@@ -1,0 +1,174 @@
+% الجزء: sets-functions-relations
+% الفصل: sets
+% القسم: unions-and-intersections
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid[ar]{sfr}{set}{uni}
+\olsection{الاتحادات والتقاطعات}
+
+\begin{explain}
+قدّمنا في \olref[sfr][set][bas]{sec} تعريفات للمجموعات بالتجريد،
+أي تعريفات من الصورة $\Setabs{x}{\phi(x)}$. ونستعمل هنا
+خاصية ما~$\phi$، وقد تشير هذه الخاصية إلى مجموعات سبق أن عرّفناها.
+فمثلًا، إذا كانت $A$ و~$B$ مجموعتين، فإن المجموعة
+$\Setabs{x}{x \in A \lor x \in B}$ تتألف من جميع الكائنات التي تُعَدّ من
+!!{element}s $A$ أو~$B$، أي إنها المجموعة التي تجمع !!{element}s
+$A$ و~$B$. ويمكن تمثيل ذلك بصريًا كما في \olref{fig:union}، حيث تدل
+المنطقة المظللة على !!{element}s المجموعتين $A$ و~$B$ مجتمعةً.
+
+\begin{figure}
+  \olasset{assets/diagrams/union.tikz}
+  \caption{اتحاد المجموعتين $A \cup B$ هو المجموعة المكوّنة من !!{element}s
+   $A$ و~$B$ معًا.}
+  \ollabel{fig:union}
+\end{figure}
+
+وهذه العملية على المجموعات---أي جمعها---شائعة ومفيدة جدًا،
+ولذلك نخصها باسم اصطلاحي ورمز.
+\end{explain}
+
+\begin{defn}[الاتحاد]
+\emph{اتحاد} مجموعتين $A$ و$B$، ويكتب $A \cup B$، هو مجموعة
+جميع الأشياء التي تكون من !!{element}s $A$ أو $B$ أو كلتيهما.
+\[
+A \cup B = \Setabs{x}{x \in A \lor x \in B}
+\]
+\end{defn}
+
+\begin{ex}
+بما أن تكرار !!{element}s لا يعتد به، فإن اتحاد مجموعتين تشتركان في
+!!a{element} لا يحتوي ذلك !!{element} إلا مرة واحدة؛ فمثلًا،
+$\{ a, b, c\} \cup \{ a, 0, 1\} = \{a, b, c, 0, 1\}$.
+
+اتحاد مجموعة وإحدى مجموعاتها الجزئية هو المجموعة الأكبر نفسها: $\{a,
+b, c \} \cup \{a \} = \{a, b, c\}$.
+
+اتحاد مجموعة والمجموعة الخالية هو المجموعة نفسها: $\{a,
+b, c \} \cup \emptyset = \{a, b, c \}$.
+\end{ex}
+
+\begin{prob}
+أثبت أنه إذا كان $A \subseteq B$، فإن $A \cup B = B$.
+\end{prob}
+
+\begin{explain}
+يمكننا أيضًا النظر في عملية «مزدوجة» للاتحاد. وهي العملية التي تكوّن
+مجموعة جميع !!{element}s التي تُعَدّ من !!{element}s~$A$ ومن !!{element}s~$B$
+أيضًا. وتسمى هذه العملية \emph{التقاطع}، ويمكن تمثيلها كما في
+\olref{fig:intersection}.
+\begin{figure}
+  \olasset{assets/diagrams/intersection.tikz}
+  \caption{تقاطع المجموعتين $A \cap B$ هو المجموعة المكوّنة من
+    !!{element}s مشتركة بينهما.}
+  \ollabel{fig:intersection}
+\end{figure}
+\end{explain}
+
+\begin{defn}[التقاطع]
+\emph{تقاطع} مجموعتين $A$ و$B$، ويكتب $A \cap B$، هو مجموعة
+جميع الأشياء التي تكون من !!{element}s كل من $A$ و~$B$.
+\[
+A \cap B = \Setabs{x}{x \in A \land x \in B}
+\]
+وتُسمّى مجموعتان \emph{متباينتين} إذا كان تقاطعهما
+خاليًا. وهذا يعني أنه لا توجد بينهما !!{element}s مشتركة.
+\end{defn}
+
+\begin{ex}
+إذا لم تكن بين مجموعتين !!{element}s مشتركة، كان تقاطعهما خاليًا:
+$\{ a, b, c\} \cap \{ 0, 1\} = \emptyset$.
+
+وإذا كانت بين مجموعتين !!{element}s مشتركة، كان تقاطعهما مجموعة
+تلك العناصر كلها: $\{a, b, c \} \cap \{a, b, d \} = \{a, b\}$.
+
+تقاطع مجموعة وإحدى مجموعاتها الجزئية هو المجموعة الأصغر نفسها:
+$\{a, b, c\} \cap \{a, b\} = \{a, b\}$.
+
+تقاطع أي مجموعة والمجموعة الخالية خالٍ: $\{a, b, c \}
+\cap \emptyset = \emptyset$.
+\end{ex}
+
+\begin{prob}
+أثبت إثباتًا صارمًا أنه إذا كان $A \subseteq B$، فإن
+$A \cap B = A$.
+\end{prob}
+
+\begin{explain}
+كما يمكننا تكوين اتحاد أو تقاطع لأكثر من مجموعتين. ومن الطرق الأنيقة
+لمعالجة ذلك بوجه عام ما يأتي: افترض أنك تجمع كل المجموعات التي تريد
+تكوين اتحادها (أو تقاطعها) في مجموعة واحدة. عندئذ يمكننا تعريف اتحاد
+مجموعاتنا الأصلية كلها بأنه مجموعة الكائنات التي تنتمي إلى !!{element}
+واحد على الأقل من تلك المجموعة، وتعريف التقاطع بأنه مجموعة كل الكائنات
+التي تنتمي إلى كل !!{element} من تلك المجموعة.
+\end{explain}
+
+\begin{defn}
+إذا كانت $A$ مجموعة من المجموعات، فإن $\bigcup A$ هي المجموعة التي
+تضم !!{element}s جميع !!{element}s~$A$:
+\begin{align*}
+\bigcup A & = \Setabs{x}{x \text{ ينتمي إلى !!a{element} من } A},
+\text{ أي}\\
+& = \Setabs{x}{\text{يوجد } B \in A
+  \text{ بحيث } x \in B}
+\end{align*}
+\end{defn}
+
+\begin{defn}
+إذا كانت $A$ مجموعة من المجموعات، فإن $\bigcap A$ هي مجموعة الكائنات
+المشتركة بين جميع عناصر~$A$:
+\begin{align*}
+\bigcap A & = \Setabs{x}{x \text{ ينتمي إلى كل !!{element} من } A},
+\text{ أي}\\
+ & = \Setabs{x}{\text{لكل } B \in A, x \in B}
+\end{align*}
+\end{defn}
+
+\begin{ex}
+افترض أن $A = \{ \{ a, b \}, \{ a, d, e \}, \{ a, d \} \}$.
+عندئذ $\bigcup A = \{ a, b, d, e \}$ و$\bigcap A = \{ a \}$.
+\end{ex}
+\begin{prob}
+	بيّن أنه إذا كانت $A$ مجموعة وكان $A \in B$، فإن
+$A \subseteq \bigcup B$.
+\end{prob}
+
+ويمكننا فعل الأمر نفسه لمتتالية من المجموعات $A_1$، $A_2$، \dots
+\begin{align*}
+\bigcup_i A_i & = \Setabs{x}{x \text{ ينتمي إلى إحدى المجموعات } A_i}\\
+\bigcap_i A_i & = \Setabs{x}{x \text{ ينتمي إلى كل } A_i}.
+\end{align*}
+
+وعندما تكون لدينا \emph{مجموعة فهرسة} للمجموعات، أي مجموعة ما $I$
+بحيث ننظر في $A_i$ لكل $i \in I$، يمكننا أيضًا استعمال الاختصارين
+الآتيين:
+\begin{align*}
+	\bigcup_{i \in I} A_i & = \bigcup \Setabs{A_i }{i \in I}\\
+	\bigcap_{i \in I} A_i & = \bigcap\Setabs{A_i}{i \in I}
+\end{align*}
+
+وأخيرًا، قد نريد النظر في مجموعة جميع !!{element}s الموجودة في~$A$
+وغير الموجودة في~$B$. ويمكن تمثيل ذلك كما في \olref{difference}.
+
+\begin{figure}
+  \olasset{assets/diagrams/difference.tikz}
+  \caption{فرق المجموعتين $A \setminus B$ هو المجموعة المكوّنة من
+    !!{element}s~$A$ التي لا تُعَدّ أيضًا من !!{element}s~$B$.}
+  \ollabel{difference}
+\end{figure}
+
+\begin{defn}[الفرق]
+\emph{فرق المجموعتين}~$A \setminus B$ هو مجموعة جميع !!{element}s
+$A$ التي لا تُعَدّ أيضًا من !!{element}s~$B$، أي
+\[
+A\setminus B = \Setabs{x}{x\in A \text{ و } x \notin B}.
+\]
+\end{defn}
+
+\begin{prob}
+	أثبت أنه إذا كان $A \subsetneq B$، فإن $B \setminus A \neq \emptyset$.
+\end{prob}
+
+\end{document}

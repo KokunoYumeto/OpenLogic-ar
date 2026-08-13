@@ -1,0 +1,114 @@
+% Arabic cumulative reader through paired-accepted unit OLP-0010.
+% This is a checkpoint reader, not the complete 722-unit edition.
+\documentclass[openany]{memoir}
+
+\ifdefined\directlua\else
+  \PackageError{open-logic-through-olp0010-ar}{يتطلب ملف التشغيل هذا LuaLaTeX}{شغّل LuaLaTeX على ملف التشغيل}
+\fi
+
+\newcommand*{\olpath}{../..}
+\newcommand*{\ollangid}{ar}
+\newcommand*{\ollanguage}{arabic}
+
+\usepackage{fontspec}
+\setmainfont{TeX Gyre Pagella}
+\setsansfont{TeX Gyre Heros}
+\setmonofont{Latin Modern Mono}
+
+\PassOptionsToPackage{provide=*,bidi=basic}{babel}
+\makeatletter
+\AddToHook{package/cleveref/before}{\DeclareOption{arabic}{}}
+\makeatother
+
+\input{\olpath/sty/open-logic.sty}
+
+\babelfont[arabic]{rm}[
+  Path=../../../00_control/fonts/scheherazade-2.100/,
+  UprightFont=Scheherazade-Regular.ttf,
+  BoldFont=Scheherazade-Bold.ttf,
+  AutoFakeSlant=0.15,
+  Renderer=HarfBuzz,
+  Scale=1.08
+]{Scheherazade-Regular.ttf}
+\babelfont[arabic]{sf}[
+  Path=../../../00_control/fonts/scheherazade-2.100/,
+  UprightFont=Scheherazade-Regular.ttf,
+  BoldFont=Scheherazade-Bold.ttf,
+  AutoFakeSlant=0.15,
+  Renderer=HarfBuzz,
+  Scale=1.08
+]{Scheherazade-Regular.ttf}
+\babelfont[arabic]{tt}{DejaVu Sans Mono}
+
+\AtBeginDocument{\selectlanguage{arabic}}
+\hypersetup{
+  unicode=true,
+  pdflang={ar},
+  pdftitle={نص المنطق المفتوح — قارئ عربي تراكمي حتى OLP-0010},
+  pdfauthor={مشروع المنطق المفتوح؛ ترجمة عربية منتجة آليًا بتوجيه فلوريس}
+}
+
+\newcommand*{\OLReleaseConceptDOI}{10.5281/zenodo.21921850}
+\newcommand*{\OLReleaseVersionDOI}{10.5281/zenodo.21921851}
+\newcommand*{\OLReleaseRepository}{https://github.com/KokunoYumeto/OpenLogic-ar}
+
+% Preserve the accepted prose/headings of structural units OLP-0002 and
+% OLP-0003 while deliberately suppressing their not-yet-translated imports.
+\NewDocumentCommand{\OLPrefixStructuralUnit}{m}{%
+  \begingroup
+  \RenewDocumentCommand{\olimport}{s o m o}{}%
+  \subfile{#1}%
+  \endgroup
+}
+
+\includeenv{editorial}
+\let\cleardoublepage\clearpage
+\pagestyle{plain}
+
+\begin{document}
+
+\begin{titlingpage}
+\begin{center}
+\vspace*{2.5cm}
+{\HUGE\bfseries\sffamily نص المنطق المفتوح\par}
+\vspace{1.2cm}
+{\huge قارئ عربي تراكمي حتى الوحدة \babelsublr{\texttt{OLP-0010}}\par}
+\vspace{1.5cm}
+{\Large العربية الفصحى المعاصرة العالمية — \babelsublr{ar}\par}
+\vspace{1.5cm}
+{\large المصدر: مشروع المنطق المفتوح، الالتزام
+\babelsublr{\texttt{9620cc73f9c8e0ad003c514a5d3748f29611c4c0}}\par}
+\vspace{0.8cm}
+{\large المستودع: \href{\OLReleaseRepository}{\babelsublr{OpenLogic-ar}}\par}
+{\large DOI المفهومي: \babelsublr{\OLReleaseConceptDOI}\par}
+{\large DOI هذا الإصدار: \babelsublr{\OLReleaseVersionDOI}\par}
+\end{center}
+
+\vfill
+
+\noindent
+تضم هذه النسخة المرحلية جميع الوحدات العربية المقبولة من
+\babelsublr{\texttt{OLP-0001}} إلى \babelsublr{\texttt{OLP-0010}}:
+مادة التعريف بالمشروع وأول فصل مكتمل في مسار الترجمة، «المجموعات».
+ولا تدّعي هذه النسخة اكتمال ترجمة المتن ذي \babelsublr{722} وحدة.
+النص الإنجليزي المثبّت هو المرجع الدلالي، وملفات \TeX{} القابلة للتحرير
+هي المرجع عند قصور استخراج النص من ملف PDF.
+
+\medskip
+\noindent
+هذه ترجمة معدّلة بموجب رخصة \href{https://creativecommons.org/licenses/by/4.0/}{CC BY 4.0}.
+يُنسب الأصل إلى مشروع المنطق المفتوح، ولا يُفهم من النشر أي تأييد من المشروع.
+أُنتجت الترجمة والتصفيف آليًا بتوجيه فلوريس، واجتازت مراجعة دلالية وبنيوية
+ومراجعة بناء وتصوير مستقلة بالذكاء الاصطناعي؛ ولم تُجرَ مراجعة بشرية عربية.
+
+\end{titlingpage}
+
+\subfile{content/open-logic-about}
+
+\tableofcontents*
+
+\OLPrefixStructuralUnit{content/content}
+\OLPrefixStructuralUnit{content/sets-functions-relations/sets-functions-relations-complete}
+\subfile{content/sets-functions-relations/sets/sets}
+
+\end{document}

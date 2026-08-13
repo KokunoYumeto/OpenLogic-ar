@@ -1,0 +1,59 @@
+% Isolated LuaLaTeX driver for the translated About unit.
+\documentclass[openany]{memoir}
+
+\ifdefined\directlua\else
+  \PackageError{about-ar}{يتطلب ملف التشغيل هذا LuaLaTeX}{شغّل الأمر lualatex about-ar.tex}
+\fi
+
+\newcommand*{\olpath}{../..}
+\newcommand*{\ollangid}{ar}
+\newcommand*{\ollanguage}{arabic}
+
+\usepackage{fontspec}
+\setmainfont{TeX Gyre Pagella}
+\setsansfont{TeX Gyre Heros}
+\setmonofont{Latin Modern Mono}
+
+% Force Babel's Unicode locale data instead of the legacy Arabic LDF.
+\PassOptionsToPackage{provide=*,bidi=basic}{babel}
+% Upstream passes every Babel language name as a cleveref option, but
+% cleveref has no Arabic option. Declare a no-op package option here;
+% the actual Arabic reference names come from open-logic-locale.sty.
+\makeatletter
+\AddToHook{package/cleveref/before}{\DeclareOption{arabic}{}}
+\makeatother
+
+\input{\olpath/sty/open-logic.sty}
+
+\babelfont[arabic]{rm}[
+  Path=../../../00_control/fonts/scheherazade-2.100/,
+  UprightFont=Scheherazade-Regular.ttf,
+  BoldFont=Scheherazade-Bold.ttf,
+  AutoFakeSlant=0.15,
+  Renderer=HarfBuzz,
+  Scale=1.08
+]{Scheherazade-Regular.ttf}
+\babelfont[arabic]{sf}[
+  Path=../../../00_control/fonts/scheherazade-2.100/,
+  UprightFont=Scheherazade-Regular.ttf,
+  BoldFont=Scheherazade-Bold.ttf,
+  AutoFakeSlant=0.15,
+  Renderer=HarfBuzz,
+  Scale=1.08
+]{Scheherazade-Regular.ttf}
+\babelfont[arabic]{tt}{DejaVu Sans Mono}
+% Reselect after all package begin-document setup so Arabic captions and
+% reference names are the final active language data.
+\AtBeginDocument{\selectlanguage{arabic}}
+
+\hypersetup{
+  unicode=true,
+  pdftitle={حول مشروع المنطق المفتوح},
+  pdfauthor={مشروع المنطق المفتوح}
+}
+
+\pagestyle{plain}
+
+\begin{document}
+\input{content/open-logic-about.tex}
+\end{document}

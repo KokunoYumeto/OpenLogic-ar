@@ -1,0 +1,52 @@
+\documentclass[article]{memoir}
+
+\usepackage{subfiles}
+\usepackage{fontspec}
+\setmainfont{TeX Gyre Pagella}
+\setsansfont{TeX Gyre Heros}
+\setmonofont{Latin Modern Mono}
+
+% Force Babel's Unicode Arabic data rather than the legacy Arabic LDF.
+\PassOptionsToPackage{provide=*,bidi=basic}{babel}
+% Upstream forwards the Babel language to cleveref, which has no Arabic
+% option. Reference names themselves come from the Arabic locale file.
+\makeatletter
+\AddToHook{package/cleveref/before}{\DeclareOption{arabic}{}}
+\makeatother
+
+% A localized section lives five directory levels below this worktree root.
+\newcommand*{\olpath}{../../../../..}
+\newcommand*{\ollangid}{ar}
+\newcommand*{\ollanguage}{arabic}
+
+\input{\olpath/sty/open-logic.sty}
+
+\babelfont[arabic]{rm}[
+  Path=../../../../../../00_control/fonts/scheherazade-2.100/,
+  UprightFont=Scheherazade-Regular.ttf,
+  BoldFont=Scheherazade-Bold.ttf,
+  AutoFakeSlant=0.15,
+  Renderer=HarfBuzz,
+  Scale=1.08
+]{Scheherazade-Regular.ttf}
+\babelfont[arabic]{sf}[
+  Path=../../../../../../00_control/fonts/scheherazade-2.100/,
+  UprightFont=Scheherazade-Regular.ttf,
+  BoldFont=Scheherazade-Bold.ttf,
+  AutoFakeSlant=0.15,
+  Renderer=HarfBuzz,
+  Scale=1.08
+]{Scheherazade-Regular.ttf}
+\babelfont[arabic]{tt}{DejaVu Sans Mono}
+
+\AtBeginDocument{\selectlanguage{arabic}}
+\hypersetup{pdflang={ar}}
+
+\def\thechapter{\theolchapter}
+% This is a reader/QA wrapper. Upstream's standalone debug package adds
+% margin IDs and coloured token witnesses, so it is deliberately omitted.
+\pagestyle{plain}
+
+\begin{document}
+This localized master is used only when compiling an Arabic section subfile.
+\end{document}
