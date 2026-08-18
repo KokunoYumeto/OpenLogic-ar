@@ -1,0 +1,261 @@
+% Part: normal-modal-logic
+% Chapter: tableaux
+% Section: soundness
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{tab}{sou}
+
+\olsection{سلامة \Log{K}}
+
+\begin{editorial}
+  يعيد برهان السلامة هذا استعمال برهان السلامة للمنطق القضي الكلاسيكي؛
+  أي إنه يبرهن كل شيء من البداية. وهذا مناسب إذا أُريد برهان سلامة
+  قائم بذاته. أما من سبق له أن رأى برهان السلامة للجداول الدلالية
+  العادية فسيجد هنا قدرًا من التكرار. ومن المخطط إتاحة الاختيار بين
+  النسخة القائمة بذاتها ونسخة تبني على الحالة غير الموجهية.
+\end{editorial}
+
+\begin{explain}
+  لكي نبيّن أن ال!!{tableau}s ذات البادئات سليمة، علينا أن نبيّن أنه إذا
+  كان
+  \[
+  \sFmla{\True}{!B_1}[1], \dots, \sFmla{\True}{!B_n}[1], \sFmla{\False}{!A}[1]
+  \]
+  له !!{tableau} مغلق، فإن $!B_1, \dots, !B_n \Entails !A$. والأسهل
+  أن نبرهن المقابل العكسي: إذا وُجد نموذج~$\mModel{M}$ وعالم~$w$ بحيث
+  $\mSat{M}{!B_i}[w]$ لكل $i=1$، \dots،~$n$، ولكن
+  $\mSat/{M}{!A}[w]$، فلا يمكن لأي !!{tableau} أن ينغلق. فهذا النموذج
+  المضاد يبيّن أن افتراضات ال!!{tableau} الابتدائية قابلة للإرضاء.
+  وتقوم خطة البرهان على إظهار أن كل تطبيق لقاعدة، متى كانت جميع
+  ال!!{formula}s ذات البادئات على أحد فروع !!a{tableau} قابلة للإرضاء،
+  ينتج منه فرع ممتد واحد على الأقل يظل قابلًا للإرضاء. ولأن الفروع
+  المغلقة غير قابلة للإرضاء، فلا بد لكل !!{tableau} لمجموعة قابلة
+  للإرضاء من ال!!{formula}s ذات البادئات أن يحتوي فرعًا مفتوحًا واحدًا
+  على الأقل.
+
+  ولتطبيق هذه الخطة في الحالة الموجهية، علينا أن نوسّع تعريفنا
+  لـ«قابلية الإرضاء» ليشمل النماذج الموجهية والبادئات. وبعد ذلك يكون
+  البرهان مباشرًا.
+\end{explain}
+
+\begin{defn}
+  لتكن $P$ مجموعة من البادئات، أي $P \subseteq (\PosInt)^*
+  \setminus \{\emptyseq\}$، وليكن $\mModel{M}$ نموذجًا. تكون الدالة
+  $f\colon P \to W$ \emph{تأويلًا لـ}~$P$ في~$\mModel{M}$ إذا تحقق
+  $Rf(\sigma)f(\sigma.n)$ كلما كان كل من $\sigma$ و$\sigma.n$ في~$P$.
+
+  وبالنسبة إلى تأويل للبادئات~$P$ يمكننا أن نعرّف ما يأتي:
+  \begin{enumerate}
+  \item يرضي $\mModel{M}$ الصيغة $\sFmla{\True}{!A}[\sigma]$ إذا وفقط إذا
+    كان $\mSat{M}{!A}[f(\sigma)]$.
+  \item يرضي $\mModel{M}$ الصيغة $\sFmla{\False}{!A}[\sigma]$ إذا وفقط إذا
+    كان $\mSat/{M}{!A}[f(\sigma)]$.
+  \end{enumerate}
+\end{defn}
+
+\begin{defn}
+  لتكن $\Gamma$ مجموعة من ال!!{formula}s ذات البادئات، ولتكن
+  $P(\Gamma)$ مجموعة البادئات التي ترد فيها. إذا كان $f$ تأويلًا
+  لـ~$P(\Gamma)$ في $\mModel{M}$، قلنا إن $\mModel{M}$ يرضي $\Gamma$
+  بالنسبة إلى~$f$، ونكتب $\mSat{M}{\Gamma}[f]$، إذا كان $\mModel{M}$
+  يرضي كل !!{formula} ذات بادئة في~$\Gamma$ بالنسبة إلى~$f$. وتكون
+  $\Gamma$ \emph{قابلة للإرضاء} إذا وفقط إذا وُجد نموذج~$\mModel{M}$
+  وتأويل~$f$ لـ$P(\Gamma)$ بحيث $\mSat{M}{\Gamma}[f]$.
+\end{defn}
+
+\begin{prop}
+  إذا احتوت $\Gamma$ كلًا من $\sFmla{\True}{!A}[\sigma]$ و
+  $\sFmla{\False}{!A}[\sigma]$، لبعض !!{formula}~$!A$ وبادئة~$\sigma$،
+  فإن $\Gamma$ غير قابلة للإرضاء.
+\end{prop}
+
+\begin{proof}
+  لا يمكن أن يوجد نموذج~$\mModel{M}$ وتأويل~$f$ لـ$P(\Gamma)$ بحيث
+  يتحقق كل من $\mSat{M}{!A}[f(\sigma)]$ و
+  $\mSat/{M}{!A}[f(\sigma)]$.
+\end{proof}
+
+\begin{thm}[السلامة]
+  \ollabel{thm:tableau-soundness}
+  إذا كان لـ$\Gamma$ !!{tableau} مغلق، فإن $\Gamma$ غير قابلة للإرضاء.
+\end{thm}
+
+\begin{proof}
+نسمي فرعًا من !!a{tableau} قابلًا للإرضاء إذا وفقط إذا كانت مجموعة
+ال!!{signed formula}s الواقعة عليه قابلة للإرضاء، ونسمي !!a{tableau}
+قابلًا للإرضاء إذا احتوى فرعًا قابلًا للإرضاء واحدًا على الأقل.
+
+نبيّن ما يأتي: إن توسيع !!{tableau} قابل للإرضاء بإحدى قواعد الاستدلال
+ينتج دائمًا !!{tableau} قابلًا للإرضاء. وهذا يثبت المبرهنة: فكل
+!!{tableau} مغلق ينتج من تطبيق قواعد الاستدلال على ال!!{tableau} الذي
+لا يتألف إلا من افتراضات من~$\Gamma$. ومن ثم، لو كانت $\Gamma$ قابلة
+للإرضاء، لكان كل !!{tableau} لها قابلًا للإرضاء. غير أن ال!!{tableau}
+المغلق غير قابل للإرضاء بوضوح، لأن جميع فروعه مغلقة، والفروع المغلقة
+غير قابلة للإرضاء.
+
+افترض أن لدينا !!{tableau} قابلًا للإرضاء، أي !!a{tableau} له فرع
+قابل للإرضاء واحد على الأقل. إما أن يضيف تطبيق قاعدة استدلال
+!!{signed formula}s إلى فرع، وإما أن يشطر فرعًا إلى فرعين. فإذا كان
+لل!!{tableau} فرع قابل للإرضاء لا يوسعه تطبيق القاعدة المعني، ظل هذا
+الفرع قابلًا للإرضاء في ال!!{tableau} الموسع، ولذلك يكون الجدول الدلالي
+الموسع قابلًا للإرضاء. فلا يلزمنا إلا النظر في الحالة التي تُطبَّق
+فيها قاعدة على فرع قابل للإرضاء.
+
+لتكن $\Gamma$ مجموعة ال!!{signed formula}s الواقعة على ذلك الفرع،
+ولتكن $\sFmla{S}{!A}[\sigma] \in \Gamma$ ال!!{signed formula} التي
+تُطبَّق عليها القاعدة. إذا لم ينتج من القاعدة انشطار الفرع، فعلينا أن
+نبيّن أن الفرع الموسع، أي $\Gamma$ مضمومًا إليها نتائج القاعدة، يظل
+قابلًا للإرضاء. وإذا نتج منها انشطار الفرع، فعلينا أن نبيّن أن أحد
+الفرعين الناتجين على الأقل قابل للإرضاء.
+
+ننظر أولًا في الاستدلالات الممكنة ذات المقدمة الواحدة.
+\begin{enumerate}
+\item يُوسَّع الفرع بتطبيق $\TRule{\True}{\lnot}$ على
+  $\sFmla{\True}{\lnot !B}[\sigma] \in \Gamma$. عندئذ يحتوي الفرع
+  الموسع ال!!{signed formula}s $\Gamma \cup
+  \{\sFmla{\False}{!B}[\sigma]\}$. افترض $\mSat{M}{\Gamma}[f]$.
+  وبوجه خاص، $\mSat{M}{\lnot !B}[f(\sigma)]$. ومن ثم
+  $\mSat/{M}{!B}[f(\sigma)]$، أي إن $\mModel{M}$ يرضي
+  $\sFmla{\False}{!B}[\sigma]$ بالنسبة إلى~$f$.
+\item يُوسَّع الفرع بتطبيق $\TRule{\False}{\lnot}$ على
+  $\sFmla{\False}{\lnot !B}[\sigma] \in \Gamma$: تمرين.
+\item يُوسَّع الفرع بتطبيق $\TRule{\True}{\land}$ على
+  $\sFmla{\True}{!B \land !C}[\sigma] \in \Gamma$، فينتج من ذلك
+  !!{signed formula}s جديدتان على الفرع:
+  $\sFmla{\True}{!B}[\sigma]$ و$\sFmla{\True}{!C}[\sigma]$. افترض
+  $\mSat{M}{\Gamma}[f]$، وبوجه خاص $\mSat{M}{!B \land
+    !C}[f(\sigma)]$. عندئذ $\mSat{M}{!B}[f(\sigma)]$ و
+  $\mSat{M}{!C}[f(\sigma)]$. وهذا يعني أن $\mModel{M}$ يرضي كلًا من
+  $\sFmla{\True}{!B}[\sigma]$ و$\sFmla{\True}{!C}[\sigma]$ بالنسبة
+  إلى~$f$.
+\item يُوسَّع الفرع بتطبيق $\TRule{\False}{\lor}$ على
+  $\sFmla{\False}{!B \lor !C}[\sigma] \in \Gamma$: تمرين.
+\item يُوسَّع الفرع بتطبيق $\TRule{\False}{\lif}$ على
+  $\sFmla{\False}{!B \lif !C}[\sigma] \in \Gamma$: وينتج من ذلك
+  !!{signed formula}s جديدتان على الفرع: $\sFmla{\True}{!B}[\sigma]$ و
+  $\sFmla{\False}{!C}[\sigma]$. افترض
+  $\mSat{M}{\Gamma}[f]$، وبوجه خاص
+  $\mSat/{M}{!B \lif !C}[f(\sigma)]$. عندئذ
+  $\mSat{M}{!B}[f(\sigma)]$ و
+  $\mSat/{M}{!C}[f(\sigma)]$. وهذا يعني أن
+  $\mModel{M}, f$ يرضيان كلًا من
+  $\sFmla{\True}{!B}[\sigma]$ و$\sFmla{\False}{!C}[\sigma]$.
+
+\iftag{prvBox}{%
+\item يُوسَّع الفرع بتطبيق $\TRule{\True}{\Box}$ على
+  $\sFmla{\True}{\Box !B}[\sigma] \in \Gamma$:
+  \iftag{probBox}{تمرين.}{وينتج من ذلك !!{signed
+      formula}~$\sFmla{\True}{!B}[\sigma.n]$ جديدة على الفرع، لبعض
+    $\sigma.n \in P(\Gamma)$ (إذ يجب أن تكون $\sigma.n$ مستعملة).
+    افترض $\mSat{M}{\Gamma}[f]$، وبوجه خاص $\mSat{M}{\Box
+      !B}[f(\sigma)]$. ولأن $f$ تأويل للبادئات، ولأن كلًا من
+    $\sigma$ و$\sigma.n \in P(\Gamma)$، نعلم أن
+    $Rf(\sigma)f(\sigma.n)$. ومن ثم $\mSat{M}{!B}[f(\sigma.n)]$،
+    أي إن $\mModel{M}, f$ يرضيان $\sFmla{\True}{!B}[\sigma.n]$.}
+
+\item يُوسَّع الفرع بتطبيق $\TRule{\False}{\Box}$ على
+  $\sFmla{\False}{\Box !B}[\sigma] \in \Gamma$:
+  \iftag{probBox}{تمرين.}{وينتج من ذلك !!{signed
+      formula}~$\sFmla{\False}{!B}[\sigma.n]$ جديدة، حيث $\sigma.n$
+    بادئة جديدة على الفرع، أي $\sigma.n \notin P(\Gamma)$.
+    ولأن $\Gamma$ قابلة للإرضاء، يوجد نموذج~$\mModel{M}$ وتأويل~$f$
+    لـ$P(\Gamma)$ بحيث $\mSat{M}{\Gamma}[f]$، وبوجه خاص
+    $\mSat/{M}{\Box !B}[f(\sigma)]$. وعلينا أن نبيّن أن
+    $\Gamma \cup \{\sFmla{\False}{!B}[\sigma.n]\}$ قابلة للإرضاء.
+    ولهذا نعرّف تأويلًا لـ$P(\Gamma) \cup \{\sigma.n\}$ كما يأتي:
+
+  بما أن $\mSat/{M}{\Box !B}[f(\sigma)]$، يوجد $w \in W$ بحيث
+  $Rf(\sigma)w$ و$\mSat/{M}{!B}[w]$. ولتكن $f'$ مثل $f$، إلا أن
+  $f'(\sigma.n) = w$. وبما أن $f'(\sigma) = f(\sigma)$ و
+  $Rf(\sigma)w$، فإن $Rf'(\sigma)f'(\sigma.n)$، ولذلك تكون $f'$
+  تأويلًا لـ$P(\Gamma) \cup \{\sigma.n\}$. ومن الواضح أن
+  $\mSat/{M}{!B}[f'(\sigma.n)]$. ولأن $f(\sigma') = f'(\sigma')$ لكل
+  بادئة $\sigma' \in P(\Gamma)$، فإن $\mSat{M}{\Gamma}[f']$. ومن ثم
+  يرضي $\mModel{M}, f'$ المجموعة $\Gamma \cup
+  \{\sFmla{\False}{!B}[\sigma.n]\}$.}
+  }{}
+
+\iftag{prvDiamond}{%
+\item يُوسَّع الفرع بتطبيق $\TRule{\True}{\Diamond}$ على
+  $\sFmla{\True}{\Diamond !B}[\sigma] \in \Gamma$:
+  \iftag{probDiamond}{تمرين.}{وينتج من ذلك !!{signed
+      formula}~$\sFmla{\True}{!B}[\sigma.n]$ جديدة، حيث $\sigma.n$
+    بادئة جديدة على الفرع، أي $\sigma.n \notin P(\Gamma)$.
+    ولأن $\Gamma$ قابلة للإرضاء، يوجد نموذج~$\mModel{M}$ وتأويل~$f$
+    لـ$P(\Gamma)$ بحيث $\mSat{M}{\Gamma}[f]$، وبوجه خاص
+    $\mSat{M}{\Diamond !B}[f(\sigma)]$. وعلينا أن نبيّن أن
+    $\Gamma \cup \{\sFmla{\True}{!B}[\sigma.n]\}$ قابلة للإرضاء.
+    ولهذا نعرّف تأويلًا لـ$P(\Gamma) \cup \{\sigma.n\}$ كما يأتي:
+
+  بما أن $\mSat{M}{\Diamond !B}[f(\sigma)]$، يوجد $w \in W$ بحيث
+  $Rf(\sigma)w$ و$\mSat{M}{!B}[w]$. ولتكن $f'$ مثل $f$، إلا أن
+  $f'(\sigma.n) = w$. وبما أن $f'(\sigma) = f(\sigma)$ و
+  $Rf(\sigma)w$، فإن $Rf'(\sigma)f'(\sigma.n)$، ولذلك تكون $f'$
+  تأويلًا لـ$P(\Gamma) \cup \{\sigma.n\}$. ومن الواضح أن
+  $\mSat{M}{!B}[f'(\sigma.n)]$. ولأن $f(\sigma') = f'(\sigma')$ لكل
+  بادئة $\sigma' \in P(\Gamma)$، فإن $\mSat{M}{\Gamma}[f']$. ومن ثم
+  يرضي $\mModel{M}, f'$ المجموعة $\Gamma \cup
+  \{\sFmla{\True}{!B}[\sigma.n]\}$.}
+\item يُوسَّع الفرع بتطبيق $\TRule{\False}{\Diamond}$ على
+  $\sFmla{\False}{\Diamond !B}[\sigma] \in \Gamma$:
+  \iftag{probDiamond}{تمرين.}{وينتج من ذلك !!{signed
+      formula}~$\sFmla{\False}{!B}[\sigma.n]$ جديدة على الفرع، لبعض
+    $\sigma.n \in P(\Gamma)$ (إذ يجب أن تكون $\sigma.n$ مستعملة).
+    افترض $\mSat{M}{\Gamma}[f]$، وبوجه خاص
+    $\mSat/{M}{\Diamond !B}[f(\sigma)]$. ولأن $f$ تأويل للبادئات،
+    ولأن كلًا من $\sigma$ و$\sigma.n \in P(\Gamma)$، نعلم أن
+    $Rf(\sigma)f(\sigma.n)$. ومن ثم $\mSat/{M}{!B}[f(\sigma.n)]$،
+    أي إن $\mModel{M}, f$ يرضيان $\sFmla{\False}{!B}[\sigma.n]$.}
+  }{}
+\end{enumerate}
+والآن ننظر في الاستدلالات الممكنة ذات المقدمتين.
+\begin{enumerate}
+\item يُوسَّع الفرع بتطبيق $\TRule{\False}{\land}$ على
+  $\sFmla{\False}{!B \land !C}[\sigma] \in \Gamma$، فينتج فرعان:
+  أيسر يمتد عبر $\sFmla{\False}{!B}[\sigma]$، وأيمن يمتد عبر
+  $\sFmla{\False}{!C}[\sigma]$. افترض $\mSat{M}{\Gamma}[f]$، وبوجه
+  خاص $\mSat/{M}{!B \land !C}[f(\sigma)]$. عندئذ إما
+  $\mSat/{M}{!B}[f(\sigma)]$ وإما $\mSat/{M}{!C}[f(\sigma)]$. في
+  الحالة الأولى يرضي $\mModel{M}, f$ الصيغة
+  $\sFmla{\False}{!B}[\sigma]$، أي إن الفرع الأيسر قابل للإرضاء. وفي
+  الحالة الثانية يرضي $\mModel{M}, f$ الصيغة
+  $\sFmla{\False}{!C}[\sigma]$، أي إن الفرع الأيمن قابل للإرضاء.
+\item يُوسَّع الفرع بتطبيق $\TRule{\True}{\lor}$ على
+    $\sFmla{\True}{!B \lor !C}[\sigma] \in \Gamma$: تمرين.
+\item يُوسَّع الفرع بتطبيق $\TRule{\True}{\lif}$ على
+    $\sFmla{\True}{!B \lif !C}[\sigma] \in \Gamma$: تمرين.
+\end{enumerate}
+\end{proof}
+
+\begin{prob}
+أكمل برهان \olref[nml][tab][sou]{thm:tableau-soundness}.
+\end{prob}
+
+\begin{cor}
+\ollabel{cor:entailment-soundness}
+إذا كان $\Gamma \Proves !A$، فإن $\Gamma \Entails !A$.
+\end{cor}
+
+\begin{proof}
+  إذا كان $\Gamma \Proves !A$، فلبعض $!B_1$، \dots، $!B_n \in
+  \Gamma$ يكون للمجموعة $\Delta = \{\sFmla{\False}{!A}[1],
+  \sFmla{\True}{!B_1}[1], \dots, \sFmla{\True}{!B_n}[1]\}$
+  !!{tableau} مغلق. نريد أن نبيّن أن $\Gamma \Entails !A$. افترض
+  العكس؛ فعندئذ يوجد نموذج~$\mModel{M}$ وعالم~$w$ بحيث
+  $\mSat{M}{!B_i}[w]$ لكل $i=1$، \dots،~$n$، ولكن
+  $\mSat/{M}{!A}[w]$. ضع $f(1) = w$؛ عندئذ تكون $f$ تأويلًا
+  لـ~$P(\Delta)$ في~$\mModel{M}$، ويرضي $\mModel{M}$ المجموعة~$\Delta$
+  بالنسبة إلى~$f$. لكن بحسب \olref{thm:tableau-soundness}، تكون
+  $\Delta$ غير قابلة للإرضاء لأن لها !!{tableau} مغلقًا، وهذا تناقض.
+  فلا بد إذن أن يكون $\Gamma \Entails !A$.
+\end{proof}
+
+\begin{cor}
+\ollabel{cor:weak-soundness}
+إذا كان $\Proves !A$، فإن $!A$ صادقة في جميع النماذج.
+\end{cor}
+
+\end{document}

@@ -1,0 +1,87 @@
+% Part: first-order-logic
+% Chapter: tableaux
+% Section: provability-quantifiers
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{tab}{qpr}
+\olsection{\usetoken{S}{derivability} والكمّيات}
+
+\begin{explain}
+  تتطلب مبرهنة الاكتمال أيضًا أن تنتج قواعد الجداول الدلالية الحقائق المتعلقة
+  بــ~$\Proves$ والمثبتة في هذا القسم.
+\end{explain}
+
+\begin{thm}
+\ollabel{thm:strong-generalization} إذا كان $c$ ثابتًا لا يظهر في
+$\Gamma$ ولا في~$!A(x)$، وكان $\Gamma \Proves !A(c)$، فإن $\Gamma
+\Proves \lforall[x][!A(x)]$.
+\end{thm}
+
+\begin{proof}
+افترض أن $\Gamma \Proves !A(c)$، أي توجد $!B_1$، \dots، $!B_n
+\in \Gamma$ و!!{tableau} مغلق لــ
+\begin{align*}
+\{ \sFmla{\False}{!A(c)}, &
+\sFmla{\True}{!B_1}, \dots, \sFmla{\True}{!B_n} \}.
+\intertext{وعلينا أن نثبت أن هناك أيضًا !!{tableau} مغلقًا لــ}
+\{ \sFmla{\False}{\lforall[x][!A(x)]}, &
+\sFmla{\True}{!B_1}, \dots, \sFmla{\True}{!B_n} \}.
+\end{align*}
+خذ ال!!{tableau} المغلق واستبدل بالافتراض الأول
+$\sFmla{\False}{\lforall[x][!A(x)]}$، ثم أدرج
+$\sFmla{\False}{!A(c)}$ بعد الافتراضات.
+\begin{center}
+\begin{tableau}{not line numbering}
+  [\sFmla{\False}{\formula{A}(c)}
+    [\sFmla{\True}{\formula{B}_1}
+      [\vdots
+      [\sFmla{\True}{\formula{B}_n}, 
+        [][][]]]]]
+\end{tableau}\qquad
+\begin{tableau}{not line numbering}
+  [\sFmla{\False}{\lforall[x][\formula{A}(x)]}
+    [\sFmla{\True}{\formula{B}_1}
+      [\vdots
+        [\sFmla{\True}{\formula{B}_n},
+          [\sFmla{\False}{\formula{A}(c)}
+        [][][]]]]]]
+\end{tableau}
+\end{center}
+يظل الجدول الدلالي مغلقًا، لأن جميع ال!!{sentence}s التي كانت متاحة
+افتراضاتٍ ما تزال متاحة في أعلى ال!!{tableau}. والسطر المدرج نتيجة تطبيق
+صحيح لــ$\TRule{\False}{\lforall}$، لأن ال!!{constant}~$c$ لا يظهر في
+$!B_1$، \dots، $!B_n$ ولا في $\lforall[x][!A(x)]$؛ أي إنه لا يظهر فوق
+السطر المدرج في ال!!{tableau} الجديد.
+\end{proof}
+
+\begin{prop}
+\ollabel{prop:provability-quantifiers}
+\begin{tagenumerate}{prvEx,prvAll}
+\tagitem{prvEx}{$!A(t) \Proves \lexists[x][!A(x)]$.}{}
+\tagitem{prvAll}{$\lforall[x][!A(x)] \Proves !A(t)$.}{}
+\end{tagenumerate}
+\end{prop}
+
+\begin{proof}
+\begin{tagenumerate}{prvEx,prvAll}
+\tagitem{prvEx}{فيما يأتي !!{tableau} مغلق لــ
+  $\sFmla{\False}{\lexists[x][!A(x)]}, \sFmla{\True}{!A(t)}$:
+  \begin{oltableau}
+    [\sFmla{\False}{\lexists[x][\formula{A}(x)]}, just = \TAss
+      [\sFmla{\True}{\formula{A}(t)}, just = \TAss
+        [\sFmla{\False}{\formula{A}(t)}, just = {\TRule{\False}{\lexists}[1]}, close]]]
+    \end{oltableau}}{}
+\tagitem{prvAll}{فيما يأتي !!{tableau} مغلق لــ
+  $\sFmla{\False}{\formula{A}(t)}, \sFmla{\True}{\lforall[x][!A(x)]}$:
+  \begin{oltableau}
+    [\sFmla{\False}{\formula{A}(t)}, just = \TAss
+      [\sFmla{\True}{\lforall[x][\formula{A}(x)]}, just = \TAss
+        [\sFmla{\True}{\formula{A}(t)}, just = {\TRule{\True}{\lforall}[2]}, close]]]
+    \end{oltableau}}{}
+\end{tagenumerate}
+\end{proof}
+
+\end{document}

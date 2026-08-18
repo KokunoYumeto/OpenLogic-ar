@@ -1,0 +1,129 @@
+% Part: first-order-logic
+% Chapter: axiomatic-deduction
+% Section: deduction-theorem
+
+% verification of properties of provability needed for maximally
+% consistent sets in the completeness chapter.
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{axd}{ded}}
+      {\olfileid{pl}{axd}{ded}}
+
+\olsection{مبرهنة الاستنباط}
+
+كما رأينا، فإن إعطاء !!{derivation}s في نسق بديهي أمر شاق، وقد يصعب
+العثور على !!{derivation}s. وبدلًا من أن نكتب فعلًا قوائم طويلة من
+ال!!{formula}s، يسهل بوجه عام أن نبرهن على وجود مثل هذه
+ال!!{derivation}s بالاستعانة ببعض النتائج البسيطة. وقد أثبتنا بالفعل
+ثلاثًا من هذه النتائج: تفيد \olref[ptn]{prop:reflexivity} بأنه يمكننا
+دائمًا الجزم بأن $\Gamma \Proves !A$ متى علمنا أن $!A \in
+\Gamma$. وتفيد \olref[ptn]{prop:monotonicity} بأنه إذا كان $\Gamma \Proves !A$
+كان أيضًا $\Gamma \cup \{!B\} \Proves !A$. ويترتب من
+\olref[ptn]{prop:transitivity} أنه إذا كان $\Gamma \Proves !A$ و
+$!A \Proves !B$، فإن $\Gamma \Proves !B$. وهذه نتيجة بسيطة أخرى،
+وهي نسخة «فوقية» من قاعدة إثبات المقدَّم:
+
+\begin{prop}
+  \ollabel{prop:mp} إذا كان $\Gamma \Proves !A$ و$\Gamma \Proves !A \lif
+  !B$، فإن $\Gamma \Proves !B$.
+\end{prop}
+
+\begin{proof}
+  لدينا $\{!A, !A \lif !B\} \Proves !B$:
+  \begin{derivation}
+    1. & $!A$ & \Hyp\\
+    2. & $!A \lif !B$ & \Hyp\\
+    3. & $!B$ & 1، 2، إثبات المقدَّم
+  \end{derivation}
+  وبحسب \olref[ptn]{prop:transitivity}، نحصل على $\Gamma \Proves !B$.
+\end{proof}
+
+أما أهم نتيجة سنستعملها في هذا السياق فهي مبرهنة الاستنباط:
+
+\begin{thm}[مبرهنة الاستنباط]
+\ollabel{thm:deduction-thm} $\Gamma \cup \{!A\} \Proves !B$ إذا وفقط
+إذا كان $\Gamma \Proves !A \lif !B$.
+\end{thm}
+
+\begin{proof}
+اتجاه «إذا» مباشر. فإذا كان $\Gamma \Proves !A \lif !B$، كان أيضًا
+$\Gamma \cup \{!A\} \Proves !A \lif !B$ بحسب
+\olref[ptn]{prop:monotonicity}. وكذلك $\Gamma \cup \{!A\} \Proves !A$
+بحسب \olref[ptn]{prop:reflexivity}. ومن ثم تعطينا \olref{prop:mp} أن
+$\Gamma \cup \{!A\} \Proves !B$.
+
+أما اتجاه «فقط إذا» فنبرهنه بالاستقراء في طول !!{derivation} الصيغة
+$!B$ من $\Gamma \cup \{!A\}$.
+
+في أساس الاستقراء نبرهن الدعوى لكل !!{derivation} طوله~$1$.
+يتألف !!^a{derivation} للصيغة~$!B$ من $\Gamma \cup \{!A\}$ وطوله~$1$
+من $!B$ وحدها؛ وإذا كان صحيحًا، فإما أن تكون
+$!B \in \Gamma \cup \{!A\}$ أو أن تكون بديهية. وإذا كان $!B \in \Gamma$
+أو كان بديهية، فإن $\Gamma \Proves !B$. ولدينا أيضًا $\Gamma
+\Proves !B \lif (!A \lif !B)$ بحسب \olref[prp]{ax:lif1}، ومن
+\olref{prop:mp} نحصل على $\Gamma \Proves !A \lif !B$. وإذا كان
+$!B \in \{ !A\}$، فإن $\Gamma \Proves !A \lif !B$، لأن ال!!{formula}
+الأخيرة~$!A \lif !B$ هي نفسها $!A \lif !A$، وقد قدّمنا !!{derive}
+لهذه الصيغة في \olref[pro]{ex:identity}.
+
+وفي خطوة الاستقراء، افترض أن !!a{derivation} للصيغة~$!B$ من
+$\Gamma \cup \{!A\}$ ينتهي بخطوة~$!B$ تبررها قاعدة إثبات المقدَّم.
+(فإن لم تبررها قاعدة إثبات المقدَّم، كان $!B \in \Gamma$ أو $!B
+\ident !A$ أو كانت $!B$ بديهية، وينطبق عندئذ التعليل نفسه المستعمل في
+أساس الاستقراء.) إذن من الخطوات السابقة في ال!!{derivation} الصيغتان
+$!C \lif !B$ و$!C$، لبعض ال!!{formula}~$!C$؛ أي إن
+$\Gamma \cup \{!A\} \Proves !C \lif !B$ و$\Gamma \cup \{!A\}
+\Proves !C$. وال!!{derivation}s المقابلة أقصر، فينطبق عليها فرض
+الاستقراء. ومن ثم نحصل على كلتا العبارتين:
+\begin{align*}
+  & \Gamma \Proves !A \lif (!C \lif !B); \\
+  & \Gamma \Proves !A \lif !C.
+\end{align*}
+ولدينا أيضًا
+\[
+\Gamma \Proves (!A \lif (!C \lif !B)) \lif
+((!A\lif !C)  \lif (!A \lif !B)),
+\]
+بحسب \olref[prp]{ax:lif2}، ويعطينا تطبيقان لـ\olref{prop:mp} النتيجة
+$\Gamma \Proves !A \lif !B$، كما هو مطلوب.
+\end{proof}
+
+لاحظ أن \olref[prp]{ax:lif1} و\olref[prp]{ax:lif2} قد اختيرتا على وجه
+التحديد بحيث تصح مبرهنة الاستنباط.
+
+وفيما يلي بعض الحقائق المفيدة عن !!{derivability}، ونترك برهانها تمارين.
+
+\begin{prop}
+  \ollabel{prop:derivfacts}
+\begin{enumerate}
+\item $\Proves (!A \lif !B) \lif ((!B \lif !C)
+  \lif (!A \lif !C))$؛ \ollabel{derivfacts:a}
+\item إذا كان $\Gamma \cup \{ \lnot !A\}
+  \Proves \lnot !B$، فإن $\Gamma \cup \{ !B\} \Proves
+  !A$ (المقابلة)؛ \ollabel{derivfacts:b}
+\item  $\{ !A, \lnot!A\} \Proves
+    !B$ (من الباطل يلزم أي شيء، الانفجار)؛ \ollabel{derivfacts:c}
+\item  $\{ \lnot\lnot!A\} \Proves
+  !A$ (حذف النفي المزدوج)؛\ollabel{derivfacts:d}
+\item إذا كان $\Gamma \Proves \lnot\lnot!A$، فإن $\Gamma \Proves
+  !A$؛\ollabel{derivfacts:e}
+\end{enumerate}
+\end{prop}
+
+\tagprob{FOL}
+\begin{prob}
+  أثبت \olref[fol][axd][ded]{prop:derivfacts}.
+\end{prob}
+\tagendprob
+
+\tagprob{notFOL}
+\begin{prob}
+  أثبت \olref[pl][axd][ded]{prop:derivfacts}.
+\end{prob}
+\tagendprob
+
+\end{document}

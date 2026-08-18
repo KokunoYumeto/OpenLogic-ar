@@ -1,0 +1,49 @@
+% Part: first-order-logic
+% Chapter: natural-deduction
+% Section: soundness-identity
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{ntd}{sid}
+
+\olsection{السلامة مع \usetoken{S}{identity}}
+
+\begin{prop}
+الاستنتاج الطبيعي المزود بقواعد~$\eq$ سليم.
+\end{prop}
+
+\begin{proof}
+كل !!{formula} على الصورة~$\eq[t][t]$ صالحة، لأنه لكل
+!!{structure}~$\Struct M$ يكون~$\Sat{M}{\eq[t][t]}$. (لاحظ أننا نفترض
+أن الحد~$t$ مغلق، أي إنه لا يحتوي على متغيرات، ولذلك لا أهمية لإسنادات
+المتغيرات.)
+
+افترض أن الاستدلال الأخير في !!a{derivation} هو~\Elim{\eq}، أي إن
+ال!!{derivation} على الصورة الآتية:
+\begin{prooftree}
+  \AxiomC{$\Gamma_1$}
+  \RightLabel{$\delta_1$}
+  \DeduceC{$\eq[t_1][t_2]$}
+  \AxiomC{$\Gamma_2$}
+  \RightLabel{$\delta_2$}
+  \DeduceC{$!A(t_1)$}
+  \RightLabel{\Elim{\eq}}
+  \BinaryInfC{$!A(t_2)$}
+\end{prooftree}
+يمكن !!{derive} المقدمتين~$\eq[t_1][t_2]$ و$!A(t_1)$ من الافتراضات
+ال!!{undischarged}~$\Gamma_1$ و$\Gamma_2$، على الترتيب. ونريد أن نبين
+أن~$!A(t_2)$ تلزم عن~$\Gamma_1 \cup \Gamma_2$. اعتبر
+!!a{structure}~$\Struct{M}$ بحيث~$\Sat{M}{\Gamma_1 \cup \Gamma_2}$.
+وبفرض الاستقراء، يكون~$\Sat{M}{!A(t_1)}$ و
+$\Sat{M}{\eq[t_1][t_2]}$. ولذلك~$\Value{t_1}{M} = \Value{t_2}{M}$.
+وليكن~$s$ أي إسناد متغيرات، وليكن
+$m = \Value{t_1}{M} = \Value{t_2}{M}$. ومن
+\olref[fol][syn][ext]{prop:ext-formulas}، يكون~$\Sat{M}{!A(t_1)}[s]$
+إذا وفقط إذا كان~$\Sat{M}{!A(x)}[\Subst{s}{m}{x}]$، إذا وفقط إذا
+كان~$\Sat{M}{!A(t_2)}[s]$. وبما أن~$\Sat{M}{!A(t_1)}$، يكون
+$\Sat{M}{!A(t_2)}$.
+\end{proof}
+
+\end{document}

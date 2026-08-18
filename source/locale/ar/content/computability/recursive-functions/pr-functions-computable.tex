@@ -1,0 +1,40 @@
+% Part: computability
+% Chapter: recursive-functions
+% Section: pr-functions-computable
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{rec}{cmp}
+\olsection{الدوال العودية البدائية قابلة للحساب}
+
+افترض أن دالة $h$ معرفة بالعودية البدائية:
+\begin{eqnarray*}
+h(\vec x, 0)     & = & f(\vec x) \\
+h(\vec x, y + 1) & = & g(\vec x, y, h(\vec x, y))
+\end{eqnarray*}
+وافترض أن الدالتين $f$ و$g$ قابلتان للحساب. (نستعمل $\vec x$ اختصارًا
+لـ$x_0$، …،~$x_{k-1}$.) من الواضح عندئذ إمكان حساب $h(\vec x,0)$،
+لأنها ليست إلا $f(\vec x)$ التي نفترض قابليتها للحساب. ويمكن بعد ذلك
+حساب $h(\vec x,1)$ أيضًا، لأن $1=0+1$، ولذلك ليست $h(\vec x,1)$ إلا
+\begin{align*}
+ h(\vec x, 1) & = g(\vec x, 0, h(\vec x, 0)) =  g(\vec x, 0, f(\vec x)).
+\intertext{ويمكننا المواصلة على هذا النحو وحساب}
+h(\vec x, 2) & = g(\vec x, 1, h(\vec x, 1)) = g(\vec x, 1, g(\vec x, 0, f(\vec x)))\\
+h(\vec x, 3) & = g(\vec x, 2, h(\vec x, 2)) = g(\vec x, 2, g(\vec x, 1, g(\vec x, 0, f(\vec x))))\\
+h(\vec x, 4) & = g(\vec x, 3, h(\vec x, 3)) = g(\vec x, 3, g(\vec x, 2, g(\vec x, 1, g(\vec x, 0, f(\vec x)))))\\
+& \vdots
+\end{align*}
+ومن ثم، لحساب $h(\vec x,y)$ بوجه عام، نحسب تباعًا $h(\vec x,0)$ و
+$h(\vec x,1)$ و…، حتى نبلغ $h(\vec x,y)$.
+
+وهكذا ينتج التعريف بالعودية البدائية دالة جديدة قابلة للحساب إذا كانت
+الدالتان $f$ و$g$ قابلتين للحساب. وينتج تركيب الدوال أيضًا دالة قابلة
+للحساب إذا كانت $f$ ودوال $g_i$ قابلة للحساب.
+
+ولما كانت الدوال الأساسية $\Zero$ و$\Succ$ و$\Proj{n}{i}$ قابلة
+للحساب، وكان التركيب والعودية البدائية ينتجان دوال قابلة للحساب من
+دوال قابلة للحساب، فإن كل دالة عودية بدائية قابلة للحساب.
+
+\end{document}

@@ -1,0 +1,143 @@
+% Part: first-order-logic
+% Chapter: tableaux
+% Section: provability-consistency
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{tab}{prv}}
+      {\olfileid{pl}{tab}{prv}}
+
+\olsection{\usetoken{S}{derivability} والاتساق}
+
+سنثبت الآن عددًا من خصائص علاقة ال!!{derivability}. وهذه الخصائص مهمة في
+ذاتها، وسيكون لكل منها دور في برهان مبرهنة الاكتمال.
+
+\begin{prop}\ollabel{prop:provability-contr}
+  إذا كان $\Gamma \Proves !A$ وكانت $\Gamma \cup \{!A\}$ غير متسقة،
+  فإن $\Gamma$ غير متسقة.
+\end{prop}
+
+\begin{proof}
+توجد مجموعتان منتهيتان $\Gamma_0 = \{!B_1, \dots, !B_n\}$ و$\Gamma_1
+  =\{!C_1, \dots, !C_m\} \subseteq \Gamma$ بحيث
+  \begin{align*}
+    \{\sFmla{\False}{!A}, &
+    \sFmla{\True}{!B_1}, \dots, \sFmla{\True}{!B_n}\} \\
+    \{\sFmla{\True}{!A}, &
+    \sFmla{\True}{!C_1}, \dots, \sFmla{\True}{!C_m}\}
+  \end{align*}
+  لهما !!{tableau}s مغلقة. وباستخدام قاعدة \Cut{} على $!A$ يمكننا
+  جمعهما في !!{tableau} مغلق واحد يثبت أن $\Gamma_0
+  \cup \Gamma_1$ غير متسقة. وبما أن $\Gamma_0
+  \subseteq \Gamma$ و$\Gamma_1 \subseteq \Gamma$، فإن $\Gamma_0 \cup
+  \Gamma_1 \subseteq \Gamma$، ومن ثم
+  فــ$\Gamma$ غير متسقة.
+\end{proof}
+
+\begin{prop}
+\ollabel{prop:prov-incons}
+$\Gamma \Proves !A$ إذا وفقط إذا كانت $\Gamma \cup \{\lnot !A\}$ غير متسقة.
+\end{prop}
+
+\begin{proof}
+افترض أولًا أن $\Gamma \Proves !A$، أي أن هناك !!{tableau} مغلقًا لــ
+\[
+\{\sFmla{\False}{!A},
+\sFmla{\True}{!B_1}, \dots, \sFmla{\True}{!B_n}\}
+\]
+وباستخدام قاعدة $\TRule{\True}{\lnot}$ يمكن تحويله إلى !!{tableau}
+مغلق لــ
+\[
+\{\sFmla{\True}{\lnot !A},
+\sFmla{\True}{!B_1}, \dots, \sFmla{\True}{!B_n}\}.
+\]
+
+ومن جهة أخرى، إذا كان للأخير !!{tableau} مغلق، فيمكننا تحويله إلى
+!!{tableau} مغلق للأول بحذف كل صيغة تنتج من تطبيق
+\TRule{\True}{\lnot} على الافتراض الأول~$\sFmla{\True}{\lnot !A}$،
+وحذف ذلك الافتراض أيضًا، ثم إضافة الافتراض $\sFmla{\False}{!A}$. ذلك
+أن الفرع إن كان مغلقًا من قبل لاحتوائه على نتيجة تطبيق
+\TRule{\True}{\lnot} على $\sFmla{\True}{\lnot !A}$، أي
+$\sFmla{\False}{!A}$، فإن الفرع الموافق له في ال!!{tableau} الجديد مغلق
+أيضًا. وإذا كان فرع في الجدول الدلالي القديم مغلقًا لاحتوائه على الافتراض
+$\sFmla{\True}{\lnot !A}$ وعلى $\sFmla{\False}{\lnot
+  !A}$ معًا، فيمكننا
+تحويله إلى فرع مغلق بتطبيق $\TRule{\False}{\lnot}$ على
+$\sFmla{\False}{\lnot !A}$ لنحصل على $\sFmla{\True}{!A}$. وهذا يغلق
+الفرع لأننا أضفنا $\sFmla{\False}{!A}$ بوصفه افتراضًا.
+\end{proof}
+
+\begin{prob}
+أثبت أن $\Gamma \Proves \lnot !A$ إذا وفقط إذا كانت $\Gamma \cup \{!A\}$ غير متسقة.
+\end{prob}
+
+\begin{prop}\ollabel{prop:explicit-inc}
+  إذا كان $\Gamma \Proves !A$ و$\lnot !A \in \Gamma$، فإن $\Gamma$
+  غير متسقة.
+\end{prop}
+
+\begin{proof}
+  افترض أن $\Gamma \Proves !A$ و$\lnot !A \in \Gamma$. إذن توجد
+  $!B_1$, \dots, $!B_n \in \Gamma$ بحيث
+  \[
+  \{\sFmla{\False}{!A}, \sFmla{\True}{!B_1}, \dots, \sFmla{\True}{!B_n}\}
+  \]
+  لها جدول دلالي مغلق. استبدل بالافتراض \sFmla{\False}{!A} الافتراض
+  \sFmla{\True}{\lnot !A}، وأدرج بعد الافتراضات نتيجة تطبيق
+  \TRule{\True}{\lnot} على \sFmla{\True}{\lnot !A}. وكل !!{sentence}
+  في ال!!{tableau} كان تبريرها يحيل إلى السطر~$1$ في ال!!{tableau}
+  القديم يصبح تبريرها الآن
+  محيلًا إلى السطر~$n+2$. ولذلك إذا كان ال!!{tableau} القديم مغلقًا، كان
+  الجديد مغلقًا أيضًا. وهو يثبت أن $\Gamma$ غير متسقة، لأن جميع الافتراضات
+  تنتمي إلى~$\Gamma$.
+\end{proof}
+
+\begin{prop}\ollabel{prop:provability-exhaustive}
+  إذا كانت كل من $\Gamma \cup \{!A\}$ و$\Gamma \cup \{\lnot !A\}$
+  غير متسقة، فإن $\Gamma$ غير متسقة.
+\end{prop}
+
+\begin{proof}
+  إذا وُجدت $!B_1$, \dots, $!B_n \in \Gamma$ و$!C_1$, \dots,
+  $!C_m \in \Gamma$ بحيث
+  \begin{align*}
+    \{\sFmla{\True}{!A}, &
+    \sFmla{\True}{!B_1}, \dots, \sFmla{\True}{!B_n}\} \text{ و}\\
+    \{\sFmla{\True}{\lnot !A}, &
+    \sFmla{\True}{!C_1}, \dots, \sFmla{\True}{!C_m}\}
+  \end{align*}
+  كان لكل منهما !!{tableau}s مغلقة، فيمكننا إنشاء !!{tableau} واحد مركب
+  يثبت أن $\Gamma$ غير متسقة، وذلك باستخدام $\sFmla{\True}{!B_1}$،
+  \dots، $\sFmla{\True}{!B_n}$ مع $\sFmla{\True}{!C_1}$، \dots،
+  $\sFmla{\True}{!C_m}$ بوصفها افتراضات، ثم تطبيق قاعدة \Cut{}. وينتج
+  فرعان، يبدأ أحدهما بــ$\sFmla{\True}{!A}$ والآخر بــ
+  $\sFmla{\False}{!A}$.  
+  
+  في الجانب الأيسر، أضف الجزء الواقع تحت افتراضات ال!!{tableau} الأول.
+  وهنا يظل كل تطبيق لقاعدة صحيحًا، لأن كل افتراض من افتراضات ال!!{tableau}
+  الأول، بما فيها $\sFmla{\True}{!A}$، متاح. وهكذا يُغلق كل فرع تحت
+  $\sFmla{\True}{!A}$. 
+  
+  وفي الجانب الأيمن، أضف الجزء الواقع تحت افتراضات ال!!{tableau} الثاني،
+  بعد حذف نتائج أي تطبيقات لــ~$\TRule{\True}{\lnot}$ على
+  $\sFmla{\True}{\lnot !A}$. فنتيجة $\TRule{\True}{\lnot}$ عند تطبيقها
+  على $\sFmla{\True}{\lnot !A}$ هي $\sFmla{\False}{!A}$، وهي مع ذلك
+  متاحة لأنها نتيجة قاعدة \Cut{} في الجانب الأيمن من ال!!{tableau} المركب.
+
+  إذا كان فرع في الجدول الدلالي الثاني مغلقًا لاحتوائه على الافتراض
+  $\sFmla{\True}{\lnot !A}$ (الذي لم يعد يظهر افتراضًا في ال!!{tableau}
+  المركب) وعلى $\sFmla{\False}{\lnot !A}$، فيمكننا تطبيق
+  $\TRule{\False}{\lnot}$ على $\sFmla{\False}{\lnot !A}$ لنحصل على
+  $\sFmla{\True}{!A}$. وعندئذ يُغلق أيضًا الفرع الموافق في ال!!{tableau}
+  المركب، لأنه يحتوي على نتيجة قاعدة \Cut{} اليمنى،
+  $\sFmla{\False}{!A}$. وإذا أُغلق فرع في ال!!{tableau} الثاني لأي سبب
+  آخر، فإن الفرع الموافق له في ال!!{tableau} المركب يُغلق أيضًا، لأن كل
+  !!{signed formula}s غير $\sFmla{\True}{\lnot !A}$ تظهر في الفرع من
+  ال!!{tableau} الثاني القديم تظهر كذلك في الفرع الموافق من ال!!{tableau}
+  المركب.
+  \end{proof}
+
+\end{document}

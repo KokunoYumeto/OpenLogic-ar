@@ -1,0 +1,321 @@
+% الجزء: نظرية البرهان
+% الفصل: حذف القطع
+% القسم: ce-largest
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{cut}{inv}
+
+\olsection{إزالة القطوع ذات الرتبة القصوى}
+
+يبيّن برهان \olref[seq][inv]{lem:G3c-invert} أنه إذا كان النسق \Log{G3c}
+!!{prove}s نتيجة قاعدة منطقية (غير
+\RightR{\lexists} و\LeftR{\lforall})، فإنه !!{prove}s أيضًا كل مقدمة من
+مقدمات القاعدة من دون زيادة !!{height} البرهان. ويمكننا إثبات نتيجة أقوى،
+وهي أن هذا يصدق أيضًا على $\Log{G3c} + \CutCS$.
+
+وكما سبق، نعرّف \emph{رتبة القطع} لاستدلال \CutCS{} بأنها عمق !!{formula}
+القطع فيه.
+
+\begin{lem}\ollabel{lem:inv-G3c-cut}
+إذا كان $\Log{G3c} + \CutCS$ !!{prove}s نتيجة قاعدة منطقية~$R$ غير
+\RightR{\lexists} أو \LeftR{\lforall} باستعمال !!a{proof}~$\pi$، فإنه
+!!{prove}s أيضًا كل مقدمة بــ!!{proof}~$\pi'$ (أو بــ!!{proof}s~$\pi'$،
+$\pi''$ بحسب كون القاعدة ذات مقدمة واحدة أو مقدمتين). وفضلًا عن ذلك،
+(أ)~$\pheight{\pi'}\le\pheight{\pi}$ (وكذلك
+$\pheight{\pi''}\le\pheight{\pi}$)، و(ب)~يكون عدد استدلالات \CutCS{}
+ورتبها في~$\pi'$ (وفي $\pi''$) هو نفسه في~$\pi$.
+\end{lem}
+
+\begin{proof}
+يتضح ذلك بفحص براهين
+\cref{pt:seq:inv:lem:G3c-invert,pt:seq:inv:lem:invert-quant}. فقد كان ذلك
+البرهان استقراء على~$\pheight{\pi}$. وفي حالة الأساس، استبدلنا مسلّمة
+بمسلّمة أخرى، ومن ثم يتحقق الشرطان (أ) و(ب) بداهة. وإذا كانت القاعدة
+الأخيرة في~$\pi$ هي القاعدة المطلوبة~$R$، فإن !!{proof}sها الفرعية
+المباشرة هي !!{proof}s~$\pi_i$ التي نريدها، ويتحقق الشرطان (أ) و(ب). وفي
+جميع الحالات الأخرى،
+طبّقنا فرض الاستقراء على !!{proof}s~$\pi$ الفرعية المباشرة، أي التي تنتهي
+بمقدمة أو مقدمات الاستدلال الأخير~$S$، ثم أعدنا تطبيق القاعدة نفسها~$S$ على
+النتائج. ويتحقق الشرطان (أ) و(ب) في !!{proof}s البرهان الجديد الفرعية
+المباشرة، ولذلك يتحققان في البرهان كله. ويبقى التحقق من الحالة التي يكون
+فيها الاستدلال الأخير هو~\CutCS. ونكتفي مرة أخرى بمثال واحد: افترض أن
+$\pi$ هو !!a{proof} لنتيجة \LeftR{\land}، وهي $!B \land !C, \Gamma
+\Sequent \Delta$، وأنه ينتهي بــ~\CutCS:
+\[
+\AxiomC{}
+\RightLabel{$\pi_1$}
+\Deduce$!B \land !C, \Gamma \fCenter \Delta, !A$
+\AxiomC{}
+\RightLabel{$\pi_2$}
+\Deduce$!A, !B \land !C, \Gamma \fCenter \Delta$
+\RightLabel{\CutCS}
+\BinaryInf$!B \land !C, \Gamma \fCenter \Delta$
+\DisplayProof
+\]
+ينطبق فرض الاستقراء على $\pi_1$ و~$\pi_2$ (وهما أيضًا !!{proof}s لأمثلة
+من نتيجة $\LeftR{\land}$)، ويعطينا !!{proof}s~$\pi_1'$ و~$\pi_2'$ لكل من
+$!B, !C, \Gamma \fCenter \Delta, !A$ و$!A, !B, !C, \Gamma \fCenter
+\Delta$ على الترتيب. ونجمعهما باستعمال \CutCS{} لنحصل على~$\pi'$:
+\[
+\AxiomC{}
+\RightLabel{$\pi_1'$}
+\Deduce$!B, !C, \Gamma \fCenter \Delta, !A$
+\AxiomC{}
+\RightLabel{$\pi_2'$}
+\Deduce$!A, !B, !C, \Gamma \fCenter \Delta$
+\RightLabel{\CutCS}
+\BinaryInf$!B, !C, \Gamma \fCenter \Delta$
+\DisplayProof
+\]
+ومن الواضح أن الشرطين (أ) و(ب) متحققان.
+\end{proof}
+
+لاحظ أن هذا لا يصلح إذا استعملنا \Cut{} بدلًا من \CutCS، لأن نتيجة
+!!{proof} الأخير ستحتوي عندئذ نسختين من $!B, !C, \Gamma$ في المقدم ونسختين
+من $\Delta$ في التالي. وسنضطر إلى الاحتجاج بمقبولية الانكماش، لكن برهان
+\olref[seq][inv]{prop:G3c-cont-adm} يستعمل مبرهنة قابلية العكس، فنكون بذلك
+قد استدللنا استدلالًا دائريًا.
+
+يمكننا استعمال \cref{pt:cut:inv:lem:inv-G3c-cut} لإعطاء برهان بديل لحذف
+القطع. ففي هذا البرهان لا نزيل تباعًا المواضع العليا لاستدلالات \CutCS{}،
+بل نزيل مواضع استدلالات \CutCS{} ذات الرتبة القصوى. أي إننا نبدأ بــ
+!!a{proof}~$\pi$ في $\Log{G3c} + \CutCS$، ونزيل قطعًا في أي موضع منه
+(وقد نستبدله بقطوع أصغر رتبة)، ثم نكرر ذلك إلى أن لا يبقى أي قطع. والشرط
+الوحيد هو ألا يقع فوق القطع الذي نعالجه قطع من الرتبة نفسها أو من رتبة أعلى.
+
+\begin{lem}\ollabel{lem:max-cut-red-G3c} إذا كان $\pi$ هو !!a{proof} في
+$\Log{G3c}+\CutCS$ ينتهي باستدلال~\CutCS{} رتبته~$n$، ولا يستعمل فيما عدا
+ذلك إلا قواعد~$\Log{G3c}$ واستدلالات \CutCS{} رتبتها $<n$، فهناك برهان
+$\pi'$ للمتتالية النهائية نفسها في~$\Log{G3c} + \CutCS$ تكون رتبة كل
+استدلال \CutCS{} فيه $<n$.
+\end{lem}
+
+\begin{proof}
+ينتهي !!{proof}~$\pi$ بما يأتي:
+\[
+\AxiomC{}
+\RightLabel{$\pi_1$}
+\Deduce$\Gamma \fCenter \Delta, !A$
+\AxiomC{}
+\RightLabel{$\pi_2$}
+\Deduce$!A, \Gamma \fCenter \Delta$
+\RightLabel{\CutCS}
+\BinaryInf$\Gamma \fCenter \Delta$
+\DisplayProof
+\]
+نميّز حالات بحسب صورة~$!A$.
+
+افترض أن $!A$ ذرية. لاحظ أنه، بمقتضى الشرط القائل إن كل استدلال \CutCS{}
+في~$\pi_1$ و$\pi_2$ لا بد أن تكون رتبته $< \depth{!A} = 0$، لا يمكن أن يوجد أي
+استدلال \CutCS{} في~$\pi_1$ أو~$\pi_2$. نبيّن بالاستقراء على
+$\pheight{\pi_2}$ أن لـ$\Gamma \Sequent \Delta$ برهانًا خاليًا من القطع.
+إذا كان $\pheight{\pi_2}=0$، فإن $!A, \Gamma \Sequent \Delta$ مسلّمة.
+فإذا لم تكن $!A$ رئيسة، كان بعض $!C$ الذري !!a{element} في كل من~$\Gamma$
+و$\Delta$، وكانت $\Gamma \Sequent \Delta$ نفسها مسلّمة. وإذا كانت $!A$
+رئيسة، فإن $\Delta=\Delta', !A$. وفي هذه الحالة ينتهي $\pi_1$ بــ
+$\Gamma \Sequent \Delta', !A, !A$. ونحصل على برهان خال من القطع لــ
+$\Gamma \Sequent \Delta', !A$ بتطبيق
+\olref[seq][inv]{prop:G3c-cont-adm} (مقبولية الانكماش). وإذا كان
+$\pheight{\pi_2}>0$، فإنه ينتهي بقاعدة~$S$. خذ مقدمة من مقدمات تلك القاعدة؛
+صورتها $!A, \Gamma', \Pi \Sequent \Delta', \Lambda$، حيث $\Pi$ و$\Lambda$
+هما !!{formula}s الفعالة للقاعدة~$S$. يعطي تطبيق
+\olref[seq][adm]{prop:weak-G3c-adm} على~$\pi_1$ و$\pi_2$ !!{proof}s لكل من
+$\Gamma, \Gamma', \Pi \Sequent \Delta, \Delta', \Lambda, !A$ و
+$!A, \Gamma, \Gamma', \Pi \Sequent \Delta, \Delta', \Lambda$، وينطبق
+عليهما فرض الاستقراء. وهكذا نحصل على !!a{proof} لــ$\Gamma, \Gamma', \Pi
+\Sequent \Delta, \Delta', \Lambda$، لكل مقدمة من مقدمات~$S$. وبتطبيق $S$
+نحصل على $\Gamma, \Gamma \Sequent \Delta, \Delta$، ثم يزوّدنا
+\olref[seq][inv]{prop:G3c-cont-adm} بالبرهان الخالي من القطع لــ$\Gamma
+\Sequent \Delta$.
+
+إذا لم تكن $!A$ ذرية، نميّز حالات بحسب !!{main operator} لــ$!A$. وفي كل
+حالة نطبّق \olref{lem:inv-G3c-cut} لنحصل على !!{proof}s لمقدمات قاعدتي
+اليسار واليمين اللتين تكون $!A$ صيغتهما الرئيسة. ثم نتابع كما في الحالة~E
+من برهان \olref[top]{lem:cut-adm-G3c}.
+\begin{enumerate}
+  \item $!A \ident \lnot !B$. ينتهي !!{proof}s~$\pi_1$ و$\pi_2$ بكل من
+  $\Gamma \Sequent \Delta, \lnot !B$ و$\lnot !B, \Gamma \Sequent
+  \Delta$. وبحسب \olref{lem:inv-G3c-cut} يوجد !!{proof}s~$\pi_1'$ و
+  $\pi_2'$ لــ$!B, \Gamma \Sequent \Delta$ و$\Gamma \Sequent \Delta,
+  !B$. ويكون !!{proof}~$\pi'$ كما يأتي:
+  \[
+  \AxiomC{}
+  \RightLabel{$\pi_2'$}
+  \Deduce$\Gamma \fCenter \Delta, !B$
+  \AxiomC{}
+  \RightLabel{$\pi_1'$}
+  \Deduce$!B, \Gamma \fCenter \Delta$
+  \RightLabel{\CutCS}
+  \BinaryInf$\Gamma \fCenter \Delta$
+  \DisplayProof
+  \]
+  \item $!A \ident (!B \lor !C)$. ينتهي !!{proof}s~$\pi_1$ و$\pi_2$
+  بكل من $\Gamma \Sequent \Delta, !B \lor !C$ و$!B \lor !C, \Gamma
+  \Sequent \Delta$. وبحسب \olref{lem:inv-G3c-cut} (قابلية عكس
+  \RightR{\lor} مطبقة على~$\pi_1$)، يوجد !!a{proof}~$\pi_1'$ لــ
+  $\Gamma \Sequent \Delta, !B, !C$. وبحسب \olref{lem:inv-G3c-cut}
+  (قابلية عكس \LeftR{\lor} مطبقة على~$\pi_2$)، يوجد !!a{proof}~$\pi_2'$
+  لــ$!B, \Gamma \Sequent \Delta$ و!!a{proof}~$\pi_2''$ لــ$!C, \Gamma
+  \Sequent \Delta$. وبتطبيق \olref[seq][adm]{prop:weak-G3c-adm} على
+  $\pi_2''$ نحصل أيضًا على !!a{proof}~$\pi_2'''$ لــ$!C, \Gamma \Sequent
+  \Delta, !B$. ويكون !!{proof}~$\pi'$:
+  \[
+  \AxiomC{}
+  \RightLabel{$\pi_1'$}
+  \Deduce$\Gamma \fCenter \Delta, !B, !C$
+  \AxiomC{}
+  \RightLabel{$\pi_2'''$}
+  \Deduce$!C, \Gamma \fCenter \Delta, !B$
+  \RightLabel{\CutCS}
+  \BinaryInf$\Gamma \fCenter \Delta, !B$
+  \AxiomC{}
+  \RightLabel{$\pi_2'$}
+  \Deduce$!B, \Gamma \fCenter \Delta$
+  \RightLabel{\CutCS}
+  \BinaryInf$\Gamma \fCenter \Delta$
+  \DisplayProof
+  \]
+  \item $!A \ident (!B \land !C)$. تمرين.
+  \item $!A \ident (!B \lif !C)$. ينتهي !!{proof}s~$\pi_1$ و$\pi_2$
+  بكل من $\Gamma \Sequent \Delta, !B \lif !C$ و$!B \lif !C, \Gamma
+  \Sequent \Delta$. وبحسب \olref{lem:inv-G3c-cut} (قابلية عكس
+  \RightR{\lif} مطبقة على~$\pi_1$)، يوجد !!a{proof}~$\pi_1'$ لــ
+  $!B, \Gamma \Sequent \Delta, !C$. وبحسب \olref{lem:inv-G3c-cut}
+  (قابلية عكس \LeftR{\lif} مطبقة على~$\pi_2$)، يوجد !!a{proof}~$\pi_2'$
+  لــ$\Gamma \Sequent \Delta, !B$ و!!a{proof}~$\pi_2''$ لــ$!C, \Gamma
+  \Sequent \Delta$. وبتطبيق \olref[seq][adm]{prop:weak-G3c-adm} على
+  $\pi_2''$ نحصل أيضًا على !!a{proof}~$\pi_2'''$ لــ$!C, !B, \Gamma
+  \Sequent \Delta$. ويكون !!{proof}~$\pi'$:
+  \[
+  \AxiomC{}
+  \RightLabel{$\pi_2'$}
+  \Deduce$\Gamma \fCenter \Delta, !B$
+  \AxiomC{}
+  \RightLabel{$\pi_1'$}
+  \Deduce$!B, \Gamma \fCenter \Delta, !C$
+  \AxiomC{}
+  \RightLabel{$\pi_2'''$}
+  \Deduce$!C, !B, \Gamma \fCenter \Delta$
+  \RightLabel{\CutCS}
+  \BinaryInf$!B, \Gamma \fCenter \Delta$
+  \RightLabel{\CutCS}
+  \BinaryInf$\Gamma \fCenter \Delta$
+  \DisplayProof
+  \]
+  \item $!A \ident \lforall[x][!B(x)]$. ينتهي !!{proof}s~$\pi_1$ و
+  $\pi_2$ بكل من $\Gamma \Sequent \Delta, \lforall[x][!B(x)]$ و
+  $\lforall[x][!B(x)], \Gamma \Sequent \Delta$. وبحسب
+  \olref{lem:inv-G3c-cut} يوجد !!a{proof}~$\pi_1'$ لــ$\Gamma \Sequent
+  \Delta, !B(c)$.
+
+  تأمل الآن !!{proof}~$\pi_2$. إنه ينتهي بــ$\lforall[x][!B(x)],
+  \Gamma \Sequent \Delta$. وبينما نتحرك صعودًا ابتداء من المتتالية النهائية
+  لــ$\pi_2$، نعلّم كل ورود لــ$\lforall[x][!B(x)]$ على يسار متتالية «يقود
+  إلى» ورود $\lforall[x][!B(x)]$ في المتتالية النهائية لــ$\pi_2$، أي:
+  (أ)~علّم $\lforall[x][!B(x)]$ في المتتالية النهائية لــ$\pi_2$.
+  (ب)~إذا وردت $\lforall[x][!B(x)]$ في سياق نتيجة قاعدة وكانت معلّمة،
+  فعلّم الورود المناظر في مقدمة القاعدة أو مقدماتها. (ج)~إذا كانت
+  $\lforall[x][!B(x)]$ رئيسة في نتيجة قاعدة \LeftR{\lforall} وكانت معلّمة،
+  فعلّم الورودين الفعالين المناظرين لــ$\lforall[x][!B(x)]$ و$!B(t)$ في
+  المقدمة.
+
+  تأمل الآن كل هذه الورودات المعلّمة لــ$\lforall[x][!B(x)]$. لا يكون أي
+  منها فعالًا في قاعدة غير \LeftR{\lforall} (فلا تُعلّم إلا !!{formula}s
+  الفعالة لقاعدة \LeftR{\lforall}). احذف من~$\pi_2$ كل الورودات المعلّمة
+  لــ$\lforall[x][!B(x)]$.
+  إذا كان الناتج !!{proof} صحيحًا، فلم تكن الورودات المعلّمة لــ
+  $\lforall[x][!B(x)]$ فعالة قط، بل أتت كلها مباشرة من مسلّمات. وينتهي
+  !!{proof} بــ$\Gamma \Sequent \Delta$، ويمكننا أن نستبدل به $\pi$.
+  وبذلك نكون قد أزلنا قطعًا ذا رتبة قصوى.
+
+  وإلا، فالناتج ليس برهانًا صحيحًا، لأننا حذفنا !!{formula}s
+  $\lforall[x][!B(x)]$ كانت فعالة في بعض استدلالات \LeftR{\lforall}.
+  وقد حوّلنا هذه إلى «استدلالات» من الصورة
+  \[
+  \AxiomC{}
+  \RightLabel{$\pi_t$}
+  \Deduce$!B(t), \Pi \fCenter \Lambda$
+  \RightLabel{\LeftR{\lforall}}
+  \UnaryInf$\Pi \fCenter \Lambda$
+  \DisplayProof
+  \]
+  استبدل بكل «استدلال» علوي من هذا النوع ما يأتي:
+  \[
+  \AxiomC{}
+  \RightLabel{$\Subst{\pi_1'}{t}{c}[\Pi \Sequent \Lambda]$}
+  \Deduce$\Gamma, \Pi \fCenter \Delta, \Lambda, !B(t)$
+  \AxiomC{}
+  \RightLabel{$\pi_t[\Gamma \Sequent \Delta]$}
+  \Deduce$!B(t), \Gamma, \Pi \fCenter \Delta, \Lambda$
+  \RightLabel{\CutCS}
+  \BinaryInf$\Gamma, \Pi \fCenter \Delta, \Lambda$
+  \DisplayProof
+  \]
+  وأضف $\Gamma$ إلى يسار كل متتالية أسفله، و$\Delta$ إلى يمينها. كرر ذلك
+  حتى تُستبدل جميع «استدلالات» \LeftR{\lforall} التي تحتوي مقدمتها على
+  $!B(t)$ معلّمة باستدلال \CutCS{} على $!B(t)$ ما. وتكون المتتالية النهائية
+  لــ!!{proof} الناتج (وهو الآن !!{proof} صحيح) من الصورة
+  $\Gamma, \dots, \Gamma \Sequent \Delta, \dots, \Delta$. طبّق مقبولية
+  الانكماش لتحوّله إلى !!a{proof} لــ$\Gamma \Sequent \Delta$، واستبدل به
+  $\pi$. وهكذا استبدلنا قطعًا واحدًا على $\lforall[x][!B(x)]$ بقطوع
+  (قد تكون كثيرة) على $!B(t)$، لكنها كلها أدنى رتبة. وتبقى أي قطوع كانت
+  موجودة أصلًا في $\pi_1$ أو $\pi_2$، لكنها أيضًا كلها أدنى رتبة.
+\end{enumerate}
+\end{proof}
+
+\begin{prob}
+تحقق من الحالة $!A \ident (!B \land !C)$ في برهان
+\olref{lem:max-cut-red-G3c}. أي بيّن أنه إذا وجد !!a{proof}~$\pi$ ينتهي بــ
+\[
+\AxiomC{}
+\RightLabel{$\pi_1$}
+\Deduce$\Gamma \fCenter \Delta, !B \land !C$
+\AxiomC{}
+\RightLabel{$\pi_2$}
+\Deduce$!B \land !C, \Gamma \fCenter \Delta$
+\RightLabel{\CutCS}
+\BinaryInf$\Gamma \fCenter \Delta$
+\DisplayProof
+\]
+وكان كل من $\pi_1$ و$\pi_2$ لا يحتوي إلا قطوعًا رتبتها
+$<\depth{!B \land !C}$، فهناك !!a{proof}~$\pi'$ لــ$\Gamma \Sequent
+\Delta$ لا يحتوي إلا قطوعًا رتبتها $<\depth{!B \land !C}$.
+\end{prob}
+
+% \begin{prob}
+% تحقق من الحالة $!A \ident \lexists[x][!B(x)]$ في برهان
+% \olref{lem:inv-G3c-cut}.
+% \end{prob}
+
+
+تثبت \olref{lem:max-cut-red-G3c} أنه يمكننا استبدال استدلال \CutCS{} ذي
+الرتبة الأعلى في !!a{proof} باستدلالات \CutCS{} أدنى رتبة. ويمكننا مرة
+أخرى استعمال هذه المبرهنة لإزالة أي عدد من استدلالات \CutCS{} من
+!!a{proof}، وذلك بتطبيقها تباعًا على !!{proof}s الفرعية العليا المنتهية
+بــ\CutCS{} ذي الرتبة القصوى.
+
+\begin{thm}\ollabel{thm:cut-elim-G3c-largest}
+يمكن تحويل أي !!{proof}~$\pi$ في $\Log{G3c} + \CutCS$ إلى برهان في~\Log{G3c}.
+\end{thm}
+
+\begin{proof}
+  نثبت أولًا أنه يمكن إزالة كل القطوع ذات الرتبة القصوى في~$\pi$. لتكن
+  $d$ الرتبة القصوى للقطوع الواقعة في~$\pi$، وليكن $n$ عدد القطوع ذات
+  الرتبة~$d$. البرهان بالاستقراء على~$n$. إذا كان $n=0$ فلا شيء نثبته.
+  وإذا كان $n>0$، فاختر قطعًا علويًا رتبته~$d$، وليكن $\pi_1$ هو
+  !!{proof} الفرعي المنتهي به. وبحسب \olref{lem:max-cut-red-G3c} يوجد
+  !!a{proof}~$\pi_1'$ للمتتالية النهائية نفسها، وكل قطوعه رتبتها $<d$.
+  استبدل $\pi_1$ بــ$\pi_1'$ في~$\pi$. ينتج من ذلك !!a{proof} يحتوي
+  $n-1$ قطعًا من الرتبة~$d$، فينطبق فرض الاستقراء.
+
+  والآن تتبع النتيجة بالاستقراء على~$d$. فإذا كان $d=0$، كانت جميع القطوع
+  ذرية، ويمكن إزالة جميعها بحسب النتيجة السابقة. وإذا كان $d>0$، تعطينا
+  النتيجة السابقة برهانًا استُبدلت فيه كل القطوع ذات الرتبة~$d$ بقطوع
+  رتبتها~$<d$. ولما كانت $d$ هي الرتبة القصوى للقطوع في~$\pi$، أصبح لدينا
+  برهان رتبة قطوعه القصوى $<d$، فينطبق فرض الاستقراء.
+\end{proof}
+
+\end{document}

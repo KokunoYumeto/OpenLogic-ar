@@ -1,0 +1,235 @@
+% Part: many-valued-logic
+% Chapter: three-valued-logics
+% Section: lukasiewicz
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mvl}{thr}{luk}
+
+\olsection{منطق~\L ukasiewicz}
+
+يرجع أحد أوائل المقترحات المنشورة والمفصلة لمنطق متعدد القيم إلى
+الفيلسوف البولندي يان~\L ukasiewicz سنة~1921. وكان~\L ukasiewicz
+مدفوعًا بمسألة
+أرسطو عن المعركة البحرية: يبدو أن الجملة ``ستقع معركة بحرية غدًا''
+ليست، \emph{اليوم}، صادقة ولا كاذبة؛ إذ لم تتحدد قيمة صدقها بعد.
+واقترح~\L ukasiewicz إدخال قيمة صدق ثالثة لمثل هذه الجمل
+``المستقبلية العرضية''.
+\begin{quote}
+يمكنني أن أفترض، من دون تناقض، أن وجودي في وارسو في لحظة معينة من
+السنة المقبلة، كظهر يوم~21 ديسمبر مثلًا، غير محدد الآن لا إيجابًا ولا
+سلبًا. ولذلك فمن الممكن، من غير الضروري، أن أكون في وارسو في الوقت
+المعين. وبناء على هذا الافتراض، لا تكون القضية ``سأكون في وارسو ظهر
+يوم~21 ديسمبر من السنة المقبلة'' في الوقت الحاضر صادقة ولا كاذبة.
+فلو كانت صادقة الآن، لكان وجودي المستقبلي في وارسو ضروريًا، وهذا يناقض
+الافتراض. ولو كانت كاذبة الآن، من جهة أخرى، لكان وجودي المستقبلي في
+وارسو مستحيلًا، وهذا يناقض الافتراض أيضًا. ومن ثم فالقضية موضع النظر
+ليست الآن صادقة ولا كاذبة، ولا بد أن تكون لها قيمة ثالثة مختلفة عن
+``$0$'' أو الكذب وعن ``$1$'' أو الصدق. ويمكننا أن نرمز إلى هذه القيمة
+بـ``$\frac{1}{2}$''. وهي تمثل ``الممكن''، وتنضم إلى ``الصادق''
+و``الكاذب'' قيمة ثالثة.
+\end{quote}
+سنستعمل~$\Undef$ لقيمة الصدق الثالثة عند~\L
+ukasiewicz.\footnote{يستعمل~\L ukasiewicz كلمة ``ممكن'' هنا بمعنى
+غير مألوف اليوم، هو الممكن غير الضروري.}
+
+يسهل تحديد دوال الصدق للروابط~$\lnot$ و$\land$ و$\lor$ وفق هذا
+التفسير: فنفي جملة مستقبلية عرضية جملة مستقبلية عرضية أيضًا، ولذلك
+$\tf{\lnot}(\Undef) = \Undef$. وإذا كان أحد مقترني اقتران ما غير
+محدد والآخر صادقًا، كان الاقتران غير محدد أيضًا؛ فقد يتبين أن الاقتران
+صادق، وقد يتبين أنه كاذب، بحسب ما يؤول إليه المقترن المستقبلي العرضي.
+ومن ثم
+\[
+    \tf{\land}(\True, \Undef) =
+\tf{\land}(\Undef, \True) =
+\Undef.
+\]
+أما إذا كان المقترن الآخر كاذبًا، فلا يمكن أن يتبين أن الاقتران صادق؛
+لذلك
+\[\tf{\land}(\False, \Undef) =
+\tf{\land}(\Undef, \False) = \False.\]
+أما القيم الأخرى (عندما تكون الوسائط قيم صدق متعينة، أي~$\True$ أو
+$\False$) فهي كما في المنطق الكلاسيكي.
+
+أما الشرط فحاله أعقد قليلًا. افترض أن~$q$ عبارة مستقبلية عرضية. إذا
+كان~$p$ كاذبًا، كان~$p \lif q$ صادقًا بصرف النظر عما يؤول إليه~$q$؛
+ولذلك ينبغي أن نضع~$\tf{\lif}(\False, \Undef) = \True$. وإذا كان~$p$
+صادقًا، كان~$q \lif p$ صادقًا بصرف النظر عما يؤول إليه~$q$؛ ولذلك
+$\tf{\lif}(\Undef, \True) = \True$. وإذا كان~$p$ صادقًا، فقد يتبين
+أن~$p \lif q$ صادق أو كاذب؛ ولذلك
+$\tf{\lif}(\True, \Undef) = \Undef$. وبالمثل، إذا كان~$p$ كاذبًا،
+فقد يتبين أن~$q \lif p$ صادق أو كاذب؛ ولذلك
+$\tf{\lif}(\Undef, \False) = \Undef$. وتبقى الحالة التي يكون فيها
+$p$ و$q$ كلاهما مستقبليًا عرضيًا. وبحسب الدافع، ينبغي حقًا أن نسند
+$\Undef$ في هذه الحالة. غير أن ذلك يجعل~$!A \lif !A$ \emph{غير}
+تحصيل منطقي. ولم يجد~\L ukasiewicz مشقة في التخلي عن
+$!A \lor \lnot !A$ و$\lnot(!A \land \lnot !A)$، لكنه تردد في التخلي
+عن~$!A \lif !A$. ولذلك اشترط
+$\tf{\lif}(\Undef, \Undef) = \True$.
+
+\begin{defn}\ollabel{def:lukasiewicz}
+يعرّف منطق~\L ukasiewicz الثلاثي القيم بالمصفوفة الآتية:
+\begin{enumerate}
+  \item لغة القضايا القياسية~$\Lang L_0$ بروابطها
+  $\lnot$ و$\land$ و$\lor$ و$\lif$.
+  \item مجموعة قيم الصدق~$V = \{\True, \Undef, \False\}$.
+  \item $\True$ هي القيمة المميزة الوحيدة؛ أي~$V^+ = \{\True\}$.
+  \item تعطي الجداول الآتية دوال الصدق:
+  \begin{center}
+    \begin{tabular}{c|c}
+      $\tf{\lnot}$ & \\
+      \hline
+      $\True$ & $\False$ \\
+      $\Undef$ & $\Undef$ \\
+      $\False$ & $\True$
+    \end{tabular}
+    \quad
+    \begin{tabular}{c|ccc}
+      $\tf{\land}[\LogLuk[3]]$ & $\True$ & $\Undef$ & $\False$ \\
+      \hline
+      $\True$ & $\True$ & $\Undef$ & $\False$ \\
+      $\Undef$ & $\Undef$ & $\Undef$ & $\False$\\
+      $\False$ & $\False$ & $\False$ & $\False$
+    \end{tabular}
+    \\[2ex]
+    \begin{tabular}{c|ccc}
+      $\tf{\lor}[\LogLuk[3]]$ & $\True$ & $\Undef$ & $\False$ \\
+      \hline
+      $\True$ & $\True$ & $\True$ & $\True$ \\
+      $\Undef$ & $\True$ & $\Undef$ & $\Undef$ \\
+      $\False$ & $\True$ & $\Undef$ & $\False$
+    \end{tabular}
+    \quad
+    \begin{tabular}{c|ccc}
+      $\tf{\lif}[\LogLuk[3]]$ & $\True$ & $\Undef$ & $\False$ \\
+      \hline
+      $\True$ & $\True$ & $\Undef$ & $\False$ \\
+      $\Undef$ & $\True$ & $\True$ & $\Undef$  \\
+      $\False$ & $\True$ & $\True$ & $\True$
+    \end{tabular}
+  \end{center}
+\end{enumerate}
+\end{defn}
+
+كما يسهل أن نرى، فإن أي~!!{formula}~$!A$ لا تحتوي إلا~$\lnot$ و
+$\land$ و$\lor$ تأخذ قيمة الصدق~$\Undef$ إذا أسندت~$\Undef$ إلى
+جميع~!!{propositional variable}s فيها. ولذلك، مثلًا، لا يكون
+التحصيلان المنطقيان الكلاسيكيان~$p \lor \lnot p$ و
+$\lnot(p \land \lnot p)$ تحصيلين منطقيين في~$\LogLuk[3]$، لأن
+$\pValue{v}(!A) = \Undef$ كلما كان~$\pAssign v(p) = \Undef$.
+
+في~!!{valuation}s التي يكون فيها~$\pAssign v(p) = \True$ أو~$\False$،
+تتفق~$\pValue v(!A)$ مع قيمة صدقها الكلاسيكية.
+
+\begin{prop}
+  إذا كان~$\pAssign v(p) \in \{\True, \False\}$ لكل~$p$ في~$!A$،
+  فإن~$\pValue v[\LogLuk[3]](!A) = \pValue v[\LogCL](!A)$.
+\end{prop}
+
+\begin{prob}\label{mvl:thr:luk:prob:luk-iff} افترض أننا نعرّف
+  $\pValue v(!A \liff !B) = \pValue v((!A \lif !B) \land (!B \lif
+  !A))$ في~$\LogLuk[3]$. فما جدول صدق~$\liff$؟
+\end{prob}
+
+كثير من التحصيلات المنطقية الكلاسيكية \emph{تحصيلات} منطقية أيضًا
+في~\LogLuk[3]، مثل~$\lnot p \lif (p \lif q)$. وكما في المنطق
+الكلاسيكي، يمكننا التحقق من ذلك بجداول الصدق:
+\begin{center}
+\begin{tabular}{cc|cccccc}
+  $p$ & $q$ & $\lnot$ & $p$ & $\lif$ & $\smash{(}p$ & $\lif$ & $q\smash{)}$ \\ \hline
+  \True & \True & \False & \True & \True & \True & \True & \True \\
+  \True & \Undef & \False & \True & \True & \True & \Undef & \Undef \\
+  \True & \False & \False & \True & \True & \True & \False & \False \\
+  \Undef & \True & \Undef & \Undef & \True & \Undef & \True & \True \\
+  \Undef & \Undef & \Undef & \Undef & \True & \Undef & \True & \Undef \\
+  \Undef & \False & \Undef & \Undef & \True & \Undef & \Undef & \False \\
+  \False & \True & \True & \False & \True & \False & \True & \True \\
+  \False & \Undef & \True & \False & \True & \False & \True & \Undef \\
+  \False & \False & \True & \False & \True & \False & \True & \False \\
+\end{tabular}
+\end{center}
+
+\begin{prob}
+  بين أن الآتي تحصيلات منطقية في~\LogLuk[3]:
+  \begin{enumerate}
+    \item $p \lif (q \lif p)$
+    \item\label{mvl:thr:luk:prob:luk-taut-2} $\lnot(p \land q) \liff (\lnot p \lor \lnot q)$
+    \item\label{mvl:thr:luk:prob:luk-taut-3} $\lnot(p \lor q) \liff (\lnot p \land \lnot q)$
+  \end{enumerate}
+  (في \olref[mvl][thr][luk]{prob:luk-taut-2} و
+  \olref[mvl][thr][luk]{prob:luk-taut-3}، اعتبر~$!A \liff !B$
+  اختصارًا لـ$(!A \lif !B) \land (!B \lif !A)$، أو ارجع إلى حلك
+  لـ\olref[mvl][thr][luk]{prob:luk-iff}.)
+\end{prob}
+
+\begin{prob}
+  بين أن التحصيلات المنطقية الكلاسيكية الآتية ليست تحصيلات منطقية
+  في~\LogLuk[3]:
+  \begin{enumerate}
+    \item $(\lnot p \land p) \lif q$
+    \item $((p \lif q) \lif p) \lif p$
+    \item $(p \lif (p \lif q)) \lif (p \lif q)$
+  \end{enumerate}
+\end{prob}
+
+قد يظن المرء لذلك أنه حتى إذا لم تكن جميع التحصيلات المنطقية
+الكلاسيكية تحصيلات في~$\LogLuk[3]$، فلا بد أن تأخذ على الأقل إما
+القيمة~$\True$ أو القيمة~$\Undef$ في كل~!!{valuation}. وهذا غير صحيح؛
+إذ يعطي الصيغة الآتية مثالًا مضادًا:
+\[
+  \lnot(p \lif \lnot p) \lor \lnot(\lnot p \lif p)
+\]
+فهي تأخذ~$\False$ إذا أخذ~$p$ القيمة~$\Undef$.
+
+\begin{prob}
+  أي العلاقات الآتية تصح في منطق~\L ukasiewicz؟ أعط جدول صدق لكل منها.
+  \begin{enumerate}
+    \item $p, p \lif q \Entails q$
+    \item $\lnot\lnot p \Entails p$
+    \item $p \land q \Entails p$
+    \item $p \Entails p \land p$
+    \item $p \Entails p \lor q$
+  \end{enumerate}
+\end{prob}
+
+أمل~\L ukasiewicz أن يبني منطقًا للإمكان على أساس نسقه الثلاثي القيم،
+بإدخال رابط ذي موضع واحد~$\Diamond !A$ (بمعنى ``$!A$ ممكنة'') ورابط
+موافق~$\Box !A$ (بمعنى ``$!A$ ضرورية''):
+\begin{center}
+  \begin{tabular}{c|c}
+    $\tf{\Diamond}$ & \\
+    \hline
+    $\True$ & $\True$ \\
+    $\Undef$ & $\True$ \\
+    $\False$ & $\False$
+  \end{tabular}
+  \quad
+  \begin{tabular}{c|c}
+    $\tf{\Box}$ & \\
+    \hline
+    $\True$ & $\True$ \\
+    $\Undef$ & $\False$ \\
+    $\False$ & $\False$
+  \end{tabular}
+\end{center}
+وبعبارة أخرى، يكون~$p$ ممكنًا إذا وفقط إذا لم يتعين كاذبًا بالفعل؛
+ويكون~$p$ ضروريًا إذا وفقط إذا تعين صادقًا بالفعل.
+
+\begin{prob}
+  بين أن~$\Box p \liff \lnot\Diamond \lnot p$ و
+  $\Diamond p \liff \lnot \Box \lnot p$ تحصيلان منطقيان في
+  $\LogLuk[3]$ بعد توسيعه بجدولي صدق~$\Box$ و$\Diamond$.
+\end{prob}
+
+غير أن أوجه قصور هذا المنطق الجهي المقترح سرعان ما ظهرت: كيفما آلت
+الأمور، لا يمكن أن يتبين أبدًا أن~$p \land \lnot p$ صادق. ولذلك، حتى
+إذا لم يكن متعينًا الآن (فكان غير محدد)، ينبغي أن يعد مستحيلًا؛ أي
+ينبغي أن تكون~$\lnot \Diamond(p \land \lnot p)$ تحصيلًا منطقيًا.
+لكن إذا كان~$\pAssign v(p) = \Undef$، فإن
+$\pValue v(\lnot \Diamond(p \land \lnot p)) = \Undef$. ومع أن
+\L ukasiewicz كان محقًا في أن قيمتي صدق لا تكفيان لاستيعاب تمييزات
+جهية كالإمكان والضرورة، فإن إدخال قيمة صدق ثالثة لا يكفي أيضًا.
+
+\end{document}

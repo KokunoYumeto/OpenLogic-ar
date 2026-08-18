@@ -1,0 +1,104 @@
+% Part: lambda-calculus
+% Chapter: church-rosser
+% Section: parallel-beta-eta-reduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{cr}{pbe}
+
+\olsection{اختزال~$\beta\eta$ المتوازي}
+
+نثبت في هذا القسم خاصية تشيرش--روسر لاختزال~$\beta\eta$ المتوازي،
+وهو مفهوم الاختزال المتوازي الموافق لاختزال~$\beta\eta$.
+
+\begin{defn}[اختزال~$\beta\eta$ المتوازي، $\beredpar$] \ollabel{defn:beredpar}
+  يعرّف \emph{اختزال~$\beta\eta$ المتوازي} ($\beredpar$) على الحدود
+  استقرائيًا كما يأتي:
+  \begin{enumerate}
+    \item \ollabel{defn:beredpar1} $x \beredpar x$.
+    \item \ollabel{defn:beredpar2} إذا كان~$N \beredpar N'$، فإن
+      $\lambd[x][N] \beredpar \lambd[x][N']$.
+    \item \ollabel{defn:beredpar3} إذا كان~$P \beredpar P'$ و
+      $Q \beredpar Q'$، فإن~$PQ \beredpar P'Q'$.
+    \item \ollabel{defn:beredpar4} إذا كان~$N \beredpar N'$ و
+      $Q \beredpar Q'$، فإن
+      $(\lambd[x][N])Q \beredpar \Subst{N'}{Q'}{x}$.
+    \item \ollabel{defn:beredpar5} إذا كان~$N \beredpar N'$، فإن
+      $\lambd[x][Nx] \beredpar N'$، بشرط~$x \notin \FV{N}$.
+  \end{enumerate}
+\end{defn}
+
+\begin{thm}\ollabel{thm:refl}
+  $M \beredpar M$.
+\end{thm}
+
+\begin{proof}
+  تمرين.
+\end{proof}
+
+\begin{prob}
+  أثبت \olref[lam][cr][pbe]{thm:refl}.
+\end{prob}
+
+\begin{defn}[التطوير الكامل بحسب~$\beta\eta$]\ollabel{defn:becd}
+  يعرّف \emph{التطوير الكامل بحسب~$\beta\eta$}، $\becd{M}$، للحد~$M$
+  كما يأتي:
+  \begin{align}
+    \becd{x} &= x \ollabel{defn:becd1} \\
+    \becd{(\lambd[x][N])} &= \lambd[x][\becd{N}] \ollabel{defn:becd2}
+      && \text{إذا لم يكن~$N$ من الصورة~$P x$ مع~$x\notin\FV{P}$}\\
+    \becd{(PQ)} &= \becd{P}\becd{Q} && \text{إذا لم يكن~$P$ تجريد~$\lambd$}
+    \ollabel{defn:becd3} \\
+    \becd{((\lambd[x][N])Q)} &= \Subst{\becd{N}}{\becd{Q}}{x}
+                             \ollabel{defn:becd4} \\
+    \becd{(\lambd[x][Nx])} &= \becd{N} \ollabel{defn:becd5} &
+      \text{إذا كان~$x \notin \FV{N}$}
+  \end{align}
+\end{defn}
+
+\begin{lem}\ollabel{lem:comp}
+  إذا كان~$M \beredpar M'$ و$R \beredpar R'$، فإن~$\Subst{M}{R}{y}
+  \beredpar \Subst{M'}{R'}{y}$.
+\end{lem}
+
+\begin{proof}
+  بالاستقراء على~!!{derivation} لـ$M \beredpar M'$. وحيث يلزم، نعيد
+  تسمية الممثلين بتحويل~$\alpha$ قبل تطبيق حالات الاستبدال بحيث يكون
+  متغير التجريد~$x \ne y$ ولا يقع~$x$ حرًا في~$R$ أو~$R'$.
+
+  الحالات الأربع الأولى مطابقة للحالات الواردة في \olref[pb]{lem:comp}.
+  وإذا كانت القاعدة الأخيرة هي \olref{defn:beredpar5}، كان~$M$ هو
+  $\lambd[x][Nx]$ و$M'$ هو~$N'$ لبعض~$x$ و$N'$، حيث
+  $x \notin \FV{N}$ و$N \beredpar N'$. نريد بيان أن
+  $\Subst{(\lambd[x][Nx])}{R}{y} \beredpar \Subst{N'}{R'}{y}$، أي
+  $\lambd[x][\Subst{N}{R}{y} x] \beredpar \Subst{N'}{R'}{y}$.
+  ويتبع ذلك من \olref{defn:beredpar}\olref{defn:beredpar5} وفرض
+  الاستقراء.
+\end{proof}
+
+\begin{lem}\ollabel{lem:cont}
+  إذا كان~$M \beredpar M'$، فإن~$M' \beredpar \becd{M}$.
+\end{lem}
+
+\begin{proof}
+  بالاستقراء على~!!{derivation} لـ$M \beredpar M'$.
+
+  الحالات الأربع الأولى مماثلة للحالات الواردة في
+  \olref[pb]{lem:cont}. وإذا كانت القاعدة الأخيرة هي
+  \olref{defn:beredpar5}، كان~$M$ هو~$\lambd[x][Nx]$ و$M'$ هو~$N'$
+  لبعض~$x$ و$N$ و$N'$، حيث~$x \notin \FV{N}$ و$N \beredpar N'$.
+  نريد بيان أن~$N' \beredpar \becd{(\lambd[x][Nx])}$، أي
+  $N' \beredpar \becd{N}$، وهذا يتبع مباشرة من فرض الاستقراء.
+\end{proof}
+
+\begin{thm}\ollabel{thm:cr}
+  تحقق~$\beredpar$ خاصية تشيرش--روسر.
+\end{thm}
+
+\begin{proof}
+  يتبع ذلك مباشرة من \olref{lem:cont}.
+\end{proof}
+
+\end{document}

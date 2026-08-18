@@ -1,0 +1,57 @@
+% Part: normal-modal-logic
+% Chapter: tableaux
+% Section: introduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{tab}{int}
+
+\olsection{مقدمة}
+
+ال!!^{tableau}s أشجار معينة (تتفرع إلى أسفل) من ال!!{signed
+  formula}s؛ أي من أزواج يتكون كل منها من علامة لقيمة صدق ($\True$ أو
+$\False$) ومن !!a{sentence}:
+\[
+\sFmla{\True}{!A} \text{ أو } \sFmla{\False}{!A}.
+\]
+تبدأ !!^a{tableau} بعدد من \emph{الافتراضات}. وتُولد كل
+!!{signed formula} لاحقة بتطبيق إحدى قواعد الاستدلال. تضيف بعض قواعد
+الاستدلال !!{signed formula}s واحدة أو أكثر إلى طرف من أطراف الشجرة، وتضيف
+قواعد أخرى طرفين جديدين، فتنتج شعبتان. وتنتج القواعد !!{signed formula}s
+تكون فيها ال!!{formula} أقل تعقيدًا من الصيغة في
+ال!!{signed formula} التي طُبقت عليها القاعدة. وعندما تحوي شعبة كلًا من
+$\sFmla{\True}{!A}$ و$\sFmla{\False}{!A}$، نقول إن الشعبة
+\emph{مغلقة}. وإذا كانت كل شعبة في !!a{tableau} مغلقة، كانت
+ال!!{tableau} كلها مغلقة. وتشكل ال!!{tableau} المغلقة !!a{derivation}
+تبين أن مجموعة ال!!{signed formula}s التي بدأنا بها ال!!{tableau} غير
+قابلة للإرضاء. ويمكن استعمال ذلك لتعريف علاقة~$\Proves$:
+$\Gamma \Proves !A$ إذا وفقط إذا وجدت مجموعة منتهية
+$\Gamma_0=\{!B_1,\dots,!B_n\}\subseteq\Gamma$ توجد لها !!{tableau}
+مغلقة للافتراضات:
+\[
+\{\sFmla{\False}{!A}, \sFmla{\True}{!B_1}, \dots, \sFmla{\True}{!B_n}\}.
+\]
+
+في المنطق الجهوي، يلزم أن نوسع مفهوم !!{signed formula} ونضيف قواعد
+تتناول~\iftag{prvBox}{$\Box$\iftag{prvDiamond}{ و
+    $\Diamond$}{}}{$\Diamond$}. فإلى جانب العلامة ($\True$ أو
+$\False$)، تحمل ال!!{formula}s في ال!!{tableau}s الجهوية أيضًا
+\emph{بادئات}~$\sigma$. وهذه البادئات متتاليات غير فارغة من الأعداد
+الصحيحة الموجبة؛ أي~$\sigma \in (\PosInt)^*\setminus\{\emptyseq\}$.
+وعندما نكتب هذه البادئات نحذف الأقواس المحيطة~$\tuple{\ }$ ونفصل بين
+ال!!{element}s المفردة بنقاط~$.$ بدلًا من الفواصل~$,$. وإذا كانت
+$\sigma$ بادئة، فإن~$\sigma.n$ هي~$\sigma\concat\tuple{n}$؛ فمثلًا،
+إذا كانت~$\sigma=1.2.1$، كانت~$\sigma.3$ هي~$1.2.1.3$. ومن ثم، مثلًا:
+\[
+\sFmla{\True}{\Box !A \lif !A}[1.2]
+\]
+هي \emph{!!{signed formula} ذات بادئة} (أو اختصارًا \emph{!!{formula}
+  ذات بادئة}).
+
+والحدس هو أن البادئة تسمي عالمًا في نموذج قد يرضي ال!!{formula}s الموجودة
+على شعبة من !!a{tableau}؛ وإذا كانت~$\sigma$ تسمي عالمًا ما، فإن
+$\sigma.n$ تسمي عالمًا يمكن النفاذ إليه من العالم الذي تسميه~$\sigma$.
+
+\end{document}

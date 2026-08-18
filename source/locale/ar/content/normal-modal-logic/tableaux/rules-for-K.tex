@@ -1,0 +1,269 @@
+% Part: normal-modal-logic
+% Chapter: tableaux
+% Section: rules-for-K
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{tab}{rul}
+
+\olsection{قواعد \Log{K}}
+
+قواعد الروابط القضية المعتادة هي قواعد ال!!{tableau}s القضية الموقعة
+المعتادة نفسها، ولا يطرأ على بنيتها سوى إضافة البادئات. ففي كل حالة، تنتج
+القاعدة المطبقة على !!{formula} موقعة~$\sFmla{S}{!A}[\sigma]$
+!!{formula}s جديدة تحمل هي أيضًا البادئة~$\sigma$. وهذا واضح حدسيًا:
+فمثلًا، إذا كان~$!A \land !B$ صادقًا عند العالم الذي تسميه~$\sigma$،
+كان~$!A$ و$!B$ صادقين عند~$\sigma$؛ ولا تضيف القاعدة هاتين النتيجتين
+إلا بهذه البادئة، من غير أن تحكم على صدقهما في عالم آخر. ونجمع القواعد
+القضية في~\olref{tab:prop-rules}.
+
+\begin{table}
+  \[\def\arraystretch{3}\begin{array}{|c|c|}
+    \hline
+    \AxiomC{\sFmla{\True}{\lnot !A}[\sigma]}
+    \RightLabel{\TRule{\True}{\lnot}}
+    \UnaryInfC{\sFmla{\False}{!A}[\sigma]}
+    \DisplayProof
+    &
+    \AxiomC{\sFmla{\False}{\lnot !A}[\sigma]}
+    \RightLabel{\TRule{\False}{\lnot}}
+    \UnaryInfC{\sFmla{\True}{!A}[\sigma]}
+    \DisplayProof
+    \\[1ex]
+    \hline
+    \AxiomC{\sFmla{\True}{!A \land !B}[\sigma]}
+    \RightLabel{\TRule{\True}{\land}}
+    \UnaryInfC{\sFmla{\True}{!A}[\sigma]}
+    \noLine
+    \UnaryInfC{\sFmla{\True}{!B}[\sigma]}
+    \DisplayProof
+    &
+    \AxiomC{\sFmla{\False}{!A \land !B}[\sigma]}
+    \RightLabel{\TRule{\False}{\land}}
+    \UnaryInfC{$\sFmla{\False}{!A}[\sigma] \quad \mid \quad
+      \sFmla{\False}{!B}[\sigma]$}
+    \DisplayProof
+    \\[2ex]
+    \hline
+    \AxiomC{\sFmla{\True}{!A \lor !B}[\sigma]}
+    \RightLabel{\TRule{\True}{\lor}}
+    \UnaryInfC{$\sFmla{\True}{!A}[\sigma] \quad \mid \quad
+      \sFmla{\True}{!B}[\sigma]$}
+    \DisplayProof
+    &
+    \AxiomC{\sFmla{\False}{!A \lor !B}[\sigma]}
+    \RightLabel{\TRule{\False}{\lor}}
+    \UnaryInfC{\sFmla{\False}{!A}[\sigma]}
+    \noLine
+    \UnaryInfC{\sFmla{\False}{!B}[\sigma]}
+    \DisplayProof
+    \\[2ex]
+    \hline
+    \AxiomC{\sFmla{\True}{!A \lif !B}[\sigma]}
+    \RightLabel{\TRule{\True}{\lif}}
+    \UnaryInfC{$\sFmla{\False}{!A}[\sigma] \quad \mid
+      \quad \sFmla{\True}{!B}[\sigma]$}
+    \DisplayProof
+    &
+    \AxiomC{\sFmla{\False}{!A \lif !B}[\sigma]}
+    \RightLabel{\TRule{\False}{\lif}}
+    \UnaryInfC{\sFmla{\True}{!A}[\sigma]}
+    \noLine
+    \UnaryInfC{\sFmla{\False}{!B}[\sigma]}
+    \DisplayProof
+    \\[2ex]
+    \hline
+  \end{array}\]
+  \caption{قواعد ال!!{tableau} ذات البادئات للروابط القضية.}
+  \ollabel{tab:prop-rules}
+\end{table}
+
+شرط الإغلاق هو نفسه في ال!!{tableau}s المعتادة، إلا أننا نشترط تطابق
+البادئات أيضًا، لا ال!!{formula}s وحدها. ولذلك تكون شعبة مغلقة إذا احتوت
+كلًا من
+\[
+\sFmla{\True}{!A}[\sigma] \quad\text{و}\quad \sFmla{\False}{!A}[\sigma]
+\]
+لبادئة ما~$\sigma$ و!!{formula}~$!A$.
+
+وقواعد وضع الافتراضات هي أيضًا قواعد ال!!{tableau}s المعتادة نفسها، عدا
+أننا نستعمل البادئة~$1$ دائمًا مع الافتراضات. (ولا يهم أي بادئة نستعمل ما
+دامت واحدة لجميع الافتراضات.) ومن ثم نقول، مثلًا، إن
+\[
+!B_1, \dots, !B_n \Proves !A
+\]
+إذا وفقط إذا وجدت لوحة مغلقة للافتراضات:
+\[
+\sFmla{\True}{!B_1}[1], \dots, \sFmla{\True}{!B_n}[1],
+\sFmla{\False}{!A}[1].
+\]
+
+بالنسبة إلى المؤثر\iftag{prvBox}{\iftag{prvDiamond}{ين الجهويين~$\Box$
+    و}{ الجهوي~$\Box$}}{}\iftag{prvDiamond}{ الجهوي~$\Diamond$}{}،
+تكون بادئة نتيجة القاعدة المطبقة على !!a{formula} ذات البادئة~$\sigma$
+هي~$\sigma.n$. لكن قيم~$n$ المسموح بها تتوقف على كون العلامة~$\True$ أو
+$\False$.
+
+\iftag{prvBox}{تُطيل القاعدة~$\TRule{\True}{\Box}$ شعبة تحوي
+  $\sFmla{\True}{\Box !A}[\sigma]$ بإضافة
+  $\sFmla{\True}{!A}[\sigma.n]$.\iftag{prvDiamond}{ وبالمثل،
+    }{}}{}\iftag{prvDiamond}{تُطيل القاعدة~$\TRule{\False}{\Diamond}$
+  شعبة تحوي~$\sFmla{\False}{\Diamond !A}[\sigma]$ بإضافة
+  $\sFmla{\False}{!A}[\sigma.n]$.}{}
+ولا يمكن تطبيق\iftag{notprvBox,notprvDiamond}{ها}{هما} إلا إذا كانت
+البادئة~$\sigma.n$ قد وردت \emph{من قبل} على الشعبة التي تُطبق فيها.
+ولنسم مثل هذه البادئة «مستعملة» (على الشعبة).
+
+\iftag{prvBox}{تُطيل القاعدة~$\TRule{\False}{\Box}$ شعبة تحوي
+  $\sFmla{\False}{\Box !A}[\sigma]$ بإضافة
+  $\sFmla{\False}{!A}[\sigma.n]$.\iftag{prvDiamond}{ وبالمثل،
+    }{}}{}\iftag{prvDiamond}{تُطيل القاعدة~$\TRule{\True}{\Diamond}$
+  شعبة تحوي~$\sFmla{\True}{\Diamond !A}[\sigma]$ بإضافة
+  $\sFmla{\True}{!A}[\sigma.n]$.}{}
+غير أنه لا يمكن تطبيق \iftag{notprvBox,notprvDiamond}{هذه القاعدة}{هاتين
+القاعدتين} إلا إذا كانت البادئة~$\sigma.n$ \emph{لم} ترد من قبل على
+الشعبة التي تُطبق فيها. ونسمي مثل هذه البادئات «جديدة» (على الشعبة).
+
+ترد القواعد في~\olref{tab:rules-K}.
+
+\begin{table}
+  \begin{center}
+    \def\arraystretch{3}\def\fCenter{}
+    \begin{tabular}{|c|c|}
+    \hline
+    \iftag{prvBox}{
+      \AxiomC{\sFmla{\True}{\Box !A}[\sigma]}
+      \RightLabel{\TRule{\True}{\Box}}
+      \UnaryInfC{\sFmla{\True}{!A}[\sigma.n]}
+      \DisplayProof
+      &
+      \AxiomC{\sFmla{\False}{\Box !A}[\sigma]}
+      \RightLabel{\TRule{\False}{\Box}}
+      \UnaryInfC{\sFmla{\False}{!A}[\sigma.n]}
+      \DisplayProof\\
+      $\sigma.n$ مستعملة & $\sigma.n$ جديدة
+      \\[1ex]
+      \hline}{}
+    \iftag{prvDiamond}{
+      \AxiomC{\sFmla{\True}{\Diamond !A}[\sigma]}
+      \RightLabel{\TRule{\True}{\Diamond}}
+      \UnaryInfC{\sFmla{\True}{!A}[\sigma.n]}
+      \DisplayProof
+      &
+      \AxiomC{\sFmla{\False}{\Diamond !A}[\sigma]}
+      \RightLabel{\TRule{\False}{\Diamond}}
+      \UnaryInfC{\sFmla{\False}{!A}[\sigma.n]}
+      \DisplayProof\\
+      $\sigma.n$ جديدة & $\sigma.n$ مستعملة
+      \\[1ex]
+      \hline}{}
+    \end{tabular}
+  \end{center}
+  \caption{القواعد الجهوية لـ~\Log{K}.}
+  \ollabel{tab:rules-K}
+\end{table}
+
+إن اشتراط كون البادئة في
+\iftag{prvBox}{\TRule{\True}{\Box}}{\TRule{\False}{\Diamond}}
+مستعملة ضروري؛ وإلا لعددنا ما يأتي !!{tableau} مغلقة:
+\iftag{notprvBox,notprvDiamond}{%
+  \iftag{prvBox}{%
+  \begin{oltableau}
+    [\pFmla{\True}{\Box \formula{A}}{1}, just = \TAss
+      [\pFmla{\False}{\lnot\Box\lnot \formula{A}}{1}, just = \TAss
+        [\pFmla{\True}{\formula{A}}{1.1}, just = {\TRule{\True}{\Box}[1]}
+          [\pFmla{\True}{\Box\lnot\formula{A}}{1},
+            just ={\TRule{\False}{\lnot}[2]}
+            [\pFmla{\True}{\lnot\formula{A}}{1.1},
+              just = {\TRule{\True}{\Box}[4]}
+              [\pFmla{\False}{\formula{A}}{1.1},
+                  just ={\TRule{\True}{\lnot}[5]}, close]
+            ]
+          ]
+        ]
+      ]
+    ]
+  \end{oltableau}
+  }{
+  \begin{oltableau}
+    [\pFmla{\True}{\lnot\Diamond\lnot \formula{A}}{1}, just = \TAss
+      [\pFmla{\False}{\Diamond\formula{A}}{1}, just = \TAss
+        [\pFmla{\False}{\formula{A}}{1.1}, just = {\TRule{\False}{\Diamond}[2]}
+          [\pFmla{\False}{\Diamond\lnot\formula{A}}{1},
+            just ={\TRule{\True}{\lnot}[1]}
+            [\pFmla{\False}{\lnot\formula{A}}{1.1},
+              just = {\TRule{\False}{\Diamond}[4]}
+              [\pFmla{\True}{\formula{A}}{1.1},
+                  just ={\TRule{\True}{\lnot}[5]}, close]
+            ]
+          ]
+        ]
+      ]
+    ]
+  \end{oltableau}
+}}{
+  \begin{oltableau}
+    [\pFmla{\True}{\Box \formula{A}}{1}, just = \TAss
+      [\pFmla{\False}{\Diamond \formula{A}}{1}, just = \TAss
+        [\pFmla{\True}{\formula{A}}{1.1}, just = {\TRule{\True}{\Box}[1]}
+          [\pFmla{\False}{\formula{A}}{1.1},
+            just = {\TRule{\False}{\Diamond}[2]}, close]
+        ]
+      ]
+    ]
+\end{oltableau}}
+
+لكن~$\Box \formula{A} \Entails/ \Diamond \formula{A}$، ولذلك سيكون
+نظام برهاننا غير سليم. وكذلك~$\Diamond \formula{A} \Entails/
+\Box \formula{A}$، لكن من دون شرط كون بادئة
+\iftag{prvBox}{\TRule{\False}{\Box}}{\TRule{\True}{\Diamond}}
+جديدة، ستكون هذه اللوحة مغلقة: \iftag{notprvBox,notprvDiamond}{%
+  \iftag{prvBox}{%
+  \begin{oltableau}
+    [\pFmla{\True}{\lnot\Box\lnot \formula{A}}{1}, just = \TAss
+      [\pFmla{\False}{\Box \formula{A}}{1}, just = \TAss
+        [\pFmla{\False}{\formula{A}}{1.1}, just = {\TRule{\True}{\Box}[2]}
+          [\pFmla{\False}{\Box\lnot\formula{A}}{1},
+            just ={\TRule{\True}{\lnot}[1]}
+            [\pFmla{\False}{\lnot\formula{A}}{1.1},
+              just = {\TRule{\False}{\Box}[4]}
+              [\pFmla{\True}{\formula{A}}{1.1},
+                  just ={\TRule{\False}{\lnot}[5]}, close]
+            ]
+          ]
+        ]
+      ]
+    ]
+  \end{oltableau}
+  }{
+  \begin{oltableau}
+    [\pFmla{\True}{\Diamond \formula{A}}{1}, just = \TAss
+      [\pFmla{\False}{\lnot\Diamond\lnot\formula{A}}{1}, just = \TAss
+        [\pFmla{\True}{\formula{A}}{1.1}, just = {\TRule{\True}{\Diamond}[1]}
+          [\pFmla{\True}{\Diamond\lnot\formula{A}}{1},
+            just ={\TRule{\False}{\lnot}[2]}
+            [\pFmla{\True}{\lnot\formula{A}}{1.1},
+              just = {\TRule{\True}{\Diamond}[4]}
+              [\pFmla{\False}{\formula{A}}{1.1},
+                  just ={\TRule{\True}{\lnot}[5]}, close]
+            ]
+          ]
+        ]
+      ]
+    ]
+  \end{oltableau}
+}}{
+  \begin{oltableau}
+    [\pFmla{\True}{\Diamond \formula{A}}{1}, just = \TAss,name=one
+      [\pFmla{\False}{\Box \formula{A}}{1}, just = \TAss, name=two
+        [\pFmla{\True}{\formula{A}}{1.1}, just = {\TRule{\True}{\Diamond}[1]}
+          [\pFmla{\False}{\formula{A}}{1.1},
+            just = {\TRule{\False}{\Box}[2]}, close]
+        ]
+      ]
+    ]
+  \end{oltableau}}
+
+\end{document}

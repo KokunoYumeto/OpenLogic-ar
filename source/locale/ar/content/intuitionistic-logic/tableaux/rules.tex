@@ -1,0 +1,143 @@
+% Part: intuitionistic-logic
+% Chapter: tableaux
+% Section: rules
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{tab}{rul}
+
+\olsection{قواعد المنطق الحدسي}
+
+قواعد الرابطين~$\land$ و$\lor$ هي نفسها قواعد !!{tableau} القضايا
+المعلّمة العادية، مع إضافة السوابق فحسب. ففي كل حالة تنتج القاعدة
+المطبقة على !!{formula} معلّمة
+$\sFmla{S}{!A}[\sigma]$ !!{formula} جديدة تحمل هي أيضًا السابقة~$\sigma$.
+وينبغي أن يكون هذا واضحًا حدسيًا: فمثلًا، إذا كانت~$!A \land !B$
+صادقة في (عالم تسمّيه)~$\sigma$، فإن~$!A$ و$!B$ صادقتان
+في~$\sigma$ (لا في عالم آخر). نجمع قواعد~$\land$ و$\lor$
+في~\olref{tab:prop-rules}.
+
+\begin{table}
+  \[\def\arraystretch{3}\begin{array}{|c|c|}
+    \hline
+    \AxiomC{\sFmla{\True}{!A \land !B}[\sigma]}
+    \RightLabel{\TRule{\True}{\land}}
+    \UnaryInfC{\sFmla{\True}{!A}[\sigma]}
+    \noLine
+    \UnaryInfC{\sFmla{\True}{!B}[\sigma]}
+    \DisplayProof
+    &
+    \AxiomC{\sFmla{\False}{!A \land !B}[\sigma]}
+    \RightLabel{\TRule{\False}{\land}}
+    \UnaryInfC{$\sFmla{\False}{!A}[\sigma] \quad \mid \quad
+      \sFmla{\False}{!B}[\sigma]$}
+    \DisplayProof
+    \\[2ex]
+    \hline
+    \AxiomC{\sFmla{\True}{!A \lor !B}[\sigma]}
+    \RightLabel{\TRule{\True}{\lor}}
+    \UnaryInfC{$\sFmla{\True}{!A}[\sigma] \quad \mid \quad
+      \sFmla{\True}{!B}[\sigma]$}
+    \DisplayProof
+    &
+    \AxiomC{\sFmla{\False}{!A \lor !B}[\sigma]}
+    \RightLabel{\TRule{\False}{\lor}}
+    \UnaryInfC{\sFmla{\False}{!A}[\sigma]}
+    \noLine
+    \UnaryInfC{\sFmla{\False}{!B}[\sigma]}
+    \DisplayProof
+    \\[2ex]
+    \hline
+  \end{array}\]
+  \caption{قواعد !!{tableau} ذات السوابق للرابطين~$\land$ و$\lor$}
+  \ollabel{tab:prop-rules}
+\end{table}
+
+شرط الإغلاق شبيه بشرط !!{tableau} العادية، إلا أننا نشترط تطابق السوابق
+أيضًا، لا تطابق !!{formula} وحدها. بل يمكننا في الواقع أن نكون أكثر
+تساهلًا قليلًا: بما أن !!{formula} تظل صادقة متى صدقت في النماذج
+الحدسية، يستحيل أن تكون~$!A$ صادقة عند~$\sigma$ وكاذبة عند أي سابقة
+متاحة~$\sigma.{*}$. ولذلك تكون الشعبة مغلقة إذا احتوت، لبعض
+السابقة~$\sigma$ و!!{formula}~$!A$، كلًا من
+\[
+\sFmla{\True}{!A}[\sigma] \quad\text{و}\quad \sFmla{\False}{!A}[\sigma.{*}]
+\]
+لاحظ أنه إذا عُكست العلامتان، أي إذا احتوت الشعبة
+\[
+\sFmla{\False}{!A}[\sigma] \quad\text{و}\quad \sFmla{\True}{!A}[\sigma.{*}]
+\]
+فلا تكون مغلقة إلا إذا كان~$*$ المتتالية الخالية.
+
+وفوق ذلك، تكون الشعبة مغلقة إذا احتوت~$\sFmla{\True}{\bot}[\sigma]$.
+
+وقواعد وضع الافتراضات هي أيضًا كما في !!{tableau} العادية، إلا أننا
+نستعمل السابقة~$1$ دائمًا للافتراضات. (ولا يهم أي سابقة نستعمل ما دامت
+واحدة لجميع الافتراضات.) لذلك نقول، مثلًا، إن
+\[
+!B_1, \dots, !B_n \Proves !A
+\]
+إذا وفقط إذا وُجد جدول مغلق للافتراضات
+\[
+\sFmla{\True}{!B_1}[1], \dots, \sFmla{\True}{!B_n}[1],
+\sFmla{\False}{!A}[1].
+\]
+
+أما قواعد الشرط~$\lif$ فتختلف عن نظيراتها في الحالتين الكلاسيكية
+والموجهاتية. تمدّد القاعدة~$\TRule{\True}{\lif}$ شعبة تحتوي
+$\sFmla{\True}{!A \lif !B}[\sigma]$ بإضافة
+$\sFmla{\False}{!A}[\sigma.{*}]$ و$\sFmla{\True}{!B}[\sigma.{*}]$
+على شعبتين مختلفتين. ولا يمكن تطبيقها إلا على سابقة~$\sigma.{*}$
+\emph{ظهرت من قبل} على الشعبة التي تُطبّق فيها. ولنسمّ سابقة كهذه
+«مستعملة» (على الشعبة). (ولأن~$\sigma.{*}$ تشمل~$\sigma$ نفسها،
+يمكن دائمًا تطبيق القاعدة بإضافة الصيغتين المعلّمتين ذواتي السابقتين
+$\sFmla{\False}{!A}[\sigma]$ و$\sFmla{\True}{!B}[\sigma]$
+على شعبتين منفصلتين.)
+
+تمدّد القاعدة~$\TRule{\False}{\lif}$ شعبة تحتوي
+$\sFmla{\False}{!A \lif !B}[\sigma]$ بإضافة كل من
+$\sFmla{\True}{!A}[\sigma.n]$ و$\sFmla{\False}{!B}[\sigma.n]$
+إلى الشعبة نفسها، حيث تكون~$\sigma.n$ سابقة جديدة على الشعبة.
+
+وتُعرّف قواعد~$\lnot$ على نحو مماثل (باستعمال تعريف
+$\lnot !A$ بوصفها~$!A \lif \lfalse$).
+
+ترد القواعد في~\olref{tab:rules-lif-lnot}.
+
+\begin{table}
+  \[\def\arraystretch{3}\begin{array}{|c|c|}
+    \hline
+    \AxiomC{\sFmla{\True}{\lnot !A}[\sigma]}
+    \RightLabel{\TRule{\True}{\lnot}}
+    \UnaryInfC{$\sFmla{\False}{!A}[\sigma.{*}]$}
+    \DisplayProof
+    &
+    \AxiomC{\sFmla{\False}{\lnot !A}[\sigma]}
+    \RightLabel{\TRule{\False}{\lnot}}
+    \UnaryInfC{\sFmla{\True}{!A}[\sigma.n]}
+    \DisplayProof
+    \\[1ex]
+    \text{$\sigma.{*}$ مستعملة} & \text{$\sigma.n$ جديدة}\\
+    \hline
+    \AxiomC{\sFmla{\True}{!A \lif !B}[\sigma]}
+    \RightLabel{\TRule{\True}{\lif}}
+    \UnaryInfC{$\sFmla{\False}{!A}[\sigma.{*}] \quad \mid \quad
+      \sFmla{\True}{!B}[\sigma.{*}]$}
+    \DisplayProof
+    &
+    \AxiomC{\sFmla{\False}{!A \lif !B}[\sigma]}
+    \RightLabel{\TRule{\False}{\lif}}
+    \UnaryInfC{\sFmla{\True}{!A}[\sigma.n]}
+    \noLine
+    \UnaryInfC{\sFmla{\False}{!B}[\sigma.n]}
+    \DisplayProof
+    \\[1ex]
+    \text{$\sigma.{*}$ مستعملة} & \text{$\sigma.n$ جديدة}\\
+    \hline
+  \end{array}\]
+  \caption{قواعد !!{tableau} ذات السوابق للرابطين~$\lnot$ و$\lif$}
+  \ollabel{tab:rules-lif-lnot}
+\end{table}
+
+\end{document}

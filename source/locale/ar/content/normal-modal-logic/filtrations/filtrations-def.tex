@@ -1,0 +1,179 @@
+% Part: normal-modal-logic
+% Chapter: filtrations
+% Section: filtrations-def
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{fil}{fil}
+
+\olsection{الترشيحات}
+
+بدلًا من تعريف «الترشيح» الوحيد لـ~$\mModel{M}$ عبر~$\Gamma$، نعرّف متى
+يُعد نموذج~$\mModel{M^*}$ ترشيحًا لـ~$\mModel{M}$. تشترك جميع
+الترشيحات في مجموعة العوالم~$W^*$ نفسها والتقييم~$V^*$ نفسه، لكن قد تكون
+لترشيحات مختلفة علاقات نفاذ~$R^*$ مختلفة. ومع ذلك، لا بد لكي يُعد~$R^*$
+ترشيحًا من أن يستوفي عددًا من الشروط. وهذه الشروط هي بالضبط ما نحتاج إليه
+لإثبات النتيجة الرئيسة، وهي أن~$\mSat{M}{!A}[w]$ إذا وفقط إذا كان
+$\mSat{M^*}{!A}[{[w]}]$، شريطة أن~$!A \in \Gamma$.
+
+\begin{defn}\ollabel{defn:filtration}
+  لتكن~$\Gamma$ مغلقة تحت أخذ الصيغ الجزئية، ولتكن
+  $\mModel{M}=\tuple{W,R,V}$. \emph{ترشيح~$\mModel{M}$ عبر~$\Gamma$}
+  هو أي نموذج~$\mModel{M^*}=\tuple{W^*,R^*,V^*}$ بحيث:
+  \begin{enumerate}
+  \item $W^*=\Setabs{[w]}{w \in W}$؛
+  \item \ollabel{defn:filtration-R}%
+    لأي~$u,v \in W$:
+    \begin{enumerate}
+    \item \ollabel{defn:filtration-R1}%
+      إذا كان~$Ruv$، كان~$R^*[u][v]$؛
+    \tagitem{prvBox}{\ollabel{defn:filtration-R2}%
+      إذا كان~$R^*[u][v]$، فلكل~$\Box !A \in \Gamma$، إذا كان
+      $\mSat{M}{\Box!A}[u]$ كان~$\mSat{M}{!A}[v]$}{}؛
+    \tagitem{prvDiamond}{\ollabel{defn:filtration-R3}%
+      إذا كان~$R^*[u][v]$، فلكل~$\Diamond !A \in \Gamma$، إذا كان
+      $\mSat{M}{!A}[v]$ كان~$\mSat{M}{\Diamond!A}[u]$.}{}
+    \end{enumerate}
+  \item $V^*(p)=\Setabs{[u]}{u \in V(p)}$.
+  \end{enumerate}
+\end{defn}
+
+يجدر التأمل في ماهية~$V^*(p)$: إنها المجموعة المؤلفة من فئات
+التكافؤ~$[w]$ لجميع العوالم~$w$ التي يصدق فيها~$p$ في~$\mModel{M}$.
+فمن جهة، إذا كان~$w \in V(p)$، كان~$[w] \in V^*(p)$ بحسب ذلك التعريف.
+لكن ليس من اللازم أن يكون~$w \in V(p)$ إذا كان~$[w] \in V^*(p)$.
+فإذا كان~$[w] \in V^*(p)$، لا يُضمن لنا إلا أن~$[w]=[u]$ من أجل
+\emph{بعض}~$u \in V(p)$. وبالطبع يعني~$[w]=[u]$ أن~$w \equiv u$.
+ومن ثم، حين يكون~$[w] \in V^*(p)$ لا يمكننا إلا أن نستنتج أن
+$w \equiv u$ لبعض~$u \in V(p)$.
+
+\begin{thm}\ollabel{thm:filtrations}
+  إذا كان~$\mModel{M^*}$ ترشيحًا لـ~$\mModel{M}$ عبر~$\Gamma$، فعندئذ
+  لكل~$!A \in \Gamma$ ولكل~$w \in W$، يكون~$\mSat{M}{!A}[w]$ إذا
+  وفقط إذا كان~$\mSat{M^*}{!A}[{[w]}]$.
+\end{thm}
+
+\begin{proof}
+  بالاستقراء في~$!A$، مع استعمال كون~$\Gamma$ مغلقة تحت أخذ الصيغ
+  الجزئية. فلأن~$!A \in \Gamma$ و$\Gamma$ مغلقة تحت أخذ
+  ال!!{formula}s الجزئية، تكون جميع ال!!{formula}s الجزئية لـ~$!A$
+  أيضًا~$\in \Gamma$. ولذلك ينطبق فرض الاستقراء في كل خطوة استقرائية على
+  ال!!{formula}s الجزئية لـ~$!A$.
+  \begin{enumerate}
+    \tagitem{prvFalse}{\indcase{!A}{\lfalse}{لا
+        $\mSat{M}{\indfrm}[w]$ ولا~$\mSat{M^*}{\indfrm}[{[w]}]$.}}{}
+    \tagitem{prvTrue}{\indcase{!A}{\ltrue}{يتحقق كل من
+        $\mSat{M}{\indfrm}[w]$ و$\mSat{M^*}{\indfrm}[{[w]}]$.}}{}
+    \item \indcase{!A}{p}{الاتجاه من اليسار إلى اليمين مباشر، إذ لا
+      يتحقق~$\mSat{M}{\indfrm}[w]$ إلا إذا كان~$w \in V(p)$، وهذا
+      يستلزم~$[w] \in V^*(p)$؛ أي~$\mSat{M^*}{\indfrm}[{[w]}]$.
+      وبالعكس، افترض~$\mSat{M^*}{\indfrm}[{[w]}]$، أي
+      $[w] \in V^*(p)$. عندئذ يوجد~$v \in V(p)$ بحيث~$w \equiv v$.
+      ومن ثم يتحقق بالطبع~$\mSat{M}{p}[v]$. ولأن~$w \equiv v$، يصدق
+      $w$ و$v$ ال!!{formula}s نفسها من~$\Gamma$. وبما أن~$p \in
+      \Gamma$ بحسب الفرض وأن~$\mSat{M}{p}[v]$، يكون
+      $\mSat{M}{\indfrm}[w]$.}
+
+    \tagitem{prvNot}{\iftag{probNot}{تمرين.}{\indcase{!A}{\lnot
+          !B}{$\mSat{M}{\indfrm}[w]$ إذا وفقط إذا كان
+          $\mSat/{M}{!B}[w]$. وبفرض الاستقراء، يكون
+          $\mSat/{M}{!B}[w]$ إذا وفقط إذا كان
+          $\mSat/{M^*}{!B}[{[w]}]$. وأخيرًا، يكون
+          $\mSat/{M^*}{!B}[{[w]}]$ إذا وفقط إذا كان
+          $\mSat{M^*}{\indfrm}[{[w]}]$.}}}{}
+
+    \tagitem{prvAnd}{\iftag{probAnd}{تمرين.}{\indcase{!A}{(!B \land
+          !C)}{$\mSat{M}{\indfrm}[w]$ إذا وفقط إذا كان
+          $\mSat{M}{!B}[w]$ و$\mSat{M}{!C}[w]$. وبفرض الاستقراء، يكون
+          $\mSat{M}{!B}[w]$ إذا وفقط إذا كان
+          $\mSat{M^*}{!B}[{[w]}]$، ويكون~$\mSat{M}{!C}[w]$ إذا وفقط
+          إذا كان~$\mSat{M^*}{!C}[{[w]}]$. كما أن
+          $\mSat{M^*}{\indfrm}[{[w]}]$ إذا وفقط إذا كان
+          $\mSat{M^*}{!B}[{[w]}]$ و$\mSat{M^*}{!C}[{[w]}]$.}}}{}
+
+    \tagitem{prvOr}{\iftag{probOr}{تمرين.}{\indcase{!A}{(!B \lor
+          !C)}{$\mSat{M}{\indfrm}[w]$ إذا وفقط إذا كان
+          $\mSat{M}{!B}[w]$ أو~$\mSat{M}{!C}[w]$. وبفرض الاستقراء،
+          يكون~$\mSat{M}{!B}[w]$ إذا وفقط إذا كان
+          $\mSat{M^*}{!B}[{[w]}]$، ويكون~$\mSat{M}{!C}[w]$ إذا وفقط
+          إذا كان~$\mSat{M^*}{!C}[{[w]}]$. كما أن
+          $\mSat{M^*}{\indfrm}[{[w]}]$ إذا وفقط إذا كان
+          $\mSat{M^*}{!B}[{[w]}]$ أو~$\mSat{M^*}{!C}[{[w]}]$.}}}{}
+
+    \tagitem{prvIf}{\iftag{probIf}{تمرين.}{\indcase{!A}{(!B \lif
+          !C)}{$\mSat{M}{\indfrm}[w]$ إذا وفقط إذا كان
+          $\mSat/{M}{!B}[w]$ أو~$\mSat{M}{!C}[w]$. وبفرض الاستقراء،
+          يكون~$\mSat{M}{!B}[w]$ إذا وفقط إذا كان
+          $\mSat{M^*}{!B}[{[w]}]$، ويكون~$\mSat{M}{!C}[w]$ إذا وفقط
+          إذا كان~$\mSat{M^*}{!C}[{[w]}]$. كما أن
+          $\mSat{M^*}{\indfrm}[{[w]}]$ إذا وفقط إذا كان
+          $\mSat/{M^*}{!B}[{[w]}]$ أو~$\mSat{M^*}{!C}[{[w]}]$.}}}{}
+
+    \tagitem{prvIff}{\iftag{probIff}{تمرين.}{\indcase{!A}{(!B \liff
+          !C)}{$\mSat{M}{\indfrm}[w]$ إذا وفقط إذا صدق
+          $\mSat{M}{!B}[w]$ و$\mSat{M}{!C}[w]$، أو صدق
+          $\mSat/{M}{!B}[w]$ و$\mSat/{M}{!C}[w]$. وبفرض الاستقراء،
+          يكون~$\mSat{M}{!B}[w]$ إذا وفقط إذا كان
+          $\mSat{M^*}{!B}[{[w]}]$، ويكون~$\mSat{M}{!C}[w]$ إذا وفقط
+          إذا كان~$\mSat{M^*}{!C}[{[w]}]$. كما أن
+          $\mSat{M^*}{\indfrm}[{[w]}]$ إذا وفقط إذا صدق
+          $\mSat{M^*}{!B}[{[w]}]$ و$\mSat{M^*}{!C}[{[w]}]$، أو صدق
+          $\mSat/{M^*}{!B}[{[w]}]$ و$\mSat/{M^*}{!C}[{[w]}]$.}}}{}
+
+    \tagitem{prvBox}{\iftag{probBox}{تمرين.}{\indcase{!A}{\Box
+          !B}{افترض~$\mSat{M}{\indfrm}[w]$؛ ولإثبات
+          $\mSat{M^*}{\indfrm}[{[w]}]$، ليكن~$v$ بحيث
+          $R^*[w][v]$. ومن
+          \olref{defn:filtration}\olref{defn:filtration-R2} نحصل على
+          $\mSat{M}{!B}[v]$، وبفرض الاستقراء نحصل على
+          $\mSat{M^*}{!B}[{[v]}]$. ولما كان~$v$ اعتباطيًا، ينتج
+          $\mSat{M^*}{\indfrm}[{[w]}]$.
+
+          وبالعكس، افترض~$\mSat{M^*}{\indfrm}[{[w]}]$، وليكن~$v$
+          اعتباطيًا بحيث~$Rwv$. ومن
+          \olref{defn:filtration}\olref{defn:filtration-R1} نحصل على
+          $R^*[w][v]$، ومن ثم~$\mSat{M^*}{!B}[{[v]}]$؛ وبفرض
+          الاستقراء~$\mSat{M}{!B}[v]$، ولما كان~$v$ اعتباطيًا ينتج
+          $\mSat{M}{\indfrm}[w]$.}}}{}
+
+    \tagitem{prvDiamond}{\iftag{probDiamond}{تمرين.}{\indcase{!A}{\Diamond
+          !B}{افترض~$\mSat{M}{\indfrm}[w]$. عندئذ يوجد~$v \in W$
+          بحيث~$Rwv$ و$\mSat{M}{!B}[v]$. وبفرض الاستقراء
+          $\mSat{M^*}{!B}[{[v]}]$، ومن
+          \olref{defn:filtration}\olref{defn:filtration-R1} نحصل على
+          $R^*[w][v]$. ومن ثم~$\mSat{M^*}{\indfrm}[{[w]}]$.
+
+          وافترض الآن~$\mSat{M^*}{\indfrm}[{[w]}]$. عندئذ يوجد
+          $[v] \in W^*$ بحيث~$R^*[w][v]$ و
+          $\mSat{M^*}{!B}[{[v]}]$. وبفرض الاستقراء
+          $\mSat{M}{!B}[v]$. وبحسب
+          \olref{defn:filtration}\olref{defn:filtration-R3} نحصل على
+          $\mSat{M}{\indfrm}[w]$.}}}{}
+  \end{enumerate}
+\end{proof}
+
+\begin{prob}
+  أكمل برهان~\olref[nml][fil][fil]{thm:filtrations}.
+\end{prob}
+
+ما يصح في الصدق عند العوالم داخل نموذج يصح أيضًا في الصدق في نموذج
+والصلاحية داخل فئة من النماذج.
+
+\begin{cor}
+  لتكن~$\Gamma$ مغلقة تحت أخذ الصيغ الجزئية. عندئذ:
+  \begin{enumerate}
+  \item إذا كان~$\mModel{M^*}$ ترشيحًا لـ~$\mModel{M}$ عبر~$\Gamma$،
+    فلكل~$!A \in \Gamma$: يكون~$\mSat{M}{!A}$ إذا وفقط إذا كان
+    $\mSat{M^*}{!A}$.
+  \item إذا كانت~$\mClass{C}$ فئة من النماذج، وكانت
+    $\Gamma(\mClass{C})$ فئة ترشيحات~$\Gamma$ لنماذج~$\mClass{C}$،
+    فإن أي !!{formula}~$!A \in \Gamma$ تكون صالحة في~$\mClass{C}$ إذا
+    وفقط إذا كانت صالحة في~$\Gamma(\mClass{C})$.
+  \end{enumerate}
+\end{cor}
+
+
+
+\end{document}

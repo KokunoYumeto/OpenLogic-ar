@@ -1,0 +1,126 @@
+% Part: model-theory
+% Chapter: lindstrom
+% Section: lindstrom-proof
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{lin}{prf}
+
+\olsection{مبرهنة ليندستروم}
+
+\begin{lem}
+\ollabel{lem:lindstrom}
+افترض أن $!E \in L(\Lang{L})$، حيث $\Lang{L}$ منتهية، وافترض أيضًا أنه
+يوجد $n \in \Nat$ بحيث إنه لأي !!{structure}s اثنتين $\Struct{M}$ و
+$\Struct{N}$، إذا كان $\Struct{M} \equiv_n \Struct{N}$ و
+$\Struct{M} \models_L !E$، فإن $\Struct{N} \models_L !E$ أيضًا.
+عندئذ تكافئ $!E$~!!{sentence} من الرتبة الأولى؛ أي توجد $!D$ من الرتبة
+الأولى بحيث $\Mod(L){!E}=\Mod(L){!D}$.
+\end{lem}
+
+\begin{proof}
+ليكن $n$ بحيث تتفق أي !!{structure}s متكافئتين حتى~$n$، $\Struct{M}$
+و$\Struct{N}$، على القيمة المسندة إلى~$!E$. تذكر
+\olref[bas][pis]{prop:qr-finite}: لا يوجد في !!{language} منتهية، حتى
+التكافؤ المنطقي، إلا عدد منتهٍ من !!{sentence}s الرتبة الأولى التي لا
+تزيد رتبة كمها على~$n$. ولكل !!{structure} ثابتة~$\Struct{M}$، لتكن
+$!D_{\Struct{M}}$ اقتران ممثل واحد من كل فئة تكافؤ منطقي للـ!!{sentence}s
+$!A$ من الرتبة الأولى الصادقة في~$\Struct{M}$ والتي تحقق
+$\QuantRank{!A} \le n$ (فهذا الاقتران منتهٍ)، بحيث
+$\Struct{N} \models !D_{\Struct{M}}$ إذا وفقط إذا كان
+$\Struct{N} \equiv_n \Struct{M}$. ثم ضع
+$!D = \textstyle\bigvee
+\Setabs{!D_{\Struct{M}}}{\Struct{M} \models_L !E}$؛ وهذا الانفصال منتهٍ
+أيضًا حتى التكافؤ المنطقي.
+
+تتبع النتيجة $\Mod(L){!E}=\Mod(L){!D}$. فإذا كان
+$\Struct{N} \models_L !D$، وجد $\Struct{M} \models_L !E$ بحيث
+$\Struct{N} \models !D_{\Struct{M}}$، ومن ثم
+$\Struct{N} \models_L !E$ أيضًا (بفرض اللمة). وبالعكس، إذا كان
+$\Struct{N} \models_L !E$، كان $!D_\Struct{N}$ أحد حدود الانفصال في
+$!D$، ولما كان $\Struct{N} \models !D_\Struct{N}$، كان كذلك
+$\Struct{N} \models_L !D$.
+\end{proof}
+
+\begin{thm}[مبرهنة ليندستروم]
+  \ollabel{thm:lindstrom} افترض أن $\tuple{L,\models_L}$ منطق مجرد سوي
+  له خاصيتا التراص ولوفنهايم--سكولم. عندئذ
+  $\tuple{L,\models_L} \le \tuple{F,\models}$ (ومن ثم يكون
+  $\tuple{L,\models_L}$ مكافئًا لمنطق الرتبة الأولى).
+\end{thm}
+
+\begin{proof}
+بحسب \olref{lem:lindstrom}، يكفي أن نبين أنه لكل
+$!E \in L(\Lang{L})$، حيث $\Lang{L}$ منتهية، يوجد $n \in \Nat$ بحيث
+إنه لأي !!{structure}s اثنتين $\Struct{M}$ و$\Struct{N}$: إذا كان
+$\Struct{M} \equiv_n \Struct{N}$، اتفقت $\Struct{M}$ و$\Struct{N}$
+على~$!E$. فعندئذ تكافئ $!E$~!!{sentence} من الرتبة الأولى، ومن هذا يتبع
+$\tuple{L,\models_L} \le \tuple{F,\models}$. ولما كنا نعمل في
+!!{language} منتهية علائقية محضة، أمكننا، بحسب
+\olref[bas][pis]{thm:b-n-f}، إحلال القضية الجبرية المقابلة
+$I_n(\emptyset,\emptyset)$ محل القضية
+$\Struct{M} \equiv_n \Struct{N}$.
+
+لتكن $!E$ معطاة، وافترض طلبًا للتناقض أنه لكل $n$ توجد
+!!{structure}s~$\Struct{M}_n$ و$\Struct{N}_n$ بحيث
+$I_n(\emptyset,\emptyset)$، لكن، مثلًا،
+$\Struct{M}_n \models_L !E$ و$\Struct{N}_n \not\models_L !E$. وبخاصية
+التشاكل يمكن أن نفترض أن جميع الـ$\Struct{M}_n$ تفسر ثوابت اللغة
+بالأشياء نفسها؛ وفوق ذلك، لما كان في اللغة عدد منتهٍ فقط من
+الـ!!{sentence}s الذرية، أمكن أن نفترض أنها تحقق الـ!!{sentence}s الذرية
+نفسها (وإلا أخذنا متتالية جزئية من الـ$\Struct{M}$). ولتكن
+$\Struct{M_\infty}$ اتحاد جميع الـ$\Struct{M}_n$، أي الـ!!{structure}
+الصغرى الوحيدة التي تحتوي كل $\Struct{M}_n$ بنية جزئية. وكما في برهان
+\olref[lsp]{thm:abstract-p-isom}، لتكن $\Struct{M_\infty}^*$ توسيع
+$\Struct{M_\infty}$ ذي الـ!!{domain}
+$\Domain{M_\infty} \cup \Domain{M_\infty}^{<\omega}$، في
+الـ!!{language} الموسعة التي تضم محمولي الوصل $P$ و$Q$.
+
+وبالمثل عرّف $\Struct{N}_n$ و$\Struct{N_\infty}$ و
+$\Struct{N_\infty}^*$. ولتكن الآن $\Struct{U}$ هي الـ!!{structure} التي
+يضم !!{domain}ها !!{domain}s~$\Struct{M_\infty}^*$ و
+$\Struct{N_\infty}^*$، وكذلك الأعداد الطبيعية~$\Nat$ مع ترتيبها
+الطبيعي~$\le$، في الـ!!{language} ذات محمولات إضافية تمثل الـ!!{domain}s
+$\Domain{M_\infty}$ و$\Domain{N_\infty}$ و
+$\Domain{M_\infty}^{<\omega}$ و$\Domain{N_\infty}^{<\omega}$، فضلًا
+عن محمولات ترمّز مجالات $\Struct{M}_n$ و$\Struct{N}_n$ بمعنى أن:
+\begin{align*}
+  \Domain{M_n} & = \Setabs{a \in \Domain{M_\infty}}{R(a, n)}; &
+  \Domain{N_n} & = \Setabs{a \in \Domain{N_\infty}}{S(a,n)}; \\
+  \Domain{M_\infty}^{<\omega}_n & = \Setabs{a \in \Domain{M_\infty}^{<\omega}}{R(a,n)}; &
+  \Domain{N_\infty}^{<\omega}_n & = \Setabs{a \in \Domain{N_\infty}^{<\omega}}{S(a,n)}.
+\end{align*}
+وللـ!!{structure}~$\Struct{U}$ أيضًا علاقة ثلاثية~$J$ بحيث
+$J(n,\mathbf{a},\mathbf{b})$ إذا وفقط إذا كان
+$I_n(\mathbf{a},\mathbf{b})$.
+
+توجد الآن !!a{sentence}~$!D$ من المنطق~$L$ في الـ!!{language}
+$\Lang{L}$ الموسعة بـ$R$ و$S$ و$J$ وغيرها، تقول إن $\le$ ترتيب خطي
+منفصل له عنصر أول ولا عنصر أخير، وإن
+$\Struct{M}_n \models_L !E$ و$\Struct{N}_n \not\models_L !E$، وإنه لكل
+$n$ في الترتيب يكون $J(n,\mathbf{a},\mathbf{b})$ إذا وفقط إذا كان
+$I_n(\mathbf{a},\mathbf{b})$.
+
+وسّع اللغة بثابت جديد~$n^*$، وأضف إلى $!D$ النمط الذي يفرض أن
+$\bar n < n^*$ لكل $n \in \Nat$ قياسي (وبصورة مكافئة، يفرض لكل عدد
+قياسي~$n$ أن تحت $n^*$ ما لا يقل عن $n$ عنصرًا). كل جزء منتهٍ من هذا
+النمط مع $!D$ يتحقق في $\Struct{U}$ باختيار عنصر قياسي كبير بما يكفي.
+ومن ثم تعطينا خاصية التراص نموذجًا~$\Struct{V}$ لـ$!D$ والنمط كله، يكون
+في ترتيبه عنصر~$n^*$ فوق كل عنصر قياسي. وبوجه خاص، تحتوي
+$\Struct{V}$~!!{structure}s جزئيتين $\Struct{M_{n^*}}$ و
+$\Struct{N_{n^*}}$ بحيث $\Struct{M_{n^*}} \models_L !E$ و
+$\Struct{N_{n^*}} \not\models_L !E$. ويمكننا الآن تعريف مجموعة
+$\mathcal{I}$ من أزواج متتاليات طولها~$k$ من $\Domain{M_{n^*}}$ و
+$\Domain{N_{n^*}}$، بوضع
+$\tuple{\mathbf{a},\mathbf{b}} \in \mathcal{I}$ إذا وفقط إذا كان
+$J(n^*-k,\mathbf{a},\mathbf{b})$، حيث $k$ طول $\mathbf{a}$ و
+$\mathbf{b}$. ولما كان $n^*$ فوق كل عدد قياسي، فإن
+$n^*-k>0$ لكل $k$ قياسي، وتشهد المجموعة $\mathcal{I}$ أن
+$\Struct{M_{n^*}} \simeq_p \Struct{N_{n^*}}$. لكن بحسب
+\olref[lsp]{thm:abstract-p-isom} تكون $\Struct{M_{n^*}}$ مكافئة لـ
+$\Struct{N_{n^*}}$ في~$L$، وهو تناقض.
+\end{proof}
+
+\end{document}

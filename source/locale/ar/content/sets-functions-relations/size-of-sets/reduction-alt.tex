@@ -1,0 +1,133 @@
+% Part:sets-functions-relations
+% Chapter: size-of-sets
+% Section: reduction-alt
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid[ar]{sfr}{siz}{red-alt}
+
+\olsection{الاختزال}
+
+\begin{editorial}
+  يثبت هذا القسم عدم القابلية للتعداد بالاختزال، بما يطابق النتائج
+  الواردة في \olref[nen-alt]{sec}. وترد نسخة بديلة، أكثر تفصيلًا
+  قليلًا، تطابق النتائج الواردة في \olref[nen]{sec}، في
+  \olref[red]{sec}.
+\end{editorial}
+
+أثبتنا أن $\Bin^\omega$ !!{nonenumerable} باستدلال قطري.
+واستعملنا استدلالًا قطريًا مشابهًا لإثبات أن
+$\Pow{\Nat}$ !!{nonenumerable}. لكن ثمة طريقة أخرى يمكننا بها إثبات
+أن $\Pow{\Nat}$ !!{nonenumerable}: أن نبين أنه \emph{إذا كانت
+$\Pow{\Nat}$ !!{enumerable}، فإن $\Bin^\omega$ تكون أيضًا
+!!{enumerable}}. وبما أننا نعلم أن $\Bin^\omega$ !!{nonenumerable}،
+فيلزم أن تكون $\Pow{\Nat}$ كذلك.
+
+يسمى هذا \emph{اختزال} مسألة إلى أخرى. وفي هذه الحالة نختزل مسألة
+تعداد $\Bin^\omega$ إلى مسألة تعداد $\Pow{\Nat}$. فمن شأن حل للمسألة
+الأخيرة---أي تعداد $\Pow{\Nat}$---أن يفضي إلى حل للمسألة
+الأولى---أي تعداد $\Bin^\omega$.
+
+لاختزال مسألة تعداد مجموعة~$B$ إلى مسألة تعداد مجموعة~$A$، نقدم
+طريقة لتحويل تعداد~$A$ إلى تعداد~$B$. وأسهل طريقة لفعل ذلك هي تعريف
+!!a{surjection} $f\colon A \to B$. فإذا كانت القائمة $x_1$، $x_2$،
+\dots{} تعدّد~$A$، فإن القائمة $f(x_1)$، $f(x_2)$، \dots{} تعدّد~$B$.
+وفي حالتنا نبحث عن !!a{surjection} $f\colon \Pow{\Nat}
+\to \Bin^\omega$.
+
+\begin{prob}
+أثبت أنه إذا وجدت دالة~!!{injective} $g\colon B \to A$، وكانت
+$B$~!!{nonenumerable}، فإن $A$ كذلك. وافعل ذلك ببيان كيفية استعمال~$g$
+لتحويل تعداد~$A$ إلى تعداد~$B$.
+\end{prob}
+
+\begin{proof}[برهان {\olref[nen-alt]{thm:nonenum-pownat}} بالاختزال]
+لإجراء الاختزال، افترض أن $\Pow{\Nat}$ !!{enumerable}، ومن ثم أن لها
+تعدادًا هو $N_{1}$، $N_{2}$، $N_{3}$، \dots
+
+عرّف الدالة $f \colon \Pow{\Nat} \to \Bin^\omega$ بجعل
+$f(N)$ السلسلة $s_{k}$ التي تحقق $s_{k}(n) = 1$ إذا وفقط إذا كان $n \in N$،
+وتحقق $s_k(n) = 0$ فيما عدا ذلك.
+
+وهذا يعرّف دالةً بوضوح، إذ متى كان $N \subseteq \Nat$، كان
+أي $n \in \Nat$ إما !!a{element} من~$N$ وإما لم يكن منه. فمثلًا،
+ترسل مجموعة الأعداد الطبيعية الزوجية $2\Nat = \Setabs{2n}{n \in \Nat} = \{0,2, 4, 6,
+\dots\}$ إلى السلسلة $1010101\dots$؛ وترسل $\emptyset$ إلى
+$0000\dots$؛ وترسل $\Nat$ إلى $1111\dots$.
+
+وهي أيضًا !!{surjective}: فكل سلسلة من~$0$ و~$1$ تقابلها مجموعة ما
+من الأعداد الطبيعية، وهي تحديدًا المجموعة التي عناصرها الأعداد الطبيعية
+المقابلة للمواضع التي تحتوي فيها السلسلة على~$1$. وبصورة أدق، إذا كان $s \in \Bin^\omega$، فعرّف $N
+\subseteq \Nat$ كما يأتي:
+\[
+N = \Setabs{n \in \Nat}{s(n) = 1}
+\]
+عندئذ $f(N) = s$، كما يمكن التحقق بالرجوع إلى تعريف~$f$.
+
+تأمل الآن القائمة
+\[
+f(N_1), f(N_2), f(N_3), \dots
+\]
+بما أن $f$ !!{surjective}، فلا بد أن يظهر كل عنصر من $\Bin^\omega$
+قيمةً لـ~$f$ عند وسيط ما، ومن ثم لا بد أن يظهر في القائمة. ولذلك
+يجب أن تعدّد هذه القائمة~$\Bin^\omega$ كلها.
+
+وهكذا، إذا كانت $\Pow{\Nat}$ !!{enumerable}، كانت $\Bin^\omega$
+!!{enumerable}. لكن $\Bin^\omega$ !!{nonenumerable}
+(\olref[nen-alt]{thm:nonenum-bin-omega}). ومن ثم فإن $\Pow{\Nat}$
+!!{nonenumerable}.
+\end{proof}
+
+%\begin{explain}
+%It is easy to be confused about the direction the reduction goes in.
+%For instance, !!a{surjective} function $g \colon \Bin^\omega \to X$
+%does \emph{not} establish that $X$ is !!{nonenumerable}.  (Consider $g
+%\colon \Bin^\omega \to \Bin$ defined by $g(s) = s(1)$, the function
+%that maps a sequence of $0$'s and $1$'s to its first !!{element}.  It
+%is surjective, because some sequences start with $0$ and some start
+%with $1$. But $\Bin$ is finite.)  Note also that the function $f$ must
+%be surjective, or otherwise the argument does not go through:
+%$f(x_1)$, $f(x_2)$, \dots{} would then not be guaranteed to include
+%all the !!{element}s of~$Y$. For instance, $h\colon \Nat \to
+%\Bin^\omega$ defined by
+%\[
+%h(n) = \underbrace{000\dots0}_{\text{$n$ $0$'s}}
+%\]
+%is a function, but $\Nat$ is !!{enumerable}.
+%\end{explain}
+
+\begin{prob}\label{sfr:siz:red-alt:prob:nat-nat}
+  أثبت، بحجة اختزال، أن المجموعة~$X$ لجميع الدوال $f\colon \Nat \to \Nat$
+  !!{nonenumerable} (تلميح: أعط دالة شاملة من $X$ إلى~$\Bin^\omega$.)
+\end{prob}
+
+\begin{prob}
+أثبت، بحجة اختزال، أن مجموعة جميع \emph{المجموعات المؤلفة من} أزواج الأعداد
+الطبيعية، أي $\Pow{\Nat \times \Nat}$، !!{nonenumerable}.
+\end{prob}
+
+\begin{prob}
+أثبت، بحجة اختزال، أن $\Nat^\omega$، وهي مجموعة المتتاليات اللانهائية
+من الأعداد الطبيعية، !!{nonenumerable}.
+\end{prob}
+
+%\begin{prob}
+%Let $P$ be the set of functions from $\Nat$ to the set $\{0\}$, and let $Q$ be the set of \emph{partial}
+%functions from the set of positive integers to the set $\{0\}$. Show
+%that $P$~is !!{enumerable} and $Q$~is not. (Hint: reduce the problem
+%of enumerating $\Bin^\omega$ to enumerating~$Q$).
+%\end{prob}
+
+\begin{prob}
+لتكن $S$ مجموعة جميع !!{surjection}s من~$\Nat$ إلى المجموعة
+$\{0,1\}$، أي إن $S$ تتألف من جميع !!{surjection}s~$f \colon \Nat
+\to \Bin$. أثبت أن $S$ !!{nonenumerable}.
+\end{prob}
+
+\begin{prob}
+أثبت أن مجموعة الأعداد الحقيقية~$\Real$ !!{nonenumerable}.
+\end{prob}
+
+\end{document}

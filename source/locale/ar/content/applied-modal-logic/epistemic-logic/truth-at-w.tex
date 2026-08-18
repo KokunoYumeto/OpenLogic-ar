@@ -1,0 +1,112 @@
+% Part: applied-modal-logics
+% Chapter: epistemic-logic
+% Section: truth-at-w
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{aml}{el}{trw}
+
+\olsection{الصدق عند عالم}
+
+كما في المنطق الجهوي النظامي، يحدد كل نموذج معرفي أي ال!!{formula}s تُعد
+صادقة عند أي العوالم فيه. ونستعمل الترميز نفسه، «النموذج~$\mModel{M}$
+يصدق !!{formula}~$!A$ عند العالم~$w$»، للمفهوم الأساسي في الدلالات
+العلائقية. وتُعرّف العلاقة استقرائيًا، وهي مطابقة لحالة المنطق الجهوي
+النظامي في جميع المؤثرات غير الجهوية.
+
+\begin{defn}\ollabel{defn:mmodels}
+  يُعرّف \emph{صدق !!a{formula}~$!A$ عند~$w$} في~$\mModel M$، ورمزه
+  $\mSat{M}{!A}[w]$، استقرائيًا كما يأتي:
+  \begin{enumerate}
+  \tagitem{prvFalse}{\indcase{!A}{\lfalse}{لا يتحقق أبدًا
+    $\mSat{M}{\lfalse}[w]$}.}{}
+  \tagitem{prvTrue}{\indcase{!A}{\ltrue}{يتحقق دائمًا
+    $\mSat{M}{\ltrue}[w]$}.}{}
+  \item $\mSat{M}{p}[w]$ إذا وفقط إذا كان~$w \in V(p)$.
+  \tagitem{prvNot}{\indcase{!A}{\lnot !B}{$\mSat{M}{\indfrm}[w]$ إذا
+    وفقط إذا كان~$\mSat/{M}{!B}[w]$}.}{}
+  \tagitem{prvAnd}{\indcase{!A}{(!B \land !C)}{$\mSat{M}{\indfrm}[w]$
+    إذا وفقط إذا كان~$\mSat{M}{!B}[w]$ و$\mSat{M}{!C}[w]$}.}{}
+  \tagitem{prvOr}{\indcase{!A}{(!B \lor !C)}{$\mSat{M}{\indfrm}[w]$
+    إذا وفقط إذا كان~$\mSat{M}{!B}[w]$ أو~$\mSat{M}{!C}[w]$}
+    (أو كلاهما).}{}
+  \tagitem{prvIf}{\indcase{!A}{(!B \lif !C)}{$\mSat{M}{\indfrm}[w]$
+    إذا وفقط إذا كان~$\mSat/{M}{!B}[w]$ أو~$\mSat{M}{!C}[w]$}.}{}
+  \tagitem{prvIff}{\indcase{!A}{(!B \liff !C)}{$\mSat{M}{\indfrm}[w]$
+    إذا وفقط إذا تحقق كل من~$\mSat{M}{!B}[w]$ و$\mSat{M}{!C}[w]$، أو
+    لم يتحقق أي من~$\mSat{M}{!B}[w]$ و$\mSat{M}{!C}[w]$}.}{}
+  \item\ollabel{defn:sub:mmodels-box}
+    \indcase{!A}{\Knows_a !B}{$\mSat{M}{\indfrm}[w]$ إذا وفقط إذا كان
+    $\mSat{M}{!B}[w']$ لكل~$w' \in W$ بحيث~$R_a ww'$}
+  \end{enumerate}
+\end{defn}
+
+لكن هنا يلزم أن نفكر في القيود على علاقات نفاذنا. فبحسب العبارة
+\olref{defn:sub:mmodels-box}، تصدق !!a{formula}~$\Knows_a !B$ عند~$w$
+متى لم يوجد~$w'$ بحيث~$R_a ww'$. وهذه هي العبارة نفسها في المنطق الجهوي
+النظامي؛ فإذا لم يكن لعالم لواحق، صدقت عنده جميع صيغ~$\Box$ صدقًا خاليًا.
+ويبدو هذا مخالفًا للحدس إلى أبعد حد إذا فهمنا~$\Knows$ على أنه يمثل
+\emph{المعرفة}. فنحن نميل إلى الاعتقاد بأنه لا توجد \emph{أي} ظروف يمكن
+أن يعرف فيها فاعل~$!A$ و$\lnot !A$ معًا في الوقت نفسه.
+
+أحد الحلول هو ضمان كون علاقة النفاذ في منطق المعرفة \emph{انعكاسية}
+دائمًا. وهذا يقابل تقريبًا فكرة أن العالم الفعلي متسق مع معلومات الفاعل.
+ويستعمل منطق المعرفة في العادة~S5، لكن قد تُستعمل نظم أضعف بحسب ما يراد
+بالضبط من علاقة~$\Knows_a$ أن تمثله.
+
+\begin{figure}
+  \begin{center}
+    \begin{tikzpicture}[modal]
+      \node[world] (w1) [label={[align=right]right:\mTrue{p}\\ \mFalse{q}}]{$w_1$};
+      \node[world] (w2) [label={[align=right]right:\mTrue{p}\\ \mTrue{q}},
+        above right=of w1]{$w_2$};
+      \node[world] (w3) [label={[align=right]right:\mFalse{p}\\ \mFalse{q}},
+        below right=of w1] {$w_3$};
+      \draw[<->] (w1) to node {$a$} (w2);
+      \draw[->,loop left] (w1) to node {$a,b$} (w1);
+      \draw[<->] (w1) to [swap] node {$b$} (w3);
+      \draw[->,loop above] (w2) to node {$a,b$} (w2) ;
+      \draw[->,loop below] (w3) to node {$a,b$} (w3) ;
+    \end{tikzpicture}
+  \end{center}
+  \caption{نموذج معرفي بسيط.}
+  \ollabel{fig:simple}
+\end{figure}
+
+\begin{prob}
+  حدّد أي العبارات الآتية تصح في~\olref[aml][el][trw]{fig:simple}:
+  \begin{enumerate}
+    \item $\mSat{M}{\lnot q}[w_1]$؛
+    \item $\mSat{M}{\Knows_a \lnot q}[w_1]$؛
+    \item $\mSat{M}{\Knows_b \lnot q}[w_1]$؛
+    \item $\mSat{M}{\Knows_b q \lor \Knows_b \lnot q}[w_2]$؛
+    \item $\mSat{M}{\Knows_a( \Knows_b q \lor \Knows_b \lnot q)}[w_2]$؛
+    \item $\mSat{M}{\EKnows_{\{a,b\}} \lnot q}[w_3]$؛
+    \end{enumerate}
+\end{prob}
+
+بعد أن أعطينا تعريفنا الأساسي للصدق عند عالم، تنتقل المفاهيم الدلالية الأخرى
+من المنطق الجهوي النظامي، كالصلاحية الجهوية والاستلزام، مباشرةً، مع تطبيقها
+على هذه الطريقة الجديدة في التفكير في تفسير المؤثرات الجهوية.
+
+ويمكننا الآن أيضًا إعطاء شروط صدق لمؤثر المعرفة المشتركة~$\CKnows_G$.
+تذكر من~\olref[sfr][rel][ops]{sec} أن \emph{الإغلاق المتعدي}~$R^+$
+لعلاقة~$R$ يُعرّف بأنه:
+\begin{align*}
+  R^+ &= \bigcup_{ n \in \mathbb{N}} R^n,
+\intertext{حيث}
+  R^0 & = R \text{ و}\\
+  R^{n+1} & = \Setabs{\tuple{x,z}}{\exists y (R^n xy \land Ryz)}.
+\end{align*}
+وحيث~$G$ مجموعة من الفاعلين، نعرّف
+$R_G=(\bigcup_{b \in G}R_b)^+$ بأنه الإغلاق المتعدي لاتحاد علاقات النفاذ
+لجميع الفاعلين.
+
+\begin{defn}
+إذا كان~$G' \subseteq G$، جعلنا~$\mSat{M}{\CKnows_{G'} !A}[w]$ إذا
+وفقط إذا كان~$\mSat{M}{!A}[w']$ لكل~$w'$ بحيث~$R_{G'}ww'$.
+\end{defn}
+
+\end{document}

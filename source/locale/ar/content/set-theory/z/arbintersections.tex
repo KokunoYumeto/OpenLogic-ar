@@ -1,0 +1,59 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{z}{arbintersections}
+\olsection{ملحق: الإغلاق والاستيعاب والتقاطع}
+
+اقترحنا في~\olref[sth][z][milestone]{sec} أن تعود إلى العمل الساذج
+في~\olref[sfr][][]{part} وتتحقق من إمكان إجرائه في~$\Zminus$. وإذا
+اتبعت هذه النصيحة، فربما عرقلتك \emph{نقطة واحدة}: استعمال
+\emph{التقاطع} في معالجة ددكند لـ\emph{الإغلاقات}.
+
+تذكر من~\olref[sfr][infinite][dedekind]{Closure} أن
+\begin{align*}
+  \closureofunder{f}{o} & = \bigcap\Setabs{X}{o \in X \text{ و$X$
+مغلقة تحت~$f$}}.
+\intertext{والصورة العامة لذلك تعريف من الشكل:}
+  C & = \bigcap\Setabs{X}{\phi(X)}.
+\end{align*}
+لكن هذا ينبغي أن يدق ناقوس الخطر: بما أن الاستيعاب الساذج يفشل، فلا
+ضمان لوجود~$\Setabs{X}{\phi(X)}$. ومن ثم يبدو على نحو خطير أن مثل
+هذه التعريفات تنطوي على \emph{غش}.
+
+لحسن الحظ، لا تنطوي على غش؛ أو بالأحرى، إذا كانت \emph{في صورتها
+الحالية} غشًا، أمكننا بذل بعض الجهد النزيه لجعلها سليمة. وقد مهّدنا
+لهذا الجهد في~\olref[sth][z][sep]{prop:intersectionsexist}، حين شرحنا
+لماذا توجد~$\bigcap A$ لكل~$A \neq \emptyset$. لكننا سنفصل الأمر
+صراحة.
+
+بافتراض الامتدادية، إذا حاولنا تعريف~$C$ بأنها
+$\bigcap\Setabs{X}{\phi(X)}$، فكل ما نطلبه حقًا هو شيء~$C$ يحقق:
+\begin{equation}\ollabel{bicondelimarbintersection}
+	\forall x(x \in C \liff \forall X(\phi(X) \lif x \in X))\tag{*}
+\end{equation}
+والآن افترض وجود \emph{مجموعة ما}~$S$ بحيث~$\phi(S)$. وعندئذ يمكننا
+تحقيق~\olref{bicondelimarbintersection} بمجرد تعريف~$C$ باستعمال
+\emph{الفصل}، كما يأتي:
+\[
+	C = \Setabs{x \in S}{\forall X(\phi(X) \lif x \in X)}.
+\]
+ونترك تمرينًا التحقق من أن هذا التعريف ينتج
+\olref{bicondelimarbintersection} كما هو مطلوب.
+%  ثبّت $x$. افترض أولًا أن $x \in C$ بحسب التعريف الجديد؛ فعندئذ يكون كل من $x
+%  \in S$ و$\forall X(\phi(X) \lif x \in X)$؛ لكن لما كان
+%  $\phi(S)$، اختُزل هذا إلى الشرط $\forall X(\phi(X)
+%  \lif x \in X)$. وعلى العكس، افترض $\forall X(\phi(X) \lif
+%  x \in X)$؛ فعندئذ، لما كان $\phi(S)$، يكون أيضًا $x \in S$؛ ومن ثم
+%  $x \in C$ بحسب التعريف الجديد.
+وستسمح لنا هذه الاستراتيجية العامة بتجاوز كل استعمال ظاهري للاستيعاب
+الساذج في تعريف التقاطعات. وفي الحالة الخاصة التي بدأت هذا المسار من
+التفكير، أي حالة~$\closureofunder{f}{o}$، يكون العمل كما يأتي. بدأنا
+برهان~\olref[sfr][infinite][dedekind]{closureproperties} بملاحظة أن
+$o \in \ran{f}\cup\{o\}$، وأن~$\ran{f} \cup \{o\}$ مغلقة تحت~$f$.
+ولذلك يمكننا تعريف ما نريده هكذا:
+\[
+	\closureofunder{f}{o} = \Setabs{x \in \ran{f} \cup \{o\}}{(\forall X \ni o)(X \text{ مغلقة تحت~$f$} \lif x \in X)}.
+\]
+
+\end{document}

@@ -1,0 +1,68 @@
+% part: intuitionistic-logic
+% chapter: introduction
+% section: axiomatic-derivations
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{int}{axd}
+
+\olsection{\usetoken{P}{derivation} مسلّمية}
+
+ال!!{derivation}s المسلّمية للمنطق القضي الحدسي أبسط أنظمة
+ال!!{derivation} من الناحية المفهومية، وأسبقها تاريخيًا. وهي تعمل كما
+في المنطق القضي الكلاسيكي تمامًا.
+
+\begin{defn}[!!^{derivability}]
+إذا كانت $\Gamma$ مجموعة من !!{formula}s اللغة $\Lang L$، فإن
+\emph{!!{derivation}} من $\Gamma$ متتالية منتهية $!A_1$،
+\dots،~$!A_n$ من ال!!{formula}s يتحقق لكل $i \le n$ واحد مما يأتي:
+\begin{enumerate}
+\item $!A_i \in \Gamma$؛ أو
+\item $!A_i$ مسلمة؛ أو
+\item تنتج $!A_i$ من بعض $!A_j$ و$!A_k$، حيث $j < i$ و$k < i$،
+  بقياس الخلف؛ أي $!A_k \ident !A_j \lif !A_i$.
+\end{enumerate}
+\end{defn}
+
+\begin{defn}[المسلّمات]
+مجموعة $\PAx$ من \emph{مسلّمات} المنطق القضي الحدسي هي جميع
+ال!!{formula}s ذات الصور الآتية:
+\begin{align}
+  & (!A \land !B) \lif !A \ollabel{ax:land1}\\
+  & (!A \land !B) \lif !B \ollabel{ax:land2}\\
+  & !A \lif (!B \lif (!A \land !B)) \ollabel{ax:land3}\\
+  & !A \lif (!A \lor !B) \ollabel{ax:lor1}\\
+  & !A \lif (!B \lor !A) \ollabel{ax:lor2}\\
+  & (!A \lif !C) \lif ((!B \lif !C) \lif ((!A \lor !B) \lif !C)) \ollabel{ax:lor3}\\
+  & !A \lif (!B \lif !A) \ollabel{ax:lif1}\\
+  & (!A \lif (!B \lif !C)) \lif ((!A \lif !B) \lif (!A \lif !C)) \ollabel{ax:lif2}\\
+  & \lfalse \lif !A \ollabel{ax:lfalse1}
+\end{align}
+\end{defn}
+
+\begin{defn}[!!^{derivability}]
+تكون !!^a{formula}~$!A$ \emph{!!{derivable}} من $\Gamma$، ونكتب
+$\Gamma \Proves !A$، إذا وُجدت !!a{derivation} من $\Gamma$ تنتهي
+بـ$!A$.
+\end{defn}
+
+\begin{defn}[المبرهنات]
+تكون !!^a{formula}~$!A$ \emph{مبرهنة} إذا وُجدت !!a{derivation}
+لـ~$!A$ من المجموعة الخالية. ونكتب $\Proves !A$ إذا كانت $!A$
+مبرهنة، و$\Proves/ !A$ إذا لم تكن كذلك.
+\end{defn}
+
+\begin{prop}
+  إذا كان $\Gamma \Proves !A$ في نظام ال!!{derivation} المسلّمي
+  للمنطق الحدسي، فإن $\Gamma \Proves !A$ أيضًا في المنطق الكلاسيكي.
+  وبوجه خاص، إذا كانت $!A$ مبرهنة حدسية، فهي مبرهنة كلاسيكية أيضًا.
+\end{prop}
+
+\begin{proof}
+  كل مسلمة حدسية مسلمة كلاسيكية أيضًا، ولذلك تكون كل !!{derivation}
+  في المنطق الحدسي !!a{derivation} في المنطق الكلاسيكي كذلك.
+\end{proof}
+
+\end{document}

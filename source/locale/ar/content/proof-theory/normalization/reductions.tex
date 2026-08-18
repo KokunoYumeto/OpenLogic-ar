@@ -1,0 +1,327 @@
+% Part: proof-theory
+% Chapter: normalization
+% Section: reductions
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{nor}{red}
+
+\olsection{تحويلات الاختزال}
+
+إذا كان طول قطع في~!!a{proof} ضمن~\Log{N1i} يساوي~$1$، فهو مقطع يتألف من
+ظهور واحد لـ~!!{formula}، وتكون تلك~!!{formula} نتيجةً إما لاستدلال
+!!a{introduction} أو لـ~\FalseInt، ومقدمةً كبرى لاستدلال~!!a{elimination}
+في الوقت نفسه. وفي برهان التطبيع ``تُختزل'' هذه القطوع باستبدال~!!{proof}
+الجزئي الذي ينتهي بمثل هذا الزوج من~!!{introduction}/!!{elimination}
+بـ~!!{proof} جديد حُذف منه زوج الاستدلالين. وقد ينتج عن هذا الاستبدال قطوع
+جديدة، غير أنه يمكن التحقق من أن رتبتها أدنى من رتبة القطع المختزل. ولذلك،
+عند تطبيق التحويل على قطع أقصى مختار علويًا وفي أقصى اليمين، يكون~!!{proof}
+الجديد إما أقصر في طول القطع (لأن قطعًا أقصى طوله~$1$ قد حُذف) وإما تكون
+رتبة القطع في~!!{proof} قد انخفضت (إذا كان ذلك هو القطع الأقصى الوحيد).
+
+فمثلًا، إذا كان الاستدلالان المعنيان هما~\Intro{\lif} و\Elim{\lif}، وكانت
+$!A \ident !B \lif !C$، وكان هناك~!!{proof} جزئي~$\delta_1$ ينتهي هكذا:
+\[
+\AxiomC{$\Discharge{!B}{x}$}
+\RightLabel{$\delta_2$}
+\DeduceC{$!C$}
+\DischargeRule{\Intro{\lif}}{x}
+\UnaryInfC{$!B \lif !C$}
+\AxiomC{}
+\RightLabel{$\delta_3$}
+\DeduceC{$!B$}
+\RightLabel{\Elim{\lif}}
+\BinaryInfC{$!C$}
+\DisplayProof
+\]
+فإننا نحذف هذا القطع باستبدال البرهان الجزئي~$\delta_1$ داخل~$\delta$
+بما يأتي:
+\[
+\AxiomC{}
+\RightLabel{$\delta_3$}
+\DeduceC{$!B$}
+\RightLabel{$\Subst{\delta_2}{\delta_3}{!B^x}$}
+\DeduceC{$!C$}
+\DisplayProof
+\]
+ونعني بـ~$\Subst{\delta_2}{\delta_3}{!B^x}$ الـ~!!{proof} الناتج من
+$\delta_2$ باستبدال نسخة كاملة من~!!{proof}~$\delta_3$ بكل فرض~$!B$ موسوم
+بـ~$x$. ونعيد تسمية المتغيرات الذاتية والمقيّدة في كل نسخة من~!!{proof}
+$\delta_3$ بصورة حديثة ومتباينة زوجيًا تجنبًا للأسر، مع إبقاء وسوم الفروض
+المفتوحة وصيغها نفسها، وإن جاز أن يزداد عدد وقائعها. ولا يبقى في البرهان
+الجديد فرض مفتوح من الصورة~$!B$ موسوم بـ~$x$. كما لا توجد فروض أخرى موسومة
+بـ~$x$، لأننا نفترض كالمعتاد أن~!!{formula}s مختلفة لا تقع فروضًا بالوسم
+نفسه. ومن ثم يكون لـ~!!{proof} الجديد الفروض المفتوحة نفسها التي لـ
+$\delta_1$؛ وكل استدلال في~$\delta_2$ يفرّغ فروضًا يفرّغ الفروض نفسها في
+$\Subst{\delta_2}{\delta_3}{!B^x}$، وكل استدلال في~$\delta_3$ يفرّغ فروضًا
+قد تظهر منه نسخ متعددة تفرّغ الوقائع المقابلة.
+
+كل قطع يقع كله داخل~$\delta_2$ أو كله خارج~$\delta_1$ في~$\delta$ لا
+يتغير: فهو يشتمل على~!!{formula}s نفسها ويمر بالاستدلالات نفسها، فتظل رتبته
+وطوله كما كانا. أما القطع الواقع داخل~$\delta_3$ فقد يُنسخ؛ ولكل نسخة الرتبة
+والطول نفسيهما، وتتحكم استراتيجية اختيار القطع الأقصى العلوي وفي أقصى
+اليمين في تعدديته. وقد حذفنا قطعًا أقصى طوله~$1$، لكن يلزم بحث أمرين قبل
+استنتاج انخفاض مقياس~$\delta$.
+
+غير أن أمرين قد يحدثان:
+\begin{enumerate}
+  \item باستبدال~$\delta_3$ بكل فرض~$!B^x$، نكون قد ضاعفنا جميع القطوع في
+  $\delta_3$. فإذا كان بعضها أقصى، فقد يزيد طول القطع في~!!{proof} الجديد
+  على طول القطع في~!!{proof} القديم. ولمنع ذلك نطبّق تحويلات الاختزال فقط
+  على قطوع قصوى \emph{علوية وفي أقصى اليمين} معًا؛ أي لا يوجد قطع أقصى فوق
+  القطع المختزل في برهانه الجزئي، ولا على فرع في~$\delta$ إلى يمينه. فلو
+  وُجد قطع أقصى في~$\delta_3$ لكان إلى يمين القطع المختزل هنا، ولو وُجد في
+  الجزء العلوي الآخر لانتُهكت العلوية. ويضمن هذا الاختيار أننا إما نقلل طول
+  القطع في~!!{proof} أو نقلل رتبته.
+  \item إذا كان فرض~$!B^x$ في~$\delta_2$ المقدمة الكبرى لاستدلال
+  !!a{elimination}، وكان آخر استدلال في~$\delta_3$ هو~\Elim{\lor} أو
+  \Elim{\lexists} أو استدلال~!!a{introduction} أو~\FalseInt، فقد أنشأنا
+  قطعًا جديدًا بوصل~$\delta_3$ بـ~$\delta_2$ عند ذلك الفرض. فما كان مجرد
+  فرض في~$\delta_2$ صار قطعًا طوله~$1$ (نتيجة~!!a{introduction} أو
+  \FalseInt ومقدمةً كبرى لاستدلال~!!a{elimination})، أو صار آخر ظهور
+  لـ~!!{formula} في مقطع قطع (أي مقدمةً كبرى لاستدلال~!!a{elimination}
+  ونتيجةً لـ~\Elim{\lor} أو~\Elim{\lexists}). وإذا كانت~$B^x$ مقدمةً
+  صغرى لـ~\Elim{\lor} أو~\Elim{\lexists}، فقد كانت أصلًا أول ظهور
+  لـ~!!{formula} في مقطع، وربما في مقطع قطع. وقد يطول ذلك المقطع في
+  !!{proof} الجديد. لكن لاحظ أن~!!{formula} التي تكوّن هذا القطع الجديد أو
+  مقطع القطع القائم هي~$!B$، وأن
+  $\depth{!B} < \depth{!B \lif !C}$. لذلك، مع أننا ربما أضفنا قطوعًا أو
+  زدنا أطوالها، فلا شيء منها قطع أقصى. ومن ثم إما أننا خفضنا رتبة القطع، أو
+  خفضنا طول القطع إن بقيت قطوع بالرتبة نفسها.
+\end{enumerate}
+
+تسمى عملية اختزال قطع طوله~$1$ \emph{تحويل اختزال} (أو \emph{تحويل
+التفاف}). وترد أنماط بعض أزواج القواعد في
+\olref{tab:reduction-conversions}. (وتُترك الأنماط الباقية تمارين.)
+
+\begin{table}
+\begin{multline*}
+\bottomAlignProof
+\AxiomC{$\Discharge{!B}{x}$}
+\RightLabel{$\delta_2$}
+\shortDeduce
+\DeduceC{$!C$}
+\DischargeRule{\Intro{\lif}}{x}
+\UnaryInfC{$!B \lif !C$}
+\AxiomC{}
+\RightLabel{$\delta_3$}
+\shortDeduce
+\DeduceC{$!B$}
+\RightLabel{\Elim{\lif}}
+\BinaryInfC{$!C$}
+\DisplayProof
+\quad \longrightarrow\quad
+\shoveright{\bottomAlignProof
+\AxiomC{}
+\RightLabel{$\delta_3$}
+\shortDeduce
+\DeduceC{$!B$}
+\RightLabel{$\Subst{\delta_2}{\delta_3}{!B^x}$}
+\shortDeduce
+\DeduceC{$!C$}
+\DisplayProof}
+\\[4ex]
+\shoveleft{\bottomAlignProof
+\AxiomC{}
+\RightLabel{$\delta_2$}
+\shortDeduce
+\DeduceC{$!B$}
+\AxiomC{}
+\RightLabel{$\delta_3$}
+\shortDeduce
+\DeduceC{$!C$}
+\RightLabel{\Intro{\land}}
+\BinaryInfC{$!B \land !C$}
+\RightLabel{\Elim{\land}[1]}
+\UnaryInfC{$!B$}
+\DisplayProof
+\quad \longrightarrow\quad
+\bottomAlignProof
+\AxiomC{}
+\RightLabel{$\delta_2$}
+\shortDeduce
+\DeduceC{$!B$}
+\DisplayProof}\qquad
+\shoveright{\bottomAlignProof
+\AxiomC{}
+\RightLabel{$\delta_2$}
+\shortDeduce
+\DeduceC{$!B$}
+\AxiomC{}
+\RightLabel{$\delta_3$}
+\shortDeduce
+\DeduceC{$!C$}
+\RightLabel{\Intro{\land}}
+\BinaryInfC{$!B \land !C$}
+\RightLabel{\Elim{\land}[2]}
+\UnaryInfC{$!C$}
+\DisplayProof
+\quad \longrightarrow\quad
+\bottomAlignProof
+\AxiomC{}
+\RightLabel{$\delta_3$}
+\shortDeduce
+\DeduceC{$!C$}
+\DisplayProof}
+\\[4ex]
+\bottomAlignProof
+\AxiomC{}
+\RightLabel{$\delta_2$}
+\shortDeduce
+\DeduceC{$!B$}
+\RightLabel{\Intro{\lor}[1]}
+\UnaryInfC{$!B \lor !C$}
+\AxiomC{$\Discharge{!B}{x}$}
+\RightLabel{$\delta_3$}
+\shortDeduce
+\DeduceC{$!D$}
+\AxiomC{$\Discharge{!C}{y}$}
+\RightLabel{$\delta_4$}
+\shortDeduce
+\DeduceC{$!D$}
+\DischargeRule{\Elim{\lor}}{x\,y}
+\TrinaryInfC{$!D$}
+\DisplayProof
+\quad \longrightarrow\quad
+\shoveright{\bottomAlignProof
+\AxiomC{}
+\RightLabel{$\delta_2$}
+\shortDeduce
+\DeduceC{$!B$}
+\RightLabel{$\Subst{\delta_3}{\delta_2}{!B^x}$}
+\shortDeduce
+\DeduceC{$!D$}
+\DisplayProof}
+\\[2ex]
+\shoveleft{\bottomAlignProof
+\AxiomC{}
+\RightLabel{$\delta_2$}
+\shortDeduce
+\DeduceC{$!B(c)$}
+\RightLabel{\Intro{\lforall}}
+\UnaryInfC{$\lforall[x][!B(x)]$}
+\RightLabel{\Elim{\lforall}}
+\UnaryInfC{$!B(t)$}
+\DisplayProof
+\quad \longrightarrow\quad
+\bottomAlignProof
+\AxiomC{}
+\RightLabel{$\Subst{\delta_2}{t}{c}$}
+\shortDeduce
+\DeduceC{$!B(t)$}
+\DisplayProof}
+\\[4ex]
+\shoveright{\bottomAlignProof
+\AxiomC{}
+\RightLabel{$\delta_2$}
+\shortDeduce
+\DeduceC{$!B(t)$}
+\RightLabel{\Intro{\lexists}}
+\UnaryInfC{$\lexists[x][!B(x)]$}
+\AxiomC{$\Discharge{!B(c)}{x}$}
+\RightLabel{$\delta_3$}
+\shortDeduce
+\DeduceC{$!D$}
+\DischargeRule{\Elim{\lexists}}{x}
+\BinaryInfC{$!D$}
+\DisplayProof
+\quad \longrightarrow\quad
+\bottomAlignProof
+\AxiomC{}
+\RightLabel{$\delta_2$}
+\shortDeduce
+\DeduceC{$!B(t)$}
+\RightLabel{$\Subst{\Subst{\delta_3}{t}{c}}{\delta_2}{!B(t)^x}$}
+\shortDeduce
+\DeduceC{$!D$}
+\DisplayProof}
+\end{multline*}
+\caption{بعض تحويلات الاختزال في~\Log{N1i}.}
+\ollabel{tab:reduction-conversions}
+\end{table}
+
+\begin{prob}
+اكتب تحويل الاختزال لـ~\Intro{\lnot} متبوعةً بـ~\Elim{\lnot}.
+\end{prob}
+
+تبقى حالة واحدة للنظر. يشمل تعريف القطع الحالة التي يكون فيها طول القطع
+$1$ وتكون~$!A$ نتيجة~\FalseInt{} ومقدمةً كبرى لاستدلال~!!a{elimination}
+في الوقت نفسه. وتُعالج هذه الحالة بطريقة شبيهة بالحالة التي تكون فيها~$!A$
+نتيجة قاعدة~!!a{introduction}. فمثلًا، استبدل
+\[
+\bottomAlignProof
+\AxiomC{}
+\RightLabel{$\delta_2$}
+\DeduceC{$\lfalse$}
+\RightLabel{\FalseInt}
+\UnaryInfC{$!B \lif !C$}
+\AxiomC{}
+\RightLabel{$\delta_3$}
+\DeduceC{$!B$}
+\RightLabel{\Elim{\lif}}
+\BinaryInfC{$!C$}
+\DisplayProof
+\quad\text{بـ}\quad
+\bottomAlignProof
+\AxiomC{}
+\RightLabel{$\delta_2$}
+\DeduceC{$\lfalse$}
+\RightLabel{\FalseInt}
+\UnaryInfC{$!C$}
+\DisplayProof
+\]
+وينبغي بعض الحذر في حالتي~$!A \ident (!B \lor !C)$ و
+$!A \ident \lexists[x][!B(x)]$. فمثلًا، لو استبدلنا
+\[
+\bottomAlignProof
+\AxiomC{}
+\RightLabel{$\delta_2$}
+\DeduceC{$\lfalse$}
+\RightLabel{\FalseInt}
+\UnaryInfC{$!B \lor !C$}
+\AxiomC{$\Discharge{!B}{x}$}
+\RightLabel{$\delta_3$}
+\DeduceC{$!D$}
+\AxiomC{$\Discharge{!C}{y}$}
+\RightLabel{$\delta_4$}
+\DeduceC{$!D$}
+\DischargeRule{\Elim{\lor}}{x\,y}
+\TrinaryInfC{$!D$}
+\DisplayProof
+\quad\text{بـ}\quad
+\bottomAlignProof
+\AxiomC{}
+\RightLabel{$\delta_2$}
+\DeduceC{$\lfalse$}
+\RightLabel{\FalseInt}
+\UnaryInfC{$!D$}
+\DisplayProof
+\]
+لربما أنشأنا قطعًا جديدًا~!!{formula} قطعه~$!D$، ولا ضمان أن
+$\depth{!D} < \depth{!B \lor !C}$!{} لذلك ينبغي أن نسلك هنا المسلك نفسه
+الذي سلكناه في اختزال~\Intro{\lor}/\Elim{\lor}، فنستبدل به ما يأتي:
+\[
+\bottomAlignProof
+\AxiomC{}
+\RightLabel{$\delta_2$}
+\DeduceC{$\lfalse$}
+\RightLabel{\FalseInt}
+\UnaryInfC{$!B$}
+\RightLabel{$\delta_3$}
+\DeduceC{$!D$}
+\DisplayProof
+\quad\text{أو}\quad
+\bottomAlignProof
+\AxiomC{}
+\RightLabel{$\delta_2$}
+\DeduceC{$\lfalse$}
+\RightLabel{\FalseInt}
+\UnaryInfC{$!C$}
+\RightLabel{$\delta_4$}
+\DeduceC{$!D$}
+\DisplayProof
+\]
+
+\end{document}

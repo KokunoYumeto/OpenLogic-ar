@@ -1,0 +1,125 @@
+% Part: sets-functions-relations
+% Chapter: infinite
+% Section: dedekind
+%
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid[ar]{sfr}{infinite}{dedekind}
+\olsection{جبرات ديديكند}
+
+لا نريد للأعداد الطبيعية أن تكون لا نهائية فحسب؛ بل نريد لها أن تتمتع
+بخواص (جبرية) معينة: فيلزم أن تسلك سلوكًا حسنًا تحت الجمع والضرب وما
+إلى ذلك.
+
+كانت فكرة ديديكند أن يتخذ مفهوم \emph{دالة اللاحق} مفهومًا أساسيًا، ثم
+يصف الأعداد بأنها الأشياء ذات الخواص الآتية:
+\begin{enumerate}
+	\item يوجد عدد، $0$، ليس لاحقًا لأي عدد
+	\\أي إن $0 \notin \ran{s}$
+	\\أي إن $\forall x\ s(x) \neq 0$
+	\item للأعداد المتمايزة لواحق متمايزة
+	\\أي إن $s$ هي !!a{injection}
+	\\أي إن $\forall x \forall y (s(x) = s(y) \lif x = y)$
+	\item\ollabel{repeatedapplication} يُحصل على كل عدد من
+	$0$ بتطبيق دالة اللاحق مرارًا.
+\end{enumerate}
+يسهل تناول الشرطين الأولين باستعمال منطق الرتبة الأولى (انظر أعلاه).
+لكن لا يمكننا تناول \olref{repeatedapplication} باستعمال منطق الرتبة
+الأولى وحده. وكان إنجاز ديديكند الحاسم أن أعاد صياغة الشرط
+\olref{repeatedapplication} بلغة نظرية المجموعات كما يأتي:
+\begin{enumerate}
+	\item[3$'$.] الأعداد الطبيعية هي أصغر مجموعة
+	\emph{منغلقة تحت دالة اللاحق}: أي إننا إذا طبقنا $s$ على أي
+	!!{element} من المجموعة، حصلنا على !!{element} آخر من المجموعة.
+\end{enumerate}
+لكن سيلزمنا أن نبسط ذلك على مهل.
+
+\begin{defn}\ollabel{Closure}
+	لكل دالة $f$، تكون المجموعة $X$ \emph{منغلقة} تحت $f$
+	{إذا وفقط إذا} كان $(\forall x \in X)f(x) \in X$. والآن نعرّف، لكل $o$:
+	$$\closureofunder{f}{o} = \bigcap\Setabs{X}{o \in X\text{ و}X
+\text{ منغلقة تحت $f$}}$$
+\end{defn}
+
+إذن $\closureofunder{f}{o}$ هي تقاطع جميع المجموعات المنغلقة تحت $f$
+التي $o$ فيها !!a{element}. ومن ثم، حدسيًا، تكون
+$\closureofunder{f}{o}$ \emph{أصغر} مجموعة منغلقة تحت $f$، و$o$ فيها
+!!a{element}. وتجعل النتيجة الآتية هذه الفكرة الحدسية دقيقة؛
+\begin{lem}\ollabel{closureproperties}
+	لكل دالة $f$ ولكل $o \in A$:
+	\begin{enumerate}
+		\item\ollabel{closurehaselem} $o \in \closureofunder{f}{o}$؛ و
+		\item\ollabel{closureclosed} $\closureofunder{f}{o}$ منغلقة تحت $f$؛ و
+		\item\ollabel{closuresmallest} إذا كانت $X$ منغلقة تحت $f$ وكان $o \in
+		X$، فإن $\closureofunder{f}{o} \subseteq X$
+	\end{enumerate}
+\end{lem}
+
+\begin{proof}
+لاحظ أن ثمة مجموعة واحدة على الأقل منغلقة تحت $f$، و$o$ فيها
+!!a{element}، وهي $\ran{f}\cup
+\{o\}$. ولذلك يوجد $\closureofunder{f}{o}$، أي تقاطع
+\emph{جميع} المجموعات من هذا القبيل. ويلزمنا الآن أن نتحقق من
+\olref{closurehaselem}--\olref{closuresmallest}.
+
+فيما يخص \olref{closurehaselem}: لدينا $o \in
+\closureofunder{f}{o}$، لأنها تقاطع مجموعات، و$o$ في كل منها
+!!a{element}.
+
+فيما يخص \olref{closureclosed}: افترض أن $x \in
+\closureofunder{f}{o}$. فإذا كان $o \in X$ وكانت $X$ منغلقة تحت $f$،
+كان $x \in X$، وعندئذ يكون $f(x) \in X$ لأن $X$ منغلقة تحت $f$.
+ومن ثم $f(x) \in \closureofunder{f}{o}$.
+
+فيما يخص \olref{closuresmallest}: بوجه عام، إذا كان $X
+\in C$ فإن $\bigcap C \subseteq X$.
+\end{proof}
+
+وباستخدام ذلك يمكننا أن نقول:
+
+\begin{defn}
+\emph{جبر ديديكند} هو مجموعة $A$ مع دالة $f
+\colon A \to A$ وعنصر ما $o \in A$ بحيث:
+	\begin{enumerate}
+		\item \ollabel{ded:proper} $o \notin \ran{f}$
+		\item \ollabel{ded:injection} $f$ هي !!a{injection}
+		\item \ollabel{ded:closure} $A = \closureofunder{f}{o}$
+	\end{enumerate}
+\end{defn}
+
+بما أن $A = \closureofunder{f}{o}$، تخبرنا نتيجتنا السابقة أن $A$ أصغر
+مجموعة منغلقة تحت $f$، و$o$ فيها !!a{element}. ومن الواضح أن جبر
+ديديكند لانهائي بحسب ديديكند؛ فما عليك إلا أن تنظر إلى الشرطين
+\olref{ded:proper} و\olref{ded:injection} من التعريف. لكن الحقيقة الأكثر
+إثارة هي أن كل مجموعة لانهائية بحسب ديديكند يمكن تحويلها إلى جبر
+ديديكند.
+
+\begin{thm}\ollabel{thm:DedekindInfiniteAlgebra}
+إذا وجدت مجموعة لانهائية بحسب ديديكند، وجد جبر ديديكند.
+\end{thm}
+
+\begin{proof}
+لتكن $D$ لانهائية بحسب ديديكند. إذن توجد دالة متباينة $g \colon D \to
+D$ وعنصر $o  \in D \setminus \ran{g}$. والآن لنجعل $A =
+\closureofunder{g}{o}$؛ وبحسب \olref{closureproperties}، توجد $A$ ويكون
+$o \in A$. ولنجعل $f =
+\funrestrictionto{g}{A}$. وسنبين أن $A, f, o$ تشكل جبر ديديكند.
+
+فيما يخص \olref{ded:proper}: لدينا $o \notin \ran{g}$ و$\ran{f}
+\subseteq \ran{g}$، ومن ثم $o\notin \ran{f}$.
+
+فيما يخص \olref{ded:injection}: الدالة $g$ متباينة على $D$؛ ولذلك يجب
+أن تكون $f \subseteq g$ متباينة.
+
+فيما يخص \olref{ded:closure}: بحسب \olref{closureproperties}، تكون $A$
+منغلقة تحت $g$؛ ومن باب أولى تكون $A$ منغلقة تحت $f$. ومن ثم
+$\closureofunder{f}{o} \subseteq A$ بحسب \olref{closureproperties}.
+وبما أن $\closureofunder{f}{o}$ منغلقة أيضًا تحت $f$ وأن $f =
+\funrestrictionto{g}{A}$، يلزم أن تكون $\closureofunder{f}{o}$ منغلقة
+تحت $g$. ولذلك $A \subseteq \closureofunder{f}{o}$ بحسب
+\olref{closureproperties}.
+\end{proof}
+
+\end{document}

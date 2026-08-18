@@ -1,0 +1,70 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{ordinals}{wo}
+\olsection{الترتيبات الجيدة}
+
+المفهوم الأساسي هو الآتي:
+
+\begin{defn}
+تكون العلاقة~$<$ \emph{ترتيبًا جيدًا} على~$A$ إذا وفقط إذا استوفت
+الشرطين الآتيين:
+\begin{enumerate}
+	\item تكون~$<$ متصلة، أي لكل~$a, b \in A$، إما~$a < b$،
+	أو~$a = b$، أو~$b < a$؛
+	\item لكل مجموعة جزئية غير خالية من~$A$ !!{element} أصغري بحسب~$<$،
+	أي إذا كان~$\emptyset \neq X \subseteq A$، فإن
+	$(\exists m \in X)(\forall z \in X)z \nless m$.
+\end{enumerate}
+\end{defn}
+
+يسهل التحقق من أن العلاقات في الأمثلة الثلاثة التي نظرنا فيها للتو
+كانت بالفعل ترتيبات جيدة.
+
+\begin{prob}
+عرض~\Olref[sth][ordinals][idea]{sec} ثلاثة ترتيبات نموذجية على الأعداد
+الطبيعية. تحقق من أن كلًا منها ترتيب جيد.
+\end{prob}
+
+وفيما يأتي بضع ملاحظات أولية، لكنها شديدة الأهمية، بشأن الترتيب الجيد.
+
+\begin{prop}\ollabel{wo:strictorder}
+إذا كانت~$<$ ترتيبًا جيدًا على~$A$، فلكل مجموعة جزئية غير خالية من~$A$
+عنصر أصغر وحيد بحسب~$<$، وتكون~$<$ غير انعكاسية ولا تناظرية ومتعدية.
+\end{prop}
+
+\begin{proof}
+إذا كانت~$X$ مجموعة جزئية غير خالية من~$A$، فلها !!{element} أصغري
+بحسب~$<$، وليكن~$m$؛ أي $(\forall z \in X)z \nless m$. ولما كانت~$<$
+متصلة، كان $(\forall z \in X)m \leq z$. ومن ثم يكون~$m$ أصغر
+!!{element} بحسب~$<$ في~$X$.
+
+ولإثبات عدم الانعكاس، ثبّت~$a \in A$؛ فأصغر !!{element} بحسب~$<$ في
+$\{a\}$ هو~$a$، ولذلك~$a \nless a$. ولإثبات التعدي، إذا كان
+$a < b < c$، فبما أن~$\{a, b, c\}$ لها !!{element} أصغر بحسب~$<$،
+كان~$a < c$. وينتج عدم التناظر من عدم الانعكاس والتعدي.
+\end{proof}
+
+\begin{prop}\ollabel{propwoinduction}
+إذا كانت~$<$ ترتيبًا جيدًا على~$A$، فعندئذ، لكل صيغة~$\phi(x)$:
+\[
+	\text{إذا كان }(\forall a \in A)((\forall b < a)\phi(b) \lif 
+		\phi(a))\text{، فإن }(\forall a \in A)\phi(a).
+\]
+\end{prop}
+
+\begin{proof}
+سنثبت المقابل بالنقيض. افترض~$\lnot(\forall a \in A)\phi(a)$، أي إن
+$X = \Setabs{x \in A}{\lnot\phi(x)} \neq \emptyset$. عندئذ يكون
+لـ$X$ !!{element} أصغري بحسب~$<$، وليكن~$a$. ومن ثم
+$(\forall b < a)\phi(b)$، مع أن~$\lnot \phi(a)$.
+\end{proof}\noindent
+ينبغي أن تذكرك هذه الخاصية الأخيرة بمبدأ الاستقراء القوي على الأعداد
+الطبيعية، أي: إذا كان
+$(\forall n \in \omega)((\forall m < n)\phi(m) \lif \phi(n))$، فإن
+$(\forall n \in \omega)\phi(n)$. وهذه الخاصية هي ما يجعل الترتيب
+الجيد مفهومًا بالغ \emph{المتانة}.
+\footnote{تذكير: يجوز أن تكون لجميع الصيغ معاملات (ما لم يُصرح بخلاف ذلك).}
+
+\end{document}

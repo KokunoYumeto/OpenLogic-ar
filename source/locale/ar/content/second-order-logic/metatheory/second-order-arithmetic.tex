@@ -1,0 +1,130 @@
+% Part: second-order-logic
+% Chapter: metatheory
+% Section: second-order-arithmetic
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sol}{met}{spa}
+
+\olsection{حساب الرتبة الثانية}
+
+تذكّر أن نظرية حساب بيانو~$\Th{PA}$ تشمل البديهيات الثماني لـ$\Th{Q}$:
+\begin{align*}
+& \lforall[x][\eq/[x'][\Obj 0]]\\
+& \lforall[x][\lforall[y][(\eq[x'][y'] \lif \eq[x][y])]]\\
+& \lforall[x][(\eq[x][\Obj 0] \lor \lexists[y][\eq[x][y']])]\\ 
+& \lforall[x][\eq[(x + \Obj 0)][x]]\\
+& \lforall[x][\lforall[y][\eq[(x + y')][(x + y)']]]\\
+& \lforall[x][\eq[(x \times \Obj 0)][\Obj 0]]\\
+& \lforall[x][\lforall[y][\eq[(x \times y')][((x \times y) + x)]]]\\
+& \lforall[x][\lforall[y][(x < y \liff \lexists[z][\eq[(z' + x)][y]])]]\\
+\intertext{مضافًا إليها جميع الجمل من الصورة}
+& (!A(\Obj 0) \land \lforall[x][(!A(x) \lif !A(x'))]) \lif \lforall[x][!A(x)].
+\end{align*}
+والأخيرة «مخطط»، أي نمط يولد عددًا لانهائيًا من~!!{sentence}s لغة
+الحساب، واحدة لكل~!!{formula}~$!A(x)$. ونسمي هذا المخطط
+\emph{مخطط بديهية الاستقراء} (من الرتبة الأولى).
+أما في حساب بيانو \emph{من الرتبة الثانية}~$\Th{PA^2}$، فيمكن تقرير
+الاستقراء بجملة واحدة. وتتألف~$\Th{PA^2}$ من البديهيات الثماني الأولى
+أعلاه، مضافًا إليها \emph{بديهية الاستقراء} (من الرتبة الثانية):
+\[
+\lforall[X][((X(\Obj 0) \land \lforall[x][(X(x) \lif X(x'))]) \lif \lforall[x][X(x)])].
+\]
+وهي تقول إنه إذا كانت مجموعة جزئية~$X$ من الـ!!{domain} تحتوي
+على~$\Assign{\Obj{0}}{M}$، وتحتوي مع كل~$x \in \Domain{M}$ أيضًا
+على~$\Assign{\prime}{M}(x)$ (أي إنها «مغلقة تحت الخلف»)، فإنها تحتوي
+كل ما في الـ!!{domain} (أي إن~$X = \Domain{M})$.
+
+وتضمن بديهية الاستقراء ألا تحتوي أي~!!{structure} تحققها إلا
+الـ!!{element}s من~$\Domain{M}$ التي تقتضي البديهيات وجودها؛ أي قيم
+$\num{n}$ لكل~$n \in \Nat$. فلا يحتوي أي نموذج لـ$\Th{PA^2}$ أعدادًا
+غير قياسية.
+
+\begin{thm}
+\ollabel{thm:sol-pa-standard}
+إذا كانت~$\Sat{M}{\Th{PA^2}}$، فإن~$\Domain{M} =
+\Setabs{\Value{\num{n}}{M}}{n \in \Nat}$.
+\end{thm}
+
+\begin{proof}
+لتكن~$N = \Setabs{\Value{\num{n}}{M}}{n \in \Nat}$، وافترض أن
+$\Sat{M}{\Th{PA^2}}$. ومن الواضح، لكل~$n \in \Nat$، أن
+$\Value{\num{n}}{M} \in \Domain{M}$؛ ومن ثم~$N \subseteq \Domain{M}$.
+
+ننتقل الآن إلى الاحتواء في الاتجاه الآخر. تأمل تعيين متغيرات~$s$
+بحيث~$s(X) = N$. وبحسب الفرض،
+\begin{align*}
+\Sat{M}{\lforall[X][((X(\Obj 0) \land \lforall[x][(X(x)
+      \lif X(x'))]) \lif \lforall[x][X(x)])]}, & \text{ومن ثم}\\
+\Sat{M}{(X(\Obj 0) \land \lforall[x][(X(x) \lif X(x'))]) \lif
+  \lforall[x][X(x)]}[s]. & 
+\end{align*}
+تأمل مقدم هذه الشرطية. لدينا~$\Value{\Obj{0}}{M} \in N$، ومن ثم
+$\Sat{M}{X(\Obj{0})}[s]$. والحد الثاني،
+$\lforall[x][(X(x) \lif X(x'))]$، محقق أيضًا. فلنفترض أن~$x \in
+N$. بحسب تعريف~$N$، يكون~$x = \Value{\num{n}}{M}$ لبعض~$n$. ومن ذلك
+نحصل على~$\Assign{\prime}{M}(x) = \Value{\num{n+1}}{M} \in N$. إذن
+$\Assign{\prime}{M}(x) \in N$.
+
+وهكذا لدينا~$\Sat{M}{X(\Obj 0) \land \lforall[x][(X(x) \lif X(x'))]}[s]$.
+وبالتالي~$\Sat{M}{\lforall[x][X(x)]}[s]$. لكن هذا يعني أن
+$x \in s(X) = N$ لكل~$x \in \Domain{M}$. ومن ثم~$\Domain{M}
+\subseteq N$.
+\end{proof}
+
+\begin{cor}
+\ollabel{cor:sol-pa-categorical}
+أي نموذجين لـ$\Th{PA^2}$ متماثلان بنيويًا.
+\end{cor}
+
+\begin{proof}
+بحسب~\olref{thm:sol-pa-standard}، تستنفد
+$\Value{\num{n}}{M}$ مجال أي نموذج لـ$\Th{PA^2}$. وكل نموذج من هذا
+القبيل نموذج أيضًا لـ$\Th{Q}$. وبحسب
+\olref[mod][mar][stm]{prop:thq-standard}، يكون كل نموذج كهذا قياسيًا؛
+أي متماثلًا بنيويًا مع~$\Struct{N}$.
+\end{proof}
+
+عرّفنا~$\Th{PA^2}$ أعلاه بأنها النظرية التي تحتوي البديهيات الحسابية
+الثماني الأولى وبديهية الاستقراء من الرتبة الثانية. والواقع أنه، بفضل
+القوة التعبيرية لمنطق الرتبة الثانية، لا يحتاج حساب بيانو من الرتبة
+الثانية إلا إلى البديهتين الحسابيتين \emph{الأوليين} مع الاستقراء.
+
+\begin{prop}\ollabel{prop:sol-pa-definable}
+لتكن~$\Th{PA^{2\dagger}}$ نظرية الرتبة الثانية التي تحتوي البديهتين
+الحسابيتين الأوليين (بديهيتي الخلف) وبديهية الاستقراء من الرتبة الثانية.
+عندئذ تكون~$\le$ و$+$ و$\times$ قابلة للتعريف في
+$\Th{PA^{2\dagger}}$.
+\end{prop}
+
+\begin{proof}
+لإثبات أن~$\le$ قابلة للتعريف، علينا أن نجد صيغة~$!A_\le(x, y)$
+بحيث تكون~$\Sat{N}{!A_\le(\num n, \num m)}$ إذا وفقط إذا كان
+$n \le m$. تأمل الصيغة
+\[
+!B(x, Y) \ident Y(x) \land \lforall[y][(Y(y) \lif Y(y'))]
+\]
+من الواضح أن~$!B(\num n, Y)$ تحققها مجموعة~$Y \subseteq \Nat$ إذا
+وفقط إذا كانت~$\Setabs{m}{n \le m} \subseteq Y$؛ ومن ثم يمكننا أن
+نأخذ~$!A_\le(x, y) \ident
+\lforall[Y][(!B(x, Y) \lif Y(y))]$.
+
+ولرؤية أن الجمع قابل للتعريف، لاحظ أن~$k+l=m$ إذا وفقط إذا وجدت
+دالة~$u$ بحيث~$u(0)=k$ و$u(n')=u(n)'$ لكل~$n$، و$m = u(l)$.
+ويمكننا استعمال هذا التكافؤ لتعريف الجمع في~$\Th{PA^{2\dagger}}$
+بالصيغة الآتية:
+\[
+!A_+(x,y,z) \ident \lexists[u][(u(\Obj 0)=x \land \lforall[w][u(w')=u
+ (w)'] \land u(y)=z)]
+\] 
+وينبغي أن يكون واضحًا أن~$\Sat{N}{!A_+(\num k, \num l, \num m)}$
+إذا وفقط إذا كان~$k+l=m$.
+\end{proof}
+
+\begin{prob}
+أكمل برهان~\olref[sol][met][spa]{prop:sol-pa-definable}.
+\end{prob}
+
+\end{document}

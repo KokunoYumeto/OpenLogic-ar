@@ -1,0 +1,125 @@
+% Part: model-theory
+% Chapter: interpolation
+% Section: definability
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{int}{def}
+
+\olsection{مبرهنة قابلية التعريف}
+
+من التطبيقات المهمة لمبرهنة الاستيفاء مبرهنة بث في قابلية التعريف.
+لتعريف علاقة~$R$ ذات $n$ مواضع، يمكننا إعطاء !!a{formula}~$!C$ لها
+$n$~!!{variable}s حرة ولا تتضمن~$R$. وهذا تعريف \emph{صريح} لـ$R$
+بدلالة~$!C$. ويمكننا أيضًا أن نقول إن نظرية~$\Sigma(P)$ في !!a{language}
+تحتوي الـ!!{predicate}~$P$ ذا $n$ مواضع تعرّف~$P$ تعريفًا صريحًا إذا
+كانت تحتوي (أو على الأقل تستلزم) تعريفًا صريحًا مصوغًا رسميًا، أي:
+\[
+\Sigma(P) \Entails \lforall[x_1][\dots
+  \lforall[x_n][(\Atom{P}{x_1,\dots, x_n} \liff !C(x_1, \dots,
+    x_n))]].
+\]
+لكن التعريف الصريح ليس إلا طريقة واحدة للتعريف، بمعنى التعيين التام،
+لعلاقة. فقد تكون النظرية بحيث يتعين تفسير~$P$ بتفسير بقية الـ!!{language}
+في كل نموذج. وتقرر مبرهنة قابلية التعريف أنه متى عينت النظرية تفسير~$P$
+بهذه الطريقة، أي متى \emph{عرّفت $P$ ضمنيًا}، فإنها تعرّفه صراحة أيضًا.
+
+\begin{defn}
+افترض أن $\Lang{L}$~!!a{language} لا تحتوي الـ!!{predicate}~$P$.
+تعرّف مجموعة~$\Sigma(P)$ من !!{sentence}s~$\Lang{L} \cup \{P\}$
+المحمول~$P$ \emph{تعريفًا صريحًا} إذا وفقط إذا وجدت
+!!a{formula}~$!C(x_1,\dots,x_n)$ من $\Lang{L}$ بحيث
+\[
+\Sigma(P) \Entails \lforall[x_1][\dots
+  \lforall[x_n][(\Atom{P}{x_1,\dots, x_n} \liff !C(x_1, \dots,
+    x_n))]].
+\]
+\end{defn}
+
+\begin{defn}
+افترض أن $\Lang{L}$~!!a{language} لا تحتوي الـ!!{predicate}s~$P$ و
+$P'$. تعرّف مجموعة~$\Sigma(P)$ من !!{sentence}s~$\Lang{L} \cup \{P\}$
+المحمول~$P$ \emph{تعريفًا ضمنيًا} إذا وفقط إذا كان
+\[
+\Sigma(P) \cup \Sigma(P') \Entails \lforall[x_1][\dots
+  \lforall[x_n][(\Atom{P}{x_1,\dots, x_n} \liff \Atom{P'}{x_1,\dots,
+      x_n})]],
+\]
+حيث $\Sigma(P')$ ناتجة من إحلال $P'$ محل $P$ بانتظام في $\Sigma(P)$.
+\end{defn}
+
+وبعبارة أخرى، لأي نموذج~$\Struct{M}$ وأي
+$R,R' \subseteq \Domain{M}^n$، إذا كان كل من
+$\Expan{M}{R} \Entails \Sigma(P)$ و
+$\Expan{M}{R'} \Entails \Sigma(P')$، فإن $R=R'$؛ حيث
+$\Expan{M}{R}$ هي الـ!!{structure}~$\Struct{M'}$ لتوسيع $\Lang{L}$
+إلى $\Lang{L} \cup \{P\}$ بحيث $\Assign{P}{M'}=R$، وبالمثل لـ
+$\Expan{M}{R'}$.
+
+\begin{thm}[مبرهنة بث في قابلية التعريف]
+تعرّف مجموعة~$\Sigma(P)$ من !!{sentence}s~$\Lang{L} \cup \{P\}$
+المحمول~$P$ تعريفًا ضمنيًا إذا وفقط إذا كانت $\Sigma(P)$ تعرّف~$P$
+تعريفًا صريحًا.
+\end{thm}
+
+\begin{proof}
+إذا كانت $\Sigma(P)$ تعرّف $P$ تعريفًا صريحًا، كان
+\begin{align*}
+  \Sigma(P) & \Entails & \lforall[x_1][\dots \lforall[x_n]
+    [(\Atom{P}{x_1,\dots, x_n} \liff !C(x_1,\dots,x_n))]]\\
+  \Sigma(P') & \Entails & \lforall[x_1][\dots \lforall[x_n]
+    [(\Atom{P'}{x_1,\dots, x_n} \liff !C(x_1,\dots,x_n))]]
+\end{align*}
+وتتبع النتيجة. ولإثبات العكس، افترض أن $\Sigma(P)$ تعرّف~$P$ تعريفًا
+ضمنيًا. أولًا نضيف الـ!!{constant}s~$c_1$، \dots،~$c_n$ إلى
+$\Lang{L}$. عندئذ
+\[
+\Sigma(P) \cup \Sigma(P') \Entails
+\Atom{P}{c_1, \dots, c_n} \to \Atom{P'}{c_1, \dots, c_n}.
+\]
+وبالتراص توجد مجموعتان منتهيتان
+$\Delta_0 \subseteq \Sigma(P)$ و$\Delta_1 \subseteq \Sigma(P')$ بحيث
+\[
+\Delta_0 \cup \Delta_1 \Entails
+\Atom{P}{c_1, \dots, c_n} \to \Atom{P'}{c_1, \dots, c_n}.
+\]
+لتكن $!D(P)$ اقتران جميع الـ!!{sentence}s~$!A(P)$ بحيث إما أن
+$!A(P) \in \Delta_0$ أو أن $!A(P') \in \Delta_1$، ولتكن $!D(P')$
+اقتران جميع الـ!!{sentence}s~$!A(P')$ بحيث إما أن
+$!A(P) \in \Delta_0$ أو أن $!A(P') \in \Delta_1$. عندئذ
+$!D(P) \land !D(P') \Entails \Atom{P}{c_1,\dots,c_n} \to
+\Atom{P'}{c_1,\dots,c_n}$. ويمكننا إعادة ترتيب هذا بحيث يقع كل
+!!{predicate} على جانب واحد من $\Entails$:
+\[
+!D(P) \land \Atom{P}{c_1, \dots, c_n} \Entails
+!D(P') \to \Atom{P'}{c_1, \dots, c_n}.
+\]
+وبمبرهنة كريغ في الاستيفاء توجد !!a{sentence}~$!C(c_1,\dots,c_n)$ لا
+تحتوي $P$ أو $P'$ بحيث:
+\begin{align*}
+  !D(P) \land \Atom{P}{c_1, \dots, c_n} & \Entails !C(c_1,\dots, c_n); \\
+  !C(c_1,\dots, c_n) & \Entails !D(P') \to \Atom{P'}{c_1, \dots, c_n}.
+\end{align*}
+من أول هذين الاستلزامين نحصل على
+$!D(P) \Entails \Atom{P}{c_1,\dots,c_n} \lif !C(c_1,\dots,c_n)$.
+ومن الثاني، لما كان نموذج $\Lang{L} \cup \{P\}$
+$\Expan{M}{R} \models !A(P)$ إذا وفقط إذا كان نموذج
+$\Lang{L} \cup \{P'\}$ المقابل $\Expan{M}{R} \models !A(P')$، نحصل
+على $!C(c_1,\dots,c_n) \Entails !D(P) \lif
+\Atom{P}{c_1,\dots,c_n}$، ومنه:
+\[
+!D(P) \Entails !C(c_1,\dots,c_n) \to \Atom{P}{c_1,\dots, c_n}.
+\]
+وبضم النتيجتين، يكون
+$!D(P) \Entails \Atom{P}{c_1,\dots,c_n} \liff
+!C(c_1,\dots,c_n)$، وبالرتابة والتعميم أيضًا:
+\[
+\Sigma(P) \Entails
+\lforall[x_1][\dots\lforall[x_n][(\Atom{P}{x_1,\dots, x_n} \liff
+    !C(x_1,\dots, x_n))]].
+\]
+\end{proof}
+
+\end{document}

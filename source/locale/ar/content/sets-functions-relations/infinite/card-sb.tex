@@ -1,0 +1,104 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid[ar]{sfr}{infinite}{card-sb}
+
+\olsection{ملحق: إثبات مبرهنة شرودر–برنشتاين}
+
+قبل أن نغادر نظرية المجموعات الساذجة، بقي لنا برهان ساذج أخير (لكنه
+متطور!) ننظر فيه. وهذا برهان مبرهنة شرودر–برنشتاين
+(\olref[sfr][siz][sb]{thm:schroder-bernstein}): إذا كان
+$\cardle{A}{B}$ و$\cardle{B}{A}$، فإن $\cardeq{A}{B}$؛ أي إنه إذا
+أعطيت !!{injection}s $f \colon A \to B$ و$g \colon B \to A$، وجدت
+!!a{bijection} $h \colon A \to B$.
+
+اتبعنا في هذا الفصل مفهوم ديديكند عن \emph{الإغلاقات}. والواقع أن
+ديديكند قدم برهانًا جميلًا لمبرهنة شرودر–برنشتاين باستعمال هذا
+المفهوم، وسنعرضه هنا. ويتبع البرهان عن كثب معالجة
+\citet[صص.~157--8]{Potter2004}، إن أردت معالجة مختلفة قليلًا لكنها
+مشابهة في جوهرها. وسيقنعك قليل من البحث في غوغل أيضًا بأن لهذه
+المبرهنة---شأنها إلى حد ما شأن كون $\sqrt{2}$ غير نسبي---براهين
+\emph{كثيرة} ممتعة ومختلفة.
+
+وباستخدام ترميز شبيه بما في
+\olref[sfr][infinite][dedekind]{Closure}، لتكن
+\[
+\Closureofunder{f}{B} = \bigcap \Setabs{X}{B \subseteq X
+\text{ و$X$ منغلقة تحت $f$}}
+\]
+لكل مجموعة $B$ ودالة~$f$. وبحسب هذا التعريف، تكون
+$\Closureofunder{f}{B}$ أصغر مجموعة منغلقة تحت $f$ وتحتوي~$B$، بمعنى
+ما يأتي:
+
+\begin{lem}\ollabel{Closureprops}
+	لكل دالة $f$ ولكل $B$:
+	\begin{enumerate}
+		\item\ollabel{Closurehaselem} $B \subseteq \Closureofunder{f}{B}$؛ و
+		\item\ollabel{Closureclosed} $\Closureofunder{f}{B}$ منغلقة تحت $f$؛ و
+		\item\ollabel{Closuresmallest} إذا كانت $X$ منغلقة تحت $f$ وكان $B
+		\subseteq X$، فإن $\Closureofunder{f}{B} \subseteq X$.
+	\end{enumerate}
+\end{lem}
+
+\begin{proof}
+تمامًا كما في \olref[sfr][infinite][dedekind]{closureproperties}.
+\end{proof}
+
+نحتاج إلى حقيقة أخيرة لنصل إلى مبرهنة شرودر–برنشتاين:
+
+\begin{prop}\ollabel{sbhelper}
+إذا كان $A \subseteq B \subseteq C$ وكان $A \approx C$، فإن $\cardeq{\cardeq{A}{B}}{C}$.
+\end{prop}
+
+\begin{proof}
+إذا أعطيت !!a{bijection} $f \colon C \to A$، فلتكن $F =
+\Closureofunder{f}{C \setminus B}$، وعرّف دالة $g$ مجالها $C$ كما
+يأتي:
+\[
+	g(x) =
+	\begin{cases}
+			f(x) &\text{إذا كان $x \in F$}\\
+			x & \text{فيما عدا ذلك}
+		\end{cases}
+\]
+سنبيّن أن $g$ هي !!a{bijection} $C \to B$، ومن ذلك يلزم أن
+$\comp{f^{-1}}{g} \colon A \to B$ هي !!a{bijection}، فيكتمل البرهان.
+
+ندعي أولًا أنه إذا كان $x \in F$ وكان $y\notin F$، فإن $g(x) \neq
+g(y)$. وافترض، برهانًا بالخلف، خلاف ذلك، فيكون $y = g(y) = g(x) =
+f(x)$. وبما أن $x \in F$ وأن $F$ منغلقة تحت $f$ بحسب
+\olref{Closureprops}، يكون $y = f(x) \in F$، وهذا تناقض.
+
+والآن افترض أن $g(x) = g(y)$. إذن، بحسب ما سبق، يكون $x \in F$ إذا
+وفقط إذا كان $y \in F$. فإذا كان $x, y \in F$، كان $f(x) = g (x) =
+g(y) = f(y)$، ومن ثم $x = y$ لأن $f$ هي !!a{bijection}. وإذا كان
+$x, y \notin F$، كان $x = g(x) = g(y) = y$. ومن ثم تكون $g$
+!!a{injection}.
+
+يبقى أن نبين أن $\ran{g} = B$. فثبّت $x \in B \subseteq C$. إذا كان
+$x \notin F$، فإن $g(x) = x$. وإذا كان $x \in F$، فإن $x = f(y)$
+لبعض $y \in F$؛ إذ لو لم يكن الأمر كذلك، لكانت $F \setminus \{x\}$
+منغلقة تحت $f$ وتحتوي $C\setminus B$، وهذا محال بحسب
+\olref{Closureprops}؛ والآن $g(y) = f(y) = x$.
+\end{proof}
+
+وأخيرًا، إليك برهان النتيجة الرئيسة. تذكر أننا، إذا أعطينا دالة $h$
+ومجموعة $D$، عرّفنا $\funimage{h}{D} = \Setabs{h(x)}{x
+\in D}$.
+
+\begin{proof}[برهان مبرهنة شرودر–برنشتاين] لتكن $f \colon A \to B$
+و$g \colon B \to A$ !!{injection}s. وبما أن $\funimage{f}{A}
+\subseteq B$، فإن $\funimage{g}{\funimage{f}{A}} \subseteq
+g[B] \subseteq A$. وكذلك تكون $\comp{f}{g} \colon A \to
+\funimage{g}{\funimage{f}{A}}$ !!{injection} لأن كلًا من $g$ و
+$f$ كذلك؛ بل إن $\comp{f}{g}$ هي !!a{bijection} بحكم الطريقة التي
+عرّفنا بها مجالها المقابل. ومن ثم
+$\cardeq{\funimage{g}{\funimage{f}{A}}}{A}$، وبحسب
+\olref{sbhelper} توجد !!a{bijection} $h \colon A \to
+\funimage{g}{B}$. وإضافة إلى ذلك، تكون $g^{-1}$ !!a{bijection}
+$\funimage{g}{B} \to B$. ومن ثم تكون $\comp{h}{g^{-1}} \colon A \to B$
+!!a{bijection}.
+\end{proof}
+
+\end{document}

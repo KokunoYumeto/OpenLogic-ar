@@ -1,0 +1,121 @@
+% Part: first-order-logic
+% Chapter: sequent-calculus
+% Section: derivations
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{seq}{der}}
+      {\olfileid{pl}{seq}{der}}
+
+\olsection{\usetoken{P}{derivation}}
+
+\begin{explain}
+سبق أن بيّنا صورة التتابعية الابتدائية، وقدمنا قواعد الاستدلال.
+وتتولد ال!!^{derivation}s في حساب التتابعيات استقرائيًا من هذه
+المعطيات: فكل !!{derivation} إما أن يكون تتابعية ابتدائية قائمة
+بنفسها، وإما أن يتألف من واحد أو اثنين من ال!!{derivation}s يتلوهما
+استدلال.
+\end{explain}
+
+\begin{defn}[$\Log{LK}$: !!{derivation}]
+إن \emph{$\Log{LK}$-!!{derivation}} لتتابعية~$S$ شجرة منتهية من
+التتابعيات تحقق الشروط الآتية:
+\begin{enumerate}
+\item التتابعيات العليا في الشجرة تتابعيات ابتدائية.
+\item التتابعية السفلى في الشجرة هي~$S$.
+\item كل تتابعية في الشجرة عدا~$S$ مقدمة لتطبيق صحيح لقاعدة استدلال
+  تقع نتيجته تحت تلك التتابعية مباشرةً في الشجرة.
+\end{enumerate}
+ونسمّي عندئذٍ~$S$ \emph{التتابعية النهائية} لل!!{derivation}، ونقول
+إن~$S$ \emph{!!{derivable} في $\Log{LK}$} (أو
+$\Log{LK}$-!!{derivable}).
+\end{defn}
+
+\begin{ex}
+كل تتابعية ابتدائية، مثل~$!C \Sequent !C$، هي !!a{derivation}. ويمكننا
+أن نحصل منها على !!{derivation} جديد بتطبيق القاعدة
+$\LeftR{\Weakening}$ مثلًا،
+\begin{prooftree}
+\Axiom$ \Gamma \fCenter \Delta $
+\RightLabel{\LeftR{\Weakening}}
+\UnaryInf$ !A, \Gamma \fCenter \Delta$
+\end{prooftree}
+غير أن المقصود بالقاعدة أن تكون عامة: فيمكننا أن نستبدل~$!A$ في
+القاعدة بأي !!{sentence}، ومن ذلك~$!D$ مثلًا. ولكي تطابق المقدمة
+تتابعيتنا الابتدائية~$!C \Sequent !C$، لا بد أن يكون كل من~$\Gamma$
+و$\Delta$ هو~$!C$ فحسب، وعندئذ تكون النتيجة
+$!D, !C \Sequent !C$. ومن ثم فإن ما يأتي !!a{derivation}:
+\begin{prooftree}
+\Axiom$ !C \fCenter !C $
+\RightLabel{\LeftR{\Weakening}}
+\UnaryInf$ !D, !C \fCenter !C$
+\end{prooftree}
+يمكننا الآن تطبيق قاعدة أخرى، ولتكن~$\LeftR{\Exchange}$، وهي تتيح لنا
+تبديل !!{sentence}s اثنتين في الجانب الأيسر. ومن ثم فإن ما يأتي أيضًا
+!!{derivation} صحيح:
+\begin{prooftree}
+\Axiom$ !C \fCenter !C $
+\RightLabel{\LeftR{\Weakening}}
+\UnaryInf$ !D, !C \fCenter !C$
+\RightLabel{\LeftR{\Exchange}}
+\UnaryInf$ !C, !D \fCenter !C$
+\end{prooftree}
+وفي هذا التطبيق للقاعدة، التي عُرضت على الصورة
+\begin{prooftree}
+\Axiom$ \Gamma, !A, !B, \Pi \fCenter \Delta $
+\RightLabel{\LeftR{\Exchange}}
+\UnaryInf$ \Gamma, !B, !A, \Pi \fCenter \Delta,$
+\end{prooftree}
+كان كل من~$\Gamma$ و$\Pi$ خاليًا، وكانت~$\Delta$ هي~$!C$، وأدى
+دوري~$!A$ و$!B$ كل من~$!D$ و~$!C$ على الترتيب. وبالطريقة نفسها
+تقريبًا نرى أيضًا أن
+\begin{prooftree}
+\Axiom$ !D \fCenter !D $
+\RightLabel{\LeftR{\Weakening}}
+\UnaryInf$ !C, !D \fCenter !D$
+\end{prooftree}
+هو !!a{derivation}. والآن يمكننا أخذ هذين ال!!{derivation}s ودمجهما
+باستعمال~$\RightR{\land}$. وقد عُرضت تلك القاعدة على الصورة
+\begin{prooftree}
+\Axiom$\Gamma \fCenter \Delta, !A$
+\Axiom$ \Gamma \fCenter \Delta, !B$
+\RightLabel{\RightR{\land}}
+\BinaryInf$ \Gamma \fCenter \Delta, !A \land !B $
+\end{prooftree}
+وفي حالتنا، يجب أن تطابق المقدمتان التتابعيتين الأخيرتين
+لل!!{derivation}s المنتهيين بالمقدمتين. وهذا يعني أن~$\Gamma$ هي
+$!C, !D$، وأن~$\Delta$ خالية، وأن~$!A$ هي~$!C$ و$!B$ هي~$!D$.
+ومن ثم تكون النتيجة، لكي يكون الاستدلال صحيحًا،
+$!C, !D \Sequent !C \land !D$.
+\begin{prooftree}
+\Axiom$ !C \fCenter !C $
+\RightLabel{\LeftR{\Weakening}}
+\UnaryInf$ !D, !C \fCenter !C$
+\RightLabel{\LeftR{\Exchange}}
+\UnaryInf$ !C, !D \fCenter !C$
+\Axiom$ !D \fCenter !D $
+\RightLabel{\LeftR{\Weakening}}
+\UnaryInf$ !C, !D \fCenter !D$
+\RightLabel{\RightR{\land}}
+\BinaryInf$ !C, !D \fCenter !C \land !D $
+\end{prooftree}
+وبالطبع يمكننا أيضًا عكس المقدمتين؛ وعندئذ تكون~$!A$ هي~$!D$،
+وتكون~$!B$ هي~$!C$. 
+\begin{prooftree}
+\Axiom$ !D \fCenter !D $
+\RightLabel{\LeftR{\Weakening}}
+\UnaryInf$ !C, !D \fCenter !D$
+\Axiom$ !C \fCenter !C $
+\RightLabel{\LeftR{\Weakening}}
+\UnaryInf$ !D, !C \fCenter !C$
+\RightLabel{\LeftR{\Exchange}}
+\UnaryInf$ !C, !D \fCenter !C$
+\RightLabel{\RightR{\land}}
+\BinaryInf$ !C, !D \fCenter !D \land !C $
+\end{prooftree}
+\end{ex}
+
+\end{document}

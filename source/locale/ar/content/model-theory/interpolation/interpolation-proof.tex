@@ -1,0 +1,194 @@
+% Part: model-theory
+% Chapter: interpolation
+% Section: interpolation-proof
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{int}{prf}
+
+\olsection{مبرهنة كريغ في الاستيفاء}
+
+\begin{thm}[مبرهنة كريغ في الاستيفاء]
+\ollabel{thm:interpol}
+إذا كان $\Entails !A \lif !B$، وجدت !!a{sentence}~$!C$ بحيث
+$\Entails !A \lif !C$ و$\Entails !C \lif !B$، وكان كل !!{constant}
+و!!{function} و!!{predicate} (عدا~$\eq$) في $!C$ واقعًا في $!A$ و$!B$
+معًا. وتسمى الـ!!{sentence}~$!C$ \emph{مستوفية} لـ$!A$ و$!B$.
+\end{thm}
+
+\begin{proof}
+افترض أن $\Lang{L}_1$ لغة $!A$ وأن $\Lang{L}_2$ لغة $!B$. ولتكن
+$\Lang{L}_0 = \Lang{L}_1 \cap \Lang{L}_2$. ولكل
+$i \in \{0,1,2\}$، لتكن $\Lang{L}'_i$ ناتجة من $\Lang{L}_i$ بإضافة
+عدد لا نهائي من الـ!!{constant}s الجديدة
+$\Obj c_0, \Obj c_1, \Obj c_2, \dots$.
+
+إذا كانت $!A$ غير قابلة للإرضاء، كانت
+$\lexists[x][\eq/[x][x]]$ مستوفية. وإذا كانت $\lnot !B$ غير قابلة
+للإرضاء (ومن ثم كانت $!B$ صالحة)، كانت
+$\lexists[x][\eq[x][x]]$ مستوفية. ولذلك يجوز أن نفترض أيضًا أن $!A$
+و$\lnot !B$ كلتيهما قابلتان للإرضاء.
+
+لإثبات المقابل لمبرهنة الاستيفاء، افترض أنه لا توجد مستوفية لـ$!A$
+و$!B$. وبعبارة أخرى، افترض أن $\{!A\}$ و$\{\lnot !B\}$ غير قابلتين
+للفصل في $\Lang{L}_0$.
+
+هدفنا توسيع الزوج $(\{!A\},\{\lnot!B\})$ إلى زوج غير قابل للفصل
+أعظمي $(\Gamma^*,\Delta^*)$. ولتعدد $!A_0$ و$!A_1$ و$!A_2$ و\dots
+الـ!!{sentence}s في $\Lang{L}'_1$، ولتعدد $!B_0$ و$!B_1$ و$!B_2$
+و\dots الـ!!{sentence}s في~$\Lang{L}'_2$. نعرّف متتاليتين متزايدتين من
+مجموعات الـ!!{sentence}s $(\Gamma_n,\Delta_n)$، حيث $n \ge 0$، كما
+يأتي. ضع $\Gamma_0=\{!A\}$ و$\Delta_0=\{\lnot !B\}$. وبافتراض أن
+$(\Gamma_n,\Delta_n)$ قد عرّف، عرّف $\Gamma_{n+1}$ و$\Delta_{n+1}$
+كما يأتي:
+\begin{enumerate}
+\item إذا كانت $\Gamma_n \cup \{!A_n\}$ و$\Delta_n$ غير قابلتين
+  للفصل في $\Lang{L}'_0$، فضع
+  $\Gamma_{n+1}=\Gamma_n \cup \{!A_n\}$. وفوق ذلك، إذا كانت $!A_n$
+  !!{formula} وجودية $\lexists[x][!S]$، فاختر !!{constant} جديدًا~$c$
+  لا يقع في $\Gamma_n$ أو $\Delta_n$ أو $!A_n$ أو $!B_n$، وأضف
+  $\Subst{!S}{c}{x}$ إلى $\Gamma_{n+1}$. وإذا كانت
+  $\Gamma_n \cup \{!A_n\}$ و$\Delta_n$ قابلتين للفصل، فضع
+  $\Gamma_{n+1}=\Gamma_n$.
+\item إذا كانت $\Gamma_{n+1}$ و$\Delta_n \cup \{!B_n\}$ غير قابلتين
+  للفصل في $\Lang{L}'_0$، فضع
+  $\Delta_{n+1}=\Delta_n \cup \{!B_n\}$. وفوق ذلك، إذا كانت $!B_n$
+  !!{formula} وجودية $\lexists[x][!S]$، فاختر !!{constant} جديدًا~$c$
+  لا يقع في $\Gamma_{n+1}$ أو $\Delta_n$ أو $!A_n$ أو $!B_n$، وأضف
+  $\Subst{!S}{c}{x}$ إلى $\Delta_{n+1}$. وإذا كانت $\Gamma_{n+1}$ و
+  $\Delta_n \cup \{!B_n\}$ قابلتين للفصل، فضع
+  $\Delta_{n+1}=\Delta_n$.
+\end{enumerate}
+وأخيرًا عرّف:
+\begin{align*}
+  \Gamma^* & = \bigcup_{n\ge 0} \Gamma_n, &
+  \Delta^* & = \bigcup_{n\ge 0} \Delta_n.
+\end{align*}
+يمكننا الآن أن نثبت بالاستقراء المتزامن على $n$:
+\begin{enumerate}
+\item\ollabel{part-a} أن $\Gamma_n$ و$\Delta_n$ غير قابلتين للفصل في
+  $\Lang{L}'_0$؛
+\item\ollabel{part-b} أن $\Gamma_{n+1}$ و$\Delta_n$ غير قابلتين للفصل
+  في $\Lang{L}'_0$.
+\end{enumerate}
+تعطينا \olref[sep]{lem:sep1} أساس \olref{part-a}. ولإثبات
+\olref{part-b} نميز ثلاث حالات:
+\begin{enumerate}
+\item إذا كانت $\Gamma_0 \cup \{!A_0\}$ و$\Delta_0$ قابلتين للفصل،
+  كان $\Gamma_1=\Gamma_0$، ولم تكن \olref{part-b} إلا
+  \olref{part-a}؛
+\item إذا كان $\Gamma_1=\Gamma_0 \cup \{!A_0\}$، كانت $\Gamma_1$
+  و$\Delta_0$ غير قابلتين للفصل بحسب البناء.
+\item تبقى الحالة التي تكون فيها $!A_0$ وجودية، بحيث
+  $\Gamma_1=\Gamma_0 \cup \{\lexists[x][!S],\Subst{!S}{c}{x}\}$.
+  وبحسب البناء، تكون $\Gamma_0 \cup \{\lexists[x][!S]\}$ و
+  $\Delta_0$ غير قابلتين للفصل، ومن ثم، بحسب \olref[sep]{lem:sep2}،
+  تكون $\Gamma_0 \cup \{\lexists[x][!S],\Subst{!S}{c}{x}\}$ و
+  $\Delta_0$ غير قابلتين للفصل أيضًا.
+\end{enumerate}
+وهذا يتم أساس الاستقراء لـ\olref{part-a} و\olref{part-b} أعلاه. ننتقل
+إلى خطوة الاستقراء. لأجل \olref{part-a}، إذا كان
+$\Delta_{n+1}=\Delta_n \cup \{!B_n\}$، كانت $\Gamma_{n+1}$ و
+$\Delta_{n+1}$ غير قابلتين للفصل بحسب البناء (حتى إذا كانت $!B_n$
+وجودية، بفضل \olref[sep]{lem:sep2}). وإذا كان
+$\Delta_{n+1}=\Delta_n$ (لأن $\Gamma_{n+1}$ و
+$\Delta_n \cup \{!B_n\}$ قابلتان للفصل)، استعملنا فرض الاستقراء في
+\olref{part-b}. ولأجل خطوة الاستقراء في \olref{part-b}، إذا كان
+$\Gamma_{n+2}=\Gamma_{n+1} \cup \{!A_{n+1}\}$، كانت $\Gamma_{n+2}$
+و$\Delta_{n+1}$ غير قابلتين للفصل بحسب البناء (حتى إذا كانت $!A_{n+1}$
+وجودية، بفضل \olref[sep]{lem:sep2}). وإذا كان
+$\Gamma_{n+2}=\Gamma_{n+1}$، استعملنا حالة الاستقراء لـ
+\olref{part-a} التي أثبتناها للتو. وهذا يتم الاستقراء على
+\olref{part-a} و\olref{part-b}.
+
+يترتب أن $\Gamma^*$ و$\Delta^*$ غير قابلتين للفصل؛ وإلا لأعطى التراص
+عددًا $n \ge 0$ تكون عنده $\Gamma_n$ و$\Delta_n$ قابلتين للفصل، خلافًا
+لـ\olref{part-a}. وبوجه خاص، تكون $\Gamma^*$ و$\Delta^*$ متسقتين: إذ
+لو كانت الأولى أو الثانية غير متسقة، لفصلت بينهما
+$\lexists[x][\eq/[x][x]]$ أو $\lforall[x][\eq[x][x]]$، على الترتيب.
+
+نبين الآن أن $\Gamma^*$ متسقة أعظميًا في $\Lang{L}'_1$، وكذلك
+$\Delta^*$ في $\Lang{L}'_2$. ولأجل الأولى، افترض أن
+$!A_n \notin \Gamma^*$ و$\lnot !A_n \notin \Gamma^*$ لبعض
+$n \ge 0$. إذا كان $!A_n \notin \Gamma^*$، كانت
+$\Gamma_n \cup \{!A_n\}$ قابلة للفصل عن $\Delta_n$، ومن ثم وجدت
+$!C \in \Lang{L}'_0$ بحيث:
+\begin{align*}
+  \Gamma^* & \Entails !A_n \lif !C, &
+  \Delta^* & \Entails \lnot !C.
+\end{align*}
+وبالمثل، إذا كان $\lnot !A_n \notin \Gamma^*$، وجدت
+$!C' \in \Lang{L}'_0$ بحيث:
+\begin{align*}
+  \Gamma^* & \Entails \lnot !A_n \lif !C', &
+  \Delta^* & \Entails \lnot !C'.
+\end{align*}
+وبالمنطق القضي، $\Gamma^* \Entails !C \lor !C'$ و
+$\Delta^* \Entails \lnot (!C \lor !C')$، فتفصل $!C \lor !C'$
+$\Gamma^*$ عن $\Delta^*$. وتثبت حجة مماثلة أن $\Delta^*$ أعظمية.
+
+وأخيرًا نبين أن $\Gamma^* \cap \Delta^*$ متسقة أعظميًا في
+$\Lang{L}'_0$. وهي متسقة بوضوح، لأنها تقاطع مجموعتين متسقتين. ولإثبات
+الأعظمية، خذ $!S \in \Lang{L}'_0$. إن $\Gamma^*$ أعظمية في
+$\Lang{L}'_1 \supseteq \Lang{L}'_0$، وبالمثل تكون $\Delta^*$ أعظمية
+في $\Lang{L}'_2 \supseteq \Lang{L}'_0$. ومن ثم إما أن
+$!S \in \Gamma^*$ أو $\lnot !S \in \Gamma^*$، وإما أن
+$!S \in \Delta^*$ أو $\lnot !S \in \Delta^*$. فإذا كان
+$!S \in \Gamma^*$ و$\lnot !S \in \Delta^*$، فصلت $!S$ بين
+$\Gamma^*$ و$\Delta^*$. وإذا كان $\lnot !S \in \Gamma^*$ و
+$!S \in \Delta^*$، فصلت $\lnot !S$ بينهما. ولذلك إما أن
+$!S \in \Gamma^* \cap \Delta^*$ أو
+$\lnot !S \in \Gamma^* \cap \Delta^*$، فيكون
+$\Gamma^* \cap \Delta^*$ أعظميًا.
+
+لما كانت $\Gamma^*$ متسقة أعظميًا، فلها نموذج $\Struct{M}'_1$ لا يضم
+!!{domain}ه~$\Domain{M'_1}$ إلا العناصر $\Assign{c}{M'_1}$ التي تفسر
+الـ!!{constant}s ويضمها جميعًا، كما في برهان مبرهنة الاكتمال
+(\olref[fol][com][cth]{thm:completeness}). وبالمثل، لـ$\Delta^*$ نموذج
+$\Struct{M}'_2$ يكون !!{domain}ه~$\Domain{M'_2}$ معطى بتفسيرات
+$\Assign{c}{M'_2}$ للـ!!{constant}s.
+
+لتكن $\Struct{M_1}$ ناتجة من $\Struct{M'_1}$ بحذف تفسيرات
+الـ!!{constant}s والـ!!{function}s والـ!!{predicate}s في
+$\Lang{L'_1} \setminus \Lang{L'_0}$، وبالمثل لـ$\Struct{M_2}$.
+عندئذ يكون التطبيق $h \colon M_1 \to M_2$ المعرّف بـ
+$h(\Assign{c}{M'_1})=\Assign{c}{M'_2}$ تشاكلًا في $\Lang{L}'_0$، لأن
+$\Gamma^* \cap \Delta^*$ متسقة أعظميًا في $\Lang{L}'_0$ كما أثبتنا.
+ويرجع ذلك إلى أن كل !!{sentence} من $\Lang{L}'_0$ إما أن تنتمي إلى
+$\Gamma^*$ و$\Delta^*$ معًا، وإما ألا تنتمي إلى أي منهما: ولذلك
+$\Assign{c}{M'_1} \in \Assign{P}{M'_1}$ إذا وفقط إذا كان
+$\Atom{P}{c} \in \Gamma^*$، إذا وفقط إذا كان
+$\Atom{P}{c} \in \Delta^*$، إذا وفقط إذا كان
+$\Assign{c}{M'_2} \in \Assign{P}{M'_2}$. ويمكن إثبات سائر الشروط التي
+تحققها التشاكلات بالطريقة نفسها.
+
+نعرّف الآن نموذجًا~$\Struct{M}$ للـ!!{language}
+$\Lang{L_1} \cup \Lang{L_2}$ كما يأتي:
+\begin{enumerate}
+\item الـ!!{domain}~$\Domain{M}$ هو $\Domain{M_2}$ نفسه، أي مجموعة كل
+  العناصر $\Assign{c}{M'_2}$؛
+\item إذا كان !!a{predicate}~$P$ في
+  $\Lang{L_2} \setminus \Lang{L_1}$، فإن
+  $\Assign{P}{M}=\Assign{P}{M'_2}$؛
+\item إذا كان محمول~$P$ في $\Lang{L}_1\setminus \Lang{L}_2$، فإن
+  $\Assign{P}{M}=h[\Assign{P}{M'_1}]$، أي إن
+  $\tuple{\Assign{c_1}{M'_2},\dots,\Assign{c_n}{M'_2}} \in
+  \Assign{P}{M}$ إذا وفقط إذا كان
+  $\tuple{\Assign{c_1}{M'_1},\dots,\Assign{c_n}{M'_1}} \in
+  \Assign{P}{M'_1}$.
+\item إذا كان !!a{predicate}~$P$ في $\Lang{L}_0$، فإن
+  $\Assign{P}{M}=\Assign{P}{M'_2}=h(\Assign{P}{M'_1})$.
+\item تعالج !!^{function}s~$\Lang{L}_1 \cup \Lang{L}_2$، ومنها
+  الـ!!{constant}s، بالطريقة نفسها.
+\end{enumerate}
+
+وأخيرًا يبيّن الاستقراء على الـ!!{formula}s أن $\Struct{M}$ توافق
+$\Struct{M'_1}$ في جميع !!{formula}s~$\Lang{L_1}$، وتوافق
+$\Struct{M'_2}$ في جميع !!{formula}s~$\Lang{L_2}$. وبوجه خاص،
+$\Sat{M}{!A}$ و$\Sat{M}{\lnot!B}$، ومن ثم
+$\not\Entails !A \lif !B$. وهذا يتم برهان مبرهنة كريغ في الاستيفاء.
+\end{proof}
+
+\end{document}

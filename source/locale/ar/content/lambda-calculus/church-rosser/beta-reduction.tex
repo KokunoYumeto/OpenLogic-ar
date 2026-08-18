@@ -1,0 +1,81 @@
+% Part: lambda-calculus
+% Chapter: church-rosser
+% Section: beta-reduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{cr}{b}
+
+\olsection{اختزال~$\beta$}
+
+\begin{lem}\ollabel{lem:one-par}
+  إذا كان~$M \bredone M'$، فإن~$M \bredpar M'$.
+\end{lem}
+\begin{proof} إذا كان~$M \bredone M'$، فإن~$M$ هو
+    $(\lambd[x][N])Q$ و$M'$ هو~$\Subst{N}{Q}{x}$، لبعض~$x$ و$N$
+    و$Q$. وبما أن~$N \bredpar N$ و$Q \bredpar Q$ بحسب
+    \olref[pb]{thm:refl}، نحصل مباشرة على
+    $(\lambd[x][N])Q \bredpar \Subst{N}{Q}{x}$ من
+    \olref[pb]{defn:bredpar}\olref[pb]{defn:bredpar4}.
+\end{proof}
+
+\begin{lem}\ollabel{lem:par-red}
+  إذا كان~$M \bredpar M'$، فإن~$M \bred M'$.
+\end{lem}
+
+\begin{proof} بالاستقراء على~!!{derivation} لـ$M \bredpar M'$.
+  \begin{enumerate}
+  \item القاعدة الأخيرة هي \olref[pb]{defn:bredpar1}: عندئذ لا يكون
+    $M$ و$M'$ إلا~$x$، ولدينا~$x \bred x$.
+  \item القاعدة الأخيرة هي \olref[pb]{defn:bredpar2}: يكون~$M$
+    هو~$\lambd[x][N]$ و$M'$ هو~$\lambd[x][N']$ لبعض~$x$ و$N$ و$N'$،
+    حيث~$N \bredpar N'$. وبفرض الاستقراء لدينا~$N \bred N'$.
+    ومن ثم~$\lambd[x][N] \bred \lambd[x][N']$ (بمتتالية تقلصات
+    $\bredone$ نفسها التي تحقق~$N \bred N'$).
+  \item القاعدة الأخيرة هي \olref[pb]{defn:bredpar3}: يكون~$M$ هو~$PQ$
+    و$M'$ هو~$P'Q'$ لبعض~$P$ و$Q$ و$P'$ و$Q'$، حيث
+    $P \bredpar P'$ و$Q \bredpar Q'$. وبفرض الاستقراء لدينا
+    $P \bred P'$ و$Q \bred Q'$. لذلك~$PQ \bred P'Q'$ بمتتالية
+    الاختزال~$P \bred P'$ يعقبها الاختزال~$Q \bred Q'$.
+  \item القاعدة الأخيرة هي \olref[pb]{defn:bredpar4}: يكون~$M$ هو
+    $(\lambd[x][N])Q$ و$M'$ هو~$\Subst{N'}{Q'}{x}$ لبعض~$x$ و$N$
+    و$N'$ و$Q$ و$Q'$، حيث~$N \bredpar N'$ و$Q \bredpar Q'$.
+    وبفرض الاستقراء نحصل على~$Q \bred Q'$ و$N \bred N'$. ومن ثم
+    $(\lambd[x][N])Q \bred \Subst{N'}{Q'}{x}$ باختزال~$N \bred N'$
+    يعقبه~$Q \bred Q'$، ثم أخيرًا تقليص~$(\lambd[x][N'])Q'$ إلى
+    $\Subst{N'}{Q'}{x}$.
+  \end{enumerate}
+\end{proof}
+
+\begin{lem}\ollabel{lem:str}
+  $\bred$ هي أصغر علاقة متعدية تحتوي~$\bredpar$.
+\end{lem}
+
+\begin{proof}
+  لتكن~$\xred$ أصغر علاقة متعدية تحتوي~$\bredpar$.
+
+  $\bred \subseteq \xred$: افترض أن~$M \bred M'$، أي إن
+  $M \ident M_1 \bredone \dots \bredone M_k \ident M'$. بحسب
+  \olref{lem:one-par}، لدينا
+  $M \ident M_1 \bredpar \dots \bredpar M_k \ident M'$. وبما أن
+  $\xred$ تحتوي~$\bredpar$ وهي متعدية، فإن~$M \xred M'$.
+
+  $\xred \subseteq \bred$: افترض أن~$M \xred M'$، أي إن
+  $M \ident M_1 \bredpar \dots \bredpar M_k \ident M'$. بحسب
+  \olref{lem:par-red}، لدينا
+  $M \ident M_1 \bred \dots \bred M_k \ident M'$. وبما أن~$\bred$
+  متعدية، فإن~$M \bred M'$.
+\end{proof}
+
+\begin{thm}\ollabel{thm:cr}
+  تحقق~$\bred$ خاصية تشيرش--روسر.
+\end{thm}
+
+\begin{proof}
+  يتبع ذلك مباشرة من \olref[dap]{thm:str} و\olref[pb]{thm:cr}
+  و\olref{lem:str}.
+\end{proof}
+
+\end{document}

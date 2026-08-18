@@ -1,0 +1,227 @@
+% Part: incompleteness
+% Chapter: representability-in-q
+% Section: basic-representable
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{req}{bre}
+\olsection{الدوال الأساسية قابلة للتمثيل في~$\Th{Q}$}
+
+علينا أولًا أن نثبت أن جميع الدوال الأساسية قابلة للتمثيل في~$\Th{Q}$.
+والمطلوب في النهاية أن نبيّن كيفية إسناد !!a{formula}
+$!A_f(x_0,\dots,x_{k-1},y)$، تمثل كل دالة أساسية ذات $k$ من الوسائط
+$f(x_0,\dots,x_{k-1})$.
+
+سنتمكن من تمثيل الصفر والخلف والجمع والضرب والدالة المميزة للمساواة
+والإسقاطات. وفي كل حالة تكون الصيغة الممثلة الملائمة مباشرة تمامًا؛
+فمثلًا تمثل الصفرَ الصيغة $y=\Obj 0$، وتمثل الخلفَ !!{formula}
+$x_0'=y$، وتمثل الجمعَ !!{formula} $(x_0+x_1)=y$. ويتمثل العمل في
+إثبات أن $\Th{Q}$ تستطيع إثبات !!{sentence}s ذات الصلة؛ فمثلًا القول
+إن !!{formula} أعلاه تمثل الجمع يستلزم إثبات أن $\Th{Q}$ تثبت، لكل
+زوج من العددين الطبيعيين $m$ و$n$،
+\begin{align*}
+& \eq[\num n + \num m][\num {n+m}] \text{ و}\\
+& \lforall[y][(\eq[(\num n + \num m)][y] \lif \eq[y][\num{n+m}])].
+\end{align*}
+
+\begin{prop}
+\ollabel{prop:rep-zero}
+تمثل الصيغة $!A_{\Zero}(x,y)\ident\eq[y][\Obj 0]$ دالة الصفر
+$\Zero(x)=0$ في~$\Th{Q}$.
+\end{prop}
+
+\begin{prop}
+\ollabel{prop:rep-succ}
+تمثل الصيغة $!A_{\Succ}(x,y)\ident\eq[y][x']$ دالة الخلف
+$\Succ(x)=x+1$ في~$\Th{Q}$.  
+\end{prop}
+
+\begin{prop}
+\ollabel{prop:rep-proj}
+تمثل الصيغة
+\[!A_{\Proj{n}{i}}(x_0,\dots,x_{n-1},y)\ident\eq[y][x_i].\]
+دالة الإسقاط $\Proj{n}{i}(x_0,\dots,x_{n-1})=x_i$ في~$\Th{Q}$.
+\end{prop}
+
+\begin{prob}
+أثبت أن $\eq[y][\Obj 0]$ و$\eq[y][x']$ و$\eq[y][x_i]$ تمثل، على
+الترتيب، $\Zero$ و$\Succ$ و$\Proj{n}{i}$.
+\end{prob}
+
+\begin{prop}
+\ollabel{prop:rep-id}
+الدالة المميزة لـ$=$،
+\[
+\Char{=}(x_0, x_1) =
+\begin{cases}
+  1 & \text{إذا كان } x_0=x_1\\
+  0 & \text{في غير ذلك}
+\end{cases}
+\]
+تمثلها في~$\Th{Q}$ الصيغة
+\[
+  !A_{\Char{=}}(x_0, x_1, y) \ident (\eq[x_0][x_1] \land \eq[y][\num{1}]) \lor (\eq/[x_0][x_1] \land
+\eq[y][\num{0}]).
+\]
+\end{prop}
+
+يتطلب البرهان اللمة الآتية.
+
+\begin{lem}
+\ollabel{lem:q-proves-neq} إذا أُعطي عددان طبيعيان $n$ و$m$ وكان
+$n\neq m$، فإن $\Th{Q}\Proves\eq/[\num n][\num m]$.
+\end{lem}
+
+\begin{proof}
+استعمل الاستقراء على $n$ لإثبات أنه لكل $m$، إذا كان $n\neq m$، فإن
+$Q\Proves\eq/[\num n][\num m]$.
+
+في حالة الأساس، $n=0$. فإذا لم يساو $m$ العدد $0$، كان $m=k+1$ لعدد
+طبيعي ما $k$. ولدينا بديهية تقول $\lforall[x][\eq/[0][x']]$. وبحسب
+بديهية للكم، نستبدل $\num k$ بـ$x$ فنستنتج $\eq/[0][\num k']$. لكن
+$\num k'$ ليس إلا $\num m$.
+
+في خطوة الاستقراء، نفترض صدق الدعوى لـ$n$ وننظر في $n+1$. وليكن $m$
+أي عدد طبيعي. ثمة احتمالان: إما $m=0$، أو $m=k+1$ لبعض $k$. تُعالج
+الحالة الأولى كما أعلاه. وفي الحالة الثانية، افترض أن
+$n+1\neq k+1$. عندئذ $n\neq k$. وبفرض الاستقراء لـ$n$ لدينا
+$\Th{Q}\Proves\eq/[\num n][\num k]$. ولدينا بديهية تقول
+$\lforall[x][\lforall[y][\eq[x'][y']\lif\eq[x][y]]]$. وباستعمال
+بديهية للكم نحصل على
+$\eq[\num n'][\num k']\lif\eq[\num n][\num k]$. ومن المنطق القضي
+يمكننا أن نستنتج، في $\Th{Q}$،
+$\eq/[\num n][\num k]\lif\eq/[\num n'][\num k']$. وبإثبات المقدّم
+نستنتج $\eq/[\num n'][\num k']$، وهو المطلوب لأن $\num k'$ هو
+$\num m$.
+\end{proof}
+
+\begin{explain}
+لاحظ أن اللمة لا تقول الكثير: فهي تقول في جوهرها إن $\Th{Q}$ تستطيع
+إثبات أن أسماء الأعداد المختلفة تدل على أشياء مختلفة. فمثلًا تثبت
+$\Th{Q}$ أن $0''\neq0'''$. لكن إثبات صدق ذلك عمومًا يتطلب بعض العناية.
+ولاحظ أيضًا أننا وإن كنا نستعمل الاستقراء، فهو استقراء \emph{خارج}
+$\Th{Q}$.
+\end{explain}
+
+\begin{proof}[برهان \olref{prop:rep-id}]
+إذا كان $n=m$، كان $\num{n}$ و$\num{m}$ الحد نفسه، وكانت
+$\Char{=}(n,m)=1$. لكن
+$\Th{Q}\Proves(\eq[\num{n}][\num{m}]\land\eq[\num{1}][\num{1}])$،
+ومن ثم تثبت $!A_=(\num{n},\num{m},\num{1})$. وإذا كان $n\neq m$،
+كانت $\Char=(n,m)=0$. وبحسب \olref{lem:q-proves-neq}، تكون
+$\Th{Q}\Proves\eq/[\num{n}][\num{m}]$، ومن ثم تثبت أيضًا
+$(\eq/[\num{n}][\num{m}]\land\Obj 0=\Obj 0)$. ولذلك
+$\Th{Q}\Proves !A_=(\num{n},\num{m},\num{0})$.
+
+وفي الجزء الثاني لدينا حالتان أيضًا. فإذا كان $n=m$، فعلينا أن نثبت
+$\Th{Q}\Proves\lforall[y][(!A_=(\num{n},\num{m},y)
+\lif\eq[y][\num{1}])]$. وبحجة غير صورية، افترض أن
+$!A_=(\num{n},\num{m},y)$، أي
+\[
+(\eq[\num{n}][\num{n}] \land \eq[y][\num{1}]) \lor
+(\eq/[\num{n}][\num{n}] \land \eq[y][\num{0}])
+\]
+يستلزم الشق الأيسر $\eq[y][\num{1}]$ بالمنطق، ويناقض الشق الأيمن
+$\eq[\num{n}][\num{n}]$ التي يمكن إثباتها بالمنطق.
+
+ومن جهة أخرى، افترض أن $n\neq m$. عندئذ تكون
+$!A_=(\num{n},\num{m},y)$ هي
+\[
+(\eq[\num{n}][\num{m}] \land \eq[y][\num{1}]) \lor
+(\eq/[\num{n}][\num{m}] \land \eq[y][\num{0}])
+\]
+وهنا يناقض الشق الأيسر $\eq/[\num{n}][\num{m}]$، التي يمكن إثباتها في
+$\Th{Q}$ بحسب \olref{lem:q-proves-neq}؛ ويستلزم الشق الأيمن
+$\eq[y][\num{0}]$.
+\end{proof}
+
+\begin{prop}
+\ollabel{prop:rep-add}
+تمثل الصيغة الآتية دالة الجمع $\Add(x_0,x_1)=x_0+x_1$ في~$\Th{Q}$:
+\[
+  !A_{\Add}(x_0, x_1, y) \ident \eq[y][(x_0 + x_1)].
+\]
+\end{prop}
+
+\begin{lem}
+\ollabel{lem:q-proves-add}
+$\Th{Q} \Proves \eq[(\num{n} + \num{m})][\num{n+m}]$
+\end{lem}
+
+\begin{proof}
+نثبت ذلك بالاستقراء على~$m$. فإذا كان $m=0$، كانت الدعوى
+$\Th{Q}\Proves\eq[(\num{n}+\Obj 0)][\num{n}]$، وهي تتبع من البديهية
+$!Q_4$. والآن افترض الدعوى لـ$m$؛ ولنثبتها لـ$m+1$، أي لنثبت
+$\Th{Q}\Proves\eq[(\num{n}+\num{m+1})][\num{n+m+1}]$. لاحظ أن
+$\num{m+1}$ ليست إلا $\num{m}'$، وأن $\num{n+m+1}$ ليست إلا
+$\num{n+m}'$. وبالبديهية $!Q_5$، تكون
+$\Th{Q}\Proves\eq[(\num{n}+\num{m}')][(\num{n}+\num{m})']$. وبفرض
+الاستقراء، تكون
+$\Th{Q}\Proves\eq[(\num{n}+\num{m})][\num{n+m}]$. ومن ثم
+$\Th{Q}\Proves\eq[(\num{n}+\num{m}')][\num{n+m}']$.
+\end{proof}
+
+\begin{proof}[برهان \olref{prop:rep-add}]
+إن !!{formula}~$!A_\Add(x_0,x_1,y)$ التي تمثل $\Add$ هي
+$\eq[y][(x_0+x_1)]$. نثبت أولًا أنه إذا كان $\Add(n,m)=k$، فإن
+$\Th{Q}\Proves !A_\Add(\num{n},\num{m},\num{k})$؛ أي
+$\Th{Q}\Proves\eq[\num{k}][(\num{n}+\num{m})]$. لكن لما كان
+$k=n+m$، كان $\num{k}$ هو بعينه $\num{n+m}$، وقد أثبتنا في
+\olref{lem:q-proves-add} أن
+$\Th{Q}\Proves\eq[(\num{n}+\num{m})][\num{n+m}]$.
+
+وعلينا أيضًا أن نثبت أنه إذا كان $\Add(n,m)=k$، فإن
+\[
+\Th{Q} \Proves \lforall[y][(!A_\Add(\num{n}, \num{m}, y) \lif
+  \eq[y][\num{k}])].
+\]
+افترض أن لدينا $\eq[(\num{n}+\num{m})][y]$. ولما كان
+\[
+\Th{Q} \Proves \eq[(\num{n}+\num{m})][\num{n+m}],
+\]
+فيمكننا استبدال الطرف الأيسر بـ$\num{n+m}$، فنحصل على
+$\eq[\num{n+m}][y]$ من أجل~$y$ كيفما كان.
+\end{proof}
+
+\begin{prop}
+\ollabel{prop:rep-mult}
+تمثل الصيغة الآتية دالة الضرب
+$\Mult(x_0,x_1)=x_0\cdot x_1$ في~$\Th{Q}$:
+\[
+  !A_{\Mult}(x_0, x_1, y) \ident y = (x_0 \times x_1).
+\]
+\end{prop}
+
+\begin{proof} تمرين. \end{proof}
+
+\begin{lem}
+\ollabel{lem:q-proves-mult}
+$\Th{Q} \Proves \eq[(\num{n} \times \num{m})][\num{n \cdot m}]$
+\end{lem}
+
+\begin{proof} تمرين. \end{proof}
+
+\begin{prob}
+أثبت \olref[inc][req][bre]{lem:q-proves-mult}.
+\end{prob}
+
+\begin{prob}
+استعمل \olref[inc][req][bre]{lem:q-proves-mult} لإثبات
+\olref[inc][req][bre]{prop:rep-mult}.
+\end{prob}
+
+\begin{explain}
+  تذكّر أننا نستعمل $\times$ رمزًا للدالة في لغة الحساب، ونستعمل
+  $\cdot$ لعملية الضرب المعتادة على الأعداد. ولذلك يمكن أن يرد
+  $\cdot$ بين تعبيرات عن أعداد (كما في $m\cdot n$)، في حين لا يرد
+  $\times$ إلا بين حدود لغة الحساب (كما في
+  $(\num{m}\times\num{n})$). ومما يزيد الالتباس أن $+$ يُستعمل لكل من
+  !!{function} وعملية الجمع. فإذا ورد بين حدين---كما في
+  $(\num{n}+\num{m})$---كان !!{function} ثنائية الموضع في لغة
+  الحساب، وإذا ورد بين عددين---كما في $n+m$---كان عملية الجمع. ويشمل
+  ذلك حالة $\num{n+m}$: فهي اسم العدد القياسي المناظر للعدد~$n+m$.
+\end{explain}
+
+\end{document}

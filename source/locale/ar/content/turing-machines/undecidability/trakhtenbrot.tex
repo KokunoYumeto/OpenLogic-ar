@@ -1,0 +1,255 @@
+% Part: turing-machines
+% Chapter: undecidability
+% Section: trakhtenbrot
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{tur}{und}{tra}
+\olsection{مبرهنة تراختنبروت}
+
+\begin{explain}
+  عرّفنا في \olref[rep]{sec} ال!!{sentence}s $!T(M,w)$
+  و~$!E(M,w)$ لآلة تورنغ~$M$ وسلسلة دخل~$w$. ثم بينا في
+  \olref[ver]{lem:valid-if-halt} و\olref[ver]{lem:halt-if-valid} أن
+  $!T(M,w)\lif !E(M,w)$ صادقة منطقيًا إذا وفقط إذا توقفت~$M$ في
+  نهاية المطاف حين تبدأ عند الدخل~$w$. ولما كانت مسألة التوقف غير
+  قابلة للقرار، ينتج من ذلك أن الصدق المنطقي لل!!{sentence}s في منطق
+  الرتبة الأولى وقابليتها للإرضاء غير قابلين للقرار
+  (\cref{tur:und:uns:thm:decision-prob,tur:und:uns:cor:undecidable-sat}).
+
+  لكن الصدق المنطقي للجمل وقابليتها للإرضاء معرفان بالنسبة إلى
+  !!{structure}s اعتباطية، منتهية كانت أو غير منتهية. وقد تظن أن
+  تقرير ما إذا كانت !!a{sentence} قابلة للإرضاء في !!{structure}
+  منتهية (أو صادقة منطقيًا في جميع ال!!{structure}s المنتهية) أسهل.
+  ويمكننا تكييف برهان استحالة حل مسألة القرار كي يبين أن الأمر ليس
+  كذلك.
+
+  أولًا، إذا رجعت إلى برهان \olref[ver]{lem:halt-if-valid} رأيت أننا
+  أنشأنا فيه نموذجًا~$\Struct M$ لـ~$!T(M,w)$ يصف بالضبط ما تفعله
+  الآلة~$M$ حين تبدأ عند الدخل~$w$. وكان مجال ذلك النموذج~$\Nat$، أي
+  غير منته. لكن إذا كانت $M$ تتوقف بالفعل عند الدخل~$w$، أمكننا بناء
+  نموذج منته~$\Struct M'$ بالطريقة نفسها. افترض أن $M$ تبدأ عند
+  الدخل~$w$ وتتوقف بعد~$k$ خطوات. خذ مجال~$\Domain{M'}$ المجموعة
+  $\{0,\dots,n\}$، حيث $n$ هو الأكبر بين~$k+1$ وطول~$w$، واجعل
+  \[
+    \Assign{\prime}{M'}(x) =
+    \begin{cases}
+      x + 1 &\text{إذا كان $x < n$}\\
+      n &\text{خلاف ذلك،}
+    \end{cases}
+  \]
+  واجعل $\tuple{x,y}\in\Assign{<}{M'}$ إذا وفقط إذا كان $x<y$ أو
+  كان $x=y=n$. وعرّف $\Struct{M'}$ فيما عدا ذلك مثل~$\Struct{M}$.
+  ومن تعريف~$\Struct{M'}$، وعلى نحو مماثل لبرهان
+  \olref[ver]{lem:halt-if-valid}، يكون $\Sat{M'}{!T(M,w)}$. ولما
+  افترضنا أن $M$ تتوقف عند الدخل~$w$، يكون $\Sat{M'}{!E(M,w)}$.
+  ولذلك يكون $\Struct{M'}$ نموذجًا منتهيًا لـ
+  $!T(M,w)\land !E(M,w)$ (لاحظ أننا استبدلنا $\lif$ بـ~$\land$).
+
+  لقد قطعنا نصف الطريق إلى البرهان: بينا أنه إذا توقفت $M$ عند
+  الدخل~$w$ كان لـ$!T(M,w)\land !E(M,w)$ نموذج منته. لكن عكس ذلك لا
+  يصح؛ أي توجد آلات تورنغ لا تتوقف عند بعض المدخلات~$w$، ومع ذلك يكون
+  لـ$!T(M,w)\land !E(M,w)$ نموذج منته. انظر مثلًا إلى الآلة~$M$ ذات
+  الحالة الوحيدة $q_0$ والتعليمة
+  $\delta(q_0,\TMblank)=\tuple{q_0,\TMblank,\TMstay}$. إذا بدأت عند
+  الدخل الخالي~$w=\emptyseq$، لم تتوقف قط: فهي في دورة غير منتهية،
+  لكنها لا تغير الشريط ولا تحرك الرأس. وجميع التهيئات متماثلة (الحالة
+  نفسها وموضع الرأس نفسه ومحتوى الشريط نفسه). ويمكننا تعريف
+  !!{structure} منتهية~$\Struct{M''}$ تحقق
+  $!T(M,\emptyseq)\land !E(M,\emptyseq)$ (تمرين). لكن يمكننا تغيير
+  $!T(M,w)$ على نحو مناسب يستبعد !!{structure}s كهذه.
+
+  \begin{prob}
+    لتكن $M$ آلة تورنغ ذات الحالة الوحيدة $q_0$ والتعليمة الوحيدة
+    $\delta(q_0,\TMblank)=\tuple{q_0,\TMblank,\TMstay}$. ولْيكن
+    $\Domain{M''}=\{0,1,2\}$، و
+    $\Assign{\prime}{M''}(0)=\Assign{\prime}{M''}(1)=1$، و
+    $\Assign{\prime}{M''}(2)=2$، و
+    $\Assign{<}{M''}=\{\tuple{0,1},\tuple{1,1},\tuple{2,2}\}$.
+    عرّف $\Assign{\Obj Q_{q_0}}{M''}$، و$\Assign{\Obj
+    S_{\TMblank}}{M''}$، و$\Assign{\Obj S_{\TMendtape}}{M''}$ بحيث
+    تصدق $!T(M,\emptyseq)$ و$!E(M,\emptyseq)$، واشرح سبب صدقهما.
+    تلميح: لاحظ أن $\delta(q_0,\TMendtape)$ غير معرّفة. واضمن صدق
+    \begin{align*}
+    & \Obj Q_{q_0}(\num{1}, \num{n}) \land \Obj S_{\TMendtape}(\num{0}, \num{n})
+      \land
+      \lforall[x][(\num{0} < x \lif \Obj S_\TMblank(x, \num{n}))] \text{\quad لكل $n \in \Nat$}\\
+    & \lexists[y][(\Obj Q_{q_0}(\num{0}, y) \land \Obj S_{\TMendtape}(\num{0}, y))]
+    \end{align*}
+    معًا في~$\Struct{M''}$.
+  \end{prob}
+\end{explain}
+
+انظر في ال!!{sentence}s التي تصف عمل آلة تورنغ~$M$ عند الدخل
+$w=\sigma_{i_1}\dots\sigma_{i_k}$:
+\begin{enumerate}
+\item بديهيات تصف الأعداد و~$<$ (كما في تعريف~$!T(M,w)$ في
+\olref[rep]{sec}).
+\item بديهيات تصف تهيئة الدخل، كما في تعريف~$!T(M,w)$.
+\item بديهيات تصف الانتقال من تهيئة إلى تليها:
+
+فيما يأتي، لتكن $!A(x,y)$ كما سبق، ولتكن
+\[
+  !B(y) \ident \lforall[x][(x < y \lif \eq/[x][y])].
+\]
+\begin{enumerate}
+\item \ollabel{rep-right} لكل تعليمة $\delta(q_i,\sigma)=
+  \tuple{q_j,\sigma',\TMright}$، ال!!{sentence}:
+\begin{align*}
+& \lforall[x][\lforall[y][(
+   (\Obj Q_{q_i}(x, y) \land \Obj S_{\sigma}(x, y)) \lif {}]] \\
+&\qquad   (\Obj Q_{q_j}(x', y') \land \Obj S_{\sigma'}(x, y') \land
+!A(x, y) \land !B(y')))
+\end{align*}
+\item \ollabel{rep-left} لكل تعليمة $\delta(q_i,\sigma)=
+  \tuple{q_j,\sigma',\TMleft}$، ال!!{sentence}
+\begin{align*}
+& \lforall[x][\lforall[y][
+    ((\Obj Q_{q_i}(x', y) \land \Obj S_{\sigma}(x', y)) \lif {}]]\\
+& \qquad   (\Obj Q_{q_j}(x, y') \land \Obj S_{\sigma'}(x', y') \land
+!A(x', y) \land !B(y'))) \land {}\\
+& \lforall[y][((\Obj Q_{q_i}(\num{0}, y) \land \Obj S_{\sigma}(\num{0},
+    y)) \lif {}]\\
+& \qquad (\Obj Q_{q_j}(\num{0}, y') \land \Obj S_{\sigma'}(\num{0},
+  y') \land !A(\num{0}, y) \land !B(y')))
+\end{align*}
+\item \ollabel{rep-stay} لكل تعليمة $\delta(q_i,\sigma)=
+  \tuple{q_j,\sigma',\TMstay}$، ال!!{sentence}:
+\begin{align*}
+& \lforall[x][\lforall[y][(
+   (\Obj Q_{q_i}(x, y) \land \Obj S_{\sigma}(x, y)) \lif {}]] \\
+&\qquad (\Obj Q_{q_j}(x, y') \land \Obj S_{\sigma'}(x, y') \land
+!A(x, y) \land !B(y')))
+\end{align*}
+\end{enumerate}
+وكما ترى، ال!!{sentence}s التي تصف انتقالات~$M$ مماثلة
+لل!!{sentence} المقابلة في~$!T(M,w)$، إلا أننا نضيف $!B(y')$ في
+النهاية. وتضمن $!B(y')$ أن يكون العدد $y'$، رقم التهيئة «التالية»،
+مختلفًا عن جميع الأعداد السابقة $\Obj 0$، و$\Obj 0'$، و\dots.
+% \item Sentences that express consistency conditions:
+% \begin{enumerate}
+%   \item\ollabel{rep-con-symb}%
+%   !!^a{sentence} that says that no square can have more than one
+%   symbol on it at any given time:
+%   \[\lforall[x][\lforall[y][(\Obj S_{\sigma}(x, y) \lif \lnot \Obj
+%   S_{\sigma'}(x, y))]],\]
+%   for every pair $\sigma \neq \sigma'$ of tape symbols of~$T$.
+%   \item\ollabel{rep-con-state}%
+%   !!^a{sentence} that says that $M$ cannot be in more than one state
+%   at any given time:
+%   \[\lforall[x][\lforall[y][(\Obj Q_{q}(x, y) \lif
+%   \lforall[z][\lnot \Obj
+%   Q_{q'}(z, y))]],\]
+%   for every pair $q \neq q'$ of states of~$T$.
+%   \item\ollabel{rep-con-tape}%
+%   !!^a{sentence} that says that $M$ cannot be on more than one tape
+%   square at any given time:
+%   \[\lforall[x][\lforall[y][(\Obj Q_{q}(x, y) \lif
+%   \lforall[z][\eq/[z][y]\lif \lnot \Obj
+%   Q_{q'}(z, y))]],\]
+%   for every pair $q$, $q'$ of states of~$T$.
+% \end{enumerate}
+\end{enumerate}
+ولتكن $!T'(M,w)$ اقتران جميع ال!!{sentence}s السابقة لآلة تورنغ~$M$
+والدخل~$w$.
+
+\begin{lem}\ollabel{lem:halts-sat}
+  إذا توقفت $M$ حين تبدأ عند الدخل~$w$، كان لـ
+  $!T'(M,w)\land !E(M,w)$ نموذج منته.
+\end{lem}
+
+\begin{proof}
+  لتكن $\Struct{M'}$ كما في برهان
+  \olref[ver]{lem:halt-if-valid}، إلا أن
+  \begin{align*}
+    \Domain{M'} & = \{0, \dots, n\},\\
+    \Assign{\prime}{M'}(x) & =
+    \begin{cases}
+      x + 1 &\text{إذا كان $x < n$}\\
+      n &\text{خلاف ذلك،}
+    \end{cases} \\
+    \tuple{x,y} \in \Assign{<}{M'} &\text{إذا وفقط إذا كان $x < y$ أو $x = y = n$،}
+  \end{align*}
+  حيث $n=\max(k+1,\len{w})$، و$k$ أصغر عدد بحيث تتوقف $M$ بعد~$k$
+  خطوات حين تبدأ عند الدخل~$w$. ونترك تمرينًا التحقق من أن
+  $\Sat{M'}{!T'(M,w)\land !E(M,w)}$.
+\end{proof}
+
+\begin{prob}
+  أكمل برهان \olref[tur][und][tra]{lem:halts-sat} بإثبات أن
+  $\Sat{M'}{!T'(M,w)\land !E(M,w)}$.
+\end{prob}
+
+\begin{lem}\ollabel{lem:sat-halts}
+  إذا كان لـ$!T'(M,w)\land !E(M,w)$ نموذج منته، توقفت $M$ حين تبدأ
+  عند الدخل~$w$.
+\end{lem}
+
+\begin{proof}
+  نبرهن العكس النقيض. افترض أن $M$ لا تتوقف حين تبدأ عند~$w$. فإذا
+  لم يكن لـ$!T'(M,w)\land !E(M,w)$ أي نموذج أصلًا، تم المطلوب. فافترض
+  أن $\Struct{M}$ نموذج لـ~$!T'(M,w)\land !E(M,w)$. وعلينا أن نبين
+  أنه لا يمكن أن يكون منتهيًا.
+
+  يمكننا أن نثبت، كما في \olref[ver]{lem:config}، أنه إذا لم تتوقف
+  $M$، حين تبدأ عند الدخل~$w$، بعد~$n$ خطوات، فإن
+  $!T'(M,w)\Entails !C(M,w,n)\land !B(\num{n})$. ولما كانت $M$ لا
+  تتوقف حين تبدأ عند~$w$، كان
+  $!T'(M,w)\Entails !C(M,w,n)\land !B(\num{n})$ لكل~$n\in\Nat$.
+  ولاحظ أن \olref[rep]{prop:mlessk} يفيد بأن
+  $!T'(M,w)\Entails\num{k}<\num{n}$ لكل~$k<n$. وكذلك
+  $!B(\num{n})\Entails\num{k}<\num{n}\lif
+  \eq/[\num{k}][\num{n}]$. ومن ثم يكون
+  $\Sat{M}{\eq/[\num{k}][\num{n}]}$ لكل~$k<n$؛ أي لا بد أن تكون
+  للحدود غير المتناهية الكثرة~$\num{k}$ قيم مختلفة كلها في
+  $\Struct{M}$. لكن هذا يقتضي أن يكون $\Domain{M}$ غير منته، ولذلك
+  لا يمكن أن يكون $\Struct{M}$ نموذجًا منتهيًا لـ
+  $!T'(M,w)\land !E(M,w)$.
+\end{proof}
+
+\begin{prob}
+  أكمل برهان \olref[tur][und][tra]{lem:sat-halts} بإثبات أنه إذا لم
+  تتوقف~$M$، حين تبدأ عند الدخل~$w$، بعد~$n$ خطوات، فإن
+  $!T'(M,w)\Entails !B(\num{n})$.
+\end{prob}
+
+\begin{thm}[مبرهنة تراختنبروت]
+  \ollabel{thm:trakhtenbrodt}
+  ليس قابلًا للقرار ما إذا كان ل!!{sentence} اعتباطية من منطق الرتبة
+  الأولى نموذج منته (أي ما إذا كانت قابلة للإرضاء على نحو منته).
+\end{thm}
+
+\begin{proof}
+  افترض وجود آلة تورنغ~$F$ تقرر مسألة قابلية الإرضاء المنتهية. فعندئذ
+  يمكننا، إذا أعطيت أي آلة تورنغ~$M$ ودخل~$w$، حساب الجملة
+  $!T'(M,w)\land !E(M,w)$، واستعمال~$F$ لتقرير ما إذا كان لها نموذج
+  منته. وتفيد
+  \cref{tur:und:tra:lem:halts-sat,tur:und:tra:lem:sat-halts} بأن لها
+  نموذجًا منتهيًا إذا وفقط إذا توقفت $M$ حين تبدأ عند الدخل~$w$.
+  ولذلك نستطيع استعمال $F$ لحل مسألة التوقف، التي نعلم أنها غير قابلة
+  للحل.
+\end{proof}
+
+\begin{cor}\ollabel{cor:fproof-incomp}%
+  لا يمكن وجود نظام !!{derivation} سليم وتام للصدق المنطقي
+  \emph{المنتهي}؛ أي !!a{derivation} يحقق $\Proves !B$ إذا وفقط
+  إذا كان $\Sat{M}{!B}$ لكل !!{structure} منتهية~$\Struct{M}$.
+\end{cor}
+
+\begin{proof}
+  تمرين.
+\end{proof}
+
+\begin{prob}
+  أثبت \olref[tur][und][tra]{cor:fproof-incomp}. لاحظ أن $!B$ متحققة
+  في كل !!{structure} منتهية إذا وفقط إذا لم تكن $\lnot !B$ قابلة
+  للإرضاء على نحو منته. واشرح لماذا قابلية الإرضاء المنتهية شبه قابلة
+  للقرار بمعنى \olref[tur][und][uns]{thm:valid-ce}. واستعمل ذلك
+  للاستدلال على أنه لو وجد !!a{derivation} للصدق المنطقي المنتهي،
+  لكانت قابلية الإرضاء المنتهية قابلة للقرار.
+\end{prob}
+
+
+\end{document}

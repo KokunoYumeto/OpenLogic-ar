@@ -1,0 +1,102 @@
+% Part: normal-modal-logic
+% Chapter: syntax-and-semantics
+% Section: substitution
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{syn}{sub}
+
+\olsection{الإحلال المتزامن}
+
+تكون \emph{حالة} !!a{formula}~$!A$ نتيجة إبدال كل ورود لـ
+!!a{propositional variable} في~$!A$ بـ!!{formula} أخرى. وسنشير كثيرًا
+إلى حالات ال!!{formula}s، سواء عند مناقشة الصلاحية أم عند مناقشة
+!!{derivability}. ولذلك يفيد تعريف المفهوم بدقة.
+
+\begin{defn}\ollabel{def:subst-inst}
+  إذا كانت~$!A$ !!{formula} موجهية لا تخرج !!{propositional
+    variable}s فيها عن~$p_1$، و\dots، و$p_n$، وكانت~$!D_1$، و\dots،
+  و$!D_n$ !!{formula}s موجهية أيضًا، عرّفنا
+  $\SSubst{!A}{\subst{!D_1}{p_1}, \dots, \subst{!D_n}{p_n}}$ بأنه
+  نتيجة إحلال كل~$!D_i$ محل~$p_i$ في~$!A$ إحلالًا متزامنًا. وصوريًا،
+  هذا تعريف بالاستقراء على~$!A$:
+  \begin{enumerate}
+    \tagitem{prvFalse}{\indcase{!A}{\lfalse}{%
+        $\SSubst{\indfrm}{\subst{!D_1}{p_1}, \dots,
+          \subst{!D_n}{p_n}}$ هي~$\lfalse$.}}{}
+    \tagitem{prvTrue}{\indcase{!A}{\ltrue}{%
+        $\SSubst{\indfrm}{\subst{!D_1}{p_1}, \dots,
+          \subst{!D_n}{p_n}}$ هي~$\ltrue$.}}{}
+    \item \indcase{!A}{q}{$\SSubst{\indfrm}{\subst{!D_1}{p_1}, \dots,
+        \subst{!D_n}{p_n}}$ هي~$q$، بشرط~$q \not\ident p_i$ لكل~$i
+      = 1$، و\dots، و$n$.}
+    \item \indcase{!A}{p_i}{$\SSubst{\indfrm}{\subst{!D_1}{p_1},
+        \dots, \subst{!D_n}{p_n}}$ هي~$!D_i$.}
+    \tagitem{prvNot}{\indcase{!A}{\lnot !B}{%
+        $\SSubst{\indfrm}{\subst{!D_1}{p_1}, \dots, \subst{!D_n}{p_n}}$ هي
+        $\lnot \SSubst{!B}{\subst{!D_1}{p_1}, \dots, \subst{!D_n}{p_n}}$.}}{}
+    \tagitem{prvAnd}{\indcase{!A}{(!B \land
+        !C)}{$\SSubst{\indfrm}{\subst{!D_1}{p_1}, \dots,
+          \subst{!D_n}{p_n}}$ هي
+        \[(\SSubst{!B}{\subst{!D_1}{p_1}, \dots, \subst{!D_n}{p_n}} \land
+          \SSubst{!C}{\subst{!D_1}{p_1}, \dots, \subst{!D_n}{p_n}}).\]}}{}
+    \tagitem{prvOr}{\indcase{!A}{(!B \lor
+          !C)}{$\SSubst{\indfrm}{\subst{!D_1}{p_1}, \dots,
+          \subst{!D_n}{p_n}}$ هي
+        \[(\SSubst{!B}{\subst{!D_1}{p_1}, \dots, \subst{!D_n}{p_n}} \lor
+          \SSubst{!C}{\subst{!D_1}{p_1}, \dots, \subst{!D_n}{p_n}}).\]}}{}
+    \tagitem{prvIf}{\indcase{!A}{(!B \lif
+          !C)}{$\SSubst{\indfrm}{\subst{!D_1}{p_1}, \dots,
+          \subst{!D_n}{p_n}}$ هي
+        \[(\SSubst{!B}{\subst{!D_1}{p_1}, \dots, \subst{!D_n}{p_n}} \lif
+          \SSubst{!C}{\subst{!D_1}{p_1}, \dots, \subst{!D_n}{p_n}}).\]}}{}
+    \tagitem{prvIff}{\indcase{!A}{(!B \liff
+          !C)}{$\SSubst{\indfrm}{\subst{!D_1}{p_1}, \dots,
+          \subst{!D_n}{p_n}}$ هي
+        \[(\SSubst{!B}{\subst{!D_1}{p_1}, \dots, \subst{!D_n}{p_n}} \liff
+          \SSubst{!C}{\subst{!D_1}{p_1}, \dots, \subst{!D_n}{p_n}}).\]}}{}
+    \item \indcase{!A}{\Box !B}{%
+        $\SSubst{\indfrm}{\subst{!D_1}{p_1}, \dots, \subst{!D_n}{p_n}}$ هي
+        $\Box
+        \SSubst{!B}{\subst{!D_1}{p_1}, \dots, \subst{!D_n}{p_n}}.$}
+    \tagitem{prvDiamond}{\indcase{!A}{\Diamond !B}{%
+        $\SSubst{\indfrm}{\subst{!D_1}{p_1}, \dots, \subst{!D_n}{p_n}}$ هي
+        $\Diamond
+        \SSubst{!B}{\subst{!D_1}{p_1}, \dots, \subst{!D_n}{p_n}}.$}}{}
+  \end{enumerate}
+  وتسمى ال!!{formula}~$\SSubst{!A}{\subst{!D_1}{p_1}, \dots,
+    \subst{!D_n}{p_n}}$ \emph{حالة إحلال} لـ$!A$.
+\end{defn}
+
+\begin{ex}
+  افترض أن~$!A$ هي~$p_1 \lif \Box(p_1 \land p_2)$، وأن~$!D_1$ هي
+  $\Diamond(p_2 \lif p_3)$، وأن~$!D_2$ هي~$\lnot\Box p_1$. عندئذ
+  تكون~$\SSubst{!A}{\subst{!D_1}{p_1}, \subst{!D_2}{p_2}}$ هي
+  \begin{align*}
+    \Diamond(p_2 \lif p_3) &
+    \lif \Box(\Diamond(p_2 \lif p_3) \land \lnot\Box p_1)
+    \intertext{بينما تكون~$\SSubst{!A}{\subst{!D_2}{p_1}, \subst{!D_1}{p_2}}$ هي}
+    \lnot\Box p_1 &
+    \lif \Box(\lnot\Box p_1 \land \Diamond(p_2 \lif p_3))
+    \intertext{لاحظ أن الإحلال المتزامن لا يساوي، بوجه عام، الإحلال
+      المتكرر. فقارن مثلًا
+      $\SSubst{!A}{\subst{!D_1}{p_1}, \subst{!D_2}{p_2}}$ أعلاه بـ
+      $\Subst{(\Subst{!A}{!D_1}{p_1})}{!D_2}{p_2}$، وهو:}
+    & \Subst{\Diamond(p_2 \lif p_3) \lif
+      \Box(\Diamond(p_2 \lif p_3) \land p_2)}{\lnot\Box p_1}{p_2},
+      \text{ أي}\
+    \Diamond(\lnot\Box p_1 \lif p_3) &
+    \lif \Box(\Diamond(\lnot\Box p_1
+    \lif p_3) \land \lnot\Box p_1)\\
+    \intertext{وقارنه أيضًا بـ$\Subst{(\Subst{!A}{!D_2}{p_2})}{!D_1}{p_1}$:}
+    & \Subst{p_1 \lif \Box(p_1 \land \lnot\Box p_1)}
+      {\Diamond(p_2 \lif p_3)}{p_1}, \text{ أي}\
+    \Diamond(p_2 \lif p_3) &
+    \lif \Box(\Diamond(p_2
+    \lif p_3) \land \lnot\Box\Diamond(p_2 \lif p_3)).
+  \end{align*}
+\end{ex}
+
+\end{document}

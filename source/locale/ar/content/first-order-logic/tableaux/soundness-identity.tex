@@ -1,0 +1,43 @@
+% Part: first-order-logic
+% Chapter: tableaux
+% Section: soundness-identity
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{tab}{sid}
+
+\olsection{السلامة مع \usetoken{S}{identity}}
+
+\begin{prop}
+!!^{tableau}s ذات قواعد الهوية سليمة: فلا !!{tableau} مغلق قابل للإرضاء.
+\end{prop}
+
+\begin{proof}
+لا يلزمنا إلا أن نبين، كما سبق، أنه إذا كان ل!!a{tableau} فرع قابل
+للإرضاء، فإن الفرع الناتج من تطبيق إحدى قواعد~$\eq$ عليه قابل للإرضاء
+أيضًا. لتكن $\Gamma$ مجموعة ال!!{formula}s الموقّعة الواقعة على الفرع،
+ولتكن $\Struct{M}$ !!a{structure} ترضي~$\Gamma$.
+
+افترض أن الفرع يُوسَّع باستخدام~$\eq$، أي بإضافة ال!!{formula} الموقّعة
+~$\sFmla{\True}{\eq[t][t]}$. ومن الواضح أن
+$\Sat{M}{\eq[t][t]}$، ولذلك تُرضي $\Struct{M}$ أيضًا $\Gamma \cup
+\{\sFmla{\True}{\eq[t][t]}\}$.
+
+إذا وُسِّع الفرع باستخدام $\TRule{\True}{\eq}$، فإننا نضيف !!{formula}
+موقّعة~$\sFmla{\True}{!A(t_2)}$، لكن $\Gamma$ تحتوي على كل من
+$\sFmla{\True}{\eq[t_1][t_2]}$ و$\sFmla{\True}{!A(t_1)}$. ومن ثم لدينا
+$\Sat{M}{\eq[t_1][t_2]}$ و$\Sat{M}{!A(t_1)}$. وليكن $s$ إسناد متغيرات
+بحيث $s(x) = \Value{t_1}{M}$. وبحسب
+\olref[syn][ass]{prop:sentence-sat-true}، يكون $\Sat{M}{!A(t_1)}[s]$.
+وبما أن $\varAssign{s}{s}{x}$، فبحسب
+\olref[syn][ext]{prop:ext-formulas} يكون $\Sat{M}{!A(x)}[s]$. وبما أن
+$\Sat{M}{\eq[t_1][t_2]}$، فلدينا $\Value{t_1}{M} = \Value{t_2}{M}$،
+ومن ثم $s(x) = \Value{t_2}{M}$. وبتطبيق
+\olref[syn][ext]{prop:ext-formulas} مرة أخرى، يكون لدينا أيضًا
+$\Sat{M}{!A(t_2)}[s]$. وبحسب \olref[syn][ass]{prop:sentence-sat-true}،
+يكون $\Sat{M}{!A(t_2)}$. وتُعالج حالة $\TRule{\False}{\eq}$ على نحو مماثل.
+\end{proof}
+
+\end{document}

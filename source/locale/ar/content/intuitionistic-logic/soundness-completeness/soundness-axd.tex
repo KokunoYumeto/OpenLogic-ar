@@ -1,0 +1,58 @@
+% part: intuitionistic-logic
+% chapter: soundness-completeness
+% section: soundness-axd
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{sc}{sax}
+
+\olsection{سلامة \usetoken{P}{derivation} البديهية}
+
+\begin{editorial}
+  يعتمد برهان السلامة على كون جميع البديهيات صالحة حدسيًا؛ ولا يزال ذلك
+  محتاجًا إلى البرهان، مثلًا في فصل الدلالات.
+\end{editorial}
+
+\begin{thm}[السلامة]
+  \ollabel{thm:soundness}
+  إذا كان~$\Gamma \Proves !A$، كان~$\Gamma \Entails !A$.
+\end{thm}
+
+\begin{proof}
+  نثبت أنه إذا كان~$\Gamma \Proves !A$، كان~$\Gamma \Entails !A$.
+  والبرهان بالاستقراء في عدد ال!!{formula}s، وهو~$n$، في
+  !!{derivation}~$!A$ من~$\Gamma$. ونبين أنه إذا كانت~$!A_1$،
+  \dots،~$!A_n=!A$ !!a{derivation} من~$\Gamma$، كان
+  $\Gamma \Entails !A_n$. ولاحظ أنه إذا كانت~$!A_1$، \dots،~$!A_n$
+  !!a{derivation}، كانت~$!A_1$، \dots،~$!A_k$ كذلك لأي~$k<n$.
+
+  لا توجد !!{derivation}s طولها~$0$، ولذلك تصح الدعوى صدقًا خاليًا عند
+  $n=0$. فافترض أن الدعوى تصح لجميع ال!!{derivation}s التي طولها~$<n$.
+  ونميز الحالات بحسب مسوغ~$!A_n$.
+
+  \begin{enumerate}
+  \item إذا كانت~$!A_n$ بديهية، فجميع البديهيات صالحة، ومن ثم
+    $\Gamma \Entails !A_n$ لأي~$\Gamma$.
+  \item إذا كان~$!A_n \in \Gamma$، فلكل~$\mModel{M}$ ولكل~$w$، إذا
+    كان~$\mSat{M}{\Gamma}[w]$، كان من الواضح أن
+    $\mSat{M}{!A_n}[w]$؛ أي~$\Gamma \Entails !A$.
+  \item إذا نتجت~$!A_n$ بتطبيق~\MP{} على~$!A_i$ و
+    $!A_j \ident !A_i \lif !A_n$، فإن~$!A_1$، \dots،~$!A_i$ و
+    $!A_1$، \dots،~$!A_j$ !!{derivation}s من~$\Gamma$، ومن ثم، بفرض
+    الاستقراء،~$\Gamma \Entails !A_i$ و
+    $\Gamma \Entails !A_i \lif !A_n$.
+
+    افترض~$\mSat{M}{\Gamma}[w]$. ولأن~$\mSat{M}{\Gamma}[w]$ و
+    $\Gamma \Entails !A_i \lif !A_n$، يكون
+    $\mSat{M}{!A_i \lif !A_n}[w]$. ويعني ذلك بالتعريف أنه لكل~$w'$
+    بحيث~$Rww'$، إذا كان~$\mSat{M}{!A_i}[w']$، كان
+    $\mSat{M}{!A_n}[w']$. ولأن~$R$ انعكاسية، يكون~$w$ من بين قيم~$w'$
+    التي تحقق~$Rww'$؛ أي إذا كان~$\mSat{M}{!A_i}[w]$، كان
+    $\mSat{M}{!A_n}[w]$. ولأن~$\Gamma \Entails !A_i$، يكون
+    $\mSat{M}{!A_i}[w]$. ومن ثم~$\mSat{M}{!A_n}[w]$، كما أردنا.
+  \end{enumerate}
+\end{proof}
+
+\end{document}

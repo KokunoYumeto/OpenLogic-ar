@@ -1,0 +1,149 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+\olfileid{sth}{card-arithmetic}{simp}
+
+\olsection{تبسيط الجمع والضرب}
+
+يتبين أن جمع الكاردينالات وضربها فيما فوق المتناهي أمر
+\emph{سهل للغاية}. وهذا ناشئ عن كون الكاردينالات أعداداً ترتيبية
+(معينة)، ومن ثم فهي مرتبة ترتيباً جيداً ويمكن معالجتها بطريقة معينة.
+غير أن إثبات ذلك \emph{ليس} سهلاً للغاية. ونحتاج، بدايةً، إلى تعريف
+دقيق:
+
+\begin{defn}
+نعرّف \emph{ترتيباً معيارياً}، $\canonord$، على أزواج الأعداد
+الترتيبية، فنشترط أن
+$\tuple{\alpha_1, \alpha_2} \canonord
+\tuple{\beta_1, \beta_2}$ إذا وفقط إذا تحقق أحد الشروط الآتية:
+\begin{enumerate}
+	\item $\max(\alpha_1, \alpha_2) < \max(\beta_1, \beta_2)$؛ أو
+	\item $\max(\alpha_1, \alpha_2) = \max(\beta_1, \beta_2)$ و
+	$\alpha_1 < \beta_1$؛ أو
+	\item $\max(\alpha_1, \alpha_2) = \max(\beta_1, \beta_2)$ و
+	$\alpha_1 = \beta_1$ و$\alpha_2 < \beta_2$.
+\end{enumerate}
+\end{defn}
+
+\begin{lem}
+$\tuple{\alpha \times \alpha, \canonord}$ ترتيب جيد، لكل عدد ترتيبي
+$\alpha$.
+\end{lem}
+
+\begin{proof}
+من الواضح أن $\canonord$ تام على $\alpha \times \alpha$. فلنفترض أن
+لا $\tuple{\alpha_1, \alpha_2}$ أصغر من
+$\tuple{\beta_1, \beta_2}$ بحسب $\canonord$، ولا الثاني أصغر من الأول.
+عندئذ
+$\max(\alpha_1, \alpha_2) = \max(\beta_1, \beta_2)$ و
+$\alpha_1 = \beta_1$ و$\alpha_2 = \beta_2$، ومن ثم
+$\tuple{\alpha_1, \alpha_2} = \tuple{\beta_1, \beta_2}$.
+
+ولإثبات أنه ترتيب جيد، لتكن $X \subseteq \alpha\times\alpha$ غير
+خالية. بما أن $\alpha$ عدد ترتيبي، يوجد $\delta$ هو أصغر عنصر في
+$\Setabs{\max(\gamma_1, \gamma_2)}{\tuple{\gamma_1,
+\gamma_2} \in X}$. احذف الآن من
+$\Setabs{\tuple{\gamma_1,\gamma_2} \in X}{\max(\gamma_1, \gamma_2) =
+\delta}$ كل الأزواج عدا التي لها أصغر إحداثي أول؛ ومن بين الباقي يكون
+الزوج ذو أصغر إحداثي ثان هو أصغر عناصر $X$ بحسب $\canonord$.
+\end{proof}
+\noindent
+والآن إلى ملاحظة صغيرة وبسيطة:
+
+\begin{prop}\ollabel{simplecardproduct}
+إذا كان $\cardeq{\alpha}{\beta}$، فإن
+$\cardeq{\alpha \times \alpha}{\beta \times \beta}$.
+\end{prop}
+
+\begin{proof}
+يكفي أن نجعل $f \colon \alpha \to \beta$ تستلزم الخريطة
+$\tuple{\gamma_1, \gamma_2} \mapsto
+\tuple{f(\gamma_1), f(\gamma_2)}$.
+\end{proof}
+\noindent
+وسنضع كل هذا الآن موضع الاستعمال لإثبات لمّة حاسمة:
+\begin{lem}\ollabel{alphatimesalpha}
+لكل عدد ترتيبي غير متناهٍ $\alpha$،
+$\cardeq{\alpha}{\alpha \times \alpha}$.
+\end{lem}
+
+\begin{proof}
+للبرهان بالخلف، ليكن $\alpha$ أصغر عدد ترتيبي غير متناهٍ لا تصح له هذه
+النتيجة. تبين \olref[sfr][siz][zigzag]{natsquaredenumerable} أن
+$\cardeq{\omega}{\omega\times\omega}$، ولذلك
+$\omega \in \alpha$. فضلاً عن ذلك، $\alpha$ كاردينال: ولنفترض العكس
+للبرهان بالخلف؛ عندئذ $\card{\alpha} \in \alpha$، فيكون
+$\cardeq{\card{\alpha}}{\card{\alpha} \times \card{\alpha}}$ بحسب
+الفرض، و$\cardeq{\card{\alpha}}{\alpha}$ بحسب التعريف؛ ومن ثم
+$\cardeq{\alpha}{\alpha\times\alpha}$ بحسب
+\olref{simplecardproduct}.
+
+والآن، لكل $\tuple{\gamma_1, \gamma_2} \in \alpha \times \alpha$،
+انظر إلى القطعة:
+\begin{align*}
+	\text{Seg}(\gamma_1, \gamma_2) &= \Setabs{\tuple{\delta_1, \delta_2} \in \alpha \times \alpha}{\tuple{\delta_1, \delta_2} \canonord \tuple{\gamma_1, \gamma_2}}
+\end{align*}
+ضع $\gamma = \max(\gamma_1, \gamma_2)$، ولاحظ أن
+$\tuple{\gamma_1, \gamma_2} \canonord \tuple{\gamma+1, \gamma + 1}$.
+إذا كان $\gamma$ متناهياً، فالقطعة متناهية، ولذلك كارديناليتها أصغر من
+الكاردينال غير المتناهي $\alpha$. أما إذا كان $\gamma$ غير متناهٍ،
+فنحصل على:
+\begin{align*}
+	\text{Seg}(\gamma_1, \gamma_2) &
+	\precsim ((\gamma \ordplus 1)\ordtimes (\gamma \ordplus 1))\\
+	&\approx (\gamma \ordtimes \gamma)
+	\text{، بحسب \olref[ord-arithmetic][using-addition]{ordinfinitycharacter} و
+	\olref{simplecardproduct}}\\
+	&\approx \gamma \text{، بحسب فرض الاستقراء}\\
+	& \prec \alpha\text{، لأن $\alpha$ كاردينال.}
+\end{align*}
+إذن $\ordtype{\alpha\times \alpha, \canonord} \leq \alpha$، ومن ثم
+$\cardle{\alpha \times \alpha}{\alpha}$. وبما أن
+$\cardle{\alpha}{\alpha \times \alpha}$ بالطبع، فالنتيجة تتبع من
+مبرهنة شرودر--برنشتاين.
+\end{proof}
+
+وأخيراً نصل إلى النتيجة المبسِّطة:
+
+\begin{thm}\ollabel{cardplustimesmax}
+إذا كان $\cardfont{a}, \cardfont{b}$ كاردينالين غير متناهيين، فإن:
+\[
+	\cardfont{a}
+\cardtimes \cardfont{b} = \cardfont{a} \cardplus \cardfont{b} =
+\text{max}(\cardfont{a}, \cardfont{b}).
+\]
+\end{thm}
+
+\begin{proof}
+من دون إخلال بالعموم، افترض أن
+$\cardfont{a} = \max(\cardfont{a}, \cardfont{b})$. وباستعمال
+\olref{alphatimesalpha} نحصل على
+$\cardfont{a}\cardtimes\cardfont{a} = \cardfont{a} \leq \cardfont{a}
+\cardplus \cardfont{b} \leq \cardfont{a} \cardplus \cardfont{a} \leq
+\cardfont{a} \cardtimes \cardfont{a}$.
+\end{proof}\noindent
+وبالمثل، إذا كان $\cardfont{a}$ غير متناهٍ، فإن اتحاد عدد
+$\cardfont{a}$ من المجموعات التي لا يزيد حجم كل منها على
+$\cardfont{a}$ لا يزيد حجمه على $\cardfont{a}$:
+
+\begin{prop}\ollabel{kappaunionkappasize}
+ليكن $\cardfont{a}$ كاردينالاً غير متناهٍ. ولكل عدد ترتيبي
+$\beta \in \cardfont{a}$، لتكن $X_\beta$ مجموعة تحقق
+$\card{X_\beta} \leq \cardfont{a}$. عندئذ
+$\card{\bigcup_{\beta \in \cardfont{a}} X_\beta} \leq \cardfont{a}$.
+\end{prop}
+
+\begin{proof}
+لكل $\beta \in \cardfont{a}$، ثبّت !!a{injection}
+$f_\beta \colon X_\beta \to \cardfont{a}$.\footnote{كيف «ثُبِّتت» هذه
+الدوال؟ انظر \olref[sth][choice][countablechoice]{sec}.} عرّف
+!!a{injection} $g \colon
+\bigcup_{\beta \in \cardfont{a}} X_\beta \to \cardfont{a} \times
+\cardfont{a}$ بوضع $g(v) = \tuple{\beta, f_\beta(v)}$، حيث
+$v \in X_\beta$ ولا يكون $v \in X_\gamma$ لأي $\gamma \in \beta$.
+والآن، بحسب \olref{cardplustimesmax}،
+$\bigcup_{\beta \in \cardfont{a}} X_\beta \preceq
+\cardfont{a} \times \cardfont{a} \approx \cardfont{a}$.
+\end{proof}
+
+\end{document}

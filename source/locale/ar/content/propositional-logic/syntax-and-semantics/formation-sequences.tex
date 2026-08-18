@@ -1,0 +1,146 @@
+% Part: first-order-logic
+% Chapter: syntax-and-semantics
+% Section: formation-sequences
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pl}{syn}{fseq}
+
+\olsection{متتاليات التكوين}
+
+يشكّل تعريف !!{formula}s بوساطة تعريف استقرائي، إلى جانب الأسلوب المكمّل
+المتمثل في إثبات خصائص !!{formula}s بالاستقراء، منهجًا أنيقًا وفعالًا.
+ومع ذلك، قد
+يكون من المفيد أيضًا النظر في منهج لبناء !!{formula}s ينطلق من الأسفل
+إلى الأعلى، خطوة فخطوة؛ وهو ما نفعله هنا باستعمال مفهوم
+\emph{متتالية التكوين}.
+
+\begin{defn}[متتاليات التكوين للصيغ]
+\ollabel{defn:fseq-frm}
+تكون المتتالية المنتهية $\tuple{!A_0,\dotsc,!A_n}$ المكوّنة من سلاسل
+رموز من اللغة~$\Lang L_0$ \emph{متتالية تكوين} لـ~$!A$ إذا كان
+$!A \ident !A_n$، وكان، لكل $i \leq n$، إما أن تكون $!A_i$ صيغة ذرية،
+وإما أن يوجد $j,k < i$ بحيث تتحقق إحدى الحالات الآتية:
+\begin{enumerate}
+    \tagitem{prvNot}{$!A_i \ident \lnot !A_j$.}{}%
+    \tagitem{prvAnd}{$!A_i \ident (!A_j \land !A_k)$.}{}%
+    \tagitem{prvOr}{$!A_i \ident (!A_j \lor !A_k)$.}{}%
+    \tagitem{prvIf}{$!A_i \ident (!A_j \lif !A_k)$.}{}%
+    \tagitem{prvIff}{$!A_i \ident (!A_j \liff !A_k)$.}{}%
+\end{enumerate}
+\end{defn}
+
+\begin{ex}
+\[
+\tuple{
+    \Obj p_0,
+    \Obj p_1,
+    (\Obj p_1 \land \Obj p_0),
+    \lnot (\Obj p_1 \land \Obj p_0)
+}
+\]
+هي متتالية تكوين لـ
+$\lnot (\Obj p_1 \land \Obj p_0)$، وكذلك
+\[
+\tuple{
+    \Obj p_0,
+    \Obj p_1,
+    \Obj p_0,
+    (\Obj p_1 \land \Obj p_0),
+    (\Obj p_0 \lif \Obj p_1),
+    \lnot (\Obj p_1 \land \Obj p_0)
+}.
+\]
+%
+وكما يتبين من المثال الثاني، قد تحتوي متتاليات التكوين على «حشو»:
+أي صيغ زائدة أو لا تسهم في البناء.
+\end{ex}
+
+\begin{prop}
+\ollabel{prop:formed}
+لكل !!{formula}~$!A$ في~$\Frm[L_0]$ متتالية تكوين.
+\end{prop}
+
+\begin{proof}
+افترض أن $!A$ ذرية. عندئذ تكون المتتالية~$\tuple{!A}$ متتالية
+تكوين لـ~$!A$.
+%
+وافترض الآن أن لـ~$!B$ و~$!C$ متتاليتا تكوين
+$\tuple{!B_0,\dotsc,!B_n}$ و~$\tuple{!C_0,\dotsc,!C_m}$،
+على الترتيب.
+%
+\begin{enumerate}
+  \tagitem{prvNot}{إذا كان $!A \ident \lnot !B$،
+      فتكون $\tuple{!B_0,\dotsc,!B_n,\lnot !B_n}$
+      متتالية تكوين لـ~$!A$.}{}
+  \tagitem{prvAnd}{إذا كان $!A \ident (!B \land !C)$،
+      فتكون $\tuple{!B_0,\dotsc,!B_n,!C_0,\dotsc,!C_m,(!B_n \land !C_m)}$
+      متتالية تكوين لـ~$!A$.}{}
+  \tagitem{prvOr}{إذا كان $!A \ident (!B \lor !C)$،
+      فتكون $\tuple{!B_0,\dotsc,!B_n,!C_0,\dotsc,!C_m,(!B_n \lor !C_m)}$
+      متتالية تكوين لـ~$!A$.}{}
+  \tagitem{prvIf}{إذا كان $!A \ident (!B \lif !C)$،
+      فتكون $\tuple{!B_0,\dotsc,!B_n,!C_0,\dotsc,!C_m,(!B_n \lif !C_m)}$
+      متتالية تكوين لـ~$!A$.}{}
+  \tagitem{prvIff}{إذا كان $!A \ident (!B \liff !C)$،
+      فتكون $\tuple{!B_0,\dotsc,!B_n,!C_0,\dotsc,!C_m,(!B_n \liff !C_m)}$
+      متتالية تكوين لـ~$!A$.}{}
+\end{enumerate}
+وبحسب مبدأ الاستقراء على !!{formula}s، لكل
+!!{formula} متتالية تكوين.
+\end{proof}
+
+يمكننا أيضًا إثبات العكس. وهذا مهم لأنه يبين أن طريقتينا في تعريف
+الصيغ متكافئتان: فهما تعطيان النتائج نفسها. ويعني أيضًا أن بوسعنا
+إثبات مبرهنات عن الصيغ باستعمال الاستقراء العادي على طول متتاليات
+التكوين.
+
+\begin{lem}
+\ollabel{lem:fseq-init}
+افترض أن $\tuple{!A_0,\dotsc,!A_n}$ متتالية تكوين لـ~$!A_n$، وأن
+$k \leq n$. عندئذ تكون $\tuple{!A_0,\dotsc,!A_k}$ متتالية تكوين
+لـ~$!A_k$.
+\end{lem}
+
+\begin{proof}
+تمرين.
+\end{proof}
+
+\begin{thm}
+\ollabel{thm:fseq-frm-equiv}
+$\Frm[L_0]$ هي مجموعة جميع سلاسل الرموز في اللغة~$\Lang L_0$ التي
+لها متتالية تكوين.
+\end{thm}
+
+\begin{proof}
+لتكن $F$ مجموعة جميع سلاسل الرموز في اللغة~$\Lang L_0$ التي لها
+متتالية تكوين. وقد رأينا في \olref[pl][syn][fseq]{prop:formed} أن
+$\Frm[L_0] \subseteq F$، ولذلك نثبت الآن الاحتواء العكسي.
+
+افترض أن لـ~$!A$ متتالية تكوين $\tuple{!A_0,\dotsc,!A_n}$.
+نثبت أن $!A \in \Frm[L_0]$ بالاستقراء القوي على~$n$.
+وفرض الاستقراء هو أن كل سلسلة رموز لها متتالية تكوين طولها
+$m < n$ تنتمي إلى~$\Frm[L_0]$. وبحسب تعريف متتالية التكوين، إما أن
+تكون $!A_n$ ذرية، وإما أن يوجد $j,k < n$ بحيث تتحقق إحدى الحالات
+الآتية:
+\begin{enumerate}
+    \tagitem{prvNot}{$!A_n \ident \lnot !A_j$.}{}%
+    \tagitem{prvAnd}{$!A_n \ident (!A_j \land !A_k)$.}{}%
+    \tagitem{prvOr}{$!A_n \ident (!A_j \lor !A_k)$.}{}%
+    \tagitem{prvIf}{$!A_n \ident (!A_j \lif !A_k)$.}{}%
+    \tagitem{prvIff}{$!A_n \ident (!A_j \liff !A_k)$.}{}%
+\end{enumerate}
+والآن نستدل بالحالات. فإذا كانت $!A_n$ ذرية، فإن
+$!A_n \in \Frm[L_0]$. ولنفترض بدلًا من ذلك أن $!A \ident
+(!A_j \land !A_k)$. بحسب \olref[pl][syn][fseq]{lem:fseq-init}، تكون
+$\tuple{!A_0,\dotsc,!A_j}$ و~$\tuple{!A_0,\dotsc,!A_k}$ متتاليتي
+تكوين لـ~$!A_j$ و~$!A_k$، على الترتيب. ولأنهما متتاليتان جزئيتان
+ابتدائيتان حقيقيتان من متتالية التكوين الخاصة بـ~$!A$، فطول كل منهما
+أقل من~$n$. ومن ثم، بفرض الاستقراء، ينتمي كل من~$!A_j$ و~$!A_k$ إلى
+$\Frm[L_0]$؛ ولذلك، بتعريف !!a{formula}، تكون
+$(!A_j \land !A_k)$ كذلك. وتتبع الحالات الأخرى باستدلال مماثل.
+\end{proof}
+
+\end{document}

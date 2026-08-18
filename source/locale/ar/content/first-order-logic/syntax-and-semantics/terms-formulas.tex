@@ -1,0 +1,227 @@
+% Part: first-order-logic
+% Chapter: syntax-and-semantics
+% Section: terms-formulas
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{syn}{frm}
+
+\olsection{الحدود وال\printtoken{P}{formula}}
+
+متى أعطيت لغة رتبة أولى~$\Lang L$، أمكننا تعريف تعبيرات مبنية من
+المعجم الأساسي لـ~$\Lang L$. ومن هذه التعبيرات، على وجه الخصوص،
+\emph{الحدود} و\emph{!!{formula}s}.
+
+\begin{defn}[الحدود]
+\ollabel{defn:terms}
+تُعرّف مجموعة \emph{الحدود}~$\Trm[L]$ في~$\Lang L$ استقرائيًا كما
+يأتي:
+\begin{enumerate}
+\item كل !!{variable} حد.
+\item كل !!{constant} في~$\Lang L$ حد.
+\item إذا كانت $f$ !!{function} ذات $n$ من المحال، وكانت
+  $t_1$، و\dots، و$t_n$ حدودًا، فإن
+  $\Atom{f}{t_1, \ldots, t_n}$ حد.
+\tagitem{limitClause}{
+  لا شيء غير ذلك حد.}{}
+\end{enumerate}
+والحد الذي لا يحتوي على !!{variable}s \emph{حد مغلق}.
+\end{defn}
+
+\begin{explain}
+تظهر ال!!{constant}s في تحديدنا للغة وللحدود بوصفها فئة مستقلة من
+الرموز، لكن كان يمكن بدلًا من ذلك إدراجها بوصفها !!{function}s صفرية
+المحل. وعندئذ أمكننا الاستغناء عن البند الثاني في تعريف الحدود. ولا
+يلزمنا إلا أن نفهم $\Atom{f}{t_1, \ldots, t_n}$ على أنه $f$ وحده إذا
+كان $n = 0$.
+\end{explain}
+
+\begin{defn}[الصيغ]
+\ollabel{defn:formulas}
+تُعرّف مجموعة \emph{!!{formula}s}~$\Frm[L]$ في اللغة~$\Lang L$
+استقرائيًا على النحو الآتي:
+\begin{enumerate}
+\tagitem{prvFalse}{$\lfalse$ هي !!{formula} ذرية.}{}
+
+\tagitem{prvTrue}{$\ltrue$ هي !!{formula} ذرية.}{}
+
+\item إذا كان $R$ !!{predicate} ذا $n$ من المحال في~$\Lang L$، وكانت
+  $t_1$، و\dots، و$t_n$ حدودًا في~$\Lang L$، فإن
+  $\Atom{R}{t_1,\ldots, t_n}$ !!{formula} ذرية.
+
+\item إذا كان $t_1$ و$t_2$ حدين في~$\Lang L$، فإن
+  $\Atom{\eq}{t_1, t_2}$ !!{formula} ذرية.
+
+\tagitem{prvNot}{إذا كانت $!A$ !!a{formula}، فإن $\lnot !A$
+  !!a{formula}.}{}
+
+\tagitem{prvAnd}{إذا كانت $!A$ و$!B$ !!{formula}s، فإن $(!A \land
+  !B)$ !!a{formula}.}{}
+
+\tagitem{prvOr}{إذا كانت $!A$ و$!B$ !!{formula}s، فإن $(!A \lor !B)$
+  !!a{formula}.}{}
+
+\tagitem{prvIf}{إذا كانت $!A$ و$!B$ !!{formula}s، فإن $(!A \lif !B)$
+  !!a{formula}.}{}
+
+\tagitem{prvIff}{إذا كانت $!A$ و$!B$ !!{formula}s، فإن
+  $(!A \liff !B)$ !!a{formula}.}{}
+
+\tagitem{prvAll}{إذا كانت $!A$ !!a{formula} وكان $x$ !!a{variable}،
+  فإن $\lforall[x][!A]$ !!a{formula}.}{}
+
+\tagitem{prvEx}{إذا كانت $!A$ !!a{formula} وكان $x$ !!a{variable}،
+  فإن $\lexists[x][!A]$ !!a{formula}.}{}
+
+\tagitem{limitClause}{لا شيء غير ذلك !!a{formula}.}{}
+\end{enumerate}
+\end{defn}
+
+\begin{explain}
+تعريف مجموعة الحدود وتعريف مجموعة ال!!{formula}s
+\emph{تعريفان استقرائيان}. ففي جوهر الأمر، نبني مجموعة
+ال!!{formula}s عبر عدد لا نهائي من المراحل. وفي المرحلة الابتدائية
+نعلن أن جميع الصيغ الذرية صيغ؛ وهذا يقابل الحالات الأولى القليلة من
+التعريف، أي حالات
+\iftag{prvTrue}{$\ltrue$، }{}%
+\iftag{prvFalse}{$\lfalse$، }{}%
+$\Atom{R}{t_1,\dots,t_n}$ و$\Atom{\eq}{t_1,t_2}$. وهكذا تعني
+«!!{formula} ذرية» أي !!{formula} من هذا الشكل.
+
+وتعطي الحالات الأخرى من التعريف قواعد لبناء !!{formula}s جديدة من
+!!{formula}s سبق بناؤها. وفي المرحلة الثانية يمكننا استعمال تلك
+القواعد لبناء !!{formula}s من !!{formula}s ذرية. وفي المرحلة الثالثة
+نبني صيغًا جديدة من الصيغ الذرية ومن الصيغ التي حصلنا عليها في
+المرحلة الثانية، وهكذا. ويُعد الشيء !!{formula} إذا بُني في نهاية
+المطاف في مرحلة من هذه المراحل، ولا يُعد أي شيء آخر كذلك.
+\end{explain}
+
+نكتب، اصطلاحًا، $\eq$ بين حجتيها ونحذف القوسين:
+فـ~$\eq[t_1][t_2]$ اختصار لـ~$\Atom{\eq}{t_1,t_2}$. ويُختصر أيضًا
+$\lnot \Atom{\eq}{t_1,t_2}$ إلى~$\eq/[t_1][t_2]$. وعند كتابة صيغة
+$(!B \ast !C)$ منشأة من $!B$ و$!C$ باستعمال رابط ثنائي
+المحل~$\ast$، سنحذف غالبًا الزوج الخارجي من الأقواس ونكتب
+ببساطة~$!B \ast !C$.
+
+\begin{intro}
+تشترط بعض كتب المنطق أن يرد ال!!{variable}~$x$ في~$!A$ لكي تدخل
+\iftag{prvEx}{$\lexists[x][!A]$ }{}%
+\iftag{notprvEx,notprvAll}{}{و }%
+\iftag{prvAll}{$\lforall[x][!A]$ }{}%
+في عداد
+\iftag{notprvEx,notprvAll}{!!a{formula}}{!!{formula}s}.
+ولا يحدث ما يضر إذا لم تشترط ذلك، كما أن تركه ييسر الأمور.
+\end{intro}
+
+\begin{tagblock}{defNot,defOr,defAnd,defIf,defIff,defTrue,defFalse,defEx,defAll}
+\begin{defn}
+يجب فهم الصيغ المنشأة باستعمال المؤثرات المعرّفة على النحو الآتي:
+
+\begin{tagenumerate}{defTrue,defFalse,defNot,defOr,defAnd,defIf,defIff,defEx,defAll}
+
+\tagitem{defTrue}{$\ltrue$ اختصار لـ
+  \iftag{prvFalse}{$\lnot\lfalse$}{$(!A \lor \lnot !A)$، حيث تكون
+    !!{formula}~$!A$ ذرية ثابتة ما}.}{}
+
+\tagitem{defFalse}{$\lfalse$ اختصار لـ
+  \iftag{prvTrue}{$\lnot\ltrue$}{$(!A \land \lnot !A)$، حيث تكون
+    !!{formula}~$!A$ ذرية ثابتة ما}.}{}
+
+\tagitem{defNot}{$\lnot !A$ اختصار لـ~$!A \lif \lfalse$.}{}
+
+\tagitem{defOr}{$!A \lor !B$ اختصار لـ
+  \iftag{prvAnd}{$\lnot(\lnot !A \land \lnot !B)$}{$\lnot !A \lif
+    !B$}.}{}
+
+\tagitem{defAnd}{$!A \land !B$ اختصار لـ
+  \iftag{prvOr}{$\lnot(\lnot !A \lor \lnot !B)$}{$\lnot (!A \lif
+    \lnot !B)$}.}{}
+
+\tagitem{defIf}{$!A \lif !B$ اختصار لـ
+  \iftag{prvOr}{$(\lnot !A \lor !B)$}{$\lnot (!A \land \lnot !B)$}.}{}
+
+\tagitem{defIff}{$!A \liff !B$ اختصار لـ~$(!A \lif !B) \land (!B
+  \lif !A)$.}{}
+
+\tagitem{defAll}{$\lforall[x][!A]$ اختصار لـ~$\lnot\lexists[x][\lnot !A]$.}{}
+
+\tagitem{defEx}{$\lexists[x][!A]$ اختصار لـ~$\lnot\lforall[x][\lnot !A]$.}{}
+\end{tagenumerate}
+\end{defn}
+\end{tagblock}
+
+إذا عملنا في لغة لتطبيق معين، كتبنا كثيرًا ال!!{predicate}s
+وال!!{function}s ثنائية المحل بين الحدين المعنيين؛ مثل
+$t_1 < t_2$ و$(t_1 + t_2)$ في لغة الحساب، و$t_1 \in t_2$ في لغة
+نظرية المجموعات. بل من الاصطلاح كتابة دالة الخلف في لغة الحساب
+\emph{بعد} حجتها:~$t'$. لكن هذه رسميًا ليست إلا اختصارات اصطلاحية،
+على الترتيب، لـ~$\Atom{\Obj A^2_0}{t_1, t_2}$ و
+$\Obj f^2_0(t_1, t_2)$ و$\Atom{\Obj A^2_0}{t_1, t_2}$ و$\Obj f^1_0(t)$.
+
+\begin{defn}[الهوية التركيبية]
+يعبّر الرمز~$\ident$ عن الهوية التركيبية بين سلاسل الرموز؛ أي إن
+$!A \ident !B$ إذا وفقط إذا كان $!A$ و$!B$ سلسلتين من الرموز لهما
+الطول نفسه وتحتويان الرمز نفسه في كل موضع.
+\end{defn}
+
+يمكن أن تحف بالرمز~$\ident$ سلاسل ناتجة من الوصل؛ فمثلًا تعني
+$!A \ident (!B \lor !C)$ أن سلسلة الرموز~$!A$ هي السلسلة نفسها الناتجة
+من وصل قوس فاتح، والسلسلة~$!B$، والرمز~$\lor$، والسلسلة~$!C$، وقوس
+غالق، بهذا الترتيب. وإذا كان الأمر كذلك، علمنا أن الرمز الأول من~$!A$
+قوس فاتح، وأن~$!A$ تحتوي على~$!B$ بوصفها سلسلةً جزئية (تبدأ عند الرمز
+الثاني)، وأن هذه السلسلة الجزئية يليها~$\lor$، وهكذا.
+
+لما كانت الحدود وال!!{formula}s تُبنى من عناصر أساسية بواسطة تعريفات
+استقرائية، أمكننا استعمال مبدأي الاستقراء الآتيين لإثبات قضايا عنها.
+
+\begin{lem}[\emph{مبدأ الاستقراء على الحدود}]
+    \ollabel{lem:trmind}
+    لتكن $\Lang L$ لغة رتبة أولى.
+    إذا كانت خاصية ما~$P$ بحيث
+    %
+    \begin{enumerate}
+        \item تصدق في كل !!{variable}~$v$،
+        %
+        \item وتصدق في كل !!{constant}~$a$ من~$\Lang L$،
+        %
+        \item وتصدق في $f(t_1,\dotsc,t_n)$ متى صدقت في
+        $t_1$، و\dots، و$t_n$ وكانت $f$ !!{function} ذات $n$ من
+            المحال في~$\Lang L$،
+    \end{enumerate}
+    (على افتراض أن $t_1$، و\dots، و$t_n$ حدود في~$\Lang{L}$)،
+    فإن $P$ تصدق في كل حد في~$\Trm[L]$.
+\end{lem}
+
+\begin{prob}
+    أثبت \olref[fol][syn][frm]{lem:trmind}.
+\end{prob}
+
+\begin{lem}[\emph{مبدأ الاستقراء على ال!!{formula}s}]
+    \ollabel{thm:frmind}
+    لتكن $\Lang L$ لغة رتبة أولى.
+    إذا كانت خاصية ما~$P$ تصدق في جميع ال!!{formula}s الذرية
+    وكانت بحيث
+    %
+    \begin{enumerate}
+        \tagitem{prvNot}{تصدق في $\lnot !A$ متى صدقت
+            في~$!A$؛}{}
+        \tagitem{prvAnd}{تصدق في $(!A \land !B)$
+            متى صدقت في $!A$ و~$!B$؛}{}
+        \tagitem{prvOr}{تصدق في $(!A \lor !B)$
+            متى صدقت في $!A$ و~$!B$؛}{}
+        \tagitem{prvIf}{تصدق في $(!A \lif !B)$
+            متى صدقت في $!A$ و~$!B$؛}{}
+        \tagitem{prvIff}{تصدق في $(!A \liff !B)$
+            متى صدقت في $!A$ و~$!B$؛}{}
+        \tagitem{prvEx}{تصدق في $\lexists[x][!A]$
+            متى صدقت في~$!A$؛}{}
+        \tagitem{prvAll}{تصدق في $\lforall[x][!A]$
+            متى صدقت في~$!A$؛}{}
+  \end{enumerate}
+  (على افتراض أن $!A$ و$!B$ !!{formula}s في~$\Lang{L}$)،
+  فإن $P$ تصدق في جميع الصيغ في~$\Frm[L]$.
+\end{lem}
+
+\end{document}

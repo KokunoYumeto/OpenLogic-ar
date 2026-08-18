@@ -1,0 +1,189 @@
+% Part: many-valued-logic
+% Chapter: three-valued-logics
+% Section: kleene
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mvl}{thr}{skl}
+
+\olsection{منطقا كليني}
+
+قدم ستيفن كليني منطقين ثلاثيي القيم دافعهما تصور قيم الصدق بوصفها
+نتائج إجراءات حسابية: فقد يعيد الإجراء~$\True$ أو~$\False$، لكنه قد
+يعجز أيضًا عن التوقف. وفي هذه الحال تكون قيمة الصدق الموافقة غير
+معرّفة، وتمثلها قيمة الصدق~$\Undef$.
+
+لحساب نفي قضية~$!A$، نحسب أولًا قيمة~$!A$ ثم نعيد نقيض النتيجة. فإذا
+لم يتوقف حساب~$!A$، لم يتوقف الإجراء كله أيضًا؛ ولذلك يكون نفي
+$\Undef$ هو~$\Undef$.
+
+ولحساب اقتران~$!A \land !B$ خياران: يمكن أولًا حساب~$!A$، ثم~$!B$،
+وعندئذ تكون النتيجة~$\True$ إذا كانت نتيجة كليهما~$\True$، وتكون
+$\False$ في غير ذلك. وإذا عجز أي من الحسابين عن التوقف، عجز الإجراء
+كله أيضًا. لذلك إذا كان أحد المقترنين غير معرّف في هذه الحال، كان
+الاقتران غير معرّف كذلك. ويصح الأمر نفسه على الفصل.
+
+أما إذا أمكننا تقييم~$!A$ و$!B$ بالتوازي، فيمكننا تحقيق نتيجة أفضل.
+فإذا توقف أحد الإجراءين وأعاد~$\False$، أمكننا التوقف لأن الجواب لا بد
+أن يكون كاذبًا. وفي هذه الحال يكون الاقتران ذو المقترن الكاذب كاذبًا،
+حتى لو كان المقترن الآخر غير معرّف. وبالمثل، عند حساب فصل بالتوازي،
+يمكننا التوقف ما إن يعيد إجراء أحد المفصولين صادقًا؛ فعندئذ لا بد أن
+يكون الفصل صادقًا. ومن ثم يمكننا في هذه الحال معرفة نتيجة دعوى مركبة
+حتى إذا كانت إحدى مركبتيها غير معرّفة. ووفق هذا التفسير يمكننا قراءة
+$\Undef$ بمعنى ``مجهول'' بدل ``غير معرّف''.
+
+ينشأ عن التفسيرين منطق كليني القوي ومنطقه الضعيف. ويعرّف الشرط بوصفه
+مكافئًا لـ$\lnot !A \lor !B$.
+
+\begin{defn}
+يعرّف \emph{منطق كليني القوي}~$\LogKs$ بالمصفوفة الآتية:
+\begin{enumerate}
+  \item لغة القضايا القياسية~$\Lang L_0$ بروابطها
+  $\lnot$ و$\land$ و$\lor$ و$\lif$.
+  \item مجموعة قيم الصدق~$V = \{\True, \Undef, \False\}$.
+  \item $\True$ هي القيمة المميزة الوحيدة؛ أي~$V^+ = \{\True\}$.
+  \item تعطي الجداول الآتية دوال الصدق:
+  \begin{center}
+    \begin{tabular}{c|c}
+      $\tf{\lnot}$ & \\
+      \hline
+      $\True$ & $\False$ \\
+      $\Undef$ & $\Undef$ \\
+      $\False$ & $\True$
+    \end{tabular}
+    \quad
+    \begin{tabular}{c|ccc}
+      $\tf{\land}[\LogKs]$ & $\True$ & $\Undef$ & $\False$ \\
+      \hline
+      $\True$ & $\True$ & $\Undef$ & $\False$ \\
+      $\Undef$ & $\Undef$ & $\Undef$ & $\False$\\
+      $\False$ & $\False$ & $\False$ & $\False$
+    \end{tabular}
+    \\[2ex]
+    \begin{tabular}{c|ccc}
+      $\tf{\lor}[\LogKs]$ & $\True$ & $\Undef$ & $\False$ \\
+      \hline
+      $\True$ & $\True$ & $\True$ & $\True$ \\
+      $\Undef$ & $\True$ & $\Undef$ & $\Undef$ \\
+      $\False$ & $\True$ & $\Undef$ & $\False$
+    \end{tabular}
+    \quad
+    \begin{tabular}{c|ccc}
+      $\tf{\lif}[\LogKs]$ & $\True$ & $\Undef$ & $\False$ \\
+      \hline
+      $\True$ & $\True$ & $\Undef$ & $\False$ \\
+      $\Undef$ & $\True$ & $\Undef$ & $\Undef$  \\
+      $\False$ & $\True$ & $\True$ & $\True$
+    \end{tabular}
+  \end{center}
+\end{enumerate}
+\end{defn}
+
+\begin{defn}
+يعرّف \emph{منطق كليني الضعيف}~$\LogKw$ بالمصفوفة الآتية:
+\begin{enumerate}
+  \item لغة القضايا القياسية~$\Lang L_0$ بروابطها
+  $\lnot$ و$\land$ و$\lor$ و$\lif$.
+  \item مجموعة قيم الصدق~$V = \{\True, \Undef, \False\}$.
+  \item $\True$ هي القيمة المميزة الوحيدة؛ أي~$V^+ = \{\True\}$.
+  \item تعطي الجداول الآتية دوال الصدق:
+  \begin{center}
+    \begin{tabular}{c|c}
+      $\tf{\lnot}$ & \\
+      \hline
+      $\True$ & $\False$ \\
+      $\Undef$ & $\Undef$ \\
+      $\False$ & $\True$
+    \end{tabular}
+    \quad
+    \begin{tabular}{c|ccc}
+      $\tf{\land}[\LogKw]$ & $\True$ & $\Undef$ & $\False$ \\
+      \hline
+      $\True$ & $\True$ & $\Undef$ & $\False$ \\
+      $\Undef$ & $\Undef$ & $\Undef$ & $\Undef$\\
+      $\False$ & $\False$ & $\Undef$ & $\False$
+    \end{tabular}
+    \\[2ex]
+    \begin{tabular}{c|ccc}
+      $\tf{\lor}[\LogKw]$ & $\True$ & $\Undef$ & $\False$ \\
+      \hline
+      $\True$ & $\True$ & $\Undef$ & $\True$ \\
+      $\Undef$ & $\Undef$ & $\Undef$ & $\Undef$ \\
+      $\False$ & $\True$ & $\Undef$ & $\False$
+    \end{tabular}
+    \quad
+    \begin{tabular}{c|ccc}
+      $\tf{\lif}[\LogKw]$ & $\True$ & $\Undef$ & $\False$ \\
+      \hline
+      $\True$ & $\True$ & $\Undef$ & $\False$ \\
+      $\Undef$ & $\Undef$ & $\Undef$ & $\Undef$  \\
+      $\False$ & $\True$ & $\Undef$ & $\True$
+    \end{tabular}
+  \end{center}
+\end{enumerate}
+\end{defn}
+
+\begin{prop}
+  ليس لـ$\LogKs$ ولا~$\LogKw$ أي تحصيل منطقي.
+\end{prop}
+
+\begin{proof}
+  إذا كان~$\pAssign v(p) = \Undef$ لجميع~!!{propositional variable}s
+  $p$، كانت قيمة صدق أي صيغة~$!A$ هي
+  $\pValue v(!A) = \Undef$، لأن
+  \[
+    \tf{\lnot}(\Undef) = \tf{\lor}(\Undef, \Undef) = \tf{\land}(\Undef,
+  \Undef) = \tf{\lif}(\Undef, \Undef) = \Undef
+  \]
+  في كلا المنطقين. وبما أن~$\Undef \notin V^+$ في كل من~$\LogKs$
+  و$\LogKw$، فلن تكون~$!A$ مميزة في هذا~!!{valuation}.
+\end{proof}
+
+مع أنه لا توجد تحصيلات منطقية في منطق كليني الضعيف ولا القوي، فإن
+لهما علاقتي نتيجة غير تافهتين.
+
+\begin{prob}
+  أي العلاقات الآتية تصح في (أ)~منطق كليني القوي و(ب)~منطق كليني
+  الضعيف؟ أعط جدول صدق لكل منها.
+  \begin{enumerate}
+    \item $p, p \lif q \Entails q$
+    \item $p \lor q, \lnot p \Entails q$
+    \item $p \land q \Entails p$
+    \item $p \Entails p \land p$
+    \item $p \Entails p \lor q$
+  \end{enumerate}
+\end{prob}
+
+فسر دميتري بوتشفار~$\Undef$ بمعنى ``عديم المعنى''، وحاول استعمالها
+لحل مفارقات من قبيل مفارقة الكذاب بأن اشترط أن تأخذ الجمل المفارقة
+القيمة~$\Undef$. وقدم منطقًا هو في جوهره منطق كليني الضعيف موسعًا
+بروابط إضافية، منها ``النفي الخارجي'' ومؤثر ``غير معرّف'':
+\begin{center}
+  \begin{tabular}{c|c}
+    $\tf{\sim}$ & \\
+    \hline
+    $\True$ & $\False$ \\
+    $\Undef$ & $\True$ \\
+    $\False$ & $\True$
+  \end{tabular}
+\quad
+  \begin{tabular}{c|c}
+    $\tf{+}$ & \\
+    \hline
+    $\True$ & $\False$ \\
+    $\Undef$ & $\True$ \\
+    $\False$ & $\False$
+  \end{tabular}
+\end{center}
+
+\begin{prob}
+  هل يمكنك تعريف~$\sim$ في منطق بوتشفار بدلالة~$\lnot$ و$+$؛ أي
+  هل يمكنك إيجاد~!!a{formula} لا تحوي إلا~!!{propositional variable}
+  واحدًا هو~$p$، ولا تتضمن~$\sim$، وتأخذ دائمًا قيمة الصدق نفسها التي
+  يأخذها~$\mathord{\sim}p$؟ أعط جدول صدق يبين صحة جوابك.
+\end{prob}
+
+
+\end{document}

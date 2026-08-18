@@ -1,0 +1,62 @@
+% Part: normal-modal-logic
+% Chapter: completeness
+% Section: completeness-K
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{com}{cmk}
+
+\olsection{التحديد والتمام لـ\Log{K}}
+
+أصبحنا الآن مستعدين لاستعمال النموذج القانوني في إثبات التمام. ينتج
+التمام من أن ال!!{formula}s الصادقة في النموذج القانوني لـ~$\Sigma$
+هي بالضبط ال!!{derivable} من~$\Sigma$. ويقال إن النماذج التي لها هذه
+الخاصية \emph{تحدّد}~$\Sigma$.
+
+\begin{defn}
+  \emph{يحدّد} النموذج~$\mModel{M}$ منطقًا جهويًا نظاميًا~$\Sigma$
+  بالضبط حين يكون~$\mSat{M}{!A}$ إذا وفقط إذا كان
+  $\Sigma \Proves !A$، لكل ال!!{formula}s~$!A$.
+\end{defn}
+
+\begin{thm}[التحديد]\ollabel{thm:determination}
+  $\mSat{M^\Sigma}{!A}$ إذا وفقط إذا كان~$\Sigma \Proves !A$.
+\end{thm}
+
+\begin{proof}
+  إذا كان~$\mSat{M^\Sigma}{!A}$، فإن
+  $\mSat{M^\Sigma}{!A}[\Delta]$ لكل مجموعة $\Sigma$-متسقة تامة
+  $\Delta$. ومن ثم، بلمّة الصدق،~$!A \in \Delta$ لكل مجموعة
+  $\Sigma$-متسقة تامة~$\Delta$؛ وبحسب
+  \olref[lin]{cor:provability-characterization} (مع
+  $\Gamma = \emptyset$)، يكون~$\Sigma \Proves !A$.
+
+  وبالعكس، إذا كان~$\Sigma \Proves !A$، فإن كل مجموعة $\Sigma$-متسقة
+  تامة~$\Delta$ تحوي~$!A$، بحسب
+  \olref[ccs]{prop:ccs-properties}\olref[ccs]{prop:ccs-closed}؛ ومن ثم،
+  بلمّة الصدق،~$\mSat{M^\Sigma}{!A}[\Delta]$ لكل~$\Delta \in
+  W^\Sigma$، أي~$\mSat{M^\Sigma}{!A}$.
+\end{proof}
+
+ولأن النموذج القانوني لـ~\Log{K} يحدّد~\Log{K}، نحصل فورًا على تمام
+\Log{K} نتيجة لازمة:
+
+\begin{cor}\ollabel{cor:Kcomplete}
+  المنطق الجهوي الأساسي~\Log{K} تام بالنسبة إلى فئة جميع النماذج؛
+  أي إنه إذا كان~$\Entails !A$، كان~$\Log{K} \Proves !A$.
+\end{cor}
+
+\begin{proof}
+  بالمقابل، إذا كان~$\Log{K} \Proves/ !A$، فبالتحديد
+  $\mSat/{M^{\Log{K}}}{!A}$، ومن ثم ليست~$!A$ صالحة.
+\end{proof}
+
+أما الحالة العامة لتمام نسق~$\Sigma$ بالنسبة إلى فئة من النماذج---مثل
+تمام~\Log{KTB4} بالنسبة إلى فئة النماذج الانعكاسية والمتناظرة
+والمتعدية---فلا يكفي فيها التحديد وحده. بل يجب أيضًا أن نبين أن النموذج
+القانوني للنسق~$\Sigma$ ينتمي إلى الفئة، وهذا لا ينتج بوضوح من بناء
+النموذج القانوني---بل ليس صحيحًا دائمًا!
+
+\end{document}

@@ -1,0 +1,306 @@
+% Part: first-order-logic
+% Chapter: natural-deduction
+% Section: soundness
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{ntd}{sou}}
+      {\olfileid{pl}{ntd}{sou}}
+      
+\olsection{السلامة}
+
+\begin{explain}
+يكون نسق !!^a{derivation}، مثل الاستنتاج الطبيعي، \emph{سليمًا} إذا لم
+يستطع !!{derive} أمورًا لا تلزم في الواقع. ولذلك فالسلامة ضرب من خصائص
+الأمان المضمونة لأنساق ال!!{derivation}. وبحسب الخاصية المتعلقة بنظرية
+البرهان التي تكون موضع البحث، نود أن نعرف مثلًا أن:
+\begin{enumerate}
+\item كل ما هو !!{derivable} من نوع !!{sentence} يكون \iftag{FOL}{صالحًا}{تحصيل حاصل}؛
+\item إذا كانت !!a{sentence} !!{derivable} من جمل أخرى، فهي أيضًا
+  نتيجة لها؛
+\item إذا كانت مجموعة من ال!!{sentence}s غير متسقة، فهي غير قابلة
+  للإرضاء.
+\end{enumerate}
+هذه خصائص مهمة لنسق !!a{derivation}. فإذا لم تتحقق أي منها، كان نسق
+ال!!{derivation} معيبًا---إذ يكون قادرًا على !!{derive} أكثر مما ينبغي.
+ولذلك فإن إثبات سلامة نسق ال!!{derivation} في غاية الأهمية.
+\end{explain}
+
+\begin{thm}[السلامة]
+\ollabel{thm:soundness}
+إذا كانت~$!A$ !!{derivable} من الافتراضات ال!!{undischarged}
+$\Gamma$، فإن~$\Gamma \Entails !A$.
+\end{thm}
+
+\begin{proof}
+ليكن~$\delta$ !!a{derivation} لـ~$!A$. ونسير بالاستقراء على عدد
+الاستدلالات في~$\delta$.
+
+في أساس الاستقراء، نبين الدعوى عندما يكون عدد الاستدلالات~$0$. وفي
+هذه الحالة، يتألف~$\delta$ من !!{sentence} واحدة فقط هي~$!A$، أي من
+افتراض. وذلك الافتراض !!{undischarged}، لأن الافتراضات لا يمكن أن
+تكون !!{discharged} إلا باستدلالات، ولا توجد استدلالات هنا. ولذلك فإن
+كل \iftag{FOL}{!!{structure}~$\Struct{M}$}{!!{valuation}~$\pAssign{v}$}
+ترضي كل الافتراضات ال!!{undischarged} في البرهان ترضي~$!A$ أيضًا.
+
+والآن خطوة الاستقراء. افترض أن~$\delta$ يحتوي على~$n$ من الاستدلالات.
+يمكن !!{derive} مقدمة أو مقدمات الاستدلال الأدنى باستعمال
+!!{derivation}s جزئية، يحتوي كل منها على أقل من~$n$ من الاستدلالات.
+ونفترض فرض الاستقراء: تلزم مقدمات الاستدلال الأدنى عن الافتراضات
+ال!!{undischarged} في ال!!{derivation}s الجزئية المنتهية بتلك المقدمات.
+وعلينا أن نبين أن النتيجة~$!A$ تلزم عن الافتراضات ال!!{undischarged}
+في البرهان كله.
+
+نميّز الحالات بحسب نوع الاستدلال الأدنى. وننظر أولًا في الاستدلالات
+الممكنة ذات المقدمة الواحدة.
+
+\begin{enumerate}
+\item افترض أن الاستدلال الأخير هو~\Intro{\lnot}: يكون ال!!{derivation}
+  على الصورة:
+  \begin{prooftree}
+    \AxiomC{$\Gamma, \Discharge{!A}{n}$}
+    \RightLabel{$\delta_1$}
+    \DeduceC{$\lfalse$}
+    \DischargeRule{\Intro{\lnot}}{n}
+    \UnaryInfC{$\lnot !A$}
+  \end{prooftree}
+  وبفرض الاستقراء، يلزم~$\lfalse$ عن الافتراضات ال!!{undischarged}
+  $\Gamma \cup \{!A\}$ في~$\delta_1$. اعتبر
+  \iftag{FOL}{!!a{structure}~$\Struct{M}$}{!!a{valuation}~$\pAssign{v}$}.
+  علينا أن نبين أنه إذا كان~$\iftag{FOL}{\Sat{M}}{\pSat{v}}{\Gamma}$،
+  فإن~$\iftag{FOL}{\Sat{M}}{\pSat{v}}{\lnot !A}$. وافترض، طلبًا للخلف،
+  أن~$\iftag{FOL}{\Sat{M}}{\pSat{v}}{\Gamma}$، لكن
+  $\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{\lnot !A}$، أي أن
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!A}$. وهذا يعني أن
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{\Gamma \cup \{!A\}}$، وهو ما يناقض
+  فرض الاستقراء. ولذلك~$\iftag{FOL}{\Sat{M}}{\pSat{v}}{\lnot !A}$.
+
+\item الاستدلال الأخير هو~\Elim{\land}: توجد صورتان؛ فقد تُستنتج~$!A$
+  أو~$!B$ من المقدمة~$!A \land !B$. اعتبر الحالة الأولى. يبدو
+  ال!!{derivation}~$\delta$ هكذا:
+  \begin{prooftree}
+    \AxiomC{$\Gamma$}
+    \RightLabel{$\delta_1$}
+    \DeduceC{$!A \land !B$}
+    \RightLabel{\Elim{\land}}
+    \UnaryInfC{$!A$}
+  \end{prooftree}
+  وبفرض الاستقراء، تلزم~$!A \land !B$ عن الافتراضات
+  ال!!{undischarged}~$\Gamma$ في~$\delta_1$. اعتبر
+  \iftag{FOL}{!!a{structure}~$\Struct{M}$}{!!a{valuation}~$\pAssign{v}$}.
+  علينا أن نبين أنه إذا كان~$\iftag{FOL}{\Sat{M}}{\pSat{v}}{\Gamma}$،
+  فإن~$\iftag{FOL}{\Sat{M}}{\pSat{v}}{!A}$. افترض
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{\Gamma}$. ومن فرض الاستقراء
+  ($\Gamma \Entails !A \land !B$)، نعرف أن
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!A \land !B}$. وبالتعريف، يكون
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!A \land !B}$ إذا وفقط إذا كان
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!A}$ وكان
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!B}$. (وتعالج الحالة التي تُستنتج
+  فيها~$!B$ من~$!A \land !B$ على نحو مماثل.)
+  
+\item الاستدلال الأخير هو~\Intro{\lor}: توجد صورتان؛ فقد تُستنتج
+  $!A \lor !B$ من المقدمة~$!A$ أو المقدمة~$!B$. اعتبر الحالة الأولى.
+  يكون ال!!{derivation} على الصورة:
+  \begin{prooftree}
+    \AxiomC{$\Gamma$}
+    \RightLabel{$\delta_1$}
+    \DeduceC{$!A$}
+    \RightLabel{\Intro{\lor}}
+    \UnaryInfC{$!A \lor !B$}
+  \end{prooftree}
+  وبفرض الاستقراء، تلزم~$!A$ عن الافتراضات ال!!{undischarged}
+  $\Gamma$ في~$\delta_1$. اعتبر
+  \iftag{FOL}{!!a{structure}~$\Struct{M}$}{!!a{valuation}~$\pAssign{v}$}.
+  علينا أن نبين أنه إذا كان~$\iftag{FOL}{\Sat{M}}{\pSat{v}}{\Gamma}$،
+  فإن~$\iftag{FOL}{\Sat{M}}{\pSat{v}}{!A \lor !B}$. افترض
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{\Gamma}$؛ عندئذ
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!A}$ لأن~$\Gamma \Entails !A$
+  (فرض الاستقراء). ولذلك يجب أن يكون كذلك
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!A \lor !B}$. (وتعالج الحالة التي
+  تُستنتج فيها~$!A \lor !B$ من~$!B$ على نحو مماثل.)
+  
+\item الاستدلال الأخير هو~\Intro{\lif}: تُستنتج~$!A \lif !B$ من برهان
+  جزئي افتراضه~$!A$ ونتيجته~$!B$، أي:
+  \begin{prooftree}
+    \AxiomC{$\Gamma, \Discharge{!A}{n}$}
+    \RightLabel{$\delta_1$}
+    \DeduceC{$!B$}
+    \DischargeRule{\Intro{\lif}}{n}
+    \UnaryInfC{$!A \lif !B$}
+  \end{prooftree}
+  وبفرض الاستقراء، تلزم~$!B$ عن الافتراضات ال!!{undischarged} في
+  $\delta_1$، أي إن~$\Gamma \cup \{!A\} \Entails !B$. اعتبر
+  \iftag{FOL}{!!a{structure}~$\Struct{M}$}{!!a{valuation}~$\pAssign{v}$}.
+  والافتراضات ال!!{undischarged} في~$\delta$ هي~$\Gamma$ وحدها، لأن
+  $!A$ تُسقط في الاستدلال الأخير. ولذلك علينا أن نبين أن
+  $\Gamma \Entails !A \lif !B$. وافترض، طلبًا للخلف، أنه لبعض
+  \iftag{FOL}{!!{structure}~$\Struct{M}$}{!!{valuation}~$\pAssign{v}$}،
+  يكون~$\iftag{FOL}{\Sat{M}}{\pSat{v}}{\Gamma}$، لكن
+  $\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{!A \lif !B}$. ومن ثم يكون
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!A}$ و
+  $\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{!B}$. لكن بفرضنا تكون~$!B$ نتيجة
+  لـ~$\Gamma \cup \{!A\}$، أي إن
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!B}$، وهذا تناقض. ولذلك
+  $\Gamma \Entails !A \lif !B$.
+
+\item الاستدلال الأخير هو~\FalseInt: ينتهي~$\delta$ هنا هكذا:
+  \begin{prooftree}
+    \AxiomC{$\Gamma$}
+    \RightLabel{$\delta_1$}
+    \DeduceC{$\lfalse$}
+    \RightLabel{\FalseInt}
+    \UnaryInfC{$!A$}
+  \end{prooftree}
+  وبفرض الاستقراء، يكون~$\Gamma \Entails \lfalse$. وعلينا أن نبين أن
+  $\Gamma \Entails !A$. افترض خلاف ذلك؛ عندئذ لبعض
+  $\iftag{FOL}{\Struct{M}}{\pAssign{v}}$ يكون
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{\Gamma}$ و
+  $\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{!A}$. لكن يكون دائمًا
+  $\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{\lfalse}$، ولذلك يعني هذا أن
+  $\Gamma \Entails/ \lfalse$، خلافًا لفرض الاستقراء.
+
+\item الاستدلال الأخير هو~\FalseCl: تمرين.
+
+\iftag{FOL}{
+\item الاستدلال الأخير هو~\Intro{\lforall}: يكون~$\delta$ عندئذ على
+  الصورة:
+  \begin{prooftree}
+    \AxiomC{$\Gamma$}
+    \RightLabel{$\delta_1$}
+    \DeduceC{$!A(a)$}
+    \RightLabel{\Intro{\lforall}}
+    \UnaryInfC{$\lforall[x][!A(x)]$}
+  \end{prooftree}
+  تكون المقدمة~$!A(a)$ نتيجةً للافتراضات ال!!{undischarged}~$\Gamma$
+  بفرض الاستقراء. اعتبر بنية~$\Struct{M}$ بحيث~$\Sat{M}{\Gamma}$.
+  وعلينا أن نبين أن~$\Sat{M}{\lforall[x][!A(x)]}$. وبما أن
+  $\lforall[x][!A(x)]$ !!a{sentence}، يعني هذا أن علينا أن نبين أنه لكل
+  إسناد متغيرات~$s$ يكون~$\Sat{M}{!A(x)}[s]$
+  (\olref[syn][ass]{prop:sat-quant}). وبما أن~$\Gamma$ لا تتألف إلا من
+  جمل، يكون~$\Sat{M}{!B}[s]$ لكل~$!B \in \Gamma$ بحسب
+  \olref[syn][sat]{defn:satisfaction}. ولتكن~$\Struct{M'}$ مثل
+  $\Struct{M}$ إلا في أن~$\Assign{a}{M'} = s(x)$. وبما أن~$a$ لا يرد
+  في~$\Gamma$، يكون~$\Sat{M'}{\Gamma}$ بحسب
+  \olref[syn][ext]{cor:extensionality-sent}. وبما أن
+  $\Gamma \Entails !A(a)$، يكون~$\Sat{M'}{!A(a)}$. وبما أن~$!A(a)$
+  !!a{sentence}، يكون~$\Sat{M'}{!A(a)}[s]$ بحسب
+  \olref[syn][ass]{prop:sentence-sat-true}. ويكون
+  $\Sat{M'}{!A(x)}[s]$ إذا وفقط إذا كان~$\Sat{M'}{!A(a)}$ بحسب
+  \olref[syn][ext]{prop:ext-formulas} (تذكّر أن~$!A(a)$ ليست إلا
+  $\Subst{!A(x)}{a}{x}$). ولذلك~$\Sat{M'}{!A(x)}[s]$. وبما أن~$a$ لا
+  يرد في~$!A(x)$، فإنه بحسب \olref[syn][ext]{prop:extensionality} يكون
+  $\Sat{M}{!A(x)}[s]$. لكن~$s$ كان إسناد متغيرات اعتباطيًا، ولذلك
+  $\Sat{M}{\lforall[x][!A(x)]}$.
+  
+\item الاستدلال الأخير هو~\Intro{\lexists}: تمرين.
+
+\item الاستدلال الأخير هو~\Elim{\forall}: تمرين.
+}{}
+\end{enumerate}
+
+والآن لننظر في الاستدلالات الممكنة ذات المقدمات المتعددة:
+\Elim{\lor} و\Intro{\land} و\iftag{FOL}{\Elim{\lif} و
+  \Elim{\lexists}}{\Elim{\lif}}.
+\begin{enumerate}
+
+\item الاستدلال الأخير هو~\Intro{\land}. تُستنتج~$!A \land !B$ من
+  المقدمتين~$!A$ و$!B$، ويكون~$\delta$ على الصورة:
+  \begin{prooftree}
+    \AxiomC{$\Gamma_1$}
+    \RightLabel{$\delta_1$}
+    \DeduceC{$!A$}
+    \AxiomC{$\Gamma_2$}
+    \RightLabel{$\delta_2$}
+    \DeduceC{$!B$}
+    \RightLabel{\Intro{\land}}
+    \BinaryInfC{$!A \land !B$}
+  \end{prooftree}
+  وبفرض الاستقراء، تلزم~$!A$ عن الافتراضات ال!!{undischarged}
+  $\Gamma_1$ في~$\delta_1$، وتلزم~$!B$ عن الافتراضات
+  ال!!{undischarged}~$\Gamma_2$ في~$\delta_2$. والافتراضات
+  ال!!{undischarged} في
+  $\delta$ هي~$\Gamma_1 \cup \Gamma_2$، ولذلك علينا أن نبين أن
+  $\Gamma_1 \cup \Gamma_2 \Entails !A \land !B$. اعتبر
+  \iftag{FOL}{!!a{structure}~$\Struct{M}$}{!!a{valuation}~$\pAssign{v}$}
+  بحيث~$\iftag{FOL}{\Sat{M}}{\pSat{v}}{\Gamma_1 \cup \Gamma_2}$.
+  وبما أن~$\iftag{FOL}{\Sat{M}}{\pSat{v}}{\Gamma_1}$، يجب أن يكون
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!A}$ لأن~$\Gamma_1 \Entails !A$،
+  وبما أن~$\iftag{FOL}{\Sat{M}}{\pSat{v}}{\Gamma_2}$، يكون
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!B}$ لأن~$\Gamma_2 \Entails !B$.
+  ويكونان معًا~$\iftag{FOL}{\Sat{M}}{\pSat{v}}{!A \land !B}$.
+  
+\item الاستدلال الأخير هو~\Elim{\lor}: تمرين.
+
+\item الاستدلال الأخير هو~\Elim{\lif}. تُستنتج~$!B$ من المقدمتين
+  $!A \lif !B$ و$!A$. ويبدو ال!!{derivation}~$\delta$ هكذا:
+  \begin{prooftree}
+    \AxiomC{$\Gamma_1$}
+    \RightLabel{$\delta_1$}
+    \DeduceC{$!A \lif !B$}
+    \AxiomC{$\Gamma_2$}
+    \RightLabel{$\delta_2$}
+    \DeduceC{$!A$}
+    \RightLabel{\Elim{\lif}}
+    \BinaryInfC{$!B$}
+  \end{prooftree}
+  وبفرض الاستقراء، تلزم~$!A \lif !B$ عن الافتراضات ال!!{undischarged}
+  $\Gamma_1$ في~$\delta_1$، وتلزم~$!A$ عن الافتراضات
+  ال!!{undischarged}~$\Gamma_2$ في~$\delta_2$. اعتبر
+  \iftag{FOL}{!!a{structure}~$\Struct{M}$}{!!a{valuation}~$\pAssign{v}$}.
+  علينا أن نبين أنه إذا كان
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{\Gamma_1 \cup \Gamma_2}$، فإن
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!B}$. افترض
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{\Gamma_1 \cup \Gamma_2}$. وبما أن
+  $\Gamma_1 \Entails !A \lif !B$، يكون
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!A \lif !B}$. وبما أن
+  $\Gamma_2 \Entails !A$، يكون~$\iftag{FOL}{\Sat{M}}{\pSat{v}}{!A}$.
+  ويعني هذا أن~$\iftag{FOL}{\Sat{M}}{\pSat{v}}{!B}$ (لأنه لو كان
+  $\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{!B}$، فبما أن
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!A}$، لكان
+  $\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{!A \lif !B}$، وهو ما يناقض
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!A \lif !B}$).
+
+\item الاستدلال الأخير هو~\Elim{\lnot}: تمرين.
+  
+\tagitem{FOL}{الاستدلال الأخير هو~\Elim{\lexists}: تمرين.}{}
+\end{enumerate}
+\end{proof}
+
+\tagprob{FOL}
+\begin{prob}
+أكمل برهان \olref[fol][ntd][sou]{thm:soundness}.
+\end{prob}
+\tagendprob
+
+\tagprob{notFOL}
+\begin{prob}
+أكمل برهان \olref[pl][ntd][sou]{thm:soundness}.
+\end{prob}
+\tagendprob
+
+\begin{cor}
+\ollabel{cor:weak-soundness}
+إذا كان~$\Proves !A$، فإن~$!A$ \iftag{FOL}{صالحة}{تحصيل حاصل}.
+\end{cor}
+
+\begin{cor}
+\ollabel{cor:consistency-soundness}
+إذا كانت~$\Gamma$ قابلة للإرضاء، فهي متسقة.
+\end{cor}
+
+\begin{proof}
+نبرهن المقابل بالنقيض. افترض أن~$\Gamma$ غير متسقة. عندئذ
+$\Gamma \Proves \lfalse$، أي إنه يوجد !!a{derivation} لـ~$\lfalse$ من
+افتراضات !!{undischarged} في~$\Gamma$. ومن \olref{thm:soundness}، كل
+\iftag{FOL}{!!{structure}~$\Struct{M}$}{!!{valuation}~$\pAssign{v}$}
+ترضي~$\Gamma$ يجب أن ترضي~$\lfalse$. وبما أن
+$\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{\lfalse}$ لكل
+\iftag{FOL}{!!{structure}~$\Struct{M}$}{!!{valuation}~$\pAssign{v}$}،
+فلا يمكن لأي \iftag{FOL}{$\Struct{M}$}{$\pAssign{v}$} أن ترضي
+$\Gamma$، أي إن~$\Gamma$ غير قابلة للإرضاء.
+\end{proof}
+
+\end{document}

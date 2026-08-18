@@ -1,0 +1,127 @@
+% Part: many-valued-logic
+% Chapter: infinite-valued-logics
+% Section: goedel
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mvl}{inf}{god}
+
+\olsection{منطقات غودل}
+
+\begin{editorial}
+  هذه ``بذرة'' قصيرة لقسم عن منطق غودل اللانهائي القيم.
+\end{editorial}
+
+\begin{defn}\ollabel{def:goedel} يعرّف منطق غودل اللانهائي القيم
+$\LogGod[\infty]$ بالمصفوفة الآتية:
+\begin{enumerate}
+  \item لغة القضايا القياسية~$\Lang L_0$ بروابطها
+  $\lfalse$ و$\lnot$ و$\land$ و$\lor$ و$\lif$.
+  \item مجموعة قيم الصدق~$V_\infty$.
+  \item $1$ هي القيمة المميزة الوحيدة؛ أي~$V^+ = \{1\}$.
+  \item تعطي الدوال الآتية دوال الصدق:
+  \begin{align*}
+    \tf{\lfalse} & = 0\\
+    \tf{\lnot}[\LogGod](x) & = \begin{cases}
+      1 & \text{إذا كان } x =0\\
+      0 & \text{في غير ذلك}
+    \end{cases}\\
+    \tf{\land}[\LogGod](x,y) & = \min(x,y)\\
+    \tf{\lor}[\LogGod](x,y) & = \max(x,y)\\
+    \tf{\lif}[\LogGod](x,y) & = \begin{cases}
+      1 & \text{إذا كان } x \le y\\
+      y & \text{في غير ذلك.}
+    \end{cases}
+    \end{align*}
+\end{enumerate}
+ويعرّف منطق غودل ذو~$m$ من القيم بالطريقة نفسها، عدا أن~$V = V_m$.
+\end{defn}
+
+\begin{prop}
+  المنطق~$\LogGod[3]$ المعرّف في \olref[thr][god]{defn:goedel} هو
+  نفسه~$\LogGod[3]$ المعرّف في \olref{def:goedel}.
+\end{prop}
+
+\begin{proof}
+  يتضح ذلك بمقارنة جداول صدق الروابط المعطاة في
+  \olref[thr][god]{defn:goedel} بجداول الصدق التي تحددها المعادلات في
+  \olref{def:goedel}:
+  \begin{center}
+    \begin{tabular}{c|c}
+      $\tf{\lnot}[\LogGod[3]]$ & \\
+      \hline
+      $1$ & $0$ \\
+      $1/2$ & $0$ \\
+      $0$ & $1$
+    \end{tabular}
+    \quad
+    \begin{tabular}{c|ccc}
+      $\tf{\land}[\LogGod]$ & $1$ & $1/2$ & $0$ \\
+      \hline
+      $1$ & $1$ & $1/2$ & $0$ \\
+      $1/2$ & $1/2$ & $1/2$ & $0$\\
+      $0$ & $0$ & $0$ & $0$
+    \end{tabular}
+    \\[2ex]
+    \begin{tabular}{c|ccc}
+      $\tf{\lor}[\LogGod]$ & $1$ & $1/2$ & $0$ \\
+      \hline
+      $1$ & $1$ & $1$ & $1$ \\
+      $1/2$ & $1$ & $1/2$ & $1/2$ \\
+      $0$ & $1$ & $1/2$ & $0$
+    \end{tabular}
+    \quad
+    \begin{tabular}{c|ccc}
+      $\tf{\lif}[\LogGod]$ & $1$ & $1/2$ & $0$ \\
+      \hline
+      $1$ & $1$ & $1/2$ & $0$ \\
+      $1/2$ & $1$ & $1$ & $0$  \\
+      $0$ & $1$ & $1$ & $1$
+    \end{tabular}
+  \end{center}
+\end{proof}
+
+\begin{prop}\ollabel{prop:god-infty-m}
+  إذا كان~$\Gamma \Entails[\LogGod[\infty]] !B$، فإن
+  $\Gamma \Entails[\LogGod[m]] !B$ لكل~$m \ge 2$.
+\end{prop}
+
+\begin{proof}
+  تمرين.
+\end{proof}
+
+\begin{prob}
+  أثبت \olref[mvl][inf][god]{prop:god-infty-m}.
+\end{prob}
+
+وفي الواقع يصح العكس أيضًا.
+
+مثل~$\LogGod[3]$، يتخذ~$\LogGod[\infty]$ جميع~!!{formula}s الصحيحة
+حدسيًا تحصيلات منطقية، والأمثلة نفسها للصيغ غير المحصلة ليست تحصيلات
+في~$\LogGod[\infty]$:
+\begin{align*}
+  & p \lor \lnot p && (p \lif q) \lif (\lnot p \lor q) \\
+  & \lnot\lnot p \lif p && \lnot(\lnot p \land \lnot q) \lif (p \lor q) \\
+  & ((p \lif q) \lif p) \lif p && \lnot(p \lif q) \lif (p \land \lnot q)
+\end{align*}
+ومثال~!!{formula} غير الصحيحة حدسيًا التي تكون مع ذلك تحصيلًا منطقيًا
+في~$\LogGod[3]$، وهو~$(p \lif q) \lor (q \lif p)$، تحصيل منطقي أيضًا
+في~$\LogGod[\infty]$. بل يمكن وصف~$\LogGod[\infty]$ بأنه المنطق
+الحدسي بعد إضافة المخطط~$(!A \lif !B) \lor (!B \lif !A)$. وقد أثبت
+ذلك مايكل دَمِت، ولذلك يسمى~$\LogGod[\infty]$ كثيرًا منطق غودل--دَمِت
+$\Log{LC}$.
+
+\begin{prob}
+  بين أن~$(p \lif q) \lor (q \lif p)$ تحصيل منطقي في
+  $\LogGod[\infty]$.
+\end{prob}
+
+\begin{prob}
+  بين أن~$(p \lif q) \lor (q \lif r) \lor (r \lif s)$، وهو تحصيل
+  منطقي في~$\LogGod[3]$، ليس تحصيلًا منطقيًا في~$\LogGod[\infty]$.
+\end{prob}
+
+\end{document}
+

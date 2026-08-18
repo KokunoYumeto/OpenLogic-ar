@@ -1,0 +1,36 @@
+% Part: first-order-logic
+% Chapter: axiomatic-deduction
+% Section: proving-things-quant
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{axd}{prq}
+
+\olsection{\usetoken{P}{derivation} مع الكمّيات}
+
+\begin{ex}
+لننشئ !!a{derivation} لــ$(\lforall[x][!A(x)] \land
+\lforall[y][!B(y)]) \lif \lforall[x][(!A(x) \land !B(x))]$.
+
+لاحظ أولًا أن
+\begin{align*}
+  (\lforall[x][!A(x)] \land \lforall[y][!B(y)]) & \lif \lforall[x][!A(x)]\\
+  \intertext{حالة من \olref[prp]{ax:land1}، وأن}
+  \lforall[x][!A(x)] & \lif !A(a) \\
+  \intertext{حالة من \olref[qua]{ax:q1}. ولذلك نعرف، بحسب \olref[pro]{prop:chain}، أن}
+  (\lforall[x][!A(x)] \land \lforall[y][!B(y)]) & \lif !A(a) \\
+  \intertext{!!{derivable}. وبالمثل، بما أن}
+  (\lforall[x][!A(x)] \land \lforall[y][!B(y)]) & \lif \lforall[y][!B(y)] \qquad\text{و}\\
+    \lforall[y][!B(y)] & \lif !B(a)\\
+    \intertext{حالتان من \olref[prp]{ax:land2} و\olref[qua]{ax:q1}، على الترتيب، فإن}
+    (\lforall[x][!A(x)] \land \lforall[y][!B(y)]) & \lif !B(a)\\
+    \intertext{قابلة للاشتقاق بحسب \olref[pro]{prop:chain}. وباستخدام حالة مناسبة من \olref[prp]{ax:land3} وتطبيقين لــ~\MP، نرى أن}
+    (\lforall[x][!A(x)] \land \lforall[y][!B(y)]) & \lif (!A(a) \land !B(a))\\
+    \intertext{قابلة للاشتقاق. ويمكننا الآن تطبيق \QR{} لنحصل على}
+(\lforall[x][!A(x)] \land \lforall[y][!B(y)]) & \lif \lforall[x][(!A(x) \land !B(x))].
+\end{align*}
+\end{ex}
+
+\end{document}

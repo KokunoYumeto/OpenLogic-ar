@@ -1,0 +1,63 @@
+% Part: counterfactuals
+% Chapter: introduction
+% Section: material-conditional
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cnt}{int}{mat}
+
+\olsection{الشرط المادي}
+
+الشرط في أبسط صوره في الإنجليزية جملة من الصورة «إذا \dots، فإن
+\dots»، حيث تكون المواضع~\dots{} جملًا هي الأخرى، مثل «إذا كان الخادم
+هو الفاعل، فإن البستاني بريء». وفي مقررات المنطق التمهيدية نتعلم تمثيل
+الشرطيات باستعمال الرابط~$\lif$: فنرمز إلى الجزأين المشار إليهما
+بـ~\dots، مثلًا، بـ!!{formula}~$!A$ و$!B$، ثم نرمز إلى الشرط كله
+بـ~$!A \lif !B$.
+
+الرابط~$\lif$ \emph{دالة صدق}، أي إن قيمة صدق~$!A \lif !B$،
+وهي~$\True$ أو~$\False$، تتحدد بقيمتي صدق~$!A$ و$!B$:
+تكون~$!A \lif !B$ صادقة إذا وفقط إذا كانت~$!A$ كاذبة أو كانت~$!B$
+صادقة، وتكون كاذبة فيما عدا ذلك. وبالنسبة إلى إسناد لقيم الصدق
+$\pAssign v$، نعرّف~$\pSat{v}{!A \lif !B}$ إذا وفقط إذا كان
+$\pSat/{v}{!A}$ أو~$\pSat{v}{!B}$. ويسمى الرابط~$\lif$ المقترن
+بهذه الدلالة \emph{الشرط المادي}.
+
+ينتج من هذا التعريف عدد من الحقائق المنطقية الأولية. فأولًا، تصح مبرهنة
+الاستنباط للشرط المادي:
+\begin{align}
+  \text{إذا كان } \Gamma, !A \Entails !B \text{ فإن } \Gamma \Entails !A \lif !B
+\end{align}
+وهو دالة صدق: فالعبارتان~$!A \lif !B$ و$\lnot !A \lor !B$ متكافئتان:
+\begin{align}
+  !A \lif !B & \Entails \lnot !A \lor !B\\
+  \lnot !A \lor !B & \Entails !A \lif !B
+  \intertext{يستلزم تالي الشرط المادي الشرط نفسه، وكذلك يستلزمه نفي مقدمه:}
+  !B & \Entails !A \lif !B\\
+  \lnot !A & \Entails !A \lif !B
+  \intertext{نفي الشرط المادي مكافئ لاقتران مقدمه بنفي تاليه: فإذا كان
+    $!A \lif !B$ كاذبًا، كان~$!A \land \lnot !B$ صادقًا، والعكس:}
+  \lnot(!A \lif !B) & \Entails !A \land \lnot !B\\
+  !A \land \lnot !B & \Entails \lnot(!A \lif !B)
+  \intertext{يدعم الشرط المادي قاعدة إثبات التالي:}
+  !A, !A \lif !B & \Entails !B
+  \intertext{يمكن تجميع الشروط المادية:}
+  !A \lif !B,  !A \lif !C & \Entails !A \lif (!B \land !C)
+  \intertext{يمكننا دائمًا تقوية المقدّم، أي إن الشرط \emph{رتيب}:}
+  !A \lif !B & \Entails (!A \land !C) \lif !B
+  \intertext{الشرط المادي متعدٍّ، أي إن قاعدة السلسلة صالحة:}
+  !A \lif !B, !B \lif !C & \Entails !A \lif !C
+  \intertext{الشرط المادي مكافئ لمقابله بالنقيض:}
+  !A \lif !B & \Entails \lnot !B \lif \lnot !A\\
+  \lnot !B \lif \lnot !A & \Entails !A \lif !B
+\end{align}
+
+هذه كلها استدلالات نافعة ولا إشكال فيها في الاستدلال الرياضي. غير أن
+الأدبيات الفلسفية واللغوية حافلة بنماذج مضادة مزعومة للاستدلالات المكافئة
+في السياقات غير الرياضية. وتوحي هذه النماذج بأن الشرط المادي~$\lif$
+ليس الرابط الملائم، أو ليس ملائمًا دائمًا على الأقل، عند تمثيل العبارات
+الإنجليزية من قبيل «إذا \dots، فإن \dots».
+
+\end{document}

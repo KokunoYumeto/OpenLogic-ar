@@ -1,0 +1,297 @@
+% Part: first-order-logic
+% Chapter: natural-deduction
+% Section: proving-things
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{ntd}{pro}}
+      {\olfileid{pl}{ntd}{pro}}
+
+\olsection{أمثلة على \usetoken{P}{derivation}}
+
+\begin{ex}
+لنعط !!a{derivation} لل!!{sentence}~$(!A \land !B) \lif !A$.
+
+نبدأ بكتابة النتيجة المطلوبة في أسفل ال!!{derivation}.
+\begin{prooftree}
+\AxiomC{}
+\UnaryInfC{$(!A\land !B) \lif !A$}
+\end{prooftree}
+
+بعد ذلك، يلزمنا أن نحدد نوع الاستدلال الذي يمكن أن ينتج !!a{sentence}
+على هذه الصورة. ال!!{main operator} للنتيجة هو~$\lif$، ولذلك سنحاول
+الوصول إلى النتيجة باستعمال قاعدة~\Intro{\lif}. ومن الأفضل أن تكتب
+الافتراضات الداخلة وتضع وسوم قواعد الاستدلال كلما تقدمت، حتى يسهل
+التبين مما إذا كانت كل الافتراضات قد !!{discharged} في نهاية البرهان.
+\begin{prooftree}
+\AxiomC{$\Discharge{!A \land !B}{1}$}
+\DeduceC{$!A$}
+\DischargeRule{\Intro{\lif}}{1} 
+\UnaryInfC{$(!A\land !B) \lif !A$}
+\end{prooftree}
+
+يلزمنا الآن ملء الخطوات من الافتراض~$!A \land !B$ إلى~$!A$. ولما كان
+لدينا رابط واحد فقط نتعامل معه، وهو~$\land$، وجب أن نستعمل قاعدة حذف
+$\land$. وهذا يعطينا البرهان الآتي:
+\begin{prooftree}
+\AxiomC{$\Discharge{!A \land !B}{1}$}
+\RightLabel{\Elim{\land}}
+\UnaryInfC{$!A$}
+\DischargeRule{\Intro{\lif}}{1} 
+\UnaryInfC{$(!A\land !B) \lif !A$}
+\end{prooftree}
+لدينا الآن !!{derivation} صحيح لـ~$(!A \land !B) \lif !A$.
+\end{ex}
+
+\begin{ex}
+لنعط الآن !!a{derivation} لـ~$(\lnot !A \lor !B)
+\lif (!A \lif !B)$.
+
+نبدأ بكتابة النتيجة المطلوبة في أسفل ال!!{derivation}.
+\begin{prooftree}
+\AxiomC{}
+\UnaryInfC{$(\lnot !A \lor !B) \lif (!A \lif !B)$}
+\end{prooftree}
+لإيجاد قاعدة منطقية يمكن أن تعطينا هذه النتيجة، ننظر في الروابط
+المنطقية في النتيجة: $\lnot$ و$\lor$ و$\lif$. ولا يعنينا في هذه
+اللحظة إلا الورود الأول لـ~$\lif$، لأنه ال!!{main operator}
+لل!!{sentence} الواقعة في أسفل الاشتقاق، في حين تقع~$\lnot$
+و$\lor$ والورود الثاني لـ~$\lif$ في نطاق رابط آخر، ولذلك سنتناولها
+لاحقًا. فنبدأ إذن بقاعدة~\Intro{\lif}. ويجب أن يكون التطبيق الصحيح
+على الصورة الآتية:
+\begin{prooftree}
+\AxiomC{$\Discharge{\lnot !A \lor !B}{1}$}
+\DeduceC{$!A \lif !B$}
+\DischargeRule{\Intro{\lif}}{1}
+\UnaryInfC{$(\lnot !A \lor !B) \lif (!A \lif !B)$}
+\end{prooftree}
+يترك لنا هذا إمكانين للمتابعة: فإما أن نواصل العمل من الأسفل إلى
+الأعلى ونبحث عن تطبيق آخر لقاعدة~\Intro{\lif}، وإما أن نعمل من
+الأعلى إلى الأسفل ونطبق قاعدة~\Elim{\lor}. ولنطبق الأخيرة. سنستعمل
+الافتراض~$\lnot !A \lor !B$ مقدمةً يسرى لقاعدة~\Elim{\lor}.
+ولكي يكون تطبيق~\Elim{\lor} صحيحًا، يجب أن تطابق المقدمتان الأخريان
+النتيجة~$!A \lif !B$، لكن يمكن اشتقاق كل منهما بدورها من افتراض آخر،
+وهو أحد فصلي~$\lnot !A \lor !B$. ولذلك سيبدو !!{derivation}نا هكذا:
+\begin{prooftree}
+\AxiomC{$\Discharge{\lnot !A \lor !B}{1}$}
+\AxiomC{$\Discharge{\lnot !A}{2}$}
+\DeduceC{$!A \lif !B$}
+\AxiomC{$\Discharge{!B}{2}$}
+\DeduceC{$!A \lif !B$}
+\DischargeRule{\Elim{\lor}}{2}
+\TrinaryInfC{$!A \lif !B$}
+\DischargeRule{\Intro{\lif}}{1} 
+\UnaryInfC{$(\lnot !A \lor !B) \lif (!A \lif !B)$}
+\end{prooftree}
+
+نريد في كل من الفرعين الواقعين على اليمين أن !!{derive}~$!A \lif !B$،
+وأفضل ما ينجز ذلك استعمال~\Intro{\lif}.
+\begin{prooftree}
+\AxiomC{$\Discharge{\lnot !A \lor !B}{1}$}
+\AxiomC{$\Discharge{\lnot !A}{2}, \Discharge{!A}{3}$}
+\DeduceC{$!B$}
+\DischargeRule{\Intro{\lif}}{3}
+\UnaryInfC{$!A \lif !B$}
+\AxiomC{$\Discharge{!B}{2}, \Discharge{!A}{4}$}
+\DeduceC{$!B$}
+\DischargeRule{\Intro{\lif}}{4}
+\UnaryInfC{$!A \lif !B$}
+\DischargeRule{\Elim{\lor}}{2}
+\TrinaryInfC{$!A \lif !B$}
+\DischargeRule{\Intro{\lif}}{1} 
+\UnaryInfC{$(\lnot !A \lor !B) \lif (!A \lif !B)$}
+\end{prooftree}
+
+نحتاج في الجزأين الناقصين من ال!!{derivation} إلى !!{derivation}s
+لـ~$!B$ من~$\lnot !A$ و$!A$ في الوسط، ومن~$!A$ و$!B$ على اليسار.
+ولنأخذ الأول أولًا. إن~$\lnot !A$ و$!A$ هما مقدمتا~\Elim{\lnot}:
+\begin{prooftree}
+\AxiomC{$\Discharge{\lnot !A}{2}$}
+\AxiomC{$\Discharge{!A}{3}$}
+\RightLabel{\Elim{\lnot}}
+\BinaryInfC{$\lfalse$}
+\DeduceC{$!B$}
+\end{prooftree}
+وباستعمال~\FalseInt، يمكننا الحصول على~$!B$ نتيجةً وإكمال الفرع.
+\begin{prooftree}
+\AxiomC{$\Discharge{\lnot !A \lor !B}{1}$}
+\AxiomC{$\Discharge{\lnot !A}{2}$}
+\AxiomC{$\Discharge{!A}{3}$}
+\RightLabel{\Elim{\lnot}}
+\BinaryInfC{$\lfalse$}
+\RightLabel{\FalseInt}
+\UnaryInfC{$!B$}
+\DischargeRule{\Intro{\lif}}{3}
+\UnaryInfC{$!A \lif !B$}
+\AxiomC{$\Discharge{!B}{2}, \Discharge{!A}{4}$}
+\DeduceC{$!B$}
+\DischargeRule{\Intro{\lif}}{4}
+\UnaryInfC{$!A \lif !B$}
+\DischargeRule{\Elim{\lor}}{2}
+\TrinaryInfC{$!A \lif !B$}
+\DischargeRule{\Intro{\lif}}{1} 
+\UnaryInfC{$(\lnot !A \lor !B) \lif (!A \lif !B)$}
+\end{prooftree}
+
+لننظر الآن في الفرع الواقع أقصى اليمين. المهم هنا أن ندرك أن تعريف
+ال!!{derivation} \emph{يسمح بإسقاط الافتراضات} لكنه \emph{لا يشترط}
+إسقاطها. وبعبارة أخرى، إذا أمكننا اشتقاق~$!B$ من أحد الافتراضين~$!A$
+و$!B$ من دون استعمال الآخر، فلا بأس بذلك. و!!{derive}~$!B$ من~$!B$
+أمر بديهي: فـ~$!B$ بمفردها !!a{derivation} من هذا القبيل، ولا يلزم أي
+استدلال. ولذلك يمكننا ببساطة حذف الافتراض~$!A$.
+\begin{prooftree}
+\AxiomC{$\Discharge{\lnot !A \lor !B}{1}$}
+\AxiomC{$\Discharge{\lnot !A}{2}$}
+\AxiomC{$\Discharge{!A}{3}$}
+\RightLabel{\Elim{\lnot}}
+\BinaryInfC{$\lfalse$}
+\RightLabel{\FalseInt}
+\UnaryInfC{$!B$}
+\DischargeRule{\Intro{\lif}}{3}
+\UnaryInfC{$!A \lif !B$}
+\AxiomC{$\Discharge{!B}{2}$}
+\RightLabel{\Intro{\lif}}
+\UnaryInfC{$!A \lif !B$}
+\DischargeRule{\Elim{\lor}}{2}
+\TrinaryInfC{$!A \lif !B$}
+\DischargeRule{\Intro{\lif}}{1} 
+\UnaryInfC{$(\lnot !A \lor !B) \lif (!A \lif !B)$}
+\end{prooftree}
+لاحظ أنه في ال!!{derivation} المكتمل لا يسقط استدلال~\Intro{\lif}
+الواقع أقصى اليمين أي افتراض في الواقع.
+\end{ex}
+
+\begin{ex}
+لم نحتج حتى الآن إلى قاعدة~\FalseCl{}. وتمتاز بأنها تتيح لنا إسقاط
+افتراض ليس !!{formula} جزئية من نتيجة القاعدة. وهي وثيقة الصلة بقاعدة
+\FalseInt{}. والواقع أن قاعدة~\FalseInt{} حالة خاصة من قاعدة
+\FalseCl{}---وهناك منطق يسمى ``المنطق الحدسي'' لا يسمح إلا بـ
+\FalseInt{}. وقاعدة~\FalseCl{} ملاذ أخير حين لا ينجح شيء آخر. فافترض
+مثلًا أننا نريد !!{derive}~$!A \lor \lnot !A$. ستكون استراتيجيتنا
+المعتادة محاولة !!{derive}~$!A \lor \lnot !A$ باستعمال~$\Intro{\lor}$.
+لكن هذا يتطلب منا !!{derive} إما~$!A$ أو~$\lnot !A$ من دون افتراضات،
+وهو غير ممكن. فلتنقذنا~\FalseCl{}!
+\begin{prooftree}
+  \AxiomC{$\Discharge{\lnot(!A \lor \lnot !A)}{1}$}
+  \DeduceC{$\lfalse$}
+  \DischargeRule{\FalseCl}{1}
+  \UnaryInfC{$!A \lor \lnot !A$}
+\end{prooftree}
+نبحث الآن عن !!a{derivation} لـ~$\lfalse$ من~$\lnot(!A \lor
+\lnot !A)$. وبما أن~$\lfalse$ نتيجة~$\Elim{\lnot}$، فقد نجربها:
+\begin{prooftree}
+  \AxiomC{$\Discharge{\lnot(!A \lor \lnot !A)}{1}$}
+  \DeduceC{$\lnot !A$}
+  \AxiomC{$\Discharge{\lnot(!A \lor \lnot !A)}{1}$}
+  \DeduceC{$!A$}
+  \RightLabel{\Elim{\lnot}}
+  \BinaryInfC{$\lfalse$}
+  \DischargeRule{\FalseCl}{1}
+  \UnaryInfC{$!A \lor \lnot !A$}
+\end{prooftree}
+تدعو استراتيجيتنا لإيجاد !!a{derivation} لـ~$\lnot !A$ إلى تطبيق
+$\Intro{\lnot}$:
+\begin{prooftree}
+  \AxiomC{$\Discharge{\lnot(!A \lor \lnot !A)}{1}, \Discharge{!A}{2}$}
+  \DeduceC{$\lfalse$}
+  \DischargeRule{\Intro{\lnot}}{2}
+  \UnaryInfC{$\lnot !A$}
+  \AxiomC{$\Discharge{\lnot(!A \lor \lnot !A)}{1}$}
+  \DeduceC{$!A$}
+  \RightLabel{\Elim{\lnot}}
+  \BinaryInfC{$\lfalse$}
+  \DischargeRule{\FalseCl}{1}
+  \UnaryInfC{$!A \lor \lnot !A$}
+\end{prooftree}
+يمكننا هنا الحصول على~$\lfalse$ بسهولة بتطبيق~$\Elim{\lnot}$ على
+الافتراض~$\lnot(!A \lor \lnot !A)$ وعلى~$!A \lor \lnot !A$ التي
+تلزم عن افتراضنا الجديد~$!A$ بواسطة~$\Intro{\lor}$:
+\begin{prooftree}
+  \AxiomC{$\Discharge{\lnot(!A \lor \lnot !A)}{1}$}
+  \AxiomC{$\Discharge{!A}{2}$}
+  \RightLabel{\Intro{\lor}}
+  \UnaryInfC{$!A \lor \lnot !A$}
+  \RightLabel{\Elim{\lnot}}
+  \BinaryInfC{$\lfalse$}
+  \DischargeRule{\Intro{\lnot}}{2}
+  \UnaryInfC{$\lnot !A$}
+  \AxiomC{$\Discharge{\lnot(!A \lor \lnot !A)}{1}$}
+  \DeduceC{$!A$}
+  \RightLabel{\Elim{\lnot}}
+  \BinaryInfC{$\lfalse$}
+  \DischargeRule{\FalseCl}{1}
+  \UnaryInfC{$!A \lor \lnot !A$}
+\end{prooftree}
+ونستعمل الاستراتيجية نفسها في الجانب الأيمن، إلا أننا نحصل على~$!A$
+بواسطة~\FalseCl:
+\begin{prooftree}
+  \AxiomC{$\Discharge{\lnot(!A \lor \lnot !A)}{1}$}
+  \AxiomC{$\Discharge{!A}{2}$}
+  \RightLabel{\Intro{\lor}}
+  \UnaryInfC{$!A \lor \lnot !A$}
+  \RightLabel{\Elim{\lnot}}
+  \BinaryInfC{$\lfalse$}
+  \DischargeRule{\Intro{\lnot}}{2}
+  \UnaryInfC{$\lnot !A$}
+  \AxiomC{$\Discharge{\lnot(!A \lor \lnot !A)}{1}$}
+  \AxiomC{$\Discharge{\lnot !A}{3}$}
+  \RightLabel{\Intro{\lor}}
+  \UnaryInfC{$!A \lor \lnot !A$}
+  \RightLabel{\Elim{\lnot}}
+  \BinaryInfC{$\lfalse$}
+  \DischargeRule{\FalseCl}{3}
+  \UnaryInfC{$!A$}
+  \RightLabel{\Elim{\lnot}}
+  \BinaryInfC{$\lfalse$}
+  \DischargeRule{\FalseCl}{1}
+  \UnaryInfC{$!A \lor \lnot !A$}
+\end{prooftree}
+\end{ex}
+
+\begin{prob}
+أعط !!{derivation}s تبين ما يأتي:
+\begin{enumerate}
+\item $!A \land (!B \land !C) \Proves (!A \land !B) \land !C$.
+\item $!A \lor (!B \lor !C) \Proves (!A \lor !B) \lor !C$.
+\item $!A \lif (!B \lif !C) \Proves !B \lif (!A \lif !C)$.
+\item $!A \Proves \lnot\lnot !A$.
+\end{enumerate}
+\end{prob}
+
+\begin{prob}
+أعط !!{derivation}s تبين ما يأتي:
+\begin{enumerate}
+\item $(!A \lor !B) \lif !C \Proves !A \lif !C$.
+\item $(!A \lif !C) \land (!B \lif !C) \Proves (!A \lor !B) \lif !C$.
+\item $\Proves \lnot(!A \land \lnot !A)$.
+\item $!B \lif !A \Proves \lnot !A \lif \lnot !B$.
+\item $\Proves (!A \lif \lnot !A) \lif \lnot !A$.
+\item $\Proves \lnot(!A \lif !B) \lif \lnot !B$.
+\item $!A \lif !C \Proves \lnot (!A \land \lnot !C)$.
+\item $!A \land \lnot !C \Proves \lnot (!A \lif !C)$.
+\item $!A \lor !B, \lnot !B \Proves !A$.
+\item $\lnot !A \lor \lnot !B \Proves \lnot(!A \land !B)$.
+\item $\Proves (\lnot !A \land \lnot !B) \lif\lnot(!A \lor !B)$.
+\item $\Proves \lnot(!A \lor !B) \lif (\lnot !A \land \lnot !B)$.
+\end{enumerate}
+\end{prob}
+
+\begin{prob}
+أعط !!{derivation}s تبين ما يأتي:
+\begin{enumerate}
+\item $\lnot(!A \lif !B) \Proves !A$.
+\item $\lnot(!A \land !B) \Proves \lnot !A \lor \lnot !B$.
+\item $!A \lif !B \Proves \lnot !A \lor !B$.
+\item $\Proves \lnot \lnot !A \lif !A$.
+\item $!A \lif !B, \lnot !A \lif !B \Proves !B$.
+\item $(!A \land !B) \lif !C \Proves (!A \lif !C) \lor (!B \lif !C)$.
+\item $(!A \lif !B) \lif !A \Proves !A$.
+\item $\Proves (!A \lif !B) \lor (!B \lif !C)$.
+\end{enumerate}
+(تتطلب هذه كلها قاعدة~$\FalseCl$.)
+\end{prob}
+
+\end{document}

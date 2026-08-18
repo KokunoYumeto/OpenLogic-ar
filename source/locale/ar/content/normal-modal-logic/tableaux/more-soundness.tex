@@ -1,0 +1,228 @@
+% Part: normal-modal-logic
+% Chapter: tableaux
+% Section: more-soundness
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{tab}{msn}
+      
+\olsection{سلامة القواعد الإضافية}
+
+نقول إن قاعدة ما سليمة لفئة من النماذج إذا كان الفرع الناتج من تطبيقها
+قابلًا للإرضاء في نموذج من تلك الفئة كلما كان الفرع الأصلي في
+!!a{tableau} قابلًا للإرضاء في نموذج منها.
+
+\begin{prop}
+  \ollabel{prop:soundness-T} 
+  \iftag{prvBox}{\Ax{T}$\Box$}{}%
+  \iftag{notprvBox,notprvDiamond}{}{ و}%
+  \iftag{prvDiamond}{\Ax{T}$\Diamond$}{}
+  \iftag{notprvBox,notprvDiamond}{سليمة}{سليمتان}
+  للنماذج الانعكاسية.
+\end{prop}
+
+\begin{proof}
+\begin{tagenumerate}{prvBox,prvDiamond}
+\tagitem{prvBox}{يُوسَّع الفرع بتطبيق T$\Box$ على
+  $\sFmla{\True}{\Box !B}[\sigma] \in \Gamma$:
+  \iftag{probBox}{تمرين.}{وينتج من ذلك !!{signed
+      formula}~$\sFmla{\True}{!B}[\sigma]$ جديدة على الفرع. افترض
+    $\mSat{M}{\Gamma}[f]$، وبوجه خاص $\mSat{M}{\Box
+      !B}[f(\sigma)]$. ولأن $R$ انعكاسية، نعلم أن
+    $Rf(\sigma)f(\sigma)$. ومن ثم $\mSat{M}{!B}[f(\sigma)]$، أي إن
+    $\mModel{M}, f$ يرضيان $\sFmla{\True}{!B}[\sigma]$.}}{}
+\tagitem{prvDiamond}{يُوسَّع الفرع بتطبيق T$\Diamond$ على
+  $\sFmla{\False}{\Diamond !B}[\sigma] \in \Gamma$:
+  \iftag{probDiamond}{تمرين.}{وينتج من ذلك !!{signed
+      formula}~$\sFmla{\False}{!B}[\sigma]$ جديدة على الفرع. افترض
+    $\mSat{M}{\Gamma}[f]$، وبوجه خاص $\mSat/{M}{\Diamond
+      !B}[f(\sigma)]$. ولأن $R$ انعكاسية، نعلم أن
+    $Rf(\sigma)f(\sigma)$. ومن ثم $\mSat/{M}{!B}[f(\sigma)]$، أي إن
+    $\mModel{M}, f$ يرضيان $\sFmla{\False}{!B}[\sigma]$.}}{}
+\end{tagenumerate}
+\end{proof}
+
+\tagprob{probBox,probDiamond}
+\begin{prob}
+  أكمل برهان \olref[nml][tab][msn]{prop:soundness-T}.
+\end{prob}
+\tagendprob
+
+\begin{prop}
+  \ollabel{prop:soundness-D} 
+  \iftag{prvBox}{\Ax{D}$\Box$}{}%
+  \iftag{notprvBox,notprvDiamond}{}{ و}%
+  \iftag{prvDiamond}{\Ax{D}$\Diamond$}{}
+  \iftag{notprvBox,notprvDiamond}{سليمة}{سليمتان}
+  للنماذج التسلسلية.
+\end{prop}
+
+\begin{proof}
+\begin{tagenumerate}{prvBox,prvDiamond}
+\tagitem{prvBox}{يُوسَّع الفرع بتطبيق D$\Box$ على
+  $\sFmla{\True}{\Box !B}[\sigma] \in \Gamma$:
+  \iftag{probBox}{تمرين.}{وينتج من ذلك !!{signed
+      formula}~$\sFmla{\True}{\Diamond !B}[\sigma]$ جديدة على
+    الفرع. افترض $\mSat{M}{\Gamma}[f]$، وبوجه خاص
+    $\mSat{M}{\Box !B}[f(\sigma)]$. ولأن $R$ تسلسلية، يوجد $w
+    \in W$ بحيث $Rf(\sigma)w$. وعندئذ $\mSat{M}{!B}[w]$، ومن ثم
+    $\mSat{M}{\Diamond !B}[f(\sigma)]$. ولذلك يرضي $\mModel{M}, f$
+    الصيغة $\sFmla{\True}{\Diamond!B}[\sigma]$.}}{}
+\tagitem{prvDiamond}{يُوسَّع الفرع بتطبيق D$\Diamond$ على
+  $\sFmla{\False}{\Diamond !B}[\sigma] \in \Gamma$:
+  \iftag{probDiamond}{تمرين.}{وينتج من ذلك !!{signed
+      formula}~$\sFmla{\False}{\Box !B}[\sigma]$ جديدة على
+    الفرع. افترض $\mSat{M}{\Gamma}[f]$، وبوجه خاص
+    $\mSat/{M}{\Diamond !B}[f(\sigma)]$. ولأن $R$ تسلسلية، يوجد $w
+    \in W$ بحيث $Rf(\sigma)w$. وعندئذ $\mSat/{M}{!B}[w]$، ومن ثم
+    $\mSat/{M}{\Box !B}[f(\sigma)]$. ولذلك يرضي $\mModel{M}, f$
+    الصيغة $\sFmla{\False}{\Box!B}[\sigma]$.}}{}
+\end{tagenumerate}
+\end{proof}
+
+\tagprob{probBox,probDiamond}
+\begin{prob}
+  أكمل برهان \olref[nml][tab][msn]{prop:soundness-D}.
+\end{prob}
+\tagendprob
+
+\begin{prop}
+  \ollabel{prop:soundness-B} 
+  \iftag{prvBox}{\Ax{B}$\Box$}{}%
+  \iftag{notprvBox,notprvDiamond}{}{ و}%
+  \iftag{prvDiamond}{\Ax{B}$\Diamond$}{}
+  \iftag{notprvBox,notprvDiamond}{سليمة}{سليمتان}
+  للنماذج المتناظرة.
+\end{prop}
+
+\begin{proof}
+\begin{tagenumerate}{prvBox,prvDiamond}
+\tagitem{prvBox}{يُوسَّع الفرع بتطبيق B$\Box$ على
+  $\sFmla{\True}{\Box !B}[\sigma.n] \in \Gamma$:
+  \iftag{probBox}{تمرين.}{وينتج من ذلك !!{signed
+      formula}~$\sFmla{\True}{!B}[\sigma]$ جديدة على الفرع. افترض
+    $\mSat{M}{\Gamma}[f]$، وبوجه خاص $\mSat{M}{\Box
+      !B}[f(\sigma.n)]$. ولأن $f$ تأويل للبادئات الواقعة على الفرع
+    في~$\mModel{M}$، نعلم أن $Rf(\sigma)f(\sigma.n)$. ولأن $R$
+    متناظرة، فإن $Rf(\sigma.n)f(\sigma)$. وبما أن
+    $\mSat{M}{\Box !B}[f(\sigma.n)]$، فإن
+    $\mSat{M}{!B}[f(\sigma)]$. ومن ثم يرضي $\mModel{M}, f$ الصيغة
+    $\sFmla{\True}{!B}[\sigma]$.}}{}
+\tagitem{prvDiamond}{يُوسَّع الفرع بتطبيق B$\Diamond$ على
+  $\sFmla{\False}{\Diamond !B}[\sigma.n] \in \Gamma$:
+  \iftag{probDiamond}{تمرين.}{وينتج من ذلك !!{signed
+      formula}~$\sFmla{\False}{!B}[\sigma]$ جديدة على الفرع. افترض
+    $\mSat{M}{\Gamma}[f]$، وبوجه خاص
+    $\mSat/{M}{\Diamond !B}[f(\sigma.n)]$. ولأن $f$ تأويل للبادئات
+    الواقعة على الفرع في~$\mModel{M}$، نعلم أن
+    $Rf(\sigma)f(\sigma.n)$. ولأن $R$ متناظرة، فإن
+    $Rf(\sigma.n)f(\sigma)$. وبما أن
+    $\mSat/{M}{\Diamond !B}[f(\sigma.n)]$، فإن
+    $\mSat/{M}{!B}[f(\sigma)]$. ومن ثم يرضي $\mModel{M}, f$ الصيغة
+    $\sFmla{\False}{!B}[\sigma]$.}}{}
+\end{tagenumerate}
+\end{proof}
+
+\tagprob{probBox,probDiamond}
+\begin{prob}
+  أكمل برهان \olref[nml][tab][msn]{prop:soundness-B}.
+\end{prob}
+\tagendprob
+
+\begin{prop}
+  \ollabel{prop:soundness-4} 
+  \iftag{prvBox}{\Ax{4}$\Box$}{}%
+  \iftag{notprvBox,notprvDiamond}{}{ و}%
+  \iftag{prvDiamond}{\Ax{4}$\Diamond$}{}
+  \iftag{notprvBox,notprvDiamond}{سليمة}{سليمتان}
+  للنماذج المتعدية.
+\end{prop}
+
+\begin{proof}
+\begin{tagenumerate}{prvBox,prvDiamond}
+\tagitem{prvBox}{يُوسَّع الفرع بتطبيق 4$\Box$ على
+  $\sFmla{\True}{\Box !B}[\sigma] \in \Gamma$:
+  \iftag{probBox}{تمرين.}{وينتج من ذلك !!{signed
+      formula}~$\sFmla{\True}{\Box!B}[\sigma.n]$ جديدة على
+    الفرع. افترض $\mSat{M}{\Gamma}[f]$، وبوجه خاص
+    $\mSat{M}{\Box !B}[f(\sigma)]$. ولأن $f$ تأويل للبادئات الواقعة
+    على الفرع في~$\mModel{M}$ ولأن $\sigma.n$ يجب أن تكون مستعملة،
+    نعلم أن $Rf(\sigma)f(\sigma.n)$. والآن ليكن $w$ أي عالم بحيث
+    $Rf(\sigma.n)w$. ولأن $R$ متعدية، فإن $Rf(\sigma)w$. وبما أن
+    $\mSat{M}{\Box !B}[f(\sigma)]$، فإن $\mSat{M}{!B}[w]$. ومن ثم
+    $\mSat{M}{\Box !B}[f(\sigma.n)]$، ويرضي $\mModel{M}, f$ الصيغة
+    $\sFmla{\True}{\Box !B}[\sigma.n]$.}}{}
+\tagitem{prvDiamond}{يُوسَّع الفرع بتطبيق 4$\Diamond$ على
+  $\sFmla{\False}{\Diamond !B}[\sigma] \in \Gamma$:
+  \iftag{probDiamond}{تمرين.}{وينتج من ذلك !!{signed
+      formula}~$\sFmla{\False}{\Diamond!B}[\sigma.n]$ جديدة على
+    الفرع. افترض $\mSat{M}{\Gamma}[f]$، وبوجه خاص
+    $\mSat/{M}{\Diamond !B}[f(\sigma)]$. ولأن $f$ تأويل للبادئات
+    الواقعة على الفرع في~$\mModel{M}$ ولأن $\sigma.n$ يجب أن تكون
+    مستعملة، نعلم أن $Rf(\sigma)f(\sigma.n)$. والآن ليكن $w$ أي عالم
+    بحيث $Rf(\sigma.n)w$. ولأن $R$ متعدية، فإن $Rf(\sigma)w$. وبما
+    أن $\mSat/{M}{\Diamond !B}[f(\sigma)]$، فإن
+    $\mSat/{M}{!B}[w]$. ومن ثم $\mSat/{M}{\Diamond !B}[f(\sigma.n)]$،
+    ويرضي $\mModel{M}, f$ الصيغة
+    $\sFmla{\False}{\Diamond !B}[\sigma.n]$.}}{}
+\end{tagenumerate}
+\end{proof}
+
+\tagprob{probBox,probDiamond}
+\begin{prob}
+  أكمل برهان \olref[nml][tab][msn]{prop:soundness-4}.
+\end{prob}
+\tagendprob
+
+\begin{prop}
+  \ollabel{prop:soundness-4r} 
+  \iftag{prvBox}{\Ax{4r}$\Box$}{}%
+  \iftag{notprvBox,notprvDiamond}{}{ و}%
+  \iftag{prvDiamond}{\Ax{4r}$\Diamond$}{}
+  \iftag{notprvBox,notprvDiamond}{سليمة}{سليمتان}
+  للنماذج الإقليدية.
+\end{prop}
+
+\begin{proof}
+\begin{tagenumerate}{prvBox,prvDiamond}
+\tagitem{prvBox}{يُوسَّع الفرع بتطبيق 4r$\Box$ على
+  $\sFmla{\True}{\Box !B}[\sigma.n] \in \Gamma$:
+  \iftag{probBox}{تمرين.}{وينتج من ذلك !!{signed
+      formula}~$\sFmla{\True}{\Box!B}[\sigma]$ جديدة على الفرع.
+    افترض $\mSat{M}{\Gamma}[f]$، وبوجه خاص $\mSat{M}{\Box
+      !B}[f(\sigma.n)]$. ولأن $f$ تأويل للبادئات الواقعة على الفرع
+    في~$\mModel{M}$، نعلم أن $Rf(\sigma)f(\sigma.n)$. والآن ليكن $w$
+    أي عالم بحيث $Rf(\sigma)w$. ولأن $R$ إقليدية، فإن
+    $Rf(\sigma.n)w$. وبما أن $\mSat{M}{\Box !B}[f(\sigma.n)]$، فإن
+    $\mSat{M}{!B}[w]$. ومن ثم $\mSat{M}{\Box !B}[f(\sigma)]$، ويرضي
+    $\mModel{M}, f$ الصيغة $\sFmla{\True}{\Box !B}[\sigma]$.}}{}
+\tagitem{prvDiamond}{يُوسَّع الفرع بتطبيق 4r$\Diamond$ على
+  $\sFmla{\False}{\Diamond !B}[\sigma.n] \in \Gamma$:
+  \iftag{probDiamond}{تمرين.}{وينتج من ذلك !!{signed
+      formula}~$\sFmla{\False}{\Diamond!B}[\sigma]$ جديدة على الفرع.
+    افترض $\mSat{M}{\Gamma}[f]$، وبوجه خاص
+    $\mSat/{M}{\Diamond !B}[f(\sigma.n)]$. ولأن $f$ تأويل للبادئات
+    الواقعة على الفرع في~$\mModel{M}$، نعلم أن
+    $Rf(\sigma)f(\sigma.n)$. والآن ليكن $w$ أي عالم بحيث
+    $Rf(\sigma)w$. ولأن $R$ إقليدية، فإن $Rf(\sigma.n)w$. وبما أن
+    $\mSat/{M}{\Diamond !B}[f(\sigma.n)]$، فإن
+    $\mSat/{M}{!B}[w]$. ومن ثم $\mSat/{M}{\Diamond !B}[f(\sigma)]$،
+    ويرضي $\mModel{M}, f$ الصيغة
+    $\sFmla{\False}{\Diamond !B}[\sigma]$.}}{}
+\end{tagenumerate}
+\end{proof}
+
+\tagprob{probBox,probDiamond}
+\begin{prob}
+  أكمل برهان \olref[nml][tab][msn]{prop:soundness-4r}.
+\end{prob}
+\tagendprob
+
+\begin{cor}
+\ollabel{cor:soundness-logics} أنظمة ال!!{tableau} الواردة في
+\olref[mru]{tab:logics-rules} سليمة لفئات النماذج المقابلة لها.
+\end{cor}
+
+\end{document}

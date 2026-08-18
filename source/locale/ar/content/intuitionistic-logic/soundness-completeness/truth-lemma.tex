@@ -1,0 +1,97 @@
+% part: intuitionistic-logic
+% chapter: soundness-completeness
+% section: truth-lemma
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{sc}{tru}
+
+\olsection{لمّة الصدق}
+
+تربط اللمّة الآتية بين الإشباع في النموذج القانوني وبين ال!!{formula}s
+التي هي !!{element}s في المجموعة الأولية~$\Delta$.
+
+\begin{lem}\ollabel{lem:truth}
+  إذا كانت~$\Delta$ أولية، كان~$\mSat{M(\Delta)}{!A}[\sigma]$ إذا
+  وفقط إذا كان~$\Delta(\sigma) \Proves !A$.
+\end{lem}
+
+\begin{proof}
+  بالاستقراء في~$!A$.
+  \begin{enumerate}
+    \item \indcase{!A}{\lfalse}{بما أن~$\Delta(\sigma)$ أولية، فهي
+      متسقة، ولذلك~$\Delta(\sigma) \Proves/ \indfrm$. وبحسب التعريف،
+      $\mSat/{M(\Delta)}{\indfrm}[\sigma]$.}
+    \item \indcase{!A}{p}{بحسب تعريف~$\mSat{{}}{}$،
+      $\mSat{M(\Delta)}{\indfrm}[\sigma]$ إذا وفقط إذا كان
+      $\sigma \in V(p)$؛ أي إذا وفقط إذا كان
+      $\Delta(\sigma) \Proves \indfrm$.}
+    \item \indcase{!A}{\lnot !B}{هذه هي حالة الشرط مع نتيجة
+      $\lfalse$، ويمكن تفصيلها على النحو الآتي. افترض أولًا
+      $\Delta(\sigma)\Proves\lnot !B$. ولكل~$\sigma'$ بحيث
+      $R\sigma\sigma'$، لدينا
+      $\Delta(\sigma)\subseteq\Delta(\sigma')$، ومن ثم
+      $\Delta(\sigma')\Proves\lnot !B$. ولو كان
+      $\mSat{M(\Delta)}{!B}[\sigma']$، لأعطى فرض الاستقراء
+      $\Delta(\sigma')\Proves !B$، فيناقض ذلك اتساق
+      $\Delta(\sigma')$. ولذلك لا يصدق~$!B$ عند أي امتداد~$\sigma'$،
+      أي~$\mSat{M(\Delta)}{\lnot !B}[\sigma]$.
+
+      وللاتجاه العكسي نبرهن النقيض المقابل. افترض
+      $\Delta(\sigma)\Proves/\lnot !B$. عندئذ
+      $\Delta(\sigma)\cup\{!B\}\Proves/\lfalse$؛ إذ لو أمكن اشتقاق
+      $\lfalse$ من إضافة~$!B$، لأمكن إدخال النفي واشتقاق
+      $\lnot !B$ من~$\Delta(\sigma)$. ولتكن
+      $\tuple{!B,\lfalse}=\tuple{!B_n,!C_n}$ لبعض~$n$. عندئذ
+      $\Delta(\sigma.n)=(\Delta(\sigma)\cup\{!B\})^*$، ولذلك
+      $\Delta(\sigma.n)\Proves !B$. وبفرض الاستقراء،
+      $\mSat{M(\Delta)}{!B}[\sigma.n]$. ولأن
+      $R\sigma(\sigma.n)$، يكون
+      $\mSat/{M(\Delta)}{\lnot !B}[\sigma]$.}
+    \item \indcase{!A}{!B \land
+      !C}{$\mSat{M(\Delta)}{\indfrm}[\sigma]$ إذا وفقط إذا كان
+      $\mSat{M(\Delta)}{!B}[\sigma]$ و
+      $\mSat{M(\Delta)}{!C}[\sigma]$. وبفرض الاستقراء،
+      $\mSat{M(\Delta)}{!B}[\sigma]$ إذا وفقط إذا كان
+      $\Delta(\sigma) \Proves !B$، وبالمثل لـ~$!C$. لكن
+      $\Delta(\sigma) \Proves !B$ و$\Delta(\sigma) \Proves !C$ إذا
+      وفقط إذا كان~$\Delta(\sigma) \Proves \indfrm$.}
+    \item \indcase{!A}{!B \lor
+      !C}{$\mSat{M(\Delta)}{\indfrm}[\sigma]$ إذا وفقط إذا كان
+      $\mSat{M(\Delta)}{!B}[\sigma]$ أو
+      $\mSat{M(\Delta)}{!C}[\sigma]$. وبفرض الاستقراء، يتحقق ذلك إذا
+      وفقط إذا كان~$\Delta(\sigma) \Proves !B$ أو
+      $\Delta(\sigma) \Proves !C$. وعلينا أن نثبت أن هذا بدوره يتحقق
+      إذا وفقط إذا كان~$\Delta(\sigma) \Proves \indfrm$. والاتجاه من
+      اليسار إلى اليمين واضح، أما الاتجاه من اليمين إلى اليسار فينتج
+      من كون~$\Delta(\sigma)$ أولية.}
+    \item \indcase{!A}{!B \lif !C}{نبرهن أولًا النقيض المقابل للاتجاه
+      من اليسار إلى اليمين. افترض
+      $\Delta(\sigma) \Proves/ !B \lif !C$. عندئذ أيضًا
+      $\Delta(\sigma) \cup \{!B\} \Proves/ !C$. ولأن
+      $\tuple{!B, !C}$ هي~$\tuple{!B_n, !C_n}$ لبعض~$n$، يكون
+      $\Delta(\sigma.n) = (\Delta(\sigma) \cup \{!B\})^*$، ويكون
+      $\Delta(\sigma.n) \Proves !B$ لكن
+      $\Delta(\sigma.n) \Proves/ !C$. وبفرض الاستقراء،
+      $\mSat{M(\Delta)}{!B}[\sigma.n]$ و
+      $\mSat/{M(\Delta)}{!C}[\sigma.n]$. ولأن
+      $R\sigma(\sigma.n)$، فهذا يعني
+      $\mSat/{M(\Delta)}{\indfrm}[\sigma]$.
+
+      افترض الآن~$\Delta(\sigma) \Proves !B \lif !C$، ولتكن
+      $R\sigma\sigma'$. وبما أن
+      $\Delta(\sigma) \subseteq \Delta(\sigma')$، يكون: إذا كان
+      $\Delta(\sigma') \Proves !B$، كان
+      $\Delta(\sigma') \Proves !C$. وبعبارة أخرى، لكل~$\sigma'$ بحيث
+      $R\sigma\sigma'$، إما~$\Delta(\sigma') \Proves/ !B$ أو
+      $\Delta(\sigma') \Proves !C$. وبفرض الاستقراء يعني ذلك أنه كلما
+      كان~$R\sigma\sigma'$، فإما
+      $\mSat/{M(\Delta)}{!B}[\sigma']$ أو
+      $\mSat{M(\Delta)}{!C}[\sigma']$؛ أي
+      $\mSat{M(\Delta)}{\indfrm}[\sigma]$.}
+  \end{enumerate}
+\end{proof}
+
+\end{document}

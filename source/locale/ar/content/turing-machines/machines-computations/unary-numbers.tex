@@ -1,0 +1,226 @@
+% Part: turing-machines
+% Chapter: machines-computations
+% Section: unary-numbers
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{tur}{mac}{una}
+\olsection{التمثيل الأحادي للأعداد}
+
+\begin{explain}
+تعمل آلات تورنغ على متتاليات من الرموز المكتوبة على أشرطتها. وبحسب
+الأبجدية التي تستعملها آلة تورنغ يمكن لهذه المتتاليات أن تمثل أنواعًا
+مختلفة من المدخلات والمخرجات. ومما يهمنا بوجه خاص، بالطبع، آلات
+تورنغ التي تحسب دوال \emph{حسابية}، أي دوال أعداد طبيعية. ومن أبسط
+طرائق تمثيل الأعداد الصحيحة الموجبة ترميزها بمتتاليات من رمز واحد
+$\TMstroke$. فإذا كان $n \in \Nat$، فلتكن $\TMstroke^n$ المتتالية
+الخالية إذا كان $n=0$، والمتتالية المؤلفة من $n$ بالضبط من علامات
+$\TMstroke$ خلاف ذلك.
+\end{explain}
+
+\begin{defn}[الحساب]
+\emph{تحسب} آلة تورنغ~$M$ الدالة $f\colon\Nat^k\to\Nat$ إذا وفقط إذا
+كانت~$M$، لكل $n_1,\dots,n_k\in\Nat$، تتوقف عند الدخل
+\[
+\TMstroke^{n_1} \TMblank \TMstroke^{n_2} \TMblank \dots \TMblank \TMstroke^{n_k}
+\]
+بخرج $\TMstroke^{f(n_1,\dots,n_k)}$.
+\end{defn}
+
+\begin{prob}
+  عرّف متى تحسب آلة تورنغ~$M$ الدالة $f\colon\Nat^k\to\Nat^m$.
+\end{prob}
+
+\begin{ex}\ollabel{ex:adder}
+\emph{الجمع:}
+لنبن آلة تحسب الدالة $f(n,m)=n+m$. ويتطلب ذلك آلة تبدأ بكتلتين من
+علامات $\TMstroke$، طولاهما $n$ و~$m$، على الشريط، وتتوقف بكتلة واحدة
+مؤلفة من $n+m$ من علامات $\TMstroke$. وتفصل بين كتلتي الدخل علامة
+$\TMblank$، ولذلك يمكن أن تكون إحدى الطرائق كتابة علامة على الخانة
+التي تحتوي $\TMblank$ ومحو آخر علامة~$\TMstroke$.
+\begin{figure}\[
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+                    semithick]
+  \tikzstyle{every state}=[fill=none,draw=black,text=black]
+
+  \node[initial,state]         (A)              {$q_0$};
+  \node[state]         (B) [right of=A] {$q_1$};
+  \node[state]         (C) [right of=B] {$q_2$};
+
+  \path (A) edge node {\TMtrans{\TMblank}{\TMstroke}{\TMstay}} (B)
+           edge [loop above] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (A)
+        (B) edge [loop above] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (B)
+            edge node {\TMtrans{\TMblank}{\TMblank}{\TMleft}} (C)
+        (C) edge [loop above] node {\TMtrans{\TMstroke}{\TMblank}{\TMstay}} (C);
+\end{tikzpicture}
+\]\caption{آلة تحسب $f(x,y)=x+y$}
+\ollabel{fig:adder}
+\end{figure}
+\end{ex}
+
+\begin{prob}
+تتبع تهيئات الآلة الواردة في \olref[tur][mac][una]{ex:adder} عند
+الدخل~$\tuple{3,2}$. ماذا يحدث إذا حسبت الآلة $0+0$؟
+\end{prob}
+
+\begin{explain}
+قدمنا في \olref[rep]{ex:doubler} مثالًا لآلة تورنغ تأخذ دخلًا متتالية
+من علامات~$\TMstroke$ وتتوقف وعلى الشريط متتالية تحوي ضعف عدد تلك
+العلامات؛ وهي آلة المضاعفة. لكن لما كان الخرج يحتوي رموز $\TMblank$
+إلى يسار كتلة علامات $\TMstroke$ المضاعفة، فهي لا تحسب في الواقع
+الدالة $f(x)=2x$ كما قد تظن. وسنصف طريقتين لإصلاح ذلك.
+\end{explain}
+
+\begin{ex}
+تحسب الآلة الواردة في \olref{fig:doubler-disc} الدالة $f(x)=2x$.
+فبدلًا من محو الدخل وكتابة علامتي $\TMstroke$ في أقصى اليمين لكل
+$\TMstroke$ في الدخل، كما تفعل الآلة الواردة في
+\olref[rep]{ex:doubler}، تضيف هذه الآلة علامة~$\TMstroke$ واحدة إلى
+اليمين لكل~$\TMstroke$ في الدخل. ولا بد لها من تتبع موضع نهاية الدخل،
+فتترك علامة~$\TMblank$ بين الدخل والعلامات المضافة، ثم تملؤها بعلامة
+$\TMstroke$ في النهاية. ولا بد أيضًا من «تذكر» موضعنا في الدخل،
+فنستبدل مؤقتًا بإحدى علامات~$\TMstroke$ في كتلة الدخل علامة
+$\TMblank$.
+  \begin{figure}
+\[
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+                    semithick]
+  \tikzstyle{every state}=[fill=none,draw=black,text=black]
+
+  \node[initial,state] (0)              {$q_0$};
+  \node[state]         (1) [above of=0] {$q_1$};
+  \node[state]         (2) [above of=1] {$q_2$};
+  \node[state]         (3) [right of=2] {$q_3$};
+  \node[state]         (4) [below of=3] {$q_4$};
+  \node[state]         (5) [below of=4] {$q_5$};
+  \node[state]         (6) [above right of=4] {$q_6$};
+  \node[state]         (7) [below of=6] {$q_7$};
+  \node[state]         (8) [below of=7] {$q_8$};
+
+  \path (0) edge node {\TMtrans{\TMstroke}{\TMblank}{\TMright}} (1)
+%    (0) edge node {\TMtrans{\TMblank}{\TMblank}{\TMstay}} (h)
+    (1) edge [loop left] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (1)
+      edge node {\TMtrans{\TMblank}{\TMblank}{\TMright}} (2)
+    (2) edge [loop above] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (2)
+        edge node {\TMtrans{\TMblank}{\TMstroke}{\TMleft}} (3)
+    (3) edge [loop above] node {\TMtrans{\TMstroke}{\TMstroke}{\TMleft}} (3)
+        edge node[left] {\TMtrans{\TMblank}{\TMblank}{\TMleft}} (4)
+    (4) edge        node[left] {\TMtrans{\TMstroke}{\TMstroke}{\TMleft}} (5)
+    (5) edge [loop below] node {\TMtrans{\TMstroke}{\TMstroke}{\TMleft}} (5)
+        edge              node {\TMtrans{\TMblank}{\TMstroke}{\TMright}} (0)
+    (4) edge      node[sloped] {\TMtrans{\TMblank}{\TMstroke}{\TMright}} (6)
+    (6) edge              node {\TMtrans{\TMblank}{\TMstroke}{\TMright}} (7)
+    (7) edge [loop right] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (7)
+        edge              node {\TMtrans{\TMblank}{\TMblank}{\TMleft}} (8)
+    (8) edge [loop right] node {\TMtrans{\TMstroke}{\TMblank}{\TMstay}} (8);
+    \end{tikzpicture}
+\]
+\caption{آلة تحسب $f(x)=2x$}
+\ollabel{fig:doubler-disc}
+\end{figure}
+\end{ex}
+
+\begin{ex}\ollabel{ex:mover}
+ثمة إمكان ثان لحساب $f(x)=2x$، وهو إبقاء آلة المضاعفة الأصلية مع
+إضافة حالات وتعليمات في نهايتها تنقل كتلة العلامات المضاعفة إلى أقصى
+يسار الشريط. والآلة الواردة في \olref{fig:mover} تنجز هذا الجزء
+الأخير وحده: فإذا بدأت على شريط يتألف من كتلة من علامات~$\TMblank$
+تليها كتلة من علامات~$\TMstroke$ (وكان الرأس في أي موضع داخل كتلة
+$\TMblank$)، محت علامات $\TMstroke$ واحدة واحدة وكتبتها في بداية
+الشريط. ولكي تستطيع معرفة متى تنتهي، تضع أولًا علامة $\TMendtape$ عند
+نهاية كتلة علامات $\TMstroke$، ثم تحذف هذه العلامة في النهاية. وقد
+بدأنا ترقيم الحالات من~$q_6$ كي يمكن إضافتها إلى آلة المضاعفة. وكل ما
+تحتاج إليه تعليمة إضافية
+$\delta(q_0,\TMblank)=\tuple{q_6,\TMblank,\TMstay}$، أي سهم من~$q_0$
+إلى~$q_6$ موسوم بـ~$\TMtrans{\TMblank}{\TMblank}{\TMstay}$. (ثمة
+مشكلة دقيقة واحدة: الآلة الناتجة لا تعمل للدخل~$x=0$. وسنترك إصلاحها
+تمرينًا.)
+\begin{figure}
+  \[
+  \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+                      semithick]
+    \tikzstyle{every state}=[fill=none,draw=black,text=black]
+    \node[initial,state] (6)              {$q_6$};
+    \node[state]         (7) [right of=6] {$q_7$};
+    \node[state]         (8) [right of=7] {$q_8$};
+    \node[state]         (9) [below of=8] {$q_9$};
+    \node[state]         (10) [left of=9] {$q_{10}$};
+    \node[state]         (11) [left of=10]  {$q_{11}$};
+    \node[state]         (12) [below of=11]  {$q_{12}$};
+    \node[state]         (13) [right of=12] {$q_{13}$};
+    \node[state]         (14) [right of=13] {$q_{14}$};
+    \path
+    (6)  edge node {\TMtrans{\TMblank}{\TMblank}{\TMright}} (7)
+    (7)  edge [loop above] node {\TMtrans{\TMblank}{\TMblank}{\TMright}} (7)
+         edge node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (8)
+    (8)  edge [loop above] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (8)
+         edge node {\TMtrans{\TMblank}{\TMendtape}{\TMleft}} (9)
+    (9)  edge [loop right] node {\TMtrans{\TMstroke}{\TMstroke}{\TMleft}} (9)
+         edge node {\TMtrans{\TMblank}{\TMblank}{\TMright}} (10)
+    (10) edge node[above] {\TMtrans{\TMstroke}{\TMblank}{\TMleft}} (11)
+    (11) edge [loop above] node {\TMtrans{\TMblank}{\TMblank}{\TMleft}} (11)
+         edge node[left] {\begin{tabular}{@{}l@{}}
+          \TMtrans{\TMendtape}{\TMendtape}{\TMright}\\
+          \TMtrans{\TMstroke}{\TMstroke}{\TMright}
+         \end{tabular}} (12)
+    (12) edge node[] {\TMtrans{\TMblank}{\TMstroke}{\TMright}} (13)
+    (13) edge [loop below] node {\TMtrans{\TMblank}{\TMblank}{\TMright}} (13)
+         edge node[sloped] {\TMtrans{\TMstroke}{\TMblank}{\TMleft}} (11)
+    (13) edge node {\TMtrans{\TMendtape}{\TMblank}{\TMstay}} (14);
+  \end{tikzpicture}
+  \]
+  \caption{نقل كتلة من علامات $\TMstroke$ إلى اليسار}
+  \ollabel{fig:mover}
+\end{figure}
+\end{ex}
+
+\begin{prob}
+وصفنا في \olref[tur][mac][una]{ex:mover} آلة مؤلفة من الجمع بين آلة
+المضاعفة في \olref[tur][mac][una]{fig:doubler-disc} وآلة النقل في
+\olref[tur][mac][una]{fig:mover}. ماذا يحدث إذا بدأت هذه الآلة
+المركبة عند الدخل~$x=0$، أي على شريط خال؟ وكيف تصلح الآلة بحيث تتوقف
+في هذه الحال بخرج~$2x=0$؟ (ينبغي أن تستطيع فعل ذلك بإضافة حالة واحدة
+وانتقال واحد.)
+\end{prob}
+
+\begin{prob}
+\emph{الطرح:} صمم آلة تورنغ تأخذ دخلًا سلسلتين غير خاليتين من
+العلامات طولاهما $n$ و~$m$، حيث $n>m$، وتحسب الدالة
+$f(n,m)=n-m$.
+\end{prob}
+
+\begin{prob}
+\emph{المساواة:} صمم آلة تورنغ تحسب الدالة الآتية:
+\[
+\fn{equality}(n,m) =
+\begin{cases}
+  \text{1} & \text{إذا كان~$n = m$} \\
+  \text{0} & \text{إذا كان~$n \neq m$}
+\end{cases}
+\]
+حيث~$n$ و~$m \in \PosInt$.
+\end{prob}
+
+\begin{prob}
+صمم آلة تورنغ تحسب الدالة $\min(x,y)$، حيث $x$ و$y$ عددان صحيحان
+موجبان تمثلهما على الشريط سلسلتان من علامات $\TMstroke$ تفصل بينهما
+علامة $\TMblank$. ويجوز لك استعمال رموز إضافية في أبجدية الآلة.
+
+تنتقي الدالة $\min$ أصغر قيمة من وسيطاتها؛ ولذلك
+$\min(3,5)=3$ و$\min(20,16)=16$ و$\min(4,4)=4$، وهكذا.
+\end{prob}
+
+\begin{defn}
+  تحسب آلة تورنغ~$M$ الدالة الجزئية $f\colon\Nat^k\pto\Nat$ إذا
+  وفقط إذا،
+  \begin{enumerate}
+    \item توقفت $M$ عند الدخل $\TMstroke^{n_1}\concat\TMblank\concat
+    \dots \concat\TMblank\concat\TMstroke^{n_k}$ بخرج $\TMstroke^{m}$ إذا كان $f(n_1,\dots,n_k)=m$.
+    \item لم تتوقف $M$ إطلاقًا، أو توقفت بخرج ليس كتلة واحدة من علامات
+    $\TMstroke$، إذا كانت $f(n_1,\dots,n_k)$ غير معرّفة.
+  \end{enumerate}
+\end{defn}
+
+\end{document}

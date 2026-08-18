@@ -1,0 +1,68 @@
+% Part: second-order-logic
+% Chapter: sol-and-set-theory
+% Section: cardinalities
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sol}{set}{crd}
+
+\olsection{أعداد المجموعات الأصلية}
+
+\begin{explain}
+مثلما نستطيع التعبير عن كون المجال منتهيًا أو لانهائيًا،
+!!{enumerable} أو~!!{nonenumerable}، نستطيع تعريف خاصية كون مجموعة
+جزئية من~$\Domain{M}$ منتهية أو لانهائية، !!{enumerable} أو
+!!{nonenumerable}.
+\end{explain}
+
+\begin{prop}
+الصيغة~$\fn{Inf}(X) \ident$
+\begin{multline*}
+\lexists[u][(\lforall[x][(X(x) \lif X(u(x)))] \land {}\\
+  \lforall[x][\lforall[y][(\eq[u(x)][u(y)] \lif 
+      \eq[x][y])]] \land {} \\\lexists[y][(X(y) \land \lforall[x][(X(x)
+      \lif \eq/[y][u(x)])])])]
+\end{multline*}
+تُرضى بالنسبة إلى تعيين متغيرات~$s$ إذا وفقط إذا كانت~$s(X)$
+لانهائية.
+\end{prop}
+
+\begin{prop}
+الصيغة~$\fn{Count}(X) \ident $
+\begin{multline*}
+(\lnot\lexists[x][X(x)] \lor {}\\
+\lexists[z][\lexists[u][(X(z) \land 
+    \lforall[x][(X(x) \lif X(u(x)))] \land {} \\ \lforall[Y][((Y(z) \land
+      \lforall[x][(Y(x) \lif Y(u(x)))]) \lif X \subseteq Y)])]])
+\end{multline*}
+تُرضى بالنسبة إلى تعيين متغيرات~$s$ إذا وفقط إذا كانت~$s(X)$
+!!{enumerable}.
+\end{prop}
+
+نعلم من مبرهنة كانتور أن ثمة مجموعات~!!{nonenumerable}، وأن ثمة، في
+الواقع، عددًا لانهائيًا من المستويات المختلفة للأحجام اللانهائية. وتطور
+نظرية المجموعات حسابًا كاملًا لأحجام المجموعات، وتسند أعدادًا أصلية
+لانهائية إلى المجموعات. وتؤدي الأعداد الطبيعية دور الأعداد الأصلية التي
+تقيس أحجام المجموعات المنتهية. أما أصلية المجموعات~!!{denumerable} فهي
+الأصلية اللانهائية الأولى، وتسمى~$\aleph_0$ («ألف-صفر»). والحجم
+اللانهائي التالي هو~$\aleph_1$، وهو أصغر حجم يمكن أن تكون عليه مجموعة
+من دون أن تكون قابلة للتعداد (أي من الحجم~$\aleph_0$). ويمكننا تعريف
+«$X$ من الحجم~$\aleph_0$» بـ
+$\fn{Aleph}_0(X) \liff \fn{Inf}(X) \land \fn{Count}(X)$. وتكون~$X$
+من الحجم~$\aleph_1$ إذا كانت لانهائية، وكانت جميع مجموعاتها الجزئية
+منتهية أو من الحجم~$\aleph_0$ أو مكافئة لها عدديًا، ولم تكن هي نفسها
+من الحجم~$\aleph_0$. ومن ثم نستطيع التعبير عن ذلك بالصيغة
+$\fn{Aleph_1}(X) \ident \fn{Inf}(X) \land
+\lforall[Y][(Y \subseteq X \lif
+  (\lnot\fn{Inf}(Y) \lor \fn{Aleph}_0(Y) \lor \cardeq{X}{Y}))] \land \lnot
+\fn{Aleph}_0(X)$. ويعرّف كون المجموعة من الحجم~$\aleph_2$ على نحو
+مماثل، وهكذا.
+
+وثمة حجم له أهمية خاصة، هو ما يسمى أصلية المتصل. وهو حجم
+$\Pow{\Nat}$، أو، على نحو مكافئ، حجم~$\Real$. ويمكن أيضًا التعبير في
+منطق الرتبة الثانية عن كون مجموعة ما من حجم المتصل، لكن ذلك يتطلب قدرًا
+أكبر من العمل.
+
+\end{document}

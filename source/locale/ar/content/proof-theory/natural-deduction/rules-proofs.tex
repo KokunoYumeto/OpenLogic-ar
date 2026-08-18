@@ -1,0 +1,273 @@
+% Part: proof-theory
+% Chapter: natural-deduction
+% Section: rules-proofs
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{nat}{rp}
+
+\olsection{القواعد و\usetoken{P}{proof}}
+
+نبدأ ببعض التعريفات وتثبيت بعض المصطلحات.
+
+تأمل القاعدتين في~\Log{N1c} و\Log{N1i} اللتين تذكران
+$!A \lif !B$:
+\[
+\bottomAlignProof
+\AxiomC{$\Discharge{!A}{x}$}
+\shortDeduce
+\DeduceC{$!B$}
+\DischargeRule{\Intro{\lif}}{x}
+\UnaryInfC{$!A \lif !B$}
+\DisplayProof
+\qquad
+\bottomAlignProof
+\AxiomC{$!A \lif !B$}
+\AxiomC{$!A$}
+\RightLabel{\Elim{\lif}}
+\BinaryInfC{$!B$}
+\DisplayProof
+\]
+قاعدة~$\Elim{\lif}$ بسيطة بما يكفي. تسمى~!!{formula}s الواقعة فوق
+الخط \emph{المقدمات}. وتكون~!!{formula} الواقعة في اليسار هي
+!!{formula}~$!A \lif !B$ \emph{الرئيسة}. ولكل قواعد~!!{elimination}
+مقدمة من هذا النوع، تقع دائمًا في أقصى اليسار، وتسمى \emph{المقدمة
+الكبرى} للاستدلال. وإذا وُجدت مقدمات أخرى، كما في هذه الحالة، سميت
+\emph{مقدمات صغرى}. وتسمى مقدمات قواعد~!!{introduction} كذلك مقدمات
+كبرى. أما~!!{formula} الواقعة تحت الخط فتسمى \emph{النتيجة}.
+
+لقاعدة~$\Intro{\lif}$ مقدمة واحدة فقط، والنتيجة هنا هي الصيغة الرئيسة
+$!A \lif !B$. وكل قواعد~!!{introduction} على هذا النحو: تكون النتيجة
+هي الصيغة الرئيسة، ويكون عاملها الرئيس هو العامل الذي يجري «إدخاله».
+
+يعني الترميز~$\Discharge{!A}{x}$ ما يأتي. في~!!a{proof}، يُطبق استدلال
+$\Intro{\lif}$ على~!!a{formula}~$!B$ بوصفها مقدمة. وللـ!!{proof}
+الجزئي المنتهي بـ$!B$ عدد من~!!{formula}s الابتدائية، وتسمى
+\emph{فروضًا}. ويكون~!!^a{proof} لـ$!B$ من فرض أو أكثر على الصورة
+$!A$~!!a{proof} على أن~$!A$ تستلزم~$!B$. وعندما نطبق قاعدة
+$\Intro{\lif}$ نستنتج~$!A \lif !B$، ولا تعود النتيجة معتمدة على الفرض
+$!A$. وللدلالة على ذلك، تُـ\emph{برأ} أو تُـ\emph{غلق} الفروض من
+الصورة~$!A$ في~!!{proof} الذي يتضمن استدلال~$\Intro{\lif}$. وتحدد
+القاعدة أي الفروض يمكن تبرئتها. ففي حالة~$\Intro{\lif}$ ذات النتيجة
+$!A \lif !B$ تكون تلك الفروض على الصورة~$!A$، أي توافق مقدّم الشرط.
+وقد يكون من المهم بيان أي الفروض تُبرأ عند أي قاعدة، ويؤدي علامة
+التبرئة~$x$ هذا الغرض. ومن المهم أن القواعد المبرئة للفروض لا
+\emph{يلزمها} تبرئة \emph{كل} الفروض ذات الصورة المطلوبة، بل لا يلزمها
+تبرئة أي فرض أصلًا. فالآتي صحيح مثلًا، مع أن~$\Intro{\lif}$ الأولى لا
+تبرئ أي فرض:
+\[
+\AxiomC{$\Discharge{!A}{y}$}
+\DischargeRule{\Intro{\lif}}{x}
+\UnaryInfC{$!B \lif !A$}
+\DischargeRule{\Intro{\lif}}{y}
+\UnaryInfC{$!A \lif (!B \lif !A)$}
+\DisplayProof
+\]
+وعندما لا تبرئ قاعدة أي فرض نحذف علامة التبرئة ببساطة، كما فعلنا هنا.
+
+في~!!{proof}
+\[
+\AxiomC{$\Discharge{!A}{x}$}
+\AxiomC{$\Discharge{!A}{y}$}
+\RightLabel{\Intro{\land}}
+\BinaryInfC{$!A \land !A$}
+\RightLabel{\Elim{\land}}
+\UnaryInfC{$!A$}
+\DischargeRule{\Intro{\lif}}{x}
+\UnaryInfC{$!A \lif !A$}
+\DischargeRule{\Intro{\lif}}{y}
+\UnaryInfC{$!A \lif (!A \lif !A)$}
+\DisplayProof
+\]
+يبرئ استدلال~$\Intro{\lif}$ الأول الفرض الأيسر~$!A^x$، ويبرئ الثاني
+الفرض الأيمن~$!A^y$. أي إن كل الفروض الموسومة~$x$ يبرئها
+$\Intro{\lif}$ ذو العلامة~$x$، وكل الفروض الموسومة~$y$ يبرئها
+الاستدلال الموسوم~$y$. ولكي ينجح ذلك، من المهم أن تكون كل الفروض ذات
+العلامة الواحدة~!!{formula} نفسها أيضًا.
+
+قواعد الأسوار أعقد قليلًا. فقواعد~$\lexists$ في~\Log{N1i} مثلًا هي:
+\[
+\bottomAlignProof
+\AxiomC{$!A(t)$}
+\RightLabel{\Intro{\lexists}}
+\UnaryInfC{$\lexists[x][!A(x)]$}
+\DisplayProof
+\qquad
+\bottomAlignProof
+\AxiomC{$\lexists[x][!A(x)]$}
+\AxiomC{$\Discharge{!A(c)}{x}$}
+\shortDeduce
+\DeduceC{$!B$}
+\DischargeRule{\Elim{\lexists}}{x}
+\BinaryInfC{$!B$} \DisplayProof
+\bottomAlignProof
+\]
+في قاعدة~$\Intro{\lexists}$ تكون المقدمة~$!A(t)$، حيث~$t$ حد مغلق،
+أي حد بلا متغيرات. ويكون هذا الاستدلال صحيحًا، أي مطابقًا لمخطط قاعدة
+$\Intro{\lexists}$، إذا وجدت~!!{formula}~$!A$ ومتغير~$x$ وحد مغلق
+$t$ بحيث تكون النتيجة~$\lexists[x][!A]$ والمقدمة~$\Subst{!A}{t}{x}$.
+وتتيح~$\Elim{\lexists}$ تبرئة فروض من الصورة~$!A(c)$؛ أي يوجد لكل
+استدلال~!!{constant}~$c$ ويمكن تبرئة الفروض ذات الصورة
+$\Subst{!A}{c}{x}$. ويجب أن تستخدم كل الفروض التي يبرئها استدلال واحد
+الثابت~$c$ نفسه. ويسمى هذا الثابت \emph{المتغير المميز} لاستدلال
+$\Elim{\lexists}$. ولا يصح الاستدلال إلا إذا لم يظهر~$c$ في فرض مفتوح
+غير~$!A(c)$ المبرأ، ولا في~$!B$، ولا في~$!A$. ويسمى ذلك \emph{شرط
+المتغير المميز}.
+
+!!^{proof}s في~\Log{N1c} و\Log{N1i} أشجار منتهية من وقائع الصيغ، تُولّد
+استقرائيًا من الفروض بتطبيق قواعد الاستدلال. وكل ورقة فرض، قد تكون
+موسومة بعلامة تبرئة، وكل واقعة~!!{formula} أخرى تلزم من~!!{formula}s
+الواقعة فوقها مباشرة بإحدى قواعد استدلال النظام. وإذا لم تكن واقعة
+!!{formula} بوصفها فرضًا في الشجرة فوق استدلال قد بُرئت باستدلال فوقها،
+سميت \emph{مفتوحة} عند ذلك الاستدلال.
+
+\begin{defn}\ollabel{defn:proof}
+تُعرّف \emph{!!^{proof}s} في~\Log{N1c} و\Log{N1i} استقرائيًا بوصفها
+أشجارًا منتهية من~!!{formula}s كما يأتي:
+\begin{enumerate}
+  \item\ollabel{defn:prf:assumption} كل~!!{formula} موسومة، بمفردها،
+  بعلامة تبرئة مثل~$x$ أو~$y$ هي~!!a{proof}. وفي~!!a{proof} يتألف من
+  !!{formula} واحدة، تُعد~!!{formula} فرضًا مفتوحًا.
+  \item\ollabel{defn:prf:one-prem} إذا كانت~$R$ قاعدة ذات مقدمة أو
+  مقدمتين أو ثلاث مقدمات~$!A_1$ و$!A_2$ و$!A_3$، ونتيجتها~$!A$، وكانت
+  $\delta_1$ و$\delta_2$ و$\delta_3$~!!{proof}s تنتهي بـ$!A_1$ و
+  $!A_2$ و$!A_3$ على الترتيب، فإن كلًا مما يأتي
+  \[
+  \AxiomC{}
+  \RightLabel{$\delta_1$}
+  \DeduceC{$!A_1$}
+  \RightLabel{$R$}
+  \UnaryInfC{$!A$}
+  \DisplayProof
+\qquad
+  \AxiomC{}
+  \RightLabel{$\delta_1$}
+  \DeduceC{$!A_1$}
+  \AxiomC{}
+  \RightLabel{$\delta_2$}
+  \DeduceC{$!A_2$}
+  \RightLabel{$R$}
+  \BinaryInfC{$!A$}
+  \DisplayProof
+\qquad
+  \AxiomC{}
+  \RightLabel{$\delta_1$}
+  \DeduceC{$!A_1$}
+  \AxiomC{}
+  \RightLabel{$\delta_2$}
+  \DeduceC{$!A_2$}
+  \AxiomC{}
+  \RightLabel{$\delta_3$}
+  \DeduceC{$!A_3$}
+  \RightLabel{$R$}
+  \TrinaryInfC{$!A$}
+  \DisplayProof
+  \]
+  هو~!!a{proof}، على الترتيب، بشرط توافق علامات الفروض في~!!{proof}s،
+  أي ألا تحمل~!!{formula}s مختلفة علامة التبرئة نفسها، وأن تكون
+  الاستدلالات تطبيقات صحيحة لـ$R$.
+  \item تُعد أعلى وقائع~!!{formula} في~!!{proof} الجديد
+  \emph{فروضًا مفتوحة} لـ!!{proof} إذا كانت فروضًا مفتوحة في
+  $\delta_1$ أو$\delta_2$ أو$\delta_3$، باستثناء الوقائع التي تبرئها
+  القاعدة. فإذا وُسمت القاعدة بـ$x$، أو بـ$x\,y$، كانت الوقائع المبرأة:
+  في~$\Intro{\lif}$ و$\Intro{\lnot}$ كل الفروض المفتوحة في~$\delta_1$
+  الموسومة~$x$؛ وفي~$\Elim{\lexists}$ كل الفروض المفتوحة الموسومة~$x$
+  في~$\delta_2$؛ وفي~$\Elim{\lor}$ كل الفروض المفتوحة الموسومة~$x$ في
+  $\delta_2$ وكل الفروض المفتوحة الموسومة~$y$ في~$\delta_3$.
+\end{enumerate}
+\end{defn}
+
+تسمى~!!{proof}s المستخدمة في البناء الاستقرائي لـ!!a{proof}
+\emph{!!{proof}s الجزئية} له. وتسمى~!!{proof}s الجزئية المنتهية بمقدمات
+استدلال~\emph{!!{proof}s الجزئية المباشرة} للاستدلال. وترد قواعد
+\Log{N1c} و\Log{N1i} في~\olref{tab:N1}.
+
+\subfile{rules-N1}
+
+\begin{defn}
+يُعرّف \emph{!!{height}}~$\pheight{\delta}$ لـ!!a{proof}~$\delta$
+استقرائيًا كما يأتي.
+\begin{enumerate}
+  \item إذا تألف~$\delta$ من فرض، كان~$\pheight{\delta}=0$.
+  \item إذا انتهى~$\delta$ باستدلال ذي مقدمة واحدة و!!{proof} جزئي
+  مباشر~$\delta_1$، كان~$\pheight{\delta}=\pheight{\delta_1}+1$.
+  \item إذا انتهى~$\delta$ باستدلال ذي مقدمتين و!!{proof}s جزئية
+  مباشرة~$\delta_1$ و$\delta_2$، كان~$\pheight{\delta}=
+  \max(\pheight{\delta_1},\pheight{\delta_2})+1$.
+  \item إذا انتهى~$\delta$ بـ$\Elim{\lor}$ و!!{proof}s جزئية مباشرة
+  $\delta_1$ و$\delta_2$ و$\delta_3$، كان~$\pheight{\delta}=
+  \max(\pheight{\delta_1},\pheight{\delta_2},\pheight{\delta_3})+1$.
+\end{enumerate}
+إذا كان للمتتالية~$S$~!!a{proof} ارتفاعه~$\le n$، كتبنا~$\Proves[n] S$.
+\end{defn}
+
+\begin{ex}
+في~\Log{N1i}، تُعد أي~!!{formula}~!!a{proof} من نفسها بوصفها فرضًا
+مفتوحًا. ومن ثم
+\[
+!A \land !B^x
+\]
+هو~!!a{proof}~$\delta_1$، وارتفاعه~$0$.
+ومن~$\delta_1$ نستطيع الحصول على~!!{proof}s اثنين~$\delta_2$ و
+$\delta_3$ بتطبيق إحدى نسختي~$\Elim{\land}$:
+\[
+\AxiomC{$!A \land !B^x$}
+\RightLabel{\Elim{\land}[2]}
+\UnaryInfC{$!B$}
+\DisplayProof
+\qquad
+\AxiomC{$!A \land !B^x$}
+\RightLabel{\Elim{\land}[1]}
+\UnaryInfC{$!A$}
+\DisplayProof
+\]
+والـ!!{proof} الجزئي المباشر للاستدلال الأخير في كل من~$\delta_2$ و
+$\delta_3$ هو~$\delta_1$. وفي كل~!!{proof} منهما تكون واقعة
+$!A\land !B$ فرضًا مفتوحًا. ولدينا
+$\pheight{\delta_2}=\pheight{\delta_3}=1$.
+
+تتطلب قاعدة~$\Intro{\land}$ مقدمتين من الصورتين~$!B$ و$!A$ لتسويغ
+نتيجة من الصورة~$!B \land !A$. ولذلك يكون الآتي~!!a{proof}~$\delta_4$:
+\[
+\AxiomC{$!A \land !B^x$}
+\RightLabel{\Elim{\land}[2]}
+\UnaryInfC{$!B$}
+\LeftSubproofLabel{$\delta_2$}
+\AxiomC{$!A \land !B^x$}
+\RightLabel{\Elim{\land}[1]}
+\UnaryInfC{$!A$}
+\RightSubproofLabel{$\delta_3$}
+\RightLabel{\Intro{\land}}
+\BinaryInfC{$!B \land !A$}
+\DisplayProof
+\]
+وارتفاعه~$\pheight{\delta_4}=\max(\pheight{\delta_2},
+\pheight{\delta_3})+1=\max(1,1)+1=2$. وله واقعتان من
+$!A \land !B$ بوصفهما فرضين، وكلتاهما مفتوحة.
+
+وأخيرًا نستطيع تطبيق~$\Intro{\lif}$ للحصول على~$\delta_5$:
+\[
+\AxiomC{$\Discharge{!A \land !B}{x}$}
+\RightLabel{\Elim{\land}[2]}
+\UnaryInfC{$!B$}
+\LeftSubproofLabel{$\delta_2$}
+\AxiomC{$\Discharge{!A \land !B}{x}$}
+\RightLabel{\Elim{\land}[1]}
+\UnaryInfC{$!A$}
+\RightSubproofLabel{$\delta_3$}
+\RightLabel{\Intro{\land}}
+\BinaryInfC{$!B \land !A$}
+\DischargeRule{\Intro{\lif}}{x}
+\UnaryInfC{$(!A \land !B) \lif (!B \land !A)$}
+\DisplayProof
+\]
+وارتفاعه~$\pheight{\delta_4}+1=3$. ويبرئ استدلال~$\Intro{\lif}$ كل
+وقائع الفروض من الصورة~$!A \land !B$ الموسومة~$x$، أي الفرضين اللذين
+كانا مفتوحين من قبل في البرهان الجزئي المباشر. ولأنهما الفرضان
+الوحيدان لـ$\delta_5$، فلا تكون له فروض مفتوحة، ومن ثم يكون~!!a{proof}
+\emph{لـ}!!{formula} نهايته~$(!A \land !B) \lif (!B \land !A)$.
+\end{ex}
+
+\end{document}

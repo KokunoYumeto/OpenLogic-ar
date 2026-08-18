@@ -1,0 +1,194 @@
+% Part: first-order-logic
+% Chapter: completeness
+% Section: compactness
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{com}{com}}
+      {\olfileid{pl}{com}{com}}
+
+\olsection{مبرهنة التراص}
+
+من النتائج المهمة لمبرهنة الاكتمال مبرهنة التراص. وتنص مبرهنة التراص
+على أنه إذا كانت كل مجموعة جزئية \emph{منتهية} من مجموعة ال!!{sentence}s
+قابلة للإرضاء، كانت المجموعة كلها قابلة للإرضاء، حتى لو كانت هي نفسها
+غير منتهية. وهذا بعيد عن البداهة؛ إذ لا يبدو، للوهلة الأولى على الأقل،
+أن ثمة ما يستبعد وجود مجموعات غير منتهية من ال!!{sentence}s متناقضة،
+على أن التناقض لا ينشأ، إن جاز التعبير، إلا من العدد غير المنتهي منها.
+وتقول مبرهنة التراص إن هذا الاحتمال مستبعد: فلا توجد مجموعات غير منتهية
+غير قابلة للإرضاء من ال!!{sentence}s تكون كل مجموعة جزئية منتهية منها
+قابلة للإرضاء. وللمبرهنة، شأنها شأن مبرهنة الاكتمال، صيغة تتصل
+بالاستلزام: إذا استلزمت مجموعة غير منتهية من ال!!{sentence}s شيئًا،
+فإن مجموعة جزئية منتهية منها تستلزمه بالفعل.
+
+\begin{defn}
+  تسمى مجموعة ال!!{sentence}s~$\Gamma$ \emph{قابلة للإرضاء منتهيًا} إذا
+  وفقط إذا كانت كل $\Gamma_0 \subseteq \Gamma$ منتهية قابلة للإرضاء.
+\end{defn}
+
+\begin{thm}[مبرهنة التراص]
+\ollabel{thm:compactness}
+تصدق العبارتان الآتيتان لكل مجموعة من ال!!{sentence}s~$\Gamma$ ولكل
+!!{sentence}~$!A$:
+\begin{enumerate}
+  \item يتحقق $\Gamma \Entails !A$ إذا وفقط إذا وجدت
+    $\Gamma_0 \subseteq \Gamma$ منتهية بحيث $\Gamma_0 \Entails !A$.
+  \item تكون $\Gamma$ قابلة للإرضاء إذا وفقط إذا كانت قابلة للإرضاء
+    منتهيًا.
+\end{enumerate}
+\end{thm}
+
+\begin{proof}
+نبرهن (2). إذا كانت $\Gamma$ قابلة للإرضاء، وُجدت
+\iftag{FOL}{!!a{structure}~$\Struct{M}$}{!!a{valuation}~$\pAssign{v}$}
+بحيث يتحقق $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!A}$ لكل $!A \in
+\Gamma$. ومن البدهي أن $\iftag{FOL}{\Struct{M}}{\pAssign{v}}$ هذه
+ترضي أيضًا كل مجموعة جزئية منتهية من~$\Gamma$، فتكون $\Gamma$ قابلة
+للإرضاء منتهيًا.
+
+والآن افترض أن $\Gamma$ قابلة للإرضاء منتهيًا. عندئذ تكون كل مجموعة
+جزئية منتهية~$\Gamma_0 \subseteq \Gamma$ قابلة للإرضاء. وبحسب السلامة
+(\iftag{FOL}{%
+  \tagrefs{prfAX/{fol:axd:sou:cor:consistency-soundness},
+    prfSC/{fol:seq:sou:cor:consistency-soundness},
+    prfND/{fol:ntd:sou:cor:consistency-soundness},
+    prfTab/{fol:tab:sou:cor:consistency-soundness}}}{%
+  \tagrefs{prfAX/{pl:axd:sou:cor:consistency-soundness},
+    prfSC/{pl:seq:sou:cor:consistency-soundness},
+    prfND/{pl:ntd:sou:cor:consistency-soundness},
+    prfTab/{pl:tab:sou:cor:consistency-soundness}}}),
+تكون كل مجموعة جزئية منتهية متسقة. ومن ثم يجب أن تكون $\Gamma$ نفسها
+متسقة بحسب
+\iftag{FOL}{%
+  \tagrefs{prfAX/{fol:axd:ptn:prop:proves-compact},
+    prfSC/{fol:seq:ptn:prop:proves-compact},
+    prfND/{fol:ntd:ptn:prop:proves-compact},
+    prfTab/{fol:tab:ptn:prop:proves-compact}}}{%
+  \tagrefs{prfAX/{pl:axd:ptn:prop:proves-compact},
+    prfSC/{pl:seq:ptn:prop:proves-compact},
+    prfND/{pl:ntd:ptn:prop:proves-compact},
+    prfTab/{pl:tab:ptn:prop:proves-compact}}}.
+وبحسب الاكتمال (\olref[cth]{thm:completeness})، لما كانت $\Gamma$
+متسقة، فهي قابلة للإرضاء.
+\end{proof}
+
+\tagprob{FOL}
+\begin{prob}
+أثبت (1) من \olref[fol][com][com]{thm:compactness}.
+\end{prob}
+\tagendprob
+
+\tagprob{notFOL}
+\begin{prob}
+أثبت (1) من \olref[pl][com][com]{thm:compactness}.
+\end{prob}
+\tagendprob
+
+\iftag{FOL}{%
+\begin{ex}
+في كل نموذج~$\Struct{M}$ لنظرية~$\Gamma$، يعيّن كل حد مغلق~$t$، بطبيعة
+الحال، !!a{element} من~$\Domain{M}$. فهل يمكن أن نضمن أيضًا أن كل
+!!{element} من~$\Domain{M}$ يعيّنه حد مغلق ما؟ وبعبارة أخرى، هل توجد
+نظريات~$\Gamma$ تكون جميع نماذجها مغطاة؟ تبين مبرهنة التراص أن الأمر
+ليس كذلك إذا كانت لـ~$\Gamma$ نماذج غير منتهية. ولرؤية ذلك، لتكن
+$\Struct{M}$ نموذجًا غير منتهٍ لـ~$\Gamma$، وليكن $c$ !!a{constant}
+لا ينتمي إلى لغة~$\Gamma$. ولتكن $\Delta$ مجموعة جميع ال!!{sentence}s
+$\eq/[c][t]$، حيث $t$ حد مغلق في لغة~$\Gamma$، أي~$\Lang{L}$:
+  \[
+  \Delta = \Setabs{\eq/[c][t]}{t \in \Trm[L]_0}.
+  \]
+يمكن كتابة كل مجموعة جزئية منتهية من $\Gamma \cup \Delta$ على الصورة
+$\Gamma' \cup \Delta'$، حيث $\Gamma' \subseteq \Gamma$ و
+$\Delta' \subseteq \Delta$. ولما كانت $\Delta'$ منتهية، فلا يمكن أن
+تحتوي إلا حدودًا مغلقة متناهية العدد. ليكن $a \in \Domain{M}$
+!!a{element} من $\Domain{M}$ لا يعيّنه أي منها، ولتكن
+$\Struct{M'}$ !!{structure} تماثل $\Struct{M}$، مع
+$\Assign{c}{M'} = a$ أيضًا. ولأن $a \neq \Value{t}{M}$ لكل حد مغلق~$t$
+يرد في~$\Delta'$، فإن $\Sat{M'}{\Delta'}$. ولما كان
+$\Sat{M}{\Gamma}$ و $\Gamma' \subseteq \Gamma$، وكان $c$ لا يرد
+في~$\Gamma$، فإن $\Sat{M'}{\Gamma'}$ أيضًا. وبالجمع نحصل على
+$\Sat{M'}{\Gamma' \cup \Delta'}$ لكل مجموعة جزئية منتهية
+$\Gamma' \cup \Delta'$ من $\Gamma \cup \Delta$. ومن ثم تكون كل مجموعة
+جزئية منتهية من $\Gamma \cup \Delta$ قابلة للإرضاء. وبحسب التراص تكون
+$\Gamma \cup \Delta$ نفسها قابلة للإرضاء، فتوجد نماذج~$\Struct{M}$
+لـ~$\Gamma \cup \Delta$. وردّ كل نموذج منها إلى اللغة الأصلية~$\Lang{L}$
+نموذج لـ~$\Gamma$ غير مغطى، لأن العنصر الذي يفسر الرمز~$c$ في التوسيع
+لا يساوي $\Value{t}{M}$ لأي حد مغلق~$t$ من~$\Lang{L}$.
+\end{ex}
+
+\begin{ex}
+اعتبر !!a{language}~$\Lang{L}$ تحتوي ال!!{predicate}~$<$، وال!!{constant}s
+$\Obj{0}$ و $\Obj{1}$، وال!!{function}s~$+$ و~$\times$ و~$-$.
+ولتكن $\Gamma$ مجموعة جميع ال!!{sentence}s في هذه ال!!{language} التي
+تصدق في ال!!{structure}~$\Struct{Q}$ ذات المجال~$\Rat$ والتأويلات
+البديهية. فـ~$\Gamma$ هي مجموعة جميع !!{sentence}s~$\Lang{L}$ الصادقة
+عن الأعداد النسبية. ومن البدهي أنه لا توجد في~$\Rat$ (ولا حتى
+في~$\Real$) أعداد~$r$ أكبر من~$0$ وأصغر من $1/k$ لكل
+$k \in \PosInt$. ولو وُجد عدد كهذا لكان \emph{متناهيًا في الصغر}: غير
+صفري، لكنه صغير بلا حد. ويمكن استعمال مبرهنة التراص لإظهار أن
+لـ~$\Gamma$ نماذج توجد فيها متناهيات في الصغر. ولا توجد في لغتنا
+!!a{function} للقسمة (لأن القسمة على صفر غير معرّفة، ويجب أن تؤوَّل
+ال!!{function}s بدوال كلية). ومع ذلك يمكننا التعبير عن $r < 1/k$، لأن
+هذا يصدق إذا وفقط إذا كان $r \cdot k < 1$. والآن ليكن $c$ !!a{constant}
+جديدًا، ولتكن $\Delta$ هي
+\[
+\{\Obj{0} < c\}
+\cup \Setabs{ c \times \num k < \Obj{1} }{k \in \PosInt}
+\]
+(حيث $\num{k} = (\Obj{1} + (\Obj{1} + \dots + (\Obj{1} +
+\Obj{1})\dots))$ وترد فيها $k$ نسخ من~$\Obj{1}$). ولكل مجموعة جزئية
+منتهية~$\Delta_0$ من~$\Delta$، يوجد~$K$ بحيث يكون $k < K$ لكل
+!!{sentence}~$c \times \num{k} < \Obj{1}$ في~$\Delta_0$. وإذا وسعنا
+$\Struct{Q}$ إلى~$\Struct{Q'}$ مع $\Assign{c}{Q'} = 1/K$، حصلنا على
+$\Sat{Q'}{\Gamma_0 \cup \Delta_0}$ لكل $\Gamma_0 \subseteq \Gamma$
+منتهية، ومن ثم تكون $\Gamma \cup \Delta$ قابلة للإرضاء منتهيًا
+(تمرين: أثبت ذلك بالتفصيل). وبحسب التراص تكون $\Gamma \cup \Delta$
+قابلة للإرضاء. وكل نموذج~$\Struct{S}$ لـ~$\Gamma \cup \Delta$ يحتوي
+متناهيًا في الصغر، هو~$\Assign{c}{S}$.
+\end{ex}
+}{}
+
+\tagprob{FOL}
+\begin{prob}
+لا يوجد في نموذج الحساب المعياري~$\Struct{N}$ !!{element}~$k \in
+\Domain{N}$ يرضي كل !!{formula}~$\num{n} < x$ (حيث
+$\num{n}$ هي $\Obj{0}^{\prime\dots\prime}$ وفيها $n$ من رموز
+$\prime$). استعمل مبرهنة التراص لتبيّن أن مجموعة ال!!{sentence}s في لغة
+الحساب الصادقة في نموذج الحساب المعياري~$\Struct{N}$ تصدق أيضًا في
+!!a{structure}~$\Struct{N'}$ تحتوي !!a{element} \emph{يرضي بالفعل} كل
+!!{formula}~$\num{n} < x$.
+\end{prob}
+\tagendprob
+
+\iftag{FOL}{
+\begin{ex}
+نعلم أن منطق الرتبة الأولى مع ال!!{identity} يستطيع التعبير عن وجوب
+بلوغ حجم ال!!{domain} حدًا أدنى: فلا تصدق ال!!{sentence}~$!A_{\ge n}$
+(التي تقول «توجد $n$ أشياء متمايزة على الأقل») إلا في البنى التي يحتوي
+فيها $\Domain{M}$ ما لا يقل عن~$n$ أشياء. فإذا أخذنا
+  \[
+  \Delta = \Setabs{!A_{\ge n}}{n \ge 1}
+  \]
+وجب أن يكون كل نموذج لـ~$\Delta$ غير منتهٍ. ومن ثم نستطيع أن نضمن ألا
+يكون لنظرية إلا نماذج غير منتهية بإضافة~$\Delta$ إليها: فنماذج
+$\Gamma \cup \Delta$ هي نماذج~$\Gamma$ غير المنتهية وحدها وجميعها.
+
+إذن يستطيع منطق الرتبة الأولى التعبير عن اللاتناهي. غير أن مبرهنة
+التراص تبين أنه لا يستطيع التعبير عن التناهي. فلنفترض أن مجموعة من
+ال!!{sentence}s~$\Lambda$ تصدق في ال!!{structure}s المنتهية وحدها
+وجميعها. عندئذ تكون $\Delta \cup \Lambda$ قابلة للإرضاء منتهيًا. لماذا؟
+افترض أن $\Delta' \cup \Lambda' \subseteq \Delta \cup \Lambda$ منتهية،
+مع $\Delta' \subseteq \Delta$ و $\Lambda' \subseteq \Lambda$. وإذا
+كانت $\Delta'=\emptyset$، فضع $n=0$؛ وإلا فليكن $n$ أكبر عدد بحيث
+$!A_{\ge n} \in \Delta'$. ولما كانت $\Lambda$ تصدق في جميع البنى
+المنتهية، فلها نموذج~$\Struct{M}$ يحتوي عددًا منتهيًا لا يقل عن~$n$ من
+ال!!{element}s. وعندئذ $\Sat{M}{\Delta' \cup \Lambda'}$. وبحسب التراص
+يكون لـ~$\Delta \cup \Lambda$ نموذج غير منتهٍ، وهذا يناقض افتراض أن
+$\Lambda$ لا تصدق إلا في ال!!{structure}s المنتهية.
+\end{ex}
+}{}
+
+\end{document}

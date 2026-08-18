@@ -1,0 +1,150 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{spine}{recursion}
+\olsection{مبرهنة (مبرهنات) العودية المتناهية التجاوز}
+
+أول ما يجب فعله هو التحقق من نجاح~\olref[valpha]{defValphas} بوصفه
+تعريفًا. وبوجه أعم، يلزمنا أن نثبت نجاح أي محاولة لتقديم تعريف
+بالعودية (المتناهية التجاوز). وهذه غاية هذا القسم.
+
+\emph{تحذير: هذه مادة دقيقة}. لكن المغزى العام بسيط: يضمن الاستقراء
+المتناهي التجاوز مع الاستبدال مشروعية (صور عدة من) العودية المتناهية
+التجاوز.\footnote{تذكير: يجوز أن تكون لجميع الصيغ والحدود معاملات
+  (ما لم يُصرح بخلاف ذلك).}
+
+\begin{defn}
+	ليكن~$\tau(x)$ حدًا، ولتكن~$f$ دالة، وليكن~$\alpha$ عددًا ترتيبيًا.
+	نقول إن~$f$ \emph{تقريب~$\alpha$} لـ$\tau$ إذا وفقط إذا كان كل من
+	$\dom{f} = \alpha$ و
+	$(\forall \beta \in \alpha)f(\beta) =
+	\tau(\funrestrictionto{f}{\beta})$.
+\end{defn}
+
+\begin{lem}[العودية المحدودة]\ollabel{transrecursionfun}
+لكل حد~$\tau(x)$ ولكل عدد ترتيبي~$\alpha$، يوجد تقريب~$\alpha$ وحيد
+لـ$\tau$.
+\end{lem}
+\begin{proof}
+سنبيّن أنه لكل~$\gamma \leq \alpha$ يوجد تقريب~$\gamma$ وحيد.
+
+نثبت الوحدانية أولًا. لتكن~$g$ و$h$، على الترتيب، تقريبي~$\gamma$
+و$\delta$. يبيّن استقراء متناهٍ في التجاوز على وسيطاتهما أن
+$g(\beta) = h(\beta)$ لكل
+$\beta \in \dom{g} \cap \dom{h} =
+\gamma \cap \delta = \min(\gamma, \delta)$. ولذلك تكون تقريباتنا وحيدة
+(إذا وجدت)، وتتفق في جميع القيم.
+
+ولإثبات الوجود، نستعمل الآن استقراءً بسيطًا متناهيًا في التجاوز
+(\olref[ordinals][opps]{simpletransrecursion}) على الأعداد الترتيبية
+$\delta \leq \alpha$.
+
+الدالة الخالية تقريب~$\emptyset$ على نحو بديهي.
+
+إذا كانت~$g$ تقريب~$\gamma$، فإن
+$g \cup \{\tuple{\gamma, \tau(g)}\}$ تقريب~$\ordsucc{\gamma}$.
+
+إذا كان~$\gamma$ عددًا ترتيبيًا حديًا، وكانت~$g_\delta$ تقريب~$\delta$
+لكل~$\delta < \gamma$، فلتكن
+$g = \bigcup_{\delta \in \gamma} g_\delta$. وهذه دالة لأن مختلف
+دوال~$g_\delta$ لدينا تتفق في جميع القيم. وإذا كان
+$\delta \in \gamma$، فإن
+$g(\delta) = g_{\ordsucc{\delta}}(\delta) =
+\tau(\funrestrictionto{g_{\ordsucc{\delta}}}{\delta}) =
+\tau(\funrestrictionto{g}{\delta})$.
+
+يتم بذلك البرهان بالاستقراء المتناهي التجاوز.
+\end{proof}
+
+إذا سمحنا لأنفسنا بتعريف \emph{حد} بدلًا من دالة، استطعنا حذف القيد
+$\alpha$ من النتيجة السابقة. وفي تقرير النتيجة الآتية وبرهانها، عندما
+تكون~$\sigma$ حدًا، نجعل
+$\funrestrictionto{\sigma}{\alpha} = \Setabs{\tuple{\beta,
+\sigma(\beta)}}{\beta \in \alpha}$.
+
+\begin{thm}[العودية العامة]\ollabel{transrecursionschema}
+لكل حد~$\tau(x)$، نستطيع أن نعرّف صراحة حدًا~$\sigma(x)$ بحيث
+$\sigma(\alpha) = \tau(\funrestrictionto{\sigma}{\alpha})$ لكل عدد
+ترتيبي~$\alpha$.
+\end{thm}
+
+\begin{proof}
+لكل~$\alpha$، يوجد بموجب~\olref{transrecursionfun} تقريب~$\alpha$
+وحيد~$f_\alpha$ لـ$\tau$. عرّف~$\sigma(\alpha)$ بأنه
+$f_{\ordsucc{\alpha}}(\alpha)$. والآن:
+	\begin{align*}
+		\sigma(\alpha) &= 
+		f_{\ordsucc{\alpha}}(\alpha) \\&= 
+		\tau(\funrestrictionto{f_{\ordsucc{\alpha}}}{\alpha}) \\&= 
+		\tau(\Setabs{\tuple{\beta, f_{\ordsucc{\alpha}}(\beta)}}{\beta \in \alpha}) \\&= 
+		\tau(\Setabs{\tuple{\beta, f_{\ordsucc{\beta}}(\beta)}}{\beta \in \alpha})\\&=
+		\tau(\funrestrictionto{\sigma}{\alpha})
+	\end{align*}
+مع ملاحظة أن
+$f_{\ordsucc{\beta}}(\beta) = f_{\ordsucc{\alpha}}(\beta)$ لكل
+$\beta < \alpha$، كما في~\olref{transrecursionfun}.
+\end{proof}
+\noindent
+لاحظ أن~\olref{transrecursionschema} \emph{مخطط}. والأهم أننا لا
+نستطيع توقع أن تعرّف~$\sigma$ دالة، أي نوعًا معينًا من
+\emph{المجموعات}، لأن~$\dom{\sigma}$ ستكون عندئذ مجموعة جميع الأعداد
+الترتيبية، خلافًا لمفارقة بورالي--فورتي
+(\olref[ordinals][basic]{buraliforti}).
+
+يبقى أن نبيّن أن~\olref{transrecursionschema} يسوّغ تعريفنا لمجموعات
+$V_\alpha$. وقد لا يكون ذلك واضحًا فورًا؛ لكنه سيظهر مع صورة أخيرة
+بسيطة من العودية المتناهية التجاوز.
+
+\begin{thm}[العودية البسيطة]\ollabel{simplerecursionschema}
+لكل حدين~$\tau(x)$ و$\theta(x)$ ولكل مجموعة~$A$، نستطيع أن نعرّف
+صراحة حدًا~$\sigma(x)$ بحيث:
+\begin{align*}
+	\sigma(\emptyset) &= A\\
+	\sigma(\ordsucc{\alpha}) &= \tau(\sigma(\alpha)) &&
+		\text{لكل عدد ترتيبي }\alpha\\
+	\sigma(\alpha) &= \theta(\ran{\funrestrictionto{\sigma}{\alpha}})&&
+		\text{عندما يكون }\alpha\text{ عددًا ترتيبيًا حديًا}
+\end{align*}
+\end{thm}
+
+\begin{proof}
+نبدأ بتعريف حد~$\xi(x)$ كما يأتي:
+%t $\xi(x) = A$ if $x$ is not a function whose domain is an ordinal;
+%otherwise let:
+\[
+	\xi(x) = 
+	\begin{cases}
+			A &\text{إذا كان $x = \emptyset$، أو لم يكن $x$ دالة}\\
+			&\hspace{1em}\text{مجالها عدد ترتيبي؛ وخلاف ذلك:}\\
+			\tau(x(\alpha)) & \text{إذا كان $\dom{x} = \ordsucc{\alpha}$}\\
+			\theta(\ran{x}) & \text{إذا كان $\dom{x}$ عددًا ترتيبيًا حديًا}
+	\end{cases}
+\]
+بموجب~\olref{transrecursionschema}، يوجد حد~$\sigma(x)$ يحقق
+$\sigma(\alpha) = \xi(\funrestrictionto{\sigma}{\alpha})$ لكل عدد
+ترتيبي~$\alpha$؛ وفوق ذلك يكون~$\funrestrictionto{\sigma}{\alpha}$
+دالة مجالها~$\alpha$. ونبيّن أن~$\sigma$ لها الخصائص المطلوبة
+بالاستقراء البسيط المتناهي التجاوز
+(\olref[ordinals][opps]{simpletransrecursion}).
+
+أولًا، $\sigma(\emptyset) = \xi(\emptyset) = A$.
+
+ثم
+$\sigma(\ordsucc{\alpha}) =
+\xi(\funrestrictionto{\sigma}{\ordsucc{\alpha}}) =
+\tau(\funrestrictionto{\sigma}{\ordsucc{\alpha}}(\alpha)) =
+\tau(\sigma(\alpha))$.
+
+وأخيرًا،
+$\sigma(\alpha) = \xi(\funrestrictionto{\sigma}{\alpha}) =
+\theta(\ran{\funrestrictionto{\sigma}{\alpha}})$، عندما يكون~$\alpha$
+حديًا.
+\end{proof}
+\noindent
+والآن، لتسويغ~\olref[valpha]{defValphas}، خذ ببساطة
+$A = \emptyset$ و$\tau(x) = \Pow{x}$ و$\theta(x) = \bigcup x$.
+وهكذا، بعد طول انتظار، يسوَّغ تعريف مجموعات~$V_\alpha$!{}
+
+
+\end{document}

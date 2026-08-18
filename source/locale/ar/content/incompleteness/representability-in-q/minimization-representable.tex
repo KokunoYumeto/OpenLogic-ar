@@ -1,0 +1,252 @@
+% Part: incompleteness
+% Chapter: representability-in-q
+% Section: minimization-representable
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{req}{min}
+\olsection{التصغير المنتظم قابل للتمثيل في $\Th{Q}$}
+
+لنتأمل البحث غير المحدود. افترض أن $g(x,z)$ منتظمة وقابلة للتمثيل في
+$\Th{Q}$، ولتكن !!{formula}~$!A_g(x,z,y)$ ممثلة لها. ولتُعرّف $f$ بـ
+$f(z)=\umin{x}{[g(x,z)=0]}$. نريد أن نجد !!a{formula}~$!A_f(z,y)$
+تمثل~$f$. فقيمة~$f(z)$ هي ذلك العدد~$x$ الذي (أ) يحقق $g(x,z)=0$،
+و(ب) هو أصغر عدد يحقق ذلك؛ أي إن $g(w,z)\neq0$ لكل $w<x$. ومن ثم يكون
+الاختيار الآتي طبيعيًا:
+\[
+!A_f(z,y) \ident !A_g(y, z, \Obj 0) \land \lforall[w][(w < y \lif \lnot
+  !A_g(w, z, \Obj 0))].
+\]
+وفي الحالة العامة ينبغي، بالطبع، أن نستبدل $z$ بـ$z_0$، \dots، $z_k$.
+
+وسيتضمن البرهان مرة أخرى بعض اللمم عما تكون $\Th{Q}$ قوية بما يكفي
+لإثباته.
+
+\begin{lem}
+\ollabel{lem:succ} لكل !!{constant}~$a$ ولكل عدد طبيعي~$n$،
+\[
+\Th{Q} \Proves \eq[(a' + \num n)][(a + \num n)'].
+\]
+\end{lem}
+
+\begin{proof}
+البرهان، كالمعتاد، بالاستقراء على~$n$. في الحالة الأساسية $n=0$،
+يلزم أن نبيّن أن $\Th{Q}$ تثبت
+$\eq[(a'+\Obj 0)][(a+\Obj 0)']$. ولدينا:
+\begin{align}
+  \Th{Q} & \Proves \eq[(a' + \Obj 0)][a'] \quad \text{بالبديهية $Q_4$}
+  \ollabel{step1}\\
+  \Th{Q} & \Proves  \eq[(a + \Obj 0)][a] \quad \text{بالبديهية $Q_4$}
+  \ollabel{step2} \\
+  \Th{Q} & \Proves \eq[(a + \Obj 0)'][a'] \quad \text{بـ\olref{step2}}
+  \ollabel{step3} \\
+  \Th{Q} & \Proves \eq[(a' + \Obj 0)][(a + \Obj 0)'] \quad
+  \text{بـ\olref{step1} و\olref{step3}}\notag
+\end{align}
+وفي خطوة الاستقراء يجوز أن نفترض أننا أثبتنا
+$\Th{Q}\Proves\eq[(a'+\num n)][(a+\num n)']$. ولما كانت
+$\num{n+1}$ هي $\num n'$، فعلينا أن نبيّن أن $\Th{Q}$ تثبت
+$\eq[(a'+\num n')][(a+\num n')']$. ولدينا:
+\begin{align}
+  \Th{Q} & \Proves \eq[(a' + \num n')][(a' + \num n)'] \quad
+  \text{بالبديهية $!Q_5$} \ollabel{step5}\\
+  \Th{Q} & \Proves \eq[(a' + \num n')][(a + \num n')'] \quad
+  \text{بفرض الاستقراء والبديهية $!Q_5$ ومنطق المساواة} \ollabel{step6}\\
+  \Th{Q} & \Proves \eq[(a' + \num n)'][(a + \num n')'] \quad
+  \text{بـ\olref{step5} و\olref{step6}.} \notag
+\end{align}
+\end{proof}
+
+ويجدر التنبيه مرة أخرى إلى أن هذا أضعف من القول إن $\Th{Q}$ تثبت
+$\lforall[x][\lforall[y][(x'+y)=(x+y)']]$. فمع أن هذه
+!!{sentence} صادقة في~$\Struct{N}$، لا تثبتها $\Th{Q}$.
+
+\begin{lem}
+\ollabel{lem:less-zero}
+$\Th{Q} \Proves \lforall[x][\lnot x < \Obj 0]$.
+\end{lem}
+
+\begin{proof}
+نقدّم البرهان بصورة غير صورية (أي لا نقدّم إلا إرشادات لبناء
+!!{derivation} الصورية).
+
+علينا أن نثبت $\lnot a<\Obj 0$ من أجل~$a$ اعتباطية. وبحسب تعريف
+$<$، يلزم أن نثبت
+$\lnot\lexists[y][\eq[(y'+a)][\Obj 0]]$ في $\Th{Q}$. سنفترض
+$\lexists[y][\eq[(y'+a)][\Obj 0]]$ ونستخرج تناقضًا. افترض
+$\eq[(b'+a)][\Obj 0]$. باستعمال $!Q_3$ نحصل على
+$\eq[a][\Obj 0]\lor\lexists[y][\eq[a][y']]$. ونفصل حالتين.
+
+الحالة 1: تصدق $\eq[a][\Obj 0]$. من $\eq[(b'+a)][\Obj 0]$ نحصل
+على $\eq[(b'+\Obj 0)][\Obj 0]$. وبحسب البديهية~$!Q_4$ في
+$\Th{Q}$، لدينا $\eq[(b'+\Obj 0)][b']$، ومن ثم
+$\eq[b'][\Obj 0]$. لكن البديهية~$!Q_2$ تعطينا أيضًا
+$\eq/[b'][\Obj 0]$، وهو تناقض.
+
+الحالة 2: يوجد $c$ بحيث $\eq[a][c']$. عندئذ نحصل على
+$\eq[(b'+c')][\Obj 0]$. وبحسب البديهية~$!Q_5$، نحصل على
+$\eq[(b'+c)'][\Obj 0]$، فيناقض ذلك البديهية~$Q_2$ مرة أخرى.
+\end{proof}
+
+\begin{lem}
+\ollabel{lem:less-nsucc}
+لكل عدد طبيعي~$n$،
+  \[
+  \Th{Q} \Proves
+  \lforall[x][(x < \num {n+1} \lif (\eq[x][\Obj 0] \lor \dots \lor
+    \eq[x][\num n]))].
+  \]
+\end{lem}
+
+\begin{proof}
+نستعمل الاستقراء على~$n$. لننظر في الحالة الأساسية $n=0$. يلزم فيها
+أن نبيّن $a<\num 1\lif\eq[a][\Obj 0]$ من أجل~$a$ اعتباطية. افترض
+$a<\num 1$. عندئذ تعطينا البديهية المعرِّفة لـ$<$ الصيغة
+$\lexists[y][\eq[(y'+a)][\Obj 0']]$ (لأن
+$\num 1\ident\Obj 0'$).
+
+افترض أن $b$ تحقق هذه الخاصية؛ أي لدينا
+$\eq[(b'+a)][\Obj 0']$. علينا أن نبيّن $\eq[a][\Obj 0]$. بحسب
+البديهية~$!Q_3$، إما $\eq[a][\Obj 0]$، وإما يوجد $c$ بحيث
+$\eq[a][c']$. لا شيء نثبته في الحالة الأولى؛ فافترض
+$\eq[a][c']$. عندئذ لدينا $\eq[(b'+c')][\Obj 0']$. وبحسب
+البديهية~$!Q_5$ في $\Th{Q}$، لدينا
+$\eq[(b'+c)'][\Obj 0']$. وبحسب البديهية~$!Q_1$، لدينا
+$\eq[(b'+c)][\Obj 0]$. لكن هذا يعني، بحسب البديهية~$!Q_8$، أن
+$c<\Obj 0$، وهو ما يناقض \olref{lem:less-zero}.
+
+والآن إلى خطوة الاستقراء. نثبت حالة $n+1$ مفترضين حالة~$n$. افترض
+$a<\num{n+2}$. وباستعمال $!Q_3$ مرة أخرى نفصل حالتين:
+$\eq[a][\Obj 0]$، ووجود $b$ بحيث $\eq[a][b']$. في الحالة الأولى
+ينتج
+$\eq[a][\Obj 0]\lor\dots\lor\eq[a][\num{n+1}]$ بداهة. وفي
+الحالة الثانية لدينا $b'<\num{n+2}$، أي
+$b'<\num{n+1}'$. وبحسب البديهية~$!Q_8$ يوجد $c$ بحيث
+$\eq[(c'+b')][\num{n+1}']$. وبحسب البديهية~$!Q_5$،
+$\eq[(c'+b)'][\num{n+1}']$. وبحسب البديهية~$!Q_1$،
+$\eq[(c'+b)][\num{n+1}]$، ولذلك $b<\num{n+1}$ بحسب
+البديهية~$!Q_8$. وبفرض الاستقراء،
+$\eq[b][\Obj 0]\lor\dots\lor\eq[b][\num n]$. ومن ذلك نحصل
+بالمنطق على
+$\eq[b'][\Obj 0']\lor\dots\lor\eq[b'][\num n']$، ومن ثم
+$\eq[a][\num 1]\lor\dots\lor\eq[a][\num{n+1}]$ لأن
+$\eq[a][b']$.
+\end{proof}
+
+\begin{lem}
+  \ollabel{lem:trichotomy} لكل عدد طبيعي~$m$،
+  \[
+  \Th{Q} \Proves
+  \lforall[y][((y < \num{m} \lor \num{m} < y) \lor \eq[y][\num{m}])].
+  \]
+\end{lem}
+
+\begin{proof}
+بالاستقراء على~$m$. تأمل أولًا الحالة $m=0$. بحسب~$!Q_3$،
+$\Th{Q}\Proves
+\lforall[y][(\eq[y][\Obj 0]\lor\lexists[z][\eq[y][z']])]$.
+لتكن $a$ اعتباطية. فإما $\eq[a][\Obj 0]$، وإما يوجد~$b$ بحيث
+$\eq[a][b']$. في الحالة الأولى لدينا أيضًا
+$(a<\Obj 0\lor\Obj 0<a)\lor\eq[a][\Obj 0]$. أما إذا كانت
+$\eq[a][b']$، فإن $\eq[(b'+\Obj 0)][(a+\Obj 0)]$ بحسب منطق
+$\eq$. وبحسب $!Q_4$، $\eq[(a+\Obj 0)][a]$، ولذلك نحصل على
+$\eq[(b'+\Obj 0)][a]$، ومن ثم
+$\lexists[z][\eq[(z'+\Obj 0)][a]]$. وبحسب تعريف $<$ في $!Q_8$،
+$\Obj 0<a$. وإذا كانت $\Obj 0<a$، كان أيضًا
+$(\Obj 0<a\lor a<\Obj 0)\lor\eq[a][\Obj 0]$.
+
+والآن افترض أن لدينا
+\begin{align*}
+  \Th{Q} & \Proves \lforall[y][((y < \num{m} \lor \num{m} < y) \lor
+    \eq[y][\num{m}])]
+  \intertext{ونريد أن نبيّن}
+  \Th{Q} & \Proves \lforall[y][((y < \num{m+1} \lor \num{m+1} < y) \lor
+    \eq[y][\num{m+1}])]
+\end{align*}
+لتكن $a$ اعتباطية. بحسب $!Q_3$، إما $\eq[a][\Obj 0]$، وإما يوجد
+$b$ بحيث $\eq[a][b']$. في الحالة الأولى لدينا
+$\eq[\num m'+a][\num{m+1}]$ بحسب $!Q_4$، ومن ثم
+$a<\num{m+1}$ بحسب $!Q_8$.
+
+تأمل الآن الحالة الثانية، $\eq[a][b']$. بحسب فرض الاستقراء،
+$(b<\num m\lor\num m<b)\lor\eq[b][\num m]$.
+
+الحد الأول $b<\num m$ يكافئ (بحسب $!Q_8$)
+$\lexists[z][\eq[(z'+b)][\num m]]$. افترض أن $c$ تحقق هذه الخاصية.
+فإذا كانت $\eq[(c'+b)][\num m]$، كانت أيضًا
+$\eq[(c'+b)'][\num m']$. وبحسب $!Q_5$،
+$\eq[(c'+b)'][(c'+b')]$. ومن ثم
+$\eq[(c'+b')][\num m']$. ونحصل على
+$\lexists[u][\eq[(u'+b')][\num{m+1}]]$ بالتعميم الوجودي على~$c$،
+مع مراعاة أن $\num m'\ident\num{m+1}$. ولذلك إذا كان
+$b<\num m$، كان $b'<\num{m+1}$، ومن ثم $a<\num{m+1}$.
+
+وافترض الآن $\num m<b$، أي
+$\lexists[z][\eq[(z'+\num m)][b]]$. ولتكن $c$ مثل هذا~$z$؛ أي
+$\eq[(c'+\num m)][b]$. بالمنطق،
+$\eq[(c'+\num m)'][b']$. وبحسب $!Q_5$،
+$\eq[(c'+\num m')][b']$. ولما كانت $\eq[a][b']$ وكان
+$\num m'\ident\num{m+1}$، نحصل على
+$\eq[(c'+\num{m+1})][a]$. وبحسب $!Q_8$، $\num{m+1}<a$.
+
+وأخيرًا، افترض $\eq[b][\num m]$. عندئذ، بالمنطق،
+$\eq[b'][\num m']$، ومن ثم $\eq[a][\num{m+1}]$.
+
+وهكذا نستطيع أن نستخرج من كل حد من فصل حالة~$m$ و$b$ الحد المناظر
+لحالة~$m+1$ و$a$.
+\end{proof}
+  
+\begin{prop}
+\ollabel{prop:rep-minimization}
+إذا كانت $!A_g(x,z,y)$ تمثل $g(x,z)$ في~$\Th{Q}$، فإن
+\[
+!A_f(z,y) \ident !A_g(y, z, \Obj 0) \land \lforall[w][(w < y \lif \lnot
+  !A_g(w, z, \Obj 0))]
+\]
+تمثل $f(z)=\umin{x}{[g(x,z)=0]}$.
+\end{prop}
+
+\begin{proof}
+نبيّن أولًا أنه إذا كان $f(n)=m$، فإن
+$\Th{Q}\Proves !A_f(\num n,\num m)$؛ أي
+\begin{align}
+  \Th{Q} & \Proves !A_g(\num{m}, \num{n}, \Obj 0) \land \lforall[w][(w <
+    \num{m} \lif \lnot !A_g(w, \num{n}, \Obj 0))]. \notag
+  \intertext{ولما كانت $!A_g(x,z,y)$ تمثل $g(x,z)$ وكان $g(m,n)=0$
+    إذا كان $f(n)=m$، فلدينا}
+\Th{Q} & \Proves !A_g(\num{m}, \num{n}, \Obj 0). \notag
+\intertext{وإذا كان $f(n)=m$، فإن $g(k,n)\neq0$ لكل $k<m$. ومن ثم}
+\Th{Q} & \Proves \lnot !A_g(\num{k}, \num{n}, \Obj 0). \notag
+\intertext{فنحصل على}
+\Th{Q} & \Proves \lforall[w][(w < \num{m} \lif \lnot
+  !A_g(w, \num{n}, \Obj 0))]. \ollabel{rep-less}
+\end{align}
+وذلك بـ\olref{lem:less-zero} إذا كان $m=0$، وبـ
+\olref{lem:less-nsucc} فيما عدا ذلك.
+
+والآن نبيّن أنه إذا كان $f(n)=m$، فإن
+$\Th{Q}\Proves
+\lforall[y][(!A_f(\num n,y)\lif\eq[y][\num m])]$. ونوجز الحجة
+مرة أخرى بصورة غير صورية، تاركين صوغها الرسمي للقارئ.
+
+افترض $!A_f(\num n,b)$. نستخرج منها (أ)
+$!A_g(b,\num n,\Obj 0)$، و(ب)
+$\lforall[w][(w<b\lif\lnot !A_g(w,\num n,\Obj 0))]$. وبحسب
+\olref{lem:trichotomy}،
+$(b<\num m\lor\num m<b)\lor\eq[b][\num m]$. وسنبيّن أن كلا من
+$b<\num m$ و$\num m<b$ يؤدي إلى تناقض.
+
+إذا كان $\num m<b$، فإن $\lnot !A_g(\num m,\num n,\Obj 0)$
+ينتج من~(ب). لكن $m=f(n)$، ولذلك $g(m,n)=0$، ومن ثم
+$\Th{Q}\Proves !A_g(\num m,\num n,\Obj 0)$ لأن $!A_g$ تمثل~$g$.
+فنحصل على تناقض.
+
+وافترض الآن $b<\num m$. لما كان
+$\Th{Q}\Proves\lforall[w][(w<\num m\lif
+\lnot !A_g(w,\num n,\Obj 0))]$ بحسب \olref{rep-less}، نحصل على
+$\lnot !A_g(b,\num n,\Obj 0)$. وهذا يناقض~(أ) مرة أخرى.
+\end{proof}
+
+\end{document}

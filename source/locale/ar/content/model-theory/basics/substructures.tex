@@ -1,0 +1,48 @@
+% Part: model-theory
+% Chapter: basics
+% Section: substructures
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{bas}{sub}
+\olsection{ال\printtoken{p}{structure} الجزئية}
+
+قد يكون !!{domain}~!!a{structure}~$\Struct{M}$ مجموعة جزئية من
+!!{domain}~$\Struct{M'}$ أخرى. لكن من الواضح ألا نعد~$\Struct{M}$
+«جزءًا» من~$\Struct{M'}$ إلا إذا لم يكن $\Domain{M} \subseteq
+\Domain{M'}$ فحسب، بل «اتفقت» $\Struct{M}$ و$\Struct{M'}$ أيضًا في
+كيفية تأويلهما رموز اللغة، على الجزء المشترك~$\Domain{M}$ على الأقل.
+
+\begin{defn}
+\ollabel{defn:substructure}
+إذا أعطيت !!{structure}s~$\Struct M$ و$\Struct M'$ للغة نفسها~$\Lang
+L$، قلنا إن $\Struct M$~\emph{!!{structure} جزئية} من~$\Struct M'$،
+وإن $\Struct M'$~\emph{امتداد} لـ~$\Struct M$، وكتبنا $\Struct M
+\substruct \Struct M'$، إذا وفقط إذا
+\begin{enumerate}
+\item $\Domain{M} \subseteq \Domain{M'}$؛
+\item لكل ثابت~$c \in \Lang L$، $\Assign{c}{M} =
+    \Assign{c}{M'}$؛
+\item لكل !!{function}~$n$-محلية $f \in \Lang L$،
+  $\Assign{f}{M}(a_1, \dots, a_n) = \Assign{f}{M'}(a_1, \dots, a_n)$
+  لجميع $a_1$، و\dots، $a_n \in \Domain{M}$؛
+\item لكل !!{predicate}~$n$-محلي $R \in \Lang L$، تكون $\langle
+  a_1, \dots, a_n\rangle \in \Assign{R}{M}$ إذا وفقط إذا كانت
+  $\langle a_1, \dots, a_n\rangle \in \Assign{R}{M'}$ لجميع $a_1$،
+  و\dots، $a_n \in \Domain{M}$.
+\end{enumerate}
+\end{defn}
+
+\begin{rem}
+\ollabel{rem:substructure}
+إذا لم تحتو اللغة ثابتًا ولا !!{function}s، فإن كل مجموعة جزئية غير
+خالية $N \subseteq \Domain{M}$ تعيّن !!{structure} جزئية~$\Struct{N}$
+من~$\Struct M$ ذات !!{domain}~$\Domain{N} = N$، بوضع
+$\Assign{R}{N} = \Assign{R}{M} \cap N^n$.
+\end{rem}
+
+% أثبت شيئًا عن هذا؟ أمثلة؟
+
+\end{document}

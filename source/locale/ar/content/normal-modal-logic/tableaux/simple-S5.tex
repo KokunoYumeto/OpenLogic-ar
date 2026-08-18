@@ -1,0 +1,85 @@
+% Part: normal-modal-logic
+% Chapter: tableaux
+% Section: simple-S5
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{tab}{s5}
+
+\olsection{\usetoken{P}{tableau} مبسطة للنسق \Log{S5}}
+
+النسق \Log{S5} سليم وتام بالنسبة إلى فئة النماذج الكلية، أي النماذج
+التي يكون فيها كل عالم متاحًا من كل عالم. ولا تؤثر علاقة الإتاحة في
+النماذج الكلية: فالقول «يوجد عالم~$w$ بحيث $\mSat{M}{!A}[w]$» صادق
+إذا وفقط إذا وُجد عالم كهذا متاح من~$u$. ومن ثم يمكننا في \Log{S5}
+أن نعرّف النموذج بأنه مجرد مجموعة من العوالم وإسناد~$V$. وهذا يوحي
+بإمكان تبسيط قواعد ال!!{tableau} أيضًا. ففي الحالة العامة نتخذ
+متتاليات الأعداد الصحيحة الموجبة بادئات، كي نتعقب أي تلك البادئات
+تسمي عوالم متاحة من غيرها: إذ تسمي $\sigma.n$ عالمًا متاحًا
+من~$\sigma$. لكن كل عالم في \Log{S5} متاح من كل عالم، فلا حاجة إلى
+هذا التعقب. ويمكننا بدلًا من ذلك استعمال الأعداد الصحيحة الموجبة
+بادئات. وترد القواعد المبسطة في \olref{tab:rules-S5}.
+
+\begin{table}
+  \begin{center}
+    \def\arraystretch{3}\def\fCenter{}
+    \begin{tabular}{|c|c|}
+    \hline
+    \iftag{prvBox}{
+      \AxiomC{\sFmla{\True}{\Box !A}[n]}
+      \RightLabel{\TRule{\True}{\Box}}
+      \UnaryInfC{\sFmla{\True}{!A}[m]}
+      \DisplayProof
+      &
+      \AxiomC{\sFmla{\False}{\Box !A}[n]}
+      \RightLabel{\TRule{\False}{\Box}}
+      \UnaryInfC{\sFmla{\False}{!A}[m]}
+      \DisplayProof\\
+      $m$ مستعملة & $m$ جديدة
+      \\[1ex]
+      \hline}{}
+    \iftag{prvDiamond}{
+      \AxiomC{\sFmla{\True}{\Diamond !A}[n]}
+      \RightLabel{\TRule{\True}{\Diamond}}
+      \UnaryInfC{\sFmla{\True}{!A}[m]}
+      \DisplayProof
+      &
+      \AxiomC{\sFmla{\False}{\Diamond !A}[n]}
+      \RightLabel{\TRule{\False}{\Diamond}}
+      \UnaryInfC{\sFmla{\False}{!A}[m]}
+      \DisplayProof\\
+      $m$ جديدة & $m$ مستعملة
+      \\[1ex]
+      \hline}{}
+    \end{tabular}
+  \end{center}
+  \caption{قواعد مبسطة للنسق \Log{S5}.}
+  \ollabel{tab:rules-S5}
+\end{table}
+
+\begin{ex}
+  نعطي جدولًا دلاليًا مغلقًا مبسطًا يبيّن أن $\Log{S5} \Proves
+  \Ax{5}$، أي $\Diamond!A \lif \Box\Diamond!A$.
+  \begin{oltableau}
+    [\pFmla{\False}{\Diamond\formula{A} \lif \Box\Diamond \formula{A}}{1},
+      just = \TAss
+      [\pFmla{\True}{\Diamond \formula{A}}{1}, just = {\TRule{\False}{\lif}[1]}
+        [\pFmla{\False}{\Box\Diamond \formula{A}}{1},
+          just = {\TRule{\False}{\lif}[1]}
+          [\pFmla{\False}{\Diamond \formula{A}}{2},
+            just = {\TRule{\False}{\Box}[3]}
+            [\pFmla{\True}{\formula{A}}{3},
+              just = {\TRule{\True}{\Diamond}[2]}
+                [\pFmla{\False}{\formula{A}}{3},
+                  just = {\TRule{\False}{\Diamond}[4]}, close]
+            ]
+          ]
+        ]
+      ]
+    ]
+  \end{oltableau}
+\end{ex}
+
+\end{document}

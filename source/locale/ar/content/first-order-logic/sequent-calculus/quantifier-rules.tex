@@ -1,0 +1,105 @@
+% Part: first-order-logic
+% Chapter: sequent-calculus
+% Section: quantifier-rules
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{seq}{qrl}
+
+\olsection{قواعد المكممات}
+
+\subsection{قواعد $\lforall$}
+
+\begin{defish}
+\Axiom$ !A(t), \Gamma \fCenter \Delta$
+\RightLabel{\LeftR{\lforall}}
+\UnaryInf$ \lforall[x][!A(x)],\Gamma \fCenter \Delta$
+\DisplayProof
+\hfill
+\Axiom$ \Gamma \fCenter \Delta, !A(a) $
+\RightLabel{\RightR{\lforall}}
+\UnaryInf$ \Gamma \fCenter \Delta, \lforall[x][!A(x)]$
+\DisplayProof
+\end{defish}
+
+في~\LeftR{\lforall} يكون~$t$ حدًا مغلقًا (أي حدًا بلا متغيرات). وفي
+\RightR{\lforall} يكون~$a$ !!a{constant} لا يجوز أن يرد في أي موضع
+من التتابعية السفلى لقاعدة~\RightR{\lforall}. ونسمي~$a$
+\emph{المتغير المميَّز} لاستدلال~\RightR{\forall}.\footnote{نستعمل
+مصطلح «المتغير المميَّز» مع أن~$a$ في القاعدة أعلاه !!a{constant}؛
+ولذلك أسباب تاريخية.}
+
+\subsection{قواعد $\lexists$}
+
+\begin{defish}
+\Axiom$ !A(a), \Gamma \fCenter \Delta $
+\RightLabel{\LeftR{\lexists}}
+\UnaryInf$ \lexists[x][!A(x)], \Gamma \fCenter \Delta$
+\DisplayProof
+\hfill
+\Axiom$ \Gamma \fCenter \Delta, !A(t) $
+\RightLabel{\RightR{\lexists}}
+\UnaryInf$ \Gamma \fCenter \Delta, \lexists[x][!A(x)]$
+\DisplayProof
+\end{defish}
+
+مرة أخرى، يكون~$t$ حدًا مغلقًا، ويكون~$a$ !!a{constant} لا يرد في
+التتابعية السفلى لقاعدة~\LeftR{\lexists}. ونسمي~$a$
+\emph{المتغير المميَّز} لاستدلال~\LeftR{\lexists}.
+
+يسمى الشرط القاضي بألا يرد المتغير المميَّز في التتابعية السفلى
+لاستدلال~\RightR{\lforall} أو~\LeftR{\lexists}
+\emph{شرط المتغير المميَّز}.
+
+\begin{explain}
+تذكّر الاصطلاح القائل إننا، حين تكون~$!A$ !!a{formula} يكون فيها
+ال!!{variable}~$x$ حرًا، نشير إلى ذلك بكتابة~$!A(x)$. وفي السياق
+نفسه تكون~$!A(t)$ اختصارًا لـ~$\Subst{!A}{t}{x}$. ولذلك كان يمكننا
+أيضًا كتابة قاعدة~\RightR{\lexists} كما يأتي:
+\begin{prooftree}
+  \Axiom$\Gamma \fCenter \Delta, \Subst{!A}{t}{x}$
+  \RightLabel{\RightR{\lexists}}
+  \UnaryInf$\Gamma \fCenter \Delta, \lexists[x][!A]$
+\end{prooftree}
+لاحظ أن~$t$ قد يرد سلفًا في~$!A$؛ فقد تكون~$!A$، مثلًا،
+$\Atom{\Obj P}{t,x}$. ومن ثم فإن استنتاج
+$\Gamma \Sequent \Delta, \lexists[x][\Atom{\Obj P}{t,x}]$ من
+~$\Gamma \Sequent \Delta, \Atom{\Obj P}{t,t}$ تطبيق صحيح
+لـ~\RightR{\lexists}---إذ يجوز لك أن «تستبدل» ورودًا واحدًا أو أكثر
+لـ~$t$ في المقدمة بال!!{variable} المربوط~$x$، ولا يلزم استبدالها
+كلها. غير أن شرطي المتغير المميَّز في~\RightR{\lforall}
+و~\LeftR{\lexists} يقتضيان ألا يرد ال!!{constant}~$a$ في~$!A$.
+ولذلك لا يصح أن تستنتج
+$\Gamma \Sequent \Delta, \lforall[x][\Atom{\Obj P}{a,x}]$ من
+$\Gamma \Sequent \Delta, \Atom{\Obj P}{a,a}$ باستعمال
+~$\RightR{\lforall}$.
+\end{explain}
+
+\begin{explain}
+لا ترد أي قيود على الحد~$t$ في~\RightR{\lexists}
+و~\LeftR{\lforall}. أما في قاعدتي~\LeftR{\lexists}
+و~\RightR{\lforall}، فيقتضي شرط المتغير المميَّز ألا يرد
+ال!!{constant}~$a$ في أي موضع خارج~$!A(a)$ في التتابعية العليا.
+وهذا ضروري لضمان سلامة النظام، أي إنه لا !!{derive}s إلا تتابعيات
+صالحة. ومن دون هذا الشرط كان ما يأتي جائزًا:
+\begin{prooftree}
+  \Axiom$!A(a) \fCenter !A(a)$
+  \RightLabel{*\LeftR{\lexists}}
+  \UnaryInf$\lexists[x][!A(x)] \fCenter !A(a)$
+  \RightLabel{\RightR{\lforall}}
+  \UnaryInf$\lexists[x][!A(x)] \fCenter \lforall[x][!A(x)]$
+  \DisplayProof\bottomAlignProof
+  \qquad
+  \Axiom$!A(a) \fCenter !A(a)$
+  \RightLabel{*\RightR{\lforall}}
+  \UnaryInf$!A(a) \fCenter \lforall[x][!A(x)]$
+  \RightLabel{\LeftR{\lexists}}
+  \UnaryInf$\lexists[x][!A(x)] \fCenter \lforall[x][!A(x)]$
+\end{prooftree}
+لكن التتابعية~$\lexists[x][!A(x)] \Sequent \lforall[x][!A(x)]$ ليست
+صالحة.
+\end{explain}
+
+\end{document}

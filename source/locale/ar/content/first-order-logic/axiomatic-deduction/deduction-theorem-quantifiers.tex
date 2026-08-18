@@ -1,0 +1,57 @@
+% Part: first-order-logic
+% Chapter: axiomatic-deduction
+% Section: deduction-theorem-quantifiers
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{axd}{ddq}
+
+\olsection{مبرهنة الاستنباط مع الكمّيات}
+
+\begin{thm}[مبرهنة الاستنباط]
+\ollabel{thm:deduction-thm-q} إذا كان $\Gamma \cup \{!A\} \Proves !B$،
+فإن $\Gamma \Proves !A \lif !B$.
+\end{thm}
+
+\begin{proof}
+نسير مرة أخرى بالاستقراء في طول !!{derivation} الصيغة $!B$ من
+$\Gamma \cup \{!A\}$.
+
+وبرهان أساس الاستقراء مطابق لما في برهان
+\olref[ded]{thm:deduction-thm}.
+
+وفي خطوة الاستقراء، افترض مرة أخرى أن !!{derivation} الصيغة $!B$ من
+$\Gamma \cup \{!A\}$ ينتهي بخطوة~$!B$ تبررها قاعدة استدلال. فإذا كانت
+قاعدة الاستدلال هي إثبات المقدَّم، سرنا كما في برهان
+\olref[ded]{thm:deduction-thm}. وإذا كانت قاعدة الاستدلال هي \QR، علمنا
+أن $!B \ident !C \lif \lforall[x][!D(x)]$، وأن !!a{formula} من الصورة
+$!C \lif !D(a)$ ترد في ال!!{derivation} قبل ذلك، حيث لا يرد $a$ في
+$!C$ ولا في $!A$ ولا في $\Gamma$. ومن ثم لدينا
+\begin{align*}
+  \Gamma \cup \{!A\} & \Proves !C \lif !D(a),\\
+  \intertext{وينطبق فرض الاستقراء، أي إن لدينا}
+    \Gamma & \Proves !A \lif (!C \lif !D(a)).\\
+  \intertext{ومن}
+  & \Proves (!A \lif (!C \lif !D(a))) \lif ((!A \land !C) \lif !D(a))\\
+  \intertext{وقاعدة إثبات المقدَّم نحصل على}
+  \Gamma & \Proves (!A \land !C) \lif !D(a).\\
+  \intertext{وبما أن شرط المتغير المميَّز ما يزال منطبقًا، يمكننا أن نضيف إلى هذا ال!!{derivation} خطوة تبررها \QR، فنحصل على}
+    \Gamma & \Proves (!A \land !C) \lif \lforall[x][!D(x)].\\
+    \intertext{ولدينا أيضًا}
+    & \Proves ((!A \land !C) \lif \lforall[x][!D(x)]) \lif (!A \lif (!C \lif \lforall[x][!D(x)])),\\
+    \intertext{ومن ثم، بقاعدة إثبات المقدَّم،}
+    \Gamma & \Proves !A \lif (!C \lif \lforall[x][!D(x)]),
+\end{align*}
+أي إن $\Gamma \Proves !A \lif !B$.
+
+ونترك تمرينًا الحالة التي تبرر فيها القاعدة \QR الصيغة $!B$، ولكنها
+تكون من الصورة $\lexists[x][!D(x)] \lif !C$.
+\end{proof}
+
+\begin{prob}
+  أكمل برهان \olref[fol][axd][ddq]{thm:deduction-thm-q}.
+\end{prob}
+
+\end{document}

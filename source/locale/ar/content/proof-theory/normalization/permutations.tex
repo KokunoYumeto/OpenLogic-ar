@@ -1,0 +1,379 @@
+% Part: proof-theory
+% Chapter: normalization
+% Section: permutations
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{nor}{per}
+
+\olsection{تحويلات التبديل}
+
+القطوع في~\Log{N1i} هي المقاطع التي تنتهي بالمقدمة الكبرى لقاعدة
+!!a{elimination}. وإحدى حالات برهان التطبيع هي تقصير القطوع القصوى، ومن ثم
+تقليل طول القطع في~!!{proof}. ويمكن لقطع طوله أكبر من~$1$ أن ينتهي بطرائق
+متعددة، بحسب ما إذا كان آخر ظهور لـ~!!{formula}~$!A$ في القطع نتيجةً لـ
+(\Elim{\lor} أو~\Elim{\lexists})، وبحسب استدلال~!!{elimination} الذي تكون
+تلك الصيغة مقدمته الكبرى.
+
+فمثلًا، إذا كان الاستدلالان المعنيان هما~\Elim{\lor} و\Elim{\land}، وكانت
+$!A \ident !B \land !C$، وكان هناك~!!{proof} جزئي~$\delta_1$ ينتهي هكذا:
+\[
+\AxiomC{}
+\RightLabel{$\delta_2$}
+\DeduceC{$!D \lor !E$}
+\AxiomC{$\Discharge{!D}{x}$}
+\RightLabel{$\delta_3$}
+\DeduceC{$!B \land !C$}
+\AxiomC{$\Discharge{!E}{y}$}
+\RightLabel{$\delta_4$}
+\DeduceC{$!B \land !C$}
+\DischargeRule{\Elim{\lor}}{x\,y}
+\TrinaryInfC{$!B \land !C$}
+\RightLabel{\Elim{\land}[1]}
+\UnaryInfC{$!B$}
+\DisplayProof
+\]
+فإن آخر ظهور لـ~!!{formula}~$!A_n$ في القطع هو نتيجة~\Elim{\lor}، أي
+الظهور السفلي لـ~$!B \land !C$. أما الظهور قبل الأخير لـ~!!{formula}
+$!A_{n-1}$ فهو إحدى المقدمتين الصغريين لـ~\Elim{\lor}.
+
+ولتقصير هذا القطع، يمكننا عكس ترتيب استدلالي~\Elim{\lor} و\Elim{\land}
+(أي ``تبديلهما''). وبعبارة أخرى، نستبدل بالبرهان الجزئي~$\delta_1$ داخل
+$\delta$ ما يأتي:
+\[
+\AxiomC{}
+\RightLabel{$\delta_2$}
+\DeduceC{$!D \lor !E$}
+\AxiomC{$\Discharge{!D}{x}$}
+\RightLabel{$\delta_3$}
+\DeduceC{$!B \land !C$}
+\RightLabel{\Elim{\land}[1]}
+\UnaryInfC{$!B$}
+\AxiomC{$\Discharge{!E}{y}$}
+\RightLabel{$\delta_4$}
+\DeduceC{$!B \land !C$}
+\RightLabel{\Elim{\land}[1]}
+\UnaryInfC{$!B$}
+\DischargeRule{\Elim{\lor}}{x\,y}
+\TrinaryInfC{$!B$}
+\DisplayProof
+\]
+فالقطوع التي كانت تنتهي في مقدمة~\Elim{\land} تحت~\Elim{\lor} تنتهي الآن
+في مقدمة أحد استدلالي~\Elim{\land} الواقعين فوق المقدمتين الصغريين لـ
+\Elim{\lor}؛ أي إن طول كل منها قد نقص بمقدار~$1$.
+
+وفوق ذلك، لا يتغير أي قطع يقع كله داخل~$\delta_2$ أو~$\delta_3$ أو
+$\delta_4$، أو يقع كله خارج~$\delta_1$ داخل~$\delta$: فهو ما يزال يشتمل
+على~!!{formula}s نفسها ويمر بالاستدلالات نفسها، ولذلك له خصوصًا رتبة القطع
+وطوله نفسيهما كما في القطع المقابل في~$\delta$. ومن ثم لم تزد رتبة القطع
+في~!!{proof} الجديد، وطول القطع في~!!{proof} الجديد أقل منه في~!!{proof}
+القديم.
+
+\begin{prob}
+ينقص طول قطع واحد على الأقل بمقدار~$1$ بعد تحويل تبديل. وإذا بدّلنا
+\Elim{\land} عبر~\Elim{\lor}، فهناك في الواقع مقطعا قطع ينقص طولهما، ومن ثم
+ينقص طول القطع في~!!{proof} بمقدار~$2$ على الأقل. فهل يمكن أن ينقص طول
+القطع في~!!a{proof} بأكثر من~$2$ بتحويل واحد من هذا النوع؟ وهل يمكن أن
+تنقص \emph{رتبة} القطع؟
+\end{prob}
+
+تسمى عملية نقل~!!a{elimination} إلى فوق قاعدة~\Elim{\lor} أو
+\Elim{\lexists} \emph{تحويل تبديل}. وترد أنماط بعض أزواج القواعد في
+\olref{tab:permutation-conversions}. (وتُترك الأنماط الباقية تمارين.)
+
+% \begin{table}
+% \begin{multline*}
+% \shoveleft{\AxiomC{$!D \lor !E$}
+% \AxiomC{$\Discharge{!D}{x}$}
+% \shortDeduce
+% \DeduceC{$!B \land !C$}
+% \AxiomC{$\Discharge{!E}{y}$}
+% \shortDeduce
+% \DeduceC{$!B \land !C$}
+% \DischargeRule{\Elim{\lor}}{x\,y}
+% \TrinaryInfC{$!B \land !C$}
+% \RightLabel{\Elim{\land}[1]}
+% \UnaryInfC{$!B$}
+% \DisplayProof}\\
+% \shoveright{\longrightarrow\ 
+% \AxiomC{$!D \lor !E$}
+% \AxiomC{$\Discharge{!D}{x}$}
+% \shortDeduce
+% \DeduceC{$!B \land !C$}
+% \RightLabel{\Elim{\land}[1]}
+% \UnaryInfC{$!B$}
+% \AxiomC{$\Discharge{!E}{y}$}
+% \shortDeduce
+% \DeduceC{$!B \land !C$}
+% \RightLabel{\Elim{\land}[1]}
+% \UnaryInfC{$!B$}
+% \DischargeRule{\Elim{\lor}}{x\,y}
+% \TrinaryInfC{$!B$}
+% \DisplayProof}
+% \\
+% \shoveleft{\AxiomC{$!D \lor !E$}
+% \AxiomC{$\Discharge{!D}{x}$}
+% \shortDeduce
+% \DeduceC{$!B \lif !C$}
+% \AxiomC{$\Discharge{!E}{y}$}
+% \shortDeduce
+% \DeduceC{$!B \lif !C$}
+% \DischargeRule{\Elim{\lor}}{x\,y}
+% \TrinaryInfC{$!B \lif !C$}
+% \AxiomC{$!B$}
+% \RightLabel{\Elim{\lif}}
+% \BinaryInfC{$!C$}
+% \DisplayProof}\\
+% \shoveright{\longrightarrow\ 
+% \AxiomC{$!D \lor !E$}
+% \AxiomC{$\Discharge{!D}{x}$}
+% \shortDeduce
+% \DeduceC{$!B \lif !C$}
+% \AxiomC{$!B$}
+% \RightLabel{\Elim{\lif}}
+% \BinaryInfC{$!C$}
+% \AxiomC{$\Discharge{!E}{y}$}
+% \shortDeduce
+% \DeduceC{$!B \lif !C$}
+% \AxiomC{$!B$}
+% \RightLabel{\Elim{\lif}}
+% \BinaryInfC{$!C$}
+% \DischargeRule{\Elim{\lor}}{x\,y}
+% \TrinaryInfC{$!C$}
+% \DisplayProof}
+% \\
+% \shoveleft{\AxiomC{$!D \lor !E$}
+% \AxiomC{$\Discharge{!D}{x}$}
+% \shortDeduce
+% \DeduceC{$!B \lif !C$}
+% \AxiomC{$\Discharge{!E}{y}$}
+% \shortDeduce
+% \DeduceC{$!B \lif !C$}
+% \DischargeRule{\Elim{\lor}}{x\,y}
+% \TrinaryInfC{$!B \lif !C$}
+% \AxiomC{$!B$}
+% \RightLabel{\Elim{\lif}}
+% \BinaryInfC{$!C$}
+% \DisplayProof}\\
+% \shoveright{\longrightarrow\ 
+% \AxiomC{$!D \lor !E$}
+% \AxiomC{$\Discharge{!D}{x}$}
+% \shortDeduce
+% \DeduceC{$!B \lif !C$}
+% \AxiomC{$!B$}
+% \RightLabel{\Elim{\lif}}
+% \BinaryInfC{$!C$}
+% \AxiomC{$\Discharge{!E}{y}$}
+% \shortDeduce
+% \DeduceC{$!B \lif !C$}
+% \AxiomC{$!B$}
+% \RightLabel{\Elim{\lif}}
+% \BinaryInfC{$!C$}
+% \DischargeRule{\Elim{\lor}}{x\,y}
+% \TrinaryInfC{$!C$}
+% \DisplayProof}
+% \\
+% \shoveleft{\AxiomC{$!D \lor !E$}
+% \AxiomC{$\Discharge{!D}{x}$}
+% \shortDeduce
+% \DeduceC{$\lforall[x][!B(x)]$}
+% \AxiomC{$\Discharge{!E}{y}$}
+% \shortDeduce
+% \DeduceC{$\lforall[x][!B(x)]$}
+% \DischargeRule{\Elim{\lor}}{x\,y}
+% \TrinaryInfC{$\lforall[x][!B(x)]$}
+% \RightLabel{\Elim{\lforall}}
+% \UnaryInfC{$!B(t)$}
+% \DisplayProof}\\
+% \shoveright{\longrightarrow\ 
+% \AxiomC{$!D \lor !E$}
+% \AxiomC{$\Discharge{!D}{x}$}
+% \shortDeduce
+% \DeduceC{$\lforall[x][!B(x)]$}
+% \RightLabel{\Elim{\lforall}}
+% \UnaryInfC{$!B(t)$}
+% \AxiomC{$\Discharge{!E}{y}$}
+% \shortDeduce
+% \DeduceC{$\lforall[x][!B(x)]$}
+% \RightLabel{\Elim{\lforall}}
+% \UnaryInfC{$!B(t)$}
+% \DischargeRule{\Elim{\lor}}{x\,y}
+% \TrinaryInfC{$!B(t)$}
+% \DisplayProof}
+% \end{multline*}
+% \caption{Some permutation conversions for \Log{N1i}.}
+% \ollabel{tab:permutation-conversions}
+% \end{table}
+
+{\small
+\begin{longtable}{@{}l@{}}
+\AxiomC{$!D \lor !E$}
+\AxiomC{$\Discharge{!D}{x}$}
+\shortDeduce
+\DeduceC{$!B \land !C$}
+\AxiomC{$\Discharge{!E}{y}$}
+\shortDeduce
+\DeduceC{$!B \land !C$}
+\DischargeRule{\Elim{\lor}}{x\,y}
+\TrinaryInfC{$!B \land !C$}
+\RightLabel{\Elim{\land}[1]}
+\UnaryInfC{$!B$}
+\DisplayProof
+$\longrightarrow$\\[6ex]
+\quad\AxiomC{$!D \lor !E$}
+\AxiomC{$\Discharge{!D}{x}$}
+\shortDeduce
+\DeduceC{$!B \land !C$}
+\RightLabel{\Elim{\land}[1]}
+\UnaryInfC{$!B$}
+\AxiomC{$\Discharge{!E}{y}$}
+\shortDeduce
+\DeduceC{$!B \land !C$}
+\RightLabel{\Elim{\land}[1]}
+\UnaryInfC{$!B$}
+\DischargeRule{\Elim{\lor}}{x\,y}
+\TrinaryInfC{$!B$}
+\DisplayProof
+\\[10ex]
+\AxiomC{$!D \lor !E$}
+\AxiomC{$\Discharge{!D}{x}$}
+\shortDeduce
+\DeduceC{$!B \lif !C$}
+\AxiomC{$\Discharge{!E}{y}$}
+\shortDeduce
+\DeduceC{$!B \lif !C$}
+\DischargeRule{\Elim{\lor}}{x\,y}
+\TrinaryInfC{$!B \lif !C$}
+\AxiomC{$!B$}
+\RightLabel{\Elim{\lif}}
+\BinaryInfC{$!C$}
+\DisplayProof
+$\longrightarrow$\\[6ex]
+\AxiomC{$!D \lor !E$}
+\AxiomC{$\Discharge{!D}{x}$}
+\shortDeduce
+\DeduceC{$!B \lif !C$}
+\AxiomC{$!B$}
+\RightLabel{\Elim{\lif}}
+\BinaryInfC{$!C$}
+\AxiomC{$\Discharge{!E}{y}$}
+\shortDeduce
+\DeduceC{$!B \lif !C$}
+\AxiomC{$!B$}
+\RightLabel{\Elim{\lif}}
+\BinaryInfC{$!C$}
+\DischargeRule{\Elim{\lor}}{x\,y}
+\TrinaryInfC{$!C$}
+\DisplayProof
+\\[10ex]
+\AxiomC{$!D \lor !E$}
+\AxiomC{$\Discharge{!D}{x}$}
+\shortDeduce
+\DeduceC{$\lforall[x][!B(x)]$}
+\AxiomC{$\Discharge{!E}{y}$}
+\shortDeduce
+\DeduceC{$\lforall[x][!B(x)]$}
+\DischargeRule{\Elim{\lor}}{x\,y}
+\TrinaryInfC{$\lforall[x][!B(x)]$}
+\RightLabel{\Elim{\lforall}}
+\UnaryInfC{$!B(t)$}
+\DisplayProof
+\quad$\longrightarrow$\\[8ex]
+\quad\AxiomC{$!D \lor !E$}
+\AxiomC{$\Discharge{!D}{x}$}
+\shortDeduce
+\DeduceC{$\lforall[x][!B(x)]$}
+\RightLabel{\Elim{\lforall}}
+\UnaryInfC{$!B(t)$}
+\AxiomC{$\Discharge{!E}{y}$}
+\shortDeduce
+\DeduceC{$\lforall[x][!B(x)]$}
+\RightLabel{\Elim{\lforall}}
+\UnaryInfC{$!B(t)$}
+\DischargeRule{\Elim{\lor}}{x\,y}
+\TrinaryInfC{$!B(t)$}
+\DisplayProof
+\\
+\caption{بعض تحويلات التبديل في~\Log{N1i}.}
+\ollabel{tab:permutation-conversions}
+\end{longtable}
+}
+
+\begin{prob}
+اكتب تحويلات التبديل لـ~\Elim{\lor} متبوعةً بـ~\Elim{\lor} أو
+\Elim{\lnot}.
+\end{prob}
+
+\begin{prob}
+اكتب تحويلات التبديل لـ~\Elim{\lexists} متبوعةً بـ~\Elim{\lexists}.
+واشرح لماذا لا يُنتهك شرط المتغير الذاتي في الحالة الثانية.
+\end{prob}
+
+ينبغي أن نتحقق من أن تطبيق تحويل تبديل لا ينتهك شرط متغير ذاتي. انظر في:
+\[
+\AxiomC{}
+\RightLabel{$\delta_2$}
+\DeduceC{$!D \lor !E$}
+\AxiomC{$\Discharge{!D}{x}$}
+\RightLabel{$\delta_3$}
+\DeduceC{$\lexists[x][!B(x)]$}
+\AxiomC{$\Discharge{!E}{y}$}
+\RightLabel{$\delta_4$}
+\DeduceC{$\lexists[x][!B(x)]$}
+\DischargeRule{\Elim{\lor}}{x\,y}
+\TrinaryInfC{$\lexists[x][!B(x)]$}
+\AxiomC{$\Discharge{!B(c)}{z}$}
+\RightLabel{$\delta_5$}
+\DeduceC{$!C$}
+\DischargeRule{\Elim{\lexists}}{z}
+\BinaryInfC{$!C$}
+\DisplayProof
+\]
+وقبل استبدال هذا البرهان نأخذ نسختين من~$\delta_5$ مع إعادة تسمية
+المتغيرات الذاتية ووسوم التفريغ، تجنبًا للأسر، بحيث تكون الأزواج
+$(c_D,z_D)$ و$(c_E,z_E)$ حديثةً ومتميزةً زوجيًا. ثم نستبدله بما يأتي:
+\[
+\AxiomC{}
+\RightLabel{$\delta_2$}
+\DeduceC{$!D \lor !E$}
+\AxiomC{$\Discharge{!D}{x}$}
+\RightLabel{$\delta_3$}
+\DeduceC{$\lexists[x][!B(x)]$}
+\AxiomC{$\Discharge{!B(c_D)}{z_D}$}
+\RightLabel{$\delta_5^{(D)}$}
+\DeduceC{$!C$}
+\DischargeRule{\Elim{\lexists}}{z_D}
+\BinaryInfC{$!C$}
+\AxiomC{$\Discharge{!E}{y}$}
+\RightLabel{$\delta_4$}
+\DeduceC{$\lexists[x][!B(x)]$}
+\AxiomC{$\Discharge{!B(c_E)}{z_E}$}
+\RightLabel{$\delta_5^{(E)}$}
+\DeduceC{$!C$}
+\DischargeRule{\Elim{\lexists}}{z_E}
+\BinaryInfC{$!C$}
+\DischargeRule{\Elim{\lor}}{x\,y}
+\TrinaryInfC{$!C$}
+\DisplayProof
+\]
+قد نقلق من أن المتغير الذاتي~$c$ يمكن أن يظهر، مثلًا، في~$!D$. فالفرض
+$!D$ يفرَّغ فوق~\Elim{\lexists} الأصلي، ولذلك لا يظهر في~!!{proof} الأصلي
+ضمن فرض مفتوح فوق المقدمة الكبرى لاستدلال~\Elim{\lexists}، ويتحقق هناك شرط
+المتغير الذاتي. أما في~!!{proof} الجديد فلا يفرَّغ~$!D$ إلا بعد استدلالي
+\Elim{\lexists}، فيبدو أن الشرط سيُنتهك. لكننا نفترض أن~!!{proof}sنا
+منتظمة: فكل متغير ذاتي هو المتغير الذاتي لاستدلال واحد، ولا يظهر في
+!!{proof} إلا فوق المقدمة الصغرى لـ~\Elim{\lexists}. وعلى وجه الخصوص لا
+يمكن أن يظهر~$c$ في~$\delta_3$ أو~$\delta_4$؛ وإعادة التسمية الحديثة التي
+أجريناها تمنع الأسر بين النسختين أيضًا.
+
+ويبيّن هذا المثال أمرًا آخر: ففي~!!{proof} الجديد نسختان من~$\delta_5$.
+ولهذا، إذا احتوى~$\delta_5$ على قطع أقصى، فلا يلزم أن ينقص طول القطع؛ بل
+قد يزداد بسبب نسخه. فعلينا أن نطبّق تحويل التبديل فقط حين نعلم أنه لا يوجد
+قطع أقصى في~$\delta_5$. ونضمن ذلك باختيار قطع أقصى \emph{علوي} دائمًا؛ أي
+قطع أقصى لا يحتوي~!!{proof}ه الجزئي (وهو~$\delta_1$ هنا) قطعًا أقصى ينتهي
+فوق آخر استدلال في ذلك~!!{proof} الجزئي. ويستبعد هذا وجود قطوع قصوى أخرى
+في~$\delta_5$ (بل وفي~$\delta_2$ أو~$\delta_3$ أو~$\delta_4$ كذلك).
+
+\end{document}

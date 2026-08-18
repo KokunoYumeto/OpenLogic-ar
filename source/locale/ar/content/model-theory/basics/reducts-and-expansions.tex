@@ -1,0 +1,65 @@
+% Part: model-theory
+% Chapter: basics
+% Section: reducts-and-expansions
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{bas}{red}
+\section{المختزلات والتوسيعات}
+
+من المفيد أو الضروري في أحيان كثيرة مقارنة لغات بينها رموز مشتركة،
+ومقارنة ال!!{structure}s لهذه اللغات. وأكثر الحالات شيوعًا هي أن تكون
+جميع رموز !!a{language}~$\Lang{L}$ جزءًا أيضًا من
+!!a{language}~$\Lang{L'}$، أي $\Lang{L} \subseteq \Lang{L'}$. ويمكن
+عندئذ دائمًا توسيع !!{structure}~$\Struct{M}$ للغة~$\Lang{L}$ إلى
+!!{structure} للغة~$\Lang{L'}$ بإضافة تأويلات للرموز الإضافية مع إبقاء
+تأويلات الرموز المشتركة كما هي. ومن جهة أخرى، يمكننا الحصول من
+!!{structure}~$\Struct{M'}$ للغة~$\Lang{L'}$ على !!{structure} للغة
+$\Lang{L}$ بمجرد «نسيان» تأويلات الرموز التي لا ترد في~$\Lang{L}$.
+
+\begin{defn}
+\ollabel{defn:reduct}
+افترض أن $\Lang L \subseteq \Lang L'$، وأن $\Struct M$~!!{structure}
+للغة~$\Lang L$، وأن $\Struct M'$~!!{structure} للغة~$\Lang L'$.
+تكون $\Struct M$ \emph{مختزَل}~$\Struct M'$ إلى~$\Lang L$، وتكون
+$\Struct M'$ \emph{توسيع}~$\Struct M$ إلى~$\Lang L'$، إذا وفقط إذا
+\begin{enumerate}
+\item $\Domain{M} = \Domain{M'}$.
+\item لكل !!{constant}~$c \in \Lang L$، $\Assign{c}{M} =
+  \Assign{c}{M'}$.
+\item لكل !!{function}~$f \in \Lang L$، $\Assign{f}{M} =
+  \Assign{f}{M'}$.
+\item لكل !!{predicate}~$P \in \Lang L$، $\Assign{P}{M} =
+  \Assign{P}{M'}$.
+\end{enumerate}
+\end{defn}
+
+\begin{prop}
+\ollabel{prop:reduct}
+إذا كانت !!{structure}~$\Struct{M}$ للغة~$\Lang{L}$ مختزَل
+!!{structure}~$\Struct{M'}$ للغة~$\Lang{L'}$، فإنه لجميع
+ال!!{sentence}s~$!A$ في~$\Lang{L}$،
+\[
+\Sat{M}{!A} \text{ إذا وفقط إذا كان } \Sat{M'}{!A}.
+\]
+\end{prop}
+
+\begin{proof}
+  تمرين.
+\end{proof}
+
+\begin{prob}
+أثبت \olref[mod][bas][red]{prop:reduct}.
+\end{prob}
+
+\begin{defn}
+إذا كانت لدينا !!{structure}~$\Struct{M}$ للغة~$\Lang{L}$، وكانت
+$\Lang{L'} = \Lang{L} \cup \{P\}$ توسيع~$\Lang{L}$ الناتج عن إضافة
+!!{predicate} واحد $n$-محلي~$P$، وكانت $R \subseteq \Domain{M}^n$
+علاقة $n$-محلية، كتبنا $\Expan{M}{R}$ للتوسيع~$\Struct{M'}$
+لـ~$\Struct{M}$ الذي فيه $\Assign{P}{M'} = R$.
+\end{defn}
+
+\end{document}

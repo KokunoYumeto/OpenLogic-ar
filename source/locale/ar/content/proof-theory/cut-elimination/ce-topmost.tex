@@ -1,0 +1,613 @@
+% الجزء: نظرية البرهان
+% الفصل: حذف القطع
+% القسم: ce-topmost
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{cut}{top}
+
+\olsection{إزالة القطوع العليا}
+
+\begin{defn}
+تأمل !!a{proof}~$\pi$ ينتهي بقاعدة \CutCS{}،
+\[
+\AxiomC{}
+\RightLabel{$\pi_1$}
+\Deduce$\Gamma \fCenter \Delta, !A$
+\AxiomC{}
+\RightLabel{$\pi_2$}
+\Deduce$!A, \Gamma \fCenter \Delta$
+\RightLabel{\CutCS}
+\BinaryInf$\Gamma \fCenter \Delta$
+\DisplayProof
+\]
+ولا يحتوي على استدلالات \CutCS{} أخرى. يكون \emph{ارتفاع القطع} في~$\pi$
+هو $\cheight{\pi}=\pheight{\pi_1}+\pheight{\pi_2}$. وتكون
+\emph{رتبة القطع} في~$\pi$ هي $\cutrank{\pi}=\depth{!A}$.
+\end{defn}
+
+\begin{lem}\ollabel{lem:cut-adm-G3c}
+قاعدة \CutCS{} مقبولة في~\Log{G3c}. وبعبارة أخرى، إذا كان $\pi$ هو
+!!a{proof} ينتهي بــ\CutCS{} واحدة، ولا يستعمل فيما عدا ذلك إلا قواعد
+النسق~$\Log{G3c}$، فهناك !!a{proof}~$\pi'$ للمتتالية النهائية نفسها في~\Log{G3c}.
+\end{lem}
+
+\begin{proof}
+البرهان باستقراء مزدوج على !!{height} القطع ورتبته. ينتهي
+!!{proof}~$\pi$ بما يأتي:
+\[
+\AxiomC{}
+\RightLabel{$\pi_1$}
+\Deduce$\Gamma \fCenter \Delta, !A$
+\AxiomC{}
+\RightLabel{$\pi_2$}
+\Deduce$!A, \Gamma \fCenter \Delta$
+\RightLabel{\CutCS}
+\BinaryInf$\Gamma \fCenter \Delta$
+\DisplayProof
+\]
+
+أساس الاستقراء: $\cheight{\pi}=0$ و$\cutrank{\pi}=0$. لما كان
+$\cheight{\pi}=\pheight{\pi_1}+\pheight{\pi_2}=0$، فإن كلًا من
+$\Gamma \Sequent \Delta, !A$ و$!A, \Gamma \Sequent \Delta$ مسلّمة.
+ولدينا حالتان: (أ)~إما أن $!A$ ليست رئيسة في إحداهما، أو (ب)~أن $!A$ رئيسة
+فيهما كلتيهما. وسنبيّن أدناه في الحالتين أن $\Gamma \Sequent \Delta$ لا بد
+أن تكون مسلّمة (ولا نحتاج إلى فرض الاستقراء لإثبات ذلك).
+
+سنميّز الآن عددًا من الحالات الممكنة بحسب ما إذا كان $\pi_1$ و$\pi_2$
+مسلّمتين أو ينتهيان باستدلال، وبحسب ما إذا كانت $!A$ رئيسة في ذلك الاستدلال
+أم لا. تغطي الحالتان A وB أساس الاستقراء. وفي خطوة الاستقراء نفترض أن
+$\cheight{\pi}>0$ أو $\cutrank{\pi}>0$ (أو كليهما). ويمكننا استعمال فرض
+الاستقراء، أي إن \CutCS{} الأخيرة يمكن حذفها من أي !!{proof} ينتهي
+بــ\CutCS{} واحدة، وتكون إما رتبة قطعه $=\cutrank{\pi}$ و!!{height} قطعه
+$<\cheight{\pi}$، وإما رتبة قطعه $<\cutrank{\pi}$. والحالة التي يكون فيها
+$\cheight{\pi}=0$ (أي المقدمتان مسلّمتان) تغطيها الحالتان A وB، والحالات
+التي يكون فيها $\cheight{\pi}>0$ تغطيها الحالات C--D.
+
+\paragraph{الحالة A:}
+ترد $!B$ ما في كل من $\Gamma$ و~$\Delta$.
+عندئذ تكون $\Gamma \Sequent \Delta$ مسلّمة (إذا كانت $!B$ ذرية)، أو يكون
+لها !!a{proof}~$\pi'$ في \Log{G3c} من دون \CutCS{} بحسب
+\olref[seq][ex]{prop:G3c-axioms}. وهذا يغطي الحالة~(أ) من أساس الاستقراء،
+لأنه إذا لم تكن $!A$ رئيسة في $\Gamma \Sequent \Delta, !A$ أو لم تكن
+رئيسة في $!A, \Gamma \Sequent \Delta$، وكانت هاتان مسلّمتين، فلا بد أن
+ترد $!B$ ذرية أخرى في كل من $\Gamma$ و~$\Delta$. كما يغطي خطوة الاستقراء
+إذا كانت إحدى المقدمتين مسلّمة لا تكون فيها $!A$ رئيسة (حتى إن كانت
+المقدمة الأخرى نتيجة قاعدة).
+
+\paragraph{الحالة B:} المقدمتان مسلّمتان، و$!A$ رئيسة، ومن ثم ذرية. تأمل
+المقدمة اليسرى $\Gamma \Sequent \Delta, !A$. لما كانت $!A$ رئيسة، فلا بد
+أن ترد في $\Gamma$ (وإلا لما كانت $\Gamma \Sequent \Delta, !A$ مسلّمة).
+وبالمثل، لا بد أن ترد $!A$ في $\Delta$، وإلا لما كانت $!A, \Gamma
+\Sequent \Delta$ مسلّمة. وهكذا تكون $!A$ ذرية وترد في كل من $\Gamma$
+و$\Delta$، أي إن $\Gamma \Sequent \Delta$ مسلّمة. وهذا يغطي الحالة~(ب)
+من أساس الاستقراء.
+
+\begin{center}
+عرض بديل للحالتين A وB
+\end{center}
+
+\paragraph{الحالة A:} إحدى مقدمتي القطع مسلّمة من الصورة $!C, \Gamma'
+\Sequent \Delta', !C$، حيث $!C$ ذرية. إذا لم تكن $!C$ هي !!{formula}
+القطع~$!A$، فلا بد أن ترد $!C$ في كل من $\Gamma$ و~$\Delta$. وعندئذ تكون
+$\Gamma \Sequent \Delta$ مسلّمة، ويمكننا اتخاذها~$\pi'$. وإذا كانت
+$!C\ident !A$ هي !!{formula} القطع، فإما أن يكون (إذا كانت المقدمة اليسرى
+مسلّمة) $!A\in\Gamma$ و$\Gamma=\Gamma', !A$، أو يكون (إذا كانت المقدمة
+اليمنى مسلّمة) $!A\in\Delta$ و$\Delta=\Delta', !A$. في الحالة الأولى،
+يكون $\pi_2$ هو !!a{proof} لــ$!A, !A, \Gamma' \Sequent \Delta$، وبمقبولية
+\LeftR{\Contraction} (\olref[seq][inv]{prop:G3c-cont-adm}) يوجد !!a{proof}
+لــ$\Gamma \Sequent \Delta$. وفي الحالة الثانية، يكون $\pi_1$ هو
+!!a{proof} لــ$\Gamma \Sequent \Delta', !A, !A$، وبمقبولية
+\RightR{\Contraction} نحصل على !!a{proof} لــ$\Gamma \Sequent \Delta$.
+
+\paragraph{الحالة B:} إحدى المقدمتين مسلّمة من الصورة~$\lfalse,
+\Gamma' \Sequent \Delta'$. فإذا كانت المقدمة اليسرى مسلّمة من هذه الصورة،
+كان $\lfalse\in\Gamma$، وكانت $\Gamma \Sequent \Delta$ مسلّمة أيضًا.
+وإذا كانت المقدمة اليمنى مسلّمة من هذه الصورة، فإما أن يكون
+$\lfalse\in\Gamma$ (فتكون $\Gamma \Sequent \Delta$ مسلّمة مرة أخرى)، أو
+أن يكون $!A\ident\lfalse$. وفي الحالة الأخيرة، يكون $\pi_1$ هو !!a{proof}
+لــ$\Gamma \Sequent \Delta, \lfalse$. ويمكننا تحويله إلى !!a{proof} لــ
+$\Gamma \Sequent \Delta$ بحذف نسخة واحدة من~$\lfalse$ من تالي كل متتالية
+في~$\pi_1$. (تمرين: تحقق من ذلك بالاستقراء على~$\pheight{\pi_1}$.)
+
+افترض الآن أن الحالة~A ولا الحالة~B تنطبق. في الحالات الباقية يكون
+$\cheight{\pi}>0$، أي إن مقدمة واحدة على الأقل هي نتيجة استدلال.
+
+\paragraph{الحالتان C وD: تبديل ترتيب القطوع.}
+تشترك الإمكانات المدروسة في الحالتين~C وD في نمط واحد. نبدأ بــ!!a{proof}
+ينتهي بــ\CutCS{}، وفيه تُستنتج إحدى المقدمتين بقاعدة~$R$ لا تكون فيها
+!!{formula} القطع~$!A$ رئيسة (بل تكون !!{formula} أخرى~$!D$ رئيسة). في
+هذا !!{proof} تأتي \CutCS{} بعد القاعدة~$R$، ويكون شكله التخطيطي كما يأتي:
+\[
+\AxiomC{}
+\RightLabel{$\pi_1$}
+\Deduce$\Gamma \fCenter \Delta', !D, !A$
+\AxiomC{}
+\RightLabel{$\pi_3$}
+\Deduce$!A, \Gamma, \Pi \fCenter \Delta', \Lambda$
+\RightLabel{$R$}
+\UnaryInf$!A, \Gamma \fCenter \Delta', !D$
+\RightSubproofLabel{$\pi_2$}
+\RightLabel{\CutCS}
+\BinaryInf$\Gamma \fCenter \Delta', !D$
+\DisplayProof
+\]
+لا يغطي هذا إلا الحالة التي تكون فيها $R$ قاعدة يمين ذات مقدمة واحدة، ولا
+تكون $A$ هي !!{formula} القاعدة~$R$ الرئيسة، وترد !!{formula}~$!D$ التي
+\emph{هي} رئيسة في تالي المقدمة اليمنى لــ\CutCS. أما إذا وردت $!D$ في
+المقدم (أي كانت $R$ قاعدة يسار)، أو وردت في المقدمة اليسرى لــ\CutCS،
+فسيختلف الشكل بالطبع. وتمثل !!{formula}s في $\Pi$ و~$\Lambda$
+!!{formula}s الفعالة للقاعدة~$R$.
+
+نعكس هذا الترتيب ونتأمل !!a{proof} تأتي فيه $R$ بعد~\CutCS{}:
+\[
+\AxiomC{}
+\RightLabel{$\pi_1'$}
+\Deduce$\Gamma, \Pi \fCenter \Delta', !D, \Lambda, !A$
+\AxiomC{}
+\RightLabel{$\pi_3'$}
+\Deduce$!A, \Gamma, \Pi \fCenter \Delta', !D, \Lambda$
+\RightLabel{\CutCS}
+\BinaryInf$\Gamma, \Pi \fCenter \Delta', !D, \Lambda$
+\RightLabel{$R$}
+\UnaryInf$\Gamma \fCenter \Delta', !D, !D$
+\DisplayProof
+\]
+نستعمل الإضعاف الحافظ للــ!!{height} لنحصل على $\pi_1'$ و$\pi_3'$ من
+$\pi_1$ و$\pi_3$ على الترتيب.
+
+ولأننا نبدّل ترتيب \CutCS{} و~$R$، يسمى ذلك «نقل القطع صعودًا عبر~$R$».
+ويؤدي هذا إلى خفض ارتفاع !!{proof} المنتهي بالمقدمة اليمنى لــ\CutCS، ومن
+ثم يخفض !!{height} القطع. أي يمكن افتراض أن !!{proof}s الفرعية المنتهية
+بــ\CutCS{} الجديدة لا يزيد !!{height}ها على ارتفاع $\pi_1$ و$\pi_3$،
+فتنخفض !!{height} القطع (لأننا حذفنا استدلالًا واحدًا من اليمين). وينطبق
+الآن فرض الاستقراء، فيخبرنا بإمكان حذف استدلال \CutCS{}. وأخيرًا نحذف
+النسخة الزائدة من~$!D$ باستعمال مقبولية~$\RightR{\Contraction}$.
+
+\paragraph{الحالة C:}
+ينتهي واحد على الأقل من $\pi_1$ و$\pi_2$ بقاعدة~$R$ ذات مقدمة واحدة لا
+تكون فيها $!A$ رئيسة. وهناك 18 حالة في المجموع، بحسب ما إذا كانت $!A$ غير
+رئيسة في المقدمة اليسرى أو اليمنى لــ\CutCS، وبحسب أي واحدة من القواعد
+التسع ذات المقدمة الواحدة تكون~$R$ (\LeftR{\lnot}، \RightR{\lnot}،
+\RightR{\lor}، \LeftR{\land}، \RightR{\lif}، وقواعد الكم الأربع). ونكتفي
+بمثالين: أن تكون $!A$ غير رئيسة في الاستدلال الأخير لــ$\pi_2$، الذي
+ينتهي إما بــ$\RightR{\lif}$ أو بــ\LeftR{\lexists}. أما الحالات الأخرى
+فنظيرة لهما وتُترك تمارين.
+
+افترض أن $\pi$ ينتهي بما يأتي:
+\[
+\AxiomC{}
+\RightLabel{$\pi_1$}
+\Deduce$\Gamma \fCenter \Delta', !B \lif !C, !A$
+\AxiomC{}
+\RightLabel{$\pi_3$}
+\Deduce$!A, !B, \Gamma \fCenter \Delta', !C$
+\RightLabel{$\RightR{\lif}$}
+\UnaryInf$!A, \Gamma \fCenter \Delta', !B \lif !C$
+\RightSubproofLabel{$\pi_2$}
+\RightLabel{\CutCS}
+\BinaryInf$\Gamma \fCenter \Delta', !B \lif !C$
+\DisplayProof
+\]
+حيث $\Delta=\Delta', !B \lif !C$. نطبّق الإضعاف الحافظ للــ!!{height}
+(\olref[seq][adm]{prop:weak-G3c-adm}) على $\pi_1$ لنحصل على !!a{proof}
+$\pi_1'$ لــ$!B, \Gamma \fCenter \Delta', !B \lif !C, !C, !A$ (نضعف
+بــ$!B$ على اليسار وبــ$!C$ على اليمين). وبالمثل نطبّق
+\olref[seq][adm]{prop:weak-G3c-adm} على~$\pi_3$ لنحصل على
+!!a{proof}~$\pi_3'$ لــ$!A, !B, \Gamma \fCenter \Delta', !B \lif !C,
+!C$ (بالإضعاف بــ$!B \lif !C$ على اليمين). وينطبق فرض الاستقراء على
+\[
+\AxiomC{}
+\RightLabel{$\pi_1'$}
+\Deduce$!B, \Gamma \fCenter \Delta', !B \lif !C, !C, !A$
+\AxiomC{}
+\RightLabel{$\pi_3'$}
+\Deduce$!A, !B, \Gamma \fCenter \Delta', !B \lif !C, !C$
+\RightLabel{\CutCS}
+\BinaryInf$!B, \Gamma \fCenter \Delta', !B \lif !C, !C$
+\DisplayProof
+\]
+الذي !!{formula} قطعه~$!A$: فهذا !!{proof} له رتبة القطع نفسها، و!!{height}
+قطع أقل من~$\pi$. وهذا يعطينا !!a{proof}~$\pi_4$ في \Log{G3c} من دون
+\CutCS{} لــ$!B, \Gamma \fCenter \Delta', !B \lif !C, !C$. طبّق
+$\RightR{\lif}$ لتحصل على !!a{proof} لــ$\Gamma \fCenter \Delta',
+!B \lif !C, !B \lif !C$:
+\[
+\AxiomC{}
+\RightLabel{$\pi_4$}
+\Deduce$!B, \Gamma \fCenter \Delta', !B \lif !C, !C$
+\RightLabel{$\RightR{\lif}$}
+\UnaryInf$\Gamma \fCenter \Delta', !B \lif !C, !B \lif !C$
+\DisplayProof
+\]
+وللحصول على !!a{proof}~$\pi'$ لــ$\Gamma \Sequent \Delta$، أي
+$\Gamma \fCenter \Delta', !B \lif !C$، طبّق
+\olref[seq][inv]{prop:G3c-cont-adm} (مقبولية الانكماش).
+
+افترض الآن أن $\pi$ ينتهي بما يأتي:
+\[
+\AxiomC{}
+\RightLabel{$\pi_1$}
+\Deduce$\lexists[x][!B(x)], \Gamma' \fCenter \Delta, !A$
+\AxiomC{}
+\RightLabel{$\pi_3$}
+\Deduce$!A, !B(c), \Gamma' \fCenter \Delta$
+\RightLabel{$\LeftR{\lexists}$}
+\UnaryInf$!A, \lexists[x][!B(x)], \Gamma' \fCenter \Delta$
+\RightSubproofLabel{$\pi_2$}
+\RightLabel{\CutCS}
+\BinaryInf$\lexists[x][!B(x)], \Gamma' \fCenter \Delta$
+\DisplayProof
+\]
+نطبّق فرض الاستقراء مرة أخرى على
+\[
+\AxiomC{}
+\RightLabel{$\pi_1[!B(c) \Sequent {}]$}
+\Deduce$\lexists[x][!B(x)], !B(c), \Gamma' \fCenter \Delta, !A$
+\AxiomC{}
+\LeftLabel{$\pi_3[\lexists[x][!B(x)] \Sequent {}]$}
+\Deduce$!A, \lexists[x][!B(x)], !B(c), \Gamma' \fCenter \Delta$
+\RightLabel{\CutCS}
+\BinaryInf$\lexists[x][!B(x)], !B(c), \Gamma' \fCenter \Delta$
+\RightLabel{\LeftR{\lexists}}
+\UnaryInf$\lexists[x][!B(x)], \lexists[x][!B(x)], \Gamma' \fCenter \Delta$
+\DisplayProof
+\]
+لاحظ أن شرط المتغير المميز متحقق، لأن شرط المتغير المميز على
+\LeftR{\lexists} في~$\pi_2$ يضمن أن $c$ لا يرد في
+$\lexists[x][!B(x)]$ أو $\Gamma'$ أو~$\Delta$. وأخيرًا، طبّق
+\olref[seq][inv]{prop:G3c-cont-adm}.
+
+
+\paragraph{الحالة D:}
+ينتهي واحد على الأقل من $\pi_1$ و$\pi_2$ بقاعدة~$R$ ذات مقدمتين لا تكون
+فيها $!A$ رئيسة. وهناك 6 حالات. وندرس الحالة التي لا تكون فيها $!A$ رئيسة
+في الاستدلال الأخير لــ$\pi_2$، الذي ينتهي بــ$\RightR{\land}$؛ أما الحالات
+الأخرى فنظيرة لها.
+
+افترض أن $\pi$ ينتهي بما يأتي:
+\[
+\AxiomC{}
+\RightLabel{$\pi_1$}
+\Deduce$\Gamma \fCenter \Delta', !B \land !C, !A$
+\AxiomC{}
+\RightLabel{$\pi_3$}
+\Deduce$!A, \Gamma \fCenter \Delta', !B$
+\AxiomC{}
+\RightLabel{$\pi_4$}
+\Deduce$!A, \Gamma \fCenter \Delta', !C$
+\RightLabel{$\RightR{\land}$}
+\BinaryInf$!A, \Gamma \fCenter \Delta', !B \land !C$
+\RightSubproofLabel{$\pi_2$}
+\RightLabel{\CutCS}
+\BinaryInf$\Gamma \fCenter \Delta$
+\DisplayProof
+\]
+ينطبق فرض الاستقراء على !!{proof}s الآتية:
+\[
+\AxiomC{}
+\RightLabel{$\pi_1'$}
+\Deduce$\Gamma \fCenter \Delta', !B \land !C, !B, !A$
+\AxiomC{}
+\RightLabel{$\pi_3'$}
+\Deduce$!A, \Gamma \fCenter \Delta', !B \land !C, !B$
+\RightLabel{\CutCS}
+\BinaryInf$\Gamma \fCenter \Delta', !B \land !C, !B$
+\DisplayProof
+\]
+و
+\[
+\AxiomC{}
+\RightLabel{$\pi_1''$}
+\Deduce$\Gamma \fCenter \Delta', !B \land !C, !C, !A$
+\AxiomC{}
+\RightLabel{$\pi_4'$}
+\Deduce$!A, \Gamma \fCenter \Delta', !B \land !C, !C$
+\RightLabel{\CutCS}
+\BinaryInf$\Gamma \fCenter \Delta', !B \land !C, !C$
+\DisplayProof
+\]
+وهنا تُستخرج !!{proof}s~$\pi_1'$ و$\pi_1''$ في \Log{G3c} من~$\pi_1$
+بالإضعاف الحافظ للــ!!{height} (\olref[seq][adm]{prop:weak-G3c-adm})
+(مرة بالإضعاف بــ$!B$ على اليمين، ومرة بــ$!C$). وتُستخرج !!{proof}s
+$\pi_3'$ و~$\pi_4'$ من $\pi_3$ و~$\pi_4$ أيضًا بالإضعاف الحافظ للــ
+!!{height} من $\pi_3$ و~$\pi_4$ على الترتيب (بالإضعاف بــ$!B \land !C$
+على اليمين).
+
+يعطينا فرض الاستقراء !!{proof}s~$\pi_5$ و~$\pi_6$ في \Log{G3c} لكل من
+$\Gamma \fCenter \Delta', !B \land !C, !B$ و$\Gamma \fCenter \Delta',
+!B \land !C, !C$. ونجمعهما في !!a{proof} لــ$\Gamma \Sequent \Delta',
+!B \land !C, !B \land !C$ باستعمال القاعدة~$\RightR{\land}$:
+\[
+\AxiomC{}
+\RightLabel{$\pi_5$}
+\Deduce$\Gamma \fCenter \Delta', !B \land !C, !B$
+\AxiomC{}
+\RightLabel{$\pi_6$}
+\Deduce$\Gamma \fCenter \Delta', !B \land !C, !C$
+\RightLabel{\RightR{\land}}
+\BinaryInf$\Gamma \fCenter \Delta', !B \land !C, !B \land !C$
+\DisplayProof
+\]
+وللحصول على !!a{proof} لــ$\Gamma \Sequent \Delta$، أي $\Gamma \fCenter
+\Delta', !B \land !C$، طبّق \olref[seq][inv]{prop:G3c-cont-adm}
+(مقبولية الانكماش).
+
+\paragraph{الحالة E: اختزال القطوع.}
+تتعلق الحالة الأخيرة بالوضع الذي ينتهي فيه كل من $\pi_1$ و$\pi_2$
+باستدلال تكون فيه $!A$ رئيسة. وهناك ست حالات، واحدة لكل !!{main operator}
+ممكن لــ$!A$.
+
+في كل حالة، نحوّل \CutCS{} ذات !!{formula} القطع~$!A$ إلى قطع واحد أو أكثر
+على !!{formula}s فرعية لــ$!A$، وهي تحديدًا !!{formula}s الفعالة في
+الاستدلالات التي تكون $!A$ هي !!{formula}ها الرئيسة. ولذلك تسمى هذه
+الحالات في الغالب «اختزال» استدلال القطع أو «تحويله».
+
+\begin{enumerate}
+\item إذا كان $!A \ident \lnot !B$، فإن $\pi$ ينتهي بــ
+\[
+\AxiomC{}
+\RightLabel{$\pi_1'$}
+\Deduce$!B, \Gamma \fCenter \Delta$
+\RightLabel{\RightR{\lnot}}
+\UnaryInf$\Gamma \fCenter \Delta, \lnot !B$
+\LeftSubproofLabel{$\pi_1$}
+\AxiomC{}
+\RightLabel{$\pi_2'$}
+\Deduce$\Gamma \fCenter \Delta, !B$
+\RightLabel{\LeftR{\lnot}}
+\UnaryInf$\lnot !B, \Gamma \fCenter \Delta$
+\RightSubproofLabel{$\pi_2$}
+\RightLabel{\CutCS}
+\BinaryInf$\Gamma \fCenter \Delta$
+\DisplayProof
+\]
+وبحسب فرض الاستقراء يمكن حذف \CutCS{} من
+\[
+\AxiomC{}
+\RightLabel{$\pi_2'$}
+\Deduce$\Gamma \fCenter \Delta, !B$
+\AxiomC{}
+\RightLabel{$\pi_1'$}
+\Deduce$!B, \Gamma \fCenter \Delta$
+\RightLabel{\CutCS}
+\BinaryInf$\Gamma \fCenter \Delta$
+\DisplayProof
+\]
+
+\item
+إذا كان $!A \ident (!B \lor !C)$، فإن $\pi$ ينتهي بــ
+\[
+\AxiomC{}
+\RightLabel{$\pi_1'$}
+\Deduce$\Gamma \fCenter \Delta, !B, !C$
+\RightLabel{\RightR{\lor}}
+\UnaryInf$\Gamma \fCenter \Delta, !B \lor !C$
+\LeftSubproofLabel{$\pi_1$}
+\AxiomC{}
+\RightLabel{$\pi_2'$}
+\Deduce$!B, \Gamma \fCenter \Delta$
+\AxiomC{}
+\RightLabel{$\pi_2''$}
+\Deduce$!C, \Gamma \fCenter \Delta$
+\RightLabel{\LeftR{\lor}}
+\BinaryInf$!B \lor !C, \Gamma \fCenter \Delta$
+\RightSubproofLabel{$\pi_2$}
+\RightLabel{\CutCS}
+\BinaryInf$\Gamma \fCenter \Delta$
+\DisplayProof
+\]
+تأمل !!{proof} المنتهي بــ\CutCS{}،
+\[
+\AxiomC{}
+\RightLabel{$\pi_1'$}
+\Deduce$\Gamma \fCenter \Delta, !B, !C$
+\AxiomC{}
+\RightLabel{$\pi_2'''$}
+\Deduce$!C, \Gamma \fCenter \Delta, !B$
+\RightLabel{\CutCS}
+\BinaryInf$\Gamma \fCenter \Delta, !B$
+\DisplayProof
+\]
+حيث يُستخرج $\pi_2'''$ من $\pi_2''$ بالإضعاف الحافظ للــ!!{height}.
+رتبة قطعه $<\cutrank{\pi}$، لأن $\depth{!C}<\depth{!B \lor !C}$، ولذلك
+يعطينا فرض الاستقراء !!a{proof} في \Log{G3c}، هو $\pi_1''$، لــ$\Gamma
+\fCenter \Delta, !B$. أما !!{proof} المنتهي بــ\CutCS{}،
+\[
+\AxiomC{}
+\RightLabel{$\pi_1''$}
+\Deduce$\Gamma \fCenter \Delta, !B$
+\AxiomC{}
+\RightLabel{$\pi_2'$}
+\Deduce$!B, \Gamma \fCenter \Delta$
+\RightLabel{\CutCS}
+\BinaryInf$\Gamma \fCenter \Delta$
+\DisplayProof
+\]
+فرتبة قطعه $=\depth{!B}<\depth{!B \lor !C}$، ومن ثم ينطبق فرض الاستقراء
+مرة أخرى، ويعطينا !!a{proof}~$\pi'$ لــ$\Gamma \fCenter \Delta$.
+
+\item $!A \ident (!B \land !C)$. تمرين.
+
+\item إذا كان $!A \ident (!B \lif !C)$، فإن $\pi$ ينتهي بــ
+\[
+\AxiomC{}
+\RightLabel{$\pi_1'$}
+\Deduce$!B, \Gamma \fCenter \Delta, !C$
+\RightLabel{\RightR{\lif}}
+\UnaryInf$\Gamma \fCenter \Delta, !B \lif !C$
+\LeftSubproofLabel{$\pi_1$}
+\AxiomC{}
+\RightLabel{$\pi_2'$}
+\Deduce$\Gamma \fCenter \Delta, !B$
+\AxiomC{}
+\RightLabel{$\pi_2''$}
+\Deduce$!C, \Gamma \fCenter \Delta$
+\RightLabel{\LeftR{\lif}}
+\BinaryInf$!B \lif !C, \Gamma \fCenter \Delta$
+\RightSubproofLabel{$\pi_2$}
+\RightLabel{\CutCS}
+\BinaryInf$\Gamma \fCenter \Delta$
+\DisplayProof
+\]
+رتبة القطع في !!{proof} المنتهي بــ\CutCS{} الآتي أدنى من رتبتها في~$\pi$:
+\[
+\AxiomC{}
+\RightLabel{$\pi_1'$}
+\Deduce$!B, \Gamma \fCenter \Delta, !C$
+\AxiomC{}
+\RightLabel{$\pi_2''$}
+\Deduce$!C, \Gamma \fCenter \Delta$
+\RightLabel{\CutCS}
+\BinaryInf$!B, \Gamma \fCenter \Delta$
+\DisplayProof
+\]
+ويعطينا فرض الاستقراء !!a{proof}~$\pi_1''$ لــ$!B, \Gamma \fCenter
+\Delta$. تأمل الآن !!{proof} المنتهي بــ\CutCS{}:
+\[
+\AxiomC{}
+\RightLabel{$\pi_2'$}
+\Deduce$\Gamma \fCenter \Delta, !B$
+\AxiomC{}
+\RightLabel{$\pi_1''$}
+\Deduce$!B, \Gamma \fCenter \Delta$
+\RightLabel{\CutCS}
+\BinaryInf$\Gamma \fCenter \Delta$
+\DisplayProof
+\]
+رتبة قطعه أيضًا أصغر من رتبة القطع في~$\pi$، ولذلك يعطينا فرض الاستقراء
+!!{proof}~$\pi'$ في \Log{G3c} لــ$\Gamma \fCenter \Delta$.
+\item إذا كان $!A \ident \lforall[x][!B(x)]$، فإن $\pi$ ينتهي بــ
+\[
+\AxiomC{}
+\RightLabel{$\pi_1'$}
+\Deduce$\Gamma \fCenter \Delta, !B(c)$
+\RightLabel{\RightR{\lforall}}
+\UnaryInf$\Gamma \fCenter \Delta, \lforall[x][!B(x)]$
+\LeftSubproofLabel{$\pi_1$}
+\AxiomC{}
+\RightLabel{$\pi_2'$}
+\Deduce$!B(t), \lforall[x][!B(x)], \Gamma \fCenter \Delta$
+\RightLabel{\LeftR{\lforall}}
+\UnaryInf$\lforall[x][!B(x)], \Gamma \fCenter \Delta$
+\RightSubproofLabel{$\pi_2$}
+\RightLabel{\CutCS}
+\BinaryInf$\Gamma \fCenter \Delta$
+\DisplayProof
+\]
+وبحسب فرض الاستقراء يمكن حذف \CutCS{} من
+\[
+\AxiomC{}
+\RightLabel{$\pi_1''$}
+\Deduce$!B(t), \Gamma \fCenter \Delta, \lforall[x][!B(x)]$
+\AxiomC{}
+\RightLabel{$\pi_2'$}
+\Deduce$!B(t), \lforall[x][!B(x)], \Gamma \fCenter \Delta$
+\RightLabel{\CutCS}
+\BinaryInf$!B(t), \Gamma \fCenter \Delta$
+\DisplayProof
+\]
+حيث يُستخرج $\pi_1''$ من $\pi_1$ (لا من~$\pi_1'$!) بالإضعاف الحافظ للــ
+!!{height}. (لهذا !!{proof} رتبة القطع نفسها، لكن !!{height} قطعه أقل.)
+وهذا يعطينا !!a{proof}~$\pi_2''$ لــ$!B(t), \Gamma \fCenter \Delta$.
+
+المتتالية النهائية لــ!!{proof}~$\pi_1'$ هي $\Gamma \Sequent \Delta,
+!B(c)$، حيث $c$ المتغير المميز لاستدلال~$\RightR{\lforall}$. ولذلك لا يرد
+$c$ في~$!B(x)$ أو $\Gamma$ أو~$\Delta$. نفترض أن !!{proof}~$\pi$ منتظم،
+ومن ثم لا يكون $c$ المتغير المميز إلا لاستدلال~$\RightR{\lforall}$ الآتي،
+ولا يرد إلا فوقه، أي لا يرد إلا في~$\pi_1'$، وليس متغيرًا مميزًا لاستدلال
+في~$\pi_1'$. ولما كان $c$ لا يرد في~$\pi_2$، فلا يمكن أن يرد في~$t$.
+وبحسب \olref[seq][qua]{lem:subst-regular} يكون
+!!{proof}~$\Subst{\pi_1'}{t}{c}$ هو !!a{proof} لــ$\Gamma \Sequent
+\Delta, !B(t)$. ونطبّق الآن فرض الاستقراء على !!{proof}
+\[
+\AxiomC{}
+\RightLabel{$\Subst{\pi_1'}{t}{c}$}
+\Deduce$\Gamma \fCenter \Delta, !B(t)$
+\AxiomC{}
+\RightLabel{$\pi_2''$}
+\Deduce$!B(t), \Gamma \fCenter \Delta$
+\RightLabel{\CutCS}
+\BinaryInf$\Gamma \fCenter \Delta$
+\DisplayProof
+\]
+(ينطبق فرض الاستقراء لأن !!{formula} القطع هي~$!B(t)$، ولذلك تكون رتبة
+القطع في !!{proof} أدنى منها في~$\pi$.)
+\item نترك الحالة $!A \ident \lexists[x][!B(x)]$ تمرينًا.
+\end{enumerate}
+\end{proof}
+
+\begin{prob}
+تحقق من الحالة الفرعية للحالة~D في برهان \olref{lem:cut-adm-G3c} التي لا
+تكون فيها $!A$ رئيسة في الاستدلال الأخير لــ$\pi_1$، المنتهي بــ
+$\LeftR{\lif}$. (ملاحظة: يقتضي هذا التمرين جزئيًا أن تصرّح بوضوح بما عليك
+إثباته، أي بالصورة التي يكون عليها $\pi$ في هذه الحالة.)
+\end{prob}
+
+\begin{prob}
+تحقق من الحالة الفرعية للحالة~D في برهان \olref{lem:cut-adm-G3c} التي لا
+تكون فيها $!A$ رئيسة في الاستدلال الأخير لــ$\pi_1$، المنتهي بــ
+$\LeftR{\lforall}$.
+\end{prob}
+
+\begin{prob}
+تحقق من الحالة الفرعية للحالة~E في برهان \olref{lem:cut-adm-G3c} التي تكون
+فيها $!A$ رئيسة في الاستدلالين الأخيرين لكل من $\pi_1$ و$\pi_2$، ويكون
+$!A \ident (!B \land !C)$.
+\end{prob}
+
+\begin{prob}
+تحقق من الحالة الفرعية للحالة~E في برهان \olref{lem:cut-adm-G3c} التي تكون
+فيها $!A$ رئيسة في الاستدلالين الأخيرين لكل من $\pi_1$ و$\pi_2$، ويكون
+$!A \ident \lexists[x][!B(x)]$.
+\end{prob}
+
+لاحظ أن !!{height} القطع في !!{proof} المنتهي بــ\CutCS{} الذي نطبّق عليه
+فرض الاستقراء في الحالة~E قد يكون أكبر من !!{height} القطع في البرهان
+الأصلي. فمثلًا، في الحالة التي يكون فيها $!A\ident(!B \lif !C)$ حوّلنا
+$\pi$ إلى !!a{proof} يتضمن استدلالي \CutCS{}،
+\[
+\AxiomC{}
+\RightLabel{$\pi_2'$}
+\Deduce$\Gamma \fCenter \Delta, !B$
+\AxiomC{}
+\RightLabel{$\pi_1'$}
+\Deduce$!B, \Gamma \fCenter \Delta, !C$
+\AxiomC{}
+\RightLabel{$\pi_2''$}
+\Deduce$!C, \Gamma \fCenter \Delta$
+\RightLabel{\CutCS}
+\BinaryInf$!B, \Gamma \fCenter \Delta$
+\RightSubproofLabel{$\pi_1''$}
+\RightLabel{\CutCS}
+\BinaryInf$\Gamma \fCenter \Delta$
+\DisplayProof
+\]
+استدلال \CutCS{} العلوي بين $\pi_1'$ و$\pi_2''$ أدنى من~$\pi$ في كل من
+رتبة القطع و!!{height} القطع. لكن !!{proof}~$\pi_1''$---وهو نتيجة تطبيق
+فرض الاستقراء---لم يعد أدنى من~$\pi$ في !!{height} القطع. غير أن
+!!{formula} القطع في استدلال \CutCS{} السفلي هي $!B$، ولذلك تكون
+\emph{رتبته} أدنى من رتبة القطع في~$\pi$.
+
+تثبت \olref{lem:cut-adm-G3c} أنه يمكننا حذف استدلال \CutCS{} علوي واحد من
+!!a{proof}. ويمكننا إثبات إمكان حذف أي عدد من استدلالات \CutCS{} من
+!!a{proof} بتطبيقها تباعًا على !!{proof}s الفرعية العليا المنتهية
+بــ\CutCS{}.
+
+\begin{thm}\ollabel{thm:cut-elim-G3c-topmost} يمكن تحويل أي !!{proof}~$\pi$
+في $\Log{G3c} + \CutCS$ إلى !!a{proof} في~\Log{G3c}.
+\end{thm}
+
+\begin{proof}
+  بالاستقراء على عدد استدلالات \CutCS{} في~$\pi$، ولنسمّه~$n$. إذا كان
+  $n=0$، فلا شيء نفعله: يكون $\pi$ أصلًا !!a{proof} في~\Log{G3c}. وإلا،
+  فتأمل !!{proof} الفرعي~$\pi'$ المنتهي باستدلال \CutCS{} علوي. فهو يحتوي
+  على قاعدة \CutCS{} واحدة بوصفها استدلاله الأخير. طبّق
+  \olref{lem:cut-adm-G3c} لتحوّله إلى برهان~$\pi''$ خال من \CutCS{}،
+  واستبدل !!{proof} الفرعي~$\pi'$ بــ$\pi''$. ينتج !!a{proof} يحتوي
+  $n-1$ استدلالًا من نوع \CutCS{}، فينطبق فرض الاستقراء.
+\end{proof}
+
+\end{document}

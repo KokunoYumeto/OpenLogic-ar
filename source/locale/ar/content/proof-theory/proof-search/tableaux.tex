@@ -1,0 +1,189 @@
+% Part: proof-theory
+% Chapter: proof-search
+% Section: tableaux
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{ps}{tab}
+
+\olsection{جداول الصدق}
+
+أنظمة جداول الصدق أنظمة~!!{proof} وثيقة الصلة بحسابات المتتاليات، وتلائم
+خصوصًا البحث عن البرهان، سواء يدويًا أم بتنفيذ برمجي. وبدل بناء أشجار من
+المتتاليات، يكون~!!a{proof} في جدول الصدق شجرةً من~!!{formula}s. لكن
+قواعدها، بخلاف الاستنباط الطبيعي، تعكس قواعد حساب المتتاليات. و!!{proof}
+جدول الصدق في جوهره بحث صريح عن نموذج؛ ولذلك تسمى هذه الجداول أحيانًا
+\emph{جداول دلالية} أو \emph{أشجار صدق}.
+
+\emph{جدول الصدق الموقّع} شجرة من~!!{formula}s موقعة، يمكن أن تكون من
+الصورة~$\sFmla{\True}{!A}$ أو~$\sFmla{\False}{!A}$. وتنمو الأشجار إلى
+الأسفل، وتبدأ بـ~!!{formula}s تحدد ما نريد أن~!!{prove}. فمثلًا، لكي
+!!{prove} المتتالية~$!A,!B\Sequent !C,!D$، نبدأ بـ
+$\sFmla{\True}{!A},\sFmla{\True}{!B},
+\sFmla{\False}{!C},\sFmla{\False}{!D}$. و!!^a{structure} يجعل~$!A$ و$!B$
+صادقتين و$!C$ و$!D$ كاذبتين هو~!!a{structure} يبيّن أن
+$!A,!B\Sequent !C,!D$ غير صالحة.
+
+يمكن توسيع عقدة ورقية (سفلية) في جدول الصدق بقواعد تمديد الفروع، فتضيف
+عقدًا أخرى إلى الفرع نفسه أو عقدتين شقيقتين تحته، وتقسم الفرع إلى فرعين
+جديدين. ويمكن تطبيق القواعد على أي~!!{formula} موقعة فوق العقدة في الفرع
+نفسه. وترد قواعد تمديد الفروع لنظام جداول الصدق الكلاسيكي~\Log{Tc} في
+\olref{tab:Tc}.
+
+\subfile{rules-Tc}
+
+كما ترى، ليست القواعد إلا قواعد~\Log{G3c} مقلوبة، وتشير العلامتان~$\True$
+و$\False$ إلى كون~!!a{formula} رئيسةً على يسار المتتالية أو يمينها على
+الترتيب.
+
+يكون فرع جدول الصدق \emph{مغلقًا} إذا احتوى كلًا من
+$\sFmla{\True}{!A}$ و$\sFmla{\False}{!A}$، أو احتوى
+$\sFmla{\True}{\lfalse}$. وإذا أُغلقت جميع الفروع قلنا إن جدول الصدق كله
+مغلق. وهذا، مثلًا، جدول مغلق للمتتالية
+$!A\lor(!B\land !C)\Sequent(!A\lor !B)\land(!A\lor !C)$؛ أي إنه يبدأ بـ
+$\sFmla{\True}{!A\lor(!B\land !C)}$ و
+$\sFmla{\False}{(!A\lor !B)\land(!A\lor !C)}$:
+\begin{oltableau}
+  [\sFmla{\True}{\formula{A} \lor (\formula{B} \land \formula{C})},
+    just=\TAss, checked
+    [\sFmla{\False}{(\formula{A} \lor \formula{B}) \land
+        (\formula{A} \lor \formula{C})}, just=\TAss, checked
+      [\sFmla{\True}{\formula{A}}, just={\TRule{\True}{\lor}[1]}
+        [\sFmla{\False}{\formula{A} \lor \formula{B}},
+          just={\TRule{\False}{\land}[2]}, checked
+          [\sFmla{\False}{\formula{A}},
+            just={\TRule{\False}{\lor}[4]}
+            [\sFmla{\False}{\formula{B}},
+              just={\TRule{\False}{\lor}[4]}, close]
+          ]
+        ]
+        [\sFmla{\False}{\formula{A} \lor \formula{C}},
+          just={\TRule{\False}{\land}[2]}, checked
+          [\sFmla{\False}{\formula{A}},
+            just={\TRule{\False}{\lor}[4]}
+            [\sFmla{\False}{\formula{C}},
+              just={\TRule{\False}{\lor}[4]}, close]
+          ]
+        ]
+      ]
+      [\sFmla{\True}{\formula{B} \land \formula{C}},
+        just={\TRule{\True}{\lor}[1]}, checked
+        [\sFmla{\False}{\formula{A} \lor \formula{B}},
+          just={\TRule{\False}{\land}[2]}, checked
+          [\sFmla{\True}{\formula{B}},
+            just={\TRule{\True}{\land}[3]}, move by=2
+            [\sFmla{\True}{\formula{C}},
+              just={\TRule{\True}{\land}[3]}
+              [\sFmla{\False}{\formula{A}},
+                just={\TRule{\False}{\lor}[4]}
+                [\sFmla{\False}{\formula{B}},
+                  just={\TRule{\False}{\lor}[4]},close
+                ]
+              ]
+            ]
+          ]
+        ]
+        [\sFmla{\False}{\formula{A} \lor \formula{C}},
+          just={\TRule{\False}{\land}[2]}, checked
+          [\sFmla{\True}{\formula{B}},
+            just={\TRule{\True}{\land}[3]}, move by=2
+              [\sFmla{\True}{\formula{C}},
+                just={\TRule{\True}{\land}[3]}
+                [\sFmla{\False}{\formula{A}},
+                  just={\TRule{\False}{\lor}[4]}
+                  [\sFmla{\False}{\formula{C}},
+                  just={\TRule{\False}{\lor}[4]},close
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    ]
+  ]
+\end{oltableau}
+
+تشير علامات الصح إلى أن القاعدة المقابلة قد طُبقت على~!!a{formula} في جميع
+الفروع الواقعة تحتها. وتشير~$\otimes$ إلى أن الفرع مغلق. أما أرقام الأسطر
+بعد القواعد فتحدد~!!{formula}s الموقعة التي طُبقت عليها القاعدة (أي
+!!{formula} الواقعة في الفرع نفسه على السطر المشار إليه).
+
+البحث عن البرهان سهل في جداول الصدق. فنولّد جدولًا على مراحل. في المرحلة
+$0$ نكتب~!!{formula}s الابتدائية في الأعلى. وفي المرحلة~$n+1$ نفعل ما يأتي
+لكل عقدة ورقية على فرع مفتوح: نجد أول صيغة موقعة غير ذرية من الأعلى لم
+تؤشَّر بعد، ونطبق عليها قاعدة تمديد الفرع. وبعد تطبيق القاعدة في كل فرع
+مفتوح يحتوي الصيغة الموقعة المعنية، نؤشرها. ولا ينطبق شرط عدم التكرار هذا
+إلا على الصيغ غير الذرية في الفروع المفتوحة. (وقد وُلد المثال السابق بهذه
+الخوارزمية.)
+
+لا تُؤشَّر~!!{formula}s الموقعة من الصورتين
+$\sFmla{\True}{\lforall}$ و$\sFmla{\False}{\lexists}$ قط، ولذلك يلزم
+معالجتها معاملة خاصة. فإذا وُجدت وجب ضمان تطبيق
+$\TRule{\True}{\lforall}$ و$\TRule{\False}{\lexists}$ في النهاية على جميع
+الحدود المنطبقة. ويمكن ضمان ذلك، مثلًا، بتطبيقهما في كل مرحلة على جميع هذه
+الصيغ في كل فرع مفتوح، بعد معالجة أعلى~!!{formula} موقعة لا تكون من هاتين
+الصورتين. والحد~$t$ المستعمل هو أول حد يمكن بناؤه من~!!{constant}s الواقعة
+بالفعل في الفرع (أو~$\Obj c_0$ إذا لم يقع أي~!!{constant}) ومن
+!!{function}s الواقعة في~!!{formula}s الابتدائية، ولا تقع الصيغة الموقعة
+المقابلة~!!{formula}~$\sFmla{\True}{!B(t)}$ أو~$\sFmla{\False}{!B(t)}$ في الفرع من
+قبل. وإذا لم يوجد حد منطبق غير مستعمل، كانت الصيغة المسوّرة مستنفدة في تلك
+المرحلة، فلا نضيف لها عقدة؛ ونعود إليها في مرحلة لاحقة إذا أدخل الفرع
+ثوابت جديدة فظهرت حدود منطبقة جديدة.
+
+إذا لم ينتج هذا البحث جدولًا مغلقًا، فإما أن يحتوي فرعًا مفتوحًا منتهيًا
+أُشّرت فيه جميع~!!{formula}s غير الذرية، وإما أن ينتج شجرة لامتناهية
+متناهية التشعب، ولا بد أن تحتوي فرعًا لامتناهيًا. وكما في
+\olref[cpl]{sec}، يمكننا تعريف~!!a{structure}~$\Struct{M}$ بحيث إذا وقعت
+$\sFmla{\True}{!A}$ في الفرع كان~$\Sat{M}{!A}$، وإذا وقعت
+$\sFmla{\False}{!A}$ كان~$\Sat/{M}{!A}$. (خذ
+$\Theta=\Setabs{!A}{\sFmla{\True}{!A}\text{ في الفرع}}$ و
+$\Xi=\Setabs{!A}{\sFmla{\False}{!A}\text{ في الفرع}}$.)
+
+يمكن بسهولة ترجمة جداول الصدق الناتجة بهذه الطريقة إلى براهين في~\Log{G3c}
+بإسناد متتالية إلى كل عقدة. فإذا كانت الصيغ الابتدائية تقابل المتتالية
+$\Gamma\Sequent\Delta$، فوسم كل صيغة ابتدائية بـ
+$\Gamma\Sequent\Delta$. وإذا مُدِّد فرع بتطبيق قاعدة تمديد على~!!{formula}
+موقعة~$\sFmla{\True}{!A}$، فوسم الورقة بـ
+$!A,\Pi\Sequent\Lambda$؛ وإذا طُبقت على~!!{formula} موقعة
+$\sFmla{\False}{!A}$، فوسم الورقة بـ~$\Pi\Sequent\Lambda,!A$. وحيث يطبق
+الجدول قاعدة~$\TRule{\True}{\star}$، طبّق قاعدة~$\LeftR{\star}$ على
+المتتالية (مع~$!A$ صيغةً رئيسة)؛ وحيث يطبق~$\TRule{\False}{\star}$، طبّق
+قاعدة~$\RightR{\star}$. وتكون مقدمات القاعدة هي المتتاليات التي تسم
+العقد المقابلة المضافة إلى الجدول. ومتى أُغلق جدول بـ
+$\sFmla{\True}{!A}$ و$\sFmla{\False}{!A}$، كان وسم العقدة الورقية الأخيرة
+متتاليةً من الصورة~$!A,\Pi\Sequent\Lambda,!A$. وإذا أُغلق بـ
+$\sFmla{\True}{\lfalse}$، كان وسم الورقة من الصورة
+$\lfalse,\Pi\Sequent\Lambda$، وهي مسلّمة~\Log{G3c} أيضًا. وقد تُسند
+المتتالية نفسها إلى عقد متعاقبة في الجدول؛ فاحذف المكررات. فمثلًا يترجم
+الجدول السابق إلى~!!{proof} الآتي:
+\[\small
+\Axiom$!A \fCenter !A, !B$
+\RightLabel{\RightR{\lor}}
+\UnaryInf$!A \fCenter !A \lor !B$
+\Axiom$!A \fCenter !A, !C$
+\RightLabel{\RightR{\lor}}
+\UnaryInf$!A \fCenter !A \lor !C$
+\RightLabel{\RightR{\land}}
+\BinaryInf$!A \fCenter (!A \lor !B) \land (!A \lor !C)$
+\Axiom$!B, !C \fCenter !A, !B$
+\RightLabel{\RightR{\lor}}
+\UnaryInf$!B, !C \fCenter !A \lor !B$
+\RightLabel{\LeftR{\land}}
+\UnaryInf$!B \land !C \fCenter !A \lor !B$
+\Axiom$!B, !C \fCenter !A, !C$
+\RightLabel{\RightR{\lor}}
+\UnaryInf$!B, !C \fCenter !A \lor !C$
+\RightLabel{\LeftR{\land}}
+\UnaryInf$!B \land !C \fCenter !A \lor !C$
+\RightLabel{\RightR{\land}}
+\BinaryInf$!B \land !C \fCenter (!A \lor !B) \land
+(!A \lor !C)$
+\RightLabel{\LeftR{\lor}}
+\BinaryInf$!A \lor (!B \land !C) \fCenter (!A \lor !B) \land
+(!A \lor !C)$
+\DisplayProof
+\]
+
+\end{document}

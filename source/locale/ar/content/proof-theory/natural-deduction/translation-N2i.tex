@@ -1,0 +1,136 @@
+% Part: proof-theory
+% Chapter: natural-deduction
+% Section: translation-N2i
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{nat}{tni}
+
+\olsection{الترجمة من \Log{N2} إلى \Log{G2}}
+
+\begin{prop}\ollabel{prop:N2-to-G2}
+إذا كان $\Log{N2c}\ (\Log{N2i}) \Proves \Gamma \Sequent !A$، فإن
+$\Log{G2c}\ (\Log{G2i}) + \Cut \Proves \Gamma' \Sequent \Delta$، حيث
+$\Gamma'$ هي المجموعة المتعددة من~!!{formula}s الناتجة من~$\Gamma$ بحذف
+الوسوم، وحيث $\Delta = \{!A\}$ إذا لم تكن~$!A$ هي~$\lfalse$، و
+$\Delta = \emptyset$ إذا كانت إياها.
+\end{prop}
+
+\begin{proof}
+البرهان مرة أخرى بالاستقراء في ارتفاع~!!{proof}~$\delta$ للمتتالية
+$\Gamma \Sequent !A$. فإذا كانت~$\delta$ مسلّمة
+$x:!A \Sequent !A$، كان~$\pi$ هو المسلّمة المقابلة
+$!A \Sequent !A$، أو~$\lfalse \Sequent \ $ إذا كان
+$!A \ident \lfalse$.
+
+إذا انتهى~$\delta$ بقاعدة استدلال، نميّز الحالات الآتية:
+\begin{enumerate}
+  \item إذا كانت~$R$ هي~\Intro{\lif} وصيغتها الرئيسة~$!B \lif !C$، وكان
+  $x:!B$ موجودًا في سياق المقدمة دون النتيجة، انتهى~$\delta$ بما يأتي:
+  \[
+  \AxiomC{}
+  \RightLabel{$\delta_1$}
+  \Deduce$x:!B, \Gamma \fCenter !C$
+  \RightLabel{\Intro{\lif}}
+  \UnaryInf$\Gamma \fCenter !B \lif !C$
+  \DisplayProof
+  \]
+  يعطي فرض الاستقراء~!!a{proof}~$\pi_1$ للمتتالية
+  $!B,\Gamma' \Sequent !C$، أو للمتتالية~$!B,\Gamma' \Sequent \ $ إذا
+  كان $!C \ident \lfalse$. وفي الحالة الأخيرة نطبّق أولًا
+  \RightR{\Weakening} لإضافة~$\lfalse$ إلى الطرف الأيمن. ثم نحصل على
+  $\pi$ في الحالتين بتطبيق~\RightR{\lif}.
+  \item إذا كانت~$R$ هي~\Intro{\lif} لكن~$x:!B$ لم يكن موجودًا في سياق
+  المقدمة، انتهى~$\delta$ بما يأتي:
+  \[
+  \AxiomC{}
+  \RightLabel{$\delta_1$}
+  \Deduce$\Gamma \fCenter !C$
+  \RightLabel{\Intro{\lif}}
+  \UnaryInf$\Gamma \fCenter !B \lif !C$
+  \DisplayProof
+  \]
+  يعطي فرض الاستقراء~!!a{proof}~$\pi_1$ للمتتالية
+  $\Gamma' \Sequent !C$، أو للمتتالية ذات الطرف الأيمن الخالي إذا كان
+  $!C \ident \lfalse$. في الحالة الأخيرة نطبّق أولًا
+  \RightR{\Weakening} لإضافة~$\lfalse$، ثم نطبّق
+  \LeftR{\Weakening} بالصيغة~$!B$، وأخيرًا~\RightR{\lif}؛ وفي الحالة
+  الأولى نحتاج إلى التطبيقين الأخيرين فقط.
+  \item إذا كانت~$R$ هي~\Elim{\lif}، انتهى~$\delta$ بما يأتي:
+  \[
+  \AxiomC{}
+  \RightLabel{$\delta_1$}
+  \Deduce$\Gamma_1 \fCenter !B \lif !A$
+  \AxiomC{}
+  \RightLabel{$\delta_2$}
+  \Deduce$\Gamma_2 \fCenter !B$
+  \RightLabel{\Elim{\lif}}
+  \BinaryInf$\Gamma_1, \Gamma_2 \fCenter !A$
+  \DisplayProof
+  \]
+  حيث السياق~$\Gamma$ هو تجميع السياقين~$\Gamma_1,\Gamma_2$. يعطي فرض
+  الاستقراء !!{proof}s: برهانًا~$\pi_1$ للمتتالية
+  $\Gamma_1' \Sequent !B \lif !A$، وبرهانًا~$\pi_2$ للمتتالية
+  $\Gamma_2' \Sequent !B$ إذا كان~$!B \not\ident \lfalse$، أو للمتتالية
+  $\Gamma_2' \Sequent \ $ إذا كان~$!B \ident \lfalse$. وفي الحالة
+  الثانية نضيف~\RightR{\Weakening} إلى~$\pi_2$ كي تكون نتيجته
+  $\Gamma_2' \Sequent \lfalse$.
+
+  إذا كان $!A \not\ident \lfalse$ نحصل على~!!{proof}~$\pi$ بالصورة:
+  \[
+  \AxiomC{}
+  \RightLabel{$\pi_1$}
+  \Deduce$\Gamma_1' \fCenter !B \lif !A$
+  \AxiomC{}
+  \RightLabel{$\pi_2$}
+  \Deduce$\Gamma_2' \fCenter !B$
+  \Axiom$!A \fCenter !A$
+  \RightLabel{\LeftR{\lif}}
+  \BinaryInf$!B \lif !A, \Gamma_2' \fCenter !A$
+  \RightLabel{\Cut}
+  \BinaryInf$\Gamma_1', \Gamma_2' \fCenter !A$
+  \DisplayProof
+  \]
+  أما إذا كان $!A \ident \lfalse$ فنستخدم~$\lfalse \Sequent \ $ مقدمةً
+  يمنى لتطبيق~\LeftR{\lif}، فنحصل على~!!a{proof} للطرف الأيمن الخالي، ثم
+  نطبّق~\Cut؛ وهكذا يكون~!!{proof}~$\pi$ للمتتالية
+  $\Gamma_1',\Gamma_2' \Sequent \ $ ولا نطبّق إضعافًا يمينيًا عليها.
+  قد لا يساوي تجميع المجموعتين المتعددتين~$\Gamma_1',\Gamma_2'$ المجموعة
+  المتعددة~$\Gamma'$ الناتجة من تجميع~$\Gamma_1,\Gamma_2$. فمثلًا، إذا كان
+  كل من~$\Gamma_1$ و$\Gamma_2$ يحتوي~$x:!C$، احتوى التجميع الأول نسختين من
+  $!C$، بينما لا ينتج من تجميع السياقين الموسومين إلا نسخة واحدة. نصحح ذلك
+  بإضافة استدلالات مناسبة من~\LeftR{\Contraction}.
+
+\item إذا كانت~$R$ هي~\FalseCl، انتهى~$\delta$ بما يأتي:
+  \[
+  \AxiomC{}
+  \RightLabel{$\delta_1$}
+  \Deduce$x: \lnot !A, \Gamma \fCenter \lfalse$
+  \RightLabel{\FalseCl}
+  \UnaryInf$\Gamma \fCenter !A$
+  \DisplayProof
+  \]
+  يوجد، بفرض الاستقراء، !!a{proof}~$\pi_1$ للمتتالية
+  $\lnot !A,\Gamma' \Sequent \ $. ونتخذ~!!{proof}~$\pi$ ليكون:
+  \[
+  \Axiom$!A \fCenter !A$
+  \RightLabel{\RightR{\lnot}}
+  \UnaryInf$\fCenter !A, \lnot !A$
+  \AxiomC{}
+  \RightLabel{$\pi_1$}
+  \Deduce$\lnot !A, \Gamma' \fCenter $
+  \RightLabel{\Cut}
+  \BinaryInf$\Gamma' \fCenter !A$
+  \DisplayProof
+  \]
+  \item تُعالج قواعد الاستدلال المتبقية على نحو مماثل، مع تجميع السياقات
+  بالفواصل وحذف التكرارات الزائدة بانقباضات يسارية عند الحاجة.
+\end{enumerate}
+لاحظ أن ترجمة~\FalseCl{} وحدها تنتج~!!a{proof}~$\pi$ فيه أكثر من
+!!{formula} واحدة على اليمين. أي إن ترجمة~!!{proof} في~\Log{N2i} هي
+!!{proof} في~\Log{G2i}.
+\end{proof}
+
+\end{document}

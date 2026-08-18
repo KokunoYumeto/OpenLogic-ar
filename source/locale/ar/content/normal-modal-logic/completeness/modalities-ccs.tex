@@ -1,0 +1,244 @@
+% Part: normal-modal-logic
+% Chapter: completeness
+% Section: modalities-ccs
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{com}{mod}
+
+\olsection{المؤثرات الجهية والمجموعات المتسقة التامة}
+
+\begin{explain}
+حين نبني نموذجًا~$\mModel{M^\Sigma}$ تكون مجموعة عوالمه هي المجموعات
+$\Sigma$-المتسقة التامة~$\Delta$ في منطق جهوي نظامي~$\Sigma$، سنحتاج
+أيضًا إلى تعريف علاقة إمكان وصول~$R^\Sigma$ بين هذه ``العوالم''.
+ونريد تعريف علاقة إمكان الوصول (والتعيين~$V^\Sigma$) بحيث يكون
+$\mSat{M^\Sigma}{!A}[\Delta]$ إذا وفقط إذا كان~$!A \in \Delta$.
+فكيف نفعل ذلك؟
+
+متى عُرّفت علاقة إمكان الوصول، ضمن تعريف الصدق عند عالم أن
+\iftag{prvBox}{$\mSat{M^\Sigma}{\Box!A}[\Delta]$ إذا وفقط إذا كان
+  $\mSat{M^\Sigma}{!A}[\Delta']$ لكل~$\Delta'$ بحيث
+  $R^\Sigma\Delta\Delta'$}{$\mSat{M^\Sigma}{\Diamond!A}[\Delta]$ إذا
+  وفقط إذا كان~$\mSat{M^\Sigma}{!A}[\Delta']$ لبعض~$\Delta'$ بحيث
+  $R^\Sigma\Delta\Delta'$}. ويتطلب برهان أن
+$\mSat{M^\Sigma}{!A}[\Delta]$ إذا وفقط إذا كان~$!A \in \Delta$ أن
+يصدق ذلك خصوصًا في ال!!{formula}s التي تبدأ بمؤثر جهوي؛ أي إن
+\iftag{prvBox}{$\mSat{M^\Sigma}{\Box!A}[\Delta]$ إذا وفقط إذا كان
+  $\Box !A \in \Delta$}{$\mSat{M^\Sigma}{\Diamond!A}[\Delta]$ إذا
+  وفقط إذا كان~$\Diamond !A \in \Delta$}. وبجمع هذا المطلب مع تعريف
+الصدق عند عالم لـ\iftag{prvBox}{$\Box !A$}{$\Diamond !A$} نحصل على:
+\[
+\iftag{prvBox}{%
+  \Box!A \in \Delta \text{ إذا وفقط إذا كان } !A \in \Delta'
+  \text{ لكل $\Delta'$ يحقق } R^\Sigma\Delta\Delta'}{%
+  \Diamond!A \in \Delta \text{ إذا وفقط إذا كان } !A \in \Delta'
+  \text{ لبعض } \Delta' \text{ يحقق } R^\Sigma\Delta\Delta'}
+\]
+\iftag{prvBox}{تأمل الاتجاه من اليسار إلى اليمين: فهو يقول إنه إذا كان
+  $\Box !A \in \Delta$، كان~$!A \in \Delta'$ لأي~$!A$ وأي~$\Delta'$
+  يحقق~$R^\Sigma\Delta\Delta'$. فإذا اشترطنا أن
+  $R^\Sigma\Delta\Delta'$ إذا وفقط إذا كان~$!A \in \Delta'$ لكل
+  $\Box!A \in \Delta$، تحقق ذلك. ويمكننا أن نكتب الشرط الواقع يمين
+  ``إذا وفقط إذا'' بإيجاز أكبر هكذا:
+  $\Setabs{!A}{\Box!A \in \Delta} \subseteq \Delta'$.}{تأمل الاتجاه
+  من اليمين إلى اليسار: فهو يقول إنه إذا كان~$!A \in \Delta'$، كان
+  $\Diamond!A \in \Delta$ لأي~$!A$ وأي~$\Delta'$ يحقق
+  $R^\Sigma\Delta\Delta'$. فإذا اشترطنا تحقق~$R^\Sigma\Delta\Delta'$
+  كلما كان~$\Diamond!A \in \Delta$ لكل~$!A \in \Delta'$، تحقق ذلك.
+  ويمكننا أن نكتب الشرط الواقع يمين ``إذا وفقط إذا'' بإيجاز أكبر هكذا:
+  $\Setabs{\Diamond!A}{!A \in \Delta'} \subseteq \Delta$.}
+
+ويبقى السؤال: هل يضمن تعريف~$R^\Sigma$ هذا بالفعل أن
+\iftag{prvBox}{$\Box !A \in \Delta$ إذا وفقط إذا كان
+  $\mSat{M^\Sigma}{\Box !A}[\Delta]$؟ \iftag{prvDiamond}{وهل يضمن
+    أيضًا أن }{}}{}\iftag{prvDiamond}{$\Diamond !A \in \Delta$ إذا
+  وفقط إذا كان~$\mSat{M^\Sigma}{\Diamond !A}[\Delta]$؟}{}
+ستثبت النتائج القليلة الآتية ذلك.
+\end{explain}
+
+\begin{defn}
+  إذا كانت~$\Gamma$ مجموعة من ال!!{formula}s، فلتكن
+  \begin{align*}
+    \Box\Gamma & = \Setabs{\Box !B}{!B \in \Gamma}\\
+    \Diamond\Gamma & = \Setabs{\Diamond !B}{!B \in \Gamma}\\
+    \intertext{ولتكن}
+    \Box^{-1}\Gamma & = \Setabs{!B}{\Box !B \in \Gamma}\\
+    \Diamond^{-1}\Gamma & = \Setabs{!B}{\Diamond !B \in \Gamma}\\
+  \end{align*}
+\end{defn}
+
+وبعبارة أخرى،~$\Box\Gamma$ هي~$\Gamma$ بعد وضع~$\Box$ أمام كل
+!!{formula} في~$\Gamma$؛ أما~$\Box^{-1}\Gamma$ فهي جميع
+ال!!{formula}s المسبوقة بـ~$\Box$ في~$\Gamma$ بعد حذف~$\Box$ الأولى.
+وهذا التعريف ليس بالغ الأهمية في ذاته، لكنه سيبسّط الترميز كثيرًا.
+
+لاحظ أن~$\Box\Box^{-1}\Gamma \subseteq \Gamma$:
+\[
+\Box\Box^{-1}\Gamma = \Setabs{\Box!B}{\Box!B \in \Gamma}
+\]
+أي إنها ليست إلا مجموعة جميع ال!!{formula}s في~$\Gamma$ التي تبدأ
+بـ~$\Box$.
+
+\begin{lem}\ollabel{lem:box1}
+  إذا كان~$\Gamma \Proves[\Sigma] !A$، فإن
+  $\Box\Gamma \Proves[\Sigma] \Box !A$.
+\end{lem}
+
+\begin{proof}
+  إذا كان~$\Gamma \Proves[\Sigma] !A$، فثمة~$!B_1$، \dots،~$!B_k
+  \in \Gamma$ بحيث
+  $\Sigma \Proves !B_1 \lif (!B_2 \lif \cdots (!B_k \lif !A)\cdots)$.
+  ولما كانت~$\Sigma$ نظامية، ينتج بقاعدة~\RK{} أن
+  $\Sigma \Proves \Box!B_1 \lif (\Box!B_2 \lif \cdots
+  (\Box!B_k \lif \Box!A)\cdots)$، حيث من الواضح أن
+  $\Box!B_1$، \dots،~$\Box!B_k \in \Box\Gamma$. ومن ثم، بحسب
+  التعريف،~$\Box\Gamma \Proves[\Sigma] \Box !A$.
+\end{proof}
+
+\begin{lem}\ollabel{lem:box2}
+  إذا كان~$\Box^{-1}\Gamma \Proves[\Sigma] !A$، فإن
+  $\Gamma \Proves[\Sigma] \Box!A$.
+\end{lem}
+
+\begin{proof}
+  افترض أن~$\Box^{-1}\Gamma \Proves[\Sigma] !A$؛ عندئذ، بحسب
+  \olref{lem:box1}، يكون
+  $\Box\Box^{-1}\Gamma \Proves[\Sigma] \Box!A$. لكن لما كان
+  $\Box\Box^{-1}\Gamma \subseteq \Gamma$، كان أيضًا
+  $\Gamma \Proves[\Sigma] \Box!A$ بالرتابة.
+\end{proof}
+
+\iftag{prvBox}{%
+% Box is primitive
+
+\begin{prop}\ollabel{prop:box}
+  إذا كانت~$\Gamma$ $\Sigma$-متسقة تامة، فإن~$\Box !A \in \Gamma$
+  إذا وفقط إذا كان، لكل مجموعة $\Sigma$-متسقة تامة~$\Delta$ تحقق
+  $\Box^{-1}\Gamma \subseteq \Delta$، لدينا~$!A \in \Delta$.
+\end{prop}
+
+\begin{proof}
+  افترض أن~$\Gamma$ $\Sigma$-متسقة تامة. الاتجاه ``فقط إذا'' يسير:
+  افترض أن~$\Box !A \in \Gamma$ وأن~$\Box^{-1}\Gamma \subseteq
+  \Delta$. لما كان~$\Box!A \in \Gamma$، كان
+  $!A \in \Box^{-1}\Gamma \subseteq \Delta$، ومن ثم~$!A \in \Delta$.
+
+  أما اتجاه ``إذا'' فنثبت مقابله: افترض أن~$\Box!A \notin \Gamma$.
+  لما كانت~$\Gamma$ $\Sigma$-متسقة تامة، كانت مغلقة استنتاجيًا، ومن ثم
+  $\Gamma \Proves/[\Sigma] \Box !A$. وبحسب~\olref{lem:box2}،
+  $\Box^{-1}\Gamma \Proves/[\Sigma] !A$. وبحسب
+  \olref[prf][con]{prop:consistencyfacts}\olref[prf][con]{prop:consistencyfacts-b}،
+  تكون~$\Box^{-1}\Gamma \cup \{\lnot!A\}$ $\Sigma$-متسقة. وبمبرهنة
+  ليندنباوم، توجد مجموعة $\Sigma$-متسقة تامة~$\Delta$ بحيث
+  $\Box^{-1}\Gamma \cup \{\lnot!A\} \subseteq \Delta$. وبالاتساق،
+  $!A \notin \Delta$.
+\end{proof}
+}{%
+% Box is not primitive, only Diamond is
+
+\begin{prop}\ollabel{prop:diamond}
+  إذا كانت~$\Gamma$ $\Sigma$-متسقة تامة، فإن~$\Diamond !A \in \Gamma$
+  إذا وفقط إذا وجدت مجموعة $\Sigma$-متسقة تامة~$\Delta$ تحقق
+  $\Diamond\Delta \subseteq \Gamma$ و~$!A \in \Delta$.
+\end{prop}
+
+\begin{proof}
+  افترض أن~$\Gamma$ $\Sigma$-متسقة تامة. الاتجاه من اليمين إلى اليسار
+  يسير: لتكن~$\Delta$ مجموعة $\Sigma$-متسقة تامة تحقق
+  $\Diamond\Delta \subseteq \Gamma$ و~$!A \in \Delta$. عندئذ
+  $\Diamond!A \in \Diamond\Delta \subseteq \Gamma$، أي
+  $\Diamond!A \in \Gamma$.
+
+  أما الاتجاه من اليسار إلى اليمين، فافترض أن
+  $\Diamond !A \in \Gamma$. علينا أن نبين وجود مجموعة $\Sigma$-متسقة
+  تامة~$\Delta$ بحيث~$!A \in \Delta$ و
+  $\Diamond\Delta \subseteq \Gamma$. لما كان~$\Diamond !A \in \Gamma$
+  وكانت~$\Gamma$ $\Sigma$-متسقة، كان~$\Box\lnot !A \notin \Gamma$.
+  ولما كانت~$\Gamma$ $\Sigma$-متسقة تامة، كانت مغلقة استنتاجيًا، ومن
+  ثم~$\Gamma \Proves/[\Sigma] \Box\lnot !A$. وبحسب~\olref{lem:box2}،
+  $\Box^{-1}\Gamma \Proves/[\Sigma] \lnot !A$. وبحسب
+  \olref[prf][con]{prop:consistencyfacts}\olref[prf][con]{prop:consistencyfacts-b}،
+  تكون~$\Box^{-1}\Gamma \cup \{!A\}$ $\Sigma$-متسقة. وبمبرهنة
+  ليندنباوم، توجد مجموعة $\Sigma$-متسقة تامة~$\Delta$ بحيث
+  $\Box^{-1}\Gamma \cup \{!A\} \subseteq \Delta$. ومن الواضح أن
+  $!A \in \Delta$. ولإثبات~$\Diamond\Delta \subseteq \Gamma$، افترض
+  خلافه: يوجد~$!B \in \Delta$ بحيث~$\Diamond !B \notin \Gamma$.
+  ولما كانت~$\Gamma$ $\Sigma$-متسقة تامة، كان
+  $\Box\lnot !B \in \Gamma$. لكن عندئذ أيضًا
+  $\lnot !B \in \Box^{-1}\Gamma \subseteq \Delta$، وهذا يجعل
+  $\Delta$ غير متسقة.
+\end{proof}
+}
+
+\begin{lem}\ollabel{lem:box-iff-diamond}
+  افترض أن~$\Gamma$ و$\Delta$ مجموعتان $\Sigma$-متسقتان تامتان. عندئذ
+  $\Box^{-1}\Gamma \subseteq \Delta$ إذا وفقط إذا كان
+  $\Diamond\Delta \subseteq \Gamma$.
+\end{lem}
+
+\begin{proof}
+  اتجاه ``فقط إذا'': افترض~$\Box^{-1}\Gamma \subseteq \Delta$، ولنفترض
+  أن~$\Diamond!A \in \Diamond\Delta$ (أي~$!A \in \Delta$). ولكي نبين
+  $\Diamond!A \in \Gamma$، يكفي أن نبين~$\Box\lnot!A \notin \Gamma$؛
+  إذ ينتج حينئذ بالقصوية أن~$\lnot\Box\lnot !A \in \Gamma$. والآن،
+  لو كان~$\Box\lnot!A \in \Gamma$، للزم بالفرض أن
+  $\lnot!A \in \Delta$، خلافًا لاتساق~$\Delta$ (لأن~$!A \in \Delta$).
+  ومن ثم~$\Box\lnot!A \notin \Gamma$ كما هو مطلوب.
+
+  اتجاه ``إذا'': افترض~$\Diamond\Delta \subseteq \Gamma$. نستدل
+  بالمقابل: افترض~$!A \notin \Delta$ لنبين~$\Box!A \notin \Gamma$.
+  إذا كان~$!A \notin \Delta$، كان~$\lnot!A \in \Delta$ بالقصوية،
+  ومن ثم~$\Diamond\lnot!A \in \Gamma$ بالفرض. لكن
+  $\Diamond\lnot!A$ في كل منطق جهوي نظامي مكافئة لـ~$\lnot\Box !A$،
+  وإذا كانت الأخيرة في~$\Gamma$، اقتضى الاتساق أن
+  $\Box!A \notin\Gamma$، كما هو مطلوب.
+\end{proof}
+
+\iftag{prvBox}{%
+  \iftag{prvDiamond}{%
+% Box and Diamond are both primitive; prove
+% prop:diamond using lem:box-iff-diamond
+
+\begin{prop}\ollabel{prop:diamond}
+  إذا كانت~$\Gamma$ $\Sigma$-متسقة تامة، فإن~$\Diamond !A \in \Gamma$
+  إذا وفقط إذا وجدت مجموعة $\Sigma$-متسقة تامة~$\Delta$ تحقق
+  $\Diamond\Delta \subseteq \Gamma$ و~$!A \in \Delta$.
+\end{prop}
+
+\begin{proof}
+افترض أن~$\Gamma$ $\Sigma$-متسقة تامة. لدينا
+$\Diamond!A \in \Gamma$ إذا وفقط إذا كان
+$\lnot\Box\lnot !A \in \Gamma$، بحسب~\Dual{} والإغلاق.
+ولدينا~$\lnot\Box\lnot !A \in \Gamma$ إذا وفقط إذا كان
+$\Box\lnot !A \notin \Gamma$، بحسب
+\olref[ccs]{prop:ccs-properties}\olref[ccs]{prop:ccs-lnot}، لأن
+$\Gamma$ $\Sigma$-متسقة تامة. وبحسب~\olref{prop:box}، يكون
+$\Box\lnot !A \notin \Gamma$ إذا وفقط إذا وجدت مجموعة $\Sigma$-متسقة
+تامة~$\Delta$ تحقق~$\Box^{-1}\Gamma \subseteq \Delta$ و
+$\lnot!A \notin \Delta$. تأمل الآن أي~$\Delta$ كهذه. بحسب
+\olref{lem:box-iff-diamond}، يكون~$\Box^{-1}\Gamma \subseteq \Delta$
+إذا وفقط إذا كان~$\Diamond\Delta \subseteq \Gamma$. كذلك، يكون
+$\lnot !A \notin \Delta$ إذا وفقط إذا كان~$!A \in \Delta$، بحسب
+\olref[ccs]{prop:ccs-properties}\olref[ccs]{prop:ccs-lnot}. وهكذا،
+$\Diamond!A \in \Gamma$ إذا وفقط إذا وجدت مجموعة $\Sigma$-متسقة
+تامة~$\Delta$ تحقق~$\Diamond\Delta \subseteq \Gamma$ و
+$!A \in \Delta$.
+\end{proof}
+
+}{}}{}
+
+\begin{prob}
+  بيّن أنه إذا كانت~$\Gamma$ $\Sigma$-متسقة تامة، فإن
+  \iftag{prvBox}{$\Diamond !A \in \Gamma$ إذا وفقط إذا وجدت مجموعة
+    $\Sigma$-متسقة تامة~$\Delta$ بحيث
+    $\Box^{-1}\Gamma \subseteq \Delta$ و~$!A \in \Delta$.}{$\Box !A
+    \in \Gamma$ إذا وفقط إذا كان، لكل مجموعة $\Sigma$-متسقة تامة
+    $\Delta$ تحقق~$\Box^{-1}\Gamma \subseteq \Delta$، لدينا
+    $!A \in \Delta$.} \emph{افعل ذلك من دون استعمال
+    \olref[nml][com][mod]{lem:box-iff-diamond}}.
+\end{prob}
+
+\end{document}

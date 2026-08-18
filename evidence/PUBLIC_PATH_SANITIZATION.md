@@ -1,5 +1,19 @@
-# Public-path sanitization receipt
+# إيصال تنقيح المسارات العامة
 
-This public evidence copy preserves all decisions, raw authority, hashes, translation ledgers, failures, corrections, build and QA results. Host-local user-root paths were replaced by `<LOCAL_USER_ROOT>`, and credential-file locators by `[REDACTED_LOCAL_CREDENTIAL_PATH]`. Credential contents were never read into or copied to the evidence. The original durable files were not edited.
+نُسخت جميع نصوص الأدلة من ضوابط الإصدار وإيصالاته وسجلات بنائه المحددة.
+كشف تدقيق إصدار الشاشة بقايا اسم مستخدم في مسارات خطوط ملتفة على عدة أسطر
+وفي إيصال تاريخي واحد. استُبدلت جميع الصور الكاملة والمجزأة للاسم وجذر ملف
+المستخدم بعلامات عامة في شجرة الأدلة الجديدة.
 
-Sanitized text artifacts: 26.
+يبقى أصل الأدلة 03 المنشور بلا تغيير، وتُحفظ هاشات مداخله الخام في قائمة
+الأساس. وتسجل القائمة الحالية هاشات الملفات العامة المنقّحة. لم يتغير أي PDF
+أو ملف هدف ترجمة أو بيان إغلاق أو ربط وحدات في هذه العملية. لا تتضمن الشجرة
+أي بيانات اعتماد أو عرضًا مؤقتًا أو مخبأً أو ناتج بناء قديمًا.
+
+## English descriptor
+
+The screen-release audit found username fragments surviving line wrapping in
+two older print-build logs and one historical receipt. The new loose evidence
+tree replaces every complete or split occurrence with public placeholders.
+Immutable asset 03 is unchanged; a baseline inventory records its raw entries,
+while the current inventory hashes the repaired public files.

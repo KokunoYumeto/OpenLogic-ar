@@ -1,0 +1,61 @@
+% Part: normal-modal-logic
+% Chapter: axioms-systems
+% Section: consistency
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{prf}{con}
+
+\olsection{الاتساق}
+
+الاتساق خاصية مهمة لمجموعات ال!!{formula}s. وتكون مجموعة من
+ال!!{formula}s غير متسقة إذا كان من الممكن أن !!{derivable} منها تناقض،
+مثل~$\lfalse$؛ وتكون متسقة فيما عدا ذلك. وإذا كانت مجموعة غير متسقة،
+فلا يمكن أن تكون !!{formula}sها كلها صادقة في نموذج عند عالم واحد.
+وسنثبت في مبرهنة التمام العكس: كل مجموعة متسقة صادقة عند عالم في نموذج،
+هو تحديدًا ``النموذج القانوني''.
+
+\begin{defn}
+  تكون المجموعة~$\Gamma$ \emph{متسقة} بالنسبة إلى النسق~$\Sigma$، أو
+  كما سنقول، \emph{$\Sigma$-متسقة}، إذا وفقط إذا كان
+  $\Gamma \Proves/[\Sigma] \lfalse$.
+\end{defn}
+
+فمثلًا، المجموعة~$\{\Box(p \lif q), \Box p, \lnot\Box q\}$ متسقة
+بالنسبة إلى منطق القضايا، لكنها ليست~\Log{K}-متسقة. وبالمثل، ليست
+المجموعة~$\{\Diamond p, \Box\Diamond p \lif q, \lnot q\}$
+\Log{K5}-متسقة.
+
+\begin{prop}\ollabel{prop:consistencyfacts}
+  لتكن~$\Gamma$ مجموعة من ال!!{formula}s. عندئذ:
+  \begin{enumerate}
+  \item تكون~$\Gamma$ $\Sigma$-متسقة إذا وفقط إذا وجدت
+    !!{formula}~$!A$ بحيث~$\Gamma \Proves/[\Sigma] !A$.
+  \item \ollabel{prop:consistencyfacts-b}%
+    $\Gamma \Proves[\Sigma] !A$ إذا وفقط إذا لم تكن
+    $\Gamma \cup \{\lnot!A\}$ $\Sigma$-متسقة.
+  \item \ollabel{prop:consistencyfacts-c}%
+    إذا كانت~$\Gamma$ $\Sigma$-متسقة، فلكل !!{formula}~$!A$ تكون إما
+    $\Gamma \cup \{!A\}$ $\Sigma$-متسقة أو
+    $\Gamma \cup \{\lnot!A\}$ $\Sigma$-متسقة.
+  \end{enumerate}
+\end{prop}
+
+\begin{proof}
+  تنتج هذه الوقائع بسهولة من منطق القضايا الكلاسيكي. ونورد حجة
+  \olref{prop:consistencyfacts-c}. نستدل بالمقابل، فنفترض أن لا
+  $\Gamma \cup \{!A\}$ ولا~$\Gamma \cup \{\lnot!A\}$
+  $\Sigma$-متسقة. عندئذ، بحسب~\olref{prop:consistencyfacts-b}، لدينا
+  $\Gamma, !A \Proves[\Sigma] \lfalse$ و
+  $\Gamma, \lnot !A \Proves[\Sigma] \lfalse$. وبمبرهنة الاستنتاج،
+  $\Gamma \Proves[\Sigma] !A \lif \lfalse$ و
+  $\Gamma \Proves[\Sigma] \lnot!A \lif \lfalse$. لكن
+  $(!A \lif \lfalse) \lif ((\lnot!A \lif \lfalse) \lif \lfalse)$
+  مثال إحلال لقضية صادقة صدقًا تحليليًا؛ ومن ثم، بحسب
+  \olref[prp]{prop:derivabilityfacts}\olref[prp]{prop:derivabilityfacts-ruleT}،
+  $\Gamma \Proves[\Sigma] \lfalse$.
+\end{proof}
+
+\end{document}

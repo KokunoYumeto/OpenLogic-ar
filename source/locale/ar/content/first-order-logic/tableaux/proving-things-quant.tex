@@ -1,0 +1,340 @@
+% Part: first-order-logic
+% Chapter: tableaux
+% Section: proving-things-quant
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{tab}{prq}
+
+\olsection{\usetoken{P}{tableau} مع الكمّيات}
+
+\begin{ex}
+عند التعامل مع الكمّيات، يجب أن نتأكد من عدم انتهاك شرط المتغير المميَّز،
+وقد يقتضي ذلك أحيانًا تغيير ترتيب إجراء بعض الاستدلالات. وبوجه عام من المفيد
+أن نحاول أولًا معالجة القواعد الخاضعة لشرط المتغير المميَّز (إذ ستقع في موضع
+أعلى من ال!!{tableau} المكتمل).
+
+لنر كيف ننشئ !!a{tableau} لل!!{sentence}
+$\lexists[x][\lnot !A(x)] \lif \lnot \lforall[x][!A(x)]$.
+وكالمعتاد نبدأ بتسجيل الافتراض:
+\begin{oltableau}
+[\sFmla{\False}{\lexists[x][\lnot \formula{A}(x)]\lif \lnot
+    \lforall[x][\formula{A}(x)]}, just=\TAss]
+\end{oltableau}
+بما أن ال!!{main operator} هو $\lif$، فإننا نطبق
+$\TRule{\False}{\lif}$:
+\begin{oltableau}
+[\sFmla{\False}{\lexists[x][\lnot \formula{A}(x)]\lif \lnot
+    \lforall[x][\formula{A}(x)]}, just=\TAss, checked
+  [\sFmla{\True}{\lexists[x][\lnot \formula{A}(x)]},
+    just={\TRule{\False}{\lif}[1]}
+    [\sFmla{\False}{\lnot\lforall[x][\formula{A}(x)]},
+      just={\TRule{\False}{\lif}[1]}]
+  ]
+]
+\end{oltableau}
+السطر التالي الذي ينبغي معالجته هو~$2$. نستخدم
+$\TRule{\True}{\lexists}$. وهذا يتطلب !!{constant} جديدًا؛ وبما أنه لا يظهر
+بعد أي !!{constant}s، فيمكننا اختيار أي واحد منها، وليكن~$a$.
+\begin{oltableau}
+[\sFmla{\False}{\lexists[x][\lnot \formula{A}(x)]\lif \lnot
+    \lforall[x][\formula{A}(x)]}, just=\TAss, checked
+  [\sFmla{\True}{\lexists[x][\lnot \formula{A}(x)]},
+    just={\TRule{\False}{\lif}[1]}, checked
+    [\sFmla{\False}{\lnot\lforall[x][\formula{A}(x)]},
+      just={\TRule{\False}{\lif}[1]}
+      [\sFmla{\True}{\lnot\formula{A}(a)}, just={\TRule{\True}{\lexists}[2]}]
+    ]
+  ]
+]
+\end{oltableau}
+نطبق الآن $\TRule{\False}{\lnot}$ على السطر~$3$:
+\begin{oltableau}
+[\sFmla{\False}{\lexists[x][\lnot \formula{A}(x)]\lif \lnot
+    \lforall[x][\formula{A}(x)]}, just=\TAss, checked
+  [\sFmla{\True}{\lexists[x][\lnot \formula{A}(x)]},
+    just={\TRule{\False}{\lif}[1]}, checked
+    [\sFmla{\False}{\lnot\lforall[x][\formula{A}(x)]},
+      just={\TRule{\False}{\lif}[1]}, checked
+      [\sFmla{\True}{\lnot\formula{A}(a)}, just={\TRule{\True}{\lexists}[2]}
+        [\sFmla{\True}{\lforall[x][\formula{A}(x)]},
+          just = {\TRule{\False}{\lnot}[3]}
+        ]
+      ]
+    ]
+  ]
+]
+\end{oltableau}
+نحصل على !!{tableau} مغلق بتطبيق $\TRule{\True}{\lnot}$ على
+السطر~$4$، ثم $\TRule{\True}{\lforall}$ على السطر~$5$.
+\begin{oltableau}
+[\sFmla{\False}{\lexists[x][\lnot \formula{A}(x)]\lif \lnot
+    \lforall[x][\formula{A}(x)]}, just=\TAss, checked
+  [\sFmla{\True}{\lexists[x][\lnot \formula{A}(x)]},
+    just={\TRule{\False}{\lif}[1]}, checked
+    [\sFmla{\False}{\lnot\lforall[x][\formula{A}(x)]},
+      just={\TRule{\False}{\lif}[1]}, checked
+      [\sFmla{\True}{\lnot\formula{A}(a)}, just={\TRule{\True}{\lexists}[2]}
+        [\sFmla{\True}{\lforall[x][\formula{A}(x)]},
+          just = {\TRule{\False}{\lnot}[3]}
+          [\sFmla{\False}{\formula{A}(a)}, just={\TRule{\True}{\lnot}[4]}
+            [\sFmla{\True}{\formula{A}(a)},
+              just={\TRule{\True}{\lforall}[5]}, close
+            ]
+          ]
+        ]
+      ]
+    ]
+  ]
+]
+\end{oltableau}
+\end{ex}
+
+\begin{ex}
+لنر كيف ننشئ !!a{tableau} للمجموعة
+\[
+\sFmla{\False}{\lexists[x][!C(x,b)]},
+\sFmla{\True}{\lexists[x][(!A(x) \land !B(x))]},
+\sFmla{\True}{\lforall[x][(!B(x) \lif !C(x,b))]}.
+\]
+وكالمعتاد نبدأ بالافتراضات:
+\begin{oltableau}
+  [\sFmla{\False}{\lexists[x][\formula{C}(x,b)]}, just=\TAss
+    [\sFmla{\True}{\lexists[x][(\formula{A}(x) \land \formula{B}(x))]},
+      just=\TAss
+      [\sFmla{\True}{\lforall[x][(\formula{B}(x) \lif \formula{C}(x,b))]},
+        just=\TAss]
+    ]
+  ]
+\end{oltableau}
+ينبغي لنا دائمًا أن نطبق أولًا قاعدة ذات شرط المتغير المميَّز؛ وفي هذه الحالة
+تكون تلك القاعدة $\TRule{\True}{\lexists}$ مطبقة على السطر~$2$.
+وبما أن الافتراضات تحتوي على ال!!{constant}~$b$، فيجب أن نستخدم ثابتًا
+مختلفًا؛ فلنختر~$a$ مرة أخرى.
+\begin{oltableau}
+  [\sFmla{\False}{\lexists[x][\formula{C}(x,b)]}, just=\TAss
+    [\sFmla{\True}{\lexists[x][(\formula{A}(x) \land \formula{B}(x))]},
+      just=\TAss, checked
+      [\sFmla{\True}{\lforall[x][(\formula{B}(x) \lif \formula{C}(x,b))]},
+        just=\TAss
+        [\sFmla{\True}{\formula{A}(a) \land \formula{B}(a)},
+          just={\TRule{\True}{\lexists}[2]}]
+      ]
+    ]
+  ]
+\end{oltableau}
+إذا طبقنا الآن $\TRule{\False}{\lexists}$ على السطر~$1$ أو
+$\TRule{\True}{\lforall}$ على السطر~$3$، فعلينا أن نقرر أي حد~$t$
+نستبدله بــ~$x$. ولأن هذه القواعد لا تخضع لشرط المتغير المميَّز، يمكننا اختيار
+أي حد نشاء. وقد نضطر في بعض الحالات إلى تطبيق القاعدة عدة مرات باستعمال حدود
+$t$ مختلفة. لكن القاعدة العامة المفيدة هي اختيار أحد الحدود التي تظهر بالفعل
+في ال!!{tableau}---وهما في هذه الحالة $a$ و~$b$---ويمكننا هنا أن نخمن أن
+$a$ أرجح أن يؤدي إلى فرع مغلق.
+\begin{oltableau}
+  [\sFmla{\False}{\lexists[x][\formula{C}(x,b)]}, just=\TAss
+    [\sFmla{\True}{\lexists[x][(\formula{A}(x) \land \formula{B}(x))]},
+      just=\TAss, checked
+      [\sFmla{\True}{\lforall[x][(\formula{B}(x) \lif \formula{C}(x,b))]}, just=\TAss
+        [\sFmla{\True}{\formula{A}(a) \land \formula{B}(a)}, just={\TRule{\True}{\lexists}[2]}
+          [\sFmla{\False}{\formula{C}(a,b)}, just={\TRule{\False}{\lexists}[1]}
+            [\sFmla{\True}{\formula{B}(a) \lif \formula{C}(a,b)},
+              just={\TRule{\True}{\lforall}[3]}
+            ]
+          ]
+        ]
+      ]
+    ]
+  ]
+\end{oltableau}
+لا نضع علامة صح على ال!!{signed formula}s في السطرين $1$ و$3$، لأننا قد
+نضطر إلى استخدامهما مرة أخرى. نطبق الآن $\TRule{\True}{\land}$ على السطر~$4$:
+\begin{oltableau}
+  [\sFmla{\False}{\lexists[x][\formula{C}(x,b)]}, just=\TAss
+    [\sFmla{\True}{\lexists[x][(\formula{A}(x) \land \formula{B}(x))]},
+      just=\TAss, checked
+      [\sFmla{\True}{\lforall[x][(\formula{B}(x) \lif \formula{C}(x,b))]}, just=\TAss
+        [\sFmla{\True}{\formula{A}(a) \land \formula{B}(a)},
+          just={\TRule{\True}{\lexists}[2]}, checked
+          [\sFmla{\False}{\formula{C}(a,b)}, just={\TRule{\False}{\lexists}[1]}
+            [\sFmla{\True}{\formula{B}(a) \lif \formula{C}(a,b)},
+              just={\TRule{\True}{\lforall}[3]}
+              [\sFmla{\True}{\formula{A}(a)}, just={\TRule{\True}{\land}[4]}
+                [\sFmla{\True}{\formula{B}(a)}, just={\TRule{\True}{\land}[4]}
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    ]
+  ]
+\end{oltableau}
+إذا طبقنا الآن $\TRule{\True}{\lif}$ على السطر~$6$، أُغلق ال!!{tableau}:
+\begin{oltableau}
+  [\sFmla{\False}{\lexists[x][\formula{C}(x,b)]}, just=\TAss
+    [\sFmla{\True}{\lexists[x][(\formula{A}(x) \land \formula{B}(x))]},
+      just=\TAss, checked
+      [\sFmla{\True}{\lforall[x][(\formula{B}(x) \lif \formula{C}(x,b))]},
+        just=\TAss
+        [\sFmla{\True}{\formula{A}(a) \land \formula{B}(a)},
+          just={\TRule{\True}{\lexists}[2]}, checked
+          [\sFmla{\False}{\formula{C}(a,b)},
+            just={\TRule{\False}{\lexists}[1]}
+            [\sFmla{\True}{\formula{B}(a) \lif \formula{C}(a,b)},
+              just={\TRule{\True}{\lforall}[3]}, checked
+              [\sFmla{\True}{\formula{A}(a)},
+                just={\TRule{\True}{\land}[4]}
+                [\sFmla{\True}{\formula{B}(a)},
+                  just={\TRule{\True}{\land}[4]}
+                  [\sFmla{\False}{\formula{B}(a)},
+                    just={\TRule{\True}{\lif}[6]},close
+                  ]
+                  [\sFmla{\True}{\formula{C}(a,b)},
+                    just={\TRule{\True}{\lif}[6]},close
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    ]
+  ]
+\end{oltableau}
+
+
+\end{ex}
+
+\begin{ex}
+ننشئ !!a{tableau} للمجموعة
+\[
+\sFmla{\True}{\lforall[x][!A(x)]}, \sFmla{\True}{\lforall[x][!A(x)] 
+  \lif \lexists[y][!B(y)]}, \sFmla{\True}{\lnot\lexists[y][!B(y)]}.
+\]
+وكالمعتاد ندوّن الافتراضات:
+\begin{oltableau}
+  [\sFmla{\True}{\lforall[x][\formula{A}(x)]}, just=\TAss
+    [\sFmla{\True}{\lforall[x][\formula{A}(x)] \lif
+        \lexists[y][\formula{B}(y)]}, just=\TAss
+      [\sFmla{\True}{\lnot\lexists[y][\formula{B}(y)]}, just=\TAss
+      ]
+    ]
+  ]
+\end{oltableau}
+نبدأ بتطبيق قاعدة $\TRule{\True}{\lnot}$ على السطر~$3$. ومن نتائج المبدأ
+القائل «طبّق دائمًا القواعد ذات شروط المتغير المميَّز أولًا» مبدأ آخر هو
+«أجّل تطبيق قواعد الكمّيات التي لا تخضع لشروط المتغير المميَّز إلى أن تدعو
+الحاجة إليها». وأجّل كذلك القواعد التي تؤدي إلى انقسام.
+\begin{oltableau}
+  [\sFmla{\True}{\lforall[x][\formula{A}(x)]}, just=\TAss
+    [\sFmla{\True}{\lforall[x][\formula{A}(x)] \lif
+        \lexists[y][\formula{B}(y)]}, just=\TAss
+      [\sFmla{\True}{\lnot\lexists[y][\formula{B}(y)]}, just=\TAss, checked
+        [\sFmla{\False}{\lexists[y][\formula{B}(y)]}, just={\TRule{\True}{\lnot}[3]}]
+      ]
+    ]
+  ]
+\end{oltableau}
+يتطلب السطر الجديد~$4$ القاعدة $\TRule{\False}{\lexists}$، وهي قاعدة كمّ
+لا تخضع لشرط المتغير المميَّز. لذلك نؤجلها ونستخدم بدلًا منها
+$\TRule{\True}{\lif}$ على السطر~$2$.
+\begin{oltableau}
+  [\sFmla{\True}{\lforall[x][\formula{A}(x)]}, just=\TAss
+    [\sFmla{\True}{\lforall[x][\formula{A}(x)] \lif
+        \lexists[y][\formula{B}(y)]}, just=\TAss, checked
+      [\sFmla{\True}{\lnot\lexists[y][\formula{B}(y)]}, just=\TAss, checked
+        [\sFmla{\False}{\lexists[y][\formula{B}(y)]},
+          just={\TRule{\True}{\lnot}[3]},
+          [\sFmla{\False}{\lforall[x][\formula{A}(x)]}, just={\TRule{\True}{\lif}[2]}]
+          [\sFmla{\True}{\lexists[y][\formula{B}(y)]}, just={\TRule{\True}{\lif}[2]}]
+        ]
+      ]
+    ]
+  ]
+\end{oltableau}
+تتطلب كلتا ال!!{signed formula}s الجديدتين قواعد ذات شروط للمتغير المميَّز،
+ولذلك ينبغي أن تكونا التاليتين:
+\begin{oltableau}
+  [\sFmla{\True}{\lforall[x][\formula{A}(x)]}, just=\TAss
+    [\sFmla{\True}{\lforall[x][\formula{A}(x)] \lif
+        \lexists[y][\formula{B}(y)]}, just=\TAss, checked
+      [\sFmla{\True}{\lnot\lexists[y][\formula{B}(y)]}, just=\TAss, checked
+        [\sFmla{\False}{\lexists[y][\formula{B}(y)]},
+          just={\TRule{\True}{\lnot}[3]}
+          [\sFmla{\False}{\lforall[x][\formula{A}(x)]}, just={\TRule{\True}{\lif}[2]},checked
+            [\sFmla{\False}{\formula{A}(b)}, just={\TRule{\False}{\lforall}[5]}]
+          ]
+          [\sFmla{\True}{\lexists[y][\formula{B}(y)]}, just={\TRule{\True}{\lif}[2]},checked
+            [\sFmla{\True}{\formula{B}(c)}, just={\TRule{\True}{\lexists}[5]}]
+          ]
+        ]
+      ]
+    ]
+  ]
+\end{oltableau}
+لإغلاق الفرعين، علينا استخدام ال!!{signed formula}s في السطرين $1$
+و~$4$. ولا تخضع القاعدتان الموافقتان (\TRule{\True}{\lforall} و
+\TRule{\False}{\lexists}) لشرط المتغير المميَّز، ولذلك لنا أن نختار ما يلائم
+من الحدود. وفي هذه الحالة هما $b$ و~$c$ على الترتيب.
+\begin{oltableau}
+  [\sFmla{\True}{\lforall[x][\formula{A}(x)]}, just=\TAss
+    [\sFmla{\True}{\lforall[x][\formula{A}(x)] \lif
+        \lexists[y][\formula{B}(y)]}, just=\TAss, checked
+      [\sFmla{\True}{\lnot\lexists[y][\formula{B}(y)]}, just=\TAss, checked
+        [\sFmla{\False}{\lexists[y][\formula{B}(y)]},
+          just={\TRule{\True}{\lnot}[3]}
+          [\sFmla{\False}{\lforall[x][\formula{A}(x)]},
+            just={\TRule{\True}{\lif}[2]},checked
+            [\sFmla{\False}{\formula{A}(b)},
+              just={\TRule{\False}{\lforall}[5]}
+              [\sFmla{\True}{\formula{A}(b)},
+                just={\TRule{\True}{\lforall}[1]},close
+              ]
+            ]
+          ]
+          [\sFmla{\True}{\lexists[y][\formula{B}(y)]},
+            just={\TRule{\True}{\lif}[2]},checked
+            [\sFmla{\True}{\formula{B}(c)},
+              just={\TRule{\True}{\lexists}[5]}
+              [\sFmla{\False}{\formula{B}(c)},
+                just={\TRule{\False}{\lexists}[4]},close
+              ]
+            ]
+          ]
+        ]
+      ]
+    ]
+  ]
+\end{oltableau}
+\end{ex}
+
+\begin{prob}
+أنشئ !!{tableau}s مغلقة لما يأتي:
+\begin{enumerate}
+\item $\sFmla{\False}{(\lforall[x][!A(x)] \land \lforall[y][!B(y)])
+\lif \lforall[z][(!A(z) \land !B(z))]}$.
+\item $\sFmla{\False}{(\lexists[x][!A(x)] \lor \lexists[y][!B(y)])
+\lif \lexists[z][(!A(z) \lor !B(z))]}$.
+\item $\sFmla{\True}{\lforall[x][(!A(x) \lif !B)]},
+\sFmla{\False}{\lexists[y][!A(y)] \lif !B}$.
+\item $\sFmla{\True}{\lforall[x][\lnot !A(x)]},
+\sFmla{\False}{\lnot\lexists[x][!A(x)]}$.
+\item $\sFmla{\False}{\lnot\lexists[x][!A(x)] \lif \lforall[x][\lnot
+!A(x)]}$.
+\item $\sFmla{\False}{\lnot\lexists[x][\lforall[y][((!A(x,y) \lif
+\lnot !A(y,y)) \land (\lnot !A(y,y) \lif !A(x,y)))]]}$.
+\end{enumerate}
+\end{prob}
+
+\begin{prob}
+أنشئ !!{tableau}s مغلقة لما يأتي:
+\begin{enumerate}
+\item $\sFmla{\False}{\lnot\lforall[x][!A(x)] \lif \lexists[x][\lnot!A(x)]}$.
+\item $\sFmla{\True}{(\lforall[x][!A(x)] \lif !B)}, \sFmla{\False}{\lexists[y][(!A(y) \lif !B)]}$.
+\item $\sFmla{\False}{\lexists[x][(!A(x) \lif \lforall[y][!A(y)])]}$.
+\end{enumerate}
+\end{prob}
+
+\end{document}

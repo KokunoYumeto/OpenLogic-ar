@@ -1,0 +1,218 @@
+% Part: many-valued-logic
+% Chapter: three-valued-logics
+% Section: multiple-designation
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mvl}{thr}{mul}
+
+\olsection{تمييز قيم غير~$\True$}
+
+كانت مجموعة قيم الصدق المميزة في جميع المنطقات التي رأيناها حتى الآن
+$V^+ = \{\True\}$؛ أي إن الشيء يعد صادقًا إذا وفقط إذا كانت قيمة
+صدقه~$\True$. لكن يمكننا أيضًا أن نعد الشيء صادقًا متى لم يكن
+$\False$. وعندئذ نحصل على منطق بأن نشترط في المصفوفة، مثلًا، أن
+$V^+ = \{\True, \Undef\}$.
+
+\begin{defn}
+يعرّف \emph{منطق المفارقة}~$\LogLP$ بالمصفوفة الآتية:
+\begin{enumerate}
+  \item لغة القضايا القياسية~$\Lang L_0$ بروابطها
+  $\lnot$ و$\land$ و$\lor$ و$\lif$.
+  \item مجموعة قيم الصدق~$V = \{\True, \Undef, \False\}$.
+  \item $\True$ و$\Undef$ مميزتان؛ أي~$V^+ = \{\True, \Undef\}$.
+  \item دوال الصدق هي نفسها في منطق كليني القوي.
+\end{enumerate}
+\end{defn}
+
+\begin{defn}
+يعرّف \emph{منطق اللامعنى} لهالدين~$\LogHal$ بالمصفوفة الآتية:
+\begin{enumerate}
+  \item لغة القضايا القياسية~$\Lang L_0$ بروابطها
+  $\lnot$ و$\land$ و$\lor$ و$\lif$، ورابط ذي موضع واحد~$+$.
+  \item مجموعة قيم الصدق~$V = \{\True, \Undef, \False\}$.
+  \item $\True$ و$\Undef$ مميزتان؛ أي~$V^+ = \{\True, \Undef\}$.
+  \item دوال الصدق هي نفسها في منطق كليني الضعيف، مضافًا إليها مؤثر
+  ``عديم المعنى'':
+  \begin{center}
+    \begin{tabular}{c|c}
+    $\tf{+}$ & \\
+    \hline
+    $\True$ & $\False$ \\
+    $\Undef$ & $\True$ \\
+    $\False$ & $\False$
+    \end{tabular}
+  \end{center}
+\end{enumerate}
+\end{defn}
+
+وعلى خلاف منطقي كليني اللذين تشترك معهما هذه المنطقات في جداول الصدق،
+فإن لهذه المنطقات \emph{بالفعل} تحصيلات منطقية.
+
+\begin{prop}\ollabel{prop:LP-taut-CL} تحصيلات~$\LogLP$ المنطقية هي
+  نفسها تحصيلات منطق القضايا الكلاسيكي.
+\end{prop}
+
+\begin{proof}
+  بحسب \olref[syn][sub]{prop:mvl-cl}، إذا كان
+  $\Entails[\LogLP] !A$، فإن~$\Entails[\LogCL] !A$. ولبيان العكس،
+  نبين أنه إذا وجد~!!a{valuation}~$\pAssign v\colon \PVar \to
+  \{\False, \True, \Undef\}$ بحيث~$\pValue v[\LogKs](!A) = \False$،
+  وجد~!!a{valuation}~$\pAssign {v'}\colon \PVar \to \{\False, \True\}$
+  بحيث~$\pValue {v'}[\LogCL](!A) = \False$. وهذا يثبت النتيجة لـ
+  $\LogLP$، لأن~$\LogKs$ و$\LogLP$ لهما دوال الصدق المميزة نفسها،
+  و$\False$ قيمة الصدق الوحيدة غير المميزة في~$\LogLP$ (وهذا هو
+  الفرق الوحيد بين~$\LogLP$ و$\LogKs$). لذلك إذا كان
+  $\Entails/[\LogLP] !A$، وجد~!!{valuation}~$\pAssign v$ بحيث
+  $\pValue v[\LogLP](!A) = \pValue v[\LogKs](!A) = \False$. وبحسب
+  الدعوى التي نثبتها، يكون~$\pValue{v'}[\LogCL](!A) = \False$؛ أي
+  $\Entails/[\LogCL] !A$.
+  
+  ولإثبات الدعوى، نعرّف أولًا~$\pAssign {v'}$ بـ
+  \[
+    \pAssign {v'}(p) =
+    \begin{cases}
+    \True & \text{إذا كان } \pAssign {v}(p) \in \{\True, \Undef\}\\
+    \False & \text{في غير ذلك}
+  \end{cases}
+  \]
+  ونبين الآن بالاستقراء على~$!A$ أن: (أ)~إذا كان
+  $\pValue v[\LogKs](!A) = \False$، فإن
+  $\pValue {v'}[\LogCL](!A) = \False$؛ و(ب)~إذا كان
+  $\pValue v[\LogKs](!A) = \True$، فإن
+  $\pValue {v'}[\LogCL](!A) = \True$.
+  \begin{enumerate}
+    \item أساس الاستقراء: $!A \ident p$. بحسب
+    \olref[syn][val]{defn:pValue}، إذا كان
+    $\pValue v[\LogKs](!A) = \False$، كان
+    $\pAssign v(p) = \False$؛ ومن ثم، بحسب تعريف~$\pAssign{v'}$،
+    $\pValue {v'}[\LogCL](!A) = \pAssign{v'}(p) = \False$، فتتحقق
+    (أ). وإذا كان~$\pValue v[\LogKs](!A) = \True$، كان
+    $\pAssign v(p) = \True$، ومن ثم
+    $\pValue {v'}[\LogCL](!A) = \pAssign{v'}(p) = \True$، فتتحقق
+    (ب).
+    
+    وفي خطوة الاستقراء، انظر إلى الحالات الآتية:
+    \item $!A \ident \lnot !B$.
+    \begin{enumerate}
+      \item افترض أن~$\pValue v[\LogKs](\lnot!B) = \False$. بحسب
+      تعريف~$\tf{\lnot}[\LogKs]$، يكون
+      $\pValue v[\LogKs](!B) = \True$. وبفرض الاستقراء، الحالة~(ب)،
+      نحصل على~$\pValue {v'}[\LogCL](!B) = \True$؛ ولذلك
+      $\pValue {v'}[\LogCL](\lnot !B) = \False$.
+      \item افترض أن~$\pValue v[\LogKs](\lnot!B) = \True$. بحسب
+      تعريف~$\tf{\lnot}[\LogKs]$، يكون
+      $\pValue v[\LogKs](!B) = \False$. وبفرض الاستقراء، الحالة~(أ)،
+      نحصل على~$\pValue {v'}[\LogCL](!B) = \False$؛ ولذلك
+      $\pValue {v'}[\LogCL](\lnot !B) = \True$.
+    \end{enumerate}
+
+    \item $!A \ident (!B \land !C)$.
+    \begin{enumerate}
+      \item افترض أن~$\pValue v[\LogKs](!B \land !C) = \False$.
+      بحسب تعريف~$\tf{\land}[\LogKs]$، يكون
+      $\pValue v[\LogKs](!B) = \False$ أو
+      $\pValue v[\LogKs](!C) = \False$. وبفرض الاستقراء، الحالة~(أ)،
+      نحصل على~$\pValue {v'}[\LogCL](!B) = \False$ أو
+      $\pValue {v'}[\LogCL](!C) = \False$؛ ولذلك
+      $\pValue {v'}[\LogCL](!B \land !C) = \False$.
+      \item افترض أن~$\pValue v[\LogKs](!B \land !C) = \True$.
+      بحسب تعريف~$\tf{\land}[\LogKs]$، يكون
+      $\pValue v[\LogKs](!B) = \True$ و
+      $\pValue v[\LogKs](!C) = \True$. وبفرض الاستقراء، الحالة~(ب)،
+      نحصل على~$\pValue {v'}[\LogCL](!B) = \True$ و
+      $\pValue {v'}[\LogCL](!C) = \True$؛ ولذلك
+      $\pValue {v'}[\LogCL](!B \land !C) = \True$.
+    \end{enumerate}
+  \end{enumerate}
+
+  الحالتان الأخريان مماثلتان، ونتركهما تمرينين. أو يمكن القول إن
+  البرهان أعلاه يثبت النتيجة لجميع~!!{formula}s التي لا تحتوي إلا
+  $\lnot$ و$\land$. ويمكن عندئذ الاحتكام إلى أن، في كل من~$\LogKs$
+  و$\LogCL$ ولكل~$\pAssign v$،
+  $\pValue v(!B \lor !C) = \pValue v(\lnot(\lnot!B \land \lnot !C))$
+  و$\pValue v(!B \lif !C) = \pValue v(\lnot(!B \land \lnot !C))$.
+\end{proof}
+
+\begin{prob}
+  أكمل إثبات \olref[mvl][thr][mul]{prop:LP-taut-CL}؛ أي أثبت (أ)
+  و(ب) للحالتين~$!A \ident (!B \lor !C)$ و
+  $!A \ident (!B \lif !C)$.
+\end{prob}
+
+\begin{prob}
+أثبت أن كل تحصيل منطقي كلاسيكي تحصيل منطقي في~$\LogHal$.
+\end{prob}
+
+مع أن لهذين المنطقين التحصيلات المنطقية نفسها التي للمنطق الكلاسيكي،
+فإن علاقتي النتيجة فيهما مختلفتان. فمنطق~$\LogLP$ مثلًا
+\emph{متسامح مع التناقض}، إذ~$\lnot p, p \Entails/ q$؛ ولذلك لا يصح
+مبدأ الانفجار~$\lnot !A, !A \Entails !B$ عمومًا. (لكنه يصح لبعض
+حالات~$!A$ و$!B$، كأن تكون~$!B$ تحصيلًا منطقيًا.)
+
+\begin{prob}
+  أي العلاقات الآتية تصح في (أ)~$\LogLP$ وفي (ب)~$\LogHal$؟ أعط
+  جدول صدق لكل منها.
+  \begin{enumerate}
+    \item $p, p \lif q \Entails q$
+    \item $\lnot q, p \lif q \Entails \lnot p$
+    \item $p \lor q, \lnot p \Entails q$
+    \item $\lnot p, p \Entails q$
+    \item $p \Entails p \lor q$
+    \item $p \lif q, q\lif r \Entails p \lif r$
+  \end{enumerate}
+\end{prob}
+
+ماذا يحدث إذا جعلنا~$\Undef$ مميزة في~$\LogLuk[3]$؟
+
+\begin{defn}
+  يعرّف \emph{منطق R-Mingle الثلاثي القيم}~$\LogRM[3]$ بالمصفوفة
+  الآتية:
+  \begin{enumerate}
+    \item لغة القضايا القياسية~$\Lang L_0$ بروابطها
+    $\lfalse$ و$\lnot$ و$\land$ و$\lor$ و$\lif$.
+    \item مجموعة قيم الصدق~$V = \{\True, \Undef, \False\}$.
+    \item $\True$ و$\Undef$ مميزتان؛ أي~$V^+ = \{\True, \Undef\}$.
+    \item دوال الصدق هي نفسها في منطق~\L ukasiewicz~$\LogLuk[3]$.
+  \end{enumerate}
+\end{defn}
+
+\begin{prob}
+  أي العلاقات الآتية تصح في~$\LogRM[3]$؟
+  \begin{enumerate}
+    \item $p, p \lif q \Entails q$
+    \item $p \lor q, \lnot p \Entails q$
+    \item $\lnot p, p \Entails q$
+    \item $p \Entails p \lor q$
+  \end{enumerate}
+\end{prob}
+
+قد تولد جداول صدق مختلفة المنطق نفسه (أي علاقة الاستلزام نفسها) بمجرد
+تغيير القيم المميزة. ويحدث ذلك مثلًا إذا أخذنا في منطق غودل
+$V^+ = \{\True, \Undef\}$ بدل~$\{\True\}$.
+
+\begin{prop}\ollabel{prop:gl-udes}
+  تعرّف المصفوفة ذات~$V = \{\False, \Undef,\True\}$ و
+  $V^+=\{\True, \Undef\}$، ودوال صدق منطق غودل الثلاثي القيم، المنطق
+  الكلاسيكي.
+\end{prop}
+
+\begin{proof}
+  تمرين.
+\end{proof}
+
+\begin{prob}
+  أثبت \olref[mvl][thr][mul]{prop:gl-udes} ببيان أنه، للمنطق~$\Log L$
+  المعرّف مثل منطق غودل عدا أن~$V^+=\{\True,\Undef\}$، إذا كان
+  $\Gamma \Entails/[\Log L] !B$، فإن~$\Gamma \Entails/[\LogCL] !B$.
+  استعمل أفكار \olref[mvl][thr][mul]{prop:LP-taut-CL}، لكن بدل إثبات
+  الخاصيتين (أ) و(ب)، بيّن أن
+  $\pValue v[\LogGod](!A) = \False$ إذا وفقط إذا كان
+  $\pValue {v'}[\LogCL](!A) = \False$ (ومن ثم أن
+  $\pValue v[\LogGod](!A) \in \{\True,\Undef\}$ إذا وفقط إذا كان
+  $\pValue {v'}[\LogCL](!A) = \True$). واشرح لماذا يثبت هذا القضية.
+\end{prob}
+
+\end{document}

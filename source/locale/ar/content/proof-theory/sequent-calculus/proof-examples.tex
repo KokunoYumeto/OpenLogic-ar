@@ -1,0 +1,338 @@
+% Part: proof-theory
+% Chapter: sequent-calculus
+% Section: proof-examples
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{seq}{ex}
+
+\olsection{أمثلة على البراهين}
+
+لإعطاء~!!{proof}s لمتتاليات، يكون من الملائم عادةً أن نبدأ بالمتتالية
+النهائية ونتقدم صعودًا: نختار فيها~!!a{formula} بوصفها~!!{formula} الفاعلة،
+ونكتب مقدمات القاعدة المقابلة فوق المتتالية، ثم نكرر العملية حتى نصل إلى
+بديهيات. افترض، مثلًا، أننا نريد برهنة المتتالية
+\[(!C \land !D) \lif !E \Sequent !C \lif (!D \lif !E)\]
+لننظر في~$!C\lif(!D\lif !E)$: إنها من الصورة~$!A\lif !B$ وتقع في يمين
+المتتالية. وتوحي مطابقة المتتالية كلها مع قاعدة~$\RightR{\lif}$ في
+\Log{G1c}،
+\[\Axiom$ !A, \Gamma \fCenter \Delta, !B$
+\RightLabel{\RightR{\lif}}
+\UnaryInf$ \Gamma \fCenter \Delta, !A \lif !B $
+\DisplayProof\]
+بأن نأخذ~$\Gamma=\{(!C\land !D)\lif !E\}$، و$\Delta=\emptyset$،
+و$!A\ident !C$، و$!B\ident !D\lif !E$. ومن ثم يمكن أن يكون الاستدلال
+الأخير في البرهان هو
+\[\Axiom$ !C, (!C \land !D) \lif !E \fCenter !D \lif !E$
+\RightLabel{\RightR{\lif}}
+\UnaryInf$(!C \land !D) \lif !E \fCenter !C \lif (!D \lif !E)$
+\DisplayProof\]
+وإذا كررنا الفكرة نفسها، مع اتخاذ~$!D\lif !E$ صيغةً فاعلةً، حصلنا
+على
+\[\Axiom$ !D, !C, (!C \land !D) \lif !E \fCenter !E$
+\RightLabel{\RightR{\lif}}
+\UnaryInf$!C, (!C \land !D) \lif !E \fCenter !D \lif !E$
+\RightLabel{\RightR{\lif}}
+\UnaryInf$(!C \land !D) \lif !E \fCenter !C \lif (!D \lif !E)$
+\DisplayProof\]
+وعلينا الآن أن نركز على~$(!C\land !D)\lif !E$ ونستعمل قاعدة
+$\LeftR{\lif}$ في~\Log{G1c}،
+\[\Axiom$ \Gamma \fCenter \Delta, !A$
+\Axiom$ !B, \Gamma \fCenter \Delta$
+\RightLabel{\LeftR{\lif}}
+\BinaryInf$ !A \lif !B, \Gamma \fCenter \Delta$
+\DisplayProof\]
+فيقودنا ذلك إلى
+\[\Axiom$!D, !C \fCenter !E, !C \land !D$
+\Axiom$!D, !C, !E \fCenter !E$
+\RightLabel{\LeftR{\lif}}
+\BinaryInf$ !D, !C, (!C \land !D) \lif !E \fCenter !E$
+\RightLabel{\RightR{\lif}}
+\UnaryInf$!C, (!C \land !D) \lif !E \fCenter !D \lif !E$
+\RightLabel{\RightR{\lif}}
+\UnaryInf$(!C \land !D) \lif !E \fCenter !C \lif (!D \lif !E)$
+\DisplayProof\]
+وإذا جعلنا~!!{formula}~$!C\land !D$ في المتتالية العليا اليسرى رئيسة،
+وأعملنا قاعدة~$\RightR{\land}$، حصلنا على
+\[
+\Axiom$!D, !C \fCenter !E, !C$
+\Axiom$!D, !C \fCenter !E, !D$
+\RightLabel{\RightR{\land}}
+\BinaryInf$!D, !C \fCenter !E, !C \land !D$
+\Axiom$!D, !C, !E \fCenter !E$
+\RightLabel{\LeftR{\lif}}
+\BinaryInf$ !D, !C, (!C \land !D) \lif !E \fCenter !E$
+\RightLabel{\RightR{\lif}}
+\UnaryInf$!C, (!C \land !D) \lif !E \fCenter !D \lif !E$
+\RightLabel{\RightR{\lif}}
+\UnaryInf$(!C \land !D) \lif !E \fCenter !C \lif (!D \lif !E)$
+\DisplayProof
+\]
+سار كل شيء جيدًا حتى الآن. ولاحظ أن ما فعلناه يصلح أيضًا في~\Log{G3c}،
+لأن القواعد التي استعملناها إلى الآن واحدة في~\Log{G1c} و\Log{G3c}.
+وقد وصلنا إلى جزء من~!!a{proof} تحتوي كل متتالية عليا فيه~!!{formula}
+نفسها في اليسار واليمين، لكنها لم تصبح بديهيات تمامًا بعد.
+
+في~\Log{G1c} علينا أن نعطي~!!{proof}s للمتتاليات العليا انطلاقًا من
+بديهيات من الصورة~$!A\Sequent !A$. ويسهل فعل ذلك بقواعد الإضعاف؛ فمثلًا
+يمكن~!!{prove} المتتالية العليا الواقعة أقصى اليسار
+$!D,!C\Sequent !E,!C$ كما يأتي:
+\[
+\Axiom$!C \fCenter !C$
+\RightLabel{\LeftR{\Weakening}}
+\UnaryInf$!D, !C \fCenter !C$
+\RightLabel{\RightR{\Weakening}}
+\UnaryInf$!D, !C \fCenter !E, !C$
+\]
+وهكذا يكون لدينا إجمالًا~!!a{proof} في~\Log{G1c} من الصورة الآتية:
+\[
+\Axiom$!C \fCenter !C$
+\RightLabel{\LeftR{\Weakening}}
+\UnaryInf$!D, !C \fCenter !C$
+\RightLabel{\RightR{\Weakening}}
+\UnaryInf$!D, !C \fCenter !E, !C$
+\Axiom$!D \fCenter !D$
+\RightLabel{\LeftR{\Weakening}}
+\UnaryInf$!D, !C \fCenter !D$
+\RightLabel{\RightR{\Weakening}}
+\UnaryInf$!D, !C \fCenter !E, !D$
+\RightLabel{\RightR{\land}}
+\BinaryInf$!D, !C \fCenter !E, !C \land !D$
+\Axiom$!E \fCenter !E$
+\RightLabel{\LeftR{\Weakening}}
+\UnaryInf$!C, !E \fCenter !E$
+\RightLabel{\LeftR{\Weakening}}
+\UnaryInf$!D, !C, !E \fCenter !E$
+\RightLabel{\LeftR{\lif}}
+\BinaryInf$ !D, !C, (!C \land !D) \lif !E \fCenter !E$
+\RightLabel{\RightR{\lif}}
+\UnaryInf$!C, (!C \land !D) \lif !E \fCenter !D \lif !E$
+\RightLabel{\RightR{\lif}}
+\UnaryInf$(!C \land !D) \lif !E \fCenter !C \lif (!D \lif !E)$
+\DisplayProof
+\]
+لا تعتمد بنية هذا البرهان، ولا ارتفاعه بوجه خاص، على ماهية~!!{formula}s
+$!C$ و$!D$ و$!E$. ويمكننا استبدال هذه الرموز في~!!{proof} أعلاه بأي
+!!{formula}s، ويظل الناتج~!!{proof} في~\Log{G1c}. فالبرهان في
+\Log{G1c}~\emph{تخطيطي}.
+
+أما بديهيات~\Log{G3c} فهي متتاليات من الصورة~$!A,\Gamma\Sequent
+\Delta,!A$، حيث يجب أن تكون~$!A$ ذرية. ولذلك، مع أن
+$!D,!C\Sequent !E,!C$ تبدو بديهية في~\Log{G3c}، إذ
+$\Gamma=\{!D\}$ و$\Delta=\{!E\}$، فإنها لا تكون بديهية \emph{حقًا} إلا
+إذا كانت~$!C$ ذرية بالفعل. ولا يكون جزء البرهان الذي بنيناه برهانًا كاملًا
+في~\Log{G3c} إلا إذا كانت~$!C$ و$!D$ و$!E$~!!{formula}s ذرية.
+
+ومع أننا، بالمعنى الدقيق، لم نبيّن أن
+\[\Log{G3c} \Proves (!C \land !D) \lif !E \Sequent !C \lif (!D \lif
+!E),\]
+فهذا في الممارسة كل ما نحتاج إلى فعله، وكل ما نستطيع فعله. والسبب أن كل
+متتالية من الصورة~$!A,\Gamma\Sequent\Delta,!A$ قابلة للبرهنة في
+\Log{G3c}، حتى إن لم تكن~$!A$ نفسها ذرية. ويمكن بيان ذلك بالاستقراء على
+عمق~$\depth{!A}$ للصيغة~$!A$.
+
+\begin{defn}\ollabel{defn:depth}
+يُعرّف \emph{عمق}~$\depth{!A}$ لـ~!!a{formula} كما يأتي:
+\begin{enumerate}
+  \item إذا كانت~$!A$ ذرية، فإن~$\depth{!A}=0$.
+  \item إذا كانت~$!A\ident\lnot !B$، أو
+    $!A\ident\lforall[x][!B(x)]$، أو
+    $!A\ident\lexists[x][!B(x)]$، فإن
+    $\depth{!A}=\depth{!B}+1$.
+  \item إذا كانت~$!A\ident(!B\land !C)$، أو
+    $!A\ident(!B\lor !C)$، أو $!A\ident(!B\lif !C)$، فإن
+    $\depth{!A}=\max(\depth{!B},\depth{!C})+1$.
+\end{enumerate}
+\end{defn}
+
+ليس من العسير إثبات أن~$\depth{!A(x)}=\depth{!A(t)}$ لأي حد~$t$. والحقيقة
+المهمة لنا أن عمق~!!{formula} الرئيسة في أي قاعدة أكبر دائمًا من عمق
+!!{formula}s الفاعلة. فمثلًا، لدينا:
+\begin{align*}
+\depth{P(x)} = \depth{P(a)} & = 0,\\
+\depth{\lforall[x][P(x)]} & = 1,\\
+\depth{(\lforall[x][P(x)] \lif P(a))} & = \max(1,0) + 1 = 2.
+\end{align*}
+ويمكننا استعمال ذلك لإثبات بعض النتائج بالاستقراء على~$\depth{!A}$، ومنها
+النتيجة الآتية.
+
+\begin{prop}\ollabel{prop:G1c-axioms}
+لكل~$!A$~!!a{proof} في~$\Log{G1c}$ لـ~$!A\Sequent !A$ تكون جميع
+بديهياته ذرية.
+\end{prop}
+
+\begin{proof}
+  بالاستقراء على~$\depth{!A}$. إذا كان~$\depth{!A}=0$، كانت~$!A$ ذرية،
+  وكانت~$!A\Sequent !A$ نفسها~!!{proof} في~\Log{G1c} من الصورة
+  المطلوبة. وإذا كان~$\depth{!A}>0$، كانت~$!A$ مبنية من~!!{formula}s
+  أقل عمقًا، كأن تكون~$!A\ident\lnot !B$، أو~$!A\ident(!B\land !C)$،
+  أو~$!A\ident\lforall[x][!B(x)]$. وفرض الاستقراء هو أنه لكل~$!D$ يحقق
+  $\depth{!D}<\depth{!A}$، لدينا
+  $\Log{G1c}\Proves !D\Sequent !D$ انطلاقًا من بديهيات ذرية.
+
+  إذا كانت~$!A\ident\lnot !B$، كان~$\depth{!B}<\depth{!A}$، وبفرض
+  الاستقراء يوجد~!!a{proof}~$\pi_1$ في~\Log{G1c} من بديهيات ذرية
+  لـ~$!B\Sequent !B$. ويمكن تمديده إلى~!!a{proof} لـ
+  $\lnot !B\Sequent\lnot !B$ كما يأتي:
+  \[
+  \AxiomC{}
+  \RightLabel{$\pi_1$}
+  \Deduce$!B \fCenter !B$
+  \RightLabel{\LeftR{\lnot}}
+  \UnaryInf$\lnot !B, !B \fCenter $
+  \RightLabel{\RightR{\lnot}}
+  \UnaryInf$\lnot !B \fCenter \lnot !B$
+  \DisplayProof
+\]
+
+  وإذا كانت~$!A\ident(!B\land !C)$، كان~$\depth{!B}<\depth{!A}$ و
+  $\depth{!C}<\depth{!A}$. وبفرض الاستقراء يوجد في
+  \Log{G1c}~!!{proof}s~$\pi_1$ و$\pi_2$ من بديهيات ذرية لـ
+  $!B\Sequent !B$ و$!C\Sequent !C$. ويمكن تمديدهما إلى~!!a{proof}
+  لـ~$!B\land !C\Sequent !B\land !C$ كما يأتي:
+  \[
+  \AxiomC{}
+  \RightLabel{$\pi_1$}
+  \Deduce$!B \fCenter !B$
+  \RightLabel{\LeftR{\Weakening}}
+  \UnaryInf$!B, !C \fCenter !B$
+  \RightLabel{\LeftR{\land}}
+  \UnaryInf$!B \land !C, !C \fCenter !B$
+  \RightLabel{\LeftR{\land}}
+  \UnaryInf$!B \land !C, !B \land !C \fCenter !B$
+  \AxiomC{}
+  \RightLabel{$\pi_2$}
+  \Deduce$!C \fCenter !C$
+  \RightLabel{\LeftR{\Weakening}}
+  \UnaryInf$!B, !C \fCenter !C$
+  \RightLabel{\LeftR{\land}}
+  \UnaryInf$!B \land !C, !C \fCenter !C$
+  \RightLabel{\LeftR{\land}}
+  \UnaryInf$!B \land !C, !B \land !C \fCenter !C$
+  \RightLabel{\RightR{\land}}
+  \BinaryInf$!B \land !C, !B \land !C \fCenter !B \land !C$
+  \RightLabel{\LeftR{\Contraction}}
+  \UnaryInf$!B \land !C \fCenter !B \land !C$
+  \DisplayProof
+  \]
+
+  والآن افترض أن~$!A\ident\lforall[x][!B(x)]$. خذ~!!a{constant}~$c$
+  لا يظهر في~$\lforall[x][!B(x)]$. عندئذ
+  $\depth{!B(c)}=\depth{!B(x)}<\depth{!A}$، وبفرض الاستقراء يوجد
+  !!a{proof}~$\pi_1$ في~\Log{G1c} من بديهيات ذرية لـ
+  $!B(c)\Sequent !B(c)$. ويمكن تمديده إلى~!!a{proof} لـ
+  $\lforall[x][!B(x)]\Sequent\lforall[x][!B(x)]$ كما يأتي:
+  \[
+  \AxiomC{}
+  \RightLabel{$\pi_1$}
+  \Deduce$!B(c) \fCenter !B(c)$
+  \RightLabel{\LeftR{\lforall}}
+  \UnaryInf$\lforall[x][!B(x)] \fCenter !B(c)$
+  \RightLabel{\RightR{\lforall}}
+  \UnaryInf$\lforall[x][!B(x)] \fCenter \lforall[x][!B(x)]$
+  \DisplayProof
+\]
+
+  وتُترك الحالات الباقية تمارين.
+\end{proof}
+
+\begin{prob}
+  أكمل برهان~\olref{prop:G1c-axioms} بمعالجة الحالات التي فيها
+  $!A\ident(!B\lor !C)$، و$!A\ident(!B\lif !C)$، و
+  $!A\ident\lexists[x][!B(x)]$.
+\end{prob}
+
+وكان يمكننا، لأغراضنا، أن نستعمل أيضًا~!!{proof} الآتي
+\[
+\AxiomC{}
+\RightLabel{$\pi_1$}
+\Deduce$!B \fCenter !B$
+\RightLabel{\RightR{\lnot}}
+\UnaryInf$\fCenter !B, \lnot !B$
+\RightLabel{\LeftR{\lnot}}
+\UnaryInf$\lnot !B \fCenter \lnot !B$
+\DisplayProof
+\]
+في حالة~$!A\ident\lnot !B$. غير أن هذا لا يصلح في بعض حسابات
+المتتاليات. فحساب المتتاليات الحدسي~\Log{G1i} شبيه بـ~\Log{G1c}، إلا أنه
+يقصر يمين كل متتالية على~!!{formula} واحدة على الأكثر. فإذا كانت
+$\Delta=\emptyset$، كان~!!{proof} الأول~!!a{proof} في~\Log{G1i} أيضًا،
+أما الثاني فلا، لأن إحدى متتالياته تحتوي~$!B$ و$\lnot !B$ معًا في اليمين.
+
+لاحظ أنه لم يكن يمكننا، حتى في~\Log{G1c}، استعمال ترتيب بديل للقواعد في
+حالة~$!A\ident\lforall[x][!B(x)]$. فالشجرة الآتية \emph{ليست}~!!a{proof}:
+  \[
+  \AxiomC{}
+  \RightLabel{$\pi_1$}
+  \Deduce$!B(c) \fCenter !B(c)$
+  \RightLabel{\RightR{\lforall}}
+  \UnaryInf$!B(c) \fCenter \lforall[x][!B(x)]$
+  \RightLabel{\LeftR{\lforall}}
+  \UnaryInf$\lforall[x][!B(x)] \fCenter \lforall[x][!B(x)]$
+  \DisplayProof
+\]
+لأنها تخرق شرط المتغير المميز في~$\RightR{\lforall}$.
+
+\begin{prop}\ollabel{prop:G3c-axioms}
+كل متتالية من الصورة~$!A,\Gamma\Sequent\Delta,!A$، حيث إن~$!A$
+\emph{ليست بالضرورة} ذرية، قابلة للبرهنة في~\Log{G3c}.
+\end{prop}
+
+\begin{proof}
+الحجة شديدة الشبه ببرهان~\olref{prop:G1c-axioms}، لكن يجب توخي الدقة في
+فرض الاستقراء. والحالة التي فيها~$n=\depth{!A}=0$ سهلة مرة أخرى: إذا كان
+$n=0$، كانت~$!A$ ذرية، وكانت~$!A,\Gamma\Sequent\Delta,!A$ بديهية في
+\Log{G3c}.
+
+افترض الآن أن~$n>0$. ونميز الحالات من جديد. فرض الاستقراء هو: لكل~$!D$
+يحقق~$\depth{!D}<n$، ولكل~$\Pi$ و$\Lambda$، لدينا
+$\Log{G3c}\Proves !D,\Pi\Sequent\Lambda,!D$. وهذه حالة
+$!A\ident(!B\land !C)$. نستعمل فرض الاستقراء مرتين: أولًا مع~$!D=!B$،
+و$\Pi=!C,\Gamma$، و$\Lambda=\Delta$، فنحصل على~!!a{proof}~$\pi_1$ لـ
+$!B,!C,\Gamma\Sequent\Delta,!B$؛ وثانيًا مع~$!D=!C$،
+و$\Pi=!B,\Gamma$، و$\Lambda=\Delta$، فنحصل على~!!a{proof}~$\pi_2$ لـ
+$!B,!C,\Gamma\Sequent\Delta,!C$. وهذا~!!{proof} لـ
+$!B\land !C,\Gamma\Sequent\Delta,!B\land !C$:
+\[
+\AxiomC{}
+\RightLabel{$\pi_1$}
+\Deduce$!B, !C, \Gamma \fCenter \Delta, !B$
+\RightLabel{\LeftR{\land}}
+\UnaryInf$!B \land !C, \Gamma \fCenter \Delta, !B$
+\AxiomC{}
+\RightLabel{$\pi_2$}
+\Deduce$!B, !C, \Gamma \fCenter \Delta, !C$
+\RightLabel{\LeftR{\land}}
+\UnaryInf$!B \land !C, \Gamma \fCenter \Delta, !C$
+\RightLabel{\RightR{\land}}
+\BinaryInf$!B \land !C, \Gamma \fCenter \Delta, !B \land !C$
+\DisplayProof
+\]
+
+وفي حالة~$!A\ident\lforall[x][!B(x)]$، اختر~!!a{constant}~$c$ لا يظهر
+في~$\lforall[x][!B(x)]$ ولا~$\Gamma$ ولا~$\Delta$. طبّق فرض الاستقراء
+مع~$!D=!B(c)$، و$\Pi=\lforall[x][!B(x)],\Gamma$، و$\Lambda=\Delta$.
+فنحصل على~!!a{proof}~$\pi_1$ لـ
+$!B(c),\lforall[x][!B(x)],\Gamma\Sequent\Delta,!B(c)$، ومنه نحصل على:
+\[
+\AxiomC{}
+\RightLabel{$\pi_1$}
+\Deduce$!B(c), \lforall[x][!B(x)], \Gamma \fCenter \Delta, !B(c)$
+\RightLabel{\LeftR{\lforall}}
+\UnaryInf$\lforall[x][!B(x)], \Gamma \fCenter \Delta, !B(c)$
+\RightLabel{\RightR{\lforall}}
+\UnaryInf$\lforall[x][!B(x)], \Gamma \fCenter \Delta, \lforall[x][!B(x)]$
+\DisplayProof
+\]
+ويتحقق شرط المتغير المميز في~$\RightR{\lforall}$ بفضل طريقة اختيارنا
+لـ~$c$.
+\end{proof}
+
+\begin{prob}
+  واصل برهان~\olref{prop:G3c-axioms} بمعالجة الحالتين اللتين فيهما
+  $!A\ident(!B\lif !C)$ و$!A\ident\lexists[x][!B(x)]$.
+\end{prob}
+
+\end{document}

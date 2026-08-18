@@ -1,0 +1,140 @@
+% Part: incompleteness
+% Chapter: incompleteness-provability
+% Section: rosser-thm
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{inp}{ros}
+
+\olsection{مبرهنة روسر}
+
+هل يمكننا تعديل برهان غودل لنحصل على نتيجة أقوى، فنستبدل
+«متسقة-$\omega$» بمجرد «متسقة»؟ الجواب «نعم»، باستعمال حيلة اكتشفها
+روسر. وتتمثل حيلة روسر في استعمال محمول !!{derivability} «معدّل» هو
+$\ORProv_T(y)$ بدلًا من~$\OProv[\Th{T}](y)$.
+
+\begin{thm}
+\ollabel{thm:rosser}
+لتكن $\Th{T}$ أي نظرية متسقة و!!{axiomatizable} تمتدّ~$\Th{Q}$.
+عندئذ لا تكون $\Th{T}$ تامة.
+\end{thm}
+
+\begin{proof}
+تذكّر أن $\OProv[\Th{T}](y)$ تعرّف بالصورة
+$\lexists[x][\OPrf[\Th{T}](x,y)]$، حيث تمثل
+$\OPrf[\Th{T}](x,y)$ العلاقة القابلة للقرار التي تصدق إذا وفقط إذا
+كان $x$ عدد غودل لـ!!a{derivation} للـ!!{sentence} ذات عدد غودل~$y$.
+والعلاقة التي تصدق بين $x$ و$y$ إذا كان $x$ عدد غودل
+لـ\emph{دحض} الجملة ذات عدد غودل~$y$ قابلة للقرار أيضًا. ولتكن
+$\fn{not}(x)$ الدالة العودية البدائية التي تفعل الآتي: إذا كان $x$
+شفرة صيغة~$!A$، كانت $\fn{not}(x)$ شفرة~$\lnot !A$. عندئذ تصدق
+$\Refut[\Th{T}](x,y)$ إذا وفقط إذا صدقت
+$\Prf[\Th{T}](x,\fn{not}(y))$. ولتمثلها
+$\ORefut[\Th{T}](x,y)$. فإذا كان
+$\Th{T}\Proves\lnot !A$، وكانت $\delta$ !!{derivation} مناظرًا، فإن
+$\Th{Q}\Proves\ORefut[\Th{T}](\gn{\delta},\gn{!A})$. ونعرّف
+$\ORProv[\Th{T}](y)$ بالصورة
+\[
+\lexists[x][(\OPrf[\Th{T}](x,y) \land \lforall[z][(z < x \lif \lnot
+  \ORefut[\Th{T}](z,y))])].
+\]
+على وجه التقريب، تقول $\ORProv[\Th{T}](y)$: «يوجد برهان لـ$y$ في
+$\Th{T}$، ولا يوجد دحض أقصر لـ$y$». وإذا افترضنا أن $\Th{T}$ متسقة،
+صدقت $\ORProv[\Th{T}](y)$ في الأعداد نفسها التي تصدق فيها
+$\OProv[\Th{T}](y)$؛ لكن لهما، من وجهة نظر \emph{قابلية الإثبات} في
+$\Th{T}$ (وقد عرفنا الآن أن ثمة فرقًا بين الصدق وقابلية الإثبات!)،
+خصائص مختلفة. فإذا كانت $\Th{T}$ \emph{غير} متسقة، فإنهما \emph{لا} يصدقان في الأعداد
+نفسها!{} (تقرأ $\ORProv[\Th{T}](y)$ غالبًا: «$y$ قابلة للإثبات وفق
+روسر». لكن قابلية الإثبات وفق روسر ليست، كما ناقشنا للتو، نوعًا خاصًا
+من قابلية الإثبات---ففي النظريات غير المتسقة توجد !!{sentence}s قابلة
+للإثبات وليست قابلة للإثبات وفق روسر---ولذلك قد تكون هذه القراءة
+مضللة. ويمكنك، تجنبًا للالتباس، أن تقرأها بدلًا من ذلك: «$y$ قابلة
+للشَّمْوَلة».)
+
+بحسب لمّة النقطة الثابتة، توجد صيغة~$!R_\Th{T}$ بحيث
+\begin{equation}
+  \Th{Q} \Proves !R_\Th{T} \liff \lnot \ORProv[\Th{T}](\gn{!R_\Th{T}}).
+  \ollabel{RT}
+\end{equation}
+وعلى خلاف برهان \olref[1in]{thm:first-incompleteness}، ندعي هنا أنه
+إذا كانت $\Th{T}$ متسقة، فلا يكون في وسع $\Th{T}$ !!{derive} $!R_\Th{T}$،
+ولا يكون في وسع $\Th{T}$ أيضًا !!{derive} $\lnot !R_\Th{T}$. (وبعبارة أخرى، لا نحتاج إلى
+افتراض الاتساق-$\omega$.)
+
+لنبيّن أولًا أن $\Th{T}\Proves/ !R_{\Th{T}}$. افترض العكس؛ فعندئذ
+يوجد !!a{derivation} لـ$!R_{\Th{T}}$ من~$\Th{T}$، وليكن $n$ عدد
+غودل له. عندئذ
+$\Th{Q}\Proves\OPrf[\Th{T}](\num{n},\gn{!R_{\Th{T}}})$، لأن
+$\OPrf[\Th{T}]$ تمثل $\Prf[\Th{T}]$ في~$\Th{Q}$. وكذلك، لكل
+$k<n$، لا يكون $k$ عدد غودل لـ!!a{derivation} لـ$\lnot !R_{\Th{T}}$،
+لأن $\Th{T}$ متسقة. ومن ثم، لكل $k<n$،
+$\Th{Q}\Proves\lnot\ORefut[\Th{T}](\num{k},\gn{!R_{\Th{T}}})$.
+وبحسب \olref[req][min]{lem:less-nsucc}،
+$\Th{Q}\Proves\lforall[z][(z<\num{n}\lif
+\lnot\ORefut[\Th{T}](z,\gn{!R_{\Th{T}}}))]$. ولذلك
+\[
+\Th{Q} \Proves \lexists[x][(\OPrf[\Th{T}](x,\gn{!R_{\Th{T}}}) \land \lforall[z][(z
+    < x \lif \lnot \ORefut[\Th{T}](z,\gn{!R_{\Th{T}}}))])],
+\]
+لكن هذه ليست إلا $\ORProv[\Th{T}](\gn{!R_{\Th{T}}})$. وبحسب
+\olref{RT}، $\Th{Q}\Proves\lnot !R_{\Th{T}}$. ولما كانت $\Th{T}$
+تمتدّ $\Th{Q}$، فإن $\Th{T}\Proves\lnot !R_{\Th{T}}$ أيضًا. وقد
+افترضنا أن $\Th{T}\Proves !R_{\Th{T}}$، فتكون $\Th{T}$ غير متسقة،
+خلافًا لفرض المبرهنة.
+
+لنبيّن الآن أن $\Th{T}\Proves/\lnot !R_{\Th{T}}$. افترض العكس مرة
+أخرى، وافترض أن $n$ عدد غودل لـ!!a{derivation} لـ$\lnot !R_{\Th{T}}$.
+عندئذ تصدق $\Refut[\Th{T}](n,\Gn{!R_{\Th{T}}})$، ولما كانت
+$\ORefut[\Th{T}]$ تمثل $\Refut[\Th{T}]$ في~$\Th{Q}$، فإن
+$\Th{Q}\Proves\ORefut[\Th{T}](\num{n},\gn{!R_{\Th{T}}})$. وسنبيّن
+مرة أخرى أن $\Th{T}$ تكون عندئذ غير متسقة، لأنها تستطيع أيضًا !!{derive}
+$!R_{\Th{T}}$. ولما كان
+\begin{align*}
+\Th{Q} & \Proves !R_{\Th{T}} \liff \lnot \ORProv[\Th{T}](\gn{!R_{\Th{T}}}),
+\intertext{ولما كانت $\Th{T}$ تمتدّ~$\Th{Q}$، فيكفي أن نبيّن أن}
+\Th{Q} & \Proves \lnot \ORProv[\Th{T}](\gn{!R_{\Th{T}}}).
+\end{align*}
+تكون الـ!!{sentence} $\lnot\ORProv[\Th{T}](\gn{!R_{\Th{T}}})$، أي
+\begin{align*}
+  \lnot & \lexists[x][(\OPrf[\Th{T}](x,\gn{!R_{\Th{T}}}) \land
+    \lforall[z][(z < x \lif \lnot \ORefut[\Th{T}](z,\gn{!R_{\Th{T}}}))])],
+  \intertext{مكافئة منطقيًا لـ}
+  & \lforall[x][(\OPrf[\Th{T}](x,\gn{!R_{\Th{T}}}) \lif
+    \lexists[z][(z < x \land \ORefut[\Th{T}](z,\gn{!R_{\Th{T}}}))])].
+\end{align*}
+سنستدل على نحو غير صوري بالمنطق، مستعملين حقائق عما !!{derive}s
+$\Th{Q}$. افترض أن $x$ اعتباطي وأن
+$\OPrf[\Th{T}](x,\gn{!R_{\Th{T}}})$. نعلم سلفًا أن
+$\Th{T}\Proves/ !R_{\Th{T}}$، ولذلك، لكل~$k$،
+$\Th{Q}\Proves\lnot\OPrf[\Th{T}](\num{k},\gn{!R_{\Th{T}}})$.
+ومن ثم ينتج، لكل~$k$، أن $\eq/[x][\num{k}]$. وعلى وجه الخصوص لدينا
+(أ) $\eq/[x][\num{n}]$. ولدينا أيضًا
+$\lnot(\eq[x][\num{0}]\lor\eq[x][\num{1}]\lor\dots\lor
+\eq[x][\num{n-1}])$، ومن ثم، بحسب
+\olref[req][min]{lem:less-nsucc}، (ب) $\lnot(x<\num{n})$. وبحسب
+\olref[req][min]{lem:trichotomy}، $\num{n}<x$. ولما كان
+$\Th{Q}\Proves\ORefut[\Th{T}](\num{n},\gn{!R_{\Th{T}}})$، كان
+$\num{n}<x\land\ORefut[\Th{T}](\num{n},\gn{!R_{\Th{T}}})$، ومن ذلك
+نحصل على
+$\lexists[z][(z<x\land\ORefut[\Th{T}](z,\gn{!R_{\Th{T}}}))]$.
+ولما كان $x$ اعتباطيًا، نحصل، كما هو مطلوب، على
+\[
+\lforall[x][(\OPrf[\Th{T}](x,\gn{!R_{\Th{T}}}) \lif
+  \lexists[z][(z < x \land \ORefut[\Th{T}](z,\gn{!R_{\Th{T}}}))])].
+\]
+\end{proof}
+
+\begin{prob}
+تسمى مجموعتان $A$ و$B$ من الأعداد الطبيعية \emph{غير قابلتين للفصل
+حسابيًا} إذا لم توجد مجموعة~$X$ !!{decidable} بحيث
+$A\subseteq X$ و$B\subseteq\Complement{X}$ (حيث $\Complement{X}$
+هي المتممة $\Nat\setminus X$ لـ~$X$). ولتكن $\Th{T}$ امتدادًا متسقًا
+و!!{axiomatizable} لـ$\Th{Q}$. افترض أن $A$ مجموعة أعداد غودل
+للـ!!{sentence}s القابلة للإثبات في~$\Th{T}$، وأن $B$ مجموعة أعداد
+غودل للجمل القابلة للدحض في~$\Th{T}$. أثبت أن $A$ و$B$ غير قابلتين للفصل
+حسابيًا.
+\end{prob}
+
+\end{document}

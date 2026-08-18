@@ -1,0 +1,161 @@
+% part: intuitionistic-logic
+% chapter: soundness-completeness
+% section: soundness-nd
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{sc}{snd}
+
+\olsection{سلامة الاستنباط الطبيعي}
+
+سنبرهن الآن سلامة الاستنباط الطبيعي بالنسبة إلى الدلالات العلائقية؛ أي
+سنبيّن أنه إذا كانت !!a{formula} قابلةً لل!!{derivable} من مجموعة من
+الافتراضات، فإن مجموعة الافتراضات تستلزم تلك ال!!{formula}.
+
+\begin{thm}[السلامة]
+  \ollabel{thm:soundness}
+  إذا كان~$\Gamma \Proves !A$، كان~$\Gamma \Entails !A$.
+\end{thm}
+
+\begin{proof}
+  نثبت أنه إذا كان~$\Gamma \Proves !A$، كان~$\Gamma \Entails !A$.
+  والبرهان بالاستقراء في !!{derivation}~$!A$ من~$\Gamma$.
+
+  \begin{enumerate}
+  \item إذا كانت ال!!{derivation} لا تتألف إلا من الافتراض~$!A$، كان
+    $!A \Proves !A$، وعلينا أن نثبت~$!A \Entails !A$. افترض
+    $\mSat{M}{!A}[w]$. عندئذ يتحقق~$\mSat{M}{!A}[w]$ بداهةً.
+
+  \item تنتهي ال!!{derivation} بـ~$\Intro{\land}$:
+    \iftag{probAnd}{تمرين.}{تبين !!{derivation}s المقدمتين، أي~$!B$ من
+      الافتراضات غير ال!!{undischarged}~$\Gamma$ و$!C$ من الافتراضات
+      غير ال!!{undischarged}~$\Delta$، أن~$\Gamma \Proves !B$ و
+      $\Delta \Proves !C$. وبفرض الاستقراء نحصل على
+      $\Gamma \Entails !B$ و$\Delta \Entails !C$. وعلينا أن نثبت
+      $\Gamma \cup \Delta \Entails !B \land !C$، لأن الافتراضات غير
+      ال!!{undischarged} في ال!!{derivation} كلها هي افتراضات~$\Gamma$
+      مع افتراضات~$\Delta$. فافترض
+      $\mSat{M}{\Gamma \cup \Delta}[w]$. عندئذ
+      $\mSat{M}{\Gamma}[w]$ أيضًا. ولأن~$\Gamma \Entails !B$، يكون
+      $\mSat{M}{!B}[w]$. وبالمثل~$\mSat{M}{!C}[w]$. ومن ثم
+      $\mSat{M}{!B \land !C}[w]$.}
+
+  \item تنتهي ال!!{derivation} بـ~$\Elim{\land}$:
+    \iftag{probAnd}{تمرين.}{تبين !!{derivation} المقدمة
+      $!B \land !C$ من الافتراضات غير ال!!{undischarged}~$\Gamma$ أن
+      $\Gamma \Proves !B \land !C$. وبفرض الاستقراء،
+      $\Gamma \Entails !B \land !C$. وعلينا أن نثبت
+      $\Gamma \Entails !B$. فافترض~$\mSat{M}{\Gamma}[w]$. ولأن
+      $\Gamma \Entails !B \land !C$، يكون
+      $\mSat{M}{!B \land !C}[w]$، ومن ثم~$\mSat{M}{!B}[w]$. وبالمثل،
+      إذا كانت نتيجة~$\Elim\land$ هي~$!C$، كان
+      $\Gamma \Entails !C$.}
+
+  \item تنتهي ال!!{derivation} بـ~$\Intro{\lor}$:
+    \iftag{probOr}{تمرين.}{افترض أن المقدمة هي~$!B$، وأن الافتراضات
+      غير ال!!{undischarged} في ال!!{derivation} المنتهية بـ~$!B$ هي
+      $\Gamma$. عندئذ~$\Gamma \Proves !B$، وبفرض الاستقراء
+      $\Gamma \Entails !B$. وعلينا أن نثبت
+      $\Gamma \Entails !B \lor !C$. افترض~$\mSat{M}{\Gamma}[w]$.
+      ولأن~$\Gamma \Entails !B$، يكون~$\mSat{M}{!B}[w]$، ومن ثم أيضًا
+      $\mSat{M}{!B \lor !C}[w]$. وبالمثل، إذا كانت المقدمة~$!C$، كان
+      $\Gamma \Entails !C$.}
+
+  \item تنتهي ال!!{derivation} بـ~$\Elim{\lor}$:
+    \iftag{probOr}{تمرين.}{ال!!{derivation}s المنتهية بالمقدمات هي
+      اشتقاق~$!B \lor !C$ من الافتراضات غير ال!!{undischarged}
+      $\Gamma$، واشتقاق~$!D$ من الافتراضات غير
+      ال!!{undischarged}~$\Delta_1 \cup \{!B\}$، واشتقاق~$!D$
+      من الافتراضات غير ال!!{undischarged}~
+      $\Delta_2 \cup \{!C\}$. ومن ثم لدينا
+      $\Gamma \Proves !B \lor !C$ و
+      $\Delta_1 \cup \{!B\} \Proves !D$ و
+      $\Delta_2 \cup \{!C\} \Proves !D$. وبفرض الاستقراء،
+      $\Gamma \Entails !B \lor !C$ و
+      $\Delta_1 \cup \{!B\} \Entails !D$ و
+      $\Delta_2 \cup \{!C\} \Entails !D$. وعلينا أن نثبت
+      $\Gamma \cup \Delta_1 \cup \Delta_2 \Entails !D$.
+
+    افترض~$\mSat{M}{\Gamma \cup \Delta_1 \cup \Delta_2}[w]$. عندئذ
+    $\mSat{M}{\Gamma}[w]$، ولأن~$\Gamma \Entails !B \lor !C$، يكون
+    $\mSat{M}{!B \lor !C}[w]$. وبحسب تعريف~$\mSat{M}{}$، إما أن
+    $\mSat{M}{!B}[w]$ أو أن~$\mSat{M}{!C}[w]$. فنميز حالتين:
+    (أ)~$\mSat{M}{!B}[w]$. عندئذ
+    $\mSat{M}{\Delta_1 \cup \{!B\}}[w]$. ولأن
+    $\Delta_1 \cup \{!B\} \Entails !D$، يكون~$\mSat{M}{!D}[w]$.
+    (ب)~$\mSat{M}{!C}[w]$. عندئذ
+    $\mSat{M}{\Delta_2 \cup \{!C\}}[w]$. ولأن
+    $\Delta_2 \cup \{!C\} \Entails !D$، يكون~$\mSat{M}{!D}[w]$.
+    ففي الحالتين~$\mSat{M}{!D}[w]$، كما أردنا.}
+
+  \item تنتهي ال!!{derivation} بـ~$\Intro{\lif}$، ونتيجتها
+    $!B \lif !C$. والمقدمة هي~$!C$، ولل!!{derivation} المنتهية
+    بالمقدمة افتراضات غير !!{undischarged} هي
+    $\Gamma \cup \{!B\}$. ومن ثم
+    $\Gamma \cup \{!B\} \Proves !C$، وبفرض الاستقراء
+    $\Gamma \cup \{!B\} \Entails !C$. وعلينا أن نثبت
+    $\Gamma \Entails !B \lif !C$.
+
+    افترض~$\mSat{M}{\Gamma}[w]$. نريد أن نثبت أنه لكل~$w'$ بحيث
+    $Rww'$، إذا كان~$\mSat{M}{!B}[w']$، كان~$\mSat{M}{!C}[w']$.
+    فافترض~$Rww'$ و$\mSat{M}{!B}[w']$. وبحسب
+    \olref[sem][rel]{prop:true-monotonic}،
+    $\mSat{M}{\Gamma}[w']$. ولأن
+    $\Gamma \cup \{!B\} \Entails !C$، يكون~$\mSat{M}{!C}[w']$،
+    وهو المطلوب.
+
+  \item تنتهي ال!!{derivation} بـ~$\Elim{\lif}$ ونتيجتها~$!C$.
+    والمقدمتان هما~$!B \lif !C$ و$!B$، ولهما !!{derivation}s من
+    الافتراضات غير ال!!{undischarged}~$\Gamma$ و$\Delta$. ومن ثم
+    $\Gamma \Proves !B \lif !C$ و$\Delta \Proves !B$. وبفرض
+    الاستقراء،~$\Gamma \Entails !B \lif !C$ و
+    $\Delta \Entails !B$. وعلينا أن نثبت
+    $\Gamma \cup \Delta \Entails !C$.
+
+    افترض~$\mSat{M}{\Gamma \cup \Delta}[w]$. ولأن
+    $\mSat{M}{\Gamma}[w]$ و$\Gamma \Entails !B \lif !C$، يكون
+    $\mSat{M}{!B \lif !C}[w]$. ويعني ذلك بالتعريف أنه لكل~$w'$ بحيث
+    $Rww'$، إذا كان~$\mSat{M}{!B}[w']$، كان~$\mSat{M}{!C}[w']$.
+    ولأن~$R$ انعكاسية، يكون~$w$ من بين قيم~$w'$ التي تحقق~$Rww'$؛
+    أي إذا كان~$\mSat{M}{!B}[w]$، كان~$\mSat{M}{!C}[w]$. ولأن
+    $\mSat{M}{\Delta}[w]$ و$\Delta \Entails !B$، يكون
+    $\mSat{M}{!B}[w]$. ومن ثم~$\mSat{M}{!C}[w]$، كما أردنا.
+
+  \item تنتهي ال!!{derivation} بـ~$\FalseInt$ ونتيجتها~$!A$.
+    والمقدمة هي~$\lfalse$، والافتراضات غير ال!!{undischarged} في
+    !!{derivation} المقدمة هي~$\Gamma$. ومن ثم
+    $\Gamma \Proves \lfalse$. وبفرض الاستقراء،
+    $\Gamma \Entails \lfalse$. وعلينا أن نثبت
+    $\Gamma \Entails !A$.
+
+    نبرهن ذلك بطريق غير مباشر. إذا كان~$\Gamma \Entails/ !A$، وُجد
+    نموذج~$\mModel{M}$ وعالم~$w$ بحيث~$\mSat{M}{\Gamma}[w]$ و
+    $\mSat/{M}{!A}[w]$. ولأن~$\Gamma \Entails \lfalse$، يكون
+    $\mSat{M}{\lfalse}[w]$. لكن ذلك محال، إذ بحسب التعريف
+    $\mSat/{M}{\lfalse}[w]$. ومن ثم~$\Gamma \Entails !A$.
+  \item تنتهي ال!!{derivation} بـ~$\Intro\lnot$: تمرين.
+  \item تنتهي ال!!{derivation} بـ~$\Elim\lnot$: تمرين.
+  \end{enumerate}
+\end{proof}
+
+\begin{prob}
+  أكمل برهان~\olref[int][sc][snd]{thm:soundness}. وفي حالتي
+  $\Intro\lnot$ و$\Elim\lnot$، استعمل تعريف
+  $\mSat{M}{\lnot !A}[w]$ في
+  \olref[int][sem][rel]{defn:true-at-w}؛ أي لا تعامل
+  $\lnot !A$ على أنها معرّفة بـ~$!A \lif \lfalse$.
+\end{prob}
+
+\begin{prob}
+  بيّن أن ال!!{formula}s الآتية غير قابلة لل!!{derivable} في المنطق
+  الحدسي:
+  \begin{enumerate}
+    \item $(!A \lif !B) \lor (!B \lif !A)$
+    \item $(\lnot\lnot !A \lif !A) \lif (!A \lor \lnot !A)$
+    \item $(!A \lif !B \lor !C) \lif \bigl((!A \lif !B)\lor(!A \lif !C)\bigr)$
+  \end{enumerate}
+\end{prob}
+
+\end{document}

@@ -1,0 +1,107 @@
+% Part: many-valued-logic
+% Chapter: infinite-valued-logics
+% Section: lukasiewicz
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mvl}{inf}{luk}
+
+\olsection{منطق~\L ukasiewicz}
+
+\begin{editorial}
+  هذه ``بذرة'' قصيرة لقسم عن منطق~\L ukasiewicz اللانهائي القيم.
+\end{editorial}
+
+\begin{defn}\ollabel{def:lukasiewicz} يعرّف منطق~\L ukasiewicz
+اللانهائي القيم~$\LogLuk[\infty]$ بالمصفوفة الآتية:
+\begin{enumerate}
+  \item لغة القضايا القياسية~$\Lang L_0$ بروابطها
+  $\lnot$ و$\land$ و$\lor$ و$\lif$.
+  \item مجموعة قيم الصدق~$V_\infty$.
+  \item $1$ هي القيمة المميزة الوحيدة؛ أي~$V^+ = \{1\}$.
+  \item تعطي الدوال الآتية دوال الصدق:
+  \begin{align*}
+    \tf{\lnot}[\LogLuk](x) & = 1 - x\\
+    \tf{\land}[\LogLuk](x,y) & = \min(x,y)\\
+    \tf{\lor}[\LogLuk](x,y) & = \max(x,y)\\
+    \tf{\lif}[\LogLuk](x,y) & = \min(1,1-(x-y)) = \begin{cases}
+      1 & \text{إذا كان } x \le y\\
+      1-(x-y) & \text{في غير ذلك.}
+    \end{cases}
+    \end{align*}
+\end{enumerate}
+ويعرّف منطق~\L ukasiewicz ذو~$m$ من القيم بالطريقة نفسها، عدا أن
+$V = V_m$.
+\end{defn}
+
+\begin{prop}
+  المنطق~$\LogLuk[3]$ المعرّف في \olref[thr][luk]{def:lukasiewicz}
+  هو نفسه~$\LogLuk[3]$ المعرّف في \olref{def:lukasiewicz}.
+\end{prop}
+
+\begin{proof}
+  يتضح ذلك بمقارنة جداول صدق الروابط المعطاة في
+  \olref[thr][luk]{def:lukasiewicz} بجداول الصدق التي تحددها المعادلات
+  في \olref{def:lukasiewicz}:
+  \begin{center}
+    \begin{tabular}{c|c}
+      $\tf{\lnot}$ & \\
+      \hline
+      $1$ & $0$ \\
+      $1/2$ & $1/2$ \\
+      $0$ & $1$
+    \end{tabular}
+    \quad
+    \begin{tabular}{c|ccc}
+      $\tf{\land}[\LogLuk[3]]$ & $1$ & $1/2$ & $0$ \\
+      \hline
+      $1$ & $1$ & $1/2$ & $0$ \\
+      $1/2$ & $1/2$ & $1/2$ & $0$\\
+      $0$ & $0$ & $0$ & $0$
+    \end{tabular}
+    \\[2ex]
+    \begin{tabular}{c|ccc}
+      $\tf{\lor}[\LogLuk[3]]$ & $1$ & $1/2$ & $0$ \\
+      \hline
+      $1$ & $1$ & $1$ & $1$ \\
+      $1/2$ & $1$ & $1/2$ & $1/2$ \\
+      $0$ & $1$ & $1/2$ & $0$
+    \end{tabular}
+    \quad
+    \begin{tabular}{c|ccc}
+      $\tf{\lif}[\LogLuk[3]]$ & $1$ & $1/2$ & $0$ \\
+      \hline
+      $1$ & $1$ & $1/2$ & $0$ \\
+      $1/2$ & $1$ & $1$ & $1/2$  \\
+      $0$ & $1$ & $1$ & $1$
+    \end{tabular}
+  \end{center}
+\end{proof}
+
+\begin{prop}\ollabel{prop:luk-infty-m}
+  إذا كان~$\Gamma \Entails[\LogLuk[\infty]] !B$، فإن
+  $\Gamma \Entails[\LogLuk[m]] !B$ لكل~$m \ge 2$.
+\end{prop}
+
+\begin{proof}
+  تمرين.
+\end{proof}
+
+\begin{prob}
+  أثبت \olref[mvl][inf][luk]{prop:luk-infty-m}.
+\end{prob}
+
+وفي الواقع يصح العكس أيضًا.
+
+منطق~\L ukasiewicz اللانهائي القيم هو أشهر منطق ضبابي. وفي أدبيات
+المنطق الضبابي يعرّف الشرط غالبًا بـ$\lnot !A \lor !B$. وعندئذ تكون
+النتيجة منطق كليني قويًا لانهائي القيم.
+
+\begin{prob}
+  بين أن~$(p \lif q) \lor (q \lif p)$ تحصيل منطقي في
+  $\LogLuk[\infty]$.
+\end{prob}
+
+\end{document}

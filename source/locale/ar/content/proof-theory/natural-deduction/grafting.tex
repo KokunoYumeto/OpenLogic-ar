@@ -1,0 +1,81 @@
+% Part: proof-theory
+% Chapter: natural-deduction
+% Section: grafting
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{nat}{gra}
+
+\olsection{تطعيم \usetoken{P}{proof}}
+
+!!^{proof}s في~\Log{N1c} و\Log{N1i} هي~!!{proof}s لـ!!{formula}s~$!A$
+من فروض~$!B$. افترض أن لـ$!B$ نفسها~!!a{proof}. فكيف نضم~!!{proof}
+$!B$ إلى~!!{proof}~$!A$ من~$!B$ لنحصل على~!!a{proof} لـ$!A$ لا
+يستخدم الفرض~$!B$؟
+
+أحد الخيارات أن نحذف الفرض~$!B$ من~!!{proof}~$!A$ بتطبيق
+$\Intro{\lif}$. ثم يمكننا ضم~!!{proof} الناتج لـ$!B \lif !A$ إلى
+!!{proof}~$!B$ لنحصل على
+\[
+\AxiomC{$\Discharge{!B}{x}$}
+\DeduceC{$!A$}
+\DischargeRule{\Intro{\lif}}{x}
+\UnaryInfC{$!B \lif !A$}
+\AxiomC{}
+\DeduceC{$!B$}
+\RightLabel{\Elim{\lif}}
+\BinaryInfC{$!A$}
+\DisplayProof
+\]
+وهذا مباشر، لكنه غير أنيق بعض الشيء: فلماذا نُدخل~$\lif$ لمجرد حذفه
+فورًا؟ ينبغي أن يكون تجنب هذا النوع من «الالتفاف» عبر~$!B \lif !A$
+ممكنًا. (والواقع أن مضمون مبرهنة التطبيع هو أن هذه الالتفافات قابلة
+للتجنب دائمًا.)
+
+وفي~\Log{N1c} و\Log{N1i} نستطيع تجنب ذلك في هذه الحالة بسهولة: نستبدل
+بالفروض~$!B^x$~!!{proof}~$!B$ كله. وهذا «التطعيم» لـ!!{proof}s على
+فروض براهين أخرى مفيد، ولذلك نسجله في تعريف.
+
+\begin{defn}
+إذا كان~$\delta_1$~!!{proof} في~\Log{N1c} (أو~!!{proof} في
+\Log{N1i}) لـ$!A$ من الفرض المفتوح~$!B^x$، وكان~$\delta_2$~!!{proof}
+في~\Log{N1c} (أو~!!{proof} في~\Log{N1i}) لـ$!B$، فإن
+$\Subst{\delta_1}{\delta_2}{!B^x}$ هو ناتج استبدال~$\delta_2$ بكل ظهور
+غير مبرأ للفرض~$!B^x$ في~$\delta_1$.
+\end{defn}
+
+إذا لم تكن لدى~$\delta_1$ و$\delta_2$~!!{formula}s فرض مختلفة
+تحمل العلامة نفسها، ولم يحتو أي فرض مفتوح في~$\delta_2$ متغيرًا
+مميزًا من~$\delta_1$، كان~$\Subst{\delta_1}{\delta_2}{!B^x}$ الناتج
+!!{proof} صحيحًا، وكانت فروضه المفتوحة هي فروض~$\delta_1$ مع فروض
+$\delta_2$. وعند تطعيم~!!{proof}s تتحقق هذه الشروط عادة. يتحقق الأول
+متى كان~$\delta_1$ و$\delta_2$ برهانين جزئيين من~!!{proof} أكبر. وإذا
+لم يتحقق الثاني، استطعنا إعادة تسمية المتغيرات المميزة في~$\delta_1$
+حتى يتحقق.
+
+وينطبق تعريف مقابل على~\Log{N2c} و\Log{N2i}.
+
+\begin{defn}
+إذا كان~$\delta_1$~!!{proof} في~\Log{N2c} (أو~!!{proof} في
+\Log{N2i}) لـ$x:!B, \Gamma_1 \Sequent !A$، وكان~$\delta_2$~!!{proof}
+في~\Log{N2c} (أو~!!{proof} في~\Log{N2i}) لـ
+$\Gamma_2 \Sequent !B$، فإن~$\Subst{\delta_1}{\delta_2}{x:!B}$ هو
+ناتج استبدال~$\delta_2$ بكل مسلّمة~$x:!B \Sequent !B$ في~$\delta_1$،
+وإضافة~$\Gamma_2$ إلى سياق كل متتالية تقع تحت تلك المسلّمات.
+\end{defn}
+
+\begin{prop}
+إذا كان~$\delta_1 \Proves x:!B, \Gamma_1 \Sequent !A$ و
+$\delta_2 \Proves \Gamma_2 \Sequent !B$، فإن
+$\Subst{\delta_1}{\delta_2}{x:!B} \Proves \Gamma_1, \Gamma_2 \Sequent
+!A$، بشرط ألا يظهر أي متغير مميز من~$\delta_1$ في~$\Gamma_2$.
+\end{prop}
+
+
+\begin{proof}
+  بالاستقراء على~$\pheight{\delta_1}$.
+\end{proof}
+
+\end{document}

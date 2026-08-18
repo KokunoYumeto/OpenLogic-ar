@@ -1,0 +1,273 @@
+% Part: incompleteness
+% Chapter: arithmetization-syntax
+% Section: proofs-in-lk
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{art}{plk}
+\olsection{\usetoken{P}{derivation} في $\Log{LK}$}
+
+\begin{explain}
+لكي نؤرْثِم !!{derivation}s، لا بد أن نمثل !!{derivation}s بأعداد. وبما أن
+!!{derivation}s أشجار من التتابعات، يحمل كل استدلال فيها أيضًا وسمًا،
+فإن التمثيل العودي هو النهج الأوضح: نمثل !!{derivation} بصفّ، مكوّناته
+التتابع الختامي والوسم وتمثيلات الـ!!{derivation}s الجزئية المؤدية إلى
+مقدمات الاستدلال الأخير.
+\end{explain}
+
+\begin{defn}
+إذا كانت $\Gamma$ متتالية منتهية من !!{sentence}s، حيث
+$\Gamma=\tuple{!A_1, \dots, !A_n}$، فإن
+$\Gn{\Gamma}=\tuple{\Gn{!A_1}, \dots, \Gn{!A_n}}$.
+
+إذا كان $\Gamma \Sequent \Delta$ تتابعًا، فإن عدد غودل لـ
+$\Gamma \Sequent \Delta$ هو
+\[
+\Gn{\Gamma \Sequent \Delta} = \tuple{\Gn{\Gamma}, \Gn{\Delta}}
+\]
+
+إذا كان $\pi$ !!a{derivation} في $\Log{LK}$، فإن $\Gn{\pi}$ يُعرّف
+كما يأتي:
+\begin{enumerate}
+\item إذا كان $\pi$ لا يتألف إلا من التتابع الابتدائي
+  $\Gamma \Sequent \Delta$، فإن $\Gn{\pi}$ هو
+  \[
+    \tuple{0, \Gn{\Gamma \Sequent \Delta}}.
+  \]
+\item إذا انتهى $\pi$ باستدلال له مقدمة واحدة أو مقدمتان، وكانت
+  $\Gamma \Sequent \Delta$ نتيجته، وكانت $\pi_1$ و$\pi_2$ البرهانين
+  الجزئيين المباشرين المنتهيين بمقدمتي الاستدلال الأخير، فإن $\Gn{\pi}$ هو
+  \begin{align*}
+    & \tuple{1, \Gn{\pi_1}, \Gn{\Gamma \Sequent \Delta}, k} \text{ أو}\\ 
+    & \tuple{2, \Gn{\pi_1}, \Gn{\pi_2}, \Gn{\Gamma \Sequent \Delta}, k}, 
+  \end{align*}
+  على الترتيب، حيث يعطي الجدول الآتي قيمة $k$ بحسب القاعدة المستعملة
+  في الاستدلال الأخير:
+
+  \begin{tabular}{lccccccc}
+    \text{القاعدة:} & \LeftR{\Weakening} & \RightR{\Weakening} &
+    \LeftR{\Contraction} & \RightR{\Contraction} &
+    \LeftR{\Exchange} & \RightR{\Exchange} \\
+    $k$: & 1 & 2 & 3 & 4 & 5 & 6 \\[2ex]
+    \text{القاعدة:} & \LeftR{\lnot} & \RightR{\lnot} &
+    \LeftR{\land} & \RightR{\land} & 
+    \LeftR{\lor} & \RightR{\lor} \\
+    $k$: & 7 & 8 & 9 & 10 & 11 & 12 \\[2ex]
+    \text{القاعدة:} & \LeftR{\lif} & \RightR{\lif} &
+    \LeftR{\lforall} & \RightR{\lforall} &
+    \LeftR{\lexists} & \RightR{\lexists} \\
+    $k$: & 13 & 14 & 15 & 16 & 17 & 18 \\[2ex]
+    \text{القاعدة:} & \Cut & = \\
+    $k$: & 19 & 20
+  \end{tabular}
+\end{enumerate}
+\end{defn}
+
+\begin{ex}
+  تأمل !!{derivation} بسيطًا جدًا
+  \begin{prooftree}
+    \Axiom$!A \fCenter !A$
+    \RightLabel{\LeftR{\land}}
+    \UnaryInf$!A \land !B \fCenter !A$
+    \RightLabel{\RightR{\lif}}
+    \UnaryInf$\fCenter (!A \land !B) \lif !A$
+  \end{prooftree}
+  يكون عدد غودل للتتابع الابتدائي $p_0=\tuple{0,
+    \Gn{!A \Sequent !A}}$. ويكون عدد غودل للـ!!{derivation} المنتهي
+    بنتيجة~$\LeftR{\land}$ هو $p_1=
+    \tuple{1,p_0,\Gn{!A \land !B \Sequent !A},9}$ ($1$ لأن
+    $\LeftR{\land}$ لها مقدمة واحدة، ثم عدد غودل للنتيجة
+    $!A \land !B \Sequent !A$، و$9$ هو العدد الذي يرمّز
+    $\LeftR{\land}$). ومن ثم يكون عدد غودل للـ!!{derivation} بأكمله
+    $\tuple{1,p_1,\Gn{\Sequent (!A \land !B) \lif !A},14}$، أي
+  \[
+  \tuple{1, \tuple{1, \tuple{0, \Gn{!A \Sequent !A}}, \Gn{!A \land !B \Sequent !A}, 9},
+    \Gn{\Sequent (!A \land !B) \lif !A}, 14}.
+  \]
+\end{ex}
+
+\begin{explain}
+بعد تثبيت تمثيل لـ!!{derivation}s، علينا أيضًا أن نبيّن إمكان التعامل
+مع !!{derivation}s كهذه عوديًا بدائيًا والتعبير بالطريقة نفسها عن خصائصها وعلاقاتها
+الأساسية. بعض العمليات بسيطة؛ فمثلًا إذا أُعطينا عدد غودل~$p$
+لـ!!a{derivation}، فإن $\fn{EndSeq}(p)=(p)_{(p)_0+1}$ يعطينا عدد غودل
+لتتابعه الختامي، وتعطينا $\fn{LastRule}(p)=(p)_{(p)_0+2}$ شفرة
+قاعدته الأخيرة. والخاصية $\fn{Sequent}(s)$ المعرّفة بـ
+\[
+  \len{s} = 2 \land \bforall{i<\len{(s)_0} + \len{(s)_1}}{\fn{Sent}(((s)_0 \concat (s)_1)_i)}
+\]
+تصدق في $s$ إذا وفقط إذا كان $s$ عدد غودل لتتابع مؤلف من
+!!{sentence}s. وبعض العمليات أصعب بكثير. وسنرسم على الأقل كيفية
+معالجتها. والغاية أن نثبت أن علاقة «$\pi$ !!a{derivation} لـ$!A$ من
+$\Gamma$» علاقة عودية بدائية في عددي غودل لـ$\pi$ و$!A$.
+\end{explain}
+
+\begin{prop}\ollabel{prop:followsby}
+  الخاصية $\fn{Correct}(p)$، التي تصدق إذا وفقط إذا كان الاستدلال
+  الأخير في !!{derivation}~$\pi$ ذي عدد غودل~$p$ صحيحًا، عودية
+  بدائية.
+\end{prop}
+
+\begin{proof}
+  يكون $\Gamma \Sequent \Delta$ تتابعًا ابتدائيًا إذا وُجدت
+  !!a{sentence}~$!A$ بحيث كان $\Gamma \Sequent \Delta$ هو
+  $!A \Sequent !A$، أو وُجد حد~$t$ بحيث كان $\Gamma \Sequent \Delta$
+  هو $\emptyset \Sequent \eq[t][t]$. وبلغة أعداد غودل، تصدق
+  $\fn{InitSeq}(s)$ إذا وفقط إذا
+  \begin{align*}
+  \bexists{x < s}{} (\fn{Sent}(x) & \land
+  s = \tuple{\tuple{x},\tuple{x}})
+  \lor {}\\
+  \bexists{t<s}{} (\fn{Term}(t) & \land
+  s = \tuple{0, \tuple{\Gn{{\eq}(} \concat t \concat \Gn{,} \concat t \concat \Gn{)}}}).
+  \end{align*}
+
+  وعلينا أيضًا أن نثبت، لكل قاعدة استدلال~$R$، أن العلاقة
+  $\fn{FollowsBy}_R(p)$ عودية بدائية؛ وتصدق $\fn{FollowsBy}_R(p)$
+  إذا وفقط إذا كان $p$
+  عدد غودل لـ!!{derivation}~$\pi$، وكان التتابع الختامي لـ$\pi$ ينتج من
+  الـ!!{derivation}s الجزئية المباشرة لـ$\pi$ بتطبيق صحيح للقاعدة~$R$.
+
+  ومن الحالات البسيطة قاعدة $\RightR{\land}$. فإذا انتهى $\pi$
+  باستدلال صحيح وفق $\RightR{\land}$، كان شكلها كما يأتي:
+  \begin{prooftree}
+    \AxiomC{}
+    \RightLabel{$\pi_1$}
+    \Deduce$\Gamma \fCenter \Delta, !A$
+    
+    \AxiomC{}
+    \RightLabel{$\pi_2$}
+    \Deduce$\Gamma \fCenter \Delta, !B$
+
+    \RightLabel{\RightR\land}
+    \BinaryInf$\Gamma \fCenter \Delta, !A \land !B$
+  \end{prooftree}
+  وهكذا يكون الاستدلال الأخير في !!{derivation}~$\pi$ تطبيقًا صحيحًا
+  لـ$\RightR{\land}$ إذا وفقط إذا وُجدت متتاليتان من !!{sentence}s،
+  $\Gamma$ و$\Delta$، و!!{sentence}s عددها اثنتان، هما $!A$ و$!B$، بحيث يكون
+  التتابع الختامي لـ$\pi_1$ هو $\Gamma \Sequent \Delta,!A$، والتتابع
+  الختامي لـ$\pi_2$ هو $\Gamma \Sequent \Delta,!B$، والتتابع الختامي
+  لـ$\pi$ هو $\Gamma \Sequent \Delta,!A \land !B$. ولا علينا إلا أن
+  نترجم ذلك إلى أعداد غودل. فإذا كان
+  $s=\Gn{\Gamma \Sequent \Delta}$، فإن $(s)_0=\Gn{\Gamma}$ و
+  $(s)_1=\Gn{\Delta}$. ومن ثم تصدق
+  $\fn{FollowsBy}_{\RightR{\land}}(p)$ إذا وفقط إذا
+\begin{align*}
+& \bexists{g < p}{\bexists{d < p}{\bexists{a < p}{\bexists{b < p}{\quad}}}} \\
+& \qquad \fn{EndSeq}(p) = 
+  \tuple{g, d \concat 
+    \tuple{\Gn{(} \concat a \concat \Gn{\land} \concat b \concat \Gn{)}}} \land {} \\
+& \qquad \fn{EndSeq}((p)_1) = \tuple{g, d \concat \tuple{a}} \land {}\\
+& \qquad \fn{EndSeq}((p)_2) = \tuple{g, d \concat \tuple{b}} \land {}\\
+& \qquad (p)_0 = 2 \land \fn{LastRule}(p) = 10.
+\end{align*}
+تعبّر الأسطر، على الترتيب، عن «وجود متتالية~($\Gamma$) عدد غودل لها
+$g$، ومتتالية~($\Delta$) عدد غودل لها $d$، و!!a{formula}~($!A$) عدد
+غودل لها $a$، و!!a{formula}~($!B$) عدد غودل لها $b$»، بحيث «يكون
+التتابع الختامي لـ$\pi$ هو $\Gamma \Sequent \Delta,!A \land !B$»،
+و«التتابع الختامي لـ$\pi_1$ هو $\Gamma \Sequent \Delta,!A$»،
+و«التتابع الختامي لـ$\pi_2$ هو $\Gamma \Sequent \Delta,!B$»، وأن
+«لـ$\pi$ اشتقاقين جزئيين مباشرين وقاعدة الاستدلال الأخيرة هي
+$\RightR\land$ (ذات العدد~$10$)».
+
+يكون الاستدلال الأخير في~$\pi$ تطبيقًا صحيحًا لـ$\RightR\lexists$
+إذا وفقط إذا وُجدت متتاليتان $\Gamma$ و$\Delta$، و!!a{formula}~$!A$،
+ومتغير~$x$، وحد مغلق~$t$، بحيث يكون التتابع الختامي لـ$\pi$ هو
+$\Gamma \Sequent \Delta,\lexists[x][!A]$، ويكون التتابع الختامي
+لـ$\pi_1$ هو $\Gamma \Sequent \Delta,\Subst{!A}{t}{x}$. ومن ثم، بلغة
+أعداد غودل، تصدق $\fn{FollowsBy}_{\RightR\lexists}(p)$ إذا وفقط إذا
+\begin{align*}
+  & \bexists{g<p}{\bexists{d<p}{\bexists{a<p}{\bexists{x<p}{\bexists{t<p}{\quad}}}}}\\
+  & \qquad \fn{Var}(x) \land \fn{ClTerm}(t) \land {}\\
+  & \qquad \fn{EndSeq}(p) = 
+  \tuple{
+    g,
+    d \concat \tuple{\Gn{\lexists} \concat x \concat a}
+  } \land {}\\
+  & \qquad \fn{EndSeq}((p)_1) = 
+  \tuple{
+    g,
+    d \concat \tuple{\fn{Subst}(a, t, x)}
+  } \land {}\\
+  & \qquad (p)_0 = 1 \land \fn{LastRule}(p) = 18.
+\end{align*}
+ثم نعرّف $\fn{Correct}(p)$ بالصيغة
+\begin{multline*}
+  \fn{Sequent}(\fn{EndSeq}(p)) \land {}\\ 
+  [(\fn{LastRule}(p) = 1 \land 
+  \fn{FollowsBy}_{\LeftR\Weakening}(p)) \lor \dots \lor {}\\
+  (\fn{LastRule}(p) = 20 \land \fn{FollowsBy}_{\eq}(p)) \lor {}\\
+  (p)_0 = 0 \land \fn{InitSeq}(\fn{EndSeq}(p))]
+\end{multline*}
+يضمن السطر الأول أن التتابع الختامي لـ$p$ تتابع بالفعل مؤلف من
+!!{sentence}s. ويغطي السطر الأخير الحالة التي لا يكون فيها $p$ إلا
+تتابعًا ابتدائيًا.
+\end{proof}
+
+\begin{prob}
+  عرّف الخصائص الآتية كما في
+  \olref[inc][art][plk]{prop:followsby}:
+  \begin{enumerate}
+  \item $\fn{FollowsBy}_{\Cut}(p)$,
+  \item $\fn{FollowsBy}_{\LeftR\lif}(p)$,
+  \item $\fn{FollowsBy}_{\eq}(p)$,
+  \item $\fn{FollowsBy}_{\RightR{\lforall}}(p)$.
+  \end{enumerate}
+  وفي الخاصية الأخيرة سيلزمك أيضًا أن تبيّن إمكان الاختبار عوديًا
+  بدائيًا مما إذا كان الاستدلال الأخير في !!{derivation} ذي عدد
+  غودل~$p$ يحقق شرط المتغير المميز؛ أي إن المتغير المميز~$a$ لقاعدة
+  $\RightR{\lforall}$ لا يرد في التتابع الختامي.
+  \end{prob}
+  
+
+\begin{prop}
+  \ollabel{prop:deriv}
+  العلاقة $\fn{Deriv}(p)$، التي تصدق إذا كان $p$ عدد غودل
+  لـ!!{derivation} صحيح~$\pi$، عودية بدائية.
+\end{prop}
+
+\begin{proof}
+  يكون !!^a{derivation}~$\pi$ صحيحًا إذا كان كل استدلال فيه تطبيقًا
+  صحيحًا لقاعدة، أي إذا انتهت كل الـ!!{derivation}s الجزئية فيه باستدلال
+  صحيح. ومن ثم تصدق $\fn{Deriv}(p)$ إذا وفقط إذا
+  \[
+  \bforall{i<\len{\fn{SubtreeSeq}(p)}}{\fn{Correct}((\fn{SubtreeSeq}(p))_i)}.
+  \]
+\end{proof}
+
+
+\begin{prop}
+افترض أن $\Gamma$ مجموعة عودية بدائية من !!{sentence}s. عندئذ تكون
+العلاقة $\Prf[\Gamma](x,y)$، التي تعبّر عن أن «$x$ شفرة
+!!a{derivation}~$\pi$ لـ$\Gamma_0 \Sequent !A$ من أجل مجموعة منتهية ما
+$\Gamma_0\subseteq\Gamma$، وأن $y$ عدد غودل لـ$!A$»، عودية بدائية.
+\end{prop}
+
+\begin{proof}
+افترض أن المحمول العودي البدائي~$R_\Gamma(y)$ يعبّر عن
+«$y\in\Gamma$». علينا أن نثبت أن $\Prf[\Gamma](x,y)$، التي تصدق إذا
+وفقط إذا كان $y$ عدد غودل لجملة~$!A$ وكان $x$ شفرة !!{derivation} في
+$\Log{LK}$ تتابعه الختامي $\Gamma_0 \Sequent !A$، عودية بدائية.
+
+بحسب القضية السابقة، فإن الخاصية $\fn{Deriv}(x)$، التي تصدق إذا وفقط
+إذا كان $x$ شفرة !!{derivation} صحيح~$\pi$ في $\Log{LK}$، عودية
+بدائية. وإذا كان $x$ شفرة كهذه، فإن $\fn{EndSeq}(x)$ شفرة التتابع
+الختامي لـ$\pi$؛ ومن ثم يكون $(\fn{EndSeq}(x))_0$ شفرة طرفه الأيسر،
+و$(\fn{EndSeq}(x))_1$ شفرة طرفه الأيمن. ولذلك يمكننا التعبير عن أن
+«الطرف الأيمن من التتابع الختامي لـ$\pi$ هو~$!A$» بالصيغة
+$\len{(\fn{EndSeq}(x))_1}=1 \land ((\fn{EndSeq}(x))_1)_0=y$. أما الطرف
+الأيسر من التتابع الختامي لـ$\pi$ فمنتهٍ تلقائيًا؛ ولا يلزمنا إلا أن
+نعبّر عن انتماء كل جملة فيه إلى~$\Gamma$. وهكذا نعرّف
+$\Prf[\Gamma](x,y)$ بالصيغة
+\begin{align*}
+\Prf[\Gamma](x, y) \defiff {}&
+\fn{Deriv}(x) \land {} \\
+& \bforall{i <
+  \len{(\fn{EndSeq}(x))_0}}{R_\Gamma(((\fn{EndSeq}(x))_0)_i)} \land {}\\
+& \len{(\fn{EndSeq}(x))_1} = 1 \land ((\fn{EndSeq}(x))_1)_0 = y.
+\end{align*}
+\end{proof}
+
+\end{document}

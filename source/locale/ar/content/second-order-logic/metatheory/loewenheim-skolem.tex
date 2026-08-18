@@ -1,0 +1,54 @@
+% Part: second-order-logic
+% Chapter: metatheory
+% Section: loewenheim-skolem
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sol}{met}{lst}
+
+\olsection{فشل مبرهنة لوفنهايم--سكولم في منطق الرتبة الثانية}
+
+\begin{explain}
+تقول مبرهنة لوفنهايم--سكولم (النزولية) إن لكل مجموعة من~!!{sentence}s
+لها نموذج لانهائي بنيةً نموذجية !!a{enumerable}. وهي أيضًا نتيجة من
+نتائج مبرهنة الاكتمال: فبرهان الاكتمال يولد نموذجًا لكل مجموعة متسقة من
+!!{sentence}s، وذلك النموذج~!!{enumerable}. وثمة أيضًا مبرهنة
+لوفنهايم--سكولم صعودية، تضمن أنه إذا كان لمجموعة من~!!{sentence}s بنية
+نموذجية !!a{denumerable}، كانت لها كذلك بنية نموذجية
+!!a{nonenumerable}. وتفشل المبرهنتان كلتاهما في منطق الرتبة الثانية.
+\end{explain}
+
+\begin{thm}
+\ollabel{thm:sol-no-ls} تفشل مبرهنة لوفنهايم--سكولم في منطق الرتبة
+الثانية: فثمة~!!{sentence}s لها نماذج لانهائية، لكن ليس لها أي نماذج
+!!{enumerable}.
+\end{thm}
+
+\begin{proof}
+تذكّر أن
+\[
+\fn{Count} \ident \lexists[z][\lexists[u][\lforall[X][((X(z) \land
+      \lforall[x][(X(x) \lif X(u(x)))]) \lif \lforall[x][X(x)])]]]
+\]
+تصدق في~!!a{structure}~$\Struct{M}$ إذا وفقط إذا كان~$\Domain{M}$
+!!{enumerable}؛ ومن ثم تصدق~$\lnot\fn{Count}$ في~$\Struct{M}$ إذا
+وفقط إذا كان~$\Domain{M}$ !!{nonenumerable}. وثمة~!!{structure}s من
+هذا القبيل؛ خذ أي مجموعة~!!{nonenumerable} لتكون الـ!!{domain}، مثل
+$\Pow{\Nat}$ أو~$\Real$. إذن لـ$\lnot \fn{Count}$ نماذج لانهائية، لكن
+ليس لها نماذج~!!{enumerable}.
+\end{proof}
+
+\begin{thm}
+ثمة~!!{sentence}s لها نماذج~!!{denumerable}، لكن ليس لها نماذج
+!!{nonenumerable}.
+\end{thm}
+
+\begin{proof}
+تصدق~$\fn{Count} \land \fn{Inf}$ في~$\Nat$، لكنها لا تصدق في أي
+!!{structure}~$\Struct{M}$ ذات مجموعة حاملة
+!!{nonenumerable}.
+\end{proof}
+
+\end{document}

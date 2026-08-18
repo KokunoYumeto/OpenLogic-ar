@@ -1,0 +1,255 @@
+% Part: model-theory
+% Chapter: models-of-arithmetic
+% Section: models-of-pa
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{mar}{mpa}
+\section{نماذج $\Th{PA}$}
+
+\begin{explain}
+كل نموذج غير قياسي لـ~$\Th{TA}$ هو أيضًا نموذج لـ~$\Th{PA}$. ونعلم أن
+لـ~$\Th{TA}$ نماذج غير قياسية، ومن ثم أن لـ~$\Th{PA}$ نماذج كذلك. ونعلم
+أيضًا أن هذه النماذج غير القياسية تحتوي «أعدادًا» غير قياسية، أي
+!!{element}s من المجال تقع «بعد» جميع «الأعداد» القياسية. ولكن كيف
+تنتظم؟ وكم عددها؟ لقد رأينا أن نماذج النظرية الأضعف~$\Th{Q}$ قد تحتوي
+عددًا غير قياسي واحدًا لا غير. غير أن هذه الـ!!{structure}s البسيطة ليست
+نماذج لـ$\Th{PA}$ ولا لـ$\Th{TA}$.
+
+ومفتاح فهم بنية نماذج $\Th{PA}$ أو $\Th{TA}$ هو النظر في الوقائع التي
+تكون !!{derivable} في هاتين النظريتين. فمثلًا تثبت $\Th{PA}$ نفسها
+$\lforall[x][\eq/[x][x']]$ و
+$\lforall[x][\lforall[y][\eq[(x+y)][(y+x)]]]$، وهذا يستبعد البنى البسيطة
+(التي تكون فيها هذه الـ!!{sentence}s كاذبة) من أن تكون نماذج لـ~$\Th{PA}$.
+
+افترض أن~$\Struct{M}$ نموذج لـ~$\Th{PA}$. فإذا كان
+$\Th{PA} \Proves !A$، فإن $\Sat{M}{!A}$. ولنستعمل مرة أخرى $\nszero$
+اختصارًا لـ$\Assign{\Obj{0}}{M}$، و$\nssucc$ لـ$\Assign{\prime}{M}$،
+و$\nsplus$ لـ$\Assign{+}{M}$، و$\nstimes$ لـ$\Assign{\times}{M}$،
+و$\nsless$ لـ$\Assign{<}{M}$. وعندئذ تقرر كل !!{sentence}~$!A$ شرطًا ما
+على $\nszero$ و$\nssucc$ و$\nsplus$ و$\nstimes$ و$\nsless$، وإذا كان
+$\Sat{M}{!A}$ فلا بد أن يتحقق ذلك الشرط. فمثلًا، إذا كان
+$\Sat{M}{!Q_1}$، أي
+$\Sat{M}{\lforall[x][\lforall[y][(\eq[x'][y'] \lif \eq[x][y])]]}$،
+فلا بد أن تكون $\nssucc$~!!{injective}.
+\end{explain}
+
+\begin{prop}
+تكون $\nsless$ في $\Struct{M}$ ترتيبًا خطيًا صارمًا، أي إنها تحقق:
+\begin{enumerate}
+\item ليس $x \nsless x$ لأي~$x \in \Domain{M}$.
+\item إذا كان $x \nsless y$ و$y \nsless z$، فإن $x \nsless z$.
+\item لأي $x \neq y$، إما $x \nsless y$ وإما $y \nsless x$.
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+تثبت $\Th{PA}$ ما يأتي:
+\begin{enumerate}
+\item $\lforall[x][\lnot x < x]$
+\item $\lforall[x][\lforall[y][\lforall[z][((x < y \land y < z) \lif x < z)]]]$
+\item $\lforall[x][\lforall[y][((x < y \lor y < x) \lor \eq[x][y])]]$
+\end{enumerate}
+\end{proof}
+
+\begin{prop}
+\ollabel{prop:M-discrete} $\nszero$ أصغر !!{element} في~$\Domain{M}$
+بحسب ترتيب~$\nsless$. ولكل~$x$، يكون $x \nsless x^\nssucc$، ويكون
+$x^\nssucc$ أصغر !!{element} بحسب~$\nsless$ له هذه الخاصية. ولكل
+$x \neq \nszero$ يوجد $y$ وحيد بحيث $y^\nssucc = x$. (نسمي $y$
+«سلف»~$x$ في~$\Struct{M}$، ونرمز إليه بـ~$^\nssucc x$.)
+\end{prop}
+
+\begin{proof}
+تمرين.
+\end{proof}
+
+\begin{prob}
+جد !!{sentence}s في~$\Lang{L_A}$ تكون !!{derivable} في~$\Th{PA}$
+(ومن ثم صادقة في~$\Struct{N}$) وتضمن خصائص $\nszero$ و$\nssucc$
+و$\nsless$ الواردة في
+\olref[mod][mar][mpa]{prop:M-discrete}.
+\end{prob}
+
+\begin{prop}
+كل الـ!!{element}s القياسية في~$\Struct{M}$ أصغر (بحسب~$\nsless$) من
+جميع الـ!!{element}s غير القياسية.
+\end{prop}
+
+\begin{proof}
+سنستعمل $n$ اختصارًا لـ$\Value{\num{n}}{M}$، وهو !!{element} قياسي
+في~$\Struct{M}$. تثبت $\Th{Q}$ نفسها، لكل~$n \in \Nat$، أن
+$\lforall[x][(x < \num{n}' \lif (\eq[x][\num{0}] \lor
+  \eq[x][\num{1}] \lor \dots \lor \eq[x][\num{n}]))]$. ولا توجد
+!!{element}s أصغر من $\nszero$ بحسب~$\nsless$. لذلك إذا كان $n$
+قياسيًا وكان $x$ غير قياسي، استحال أن يكون $x \nsless n$. وبالتعريف،
+العنصر غير القياسي هو ما لا يساوي $\Value{\num{n}}{M}$ لأي
+$n \in \Nat$، ومن ثم يكون $x \neq n$ أيضًا. ولما كانت $\nsless$
+ترتيبًا خطيًا، فلا بد أن يكون $n \nsless x$.
+\end{proof}
+
+\begin{prop}
+كل !!{element} غير قياسي~$x$ في~$\Domain{M}$ هو عنصر في المجموعة الجزئية
+\[
+\dots ^{\nssucc\nssucc\nssucc}x \nsless ^{\nssucc\nssucc}x \nsless
+^{\nssucc}x \nsless x \nsless x^{\nssucc} \nsless x^{\nssucc\nssucc}
+\nsless x^{\nssucc\nssucc\nssucc} \nsless \dots
+\]
+ونسمي هذه المجموعة الجزئية \emph{كتلة~$x$}، ونرمز إليها بـ$[x]$.
+وليس لها أصغر عنصر ولا أكبر !!{element}. ويمكن وصفها بأنها مجموعة
+كل $y \in \Domain{M}$ بحيث يوجد عدد قياسي~$n$ يحقق
+$x \nsplus n = y$ أو $y \nsplus n = x$.
+\end{prop}
+
+\begin{proof}
+من الواضح أن مثل هذه المجموعة~$[x]$ موجود دائمًا، لأن كل !!{element}
+غير قياسي~$y$ في~$\Domain{M}$ له خلف وحيد~$y^\nssucc$ وسلف وحيد
+$^\nssucc y$. ولأي !!{element}s متعاقبة $y$ و$y^\nssucc$ يكون
+$y \nsless y^\nssucc$، ويكون $y^\nssucc$ أصغر !!{element} في
+$\Domain{M}$ بحسب~$\nsless$ يكون $y$ أصغر منه بحسب~$\nsless$.
+ولما كان دائمًا $^\nssucc y \nsless y$ و$y \nsless y^\nssucc$، لم
+يكن لـ$[x]$ أصغر عنصر ولا أكبر !!{element}. وإذا كان
+$y \in [x]$، فإن $x \in [y]$، إذ يكون حينئذ إما
+$y^{\nssucc\dots\nssucc} = x$ وإما
+$x^{\nssucc\dots\nssucc} = y$. وإذا كان
+$y^{\nssucc\dots\nssucc} = x$ (وفيه $n$ من رموز~$\nssucc$)، فإن
+$y \nsplus n = x$، والعكس صحيح، لأن
+$\Th{PA} \Proves \lforall[x][\eq[x^{\prime\dots\prime}][(x +
+    \num{n})]]$ (إذا كان $n$ عدد رموز~$\prime$).
+\end{proof}
+
+\begin{prop}
+إذا كان $[x] \neq [y]$ و$x \nsless y$، فإن $u \nsless v$ لكل
+$u \in [x]$ ولكل $v \in [y]$.
+\end{prop}
+
+\begin{proof}
+لاحظ أن
+$\Th{PA} \Proves \lforall[x][\lforall[y][(x < y \lif (x' < y
+    \lor x' = y))]]$. ولذلك إذا كان $u \nsless v$، كان أيضًا
+$u \nsplus n^\nssucc \nsless v$ لأي~$n$ متى كان $[u] \neq [v]$.
+
+وكل $u \in [x]$ أصغر من~$y$ بحسب~$\nsless$: فبحسب الفرض
+$x \nsless y$. فإذا كان $u \nsless x$، كان $u \nsless y$ بالتعدي.
+وإذا كان $x \nsless u$ مع $u \in [x]$، كان
+$u = x\nsplus n^\nssucc$ لبعض~$n$، ومن ثم $u \nsless y$ بالواقعة التي
+أثبتناها للتو.
+
+افترض الآن أن $v \in [y]$ أصغر من~$y$ بحسب~$\nsless$، أي إن
+$v \nsplus m^\nssucc = y$ لبعض $m$ قياسي. وهذا يستبعد
+$v \nsless x$، وإلا لكان $y = v \nsplus m^\nssucc \nsless x$.
+ومن الواضح أيضًا أن $x \neq v$، وإلا لكان
+$x \nsplus m^\nssucc = v \nsplus m^\nssucc = y$، ولحصلنا على
+$[x] = [y]$. إذن $x \nsless v$. ولكن عندئذ يكون أيضًا
+$x \nsplus n^\nssucc \nsless v$ لأي~$n$. ومن ثم، إذا كان
+$x \nsless u$ و$u \in [x]$، كان $u \nsless v$. وإذا كان
+$u \nsless x$، كان $u \nsless v$ بالتعدي.
+
+وأخيرًا، إذا كان $y \nsless v$، فإن $u \nsless v$ لأننا بينا أن
+$u \nsless y$، ولدينا $y \nsless v$.
+\end{proof}
+
+\begin{cor}
+إذا كان $[x] \neq [y]$، فإن $[x] \cap [y] = \emptyset$.
+\end{cor}
+
+\begin{proof}
+افترض أن $z \in [x]$ وأن $x \nsless y$. عندئذ يكون $z \nsless u$
+لكل $u \in [y]$. ولو كان $z \in [y]$، لحصلنا على $z \nsless z$.
+والحجة مماثلة إذا كان $y \nsless x$.
+\end{proof}
+
+\begin{explain}
+يعني هذا أن الكتل نفسها يمكن ترتيبها على نحو يحترم~$\nsless$:
+$[x] \nsless [y]$ إذا وفقط إذا كان $x \nsless y$، أو، على نحو مكافئ،
+إذا كان $u \nsless v$ لأي $u \in [x]$ و$v \in [y]$. ومن الواضح أن
+الكتلة القياسية~$[0]$ هي أصغر الكتل. وهي لا تتقاطع مع أي كتلة غير
+قياسية، ولا تتقاطع أي كتلتين غير قياسيتين أيضًا. وعلى وجه التحديد، لا
+يمكن «بلوغ» كتلة مختلفة بأخذ الأخلاف أو الأسلاف المتكررة.
+\end{explain}
+
+\begin{prop}
+إذا كان $x$ و$y$ غير قياسيين، فإن $x \nsless x \nsplus y$ و
+$x \nsplus y \notin [x]$.
+\end{prop}
+
+\begin{proof}
+إذا كان $y$ غير قياسي، فإن $y \neq \nszero$. ولدينا
+$\Th{PA} \Proves \lforall[x][(y \neq \Obj{0} \lif x < (x+y))]$. افترض الآن أن
+$x \nsplus y \in [x]$. ولما كان $x \nsless x \nsplus y$، فلا بد أن
+يكون $x \nsplus n^\nssucc = x \nsplus y$. لكن لدينا
+$\Th{PA} \Proves \lforall[x][\lforall[y][\lforall[z][(\eq[(x+y)][(x+z)] \lif y = z)]]]$
+(قانون الاختزال للجمع). ويعني هذا أن $y = n^\nssucc$ لبعض $n$ قياسي؛
+لكن المفروض أن $y$ غير قياسي.
+\end{proof}
+
+\begin{prop}
+لا توجد كتلة غير قياسية صغرى.
+\end{prop}
+
+\begin{proof}
+لدينا $\Th{PA} \Proves \lforall[x][\lexists[y][(\eq[(y+y)][x] \lor
+      \eq[(y+y)'][x])]]$، أي إن كل $x$ يقبل القسمة على~$2$ (وربما
+مع باق مقداره~$1$). وإذا كان $x$ غير قياسي، كان $y$ غير قياسي أيضًا.
+وبحسب القضية السابقة، يكون $y \nsless y \nsplus y$ و
+$y \nsplus y \notin [y]$. وكذلك يكون
+$y \nsless (y \nsplus y)^\nssucc$ و
+$(y \nsplus y)^\nssucc \notin [y]$. لكن
+$x = y \nsplus y$ أو $x = (y \nsplus y)^\nssucc$، ومن ثم
+$y \nsless x$ و$y \notin [x]$.
+\end{proof}
+
+\begin{prop}
+لا توجد كتلة كبرى.
+\end{prop}
+
+\begin{proof}
+تمرين.
+\end{proof}
+
+\begin{prob}
+بيّن أنه لا توجد كتلة كبرى في أي نموذج غير قياسي لـ~$\Th{PA}$.
+\end{prob}
+
+\begin{prop}
+\ollabel{prop:blocks-dense}
+ترتيب الكتل كثيف. أي إنه إذا كان $x \nsless y$ و$[x] \neq [y]$،
+فثمة كتلة~$[z]$ تختلف عن كلتيهما وتقع بينهما.
+\end{prop}
+
+\begin{proof}
+افترض أن $x \nsless y$. وكما سبق، يقبل $x \nsplus y$ القسمة على
+اثنين (وربما مع باق): يوجد $z \in \Domain{M}$ بحيث إما
+$x \nsplus y = z \nsplus z$ أو
+$x \nsplus y = (z \nsplus z)^\nssucc$. والعنصر~$z$ هو
+«متوسط» $x$ و$y$، ويكون $x \nsless z$ و$z \nsless y$.
+\end{proof}
+
+\begin{prob}
+اكتب برهانًا مفصلًا لـ
+\olref[mod][mar][mpa]{prop:blocks-dense}. أي !!{sentence} يجب أن
+!!{derive}ها $\Th{PA}$ كي تضمن وجود~$z$؟ ولماذا يكون $x \nsless z$
+و$z \nsless y$، ولماذا يكون $[x] \neq [z]$ و$[z] \neq [y]$؟
+\end{prob}
+
+\begin{explain}
+وهكذا تكون الكتل غير القياسية مرتبة مثل الأعداد النسبية: فهي تشكل
+ترتيبًا خطيًا كثيفًا !!a{denumerable} بلا طرفين. ويمكن إثبات أن كل ترتيبين
+!!{denumerable} من هذا القبيل متشاكلان. وينتج من ذلك أنه لأي نموذجين
+غير قياسيين !!{enumerable}~$\Struct{M}_1$ و$\Struct{M}_2$ للحساب الصادق،
+يكون مختزلاهما إلى اللغة التي لا تحتوي إلا $<$ و$=$ متشاكلين. والواقع
+أنه يمكن تعريف تشاكل~$h$ كما يأتي: الجزآن القياسيان من $\Struct{M}_1$
+و$\Struct{M}_2$ متشاكلان مع النموذج القياسي~$\Struct{N}$، ومن ثم
+أحدهما مع الآخر. والكتل التي يتألف منها الجزء غير القياسي مرتبة هي نفسها
+مثل الأعداد النسبية، ومن ثم فهي متشاكلة؛ ويمكن مد تشاكل الكتل إلى تشاكل
+\emph{داخل} الكتل بمقابلة عناصر اعتباطية في كل منها، ثم جعل صورة خلف~$x$
+في~$\Struct{M}_1$ خلف صورة~$x$ في~$\Struct{M}_2$. لاحظ أنه \emph{لا} ينتج من
+ذلك أن $\mathfrak{M}_1$ و$\mathfrak{M}_2$ متشاكلان في لغة الحساب الكاملة
+(فالتشاكل نسبي دائمًا إلى !!a{language})، إذ توجد طرائق غير متشاكلة لتعريف
+الجمع والضرب على $\Domain{M_1}$ و$\Domain{M_2}$. (وينتج هذا أيضًا من
+مبرهنة شهيرة لفوت تنص على أن عدد النماذج القابلة للعد لنظرية تامة لا يمكن
+أن يكون~2.)
+\end{explain}
+\end{document}

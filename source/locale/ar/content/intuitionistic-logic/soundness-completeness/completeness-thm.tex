@@ -1,0 +1,49 @@
+% part: intuitionistic-logic
+% chapter: soundness-completeness
+% section: completeness-thm
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{sc}{cpl}
+
+\olsection{مبرهن التمام}
+
+\begin{thm}\ollabel{thm:completeness}
+  إذا كان~$\Gamma \Entails !A$، كان~$\Gamma \Proves !A$.
+\end{thm}
+
+\begin{proof}
+  نبرهن النقيض المقابل. افترض~$\Gamma \Proves/ !A$. عندئذ، بحسب
+  \olref[lin]{lem:lindenbaum}، توجد مجموعة أولية
+  $\Gamma^* \supseteq \Gamma$ بحيث~$\Gamma^* \Proves/ !A$. اعتبر
+  النموذج القانوني~$\mModel{M(\Gamma^*)}$ لـ~$\Gamma^*$ كما عُرّف في
+  \olref[mod]{defn:canonical-model}. ولكل~$!B \in \Gamma$ لدينا
+  $\Gamma^* \Proves !B$. ولاحظ أن
+  $\Gamma^*(\emptyseq)=\Gamma^*$. وبحسب لمّة الصدق
+  (\olref[tru]{lem:truth})، لدينا
+  $\mSat{M(\Gamma^*)}{!B}[\emptyseq]$ لكل~$!B \in \Gamma$، ولدينا
+  $\mSat/{M(\Gamma^*)}{!A}[\emptyseq]$. وهذا يبين أن
+  $\Gamma \Entails/ !A$.
+\end{proof}
+
+\begin{prob}
+  بيّن أنه إذا لم تتضمن~$!A$ إلا !!{propositional variable}s و
+  $\lor$ و$\land$، كان~$\Entails/ !A$. واستنتج من ذلك أن~$\lif$ لا
+  يمكن تعريفها في المنطق الحدسي باستعمال~$\lor$ و$\land$.
+\end{prob}
+
+\begin{prob}
+  استعمل مبرهن التمام لإثبات أنه إذا كان~$\Proves !A \lor !B$، كان
+  $\Proves !A$ أو~$\Proves !B$. (تلميح: افترض
+  $\mSat/{M_1}{!A}$ و$\mSat/{M_2}{!B}$، وابنِ نموذجًا جديدًا
+  $\mModel{M}$ بحيث~$\mSat/{M}{!A \lor !B}$.)
+\end{prob}
+
+\begin{prob}
+  بيّن أنه إذا كان~$\mModel{M}$ نموذجًا علائقيًا يستعمل ترتيبًا خطيًا،
+  كان~$\mSat{M}{(!A \lif !B)\lor(!B \lif !A)}$.
+\end{prob}
+
+\end{document}

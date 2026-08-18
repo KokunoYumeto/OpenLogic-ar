@@ -1,0 +1,332 @@
+% Part: first-order-logic
+% Chapter: sequent-calculus
+% Section: proving-things
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{seq}{pro}}
+      {\olfileid{pl}{seq}{pro}}
+
+\olsection{أمثلة على ال\usetoken{P}{derivation}}
+
+\begin{ex}
+أعط $\Log{LK}$-!!{derivation} للتتابعية~$!A \land !B \Sequent !A$.
+
+نبدأ بكتابة التتابعية النهائية المطلوبة في أسفل ال!!{derivation}.
+\begin{prooftree}
+\AxiomC{}
+\UnaryInf$!A\land !B \fCenter !A$
+\end{prooftree}
+ثم نحتاج إلى تعيين نوع الاستدلال الذي يمكن أن تكون تتابعيته السفلى من
+هذه الصورة. قد يكون قاعدة بنيوية، لكن من المستحسن أن نبدأ بالبحث عن
+قاعدة منطقية. والرابط المنطقي الوحيد الوارد في التتابعية السفلى
+هو~$\land$، ولذلك نبحث عن قاعدة لـ~$\land$؛ ولأن رمز~$\land$ يرد في
+المقدَّم، فنحن ننظر في القاعدة~\LeftR{\land}.
+\begin{prooftree}
+\AxiomC{}
+\RightLabel{\LeftR{\land}}
+\UnaryInf$!A\land !B \fCenter !A$
+\end{prooftree}
+ثمة احتمالان للتتابعية العليا لاستدلال~\LeftR{\land}: فقد تكون
+$!A \Sequent !A$، أو تكون~$!B \Sequent !A$. ومن الواضح أن
+$!A \Sequent !A$ تتابعية ابتدائية (وهذا أمر حسن)، في حين أن
+$!B \Sequent !A$ غير قابلة للاشتقاق عمومًا. فنملأ التتابعية العليا:
+\begin{prooftree}
+\Axiom$!A \fCenter !A$
+\RightLabel{\LeftR{\land}}
+\UnaryInf$!A\land !B \fCenter !A$
+\end{prooftree}
+أصبح لدينا الآن $\Log{LK}$-!!{derivation} صحيح للتتابعية
+$!A \land !B \Sequent !A$.
+\end{ex}
+
+\begin{ex}
+أعط $\Log{LK}$-!!{derivation} للتتابعية
+$\lnot !A \lor !B \Sequent !A \lif !B$.
+
+ابدأ بكتابة التتابعية النهائية المطلوبة في أسفل ال!!{derivation}.
+\begin{prooftree}
+\AxiomC{}
+\UnaryInf$\lnot !A \lor !B \fCenter !A \lif !B$
+\end{prooftree}
+للعثور على قاعدة منطقية يمكن أن تعطينا هذه التتابعية النهائية، ننظر
+إلى الروابط المنطقية فيها: $\lnot$ و$\lor$ و$\lif$. ولا يعنينا الآن
+إلا~$\lor$ و$\lif$ لأنهما !!{main operator}s ل!!{sentence}s في
+التتابعية النهائية، أما~$\lnot$ فيقع داخل نطاق رابط آخر، فسنتناوله
+لاحقًا. ومن ثم فإن خياري القاعدة المنطقية للاستدلال الأخير هما
+\LeftR{\lor} و~\RightR{\lif}. وكان يمكننا حقًا اختيار أي منهما، لكن
+لنختر القاعدة~\RightR{\lif} (ولو لمجرد أنها تتيح لنا تأجيل الانقسام
+إلى فرعين). ووفق صورة استدلالات~\RightR{\lif} القادرة على إنتاج
+التتابعية السفلى، لا بد أن تكون الصورة كما يأتي:
+\begin{prooftree}
+\AxiomC{}
+\UnaryInf$ !A, \lnot !A \lor !B \fCenter !B $
+\RightLabel{\RightR{\lif}} \UnaryInf$ \lnot !A \lor !B \fCenter !A \lif !B $
+\end{prooftree}
+
+إذا نقلنا~$\lnot !A \lor !B$ إلى أقصى المقدَّم، أمكننا تطبيق
+القاعدة~\LeftR{\lor}. ووفق المخطط، لا بد أن تنقسم إلى تتابعيتين
+عليين كما يأتي:
+\begin{prooftree}
+\AxiomC{}
+\UnaryInf$\lnot !A, !A \fCenter !B$
+\AxiomC{}
+\UnaryInf$!B, !A \fCenter !B$
+\RightLabel{\LeftR{\lor}}
+\BinaryInf$ \lnot !A \lor !B, !A \fCenter !B $
+\RightLabel{\LeftR{\Exchange}}
+\UnaryInf$ !A, \lnot !A \lor !B \fCenter !B $
+\RightLabel{\RightR{\lif}}
+\UnaryInf$ \lnot !A \lor !B \fCenter !A \lif !B $
+\end{prooftree}
+تذكر أننا نحاول شق طريقنا صعودًا إلى تتابعيات ابتدائية؛ ويبدو أننا
+اقتربنا جدًا!{} فالفرع الأيمن لا يفصله عن تتابعية ابتدائية إلا إضعاف
+واحد وتبادل واحد، وعندئذ يكتمل:
+\begin{prooftree}
+\AxiomC{}
+\UnaryInf$\lnot !A, !A \fCenter !B$
+\Axiom$!B \fCenter !B$
+\RightLabel{\LeftR{\Weakening}}
+\UnaryInf$!A, !B \fCenter !B$
+\RightLabel{\LeftR{\Exchange}}
+\UnaryInf$!B, !A \fCenter !B$
+\RightLabel{\LeftR{\lor}}
+\BinaryInf$\lnot !A \lor !B, !A \fCenter !B $
+\RightLabel{\LeftR{\Exchange}}
+\UnaryInf$ !A, \lnot !A \lor !B \fCenter !B $
+\RightLabel{\RightR{\lif}}
+\UnaryInf$ \lnot !A \lor !B \fCenter !A \lif !B $
+\end{prooftree}
+
+والآن، بالنظر إلى الفرع الأيسر، نجد أن الرابط المنطقي الوحيد في أي
+!!{sentence} هو رمز~$\lnot$ في !!{sentence}s المقدَّم، ولذلك نبحث عن
+مثيل للقاعدة~\LeftR{\lnot}.
+\begin{prooftree}
+\AxiomC{}
+\UnaryInf$ !A \fCenter !B, !A$
+\RightLabel{\LeftR{\lnot}}
+\UnaryInf$\lnot !A, !A \fCenter !B$
+\Axiom$!B \fCenter !B$
+\RightLabel{\LeftR{\Weakening}}
+\UnaryInf$!A, !B \fCenter !B$
+\RightLabel{\LeftR{\Exchange}}
+\UnaryInf$!B, !A \fCenter !B$
+\RightLabel{\LeftR{\lor}}
+\BinaryInf$\lnot !A \lor !B, !A \fCenter !B $
+\RightLabel{\LeftR{\Exchange}}
+\UnaryInf$ !A, \lnot !A \lor !B \fCenter !B $
+\RightLabel{\RightR{\lif}}
+\UnaryInf$ \lnot !A \lor !B \fCenter !A \lif !B $
+\end{prooftree}
+وعلى غرار إكمالنا الفرع الأيمن، لا يفصلنا عن إكمال هذا الفرع الأيسر
+أيضًا إلا إضعاف واحد وتبادل واحد.
+\begin{prooftree}
+\Axiom$!A \fCenter !A$
+\RightLabel{\RightR{\Weakening}}
+\UnaryInf$ !A \fCenter !A, !B$
+\RightLabel{\RightR{\Exchange}}
+\UnaryInf$ !A \fCenter !B, !A$
+\RightLabel{\LeftR{\lnot}}
+\UnaryInf$\lnot !A, !A \fCenter !B$
+\Axiom$!B \fCenter !B$
+\RightLabel{\LeftR{\Weakening}}
+\UnaryInf$!A, !B \fCenter !B$
+\RightLabel{\LeftR{\Exchange}}
+\UnaryInf$!B, !A \fCenter !B$
+\RightLabel{\LeftR{\lor}}
+\BinaryInf$\lnot !A \lor !B, !A \fCenter !B $
+\RightLabel{\LeftR{\Exchange}}
+\UnaryInf$ !A, \lnot !A \lor !B \fCenter !B $
+\RightLabel{\RightR{\lif}}
+\UnaryInf$ \lnot !A \lor !B \fCenter !A \lif !B $
+\end{prooftree}
+\end{ex}
+
+\begin{ex}
+أعط $\Log{LK}$-!!{derivation} للتتابعية
+$\lnot !A \lor \lnot !B \Sequent \lnot (!A \land !B)$.
+
+باستعمال الأساليب السابقة، نبدأ بكتابة التتابعية النهائية المطلوبة في
+الأسفل.
+\begin{prooftree}
+\AxiomC{}
+\UnaryInf$ \lnot !A \lor \lnot !B \fCenter \lnot (!A \land !B) $
+\end{prooftree}
+المؤثران الرئيسان المتاحان لل!!{sentence}s في التتابعية النهائية هما
+رمزا~$\lor$ و$\lnot$. ويصح هنا تطبيق~\LeftR{\lor} أو
+\RightR{\lnot}، لكننا نبدأ بالقاعدة~\RightR{\lnot} لأنها تؤجل
+الانقسام إلى فرعين قليلًا:
+\begin{prooftree}
+\AxiomC{}
+\UnaryInf$!A \land !B, \lnot !A \lor \lnot !B \fCenter $
+\RightLabel{\RightR{\lnot}}
+\UnaryInf$\lnot !A \lor \lnot !B \fCenter \lnot (!A \land !B)$
+\end{prooftree}
+لدينا الآن خيار النظر في القاعدة~\LeftR{\land} أو~\LeftR{\lor}.
+فلنر ما يحدث عند تطبيق~\LeftR{\land}: يمكننا البدء إما بالتتابعية
+$!A, \lnot !A \lor !B \Sequent \quad$ وإما بالتتابعية
+$!B, \lnot !A \lor !B \Sequent \quad$. ولأن ال!!{derivation}
+متناظر بالنسبة إلى~$!A$ و$!B$، فلنأخذ الأولى:
+\begin{prooftree}
+\AxiomC{}
+\UnaryInf$!A, \lnot !A \lor \lnot !B \fCenter $
+\RightLabel{\LeftR{\land}}
+\UnaryInf$!A \land !B, \lnot !A \lor \lnot !B \fCenter $
+\RightLabel{\RightR{\lnot}}
+\UnaryInf$\lnot !A \lor \lnot !B \fCenter \lnot (!A \land !B)$
+\end{prooftree}
+ومع الاستمرار في ملء ال!!{derivation} نرى أننا نصطدم بمشكلة:
+\begin{prooftree}
+\Axiom$!A \fCenter !A$
+\RightLabel{\LeftR{\lnot}}
+\UnaryInf$ \lnot !A, !A \fCenter$
+\AxiomC{}
+\RightLabel{?}
+\UnaryInf$!A \fCenter !B$
+\RightLabel{\LeftR{\lnot}}
+\UnaryInf$ \lnot !B, !A \fCenter$
+\RightLabel{\LeftR{\lor}}
+\BinaryInf$\lnot !A \lor \lnot !B, !A \fCenter $
+\RightLabel{\LeftR{\Exchange}}
+\UnaryInf$!A, \lnot !A \lor \lnot !B \fCenter $
+\RightLabel{\LeftR{\land}}
+\UnaryInf$!A \land !B, \lnot !A \lor \lnot !B \fCenter $
+\RightLabel{\RightR{\lnot}}
+\UnaryInf$\lnot !A \lor \lnot !B \fCenter \lnot (!A \land !B)$
+\end{prooftree}
+لا يمكن اختزال أعلى الفرع الأيمن أكثر، ولا يمكن تحويله باستدلالات
+بنيوية إلى تتابعية ابتدائية؛ فليس هذا هو الطريق الصحيح. ومن الواضح
+إذن أن تطبيق~\LeftR{\land} أعلاه كان خطأً. وإذا عدنا إلى ما كان
+لدينا وطبقنا~\LeftR{\lor} بدلًا منه حصلنا على
+\begin{prooftree}
+\AxiomC{}
+\UnaryInf$\lnot !A, !A \land !B \fCenter $
+
+\AxiomC{}
+\UnaryInf$\lnot !B, !A \land !B \fCenter $
+
+\RightLabel{\LeftR{\lor}}
+\BinaryInf$\lnot !A \lor \lnot !B, !A \land !B \fCenter $
+\RightLabel{\LeftR{\Exchange}}
+\UnaryInf$!A \land !B, \lnot !A \lor \lnot !B \fCenter $
+\RightLabel{\RightR{\lnot}}
+\UnaryInf$\lnot !A \lor \lnot !B \fCenter \lnot (!A \land !B)$
+\end{prooftree}
+وبإكمال كل فرع كما فعلنا من قبل نحصل على
+\begin{prooftree}
+\Axiom$ !A \fCenter!A$
+\RightLabel{\LeftR{\land}}
+\UnaryInf$!A \land !B \fCenter !A$
+\RightLabel{\LeftR{\lnot}}
+\UnaryInf$\lnot !A, !A \land !B \fCenter $
+
+\Axiom$ !B \fCenter !B$
+\RightLabel{\LeftR{\land}}
+\UnaryInf$!A \land !B \fCenter !B$
+\RightLabel{\LeftR{\lnot}}
+\UnaryInf$\lnot !B, !A \land !B \fCenter $
+
+\RightLabel{\LeftR{\lor}}
+\BinaryInf$\lnot !A \lor \lnot !B, !A \land !B \fCenter $
+\RightLabel{\LeftR{\Exchange}}
+\UnaryInf$!A \land !B, \lnot !A \lor \lnot !B \fCenter $
+\RightLabel{\RightR{\lnot}}
+\UnaryInf$\lnot !A \lor \lnot !B \fCenter \lnot (!A \land !B)$
+\end{prooftree}
+(وكان يمكننا تنفيذ قواعد~$\land$ في موضع أدنى من قواعد~$\lnot$ في
+هذه الخطوات، مع بقائنا نحصل على !!{derivation} صحيح).
+\end{ex}
+
+\begin{ex}
+لم نستعمل إلى الآن قاعدة الانكماش، لكنها تلزم أحيانًا. وهذا مثال على
+ذلك. افترض أننا نريد إثبات~$\quad \Sequent !A \lor \lnot !A$.
+إن تطبيق~$\RightR{\lor}$ عكسيًا يعطينا واحدًا من هذين
+ال!!{derivation}s:
+\begin{prooftree}
+\AxiomC{}
+\UnaryInf$ \fCenter !A$
+\RightLabel{\RightR{\lor}}
+\UnaryInf$ \fCenter !A \lor \lnot !A$
+\DisplayProof\qquad\bottomAlignProof
+\AxiomC{}
+\UnaryInf$!A \fCenter $
+\RightLabel{\RightR{\lnot}}
+\UnaryInf$ \fCenter \lnot !A$
+\RightLabel{\RightR{\lor}}
+\UnaryInf$ \fCenter !A \lor \lnot !A$
+\end{prooftree}
+ولا ينتهي أي منهما، بالطبع، بتتابعية ابتدائية. والحيلة هي أن ندرك أن
+قاعدة الانكماش تتيح لنا دمج نسختين من !!a{sentence} في نسخة
+واحدة---وعندما نبحث عن برهان، أي نسير من أسفل إلى أعلى، يمكننا
+الاحتفاظ بنسخة من~$!A \lor \lnot !A$ في المقدمة، مثلًا،
+\begin{prooftree}
+\AxiomC{}
+\UnaryInf$ \fCenter !A \lor \lnot !A, !A$
+\RightLabel{\RightR{\lor}}
+\UnaryInf$ \fCenter !A \lor \lnot !A, !A \lor \lnot !A$
+\RightLabel{\RightR{\Contraction}}
+\UnaryInf$ \fCenter !A \lor \lnot !A$
+\end{prooftree}
+يمكننا الآن تطبيق~$\RightR{\lor}$ مرة ثانية، والحصول كذلك
+على~$\lnot !A$، وهو ما يقود إلى !!{derivation} كامل.
+\begin{prooftree}
+\Axiom$!A \fCenter !A$
+\RightLabel{\RightR{\lnot}}
+\UnaryInf$\fCenter !A, \lnot !A$
+\RightLabel{\RightR{\lor}}
+\UnaryInf$\fCenter !A, !A \lor \lnot !A$
+\RightLabel{\RightR{\Exchange}}
+\UnaryInf$ \fCenter !A \lor \lnot !A, !A$
+\RightLabel{\RightR{\lor}}
+\UnaryInf$ \fCenter !A \lor \lnot !A, !A \lor \lnot !A$
+\RightLabel{\RightR{\Contraction}}
+\UnaryInf$ \fCenter !A \lor \lnot !A$
+\end{prooftree}
+\end{ex}
+
+\begin{prob}
+أعط !!{derivation}s للتتابعيات الآتية:
+\begin{enumerate}
+\item $!A \land (!B \land !C) \Sequent (!A \land !B) \land !C$.
+\item $!A \lor (!B \lor !C) \Sequent (!A \lor !B) \lor !C$.
+\item $!A \lif (!B \lif !C) \Sequent !B \lif (!A \lif !C)$.
+\item $!A \Sequent \lnot\lnot !A$.
+\end{enumerate}
+\end{prob}
+
+\begin{prob}
+أعط !!{derivation}s للتتابعيات الآتية:
+\begin{enumerate}
+\item $(!A \lor !B) \lif !C \Sequent !A \lif !C$.
+\item $(!A \lif !C) \land (!B \lif !C) \Sequent (!A \lor !B) \lif !C$.
+\item $\Sequent \lnot(!A \land \lnot !A)$.
+\item $!B \lif !A \Sequent \lnot !A \lif \lnot !B$.
+\item $\Sequent (!A \lif \lnot !A) \lif \lnot !A$.
+\item $\Sequent \lnot(!A \lif !B) \lif \lnot !B$.
+\item $!A \lif !C \Sequent \lnot (!A \land \lnot !C)$.
+\item $!A \land \lnot !C \Sequent \lnot (!A \lif !C)$.
+\item $!A \lor !B, \lnot !B \Sequent !A$.
+\item $\lnot !A \lor \lnot !B \Sequent \lnot(!A \land !B)$.
+\item $\Sequent (\lnot !A \land \lnot !B) \lif\lnot(!A \lor !B)$.
+\item $\Sequent \lnot(!A \lor !B) \lif (\lnot !A \land \lnot !B)$.
+\end{enumerate}
+\end{prob}
+
+\begin{prob}
+أعط !!{derivation}s للتتابعيات الآتية:
+\begin{enumerate}
+\item $\lnot(!A \lif !B) \Sequent !A$.
+\item $\lnot(!A \land !B) \Sequent \lnot !A \lor \lnot !B$.
+\item $!A \lif !B \Sequent \lnot !A \lor !B$.
+\item $\Sequent \lnot \lnot !A \lif !A$.
+\item $!A \lif !B, \lnot !A \lif !B \Sequent !B$.
+\item $(!A \land !B) \lif !C \Sequent (!A \lif !C) \lor (!B \lif !C)$.
+\item $(!A \lif !B) \lif !A \Sequent !A$.
+\item $\Sequent (!A \lif !B) \lor (!B \lif !C)$.
+\end{enumerate}
+(تتطلب هذه كلها القاعدة~$\RightR{\Contraction}$.)
+\end{prob}
+\end{document}

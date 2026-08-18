@@ -1,0 +1,270 @@
+% Part: lambda-calculus
+% Chapter: syntax
+% Section: alpha
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{syn}{alp}
+\olsection{تحويل~$\alpha$}
+
+ما العلاقة بين~$\lambd[x][x]$ و$\lambd[y][y]$؟ كلاهما يمثل دالة
+الهوية، مع أنهما بالطبع حدان مختلفان من الوجهة التركيبية. ولا يختلفان إلا
+في اسم المتغير المقيد، وأحدهما ناتج ``إعادة تسمية'' المتغير المقيد في
+الآخر. وهذا ما يسمى \emph{تحويل~$\alpha$}.
+
+\begin{defn}[تغيير المتغير المقيد، $\aconvone$]
+  إذا احتوى حد~$M$ واقعةً لـ$\lambd[x][N]$، وكان~$y \notin
+  \FV{N}$، وكان~$\Subst{N}{y}{x}$ معرّفًا، فإن استبدال هذه الواقعة بـ
+  \begin{equation*}
+    \lambd[y][\Subst{N}{y}{x}]
+  \end{equation*}
+  بحيث ينتج~$M'$ يسمى \emph{تغييرًا للمتغير المقيد}، ويكتب
+  $M \redone[\alpha] M'$.
+\end{defn}
+
+\begin{defn}[توافق العلاقة]
+  يقال إن علاقة~$R$ على الحدود \emph{متوافقة} إذا استوفت الشروط الآتية:
+  \begin{enumerate}
+  \item إذا كان~$R N N'$ فإن~$R \lambd[x][N] \lambd[x][N']$
+  \item إذا كان~$R P P'$ فإن~$R (PQ) (P'Q)$
+  \item إذا كان~$R Q Q'$ فإن~$R (PQ) (PQ')$
+  \end{enumerate}
+\end{defn}
+
+فلنعد الآن صياغة التعريف:
+\begin{defn}[تغيير المتغير المقيد، $\aconvone$]
+  \emph{تغيير المتغير المقيد} ($\redone[\alpha]$) هو أصغر علاقة متوافقة
+  على الحدود تستوفي الشرط الآتي:
+  \begin{align*}
+    &\lambd[x][N] \redone[\alpha] \lambd[y][\Subst{N}{y}{x}] && \text{إذا
+      كان~$x \neq y$ و$y \notin \FV{N}$} \\
+    & &&\text{وكان~$\Subst{N}{y}{x}$ معرّفًا}
+  \end{align*}
+\end{defn}
+
+تعني ``أصغر'' هنا أن العلاقة لا تحتوي إلا الأزواج التي يقتضيها التوافق
+والشرط الإضافي، ولا تحتوي سواها. ولذلك يمكن تعريف هذه العلاقة أيضًا كما
+يأتي:
+
+\begin{defn}[تغيير المتغير المقيد، $\aconvone$] \ollabel{defn:aconvone}
+  يعرّف \emph{تغيير المتغير المقيد} ($\aconvone$) استقرائيًا كما يأتي:
+  \begin{enumerate}
+  \item إذا كان~$N \aconvone N'$ فإن~$\lambd[x][N] \aconvone
+    \lambd[x][N']$ \ollabel{defn:aconvone1}
+  \item إذا كان~$P \aconvone P'$ فإن~$(PQ) \aconvone (P'Q)$ \ollabel{defn:aconvone2}
+  \item إذا كان~$Q \aconvone Q'$ فإن~$(PQ) \aconvone (PQ')$ \ollabel{defn:aconvone3}
+  \item إذا كان~$x \neq y$ و$y \notin \FV{N}$ وكان~$\Subst{N}{y}{x}$
+    معرّفًا، فإن~$\lambd[x][N] \redone[\alpha]
+    \lambd[y][\Subst{N}{y}{x}]$.
+    \ollabel{defn:aconvone4}
+  \end{enumerate}
+\end{defn}
+
+التعريفات متكافئة، لكننا نترك البرهان تمرينًا. وسنستعمل من الآن فصاعدًا
+التعريف الاستقرائي.
+
+\begin{defn}[تحويل~$\alpha$، $\aconv$]
+  \emph{تحويل~$\alpha$} ($\aconv$) هو أصغر علاقة انعكاسية ومتعدية على
+  الحدود تحتوي~$\aconvone$.
+\end{defn}
+
+وكما سبق، تعني ``أصغر'' أن العلاقة لا تحتوي إلا الأزواج التي يقتضيها
+التعدي و$\aconvone$، وهذا يقود إلى التعريف المكافئ الآتي:
+
+\begin{defn}[تحويل~$\alpha$، $\aconv$] \ollabel{defn:aconv}
+  يعرّف \emph{تحويل~$\alpha$} ($\aconv$) استقرائيًا كما يأتي:
+  \begin{enumerate}
+  \item إذا كان~$P \aconv Q$ و$Q \aconv R$، فإن~$P \aconv R$.
+    \ollabel{defn:aconv1}
+  \item إذا كان~$P \aconvone Q$، فإن~$P \aconv Q$. \ollabel{defn:aconv2}
+  \item $P \aconv P$. \ollabel{defn:aconv3}
+  \end{enumerate}
+\end{defn}
+
+\begin{ex}
+  يتحول~$\lambd[x][f x]$ بتحويل~$\alpha$ إلى~$\lambd[y][f
+  y]$، والعكس صحيح. وبعبارة غير رسمية، كلاهما دالة تقبل وسيطًا وتعيد
+  نتيجة تطبيق~$f$ على ذلك الوسيط، مع الإحالة إلى متغير البيئة~$f$.
+
+  ولا يتحول~$\lambd[x][f x]$ بتحويل~$\alpha$ إلى~$\lambd[x][g
+    x]$. وبعبارة غير رسمية، يحيل الحدان إلى متغيري البيئة~$f$ و$g$ على
+  الترتيب، وهذا يجعلهما دالتين مختلفتين: فسلوكهما يختلف في البيئات التي
+  تختلف فيها~$f$ و$g$.
+\end{ex}
+
+\begin{prob}
+  هل كل زوج من أزواج الحدود الآتية قابل لتحويل~$\alpha$؟
+  \begin{enumerate}
+  \item $\lambd[x][\lambd[y][x]]$ و$\lambd[y][\lambd[x][y]]$
+  \item $\lambd[x][\lambd[y][x]]$ و$\lambd[c][\lambd[b][a]]$
+  \item $\lambd[x][\lambd[y][x]]$ و$\lambd[c][\lambd[b][a]]$
+  \end{enumerate}
+\end{prob}
+
+\begin{lem}\ollabel{lem:fv-one}
+  إذا كان~$P \aconvone Q$ فإن~$\FV{P} = \FV{Q}$.
+\end{lem}
+
+\begin{proof}
+  بالاستقراء على~!!{derivation} لـ$P \aconvone Q$.
+  \begin{enumerate}
+  \item إذا كانت القاعدة الأخيرة هي~\olref{defn:aconvone4}، كان~$P$ من
+    الصورة~$\lambd[x][N]$ و$Q$ من الصورة
+    $\lambd[y][\Subst{N}{y}{x}]$، حيث~$x \neq y$ و$y \notin \FV{N}$
+    و$\Subst{N}{y}{x}$ معرّف. ونميز حالتين بحسب كون~$x \in \FV{N}$:
+    \begin{enumerate}
+    \item إذا كان~$x \in \FV{N}$، فعندئذ:
+      \begin{align*}
+        \FV{\lambd[y][\Subst{N}{y}{x}]} &=
+        \FV{\Subst{N}{y}{x}} \setminus \{y\} \\
+        & = ((\FV{N} \setminus \{x\}) \cup \{y\}) \setminus \{y\}
+         && \text{ بموجب \olref[sub]{thm:infv}} \\
+        & = \FV{N} \setminus \{x\} \\
+        & = \FV{\lambd[x][N]}
+      \end{align*}
+    \item إذا كان~$x \notin \FV{N}$، فعندئذ:
+      \begin{align*}
+        \FV{\lambd[y][\Subst{N}{y}{x}]}
+        & = \FV{\Subst{N}{y}{x}} \setminus \{y\} \\
+        & = \FV{N} \setminus \{x\}
+         && \text{بموجب \olref[sub]{thm:notinfv}} \\
+        & = \FV{\lambd[x][N]}.
+      \end{align*}
+    \end{enumerate}
+  \item تترك الحالات الثلاث الأخرى تمارين. 
+  \end{enumerate}
+\end{proof}
+
+\begin{prob}
+  أكمل برهان~\olref[lam][syn][alp]{lem:fv-one}.
+\end{prob}
+
+\begin{lem}\ollabel{lem:inv}
+  إذا كان~$P \aconvone Q$ فإن~$Q \aconvone P$.
+\end{lem}
+
+\begin{proof}
+  بالاستقراء على~!!{derivation} لـ$P \aconvone Q$.
+  \begin{enumerate}
+  \item إذا كانت القاعدة الأخيرة هي~\olref{defn:aconvone4}، كان~$P$ من
+    الصورة~$\lambd[x][N]$ و$Q$ من الصورة
+    $\lambd[y][\Subst{N}{y}{x}]$، حيث~$x \neq y$ و$y \notin \FV{N}$
+    و$\Subst{N}{y}{x}$ معرّف. أولًا، لدينا~$y \notin
+    \FV{\Subst{N}{y}{x}}$ بموجب~\olref[sub]{thm:clr}. وبموجب
+    \olref[sub]{thm:inv} نعلم أن~$\Subst{\Subst{N}{y}{x}}{x}{y}$ ليس
+    معرّفًا فحسب، بل يساوي~$N$ أيضًا. ثم نحصل بموجب
+    \olref{defn:aconvone4} على~$\lambd[y][\Subst{N}{y}{x}]
+    \aconvone \lambd[x][\Subst{\Subst{N}{y}{x}}{x}{y}] =
+    \lambd[x][N]$.
+  \end{enumerate}
+\end{proof}
+
+\begin{prob}
+  أكمل برهان~\olref[lam][syn][alp]{lem:inv}
+\end{prob}
+
+\begin{thm}
+  تحويل~$\alpha$ علاقة تكافؤ على الحدود، أي إنه انعكاسي ومتناظر ومتعدٍ.
+\end{thm}
+
+\begin{proof}
+  \begin{enumerate}
+  \item يمكن تغيير كل حد~$M$ إلى~$M$ بإجراء \emph{صفر} من تغييرات
+    المتغيرات المقيدة.
+  \item إذا تحول~$P$ بتحويل~$\alpha$ إلى~$Q$ بسلسلة من تغييرات
+    المتغيرات المقيدة، أمكننا انطلاقًا من~$Q$ أن نعكس هذه التغييرات
+    ببساطة (بموجب~\olref{lem:inv}) وبترتيب معاكس، فنحصل على~$P$.
+  \item إذا تحول~$P$ بتحويل~$\alpha$ إلى~$Q$ بسلسلة من تغييرات
+    المتغيرات المقيدة، وتحول~$Q$ إلى~$R$ بسلسلة أخرى، أمكننا تغيير~$P$
+    إلى~$R$ بتطبيق السلسلة الأولى ثم الثانية.
+  \end{enumerate}
+\end{proof}
+
+ومن الآن فصاعدًا نقول إن~$M$ و$N$ \emph{متكافئان بحسب~$\alpha$}، ونكتب
+$M \aeq N$، إذا وفقط إذا تحول~$M$ بتحويل~$\alpha$ إلى~$N$ (وهو، كما
+برهنا للتو، حاصل إذا وفقط إذا تحول~$N$ بتحويل~$\alpha$ إلى~$M$).
+
+\begin{thm}\ollabel{thm:fv}
+  إذا كان~$M \aeq N$، فإن~$\FV{M} = \FV{N}$.
+\end{thm}
+
+\begin{proof}
+  ينتج مباشرة من~\olref{lem:fv-one}.
+\end{proof}
+
+\begin{lem}\ollabel{lem:sub:R}
+  إذا كان~$R \aeq R'$ وكان~$\Subst{M}{R}{y}$ معرّفًا، فإن
+  $\Subst{M}{R'}{y}$ معرّف ومكافئ بحسب~$\alpha$ لـ$\Subst{M}{R}{y}$.
+\end{lem}
+
+\begin{proof}
+  تمرين.
+\end{proof}
+
+\begin{prob}
+  أثبت~\olref[lam][syn][alp]{lem:sub:R}.
+\end{prob}
+
+تذكّر أن الإحلال في~\olref[sub]{sec} غير معرّف في بعض الحالات؛ لكننا
+نستطيع، باستعمال تحويل~$\alpha$ على الحدود، أن نجعل الإحلال معرّفًا
+دائمًا بإعادة تسمية المتغيرات المقيدة. وتحفظ النتيجة التكافؤ بحسب
+$\alpha$، كما تبين المبرهنة الآتية:
+
+\begin{thm}\ollabel{thm:sub}
+  لكل~$M$ و$R$ و$y$ يوجد~$M'$ بحيث~$M \aeq M'$ ويكون
+  $\Subst{M'}{R}{y}$ معرّفًا. وفضلًا على ذلك، إذا وجد زوج آخر يحقق
+  $M'' \aeq M$ و$R''$ وكان~$\Subst{M''}{R''}{y}$ معرّفًا و$R'' \aeq
+  R$، فإن~$\Subst{M'}{R}{y} \aeq \Subst{M''}{R''}{y}$.
+\end{thm}
+
+\begin{proof}
+  بالاستقراء على تكوين~$M$:
+  \begin{enumerate}
+  \item إذا كان~$M$ متغيرًا~$z$: تمرين.
+  \item افترض أن~$M$ من الصورة~$\lambd[x][N]$. اختر متغيرًا~$z$
+    يختلف عن~$x$ و$y$ ويحقق~$z \notin \FV{N}$ و$z \notin \FV{R}$.
+    وبفرض الاستقراء يوجد~$N'$ بحيث~$N' \aeq N$ ويكون
+    $\Subst{N'}{z}{x}$ معرّفًا. وعندئذ أيضًا~$\lambd[x][N] \aeq
+    \lambd[x][N']$ بموجب
+    \olref{defn:aconvone}\olref{defn:aconvone1}. والآن~$\lambd[x][N']
+    \aeq \lambd[z][\Subst{N'}{z}{x}]$ بموجب
+    \olref{defn:aconvone}\olref{defn:aconvone4}. ويمكننا فعل ذلك لأن
+    $z \ne x$ و$z \notin \FV{N'}$ و$\Subst{N'}{z}{x}$ معرّف. وأخيرًا،
+    يكون~$\Subst{\lambd[z][\Subst{N'}{z}{x}]}{R}{y}$ معرّفًا لأن~$z
+    \neq y$ و$z \notin \FV{R}$.
+
+    وفضلًا على ذلك، إذا وجد~$N''$ و$R''$ آخران يستوفيان الشروط نفسها،
+    كان
+    \begin{multline*}
+      \Subst{(\lambd[z][\Subst{N''}{z}{x}])}{R''}{y} =\\
+    \begin{aligned}
+      &= \lambd[z][\Subst{\Subst{N''}{z}{x}}{R''}{y}] \\
+      &= \lambd[z][\Subst{\Subst{N''}{z}{x}}{R}{y}] && \text{بموجب
+        \olref{lem:sub:R}}\\
+      &=\lambd[z][\Subst{\Subst{N'}{z}{x}}{R}{y}]
+      && \text{بفرض الاستقراء}\\
+      &=\Subst{(\lambd[z][\Subst{N'}{z}{x}])}{R}{y}
+    \end{aligned}
+    \end{multline*}
+    \item إذا كان~$M$ من الصورة~$(PQ)$: تمرين.
+  \end{enumerate}
+\end{proof}
+
+\begin{prob}
+  أكمل برهان~\olref[lam][syn][alp]{thm:sub}.
+\end{prob}
+
+\begin{cor}\ollabel{cor:sub}
+  لكل~$M$ و$R$ و$y$ يوجد زوج~$M'$ و$R'$ بحيث~$M' \aeq M$ و$R \aeq
+  R'$ ويكون~$\Subst{M'}{R'}{y}$ معرّفًا. وفضلًا على ذلك، إذا وجد زوج
+  آخر يحقق~$M'' \aeq M$ و$R''$ وكان~$\Subst{M''}{R''}{y}$ معرّفًا،
+  فإن~$\Subst{M'}{R'}{y} \aeq \Subst{M''}{R''}{y}$.
+\end{cor}
+
+\begin{proof}
+  ينتج مباشرة من~\olref{thm:sub}.
+\end{proof}
+
+\end{document}

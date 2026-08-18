@@ -1,0 +1,152 @@
+% Part: first-order-logic
+% Chapter: syntax-and-semantics
+% Section: first-order-languages
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{syn}{fol}
+
+\olsection{لغات الرتبة الأولى}
+
+
+تُبنى تعبيرات منطق الرتبة الأولى من معجم أساسي يحتوي على
+\emph{!!{variable}s} و\emph{!!{constant}s} و\emph{!!{predicate}s}
+وأحيانًا \emph{!!{function}s}. ومنها، مع الروابط المنطقية والمكممات
+وعلامات الترقيم كالأقواس والفواصل، تتكون \emph{الحدود}
+و\emph{!!{formula}s}.
+
+\begin{explain}
+على نحو غير رسمي، ال!!{predicate}s أسماء للخصائص والعلاقات،
+وال!!{constant}s أسماء للكائنات المفردة، وال!!{function}s أسماء
+للتطبيقات. وهذه، باستثناء ال!!{identity}~$\eq$، هي
+\emph{الرموز غير المنطقية}، وهي تؤلف مجتمعة لغةً ما. وتتحدد أي لغة
+رتبة أولى~$\Lang L$ برموزها غير المنطقية. وفي أعم حالة، تحتوي
+$\Lang L$ على عدد لا نهائي من الرموز من كل نوع.
+\end{explain}
+
+نستعمل في الحالة العامة الرموز الآتية في منطق الرتبة الأولى:
+
+\begin{enumerate}
+\item الرموز المنطقية
+\begin{enumerate}
+\item الروابط المنطقية:
+  \startycommalist
+  \iftag{prvNot}{\ycomma $\lnot$ (النفي)}{}%
+  \iftag{prvAnd}{\ycomma $\land$ (العطف)}{}%
+  \iftag{prvOr}{\ycomma $\lor$ (الفصل)}{}%
+  \iftag{prvIf}{\ycomma $\lif$ (!!{conditional})}{}%
+  \iftag{prvIff}{\ycomma $\liff$ (!!{biconditional})}{}%
+  \iftag{prvAll}{\ycomma $\lforall$ (المكمم الكلي)}{}%
+  \iftag{prvEx}{\ycomma $\lexists$ (المكمم الوجودي)}{}.
+\tagitem{prvFalse}{الثابت القضوي الدال على !!{falsity}~$\lfalse$.}{}
+\tagitem{prvTrue}{الثابت القضوي الدال على !!{truth}~$\ltrue$.}{}
+\item ال!!{identity} الثنائية المحل~$\eq$.
+\item مجموعة !!{denumerable} من ال!!{variable}s: $\Obj v_0$، و$\Obj v_1$، و$\Obj
+  v_2$، و\dots
+\end{enumerate}
+\item الرموز غير المنطقية التي تؤلف \emph{اللغة القياسية} لمنطق
+  الرتبة الأولى
+\begin{enumerate}
+\item مجموعة !!{denumerable} من ال!!{predicate}s ذات $n$ من المحال لكل
+  $n>0$: $\Obj A^n_0$، و$\Obj A^n_1$، و$\Obj A^n_2$، و\dots
+\item مجموعة !!{denumerable} من ال!!{constant}s: $\Obj c_0$، و$\Obj c_1$، و$\Obj
+  c_2$، و\dots.
+\item مجموعة !!{denumerable} من ال!!{function}s ذات $n$ من المحال لكل
+  $n>0$: $\Obj f^n_0$، و$\Obj f^n_1$، و$\Obj f^n_2$، و\dots
+\end{enumerate}
+\item علامات الترقيم: القوسان ( و)، والفاصلة.
+\end{enumerate}
+
+ستصاغ معظم تعريفاتنا ونتائجنا للغة القياسية الكاملة لمنطق الرتبة
+الأولى. غير أننا قد نقصر اللغة، بحسب التطبيق، على عدد قليل من
+ال!!{predicate}s وال!!{constant}s وال!!{function}s.
+
+\begin{ex}
+تحتوي لغة الحساب~$\Lang L_A$ على !!{predicate} ثنائي المحل واحد~$<$،
+و!!{constant} واحد~$\Obj 0$، و!!{function} أحادية المحل واحدة~$\prime$،
+و!!{function}s ثنائية المحل اثنتين~$+$ و~$\times$.
+\end{ex}
+
+\begin{ex}
+لا تحتوي لغة نظرية المجموعات~$\Lang L_Z$ إلا على
+ال!!{predicate} الثنائي المحل~$\in$.
+\end{ex}
+
+\begin{ex}
+لا تحتوي لغة الترتيبات~$\Lang L_\le$ إلا على
+ال!!{predicate} الثنائي المحل~$\le$.
+\end{ex}
+
+وهذه، مرة أخرى، اصطلاحات: فهي رسميًا مجرد أسماء مستعارة؛ فمثلًا، $<$
+و$\in$ و$\le$ أسماء مستعارة لـ~$\Obj A^2_0$، و$\Obj 0$ اسم مستعار
+لـ~$\Obj c_0$، و$\prime$ لـ~$\Obj f^1_0$، و$+$ لـ~$\Obj f^2_0$،
+و$\times$ لـ~$\Obj f^2_1$.
+
+\iftag{defNot,defOr,defAnd,defIf,defIff,defTrue,defFalse,defEx,defAll}{%
+بالإضافة إلى الروابط الأولية و
+\iftag{notprvEx,notprvAll}{المكمم}{المكممات} المقدمة أعلاه، نستعمل
+أيضًا الرموز \emph{المعرّفة} الآتية:
+\startycommalist
+  \iftag{defNot}{\ycomma $\lnot$ (النفي)}{}%
+  \iftag{defAnd}{\ycomma $\land$ (العطف)}{}%
+  \iftag{defOr}{\ycomma $\lor$ (الفصل)}{}%
+  \iftag{defIf}{\ycomma $\lif$ (!!{conditional})}{}%
+  \iftag{defIff}{\ycomma $\liff$ (!!{biconditional})}{}%
+  \iftag{defAll}{\ycomma $\lforall$ (المكمم الكلي)}{}%
+  \iftag{defEx}{\ycomma $\lexists$ (المكمم الوجودي)}{}%
+  \iftag{defFalse}{\ycomma !!{falsity}~$\lfalse$}{}%
+  \iftag{defTrue}{\ycomma !!{truth}~$\ltrue$}{}%
+}{}.
+
+\begin{tagblock}{defNot,defOr,defAnd,defIf,defIff,defTrue,defFalse,defEx,defAll}
+\begin{explain}
+الرمز المعرّف ليس جزءًا رسميًا من اللغة، بل يُدخل بوصفه اختصارًا غير
+رسمي: فهو يتيح لنا اختصار صيغ كانت ستغدو طويلة جدًا لو اقتصرنا على
+الرموز الأولية. وهذه ميزة واضحة. غير أن الميزة الأكبر هي أن البراهين
+تصير أقصر. فإذا كان رمز ما أوليًا، وجب تناوله على حدة في البراهين.
+ومن ثم، كلما كثرت الرموز الأولية طالت براهيننا.
+\end{explain}
+\end{tagblock}
+
+% Alternate symbols
+
+\begin{intro}
+قد تكون على معرفة بمصطلحات ورموز تختلف عن تلك التي نستعملها أعلاه. يشيع
+في كتب المنطق (وعند مدرّسيه) استعمال $\sim$ و$\neg$ و~!\ للدلالة على
+«النفي»، واستعمال $\wedge$ و$\cdot$ و$\&$ للدلالة على «العطف». أما
+الرموز الشائعة لـ«الشرط» أو «الاستلزام» فهي $\rightarrow$
+و$\Rightarrow$ و$\supset$.
+\iftag{prvIff,defIff}{أما رموز «الشرط الثنائي» أو «الاستلزام المتبادل»
+  أو «التكافؤ (المادي)» فهي $\leftrightarrow$ و$\Leftrightarrow$
+  و$\equiv$.}{}
+\iftag{prvFalse,defFalse}{تتنوع أسماء الرمز~$\lfalse$؛ فيسمى
+  «الكذب» أو «الباطل» أو «المحال» أو «القاع».}{}
+\iftag{prvTrue,defTrue}{تتنوع أسماء الرمز~$\ltrue$؛ فيسمى
+  «الصدق» أو «الحق» أو «القمة».}{}
+
+ومن الاصطلاح استعمال الأحرف الصغيرة من أول الأبجدية اللاتينية (مثل
+$a$ و$b$ و$c$) لل!!{constant}s (وتسمى أحيانًا أسماء)، والأحرف
+الصغيرة من آخرها (مثل $x$ و$y$ و$z$) لل!!{variable}s. وتقترن
+المكممات بال!!{variable}s، مثل~$x$؛ ومن الاختلافات الترميزية
+$\forall x$ و$(\forall x)$ و$(x)$ و$\Pi x$ و$\bigwedge_x$ للمكمم
+الكلي، و$\exists x$ و$(\exists x)$ و$(Ex)$ و$\Sigma x$ و
+$\bigvee_x$ للمكمم الوجودي.
+\end{intro}
+
+\begin{explain}
+قد نعامل جميع المؤثرات القضوية والمكممين كرموز أولية في اللغة. وقد
+نختار بدلًا من ذلك ذخيرة أصغر من الرموز الأولية ونعامل سائر
+ال!!{operator}s بوصفها معرّفة. ومن مجموعات المؤثرات البوليانية
+«الكاملة من حيث الدوال الصدقية» $\{ \lnot, \lor \}$ و
+$\{ \lnot, \land \}$ و$\{ \lnot, \lif\}$؛ ويمكن ضم كل منها إلى أي
+من المكممين للحصول على لغة رتبة أولى كاملة القدرة التعبيرية.
+
+وقد تكون على معرفة ب!!{operator}s أخرى: شرطة شيفر~$|$ (المنسوبة إلى
+هنري شيفر)، وسهم بيرس~$\downarrow$، المعروف أيضًا بخنجر كواين. وإذا
+أُعطيا قراءتيهما المعتادتين، «نفي العطف» و«نفي الفصل» (على الترتيب)،
+كان كل من هذين المؤثرين كاملًا من حيث الدوال الصدقية بمفرده.
+\end{explain}
+
+\end{document}

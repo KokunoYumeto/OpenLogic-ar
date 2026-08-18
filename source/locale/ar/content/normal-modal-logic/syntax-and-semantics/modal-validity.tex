@@ -1,0 +1,74 @@
+% Part: normal-modal-logic
+% Chapter: syntax-and-semantics
+% Section: modal-validity
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{syn}{val}
+
+\olsection{الصلاحية}
+
+\begin{explain}
+  للـ!!^{formula}s الصادقة في جميع النماذج، أي الصادقة في كل عالم من
+  كل نموذج، أهمية خاصة. فهي تمثل القضايا الموجهية الصادقة كيفما فُسّر
+  $\Box$ و$\Diamond$، ما دام التفسير ``سويًا'' بمعنى أنه متولد من
+  علاقة وصول ما على العوالم الممكنة. ونسمي هذه ال!!{formula}s
+  \emph{صالحة}. فمثلًا، الصيغة~$\Box(p \land q) \lif \Box p$ صالحة.
+  غير أن بعض ال!!{formula}s التي قد يتوقع المرء صلاحيتها بناء على
+  تفسير~$\Box$ بجهة الصدق، مثل~$\Box p \lif p$، ليست صالحة. ومن أوجه
+  أهمية النماذج العلائقية أن أنواعًا مختلفة من علاقات الوصول تستطيع
+  تمثيل تفسيرات مختلفة لـ$\Box$ و$\Diamond$. وهذا يوحي بأن نعرّف
+  الصلاحية لا بالنسبة إلى 
+  \emph{جميع} النماذج فحسب، بل بالنسبة إلى جميع النماذج
+  \emph{من نوع معين}. وسيتبين، مثلًا، أن~$\Box p \lif p$ صادقة في
+  جميع النماذج التي يمكن فيها الوصول من كل عالم إلى نفسه، أي التي
+  تكون فيها~$R$ انعكاسية. ويتيح لنا تعريف الصلاحية بالنسبة إلى أصناف
+  النماذج صياغة ذلك بإيجاز: الصيغة~$\Box p \lif p$ صالحة في صنف
+  النماذج الانعكاسية.
+\end{explain}
+
+\begin{defn}
+  تكون !!^a{formula}~$!A$ \emph{صالحة} في صنف النماذج~$\mClass{C}$
+  إذا كانت صادقة في كل نموذج من~$\mClass{C}$ (أي في كل عالم من كل
+  نموذج في~$\mClass{C}$). وإذا كانت~$!A$ صالحة في~$\mClass{C}$، كتبنا
+  $\mClass{C} \Entails !A$؛ ونكتب~$\Entails !A$ إذا كانت~$!A$ صالحة
+  في صنف \emph{جميع} النماذج.
+\end{defn}
+
+\begin{prop}\ollabel{prop:subset-class}
+  إذا كانت~$!A$ صالحة في~$\mClass{C}$، فهي صالحة أيضًا في كل صنف
+  $\mClass{C}' \subseteq \mClass{C}$.
+\end{prop}
+
+\begin{prop}\ollabel{prop:Nec-rule}
+  إذا كانت~$!A$ صالحة، فإن~$\Box!A$ صالحة أيضًا.
+\end{prop}
+
+\begin{proof}
+  افترض~$\Entails !A$. ولإثبات~$\Entails \Box!A$، ليكن
+  $\mModel{M} = \tuple{W, R, V}$ نموذجًا وليكن~$w \in W$. فإذا كان
+  $Rww'$، كان~$\mSat{M}{!A}[w']$ لأن~$!A$ صالحة، ومن ثم كان أيضًا
+  $\mSat{M}{\Box!A}[w]$. ولما كان~$\mModel{M}$ و$w$ اعتباطيين، كان
+  $\Entails \Box!A$.
+\end{proof}
+
+\begin{prob}
+  أثبت أن الصيغ الآتية صالحة:
+  \begin{enumerate}
+  \item $\Box p \lif \Box (q \lif p)$؛
+  \item $\Box \lnot \lfalse$؛
+  \item $\Box p \lif (\Box q \lif \Box p)$.
+  \end{enumerate}
+\end{prob}
+
+\begin{prob}
+  أثبت أن~$!A \lif \Box!A$ صالحة في صنف النماذج~$\mClass{C}$ من
+  الصورة~$\mModel{M} = \tuple{W, R, V}$ حيث~$W = \{w\}$. وبالمثل،
+  أثبت أن~$!B \lif \Box !A$ و$\Diamond !A \lif !B$ صالحتان في صنف
+  النماذج~$\mModel{M} = \tuple{W, R, V}$ التي فيها
+  $R = \emptyset$.
+\end{prob}
+
+\end{document}

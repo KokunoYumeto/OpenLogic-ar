@@ -1,0 +1,132 @@
+% Part: normal-modal-logic
+% Chapter: filtrations
+% Section: euclidean-filtrations
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{fil}{euc}
+
+\olsection{ترشيحات النماذج الإقليدية}
+
+لا ينجح نهج~\olref[acc]{sec} في حالة النماذج الإقليدية أو المتسلسلة
+والإقليدية. انظر إلى النموذج في أعلى~\olref{fig:ser-eucl}، وهو إقليدي
+ومتسلسل معًا. ولتكن~$\Gamma=\{p,\Box p\}$. عند أخذ ترشيح عبر~$\Gamma$،
+يكون~$[w_1]=[w_3]$، لأن~$w_1$ و$w_3$ هما العالمان الوحيدان اللذان
+يتفقان على~$\Gamma$. ويرث كل ترشيح أيضًا السهم من~$\mModel{M}$، كما
+يبين~\olref{fig:ser-eucl2}. وذلك النموذج ليس إقليديًا. وفوق ذلك، لا
+يمكننا إضافة أسهم إلى ذلك النموذج لجعله إقليديًا؛ إذ سيتعين أن نضيف سهمين
+متعاكسين بين~$[w_2]$ و$[w_4]$، ثم بين~$[w_2]$ و$[w_5]$ أيضًا. لكن
+يفترض أن يصدق~$\Box p$ عند~$w_2$، في حين يكذب~$p$ عند~$w_5$.
+
+\begin{figure}[htpb]
+  \centering
+  \begin{tikzpicture}[modal]
+    \node[world] (w1)
+          [label={left: \mFalse{p}},
+            label={below: $\mSat{{}}{\Box p}$}] {$w_1$};
+    \node[world] (w2)
+          [label={right: \mTrue{p}},
+            label = {below: $\mSat{{}}{\Box p}$},
+            right=of w1] {$w_2$};
+    \draw[->] (w1) to (w2);
+    \draw[reflexive above] (w2) to (w2);
+    \node[world] (w3)
+          [label={left: \mFalse{p}},
+            label={below: $\mSat{{}}{\Box p}$},
+            below=of w1] {$w_3$};
+    \node[world] (w4)
+          [label={right:\mTrue{p}},
+            label={below: $\mSat/{{}}{\Box p}$},
+            right=of w3] {$w_4$};
+    \draw[->] (w3) to (w4);
+    \draw[reflexive above] (w4) to (w4);
+    \node[world] (w5)
+          [label={right: \mFalse{p}},
+            label=below:$\mSat/{{}}{\Box p}$,
+            right=of w4] {$w_5$};
+    \draw[->, bend left] (w4) to (w5);
+    \draw[->, bend left] (w5) to (w4);
+    \draw[reflexive above] (w5) to (w5);
+  \end{tikzpicture}
+  \caption{نموذج متسلسل وإقليدي.}
+  \ollabel{fig:ser-eucl}
+\end{figure}
+
+\begin{figure}[ht]
+  \centering
+  \begin{tikzpicture}[modal,every text node part/.style={align=center}]
+    \node[world] (w1)
+          [label={left: \mFalse{p}},
+            label={right:$[w_1]=[w_3]$},
+            label={below: $\mSat{{}}{\Box p}$}] {$[w_1]$};
+    \node[world] (w2)
+         [label={right: \mTrue{p}},
+           label = {below: $\mSat{{}}{\Box p}$},
+           right=of w1, yshift=1.5cm] {$[w_2]$};
+    \draw[->] (w1) to (w2);
+    \draw[reflexive above] (w2) to (w2);
+    \node[world] (w4)
+         [label={right:\mTrue{p}},
+           label={below: $\mSat/{{}}{\Box p}$},
+           right=of w1,yshift=-1.5cm] {$[w_4]$};
+    \draw[->] (w1) to (w4);
+    \draw[reflexive above] (w4) to (w4);
+    \node[world] (w5)
+         [label={right: \mFalse{p}},
+             label=below:$\mSat/{{}}{\Box p}$,
+             right=of w4] {$[w_5]$};
+    \draw[->, bend left] (w4) to (w5);
+    \draw[->, bend left] (w5) to (w4);
+    \draw[reflexive above] (w5) to (w5);
+  \end{tikzpicture}
+  \caption{ترشيح النموذج في~\olref{fig:ser-eucl}.}
+  \ollabel{fig:ser-eucl2}
+\end{figure}
+
+وعلى وجه الخصوص، لا يكفي للحصول على ترشيح إقليدي أن ننظر في الترشيحات
+عبر مجموعات اعتباطية~$\Gamma$ مغلقة تحت أخذ ال!!{formula}s الجزئية. بل
+يجب أن ننظر في مجموعات~$\Gamma$ \emph{مغلقة جهويًا} (انظر
+\olref[pre]{defn:modallyclosed}). وهذه المجموعات من الجمل لا نهائية، ولذلك
+لا تعطينا فورًا خاصية النموذج المنتهي أو قابلية النظام المقابل للقرار.
+
+\begin{thm}\ollabel{thm:modal-closed-filt}
+  لتكن~$\Gamma$ مغلقة جهويًا، وليكن~$\mModel{M}=\tuple{W,R,V}$، وليكن
+  $\mModel{M^*}=\tuple{W^*,R^*,V^*}$ الترشيح الأخشن لـ~$\mModel{M}$
+  عبر~$\Gamma$.
+  \begin{enumerate}
+  \item إذا كان~$\mModel{M}$ متعديًا، كان~$\mModel{M^*}$ متعديًا.
+  \item إذا كان~$\mModel{M}$ إقليديًا، كان~$\mModel{M^*}$ إقليديًا.
+  \item إذا كان~$\mModel{M}$ متناظرًا، كان~$\mModel{M^*}$ متناظرًا.
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+\begin{enumerate}
+  \item إذا كان~$\mModel{M^*}$ الترشيح الأخشن، فعندئذ، بحسب التعريف،
+    يتحقق~$R^*[u][v]$ إذا وفقط إذا تحقق~$C_1(u,v)$. ولإثبات التعدي،
+    افترض~$C_1(u,v)$ و$C_1(v,w)$؛ وعلينا إثبات~$C_1(u,w)$.
+    \iftag{prvBox}{افترض~$\mSat{M}{\Box !A}[u]$؛ عندئذ
+      $\mSat{M}{\Box\Box!A}[u]$، لأن~\Ax{4} صالحة في جميع النماذج
+      المتعدية؛ ولأن~$\Box\Box!A \in \Gamma$ بالإغلاق، ينتج من
+      $C_1(u,v)$ أن~$\mSat{M}{\Box!A}[v]$، ثم ينتج من~$C_1(v,w)$ أن
+      $\mSat{M}{!A}[w]$. }{}\iftag{prvDiamond}{افترض
+      $\mSat{M}{!A}[w]$؛ عندئذ~$\mSat{M}{\Diamond !A}[v]$ بحسب
+      $C_1(v,w)$، لأن~$\Diamond !A \in \Gamma$ بالإغلاق الجهوي. ومن
+      $C_1(u,v)$ نحصل على~$\mSat{M}{\Diamond\Diamond !A}[u]$، لأن
+      $\Diamond\Diamond!A \in \Gamma$ بالإغلاق الجهوي. ولأن
+      \Ax{4_\Diamond} صالحة في جميع النماذج المتعدية، يكون
+      $\mSat{M}{\Diamond!A}[u]$.}{}
+  \item تمرين. استعمل كون كل من~\Ax{5} و$\Ax{5_\Diamond}$ صالحة في
+    جميع النماذج الإقليدية.
+  \item تمرين. استعمل كون~\Ax{B} و$\Ax{B_\Diamond}$ صالحة في جميع
+    النماذج المتناظرة.
+\end{enumerate}
+\end{proof}
+
+\begin{prob}
+  أكمل برهان~\olref[nml][fil][euc]{thm:modal-closed-filt}.
+\end{prob}
+
+\end{document}

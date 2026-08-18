@@ -1,0 +1,68 @@
+% Part: sets-functions-relations
+% Chapter: functions
+% Section: composition
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid[ar]{sfr}{fun}{cmp}
+\olsection{تركيب الدوال}
+
+\begin{explain}
+\oliflabeldef{sfr:fun:inv:sec}{رأينا في \olref[inv]{sec} أن
+المعكوس~$f^{-1}$، حين تكون لدينا !!a{bijection} نرمز إليها بـ~$f$،
+هو نفسه دالة. ومن العمليات الأخرى على الدوال عملية التركيب؛ إذ }{}يمكننا تعريف دالة جديدة
+بتركيب دالتين، $f$ و~$g$، أي بتطبيق $f$ أولًا ثم~$g$. ولا يمكن
+ذلك، بطبيعة الحال، إلا إذا كان المدى واقعًا ضمن المجال، أي يجب أن يكون
+مدى~$f$ مجموعة جزئية من مجال~$g$. \oliflabeldef{sfr:rel:ops:sec}{وهذه
+العملية على الدوال نظير عملية الضرب النسبي على العلاقات الواردة في
+\olref[rel][ops]{sec}.}{}
+
+قد يساعد مخطط على توضيح فكرة التركيب. ففي
+\olref{fig:composition} نمثل دالتين $f \colon A \to B$
+و$g \colon B \to C$ وتركيبهما~$(\comp{f}{g})$. وتقرن
+الدالة $(\comp{f}{g}) \colon A \to C$ بين كل !!{element} من~$A$
+و!!a{element} من~$C$. ونحدد أي !!{element} من~$C$
+يقترن به !!a{element} من $A$ كما يأتي: إذا أعطينا مدخلًا $x \in
+A$، نطبق أولًا الدالة $f$ على~$x$، فنحصل على قيمة ما $f(x)
+= y \in B$، ثم نطبق الدالة $g$ على~$y$، فنحصل على قيمة ما
+$g(f(x)) = g(y) = z \in C$.
+\begin{figure}
+  \olasset[2\olphotowidth]{assets/diagrams/composition.tikz}
+  \caption{تركيب $g \circ f$ للدالتين $f$ و~$g$.}
+  \ollabel{fig:composition}
+\end{figure}
+\end{explain}
+
+\begin{defn}[التركيب]
+لتكن الدالتان $f\colon A \to B$ و$g\colon B \to C$. إن
+\emph{تركيب} $f$ مع~$g$ هو $\comp{f}{g} \colon A \to C$،
+حيث $(\comp{f}{g})(x) = g(f(x))$.
+\end{defn}
+
+\begin{ex}
+اعتبر الدالتين $f(x) = x + 1$ و$g(x) = 2x$. بما أن
+$(\comp{f}{g})(x) = g(f(x))$، فلكل مدخل~$x$ يجب أولًا أخذ لاحقه،
+ثم ضرب الناتج في اثنين. ومن ثم فإن تركيبهما
+معطى بـ$(\comp{f}{g})(x) = 2(x+1)$.
+\end{ex}
+
+\begin{prob}
+بيّن أنه إذا كانت الدالتان $f \colon A \to B$ و$g \colon B \to C$
+كلتاهما !!{injective}، فإن الدالة $\comp{f}{g}\colon A \to C$
+!!{injective}.
+\end{prob}
+
+\begin{prob}
+بيّن أنه إذا كانت الدالتان $f \colon A \to B$ و$g \colon B \to C$
+كلتاهما !!{surjective}، فإن الدالة $\comp{f}{g}\colon A \to C$
+!!{surjective}.
+\end{prob}
+
+\begin{prob}
+افترض أن $f \colon A \to B$ و$g \colon B \to C$. بيّن أن الرسم
+البياني لـ$\comp{f}{g}$ هو $R_f \mid R_g$.
+\end{prob}
+
+\end{document}

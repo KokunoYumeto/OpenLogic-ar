@@ -1,0 +1,83 @@
+% Part: model-theory
+% Chapter: basics
+% Section: dlo
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{bas}{dlo}
+\section{الترتيبات الخطية الكثيفة}
+
+\begin{defn}
+  \emph{الترتيب الخطي الكثيف بلا طرفين} هو !!a{structure}~$\Struct{M}$
+  للـ!!{language} التي تحتوي !!{predicate} واحدًا ذا موضعين~$<$ يحقق
+  الجمل الآتية:
+  \begin{enumerate}
+  \item $\lforall[x][\lnot x < x]$؛
+  \item $\lforall[x][\lforall[y][\lforall[z][(x < y \lif (y < z \lif x
+    <z ))]]]$؛
+  \item $\lforall[x][\lforall[y][(x< y \lor \eq[x][y] \lor y < x)]]$؛
+  \item $\lforall[x][\lexists[y][x < y]]$؛
+  \item $\lforall[x][\lexists[y][y < x]]$؛
+  \item $\lforall[x][\lforall[y][(x < y \lif \lexists[z][(x < z \land
+        z < y))]]]$.
+ \end{enumerate}
+\end{defn}
+
+\begin{thm}\ollabel{thm:cantorQ}
+  كل ترتيبين خطيين كثيفين !!{enumerable} بلا طرفين متشاكلان.
+\end{thm}
+
+\begin{proof}
+  لتكن $\Struct{M_1}$ و$\Struct{M_2}$ ترتيبين خطيين كثيفين
+  !!{enumerable} بلا طرفين، حيث ${<_1} = \Assign{<}{M_1}$ و
+  ${<_2} = \Assign{<}{M_2}$، ولتكن $\PIso{I}$ مجموعة جميع التشاكلات
+  الجزئية بينهما. ليست $\PIso{I}$ خالية، إذ إن
+  $\emptyset \in \PIso{I}$ على الأقل. نبين أن $\PIso{I}$ تحقق خاصية
+  الذهاب والإياب. وعندئذ $\Struct{M_1} \iso[p] \Struct{M_2}$، وتتبع
+  المبرهنة من \olref[pis]{thm:p-isom1}.
+
+  لإثبات أن $\PIso{I}$ تحقق خاصية الذهاب، خذ $p \in \PIso{I}$ و
+  $a \in \Domain{M_1}$. إذا كانت $p$ الدالة الخالية، فاختر أي
+  $b \in \Domain{M_2}$ وخذ $q = \{\langle a,b\rangle\}$. وإذا كان
+  $a$ في مجال $p$، فخذ $q=p$. ويبقى أن تكون $p$ غير خالية وألا يكون
+  $a$ في مجالها. اكتب عندئذ $p(a_i)=b_i$، حيث $i=1$، \dots،~$n$،
+  وافترض من غير إخلال بالعموم أن $a_1 <_1 a_2 <_1 \cdots <_1 a_n$.
+  أوجد $b \in \Domain{M_2}$ على النحو الآتي:
+  \begin{enumerate}
+  \item إذا كان $a <_1 a_1$، فليكن $b \in \Domain{M_2}$ بحيث
+    $b <_2 b_1$؛
+  \item إذا كان $a_n <_1 a$، فليكن $b \in \Domain{M_2}$ بحيث
+    $b_n <_2 b$؛
+ \item إذا كان $a_i <_1 a <_1 a_{i+1}$ لبعض $i$، فليكن
+   $b \in \Domain{M_2}$ بحيث $b_i <_2 b <_2 b_{i+1}$.
+  \end{enumerate}
+  ويمكن دائمًا إيجاد $b$ بالخاصية المطلوبة، لأن $\Struct{M_2}$ ترتيب
+  خطي كثيف بلا طرفين. عرّف $q = p \cup \{ \langle a, b \rangle \}$،
+  فتكون $q \in \PIso{I}$ التوسيع المطلوب لـ$p$. وهذا يثبت خاصية
+  الذهاب. وخاصية الإياب مماثلة. ومن ثم
+  $\Struct{M_1} \iso[p] \Struct{M_2}$؛ وبحسب
+  \olref[pis]{thm:p-isom1}، $\Struct{M_1} \iso \Struct{M_2}$.
+\end{proof}
+
+\begin{prob}
+  أتم برهان \olref[mod][bas][dlo]{thm:cantorQ} بالتحقق من أن
+  $\PIso{I}$ تحقق خاصية الإياب.
+\end{prob}
+
+\begin{rem}
+  لتكن $\Struct{S}$ أي ترتيب خطي كثيف !!{enumerable} بلا طرفين. عندئذ
+  (بحسب \olref{thm:cantorQ}) يكون $\Struct{S} \iso \Struct{Q}$، حيث
+  $\Struct{Q} = (\Rat, <)$ هو الترتيب الخطي الكثيف !!{enumerable} الذي
+  مجاله مجموعة الأعداد النسبية~$\Rat$. تأمل الآن مرة أخرى
+  الـ!!{structure}~$\Struct{R} = (\Real, <)$ من
+  \olref[thm]{remark:R}. رأينا أن ثمة !!a{enumerable}
+  !!{structure}~$\Struct{S}$ بحيث $\Struct{R} \elemequiv \Struct{S}$.
+  لكن $\Struct{S}$ ترتيب خطي كثيف !!a{enumerable} بلا طرفين، ومن ثم فهو
+  متشاكل (وبالتالي مكافئ أوليًا) مع الـ!!{structure}~$\Struct{Q}$.
+  وبتعدي التكافؤ الأولي، $\Struct{R} \elemequiv \Struct{Q}$. (وكان
+  بوسعنا إثبات ذلك مباشرة بإقامة $\Struct{R} \iso[p] \Struct{Q}$ بحجة
+  الذهاب والإياب نفسها.)
+\end{rem}
+\end{document}

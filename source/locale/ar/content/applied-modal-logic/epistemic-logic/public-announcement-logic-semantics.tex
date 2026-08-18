@@ -1,0 +1,123 @@
+% Part: applied-modal-logics
+% Chapter: epistemic-logic
+% Section: public-announcement-logic-semantics
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{aml}{el}{psm}
+
+\olsection{دلالات منطق الإعلان العام}
+
+النماذج العلاقية لمنطقيات الإعلان العام هي نفسها نماذج المنطقيات
+المعرفية. لكن دلالات مؤثر الإعلان العام جديدة.
+
+\begin{defn}\ollabel{defn:mmodels} يُعرَّف \emph{صدق !!a{formula}~$!A$
+  عند~$w$} في نموذج~$\mModel M = \tuple{W, R, V}$، ورمزه
+  $\mSat{M}{!A}[w]$، استقرائيًا كما يأتي:
+  \begin{enumerate}
+  \tagitem{prvFalse}{\indcase{!A}{\lfalse}{لا يتحقق $\mSat{M}{\lfalse}[w]$ أبدًا.}}{}
+  \tagitem{prvTrue}{\indcase{!A}{\ltrue}{يتحقق $\mSat{M}{\ltrue}[w]$ دائمًا.}}{}
+  \item $\mSat{M}{p}[w]$ إذا وفقط إذا كان $w \in V(p)$.
+  \tagitem{prvNot}{\indcase{!A}{\lnot !B}{$\mSat{M}{\indfrm}[w]$ إذا وفقط
+    إذا كان $\mSat/{M}{!B}[w]$.}}{}
+  \tagitem{prvAnd}{\indcase{!A}{(!B \land !C)}{$\mSat{M}{\indfrm}[w]$ إذا
+    وفقط إذا كان $\mSat{M}{!B}[w]$ و$\mSat{M}{!C}[w]$.}}{}
+  \tagitem{prvOr}{\indcase{!A}{(!B \lor !C)}{$\mSat{M}{\indfrm}[w]$ إذا
+    وفقط إذا كان $\mSat{M}{!B}[w]$ أو $\mSat{M}{!C}[w]$} (أو كلاهما).}{}
+  \tagitem{prvIf}{\indcase{!A}{(!B \lif !C)}{$\mSat{M}{\indfrm}[w]$ إذا
+    وفقط إذا كان $\mSat/{M}{!B}[w]$ أو $\mSat{M}{!C}[w]$.}}{}
+  \tagitem{prvIff}{\indcase{!A}{(!B \liff !C)}{$\mSat{M}{\indfrm}[w]$ إذا
+    وفقط إذا تحقق كل من $\mSat{M}{!B}[w]$ و$\mSat{M}{!C}[w]$، أو لم
+    يتحقق أي منهما.}}{}
+  \item\ollabel{defn:sub:mmodels-box}
+    \indcase{!A}{\Knows_a !B}{$\mSat{M}{\indfrm}[w]$ إذا وفقط إذا كان
+    $\mSat{M}{!B}[w']$ لكل $w' \in W$ بحيث $R_a ww'$.}
+  \item\ollabel{defn:sub:mmodels-pal}
+    \indcase{!A}{[!B] !C}{$\mSat{M}{\indfrm}[w]$ إذا وفقط إذا كان
+    $\mSat{M}{!B}[w]$ يستلزم $\mSat{M \mid !B}{!C}[w]$.}
+
+  
+  حيث يُعرَّف $\mModel M \mid !B = \tuple{W', R', V'}$ كما يأتي:
+  \begin{enumerate}
+    \item $W' = \Setabs{ u \in W}{\mSat{M}{!B}[u]}$. أي إن عوالم
+      $\mModel M \mid !B$ هي عوالم~$\mModel M$ التي تصدق فيها $!B$.
+    \item $R'_a = R_a \cap (W' \times W')$. فتُقصر علاقة الإتاحة لكل
+      عامل ببساطة على العوالم الباقية في~$W'$.
+    \item $V'(p) = \Setabs{ u \in W'}{u \in V(p) }$. وبالمثل تظل
+      الإسنادات القضوية عند العوالم كما هي؛ وهذا يمثل فكرة أن الأحداث
+      المعلوماتية لا تغير قيم صدق المتغيرات القضوية.
+  \end{enumerate}
+  
+  \end{enumerate} 
+\end{defn}
+
+السمة المميزة لمنطقيات الإعلان العام، إذن، هي أن صدق !!a{formula} في
+$\mModel M$ لا يمكن أحيانًا تقريره إلا بالرجوع إلى نموذج غير
+$\mModel M$ نفسه.
+
+ولاحظ أيضًا أن دلالاتنا تعامل مؤثر الإعلان معاملة مؤثر~$\Box$؛ ولذلك
+إذا تعذر إعلان !!a{formula}~$!A$ إعلانًا صادقًا عند عالم، فإن
+$[!A]!B$ تصدق فيه صدقًا تافهًا، مثلما تصدق جميع !!{formula}s
+ذات~$\Box$ عند النقاط النهائية.
+
+\begin{figure}
+  \begin{center}
+    \begin{tikzpicture}[modal]
+      \node[world] (w1) [label={below left:$p, \lnot q$}]{$w_1$}; 
+      \node[world] (w2) [left=of w1, label={left:$\lnot p, \lnot q$}]{$w_2$}; 
+      \node[world] (w3) [above=of w1, label={right:$p, q$}] {$w_3$};
+      \draw[<->] (w1) to [swap] node {$b$} (w2);
+      \draw[->,loop below] (w1) to node {$a, b$} (w1);
+      \draw[<->] (w1) to [swap] node {$a$} (w3);
+      \draw[->,loop above] (w2) to node {$a, b$} (w2) ;
+      \draw[->,loop above] (w3) to node {$a, b$} (w3) ;
+      
+      \node[world](v1)[right of=w1, xshift=1.25in, label={right:$p, \lnot q$}]{$w'_1$};
+      \node[world](v3)[above of=v1,label={right:$p,q$}]{$w'_3$};
+      \draw[<->] (v1) to node {$a$} (v3);
+      \draw[->,loop below] (v1) to node {$a,b$} (v1);
+      \draw[->,loop above] (v3) to node {$a,b$} (v3) ;
+      
+      \node(m)[below=of w1]{$\mModel M$};
+      \node(m')[below=of v1]{$\mModel M \mid p$}; 
+
+      \draw[-,dotted] (w1) to node {\footnotesize إعلان $p$}(v1) ;
+     
+    \end{tikzpicture}
+  \end{center}
+  \caption{قبل الإعلان العام عن $p$ وبعده.}
+  \ollabel{fig:announcement-example}
+\end{figure}
+
+يمكننا أن نرى الإعلان العام عن !!a{formula} تقليصًا لنموذج، أو قصرًا
+له على العوالم التي كانت ال!!{formula} صادقة فيها. ويعطي
+\olref{fig:announcement-example} مثالًا لآثار إعلان~$p$ على الملأ.
+ومن الأمور اللافتة في ذلك النموذج أن العامل~$b$ يعلم أن~$p$ نتيجة
+للإعلان، في حين لا يتعلم العامل~$a$ ذلك (لأنه كان يعلم أصلًا أن~$p$
+صادقة).
+
+وبصورة أدق، لدينا $\mSat{M}{\lnot \Knows_b p}[w_1]$، ولكن
+$\mSat{M \mid p}{\Knows_b p}[w'_1]$. ويستلزم هذا
+$\mSat{M}{[p] \Knows_b p}[w_1]$. غير أنه يمكننا إثبات دعاوى أقوى من
+ذلك عن نتيجة الإعلان. ففي الواقع،
+$\mSat{M}{[p]\CKnows_{\{a,b\}} p}[w_1]$. وبعبارة أخرى، يصبح~$p$ بعد
+إعلانه \emph{معرفة مشتركة}.
+
+لكن قد نتساءل عما إذا كان هذا يصح في الحالة العامة، وعما إذا كان
+الإعلان الصادق عن~$!A$ يجعل $!A$ \emph{دائمًا} معرفة مشتركة. وقد يكون
+مفاجئًا أن الجواب لا. فالواقع أنه يمكن إعلان !!{formula}s إعلانًا
+صادقًا ثم لا تعود صادقة بعد إعلانها. انظر، مثلًا، في آثار إعلان
+$p \land \lnot \Knows_b p$ عند~$w_1$ في
+\olref{fig:announcement-example}. يحتفظ النموذج $\mModel M \mid p$
+بالعالمين~$w_1$ و~$w_3$، أما
+$\mModel M \mid (p \land \lnot \Knows_b p)$ فلا يحتفظ إلا بالعالم
+$w_1$. وفي هذا النموذج الأحادي العالم،
+$\mSat{M \mid (p \land \lnot \Knows_b p)}{\Knows_b p}[w_1]$؛ ولذلك
+$\mSat/{M \mid (p \land \lnot \Knows_b p)}{p \land \lnot \Knows_b p}[w_1]$،
+ومن ثم
+$\mSat/{M}{[p \land \lnot \Knows_b p](p \land \lnot \Knows_b p)}[w_1]$.
+فهذه !!a{formula} تصبح كاذبة بعد إعلانها.
+
+\end{document}

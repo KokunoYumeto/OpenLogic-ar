@@ -1,0 +1,186 @@
+% Part: first-order-logic
+% Chapter: tableaux
+% Section: proof-theoretic-notions
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{tab}{ptn}}
+      {\olfileid{pl}{tab}{ptn}}
+      
+\olsection{المفاهيم النظرية البرهانية}
+
+\begin{editorial}
+يجمع هذا القسم تعريفي علاقة القابلية للإثبات والاتساق في الجداول الدلالية.
+\end{editorial}
+
+\begin{explain}
+مثلما عرّفنا عددًا من المفاهيم الدلالية المهمة (الصلاحية والاستلزام وقابلية
+الإرضاء)، نعرّف الآن \emph{مفاهيم نظرية برهانية} موافقة لها. ولا تُعرَّف هذه
+بالرجوع إلى إرضاء ال!!{sentence}s في
+\iftag{FOL}{ال!!{structure}s}{ال!!{valuation}s}، بل بالرجوع إلى وجود بعض
+ال!!{tableau}x المغلقة. وكان من الاكتشافات المهمة أن هذه المفاهيم تتطابق.
+وهذا التطابق هو مضمون \emph{مبرهنة السلامة} و\emph{مبرهنة الاكتمال}.
+\end{explain}
+
+
+\begin{defn}[المبرهنات]
+تكون ال!!{sentence}~$!A$ \emph{مبرهنة} إذا وُجد !!{tableau} مغلق
+لــ~$\sFmla{\False}{!A}$. ونكتب $\Proves !A$ إذا كانت $!A$ مبرهنة،
+و$\Proves/ !A$ إذا لم تكن كذلك.
+\end{defn}
+
+\begin{defn}[!!^{derivability}]
+تكون !!^a{sentence} $!A$ \emph{!!{derivable} من} مجموعة ال!!{sentence}s
+~$\Gamma$، أي $\Gamma \Proves !A$، إذا وفقط إذا وُجدت مجموعة منتهية
+$\{!B_1, \dots, !B_n\} \subseteq \Gamma$ و!!{tableau} مغلق للمجموعة
+\[
+\{
+  \sFmla{\False}{!A},
+  \sFmla{\True}{!B_1}, \dots,
+  \sFmla{\True}{!B_n}
+  \}.
+\]
+إذا لم تكن $!A$ !!{derivable} من $\Gamma$ كتبنا $\Gamma \Proves/
+!A$.
+\end{defn}
+
+\begin{defn}[الاتساق]
+تكون مجموعة ال!!{sentence}s~$\Gamma$ \emph{غير متسقة} إذا وفقط إذا وُجدت
+مجموعة منتهية $\{!B_1, \dots, !B_n\} \subseteq \Gamma$ و!!{tableau}
+مغلق للمجموعة
+\[
+\{
+  \sFmla{\True}{!B_1}, \dots,
+  \sFmla{\True}{!B_n}  
+  \}.
+\]
+إذا لم تكن $\Gamma$ غير متسقة، قلنا إنها \emph{متسقة}.
+\end{defn}
+
+\begin{prop}[الانعكاسية]
+\ollabel{prop:reflexivity}
+إذا كان $!A \in \Gamma$، فإن $\Gamma \Proves !A$.
+\end{prop}
+
+\begin{proof}
+إذا كان $!A \in \Gamma$، فإن $\{!A\}$ مجموعة جزئية منتهية من~$\Gamma$ وال!!{tableau}
+\begin{oltableau}
+  [\sFmla{\False}{\formula{A}}, just = \TAss
+    [\sFmla{\True}{\formula{A}}, just = \TAss,close]
+  ]
+\end{oltableau}
+مغلق.
+\end{proof}
+  
+
+\begin{prop}[الرتابة]
+\ollabel{prop:monotonicity}
+إذا كان $\Gamma \subseteq \Delta$ و$\Gamma \Proves !A$، فإن $\Delta
+\Proves !A$.
+\end{prop}
+
+\begin{proof}
+كل مجموعة جزئية منتهية من~$\Gamma$ هي أيضًا مجموعة جزئية من~$\Delta$.
+\end{proof}
+
+\begin{prop}[التعدية]
+\ollabel{prop:transitivity}
+إذا كان $\Gamma \Proves !A$ و$\{!A\} \cup
+\Delta \Proves !B$، فإن $\Gamma \cup \Delta \Proves !B$.
+\end{prop}
+
+\begin{proof}
+إذا كان $\{!A\} \cup \Delta \Proves !B$، فثمة مجموعة جزئية منتهية $\Delta_0 =
+\{!C_1, \dots, !C_n\} \subseteq \Delta$ بحيث
+\begin{align*}
+\{\sFmla{\False}{!B}, & \sFmla{\True}{!A}, \sFmla{\True}{!C_1},
+\dots, \sFmla{\True}{!C_n}\}
+\intertext{لها !!{tableau} مغلق. وإذا كان $\Gamma \Proves !A$، فثمة
+  $!D_1$, \dots, $!D_m \in \Gamma$ بحيث}
+\{\sFmla{\False}{!A}, & \sFmla{\True}{!D_1},
+\dots, \sFmla{\True}{!D_m}\}
+\end{align*}
+لها !!{tableau} مغلق.
+
+انظر الآن في ال!!{tableau} ذي الافتراضات
+\[
+\sFmla{\False}{!B},
+\sFmla{\True}{!C_1}, \dots, \sFmla{\True}{!C_n},
+\sFmla{\True}{!D_1}, \dots, \sFmla{\True}{!D_m}.
+\]
+طبّق قاعدة \Cut{} على~$!A$. يولّد ذلك فرعين، يحتوي أحدهما على
+$\sFmla{\True}{!A}$ والآخر على $\sFmla{\False}{!A}$. وهكذا تتوافر في
+أحد الفرعين جميع الصيغ
+\[
+\{\sFmla{\False}{!B}, \sFmla{\True}{!A},
+\sFmla{\True}{!C_1}, \dots, \sFmla{\True}{!C_n}\}
+\]
+وبما أن لهذه الافتراضات !!{tableau} مغلقًا، فيمكننا إلحاقه بذلك الفرع؛
+فيُغلق كل فرع يمر عبر $\sFmla{\True}{!A}$. وفي الفرع الآخر تتوافر جميع الصيغ
+\[
+\{\sFmla{\False}{!A}, \sFmla{\True}{!D_1}, \dots,
+\sFmla{\True}{!D_m}\}
+\]
+ولذلك يمكننا أيضًا إكمال الجانب الآخر لنحصل على !!{tableau} مغلق. وهذا يثبت
+$\Gamma \cup \Delta \Proves !B$.
+\end{proof}
+
+لاحظ أن هذا يعني، بوجه خاص، أنه إذا كان $\Gamma \Proves !A$ و$!A
+\Proves !B$، فإن $\Gamma \Proves !B$. وينتج أيضًا أنه إذا كان $!A_1,
+\dots, !A_n \Proves !B$ وكان $\Gamma \Proves !A_i$ لكل~$i$، فإن
+$\Gamma \Proves !B$.
+
+\begin{prop}
+\ollabel{prop:incons}
+تكون $\Gamma$ غير متسقة إذا وفقط إذا كان $\Gamma \Proves !A$ لكل
+!!{sentence}~$!A$.
+\end{prop}
+
+\begin{proof}
+تمرين.
+\end{proof}
+
+\tagprob{FOL}
+\begin{prob}
+أثبت \olref[fol][tab][ptn]{prop:incons}
+\end{prob}
+\tagendprob
+
+\tagprob{notFOL}
+\begin{prob}
+أثبت \olref[pl][tab][ptn]{prop:incons}
+\end{prob}
+\tagendprob
+
+\begin{prop}[التراص]
+  \ollabel{prop:proves-compact}
+  \begin{enumerate}
+  \item إذا كان $\Gamma \Proves !A$، فثمة مجموعة جزئية منتهية $\Gamma_0
+    \subseteq \Gamma$ بحيث $\Gamma_0 \Proves !A$.
+  \item إذا كانت كل مجموعة جزئية منتهية من~$\Gamma$ متسقة، فإن $\Gamma$
+    متسقة.
+  \end{enumerate}
+\end{prop}
+
+\begin{proof}
+  \begin{enumerate}
+    \item إذا كان $\Gamma \Proves !A$، فثمة مجموعة جزئية منتهية
+      $\Gamma_0 = \{!B_1, \dots, !B_n\}$ و!!{tableau} مغلق لــ
+      \[
+      \{\sFmla{\False}{!A}, \sFmla{\True}{!B_1}, \dots, \sFmla{\True}{!B_n}\}
+      \]
+      ويثبت هذا ال!!{tableau} أيضًا $\Gamma_0 \Proves !A$.
+    \item إذا كانت $\Gamma$ غير متسقة، فهناك !!{tableau} مغلق، لبعض
+      المجموعات الجزئية المنتهية
+      $\Gamma_0 = \{!B_1, \dots, !B_n\}$، لــ
+      \[
+      \{\sFmla{\True}{!B_1}, \dots, \sFmla{\True}{!B_n}\}
+      \]
+      ويثبت هذا ال!!{tableau} المغلق أن $\Gamma_0$ غير متسقة.
+  \end{enumerate}
+\end{proof}
+
+\end{document}

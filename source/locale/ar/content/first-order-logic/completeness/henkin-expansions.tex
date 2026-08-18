@@ -1,0 +1,202 @@
+% Part: first-order-logic
+% Chapter: completeness
+% Section: henkin-expansion
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{com}{hen}
+
+\olsection{توسيع هنكن}
+
+\begin{explain}
+يتمثل جانب من صعوبة برهان مبرهنة الاكتمال في وجوب أن يجعل النموذج الذي
+ننشئه من مجموعة متسقة كاملة~$\Gamma$ كل ال!!{formula}s المكممة
+في~$\Gamma$ صادقة. ولضمان ذلك نستعمل حيلة ترجع إلى ليون هنكن. وخلاصة
+الحيلة أن نوسع اللغة بعدد لا نهائي من ال!!{constant}s، وأن نضيف، لكل
+!!{formula} ذات !!{variable} حر واحد $!A(x)$، صيغة من الصورة
+\iftag{prvEx}
+      {$\lexists[x][!A(x)] \lif !A(c)$}
+      {$\lnot\lforall[x][!A(x)] \lif \lnot !A(c)$},
+حيث يكون $c$ واحدًا من ال!!{constant}s الجديدة. وحين ننشئ ال!!{structure}
+التي ترضي~$\Gamma$، يضمن ذلك أن يكون لكل
+\iftag{prvEx}
+{جملة وجودية صادقة شاهد}
+{جملة كلية كاذبة مثال ناقض}
+بين الرموز الثابتة الجديدة.
+\end{explain}
+
+\begin{prop}
+\ollabel{prop:lang-exp}
+إذا كانت $\Gamma$ متسقة في $\Lang L$، وكانت $\Lang L'$ ناتجة من
+$\Lang L$ بإضافة مجموعة !!a{denumerable} من ال!!{constant}s الجديدة
+$\Obj d_0$ و$\Obj d_1$ و\dots، فإن $\Gamma$ متسقة في~$\Lang L'$.
+\end{prop}
+
+\begin{defn}[المجموعة المشبعة]
+تكون مجموعة $\Gamma$ من !!{formula}s لغة $\Lang {L}$
+\emph{مشبعة} إذا وفقط إذا وُجد، لكل !!{formula}~$!A(x) \in \Frm[L]$
+ذات !!{variable} حر واحد~$x$، !!a{constant}~$c \in \Lang{L}$ بحيث
+\iftag{prvEx}
+      {$\lexists[x][!A(x)] \lif !A(c) \in \Gamma$}
+      {$\lnot\lforall[x][!A(x)] \lif \lnot !A(c) \in \Gamma$}.
+\end{defn}
+
+سنستعمل التعريف الآتي في برهان المبرهنة التالية.
+
+\begin{defn}
+\ollabel{defn:henkin-exp}
+لتكن $\Lang L'$ كما في \olref{prop:lang-exp}. ثبّت تعدادًا
+$!A_0(x_0)$ و$!A_1(x_1)$ و\dots لجميع !!{formula}s~$!A_i(x_i)$
+في~$\Lang L'$ التي يرد فيها متغير واحد ($x_i$) حرًا. ونعرف
+ال!!{sentence}s~$!D_n$ بالاستقراء في~$n$.
+
+ليكن $c_0$ أول !!{constant} من بين $\Obj d_i$ التي أضفناها
+إلى~$\Lang{L}$ لا يرد في~$!A_0(x_0)$. وبافتراض أن $!D_0$ و\dots
+و~$!D_{n-1}$ قد عُرّفت، ليكن $c_n$ أول ال!!{constant}s الجديدة
+~$\Obj d_i$ الذي لا يرد في $!D_0$ و\dots و~$!D_{n-1}$ ولا
+في~$!A_n(x_n)$.
+
+والآن لتكن $!D_{n}$ هي ال!!{sentence} \iftag{prvEx}
+{$\lexists[x_{n}][!A_{n}(x_{n})] \lif
+  !A_{n}(c_{n})$}{$\lnot\lforall[x_{n}][!A_{n}(x_{n})] \lif \lnot
+  !A_{n}(c_{n})$}.
+\end{defn}
+
+\begin{lem}
+\ollabel{lem:henkin}
+يمكن توسيع كل مجموعة متسقة~$\Gamma$ إلى مجموعة متسقة مشبعة~$\Gamma'$.
+\end{lem}
+
+\begin{proof}
+لتكن لدينا مجموعة متسقة من الجمل~$\Gamma$ في لغة~$\Lang{L}$. وسّع
+اللغة بإضافة مجموعة !!a{denumerable} من ال!!{constant}s الجديدة لتكوين
+~$\Lang{L'}$. وبحسب \olref{prop:lang-exp} تظل $\Gamma$ متسقة في اللغة
+الأغنى. ولتكن كذلك $!D_i$ كما في \olref{defn:henkin-exp}. ضع
+\begin{align*}
+\Gamma_0 & = \Gamma \\
+\Gamma_{n+1} & = \Gamma_n \cup \{!D_n \}
+\end{align*}
+أي إن $\Gamma_{n+1} = \Gamma \cup \{ !D_0, \dots, !D_n \}$، ولتكن
+$\Gamma' = \bigcup_{n} \Gamma_n$. ومن الواضح أن $\Gamma'$ مشبعة.
+
+لو كانت $\Gamma'$ غير متسقة، لكانت $\Gamma_n$ غير متسقة لبعض $n$
+(تمرين: بيّن السبب). ومن ثم يكفي، لإثبات اتساق $\Gamma'$، أن نبين
+بالاستقراء في~$n$ أن كل مجموعة~$\Gamma_n$ متسقة.
+
+أساس الاستقراء هو ببساطة الدعوى أن $\Gamma_0 = \Gamma$ متسقة، وهي فرض
+المبرهنة. وفي خطوة الاستقراء، افترض أن $\Gamma_{n}$ متسقة لكن
+$\Gamma_{n+1} = \Gamma_n \cup \{!D_n\}$ غير متسقة. تذكر أن $!D_n$~هي
+\iftag{prvEx}
+{$\lexists[x_{n}][!A_{n}(x_n)] \lif !A_{n}(c_{n})$}
+{$\lnot\lforall[x_{n}][!A_{n}(x_n)] \lif \lnot !A_{n}(c_{n})$},
+حيث تكون $!A_n(x_n)$ !!a{formula} من $\Lang{L'}$ لا يكون حرًا فيها إلا
+المتغير~$x_n$. وبحسب طريقة اختيارنا~$c_n$ (انظر
+\olref{defn:henkin-exp})، لا يرد $c_n$ في~$!A_n(x_n)$ ولا في~$\Gamma_n$.
+
+إذا كانت $\Gamma_n \cup \{!D_n\}$ غير متسقة، فإن $\Gamma_n
+\Proves \lnot !D_n$، ومن ثم تتحقق العبارتان الآتيتان:
+\iftag{prvEx}{
+\[
+\Gamma_n \Proves \lexists[x_n][!A_n(x_n)]
+\qquad
+\Gamma_n \Proves \lnot !A_n(c_n)
+\]}{
+\[
+\Gamma_n \Proves \lnot\lforall[x_n][!A_n(x_n)]
+\qquad
+\Gamma_n \Proves !A_n(c_n)
+\]}
+بما أن $c_n$ لا يرد في $\Gamma_n$ ولا في~$!A_n(x_n)$، تنطبق
+\tagrefs{prfAX/{fol:axd:qpr:thm:strong-generalization},prfSC/{fol:seq:qpr:thm:strong-generalization},prfND/{fol:ntd:qpr:thm:strong-generalization},prfTab/{fol:tab:qpr:thm:strong-generalization}}.
+ومن \iftag{prvEx}
+{$\Gamma_n \Proves \lnot !A_n(c_n)$}
+{$\Gamma_n \Proves !A_n(c_n)$},
+نحصل على
+\iftag{prvEx}
+{$\Gamma_n \Proves \lforall[x_n][\lnot !A_n(x_n)]$}
+{$\Gamma_n \Proves \lforall[x_n][!A_n(x_n)]$}.
+وهكذا تكون كل من العبارتين
+\iftag{prvEx}
+{$\Gamma_n \Proves \lexists[x_n][!A_n(x_n)]$ و
+$\Gamma_n \Proves \lforall[x_n][\lnot !A_n(x_n)]$}
+{$\Gamma_n \Proves \lnot\lforall[x_n][!A_n(x_n)]$ و
+$\Gamma_n \Proves \lforall[x_n][!A_n(x_n)]$},
+صحيحة، ولذلك تكون $\Gamma_n$ نفسها غير متسقة.
+\iftag{prvEx}
+{(لاحظ أن
+\iftag{prvAll}
+{$\lforall[x_n][\lnot !A_n(x_n)] \Proves
+  \lnot\lexists[x_n][!A_n(x_n)]$}
+{$\lforall[x_n][\lnot !A_n(x_n)]$ تُعرّف بأنها
+  $\lnot\lexists[x_n][\lnot\lnot !A_n(x_n)]$ و
+  $\lnot\lexists[x_n][\lnot\lnot !A_n(x_n)] \Proves
+  \lnot\lexists[x_n][!A_n(x_n)]$}.)}{}
+وهذا تناقض، إذ كان مفروضًا أن $\Gamma_n$ متسقة. ومن ثم تكون
+$\Gamma_n \cup \{ !D_n\}$ متسقة.
+\end{proof}
+
+\begin{explain}
+سنبيّن الآن أن المجموعات المتسقة \emph{الكاملة} المشبعة تتصف بأنها
+\iftag{prvAll}{تحتوي !!{sentence} مكممة كليًا إذا وفقط إذا كانت تحتوي
+  جميع حالاتها}{}\iftag{defAll,defEx}{}{، و}\iftag{prvEx}{تحتوي
+  !!{sentence} مكممة وجوديًا إذا وفقط إذا كانت تحتوي حالة واحدة منها
+  على الأقل}{}. وسنستعمل ذلك لنبيّن أن ال!!{structure} التي سننشئها من
+مجموعة كاملة متسقة مشبعة تجعل كل جملها المكممة صادقة.
+\end{explain}
+
+\begin{prop}\ollabel{prop:saturated-instances}
+افترض أن $\Gamma$ كاملة ومتسقة ومشبعة.
+\begin{tagenumerate}{prvEx,prvAll}
+\tagitem{prvEx}{$\lexists[x][!A(x)] \in \Gamma$ إذا وفقط إذا كان
+  $!A(t) \in \Gamma$ لحد مغلق واحد~$t$ على الأقل.}{}
+\tagitem{prvAll}{$\lforall[x][!A(x)] \in \Gamma$ إذا وفقط إذا كان
+  $!A(t) \in \Gamma$ لكل حد مغلق~$t$.}{}
+\end{tagenumerate}
+\end{prop}
+
+\begin{proof}
+  \begin{tagenumerate}{prvEx,prvAll}
+  \tagitem{prvEx}{%
+    \iftag{probEx}{تمرين.}{افترض أولًا أن $\lexists[x][!A(x)]
+      \in \Gamma$. ولما كانت $\Gamma$ مشبعة، كان
+      $(\lexists[x][!A(x)] \lif !A(c)) \in \Gamma$ لبعض
+      ال!!{constant}~$c$. وبحسب
+      \tagrefs{prfAX/{fol:axd:ppr:prop:provability-lif},prfSC/{fol:seq:ppr:prop:provability-lif},prfND/{fol:ntd:ppr:prop:provability-lif},prfTab/{fol:tab:ppr:prop:provability-lif}}، البند~(1)،
+      و\olref[ccs]{prop:ccs}\olref[ccs]{prop:ccs-prov-in}، نحصل على
+      $!A(c) \in \Gamma$.
+
+    وفي الاتجاه الآخر لا يلزم الإشباع: افترض أن $!A(t) \in \Gamma$.
+    عندئذ $\Gamma \Proves \lexists[x][!A(x)]$ بحسب
+      \tagrefs{prfAX/{fol:axd:qpr:prop:provability-quantifiers},prfSC/{fol:seq:qpr:prop:provability-quantifiers},prfND/{fol:ntd:qpr:prop:provability-quantifiers},prfTab/{fol:tab:qpr:prop:provability-quantifiers}}، البند~(1). وبحسب
+    \olref[ccs]{prop:ccs}\olref[ccs]{prop:ccs-prov-in} نحصل على
+    $\lexists[x][!A(x)] \in \Gamma$.}}{}
+  \tagitem{prvAll}{%
+    \iftag{probAll}{تمرين.}{افترض أن $!A(t) \in \Gamma$ لكل الحدود
+      المغلقة~$t$. وللوصول إلى تناقض، افترض أن
+      $\lforall[x][!A(x)] \notin \Gamma$. ولما كانت $\Gamma$ كاملة،
+      كان $\lnot\lforall[x][!A(x)] \in \Gamma$. وبالإشباع يكون
+      \iftag{prvEx}{$(\lexists[x][\lnot !A(x)] \lif \lnot !A(c)) \in
+        \Gamma$}{$(\lnot\lforall[x][!A(x)] \lif \lnot !A(c)) \in
+        \Gamma$} لبعض ال!!{constant}~$c$. وبحسب الفرض، لما كان $c$
+      حدًا مغلقًا، كان $!A(c) \in \Gamma$. لكن ذلك يجعل $\Gamma$
+      غير متسقة. (تمرين: أعط ال!!{derivation} الذي يبين أن
+      \[
+      \lnot \lforall[x][!A(x)],
+      \iftag{prvEx}{\lexists[x][\lnot !A(x)] \lif \lnot
+        !A(c)}{\lnot\lforall[x][!A(x)] \lif \lnot
+        !A(c)}, !A(c)
+      \]
+      غير متسقة.)
+
+      وفي الاتجاه العكسي لا نحتاج إلى الإشباع: افترض أن
+      $\lforall[x][!A(x)] \in \Gamma$. عندئذ $\Gamma \Proves !A(t)$
+      بحسب
+      \tagrefs{prfAX/{fol:axd:qpr:prop:provability-quantifiers},prfSC/{fol:seq:qpr:prop:provability-quantifiers},prfND/{fol:ntd:qpr:prop:provability-quantifiers},prfTab/{fol:tab:qpr:prop:provability-quantifiers}},
+      البند~(2). ونحصل على $!A(t) \in \Gamma$ بحسب
+      \olref[ccs]{prop:ccs}.}}{}
+  \end{tagenumerate}
+\end{proof}
+
+\end{document}

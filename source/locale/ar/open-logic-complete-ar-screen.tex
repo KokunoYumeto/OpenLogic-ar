@@ -1,0 +1,53 @@
+% Screen-reading Arabic reader. The canonical print driver remains unchanged
+% in geometry; this wrapper retypesets the same source for fit-width reading.
+
+\PassOptionsToClass{14pt,oneside}{memoir}
+\AddToHook{class/memoir/after}{%
+  \setstocksize{11in}{8.5in}%
+  \settrimmedsize{\stockheight}{\stockwidth}{*}%
+  \settrims{0pt}{0pt}%
+  \settypeblocksize{9.3in}{6.5in}{*}%
+  \setlrmarginsandblock{1in}{1in}{*}%
+  \setulmarginsandblock{0.85in}{0.85in}{*}%
+  % The 14 pt Arabic running heads need both a taller box and real clearance
+  % from the physical top edge; an 8 pt head drop clipped Scheherazade marks.
+  \setheadfoot{22pt}{24pt}%
+  \setheaderspaces{20pt}{*}{*}%
+  \checkandfixthelayout
+  \raggedbottom
+  % Give mixed RTL prose and inline mathematics modest screen-only flexibility.
+  \setlength{\emergencystretch}{1.5em}%
+}
+
+% The unique 49.3 substitution alignment is wider than the physical page at
+% the 14 pt reader size. Keep the surrounding prose large, but set that formal
+% block at memoir's supported 10 pt scriptsize so no formula is clipped.
+\AddToHook{env/align*/before}{%
+  \ifnum\value{chapter}=49\relax
+    \ifnum\value{section}=3\relax
+      \scriptsize
+    \fi
+  \fi
+}
+\AddToHook{env/align*/after}{%
+  \ifnum\value{chapter}=49\relax
+    \ifnum\value{section}=3\relax
+      \normalsize
+    \fi
+  \fi
+}
+
+\newcommand*{\OLCompletePDFTitle}{نص المنطق المفتوح — نسخة القراءة العربية المُعاد تنضيدها للشاشة}
+\newcommand*{\OLCompleteEditionSubtitle}{نسخة القراءة العربية المُعاد تنضيدها للشاشة}
+\newcommand*{\OLSecondaryEditionSubtitleBlock}{%
+  \vspace{0.55cm}%
+  {\Large\foreignlanguage{english}{Screen-Optimized Retypeset Edition}\par}%
+}
+\newcommand*{\OLReleaseDOIBlock}{%
+  {\large DOI المفهومي الثابت: \babelsublr{10.5281/zenodo.21921850}\par}%
+}
+\AddToHook{begindocument/before}{%
+  \hypersetup{pdfstartview=FitH,pdfpagelayout=OneColumn,pdfpagemode=UseOutlines}%
+}
+
+\input{open-logic-complete-ar.tex}

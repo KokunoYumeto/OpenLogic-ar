@@ -1,0 +1,154 @@
+% Complete Arabic reader for the frozen Open Logic Project source release.
+% English source authority: OpenLogicProject/OpenLogic
+% 9620cc73f9c8e0ad003c514a5d3748f29611c4c0.
+
+\documentclass[openany]{memoir}
+
+\ifdefined\directlua\else
+  \PackageError{open-logic-complete-ar}{يتطلب ملف التشغيل هذا LuaLaTeX}{شغّل LuaLaTeX على ملف التشغيل}
+\fi
+
+\newcommand*{\olpath}{../..}
+\newcommand*{\ollangid}{ar}
+\newcommand*{\ollanguage}{arabic}
+
+\usepackage{fontspec}
+\usepackage{gitinfo2}
+\setmainfont{TeX Gyre Pagella}
+\setsansfont{TeX Gyre Heros}
+\setmonofont{Latin Modern Mono}
+
+\PassOptionsToPackage{provide=*,bidi=basic}{babel}
+\makeatletter
+\AddToHook{package/cleveref/before}{\DeclareOption{arabic}{}}
+\makeatother
+
+\input{\olpath/sty/open-logic.sty}
+\input{\olpath/sty/open-logic-defer.sty}
+
+% Keep Polish names in the Latin font even inside Arabic prose. The pinned
+% Scheherazade release intentionally has no L-with-stroke glyphs.
+\DeclareRobustCommand{\OLPolishUpperL}{\foreignlanguage{english}{Ł}}
+\DeclareRobustCommand{\OLPolishLowerL}{\foreignlanguage{english}{ł}}
+\renewcommand*{\L}{\OLPolishUpperL}
+\renewcommand*{\l}{\OLPolishLowerL}
+
+% TeX's legacy short bar is a control-slot glyph absent from Unicode text
+% fonts. Draw the equivalent mathematical rule instead.
+\renewcommand*{\bar}[1]{\overline{#1}}
+
+% A bar nested inside the upstream \Th macro is otherwise swallowed by
+% \mathbf under LuaLaTeX.  Keep ordinary theory names unchanged, but render a
+% complemented theory name as bold Latin text plus a real combining overline;
+% this preserves both the printed distinction and Unicode text extraction.
+\ExplSyntaxOn
+\cs_new:Npn \ol_build_theory_bar:n #1
+  { \mathord{\text{\foreignlanguage{english}{\bfseries #1\char"0305}}} }
+\RenewDocumentCommand \Th { m }
+  {
+    \tl_if_head_eq_meaning:nNTF {#1} \bar
+      { \exp_args:No \ol_build_theory_bar:n { \tl_tail:n {#1} } }
+      { \mathbf{#1} }
+  }
+\ExplSyntaxOff
+
+% Every file in this frozen locale tree is an accepted Arabic target. The
+% upstream optional per-file locale marker is not consistently populated, so
+% do not end an accepted localized file when that legacy marker is absent.
+\let\OLUnLocalizedHook\relax
+\RenewDocumentCommand{\olpartid}{o m}{\renewcommand*{\theolpart}{#2}}
+
+\babelfont[arabic]{rm}[
+  Path=../../../00_control/fonts/scheherazade-2.100/,
+  UprightFont=Scheherazade-Regular.ttf,
+  BoldFont=Scheherazade-Bold.ttf,
+  AutoFakeSlant=0.15,
+  Renderer=HarfBuzz,
+  Scale=1.08
+]{Scheherazade-Regular.ttf}
+\babelfont[arabic]{sf}[
+  Path=../../../00_control/fonts/scheherazade-2.100/,
+  UprightFont=Scheherazade-Regular.ttf,
+  BoldFont=Scheherazade-Bold.ttf,
+  AutoFakeSlant=0.15,
+  Renderer=HarfBuzz,
+  Scale=1.08
+]{Scheherazade-Regular.ttf}
+\babelfont[arabic]{tt}{DejaVu Sans Mono}
+
+\AtBeginDocument{\selectlanguage{arabic}}
+\hypersetup{
+  unicode=true,
+  pdflang={ar},
+  pdftitle={نص المنطق المفتوح — النسخة العربية الكاملة للمصدر المثبّت},
+  pdfauthor={Open Logic Project},
+  pdfsubject={Contributor: AI typesetting \& translation}
+}
+
+\newcommand*{\OLReleaseConceptDOI}{10.5281/zenodo.21921850}
+\newcommand*{\OLReleaseVersionDOI}{10.5281/zenodo.21987686}
+\newcommand*{\OLReleaseRepository}{https://github.com/KokunoYumeto/OpenLogic-ar}
+
+\makeatletter
+\renewcommand*{\@gitFootRev}{مراجعة المصدر: 9620cc7 (2026-07-12)}
+\makeatother
+\renewcommand*{\ifgitinfo}{\sffamily\footnotesize
+  مراجعة المصدر: \babelsublr{\texttt{9620cc7}} (2026-07-12)}
+
+\includeenv{editorial}
+\problemsperchapter
+\let\cleardoublepage\clearpage
+\pagestyle{plain}
+
+\begin{document}
+
+\begin{titlingpage}
+\begin{center}
+\vspace*{2.5cm}
+{\HUGE\bfseries\sffamily نص المنطق المفتوح\par}
+\vspace{1.2cm}
+{\huge النسخة العربية الكاملة للمصدر المثبّت\par}
+\vspace{1.5cm}
+{\Large العربية الفصحى المعاصرة العالمية — \babelsublr{ar}\par}
+\vspace{1.5cm}
+{\large المصدر: مشروع المنطق المفتوح، الالتزام
+\babelsublr{\texttt{9620cc73f9c8e0ad003c514a5d3748f29611c4c0}}\par}
+\vspace{0.8cm}
+{\large المستودع: \href{\OLReleaseRepository}{\babelsublr{OpenLogic-ar}}\par}
+{\large DOI المفهومي: \babelsublr{\OLReleaseConceptDOI}\par}
+{\large DOI هذا الإصدار: \babelsublr{\OLReleaseVersionDOI}\par}
+\end{center}
+
+\vfill
+
+\noindent
+تغطي ملفات الترجمة العربية جميع وحدات الإغلاق المثبّت البالغ عددها
+\babelsublr{722} وحدة. ويعرض هذا القارئ مسار الكتاب القانوني الذي يصل إلى
+\babelsublr{642} وحدة؛ أما الوحدات الثمانون المحتفظ بها خارج مسار القارئ
+فتُجمع في ملحق إغلاق مستقل مرفق بهذه النسخة.
+
+\medskip
+\noindent
+هذه ترجمة معدّلة بموجب رخصة
+\href{https://creativecommons.org/licenses/by/4.0/}{CC BY 4.0}.
+يُنسب الأصل إلى مشروع المنطق المفتوح، ولا يُفهم من هذا الإصدار أي تأييد
+من المشروع. ساهمت \foreignlanguage{english}{AI typesetting \& translation}
+في الترجمة والتصفيف بتوجيه فلوريس؛ ولم تُجرَ مراجعة بشرية عربية.
+
+\end{titlingpage}
+
+\pagestyle{giheadings}
+
+\subfile{content/open-logic-about}
+
+\tableofcontents*
+
+\subfile{content/content}
+
+\photocredits
+
+\nocite{Frege1953,Peter1967}
+\bibliographystyle{\olpath/bib/natbib-oup}
+\bibliography{\olpath/bib/open-logic}
+
+\end{document}

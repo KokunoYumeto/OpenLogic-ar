@@ -1,0 +1,130 @@
+% Part:sets-functions-relations
+% Chapter: size-of-sets
+% Section: enumerations-alt
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid[ar]{sfr}{siz}{enm-alt}
+
+\olsection{التعدادات ومجموعات \usetoken{S}{enumerable}}
+
+\begin{editorial}
+  يعرّف هذا القسم التعدادات بوصفها دوال تقابلية مع (مقاطع ابتدائية)
+  من $\Nat$، كما يجري في نظرية المجموعات. ولذلك فهو يتعارض قليلًا مع
+  التعريفات الواردة في \olref[enm]{sec}، ويكرر جميع الأمثلة الواردة
+  هناك. وهو أيضًا أشد إيجازًا بعض الشيء من ذلك القسم.
+\end{editorial}
+
+يمكننا تحديد مجموعة منتهية بمجرد تعداد !!{element}sها. وهذا ما نفعله
+عندما نعرّف مجموعة على النحو الآتي:
+\[
+  A = \{a_1, a_2, \ldots, a_n\}.
+\]
+إذا افترضنا أن !!{element}s~$a_1$، \dots،~$a_n$ كلها متمايزة،
+فإن هذا يعطينا !!a{bijection} بين $A$ والأعداد الطبيعية $n$ الأولى
+$0$، \dots،~$n-1$. وبالعكس، لما كان لكل مجموعة منتهية عدد منتهٍ فقط
+من !!{element}s، أمكن وضع كل مجموعة منتهية في مثل هذه المراسلة.
+وبعبارة أخرى، إذا كانت $A$ منتهية، وجدت !!a{bijection} بين $A$
+و$\{0, \dots, n-1\}$، حيث $n$ هو عدد !!{element}s~$A$.
+
+إذا سمحنا بأنواع معينة من المجموعات اللانهائية، فسوف نسمح أيضًا
+بتعداد بعض المجموعات اللانهائية. ويمكننا صياغة ذلك بدقة بالقول إن
+مجموعة لا نهائية تعدّدها !!a{bijection} بينها وبين مجموعة الأعداد
+الطبيعية كلها~$\Nat$.
+
+\begin{defn}[التعداد، بصيغة نظرية المجموعات]
+\emph{تعداد} مجموعة $A$ هو !!a{bijection} مداها $A$ ومجالها إما
+مقطع ابتدائي من الأعداد الطبيعية $\{0, 1, \ldots, n\}$ {أو}
+مجموعة الأعداد الطبيعية كلها~$\Nat$.
+\end{defn}
+
+\begin{explain}
+يقوم على هذا الاستعمال لكلمة \emph{التعداد} أساس حدسي. فالقول إننا
+عددنا مجموعة $A$ هو القول إن ثمة !!a{bijection}~$f$ تتيح لنا عد
+عناصر المجموعة~$A$ واحدًا واحدًا. العنصر ذو الرتبة~$0$
+هو $f(0)$، وذو الرتبة الأولى هو $f(1)$، \ldots وذو الرتبة~$n$ هو
+$f(n)$\ldots.\footnote{نعم، نبدأ العد من $0$. وكان يمكننا بالطبع أن
+نبدأ أيضًا من~$1$. ولن يحدث ذلك فرقًا كبيرًا؛ فكل ما علينا فعله هو
+استبدال~$\Nat$ بـ~$\PosInt$.} ويمكن جعل مسوغ ذلك أوضح بإضافة ما يأتي:
+\end{explain}
+
+\begin{defn}
+  \ollabel{defn:enumerable}
+  تكون المجموعة~$A$ !!{enumerable} إذا وفقط إذا تحقق أحد أمرين: إما
+  $A = \emptyset$ أو أن يكون لـ~$A$ تعداد. ونقول إن $A$
+  !!{nonenumerable} إذا وفقط إذا لم
+  تكن $A$ !!{enumerable}.
+\end{defn}
+
+\begin{explain}
+إذن تكون المجموعة !!{enumerable} إذا وفقط إذا كانت خالية أو أمكنك
+استعمال تعداد لعد !!{element}sها واحدًا واحدًا.
+\end{explain}
+
+\begin{ex}
+الدالة التي تعدّد الأعداد الطبيعية هي ببساطة دالة الهوية
+$\Id{\Nat} \colon \Nat \to \Nat$ المعطاة بـ$\Id{\Nat}(n) = n$. أما
+الدالة التي تعدّد الأعداد الطبيعية \emph{الموجبة}، $\Nat^+ =
+\Nat \setminus \{0\}$، فهي الدالة $g(n) = n + 1$، أي دالة اللاحق.
+\end{ex}
+
+\begin{prob}
+أثبت أن المجموعة $A$ !!{enumerable} إذا وفقط إذا كانت $A = \emptyset$
+أو وجدت !!a{surjection} $f\colon \Nat \to A$. وأثبت أن $A$
+!!{enumerable} إذا وفقط إذا وجدت !!a{injection} $g\colon A \to \Nat$.
+\end{prob}
+
+\begin{ex}
+الدالتان $f\colon \Nat \to \Nat$ و$g \colon \Nat \to \Nat$
+المعطاتان بـ
+\begin{align*}
+  f(n) & = 2n \text{ و}\\
+  g(n) & = 2n+1
+\end{align*}
+تعدّدان، على الترتيب، الأعداد الطبيعية الزوجية والأعداد الطبيعية
+الفردية. لكن كل واحدة منهما ليست !!{surjective}، ولذلك لا تكون أي منهما
+تعدادًا لـ$\Nat$.
+\end{ex}
+
+\begin{prob}
+عرّف تعدادًا للأعداد المربعة $1$، $4$، $9$، $16$، \dots
+\end{prob}
+
+\begin{ex}
+لتكن $\lceil x \rceil$ \emph{دالة السقف}، التي تقرّب $x$ صعودًا
+إلى أقرب عدد صحيح. عندئذ تعدّد الدالة $f \colon \Nat \to \Int$
+المعطاة بـ:
+\[
+  f(n) = (-1)^{n} \left\lceil\tfrac{n}{2}\right\rceil
+\]
+مجموعة الأعداد الصحيحة~$\Int$ على النحو الآتي:
+\[
+\begin{array}{c c c c c c c c}
+f(0) & f(1) & f(2) & f(3) & f(4) & f(5) & f(6) & \dots \\ \\
+\big\lceil \tfrac{0}{2} \big\rceil & -\big\lceil \tfrac{1}{2}\big\rceil &  \big\lceil \tfrac{2}{2} \big\rceil & -\big\lceil \tfrac{3}{2} \big\rceil & \big\lceil \tfrac{4}{2} \big\rceil  & -\big\lceil \tfrac{5}{2}\big\rceil & \big\lceil \tfrac{6}{2} \big\rceil & \dots \\ \\
+0 & -1 & 1 & -2 & 2 & -3 & 3& \dots
+\end{array}
+\]
+لاحظ كيف تولّد $f$ قيم $\Int$ «بالقفز» جيئة وذهابًا بين الأعداد
+الصحيحة الموجبة والسالبة. ويمكنك أيضًا تصور $f$ على أنها معرّفة بحسب
+الحالات كما يأتي:
+\[
+f(n) = \begin{cases}
+  \frac{n}{2} & \text{إذا كان $n$ زوجيًا}\\
+  -\frac{n+1}{2} & \text{إذا كان $n$ فرديًا}
+  \end{cases}
+\]
+\end{ex}
+
+\begin{prob}
+أثبت أنه إذا كانت $A$ و$B$ !!{enumerable}، فإن $A \cup B$ كذلك.
+\end{prob}
+
+\begin{prob}
+أثبت بالاستقراء على $n$ أنه إذا كانت $A_1$، $A_2$، \dots،~$A_n$
+كلها !!{enumerable}، فإن $A_1 \cup \dots \cup A_n$ كذلك.
+\end{prob}
+
+\end{document}

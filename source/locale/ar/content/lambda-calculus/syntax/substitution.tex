@@ -1,0 +1,178 @@
+% Part: lambda-calculus
+% Chapter: syntax
+% Section: substitution
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{syn}{sub}
+\olsection{الإحلال}
+
+\begin{explain}
+المتغيرات الحرة إحالات إلى متغيرات البيئة؛ ومن ثم فمن المعقول أن نستعمل
+بالفعل قيمة معينة محل متغير حر. فمثلًا، قد نريد أن نستبدل~$f$ في
+$\lambd[x][f x]$ بحد معين، كدالة الهوية~$\lambd[y][y]$. وينتج من ذلك
+$\lambd[x][(\lambd[y][y]) x]$. وتسمى عملية استبدال المتغيرات الحرة بحدود
+لامبدا الإحلال.
+\end{explain}
+
+\begin{defn}[الإحلال] \ollabel{defn:substitution}
+  يعرّف \emph{إحلال} الحد~$N$ محل المتغير~$x$ في الحد~$M$، ويرمز إليه
+  بـ$\Subst{M}{N}{x}$، استقرائيًا كما يأتي:
+  \begin{enumerate}
+    \item $\Subst{x}{N}{x} = N$. \ollabel{defn:substitution-1} 
+    \item $\Subst{y}{N}{x}  = y$ إذا كان~$x \neq y$. \ollabel{defn:substitution-2} 
+    \item $\Subst{PQ}{N}{x}  = (\Subst{P}{N}{x}) (\Subst{Q}{N}{x})$.
+      \ollabel{def:substitution-3}
+    \item $\Subst{(\lambd[y][P])}{N}{x} = \lambd[y][\Subst{P}{N}{x}]$،
+      إذا كان~$x \neq y$ و$y \notin \FV{N}$، وهو غير معرّف في غير ذلك.
+      \ollabel{defn:substitution-4}
+  \end{enumerate}
+\end{defn}
+
+\begin{explain}
+في~\olref{defn:substitution}\olref{defn:substitution-4} نشترط~$x
+\neq y$ لأننا لا نريد أن نستبدل بـ$N$ الوقائع \emph{المقيدة} للمتغير~$x$
+في~$M$. فمثلًا، إذا حسبنا الإحلال~$\Subst{\lambd[x][x]}{y}{x}$، فلا
+ينبغي أن تكون النتيجة~$\lambd[x][y]$؛ بل إن هذا الإحلال غير معرّف وفق
+تعريفنا الجزئي المتعمد، ويُعالج الأمر لاحقًا بتحويل~$\alpha$ وتغيير أسماء
+المتغيرات المقيدة.
+
+وعند إحلال~$N$ محل~$x$ في~$\lambd[y][P]$، نشترط أيضًا أن يكون~$y
+\notin \FV{N}$. فمثلًا، لا يمكننا وفق هذا التعريف الجزئي المتعمد أن
+نحل~$y$ محل~$x$ في~$\lambd[y][x]$، أي إن
+$\Subst{\lambd[y][x]}{y}{x}$ غير معرّف؛ إذ إن الاستبدال الساذج سيعطي
+$\lambd[y][y]$، وهو حد يدل على الدالة التي تقبل وسيطًا وتعيده مباشرة.
+أما الحد~$\lambd[y][x]$ فيدل على دالة تعيد دائمًا الحد~$x$ (أو ما يحيل
+إليه~$x$). فالنتيجة التي نريدها في الحقيقة دالة تقبل وسيطًا وتهمله ثم
+تعيد متغير البيئة~$y$. ولكي نفعل ذلك على الوجه الصحيح، يلزم أولًا أن
+``نعيد تسمية'' المتغير المقيد~$y$؛ وسيحل تحويل ألفا هذه المسألة لاحقًا.
+\end{explain}
+
+\begin{prob}
+  ما نتائج الإحلالات الآتية؟
+  \begin{enumerate}
+  \item $\Subst{\lambd[y][x(\lambd[w][vwx])]}{(uv)}{x}$
+  \item $\Subst{\lambd[y][x(\lambd[x][x])]}{(\lambd[y][xy])}{x}$
+  \item $\Subst{y(\lambd[v][xv])}{(\lambd[y][vy])}{x}$
+  \end{enumerate}
+\end{prob}
+
+\begin{thm} \ollabel{thm:notinfv}
+  إذا كان~$x \notin \FV{M}$، فإن~$\FV{\Subst{M}{N}{x}} = \FV{M}$،
+  متى كان الطرف الأيسر معرّفًا.
+\end{thm}
+
+\begin{proof}
+  بالاستقراء على تكوين~$M$.
+  \begin{enumerate}
+  \item إذا كان~$M$ متغيرًا: تمرين.
+  \item إذا كان~$M$ من الصورة~$(PQ)$: تمرين.
+  \item إذا كان~$M$ من الصورة~$\lambd[y][P]$، ولما كان
+    $\Subst{\lambd[y][P]}{N}{x}$ معرّفًا، فلا بد أن يكون
+    $\lambd[y][\Subst{P}{N}{x}]$. ومن ثم لا بد أن يكون
+    $\Subst{P}{N}{x}$ معرّفًا؛ وكذلك~$x \neq y$ و$y \notin \FV{N}$
+    و$x \notin \FV{P}$. وعندئذ:
+    \begin{multline*}
+      \FV{\Subst{\lambd[y][P]}{N}{x}} = \\
+    \begin{aligned}
+      & = \FV{\lambd[y][\Subst{P}{N}{x}]} &&
+      \text{بموجب \olref{defn:substitution-4}}\\
+      & = \FV{\Subst{P}{N}{x}} \setminus \{y\} &&
+      \text{بموجب \olref[fv]{def:fv}\olref[fv]{def:fv2}}\\
+      & = \FV{P} \setminus \{y\} && \text{بفرض الاستقراء} \\
+      & = \FV{\lambd[y][P]} && \text{بموجب \olref[fv]{def:fv}\olref[fv]{def:fv2}}
+    \end{aligned}
+    \end{multline*}
+  \end{enumerate}
+\end{proof}
+
+\begin{prob}
+  أكمل برهان~\olref[lam][syn][sub]{thm:notinfv}.
+\end{prob}
+
+\begin{thm} \ollabel{thm:infv}
+  إذا كان~$x \in \FV{M}$، فإن~$\FV{\Subst{M}{N}{x}} = (\FV{M} \setminus
+  \{x\}) \cup \FV{N}$، بشرط أن يكون الطرف الأيسر معرّفًا.
+\end{thm}
+
+\begin{proof}
+  بالاستقراء على تكوين~$M$.
+  \begin{enumerate}
+  \item إذا كان~$M$ متغيرًا: تمرين.
+  \item إذا كان~$M$ من الصورة~$PQ$: لما كان
+    $\Subst{(PQ)}{N}{x}$ معرّفًا، فلا بد أن يكون
+    $(\Subst{P}{N}{x})(\Subst{Q}{N}{x})$، مع كون كلا الإحلالين
+    معرّفًا. وكذلك، لما كان~$x \in \FV{PQ}$، فإما أن يكون~$x \in
+    \FV{P}$ أو~$x \in \FV{Q}$ أو كليهما. ويترك الباقي تمرينًا.
+  \item إذا كان~$M$ من الصورة~$\lambd[y][P]$. لما كان
+    $\Subst{\lambd[y][P]}{N}{x}$ معرّفًا، فلا بد أن يكون
+    $\lambd[y][\Subst{P}{N}{x}]$، مع كون~$\Subst{P}{N}{x}$
+    معرّفًا، و$x \neq y$ و$y \notin \FV{N}$؛ وكذلك، لما كان~$x \in
+    \FV{\lambd[y][P]}$، كان~$x \in \FV{P}$ أيضًا. والآن:
+    \begin{multline*}
+      \FV{\Subst{(\lambd[y][P])}{N}{x}} = \\
+      \begin{aligned}
+      & = \FV{\lambd[y][\Subst{P}{N}{x}]} \\
+      & = \FV{\Subst{P}{N}{x}} \setminus \{y\} \\
+      & = ((\FV{P}\setminus\{x\})\cup\FV{N})\setminus\{y\}
+       && \text{بفرض الاستقراء} \\
+      & = (\FV{P}\setminus\{x,y\})\cup\FV{N}
+       && \text{لأن~$y\notin\FV{N}$} \\
+      & = (\FV{\lambd[y][P]} \setminus \{x\}) \cup \FV{N}
+      \end{aligned}
+      \end{multline*}
+  \end{enumerate}
+\end{proof}
+
+\begin{prob}
+  أكمل برهان~\olref[lam][syn][sub]{thm:infv}.
+\end{prob}
+
+\begin{thm}\ollabel{thm:clr}
+  $x \notin \FV{\Subst{M}{N}{x}}$، إذا كان الطرف الأيمن معرّفًا
+  و$x \notin \FV{N}$.
+\end{thm}
+
+\begin{proof}
+  تمرين.
+\end{proof}
+
+\begin{prob}
+  أثبت~\olref[lam][syn][sub]{thm:clr}.
+\end{prob}
+
+
+\begin{thm}\ollabel{thm:inv}
+  إذا كان~$\Subst{M}{y}{x}$ معرّفًا و$y \notin \FV{M}$، فإن
+  $\Subst{\Subst{M}{y}{x}}{x}{y} = M$.
+\end{thm}
+
+\begin{proof}
+  بالاستقراء على تكوين~$M$.
+  \begin{enumerate}
+  \item إذا كان~$M$ متغيرًا~$z$: تمرين.
+  \item إذا كان~$M$ من الصورة~$(PQ)$. فعندئذ:
+    \begin{align*}
+      \Subst{\Subst{(PQ)}{y}{x}}{x}{y}
+      &=\Subst{((\Subst{P}{y}{x})(\Subst{Q}{y}{x}))}{x}{y} \\
+      &= (\Subst{\Subst{P}{y}{x}}{x}{y})(\Subst{\Subst{Q}{y}{x}}{x}{y}) \\
+      &= (PQ) \text{ بفرض الاستقراء}
+    \end{align*}
+  \item إذا كان~$M$ من الصورة~$\lambd[z][N]$. ولأن
+    $\Subst{\lambd[z][N]}{y}{x}$ معرّف، نعلم أن~$z \neq y$. ومن ثم:
+    \begin{align*}
+      \Subst{\Subst{(\lambd[z][N])}{y}{x}}{x}{y}\\
+      & = \Subst{(\lambd[z][\Subst{N}{y}{x}])}{x}{y} \\
+      & = \lambd[z][\Subst{\Subst{N}{y}{x}}{x}{y}] \\
+      &= \lambd[z][N] \text{ بفرض الاستقراء} 
+    \end{align*}
+  \end{enumerate}
+\end{proof}
+
+\begin{prob}
+  أكمل برهان~\olref[lam][syn][sub]{thm:inv}.
+\end{prob}
+
+\end{document}

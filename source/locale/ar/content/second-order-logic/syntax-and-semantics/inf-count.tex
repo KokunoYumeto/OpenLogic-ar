@@ -1,0 +1,135 @@
+% Part: second-order-logic
+% Chapter: syntax-and-semantics
+% Section: size-of-domain
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sol}{syn}{siz}
+
+\olsection{وصف المجالات: الـ\usetoken{S}{enumerable} منها و\usetoken{P}{domain} اللانهائية}
+
+تكون المجموعة~$M$ لانهائية (بمعنى ديديكند) إذا وفقط إذا وجدت
+!!a{injective} دالة~$f\colon M \to M$ غير~!!{surjective}؛ أي إن
+$\ran{f} \neq M$. وفي منطق الرتبة الأولى يمكننا أن نتأمل
+!!{function} أحادية الموضع~$f$، ونقول إن الدالة~$\Assign{f}{M}$
+المسندة إليها في~!!a{structure}~$\Struct{M}$ هي~!!{injective} وإن
+$\ran{f} \neq \Domain{M}$:
+\[
+\lforall[x][\lforall[y][(\eq[f(x)][f(y)] \lif \eq[x][y])]] \land
+\lexists[y][\lforall[x][\eq/[y][f(x)]]].
+\]
+إذا كانت~$\Struct{M}$ تحقق هذه الـ!!{sentence}، كانت
+$\Assign{f}{M}: \Domain{M} \to \Domain{M}$ !!{injective}،
+ومن ثم لا بد أن يكون~$\Domain{M}$ لانهائيًا. وإذا كان~$\Domain{M}$
+لانهائيًا، ومن ثم وجدت دالة كهذه، أمكننا أن نجعل~$\Assign{f}{M}$ هي
+تلك الدالة، فتحقق~$\Struct{M}$ الـ!!{sentence}. غير أن ذلك يقتضي أن
+تحتوي لغتنا الرمز غير المنطقي~$f$ الذي نستعمله لهذا الغرض. أما في
+منطق الرتبة الثانية فيمكننا ببساطة أن نقول إن دالة كهذه
+\emph{موجودة}. ولا يعود ذلك يتطلب~$f$، فنحصل على الـ!!{sentence}
+الآتية في منطق الرتبة الثانية الخالص:
+\[
+\fn{Inf} \ident \lexists[u][(\lforall[x][\lforall[y][(\eq[u(x)][u(y)]
+      \lif \eq[x][y])]] \land \lexists[y][\lforall[x][\eq/[y][u(x)]]])].
+\]
+تصدق~$\Sat{M}{\fn{Inf}}$ إذا وفقط إذا كان~$\Domain{M}$ لانهائيًا.
+ويمكننا عندئذ تعريف~$\fn{Fin} \ident \lnot \fn{Inf}$؛ فتصدق
+$\Sat{M}{\fn{Fin}}$ إذا وفقط إذا كان~$\Domain{M}$ منتهيًا. ولا يمكن
+لأي~!!{sentence} مفردة من منطق الرتبة الأولى الخالص أن تعبر عن أن
+الـ!!{domain} لانهائي، وإن أمكن لمجموعة لانهائية منها ذلك. ولا توجد
+مجموعة من~!!{sentence}s منطق الرتبة الأولى الخالص تُرضى في
+!!a{structure} إذا وفقط إذا كان مجالها منتهيًا.
+
+\begin{prop}
+$\Sat{M}{\fn{Inf}}$ إذا وفقط إذا كان~$\Domain{M}$ لانهائيًا.
+\end{prop}
+
+\begin{proof}
+تصدق~$\Sat{M}{\fn{Inf}}$ إذا وفقط إذا
+  $\Sat{M}{\lforall[x][\lforall[y][(\eq[u(x)][u(y)] \lif \eq[x][y])]]
+    \land \lexists[y][\lforall[x][\eq/[y][u(x)]]]}[s]$ لبعض~$s$.
+وإذا صدقت، كانت~$s(u)$ !!a{injective} دالة، وكان بعض
+$y \in \Domain{M}$ خارج مدى~$s(u)$. وبالعكس، إذا وجدت
+!!a{injective}~$f\colon \Domain{M} \to \Domain{M}$ بحيث
+$\ran{f} \neq \Domain{M}$، فاختر تعيينًا~$s$ بحيث~$s(u) = f$.
+\end{proof}
+
+تكون المجموعة~$M$ !!{enumerable} إذا كان لها تعداد
+\[
+m_0, m_1, m_2, \dots
+\]
+لـ!!{element}s فيها (من دون تكرار، لكنه قد يكون منتهيًا). وإذا كانت
+$M$ غير خالية، وجد مثل هذا التعداد إذا وفقط إذا وجد
+!!a{element}~$z \in M$ ودالة~$f\colon M \to M$ بحيث تكون
+$z$، و$f(z)$، و$f(f(z))$، و\dots جميع~!!{element}s~$M$. فإذا وجد
+التعداد، كان~$z = m_0$ و$f(m_k) = m_{k+1}$ (أو
+$f(m_k) = m_k$ إذا كان~$m_k$ آخر~!!{element} في التعداد) هما
+الـ!!{element} والدالة المطلوبين. ومن جهة أخرى، إذا وجد~$z$ و$f$ من
+هذا القبيل، كان~$z$، و$f(z)$، و$f(f(z))$، و\dots تعدادًا لـ$M$،
+فتكون~$M$ !!{enumerable}. ويمكننا التعبير في منطق الرتبة الثانية عن
+وجود~$z$ و$f$ لإنتاج~!!{sentence} تصدق في~!!a{structure} إذا وفقط
+إذا كانت الـ!!{structure} !!{enumerable}:
+\[
+\fn{Count} \ident
+\lexists[z][\lexists[u][\lforall[X][((X(z) \land
+      \lforall[x][(X(x) \lif X(u(x)))]) \lif \lforall[x][X(x)])]]]
+\]
+
+\begin{prop}
+$\Sat{M}{\fn{Count}}$ إذا وفقط إذا كان~$\Domain{M}$ !!{enumerable}.
+\end{prop}
+
+\begin{proof}
+افترض أن~$\Domain{M}$ !!{enumerable}، وليكن
+$m_0$، و$m_1$، و\dots تعدادًا له. وبحذف التكرارات نستطيع ضمان ألا
+يظهر أي~$m_k$ مرتين. عرّف~$f(m_k) = m_{k+1}$، واجعل
+$f(m_k)=m_k$ إذا كان~$m_k$ آخر عنصر في تعداد منته، ولتكن
+$s(z) = m_0$ و$s(u) = f$. ونبين أن
+\[
+\Sat{M}{\lforall[X][((X(z) \land \lforall[x][(X(x) \lif X(u(x)))])
+    \lif \lforall[x][X(x)])]}[s]
+\]
+افترض أن~$S \subseteq \Domain{M}$ اعتباطية. وافترض أيضًا أن
+$\Sat{M}{(X(z) \land \lforall[x][(X(x) \lif
+X(u(x)))])}[\Subst{s}{S}{X}]$. عندئذ
+$\Subst{s}{S}{X}(z) \in S$، ومتى كان~$x \in S$ كان أيضًا
+$(\Subst{s}{S}{X}(u))(x) \in S$. وبعبارة أخرى، لما كان
+$\varAssign{\Subst{s}{S}{X}}{s}{X}$، كان~$m_0 \in S$، وإذا كان
+$x \in S$ كان~$f(x) \in S$؛ ومن ثم
+$m_0 \in S$، و$m_1 = f(m_0) \in S$، و
+$m_2 = f(f(m_0)) \in S$، وهكذا. ولذلك~$S = \Domain{M}$، ومن ثم
+$\Sat{M}{\lforall[x][X(x)]}[\Subst{s}{S}{X}]$. ولما كانت
+$S \subseteq \Domain{M}$ اعتباطية، تم المطلوب:
+$\Sat{M}{\fn{Count}}$.
+
+افترض الآن أن~$\Sat{M}{\fn{Count}}$؛ أي إن
+\[
+\Sat{M}{\lforall[X][((X(z) \land \lforall[x][(X(x) \lif X(u(x)))])
+    \lif \lforall[x][X(x)])]}[s]
+\]
+لبعض~$s$. ولتكن~$m = s(z)$ و$f = s(u)$، وتأمل
+$S = \{m, f(m), f(f(m)), \dots\}$. ومن الواضح أن~$S$ المعرّفة على
+هذا النحو~!!{enumerable}. وعندئذ
+\[
+\Sat{M}{(X(z) \land \lforall[x][(X(x) \lif X(u(x)))])
+    \lif \lforall[x][X(x)]}[\Subst{s}{S}{X}]
+\]
+بحسب الفرض. ولدينا أيضًا~$\Sat{M}{X(z)}[\Subst{s}{S}{X}]$ لأن
+$S \ni m = \Subst{s}{S}{X}(z)$، وكذلك
+$\Sat{M}{\lforall[x][(X(x) \lif
+X(u(x)))]}[\Subst{s}{S}{X}]$، لأن~$f(x) \in S$ متى كان~$x \in S$.
+ولما كان كل من المقدم والشرطية مُرضًى، فلا بد أن يكون التالي مُرضًى
+أيضًا: $\Sat{M}{\lforall[x][X(x)]}[\Subst{s}{S}{X}]$. لكن هذا يعني
+أن~$S = \Domain{M}$، ومن ثم يكون~$\Domain{M}$ !!{enumerable} لأن
+$S$ كذلك بالتعريف.
+\end{proof}
+
+\begin{prob}
+تصدق الـ!!{sentence}~$\fn{Inf} \land \fn{Count}$ في جميع المجالات الـ
+!!{denumerable} وفيها وحدها. عدّل تعريف~$\fn{Count}$ بحيث
+تصبح~!!{sentence} أخرى تعبر مباشرة عن أن المجال~!!{denumerable}،
+وأثبت أنها تفعل ذلك.
+\end{prob}
+
+\end{document}

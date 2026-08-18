@@ -1,0 +1,243 @@
+% Part: first-order-logic
+% Chapter: natural-deduction
+% Section: proving-things-quant
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{ntd}{prq}
+
+\olsection{\usetoken{P}{derivation} مع المكممات}
+
+\begin{ex}
+عند التعامل مع المكممات، يجب أن نتأكد من عدم انتهاك شرط المتغير
+المميَّز، ويتطلب ذلك أحيانًا أن نغيّر ترتيب تنفيذ بعض الاستدلالات.
+وبوجه عام، من المفيد أن نحاول معالجة القواعد الخاضعة لشرط المتغير
+المميَّز أولًا (إذ ستكون في موضع أدنى من البرهان المكتمل).
+
+لنر كيف نعطي !!a{derivation} لل!!{formula}
+$\lexists[x][\lnot !A(x)] \lif \lnot \lforall[x][!A(x)]$.
+نبدأ كالمعتاد، فنكتب:
+\begin{prooftree}
+\AxiomC{}
+\UnaryInfC{$\lexists[x][\lnot !A(x)]\lif \lnot \lforall[x][!A(x)]$}
+\end{prooftree}
+نبدأ بكتابة ما يلزم لتسويغ الخطوة الأخيرة باستعمال قاعدة~\Intro{\lif}.
+\begin{prooftree}
+\AxiomC{$\Discharge{\lexists[x][\lnot !A(x)]}{1}$}
+\DeduceC{$\lnot \lforall[x][!A(x)]$}
+\DischargeRule{\Intro{\lif}}{1}
+\UnaryInfC{$\lexists[x][\lnot !A(x)]\lif \lnot \lforall[x][!A(x)]$}
+\end{prooftree}
+لما لم تكن هناك قاعدة واضحة نطبقها على~$\lnot \lforall[x][!A(x)]$،
+سنرتب ال!!{derivation} بحيث يمكننا استعمال قاعدة~\Elim{\lexists}.
+ويجب أن ننتبه هنا إلى شرط المتغير المميَّز، ونختار رمزًا ثابتًا لا يرد
+في~$\lexists[x][\lnot !A(x)]$ ولا في أي افتراض يعتمد عليه.
+(لكن لما لم ترد أي !!{constant}s، صلح أي اختيار.)
+\begin{prooftree}
+\AxiomC{$\Discharge{\lexists[x][\lnot !A(x)]}{1}$}
+\AxiomC{$\Discharge{\lnot !A(a)}{2}$}
+\DeduceC{$\lnot \lforall[x][!A(x)]$}
+\DischargeRule{\Elim{\lexists}}{2}
+\BinaryInfC{$\lnot \lforall[x][!A(x)]$}
+\DischargeRule{\Intro{\lif}}{1}
+\UnaryInfC{$\lexists[x][\lnot !A(x)] \lif \lnot \lforall[x][!A(x)]$}
+\end{prooftree}
+لكي نشتق~$\lnot \lforall[x][!A(x)]$، سنحاول استعمال قاعدة
+\Intro{\lnot}: وهذا يقتضي أن نشتق تناقضًا، وربما باستعمال
+$\lforall[x][!A(x)]$ افتراضًا إضافيًا. وبالطبع، قد يتضمن هذا التناقض
+الافتراض~$\lnot !A(a)$ الذي سيسقطه استدلال~\Elim{\lexists}. ويمكننا
+ترتيب ذلك هكذا:
+\begin{prooftree}
+\AxiomC{$\Discharge{\lexists[x][\lnot !A(x)]}{1}$}
+\AxiomC{$\Discharge{\lnot !A(a)}{2}, \Discharge{\lforall[x][!A(x)]}{3}$}
+\DeduceC{$\lfalse$}
+\DischargeRule{\Intro{\lnot}}{3}
+\UnaryInfC{$\lnot \lforall[x][!A(x)]$}
+\DischargeRule{\Elim{\lexists}}{2}
+\BinaryInfC{$\lnot \lforall[x][!A(x)]$}
+\DischargeRule{\Intro{\lif}}{1}
+\UnaryInfC{$\lexists[x][\lnot !A(x)]\lif \lnot \lforall[x][!A(x)]$}
+\end{prooftree}
+يبدو أننا اقتربنا من الحصول على تناقض. وأسهل قاعدة يمكن تطبيقها هي
+\Elim{\lforall}، وهي لا تخضع لأي شرط على المتغير المميَّز. ولما كان
+يجوز لنا استعمال أي حد نريده محل~$x$ المكمم كليًا، فمن الأنسب أن نواصل
+استعمال~$a$ حتى نصل إلى تناقض.
+\begin{prooftree}
+\AxiomC{$\Discharge{\lexists[x][\lnot !A(x)]}{1}$}
+\AxiomC{$\Discharge{\lnot !A(a)}{2}$}
+\AxiomC{$\Discharge{\lforall[x][!A(x)]}{3}$}
+\RightLabel{\Elim{\lforall}}
+\UnaryInfC{$!A(a)$}
+\RightLabel{\Elim{\lnot}}
+\BinaryInfC{$\lfalse$}
+\DischargeRule{\Intro{\lnot}}{3}
+\UnaryInfC{$\lnot \lforall[x][!A(x)]$}
+\DischargeRule{\Elim{\lexists}}{2}
+\BinaryInfC{$\lnot \lforall[x][!A(x)]$}
+\DischargeRule{\Intro{\lif}}{1}
+\UnaryInfC{$\lexists[x][\lnot !A(x)]\lif \lnot \lforall[x][!A(x)]$}
+\end{prooftree}
+
+من المهم، ولا سيما عند التعامل مع المكممات، أن نراجع في هذه المرحلة
+أن شرط المتغير المميَّز لم يُنتهك. ولما كانت القاعدة الوحيدة التي
+طبقناها والخاضعة لشرط المتغير المميَّز هي~\Elim{\exists}، وكان
+المتغير المميَّز~$a$ لا يرد في أي افتراض تعتمد عليه، فهذا
+!!{derivation} صحيح.
+\end{ex}
+
+\begin{ex}
+قد نشتق أحيانًا !!a{formula} من !!{formula}s أخرى. وفي هذه الحالات، قد
+تكون لدينا افتراضات غير مسقطة. ومن المهم أن نضبط افتراضاتنا إلى جانب
+الغاية النهائية.
+
+لنر كيف نعطي !!a{derivation} لل!!{formula}~$\lexists[x][!C(x,b)]$
+من الافتراضين~$\lexists[x][(!A(x) \land !B(x))]$ و
+$\lforall[x][(!B(x) \lif !C(x,b))]$. نبدأ كالمعتاد بكتابة النتيجة في
+الأسفل.
+\begin{prooftree}
+\AxiomC{}
+\UnaryInfC{$\lexists[x][!C(x,b)]$}
+\end{prooftree}
+
+لدينا مقدمتان نعمل بهما. ولاستعمال الأولى، أي لمحاولة إيجاد
+!!a{derivation} لـ~$\lexists[x][!C(x, b)]$ من
+$\lexists[x][(!A(x) \land !B(x))]$، نستعمل قاعدة~\Elim{\lexists}.
+ولما كانت تخضع لشرط المتغير المميَّز، فسنطبق تلك القاعدة أولًا. فنحصل
+على الآتي:
+\begin{prooftree}
+\AxiomC{$\lexists[x][(!A(x) \land !B(x))]$}
+\AxiomC{$\Discharge{!A(a) \land !B(a)}{1}$}
+\DeduceC{$\lexists[x][!C(x,b)]$}
+\DischargeRule{\Elim{\lexists}}{1}
+\BinaryInfC{$\lexists[x][!C(x,b)]$}
+\end{prooftree}
+يشترك الافتراضان اللذان نعمل بهما في~$!B$. وقد يكون من المفيد في هذه
+المرحلة أن نطبق~\Elim{\land} لفصل~$!B(a)$.
+\begin{prooftree}
+\AxiomC{$\lexists[x][(!A(x) \land !B(x)])$}
+\AxiomC{$\Discharge{!A(a) 
+\land !B(a)}{1}$}
+\RightLabel{\Elim{\land}}
+\UnaryInfC{$!B(a)$}
+\DeduceC{$\lexists[x][!C(x,b)]$}
+\DischargeRule{\Elim{\lexists}}{1}
+\BinaryInfC{$\lexists[x][!C(x,b)]$}
+\end{prooftree}
+
+الافتراض الثاني الذي علينا العمل به هو~$\lforall[x][(!B(x) \lif
+!C(x,b))]$. ولما لم يكن هناك شرط على المتغير المميَّز، يمكننا أن
+نعوّض عن~$x$ بال!!{constant}~$a$ باستعمال~\Elim{\lforall} لنحصل على
+$!B(a) \lif !C(a, b)$. ولدينا الآن كل من~$!B(a) \lif !C(a,b)$
+و$!B(a)$. وينبغي أن تكون خطوتنا التالية تطبيقًا مباشرًا لقاعدة
+\Elim{\lif}.
+\begin{prooftree}
+\AxiomC{$\lexists[x][(!A(x) \land !B(x))]$}
+\AxiomC{$\lforall[x][(!B(x) \lif !C(x,b))]$}
+\RightLabel{\Elim{\lforall}}
+\UnaryInfC{$!B(a) \lif !C(a,b)$}
+\AxiomC{$\Discharge{!A(a) 
+\land !B(a)}{1}$}
+\RightLabel{\Elim{\land}}
+\UnaryInfC{$!B(a)$}
+\RightLabel{\Elim{\lif}}
+\BinaryInfC{$!C(a,b)$}
+\DeduceC{$\lexists[x][!C(x,b)]$}
+\DischargeRule{\Elim{\lexists}}{1}
+\insertBetweenHyps{\hspace{-5em}}
+\BinaryInfC{$\lexists[x][!C(x,b)]$}
+\end{prooftree}
+لقد أوشكنا!{} فبتطبيق واحد لـ~\Intro{\lexists} نبلغ غايتنا.
+\begin{prooftree}
+\AxiomC{$\lexists[x][(!A(x) \land !B(x))]$}
+\AxiomC{$\lforall[x][(!B(x) \lif !C(x,b))]$}
+\RightLabel{\Elim{\lforall}}
+\UnaryInfC{$!B(a) \lif !C(a,b)$}
+\AxiomC{$\Discharge{!A(a) 
+\land !B(a)}{1}$}
+\RightLabel{\Elim{\land}}
+\UnaryInfC{$!B(a)$}
+\RightLabel{\Elim{\lif}}
+\BinaryInfC{$!C(a,b)$}
+\RightLabel{\Intro{\lexists}}
+\UnaryInfC{$\lexists[x][!C(x,b)]$}
+\DischargeRule{\Elim{\lexists}}{1}
+\insertBetweenHyps{\hspace{-5em}}
+\BinaryInfC{$\lexists[x][!C(x,b)]$}
+\end{prooftree}
+وبما أننا حرصنا في كل خطوة على ألا تُنتهك شروط المتغير المميَّز،
+يمكننا الوثوق بأن هذا !!{derivation} صحيح.
+\end{ex}
+
+\begin{ex}
+أعط !!a{derivation} لل!!{formula}~$\lnot\lforall[x][!A(x)]$ من
+الافتراضين~$\lforall[x][!A(x)] \lif \lexists[y][!B(y)]$ و
+$\lnot\lexists[y][!B(y)]$. نبدأ كالمعتاد بكتابة ال!!{formula}
+المطلوبة في الأسفل.
+\begin{prooftree}
+\AxiomC{}
+\UnaryInfC{$\lnot\lforall[x][!A(x)]$}
+\end{prooftree}
+السطر الأخير في ال!!{derivation} نفي، ولذلك فلنجرب استعمال
+\Intro{\lnot}. وسيتطلب هذا أن نعرف كيف !!{derive} تناقضًا.
+\begin{prooftree}
+\AxiomC{$\Discharge{\lforall[x][!A(x)]}{1}$}
+\DeduceC{$\lfalse$}
+\DischargeRule{\Intro{\lnot}}{1}
+\UnaryInfC{$\lnot\lforall[x][!A(x)]$}
+\end{prooftree}
+كل شيء على ما يرام حتى الآن. يمكننا استعمال~\Elim{\lforall}، لكن
+ليس من الواضح هل سيساعدنا ذلك في بلوغ غايتنا. وبدلًا من ذلك، فلنستعمل
+أحد افتراضاتنا. إن~$\lforall[x][!A(x)] \lif \lexists[y][!B(y)]$
+مع~$\lforall[x][!A(x)]$ يتيحان لنا استعمال قاعدة~\Elim{\lif}.
+\begin{prooftree}
+\AxiomC{$\lforall[x][!A(x)] \lif \lexists[y][!B(y)]$}
+\AxiomC{$\Discharge{\lforall[x][!A(x)]}{1}$}
+\RightLabel{\Elim{\lif}}
+\BinaryInfC{$\lexists[y][!B(y)]$}
+\DeduceC{$\lfalse$}
+\DischargeRule{\Intro{\lnot}}{1}
+\UnaryInfC{$\lnot\lforall[x][!A(x)]$}
+\end{prooftree}
+بقي لدينا الآن افتراض أخير نعمل به، ويبدو أن هذا سيساعدنا على بلوغ
+تناقض باستعمال~\Elim{\lnot}.
+\begin{prooftree}
+\AxiomC{$\lnot\lexists[y][!B(y)]$}
+\AxiomC{$\lforall[x][!A(x)] \lif \lexists[y][!B(y)]$}
+\AxiomC{$\Discharge{\lforall[x][!A(x)]}{1}$}
+\RightLabel{\Elim{\lif}}
+\BinaryInfC{$\lexists[y][!B(y)]$}
+\RightLabel{\Elim{\lnot}}
+\BinaryInfC{$\lfalse$}
+\DischargeRule{\Intro{\lnot}}{1}
+\UnaryInfC{$\lnot\lforall[x][!A(x)]$}
+\end{prooftree}
+\end{ex}
+
+\begin{prob}
+أعط !!{derivation}s تبين ما يأتي:
+\begin{enumerate}
+\item $\Proves (\lforall[x][!A(x)] \land \lforall[y][!B(y)]) \lif
+\lforall[z][(!A(z) \land !B(z))]$.
+\item $\Proves (\lexists[x][!A(x)] \lor \lexists[y][!B(y)]) \lif
+\lexists[z][(!A(z) \lor !B(z))]$.
+\item $\lforall[x][(!A(x) \lif !B)] \Proves \lexists[y][!A(y)] \lif !B$.
+\item $\lforall[x][\lnot !A(x)] \Proves \lnot\lexists[x][!A(x)]$.
+\item $\Proves \lnot\lexists[x][!A(x)] \lif \lforall[x][\lnot !A(x)]$.
+\item $\Proves \lnot\lexists[x][\lforall[y][((!A(x,y) \lif \lnot
+!A(y,y)) \land (\lnot !A(y,y) \lif !A(x,y)))]]$.
+\end{enumerate}
+\end{prob}
+
+\begin{prob}
+أعط !!{derivation}s تبين ما يأتي:
+\begin{enumerate}
+\item $\Proves \lnot\lforall[x][!A(x)] \lif \lexists[x][\lnot!A(x)]$.
+\item $(\lforall[x][!A(x)] \lif !B) \Proves \lexists[y][(!A(y) \lif !B)]$.
+\item $\Proves \lexists[x][(!A(x) \lif \lforall[y][!A(y)])]$.
+\end{enumerate}
+(تتطلب هذه كلها قاعدة~$\FalseCl$.)
+\end{prob}
+
+\end{document}

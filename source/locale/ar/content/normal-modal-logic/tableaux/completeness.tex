@@ -1,0 +1,218 @@
+% Part: normal-modal-logic
+% Chapter: tableaux
+% Section: completeness
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{tab}{cpl}
+
+\olsection{تمام \Log{K}}
+
+\begin{explain}
+  لكي نبيّن أن طريقة ال!!{tableau}s تامة، علينا أن نبيّن أنه كلما لم
+  يوجد !!{tableau} مغلق يبيّن $\Gamma \Proves !A$، كان
+  $\Gamma \Entails/ !A$، أي وُجد نموذج مضاد. لكن عبارة «لا يوجد
+  !!{tableau} مغلق» تعني أن كل طريقة يمكن أن نحاول بها إنشاء واحد لا
+  بد أن تفشل في الانغلاق. والحيلة هي ملاحظة أنه إذا فشلت كل طريقة من
+  هذا القبيل في الانغلاق، فإن طريقة معينة \emph{منهجية ومستنفدة} تفشل
+  فيه أيضًا. وهذه الطريقة المنهجية المستنفدة كانت ستنغلق لو وُجد
+  !!{tableau} مغلق. وسيحتوي ذلك الجدول الدلالي الواحد، بين فروعه
+  المفتوحة، كل المعلومات اللازمة لتعريف نموذج مضاد. فالنموذج المضاد
+  الذي يعطيه فرع مفتوح في هذا الجدول الدلالي يتخذ جميع البادئات
+  المستعملة على ذلك الفرع عوالم له، ويكون !!a{propositional
+    variable}~$p$ صادقًا عند $\sigma$ إذا وفقط إذا وردت
+  $\sFmla{\True}{p}[\sigma]$ على الفرع.
+\end{explain}
+
+\begin{defn}
+  يسمى فرع في !!a{tableau} تامًا إذا كان، كلما احتوى !!{formula} ذات
+  بادئة $\sFmla{S}{!A}[\sigma]$ يمكن تطبيق قاعدة عليها، يحتوي أيضًا
+  ما يأتي:
+  \begin{enumerate}
+    \item ال!!{formula}s ذات البادئات التي هي النتائج المقابلة
+      للقاعدة، في حالة قواعد الرصّ القضوية؛
+    \item إحدى !!{formula}s النتيجة المقابلة، في حالة قواعد التفريع
+      القضوية؛
+    \item نتيجة ممكنة واحدة على الأقل، في حالة القواعد الموجهية التي
+      تتطلب بادئة جديدة؛
+    \item النتيجة المقابلة لكل بادئة ترد على الفرع، في حالة القواعد
+      الموجهية التي تتطلب بادئة مستعملة.
+  \end{enumerate}
+\end{defn}
+
+\begin{explain}
+فمثلًا، يحتوي الفرع التام $\sFmla{\True}{!B}[\sigma]$ و
+$\sFmla{\True}{!C}[\sigma]$ كلما احتوى
+$\sFmla{\True}{!B \land !C}[\sigma]$. وإذا احتوى
+$\sFmla{\True}{!B \lor !C}[\sigma]$، فإنه يحتوي واحدة على الأقل من
+$\sFmla{\True}{!B}[\sigma]$ و$\sFmla{\True}{!C}[\sigma]$. وإذا احتوى
+\iftag{prvBox} {$\sFmla{\False}{\Box !B}[\sigma]$}
+{$\sFmla{\True}{\Diamond !B}[\sigma]$}، فإنه يحتوي أيضًا
+\iftag{prvBox} {$\sFmla{\False}{!B}[\sigma.n]$}
+{$\sFmla{\True}{!B}[\sigma.n]$} لعدد~$n$ واحد على الأقل. وكلما احتوى
+\iftag{prvBox} {$\sFmla{\True}{\Box !B}[\sigma]$}
+{$\sFmla{\False}{\Diamond !B}[\sigma]$}، فإنه يحتوي أيضًا
+\iftag{prvBox} {$\sFmla{\True}{!B}[\sigma.n]$}
+{$\sFmla{\False}{!B}[\sigma.n]$} لكل~$n$ تكون فيه $\sigma.n$
+مستعملة على الفرع.
+\end{explain}
+
+\begin{prop}\ollabel{prop:complete-tableau}
+  لكل $\Gamma$ منتهية !!a{tableau} تكون جميع فروعه تامة.
+\end{prop}
+
+\begin{proof}
+  انظر في فرع مفتوح من !!a{tableau} لـ~$\Gamma$. لا يوجد على الفرع
+  إلا عدد منته من ال!!{formula}s ذات البادئات التي يمكن تطبيق قاعدة
+  عليها. وبحسب ترتيب ثابت (من الأعلى إلى الأسفل مثلًا)، طبّق على كل
+  واحدة من هذه ال!!{formula}s لا تتحقق لها الشروط (1)--(4) بعدُ
+  القواعد التي يمكن تطبيقها عليها، لتمديد الفرع. وينتج من ذلك في بعض
+  الحالات تفريع؛ فطبّق القاعدة عند طرف كل فرع ناتج على جميع
+  ال!!{formula}s المتبقية ذات البادئات. ولأن عدد ال!!{formula}s ذات
+  البادئات منته، وعدد البادئات المستعملة على الفرع منته، تنتهي هذه
+  العملية إلى فروع (قد تكون كثيرة) تمد الفرع الأصلي. طبّق العملية على
+  كل واحد منها وكررها. وبحسب البناء، يكون كل فرع تامًا.
+\end{proof}
+
+\begin{thm}[التمام]
+  \ollabel{thm:tableau-completeness}
+  إذا كانت $\Gamma$ منتهية ولم يكن لها !!{tableau} مغلق، فإن $\Gamma$
+  قابلة للإرضاء.
+\end{thm}
+
+\begin{proof}
+بحسب القضية، لـ$\Gamma$ !!a{tableau} تكون جميع فروعه تامة. ولأنه لا
+يوجد لها !!{tableau} مغلق، فلها !!a{tableau} فيه فرع واحد على الأقل
+مفتوح وتام. لتكن $\Delta$ مجموعة ال!!{formula}s ذات البادئات الواقعة
+على ذلك الفرع، ولتكن $P(\Delta)$ مجموعة البادئات الواردة فيها.
+
+نعرّف نموذجًا~$\mModel{M(\Delta)} = \tuple{P(\Delta), R, V}$ تكون
+عوالمه هي البادئات الواردة في~$\Delta$، وتُعطى علاقة الإتاحة فيه بـ:
+\[
+R\sigma\sigma' \quad \text{إذا وفقط إذا} \quad
+\sigma'=\sigma.n \quad \text{لبعض~$n$}
+\]
+ويُعطى إسناده بـ
+\[
+V(p) = \Setabs{\sigma}{\sFmla{\True}{p}[\sigma] \in \Delta}.
+\]
+نبيّن بالاستقراء على~$!A$ أنه إذا كان $\sFmla{\True}{!A}[\sigma] \in
+\Delta$، فإن $\mSat{M(\Delta)}{!A}[\sigma]$، وإذا كان
+$\sFmla{\False}{!A}[\sigma] \in \Delta$، فإن
+$\mSat/{M(\Delta)}{!A}[\sigma]$.
+
+\begin{enumerate}
+  \item \indcase{!A}{p}{إذا كان $\sFmla{\True}{\indfrm}[\sigma] \in \Delta$،
+    فإن $\sigma \in V(p)$ (بحسب تعريف~$V$)، ومن ثم
+    $\mSat{M(\Delta)}{\indfrm}[\sigma]$.
+
+    وإذا كان $\sFmla{\False}{\indfrm}[\sigma] \in \Delta$، فإن
+    $\sFmla{\True}{\indfrm}[\sigma] \notin \Delta$، وإلا لكان الفرع
+    مغلقًا. ولذلك $\sigma \notin V(p)$، ومن ثم
+    $\mSat/{M(\Delta)}{\indfrm}[\sigma]$.}
+  \item \indcase{!A}{\lnot !B}{\iftag{probNot}{تمرين.}{إذا كان
+      $\sFmla{\True}{\indfrm}[\sigma] \in \Delta$، فإن
+      $\sFmla{\False}{!B}[\sigma] \in \Delta$ لأن الفرع تام. وبفرض
+      الاستقراء، $\mSat/{M(\Delta)}{!B}[\sigma]$، ومن ثم
+      $\mSat{M(\Delta)}{\indfrm}[\sigma]$.
+
+      وإذا كان $\sFmla{\False}{\indfrm}[\sigma] \in \Delta$، فإن
+      $\sFmla{\True}{!B}[\sigma] \in \Delta$ لأن الفرع تام. وبفرض
+      الاستقراء، $\mSat{M(\Delta)}{!B}[\sigma]$، ومن ثم
+      $\mSat/{M(\Delta)}{\indfrm}[\sigma]$.}}
+  \item \indcase{!A}{!B \land !C}{\iftag{probAnd}{تمرين.}{إذا كان
+      $\sFmla{\True}{\indfrm}[\sigma] \in \Delta$، فإن كلًا من
+      $\sFmla{\True}{!B}[\sigma] \in \Delta$ و
+      $\sFmla{\True}{!C}[\sigma] \in \Delta$ لأن الفرع تام. وبفرض
+      الاستقراء، $\mSat{M(\Delta)}{!B}[\sigma]$ و
+      $\mSat{M(\Delta)}{!C}[\sigma]$. ومن ثم
+      $\mSat{M(\Delta)}{\indfrm}[\sigma]$.
+
+      وإذا كان $\sFmla{\False}{\indfrm}[\sigma] \in \Delta$، فإما
+      أن يكون $\sFmla{\False}{!B}[\sigma] \in \Delta$ أو يكون
+      $\sFmla{\False}{!C}[\sigma] \in \Delta$ لأن الفرع تام. وبفرض
+      الاستقراء، إما $\mSat/{M(\Delta)}{!B}[\sigma]$ أو
+      $\mSat/{M(\Delta)}{!C}[\sigma]$. ومن ثم
+      $\mSat/{M(\Delta)}{\indfrm}[\sigma]$.}}
+  \item \indcase{!A}{!B \lor !C}{\iftag{probOr}{تمرين.}{إذا كان
+      $\sFmla{\True}{\indfrm}[\sigma] \in \Delta$، فإما أن يكون
+      $\sFmla{\True}{!B}[\sigma] \in \Delta$ أو يكون
+      $\sFmla{\True}{!C}[\sigma] \in \Delta$ لأن الفرع تام. وبفرض
+      الاستقراء، إما $\mSat{M(\Delta)}{!B}[\sigma]$ أو
+      $\mSat{M(\Delta)}{!C}[\sigma]$. ومن ثم
+      $\mSat{M(\Delta)}{\indfrm}[\sigma]$.
+
+      وإذا كان $\sFmla{\False}{\indfrm}[\sigma] \in \Delta$، فإن
+      كلًا من $\sFmla{\False}{!B}[\sigma] \in \Delta$ و
+      $\sFmla{\False}{!C}[\sigma] \in \Delta$ لأن الفرع تام. وبفرض
+      الاستقراء، كل من $\mSat/{M(\Delta)}{!B}[\sigma]$ و
+      $\mSat/{M(\Delta)}{!C}[\sigma]$. ومن ثم
+      $\mSat/{M(\Delta)}{\indfrm}[\sigma]$.}}
+  \item \indcase{!A}{!B \lif !C}{\iftag{probIf}{تمرين.}{إذا كان
+      $\sFmla{\True}{\indfrm}[\sigma] \in \Delta$، فإما أن يكون
+      $\sFmla{\False}{!B}[\sigma] \in \Delta$ أو يكون
+      $\sFmla{\True}{!C}[\sigma] \in \Delta$ لأن الفرع تام. وبفرض
+      الاستقراء، إما $\mSat/{M(\Delta)}{!B}[\sigma]$ أو
+      $\mSat{M(\Delta)}{!C}[\sigma]$. ومن ثم
+      $\mSat{M(\Delta)}{\indfrm}[\sigma]$.
+
+      وإذا كان $\sFmla{\False}{\indfrm}[\sigma] \in \Delta$، فإن
+      كلًا من $\sFmla{\True}{!B}[\sigma] \in \Delta$ و
+      $\sFmla{\False}{!C}[\sigma] \in \Delta$ لأن الفرع تام. وبفرض
+      الاستقراء، كل من $\mSat{M(\Delta)}{!B}[\sigma]$ و
+      $\mSat/{M(\Delta)}{!C}[\sigma]$. ومن ثم
+      $\mSat/{M(\Delta)}{\indfrm}[\sigma]$.}}
+  \item \indcase{!A}{\Box !B}{\iftag{probBox}{تمرين.}{إذا كان
+      $\sFmla{\True}{\indfrm}[\sigma] \in \Delta$، فإن
+      $\sFmla{\True}{!B}[\sigma.n] \in \Delta$ لكل $\sigma.n$
+      مستعملة على الفرع، لأن الفرع تام؛ أي لكل $\sigma'
+      \in P(\Delta)$ بحيث $R\sigma\sigma'$. وبفرض الاستقراء،
+      $\mSat{M(\Delta)}{!B}[\sigma']$ لكل $\sigma'$ بحيث
+      $R\sigma\sigma'$. ومن ثم $\mSat{M(\Delta)}{\indfrm}[\sigma]$.
+
+      وإذا كان $\sFmla{\False}{\indfrm}[\sigma] \in \Delta$، فلبعض
+      $\sigma.n$ يكون $\sFmla{\False}{!B}[\sigma.n] \in \Delta$ لأن
+      الفرع تام. وبفرض الاستقراء،
+      $\mSat/{M(\Delta)}{!B}[\sigma.n]$. ولأن
+      $R\sigma(\sigma.n)$، توجد~$\sigma'$ بحيث
+      $\mSat/{M(\Delta)}{!B}[\sigma']$. ومن ثم
+      $\mSat/{M(\Delta)}{\indfrm}[\sigma]$.}}
+  \item \indcase{!A}{\Diamond !B}{\iftag{probDiamond}{تمرين.}{إذا كان
+      $\sFmla{\True}{\indfrm}[\sigma] \in \Delta$، فلبعض
+      $\sigma.n$ يكون $\sFmla{\True}{!B}[\sigma.n] \in \Delta$ لأن
+      الفرع تام. وبفرض الاستقراء، $\mSat{M(\Delta)}{!B}[\sigma.n]$.
+      ولأن $R\sigma(\sigma.n)$، توجد~$\sigma'$ بحيث
+      $\mSat{M(\Delta)}{!B}[\sigma']$. ومن ثم
+      $\mSat{M(\Delta)}{\indfrm}[\sigma]$.
+
+      وإذا كان $\sFmla{\False}{\indfrm}[\sigma] \in \Delta$، فإن
+      $\sFmla{\False}{!B}[\sigma.n] \in \Delta$ لكل $\sigma.n$
+      مستعملة على الفرع، لأن الفرع تام؛ أي لكل $\sigma'
+      \in P(\Delta)$ بحيث $R\sigma\sigma'$. وبفرض الاستقراء،
+      $\mSat/{M(\Delta)}{!B}[\sigma']$ لكل $\sigma'$ بحيث
+      $R\sigma\sigma'$. ومن ثم $\mSat/{M(\Delta)}{\indfrm}[\sigma]$.}}
+\end{enumerate}
+لتكن $f$ دالة الهوية على $P(\Delta)$، أي $f(\sigma)=\sigma$. عندئذ
+تكون $f$ تأويلًا للبادئات في $\mModel{M(\Delta)}$، ويبيّن الاستقراء
+أن $\mModel{M(\Delta)}$ يرضي $\Delta$ بالنسبة إلى~$f$. ولأن
+$\Gamma \subseteq \Delta$، فإن $\mSat{M(\Delta)}{\Gamma}[f]$.
+\end{proof}
+
+\begin{prob}
+أكمل برهان \olref[nml][tab][cpl]{thm:tableau-completeness}.
+\end{prob}
+
+\begin{cor}
+\ollabel{cor:entailment-completeness}
+إذا كانت $\Gamma$ منتهية وكان $\Gamma \Entails !A$، فإن
+$\Gamma \Proves !A$.
+\end{cor}
+
+\begin{cor}
+\ollabel{cor:weak-completeness}
+إذا كانت $!A$ صادقة في جميع النماذج، فإن $\Proves !A$.
+\end{cor}
+
+\end{document}

@@ -1,0 +1,306 @@
+% Part: proof-theory
+% Chapter: normalization
+% Section: translations
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{nor}{tr}
+
+\olsection{الترجمة بين \usetoken{P}{proof} السوية في~\Log{N2i} و\Log{G2i}}
+
+يمكن ترجمة~!!^{proof}s في~\Log{N2i} إلى~!!{proof}s في~\Log{G2i} والعكس.
+وأول ما نلاحظه أن ترجمة~!!{proof}s الخالية من القطع في~\Log{G2i} تنتج
+!!{proof}s سوية في~\Log{N2i}.
+
+ولصياغة النتيجة نحتاج إلى مصطلح يسهّل الربط بين مقدمات المتتاليات في
+\Log{N2i} و\Log{G2i}: نقول إن مجموعة~$\Gamma'$ من~!!{formula}s الموسومة
+\emph{تقابل} المجموعة المتعددة~$\Gamma$ من~!!{formula}s غير الموسومة إذا
+كان، لكل~!!{formula}~$!A$، عدد~!!{element}s المجموعة~$\Gamma'$ التي صورتها
+$x:!A$ أصغر من أو يساوي تعددية~$!A$ في~$\Gamma$.
+
+\begin{cor}
+إذا كان $\Log{G2i} \Proves \Gamma \Sequent \Delta$، فثمة
+!!{proof} سوي~$\delta$ في~\Log{N2i} للمتتالية~$\Gamma' \Sequent !C$، حيث
+$!C\ident\lfalse$ إذا كانت~$\Delta$ خالية، و$!C\ident !A$ إذا كانت
+$\Delta=\{!A\}$، وحيث تقابل مجموعة~$\Gamma'$ من~!!{formula}s الموسومة
+المجموعة المتعددة~$\Gamma$؛ أي إنه، لكل~!!{formula}~$!A$، يكون عدد
+!!{element}s المجموعة~$\Gamma'$ التي صورتها~$x:!A$ أصغر من أو يساوي
+تعددية~$!A$ (أي عدد نسخ~$!A$) في~$\Gamma$.
+\end{cor}
+
+\begin{proof}
+يتضح ذلك بفحص برهان~\olref[nat][tgi]{prop:G2i-to-N2i}: فنحن نضيف قواعد
+!!{introduction} إلى نهايات~!!{proof}s، ونضيف قواعد~!!{elimination} إلى
+أعالي~!!{proof}s وحدها، ولذلك لا ندخل أبدًا قاعدة~!!{introduction} فوق
+!!a{elimination}.
+\end{proof}
+
+لكن ترجمة قاعدة~\Cut{} المعطاة في~\olref[nat][tgi]{prop:G2i-to-N2i}
+قد تدخل قطوعًا في~!!{proof}~$\delta$ من~\Log{N2i}. فإذا انتهى~!!{proof}
+في~\Log{G2i} بـ~\Cut{} وكان~!!{proof}sه الجزئيان المباشران~$\pi_1$ و$\pi_2$
+للمتتاليتين~$\Gamma_1 \Sequent !A$ و
+$!A,\Gamma_2 \Sequent \Delta_2$ على الترتيب، فإننا نوصل ترجمة~$\pi_1$،
+وهي~$\delta_1$، بمسلّمات~$x:!A \Sequent !A$ الواقعة في ترجمة~$\pi_2$،
+وهي~$\delta_2$. فإذا انتهى~$\delta_1$ بقاعدة~!!a{introduction} صيغتها
+الرئيسة~!!{formula}~$!A$، وكانت المسلّمة~$x:!A \Sequent !A$ في~$\delta_2$
+المقدمة الكبرى لقاعدة~!!a{elimination}، نتج عن ذلك قطع في~$\delta$.
+
+ويمكن أيضًا ترجمة~!!{proof}s في~\Log{N2i} إلى~!!{proof}s في~\Log{G2i}.
+ففي برهان~\olref[nat][tni]{prop:N2-to-G2} تنتج عن ترجمة~\Elim{\land} و
+\Elim{\lif} و\Elim{\lnot} و\Elim{\lforall} استدلالات~\Cut{} في
+!!{proof}~\Log{G2i} الناتج. غير أن هذا يمكن اجتنابه إذا كان~!!{proof}
+\Log{N2i} الذي نبدأ منه سويًا.
+
+لنسمِّ قائمة~$S_1$، \dots، $S_n$ من وقائع المتتاليات في~!!{proof}
+$\delta$ من~\Log{N2i} \emph{فرعًا} إذا كانت~$S_1$ مسلّمة، وكانت~$S_{i+1}$
+نتيجة الاستدلال كلما كانت~$S_i$ مقدمته الكبرى، ولم تكن العقدة الأخيرة
+$S_n$ مقدمةً كبرى لأي استدلال. أي إن الفرع يتتبع المتتاليات نزولًا في
+$\delta$ بدءًا من المسلّمات، لكنه يتوقف عند المقدمات الصغرى لقواعد
+!!{elimination}. و\emph{الفرع الرئيس} لـ~$\delta$ فرع تكون~$S_n$ فيه
+المتتالية النهائية. ولا بد أن يكون لكل~!!{proof}~$\delta$ فرع رئيس واحد
+على الأقل، لأن لكل قاعدة مقدمة كبرى واحدة على الأقل (ولا يملك مقدمتين
+كبرَيَيْن سوى~\Intro{\land}).
+
+\begin{prop}\ollabel{prop:normal-N2i-to-G2i}
+إذا كان~$\delta$ !!{proof} سويًا في~$\Log{N2i}$ للمتتالية
+$\Gamma \Sequent !A$، فثمة~!!{proof}~$\pi$ خالٍ من القطع، وهو
+!!{proof} في~$\Log{G2i}$
+للمتتالية~$\Gamma' \Sequent \Delta$، حيث~$\Gamma'$ هي المجموعة المتعددة
+من~!!{formula}s الناتجة من~$\Gamma$ بحذف الوسوم، و
+$\Delta=\{!A\}$ إذا لم تكن~$!A$ هي~$\lfalse$، و
+$\Delta=\emptyset$ إذا كانت إياها.
+\end{prop}
+
+\begin{proof}
+هذه المرة نستعمل الاستقراء في عدد الاستدلالات في~!!{proof}~$\delta$
+للمتتالية~$\Gamma \Sequent !A$. فإذا لم يوجد استدلال في~$\delta$، كانت
+مسلّمة~$x:!A \Sequent !A$، وكان~$\pi$ المسلّمة المقابلة
+$!A \Sequent !A$، أو~$\lfalse \Sequent \ $ إذا كان
+$!A\ident\lfalse$.
+
+إذا انتهى~$\delta$ بقاعدة استدلال، نميّز الحالات الآتية:
+\begin{enumerate}
+  \item إذا كانت~$R$ قاعدة~!!a{introduction} أو~\FalseInt، جرت الترجمة
+  كما في برهان~\olref[nat][tni]{prop:N2-to-G2} تمامًا، ولم تحتج إلى~\Cut.
+
+  \item إذا كانت آخر قاعدة~$R$ في~$\delta$ قاعدة~!!a{elimination}، فلاحظ
+  ما يأتي:
+  \begin{enumerate}
+    \item لا يمر فرع رئيس في~$\delta$ بأي قواعد~!!{introduction}، وإلا
+    لكانت قاعدة~!!a{introduction} أو~\FalseInt{} متبوعةً بقاعدة
+    !!a{elimination} على الفرع الرئيس، ولما كان~$\delta$ سويًا.
+    \item بما أن الفروع الرئيسة في~$\delta$ لا تمر بقواعد~!!{introduction}،
+    فلا يوجد إلا فرع رئيس واحد. (لقاعدة~\Intro{\land} وحدها مقدمتان
+    كبريان، ولذلك يجب أن تمر الفروع الرئيسة المتعددة بمقدمتي قاعدة من هذا
+    النوع.)
+    \item إذا اشتمل الفرع الرئيس على المقدمة الكبرى لـ~\Elim{\lor} أو
+    \Elim{\lexists}، فلا توجد إلا قاعدة واحدة من هذا النوع وتكون الأخيرة،
+    أي~$R$. (وإلا لاحتوى الفرع الرئيس قاعدة~\Elim{\lor} أو
+    \Elim{\lexists} تكون نتيجتها مقدمةً كبرى لقاعدة~!!a{elimination}، ولما
+    كان البرهان سويًا، إذ يمكن عندئذ تطبيق تحويل تبديل.)
+    \item لا تفرّغ أي~!!{elimination} غير~\Elim{\lor} و\Elim{\lexists}
+    فروضًا، أي لا تغيّر السياق الأيسر للمتتاليات. ولا تفرّغ هاتان القاعدتان
+    إلا فروضًا فوق مقدمة صغرى، أي لا تغيّران السياق الأيسر إلا لمقدمتيهما
+    الصغريين. وبعبارة أخرى، إذا كان سياق متتالية~$S_i$ على الفرع الرئيس
+    لـ~$\delta$ هو~$\Gamma_1$، فإن سياق النتيجة~$S_{i+1}$ للاستدلال الذي
+    تكون~$S_i$ مقدمته الكبرى هو سياق حديث~$\Gamma_2 \supseteq \Gamma_1$.
+    \item ونتيجةً لذلك، إذا كانت~$x:!C \Sequent !C$ المتتالية العليا
+    $S_1$ في الفرع الرئيس، فإن~$x:!C \in \Gamma$.
+  \end{enumerate}
+  والآن نميّز الحالات بحسب صورة~$!C$. وبما أن كل~$S_i$ في الفرع الرئيس
+  مقدمة كبرى لقاعدة~!!a{elimination}، ينطبق ذلك أيضًا على
+  $x:!C \Sequent !C$.
+
+  \item إذا كان $!C \ident !D \land !E$، كان~$\delta$ بالصورة:
+  \[
+  \Axiom$x:!D \land !E \fCenter !D \land !E$
+  \RightLabel{\Elim{\land}[1]}
+  \UnaryInf$x:!D \land !E \fCenter !D$
+  \Deduce$x:!D \land !E, \Gamma_1 \fCenter !A$
+  \DisplayProof
+  \]
+  لا يمر الفرع الرئيس، الذي يشتمل على~$x:!D \land !E \Sequent !D$، بنتيجة
+  قاعدة~\Intro{\lif} أو~\Intro{\lnot}، ولا بمقدمة صغرى لـ~\Elim{\lor} أو
+  \Elim{\lexists}؛ ومن ثم تبقى~!!{formula}s السياق في
+  $x:!D \land !E$ بلا تغيير على طول الفرع الرئيس. وهذا يفسر وجوب احتواء
+  سياق المتتالية النهائية على~$x:!D \land !E$. وفوق ذلك يمكننا تحويل
+  !!{proof}~$\delta$ إلى~!!{proof}~$\delta_1$ باستبدال الـ~!!{proof}
+  الجزئي المنتهي بـ~\Elim{\land} بالمسلمة~$x:!D \Sequent !D$، واستبدال
+  $x:!D \land !E$ بـ~$x:!D$ في سياق كل متتالية على الفرع الرئيس؛ أي نحوّل
+  \[
+  \bottomAlignProof
+  \Axiom$x:!D \land !E \fCenter !D \land !E$
+  \RightLabel{\Elim{\land}[1]}
+  \UnaryInf$x:!D \land !E \fCenter !D$
+  \Deduce$x:!D \land !E, \Gamma_1 \fCenter !A$
+  \DisplayProof
+  \quad\text{إلى}\quad
+  \bottomAlignProof
+  \Axiom$x:!D \fCenter !D$
+  \Deduce$x:!D, \Gamma_1 \fCenter !A$
+  \DisplayProof
+  \]
+  ينطبق فرض الاستقراء على~$\delta_1$، لأن عدد الاستدلالات في~$\delta$
+  يساوي عدد الاستدلالات في~$\delta_1$ زائد~$1$.
+
+  وبفرض الاستقراء يوجد~!!{proof}~$\pi_1$ في~\Log{G2i} للمتتالية
+  $!D,\Gamma_1' \Sequent \Delta$. ونحصل على~!!{proof}~$\pi$ بتطبيق
+  \LeftR{\land}، مع إبقاء الطرف الأيمن~$\Delta$ نفسه:
+  \[
+  \AxiomC{}
+  \RightLabel{$\pi_1$}
+  \Deduce$!D, \Gamma_1' \fCenter \Delta$
+  \RightLabel{\LeftR{\land}}
+  \UnaryInf$!D \land !E, \Gamma_1' \fCenter \Delta$
+  \DisplayProof
+  \]
+  وإذا كانت~$\Delta$ خالية فلا نطبّق إضعافًا يمينيًا؛ إذ يجب أن تبقى خالية.
+
+  \item إذا كان $!C \ident !D \lor !E$، فلا بد أن يكون المقدمة الكبرى لـ
+  \Elim{\lor}، ولا بد أن يكون هذا الاستدلال آخر استدلال~$R$ على الفرع
+  الرئيس. أي إن~$\delta$ بالصورة:
+  \[
+  \Axiom$x:!D \lor !E \fCenter !D \lor !E$
+  \AxiomC{}
+  \RightLabel{$\delta_1$}
+  \Deduce$y:!D, \Gamma_1 \fCenter!A$
+  \AxiomC{}
+  \RightLabel{$\delta_2$}
+  \Deduce$z:!E, \Gamma_2 \fCenter !A$
+  \RightLabel{\Elim{\lor}}
+  \TrinaryInf$x:!D \lor !E, \Gamma_1, \Gamma_2 \fCenter !A$
+  \DisplayProof
+  \]
+  ينطبق فرض الاستقراء على~!!{proof}s~$\delta_1$ و$\delta_2$؛ فنحصل على
+  !!{proof}s~$\pi_1$ و$\pi_2$ في~\Log{G2i} للمتتاليتين
+  $!D,\Gamma_1' \Sequent \Delta$ و$!E,\Gamma_2' \Sequent \Delta$.
+  ونطبّق~$\LeftR{\lor}$ للحصول على~$\pi$:
+  \[
+  \AxiomC{}
+  \RightLabel{$\pi_1$}
+  \Deduce$!D, \Gamma_1' \fCenter \Delta$
+  \AxiomC{}
+  \RightLabel{$\pi_2$}
+  \Deduce$!E, \Gamma_2' \fCenter \Delta$
+  \RightLabel{\LeftR{\lor}}
+  \BinaryInf$!D \lor !E, \Gamma_1', \Gamma_2' \fCenter \Delta$
+  \DisplayProof
+  \]
+  وإذا لم تفرّغ~$\Elim{\lor}$ الفرض~$y:!D$ أو~$z:!E$ (أي إذا لم يكن
+  موجودًا في سياق المقدمة الصغرى)، أضفنا ما يلزم فقط من تطبيقات
+  \LeftR{\Weakening}. ولا نضيف إضعافًا يمينيًا عندما تكون~$\Delta$ خالية؛
+  فمثلًا، إذا غاب الفرضان:
+  \[
+  \AxiomC{}
+  \RightLabel{$\pi_1$}
+  \Deduce$\Gamma_1' \fCenter \Delta$
+  \RightLabel{\LeftR{\Weakening}}
+  \UnaryInf$!D, \Gamma_1' \fCenter \Delta$
+  \AxiomC{}
+  \RightLabel{$\pi_2$}
+  \Deduce$\Gamma_2' \fCenter \Delta$
+  \RightLabel{\LeftR{\Weakening}}
+  \UnaryInf$!E, \Gamma_2' \fCenter \Delta$
+  \RightLabel{\LeftR{\lor}}
+  \BinaryInf$!D \lor !E, \Gamma_1', \Gamma_2' \fCenter \Delta$
+  \DisplayProof
+  \]
+
+  \item إذا كان $!C \ident !D \lif !E$، كان~$\delta$ بالصورة:
+  \[
+  \Axiom$x:!D \lif !E \fCenter !D \lif !E$
+  \AxiomC{}
+  \RightLabel{$\delta_1$}
+  \Deduce$\Gamma_1 \fCenter!D$
+  \RightLabel{\Elim{\lif}}
+  \BinaryInf$x:!D \lif !E, \Gamma_1 \fCenter !E$
+  \RightLabel{$\delta_2$}
+  \Deduce$x:!D \lif !E, \Gamma_1, \Gamma_2 \fCenter !A$
+  \DisplayProof
+  \]
+  لاحظ هنا أن الفرع الرئيس، الذي يشتمل على
+  $x:!D \lif !E,\Gamma_1 \Sequent !E$، لا يمر بنتيجة~\Intro{\lif} أو
+  \Intro{\lnot} ولا بمقدمة صغرى لـ~\Elim{\lor} أو~\Elim{\lexists}؛ ولذلك
+  تبقى~!!{formula}s السياق في~$x:!D \lif !E,\Gamma_1$ بلا تغيير على طول
+  الفرع الرئيس. وهذا يفسر وجوب احتواء سياق المتتالية النهائية على
+  $x:!D \lif !E,\Gamma_1$. وفوق ذلك يمكننا تحويل قطعة~!!{proof}~$\delta_2$
+  إلى~!!{proof} صحيح~$\delta_2'$ باستبدال الـ~!!{proof} الجزئي المنتهي
+  بـ~\Elim{\lif} بالمسلمة~$x:!E \Sequent !E$، وباستبدال
+  $x:!D \lif !E,\Gamma_1$ في سياق كل متتالية على الفرع الرئيس بـ~$x:!E$؛
+  أي نحوّل
+  \[
+  \bottomAlignProof
+  \Axiom$x:!D \lif !E, \Gamma_1 \fCenter !E$
+  \RightLabel{$\delta_2$}
+  \Deduce$x:!D \lif !E, \Gamma_1, \Gamma_2 \fCenter !A$
+  \DisplayProof
+  \quad\text{إلى}\quad
+  \bottomAlignProof
+  \Axiom$x:!E \fCenter !E$
+  \RightLabel{$\delta_2'$}
+  \Deduce$x:!E, \Gamma_2 \fCenter !A$
+  \DisplayProof
+  \]
+  ينطبق فرض الاستقراء على~$\delta_1$ و$\delta_2'$، لأن عدد الاستدلالات في
+  $\delta$ هو مجموع عددي الاستدلالات في~$\delta_1$ و$\delta_2$ زائد~$1$
+  لاستدلال~\Elim{\lif} في بداية الفرع الرئيس. وإذا كان هذا الاستدلال نفسه
+  آخر استدلال~$R$ في~$\delta$، احتوى~$\delta_2$ صفرًا من الاستدلالات.
+
+  وبفرض الاستقراء توجد~!!{proof}s~$\pi_1$ و$\pi_2$ في~\Log{G2i}، الأولى
+  للمتتالية~$\Gamma_1' \Sequent !D$ إذا كان~$!D\not\ident\lfalse$، أو
+  للطرف الأيمن الخالي إذا كان~$!D\ident\lfalse$، والثانية للمتتالية
+  $!E,\Gamma_2' \Sequent \Delta$. ونحصل على~!!{proof}~$\pi$ بتطبيق
+  \LeftR{\lif}:
+  \[
+  \AxiomC{}
+  \RightLabel{$\pi_1$}
+  \Deduce$\Gamma_1' \fCenter !D$
+  \AxiomC{}
+  \RightLabel{$\pi_2$}
+  \Deduce$!E, \Gamma_2' \fCenter \Delta$
+  \RightLabel{\LeftR{\lif}}
+  \BinaryInf$!D \lif !E, \Gamma_1', \Gamma_2' \fCenter \Delta$
+  \DisplayProof
+  \]
+  وإذا كان~$!D\ident\lfalse$ وحده، نطبّق~\RightR{\Weakening} على~$\pi_1$
+  لتوفير المقدمة الأولى لـ~\LeftR{\lif}. ولا نطبّق إضعافًا يمينيًا على
+  $\pi_2$ أو على النتيجة إذا كانت~$!A\ident\lfalse$؛ فتبقى~$\Delta$ خالية:
+  \[
+  \AxiomC{}
+  \RightLabel{$\pi_1$}
+  \Deduce$\Gamma_1' \fCenter $
+  \RightLabel{\RightR{\Weakening}}
+  \UnaryInf$\Gamma_1' \fCenter !D$
+  \AxiomC{}
+  \RightLabel{$\pi_2$}
+  \Deduce$!E, \Gamma_2' \fCenter \Delta$
+  \RightLabel{\LeftR{\lif}}
+  \BinaryInf$!D \lif !E, \Gamma_1', \Gamma_2' \fCenter \Delta$
+  \DisplayProof
+  \]
+
+\end{enumerate}
+وتُعالج الحالات المتبقية على نحو مماثل، وتُترك تمارين.
+ولا تشمل الحجة الحالة الكلاسيكية~\FalseCl، ولذلك تقتصر المبرهنة على
+\Log{N2i} و\Log{G2i}.
+\end{proof}
+
+\begin{cor}
+كل~!!{formula} يقع في~!!{proof} سوي من~\Log{N2i} هو~!!{formula} فرعية
+لإحدى~!!{formula}s في المتتالية النهائية. وكل صيغة تقع في برهان سوي من
+\Log{N1i} هي صيغة فرعية للصيغة النهائية أو لأحد الفروض المفتوحة.
+\end{cor}
+
+\begin{proof}
+  بموجب~\olref{prop:normal-N2i-to-G2i} يمكن ترجمة كل~!!{proof} سوي في
+  \Log{N2i} إلى~!!{proof} خالٍ من القطع في~\Log{G2i}. ويبين فحص البرهان أن
+  كل~!!{formula} واقعة في~!!{proof}~\Log{N2i} تقع أيضًا في~!!{proof}
+  \Log{G2i}. وبما أن~\Log{G2i} لا يملك قاعدة~\Cut{}، فله خاصية
+  !!{formula} الفرعية. أما ترجمة~\Log{N1i} إلى~\Log{N2i} فتحفظ السوية
+  وتسجل الفروض المفتوحة في مقدمة المتتالية النهائية، فتنتج الحالة الثانية
+  من الحالة الأولى.
+\end{proof}
+
+\end{document}

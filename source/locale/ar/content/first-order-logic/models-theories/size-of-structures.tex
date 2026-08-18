@@ -1,0 +1,71 @@
+% Part: first-order-logic
+% Chapter: models-theories
+% Section: size-of-structures
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{mat}{siz}
+
+\olsection{التعبير عن حجم ال\printtoken{P}{structure}}
+
+\begin{explain}
+ثمة خصائص للبنى نستطيع التعبير عنها حتى من غير استعمال الرموز غير
+المنطقية للغة. فهناك، مثلًا، !!{sentence}s تصدق في !!a{structure}
+إذا وفقط إذا كان !!{domain} ال!!{structure} يحتوي على عدد معين~$n$
+من ال!!{element}s على الأقل، أو على الأكثر، أو بالضبط.
+\end{explain}
+
+\begin{prop}
+تصدق ال!!{sentence}
+\begin{multline*}
+  !A_{\ge n} \ident \lexists[x_1][\lexists[x_2][\dots\lexists[x_n][{}]]]\\
+  \begin{aligned}
+  (\eq/[x_1][x_2] \land {}
+  \eq/[x_1][x_3] \land \eq/[x_1][x_4] \land \dots \land \eq/[x_1][x_n] \land {}\\
+\eq/[x_2][x_3] \land \eq/[x_2][x_4] \land \dots \land {} \eq/[x_2][x_n] \land {} \\
+\vdots\\
+\eq/[x_{n-1}][x_n])
+\end{aligned}
+\end{multline*}
+في !!a{structure}~$\Struct M$ إذا وفقط إذا كان $\Domain M$ يحتوي على
+$n$ من ال!!{element}s على الأقل. وبناء عليه، يكون
+$\Sat{M}{\lnot !A_{\ge n+1}}$ إذا وفقط إذا كان $\Domain M$ يحتوي على
+$n$ من ال!!{element}s على الأكثر.
+
+\end{prop}
+
+\begin{prop}
+تصدق ال!!{sentence}
+\begin{multline*}
+!A_{= n} \ident \lexists[x_1][\lexists[x_2][\dots\lexists[x_n][{}]]] \\
+\begin{aligned}
+  (\eq/[x_1][x_2] \land {}
+  \eq/[x_1][x_3] \land \eq/[x_1][x_4] \land \dots \land \eq/[x_1][x_n] \land {}\\
+\eq/[x_2][x_3] \land \eq/[x_2][x_4] \land \dots \land {} \eq/[x_2][x_n] \land {} \\
+\vdots\\
+\eq/[x_{n-1}][x_n] \land {} \\
+\lforall[y][(\eq[y][x_1] \lor \dots \lor \eq[y][x_n])]
+\end{aligned}
+\end{multline*}
+في !!a{structure}~$\Struct M$ إذا وفقط إذا كان $\Domain M$ يحتوي على
+$n$ من ال!!{element}s بالضبط.
+\end{prop}
+
+\begin{prop}
+تكون ال!!{structure} لا نهائية إذا وفقط إذا كانت نموذجًا لـ
+\[
+\{!A_{\ge 1}, !A_{\ge 2}, !A_{\ge 3}, \dots \}.
+\]
+\end{prop}
+
+لا توجد جملة منطقية صرفة واحدة تصدق في~$\Struct M$ إذا وفقط إذا كان
+$\Domain M$ لا نهائيًا. غير أنه يمكن إعطاء !!{sentence}s فيها
+!!{predicate}s غير منطقية لا تكون لها إلا نماذج لا نهائية (مع أن كل
+!!{structure} لا نهائية لا تكون نموذجًا لها). أما خاصية كون البنية
+منتهية، وخاصية كونها !!{nonenumerable}، فلا يمكن التعبير عن أي منهما
+حتى بمجموعة لا نهائية من ال!!{sentence}s. وتنتج هذه الوقائع من
+مبرهنتي التراص ولوفنهايم--سكولم.
+
+\end{document}

@@ -1,0 +1,54 @@
+% Part: incompleteness
+% Chapter: theories-computability
+% Section: q-is-ce
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{tcp}{qce}
+
+\olsection{$\Th{Q}$ تامة بين المجموعات \printtoken{S}{c.e.}}
+
+
+\begin{thm}
+$\Th{Q}$ !!{c.e.} لكنها غير قابلة للقرار. بل هي مجموعة !!{c.e.}
+تامة.
+\end{thm}
+
+\begin{proof}
+ليس من الصعب أن نرى أن $\Th{Q}$ !!{c.e.}، لأنها مجموعة
+(شفرات) الجمل~$y$ التي يوجد لها برهان~$x$ في $\Th{Q}$:
+\[
+Q = \Setabs{y}{\lexists[x][\Prf[\Th{Q}](x,y)]}.
+\]
+لكننا نعلم أن $\Prf[\Th{Q}](x,y)$ قابلة للحساب (بل عودية بدائية)،
+وكل مجموعة يمكن كتابتها بالصورة أعلاه قابلة للتعداد حسابيًا.
+
+والقول إنها مجموعة تامة قابلة للتعداد حسابيًا يكافئ القول إن
+$K\leq_m Q$، حيث $K=\Setabs{x}{!A_x(x)\downarrow}$. فلنبيّن إذن أن
+$K$ قابلة للاختزال إلى $\Th{Q}$. لما كان محمول كليني $T(e,x,s)$
+عوديًا بدائيًا، فهو قابل للتمثيل في $\Th{Q}$، ولتكن الصيغة الممثلة
+$!A_T$. عندئذ، لكل $x$،
+\begin{align*}
+x \in K & \lif \lexists[s][T(x,x,s)] \\
+& \lif \lexists[s][(\Th{Q} \Proves !A_T(\num x,\num x, \num s))]
+  \\
+& \lif \Th{Q} \Proves \lexists[s][!A_T(\num x, \num x, s)].
+\end{align*}
+وفي الاتجاه العكسي، إذا كانت
+$\Th{Q}\Proves\lexists[s][!A_T(\num x,\num x,s)]$، فلا بد في
+الواقع أن تكون الصيغة $!A_T(\num x,\num x,\num n)$ صادقة لعدد
+طبيعي ما~$n$. فلو كذبت $T(x,x,n)$، لأثبتت $\Th{Q}$ الصيغة
+$\lnot !A_T(\num x,\num x,\num n)$ لأن $!A_T$ تمثل~$T$. لكن
+$\Th{Q}$ كانت ستثبت عندئذ صيغة كاذبة، وهذا تناقض. فلا بد أن تصدق
+$T(x,x,n)$، ومن ذلك ينتج $!A_x(x)\downarrow$.
+
+وخلاصة القول إن $x$ ينتمي إلى $K$، لكل $x$، إذا وفقط إذا أثبتت
+$\Th{Q}$ الصيغة $\lexists[s][!A_T(\num x,\num x,s)]$. ومن ثم تكون
+الدالة $f$ التي ترسل $x$ إلى (شفرة) الجملة
+$\lexists[s][!A_T(\num x,\num x,s)]$ اختزالًا لـ$K$ إلى
+$\Th{Q}$.
+\end{proof}
+
+\end{document}

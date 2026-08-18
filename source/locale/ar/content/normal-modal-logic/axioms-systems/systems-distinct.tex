@@ -1,0 +1,148 @@
+% Part: normal-modal-logic
+% Chapter: axioms-systems
+% Section: systems-distinct
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{prf}{dis}
+
+\olsection{بيان تمايز النظم}
+
+رأينا في \olref[prs]{sec} كيف نثبت أن نسقين من المنطق الجهوي هما في
+الواقع النسق نفسه. وتتيح لنا \olref[snd]{thm:soundness} أن نبين تمايز
+نسقين جهويين $\Sigma$ و$\Sigma'$، وذلك بإيجاد !!a{formula}~$!A$ بحيث
+$\Sigma' \Proves !A$ وتخفق هذه الصيغة في نموذج لـ~$\Sigma$.
+
+\begin{prop}
+  $\Log{KD} \subsetneq \Log{KT}$
+\end{prop}
+
+\begin{proof} هذه هي النظيرة التركيبية للحقيقة الدلالية القائلة إن كل
+  علاقة انعكاسية تسلسلية. ولكي نبين $\Log{KD} \subseteq \Log{KT}$،
+  علينا أن نرى أن $\Log{KD} \Proves !B$ يستلزم $\Log{KT} \Proves
+  !B$، وهذا ينتج من $\Log{KT} \Proves \Ax{D}$، كما بينا في
+  \olref[prs]{prop:S5facts}\olref[prs]{prop:S5facts-KT-D}. ولكي نبين
+  أن الاحتواء صارم، يكفي، بمقتضى السلامة
+  (\olref[snd]{thm:soundness})، أن نبرز نموذجا لـ\Log{KD} تخفق فيه
+  \Ax{T}، أي $\Box p \lif p$ (وهي مهمة سهلة تترك تمرينا)، إذ عندئذ
+  يترتب بالسلامة أن $\Log{KD} \Proves/ \Box p \lif p$.
+\end{proof}
+
+\begin{prop}
+  $\Log{KB} \neq \Log{K4}$.
+\end{prop}
+
+\begin{proof}
+  نبني نموذجا تناظريا تخفق فيه بعض أمثلة \Ax{4}؛ ولما كان المثال
+  !!{derivable} بوضوح في \Log{K4} لكنه ليس كذلك في \Log{KB}، ينتج
+  أن $\Log{K4} \nsubseteq \Log{KB}$. انظر النموذج التناظري
+  $\mModel{M}$ في \olref{fig:Bnot4}. ولأن النموذج تناظري، فإن
+  \Ax{K} و~\Ax{B} صادقتان في~$\mModel{M}$ (بحسب
+  \olref[syn][sch]{prop:Kvalid} و
+  \olref[frd][acc]{thm:soundschemas}، على الترتيب). ومع ذلك،
+  $\mSat/{M}{\Box p \lif \Box\Box p}[w_1]$.
+\end{proof}
+
+\begin{figure}[htpb]
+  \centering
+  \begin{tikzpicture}[modal]
+    \node[world] (w1) [label=above:\mFalse{p},
+    label={below:$\mSat{{}}{\Box p}$\\ $\mSat/{{}}{\Box\Box p}$}] {$w_1$}; 
+    \node[world] (w2) [label=above:\mTrue{p},
+      label=below:$\mSat/{{}}{\Box p}$, right=of w1]{$w_2$}; 
+    \draw[->, bend left] (w1) to (w2); 
+    \draw[->, bend left] (w2) to (w1); 
+  \end{tikzpicture}
+  \caption{نموذج تناظري يكذّب مثالا لـ\Ax{4}.}
+  \ollabel{fig:Bnot4}
+\end{figure}
+ 
+\begin{thm}\ollabel{thm:KTBnot45}
+  $\Log{KTB} \Proves/ \Ax{4}$ و$\Log{KTB} \Proves/ \Ax{5}$.
+\end{thm}
+
+\begin{proof}
+  نعلم من \olref[frd][acc]{thm:soundschemas} أن جميع أمثلة \Ax{T}
+  و\Ax{B} صادقة في كل نموذج انعكاسي وتناظري (على الترتيب). ومن ثم
+  يكفي بالسلامة أن نجد نموذجا انعكاسيا وتناظريا يشتمل على عالم يخفق
+  فيه مثال لـ~\Ax{4}، وبالمثل لـ~\Ax{5}. ونستعمل النموذج نفسه لكلا
+  الادعاءين. انظر النموذج التناظري الانعكاسي في
+  \olref{fig:KTBnot45}. عندئذ
+  $\mSat/{M}{\Box p \lif \Box \Box p}[w_1]$، فتخفق \Ax{4} في $w_1$.
+  وبالمثل، $\mSat/{M}{\Diamond \lnot p \lif \Box \Diamond \lnot
+    p}[w_2]$، فيخفق مثال \Ax{5} الذي فيه $!A = \lnot p$ في~$w_2$.
+\end{proof}
+
+\begin{figure}[htpb]
+  \centering
+  \begin{tikzpicture}[modal]
+    \node[world] (w1) [label={right:\mTrue{p}},
+      label={below: $\mSat{{}}{\Box p}$\\
+        $\mSat/{{}}{\Box\Box p}$\\
+        $\mSat/{{}}{\Diamond\lnot p}$}] {$w_1$};
+    \draw[reflexive above] (w1) to (w1);
+    \node[world] (w2) [label={right:\mTrue{p}}, label={below:
+        $\mSat{{}}{\Diamond\lnot p}$\\
+        $\mSat/{{}}{\Box\Diamond\lnot p}$}, right=of w1] {$w_2$} ;
+    \draw[reflexive above] (w2) to (w2);
+    \node[world] (w3) [label={right:\mFalse{p}},right=of w2] {$w_3$};
+    \draw[reflexive above] (w3) to (w3);
+    \draw[->, bend left] (w1) to (w2);  
+    \draw[->, bend left] (w2) to (w3);  
+    \draw[->, bend left] (w3) to (w2);  
+    \draw[->, bend left] (w2) to (w1);  
+  \end{tikzpicture}
+  \caption{نموذج \olref{thm:KTBnot45}.}
+  \ollabel{fig:KTBnot45}
+\end{figure}
+
+\begin{thm}\ollabel{thm:KD5not4}
+  $\Log{KD5} \neq \Log{KT4} = \Log{S4}$.
+\end{thm}
+
+\begin{proof}
+  نعلم من \olref[frd][acc]{thm:soundschemas} أن جميع أمثلة \Ax{D}
+  و~\Ax{5} صادقة في جميع النماذج التسلسلية الإقليدية. ولذلك يكفي أن
+  نجد نموذجا تسلسليا إقليديا يشتمل على عالم يخفق فيه بعض أمثلة
+  \Ax{4}. انظر نموذج \olref{fig:KD5not4}، ولاحظ أن
+  $\mSat/{M}{\Box p \lif \Box\Box p}[w_1]$.
+\end{proof}
+
+\begin{figure}[t]
+  \centering
+  \begin{tikzpicture}[modal]
+    \node[world] (w2) [label=north west:\mTrue{p}]{$w_2$} ;
+    \draw[reflexive left] (w2) to (w2);
+    \node[world] (w1) [label=right:\mFalse{p},
+      label=below:{$\mSat{{}}{\Box p}, \mSat/{{}}{\Box\Box p}$},
+      below right=of w2]{$w_1$};
+    \node[world] (w3) [label=north east:\mTrue{p}, above right=of w1]{$w_3$} ;
+    \draw[reflexive right] (w3) to (w3);
+    \node[world] (w4) [label=right:\mFalse{p},above right=of w2]{$w_4$};
+    \draw[reflexive above] (w4) to (w4);
+    \draw[->] (w1) to (w2);  
+    \draw[->] (w1) to (w3);  
+    \draw[->, bend left=15] (w2) to (w3);
+    \draw[->, bend left=15] (w3) to (w2);  
+    \draw[->, bend left=15] (w2) to (w4);
+    \draw[->, bend left=15] (w4) to (w2);  
+    \draw[->, bend left=15] (w3) to (w4);
+    \draw[->, bend left=15] (w4) to (w3);  
+  \end{tikzpicture}
+  \caption{نموذج \olref{thm:KD5not4}.}
+  \ollabel{fig:KD5not4}
+\end{figure}
+
+\begin{prob}
+  أعط برهانا بديلا لـ\olref[nml][prf][dis]{thm:KD5not4} باستعمال
+  نموذج ذي $3$ عوالم.
+\end{prob}
+
+\begin{prob}
+  قدّم نموذجا واحدا انعكاسيا ومتعديا يبين كلا من
+  $\Log{KT4} \Proves/ \Ax{B}$ و$\Log{KT4} \Proves/ \Ax{5}$.
+\end{prob}
+
+\end{document}

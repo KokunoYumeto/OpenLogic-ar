@@ -1,0 +1,198 @@
+% Part: first-order-logic
+% Chapter: completeness
+% Section: identity
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{com}{ide}
+\olsection{الهوية}
+
+\begin{explain}
+يكفي إنشاء نموذج الحدود الوارد في القسم السابق لإثبات اكتمال منطق
+الرتبة الأولى للمجموعات~$\Gamma$ التي لا تحتوي~$\eq$. فنموذج الحدود
+يرضي كل $!A \in \Gamma^*$ لا تحتوي~$\eq$ (ومن ثم كل
+$!A \in \Gamma$). لكنه لا يعمل إذا كان $\eq$ حاضرًا. والسبب هو أن
+$\Gamma^*$ قد تحتوي عندئذ !!a{sentence}~$\eq[t][t']$، بينما تكون قيمة
+كل حد في نموذج الحدود هي ذلك الحد نفسه. ولذلك، إذا كان $t$ و$t'$ حدين
+مختلفين، كانت قيمتاهما في نموذج الحدود---أي $t$ و$t'$ على
+الترتيب---مختلفتين، فتكون $\eq[t][t']$ كاذبة. ويمكننا إصلاح ذلك باستعمال
+إنشاء يُعرف باسم «أخذ خارج القسمة».
+\end{explain}
+
+\begin{defn}
+  لتكن $\Gamma^*$ مجموعة متسقة و!!{complete} من الجمل في~$\Lang L$.
+  نعرّف العلاقة $\approx$ على مجموعة الحدود المغلقة في~$\Lang L$ بوضع
+  \[
+  t \approx t' \text{\quad إذا وفقط إذا \quad} \eq[t][t'] \in \Gamma^*
+  \]
+\end{defn}
+
+\begin{prop}
+\ollabel{prop:approx-equiv}
+للعلاقة $\approx$ الخصائص الآتية:
+\begin{enumerate}
+\item $\approx$ انعكاسية.
+\item $\approx$ تماثلية.
+\item  $\approx$ تعدية.
+\item إذا كان $t \approx t'$، وكانت $f$ !!a{function}، وكانت $t_1$،
+  \dots، $t_{i-1}$، $t_{i+1}$، \dots، $t_n$ حدودًا مغلقة، فإن
+\[
+\Atom{f}{t_1,\dots, t_{i-1}, t, t_{i+1}, \dots, t_n} \approx
+\Atom{f}{t_1,\dots, t_{i-1}, t', t_{i+1}, \dots, t_n}.
+\]
+\item إذا كان $t \approx t'$، وكان $R$ !!a{predicate}، وكانت $t_1$،
+  \dots، $t_{i-1}$، $t_{i+1}$، \dots، $t_n$ حدودًا مغلقة، فإن
+\begin{multline*}
+\Atom{R}{t_1,\dots, t_{i-1}, t, t_{i+1}, \dots, t_n} \in \Gamma^* \text{ إذا وفقط إذا } \\
+\Atom{R}{t_1,\dots, t_{i-1}, t', t_{i+1}, \dots, t_n} \in \Gamma^*.
+\end{multline*}
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+لما كانت $\Gamma^*$ متسقة و!!{complete}، كان $\eq[t][t'] \in
+\Gamma^*$ إذا وفقط إذا كان $\Gamma^* \Proves \eq[t][t']$. ولذلك يكفي
+أن نبين ما يأتي:
+\begin{enumerate}
+\item $\Gamma^* \Proves \eq[t][t]$ لكل الحدود المغلقة~$t$.
+\item إذا كان $\Gamma^* \Proves \eq[t][t']$، فإن
+  $\Gamma^* \Proves \eq[t'][t]$.
+\item إذا كان $\Gamma^* \Proves \eq[t][t']$ و$\Gamma^* \Proves
+  \eq[t'][t'']$، فإن $\Gamma^* \Proves \eq[t][t'']$.
+\item إذا كان $\Gamma^* \Proves \eq[t][t']$، فإن
+\[
+\Gamma^* \Proves
+\eq[\Atom{f}{t_1,\dots,t_{i-1},t,t_{i+1},\dots,t_n}][\Atom{f}{t_1,\dots,t_{i-1},t',t_{i+1},\dots,t_n}]
+\]
+لكل !!{function}~$f$ ذات $n$ مواضع ولكل حدود مغلقة $t_1$، \dots،
+$t_{i-1}$، $t_{i+1}$، \dots،~$t_n$.
+\item إذا كان $\Gamma^* \Proves \eq[t][t']$ و
+$\Gamma^* \Proves
+\Atom{R}{t_1,\dots,t_{i-1},t,t_{i+1},\dots,t_n}$، فإن
+$\Gamma^* \Proves \Atom{R}{t_1,\dots,t_{i-1},t',t_{i+1},\dots,t_n}$
+لكل !!{predicate}~$R$ ذي $n$ مواضع ولكل حدود مغلقة $t_1$، \dots،
+$t_{i-1}$، $t_{i+1}$، \dots،~$t_n$.
+\end{enumerate}
+\end{proof}
+
+\begin{prob}
+أكمل برهان~\olref[fol][com][ide]{prop:approx-equiv}.
+\end{prob}
+
+\begin{defn}
+افترض أن $\Gamma^*$ مجموعة متسقة و!!{complete} في لغة~$\Lang L$، وأن
+$t$ حد مغلق، وأن $\approx$ كما في التعريف السابق. اكتب $\Trm[L]_0$
+لمجموعة الحدود المغلقة في~$\Lang L$. عندئذ:
+\[
+\equivrep{t}{\approx} = \Setabs{t'}{t'\in \Trm[L]_0, t \approx t'}
+\]
+و$\equivclass{\Trm[L]_0}{\approx} = \Setabs{\equivrep{t}{\approx}}{t \in \Trm[L]_0}$.
+\end{defn}
+
+\begin{defn}
+\ollabel{defn:term-model-factor}
+ليكن $\Struct M = \Struct M(\Gamma^*)$ نموذج الحدود لـ~$\Gamma^*$ من
+\olref[mod]{defn:termmodel}. عندئذ تكون
+$\Struct{\equivclass{M}{\approx}}$ ال!!{structure} الآتية:
+\begin{enumerate}
+\item $\Domain{\equivclass{M}{\approx}} = \equivclass{\Trm[L]_0}{\approx}$.
+\item $\Assign{c}{\equivclass{M}{\approx}} = \equivrep{c}{\approx}$
+\item $\Assign{f}{\equivclass{M}{\approx}}(\equivrep{t_1}{\approx}, \dots,
+  \equivrep{t_n}{\approx}) = \equivrep{\Atom{f}{t_1,\dots, t_n}}{\approx}$
+\item $\tuple{\equivrep{t_1}{\approx}, \dots, \equivrep{t_n}{\approx}} \in
+  \Assign{R}{\equivclass{M}{\approx}}$ إذا وفقط إذا كان
+  $\Sat{M}{\Atom{R}{t_1,\dots, t_n}}$؛ أي إذا وفقط إذا كان
+  $\Atom{R}{t_1,\dots, t_n} \in \Gamma^*$.
+\end{enumerate}
+\end{defn}
+
+\begin{explain}
+لاحظ أننا عرّفنا $\Assign{f}{\equivclass{M}{\approx}}$ و
+$\Assign{R}{\equivclass{M}{\approx}}$ لعناصر
+$\equivclass{\Trm[L]_0}{\approx}$ بالإشارة إليها على صورة
+$\equivrep{t}{\approx}$؛ أي بواسطة \emph{ممثلين}~$t \in
+\equivrep{t}{\approx}$. وعلينا أن نضمن ألا تعتمد هذه التعريفات على
+اختيار أولئك الممثلين؛ أي أن تعطي التعريفات النتيجة نفسها عند اختيارات
+أخرى~$t'$ تحدد أصناف التكافؤ نفسها
+($\equivrep{t}{\approx} = \equivrep{t'}{\approx}$). فمثلًا، إذا كان
+$R$ !!{predicate} أحادي الموضع، فإن البند الأخير من التعريف يقول إن
+$\equivrep{t}{\approx} \in \Assign{R}{\equivclass{M}{\approx}}$ إذا
+وفقط إذا كان $\Sat{M}{\Atom{R}{t}}$. وإذا كان، لحد آخر~$t'$ يحقق
+$t \approx t'$، لدينا $\Sat/{M}{\Atom{R}{t}}$، فإن التعريف يقتضي
+$\equivrep{t'}{\approx} \notin \Assign{R}{\equivclass{M}{\approx}}$.
+وإذا كان $t \approx t'$، فإن $\equivrep{t}{\approx} =
+\equivrep{t'}{\approx}$، لكن لا يمكن أن يكون لدينا كل من
+$\equivrep{t}{\approx} \in \Assign{R}{\equivclass{M}{\approx}}$ و
+$\equivrep{t}{\approx} \notin \Assign{R}{\equivclass{M}{\approx}}$.
+غير أن \olref{prop:approx-equiv} تضمن استحالة ذلك.
+\end{explain}
+
+\begin{prop}
+$\Struct{\equivclass{M}{\approx}}$ معرّفة تعريفًا سليمًا؛ أي إذا كانت
+$t_1$، \dots، $t_n$، $t_1'$، \dots، $t_n'$ حدودًا مغلقة، وكان
+$t_i \approx t_i'$ لكل $i$ يحقق $1 \le i \le n$، فإن
+\begin{enumerate}
+\item $\equivrep{\Atom{f}{t_1,\dots, t_n}}{\approx} =
+    \equivrep{\Atom{f}{t_1',\dots, t_n'}}{\approx}$؛ أي إن
+  \[
+  \Atom{f}{t_1,\dots, t_n} \approx \Atom{f}{t_1',\dots, t_n'}
+  \]
+  و
+\item $\Sat{M}{\Atom{R}{t_1,\dots, t_n}}$ إذا وفقط إذا كان
+  $\Sat{M}{\Atom{R}{t_1',\dots, t_n'}}$؛ أي إن
+  \[
+    \Atom{R}{t_1,\dots, t_n} \in \Gamma^* \text{ إذا وفقط إذا }
+    \Atom{R}{t_1',\dots, t_n'} \in \Gamma^*.
+  \]
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+تلزم من \olref{prop:approx-equiv} بالاستقراء في~$n$.
+\end{proof}
+
+كما في حالة نموذج الحدود، نحتاج إلى اللمّة الآتية قبل برهان لمّة الصدق.
+
+\begin{lem}
+\ollabel{lem:val-in-termmodel-factored} ليكن $\Struct M = \Struct M
+ (\Gamma^*)$؛ عندئذ $\Value{t}{\equivclass{M}{\approx}} = \equivrep{t}
+ {\approx}$ لكل حد مغلق~$t$.
+\end{lem}
+\begin{proof}
+البرهان مماثل لبرهان \olref[mod]{lem:val-in-termmodel}.
+\end{proof}
+
+\begin{prob}
+أكمل برهان~\olref[fol][com][ide]{lem:val-in-termmodel-factored}.
+\end{prob}
+
+\begin{lem}
+\ollabel{lem:truth}
+$\Sat{\equivclass{M}{\approx}}{!A}$ إذا وفقط إذا كان
+$!A \in \Gamma^*$ لكل الجمل~$!A$.
+\end{lem}
+
+\begin{proof}
+بالاستقراء في~$!A$، كما في برهان \olref[mod]{lem:truth}. والحالة
+الوحيدة التي تحتاج عناية إضافية هي حين $!A \ident \eq[t][t']$.
+\begin{align*}
+\Sat{\equivclass{M}{\approx}}{\eq[t][t']} & \text{ إذا وفقط إذا } \equivrep{t}{\approx} = \equivrep{t'}{\approx}
+\text{ (بحسب تعريف $\Struct{\equivclass{M}{\approx}}$)}\\
+& \text{ إذا وفقط إذا } t \approx t' \text{ (بحسب تعريف $\equivrep{t}{\approx}$)}\\
+& \text{ إذا وفقط إذا } \eq[t][t'] \in \Gamma^* \text{ (بحسب تعريف $\approx$).}
+\end{align*}
+\end{proof}
+
+\begin{digress}
+لاحظ أنه مع كون $\Struct{M(\Gamma^*)}$ !!{enumerable} ولا نهائيًا
+دائمًا، فقد يكون $\Struct{\equivclass{M}{\approx}}$ منتهيًا، إذ قد
+يتبين أنه لا يوجد إلا عدد منتهٍ من الأصناف $\equivrep{t}{\approx}$.
+وهذا متوقع، لأن $\Gamma$ قد تحتوي !!{sentence}s تقتضي أن تكون كل
+!!{structure} تصدق فيها منتهية. فمثلًا، $\lforall[x][\lforall[y][x =
+y]]$ !!{sentence} متسقة، لكنها لا تُرضى إلا في !!{structure}s ذات
+!!a{domain} لا يحتوي إلا !!{element} واحدًا.
+\end{digress}
+
+\end{document}

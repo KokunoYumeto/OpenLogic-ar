@@ -1,0 +1,143 @@
+% Part: turing-machines
+% Chapter: undecidability
+% Section: enumerating-tms
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{tur}{und}{enu}
+\olsection{تعداد آلات تورنغ}
+
+\begin{explain}
+يمكننا أن نبين أن مجموعة جميع آلات تورنغ !!{enumerable}. وينتج ذلك من
+إمكان وصف كل آلة تورنغ وصفًا منتهيًا. فمجموعة الحالات وأبجدية الشريط
+مجموعتان منتهيتان. ودالة الانتقال دالة جزئية من $Q \times \Sigma$ إلى
+$Q \times \Sigma \times \{\TMleft,\TMright,\TMstay\}$، ولذلك يمكن
+تحديدها هي الأخرى بإدراج قيمها عند أزواج الوسيطات المنتهية العدد التي
+تكون معرّفة عندها.
+
+هذا صحيح في حدوده، لكن ثمة فرق دقيق. فلم يفرض تعريف آلات تورنغ أي
+قيد على ال!!{element}s التي يمكن أن تحتويها مجموعة الحالات وأبجدية
+الشريط. ولذلك توجد، من الناحية التقنية، آلة تورنغ تستعمل كل عدد حقيقي
+معين حالةً من حالاتها. لكن \emph{سلوك} آلة تورنغ مستقل عن الأشياء التي
+تؤدي دور الحالات ورموز الأبجدية. انظر إلى آلتي تورنغ في
+\olref{fig:variants}.
+\begin{figure}
+\begin{center}
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+                    semithick]
+  \tikzstyle{every state}=[fill=none,draw=black,text=black]
+
+  \node[initial,state]         (A)              {$q_0$};
+  \node[state]         (B) [right of=A] {$q_1$};
+
+  \path (A) edge [bend left] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (B)
+        (B) edge [loop above] node {\TMtrans{\TMblank}{\TMblank}{\TMright}} (B)
+            edge [bend left] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (A);
+\end{tikzpicture}\\
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+  semithick]
+\tikzstyle{every state}=[fill=none,draw=black,text=black]
+
+\node[initial,state]         (A)              {$s$};
+\node[state]         (B) [right of=A] {$h$};
+
+\path (A) edge [bend left] node {\TMtrans{A}{A}{\TMright}} (B)
+(B) edge [loop above] node {\TMtrans{\TMblank}{\TMblank}{\TMright}} (B)
+edge [bend left] node {\TMtrans{A}{A}{\TMright}} (A);
+\end{tikzpicture}
+\end{center}
+\caption{صورتان مختلفتان لآلة \emph{الزوجية}}
+\ollabel{fig:variants}
+\end{figure}
+يقابل هذان المخططان آلتين: الآلة $M$، ذات أبجدية الشريط
+$\Sigma=\{\TMendtape,\TMblank,\TMstroke\}$ ومجموعة الحالات
+$\{q_0,q_1\}$، والآلة $M'$، ذات الأبجدية
+$\Sigma'=\{\TMendtape,\TMblank,A\}$ والحالتين $\{s,h\}$. لكن
+تعليماتهما متماثلة فيما عدا ذلك: تتوقف $M$ عند متتالية مؤلفة من $n$
+من علامات~$\TMstroke$ إذا وفقط إذا كان $n$ زوجيًا، وتتوقف $M'$ عند
+متتالية مؤلفة من $n$ من رموز~$A$ إذا وفقط إذا كان $n$ زوجيًا. وكل ما
+فعلناه هو إعادة تسمية $\TMstroke$ بـ~$A$، و$q_0$ بـ~$s$، و$q_1$
+بـ~$h$. ويمكن تعميم هذا المثال: نستطيع عد آلتي تورنغ متماثلتين ما دامت
+إحداهما تنتج من الأخرى بإعادة تسمية الرموز والحالات على هذا النحو.
+بل يمكننا ببساطة عد رموز آلة تورنغ وحالاتها أعدادًا صحيحة موجبة: فنفكر
+في~$1$ بدلًا من~$\sigma_0$، وفي~$2$ بدلًا من~$\sigma_1$، وهكذا؛
+ويكون $\TMendtape$ هو~$1$، و$\TMblank$ هو~$2$، وهكذا. وبهذه الطريقة
+تصير آلة \emph{الزوجية} الآلة المرسومة في
+\olref{fig:standard-even}.
+\begin{figure}
+\[\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+  semithick]
+\tikzstyle{every state}=[fill=none,draw=black,text=black]
+
+\node[initial,state]         (A)              {$1$};
+\node[state]         (B) [right of=A] {$2$};
+
+\path (A) edge [bend left] node {\TMtrans{3}{3}{\TMright}} (B)
+(B) edge [loop above] node {\TMtrans{2}{2}{\TMright}} (B)
+edge [bend left] node {\TMtrans{3}{3}{\TMright}} (A);
+\end{tikzpicture}
+\]
+\caption{آلة \emph{زوجية} قياسية}
+\ollabel{fig:standard-even}
+\end{figure}
+يمكن أن نسمي آلة تورنغ التي تكون حالاتها ورموزها أعدادًا صحيحة موجبة
+آلة \emph{قياسية}، وأن نقتصر من الآن فصاعدًا على الآلات القياسية.
+\footnote{مصطلح «الآلة القياسية» ليس مصطلحًا قياسيًا.}
+
+أردنا أن نبين أن مجموعة آلات تورنغ !!{enumerable}، وفي ضوء الاعتبارات
+السابقة يكفي أن نبين أن مجموعة آلات تورنغ القياسية !!{enumerable}.
+لنفترض أننا أعطينا آلة تورنغ قياسية
+$M=\tuple{Q,\Sigma,q_0,\delta}$. كيف يمكننا وصفها بسلسلة منتهية من
+الأعداد الصحيحة الموجبة؟ ندرج أولًا عدد الحالات، ثم الحالات نفسها، ثم
+عدد الرموز، ثم الرموز نفسها، ثم الحالة الابتدائية. (تذكر أن هذه كلها
+أعداد صحيحة موجبة، لأن $M$ آلة قياسية.) وماذا عن~$\delta$؟ إن مجموعة
+الوسيطات الممكنة، أي الأزواج $\tuple{q,\sigma}$، منتهية لأن $Q$
+و~$\Sigma$ منتهيتان. ولذلك لا تتعدى المعلومات التي تحملها~$\delta$
+القائمة المنتهية لجميع الخماسيات $\tuple{q,\sigma,q',\sigma',d}$ التي
+تكون عندها
+$\delta(q,\sigma)=\tuple{q',\sigma',D}$، حيث $d$ عدد يرمز الاتجاه~$D$
+(وليكن $1$ لـ~$\TMleft$، و$2$ لـ~$\TMright$، و$3$ لـ~$\TMstay$).
+
+وبهذه الطريقة يمكن وصف كل آلة تورنغ قياسية بقائمة منتهية من الأعداد
+الصحيحة الموجبة، أي بمتتالية $s_M\in(\PosInt)^*$. فمثلًا ترمز آلة
+\emph{الزوجية} القياسية بالمتتالية
+\[
+2, \underbrace{1, 2}_Q, 3, \overbrace{1, 2, 3}^\Sigma, 1, \underbrace{1, 3, 2, 3, 2}_{\delta(1,3) = \tuple{2,3,R}},
+\overbrace{2, 2, 2, 2, 2}^{\delta(2,2) = \tuple{2,2,R}},
+\underbrace{2, 3, 1, 3, 2}_{\delta(2,3) = \tuple{1,3,R}}.
+\]
+\end{explain}
+
+\begin{thm}
+توجد دوال من $\Nat$ إلى~$\Nat$ غير قابلة للحساب بآلة تورنغ.
+\end{thm}
+
+\begin{proof}
+نعلم أن مجموعة المتتاليات المنتهية من الأعداد الصحيحة الموجبة
+$(\PosInt)^*$ هي !!{enumerable}
+(\cref{sfr:siz:zigzag:prob:posint-star}). وينتج من ذلك أن مجموعة أوصاف
+آلات تورنغ القياسية، بوصفها مجموعة جزئية من~$(\PosInt)^*$، قابلة
+للتعداد هي أيضًا. وكل دالة من $\Nat$ إلى~$\Nat$ قابلة للحساب بآلة
+تورنغ تحسبها آلة تورنغ ما (بل آلات كثيرة). وبإعادة تسمية حالاتها
+ورموزها بأعداد صحيحة موجبة (وبوجه خاص تسمية $\TMendtape$ بالعدد~$1$،
+و$\TMblank$ بالعدد~$2$، و$\TMstroke$ بالعدد~$3$) نرى أن آلة تورنغ
+قياسية تحسب كل دالة قابلة للحساب بآلة تورنغ. وهذا يعني أن مجموعة جميع
+الدوال من $\Nat$ إلى~$\Nat$ القابلة للحساب بآلة تورنغ قابلة للتعداد
+أيضًا.
+
+ومن ناحية أخرى، ليست مجموعة جميع الدوال من $\Nat$ إلى~$\Nat$
+!!{enumerable} (\cref{sfr:siz:red:prob:nat-nat}). فلو كانت كل الدوال
+قابلة للحساب بآلة تورنغ ما، لأمكننا تعداد مجموعة جميع الدوال بإدراج
+أوصاف آلات تورنغ التي تحسبها. ومن ثم توجد دوال غير قابلة للحساب بآلة
+تورنغ.
+\end{proof}
+
+\begin{prob}
+  هل يمكنك أن تجد طريقة لوصف آلات تورنغ لا تتطلب إدراج الحالات ورموز
+  الأبجدية صراحة؟ يجوز لك أن تعرّف مفهومك الخاص للآلة «القياسية»، لكن
+  وضح لماذا تستطيع آلة «قياسية» بالمعنى الجديد أن تحاكي كل آلة تورنغ.
+\end{prob}
+
+\end{document}

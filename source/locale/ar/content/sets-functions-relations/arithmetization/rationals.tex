@@ -1,0 +1,74 @@
+% Part: sets-functions-relations
+% Chapter: arithmetization
+% Section: rationals
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid[ar]{sfr}{arith}{rat}
+\olsection{من $\Int$ إلى $\Rat$}
+
+رأينا للتو كيف نبني الأعداد الصحيحة من الأعداد الطبيعية، باستعمال شيء من
+نظرية المجموعات الساذجة. وسنرى الآن كيف نبني الأعداد النسبية من الأعداد
+الصحيحة بطريقة شديدة الشبه. وملاحظاتنا الأولية هي:
+\begin{enumerate}
+	\item يمكن كتابة كل عدد نسبي على الصورة $\nicefrac{i}{j}$،
+	حيث يكون كل من $i$ و$j$ عددًا صحيحًا، لكن $j$ غير صفري.
+	\item يمكن كذلك ترميز المعلومات التي يحملها التعبير $\nicefrac{i}{j}$
+	بالزوج المرتب $\tuple{ i, j}$.
+\end{enumerate}
+قد يبدو النهج الواضح أن نفكر في الأعداد النسبية \emph{على أنها} أزواج مرتبة
+مأخوذة من $\Int \times (\Int \setminus \{0_\Int\})$. لكن هذا، كما من قبل،
+سيكون ساذجًا أكثر مما ينبغي؛ إذ نريد $\nicefrac{3}{2} = \nicefrac{6}{4}$،
+لكن $\tuple{ 3, 2}\neq \tuple{ 6,
+4}$. وبوجه أعم، سنريد ما يأتي:
+\[
+	\nicefrac{a}{b} = \nicefrac{c}{d} \text{ إذا وفقط إذا } a \times d = b \times c
+\]
+ولتحصيل ذلك، نعرّف {علاقة تكافؤ} على $\Int \times
+(\Int \setminus \{0_\Int\})$ على النحو الآتي:
+\[
+	\tuple{ a, b }\Ratequiv \tuple{ c, d} \text{ إذا وفقط إذا }a \times d = b \times c
+\]
+علينا أن نتحقق من أن هذه علاقة تكافؤ. وهذا يشبه إلى حد بعيد حالة
+$\Intequiv$، وسنتركه تمرينًا.
+\begin{prob}
+أثبت أن $\Ratequiv$ علاقة تكافؤ.
+\end{prob}
+لكنه يتيح لنا أن نقول:
+\begin{defn}
+الأعداد النسبية هي فئات تكافؤ أزواج الأعداد الصحيحة، بالنسبة إلى
+$\Ratequiv$، على أن يكون العنصر الثاني غير صفري. أي إن $\Rat =
+\equivclass{(\Int \times (\Int\setminus \{0_\Int\}))}{\Ratequiv}$.
+\end{defn}
+
+وكما في الأعداد الصحيحة، نريد أيضًا تعريف بعض العمليات الأساسية.
+وحيث إن $\equivrep{i,j}{\Ratequiv}$ هي فئة التكافؤ بالنسبة إلى
+$\Ratequiv$ التي يكون $\tuple{i, j}$ !!a{element} فيها، نقول:
+\begin{align*}
+	\equivrep{a, b}{\Ratequiv} + \equivrep{c, d}{\Ratequiv} &= \equivrep{ad + bc,  bd}{\Ratequiv}\\
+	\equivrep{a, b}{\Ratequiv} \times \equivrep{c, d}{\Ratequiv} &= \equivrep{a  c, b d}{\Ratequiv}.
+\intertext{لتعريف $r \leq s$ على هذه الأعداد النسبية، نستعمل حقيقة أن
+$r \le s$ إذا وفقط إذا كان $s - r$ غير سالب، أي إن $r - s$ يمكن كتابته
+على صورة $\nicefrac{i}{j}$ حيث يكون $i$ غير سالب ويكون $j$~موجبًا:}
+	\equivrep{a, b}{\Ratequiv} \leq \equivrep{c, d}{\Ratequiv} &\text{ إذا وفقط إذا }
+	\equivrep{c, d}{\Ratequiv} - \equivrep{a, b}{\Ratequiv} =
+	\equivrep{i_\Int, j_\Int}{\Ratequiv}
+\end{align*}
+لبعض $i \in \Nat$ و$0 \neq j \in \Nat$.
+
+ويلزمنا بعد ذلك أن نتحقق من أن هذه التعريفات تسلك كما \emph{ينبغي} لها؛
+ونرجئ ذلك إلى \olref[check]{sec}. لكنها تفعل ذلك بالفعل!{} وأخيرًا، نريد
+طريقة لمعاملة الأعداد الصحيحة \emph{على أنها} أعداد نسبية؛ ولذلك نشترط،
+لكل $i \in \Int$، أن $i_\Rat =
+\equivrep{i, 1_\Int}{\Ratequiv}$. ونتحقق مرة أخرى من سلامة سلوك كل هذا
+في \olref[check]{sec}.
+
+\begin{prob}
+أثبت أن $(i + j)_\Rat = i_\Rat+ j_\Rat$ وأن $(i \times j)_\Rat =
+i_\Rat \times j_\Rat$ وأن $i \leq j \liff i_\Rat \leq j_\Rat$، لأي
+$i, j \in \Int$.
+\end{prob}
+
+\end{document}

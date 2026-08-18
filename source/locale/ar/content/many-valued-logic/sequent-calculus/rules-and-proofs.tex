@@ -1,0 +1,76 @@
+% Part: many-valued-logic
+% Chapter: sequent-calculus
+% Section: rules-and-proofs
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mvl}{seq}{rul}
+
+\olsection{القواعد وال\usetoken{P}{derivation}}
+
+فيما يأتي، لتدل~$\Gamma, \Delta, \Pi, \Lambda$ على متتاليات منتهية
+(وربما خالية) من ال!!{sentence}s.
+
+\begin{defn}[التتابعية]
+\emph{التتابعية ذات الجوانب~$n$} تعبير من الصورة
+\[
+\Gamma_1 \nSequent \dots \nSequent \Gamma_n
+\]
+حيث كل~$\Gamma_i$ متتالية منتهية (وربما خالية) من !!{sentence}s
+اللغة~$\Lang L$.
+\end{defn}
+
+\begin{defn}[التتابعية الابتدائية]
+\emph{التتابعية الابتدائية ذات الجوانب~$n$} تتابعية ذات جوانب~$n$ من
+الصورة~$!A \nSequent \dots \nSequent !A$ لأي !!{sentence}~$!A$ في
+اللغة.
+
+وإذا احتوت اللغة على رابط صفري الرتبة~$\star$، أي ثابت قضايا، أخذنا
+أيضًا التتابعية~$\dots \nSequent \star \nSequent \dots$، حيث تظهر
+$\star$ في الموضع المقابل لقيمة الصدق المرتبطة بـ
+$\tf{\star} \in V$، وتكون المواضع الأخرى خالية.
+\end{defn}
+
+لكل رابط في منطق ذي~$n$ من القيم~$\Log{L}$ قاعدة منطقية لكل قيمة صدق
+يمكن أن يأخذها ذلك الرابط في~$\Log{L}$. وال!!^{derivation}s في حساب
+تتابعيات ذي جوانب~$n$ للمنطق~$\Log{L}$ أشجار من التتابعيات؛ تكون
+التتابعيات العليا فيها تتابعيات ابتدائية، وإذا وقعت تتابعية تحت
+تتابعية أخرى أو أكثر، وجب أن تتبع منها على الوجه الصحيح بقاعدة
+استدلال لروابط~$\Log{L}$.
+
+\begin{defn}[المبرهنات]
+تكون !!^a{sentence}~$!A$ \emph{مبرهنة} في منطق ذي~$n$ من القيم
+$\Log{L}$ إذا وُجد !!a{derivation} للتتابعية ذات الجوانب~$n$ التي
+تحتوي~$!A$ في كل موضع يقابل قيمة صدق معيّنة في~$\Log{L}$. ونكتب
+$\Proves[\Log{L}] !A$ إذا كانت~$!A$ مبرهنة، ونكتب
+$\Proves/[\Log{L}] !A$ إذا لم تكن كذلك.
+\end{defn}
+
+\begin{defn}[!!^{derivability}]
+تكون !!^a{sentence}~$!A$ \emph{!!{derivable} من} مجموعة
+!!{sentence}s~$\Gamma$ في منطق ذي~$n$ من القيم~$\Log{L}$، أي
+$\Gamma \Proves[\Log{L}] !A$، إذا وفقط إذا وُجدت مجموعة جزئية
+منتهية~$\Gamma_0 \subseteq \Gamma$ ومتتالية~$\Gamma_0'$ من
+ال!!{sentence}s في~$\Gamma_0$ بحيث يكون للتتابعية الآتية
+!!a{derivation}:
+\[ \Lambda_1 \nSequent \dots \nSequent \Lambda_n \]
+حيث تكون~$\Lambda_i$ هي~$!A$ إذا كان الموضع~$i$ يقابل قيمة صدق
+معيّنة، وتكون~$\Gamma_0'$ إذا كان يقابل قيمة صدق غير معيّنة. وإذا لم
+تكن~$!A$ !!{derivable} من~$\Gamma$، كتبنا
+$\Gamma \Proves/[\Log{L}] !A$.
+\end{defn}
+
+فمثلًا، لمنطق~\L ukasiewicz الثلاثي القيم حساب تتابعيات ذو ثلاثة
+جوانب. وفي التتابعية الثلاثية الجوانب
+$\Gamma \nSequent \Pi \nSequent \Delta$، تقابل~$\Gamma$ القيمة
+$\False$، وتقابل~$\Delta$ القيمة~$\True$، وتقابل~$\Pi$ القيمة
+$\Undef$. والتتابعيات الابتدائية هي
+$!A \nSequent !A \nSequent !A$. ولما كانت~$\True$ وحدها معيّنة، فإن
+$\Gamma \Proves[\LogLuk[3]] !A$ إذا وفقط إذا كان للتتابعية
+$\Gamma \nSequent \Gamma \nSequent !A$ !!a{derivation}. (ولو كانت
+$\Undef$ معيّنة أيضًا، لاحتجنا إلى !!a{derivation} للتتابعية
+$\Gamma \nSequent !A \nSequent !A$.)
+
+\end{document}

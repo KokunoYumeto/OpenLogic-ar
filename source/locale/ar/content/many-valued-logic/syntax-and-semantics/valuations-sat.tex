@@ -1,0 +1,50 @@
+% Part: many-valued-logic
+% Chapter: syntax-and-semantics
+% Section: valuations-sat
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mvl}{syn}{val}
+
+\olsection{\usetoken{P}{valuation} والإشباع}
+
+\begin{defn}[!!^{valuation}s]
+لتكن~$V$ مجموعة من قيم الصدق. يكون \emph{!!{valuation}} للغة
+$\Lang{L}$ في~$V$ دالة~$\pAssign{v}$ تسند~!!a{element} من~$V$ إلى
+!!{propositional variable}s اللغة؛ أي
+$\pAssign{v} \colon \PVar \to V$.
+\end{defn}
+
+\begin{defn}\ollabel{defn:pValue}
+  إذا أعطينا~!!a{valuation}~$\pAssign{v}$ في مجموعة قيم الصدق~$V$
+  لمنطق متعدد القيم~$\Log L$، عرّف دالة التقييم
+  $\pValue{v} \colon \Frm[L] \to V$ استقرائيًا كما يأتي:
+  \begin{enumerate}
+    \item $\pValue{v}(\Obj p_n) = \pAssign{v}(\Obj p_n)$؛
+    \item إذا كان~$\star$ رابطًا ذا~$0$ من المواضع، فإن
+    $\pValue{v}(\star) = \tf{\star}[\Log L]$؛
+    \item إذا كان~$\star$ رابطًا ذا~$n$ من المواضع، حيث~$n>0$، فإن
+    \[
+      \pValue{v}(\star(!A_1, \dots, !A_n)) = \tf{\star}[\Log L]
+      (\pValue{v}(!A_1), \dots, \pValue{v}(!A_n)).
+    \]
+  \end{enumerate}
+\end{defn}
+
+\begin{defn}[الإشباع]
+\ollabel{defn:satisfaction} تكون~!!{formula}~$!A$ \emph{مشبعة}
+  بالتقييم~!!a{valuation}~$\pAssign{v}$، أي
+  $\pSat{v}{!A}[\Log L]$، إذا وفقط إذا كان
+  $\pValue{v}(!A)[\Log L] \in V^+$، حيث~$V^+$ مجموعة قيم الصدق
+  المميزة للمنطق~$\Log L$.
+  
+  ونكتب~$\pSat/{v}{!A}[\Log L]$ بمعنى ``ليس
+  $\pSat{v}{!A}[\Log L]$.'' وإذا كانت~$\Gamma$ مجموعة من
+  !!{formula}s، فإن~$\pSat{v}{\Gamma}[\Log L]$ إذا وفقط إذا كان
+  $\pSat{v}{!A}[\Log L]$ لكل~$!A \in \Gamma$.
+\end{defn}
+
+\end{document}
+

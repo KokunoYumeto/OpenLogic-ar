@@ -1,0 +1,63 @@
+% Part: first-order-logic
+% Chapter: proof-systems
+% Section: seqeunt-calculus
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{prf}{seq}}
+      {\olfileid{pl}{prf}{seq}}
+
+\olsection{حساب التتابعيات}
+
+في حين تعمل أنظمة !!{derivation} كثيرة بترتيبات من ال!!{sentence}s،
+يعمل حساب التتابعيات بـ\emph{التتابعيات}. والتتابعية تعبير من الصورة
+\[
+!A_1, \dots, !A_m \Sequent !B_1, \dots, !B_m,
+\]
+أي إنها زوج من متتاليتين من ال!!{sentence}s يفصل بينهما رمز
+التتابعية~$\Sequent$. ويجوز أن تكون أي من المتتاليتين خالية.
+و!!^a{derivation} في حساب التتابعيات شجرة من التتابعيات؛ تكون
+التتابعيات العليا فيها من صورة خاصة (وتسمى «التتابعيات الابتدائية» أو
+«البديهيات»)، وتتبع كل تتابعية أخرى من التتابعيات الواقعة فوقها مباشرةً
+بإحدى قواعد الاستدلال. فإما أن تعالج قواعد الاستدلال ال!!{sentence}s
+في التتابعيات (بإضافتها أو حذفها أو إعادة ترتيبها في الجانب الأيسر أو
+الأيمن)، وإما أن تُدخل !!{formula} مركبة في نتيجة القاعدة. فمثلًا،
+تجيز القاعدة~$\LeftR{\land}$ الاستدلال من $!A,
+\Gamma \Sequent \Delta$ إلى $!A \land !B, \Gamma \Sequent \Delta$،
+وتجيز القاعدة~$\RightR{\lif}$ الاستدلال من $!A, \Gamma \Sequent
+\Delta, !B$ إلى $\Gamma \Sequent \Delta, !A \lif !B$، لأي من
+$\Gamma$ و$\Delta$ و$!A$ و~$!B$. (ويجوز خصوصًا أن تكون $\Gamma$
+و~$\Delta$ خاليتين.)
+
+تُعرّف علاقة~$\Proves$ القائمة على حساب التتابعيات كما يأتي:
+$\Gamma \Proves !A$ إذا وفقط إذا وجدت متتالية~$\Gamma_0$ بحيث يكون
+كل~$!A$ في~$\Gamma_0$ عنصرًا في~$\Gamma$، ويوجد !!{derivation} تقع
+التتابعية~$\Gamma_0 \Sequent !A$ في جذره. وتكون~$!A$ مبرهنة في حساب
+التتابعيات إذا كان للتتابعية~$\Sequent !A$ !!a{derivation}. فمثلًا،
+هذا !!a{derivation} يبين أن $\Proves (!A \land !B) \lif !A$:
+\begin{prooftree}
+  \Axiom$!A \fCenter !A$
+  \RightLabel{\LeftR{\land}}
+  \UnaryInf$!A \land !B \fCenter !A$
+  \RightLabel{\RightR{\lif}}
+  \UnaryInf$\fCenter (!A \land !B) \lif !A$
+\end{prooftree}
+
+تكون المجموعة~$\Gamma$ غير متسقة في حساب التتابعيات إذا وجد
+!!a{derivation} لـ~$\Gamma_0 \Sequent$ (حيث يكون كل
+$!A \in \Gamma_0$ عنصرًا في~$\Gamma$، ويكون الجانب الأيمن من
+التتابعية خاليًا). وباستعمال القاعدة~\RightR{\Weakening} تصبح أي
+!!{sentence} قابلةً لل!!{derive} من مجموعة غير متسقة.
+
+ابتكر غيرهارد غنتسن حساب التتابعيات في ثلاثينيات القرن العشرين. وبفضل
+تصميمه المنهجي والمتناظر، فإنه جهاز صوري نافع جدًا لتطوير نظرية
+لل!!{derivation}s. ويسهل نسبيًا العثور على !!{derivation}s في حساب
+التتابعيات، لكن قراءة هذه ال!!{derivation}s كثيرًا ما تكون عسيرة، ولا يسهل أحيانًا رؤية
+صلتها بالبراهين. ومع ذلك، فقد ثبت أنه مقاربة أنيقة جدًا لأنظمة
+ال!!{derivation}، ولكثير من الأنساق المنطقية أنظمة من حساب
+التتابعيات.
+
+\end{document}

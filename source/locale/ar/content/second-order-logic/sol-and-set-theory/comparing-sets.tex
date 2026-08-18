@@ -1,0 +1,81 @@
+% Part: second-order-logic
+% Chapter: sol-and-set-theory
+% Section: comparing-sets
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sol}{set}{cmp}
+
+\olsection{مقارنة المجموعات}
+
+\begin{prop}
+تعرّف الـ!!{formula}~$\lforall[x][(X(x) \lif Y(x))]$ علاقة الاحتواء
+الجزئي؛ أي إن~$\Sat{M}{\lforall[x][(X(x) \lif Y(x))]}[s]$ إذا وفقط
+إذا كان~$s(X) \subseteq s(Y)$.
+\end{prop}
+
+\begin{prop}
+تعرّف الـ!!{formula}~$\lforall[x][(X(x) \liff Y(x))]$ علاقة الهوية
+على المجموعات؛ أي إن~$\Sat{M}{\lforall[x][(X(x) \liff Y(x))]}[s]$
+إذا وفقط إذا كان~$s(X) = s(Y)$.
+\end{prop}
+
+\begin{prop}
+تعرّف الـ!!{formula}~$\lexists[x][X(x)]$ خاصية عدم الخلو؛ أي إن
+$\Sat{M}{\lexists[x][X(x)]}[s]$ إذا وفقط إذا كان~$s(X) \neq
+\emptyset$.
+\end{prop}
+
+لا تكون المجموعة~$X$ أكبر من المجموعة~$Y$،
+$\cardle{X}{Y}$، إذا وفقط إذا وجدت دالة~!!a{injective}
+$f\colon X \to Y$. ولما كان يمكننا التعبير عن كون دالة ما متباينة، وعن
+كون قيمها عند وسائط من~$X$ تنتمي إلى~$Y$ أيضًا، أمكننا كذلك تعريف
+علاقة عدم الكبر على المجموعات الجزئية من المجال.
+
+\begin{prop}
+تعرّف الصيغة
+\[
+\lexists[u][(\lforall[x][(X(x) \lif Y(u(x)))] \land \lforall[x][\lforall[y][(\eq[u(x)][u(y)] \lif
+      \eq[x][y])]])]
+\]
+علاقة عدم الكبر.
+\end{prop}
+
+تكون مجموعتان متساويتين في الحجم، أو «متكافئتين عدديًا»،
+$\cardeq{X}{Y}$، إذا وفقط إذا وجدت دالة~!!a{bijective}
+$f\colon X \to Y$.
+
+\begin{prop}
+تعرّف الصيغة
+\begin{multline*}
+  \lexists[u][(\lforall[x][(X(x) \lif Y(u(x)))] \land {}\\
+    \lforall[x][\lforall[y][((X(x) \land X(y) \land \eq[u(x)][u(y)]) \lif \eq[x][y])]]
+  \land {} \\\lforall[y][(Y(y) \lif \lexists[x][(X(x)
+      \land \eq[y][u(x)])])])]
+\end{multline*}
+علاقة التكافؤ العددي.
+\end{prop}
+
+وسنختصر هذه الـ!!{formula}s، على الترتيب، بالرموز
+$X \subseteq Y$، و$X = Y$، و$X \neq \emptyset$، و$\cardle{X}{Y}$،
+و$\cardeq{X}{Y}$. (وقد يكون هذا مربكًا قليلًا، لأننا نستعمل الترميز
+نفسه حين نتحدث بصورة غير صورية عن المجموعتين~$X$ و$Y$؛ أما هنا فالترميز
+اختصار لـ!!{formula}s من منطق الرتبة الثانية تتضمن متغيري العلاقة
+الأحاديي الموضع~$X$ و$Y$.)
+
+\begin{prop}
+الـ!!{sentence}~$\lforall[X][\lforall[Y][((\cardle{X}{Y} \land
+    \cardle{Y}{X}) \lif \cardeq{X}{Y})]]$ صادقة منطقيًا.
+\end{prop}
+
+\begin{proof}
+تُرضى الـ!!{sentence} في~!!a{structure}~$\Struct{M}$ إذا كان، لكل
+مجموعتين جزئيتين~$X \subseteq \Domain{M}$ و
+$Y \subseteq \Domain{M}$، أن~$\cardeq{X}{Y}$ متى كان
+$\cardle{X}{Y}$ و$\cardle{Y}{X}$. لكن هذا يصدق على \emph{أي}
+مجموعتين~$X$ و$Y$؛ فهو مبرهنة شرودر--برنشتاين.
+\end{proof}
+
+\end{document}

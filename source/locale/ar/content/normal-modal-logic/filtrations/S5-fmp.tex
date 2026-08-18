@@ -1,0 +1,85 @@
+% Part: normal-modal-logic
+% Chapter: filtrations
+% Section: S5-fmp
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{fil}{fmp}
+
+\olsection{للمنطقين \Log{K} و\Log{S5} خاصية النموذج المنتهي}
+
+\begin{defn}
+  يقال إن نظامًا~$\Sigma$ من المنطق الجهوي يملك \emph{خاصية النموذج
+    المنتهي} إذا كانت، كلما صدقت !!a{formula}~$!A$ عند عالم في نموذج
+  لـ~$\Sigma$، تصدق~$!A$ عند عالم في نموذج \emph{منتهٍ} لـ~$\Sigma$.
+\end{defn}
+
+\begin{prop}\ollabel{prop:K-fmp}
+  يملك~\Log{K} خاصية النموذج المنتهي.
+\end{prop}
+
+\begin{proof}
+  \Log{K} هو مجموعة ال!!{formula}s الصالحة؛ أي إن كل نموذج هو نموذج
+  لـ~\Log{K}. وبحسب~\olref[fil]{thm:filtrations}، إذا كان
+  $\mSat{M}{!A}[w]$، كان~$\mSat{M^*}{!A}[{[w]}]$ لكل ترشيح
+  لـ~$\mModel{M}$ عبر المجموعة~$\Gamma$ المؤلفة من ال!!{formula}s
+  الجزئية لـ~$!A$. وليس لأي !!{formula} إلا عدد منتهٍ من
+  ال!!{formula}s الجزئية، ولذلك~$\Gamma$ منتهية. وبحسب
+  \olref[fin]{prop:filt-are-finite}، يكون~$\card{W^*} \le 2^n$، حيث
+  $n$ عدد ال!!{formula}s في~$\Gamma$. ولأن~\Log{K} لا يفرض أي قيد على
+  النماذج، يكون~$\mModel{M^*}$ نموذجًا لـ~\Log{K}.
+\end{proof}
+
+لإثبات أن منطقًا~\Log{L} يملك خاصية النموذج المنتهي بواسطة الترشيحات، من
+الضروري أن يكون ترشيح نموذج~\Log{L} هو نفسه نموذج~\Log{L}. وكثيرًا ما
+يتطلب ذلك عملًا معتبرًا، وليس كل ترشيح يعطي نموذجًا لـ~\Log{L}. غير أن
+الأمر يظل صحيحًا في النماذج الكلية.
+
+\begin{prop}\ollabel{prop:univ-fin}
+  لتكن~$\mClass{U}$ فئة النماذج الكلية (انظر
+  \olref[frd][es5]{prop:S5=univ})، ولتكن~$\mClass{U}_\mathrm{Fin}$
+  فئة جميع النماذج الكلية المنتهية. عندئذ تكون أي !!{formula}~$!A$
+  صالحة في~$\mClass{U}$ إذا وفقط إذا كانت صالحة في
+  $\mClass{U}_\mathrm{Fin}$.
+\end{prop}
+
+\begin{proof}
+  النماذج الكلية المنتهية نماذج كلية، ومن ثم فالاتجاه من اليسار إلى اليمين
+  مباشر. أما الاتجاه من اليمين إلى اليسار، فافترض أن~$!A$ كاذبة عند عالم
+  ما~$w$ في نموذج كلي~$\mModel{M}$. ولتحتو~$\Gamma$ الصيغة~$!A$ وجميع
+  صيغها الجزئية؛ ومن الواضح أن~$\Gamma$ منتهية. خذ ترشيحًا
+  $\mModel{M^*}$ لـ~$\mModel{M}$؛ يكون~$\mModel{M^*}$ منتهيًا بحسب
+  \olref[fin]{prop:filt-are-finite}، وبحسب
+  \olref[fil]{thm:filtrations} تكون~$!A$ كاذبة عند~$[w]$ في
+  $\mModel{M^*}$. ويبقى أن نلاحظ أن~$\mModel{M^*}$ كلي أيضًا: لأي
+  $u$ و$v$ يكون~$Ruv$ بالفرض، وبحسب
+  \olref[fil]{defn:filtration}\olref[fil]{defn:filtration-R} يكون أيضًا
+  $R^*[u][v]$.
+\end{proof}
+
+\begin{cor}\ollabel{cor:S5fmp}
+  يملك~\Log{S5} خاصية النموذج المنتهي.
+\end{cor}
+
+\begin{proof}
+  بحسب~\olref[frd][es5]{prop:S5=univ}، إذا صدقت~$!A$ عند عالم في نموذج
+  انعكاسي إقليدي ما، صدقت عند عالم في نموذج كلي. وبحسب
+  \olref{prop:univ-fin}، تصدق عند عالم في نموذج كلي منتهٍ (هو ترشيح
+  النموذج عبر مجموعة ال!!{formula}s الجزئية لـ~$!A$). وكل نموذج كلي
+  انعكاسي وإقليدي أيضًا؛ ومن ثم تصدق~$!A$ عند عالم في نموذج انعكاسي
+  إقليدي منتهٍ.
+\end{proof}
+
+\begin{prob}
+  أثبت أن كل ترشيح لنموذج متسلسل أو انعكاسي يكون هو أيضًا متسلسلًا أو
+  انعكاسيًا، على الترتيب.
+\end{prob}
+
+\begin{prob}
+  أوجد ترشيحًا غير متناظر (أو غير متعدٍ، أو غير إقليدي) لنموذج متناظر
+  (أو متعدٍ، أو إقليدي).
+\end{prob}
+
+\end{document}

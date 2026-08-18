@@ -1,0 +1,596 @@
+% Part: proof-theory
+% Chapter: cut-elimination
+% Section: interpolation
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{cut}{itp}
+
+\olsection{لمّة ماهارا ومبرهنة كريغ للاستيفاء}
+
+تنص مبرهنة الاستيفاء، التي ترجع إلى وليم كريغ، على أنه إذا كان
+$!A \Entails !B$، وُجدت~!!a{sentence}~$!C$ (تسمى
+\emph{صيغة الاستيفاء}) بحيث~$!A \Entails !C$ و$!C \Entails !B$.
+ومن المهم أنه يمكن اختيار صيغة الاستيفاء~$!C$ بحيث تكون كل
+!!{constant}s و!!{predicate}s الواردة فيها واردة في كل من~$!A$ و$!B$.
+(ونفترض عدم وجود~!!{function}s.) ولولا هذا القيد لأمكن أن تقوم~$!A$
+و$!B$ نفسيهما بدور صيغتي استيفاء على نحو تافه.
+
+تصدق مبرهنة الاستيفاء في منطق الرتبة الأولى الكلاسيكي، وقد وُصفت بأنها
+«آخر خاصية مهمة لمنطق الرتبة الأولى» جرى اكتشافها. ولها تطبيقات مهمة في
+نظرية النماذج والاستدلال الآلي. وكان دافعها وتطبيقها الأصليان في فلسفة
+العلم، إذ يمكن استخدامها لدراسة الأوليات التي يمكن بها تسليم نظرية أو
+يتعذر ذلك. كما تستلزم مبرهنة بيث في قابلية التعريف، التي تقول إن
+النظرية إذا استطاعت أن تعرّف مفهومًا ضمنيًا استطاعت أن تعرّفه صراحة.
+
+مثل نتائج كثيرة في المنطق الرياضي، يمكن برهنة مبرهنة الاستيفاء بطرائق
+نظرية النماذج وبطرائق نظرية البرهان معًا. وميزة الطرائق البرهانية أنها
+لا تبيّن وجود صيغة استيفاء فحسب، بل تقدم خوارزمية تستخرجها من
+!!a{proof} صوري للمتتالية~$!A \Sequent !B$، مثل~!!a{proof} لها في
+\Log{G3c}.
+
+لتكن~$\Lang L(!A)$ مجموعة~!!{constant}s و!!{predicate}s في~$!A$،
+ولتكن~$\Lang L(\Gamma) = \bigcup \Setabs{\Lang L(!A)}{!A \in
+\Gamma}$. ونفترض في هذا القسم كله أننا نتعامل مع~!!{formula}s خالية
+من~!!{function}s.
+
+\begin{thm}[مبرهنة كريغ للاستيفاء]\ollabel{thm:interpolation}
+لتكن~!!{language}~$!A$ هي~$\Lang L(!A)$، ولغة~$!B$ هي
+$\Lang L(!B)$. إذا كان~$\Log{G3c} \Proves !A \Sequent !B$، وُجدت
+!!a{formula}~$!C$ في~!!{language}~$\Lang L(!C) \subseteq \Lang
+L(!A) \cap \Lang L(!B)$ بحيث~$\Log{G3c} \Proves !A \Sequent !C$
+و$\Log{G3c} \Proves !C \Sequent !B$.
+\end{thm}
+
+نبرهن تعميمًا لمبرهنة الاستيفاء كي نستفيد من بنية~!!{proof}s في
+\Log{G3c}. ولأجل ذلك، تصوّر أن مقدّم كل متتالية وتاليها مقسومان إلى
+جزأين. نكتب~$\maeh{\Gamma_1}{\Gamma_2} \Sequent
+\maeh{\Delta_1}{\Delta_2}$ للدلالة على أن~$\Gamma_1$ و$\Delta_1$
+ينتميان إلى الجزء الأول، وأن~$\Gamma_2$ و$\Delta_2$ ينتميان إلى الجزء
+الثاني. وعندئذ تتبع مبرهنة الاستيفاء فورًا من اللمّة الآتية.
+
+\begin{lem}[لمّة ماهارا]\ollabel{lem:maehara} إذا كان~$\Log{G3c}
+\Proves \maeh{\Gamma_1}{\Gamma_2} \Sequent \maeh{\Delta_1}{\Delta_2}$،
+وُجدت~!!a{formula}~$!C$ في~!!{language}~$\Lang L(!C)
+\subseteq \Lang L(\Gamma_1,
+\Delta_1) \cap \Lang L(\Gamma_2, \Delta_2)$ بحيث~$\Log{G3c}
+\Proves \Gamma_1 \Sequent \Delta_1, !C$ و$\Log{G3c} \Proves !C,
+\Gamma_2 \Sequent \Delta_2$.
+\end{lem}
+
+\begin{proof}
+  افترض أن~$\pi \Proves \maeh{\Gamma_1}{\Gamma_2} \Sequent
+  \maeh{\Delta_1}{\Delta_2}$. نبرهن المطلوب بالاستقراء على
+  $n=\pheight{\pi}$.
+
+  إذا كان~$n=0$، كانت~$\maeh{\Gamma_1}{\Gamma_2} \Sequent
+  \maeh{\Delta_1}{\Delta_2}$ مسلّمة، وظهرت~!!{formula} ذرية ما~$!A$
+  في كل من~$\Gamma_1, \Gamma_2$ و$\Delta_1, \Delta_2$. ولدينا أربع
+  حالات بحسب انتماء~$!A$ إلى الجزء الأول أو الثاني في اليسار، وانتمائها
+  إلى الجزء الأول أو الثاني في اليمين.
+  \begin{enumerate}
+    \item $!A \in \Gamma_1$ و$!A \in \Delta_1$. نريد~$!C$ بحيث
+    تكون كل من~$\Gamma_1 \Sequent \Delta_1, !C$ و$!C, \Gamma_2
+    \Sequent \Delta_2$~!!{provable}. الأولى مسلّمة بالفعل أيًا كان
+    اختيار~$!C$، لأن~$!A$ تظهر في اليسار واليمين. والطريقة الوحيدة
+    لضمان كون~$!C, \Gamma_2 \Sequent \Delta_2$~!!{provable} هي أن
+    نضع~$!C \ident \lfalse$.
+    \item $!A \in \Gamma_1$ و$!A \in \Delta_2$. عندئذ تكون
+    $\Gamma_1 \Sequent \Delta_1, !A$ و$!A, \Gamma_2 \Sequent
+    \Delta_2$ مسلّمتين، فيمكن اختيار~$!C \ident !A$.
+    \item $!A \in \Gamma_2$ و$!A \in \Delta_1$. عندئذ تكون
+    $!A, \Gamma_1 \Sequent \Delta_1$ و$\Gamma_2 \Sequent \Delta_2,
+    !A$ مسلّمتين، لكن~$!A$ تقع فيهما في الجهتين الخطأ، فلا تكون هي صيغة
+    الاستيفاء. غير أننا نستطيع باستخدام~$\RightR{\lnot}$ و
+    $\LeftR{\lnot}$ أن~!!{prove} المتتاليتين~$\Gamma_1
+    \Sequent \Delta_1, \lnot!A$ و$\lnot !A, \Gamma_2 \Sequent
+    \Delta_2$.
+    \item $!A \in \Gamma_2$ و$!A \in \Delta_2$. تمرين.
+  \end{enumerate}
+  ونترك تمرينًا حالتي كون~$\maeh{\Gamma_1}{\Gamma_2} \Sequent
+  \maeh{\Delta_1}{\Delta_2}$ مسلّمة بسبب~$\lfalse \in \Gamma_1$ أو
+  $\lfalse \in \Gamma_2$.
+
+  إذا كان~$n>0$، انتهى~$\pi$ باستدلال منطقي. وعلينا تمييز الحالات بحسب
+  القاعدة المستخدمة والجزء الذي تنتمي إليه الصيغة الرئيسة. وفي كل حالة
+  نستطيع استخدام فرض الاستقراء القائل إن اللمّة تصدق لكل~!!{proof}s
+  $\pi_1$ بحيث~$\pheight{\pi_1} < n$، وبأي تقسيم لمتتالية نهاية
+  $\pi_1$ إلى جزأين. فلنتأمل بعض الحالات المحددة.
+  \begin{enumerate}
+    \item ينتهي~$\pi$ بـ$\RightR{\lnot}$، وصيغته الرئيسة~$\lnot
+    !A$. ولدينا حالتان: بحسب انتماء~$\lnot !A$ إلى الجزء الأول أو
+    الثاني، ينتهي~$\pi$ بأحد الشكلين
+    \[
+    \AxiomC{}
+    \RightLabel{$\pi_1$}
+    \Deduce$\maeh{!A, \Gamma_1}{\Gamma_2} \fCenter
+      \maeh{\Delta_1}{\Delta_2}$
+    \RightLabel{\RightR{\lnot}}
+    \UnaryInf$\maeh{\Gamma_1}{\Gamma_2} \fCenter
+      \maeh{\Delta_1, \lnot !A}{\Delta_2}$
+    \DisplayProof
+    \]
+    أو
+    \[
+    \AxiomC{}
+    \RightLabel{$\pi_1$}
+    \Deduce$\maeh{\Gamma_1}{!A, \Gamma_2} \fCenter
+      \maeh{\Delta_1}{\Delta_2}$
+    \RightLabel{\RightR{\lnot}}
+    \UnaryInf$\maeh{\Gamma_1}{\Gamma_2} \fCenter
+      \maeh{\Delta_1}{\Delta_2, \lnot !A}$
+    \DisplayProof
+    \]
+    لاحظ أننا إذا وضعنا~!!{formula} الرئيسة~$\lnot !A$ في الجزء الأول،
+    وضعنا~!!{formula} الفعالة~$!A$ في الجزء الأول من المقدمة أيضًا. وهذا
+    اختيار متاح لنا. وكان فرض الاستقراء سيصدق كذلك لو وضعنا الصيغة
+    الفعالة في الجزء الآخر، لكننا عندئذ لن نستطيع إيجاد صيغة استيفاء
+    (جرّب ذلك تمرينًا).
+
+    تأمل أولًا الوضع الأول، حيث تنتمي~$\lnot !A$ إلى الجزء الأول. بفرض
+    الاستقراء توجد صيغة استيفاء لمتتالية نهاية~$\pi_1$، أي توجد
+    !!a{formula}~$!C_1$ بحيث تكون كل من
+    \begin{align*}
+    !A, \Gamma_1 & \Sequent \Delta_1, !C_1 &&\text{و} &
+    !C_1, \Gamma_2 & \Sequent \Delta_2
+    \intertext{قابلة للبرهنة. وما نحتاج إليه~!!a{formula}~$!C$ بحيث
+    تكون المتتاليتان الآتيتان~!!{provable}:}
+    \Gamma_1 & \Sequent \Delta_1, \lnot !A, !C &&\text{و} &
+    !C, \Gamma_2 & \Sequent \Delta_2
+    \end{align*}
+    ومن الواضح أنه يكفينا وضع~$!C \ident !C_1$: فقد أخبرنا فرض
+    الاستقراء أن المتتالية اليمنى~!!{provable}، وتنتج المتتالية اليسرى
+    من المتتالية التي أعطاها فرض الاستقراء بتطبيق~$\RightR{\lnot}$.
+    ويعطينا فرض الاستقراء أيضًا~$\Lang L(!C_1) \subseteq \Lang L(!A,
+    \Gamma_1, \Delta_1) \cap \Lang L(\Gamma_2, \Delta_2)$. وبما أن
+    $\Lang L(\lnot !A) = \Lang L(!A)$ و$\Lang L(!C) = \Lang L(!C_1)$،
+    يكون~$\Lang L(!C_1) \subseteq \Lang L(\Gamma_1, \Delta_1,
+    \lnot !A) \cap \Lang L(\Gamma_2, \Delta_2)$.
+
+    أما في الوضع الثاني فالحال مختلفة قليلًا، إذ تنتمي~$\lnot !A$ إلى
+    الجزء الثاني. نضع~!!{formula} الفعالة في المقدمة في الجزء الثاني
+    أيضًا، ونطبق فرض الاستقراء فنحصل على
+    \begin{align*}
+    \Gamma_1 & \Sequent \Delta_1, !C_1 &&\text{و} &
+    !C_1, !A, \Gamma_2 & \Sequent \Delta_2
+    \intertext{وهما قابلتان للبرهنة. وإذا طبقنا قاعدة~$\RightR{\lnot}$
+    مرة أخرى على الثانية، حصلنا على~!!{proof}s لـ}
+    \Gamma_1 & \Sequent \Delta_1, !C_1 &&\text{و} &
+    !C_1, \Gamma_2 & \Sequent \Delta_2, \lnot !A
+    \end{align*}
+    وهاتان بالضبط المتتاليتان اللتان نريد أن تكونا~!!{provable} إذا كانت
+    $!C_1$ صيغة استيفاء؛ فنضع مرة أخرى~$!C \ident !C_1$. وكما سبق يكون
+    $\Lang L(!C_1) \subseteq \Lang L(\Gamma_1, \Delta_1) \cap
+    \Lang L(\Gamma_2, \Delta_2, \lnot !A)$.
+
+    \item ينتهي~$\pi$ بـ$\RightR{\lif}$، وصيغته الرئيسة
+    !!{formula}~$!A
+    \lif !B$. ولدينا حالتان أيضًا، بحسب انتماء~$!A \lif !B$ إلى الجزء
+    الأول أو الثاني. ينتهي~!!{proof}~$\pi$ بأحد الشكلين
+    \[
+    \AxiomC{}
+    \RightLabel{$\pi_1$}
+    \Deduce$\maeh{!A, \Gamma_1}{\Gamma_2} \fCenter
+      \maeh{\Delta_1, !B}{\Delta_2}$
+    \RightLabel{\RightR{\lif}}
+    \UnaryInf$\maeh{\Gamma_1}{\Gamma_2} \fCenter
+      \maeh{\Delta_1, !A \lif !B}{\Delta_2}$
+    \DisplayProof
+    \]
+    أو
+    \[
+    \AxiomC{}
+    \RightLabel{$\pi_1$}
+    \Deduce$\maeh{\Gamma_1}{!A, \Gamma_2} \fCenter
+      \maeh{\Delta_1}{\Delta_2, !B}$
+    \RightLabel{\RightR{\lif}}
+    \UnaryInf$\maeh{\Gamma_1}{\Gamma_2} \fCenter
+      \maeh{\Delta_1}{\Delta_2, !A \lif !B}$
+    \DisplayProof
+    \]
+    وقد وضعنا مرة أخرى~!!{formula}s الفعالة في الجزء نفسه من المقدمة
+    الذي تنتمي إليه~!!{formula} الرئيسة في النتيجة. وفي الوضع الأول
+    نطبق فرض الاستقراء فنحصل على~!!{proof}s لـ
+    \begin{align*}
+    !A, \Gamma_1 & \Sequent \Delta_1, !B, !C_1 &&\text{و} & !C_1, \Gamma_2 & \Sequent \Delta_2
+    \intertext{والمتتالية اليسرى مقدمة مناسبة لـ$\RightR{\lif}$؛ ومن
+    ثم تكون المتتاليتان الآتيتان~!!{provable}:}
+    \Gamma_1 & \Sequent \Delta_1, !A \lif !B, !C_1 &&\text{و} & !C_1, \Gamma_2 & \Sequent \Delta_2
+    \end{align*}
+    وهذا يعني أن~$!C_1$ صيغة استيفاء لمتتالية نهاية~$\pi$ أيضًا،
+    فيمكن أن نضع~$!C \ident !C_1$ مرة أخرى.
+
+    وتعالج الحالة الأخرى بالطريقة نفسها.
+
+    \item ينتهي~$\pi$ بـ$\LeftR{\lif}$، وصيغته الرئيسة
+    !!{formula}~$!A
+    \lif !B$. إذا انتمت~$!A \lif !B$ إلى الجزء الأول، انتهى
+    !!{proof}~$\pi$ بالشكل
+    \[
+    \AxiomC{}
+    \RightLabel{$\pi_1$}
+    \Deduce$\maeh{\Gamma_1}{\Gamma_2} \fCenter
+      \maeh{\Delta_1, !A}{\Delta_2}$
+    \AxiomC{}
+    \RightLabel{$\pi_2$}
+    \Deduce$\maeh{!B, \Gamma_1}{\Gamma_2} \fCenter
+      \maeh{\Delta_1}{\Delta_2}$
+    \RightLabel{\LeftR{\lif}}
+    \BinaryInf$\maeh{!A \lif !B, \Gamma_1}{\Gamma_2} \fCenter
+      \maeh{\Delta_1}{\Delta_2}$
+    \DisplayProof
+    \]
+    ويعطينا فرض الاستقراء الآن أربع متتاليات~!!{provable}: اثنتان لصيغة
+    الاستيفاء~$!C_1$ للمقدمة اليسرى، واثنتان لصيغة الاستيفاء~$!C_2$
+    للمقدمة الثانية:
+    \begin{align*}
+    \Gamma_1 & \Sequent \Delta_1, !A, !C_1 &&\text{(1)} &
+    !C_1, \Gamma_2 & \Sequent \Delta_2 && \text{(2)}\\
+    !B, \Gamma_1 & \Sequent \Delta_1, !C_2 &&\text{(3)} &
+    !C_2, \Gamma_2 & \Sequent \Delta_2 && \text{(4)}
+    \end{align*}
+    ويمكن أن تكون المتتاليتان (1) و(3) مقدمتي~$\LeftR{\lif}$ إذا طبقنا
+    الإضعاف، فأضفنا~$!C_2$ إلى يمين (1) و$!C_1$ إلى يمين (3):
+    \[
+    \AxiomC{}
+    \Deduce$\Gamma_1 \fCenter \Delta_1, !A, !C_1, !C_2$
+    \AxiomC{}
+    \Deduce$!B, \Gamma_1 \fCenter \Delta_1, !C_1, !C_2$
+    \RightLabel{\LeftR{\lif}}
+    \BinaryInf$!A \lif !B, \Gamma_1 \fCenter \Delta_1, !C_1, !C_2$
+    \DisplayProof
+    \]
+    وبتطبيق~$\RightR{\lor}$ نحصل على المتتالية
+    \[
+    !A \lif !B, \Gamma_1 \fCenter \Delta_1, !C_1 \lor !C_2.
+    \]
+    وهذا يرجح أن تكون~$!C_1 \lor !C_2$ صيغة الاستيفاء في هذه الحالة.
+    وهي كذلك بالفعل، إذ نستطيع أن~!!{prove} المتتالية الأخرى المطلوبة
+    انطلاقًا من المتتاليتين الباقيتين (2) و(4):
+    \[
+    \AxiomC{}
+    \Deduce$!C_1, \Gamma_2 \fCenter \Delta_2$
+    \AxiomC{}
+    \Deduce$!C_2, \Gamma_2 \fCenter \Delta_2$
+    \RightLabel{\LeftR{\lor}}
+    \BinaryInf$!C_1 \lor !C_2, \Gamma_2 \fCenter \Delta_2$
+    \DisplayProof
+    \]
+    يبقى التحقق من أن~$!C_1 \lor !C_2$ تنتمي إلى اللغة الصحيحة. يعطينا
+    فرض الاستقراء
+    \begin{align*}
+    \Lang L(!C_1) & \subseteq
+    \Lang L(\Gamma_1, \Delta_1, !A) \cap \Lang L(\Gamma_2, \Delta_2) &\text{و}\\
+    \Lang L(!C_2) & \subseteq
+    \Lang L(!B, \Gamma_1, \Delta_1) \cap \Lang L(\Gamma_2, \Delta_2)
+    \intertext{ولما كان}
+    \Lang L(!A) & \subseteq \Lang L(!A \lif !B) &\text{و}\\
+    \Lang L(!B) & \subseteq \Lang L(!A \lif !B)
+    \intertext{كان كل من}
+    \Lang L(!C_1) & \subseteq
+    \Lang L(\Gamma_1, \Delta_1, !A \lif !B) \cap \Lang L(\Gamma_2, \Delta_2) &\text{و}\\
+    \Lang L(!C_2) & \subseteq
+    \Lang L(\Gamma_1, \Delta_1, !A \lif !B) \cap \Lang L(\Gamma_2, \Delta_2).
+    \intertext{وبالتالي، لما كان~$\Lang L (!C_1 \lor !C_2) = {}$}
+    \Lang L(!C_1) \cup \Lang L(!C_2) & \subseteq
+    \Lang L(\Gamma_1, \Delta_1, !A \lif !B) \cap \Lang L(\Gamma_2, \Delta_2),
+    \end{align*}
+    وهو المطلوب.
+
+    وإذا انتمت~$!A \lif !B$ إلى الجزء الثاني اختلف الوضع، لكنه يعالج
+    بطريقة مماثلة. ويعطينا فرض الاستقراء مرة أخرى أربع متتاليات
+    !!{provable}:
+    \begin{align*}
+    \Gamma_1 & \Sequent \Delta_1, !C_1 &&\text{(1)} &
+    !C_1, \Gamma_2 & \Sequent \Delta_2, !A && \text{(2)}\\
+    \Gamma_1 & \Sequent \Delta_1, !C_2 &&\text{(3)} &
+    !C_2, !B, \Gamma_2 & \Sequent \Delta_2 && \text{(4)}
+    \end{align*}
+    والآن تكون المتتاليتان (2) و(4)، بعد إضافة بعض~!!{formula}s
+    بالإضعاف، مقدمتي~$\LeftR{\lif}$:
+    \[
+    \AxiomC{}
+    \Deduce$!C_1, !C_2, \Gamma_2 \fCenter \Delta_2, !A$
+    \AxiomC{}
+    \Deduce$!B, !C_1, !C_2, \Gamma_2 \fCenter \Delta_2$
+    \RightLabel{\LeftR{\lif}}
+    \BinaryInf$!A \lif !B, !C_1, !C_2, \Gamma_2 \fCenter \Delta_2$
+    \DisplayProof
+    \]
+    ونريد مرة أخرى تحويل هذه إلى متتالية فيها~!!{formula} واحدة مبنية من
+    $!C_1$ و$!C_2$، لكننا نحتاج إليها هذه المرة في المقدّم لأننا نتعامل
+    الآن مع الجزء الثاني. ويؤدي تطبيق~$\LeftR{\land}$ الغرض؛ فينبغي أن
+    نختار~$!C \ident (!C_1 \land !C_2)$ صيغة للاستيفاء. ومن حسن الحظ
+    أننا نستطيع استخدام المتتاليتين الباقيتين (1) و(3) كي~!!{prove}
+    المتتالية المقابلة للجزء الآخر:
+    \[
+    \AxiomC{}
+    \Deduce$\Gamma_1 \fCenter \Delta_1, !C_1$
+    \AxiomC{}
+    \Deduce$\Gamma_1 \fCenter \Delta_1, !C_2$
+    \RightLabel{\RightR{\land}}
+    \BinaryInf$\Gamma_1 \fCenter \Delta_1, !C_1 \land !C_2$
+    \DisplayProof
+    \]
+    وكما سبق، يكون~$\Lang L(!C_1 \land !C_2) \subseteq \Lang
+    L(\Gamma_1, \Delta_1) \cap \Lang L(\Gamma_2, \Delta_2, !A \lif
+    !B)$.
+
+    \item ينتهي~$\pi$ بـ$\RightR{\lforall}$، وصيغته الرئيسة
+    !!{formula}~$\lforall[x][!A(x)]$:
+    \[
+    \AxiomC{}
+    \RightLabel{$\pi_1$}
+    \Deduce$\maeh{\Gamma_1}{\Gamma_2} \fCenter
+    \maeh{\Delta_1, !A(c)}{\Delta_2}$
+    \RightLabel{\RightR{\lforall}}
+    \UnaryInf$\maeh{\Gamma_1}{\Gamma_2} \fCenter
+      \maeh{\Delta_1, \lforall[x][!A(x)]}{\Delta_2}$
+    \DisplayProof
+    \]
+    أو
+    \[
+    \AxiomC{}
+    \RightLabel{$\pi_1$}
+    \Deduce$\maeh{\Gamma_1}{\Gamma_2} \fCenter
+      \maeh{\Delta_1}{\Delta_2, !A(c)}$
+    \RightLabel{\RightR{\lforall}}
+    \UnaryInf$\maeh{\Gamma_1}{\Gamma_2} \fCenter
+      \maeh{\Delta_1}{\Delta_2, \lforall[x][!A(x)]}$
+    \DisplayProof
+    \]
+    في الوضع الأول يعطينا فرض الاستقراء~!!{proof}s لـ
+    $\Gamma_1 \Sequent \Delta_1, !A(c), !C_1$ و$!C_1, \Gamma_2
+    \Sequent \Delta_2$. ويمكن تطبيق~$\RightR{\lforall}$ على الأولى
+    فنحصل على~$\Gamma_1 \Sequent \Delta_1, \lforall[x][!A(x)], !C_1$.
+    (شرط المتغير المميز متحقق لأنه كان متحققًا أصلًا في قاعدة
+    $\RightR{\lforall}$ في نهاية~$\pi$.) وهكذا تكون~$!C_1$ صيغة
+    استيفاء إذا تحقق الشرط~$\Lang L(!C_1) \subseteq \Lang L(\Gamma_1,
+    \Delta_1, \lforall[x][!A(x)]) \cap \Lang L(\Gamma_2, \Delta_2)$.
+    ويعطينا فرض الاستقراء~$\Lang L(!C_1) \subseteq \Lang L(\Gamma_1,
+    \Delta_1, !A(c)) \cap \Lang L(\Gamma_2, \Delta_2)$. لذا لا يبقى
+    إلا القلق بشأن~$c$: هل يمكن أن تظهر في~$!C_1$؟ لا يمكن. فلو ظهرت
+    فيها لكان كل من~$c \in \Lang L(\Gamma_1, \Delta_1, !A(c))$، وهو
+    صحيح، و$c \in \Lang L(\Gamma_2, \Delta_2)$. لكن~$c$ كانت عندئذ
+    ستظهر في نتيجة استدلال~$\RightR{\lforall}$ في~$\pi$، خلافًا لشرط
+    المتغير المميز.
+
+    والحالة الأخرى مماثلة.
+
+    \item ينتهي~$\pi$ بـ$\RightR{\lexists}$، وصيغته الرئيسة
+    !!{formula}~$\lexists[x][!A(x)]$. ولدينا وضعان مرة أخرى. نتأمل
+    الوضع الذي تنتمي فيه~$\lexists[x][!A(x)]$ إلى الجزء الأول، ونترك
+    الآخر تمرينًا.
+
+    في الوضع الأول ينتهي~$\pi$ بالشكل
+    \[
+    \AxiomC{}
+    \RightLabel{$\pi_1$}
+    \Deduce$\maeh{\Gamma_1}{\Gamma_2} \fCenter
+      \maeh{\Delta_1, \lexists[x][!A(x)], !A(t)}{\Delta_2}$
+    \RightLabel{\RightR{\lexists}}
+    \UnaryInf$\maeh{\Gamma_1}{\Gamma_2} \fCenter
+      \maeh{\Delta_1, \lexists[x][!A(x)]}{\Delta_2}$
+    \DisplayProof
+    \]
+    ويعطينا فرض الاستقراء~!!{proof}s لـ$\Gamma_1 \Sequent
+    \Delta_1, \lexists[x][!A(x)], !A(t), !C_1$ و$!C_1, \Gamma_2
+    \Sequent \Delta_2$. ويمكن تطبيق~$\RightR{\lexists}$ على الأولى
+    فنحصل على~$\Gamma_1 \Sequent \Delta_1, \lexists[x][!A(x)], !C_1$.
+    وهكذا تكون~$!C_1$ صيغة استيفاء مرة أخرى إذا تحقق الشرط
+    $\Lang L(!C_1) \subseteq \Lang L(\Gamma_1, \Delta_1,
+    \lexists[x][!A(x)]) \cap \Lang L(\Gamma_2, \Delta_2)$. أما فرض
+    الاستقراء فيعطينا~$\Lang L(!C_1) \subseteq \Lang L(\Gamma_1,
+    \Delta_1, \lexists[x][!A(x)], !A(t)) \cap \Lang L(\Gamma_2,
+    \Delta_2)$.
+
+    ولأننا افترضنا عدم وجود~!!{function}s، فلا يمكن أن يكون الحد~$t$
+    إلا متغيرًا أو~!!a{constant}. إذا كان متغيرًا فلا يضيف رمزًا إلى
+    اللغة، فنأخذ~$!C_1$ صيغة للاستيفاء. وإذا كان ثابتًا، ولنكتب
+    $t \ident b$، فلا مشكلة كذلك إذا كان~$b \notin \Lang L(!C_1)$ أو
+    كان~$b \in \Lang L(\Gamma_1, \Delta_1,
+    \lexists[x][!A(x)]) \cap \Lang L(\Gamma_2, \Delta_2)$؛ فنأخذ
+    $!C_1$ صيغة للاستيفاء. لا نحتاج إلى التجريد إلا إذا كان~$b \in
+    \Lang L(!C_1)$ ولم يكن~$b$ مشتركًا بين لغتي الجزأين. عندئذ نستبدل
+    كل ظهور لـ$b$ في~$!C_1$ بـ!!a{variable}~$y$، فنكتب
+    $!C_1 \ident \Subst{!C_1'}{b}{y}$، حيث لا تحتوي~$!C_1'$ على~$b$.
+    وإضافة إلى ذلك، إما أن يكون~$b \notin \Lang L(\Gamma_1, \Delta_1,
+    \lexists[x][!A(x)])$ أو~$b \notin \Lang L(\Gamma_2, \Delta_2)$.
+    وفي الحالتين نأخذ، على الترتيب،~$!C \ident
+    \lforall[y][!C_1'(y)]$ أو~$!C \ident \lexists[y][!C_1'(y)]$.
+    ففي الحالة الأولى لدينا:
+    \[
+    \AxiomC{}
+    \Deduce$\Gamma_1 \fCenter
+      \Delta_1, \lexists[x][!A(x)], !A(b), !C_1'(b)$
+    \RightLabel{\RightR{\lexists}}
+    \UnaryInf$\Gamma_1 \fCenter \Delta_1, \lexists[x][!A(x)], !C_1'(b)$
+    \RightLabel{\RightR{\lforall}}
+    \UnaryInf$\Gamma_1 \fCenter
+      \Delta_1, \lexists[x][!A(x)], \lforall[y][!C_1'(y)]$
+    \DisplayProof
+    \]
+    و
+    \[
+    \AxiomC{}
+    \Deduce$!C_1'(b), \lforall[y][!C_1'(y)], \Gamma_2 \fCenter \Delta_2$
+    \RightLabel{\LeftR{\lforall}}
+    \UnaryInf$\lforall[y][!C_1'(y)], \Gamma_2 \fCenter \Delta_2$
+    \DisplayProof
+    \]
+    وتأتي~!!{proof}s المتتاليتين العلويتين من فرض الاستقراء (وفي
+    الثانية نطبق مقبولية الإضعاف مع~$\lforall[y][!C_1'(y)]$ في
+    المقدّم). ويتحقق شرط المتغير المميز في~$\RightR{\lforall}$ في
+    !!{proof} الأول لأن~$b \notin \Lang L(\Gamma_1, \Delta_1,
+    \lexists[x][!A(x)])$، ولأن~$!C_1'$ عُرّفت بحيث لا تحتوي~$b$.
+
+    وفي الحالة الثانية لدينا، من فرض الاستقراء مع مقبولية الإضعاف بـ
+    $\lexists[y][!C_1'(y)]$:
+    \[
+    \AxiomC{}
+    \Deduce$\Gamma_1 \fCenter
+      \Delta_1, \lexists[x][!A(x)], !A(b), \lexists[y][!C_1'(y)], !C_1'(b)$
+    \RightLabel{\RightR{\lexists}}
+    \UnaryInf$\Gamma_1 \fCenter
+      \Delta_1, \lexists[x][!A(x)], \lexists[y][!C_1'(y)], !C_1'(b)$
+    \RightLabel{\RightR{\lexists}}
+    \UnaryInf$\Gamma_1 \fCenter
+      \Delta_1, \lexists[x][!A(x)], \lexists[y][!C_1'(y)]$
+    \DisplayProof
+    \]
+    و
+    \[
+    \AxiomC{}
+    \Deduce$!C_1'(b), \Gamma_2 \fCenter \Delta_2$
+    \RightLabel{\LeftR{\lexists}}
+    \UnaryInf$\lexists[y][!C_1'(y)], \Gamma_2 \fCenter \Delta_2$
+    \DisplayProof
+    \]
+    ويتحقق شرط المتغير المميز في~$\LeftR{\lexists}$ في~!!{proof}
+    الثاني لأن~$b \notin \Lang L(\Gamma_2, \Delta_2)$، ولأن~$!C_1'$
+    عُرّفت بحيث لا تحتوي~$b$.
+  \end{enumerate}
+  والحالات الأخرى مماثلة، ونتركها تمارين.
+\end{proof}
+
+\begin{prob}
+افترض أن لدينا الرابط~$\lnand$ ذا القاعدتين
+\[
+\Axiom$\Gamma \fCenter \Delta, !A$
+\Axiom$\Gamma \fCenter \Delta, !B$
+\RightLabel{\LeftR{\lnand}}
+\BinaryInf$!A \lnand !B, \Gamma \fCenter \Delta$
+\DisplayProof
+\quad
+\Axiom$!A, !B, \Gamma \fCenter \Delta$
+\RightLabel{\RightR{\lnand}}
+\UnaryInf$\Gamma \fCenter \Delta, !A \lnand !B$
+\DisplayProof
+\]
+بيّن أن لمّة ماهارا تظل صادقة بمعالجة الحالات في برهان
+\olref{lem:maehara} التي ينتهي فيها~$\pi$ بإحدى هاتين القاعدتين.
+\end{prob}
+
+بعد إثبات لمّة ماهارا، نستطيع استخدامها لبرهنة مبرهنة كريغ للاستيفاء.
+
+\begin{proof}[برهان \olref{thm:interpolation}]
+  افترض أن~$!A \Sequent !B$~!!{provable}. طبّق~\olref{lem:maehara}
+  على~$\maeh{!A}{\ } \Sequent \maeh{\ }{!B}$ لتحصل على صيغة
+  الاستيفاء~$!C$. وعندئذ~$\Proves !A \Sequent !C$ و$\Proves !C
+  \Sequent !B$.
+\end{proof}
+
+افترض أن~$\Gamma$ نظرية (مجموعة~!!{sentence}s) في
+!!a{language}~$\Lang L$ تحتوي~!!{predicate}~$R$ ذا~$n$ مواضع. نقول
+إن~$\Gamma$ \emph{تعرّف}~$R$ \emph{ضمنيًا} إذا وفقط إذا
+\begin{align*}
+\Gamma, \Gamma'
+& \Entails \lforall[x_1][\dots\lforall[x_n][(R(x_1,\dots,x_n) \liff
+R'(x_1, \dots, x_n))]],
+\intertext{حيث~$\Gamma'$ هي~$\Gamma$ بعد استبدال كل ظهور لـ$R$ بـ
+$R' \notin \Lang L$. وتكون~$\Gamma$ قد \emph{عرّفت}~$R$
+\emph{صراحة} إذا وجدت~$!A(x_1, \dots, x_n)$ لا تحتوي~$R$ بحيث}
+\Gamma &\Entails
+\lforall[x_1][\dots\lforall[x_n][(R(x_1,\dots,x_n) \liff !A(x_1,
+\dots, x_n))]].
+\end{align*}
+ومن الواضح أن تعريف~$\Gamma$ لـ$R$ صراحة يستلزم تعريفها له ضمنيًا.
+أما العكس فليس واضحًا، لكنه يصدق مع ذلك:
+
+\begin{lem}[مبرهنة بيث في قابلية التعريف]
+  إذا عرّفت~$\Gamma$ العلاقة~$R$ ضمنيًا، عرّفتها صراحة أيضًا.
+\end{lem}
+
+\begin{proof}
+  افترض أن~$\Gamma$ تعرّف~$R$ ضمنيًا. لتكن~$R'$ و$\Gamma'$ كما سبق،
+  ولتكن~$\Lang L' = \Lang L(\Gamma') = \Lang L \setminus \{R\}
+  \cup \{R'\}$. وبالفرض لدينا
+  \begin{align*}
+    \Gamma, \Gamma' &
+    \Sequent \lforall[x_1][\dots\lforall[x_n][(R(x_1,\dots,x_n)
+    \liff R'(x_1, \dots, x_n))]].
+  \intertext{لتكن~$c_1$, \dots,~$c_n$~!!{constant}s لا تظهر في
+  $\Gamma$. وتعطينا لمّة القابلية للعكس}
+    \Gamma, \Gamma', R(c_1,\dots,c_n) & \Sequent  R'(c_1, \dots, c_n).
+  \intertext{عرّف}
+    \Lang L_1 &= \Lang L(\Gamma, R(c_1,\dots,c_n)), &
+    \Lang L_2 &= \Lang L(\Gamma',R'(c_1,\dots,c_n)).
+  \intertext{وطبّق لمّة ماهارا على}
+    \maeh{\Gamma, R(c_1,\dots,c_n)}{\Gamma'} & \Sequent
+      \maeh{\ }{R'(c_1, \dots, c_n)}.
+  \intertext{فنحصل على صيغة استيفاء~$!C(c_1,\dots,c_n)$ بحيث}
+    \Gamma, R(c_1,\dots,c_n) & \Sequent !C(c_1, \dots, c_n) \\
+    !C(c_1, \dots, c_n), \Gamma' & \Sequent R'(c_1, \dots, c_n).
+  \intertext{ولهاتين المتتاليتين~!!{proof}s. وتعطينا لمّة ماهارا}
+    \Lang L(!C) &\subseteq \Lang L_1 \cap \Lang L_2 \\
+      &= (\Lang L(\Gamma) \setminus \{R\})
+         \cup \{c_1,\dots,c_n\}.
+  \intertext{لتكن~$!A(x_1,\dots,x_n)$ ناتجة من~$!C(c_1,\dots,c_n)$
+  باستبدال الثابت الجديد~$c_i$ بالمتغير~$x_i$ لكل~$i$. عندئذ لا تحتوي
+  $!A$ الرمز~$R$. واستبدل~$R'$ في كل موضع بـ$R$ في~!!{proof} المتتالية
+  الثانية لتحصل على~!!a{proof} لـ}
+    !A(c_1, \dots, c_n), \Gamma & \Sequent R(c_1, \dots, c_n).
+  \end{align*}
+  والمتتالية الأولى هي
+  $\Gamma, R(c_1,\dots,c_n) \Sequent !A(c_1,\dots,c_n)$.
+  وبالجمع القضوي بين المتتاليتين نحصل على
+  \[
+    \Gamma \Sequent R(c_1,\dots,c_n) \liff !A(c_1,\dots,c_n).
+  \]
+  ثم نطبق~$\RightR{\lforall}$ باستخدام الثوابت الجديدة تباعًا فنحصل على
+  !!a{proof} لـ
+  \[
+    \Gamma \Sequent \lforall[x_1][\dots\lforall[x_n][(R(x_1,\dots,x_n) \liff !A(x_1, \dots, x_n))]].
+  \]
+  وهذا يبيّن أن~$!A(x_1, \dots, x_n)$ تعرّف~$R$ صراحة في~$\Gamma$.
+\end{proof}
+
+وثمة نتيجة ثالثة تكافئ الاستيفاء، ويمكن مثلها برهنتها باستخدام لمّة
+ماهارا، وهي: إذا كانت~$\Gamma_1$ و$\Gamma_2$ نظريتين متسقتين تحتويان
+نظرية تامة~$\Gamma$ في اللغة~$\Lang L(\Gamma) \subseteq
+\Lang L(\Gamma_1) \cap \Lang L(\Gamma_2)$، كانت
+$\Gamma_1 \cup \Gamma_2$ متسقة.
+
+تذكّر أن النظرية التامة هي التي يكون فيها، لكل~!!{sentence}~$!A$ في
+لغتها، إما~$\Gamma \Proves !A$ أو~$\Gamma \Proves \lnot !A$. ولأن
+$\Gamma_1$ و$\Gamma_2$ امتدادان متسقان لـ$\Gamma$، فلا بد أن تكون
+$\Gamma$ متسقة. ومن ثم، إذا كانت~$!A$~!!a{sentence} في اللغة
+$\Lang L(\Gamma_1) \cap \Lang L(\Gamma_2)$، امتنع أن يكون معًا
+$\Gamma_1 \Entails !A$ و$\Gamma_2 \Entails \lnot !A$. ولرؤية ذلك،
+افترض وجود~$!A$ كهذه. إذا كان~$\Gamma_1 \Entails !A$، لزم أن يكون
+$\Gamma \Entails !A$؛ وإلا استلزم تمام~$\Gamma$ أن
+$\Gamma \Entails \lnot !A$، وبما أن~$\Gamma \subseteq \Gamma_1$،
+كان~$\Gamma_1 \Entails \lnot !A$، فتغدو~$\Gamma_1$ غير متسقة. إذن
+$\Gamma \Entails !A$، وبما أن~$\Gamma \subseteq \Gamma_2$، يكون
+$\Gamma_2 \Entails !A$. ولذلك~$\Gamma_2 \Entails/ \lnot !A$، وإلا
+كانت~$\Gamma_2$ غير متسقة.
+
+وعدم وجود~!!a{sentence}~$!A$ في~!!{language} المشتركة
+$\Lang L(\Gamma_1) \cap \Lang L(\Gamma_2)$ بحيث
+$\Gamma_1 \Entails !A$ و$\Gamma_2 \Entails \lnot !A$ هو كل ما يلزم
+للبرهان، الذي نقدمه هنا برهانيًا باستخدام لمّة ماهارا.
+
+\begin{thm}[مبرهنة روبنسون في الاتساق المشترك]
+افترض أن~$\Gamma_1$ و$\Gamma_2$ نظريتان متسقتان، وأنه لا توجد~$!A$ في
+!!{language}~$\Lang L(\Gamma_1) \cap \Lang L(\Gamma_2)$ بحيث يكون
+$\Gamma_1 \Entails !A$ و$\Gamma_2 \Entails \lnot !A$. عندئذ تكون
+$\Gamma_1 \cup \Gamma_2$ متسقة.
+\end{thm}
+
+\begin{proof}
+  افترض، خلافًا للمطلوب، أن~$\Gamma_1 \cup \Gamma_2$ غير متسقة. عندئذ
+  للمتتالية~$\Gamma_1, \Gamma_2 \Sequent \ $~!!a{proof}. طبّق لمّة
+  ماهارا على~$\maeh{\Gamma_1}{\Gamma_2} \Sequent \maeh{\ }{\ }$
+  لتحصل على~!!a{sentence}~$!A$ في~!!{language}~$\Lang L(\Gamma_1)
+  \cap \Lang L(\Gamma_2)$ بحيث~$\Proves \Gamma_1 \Sequent !A$ و
+  $\Proves !A, \Gamma_2 \Sequent \quad$. ومن الأخيرة نحصل على
+  $\Proves \Gamma_2 \Sequent \lnot !A$. لكننا افترضنا عدم وجود
+  !!{sentence} كهذه.
+\end{proof}
+
+افترضنا ضمنًا فيما سبق أن النظريات~$\Gamma$ و$\Gamma_1$ و$\Gamma_2$
+منتهية. وبفضل التراص تصدق النتائج كذلك على النظريات اللانهائية.
+
+\end{document}

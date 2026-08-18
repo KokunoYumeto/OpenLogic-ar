@@ -1,0 +1,91 @@
+% Part: many-valued-logic
+% Chapter: syntax-and-semantics
+% Section: sublogics
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mvl}{syn}{sub}
+
+\olsection{المنطقات المتعددة القيم بوصفها منطقات جزئية من~$\LogCL$}
+
+تعرّف المنطقات المتعددة القيم المعتادة كلها بمصفوفات تتفق فيها قيمة
+دالة الصدق، عندما تكون وسائطها من~$\{\True, \False\}$، مع دوال الصدق
+الكلاسيكية. وعلى وجه التحديد، إذا كان~$x \in \{\True, \False\}$ في
+هذه المنطقات، فإن~$\tf{\lnot}[\Log L](x) = \tf{\lnot}[\LogCL](x)$؛
+ولكل~$\star$ من~$\land$ و$\lor$ و$\lif$، إذا كان
+$x, y \in \{\True, \False\}$، فإن
+$\tf{\star}[\Log L](x,y) = \tf{\star}[\LogCL](x,y)$. وبعبارة أخرى،
+دوال الصدق للروابط~$\lnot$ و$\land$ و$\lor$ و$\lif$، مقيدة إلى
+$\{\True,\False\}$، هي بالضبط دوال الصدق الكلاسيكية.
+
+\begin{prop}\ollabel{prop:mvl-cl}
+  افترض أن لغة منطق متعدد القيم~$\Log L$ تحتوي الروابط~$\lnot$ و
+  $\land$ و$\lor$ و$\lif$، وأن~$\True, \False \in V$، وأن دوال صدقه
+  تحقق:
+  \begin{enumerate}
+    \item\ollabel{prop:not} $\tf{\lnot}[\Log L](x) = \tf{\lnot}[\LogCL](x)$ إذا كان~$x =
+    \True$ أو~$x = \False$؛
+    \item\ollabel{prop:land} $\tf{\land}[\Log L](x,y) = \tf{\land}[\LogCL](x,y)$،
+    \item\ollabel{prop:lor} $\tf{\lor}[\Log L](x,y) = \tf{\lor}[\LogCL](x,y)$،
+    \item\ollabel{prop:lif} $\tf{\lif}[\Log L](x,y) = \tf{\lif}[\LogCL](x,y)$،
+    إذا كان~$x, y \in \{\True, \False\}$.
+  \end{enumerate}
+  عندئذ، لكل تقييم~$\pAssign v$ في~$V$ يحقق
+  $\pAssign v(p) \in \{\True,\False\}$ لكل~$p$ يرد في~$!A$، يكون
+  $\pValue v[\Log L](!A) = \pValue v[\LogCL](!A)$.
+\end{prop}
+
+\begin{proof}
+  بالاستقراء على~$!A$.
+  \begin{enumerate}
+  \item إذا كانت~$!A \ident p$ ذرية، كان
+  $\pValue v[\Log L](!A) = \pAssign v(p) = \pValue
+  v[\LogCL](!A)$.
+  \item إذا كان~$!A \ident \lnot B$، كان
+  \begin{align*}
+    \pValue v[\Log L](!A) & = \tf{\lnot}[\Log L](\pValue v[\Log L](!B)) & &\text{بحسب \olref[val]{defn:pValue}}\\
+    & = \tf{\lnot}[\Log L](\pValue v[\LogCL](!B)) && \text{بفرض الاستقراء}\\
+    & = \tf{\lnot}[\LogCL](\pValue v[\LogCL](!B))
+&&\text{بحسب الفرض \olref{prop:not}،}\\
+&&&\text{لأن~$\pValue v[\LogCL](!B) \in \{\True, \False\}$،}\\
+& = \pValue v[\LogCL](!A) &&\text{بحسب \olref[val]{defn:pValue}}.
+\end{align*}
+\item إذا كان~$!A \ident (!B \land !C)$، كان
+\begin{align*}
+  \pValue v[\Log L](!A) & = \tf{\land}[\Log L](\pValue v[\Log L](!B), \pValue v[\Log L](!C)) & &\text{بحسب \olref[val]{defn:pValue}}\\
+  & = \tf{\land}[\Log L](\pValue v[\LogCL](!B),\pValue v[\LogCL](!C)) && \text{بفرض الاستقراء}\\
+  & = \tf{\land}[\LogCL](\pValue v[\LogCL](!B),\pValue v[\LogCL](!C))
+&&\text{بحسب الفرض \olref{prop:land}،}\\
+&&&\text{لأن~$\pValue v[\LogCL](!B),\pValue v[\LogCL](!C) \in \{\True, \False\}$،}\\
+& = \pValue v[\LogCL](!A) &&\text{بحسب \olref[val]{defn:pValue}}.
+\end{align*}
+\end{enumerate}
+وحالتا~$!A \ident (!B \lor !C)$ و$!A \ident (!B \lif !C)$
+مماثلتان.
+\end{proof}
+
+\begin{cor}
+  إذا حقق منطق متعدد القيم شروط \olref{prop:mvl-cl}، وكان
+  $\True \in V^+$ و$\False \notin V^+$، فإن
+  ${\Entails[\Log L]} \subseteq {\Entails[\LogCL]}$؛ أي إذا كان
+  $\Gamma \Entails[\Log L] !B$، فإن~$\Gamma \Entails[\LogCL] !B$.
+  وبخاصة، كل تحصيل منطقي لـ$\Log L$ تحصيل منطقي كلاسيكي أيضًا.
+\end{cor}
+
+\begin{proof}
+  نثبت المعاكس النقيض. افترض أن~$\Gamma \Entails/[\LogCL] !B$.
+  عندئذ يوجد~!!{valuation}~$\pAssign v\colon \PVar \to
+  \{\True, \False\}$ بحيث~$\pValue v[\LogCL](!A) = \True$ لكل
+  $!A \in \Gamma$، و$\pValue v[\LogCL](!B) = \False$. وبما أن
+  $\True, \False \in V$، يكون~!!{valuation}~$\pAssign v$ أيضًا
+  !!a{valuation} للمنطق~$\Log L$. وبحسب \olref{prop:mvl-cl}، يكون
+  $\pValue v[\Log L](!A) = \True$ لكل~$!A \in \Gamma$، و
+  $\pValue v[\Log L](!B) = \False$. وبما أن~$\True \in V^+$ و
+  $\False \notin V^+$، يعني هذا أن~$\pAssign v
+  \Entails[\Log L] \Gamma$ و$\pAssign v \Entails/[\Log L] !B$؛ أي
+  $\Gamma \Entails/[\Log L] !B$.
+\end{proof}
+\end{document}
+

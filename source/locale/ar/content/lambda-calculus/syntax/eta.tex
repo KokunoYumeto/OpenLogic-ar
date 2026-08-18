@@ -1,0 +1,81 @@
+% Part: lambda-calculus
+% Chapter: syntax
+% Section: eta
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{syn}{eta}
+\olsection{تحويل~$\eta$}
+
+توجد علاقة أخرى على حدود~$\lambda$. فقد استعملنا في~\olref[fv]{sec}
+المثال~$\lambd[x][(fx)]$، وهو يقبل وسيطًا ويطبق~$f$ عليه. وبعبارة أخرى،
+إنه الدالة نفسها التي يمثلها~$f$: فكل من~$\lambd[x][(fx)]N$ و$fN$
+يختزل إلى~$fN$. ونستعمل اختزال~$\eta$ (وتمديد~$\eta$) لصوغ هذه الفكرة.
+
+\begin{defn}[تقلّص~$\eta$، $\eredone$]
+  \ollabel{defn:beredone}
+  \emph{تقلّص~$\eta$} ($\eredone$) هو أصغر علاقة متوافقة على الحدود
+  تستوفي الشرط الآتي:
+  \[
+    \lambd[x][M x] \eredone M \text{ بشرط } x \notin \FV{M}
+  \]
+\end{defn}
+
+\begin{defn}[اختزال~$\beta\eta$، $\bered$] \ollabel{defn:bered}
+  \emph{اختزال~$\beta\eta$} ($\bered$) هو أصغر علاقة انعكاسية ومتعدية
+  على الحدود تحتوي~$\bredone$ و$\eredone$، أي إنه يضم قاعدتي الانعكاس
+  والتعدي فضلًا على القاعدتين الآتيتين:
+  \begin{enumerate}
+  \item إذا كان~$M \bredone N$ فإن~$M \bered N$. \ollabel{defn:bered3}
+  \item إذا كان~$M \eredone N$ فإن~$M \bered N$. \ollabel{defn:bered4}
+  \end{enumerate}
+    
+\end{defn}
+
+\begin{defn}
+  نوسع علاقة التكافؤ~$\equal$ بقاعدة تحويل~$\eta$:
+  \[
+  \lambd[x][f x] \equal f
+  \]
+  ونرمز إلى العلاقة الموسعة بـ$\equal[\eta]$.
+\end{defn}
+
+للتكافؤ بحسب~$\eta$ أهمية لأنه مرتبط بامتدادية حدود لامبدا:
+
+\begin{defn}[الامتدادية]
+  نوسع علاقة التكافؤ~$\equal$ بقاعدة~(\ext):
+  \begin{center}
+  إذا كان~$Mx \equal Nx$ فإن~$M \equal N$، بشرط~$x \notin \FV{MN}$.
+  \end{center}
+  ونرمز إلى العلاقة الموسعة بـ$\equal[\ext]$.
+\end{defn}
+
+وبعبارة تقريبية، تقرر القاعدة أن حدين، حين ينظر إليهما بوصفهما دالتين،
+ينبغي أن يعدّا متساويين إذا كان سلوكهما واحدًا عند الوسيط نفسه.
+
+نبرهن الآن أن قاعدة~$\eta$ تعطي الامتدادية بالضبط، ولا تعطي شيئًا زائدًا.
+
+\begin{thm}
+  $M \equal[\ext] N$ إذا وفقط إذا كان~$M \equal[\eta] N$.
+\end{thm}
+
+\begin{proof}
+  نبرهن أولًا أن~$\equal[\eta]$ مغلقة تحت قاعدة الامتدادية. أي إن قاعدة
+  $ext$ لا تضيف شيئًا إلى~$\equal[\eta]$. ومن ثم تحتوي~$\equal[\eta]$
+  العلاقة~$\equal[\ext]$، وإذا كان~$M \equal[\ext] N$ فإن~$M
+  \equal[\eta] N$.
+
+  ولإثبات أن~$\equal[\eta]$ مغلقة تحت~\ext، لاحظ أنه لأي~$M \equal N$
+  مشتق بقاعدة~\ext{}، لدينا~$Mx \equal[\eta] Nx$ مقدمةً. وعندئذ يكون
+  $\lambd[x][Mx] \equal[\eta] \lambd[x][Nx]$ بموجب قاعدة من قواعد
+  $\equal$، ويعطينا تطبيق~$\eta$ على الطرفين~$M \equal[\eta] N$.
+
+  وبالمثل نبرهن أن قاعدة~$\eta$ محتواة في~$\equal[\ext]$. فلأي
+  $\lambd[x][Mx]$ و$M$ يحققان~$x \notin \FV{M}$، لدينا
+  $(\lambd[x][Mx])x \equal[\ext] Mx$، فنحصل على
+  $\lambd[x][Mx] \equal[\ext] M$ بموجب قاعدة~\ext{}.
+\end{proof}
+
+\end{document}

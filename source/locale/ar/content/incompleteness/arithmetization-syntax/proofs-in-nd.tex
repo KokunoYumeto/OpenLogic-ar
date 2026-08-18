@@ -1,0 +1,315 @@
+% Part: incompleteness
+% Chapter: arithmetization-syntax
+% Section: proofs-in-nd
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{art}{pnd}
+\olsection{\usetoken{P}{derivation} في الاستنباط الطبيعي}
+
+\begin{explain}
+لكي نؤرْثِم !!{derivation}s، لا بد أن نمثل !!{derivation}s بأعداد. وبما أن
+!!{derivation}s أشجار من !!{formula}s، يحمل كل استدلال فيها وسمًا أو
+وسمين، فإن التمثيل العودي هو النهج الأوضح: نمثل !!{derivation} بصفّ
+تتكون مركباته من عدد الـ!!{derivation}s الجزئية المباشرة المؤدية إلى
+مقدمات الاستدلال الأخير، وتمثيلات هذه الـ!!{derivation}s الجزئية،
+والـ!!{formula} الختامية، ووسم التفريغ في الاستدلال الأخير، وعدد يدل على
+نوع هذا الاستدلال.
+\end{explain}
+
+\begin{defn}
+  إذا كان $\delta$ !!a{derivation} في الاستنباط الطبيعي، فإن
+  $\Gn{\delta}$ يُعرّف استقرائيًا كما يأتي:
+  \begin{enumerate}
+  \item 
+    إذا كان $\delta$ لا يتألف إلا من الفرض~$!A$، فإن $\Gn{\delta}$
+    هو $\tuple{0,\Gn{!A},n}$. ويكون العدد~$n$ مساويًا لـ$0$ إذا كان
+    الفرض !!{undischarged}، ويساوي الوسم العددي في غير ذلك.
+  \item 
+    إذا انتهى $\delta$ باستدلال ذي صفر أو واحدة أو اثنتين أو ثلاث من
+    المقدمات، فإن $\Gn{\delta}$ هو
+    \begin{align*}
+      & \tuple{0, \Gn{!A}, n, k}, \\
+      & \tuple{1, \Gn{\delta_1}, \Gn{!A}, n, k}, \\
+      & \tuple{2, \Gn{\delta_1}, \Gn{\delta_2}, \Gn{!A}, n, k}, \text{ أو}\\
+      & \tuple{3, \Gn{\delta_1}, \Gn{\delta_2}, \Gn{\delta_3}, \Gn{!A}, n,
+        k},
+    \end{align*}
+    على الترتيب. وهنا $\delta_1$ و$\delta_2$ و$\delta_3$ هي
+    الـ!!{derivation}s الجزئية المنتهية بمقدمة أو مقدمات الاستدلال الأخير
+    في $\delta$، و$!A$ نتيجة الاستدلال الأخير في~$\delta$، و$n$ وسم
+    التفريغ فيه
+    ($0$ إذا لم يفرّغ الاستدلال أي فروض)، ويعطي الجدول الآتي قيمة~$k$
+    بحسب القاعدة المستعملة في الاستدلال الأخير.
+  
+    \begin{tabular}{lccccccc}
+      \text{القاعدة:} & \Intro{\land} & \Elim{\land} & \Intro{\lor} & \Elim{\lor} \\
+      $k$: & 1 & 2 & 3 & 4  \\[1.5ex]
+      \text{القاعدة:} &  \Intro{\lif} & \Elim{\lif} & \Intro{\lnot} & \Elim{\lnot} \\
+      $k$: & 5 & 6 & 7 & 8 \\[1.5ex]
+      \text{القاعدة:}  &  \FalseInt & \FalseCl & \Intro{\lforall} & \Elim{\lforall} \\
+      $k$: & 9 & 10 & 11 & 12 \\[1.5ex]
+      \text{القاعدة:} & \Intro{\lexists} & \Elim{\lexists} & \Intro{\eq} & \Elim{\eq} \\
+      $k$: & 13 & 14 & 15 & 16 
+    \end{tabular}
+  \end{enumerate}
+\end{defn}
+
+\begin{ex}
+  تأمل !!{derivation} بسيطًا جدًا
+  \begin{prooftree}
+    \AxiomC{$\Discharge{!A \land !B}{1}$}
+    \RightLabel{\Elim{\land}}
+    \UnaryInfC{$!A$}
+    \DischargeRule{\Intro{\lif}}{1}
+    \UnaryInfC{$(!A \land !B) \lif !A$}
+  \end{prooftree}
+  يكون عدد غودل للفرض $d_0=\tuple{0,\Gn{!A \land !B},1}$. ويكون عدد
+  غودل للـ!!{derivation} المنتهي بنتيجة~$\Elim{\land}$ هو
+  $d_1=\tuple{1,d_0,\Gn{!A},0,2}$ ($1$ لأن $\Elim{\land}$ لها مقدمة
+  واحدة، ثم عدد غودل للنتيجة~$!A$، و$0$ لأنه لا يُفرّغ أي فرض، و$2$
+  هو العدد الذي يرمّز $\Elim{\land}$). ومن ثم يكون عدد غودل
+  للـ!!{derivation} بأكمله
+  $\tuple{1,d_1,\Gn{((!A \land !B) \lif !A)},1,5}$، أي
+  \[
+  \tuple{1, \tuple{1, \tuple{0, \Gn{(!A \land !B)}, 1}, \Gn{!A}, 0, 2},
+    \Gn{((!A \land !B) \lif !A)}, 1, 5}.
+  \]
+\end{ex}
+
+\begin{explain}
+بعد تثبيت تمثيل لـ!!{derivation}s، علينا أيضًا أن نبيّن إمكان التعامل
+عوديًا بدائيًا مع أعداد غودل لهذه الـ!!{derivation}s، والتعبير عن
+خصائصها وعلاقاتها الأساسية. بعض العمليات بسيطة؛ فمثلًا إذا أُعطينا عدد
+غودل~$d$ لـ!!a{derivation}، فإن
+$\fn{EndFmla}(d)=(d)_{(d)_0+1}$ يعطينا عدد غودل للـ!!{formula} الختامية،
+وتعطينا $\fn{DischargeLabel}(d)=(d)_{(d)_0+2}$ وسم التفريغ، وتعطينا
+$\fn{LastRule}(d)=(d)_{(d)_0+3}$ العدد الدال على نوع الاستدلال الأخير.
+وبعض العمليات أصعب بكثير. وسنرسم على الأقل كيفية معالجتها. والغاية أن
+نثبت أن علاقة «$\delta$ !!a{derivation} لـ$!A$ من $\Gamma$» علاقة
+عودية بدائية في عددي غودل لـ$\delta$ و$!A$.
+\end{explain}
+
+\begin{prop}
+  العلاقات الآتية عودية بدائية:
+  \begin{enumerate}
+  \item ترد $!A$ فرضًا في~$\delta$ بالوسم~$n$.
+  \item جميع الفروض في $\delta$ ذات الوسم~$n$ من الصورة~$!A$ (أي
+    يمكننا !!{discharge} الفرض~$!A$ باستعمال الوسم~$n$ في~$\delta$).
+  \end{enumerate}
+\end{prop}
+
+\begin{proof}
+  علينا أن نثبت أن العلاقات المناظرة بين أعداد غودل لـ!!{formula}s
+  وأعداد غودل لـ!!{derivation}s عودية بدائية.
+  \begin{enumerate}
+  \item نريد أن نثبت أن $\fn{Assum}(x,d,n)$ عودية بدائية؛ وهي تصدق
+    إذا كان $x$ عدد غودل لفرض في !!{derivation} ذي عدد غودل~$d$
+    والموسوم بـ$n$. وهذا هو الحال إذا كان الـ!!{derivation} ذو عدد غودل
+    $\tuple{0,x,n}$ !!{derivation}ًا جزئيًا من~$d$. ولاحظ أن طريقتنا في
+    ترميز !!{derivation}s حالة خاصة من ترميز الأشجار المعروض في
+    \olref[cmp][rec][tre]{sec}؛ ولذلك تعطينا الدالة العودية البدائية
+    $\fn{SubtreeSeq}(d)$ متتالية أعداد غودل لجميع الـ!!{derivation}s
+    الجزئية من~$d$ (طولها لا يتجاوز $d$). ومن ثم يمكننا أن نعرّف
+    \[
+    \fn{Assum}(x, d, n) \defiff \bexists{i<d}{(\fn{SubtreeSeq}(d))_i =
+      \tuple{0, x, n}}.
+    \]
+  \item نريد أن نثبت أن $\fn{Discharge}(x,d,n)$ عودية بدائية؛ وهي
+    تصدق إذا كانت جميع الفروض ذات الوسم~$n$ في !!{derivation} ذي عدد
+    غودل~$d$ هي !!{formula} ذات عدد غودل~$x$. وهذه العلاقة تصدق إذا
+    وفقط إذا
+    $\bforall{y<d}{(\fn{Assum}(y,d,n) \lif y=x)}$.
+  \end{enumerate}
+\end{proof}
+
+\begin{prop}
+  \ollabel{prop:followsby}
+  الخاصية $\fn{Correct}(d)$، التي تصدق إذا وفقط إذا كان الاستدلال
+  الأخير في !!{derivation}~$\delta$ ذي عدد غودل~$d$ صحيحًا، عودية
+  بدائية.
+\end{prop}
+
+\begin{proof}
+  علينا هنا أن نثبت، لكل قاعدة استدلال~$R$، أن العلاقة
+  $\fn{FollowsBy}_R(d)$ عودية بدائية؛ وتصدق $\fn{FollowsBy}_R(d)$
+  إذا وفقط إذا كان $d$
+  عدد غودل لـ!!{derivation}~$\delta$، وكانت الـ!!{formula} الختامية
+  لـ$\delta$ تنتج من الـ!!{derivation}s الجزئية المباشرة لـ$\delta$
+  بتطبيق صحيح للقاعدة~$R$.
+
+  ومن الحالات البسيطة قاعدة $\Intro{\land}$. فإذا انتهى $\delta$
+  باستدلال صحيح وفق $\Intro{\land}$، كان شكلها كما يأتي:
+  \begin{prooftree}
+    \AxiomC{}
+    \RightLabel{$\delta_1$}
+    \DeduceC{$!A$}
+    
+    \AxiomC{}
+    \RightLabel{$\delta_2$}
+    \DeduceC{$!B$}
+
+    \RightLabel{\Intro\land}
+    \BinaryInfC{$!A \land !B$}
+  \end{prooftree}
+  عندئذ يكون عدد غودل~$d$ لـ$\delta$ هو
+  $\tuple{2,d_1,d_2,\Gn{(!A \land !B)},0,k}$، حيث
+  $\fn{EndFmla}(d_1)=\Gn{!A}$ و$\fn{EndFmla}(d_2)=\Gn{!B}$ و$n=0$
+  و$k=1$. ولذلك يمكننا تعريف $\fn{FollowsBy}_{\Intro\land}(d)$ بالصيغة
+  \begin{multline*}
+    (d)_0 = 2 \land \fn{DischargeLabel}(d) = 0 \land \fn{LastRule}(d) = 1 \land {}\\
+    \fn{EndFmla}(d) = {}\\
+    \Gn{(} \concat \fn{EndFmla}((d)_1) \concat \Gn{\land}
+    \concat \fn{EndFmla}((d)_2) \concat \Gn{)}.
+  \end{multline*}
+
+  ومثال بسيط آخر هو قاعدة $\Intro\eq$. فليس لها مقدمات، ومن ثم
+  $(d)_0=0$ كما في الفروض، وليس لها أيضًا وسم تفريغ، أي $n=0$. لكن
+  يجب أن تكون $!A$ من الصورة $\eq[t][t]$ لحد مغلق~$t$. وفي هذه الحالة
+  يكون التعريف العودي البدائي هو
+  \begin{multline*}
+    (d)_0 = 0 \land \fn{DischargeLabel}(d) = 0 \land {}\\
+    \bexists{t<d}{(\fn{ClTerm}(t) \land 
+      \fn{EndFmla}(d) = {}\\
+      \Gn{{\eq}(} \concat t \concat \Gn{,} \concat t \concat \Gn{)})}.
+  \end{multline*}
+
+  ولمثال أعقد، تصدق $\fn{FollowsBy}_{\Intro{\lif}}(d)$ إذا وفقط إذا
+  كانت الـ!!{formula} الختامية لـ$\delta$ من الصورة $(!A\lif !B)$، وكانت
+  الـ!!{formula} الختامية لـ$\delta_1$ هي~$!B$، وكان كل فرض في~$\delta$
+  موسوم بـ$n$ من الصورة~$!A$. ويمكننا التعبير عن ذلك عوديًا بدائيًا
+  بالصيغة
+  \begin{multline*}
+    (d)_0 = 1 \land {}\\
+    \bexists{a<d}{(\fn{Discharge}(a, (d)_1, \fn{DischargeLabel}(d)) \land {}}\\
+      \fn{EndFmla}(d) = (\Gn{(} \concat a \concat \Gn{\lif}
+      \concat \fn{EndFmla}((d)_1) \concat \Gn{)}))
+  \end{multline*}
+  (اعتبر $a$ عدد غودل لـ$!A$.)
+
+  ولمثال آخر، تأمل $\Intro{\lexists}$. يكون الاستدلال الأخير في
+  $\delta$ صحيحًا هنا إذا وفقط إذا وُجدت !!a{formula}~$!A$، وحد
+  مغلق~$t$، و!!a{variable}~$x$، بحيث تكون $\Subst{!A}{t}{x}$ هي
+  الـ!!{formula} الختامية لـ!!{derivation}~$\delta_1$، وتكون
+  $\lexists[x][!A]$ نتيجة الاستدلال الأخير. ومن ثم تصدق
+  $\fn{FollowsBy}_{\Intro{\lexists}}(d)$ إذا وفقط إذا
+  \begin{multline*}
+    (d)_0 = 1 \land \fn{DischargeLabel}(d) = 0 \land {} \\
+    \bexists{a < d}{\bexists{x<d}{\bexists{t<d}{
+          (\fn{ClTerm}(t) \land \fn{Var}(x)  \land {}}}}\\
+    \fn{Subst}(a,t,x) = \fn{EndFmla}((d)_1) \land
+    \fn{EndFmla}(d) = (\Gn{\lexists} \concat x \concat a)).
+  \end{multline*}
+
+  ثم نعرّف $\fn{Correct}(d)$ بالصيغة
+  \begin{multline*}
+    \fn{Sent}(\fn{EndFmla}(d)) \land [ {}\\
+    (\fn{LastRule}(d) = 1 \land
+    \fn{FollowsBy}_{\Intro\land}(d)) \lor \dots \lor {}\\
+    (\fn{LastRule}(d) = 16 \land \fn{FollowsBy}_{\Elim\eq}(d)) \lor {}\\
+    \bexists{n<d}{\bexists{x<d}{(d = \tuple{0, x, n})}}].
+  \end{multline*}
+  يضمن السطر الأول أن الـ!!{formula} الختامية لـ$d$ جملة. ويغطي السطر
+  الأخير الحالة التي لا يكون فيها $d$ إلا فرضًا.
+\end{proof}
+
+\begin{prob}
+  عرّف الخصائص الآتية كما في
+  \olref[inc][art][pnd]{prop:followsby}:
+  \begin{enumerate}
+  \item $\fn{FollowsBy}_{\Elim{\lif}}(d)$,
+  \item $\fn{FollowsBy}_{\Elim{\eq}}(d)$,
+  \item $\fn{FollowsBy}_{\Elim{\lor}}(d)$,
+  \item $\fn{FollowsBy}_{\Intro{\lforall}}(d)$.
+  \end{enumerate}
+  وفي الخاصية الأخيرة سيلزمك أيضًا أن تبيّن إمكان الاختبار عوديًا
+  بدائيًا مما إذا كان الاستدلال الأخير في !!{derivation} ذي عدد
+  غودل~$d$ يحقق شرط المتغير المميز؛ أي إن المتغير المميز~$a$ في
+  استدلال $\Intro{\lforall}$ لا يرد في الـ!!{formula} الختامية لـ$d$ ولا
+  في فرض مفتوح فيها. ويجوز لك استعمال المحمول العودي البدائي
+  $\fn{OpenAssum}$ من \olref[inc][art][pnd]{prop:openassum} لهذا الغرض.
+\end{prob}
+
+\begin{prop}
+  \ollabel{prop:deriv}
+  العلاقة $\fn{Deriv}(d)$، التي تصدق إذا كان $d$ عدد غودل
+  لـ!!{derivation} صحيح~$\delta$، عودية بدائية.
+\end{prop}
+
+\begin{proof}
+  يكون !!^a{derivation}~$\delta$ صحيحًا إذا كان كل استدلال فيه تطبيقًا
+  صحيحًا لقاعدة، أي إذا انتهت كل الـ!!{derivation}s الجزئية فيه باستدلال
+  صحيح. ومن ثم تصدق $\fn{Deriv}(d)$ إذا وفقط إذا
+  \[
+  \bforall{i<\len{\fn{SubtreeSeq}(d)}}{\fn{Correct}((\fn{SubtreeSeq}(d))_i)}
+  \]
+\end{proof}
+
+\begin{prop}
+  \ollabel{prop:openassum} العلاقة $\fn{OpenAssum}(z,d)$، التي تصدق
+  إذا كان $z$ عدد غودل لفرض~$!A$ في حالة !!a{undischarged} ضمن
+  الـ!!{derivation}~$\delta$ ذي عدد غودل~$d$، عودية بدائية.
+\end{prop}
+
+\begin{proof}
+  يكون ورود فرض ما في حالة !!{discharged} إذا ورد بالوسم~$n$ في
+  !!{derivation} جزئي من~$\delta$ ينتهي بقاعدة وسم تفريغها~$n$. ولذلك
+  تكون $!A$ فرضًا في حالة !!a{undischarged} في~$\delta$ إذا كان أحد وروداتها
+  على الأقل بلا !!{discharged} في~$\delta$. ويجب أن نتوخى الحذر: فقد تشتمل
+  $\delta$ على ورودات لـ$!A$ بعضها في حالة !!{discharged} وبعضها
+  في حالة !!{undischarged}.
+
+  تأمل متتالية $\delta_0$، \dots، $\delta_k$ حيث $\delta_0=\delta$،
+  و$\delta_k$ هي الفرض $\Discharge{!A}{n}$ (لبعض~$n$)، وتكون
+  $\delta_{i+1}$ !!{derivation} جزئي مباشر من~$\delta_i$. فإذا وُجدت
+  متتالية كهذه لا تنتهي فيها أي $\delta_i$ باستدلال وسم تفريغه~$n$،
+  كانت $!A$ فرضًا في حالة !!a{undischarged} في~$\delta$.
+
+  تزودنا الدالة العودية البدائية $\fn{SubtreeSeq}(d)$ بمتتالية أعداد
+  غودل لجميع الـ!!{derivation}s الجزئية من~$\delta$. وكل متتالية لأعداد
+  غودل لـ!!{derivation}s جزئية من~$\delta$ هي متتالية جزئية منها. وكون
+  متتاليةٍ ما متتاليةً جزئية علاقة عودية بدائية: تصدق
+  $\fn{Subseq}(s,s')$ إذا وفقط إذا
+  $\bforall{i<\len{s}}{\lexists[j<\len{s'}][(s)_i=(s')_j]}$. وكذلك
+  كون !!{derivation} ما جزئيًا مباشرًا: تصدق
+  $\fn{Subderiv}(d,d')$ إذا وفقط إذا
+  $\bexists{j<(d')_0}{d=(d')_{j+1}}$. ولذلك يمكننا تعريف
+  $\fn{OpenAssum}(z,d)$ بالصيغة
+  \begin{multline*}
+    \bexists{s\leq\fn{SubtreeSeq}(d)}{(\fn{Subseq}(s, \fn{SubtreeSeq}(d))
+      \land (s)_0 = d \land {}} \\
+    \bexists{n<d}{((s)_{\len{s} \tsub 1} = \tuple{0, z, n} \land {}}\\
+      \bforall{i<(\len{s} \tsub 1)}{(\fn{Subderiv}((s)_{i+1}, (s)_i) \land {}}\\
+      \fn{DischargeLabel}((s)_i) \neq n))).
+  \end{multline*}
+\end{proof}
+
+\begin{prop}
+  \ollabel{prop:prf-prim-rec}
+  افترض أن $\Gamma$ مجموعة عودية بدائية من !!{sentence}s. عندئذ تكون
+  العلاقة $\Prf[\Gamma](x,y)$، التي تعبّر عن أن «$x$ شفرة
+  !!a{derivation}~$\delta$ لـ$!A$ من فروض في حالة !!{undischarged} تنتمي إلى
+  $\Gamma$، وأن $y$ عدد غودل لـ$!A$»، عودية بدائية.
+\end{prop}
+
+\begin{proof}
+  افترض أن المحمول العودي البدائي~$R_\Gamma(y)$ يعبّر عن
+  «$y\in\Gamma$». علينا أن نثبت أن $\Prf[\Gamma](x,y)$، التي تصدق إذا
+  وفقط إذا كان $y$ عدد غودل لجملة~$!A$، وكان $x$ شفرة !!{derivation}
+  بالاستنباط الطبيعي، تكون الـ!!{formula} الختامية فيه~$!A$، وتكون جميع
+  فروضه في حالة !!{undischarged} ومنتميةً إلى~$\Gamma$، عودية بدائية.
+
+  وبحسب \olref{prop:deriv}، تكون الخاصية $\fn{Deriv}(x)$، التي تصدق
+  إذا وفقط إذا كان $x$ عدد غودل لـ!!{derivation} صحيح~$\delta$ في
+  الاستنباط الطبيعي، عودية بدائية. وهكذا يمكننا تعريف
+  $\Prf[\Gamma](x,y)$ بالصيغة
+  \begin{align*}
+    \Prf[\Gamma](x, y) \defiff {}
+    & \fn{Deriv}(x) \land \fn{EndFmla}(x) = y \land {} \\
+    & \bforall{z < x}{(\fn{OpenAssum}(z, x) \lif R_\Gamma(z))}.
+  \end{align*}
+\end{proof}
+
+\end{document}

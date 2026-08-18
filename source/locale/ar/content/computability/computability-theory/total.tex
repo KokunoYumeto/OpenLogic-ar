@@ -1,0 +1,58 @@
+% Part: computability
+% Chapter: computability-theory
+% Section: total
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{thy}{tot}
+\olsection{عدم قابلية تقرير الكلية}
+
+لننظر في مثال آخر على استعمال مبرهنة $s$-$m$-$n$ لإثبات أن شيئًا ما
+غير قابل للحساب. ولتكن $\fn{Tot}$ مجموعة فهارس الدوال الكلية القابلة
+للحساب، أي
+\[
+\fn{Tot} = \Setabs{x}{\text{لكل $y$، تكون $\cfind{x}(y)\fdefined$}}.
+\]
+
+\begin{prop}
+\ollabel{prop:total}
+المجموعة $\fn{Tot}$ غير قابلة للحساب.
+\end{prop}
+
+\begin{proof}
+يكفي، لإثبات أن $\fn{Tot}$ غير قابلة للحساب، أن نبين أن $K$ قابلة
+للاختزال إليها. عرّف $h(x,y)$ كما يأتي:
+\[
+h(x,y) \simeq
+\begin{cases}
+0 & \text{إذا كان $x \in K$} \\
+\fundefined & \text{خلاف ذلك.}
+\end{cases}
+\]
+لاحظ أن $h(x,y)$ لا تعتمد على $y$ إطلاقًا. وليس من الصعب أن نرى أن
+$h$ جزئية قابلة للحساب: فعند الدخلين $x,y$ نحسب~$h$ بمحاكاة
+الدالة~$\cfind{x}$ أولًا عند الدخل~$x$؛ فإذا توقفت هذه العملية أخرجت
+$h(x,y)$ القيمة~$0$ وتوقفت. ومن ثم فإن $h(x,y)$ ليست إلا
+$\Zero(\umin{s}{T(x,x,s)})$، حيث $\Zero$ دالة الصفر الثابتة.
+
+وباستعمال مبرهنة $s$-$m$-$n$ توجد دالة عودية بدائية~$k(x)$ بحيث، لكل
+$x$ و~$y$،
+\[
+\cfind{k(x)}(y) \simeq
+\begin{cases}
+0 & \text{إذا كان $x \in K$} \\
+\fundefined & \text{خلاف ذلك.}
+\end{cases}
+\]
+إذن تكون $\cfind{k(x)}$ كلية إذا كان $x \in K$، وتكون غير معرّفة
+خلاف ذلك. وبذلك تكون $k$ اختزالًا من $K$ إلى~$\fn{Tot}$.
+\end{proof}
+
+\begin{digress}
+يتبين أن $\fn{Tot}$ ليست حتى قابلة للتعداد حسابيًا؛ إذ يقع تعقيدها في
+مرتبة أعلى من «الهرم الحسابي». لكننا لن نعنى هنا بهذه النتيجة الأقوى.
+\end{digress}
+
+\end{document}

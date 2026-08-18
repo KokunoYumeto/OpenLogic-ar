@@ -1,0 +1,156 @@
+% Part: normal-modal-logic
+% Chapter: completeness
+% Section: truth-lemma
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{com}{tru}
+
+\olsection{لمّة الصدق}
+
+عُرّف النموذج القانوني~$\mModel{M^\Sigma}$ بحيث يكون
+$\mSat{M^\Sigma}{!A}[\Delta]$ إذا وفقط إذا كان~$!A \in \Delta$.
+ويؤدي تعريف~$V^\Sigma$ إلى ذلك مباشرة في ال!!{propositional
+variable}s.
+لكن علينا التحقق من صدق التكافؤ لجميع ال!!{formula}s، ونفعل ذلك
+بالاستقراء. وتتضمن خطوة الاستقراء إثبات التكافؤ لل!!{formula}s التي
+تدخل فيها المؤثرات القضوية (حيث نحتاج إلى
+\olref[ccs]{prop:ccs-properties}) والمؤثرات الجهية (حيث نستعمل نتائج
+\olref[mod]{sec}).
+
+\begin{prop}[لمّة الصدق]
+  \ollabel{prop:truthlemma}
+  لكل~$\Delta \in W^\Sigma$ ولكل !!{formula}~$!A$،
+  $\mSat{M^\Sigma}{!A}[\Delta]$ إذا وفقط إذا كان~$!A \in \Delta$.
+\end{prop}
+
+\begin{proof}
+  بالاستقراء على~$!A$.
+  \begin{enumerate}
+    \tagitem{prvFalse}{\indcase{!A}{\lfalse}{لدينا
+        $\mSat/{M^\Sigma}{\lfalse}[\Delta]$ بحسب
+        \olref[syn][trw]{defn:mmodels}، و$\lfalse \notin \Delta$ بحسب
+        \olref[ccs]{prop:ccs-properties}\olref[ccs]{prop:ccs-lfalse}.}}{}
+
+    \tagitem{prvTrue}{\indcase{!A}{\ltrue}{لدينا
+        $\mSat{M^\Sigma}{\ltrue}[\Delta]$ بحسب
+        \olref[syn][trw]{defn:mmodels}، و$\ltrue \in \Delta$ بحسب
+        \olref[ccs]{prop:ccs-properties}\olref[ccs]{prop:ccs-ltrue}.}}{}
+
+    \item \indcase{!A}{p}{لدينا~$\mSat{M^\Sigma}{p}[\Delta]$ إذا وفقط
+      إذا كان~$\Delta \in V^\Sigma(p)$، بحسب
+      \olref[syn][trw]{defn:mmodels}. كذلك،~$\Delta \in V^\Sigma(p)$
+      إذا وفقط إذا كان~$p \in \Delta$، بحسب تعريف~$V^\Sigma$.}
+
+    \tagitem{prvNot}{\indcase{!A}{\lnot !B}{%
+        \iftag{probNot}{تمرين.}{لدينا
+          $\mSat{M^\Sigma}{\lnot !B}[\Delta]$ إذا وفقط إذا كان
+          $\mSat/{M^\Sigma}{!B}[\Delta]$
+          (\olref[syn][trw]{defn:mmodels})، إذا وفقط إذا كان
+          $!B \notin \Delta$ (بفرض الاستقراء)، إذا وفقط إذا كان
+          $\lnot !B \in \Delta$ (بحسب
+          \olref[ccs]{prop:ccs-properties}\olref[ccs]{prop:ccs-lnot}).}}}{}
+
+    \tagitem{prvAnd}{\indcase{!A}{!B \land !C}{%
+        \iftag{probAnd}{تمرين.}{لدينا
+          $\mSat{M^\Sigma}{!B \land !C}[\Delta]$ إذا وفقط إذا كان
+          $\mSat{M^\Sigma}{!B}[\Delta]$ و
+          $\mSat{M^\Sigma}{!C}[\Delta]$ (بحسب
+          \olref[syn][trw]{defn:mmodels})، إذا وفقط إذا كان
+          $!B \in \Delta$ و$!C \in \Delta$ (بفرض الاستقراء)، إذا
+          وفقط إذا كان~$!B \land !C \in \Delta$ (بحسب
+          \olref[ccs]{prop:ccs-properties}\olref[ccs]{prop:ccs-land}).}}}{}
+
+    \tagitem{prvOr}{\indcase{!A}{!B \lor !C}{%
+        \iftag{probOr}{تمرين.}{لدينا
+          $\mSat{M^\Sigma}{!B \lor !C}[\Delta]$ إذا وفقط إذا كان
+          $\mSat{M^\Sigma}{!B}[\Delta]$ أو
+          $\mSat{M^\Sigma}{!C}[\Delta]$ (بحسب
+          \olref[syn][trw]{defn:mmodels})، إذا وفقط إذا كان
+          $!B \in \Delta$ أو~$!C \in \Delta$ (بفرض الاستقراء)، إذا
+          وفقط إذا كان~$!B \lor !C \in \Delta$ (بحسب
+          \olref[ccs]{prop:ccs-properties}\olref[ccs]{prop:ccs-lor}).}}}{}
+
+    \tagitem{prvIf}{\indcase{!A}{!B \lif !C}{%
+        \iftag{probIf}{تمرين.}{لدينا
+          $\mSat{M^\Sigma}{!B \lif !C}[\Delta]$ إذا وفقط إذا كان
+          $\mSat/{M^\Sigma}{!B}[\Delta]$ أو
+          $\mSat{M^\Sigma}{!C}[\Delta]$ (بحسب
+          \olref[syn][trw]{defn:mmodels})، إذا وفقط إذا كان
+          $!B \notin \Delta$ أو~$!C \in \Delta$ (بفرض الاستقراء)، إذا
+          وفقط إذا كان~$!B \lif !C \in \Delta$ (بحسب
+          \olref[ccs]{prop:ccs-properties}\olref[ccs]{prop:ccs-lif}).}}}{}
+
+    \tagitem{prvIff}{\indcase{!A}{!B \liff !C}{%
+        \iftag{probIff}{تمرين.}{لدينا
+          $\mSat{M^\Sigma}{!B \liff !C}[\Delta]$ إذا وفقط إذا كان إما
+          $\mSat{M^\Sigma}{!B}[\Delta]$ و
+          $\mSat{M^\Sigma}{!C}[\Delta]$، أو
+          $\mSat/{M^\Sigma}{!B}[\Delta]$ و
+          $\mSat/{M^\Sigma}{!C}[\Delta]$ (بحسب
+          \olref[syn][trw]{defn:mmodels})، إذا وفقط إذا كان إما
+          $!B \in \Delta$ و$!C \in \Delta$، أو~$!B \notin \Delta$ و
+          $!C \notin \Delta$ (بفرض الاستقراء)، إذا وفقط إذا كان
+          $!B \liff !C \in \Delta$ (بحسب
+          \olref[ccs]{prop:ccs-properties}\olref[ccs]{prop:ccs-liff}).}}}{}
+
+    \tagitem{prvBox}{\indcase{!A}{\Box !B}{%
+        \iftag{probBox}{تمرين.}{افترض أولًا أن
+          $\mSat{M^\Sigma}{\Box !B}[\Delta]$. بحسب
+          \olref[syn][trw]{defn:mmodels}، يكون
+          $\mSat{M^\Sigma}{!B}[\Delta']$ لكل~$\Delta'$ بحيث
+          $R^\Sigma \Delta\Delta'$. وبفرض الاستقراء، يكون
+          $!B \in \Delta'$ لكل~$\Delta'$ بحيث
+          $R^\Sigma \Delta\Delta'$. وبحسب تعريف~$R^\Sigma$، يكون
+          $!B \in \Delta'$ لكل~$\Delta'$ بحيث
+          $\Box^{-1}\Delta \subseteq \Delta'$. وبحسب
+          \olref[mod]{prop:box}، يكون~$\Box !B \in \Delta$.
+
+          والآن افترض~$\Box !B \in \Delta$. لتكن~$\Delta' \in
+          W^\Sigma$ بحيث~$R^\Sigma \Delta\Delta'$، أي
+          $\Box^{-1}\Delta \subseteq \Delta'$. ولما كان
+          $\Box !B \in \Delta$، كان~$!B \in \Box^{-1}\Delta$، ومن
+          ثم~$!B \in \Delta'$. وبفرض الاستقراء،
+          $\mSat{M^\Sigma}{!B}[\Delta']$. ولأن~$\Delta'$ اعتباطية بين
+          ما يحقق~$R^\Sigma \Delta\Delta'$، يكون، لكل~$\Delta' \in
+          W^\Sigma$ بحيث~$R^\Sigma \Delta\Delta'$،
+          $\mSat{M^\Sigma}{!B}[\Delta']$. وبحسب
+          \olref[syn][trw]{defn:mmodels}،
+          $\mSat{M^\Sigma}{\Box !B}[\Delta]$.}}}{}
+
+    \tagitem{prvDiamond}{\indcase{!A}{\Diamond !B}{%
+        \iftag{probDiamond}{تمرين.}{افترض أولًا أن
+          $\mSat{M^\Sigma}{\Diamond !B}[\Delta]$. بحسب
+          \olref[syn][trw]{defn:mmodels}، يوجد~$\Delta'$ يحقق
+          $R^\Sigma \Delta\Delta'$ و
+          $\mSat{M^\Sigma}{!B}[\Delta']$. وبفرض الاستقراء، يوجد
+          $\Delta'$ يحقق~$R^\Sigma \Delta\Delta'$ و~$!B \in \Delta'$.
+          وبحسب تعريف~$R^\Sigma$،\iftag{prvBox}{ يوجد~$\Delta'$ بحيث
+            $\Box^{-1}\Delta \subseteq \Delta'$ و~$!B \in \Delta'$.
+            وبحسب~\olref[mod]{prop:diamond}،}{} يوجد~$\Delta'$ بحيث
+          $\Diamond \Delta' \subseteq \Delta$ و~$!B \in \Delta'$.
+          ولما كان~$!B \in \Delta'$، كان
+          $\Diamond !B \in \Diamond\Delta'$، ومن ثم
+          $\Diamond !B \in \Delta$.
+
+          والآن افترض~$\Diamond !B \in \Delta$. بحسب
+          \olref[mod]{prop:diamond}، توجد مجموعة $\Sigma$-متسقة تامة
+          $\Delta' \in W^\Sigma$ بحيث~$\Diamond\Delta' \subseteq
+          \Delta$ و~$!B \in \Delta'$.\iftag{prvBox}{ وبحسب
+            \olref[mod]{lem:box-iff-diamond}، توجد~$\Delta' \in
+            W^\Sigma$ بحيث~$\Box^{-1}\Delta \subseteq \Delta'$ و
+            $!B \in \Delta'$.}{} وبحسب تعريف~$R^\Sigma$، يتحقق
+          $R^\Sigma \Delta\Delta'$؛ ومن ثم توجد~$\Delta' \in W^\Sigma$
+          بحيث~$R^\Sigma \Delta\Delta'$ و~$!B \in \Delta'$. وبحسب
+          \olref[syn][trw]{defn:mmodels}،
+          $\mSat{M^\Sigma}{\Diamond !B}[\Delta]$.}}}{}
+  \end{enumerate}
+\end{proof}
+
+\begin{probtag}{probFalse,probTrue,probNot,probAnd,probOr,probIf,probIff,probBox,probDiamond}
+  أكمل برهان~\olref[nml][com][tru]{prop:truthlemma}.
+\end{probtag}
+
+\end{document}

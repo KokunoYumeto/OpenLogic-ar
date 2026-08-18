@@ -1,0 +1,93 @@
+% part: intuitionistic-logic
+% chapter: propositions-as-types
+% section: terms-to-proofs
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{pty}{tp}
+
+\olsection{استعادة \usetoken{P}{derivation} من حدود البرهان}
+
+لننظر الآن في الاتجاه الآخر: ترجمة حد برهان~$N$ صحيح وقابل للتنميط إلى
+!!a{proof} في~\Log{N2i}. ولا يمكن ذلك عمومًا إلا بالنسبة إلى سياق يحتوي
+زوجًا~$x:!A$ لكل متغير~$x$ يقع حرًا في حد البرهان المعطى؛ أما الحد الخام
+غير القابل للتنميط فلا يرمّز برهانًا صحيحًا. ولنبدأ بمثال لا متغيرات حرة
+فيه، هو الحد
+\[
+\lambd[\typeof{x}{!A \land
+  !B}][\pair{\proj{2}{x}}{\proj{1}{x}}].
+\]
+إنه من الصورة~$\lambd[\typeof{x}{!A\land !B}][N_1]$. ولأن القاعدة الوحيدة
+في~\Log{tN2i} التي تنتج حدًا من هذه الصورة هي~\Intro{\lif}، نعرف أن
+!!{proof} الذي يرمّزه~$N$ لا بد أن ينتهي بـ~\Intro{\lif}؛ أي إنه ينتهي
+هكذا:
+  \[
+  \Axiom$x : !A\land !B \fCenter \pair{\proj{2}{x}}{\proj{1}{x}} :
+    !C$
+  \RightLabel{\Intro\lif}
+  \UnaryInf$\fCenter \lambd[\typeof{x}{!A \land
+  !B}][\pair{\proj{2}{x}}{\proj{1}{x}}] : (!A \land !B) \lif !C$
+  \DisplayProof
+  \]
+لا نعرف بعد ما~$!C$، لكننا نعرف أن مقدم الشرط هو~$!A\land !B$، وأن سياق
+المقدمة لا بد أن يحتوي~$x:!A\land !B$.
+
+وقد تحدد الآن حد البرهان المرتبط بالمقدمة، وهو
+$\pair{\proj{2}{x}}{\proj{1}{x}}$. ولا بد أن ينتهي~!!{proof} الذي يرمّزه
+\emph{هو} بـ~\Intro{\land}. وما زلنا لا نعرف ما~$!C$، لكننا نعرف، لكونه
+نتيجة~\Intro{\land}، أنه لا بد أن يكون اقترانًا؛ أي
+$!C\ident(!C_1\land !C_2)$. فنواصل إعادة البناء:
+  \[
+  \Axiom$x : !A\land !B \fCenter \proj{2}{x} : !C_1$
+  \Axiom$x : !A\land !B \fCenter \proj{1}{x} : !C_2$
+  \RightLabel{\Intro\land}
+  \BinaryInf$x : !A\land !B \fCenter \pair{\proj{2}{x}}{\proj{1}{x}} :
+    !C_1 \land !C_2$
+  \RightLabel{\Intro\lif}
+  \UnaryInf$\fCenter \lambd[\typeof{x}{!A \land
+  !B}][\pair{\proj{2}{x}}{\proj{1}{x}}] : (!A \land !B) \lif (!C_1 \land !C_2)$
+  \DisplayProof
+  \]
+يدل حد البرهان~$\pi_2(x)$ على أن المتتالية العليا اليسرى حُصل عليها
+بـ~\Elim{\land}[2]، أي إن المقدمة من الصورة~$!D\land !C_1$. وعلى اليمين
+نستطيع تعيين أن الاستدلال المؤدي إلى~$!C_2$ لا بد أن يكون~\Elim{\land}[1]،
+وأن المقدمة من الصورة~$!C_2\land !E$.
+  \[
+  \Axiom$x : !A\land !B \fCenter x: !D\land !C_1$
+  \RightLabel{\Elim\land[2]}
+  \UnaryInf$x : !A\land !B \fCenter \proj{2}{x} : !C_1$
+  \Axiom$x : !A\land !B \fCenter x: !C_2\land !E$
+  \RightLabel{\Elim\land[1]}
+  \UnaryInf$x : !A\land !B \fCenter \proj{1}{x} : !C_2$
+  \RightLabel{\Intro\land}
+  \BinaryInf$x : !A\land !B \fCenter \pair{\proj{2}{x}}{\proj{1}{x}} :
+    !C_1 \land !C_2$
+  \RightLabel{\Intro\lif}
+  \UnaryInf$\fCenter \lambd[\typeof{x}{!A \land
+  !B}][\pair{\proj{2}{x}}{\proj{1}{x}}] : (!A \land !B) \lif (!C_1 \land !C_2)$
+  \DisplayProof
+  \]
+ولأن حدود البرهان في المتتاليتين العليين صارت متغيرات، نعرف أنهما لا بد أن
+تكونا بديهيتين. وهذا يعيّن~$!C_1$ و$!C_2$ و$!D$ و$!E$: فلا بد أن يكون
+$!D\ident !A$ و$!C_1\ident !B$، وإلا لم تكن المتتالية اليسرى بديهية؛ ولا
+بد أن يكون~$!C_2\ident !A$ و$!E\ident !B$، وإلا لم تكن المتتالية اليمنى
+بديهية. وهكذا استعدنا البرهان كاملًا:
+  \[
+  \Axiom$x : !A\land !B \fCenter x: !A\land !B$
+  \RightLabel{\Elim\land[2]}
+  \UnaryInf$x : !A\land !B \fCenter \proj{2}{x} : !B$
+  \Axiom$x : !A\land !B \fCenter x: !A\land !B$
+  \RightLabel{\Elim\land[1]}
+  \UnaryInf$x : !A\land !B \fCenter \proj{1}{x} : !A$
+  \RightLabel{\Intro\land}
+  \BinaryInf$x : !A\land !B \fCenter \pair{\proj{2}{x}}{\proj{1}{x}} :
+    !B \land !A$
+  \RightLabel{\Intro\lif}
+  \UnaryInf$\fCenter \lambd[\typeof{x}{!A \land
+  !B}][\pair{\proj{2}{x}}{\proj{1}{x}}] : (!A \land !B) \lif (!B \land !A)$
+  \DisplayProof
+  \]
+
+\end{document}

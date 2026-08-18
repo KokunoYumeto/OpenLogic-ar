@@ -1,0 +1,61 @@
+% Part: first-order-logic
+% Chapter: models-theories
+% Section: expressing-props-of-structures
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{mat}{exs}
+
+\olsection{التعبير عن خصائص ال\printtoken{P}{structure}}
+
+\begin{explain}
+كثيرًا ما يكون من المفيد والمهم أن نعبر عن شروط على الدوال والعلاقات،
+أو، بوجه أعم، عن كون الدوال والعلاقات في بنية تحقق تلك الشروط. فنود،
+مثلًا، أن تكون لدينا سبل لتمييز ال!!{structure}s التي «تجسد» ما نريد
+أن «تعنيه» ال!!{predicate}s في لغة ما من ال!!{structure}s التي لا
+تفعل ذلك. ولنا، بالطبع، مطلق الحرية في تحديد ال!!{structure}s التي
+«نقصدها»؛ فيمكننا، مثلًا، أن نشترط أن يكون تأويل
+ال!!{predicate}~$\le$ ترتيبًا، أو أن نقصر اهتمامنا على تأويلات~$\Lang
+L$ التي يتألف مجالها من مجموعات ويؤول فيها $\Obj \in$ بعلاقة «هو
+!!a{element} في». ولكن هل نستطيع فعل ذلك ب!!{sentence}s اللغة؟ أي:
+ما الشروط على !!a{structure}~$\Struct M$ التي نستطيع التعبير عنها
+ب!!a{sentence} (أو ربما بمجموعة من ال!!{sentence}s) في لغة~$\Struct
+M$؟ ثمة شروط لن نستطيع التعبير عنها. فلا توجد، مثلًا، جملة من~$\Lang
+L_A$ لا تصدق في !!a{structure}~$\Struct M$ إلا إذا كان
+$\Domain M = \Nat$. ولا نستطيع التعبير عن أن «المجال لا يحتوي إلا
+على الأعداد الطبيعية». ولكن ربما استطعنا التعبير عن «خصائص بنيوية»
+لل!!{structure}s. فأي خصائص لل!!{structure}s نستطيع التعبير عنها
+ب!!{sentence}s؟ أو، بصياغة أخرى، أي مجموعات من ال!!{structure}s
+نستطيع وصفها بأنها تلك التي تجعل !!a{sentence} (أو مجموعة من
+ال!!{sentence}s) صادقة؟
+\end{explain}
+
+\begin{defn}[نموذج مجموعة]
+لتكن $\Gamma$ مجموعة من ال!!{sentence}s في لغة~$\Lang L$. نقول إن
+!!a{structure}~$\Struct M$ \emph{نموذج لـ}~$\Gamma$ إذا كان
+$\Sat{M}{!A}$ لكل $!A \in \Gamma$.
+\end{defn}
+
+\begin{ex}
+تصدق الجملة $\lforall[x][x \le x]$ في~$\Struct M$ إذا وفقط إذا كانت
+$\Assign{\le}{M}$ علاقة انعكاسية. وتصدق الجملة
+$\lforall[x][\lforall[y][((x \le y \land y \le x) \lif x = y)]]$ في
+~$\Struct M$ إذا وفقط إذا كانت $\Assign{\le}{M}$ مضادة للتناظر.
+وتصدق الجملة $\lforall[x][\lforall[y][\lforall[z][((x \le y \land y \le z)
+      \lif x \le z)]]]$ في~$\Struct M$ إذا وفقط إذا كانت
+$\Assign{\le}{M}$ متعدية. ومن ثم فإن نماذج
+\begin{align*}
+\{\quad &\lforall[x][x \le x], \\
+   & \lforall[x][\lforall[y][((x \le y \land y \le
+    x) \lif x = y)]], \\
+   &\lforall[x][\lforall[y][\lforall[z][((x \le y
+      \land y \le z) \lif x \le z)]]] \quad \}
+\end{align*}
+هي بالضبط البنى التي تكون فيها~$\Assign{\le}{M}$ انعكاسية ومضادة
+للتناظر ومتعدية، أي ترتيبًا جزئيًا. ولذلك يمكننا اتخاذ هذه الجمل
+بديهيات \emph{لنظرية الرتبة الأولى للترتيبات الجزئية}.
+\end{ex}
+
+\end{document}

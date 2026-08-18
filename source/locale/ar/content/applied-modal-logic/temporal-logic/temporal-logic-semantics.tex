@@ -1,0 +1,130 @@
+% Part: applied-modal-logics
+% Chapter: temporal-logic
+% Section: temporal-logic-semantics
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{aml}{tl}{sem}
+
+\olsection{دلالات المنطق الزمني}
+
+\begin{defn}
+تحوي اللغة الأساسية للمنطق الزمني ما يأتي:
+\begin{enumerate}
+  \tagitem{prvFalse}{الثابت القضي الدال على !!{falsity}~$\lfalse$.}{}
+  \tagitem{prvTrue}{الثابت القضي الدال على !!{truth}~$\ltrue$.}{}
+  \item مجموعة !!{denumerable} من ال!!{propositional variable}s:
+    $\Obj p_0$، $\Obj p_1$، $\Obj p_2$، \dots
+  \item الروابط القضية: \startycommalist
+  \iftag{prvNot}{\ycomma $\lnot$ (النفي)}{}%
+  \iftag{prvAnd}{\ycomma $\land$ (العطف)}{}%
+  \iftag{prvOr}{\ycomma $\lor$ (الفصل)}{}%
+  \iftag{prvIf}{\ycomma $\lif$ (!!{conditional})}{}%
+  \iftag{prvIff}{\ycomma $\liff$ (!!{biconditional})}{}.
+  \item مؤثرا الماضي~$\Ptemp$ و$\Htemp$.
+  \item مؤثرا المستقبل~$\Ftemp$ و$\Gtemp$.
+\end{enumerate}
+\end{defn}
+
+سنناقش لاحقًا إمكان إضافة أنواع أخرى من المؤثرات الجهوية.
+
+\begin{defn}
+تُعرّف \emph{!!^{formula}s} اللغة الزمنية استقرائيًا كما يأتي:
+\begin{enumerate}
+\tagitem{prvFalse}{$\lfalse$ !!{formula} ذرية.}{}
+
+\tagitem{prvTrue}{$\ltrue$ !!{formula} ذرية.}{}
+
+\item كل متغير قضي~$\Obj p_i$ هو !!{formula} (ذرية).
+
+\tagitem{prvNot}{إذا كانت~$!A$ !!a{formula}، كانت~$\lnot !A$
+  !!a{formula}.}{}
+
+\tagitem{prvAnd}{إذا كانت~$!A$ و$!B$ !!{formula}s، كانت
+  $(!A \land !B)$ !!a{formula}.}{}
+
+\tagitem{prvOr}{إذا كانت~$!A$ و$!B$ !!{formula}s، كانت
+  $(!A \lor !B)$ !!a{formula}.}{}
+
+\tagitem{prvIf}{إذا كانت~$!A$ و$!B$ !!{formula}s، كانت
+  $(!A \lif !B)$ !!a{formula}.}{}
+
+\tagitem{prvIff}{إذا كانت~$!A$ و$!B$ !!{formula}s، كانت
+  $(!A \liff !B)$ !!a{formula}.}{}
+
+\item إذا كانت~$!A$ !!a{formula}، فإن~$\Ptemp !A$ و$\Htemp !A$
+  و$\Ftemp !A$ و$\Gtemp !A$ كلها !!{formula}s.
+
+\tagitem{limitClause}{لا شيء غير ذلك !!a{formula}.}{}
+\end{enumerate}
+\end{defn}
+
+تُعطى دلالات المنطق الزمني بواسطة نماذج علائقية، كما في سائر أنواع المنطق
+المقصدي.
+
+\begin{defn}
+  \emph{نموذج} اللغة الزمنية ثلاثي
+  $\mModel{M}=\tuple{T,\prec,V}$، حيث:
+  \begin{enumerate}
+  \item $T$ مجموعة غير فارغة، تُفسر عناصرها بوصفها نقاطًا في الزمن.
+  \item $\prec$ علاقة ثنائية على~$T$.
+  \item $V$ دالة تسند إلى كل~!!{propositional
+    variable}~$p$ مجموعة~$V(p)$ من النقاط الزمنية.
+  \end{enumerate}
+  وحين يكون~$t \prec t'$، نقول إن~$t$ \emph{يسبق}~$t'$.
+  وحين يكون~$t \in V(p)$، نقول إن~$p$ \emph{صادق عند}~$t$.
+\end{defn}
+
+ستلاحظ أننا لا نفرض الآن أي شروط على علاقة السبق~$\prec$. وهذا يعني أنه
+لا توجد حاليًا قيود على بنية نماذجنا الزمنية؛ فيمكن أن تكون لدينا نماذج
+يكون الزمن فيها خطيًا أو متفرعًا أو دائريًا، أو ذا أي بنية كانت.
+
+وكما في المنطق الجهوي النظامي، يحدد كل نموذج زمني أي ال!!{formula}s تُعد
+صادقة عند أي نقاط فيه. ونستعمل الترميز نفسه، «النموذج~$\mModel{M}$ يصدق
+!!{formula}~$!A$ عند النقطة~$t$»، للمفهوم الأساسي في الدلالات العلائقية.
+وتُعرّف العلاقة استقرائيًا، وهي مطابقة لحالة المنطق الجهوي النظامي في جميع
+المؤثرات غير الجهوية.
+
+\begin{defn}\ollabel{defn:tmodels}
+  يُعرّف \emph{صدق !!a{formula}~$!A$ عند~$t$} في~$\mModel M$، ورمزه
+  $\mSat{M}{!A}[t]$، استقرائيًا كما يأتي:
+  \begin{enumerate}
+  \tagitem{prvFalse}{\indcase{!A}{\lfalse}{لا يتحقق أبدًا
+    $\mSat{M}{\lfalse}[t]$}.}{}
+  \tagitem{prvTrue}{\indcase{!A}{\ltrue}{يتحقق دائمًا
+    $\mSat{M}{\ltrue}[t]$}.}{}
+  \item $\mSat{M}{p}[t]$ إذا وفقط إذا كان~$t \in V(p)$.
+  \tagitem{prvNot}{\indcase{!A}{\lnot !B}{$\mSat{M}{\indfrm}[t]$ إذا
+    وفقط إذا كان~$\mSat/{M}{!B}[t]$}.}{}
+  \tagitem{prvAnd}{\indcase{!A}{(!B \land !C)}{$\mSat{M}{\indfrm}[t]$
+    إذا وفقط إذا كان~$\mSat{M}{!B}[t]$ و$\mSat{M}{!C}[t]$}.}{}
+  \tagitem{prvOr}{\indcase{!A}{(!B \lor !C)}{$\mSat{M}{\indfrm}[t]$
+    إذا وفقط إذا كان~$\mSat{M}{!B}[t]$ أو~$\mSat{M}{!C}[t]$}
+    (أو كلاهما).}{}
+  \tagitem{prvIf}{\indcase{!A}{(!B \lif !C)}{$\mSat{M}{\indfrm}[t]$
+    إذا وفقط إذا كان~$\mSat/{M}{!B}[t]$ أو~$\mSat{M}{!C}[t]$}.}{}
+  \tagitem{prvIff}{\indcase{!A}{(!B \liff !C)}{$\mSat{M}{\indfrm}[t]$
+    إذا وفقط إذا تحقق كل من~$\mSat{M}{!B}[t]$ و$\mSat{M}{!C}[t]$، أو
+    لم يتحقق أي من~$\mSat{M}{!B}[t]$ و$\mSat{M}{!C}[t]$}.}{}
+  \item\ollabel{defn:sub:mmodels-p}
+    \indcase{!A}{\Ptemp !B}{$\mSat{M}{\indfrm}[t]$ إذا وفقط إذا كان
+    $\mSat{M}{!B}[t']$ لبعض~$t' \in T$ بحيث~$t' \prec t$}
+  \item\ollabel{defn:sub:mmodels-h}
+    \indcase{!A}{\Htemp !B}{$\mSat{M}{\indfrm}[t]$ إذا وفقط إذا كان
+    $\mSat{M}{!B}[t']$ لكل~$t' \in T$ بحيث~$t' \prec t$}
+  \item\ollabel{defn:sub:mmodels-f}
+    \indcase{!A}{\Ftemp !B}{$\mSat{M}{\indfrm}[t]$ إذا وفقط إذا كان
+    $\mSat{M}{!B}[t']$ لبعض~$t' \in T$ بحيث~$t \prec t'$}
+  \item\ollabel{defn:sub:mmodels-g}
+    \indcase{!A}{\Gtemp !B}{$\mSat{M}{\indfrm}[t]$ إذا وفقط إذا كان
+    $\mSat{M}{!B}[t']$ لكل~$t' \in T$ بحيث~$t \prec t'$}
+  \end{enumerate}
+\end{defn}
+
+قد يتضح لك من الدلالات أن المؤثرين~$\Ptemp$ و$\Htemp$ متقابلان، وكذلك
+المؤثران~$\Ftemp$ و$\Gtemp$؛ بحيث يمكننا تعريف~$\Htemp !A$ بأنه
+$\lnot \Ptemp \lnot !A$، وفعل الأمر نفسه بـ~$\Gtemp$ و$\Ftemp$.
+
+\end{document}

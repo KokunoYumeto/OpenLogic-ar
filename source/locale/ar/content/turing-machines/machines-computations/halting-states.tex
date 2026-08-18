@@ -1,0 +1,73 @@
+% Part: turing-machines
+% Chapter: machines-computations
+% Section: halting-states
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{tur}{mac}{hal}
+\olsection{حالات التوقف}
+
+\begin{explain}
+مع أننا عرّفنا آلاتنا بحيث لا تتوقف إلا عند عدم وجود تعليمة تنفذها،
+فإن التمثيلات الشائعة لآلات تورنغ تشتمل على \emph{حالة توقف} مخصوصة
+$h$، بحيث $h \in Q$.
+
+والفكرة الكامنة وراء حالة التوقف بسيطة: حين تنتهي الآلة من عملها
+(فتكون مستعدة لقبول الدخل، أو تكون قد فرغت من كتابة الخرج)، تنتقل إلى
+حالة~$h$ وتتوقف فيها. ولبعض الآلات حالتا توقف، تقبل إحداهما الدخل
+وترفضه الأخرى.
+\end{explain}
+
+\begin{ex}\emph{حالات التوقف}.
+لإيضاح هذا المفهوم، لنبدأ بتعديل آلة الزوجية. فبدلًا من أن تتوقف
+الآلة في الحالة~$q_0$ إذا كان الدخل زوجيًا، يمكننا إضافة تعليمة ترسل
+الآلة إلى حالة توقف.
+\[
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+                    semithick]
+  \tikzstyle{every state}=[fill=none,draw=black,text=black]
+
+  \node[initial, state]         (A)                     {$q_0$};
+  \node[state]         (B) [right of=A] {$q_1$};
+  \node[state]         (C) [below of=A] {$h$};
+
+  \path (A) edge [bend left] node {\TMtrans{\TMstroke}{\TMstroke}{R}} (B)
+        edge node {\TMtrans{\TMblank}{\TMblank}{N}} (C)
+        (B) edge [loop above] node {\TMtrans{\TMblank}{\TMblank}{R}} (B)
+            edge [bend left] node {\TMtrans{\TMstroke}{\TMstroke}{R}} (A);
+\end{tikzpicture}
+\]
+
+ولنوسع المثال أكثر. حين تقرر الآلة أن الدخل فردي، فإنها لا تتوقف قط.
+ويمكننا تعديلها لتشتمل على حالة \emph{رفض}، وذلك باستبدال تعليمة
+الدوران بتعليمة للانتقال إلى حالة رفض~$r$.
+\[
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+                    semithick]
+  \tikzstyle{every state}=[fill=none,draw=black,text=black]
+
+  \node[initial,state]         (A)                     {$q_0$};
+  \node[state]         (B) [right of=A] {$q_1$};
+  \node[state]         (C) [below of=A] {$h$};
+  \node[state]         (D) [below of=B] {$r$};
+
+  \path (A) edge [bend left] node {\TMtrans{\TMstroke}{\TMstroke}{R}} (B)
+        edge node {\TMtrans{\TMblank}{\TMblank}{N}} (C)
+        (B) edge node {\TMtrans{\TMblank}{\TMblank}{N}} (D)
+            edge [bend left] node {\TMtrans{\TMstroke}{\TMstroke}{R}} (A);
+\end{tikzpicture}
+\]
+\end{ex}
+
+\begin{explain}
+قد تفيد إضافة حالة توقف مخصوصة في حالات كهذه، إذ تبين صراحة متى تقبل
+الآلة بعض المدخلات أو ترفضها. لكن من المهم ملاحظة أن إضافة حالة توقف
+مخصوصة لا تمنح الآلة أي قدرة حسابية جديدة. وبالمثل، لمفهوم التوقف
+الأقل صورية مزاياه أيضًا. فتعريف التوقف المستعمل حتى الآن في هذا
+الفصل يجعل برهان \emph{مسألة التوقف} حدسيًا ويسير العرض. ولهذا سنواصل
+استعمال تعريفنا الأصلي.
+\end{explain}
+
+\end{document}

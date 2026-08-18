@@ -1,0 +1,177 @@
+% Part: normal-modal-logic
+% Chapter: syntax-and-semantics
+% Section: schemas
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{syn}{sch}
+
+\olsection{المخططات والصلاحية}
+
+\begin{defn}
+  \emph{المخطط} مجموعة من ال!!{formula}s تضم جميع حالات الإحلال
+  ل!!{formula} موجهية ما~$!C$، ولا تضم سواها، أي
+  \[
+  \Setabs{!B}{\lexists[!D_1], \dots, \lexists[!D_n] \left(!B =
+  \SSubst{!C}{\subst{!D_1}{p_1}, \dots, \subst{!D_n}{p_n}} \right) }.
+  \]
+  وتسمى ال!!{formula}~$!C$ ال!!{formula} \emph{المميزة} للمخطط، وهي
+  وحيدة حتى إعادة تسمية ال!!{propositional variable}s. وتكون
+  !!^a{formula}~$!A$ \emph{حالة} من مخطط إذا كانت عنصرًا في المجموعة.
+\end{defn}
+
+من الملائم أن نرمز إلى المخطط بالتعبير الميتالغوي الناتج من إحلال
+`$!A$'، و`$!B$'، و\dots، محل المكونات الذرية لـ$!C$. فمثلًا، تدل
+التعبيرات الآتية على مخططات: `$!A$'، و`$!A \lif \Box!A$'، و
+`$!A \lif (!B \lif !A)$'. وهي تقابل ال!!{formula}s المميزة~$p$، و
+$p \lif \Box p$، و$p \lif (q \lif p)$. ويدل المخطط~`$!A$' على
+مجموعة \emph{جميع} ال!!{formula}s.
+
+\begin{defn}
+  يكون المخطط \emph{صادقًا} في نموذج إذا وفقط إذا كانت جميع حالاته
+  صادقة فيه؛ ويكون المخطط \emph{صالحًا} إذا وفقط إذا كان صادقًا في كل
+  نموذج.
+\end{defn}
+
+\begin{prop}\ollabel{prop:Kvalid}
+  المخطط الآتي~\Ax{K} صالح:
+  \begin{equation*}
+  \Box(!A \lif !B) \lif (\Box !A \lif \Box !B). \tag{\Ax{K}}
+  \end{equation*}
+\end{prop}
+
+\begin{proof}
+  نحتاج إلى إثبات أن جميع حالات المخطط صادقة في كل عالم من كل نموذج.
+  فليكن~$\mModel{M} = \tuple{W,R,V}$ و$w \in W$ اعتباطيين. ولإثبات
+  صدق شرط في عالم، نفترض صدق المقدَّم ونثبت صدق التالي أيضًا. في هذه
+  الحالة، لنفترض~$\mSat{M}{\Box(!A \lif !B)}[w]$ و
+  $\mSat{M}{\Box !A}[w]$. ونحتاج إلى إثبات~$\mSat{M}{\Box !B}[w]$.
+  فليكن~$w'$ اعتباطيًا بحيث~$Rww'$. عندئذ، بحسب الفرض الأول، يكون
+  $\mSat{M}{!A \lif !B}[w']$، وبحسب الفرض الثاني يكون
+  $\mSat{M}{!A}[w']$. ومن ثم~$\mSat{M}{!B}[w']$. ولما كان~$w'$
+  اعتباطيًا، كان~$\mSat{M}{\Box !B}[w]$.
+\end{proof}
+
+\begin{prop}\ollabel{prop:Dual-valid}
+  مخطط الثنائية الآتي~\Dual{} صالح:
+  \begin{equation*}
+  \Diamond !A \liff \lnot\Box\lnot !A. \tag{\Dual}
+  \end{equation*}
+\end{prop}
+
+\begin{proof}
+  تمرين.
+\end{proof}
+
+\begin{prob}
+  أثبت~\olref[nml][syn][sch]{prop:Dual-valid}.
+\end{prob}
+
+\begin{prop}\ollabel{prop:soundMP}
+  إذا كانت~$!A$ و$!A \lif !B$ صادقتين في عالم من نموذج، كانت~$!B$
+  صادقة فيه أيضًا. ومن ثم فإن ال!!{formula}s الصالحة مغلقة تحت قاعدة
+  إثبات المقدَّم.
+\end{prop}
+
+\begin{prop}\ollabel{prop:valid-instances}
+  تكون !!^a{formula}~$!A$ صالحة إذا وفقط إذا كانت جميع حالات إحلالها
+  صالحة. وبعبارة أخرى، يكون المخطط صالحًا إذا وفقط إذا كانت
+  !!{formula}ه المميزة صالحة.
+\end{prop}
+
+\begin{proof}
+  اتجاه ``إذا'' واضح، لأن~$!A$ حالة إحلال من نفسها.
+
+  ولإثبات اتجاه ``فقط إذا''، نثبت الآتي: افترض أن
+  $\mModel{M} = \tuple{W, R, V}$ نموذج موجهي، وأن
+  $!B \ident \SSubst{!A}{\subst{!D_1}{p_1},\dots,\subst{!D_n}{p_n}}$
+  حالة إحلال لـ$!A$. عرّف~$\mModel{M'} = \tuple{W, R, V'}$ بواسطة
+  $V'(p_i) = \Setabs{w}{\mSat{M}{!D_i}[w]}$. عندئذ
+  $\mSat{M}{!B}[w]$ إذا وفقط إذا كان~$\mSat{M'}{!A}[w]$، لأي
+  $w \in W$. (نترك البرهان تمرينًا.) افترض الآن أن~$!A$ صالحة، لكن
+  حالة إحلال ما~$!B$ منها غير صالحة. عندئذ يوجد
+  $\mModel{M} = \tuple{W, R, V}$ و$w \in W$ بحيث
+  $\mSat/{M}{!B}[w]$. لكن الدعوى تعطينا~$\mSat/{M'}{!A}[w]$، فلا تكون
+  $!A$ صالحة، وهذا تناقض.
+\end{proof}
+
+\begin{prob}
+  أثبت الدعوى في جزء ``فقط إذا'' من برهان
+  \olref[nml][syn][sch]{prop:valid-instances}. (تلميح: استعمل
+  الاستقراء على~$!A$.)
+\end{prob}
+
+لاحظ، مع ذلك، أنه ليس صحيحًا أن مخططًا ما يكون صادقًا في نموذج إذا
+وفقط إذا كانت صيغته المميزة صادقة فيه. ولا شك أن اتجاه ``فقط إذا''
+صحيح: فإذا كانت كل حالة من~$!A$ صادقة في~$\mModel{M}$، كانت~$!A$
+نفسها صادقة في~$\mModel{M}$. لكن قد تكون~$!A$ صادقة في~$\mModel{M}$
+وتكون حالة ما منها كاذبة في عالم من~$\mModel{M}$. ولمثال مضاد بالغ
+البساطة، تأمل~$p$ في نموذج لا يحوي إلا العالم~$w$، وفيه
+$V(p) = \{w\}$، فتكون~$p$ صادقة في~$w$. لكن~$\lfalse$ حالة من~$p$،
+وليست صادقة في~$w$.
+
+\begin{prob}
+  أثبت أن أيًا من ال!!{formula}s الآتية ليس صالحًا:
+  \begin{enumerate}
+    \item[\Ax{D}:] \quad $\Box p \lif \Diamond p$؛
+    \item[\Ax{T}:] \quad $\Box p \lif p$؛
+    \item[\Ax{B}:] \quad $p \lif \Box\Diamond p$؛
+    \item[\Ax{4}:] \quad $\Box p \lif \Box \Box p$؛
+    \item[\Ax{5}:] \quad $\Diamond p \lif \Box \Diamond p$.
+  \end{enumerate}
+\end{prob}
+
+\begin{table}[t]
+    \centering
+    \begin{tabular}{| l || l |}
+      \hline
+      {\emph{مخططات صالحة}} & {\emph{مخططات غير صالحة}} \\
+      \hline\hline
+      $\Box(!A \lif !B) \lif (\Diamond !A \lif \Diamond !B)$
+      & $\Box (!A \lor !B) \lif (\Box !A \lor \Box !B)$ \\
+      $\Diamond (!A \lif !B) \lif (\Box !A \lif \Diamond
+      !B)$
+      & $(\Diamond !A \land \Diamond !B) \lif \Diamond (!A
+      \land !B)$\\
+      $\Box (!A \land !B) \liff (\Box !A \land \Box !B)$
+      & $!A \lif \Box !A$ \\
+      $\Box !A \lif \Box (!B \lif !A)$
+      & $\Box \Diamond !A \lif !B$ \\
+      $\lnot \Diamond !A \lif \Box (!A \lif !B)$
+      & $\Box \Box !A \lif \Box !A$ \\
+      $\Diamond (!A \lor !B) \liff (\Diamond !A \lor
+      \Diamond !B)$
+      & $\Box \Diamond !A \lif \Diamond \Box !A$. \\
+      \hline
+    \end{tabular}
+    \caption{المخططات الصالحة وغير الصالحة.}
+    \ollabel{tab:valid-invalidSchemas}
+\end{table}
+
+\begin{prob}%\ollabel{ex:in/validSchemas}
+  أثبت أن المخططات في العمود الأول من
+  \olref[nml][syn][sch]{tab:valid-invalidSchemas} صالحة، وأن التي في
+  العمود الثاني غير صالحة.
+\end{prob}
+
+\begin{prob}
+  قرر هل المخططان الآتيان صالحان أم غير صالحين:
+  \begin{enumerate}
+  \item $(\Diamond !A \lif \Box !B) \lif (\Box !A \lif \Box
+    !B)$؛
+  \item $\Diamond(!A \lif !B) \lor \Box(!B \lif !A)$.
+  \end{enumerate}
+\end{prob}
+
+\begin{prob}
+  أوجد لكل واحد من المخططين الآتيين نموذجًا~$\mModel{M}$ تكون فيه كل
+  حالة من ال!!{formula} صادقة:
+  \begin{enumerate}
+  \item $p \lif \Diamond\Diamond p$؛
+  \item $\Diamond p \lif \Box p$.
+  \end{enumerate}
+\end{prob}
+
+\end{document}

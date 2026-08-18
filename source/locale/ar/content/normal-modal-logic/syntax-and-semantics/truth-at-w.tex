@@ -1,0 +1,135 @@
+% Part: normal-modal-logic
+% Chapter: syntax-and-semantics
+% Section: truth-at-w
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{syn}{trw}
+
+\olsection{الصدق في عالم}
+
+يحدد كل نموذج موجهي أي ال!!{formula}s الموجهية تعد صادقة في أي عوالمه.
+وعلاقة ``النموذج~$\mModel{M}$ يجعل ال!!{formula}~$!A$ صادقة في
+العالم~$w$'' هي المفهوم الأساسي في الدلالة العلائقية. وتُعرّف هذه
+العلاقة استقرائيًا، وتتفق مع الوصف المعتاد باستعمال جداول الصدق
+للمؤثرات غير الموجهية.
+
+\begin{defn}\ollabel{defn:mmodels}
+  يُعرّف \emph{صدق !!a{formula}~$!A$ في~$w$} ضمن~$\mModel M$، ويرمز
+  إليه بـ$\mSat{M}{!A}[w]$، استقرائيًا كما يأتي:
+  \begin{enumerate}
+  \tagitem{prvFalse}{\indcase{!A}{\lfalse}{لا يصدق أبدًا
+    $\mSat{M}{\lfalse}[w]$}.}{}
+  \tagitem{prvTrue}{\indcase{!A}{\ltrue}{يصدق دائمًا
+    $\mSat{M}{\ltrue}[w]$}.}{}
+  \item $\mSat{M}{p}[w]$ إذا وفقط إذا كان~$w \in V(p)$.
+  \tagitem{prvNot}{\indcase{!A}{\lnot !B}{$\mSat{M}{\indfrm}[w]$ إذا
+    وفقط إذا كان~$\mSat/{M}{!B}[w]$}.}{}
+  \tagitem{prvAnd}{\indcase{!A}{(!B \land !C)}{$\mSat{M}{\indfrm}[w]$
+    إذا وفقط إذا كان~$\mSat{M}{!B}[w]$ و$\mSat{M}{!C}[w]$}.}{}
+  \tagitem{prvOr}{\indcase{!A}{(!B \lor !C)}{$\mSat{M}{\indfrm}[w]$
+    إذا وفقط إذا كان~$\mSat{M}{!B}[w]$ أو~$\mSat{M}{!C}[w]$}
+    (أو كلاهما).}{}
+  \tagitem{prvIf}{\indcase{!A}{(!B \lif !C)}{$\mSat{M}{\indfrm}[w]$
+    إذا وفقط إذا كان~$\mSat/{M}{!B}[w]$ أو~$\mSat{M}{!C}[w]$}.}{}
+  \tagitem{prvIff}{\indcase{!A}{(!B \liff !C)}{$\mSat{M}{\indfrm}[w]$
+    إذا وفقط إذا كان إما كل من~$\mSat{M}{!B}[w]$ و$\mSat{M}{!C}[w]$،
+    أو لا~$\mSat{M}{!B}[w]$ ولا~$\mSat{M}{!C}[w]$}.}{}
+  \item\ollabel{defn:sub:mmodels-box}
+    \indcase{!A}{\Box !B}{$\mSat{M}{\indfrm}[w]$ إذا وفقط إذا كان
+    $\mSat{M}{!B}[w']$ لكل~$w' \in W$ يحقق~$Rww'$.}
+  \item\ollabel{defn:sub:mmodels-diamond}
+    \indcase{!A}{\Diamond !B}{$\mSat{M}{\indfrm}[w]$ إذا وفقط إذا كان
+    $\mSat{M}{!B}[w']$ لواحد على الأقل من~$w' \in W$ التي تحقق~$Rww'$.}
+  \end{enumerate}
+\end{defn}
+
+لاحظ أنه، بحسب البند~\olref{defn:sub:mmodels-box}، تكون
+!!a{formula}~$\Box !B$ صادقة في~$w$ كلما لم يوجد~$w'$ يحقق~$Rww'$.
+وفي هذه الحالة تكون~$\Box !B$ صادقة في~$w$ \emph{صدقًا خاليًا}.
+وقد تتحقق~$\Box !B$ في~$w$ حتى لو لم تتحقق~$!B$ فيه. ولا يضمن صدق
+$!B$ في~$w$ صدق~$\Diamond !B$ فيه. غير أن هذا يصدق إذا كان~$Rww$،
+كأن تكون~$R$ انعكاسية. وإذا لم يوجد~$w'$ يحقق~$Rww'$، فإن
+$\mSat/{M}{\Diamond !A}[w]$ لأي~$!A$.
+
+\begin{prob}
+  تأمل نموذج~\olref[nml][syn][rel]{fig:simple}. أي العبارات الآتية
+  تصدق؟
+    \begin{enumerate}
+    \item $\mSat{M}{q}[w_1]$؛
+    \item $\mSat{M}{\lnot q}[w_3]$؛
+    \item $\mSat{M}{p \lor q}[w_1]$؛
+    \item $\mSat{M}{\Box (p \lor q)}[w_1]$؛
+    \item $\mSat{M}{\Box q}[w_3]$؛
+    \item $\mSat{M}{\Box \bot}[w_3]$؛
+    \item $\mSat{M}{\Diamond q}[w_1]$؛
+    \item $\mSat{M}{\Box q}[w_1]$؛
+    \item $\mSat{M}{\lnot \Box\Box \lnot q}[w_1]$.
+    \end{enumerate}
+\end{prob}
+
+% Prove duality of \Box and \Diamond
+\begin{tagblock}{prvDiamond}
+\begin{prop}\ollabel{prop:dual}
+  \begin{enumerate}
+  \item $\mSat{M}{\Box !A}[w]$ إذا وفقط إذا كان
+    $\mSat{M}{\lnot\Diamond\lnot !A}[w]$.
+  \item $\mSat{M}{\Diamond !A}[w]$ إذا وفقط إذا كان
+    $\mSat{M}{\lnot\Box\lnot !A}[w]$.
+  \end{enumerate}
+\end{prop}
+
+\begin{proof}
+  \begin{enumerate}
+    \item $\mSat{M}{\lnot\Diamond\lnot !A}[w]$ إذا وفقط إذا كان
+      $\mSat/{M}{\Diamond\lnot !A}[w]$، بحسب تعريف~$\mSat{M}{}[w]$.
+      و$\mSat{M}{\Diamond\lnot !A}[w]$ إذا وفقط إذا وُجد~$w'$ يحقق
+      $Rww'$ وكان~$\mSat{M}{\lnot !A}[w']$. ومن ثم يكون
+      $\mSat/{M}{\Diamond\lnot !A}[w]$ إذا وفقط إذا كان، لكل~$w'$ يحقق
+      $Rww'$، لدينا~$\mSat/{M}{\lnot !A}[w']$. ولدينا أيضًا
+      $\mSat/{M}{\lnot !A}[w']$ إذا وفقط إذا كان~$\mSat{M}{!A}[w']$.
+      وبجمع ذلك، يكون~$\mSat{M}{\lnot\Diamond\lnot !A}[w]$ إذا وفقط
+      إذا كان، لكل~$w'$ يحقق~$Rww'$، لدينا~$\mSat{M}{!A}[w']$. وبحسب
+      تعريف~$\mSat{M}{}[w]$ مرة أخرى، يتحقق ذلك إذا وفقط إذا كان
+      $\mSat{M}{\Box !A}[w]$.
+    \item \iftag{probDiamond}{تمرين.}{$\mSat{M}{\lnot\Box\lnot !A}[w]$
+      إذا وفقط إذا كان~$\mSat/{M}{\Box\lnot !A}[w]$.
+      و$\mSat{M}{\Box\lnot !A}[w]$ إذا وفقط إذا كان، لكل~$w'$ يحقق
+      $Rww'$، لدينا~$\mSat{M}{\lnot !A}[w']$. ومن ثم يكون
+      $\mSat/{M}{\Box\lnot !A}[w]$ إذا وفقط إذا وُجد~$w'$ يحقق
+      $Rww'$ وكان~$\mSat/{M}{\lnot !A}[w']$. ولدينا أيضًا
+      $\mSat/{M}{\lnot !A}[w']$ إذا وفقط إذا كان~$\mSat{M}{!A}[w']$.
+      وبجمع ذلك، يكون~$\mSat{M}{\lnot\Box\lnot !A}[w]$ إذا وفقط إذا
+      وُجد~$w'$ يحقق~$Rww'$ وكان~$\mSat{M}{!A}[w']$. وبحسب تعريف
+      $\mSat{M}{}[w]$ مرة أخرى، يتحقق ذلك إذا وفقط إذا كان
+      $\mSat{M}{\Diamond !A}[w]$.}
+  \end{enumerate}
+\end{proof}
+
+\begin{probtag}{probDiamond}
+  أكمل برهان~\olref[nml][syn][trw]{prop:dual}.
+\end{probtag}
+\end{tagblock}
+
+\begin{prob}
+  ليكن~$\mModel{M} = \tuple{W, R, V}$ نموذجًا، وافترض أن~$w_1, w_2 \in
+  W$ يحققان:
+  \begin{enumerate}
+  \item $w_1 \in V(p)$ إذا وفقط إذا كان~$w_2 \in V(p)$ (لكل
+    !!{propositional variable}~$p$)؛ و
+  \item لكل~$w \in W$: يصدق~$Rw_1w$ إذا وفقط إذا كان~$Rw_2w$.
+  \end{enumerate}
+  أثبت، باستعمال الاستقراء على ال!!{formula}s، أنه لجميع
+  ال!!{formula}s~$!A$: يصدق~$\mSat{M}{!A}[w_1]$ إذا وفقط إذا كان
+  $\mSat{M}{!A}[w_2]$.
+\end{prob}
+
+\begin{probtag}{prvDiamond}
+  ليكن~$\mModel{M} = \tuple{W, R, V}$. أثبت أن
+  $\mSat{M}{\lnot\Diamond !A}[w]$ إذا وفقط إذا كان
+  $\mSat{M}{\Box\lnot!A}[w]$.
+\end{probtag}
+
+\end{document}

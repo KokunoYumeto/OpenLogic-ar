@@ -1,0 +1,133 @@
+% Part: first-order-logic
+% Chapter: sequent-calculus
+% Section: provability-consistency
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{seq}{prv}}
+      {\olfileid{pl}{seq}{prv}}
+
+\olsection{\usetoken{S}{derivability} والاتساق}
+
+سنثبت الآن عددًا من خصائص علاقة ال!!{derivability}. وهي مهمة كل منها
+في ذاتها، كما سيكون لكل منها دور في برهان مبرهنة الاكتمال.
+
+\begin{prop}\ollabel{prop:provability-contr}
+  إذا كان~$\Gamma \Proves !A$ وكانت~$\Gamma \cup \{!A\}$ غير متسقة،
+  فإن~$\Gamma$ غير متسقة.
+\end{prop}
+
+\begin{proof}
+توجد مجموعتان منتهيتان~$\Gamma_0$ و
+$\Gamma_1 \subseteq \Gamma$ بحيث $\Log{LK}$ !!{derive}s
+$\Gamma_0 \Sequent !A$ و$!A, \Gamma_1 \Sequent \quad$. وليكن
+$\Log{LK}$-!!{derivation} للتتابعية~$\Gamma_0 \Sequent !A$ هو
+~$\pi_0$، وليكن $\Log{LK}$-!!{derivation} للتتابعية
+$\Gamma_1, !A \Sequent \quad$ هو~$\pi_1$. وعندئذ يمكننا !!{derive}
+\begin{prooftree}
+\AxiomC{}
+\RightLabel{$\pi_0$}
+\Deduce$ \Gamma_0 \fCenter !A $
+\AxiomC{}
+\RightLabel{$\pi_1$}
+\Deduce$!A, \Gamma_1 \fCenter $
+\RightLabel{\Cut}
+\BinaryInf$ \Gamma_0,\Gamma_1 \fCenter $
+\end{prooftree}
+
+بما أن~$\Gamma_0 \subseteq \Gamma$ و$\Gamma_1 \subseteq \Gamma$،
+فإن~$\Gamma_0 \cup \Gamma_1 \subseteq \Gamma$؛ ومن ثم فإن~$\Gamma$
+غير متسقة.
+\end{proof}
+
+\begin{prop}
+\ollabel{prop:prov-incons}
+$\Gamma \Proves !A$ إذا وفقط إذا كانت~$\Gamma \cup \{\lnot !A\}$ غير
+متسقة.
+\end{prop}
+
+\begin{proof}
+افترض أولًا أن~$\Gamma \Proves !A$، أي إنه يوجد
+!!a{derivation}~$\pi_0$ للتتابعية~$\Gamma \Sequent !A$. وبإضافة قاعدة
+$\LeftR{\lnot}$ نحصل على !!a{derivation} للتتابعية
+~$\lnot !A, \Gamma \Sequent \quad$، أي إن
+$\Gamma \cup \{\lnot !A\}$ غير متسقة.
+
+وإذا كانت~$\Gamma \cup \{\lnot !A\}$ غير متسقة، وجد
+!!a{derivation}~$\pi_1$ للتتابعية
+$\lnot !A, \Gamma \Sequent \quad$. وما يأتي !!a{derivation}
+للتتابعية~$\Gamma \Sequent !A$:
+\begin{prooftree}
+  \Axiom$!A \fCenter !A$
+  \RightLabel{\RightR{\lnot}}
+  \UnaryInf$\fCenter !A, \lnot !A$
+  \AxiomC{}
+  \RightLabel{$\pi_1$}
+  \Deduce$\lnot !A, \Gamma \fCenter$
+  \RightLabel{\Cut}
+  \BinaryInf$\Gamma \fCenter !A$
+\end{prooftree}
+\end{proof}
+
+\begin{prob}
+أثبت أن~$\Gamma \Proves \lnot !A$ إذا وفقط إذا كانت
+$\Gamma \cup \{!A\}$ غير متسقة.
+\end{prob}
+
+\begin{prop}\ollabel{prop:explicit-inc}
+  إذا كان~$\Gamma \Proves !A$ وكان~$\lnot !A \in \Gamma$، فإن
+  $\Gamma$ غير متسقة.
+\end{prop}
+
+\begin{proof}
+  افترض أن~$\Gamma \Proves !A$ وأن~$\lnot !A \in \Gamma$. عندئذ يوجد
+  !!a{derivation}~$\pi$ لتتابعية~$\Gamma_0 \Sequent !A$. والتتابعية
+  $\lnot !A, \Gamma_0 \Sequent \quad$ !!{derivable} أيضًا:
+  \begin{prooftree}
+    \AxiomC{}
+    \RightLabel{$\pi$}
+    \Deduce$\Gamma_0 \fCenter !A$
+    \Axiom$!A \fCenter !A$
+    \RightLabel{\LeftR{\lnot}}
+    \UnaryInf$\lnot !A, !A \fCenter$
+    \RightLabel{\LeftR{\Exchange}}
+    \UnaryInf$!A, \lnot !A \fCenter$
+    \RightLabel{\Cut}
+    \BinaryInf$\Gamma_0, \lnot !A \fCenter$
+  \end{prooftree}
+  وبما أن~$\lnot !A \in \Gamma$ و$\Gamma_0 \subseteq \Gamma$، فإن
+  هذا يبين أن~$\Gamma$ غير متسقة.
+\end{proof}
+
+\begin{prop}\ollabel{prop:provability-exhaustive}
+  إذا كانت كل من~$\Gamma \cup \{!A\}$ و
+  $\Gamma \cup \{\lnot !A\}$ غير متسقة، فإن~$\Gamma$ غير متسقة.
+\end{prop}
+
+\begin{proof}
+توجد مجموعتان منتهيتان~$\Gamma_0 \subseteq \Gamma$ و
+$\Gamma_1 \subseteq \Gamma$، و$\Log{LK}$-!!{derivation}s
+$\pi_0$ و$\pi_1$ للتتابعيتين~$!A, \Gamma_0 \Sequent \quad$ و
+$\lnot !A, \Gamma_1 \Sequent \quad$ على الترتيب. ويمكننا عندئذ
+!!{derive}
+\begin{prooftree}
+\AxiomC{}
+\RightLabel{$\pi_0$}
+\Deduce$ !A, \Gamma_0 \fCenter $
+\RightLabel{\RightR{\lnot}}
+\UnaryInf$ \Gamma_0 \fCenter \lnot !A$
+\AxiomC{}
+\RightLabel{$\pi_1$}
+\Deduce$\lnot !A, \Gamma_1 \fCenter  $
+\RightLabel{\Cut}
+\BinaryInf$ \Gamma_0, \Gamma_1 \fCenter $
+\end{prooftree}
+وبما أن~$\Gamma_0 \subseteq \Gamma$ و$\Gamma_1 \subseteq \Gamma$،
+فإن~$\Gamma_0 \cup \Gamma_1 \subseteq \Gamma$. ومن ثم فإن~$\Gamma$
+غير متسقة.
+\end{proof}
+
+\end{document}

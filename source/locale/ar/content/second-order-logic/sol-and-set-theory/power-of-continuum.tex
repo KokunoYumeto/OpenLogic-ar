@@ -1,0 +1,162 @@
+% Part: second-order-logic
+% Chapter: sol-and-set-theory
+% Section: power-of-continuum
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sol}{set}{pow}
+
+\olsection{قوة المتصل}
+
+\begin{explain}
+نستطيع في منطق الرتبة الثانية أن نكمم على المجموعات الجزئية من
+الـ!!{domain}، لكن لا نستطيع أن نكمم على مجموعات المجموعات الجزئية من
+الـ!!{domain}.
+ولفعل ذلك مباشرة نحتاج إلى منطق \emph{الرتبة الثالثة}. فلو أردنا، مثلًا،
+تقرير مبرهنة كانتور القائلة إنه لا توجد دالة~!!{injective} من مجموعة
+قوى مجموعة ما إلى المجموعة نفسها، فقد نحاول صياغتها هكذا: «لكل
+مجموعة~$X$ ولكل مجموعة~$P$، إذا كانت~$P$ مجموعة قوى~$X$، فليس
+$\cardle{P}{X}$». والقول إن~$P$ مجموعة قوى~$X$ يقتضي أن نصوغ أن
+الـ!!{element}s في~$P$ هي جميع المجموعات الجزئية من~$X$ ولا شيء
+سواها، أي شيئًا من قبيل~$\lforall[Y][(P(Y)
+  \liff Y \subseteq X)]$. وتكمن المشكلة في~$P(Y)$: فهذه ليست
+!!a{formula} من منطق الرتبة الثانية، لأن وسائط متغيرات العلاقة الأحادية
+الموضع مثل~$P$ لا يمكن أن تكون إلا حدودًا.
+
+غير أننا نستطيع \emph{محاكاة} التكميم على مجموعات المجموعات إذا كان
+المجال كبيرًا بما يكفي. والفكرة هي الاستفادة من أن العلاقة الثنائية
+الموضع~$R$ تربط~!!{element}s من الـ!!{domain} بـ!!{element}s من
+الـ!!{domain}. فإذا أعطيت علاقة~$R$ من هذا القبيل، أمكننا جمع جميع
+الـ!!{element}s التي يرتبط بها~$x$ ما بالعلاقة~$R$:
+$\Setabs{y \in \Domain{M}}{R(x,y)}$ هي المجموعة التي «يرمزها»~$x$.
+وبالعكس، إذا كانت~$Z \subseteq \Pow{\Domain{M}}$ مجموعة ما من
+المجموعات الجزئية من~$\Domain{M}$، وكان في~$\Domain{M}$ من
+الـ!!{element}s عدد لا يقل عن عدد المجموعات في~$Z$، فثمة أيضًا
+علاقة~$R \subseteq \Domain{M}^2$ يرمز بالعلاقة~$R$ عنصر~$x$ ما
+كل~$Y \in Z$.
+\end{explain}
+
+\begin{defn}
+إذا كانت~$R \subseteq \Domain{M}^2$، فإن~\emph{$x$ يرمز بالعلاقة~$R$}
+المجموعة~$\Setabs{y \in \Domain{M}}{R(x, y)}$.
+\end{defn}
+
+إذا كان~!!a{element}~$x \in \Domain{M}$ يرمز بالعلاقة~$R$ مجموعة
+$Z \subseteq \Domain{M}$، فإن مجموعة~$Y \subseteq \Domain{M}$ ترمز
+مجموعة من المجموعات، هي المجموعات التي ترمزها الـ!!{element}s من~$Y$.
+ومن ثم يمكن لـ$Y$ أن ترمز بالعلاقة~$R$ المجموعة~$\Pow{X}$. وتفعل ذلك
+إذا وفقط إذا كان، لكل~$Z \subseteq X$، عنصر~$x \in Y$ يرمز
+بالعلاقة~$R$ المجموعة~$Z$، وكان كل~$x \in Y$ يرمز بالعلاقة~$R$
+مجموعةً~$Z \subseteq X$.
+
+\begin{prop}
+تعبّر الـ!!{formula}
+  \[
+  \fn{Codes}(x, R, Z) \ident \lforall[y][(Z(y) \liff
+    R(x, y))]
+  \]
+عن أن~$s(x)$ يرمز بالعلاقة~$s(R)$ المجموعة~$s(Z)$. وتعبّر
+الـ!!{formula}
+\begin{multline*}
+  \fn{Pow}(Y, R, X) \ident \\
+  \lforall[Z][(Z \subseteq X \lif \lexists[x][(Y(x) \land
+    \fn{Codes}(x, R, Z))])] \land {} \\ \lforall[x][(Y(x) \lif
+  \lforall[Z][(\fn{Codes}(x, R, Z) \lif Z \subseteq X)])]
+\end{multline*}
+عن أن~$s(Y)$ ترمز بالعلاقة~$s(R)$ مجموعة القوى لـ$s(X)$؛ أي إن عناصر
+$s(Y)$ ترمز بالعلاقة~$s(R)$ جميع المجموعات الجزئية من~$s(X)$ ولا شيء
+سواها.
+\end{prop}
+
+\begin{explain}
+بهذه الحيلة نستطيع التعبير عن عبارات تخص مجموعة القوى بالتكميم على
+رموز المجموعات الجزئية بدلًا من المجموعات الجزئية نفسها. فيمكن، مثلًا،
+التعبير الآن عن مبرهنة كانتور بالقول إنه لا توجد دالة~!!{injective} من
+مجال أي علاقة ترمز مجموعة القوى لـ$X$ إلى~$X$ نفسها.
+\end{explain}
+
+\begin{prop}
+الجملة
+\begin{multline*}
+  \lforall[X][\lforall[Y][\lforall[R][(\fn{Pow}(Y, R, X) \lif \\
+      \lnot \lexists[u][(\lforall[x][\lforall[y][(\eq[u(x)][u(y)] \lif
+            \eq[x][y])]] \land {}\\
+        \lforall[x][(Y(x) \lif X(u(x)))])])]]]
+\end{multline*}
+صادقة منطقيًا.
+\end{prop}
+
+\begin{explain}
+مجموعة قوى مجموعة~!!a{denumerable} تكون~!!{nonenumerable}، ومن ثم
+تكون أصليتها أكبر من أصلية أي مجموعة~!!{denumerable} (وهي
+$\aleph_0$). ويسمى حجم~$\Pow{\Nat}$ «قوة المتصل»، لأنه يساوي حجم نقاط
+خط الأعداد الحقيقية~$\Real$. وإذا كان الـ!!{domain} كبيرًا بما يكفي
+لترميز مجموعة قوى مجموعة~!!a{denumerable}، أمكننا التعبير عن كون
+مجموعة ما من حجم المتصل بالقول إنها مكافئة عدديًا لأي مجموعة~$Y$ ترمز
+مجموعة قوى مجموعة~$X$ من الحجم~$\aleph_0$. (وإذا لم يكن المجال كبيرًا
+بما يكفي، أي إذا لم يحتو مجموعة جزئية مكافئة عدديًا لـ$\Real$، فلن
+توجد أيضًا علاقة ترمز~$\Pow{X}$.)
+\end{explain}
+
+\begin{prop}
+إذا كان~$\cardle{\Real}{\Domain{M}}$، فإن الـ!!{formula}
+\begin{multline*}
+\fn{Cont}(Y) \ident 
+\lexists[X][\lexists[R][((\fn{Aleph}_0(X) \land
+      \fn{Pow}(Y, R, X)) \land \\ 
+      \lforall[x][\lforall[y][((Y(x) \land {} 
+      Y(y) \land \lforall[z][R(x,z) \liff R(y,z)]) \lif \eq[x][y])]])]]
+\end{multline*}
+تعبّر عن أن~$\cardeq{s(Y)}{\Real}$.
+\end{prop}
+
+\begin{proof}
+تعبّر~$\fn{Pow}(Y, R, X)$ عن أن~$s(Y)$ ترمز بالعلاقة~$s(R)$ مجموعة
+القوى لـ$s(X)$، التي تقول~$\fn{Aleph}_0(X)$ إنها قابلة للتعداد. ومن
+ثم تكون~$s(Y)$ كبيرة بقدر قوة المتصل على الأقل، وإن جاز أن تكون أكبر
+(إذا كانت عناصر متعددة من~$s(Y)$ ترمز المجموعة الجزئية نفسها من~$X$).
+ويستبعد الحد الأخير هذا الاحتمال، إذ يقتضي أن يكون الربط، بالعلاقة
+$s(R)$، بين عناصر~$s(Y)$ والمجموعات الجزئية من~$s(X)$~!!{injective}.
+\end{proof}
+
+\begin{prop}
+تكون~$\cardeq{\Domain{M}}{\Real}$ إذا وفقط إذا
+\begin{multline*}
+  \Sat{M}{\lexists[X][\lexists[Y][\lexists[R][(\fn{Aleph}_0(X) \land \fn{Pow}(Y, R, X) \land {}\\
+      \lforall[x][\lforall[y][((Y(x) \land Y(y) \land
+        \lforall[z][R(x,z) \liff R(y,z)]) \lif \eq[x][y])]] \land {}\\
+      \lexists[u][(\lforall[x][\lforall[y][(\eq[u(x)][u(y)] \lif \eq[x][y])]] \land {}
+        \\\lforall[x][Y(u(x))] \land {}
+        \\\lforall[y][(Y(y) \lif \lexists[x][\eq[y][u(x)]])])])]]]}. 
+\end{multline*}
+\end{prop}
+
+\begin{explain}
+فرضية المتصل هي القول إن حجم المتصل هو الأصلية الأولى
+!!{nonenumerable}؛ أي إن~$\Pow{\Nat}$ من الحجم~$\aleph_1$.
+\end{explain}
+
+\begin{prop}
+تصدق فرضية المتصل إذا وفقط إذا كانت
+\[\fn{CH} \ident
+\lforall[X][(\fn{Aleph}_1(X) \liff \fn{Cont}(X))]\]
+صادقة منطقيًا.
+\end{prop}
+
+لاحظ أنه لا يصدق أن~$\lnot \fn{CH}$ صادقة منطقيًا إذا وفقط إذا كانت
+فرضية المتصل كاذبة. ففي بنية~!!a{enumerable} لا توجد مجموعات جزئية من
+الحجم~$\aleph_1$، ولا مجموعات جزئية من حجم المتصل؛ ومن ثم تكون
+$\fn{CH}$ صادقة دائمًا في بنية~!!a{enumerable}. غير أننا نستطيع إعطاء
+جملة مختلفة تصدق منطقيًا إذا وفقط إذا كانت فرضية المتصل كاذبة:
+
+\begin{prop}
+تكون فرضية المتصل كاذبة إذا وفقط إذا كانت
+\[\fn{NCH} \ident
+\lforall[X][(\fn{Cont}(X) \lif \lexists[Y][(Y \subseteq X \land \lnot
+    \fn{Count}(Y) \land \lnot \cardeq{X}{Y})])]\]
+صادقة منطقيًا.
+\end{prop}
+
+\end{document}

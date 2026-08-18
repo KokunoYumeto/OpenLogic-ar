@@ -1,0 +1,53 @@
+% Part: incompleteness
+% Chapter: arithmetization-syntax
+% Section: substitution
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{art}{sub}
+\olsection{الإحلال}
+
+تذكّر أن الإحلال هو عملية استبدال الحد~$t$ بجميع الورودات الحرة
+لـ!!a{variable}~$u$ في !!a{formula}~$!A$، ونكتبها
+$\Subst{!A}{t}{u}$. وعندما تُجرى هذه العملية على أعداد غودل
+لـ!!{variable}s و!!{formula}s والحدود فإنها تكون عودية بدائية.
+
+\begin{prop}\ollabel{prop:subst-primrec}
+توجد دالة عودية بدائية $\fn{Subst}(x,y,z)$ لها الخاصية
+\[
+\fn{Subst}(\Gn{!A}, \Gn{t}, \Gn{u}) = \Gn{\Subst{!A}{t}{u}}.
+\]
+\end{prop}
+
+\begin{proof}
+يمكننا عندئذ تعريف دالة $\fn{hSubst}$ بالعودية البدائية كما يأتي:
+\begin{multline*}
+\begin{aligned}
+\fn{hSubst}(x, y, z, 0) & = \emptyseq \\
+\fn{hSubst}(x, y, z, i+1) & =
+\end{aligned}\\
+\begin{cases}
+\fn{hSubst}(x, y, z, i) \concat y & \text{إذا صدقت $\fn{FreeOcc}(x, z, i)$} \\
+\fn{append}(\fn{hSubst}(x, y, z, i), (x)_{i}) & \text{في غير ذلك.}
+\end{cases}
+\end{multline*}
+يمكن الآن تعريف $\fn{Subst}(x,y,z)$ بأنها
+$\fn{hSubst}(x,y,z,\len{x})$.
+\end{proof}
+
+\begin{prop}
+\ollabel{prop:free-for}
+العلاقة $\fn{FreeFor}(x,y,z)$، التي تصدق إذا وفقط إذا كان الحد ذو عدد
+غودل~$y$ !!{free for} المتغير ذي عدد غودل~$z$ في الصيغة ذات عدد
+غودل~$x$، عودية بدائية.
+\end{prop}
+
+\begin{proof} تمرين. \end{proof}
+
+\begin{prob}
+أثبت \olref[inc][art][sub]{prop:free-for}.
+\end{prob}
+
+\end{document}

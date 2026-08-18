@@ -1,0 +1,317 @@
+% Part: turing-machines
+% Chapter: undecidability
+% Section: verification
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{tur}{und}{ver}
+\olsection{التحقق من صحة التمثيل}
+
+\begin{explain}
+للتحقق من صحة تمثيلنا علينا إثبات أمرين. أولهما أنه إذا توقفت $M$ عند
+الدخل~$w$، كانت $!T(M,w)\lif !E(M,w)$ صادقة منطقيًا. ثم علينا إثبات
+العكس؛ أي إنه إذا كانت $!T(M,w)\lif !E(M,w)$ صادقة منطقيًا، توقفت
+$M$ بالفعل في نهاية المطاف حين شغلت عند الدخل~$w$.
+
+تختلف استراتيجية إثبات النتيجتين اختلافًا شديدًا. فعلينا في النتيجة
+الأولى بيان أن !!a{sentence} في منطق الرتبة الأولى (وهي
+$!T(M,w)\lif !E(M,w)$) صادقة منطقيًا. وأيسر طريقة لذلك إعطاء
+!!a{derivation}. لكن يفترض أن ينجح برهاننا لكل $M$ و$w$؛ ولذلك لا
+توجد في الواقع !!{sentence} واحدة نحتاج إلى إعطاء !!a{derivation}
+لها، بل توجد جمل غير متناهية الكثرة. وأفضل ما نستطيعه إذن هو أن نثبت
+بالاستقراء أنه مهما كانت صورة $M$ و~$w$، ومهما بلغ عدد الخطوات التي
+تحتاج إليها $M$ لتتوقف عند الدخل~$w$، فسيكون ثمة !!a{derivation}
+لـ$!T(M,w)\lif !E(M,w)$.
+
+ومن الطبيعي أن يجري الاستقراء على عدد الخطوات التي تخطوها $M$ قبل
+بلوغ تهيئة توقف. وسنثبت في برهاننا الاستقرائي، لكل خطوة~$n$ من تشغيل
+$M$ عند الدخل~$w$ حتى تهيئة التوقف الأولى، أن
+$!T(M,w)\Entails !C(M,w,n)$، حيث تصف $!C(M,w,n)$ وصفًا صحيحًا تهيئة
+$M$ المشغلة عند~$w$ بعد~$n$ خطوات. فإذا توقفت $M$ عند الدخل~$w$ بعد
+$n$ خطوة مثلًا، وصفت $!C(M,w,n)$ تهيئة توقف. وسنبين أيضًا أن
+$!C(M,w,n)\Entails !E(M,w)$ متى وصفت $!C(M,w,n)$ تهيئة توقف. ومن
+ثم، إذا توقفت $M$ عند الدخل~$w$، وجد~$n$ تكون بعده $M$ في تهيئة
+توقف. ولذلك $!T(M,w)\Entails !C(M,w,n)$، حيث تصف $!C(M,w,n)$ تهيئة
+توقف، ولما كان في هذه الحال $!C(M,w,n)\Entails !E(M,w)$، حصلنا على
+$!T(M,w)\Entails !E(M,w)$؛ أي
+$\Entails !T(M,w)\lif !E(M,w)$.
+
+أما استراتيجية إثبات العكس فمختلفة جدًا. نفترض هنا أن
+$\Entails !T(M,w)\lif !E(M,w)$، وعلينا إثبات أن $M$ تتوقف عند
+الدخل~$w$. وينتج من الفرض أن $!T(M,w)\Entails !E(M,w)$؛ أي إن
+$!E(M,w)$ صادقة في كل !!{structure} تصدق فيها $!T(M,w)$. ولذلك سنصف
+!!a{structure}~$\Struct{M}$ تصدق فيها $!T(M,w)$: سيكون مجالها
+$\Nat$، وتحدد تهيئات~$M$ أثناء تشغيلها عند الدخل~$w$ تفسير جميع
+$\Obj Q_q$ و$\Obj S_\sigma$. فمثلًا يكون
+$\Sat{M}{\Obj Q_q(\num{m},\num{n})}$ إذا وفقط إذا كانت $M$، حين
+تشغل عند الدخل~$w$ مدة $n$ خطوة، في الحالة~$q$ وتمسح الخانة~$m$.
+ولما كان $!T(M,w)\Entails !E(M,w)$ بحسب الفرض، وكان
+$\Sat{M}{!T(M,w)}$ بحسب البناء، كان $\Sat{M}{!E(M,w)}$. لكن
+$\Sat{M}{!E(M,w)}$ إذا وفقط إذا وجد $n\in\Domain{M}=\Nat$ بحيث تكون
+$M$، حين تشغل عند الدخل~$w$، في تهيئة توقف بعد~$n$ خطوات.
+\end{explain}
+
+\begin{defn}
+لتكن $!C(M,w,n)$ ال!!{sentence}
+\[
+\Obj Q_q(\num{m}, \num{n}) \land \Obj S_{\sigma_0}(\num{0}, \num{n})
+\land \dots \land \Obj S_{\sigma_k}(\num{k}, \num{n}) \land
+\lforall[x][(\num{k} < x \lif \Obj S_\TMblank(x, \num{n}))]
+\]
+حيث $q$ حالة $M$ عند الزمن~$n$، وتمسح $M$ الخانة~$m$ عند الزمن~$n$،
+وتحتوي الخانة~$i$ الرمز~$\sigma_i$ عند الزمن~$n$ لكل
+$0\le i\le k$، و$k$ إما رقم الخانة غير الفارغة الواقعة في أقصى يمين
+الشريط عند الزمن~$0$، وإما رقم الخانة الواقعة في أقصى اليمين التي
+زارها رأس الشريط بعد $n$ خطوة، أيهما أكبر.
+\end{defn}
+
+\begin{lem}\ollabel{lem:halt-config-implies-halt}
+إذا كانت $M$ المشغلة عند الدخل~$w$ في تهيئة توقف بعد $n$ خطوة، فإن
+$!C(M,w,n)\Entails !E(M,w)$.
+\end{lem}
+
+\begin{proof}
+افترض أن $M$ تتوقف عند الدخل~$w$ بعد $n$ خطوة. توجد حالة~$q$ وخانة
+$m$ ورمز~$\sigma$ بحيث:
+\begin{enumerate}
+\item تكون $M$ بعد $n$ خطوة في الحالة~$q$ وتمسح الخانة~$m$ التي يظهر
+  عليها~$\sigma$.
+\item تكون دالة الانتقال $\delta(q,\sigma)$ غير معرّفة.
+\end{enumerate}
+$!C(M,w,n)$ وصف لهذه التهيئة، وتشتمل على العبارتين
+$\Obj Q_q(\num{m},\num{n})$ و
+$\Obj S_\sigma(\num{m},\num{n})$. وتستلزم هاتان العبارتان معًا
+$!E(M,w)$:
+\[
+\lexists[x][\lexists[y][(\bigvee_{\tuple{q, \sigma} \in
+      X}(\Obj Q_q(x, y) \land \Obj S_\sigma(x, y)))]]
+\]
+لأن $\Obj Q_q(\num{m},\num{n})\land
+\Obj S_\sigma(\num{m},\num{n})$ تستلزم
+$\bigvee_{\tuple{q,\sigma}\in X}(\Obj Q_q(\num{m},\num{n})\land
+\Obj S_\sigma(\num{m},\num{n}))$، إذ
+$\tuple{q,\sigma}\in X$.
+\end{proof}
+
+\begin{explain}
+إذن إذا توقفت $M$ عند الدخل $w$ وجد~$n$ بحيث
+$!C(M,w,n)\Entails !E(M,w)$. وسنبين الآن أنه لكل زمن~$n$ لا يجاوز
+تهيئة التوقف الأولى، يكون $!T(M,w)\Entails !C(M,w,n)$.
+\end{explain}
+
+\begin{lem}
+\ollabel{lem:config}
+لكل $n$، إذا لم تكن $M$ قد توقفت قبل إتمام $n$ خطوة، فإن
+$!T(M,w)\Entails !C(M,w,n)$.
+\end{lem}
+
+\begin{proof}
+أساس الاستقراء: إذا كان $n=0$، كانت مقترنات $!C(M,w,0)$ مقترنات
+أيضًا في $!T(M,w)$، ولذلك تستلزمها.
+
+فرض الاستقراء: إذا لم تكن $M$ قد توقفت قبل الخطوة رقم $n$، فإن
+$!T(M,w)\Entails !C(M,w,n)$. وعلينا أن نبين أنه (ما لم تكن
+$!C(M,w,n)$ تصف تهيئة توقف) يكون
+$!T(M,w)\Entails !C(M,w,n+1)$.
+
+افترض أن $M$، بعد $n$ خطوة من بدئها عند $w$، في الحالة~$q$ وتمسح
+الخانة~$m$. ولما كانت $M$ لا تتوقف بعد~$n$ خطوة، فلا بد أن يشتمل
+برنامج~$M$ على تعليمة من إحدى الصور الثلاث الآتية:
+
+\begin{enumerate}
+\item \ollabel{right} $\delta(q, \sigma) = \tuple{q', \sigma', \TMright}$
+
+\item \ollabel{left} $\delta(q, \sigma) = \tuple{q', \sigma', \TMleft}$
+
+\item \ollabel{stay} $\delta(q, \sigma) = \tuple{q', \sigma', \TMstay}$
+\end{enumerate}
+
+سننظر في كل حالة من هذه الحالات الثلاث على التوالي.
+
+\begin{enumerate}
+\item افترض وجود تعليمة من الصورة~\olref{right}. بحسب
+  \olref[rep]{defn:tm-descr}\olref[rep]{rep-right} يعني هذا أن
+\begin{align*}
+& \lforall[x][\lforall[y][((\Obj Q_{q}(x,
+  y) \land \Obj S_\sigma(x, y)) \lif {}]]\\
+& \qquad (\Obj Q_{q'}(x',
+  y') \land \Obj S_{\sigma'}(x, y') \land !A(x, y)))
+\intertext{مقترنة في $!T(M,w)$. وتستلزم ال!!{sentence} الآتية
+  (بالتخصيص الكلي، مع $\num{m}$ بدل~$x$ و$\num{n}$ بدل~$y$):}
+& (\Obj Q_{q}(\num{m}, \num{n}) \land \Obj S_{\sigma}(\num{m},
+\num{n})) \lif {}\\
+& \qquad (\Obj Q_{q'}(\num{m}', \num{n}') \land
+\Obj S_{\sigma'}(\num{m}, \num{n}') \land !A(\num{m}, \num{n})).
+\intertext{ويفيد فرض الاستقراء أن $!T(M,w)\Entails !C(M,w,n)$؛ أي}
+& \Obj Q_q(\num{m}, \num{n}) \land \Obj S_{\sigma_0}(\num{0}, \num{n})
+\land \dots \land \Obj S_{\sigma_k}(\num{k}, \num{n}) \land \\
+& \qquad\lforall[x][(\num{k} < x \lif \Obj S_\TMblank(x, \num{n}))]\\
+\intertext{ولما كانت الخانة~$m$ بعد $n$ خطوة تحتوي~$\sigma$، كان
+  المقترن المقابل $\Obj S_\sigma(\num{m},\num{n})$، ولذلك تستلزم هذه}
+& \Obj Q_{q}(\num{m}, \num{n}) \land \Obj S_{\sigma}(\num{m},
+   \num{n}).
+\intertext{فنحصل الآن على}
+& \Obj Q_{q'}(\num{m}', \num{n}') \land \Obj S_{\sigma'}(\num{m},
+  \num{n}') \land {}\\
+& \qquad\Obj S_{\sigma_0}(\num{0}, \num{n}') \land \dots \land
+  \Obj S_{\sigma_k}(\num{k}, \num{n}') \land {}\\
+& \qquad \lforall[x][(\num{k} < x \lif \Obj S_\TMblank(x, \num{n}'))]
+\end{align*}
+كما يأتي: يأتي السطر الأول مباشرة من تالي الشرط السابق بقياس الفصل.
+وكل مقترن في السطر الأوسط، الذي يستثني
+$S_{\sigma_m}(\num{m},\num{n}')$، ينتج من المقترن المقابل في
+$!C(M,w,n)$ مع $!A(\num{m},\num{n})$.
+
+إذا كان $m<k$، فإن $!T(M,w)\Proves\num{m}<\num{k}$
+(\olref[rep]{prop:mlessk})، ومن تعدي~$<$ نحصل على
+$\lforall[x][(\num{k}<x\lif\num{m}<x)]$. وإذا كان $m=k$، حصلنا على
+$\lforall[x][(\num{k}<x\lif\num{m}<x)]$ بالمنطق وحده. وينتج السطر
+الأخير عندئذ من المقترن المقابل في $!C(M,w,n)$، ومن
+$\lforall[x][(\num{k}<x\lif\num{m}<x)]$، ومن
+$!A(\num{m},\num{n})$. فإذا كان $m<k$، كانت هذه بالفعل
+$!C(M,w,n+1)$.
+
+افترض الآن أن $m=k$. في هذه الحال يكون رأس الشريط قد زار بعد $n+1$
+خطوة الخانة~$k+1$ أيضًا، وهي الآن الخانة المزارة الواقعة في أقصى
+اليمين. ولذلك تحتوي $!C(M,w,n+1)$ مقترنًا جديدًا هو
+$\Obj S_\TMblank(\num{k}',\num{n}')$، ويكون مقترنها الأخير
+$\lforall[x][(\num{k}'<x\lif\Obj S_\TMblank(x,\num{n}'))]$. وعلينا
+التحقق من أن هاتين ال!!{sentence}s مستلزمتان أيضًا.
+
+لدينا بالفعل $\lforall[x][(\num{k}<x\lif\Obj S_\TMblank(x,
+  \num{n}'))]$. وتعطينا، على وجه الخصوص،
+$\num{k}<\num{k}'\lif\Obj S_\TMblank(\num{k}',\num{n}')$. ومن
+البديهية $\lforall[x][x<x']$ نحصل على $\num{k}<\num{k}'$. وبقياس
+الفصل ينتج $\Obj S_\TMblank(\num{k}',\num{n}')$.
+
+وكذلك، لما كان $!T(M,w)\Proves\num{k}<\num{k}'$، تعطينا بديهية تعدي
+$<$ العبارة
+$\lforall[x][(\num{k}'<x\lif\Obj S_\TMblank(x,\num{n}'))]$. (ونترك
+التحقق من ذلك تمرينًا.)
+
+\item افترض وجود تعليمة من الصورة~\olref{left}. عندئذ، بحسب
+  \olref[rep]{defn:tm-descr}\olref[rep]{rep-left}،
+\begin{align*}
+& \lforall[x][\lforall[y][((\Obj Q_{q}(x', y) \land \Obj
+    S_{\sigma}(x', y)) \lif {}]]\\
+& \qquad (\Obj Q_{q'}(x, y') \land \Obj
+  S_{\sigma'}(x', y') \land !A(x', y))) \land {}\\
+& \lforall[y][((\Obj Q_{q_i}(\num{0}, y) \land \Obj S_{\sigma}(\num{0},
+    y)) \lif {}]\\
+& \qquad (\Obj Q_{q_j}(\num{0}, y') \land \Obj S_{\sigma'}(\num{0}, y')
+  \land !A(\num{0}, y)))
+\intertext{مقترنة في $!T(M,w)$. فإذا كان $m>0$، فليكن $l=m-1$
+  (أي $m=l+1$). ويستلزم المقترن الأول من ال!!{sentence} السابقة ما يأتي:}
+& (\Obj Q_{q}(\num{l}', \num{n}) \land \Obj S_{\sigma}(\num{l}', \num{n}))
+\lif {} \\
+& \qquad (\Obj Q_{q'}(\num{l}, \num{n}') \land \Obj S_{\sigma'}(\num{l}',
+\num{n}') \land !A(\num{l}', \num{n})).
+\intertext{وإلا فليكن $l=m=0$، وانظر إلى ال!!{sentence} الآتية التي
+  يستلزمها المقترن الثاني:}
+& ((\Obj Q_{q_i}(\num{0}, \num{n}) \land \Obj S_{\sigma}(\num{0}, \num{n})) \lif {}\\
+& \qquad   (\Obj Q_{q_j}(\num{0}, \num{n}') \land \Obj S_{\sigma'}(\num{0}, \num{n}') \land
+!A(\num{0}, \num{n}))).
+\intertext{وتستلزم كل من العبارتين}
+&  \Obj Q_{q'}(\num{l}, \num{n}') \land \Obj S_{\sigma'}(\num{m},
+  \num{n}') \land {}\\
+&\qquad  \Obj S_{\sigma_0}(\num{0}, \num{n}')\land \dots \land
+  \Obj S_{\sigma_k}(\num{k}, \num{n}')  \land {} \\
+& \qquad  \lforall[x][(\num{k} < x
+  \lif \Obj S_\TMblank(x, \num{n}'))]
+\end{align*}
+كما سبق. (لاحظ أن $\num{l}'\ident\num{l+1}\ident\num{m}$ في الحالة
+الأولى، وأن $\num{l}\ident\num{0}$ في الحالة الثانية.) لكن هذه هي
+$!C(M,w,n+1)$ بعينها.
+
+\item تترك الحالة~\olref{stay} تمرينًا.
+\end{enumerate}
+لقد بينا أنه، لكل~$n$ لا يجاوز تهيئة التوقف الأولى، يكون
+$!T(M,w)\Entails !C(M,w,n)$.
+\end{proof}
+
+\begin{prob}
+أكمل الحالة~\olref[tur][und][ver]{stay} من برهان
+\olref[tur][und][ver]{lem:config}.
+\end{prob}
+
+\begin{prob}
+أعط !!a{derivation} لـ$\Obj S_{\sigma_i}(\num{i},\num{n}')$ من
+$\Obj S_{\sigma_i}(\num{i},\num{n})$ و$!A(m,n)$ (بافتراض
+$i\neq m$؛ أي إما $i<m$ وإما $m<i$).
+\end{prob}
+
+\begin{prob}
+أعط !!a{derivation} لـ
+$\lforall[x][(\num{k}'<x\lif\Obj S_\TMblank(x,\num{n}'))]$ من
+$\lforall[x][(\num{k}<x\lif\Obj S_\TMblank(x,\num{n}'))]$، و
+$\lforall[x][x<x']$، و
+$\lforall[x][\lforall[y][\lforall[z][((x<y\land y<z)\lif x<z)]]]$.)
+\end{prob}
+
+
+\begin{lem}
+\ollabel{lem:valid-if-halt}
+إذا توقفت $M$ عند الدخل~$w$، كانت $!T(M,w)\lif !E(M,w)$ صادقة
+منطقيًا.
+\end{lem}
+
+\begin{proof}
+تفيد \olref{lem:config} أنه لكل زمن~$n$ حتى تهيئة التوقف الأولى، يكون
+وصف~$!C(M,w,n)$ لتهيئة $M$ عند الزمن~$n$ مستلزمًا من~$!T(M,w)$.
+افترض أن $M$ تتوقف بعد $k$ خطوات. عندئذ تمسح الخانة~$m$ لبعض
+$m\in\Nat$. وتصف $!C(M,w,k)$ تهيئة توقف لـ~$M$؛ أي إنها تحتوي
+مقترنين هما $\Obj Q_q(\num{m},\num{k})$ و
+$\Obj S_\sigma(\num{m},\num{k})$، حيث
+$\delta(q,\sigma)$ غير معرّفة. ولذلك، بحسب
+\olref{lem:halt-config-implies-halt}، يكون
+$!C(M,w,k)\Entails !E(M,w)$. لكن لما كان
+$!T(M,w)\Entails !C(M,w,k)$، كان $!T(M,w)\Entails !E(M,w)$، ومن ثم
+كانت $!T(M,w)\lif !E(M,w)$ صادقة منطقيًا.
+\end{proof}
+
+
+\begin{explain}
+لإتمام التحقق من دعوانا علينا أيضًا إثبات الاتجاه العكسي: إذا كانت
+$!T(M,w)\lif !E(M,w)$ صادقة منطقيًا، فإن $M$ تتوقف بالفعل حين تبدأ
+عند الدخل~$w$.
+\end{explain}
+
+\begin{lem}
+\ollabel{lem:halt-if-valid}
+إذا كان $\Entails !T(M,w)\lif !E(M,w)$، فإن $M$ تتوقف عند
+الدخل~$w$.
+\end{lem}
+
+\begin{proof}
+انظر إلى ال!!{structure}~$\Struct M$ للغة $\Lang L_M$، التي مجالها
+$\Nat$ وتفسر $\Obj 0$ بالعدد~$0$، و$\prime$ بدالة اللاحق، و$<$
+بعلاقة الأصغر من، وتفسر المحمولين $\Obj Q_q$ و~$\Obj S_\sigma$ كما
+يأتي:
+\begin{align*}
+  \Assign{\Obj Q_q}{M} & =
+\Setabs{\tuple{m, n}}{\begin{array}{ll}\text{بعد بدء $M$ عند~$w$ ومرور~$n$ خطوة،}\\ \text{تكون في الحالة $q$
+  وتمسح الخانة~$m$}\end{array}} \\
+\Assign{\Obj S_\sigma}{M} & = \Setabs{\tuple{m, n}}{\begin{array}{ll}
+\text{بعد بدء $M$ عند~$w$ ومرور $n$ خطوة،}\\ \text{تحتوي الخانة~$m$ من شريط $M$
+  الرمز~$\sigma$}\end{array}}
+\end{align*}
+أي إننا نبني ال!!{structure}~$\Struct{M}$ بحيث تصف، خطوة فخطوة، ما
+تفعله $M$ بالفعل حين تبدأ عند الدخل~$w$. ومن الواضح أن
+$\Sat{M}{!T(M,w)}$. فإذا كان
+$\Entails !T(M,w)\lif !E(M,w)$، كان أيضًا $\Sat{M}{!E(M,w)}$؛ أي
+\[
+\Sat{M}{\lexists[x][\lexists[y][(\bigvee_{\tuple{q, \sigma} \in
+      X}(\Obj Q_q(x, y) \land \Obj S_\sigma(x, y)))]]}.
+\]
+ولما كان $\Domain{M}=\Nat$، فلا بد من وجود $m,n\in\Nat$ بحيث
+$\Sat{M}{\Obj Q_q(\num{m},\num{n})\land
+\Obj S_\sigma(\num{m},\num{n})}$ لبعض~$q$ و~$\sigma$ تكون عندهما
+$\delta(q,\sigma)$ غير معرّفة. وبحسب تعريف~$\Struct M$ يعني هذا أن
+$M$، بعد أن تبدأ عند الدخل~$w$ وتمر~$n$ خطوة، تكون في الحالة~$q$
+وتقرأ الرمز~$\sigma$، وأن دالة الانتقال غير معرّفة؛ أي إن~$M$ قد
+توقفت.
+\end{proof}
+
+\end{document}

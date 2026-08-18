@@ -1,0 +1,217 @@
+% Part: model-theory
+% Chapter: basics
+% Section: partial-iso
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{bas}{pis}
+\section{التشاكلات الجزئية}
+
+\begin{defn}
+  لتكن !!{structure}s اثنتان $\Struct{M}$ و$\Struct{N}$. \emph{التشاكل
+  الجزئي} من $\Struct{M}$ إلى $\Struct{N}$ دالة جزئية منتهية~$p$ تأخذ
+  مدخلاتها من $\Domain M$ وتعيد قيمًا في $\Domain N$، وتحقق شروط التشاكل
+  الواردة في \olref[iso]{defn:isomorphism} على مجالها:
+  \begin{enumerate}
+  \item تكون $p$~!!{injective}؛
+  \item لكل !!{constant}~$c$: إذا كانت $p(\Assign{c}{M})$ معرّفة، فإن
+    $p(\Assign{c}{M}) = \Assign{c}{N}$؛
+  \item لكل !!{predicate}~$P$ ذي $n$ مواضع: إذا كانت $a_1$، \dots،
+    $a_n$ في مجال $p$، فإن $\langle a_1, \dots, a_n\rangle \in
+    \Assign P M$ إذا وفقط إذا كان
+    $\langle p(a_1), \dots, p(a_n) \rangle \in \Assign P N$؛
+  \item لكل !!{function}~$f$ ذات $n$ مواضع: إذا كانت $a_1$، \dots،
+    $a_n$ في مجال $p$، فإن $p(\Assign f M (a_1, \dots,a_n))
+    = \Assign f N (p(a_1), \dots, p(a_n))$.
+  \end{enumerate}
+  وكون $p$ منتهية يعني أن $\dom{p}$ منتهٍ.
+\end{defn}
+
+لاحظ أن الدالة الخالية~$\emptyset$ تشاكل جزئي دائمًا بين أي
+!!{structure}s اثنتين.
+
+\begin{defn}\ollabel{defn:partialisom}
+  تكون !!{structure}s اثنتان $\Struct{M}$ و$\Struct{N}$
+  \emph{متشاكلتين جزئيًا}، ونكتب $\Struct{M} \iso[p] \Struct{N}$، إذا
+  وفقط إذا وجدت مجموعة غير خالية~$I$ من التشاكلات الجزئية بين
+  $\Struct{M}$ و$\Struct{N}$ تحقق خاصية \emph{الذهاب والإياب}:
+  \begin{enumerate}
+  \item (\emph{الذهاب}) لكل $p \in I$ و$a \in \Domain M$ يوجد
+    $q \in I$ بحيث $p \subseteq q$ ويكون $a$ في مجال $q$؛
+  \item (\emph{الإياب}) لكل $p \in I$ و$b \in \Domain N$ يوجد
+    $q \in I$ بحيث $p \subseteq q$ ويكون $b$ في مدى $q$.
+  \end{enumerate}
+\end{defn}
+
+\begin{thm}\ollabel{thm:p-isom1}
+  إذا كان $\Struct{M} \iso[p] \Struct{N}$ وكانت $\Struct{M}$ و
+  $\Struct{N}$~!!{enumerable}، فإن $\Struct{M} \iso \Struct{N}$.
+\end{thm}
+
+\begin{proof}
+  لما كانت $\Struct{M}$ و$\Struct{N}$~!!{enumerable}، اكتب
+  $\Domain{M} = \{a_0, a_1, \ldots \}$ و
+  $\Domain{N} = \{b_0, b_1, \ldots \}$. نبدأ بأي $p_0 \in I$، ونعرّف
+  متتالية متزايدة من التشاكلات الجزئية
+  $p_0 \subseteq p_1 \subseteq p_2 \subseteq \cdots$ كما يأتي:
+  \begin{enumerate}
+  \item إذا كان $n+1$ فرديًا، أي إذا كان $n = 2r$، فاستعمل خاصية الذهاب
+    لإيجاد $p_{n+1} \in I$ بحيث $p_n \subseteq p_{n+1}$ ويكون $a_r$
+    في مجال $p_{n+1}$؛
+  \item إذا كان $n+1$ زوجيًا، أي إذا كان $n=2r+1$، فاستعمل خاصية الإياب
+    لإيجاد $p_{n+1} \in I$ بحيث $p_n \subseteq p_{n+1}$ ويكون $b_r$
+    في مدى $p_{n+1}$.
+  \end{enumerate}
+إذا وضعنا الآن:
+\[
+p = \bigcup_{n\ge 0} p_n,
+\]
+كان $p$ تشاكلًا بين $\Struct{M}$ و$\Struct{N}$.
+\end{proof}
+
+\begin{prob}
+  بيّن بالتفصيل أن $p$ كما عرّفت في
+  \olref[mod][bas][pis]{thm:p-isom1} تشاكل بالفعل.
+\end{prob}
+
+\begin{thm}\ollabel{thm:p-isom2}
+  لتكن $\Struct{M}$ و$\Struct{N}$~!!{structure}s للـ!!{language} علائقية
+  محضة (أي !!a{language} لا تحتوي إلا !!{predicate}s، ولا تحتوي
+  !!{function}s أو ثوابت). إذا كان $\Struct{M} \iso[p] \Struct{N}$،
+  فإن $\Struct{M} \elemequiv \Struct{N}$ أيضًا.
+\end{thm}
+
+\begin{proof}
+  يبيّن الاستقراء على الـ!!{formula}s أنه إذا كانت $a_1$، \dots، $a_n$
+  و$b_1$، \dots، $b_n$ بحيث يوجد تشاكل جزئي~$p$ يرسل كل $a_i$ إلى
+  $b_i$، وكان $s_1(x_i)=a_i$ و$s_2(x_i)=b_i$ (لـ$i=1$، \dots،~$n$)،
+  فإن $\Sat{M}{!A}[s_1]$ إذا وفقط إذا كان $\Sat{N}{!A}[s_2]$.
+  وتعطي حالة $n=0$ أن $\Struct{M} \elemequiv \Struct{N}$.
+\end{proof}
+
+\begin{rem}
+إذا وجدت !!{function}s، بقيت النتيجة السابقة صحيحة، لكن يلزم النظر في
+التشاكل الذي تستحثه $p$ بين الـ!!{structure} الجزئية من $\Struct{M}$
+المولدة بـ$a_1$، \dots، $a_n$ والـ!!{structure} الجزئية من
+$\Struct{N}$ المولدة بـ$b_1$، \dots، $b_n$.
+\end{rem}
+
+يمكن «تفكيك» النتيجة السابقة إلى مراحل بإقامة صلة بين عدد الكمّامات
+المتعشقة في !!a{formula} وعدد المرات التي يمكن فيها توسيع التشاكلات
+الجزئية المعنية.
+
+\begin{defn}
+  لكل !!{formula}~$!A$، تعرّف \emph{رتبة الكم} لـ$!A$، ويرمز إليها
+  بـ$\QuantRank{!A} \in \Nat$، استقرائيًا بأنها أكبر عدد من الكمّامات
+  المتعشقة في $!A$. وتكون !!{structure}s اثنتان $\Struct{M}$ و
+  $\Struct{N}$ \emph{متكافئتين حتى الرتبة~$n$}، ونكتب
+  $\Struct{M} \elemequiv[n] \Struct{N}$، إذا اتفقتا على جميع الجمل ذات
+  رتبة الكم الأصغر من أو المساوية لـ$n$.
+\end{defn}
+
+\begin{prop}\ollabel{prop:qr-finite}
+  لتكن $\Lang{L}$~!!{language} علائقية محضة منتهية، أي !!{language}
+  تحتوي عددًا منتهيًا من الـ!!{predicate}s والـ!!{constant}s ولا تحتوي
+  !!{function}s. لكل $n,k \in \Nat$ لا يوجد، حتى التكافؤ المنطقي، إلا
+  عدد منتهٍ من !!{formula}s الرتبة الأولى في الـ!!{language}~$\Lang{L}$ التي لا تزيد
+  رتبة كمها على~$n$ وتقع متغيراتها الحرة ضمن $x_1$، \dots،~$x_k$.
+\end{prop}
+
+\begin{proof}
+  بالاستقراء على $n$، مع إثبات الدعوى في آن واحد لكل $k$.
+\end{proof}
+
+\begin{defn}
+  لتكن !!a{structure}~$\Struct{M}$. نرمز بـ$\Domain M^{<\omega}$ إلى
+  مجموعة جميع المتتاليات المنتهية على $\Domain{M}$. ونستعمل
+  $\mathbf{a}, \mathbf{b}, \mathbf{c}, \ldots$ للدلالة على متتاليات
+  منتهية. وإذا كانت $\mathbf{a} \in \Domain{M}^{<\omega}$ و
+  $a \in \Domain{M}$، فإن $\mathbf{a}a$ تمثل \emph{وصل}
+  $\mathbf{a}$ بـ$a$.
+\end{defn}
+
+\begin{defn}
+  لتكن !!{structure}s اثنتان $\Struct{M}$ و$\Struct{N}$. نعرّف علائق
+  $I_n \subseteq \Domain M^{<\omega} \times \Domain N^{<\omega}$ بين
+  متتاليات متساوية الطول، بالاستقراء على $n$ كما يأتي:
+   \begin{enumerate}
+   \item تكون $I_0(\mathbf{a},\mathbf{b})$ إذا وفقط إذا حققت
+     $\mathbf{a}$ و$\mathbf{b}$ الـ!!{formula}s الذرية نفسها في
+     $\Struct{M}$ و$\Struct{N}$؛ أي إذا كان طول المتتاليتين~$k$، وكان
+     $s_1(x_i)=a_i$ و$s_2(x_i)=b_i$، وكانت $!A$ ذرية وجميع
+     !!{variable}s فيها من بين $x_1$، \dots،~$x_k$، فإن
+     $\Sat{M}{!A}[s_1]$ إذا وفقط إذا كان $\Sat{N}{!A}[s_2]$.
+   \item تكون $I_{n+1}(\mathbf{a},\mathbf{b})$ إذا وفقط إذا كان لكل
+     $a\in \Domain M$ عنصر~$b\in \Domain N$ بحيث
+     $I_n(\mathbf{a}a,\mathbf{b}b)$، والعكس بالعكس.
+   \end{enumerate}
+\end{defn}
+
+
+\begin{defn}
+  نكتب $\Struct{M} \approx_n \Struct{N}$ إذا تحققت
+  $I_n(\emptyseq,\emptyseq)$ في $\Struct{M}$ و$\Struct{N}$ (حيث
+  $\emptyseq$ هي المتتالية الخالية).
+\end{defn}
+
+\begin{thm}\ollabel{thm:b-n-f}
+  لتكن $\Lang{L}$~!!{language} علائقية محضة. إذا كانت
+  $I_n(\mathbf{a},\mathbf{b})$ وكان طول المتتاليتين~$k$، فإن لكل $!A$
+  تقع متغيراتها الحرة ضمن $x_1$، \dots،~$x_k$ وتحقق
+  $\QuantRank{!A} \le n$، يكون $\Sat{M}{!A}[\mathbf{a}]$ إذا وفقط إذا
+  كان $\Sat{N}{!A}[\mathbf{b}]$ (حيث تحقق $\mathbf{a}$ مرة أخرى~$!A$
+  إذا حققها أي تعيين~$s$ بحيث $s(x_i)=a_i$). وإذا كانت $\Lang{L}$
+  منتهية، صح العكس أيضًا.
+\end{thm}
+
+\begin{proof}
+  يثبت بسهولة، بالاستقراء على $!A$، أن
+  $I_n(\mathbf{a},\mathbf{b})$ تستلزم أن $\mathbf{a}$ و$\mathbf{b}$
+  تحققان الـ!!{formula}s نفسها التي لا تزيد رتبة كمها على~$n$ وتقع
+  متغيراتها الحرة ضمن قائمة المتغيرات الثابتة المقابلة لإحداثياتهما.
+  ولإثبات العكس نستقرئ على $n$، مستعملين
+  \olref{prop:qr-finite}، التي تضمن أنه، لكل $n$ ولكل قائمة منتهية ثابتة
+  من المتغيرات الحرة، لا يوجد إلا عدد منتهٍ من فئات التكافؤ المنطقي
+  للـ!!{formula}s التي لا تزيد رتبة كمها على~$n$.
+
+  عند $n=0$، يقتضي فرض أن $\mathbf{a}$ و$\mathbf{b}$ تحققان
+  الـ!!{formula}s الخالية من الكم نفسها أنهما تحققان الصيغ الذرية نفسها،
+  ومن ثم تكون $I_0(\mathbf{a},\mathbf{b})$.
+
+  في حالة $n+1$، افترض أن $\mathbf{a}$ و$\mathbf{b}$ تحققان
+  الـ!!{formula}s نفسها التي لا تزيد رتبة كمها على $n+1$. ولكي نثبت
+  $I_{n+1}(\mathbf{a},\mathbf{b})$، يكفي أن نثبت أنه لكل
+  $a \in \Domain M$ يوجد $b \in \Domain N$ بحيث
+  $I_n(\mathbf{a}a,\mathbf{b}b)$؛ وبحسب فرض الاستقراء يكفي أيضًا أن
+  نثبت أنه لكل $a \in \Domain M$ يوجد $b \in \Domain N$ بحيث تحقق
+  $\mathbf{a}a$ و$\mathbf{b}b$ الـ!!{formula}s نفسها التي لا تزيد رتبة
+  كمها على~$n$.
+
+  خذ $a \in \Domain M$. اختر ممثلًا واحدًا من كل فئة تكافؤ منطقي
+  للـ!!{formula}s~$!B(x,\mathbf{y})$ التي لا تزيد رتبة كمها على~$n$،
+  وتقع متغيراتها الحرة ضمن القائمة الثابتة $x,\mathbf{y}$، وتحققها
+  $\mathbf{a}a$ في $\Struct{M}$. ولتكن $!T^a_n$ اقتران هذه المجموعة
+  المنتهية من الممثلين؛ ومن ثم يجوز عدّها !!{formula} واحدة من الرتبة
+  الأولى. يترتب أن $\mathbf{a}$ تحقق
+  $\lexists[x][!T^a_n(x,\mathbf{y})]$، ورتبة كم هذه الصيغة لا تزيد على
+  $n+1$. وبحسب الفرض، تحقق $\mathbf{b}$ الصيغة نفسها في $\Struct{N}$؛
+  ومن ثم يوجد $b \in \Domain N$ بحيث تحقق $\mathbf{b}b$ الصيغة
+  $!T^a_n$. وبوجه خاص، تحقق $\mathbf{b}b$ الـ!!{formula}s نفسها التي
+  لا تزيد رتبة كمها على~$n$ وتحققها $\mathbf{a}a$؛ إذ تشمل الممثلين
+  المختارين ممثل فئة كل صيغة صادقة أو نفي صيغة كاذبة. وبالمثل نبين أنه
+  لكل $b \in \Domain N$ يوجد $a\in \Domain M$ بحيث تحقق
+  $\mathbf{a}a$ و$\mathbf{b}b$ الـ!!{formula}s نفسها التي لا تزيد رتبة
+  كمها على~$n$، وهذا يتم البرهان.
+\end{proof}
+
+\begin{cor}\ollabel{cor:b-n-f}
+  إذا كانت $\Struct{M}$ و$\Struct{N}$~!!{structure}s علائقية محضة في
+  !!{language} منتهية، فإن $\Struct{M} \approx_n\Struct{N}$ إذا وفقط
+  إذا كان $\Struct{M} \elemequiv[n] \Struct{N}$. وبوجه خاص،
+  $\Struct{M} \elemequiv \Struct{N}$ إذا وفقط إذا كان، لكل $n$،
+  $\Struct{M} \approx_n \Struct{N}$.
+\end{cor}
+
+\end{document}

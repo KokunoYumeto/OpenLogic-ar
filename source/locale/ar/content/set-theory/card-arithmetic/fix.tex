@@ -1,0 +1,152 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{card-arithmetic}{fix}
+\olsection{نقاط $\aleph$ الثابتة}
+
+اقترحنا في \olref[spine][]{chap} أن بديهية الاستبدال بحاجة إلى تبرير،
+لأنها تجبر التراتبية على أن تكون بالغة الارتفاع. وبعد أن درسنا شيئاً من
+حساب الكاردينالات، نستطيع أن نقدم مثالاً صغيراً على ارتفاع التراتبية.
+
+من الواضح أن $0 < \aleph_0$ و$1 < \aleph_1$ و$2 < \aleph_2$، وهكذا؛
+بل إن فرق الحجم لا يزداد إلا \emph{كبراً} مع كل خطوة. ولذلك يغري هذا
+بالتخمين أن $\kappa< \aleph_\kappa$ لكل عدد ترتيبي $\kappa$.
+
+لكن هذا التخمين \emph{كاذب} في $\ZFC$. فنستطيع في الواقع أن نثبت وجود
+\emph{نقاط ثابتة لـ$\aleph$}، أي كاردينالات $\kappa$ تحقق
+$\kappa=\aleph_\kappa$.
+
+\begin{prop}\ollabel{alephfixed}
+توجد نقطة ثابتة لـ$\aleph$.
+\end{prop}
+
+\begin{proof}
+عرّف بالعود:
+\begin{align*}
+	\kappa_0 &= 0\\
+	\kappa_{n+1} &= \aleph_{\kappa_n}\\
+	\kappa&= \bigcup_{n < \omega}\kappa_n
+\end{align*}
+يكون $\kappa$ كاردينالاً بحسب
+\olref[cardinals][classing]{unioncardinalscardinal}. والآن:
+\[
+	\kappa= \bigcup_{n < \omega} \kappa_{n+1} =
+	\bigcup_{n < \omega}\aleph_{\kappa_n} =
+	\bigcup_{\alpha < \kappa}\aleph_\alpha = \aleph_\kappa
+\]
+\end{proof}
+
+كتب بولوس مرة مقالة عن نقطة $\aleph$ الثابتة نفسها التي أنشأناها للتو.
+وبعد أن لاحظ وجود $\kappa$ في مطلع مقالته قال:
+\begin{quote}
+	[$\kappa$] عدد \emph{كبير جداً} بحسب معايير من لم يسبق لهم التعرض
+	لنظرية المجموعات؛ وهو، فيما يبدو لي، كبير إلى حد يجعل صدق أي نظرية
+	تتضمن بين أقوالها زعم وجود $\kappa$ من الأشياء على الأقل موضع شك.
+	\citep[p.~257]{Boolos2000}
+\end{quote}
+ثم ختم مقالته أخيراً بالسؤال:
+\begin{quote}
+	[هل] نشك في أنه، أياً يكن الحال في بداية القصة، حين نكون قد بلغنا هذا
+	الموضع تكون العجلات قد أخذت تدور في فراغ، ولم نعد نصغي إلى وصف شيء
+	واقع؟
+	\citep[p.~268]{Boolos2000}
+\end{quote}
+فإذا كنا قد تجاوزنا بالفعل «أي شيء واقع»، وجب أن نوجه اللوم مباشرة إلى
+الاستبدال، لأن هذه البديهية هي التي تتيح نجاح برهاننا. وعندئذ، فيما
+نفترض، سيحتاج بولوس إلى مراجعة قوله، قبل بضعة عقود، إن الاستبدال لا تترتب
+عليه آثار «غير مرغوب فيها» (انظر
+\olref[replacement][extrinsic]{sec}).
+
+ولكن هل وجود $\kappa$ سيئ إلى هذا الحد؟ قد يفيد هنا أن ننظر في
+\emph{مفارقة تريسترام شاندي} عند راسل. يوثق تريسترام شاندي حياته في
+يومياته، لكن تسجيل يوم واحد يستغرق منه سنة. ومع مرور كل سنة يزداد
+تريسترام تأخراً: فبعد سنة لا يكون قد سجل إلا يوماً واحداً، ويكون قد عاش
+364 يوماً غير مسجلة؛ وبعد سنتين لا يكون قد سجل إلا يومين، ويكون قد عاش
+728 يوماً غير مسجلة؛ وبعد ثلاث سنوات لا يكون قد سجل إلا ثلاثة أيام،
+ويكون قد عاش 1092 يوماً غير مسجلة
+\dots\footnote{نتجاهل السنوات الكبيسة.} ومع ذلك، إذا كان تريسترام
+\emph{خالداً} فسيتمكن من تسجيل كل يوم، لأنه سيسجل اليوم $n$ في السنة
+$n$ من حياته. ولذلك ستكون لتريسترام، «في نهاية الزمان»، يوميات كاملة.
+
+فلماذا يختلف هذا إلى ذلك الحد عن فكرة أن $\alpha$ أصغر من
+$\aleph_\alpha$---بل أصغر منه على نحو متزايد ويائس---حتى نصل إلى
+$\kappa$، حيث نلحق به ويصبح $\kappa = \aleph_\kappa$؟
+
+فلندع ذلك جانباً، ولنفترض قبولنا $\ZFC$، ولنختتم بمزيد من المتعة بشأن
+إنشاء النقاط الثابتة. تثبت النتائج الثلاث الآتية، على نحو حدسي، أن ثمة
+نقطة غير تافهة تكون عندها التراتبية عريضة بقدر ارتفاعها:
+
+\begin{prop}\ollabel{bethfixed}
+توجد نقطة ثابتة لـ$\beth$، أي يوجد $\kappa$ بحيث
+$\kappa= \beth_\kappa$.
+\end{prop}
+
+\begin{proof}
+كما في \olref{alephfixed}، باستعمال «$\beth$» بدلاً من «$\aleph$».
+\end{proof}
+
+\begin{prop}\ollabel{stagesize}
+$\card{V_{\omega+\alpha}} = \beth_{\alpha}$. وإذا كان
+$\omega \ordtimes \omega \leq \alpha$، فإن
+$\card{V_\alpha} = \beth_\alpha$.
+\end{prop}
+
+\begin{proof}
+يثبت الادعاء الأول باستقراء بسيط ما فوق المتناهي. ويتبع الادعاء الثاني،
+لأنه إذا كان $\omega \ordtimes \omega \leq \alpha$ فإن
+$\omega + \alpha = \alpha$. ولإثبات ذلك نستعمل حقائق عن حساب الأعداد
+الترتيبية من \olref[ord-arithmetic][]{chap}. لاحظ أولاً أن
+$\omega \ordtimes \omega = \omega \ordtimes (1 \ordplus \omega) =
+(\omega \ordtimes 1) \ordplus (\omega\ordtimes\omega) = \omega
+\ordplus (\omega \ordtimes \omega)$. فإذا كان
+$\omega \ordtimes \omega \leq \alpha$، أي كان
+$\alpha = (\omega\ordtimes\omega) \ordplus \beta$ لبعض $\beta$، فإن
+$\omega \ordplus \alpha = \omega \ordplus
+((\omega \ordtimes \omega) \ordplus \beta) =
+(\omega \ordplus (\omega \ordtimes \omega)) \ordplus \beta =
+(\omega \ordtimes \omega) \ordplus \beta = \alpha$.
+\end{proof}
+
+\begin{cor}
+يوجد $\kappa$ بحيث $\card{V_\kappa} = \kappa$.
+\end{cor}
+
+\begin{proof}
+ليكن $\kappa$ نقطة ثابتة لـ$\beth$ كما تضمنها
+\olref{bethfixed}. ومن الواضح أن
+$\omega \ordtimes \omega < \kappa$. ومن ثم، بحسب
+\olref{stagesize}، $\card{V_\kappa} = \beth_\kappa= \kappa$.
+\end{proof}
+
+تحت $V_\kappa$ من المراحل بقدر ما في $V_\kappa$ من !!{element}.
+إذن، على نحو حدسي، يكون $V_\kappa$ عريضاً بقدر ارتفاعه. وهذا شبيه جداً
+بتريسترام شاندي: ننتقل من مرحلة إلى تليها بأخذ \emph{مجموعات القوى}،
+فنجعل تراتبيتنا \emph{أكبر بكثير} في كل خطوة. لكن «في النهاية»، أي عند
+المرحلة $\kappa$، يلحق عرض التراتبية بارتفاعها.
+
+قد يسأل المرء: \emph{كم مرة يساوي عرض التراتبية ارتفاعها؟} والجواب:
+\emph{بعدد الأعداد الترتيبية.} لكن هذا يحتاج إلى شيء من الشرح.
+
+نعرّف حداً $\tau$ كما يأتي. لأي $A$، ضع:
+\begin{align*}
+	\tau_0(A) & \defis \cardsucc{\card{A}}\\
+	\tau_{n+1}(A) & \defis \beth_{\tau_n(A)}\\
+	\tau(A) & \defis \bigcup_{n < \omega}\tau_n(A)
+\intertext{كما في \olref{bethfixed}، تكون $\tau(A)$ نقطة ثابتة لـ$\beth$
+لكل $A$، ومن تعريف $\tau_0(A)$ يكون
+$\card{A} < \tau(A)$ بوضوح. فانظر الآن إلى التعريف العودي الآتي:}
+	W_0 &\defis 0\\
+	W_{\alpha + 1} & \defis \tau(W_\alpha)\\
+	W_\alpha & \defis \bigcup_{\beta < \alpha} W_\beta
+	\text{، إذا كان $\alpha$ حدياً.}
+\end{align*}
+هذا البناء معرّف لجميع الأعداد الترتيبية. وكل $W_\alpha$ كاردينال؛ وفي
+كل خطوة خلفية لدينا
+$W_\alpha=\card{W_\alpha}<\tau(W_\alpha)=W_{\alpha+1}$، بينما نأخذ
+الاتحاد في المراحل الحدية. لذلك تكون الخريطة
+$\alpha\mapsto W_\alpha$ متزايدة قطعاً، ومن ثم فهي، على نحو حدسي،
+«!!a{injection}» من الأعداد الترتيبية إلى نقاط $\beth$ الثابتة. وتماماً
+كما سبق، يكون $V_{W_\alpha}$ عريضاً بقدر ارتفاعه، لكل $\alpha$.
+
+\end{document}

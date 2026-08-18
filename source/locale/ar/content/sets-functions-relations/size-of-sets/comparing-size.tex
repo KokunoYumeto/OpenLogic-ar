@@ -1,0 +1,146 @@
+% Part:sets-functions-relations
+% Chapter: size-of-sets
+% Section: comparing-sizes
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid[ar]{sfr}{siz}{car}
+
+\olsection{مجموعات مختلفة الأحجام، ومبرهنة كانتور}
+
+\begin{explain}
+قدّمنا صياغة دقيقة لفكرة أن مجموعتين لهما الحجم نفسه. ويمكننا أيضًا
+تقديم صياغة دقيقة لفكرة أن مجموعة أصغر من أخرى. وسيتطلب تعريفنا لعبارة
+«لا تزيد حجمًا على (أو تتساوى عددًا مع)»، بدلًا من !!a{bijection} بين
+المجموعتين، !!a{injection} من المجموعة الأولى إلى الثانية. فإذا وجدت
+مثل هذه الدالة، كان حجم المجموعة الأولى أقل من أو مساويًا لحجم الثانية.
+ومن الوجهة الحدسية، تضمن !!a{injection} من مجموعة إلى أخرى أن مدى الدالة
+يضم من !!{element}s عددًا لا يقل عن عدد !!{element}s مجالها، إذ لا
+يُرسل عنصران مختلفان من المجال إلى !!{element} واحد من المدى.
+\end{explain}
+
+\begin{defn}
+نقول إن $A$ \emph{لا تزيد حجمًا على}~$B$، ويكتب ذلك $\cardle{A}{B}$،
+إذا وفقط إذا وجدت !!a{injection} $f \colon A \to B$.
+\end{defn}
+
+من الواضح أن هذه علاقة انعكاسية ومتعدية، لكنها ليست متناظرة (ويترك
+إثبات ذلك تمرينًا). ويمكننا أيضًا إدخال مفهوم ينص على أن مجموعة ما
+أصغر (حصرًا) من أخرى.
+
+\begin{defn}
+نقول إن $A$ \emph{أصغر حجمًا من}~$B$، ويكتب ذلك $\cardless{A}{B}$،
+إذا وفقط إذا وجدت !!a{injection}~$f\colon A \to B$، ولم توجد
+!!{bijection}~$g\colon A
+\to B$؛ أي إذا كان $\cardle{A}{B}$ و$\cardneq{A}{B}$.
+\end{defn}
+
+من الواضح أن هذه العلاقة لا انعكاسية ومتعدية. (ويترك إثبات ذلك
+تمرينًا.) وباستعمال هذا الترميز، يمكننا القول إن مجموعة~$A$
+!!{enumerable} إذا وفقط إذا كان $\cardle{A}{\Nat}$، وإن $A$
+!!{nonenumerable} إذا وفقط إذا كان $\cardless{\Nat}{A}$. ويتيح لنا ذلك
+إعادة صياغة
+\oliflabeldef{sfr:siz:nen-alt:thm:nonenum-pownat}{%
+\olref[sfr][siz][nen-alt]{thm:nonenum-pownat}
+بوصفها الملاحظة القائلة إن
+$\cardless{\Nat}{\Pow{\Nat}}$}{%
+\olref[sfr][siz][nen]{thm:nonenum-pownat}
+بوصفها الملاحظة القائلة إن $\cardless{\PosInt}{\Pow{\PosInt}}$}. والواقع
+أن \citet{Cantor1892} أثبت أن هذه النقطة الأخيرة \emph{عامة تمامًا}:
+
+\begin{thm}[كانتور]\ollabel{thm:cantor}
+$\cardless{A}{\Pow{A}}$، لأي مجموعة $A$.
+\end{thm}
+
+\begin{proof}
+الدالة $f(x) = \{x\}$ هي !!a{injection} $f \colon A \to \Pow{A}$،
+لأنه إذا كان $x \neq y$، كان $\{x\} \neq \{y\}$ أيضًا بحكم
+الامتدادية، ومن ثم $f(x) \neq f(y)$. وهكذا يكون $\cardle{A}{\Pow{A}}$.
+
+\begin{editorial}
+نعرض البرهان المفصل إذا كان \olref[nen]{sec} موجودًا، ونعرض فيما عدا
+ذلك برهانًا أسرع يطابق \olref[nen-alt]{sec}.
+\end{editorial}
+
+\oliflabeldef{sfr:siz:nen:sec}{%
+  سنبين الآن أنه لا يمكن أن توجد دالة~!!a{surjective}~$g\colon A \to
+  \Pow{A}$، فضلًا عن دالة~!!a{bijective}، ومن ثم أن
+  $\cardneq{A}{\Pow{A}}$. افترض، إذن، أن $g\colon A \to \Pow{A}$.
+  بما أن $g$ كلية، فإنها ترسل كل $x \in A$ إلى مجموعة جزئية $g(x)
+  \subseteq A$. ويمكننا أن نبين أن $g$ لا يمكن أن تكون شاملة. ولنفعل
+  ذلك، نعرّف مجموعة جزئية~$\overline{A} \subseteq A$ يستحيل، بحكم
+  تعريفها، أن تكون في مدى~$g$. ضع
+  \[
+  \overline{A} = \Setabs{x \in A}{x \notin g(x)}.
+  \]
+  بما أن قيمة~$g(x)$ معرّفة لكل $x \in A$، فمن الواضح أن $\overline{A}$
+  مجموعة جزئية من~$A$ معرّفة تعريفًا جيدًا. لكنها لا يمكن أن تكون في مدى~$g$.
+  ليكن $x \in A$ اعتباطيًا؛ سنبين أن $\overline{A} \neq
+  g(x)$. فإذا كان $x \in g(x)$، فإنه لا يحقق $x \notin g(x)$، ومن ثم،
+  بحسب تعريف~$\overline{A}$، يكون $x \notin
+  \overline{A}$. وإذا كان
+  $x \in \overline{A}$، وجب أن يحقق الخاصية المعرّفة لـ~$\overline{A}$،
+  أي $x \in A$ و$x \notin
+  g(x)$. ولما كان $x$ اعتباطيًا، فهذا يبين أنه لكل $x \in
+  \overline{A}$، يكون $x \in g(x)$ إذا وفقط إذا كان $x \notin \overline{A}$،
+  ومن ثم $g(x) \neq \overline{A}$. وبعبارة أخرى، لا يمكن أن تكون
+  $\overline{A}$ في مدى~$g$، خلافًا لافتراض أن~$g$ شاملة.}{ويبقى أن
+  نبين $\cardneq{A}{\Pow{A}}$. افترض، طلبًا للتناقض، أن
+  $\cardeq{A}{\Pow{A}}$، أي إن ثمة !!{bijection} ما
+  $g \colon A \to \Pow{A}$. وتأمل الآن:
+  \[
+    D = \Setabs{x \in A}{x \notin g(x)}
+  \]
+  لاحظ أن $D \subseteq A$، ومن ثم $D \in \Pow{A}$. وبما أن $g$
+  !!a{bijection}، فثمة $y \in A$ بحيث $g(y) = D$. لكن لدينا الآن:
+  \[
+    y \in g(y) \text{ إذا وفقط إذا } y \in D \text{ إذا وفقط إذا } y \notin g(y).
+  \]
+  وهذا تناقض؛ ومن ثم $\cardneq{A}{\Pow{A}}$.}{}
+\end{proof}
+
+\begin{explain}
+\oliflabeldef{sfr:siz:nen:thm:nonenum-pownat}{من المفيد مقارنة برهان
+  \olref{thm:cantor} ببرهان
+  \olref[nen]{thm:nonenum-pownat}. فقد بينّا هناك أنه يمكن، من أي قائمة
+  $Z_1$، $Z_2$، \dots، من المجموعات الجزئية من~$\PosInt$، بناء
+  مجموعة~$\overline{Z}$ من الأعداد يُضمن أنها ليست في القائمة. وهي ليست
+  في القائمة لأن لكل $n \in
+  \PosInt$، يكون $n \in Z_n$ إذا وفقط إذا كان $n \notin \overline{Z}$.
+  وهكذا يوجد دائمًا عدد ما يكون !!a{element} من إحدى المجموعتين~$Z_n$ و
+  $\overline{Z}$ دون الأخرى. ونتبع الفكرة نفسها هنا، غير أن المؤشرات~$n$
+  أصبحت الآن !!{element}s~$A$ بدلًا من~$\PosInt$. وتُعرّف المجموعة
+  $\overline{A}$ بحيث تختلف عن~$g(x)$ لكل $x \in A$، لأن
+  $x \in g(x)$ إذا وفقط إذا كان $x \notin \overline{A}$. ومرة أخرى،
+  يوجد دائمًا !!a{element} من~$A$ يكون !!a{element} من إحدى
+  المجموعتين~$g(x)$ و$\overline{A}$ دون الأخرى. وكما أن $\overline{Z}$ لا يمكن لذلك
+  أن تكون في القائمة $Z_1$، $Z_2$، \dots، لا يمكن أن تكون
+  $\overline{A}$ في مدى~$g$.}{}
+
+\oliflabeldef{sfr:siz:nen-alt:thm:nonenum-pownat}{من المفيد مقارنة برهان
+  \olref{thm:cantor} ببرهان
+  \olref[nen-alt]{thm:nonenum-pownat}. فقد بينّا هناك أنه يمكننا، من أي
+  قائمة $N_0$، $N_1$، $N_2$، \dots، من المجموعات الجزئية من~$\Nat$،
+  بناء مجموعة~$D$ من الأعداد يُضمن أنها ليست في القائمة. وهي ليست في
+  القائمة لأن $n \in N_n$ إذا وفقط إذا كان $n \notin
+  D$، لكل $n \in \Nat$. ونتبع الفكرة نفسها هنا، غير أن المؤشرات~$n$
+  أصبحت الآن !!{element}s~$A$ بدلًا من~$\Nat$. وتُعرّف المجموعة
+  $D$ بحيث تختلف عن~$g(x)$ لكل $x
+  \in A$، لأن $x \in g(x)$ إذا وفقط إذا كان $x \notin D$.}{}
+
+ومن المفيد أيضًا مقارنة البرهان ببرهان مفارقة راسل،
+\olref[sfr][set][rus]{thm:russells-paradox}. فالواقع أن مبرهنة كانتور
+كانت مصدر إلهام راسل في صياغة مفارقته.
+\end{explain}
+
+\begin{prob}
+  أثبت أنه لا يمكن أن توجد !!a{injection} $g\colon \Pow{A} \to
+  A$، لأي مجموعة~$A$. تلميح: افترض أن $g\colon \Pow{A} \to A$
+  !!{injective}. وتأمل $D = \Setabs{g(B)}{B \subseteq A \text{ و
+  } g(B) \notin B}$. ولتكن $x = g(D)$. استعمل كون $g$
+  !!{injective} لاستخلاص تناقض.
+\end{prob}
+
+\end{document}

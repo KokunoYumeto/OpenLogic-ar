@@ -1,0 +1,94 @@
+% Part: incompleteness
+% Chapter: arithmetization-syntax
+% Section: coding-formulas
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{art}{frm}
+\olsection{ترميز \printtoken{P}{formula}}
+
+بعد أن عرّفنا العلاقة $\fn{Term}(x)$ تعريفًا عوديًا بدائيًا، يمكننا
+استعمالها لتعريف العلاقة المناظرة لـ!!{formula}s، $\fn{Frm}(x)$، تعريفًا عوديًا
+بدائيًا.
+
+\begin{prop}
+العلاقة $\fn{Atom}(x)$، التي تصدق إذا وفقط إذا كان $x$ عدد غودل
+لـ!!{formula} ذرية، عودية بدائية.
+\end{prop}
+
+\begin{proof}
+يكون العدد $x$ عدد غودل لـ!!{formula} ذرية إذا وفقط إذا تحقق أحد
+الأمور الآتية:
+\begin{enumerate}
+\item توجد $n$ و$j<x$ و$z<x$ بحيث $\len{z}=n$، ولكل $i<n$ تكون
+  $\fn{Term}((z)_i)$ صادقة، و$x=$
+\[
+\Gn{\Obj P^n_j(} \concat \fn{flatten}(z) \concat \Gn{)}.
+\]
+\item توجد $z_1,z_2<x$ بحيث تصدق $\fn{Term}(z_1)$ و$\fn{Term}(z_2)$،
+  و$x=$
+\[
+\Gn{{\eq}(} \concat z_1 \concat \Gn{,} \concat z_2 \concat{\Gn{)}}.
+\]
+  \tagitem{prvFalse}{$x = \Gn{\lfalse}$.}{}
+  \tagitem{prvTrue}{$x = \Gn{\ltrue}$.}{}
+\end{enumerate}
+\end{proof}
+
+\begin{prop}
+\ollabel{prop:frm-primrec}
+العلاقة $\fn{Frm}(x)$، التي تصدق إذا وفقط إذا كان $x$ عدد غودل
+لـ!!a{formula}، عودية بدائية.
+\end{prop}
+
+\begin{proof}
+تكون متتالية الرموز~$s$ !!a{formula} إذا وفقط إذا وُجدت متتالية تكوين
+$s_0$، \dots، $s_{k-1}=s$ من !!{formula} تسجل كيفية تكوين~$s$ من
+!!{formula}s ذرية وفق قواعد التكوين. ويمكن اختيار متتالية تكوين خالية من
+التكرار؛ فتكون كل $s_i$ صيغة جزئية من~$s$، ولا يزيد طول المتتالية على
+$k=\len{x}$، ولا يزيد عدد غودل لأي عنصر فيها على~$x$ (وتتحقق المساواة
+في العنصر الأخير). ومن ثم يمكن، مثلًا، حصر شفرة المتتالية بالحد
+$p_{k-1}^{k(x+1)}$، وهو حد عودي بدائي. وهكذا يمكن إجراء جميع الكمّيات
+اللازمة على متتاليات التكوين ضمن حدود عودية بدائية.
+\end{proof}
+
+\begin{prob}
+قدّم برهانًا مفصلًا لـ\olref[inc][art][frm]{prop:frm-primrec} على غرار
+البرهان الأول لـ\olref[inc][art][trm]{prop:term-primrec}.
+\end{prob}
+
+\begin{prop}
+\ollabel{prop:freeocc-primrec}
+العلاقة $\fn{FreeOcc}(x,z,i)$، التي تصدق إذا وفقط إذا كان الرمز ذو
+الرتبة $i$ في الصيغة ذات عدد غودل~$x$ ورودًا حرًا للمتغير ذي عدد
+غودل~$z$، عودية بدائية.
+\end{prop}
+
+\begin{proof}
+تمرين.
+\end{proof}
+
+\begin{prob}
+أثبت \olref[inc][art][frm]{prop:freeocc-primrec}. ويجوز لك استعمال حقيقة
+أن كل مقطع من !!a{formula} يكون هو نفسه !!a{formula} إنما هو
+!!{formula} جزئية منها.
+\end{prob}
+
+\begin{prop}
+الخاصية $\fn{Sent}(x)$، التي تصدق إذا وفقط إذا كان $x$ عدد غودل
+لـ!!a{sentence}، عودية بدائية.
+\end{prop}
+
+\begin{proof}
+!!{sentence} هي !!a{formula} لا تشتمل على ورودات حرة لـ!!{variable}s.
+ومن ثم تصدق $\fn{Sent}(x)$ إذا وفقط إذا
+\begin{multline*}
+\bforall{i<\len{x}}{\bforall{z<x}{}}\\
+(\bexists{j<z}{z=\Gn{\Obj v_j}} \lif \lnot\fn{FreeOcc}(x,z,i)).
+\end{multline*}
+\end{proof}
+
+
+\end{document}

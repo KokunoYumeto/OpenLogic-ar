@@ -1,0 +1,113 @@
+% Part: conditional-logics
+% Chapter: minimal-change-semantics
+% Section: true-false
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{con}{min}{tf}
+
+\olsection{صدق الشرطيات المخالفة للواقع وكذبها}
+
+يكون الشرط المخالف للواقع~$!A \cif !B$ صادقًا (على نحو غير فارغ) إذا
+كانت جميع أقرب عوالم~$!A$ عوالم~$!B$، كما يبيّن
+\olref{fig:true}.
+\begin{figure}
+\begin{center}
+\begin{tikzpicture}[scale=.7]\small
+  \spheresystem{5}
+  \draw (0,0) node {$w$};
+  \propositionintersect{0}{4}{40}{3.5}
+  {\tikzset{proposition/.append={smooth,tension=1.4}}
+  \proposition[shift={(1.6,-1)}]{90}{1}{30}{4}}
+  \path (1.5,3) node[below] {$\formula{B}$};
+  \path (3,0) node {$\formula{A}$};
+\end{tikzpicture}
+\caption{شرط مخالف للواقع صادق على نحو غير فارغ}
+\ollabel{fig:true}
+\end{center}
+\end{figure}
+ويكون الشرط المخالف للواقع صادقًا أيضًا عند~$w$ إذا لم يحتو نظام الكرات
+المحيطة بـ$w$ أي كرة تقبل~$!A$ أصلًا. وفي هذه الحالة يكون صادقًا
+\emph{على نحو فارغ} (انظر~\olref{fig:vacuous}).
+\begin{figure}
+\begin{center}
+\begin{tikzpicture}[scale=.7]\small
+  \spheresystem{5}
+  \draw (0,0) node {$w$};
+  \proposition{0}{6.5}{40}{3.5}
+  {\tikzset{proposition/.append={smooth,tension=1.4}}
+  \proposition[shift={(1.2,-1)}]{90}{1}{30}{4}}
+  \path (1.5,3) node[below] {$\formula{B}$};
+  \spherepos{0}{7}{node {$\formula{A}$}}
+\end{tikzpicture}
+\caption{شرط مخالف للواقع صادق على نحو فارغ}
+\ollabel{fig:vacuous}
+\end{center}
+\end{figure}
+
+وقد يكون كاذبًا بطريقتين. إحداهما أن تكون بعض أقرب عوالم~$!A$،
+لا كلها، عوالم~$!B$. وفي هذه الحالة تكون~$!A \cif \lnot !B$ كاذبة
+أيضًا (انظر~\olref{fig:false}).
+\begin{figure}
+\begin{center}
+\begin{tikzpicture}[scale=.7]\small
+  \spheresystem{5}
+  \draw (0,0) node {$w$};
+  \propositionintersect{0}{4}{40}{3.5}
+  {\tikzset{proposition/.append={smooth,tension=1.4}}
+  \proposition[shift={(1.6,0)}]{90}{1}{30}{3}}
+  \path (1.5,3) node[below] {$\formula{B}$};
+  \path (3,0) node {$\formula{A}$};
+\end{tikzpicture}
+\caption{شرط مخالف للواقع كاذب، ومقابله كاذب}
+\ollabel{fig:false}
+\end{center}
+\end{figure}
+أما إذا لم تتقاطع أقرب عوالم~$!A$ مع عوالم~$!B$ أصلًا، كانت
+$!A \cif !B$ كاذبة. لكن جميع أقرب عوالم~$!A$ تكون في هذه الحالة
+عوالم~$\lnot !B$، ولذلك تكون~$!A \cif \lnot !B$ صادقة
+(انظر~\olref{fig:false-opposite}).
+\begin{figure}
+\begin{center}
+\begin{tikzpicture}[scale=.7]\small
+  \spheresystem{5}
+  \draw (0,0) node {$w$};
+  \propositionintersect{0}{4}{40}{3.5}
+  {\tikzset{proposition/.append={smooth,tension=1.4}}
+  \proposition[shift={(-1,0)}]{90}{1}{30}{3}}
+  \path (-1,3) node[below] {$\formula{B}$};
+  \path (3,0) node {$\formula{A}$};
+\end{tikzpicture}
+\caption{شرط مخالف للواقع كاذب، ومقابله صادق}
+\ollabel{fig:false-opposite}
+\end{center}
+\end{figure}
+
+بخلاف الشرط الصارم، يمكن أن تكون الشرطيات المخالفة للواقع عرضية.
+انظر نموذج الكرات في~\olref{fig:contingent}. فجميع عوالم~$!A$ الأقرب
+إلى~$u$ هي عوالم~$!B$، ولذلك~$\mSat{M}{!A \cif !B}[u]$.
+لكن بعض عوالم~$!A$ الأقرب إلى~$v$ ليست عوالم~$!B$، ولذلك
+$\mSat/{M}{!A \cif !B}[v]$.
+\begin{figure}
+\begin{center}
+\begin{tikzpicture}[scale=.6]\small
+  \spheresystem{7}
+  \spheresystem[shift={(0:3.1)},dashed]{4}
+  \propositionintersect{45}{4}{40}{4.5}
+  \begin{scope}
+    \clip \propositionplot{45}{4}{40}{4.5} ;
+    \spherelayer[shift={(0:3.1)}]{3}
+  \end{scope}
+  \proposition[shift={(1.4,-.5)}]{90}{1}{35}{5}
+  \path (0,0) node {$u$};
+  \path (0:3.1) node {$v$};
+  \spherepos{35}{9}{node {$\formula{A}$}}
+  \spherepos{80}{9}{node {$\formula{B}$}}
+\end{tikzpicture}
+\end{center}
+\caption{شرط مخالف للواقع عَرَضي}
+\ollabel{fig:contingent}
+\end{figure}
+\end{document}

@@ -1,0 +1,81 @@
+% Part: incompleteness
+% Chapter: theories-computability
+% Section: extensions-of-q-not-decidable
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{tcp}{cqn}
+
+\olsection{امتدادات $\Th{Q}$ المتسقة غير قابلة للقرار}
+
+\begin{explain}
+تذكّر أن النظرية تكون \emph{متسقة} إذا لم تثبت $!A$ و$\lnot !A$
+معًا لأي صيغة~$!A$. ولما كان أي شيء ينتج من التناقض، كانت النظرية غير
+المتسقة تافهة: كل جملة قابلة للإثبات فيها. ومن الواضح أن النظرية إذا
+كانت متسقة-$\omega$ كانت متسقة. لكن الاتساق شرط أضعف (أي توجد نظريات
+متسقة وليست متسقة-$\omega$). ويمكننا إضعاف الفرض في
+\olref[oqn]{thm:oconsis-q} إلى مجرد الاتساق فنحصل على مبرهنة أقوى.
+\end{explain}
+
+\begin{lem}
+لا توجد «علاقة شاملة قابلة للحساب». أي لا توجد علاقة ثنائية قابلة
+للحساب $R(x,y)$ تحقق الخاصية الآتية: متى كانت $S(y)$ علاقة أحادية
+قابلة للحساب، وُجد $k$ بحيث، لكل $y$، تصدق $S(y)$ إذا وفقط إذا صدقت
+$R(k,y)$.
+\end{lem}
+
+\begin{proof}
+افترض أن $R(x,y)$ علاقة شاملة قابلة للحساب. ولتكن $S(y)$ العلاقة
+$\lnot R(y,y)$. ولما كانت $S(y)$ قابلة للحساب، يوجد $k$ بحيث تكافئ
+$S(y)$ العلاقة $R(k,y)$. لكن $S(k)$ تكافئ عندئذ كلًا من $R(k,k)$
+و$\lnot R(k,k)$، وهذا تناقض.
+\end{proof}
+
+
+\begin{thm}
+لتكن $\Th{T}$ أي نظرية متسقة تشتمل على $\Th{Q}$. عندئذ لا تكون
+$\Th{T}$ قابلة للقرار.
+\end{thm}
+
+
+\begin{proof}
+افترض أن $\Th{T}$ امتداد متسق قابل للقرار لـ$\Th{Q}$. سنستخرج
+تناقضًا باستعمال $\Th{T}$ لتعريف علاقة شاملة قابلة للحساب.
+
+لتصدق $R(x,y)$ إذا وفقط إذا
+\begin{quote}
+يرمز $x$ صيغة $!D(u)$، وتثبت $\Th{T}$ الصيغة $!D(\num y)$.
+\end{quote}
+بما أننا نفترض أن $\Th{T}$ قابلة للقرار، فإن $R$ قابلة للحساب. لنبيّن
+أن $R$ شاملة. إذا كانت $S(y)$ أي علاقة قابلة للحساب، فهي قابلة للتمثيل
+في $\Th{Q}$ (ومن ثم في $\Th{T}$) بصيغة $!D_S(u)$. ولكل $n$ عندئذ
+\begin{eqnarray*}
+S(n) & \lif & T \vdash !D_S(\num n) \\
+& \lif & R(\Gn{!D_S(u)}, n)
+\end{eqnarray*}
+و
+\begin{eqnarray*}
+\lnot S(n) & \lif & T \vdash \lnot !D_S(\num n) \\
+& \lif & T \not\vdash !D_S(\num n) \quad \text{(لأن $\Th{T}$
+  متسقة)} \\
+& \lif & \lnot R(\Gn{!D_S(u)}, n).
+\end{eqnarray*}
+أي إنه، لكل $y$، تصدق $S(y)$ إذا وفقط إذا تصدق
+$R(\Gn{!D_S(u)},y)$. ومن ثم تكون $R$ شاملة، فنحصل على التناقض
+المطلوب.
+\end{proof}
+
+لنسمِّ «الحساب الصادق» النظرية
+$\Setabs{!A}{\Sat{\Nat}{!A}}$؛ أي مجموعة الجمل في لغة الحساب الصادقة
+في التأويل القياسي.
+
+\begin{cor}
+الحساب الصادق غير قابل للقرار.
+\end{cor}
+
+%In Section~\olref{undefinability:truth:section} we will state a stronger
+%result, due to Tarski.
+
+\end{document}

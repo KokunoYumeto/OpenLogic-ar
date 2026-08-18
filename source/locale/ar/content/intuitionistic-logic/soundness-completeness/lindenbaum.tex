@@ -1,0 +1,146 @@
+% part: intuitionistic-logic
+% chapter: soundness-completeness
+% section: lindenbaum
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{sc}{lin}
+
+\olsection{لمّة ليندنباوم}
+
+يُبرهن مبرهن التمام للمنطق الحدسي بافتراض~$\Gamma \Proves/ !A$ وبناء
+نموذج~$\mModel{M}$ يحقق~$\mSat{M}{\Gamma}$ و$\mSat/{M}{!A}$.
+
+يمكن في المنطق الكلاسيكي ردّ علاقة ال!!{derivability} إلى مفهوم الاتساق،
+لأن !!a{formula}~$!A$ تكون قابلة لل!!{derivable} من مجموعة من
+ال!!{formula}s إذا وفقط إذا كانت المجموعة مع نفي~$!A$ غير متسقة. ولا
+يمكن فعل ذلك في المنطق الحدسي. ففي المنطق الحدسي، إذا كان~$\lnot !A$
+غير متسق، لم نحصل إلا على~$\Proves \lnot\lnot !A$. ولما كانت
+$\lnot\lnot !A \lif !A$ لا تصح حدسيًا بوجه عام، فلا يمكننا أن نستنتج
+$\Proves !A$.
+
+ولهذا نحتاج عند بناء النموذج~$\mModel{M}$ إلى تتبع عدم
+!!{derivability}~$!A$، حيث~$!A$ هي ال!!{formula} المعنية. ومن ثم لا نستطيع بناء
+النموذج~$\mModel{M}$ باستعمال مجموعة كاملة
+$\Gamma^* \supseteq \Gamma$؛ إذ في كل مجموعة كاملة~$\Gamma^*$ لدينا
+$\Gamma^* \Proves !A \lor \lnot !A$.
+
+وبدلًا من استعمال مجموعة كاملة~$\Gamma^*$، سنستعمل مفهوم المجموعة
+الأولية من الصيغ:
+
+\begin{defn}\ollabel{defn:prime}
+  تكون مجموعة ال!!{formula}s~$\Gamma$ \emph{أولية} إذا وفقط إذا:
+  \begin{enumerate}
+  \item\ollabel{defn:prime1} كانت~$\Gamma$ متسقة؛ أي
+    $\Gamma \Proves/ \lfalse$؛
+  \item\ollabel{defn:prime2} إذا كان~$\Gamma \Proves !A$، كان
+    $!A \in \Gamma$؛
+  \item\ollabel{defn:prime3} إذا كان~$!A \lor !B \in \Gamma$، كان
+    $!A \in \Gamma$ أو~$!B \in \Gamma$.
+  \end{enumerate}
+\end{defn}
+
+\begin{lem}[لمّة ليندنباوم]
+  \ollabel{lem:lindenbaum} إذا كان~$\Gamma \Proves/ !A$، وُجدت
+  $\Gamma^* \supseteq \Gamma$ بحيث تكون~$\Gamma^*$ أولية ويكون
+  $\Gamma^* \Proves/ !A$.
+\end{lem}
+
+\begin{proof}
+  لتكن~$!B_1 \lor !C_1$، $!B_2 \lor !C_2$، \dots، تعدادًا لجميع
+  ال!!{formula}s من الصورة~$!B \lor !C$. وسنعرّف متتالية متزايدة من
+  مجموعات ال!!{formula}s~$\Gamma_n$، بحيث تُعرّف كل
+  $\Gamma_{n+1}$ بأنها~$\Gamma_n$ مضافًا إليها !!{formula} جديدة
+  واحدة. وستكون~$\Gamma^*$ اتحاد جميع~$\Gamma_n$. ونختار
+  ال!!{formula}s الجديدة على نحو يضمن أن~$\Gamma^*$ أولية وأنه يظل
+  لدينا~$\Gamma^* \Proves/ !A$. وهذا يعني أن علينا في كل خطوة إيجاد
+  أول فصل~$!B_i \lor !C_i$ بحيث:
+  \begin{enumerate}
+  \item\ollabel{gamma-1} $\Gamma_n \Proves !B_i \lor !C_i$؛
+  \item\ollabel{gamma-2} $!B_i \notin \Gamma_n$ و
+    $!C_i \notin \Gamma_n$.
+  \end{enumerate}
+  ونضيف إلى~$\Gamma_n$ إما~$!B_i$ إذا كان
+  $\Gamma_n \cup \{!B_i\} \Proves/ !A$، وإما~$!C_i$ خلاف ذلك. وسنثبت
+  أن هذا الإجراء يعمل. ولنعرف الآن~$i(n)$ بأنه أصغر~$i$ يحقق
+  \olref{gamma-1} و\olref{gamma-2}.
+
+  عرّف~$\Gamma_0 = \Gamma$ و
+  \[
+  \Gamma_{n+1} = \begin{cases}
+    \Gamma_n \cup \{!B_{i(n)}\} &
+    \text{إذا كان $\Gamma_n \cup \{!B_{i(n)}\} \Proves/ !A$} \\
+    \Gamma_n \cup \{!C_{i(n)}\} & \text{خلاف ذلك}
+    \end{cases}
+  \]
+  وإذا لم تكن~$i(n)$ معرّفة، أي إذا كان، كلما تحقق
+  $\Gamma_n \Proves !B \lor !C$، إما~$!B \in \Gamma_n$ أو
+  $!C \in \Gamma_n$، وضعنا~$\Gamma_{n+1}=\Gamma_n$. والآن لتكن
+  $\Gamma^* = \bigcup_{n=0}^\infty \Gamma_n$.
+
+  نثبت أولًا أنه لكل~$n$، يكون~$\Gamma_n \Proves/ !A$. ونسير
+  بالاستقراء في~$n$. عند~$n=0$ تصح الدعوى بفرض اللمّة، أي
+  $\Gamma \Proves/ !A$. وإذا كان~$n>0$، فعلينا أن نثبت أنه إذا كان
+  $\Gamma_n \Proves/ !A$، كان~$\Gamma_{n+1} \Proves/ !A$. وإذا لم تكن
+  $i(n)$ معرّفة، كان~$\Gamma_{n+1}=\Gamma_n$، فلا شيء علينا إثباته.
+  فافترض أن~$i(n)$ معرّفة، واكتب اختصارًا~$i=i(n)$.
+
+  سنبرهن نقيض الدعوى المقابل. افترض~$\Gamma_{n+1} \Proves !A$.
+  وبحسب البناء، تكون~$\Gamma_{n+1}=\Gamma_n\cup\{!B_i\}$ إذا كان
+  $\Gamma_n\cup\{!B_i\}\Proves/!A$، وتكون
+  $\Gamma_{n+1}=\Gamma_n\cup\{!C_i\}$ خلاف ذلك. ولا يمكن بوضوح أن
+  تكون الحالة الأولى، إذ كان سيلزم عندئذ
+  $\Gamma_{n+1}\Proves/!A$. ولذلك
+  $\Gamma_n\cup\{!B_i\}\Proves !A$ و
+  $\Gamma_{n+1}=\Gamma_n\cup\{!C_i\}$. ومن تعريف~$i(n)$ لدينا
+  $\Gamma_n\Proves !B_i\lor !C_i$. ولدينا كذلك
+  $\Gamma_n\cup\{!B_i\}\Proves !A$ و
+  $\Gamma_n\cup\{!C_i\}\Proves !A$. ومن ثم
+  $\Gamma_n\Proves !A$، وهو المطلوب.
+
+  لو كان~$\Gamma^* \Proves !A$، لوجدت مجموعة جزئية منتهية
+  $\Gamma'\subseteq\Gamma^*$ بحيث~$\Gamma'\Proves !A$. ولا بد لكل
+  $!D\in\Gamma'$ من أن ينتمي إلى~$\Gamma_i$ لبعض~$i$. ولتكن~$n$ أكبر
+  هذه المؤشرات. وبما أن~$\Gamma_i\subseteq\Gamma_n$ إذا كان~$i\leq n$،
+  نحصل على~$\Gamma'\subseteq\Gamma_n$. لكن عندئذ
+  $\Gamma_n\Proves !A$، وهذا يناقض ما برهناه من أن
+  $\Gamma_n\Proves/!A$.
+
+  وأخيرًا نثبت أن~$\Gamma^*$ أولية، أي إنها تحقق الشروط
+  \olref{defn:prime1} و\olref{defn:prime2} و\olref{defn:prime3} في
+  \olref{defn:prime}.
+
+  أولًا، بما أن~$\Gamma^*\Proves/!A$، فإن~$\Gamma^*$ متسقة، ومن ثم
+  يتحقق~\olref{defn:prime1}.
+
+  ونثبت الآن أنه إذا كان~$\Gamma^*\Proves !B\lor !C$، كان إما
+  $!B\in\Gamma^*$ أو~$!C\in\Gamma^*$. وهذا يثبت
+  \olref{defn:prime3}، لأن~$!B\lor !C\in\Gamma^*$ يستلزم أيضًا
+  $\Gamma^*\Proves !B\lor !C$. فافترض
+  $\Gamma^*\Proves !B\lor !C$ مع~$!B\notin\Gamma^*$ و
+  $!C\notin\Gamma^*$. ولأن~$\Gamma^*\Proves !B\lor !C$، يوجد~$n$
+  بحيث~$\Gamma_n\Proves !B\lor !C$. ويظهر~$!B\lor !C$ في تعداد جميع
+  الفصول، ولنقل إنه~$!B_j\lor !C_j$. ويحقق~$!B_j\lor !C_j$ الشرطين
+  الواردين في تعريف~$i(n)$: إذ
+  $\Gamma_n\Proves !B_j\lor !C_j$، مع
+  $!B_j\notin\Gamma_n$ و$!C_j\notin\Gamma_n$. وفي كل مرحلة يقل بواحد
+  على الأقل عدد الفصول~$!B_i\lor !C_i$ التي تسبق هذا الفصل وتحقق
+  الشرطين، لأننا نضيف في كل مرحلة إما~$!B_i$ أو~$!C_i$. ولذلك توجد
+  مرحلة~$m$ يكون عندها~$j=i(m)$. ولكن عندئذ إما
+  $!B\in\Gamma_{m+1}$ أو~$!C\in\Gamma_{m+1}$، خلافًا لافتراض
+  $!B\notin\Gamma^*$ و$!C\notin\Gamma^*$.
+
+  افترض الآن~$\Gamma^*\Proves !B$. عندئذ
+  $\Gamma^*\Proves !B\lor !B$. وقد أثبتنا للتو أنه إذا كان
+  $\Gamma^*\Proves !B\lor !B$، كان~$!B\in\Gamma^*$. ومن ثم تحقق
+  $\Gamma^*$ الشرط~\olref{defn:prime2} من~\olref{defn:prime}.
+\end{proof}
+
+\begin{prob}
+بيّن أنه إذا كان~$\Gamma \Proves/ \bot$، كانت~$\Gamma$ متسقة في
+المنطق الكلاسيكي؛ أي توجد قيمة تجعل جميع الصيغ في~$\Gamma$ صادقة.
+\end{prob}
+
+\end{document}

@@ -1,0 +1,134 @@
+% Part: first-order-logic
+% Chapter: axiomatic-deduction
+% Section: proof-theoretic-notions
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{axd}{ptn}}
+      {\olfileid{pl}{axd}{ptn}}
+
+\olsection{المفاهيم النظرية البرهانية}
+
+\begin{explain}
+مثلما عرّفنا عددًا من المفاهيم الدلالية المهمة
+(\iftag{FOL}{الصلاحية}{تحصيل الحاصل}، والاستلزام، وقابلية الإرضاء)، نعرّف
+الآن \emph{مفاهيم نظرية برهانية} موافقة لها. ولا تُعرّف هذه بالرجوع إلى
+إرضاء ال!!{sentence}s في
+\iftag{FOL}{ال!!{structure}s}{ال!!{valuation}s}، بل بالرجوع إلى
+!!{derivability} بعض الصيغ أو !!{nonderivability}ها. وكان من الاكتشافات
+المهمة أن هذه المفاهيم تتطابق. وهذا التطابق هو مضمون \emph{مبرهنة السلامة}
+و\emph{مبرهنة الاكتمال}.
+\end{explain}
+
+\begin{defn}[!!^{derivability}]
+تكون !!^a{formula}~$!A$ \emph{!!{derivable}} من $\Gamma$، ونكتب
+$\Gamma \Proves !A$، إذا وُجد !!a{derivation} من~$\Gamma$ ينتهي
+بــ~$!A$.
+\end{defn}
+
+\begin{defn}[المبرهنات]
+تكون !!^a{formula}~$!A$ \emph{مبرهنة} إذا وُجد !!a{derivation} لــ
+$!A$ من المجموعة الخالية. ونكتب $\Proves !A$ إذا كانت $!A$ مبرهنة،
+و$\Proves/ !A$ إذا لم تكن كذلك.
+\end{defn}
+
+\begin{defn}[الاتساق]
+تكون مجموعة $\Gamma$ من ال!!{formula}s \emph{متسقة} إذا وفقط إذا كان
+$\Gamma\Proves/ \lfalse$؛ وتكون \emph{غير متسقة} خلاف ذلك.
+\end{defn}
+
+\begin{prop}[الانعكاسية]
+\ollabel{prop:reflexivity}
+إذا كان $!A \in \Gamma$، فإن $\Gamma \Proves !A$.
+\end{prop}
+
+\begin{proof}
+  ال!!{formula}~$!A$ وحدها !!a{derivation} لــ~$!A$ من~$\Gamma$.
+\end{proof}
+
+\begin{prop}[الرتابة]
+\ollabel{prop:monotonicity}
+إذا كان $\Gamma \subseteq \Delta$ و$\Gamma \Proves !A$، فإن $\Delta
+\Proves !A$.
+\end{prop}
+
+\begin{proof}
+كل !!{derivation} لــ$!A$ من $\Gamma$ هو أيضًا !!a{derivation} لــ
+$!A$ من~$\Delta$.
+\end{proof}
+
+\begin{prop}[التعدية]
+\ollabel{prop:transitivity}
+إذا كان $\Gamma \Proves !A$ و$\{!A\} \cup \Delta \Proves
+!B$، فإن $\Gamma \cup \Delta \Proves !B$.
+\end{prop}
+
+\begin{proof}
+  افترض أن $\{!A\} \cup \Delta \Proves !B$. عندئذ يوجد
+  !!a{derivation} $!B_1$، \dots، $!B_l = !B$ من~$\{!A\} \cup
+  \Delta$. وستكون بعض الخطوات في ذلك ال!!{derivation} صحيحة بسبب قاعدة
+  تحيل إلى سطر سابق~$!B_i = !A$. وبالفرض يوجد !!a{derivation} لــ
+  ~$!A$ من~$\Gamma$، أي !!a{derivation}~$!A_1$، \dots، $!A_k = !A$،
+  حيث تكون كل $!A_i$ بديهية، أو !!a{element} من~$\Gamma$، أو صحيحة
+  بقاعدة استدلال. انظر الآن في المتتالية
+  \[
+  !A_1, \dots, !A_k = !A, !B_1, \dots, !B_l = !B.
+  \]
+  وهذا !!{derivation} صحيح لــ~$!B$ من $\Gamma \cup \Delta$، لأن كل
+  $!B_i = !A$ يبررها الآن نفس ما يبرر~$!A_k = !A$.
+\end{proof}
+
+لاحظ أن هذا يعني، بوجه خاص، أنه إذا كان $\Gamma \Proves !A$ و$!A
+\Proves !B$، فإن $\Gamma \Proves !B$. وينتج أيضًا أنه إذا كان $!A_1,
+\dots, !A_n \Proves !B$ وكان $\Gamma \Proves !A_i$ لكل~$i$، فإن
+$\Gamma \Proves !B$.
+
+\begin{prop}
+\ollabel{prop:incons}
+تكون $\Gamma$ غير متسقة إذا وفقط إذا كان $\Gamma \Proves !A$ لكل~$!A$.
+\end{prop}
+
+\begin{proof}
+تمرين.
+\end{proof}
+
+\tagprob{FOL}
+\begin{prob}
+أثبت \olref[fol][axd][ptn]{prop:incons}.
+\end{prob}
+\tagendprob
+
+\tagprob{notFOL}
+\begin{prob}
+أثبت \olref[pl][axd][ptn]{prop:incons}.
+\end{prob}
+\tagendprob
+
+\begin{prop}[التراص]
+\ollabel{prop:proves-compact}
+  \begin{enumerate}
+  \item إذا كان $\Gamma \Proves !A$، فثمة مجموعة جزئية منتهية $\Gamma_0
+    \subseteq \Gamma$ بحيث $\Gamma_0 \Proves !A$.
+  \item إذا كانت كل مجموعة جزئية منتهية من~$\Gamma$ متسقة، فإن
+    $\Gamma$ متسقة.
+  \end{enumerate}
+\end{prop}
+
+\begin{proof}
+  \begin{enumerate}
+    \item إذا كان $\Gamma \Proves !A$، فثمة متتالية منتهية من
+      ال!!{formula}s $!A_1$، \dots،~$!A_n$ بحيث $!A \ident !A_n$، وتكون
+      كل $!A_i$ إما بديهية منطقية، أو !!a{element} من~$\Gamma$، أو تلزم
+      عن !!{formula}s سابقة بقاعدة استدلال. خذ $\Gamma_0$ مؤلفة من تلك
+      الصيغ $!A_i$ التي تنتمي إلى~$\Gamma$. وعندئذ يكون ال!!{derivation}
+      كذلك !!a{derivation} من~$\Gamma_0$، ومن ثم
+      $\Gamma_0 \Proves !A$.
+    \item هذا هو المقابل بالنقيض لــ~(1) في الحالة الخاصة $!A
+      \ident \lfalse$.
+\end{enumerate}
+\end{proof}
+
+\end{document}

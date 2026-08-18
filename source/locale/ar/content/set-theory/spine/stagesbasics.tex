@@ -1,0 +1,110 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{spine}{Valphabasic}
+\olsection{الخصائص الأساسية للمراحل}
+
+لإبراز الأهمية التأسيسية لتعريف مجموعات~$V_\alpha$، سنعرض بضع نتائج
+أساسية عنها. ونبدأ بتعريف:
+\footnote{لا يوجد اصطلاح معياري لـ«مقتدرة»؛ وهذا هو الاسم الذي يستعمله
+  \citet{ButtonLT1}.}
+\begin{defn}
+	تكون المجموعة~$A$ \emph{مقتدرة} إذا وفقط إذا كان
+	$\forall x((\exists y \in A)x \subseteq y \lif x \in A)$.
+\end{defn}
+\begin{lem}\ollabel{Valphabasicprops}
+لكل عدد ترتيبي~$\alpha$:
+\begin{enumerate}
+	\item\ollabel{Valphatrans} كل~$V_\alpha$ متعدية.
+	\item\ollabel{Valphapotent} كل~$V_\alpha$ مقتدرة.
+	\item\ollabel{Valphacum} إذا كان~$\gamma \in \alpha$، فإن
+	$V_\gamma \in V_\alpha$ (ومن ثم أيضًا
+	$V_\gamma \subseteq V_\alpha$ بموجب~\olref{Valphatrans}).
+\end{enumerate}
+\end{lem}
+
+\begin{proof}
+نثبت ذلك باستقراء متناهٍ في التجاوز (متزامن). ولأجل الاستقراء، افترض
+أن~\olref{Valphatrans}--\olref{Valphacum} تصدق لكل عدد ترتيبي
+$\beta < \alpha$.
+
+حالة~$\alpha = \emptyset$ بديهية.
+
+افترض~$\alpha = \ordsucc{\beta}$. لإثبات~\olref{Valphacum}، إذا كان
+$\gamma \in \alpha$، فإما أن~$\gamma \in \beta$، وعندئذ
+$V_\gamma \subseteq V_\beta$ بفرض الاستقراء، أو أن~$\gamma = \beta$،
+وعندئذ تصدق~$V_\gamma \subseteq V_\beta$ بالانعكاس. ومن ثم
+$V_\gamma \in \Pow{V_\beta} = V_\alpha$. ولإثبات
+\olref{Valphapotent}، افترض~$A \subseteq B \in V_\alpha$، أي
+$A \subseteq B \subseteq V_\beta$؛ فعندئذ~$A \subseteq V_\beta$، ومن
+ثم~$A \in V_\alpha$. ولإثبات~\olref{Valphatrans}، لاحظ أنه إذا كان
+$x \in A \in V_\alpha$، كان~$A \subseteq V_\beta$، ومن ثم
+$x \in V_\beta$، ومن ثم~$x \subseteq V_\beta$ لأن~$V_\beta$ متعدية
+بفرض الاستقراء، ولذلك~$x \in V_\alpha$.
+
+افترض أن~$\alpha$ عدد ترتيبي حدي. لإثبات~\olref{Valphacum}، إذا كان
+$\gamma \in \alpha$، فإن
+$\gamma \in \ordsucc{\gamma} \in \alpha$، ومن ثم
+$V_\gamma \in V_{\ordsucc{\gamma}}$ بالافتراض، ولذلك
+$V_\gamma \in \bigcup_{\beta \in \alpha} V_\beta = V_\alpha$.
+ولإثبات~\olref{Valphatrans} و\olref{Valphapotent}، لاحظ فقط أن اتحاد
+مجموعات متعدية (على الترتيب، مقتدرة) متعد (على الترتيب، مقتدر).
+\end{proof}
+
+\begin{lem}\ollabel{Valphanotref}
+لكل عدد ترتيبي~$\alpha$، $V_\alpha \notin V_\alpha$.
+\end{lem}
+
+\begin{proof}
+بالاستقراء المتناهي التجاوز. من الواضح أن
+$V_\emptyset \notin V_\emptyset$.
+
+افترض، خلافًا للمطلوب، أن
+$V_{\ordsucc{\alpha}} \in V_{\ordsucc{\alpha}} = \Pow{V_\alpha}$.
+عندئذ~$V_{\ordsucc{\alpha}} \subseteq V_\alpha$؛ ولما كان
+$V_\alpha \in V_{\ordsucc{\alpha}}$ بموجب
+\olref{Valphabasicprops}، حصلنا على~$V_\alpha \in V_\alpha$. وبأخذ
+المقابل بالنقيض: إذا كان~$V_\alpha \notin V_\alpha$، فإن
+$V_{\ordsucc{\alpha}} \notin V_{\ordsucc{\alpha}}$.
+
+وإذا كانت~$\alpha$ حدية، فافترض، خلافًا للمطلوب، أن
+$V_\alpha \in V_\alpha = \bigcup_{\beta \in \alpha}V_\beta$.
+عندئذ~$V_\alpha \in V_\beta$ لبعض~$\beta \in \alpha$؛ لكن يكون أيضًا
+$V_\beta \in V_\alpha$، ومن ثم~$V_\beta \in V_\beta$ بموجب
+\olref{Valphabasicprops} (مرتين). وبأخذ المقابل بالنقيض، إذا كان
+$V_\beta \notin V_\beta$ لكل~$\beta \in \alpha$، فإن
+$V_\alpha \notin V_\alpha$.
+\end{proof}
+
+\begin{cor}
+لأي عددين ترتيبيين~$\alpha, \beta$:
+$\alpha \in \beta$ إذا وفقط إذا كان~$V_\alpha \in V_\beta$.
+\end{cor}
+
+\begin{proof}
+تعطي~\Olref{Valphabasicprops} أحد الاتجاهين. وللاتجاه الآخر، افترض
+$V_\alpha \in V_\beta$. عندئذ~$\alpha \neq \beta$ بموجب
+\olref{Valphanotref}؛ وكذلك~$\beta \notin \alpha$، وإلا لكان
+$V_\beta \in V_\alpha$، ومن ثم~$V_\beta \in V_\beta$ بموجب
+\olref{Valphabasicprops} (مرتين)، خلافًا لـ\olref{Valphanotref}.
+ولذلك~$\alpha \in \beta$ بموجب التثليث.
+\end{proof}
+\noindent
+يتيح لنا كل ذلك أن نفكر في كل~$V_\alpha$ بوصفها المرحلة ذات الرتبة
+$\alpha$ من الهرم. وسبب ذلك هو الآتي.
+
+يمكن قطعًا التفكير في مجموعات~$V_\alpha$ لدينا على أنها تتكون بعملية
+\emph{تكرارية}، لأن استعمالنا للأعداد الترتيبية يتتبع مفهوم التكرار.
+وفوق ذلك، إذا تكونت مرحلة قبل أخرى، أي إذا كان
+$V_\beta \in V_\alpha$، أي~$\beta \in \alpha$، كانت عملية التكوين
+لدينا \emph{تراكمية}، لأن~$V_\beta \subseteq V_\alpha$. وأخيرًا، نحن
+نكوّن بالفعل \emph{جميع} التجمعات الممكنة للمجموعات التي كانت متاحة
+في أي مرحلة سابقة، لأن كل مرحلة خلفية~$V_{\ordsucc{\alpha}}$ هي
+مجموعة قوى سابقتها~$V_\alpha$.
+
+وخلاصة القول: مع~$\ZFminus$، نكون قد \emph{قاربنا} تمامًا صياغة
+تصورنا للهرم التراكمي-التكراري للمجموعات. (مع أننا لا نزال، بالطبع،
+بحاجة إلى تسويغ الاستبدال.)
+
+\end{document}

@@ -1,0 +1,90 @@
+% Part: first-order-logic 
+% Chapter: axiomatic-deduction 
+% Section: rules-and-proofs
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{axd}{rul}}
+      {\olfileid{pl}{axd}{rul}}
+
+\olsection{القواعد و\usetoken{P}{derivation}}
+
+\begin{explain}
+  قد تكون أنساق ال!!{derivation}s البديهية أبسط أنساق ال!!{derivation}
+  في المنطق. ف!!^a{derivation} ليس إلا متتالية من ال!!{formula}s.
+  ولكي تُعد المتتالية !!a{derivation}، يجب أن تكون كل !!{formula} فيها
+  إما حالة من بديهية، وإما أن تلزم بقاعدة استدلال عن !!{formula}s واحدة
+  أو أكثر تسبقها في المتتالية. وتقوم !!^a{derivation} بــ!!{derive}s
+  آخر !!{formula} فيها.
+\end{explain}
+
+\begin{defn}[!!^{derivability}]
+إذا كانت $\Gamma$ مجموعة من !!{formula}s اللغة $\Lang L$، فإن
+\emph{!!{derivation}} من~$\Gamma$ هو متتالية منتهية $!A_1$،
+\dots،~$!A_n$ من ال!!{formula}s، يتحقق لكل $i \le n$ واحد مما يأتي:
+\begin{enumerate}
+\item $!A_i \in \Gamma$؛ أو
+\item $!A_i$ بديهية؛ أو
+\item تلزم $!A_i$ عن $!A_j$ ما (وعن $!A_k$) حيث $j < i$ (و
+  $k < i$) بقاعدة استدلال.
+\end{enumerate}
+\end{defn}
+
+يعتمد ما يُعد !!{derivation} صحيحًا على قواعد الاستدلال التي نجيزها (وطبعًا
+على ما نتخذه بديهيات). وقاعدة الاستدلال عبارة شرطية تخبرنا بأنه في ظروف
+معينة تكون خطوة~$!A_i$ في !!a{derivation} خطوة استدلال صحيحة.
+
+\begin{defn}[قاعدة الاستدلال]
+تعطي \emph{قاعدة الاستدلال} شرطًا كافيًا لما يُعد خطوة استدلال صحيحة في
+!!a{derivation} من~$\Gamma$.
+\end{defn}
+
+فمثلًا، بما أن كل متتالية أحادية العنصر $!A$ تحقق $!A \in \Gamma$ تُعد
+بوضوح !!a{derivation}، فقد تكون العبارة الآتية قاعدة استدلال بسيطة جدًا:
+\begin{quote}
+  إذا كان $!A \in \Gamma$، فإن $!A$ دائمًا خطوة استدلال صحيحة في كل
+  !!{derivation} من~$\Gamma$.
+\end{quote}
+وبالمثل، إذا كانت $!A$ إحدى البديهيات، فإن $!A$ وحدها !!a{derivation}،
+ولذلك تكون العبارة الآتية أيضًا قاعدة استدلال:
+\begin{quote}
+  إذا كانت $!A$ بديهية، فإن $!A$ خطوة استدلال صحيحة.
+\end{quote}
+ويصبح الأمر أكثر إثارة إذا أحالت قاعدة الاستدلال إلى !!{formula}s تظهر
+قبل الخطوة موضع النظر. وتسمى القاعدة الآتية \emph{قاعدة إثبات المقدَّم}:
+\begin{quote}
+  إذا ظهرت $!B \lif !A$ و$!B$ في موضع أعلى من ال!!{derivation}،
+  فإن~$!A$ خطوة استدلال صحيحة.
+\end{quote}
+إذا كانت هذه قاعدة الاستدلال الوحيدة، كان تعريفنا لل!!{derivation} أعلاه
+مكافئًا لما يأتي: تكون $!A_1$، \dots،~$!A_n$ !!a{derivation} إذا وفقط
+إذا تحقق لكل $i \le n$ واحد مما يأتي:
+\begin{enumerate}
+\item $!A_i \in \Gamma$؛ أو
+\item $!A_i$ بديهية؛ أو
+\item لبعض $j < i$ تكون $!A_j$ هي $!B \lif !A_i$، ولبعض $k < i$ تكون
+  $!A_k$ هي~$!B$.
+\end{enumerate}
+يقول الشرط الأخير إن $!A_i$ تلزم عن~$!A_j$ ($!B \lif !A_i$) و$!A_k$
+($!B$) بقاعدة إثبات المقدَّم. فإذا استطعنا الانتقال من $1$ إلى~$n$،
+وفي كل مرة نجد !!a{formula}~$!A_i$ إما تنتمي إلى~$\Gamma$، وإما بديهية،
+وإما تخبرنا قاعدة استدلال بأنها خطوة استدلال صحيحة، فإن المتتالية كلها تُعد
+!!{derivation} صحيحًا.
+
+\begin{defn}[!!^{derivability}]
+تكون ال!!{formula}~$!A$ \emph{!!{derivable}} من $\Gamma$، ونكتب
+$\Gamma \Proves !A$، إذا وُجد !!a{derivation} من $\Gamma$ ينتهي
+بــ$!A$.
+\end{defn}
+
+\begin{defn}[المبرهنات]
+تكون !!^a{formula}~$!A$ \emph{مبرهنة} إذا وُجد !!a{derivation}
+لــ~$!A$ من المجموعة الخالية. ونكتب $\Proves !A$ إذا كانت $!A$ مبرهنة،
+و$\Proves/ !A$ إذا لم تكن كذلك.
+\end{defn}
+
+
+\end{document}

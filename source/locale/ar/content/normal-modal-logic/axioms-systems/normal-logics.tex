@@ -1,0 +1,117 @@
+% Part: normal-modal-logic
+% Chapter: axioms-systems
+% Section: normal-logics
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{prf}{nor}
+
+\olsection{المنطقات الجهية النظامية}
+
+ليس من السهل توصيف كل مجموعة من !!{formula}s الجهية بأنها مجموعة
+!!{formula}s القابلة للاشتقاق من مجموعة بديهيات. فنحن نريد للمنطقات
+الجهية أن تكون حسنة السلوك. وأولا، ينبغي بالطبع أن يظل كل ما نستطيع
+أن !!{derive} في منطق القضايا الكلاسيكي !!{derivable}، مع مراعاة أن
+!!{formula}s قد تحتوي الآن أيضا على
+\iftag{prvBox}{$\Box$\iftag{prvDiamond}{
+    و~}{}}{}\iftag{prvDiamond}{$\Diamond$}{}. ولذلك نشترط أن يشتمل
+المنطق الجهوي على جميع أمثلة القضايا الصادقة صدقا تحليليا، وأن يكون
+مغلقا تحت القياس الاستثنائي.
+
+\begin{defn}
+  \emph{المنطق الجهوي} هو مجموعة~$\Sigma$ من !!{formula}s الجهية بحيث
+  \begin{enumerate}
+  \item تشتمل على جميع القضايا الصادقة صدقا تحليليا، و
+  \item تكون مغلقة تحت الإحلال، أي إذا كان $!A \in \Sigma$ وكانت
+    $!D_1$، \dots، $!D_n$ هي !!{formula}s، فعندئذ
+    \[
+    \SSubst{!A}{\subst{!D_1}{p_1}, \dots, \subst{!D_n}{p_n}} \in \Sigma,
+    \]
+  \item تكون مغلقة تحت \emph{القياس الاستثنائي}، أي إذا كان $!A$
+    و$!A \lif !B \in \Sigma$، فعندئذ $!B \in \Sigma$.
+  \end{enumerate}
+\end{defn}
+
+لكي نستعمل الدلالة العلاقية للمنطقات الجهية، علينا أيضا أن نشترط
+اشتمالها على جميع !!{formula}s الصالحة في جميع النماذج الجهية. ويتبين
+أن هذا الشرط يتحقق متى كانت جميع أمثلة \Ax{K}
+\iftag{prvDiamond}{و~\Dual{}}{} !!{derivable}، وكان كلما كانت
+!!a{formula}~$!A$ !!{derivable} كانت~$\Box !A$ كذلك. ويسمى المنطق
+الجهوي الذي يحقق هذه الشروط \emph{نظاميا}. (وتوجد بالطبع منطقات
+جهية غير نظامية، لكن النماذج العلاقية المعتادة لا تلائمها.)
+
+\begin{defn}
+  يكون المنطق الجهوي $\Sigma$ \emph{نظاميا} إذا اشتمل على
+  \begin{align*}
+    \tag{\Ax{K}} & \Box(p \lif q) \lif (\Box p \lif \Box q),
+    \iftag{prvDiamond}{\\
+      \tag{\Dual} & \Diamond p \liff \lnot\Box\lnot p}{}
+  \end{align*}
+  وكان مغلقا تحت \emph{الإلزام}، أي إذا كان $!A \in
+  \Sigma$، فعندئذ $\Box !A \in \Sigma$.
+\end{defn}
+
+لاحظ أن اللزوم الصادق صدقا تحليليا «دقيق» بما يكفي ليحفظ
+\emph{الصدق في عالم}، بينما لا تحفظ القاعدة \Nec{} إلا \emph{الصدق
+في نموذج} (ومن ثم تحفظ أيضا الصلاحية في إطار أو في فئة أطر).
+
+\begin{prop}\ollabel{prop:rk}
+  كل منطق جهوي نظامي مغلق تحت القاعدة \RK،
+  \begin{prooftree}
+    \AxiomC{$!A_1 \lif (!A_2 \lif \cdots (!A_{n-1} \lif !A_n)\cdots)$}
+    \RightLabel{\RK}
+    \UnaryInfC{$\Box!A_1 \lif (\Box!A_2 \lif \cdots (\Box!A_{n-1}
+      \lif \Box!A_n)\cdots).$}
+  \end{prooftree}
+\end{prop}
+
+\begin{proof}
+  بالاستقراء على~$n$: إذا كان $n = 1$، فالقاعدة ليست سوى \Nec، وكل
+  منطق جهوي نظامي مغلق تحت \Nec.
+
+  ولنفترض الآن أن النتيجة صحيحة لـ$n-1$؛ ونبين صحتها لـ$n$.
+
+  افترض أن
+  \begin{align*}
+  & !A_1 \lif (!A_2 \lif \cdots (!A_{n-1} \lif !A_n)\cdots) \in \Sigma
+  \intertext{وبفرض الاستقراء، لدينا}
+  & \Box!A_1 \lif (\Box!A_2 \lif \cdots \Box(!A_{n-1} \lif !A_n)\cdots)
+  \in \Sigma
+  \intertext{ولأن $\Sigma$ منطق جهوي نظامي، فإنه يشتمل على جميع أمثلة
+    $\Ax{K}$، ومنها بوجه خاص}
+  & \Box(!A_{n-1} \lif !A_n) \lif (\Box!A_{n-1} \lif \Box!A_n) \in \Sigma
+  \intertext{وباستخدام القياس الاستثنائي وأمثلة مناسبة لقضايا صادقة صدقا تحليليا نحصل على}
+  & \Box!A_1 \lif (\Box!A_2 \lif \cdots (\Box!A_{n-1}
+  \lif \Box!A_n)\cdots) \in \Sigma.
+  \end{align*}
+\end{proof}
+
+\begin{prop}\ollabel{prop:notDiamondBot}
+  يشتمل كل منطق جهوي نظامي $\Sigma$ على~$\lnot\Diamond\lfalse$.
+\end{prop}
+
+\begin{prob}
+  أثبت \olref[nml][prf][nor]{prop:notDiamondBot}.
+\end{prob}
+
+\begin{prop}
+  لتكن $!A_1$، \dots، $!A_n$ هي !!{formula}s. عندئذ يوجد أصغر
+  منطق جهوي نظامي $\Sigma$ يشتمل على جميع أمثلة $!A_1$، \dots، $!A_n$.
+\end{prop}
+
+\begin{proof}
+  إذا أعطيت $!A_1$، \dots، $!A_n$، فعرّف $\Sigma$ بأنه تقاطع جميع
+  المنطقات الجهية النظامية التي تشتمل على جميع أمثلة $!A_1$، \dots،
+  $!A_n$. وهذا التقاطع غير خال، لأن $\Frm[L]$، وهي مجموعة جميع
+  !!{formula}s، منطق جهوي من هذا القبيل.
+\end{proof}
+
+\begin{defn}
+يسمى أصغر منطق جهوي نظامي يشتمل على $!A_1$، \dots، $!A_n$
+\emph{نسقا جهيا}، ويرمز إليه بـ$\Log{K} !A_1 \dots
+!A_n$. ويرمز إلى أصغر منطق جهوي نظامي بـ~\Log{K}.
+\end{defn}
+
+\end{document}

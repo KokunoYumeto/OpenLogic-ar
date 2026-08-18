@@ -1,0 +1,103 @@
+% Part: counterfactuals
+% Chapter: introduction
+% Section: strict-conditional
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cnt}{int}{str}
+
+\olsection{الشرط الصارم}
+
+أدخل لويس \emph{الشرط الصارم}~$\strictif$، وذهب إلى أنه هو، لا الشرط
+المادي، ما يقابل الاستلزام. وفي منطق الموجهات الصدقي يمكن تعريف
+$!A \strictif !B$ بأنه~$\Box(!A \lif !B)$. ومن ثم يكون الشرط الصارم
+صادقًا (في عالم) إذا وفقط إذا كان الشرط المادي المقابل ضروريًا.
+
+فكيف يصمد الشرط الصارم أمام مفارقات الشرط المادي؟ قد يكون الشرط الصارم
+ذو المقدّم الكاذب صادقًا أو كاذبًا، وكذلك الشرط الصارم ذو التالي الصادق.
+وفوق ذلك، ليست~$(!A \strictif !B) \lor (!B \strictif !A)$ صالحة.
+كما أن الشرط الصارم~$!A \strictif !B$ غير مكافئ لـ
+$\lnot !A \lor !B$، ولذلك فهو ليس دالة صدق.
+
+لدينا:
+\begin{align}
+  !A \strictif !B & \Entails \lnot !A \lor !B
+  \text{ لكن:}\\
+  \lnot !A \lor !B & \Entails/ !A \strictif !B\\
+  !B & \Entails/ !A \strictif !B\\
+  \lnot !A & \Entails/ !A \strictif !B\\
+  \lnot(!A \strictif !B) & \Entails/ !A \land \lnot !B
+  \text{ لكن:}\\
+  !A \land \lnot !B & \Entails \lnot(!A \strictif !B)
+  \intertext{ومع ذلك، يظل الشرط الصارم يدعم قاعدة إثبات التالي:}
+  !A, !A \strictif !B & \Entails !B
+  \intertext{يمكن تجميع الشروط الصارمة:}
+  !A \strictif !B,  !A \strictif !C & \Entails !A \strictif (!B \land !C)
+  \intertext{تصح تقوية المقدّم للشرط الصارم:}
+  !A \strictif !B & \Entails (!A \land !C) \strictif !B
+  \intertext{الشرط الصارم متعدٍّ أيضًا:}
+  !A \strictif !B, !B \strictif !C & \Entails !A \strictif !C
+  \intertext{وأخيرًا، الشرط الصارم مكافئ لمقابله بالنقيض:}
+  !A \strictif !B & \Entails \lnot !B \strictif \lnot !A\\
+  \lnot !B \strictif \lnot !A & \Entails !A \strictif !B
+\end{align}
+
+\begin{prob}
+  أعط نماذج مضادة في~$\Log{S5}$ لعلاقات الاستلزام التي لا تصح للشرط
+  الصارم، أي:
+  \begin{enumerate}
+  \item $\lnot p \Entails/ \Box(p \lif q)$
+  \item $q \Entails/ \Box(p \lif q)$
+  \item $\lnot\Box(p \lif q) \Entails/ p \land \lnot q$
+  \item $\Entails/ \Box(p \lif q) \lor \Box(q \lif p)$
+  \end{enumerate}
+\end{prob}
+
+\begin{prob}
+  بيّن أن علاقات الاستلزام الصالحة تصح للشرط الصارم، وذلك بإعطاء
+  براهين في~$\Log{S5}$ لما يأتي:
+  \begin{enumerate}
+  \item  $\Box(!A \lif !B) \Entails \lnot !A \lor !B$
+  \item $!A \land \lnot !B \Entails \lnot\Box(!A \lif !B)$
+  \item $!A, \Box(!A \lif !B) \Entails !B$
+  \item $\Box(!A \lif !B), \Box(!A \lif !C) \Entails \Box(!A \lif (!B
+    \land !C))$
+  \item $\Box(!A \lif !B) \Entails \Box((!A \land !C) \lif !B)$
+  \item $\Box(!A \lif !B), \Box(!B \lif !C) \Entails \Box(!A
+    \lif !C)$
+  \item $\Box(!A \lif !B) \Entails \Box(\lnot !B \lif \lnot !A)$
+  \item $\Box(\lnot !B \lif \lnot !A) \Entails \Box(!A \lif !B)$
+  \end{enumerate}
+  \end{prob}
+
+ومع ذلك، للشرط الصارم «مفارقاته» الخاصة. فكما أن الشرط المادي ذا
+المقدّم الكاذب أو التالي الصادق يكون صادقًا، يكون الشرط الصارم ذا
+المقدّم الكاذب \emph{بالضرورة} أو التالي الصادق بالضرورة صادقًا.
+وفوق ذلك، كل شرط صارم صادق هو صادق بالضرورة، وكل شرط صارم كاذب هو كاذب
+بالضرورة. وبعبارة أخرى، لدينا
+\begin{align}
+  \Box \lnot !A & \Entails !A \strictif !B\\
+  \Box !B & \Entails !A \strictif !B\\
+  !A \strictif !B& \Entails \Box(!A \strictif !B)\\
+  \lnot(!A \strictif !B) & \Entails \Box\lnot(!A \strictif !B)
+\end{align}
+ولا تكون هذه مشكلات إذا فهمنا~$\strictif$ بمعنى «يستلزم». فعلاقات
+الاستلزام المنطقي حقائق رياضية في نهاية المطاف، ولذلك لا يمكن أن تكون
+عرضية. لكنها تثير مشكلات إذا أردنا استعمال~$\strictif$ رابطًا منطقيًا
+يفترض أن يصوغ «إذا \dots، فإن \dots»، ولا سيما الأخيرتين. فمن المؤكد
+وجود عبارات من صورة «إذا \dots، فإن \dots» صادقة عرضًا أو كاذبة عرضًا؛
+فهي في الواقع ليست ضرورية ولا مستحيلة في العموم.
+
+\begin{prob}
+  أعط براهين في~$\Log{S5}$ لما يأتي:
+  \begin{enumerate}
+    \item  $\Box \lnot !A \Entails !A \strictif !B$
+    \item $!A \strictif !B \Entails \Box(!A \strictif !B)$
+    \item $\lnot(!A \strictif !B)  \Entails \Box\lnot(!A \strictif !B)$
+  \end{enumerate}
+  استعمل تعريف~$\strictif$ في ذلك.
+\end{prob}
+
+\end{document}

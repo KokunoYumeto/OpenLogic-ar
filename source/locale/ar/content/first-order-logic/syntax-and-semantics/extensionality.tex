@@ -1,0 +1,137 @@
+% Part: first-order-logic
+% Chapter: syntax-and-semantics
+% Section: extensionality
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{syn}{ext}
+
+\olsection{الامتدادية}
+
+\begin{explain}
+يمكن التعبير عن الامتدادية، التي تسمى أحيانًا وثاقة الصلة، على نحو
+غير رسمي كما يأتي: العوامل الوحيدة التي تؤثر في إرضاء
+!!{formula}~$!A$ في !!a{structure}~$\Struct M$ نسبة إلى إسناد
+ل!!a{variable}~$s$ هي حجم ال!!{domain} والإسنادات التي تجريها
+$\Struct M$ و$s$ إلى عناصر اللغة التي تظهر فعلًا في~$!A$.
+
+ومن النتائج المباشرة للامتدادية أنه حيث تتفق !!{structure}s
+~$\Struct M$ و$\Struct M'$ على جميع عناصر اللغة الظاهرة في
+جملة~$!A$ ويكون لهما المجال نفسه، فلا بد أن تتفق~$\Struct M$
+و$\Struct M'$ أيضًا في صدق~$!A$ نفسها أو عدمه.
+\end{explain}
+
+\begin{prop}[الامتدادية]
+  \ollabel{prop:extensionality}
+  لتكن $!A$ !!a{formula}، ولتكن $\Struct M_1$ و$\Struct M_2$
+  !!{structure}s بحيث $\Domain{M_1} = \Domain{M_2}$، وليكن $s$
+  إسناد متغيرات على~$\Domain{M_1} = \Domain{M_2}$. إذا كان
+  $\Assign{c}{M_1} = \Assign{c}{M_2}$،
+  و$\Assign{R}{M_1}=\Assign{R}{M_2}$، و
+  $\Assign{f}{M_1} = \Assign{f}{M_2}$ لكل !!{constant}~$c$،
+  ورمز علاقة~$R$، و!!{function}~$f$ ترد في~$!A$، فإن
+  $\Sat{M_1}{!A}[s]$ إذا وفقط إذا كان $\Sat{M_2}{!A}[s]$.
+\end{prop}
+
+\begin{proof}
+  أثبت أولًا (بالاستقراء على~$t$) أنه لكل حد،
+  $\Value{t}{M_1}[s] = \Value{t}{M_2}[s]$. ثم أثبت القضية
+  بالاستقراء على~$!A$، مستعملًا الدعوى المثبتة للتو في أساس
+  الاستقراء (حيث $!A$ ذرية).
+\end{proof}
+
+\begin{prob}
+نفّذ برهان \olref[fol][syn][ext]{prop:extensionality} بالتفصيل.
+\end{prob}
+
+\begin{cor}[امتدادية ال!!^{sentence}s]
+  \ollabel{cor:extensionality-sent}
+  لتكن $!A$ !!a{sentence}، ولتكن $\Struct{M_1}$ و$\Struct{M_2}$ كما
+  في~\olref{prop:extensionality}. عندئذ
+  $\Sat{M_1}{!A}$ إذا وفقط إذا كان $\Sat{M_2}{!A}$.
+\end{cor}
+
+\begin{proof}
+تتبع من \olref{prop:extensionality} بحسب
+\olref[ass]{cor:sat-sentence}.
+\end{proof}
+
+وفوق ذلك، لا تعتمد قيمة حد، ولا إرضاء !!a{structure} ل!!a{formula}
+أو عدم إرضائها لها، إلا على قيم حدودها الجزئية.
+
+\begin{prop}\ollabel{prop:ext-terms}
+لتكن $\Struct M$ !!a{structure}، وليكن $t$ و$t'$ حدين، وليكن $s$
+إسناد متغيرات. عندئذ $\Value{\Subst{t}{t'}{x}}{M}[s] =
+\Value{t}{M}[\Subst{s}{\Value{t'}{M}[s]}{x}]$.
+\end{prop}
+
+\begin{proof}
+بالاستقراء على~$t$.
+\begin{enumerate}
+\item إذا كان $t$ رمزًا ثابتًا، وليكن $t\ident c$، فإن
+  $\Subst{t}{t'}{x} = c$، و$\Value{c}{M}[s] = \Assign{c}{M} =
+  \Value{c}{M}[\Subst{s}{\Value{t'}{M}[s]}{x}]$.
+
+\item إذا كان $t$ متغيرًا غير~$x$، وليكن $t \ident y$، فإن
+  $\Subst{t}{t'}{x} = y$، و$\Value{y}{M}[s] =
+  \Value{y}{M}[\Subst{s}{\Value{t'}{M}[s]}{x}]$ لأن
+  $\varAssign{s}{\Subst{s}{\Value{t'}{M}[s]}{x}}{x}$.
+
+\item إذا كان $t \ident x$، فإن $\Subst{t}{t'}{x} = t'$. لكن
+  $\Value{x}{M}[\Subst{s}{\Value{t'}{M}[s]}{x}] = \Value{t'}{M}[s]$
+  بحسب تعريف~$\Subst{s}{\Value{t'}{M}[s]}{x}$.
+
+\item إذا كان $t \ident \Atom{f}{t_1,\dots,t_n}$، فلدينا:
+\begin{multline*}
+  \Value{\Subst{t}{t'}{x}}{M}[s]  = \\
+  \begin{aligned}[b]
+& \Value{\Atom{f}{\Subst{t_1}{t'}{x}, \dots, \Subst{t_n}{t'}{x}}}{M}[s]\\
+& \qquad    \text{ بحسب تعريف $\Subst{t}{t'}{x}$}\\
+& = \Assign{f}{M}(\Value{\Subst{t_1}{t'}{x}}{M}[s], \dots,
+    \Value{\Subst{t_n}{t'}{x}}{M}[s])\\
+    & \qquad  \text{ بحسب تعريف $\Value{\Atom{f}{\dots}}{M}[s]$}\\
+& = \Assign{f}{M}(\Value{t_1}{M}[\Subst{s}{\Value{t'}{M}[s]}{x}], \dots,
+   \Value{t_n}{M}[\Subst{s}{\Value{t'}{M}[s]}{x}])\\
+& \qquad    \text{ بفرضية الاستقراء}\\
+& = \Value{t}{M}[\Subst{s}{\Value{t'}{M}[s]}{x}]
+    \text{ بحسب تعريف $\Value{\Atom{f}{\dots}}{M}[\Subst{s}{\Value{t'}{M}[s]}{x}]$}
+  \end{aligned}
+\end{multline*}
+\end{enumerate}
+\end{proof}
+
+\begin{prop}\ollabel{prop:ext-formulas} لتكن $\Struct M$
+!!a{structure}، ولتكن $!A$ !!a{formula}، وليكن $t'$~حدًا، وليكن
+$s$~إسناد متغيرات. عندئذ
+$\Sat{M}{\Subst{!A}{t'}{x}}[s]$ إذا وفقط إذا كان
+$\Sat{M}{!A}[\Subst{s}{\Value{t'}{M}[s]}{x}]$.
+\end{prop}
+
+\begin{proof}
+تمرين.
+\end{proof}
+
+\begin{prob}
+أثبت \olref[fol][syn][ext]{prop:ext-formulas}.
+\end{prob}
+
+\begin{explain}
+  المقصود من
+  \cref{fol:syn:ext:prop:ext-terms,fol:syn:ext:prop:ext-formulas} هو
+  الآتي. افترض أن لدينا حدًا~$t$ أو !!a{formula}~$!A$، وحدًا
+  ما~$t'$، ونريد معرفة قيمة $\Subst{t}{t'}{x}$ أو ما إذا كانت
+  $\Subst{!A}{t'}{x}$ مُرضاة في !!a{structure}~$\Struct M$ نسبة
+  إلى إسناد ل!!a{variable}~$s$. يمكننا عندئذ إما أن نجري الإحلال
+  أولًا ثم ننظر في القيمة أو الإرضاء نسبة إلى~$\Struct{M}$ و$s$،
+  وإما أن نعيّن أولًا القيمة~$m = \Value{t'}{M}[s]$ للحد~$t'$ في
+  $\Struct{M}$ نسبة إلى~$s$، ونغيّر إسناد ال!!{variable}s
+  إلى~$\Subst{s}{m}{x}$، ثم ننظر في قيمة~$t$ في~$\Struct{M}$
+  و$\Subst{s}{m}{x}$، أو في صدق
+  $\Sat{M}{!A}[\Subst{s}{m}{x}]$.
+  وتكفل \Cref{fol:syn:ext:prop:ext-terms,fol:syn:ext:prop:ext-formulas}
+  أن يكون الجواب واحدًا أيًا من الطريقتين اتبعنا.
+\end{explain}
+
+\end{document}

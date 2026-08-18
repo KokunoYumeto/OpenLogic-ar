@@ -1,0 +1,240 @@
+% Part: proof-theory
+% Chapter: cut-elimination
+% Section: midsequent
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{cut}{mid}
+
+\olsection{مبرهنة المتتالية الوسطى ومبرهنة هيربراند}
+
+من النتائج المهمة لمبرهنة حذف القطع مبرهنة المتتالية الوسطى. وتنص على
+أنه إذا وُجد~!!a{proof}~$\pi$ لـ$\Gamma \Sequent \Delta$ تكون فيه كل
+!!{formula} سوَرية المقدمة، وُجد~!!a{proof}~$\pi'$ يحتوي متتالية
+$S \ident \Pi \Sequent \Lambda$ (تسمى \emph{المتتالية الوسطى}) بحيث
+تكون كل الاستدلالات فوق~$S$ في~$\pi'$ قضوية، وكل الاستدلالات تحت~$S$
+استدلالات سوَرية. (تكون~!!^a{formula}~$!A$ \emph{سوَرية المقدمة}، أو
+في \emph{الصيغة سوَرية المقدمة}، إذا كانت على الصورة
+\[\mathsf{Q}_1x_1\dots\mathsf{Q}_nx_n\,!B(x_1,\dots,x_n)\]
+حيث كل~$\mathsf{Q}_i$ إما~$\lforall$ وإما~$\lexists$.) ومن النتائج
+المهمة لمبرهنة المتتالية الوسطى مبرهنة هيربراند. ويصعب وصف حالتها العامة
+قليلًا، لكنها تأخذ في غاية العموم الصورة الآتية: لكل~!!{provable}
+!!{sentence}~$!A$ في منطق الرتبة الأولى، توجد قضية تحصيل حاصل~$!A'$
+يمكن أن~!!{prove} منها~$!A$. وفيما يأتي نسختها لـ!!{sentence}s من
+الصورة~$\lexists[x][!B(x)]$، حيث~$!B$ خالية من الأسوار:
+
+\begin{thm}[مبرهنة هيربراند]
+افترض أن~$!B(x)$ خالية من الأسوار وأن
+$\Proves \lexists[x][!B(x)]$. عندئذ توجد حدود~$t_1$, \dots,~$t_n$
+بحيث~$\Proves !B(t_1) \lor \dots \lor !B(t_n)$.
+\end{thm}
+
+تسمى~!!{formula}~$!B(t_1) \lor \dots \lor !B(t_n)$
+\emph{فصل هيربراند} لـ$\lexists[x][!B(x)]$. ولأن~$!B$ خالية من
+الأسوار، يكون هذا الفصل خاليًا من الأسوار أيضًا. فإذا كان~!!{provable}،
+كان~!!{provable} ببرهان خال من القطع، ومن ثم كان له~!!a{proof} لا
+يستخدم إلا الاستدلالات القضوية. ولذلك فهو تحصيل حاصل.
+
+الجزء الصعب من مبرهنة هيربراند هو بيان وجود فصل هيربراند لكل
+!!{provable}~!!{formula}~$\lexists[x][!B(x)]$. أما العكس، أي أن
+$\lexists[x][!B(x)]$ قابلة للبرهنة إذا كان لها فصل هيربراند، فسهل.
+فالواقع أن فصل هيربراند يستلزم~$\lexists[x][!B(x)]$. وهذا مثلًا
+!!a{proof} في~\Log{G3c} للحالة~$n=2$:
+\[
+\Axiom$!B(t_1) \fCenter \lexists[x][!B(x)], !B(t_1), !B(t_2)$
+\Axiom$!B(t_2) \fCenter \lexists[x][!B(x)], !B(t_1), !B(t_2)$
+\RightLabel{\LeftR{\lor}}
+\BinaryInf$!B(t_1) \lor !B(t_2) \fCenter \lexists[x][!B(x)], !B(t_1), !B(t_2)$
+\RightLabel{\RightR{\lexists}}
+\UnaryInf$!B(t_1) \lor !B(t_2) \fCenter \lexists[x][!B(x)], !B(t_2)$
+\RightLabel{\RightR{\lexists}}
+\UnaryInf$!B(t_1) \lor !B(t_2) \fCenter \lexists[x][!B(x)]$
+\DisplayProof
+\]
+
+لاستخراج فصل هيربراند من~!!a{proof}~$\pi$ لـ
+$\Sequent \lexists[x][!B(x)]$، تأمل الحالة التي تكون فيها كل
+استدلالات~$\RightR{\lexists}$ في~!!{proof} الخالي من القطع~$\pi$ عند
+النهاية:
+\[
+\AxiomC{}
+\RightLabel{$\pi_1$}
+\Deduce$ \fCenter \lexists[x][!B(x)], !B(t_1), \dots, !B(t_n)$
+\RightLabel{\RightR{\lexists}}
+\UnaryInf$ \fCenter \lexists[x][!B(x)], !B(t_2), \dots, !B(t_n)$
+\RightLabel{$(n-1) \times \RightR{\lexists}$}
+\Deduce$ \fCenter \lexists[x][!B(x)]$
+\DisplayProof
+\]
+إذا كانت هذه هي كل استدلالات~$\RightR{\lexists}$ في~$\pi$ التي تكون
+فيها~$\lexists[x][!B(x)]$ فعالة، فلا توجد استدلالات سوَرية أخرى في
+$\pi_1$. والسبب أن~$!B(x)$ لا تحتوي أسوارًا أخرى، وأن متتالية النهاية
+لا تحتوي أي~!!{formula}s في اليسار. وبعبارة أخرى، تكون
+$\fCenter \lexists[x][!B(x)], !B(t_1), \dots, !B(t_n)$ المتتالية
+الوسطى لـ$\pi$. وفوق ذلك، لما لم توجد استدلالات سوَرية فوق المتتالية
+الوسطى، احتوتها كل المتتاليات الواقعة فوقها، ولم تكن فيها
+$\lexists[x][!B(x)]$ فعالة ولا رئيسة. ومن ثم يمكن حذفها من~!!{proof}
+$\pi_1$، فنحصل على~!!a{proof} لـ
+$\fCenter !B(t_1), \dots, !B(t_n)$، وباستخدام~$n-1$ تطبيقًا لـ
+$\RightR{\lor}$ نحصل على~!!a{proof} لفصل هيربراند
+$\Sequent !B(t_1) \lor \dots \lor !B(t_n)$.
+
+لكن المشكلة أننا لا نستطيع افتراض أن حتى~!!{proof} خاليًا من القطع لـ
+$\Sequent \lexists[x][!B(x)]$ تكون فيه كل استدلالات
+$\RightR{\lexists}$ كتلة واحدة عند النهاية. فقد تقع بين هذه
+الاستدلالات استدلالات تكون فيها إحدى~$!B(t_i)$ رئيسة. ومن هنا تأتي
+الحاجة إلى مبرهنة المتتالية الوسطى.
+
+\begin{thm}[مبرهنة المتتالية الوسطى]\ollabel{thm:midsequent} إذا وُجد
+  في~\Log{G3c}~!!{proof}~$\pi$ لـ$\Gamma \Sequent \Delta$ تكون فيه كل
+  !!{formula}s في~$\Gamma$ و$\Delta$ سوَرية المقدمة، وُجد~!!a{proof}
+  $\pi'$ يحتوي متتالية~$\Pi \Sequent \Lambda$ بحيث تكون كل
+  الاستدلالات تحتها سوَرية، وكل الاستدلالات فوقها قضوية.
+\end{thm}
+
+\begin{proof}
+  عرّف \emph{رتبة} الاستدلال السُّوَري في~$\pi$ بأنها عدد الاستدلالات
+  القضوية الواقعة تحته، وعرّف رتبة~$\pi$، أي~$o(\pi)$، بأنها مجموع رتب
+  كل استدلالاته السُّوَرية. إذا كان~$o(\pi)=0$، لم يكن تحت أي استدلال
+  سُوَري استدلال قضوي، فنكون قد انتهينا: لما كانت لكل الاستدلالات
+  السُّوَرية مقدمة واحدة، وُجد استدلال سُوَري أعلى وحيد، ومقدمته هي
+  المتتالية الوسطى.
+
+  وإذا كان~$o(\pi)>0$، فاختر أدنى استدلال سُوَري رتبته~$>0$. ولأن
+  رتبته موجبة، فلا بد من وجود استدلال قضوي تحته. ولأنه أدنى استدلال
+  سُوَري من هذا القبيل، لا يمكن أن تكون نتيجته مقدمة لاستدلال سُوَري؛
+  وإلا كان ذلك الاستدلال السُّوَري الثاني الأدنى تحته استدلال قضوي
+  أيضًا. ونميز الحالات الكثيرة بحسب نوع الاستدلال السُّوَري ونوع
+  الاستدلال القضوي الواقع تحته. ولأن متتالية النهاية لا تتألف إلا من
+  صيغ سوَرية المقدمة، لا يمكن أن تكون الصيغة الرئيسة للاستدلال السُّوَري
+  فعالة في الاستدلال القضوي التالي. وإلا كان لصيغة ذلك الاستدلال الرئيسة
+  سور في نطاق رابط قضوي. وبخاصية~!!{formula} الجزئية، لزم أن تكون هذه
+  !!{formula} جزئية من~!!a{formula} في متتالية النهاية. ومن ثم
+  تكون~!!{formula} الرئيسة للاستدلال السُّوَري~!!a{element} من سياق
+  الاستدلال القضوي الأدنى.
+
+  وفيما يأتي مثالان:
+
+أولًا، افترض أن لدينا~$\RightR{\lforall}$ ينتهي في المقدمة اليمنى لـ
+$\LeftR{\lif}$. عندئذ ينتهي~!!{proof} الجزئي المعني من~$\pi$ بـ
+!!{proof} الجزئي~$\pi_1$:
+\[
+\AxiomC{}
+\RightLabel{$\pi_2$}
+\Deduce$\Gamma' \fCenter \Delta', \lforall[x][!A(x)], !B$
+\AxiomC{}
+\RightLabel{$\pi_3$}
+\Deduce$!C, \Gamma' \fCenter \Delta', !A(c)$
+\RightLabel{\RightR{\lforall}}
+\UnaryInf$!C, \Gamma' \fCenter \Delta', \lforall[x][!A(x)]$
+\RightLabel{\LeftR{\lif}}
+\BinaryInf$!B \lif !C, \Gamma' \fCenter \Delta', \lforall[x][!A(x)]$
+\DisplayProof
+\]
+يمكننا افتراض أن~$\pi$ منتظم، ومن ثم لا يظهر المتغير المميز~$c$ خارج
+$\pi_3$؛ وبوجه خاص لا يظهر في~$!B \lif !C$ ولا في~$\pi_2$. والآن
+تأمل البرهان~$\pi_1'$:
+\[
+\AxiomC{}
+\RightLabel{$\pi_2'$}
+\Deduce$\Gamma' \fCenter \Delta', \lforall[x][!A(x)], !A(c), !B$
+\AxiomC{}
+\RightLabel{$\pi_3$}
+\Deduce$!C, \Gamma' \fCenter \Delta', \lforall[x][!A(x)], !A(c)$
+\RightLabel{\LeftR{\lif}}
+\BinaryInf$!B \lif !C, \Gamma' \fCenter \Delta', \lforall[x][!A(x)], !A(c)$
+\RightLabel{\RightR{\lforall}}
+\UnaryInf$!B \lif !C, \Gamma' \fCenter \Delta', \lforall[x][!A(x)], \lforall[x][!A(x)]$
+\DisplayProof
+\]
+حيث ينتج~$\pi_2'$ من~$\pi_2$ بإضعافه بـ$!A(c)$ في اليمين. (ولا يضيف
+ذلك أي استدلال، وبوجه خاص لا يضيف استدلالات سوَرية قد تؤثر في الرتبة.
+كما أنه لا يخل بأي شرط لمتغير مميز في~$\pi_2$، إذ لا يُستخدم أي ثابت
+في~$!A(c)$ متغيرًا مميزًا في~$\pi_2$.) ويظل شرط المتغير المميز في
+$\RightR{\lforall}$ متحققًا، لأن~$c$ لا تظهر في~$!B \lif !C$.
+
+نستدعي مقبولية التقليص فنحصل على~!!a{proof}~$\pi_1''$ لـ
+$!B \lif !C, \Gamma' \fCenter \Delta', \lforall[x][!A(x)]$. ولم
+يغير برهان مقبولية~$\RightR{\Contraction}$ لـ$\lforall[x][!A(x)]$،
+ولا برهان قابلية~$\RightR{\lforall}$ للعكس المستخدم فيه، رتبة أي
+استدلال؛ فقد حذفا استدلالات في أقصى الأحوال. ولذلك لا توجد استدلالات
+سوَرية في~$\pi_1''$ أكثر مما في~$\pi_1$، ولكل استدلال سُوَري في
+$\pi_1''$ عدد الاستدلالات القضوية نفسه تحته كما للاستدلال المقابل في
+$\pi_1$، باستثناء~$\RightR{\lforall}$ الأخير: كان تحته
+$\LeftR{\lif}$ في~$\pi$، وقد نقلناه إلى فوقه في~$\pi_1''$. استبدل
+$\pi_1''$ بـ$\pi_1$ في~$\pi$. ويكون للـ!!{proof} الناتج رتبة أدنى،
+لأن رتبة استدلال~$\RightR{\lforall}$ على الأقل نقصت بمقدار~$1$. ثم
+طبّق فرض الاستقراء.
+
+والحالات التي يكون فيها الاستدلال السُّوَري هو~$\RightR{\lexists}$
+أسهل، إذ لا نحتاج إلى التقليص ولا إلى القلق بشأن شرط متغير مميز. فافترض
+مثلًا أن~$\RightR{\lexists}$ يتبعه~$\RightR{\land}$، وهذه المرة بوصفه
+المقدمة اليسرى. يكون~!!{proof} الجزئي المعني هو~$\pi_1$:
+\[
+\AxiomC{}
+\RightLabel{$\pi_2$}
+\Deduce$\Gamma' \fCenter \Delta', \lexists[x][!A(x)], !A(t), !B$
+\RightLabel{\RightR{\lexists}}
+\UnaryInf$\Gamma' \fCenter \Delta', \lexists[x][!A(x)], !B$
+\AxiomC{}
+\RightLabel{$\pi_3$}
+\Deduce$\Gamma' \fCenter \Delta', \lexists[x][!A(x)], !C$
+\RightLabel{\RightR{\land}}
+\BinaryInf$\Gamma' \fCenter \Delta', \lexists[x][!A(x)], !B \land !C$
+\DisplayProof
+\]
+استبدل~$\pi_1'$ بـ$\pi_1$ في~$\pi$:
+\[
+\AxiomC{}
+\RightLabel{$\pi_2$}
+\Deduce$\Gamma' \fCenter \Delta', \lexists[x][!A(x)], !A(t), !B$
+\AxiomC{}
+\RightLabel{$\pi_3'$}
+\Deduce$\Gamma' \fCenter \Delta', \lexists[x][!A(x)], !A(t), !C$
+\RightLabel{\RightR{\land}}
+\BinaryInf$\Gamma' \fCenter \Delta', \lexists[x][!A(x)], !A(t), !B \land !C$
+\RightLabel{\RightR{\lexists}}
+\UnaryInf$\Gamma' \fCenter \Delta', \lexists[x][!A(x)], !B \land !C$
+\DisplayProof
+\]
+حيث ينتج~$\pi_3'$ من~$\pi_3$ بإضعافه بـ$!A(t)$ في اليمين. ولا يتضمن
+هذا الإضعاف إلا إضافة~$!A(t)$ إلى يمين كل متتالية في~$\pi_3$، فلا يغير
+رتبة أي استدلال سُوَري. وتكون رتب الاستدلالات السُّوَرية في~$\pi'$
+كما هي في~$\pi$، سوى أن رتبة استدلال~$\RightR{\lexists}$ الذي بُدّل
+موضعه مع~$\RightR{\land}$ نقصت بمقدار~$1$. فينطبق فرض الاستقراء.
+\end{proof}
+
+\begin{prob}
+صف الحالتين في برهان~\olref{thm:midsequent} اللتين ينتهي في إحداهما
+$\LeftR{\lexists}$ في مقدمة~$\RightR{\lif}$، وينتهي في الأخرى
+$\LeftR{\lforall}$ في المقدمة اليسرى لـ$\LeftR{\lor}$.
+\end{prob}
+
+\begin{proof}[برهان مبرهنة هيربراند]
+افترض أن~$\pi$ ينتهي بـ$\Sequent \lexists[x][!B(x)]$. وبفضل
+\olref{thm:midsequent} نستطيع تحويل~$\pi$ إلى~!!a{proof}~$\pi'$ ذي
+متتالية وسطى~$S$، ولا بد أن تكون على الصورة
+\[
+\Sequent \lexists[x][!B(x)], !B(t_1), \dots, !B(t_n).
+\]
+ولأن كل الاستدلالات فوق~$S$ قضوية، لا يمكن أن تكون
+$\lexists[x][!B(x)]$ رئيسة في استدلال فوق~$S$. ولأنها ليست ذرية، لا
+يمكن أن تكون رئيسة في مسلّمة. ولأن~$\lexists[x][!B(x)]$ لا يمكن أن تكون
+صيغة جزئية حقيقية من~$!B(t_1)$، إذ إن~$!B(x)$ خالية من الأسوار، فلا
+يمكن كذلك أن تكون فعالة فوق~$S$. ومن ثم يعطي حذف
+$\lexists[x][!B(x)]$ من~!!{proof} الجزئي المنتهي بـ$S$~!!{proof}
+صحيحًا لـ$\Sequent !B(t_1), \dots, !B(t_n)$، ومنه يمكن الحصول على
+!!a{proof} لـ$\Sequent !B(t_1) \lor \dots \lor !B(t_n)$ بتطبيق
+$\RightR{\lor}$ عدد~$n-1$ من المرات.
+\end{proof}
+
+% \begin{prob}
+% أوجد فصل هيربراند لـ$\lexists[x][\lforall[y][(!A(x) \lif
+% !A(y))]]$ بإيجاد~!!{proof} خال من القطع لـ$\Sequent
+% \lexists[x][\lforall[y][(!A(x) \lif !A(y))]]$ وتطبيق التحويل في
+% \olref{thm:midsequent} لإيجاد متتالية وسطى عند الحاجة.
+% \end{prob}
+
+\end{document}

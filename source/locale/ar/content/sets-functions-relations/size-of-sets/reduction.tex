@@ -1,0 +1,132 @@
+% Part:sets-functions-relations
+% Chapter: sets
+% Section: reduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid[ar]{sfr}{siz}{red}
+
+\olsection{الاختزال}
+
+\begin{editorial}
+  يثبت هذا القسم عدم القابلية للتعداد بالاختزال، بما يطابق النتائج
+  الواردة في \olref[nen]{sec}. أما النسخة البديلة الأكثر إيجازًا
+  قليلًا، المطابقة للنتائج الواردة في \olref[nen-alt]{sec}، فترد في
+  \olref[red-alt]{sec}.
+\end{editorial}
+
+أثبتنا أن $\Pow{\PosInt}$ !!{nonenumerable} بحجة قطرية. وكان لدينا
+بالفعل برهان على أن $\Bin^\omega$، وهي مجموعة جميع المتتاليات
+اللانهائية من~$0$ و~$1$، !!{nonenumerable}. وفيما يأتي طريقة أخرى
+لإثبات أن $\Pow{\PosInt}$ !!{nonenumerable}: أثبت أنه \emph{إذا كانت
+  $\Pow{\PosInt}$ !!{enumerable}، فإن $\Bin^\omega$ تكون أيضًا
+  !!{enumerable}}. وبما أننا نعلم أن $\Bin^\omega$ ليست
+!!{enumerable}، فلا يمكن أن تكون $\Pow{\PosInt}$ كذلك. ويسمى هذا
+\emph{اختزال} مسألة إلى أخرى---وفي هذه الحالة نختزل مسألة تعداد
+$\Bin^\omega$ إلى مسألة تعداد $\Pow{\PosInt}$. فمن شأن حل للمسألة
+الأخيرة---أي تعداد $\Pow{\PosInt}$---أن يفضي إلى حل للمسألة
+الأولى---أي تعداد $\Bin^\omega$.
+
+كيف نختزل مسألة تعداد مجموعة~$B$ إلى مسألة تعداد مجموعة~$A$؟ نقدم
+طريقة لتحويل تعداد~$A$ إلى تعداد~$B$. وأسهل طريقة لذلك هي تعريف
+دالة~!!a{surjective} $f\colon A \to B$. فإذا كانت القائمة $x_1$، $x_2$،
+\dots{} تعدّد~$A$، فإن القائمة $f(x_1)$، $f(x_2)$، \dots{} تعدّد~$B$.
+وفي حالتنا نبحث عن دالة شاملة
+$f\colon \Pow{\PosInt} \to \Bin^\omega$.
+
+\begin{prob}
+أثبت أنه إذا وجدت دالة~!!{injective} $g\colon B \to A$، وكانت
+$B$~!!{nonenumerable}، فإن $A$ كذلك. وافعل ذلك ببيان كيفية استعمال~$g$
+لتحويل تعداد~$A$ إلى تعداد~$B$.
+\end{prob}
+
+\begin{proof}[برهان {\olref[nen]{thm:nonenum-pownat}} بالاختزال]
+افترض أن $\Pow{\PosInt}$ !!{enumerable}، ومن ثم أن لها تعدادًا هو
+$Z_{1}$، $Z_{2}$، $Z_{3}$، \dots
+
+عرّف الدالة $f \colon \Pow{\PosInt} \to \Bin^\omega$ بجعل
+$f(Z)$ المتتالية $s_{k}$ التي تحقق $s_{k}(n) = 1$ إذا وفقط إذا كان
+$n \in Z$، وتحقق $s_k(n) = 0$ فيما عدا ذلك. وهذا يعرّف دالةً بوضوح،
+إذ متى كان $Z \subseteq \PosInt$، كان كل $n \in \PosInt$ إما
+!!a{element} من $Z$ وإما لم يكن منه. فمثلًا ترسل مجموعة الأعداد
+الصحيحة الموجبة الزوجية $2\PosInt = \{2,
+4, 6, \dots\}$ إلى المتتالية $010101\dots$، وترسل المجموعة الخالية
+إلى $0000\dots$، وترسل المجموعة $\PosInt$ نفسها إلى $1111\dots$.
+
+وهي أيضًا !!{surjective}: فكل متتالية من~$0$ و~$1$ تقابل مجموعة من
+الأعداد الصحيحة الموجبة، هي تحديدًا المجموعة التي تضم الأعداد المقابلة
+للمواضع التي تحمل فيها المتتالية~$1$. وبصورة أدق، افترض أن
+$s \in \Bin^\omega$. وعرّف $Z
+\subseteq \PosInt$ كما يأتي:
+\[
+Z = \Setabs{n \in \PosInt}{s(n) = 1}
+\]
+عندئذ $f(Z) = s$، كما يمكن التحقق بالرجوع إلى تعريف~$f$.
+
+تأمل الآن القائمة
+\[
+f(Z_1), f(Z_2), f(Z_3), \dots
+\]
+بما أن $f$ !!{surjective}، فلا بد أن يظهر كل عنصر من $\Bin^\omega$
+قيمةً لـ~$f$ عند وسيط ما، ومن ثم لا بد أن يظهر في القائمة. ولذلك يجب
+أن تعدّد هذه القائمة~$\Bin^\omega$ كلها.
+
+وهكذا، إذا كانت $\Pow{\PosInt}$ !!{enumerable}، كانت $\Bin^\omega$
+!!{enumerable}. لكن $\Bin^\omega$ !!{nonenumerable}
+(\olref[nen]{thm:nonenum-bin-omega}). ومن ثم فإن $\Pow{\PosInt}$
+!!{nonenumerable}.
+\end{proof}
+
+\begin{explain}
+يسهل الالتباس في اتجاه الاختزال. فمثلًا، إن دالة~!!a{surjective}
+$g \colon \Bin^\omega \to B$ \emph{لا} تثبت أن $B$ !!{nonenumerable}. (تأمل $g
+\colon \Bin^\omega \to \Bin$ المعرّفة بـ$g(s) = s(1)$، وهي الدالة
+التي ترسل متتالية من~$0$ و~$1$ إلى أول !!{element} فيها. وهي
+!!{surjective}، لأن بعض المتتاليات تبدأ بـ$0$ وبعضها يبدأ بـ$1$.
+لكن $\Bin$ منتهية.) ولاحظ أيضًا أن الدالة~$f$ يجب أن تكون
+!!{surjective}، وإلا لم تكتمل الحجة: فلن يكون مضمونًا عندئذ أن تضم
+$f(x_1)$، $f(x_2)$، \dots{} جميع !!{element}s~$B$. فمثلًا،
+\[
+h(n) = \underbrace{000\dots0}_{\text{عددها $n$ من $0$}}
+\]
+يعرّف ذلك دالة $h\colon \PosInt \to
+\Bin^\omega$، لكن $\PosInt$ !!{enumerable}.
+\end{explain}
+
+\begin{prob}
+أثبت، بحجة اختزال، أن مجموعة جميع \emph{المجموعات المؤلفة من} أزواج الأعداد
+الصحيحة الموجبة !!{nonenumerable}.
+\end{prob}
+
+\begin{prob}\label{sfr:siz:red:prob:nat-nat}
+  أثبت، بحجة اختزال، أن المجموعة~$X$ لجميع الدوال
+  $f\colon \Nat \to \Nat$ !!{nonenumerable} (تلميح: أعط دالة شاملة
+  من $X$ إلى~$\Bin^\omega$.)
+\end{prob}
+
+\begin{prob}
+أثبت، بحجة اختزال، أن $\Nat^\omega$، وهي مجموعة المتتاليات اللانهائية
+من الأعداد الطبيعية، !!{nonenumerable}.
+\end{prob}
+
+\begin{prob}
+لتكن $P$ مجموعة الدوال من مجموعة الأعداد الصحيحة الموجبة إلى المجموعة
+$\{0\}$، ولتكن $Q$ مجموعة الدوال \emph{الجزئية} من مجموعة الأعداد
+الصحيحة الموجبة إلى المجموعة $\{0\}$. أثبت أن $P$~!!{enumerable} وأن
+$Q$ ليست كذلك. (تلميح: اختزل مسألة تعداد $\Bin^\omega$ إلى تعداد~$Q$).
+\end{prob}
+
+\begin{prob}
+لتكن $S$ مجموعة جميع الدوال~!!{surjective} من مجموعة الأعداد الصحيحة
+الموجبة إلى المجموعة \{0,1\}، أي إن $S$ تتألف من جميع
+الدوال~!!{surjective}~$f\colon \PosInt \to \Bin$. أثبت أن $S$
+!!{nonenumerable}.
+\end{prob}
+
+\begin{prob}
+أثبت أن مجموعة جميع الأعداد الحقيقية~$\Real$ !!{nonenumerable}.
+\end{prob}
+
+\end{document}

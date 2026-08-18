@@ -1,0 +1,152 @@
+% Part: normal-modal-logic
+% Chapter: frame-definability
+% Section: second-order-definability
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{frd}{st}
+
+\olsection{قابلية التعريف من الرتبة الثانية}
+
+ليست كل خاصية إطار قابلة للتعريف بصيغ موجهية قابلةً للتعريف من
+الرتبة الأولى. لكن إذا أتحنا التكميم على محمولات أحادية (أي التكميم
+الأحادي من الرتبة الثانية)، أمكننا تعريف جميع خصائص الأطر القابلة
+للتعريف موجهيًا. والحيلة هي استغلال الطريقة المنهجية التي ترتبط بها
+شروط صدق !!{formula} موجهية في عالم بـ!!{formula}s من الرتبة الأولى.
+وهذه هي ما تسمى الترجمة القياسية للصيغ الموجهية إلى صيغ من الرتبة
+الأولى في لغة لا تضم !!{predicate} ثنائيًا~$Q$ لعلاقة الوصول فحسب، بل
+تضم أيضًا !!{predicate} أحاديًا~$P_i$ لـ!!{propositional variable}s
+$\Obj p_i$ يرد في~$!A$.
+
+\begin{defn}
+  تُعرّف \emph{الترجمة القياسية}~$\ST_x(!A)$ استقرائيًا كما يأتي:
+  \begin{enumerate}
+  \tagitem{prvFalse}{\indcase{!A}{\lfalse}{$\ST_x(\indfrm) = \lfalse$.}}{}
+  \tagitem{prvTrue}{\indcase{!A}{\ltrue}{$\ST_x(\indfrm) = \ltrue$.}}{}
+  \item \indcase{!A}{\Obj p_i}{$\ST_x(\indfrm) = \Atom{P_i}{x}$.}
+  \tagitem{prvNot}{\indcase{!A}{\lnot !B}{$\ST_x(\indfrm) = \lnot \ST_x(!B)$.}}{}
+  \tagitem{prvAnd}{\indcase{!A}{(!B \land !C)}{$\ST_x(\indfrm) = (\ST_x(!B)
+      \land \ST_x(!C))$.}}{}
+  \tagitem{prvOr}{\indcase{!A}{(!B \lor !C)}{$\ST_x(\indfrm) = (\ST_x(!B)
+      \lor \ST_x(!C))$.}}{}
+  \tagitem{prvIf}{\indcase{!A}{(!B \lif !C)}{$\ST_x(\indfrm) = (\ST_x(!B)
+      \lif \ST_x(!C))$.}}{}
+  \tagitem{prvIff}{\indcase{!A}{(!B \liff !C)}{$\ST_x(\indfrm) = (\ST_x(!B)
+      \liff \ST_x(!C))}$.}{}
+  \tagitem{prvBox}{\indcase{!A}{\Box !B}{$\ST_x(\indfrm) =
+      \lforall[y][(\Atom{Q}{x,y} \lif \ST_y(!B))]$.}}{}
+  \tagitem{prvDiamond}{\indcase{!A}{\Diamond !B}{$\ST_x(\indfrm) =
+      \lexists[y][(\Atom{Q}{x,y} \land \ST_y(!B))]$.}}{}
+  \end{enumerate}
+\end{defn}
+
+فمثلًا،~$\ST_x(\Box p \lif p)$ هي
+$\lforall[y][(\Atom{Q}{x,y} \lif \Atom{P}{y})] \lif \Atom{P}{x}$.
+وتحتاج كل~!!{structure} للغة~$\ST_x(!A)$ إلى مجال، وعلاقة ثنائية
+معينة لـ$Q$، ومجموعات جزئية من المجال معينة للـ!!{predicate}s الأحادية
+$P_i$. وبعبارة أخرى، مكونات هذه ال!!a{structure} هي بالضبط مكونات
+نموذج لـ$!A$: فالمجال مجموعة العوالم، والعلاقة الثنائية المعينة لـ$Q$
+علاقة الوصول، والمجموعات الجزئية المعينة لـ$P_i$ ليست إلا التعيينات
+$V(\Obj p_i)$. وليس من المستغرب أن يتفق تحقق~$!A$ في نموذج موجهي مع
+تحقق~$\ST_x(!A)$ في ال!!{structure} المقابلة:
+
+\begin{prop}\ollabel{prop:st}
+  ليكن~$\mModel{M} = \tuple{W, R, V}$، ولتكن~$\Struct{M'}$
+  ال!!{structure} من الرتبة الأولى ذات~$\Domain{M'} = W$، و
+  $\Assign{Q}{M'} = R$، و$\Assign{P_i}{M'} = V(\Obj p_i)$، ولتكن
+  $s(x) = w$. عندئذ
+  \[
+  \mSat{M}{!A}[w] \text{ إذا وفقط إذا كان } \Sat{M'}{\ST_x(!A)}[s]
+  \]
+\end{prop}
+
+\begin{proof}
+  بالاستقراء على~$!A$.
+\end{proof}
+
+\begin{prop}
+  افترض أن~$!A$ !!{formula} موجهية وأن
+  $\mModel{F} = \tuple{W, R}$ إطار. ولتكن~$\Struct{F'}$
+  ال!!{structure} من الرتبة الأولى ذات~$\Domain{F'} = W$ و
+  $\Assign{Q}{F'} = R$، ولتكن~$!A'$ صيغة الرتبة الثانية
+  \[
+  \lforall[X_1][\dots\lforall[X_n][\lforall[x][
+        \SSubst{\ST_x(!A)}{\subst{X_1}{P_1}, \dots,
+          \subst{X_n}{P_n}}]]],
+  \]
+  حيث~$P_1$، و\dots، و$P_n$ هي جميع ال!!{predicate}s الأحادية في
+  $\ST_x(!A)$. عندئذ
+  \[
+  \mModel{F} \Entails !A \text{ إذا وفقط إذا كان } \Sat{F'}{!A'}
+  \]
+\end{prop}
+
+\begin{proof}
+  يكون~$\Sat{F'}{!A'}$ إذا وفقط إذا كان، لكل !!{structure}
+  $\mModel{M'}$ توسّع~$\Struct{F'}$ بحيث~$\Domain{M'} = W$ و
+  $\Assign{Q}{M'} = R$ و$\Assign{P_i}{M'} \subseteq W$ لكل
+  $i = 1$، و\dots، و$n$، ولكل~$s$ يحقق~$s(x) \in W$، لدينا
+  $\Sat{M'}{\ST_x(!A)}[s]$. وبحسب~\olref{prop:st}، يتحقق ذلك إذا
+  وفقط إذا كان، لجميع النماذج~$\mModel{M}$ المبنية على~$\mModel{F}$
+  ولكل عالم~$w \in W$، لدينا~$\mSat{M}{!A}[w]$، أي
+  $\mModel{F} \Entails !A$.
+\end{proof}
+
+\begin{defn}
+  يكون صنف الأطر~$\mClass{F}$ \emph{قابلًا للتعريف من الرتبة
+  الثانية} إذا وُجدت !!a{sentence}~$!A$ في لغة الرتبة الثانية ذات
+  !!{predicate} ثنائي واحد~$Q$ وذات مكممات لا تقع إلا على متغيرات
+  مجموعات أحادية، بحيث~$\mModel{F} = \tuple{W, R} \in \mClass{F}$
+  إذا وفقط إذا كان~$\Sat{M}{!A}$ في ال!!{structure}~$\Struct{M}$ ذات
+  $\Domain{M} = W$ و$\Assign{Q}{M} = R$.
+\end{defn}
+
+\begin{cor}
+  إذا كان صنف من الأطر قابلًا للتعريف بـ!!a{formula}~$!A$، كان صنف
+  علاقات الوصول المقابل قابلًا للتعريف بجملة أحادية من الرتبة الثانية.
+\end{cor}
+
+\begin{proof}
+  لجملة الرتبة الثانية الأحادية~$!A'$ في البرهان السابق الخاصية
+  المطلوبة.
+\end{proof}
+
+ولمثال، تأمل مرة أخرى ال!!{formula}~$\Box p \lif p$. إنها تعرّف
+الانعكاسية. والانعكاسية قابلة، بالطبع، للتعريف من الرتبة الأولى
+بال!!{sentence}~$\lforall[x][\Atom{Q}{x,x}]$. لكنها قابلة أيضًا
+للتعريف بال!!{sentence} الأحادية من الرتبة الثانية
+\[
+\lforall[X][\lforall[x][(\lforall[y][(\Atom{Q}{x,y} \lif \Atom{X}{y})]
+    \lif \Atom{X}{x})]].
+\]
+وهذا يعني، بالطبع، أن الجملتين متكافئتان. وفيما يأتي طريقة قد تقنعك
+بهذا مباشرة: افترض أولًا أن جملة الرتبة الثانية صادقة في
+!!a{structure}~$\Struct{M}$. ولما كان~$x$ و$X$ مكممين كليًا، وجب أن
+يصدق الباقي لأي~$x \in W$ ومجموعة~$X \subseteq W$، ومنها مثلًا
+المجموعة~$\Setabs{z}{Rxz}$ حيث~$R = \Assign{Q}{M}$. ومن ثم، لأي~$s$
+يحقق~$s(x) \in W$ و$s(X) = \Setabs{z}{Rxz}$، يكون
+$\Sat{M}{\lforall[y][(\Atom{Q}{x,y} \lif
+    \Atom{X}{y})] \lif \Atom{X}{x}}[s]$. لكن طريقة اختيارنا لـ$s(X)$
+تعني أن~$\Sat{M}{\lforall[y][(\Atom{Q}{x,y} \lif
+    \Atom{Q}{x,y})] \lif \Atom{Q}{x,x}}[s]$، وهذا يكافئ
+$\Atom{Q}{x,x}$ لأن المقدَّم صالح. ولما كان~$s(x)$ اعتباطيًا، كان
+$\Sat{M}{\lforall[x][\Atom{Q}{x,x}]}$.
+
+افترض الآن أن~$\Sat{M}{\lforall[x][\Atom{Q}{x,x}]}$، وأثبت أن
+$\Sat{M}{\lforall[X][\lforall[x][(\lforall[y][(\Atom{Q}{x,y} \lif
+        \Atom{X}{y})] \lif \Atom{X}{x})]]}$. اختر أي تعيين~$s$،
+وافترض~$\Sat{M}{\lforall[y][(\Atom{Q}{x,y} \lif
+    \Atom{X}{y})]}[s]$. ولتكن~$s'$ مغايرة~$s$ عند~$y$ بحيث~$s'(y)
+= s(x)$؛ عندئذ~$\Sat{M}{\Atom{Q}{x,y} \lif \Atom{X}{y}}[s']$، أي
+$\Sat{M}{\Atom{Q}{x,x} \lif \Atom{X}{x}}[s]$. ولما كان
+$\Sat{M}{\lforall[x][\Atom{Q}{x,x}]}$، كان المقدَّم صادقًا، ومن ثم
+$\Sat{M}{\Atom{X}{x}}[s]$، وهذا ما أردنا إثباته.
+
+ولما كانت بعض أصناف الأطر القابلة للتعريف غير قابلة للتعريف من
+الرتبة الأولى، فليست كل~!!{sentence} أحادية من الرتبة الثانية من
+الصورة~$!A'$ مكافئة لـ!!{sentence} من الرتبة الأولى. ولا توجد طريقة
+فعالة لتقرير أيها كذلك.
+
+\end{document}

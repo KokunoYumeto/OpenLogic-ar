@@ -1,0 +1,50 @@
+% Part: normal-modal-logic
+% Chapter: axioms-systems
+% Section: provability-properties
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{prf}{prp}
+
+\olsection{خصائص \usetoken{S}{derivability}}
+
+\begin{prop}\ollabel{prop:derivabilityfacts}
+  لتكن~$\Sigma$ نسقًا جهويًا، ولتكن~$\Gamma$ مجموعة من ال!!{formula}s.
+  عندئذ تتحقق الخصائص الآتية:
+  \begin{enumerate}
+  \item\ollabel{prop:derivabilityfacts-monotonicity} \emph{الرتابة}: إذا
+    كان~$\Gamma \Proves[\Sigma] !A$ و$\Gamma \subseteq \Delta$، فإن
+    $\Delta \Proves[\Sigma] !A$؛
+  \item\ollabel{prop:derivabilityfacts-reflexivity}
+    \emph{الانعكاسية}: إذا كان~$!A \in \Gamma$، فإن
+    $\Gamma \Proves[\Sigma] !A$؛
+  \item\ollabel{prop:derivabilityfacts-cut} \emph{القطع}: إذا كان
+    $\Gamma \Proves[\Sigma] !A$ و$\Delta \cup \{!A\}
+    \Proves[\Sigma] !B$، فإن~$\Gamma \cup \Delta \Proves[\Sigma] !B$؛
+  \item\ollabel{prop:derivabilityfacts-deduction} \emph{مبرهنة الاستنتاج}:
+    $\Gamma \cup \{!B\} \Proves[\Sigma] !A$ إذا وفقط إذا كان
+    $\Gamma \Proves[\Sigma] !B \lif !A$؛
+  \item \ollabel{prop:derivabilityfacts-ruleT}% \emph{Rule T}: If
+    كان~$\Gamma \Proves[\Sigma] !A_1$ و\dots{} و
+    $\Gamma \Proves[\Sigma] !A_n$، وكانت
+    $!A_1 \lif (!A_2 \lif \cdots (!A_n \lif !B)\cdots)$ مثال إحلال
+    لقضية صادقة صدقًا تحليليًا، فإن~$\Gamma \Proves[\Sigma] !B$.
+  \end{enumerate}
+\end{prop}
+
+البرهان تمرين يسير. ويترتب من الجزء
+\olref{prop:derivabilityfacts-ruleT} من~\olref{prop:derivabilityfacts}،
+مثلًا، أنه إذا كان~$\Gamma \Proves[\Sigma] !A \lor !B$ و
+$\Gamma \Proves[\Sigma] \lnot !A$، فإن~$\Gamma \Proves[\Sigma] !B$.
+وسنكتب فيما يأتي~$\Gamma, !A \Proves[\Sigma] !B$ بدلًا من
+$\Gamma \cup \{!A\} \Proves[\Sigma] !B$.
+
+\begin{defn}
+  تكون المجموعة~$\Gamma$ \emph{مغلقة استنتاجيًا} بالنسبة إلى النسق
+  $\Sigma$ إذا وفقط إذا كان~$\Gamma \Proves[\Sigma] !A$ يستلزم
+  $!A \in \Gamma$.
+\end{defn}
+
+\end{document}

@@ -1,0 +1,190 @@
+% Part: computability
+% Chapter: recursive-functions
+% Section: examples
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{rec}{exa}
+\olsection{أمثلة للدوال العودية البدائية}
+
+لدينا من قبل بعض أمثلة الدوال العودية البدائية، ومنها دالتا الجمع
+والضرب~$\Add$ و$\Mult$. ودالة الهوية $\fn{id}(x)=x$ عودية بدائية،
+لأنها ليست إلا~$\Proj{1}{0}$. والدوال الثابتة
+$\fn{const}_n(x)=n$ عودية بدائية، إذ يمكن تعريفها من $\Zero$ و$\Succ$
+بالتركيب المتتابع. وهذا مفيد حين نريد استعمال ثوابت في تعريفات عودية
+بدائية. فإذا أردنا، مثلًا، تعريف الدالة $f(x)=2\cdot x$، أمكننا الحصول
+عليها بتركيب $\fn{const}_2(x)$ مع الضرب هكذا:
+$f(x)=\Mult(\fn{const}_2(x),\Proj{1}{0}(x))$. وسنستعمل هذه الحيلة من
+الآن فصاعدًا.
+
+\begin{prop}
+  دالة الأس $\fn{exp}(x,y)=x^y$ عودية بدائية.
+\end{prop}
+
+\begin{proof}
+  يمكننا تعريف $\fn{exp}$ بالعودية البدائية هكذا:
+  \begin{align*}
+    \fn{exp}(x, 0) & = 1\\
+    \fn{exp}(x, y+1) & = \Mult(x, \fn{exp}(x,y)).
+    \intertext{وهذا، بالدقة الصارمة، ليس تعريفًا عوديًا من دوال عودية
+      بدائية. أما رسميًا فلدينا:}
+    \fn{exp}(x, 0) & = f(x)\\
+    \fn{exp}(x, y+1) & = g(x, y, \fn{exp}(x,y)).
+    \intertext{حيث}
+    f(x) & = \Succ(\Zero(x)) = 1\\
+    g(x, y, z) & = \Mult(\Proj{3}{0}(x, y, z), \Proj{3}{2}(x, y, z)) = x \cdot z
+  \end{align*}
+  ولذلك تكون $f$ و$g$ معرفتين من دوال عودية بدائية بالتركيب.
+\end{proof}
+
+\begin{prop}
+  دالة السابق $\fn{pred}(y)$ المعرفة بـ
+  \[
+  \fn{pred}(y) = \begin{cases}
+    0 & \text{إذا كان $y=0$}\\
+    y-1 & \text{في غير ذلك}
+  \end{cases}
+  \]
+  عودية بدائية.
+\end{prop}
+
+\begin{proof}
+ لاحظ أن
+ \begin{align*}
+   \fn{pred}(0) & = 0 \text{، وأن}\\
+   \fn{pred}(y+1) & = y.
+ \end{align*}
+ هذا يكاد يكون تعريفًا بالعودية البدائية، لكنه لا يلائم، بالدقة الصارمة،
+ نمط التعريف بالعودية البدائية، لأن ذلك النمط يتطلب حجة إضافية واحدة
+ على الأقل~$x$. ومن الغريب أيضًا أنه لا يستعمل $\fn{pred}(y)$ فعلًا
+ في تعريف $\fn{pred}(y+1)$. غير أن بوسعنا أولًا تعريف
+ $\fn{pred}'(x,y)$ بـ
+ \begin{align*}
+   \fn{pred}'(x, 0) & = \Zero(x) = 0,\\
+   \fn{pred}'(x, y+1) & = \Proj{3}{1}(x, y, \fn{pred'}(x, y)) = y.
+ \end{align*}
+ثم تعريف $\fn{pred}$ منها بالتركيب، مثلًا هكذا:
+$\fn{pred}(x)=\fn{pred}'(\Zero(x),\Proj{1}{0}(x))$.
+\end{proof}
+
+\begin{prop}
+  دالة المضروب $\fn{fac}(x)=\fact{x}=1\cdot2\cdot3
+  \cdot\dots\cdot x$ عودية بدائية.
+\end{prop}
+
+\begin{proof}
+  التعريف الواضح بالعودية البدائية هو
+  \begin{align*}
+    \fn{fac}(0) &= 1\\
+    \fn{fac}(y+1) & = \fn{fac}(y) \cdot (y+1).
+    \intertext{ويلزمنا رسميًا أن نعرف أولًا دالة ثنائية الحجج $h$:}
+    h(x, 0) & = \fn{const}_1(x)\\
+    h(x, y+1) & = g(x, y, h(x, y))
+    \intertext{حيث $g(x,y,z)=\Mult(\Proj{3}{2}(x,y,z),
+      \Succ(\Proj{3}{1}(x,y,z)))$، ثم نجعل}
+    \fn{fac}(y) & = h(\Proj{1}{0}(y), \Proj{1}{0}(y)) = h(y,y).
+  \end{align*}
+  وسنتساهل قليلًا من الآن فصاعدًا، فلا نعطي التعريفات الرسمية بالتركيب
+  والعودية البدائية.
+\end{proof}
+
+\begin{prop}
+  الطرح المبتور، $x\tsub y$، المعرف بـ
+  \[
+  x \tsub y = \begin{cases}
+    0 & \text{إذا كان $x<y$}\\
+    x-y & \text{في غير ذلك}
+  \end{cases}
+  \]
+  عودي بدائي.
+\end{prop}
+
+\begin{proof}
+  لدينا:
+  \begin{align*}
+    x \tsub 0 & = x\\
+    x \tsub (y+1) & = \fn{pred}(x \tsub y)
+  \end{align*}
+\end{proof}
+
+\begin{prop}
+ المسافة بين $x$ و$y$، أي $\left|x-y\right|$، عودية بدائية.
+\end{prop}
+
+\begin{proof}
+  لدينا $\left|x-y\right|=(x\tsub y)+(y\tsub x)$، ولذلك يمكن تعريف
+  المسافة بالتركيب من $+$ و$\tsub$، وهما عوديان بدائيان.
+\end{proof}
+
+\begin{prop}
+  أكبر $x$ و$y$، أي $\fn{max}(x,y)$، عودي بدائي.
+\end{prop}
+
+\begin{proof}
+  يمكننا تعريف $\fn{max}(x,y)$ بالتركيب من $+$ و$\tsub$ هكذا:
+  \[
+  \fn{max}(x,y) \defis x + (y \tsub x).
+  \]
+  إذا كان $x$ هو الأكبر، أي $x\ge y$، كان $y\tsub x=0$، ومن ثم
+  $x+(y\tsub x)=x+0=x$. وإذا كان $y$ هو الأكبر، كان
+  $y\tsub x=y-x$، ومن ثم $x+(y\tsub x)=x+(y-x)=y$.
+\end{proof}
+
+\begin{prop}
+  \ollabel{prop:min-pr}
+  أصغر $x$ و$y$، أي $\fn{min}(x,y)$، عودي بدائي.
+\end{prop}
+
+\begin{proof}
+  تمرين.
+\end{proof}
+
+\begin{prob}
+  أثبت \olref[cmp][rec][exa]{prop:min-pr}.
+\end{prob}
+
+\begin{prob}
+بين أن
+\[
+f(x, y) =
+2^{(2^{\iddots^{2^{x}}})}\raisebox{1ex}{\bigg\rbrace}
+\raisebox{1ex}{\text{$y$ نسخ من العدد~$2$}}
+\]
+دالة عودية بدائية.
+\end{prob}
+
+\begin{prob}
+بين أن القسمة الصحيحة $d(x,y)=\lfloor x/y\rfloor$ (أي القسمة مع إهمال
+كل ما يلي الفاصلة العشرية) عودية بدائية. ونشترط، حين $y=0$، أن
+$d(x,y)=0$. أعط تعريفًا صريحًا لـ~$d$ باستعمال العودية البدائية
+والتركيب.
+\end{prob}
+
+\begin{prop}
+مجموعة الدوال العودية البدائية منغلقة تحت العمليتين الآتيتين:
+\begin{enumerate}
+\item المجاميع المنتهية: إذا كانت $f(\vec x,z)$ عودية بدائية، كانت
+الدالة الآتية كذلك:
+\[
+g(\vec x, y) \defis \sum_{z = 0}^y f(\vec x, z).
+\]
+\item الجداءات المنتهية: إذا كانت $f(\vec x,z)$ عودية بدائية، كانت
+الدالة الآتية كذلك:
+\[
+h(\vec x, y) \defis \prod_{z = 0}^y f(\vec x, z).
+\]
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+فمثلًا تعرف المجاميع المنتهية عوديًا بالمعادلتين
+\begin{align*}
+  g(\vec x, 0) & = f(\vec x, 0)\\
+  g(\vec x, y+1) & = g(\vec x, y) + f(\vec x, y+1).
+\end{align*}
+\end{proof}
+
+
+\end{document}

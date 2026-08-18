@@ -1,0 +1,107 @@
+% Part:sets-functions-relations
+% Chapter: size-of-sets
+% Section: equinumerous-sets
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid[ar]{sfr}{siz}{equ}
+
+\olsection{التساوي العددي}
+
+لدينا تصور حدسي لـ«حجم» المجموعات، وهو تصور يعمل جيدًا مع المجموعات
+المنتهية. ولكن ماذا عن المجموعات اللانهائية؟ إذا أردنا وضع طريقة صورية
+لمقارنة حجمي مجموعتين من \emph{أي} حجم، فمن المناسب أن نبدأ بتعريف
+متى تكون المجموعتان متساويتين في الحجم. يقول فريغه:
+\begin{quote}
+  إذا أراد نادل أن يتيقن أنه وضع على المائدة من السكاكين عددًا مساويًا
+  تمامًا لعدد الصحون، فلا حاجة به إلى عد أي منهما، إذا اكتفى بوضع سكين
+  إلى يمين كل صحن، على نحو تكون معه كل سكين على المائدة إلى يمين صحن
+  ما. وهكذا تقترن الصحون والسكاكين بعضها ببعض اقترانًا فريدًا، بل بواسطة
+  العلاقة المكانية نفسها. \citep[\S70]{Frege1884}
+\end{quote}
+يمكن إبراز الفكرة الكامنة في هذا المقطع بتعريف صوري:
+
+\begin{defn}\ollabel{comparisondef}
+  تكون $A$ \emph{متساويةً عددًا} مع $B$، ويكتب ذلك $\cardeq{A}{B}$، إذا
+  وفقط إذا وجدت !!a{bijection} $f \colon A \to B$.
+\end{defn}
+
+\begin{prop}\ollabel{equinumerosityisequi}
+التساوي العددي علاقة تكافؤ.
+\end{prop}
+
+\begin{proof}
+يجب أن نبين أن التساوي العددي انعكاسي ومتناظر ومتعدٍّ. ولتكن $A, B$
+و$C$ مجموعات.
+
+\emph{الانعكاسية.} دالة الهوية $\Id{A} \colon A \to A$، حيث
+$\Id{A} (x) = x$ لكل $x \in A$، هي !!a{bijection}. ومن ثم
+$\cardeq{A}{A}$.
+
+\emph{التناظر.} افترض أن $\cardeq{A}{B}$، أي إن ثمة
+!!a{bijection} $f\colon A \to B$. وبما أن $f$ !!{bijective}، فإن
+معكوسها $f^{-1}$ موجود وهو أيضًا !!{bijective}. ومن ثم تكون
+$f^{-1}\colon B \to A$ !!a{bijection}، فينتج $\cardeq{B}{A}$.
+
+\emph{التعدي.} افترض أن $\cardeq{A}{B}$ و$\cardeq{B}{C}$، أي إن ثمة
+!!{bijection}s $f\colon A \to B$ و$g\colon B \to
+C$. عندئذ تكون الدالة المركبة $\comp{f}{g}\colon A \to C$ !!{bijective}،
+فينتج $\cardeq{A}{C}$.
+\end{proof}
+
+\begin{prop}
+إذا كان $\cardeq{A}{B}$، فإن $A$ !!{enumerable} إذا
+وفقط إذا كانت $B$ كذلك.
+\end{prop}
+
+\begin{editorial}
+يستعمل البرهان الآتي \olref[enm]{defn:enumerable} إذا كان
+\olref[enm]{sec} مدرجًا، ويستعمل \olref[enm-alt]{defn:enumerable}
+فيما عدا ذلك.
+\end{editorial}
+
+\begin{proof}
+افترض أن $\cardeq{A}{B}$، فتوجد !!{bijection} ما $f \colon A
+\to B$، وافترض أن $A$ !!{enumerable}.
+\oliflabeldef{sfr:siz:enm:defn:enumerable}{
+  عندئذ إما أن يكون $A = \emptyset$، وإما أن توجد دالة~!!a{surjective}
+  $g\colon \PosInt \to A$. وإذا كان $A = \emptyset$، كان $B = \emptyset$
+  أيضًا (وإلا لوجد !!a{element}~$y \in B$، من غير أن يوجد $x \in
+  A$ يحقق $g(x) = y$). أما إذا كانت $g\colon \PosInt \to A$
+  !!{surjective}، فإن $\comp{g}{f} \colon \PosInt \to B$
+  !!{surjective}. ولبيان ذلك، خذ $y \in B$. بما أن $f$
+  !!{surjective}، يوجد $x \in A$ بحيث $f(x) = y$. وبما أن
+  $g$ !!{surjective}، يوجد $n \in \PosInt$ بحيث $g(n) =
+  x$. ومن ثم
+\[
+(\comp{g}{f})(n) = f(g(n)) = f(x) = y
+\]
+وعليه فإن $\comp{g}{f}$ !!{surjective}. وقد حصلنا على أن $\comp{g}{f}$
+تعداد لـ~$B$، ومن ثم فإن $B$~!!{enumerable}.}
+{
+  عندئذ إما أن يكون $A  = \emptyset$، وإما أن توجد !!a{bijection}~$g$
+  مداها $A$ ومجالها إما $\Nat$ وإما مقطع ابتدائي من الأعداد الطبيعية.
+  وإذا كان $A = \emptyset$، كان $B =
+  \emptyset$ أيضًا (وإلا لوجد~$y \in B$ من غير أن يوجد $x
+  \in A$ بحيث $g(x) = y$). فافترض إذن أن لدينا
+  !!{bijection}~$g$. عندئذ تكون $\comp{g}{f}$ !!a{bijection} مداها~$B$
+  ومجالها هو مجال~$g$ نفسه (أي إما $\Nat$ وإما مقطع ابتدائي منه)،
+  ومن ثم تكون $B$ !!{enumerable}.}
+
+إذا كانت $B$ !!{enumerable}، حصلنا على أن $A$ !!{enumerable} بتكرار
+الحجة مع !!{bijection} $f^{-1}\colon B \to A$ بدلًا من~$f$.
+\end{proof}
+
+\begin{prob}
+أثبت أنه إذا كان $\cardeq{A}{C}$ و$\cardeq{B}{D}$، وكان $A \cap B =
+C \cap D = \emptyset$، فإن $\cardeq{A \cup B}{C \cup D}$.
+\end{prob}
+
+\begin{prob}
+أثبت أنه إذا كانت $A$ لا نهائية و!!{enumerable}، فإن
+$\cardeq{A}{\Nat}$.
+\end{prob}
+
+\end{document}

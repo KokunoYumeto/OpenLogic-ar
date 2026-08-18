@@ -1,0 +1,181 @@
+% Part: normal-modal-logic
+% Chapter: frame-definability
+% Section: properties-accessibility
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{frd}{acc}
+
+\olsection{خصائص علاقات الوصول}
+
+يتبين أن كثيرًا من ال!!{formula}s الموجهية مميزة لخصائص بسيطة، بل
+مألوفة، لعلاقة الوصول. ويعني هذا، في أحد الاتجاهين، أن كل نموذج له
+خاصية معطاة يجعل !!{formula} مقابلة لها (وجميع حالات إحلالها) صادقة.
+ونبدأ بخمسة أمثلة كلاسيكية لأنواع علاقات الوصول وللصيغ التي يضمن صدقها
+كل نوع.
+
+\begin{thm}\ollabel{thm:soundschemas}
+  ليكن~$\mModel{M} = \tuple{W, R, V}$ نموذجًا. إذا كانت لـ$R$ الخاصية
+  المبينة في الجانب الأيسر من~\olref{tab:five}، كانت كل حالة من
+  ال!!{formula} في الجانب الأيمن صادقة في~$\mModel{M}$.
+\end{thm}
+
+\begin{table}[t]
+    \begin{tabular}{| l || l |}
+      \hline
+      {\emph{إذا كانت~$R$ \dots}} & {\emph{فإن \dots صادقة في~$\mModel{M}$:}} \\
+      \hline \hline
+      \emph{تسلسلية}: $\forall u \exists v Ruv$ & \hbox to.43\textwidth
+           {$\Box p \lif \Diamond p$ \hfill (\Ax{D})} \\
+      \hline
+      \emph{انعكاسية}: $\forall w Rww$
+      & \hbox to.43\textwidth
+          {$\Box p \lif p$ \hfill (\Ax{T})} \\
+      \hline
+      \emph{متناظرة}: &  \hbox to .43\textwidth
+           {$p \lif \Box\Diamond p$ \hfill (\Ax{B})} \\
+           $\forall u\forall v(Ruv \lif Rvu)$ & \\
+      \hline
+      \emph{متعدية}: & \hbox to.43\textwidth
+           {$\Box p \lif \Box \Box p$ \hfill (\Ax{4})} \\
+      $\forall u \forall v \forall w ((Ruv \land Rvw) \lif Ruw)$ & \\
+      \hline
+      \emph{إقليدية}: & \hbox to .43\textwidth
+        {$\Diamond p \lif \Box\Diamond p$ \hfill (\Ax{5})} \\
+      $\forall w \forall u \forall v ((Rwu \land Rwv) \lif Ruv)$ &\\
+      \hline
+    \end{tabular}
+    \caption{خمس حقائق مطابقة.}
+    \ollabel{tab:five}
+  \end{table}
+
+
+\begin{proof}
+  هذه حالة~\Ax{B}: لإثبات أن المخطط صادق في نموذج، نحتاج إلى إثبات
+  أن جميع حالاته صادقة في جميع عوالم النموذج. فلتكن
+  $!A \lif \Box\Diamond !A$ حالة معطاة من~\Ax{B}، وليكن~$w \in W$
+  عالمًا اعتباطيًا. افترض أن المقدَّم~$!A$ صادق في~$w$، لكي نثبت أن
+  $\Box \Diamond !A$ صادقة في~$w$. فنحتاج إذن إلى إثبات أن
+  $\Diamond !A$ صادقة في كل~$w'$ يمكن الوصول إليه من~$w$. والآن، لأي
+  $w'$ يحقق~$Rww'$، يعطينا فرض التناظر أن~$Rw'w$ أيضًا (انظر
+  \olref{fig:Bsymm}). ولما كان~$\mSat{M}{!A}[w]$، كان
+  $\mSat{M}{\Diamond !A}[w']$. ولما كان~$w'$ عالمًا اعتباطيًا يحقق
+  $Rww'$، كان~$\mSat{M}{\Box\Diamond!A}[w]$.
+
+  ونترك الحالات الأخرى تمارين.
+\end{proof}
+
+\begin{prob}
+  أكمل برهان~\olref[nml][frd][acc]{thm:soundschemas}.
+\end{prob}
+
+\begin{figure}
+  \begin{center}
+    \begin{tikzpicture}[modal]
+      \node[world] (w1) [label={below:$\mSat{{}}{\formula{A}}$\\
+          $\mSat{{}}{\Box\Diamond \formula{A}}$}] {$w$};
+      \node[world] (w2) [label=below:{$\mSat{{}}{\Diamond \formula{A}}$},
+        right=of w1] {$w'$};
+      \draw[->, bend left] (w1) to (w2);
+      \draw[->, bend left] (w2) to (w1);
+    \end{tikzpicture}
+  \end{center}
+\caption{الحجة المستندة إلى التناظر.}
+\ollabel{fig:Bsymm}
+\end{figure}
+
+لاحظ أن الاستلزامات العكسية لـ\olref{thm:soundschemas} لا تصدق: فليس
+صحيحًا أن علاقة الوصول في نموذج تحقق مخططًا لا بد أن تكون لها الخاصية
+المقابلة. وفي حالة~\Ax{T} والنماذج الانعكاسية، يسهل تقديم مثال لنموذج
+تفشل فيه~\Ax{T} نفسها: لتكن~$W = \{w\}$، و$R = \emptyset$، و
+$V(p) = \emptyset$. عندئذ ليست~$R$ انعكاسية، لكن
+$\mSat{M}{\Box p}[w]$ و$\mSat/{M}{p}[w]$. غير أنه ليس لدينا هنا إلا
+حالة واحدة من~\Ax{T} تفشل في~$\mModel{M}$؛ أما الحالات الأخرى، مثل
+$\Box \lnot p \lif \lnot p$، فهي صادقة. ومن الأصعب تقديم أمثلة تكون
+فيها \emph{كل حالة إحلال} لـ\Ax{T} صادقة في~$\mModel{M}$ من دون أن
+يكون~$\mModel{M}$ انعكاسيًا. لكن توجد نماذج كهذه أيضًا:
+
+\begin{prop}\ollabel{prop:reflexive}
+  ليكن~$\mModel{M} = \tuple{W, R, V}$ نموذجًا بحيث~$W = \{u, v\}$
+  و$R = \{\tuple{u,v}, \tuple{v,u}\}$. وافترض أنه لكل~$p$:
+  $u \in V(p) \Leftrightarrow v \in V(p)$. عندئذ:
+  \begin{enumerate}
+  \item لكل~$!A$: يصدق~$\mSat{M}{!A}[u]$ إذا وفقط إذا كان
+    $\mSat{M}{!A}[v]$ (استعمل الاستقراء على~$!A$).
+  \item كل حالة من~\Ax{T} صادقة في~$\mModel{M}$.
+  \end{enumerate}
+  ولما كان~$\mModel{M}$ غير انعكاسي (بل هو في الواقع
+  \emph{لا انعكاسي})، يفشل عكس~\olref{thm:soundschemas} في حالة
+  \Ax{T} (ويمكن تقديم حجج مشابهة لبعض المخططات الأخرى المذكورة في
+  \olref{thm:soundschemas}، وإن لم يمكن ذلك لها جميعًا).
+\end{prop}
+
+\begin{prob}
+  أثبت الدعويين في~\olref[nml][frd][acc]{prop:reflexive}.
+\end{prob}
+
+مع أننا سنركز على ال!!{formula}s الكلاسيكية الخمس~\Ax{D}، و\Ax{T}،
+و\Ax{B}، و\Ax{4}، و\Ax{5}، نسجل في~\olref{tab:anotherfive} بضع خصائص
+أخرى لعلاقات الوصول. تكون علاقة الوصول~$R$ دالية جزئيًا إذا لم يمكن
+الوصول من كل عالم إلى أكثر من عالم واحد. وإذا أمكن الوصول من كل عالم
+إلى عالم واحد بالضبط، سميناها دالية. (ومن ثم فالعلاقات الدالية هي
+بالضبط العلاقات التسلسلية والدالية جزئيًا معًا.) وتسمى ``دالية'' لأن
+علاقة الوصول تعمل كدالة (جزئية). وتكون العلاقة كثيفة بضعف إذا كان،
+كلما~$Ruv$، عالم~$w$ ``بين''~$u$ و$v$. فالعلاقات الكثيفة بضعف، بمعنى
+ما، نقيض العلاقات المتعدية: في العلاقة المتعدية، متى أمكن الوصول إلى
+$v$ من~$u$ بطريق غير مباشر عبر~$w$، أمكن الوصول إلى~$v$ من~$u$
+مباشرة؛ أما في العلاقة الكثيفة بضعف، فمتى أمكن الوصول إلى~$v$ من~$u$
+مباشرة، أمكن أيضًا الوصول إليه بطريق غير مباشر عبر عالم ما~$w$.
+وتكون العلاقة موجهة بضعف إذا كان، متى أمكن الوصول إلى العالمين~$u$
+و$v$ من عالم ما~$w$، يمكن الوصول إلى عالم واحد~$t$ من كل من~$u$
+و$v$؛ وتسمى هذه أحيانًا ``خاصية الماسة'' أو ``الالتقاء''.
+
+\begin{table}[t]
+    \begin{tabular}{| p{.50\textwidth} || p{.43\textwidth} |}
+      \hline
+      {\emph{إذا كانت~$R$ \dots}} & {\emph{فإن \dots صادقة في~$\mModel{M}$:}} \\
+      \hline \hline
+      \emph{دالية جزئيًا}: &
+      \multirow{2}{*}{$\Diamond p \lif \Box p$} \\
+      $ \forall w \forall u \forall v ((Rwu \land Rwv) \lif u =v )$ & \\
+      \hline
+      \multirow{2}{*}{\emph{دالية}: $\forall w \exists v \forall u(Rwu \liff \eq[u][v]) $}
+      & \multirow{2}{*}{$\Diamond p \liff \Box p$} \\
+      & \\
+      \hline
+      \emph{كثيفة بضعف}: &  \multirow{2}{*}{$\Box \Box p \lif
+        \Box p$} \\
+      $\forall u\forall v(Ruv \lif \exists w(Ruw \land Rwv))$ & \\
+      \hline
+      \emph{متصلة بضعف}: &
+      \multirow{3}{*}{\hbox to.43\textwidth{$
+        \begin{array}{@{}l@{}}
+          \Box ((p \land \Box p) \lif q) \lor {} \\
+          \qquad \Box ((q \land \Box q) \lif p)
+        \end{array}$ \hfill (\Ax{L})}
+      } \\
+      $\forall w \forall u \forall v ((Rwu \land Rwv) \lif {}$ &\\
+      \qquad $(Ruv \lor u=v \lor Rvu))$ & \\
+      \hline
+      \emph{موجهة بضعف}: & \multirow{3}{*}{\hbox to .43\textwidth
+        {$\Diamond\Box p \lif \Box\Diamond p$\hfill (\Ax{G})}} \\
+      $\forall w \forall u \forall v ((Rwu \land Rwv) \lif {}$ & \\
+      \qquad $\exists t (Rut \land Rvt))$ & \\
+      \hline
+    \end{tabular}
+    \caption{خمس حقائق مطابقة أخرى.}
+    \ollabel{tab:anotherfive}
+  \end{table}
+
+\begin{prob}
+  ليكن~$\mModel{M} = \tuple{W, R, V}$ نموذجًا. أثبت أنه إذا حققت~$R$
+  الخصائص في الجانب الأيسر من
+  \olref[nml][frd][acc]{tab:anotherfive}، كانت كل حالة من الصيغة
+  المقابلة في الجانب الأيمن صادقة في~$\mModel{M}$.
+\end{prob}
+
+
+
+\end{document}

@@ -1,0 +1,126 @@
+% Part: first-order-logic
+% Chapter: axiomatic-deduction
+% Section: proving-things
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{axd}{pro}}
+      {\olfileid{pl}{axd}{pro}}
+
+\olsection{أمثلة على \usetoken{P}{derivation}}
+
+
+\begin{ex}
+افترض أننا نريد إثبات $(\lnot !D \lor !E) \lif (!D \lif
+!E)$. من الواضح أن هذه ليست حالة من أي بديهية لدينا، ولذلك علينا استخدام
+قاعدة \MP{} لكي !!{derive} إياها. والقاعدة الوحيدة التي نحتاج إليها هنا
+هي إثبات المقدَّم، وهي تتيح لنا، عند إعطائنا $!A$ و$!A \lif !B$، تبرير~$!B$.
+ومن الاستراتيجيات الممكنة استخدام \olref[prp]{ax:lor3} بحيث تكون $!A$ هي
+$\lnot !D$، و$!B$ هي $!E$، و$!C$ هي $!D \lif !E$، أي الحالة
+\[
+(\lnot !D \lif (!D \lif !E)) \lif ((!E \lif (!D \lif !E)) \lif ((\lnot
+!D \lor !E) \lif (!D \lif !E))).
+\]
+لماذا؟ لأن تطبيقين لقاعدة إثبات المقدَّم ينتجان الجزء الأخير، وهو ما نريده. ونرى
+بسهولة أن $\lnot !D \lif (!D \lif !E)$ حالة من
+\olref[prp]{ax:lnot2}، وأن $!E \lif (!D \lif !E)$ حالة من
+\olref[prp]{ax:lif1}. ومن ثم يكون !!{derivation} المطلوب:
+\begin{derivation}
+  1. &  $\lnot !D \lif (!D \lif !E)$ & \olref[prp]{ax:lnot2} \\
+  2. & $(\lnot !D \lif (!D \lif !E)) \lif {}$\\
+  &\qquad $((!E \lif (!D \lif !E)) \lif ((\lnot !D \lor !E) \lif (!D \lif !E)))$ & \olref[prp]{ax:lor3}\\
+  3. & $(!E \lif (!D \lif !E)) \lif ((\lnot !D \lor !E) \lif (!D \lif !E))$ & 1, 2, \MP\\
+  4. & $!E \lif (!D \lif !E)$ & \olref[prp]{ax:lif1}\\
+  5. & $(\lnot !D \lor !E) \lif (!D \lif !E)$ & 3, 4, \MP
+\end{derivation}
+\end{ex}
+
+\begin{ex}\ollabel{ex:identity}
+لنحاول إيجاد !!a{derivation} لــ$!D \lif !D$. إنها ليست حالة من بديهية،
+ولذلك علينا استخدام \MP{} لكي !!{derive} إياها.
+\olref[prp]{ax:lif1} بديهية على الصورة~$!A \lif !B$ يمكننا تطبيق~\MP
+عليها. ولكي تكون مفيدة، يجب طبعًا أن تكون $!B$ التي تبررها \MP{} خطوةً
+صحيحة في هذه الحالة هي~$!D \lif !D$، لأن هذا هو ما نريد !!{derive}.
+وهذا يعني أن $!A$ يجب أن تكون أيضًا $!D$، أي قد ننظر في الحالة الآتية من
+\olref[prp]{ax:lif1}:
+\[
+!D \lif (!D \lif !D)
+\]
+ولكي نطبق \MP، نحتاج أيضًا إلى تبرير المقدمة الثانية الموافقة، وهي~$!A$.
+لكنها ستكون في حالتنا~$!D$، ولن نستطيع !!{derive}~$!D$ وحدها. ولذلك
+نحتاج إلى استراتيجية مختلفة.
+
+البديهية الأخرى التي لا تتضمن إلا~$\lif$ هي \olref[prp]{ax:lif2}، أي
+\[
+(!A \lif (!B \lif !C)) \lif ((!A \lif !B) \lif (!A \lif !C))
+\]
+يمكننا الوصول إلى الشرطية المتداخلة الأخيرة بتطبيق \MP{} مرتين. وهذا يعني
+مرة أخرى أننا نريد حالة من \olref[prp]{ax:lif2} تكون فيها $!A \lif !C$
+هي $!D \lif !D$، أي ال!!{formula} التي نهدف إليها. وعندئذ تكون كل من
+$!A$ و$!C$ هي~$!D$ طبعًا. فكيف نختار~$!B$ بحيث تكون كل من
+$!A \lif (!B \lif !C)$ و$!A \lif !B$، أي في حالتنا
+$!D \lif (!B \lif !D)$ و$!D \lif !B$، !!{derivable} أيضًا؟ الصيغة
+الأولى حالة من \olref[prp]{ax:lif1} بالفعل أيًا يكن ما نختاره لــ$!B$.
+وتكون $!D \lif !B$ حالة أخرى من \olref[prp]{ax:lif1} إذا كانت $!B$ هي
+$(!D \lif !D)$. ومن ثم يكون !!{derivation} المطلوب:
+\begin{derivation}
+  1. & $!D \lif ((!D \lif !D) \lif !D)$ & \olref[prp]{ax:lif1}\\
+  2. & $(!D \lif ((!D \lif !D) \lif !D)) \lif {}$\\
+  & \qquad $((!D \lif (!D \lif !D)) \lif (!D \lif !D))$ & \olref[prp]{ax:lif2}\\
+  3. & $(!D \lif (!D \lif !D)) \lif (!D \lif !D)$ & 1, 2, \MP\\
+  4. & $!D \lif (!D \lif !D)$ & \olref[prp]{ax:lif1}\\
+  5. & $!D \lif !D$ & 3, 4, \MP
+\end{derivation}
+\end{ex}
+
+\begin{ex}\ollabel{ex:chain}
+نريد أحيانًا أن نبين وجود !!a{derivation} ل!!{formula} ما من
+!!{formula}s أخرى~$\Gamma$. فمثلًا، لنبين أنه يمكننا !!{derive}
+$!A \lif !C$ من $\Gamma = \{!A \lif !B, !B \lif !C\}$.
+\begin{derivation}
+  1. & $!A \lif !B$ & \Hyp\\
+  2. & $!B \lif !C$ & \Hyp\\
+  3. & $(!B \lif !C) \lif (!A \lif (!B \lif !C))$ & \olref[prp]{ax:lif1} \\
+  4. & $!A \lif (!B \lif !C)$ & 2, 3, \MP\\
+  5. & $(!A \lif (!B \lif !C)) \lif {}$\\
+  & \qquad $((!A \lif !B) \lif (!A \lif !C))$ & \olref[prp]{ax:lif2}\\
+  6. & $((!A \lif !B) \lif (!A \lif !C))$ & 4, 5, \MP\\
+  7. & $!A \lif !C$ & 1, 6, \MP
+\end{derivation}
+تشير الأسطر الموسومة «\Hyp» (اختصارًا لــ«فرضية») إلى أن ال!!{formula}
+في ذلك السطر !!a{element} من~$\Gamma$.
+\end{ex}
+
+\begin{prop}
+  \ollabel{prop:chain} إذا كان $\Gamma \Proves !A \lif !B$ و$\Gamma
+  \Proves !B \lif !C$، فإن $\Gamma \Proves !A \lif !C$.
+\end{prop}
+
+\begin{proof}
+  افترض أن $\Gamma \Proves !A \lif !B$ و$\Gamma \Proves !B \lif
+  !C$. عندئذ يوجد !!a{derivation} لــ$!A \lif !B$ من~$\Gamma$؛ ويوجد
+  كذلك !!a{derivation} لــ~$!B \lif !C$ من~$\Gamma$. اجمعهما في
+  !!{derivation} واحد بوصل إحداهما بالأخرى. ثم أضف الأسطر 3--7 من
+  ال!!{derivation} في المثال السابق. وهذا !!a{derivation} لــ
+  $!A \lif !C$---وهي السطر الأخير من ال!!{derivation} الجديد---من
+  ~$\Gamma$. لاحظ أن تبريري السطرين 4 و~7 يظلان صحيحين إذا استُبدلت
+  بالإحالة إلى السطر رقم~1 إحالة إلى السطر الأخير من ال!!{derivation}
+  لــ~$!A \lif !B$، وبالإحالة إلى السطر رقم~2 إحالة إلى السطر الأخير
+  من ال!!{derivation} لــ~$!B \lif !C$.
+\end{proof}
+
+\begin{prob}
+بيّن أن العبارات الآتية صحيحة بعرض !!{derivation}s من البديهيات:
+\begin{enumerate}
+\item $(!A \land !B) \lif (!B \land !A)$
+\item $((!A \land !B) \lif !C) \lif (!A \lif (!B \lif !C))$
+\item $\lnot(!A \lor !B) \lif \lnot !A$.
+\end{enumerate}
+\end{prob}
+
+
+
+\end{document}

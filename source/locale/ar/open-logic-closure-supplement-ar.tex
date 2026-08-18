@@ -1,0 +1,289 @@
+% QA-only Arabic closure supplement for the frozen Open Logic Project release.
+% English source authority: OpenLogicProject/OpenLogic
+% 9620cc73f9c8e0ad003c514a5d3748f29611c4c0.
+
+\documentclass[openany]{memoir}
+
+\ifdefined\directlua\else
+  \PackageError{open-logic-closure-supplement-ar}{يتطلب ملف التشغيل هذا LuaLaTeX}{شغّل LuaLaTeX على ملف التشغيل}
+\fi
+
+\newcommand*{\olpath}{../..}
+\newcommand*{\ollangid}{ar}
+\newcommand*{\ollanguage}{arabic}
+
+\usepackage{fontspec}
+\usepackage{gitinfo2}
+\setmainfont{TeX Gyre Pagella}
+\setsansfont{TeX Gyre Heros}
+\setmonofont{Latin Modern Mono}
+
+\PassOptionsToPackage{provide=*,bidi=basic}{babel}
+\makeatletter
+\AddToHook{package/cleveref/before}{\DeclareOption{arabic}{}}
+\makeatother
+
+% Resolve references against the complete-reader job without adding these
+% retained QA units to the canonical reader graph.
+\usepackage{xr-hyper}
+\externaldocument{open-logic-complete-ar}
+
+\input{\olpath/sty/open-logic.sty}
+\input{\olpath/sty/open-logic-defer.sty}
+
+\DeclareRobustCommand{\OLPolishUpperL}{\foreignlanguage{english}{Ł}}
+\DeclareRobustCommand{\OLPolishLowerL}{\foreignlanguage{english}{ł}}
+\renewcommand*{\L}{\OLPolishUpperL}
+\renewcommand*{\l}{\OLPolishLowerL}
+\renewcommand*{\bar}[1]{\overline{#1}}
+
+% Preserve complemented bold theory names visually and in text extraction.
+\ExplSyntaxOn
+\cs_new:Npn \ol_build_theory_bar:n #1
+  { \mathord{\text{\foreignlanguage{english}{\bfseries #1\char"0305}}} }
+\RenewDocumentCommand \Th { m }
+  {
+    \tl_if_head_eq_meaning:nNTF {#1} \bar
+      { \exp_args:No \ol_build_theory_bar:n { \tl_tail:n {#1} } }
+      { \mathbf{#1} }
+  }
+\ExplSyntaxOff
+
+% The QA supplement replays a few source files whose labels collide with
+% different reader-reachable units.  Keep the reader AUX for all other links,
+% but let the supplement's own AUX own these seven exact label families.
+\ExplSyntaxOn
+\cs_new_protected:Npn \ol_build_drop_external_label:n #1
+  {
+    \cs_undefine:c { r@#1 }
+    \cs_undefine:c { r@#1@cref }
+  }
+\clist_map_inline:nn
+  {
+    fol:axd:prv:sec,
+    fol:axd:prv:prop:provability-contr,
+    fol:axd:prv:prop:provability-exhaustive,
+    fol:syn::chap,
+    sfr:rel::chap,
+    sfr:::part,
+    sfr:siz::chap
+  }
+  { \ol_build_drop_external_label:n {#1} }
+
+% Source-level shorthand and historical namespace errors are kept out of the
+% translated files.  These driver-local aliases point only to labels already
+% present in the complete-reader or supplement AUX files.
+\cs_new_protected:Npn \ol_build_alias_label:nn #1#2
+  {
+    \cs_if_exist:cT { r@#2 }
+      { \cs_set_eq:cc { r@#1 } { r@#2 } }
+    \cs_if_exist:cT { r@#2@cref }
+      { \cs_set_eq:cc { r@#1@cref } { r@#2@cref } }
+  }
+\cs_new_protected:Npn \ol_build_install_reference_aliases:
+  {
+    \ol_build_alias_label:nn {fol:seq:prv:prop:provability-land-left}  {fol:seq:ppr:prop:provability-land-left}
+    \ol_build_alias_label:nn {fol:seq:prv:prop:provability-land-right} {fol:seq:ppr:prop:provability-land-right}
+    \ol_build_alias_label:nn {fol:ntd:prv:prop:provability-land-left}  {fol:ntd:ppr:prop:provability-land-left}
+    \ol_build_alias_label:nn {fol:ntd:prv:prop:provability-land-right} {fol:ntd:ppr:prop:provability-land-right}
+    \ol_build_alias_label:nn {fol:seq:prv:prop:provability-lor-left}   {fol:seq:ppr:prop:provability-lor}
+    \ol_build_alias_label:nn {fol:seq:prv:prop:provability-lor-right}  {fol:seq:ppr:prop:provability-lor}
+    \ol_build_alias_label:nn {fol:ntd:prv:prop:provability-lor-left}   {fol:ntd:ppr:prop:provability-lor}
+    \ol_build_alias_label:nn {fol:ntd:prv:prop:provability-lor-right}  {fol:ntd:ppr:prop:provability-lor}
+    \ol_build_alias_label:nn {fol:seq:prv:prop:provability-mp}         {fol:seq:ppr:prop:provability-lif-left}
+    \ol_build_alias_label:nn {fol:ntd:prv:prop:provability-mp}         {fol:ntd:ppr:prop:provability-lif-left}
+    \ol_build_alias_label:nn {fol:seq:prv:prop:provability-lif}        {fol:seq:ppr:prop:provability-lif-right}
+    \ol_build_alias_label:nn {fol:ntd:prv:prop:provability-lif}        {fol:ntd:ppr:prop:provability-lif-right}
+    \ol_build_alias_label:nn {udf:seq:inv:prop:G3c-cont-adm}           {pt:seq:inv:prop:G3c-cont-adm}
+    \ol_build_alias_label:nn {pl:prp:axd:prop:phi}                     {pl:axd:prv:prop:provability-exhaustive}
+    \ol_build_alias_label:nn {pl:prp:axd:prop:prov-incons}             {pl:axd:prv:prop:prov-incons}
+    \ol_build_alias_label:nn {pl:prp:sem:prop:semanticalfacts}         {pl:syn:sem:prop:semanticalfacts}
+  }
+\AtBeginDocument{\ol_build_install_reference_aliases:}
+\ExplSyntaxOff
+
+% Every file in this frozen locale tree is an accepted Arabic target. The
+% upstream optional per-file locale marker is not consistently populated, so
+% do not end an accepted localized file when that legacy marker is absent.
+\let\OLUnLocalizedHook\relax
+\RenewDocumentCommand{\olpartid}{o m}{\renewcommand*{\theolpart}{#2}}
+
+\babelfont[arabic]{rm}[
+  Path=../../../00_control/fonts/scheherazade-2.100/,
+  UprightFont=Scheherazade-Regular.ttf,
+  BoldFont=Scheherazade-Bold.ttf,
+  AutoFakeSlant=0.15,
+  Renderer=HarfBuzz,
+  Scale=1.08
+]{Scheherazade-Regular.ttf}
+\babelfont[arabic]{sf}[
+  Path=../../../00_control/fonts/scheherazade-2.100/,
+  UprightFont=Scheherazade-Regular.ttf,
+  BoldFont=Scheherazade-Bold.ttf,
+  AutoFakeSlant=0.15,
+  Renderer=HarfBuzz,
+  Scale=1.08
+]{Scheherazade-Regular.ttf}
+\babelfont[arabic]{tt}{DejaVu Sans Mono}
+
+\AtBeginDocument{\selectlanguage{arabic}}
+\hypersetup{
+  unicode=true,
+  pdflang={ar},
+  pdftitle={نص المنطق المفتوح — ملحق إغلاق الوحدات الخارجة عن مسار القارئ},
+  pdfauthor={Open Logic Project},
+  pdfsubject={Contributor: AI typesetting \& translation}
+}
+
+\newcommand*{\OLReleaseConceptDOI}{10.5281/zenodo.21921850}
+\newcommand*{\OLReleaseVersionDOI}{10.5281/zenodo.21987686}
+\newcommand*{\OLReleaseRepository}{https://github.com/KokunoYumeto/OpenLogic-ar}
+
+\makeatletter
+\renewcommand*{\@gitFootRev}{مراجعة المصدر: 9620cc7 (2026-07-12)}
+\makeatother
+\renewcommand*{\ifgitinfo}{\sffamily\footnotesize
+  مراجعة المصدر: \babelsublr{\texttt{9620cc7}} (2026-07-12)}
+
+\includeenv{editorial}
+\problemsperchapter
+\let\cleardoublepage\clearpage
+\pagestyle{plain}
+
+% Each explicit QA unit is isolated so that its ordinary \olimport edges do
+% not replay the book graph. Direct \subfile calls inside a retained unit are
+% intentionally preserved: they account for eight nested closure units.
+\NewDocumentCommand{\OLClosureUnit}{m}{%
+  \begingroup
+    \RenewDocumentCommand{\olimport}{s o m o}{}%
+    \subfile{#1}%
+  \endgroup
+}
+
+\begin{document}
+
+\begin{titlingpage}
+\begin{center}
+\vspace*{2.5cm}
+{\HUGE\bfseries\sffamily نص المنطق المفتوح\par}
+\vspace{1.2cm}
+{\huge ملحق الإغلاق لضمان الجودة\par}
+\vspace{1.2cm}
+{\Large الوحدات الثمانون الواقعة خارج مسار القارئ\par}
+\vspace{1.5cm}
+{\large العربية الفصحى المعاصرة العالمية — \babelsublr{ar}\par}
+\vspace{1.5cm}
+{\large المصدر: مشروع المنطق المفتوح، الالتزام
+\babelsublr{\texttt{9620cc73f9c8e0ad003c514a5d3748f29611c4c0}}\par}
+{\large المعرّف الرقمي لهذا الإصدار:
+\babelsublr{\OLReleaseVersionDOI}\par}
+\vspace{0.8cm}
+{\Large\bfseries ملحق الإغلاق المرافق للنسخة الكاملة\par}
+\end{center}
+
+\vfill
+
+\noindent
+هذا ملحق تقني مستقل يرافق النسخة الكاملة، ويجمع الوحدات الثمانين
+المحتفظ بها خارج مسار القارئ القانوني: إحدى وسبعين وحدة مدرجة صراحة،
+وثماني وحدات متداخلة تستدعيها ملفاتها الأم مباشرة، ومقطعًا واحدًا
+يُدرج مباشرة. وبذلك يكتمل توثيق وحدات المصدر البالغ عددها
+\babelsublr{722} من دون تغيير رسم تبعيات القارئ.
+
+\medskip
+\noindent
+هذه ترجمة معدّلة بموجب رخصة
+\href{https://creativecommons.org/licenses/by/4.0/}{CC BY 4.0}.
+يُنسب الأصل إلى مشروع المنطق المفتوح، ولا يُفهم من هذا الملحق أي تأييد
+من المشروع. ساهمت \foreignlanguage{english}{AI typesetting \& translation}
+في الترجمة والتصفيف بتوجيه فلوريس؛ ولم تُجرَ مراجعة بشرية عربية.
+
+\end{titlingpage}
+
+\pagestyle{giheadings}
+
+\OLClosureUnit{content/first-order-logic/axiomatic-deduction/provability} % OLP-0643
+\begingroup
+\toggletrue{prfSC}\toggletrue{prfND}% ensure \tagrefs has a nonempty QA fallback
+\OLClosureUnit{content/first-order-logic/completeness/maximally-consistent-sets} % OLP-0644
+\endgroup
+\OLClosureUnit{content/first-order-logic/syntax-and-semantics/introduction} % OLP-0645
+\OLClosureUnit{content/first-order-logic/syntax-and-semantics/syntax-and-semantics} % OLP-0646
+\OLClosureUnit{content/incompleteness/representability-in-q/c-representable} % OLP-0647
+\OLClosureUnit{content/incompleteness/representability-in-q/c} % OLP-0648
+\OLClosureUnit{content/intuitionistic-logic/semantics/propositions} % OLP-0649
+\OLClosureUnit{content/lambda-calculus/lambda-definability/lists} % OLP-0650
+\OLClosureUnit{content/lambda-calculus/syntax/conversion} % OLP-0651
+\OLClosureUnit{content/many-valued-logic/sequent-calculus/proof-theoretic-notions} % OLP-0652
+\OLClosureUnit{content/model-theory/basics/nonstandard-arithmetic} % OLP-0653
+\OLClosureUnit{content/normal-modal-logic/syntax-and-semantics/normal-modal-logics} % OLP-0654
+\OLClosureUnit{content/proof-theory/cut-elimination/ce-largest} % OLP-0655
+\OLClosureUnit{content/proof-theory/cut-elimination/ce-topmost} % OLP-0656
+\OLClosureUnit{content/proof-theory/cut-elimination/cut-elimination} % OLP-0657
+\OLClosureUnit{content/proof-theory/cut-elimination/interpolation} % OLP-0658
+\OLClosureUnit{content/proof-theory/cut-elimination/introduction} % OLP-0659
+
+% OLP-0660 is a document fragment rather than a standalone subfile.
+\input{content/proof-theory/cut-elimination/intuitionistic.tex}
+
+\OLClosureUnit{content/proof-theory/cut-elimination/midsequent} % OLP-0661
+\OLClosureUnit{content/proof-theory/natural-deduction/grafting} % OLP-0662
+\OLClosureUnit{content/proof-theory/natural-deduction/introduction} % OLP-0663
+\OLClosureUnit{content/proof-theory/natural-deduction/natural-deduction} % OLP-0664
+\OLClosureUnit{content/proof-theory/natural-deduction/quantifiers} % OLP-0665
+% OLP-0666 and OLP-0667 are loaded by direct \subfile calls in retained parents.
+\OLClosureUnit{content/proof-theory/natural-deduction/rules-proofs} % OLP-0668
+\OLClosureUnit{content/proof-theory/natural-deduction/sequents} % OLP-0669
+\OLClosureUnit{content/proof-theory/natural-deduction/translation-G2i} % OLP-0670
+\OLClosureUnit{content/proof-theory/natural-deduction/translation-N2i} % OLP-0671
+\OLClosureUnit{content/proof-theory/normalization/introduction} % OLP-0672
+\OLClosureUnit{content/proof-theory/normalization/normalization-thm} % OLP-0673
+\OLClosureUnit{content/proof-theory/normalization/normalization} % OLP-0674
+\OLClosureUnit{content/proof-theory/normalization/permutations} % OLP-0675
+\OLClosureUnit{content/proof-theory/normalization/reductions} % OLP-0676
+\OLClosureUnit{content/proof-theory/normalization/segments} % OLP-0677
+\OLClosureUnit{content/proof-theory/normalization/translations} % OLP-0678
+\OLClosureUnit{content/proof-theory/proof-search/completeness} % OLP-0679
+\OLClosureUnit{content/proof-theory/proof-search/introduction} % OLP-0680
+\OLClosureUnit{content/proof-theory/proof-search/proof-search} % OLP-0681
+% OLP-0682 is loaded by a direct \subfile call in a retained parent.
+\OLClosureUnit{content/proof-theory/proof-search/search-algorithm} % OLP-0683
+\OLClosureUnit{content/proof-theory/proof-search/tableaux} % OLP-0684
+\OLClosureUnit{content/proof-theory/proof-theory} % OLP-0685
+\OLClosureUnit{content/proof-theory/propositions-as-types/introduction} % OLP-0686
+\OLClosureUnit{content/proof-theory/propositions-as-types/normalization} % OLP-0687
+\OLClosureUnit{content/proof-theory/propositions-as-types/proof-terms} % OLP-0688
+\OLClosureUnit{content/proof-theory/propositions-as-types/proofs-to-terms} % OLP-0689
+\OLClosureUnit{content/proof-theory/propositions-as-types/propositions-as-types} % OLP-0690
+\OLClosureUnit{content/proof-theory/propositions-as-types/reduction} % OLP-0691
+% OLP-0692 and OLP-0693 are loaded by direct \subfile calls in retained parents.
+\OLClosureUnit{content/proof-theory/propositions-as-types/sequent-natural-deduction} % OLP-0694
+\OLClosureUnit{content/proof-theory/propositions-as-types/terms-to-proofs} % OLP-0695
+\OLClosureUnit{content/proof-theory/propositions-as-types/type-preservation} % OLP-0696
+\OLClosureUnit{content/proof-theory/propositions-as-types/types} % OLP-0697
+\OLClosureUnit{content/proof-theory/sequent-calculus/admissible-derivable} % OLP-0698
+\OLClosureUnit{content/proof-theory/sequent-calculus/interpretation-rules} % OLP-0699
+\OLClosureUnit{content/proof-theory/sequent-calculus/introduction} % OLP-0700
+\OLClosureUnit{content/proof-theory/sequent-calculus/invertibility} % OLP-0701
+\OLClosureUnit{content/proof-theory/sequent-calculus/proof-examples} % OLP-0702
+\OLClosureUnit{content/proof-theory/sequent-calculus/quantifiers} % OLP-0703
+% OLP-0704 is loaded by a direct \subfile call in a retained parent.
+\OLClosureUnit{content/proof-theory/sequent-calculus/rules-G1i} % OLP-0705
+% OLP-0706 and OLP-0707 are loaded by direct \subfile calls in retained parents.
+\OLClosureUnit{content/proof-theory/sequent-calculus/rules-G3i} % OLP-0708
+\OLClosureUnit{content/proof-theory/sequent-calculus/rules-LK} % OLP-0709
+\OLClosureUnit{content/proof-theory/sequent-calculus/rules-mG3i} % OLP-0710
+\OLClosureUnit{content/proof-theory/sequent-calculus/rules-proofs} % OLP-0711
+\OLClosureUnit{content/proof-theory/sequent-calculus/sequent-calculus} % OLP-0712
+\OLClosureUnit{content/proof-theory/sequent-calculus/translations} % OLP-0713
+\OLClosureUnit{content/propositional-logic/syntax-and-semantics/completeness} % OLP-0714
+\OLClosureUnit{content/propositional-logic/syntax-and-semantics/soundness} % OLP-0715
+\OLClosureUnit{content/second-order-logic/syntax-and-semantics/language-of-sol} % OLP-0716
+\OLClosureUnit{content/sets-functions-relations/functions/isomorphic-functions} % OLP-0717
+\OLClosureUnit{content/sets-functions-relations/inductive-defs-proofs/introduction} % OLP-0718
+\OLClosureUnit{content/sets-functions-relations/relations/relations} % OLP-0719
+\OLClosureUnit{content/sets-functions-relations/sets-functions-relations} % OLP-0720
+\OLClosureUnit{content/sets-functions-relations/sets/proofs-about-sets} % OLP-0721
+\OLClosureUnit{content/sets-functions-relations/size-of-sets/size-of-sets} % OLP-0722
+
+\end{document}

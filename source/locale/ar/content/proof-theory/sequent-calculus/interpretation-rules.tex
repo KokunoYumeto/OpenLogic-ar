@@ -1,0 +1,130 @@
+% Part: proof-theory
+% Chapter: sequent-calculus
+% Section: interpretation-rules
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{seq}{irl}
+
+\olsection{تفسير القواعد}
+
+تذكّر تفسير المتتالية: تكون المتتالية~$\Gamma\Sequent\Delta$ صادقة في
+!!a{structure}~$\Struct{M}$ إذا كان عنصر واحد على الأقل~$!A\in\Gamma$
+كاذبًا، أو عنصر واحد على الأقل~$!A\in\Delta$ صادقًا. ويمكن قراءة القواعد
+المنطقية لـ~\Log{G3c} بوصفها ترميزًا لشروط صدق~!!{formula}s الرئيسة فيها.
+انظر في~\RightR{\lif}. إن~!!{formula} الرئيسة هي~$!A\lif !B$، وهي صادقة
+إذا كان~$!A$ كاذبًا أو~$!B$ صادقًا. ولذلك تكون المتتالية
+$\ \Sequent !A\lif !B$ صادقة إذا وفقط إذا كانت~$!A\Sequent !B$ صادقة.
+وإذا أضفنا~!!{formula}s السياق~$\Gamma,\Delta$ إلى مقدمي المتتاليتين
+وتالييهما، حصلنا بالضبط على نتيجة قاعدة~\RightR{\lif} ومقدمتها.
+
+والوضع مماثل في~\LeftR{\lif}. تكون~$!A\lif !B$ كاذبة إذا كان~$!A$ صادقًا
+و$!B$ كاذبًا. ومن ثم تكون~$!A\lif !B\Sequent\ $ صادقة إذا وفقط إذا كانت
+كلتا المتتاليتين~$\ \Sequent !A$ و$!B\Sequent\ $ صادقة. فنتيجة
+\LeftR{\lif} مكافئة لاقتران مقدمتيها. ويضمن هذا النمط سلامة قواعد
+\Log{G3c}: إذا صدقت جميع المقدمات صدقت النتيجة. كما يضمن تمامها.
+
+وفي الواقع يمكن وصف شروط صدق أي رابط صدقي بهذه الطريقة بواسطة مجموعة من
+المتتاليات. وينتج ذلك من إمكان وصف كل دالة صدق في المنطق الكلاسيكي
+بـ~!!a{formula} في الصيغة العادية الاقترانية: اقتران لفصول من~!!{formula}s
+الذرية ومن نفيها. فمثلًا، لتكن~$!A\oplus !B$ صادقة إذا وفقط إذا صدقت واحدة
+بالضبط من~$!A$ و$!B$؛ أي إنها ``أو مانعة للجمع''. عندئذ تكون
+$!A\oplus !B$ صادقة إذا وفقط إذا صدقت
+$(!A\lor !B)\land(\lnot !A\lor\lnot !B)$، وتكون كاذبة إذا صدقت
+$(\lnot !A\lor !B)\land(!A\lor\lnot !B)$. ولذلك يمكن إدخال قاعدتي حساب
+المتتاليات الآتيتين لـ~$\oplus$:
+\begin{align*}
+&
+\Axiom$\Gamma \fCenter \Delta, !A, !B$
+\Axiom$!A, !B, \Gamma \fCenter \Delta$
+\RightLabel{\RightR{\oplus}}
+\BinaryInf$\Gamma \fCenter \Delta, !A \oplus !B$
+\DisplayProof
+\\
+& \Axiom$!A, \Gamma \fCenter \Delta, !B$
+\Axiom$!B, \Gamma \fCenter \Delta, !A$
+\RightLabel{\LeftR{\oplus}}
+\BinaryInf$!A \oplus !B, \Gamma \fCenter \Delta$
+\DisplayProof
+\end{align*}
+وتكون القاعدتان أيضًا سليمتين وتامتين. فنتيجة كل منهما صادقة إذا وفقط إذا
+صدقت جميع مقدماتها.
+
+\begin{prob}
+افترض أن~$!A\downarrow !B$ صادقة إذا وفقط إذا لم تصدق~$!A$ ولا~$!B$
+(``NOR''). فما قاعدتاها في~\Log{G3c}؟ (جد متتاليتين تصدقان معًا إذا وفقط
+إذا صدقت~$!A\downarrow !B$، فتحصل على قاعدة~\RightR{\downarrow}. ثم جد
+متتالية واحدة تصدق إذا وفقط إذا كذبت~$!A\downarrow !B$، فتحصل على قاعدة
+\LeftR{\downarrow}.)
+\end{prob}
+
+لكل رابط وسور في~\Log{G3c} قاعدتان بالضبط: قاعدة يسرى وقاعدة يمنى. أما
+\Log{G1c} ففيه قاعدتان لـ~\LeftR{\land} وقاعدتان لـ~\RightR{\lor}. والسبب
+أن نظام غنتسن الأصلي~\Log{LK}، الذي صيغ~\Log{G1c} على مثاله، كان له تنويع
+\Log{LJ} لمنطق غير كلاسيكي مهم، هو المنطق الحدسي. ولكي يكون النظام سليمًا
+وتامًا للمنطق الحدسي، قُيّد تالي كل متتالية في~\Log{LJ} بألا يحتوي أكثر من
+!!{formula} واحدة. وهذا يمنع استعمال قاعدة~\RightR{\lor} في~\Log{G3c}،
+لأن مقدمتها تحتوي~$!A$ و$!B$ معًا في التالي. ولذلك استعمل غنتسن زوجًا من
+قواعد~\RightR{\lor} في~\Log{LJ}، واستعمل الزوج نفسه في~\Log{LK}. وعلى
+نحو مماثل، النسخة الحدسية~\Log{G1i} ليست إلا~\Log{G1c} مع قصر كل تالي على
+!!{formula} واحدة على الأكثر. (ولـ~\Log{G3c} أيضًا نسخة حدسية، لكن بعض
+قواعدها تختلف من نظيراتها في~\Log{G3c}؛ فهي، مثلًا، تستعمل كذلك زوجًا من
+قواعد~\RightR{\lor}.)
+
+ويسهل رؤية سلامة القواعد البنيوية لـ~\Log{G1c}. فمثلًا، إذا احتوت
+$\Gamma\Sequent\Delta$~!!{formula} كاذبة على اليسار أو~!!{formula} صادقة
+على اليمين، احتوت~$\Gamma\Sequent\Delta,!A$ الصيغة نفسها؛ ولا يهم عندئذ
+أكانت~$!A$ صادقة أم كاذبة. ولذلك، إذا صدقت مقدمة~\RightR{\Weakening} صدقت
+نتيجتها. ولا يصح العكس هنا: فقد تصدق النتيجة لأن~$!A$ صادقة، وحينئذ لا
+نضمن صدق المقدمة.
+
+ولماذا نحتاج إلى القواعد البنيوية أصلًا؟ نحتاج، مثلًا، إلى الانكماش
+(\RightR{\Contraction} و\LeftR{\Contraction}) كي~!!{prove}
+$\ \Sequent !A\lor\lnot !A$. فإذا بدأت بـ~$!A\Sequent !A$ حصلت أولًا
+على~$\Sequent !A,\lnot !A$ باستعمال~\RightR{\lnot}. ثم تستطيع استعمال
+نسختي~\RightR{\lor} تباعًا: مرة للحصول على~$!A\lor\lnot !A$ من
+$\lnot !A$، ومرة للحصول على~$!A\lor\lnot !A$ من~$!A$. والناتج هو
+$\ \Sequent !A\lor\lnot !A,!A\lor\lnot !A$. ولكي تحصل في~\Log{G1c}
+على~$\Sequent !A\lor\lnot !A$، يلزم أن ``تنكمش'' واقعتا~!!{formula}
+نفسها في~!!a{proof}:
+\[
+\Axiom$!A \fCenter !A$
+\RightLabel{\RightR{\lnot}}
+\UnaryInf$\fCenter !A, \lnot !A$
+\RightLabel{\RightR{\lor}}
+\UnaryInf$\fCenter !A, !A \lor \lnot !A$
+\RightLabel{\RightR{\lor}}
+\UnaryInf$\fCenter !A \lor \lnot !A, !A \lor \lnot !A$
+\RightLabel{\RightR{\Contraction}}
+\UnaryInf$\fCenter !A \lor \lnot !A$
+\DisplayProof
+\]
+وهناك فعلًا متتاليات صالحة لا يمكن~!!{prove} في~\Log{G1c} من دون إضعاف
+أو انكماش. فمثلًا، لا بد أن ينتهي~!!a{proof} للمتتالية
+$!A\Sequent !B\lif !A$ في~\Log{G1c} بـ~\RightR{\lif}، لأن~$!B\lif !A$
+وحدها يمكن أن تكون رئيسة، وهذا يتطلب المقدمة~$!B,!A\Sequent !A$. وهي
+بدورها تتطلب~\LeftR{\Weakening} للحصول عليها من البديهية~$!A\Sequent !A$:
+\[
+\Axiom$!A \fCenter !A$
+\RightLabel{\LeftR{\Weakening}}
+\UnaryInf$!B, !A \fCenter !A$
+\RightLabel{\RightR{\lif}}
+\UnaryInf$!A \fCenter !B \lif !A$
+\DisplayProof
+\]
+
+لا حاجة مطلقًا إلى قاعدتي الانكماش والإضعاف في~\Log{G3c}. فالإضعاف مدمج
+في البديهيات، ويمكن غالبًا اجتناب الانكماش بدمج نسختي السياق
+$\Gamma,\Delta$ في القواعد ذات المقدمتين في نسخة واحدة. وفي~\Log{G1c}
+و\Log{G3c} معًا قواعد من هذا النوع ``تتقاسم السياق''. ولا يلزم الانكماش في
+القواعد ذات المقدمة الواحدة إلا لـ~\RightR{\lor} و\LeftR{\land} و
+\RightR{\lexists} و\LeftR{\lforall}. وتجعل نسخ هذه القواعد في~\Log{G3c}
+الانكماش زائدًا تمامًا. وهناك نظام~\Log{G2c} (انظر~\olref{tab:G2c}) تكون
+فيه سياقات القواعد ذات المقدمتين مستقلة. ويكون الانكماش في~\Log{G2c} أهم
+منه في~\Log{G1c}.
+
+\subfile{rules-G2c}
+
+\end{document}

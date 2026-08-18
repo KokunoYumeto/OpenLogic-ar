@@ -1,0 +1,52 @@
+% Part: first-order-logic
+% Chapter: axiomatic-deduction
+% Section: provability-quantifiers
+
+% verification of properties of provability needed for maximally
+% consistent sets in the completeness chapter.
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{axd}{qpr}
+
+\olsection{\usetoken{S}{derivability} والكمّيات}
+
+\begin{explain}
+  تتطلب مبرهنة الاكتمال أيضًا أن تنتج الاشتقاقات البديهية الحقائق
+  المتعلقة بـ$\Proves$ التي نثبتها في هذا القسم.
+\end{explain}
+
+\begin{thm}
+\ollabel{thm:strong-generalization} إذا كان $c$ !!a{constant} لا يرد
+في $\Gamma$ ولا في $!A(x)$، وكان $\Gamma \Proves !A(c)$، فإن $\Gamma
+\Proves \lforall[x][!A(x)]$.
+\end{thm}
+
+\begin{proof}
+تعطينا مبرهنة الاستنباط $\Gamma \Proves \ltrue \lif !A(c)$. وبما أن
+$c$ لا يرد في $\Gamma$ ولا في~$\ltrue$، نحصل على $\Gamma \Proves
+\ltrue \lif \lforall[x][!A(x)]$. ولدينا أيضًا $\Gamma \Proves
+\ltrue$، ومن ثم نحصل بقاعدة إثبات المقدَّم الفوقية
+\olref[ded]{prop:mp} على $\Gamma \Proves \lforall[x][!A(x)]$.
+\end{proof}
+
+\begin{prop}
+\ollabel{prop:provability-quantifiers}
+إذا كان $t$ حدًا مغلقًا، فإن:
+\begin{tagenumerate}{prvEx,prvAll}
+\tagitem{prvEx}{$!A(t) \Proves \lexists[x][!A(x)]$.}{}
+
+\tagitem{prvAll}{$\lforall[x][!A(x)] \Proves !A(t)$.}{}
+\end{tagenumerate}
+\end{prop}
+
+\begin{proof}
+\begin{tagenumerate}{prvEx,prvAll}
+\tagitem{prvEx}{من \olref[qua]{ax:q2} ومبرهنة الاستنباط.}{}
+\tagitem{prvAll}{من \olref[qua]{ax:q1} ومبرهنة الاستنباط.}{}
+\end{tagenumerate}
+\end{proof}
+
+\end{document}

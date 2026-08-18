@@ -1,0 +1,235 @@
+% Part: first-order-logic
+% Chapter: tableaux
+% Section: soundness.tex
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{tab}{sou}}
+      {\olfileid{pl}{tab}{sou}}
+      
+\olsection{السلامة}
+
+\begin{explain}
+يكون نسق !!^a{derivation}، كالجداول الدلالية، \emph{سليمًا} إذا لم يستطع
+!!{derive} أمورًا لا تلزم في الواقع. ولذلك فالسلامة ضرب من خصائص الأمان
+المضمونة لأنساق ال!!{derivation}. وبحسب الخاصية النظرية البرهانية موضع
+البحث، نود أن نعرف مثلًا أن:
+\begin{enumerate}
+\item كل~$!A$ !!{derivable} تكون \iftag{FOL}{صالحة}{تحصيل حاصل}؛
+\item إذا كانت !!a{sentence} !!{derivable} من جمل أخرى، فهي أيضًا نتيجة لها؛
+\item إذا كانت مجموعة من ال!!{sentence}s غير متسقة، فهي غير قابلة للإرضاء.
+\end{enumerate}
+هذه خصائص مهمة لنسق !!a{derivation}. فإذا لم تتحقق أي منها، كان نسق
+ال!!{derivation} معيبًا---إذ يكون قادرًا على !!{derive} أكثر مما ينبغي.
+ولذلك فإن إثبات سلامة نسق !!a{derivation} في غاية الأهمية.
+
+ولأن جميع هذه الخصائص النظرية البرهانية تُعرّف بواسطة !!{tableau}s مغلقة
+من نوع أو آخر، فإن إثبات (1)--(3) أعلاه يقتضي إثبات أمر يتعلق بالخصائص
+الدلالية لل!!{tableau}s المغلقة. سنعرّف أولًا ما يعنيه أن تُرضى
+!!a{signed formula} في \iftag{FOL}{بنية}{تقييم}، ثم نبين أنه إذا كان
+!!{tableau} مغلقًا، فلا \iftag{FOL}{بنية}{تقييم} ترضي جميع افتراضاته.
+وعندئذ تلزم (1)--(3) نتائجَ مباشرةً لهذه النتيجة.
+\end{explain}
+
+\begin{defn}
+\iftag{FOL}{!!^a{structure}}{!!^a{valuation}}~$\iftag{FOL}{\Struct{M}}{\pAssign{v}}$
+\emph{ترضي}
+!!a{signed formula} $\sFmla{\True}{!A}$ إذا وفقط إذا كان
+$\iftag{FOL}{\Sat{M}}{\pSat{v}}{!A}$، وتُرضي
+$\sFmla{\False}{!A}$ إذا وفقط إذا كان
+$\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{!A}$. وتُرضي
+$\iftag{FOL}{\Struct{M}}{\pAssign{v}}$ مجموعة من ال!!{signed formula}s
+~$\Gamma$ إذا وفقط إذا أرضت كل $\sFmla{S}{!A} \in \Gamma$. وتكون
+$\Gamma$~\emph{قابلة للإرضاء} إذا وُجدت
+\iftag{FOL}{!!a{structure}}{!!a{valuation}} ترضيها، و\emph{غير قابلة
+للإرضاء} خلاف ذلك.
+\end{defn}
+
+\begin{thm}[السلامة]
+  \ollabel{thm:tableau-soundness}
+  إذا كان لــ$\Gamma$ !!{tableau} مغلق، فإن $\Gamma$ غير قابلة للإرضاء.
+\end{thm}
+
+\begin{proof}
+لنسمِّ فرعًا من !!a{tableau} قابلًا للإرضاء إذا وفقط إذا كانت مجموعة
+ال!!{signed formula}s الواقعة عليه قابلة للإرضاء، ولنسمِّ !!a{tableau}
+قابلًا للإرضاء إذا احتوى على فرع واحد قابل للإرضاء على الأقل.
+
+نبين ما يأتي: إن توسيع !!{tableau} قابل للإرضاء بإحدى قواعد الاستدلال
+ينتج دائمًا !!{tableau} قابلًا للإرضاء. وهذا يثبت المبرهنة: فكل
+!!{tableau} مغلق ينتج من تطبيق قواعد الاستدلال على ال!!{tableau} المؤلف
+فقط من افتراضات من~$\Gamma$. ولذلك لو كانت $\Gamma$ قابلة للإرضاء، لكان
+كل !!{tableau} لها قابلًا للإرضاء. لكن ال!!{tableau} المغلق غير قابل
+للإرضاء بوضوح: إذ يحتوي كل فرع على $\sFmla{\True}{!A}$ و
+$\sFmla{\False}{!A}$ معًا، ولا يمكن لأي \iftag{FOL}{بنية}{تقييم} أن ترضي
+$!A$ ولا ترضيها في آن واحد.
+
+افترض أن لدينا !!{tableau} قابلًا للإرضاء، أي !!a{tableau} له فرع واحد
+قابل للإرضاء على الأقل. فتطبيق قاعدة استدلال إما أن يضيف
+!!{signed formula}s إلى فرع، وإما أن يقسم فرعًا إلى اثنين. وإذا كان في
+ال!!{tableau} فرع قابل للإرضاء لا يوسعه تطبيق القاعدة المعني، فإنه يظل
+فرعًا قابلًا للإرضاء في ال!!{tableau} الموسع، ولذلك يكون الجدول الدلالي
+الموسع قابلًا للإرضاء. فلا يبقى علينا إلا النظر في الحالة التي تُطبّق فيها
+قاعدة على فرع قابل للإرضاء.
+
+لتكن $\Gamma$ مجموعة ال!!{signed formula}s الواقعة على ذلك الفرع،
+ولتكن $\sFmla{S}{!A} \in \Gamma$ هي ال!!{signed formula} التي تُطبّق
+عليها القاعدة. فإذا لم تنتج القاعدة فرعًا منقسمًا، فعلينا أن نبين أن الفرع
+الموسع، أي $\Gamma$ مع نتائج القاعدة، يظل قابلًا للإرضاء. وإذا أنتجت القاعدة
+فرعًا منقسمًا، فعلينا أن نبين أن واحدًا على الأقل من الفرعين الناتجين قابل
+للإرضاء.
+  
+ننظر أولًا في الاستدلالات الممكنة التي لا تنتج فرعًا منقسمًا.
+\begin{enumerate}
+\item يُوسَّع الفرع بتطبيق $\TRule{\True}{\lnot}$ على
+  $\sFmla{\True}{\lnot !B} \in \Gamma$. عندئذ يحتوي الفرع الموسع على
+  ال!!{signed formula}s $\Gamma \cup
+  \{\sFmla{\False}{!B}\}$. افترض
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{\Gamma}$. وبوجه خاص
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{\lnot !B}$. ومن ثم
+  $\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{!B}$، أي
+  تُرضي $\iftag{FOL}{\Struct{M}}{\pAssign{v}}$
+  $\sFmla{\False}{!B}$.
+\item يُوسَّع الفرع بتطبيق $\TRule{\False}{\lnot}$ على
+  $\sFmla{\False}{\lnot !B} \in \Gamma$: تمرين.
+\item يُوسَّع الفرع بتطبيق $\TRule{\True}{\land}$ على
+  $\sFmla{\True}{!B \land !C} \in \Gamma$، وينتج من ذلك
+  !!{signed formula}s جديدتان على الفرع: $\sFmla{\True}{!B}$ و
+  $\sFmla{\True}{!C}$. افترض
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{\Gamma}$، وبوجه خاص
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!B \land !C}$. ومن ثم
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!B}$ و
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!C}$. وهذا يعني أن
+  $\iftag{FOL}{\Struct{M}}{\pAssign{v}}$ تُرضي كلًا من
+  $\sFmla{\True}{!B}$ و$\sFmla{\True}{!C}$.
+\item يُوسَّع الفرع بتطبيق $\TRule{\False}{\lor}$ على
+  $\sFmla{\False}{!B \lor !C} \in \Gamma$: تمرين.
+\item يُوسَّع الفرع بتطبيق $\TRule{\False}{\lif}$ على
+  $\sFmla{\False}{!B \lif !C} \in \Gamma$: وينتج من ذلك
+  !!{signed formula}s جديدتان على الفرع: $\sFmla{\True}{!B}$ و
+  $\sFmla{\False}{!C}$. افترض
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{\Gamma}$، وبوجه خاص
+  $\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{!B \lif !C}$. ومن ثم
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!B}$ و
+  $\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{!C}$. وهذا يعني أن
+  $\iftag{FOL}{\Struct{M}}{\pAssign{v}}$ تُرضي كلًا من
+  $\sFmla{\True}{!B}$ و$\sFmla{\False}{!C}$.
+
+\iftag{FOL}{%
+\item يُوسَّع الفرع بتطبيق $\TRule{\True}{\lforall}$ على
+  $\sFmla{\True}{\lforall[x][!A(x)]} \in \Gamma$: وينتج من ذلك
+  !!{signed formula} جديدة~$\sFmla{\True}{!A(t)}$ على الفرع.
+  افترض $\Sat{M}{\Gamma}$، وبوجه خاص
+  $\Sat{M}{\lforall[x][!A(x)]}$. وبحسب
+  \olref[syn][sem]{prop:quant-terms}، يكون $\Sat{M}{!A(t)}$. ولذلك
+  تُرضي $\Struct{M}$ الصيغة $\sFmla{\True}{!A(t)}$.
+
+\item يُوسَّع الفرع بتطبيق $\TRule{\False}{\lforall}$ على
+  $\sFmla{\False}{\lforall[x][!A(x)]} \in \Gamma$: وينتج من ذلك
+  !!{signed formula} جديدة~$\sFmla{\False}{!A(a)}$، حيث $a$
+  !!a{constant} لا يظهر في~$\Gamma$. وبما أن $\Gamma$ قابلة للإرضاء،
+  فثمة $\Struct{M}$ بحيث $\Sat{M}{\Gamma}$، وبوجه خاص
+  $\Sat/{M}{\lforall[x][!A(x)]}$. وعلينا أن نبين أن
+  $\Gamma \cup \{\sFmla{\False}{!A(a)}\}$ قابلة للإرضاء. ولهذا نعرّف
+  بنية مناسبة~$\Struct{M'}$ كما يأتي.
+
+  بحسب \olref[syn][ass]{prop:sat-quant}، يكون
+  $\Sat/{M}{\lforall[x][!A(x)]}$ إذا وفقط إذا وُجد $s$ بحيث
+  $\Sat/{M}{!A(x)}[s]$. ولتكن الآن $\Struct{M'}$ مثل
+  $\Struct{M}$ تمامًا، إلا أن $\Assign{a}{M'} = s(x)$. وبحسب
+  \olref[syn][ext]{cor:extensionality-sent}، لكل
+  $\sFmla{\True}{!C} \in \Gamma$ يكون $\Sat{M'}{!C}$، ولكل
+  $\sFmla{\False}{!C} \in \Gamma$ يكون $\Sat/{M'}{!C}$، لأن $a$ لا
+  يظهر في~$\Gamma$.
+
+  بحسب \olref[syn][ext]{prop:extensionality}، يكون
+  $\Sat/{M'}{!A(x)}[s]$. وبحسب \olref[syn][ext]{prop:ext-formulas}،
+  يكون $\Sat/{M'}{!A(a)}[s]$. وبما أن $!A(a)$ !!a{sentence}، فبحسب
+  \olref[syn][ass]{prop:sentence-sat-true} يكون $\Sat/{M'}{!A(a)}$،
+  أي إن $\Struct{M'}$ تُرضي $\sFmla{\False}{!A(a)}$.
+\item يُوسَّع الفرع بتطبيق $\TRule{\True}{\lexists}$ على
+  $\sFmla{\True}{\lexists[x][!B(x)]} \in \Gamma$: تمرين.
+\item يُوسَّع الفرع بتطبيق $\TRule{\False}{\lexists}$ على
+  $\sFmla{\False}{\lexists[x][!B(x)]} \in \Gamma$: تمرين.}{}
+\end{enumerate}
+لننظر الآن في الاستدلالات الممكنة التي تنتج فرعًا منقسمًا.
+\begin{enumerate}
+\item يُوسَّع الفرع بتطبيق $\TRule{\False}{\land}$ على
+  $\sFmla{\False}{!B \land !C} \in \Gamma$، فينتج فرعان: أيسر يستمر
+  عبر $\sFmla{\False}{!B}$، وأيمن يستمر عبر $\sFmla{\False}{!C}$. افترض
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{\Gamma}$، وبوجه خاص
+  $\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{!B \land !C}$. ومن ثم إما
+  $\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{!B}$ أو
+  $\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{!C}$. ففي الحالة الأولى تُرضي
+  $\iftag{FOL}{\Struct{M}}{\pAssign{v}}$ الصيغة
+  $\sFmla{\False}{!B}$، أي إن $\iftag{FOL}{\Struct{M}}{\pAssign{v}}$
+  ترضي الصيغ الواقعة على الفرع الأيسر. وفي الحالة الثانية تُرضي
+  $\iftag{FOL}{\Struct{M}}{\pAssign{v}}$ الصيغة
+  $\sFmla{\False}{!C}$، أي إن $\iftag{FOL}{\Struct{M}}{\pAssign{v}}$
+  ترضي الصيغ الواقعة على الفرع الأيمن.
+\item يُوسَّع الفرع بتطبيق $\TRule{\True}{\lor}$ على
+  $\sFmla{\True}{!B \lor !C} \in \Gamma$: تمرين.
+\item يُوسَّع الفرع بتطبيق $\TRule{\True}{\lif}$ على
+  $\sFmla{\True}{!B \lif !C} \in \Gamma$: تمرين.
+\item يُوسَّع الفرع بتطبيق \Cut: وينتج من ذلك فرعان، يحتوي أحدهما على
+  $\sFmla{\True}{!B}$ والآخر على $\sFmla{\False}{!B}$. وبما أن
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{\Gamma}$، وإما
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!B}$ أو
+  $\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{!B}$,
+  فإن $\iftag{FOL}{\Struct{M}}{\pAssign{v}}$ تُرضي إما الفرع الأيسر
+  وإما الفرع الأيمن.
+\end{enumerate}
+\end{proof}
+
+\tagprob{FOL}
+\begin{prob}
+أكمل برهان \olref[fol][tab][sou]{thm:tableau-soundness}.
+\end{prob}
+\tagendprob
+
+\tagprob{notFOL}
+\begin{prob}
+أكمل برهان \olref[pl][tab][sou]{thm:tableau-soundness}.
+\end{prob}
+\tagendprob
+
+\begin{cor}
+\ollabel{cor:weak-soundness}
+إذا كان $\Proves !A$، فإن $!A$ \iftag{FOL}{صالحة}{تحصيل حاصل}.
+\end{cor}
+
+\begin{cor}
+\ollabel{cor:entailment-soundness}
+إذا كان $\Gamma \Proves !A$، فإن $\Gamma \Entails !A$.
+\end{cor}
+
+\begin{proof}
+  إذا كان $\Gamma \Proves !A$، فلبعض $!B_1$، \dots، $!B_n \in
+  \Gamma$ يكون للمجموعة $\{\sFmla{\False}{!A}, \sFmla{\True}{!B_1}, \dots,
+  \sFmla{\True}{!B_n}\}$ !!{tableau} مغلق. وبحسب
+  \olref{thm:tableau-soundness}، فإن كل
+  \iftag{FOL}{!!{structure}}{!!{valuation}}~$\iftag{FOL}{\Struct{M}}{\pAssign{v}}$
+  تجعل بعض $!B_i$ كاذبة أو تجعل $!A$ صادقة. ومن ثم، إذا كان
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{\Gamma}$، كان أيضًا
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!A}$.
+\end{proof}
+
+\begin{cor}
+\ollabel{cor:consistency-soundness}
+إذا كانت $\Gamma$ قابلة للإرضاء، فهي متسقة.
+\end{cor}
+
+\begin{proof}
+نبرهن المقابل بالنقيض. افترض أن $\Gamma$ غير متسقة. عندئذ توجد $!B_1$،
+\dots، $!B_n \in \Gamma$ و!!{tableau} مغلق لــ
+$\{\sFmla{\True}{!B_1}, \dots, \sFmla{\True}{!B_n}\}$. وبحسب
+\olref{thm:tableau-soundness}، لا توجد
+$\iftag{FOL}{\Struct{M}}{\pAssign{v}}$ بحيث
+$\iftag{FOL}{\Sat{M}}{\pSat{v}}{!B_i}$ لكل $i=1$، \dots،~$n$.
+لكن هذا يعني أن $\Gamma$ غير قابلة للإرضاء.
+\end{proof}
+
+\end{document}

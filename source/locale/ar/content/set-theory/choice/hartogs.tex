@@ -1,0 +1,92 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{choice}{hartogs}
+\olsection{القابلية للمقارنة ولمّة هارتوغس}
+
+ذلك هو الجانب الإيجابي. أما الجانب السلبي فهو أن الأمور تصبح
+\emph{فوضوية} من دون الاختيار. ولرؤية السبب، إليك نتيجة جميلة
+لـ\cite{Hartogs1915}:
+
+\begin{lem}[\emph{في $\ZF$}]\ollabel{HartogsLemma}
+لكل مجموعة~$A$، يوجد عدد ترتيبي~$\alpha$ بحيث
+$\cardnless{\alpha}{A}$.
+\end{lem}
+
+\begin{proof}
+إذا كان~$B \subseteq A$ و$R \subseteq B^2$، فإن
+$\tuple{B, R} \subseteq V_{\setrank{A}+4}$ بموجب
+\olref[ord-arithmetic][using-addition]{rankcomputation}. ومن ثم انظر،
+باستعمال الفصل، في:
+\[
+	C = \Setabs{\tuple{B, R} \in V_{\setrank{A}+5}}{B\subseteq A
+	\text{ و$\tuple{B, R}$ ترتيب جيد}}
+\]
+وباستخدام الاستبدال و
+\olref[ordinals][ordtype]{thmOrdinalRepresentation}، كوّن المجموعة:
+\[
+	\alpha = \Setabs{\ordtype{B, R}}{\tuple{B, R} \in C}.
+\]
+بموجب~\olref[ordinals][basic]{corordtransitiveord}، تكون~$\alpha$
+عددًا ترتيبيًا، لأنها مجموعة متعدية من الأعداد الترتيبية. ففي
+النهاية، إذا كان~$\gamma \in \beta \in \alpha$، فإن
+$\beta = \ordtype{B, R}$ لبعض~$B \subseteq A$، وعندئذ
+$\gamma = \ordtype{B_b, R_b}$ لبعض~$b \in B$ بموجب
+\olref[ordinals][iso]{wellordinitialsegment}، ومن ثم
+$\gamma \in \alpha$.
+
+للوصول إلى تناقض، افترض وجود !!a{injection}
+$f \colon \alpha \to A$. عندئذ، حيث:
+\begin{align*}
+	B &= \ran{f}\\
+	R &= \Setabs{\tuple{f(\alpha), f(\beta)} \in A \times A}{\alpha \in \beta}.
+\end{align*}
+من الواضح أن~$\alpha = \ordtype{B, R}$ وأن
+$\tuple{B, R} \in C$. ومن ثم~$\alpha \in \alpha$، وهذا تناقض.
+\end{proof}
+
+يستلزم ذلك نتيجة عميقة:
+
+\begin{thm}[\emph{في $\ZF$}]
+الادعاءان الآتيان متكافئان:
+\begin{enumerate}
+	\item\ollabel{equivwo} مسلّمة الترتيب الجيد؛
+	\item\ollabel{equivcompare} إما~$\cardle{A}{B}$ أو
+	$\cardle{B}{A}$، لأي مجموعتين~$A$ و$B$.
+\end{enumerate}
+\end{thm}
+
+\begin{proof}
+\emph{\olref{equivwo} $\Rightarrow$ \olref{equivcompare}.} ثبّت~$A$
+و$B$. باستدعاء~\olref{equivwo}، يوجد ترتيبان جيدان
+$\tuple{A, R}$ و$\tuple{B, S}$. وباستدعاء
+\olref[ordinals][ordtype]{thmOrdinalRepresentation}، لتكن
+$f \colon \alpha \to \tuple{A, R}$ و
+$g \colon \beta \to \tuple{B, S}$ تماثلين. بموجب
+\olref[sth][ordinals][basic]{ordinalsaresubsets}، إما
+$\alpha \subseteq \beta$ أو~$\beta \subseteq \alpha$. فإذا كان
+$\alpha \subseteq \beta$، كانت
+$\comp{f^{-1}}{g} \colon A \to B$ !!a{injection}، ومن ثم
+$\cardle{A}{B}$؛ وبالمثل، إذا كان~$\beta \subseteq \alpha$، كان
+$\cardle{B}{A}$.
+
+\emph{\olref{equivcompare} $\Rightarrow$ \olref{equivwo}.} ثبّت~$A$؛
+وبموجب~\olref{HartogsLemma}، يوجد عدد ترتيبي~$\beta$ بحيث
+$\cardnless{\beta}{A}$. وباستدعاء~\olref{equivcompare}، يكون
+$\cardle{A}{\beta}$. ومن ثم توجد !!{injection}
+$f \colon A \to \beta$، ويمكننا استخدام هذا الحقن لترتيب عناصر~$A$
+ترتيبًا جيدًا، بأن نعرّف ترتيبًا
+$\Setabs{\tuple{a, b} \in A \times A}{f(a) \in f(b)}$.
+\end{proof}
+\noindent
+ونتيجة مباشرة لذلك: إذا فشل الترتيب الجيد، كانت بعض المجموعات
+\emph{غير قابلة للمقارنة حرفيًا} من حيث حجمها. فإذا فشل الترتيب الجيد،
+كان الحساب الكاردينالي المتناهي التجاوز فوضويًا. فعلينا مثلًا التخلي
+عن فكرة أنه إذا كانت~$A$ و$B$ غير منتهيتين، فإن
+$\cardeq{A \disjointsum B}{M}$ و$\cardeq{A \times B}{M}$، حيث~$M$ هي
+الكبرى بين~$A$ و$B$ (انظر
+\olref[card-arithmetic][simp]{cardplustimesmax}). والمشكلة بسيطة: إذا
+لم نستطع \emph{مقارنة} حجم~$A$ وحجم~$B$، فلا معنى للسؤال أيهما أكبر.
+
+\end{document}

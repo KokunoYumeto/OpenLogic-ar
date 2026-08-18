@@ -1,0 +1,130 @@
+% Part: normal-modal-logic
+% Chapter: sequent-calculus
+% Section: rules-for-K
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{seq}{rul}
+
+\olsection{قواعد \Log{K}}
+
+قواعد الروابط القضوية العادية هي نفسها قواعد حساب التتابعيات العادي
+$\Log{LK}$. والمسلمات هي نفسها أيضًا: فكل تتابعية من الصورة
+$!A \Sequent !A$ تُعد مسلمة.
+
+وللمؤثر\iftag{prvBox}{\iftag{prvDiamond}{ين الموجهيين~$\Box$
+و}{ الموجهي~$\Box$}}{}\iftag{prvDiamond}{ الموجهي~$\Diamond$}{}، لدينا
+\iftag{notprvBox,notprvDiamond}{القاعدة الإضافية الآتية}{القواعد
+الإضافية الآتية}:
+\[
+  \iftag{prvBox}{\iftag{prvDiamond}{% <> and [] primitive
+    \Axiom$\Gamma \fCenter \Delta, !A$
+    \RightLabel{$\Box$}
+    \UnaryInf$\Box\Gamma \fCenter \Diamond\Delta, \Box!A$
+    \DisplayProof  
+    \qquad
+    \Axiom$!A, \Gamma \fCenter \Delta$
+    \RightLabel{$\Diamond$}
+    \UnaryInf$\Diamond!A, \Box\Gamma \fCenter \Diamond\Delta$
+    \DisplayProof
+}{% only Box primitive
+\Axiom$\Gamma \fCenter !A$
+\RightLabel{$\Box$}
+\UnaryInf$\Box\Gamma \fCenter \Box!A$
+\DisplayProof
+}}{% only <> primitive
+  \Axiom$!A \fCenter \Delta$
+  \RightLabel{$\Diamond$}
+  \UnaryInf$\Diamond!A \fCenter \Diamond\Delta$
+  \DisplayProof
+}
+\]
+هنا تعني \iftag{prvBox}{$\Box\Gamma$ متتالية ال!!{formula}s الناتجة
+من~$\Gamma$ بوضع $\Box$ أمام كل !!{formula} في~$\Gamma$
+\iftag{prvDiamond}{، وتعني }{}}{}\iftag{prvDiamond}{$\Diamond\Delta$
+متتالية ال!!{formula}s الناتجة من~$\Delta$ بوضع $\Diamond$ أمام كل
+!!{formula} في~$\Delta$}{}. \iftag{notprvDiamond}{ويجب ألا يحتوي
+الجانب الأيمن من مقدمة قاعدة $\Box$ أكثر من !!{formula} واحدة~$!A$. }{}%
+\iftag{notprvBox}{ويجب ألا يحتوي الجانب الأيسر من مقدمة قاعدة
+$\Diamond$ أكثر من !!{formula} واحدة~$!A$. }{}%
+يجوز أن تكون \iftag{prvBox}{$\Gamma$\iftag{prvDiamond}{ و~}{}}{}%
+\iftag{prvDiamond}{$\Delta$}{} فارغة؛ وعندئذ يكون الجزء المقابل
+\iftag{prvBox}{$\Box\Gamma$\iftag{prvDiamond}{ و~}{}}{}%
+\iftag{prvDiamond}{$\Diamond\Delta$}{} من تتابعية النتيجة فارغًا أيضًا.
+
+إن قصر
+\iftag{prvBox}{إضافة $\Box$ في اليمين\iftag{prvDiamond}{ وإضافة
+}{}}{}\iftag{prvDiamond}{$\Diamond$ في اليسار}{}
+على !!{formula} واحدة~$!A$ شرط ضروري. فلو سُمح لنا
+\iftag{prvBox}{بإضافة $\Box$ إلى أي عدد من ال!!{formula}s في
+اليمين\iftag{prvDiamond}{، أو }{}}{}\iftag{prvDiamond}{بإضافة
+$\Diamond$ إلى أي عدد من ال!!{formula}s في اليسار}{} لأمكننا أن
+!!{derive}:
+  \[
+    \iftag{prvBox}{
+      \Axiom$!A \fCenter !A$
+      \RightLabel{\RightR{\lnot}}
+      \UnaryInf$\fCenter !A, \lnot !A$
+      \RightLabel{$\Box*$}
+      \UnaryInf$\fCenter \Box!A, \Box\lnot !A$
+      \doubleLine
+      \RightLabel{\RightR{\lor}}
+      \UnaryInf$\fCenter \Box!A \lor \Box \lnot !A$
+      \DisplayProof}{}
+    \iftag{notprvBox,notprvDiamond}{}{\qquad}
+    \iftag{prvDiamond}{
+      \Axiom$!A \fCenter !A$
+      \RightLabel{\LeftR{\lnot}}
+      \UnaryInf$\lnot !A, !A \fCenter$
+      \RightLabel{$\Diamond*$}
+      \UnaryInf$\Diamond\lnot !A,\Diamond!A \fCenter $
+      \RightLabel{\RightR{\lnot}}
+      \UnaryInf$\Diamond!A \fCenter \lnot\Diamond\lnot !A$
+      \RightLabel{\RightR{\lif}}
+      \UnaryInf$ \fCenter \Diamond!A \lif \lnot\Diamond\lnot !A$
+      \DisplayProof}{}
+  \]
+لكن \iftag{prvBox}{$\Box!A \lor \Box \lnot !A$
+\iftag{prvDiamond}{ و$\Diamond!A \lif \lnot\Diamond\lnot !A$
+ليستا}{ليست}}{$\Diamond!A \lif \lnot\Diamond\lnot !A$ ليست} صادقة
+صدقًا عامًا في~$\Log{K}$.
+
+ولو سمحنا بصيغ جانبية إلى جانب~$!A$ في المقدمة، وسمحنا
+\iftag{prvBox}{لقاعدة $\Box$ بأن تضيف $\Box$ إلى~$!A$ وحدها في
+اليمين\iftag{prvDiamond}{، أو سمحنا }{}}{}\iftag{prvDiamond}{لقاعدة
+$\Diamond$ بأن تضيف $\Diamond$ إلى~$!A$ وحدها في اليسار}{} (من غير
+أن تفعل شيئًا بالصيغ الجانبية)، لأمكننا أن !!{derive}:
+\[
+  \iftag{prvBox}{
+    \Axiom$!A \fCenter !A$
+    \RightLabel{\RightR{\lnot}}
+    \UnaryInf$\fCenter !A, \lnot !A$
+    \RightLabel{\RightR{\Exchange}}
+    \UnaryInf$\fCenter \lnot !A, !A$
+    \RightLabel{$\Box*$}
+    \UnaryInf$\fCenter \lnot!A, \Box !A$
+    \doubleLine
+    \RightLabel{\RightR{\lor}}
+    \UnaryInf$\fCenter \lnot!A \lor \Box !A$
+    \DisplayProof}{}
+  \iftag{notprvBox,notprvDiamond}{}{\qquad}
+  \iftag{prvDiamond}{
+    \Axiom$!A \fCenter !A$
+    \RightLabel{\LeftR{\lnot}}
+    \UnaryInf$\lnot !A, !A \fCenter$
+    \RightLabel{$\Diamond*$}
+    \UnaryInf$\Diamond\lnot !A, !A \fCenter $
+    \RightLabel{\RightR{\lnot}}
+    \UnaryInf$!A \fCenter \lnot\Diamond\lnot !A$
+    \RightLabel{\RightR{\lif}}
+    \UnaryInf$ \fCenter !A \lif \lnot\Diamond\lnot !A$
+    \DisplayProof}{}
+\]
+لكن \iftag{prvBox}{$\lnot!A \lor \Box !A$ (وهي مكافئة لـ$!A
+\lif \Box!A$)\iftag{prvDiamond}{ و$!A \lif \lnot\Diamond\lnot !A$
+ليستا}{ليست}}{$!A \lif \lnot\Diamond\lnot !A$ ليست} صادقة صدقًا
+عامًا في~$\Log{K}$.
+
+\end{document}

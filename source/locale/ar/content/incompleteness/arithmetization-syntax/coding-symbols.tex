@@ -1,0 +1,108 @@
+% Part: incompleteness
+% Chapter: arithmetization-syntax
+% Section: coding-symbols
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{art}{cod}
+\olsection{ترميز الرموز}
+
+تستعمل اللغة الأساسية~$\Lang L$ لمنطق الرتبة الأولى الرموز
+\[
+\lfalse \quad \lnot \quad \lor \quad \land \quad \lif \quad \lforall
+\quad \lexists \quad \eq \quad ( \quad ) \quad ,
+\]
+مع مجموعات !!{enumerable} من المتغيرات وال!!{constant}s، ومجموعات
+!!{enumerable} من ال!!{function}s وال!!{predicate}s ذات الرتب
+الاعتباطية. ويمكننا أن نسند إلى كل رمز من هذه الرموز \emph{رمزًا
+عدديًا} بحيث يسند إلى كل رمز عدد فريد، ولا يسند العدد نفسه إلى رمزين
+مختلفين. ونعلم أن ذلك ممكن لأن مجموعة جميع الرموز !!{enumerable}، ومن
+ثم توجد !!a{bijection} بينها وبين مجموعة الأعداد الطبيعية. لكننا نريد
+ضمان إمكان استرجاع الرمز (ومعلومات عنه أيضًا، مثل رتبة
+!!a{function}) من رمزه العددي على نحو قابل للحساب. وثمة بالطبع طرائق
+ممكنة كثيرة لفعل ذلك. وإليك واحدة منها تستعمل دوال عودية بدائية.
+(تذكر أن $\tuple{n_0,\dots,n_k}$ هو العدد الذي يرمز متتالية الأعداد
+$n_0$، و\dots، و$n_k$.)
+
+\begin{defn}
+إذا كان $s$ رمزًا في~$\Lang L$، فليكن \emph{رمز الرمز العددي}
+$\scode s$ معرفًا كما يأتي:
+\begin{enumerate}
+\item إذا كان $s$ من الرموز المنطقية، أعطي $\scode s$ بالجدول الآتي:
+\[
+\begin{array}{cccccccccc}
+  \lfalse & \lnot & \lor & \land & \lif & \lforall \\
+\tuple{0, 0} & \tuple{0, 1} & \tuple{0, 2} & \tuple{0, 3} &
+\tuple{0, 4} & \tuple{0, 5} \\
+\lexists & \eq & ( & ) & ,\\
+\tuple{0, 6} & \tuple{0, 7} &
+\tuple{0, 8} & \tuple{0, 9} & \tuple{0, 10}
+\end{array}
+\]
+\item إذا كان $s$ المتغير رقم $i$، أي $\Obj v_i$، فإن
+$\scode s=\tuple{1,i}$.
+\item إذا كان $s$ ال!!{constant} رقم $i$، أي~$\Obj c_i$، فإن
+  $\scode s=\tuple{2,i}$.
+\item إذا كان $s$ ال!!{function} رقم $i$ وذا الرتبة $n$، أي
+$\Obj f_i^n$، فإن $\scode s=\tuple{3,n,i}$.
+\item إذا كان $s$ ال!!{predicate} رقم $i$ وذا الرتبة $n$، أي
+$\Obj P_i^n$، فإن $\scode s=\tuple{4,n,i}$.
+\end{enumerate}
+\end{defn}
+
+\begin{prop}
+العلاقات الآتية عودية بدائية:
+\begin{enumerate}
+\item $\fn{Fn}(x,n)$ إذا وفقط إذا كان $x$ رمز $\Obj f^n_i$ لبعض~$i$؛
+  أي إذا كان $x$ رمز !!{function} ذي رتبة $n$.
+\item $\fn{Pred}(x,n)$ إذا وفقط إذا كان $x$ رمز $\Obj P^n_i$ لبعض
+  $i$، أو كان $x$ رمز $\eq$ وكان $n=2$؛ أي إذا كان $x$ رمز
+  !!{predicate} ذي رتبة $n$.
+\end{enumerate}
+\end{prop}
+
+\begin{defn}
+إذا كانت $s_0,\dots,s_{n-1}$ متتالية من الرموز، فإن \emph{عدد غودل}
+لها هو $\tuple{\scode{s_0},\dots,\scode{s_{n-1}}}$.
+\end{defn}
+
+\begin{explain}
+لاحظ أن \emph{الرموز العددية} و\emph{أعداد غودل} شيئان مختلفان.
+فمثلًا للمتغير~$\Obj v_5$ رمز عددي
+$\scode{\Obj v_5}=\tuple{1,5}=2^2\cdot3^6$. لكن المتغير~$\Obj v_5$
+إذا نظرنا إليه بوصفه حدًا هو أيضًا متتالية من الرموز (طولها~$1$).
+و\emph{عدد غودل}~$\Gn{\Obj v_5}$ لل\emph{حد}~$\Obj v_5$ هو
+$\tuple{\scode{\Obj v_5}}=2^{\scode{\Obj v_5}+1}
+=2^{2^2\cdot3^6+1}$.
+\end{explain}
+
+\begin{ex}
+تذكر أنه إذا كانت $k_0$، و\dots، و$k_{n-1}$ متتالية أعداد، فإن رمز
+المتتالية $\tuple{k_0,\dots,k_{n-1}}$ في ترميز قوى الأعداد الأولية هو
+\[
+2^{k_0+1}\cdot3^{k_1+1}\cdot \dots \cdot p_{n-1}^{k_{n-1}+1},
+\]
+حيث $p_i$ العدد الأولي رقم $i$ (ابتداءً من $p_0=2$). ولذلك، مثلًا،
+يكون للصيغة $\eq[\Obj v_0][\Obj 0]$، أو بصيغة أصرح
+${\eq}(\Obj v_0,\Obj c_0)$، عدد غودل
+\[
+\tuple{\scode{\eq},\scode{(},\scode{\Obj v_0},\scode{,}, \scode{\Obj
+    c_0},\scode{)}}.
+\]
+وهنا $\scode{\eq}$ هو $\tuple{0,7}=2^{0+1}\cdot3^{7+1}$، و
+$\scode{\Obj v_0}$ هو $\tuple{1,0}=2^{1+1}\cdot3^{0+1}$، وهكذا.
+ومن ثم يكون $\Gn{=(\Obj v_0,\Obj c_0)}$
+\begin{multline*}
+2^{\scode{=} + 1}\cdot 3^{\scode{(}+1}\cdot 5^{\scode{\Obj v_0}+1}
+\cdot 7^{\scode{,} + 1} \cdot 11^{\scode{\Obj c_0}+1} \cdot
+13^{\scode{)}+1} = \\
+2^{2^1\cdot 3^8 + 1}\cdot 3^{2^1\cdot 3^9+1}\cdot 5^{2^2\cdot 3^1+1}
+\cdot 7^{2^1\cdot 3^{11} + 1} \cdot 11^{2^3\cdot3^1+1} \cdot
+13^{2^1\cdot3^{10}+1} = \\
+2^{13\,123}\cdot 3^{39\,367}\cdot 5^{13}\cdot 7^{354\,295}\cdot11^{25}\cdot13^{118\,099}.
+\end{multline*}
+\end{ex}
+
+\end{document}

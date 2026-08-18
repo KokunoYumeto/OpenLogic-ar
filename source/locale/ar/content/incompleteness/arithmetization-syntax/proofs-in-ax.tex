@@ -1,0 +1,203 @@
+% Part: incompleteness
+% Chapter: arithmetization-syntax
+% Section: proofs-in-ax
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{art}{pax}
+\olsection{\usetoken{P}{derivation} بديهية}
+
+\begin{explain}
+لكي نؤرْثِم !!{derivation}s بديهية، لا بد أن نمثل !!{derivation}s بأعداد. وبما أن
+!!{derivation}s ليست إلا متتاليات من !!{formula}s، فإن النهج الواضح هو
+ترميز كل !!{derivation} بشفرة متتالية شفرات الـ!!{formula}s التي تتألف
+منها.
+\end{explain}
+
+\begin{defn}
+إذا كان $\delta$ !!{derivation} بديهيًا مؤلفًا من !!{formula}s
+$!A_1$، \dots،~$!A_n$، فإن $\Gn{\delta}$ هو
+\[
+\tuple{\Gn{!A_1}, \dots, \Gn{!A_n}}.
+\]
+\end{defn}
+
+\begin{ex}
+  تأمل !!{derivation} بسيطًا جدًا:
+  \begin{derivation}
+  1. & $!B \lif (!B \lor !A)$ \\
+  2. & $(!B \lif (!B \lor !A)) \lif (!A  \lif (!B \lif (!B \lor !A)))$\\
+  3. & $!A  \lif (!B \lif (!B \lor !A))$
+  \end{derivation}
+  يكون عدد غودل لهذا الـ!!{derivation} هو
+  \begin{align*}
+  \openTuple\, 
+    & \Gn{!B \lif (!B \lor !A)}, \\
+    &\Gn{(!B \lif (!B \lor !A)) \lif (!A  \lif (!B \lif (!B \lor !A)))},\\
+    & \Gn{!A  \lif (!B \lif (!B \lor !A))} \,\closeTuple.
+  \end{align*}
+\end{ex}
+
+\begin{explain}
+بعد تثبيت تمثيل لـ!!{derivation}s، علينا أيضًا أن نبيّن إمكان التعامل
+مع !!{derivation}s كهذه عوديًا بدائيًا والتعبير بالطريقة نفسها عن خصائصها وعلاقاتها
+الأساسية. بعض العمليات بسيطة؛ فمثلًا إذا أُعطينا عدد غودل~$d$
+لـ!!a{derivation}، فإن $(d)_{\len{d}-1}$ يعطينا عدد غودل
+للـ!!{formula} الختامية فيه. وبعض العمليات أصعب بكثير. وسنرسم على
+الأقل كيفية معالجتها. والغاية أن نثبت أن علاقة «$\delta$
+!!a{derivation} لـ$!A$ من $\Gamma$» عودية بدائية في عددي غودل
+لـ$\delta$ و$!A$.
+\end{explain}
+
+\begin{prop}
+\ollabel{prop:followsby}
+العلاقات الآتية عودية بدائية:
+\begin{enumerate}
+\item $!A$ بديهية.
+\item السطر ذو الرتبة $i$ في $\delta$ مبرر بقاعدة إثبات المقدّم.
+\item السطر ذو الرتبة $i$ في $\delta$ مبرر بـ\QR.
+\item $\delta$ !!{derivation} صحيح.
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+علينا أن نثبت أن العلاقات المناظرة بين أعداد غودل لـ!!{formula}s
+وأعداد غودل لـ!!{derivation}s عودية بدائية.
+\begin{enumerate}
+\item لدينا قائمة معطاة من مخططات البديهيات، وتكون $!A$ بديهية إذا
+  كانت من الصورة التي يعطيها أحد هذه المخططات. وبما أن قائمة المخططات
+  منتهية، فيكفي أن نبيّن أنه يمكننا، لكل مخطط بديهي، أن نختبر عوديًا
+  بدائيًا ما إذا كانت $!A$ من صورته. فتأمل مثلًا مخطط البديهية
+  \[
+  !B \lif (!C \lif !B).
+  \]
+  تكون $!A$ حالة من مخطط البديهية هذا إذا وُجدت !!{formula}s $!B$
+  و$!C$ بحيث نحصل على $!A$ بوصل `$($' ثم $!B$ ثم `$\lif$' ثم `$($'
+  ثم $!C$ ثم `$\lif$' ثم $!B$ ثم~`$))$'. ويمكننا اختبار الخاصية
+  المناظرة لعدد غودل~$n$ لـ$!A$، لأن وصل المتتاليات عودي بدائي،
+  ولأن عددي غودل لـ$!B$ و$!C$ لا بد أن يكونا أصغر من عدد غودل لـ$!A$؛
+  فمتى صدقت العلاقة كان كل من $!B$ و$!C$ واحدًا من الـ!!{formula}s
+  الجزئية من~$!A$.
+  ومن ثم يمكننا أن نعرّف:
+  \begin{multline*}
+  \fn{IsAx}_{!B \lif (!C \lif !B)}(n) \defiff \bexists{b< n}{
+    \bexists{c < n}{(\fn{Sent}(b) \land \fn{Sent}(c) \land {}}}\\ n =
+  \Gn{(} \concat b \concat \Gn{\lif} \concat \Gn{(} \concat c \concat
+  \Gn{\lif} \concat b \concat \Gn{))}).
+  \end{multline*}
+  وإذا كان لدينا تعريف كهذا لكل مخطط بديهي، عرّف فصلها الخاصية
+  $\fn{IsAx}(n)$، أي «$n$ عدد غودل لبديهية».
+\item يكون السطر ذو الرتبة $i$ في $\delta$ مبررًا بإثبات المقدّم إذا
+  وفقط إذا وُجد سطران $j$ و$k<i$، وكانت الـ!!{sentence} في السطر~$j$
+  صيغة ما~$!A$، والجملة في السطر~$k$ هي $!A\lif !B$، والجملة في
+  السطر~$i$ هي~$!B$.
+  \begin{multline*}
+    \fn{MP}(d, i) \defiff \bexists{j < i}{\bexists{k < i}{}}\\
+    (d)_k = \Gn{(} \concat (d)_j
+      \concat \Gn{\lif} \concat (d)_i \concat \Gn{)}
+  \end{multline*}
+  ولما كان التكميم المحدود والوصل و$=$ عمليات عودية بدائية، فإن هذا
+  يعرّف علاقة عودية بدائية.
+\item يكون سطر في $\delta$ مبررًا بـ\QR{} إذا كان من الصورة
+  $!B\lif\lforall[x][!A(x)]$، وكان سطر سابق هو $!B\lif !A(c)$
+  لـ!!{constant} ما~$c$، ولم يرد $c$ في~$!B$. وهذا هو الحال إذا وفقط إذا
+  \begin{enumerate}
+  \item وُجدت !!a{sentence}~$!B$، و
+  \item !!a{formula}~$!A(x)$ متغيرها الحر الوحيد~$x$، بحيث
+  \item يشتمل السطر $i$ على $!B\lif\lforall[x][!A(x)]$، و
+  \item يشتمل سطر ما $j<i$ على $!B\lif\Subst{!A}{c}{x}$ لثابت~$c$
+  \item لا يرد في~$!B$.
+  \end{enumerate}
+  ويمكن اختبار هذه الشروط كلها عوديًا بدائيًا، لأن أعداد غودل
+  لـ$!B$ و$!A(x)$ و$x$ أصغر من عدد غودل للصيغة في السطر~$i$، وعدد
+  غودل لـ$c$ أصغر من عدد غودل للصيغة في السطر~$j$:
+  \begin{multline*}
+    \fn{QR}_1(d, i) \defiff \bexists{j<i}{\bexists{b < (d)_i}{\bexists{x <
+        (d)_i}{\bexists{a < (d)_i}{\bexists{c < (d)_j}{(}}}}}
+    \\ \fn{Var}(x) \land \fn{Const}(c) \land {} \\
+    (d)_i = \Gn{(} \concat
+    b \concat \Gn{\lif} \concat \Gn{\lforall} \concat x \concat a
+    \concat \Gn{)} \land {}\\
+    (d)_j = \Gn{(} \concat b \concat
+    \Gn{\lif} \concat \fn{Subst}(a,c,x) \concat \Gn{)} \land {}\\ \fn{Sent}(b)
+    \land \fn{Sent}(\fn{Subst}(a,c,x)) \land {} \bforall{k <
+      \len{b}}{(b)_k \neq (c)_0})
+  \end{multline*}
+  وهنا نفترض أن $c$ و$x$ هما عددا غودل للثابت والمتغير بوصفهما حدين
+  (لا شفرتي رمزيهما). ونختبر أن $x$ هو المتغير الحر الوحيد في~$!A(x)$
+  باختبار ما إذا كانت $\Subst{!A(x)}{c}{x}$ !!a{sentence}، ونضمن عدم
+  ورود $c$ في $!B$ باشتراط اختلاف كل رمز في~$!B$ عن~$c$.
+
+  ونترك الصيغة الأخرى من \QR{} تمرينًا.
+\item يكون $d$ عدد غودل لـ!!{derivation} صحيح إذا وفقط إذا كان كل سطر
+  فيه بديهية أو مبررًا بإثبات المقدّم أو بـ\QR. ومن ثم:
+  \[
+  \fn{Deriv}(d) \defiff \bforall{i < \len{d}}{(\fn{IsAx}((d)_i) \lor
+    \fn{MP}(d,i) \lor \fn{QR}(d, i))}
+  \]
+\end{enumerate}
+\end{proof}
+
+\begin{prob}
+عرّف العلاقات الآتية كما في
+\olref[inc][art][pax]{prop:followsby}:
+\begin{enumerate}
+\item $\fn{IsAx}_{!A \lif (!B \lif (!A \land !B))}(n)$,
+\item $\fn{IsAx}_{\lforall[x][!A(x)] \lif !A(t)}(n)$,
+\item $\fn{QR}_{2}(d, i)$ (للصيغة الأخرى من \QR).
+\end{enumerate}
+\end{prob}
+
+\begin{prop}
+افترض أن $\Gamma$ مجموعة عودية بدائية من !!{sentence}s. عندئذ تكون
+العلاقة $\Prf[\Gamma](x,y)$، التي تعبّر عن أن «$x$ شفرة
+!!a{derivation}~$\delta$ لـ$!A$ من~$\Gamma$، وأن $y$ عدد غودل
+لـ$!A$»، عودية بدائية.
+\end{prop}
+
+\begin{proof}
+افترض أن المحمول العودي البدائي~$R_\Gamma(y)$ يعبّر عن
+«$y\in\Gamma$». علينا أن نثبت أن العلاقة $\Prf[\Gamma](x,y)$ عودية
+بدائية؛ وتصدق $\Prf[\Gamma](x,y)$ إذا وفقط إذا كان $y$ عدد غودل
+لـ!!a{sentence}~$!A$
+وكان $x$ شفرة !!a{derivation} لـ$!A$ من $\Gamma$.
+
+بحسب القضية السابقة، فإن الخاصية $\fn{Deriv}(x)$، التي تصدق إذا وفقط
+إذا كان $x$ شفرة !!{derivation} صحيح~$\delta$، عودية بدائية. لكن ذلك
+التعريف لم يأخذ المجموعة $\Gamma$ في الحسبان بوصفها طريقة إضافية
+لتبرير أسطر !!{derivation}. كما أن اختبارنا العودي البدائي لكون سطر
+ما مبررًا بـ\QR{} أغفل اشتراط ألا يرد الثابت~$c$ في~$\Gamma$. ويمكن
+تعديل تعريفنا ليأخذ $\Gamma$ في الحسبان مباشرة، لكن استعمال
+$\fn{Deriv}$ ومبرهنة الاستنباط أسهل. تصدق $\Gamma\Proves !A$ إذا وفقط
+إذا وُجدت قائمة منتهية من !!{sentence}s
+$!B_1$، \dots، $!B_n\in\Gamma$ بحيث
+$\{!B_1,\dots,!B_n\}\Proves !A$. وبحسب مبرهنة الاستنباط، يتحقق ذلك إذا
+$\Proves(!B_1\lif(!B_2\lif\cdots(!B_n\lif !A)\cdots))$. ويمكن اختبار
+ما إذا كانت !!a{sentence} ذات عدد غودل~$z$ من هذه الصورة عوديًا
+بدائيًا. ولذلك، بدلًا من اعتبار $x$ عدد غودل لـ!!a{derivation}
+للـ!!{sentence} ذات عدد غودل~$y$ \emph{من $\Gamma$}، نعدّه عدد غودل
+لـ!!a{derivation} لشرطية متداخلة من الصورة أعلاه من~$\emptyset$.
+
+أولًا، إذا كانت لدينا متتالية من !!{sentence}s، أمكننا أن نكوّن عوديًا
+بدائيًا الشرطية التي تكون جميع هذه الجمل مقدماتها والـ!!{sentence} المعطاة
+تاليها:
+\begin{align*}
+  \fn{hCond}(s, y, 0) & = y \\
+  \fn{hCond}(s, y, n+1) & = \Gn{(} \concat (s)_{n} \concat \Gn{\lif}
+  \concat \fn{hCond}(s, y, n) \concat \Gn{)}\\
+  \fn{Cond}(s, y) & = \fn{hCond}(s, y, \len{s})\\
+  \intertext{ومن ثم يمكننا تعريف $\Prf[\Gamma](x,y)$ بالصيغة}
+  \Prf[\Gamma](x, y) & \defiff \bexists{s < \fn{sequenceBound}(x,x)}{(} \\
+  &\qquad (x)_{\len{x}-1} = \fn{Cond}(s,y) \land {} \\
+  &\qquad\bforall{i<\len{s}}{(s)_i \in \Gamma} \land {} \\
+  &\qquad\fn{Deriv}(x)).
+\end{align*}
+نحصل على الحد المفروض على~$s$ بملاحظة أن كل $(s)_i$ عدد غودل
+لـ!!{formula} جزئية من السطر الأخير في !!{derivation}، أي إنه أصغر من
+$(x)_{\len{x}-1}$. وعدد المقدمات $!B\in\Gamma$، أي طول~$s$، أصغر من
+طول السطر الأخير في~$x$.
+\end{proof}
+
+\end{document}

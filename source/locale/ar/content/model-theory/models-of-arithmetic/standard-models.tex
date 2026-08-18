@@ -1,0 +1,168 @@
+% Part: model-theory
+% Chapter: models-of-arithmetic
+% Section: standard-models
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{mar}{stm}
+\olsection{نماذج الحساب القياسية}
+
+من الواضح أن المقصود بلغة الحساب~$\Lang{L_A}$ هو الحديث عن الأعداد،
+وتحديدًا عن الأعداد الطبيعية. ولذلك يتميز «النموذج» القياسي
+$\Struct{N}$: فهو النموذج الذي نريد الحديث عنه. غير أننا نهتم في المنطق
+غالبًا بالخصائص البنيوية فحسب، وأي !!{structure}s متشاكلتين تشتركان في
+تلك الخصائص. ومن ثم يمكن أن نكون أكثر تسامحًا قليلًا ونعد كل
+!!{structure} متشاكلة مع~$\Struct{N}$ «قياسية».
+
+\begin{defn}
+تكون !!{structure} للغة $\Lang{L_A}$ \emph{قياسية} إذا كانت متشاكلة
+مع~$\Struct{N}$.
+\end{defn}
+
+\begin{prop}
+\ollabel{prop:standard-domain} إذا كانت !!a{structure}~$\Struct{M}$
+قياسية، فإن مجالها مجموعة قيم الأعداد القياسية، أي:
+\[
+\Domain{M} = \Setabs{\Value{\num{n}}{M}}{n \in \Nat}
+\]
+\end{prop}
+
+\begin{proof}
+من الواضح أن كل $\Value{\num{n}}{M} \in \Domain{M}$. ولا يبقى إلا أن
+نبين أن كل $x \in \Domain{M}$ يساوي $\Value{\num{n}}{M}$ لبعض~$n$.
+ولما كانت $\Struct{M}$ قياسية، فهي متشاكلة مع~$\Struct{N}$. افترض أن
+$g\colon \Nat \to \Domain{M}$ تشاكل. عندئذ
+$g(n) = g(\Value{\num{n}}{N}) = \Value{\num{n}}{M}$. ولكل
+$x \in \Domain{M}$ يوجد $n \in \Nat$ بحيث $g(n)=x$، لأن $g$~!!{surjective}.
+\end{proof}
+
+\begin{explain}
+إذا كانت بنية~$\Struct{M}$ للغة $\Lang{L_A}$ قياسية، أمكن تسمية جميع
+عناصر !!{domain}ها بالأعداد القياسية $\num{0}$، $\num{1}$، $\num{2}$،
+\dots، أي بالحدود $\Obj{0}$، $\Obj{0}'$، $\Obj{0}''$، وهكذا. ولا يعني
+هذا بالطبع أن !!{element}s~$\Domain{M}$ \emph{هي} الأعداد، بل يعني فقط
+أننا نستطيع تعيينها بالطريقة نفسها التي نعين بها الأعداد في~$\Domain{N}$.
+\end{explain}
+
+\begin{prob}
+بيّن أن عكس \olref[mod][mar][stm]{prop:standard-domain} كاذب؛ أي أعط
+مثالًا لـ!!a{structure}~$\Struct{M}$ تحقق
+$\Domain{M} = \Setabs{\Value{\num{n}}{M}}{n \in \Nat}$ ولا تكون
+متشاكلة مع~$\Struct{N}$.
+\end{prob}
+
+\begin{prop}
+\ollabel{prop:thq-standard}
+إذا كان $\Sat{M}{\Th{Q}}$ و
+$\Domain{M} = \Setabs{\Value{\num{n}}{M}}{n \in \Nat}$، فإن
+$\Struct{M}$ قياسية.
+\end{prop}
+
+\begin{proof}
+علينا أن نبين أن $\Struct{M}$ متشاكلة مع~$\Struct{N}$. تأمل الدالة
+$g\colon \Nat \to \Domain{M}$ المعرفة بـ
+$g(n)=\Value{\num{n}}{M}$. بحسب الفرض تكون $g$~!!{surjective}.
+وهي !!{injective} أيضًا: متى كان $n \neq m$، كان
+$\Th{Q} \Proves \eq/[\num{n}][\num{m}]$. ومن ثم، لما كان
+$\Sat{M}{\Th{Q}}$، يكون $\Sat{M}{\eq/[\num{n}][\num{m}]}$ متى كان
+$n \neq m$. لذلك إذا كان $n \neq m$، فإن
+$\Value{\num{n}}{M} \neq \Value{\num{m}}{M}$، أي $g(n) \neq g(m)$.
+
+وعلينا أيضًا التحقق من أن $g$ تشاكل.
+\begin{enumerate}
+\item لدينا $g(\Assign{\Obj{0}}{N})=g(0)$، لأن
+  $\Assign{\Obj{0}}{N}=0$. وبتعريف~$g$، يكون
+  $g(0)=\Value{\num{0}}{M}$. لكن $\num{0}$ هو $\Obj{0}$ نفسه، وقيمة
+  الحد الذي يكون !!a{constant} هي ما تسنده الـ!!{structure} إلى ذلك
+  الـ!!{constant}، أي
+  $\Value{\Obj{0}}{M}=\Assign{\Obj{0}}{M}$. وهكذا نحصل، كما يلزم، على
+  $g(\Assign{\Obj{0}}{N})=\Assign{\Obj{0}}{M}$.
+\item $g(\Assign{\prime}{N}(n))=g(n+1)$، لأن $\prime$ في
+  $\Struct{N}$ دالة الخلف على~$\Nat$. ثم
+  $g(n+1)=\Value{\num{n+1}}{M}$ بتعريف~$g$. لكن $\num{n+1}$ هو الحد
+  نفسه $\num{n}'$، ومن ثم
+  $\Value{\num{n+1}}{M}=\Value{\num{n}'}{M}$. وبتعريف دالة القيمة،
+  يساوي هذا $\Assign{\prime}{M}(\Value{\num{n}}{M})$. وبما أن
+  $\Value{\num{n}}{M}=g(n)$، نحصل على
+  $g(\Assign{\prime}{N}(n))=\Assign{\prime}{M}(g(n))$.
+\item $g(\Assign{+}{N}(n,m))=g(n+m)$، لأن $+$ في $\Struct{N}$ دالة
+  الجمع على~$\Nat$. ثم $g(n+m)=\Value{\num{n+m}}{M}$ بتعريف~$g$.
+  لكن $\Th{Q} \Proves \num{n+m} = (\num{n} + \num{m})$، ومن ثم
+  $\Value{\num{n+m}}{M}=\Value{\num{n}+\num{m}}{M}$. وبتعريف دالة
+  القيمة يساوي هذا
+  $\Assign{+}{M}(\Value{\num{n}}{M},\Value{\num{m}}{M})$. وبما أن
+  $\Value{\num{n}}{M}=g(n)$ و$\Value{\num{m}}{M}=g(m)$، نحصل على
+  $g(\Assign{+}{N}(n,m))=\Assign{+}{M}(g(n),g(m))$.
+\item $g(\Assign{\times}{N}(n, m)) = \Assign{\times}{M}(g(n), g(m))$:
+  تمرين.
+\item $\tuple{n,m} \in \Assign{<}{N}$ إذا وفقط إذا كان $n<m$. فإذا
+  كان $n<m$، كان $\Th{Q} \Proves \num{n} < \num{m}$، وكذلك
+  $\Sat{M}{\num{n} < \num{m}}$. ومن ثم
+  $\tuple{\Value{\num{n}}{M},\Value{\num{m}}{M}} \in \Assign{<}{M}$،
+  أي $\tuple{g(n),g(m)} \in \Assign{<}{M}$. وإذا كان $n \not< m$، كان
+  $\Th{Q} \Proves \lnot \num{n} < \num{m}$، وبالتالي
+  $\Sat/{M}{\num{n} < \num{m}}$. وهكذا، كما سبق،
+  $\tuple{g(n),g(m)} \notin \Assign{<}{M}$. وبضم الحالتين نحصل على:
+  $\tuple{n,m} \in \Assign{<}{N}$ إذا وفقط إذا كان
+  $\tuple{g(n),g(m)} \in \Assign{<}{M}$.
+\end{enumerate}
+\end{proof}
+
+\begin{explain}
+الدالة~$g$ أوضح طريقة لتعريف تطبيق من $\Nat$ إلى مجال أي
+!!{structure}~$\Struct{M}$ أخرى للغة $\Lang{L_A}$، لأن كل
+$\Struct{M}$ كهذه تحتوي !!{element}s تسميها $\num{0}$ و$\num{1}$
+و$\num{2}$ وهكذا. فلا غرابة إذن في أنه إذا جعلت $\Struct{M}$ بعض
+العبارات الأساسية على الأقل عن الـ$\num{n}$ صادقة بالطريقة نفسها التي
+تفعلها~$\Struct{N}$، وكانت $g$ تقابلًا أيضًا، صارت $g$ تشاكلًا. والواقع
+أنها الوحيدة إذا لم يحتو $\Domain{M}$ أي !!{element}s سوى ما تسميه
+الـ$\num{n}$.
+\end{explain}
+
+\begin{prop}
+\ollabel{prop:thq-unique-iso} إذا كانت $\Struct{M}$ قياسية، كانت $g$ من
+برهان \olref{prop:thq-standard} التشاكل الوحيد من $\Struct{N}$ إلى~$\Struct{M}$.
+\end{prop}
+
+\begin{proof}
+افترض أن $h\colon \Nat \to \Domain{M}$ تشاكل بين $\Struct{N}$
+و$\Struct{M}$. نبين بالاستقراء على~$n$ أن $g=h$. إذا كان $n=0$، فإن
+$g(0)=\Assign{\Obj{0}}{M}$ بتعريف~$g$. لكن لما كانت $h$ تشاكلًا، كان
+$h(0)=h(\Assign{\Obj{0}}{N})=\Assign{\Obj{0}}{M}$، ومن ثم $g(0)=h(0)$.
+
+تأمل الآن حالة $n+1$. لدينا
+\begin{align*}
+  g(n+1) & = \Value{\num{n+1}}{M} \text{ بتعريف~$g$}\\
+  & = \Value{\num{n}'}{M} \text{ لأن $\num{n+1}\ident \num{n}'$}\\
+  & = \Assign{\prime}{M}(\Value{\num{n}}{M})
+    \text{ بتعريف $\Value{t'}{M}$}\\
+  & = \Assign{\prime}{M}(g(n)) \text{ بتعريف~$g$}\\
+  & = \Assign{\prime}{M}(h(n)) \text{ بفرض الاستقراء}\\
+  & = h(\Assign{\prime}{N}(n)) \text{ لأن $h$ تشاكل}\\
+  & = h(n+1)
+\end{align*}
+\end{proof}
+
+\begin{explain}
+لكل مجموعة~$M$~!!{denumerable} يوجد !!a{bijection} بين $\Nat$ و$M$؛
+ومن ثم تصلح كل مجموعة~$M$ كهذه لأن تكون !!{domain} نموذج قياسي
+$\Struct{M}$. والواقع أنك متى اخترت شيئًا $z \in M$ ودالة مناسبة~$s$
+لتفسيرا $\Assign{\Obj{0}}{M}$ و$\Assign{\prime}{M}$، تعينت تفسيرات
+$+$ و$\times$ و$<$ سلفًا. ولا تصلح في نموذج قياسي لتفسير
+$\Assign{\prime}{M}$ إلا الدوال $s\colon M \to M \setminus \{z\}$
+التي تكون !!{injective} و!!{surjective} معًا. ولا يمكن أن يحتوي مدى~$s$
+العنصر~$z$، وإلا كانت $\lforall[x][\eq/[\Obj 0][x']]$ كاذبة. وهذه
+!!{sentence} صادقة في~$\Struct{N}$، فلا بد أن تجعلها $\Struct{M}$ صادقة
+أيضًا. ويجب أن تكون $s$~!!{injective}، لأن دالة الخلف
+$\Assign{\prime}{N}$ في $\Struct{N}$ كذلك، وكون
+$\Assign{\prime}{N}$~!!{injective} تعبر عنه !!a{sentence} صادقة في
+$\Struct{N}$. ويجب أن تكون !!{surjective}، وإلا وجد
+$x \in M \setminus \{z\}$ ليس في مدى~$s$؛ أي لكانت الـ!!{sentence}
+$\lforall[x][(\eq[x][\Obj 0] \lor \lexists[y][\eq[y'][x]])]$ كاذبة
+في~$\Struct{M}$، مع أنها صادقة في~$\Struct{N}$.
+\end{explain}
+
+
+\end{document}

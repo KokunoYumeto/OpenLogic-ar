@@ -1,0 +1,111 @@
+% Part:sets-functions-relations
+% Chapter: size-of-sets
+% Section: pairing-alt
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid[ar]{sfr}{siz}{pai-alt}
+
+\olsection{دالة مزاوجة بديلة}
+
+\begin{explain}
+ثمة تعدادات أخرى لـ$\Nat^2$ يسهل تعيين معكوساتها. وفيما يأتي
+أحدها. فبدلًا من تمثيل التعداد بصريًا في مصفوفة، ابدأ بقائمة من
+الأعداد الصحيحة الموجبة يقترن كل منها بموضع فارغ (في البداية). وتصور
+ملء هذه المواضع تباعًا بالأزواج $\tuple{n,m}$ على النحو الآتي.
+ابدأ بالأزواج التي لها~$0$ في المركبة الأولى (أي الأزواج
+$\tuple{0,m}$)، وضع الأول منها (أي $\tuple{0,0}$) في أول موضع فارغ،
+ثم تجاوز موضعًا فارغًا، وضع الثاني (أي $\tuple{0,2}$) في الموضع
+الفارغ التالي، وتجاوز موضعًا مرة أخرى، وهكذا. وتبدو بداية تعدادنا
+(غير المكتملة) الآن هكذا:
+\[\small
+\begin{array}{@{}c c c c c c c c c c c@{}}
+\mathbf 1 & \mathbf 2 & \mathbf 3 & \mathbf 4 & \mathbf 5 & \mathbf 6 & \mathbf 7 & \mathbf 8 & \mathbf 9 & \mathbf{10} & \dots \\ \\
+\tuple{0,0} &  & \tuple{0,1} &  & \tuple{0,2} &  & \tuple{0,3} & & \tuple{0,4} &  & \dots \\
+\end{array}
+\]
+كرر ذلك بالأزواج $\tuple{1,m}$ في المواضع التي لا تزال فارغة،
+متجاوزًا مرة أخرى موضعًا فارغًا من كل موضعين:
+\[\small
+\begin{array}{@{}c c c c c c c c c c c@{}}
+\mathbf 1 & \mathbf 2 & \mathbf 3 & \mathbf 4 & \mathbf 5 & \mathbf 6 & \mathbf 7 & \mathbf 8 & \mathbf 9 & \mathbf{10} & \dots \\ \\
+\tuple{0,0} & \tuple{1,0} & \tuple{0,1} &  & \tuple{0,2} & \tuple{1,1} &
+\tuple{0,3} & & \tuple{0,4} &  \tuple{1,2} & \dots \\
+\end{array}
+\]
+وأدخل الأزواج $\tuple{2,m}$، $\tuple{2,m}$، وهكذا، بالطريقة نفسها.
+ومن ثم يبدأ تعدادنا المكتمل هكذا:
+\[\small
+\begin{array}{@{}cc c c c c c c c c c@{}}
+\mathbf 1 & \mathbf 2 & \mathbf 3 & \mathbf 4 & \mathbf 5 & \mathbf 6 & \mathbf 7 & \mathbf 8 & \mathbf 9 & \mathbf{10} & \dots \\ \\
+\tuple{0,0} & \tuple{1,0} & \tuple{0,1} & \tuple{2,0}  & \tuple{0,2} &
+\tuple{1,1} & \tuple{0,3} & \tuple{3,0}  & \tuple{0,4} &  \tuple{1,2} & \dots \\
+\end{array}
+\]
+وإذا رقّمنا خانات المصفوفة أعلاه وفقًا لهذا التعداد، فلن نجد خطًا
+متعرجًا أنيقًا، بل الترتيب الآتي:
+\[
+\begin{array}{ c | c | c | c | c | c | c | c }
+& \mathbf 0 & \mathbf 1 & \mathbf 2 & \mathbf 3 & \mathbf 4 & \mathbf 5 & \dots \\
+\hline
+\mathbf 0 & 1 & 3 & 5 & 7 & 9 & 11 & \dots \\
+\hline
+\mathbf 1 & 2 & 6 & 10 & 14 & 18 & \dots & \dots \\
+\hline
+\mathbf 2 & 4 & 12 & 20 & 28 & \dots & \dots & \dots \\
+\hline
+\mathbf 3 & 8 & 24 & 40 & \dots & \dots & \dots & \dots \\
+\hline
+\mathbf 4 & 16 & 48 & \dots & \dots & \dots & \dots & \dots \\
+\hline
+\mathbf 5 & 32 & \dots & \dots & \dots & \dots & \dots & \dots \\
+\hline
+\vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \ddots\\
+\end{array}
+\]
+نرى أن الأزواج في الصف~$0$ تقع في المواضع ذات الأرقام الفردية في
+تعدادنا، أي إن الزوج $\tuple{0,m}$ يقع في الموضع $2m+1$؛ وتقع أزواج
+الصف الثاني، $\tuple{1,m}$، في المواضع التي تساوي أرقامها ضعف عدد
+فردي، وتحديدًا $2 \cdot (2m+1)$؛ وتقع أزواج الصف الثالث،
+$\tuple{2,m}$، في المواضع التي تساوي أرقامها أربعة أضعاف عدد فردي،
+$4 \cdot (2m+1)$؛ وهكذا. وعوامل $(2m+1)$ لكل صف، $1$، $2$، $4$،
+$8$، \dots، هي بالضبط قوى~$2$: أي $1= 2^0$، $2 = 2^1$،
+$4 = 2^2$، $8 = 2^3$، \dots\@ والواقع أن الأس المعني هو دائمًا
+العضو الأول من الزوج قيد النظر. ومن ثم يكون العامل للزوج
+$\tuple{n,m}$ هو $2^n$. وهذا يعطينا الصيغة العامة:
+$2^n \cdot (2m+1)$. لكن هذه دالة ترسل الأزواج إلى أعداد صحيحة
+\emph{موجبة}، أي إن موضع $\tuple{0,0}$ هو~$1$. فإذا أردنا البدء من
+الموضع~$0$، وجب أن نطرح~$1$ من الناتج. فنحصل على ما يأتي:
+\end{explain}
+
+\begin{ex}
+الدالة $h\colon \Nat^2 \to \Nat$ المعطاة بـ
+\[
+h(n,m) = 2^n (2m+1) - 1
+\]
+هي دالة مزاوجة لمجموعة أزواج الأعداد الطبيعية~$\Nat^2$.
+\end{ex}
+
+\begin{explain}
+وعليه، في تعدادنا الثاني لـ$\Nat^2$، رمز الزوج
+$\tuple{0,0}$ هو $h(0,0) = 2^0(2\cdot 0+1) - 1 = 0$؛
+ورمز $\tuple{1,2}$ هو $2^{1} \cdot (2 \cdot 2 + 1) - 1 = 2
+\cdot 5 - 1 = 9$؛ ورمز $\tuple{2,6}$ هو $2^{2} \cdot (2
+\cdot 6 + 1) - 1 = 51$.
+\end{explain}
+
+يكفي أحيانًا ترميز أزواج الأعداد الطبيعية~$\Nat^2$ من غير اشتراط
+أن يكون الترميز شاملًا. ولمثل هذه الترميزات معكوسات ليست إلا دوالًا
+جزئية.
+
+\begin{ex}
+الدالة $j\colon \Nat^2 \to \Nat^+$ المعطاة بـ
+\[
+j(n,m) = 2^n3^m
+\]
+هي دالة~!!a{injective} $\Nat^2 \to \Nat$.
+\end{ex}
+
+\end{document}

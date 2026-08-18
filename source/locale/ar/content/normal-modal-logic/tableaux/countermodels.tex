@@ -1,0 +1,303 @@
+% Part: normal-modal-logic
+% Chapter: tableaux
+% Section: countermodels
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{tab}{cou}
+      
+\olsection{النماذج المضادة من \usetoken{P}{tableau}}
+
+\begin{explain}
+  لا يبيّن برهان مبرهنة التمام أنه إذا كان $\Entails !A$، فإن
+  $\Proves !A$ فحسب، بل يعطينا أيضًا طريقة لبناء نماذج مضادة لـ~$!A$
+  إذا كان $\Entails/ !A$. وفي حالة~$\Log{K}$، تمثل هذه الطريقة
+  \emph{إجراء قرار}. افترض، مثلًا، أن $\Entails/ !A$. عندئذ يعطي
+  برهان \olref[cpl]{prop:complete-tableau} طريقة لبناء !!{tableau}
+  تام، وهذه الطريقة تنتهي دائمًا في الواقع. فقواعد~$\Log{K}$ القضوية
+  لا تضيف إلا !!{formula}s ذات بادئات أقل تعقيدًا؛ أي لا يلزم تطبيق
+  أي قاعدة قضوية على الفرع أكثر من مرة واحدة لكل صيغة موقعة
+  $\sFmla{S}{!A}[\sigma]$. ولا تولّد البادئات الجديدة إلا قاعدة
+  \iftag{prvBox}{$\TRule{\False}{\Box}$}{}\iftag{notprvBox,notprvDiamond}{}{
+    و}\iftag{prvDiamond}{$\TRule{\True}{\Diamond}$}{}
+  \iftag{notprvBox,notprvDiamond}{، ولا يلزم تطبيقها}{، ولا يلزم تطبيقهما}
+  إلا مرة واحدة أيضًا (وتنتج بادئة جديدة واحدة).
+  وقد يلزم تطبيق
+  \iftag{prvBox}{$\TRule{\True}{\Box}$}{}\iftag{notprvBox,notprvDiamond}{}{
+    و}\iftag{prvDiamond}{$\TRule{\False}{\Diamond}$}{}
+  \iftag{notprvBox,notprvDiamond}{عدة مرات}{عدة مرات}، ولكن مرة واحدة
+  فقط لكل بادئة، ولا يُولَّد إلا عدد منته من البادئات الجديدة. ولذلك
+  ينتهي البناء بعد عدد منته من المراحل إما إلى فرع مغلق وإما إلى فرع تام.
+
+  متى بُني جدول دلالي له فرع مفتوح تام، أعطانا برهان
+  \olref[cpl]{thm:tableau-completeness} نموذجًا صريحًا يرضي المجموعة
+  الأصلية من ال!!{formula}s ذات البادئات. ولذلك، ليس الأمر مجرد أنه إذا
+  كان $\Gamma \Entails !A$، وُجد !!{tableau} مغلق وكان
+  $\Gamma \Proves !A$؛ بل إننا، إذا بحثنا عن ال!!{tableau} المغلق
+  بالطريقة المناسبة وانتهينا إلى !!{tableau} «تام»، فلن نعلم فقط أن
+  $\Gamma \Entails/ !A$، بل سنتمكن فعلًا من بناء نموذج مضاد.
+\end{explain}
+
+\iftag{prvBox}{
+\begin{ex}
+  نعلم أن $\Proves/ \Box(p \lor q) \lif (\Box p \lor \Box q)$.
+  يبدأ بناء جدول دلالي هكذا:
+  \begin{oltableau}
+    [\pFmla{\False}{\Box(p \lor q) \lif (\Box p \lor \Box q)}{1},
+      just = \TAss, checked
+      [\pFmla{\True}{\Box(p \lor q)}{1},
+        just = {\TRule{\False}{\lif}[1]}, 
+        [\pFmla{\False}{\Box p \lor \Box q}{1},
+          just = {\TRule{\False}{\lif}[1]}, checked
+          [\pFmla{\False}{\Box p}{1},
+            just = {\TRule{\False}{\lor}[3]}, checked
+            [\pFmla{\False}{\Box q}{1},
+              just = {\TRule{\False}{\lor}[3]}, checked
+              [\pFmla{\False}{p}{1.1}, 
+                just = {\TRule{\False}{\Box}[4]}, checked
+                [\pFmla{\False}{q}{1.2}, 
+                  just = {\TRule{\False}{\Box}[5]}, checked
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    ]
+  \end{oltableau}
+  لم يكتمل ال!!{tableau} بعدُ بالطبع. وفي الخطوة التالية ننظر في السطر
+  الوحيد الذي لا يحمل علامة فحص: ال!!{formula} ذات البادئة
+  $\sFmla{\True}{\Box(p \lor q)}[1]$ في السطر~$2$. ويقتضي بناء
+  الجدول الدلالي التام تطبيق قاعدة $\TRule{\True}{\Box}$ على كل بادئة
+  مستعملة على الفرع، أي على كل من $1.1$ و$1.2$:
+  \begin{oltableau}
+    [\pFmla{\False}{\Box(p \lor q) \lif (\Box p \lor \Box q)}{1},
+      just = \TAss, checked
+      [\pFmla{\True}{\Box(p \lor q)}{1},
+        just = {\TRule{\False}{\lif}[1]}, 
+        [\pFmla{\False}{\Box p \lor \Box q}{1},
+          just = {\TRule{\False}{\lif}[1]}, checked
+          [\pFmla{\False}{\Box p}{1},
+            just = {\TRule{\False}{\lor}[3]}, checked
+            [\pFmla{\False}{\Box q}{1},
+              just = {\TRule{\False}{\lor}[3]}, checked
+              [\pFmla{\False}{p}{1.1}, 
+                just = {\TRule{\False}{\Box}[4]}, checked
+                [\pFmla{\False}{q}{1.2}, 
+                  just = {\TRule{\False}{\Box}[5]}, checked
+                  [\pFmla{\True}{p \lor q}{1.1}, 
+                    just = {\TRule{\True}{\Box}[2]}
+                    [\pFmla{\True}{p \lor q}{1.2}, 
+                      just = {\TRule{\True}{\Box}[2]}
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    ]
+  \end{oltableau}
+  والآن لا تحمل الأسطر 2 و8 و9 علامات فحص. لكن لم تُضف أي بادئة
+  جديدة، فنطبق $\TRule{\True}{\lor}$ على السطرين~8 و~9 في جميع الفروع
+  الناتجة (ما دامت لا تنغلق):
+  \begin{oltableau}
+    [\pFmla{\False}{\Box(p \lor q) \lif (\Box p \lor \Box q)}{1},
+      just = \TAss, checked
+      [\pFmla{\True}{\Box(p \lor q)}{1},
+        just = {\TRule{\False}{\lif}[1]}, checked
+        [\pFmla{\False}{\Box p \lor \Box q}{1},
+          just = {\TRule{\False}{\lif}[1]}, checked
+          [\pFmla{\False}{\Box p}{1},
+            just = {\TRule{\False}{\lor}[3]}, checked
+            [\pFmla{\False}{\Box q}{1},
+              just = {\TRule{\False}{\lor}[3]}, checked
+              [\pFmla{\False}{p}{1.1}, 
+                just = {\TRule{\False}{\Box}[4]}, checked
+                [\pFmla{\False}{q}{1.2}, 
+                  just = {\TRule{\False}{\Box}[5]}, checked
+                  [\pFmla{\True}{p \lor q}{1.1}, 
+                    just = {\TRule{\True}{\Box}[2]}, checked
+                    [\pFmla{\True}{p \lor q}{1.2}, 
+                      just = {\TRule{\True}{\Box}[2]}, checked
+                      [\pFmla{\True}{p}{1.1},
+                        just = {\TRule{\True}{\lor}[8]}, checked, close
+                      ]
+                      [\pFmla{\True}{q}{1.1},
+                        just = {\TRule{\True}{\lor}[8]}, checked
+                        [\pFmla{\True}{p}{1.2},
+                          just = {\TRule{\True}{\lor}[9]}, checked]
+                        [\pFmla{\True}{q}{1.2},
+                          just = {\TRule{\True}{\lor}[9]}, checked, close]
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    ]
+  \end{oltableau}
+  يبقى فرع مفتوح واحد، وهو تام. ومنه نعرّف نموذجًا عوالمه
+  $W = \{1, 1.1, 1.2\}$ (وهي البادئات الوحيدة الواقعة على الفرع
+  المفتوح)، وعلاقة الإتاحة فيه
+  $R = \{\tuple{1, 1.1}, \tuple{1, 1.2}\}$، وإسناده $V(p) =
+  \{1.2\}$ (لأن السطر~11 يحتوي $\sFmla{\True}{p}[1.2]$) و
+  $V(q) = \{1.1\}$ (لأن السطر~10 يحتوي
+  $\sFmla{\True}{q}[1.1]$). ويُرسم النموذج في
+  \olref{fig:counter-Box}، ويمكنك التحقق من أنه نموذج مضاد لـ
+  $\Box(p \lor q) \lif (\Box p \lor \Box q)$.
+  \begin{figure}
+  \begin{center}
+    \begin{tikzpicture}[modal]
+      \node[world] (w1) [label={[align=right]right:\mFalse{p}\\ \mFalse{q}}]{$1$}; 
+      \node[world] (w2) [label={[align=right]right:\mFalse{p}\\ \mTrue{q}},
+        above left=of w1]{$1.1$}; 
+      \node[world] (w3) [label={[align=right]right:\mTrue{p}\\ \mFalse{q}},
+        above right=of w1] {$1.2$};
+      \draw[->] (w1) to (w2);
+      \draw[->] (w1) to (w3);
+    \end{tikzpicture}
+  \end{center}
+  \caption{نموذج مضاد لـ$\Box(p \lor q) \lif (\Box p \lor \Box q)$.}
+  \ollabel{fig:counter-Box}
+\end{figure}
+\end{ex}          
+}
+{
+\begin{ex}
+  نعلم أن $\Proves/ (\Diamond p \land \Diamond q) \lif \Diamond(p
+  \land q)$. يبدأ بناء جدول دلالي هكذا:
+  \begin{oltableau}
+    [\pFmla{\False}{(\Diamond p \land \Diamond q) \lif \Diamond(p \land q)}{1},
+      just = \TAss, checked
+      [\pFmla{\True}{\Diamond p \land \Diamond q}{1},
+        just = {\TRule{\False}{\lif}[1]}, checked
+        [\pFmla{\False}{\Diamond(p \land q)}{1},
+          just = {\TRule{\False}{\lif}[1]}
+          [\pFmla{\True}{\Diamond p}{1},
+            just = {\TRule{\True}{\land}[2]}, checked
+            [\pFmla{\True}{\Diamond q}{1},
+              just = {\TRule{\True}{\land}[2]}, checked
+              [\pFmla{\True}{p}{1.1}, 
+                just = {\TRule{\True}{\Diamond}[4]}, checked
+                [\pFmla{\True}{q}{1.2}, 
+                  just = {\TRule{\True}{\Diamond}[5]}, checked
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    ]
+  \end{oltableau}
+  لم يكتمل ال!!{tableau} بعدُ بالطبع. وفي الخطوة التالية ننظر في السطر
+  الوحيد الذي لا يحمل علامة فحص: ال!!{formula} ذات البادئة
+  $\sFmla{\False}{\Diamond(p \land q)}[1]$ في السطر~$3$. ويقتضي بناء
+  الجدول الدلالي التام تطبيق قاعدة $\TRule{\False}{\Diamond}$ على كل
+  بادئة مستعملة على الفرع، أي على كل من $1.1$ و$1.2$:
+  \begin{oltableau}
+    [\pFmla{\False}{(\Diamond p \land \Diamond q) \lif \Diamond(p \land q)}{1},
+      just = \TAss, checked
+      [\pFmla{\True}{\Diamond p \land \Diamond q}{1},
+        just = {\TRule{\False}{\lif}[1]}, checked
+        [\pFmla{\False}{\Diamond (p \land q)}{1},
+          just = {\TRule{\False}{\lif}[1]}
+          [\pFmla{\True}{\Diamond p}{1},
+            just = {\TRule{\True}{\land}[2]}, checked
+            [\pFmla{\True}{\Diamond q}{1},
+              just = {\TRule{\True}{\land}[2]}, checked
+              [\pFmla{\True}{p}{1.1}, 
+                just = {\TRule{\True}{\Diamond}[4]}, checked
+                [\pFmla{\True}{q}{1.2}, 
+                  just = {\TRule{\True}{\Diamond}[5]}, checked
+                  [\pFmla{\False}{p \land q}{1.1}, 
+                    just = {\TRule{\False}{\Diamond}[3]}
+                    [\pFmla{\False}{p \land q}{1.2}, 
+                      just = {\TRule{\False}{\Diamond}[3]}
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    ]
+  \end{oltableau}
+  والآن لا تحمل الأسطر 3 و8 و9 علامات فحص. لكن لم تُضف أي بادئة
+  جديدة، فنطبق $\TRule{\False}{\land}$ على السطرين~8 و~9 في جميع
+  الفروع الناتجة (ما دامت لا تنغلق):
+  \begin{oltableau}
+    [\pFmla{\False}{(\Diamond p \land \Diamond q) \lif \Diamond(p \land q)}{1},
+      just = \TAss, checked
+      [\pFmla{\True}{\Diamond p \land \Diamond q}{1},
+        just = {\TRule{\False}{\lif}[1]}, checked
+        [\pFmla{\False}{\Diamond(p \land q)}{1},
+          just = {\TRule{\False}{\lif}[1]}
+          [\pFmla{\True}{\Diamond p}{1},
+            just = {\TRule{\True}{\land}[2]}, checked
+            [\pFmla{\True}{\Diamond q}{1},
+              just = {\TRule{\True}{\land}[2]}, checked
+              [\pFmla{\True}{p}{1.1}, 
+                just = {\TRule{\True}{\Diamond}[4]}, checked
+                [\pFmla{\True}{q}{1.2}, 
+                  just = {\TRule{\True}{\Diamond}[5]}, checked
+                  [\pFmla{\False}{p \land q}{1.1}, 
+                    just = {\TRule{\False}{\Diamond}[3]}, checked
+                    [\pFmla{\False}{p \land q}{1.2}, 
+                      just = {\TRule{\False}{\Diamond}[3]}, checked
+                      [\pFmla{\False}{p}{1.1},
+                        just = {\TRule{\False}{\land}[8]}, checked, close
+                      ]
+                      [\pFmla{\False}{q}{1.1},
+                        just = {\TRule{\False}{\land}[8]}, checked
+                        [\pFmla{\False}{p}{1.2},
+                          just = {\TRule{\False}{\land}[9]}, checked]
+                        [\pFmla{\False}{q}{1.2},
+                          just = {\TRule{\False}{\land}[9]}, checked, close]
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    ]
+  \end{oltableau}
+  يبقى فرع مفتوح واحد، وهو تام. ومنه نعرّف نموذجًا عوالمه
+  $W = \{1, 1.1, 1.2\}$ (وهي البادئات الوحيدة الواقعة على الفرع
+  المفتوح)، وعلاقة الإتاحة فيه
+  $R = \{\tuple{1, 1.1}, \tuple{1, 1.2}\}$، وإسناده $V(p) =
+  \{1.1\}$ (لأن السطر~6 يحتوي $\sFmla{\True}{p}[1.1]$) و
+  $V(q) = \{1.2\}$ (لأن السطر~7 يحتوي
+  $\sFmla{\True}{q}[1.2]$). ويُرسم النموذج في
+  \olref{fig:counter-Diamond}، ويمكنك التحقق من أنه نموذج مضاد لـ
+  $(\Diamond p \land \Diamond q) \lif \Diamond (p \land q)$.
+  \begin{figure}
+  \begin{center}
+    \begin{tikzpicture}[modal]
+      \node[world] (w1) [label={[align=right]right:\mFalse{p}\\ \mFalse{q}}]{$1$}; 
+      \node[world] (w2) [label={[align=right]right:\mTrue{p}\\ \mFalse{q}},
+        above left=of w1]{$1.1$}; 
+      \node[world] (w3) [label={[align=right]right:\mFalse{p}\\ \mTrue{q}},
+        above right=of w1] {$1.2$};
+      \draw[->] (w1) to (w2);
+      \draw[->] (w1) to (w3);
+    \end{tikzpicture}
+  \end{center}
+  \caption{نموذج مضاد لـ$(\Diamond p \land \Diamond q) \lif
+    \Diamond (p \land q)$.}
+  \ollabel{fig:counter-Diamond}
+\end{figure}
+\end{ex}          
+}
+
+\end{document}
