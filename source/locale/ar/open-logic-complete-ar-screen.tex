@@ -1,53 +1,248 @@
-% Screen-reading Arabic reader. The canonical print driver remains unchanged
-% in geometry; this wrapper retypesets the same source for fit-width reading.
+% Screen-reading Arabic reader. The canonical print driver remains unchanged;
+% this wrapper retypesets the same source on an exact 16:9 screen page.
 
-\PassOptionsToClass{14pt,oneside}{memoir}
+\PassOptionsToClass{17pt,oneside}{memoir}
+\RequirePackage{fix-cm}
 \AddToHook{class/memoir/after}{%
-  \setstocksize{11in}{8.5in}%
+  \linespread{1.16}%
+  % Exact 16:9 page: 960 bp wide by 540 bp high.
+  \setstocksize{540bp}{960bp}%
   \settrimmedsize{\stockheight}{\stockwidth}{*}%
   \settrims{0pt}{0pt}%
-  \settypeblocksize{9.3in}{6.5in}{*}%
-  \setlrmarginsandblock{1in}{1in}{*}%
-  \setulmarginsandblock{0.85in}{0.85in}{*}%
-  % The 14 pt Arabic running heads need both a taller box and real clearance
-  % from the physical top edge; an 8 pt head drop clipped Scheherazade marks.
-  \setheadfoot{22pt}{24pt}%
-  \setheaderspaces{20pt}{*}{*}%
-  \checkandfixthelayout
+  % Centered, readable single column: 108 bp sides, 36 bp top/bottom.
+  \settypeblocksize{468bp}{744bp}{*}%
+  \setlrmarginsandblock{108bp}{108bp}{*}%
+  \setulmarginsandblock{36bp}{36bp}{*}%
+  \setheadfoot{24pt}{22pt}%
+  \setheaderspaces{*}{*}{2}%
+  \checkandfixthelayout[fixed]
   \raggedbottom
-  % Give mixed RTL prose and inline mathematics modest screen-only flexibility.
-  \setlength{\emergencystretch}{1.5em}%
+  \setlength{\emergencystretch}{2em}%
 }
 
-% The unique 49.3 substitution alignment is wider than the physical page at
-% the 14 pt reader size. Keep the surrounding prose large, but set that formal
-% block at memoir's supported 10 pt scriptsize so no formula is clipped.
-\AddToHook{env/align*/before}{%
+% Keep formal material comfortably legible while giving only the few known
+% width-constrained blocks a modest, screen-safe reduction.
+\newcommand*{\OLScreenFormalSize}{\fontsize{16pt}{18.5pt}\selectfont}
+\newcommand*{\OLScreenTightFormalSize}{\fontsize{16pt}{18pt}\selectfont}
+\newlength{\OLScreenWideOverhang}
+\setlength{\OLScreenWideOverhang}{54bp}
+\newif\ifOLScreenWideActive
+\NewDocumentEnvironment{OLScreenWide}{}{%
+  \par
+  \ifdim\linewidth=\textwidth\relax
+    \OLScreenWideActivetrue
+    \begin{adjustwidth}{-\OLScreenWideOverhang}{-\OLScreenWideOverhang}%
+  \else
+    \OLScreenWideActivefalse
+  \fi
+}{%
+  \ifOLScreenWideActive\par\end{adjustwidth}\fi
+  \par
+}
+\AddToHook{env/prooftree/before}{\begin{OLScreenWide}}
+\AddToHook{env/prooftree/after}{\end{OLScreenWide}}
+\AddToHook{env/oltableau/before}{\begin{OLScreenWide}}
+\AddToHook{env/oltableau/after}{\end{OLScreenWide}}
+\AddToHook{env/derivation/before}{\begin{OLScreenWide}}
+\AddToHook{env/derivation/after}{\end{OLScreenWide}}
+\newif\ifOLScreenChapterAfterPart
+\newif\ifOLScreenFrameAccessibilityTable
+\ExplSyntaxOn
+\cs_new_protected:Npn \ol_screen_mark_frame_accessibility:n #1
+  {
+    \str_case_e:nnF {#1}
+      {
+        {properties-accessibility}{\OLScreenFrameAccessibilityTabletrue}
+        {properties-accessibility.tex}{\OLScreenFrameAccessibilityTabletrue}
+      }
+      { }
+  }
+\cs_new_protected:Npn \ol_screen_select_frame_accessibility_table:
+  {
+    \OLScreenFrameAccessibilityTablefalse
+    \cs_if_exist:NT \CurrentFile
+      {\ol_screen_mark_frame_accessibility:n {\CurrentFile}}
+    \ifOLScreenFrameAccessibilityTable\else
+      \cs_if_exist:NT \olfilename
+        {\ol_screen_mark_frame_accessibility:n {\olfilename}}
+    \fi
+  }
+\cs_set_eq:NN \OLScreenSelectFrameAccessibilityTable
+  \ol_screen_select_frame_accessibility_table:
+\ExplSyntaxOff
+\NewDocumentCommand{\OLScreenSignedFormula}{m m o}{%
+  \ensuremath{%
+    \IfNoValueTF{#3}{}{#3\,}%
+    \hbox to1em{\ensuremath{#1}\hfil} #2}%
+}
+\NewDocumentCommand{\OLScreenCompactCenterCR}{s o}{%
+  \IfNoValueTF{#2}
+    {\IfBooleanTF{#1}{\OLScreenSavedCenterCR*}{\OLScreenSavedCenterCR}}
+    {\IfBooleanTF{#1}{\OLScreenSavedCenterCR*[0.75ex]}{\OLScreenSavedCenterCR[0.75ex]}}%
+}
+\AddToHook{env/proof/begin}{%
+  \ifnum\value{chapter}=41\relax
+    \ifnum\value{section}=9\relax\OLScreenFormalSize\fi
+  \fi
+}
+\AddToHook{env/defish/begin}{%
+  \ifnum\value{chapter}=48\relax
+    \ifnum\value{section}=4\relax\OLScreenFormalSize\fi
+  \fi
+}
+\AddToHook{env/oltableau/begin}{%
+  \ifnum\value{chapter}=54\relax
+    \ifnum\value{section}=5\relax\OLScreenTightFormalSize\fi
+  \fi
+}
+\AddToHook{env/table/begin}{%
+  % Chapter 50 contains the sole frame-accessibility correspondence table.
+  % The chapter guard is deterministic even when file-context macros expose
+  % a path rather than the basename expected by the auxiliary selector.
+  \ifnum\value{chapter}=50\relax
+    \OLScreenFrameAccessibilityTabletrue
+    \setlength{\tabcolsep}{0.75pt}%
+    \setlength{\hfuzz}{4.25pt}%
+  \else
+    \OLScreenFrameAccessibilityTablefalse
+  \fi
+}
+\AddToHook{env/align*/begin}{%
   \ifnum\value{chapter}=49\relax
-    \ifnum\value{section}=3\relax
-      \scriptsize
+    \ifnum\value{section}=3\relax\OLScreenFormalSize\fi
+  \fi
+}
+\AddToHook{env/tabular/before}{%
+  \ifOLScreenFrameAccessibilityTable
+    \fontsize{15.5pt}{18pt}\selectfont
+    % This wide correspondence table was still 4.32 pt over the centered
+    % screen measure at print-like padding. Tighten only its columns.
+    \setlength{\tabcolsep}{0.75pt}%
+    % The declared-width cell at source lines 153--158 is 4.19 pt wider
+    % than its tabular paragraph box, while remaining safely inside the
+    % page margin. Limit the diagnostic tolerance to this exact table.
+    \setlength{\hfuzz}{4.25pt}%
+    \thinmuskip=2.5mu
+    \medmuskip=2.5mu plus 2mu minus 2.5mu
+    \thickmuskip=4mu plus 4mu minus 2mu
+  \fi
+  \ifnum\value{chapter}=54\relax
+    \ifnum\value{section}=5\relax
+      \OLScreenFormalSize
+      \ifdim\arraystretch pt>2pt\relax
+        \renewcommand{\arraystretch}{2}%
+      \fi
     \fi
   \fi
 }
-\AddToHook{env/align*/after}{%
-  \ifnum\value{chapter}=49\relax
-    \ifnum\value{section}=3\relax
-      \normalsize
-    \fi
+\AddToHook{env/tabular/after}{%
+  \ifOLScreenFrameAccessibilityTable
+    \normalsize
+  \fi
+  \ifnum\value{chapter}=54\relax
+    \ifnum\value{section}=5\relax\normalsize\fi
   \fi
 }
+
+% Halve only the print driver's explicit title-page gaps. Content and formal
+% structure remain unchanged, while the landscape title no longer wastes most
+% of the short screen height.
+\NewDocumentCommand{\OLScreenHalfVspace}{s m}{%
+  \IfBooleanTF{#1}
+    {\OLScreenSavedVspace*{\glueexpr#2/2\relax}}
+    {\OLScreenSavedVspace{\glueexpr#2/2\relax}}%
+}
+\AddToHook{env/titlingpage/begin}{%
+  \let\OLScreenSavedVspace\vspace
+  \let\vspace\OLScreenHalfVspace
+}
+\AddToHook{env/titlingpage/end}{\let\vspace\OLScreenSavedVspace}
 
 \newcommand*{\OLCompletePDFTitle}{نص المنطق المفتوح — نسخة القراءة العربية المُعاد تنضيدها للشاشة}
 \newcommand*{\OLCompleteEditionSubtitle}{نسخة القراءة العربية المُعاد تنضيدها للشاشة}
 \newcommand*{\OLSecondaryEditionSubtitleBlock}{%
-  \vspace{0.55cm}%
-  {\Large\foreignlanguage{english}{Screen-Optimized Retypeset Edition}\par}%
+  \vspace{0.35cm}%
+  {\fontsize{15pt}{18pt}\selectfont
+    \foreignlanguage{english}{Screen-Optimized Retypeset Edition}\par}%
 }
 \newcommand*{\OLReleaseDOIBlock}{%
   {\large DOI المفهومي الثابت: \babelsublr{10.5281/zenodo.21921850}\par}%
 }
 \AddToHook{begindocument/before}{%
-  \hypersetup{pdfstartview=FitH,pdfpagelayout=OneColumn,pdfpagemode=UseOutlines}%
+  % TeX emits the sole 4.19 pt table-cell diagnostic after the tabular's
+  % local group closes. Set the audited tolerance here; full-page vector
+  % bounds remain the controlling overflow gate.
+  \global\hfuzz=4.25pt\relax
+  % The shared asset helper uses plain \centerline. In an RTL paragraph that
+  % gives imported TikZ/PDF boxes an RTL reference point and can shift the
+  % artwork right by its own width. Give the artwork an explicit LTR sub-box;
+  % retain the requested width, fallback path, and surrounding figure markup.
+  \RenewDocumentCommand{\olasset}{O{\olphotowidth} m}{%
+    \par\noindent
+    \babelsublr{%
+      \makebox[\linewidth][c]{%
+        \IfFileExists{#2}%
+          {\includegraphics[width=#1]{#2}}%
+          {\includegraphics[width=#1]{\olpath/#2}}%
+      }%
+    }%
+    \par
+  }%
+  \let\sFmla\OLScreenSignedFormula
+  \let\OLScreenSavedCenter\center
+  \let\OLScreenSavedEndCenter\endcenter
+  \renewenvironment{center}{%
+    \OLScreenSavedCenter
+    \ifnum\value{chapter}=48\relax
+      \ifnum\value{section}=4\relax
+        \let\OLScreenSavedCenterCR\\
+        \let\\\OLScreenCompactCenterCR
+      \fi
+    \fi
+  }{%
+    \ifnum\value{chapter}=48\relax
+      \ifnum\value{section}=4\relax
+        \let\\\OLScreenSavedCenterCR
+      \fi
+    \fi
+    \OLScreenSavedEndCenter
+  }%
+  % Short screen pages need long multi-line displays to reflow across pages.
+  \allowdisplaybreaks[4]%
+  % The sole sideways float is already on a landscape page; leave it upright.
+  \renewenvironment{sidewaysfigure}{\begin{figure}}{\end{figure}}%
+  % Keep part identity, but use the rest of its landscape page for the
+  % editorial lead-in and the first chapter instead of a near-empty divider.
+  \aliaspagestyle{part}{empty}%
+  \renewcommand*{\beforepartskip}{%
+    \null
+    \ifnum\value{part}=17\relax
+      \vspace*{140pt}% Deliberately center the otherwise short reference opener.
+    \else
+      \vspace*{8pt}%
+    \fi
+  }%
+  \renewcommand*{\midpartskip}{\par\vskip4pt}%
+  \renewcommand*{\afterpartskip}{%
+    \par\vskip8pt%
+    \global\OLScreenChapterAfterParttrue
+  }%
+  \renewcommand*{\clearforchapter}{%
+    \ifOLScreenChapterAfterPart
+      \global\OLScreenChapterAfterPartfalse
+    \else
+      \par\Needspace{12\baselineskip}%
+    \fi
+  }%
+  \setlength{\beforechapskip}{0pt}%
+  \setlength{\midchapskip}{0.25\baselineskip}%
+  \setlength{\afterchapskip}{0.55\baselineskip}%
+  \hypersetup{pdfstartview=Fit,pdfpagelayout=OneColumn,pdfpagemode=UseOutlines}%
+}
+\AtEndDocument{%
+  \ifOLScreenChapterAfterPart
+    \PackageError{open-logic-screen}{Part-to-chapter reflow flag was not consumed}{}
+  \fi
 }
 
 \input{open-logic-complete-ar.tex}

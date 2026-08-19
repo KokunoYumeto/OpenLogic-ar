@@ -1,83 +1,94 @@
-# نص المنطق المفتوح — النسخة العربية الكاملة مع إعادة تنضيد إضافية للشاشة
+# نص المنطق المفتوح — النسخة العربية الكاملة بتنسيق شاشة حقيقي 16:9
 
-يضم هذا المستودع النسخة العربية المستقلة الكاملة من متن مشروع المنطق المفتوح
-للمصدر المثبّت. يضيف الإصدار `OLP-0722-SCREEN-20260818` ملفّي PDF للقراءة
-على الشاشة، ويحفظ جميع أصول الطباعة في الإصدار `OLP-0722-20260818` من دون
-أي تغيير في بايتاتها.
+## English descriptor: Complete Arabic edition with readable 16:9 screen reflow
+
+نص المنطق المفتوح كتاب دراسي مفتوح وتعاوني في المنطق الصوري، صُمّم لمسار
+جامعي متوسط صارم وللاستخدام المرن في مقررات متعددة. تغطي هذه النسخة العربية
+الكاملة ذات 722 وحدة نظرية المجموعات الساذجة، والعلاقات والدوال، وصياغة
+المنطق القضي ومنطق الرتبة الأولى ودلالاتهما، ونظم البرهان، وقابلية الحساب،
+ونظريات عدم الاكتمال، والمنطق الموجّه، ونظرية البرهان، وموضوعات متقدمة أخرى.
+
+يحفظ هذا المستودع النسخة العربية المستقلة الكاملة للمصدر المثبّت، مع مصادر
+TeX قابلة للتحرير وأدلة منشأ وبناء. يضيف الإصدار
+`OLP-0722-REFLOW-16X9-20260819` ملفّي قراءة أفقيين بنسبة `16:9`، مع إبقاء
+أصول الطباعة 00 إلى 04 من دون أي تغيير في بايتاتها.
 
 ## هوية الإصدار
 
+- DOI الدقيق لهذا الإصدار: [10.5281/zenodo.22015759](https://doi.org/10.5281/zenodo.22015759)
 - DOI المفهومي العربي الثابت: [10.5281/zenodo.21921850](https://doi.org/10.5281/zenodo.21921850)
-- آخر DOI دقيق منشور في Zenodo قبل إصدار الشاشة هذا: [10.5281/zenodo.21987686](https://doi.org/10.5281/zenodo.21987686)، وهو خاص بإصدار الطباعة `OLP-0722-20260818`
-- إصدار GitHub الإضافي: [ar-olp-0722-screen-20260818](https://github.com/KokunoYumeto/OpenLogic-ar/releases/tag/ar-olp-0722-screen-20260818)
-- النسخة: `OLP-0722-SCREEN-20260818`
+- إصدار GitHub: [ar-olp-0722-reflow-16x9-20260819](https://github.com/KokunoYumeto/OpenLogic-ar/releases/tag/ar-olp-0722-reflow-16x9-20260819)
+- النسخة: `OLP-0722-REFLOW-16X9-20260819`
+- التاريخ: `2026-08-19`
 - اللغة: العربية الفصحى المعاصرة العالمية (`ar`؛ رمز Zenodo: `ara`)
-- المؤلف والمنشئ الوحيد في بيانات الاستشهاد: `Open Logic Project`
+- المؤلف والمنشئ الوحيد: `Open Logic Project`
+- المساهم الوحيد في خانة المساهمين: `AI typesetting & translation`، بالنوع `Other`، بلا معرّفات أو انتساب مؤسسي
 - سلطة المصدر: التعهد `9620cc73f9c8e0ad003c514a5d3748f29611c4c0`
 - شجرة المصدر: `f67757bb9305b173634082ab4cefd5601a707a34`
 - الترخيص: CC BY 4.0، ما لم يذكر مكوّن بعينه خلاف ذلك
 
-لا يُدّعى بعدُ DOI دقيق مستقل لإصدار الشاشة. يقدّم ملف `.zenodo.json` بيانات
-وصفية عربية أولًا لنسخة Zenodo جديدة مستقبلًا؛ ولم تُعدَّل سجلات Zenodo
-المنشورة سابقًا.
+يظهر داخل ملفّي PDF الـDOI المفهومي الثابت فقط. أمّا DOI الدقيق
+`10.5281/zenodo.22015759` فهو معرّف بيانات الإصدار ولا يُحقن في مشغّلات PDF.
 
-## النطاق والتنسيقان
+## النطاق وإعادة التدفق
 
-المحتوى واحد في تنسيق الطباعة وتنسيق الشاشة:
+المحتوى لم يتغيّر: القارئ المترابط يضم 642 وحدة، وملحق الإغلاق التقني يضم
+80 وحدة مستقلة، والمجموع 722 وحدة. أعيد تدفق هذا المحتوى داخل صفحة شاشة
+أفقية مقدارها `960 × 540 bp`، مع عمود قراءة مركزي مقداره `744 × 468 bp`،
+وهوامش جانبية متناظرة مقدارها `108 bp`، وهوامش علوية وسفلية مقدارها
+`36 bp`، وخط أساسه 17 نقطة. يفتح الملف على `/Fit`، مع `/OneColumn` ولوحة
+علامات `/UseOutlines`.
 
-- القارئ المترابط الأساسي: 642 وحدة.
-- ملحق الإغلاق التقني المستقل: 80 وحدة خارج مسار القارئ.
-- الحساب الكامل: 642 + 80 = 722 وحدة.
-
-يبقى تنسيق الطباعة في 819 و123 صفحة. وتعرض إعادة تنضيد الشاشة المحتوى نفسه
-بخط 14 نقطة، وكتلة نص أوسع، وهوامش متناظرة، وعرض افتتاحي ملائم لعرض الشاشة،
-في 946 و136 صفحة. هذا تنسيق ثابت، وليس مستندًا متجاوبًا أو قابلًا لإعادة
-التدفق الحقيقي.
+ينتج عن الخط الأكبر والتدفق المتواصل 1542 صفحة للقارئ و209 صفحات للملحق.
+صفحة العنوان شاشة واحدة، وتبدأ المادة في الصفحة الثانية. لا تُحجز صفحات
+شبه فارغة للفصول؛ وتشارك عناوين الأجزاء والفصول الشاشة مع المادة التالية
+حيث يسمح البناء. هذا تنسيق شاشة ثابت ومحسّن للقراءة، لا مستند HTML متجاوبًا.
 
 ## أصول الإصدار
 
 | الرقم | الأصل | الوظيفة |
 |---:|---|---|
-| 00 | `00_OPENLOGIC_ar_COMPLETE_LINKED_READER_OLP-0722.pdf` | القارئ العربي المترابط في تنسيق الطباعة، بلا تغيير في البايتات |
-| 01 | `01_OPENLOGIC_ar_CLOSURE_SUPPLEMENT_80_UNITS_OLP-0722.pdf` | الملحق التقني في تنسيق الطباعة، بلا تغيير في البايتات |
+| 00 | `00_OPENLOGIC_ar_COMPLETE_LINKED_READER_OLP-0722.pdf` | القارئ العربي في تنسيق الطباعة، بلا تغيير |
+| 01 | `01_OPENLOGIC_ar_CLOSURE_SUPPLEMENT_80_UNITS_OLP-0722.pdf` | ملحق الطباعة، بلا تغيير |
 | 02 | `02_OPENLOGIC_ar_EDITABLE_SOURCES_OLP-0722.zip` | المصادر الكاملة القابلة للتحرير للإصدار الأساس |
-| 03 | `03_OPENLOGIC_ar_EVIDENCE_AND_PROVENANCE_OLP-0722.zip` | الأدلة والمنشأ للإصدار الأساس |
+| 03 | `03_OPENLOGIC_ar_EVIDENCE_AND_PROVENANCE_OLP-0722.zip` | أدلة ومنشأ إصدار الطباعة |
 | 04 | `04_OPENLOGIC_ar_SHA256_MANIFEST_OLP-0722.txt` | هاشات الأصول 00 إلى 03 |
-| 05 | `05_OPENLOGIC_ar_COMPLETE_LINKED_READER_SCREEN_OLP-0722.pdf` | القارئ المُعاد تنضيده للشاشة، 946 صفحة |
-| 06 | `06_OPENLOGIC_ar_CLOSURE_SUPPLEMENT_80_UNITS_SCREEN_OLP-0722.pdf` | الملحق المُعاد تنضيده للشاشة، 136 صفحة |
-| 07 | `07_OPENLOGIC_ar_SCREEN_LAYOUT_SOURCES_AND_EVIDENCE_OLP-0722.zip` | مشغّلات التنضيد الإضافية، وتعليمات البناء، وأدلة البناء وQA المنقّحة |
-| 08 | `08_OPENLOGIC_ar_SHA256_MANIFEST_SCREEN_UPDATE_OLP-0722.txt` | هاشات SHA-256 لجميع الأصول 00 إلى 07 |
+| 05 | `05_OPENLOGIC_ar_COMPLETE_LINKED_READER_SCREEN_OLP-0722.pdf` | قارئ 16:9، 1542 صفحة |
+| 06 | `06_OPENLOGIC_ar_CLOSURE_SUPPLEMENT_80_UNITS_SCREEN_OLP-0722.pdf` | ملحق 16:9، 209 صفحات |
+| 07 | `07_OPENLOGIC_ar_SCREEN_LAYOUT_SOURCES_AND_EVIDENCE_OLP-0722.zip` | المشغّلات، وأدوات البناء والإصلاح، وإيصالات البناء وQA |
+| 08 | `08_OPENLOGIC_ar_SHA256_MANIFEST_SCREEN_UPDATE_OLP-0722.txt` | هاشات SHA-256 للأصول 00 إلى 07 |
 
-لا يضع البيان 08 هاشًا لنفسه. يتألف كل سطر من 64 رقمًا سداسيًا عشريًا كبيرًا،
-ثم مسافتين، ثم اسم الأصل الأساس.
+لا يضع البيان 08 هاشًا لنفسه. يتألف كل سطر من 64 رقمًا سداسيًا عشريًا
+كبيرًا، ثم مسافتين، ثم اسم الأصل الأساس.
 
 ## البناء القابل لإعادة التشغيل
 
-يُبنى تنسيق الطباعة بواسطة `build/BUILD.ps1`، وتُبنى إعادة تنضيد الشاشة بواسطة
-`build/BUILD_SCREEN.ps1`. يبني برنامج الشاشة القارئ أولًا باستخدام LuaLaTeX
-وBibTeX، ثم يبني الملحق مع إحالات AUX إلى قارئ الشاشة. يتحقق البرنامج من
-عدد الصفحات، ووجود DOI المفهومي، وغياب DOI الدقيق للنسخة من المشغّلات،
-والهاشات الاختيارية، ويرفض الكتابة فوق أي أصل إصدار موجود.
+يبني `build/BUILD_SCREEN.ps1` ملفّي TeX الخام، ويتحقق من هاشاتهما المثبّتة،
+ثم يشغّل `build/repair_rtl_link_rects_ar.py`. لا يغيّر الإصلاح أي محتوى مرئي؛
+بل يصحّح فقط مستطيلات روابط RTL التي ضخّمها LuaTeX/hyperref. يفشل البرنامج
+مغلقًا عند أي توقيع غير معروف، ثم يتحقق من الهندسة والروابط وعدد الصفحات
+والهاشات النهائية. يبني `build/BUILD_SCREEN_BUNDLE.ps1` الأصل 07 بترتيب
+محدّد وطوابع زمنية ثابتة وقائمة هاشات داخلية.
 
-ترد التفاصيل في `build/BUILD_REQUIREMENTS.md` و
+ترد المتطلبات الدقيقة في `build/BUILD_REQUIREMENTS.md` و
 `build/BUILD_SCREEN_REQUIREMENTS.md`.
 
 ## حدود معلنة
 
-- ملفات PDF غير موسومة بعناصر بنيوية ولا تحمل شهادة PDF/UA أو اعتماد نفاذية.
+- ملفا PDF غير موسومين بعناصر بنيوية ولا يحملان شهادة PDF/UA.
 - استخراج Unicode للرياضيات وترتيب بعض النصوص ثنائية الاتجاه غير كاملين؛ مصادر TeX القابلة للتحرير هي المرجع النصي.
 - لم تُجرَ مراجعة بشرية عربية أو أهلية، ولا يُدّعى اعتماد المجتمع اللغوي.
 - هذا الإصدار المستقل لا يعني تأييد مشروع المنطق المفتوح.
-- العلاقة المقصودة بالمصدر هي اشتقاق/ترجمة من التعهد المثبّت؛ لا تُخترع علاقة `IsPartOf` لمجموعة عالمية غير موجودة.
+- لا يغيّر هذا الإصدار أي هدف ترجمة أو بيان إغلاق أو ربط وحدة.
 
 ## English descriptor
 
-This repository contains the independently maintained complete Arabic edition
-of *The Open Logic Text*. The additive `OLP-0722-SCREEN-20260818` release
-preserves the existing print assets byte-for-byte and adds a 642-unit,
-946-page linked reader plus an 80-unit, 136-page closure supplement retypeset
-for on-screen reading. These PDFs use a fixed Letter page with 14-point type,
-a wider text block, symmetric margins, and FitH opening behavior; they are not
-genuinely responsive or reflowable. They remain untagged and are not PDF/UA
-certified. No separate Zenodo version DOI is claimed until a new Zenodo version
-is actually published.
+*The Open Logic Text* is a collaborative open textbook in formal logic for a
+rigorous intermediate course. This complete 722-unit Arabic edition covers
+naive set theory, relations and functions, propositional and first-order
+syntax and semantics, proof systems, computability, incompleteness, modal
+logic, proof theory, and further advanced topics. The release also supplies a
+1542-page linked reader and 209-page supplement reflowed onto centered exact
+960 × 540 screen pages. The PDFs remain untagged and are not PDF/UA certified;
+editable TeX remains authoritative for math and bidirectional extraction
+limitations.

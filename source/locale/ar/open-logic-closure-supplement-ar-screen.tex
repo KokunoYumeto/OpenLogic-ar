@@ -1,46 +1,221 @@
 % Screen-reading Arabic closure supplement. It resolves external references
-% against the screen reader so page links and page-number references agree.
+% against the exact-16:9 complete reader so page links agree.
 
-\PassOptionsToClass{14pt,oneside}{memoir}
+\PassOptionsToClass{17pt,oneside}{memoir}
+\RequirePackage{fix-cm}
 \AddToHook{class/memoir/after}{%
-  \setstocksize{11in}{8.5in}%
+  \linespread{1.16}%
+  % Exact 16:9 page: 960 bp wide by 540 bp high.
+  \setstocksize{540bp}{960bp}%
   \settrimmedsize{\stockheight}{\stockwidth}{*}%
   \settrims{0pt}{0pt}%
-  \settypeblocksize{9.3in}{6.5in}{*}%
-  \setlrmarginsandblock{1in}{1in}{*}%
-  \setulmarginsandblock{0.85in}{0.85in}{*}%
-  % The 14 pt Arabic running heads need both a taller box and real clearance
-  % from the physical top edge; an 8 pt head drop clipped Scheherazade marks.
-  \setheadfoot{22pt}{24pt}%
-  \setheaderspaces{20pt}{*}{*}%
-  \checkandfixthelayout
+  % Centered, readable single column: 108 bp sides, 36 bp top/bottom.
+  \settypeblocksize{468bp}{744bp}{*}%
+  \setlrmarginsandblock{108bp}{108bp}{*}%
+  \setulmarginsandblock{36bp}{36bp}{*}%
+  \setheadfoot{24pt}{22pt}%
+  \setheaderspaces{*}{*}{2}%
+  \checkandfixthelayout[fixed]
   \raggedbottom
-  % Give mixed RTL prose and inline mathematics modest screen-only flexibility.
-  \setlength{\emergencystretch}{1.5em}%
+  \setlength{\emergencystretch}{2em}%
 }
 
-% In chapter 2, section 1, the eighth align* is the long interpolation proof.
-% Set only that block at memoir's supported 11 pt footnotesize; at 14 pt it is
-% wider than the physical page, while the surrounding Arabic remains 14 pt.
-\newcount\OLScreenInterpolationAlign
-\AddToHook{env/align*/before}{%
-  \ifnum\value{chapter}=2\relax
-    \ifnum\value{section}=1\relax
-      \global\advance\OLScreenInterpolationAlign by 1\relax
-      \ifnum\OLScreenInterpolationAlign=8\relax
-        \footnotesize
+% Match the complete reader's screen typography and reflow behavior. These
+% hooks are inert unless a corresponding chapter/section is present.
+\newcommand*{\OLScreenFormalSize}{\fontsize{16pt}{18.5pt}\selectfont}
+\newcommand*{\OLScreenTightFormalSize}{\fontsize{16pt}{18pt}\selectfont}
+\newcommand*{\OLScreenResidualFloatSize}{\fontsize{15pt}{17.5pt}\selectfont}
+\newlength{\OLScreenWideOverhang}
+\setlength{\OLScreenWideOverhang}{54bp}
+\newif\ifOLScreenWideActive
+\NewDocumentEnvironment{OLScreenWide}{}{%
+  \par
+  \ifdim\linewidth=\textwidth\relax
+    \OLScreenWideActivetrue
+    \begin{adjustwidth}{-\OLScreenWideOverhang}{-\OLScreenWideOverhang}%
+  \else
+    \OLScreenWideActivefalse
+  \fi
+}{%
+  \ifOLScreenWideActive\par\end{adjustwidth}\fi
+  \par
+}
+\AddToHook{env/prooftree/before}{\begin{OLScreenWide}}
+\AddToHook{env/prooftree/after}{\end{OLScreenWide}}
+\AddToHook{env/oltableau/before}{\begin{OLScreenWide}}
+\AddToHook{env/oltableau/after}{\end{OLScreenWide}}
+\AddToHook{env/derivation/before}{\begin{OLScreenWide}}
+\AddToHook{env/derivation/after}{\end{OLScreenWide}}
+\NewDocumentCommand{\OLScreenSignedFormula}{m m o}{%
+  \ensuremath{%
+    \IfNoValueTF{#3}{}{#3\,}%
+    \hbox to1em{\ensuremath{#1}\hfil} #2}%
+}
+\NewDocumentCommand{\OLScreenCompactCenterCR}{s o}{%
+  \IfNoValueTF{#2}
+    {\IfBooleanTF{#1}{\OLScreenSavedCenterCR*}{\OLScreenSavedCenterCR}}
+    {\IfBooleanTF{#1}{\OLScreenSavedCenterCR*[0.75ex]}{\OLScreenSavedCenterCR[0.75ex]}}%
+}
+% Nine proof-rule tables are taller than a short 16:9 screen at print spacing.
+% Cap only their explicit inter-row gaps. Six residual unbreakable sheets also
+% remove bussproofs' optional 2 pt padding on each side of every inference line.
+\newif\ifOLScreenCompactFloat
+\newif\ifOLScreenTightProofFloat
+\let\OLScreenCompactFloatSize\OLScreenFormalSize
+\newcommand*{\OLScreenFloatRowGap}{1ex}
+\ExplSyntaxOn
+\cs_new_protected:Npn \ol_screen_use_compact_float:
+  {
+    \OLScreenCompactFloattrue
+    \cs_set_eq:NN \OLScreenCompactFloatSize \OLScreenFormalSize
+  }
+\cs_new_protected:Npn \ol_screen_use_tight_proof_float:
+  {
+    \ol_screen_use_compact_float:
+    \OLScreenTightProofFloattrue
+  }
+\cs_new_protected:Npn \ol_screen_mark_compact_float:n #1
+  {
+    \str_case_e:nnF {#1}
+      {
+        {rules-N1}{\ol_screen_use_tight_proof_float:\cs_set:Npn \OLScreenFloatRowGap {.1ex}}
+        {rules-N1.tex}{\ol_screen_use_tight_proof_float:\cs_set:Npn \OLScreenFloatRowGap {.1ex}}
+        {rules-N2}{\ol_screen_use_compact_float:}
+        {rules-N2.tex}{\ol_screen_use_compact_float:}
+        {reductions}{\ol_screen_use_tight_proof_float:}
+        {reductions.tex}{\ol_screen_use_tight_proof_float:}
+        {rules-tN2}{\ol_screen_use_compact_float:}
+        {rules-tN2.tex}{\ol_screen_use_compact_float:}
+        {rules-tN3}{\ol_screen_use_compact_float:}
+        {rules-tN3.tex}{\ol_screen_use_compact_float:}
+        {rules-G2c}{\ol_screen_use_tight_proof_float:\cs_set_eq:NN \OLScreenCompactFloatSize \OLScreenResidualFloatSize}
+        {rules-G2c.tex}{\ol_screen_use_tight_proof_float:\cs_set_eq:NN \OLScreenCompactFloatSize \OLScreenResidualFloatSize}
+        {rules-G1c}{\ol_screen_use_tight_proof_float:}
+        {rules-G1c.tex}{\ol_screen_use_tight_proof_float:}
+        {rules-G1i}{\ol_screen_use_tight_proof_float:}
+        {rules-G1i.tex}{\ol_screen_use_tight_proof_float:}
+        {rules-LK}{\ol_screen_use_tight_proof_float:\cs_set_eq:NN \OLScreenCompactFloatSize \OLScreenResidualFloatSize\cs_set:Npn \OLScreenFloatRowGap {.1ex}}
+        {rules-LK.tex}{\ol_screen_use_tight_proof_float:\cs_set_eq:NN \OLScreenCompactFloatSize \OLScreenResidualFloatSize\cs_set:Npn \OLScreenFloatRowGap {.1ex}}
+      }
+      { }
+  }
+\cs_new_protected:Npn \ol_screen_select_compact_float:
+  {
+    \OLScreenCompactFloatfalse
+    \OLScreenTightProofFloatfalse
+    \cs_set:Npn \OLScreenFloatRowGap {1ex}
+    \cs_if_exist:NT \CurrentFile
+      {\ol_screen_mark_compact_float:n {\CurrentFile}}
+    \ifOLScreenCompactFloat\else
+      \cs_if_exist:NT \olfilename
+        {\ol_screen_mark_compact_float:n {\olfilename}}
+    \fi
+  }
+\cs_set_eq:NN \OLScreenSelectCompactFloat
+  \ol_screen_select_compact_float:
+\ExplSyntaxOff
+\AddToHook{env/proof/begin}{%
+  \ifnum\value{chapter}=41\relax
+    \ifnum\value{section}=9\relax\OLScreenFormalSize\fi
+  \fi
+}
+\AddToHook{env/defish/begin}{%
+  \ifnum\value{chapter}=48\relax
+    \ifnum\value{section}=4\relax\OLScreenFormalSize\fi
+  \fi
+}
+\AddToHook{env/oltableau/begin}{%
+  \ifnum\value{chapter}=54\relax
+    \ifnum\value{section}=5\relax\OLScreenTightFormalSize\fi
+  \fi
+}
+\AddToHook{env/table/begin}{%
+  \OLScreenSelectCompactFloat
+  \ifOLScreenCompactFloat
+    \OLScreenCompactFloatSize
+    \setlength{\belowcaptionskip}{0pt}%
+    \ifOLScreenTightProofFloat
+      \setlength{\abovecaptionskip}{0pt}%
+    \else
+      \setlength{\abovecaptionskip}{4pt}%
+    \fi
+  \fi
+  \ifOLScreenTightProofFloat\def\extraVskip{0pt}\fi
+  \ifnum\value{chapter}=50\relax
+    \ifnum\value{section}=2\relax
+      \addtolength{\textwidth}{12pt}%
+    \fi
+  \fi
+}
+\makeatletter
+\AddToHook{env/table/begin}{%
+  \ifOLScreenCompactFloat
+    \let\OLScreenSavedArgArrayCR\@argarraycr
+    \def\@argarraycr[#1]{\OLScreenSavedArgArrayCR[\OLScreenFloatRowGap]}%
+    \let\OLScreenSavedMathCRArgs\math@cr@@
+    \def\math@cr@@[#1]{\OLScreenSavedMathCRArgs[\OLScreenFloatRowGap]}%
+  \fi
+}
+\makeatother
+\AddToHook{env/table/end}{%
+  \ifnum\value{chapter}=50\relax
+    \ifnum\value{section}=2\relax
+      \addtolength{\textwidth}{-12pt}%
+    \fi
+  \fi
+}
+\AddToHook{env/align*/begin}{%
+  \ifnum\value{chapter}=49\relax
+    \ifnum\value{section}=3\relax\OLScreenFormalSize\fi
+  \fi
+}
+\AddToHook{env/tabular/before}{%
+  \ifnum\value{chapter}=50\relax
+    \ifnum\value{section}=2\relax
+      \OLScreenFormalSize
+      \setlength{\tabcolsep}{4pt}%
+    \fi
+  \fi
+  \ifnum\value{chapter}=54\relax
+    \ifnum\value{section}=5\relax
+      \OLScreenFormalSize
+      \ifdim\arraystretch pt>2pt\relax
+        \renewcommand{\arraystretch}{2}%
       \fi
     \fi
   \fi
 }
-\AddToHook{env/align*/after}{%
-  \ifnum\value{chapter}=2\relax
-    \ifnum\value{section}=1\relax
-      \ifnum\OLScreenInterpolationAlign=8\relax
-        \normalsize
-      \fi
+\AddToHook{env/tabular/after}{%
+  \ifnum\value{chapter}=50\relax
+    \ifnum\value{section}=2\relax
+      \normalsize
     \fi
   \fi
+  \ifnum\value{chapter}=54\relax
+    \ifnum\value{section}=5\relax\normalsize\fi
+  \fi
+}
+
+% The supplement has a longer legal block than the complete reader. Reduce
+% only its explicit print-title gaps and suppress title-only stretch so all
+% title/legal copy remains on a single screen.
+\NewDocumentCommand{\OLScreenHalfVspace}{s m}{%
+  \IfBooleanTF{#1}
+    {\OLScreenSavedVspace*{\glueexpr#2/8\relax}}
+    {\OLScreenSavedVspace{\glueexpr#2/8\relax}}%
+}
+\newcommand*{\OLScreenTitleFill}{%
+  \par
+}
+\AddToHook{env/titlingpage/begin}{%
+  \let\OLScreenSavedVspace\vspace
+  \let\OLScreenSavedVfill\vfill
+  \let\vspace\OLScreenHalfVspace
+  \let\vfill\OLScreenTitleFill
+}
+\AddToHook{env/titlingpage/end}{%
+  \let\vspace\OLScreenSavedVspace
+  \let\vfill\OLScreenSavedVfill
 }
 
 \newcommand*{\OLCompleteReaderJob}{open-logic-complete-ar-screen}
@@ -48,15 +223,89 @@
 \newcommand*{\OLSupplementEditionTitle}{ملحق الإغلاق المُعاد تنضيده للشاشة}
 \newcommand*{\OLSupplementEditionScope}{الوحدات الثمانون الواقعة خارج مسار القارئ}
 \newcommand*{\OLSecondaryEditionSubtitleBlock}{%
-  \vspace{0.55cm}%
-  {\Large\foreignlanguage{english}{Screen-Optimized Closure Supplement}\par}%
+  \vspace{0.35cm}%
+  {\fontsize{15pt}{18pt}\selectfont
+    \foreignlanguage{english}{Screen-Optimized Closure Supplement}\par}%
 }
 \newcommand*{\OLReleaseDOIBlock}{%
   {\large المعرّف الرقمي المفهومي الثابت:
   \babelsublr{10.5281/zenodo.21921850}\par}%
 }
-\AddToHook{begindocument/before}{%
-  \hypersetup{pdfstartview=FitH,pdfpagelayout=OneColumn,pdfpagemode=UseOutlines}%
+% The retained closure sequence ends with a heading-only Chapter 8 driver
+% immediately followed by the Part II driver. Memoir normally clears before
+% every part; suppress that one redundant clear. All other part clears retain
+% exact memoir behaviour. This is the proven FA transition implementation.
+\makeatletter
+\newcommand*{\OLScreenDefaultPartClear}{%
+  \if@openright
+    \cleardoublepage
+  \else
+    \clearpage
+  \fi
 }
-
+\newcommand*{\OLScreenInstallPartTransition}{%
+  \renewcommand{\@setuppart}{%
+    \ifnum\value{chapter}=8\relax
+      \ifnum\value{part}=1\relax
+        \par
+      \else
+        \OLScreenDefaultPartClear
+      \fi
+    \else
+      \OLScreenDefaultPartClear
+    \fi
+    \thispagestyle{part}%
+    \if@twocolumn
+      \onecolumn
+      \@tempswatrue
+    \else
+      \@tempswafalse
+    \fi
+    \beforepartskip
+  }%
+}
+\makeatother
+\AddToHook{begindocument/before}{%
+  \OLScreenInstallPartTransition
+  \let\sFmla\OLScreenSignedFormula
+  \let\OLScreenSavedCenter\center
+  \let\OLScreenSavedEndCenter\endcenter
+  \renewenvironment{center}{%
+    \OLScreenSavedCenter
+    \ifnum\value{chapter}=48\relax
+      \ifnum\value{section}=4\relax
+        \let\OLScreenSavedCenterCR\\
+        \let\\\OLScreenCompactCenterCR
+      \fi
+    \fi
+  }{%
+    \ifnum\value{chapter}=48\relax
+      \ifnum\value{section}=4\relax
+        \let\\\OLScreenSavedCenterCR
+      \fi
+    \fi
+    \OLScreenSavedEndCenter
+  }%
+  \allowdisplaybreaks[4]%
+  \renewenvironment{sidewaysfigure}{\begin{figure}}{\end{figure}}%
+  \aliaspagestyle{part}{empty}%
+  \renewcommand*{\beforepartskip}{\null\vspace*{8pt}}%
+  \renewcommand*{\midpartskip}{\par\vskip4pt}%
+  \renewcommand*{\afterpartskip}{\par\vskip8pt}%
+  % Chapter 8 follows a long Chapter 7 tail whose residual space can hold its
+  % heading but not the Part II introduction. Move only that transition as a
+  % unit; retain the compact six-line rule for every other replayed QA unit.
+  \renewcommand*{\clearforchapter}{%
+    \par
+    \ifnum\value{chapter}=7\relax
+      \clearpage
+    \else
+      \Needspace{6\baselineskip}%
+    \fi
+  }%
+  \setlength{\beforechapskip}{0pt}%
+  \setlength{\midchapskip}{0.25\baselineskip}%
+  \setlength{\afterchapskip}{0.55\baselineskip}%
+  \hypersetup{pdfstartview=Fit,pdfpagelayout=OneColumn,pdfpagemode=UseOutlines}%
+}
 \input{open-logic-closure-supplement-ar.tex}

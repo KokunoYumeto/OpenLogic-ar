@@ -1,17 +1,18 @@
-# تنقيح المسارات العامة
+# تنقيح المسارات العامة لأدلة الشاشة 16:9
 
-تبقى تقارير LOG وBLG الخام في مخرجات البناء الخاصة ولا تُنشر. استُبدلت جميع
-صور اسم المستخدم وجذر ملف المستخدم في النسخ العامة بعلامات `<USER>` أو
-`<USER_HOME>` أو `<USERS>`. بعد الاستبدال، أعاد البحث البايتي صفر نتيجة لاسم
-المستخدم أو لصيغ جذور المستخدم في Windows.
+استُبدلت كل صورة لـ`C:\Users\Floris` و`C:/Users/Floris` في تقارير LOG وFLS
+وBLG المنشورة بالعلامة `<USER_HOME>`. وحُوّلت حقول مسار الإدخال والإخراج في
+إيصالَي إصلاح الروابط إلى أسماء عامة داخل `private-build/` و`release/`.
+بلغ عدد الاستبدالات النصية 2927، وأعاد الفحص صفراً لاسم المستخدم أو لجذر
+`C:\Users` و`C:/Users` داخل ملفات الحزمة العامة.
 
-يغيّر التنقيح الإيصالات النصية فقط. لم تتغير ملفات PDF 05 و06، ولا المشغّلات،
-ولا ملفات هدف الترجمة. تسجل `inventories/RAW_BUILD_EVIDENCE_SHA256.tsv`
-هاشات الإيصالات الخام، وتسجل `inventories/SCREEN_BUNDLE_SHA256.tsv` هاشات
-النسخ العامة.
+لا يغيّر التنقيح ملفات PDF أو المشغّلات أو ملفات الهدف أو قياسات الإصلاح.
+تسجل قائمة `RAW_SCREEN_BUILD_EVIDENCE_SHA256.tsv` هاشات السجلات الخام،
+وتسجل قائمة الحزمة هاشات النسخ العامة.
 
 ## English descriptor
 
-Private user paths in the published LOG and BLG receipts were replaced with
-public placeholders. Raw receipt hashes are retained separately. No PDF,
-translation source, wrapper, manifest, or binding byte was changed.
+All private user-home spellings in the published LOG/FLS/BLG records were
+replaced with `<USER_HOME>`, and repair-receipt paths were made portable.
+No PDF, TeX wrapper, translation target, link mapping, or semantic invariant
+was changed.

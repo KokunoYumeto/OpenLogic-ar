@@ -96,13 +96,20 @@ pwsh -NoProfile -File .\build\BUILD.ps1 `
 ملفا PDF غير موسومين بنيويًا، واستخراج الرياضيات والنص ثنائي الاتجاه غير
 كامل؛ لذلك لا ينشئ نجاح البناء ادعاء PDF/UA أو نفاذية أو مراجعة بشرية عربية.
 
-## إعادة التنضيد الإضافية للشاشة
+## إعادة التدفق المصحّحة للشاشة 16:9
 
-يبقى هذا المستند مرجع بناء تنسيق الطباعة ذي 819 و123 صفحة. تُبنى إضافة الشاشة
-بمشغّلات مستقلة وبواسطة `build/BUILD_SCREEN.ps1`، وتعرض الوحدات الـ722 نفسها
-في 946 و136 صفحة. ترد المتطلبات والهاشات والبوابات المستقلة في
-`build/BUILD_SCREEN_REQUIREMENTS.md`. لا تُكتب أصول الطباعة 00 إلى 04 في هذه
-العملية.
+يبقى ما سبق مرجع بناء تنسيق الطباعة ذي 819 و123 صفحة وDOI دقيق
+`10.5281/zenodo.21987686`. أمّا إصدار الشاشة الحالي فهو
+`OLP-0722-REFLOW-16X9-20260819`، وDOI الدقيق لبياناته
+`10.5281/zenodo.22015759`. يظهر داخل ملفّي الشاشة DOI المفهومي
+`10.5281/zenodo.21921850` فقط.
+
+تُبنى إضافة الشاشة بمشغّلين مستقلين وبواسطة `build/BUILD_SCREEN.ps1`، وتعرض
+الوحدات الـ722 نفسها في 1542 و209 صفحات على قياس `960 × 540 bp`. بعد بناء
+TeX الخام يشغّل البرنامج إصلاحًا حتميًا مغلق الفشل لمستطيلات روابط RTL، ثم
+يفحص عدد الصفحات والهندسة وعرض الافتتاح وعدد الروابط والهاشات الخام والنهائية.
+لا تُكتب أصول الطباعة 00 إلى 04 في هذه العملية. ترد البوابات والهاشات في
+`build/BUILD_SCREEN_REQUIREMENTS.md`.
 
 ## English descriptor
 
@@ -110,4 +117,7 @@ Build the 642-unit, 819-page canonical Arabic reader first, including BibTeX,
 then build the separate 80-unit, 123-page closure supplement against the
 reader AUX. Run twice in distinct clean output directories and require
 byte-identical PDFs before release staging. The script performs no Git or
-network operation and refuses to overwrite existing release assets.
+network operation and refuses to overwrite existing release assets. The
+separate 16:9 builder preserves the same 722-unit source, produces 1542- and
+209-page screen PDFs at exactly 960 × 540 points, and applies a fail-closed,
+annotation-only RTL link-rectangle repair before final hash verification.
