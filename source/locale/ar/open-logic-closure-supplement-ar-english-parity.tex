@@ -1,0 +1,44 @@
+% Arabic closure supplement with the pinned English edition's page
+% architecture.  Keep the frozen supplement and complete-reader graph intact.
+% Retain the English 341 pt by 550 pt typeblock and 1.05 line spread, center
+% that block on every Letter page, and make the head register Arabic-safe.
+
+\newcommand*{\OLSupplementPDFTitle}{نص المنطق المفتوح — ملحق الإغلاق العربي بتخطيط مطابق للأصل الإنجليزي}
+\newcommand*{\OLSupplementEditionTitle}{ملحق الإغلاق العربي}
+\newcommand*{\OLSupplementPDFSubject}{ملحق الإغلاق العربي بتخطيط مطابق للأصل الإنجليزي}
+\newcommand*{\OLSecondaryEditionSubtitleBlock}{%
+  \vspace{0.6cm}%
+  {\large\foreignlanguage{english}{Arabic closure supplement in the English source layout}\par}%
+}
+\newcommand*{\OLReleaseConceptDOI}{10.5281/zenodo.21921850}
+\newcommand*{\OLReleaseDOIBlock}{%
+  {\large DOI المفهومي الثابت: \babelsublr{\OLReleaseConceptDOI}\par}%
+}
+
+\AddToHook{class/memoir/after}{%
+  \linespread{1.05}%
+  \settypeblocksize{550pt}{341pt}{*}%
+  % A 0.0001 pt guard prevents memoir's default whole-point truncation from
+  % turning the requested 341 pt block into 340 pt.
+  \setlrmarginsandblock{136.6474pt}{136.6474pt}{*}%
+  \setulmarginsandblock{122.484995pt}{122.484995pt}{*}%
+  \setheadfoot{14pt}{25.29494pt}%
+  \checkandfixthelayout[fixed]%
+  % In RTL output, increasing these registers moves the physical box left.
+  \addtolength{\oddsidemargin}{0.37740pt}%
+  \addtolength{\evensidemargin}{0.37740pt}%
+}
+
+% xr-hyper must resolve against the parity reader AUX generated in the same
+% output directory, not against an older release-lane AUX.
+\newcommand*{\OLCompleteReaderJob}{open-logic-complete-ar-english-parity}
+
+\AddToHook{begindocument/before}{%
+  \hypersetup{%
+    pdfstartview=FitH,%
+    pdfpagelayout=OneColumn,%
+    pdfpagemode=UseOutlines%
+  }%
+}
+
+\input{open-logic-closure-supplement-ar.tex}

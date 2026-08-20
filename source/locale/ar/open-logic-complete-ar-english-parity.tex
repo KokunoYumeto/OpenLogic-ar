@@ -1,0 +1,70 @@
+% Arabic reader with the pinned English complete edition's page architecture.
+%
+% This wrapper is intentionally additive and minimal.  The frozen Arabic
+% driver owns the content graph, fonts, bidi behavior, headings, and floats.
+% Retain the English 341 pt by 550 pt typeblock and 1.05 line spread, but
+% center that block on each Letter page rather than across a printed spread.
+% The slightly taller head register accommodates Arabic glyph extents without
+% changing the typeblock, hierarchy, body size, or leading.
+
+% Arabic-first release identity.  Embed only the stable concept DOI so this
+% corrected release cannot be confused with an earlier exact Zenodo version.
+\newcommand*{\OLCompletePDFTitle}{نص المنطق المفتوح — النسخة العربية الكاملة بتخطيط مطابق للأصل الإنجليزي}
+\newcommand*{\OLCompleteEditionSubtitle}{النسخة العربية الكاملة بتخطيط مطابق للأصل الإنجليزي}
+\newcommand*{\OLSecondaryEditionSubtitleBlock}{%
+  \vspace{0.6cm}%
+  {\large\foreignlanguage{english}{Complete Arabic edition in the English source layout}\par}%
+}
+\newcommand*{\OLReleaseConceptDOI}{10.5281/zenodo.21921850}
+\newcommand*{\OLReleaseDOIBlock}{%
+  {\large DOI المفهومي الثابت: \babelsublr{\OLReleaseConceptDOI}\par}%
+}
+
+\AddToHook{class/memoir/after}{%
+  \linespread{1.05}%
+  \settypeblocksize{550pt}{341pt}{*}%
+  % A 0.0001 pt guard prevents memoir's default whole-point truncation from
+  % turning the requested 341 pt block into 340 pt.
+  \setlrmarginsandblock{136.6474pt}{136.6474pt}{*}%
+  \setulmarginsandblock{122.484995pt}{122.484995pt}{*}%
+  \setheadfoot{14pt}{25.29494pt}%
+  \checkandfixthelayout[fixed]%
+  % Correct the measured PDF origin after retaining the full 341 pt width.
+  % The target physical margins are 136.137 bp on both sides.
+  % In RTL output, increasing these registers moves the physical box left.
+  \addtolength{\oddsidemargin}{0.37740pt}%
+  \addtolength{\evensidemargin}{0.37740pt}%
+}
+
+% Babel's RTL output direction displaces the box mechanics of TikZ assets and
+% rotating floats even though their mathematical contents follow the English
+% source.  Keep each complete graphical box in LuaTeX's LTR box direction;
+% the surrounding prose immediately returns to Arabic RTL when the local
+% group ends.  The frozen translation sources and content graph stay intact.
+\makeatletter
+\newcommand*{\OLParityGraphicLTRBefore}{\begingroup\bbl@setdirs\z@}
+\newcommand*{\OLParityGraphicLTRAfter}{\endgroup}
+\newcommand*{\OLParityInstallGraphicDirectionFixes}{%
+  \let\OLParityOriginalAsset\olasset
+  \RenewDocumentCommand{\olasset}{O{\olphotowidth}m}{%
+    \begingroup\bbl@setdirs\z@
+    \OLParityOriginalAsset[##1]{##2}%
+    \endgroup
+  }%
+  \AddToHook{env/tikzpicture/before}{\OLParityGraphicLTRBefore}%
+  \AddToHook{env/tikzpicture/after}{\OLParityGraphicLTRAfter}%
+  \AddToHook{env/sidewaysfigure/before}{\OLParityGraphicLTRBefore}%
+  \AddToHook{env/sidewaysfigure/after}{\OLParityGraphicLTRAfter}%
+}
+\makeatother
+
+\AddToHook{begindocument/before}{%
+  \OLParityInstallGraphicDirectionFixes
+  \hypersetup{%
+    pdfstartview=FitH,%
+    pdfpagelayout=OneColumn,%
+    pdfpagemode=UseOutlines%
+  }%
+}
+
+\input{open-logic-complete-ar.tex}

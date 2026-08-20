@@ -26,7 +26,8 @@
 % Resolve references against the complete-reader job without adding these
 % retained QA units to the canonical reader graph.
 \usepackage{xr-hyper}
-\externaldocument{open-logic-complete-ar}
+\providecommand*{\OLCompleteReaderJob}{open-logic-complete-ar}
+\externaldocument{\OLCompleteReaderJob}
 
 \input{\olpath/sty/open-logic.sty}
 \input{\olpath/sty/open-logic-defer.sty}
@@ -127,16 +128,25 @@
 \babelfont[arabic]{tt}{DejaVu Sans Mono}
 
 \AtBeginDocument{\selectlanguage{arabic}}
+\providecommand*{\OLSupplementPDFTitle}{نص المنطق المفتوح — ملحق إغلاق الوحدات الخارجة عن مسار القارئ}
+\providecommand*{\OLSupplementEditionTitle}{ملحق الإغلاق لضمان الجودة}
+\providecommand*{\OLSupplementEditionScope}{الوحدات الثمانون الواقعة خارج مسار القارئ}
+\providecommand*{\OLSupplementPDFSubject}{\OLSupplementEditionTitle}
+\providecommand*{\OLSecondaryEditionSubtitleBlock}{}
 \hypersetup{
   unicode=true,
   pdflang={ar},
-  pdftitle={نص المنطق المفتوح — ملحق إغلاق الوحدات الخارجة عن مسار القارئ},
+  pdftitle={\OLSupplementPDFTitle},
   pdfauthor={Open Logic Project},
-  pdfsubject={Contributor: AI typesetting \& translation}
+  pdfsubject={\OLSupplementPDFSubject}
 }
 
-\newcommand*{\OLReleaseConceptDOI}{10.5281/zenodo.21921850}
-\newcommand*{\OLReleaseVersionDOI}{10.5281/zenodo.21987686}
+\providecommand*{\OLReleaseConceptDOI}{10.5281/zenodo.21921850}
+\providecommand*{\OLReleaseVersionDOI}{10.5281/zenodo.21987686}
+\providecommand*{\OLReleaseDOIBlock}{%
+  {\large المعرّف الرقمي لهذا الإصدار:
+  \babelsublr{\OLReleaseVersionDOI}\par}%
+}
 \newcommand*{\OLReleaseRepository}{https://github.com/KokunoYumeto/OpenLogic-ar}
 
 \makeatletter
@@ -167,16 +177,16 @@
 \vspace*{2.5cm}
 {\HUGE\bfseries\sffamily نص المنطق المفتوح\par}
 \vspace{1.2cm}
-{\huge ملحق الإغلاق لضمان الجودة\par}
+{\huge \OLSupplementEditionTitle\par}
 \vspace{1.2cm}
-{\Large الوحدات الثمانون الواقعة خارج مسار القارئ\par}
+{\Large \OLSupplementEditionScope\par}
+\OLSecondaryEditionSubtitleBlock
 \vspace{1.5cm}
 {\large العربية الفصحى المعاصرة العالمية — \babelsublr{ar}\par}
 \vspace{1.5cm}
 {\large المصدر: مشروع المنطق المفتوح، الالتزام
 \babelsublr{\texttt{9620cc73f9c8e0ad003c514a5d3748f29611c4c0}}\par}
-{\large المعرّف الرقمي لهذا الإصدار:
-\babelsublr{\OLReleaseVersionDOI}\par}
+\OLReleaseDOIBlock
 \vspace{0.8cm}
 {\Large\bfseries ملحق الإغلاق المرافق للنسخة الكاملة\par}
 \end{center}
@@ -195,8 +205,7 @@
 هذه ترجمة معدّلة بموجب رخصة
 \href{https://creativecommons.org/licenses/by/4.0/}{CC BY 4.0}.
 يُنسب الأصل إلى مشروع المنطق المفتوح، ولا يُفهم من هذا الملحق أي تأييد
-من المشروع. ساهمت \foreignlanguage{english}{AI typesetting \& translation}
-في الترجمة والتصفيف بتوجيه فلوريس؛ ولم تُجرَ مراجعة بشرية عربية.
+من المشروع. لم تُجرَ مراجعة بشرية عربية لهذا الملحق.
 
 \end{titlingpage}
 
