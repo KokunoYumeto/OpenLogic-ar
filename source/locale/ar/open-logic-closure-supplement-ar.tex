@@ -27,7 +27,8 @@
 % retained QA units to the canonical reader graph.
 \usepackage{xr-hyper}
 \providecommand*{\OLCompleteReaderJob}{open-logic-complete-ar}
-\externaldocument{\OLCompleteReaderJob}
+\providecommand*{\OLCompleteReaderPDF}{\OLCompleteReaderJob.pdf}
+\externaldocument{\OLCompleteReaderJob}[\OLCompleteReaderPDF]
 
 \input{\olpath/sty/open-logic.sty}
 \input{\olpath/sty/open-logic-defer.sty}
@@ -126,6 +127,11 @@
   Scale=1.08
 ]{Scheherazade-Regular.ttf}
 \babelfont[arabic]{tt}{DejaVu Sans Mono}
+
+% Use the same notation-profile layer as the complete reader.  The translated
+% 722-file closure is never rewritten to manufacture a second presentation.
+\providecommand*{\OLNotationProfile}{international}
+\input{open-logic-notation-profile-ar.tex}
 
 \AtBeginDocument{\selectlanguage{arabic}}
 \providecommand*{\OLSupplementPDFTitle}{نص المنطق المفتوح — ملحق إغلاق الوحدات الخارجة عن مسار القارئ}

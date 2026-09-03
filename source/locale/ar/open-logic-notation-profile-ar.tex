@@ -1,0 +1,146 @@
+% Typed Arabic mathematical-notation presentation profiles.
+%
+% This file changes presentation only.  It never reverses a formula token
+% stream, edits a translated content file, or guesses a variable substitution.
+
+\providecommand*{\OLNotationProfileArabicName}{}
+\providecommand*{\OLNotationProfileEnglishName}{}
+\providecommand*{\OLNotationProfileTechnicalSummary}{}
+
+\makeatletter
+\edef\OLNotationProfileResolved{\OLNotationProfile}
+\def\OLNotationProfileInternational{international}
+\def\OLNotationProfileMachrek{machrek}
+
+\ifx\OLNotationProfileResolved\OLNotationProfileInternational
+  \renewcommand*{\OLNotationProfileArabicName}{الترميز الرياضي الدولي بالأرقام 0--9}
+  \renewcommand*{\OLNotationProfileEnglishName}{International notation (digits 0--9)}
+  \renewcommand*{\OLNotationProfileTechnicalSummary}{%
+    formula-direction=LTR; math-digits=U+0030--U+0039; source-transform=none}
+  \AddToHook{begindocument/end}{%
+    \typeout{OL-NOTATION-PROFILE=international}%
+    \typeout{OL-NOTATION-FORMULA-DIRECTION=LTR}%
+    \typeout{OL-NOTATION-MATH-DIGITS=U+0030--U+0039}%
+  }
+\else\ifx\OLNotationProfileResolved\OLNotationProfileMachrek
+  \renewcommand*{\OLNotationProfileArabicName}{ترميز المشرق بالأرقام العربية الهندية ٠--٩}
+  \renewcommand*{\OLNotationProfileEnglishName}{Machrek notation (Arabic-Indic digits)}
+  \renewcommand*{\OLNotationProfileTechnicalSummary}{%
+    formula-direction=LTR; source-digits=U+0030--U+0039;
+    visual-digits=U+0660--U+0669; source-transform=none}
+
+  % A dedicated face provides Arabic-Indic digit presentation.  The
+  % bundled OFL derivative maps ASCII character slots to XITS Math's Arabic-
+  % Indic digit outlines.  Digits are made math-active and expand to an
+  % ordinary math atom containing a direct text-font glyph selected at the
+  % current math style.  This avoids mutable Unicode math-family state in
+  % headings while retaining ASCII source tokens and LTR formula structure.
+  \newcommand*{\OLMachrekMathDigit}[1]{%
+    \mathchoice
+      {\hbox{\OLArabicMathDigitsText #1}}%
+      {\hbox{\OLArabicMathDigitsText #1}}%
+      {\hbox{\OLArabicMathDigitsScript #1}}%
+      {\hbox{\OLArabicMathDigitsScriptScript #1}}%
+  }
+  % The outer group is also syntactic: after ^ or _, TeX requires a grouped
+  % field when an active digit expands to the multi-token \mathchoice form.
+  \def\OLMachrekMathDigitZero{{\OLMachrekMathDigit{0}}}
+  \def\OLMachrekMathDigitOne{{\OLMachrekMathDigit{1}}}
+  \def\OLMachrekMathDigitTwo{{\OLMachrekMathDigit{2}}}
+  \def\OLMachrekMathDigitThree{{\OLMachrekMathDigit{3}}}
+  \def\OLMachrekMathDigitFour{{\OLMachrekMathDigit{4}}}
+  \def\OLMachrekMathDigitFive{{\OLMachrekMathDigit{5}}}
+  \def\OLMachrekMathDigitSix{{\OLMachrekMathDigit{6}}}
+  \def\OLMachrekMathDigitSeven{{\OLMachrekMathDigit{7}}}
+  \def\OLMachrekMathDigitEight{{\OLMachrekMathDigit{8}}}
+  \def\OLMachrekMathDigitNine{{\OLMachrekMathDigit{9}}}
+
+  % These definitions must remain expandable: TeX expands a bare math-active
+  % digit while it scans a one-token subscript or superscript such as x_i^2.
+  % A protected definition reaches that scanner as an unexpanded command and
+  % produces a malformed script field.
+  \begingroup\lccode`\~=`0
+    \lowercase{\endgroup\def~}{\OLMachrekMathDigitZero}
+  \begingroup\lccode`\~=`1
+    \lowercase{\endgroup\def~}{\OLMachrekMathDigitOne}
+  \begingroup\lccode`\~=`2
+    \lowercase{\endgroup\def~}{\OLMachrekMathDigitTwo}
+  \begingroup\lccode`\~=`3
+    \lowercase{\endgroup\def~}{\OLMachrekMathDigitThree}
+  \begingroup\lccode`\~=`4
+    \lowercase{\endgroup\def~}{\OLMachrekMathDigitFour}
+  \begingroup\lccode`\~=`5
+    \lowercase{\endgroup\def~}{\OLMachrekMathDigitFive}
+  \begingroup\lccode`\~=`6
+    \lowercase{\endgroup\def~}{\OLMachrekMathDigitSix}
+  \begingroup\lccode`\~=`7
+    \lowercase{\endgroup\def~}{\OLMachrekMathDigitSeven}
+  \begingroup\lccode`\~=`8
+    \lowercase{\endgroup\def~}{\OLMachrekMathDigitEight}
+  \begingroup\lccode`\~=`9
+    \lowercase{\endgroup\def~}{\OLMachrekMathDigitNine}
+
+  \newcommand*{\OLActivateMachrekMathDigitTokens}{%
+    \mathcode`0="8000
+    \mathcode`1="8000
+    \mathcode`2="8000
+    \mathcode`3="8000
+    \mathcode`4="8000
+    \mathcode`5="8000
+    \mathcode`6="8000
+    \mathcode`7="8000
+    \mathcode`8="8000
+    \mathcode`9="8000
+  }
+
+  % The url package intentionally typesets addresses in a private math group.
+  % Restore ordinary family-zero digit slots there so an Arabic math profile
+  % can never alter the visible or copyable spelling of a URL.
+  \newcommand*{\OLUseInternationalURLDigits}{%
+    \Umathcode`0=0 0 "0030
+    \Umathcode`1=0 0 "0031
+    \Umathcode`2=0 0 "0032
+    \Umathcode`3=0 0 "0033
+    \Umathcode`4=0 0 "0034
+    \Umathcode`5=0 0 "0035
+    \Umathcode`6=0 0 "0036
+    \Umathcode`7=0 0 "0037
+    \Umathcode`8=0 0 "0038
+    \Umathcode`9=0 0 "0039
+  }
+  \AtBeginDocument{%
+    \@ifundefined{Url@MathSetup}{}{%
+      \g@addto@macro\Url@MathSetup{\OLUseInternationalURLDigits}%
+    }%
+  }
+
+  \newcommand*{\OLActivateMachrekMathDigits}{%
+    \check@mathfonts
+    \font\OLArabicMathDigitsText=
+      "[fonts/OpenLogicMachrekDigits-Regular.otf]:mode=base" at \tf@size pt
+    \font\OLArabicMathDigitsScript=
+      "[fonts/OpenLogicMachrekDigits-Regular.otf]:mode=base" at \sf@size pt
+    \font\OLArabicMathDigitsScriptScript=
+      "[fonts/OpenLogicMachrekDigits-Regular.otf]:mode=base" at \ssf@size pt
+    \OLActivateMachrekMathDigitTokens
+    \typeout{OL-NOTATION-PROFILE=machrek}%
+    \typeout{OL-NOTATION-FORMULA-DIRECTION=LTR}%
+    \typeout{OL-NOTATION-MATH-SOURCE-DIGITS=U+0030--U+0039}%
+    \typeout{OL-NOTATION-MATH-VISUAL-DIGITS=U+0660--U+0669}%
+    \typeout{OL-NOTATION-MATH-DIGIT-FONT=OpenLogicMachrekDigits-Regular}%
+  }
+  \AddToHook{begindocument/end}{\OLActivateMachrekMathDigits}
+
+  % Explicit, opt-in punctuation for future source-authored formula loci.  It
+  % is intentionally not bound to the ASCII period/comma, because those tokens
+  % also serve non-decimal purposes in the frozen logic corpus.
+  \DeclareRobustCommand{\OLMachrekDecimalSeparator}{%
+    \mathpunct{\hbox{\OLArabicMathDigitsText\char"066B}}}
+  \DeclareRobustCommand{\OLMachrekThousandsSeparator}{%
+    \mathpunct{\hbox{\OLArabicMathDigitsText\char"066C}}}
+\else
+  \PackageError{open-logic-notation-profile-ar}
+    {Unknown notation profile `\OLNotationProfile'}
+    {Use `international' or `machrek'.}
+\fi\fi
+\makeatother

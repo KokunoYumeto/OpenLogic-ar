@@ -1,0 +1,49 @@
+% Reproducible readable US Letter layout shared by both notation profiles.
+% It reconstructs the measured public R2 geometry while keeping one source.
+
+\PassOptionsToClass{14pt,oneside}{memoir}
+\RequirePackage{fix-cm}
+\AddToHook{class/memoir/after}{%
+  \linespread{1.05}%
+  \settypeblocksize{650pt}{468pt}{*}%
+  \setlrmarginsandblock{73.1474pt}{73.1474pt}{*}%
+  \setulmarginsandblock{72.484995pt}{72.484995pt}{*}%
+  \setheadfoot{18.5pt}{25.29494pt}%
+  \setheaderspaces{*}{*}{2}%
+  \checkandfixthelayout[fixed]%
+  % Compensate for the RTL output origin so the 468 pt block is physically
+  % centered at 72.874 PDF-point side margins.
+  \addtolength{\oddsidemargin}{0.37740pt}%
+  \addtolength{\evensidemargin}{0.37740pt}%
+  \raggedbottom
+  \setlength{\emergencystretch}{2em}%
+}
+
+% Babel's RTL output direction can displace complete graphical boxes even
+% though their mathematical contents follow the LTR source.  Constrain only
+% the containing boxes; surrounding prose immediately returns to Arabic RTL.
+\makeatletter
+\newcommand*{\OLReadableGraphicLTRBefore}{\begingroup\bbl@setdirs\z@}
+\newcommand*{\OLReadableGraphicLTRAfter}{\endgroup}
+\newcommand*{\OLReadableInstallGraphicDirectionFixes}{%
+  \let\OLReadableOriginalAsset\olasset
+  \RenewDocumentCommand{\olasset}{O{\olphotowidth}m}{%
+    \begingroup\bbl@setdirs\z@
+    \OLReadableOriginalAsset[##1]{##2}%
+    \endgroup
+  }%
+  \AddToHook{env/tikzpicture/before}{\OLReadableGraphicLTRBefore}%
+  \AddToHook{env/tikzpicture/after}{\OLReadableGraphicLTRAfter}%
+  \AddToHook{env/sidewaysfigure/before}{\OLReadableGraphicLTRBefore}%
+  \AddToHook{env/sidewaysfigure/after}{\OLReadableGraphicLTRAfter}%
+}
+\makeatother
+
+\AddToHook{begindocument/before}{%
+  \OLReadableInstallGraphicDirectionFixes
+  \hypersetup{%
+    pdfstartview=FitH,%
+    pdfpagelayout=OneColumn,%
+    pdfpagemode=UseOutlines%
+  }%
+}

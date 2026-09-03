@@ -1,0 +1,66 @@
+{
+  "schema": "openlogic-arabic-notation-profile-v1",
+  "source_closure_units": 722,
+  "source_transform": "none",
+  "profiles": {
+    "international": {
+      "formula_direction": "LTR",
+      "math_digit_input": "U+0030-U+0039",
+      "math_digit_glyphs": "U+0030-U+0039",
+      "decimal_separator": "source token retained",
+      "variables": "source Latin and Greek retained",
+      "summation": "source Greek sigma retained",
+      "named_functions": "source spelling retained"
+    },
+    "machrek": {
+      "formula_direction": "LTR",
+      "math_digit_input": "U+0030-U+0039",
+      "math_digit_glyphs": "Arabic-Indic U+0660-U+0669 outlines through the renamed OFL OpenLogicMachrekDigits face; LuaTeX character slots remain U+0030-U+0039",
+      "decimal_separator": "source token retained; explicit U+066B macro available only for audited loci",
+      "thousands_separator": "source token retained; explicit U+066C macro available only for audited loci",
+      "variables": "source Latin and Greek retained",
+      "summation": "source Greek sigma retained",
+      "named_functions": "source spelling retained"
+    }
+  },
+  "typed_exceptions": [
+    {
+      "class": "formula direction",
+      "decision": "Never set global RTL math direction or reverse TeX tokens.",
+      "evidence": [
+        "W3C Arabic Mathematical Notation: text and mathematical direction are distinct",
+        "bounded LuaLaTeX probe: TRT reverses multi-digit numbers and Latin function/operator order",
+        "DAM2018ENAR scan pages 174, 189, 418, 700, and 760 use LTR formulas inside RTL Arabic prose"
+      ]
+    },
+    {
+      "class": "summation",
+      "decision": "Retain Greek sigma.",
+      "evidence": [
+        "DAM2018ENAR PDF page 700 defines إشارة الجمع and explicitly identifies Greek sigma Σ"
+      ]
+    },
+    {
+      "class": "variables",
+      "decision": "Retain source Latin and Greek variable alphabets unless an author explicitly supplies a semantic mapping.",
+      "evidence": [
+        "DAM2018ENAR PDF page 760 defines متغير while using Latin variables throughout neighboring formulas",
+        "blind alphabet substitution would conflate identifiers and mathematical constants"
+      ]
+    }
+  ],
+  "legacy_compatibility": {
+    "rydarab": "reference only",
+    "ramzarab": "reference only",
+    "reason": "The archived implementation requires ArabTeX, reverses token streams, globally rebinds core math primitives, and uses legacy 8-bit fonts."
+  },
+  "machrek_digit_font": {
+    "family": "OpenLogic Machrek Digits",
+    "postscript_name": "OpenLogicMachrekDigits-Regular",
+    "derivation": "XITS Math 1.302 with only the ASCII digit cmap slots remapped to its Arabic-Indic digit outlines and all primary names changed",
+    "license": "SIL Open Font License 1.1",
+    "source_sha256": "3025792ADB0B7072ACE08BF5726D341DE32F2254612DDEC6DD98271A8DD29689",
+    "output_sha256": "C4F290FB671B1EDF554BD57D31C6CD40CE88099FCA70B8B46B32B3F792A7D7AF",
+    "provenance_receipt": "evidence/notation/MACHREK_DIGIT_FONT_PROVENANCE.json"
+  }
+}
