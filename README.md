@@ -2,10 +2,10 @@
 
 يقدّم هذا المستودع ترجمة عربية كاملة لمحتوى «مشروع المنطق المفتوح» المثبّت، في ملفين مستقلين مكتملين لا يحتاج أيّ منهما إلى ملف مرافق:
 
-- [النسخة الكاملة بالترميز الرياضي الدولي — 1153 صفحة](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-complete-dual-notation-20260903/00_OPENLOGIC_ar_COMPLETE_722_UNIT_READER_INTERNATIONAL_NOTATION_OLP-0722.pdf)
-- [النسخة الكاملة بترميز المشرق للأرقام الرياضية — 1154 صفحة](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-complete-dual-notation-20260903/01_OPENLOGIC_ar_COMPLETE_722_UNIT_READER_MACHREK_NOTATION_OLP-0722.pdf)
-- [المصادر وأدلة البناء والتحقق](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-complete-dual-notation-20260903/02_OPENLOGIC_ar_COMPLETE_DUAL_NOTATION_SOURCES_AND_EVIDENCE_OLP-0722.zip)
-- [بيان SHA-256](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-complete-dual-notation-20260903/03_OPENLOGIC_ar_COMPLETE_DUAL_NOTATION_SHA256_OLP-0722.txt)
+- [النسخة الكاملة بالترميز الرياضي الدولي — 1153 صفحة](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-complete-dual-notation-r2-20260903/00_OPENLOGIC_ar_COMPLETE_722_UNIT_READER_INTERNATIONAL_NOTATION_OLP-0722.pdf)
+- [النسخة الكاملة بترميز المشرق للأرقام الرياضية — 1154 صفحة](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-complete-dual-notation-r2-20260903/01_OPENLOGIC_ar_COMPLETE_722_UNIT_READER_MACHREK_NOTATION_OLP-0722.pdf)
+- [المصادر وأدلة البناء والتحقق](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-complete-dual-notation-r2-20260903/02_OPENLOGIC_ar_COMPLETE_DUAL_NOTATION_SOURCES_AND_EVIDENCE_OLP-0722.zip)
+- [بيان SHA-256](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-complete-dual-notation-r2-20260903/03_OPENLOGIC_ar_COMPLETE_DUAL_NOTATION_SHA256_OLP-0722.txt)
 
 ## معنى الاكتمال
 
@@ -20,7 +20,7 @@
 
 المقاس US Letter عمودي. الملفان ثابتَا التخطيط وغير موسومين بنيويًا، ولا يُقدَّمان على أنهما متوافقان مع PDF/UA. حُفظت الإصدارات السابقة في سجل الإصدارات.
 
-المؤلف والمنشئ: Open Logic Project. تعهد المصدر المثبّت: `9620cc73f9c8e0ad003c514a5d3748f29611c4c0`. المعرّف المفهومي الثابت: [10.5281/zenodo.21921850](https://doi.org/10.5281/zenodo.21921850).
+المؤلف والمنشئ: Open Logic Project. حُفظت هوية المصدر المثبّت في حزمة الأدلة التقنية. المعرّف المفهومي الثابت: [10.5281/zenodo.21921850](https://doi.org/10.5281/zenodo.21921850).
 
 ## English
 

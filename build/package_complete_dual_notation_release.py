@@ -11,7 +11,7 @@ import zipfile
 from pathlib import Path, PurePosixPath
 
 
-ARCHIVE_ROOT = "OpenLogic-ar-OLP-0722-complete-dual-notation"
+ARCHIVE_ROOT = "OpenLogic-ar-OLP-0722-complete-dual-notation-r2"
 FIXED_ZIP_TIME = (2026, 9, 3, 0, 0, 0)
 
 ROOT_FILES = (
@@ -46,10 +46,9 @@ EXACT_FILES = (
     "output/pdf/complete-722-v1/00_OPENLOGIC_ar_COMPLETE_722_UNIT_READER_INTERNATIONAL_NOTATION_OLP-0722.assembly.json",
     "output/pdf/complete-722-v1/01_OPENLOGIC_ar_COMPLETE_722_UNIT_READER_MACHREK_NOTATION_OLP-0722.assembly.json",
     "output/pdf/complete-722-v1/OPENLOGIC_ar_COMPLETE_722_DUAL_NOTATION_QA.json",
-    "output/pdf/dual-notation-v4/VISUAL_QA.json",
-    "output/pdf/dual-notation-v5-replay/BUILD_ARTIFACTS.json",
-    "output/pdf/dual-notation-v5-replay/BUILD_CONVERGENCE.json",
-    "output/pdf/dual-notation-v5-replay/OPENLOGIC_ar_DUAL_NOTATION_PDF_QA.json",
+    "output/pdf/complete-722-v1/SOURCE_PROFILE_AUDIT.json",
+    "output/pdf/complete-722-v1/REPRODUCIBILITY.json",
+    "output/pdf/complete-722-v1/VISUAL_QA.json",
 )
 
 TEXT_SUFFIXES = {
@@ -243,7 +242,7 @@ def main() -> int:
     payload = {
         "schema": "openlogic-arabic-complete-dual-notation-packaging-v1",
         "status": "PASS",
-        "version": "OLP-0722-COMPLETE-DUAL-NOTATION-20260903",
+        "version": "OLP-0722-COMPLETE-DUAL-NOTATION-R2-20260903",
         "zip": verification,
         "public_text_scan": {
             "windows_user_paths": 0,
