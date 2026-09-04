@@ -1,5 +1,7 @@
 # نص المنطق المفتوح — نسختان عربيتان كاملتان (722/722)
 
+> هذا الإصدار مدرج في [الفهرس المركزي لترجمات مشروع المنطق المفتوح](https://github.com/KokunoYumeto/OpenLogic-translations)، الذي يفصل بين اكتمال المصادر المترجمة واكتمال ملف القراءة المستقل.
+
 يقدّم هذا المستودع ترجمة عربية كاملة لمحتوى «مشروع المنطق المفتوح» المثبّت، في ملفين مستقلين مكتملين لا يحتاج أيّ منهما إلى ملف مرافق:
 
 - [النسخة الكاملة بالترميز الرياضي الدولي — 1153 صفحة](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-complete-dual-notation-r2-20260903/00_OPENLOGIC_ar_COMPLETE_722_UNIT_READER_INTERNATIONAL_NOTATION_OLP-0722.pdf)
