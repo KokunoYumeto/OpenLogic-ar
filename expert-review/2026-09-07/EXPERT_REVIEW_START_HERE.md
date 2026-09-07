@@ -1,5 +1,10 @@
 Working snapshot — 7 September 2026. [All recorded choices](ALL_RECORDED_CHOICES.md).
 
+**Latest checked supplement:** [16 decisions and corrections, with Arabic explanations and exact source locations](supplement-16-choices/README.md).
+These update function wording, enumerability and modal/many-valued passages.
+The 30-choice queue below remains the earlier checked selection; the supplement
+is additional source-review work, not a newly built Classical book.
+
 # Start here: technical choices to double-check / ابدأ هنا: مصطلحات تقنية يُرجى تدقيقها
 
 This is the short human queue: **30** genuinely technical or repair-related choices selected from **879** ledger flags. Routine auto-mined prose stays in the exhaustive archive instead of filling this first screen. Each term links to every distinct recorded occurrence.
