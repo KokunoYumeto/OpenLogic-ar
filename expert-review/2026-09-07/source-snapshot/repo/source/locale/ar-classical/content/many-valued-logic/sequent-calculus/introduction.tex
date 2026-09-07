@@ -1,0 +1,80 @@
+% Part: many-valued-logic
+% Chapter: sequent-calculus
+% Section: introduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mvl}{seq}{int}
+
+\olsection{مقدمة}
+
+حساب التتابعيات في المنطق الكلاسيكي نسق !!{derivation} يجمع البساطة
+إلى الفعالية. ولا يختص إمكان بنائه بذلك المنطق؛ فمتى عُرّف منطق متعدد
+القيم بمصفوفة كانت مجموعة قيمها~$V$ منتهية، أمكن أن يُجعل له حساب
+تتابعيات. ولبيان الطريق إلى ذلك، ننظر أولًا في دلالة التتابعية الكلاسيكية
+وفي صورة قواعد الاستدلال عليها.
+
+تذكر الآن أن التتابعية
+\begin{align*}
+    !A_1, \dots, !A_m & \Sequent !B_1, \dots, !B_n
+\intertext{يمكن تفسيرها بالـ!!{formula}}
+    (!A_1 \land \cdots \land !A_m) & \lif (!B_1 \lor \cdots \lor
+!B_n)
+\end{align*}
+ومعنى ذلك أن !!^a{valuation}~$\pAssign{v}$ \emph{يحقق} التتابعية
+$\Gamma \Sequent \Delta$ متى وفقط متى حصل أحد الأمرين:
+$\pValue{v}(!A) = \False$ لبعض~$!A \in \Gamma$، أو
+$\pValue{v}(!A) = \True$ لبعض~$!A \in \Delta$. وعلى هذا تكون
+التتابعيات الابتدائية~$!A \Sequent !A$ محققة على كل حال؛ إذ لا يخلو
+الأمر من~$\pValue v(!A) = \True$ أو~$\pValue v(!A) = \False$.
+
+فيما يأتي قاعدتا الاستدلال الخاصتان بالشرط في~$\Log{LK}$، بعد حذف
+الصيغ الجانبية~$\Gamma$ و$\Delta$:
+
+\begin{defish}
+    \Axiom$ \fCenter !A$
+    \Axiom$ !B \fCenter $
+    \RightLabel{\LeftR{\lif}}
+    \BinaryInf$ !A \lif !B \fCenter $
+    \DisplayProof
+    \hfill
+    \Axiom$ !A \fCenter !B$
+    \RightLabel{\RightR{\lif}}
+    \UnaryInf$ \fCenter !A \lif !B $
+    \DisplayProof
+\end{defish}
+
+فلنقرأ القاعدتين على مقتضى هذه الدلالة. تفيد قاعدة
+$\LeftR{\lif}$ أن اجتماع~$\pValue v(!A) = \True$ و
+$\pValue v(!B) = \False$ يقتضي~$\pValue v(!A \lif !B) = \False$.
+وتفيد قاعدة~$\RightR{\lif}$ أن حصول أحد الأمرين:
+$\pValue v(!A) = \False$ أو~$\pValue v(!B) = \True$، يقتضي
+$\pValue v(!A \lif !B) = \True$. بل يصح العكس في كل منهما،
+فتكون الدلالة تكافؤًا. وليس هذا شأن قاعدتي~$\LeftR{\land}$ و$\RightR{\lor}$
+في صورتيهما القياسيتين، غير أن لكل منهما صورة أخرى يتحقق فيها التكافؤ:
+
+\begin{defish}
+    \Axiom$!A, !B, \Gamma \fCenter \Delta$
+    \RightLabel{\LeftR{\land}}
+    \UnaryInf$!A \land !B, \Gamma \fCenter \Delta$
+    \DisplayProof
+    \hfill
+    \Axiom$ \Gamma \fCenter \Delta, !A, !B$
+    \RightLabel{\RightR{\lor}}
+    \UnaryInf$ \Gamma \fCenter \Delta, !A \lor !B$
+    \DisplayProof
+\end{defish}
+
+فإذا نقلنا هذا المعنى إلى منطق ذي~$n$ من القيم، كان حساب التتابعيات
+ذا~$n$ من المواضع، لا موضعين فحسب: لكل قيمة صدق موضع يخصها.
+ومثال ذلك المنطق الثلاثي القيم حيث~$V = \{\False, \Undef, \True\}$؛
+فالتتابعية فيه على صورة~$\Gamma \mid \Pi \mid \Delta$. ويحققها
+!!a{valuation}~$\pAssign v$ متى وفقط متى صدق أحد الشروط الآتية:
+$\pValue{v}(!A) = \False$ لبعض~$!A \in \Gamma$، أو
+$\pValue{v}(!A) = \True$ لبعض~$!A \in \Delta$، أو
+$\pValue{v}(!A) = \Undef$ لبعض~$!A \in \Pi$.
+ولذلك كانت التتابعيات الابتدائية~$!A \mid !A \mid !A$ محققة دائمًا.
+
+\end{document}

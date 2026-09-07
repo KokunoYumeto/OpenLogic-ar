@@ -1,0 +1,174 @@
+% Part: first-order-logic
+% Chapter: tableaux
+% Section: provability-propositional
+
+% verification of properties of provability needed for maximally
+% consistent sets in the completeness chapter.
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{tab}{ppr}}
+      {\olfileid{pl}{tab}{ppr}}
+
+\olsection{\usetoken{S}{derivability} والروابط القضيّة}
+
+\begin{explain}
+  نثبت أن علاقة ال!!{derivability}~$\Proves$ للجداول الدلالية قوية بما
+  يكفي لإثبات بعض الحقائق الأساسية المتعلقة بالروابط القضيّة، مثل
+  $!A \land !B \Proves !A$ و$!A, !A \lif !B \Proves !B$ (قاعدة إثبات
+  المقدَّم). وهذه الحقائق لازمة لبرهان مبرهنة الاكتمال.
+\end{explain}
+
+\begin{prop}\ollabel{prop:provability-land}
+  \begin{enumerate}
+  \item \ollabel{prop:provability-land-left} كل من $!A \land !B \Proves
+    !A$ و$!A \land !B \Proves !B$.
+  \item \ollabel{prop:provability-land-right} $!A, !B \Proves !A \land
+    !B$.
+  \end{enumerate}
+\end{prop}
+
+\begin{proof}
+  \begin{enumerate}
+  \item لكل من $\{\sFmla{\False}{!A}, \sFmla{\True}{!A \land !B}\}$ و
+    $\{\sFmla{\False}{!B}, \sFmla{\True}{!A \land !B}\}$
+    !!{tableau}s مغلقة:
+    \begin{oltableau}{}
+      [\sFmla{\False}{\formula{A}}, just=\TAss
+        [\sFmla{\True}{\formula{A} \land \formula{B}}, just=\TAss
+          [\sFmla{\True}{\formula{A}},just={\TRule{\True}{\land}[2]}
+            [\sFmla{\True}{\formula{B}},just={\TRule{\True}{\land}[2]}, close
+            ]
+          ]
+        ]
+      ]
+    \end{oltableau}
+    \begin{oltableau}{}
+      [\sFmla{\False}{\formula{B}}, just=\TAss
+        [\sFmla{\True}{\formula{A} \land \formula{B}}, just=\TAss
+          [\sFmla{\True}{\formula{A}},just={\TRule{\True}{\land}[2]}
+            [\sFmla{\True}{\formula{B}},just={\TRule{\True}{\land}[2]}, close
+            ]
+          ]
+        ]
+      ]
+    \end{oltableau}
+    \item إليك !!{tableau} مغلقًا لــ $\{\sFmla{\True}{!A},
+      \sFmla{\True}{!B}, \sFmla{\False}{!A \land !B}\}$:
+      \begin{oltableau}
+        [\sFmla{\False}{\formula{A} \land \formula{B}}, just = \TAss
+          [\sFmla{\True}{\formula{A}}, just = \TAss
+            [\sFmla{\True}{\formula{B}}, just=\TAss
+              [\sFmla{\False}{\formula{A}}, just = {\TRule{\False}{\land}[1]}, close]
+              [\sFmla{\False}{\formula{B}}, just = {\TRule{\False}{\land}[1]}, close]
+            ]
+          ]
+        ]
+      \end{oltableau}     
+  \end{enumerate}
+\end{proof}
+
+\begin{prop}\ollabel{prop:provability-lor}
+  \begin{enumerate}
+  \item المجموعة $\{!A \lor !B, \lnot !A, \lnot !B\}$ غير متسقة.
+  \item كل من $!A \Proves !A \lor !B$ و$!B \Proves !A \lor !B$.
+  \end{enumerate}
+\end{prop}
+
+\begin{proof}
+  \begin{enumerate}
+  \item ننشئ !!{tableau} مغلقًا لــ $\{\sFmla{\True}{!A \lor !B},
+    \sFmla{\True}{\lnot !A}, \sFmla{\True}{\lnot !B}\}$:
+    \begin{oltableau}
+      [\sFmla{\True}{\formula{A} \lor \formula{B}}, just = \TAss
+        [\sFmla{\True}{\lnot \formula{A}}, just = \TAss
+          [\sFmla{\True}{\lnot \formula{B}}, just = \TAss
+            [\sFmla{\False}{\formula{A}}, just = {\TRule{\True}{\lnot}[2]}
+              [\sFmla{\False}{\formula{B}}, just = {\TRule{\True}{\lnot}[3]}
+                [\sFmla{\True}{\formula{A}}, just = {\TRule{\True}{\lor}[1]}, close]
+                [\sFmla{\True}{\formula{B}}, just = {\TRule{\True}{\lor}[1]}, close]
+              ]
+            ]
+          ]
+        ]
+      ]
+    \end{oltableau}
+  \item لكل من $\{\sFmla{\False}{!A \lor !B}, \sFmla{\True}{!A}\}$ و
+    $\{\sFmla{\False}{!A \lor !B}, \sFmla{\True}{!B}\}$
+    !!{tableau}s مغلقة:
+    \begin{oltableau}{}
+      [\sFmla{\False}{\formula{A} \lor \formula{B}}, just=\TAss
+        [\sFmla{\True}{\formula{A}}, just=\TAss
+          [\sFmla{\False}{\formula{A}},just={\TRule{\False}{\lor}[1]}
+            [\sFmla{\False}{\formula{B}},just={\TRule{\False}{\lor}[1]}, close
+            ]
+          ]
+        ]
+      ]
+    \end{oltableau}
+    \begin{oltableau}{}
+      [\sFmla{\False}{\formula{A} \lor \formula{B}}, just=\TAss
+        [\sFmla{\True}{\formula{B}}, just=\TAss
+          [\sFmla{\False}{\formula{A}},just={\TRule{\False}{\lor}[1]}
+            [\sFmla{\False}{\formula{B}},just={\TRule{\False}{\lor}[1]}, close
+            ]
+          ]
+        ]
+      ]
+    \end{oltableau}
+  \end{enumerate}
+\end{proof}
+
+\begin{prop}\ollabel{prop:provability-lif}
+  \begin{enumerate}
+  \item \ollabel{prop:provability-lif-left}  $!A, !A \lif !B \Proves !B$.
+  \item \ollabel{prop:provability-lif-right}
+    كل من $\lnot !A \Proves !A \lif !B$ و$!B \Proves !A \lif !B$.
+  \end{enumerate}
+\end{prop}
+
+\begin{proof}
+  \begin{enumerate}
+    \item للمجموعة $\{\sFmla{\False}{!B}, \sFmla{\True}{!A \lif !B},
+      \sFmla{\True}{!A}\}$ !!{tableau} مغلق:
+      \begin{oltableau}
+        [\sFmla{\False}{\formula{B}}, just=\TAss
+          [\sFmla{\True}{\formula{A} \lif \formula{B}}, just=\TAss
+            [\sFmla{\True}{\formula{A}}, just=\TAss
+              [\sFmla{\False}{\formula{A}}, just = {\TRule{\True}{\lif}[2]}, close]
+              [\sFmla{\True}{\formula{B}}, just = {\TRule{\True}{\lif}[2]}, close]
+            ]
+          ]
+        ]
+      \end{oltableau}
+    \item لكل من $\{\sFmla{\False}{!A \lif !B},
+      \sFmla{\True}{\lnot !A}\}$ و$\{\sFmla{\False}{!A \lif !B},
+      \sFmla{\True}{!B}\}$ !!{tableau}s مغلقة:
+      \begin{oltableau}
+        [\sFmla{\False}{\formula{A} \lif \formula{B}}, just = \TAss
+          [\sFmla{\True}{\lnot \formula{A}}, just = \TAss
+            [\sFmla{\True}{\formula{A}}, just = {\TRule{\False}{\lif}[1]}
+              [\sFmla{\False}{\formula{B}}, just = {\TRule{\False}{\lif}[1]}
+                [\sFmla{\False}{\formula{A}}, just = {\TRule{\True}{\lnot}[2]}, close]
+              ]
+            ]
+          ]
+        ]
+      \end{oltableau}
+      \begin{oltableau}
+        [\sFmla{\False}{\formula{A} \lif \formula{B}}, just = \TAss
+          [\sFmla{\True}{\formula{B}}, just = \TAss
+            [\sFmla{\True}{\formula{A}}, just = {\TRule{\False}{\lif}[1]}
+              [\sFmla{\False}{\formula{B}}, just = {\TRule{\False}{\lif}[1]},close
+              ]
+            ]
+          ]
+        ]
+      \end{oltableau}
+  \end{enumerate}
+\end{proof}
+
+\end{document}

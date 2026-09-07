@@ -1,0 +1,92 @@
+% part: intuitionistic-logic
+% chapter: semantics
+% section: topological-semantics
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{sem}{top}
+
+\olsection{الدلالات الطوبولوجية}
+
+وللمنطق الحدسي وجه آخر من الدلالة، أساسه مفهوم الطوبولوجيا في الرياضيات.
+
+\begin{defn}
+  لتكن~$X$ مجموعة. نعني بـ\emph{الطوبولوجيا على~$X$} مجموعة
+  $\Top{O}\subseteq\Pow{X}$ تتصف بالخواص المذكورة أدناه. وتدعى
+  !!{element}s~$\Top{O}$ \emph{المجموعات المفتوحة} لتلك الطوبولوجيا؛
+  وأما~$X$ مأخوذة مع~$\Top{O}$ فتدعى \emph{فضاءً طوبولوجيًا}.
+  \begin{enumerate}
+  \item الخلو والفضاء كله من المجموعات المفتوحة:
+    $\emptyset$، $X \in \Top{O}$.
+  \item لا يخرج التقاطع المنتهي عن المجموعات المفتوحة: فمن
+    $U$، $V \in \Top{O}$ يلزم~$U \cap V \in \Top{O}$.
+  \item وكذلك الاتحاد، أيًا كانت أسرة المجموعات: فإن كان
+    $U_i \in \Top{O}$ لكل~$i \in I$، كان
+    $\bigcup \Setabs{U_i}{i \in I} \in \Top{O}$.
+  \end{enumerate}
+\end{defn}
+
+وقد نقتصر على الرمز~$X$ للدلالة على الفضاء الطوبولوجي متى عُلمت المجموعات
+المفتوحة من سياق الكلام. ولا يراد بذلك أن~$X$ وحدها طوبولوجيا؛ فإن
+الطوبولوجيا أسرة المجموعات المفتوحة، وإنما تصير~$X$ فضاءً طوبولوجيًا
+بانضمام تلك الأسرة إليها.
+
+\begin{defn}
+  \emph{النموذج الطوبولوجي} للمنطق القضي الحدسي هو الثلاثي
+  $\mModel{X}=\tuple{X,\Top{O},V}$؛ فيه~$\Top{O}$ طوبولوجيا على~$X$،
+  و$V$ دالة تجعل لكل متغير قضي مجموعة مفتوحة من~$\Top{O}$.
+
+  فإذا أُعطي النموذج الطوبولوجي~$\mModel{X}$، عرّفنا~$\Prop{X}{!A}$
+  بالاستقراء الآتي:
+  \begin{enumerate}
+  \item $\Prop{X}{\lfalse}=\emptyset$؛
+  \item $\Prop{X}{p}=V(p)$؛
+  \item $\Prop{X}{!A \land !B}=\Prop{X}{!A}\cap\Prop{X}{!B}$؛
+  \item $\Prop{X}{!A \lor !B}=\Prop{X}{!A}\cup\Prop{X}{!B}$؛
+  \item $\Prop{X}{!A \lif !B}=\Interior{(X\setminus\Prop{X}{!A})\cup
+    \Prop{X}{!B}}$.
+  \end{enumerate}
+  والمراد بـ~$\Interior{V}$ الدالة التي تقابل المجموعة~$V \subseteq X$
+  بـ\emph{داخلها}: أي اتحاد المجموعات المفتوحة الواقعة فيها جميعًا.
+  وصورة هذا التعريف:
+  \[
+  \Interior{V}=\bigcup\Setabs{U}{U \subseteq V \text{ و } U \in \Top{O}}.
+  \]
+\end{defn}
+
+وداخل كل مجموعة مفتوح، إذ هو اتحاد مجموعات مفتوحة؛ فثبت أن
+$\Prop{X}{!A}$ مجموعة مفتوحة في كل حال.
+
+وعلى شدة تجريد هذه الدلالات، يمكن تقريب وجه اختيارها. لنجعل~!!{element}s،
+أي «نقاط»،~$X$ مواضع يُحكم عندها على العبارات. فتكون النقاط التي تصدق
+عندها~$!A$، مأخوذة جملةً، هي القضية المعبر عنها بـ~$!A$. وليس كل مجموع
+من النقاط صالحًا لأن يكون قضية، بل الذي يصلح لذلك إنما هو
+!!{element}s~$\Top{O}$. ومعنى~$!A \Entails !B$ أن~$!B$ تصدق في كل
+نقطة تصدق فيها~$!A$؛ وهذا يكافئ
+$\Prop{X}{!A}\subseteq\Prop{X}{!B}$ لكل~$X$. وأما عبارة
+المحال~$\lfalse$ فلا تصدق في نقطة أصلًا، ومن ثم~$\Prop{X}{\lfalse}=\emptyset$.
+
+فلننظر الآن في صلة القضايا المعبر عنها بـ~$!B \land !C$ و$!B \lor !C$
+و$!B \lif !C$ بالقضيتين المعبر عنهما بـ~$!B$ و$!C$: ما الصلة التي
+تقتضيها صحة القوانين الحدسية، حتى يكون~$!A \Proves !B$ إذا وفقط إذا كان
+$\Prop{X}{!A}\subseteq\Prop{X}{!B}$؟ لا بد من~$\lfalse \Proves !A$ لكل
+$!A$، وهذا حاصل لأن~$\emptyset\subseteq U$ لكل~$U$. ومن
+$!B \land !C \Proves !B$ يلزم اشتراط
+$\Prop{X}{!B \land !C}\subseteq\Prop{X}{!B}$، وكذلك
+$\Prop{X}{!B \land !C}\subseteq\Prop{X}{!C}$. وأكبر ما يفي بالشرطين
+$W \subseteq U$ و$W \subseteq V$ هو~$U \cap V$. وعلى الجهة الأخرى،
+$!B \Proves !B \lor !C$ و$!C \Proves !B \lor !C$؛ فلا بد إذن من
+$\Prop{X}{!B}\subseteq\Prop{X}{!B \lor !C}$ و
+$\Prop{X}{!C}\subseteq\Prop{X}{!B \lor !C}$. وأصغر مجموعة~$W$ تحقق
+$U \subseteq W$ و$V \subseteq W$ هي~$U \cup V$.
+
+وأما~$\lif$ فوجه تعريفها أدق: إذ تعبّر~$!A \lif !B$ عن أضعف قضية
+يلزم عنها~$!B$ إذا ضُمّت إليها~$!A$. وكون~$!A \lif !B$ مع~$!A$
+تستلزم~$!B$ ظاهر من~$(!A \lif !B)\land !A \Proves !B$. فالمطلوب أن تكون
+$\Prop{X}{!A \lif !B}$ أعظم مجموعة مفتوحة يتحقق لها
+$\Prop{X}{!A \lif !B}\cap\Prop{X}{!A}\subseteq\Prop{X}{!B}$؛ ومن هذا
+ينشأ التعريف المتقدم.
+
+\end{document}

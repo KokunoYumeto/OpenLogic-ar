@@ -1,0 +1,62 @@
+% Part: first-order-logic
+% Chapter: models-theories
+% Section: expressing-props-of-structures
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{mat}{exs}
+
+\olsection{التعبير عن خصائص ال\printtoken{P}{structure}}
+
+\begin{explain}
+من مطالب هذا البحث التعبير عن شروط الدوال والعلاقات، وبيان
+متى تحقق الدوال والعلاقات في بنية تلك الشروط. فقد نريد تمييز
+ال!!{structure}s الموافقة لما قصدناه بمعاني ال!!{predicate}s
+من ال!!{structure}s المخالفة له. ولنا أن نعيّن
+ال!!{structure}s المقصودة كما نشاء؛ كأن نشترط في تأويل
+ال!!{predicate}~$\le$ أن يكون ترتيبًا، أو نقتصر على تأويلات~$\Lang
+L$ التي يكون مجالها من المجموعات ويكون مدلول $\Obj \in$ فيها
+علاقة «هو !!a{element} في». ولكن أيمكن أداء هذه الشروط
+ب!!{sentence}s من اللغة نفسها؟ أيّ الشروط على
+!!a{structure}~$\Struct M$ يمكن أن تؤديه
+!!a{sentence}، أو مجموعة من ال!!{sentence}s، في لغة~$\Struct
+M$؟ ليست الشروط كلها مما تؤديه اللغة. فلا توجد مثلًا جملة
+من~$\Lang L_A$ لا تصدق في !!a{structure}~$\Struct M$ إلا حيث
+$\Domain M = \Nat$؛ فلا سبيل إلى التعبير عن أن «المجال لا يحتوي
+إلا على الأعداد الطبيعية». وقد يمكن، مع ذلك، التعبير عن «خواص
+بنيوية» لل!!{structure}s. فأي خواص ال!!{structure}s تؤديها
+ال!!{sentence}s؟ وبعبارة أخرى، أي فئات من ال!!{structure}s
+يمكن أن نحدّها بأنها البنى التي تصدق فيها !!a{sentence}، أو
+مجموعة من ال!!{sentence}s؟
+\end{explain}
+
+\begin{defn}[نموذج مجموعة]
+لتكن $\Gamma$ مجموعة من ال!!{sentence}s في لغة~$\Lang L$. نقول إن
+!!a{structure}~$\Struct M$ \emph{نموذج لـ}~$\Gamma$ إذا كان
+$\Sat{M}{!A}$ لكل $!A \in \Gamma$.
+\end{defn}
+
+\begin{ex}
+فالجملة $\lforall[x][x \le x]$ تصدق في~$\Struct M$ إذا وفقط إذا
+كانت $\Assign{\le}{M}$ انعكاسية. وأما الجملة
+$\lforall[x][\lforall[y][((x \le y \land y \le x) \lif x = y)]]$،
+فتصدق في~$\Struct M$ إذا وفقط إذا كانت $\Assign{\le}{M}$ مضادة
+للتناظر. وأما الجملة $\lforall[x][\lforall[y][\lforall[z][((x \le y \land y \le z)
+      \lif x \le z)]]]$، فتصدق في~$\Struct M$ إذا وفقط إذا كانت
+$\Assign{\le}{M}$ متعدية. فإذن نماذج المجموعة
+\begin{align*}
+\{\quad &\lforall[x][x \le x], \\
+   & \lforall[x][\lforall[y][((x \le y \land y \le
+    x) \lif x = y)]], \\
+   &\lforall[x][\lforall[y][\lforall[z][((x \le y
+      \land y \le z) \lif x \le z)]]] \quad \}
+\end{align*}
+هي البنى التي تكون فيها~$\Assign{\le}{M}$ انعكاسية ومضادة
+للتناظر ومتعدية، دون غيرها؛ أي البنى التي يكون فيها ترتيبًا جزئيًا.
+فلنا أن نجعل هذه الجمل بديهيات
+\emph{لنظرية الرتبة الأولى للترتيبات الجزئية}.
+\end{ex}
+
+\end{document}

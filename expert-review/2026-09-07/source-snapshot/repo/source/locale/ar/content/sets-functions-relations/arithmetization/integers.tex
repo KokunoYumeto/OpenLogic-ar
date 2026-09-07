@@ -1,0 +1,108 @@
+% Part: sets-functions-relations
+% Chapter: arithmetization
+% Section: From N to Z
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+
+\begin{document}
+
+\olfileid[ar]{sfr}{arith}{int}
+\olsection{من $\Nat$ إلى $\Int$}
+
+فيما يأتي ملاحظتان أساسيتان:
+	\begin{enumerate}
+		\item يمكن كتابة كل عدد صحيح على الصورة $n - m$، حيث $n, m \in\Nat$.
+		\item يمكن كذلك ترميز المعلومات التي يحملها التعبير $n - m$ بالزوج المرتب $\tuple{n, m}$.
+	\end{enumerate}
+ونعلم من قبل أن الأزواج المرتبة من الأعداد الطبيعية هي !!{element}s المجموعة $\Nat^2$.
+ونفترض أننا نفهم $\Nat$. ومن ثم فهذا اقتراح ساذج يستند إلى الملاحظتين
+السابقتين: \emph{لنعامل الأعداد الصحيحة على أنها أزواج مرتبة من الأعداد الطبيعية}.
+
+والواقع أن هذا الاقتراح أشد سذاجة مما ينبغي. فمن الواضح أننا نريد أن يكون
+$0- 2 = 4 - 6$. لكن من الجلي أن $\tuple{0, 2 }\neq \tuple{4, 6}$.
+لذلك لا يمكننا أن نقول ببساطة إن $\Nat^2$ هي مجموعة الأعداد الصحيحة.
+
+وبتعميم المشكلة السابقة، نريد ما يأتي:
+	$$a - b = c - d \text{ إذا وفقط إذا }a + d = c + b$$
+(وينبغي أن يكون واضحًا أن هذه هي الطريقة التي \emph{يُراد} للأعداد الصحيحة
+أن تسلك بها: فما علينا إلا أن نضيف $b$ و$d$ إلى الطرفين.) والطريقة السهلة
+لضمان هذا السلوك هي أن نعرّف علاقة تكافؤ بين الأزواج المرتبة، هي
+$\Intequiv$، على النحو الآتي:
+$$\tuple{ a, b } \Intequiv \tuple{c, d}\text{ إذا وفقط إذا }a + d = c + b$$
+وعلينا الآن أن نبين أن هذه علاقة تكافؤ.
+\begin{prop} $\Intequiv$ علاقة تكافؤ.
+\end{prop}
+	\begin{proof}
+	علينا أن نبين أن $\Intequiv$ انعكاسية ومتناظرة ومتعدية.
+
+	\emph{الانعكاسية:} من الجلي أن $\tuple{a, b} \Intequiv \tuple{a, b}$، لأن $a + b = b + a$.
+
+	\emph{التناظر:} افترض أن $\tuple{a, b} \Intequiv \tuple{c, d}$، ومن ثم $a + d = c + b$.
+	إذن $c + b = a + d$، ومن ثم $\tuple{c, d} \Intequiv \tuple{a, b}$.
+
+	\emph{التعدي:} افترض أن $\tuple{a, b} \Intequiv \tuple{c, d}\Intequiv \tuple{m, n}$.
+	إذن $a + d = c + b$ و$c + n = m + d$. ومن ثم
+	$a + d + c + n = c + b + m + d$، وبالتالي $a + n = m + b$.
+	إذن $\tuple{a, b } \Intequiv \tuple{m, n}$.
+\end{proof}
+
+يمكننا الآن أن نستعمل علاقة التكافؤ هذه لأخذ فئات التكافؤ:
+
+\begin{defn}
+		الأعداد الصحيحة هي فئات تكافؤ الأزواج المرتبة من الأعداد الطبيعية بالنسبة
+		إلى $\Intequiv$؛ أي إن $\Int = \equivclass{\Nat^2}{\Intequiv}$.
+\end{defn}
+
+قد تكون لدى المرء ردود \emph{فلسفية} كثيرة مختلفة تجاه هذا التعريف الاشتراطي.
+لكن قبل أن ننظر في تلك الردود، يجدر بنا أن نواصل معالجة بعض الجوانب التقنية.
+
+بعد أن قلنا ما الأعداد الصحيحة، يلزمنا أن نعرّف عليها الدوال والعلاقات الأساسية.
+لنكتب $\equivrep{m, n}{\Intequiv}$ لفئة التكافؤ بالنسبة إلى $\Intequiv$ التي
+يكون $\tuple{m, n}$ !!a{element} فيها.\footnote{ملاحظة: باستعمال الترميز المقدم
+في \olref[sfr][rel][eqv]{def:equivalenceclass}، كنا سنكتب
+$\equivrep{\tuple{m,n}}{\Intequiv}$ للشيء نفسه. لكن قراءة هذا الترميز أصعب قليلًا.}
+أي إن:
+	$$\equivrep{m, n}{\Intequiv} = \Setabs{\tuple{a, b} \in \Nat^2}{\tuple{a, b}\Intequiv \tuple{m, n}}$$
+والآن نقدم التعريفات الآتية:
+	\begin{align*}
+		\equivrep{a, b}{\Intequiv} + \equivrep{c, d}{\Intequiv} &= \equivrep{a + c, b + d}{\Intequiv}\\
+		\equivrep{a, b}{\Intequiv} \times \equivrep{c, d}{\Intequiv} &= \equivrep{a c + b  d, a  d + b c}{\Intequiv}\\
+		\equivrep{a, b}{\Intequiv} \leq \equivrep{c, d}{\Intequiv} &\text{ إذا وفقط إذا }a + d \leq b + c
+	\end{align*}
+(وكما هو مألوف، أستعمل «$ab$» للدلالة على «$(a \times b)$»، لمجرد تسهيل
+قراءة البديهيات.) ويلزمنا الآن أن نتأكد من أن هذه التعريفات تسلك كما
+\emph{ينبغي} لها. وبيان معنى ذلك بالتفصيل والتحقق منه أمر شاق إلى حد ما؛
+فنرجئ التفاصيل إلى \olref[check]{sec}. لكن الخلاصة الوجيزة هي أن كل شيء يعمل!
+
+بقي أمر أخير. لقد بنينا الأعداد الصحيحة باستعمال الأعداد الطبيعية. غير أن
+هذا يعني أن الأعداد الطبيعية \emph{ليست هي نفسها أعدادًا صحيحة}. وسنعود
+إلى الدلالة الفلسفية لهذا في \olref[ref]{sec}. لكننا نحتاج، من الناحية
+التقنية المحضة، إلى طريقة تمكّننا من معاملة الأعداد الطبيعية \emph{على أنها}
+أعداد صحيحة. والفكرة سهلة جدًا: لكل $n \in \Nat$، نشترط ببساطة أن
+$n_\Int = \equivrep{n, 0}{\Intequiv}$. ويلزم أن نتحقق من أن هذا التعريف
+سليم السلوك، أي إنه لأي $m, n
+\in \Nat$
+\begin{align*}
+	(m + n)_\Int &= m_\Int + n_\Int\\
+	(m \times n)_\Int &= m_\Int \times n_\Int\\
+	m \leq n &\liff m_\Int \leq n_\Int
+\end{align*}
+لكن هذا كله مباشر إلى حد بعيد. فمثلًا، لإثبات تحقق الشرط الثاني، يمكننا
+أن نستند ببساطة إلى سلوك الأعداد الطبيعية ونستدل على النحو الآتي:
+%\begin{proof}
+%	Helping myself to the behaviour of the natural numbers, evidently:
+	\begin{align*}
+%		(m + n)_\Int  = \equivrep{m + n, 0}{\Intequiv} = \equivrep{m + n, 0 + 0}{\Intequiv} = \equivrep{m, 0}{\Intequiv} + \equivrep{n, 0}{\Intequiv} = m_\Int + n_\Int\\
+		(m \times n)_\Int  &= \equivrep{m \times n, 0}{\Intequiv} \\
+		&= \equivrep{m \times n + 0 \times 0, m \times 0 + 0 \times n}{\Intequiv} \\
+		&= \equivrep{m, 0}{\Intequiv} \times \equivrep{n, 0}{\Intequiv} \\
+		&= m_\Int \times n_\Int
+	\end{align*}
+%\end{proof}
+ونترك للقارئ، تمرينًا، التحقق من تحقق الشرطين الآخرين.
+\begin{prob}
+	أثبت أن $(m + n)_\Int = m_\Int + n_\Int$ وأن
+	$m \leq n \liff m_\Int \leq n_\Int$، لأي $m, n \in \Nat$.
+\end{prob}
+\end{document}

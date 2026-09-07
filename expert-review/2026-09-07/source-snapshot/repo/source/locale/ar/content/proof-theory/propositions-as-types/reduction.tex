@@ -1,0 +1,191 @@
+% part: intuitionistic-logic
+% chapter: propositions-as-types
+% section: reduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{pty}{red}
+
+\olsection{الاختزال}
+
+في~!!{derivation}s الاستنباط الطبيعي تكون قاعدة~!!a{introduction} تتبعها
+قاعدة~!!a{elimination} التفافًا يمكن ``اختزاله''. فمثلًا، يلغي
+استدلال~$\Intro{\land}$ يتبعه~$\Elim{\land}$ أحدهما الآخر، لأن نتيجة
+$\Elim{\land}$ تكون دائمًا أحد حدي الاقتران الذي ينتجه~$\Intro{\land}$،
+ومقدمتا~$\Intro{\land}$ هما حدا الاقتران نفسيهما. ولذلك، إذا احتجنا إلى
+!!a{derivation} لأي من الحدين، أمكننا استعمال ذلك~!!{derivation} مباشرةً
+من دون إدخال الاقتران ثم حذفه. ولدينا:
+\begin{gather*}
+  \bottomAlignProof
+  \AxiomC{}
+  \RightLabel{$\delta_1$}
+  \DeduceC{$!A_1$}
+  \AxiomC{}
+  \RightLabel{$\delta_2$}
+  \DeduceC{$!A_2$}
+  \RightLabel{$\Intro{\land}$}
+  \BinaryInfC{$!A_1 \land !A_2$}
+  \RightLabel{$\Elim{\land}_i$}
+  \UnaryInfC{$!A_i$}
+  \DisplayProof\bottomAlignProof
+  \quad
+  \redone
+  \quad
+  \AxiomC{}
+  \RightLabel{$\delta_i$}
+  \DeduceC{$!A_i$}
+  \DisplayProof
+\end{gather*}
+
+يمكننا أن ننظر في علاقة اختزال مماثلة على حدود البرهان المقابلة يقترحها هذا
+التبسيط. فإذا كان~$N_1$ حد برهان~$\delta_1$ و$N_2$ حد برهان~$\delta_2$،
+قلنا إن حد برهان البرهان الواقع على اليسار يختزل في خطوة واحدة إلى حد برهان
+البرهان الواقع على اليمين:
+\[
+  \proj{i}{\pair{N_1}{N_2}} \redone N_i
+\]
+وهذه في حساب لامبدا المنمّط قاعدة \emph{اختزال بيتا} للنمط الضربي.
+
+يسمى في الاستنباط الطبيعي زوج من الاستدلالات، مثل~$\Intro{\land}$ يتبعه
+$\Elim{\land}$، أي زوج يخضع للاختزال، \emph{قطعًا}. وفي حساب لامبدا المنمّط
+يسمى الحد الواقع على يسار~$\redone$ \emph{ردكسًا}، والحد الواقع على يمينه
+\emph{مختزَلًا}. وعلى خلاف حساب لامبدا غير المنمّط، حيث لا يعد ردكسًا إلا
+$(\lambd[x][N])Q$، يوسَّع نحو حساب لامبدا المنمّط ليشمل الحدود التي تحتوي
+$\pair{N}{M}$ و$\proj{i}{N}$ و$\inj[!A]{i}{N}$ و
+$\dcase{N}{x_1}{M_1}{x_2}{M_2}$ و$\abort{!A}{N}$، مع الردكسات المقابلة.
+
+ولدينا على نحو مماثل اختزال للفصل:
+\begin{gather*}
+  \bottomAlignProof
+  \AxiomC{}
+  \RightLabel{$\delta$}
+  \DeduceC{$!A_i$}
+  \RightLabel{$\Intro{\lor}$}
+  \UnaryInfC{$!A_1 \lor !A_2$}
+  \AxiomC{$\Discharge{!A_1}{x_1}$}
+  \RightLabel{$\delta_1$}
+  \DeduceC{$!C$}
+  \AxiomC{$\Discharge{!A_2}{x_2}$}
+  \RightLabel{$\delta_2$}
+  \DeduceC{$!C$}
+  \DischargeRule{$\Elim{\lor}$}{x_1,x_2}
+  \TrinaryInfC{$!C$}
+  \DisplayProof\bottomAlignProof
+  \quad
+  \redone
+  \quad
+  \AxiomC{}
+  \RightLabel{$\delta$}
+  \DeduceC{$!A_i$}
+  \RightLabel{$\delta_i$}
+  \DeduceC{$!C$}
+  \DisplayProof
+\end{gather*}
+ويقابل ذلك الاختزال الآتي على حدود البرهان:
+\begin{gather*}
+  \dcase{\inj[!A_{3-i}]{i}{M}}{x_1}{N_1}{x_2}{N_2}
+  \redone \Subst{N_i}{M}{x_i}.
+\end{gather*}
+حيث~$M$ حد برهان~$\delta$، و$N_i$ حد برهان~$\delta_i$. وهذه قاعدة اختزال
+بيتا للأنماط الجمعية. والترميز~$!A_{3-i}$ في الحقن هو حد الفصل المحذوف من
+المقدمة. ويعني~$\Subst{N_i}{M}{x_i}$ إحلال~$M$ محل كل وقوع حر للمتغير
+$x_i$ في~$N_i$.
+
+ويقابل اختزال النمط الدالي حذف التفاف من~$\Intro\lif$ يتبعه~$\Elim\lif$.
+\begin{gather*}
+  \bottomAlignProof
+  \AxiomC{$\Discharge{!A}{x}$}
+  \RightLabel{$\delta$}
+  \DeduceC{$!B$}
+  \DischargeRule{$\Intro{\lif}$}{x}
+  \UnaryInfC{$!A \lif !B$}
+  \AxiomC{}
+  \RightLabel{$\delta'$}
+  \DeduceC{$!A$}
+  \RightLabel{$\Elim{\lif}$}
+  \BinaryInfC{$!B$}
+  \DisplayProof\bottomAlignProof
+  \quad
+  \redone
+  \quad
+  \AxiomC{}
+  \RightLabel{$\delta'$}
+  \DeduceC{$!A$}
+  \RightLabel{$\delta$}
+  \DeduceC{$!B$}
+  \DisplayProof
+\end{gather*}
+أما في حدود البرهان فليس ذلك سوى اختزال بيتا المعتاد:
+\begin{gather*}
+  (\lambd[\typeof{x}{!A}][N]M)
+  \redone \Subst{N}{M}{x}.
+\end{gather*}
+
+وإلى جانب تحويلات الاختزال على~!!{proof}s، يمكننا النظر في تحويلات
+التبديل. وهي تنطبق على~!!{proof}s أو براهينها الجزئية التي تنتهي بقاعدة
+$\Elim{\lor}$ تتبعها قاعدة~!!{elimination} أخرى، مثلًا:
+\begin{multline*}
+  \bottomAlignProof
+  \AxiomC{}
+  \RightLabel{$\delta$}
+  \DeduceC{$!A_i$}
+  \RightLabel{$\Intro{\lor}$}
+  \UnaryInfC{$!A_1 \lor !A_2$}
+  \AxiomC{$\Discharge{!A_1}{x_1}$}
+  \RightLabel{$\delta_1$}
+  \DeduceC{$!C_1 \land !C_2$}
+  \AxiomC{$\Discharge{!A_2}{x_2}$}
+  \RightLabel{$\delta_2$}
+  \DeduceC{$!C_1 \land !C_2$}
+  \DischargeRule{$\Elim{\lor}$}{x_1,x_2}
+  \TrinaryInfC{$!C_1 \land !C_2$}
+  \RightLabel{\Elim{\land}[i]}
+  \UnaryInfC{$!C_i$}
+  \DisplayProof\bottomAlignProof
+  \quad
+  \redone
+  \\
+  \AxiomC{}
+  \RightLabel{$\delta$}
+  \DeduceC{$!A_i$}
+  \RightLabel{$\Intro{\lor}$}
+  \UnaryInfC{$!A_1 \lor !A_2$}
+  \AxiomC{$\Discharge{!A_1}{x_1}$}
+  \RightLabel{$\delta_1$}
+  \DeduceC{$!C_1 \land !C_2$}
+  \RightLabel{\Elim{\land}[i]}
+  \UnaryInfC{$!C_i$}
+  \AxiomC{$\Discharge{!A_2}{x_2}$}
+  \RightLabel{$\delta_2$}
+  \DeduceC{$!C_1 \land !C_2$}
+  \RightLabel{\Elim{\land}[i]}
+  \UnaryInfC{$!C_i$}
+  \DischargeRule{$\Elim{\lor}$}{x_1,x_2}
+  \TrinaryInfC{$!C_i$}
+  \DisplayProof
+\end{multline*}
+إذا كانت حدود برهان~$\delta$ و$\delta_1$ و$\delta_2$ هي، على الترتيب،
+$M$ و$N_1$ و$N_2$، كانت قاعدة الاختزال المقابلة لحدود البرهان، أي حدود
+لامبدا، هي:
+\[
+  \proj{i}{\dcase{M}{x_1}{N_1}{x_2}{N_2}} \redone
+  \dcase{M}{x_1}{\proj{i}{N_1}}{x_2}{\proj{i}{N_2}}.
+\]
+
+وبالطبع لا نحذف الالتفافات عند نهايات~!!{proof}s وحدها، بل نحذفها أيضًا
+داخل~!!{proof}s بتطبيق تحويل الاختزال على~!!{proof} جزئي ينتهي بالتفاف.
+وكذلك ينطبق اختزال بيتا على الحدود الجزئية من حدود لامبدا. فإذا كان~$N$
+حدًا جزئيًا من~$M$، وكان~$N\redone N'$، أمكننا استبدال~$N'$ بالحد الجزئي
+$N$ في~$M$ لنحصل على~$M'$. ونكتب في هذه الحالة أيضًا~$M\redone M'$.
+وإذا وجدت متتالية
+$M=M_1\redone M_2\redone M_3\redone\dots\redone M_k=M'$، بما في ذلك
+حالة~$k=1$، أي~$M=M'$، كتبنا~$M\red M'$.
+
+يسمى~!!{proof} الذي لا يمكن تطبيق أي تحويل على أي~!!{proof} جزئي منه
+\emph{عاديًا}. وعلى نحو مماثل، يسمى حد لامبدا الذي لا يمكن تطبيق أي تحويل
+عليه أو على أي حد جزئي منه \emph{عاديًا}. ويسمى حد لامبدا العادي أيضًا
+\emph{صيغة عادية}.
+
+\end{document}

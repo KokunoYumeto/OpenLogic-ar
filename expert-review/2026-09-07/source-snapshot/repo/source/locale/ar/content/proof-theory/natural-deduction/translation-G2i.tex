@@ -1,0 +1,206 @@
+% Part: proof-theory
+% Chapter: natural-deduction
+% Section: translation-G2i
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{nat}{tgi}
+
+\olsection{الترجمة من \Log{G2i} إلى \Log{N2i}}
+
+مقدّمات المتتاليات في~\Log{G2i} مجموعات متعددة~$\Gamma$ من
+!!{formula}s، بينما مقدّمات المتتاليات في~\Log{N2i} مجموعات~$\Gamma'$ من
+الصيغ الموسومة، بحيث لا يظهر كل وسم إلا مرة واحدة. لنقل إن مجموعة~$\Gamma'$
+من~!!{formula}s الموسومة \emph{تقابل} المجموعة المتعددة~$\Gamma$ إذا كان، لكل
+!!{formula}~$!A$، عدد~!!{element}s المجموعة~$\Gamma'$ التي صورتها
+$x : !A$ أصغر من أو يساوي تعددية~$!A$ (أي عدد نسخ~$!A$) في~$\Gamma$.
+
+\begin{prop}\ollabel{prop:G2i-to-N2i}
+إذا كان $\Log{G2i} + \Cut \Proves \Gamma \Sequent \Delta$، فإن $\Log{N2i}
+\Proves \Gamma' \Sequent !C$، حيث $!C \ident \lfalse$ إذا كانت $\Delta$
+خالية، و$!C \ident !A$ إذا كانت $\Delta = \{!A\}$، وحيث تقابل $\Gamma'$
+المجموعة~$\Gamma$.
+\end{prop}
+
+\begin{proof}
+  نبيّن أنه إذا كان~$\pi$ !!a{proof} للمتتالية $\Gamma \Sequent \Delta$ في
+  $\Log{G2i}+\Cut$، فثمة~$\Gamma'$ تقابل~$\Gamma$ وثمة
+  !!a{proof}~$\delta$ للمتتالية~$\Gamma' \Sequent !C$ في~\Log{N2i}.
+  نفعل ذلك بالاستقراء في $n = \pheight{\pi}$.
+
+  إذا كان $n = 0$، فإن~$\pi$ مسلّمة. فإذا كانت المسلّمة $\lfalse \Sequent
+  \quad$، كانت~$\delta$ هي المسلّمة $x:\lfalse \Sequent \lfalse$؛ أي إن
+  $\Gamma' = \{x:\lfalse\}$ و$!C \ident \lfalse$. وإذا كانت~$\pi$ مسلّمة
+  من الصورة $!A \Sequent !A$، كانت~$\delta$ هي $x: !A \Sequent !A$.
+  
+  وإذا كان $n>0$، انتهى~$\pi$ بقاعدة~$R$. يضمن فرض الاستقراء وجود
+  !!{proof}s في~\Log{N2i} لمتتاليات تقابل مقدمات تلك القاعدة. وبإعادة
+  الوسم عند الحاجة، نستطيع أن نفترض أن وسوم التفريغ والوسوم المقيّدة في هذه
+  البراهين متميزة، وأنها متباينة بعضها عن بعض بين براهين المقدمات المختلفة
+  أو المنسوخة، وأن الوسم~$x$ لا يظهر فوق استدلال يفرّغه إلا إذا كان ذلك
+  الاستدلال يفرّغه بالفعل. ثم نبيّن كيف يمكن جمع هذه~!!{proof}s للحصول على
+  براهين لمتتالية مناسبة~$\Gamma' \Sequent !C$. ونميّز الحالات بحسب~$R$.
+
+  \begin{enumerate}
+    \item إذا كانت~$R$ هي~\RightR{\Weakening}، انتهى~$\pi$ بما يأتي:
+    \[
+    \AxiomC{}
+    \RightLabel{$\pi_1$}
+    \Deduce$\Gamma \fCenter$
+    \RightLabel{\RightR{\Weakening}}
+    \UnaryInf$\Gamma \fCenter !A$
+    \DisplayProof
+    \]
+    يعطي تطبيق فرض الاستقراء على~$\pi_1$ !!a{proof}
+    للمتتالية~$\Gamma' \Sequent \lfalse$. ونطبّق~$\FalseInt$ لنحصل على
+    !!a{proof} للمتتالية $\Gamma' \Sequent !A$.
+    \item إذا كانت~$R$ هي~\LeftR{\Weakening}، انتهى~$\pi$ بما يأتي:
+    \[
+    \AxiomC{}
+    \RightLabel{$\pi_1$}
+    \Deduce$\Gamma \fCenter \Delta$
+    \RightLabel{\LeftR{\Weakening}}
+    \UnaryInf$!A, \Gamma \fCenter \Delta$
+    \DisplayProof
+    \]
+    يعطي تطبيق فرض الاستقراء على~$\pi_1$ !!a{proof}
+    للمتتالية~$\Gamma' \Sequent !C$، ونتخذه~$\delta$. لاحظ أنه إذا كانت
+    $\Gamma'$ تقابل~$\Gamma$ فهي تقابل أيضًا~$!A,\Gamma$، لأن عدد الصيغ
+    $x:!A$ في~$\Gamma'$ لا يزيد على عدد نسخ~$!A$ في~$\Gamma$، ومن ثم لا
+    يزيد أيضًا على عدد نسخها في السياق~$!A,\Gamma$.
+    \item إذا كانت~$R$ هي~\LeftR{\Contraction}، انتهى~$\pi$ بما يأتي:
+    \[
+    \AxiomC{}
+    \RightLabel{$\pi_1$}
+    \Deduce$!A, !A, \Gamma \fCenter \Delta$
+    \RightLabel{\LeftR{\Contraction}}
+    \UnaryInf$!A, \Gamma \fCenter \Delta$
+    \DisplayProof
+    \]
+    يعطي تطبيق فرض الاستقراء على~$\pi_1$ !!a{proof}
+    هو~$\delta_1$ للمتتالية~$\Pi, \Gamma' \Sequent !C$، حيث
+    $\Pi \subseteq \{x : !A,y:!A\}$. إذا كانت
+    $\Pi = \{x : !A,y:!A\}$، فاستبدل بكل~!!{formula}s الموسومة~$y:!A$ في
+    $\delta_1$ الصيغة~$x:!A$. وبما أن~$x$ يظهر في سياق المتتالية النهائية
+    لـ~$\delta_1$، يمكننا افتراض أن لا استدلال في~$\delta_1$ يفرّغ
+    !!a{formula} من الصورة~$x:!B$؛ أي إن أي~$x:!B$ في يسار متتالية ضمن
+    $\delta_1$ ليس فعالًا. ولذلك تظل النتيجة~!!a{proof} في~\Log{N2i}.
+    \item إذا كانت~$R$ هي~$\RightR{\lif}$، انتهى~$\pi$ بما يأتي:
+    \[
+    \AxiomC{}
+    \RightLabel{$\pi_1$}
+    \Deduce$!A, \Gamma \fCenter !B$
+    \RightLabel{\RightR{\lif}}
+    \UnaryInf$\Gamma \fCenter !A \lif !B$
+    \DisplayProof
+    \]
+    يوجد، بفرض الاستقراء، !!a{proof}~$\delta_1$ للمتتالية
+    $x:!A,\Gamma' \Sequent !B$ أو للمتتالية~$\Gamma' \Sequent !B$، حيث
+    تقابل~$\Gamma'$ المجموعة~$\Gamma$. نحصل على~$\delta$ بإتباع
+    $\delta_1$ بتطبيق~\Intro{\lif} (ويجوز أن يكون الفرض الموسوم غير
+    مستعمل).
+    \item إذا كانت~$R$ هي~\LeftR{\lif}، انتهى~$\pi$ بما يأتي:
+    \[
+    \AxiomC{}
+    \RightLabel{$\pi_1$}
+    \Deduce$\Gamma_1 \fCenter !A$
+    \AxiomC{}
+    \RightLabel{$\pi_2$}
+    \Deduce$!B, \Gamma_2 \fCenter \Delta$
+    \RightLabel{\LeftR{\lif}}
+    \BinaryInf$!A \lif !B, \Gamma_1, \Gamma_2 \fCenter \Delta$
+    \DisplayProof
+    \]
+    يعطي فرض الاستقراء !!{proof}s: برهانًا~$\delta_1$ للمتتالية
+    $\Gamma_1' \Sequent !A$، وبرهانًا~$\delta_2$ للمتتالية
+    $x:!B,\Gamma_2' \Sequent !C$ أو للمتتالية~$\Gamma_2' \Sequent !C$.
+    في الحالة الثانية يصلح~$\delta_2$ أن يكون~$\delta$. وفي الحالة الأولى
+    نعيد تسمية جميع الصيغ ووسوم التفريغ والوسوم المقيّدة، تجنبًا للأسر، بحيث
+    لا يظهر أي وسم في كل من~$\delta_1$ و$\delta_2$. عندئذ يقابل السياق
+    $\Gamma_1',\Gamma_2'$ السياق~$\Gamma_1,\Gamma_2$. ولأن~$x:!B$ يظهر في
+    المتتالية النهائية لـ~$\delta_2$، فلا يمكن أن يكون~$x:!B$ فعالًا في أي
+    استدلال وسم تفريغه~$x$ داخل~$\delta_2$. استبدل بكل مسلّمة
+    $x:!B \Sequent !B$ في~$\delta_2$ الـ~!!{proof}~$\delta_3$ الآتي:
+    \[
+    \Axiom$x: !A \lif !B \fCenter !A \lif !B$
+    \AxiomC{}
+    \RightLabel{$\delta_1$}
+    \Deduce$\Gamma_1' \fCenter !A$
+    \RightLabel{\Elim{\lif}}
+    \BinaryInf$x: !A \lif !B, \Gamma_1' \fCenter !B$
+    \DisplayProof
+    \]
+    واستبدل بكل ظهور لـ~$x:!B$ في~$\delta_2$ الصيغة~$x:!A \lif !B$.
+    والنتيجة~$\Subst{\delta_2}{\delta_3}{x:!B}$ هي~!!a{proof} للمتتالية
+    $x:!A \lif !B,\Gamma_1',\Gamma_2' \Sequent !C$.
+    \item إذا كانت~$R$ هي~\RightR{\land}، انتهى~$\pi$ بما يأتي:
+    \[
+    \AxiomC{}
+    \RightLabel{$\pi_1$}
+    \Deduce$\Gamma_1 \fCenter !A$
+    \AxiomC{}
+    \RightLabel{$\pi_2$}
+    \Deduce$\Gamma_2 \fCenter !B$
+    \RightLabel{\RightR{\land}}
+    \BinaryInf$\Gamma_1, \Gamma_2 \fCenter !A \land !B$
+    \DisplayProof
+    \]
+    يعطي فرض الاستقراء برهانًا~$\delta_1$ للمتتالية
+    $\Gamma_1' \Sequent !A$ وبرهانًا~$\delta_2$ للمتتالية
+    $\Gamma_2' \Sequent !B$. وبإعادة تسمية جميع الصيغ ووسوم التفريغ والوسوم
+    المقيّدة في~$\delta_2$ تجنبًا للأسر، يمكننا ضمان ألا يظهر أي وسم في كل من
+    $\delta_1$ و$\delta_2$. وعندئذ يقابل السياق~$\Gamma_1',\Gamma_2'$
+    السياق~$\Gamma_1,\Gamma_2$. ونحصل على~!!a{proof}~$\delta$ بتطبيق
+    $\Intro{\land}$ على المتتاليتين النهائيتين لـ~$\delta_1$ و$\delta_2$.
+    \item إذا كانت~$R$ هي~$\LeftR{\land}$، وانتهى~$\pi$، مثلًا، بما يأتي:
+    \[
+    \AxiomC{}
+    \RightLabel{$\pi_1$}
+    \Deduce$!A, \Gamma \fCenter \Delta$
+    \RightLabel{\LeftR{\land}}
+    \UnaryInf$!A \land !B, \Gamma \fCenter \Delta$
+    \DisplayProof
+    \]
+    فبفرض الاستقراء يوجد~!!a{proof}~$\delta_1$ للمتتالية
+    $x:!A,\Gamma' \Sequent !C$ أو للمتتالية~$\Gamma' \Sequent !C$، حيث
+    تقابل~$\Gamma'$ المجموعة~$\Gamma$. في الحالة الثانية نتخذ~$\delta_1$
+    ليكون~$\delta$. وفي الحالة الأولى، لاحظ أن ظهور~$x:!A$ في المتتالية
+    النهائية يعني أنه ليس فعالًا في أي استدلال وسم تفريغه~$x$ داخل
+    $\delta_1$. استبدل بكل مسلّمة $x:!A \Sequent !A$ الـ~!!{proof}~$\delta_2$
+    الآتي:
+    \[
+    \Axiom$x: !A \land !B \fCenter !A \land !B$
+    \RightLabel{\Elim{\land}[1]}
+    \UnaryInf$x: !A \land !B \fCenter !A$
+    \DisplayProof
+    \]
+    واستبدل بكل ظهور لـ~$x:!A$ الصيغة~$x:!A \land !B$؛ أي انظر في
+    $\Subst{\delta_1}{\delta_2}{x:!A}$. وهذا~!!a{proof} للمتتالية
+    $x:!A \land !B,\Gamma' \Sequent !C$.
+    \item إذا كانت~$R$ هي~\Cut، انتهى~$\pi$ بما يأتي:
+    \[
+    \AxiomC{}
+    \RightLabel{$\pi_1$}
+    \Deduce$\Gamma_1 \fCenter !A$
+    \AxiomC{}
+    \RightLabel{$\pi_2$}
+    \Deduce$!A, \Gamma_2 \fCenter \Delta$
+    \RightLabel{\Cut}
+    \BinaryInf$\Gamma_1, \Gamma_2 \fCenter \Delta$
+    \DisplayProof
+    \]
+    يعطي فرض الاستقراء برهانًا~$\delta_1$ للمتتالية
+    $\Gamma_1' \Sequent !A$ وبرهانًا~$\delta_2$ للمتتالية
+    $x:!A,\Gamma_2' \Sequent !C$ أو للمتتالية~$\Gamma_2' \Sequent !C$.
+    نعيد وسم نسختي البرهان تجنبًا للأسر بحيث تكون وسومهما متباينة. وفي
+    الحالة الثانية نتخذ~$\delta=\delta_2$. وإلا استبدل بكل مسلّمة
+    $x:!A \Sequent !A$ في~$\delta_2$ البرهان~$\delta_1$ لنحصل على~$\delta$
+    بوصفه~!!{proof}~$\Subst{\delta_2}{\delta_1}{x:!A}$ للمتتالية
+    $\Gamma_1',\Gamma_2' \Sequent !C$.
+    \item تُعالج الحالات المنطقية المتبقية على نحو مماثل.
+  \end{enumerate}
+\end{proof}
+
+\end{document}

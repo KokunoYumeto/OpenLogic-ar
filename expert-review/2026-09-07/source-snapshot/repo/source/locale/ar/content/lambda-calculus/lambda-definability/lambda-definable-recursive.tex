@@ -1,0 +1,43 @@
+% Part: lambda-calculus
+% Chapter: lambda-definability
+% Section: lambda-definable-recursive
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{ldf}{ldr}
+\olsection{الدوال \usetoken{S}{lambda definable} عودية}
+
+ليست جميع الدوال العودية الجزئية !!{lambda definable} فحسب، بل يصح
+العكس أيضًا. أي إن جميع الدوال~!!{lambda definable} عودية جزئية.
+
+\begin{thm}
+  \ollabel{thm:lambda-computable} إذا كانت دالة جزئية~$f$
+  !!{lambda definable}، فهي عودية جزئية.
+\end{thm}
+
+\begin{proof}
+  نرسم البرهان رسمًا موجزًا فحسب. أولًا نعرّف ترقيمًا حسابيًا لحدود
+  $\lambd$؛ أي نسند إلى حدود~$\lambd$ أعداد غودل منهجيًا، باستعمال
+  الترميز المعتاد للمتتاليات بقوى الأعداد الأولية. ثم نعرّف دالة عودية
+  جزئية~$\fn{normalize}(t)$ تأخذ عدد غودل~$t$ لحد لامبدا وسيطًا، وتعيد
+  عدد غودل لصورته السوية إن كانت له صورة، وتكون غير معرّفة في غير
+  ذلك. ثم نعرّف دالتين عوديتين جزئيتين~$\fn{toChurch}$ و
+  $\fn{fromChurch}$ تحولان الأعداد الطبيعية إلى أعداد غودل لأعداد
+  تشيرش الموافقة ومنها.
+
+  وباستعمال هذه الدوال العودية يمكننا تعريف~$f$ دالة عودية جزئية.
+  فهناك حد~$\lambd$~$F$ !!{lambda define}s~$f$. ولحساب
+  $f(n_1, \dots, n_k)$، نحصل أولًا على أعداد غودل لأعداد تشيرش
+  الموافقة باستعمال~$\fn{toChurch}(n_i)$، ثم نلحقها بـ$\Gn{F}$ لنحصل
+  على عدد غودل للحد~$F \num{n_1}\dots\num{n_k}$. وبعد ذلك نطبق
+  $\fn{normalize}$ في عدد غودل هذا. فإذا كانت~$f(n_1, \dots, n_k)$
+  معرّفة، كان للحد~$F \num{n_1}\dots\num{n_k}$ صورة سوية (ولا بد أن
+  تكون عدد تشيرش)، وإلا فلا صورة سوية له (ومن ثم تكون
+  \[\fn{normalize}(\Gn{F\num{n_1}\dots\num{n_k}})\]
+  غير معرّفة). وأخيرًا نطبق~$\fn{fromChurch}$ في عدد غودل للحد بعد
+  تسويته.
+\end{proof}
+
+\end{document}

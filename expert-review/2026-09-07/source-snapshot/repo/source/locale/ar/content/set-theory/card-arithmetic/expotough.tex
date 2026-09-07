@@ -1,0 +1,110 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+\olfileid{sth}{card-arithmetic}{expotough}
+
+\olsection[بعض التبسيطات]{بعض التبسيطات في أس الكاردينالات}
+
+مع أن تعريف $\canonord$ كان معقداً بعض الشيء، فإن ثمرته نتيجة مفيدة عن
+جمع الكاردينالات وضربها، هي \olref[simp]{cardplustimesmax}. غير أن أس
+الكاردينالات ما فوق المتناهي لا يقبل تبسيطاً بمثل هذه المباشرة. ولبيان
+السبب نبدأ بنتيجة توسع نمطاً مألوفاً من الحالة المتناهية (وإن كان
+برهانها على درجة عالية من التجريد):
+
+\begin{prop}\ollabel{simplecardexpo}
+$\cardexpo{\cardfont{a}}{\cardfont{b} \cardplus \cardfont{c}} =
+\cardexpo{\cardfont{a}}{\cardfont{b}} \cardtimes
+\cardexpo{\cardfont{a}}{\cardfont{c}}$، و
+$\cardexpo{(\cardexpo{\cardfont{a}}{\cardfont{b}})}{\cardfont{c}} =
+\cardexpo{\cardfont{a}}{\cardfont{b} \cardtimes \cardfont{c}}$، لأي
+كاردينالات $\cardfont{a}, \cardfont{b}, \cardfont{c}$.
+\end{prop}
+
+\begin{proof}
+لإثبات الادعاء الأول، انظر في دالة
+$f \colon (\cardfont{b}\disjointsum\cardfont{c}) \to \cardfont{a}$.
+والآن «اقسمها» بتعريف $f_\cardfont{b}(\beta) = f(\beta, 0)$ لكل
+$\beta \in \cardfont{b}$، و$f_\cardfont{c}(\gamma) = f(\gamma, 1)$
+لكل $\gamma \in \cardfont{c}$. تكون الخريطة
+$f \mapsto \tuple{f_{\cardfont{b}}, f_{\cardfont{c}}}$
+!!a{bijection} من
+$\funfromto{\cardfont{b} \disjointsum \cardfont{c}}{\cardfont{a}}$ إلى
+$(\funfromto{\cardfont{b}}{\cardfont{a}} \times
+\funfromto{\cardfont{c}}{\cardfont{a}})$.
+
+ولإثبات الادعاء الثاني، انظر في دالة
+$f \colon \cardfont{c} \to
+(\funfromto{\cardfont{b}}{\cardfont{a}})$؛ فلكل
+$\gamma \in \cardfont{c}$ دالة
+$f(\gamma) \colon \cardfont{b} \to \cardfont{a}$. وعرّف الآن
+$f^*(\beta, \gamma) = (f(\gamma))(\beta)$ لكل
+$\tuple{\beta, \gamma} \in \cardfont{b} \times \cardfont{c}$.
+الخريطة $f \mapsto f^*$ هي !!a{bijection} من
+$\funfromto{\cardfont{c}}{(\funfromto{\cardfont{b}}{\cardfont{a}})}$
+إلى $\funfromto{\cardfont{b} \times \cardfont{c}}{\cardfont{a}}$.
+\end{proof}
+
+ما \emph{نريده} هو طريقة سهلة لحساب
+$\cardexpo{\cardfont{a}}{\cardfont{b}}$ حين نتعامل مع كاردينالات غير
+متناهية. والنتيجة الآتية خطوة حسنة في هذا الاتجاه:
+
+\begin{prop}\ollabel{cardexpo2reduct}
+إذا كان $2 \leq \cardfont{a} \leq \cardfont{b}$ وكان
+$\cardfont{b}$ غير متناهٍ، فإن
+$\cardexpo{\cardfont{a}}{\cardfont{b}} =
+\cardexpo{2}{\cardfont{b}}$.
+\end{prop}
+
+\begin{proof}
+\begin{align*}
+	\cardexpo{2}{\cardfont{b}} &\leq
+	\cardexpo{\cardfont{a}}{\cardfont{b}}\text{، لأن $2 \leq \cardfont{a}$}\\
+	&\leq \cardexpo{(\cardexpo{2}{\cardfont{a}})}{\cardfont{b}}
+	\text{، بحسب \olref[opps]{cantorcor}}\\
+	&= \cardexpo{2}{\cardfont{a} \cardtimes \cardfont{b}}
+	\text{، بحسب \olref{simplecardexpo}} \\
+	&= \cardexpo{2}{\cardfont{b}}
+	\text{، بحسب \olref[simp]{cardplustimesmax}}.
+\end{align*}
+\end{proof}
+
+لا ينبغي أن نتوقع حقاً أن نبسط هذا أكثر، لأن
+$\cardfont{b} < \cardexpo{2}{\cardfont{b}}$ بحسب
+\olref[card-arithmetic][opps]{cantorcor}. لكن هذا لا يخبرنا بما ينبغي
+قوله عن $\cardexpo{\cardfont{a}}{\cardfont{b}}$ عندما
+$\cardfont{b} < \cardfont{a}$. وبالطبع، إذا كان $\cardfont{b}$
+\emph{متناهياً} فنحن نعرف ما نفعل.
+
+\begin{prop}
+إذا كان $\cardfont{a}$ غير متناهٍ وكان $0<n<\omega$، فإن
+$\cardexpo{\cardfont{a}}{n} = \cardfont{a}$.
+\end{prop}
+
+\begin{proof}
+$\cardexpo{\cardfont{a}}{n} = \cardfont{a} \cardtimes \cardfont{a}
+\cardtimes \ldots \cardtimes \cardfont{a} = \cardfont{a}$، بحسب
+\olref[simp]{cardplustimesmax}.
+\end{proof}
+\noindent
+وفوق ذلك يمكننا، في بعض الحالات الأخرى، ضبط حجم
+$\cardexpo{\cardfont{a}}{\cardfont{b}}$:
+
+\begin{prop}
+إذا كان $2 \leq \cardfont{b} < \cardfont{a} \leq
+\cardexpo{2}{\cardfont{b}}$ وكان $\cardfont{b}$ غير متناهٍ، فإن
+$\cardexpo{\cardfont{a}}{\cardfont{b}} =
+\cardexpo{2}{\cardfont{b}}$.
+\end{prop}
+
+\begin{proof}
+$\cardexpo{2}{\cardfont{b}}\leq
+\cardexpo{\cardfont{a}}{\cardfont{b}} \leq
+\cardexpo{(\cardexpo{2}{\cardfont{b}})}{\cardfont{b}} =
+\cardexpo{2}{\cardfont{b}\cardtimes\cardfont{b}} =
+\cardexpo{2}{\cardfont{b}}$، باستدلال مماثل لما في
+\olref{cardexpo2reduct}.
+\end{proof}
+\noindent
+أما بعد هذه النقطة، فتصير الأمور أشد دقة بكثير.
+
+\end{document}

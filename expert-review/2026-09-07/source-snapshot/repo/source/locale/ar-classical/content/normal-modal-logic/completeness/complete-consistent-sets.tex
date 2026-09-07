@@ -1,0 +1,153 @@
+% Part: normal-modal-logic
+% Chapter: completeness
+% Section: complete-consistent-sets
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{com}{ccs}
+
+\olsection{المجموعات $\Sigma$-المتسقة التامة}
+
+لتكن~$\Sigma$ مجموعة من ال!!{formula}s الجهية نتخذها بديهيات
+لمنطق جهوي نظامي، أو مبادئ معرّفة له. فاتساق مجموعة~$\Gamma$
+بالنسبة إلى~$\Sigma$ معناه $\Gamma \Proves/[\Sigma] \lfalse$؛
+أي امتناع !!{derivation} لـ
+$!A_1 \lif (!A_2 \lif \cdots (!A_n \lif \lfalse)\dots)$ من~$\Sigma$
+مع كون~$!A_i \in \Gamma$ لكل~$i$.
+وسنبني نموذجًا «قانونيًا» تكون عوالمه مجموعات من نوع أخص:
+فهي $\Sigma$-متسقة، ولا تقف عند مجرد الاتساق مع~$\Sigma$،
+بل تبلغ الغاية فيه بأن تفصل في كل !!{formula} جهية.
+فلكل~$!A$ يلزم أن يكون~$!A \in \Gamma$ أو $\lnot !A \in \Gamma$،
+على ما يضبطه التعريف الآتي:
+
+\begin{defn}
+  تكون المجموعة~$\Gamma$ \emph{$\Sigma$-متسقة تامة} إذا وفقط إذا
+  كانت $\Sigma$-متسقة، وكان، لكل~$!A$، إما~$!A \in \Gamma$ أو
+  $\lnot !A \in \Gamma$.
+\end{defn}
+
+وتجمع المجموعات $\Sigma$-المتسقة التامة~$\Gamma$ خصائص ينتفع بها
+في بناء النموذج. فمنها الإغلاق الاستنتاجي:
+إذا كان~$\Gamma \Proves[\Sigma] !A$ لزم~$!A \in \Gamma$؛
+ومن ثم ينتمي كل مثال إحلال لـ!!a{formula}~$!A \in \Sigma$ إلى~$\Gamma$.
+ومنها أن الانتماء إلى~$\Gamma$ يجري على شروط صدق الروابط القضوية.
+وهذه المطابقة بين العضوية والصدق هي ما نحتاج إليه في تعريف
+«النموذج القانوني».
+
+\begin{prop}\ollabel{prop:ccs-properties}
+  افترض أن~$\Gamma$ مجموعة $\Sigma$-متسقة تامة. عندئذ:
+  \begin{enumerate}
+  \item \ollabel{prop:ccs-closed}%
+    $\Gamma$ مغلقة استنتاجيًا في~$\Sigma$.
+  \item \ollabel{prop:ccs-sigma}%
+    $\Sigma \subseteq \Gamma$.
+  \tagitem{prvFalse}{\ollabel{prop:ccs-lfalse}%
+    $\lfalse \notin \Gamma$}{}
+  \tagitem{prvTrue}{\ollabel{prop:ccs-ltrue}%
+    $\ltrue \in \Gamma$}{}
+  \item \ollabel{prop:ccs-lnot}%
+    $\lnot!A \in \Gamma$ إذا وفقط إذا كان~$!A \notin \Gamma$.
+  \tagitem{prvAnd}{\ollabel{prop:ccs-land}%
+    $!A \land !B \in \Gamma$ إذا وفقط إذا كان~$!A \in \Gamma$ و
+    $!B \in \Gamma$}{}
+  \tagitem{prvOr}{\ollabel{prop:ccs-lor}%
+    $!A \lor !B \in \Gamma$ إذا وفقط إذا كان~$!A \in \Gamma$ أو
+    $!B \in \Gamma$}{}
+  \tagitem{prvIf}{\ollabel{prop:ccs-lif}%
+    $!A \lif !B \in \Gamma$ إذا وفقط إذا كان~$!A \notin \Gamma$ أو
+    $!B \in \Gamma$}{}
+  \tagitem{prvIff}{\ollabel{prop:ccs-liff}%
+    $!A \liff !B \in \Gamma$ إذا وفقط إذا كان إما~$!A \in \Gamma$
+    و$!B \in \Gamma$، أو~$!A \notin \Gamma$ و$!B \notin \Gamma$}{}
+  \end{enumerate}
+\end{prop}
+
+\begin{proof}
+  \begin{enumerate}
+  \item لنفرض $\Gamma \Proves[\Sigma] !A$ مع~$!A \notin \Gamma$.
+    بما أن~$\Gamma$ $\Sigma$-متسقة تامة، فلا بد من~$\lnot!A \in \Gamma$.
+    فيلزم عدم اتساق~$\Gamma$، إذ نضم النفي إلى ما اشتققناه ونستعمل
+    $!A, \lnot !A \Proves[\Sigma] \lfalse$؛ وهذا يخالف الفرض.
+
+  \item إذا كان~$!A \in \Sigma$، فإن~$\Gamma \Proves[\Sigma] !A$،
+    ومن ثم~$!A \in \Gamma$ بالإغلاق الاستنتاجي، أي بالحالة
+    \olref{prop:ccs-closed}.
+
+  \tagitem{prvFalse}{إذا كان~$\lfalse \in \Gamma$، فإن
+    $\Gamma \Proves[\Sigma] \lfalse$، فتكون~$\Gamma$
+    $\Sigma$-غير متسقة.}{}
+
+  \tagitem{prvTrue}{$\Gamma \Proves[\Sigma] \ltrue$، ومن ثم
+    $\ltrue \in \Gamma$ بالإغلاق الاستنتاجي، أي بالحالة
+    \olref{prop:ccs-closed}.}{}
+
+  \item من~$\lnot!A \in \Gamma$ يلزم $!A \notin \Gamma$،
+    وإلا اجتمعت الصيغة ونفيها وخولف الاتساق.
+    وأما إذا كان~$!A \notin \Gamma$، فلا بد من~$\lnot !A \in \Gamma$،
+    لأن~$\Gamma$ $\Sigma$-متسقة تامة، ولا تدع الصيغة ونفيها كليهما خارجها.
+
+  \tagitem{prvAnd}{\iftag{probAnd}{تمرين.}{افترض أن
+      $!A \land !B \in \Gamma$. ولما كانت
+      $(!A \land !B) \lif !A$ مثال إحلال لقضية صادقة صدقًا تحليليًا،
+      كان~$!A \in \Gamma$ بالإغلاق الاستنتاجي، أي بالحالة
+      \olref{prop:ccs-closed}. وكذلك~$!B \in \Gamma$. ومن ناحية أخرى،
+      افترض أن~$!A \in \Gamma$ و$!B \in \Gamma$. عندئذ يقتضي الإغلاق
+      الاستنتاجي أن~$(!A \land !B) \in \Gamma$، لأن
+      $!A \lif (!B \lif (!A \land !B))$ مثال إحلال لقضية صادقة صدقًا
+      تحليليًا.}}{}
+
+  \tagitem{prvOr}{\iftag{probOr}{تمرين.}{افترض أن
+      $!A \lor !B \in \Gamma$، وأن~$!A \notin \Gamma$ و
+      $!B \notin \Gamma$. ولما كانت~$\Gamma$ $\Sigma$-متسقة تامة،
+      كان~$\lnot!A \in \Gamma$ و$\lnot !B \in \Gamma$. ومن ثم
+      $\lnot(!A \lor !B) \in \Gamma$، لأن
+      $\lnot !A \lif (\lnot !B \lif \lnot (!A \lor !B))$ مثال إحلال
+      لقضية صادقة صدقًا تحليليًا. وهذا يعني أن~$\Gamma$
+      $\Sigma$-غير متسقة، وهو تناقض. والعكس مباشر: إذا كان
+      $!A \in \Gamma$ أو~$!B \in \Gamma$، فإن الإغلاق الاستنتاجي
+      يقتضي~$!A \lor !B \in \Gamma$.}}{}
+
+  \tagitem{prvIf}{\iftag{probIf}{تمرين.}{افترض أن
+      $!A \lif !B \in \Gamma$ و$!A \in \Gamma$؛ عندئذ
+      $\Gamma \Proves[\Sigma] !B$، ومن ثم~$!B \in \Gamma$ بالإغلاق
+      الاستنتاجي. وبالعكس، إذا كان~$!A \lif !B \notin \Gamma$، فبما
+      أن~$\Gamma$ $\Sigma$-متسقة تامة، يكون
+      $\lnot (!A \lif !B) \in \Gamma$. ولما كانت
+      $\lnot(!A \lif !B) \lif !A$ مثال إحلال لقضية صادقة صدقًا
+      تحليليًا، كان~$!A \in \Gamma$ بالإغلاق الاستنتاجي. ولما كانت
+      $\lnot(!A \lif !B) \lif \lnot !B$ مثالًا كذلك، كان
+      $\lnot !B \in \Gamma$. ومن ثم~$!B \notin \Gamma$ لاتساق
+      $\Gamma$ مع~$\Sigma$.}}{}
+
+  % استكمال برهان مصدر (0443-I1): صُرّح بحالة خروج الصيغتين باستعمال نفييهما.
+  \tagitem{prvIff}{\iftag{probIff}{تمرين.}{افترض أن
+      $!A \liff !B \in \Gamma$. إذا كان~$!A \in \Gamma$، كان
+      $!B \in \Gamma$، لأن~$(!A \liff !B) \lif (!A \lif !B)$ مثال
+      إحلال لقضية صادقة صدقًا تحليليًا. وبالمثل، إذا كان
+      $!B \in \Gamma$، كان~$!A \in \Gamma$. ومن ثم فإما أن يكون
+      $!A \in \Gamma$ و$!B \in \Gamma$، أو لا يكون
+      $!A \in \Gamma$ ولا~$!B \in \Gamma$.
+
+      وبالعكس، افترض أن~$!A \liff !B \notin \Gamma$. ولما كانت
+      $\Gamma$ $\Sigma$-متسقة تامة، كان
+      $\lnot (!A \liff !B) \in \Gamma$. ولما كانت
+      $\lnot(!A \liff !B) \lif (!A \lif \lnot !B)$ مثال إحلال لقضية
+      صادقة صدقًا تحليليًا، فإذا كان~$!A \in \Gamma$، كان
+      $\lnot !B \in \Gamma$، ومن ثم~$!B \notin \Gamma$ لاتساق
+      $\Gamma$ مع~$\Sigma$. وبالمثل، إذا كان~$!B \in \Gamma$، كان
+      $!A \notin \Gamma$. ولو خرجت الصيغتان كلتاهما من~$\Gamma$،
+      لدخل نفياهما فيها بالتمام، ولاستلزم هذان النفيان التكافؤ بقضية
+      صادقة صدقًا تحليليًا؛ فيناقض ذلك فرض خروج التكافؤ من~$\Gamma$.
+      ومن ثم لا يكون~$!A \in \Gamma$ و
+      $!B \in \Gamma$ معًا، ولا يكون~$!A \notin \Gamma$ و
+      $!B \notin \Gamma$ معًا.}}{}
+  \end{enumerate}
+\end{proof}
+
+\begin{probtag}{probAnd,probOr,probIf,probIff}
+  أكمل برهان~\olref[nml][com][ccs]{prop:ccs-properties}.
+\end{probtag}
+
+\end{document}

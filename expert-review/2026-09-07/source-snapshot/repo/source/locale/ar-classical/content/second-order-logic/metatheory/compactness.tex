@@ -1,0 +1,70 @@
+% Part: second-order-logic
+% Chapter: metatheory
+% Section: compactness
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sol}{met}{com}
+
+\olsection{منطق الرتبة الثانية غير متراص}
+
+\begin{explain}
+مجموعة الجمل~$\Gamma$ \emph{قابلة للإرضاء منتهيًا} إذا كانت
+كل مجموعة جزئية منتهية منها قابلة للإرضاء.
+وفي منطق الرتبة الأولى، متى كانت مجموعة من !!{sentence}s~$\Gamma$
+قابلة للإرضاء منتهيًا لزم أن تكون قابلة للإرضاء.
+هذه الخاصية هي \emph{التراص}. ولها عبارة مكافئة بلغة الاستلزام:
+من~$\Gamma \Entails !A$ يلزم وجود مجموعة جزئية
+منتهية~$\Gamma_0 \subseteq \Gamma$ تحقق~$\Gamma_0 \Entails !A$.
+وفي هذه العبارة تظهر الخاصية نتيجة مباشرة للاكتمال:
+إذ إن~$\Gamma \Entails !A$ يقتضي~$\Gamma \Proves !A$ بالاكتمال،
+وكل !!{derivation} إنما يستعمل عددًا منتهيًا من
+!!{sentence}s~$\Gamma$.
+
+وأما الرتبة الثانية فلا تتصف بالتراص. فقد تكون مجموعة من
+!!{sentence}s هذه الرتبة قابلة للإرضاء منتهيًا ولا تكون قابلة
+للإرضاء؛ وقد تستلزم~$!A$ مع أن أي مجموعة جزئية منتهية منها
+لا تستلزم~$!A$.
+\end{explain}
+
+\begin{thm}
+\ollabel{thm:sol-not-compact}
+لا يتصف منطق الرتبة الثانية بالتراص.
+\end{thm}
+
+\begin{proof}
+قد ثبت أن
+\[
+\fn{Inf} \ident \lexists[u][(\lforall[x][\lforall[y][(\eq[u(x)][u(y)]
+      \lif \eq[x][y])]] \land \lexists[y][\lforall[x][\eq/[y][u(x)]]])]
+\]
+تُرضى في !!a{structure} إذا وفقط إذا كان مجالها لانهائيًا.
+ولتكن~$!A^{\ge n}$ جملة تفيد أن في المجال~$n$ من
+!!{element}s على الأقل؛ ومن ذلك:
+\[
+!A^{\ge n} \ident \lexists[x_1][\dots\lexists[x_n][(\eq/[x_1][x_2]
+    \land \eq/[x_1][x_3] \land \dots \land \eq/[x_{n-1}][x_n])]].
+\]
+نأخذ مجموعة !!{sentence}s
+\[
+\Gamma = \{\lnot \fn{Inf}, !A^{\ge 1}, !A^{\ge 2}, !A^{\ge 3}, \dots\}.
+\]
+هي قابلة للإرضاء منتهيًا. فلكل مجموعة جزئية منتهية~$\Gamma_0
+\subseteq \Gamma$ نستطيع اختيار~$k$ بحيث~$!A^{\ge k} \in \Gamma$،
+ولا يكون~$!A^{\ge n} \in \Gamma_0$ لأي~$n>k$.
+فإذا كان مجال~$\Domain{M}$ مؤلفًا من~$k$ من !!{element}s،
+حصل~$\Sat{M}{\Gamma_0}$.
+لكن~$\Gamma$ لا تُرضى؛ إذ من~$\Sat{M}{\lnot \fn{Inf}}$
+يلزم أن يكون~$\Domain{M}$ منتهيًا. وليكن عدد عناصره~$k$،
+فيكون~$\Sat/{M}{!A^{\ge k+1}}$.
+\end{proof}
+
+\begin{prob}
+اطلب مجموعة~$\Gamma$ و!!a{sentence}~$!A$ يكون بهما
+$\Gamma \Entails !A$، مع أن كل مجموعة جزئية
+منتهية~$\Gamma_0 \subseteq \Gamma$ تحقق~$\Gamma_0 \Entails/ !A$.
+\end{prob}
+
+\end{document}

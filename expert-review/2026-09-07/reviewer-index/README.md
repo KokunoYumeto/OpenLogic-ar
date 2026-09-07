@@ -1,0 +1,175 @@
+# Renderable terminology review shards / أجزاء مراجعة المصطلحات
+
+These small, deterministic files are the browser-friendly review surface. Start with the ranked queue one directory above; it links directly into the appropriate priority shard. Canonical monolithic Markdown, JSON and CSV remain available for preservation and bulk processing.
+
+Each generated detail shard is capped at **225 KiB** and is normally partitioned near **180 KiB**, while a location-rich decision is never split or truncated.
+
+No final PDF page is inferred. A page appears only when the generator receives final PDF, AUX and SyncTeX evidence.
+
+## Priority shards / أجزاء الأولوية
+
+- [Part 001](priority-001.md) — global ranks 1–5; 5 choices
+- [Part 002](priority-002.md) — global ranks 11–19; 9 choices
+- [Part 003](priority-003.md) — global ranks 21–30; 10 choices
+- [Part 004](priority-004.md) — global ranks 31–40; 10 choices
+- [Part 005](priority-005.md) — global ranks 41–50; 10 choices
+- [Part 006](priority-006.md) — global ranks 51–60; 10 choices
+- [Part 007](priority-007.md) — global ranks 61–70; 10 choices
+- [Part 008](priority-008.md) — global ranks 71–80; 10 choices
+- [Part 009](priority-009.md) — global ranks 81–90; 10 choices
+- [Part 010](priority-010.md) — global ranks 91–100; 10 choices
+- [Part 011](priority-011.md) — global ranks 101–110; 10 choices
+- [Part 012](priority-012.md) — global ranks 111–120; 10 choices
+- [Part 013](priority-013.md) — global ranks 121–130; 10 choices
+- [Part 014](priority-014.md) — global ranks 131–140; 10 choices
+- [Part 015](priority-015.md) — global ranks 141–150; 10 choices
+- [Part 016](priority-016.md) — global ranks 151–160; 10 choices
+- [Part 017](priority-017.md) — global ranks 161–170; 10 choices
+- [Part 018](priority-018.md) — global ranks 171–180; 10 choices
+- [Part 019](priority-019.md) — global ranks 181–190; 10 choices
+- [Part 020](priority-020.md) — global ranks 191–200; 10 choices
+- [Part 021](priority-021.md) — global ranks 201–210; 10 choices
+- [Part 022](priority-022.md) — global ranks 211–220; 10 choices
+- [Part 023](priority-023.md) — global ranks 221–230; 10 choices
+- [Part 024](priority-024.md) — global ranks 231–240; 10 choices
+- [Part 025](priority-025.md) — global ranks 241–250; 10 choices
+- [Part 026](priority-026.md) — global ranks 251–260; 10 choices
+- [Part 027](priority-027.md) — global ranks 261–270; 10 choices
+- [Part 028](priority-028.md) — global ranks 271–280; 10 choices
+- [Part 029](priority-029.md) — global ranks 281–290; 10 choices
+- [Part 030](priority-030.md) — global ranks 291–300; 10 choices
+- [Part 031](priority-031.md) — global ranks 301–310; 10 choices
+- [Part 032](priority-032.md) — global ranks 311–320; 10 choices
+- [Part 033](priority-033.md) — global ranks 321–330; 10 choices
+- [Part 034](priority-034.md) — global ranks 331–340; 10 choices
+- [Part 035](priority-035.md) — global ranks 341–350; 10 choices
+- [Part 036](priority-036.md) — global ranks 351–360; 10 choices
+- [Part 037](priority-037.md) — global ranks 361–370; 10 choices
+- [Part 038](priority-038.md) — global ranks 371–380; 10 choices
+- [Part 039](priority-039.md) — global ranks 381–390; 10 choices
+- [Part 040](priority-040.md) — global ranks 391–400; 10 choices
+- [Part 041](priority-041.md) — global ranks 401–410; 10 choices
+- [Part 042](priority-042.md) — global ranks 411–420; 10 choices
+- [Part 043](priority-043.md) — global ranks 421–430; 10 choices
+- [Part 044](priority-044.md) — global ranks 431–440; 10 choices
+- [Part 045](priority-045.md) — global ranks 441–450; 10 choices
+- [Part 046](priority-046.md) — global ranks 451–460; 10 choices
+- [Part 047](priority-047.md) — global ranks 461–467; 7 choices
+- [Part 048](priority-048.md) — global ranks 471–480; 10 choices
+- [Part 049](priority-049.md) — global ranks 481–490; 10 choices
+- [Part 050](priority-050.md) — global ranks 491–500; 10 choices
+- [Part 051](priority-051.md) — global ranks 501–510; 10 choices
+- [Part 052](priority-052.md) — global ranks 511–520; 10 choices
+- [Part 053](priority-053.md) — global ranks 521–530; 10 choices
+- [Part 054](priority-054.md) — global ranks 531–540; 10 choices
+- [Part 055](priority-055.md) — global ranks 541–550; 10 choices
+- [Part 056](priority-056.md) — global ranks 551–560; 10 choices
+- [Part 057](priority-057.md) — global ranks 561–570; 10 choices
+- [Part 058](priority-058.md) — global ranks 571–580; 10 choices
+- [Part 059](priority-059.md) — global ranks 581–590; 10 choices
+- [Part 060](priority-060.md) — global ranks 591–600; 10 choices
+- [Part 061](priority-061.md) — global ranks 601–610; 10 choices
+- [Part 062](priority-062.md) — global ranks 611–620; 10 choices
+- [Part 063](priority-063.md) — global ranks 621–630; 10 choices
+- [Part 064](priority-064.md) — global ranks 631–640; 10 choices
+- [Part 065](priority-065.md) — global ranks 641–650; 10 choices
+- [Part 066](priority-066.md) — global ranks 651–660; 10 choices
+- [Part 067](priority-067.md) — global ranks 661–670; 10 choices
+- [Part 068](priority-068.md) — global ranks 671–680; 10 choices
+- [Part 069](priority-069.md) — global ranks 681–690; 10 choices
+- [Part 070](priority-070.md) — global ranks 691–700; 10 choices
+- [Part 071](priority-071.md) — global ranks 701–710; 10 choices
+- [Part 072](priority-072.md) — global ranks 711–720; 10 choices
+- [Part 073](priority-073.md) — global ranks 721–730; 10 choices
+- [Part 074](priority-074.md) — global ranks 731–740; 10 choices
+- [Part 075](priority-075.md) — global ranks 741–750; 10 choices
+- [Part 076](priority-076.md) — global ranks 751–760; 10 choices
+- [Part 077](priority-077.md) — global ranks 761–770; 10 choices
+- [Part 078](priority-078.md) — global ranks 771–780; 10 choices
+- [Part 079](priority-079.md) — global ranks 781–790; 10 choices
+- [Part 080](priority-080.md) — global ranks 791–800; 10 choices
+- [Part 081](priority-081.md) — global ranks 801–810; 10 choices
+- [Part 082](priority-082.md) — global ranks 811–820; 10 choices
+- [Part 083](priority-083.md) — global ranks 821–830; 10 choices
+- [Part 084](priority-084.md) — global ranks 831–840; 10 choices
+- [Part 085](priority-085.md) — global ranks 841–850; 10 choices
+- [Part 086](priority-086.md) — global ranks 851–860; 10 choices
+- [Part 087](priority-087.md) — global ranks 861–870; 10 choices
+- [Part 088](priority-088.md) — global ranks 871–880; 10 choices
+- [Part 089](priority-089.md) — global ranks 881–888; 8 choices
+
+## Complete shards / الأجزاء الكاملة
+
+- [Part 001](complete-001.md) — 15 choices; a bijection … Additive Inverse
+- [Part 002](complete-002.md) — 15 choices; admissible rule … ancestor
+- [Part 003](complete-003.md) — 15 choices; ancestor; successor; predecessor; child; parent … are not themselves integers
+- [Part 004](complete-004.md) — 15 choices; argument … as
+- [Part 005](complete-005.md) — 15 choices; Associativity … axiomatized / axiomatizable / effectively axiomatizable
+- [Part 006](complete-006.md) — 15 choices; balanced … bijective function; bijection; one-to-one correspondence
+- [Part 007](complete-007.md) — 15 choices; binary relation … branch; maximal chain; subtree
+- [Part 008](complete-008.md) — 15 choices; Branches … Cauchy sequence
+- [Part 009](complete-009.md) — 15 choices; Cauchy sequence; tends to zero; limit; rational approximation … codomain
+- [Part 010](complete-010.md) — 15 choices; codomain … complete ordered field
+- [Part 011](complete-011.md) — 15 choices; complete ordered field; construction; embedding; metaphysical identity … computer science
+- [Part 012](complete-012.md) — 15 choices; conclusion … constant-free fragment
+- [Part 013](complete-013.md) — 15 choices; construct … contrapositive
+- [Part 014](complete-014.md) — 15 choices; convention … cut
+- [Part 015](complete-015.md) — 15 choices; cut … defined
+- [Part 016](complete-016.md) — 15 choices; defined … derivation system / proof system
+- [Part 017](complete-017.md) — 15 choices; derivation/derivable … Directed graphs
+- [Part 018](complete-018.md) — 15 choices; directly … Distributivity
+- [Part 019](complete-019.md) — 15 choices; divisibility without remainder … eigenvariable
+- [Part 020](complete-020.md) — 15 choices; eigenvariable … empty relation
+- [Part 021](complete-021.md) — 15 choices; empty relation; universal relation … enumeration
+- [Part 022](complete-022.md) — 15 choices; enumeration … equivalence class
+- [Part 023](complete-023.md) — 15 choices; equivalence class … exchange
+- [Part 024](complete-024.md) — 15 choices; exclusive or (XOR) … finite
+- [Part 025](complete-025.md) — 15 choices; finite model property … formal meta-logic
+- [Part 026](complete-026.md) — 15 choices; formal meta-logic … free group / group action / orbit / free action / absorption
+- [Part 027](complete-027.md) — 15 choices; freely available … future contingent
+- [Part 028](complete-028.md) — 15 choices; future contingent … Graphs
+- [Part 029](complete-029.md) — 15 choices; greater than … identity relation on
+- [Part 030](complete-030.md) — 15 choices; identity relation/symbol … induces
+- [Part 031](complete-031.md) — 15 choices; induction / inductive proof … infinite-valued Łukasiewicz logic
+- [Part 032](complete-032.md) — 15 choices; infinite-valued Łukasiewicz logic … interpolation theorem / interpolant
+- [Part 033](complete-033.md) — 15 choices; interpretation … inverse; left inverse; right inverse of a function
+- [Part 034](complete-034.md) — 15 choices; Inverses of Functions … isolated vertex; loop; multiple edges; directed or labeled edge
+- [Part 035](complete-035.md) — 15 choices; isomorphic … least
+- [Part 036](complete-036.md) — 15 choices; least element … linear order.
+- [Part 037](complete-037.md) — 15 choices; local determination … matching pair of signed formulas
+- [Part 038](complete-038.md) — 15 choices; material conditional / strict conditional … modal logic; accessibility relation; intensional; provability logic
+- [Part 039](complete-039.md) — 15 choices; modal sequent calculus … more
+- [Part 040](complete-040.md) — 15 choices; multiple-conclusion system … natural number
+- [Part 041](complete-041.md) — 15 choices; natural numbers … Non-enumerable Sets
+- [Part 042](complete-042.md) — 15 choices; non-logical symbol … Open Logic Project
+- [Part 043](complete-043.md) — 15 choices; Open Logic Text … ordered field; Completeness Property; least upper bound
+- [Part 044](complete-044.md) — 15 choices; ordered fields … pairing function
+- [Part 045](complete-045.md) — 15 choices; Pairing function … partial isomorphism / back-and-forth / quantifier rank
+- [Part 046](complete-046.md) — 15 choices; partial order … photo credits
+- [Part 047](complete-047.md) — 15 choices; pointwise limit / uniformly Cauchy / uniformly convergent / compact … predicative / impredicative
+- [Part 048](complete-048.md) — 15 choices; prefix … proof
+- [Part 049](complete-049.md) — 15 choices; proof … propositional connectives
+- [Part 050](complete-050.md) — 15 choices; propositional logic … R-equivalent
+- [Part 051](complete-051.md) — 15 choices; range … reduct / expansion
+- [Part 052](complete-052.md) — 15 choices; Reduction … regular minimization
+- [Part 053](complete-053.md) — 15 choices; regular proof … resolution method / resolution refutation
+- [Part 054](complete-054.md) — 15 choices; restriction … satisfaction / satisfies
+- [Part 055](complete-055.md) — 15 choices; satisfiability; validity; semantic consequence … self-membered; non-self-membered set
+- [Part 056](complete-056.md) — 7 choices; Semantic Deduction Theorem … sequence
+- [Part 057](complete-057.md) — 10 choices; sequent … serial, Euclidean, weakly dense/connected/directed, partially functional, converse well-founded
+- [Part 058](complete-058.md) — 15 choices; set … sigma-algebra
+- [Part 059](complete-059.md) — 15 choices; signed formula … standard part / immediate predecessor / cofinite / elementarily equivalent
+- [Part 060](complete-060.md) — 15 choices; state … structural rule
+- [Part 061](complete-061.md) — 15 choices; structural rule … subtree
+- [Part 062](complete-062.md) — 15 choices; subtree … symmetric
+- [Part 063](complete-063.md) — 15 choices; symmetric … tautology
+- [Part 064](complete-064.md) — 15 choices; tautology / tautological instance … the two added signed formulas
+- [Part 065](complete-065.md) — 15 choices; The union of a set and one of its subsets is just the bigger set: … transitive
+- [Part 066](complete-066.md) — 15 choices; transitive … tree; rooted tree; root
+- [Part 067](complete-067.md) — 15 choices; Trees … truth-functional; truth function; material conditional
+- [Part 068](complete-068.md) — 15 choices; truth-value sign … union
+- [Part 069](complete-069.md) — 15 choices; Union … valid/validity
+- [Part 070](complete-070.md) — 15 choices; valuation … weakening
+- [Part 071](complete-071.md) — 13 choices; weakening … yet
+
+[Back to start-here queue / العودة إلى قائمة البدء](../EXPERT_REVIEW_START_HERE.md)

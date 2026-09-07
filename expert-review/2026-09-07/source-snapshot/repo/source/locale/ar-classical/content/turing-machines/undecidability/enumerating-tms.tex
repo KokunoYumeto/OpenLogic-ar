@@ -1,0 +1,138 @@
+% Part: turing-machines
+% Chapter: undecidability
+% Section: enumerating-tms
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{tur}{und}{enu}
+\olsection{تعداد آلات تورنغ}
+
+\begin{explain}
+نبين أن مجموعة آلات تورنغ !!{enumerable}، على معنى ستأتي دقته.
+ووجه ذلك أن لكل آلة وصفًا منتهيًا: فحالاتها منتهية، وكذلك أبجدية
+شريطها، ودالة انتقالها دالة جزئية من $Q \times \Sigma$ إلى
+$Q \times \Sigma \times \{\TMleft,\TMright,\TMstay\}$. فيكفي في تعيينها
+سرد قيمها عند أزواج الوسيطات التي تُعرّف عليها، وهي منتهية العدد.
+
+إلا أن في هذا القول تفصيلًا ينبغي التنبه له. فإن تعريف آلة تورنغ
+لم يقيّد ال!!{element}s التي تُتخذ حالات أو رموزًا للشريط؛ فيجوز،
+بحسب ظاهر التعريف، أن نجعل أي عدد حقيقي بعينه حالة لآلة ما. وإنما
+العبرة ب\emph{سلوك} الآلة، لا بذوات الأشياء المسماة حالات ورموزًا.
+ولننظر في الآلتين المرسومتين في \olref{fig:variants}.
+\begin{figure}
+\begin{center}
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+                    semithick]
+  \tikzstyle{every state}=[fill=none,draw=black,text=black]
+
+  \node[initial,state]         (A)              {$q_0$};
+  \node[state]         (B) [right of=A] {$q_1$};
+
+  \path (A) edge [bend left] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (B)
+        (B) edge [loop above] node {\TMtrans{\TMblank}{\TMblank}{\TMright}} (B)
+            edge [bend left] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (A);
+\end{tikzpicture}\\
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+  semithick]
+\tikzstyle{every state}=[fill=none,draw=black,text=black]
+
+\node[initial,state]         (A)              {$s$};
+\node[state]         (B) [right of=A] {$h$};
+
+\path (A) edge [bend left] node {\TMtrans{A}{A}{\TMright}} (B)
+(B) edge [loop above] node {\TMtrans{\TMblank}{\TMblank}{\TMright}} (B)
+edge [bend left] node {\TMtrans{A}{A}{\TMright}} (A);
+\end{tikzpicture}
+\end{center}
+\caption{اختلاف التسميات في آلة \emph{الزوجية}}
+\ollabel{fig:variants}
+\end{figure}
+فالمخطط الأول لآلة $M$ أبجدية شريطها
+$\Sigma=\{\TMendtape,\TMblank,\TMstroke\}$ وحالاتها
+$\{q_0,q_1\}$، والثاني لآلة $M'$ أبجديتها
+$\Sigma'=\{\TMendtape,\TMblank,A\}$ وحالتاها $\{s,h\}$. ولا فرق بين
+تعليماتهما سوى هذه التسميات: فالآلة $M$ تتوقف عند متتالية من $n$
+علامات~$\TMstroke$ إذا وفقط إذا كان $n$ زوجيًا؛ وكذلك تتوقف $M'$
+عند متتالية من $n$ رموز~$A$ إذا وفقط إذا كان $n$ زوجيًا. فليس
+التغيير إلا تسمية $\TMstroke$ باسم~$A$، و$q_0$ باسم~$s$، و$q_1$
+باسم~$h$. ويجري هذا الحكم على سائر الآلات: نعد الآلتين متماثلتين
+متى أمكن الانتقال من إحداهما إلى الأخرى بإعادة تسمية الحالات والرموز.
+بل يجوز أن تكون أسماؤها كلها أعدادًا صحيحة موجبة؛ فنضع~$1$
+موضع~$\sigma_0$، و~$2$ موضع~$\sigma_1$، وهكذا. وتكون تسمية
+$\TMendtape$ هي~$1$، وتسمية $\TMblank$ هي~$2$، وعلى هذا القياس.
+فتصير آلة \emph{الزوجية} إلى الصورة التي في
+\olref{fig:standard-even}.
+\begin{figure}
+\[\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+  semithick]
+\tikzstyle{every state}=[fill=none,draw=black,text=black]
+
+\node[initial,state]         (A)              {$1$};
+\node[state]         (B) [right of=A] {$2$};
+
+\path (A) edge [bend left] node {\TMtrans{3}{3}{\TMright}} (B)
+(B) edge [loop above] node {\TMtrans{2}{2}{\TMright}} (B)
+edge [bend left] node {\TMtrans{3}{3}{\TMright}} (A);
+\end{tikzpicture}
+\]
+\caption{آلة \emph{زوجية} قياسية}
+\ollabel{fig:standard-even}
+\end{figure}
+ولنسمّ آلة تورنغ \emph{قياسية} إذا كانت حالاتُها ورموزُها أعدادًا
+صحيحة موجبة، ولنقصر النظر فيما يأتي على هذه الآلات.
+\footnote{«الآلة القياسية» اصطلاح نستعمله هنا، وليس اصطلاحًا متعارفًا عليه.}
+
+كان المطلوب أن مجموعة آلات تورنغ !!{enumerable}؛ وقد تبين أن
+حسبنا لهذا الغرض إثبات أن مجموعة الآلات القياسية !!{enumerable}.
+ولتكن $M=\tuple{Q,\Sigma,q_0,\delta}$ آلة قياسية. وصفها بسلسلة
+منتهية من الأعداد الصحيحة الموجبة يكون على الوجه الآتي: نسرد عدد
+الحالات، فالحالات، ثم عدد الرموز، فالرموز، ثم الحالة الابتدائية.
+وكل ذلك أعداد صحيحة موجبة، لأن $M$ قياسية. ويبقى تعيين~$\delta$.
+وأزواج الوسيطات $\tuple{q,\sigma}$ منتهية العدد، لانتهاء $Q$
+و~$\Sigma$؛ فلا تحمل~$\delta$ إلا قائمة منتهية من الخماسيات
+$\tuple{q,\sigma,q',\sigma',d}$ التي يتحقق فيها
+$\delta(q,\sigma)=\tuple{q',\sigma',D}$، ويكون $d$ رمزًا عدديًا
+للاتجاه~$D$: نجعل $1$ رمز~$\TMleft$، و$2$ رمز~$\TMright$،
+و$3$ رمز~$\TMstay$.
+
+فقد صار وصف كل آلة قياسية قائمة منتهية من الأعداد الصحيحة الموجبة،
+أي متتالية $s_M\in(\PosInt)^*$. ووصف آلة \emph{الزوجية} القياسية،
+مثلًا، هو
+\[
+2, \underbrace{1, 2}_Q, 3, \overbrace{1, 2, 3}^\Sigma, 1, \underbrace{1, 3, 2, 3, 2}_{\delta(1,3) = \tuple{2,3,R}},
+\overbrace{2, 2, 2, 2, 2}^{\delta(2,2) = \tuple{2,2,R}},
+\underbrace{2, 3, 1, 3, 2}_{\delta(2,3) = \tuple{1,3,R}}.
+\]
+\end{explain}
+
+\begin{thm}
+ليست كل دالة من $\Nat$ إلى~$\Nat$ قابلة للحساب بآلة تورنغ.
+\end{thm}
+
+\begin{proof}
+مجموعة المتتاليات المنتهية من الأعداد الصحيحة الموجبة
+$(\PosInt)^*$ !!{enumerable}
+(\cref{sfr:siz:zigzag:prob:posint-star}). وأوصاف الآلات القياسية
+مجموعة جزئية من~$(\PosInt)^*$، فتقبل التعداد أيضًا. وكل دالة من
+$\Nat$ إلى~$\Nat$ قابلة للحساب بآلة تورنغ تحسبها آلة، بل آلات كثيرة.
+فإذا سمينا حالات إحدى هذه الآلات ورموزها بأعداد صحيحة موجبة، وجعلنا
+خاصةً $\TMendtape$ هو~$1$، و$\TMblank$ هو~$2$،
+و$\TMstroke$ هو~$3$، حصلنا على آلة قياسية تحسب الدالة نفسها.
+إذن كل دالة قابلة للحساب تحسبها آلة قياسية، ومن ثم تقبل مجموعة
+الدوال القابلة للحساب من $\Nat$ إلى~$\Nat$ التعداد.
+
+لكن مجموعة الدوال كلها من $\Nat$ إلى~$\Nat$ ليست !!{enumerable}
+(\cref{sfr:siz:red:prob:nat-nat}). فلو كانت كل دالة تحسبها آلة
+تورنغ، لكان سرد أوصاف الآلات التي تحسبها تعدادًا للدوال جميعًا، وهو
+خلاف ما ثبت. فلا بد من دوال لا تقبل الحساب بآلة تورنغ.
+\end{proof}
+
+\begin{prob}
+  التمس وصفًا لآلات تورنغ يستغني عن سرد الحالات ورموز الأبجدية واحدًا
+  واحدًا. ولك أن تختار تعريفًا آخر للآلة «القياسية»؛ على أن تبين
+  كيف تستطيع آلة قياسية، بهذا المعنى الذي اخترته، محاكاة كل آلة تورنغ.
+\end{prob}
+
+\end{document}

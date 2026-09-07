@@ -1,0 +1,84 @@
+% Part: applied-modal-logics
+% Chapter: epistemic-logic
+% Section: language-epistemic-logic
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{aml}{el}{lan}
+
+\olsection{لغة منطق المعرفة}
+
+\begin{defn}
+لتكن~$G$ مجموعة من رموز الفاعلين. تحوي اللغة الأساسية لمنطق المعرفة متعدد
+الفاعلين ما يأتي:
+\begin{enumerate}
+  \tagitem{prvFalse}{الثابت القضي الدال على !!{falsity}~$\lfalse$.}{}
+  \tagitem{prvTrue}{الثابت القضي الدال على !!{truth}~$\ltrue$.}{}
+  \item مجموعة !!{denumerable} من ال!!{propositional variable}s:
+    $\Obj p_0$، $\Obj p_1$، $\Obj p_2$، \dots
+  \item الروابط القضية: \startycommalist
+  \iftag{prvNot}{\ycomma $\lnot$ (النفي)}{}%
+  \iftag{prvAnd}{\ycomma $\land$ (العطف)}{}%
+  \iftag{prvOr}{\ycomma $\lor$ (الفصل)}{}%
+  \iftag{prvIf}{\ycomma $\lif$ (!!{conditional})}{}%
+  \iftag{prvIff}{\ycomma $\liff$ (!!{biconditional})}{}.
+  \item مؤثر المعرفة~$\Knows_a$، حيث~$a \in G$.
+\end{enumerate}
+\end{defn}
+
+إذا لم يعننا في نظامنا إلا معرفة فاعل واحد، أمكننا إسقاط الإشارة إلى
+المجموعة~$G$ وإلى الفاعلين الأفراد. وعندئذ لا يبقى لدينا إلا المؤثر
+الأساسي~$\Knows$.
+
+\begin{defn}
+تُعرّف \emph{!!^{formula}s} اللغة المعرفية استقرائيًا كما يأتي:
+\begin{enumerate}
+\tagitem{prvFalse}{$\lfalse$ !!{formula} ذرية.}{}
+
+\tagitem{prvTrue}{$\ltrue$ !!{formula} ذرية.}{}
+
+\item كل متغير قضي~$\Obj p_i$ هو !!{formula} (ذرية).
+
+\tagitem{prvNot}{إذا كانت~$!A$ !!a{formula}، كانت~$\lnot !A$
+  !!a{formula}.}{}
+
+\tagitem{prvAnd}{إذا كانت~$!A$ و$!B$ !!{formula}s، كانت
+  $(!A \land !B)$ !!a{formula}.}{}
+
+\tagitem{prvOr}{إذا كانت~$!A$ و$!B$ !!{formula}s، كانت
+  $(!A \lor !B)$ !!a{formula}.}{}
+
+\tagitem{prvIf}{إذا كانت~$!A$ و$!B$ !!{formula}s، كانت
+  $(!A \lif !B)$ !!a{formula}.}{}
+
+\tagitem{prvIff}{إذا كانت~$!A$ و$!B$ !!{formula}s، كانت
+  $(!A \liff !B)$ !!a{formula}.}{}
+
+\item إذا كانت~$!A$ !!a{formula} وكان~$a \in G$، كانت~$\Knows_a !A$
+  !!a{formula}.
+
+\tagitem{limitClause}{لا شيء غير ذلك !!a{formula}.}{}
+\end{enumerate}
+\end{defn}
+
+لا تحتوي !!a{formula}~$!A$ على~$\Knows_a$ لأي~$a \in G$ إذا وفقط إذا
+كانت \emph{خالية من الجهة}.
+
+\begin{defn}
+  بينما يُقصد من المؤثر~$\Knows$ تمثيل معرفة الفرد، يمثل~$\EKnows$، الذي
+  يُقرأ غالبًا «يعلم الجميع»، معرفة المجموعة. وحيث~$G' \subseteq G$، نعرّف
+  $\EKnows_{G'} !A$ اختصارًا لـ
+  \[\bigwedge_{b \in G'} \Knows_b !A.\]
+\end{defn}
+
+ويمكننا أيضًا تعريف معنى للمعرفة أشد قوة، هو \emph{المعرفة المشتركة} بين
+مجموعة من الفاعلين~$G$. فإذا كانت معلومة ما معرفة مشتركة بين مجموعة من
+الفاعلين، كان معنى ذلك أن جميع الفاعلين، لكل توليفة منهم في تلك المجموعة،
+يعلمون أن بعضهم يعلم أن بعضهم يعلم~\dots إلى ما لا نهاية. وهذا أقوى بكثير
+من معرفة المجموعة، ومن السهل إنشاء نماذج علائقية تكون فيها !!a{formula}
+معرفةً للمجموعة دون أن تكون معرفة مشتركة. وسنستعمل~$\CKnows_G !A$ لتمثيل
+«من المعرفة المشتركة بين~$G$ أن~$!A$».
+
+\end{document}

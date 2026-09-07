@@ -1,0 +1,75 @@
+% Part: many-valued-logic
+% Chapter: sequent-calculus
+% Section: rules-and-proofs
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mvl}{seq}{rul}
+
+\olsection{القواعد وال\usetoken{P}{derivation}}
+
+نجعل~$\Gamma, \Delta, \Pi, \Lambda$ فيما يأتي أسماء لمتتاليات
+منتهية من ال!!{sentence}s، وندخل في ذلك المتتالية الخالية.
+
+\begin{defn}[التتابعية]
+\emph{التتابعية ذات الجوانب~$n$} تعبير من الصورة
+\[
+\Gamma_1 \nSequent \dots \nSequent \Gamma_n
+\]
+حيث كل~$\Gamma_i$ متتالية منتهية (وربما خالية) من !!{sentence}s
+اللغة~$\Lang L$.
+\end{defn}
+
+\begin{defn}[التتابعية الابتدائية]
+\emph{التتابعية الابتدائية ذات الجوانب~$n$} تتابعية ذات جوانب~$n$ من
+الصورة~$!A \nSequent \dots \nSequent !A$ لأي !!{sentence}~$!A$ في
+اللغة.
+
+وقد تشتمل اللغة على رابط صفري الرتبة~$\star$، وهو ثابت من ثوابت
+القضايا. وحينئذ نعدّ التتابعية~$\dots \nSequent \star \nSequent \dots$
+ابتدائية أيضًا، على أن يوضع~$\star$ وحده في الموضع الموافق لقيمة
+الصدق~$\tf{\star} \in V$، وتخلو سائر المواضع.
+\end{defn}
+
+إذا كان المنطق ذا~$n$ من القيم ورمزه~$\Log{L}$، خُصّ كل رابط فيه
+بقاعدة منطقية لكل قيمة صدق يجوز أن يأخذها في~$\Log{L}$.
+وأما ال!!^{derivation}s في حساب التتابعيات ذي الجوانب~$n$ للمنطق~$\Log{L}$،
+فهي أشجار رؤوسها العليا تتابعيات ابتدائية. وكل تتابعية تقع تحت واحدة
+أو أكثر إنما تصح في الشجرة إذا نتجت مما فوقها بتطبيق صحيح لإحدى
+قواعد روابط~$\Log{L}$.
+
+\begin{defn}[المبرهنات]
+تكون !!^a{sentence}~$!A$ \emph{مبرهنة} في منطق ذي~$n$ من القيم
+$\Log{L}$ إذا وُجد !!a{derivation} للتتابعية ذات الجوانب~$n$ التي
+تحتوي~$!A$ في كل موضع يقابل قيمة صدق مميّزة في~$\Log{L}$. ونكتب
+$\Proves[\Log{L}] !A$ إذا كانت~$!A$ مبرهنة، ونكتب
+$\Proves/[\Log{L}] !A$ إذا لم تكن كذلك.
+\end{defn}
+
+\begin{defn}[!!^{derivability}]
+تكون !!^a{sentence}~$!A$ \emph{!!{derivable} من} مجموعة
+!!{sentence}s~$\Gamma$ في منطق ذي~$n$ من القيم~$\Log{L}$، أي
+$\Gamma \Proves[\Log{L}] !A$، إذا وفقط إذا وُجدت مجموعة جزئية
+منتهية~$\Gamma_0 \subseteq \Gamma$ ومتتالية~$\Gamma_0'$ من
+ال!!{sentence}s في~$\Gamma_0$ بحيث يكون للتتابعية الآتية
+!!a{derivation}:
+\[ \Lambda_1 \nSequent \dots \nSequent \Lambda_n \]
+حيث تكون~$\Lambda_i$ هي~$!A$ إذا كان الموضع~$i$ يقابل قيمة صدق
+مميّزة، وتكون~$\Gamma_0'$ إذا كان يقابل قيمة صدق غير مميّزة. وإذا لم
+تكن~$!A$ !!{derivable} من~$\Gamma$، كتبنا
+$\Gamma \Proves/[\Log{L}] !A$.
+\end{defn}
+
+ولنعتبر منطق~\L ukasiewicz الثلاثي القيم، فحساب تتابعياته ذو ثلاثة
+جوانب. في التتابعية~$\Gamma \nSequent \Pi \nSequent \Delta$
+موضع~$\Gamma$ للقيمة~$\False$، وموضع~$\Delta$ للقيمة~$\True$،
+وموضع~$\Pi$ للقيمة~$\Undef$. وابتدائياته على الصورة
+$!A \nSequent !A \nSequent !A$. ثم إن~$\True$ وحدها مميّزة؛
+ولهذا كان~$\Gamma \Proves[\LogLuk[3]] !A$ مكافئًا لوجود
+!!a{derivation} للتتابعية~$\Gamma \nSequent \Gamma \nSequent !A$.
+ولو عُدّت~$\Undef$ مميّزة أيضًا، لكان المطلوب !!a{derivation}
+للتتابعية~$\Gamma \nSequent !A \nSequent !A$.
+
+\end{document}

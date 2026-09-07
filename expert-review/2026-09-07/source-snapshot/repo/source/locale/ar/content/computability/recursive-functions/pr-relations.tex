@@ -1,0 +1,161 @@
+% Part: computability
+% Chapter: recursive-functions
+% Section: pr-relations
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{rec}{prr}
+\olsection{العلائق العودية البدائية}
+
+\begin{defn}
+يقال إن العلاقة $R(\vec x)$ عودية بدائية إذا كانت دالتها المميزة
+\[
+\Char{R}(\vec x) = \left\{
+  \begin{array}{ll}
+  1 & \mbox{إذا صدقت $R(\vec x)$} \\
+  0 & \mbox{في غير ذلك}
+  \end{array}
+\right.
+\]
+عودية بدائية.
+\end{defn}
+
+وبعبارة أخرى، حين يتحدث المرء عن علاقة عودية بدائية $R(\vec x)$، فهو
+يشير إلى علاقة من الصورة $\Char{R}(\vec x)=1$، حيث $\Char{R}$ دالة
+عودية بدائية تعيد، عند أي دخل، إما $1$ وإما $0$. فمثلًا تقابل العلاقة
+$\fn{IsZero}(x)$، التي تصدق إذا وفقط إذا كان $x=0$، الدالة
+$\Char{\fn{IsZero}}$ المعرفة بالعودية البدائية هكذا:
+\begin{align*}
+\Char{\fn{IsZero}}(0) & = 1,\\
+\Char{\fn{IsZero}}(x+1) & = 0.
+\end{align*}
+
+وينبغي أن يكون واضحًا أن العلائق يمكن تركيبها مع دوال عودية بدائية
+أخرى. ولذلك تكون العلاقتان الآتيتان عوديتين بدائيتين أيضًا:
+\begin{enumerate}
+\item علاقة المساواة، $x=y$، المعرفة بـ
+$\fn{IsZero}(\left|x-y\right|)$.
+\item علاقة الأصغر من أو المساوي، $x\leq y$، المعرفة بـ
+$\fn{IsZero}(x\tsub y)$.
+\end{enumerate}
+
+\begin{prop}
+  مجموعة العلائق العودية البدائية منغلقة تحت العمليات البوليانية؛ أي
+  إذا كانت $P(\vec x)$ و$Q(\vec x)$ عوديتين بدائيتين، كانت العلائق
+  الآتية كذلك:
+  \begin{enumerate}
+  \item $\lnot P(\vec x)$
+  \item $P(\vec x) \land Q(\vec x)$
+  \item $P(\vec x) \lor Q(\vec x)$
+  \item $P(\vec x) \lif Q(\vec x)$
+  \end{enumerate}
+\end{prop}
+
+\begin{proof}
+  افترض أن $P(\vec x)$ و$Q(\vec x)$ عوديتان بدائيتان، أي إن دالتيهما
+  المميزتين $\Char{P}$ و$\Char{Q}$ عوديتان بدائيتان. ويلزمنا بيان أن
+  الدوال المميزة لـ$\lnot P(\vec x)$ وما بعدها عودية بدائية أيضًا.
+  \[
+  \Char{\lnot P}(\vec x) = \begin{cases}
+    0 & \text{إذا كانت $\Char{P}(\vec x) = 1$}\\
+    1 & \text{في غير ذلك}
+  \end{cases}
+  \]
+  يمكننا تعريف $\Char{\lnot P}(\vec x)$ بأنها
+  $1\tsub\Char{P}(\vec x)$.
+  \[
+  \Char{P \land Q}(\vec x) = \begin{cases}
+    1 & \text{إذا كانت $\Char{P}(\vec x) = \Char{Q}(\vec x) = 1$}\\
+    0 & \text{في غير ذلك}
+  \end{cases}
+  \]
+  ويمكننا تعريف $\Char{P\land Q}(\vec x)$ بأنها
+  $\Char{P}(\vec x)\cdot\Char{Q}(\vec x)$، أو بأنها
+  $\fn{min}(\Char{P}(\vec x),\Char{Q}(\vec x))$. وبالمثل،
+  \begin{align*}
+    \Char{P \lor Q}(\vec x) & = \fn{max}(\Char{P}(\vec x), \Char{Q}(\vec x)) \text{، و}\\
+    \Char{P \lif Q}(\vec x) & = \fn{max}(1 \tsub
+  \Char{P}(\vec x), \Char{Q}(\vec x)).
+  \end{align*}
+\end{proof}
+
+\begin{prop}
+  مجموعة العلائق العودية البدائية منغلقة تحت التكميم المحدود؛ أي إذا
+  كانت $R(\vec x,z)$ علاقة عودية بدائية، كانت العلاقتان
+  \begin{align*}
+    & \bforall{z < y}{R(\vec x, z)} \text{، و}\\
+    & \bexists{z < y}{R(\vec x, z)}
+  \end{align*}
+  عوديتين بدائيتين. وتصدق $\bforall{z<y}{R(\vec x,z)}$ على $\vec x$
+  و$y$ إذا وفقط إذا صدقت $R(\vec x,z)$ لكل~$z$ أصغر من~$y$، وكذلك
+  الحال في $\bexists{z<y}{R(\vec x,z)}$.
+\end{prop}
+
+\begin{proof}
+  نأخذ، اصطلاحًا، $\bforall{z<0}{R(\vec x,z)}$ صادقة (للسبب البسيط
+  أنه لا يوجد $z$ أصغر من~$0$)، ونأخذ
+  $\bexists{z<0}{R(\vec x,z)}$ كاذبة. يعمل المكمم الكلي المحدود عمل
+  جداء منته أو أصغر مكرر؛ أي إذا كانت
+  $P(\vec x,y)\defiff\bforall{z<y}{R(\vec x,z)}$، أمكن تعريف
+  $\Char{P}(\vec x,y)$ بـ
+  \begin{align*}
+    \Char{P}(\vec x, 0) & = 1\\
+    \Char{P}(\vec x, y+1) & =
+    \fn{min}(\Char{P}(\vec x, y), \Char{R}(\vec x, y)).
+  \end{align*}
+  ويمكن بالمثل تعريف التكميم الوجودي المحدود باستعمال $\fn{max}$. أو
+  يمكن تعريفه من التكميم الكلي المحدود باستعمال التكافؤ
+  $\bexists{z<y}{R(\vec x,z)}\liff
+  \lnot\bforall{z<y}{\lnot R(\vec x,z)}$. ولاحظ، مثلًا، أن مكممًا
+  محدودًا من الصورة $\bexists{x\leq y}{\dots x\dots}$ يكافئ
+  $\bexists{x<y+1}{\dots x\dots}$.
+\end{proof}
+
+\begin{prob}
+  بين أن العلاقة الثلاثية الحجج $x\equiv y\mod n$ (التطابق بترديد
+  ~ $n$) عودية بدائية.
+\end{prob}
+
+ومن الدوال العودية البدائية المفيدة أيضًا الدالة الشرطية
+$\fn{cond}(x,y,z)$ المعرفة بـ
+\begin{align*}
+  \fn{cond}(x,y,z) & = \begin{cases}
+  y & \text{إذا كان $x=0$} \\
+  z & \text{في غير ذلك}.
+\end{cases}
+\intertext{وهي معرفة عوديًا بـ}
+\fn{cond}(0,y,z) & = y,\\
+\fn{cond}(x+1,y,z) & = z.
+\end{align*}
+ويمكن استعمالها لتسويغ تعريفات الدوال العودية البدائية بالحالات من
+علائق عودية بدائية:
+
+\begin{prop}
+إذا كانت $g_0(\vec x)$، …،~$g_m(\vec x)$ دوال عودية بدائية، وكانت
+$R_0(\vec x)$، …،~$R_{m-1}(\vec x)$ علائق عودية بدائية، فإن الدالة
+$f$ المعرفة بـ
+\[
+f(\vec x) = \begin{cases}
+    g_0(\vec x) & \text{إذا صدقت $R_0(\vec{x})$} \\
+    g_1(\vec x) & \text{إذا صدقت $R_1(\vec{x})$ ولم تصدق $R_0(\vec{x})$} \\
+    \vdots & \\
+    g_{m-1}(\vec x) & \text{إذا صدقت $R_{m-1}(\vec{x})$ ولم تصدق أي
+      من سابقاتها}
+    \\
+    g_m(\vec x) & \mbox{في غير ذلك}
+\end{cases}
+\]
+عودية بدائية أيضًا.
+\end{prop}
+
+\begin{proof}
+  حين $m=1$، لا تكون هذه إلا الدالة المعرفة بـ
+  \[
+  f(\vec x) = \fn{cond}(\Char{\lnot R_0}(\vec x),g_0(\vec x),g_1(\vec
+  x)).
+  \]
+  وحين يكون $m$ أكبر من~$1$، يكفي تركيب تعريفات من هذه الصورة.
+\end{proof}
+\end{document}

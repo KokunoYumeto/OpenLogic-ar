@@ -1,0 +1,103 @@
+% Part: first-order-logic
+% Chapter: natural-deduction
+% Section: derivations
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{ntd}{der}}
+      {\olfileid{pl}{ntd}{der}}
+
+\olsection{\usetoken{P}{derivation}}
+
+\begin{explain}
+قلنا ما الافتراض، وقدمنا قواعد الاستدلال. ومنهما تتولد
+!!^{derivation}s في الاستنتاج الطبيعي استقرائيًا: فكل !!{derivation}
+إما أن يكون افتراضًا قائمًا بذاته، وإما أن يتألف من واحد أو اثنين أو
+ثلاثة من ال!!{derivation}s، يعقبها استدلال صحيح.
+\end{explain}
+
+\begin{defn}[!!^{derivation}]
+يكون \Article{derivation} \emph{!!{derivation}} لـ!!a{sentence}~$!A$
+من افتراضات~$\Gamma$ شجرة منتهية من ال!!{sentence}s تحقق الشروط الآتية:
+\begin{enumerate}
+\item تكون ال!!{sentence}s العليا في الشجرة إما عناصر في~$\Gamma$، أو
+  !!{discharged} باستدلال في الشجرة.
+\item تكون ال!!{sentence} السفلى في الشجرة هي~$!A$.
+\item تكون كل !!{sentence} في الشجرة، عدا الجملة~$!A$ الواقعة في
+  الأسفل، مقدمة لتطبيق صحيح لقاعدة استدلال تقع نتيجته مباشرة تحت تلك
+  ال!!{sentence} في الشجرة.
+\end{enumerate}
+ونقول عندئذ إن~$!A$ هي \emph{نتيجة} ال!!{derivation}، وإن~$\Gamma$ هي
+افتراضاته ال!!{undischarged}.
+
+إذا وجد !!a{derivation} لـ~$!A$ من~$\Gamma$، قلنا إن~$!A$
+\emph{!!{derivable}} من~$\Gamma$، أو بالرموز: $\Gamma \Proves !A$.
+وإذا وجد !!a{derivation} لـ~$!A$ تكون فيه كل الافتراضات
+!!{discharged}، كتبنا~$\Proves !A$.
+\end{defn}
+
+\begin{ex}
+كل افتراض قائم بذاته !!a{derivation}. فمثلًا، تكون~$!A$ بمفردها
+!!a{derivation}، وكذلك~$!B$ بمفردها. ويمكننا الحصول على !!{derivation}
+جديد منهما بتطبيق قاعدة~$\Intro{\land}$ مثلًا:
+\begin{prooftree}
+\AxiomC{$!A$}
+\AxiomC{$!B$}
+\RightLabel{\Intro{\land}}
+\BinaryInfC{$!A \land !B$}
+\end{prooftree}
+ويُراد لهذه القواعد أن تكون عامة: فيمكننا أن نستبدل بما فيها من~$!A$
+و$!B$ أي !!{sentence}s، مثل~$!C$ و$!D$. وعندئذ تكون النتيجة
+$!C \land !D$، ومن ثم يكون
+\begin{prooftree}
+\AxiomC{$!C$}
+\AxiomC{$!D$}
+\RightLabel{\Intro{\land}}
+\BinaryInfC{$!C \land !D$}
+\end{prooftree}
+!!{derivation} صحيحًا. وبالطبع يمكننا كذلك تبديل الافتراضين، فتقوم~$!D$
+مقام~$!A$، وتقوم~$!C$ مقام~$!B$. ولذلك يكون
+\begin{prooftree}
+\AxiomC{$!D$}
+\AxiomC{$!C$}
+\RightLabel{\Intro{\land}}
+\BinaryInfC{$!D \land !C$}
+\end{prooftree}
+!!{derivation} صحيحًا أيضًا.
+
+يمكننا الآن تطبيق قاعدة أخرى، مثل~$\Intro{\lif}$، تتيح لنا استنتاج
+شرطية و!!{discharge} أي افتراض يطابق مقدَّم تلك الشرطية. ولذلك تكون
+كل من ال!!{derivation}s الآتية صحيحة:
+\begin{prooftree}
+\AxiomC{$\Discharge{!C}{1}$}
+\AxiomC{$!D$}
+\RightLabel{\Intro{\land}}
+\BinaryInfC{$!C \land !D$}
+\DischargeRule{\Intro{\lif}}{1}
+\UnaryInfC{$!C \lif (!C \land !D)$}
+\DisplayProof\bottomAlignProof
+\AxiomC{$!C$}
+\AxiomC{$\Discharge{!D}{1}$}
+\RightLabel{\Intro{\land}}
+\BinaryInfC{$!C \land !D$}
+\DischargeRule{\Intro{\lif}}{1}
+\UnaryInfC{$!D \lif (!C \land !D)$}
+\end{prooftree}
+وهما تبينان، على الترتيب، أن~$!D \Proves !C \lif (!C \land !D)$ وأن
+$!C \Proves !D \lif (!C \land !D)$.
+
+تذكّر أن إسقاط الافتراضات إذن لا شرط: فلا يلزمنا إسقاط الافتراضات.
+وعلى وجه الخصوص، يمكننا تطبيق قاعدة حتى إذا لم تكن الافتراضات موجودة
+في ال!!{derivation}. فمثلًا، الآتي جائز مع أنه لا يوجد افتراض~$!A$
+لـ!!{discharged}ه:
+\begin{prooftree}
+  \AxiomC{$!B$}
+  \DischargeRule{\Intro{\lif}}{1}
+  \UnaryInfC{$!A \lif !B$}
+\end{prooftree}
+\end{ex}
+
+\end{document}

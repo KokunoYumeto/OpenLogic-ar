@@ -1,0 +1,170 @@
+% Part: lambda-calculus
+% Chapter: lambda-definability
+% Section: fixpoints
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{ldf}{fp}
+
+\olsection{النقاط الثابتة}
+
+نريد، مثلًا، أن نعرّف دالة المضروب تعريفًا عوديًا بحد~$\fn{Fac}$
+يحقق
+\[
+\fn{Fac} \ident \lambd[n][\fn{IsZero}\, n\, \num 1 (\fn{Mult}\, n (\fn{Fac}(\fn{Pred} \, n)))]
+\]
+فالمراد أن يكون مضروب~$n$ مساويًا لـ~$1$ عند~$n = 0$، ومساويًا
+لحاصل ضرب~$n$ في مضروب~$n-1$ فيما عدا ذلك. غير أن هذه العبارة لا
+تصلح بذاتها تعريفًا لحد~$\fn{Fac}$؛ لأن~$\fn{Fac}$ نفسه قد عاد
+في الطرف الأيمن، والتعريف بالإحالة إلى الذات ليس من قواعد حساب لامبدا.
+أما إذا كتبنا، مثلًا،
+\[
+\fn{Mult} \ident \lambd[ab][a (\fn{Add}\, b) \num 0]
+\]
+فليس في الطرف الأيمن إلا حدود سبقت معرفتها، ومنها~$\fn{Add}$؛ فيمكن
+أن نحل تعريف~$\fn{Add}$ محله، فنحصل على حد لامبدا خالص لـ~$\fn{Mult}$.
+وإن اشتمل تعريف~$\fn{Add}$ نفسه على اسم معرف، كما يقع في
+$\fn{Add}'$، كررنا الإحلال حتى لا يبقى إلا تركيب لامبدا الخالص.
+
+ولا ينتهي هذا المسلك إذا كان التعريف عوديًا كتعريف~$\fn{Fac}$.
+فإحلال العبارة المعرفة لـ~$\fn{Fac}$ محل ورود~$\fn{Fac}$ في الطرف الأيمن
+يعطي:
+\begin{align*}
+  \fn{Fac} & \ident
+  \lambd[n][\fn{IsZero}\, n\, \num{1}\,
+    (\fn{Mult}\, n
+      ((\lambd[n][\fn{IsZero}\, n\, \num{1}\,
+        (\fn{Mult}\, n\, (\fn{Fac}(\fn{Pred}\, n)))])
+      (\fn{Pred}\, n)))]
+\end{align*}
+ولا يزال~$\fn{Fac}$ حاضرًا في الطرف الأيمن. وكلما أعدنا الإحلال طال
+الحد وبقي الاسم، فلا تبلغ العملية حد لامبدا خالصًا. فهذه الحيلة لا
+تعرّف المضروب، ولا سائر الدوال العودية.
+
+لكن في المعادلة العودية دلالة نافعة. فلنفرض أن~$f$ حد يمثل دالة
+المضروب، ولنضع
+\[
+\fn{Fac}' \ident \lambd[g][\lambd[n][\fn{IsZero} \, n \, \num 1\, (\fn{Mult} \, n\, (g (\fn{Pred} n)))]]
+\]
+وهذا الحد، عند تطبيقه في~$f$، أي~$\fn{Fac}'\,f$، يمثل دالة المضروب
+أيضًا. فإذا نظرنا إلى~$\fn{Fac}'$ على أنها دالة تأخذ دالة وتردّ
+دالة، كانت قيمة~$\fn{Fac'}\, f$ هي~$f$ نفسها، متى كانت~$f$ دالة
+المضروب. وتسمى الدالة~$f$ التي تحقق~$\fn{Fac}' \, f \equal[\beta] f$
+\emph{نقطة ثابتة} لـ~$\fn{Fac}'$. ومن ثم فدالة المضروب نقطة ثابتة
+لـ~$\fn{Fac}'$.
+
+وفي حساب لامبدا حدود تستخرج لحد معطى نقطة ثابتة؛ وبها نحول حدًا
+كـ~$\fn{Fac}'$ إلى تعريف فعلي للمضروب.
+
+\begin{defn}
+  \ollabel{defn:Turing-Y}
+  \emph{مركّب~Y} هو الحد:
+  \[
+  Y \ident (\lambd[ux][x(uux)])(\lambd[ux][x(uux)]).
+  \]
+\end{defn}
+
+\begin{thm}
+  للحد~$Y$ الخاصية~$Yg \red g(Yg)$ لأي حد~$g$؛ ولذلك يكون~$Yg$
+  نقطة ثابتة لـ~$g$.
+\end{thm}
+
+\begin{proof}
+  رمز إلى~$(\lambd[ux][x(uux)])$ بـ~$U$ اختصارًا، فيكون~$Y \ident UU$.
+  وحينئذ
+  \begin{align*}
+    Y g &\ident (\lambd[ux][x(uux)])U\,g \\
+    &\red (\lambd[x][x(UUx)])g\\
+    & \red g(UUg) \ident g(Yg).
+  \end{align*}
+  فالحدان~$g(Yg)$ و$Yg$ يختزلان كلاهما إلى~$g(Yg)$؛ ومن ثم
+  $g(Yg) \equal[\beta] Yg$، وهو عين كون~$Yg$ نقطة ثابتة لـ~$g$.
+\end{proof}
+
+ولما كان~$Yg$ موضع اختزال، جاز أن نسلك به اختزالًا لا ينتهي:
+\begin{align*}
+  Y g &\red g (Y g) \\
+    &\red g (g (Y g)) \\
+    &\red g(g (g (Y g)))\\
+    &\ldots
+\end{align*}
+فيجوز أن نتصور~$Yg$ كأنه~$g$ مطبقة في ذاتها عددًا لا نهاية له من
+المرات. وإذا طبقنا~$g$ فيه مرة أخرى، لم نزد---بهذا التصور---شيئًا؛
+فتطبيق~$g$ في~$g$ المطبقة عددًا لا نهاية له من المرات في~$Yg$
+يظل تطبيقًا لـ~$g$ في~$Yg$ عددًا لا نهاية له من المرات.
+
+وينبغي التمييز هنا بين مسالك الاختزال. فمتتالية اختزال~$\beta$ السابقة، المبدوءة
+بـ~$Yg$، لا تنتهي. وإذا طبقنا~$Yg$ في حد ما، كان من مسالك اختزال
+$(Yg)N$ المرور بالحدود~$(g(Yg))N$ ثم~$(g(g(Yg)))N$، وهكذا بلا نهاية.
+ومع ذلك قد يوجد مسلك \emph{آخر} ينتهي إلى صورة سوية.
+
+ولنر ذلك في المضروب. عرّف~$\fn{Fac}$ بأنه~$Y\, \fn{Fac}'$، أي نقطة
+ثابتة لـ~$\fn{Fac'}$. عندئذ:
+\begin{align*}
+  \fn{Fac}\,\num 3
+  &\red Y\, \fn{Fac}' \, \num 3 \\
+  &\red \fn{Fac}' (Y \,\fn{Fac}') \, \num 3 \\
+  &\ident (\lambd[x][\lambd[n][\fn{IsZero} \, n\, \num 1\,
+      (\fn{Mult}\, n\, (x (\fn{Pred}\, n)))]]) \, \fn{Fac} \, \num 3\\
+  & \red \fn{IsZero} \, \num 3\, \num 1\,
+      (\fn{Mult}\, \num 3\, (\fn{Fac} (\fn{Pred}\, \num 3))) \\
+  &\red  \fn{Mult}\, \num 3 \, (\fn{Fac} \, \num 2).
+  \intertext{وبالمثل،}
+  \fn{Fac}\,\num 2
+  &\red  \fn{Mult}\, \num 2 \, (\fn{Fac} \, \num 1) \\
+  \fn{Fac}\,\num 1
+  &\red  \fn{Mult}\, \num 1 \, (\fn{Fac} \, \num 0)
+  \intertext{لكن}
+  \fn{Fac}\,\num 0
+  &\red \fn{Fac}' (Y \,\fn{Fac}') \, \num 0 \\
+  &\ident (\lambd[x][\lambd[n][\fn{IsZero} \, n\, \num 1\,
+      (\fn{Mult}\, n\, (x (\fn{Pred}\, n)))]]) \, \fn{Fac} \, \num 0\\
+  & \red \fn{IsZero} \, \num 0\, \num 1\,
+      (\fn{Mult}\, \num 0\, (\fn{Fac} (\fn{Pred}\, \num 0))).\\
+  &\red \num 1.
+  \intertext{ومن ثم، بجمع ذلك،}
+  \fn{Fac}\,\num 3
+  &\red  \fn{Mult}\, \num 3 \,
+  (\fn{Mult} \, \num 2\, (\fn{Mult} \, \num 1\, \num 1)).
+\end{align*}
+
+وهذا البناء لا يختص بـ~$\fn{Fac'}$، بل يجري في كل تعريف عودي.
+فإذا كانت لنا المعادلة
+\begin{align*}
+g\,x_1\dots x_n & \equal[\beta] N
+\intertext{حيث يجوز أن يحتوي~$N$ على~$g$ و$x_1$، \dots،~$x_n$.
+وعندئذ يوجد دائمًا حد~$G \ident (Y \lambd[g][\lambd[x_1\dots x_n][N]])$
+بحيث}
+G\,x_1 \dots x_n & \equal[\beta] \Subst{N}{G}{g}.
+\intertext{إذ بحسب مبرهنة النقطة الثابتة،}
+G \ident (Y \lambd[g][\lambd[x_1\dots x_n][N]]) & \red \lambd[g][\lambd[x_1\dots x_n][N]](Y \lambd[g][\lambd[x_1\dots x_n][N]])\\
+& \ident (\lambd[g][\lambd[x_1\dots x_n][N]])\,G
+\intertext{وبالتالي}
+G\,x_1 \dots x_n
+& \red (\lambd[g][\lambd[x_1\dots x_n][N]])\,G\,x_1\dots x_n\\
+& \red (\lambd[x_1\dots x_n][\Subst{N}{G}{g}])\,x_1\dots x_n\\
+  & \red \Subst{N}{G}{g}.
+\end{align*}
+وهذا عين السلوك الذي نصت عليه المعادلة العودية.
+
+ومركّب~$Y$ في \olref{defn:Turing-Y} من وضع آلان تورنغ. ولألونزو
+تشيرش صيغة أخرى نرمز إليها بـ~$Y_C$:
+\[
+Y_C \ident \lambd[g][(\lambd[x][g(xx)])(\lambd[x][g(xx)])].
+\]
+ومركّب تشيرش أضعف قليلًا من مركّب تورنغ: فهو يحقق
+$Y_Cg \equal[\beta] g(Y_Cg)$، ولا يحقق~$Y_Cg \bred g(Y_Cg)$.
+وليكن~$V$ الحد~$\lambd[x][g(xx)]$، حتى يكون~$Y_C \ident \lambd[g][VV]$.
+فنجد
+\begin{align*}
+  VV & \ident (\lambd[x][g(xx)])V \red g(VV)
+  \text{ ومن ثم}\\
+  Y_Cg & \ident (\lambd[g][VV])g \red VV \red g(VV) \text{، وكذلك}\\
+  g(Y_Cg) & \ident g((\lambd[g][VV])g) \red g(VV).
+\end{align*}
+فالحدان~$Y_Cg$ و$g(Y_Cg)$ يردان إلى حد مشترك هو~$g(VV)$؛ ولذلك
+$Y_Cg \equal[\beta] g(Y_Cg)$. وهذه المساواة تكفي لكثير من التطبيقات.
+
+\end{document}

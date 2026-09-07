@@ -1,0 +1,70 @@
+% Part: model-theory
+% Chapter: models-of-arithmetic
+% Section: introduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{mar}{int}
+\section{مقدمة}
+
+\emph{النموذج القياسي} للحساب هو الـ!!{structure}~$\Struct{N}$ ذات
+$\Domain{N} = \Nat$، التي تفسر فيها $\Obj{0}$ و$\prime$ و$+$ و$\times$
+و$<$ على النحو المتوقع. أي إن $\Obj{0}$ هو~$0$، و$\prime$ دالة الخلف،
+ويفسر $+$ بجمع الأعداد في~$\Nat$، و$\times$ بضربها، و$<$ بترتيبها
+المعتاد. وعلى وجه التحديد:
+\begin{align*}
+  \Assign{\Obj{0}}{N} & = 0\\
+  \Assign{\prime}{N}(n) & = n + 1\\
+  \Assign{+}{N}(n, m) & = n + m\\
+  \Assign{\times}{N}(n, m) & = nm\\
+  \Assign{<}{N} & = \Setabs{\tuple{n,m} \in \Nat^2}{n<m}
+\end{align*}
+وبالطبع توجد بنى للغة $\Lang{L_A}$ مجالاتها غير~$\Nat$. فمثلًا يمكن أن
+نأخذ $\Struct{M}$ ذات المجال $\Domain{M} = \{a\}^*$ (أي المتتاليات
+المنتهية للرمز الواحد~$a$، وهي $\emptyset$، $a$، $aa$، $aaa$، \dots)،
+والتفسيرات:
+\begin{align*}
+  \Assign{\Obj{0}}{M} & = \emptyset\\
+  \Assign{\prime}{M}(s) & = s \concat a\\
+  \Assign{+}{M}(s, t) & = s \concat t\\
+  \Assign{\times}{M}(s, t) & = a^{\lvert s\rvert\lvert t\rvert}\\
+  \Assign{<}{M} & = \Setabs{\tuple{s,t} \in (\{a\}^*)^2}{\lvert s\rvert<\lvert t\rvert}
+\end{align*}
+هاتان البنيتان «الشيء نفسه في جوهرهما»، بمعنى أن الفرق الوحيد بينهما في
+!!{element}s الـ!!{domain}s، لا في الكيفية التي تربط بها دوال التفسير
+!!{element}s الـ!!{domain}s بعضها ببعض. ونقول إن الـ!!{structure}s
+\emph{متشاكلة}.
+
+من النتائج السهلة لمبرهنة التراص أن لكل نظرية صادقة في~$\Struct{N}$
+نماذج غير متشاكلة مع~$\Struct{N}$. وتسمى هذه البنى \emph{غير قياسية}.
+واللافت فيها أن !!{element}s النموذج القياسي (أي $\Struct{N}$، وكذلك كل
+!!{structure}s المتشاكلة معها) تستنفدها قيم الأعداد القياسية~$\num{n}$،
+أي:
+\[
+\Domain{N} = \Setabs{\Value{\num{n}}{N}}{n \in \Nat}
+\]
+أما في النماذج غير القياسية فليس الأمر كذلك: إذا كانت $\Struct{M}$ غير
+قياسية، وجد على الأقل $x \in \Domain{M}$ بحيث
+$x \neq \Value{\num{n}}{M}$ لكل~$n$.
+
+وهذه العناصر غير القياسية طريفة حقًا: فهي «أعداد طبيعية لا نهائية».
+كما أن وجودها يفسر، بمعنى ما، ظواهر عدم الاكتمال. خذ مثلًا عبارة اتساق
+حساب بيانو، $\OCon[\Th{PA}]$، أي
+$\lnot \lexists[x][\OPrf[\Th{PA}](x, \gn{\lfalse})]$. ولما كانت
+$\Th{PA}$ لا تثبت $\OCon[\Th{PA}]$ ولا $\lnot \OCon[\Th{PA}]$، أمكن
+إضافة أي منهما إلى $\Th{PA}$ مع بقاء الاتساق. وبما أن $\Th{PA}$ متسقة،
+فإن $\Sat{N}{\OCon[\Th{PA}]}$، وبالتالي
+$\Sat/{N}{\lnot \OCon[\Th{PA}]}$. إذن \emph{ليست} $\Struct{N}$ نموذجًا لـ
+$\Th{PA} \cup \{\lnot \OCon[\Th{PA}]\}$، ولا بد أن تكون جميع نماذج
+هذه النظرية غير قياسية. ويجب أن تحتوي نماذج
+$\Th{PA} \cup \{\lnot \OCon[\Th{PA}]\}$ بعض الـ!!{element} الذي يؤدي
+دور الشاهد الذي يجعل
+$\lexists[x][\OPrf[\Th{PA}](x,\gn{\lfalse})]$ صادقة، أي عدد غودل
+لـ!!a{derivation} لتناقض من~$\Th{PA}$. ولا يمكن أن يكون هذا
+الـ!!a{element} قياسيًا، لأن
+$\Th{PA} \Proves \lnot \OPrf[\Th{PA}](\num{n}, \gn{\lfalse})$
+لكل~$n$.
+
+\end{document}

@@ -1,0 +1,62 @@
+% Part: sets-functions-relations
+% Chapter: functions
+% Section: composition
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid[ar]{sfr}{fun}{cmp}
+\olsection{تركيب الدوال}
+
+\begin{explain}
+\oliflabeldef{sfr:fun:inv:sec}{تقدم في \olref[inv]{sec} أن
+معكوس~$f^{-1}$ لـ!!a{bijection}~$f$ دالة أيضًا. ومن عمليات الدوال
+التركيب. }{}فنركب $f$ و~$g$ فنحصل على دالة جديدة، بتطبيق $f$
+أولًا ثم~$g$. ولا يصح ذلك إلا إذا اتفق المدى والمجال بالقدر المطلوب:
+أن يكون مدى~$f$ جزئية من مجال~$g$.
+\oliflabeldef{sfr:rel:ops:sec}{وهذا نظير الضرب النسبي للعلاقات
+المذكور في \olref[rel][ops]{sec}.}{}
+
+وبيانه بالرسم في \olref{fig:composition}: فيه الدالتان
+$f \colon A \to B$ و$g \colon B \to C$ وتركيبهما~$(\comp{f}{g})$.
+فالدالة $(\comp{f}{g}) \colon A \to C$ تقابل كل !!{element}
+من~$A$ بـ!!a{element} من~$C$. وتعيين أي !!{element} من~$C$
+يقابل !!a{element} من $A$ يجري هكذا: نأخذ المدخل $x \in A$،
+ونطبق $f$ على~$x$ فنحصل على $f(x) = y \in B$، ثم نطبق $g$
+على~$y$ فنحصل على $g(f(x)) = g(y) = z \in C$.
+\begin{figure}
+  \olasset[2\olphotowidth]{assets/diagrams/composition.tikz}
+  \caption{التركيب $g \circ f$ حاصل تركيب الدالتين $f$ و~$g$.}
+  \ollabel{fig:composition}
+\end{figure}
+\end{explain}
+
+\begin{defn}[التركيب]
+خذ $f\colon A \to B$ و$g\colon B \to C$ دالتين.
+\emph{تركيب} $f$ مع~$g$ هو $\comp{f}{g} \colon A \to C$،
+وتعريفه $(\comp{f}{g})(x) = g(f(x))$.
+\end{defn}
+
+\begin{ex}
+لتكن $f(x) = x + 1$ و$g(x) = 2x$. فبحسب
+$(\comp{f}{g})(x) = g(f(x))$ نأخذ لاحق المدخل~$x$ أولًا،
+ثم نضرب الحاصل في اثنين؛ فيكون $(\comp{f}{g})(x) = 2(x+1)$.
+\end{ex}
+
+\begin{prob}
+إذا كانت $f \colon A \to B$ و$g \colon B \to C$ كلتاهما !!{injective}،
+فبرهن على أن $\comp{f}{g}\colon A \to C$ هي !!{injective}.
+\end{prob}
+
+\begin{prob}
+إذا كانت $f \colon A \to B$ و$g \colon B \to C$ كلتاهما !!{surjective}،
+فبرهن على أن $\comp{f}{g}\colon A \to C$ هي !!{surjective}.
+\end{prob}
+
+\begin{prob}
+خذ $f \colon A \to B$ و$g \colon B \to C$، وأثبت أن رسم
+$\comp{f}{g}$ البياني هو $R_f \mid R_g$.
+\end{prob}
+
+\end{document}

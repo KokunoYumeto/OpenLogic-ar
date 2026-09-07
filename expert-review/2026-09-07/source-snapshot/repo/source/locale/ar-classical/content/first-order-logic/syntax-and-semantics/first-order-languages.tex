@@ -1,0 +1,153 @@
+% Part: first-order-logic
+% Chapter: syntax-and-semantics
+% Section: first-order-languages
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{syn}{fol}
+
+\olsection{لغات الرتبة الأولى}
+
+
+أصل تعبيرات منطق الرتبة الأولى معجم يشتمل على
+\emph{!!{variable}s} و\emph{!!{constant}s} و\emph{!!{predicate}s}،
+وقد يشتمل أيضًا على \emph{!!{function}s}. فإذا ضُمّت إلى هذه الرموز
+الروابط المنطقية والمكممات وعلامات الترقيم، من أقواس وفواصل، تألّفت
+منها \emph{الحدود} و\emph{!!{formula}s}.
+
+\begin{explain}
+ووجه ذلك، قبل ضبطه بالتعريف، أن ال!!{predicate}s تسمّي الخصائص
+والعلاقات، وال!!{constant}s تسمّي الكائنات المفردة، وال!!{function}s
+تسمّي التطبيقات. وهذه الرموز، سوى ال!!{identity}~$\eq$، تسمى
+\emph{الرموز غير المنطقية}، وباجتماعها تكون اللغة. فكل لغة من
+الرتبة الأولى~$\Lang L$ إنما تتعيّن بتعيّن رموزها غير المنطقية.
+وفي الحالة العامة يكون في $\Lang L$ من كل نوع رموز لا تتناهى.
+\end{explain}
+
+وتفصيل الرموز التي نعتمدها في الحالة العامة من منطق الرتبة الأولى كما يأتي:
+
+\begin{enumerate}
+\item الرموز المنطقية
+\begin{enumerate}
+\item الروابط المنطقية:
+  \startycommalist
+  \iftag{prvNot}{\ycomma $\lnot$ (النفي)}{}%
+  \iftag{prvAnd}{\ycomma $\land$ (العطف)}{}%
+  \iftag{prvOr}{\ycomma $\lor$ (الفصل)}{}%
+  \iftag{prvIf}{\ycomma $\lif$ (!!{conditional})}{}%
+  \iftag{prvIff}{\ycomma $\liff$ (!!{biconditional})}{}%
+  \iftag{prvAll}{\ycomma $\lforall$ (المكمم الكلي)}{}%
+  \iftag{prvEx}{\ycomma $\lexists$ (المكمم الوجودي)}{}.
+\tagitem{prvFalse}{الثابت القضوي الدال على !!{falsity}~$\lfalse$.}{}
+\tagitem{prvTrue}{الثابت القضوي الدال على !!{truth}~$\ltrue$.}{}
+\item ال!!{identity} الثنائية المحل~$\eq$.
+\item مجموعة !!{denumerable} من ال!!{variable}s: $\Obj v_0$، و$\Obj v_1$، و$\Obj
+  v_2$، و\dots
+\end{enumerate}
+\item الرموز غير المنطقية التي تؤلف \emph{اللغة القياسية} لمنطق
+  الرتبة الأولى
+\begin{enumerate}
+\item مجموعة !!{denumerable} من ال!!{predicate}s ذات $n$ من المحال لكل
+  $n>0$: $\Obj A^n_0$، و$\Obj A^n_1$، و$\Obj A^n_2$، و\dots
+\item مجموعة !!{denumerable} من ال!!{constant}s: $\Obj c_0$، و$\Obj c_1$، و$\Obj
+  c_2$، و\dots.
+\item مجموعة !!{denumerable} من ال!!{function}s ذات $n$ من المحال لكل
+  $n>0$: $\Obj f^n_0$، و$\Obj f^n_1$، و$\Obj f^n_2$، و\dots
+\end{enumerate}
+\item علامات الترقيم: القوسان ( و)، والفاصلة.
+\end{enumerate}
+
+وعلى اللغة القياسية الكاملة لمنطق الرتبة الأولى تُحمل أكثر
+تعريفاتنا ونتائجنا. وقد يقتضي موضع الاستعمال أن نقتصر من
+ال!!{predicate}s وال!!{constant}s وال!!{function}s على قليل.
+
+\begin{ex}
+فمن ذلك لغة الحساب~$\Lang L_A$؛ إذ ليس فيها إلا !!{predicate}
+ثنائي المحل~$<$، و!!{constant} واحد~$\Obj 0$، و!!{function}
+أحادية المحل~$\prime$، واثنتان من ال!!{function}s الثنائية المحل، هما~$+$ و~$\times$.
+\end{ex}
+
+\begin{ex}
+وأما لغة نظرية المجموعات~$\Lang L_Z$، فليس من رموزها غير المنطقية
+إلا ال!!{predicate} الثنائي المحل~$\in$.
+\end{ex}
+
+\begin{ex}
+وكذلك لغة الترتيبات~$\Lang L_\le$، فإن رموزها غير المنطقية تنحصر في
+ال!!{predicate} الثنائي المحل~$\le$.
+\end{ex}
+
+وليس في اختيار هذه الرسوم إلا اصطلاح في التسمية؛ فهي، عند الضبط
+الصوري، أسماء مستعارة. فمثلًا، $<$
+و$\in$ و$\le$ أسماء مستعارة لـ~$\Obj A^2_0$، و$\Obj 0$ اسم مستعار
+لـ~$\Obj c_0$، و$\prime$ لـ~$\Obj f^1_0$، و$+$ لـ~$\Obj f^2_0$،
+و$\times$ لـ~$\Obj f^2_1$.
+
+\iftag{defNot,defOr,defAnd,defIf,defIff,defTrue,defFalse,defEx,defAll}{%
+ومع الروابط الأولية و
+\iftag{notprvEx,notprvAll}{المكمم}{المكممات} التي تقدمت، نأخذ
+الرموز الآتية على أنها رموز \emph{معرّفة}:
+\startycommalist
+  \iftag{defNot}{\ycomma $\lnot$ (النفي)}{}%
+  \iftag{defAnd}{\ycomma $\land$ (العطف)}{}%
+  \iftag{defOr}{\ycomma $\lor$ (الفصل)}{}%
+  \iftag{defIf}{\ycomma $\lif$ (!!{conditional})}{}%
+  \iftag{defIff}{\ycomma $\liff$ (!!{biconditional})}{}%
+  \iftag{defAll}{\ycomma $\lforall$ (المكمم الكلي)}{}%
+  \iftag{defEx}{\ycomma $\lexists$ (المكمم الوجودي)}{}%
+  \iftag{defFalse}{\ycomma !!{falsity}~$\lfalse$}{}%
+  \iftag{defTrue}{\ycomma !!{truth}~$\ltrue$}{}%
+}{}.
+
+\begin{tagblock}{defNot,defOr,defAnd,defIf,defIff,defTrue,defFalse,defEx,defAll}
+\begin{explain}
+أما الرمز المعرّف فليس من أصل اللغة في اصطلاحها الصوري، وإنما هو
+اختصار نضعه للتيسير. فلولاه، ولزمنا الاقتصار على الرموز الأولية،
+لطالت بعض الصيغ طولًا شديدًا. وفوق اختصار الصيغ فائدة أخرى، هي
+اختصار البراهين؛ وذلك أن لكل رمز أولي حالةً تخصه في البرهان،
+فكلما ازداد عدد تلك الرموز ازدادت الحالات وطال البرهان.
+\end{explain}
+\end{tagblock}
+
+% Alternate symbols
+
+\begin{intro}
+وقد تختلف اصطلاحات الكتب والمدرّسين عما اخترناه هنا. فمن الرموز
+الشائعة عندهم $\sim$ و$\neg$ و~!\ للدلالة على
+«النفي»، واستعمال $\wedge$ و$\cdot$ و$\&$ للدلالة على «العطف». أما
+الرموز الشائعة لـ«الشرط» أو «الاستلزام» فهي $\rightarrow$
+و$\Rightarrow$ و$\supset$.
+\iftag{prvIff,defIff}{أما رموز «الشرط الثنائي» أو «الاستلزام المتبادل»
+  أو «التكافؤ (المادي)» فهي $\leftrightarrow$ و$\Leftrightarrow$
+  و$\equiv$.}{}
+\iftag{prvFalse,defFalse}{تتنوع أسماء الرمز~$\lfalse$؛ فيسمى
+  «الكذب» أو «الباطل» أو «المحال» أو «القاع».}{}
+\iftag{prvTrue,defTrue}{تتنوع أسماء الرمز~$\ltrue$؛ فيسمى
+  «الصدق» أو «الحق» أو «القمة».}{}
+
+ومن اصطلاحهم أيضًا أن يجعلوا الأحرف الصغيرة من صدر الأبجدية اللاتينية (مثل
+$a$ و$b$ و$c$) لل!!{constant}s (وتسمى أحيانًا أسماء)، والأحرف
+الصغيرة من آخرها (مثل $x$ و$y$ و$z$) لل!!{variable}s. وتقترن
+المكممات بال!!{variable}s، مثل~$x$؛ ومن الاختلافات الترميزية
+$\forall x$ و$(\forall x)$ و$(x)$ و$\Pi x$ و$\bigwedge_x$ للمكمم
+الكلي، و$\exists x$ و$(\exists x)$ و$(Ex)$ و$\Sigma x$ و
+$\bigvee_x$ للمكمم الوجودي.
+\end{intro}
+
+\begin{explain}
+ولنا أن نجعل المؤثرات القضوية كلها، ومعها المكممان، رموزًا أولية؛
+ولنا أن نكتفي بأصل أقل عددًا، ثم نعرّف سائر
+ال!!{operator}s به. فمن مجموعات المؤثرات البوليانية التي تكون
+«كاملة من حيث الدوال الصدقية» $\{ \lnot, \lor \}$ و
+$\{ \lnot, \land \}$ و$\{ \lnot, \lif\}$؛ ويمكن ضم كل منها إلى أي
+من المكممين للحصول على لغة رتبة أولى كاملة القدرة التعبيرية.
+
+ومن ال!!{operator}s الأخرى شرطة شيفر~$|$، ونسبتها إلى
+هنري شيفر، وسهم بيرس~$\downarrow$، ويقال له أيضًا خنجر كواين.
+فإذا أريد بهما معناهما المعتاد، أي «نفي العطف» للأول و«نفي الفصل»
+للثاني، استقل كل واحد منهما بالكمال من حيث الدوال الصدقية.
+\end{explain}
+
+\end{document}

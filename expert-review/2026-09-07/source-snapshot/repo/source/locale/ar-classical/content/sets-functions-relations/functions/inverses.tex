@@ -1,0 +1,173 @@
+% Part: sets-functions-relations
+% Chapter: functions
+% Section: inverses
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid[ar]{sfr}{fun}{inv}
+\olsection{معكوسات الدوال}
+
+\begin{explain}
+إذا كانت الدوال تعيينات، فهل يجوز ردّ التعيين على أعقابه؟
+فدالة اللاحق $f(x) = x + 1$ يرد فعلها $g(y) = y - 1$؛ إذ
+تعيد الثانية ما غيّرته~$f$.
+
+غير أن المجالين معتبران هنا. فقاعدة~$g$ تعرّف دالة
+$\Int \to \Int$، ولا تعرّف \emph{دالة} $\Nat
+\to \Nat$؛ لأن $g(0) \notin \Nat$. فحتى في هذا المثال اليسير
+ليس إمكان العكس مطلقًا، بل قد يتوقف على المجال والمجال المقابل.
+
+ويضبط هذا المعنى اصطلاح معكوس الدالة.
+\end{explain}
+
+\begin{defn}
+الدالة $g \colon B \to A$ \emph{معكوس} للدالة $f
+\colon A \to B$ متى كان $f(g(y)) = y$ و$g(f(x)) = x$ لكل
+$x \in A$ و$y \in B$.
+\end{defn}
+
+فإن كان لـ$f$ معكوس~$g$، استعملنا له كثيرًا الرمز $f^{-1}$ مكان~$g$.
+
+\begin{explain}
+ولنبحث متى يوجد المعكوس. قد نقترح لمعكوس $f\colon A \to B$
+دالة $g\colon B \to A$ «نعرفها بـ»
+\[
+g(y) = \text{«ذلك» $x$ الذي يحقق $f(x) = y$.}
+\]
+وإنما وضعت «نعرفها بـ» و«ذلك» بين علامتي التنصيص لأن الكلام
+لا يصلح تعريفًا على إطلاقه. فلا بد أولًا من~$x$ واحد لا غير
+يحقق $f(x) = y$، ليتعين مخرج~$g$؛ ولا بد ثانيًا من هذا التعيين
+لكل $y \in B$. فإن وجد $x_1$ و$x_2 \in A$، مع $x_1 \neq x_2$
+و$f(x_1) = f(x_2)$، تعددت القيمة المقترحة لـ$g(y)$ عند
+$y = f(x_1) = f(x_2)$. وإن لم يوجد~$x$ يحقق $f(x) = y$،
+لم تتعين $g(y)$ أصلًا. فتعريف $g$ يقتضي أن تجمع $f$
+!!{injective} و!!{surjective}.
+
+ولنفرق بين مسألتين. إذا أعطيت~$f\colon A \to B$، فمتى توجد
+$g\colon B \to A$ بحيث $g(f(x)) = x$؟ هذه $g$ ترد فعل~$f$،
+وتسمى \emph{معكوسًا أيسر} لـ~$f$. ومتى توجد $h\colon B \to A$
+بحيث $f(h(y)) = y$؟ هذه $h$ \emph{معكوس أيمن} لـ~$f$،
+و$f$ ترد فعل~$h$.
+\end{explain}
+
+\begin{prop}
+لتكن $f\colon A \to B$ !!{injective}، وليكن $A \neq \emptyset$.
+فلها \emph{معكوس أيسر}~$g\colon B \to A$ لـ~$f$ يحقق $g(f(x)) = x$
+لكل $x \in A$.
+\end{prop}
+
+\begin{explain}
+\textbf{تنبيه على سهو الأصل.} أسقط متن القضية الإنجليزي شرط
+$A\neq\emptyset$، وبرهانها لا يستغني عنه إذ يختار~$a\in A$.
+فالدالة الخالية $\emptyset\to\{0\}$ متباينة ولا معكوس أيسر لها،
+لأنه لا دالة من~$\{0\}$ إلى~$\emptyset$. والتحقيق أن المتباينة
+يكون لها معكوس أيسر إذا وفقط إذا كانت~$A$ غير خالية أو كان~$B$
+خاليًا؛ وأثبتنا الصورة التي يجري عليها هذا البرهان.
+\end{explain}
+
+\begin{proof}
+افرض $f\colon A \to B$ !!{injective} و$A \neq \emptyset$، وخذ $y \in B$.
+فإن كان $y \in \ran{f}$ وجد $x \in A$ مع $f(x) = y$، ولأن
+$f$ !!{injective} كان~$x \in A$ هذا وحيدًا. فنضع $g(y) = x$؛
+أي نجعل $g(y)$ ذلك $x \in A$ الذي يحقق $f(x) = y$.
+وإن كان $y \notin \ran{f}$ جاز تعيينه لأي~$a \in A$.
+فنثبت $a \in A$ ونعرّف $g\colon B \to A$ هكذا:
+\[
+g(y) = \begin{cases}
+    x & \text{إذا كان $f(x) = y$}\\
+    a & \text{إذا كان $y \notin \ran{f}$.}
+\end{cases}
+\]
+فقد تعيّنت لكل $y \in B$؛ إذ لكل $y \in \ran{f}$ عنصر واحد
+$x \in A$ يحقق $f(x) = y$. ومتى كان $y = f(x)$ أعطى التعريف
+$g(y) = x$، أي $g(f(x)) = x$.
+\end{proof}
+
+\begin{prob}
+برهن على أن الدالة $f\colon A \to B$، إن كان لها معكوس أيسر~$g$، يلزم
+أن تكون $f$ !!{injective}.
+\end{prob}
+
+\begin{prop}
+لتكن $f\colon A \to B$ !!{surjective}. فلها \emph{معكوس أيمن}~$h\colon B \to A$
+لـ~$f$ يحقق $f(h(y)) = y$ لكل~$y \in B$.
+\end{prop}
+
+\begin{proof}
+افرض $f\colon A \to B$ !!{surjective}، وخذ $y \in B$.
+فبما أن $f$ !!{surjective} يوجد $x_y \in A$ يحقق $f(x_y) = y$.
+نضع $h(y) = x_y$؛ أي نختار لكل $y \in B$ عنصرًا $x \in A$
+بحيث $f(x) = y$. وشمول $f$، أي كونها !!{surjective}، يضمن
+وجود ما نختاره.\footnote{لأن $f$ !!{surjective} تكون، لكل~$y \in B$،
+المجموعة $\Setabs{x}{f(x) = y}$ غير خالية. وتعريف~$h$ يقتضي اختيار
+عنصر $x$ واحد من كل واحدة منها. وليس إمكان هذه الاختيارات جميعًا
+بديهيًا؛ بل يفترض بديهية مستقلة. فهذه القضية تستعمل بديهية
+الاختيار، وهي مسألة \oliflabeldef{sth:choice::chap}{سنعاودها في \olref[sth][choice][]{chap}}{نتجاوز تفصيلها هنا}.
+ولا تلزم البديهية في حالات مخصوصة كثيرة، كأن يكون $A = \Nat$
+أو يكون منتهيًا، أو تكون $f$ !!{bijective}. ففي هذه الحالة
+الأخيرة، حيث $f$ !!{bijective}، لكل $y \in B$ مجموعة
+$\Setabs{x}{f(x) = y}$ لا تضم إلا !!{element} واحدًا؛ فلا اختيار
+بين بدائل أصلًا.}
+فإذا كان $x = h(y)$ كان، بمقتضى التعريف، $f(x) = y$؛ أي لكل
+$y \in B$ يتحقق $f(h(y)) = y$.
+\end{proof}
+
+\begin{prob}
+برهن على أن الدالة $f\colon A \to B$، إن كان لها معكوس أيمن~$h$، يلزم
+أن تكون $f$ !!{surjective}.
+\end{prob}
+
+\begin{explain}
+وبجمع وجوه البرهان السابق يتبين أن لكل !!{bijection} معكوسًا:
+دالة واحدة تكون معكوسًا أيسر وأيمن لـ~$f$ معًا.
+\end{explain}
+
+\begin{prop}\ollabel{prop:bijection-inverse}
+لتكن $f\colon A \to B$ !!{bijective}. فتوجد
+دالة~$f^{-1}\colon B \to A$ تحقق، لكل $x \in A$،
+$f^{-1}(f(x)) = x$، ولكل $y \in B$، $f(f^{-1}(y)) = y$.
+\end{prop}
+
+\begin{proof}
+إثباتها تمرين.
+\end{proof}
+
+\begin{prob}
+برهن على \olref[sfr][fun][inv]{prop:bijection-inverse}: عرّف~$f^{-1}$
+أولًا، ثم أثبت أنها دالة، ثم أنها معكوس لـ~$f$؛ أي
+$f^{-1}(f(x)) = x$ و$f(f^{-1}(y)) = y$ لكل $x \in A$ و$y \in B$.
+\end{prob}
+
+\begin{explain}
+ولاستخراج المعكوس وجه أعم قليلًا. رأينا في \olref[kin]{sec} أن كل
+دالة $f$ تستحث !!a{surjection} $f' \colon A \to \ran{f}$ إذا وضعنا
+$f'(x) = f(x)$ لكل $x \in A$. فإن كانت $f$ !!{injective} صارت
+$f'$ !!{bijective}؛ فلها معكوس وحيد بمقتضى \olref{prop:bijection-inverse}.
+ونتسامح أحيانًا تسامحًا يسيرًا في العبارة فنسمي معكوس $f'$
+«معكوس~$f$».
+\end{explain}
+
+\begin{prop}\ollabel{prop:left-right}%
+إذا كان لـ$f\colon A \to B$ معكوس أيسر~$g$ ومعكوس أيمن~$h$، لزم $h = g$.
+\end{prop}
+
+\begin{proof}
+إثباتها تمرين.
+\end{proof}
+
+\begin{prob}
+برهن على \olref[sfr][fun][inv]{prop:left-right}.
+\end{prob}
+
+\begin{prop}\ollabel{prop:inverse-unique}
+معكوس الدالة~$f$ واحد إن وجد.
+\end{prop}
+
+\begin{proof}
+ليكن $g$ و$h$ معكوسين لـ~$f$. فـ$g$ معكوس أيسر لـ~$f$ خاصة،
+و$h$ معكوس أيمن. ومن \olref{prop:left-right} ينتج $g = h$.
+\end{proof}
+
+\end{document}

@@ -1,0 +1,252 @@
+% Part:sets-functions-relations
+% Chapter: size-of-sets
+% Section: enumerations
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid[ar]{sfr}{siz}{enm}
+
+\olsection{التعدادات ومجموعات \usetoken{S}{enumerable}}
+
+\begin{editorial}
+هذا القسم في تعداد المجموعات، وتعريف التعداد فيه دالة شاملة من
+$\PosInt$. ويسلك في البيان طريق التدرج لمن قلّ تمرسه بالرياضيات.
+وفي \olref[enm-alt]{sec} بديل أوجز، لكنه يعرّف التعداد تعريفًا
+آخر: تقابل مع $\Nat$ أو مع مقطع ابتدائي.
+\end{editorial}
+
+\begin{explain}
+تقدمت أمثلة عيّنّا فيها المجموعات بسرد !!{element}sها.
+فلنعمم القول: كيف نسرد !!{element}s مجموعة، ومتى يتيسر ذلك،
+وإن كانت غير منتهية؟
+\end{explain}
+
+\begin{defn}[التعداد، بصيغة غير رسمية]
+\emph{تعداد} المجموعة~$A$، على التقريب، قائمة قد لا تتناهى من
+!!{element}s~$A$، يظهر كل !!{element} من $A$ فيها عند موضع
+رقمه منته. فمتى كان لـ$A$ تعداد، سميت $A$ \emph{!!{enumerable}}.
+\end{defn}
+
+\begin{explain}
+ولضبط هذا المعنى ينبغي تمييز أمور:
+\begin{enumerate}
+\item التعداد قائمة لها أول، ولكل !!{element} سوى الأول
+!!{element} واحد يسبقه مباشرة، ولا يكون بين !!{element} القائمة
+الأول وأي !!{element} آخر إلا عدد منته من العناصر. فمن ثم لكل
+!!{element} موضع منته: موضع !!{element} الأول~$1$، والثاني~$2$، وهكذا.
+\item قد يختلف ترتيب ظهور !!{element}s المجموعة~$A$ باختلاف تعدادها.
+فـ$4$، $1$، $25$، $16$،~$9$ تعداد لمجموعة المربعات الخمسة الأولى،
+كما أن $1$، $4$، $9$، $16$،~$25$ تعداد لها.
+\item والتكرار لا يبطل التعداد: $1$، $1$، $2$، $2$، $3$، $3$،~\dots{}
+تعدّد ما تعدده $1$، $2$، $3$،~\dots{}.
+\item غير أن الترتيب والتكرار \emph{معتبران} في تعيين التعداد نفسه.
+فيجوز أن يبدأ تعداد الصحيحات الموجبة بـ$1$، $2$، $3$، $1$، \dots{}؛
+إلا أن انتظامه يظهر أسهل في الصورة المألوفة $1$، $2$، $3$، $4$،~\dots
+\item ولا بد من أول: فـ\dots، $3$، $2$، $1$ ليست تعدادًا للصحيحات
+الموجبة، إذ ليس فيها !!{element} أول. ولتر ذلك من التعريف التقريبي،
+سل: «ما رقم الموضع الذي يظهر فيه العدد 76؟»
+\item وكذلك ليست $1$، $3$، $5$، \dots، $2$، $4$، $6$، \dots\@
+تعدادًا لها؛ فمواضع الأزواج فيها $\infty + 1$، $\infty + 2$، $\infty +
+3$، وليست مواضع منتهية.
+\item والخالية قابلة للتعداد؛ فتعدادها القائمة الخالية!{}
+\end{enumerate}
+\end{explain}
+
+\begin{prop}
+كل مجموعة $A$ لها تعداد يمكن تعدادها بلا تكرار.
+\end{prop}
+
+\begin{proof}
+ليكن لـ$A$ تعداد $x_1$، $x_2$، \dots{}، وكل $x_i$ فيه !!{element}
+من~$A$. نحذف !!{element}s المكررة فنحصل على تعداد جديد:
+نثبت $x_i$ إذا كان !!a{element} من~$A$ لم يسبق بين
+$x_1$، \dots، $x_{i-1}$، ونحذف $x_i$ إذا سبق ظهوره بين
+$x_1$، \dots،~$x_{i-1}$.
+\end{proof}
+
+وقد أبانت هذه الحجة حاجتنا إلى حد أدق للتعداد ولمجموعات
+!!{enumerable}، حتى يحكم فهمها والبرهان عليها. وهو الآتي.
+
+\begin{defn}[التعداد، بصيغة رسمية]
+لكل مجموعة $A \neq \emptyset$ يسمى \emph{تعدادًا} لها كل دالة
+!!{surjective} $f \colon \PosInt \to A$.
+\end{defn}
+
+\begin{explain}
+وبيان تكافؤ الحد الصوري والحد التقريبي بالقوائم من وجهين.
+أحدهما أن كل !!{surjective} من $\PosInt$ إلى~$A$ تعدّد~$A$،
+إذ تعطي القائمة $f(1)$، $f(2)$، $f(3)$، \dots.
+ولأن $f$ !!{surjective} فلا يفوتها !!{element} من~$A$، بل يكون
+قيمة~$f(n)$ لبعض~$n \in \PosInt$. فكل !!{element} من $A$ يظهر
+عند موضع منته. وقد لا تكون الدالة !!{injective} فيقع التكرار،
+وهو جائز كما تقدم.
+
+والآخر أن القائمة الجامعة لكل !!{element}s~$A$ تعطينا دالة
+!!a{surjective} $f\colon \PosInt \to A$: نجعل $f(n)$
+!!{element}ها ذا الرتبة $n$، أو !!{element}ها الأخير إن لم يوجد
+!!{element} ذو رتبة $n$. وإنما يمتنع الحصول على دالة
+!!a{surjective} بهذا الوجه إذا كانت $A$ خالية، فقائمتها خالية.
+فكل قائمة غير خالية تعيّن دالة !!a{surjective} $f\colon \PosInt \to A$.
+\end{explain}
+
+\begin{defn}
+  \ollabel{defn:enumerable}
+المجموعة~$A$ !!{enumerable} إذا وفقط إذا كانت خالية أو كان لها تعداد.
+\end{defn}
+
+\begin{ex}
+تعدّد الصحيحات الموجبة ($\PosInt$) دالة الهوية $f(n) = n$،
+وتعدّد الطبيعيّات $\Nat$ الدالة $g(n) = n - 1$.
+\end{ex}
+
+\begin{ex}
+خذ الدالتين $f\colon \PosInt \to \PosInt$ و$g \colon \PosInt \to
+\PosInt$ المحدّدتين بـ
+\begin{align*}
+f(n) & = 2n \text{ و}\\
+g(n) & = 2n - 1
+\end{align*}
+فالأولى تعدّد الصحيحات الموجبة الزوجية، والثانية تعدّد الفردية.
+وليست واحدة منهما تعدادًا لـ$\PosInt$؛ إذ ليست !!{surjective}.
+\end{ex}
+
+\begin{prob}
+ضع تعدادًا للمربعات الموجبة $1$، $4$، $9$، $16$، \dots
+\end{prob}
+
+\begin{ex}
+الدالة $f(n) = (-1)^{n} \lceil \frac{(n-1)}{2}\rceil$ تعدّد
+الصحيحات. والرمز $\lceil x \rceil$ \emph{دالة السقف}: تصعد بـ$x$
+إلى أقرب صحيح. فتعداد~$\Int$ بها يجعل $f$ تنتقل في قيم $\Int$
+من الموجب إلى السالب ثم تعود، كما ترى:
+\[
+\begin{array}{c c c c c c c c}
+f(1) & f(2) & f(3) & f(4) & f(5) & f(6) & f(7) & \dots \\ \\
+- \lceil \tfrac{0}{2} \rceil & \lceil \tfrac{1}{2}\rceil & - \lceil \tfrac{2}{2} \rceil & \lceil \tfrac{3}{2} \rceil & - \lceil \tfrac{4}{2} \rceil  & \lceil \tfrac{5}{2}
+\rceil & - \lceil \tfrac{6}{2} \rceil & \dots \\ \\
+0 & 1 & -1 & 2 & -2 & 3 & -3 & \dots
+\end{array}
+\]
+ولـ$f$ تعريف بالحالات أيضًا:
+\[
+f(n) = \begin{cases}
+  0 & \text{إذا كان $n = 1$}\\
+  n/2 & \text{إذا كان $n$ زوجيًا}\\
+  -(n-1)/2 & \text{إذا كان $n$ فرديًا و$>1$}
+  \end{cases}
+\]
+\end{ex}
+
+\begin{editorial}
+\textbf{تنبيه تصحيحي على الأصل (OLSIZ-001).}
+أُثبتت القيمة $-3$ تحت $f(7)$؛ فقد أسقطها جدول الأصل، مع أن
+السطر الذي فوقها يعطي $-\lceil 6/2\rceil=-3$.
+\end{editorial}
+
+\begin{prob}
+أثبت أنه إذا كانت $A$ و$B$ !!{enumerable} كان $A \cup B$ كذلك.
+فافرض دالتين !!{surjective} هما $f\colon \PosInt \to A$ و$g\colon \PosInt \to B$،
+ثم عرّف دالة !!a{surjective}~$h\colon \PosInt \to A \cup B$،
+وأقم البرهان على كونها !!{surjective}. ولا تهمل كون $A$ خالية
+أو~$B = \emptyset$.
+\end{prob}
+
+\begin{prob}
+أثبت أنه إذا كان $B \subseteq A$ وكانت $A$ !!{enumerable} كانت~$B$ كذلك.
+فافرض دالة !!a{surjective} $f\colon \PosInt \to A$،
+وعرّف دالة !!a{surjective} $g\colon \PosInt \to B$ ثم أثبت أنها
+!!{surjective}. وما الحكم إذا كان $B = \emptyset$؟
+\end{prob}
+
+\begin{prob}
+برهن بالاستقراء على $n$ أن $A_1$، $A_2$، \dots، $A_n$ إذا كانت
+كلها !!{enumerable} كان $A_1 \cup \dots \cup A_n$ كذلك.
+ولك استعمال أن $A$ و~$B$ إذا كانتا !!{enumerable} كان $A \cup B$ كذلك.
+\end{prob}
+
+قد يبدو البدء في سرد !!{element}s المجموعة بـ!!{element} الرتبة~$1$
+أقرب إلى الطبع، ولكن الرياضيين يؤثرون العد بالطبيعيّات~$\Nat$،
+فيسمون !!{element}s القائمة ذا الرتبة $0$ ثم $1$ ثم $2$، وهكذا.
+فبإزاء ذلك يجوز تعريف التعداد بأنه دالة !!a{surjective} من $\Nat$
+إلى~$A$. والتعريفان متكافئان.
+
+\begin{prop}\ollabel{prop:enum-shift}
+وجود !!a{surjection} $f\colon \PosInt \to A$ يكافئ وجود
+!!a{surjection} $g\colon \Nat \to A$.
+\end{prop}
+
+\begin{proof}
+إذا أعطيت !!a{surjection} $f\colon \PosInt \to A$ ضع $g(n) = f(n+1)$
+لكل $n \in \Nat$. فيظهر أن $g\colon \Nat \to A$ هي !!{surjective}.
+وبالعكس، إذا أعطيت !!a{surjection} $g\colon \Nat \to A$
+فضع $f(n) = g(n-1)$.
+\end{proof}
+
+ومن ذلك نحصل على التالي:
+
+\begin{cor}\ollabel{cor:enum-nat}
+المجموعة $A$ !!{enumerable} إذا وفقط إذا كانت خالية أو وجدت دالة
+!!a{surjective} $f\colon \Nat \to A$.
+\end{cor}
+
+تقدم إمكان حذف التكرار من قائمة !!{element}s~$A$.
+ويجري مثله في التعداد الصوري، لكن ضبطه وبرهانه أدق.
+فالدالة $f\colon \PosInt \to A$ لا بد أن تعرّف لكل $n \in \PosInt$.
+فإن كانت~$A$ ذات عدد منته من !!{element}s، لم يمكن أن تعطى
+!!{element}s~$\PosInt$ غير المتناهية قيمًا تستوفي !!{element}s~$A$
+ولا تعود إلى قيمة مرتين. فحين تنتهي القائمة الخالية من التكرار
+يجب اختيار مجال آخر لـ$f$ له عدد منته من !!{element}s.
+وعدم التكرار يقتضي أن تكون $f$ !!{injective}؛ وهي !!{surjective}
+كذلك، فالمطلوب !!a{bijection} من منتهية $\{1, \dots, n\}$
+أو من $\PosInt$ إلى~$A$.
+
+\begin{prop}\ollabel{prop:enum-bij}
+إذا كانت $f\colon \PosInt \to A$ !!{surjective}، أي تعدادًا لـ~$A$،
+وجدت !!a{bijection} $g\colon Z \to A$، حيث $Z$ إما~$\PosInt$
+وإما $\{1, \dots, n\}$ لبعض~$n \in \PosInt$.
+\end{prop}
+
+\begin{proof}
+نبني $g$ عوديًا، فنضع $g(1) = f(1)$. وإذا تعيّنت $g(i)$
+جعلنا $g(i+1)$ أول قيمة في $f(1)$، $f(2)$، \dots{}
+لم ترد في $g(1)$، \dots، $g(i)$، إن وجدت.
+فإن كان عدد !!{element}s $A$ هو $n$ فقط، تعيّنت
+$g(1)$، \dots، $g(n)$ كلها، فحصلت $g\colon \{1, \dots, n\} \to A$.
+وإن كانت !!{element}s $A$ غير متناهية، فلكل $i$ يوجد !!a{element}
+من~$A$ في $f(1)$، $f(2)$، \dots، لم يرد بين $g(1)$، \dots، $g(i)$.
+فنحصل حينئذ على $g\colon \PosInt \to A$.
+
+و$g$ !!{surjective}، إذ كل عنصر من~$A$ يظهر في
+$f(1)$، $f(2)$، \dots{} لأن $f$ !!{surjective}، فلا بد أن يؤخذ
+قيمة لـ$g(i)$ عند بعض~$i$. وهي !!{injective} أيضًا؛ فلو كان
+$j < i$ و$g(j) = g(i)$ لكانت $g(i)$ قد سبقت بين
+$g(1)$، \dots، $g(i-1)$، خلافًا لتعريف~$g$.
+\end{proof}
+
+\begin{cor}\ollabel{cor:enum-nat-bij}
+المجموعة $A$ !!{enumerable} إذا وفقط إذا كانت خالية أو وجدت
+!!a{bijection} $f\colon N \to A$، حيث $N = \Nat$ أو
+$N = \{0, \dots, n\}$ لبعض $n \in \Nat$.
+\end{cor}
+
+\begin{proof}
+فـ$A$ !!{enumerable} إذا وفقط إذا كانت $A$ خالية أو وجدت
+!!a{surjective} $f\colon \PosInt \to A$. وبـ\olref{prop:enum-bij}
+تكافئ الحالة الأخيرة وجود دالة !!a{bijective}~$f\colon Z \to A$،
+حيث $Z = \PosInt$ أو $Z = \{1, \dots, n\}$ لبعض $n \in \PosInt$.
+وبمثل حجة \olref{prop:enum-shift} يكافئ هذا وجود
+!!a{bijection} $g\colon N \to A$، حيث $N = \Nat$ أو $N = \{0, \dots, n-1\}$.
+\end{proof}
+
+\begin{prob}
+في \olref[sfr][siz][enm]{defn:enumerable} تكون $A$ قابلة للتعداد
+إذا وفقط إذا كان $A = \emptyset$ أو وجدت دالة !!a{surjective}
+$f\colon \PosInt \to A$. ويمكن أن يحد «المجموعة !!{enumerable}»
+بوجود دالة !!a{injective} $g\colon A \to \PosInt$.
+فأثبت اتفاق الحدين: وجود دالة !!a{injective} $g\colon A \to \PosInt$
+يكافئ كون $A = \emptyset$ أو وجود دالة !!a{surjective} $f\colon \PosInt \to A$.
+\end{prob}
+
+\end{document}
