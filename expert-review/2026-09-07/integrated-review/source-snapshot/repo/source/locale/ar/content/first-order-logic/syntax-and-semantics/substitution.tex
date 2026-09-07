@@ -1,0 +1,124 @@
+% Part: first-order-logic
+% Chapter: syntax-and-semantics
+% Section: substitution
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{syn}{sub}
+
+\olsection{الإحلال}
+
+\begin{defn}[الإحلال في حد]
+نعرّف $\Subst{s}{t}{x}$، وهي نتيجة \emph{إحلال}~$t$ محل كل ورود
+لـ~$x$ في~$s$، عوديًا:
+\begin{enumerate}
+\item \indcase{s}{c}{$\Subst{\indfrm}{t}{x}$ هي $s$ نفسها.}
+
+\item \indcase{s}{y}{$\Subst{\indfrm}{t}{x}$ هي أيضًا $s$ نفسها،
+  شريطة أن يكون $y$ متغيرًا وأن $y \not\ident x$.}
+
+\item \indcase{s}{x}{$\Subst{\indfrm}{t}{x}$ هي~$t$.}
+
+\item\indcase{s}{\Atom{f}{t_1, \dots, t_n}}{$\Subst{\indfrmp}{t}{x}$ هي
+  $\Atom{f}{\Subst{t_1}{t}{x}, \dots, \Subst{t_n}{t}{x}}$.}
+\end{enumerate}
+\end{defn}
+
+\begin{defn}
+يكون الحد~$t$ \emph{!!{free for}}~$x$ في~$!A$ إذا لم يقع أي من
+الورودات الحرة لـ~$x$ في~$!A$ في مجال مكمم يقيد متغيرًا في~$t$.
+\end{defn}
+
+\begin{ex} ~
+\begin{enumerate}
+\item $\Obj v_8$ حرة للإحلال محل~$\Obj v_1$ في
+  $\lexists[\Obj v_3]\Atom{\Obj A^2_4}{\Obj v_3,\Obj v_1}$
+
+\item $\Obj f^2_1(\Obj v_1, \Obj v_2)$ \emph{ليست} حرة للإحلال
+  محل~$\Obj v_0$ في
+  $\lforall[\Obj v_2]\Atom{\Obj A^2_4}{\Obj v_0,\Obj v_2}$
+\end{enumerate}
+\end{ex}
+
+\begin{defn}[الإحلال في !!a{formula}]
+إذا كانت $!A$ !!a{formula}، وكان $x$~!!a{variable}، وكان $t$~حدًا
+!!{free for}~$x$ في~$!A$، فإن $\Subst{!A}{t}{x}$ هي نتيجة إحلال
+$t$ محل جميع الورودات الحرة لـ~$x$ في~$!A$.
+\begin{enumerate}
+\tagitem{prvFalse}{\indcase{!A}{\lfalse}{$\Subst{\indfrm}{t}{x}$ هي
+    $\lfalse$.}}{}
+
+\tagitem{prvTrue}{\indcase{!A}{\ltrue}{$\Subst{\indfrm}{t}{x}$ هي
+    $\ltrue$.}}{}
+
+\item \indcase{!A}{\Atom{P}{t_1,\dots,
+    t_n}}{$\Subst{\indfrm}{t}{x}$ هي $\Atom{P}{\Subst{t_1}{t}{x},
+    \dots, \Subst{t_n}{t}{x}}$.}
+
+\item \indcase{!A}{\eq[t_1][t_2]}{$\Subst{\indfrmp}{t}{x}$ هي
+  $\Subst{t_1}{t}{x} = \Subst{t_2}{t}{x}$.}
+
+\tagitem{prvNot}{\indcase{!A}{\lnot !B}{$\Subst{\indfrmp}{t}{x}$ هي
+    $\lnot \Subst{!B}{t}{x}$.}}{}
+
+\tagitem{prvAnd}{\indcase{!A}{(!B \land
+    !C)}{$\Subst{\indfrmp}{t}{x}$ هي $(\Subst{!B}{t}{x} \land
+    \Subst{!C}{t}{x})$.}}{}
+
+\tagitem{prvOr}{\indcase{!A}{(!B \lor
+    !C)}{$\Subst{\indfrmp}{t}{x}$ هي $(\Subst{!B}{t}{x} \lor
+    \Subst{!C}{t}{x})$.}}{}
+
+\tagitem{prvIf}{\indcase{!A}{(!B \lif
+    !C)}{$\Subst{\indfrmp}{t}{x}$ هي $(\Subst{!B}{t}{x} \lif
+    \Subst{!C}{t}{x})$.}}{}
+
+\tagitem{prvIff}{\indcase{!A}{(!B \liff
+    !C)}{$\Subst{\indfrmp}{t}{x}$ هي $(\Subst{!B}{t}{x} \liff
+    \Subst{!C}{t}{x})$.}}{}
+
+\tagitem{prvAll}{
+\indcase{!A}{\lforall[y][!B]}{$\Subst{\indfrmp}{t}{x}$
+    هي $\lforall[y][\Subst{!B}{t}{x}]$، شريطة أن يكون $y$ متغيرًا
+    غير~$x$؛ وإلا كانت $\Subst{\indfrmp}{t}{x}$ هي $\indfrm$
+    نفسها.}}{}
+
+\tagitem{prvEx}{
+\indcase{!A}{\lexists[y][!B]}{$\Subst{\indfrmp}{t}{x}$
+    هي $\lexists[y][\Subst{!B}{t}{x}]$، شريطة أن يكون $y$ متغيرًا
+    غير~$x$؛ وإلا كانت $\Subst{\indfrmp}{t}{x}$ هي $\indfrm$
+    نفسها.}}{}
+\end{enumerate}
+\end{defn}
+
+\begin{explain}
+لاحظ أن الإحلال قد يكون خالي الأثر: فإذا لم يرد~$x$ في~$!A$ أصلًا،
+كانت $\Subst{!A}{t}{x}$ هي~$!A$ نفسها.
+
+وقيد كون~$t$ !!{free for}~$x$ في~$!A$ ضروري لاستبعاد حالات كالحالة
+الآتية. إذا كان $!A \ident \lexists[y][x < y]$ وكان $t \ident y$،
+فستكون $\Subst{!A}{t}{x}$ هي $\lexists[y][y < y]$. وفي هذه الحالة
+«يُؤسَر» المتغير الحر~$y$ بالمكمم~$\lexists[y]$ عند الإحلال، وهذا غير
+مرغوب فيه. فنحن نريد، مثلًا، أنه متى صدقت $\lforall[x][!B]$، صدقت
+كذلك $\Subst{!B}{t}{x}$. لكن انظر في
+$\lforall[x][\lexists[y][x < y]]$ (حيث $!B$ هي $\lexists[y][x <
+  y]$). إنها جملة تصدق، مثلًا، على الأعداد الطبيعية: لكل عدد~$x$
+عدد~$y$ أكبر منه. ولو أجزنا~$y$ إحلالًا ممكنًا محل~$x$، لانتهينا إلى
+$\Subst{!B}{y}{x} \ident \lexists[y][y < y]$، وهي كاذبة. ونمنع
+ذلك باشتراط ألا ينتهي أي من المتغيرات الحرة في~$t$ مقيدًا بمكمم
+في~$!A$.
+\end{explain}
+
+كثيرًا ما نستخدم الاصطلاح الآتي لتجنب الترميز المرهق: إذا كانت
+$!A$ !!a{formula} قد تحتوي على ال!!{variable}~$x$ حرًا، كتبنا
+أيضًا~$!A(x)$ للدلالة على ذلك. وحين يتضح أي~$!A$ وأي~$x$ نعني، وكان
+$t$ حدًا (ويُفترض أنه حر للإحلال محل~$x$ في~$!A(x)$)، كتبنا
+$!A(t)$ اختصارًا لـ~$\Subst{!A}{t}{x}$. فقد نقول، مثلًا، «نسمي
+$!A(t)$ حالة إحلالية من~$\lforall[x][!A(x)]$». ونعني بهذا أنه إذا
+كانت $!A$~أي !!{formula}، وكان $x$~!!a{variable}، وكان $t$~حدًا
+حرًا للإحلال محل~$x$ في~$!A$، فإن $\Subst{!A}{t}{x}$ حالة إحلالية
+من~$\lforall[x][!A]$.
+
+\end{document}

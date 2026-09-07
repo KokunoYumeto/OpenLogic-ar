@@ -1,0 +1,211 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{ord-arithmetic}{add}
+\olsection{الجمع الترتيبي}
+
+افترض أننا نريد جمع~$\alpha$ و$\beta$. يمكننا ببساطة أن نضع {نسخة}
+من~$\beta$ مباشرة بعد نسخة من~$\alpha$. (نحتاج إلى أخذ
+\emph{نسخ}، لأننا نعلم من
+\olref[ordinals][basic]{ordinalsaresubsets} أن إما
+$\alpha \subseteq \beta$ أو~$\beta \subseteq \alpha$.) والأثر الحدسي
+لهذا هو أن نجتاز متتالية من الخطوات نمطها~$\alpha$، \emph{ثم} نجتاز
+متتالية نمطها~$\beta$. وستكون المتتالية الناتجة مرتبة ترتيبًا جيدًا؛
+ومن ثم، بموجب~\olref[ordinals][ordtype]{thmOrdinalRepresentation}،
+تكون متماثلة مع عدد ترتيبي (فريد). ويمكن عدّ ذلك العدد الترتيبي
+\emph{مجموع}~$\alpha$ و$\beta$.
+
+هذه هي الفكرة الحدسية وراء الجمع الترتيبي. ولكي نعرّفه بدقة، نبدأ
+بفكرة أخذ \emph{نسخ} من المجموعات. والفكرة هنا هي استخدام وسمين
+اعتباطيين، هما~$0$ و$1$، لتتبع منشأ كل شيء:
+
+\begin{defn}\ollabel{defdissum}
+\emph{الجمع المنفصل} لـ$A$ و$B$ هو
+$A \disjointsum B = (A\times \{0\}) \cup (B \times \{1\})$.
+\end{defn}
+
+نعرّف بعد ذلك ترتيبًا على أزواج الأعداد الترتيبية:
+
+\begin{defn}
+لأي أعداد ترتيبية~$\alpha_1, \alpha_2, \beta_1, \beta_2$، نقول إن:
+\begin{align*}
+	\tuple{\alpha_1, \alpha_2} \rlexless \tuple{\beta_1, \beta_2}\text{ إذا وفقط إذا كان }&
+	\text{إما $\alpha_2 \in \beta_2$،}\\
+	& \text{أو كان معًا $\alpha_2 = \beta_2$ و$\alpha_1 \in \beta_1$}
+\end{align*}
+\end{defn}
+
+هذا ترتيب \emph{معجمي معكوس}، لأنك ترتب بحسب العنصر الثاني، ثم بحسب
+العنصر الأول. تذكّر الآن أننا أردنا تعريف~$\alpha \ordplus \beta$
+بوصفه نمط ترتيب نسخة من~$\alpha$ تتبعها نسخة من~$\beta$. ولتحقيق ذلك
+نقول:
+
+\begin{defn}\ollabel{defordplus}
+لأي عددين ترتيبيين~$\alpha$ و$\beta$، يكون مجموعهما
+$\alpha \ordplus \beta =
+\ordtype{\alpha \disjointsum \beta, \rlexless}$.
+\end{defn}
+\noindent
+لاحظ أننا أسأنا استعمال الترميز قليلًا هنا؛ إذ ينبغي لنا، بدقة، أن
+نكتب «$\Setabs{\tuple{x,y}\in(\alpha\disjointsum\beta)^2}{x \rlexless y}$»
+بدلًا من «$\rlexless$». لكننا سنواصل، طلبًا للإيجاز، إساءة استعمال
+الترميز بهذه الطريقة فيما يأتي.
+
+تؤكد النتيجة الآتية، مع
+\olref[ordinals][ordtype]{thmOrdinalRepresentation}، أن تعريفنا حسن
+الصياغة:
+
+\begin{lem}\ollabel{ordsumlessiswo}
+$\tuple{\alpha \disjointsum \beta, \rlexless}$ ترتيب جيد، لأي عددين
+ترتيبيين~$\alpha$ و$\beta$.
+\end{lem}
+
+\begin{proof}
+من الواضح أن~$\rlexless$ متصل على~$\alpha \disjointsum \beta$.
+ولبيان أنه مؤسس جيدًا، ثبّت مجموعة غير خالية
+$X \subseteq \alpha \disjointsum \beta$. ولتكن~$Y$ المجموعة الجزئية
+من~$X$ التي يكون إحداثي عناصرها الثاني أصغر ما يمكن، أي
+$Y = \Setabs{\tuple{\gamma, i} \in X}{(\forall \tuple{\delta, j} \in X)i \leq j}$.
+ثم اختر عنصر~$Y$ ذا الإحداثي الأول الأصغر.
+\end{proof}
+\noindent
+وهكذا لدينا تعريف صريح حسن للجمع الترتيبي. وفيما يأتي حقيقة غير
+مفاجئة (تذكر أن~$1 = \{0\}$، بموجب
+\olref[z][infinity-again]{defnomega}):
+\begin{prop}
+$\alpha \ordplus 1 = \ordsucc{\alpha}$، لأي عدد ترتيبي~$\alpha$.
+\end{prop}
+
+\begin{proof}
+انظر في التماثل~$f$ من
+$\ordsucc{\alpha} = \alpha \cup \{\alpha\}$ إلى
+$\alpha\disjointsum1 = (\alpha \times \{0\})
+\cup (\{0\} \times \{1\})$، المعطى بـ
+$f(\gamma) = \tuple{\gamma, 0}$ لكل~$\gamma \in \alpha$، وبـ
+$f(\alpha) = \tuple{0, 1}$.
+\end{proof}
+\noindent
+وفوق ذلك، يسهل بيان أن الجمع يحقق شروطًا عودية معينة:
+
+\begin{lem}\ollabel{ordadditionrecursion}
+لأي عددين ترتيبيين~$\alpha, \beta$، لدينا:
+\begin{align*}
+	\alpha\ordplus 0 &= \alpha\\
+	\alpha \ordplus  (\beta\ordplus 1) &= (\alpha \ordplus  \beta) \ordplus  1\\
+	\alpha  \ordplus  \beta &= \supstrict_{\delta < \beta}(\alpha \ordplus  \delta) && \text{إذا كان $\beta$ عددًا ترتيبيًا حديًا}
+\end{align*}
+\end{lem}
+
+\begin{proof}
+نتحقق من الحالات واحدة فواحدة؛ أولًا:
+\begin{align*}
+	\alpha \ordplus  0
+	&= \ordtype{\alpha \times \{0\}, \rlexless}\\
+	&= \alpha\\
+	\alpha \ordplus (\beta \ordplus  1)
+	%&= \ordtype{(\alpha\times \{0\}) \cup (\ordtype{\beta \ordplus  1}\times \{1\}), \rlexless} \\
+	&= \ordtype{(\alpha\times \{0\}) \cup (\ordsucc{\beta}\times \{1\}), \rlexless} \\
+	&= \ordtype{(\alpha\times \{0\}) \cup (\beta \times \{1\}), \rlexless} \ordplus 1\\
+	&= (\alpha \ordplus  \beta) \ordplus  1
+\end{align*}
+ولتكن الآن~$\beta \neq \emptyset$ حدية. إذا كان~$\delta < \beta$،
+كان أيضًا~$\delta\ordplus 1 < \beta$، ولذلك يكون
+$\alpha \ordplus \delta$ مقطعًا ابتدائيًا حقيقيًا من
+$\alpha \ordplus \beta$. ومن ثم فإن~$\alpha \ordplus \beta$ حد
+أعلى صارم للمجموعة
+$X = \Setabs{\alpha \ordplus \delta}{\delta < \beta}$. وفوق ذلك، إذا
+كان~$\alpha \leq \gamma < \alpha \ordplus \beta$، فمن الواضح أن
+$\gamma = \alpha \ordplus \delta$ لبعض~$\delta < \beta$. ولذلك
+$\alpha \ordplus \beta =
+\supstrict_{\delta< \beta}(\alpha\ordplus \delta)$.
+\end{proof}
+
+لكن ثمة حقيقة لافتة. كان بوسعنا، عند تعريف الجمع الترتيبي، أن نستخدم
+\emph{بدلًا من ذلك} مبرهنة العودية المتناهية التجاوز فحسب، وأن نقرر
+معادلات العودية كما وردت تمامًا في~\olref{ordadditionrecursion}
+(لكن باستخدام «$\ordsucc{\beta}$» بدلًا من «$\beta \ordplus 1$»).
+
+إذن توجد طريقتان مختلفتان لتعريف العمليات على الأعداد الترتيبية.
+يمكننا تعريفها \emph{تركيبيًا}، بأن نبني صراحة مجموعة مرتبة ترتيبًا
+جيدًا ثم ننظر في نمط ترتيبها. أو يمكننا تعريفها \emph{عوديًا}، بمجرد
+تقرير معادلات العودية. وإذا أُنجز الأمر على الوجه الصحيح، كانت
+النتيجة واحدة. فمبرهنة العودية المتناهية التجاوز تضمن أن معادلات
+العودية هذه تعيّن أعدادًا ترتيبية \emph{فريدة}.
+
+يسلك الحساب الترتيبي، من نواح كثيرة، مسلك جمع الأعداد الطبيعية.
+فيمكننا مثلًا إثبات ما يأتي:
+
+\begin{lem}\ollabel{ordinaladditionisnice}
+إذا كانت~$\alpha, \beta, \gamma$ أعدادًا ترتيبية، فإن:
+\begin{enumerate}
+	\item\ollabel{ordaddition1} إذا كان~$\beta < \gamma$، فإن
+	$\alpha \ordplus \beta < \alpha \ordplus \gamma$؛
+	\item\ollabel{ordaddition2} إذا كان~$\alpha \ordplus \beta =
+	\alpha\ordplus \gamma$، فإن~$\beta = \gamma$؛
+	\item\ollabel{ordaddition3} $\alpha \ordplus (\beta \ordplus
+	\gamma) = (\alpha \ordplus \beta) \ordplus \gamma$، أي إن الجمع
+	تجميعي؛
+	\item\ollabel{ordaddition4} إذا كان~$\alpha \leq \beta$، فإن
+	$\alpha \ordplus \gamma \leq \beta \ordplus \gamma$.
+\end{enumerate}
+\end{lem}
+
+\begin{proof}
+نثبت~\olref{ordaddition3}، ونترك الباقي تمرينًا. والبرهان بالاستقراء
+البسيط المتناهي التجاوز على~$\gamma$، باستعمال
+\olref{ordadditionrecursion}. عندما~$\gamma = 0$:
+\[
+(\alpha \ordplus  \beta) \ordplus  0 = \alpha \ordplus  \beta  = \alpha \ordplus  (\beta \ordplus  0)
+\]
+وعندما~$\gamma = \delta\ordplus 1$، افترض استقرائيًا أن
+$(\alpha \ordplus  \beta) \ordplus  \delta =
+\alpha \ordplus  (\beta \ordplus \delta)$؛ والآن، باستخدام
+\olref{ordadditionrecursion} ثلاث مرات:
+\begin{align*}
+	(\alpha \ordplus  \beta) \ordplus  (\delta \ordplus  1) & = ((\alpha \ordplus  \beta) \ordplus  \delta)\ordplus 1\\
+	& = (\alpha \ordplus  (\beta \ordplus  \delta)) \ordplus  1\\
+	& = \alpha \ordplus  ((\beta \ordplus  \delta)\ordplus 1)\\
+	& = \alpha \ordplus  (\beta \ordplus  (\delta\ordplus 1))
+\end{align*}	
+وعندما تكون~$\gamma$ عددًا ترتيبيًا حديًا، افترض استقرائيًا أنه إذا
+كان~$\delta \in \gamma$، فإن
+$(\alpha \ordplus  \beta) \ordplus  \delta =
+\alpha \ordplus  (\beta \ordplus  \delta)$؛ والآن:
+\begin{align*}
+	(\alpha \ordplus  \beta) \ordplus  \gamma & = \supstrict_{\delta < \gamma}((\alpha \ordplus  \beta) \ordplus  \delta) \\
+	&= \supstrict_{\delta < \gamma}(\alpha \ordplus  (\beta \ordplus  \delta))\\
+	&= \alpha \ordplus  \supstrict_{\delta < \gamma}(\beta \ordplus  \delta)\\
+	& = \alpha \ordplus  (\beta \ordplus  \gamma)
+\end{align*}
+\end{proof}
+
+\begin{prob}
+أثبت بقية~\olref[sth][ord-arithmetic][add]{ordinaladditionisnice}.
+\end{prob}
+
+بهذه الوجوه ينبغي أن يكون الجمع الترتيبي مألوفًا جدًا. لكن ثمة وجه
+حاسمًا \emph{لا} يشبه فيه الجمع الترتيبي جمع الأعداد الطبيعية.
+
+\begin{prop}\ollabel{ordsumnotcommute}
+الجمع الترتيبي {ليس} تبادليًا؛
+$1 \ordplus \omega = \omega < \omega \ordplus 1$.
+\end{prop}
+
+\begin{proof}
+لاحظ أن~$1 \ordplus \omega = \supstrict_{n < \omega} (1 \ordplus n)
+= \omega \in \omega \cup \{\omega\} = \ordsucc{\omega} = \omega
+\ordplus 1$.
+\end{proof}
+\noindent
+ومع أن هذا قد يبدو مفاجئًا في البداية، فإنه \emph{ينبغي ألا يكون
+كذلك}. فمن جهة، عندما تنظر في~$1 \ordplus \omega$، فأنت تفكر في نمط
+الترتيب الناتج من وضع عنصر إضافي \emph{قبل} الأعداد الطبيعية كلها.
+وبالاستدلال كما فعلنا مع فندق هيلبرت في
+\olref[sfr][infinite][hilbert]{sec}، ينبغي حدسيًا ألا يغير هذا العنصر
+الأول الإضافي نمط الترتيب الكلي. ومن جهة أخرى، عندما تنظر في
+$\omega \ordplus 1$، فأنت تفكر في نمط الترتيب الناتج من وضع عنصر
+إضافي \emph{بعد} الأعداد الطبيعية كلها. وذلك شيء مختلف اختلافًا
+جذريًا!
+
+\end{document}

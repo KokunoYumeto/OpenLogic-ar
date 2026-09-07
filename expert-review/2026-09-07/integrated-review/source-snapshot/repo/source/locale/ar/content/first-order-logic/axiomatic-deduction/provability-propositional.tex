@@ -1,0 +1,82 @@
+% Part: first-order-logic
+% Chapter: axiomatic-deduction
+% Section: provability-propositional
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{axd}{ppr}}
+      {\olfileid{pl}{axd}{ppr}}
+
+\olsection{\usetoken{S}{derivability} والروابط القضوية}
+
+\begin{explain}
+  نثبت أن علاقة !!{derivability}~$\Proves$ في الاستنتاج البديهي قوية
+  بما يكفي لإثبات بعض الحقائق الأساسية التي تتعلق بالروابط القضوية؛
+  ومنها أن $!A \land !B \Proves !A$ وأن $!A, !A \lif !B \Proves !B$
+  (قاعدة إثبات المقدَّم). وهذه الحقائق لازمة لبرهان مبرهنة الاكتمال.
+\end{explain}
+
+\begin{prop}\ollabel{prop:provability-land}
+  \begin{enumerate}
+  \item \ollabel{prop:provability-land-left} كل من $!A \land !B \Proves
+    !A$ و$!A \land !B \Proves !B$.
+  \item \ollabel{prop:provability-land-right} $!A, !B \Proves !A \land !B$.
+  \end{enumerate}
+\end{prop}
+
+\begin{proof}
+  \begin{enumerate}
+    \item من \olref[prp]{ax:land1} و\olref[prp]{ax:land2} بقاعدة
+      إثبات المقدَّم.
+  \item من \olref[prp]{ax:land3} بتطبيق قاعدة إثبات المقدَّم مرتين.
+  \end{enumerate}
+\end{proof}
+
+
+\begin{prop}\ollabel{prop:provability-lor}
+  \begin{enumerate}
+  \item المجموعة $!A \lor !B, \lnot !A, \lnot !B$ غير متسقة.
+  \item كل من $!A \Proves !A \lor !B$ و$!B \Proves !A \lor !B$.
+  \end{enumerate}
+\end{prop}
+
+\begin{proof}
+  \begin{enumerate}
+  \item من \olref[prp]{ax:lnot2} نحصل على $\Proves \lnot !A \lif (!A
+    \lif \lfalse)$ وعلى $\Proves \lnot !B \lif (!B \lif \lfalse)$.
+    ومن ثم تعطينا مبرهنة الاستنباط $\{\lnot !A\} \Proves !A \lif
+    \lfalse$ و$\{\lnot !B\} \Proves !B \lif \lfalse$. ومن
+    \olref[prp]{ax:lor3} نحصل على $\{\lnot !A, \lnot !B\} \Proves (!A
+    \lor !B) \lif \lfalse$. وتعطينا مبرهنة الاستنباط
+    $\{!A \lor !B, \lnot !A, \lnot !B\} \Proves \lfalse$.
+  \item من \olref[prp]{ax:lor1} و\olref[prp]{ax:lor2} بقاعدة إثبات
+    المقدَّم.
+  \end{enumerate}
+\end{proof}
+
+\begin{prop}\ollabel{prop:provability-lif}
+  \begin{enumerate}
+  \item \ollabel{prop:provability-lif-left}  $!A, !A \lif !B \Proves !B$.
+  \item \ollabel{prop:provability-lif-right}
+    كل من $\lnot !A \Proves !A \lif !B$ و$!B \Proves !A \lif !B$.
+  \end{enumerate}
+\end{prop}
+
+\begin{proof}
+  \begin{enumerate}
+  \item يمكننا أن نعطي !!{derive}:
+    \begin{derivation}
+      1. & $!A$ & \Hyp\\
+      2. & $!A \lif !B$ & \Hyp\\
+      3. & $!B$ & 1, 2, \MP
+    \end{derivation}
+
+  \item من \olref[prp]{ax:lnot2} و\olref[prp]{ax:lif1} ومبرهنة
+    الاستنباط، على الترتيب.
+  \end{enumerate}
+\end{proof}
+
+\end{document}

@@ -1,0 +1,95 @@
+% Part:sets-functions-relations
+% Chapter: size-of-sets
+% Section: comparing-sizes
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid[ar]{sfr}{siz}{car}
+
+\olsection{اختلاف أحجام المجموعات ومبرهنة كانتور}
+
+\begin{explain}
+بعد أن ضبطنا معنى تساوي المجموعتين في الحجم، نضبط معنى كون إحداهما أصغر من الأخرى. فنستعيض، في تعريف «لا تزيد حجمًا على»، عن اشتراط !!a{bijection} بين المجموعتين باشتراط !!a{injection} من الأولى إلى الثانية. فإذا وجدت تلك الدالة حكمنا بأن حجم الأولى أقل من حجم الثانية أو مساو له. ووجه ذلك في التصور أن !!a{injection} لا بد أن تجد في مداها من !!{element}s ما يفي بعدد !!{element}s مجالها؛ إذ لا يجتمع عنصران مختلفان من المجال في !!{element} واحد من المدى.
+\end{explain}
+
+\begin{defn}
+المجموعة $A$ \emph{لا تزيد حجمًا على}~$B$، ورمز ذلك $\cardle{A}{B}$، إذا وفقط إذا وجدت !!a{injection} $f \colon A \to B$.
+\end{defn}
+
+ولهذه العلاقة الانعكاسية والتعدي، دون التناظر؛ وإثبات ذلك متروك للتمرين. ثم نخص من هذه المقارنة حال الصغر المحض، حيث لا تساوي بين الحجمين.
+
+\begin{defn}
+تكون $A$ \emph{أصغر حجمًا من}~$B$، ونكتب $\cardless{A}{B}$، إذا وفقط إذا وجدت !!a{injection}~$f\colon A \to B$ ولم توجد !!{bijection}~$g\colon A
+\to B$. فشرطا ذلك هما $\cardle{A}{B}$ و$\cardneq{A}{B}$.
+\end{defn}
+
+وهذه العلاقة لا انعكاسية، وهي متعدية؛ وللقارئ إثبات الأمرين تمرينًا. وبالترميز الجديد تكون المجموعة~$A$ !!{enumerable} إذا وفقط إذا كان $\cardle{A}{\Nat}$، وتكون $A$ !!{nonenumerable} إذا وفقط إذا كان $\cardless{\Nat}{A}$. ولذلك نستطيع أن نعبر عن
+\oliflabeldef{sfr:siz:nen-alt:thm:nonenum-pownat}{%
+\olref[sfr][siz][nen-alt]{thm:nonenum-pownat}
+بالقول إن
+$\cardless{\Nat}{\Pow{\Nat}}$}{%
+\olref[sfr][siz][nen]{thm:nonenum-pownat}
+بالقول إن $\cardless{\PosInt}{\Pow{\PosInt}}$}. وقد أثبت \citet{Cantor1892} أن الحكم الأخير \emph{لا يختص بهذه المجموعات، بل يعمها كلها}:
+
+\begin{thm}[كانتور]\ollabel{thm:cantor}
+$\cardless{A}{\Pow{A}}$ مهما تكن المجموعة $A$.
+\end{thm}
+
+\begin{proof}
+لنضع $f(x) = \{x\}$. فهذه !!a{injection} $f \colon A \to \Pow{A}$؛ لأن $x \neq y$ يستلزم $\{x\} \neq \{y\}$ بالامتدادية، ومنه $f(x) \neq f(y)$. فثبت $\cardle{A}{\Pow{A}}$.
+
+\begin{editorial}
+إن أدرج \olref[nen]{sec} سقنا البرهان مفصلًا، وإلا أوردنا وجهًا أوجز يوافق \olref[nen-alt]{sec}.
+\end{editorial}
+
+\oliflabeldef{sfr:siz:nen:sec}{%
+ويبقى أن ننفي وجود دالة~!!a{surjective}~$g\colon A \to
+\Pow{A}$؛ فإذا امتنع ذلك امتنعت الدالة~!!a{bijective} من باب أولى، وثبت $\cardneq{A}{\Pow{A}}$. فلتكن $g\colon A \to \Pow{A}$ دالة مفروضة. ولكون $g$ كلية، فإن كل $x \in A$ له صورة هي مجموعة جزئية $g(x)
+\subseteq A$. ولإثبات أن $g$ غير شاملة نبني مجموعة جزئية~$\overline{A} \subseteq A$ يقتضي تعريفها ألا تقع في مدى~$g$. نضع
+\[
+  \overline{A} = \Setabs{x \in A}{x \notin g(x)}.
+\]
+وحيث كانت~$g(x)$ معرفة لكل $x \in A$، كانت $\overline{A}$ مجموعة جزئية معينة من~$A$. لكنها خارجة عن مدى~$g$. وبيانه: خذ $x \in A$ على الإطلاق، فالمطلوب $\overline{A} \neq
+g(x)$. فإن كان $x \in g(x)$ لم يصدق $x \notin g(x)$، وبحسب تعريف~$\overline{A}$ يلزم $x \notin
+  \overline{A}$. وإن كان $x \in \overline{A}$، صدقت عليه الصفة المحددة لـ~$\overline{A}$، أي $x \in A$ و$x \notin
+  g(x)$. ولما لم نخص $x$ بشيء، ثبت لكل $x \in
+  A$ أن $x \in g(x)$ إذا وفقط إذا كان $x \notin \overline{A}$؛ لذلك $g(x) \neq \overline{A}$. فالمجموعة $\overline{A}$ لا تقع في مدى~$g$، وهذا يناقض فرض كون~$g$ شاملة.
+
+}{والمطلوب الباقي هو $\cardneq{A}{\Pow{A}}$. فلو فرضنا خلافه، أي $\cardeq{A}{\Pow{A}}$، لوجدت !!{bijection} $g \colon A \to \Pow{A}$. ولنضع
+\[
+    D = \Setabs{x \in A}{x \notin g(x)}
+\]
+فإن $D \subseteq A$، ولذلك $D \in \Pow{A}$. والدالة $g$ !!a{bijection}، فلا بد من $y \in A$ يحقق $g(y) = D$. وعندئذ نحصل على
+\[
+    y \in g(y) \text{ إذا وفقط إذا } y \in D \text{ إذا وفقط إذا } y \notin g(y).
+\]
+وقد وقع التناقض، فيثبت $\cardneq{A}{\Pow{A}}$.}{}
+\end{proof}
+
+\begin{editorial}
+\textbf{تنبيه تصحيحي على الأصل (OLSIZ-007).}
+اختير $x$ اعتباطيًا من $A$، غير أن الأصل قيّد النتيجة خطأً
+بـ$x\in\overline{A}$؛ فأعيد مجال التعميم إلى $x\in A$، وهو اللازم
+لإخراج $\overline{A}$ من مدى $g$.
+\end{editorial}
+
+\begin{explain}
+\oliflabeldef{sfr:siz:nen:thm:nonenum-pownat}{وتظهر وحدة الطريقة إذا قارنا برهان \olref{thm:cantor} ببرهان \olref[nen]{thm:nonenum-pownat}. فقد كنا نأخذ قائمة $Z_1$، $Z_2$، \dots{} من المجموعات الجزئية من~$\PosInt$، ونبني منها مجموعة أعداد~$\overline{Z}$ لا تدخل القائمة. وذلك أن كل $n \in
+\PosInt$ يحقق $n \in Z_n$ إذا وفقط إذا كان $n \notin \overline{Z}$؛ فلا بد من عدد يكون !!a{element} لإحدى المجموعتين~$Z_n$ و$\overline{Z}$ دون الأخرى. وهنا استعملنا عين هذا المعنى، إلا أن المؤشرات~$n$ صارت !!{element}s~$A$ بدلًا من~$\PosInt$. وقد عينّا المجموعة $\overline{A}$ لتخالف~$g(x)$ لكل $x \in A$، لأن $x \in g(x)$ يكافئ $x \notin \overline{A}$. فلا يخلو الأمر هنا أيضًا من !!a{element} من~$A$ يكون !!a{element} لإحدى المجموعتين~$g(x)$ و$\overline{A}$ دون صاحبتها. فكما خرجت $\overline{Z}$ عن القائمة $Z_1$، $Z_2$، \dots، خرجت $\overline{A}$ عن مدى~$g$.}{}
+
+\oliflabeldef{sfr:siz:nen-alt:thm:nonenum-pownat}{ولنقابل كذلك برهان \olref{thm:cantor} ببرهان \olref[nen-alt]{thm:nonenum-pownat}. هناك أخذنا قائمة $N_0$، $N_1$، $N_2$، \dots{} من المجموعات الجزئية من~$\Nat$، فبنينا مجموعة أعداد~$D$ لا ترد في القائمة. وسبب خروجها أن $n \in N_n$ يكافئ $n \notin
+D$ لكل $n \in \Nat$. والمعنى هنا واحد، سوى أن المؤشرات~$n$ صارت !!{element}s~$A$ عوضًا عن~$\Nat$. وقد وضعنا $D$ على وجه تخالف به~$g(x)$ لكل $x
+\in A$؛ إذ $x \in g(x)$ إذا وفقط إذا كان $x \notin D$.}{}
+
+ومن وجوه النظر النافعة مقابلة هذا البرهان ببرهان مفارقة راسل، \olref[sfr][set][rus]{thm:russells-paradox}؛ فإن راسل استمد من مبرهنة كانتور ما هداه إلى مفارقته.
+\end{explain}
+
+\begin{prob}
+بين امتناع وجود !!a{injection} $g\colon \Pow{A} \to
+A$ مهما تكن المجموعة~$A$. وللتلميح، افرض أن $g\colon \Pow{A} \to A$ !!{injective}، وضع $D = \Setabs{g(B)}{B \subseteq A \text{ و
+  } g(B) \notin B}$، ثم خذ $x = g(D)$. واستخرج التناقض من كون $g$ !!{injective}.
+\end{prob}
+
+\end{document}

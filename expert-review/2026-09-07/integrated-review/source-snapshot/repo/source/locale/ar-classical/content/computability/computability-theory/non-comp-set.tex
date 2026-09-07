@@ -1,0 +1,63 @@
+% Part: computability
+% Chapter: computability-theory
+% Section: non-comp-set
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{thy}{ncp}
+\olsection{توجد مجموعات غير قابلة للحساب}
+
+قد ثبت أن قابلية المجموعة للحساب تستلزم قابليتها للتعداد حسابيًا. وأما
+العكس فلا يصح على العموم، كما تبيّن النتيجة الآتية.
+
+\begin{thm}\ollabel{thm:K-0}
+لتكن $K_0$ المجموعة $\Setabs{\tuple{e, x}}{\cfind{e}(x) \fdefined}$.
+عندئذ تكون $K_0$ قابلة للتعداد حسابيًا، ولكنها غير قابلة للحساب.
+\end{thm}
+
+\begin{proof}
+أما قابلية $K_0$ للتعداد حسابيًا فتثبت بجعلها مجالًا للدالة~$f$
+التي تعريفها
+\[
+f(z) = \umin{y}{(\len{z} = 2 \land T((z)_0, (z)_1, y))}.
+\]
+إذ متى كانت $\cfind{e}(x)$ معرّفة عثرت $f(\tuple{e,x})$ على سجل حساب
+متوقف؛ وإن لم تُعرّف $\cfind{e}(x)$، لم تُعرّف
+$f(\tuple{e,x})$. وأما إن لم يرمز $z$ إلى زوج، فـ$f(z)$
+غير معرّفة كذلك.
+
+وأما انتفاء قابلية $K_0$ للحساب فهو عين عدم قابلية مشكلة التوقف
+للقرار في \olref[hlt]{thm:halting-problem}.
+\end{proof}
+
+فـ$K_0$ تجمع الأزواج $\tuple{e,x}$ التي تحقق
+$\cfind{e}(x)\fdefined$؛ ومعنى $\tuple{e,x}\in K_0$ أن
+$\cfind{e}$ تتعين عند الدخل~$x$، أي يتوقف حسابها هناك. ومن ثم تسمى
+«مجموعة التوقف». ونخص المجموعة
+$K=\Setabs{e}{\cfind{e}(e)\fdefined}$ باسم «مجموعة التوقف الذاتي»؛
+وهي مثال معياري كثير الاستعمال لما لا يقبل القرار.
+
+\begin{thm}\ollabel{thm:K}
+مجموعة التوقف الذاتي $K=\Setabs{e}{\cfind{e}(e)\fdefined}$
+!!{c.e.} ولكنها غير قابلة للقرار.
+\end{thm}
+
+\begin{proof}
+  لنفرض، طلبًا للخلف، قابلية $K$ للقرار؛ فتكون دالتها المميزة $\Char{K}$ قابلة
+  للحساب. ونضع
+  \[d(e) = \begin{cases}
+  1 & \text{إذا كانت\/ $\Char{K}(e) = 0$}\\
+  \fundefined & \text{في غير ذلك.}
+  \end{cases}
+  \]
+  ثم نأخذ $k$ فهرسًا لـ~$d$، فيكون $d\simeq\cfind{k}$، ومنه
+  $d(k)\simeq\cfind{k}(k)$. وهذا يناقض حقيقة أن
+  $d(k)\fdefined$ إذا وفقط إذا كانت $\cfind{k}(k)\fundefined$، كما
+  يقتضي تعريف~$d$.
+
+  وأما $K$ فهي مجال $f(x)=\umin{y}{T(x,x,y)}$، ومن ثم فهي !!{c.e.}.
+\end{proof}
+
+\end{document}

@@ -1,0 +1,202 @@
+% Part: model-theory
+% Chapter: models-of-arithmetic
+% Section: models-of-q
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{mar}{mdq}
+\section{نماذج $\Th{Q}$}
+
+\begin{explain}
+نعلم أن ثمة !!{structure}s غير قياسية تجعل الـ!!{sentence}s نفسها التي
+تجعلها~$\Struct{N}$ صادقة، أي إنها نماذج لـ$\Th{TA}$. وبما أن
+$\Sat{N}{\Th{Q}}$، فإن كل نموذج لـ$\Th{TA}$ نموذج لـ$\Th{Q}$ أيضًا.
+والنظرية $\Th{Q}$ أضعف بكثير من~$\Th{TA}$؛ فمثلًا
+$\Th{Q} \Proves/ \lforall[x][\lforall[y][\eq[(x + y)][(y+x)]]]$.
+والنظريات الأضعف أيسر إرضاءً: فلها نماذج أكثر. فـ$\Th{Q}$ مثلًا لها
+نماذج تجعل $\lforall[x][\lforall[y][\eq[(x + y)][(y+x)]]]$ كاذبة، لكن
+هذه لا يمكن أن تكون في الوقت نفسه نماذج لـ$\Th{TA}$، ولا لـ$\Th{PA}$
+أيضًا. ونماذج $\Th{Q}$ بسيطة نسبيًا كذلك: يمكننا تحديدها صراحة.
+\end{explain}
+
+\begin{ex}
+\ollabel{ex:model-K-of-Q}
+تأمل الـ!!{structure}~$\Struct{K}$ ذات المجال
+$\Domain{K}=\Nat \cup \{a\}$ والتفسيرات
+\begin{align*}
+  \Assign{\Obj{0}}{K} & = 0\\
+  \Assign{\prime}{K}(x) & =
+  \begin{cases}
+    x+1 & \text{إذا كان $x\in \Nat$}\\
+    a & \text{إذا كان $x = a$}
+  \end{cases}\\
+  \Assign{+}{K}(x, y) & =
+  \begin{cases}
+    x+y & \text{إذا كان $x$ و$y \in\Nat$}\\
+    a & \text{فيما عدا ذلك}
+  \end{cases}\\
+  \Assign{\times}{K}(x, y) & =
+  \begin{cases}
+    xy & \text{إذا كان $x$ و$y \in\Nat$}\\
+    0 & \text{إذا كان $x = 0$ أو $y = 0$}\\
+    a & \text{فيما عدا ذلك}\\
+  \end{cases}\\
+  \Assign{<}{K} & =
+  \Setabs{\tuple{x,y}}{x, y \in \Nat \text{ و } x<y} \cup
+  \Setabs{\tuple{x,a}}{x \in \Domain{K}}
+\end{align*}
+لكي نبين أن $\Sat{K}{\Th{Q}}$، علينا التحقق من صدق جميع بديهيات
+$\Th{Q}$ في~$\Struct{K}$. وللتيسير نكتب $x^\nssucc$ بدل
+$\Assign{\prime}{K}(x)$ («خلف» $x$ في~$\Struct{K}$)، و$x \nsplus y$
+بدل $\Assign{+}{K}(x,y)$ («مجموع» $x$ و$y$ في~$\Struct{K}$)، و
+$x \nstimes y$ بدل $\Assign{\times}{K}(x,y)$ («حاصل ضرب» $x$ و$y$
+في~$\Struct{K}$)، و$x \nsless y$ بدل
+$\tuple{x,y} \in \Assign{<}{K}$. وبهذه الاختصارات يمكن عرض العمليات
+في~$\Struct{K}$ بوضوح أكبر كما يأتي:
+\[
+\begin{array}{c|c}
+  x & x^\nssucc \\
+  \hline
+  n & n+1 \\
+  a & a
+\end{array}
+\qquad
+\begin{array}{c|ccc}
+  x \nsplus y & 0 & m & a \\
+  \hline
+  0 & 0 & m & a \\
+  n & n & n+m & a \\
+  a & a & a & a \\
+\end{array}
+\qquad
+\begin{array}{c|ccc}
+  x \nstimes y & 0 & m & a \\
+  \hline
+  0 & 0 & 0 & 0 \\
+  n & 0 & nm & a \\
+  a & 0 & a & a \\
+\end{array}
+\]
+لدينا $n \nsless m$ إذا وفقط إذا كان $n<m$، حيث
+$n,m \in \Nat$، ولدينا $x \nsless a$ لكل~$x \in \Domain{K}$.
+
+لدينا $\Sat{K}{\lforall[x][\lforall[y][(\eq[x'][y'] \lif \eq[x][y])]]}$
+لأن $\nssucc$~!!{injective}. ولدينا
+$\Sat{K}{\lforall[x][\eq/[\Obj 0][x']]}$ لأن $0$ ليس خلفًا وفق
+$\nssucc$ في~$\Struct{K}$. وكذلك لدينا
+$\Sat{K}{\lforall[x][(\eq[x][\Obj 0] \lor \lexists[y][\eq[x][y']])]}$
+لأنه لكل $n>0$ يكون $n=(n-1)^\nssucc$، ويكون $a=a^\nssucc$.
+
+ولدينا $\Sat{K}{\lforall[x][\eq[(x + \Obj 0)][x]]}$ لأن
+$n \nsplus 0=n+0=n$، ولأن $a\nsplus 0=a$ بتعريف~$\nsplus$.
+أما $\Sat{K}{\lforall[x][\lforall[y][\eq[(x + y')][(x + y)']]]}$
+فتحتاج إلى عناية أكبر قليلًا. إذا كان $n$ و$m$ قياسيين، كان:
+\begin{align*}
+(n \nsplus m^\nssucc) & = (n+(m+1)) = (n+m)+1 = (n \nsplus m)^\nssucc
+\intertext{لأن $\nsplus$ و$^\nssucc$ يوافقان $+$ و$\prime$ على الأعداد
+  القياسية. افترض الآن أن $x \in \Domain{K}$. عندئذ}
+(x \nsplus a^\nssucc) & = (x \nsplus a) = a = a^\nssucc = (x \nsplus a)^\nssucc
+\intertext{وتبقى الحالة التي يكون فيها $y \in \Domain{K}$ و$x=a$.
+  وهنا أيضًا نميز بين أن يكون $y=n$ قياسيًا أو أن يكون $y=a$:}
+(a \nsplus n^\nssucc) & = (a \nsplus (n+1)) = a = a^\nssucc = (a \nsplus n)^\nssucc\\
+(a \nsplus a^\nssucc) & = (a \nsplus a) = a = a^\nssucc = (a \nsplus a)^\nssucc
+\end{align*}
+وهذا بالطبع أكثر تفصيلًا مما يلزم. فمثلًا، لما كان
+$a \nsplus z=a$ أيًا كان $z$، أمكن أن نستنتج مباشرة أن
+$a \nsplus a^\nssucc=a$. ويمكن التحقق من البديهيات الباقية بالطريقة
+نفسها.
+
+وهكذا تكون $\Struct{K}$ نموذجًا لـ$\Th{Q}$. و«جمعها»~$\nsplus$ تبادلي
+أيضًا. غير أن ثمة جملًا أخرى تصدق في~$\Struct{N}$ وتكذب في~$\Struct{K}$،
+والعكس بالعكس. فمثلًا $a \nsless a$، ومن ثم
+$\Sat{K}{\lexists[x][x < x]}$ و$\Sat/{K}{\lforall[x][\lnot x<x]}$.
+وهذا يبين أن $\Th{Q} \Proves/ \lforall[x][\lnot x < x]$.
+\end{ex}
+
+\begin{prob}
+أثبت أن $\Struct{K}$ من \olref[mod][mar][mdq]{ex:model-K-of-Q} تحقق
+بديهيات $\Th{Q}$ الباقية:
+\begin{align*}
+  & \lforall[x][\eq[(x \times \Obj 0)][\Obj 0]] \tag{$!Q_6$}\\
+  & \lforall[x][\lforall[y][\eq[(x \times y')][((x \times y) + x)]]] \tag{$!Q_7$}\\
+  & \lforall[x][\lforall[y][(x < y \liff \lexists[z][\eq[(z' + x)][y]])]] \tag{$!Q_8$}
+\end{align*}
+وأوجد !!a{sentence} لا تتضمن إلا~$\prime$ وتكون صادقة في~$\Struct{N}$
+وكاذبة في~$\Struct{K}$.
+\end{prob}
+
+\begin{ex}
+\ollabel{ex:model-L-of-Q} تأمل الـ!!{structure}~$\Struct{L}$ ذات المجال
+$\Domain{L}=\Nat \cup \{a,b\}$ والتفسيرين
+$\Assign{\prime}{L}=\nssucc$ و$\Assign{+}{L}=\nsplus$ المعطيين بـ
+\[
+\begin{array}{c|c}
+  x & x^\nssucc \\
+  \hline
+  n & n+1 \\
+  a & a\\
+  b & b
+\end{array}
+\qquad
+\begin{array}{c|ccc}
+  x \nsplus y & m & a & b\\
+  \hline
+  n & n+m & b & a\\
+  a & a & b & a\\
+  b & b & b & a
+\end{array}
+\]
+لما كانت $\nssucc$~!!{injective}، وكان $0$ خارج مداها، وكان كل
+$x \in \Domain{L}$ عدا~$0$ في مداها، كانت البديهيات
+$!Q_1$--$!Q_3$ صادقة في~$\Struct{L}$. ولكل $x$ يكون
+$x \nsplus 0=x$، فتكون $!Q_4$ صادقة أيضًا. ولأجل $!Q_5$، تأمل
+$x \nsplus y^\nssucc$ و$(x \nsplus y)^\nssucc$. إنهما متساويان إذا
+كان $x$ و$y$ قياسيين، لأن $\nssucc$ و$\nsplus$ يوافقان $\prime$ و$+$
+عندئذ. وإذا كان $x$ غير قياسي و$y$ قياسيًا، كان
+$x \nsplus y^\nssucc=x=x^\nssucc=(x \nsplus y)^\nssucc$. وإذا كان
+$x$ و$y$ كلاهما غير قياسي، كانت لدينا الحالات الأربع:
+\begin{align*}
+&  a \nsplus a^\nssucc  = b = b^\nssucc = (a \nsplus a)^\nssucc\\
+&  b \nsplus b^\nssucc  = a = a^\nssucc = (b \nsplus b)^\nssucc\\
+&  b \nsplus a^\nssucc  = b = b^\nssucc = (b \nsplus a)^\nssucc\\
+&  a \nsplus b^\nssucc  = a = a^\nssucc = (a \nsplus b)^\nssucc\\
+\intertext{وإذا كان $x$ قياسيًا و$y$ غير قياسي، كان}
+&  n \nsplus a^\nssucc  = n \nsplus a = b = b^\nssucc = (n \nsplus a)^\nssucc\\
+&  n \nsplus b^\nssucc  = n \nsplus b = a = a^\nssucc = (n \nsplus b)^\nssucc
+\end{align*}
+إذن $\Sat{L}{!Q_5}$. لكن $a \nsplus 0 \neq 0 \nsplus a$، ومن ثم
+$\Sat/{L}{\lforall[x][\lforall[y][\eq[(x+y)][(y+x)]]]}$.
+\end{ex}
+
+\begin{prob}
+وسّع $\Struct{L}$ من \olref[mod][mar][mdq]{ex:model-L-of-Q} لتشمل
+$\nstimes$ و$\nsless$ اللتين تفسران~$\times$ و$<$. وبيّن أن بنيتك تحقق
+بديهيات $\Th{Q}$ الباقية:
+\begin{align*}
+& \lforall[x][\eq[(x \times \Obj 0)][\Obj 0]] \tag{$!Q_6$}\\ &
+  \lforall[x][\lforall[y][\eq[(x \times y')][((x \times y) + x)]]]
+  \tag{$!Q_7$}\\ & \lforall[x][\lforall[y][(x < y \liff \lexists[z][\eq[(z'+x)][y]])]] \tag{$!Q_8$}
+\end{align*}
+\end{prob}
+
+\begin{prob}
+في $\Struct{L}$ من \olref[mod][mar][mdq]{ex:model-L-of-Q}، لدينا
+$a^\nssucc=a$ و$b^\nssucc=b$. فهل يوجد نموذج لـ$\Th{Q}$ يكون فيه
+$a^\nssucc=b$ و$b^\nssucc=a$؟
+\end{prob}
+
+\begin{explain}
+لقد أنشأنا صراحة نماذج لـ$\Th{Q}$ تعيش فيها الـ!!{element}s غير
+القياسية «وراء» العناصر القياسية. والواقع أن البديهيات تقتضي هذا القدر.
+فلا يمكن أن يكون !!{element} غير قياسي~$x$~${} \nsless 0$، لأن
+$\Th{Q} \Proves \lforall[x][\lnot x<0]$ (انظر
+\olref[inc][req][min]{lem:less-zero}). ولكل $n$، لدينا
+$\Th{Q} \Proves \lforall[x][(x < \num{n}' \lif
+(\eq[x][\num{0}] \lor \eq[x][\num{1}] \lor \dots \lor
+\eq[x][\num{n}]))]$ (انظر \olref[inc][req][min]{lem:less-nsucc})،
+ومن ثم لا يمكن أن يكون $a \nsless n$ لأي~$n>0$.
+\end{explain}
+
+\end{document}

@@ -1,0 +1,74 @@
+% Part: first-order-logic
+% Chapter: sequent-calculus
+% Section: rules-and-proofs
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{seq}{rul}}
+      {\olfileid{pl}{seq}{rul}}
+
+\olsection{القواعد وال\usetoken{P}{derivation}}
+
+فيما يأتي، لتدل~$\Gamma, \Delta, \Pi, \Lambda$ على متتاليات منتهية
+من ال!!{sentence}s.
+
+\begin{defn}[التتابعية]
+\emph{التتابعية} تعبير من الصورة
+\[
+\Gamma \Sequent \Delta
+\]
+حيث~$\Gamma$ و$\Delta$ متتاليتان منتهيتان (وربما خاليتان) من
+!!{sentence}s اللغة~$\Lang L$. وتسمى~$\Gamma$ \emph{المقدَّم}، بينما
+تسمى~$\Delta$ \emph{التالي}.
+\end{defn}
+
+\begin{explain}
+الفكرة الحدسية الكامنة وراء التتابعية هي: إذا تحققت جميع
+ال!!{sentence}s في المقدَّم، تحققت واحدة على الأقل من ال!!{sentence}s في
+التالي. أي إنه إذا كان $\Gamma = \tuple{!A_1, \dots, !A_m}$ و
+$\Delta = \tuple{!B_1, \dots, !B_n}$، فإن $\Gamma \Sequent \Delta$
+تتحقق إذا وفقط إذا تحققت
+\[
+(!A_1 \land \cdots \land !A_m) \lif (!B_1 \lor \cdots \lor
+!B_n)
+\]
+وثمة حالتان خاصتان: أن تكون~$\Gamma$ خالية، وأن تكون~$\Delta$ خالية.
+فإذا كانت~$\Gamma$ خالية، أي إذا كان $m = 0$، فإن $\quad
+\Sequent \Delta$ تتحقق إذا وفقط إذا تحقق
+$!B_1 \lor \dots \lor !B_n$. وإذا كانت~$\Delta$ خالية، أي إذا كان
+$n = 0$، فإن $\Gamma \Sequent \quad$ تتحقق إذا وفقط إذا تحقق
+$\lnot(!A_1 \land \dots \land !A_m)$. ونقول إن التتابعية صالحة إذا
+وفقط إذا كانت ال!!{sentence} المقابلة صالحة.
+\end{explain}
+
+إذا كانت~$\Gamma$ متتالية من ال!!{sentence}s، كتبنا $\Gamma, !A$
+لنتيجة إلحاق~$!A$ بالطرف الأيمن من~$\Gamma$ (وكتبنا $!A, \Gamma$
+لنتيجة إلحاق~$!A$ بالطرف الأيسر من~$\Gamma$). وإذا كانت~$\Delta$
+متتالية من ال!!{sentence}s أيضًا، كانت~$\Gamma, \Delta$ وصل
+المتتاليتين.
+
+\begin{defn}[تتابعية ابتدائية]
+\emph{التتابعية الابتدائية} تتابعية
+\iftag{prvFalse,prvTrue}{من إحدى الصور الآتية:
+  \begin{enumerate}
+    \item $!A \Sequent !A$
+    \tagitem{prvTrue}{$\quad \Sequent \ltrue$}{}
+    \tagitem{prvFalse}{$\lfalse \Sequent \quad$}{}
+  \end{enumerate}}
+{من الصورة $!A \Sequent !A$} لأي !!{sentence}~$!A$ في اللغة.
+\end{defn}
+
+ال!!^{derivation}s في حساب التتابعيات أشجار معينة من التتابعيات؛ تكون
+التتابعيات العليا فيها تتابعيات ابتدائية، وإذا وقعت تتابعية تحت
+تتابعية أخرى أو تتابعيتين، وجب أن تتبع منها أو منهما على الوجه الصحيح
+بقاعدة استدلال. وتنقسم قواعد~$\Log{LK}$ إلى نوعين رئيسين: قواعد
+\emph{منطقية} وقواعد \emph{بنيوية}. وتسمى القواعد المنطقية باسم
+!!{main operator} لل!!{sentence} التي تحتوي على~$!A$ و/أو~$!B$ في
+التتابعية السفلى. ولكل قاعدة نسختان: إحداهما لاستنتاج تتابعية تقع فيها
+ال!!{sentence} المحتوية على ال!!{operator} في الجانب الأيسر، والأخرى
+لاستنتاج تتابعية تقع فيها تلك ال!!{sentence} في الجانب الأيمن.
+
+\end{document}

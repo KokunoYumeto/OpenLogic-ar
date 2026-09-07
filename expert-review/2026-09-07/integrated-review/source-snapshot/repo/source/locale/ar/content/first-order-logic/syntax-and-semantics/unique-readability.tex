@@ -1,0 +1,199 @@
+% Part: first-order-logic
+% Chapter: syntax-and-semantics
+% Section: unique-readability
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{syn}{unq}
+
+\olsection{وحدانية القراءة}
+
+\begin{explain}
+تكفل الطريقة التي عرّفنا بها ال!!{formula}s أن تكون لكل !!{formula}
+\emph{قراءة وحيدة}؛ أي إنه لا توجد، في جوهر الأمر، إلا طريقة واحدة
+لبنائها وفق قواعد تكوين ال!!{formula}s لدينا، وطريقة واحدة
+«لتأويلها». ولولا ذلك لكانت لدينا !!{formula}s ملتبسة، أي
+!!{formula}s لها أكثر من قراءة أو تأويل---وهذا بوضوح مما نريد
+اجتنابه. والأهم من ذلك أن جلّ التعريفات والبراهين التي سنوردها لن
+يستقيم من دون هذه الخاصية.
+
+ولعل أفضل سبيل إلى توضيح ذلك أن ننظر فيما كان سيحدث لو أننا وضعنا
+قواعد رديئة لتكوين ال!!{formula}s لا تكفل وحدانية القراءة. فربما
+أغفلنا، مثلًا، الأقواس في قواعد تكوين الروابط، وأجزنا ما يأتي:
+\begin{quote}
+إذا كانت $!A$ و$!B$ !!{formula}s، فإن $!A \lif !B$ كذلك.
+\end{quote}
+فإذا بدأنا بصيغة ذرية~$!D$، أمكننا بهذا أن نكوّن $!D
+\lif !D$. ومنها، مع $!D$، نحصل على $!D \lif !D
+\lif !D$. لكن يمكن فعل ذلك بطريقتين:
+\begin{enumerate}
+\item نأخذ $!D$ على أنها $!A$، و$!D \lif !D$ على أنها $!B$.
+\item نأخذ $!A$ على أنها $!D \lif !D$، وتكون $!B$ هي~$!D$.
+\end{enumerate}
+وبالمقابل، ثمة طريقتان «لقراءة» ال!!{formula}~$!D \lif !D \lif
+!D$. فهي من الصورة $!B \lif !C$، حيث $!B$ هي $!D$ و$!C$ هي $!D
+\lif !D$، لكنها \emph{أيضًا} من الصورة $!B \lif !C$، حيث $!B$ هي
+$!D \lif !D$ و$!C$ هي~$!D$.
+
+إذا وقع هذا، فلن تعمل تعريفاتنا دائمًا. فعندما نعرّف، مثلًا،
+!!{main operator} لصيغة، نقول: في صيغة من الصورة $!B \lif !C$ يكون
+!!{main operator} هو الورود المشار إليه للرمز~$\lif$. ولكن إذا
+أمكنت مطابقة الصيغة $!D \lif !D \lif !D$ مع $!B \lif !C$
+بالطريقتين المختلفتين المذكورتين أعلاه، حصلنا في الحالة الأولى على
+الورود الأول لـ~$\lif$ بوصفه !!{main operator}، وفي الثانية على
+الورود الثاني. غير أننا نريد !!{main operator} أن يكون
+\emph{دالة} في ال!!{formula}؛ أي يجب أن يكون لكل !!{formula} ورود
+واحد بالضبط ل!!{main operator}.
+\end{explain}
+
+\begin{lem}
+يتساوى عدد الأقواس اليسرى وعدد الأقواس اليمنى في أي
+!!a{formula}~$!A$.
+\end{lem}
+
+\begin{proof}
+نثبت ذلك بالاستقراء على طريقة بناء~$!A$. ويتطلب هذا أمرين: (أ) أن
+نثبت أولًا أن جميع الصيغ الذرية تتمتع بالخاصية المقصودة (أساس
+الاستقراء). (ب) ثم أن نثبت أنه متى بنينا صيغًا جديدة من صيغ معطاة،
+تمتعت الصيغ الجديدة بالخاصية إذا تمتعت بها الصيغ القديمة.
+
+ليكن $l(!A)$ عدد الأقواس اليسرى، و$r(!A)$ عدد الأقواس اليمنى
+في~$!A$، ولنعرّف $l(t)$ و$r(t)$، على نحو مماثل، بأنهما عدد الأقواس
+اليسرى واليمنى في الحد~$t$.
+
+\begin{prob}
+    أثبت أنه لكل حد~$t$، لدينا $l(t) = r(t)$.
+\end{prob}
+
+\begin{enumerate}
+\tagitem{prvFalse}{\indcase{!A}{\lfalse}{$\indfrm$ فيها $0$ من الأقواس
+    اليسرى و$0$ من الأقواس اليمنى.}}{}
+
+\tagitem{prvTrue}{\indcase{!A}{\ltrue}{$\indfrm$ فيها $0$ من الأقواس
+    اليسرى و$0$ من الأقواس اليمنى.}}{}
+
+\item \indcase{!A}{\Atom{R}{t_1,\dots,t_n}}{$l(\indfrm) = 1 + l(t_1) +
+  \dots + l(t_n) = 1 + r(t_1) + \dots + r(t_n) = r(\indfrm)$. وهنا
+  نستخدم الحقيقة المتروكة تمرينًا، وهي أن $l(t) = r(t)$ لكل
+  حد~$t$.}
+
+\item \indcase{!A}{\eq[t_1][t_2]}{$l(\indfrm) = l(t_1) + l(t_2) =
+  r(t_1) + r(t_2) = r(\indfrm)$.}
+
+\tagitem{prvNot}{\indcase{!A}{\lnot !B}{بفرضية الاستقراء،
+    $l(!B) = r(!B)$. ومن ثم $l(\indfrm) = l(!B) = r(!B) =
+    r(\indfrm)$.}}{}
+
+\item \indcase{!A}{(!B \ast !C)}{بفرضية الاستقراء، $l(!B) =
+  r(!B)$ و$l(!C) = r(!C)$. ومن ثم $l(\indfrm) = 1 + l(!B) + l(!C) =
+  1 + r(!B) + r(!C) = r(\indfrm)$.}
+
+\tagitem{prvAll}{\indcase{!A}{\lforall[x][!B]}{بفرضية الاستقراء،
+    $l(!B) = r(!B)$. ومن ثم $l(\indfrm) = l(!B) = r(!B) =
+    r(\indfrm)$.}}{}
+
+% Print case for \lexists if prvEx and not prvAll
+\tagitem{prvAll,notprvEx}{}{\indcase{!A}{\lexists[x][!B]}{بفرضية
+    الاستقراء، $l(!B) = r(!B)$. ومن ثم $l(\indfrm) = l(!B) = r(!B) =
+    r(\indfrm)$.}}
+
+% Just say similarly if prvEx and prvAll
+\tagitem{notprvAll,notprvEx}{}{\indcase{!A}{\lexists[x][!B]}{وبالمثل.}}
+\end{enumerate}
+\end{proof}
+
+\begin{defn}[المقطع الابتدائي الحقيقي]
+تكون سلسلة الرموز~$!B$ \emph{مقطعًا ابتدائيًا حقيقيًا} من سلسلة
+الرموز~$!A$ إذا كان وصل~$!B$ بسلسلة رموز غير خالية ينتج~$!A$.
+\end{defn}
+
+\begin{lem}\ollabel{lem:no-prefix}
+إذا كانت $!A$ !!a{formula}، وكانت $!B$ مقطعًا ابتدائيًا حقيقيًا من
+$!A$، فإن $!B$ ليست !!a{formula}.
+\end{lem}
+
+\begin{proof}
+تمرين.
+\end{proof}
+
+\begin{prob}
+أثبت \olref[fol][syn][unq]{lem:no-prefix}.
+\end{prob}
+
+\begin{prop}
+\ollabel{prop:unique-atomic}
+إذا كانت $!A$ !!{formula} ذرية، فإنها تحقق شرطًا واحدًا، وواحدًا فقط،
+من الشروط الآتية.
+\begin{enumerate}
+\tagitem{prvFalse}{$!A \ident \lfalse$.}{}
+\tagitem{prvTrue}{$!A \ident \ltrue$.}{}
+\item $!A \ident \Atom{R}{t_1,\dots,t_n}$، حيث $R$ !!{predicate}
+  ذات $n$ مواضع، و$t_1$، \dots، $t_n$ حدود، ويُعيَّن كل من $R$،
+  و$t_1$، \dots، $t_n$ تعيينًا وحيدًا.
+\item $!A \ident \eq[t_1][t_2]$، حيث $t_1$ و$t_2$ حدان معيّنان
+  تعيينًا وحيدًا.
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+تمرين.
+\end{proof}
+
+\begin{prob}
+أثبت \olref[fol][syn][unq]{prop:unique-atomic} (تلميح: صغ نسخة من
+\olref[fol][syn][unq]{lem:no-prefix} للحدود وأثبتها).
+\end{prob}
+
+\begin{prop}[وحدانية القراءة]
+تحقق كل !!{formula} شرطًا واحدًا، وواحدًا فقط، من الشروط الآتية.
+\begin{enumerate}
+\item $!A$ ذرية.
+
+\tagitem{prvNot}{$!A$ من الصورة $\lnot !B$.}{}
+
+\tagitem{prvAnd}{$!A$ من الصورة $(!B \land !C)$.}{}
+
+\tagitem{prvOr}{$!A$ من الصورة $(!B \lor !C)$.}{}
+
+\tagitem{prvIf}{$!A$ من الصورة $(!B \lif !C)$.}{}
+
+\tagitem{prvIff}{$!A$ من الصورة $(!B \liff !C)$.}{}
+
+\tagitem{prvAll}{$!A$ من الصورة $\lforall[x][!B]$.}{}
+
+\tagitem{prvEx}{$!A$ من الصورة $\lexists[x][!B]$.}{}
+\end{enumerate}
+وفوق ذلك تُعيَّن $!B$، أو $!B$ و$!C$، تعيينًا وحيدًا في كل حالة.
+ويعني هذا، مثلًا، أنه لا توجد أزواج مختلفة $!B$، و$!C$، و$!B'$،
+و$!C'$ بحيث تكون $!A$ من الصورتين
+\iftag{prvIf}{$(!B \lif !C)$ و$(!B' \lif !C')$.}{
+    \iftag{prvOr}{$(!B \lor !C)$ و$(!B' \lor !C')$.}{
+      \iftag{prvAnd}{$(!B \land !C)$ و$(!B' \land !C')$.}{}}}
+\end{prop}
+
+\begin{proof}
+تقتضي قواعد التكوين أن تبدأ كل !!a{formula} غير ذرية بقوس
+فاتح~(، أو \iftag{prvNot}{$\lnot$،}{} أو بمكمم. ومن جهة أخرى،
+لا بد أن تكون كل !!{formula} تبدأ بأحد الرموز الآتية ذرية:
+!!a{predicate}، أو !!a{function}، أو !!a{constant}، أو
+!!a{variable}\iftag{prvFalse}{، أو $\lfalse$}{}\iftag{prvTrue}{، أو $\ltrue$}{}.
+
+ومن ثم لا يلزمنا في الحقيقة إلا أن نبيّن أنه إذا كانت $!A$ من
+الصورة $(!B \ast !C)$، وكانت أيضًا من الصورة $(!B'
+\mathbin{\ast'} !C')$، فإن $!B \ident !B'$، و$!C \ident !C'$،
+و$\ast = {\ast'}$.
+
+فافترض أن $!A \ident (!B \ast !C)$ و$!A \ident (!B'
+\mathbin{\ast'} !C')$ معًا. عندئذ إما أن $!B \ident !B'$ أو لا.
+فإن كانت كذلك، فمن الواضح أن $\ast = {\ast'}$ و$!C \ident !C'$،
+إذ تكونان حينئذ سلسلتين جزئيتين من~$!A$ تبدآن في الموضع نفسه
+وطولهما واحد. والحالة الأخرى هي $!B \not\ident !B'$. ولما كانت
+$!B$ و$!B'$ كلتاهما سلسلتين جزئيتين من~$!A$ تبدآن في الموضع نفسه،
+فلا بد أن تكون إحداهما مقطعًا ابتدائيًا حقيقيًا من الأخرى. غير أن
+هذا مستحيل بحسب \olref{lem:no-prefix}.
+\end{proof}
+
+
+\end{document}

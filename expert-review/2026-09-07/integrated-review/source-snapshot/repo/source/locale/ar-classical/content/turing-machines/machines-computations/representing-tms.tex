@@ -1,0 +1,198 @@
+% Part: turing-machines
+% Chapter: machines-computations
+% Section: representing-tms
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{tur}{mac}{rep}
+\olsection{تمثيل آلات تورنغ}
+
+\begin{explain}
+من طرق تصوير آلات تورنغ \emph{مخططات الحالات}: عقد تصل بينها سهام، تمثل كل عقدة حالة، ويمثل كل سهم تعليمة تجري من تلك الحالة. وتكتب تفاصيل التعليمة على السهم أو تحته. ولنأخذ الآلة الآتية، وليس لها إلا حالتان داخليتان $q_0$ و$q_1$ وتعليمة واحدة:
+\[
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+                    semithick]
+  \tikzstyle{every state}=[fill=none,draw=black,text=black]
+
+  \node[initial,state]   (A)              {$q_0$};
+  \node[state]   (B) [right of=A] {$q_1$};
+
+  \path (A) edge  node {\TMtrans{\TMblank}{\TMstroke}{\TMright}} (B);
+\end{tikzpicture}
+\]
+وقد مر أن للآلة رأس قراءة وكتابة، وأن دخلها مكتوب على الشريط. فمعنى هذه التعليمة: \emph{إن قرأت $\TMblank$ وأنت في الحالة $q_0$، فاكتب $\TMstroke$، وتحرك يمينًا، وصر إلى الحالة $q_1$}. وهذا معناه أن دالة الانتقال ترسل $\tuple{q_0,\TMblank}$ إلى $\tuple{q_1,\TMstroke,\TMright}$.
+\end{explain}
+
+\begin{ex}
+\emph{آلة الزوجية}: شرط توقف الآلة الآتية، اللازم والكافي، أن يكون عدد رموز $\TMstroke$ على الشريط زوجيًّا؛ على فرض أن رموز $\TMstroke$ كلها تسبق أول $\TMblank$.
+\[
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+                    semithick]
+  \tikzstyle{every state}=[fill=none,draw=black,text=black]
+
+  \node[initial,state]         (A)              {$q_0$};
+  \node[state]         (B) [right of=A] {$q_1$};
+
+  \path (A) edge [bend left] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (B)
+        (B) edge [loop above] node {\TMtrans{\TMblank}{\TMblank}{\TMright}} (B)
+            edge [bend left] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (A);
+\end{tikzpicture}
+\]
+
+ودالة الانتقال التي يعبر عنها المخطط هي:
+\begin{align*}
+\delta(q_0, \TMstroke) & = \tuple{q_1, \TMstroke, \TMright},\\
+\delta(q_1, \TMstroke) & = \tuple{q_0, \TMstroke, \TMright},\\
+\delta(q_1, \TMblank)  & = \tuple{q_1, \TMblank, \TMright}
+\end{align*}
+\end{ex}
+
+\begin{explain}
+فلا تقف هذه الآلة إلا للدخل المؤلف من عدد زوجي من العلامات، وإلا مضت نظريًّا إلى غير نهاية. ولتتبع عمل آلة على دخل معين ننظر في \emph{تهيئاتها}. وسيأتي حدها الصوري؛ أما الآن فنتصورها رسومًا متتابعة تصف وضع الآلة في كل لحظة من عملها. وفي كل تهيئة بيان محتوى الشريط، وحالة الآلة، ومكان رأس القراءة والكتابة. ومنها نتتبع الحساب إلى خرجه متى توقف.
+
+فلنتتبع آلة الزوجية على دخل فيه أربع علامات $\TMstroke$؛ والمنتظر أن تقف. ثم نجرب دخلًا فيه ثلاث علامات $\TMstroke$، فسيظهر أنها تعمل أبدًا.
+
+تبدأ الآلة في الحالة~$q_0$، ماسحة أقصى علامة~$\TMstroke$ إلى اليسار. فنكتب تهيئتها الابتدائية:
+\[
+\TMendtape \TMstroke_0 \TMstroke \TMstroke \TMstroke \TMblank \ldots
+\]
+فالحالة هي~$q_0$، والرمز الممسوح أول~$\TMstroke$ من اليسار. وقد دللنا على هذا بوضع دليل الحالة أسفل أول~$\TMstroke$. وتنطبق التعليمة $\delta(q_0,\TMstroke)=\tuple{q_1,\TMstroke,\TMright}$؛ فتحرك الرأس يمينًا وتصير الآلة إلى~$q_1$:
+\[
+\TMendtape \TMstroke \TMstroke_1 \TMstroke \TMstroke \TMblank \ldots
+\]
+وهي الآن في الحالة~$q_1$، تقرأ~$\TMstroke$، فيلزم إجراء التعليمة $\delta(q_1,\TMstroke)=\tuple{q_0,
+  \TMstroke,\TMright}$. فنحصل على
+\[
+\TMendtape \TMstroke \TMstroke \TMstroke_0 \TMstroke \TMblank \ldots
+\]
+ثم تعود التعليمتان بالترتيب نفسه، فتتعاقب التهيئتان:
+\[
+\TMendtape \TMstroke \TMstroke \TMstroke \TMstroke_1 \TMblank \ldots
+\]
+\[
+\TMendtape \TMstroke \TMstroke \TMstroke \TMstroke \TMblank_0 \ldots
+\]
+وهنا بلغت الآلة الحالة~$q_0$ وهي تقرأ~$\TMblank$. ولا تعليمة لهذا الزوج في مخطط الانتقال، فتقف الآلة، وبذلك يكون الدخل مقبولًا.
+
+أما إذا بدأنا بثلاث علامات $\TMstroke$، فإن أول الحساب يشبه سابقه، لأن التعليمات واحدة ولم يتغير إلا مقدار الدخل:
+\[
+\TMendtape \TMstroke_0 \TMstroke \TMstroke \TMblank \ldots
+\]
+\[
+\TMendtape \TMstroke \TMstroke_1 \TMstroke \TMblank \ldots
+\]
+\[
+\TMendtape \TMstroke \TMstroke \TMstroke_0 \TMblank \ldots
+\]
+\[
+\TMendtape \TMstroke \TMstroke \TMstroke \TMblank_1 \ldots
+\]
+فقد جاوز الرأس جميع علامات $\TMstroke$، وصار يقرأ~$\TMblank$ في الحالة~$q_1$. ولهذا الزوج التعليمة $\delta(q_1,\TMblank)=\tuple{q_1,\TMblank,\TMright}$. وما يلي ذلك من الشريط يمينًا مملوء برموز $\TMblank$ إلى غير نهاية؛ فلا تزال الآلة تجري هذه التعليمة \emph{أبدًا}، باقية في~$q_1$ وماضية إلى اليمين. فلا تتوقف، ولا تقبل الدخل.
+\end{explain}
+
+\begin{explain}
+وليس التوقف لازمًا لكل آلة. فإذا كان معناه ألا تجد الآلة تعليمة تنفذها، كفى لإنشاء آلة لا تقف أن نجعل لكل حالة ورمز سهمًا خارجًا يحدد الفعل التالي. وعلى هذا نعدل آلة الزوجية بإضافة تعليمة لقراءة $\TMblank$ في~$q_0$، فتمضي إلى غير نهاية على هذه المدخلات.
+\end{explain}
+
+\begin{ex}
+\[
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+                    semithick]
+  \tikzstyle{every state}=[fill=none,draw=black,text=black]
+
+  \node[initial,state] (A)              {$q_0$};
+  \node[state]         (B) [right of=A] {$q_1$};
+
+  \path
+  (A) edge [bend left] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (B)
+      edge [loop above] node {\TMtrans{\TMblank}{\TMblank}{\TMright}} (A)
+  (B) edge [loop above] node {\TMtrans{\TMblank}{\TMblank}{\TMright}} (B)
+      edge [bend left] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (A);
+\end{tikzpicture}
+\]
+\end{ex}
+
+\begin{explain}
+وثمة تمثيل آخر هو جدول الآلة. نجعل أبجدية الشريط على المحور $x$، والحالات على المحور $y$؛ ونكتب في خانة التقاطع بين كل حالة ورمز بقية التعليمة: الحالة الجديدة، والرمز المكتوب، وجهة الحركة. ويمتاز الجدول بسهولة تعرف أزواج الحالة والرمز التي قد تتوقف عندها الآلة؛ فكل فراغ فيه موضع محتمل للتوقف. أما المخطط ومجموعة التعليمات فقد لا تظهر منهما تلك المواضع أول وهلة، في حين يكفي في الجدول تتبع خاناته الخالية.
+\end{explain}
+
+\begin{ex}
+ولآلة الزوجية الجدول الآتي:
+\[
+\centering
+\begin{tabular}{lllll}
+\cline{2-4}
+\multicolumn{1}{l|}{}      & \multicolumn{1}{c|}{$\TMblank$}
+& \multicolumn{1}{c|}{$\TMstroke$}     & \multicolumn{1}{c|}{$\TMendtape$}   &  \\ \cline{1-4}
+\multicolumn{1}{|l|}{$q_0$} & \multicolumn{1}{l|}{}
+& \multicolumn{1}{l|}{\TMtrans{\TMstroke}{q_1}{\TMright}} &
+\multicolumn{1}{l|}{\phantom{\TMtrans{\TMstroke}{q_1}{\TMright}}} &  \\ \cline{1-4}
+\multicolumn{1}{|l|}{$q_1$} & \multicolumn{1}{l|}{\TMtrans{\TMblank}{q_1}{\TMright}}
+& \multicolumn{1}{l|}{\TMtrans{\TMstroke}{q_0}{\TMright}} &
+\multicolumn{1}{l|}{\phantom{\TMtrans{\TMstroke}{q_1}{\TMright}}} &  \\ \cline{1-4}
+\end{tabular}
+\]
+فيظهر منه توقف الآلة عند قراءة~$\TMblank$ في الحالة~$q_0$.
+\end{ex}
+
+\begin{explain}
+اقتصر نظرنا حتى الآن على آلات تقرأ الدخل وتقبله. ولكن للآلة أن تكتب أيضًا؛ ومن أمثلتها الكثيرة \emph{آلة المضاعفة}. تبدأ هذه بكتلة عددها $n$ من علامات $\TMstroke$، وتنتهي بكتلة عددها $2n$ من علامات $\TMstroke$.
+\end{explain}
+
+\begin{ex}
+\ollabel{ex:doubler}
+قبل وضع الآلة نحتاج إلى \emph{خطة} لحل المسألة. فالآلة في صورتها المعطاة لا تحفظ في حالتها عدد علامات $\TMstroke$ التي قرأتها إذا كثر العدد بلا حد، فنحتاج إلى أثر على الشريط نتتبع به علامات $\TMstroke$ كلها. ومن ذلك فصل الخرج عن الدخل بعلامة~$\TMblank$. فتمحو الآلة أول $\TMstroke$ من الدخل، وتعبر ما بقي منه، وتترك $\TMblank$، ثم تكتب علامتي $\TMstroke$ جديدتين. ثم ترجع إلى ثاني $\TMstroke$ في الدخل فتضاعفه كذلك. فكل $\TMstroke$ من الدخل يقابلها علامتا $\TMstroke$ في الخرج. وبمحو ما عولج من الدخل نضمن ألا تفوت $\TMstroke$، وألا تضاعف مرتين. فإذا محي الدخل كله بقيت $2n$ من علامات $\TMstroke$ على الشريط. ومخطط الآلة الناتجة في \olref{fig:doubler}.
+\begin{figure}
+\[
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+                    semithick]
+  \tikzstyle{every state}=[fill=none,draw=black,text=black]
+
+  \node[initial,state] (1)              {$q_0$};
+  \node[state]         (2) [right of=1] {$q_1$};
+  \node[state]         (3) [right of=2] {$q_2$};
+  \node[state]         (4) [below of=3] {$q_3$};
+  \node[state]         (5) [left of=4]  {$q_4$};
+  \node[state]         (6) [left of=5]  {$q_5$};
+
+  \path (1) edge node {\TMtrans{\TMstroke}{\TMblank}{\TMright}} (2)
+    (2) edge [loop above] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (2)
+      edge node {\TMtrans{\TMblank}{\TMblank}{\TMright}} (3)
+    (3) edge [loop above] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (3)
+        edge node {\TMtrans{\TMblank}{\TMstroke}{\TMright}} (4)
+    (4) edge [loop below] node {\TMtrans{\TMblank}{\TMstroke}{\TMleft}} (4)
+        edge node {\TMtrans{\TMstroke}{\TMstroke}{\TMleft}} (5)
+    (5) edge [loop below]  node {\TMtrans{\TMstroke}{\TMstroke}{\TMleft}} (5)
+        edge              node {\TMtrans{\TMblank}{\TMblank}{\TMleft}} (6)
+    (6) edge [loop below] node {\TMtrans{\TMstroke}{\TMstroke}{\TMleft}} (6)
+        edge              node {\TMtrans{\TMblank}{\TMblank}{\TMright}} (1);
+\end{tikzpicture}
+\]
+\caption{مخطط آلة المضاعفة}
+\ollabel{fig:doubler}
+\end{figure}
+\end{ex}
+
+\begin{prob}
+خذ دخلًا كيف اتفق، وسجل تتابع تهيئات آلة المضاعفة في \olref[tur][mac][rep]{ex:doubler}.
+\end{prob}
+
+\begin{prob}
+أنشئ آلة تورنغ أبجديتها $\{\TMendtape,\TMblank,A,B\}$ تقبل---أي تقف على---كل سلسلة من $A$ و$B$ يتساوى فيها عدد $A$ وعدد $B$، \emph{مع تقدم} جميع $A$ على جميع $B$. ولترفض---أي لتستمر بلا توقف على---كل سلسلة يختل فيها تساوي العددين أو يتخلف فيها بعض $A$ عن بعض~$B$. فيلزم مثلًا قبول $AABB$ و$AAABBB$، ورفض $AAB$ و$AABBAABB$.
+\end{prob}
+
+\begin{prob}
+أنشئ آلة تورنغ أبجديتها $\{\TMendtape,\TMblank,A,B\}$، دخلها سلسلة $\alpha$ كيف اتفقت من $A$ و$B$، فتكررها ليكون الخرج $\alpha\alpha$. فالدخل $ABBA$، مثلًا، ينبغي أن يصير $ABBAABBA$.
+\end{prob}
+
+\begin{prob}
+\emph{أمرتبة هي؟} أنشئ آلة تورنغ بأبجدية $\{\TMendtape,\TMblank,A,B\}$ تختبر، عند إعطائها سلسلة منتهية من $A$ و$B$، هل كل $A$ إلى يسار كل $B$. ولتبق سلسلة الدخل على الشريط، وتقف إن كانت «مرتبة أبجديًّا»، وتدور أبدًا إن لم تكن كذلك.
+\end{prob}
+
+\begin{prob}
+\emph{آلة الترتيب الأبجدي:} أنشئ آلة تورنغ بأبجدية $\{\TMendtape,\TMblank,A,B\}$ تأخذ سلسلة منتهية من $A$ و$B$ فتعيد ترتيبها، جاعلة جميع $A$ إلى يسار جميع~$B$. فلتصر $BABAA$ إلى $AAABB$، ولتصر $ABBABB$ إلى $AABBBB$، مثلًا.
+\end{prob}
+
+\end{document}

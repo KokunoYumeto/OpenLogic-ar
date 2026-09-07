@@ -1,0 +1,86 @@
+% Part: normal-modal-logic
+% Chapter: tableaux
+% Section: simple-S5
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{tab}{s5}
+
+\olsection{\usetoken{P}{tableau} مبسطة للنسق \Log{S5}}
+
+للنسق~\Log{S5} السلامة والتمام بالنسبة إلى النماذج الكلية، وهي التي
+ينفذ فيها كل عالم إلى كل عالم. فلا يبقى لتعيين علاقة الإتاحة أثر زائد:
+وجود عالم~$w$ يحقق~$\mSat{M}{!A}[w]$ يكافئ وجود عالم كذلك يمكن
+النفاذ إليه من~$u$. فيجوز، عند دراسة~\Log{S5}، أن نكتفي في وصف
+النموذج بمجموعة عوالم وتقويم~$V$. ويتبع ذلك تبسيط قواعد ال!!{tableau}.
+فإنما احتجنا، في الحالة العامة، إلى متتاليات الأعداد الصحيحة الموجبة
+كي نستدل من البادئات على النفاذ؛ فـ~$\sigma.n$ تسمّي عالمًا ينفذ إليه
+العالم الذي تسميه~$\sigma$. أما في~\Log{S5}، بالنماذج الكلية، فالنفاذ
+عام بين العوالم، فلا حاجة إلى حفظ هذه الصلات في أسماء البادئات.
+ونستعيض عن المتتاليات بأعداد صحيحة موجبة مفردة. والقواعد على هذا الوجه
+في~\olref{tab:rules-S5}.
+
+\begin{table}
+  \begin{center}
+    \def\arraystretch{3}\def\fCenter{}
+    \begin{tabular}{|c|c|}
+    \hline
+    \iftag{prvBox}{
+      \AxiomC{\sFmla{\True}{\Box !A}[n]}
+      \RightLabel{\TRule{\True}{\Box}}
+      \UnaryInfC{\sFmla{\True}{!A}[m]}
+      \DisplayProof
+      &
+      \AxiomC{\sFmla{\False}{\Box !A}[n]}
+      \RightLabel{\TRule{\False}{\Box}}
+      \UnaryInfC{\sFmla{\False}{!A}[m]}
+      \DisplayProof\\
+      $m$ مستعملة & $m$ جديدة
+      \\[1ex]
+      \hline}{}
+    \iftag{prvDiamond}{
+      \AxiomC{\sFmla{\True}{\Diamond !A}[n]}
+      \RightLabel{\TRule{\True}{\Diamond}}
+      \UnaryInfC{\sFmla{\True}{!A}[m]}
+      \DisplayProof
+      &
+      \AxiomC{\sFmla{\False}{\Diamond !A}[n]}
+      \RightLabel{\TRule{\False}{\Diamond}}
+      \UnaryInfC{\sFmla{\False}{!A}[m]}
+      \DisplayProof\\
+      $m$ جديدة & $m$ مستعملة
+      \\[1ex]
+      \hline}{}
+    \end{tabular}
+  \end{center}
+  \caption{قواعد مبسطة للنسق \Log{S5}.}
+  \ollabel{tab:rules-S5}
+\end{table}
+
+\begin{ex}
+  لإثبات~$\Log{S5} \Proves
+  \Ax{5}$، أي~$\Diamond!A \lif \Box\Diamond!A$، يكفينا الجدول الدلالي
+  المبسط الآتي، وهو مغلق.
+  \begin{oltableau}
+    [\pFmla{\False}{\Diamond\formula{A} \lif \Box\Diamond \formula{A}}{1},
+      just = \TAss
+      [\pFmla{\True}{\Diamond \formula{A}}{1}, just = {\TRule{\False}{\lif}[1]}
+        [\pFmla{\False}{\Box\Diamond \formula{A}}{1},
+          just = {\TRule{\False}{\lif}[1]}
+          [\pFmla{\False}{\Diamond \formula{A}}{2},
+            just = {\TRule{\False}{\Box}[3]}
+            [\pFmla{\True}{\formula{A}}{3},
+              just = {\TRule{\True}{\Diamond}[2]}
+                [\pFmla{\False}{\formula{A}}{3},
+                  just = {\TRule{\False}{\Diamond}[4]}, close]
+            ]
+          ]
+        ]
+      ]
+    ]
+  \end{oltableau}
+\end{ex}
+
+\end{document}

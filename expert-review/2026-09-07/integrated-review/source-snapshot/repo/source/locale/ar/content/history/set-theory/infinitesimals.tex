@@ -1,0 +1,87 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{his}{set}{infinitesimals}
+\olsection{الكميات المتناهية الصغر والاشتقاق}
+
+اكتشف نيوتن ولايبنتس حساب التفاضل والتكامل، كل منهما مستقلًا عن
+الآخر، في أواخر القرن السابع عشر. وكان \emph{الاشتقاق} من أهم تطبيقات
+هذا الحساب. وبعبارة تقريبية، يهدف الاشتقاق إلى تقديم مفهوم لـ«معدل
+تغير» دالة عند نقطة، أو ميلها.
+
+وفيما يأتي طريقة حية لتوضيح الفكرة. تأمل الدالة
+$f(x) = \nicefrac{x^2}{4} + \nicefrac{1}{2}$ المرسومة بالأسود أدناه:
+\begin{center}
+	\begin{tikzpicture}[scale=1]
+	\draw[->, gray] (-1,0) -- (4.25,0) node[right] {$x$};
+	\draw[->, gray] (0,-0.25) -- (0,5.25) node[above] {$f(x)$};
+	
+	\foreach \x/\xtext in {1/1, 2/2, 3/3, 4/4}
+	\draw[shift={(\x,0)}, gray] (0pt,2pt) -- (0pt,-2pt) node[below] {$\xtext$};
+	
+	\foreach \y/\ytext in {1/1, 2/2, 3/3, 4/4, 5/5}
+	\draw[shift={(0,\y)}, gray] (2pt,0pt) -- (-2pt,0pt) node[left] {$\ytext$};
+	
+	\draw[oldiagcolorC] (0.5, 9/16) -- (3.5, 57/16) -- (3.5, 9/16)--cycle;
+	\draw[oldiagcolorD] (.5, 9/16) -- (2.5, 33/16) -- (2.5, 9/16) -- cycle;
+	\draw[oldiagcolorE] (.5, 9/16) -- (1.5, 17/16) -- (1.5, 9/16) -- cycle;
+	\draw[thick] (-1,.75) parabola bend (0,0.5) (4,4.5);
+	\end{tikzpicture}
+\end{center}
+افترض أننا نريد إيجاد ميل الدالة عند~$c = \nicefrac{1}{2}$. نبدأ
+برسم مثلث يقارب وتره الميل عند تلك النقطة، وليكن المثلث الأحمر أعلاه.
+وإذا كان~$\beta$ طول قاعدة مثلثنا، كان ارتفاعه
+$f(\nicefrac{1}{2}+\beta) - f(\nicefrac{1}{2})$، ولذلك يكون ميل الوتر:
+\[
+\frac{f(\nicefrac{1}{2}+\beta) - f(\nicefrac{1}{2})}{\beta}.
+\]
+ومن ثم يكون ميل مثلثنا~!!{colorC}، الذي طول قاعدته~$3$، مساويًا
+بالضبط لـ$1$. ويعطينا وتر مثلث أصغر، هو المثلث~!!{colorD} ذو القاعدة
+التي طولها~$2$، تقريبًا أفضل؛ فميله~$\nicefrac{3}{4}$. ويعطينا مثلث
+أصغر منه، هو المثلث~!!{colorE} ذو القاعدة التي طولها~$1$، تقريبًا أفضل
+أيضًا، وميله~$\nicefrac{1}{2}$.
+
+كلما صغرت المثلثات تحسنت تقريباتنا. ولذلك قد نقول شيئًا كهذا: إن وتر
+مثلث طول قاعدته \emph{متناه في الصغر} يعطينا الميل نفسه عند
+$c = \nicefrac{1}{2}$. ونحصل بهذه الطريقة على صيغة للمشتقة الأولى
+للدالة~$f$ عند النقطة~$c$:
+\[
+{f'}(c) = \frac{f(c+\beta) - f(c)}{\beta} \text{ حيث $\beta$ متناهية في الصغر.}
+\]
+وهذا، على وجه التقريب، ما قاله نيوتن ولايبنتس.
+
+لكن لما قالا ذلك، وجب أن نسألهما: ما الكمية \emph{المتناهية في الصغر}؟
+هنا تنشأ معضلة حقيقية. فإذا كان~$\beta = 0$، كانت~$f'$ غير معرّفة
+تعريفًا سليمًا لأنها تنطوي على القسمة على~$0$. أما إذا كان~$\beta >
+0$، فلا نحصل إلا على \emph{تقريب} للميل، لا على الميل نفسه.
+
+وليس هذا الاعتراض إسقاطًا لمشكلة حديثة على الماضي. فهذا بيركلي ينتقد
+أتباع نيوتن:
+\begin{quote}
+I admit that signs may be made to denote either any thing or nothing:
+and consequently that in the original notation $c + \beta$, $\beta$
+might have signified either an increment or nothing. But then which of
+these soever you make it signify, you must argue consistently with
+such its signification, and not proceed upon a double meaning: Which
+to do were a manifest sophism. (\citealt[\S{}XIII]{Berkeley1734},
+variables changed to match preceding text)
+\end{quote}
+وللدفاع عن حساب المتناهيات في الصغر أمام بيركلي، قد يجيب المرء بأن
+الحديث عن «المتناهيات في الصغر» مجازي فحسب. فقد يقال إننا، ما دمنا
+نأخذ مثلثًا \emph{صغيرًا جدًا}، سنحصل على تقريب \emph{جيد بما يكفي}
+للمماس. وكان لدى بيركلي رد على ذلك أيضًا: فلئن كان هذا كافيًا
+للهندسة، فإنه يقوض \emph{مكانة} الرياضيات، إذ
+\begin{quote}
+we are told that \emph{in rebus mathematicis errores qu\`{a}m minimi
+non sunt contemnendi}. [In the case of mathematics, the smallest
+errors are not to be neglected.] \citep[\S{}IX]{Berkeley1734}
+\end{quote}
+والمقطع المائل اقتباس شبه حرفي من كتاب نيوتن~\emph{تربيع المنحنيات}
+(1704).
+
+كانت اعتراضات بيركلي الفلسفية عميقة نافذة. ومع ذلك، حقق حساب التفاضل
+والتكامل نجاحًا هائلًا، وواصل الرياضيون استخدامه من دون الوقوع في
+الخطأ.
+
+\end{document}

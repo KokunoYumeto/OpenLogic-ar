@@ -1,30 +1,12 @@
-# All recorded Arabic translation choices / جميع اختيارات الترجمة المسجلة
+# Integrated Arabic translation-review register
 
-Working snapshot, 7 September 2026 — **1,050 human-readable entries**, not a claim
-that every translation decision in the 722-unit work has been fully reviewed.
+Working register: 1,073 readable entries; counts are recorded entries, not unique terms or a completed full-work audit.
 
-**Latest update:** [16 further decisions and corrections — wording, exact places,
-reasons and questions for reviewers](supplement-16-choices/README.md).
-They are supplied as a separately checked supplement, not silently merged into
-the older register below. Some concern already recorded terms; do not add 16
-to the entry count as if all were new unique terms.
+**This total includes 7 unapplied proposals, labelled explicitly in the readable sections and occurrence table. These proposals are not current source wording.**
 
-- [Start with 30 priority choices](EXPERT_REVIEW_START_HERE.md).
-- [Browse every recorded entry, in readable parts](reviewer-index/README.md).
-- [Browse all priority and complete parts](reviewer-index/README.md).
-- [Download the sortable occurrence table](EXPERT_REVIEW_OCCURRENCES.csv).
-- [Download the machine-readable register (gzip)](EXPERT_REVIEW_INDEX.json.gz).
-- [Earlier source work and audit intake, preserved separately](additional-work/README.md).
-- [Saved supporting implementation and its validation scope](implementation-update/README.md).
+- [Start with priority choices](integrated-review/EXPERT_REVIEW_START_HERE.md).
+- [Browse all recorded entries](integrated-review/reviewer-index/README.md).
+- [Sortable occurrence table](integrated-review/EXPERT_REVIEW_OCCURRENCES.csv).
+- [Machine-readable register](integrated-review/EXPERT_REVIEW_INDEX.json.gz).
 
-Entries show the English term, Arabic wording, reasons, alternatives, and exact
-source locations when proved. Unresolved locations remain visibly unresolved.
-There are 879 flagged choices, 495 unresolved lexical locations, 110 flags still
-needing explicit questions, and no certified final PDF page numbers. Earlier
-reasons reconstructed retrospectively are labelled as such. Expert corrections
-are welcome; no expert response is required before work continues.
-
-The accompanying source snapshot preserves the exact bytes reviewed, including
-three predecessor files reconstructed by verified inverse patches. It does not
-overwrite the actively improving translation. This is a review publication,
-not a newly built or certified Classical book.
+902 flagged choices; 534 unresolved lexical locations; 110 flags still need explicit questions. Entries distinguish recorded evidence, retrospective reasons and provisional choices open to correction. Exact source locations are supplied where proved; final PDF page numbers are not certified. This integrated source/reviewer update does not rebuild the books or certify a finished Classical reader. Earlier source snapshots and the separate 16-choice supplement remain preserved beside this subtree.

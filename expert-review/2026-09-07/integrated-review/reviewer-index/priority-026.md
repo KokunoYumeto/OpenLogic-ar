@@ -1,0 +1,251 @@
+# Priority terminology review: part 26 of 91
+
+[← Previous / السابق](priority-025.md) · [Shard index / فهرس الأجزاء](README.md) · [Next / التالي →](priority-027.md)
+
+This renderable shard contains **10** choices. It preserves every distinct recorded occurrence for those choices. The canonical monolithic sheets remain one directory above for archival use.
+
+No final-reader PDF/AUX/SyncTeX evidence was supplied; source locations are shown, and final PDF pages remain unclaimed.
+
+| Global rank / score | Term / المصطلح | Arabic in use / العربية | Where / الموضع |
+| ---: | --- | --- | --- |
+| #245 / 85 | [end-sequent](#priority-retro0051-0100-end-sequent-b99bb08808) | <span lang="ar" dir="rtl">التتابعية النهائية</span> | OLP-0074 — Derivations · shared · MSA · [L32](../source-snapshot/repo/source/locale/ar/content/first-order-logic/sequent-calculus/derivations.tex#L32) · [+20 more source locations](#priority-retro0051-0100-end-sequent-b99bb08808) |
+| #246 / 85 | [Enumeration, formally](#priority-retro-0005-0050-named-defn-d193a5555cc60213-5b99a4db87) | <span lang="ar" dir="rtl">التعداد، بصيغة رسمية</span> | OLP-0029 — التعدادات ومجموعات Enumerable · shared · MSA · [L83](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/size-of-sets/enumerability.tex#L83) · [+2 more source locations](#priority-retro-0005-0050-named-defn-d193a5555cc60213-5b99a4db87) |
+| #247 / 85 | [Enumeration, informally](#priority-retro-0005-0050-named-defn-12015ab0d31302f0-b144cf5d19) | <span lang="ar" dir="rtl">التعداد، بصيغة غير رسمية</span> | OLP-0029 — التعدادات ومجموعات Enumerable · shared · MSA · [L27](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/size-of-sets/enumerability.tex#L27) · [+2 more source locations](#priority-retro-0005-0050-named-defn-12015ab0d31302f0-b144cf5d19) |
+| #248 / 85 | [Enumerations and Enumerable Sets](#priority-retro-0005-0050-section-80593715a84b8e86-60f675cff9) | <span lang="ar" dir="rtl">التعدادات ومجموعات قابلة للتعداد</span> | OLP-0029 — التعدادات ومجموعات Enumerable · shared · MSA · [L11](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/size-of-sets/enumerability.tex#L11) · [+5 more source locations](#priority-retro-0005-0050-section-80593715a84b8e86-60f675cff9) |
+| #249 / 85 | [Equinumerosity](#priority-retro-0005-0050-section-d9dad9f9252c1c94-6de2a7e1dc) | <span lang="ar" dir="rtl">التساوي العددي</span> | OLP-0035 — التساوي العددي · shared · MSA · [L11](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/size-of-sets/equinumerous-sets.tex#L11) · [+2 more source locations](#priority-retro-0005-0050-section-d9dad9f9252c1c94-6de2a7e1dc) |
+| #250 / 85 | [Equivalence Relations](#priority-retro-0005-0050-section-7b0462c3fdfe278d-4e2da13e14) | <span lang="ar" dir="rtl">علاقات التكافؤ</span> | OLP-0015 — علاقات التكافؤ · shared · MSA · [L11](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/relations/equivalence-relations.tex#L11) · [+2 more source locations](#priority-retro-0005-0050-section-7b0462c3fdfe278d-4e2da13e14) |
+| #251 / 85 | [exchange](#priority-retro0051-0100-exchange-3957a1c450) | <span lang="ar" dir="rtl">التبادل</span> | OLP-0073 — القواعد البنيوية · shared · MSA · [L51](../source-snapshot/repo/source/locale/ar/content/first-order-logic/sequent-calculus/structural-rules.tex#L51) · [+21 more source locations](#priority-retro0051-0100-exchange-3957a1c450) |
+| #252 / 85 | [falsity](#priority-retro0051-0100-falsity-2f3a2ee9b0) | <span lang="ar" dir="rtl">الكذب</span> | OLP-0057 — مقدمة · shared · MSA · [L21](../source-snapshot/repo/source/locale/ar/content/propositional-logic/syntax-and-semantics/introduction.tex#L21) · [+14 more source locations](#priority-retro0051-0100-falsity-2f3a2ee9b0) |
+| #253 / 85 | [finite strings](#priority-retro-0005-0050-emphasis-8767472fa81b1629-f67f429b64) | <span lang="ar" dir="rtl">السلاسل المنتهية</span> | OLP-0007 — بعض المجموعات المهمة · shared · MSA · [L47](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/sets/important-sets.tex#L47) · [+2 more source locations](#priority-retro-0005-0050-emphasis-8767472fa81b1629-f67f429b64) |
+| #254 / 85 | [finitely branching](#priority-retro-0005-0050-emphasis-f61b7c3fde161bcc-aa3ef4e574) | <span lang="ar" dir="rtl">منتهية التفرع</span> | OLP-0018 — الأشجار · shared · MSA · [L84](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/relations/trees.tex#L84) · [+2 more source locations](#priority-retro-0005-0050-emphasis-f61b7c3fde161bcc-aa3ef4e574) |
+
+<a id="priority-retro0051-0100-end-sequent-b99bb08808"></a>
+## end-sequent — <span lang="ar" dir="rtl">التتابعية النهائية</span>
+
+- **ID / الرقم:** `RETRO0051-0100-end-sequent`
+- **Global priority rank / score:** #245 / 85
+- **Sense / المعنى:** The bottom/root sequent concluded by a derivation.
+- **Why this choice / سبب الاختيار:** النهائية marks the derivation's conclusion and contrasts with ابتدائية.
+- **Useful alternatives / البدائل المفيدة:** التتابعية الختامية — possible alternative — Idiomatic and avoids a temporal finality reading.; جذر الاشتقاق — not selected — Names tree position, not the sequent itself.
+> ⚑ **PLEASE DOUBLE-CHECK THIS CHOICE / يُرجى التحقق من هذا الاختيار:** Is التتابعية النهائية the preferred term for end-sequent, or should الختامية be used?
+
+- **Where first / أول موضع:** OLP-0074 — Derivations · shared · MSA · [L32](../source-snapshot/repo/source/locale/ar/content/first-order-logic/sequent-calculus/derivations.tex#L32) · [+20 more source locations](#priority-retro0051-0100-end-sequent-b99bb08808)
+- **Every distinct recorded occurrence / كل موضع مسجل متميز:**
+  - **OLP-0074 — Derivations**
+    - **EN:** `derivations.tex`
+      - [L33](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/first-order-logic/sequent-calculus/derivations.tex#L33)
+    - **MSA:** `derivations.tex`
+      - [L32](../source-snapshot/repo/source/locale/ar/content/first-order-logic/sequent-calculus/derivations.tex#L32)
+    - **CA:** `derivations.tex`
+      - [L29](../source-snapshot/repo/source/locale/ar-classical/content/first-order-logic/sequent-calculus/derivations.tex#L29)
+  - **OLP-0075 — أمثلة على الDerivations**
+    - **EN:** `proving-things.tex`
+      - [L18](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/first-order-logic/sequent-calculus/proving-things.tex#L18), [L54](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/first-order-logic/sequent-calculus/proving-things.tex#L54), [L59](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/first-order-logic/sequent-calculus/proving-things.tex#L59), [L60](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/first-order-logic/sequent-calculus/proving-things.tex#L60), [L62](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/first-order-logic/sequent-calculus/proving-things.tex#L62), [L159](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/first-order-logic/sequent-calculus/proving-things.tex#L159), [L164](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/first-order-logic/sequent-calculus/proving-things.tex#L164)
+    - **MSA:** `proving-things.tex`
+      - [L18](../source-snapshot/repo/source/locale/ar/content/first-order-logic/sequent-calculus/proving-things.tex#L18), [L50](../source-snapshot/repo/source/locale/ar/content/first-order-logic/sequent-calculus/proving-things.tex#L50), [L55](../source-snapshot/repo/source/locale/ar/content/first-order-logic/sequent-calculus/proving-things.tex#L55), [L58](../source-snapshot/repo/source/locale/ar/content/first-order-logic/sequent-calculus/proving-things.tex#L58), [L152](../source-snapshot/repo/source/locale/ar/content/first-order-logic/sequent-calculus/proving-things.tex#L152), [L158](../source-snapshot/repo/source/locale/ar/content/first-order-logic/sequent-calculus/proving-things.tex#L158) — current file differs from recorded snapshot
+    - **CA:** `proving-things.tex`
+      - [L18](../source-snapshot/repo/source/locale/ar-classical/content/first-order-logic/sequent-calculus/proving-things.tex#L18), [L47](../source-snapshot/repo/source/locale/ar-classical/content/first-order-logic/sequent-calculus/proving-things.tex#L47), [L52](../source-snapshot/repo/source/locale/ar-classical/content/first-order-logic/sequent-calculus/proving-things.tex#L52), [L142](../source-snapshot/repo/source/locale/ar-classical/content/first-order-logic/sequent-calculus/proving-things.tex#L142), [L148](../source-snapshot/repo/source/locale/ar-classical/content/first-order-logic/sequent-calculus/proving-things.tex#L148) — current file differs from recorded snapshot
+
+<a id="priority-retro-0005-0050-named-defn-d193a5555cc60213-5b99a4db87"></a>
+## Enumeration, formally — <span lang="ar" dir="rtl">التعداد، بصيغة رسمية</span>
+
+- **ID / الرقم:** `retro-0005-0050:named-defn:d193a5555cc60213`
+- **Global priority rank / score:** #246 / 85
+- **Sense / المعنى:** The expression in its exact local mathematical/expository role as a definition label; the occurrence excerpts and unit context disambiguate the sense.
+- **Why this choice / سبب الاختيار:** The Classical target retains «التعداد، بصيغة رسمية» from the MSA target for English «Enumeration, formally» in an aligned definition label. The identical semantic markup and the local mathematical context constrain the referent. This is a present-tense retrospective justification, not a claim about the original translator’s deliberation.
+- **Useful alternatives / البدائل المفيدة:** No alternative reconstructed from the current sources — not-applicable — The two Arabic targets agree here, and no source-side evidence records a competing choice; inventing one retrospectively would be misleading.
+> ⚑ **PLEASE DOUBLE-CHECK THIS CHOICE / يُرجى التحقق من هذا الاختيار:** At OLP-0029, English line 87 and Classical line 72, does «التعداد، بصيغة رسمية» best preserve the sense of «Enumeration, formally» as a definition label, or is another officially attested realization preferable?
+
+- **Where first / أول موضع:** OLP-0029 — التعدادات ومجموعات Enumerable · shared · MSA · [L83](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/size-of-sets/enumerability.tex#L83) · [+2 more source locations](#priority-retro-0005-0050-named-defn-d193a5555cc60213-5b99a4db87)
+- **Every distinct recorded occurrence / كل موضع مسجل متميز:**
+  - **OLP-0029 — التعدادات ومجموعات Enumerable**
+    - **EN:** `enumerability.tex`
+      - [L87](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/size-of-sets/enumerability.tex#L87)
+    - **MSA:** `enumerability.tex`
+      - [L83](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/size-of-sets/enumerability.tex#L83)
+    - **CA:** `enumerability.tex`
+      - [L72](../source-snapshot/repo/source/locale/ar-classical/content/sets-functions-relations/size-of-sets/enumerability.tex#L72) — current file differs from recorded snapshot
+
+<a id="priority-retro-0005-0050-named-defn-12015ab0d31302f0-b144cf5d19"></a>
+## Enumeration, informally — <span lang="ar" dir="rtl">التعداد، بصيغة غير رسمية</span>
+
+- **ID / الرقم:** `retro-0005-0050:named-defn:12015ab0d31302f0`
+- **Global priority rank / score:** #247 / 85
+- **Sense / المعنى:** The expression in its exact local mathematical/expository role as a definition label; the occurrence excerpts and unit context disambiguate the sense.
+- **Why this choice / سبب الاختيار:** The Classical target retains «التعداد، بصيغة غير رسمية» from the MSA target for English «Enumeration, informally» in an aligned definition label. The identical semantic markup and the local mathematical context constrain the referent. This is a present-tense retrospective justification, not a claim about the original translator’s deliberation.
+- **Useful alternatives / البدائل المفيدة:** No alternative reconstructed from the current sources — not-applicable — The two Arabic targets agree here, and no source-side evidence records a competing choice; inventing one retrospectively would be misleading.
+> ⚑ **PLEASE DOUBLE-CHECK THIS CHOICE / يُرجى التحقق من هذا الاختيار:** At OLP-0029, English line 27 and Classical line 26, does «التعداد، بصيغة غير رسمية» best preserve the sense of «Enumeration, informally» as a definition label, or is another officially attested realization preferable?
+
+- **Where first / أول موضع:** OLP-0029 — التعدادات ومجموعات Enumerable · shared · MSA · [L27](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/size-of-sets/enumerability.tex#L27) · [+2 more source locations](#priority-retro-0005-0050-named-defn-12015ab0d31302f0-b144cf5d19)
+- **Every distinct recorded occurrence / كل موضع مسجل متميز:**
+  - **OLP-0029 — التعدادات ومجموعات Enumerable**
+    - **EN:** `enumerability.tex`
+      - [L27](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/size-of-sets/enumerability.tex#L27)
+    - **MSA:** `enumerability.tex`
+      - [L27](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/size-of-sets/enumerability.tex#L27)
+    - **CA:** `enumerability.tex`
+      - [L26](../source-snapshot/repo/source/locale/ar-classical/content/sets-functions-relations/size-of-sets/enumerability.tex#L26) — current file differs from recorded snapshot
+
+<a id="priority-retro-0005-0050-section-80593715a84b8e86-60f675cff9"></a>
+## Enumerations and Enumerable Sets — <span lang="ar" dir="rtl">التعدادات ومجموعات قابلة للتعداد</span>
+
+- **ID / الرقم:** `retro-0005-0050:section:80593715a84b8e86`
+- **Global priority rank / score:** #248 / 85
+- **Sense / المعنى:** The expression in its exact local mathematical/expository role as a section heading; the occurrence excerpts and unit context disambiguate the sense.
+- **Why this choice / سبب الاختيار:** The Classical target retains «التعدادات ومجموعات قابلة للتعداد» from the MSA target for English «Enumerations and Enumerable Sets» in an aligned section heading. The identical semantic markup and the local mathematical context constrain the referent. This is a present-tense retrospective justification, not a claim about the original translator’s deliberation.
+- **Useful alternatives / البدائل المفيدة:** No alternative reconstructed from the current sources — not-applicable — The two Arabic targets agree here, and no source-side evidence records a competing choice; inventing one retrospectively would be misleading.
+> ⚑ **PLEASE DOUBLE-CHECK THIS CHOICE / يُرجى التحقق من هذا الاختيار:** At OLP-0029, English line 11 and Classical line 11, does «التعدادات ومجموعات قابلة للتعداد» best preserve the sense of «Enumerations and Enumerable Sets» as a section heading, or is another officially attested realization preferable?
+
+- **Where first / أول موضع:** OLP-0029 — التعدادات ومجموعات Enumerable · shared · MSA · [L11](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/size-of-sets/enumerability.tex#L11) · [+5 more source locations](#priority-retro-0005-0050-section-80593715a84b8e86-60f675cff9)
+- **Every distinct recorded occurrence / كل موضع مسجل متميز:**
+  - **OLP-0029 — التعدادات ومجموعات Enumerable**
+    - **EN:** `enumerability.tex`
+      - [L11](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/size-of-sets/enumerability.tex#L11)
+    - **MSA:** `enumerability.tex`
+      - [L11](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/size-of-sets/enumerability.tex#L11)
+    - **CA:** `enumerability.tex`
+      - [L11](../source-snapshot/repo/source/locale/ar-classical/content/sets-functions-relations/size-of-sets/enumerability.tex#L11) — current file differs from recorded snapshot
+  - **OLP-0038 — التعدادات ومجموعات Enumerable**
+    - **EN:** `enumerability-alt.tex`
+      - [L11](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/size-of-sets/enumerability-alt.tex#L11)
+    - **MSA:** `enumerability-alt.tex`
+      - [L11](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/size-of-sets/enumerability-alt.tex#L11)
+    - **CA:** `enumerability-alt.tex`
+      - [L11](../source-snapshot/repo/source/locale/ar-classical/content/sets-functions-relations/size-of-sets/enumerability-alt.tex#L11)
+
+<a id="priority-retro-0005-0050-section-d9dad9f9252c1c94-6de2a7e1dc"></a>
+## Equinumerosity — <span lang="ar" dir="rtl">التساوي العددي</span>
+
+- **ID / الرقم:** `retro-0005-0050:section:d9dad9f9252c1c94`
+- **Global priority rank / score:** #249 / 85
+- **Sense / المعنى:** The expression in its exact local mathematical/expository role as a section heading; the occurrence excerpts and unit context disambiguate the sense.
+- **Why this choice / سبب الاختيار:** The Classical target retains «التساوي العددي» from the MSA target for English «Equinumerosity» in an aligned section heading. The identical semantic markup and the local mathematical context constrain the referent. This is a present-tense retrospective justification, not a claim about the original translator’s deliberation.
+- **Useful alternatives / البدائل المفيدة:** No alternative reconstructed from the current sources — not-applicable — The two Arabic targets agree here, and no source-side evidence records a competing choice; inventing one retrospectively would be misleading.
+> ⚑ **PLEASE DOUBLE-CHECK THIS CHOICE / يُرجى التحقق من هذا الاختيار:** At OLP-0035, English line 11 and Classical line 11, does «التساوي العددي» best preserve the sense of «Equinumerosity» as a section heading, or is another officially attested realization preferable?
+
+- **Where first / أول موضع:** OLP-0035 — التساوي العددي · shared · MSA · [L11](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/size-of-sets/equinumerous-sets.tex#L11) · [+2 more source locations](#priority-retro-0005-0050-section-d9dad9f9252c1c94-6de2a7e1dc)
+- **Every distinct recorded occurrence / كل موضع مسجل متميز:**
+  - **OLP-0035 — التساوي العددي**
+    - **EN:** `equinumerous-sets.tex`
+      - [L11](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/size-of-sets/equinumerous-sets.tex#L11)
+    - **MSA:** `equinumerous-sets.tex`
+      - [L11](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/size-of-sets/equinumerous-sets.tex#L11)
+    - **CA:** `equinumerous-sets.tex`
+      - [L11](../source-snapshot/repo/source/locale/ar-classical/content/sets-functions-relations/size-of-sets/equinumerous-sets.tex#L11) — current file differs from recorded snapshot
+
+<a id="priority-retro-0005-0050-section-7b0462c3fdfe278d-4e2da13e14"></a>
+## Equivalence Relations — <span lang="ar" dir="rtl">علاقات التكافؤ</span>
+
+- **ID / الرقم:** `retro-0005-0050:section:7b0462c3fdfe278d`
+- **Global priority rank / score:** #250 / 85
+- **Sense / المعنى:** The expression in its exact local mathematical/expository role as a section heading; the occurrence excerpts and unit context disambiguate the sense.
+- **Why this choice / سبب الاختيار:** The Classical target retains «علاقات التكافؤ» from the MSA target for English «Equivalence Relations» in an aligned section heading. The identical semantic markup and the local mathematical context constrain the referent. This is a present-tense retrospective justification, not a claim about the original translator’s deliberation.
+- **Useful alternatives / البدائل المفيدة:** No alternative reconstructed from the current sources — not-applicable — The two Arabic targets agree here, and no source-side evidence records a competing choice; inventing one retrospectively would be misleading.
+> ⚑ **PLEASE DOUBLE-CHECK THIS CHOICE / يُرجى التحقق من هذا الاختيار:** At OLP-0015, English line 11 and Classical line 11, does «علاقات التكافؤ» best preserve the sense of «Equivalence Relations» as a section heading, or is another officially attested realization preferable?
+
+- **Where first / أول موضع:** OLP-0015 — علاقات التكافؤ · shared · MSA · [L11](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/relations/equivalence-relations.tex#L11) · [+2 more source locations](#priority-retro-0005-0050-section-7b0462c3fdfe278d-4e2da13e14)
+- **Every distinct recorded occurrence / كل موضع مسجل متميز:**
+  - **OLP-0015 — علاقات التكافؤ**
+    - **EN:** `equivalence-relations.tex`
+      - [L11](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/relations/equivalence-relations.tex#L11)
+    - **MSA:** `equivalence-relations.tex`
+      - [L11](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/relations/equivalence-relations.tex#L11)
+    - **CA:** `equivalence-relations.tex`
+      - [L11](../source-snapshot/repo/source/locale/ar-classical/content/sets-functions-relations/relations/equivalence-relations.tex#L11)
+
+<a id="priority-retro0051-0100-exchange-3957a1c450"></a>
+## exchange — <span lang="ar" dir="rtl">التبادل</span>
+
+- **ID / الرقم:** `RETRO0051-0100-exchange`
+- **Global priority rank / score:** #251 / 85
+- **Sense / المعنى:** A structural rule swapping adjacent context formulas.
+- **Why this choice / سبب الاختيار:** التبادل describes permutation without suggesting semantic equivalence.
+- **Useful alternatives / البدائل المفيدة:** التبديل — possible alternative — Arguably more direct for swapping positions.
+> ⚑ **PLEASE DOUBLE-CHECK THIS CHOICE / يُرجى التحقق من هذا الاختيار:** Should the exchange rule be التبادل or التبديل?
+
+- **Where first / أول موضع:** OLP-0073 — القواعد البنيوية · shared · MSA · [L51](../source-snapshot/repo/source/locale/ar/content/first-order-logic/sequent-calculus/structural-rules.tex#L51) · [+21 more source locations](#priority-retro0051-0100-exchange-3957a1c450)
+- **Every distinct recorded occurrence / كل موضع مسجل متميز:**
+  - **OLP-0077 — مفاهيم نظرية البرهان**
+    - **EN:** `proof-theoretic-notions.tex`
+      - [L45](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/first-order-logic/sequent-calculus/proof-theoretic-notions.tex#L45), [L59](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/first-order-logic/sequent-calculus/proof-theoretic-notions.tex#L59)
+    - **MSA:** `proof-theoretic-notions.tex`
+      - [L45](../source-snapshot/repo/source/locale/ar/content/first-order-logic/sequent-calculus/proof-theoretic-notions.tex#L45), [L60](../source-snapshot/repo/source/locale/ar/content/first-order-logic/sequent-calculus/proof-theoretic-notions.tex#L60), [L68](../source-snapshot/repo/source/locale/ar/content/first-order-logic/sequent-calculus/proof-theoretic-notions.tex#L68)
+    - **CA:** `proof-theoretic-notions.tex`
+      - [L44](../source-snapshot/repo/source/locale/ar-classical/content/first-order-logic/sequent-calculus/proof-theoretic-notions.tex#L44), [L59](../source-snapshot/repo/source/locale/ar-classical/content/first-order-logic/sequent-calculus/proof-theoretic-notions.tex#L59), [L67](../source-snapshot/repo/source/locale/ar-classical/content/first-order-logic/sequent-calculus/proof-theoretic-notions.tex#L67)
+  - **OLP-0073 — القواعد البنيوية**
+    - **EN:** `structural-rules.tex`
+      - [L18](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/first-order-logic/sequent-calculus/structural-rules.tex#L18), [L51](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/first-order-logic/sequent-calculus/structural-rules.tex#L51), [L55](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/first-order-logic/sequent-calculus/structural-rules.tex#L55), [L60](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/first-order-logic/sequent-calculus/structural-rules.tex#L60), [L65](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/first-order-logic/sequent-calculus/structural-rules.tex#L65)
+    - **MSA:** `structural-rules.tex`
+      - [L51](../source-snapshot/repo/source/locale/ar/content/first-order-logic/sequent-calculus/structural-rules.tex#L51), [L55](../source-snapshot/repo/source/locale/ar/content/first-order-logic/sequent-calculus/structural-rules.tex#L55), [L60](../source-snapshot/repo/source/locale/ar/content/first-order-logic/sequent-calculus/structural-rules.tex#L60), [L65](../source-snapshot/repo/source/locale/ar/content/first-order-logic/sequent-calculus/structural-rules.tex#L65)
+    - **CA:** `structural-rules.tex`
+      - [L15](../source-snapshot/repo/source/locale/ar-classical/content/first-order-logic/sequent-calculus/structural-rules.tex#L15), [L47](../source-snapshot/repo/source/locale/ar-classical/content/first-order-logic/sequent-calculus/structural-rules.tex#L47), [L51](../source-snapshot/repo/source/locale/ar-classical/content/first-order-logic/sequent-calculus/structural-rules.tex#L51), [L56](../source-snapshot/repo/source/locale/ar-classical/content/first-order-logic/sequent-calculus/structural-rules.tex#L56), [L61](../source-snapshot/repo/source/locale/ar-classical/content/first-order-logic/sequent-calculus/structural-rules.tex#L61)
+
+<a id="priority-retro0051-0100-falsity-2f3a2ee9b0"></a>
+## falsity — <span lang="ar" dir="rtl">الكذب</span>
+
+- **ID / الرقم:** `RETRO0051-0100-falsity`
+- **Global priority rank / score:** #252 / 85
+- **Sense / المعنى:** The false propositional constant or property of being false.
+- **Why this choice / سبب الاختيار:** الكذب is the inherited counterpart to الصدق and names the false constant in context.
+- **Useful alternatives / البدائل المفيدة:** البطلان — possible alternative — Could be confused with invalidity.; الزيف — not selected — Less standard in the current logical register.
+> ⚑ **PLEASE DOUBLE-CHECK THIS CHOICE / يُرجى التحقق من هذا الاختيار:** For falsity and the falsum constant, should the Arabic headword be الكذب, الباطل, or البطلان؟
+
+- **Where first / أول موضع:** OLP-0057 — مقدمة · shared · MSA · [L21](../source-snapshot/repo/source/locale/ar/content/propositional-logic/syntax-and-semantics/introduction.tex#L21) · [+14 more source locations](#priority-retro0051-0100-falsity-2f3a2ee9b0)
+- **Every distinct recorded occurrence / كل موضع مسجل متميز:**
+  - **OLP-0058 — Formulas القضايا**
+    - **EN:** `formulas.tex`
+      - [L23](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/propositional-logic/syntax-and-semantics/formulas.tex#L23), [L46](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/propositional-logic/syntax-and-semantics/formulas.tex#L46), [L73](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/propositional-logic/syntax-and-semantics/formulas.tex#L73)
+    - **MSA:** `formulas.tex`
+      - [L23](../source-snapshot/repo/source/locale/ar/content/propositional-logic/syntax-and-semantics/formulas.tex#L23), [L46](../source-snapshot/repo/source/locale/ar/content/propositional-logic/syntax-and-semantics/formulas.tex#L46), [L71](../source-snapshot/repo/source/locale/ar/content/propositional-logic/syntax-and-semantics/formulas.tex#L71)
+    - **CA:** `formulas.tex`
+      - [L23](../source-snapshot/repo/source/locale/ar-classical/content/propositional-logic/syntax-and-semantics/formulas.tex#L23), [L46](../source-snapshot/repo/source/locale/ar-classical/content/propositional-logic/syntax-and-semantics/formulas.tex#L46), [L67](../source-snapshot/repo/source/locale/ar-classical/content/propositional-logic/syntax-and-semantics/formulas.tex#L67)
+  - **OLP-0057 — مقدمة**
+    - **EN:** `introduction.tex`
+      - [L23](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/propositional-logic/syntax-and-semantics/introduction.tex#L23)
+    - **MSA:** `introduction.tex`
+      - [L21](../source-snapshot/repo/source/locale/ar/content/propositional-logic/syntax-and-semantics/introduction.tex#L21), [L25](../source-snapshot/repo/source/locale/ar/content/propositional-logic/syntax-and-semantics/introduction.tex#L25)
+    - **CA:** `introduction.tex`
+      - [L16](../source-snapshot/repo/source/locale/ar-classical/content/propositional-logic/syntax-and-semantics/introduction.tex#L16), [L20](../source-snapshot/repo/source/locale/ar-classical/content/propositional-logic/syntax-and-semantics/introduction.tex#L20)
+      - [L19](../source-snapshot/repo/source/locale/ar-classical/content/propositional-logic/syntax-and-semantics/introduction.tex#L19) — recovered by a unique exact search (recorded-excerpt exact context fragment)
+
+<a id="priority-retro-0005-0050-emphasis-8767472fa81b1629-f67f429b64"></a>
+## finite strings — <span lang="ar" dir="rtl">السلاسل المنتهية</span>
+
+- **ID / الرقم:** `retro-0005-0050:emphasis:8767472fa81b1629`
+- **Global priority rank / score:** #253 / 85
+- **Sense / المعنى:** The expression in its exact local mathematical/expository role as a explicitly emphasized expression; the occurrence excerpts and unit context disambiguate the sense.
+- **Why this choice / سبب الاختيار:** The Classical target retains «السلاسل المنتهية» from the MSA target for English «finite strings» in an aligned explicitly emphasized expression. The identical semantic markup and the local mathematical context constrain the referent. This is a present-tense retrospective justification, not a claim about the original translator’s deliberation.
+- **Useful alternatives / البدائل المفيدة:** No alternative reconstructed from the current sources — not-applicable — The two Arabic targets agree here, and no source-side evidence records a competing choice; inventing one retrospectively would be misleading.
+> ⚑ **PLEASE DOUBLE-CHECK THIS CHOICE / يُرجى التحقق من هذا الاختيار:** At OLP-0007, English line 47 and Classical line 43, does «السلاسل المنتهية» best preserve the sense of «finite strings» as an explicitly emphasized expression, or is another officially attested realization preferable?
+
+- **Where first / أول موضع:** OLP-0007 — بعض المجموعات المهمة · shared · MSA · [L47](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/sets/important-sets.tex#L47) · [+2 more source locations](#priority-retro-0005-0050-emphasis-8767472fa81b1629-f67f429b64)
+- **Every distinct recorded occurrence / كل موضع مسجل متميز:**
+  - **OLP-0007 — بعض المجموعات المهمة**
+    - **EN:** `important-sets.tex`
+      - [L47–L48](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/sets/important-sets.tex#L47-L48)
+    - **MSA:** `important-sets.tex`
+      - [L47](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/sets/important-sets.tex#L47)
+    - **CA:** `important-sets.tex`
+      - [L43](../source-snapshot/repo/source/locale/ar-classical/content/sets-functions-relations/sets/important-sets.tex#L43)
+
+<a id="priority-retro-0005-0050-emphasis-f61b7c3fde161bcc-aa3ef4e574"></a>
+## finitely branching — <span lang="ar" dir="rtl">منتهية التفرع</span>
+
+- **ID / الرقم:** `retro-0005-0050:emphasis:f61b7c3fde161bcc`
+- **Global priority rank / score:** #254 / 85
+- **Sense / المعنى:** The expression in its exact local mathematical/expository role as a explicitly emphasized expression; the occurrence excerpts and unit context disambiguate the sense.
+- **Why this choice / سبب الاختيار:** The Classical target retains «منتهية التفرع» from the MSA target for English «finitely branching» in an aligned explicitly emphasized expression. The identical semantic markup and the local mathematical context constrain the referent. This is a present-tense retrospective justification, not a claim about the original translator’s deliberation.
+- **Useful alternatives / البدائل المفيدة:** No alternative reconstructed from the current sources — not-applicable — The two Arabic targets agree here, and no source-side evidence records a competing choice; inventing one retrospectively would be misleading.
+> ⚑ **PLEASE DOUBLE-CHECK THIS CHOICE / يُرجى التحقق من هذا الاختيار:** At OLP-0018, English line 87 and Classical line 79, does «منتهية التفرع» best preserve the sense of «finitely branching» as an explicitly emphasized expression, or is another officially attested realization preferable?
+
+- **Where first / أول موضع:** OLP-0018 — الأشجار · shared · MSA · [L84](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/relations/trees.tex#L84) · [+2 more source locations](#priority-retro-0005-0050-emphasis-f61b7c3fde161bcc-aa3ef4e574)
+- **Every distinct recorded occurrence / كل موضع مسجل متميز:**
+  - **OLP-0018 — الأشجار**
+    - **EN:** `trees.tex`
+      - [L87](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/relations/trees.tex#L87)
+    - **MSA:** `trees.tex`
+      - [L84](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/relations/trees.tex#L84) — current file differs from recorded snapshot
+    - **CA:** `trees.tex`
+      - [L79](../source-snapshot/repo/source/locale/ar-classical/content/sets-functions-relations/relations/trees.tex#L79)
+
+[← Previous / السابق](priority-025.md) · [Shard index / فهرس الأجزاء](README.md) · [Next / التالي →](priority-027.md)

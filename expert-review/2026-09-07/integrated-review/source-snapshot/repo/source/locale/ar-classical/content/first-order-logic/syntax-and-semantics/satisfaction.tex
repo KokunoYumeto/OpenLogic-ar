@@ -1,0 +1,419 @@
+% Part: first-order-logic
+% Chapter: syntax-and-semantics
+% Section: satisfaction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{syn}{sat}
+
+\olsection{إرضاء \article{formula} \printtoken{S}{formula}
+  في \article{structure} \printtoken{S}{structure}}
+
+\begin{explain}
+يرتبط باب التعبيرات، من حدود وال!!{formula}s، بباب
+ال!!{structure}s من جهتين: \emph{!!{value}} الحد، و\emph{إرضاء}
+!!a{formula}. وتقريب الأولى أن !!{value} الحد !!a{element} من
+!!a{structure}؛ فإن كان الحد رمزًا ثابتًا فحسب، فـ!!{value} هي الشيء
+الذي عيّنته ال!!{structure} لذلك الثابت. وإن تألّف من
+ال!!{function}s، حُسبت !!{value} له من !!{value}s الثوابت ومن
+الدوال المعيّنة لرموز الدوال الواردة فيه. وأما !!^a{formula} فتكون
+\emph{مُرضاة} في !!a{structure} متى جعل تأويل المحمولات
+ال!!{formula} صادقة في مجال ال!!{structure}. وهذا أيضًا يُضبط
+بالاستقراء: فتعيينات ال!!{structure} تبيّن مباشرة متى تُرضى
+ال!!{formula}s الذرية؛ وأما !!{formula} المركبة، فيتعلّق إرضاؤها
+بالرابط الرئيس أو المكمم، وبإرضاء ال!!{subformula}s المباشرة أو
+عدم إرضائها.
+
+غير أن في المكممات مزيد نظر؛ إذ قد يكون في ال!!{subformula}
+المباشرة ل!!{formula} مكممة !!{variable} حر، وال!!{structure}s
+لا تعيّن !!{value}s ال!!{variable}s. فلا بد لمعالجة ذلك من
+\emph{إسنادات المتغيرات}. وحينئذ لا نعتبر الإرضاء بالنسبة إلى
+!!a{structure} مجردة، بل إلى !!a{structure} ومعها إسناد
+ل!!a{variable}.
+\end{explain}
+
+\begin{defn}[إسناد المتغيرات]
+\emph{إسناد المتغيرات}~$s$ ل!!a{structure}~$\Struct{M}$ دالة ترسل
+كل !!{variable} إلى !!a{element} من~$\Domain M$؛ أي
+$s\colon \Var \to \Domain M$.
+\end{defn}
+
+\begin{explain}
+في !!^a{structure} تتعيّن !!a{value} كل !!{constant}، وبإسناد
+المتغيرات تتعيّن قيمة كل متغير. ونريد، فوق ذلك، أن تدل الحدود
+المركبة منهما على !!{element}s من ال!!{domain}. فلذلك نعرّف
+!!{value} الحدود بالاستقراء: قيمة ال!!{constant}s والمتغيرات
+مأخوذة مما عيّنته ال!!{structure} أو الإسناد، وقيمة الحدود
+المركبة تُحسب عوديًا بالدوال التي عيّنتها ال!!{structure}
+لل!!{function}s.
+\end{explain}
+
+\begin{defn}[!!^{value} الحدود]
+إذا كان $t$ حدًا من اللغة~$\Lang L$، وكانت $\Struct M$
+!!{structure} لـ~$\Lang L$، وكان $s$ إسنادًا ل!!a{variable}
+في~$\Struct M$، عُرّفت \emph{!!{value}}~$\Value{t}{M}[s]$ كما يأتي:
+\begin{enumerate}
+\item \indcase{t}{c}{$\Value{\indfrm}{M}[s] = \Assign{\indcomplex}{M}$.}
+\item \indcase{t}{x}{$\Value{\indfrm}{M}[s] = s(\indcomplex)$.}
+\item \indcase{t}{\Atom{f}{t_1, \ldots, t_n}}{
+\[
+\Value{\indfrm}{M}[s] = \Assign{f}{M}(\Value{t_1}{M}[s], \ldots,
+\Value{t_n}{M}[s]).
+\]}
+\end{enumerate}
+\end{defn}
+
+\begin{defn}[مغاير بالنسبة إلى~$x$]
+إذا كان $s$ إسنادًا ل!!a{variable} في !!a{structure}~$\Struct M$،
+فكل إسناد ل!!{variable}~$s'$ في~$\Struct M$ لا يختلف عن~$s$ إلا،
+على الأكثر، فيما يسنده إلى~$x$ يسمى \emph{مغايرًا بالنسبة إلى~$x$}
+لـ~$s$. وإذا كان $s'$ مغايرًا بالنسبة إلى~$x$ لـ~$s$ كتبنا
+$\varAssign{s'}{s}{x}$.
+\end{defn}
+
+\begin{explain}
+وليس المغاير بالنسبة إلى~$x$ لإسناد~$s$ \emph{ملزمًا} بأن يجعل
+قيمة~$x$ غير قيمتها الأولى؛ فكل إسناد مغاير بالنسبة
+إلى~$x$ لنفسه أيضًا.
+\end{explain}
+
+\begin{defn}
+  إذا كان $s$ إسنادًا ل!!a{variable} في !!a{structure}~$\Struct M$
+  وكان $m \in \Domain{M}$، فإن الإسناد~$\Subst{s}{m}{x}$ هو إسناد
+  المتغيرات المعرّف بـ
+  \[\Subst{s}{m}{x}(y) = \begin{cases}
+    m & \text{إذا كان } y \ident x\\
+    s(y) & \text{فيما عدا ذلك}.
+  \end{cases}\]
+\end{defn}
+
+فـ$\Subst{s}{m}{x}$ مغاير معيّن بالنسبة إلى~$x$
+لـ~$s$: يضع !!{element} المجال~$m$ قيمةً لـ~$x$، ويبقي قيم
+ال!!{variable}s غير~$x$ على ما عيّنه لها~$s$.
+
+\begin{defn}[الإرضاء]
+\ollabel{defn:satisfaction}
+يُعرّف إرضاء !!a{formula}~$!A$ في !!a{structure}~$\Struct M$ نسبة
+إلى إسناد ل!!a{variable}~$s$، ويرمز إليه
+$\Sat{M}{!A}[s]$، عوديًا كما يأتي. (ونكتب
+$\Sat/{M}{!A}[s]$ بمعنى «ليس $\Sat{M}{!A}[s]$».)
+\begin{enumerate}
+\tagitem{prvFalse}{%
+  \indcase{!A}{\lfalse}{$\Sat/{M}{\indfrm}[s]$.}}{}
+
+\tagitem{prvTrue}{%
+  \indcase{!A}{\ltrue}{$\Sat{M}{\indfrm}[s]$.}}{}
+
+\item \indcase{!A}{\Atom{R}{t_1, \dots, t_n}}{$\Sat{M}{\indfrm}[s]$
+  إذا وفقط إذا كان $\langle \Value{t_1}{M}[s], \dots,
+  \Value{t_n}{M}[s] \rangle \in \Assign{R}{M}$.}
+
+\item \indcase{!A}{\eq[t_1][t_2]}{$\Sat{M}{\indfrm}[s]$ إذا وفقط
+  إذا كان $\Value{t_1}{M}[s] = \Value{t_2}{M}[s]$.}
+
+\tagitem{prvNot}{%
+  \indcase{!A}{\lnot !B}{$\Sat{M}{\indfrm}[s]$ إذا وفقط إذا كان
+    $\Sat/{M}{!B}[s]$.}}{}
+
+\tagitem{prvAnd}{%
+  \indcase{!A}{(!B \land !C)}{$\Sat{M}{\indfrm}[s]$ إذا وفقط إذا
+    كان $\Sat{M}{!B}[s]$ و$\Sat{M}{!C}[s]$.}}{}
+
+\tagitem{prvOr}{%
+  \indcase{!A}{(!B \lor !C)}{$\Sat{M}{\indfrm}[s]$ إذا وفقط إذا
+    كان $\Sat{M}{!B}[s]$ أو $\Sat{M}{!C}[s]$ (أو كلاهما).}}{}
+
+\tagitem{prvIf}{%
+  \indcase{!A}{(!B \lif !C)}{$\Sat{M}{\indfrm}[s]$ إذا وفقط إذا
+    كان $\Sat/{M}{!B}[s]$ أو $\Sat{M}{!C}[s]$ (أو كلاهما).}}{}
+
+\tagitem{prvIff}{%
+  \indcase{!A}{(!B \liff !C)}{$\Sat{M}{\indfrm}[s]$ إذا وفقط إذا
+    كان إما كل من $\Sat{M}{!B}[s]$ و$\Sat{M}{!C}[s]$، وإما لا
+    $\Sat{M}{!B}[s]$ ولا $\Sat{M}{!C}[s]$.}}{}
+
+\tagitem{prvAll}{%
+  \indcase{!A}{\lforall[x][!B]}{$\Sat{M}{\indfrm}[s]$ إذا وفقط إذا
+    كان، لكل !!{element}~$m \in \Domain M$،
+    $\Sat{M}{!B}[\Subst{s}{m}{x}]$.}}{}
+
+\tagitem{prvEx}{%
+  \indcase{!A}{\lexists[x][!B]}{$\Sat{M}{\indfrm}[s]$ إذا وفقط إذا
+  كان، ل!!{element} واحد على الأقل~$m \in \Domain M$،
+  $\Sat{M}{!B}[\Subst{s}{m}{x}]$.}}{}
+\end{enumerate}
+\end{defn}
+
+\begin{explain}
+ويتبيّن موضع الحاجة إلى إسنادات المتغيرات في
+\iftag{notprvEx,notprvAll}{البند الأخير}{البندين الأخيرين}.\iftag{prvAll}{
+فلا يصح أن نحدّ إرضاء $\lforall[x][!B(x)]$ بقولنا: «لكل $m \in
+\Domain{M}$، $\Sat{M}{!B(m)}$».}{}\iftag{prvEx}{ ولا أن نحدّ إرضاء
+$\lexists[x][!B(x)]$ بقولنا: «لـ~$m \in \Domain{M}$ واحد على
+الأقل، $\Sat{M}{!B(m)}$».}{} وذلك أن $m \in \Domain M$
+شيء من المجال، لا رمز من اللغة؛ فلا تكون $!B(m)$~!!a{formula}،
+أي إن $\Subst{!B}{m}{x}$ غير معرّفة. وليس لنا أن نفترض وجود
+!!{constant}s أو حدود تسمّي كل !!{element} من~$\Struct{M}$؛
+فتعريف ال!!{structure}s لا يوجب ذلك. بل إن مجموعة
+ال!!{constant}s في اللغة القياسية !!{denumerable}؛ فإن كان
+$\Domain{M}$ غير !!{enumerable} لم تكفِ ال!!{constant}s
+لتسمية جميع الأشياء.
+
+والخلاص من ذلك بإسنادات ال!!{variable}s، إذ نربط بها المتغيرات
+مباشرة ب!!{element}s المجال. فبدلًا من أن نقول مثلًا إن
+\iftag{prvEx}{$\lexists[x][!B(x)]$}{$\lforall[x][!B(x)]$} مُرضاة
+في~$\Struct M$ إذا وفقط إذا
+\iftag{prvEx}{كان $\Sat{M}{!B(m)}$ لواحد على الأقل من $m \in
+\Domain{M}$}{كان ذلك لكل $m \in \Domain{M}$، $\Sat{M}{!B(m)}$}،
+نقول: هي مُرضاة في~$\Struct M$ \emph{بالنسبة إلى}~$s$ إذا وفقط
+إذا أُرضيت $!B(x)$ بالنسبة إلى~$\Subst{s}{m}{x}$
+\iftag{prvEx}{لواحد على الأقل}{لكل} $m \in \Domain M$.
+\end{explain}
+
+\begin{ex}
+لتكن $\Lang{L} = \{a, b, f, R\}$، حيث $a$ و$b$ !!{constant}s،
+و$f$~!!{function} ثنائية المحل، و$R$~!!{predicate} ثنائي المحل. وانظر
+في ال!!{structure}~$\Struct{M}$ المعرّفة بما يأتي:
+\begin{enumerate}
+\item $\Domain M = \{1, 2, 3, 4\}$
+\item $\Assign{a}{M} = 1$
+\item $\Assign{b}{M} = 2$
+\item $\Assign{f}{M}(x, y) = x+y$ إذا كان $x+y \le 3$، و$= 3$ فيما عدا ذلك.
+\item $\Assign{R}{M} = \{\tuple{1, 1}, \tuple{1, 2}, \tuple{2, 3}, \tuple{2, 4}\}$
+\end{enumerate}
+الدالة $s(x) = 1$ التي تسند $1 \in \Domain{M}$ إلى كل
+!!{variable} إسناد متغيرات لـ~$\Struct{M}$.
+
+عندئذ
+\begin{align*}
+\Value{f(a,b)}{M}[s] & = \Assign{f}{M}(\Value{a}{M}[s], \Value{b}{M}[s]).
+\intertext{ولما كان $a$ و$b$ !!{constant}s، فإن $\Value{a}{M}[s]
+  = \Assign{a}{M} = 1$ و$\Value{b}{M}[s] = \Assign{b}{M} = 2$. ومن ثم}
+\Value{f(a,b)}{M}[s] & = \Assign{f}{M}(1, 2) = 1+2 = 3.
+\intertext{ولحساب قيمة $f(f(a,b),a)$ يلزمنا النظر في}
+\Value{f(f(a,b),a)}{M}[s] & = \Assign{f}{M}(\Value{f(a, b)}{M}[s],
+\Value{a}{M}[s]) = \Assign{f}{M}(3, 1) = 3,
+\intertext{لأن $3+1 > 3$. ولما كان $s(x) = 1$ و$\Value{x}{M}[s] =
+  s(x)$، كان لدينا أيضًا}
+\Value{f(f(a,b),x)}{M}[s] & = \Assign{f}{M}(\Value{f(a, b)}{M}[s],
+\Value{x}{M}[s]) = \Assign{f}{M}(3, 1) = 3,
+\end{align*}
+
+أما ال!!{formula} الذرية~$R(t_1, t_2)$، فتُرضى متى كانت
+ثنائية قيمتي حجتيها، أي $\tuple{\Value{t_1}{M}[s], \Value{t_2}{M}[s]}$،
+!!a{element} من~$\Assign{R}{M}$. فمن ذلك
+$\Sat{M}{R(b,f(a,b))}[s]$؛ إذ $\tuple{\Value{b}{M},
+  \Value{f(a,b)}{M}} = \tuple{2, 3} \in \Assign{R}{M}$.
+وأما $\Sat/{M}{R(x, f(a,b))}[s]$، فلأن
+$\tuple{1, 3} \notin \Assign{R}{M}$.
+
+وأما الصيغة غير الذرية~$!A$، فسبيل الحكم عليها أن نأخذ من
+التعريف الاستقرائي البند الموافق لرابطها الرئيس. فالرابط الرئيس
+في~$R(a, a) \lif (R(b, x) \lor R(x, b))$ هو~$\lif$؛ ولذلك
+\begin{align*}
+  & \Sat{M}{R(a, a) \lif (R(b, x) \lor R(x, b))}[s] \text{ إذا وفقط إذا }\\
+  & \qquad
+  \Sat/{M}{R(a,a)}[s] \text{ أو } \Sat{M}{R(b, x) \lor R(x, b)}[s]
+  \intertext{ولما كان $\Sat{M}{R(a,a)}[s]$ (لأن $\tuple{1,1} \in
+    \Assign{R}{M}$)، فلا يمكننا بعد تعيين الجواب، ويلزم أولًا أن
+    نعرف هل $\Sat{M}{R(b, x) \lor R(x, b)}[s]$:}
+  & \Sat{M}{R(b, x) \lor R(x, b)}[s] \text{ إذا وفقط إذا }\\
+  & \qquad \Sat{M}{R(b,x)}[s] \text{ أو } \Sat{M}{R(x, b)}[s]
+  \intertext{وهذا هو الواقع، لأن $\Sat{M}{R(x, b)}[s]$
+    (إذ $\tuple{1,2} \in \Assign{R}{M}$).}
+\end{align*}
+
+قد تقدم أن المغاير بالنسبة إلى~$x$ لـ~$s$ لا يجوز أن يخالف
+الإسناد~$s$ إلا في قيمة~$x$، وقد يوافقه فيها أيضًا.
+فلكل !!{element} من~$\Domain{M}$ مغاير بالنسبة إلى~$x$ لـ~$s$:
+\begin{align*}
+  s_1 & = \Subst{s}{1}{x}, &
+  s_2 & = \Subst{s}{2}{x},\\
+  s_3 & = \Subst{s}{3}{x}, &
+  s_4 & = \Subst{s}{4}{x}.
+\end{align*}
+فمثلًا، $s_2(x) = 2$ و$s_2(y) = s(y) = 1$ لجميع المتغيرات~$y$
+غير~$x$. وهذه هي جميع المغايرات بالنسبة إلى~$x$ لـ~$s$ في
+البنية~$\Struct{M}$، لأن $\Domain{M} = \{1, 2, 3, 4\}$. ولاحظ،
+على وجه الخصوص، أن $s_1 = s$ (إذ يكون~$s$ دائمًا مغايرًا بالنسبة
+إلى~$x$ لنفسه).
+
+\iftag{prvEx}{لتعيين ما إذا كانت !!{formula} مكممة وجوديًا
+~$\lexists[x][!A(x)]$ مُرضاة، يلزم أن نعيّن ما إذا كان
+$\Sat{M}{!A(x)}[\Subst{s}{m}{x}]$ لواحد على الأقل من
+$m \in \Domain M$. ومن ثم
+  \[
+  \Sat{M}{\lexists[x][(R(b,x) \lor R(x,b))]}[s],
+  \]
+لأن $\Sat{M}{R(b,x) \lor R(x, b)}[\Subst{s}{1}{x}]$
+($\Subst{s}{3}{x}$ يصلح أيضًا). لكن
+  \[
+  \Sat/{M}{\lexists[x][(R(b,x) \land R(x,b))]}[s]
+  \]
+لأنه أيًا كان $m \in \Domain{M}$ الذي نختاره، يكون
+$\Sat/{M}{R(b,x) \land R(x,b)}[\Subst{s}{m}{x}]$.}{}
+
+\iftag{prvAll}{لتعيين ما إذا كانت !!{formula} مكممة كليًا
+~$\lforall[x][!A(x)]$ مُرضاة، يلزم أن نعيّن ما إذا كان
+$\Sat{M}{!A(x)}[\Subst{s}{m}{x}]$ لكل $m \in \Domain M$. ومن ثم
+  \[
+  \Sat{M}{\lforall[x][(R(x,a) \lif R(a,x))]}[s],
+  \]
+لأن $\Sat{M}{R(x,a) \lif R(a,x)}[\Subst{s}{m}{x}]$ لكل $m \in
+\Domain M$. فعندما $m = 1$ يكون
+$\Sat{M}{R(a,x)}[\Subst{s}{1}{x}]$، فتكون التالية صادقة؛ وعندما
+$m = 2$، أو $3$، أو~$4$ يكون
+$\Sat/{M}{R(x,a)}[\Subst{s}{m}{x}]$، فتكون المقدمة كاذبة. لكن
+  \[
+  \Sat/{M}{\lforall[x][(R(a,x) \lif R(x,a))]}[s]
+  \]
+لأن $\Sat/{M}{R(a,x) \lif R(x,a)}[\Subst{s}{2}{x}]$ (إذ
+$\Sat{M}{R(a, x)}[\Subst{s}{2}{x}]$ و$\Sat/{M}{R(x,
+  a)}[\Subst{s}{2}{x}]$).}{}
+
+\iftag{defEx}{لتعيين ما إذا كانت !!{formula} مكممة وجوديًا
+~$\lexists[x][!A(x)]$ مُرضاة، يلزم أن نعيّن ما إذا كان
+$\Sat{M}{\lnot \lforall[x][\lnot !A(x)]}[s]$. فمثلًا، لدينا
+  \[
+  \Sat{M}{\lexists[x][(R(b,x) \lor R(x,b))]}[s].
+  \]
+أولًا، $\Sat{M}{R(b,x) \lor R(x, b)}[\Subst{s}{1}{x}]$
+($\Subst{s}{3}{x}$ يصلح أيضًا). ومن ثم
+$\Sat/{M}{\lnot(R(b,x) \lor R(x,b))}[\Subst{s}{1}{x}]$، وبالتالي
+$\Sat/{M}{\lforall[x][\lnot((R(b,x) \lor R(x,b)))]}[s]$، ومنه
+$\Sat{M}{\lnot\lforall[x][\lnot((R(b,x) \lor
+R(x,b)))]}[s]$. وأما من الجهة الأخرى
+  \[
+  \Sat/{M}{\lexists[x][(R(b,x) \land R(x,b))]}[s].
+  \]
+وذلك لأن $\Sat{M}{\lforall[x][\lnot(R(b,x) \land
+R(x,b))]}[s]$، إذ لا يوجد $m \in \Domain M$ بحيث
+$\Sat{M}{R(b,x) \land R(x,b)}[\Subst{s}{m}{x}]$. ويُستدل من هذه الأمثلة على القاعدة الآتية: يكون $\Sat{M}{\lexists[x][!A(x)]}[s]$ إذا
+وفقط إذا كان $\Sat{M}{!A(x)}[\Subst{s}{m}{x}]$ لواحد على الأقل
+من~$m \in \Domain M$.}{}
+
+\iftag{defAll}{لتعيين ما إذا كانت !!{formula} مكممة كليًا
+~$\lforall[x][!A(x)]$ مُرضاة، يلزم أن نعيّن ما إذا كان
+$\Sat{M}{\lnot\lexists[x][\lnot !A(x)]}[s]$. فمثلًا
+  \[
+  \Sat{M}{\lforall[x][(R(x,a) \lif R(a,x))]}[s],
+  \]
+أولًا، $\Sat{M}{R(x,a) \lif R(a,x)}[\Subst{s}{m}{x}]$ لكل
+$m \in \Domain M$ ($\Sat{M}{R(a,x)}[\Subst{s}{1}{x}]$
+و$\Sat/{M}{R(a,x)}[\Subst{s}{m}{x}]$ عندما $m = 2$، أو $3$،
+أو~$4$). ومن ثم لا يوجد $m \in \Domain M$ بحيث
+$\Sat{M}{\lnot(R(x,a) \lif R(a,x))}[\Subst{s}{m}{x}]$، ولذلك
+$\Sat/{M}{\lexists[x][\lnot(R(x,a) \lif R(a,x))]}[s]$. وبالتالي
+$\Sat{M}{\lnot\lexists[x][\lnot(R(x,a) \lif R(a,x))]}[s]$. ومن
+جهة أخرى
+  \[
+  \Sat/{M}{\lforall[x][(R(a,x) \lif R(x,a))]}[s],
+  \]
+لأن $\Sat/{M}{R(a,x) \lif R(x,a)}[\Subst{s}{2}{x}]$، ومن ثم
+$\Sat{M}{\lexists[x][\lnot(R(a,x) \lif R(x,a))]}[s]$. وهذه الأمثلة تدل على القاعدة الآتية: يكون
+$\Sat{M}{\lforall[x][!A(x)]}[s]$ إذا وفقط إذا كان
+$\Sat{M}{!A(x)}[\Subst{s}{m}{x}]$ لكل $m \in \Domain M$.}{}
+
+ولننظر الآن في الحالة الأكثر تركيبًا:
+\[
+\lforall[x][(R(a,x) \lif \lexists[y][R(x,y)])].
+\]
+لما كان $\Sat/{M}{R(a,x)}[\Subst{s}{3}{x}]$ و
+$\Sat/{M}{R(a,x)}[\Subst{s}{4}{x}]$، فلم يبق للنظر في تالية الشرطية إلا الحالتان $m = 1$
+و$m = 2$. هل $\Sat{M}{\lexists[y][R(x,y)]}[\Subst{s}{1}{x}]$؟
+يكون الجواب بالإيجاب إذا وُجد $n \in \Domain M$ واحد على الأقل بحيث
+$\Sat{M}{R(x,y)}[\Subst{\Subst{s}{1}{x}}{n}{y}]$. ولنا أن
+نأخذ $n = 1$، فيكون
+$\Subst{\Subst{s}{1}{x}}{n}{y} = \Subst{s}{1}{y} = s$. ولما كان
+$s(x) = 1$، و$s(y) = 1$، و$\tuple{1,1} \in \Assign{R}{M}$، فالجواب
+نعم.
+
+وأما السؤال هل
+$\Sat{M}{\lexists[y][R(x,y)]}[\Subst{s}{2}{x}]$، فجوابه بالنظر في
+إسنادات ال!!{variable}s~$\Subst{\Subst{s}{2}{x}}{n}{y}$. وهنا،
+عندما $n = 1$، يكون هذا الإسناد~$s_2 = \Subst{s}{2}{x}$، وهذا الإسناد لا
+يرضي $R(x,y)$ ($s_2(x) = 2$، و$s_2(y) = 1$،
+و$\tuple{2,1}\notin \Assign{R}{M}$). وأما إذا أخذنا
+$\Subst{\Subst{s}{2}{x}}{3}{y} = \Subst{s_2}{3}{y}$،
+فلدينا $\Sat{M}{R(x,y)}[\Subst{s_2}{3}{y}]$ لأن
+$\tuple{2,3} \in \Assign{R}{M}$، ومن ثم
+$\Sat{M}{\lexists[y][R(x,y)]}[s_2]$.
+
+وهكذا، لكل $m \in \Domain M$، إما
+$\Sat/{M}{R(a,x)}[\Subst{s}{m}{x}]$ (إذا كان $m = 3$، أو~$4$)،
+وإما $\Sat{M}{\lexists[y][R(x,y)]}[\Subst{s}{m}{x}]$ (إذا كان
+$m = 1$، أو~$2$)، ومن ثم
+\[
+\Sat{M}{\lforall[x][(R(a,x) \lif \lexists[y][R(x,y)])]}[s].
+\]
+ومن جهة أخرى
+\[
+\Sat/{M}{\lexists[x][(R(a,x) \land \lforall[y][R(x,y)])]}[s].
+\]
+لدينا $\Sat{M}{R(a,x)}[\Subst{s}{m}{x}]$ فقط عندما $m = 1$ وعندما
+$m = 2$. لكن لكل من هاتين القيمتين لـ~$m$ يوجد بدوره
+$n \in \Domain M$، هو $n = 4$، بحيث
+$\Sat/{M}{R(x,y)}[\Subst{\Subst{s}{m}{x}}{n}{y}]$، ومن ثم
+$\Sat/{M}{\lforall[y][R(x,y)]}[\Subst{s}{m}{x}]$ عندما $m = 1$
+وعندما $m = 2$. فالحاصل أنه لا يوجد $m \in \Domain M$ بحيث
+$\Sat{M}{R(a,x) \land \lforall[y][R(x,y)]}[\Subst{s}{m}{x}]$.
+\end{ex}
+
+\iftag{defEx}{%
+\begin{prop}\ollabel{prop:sat-ex}
+$\Sat{M}{\lexists[x][!B(x)]}[s]$ إذا وفقط إذا وُجد مغاير بالنسبة
+إلى~$x$، $s'$، لـ~$s$ بحيث $\Sat{M}{!B(x)}[s']$.
+\end{prop}
+
+\begin{proof}
+  تمرين.
+\end{proof}
+}{}
+
+\tagprob{defEx}
+\begin{prob}
+  أثبت \olref[fol][syn][sat]{prop:sat-ex}.
+\end{prob}
+\tagendprob
+
+\iftag{defAll}{%
+\begin{prop}\ollabel{prop:sat-all}
+$\Sat{M}{\lforall[x][!B(x)]}[s]$ إذا وفقط إذا كان، لكل مغاير
+بالنسبة إلى~$x$، $s'$، لـ~$s$، $\Sat{M}{!B(x)}[s']$.
+\end{prop}
+
+\begin{proof}
+  تمرين.
+\end{proof}
+}{}
+
+\tagprob{defAll}
+\begin{prob}
+  أثبت \olref[fol][syn][sat]{prop:sat-all}.
+\end{prob}
+\tagendprob
+
+\begin{prob}
+لتكن $\Lang L = \{c, f, A\}$ ذات !!{constant} واحد، و!!{function}
+واحدة أحادية المحل، و!!{predicate} واحد ثنائي المحل، ولتكن
+ال!!{structure}~$\Struct{M}$ معطاة بما يأتي:
+\begin{enumerate}
+\item $\Domain M = \{1, 2, 3\}$
+\item $\Assign{c}{M} = 3$
+\item $\Assign{f}{M}(1) = 2, \Assign{f}{M}(2) = 3, \Assign{f}{M}(3) = 2$
+\item $\Assign{A}{M} = \{\tuple{1, 2}, \tuple{2, 3}, \tuple{3, 3}\}$
+\end{enumerate}
+(أ) ليكن $s(v) = 1$ لكل ال!!{variable}s~$v$. عيّن ما إذا كان
+\[
+\Sat{M}{\lexists[x][(A(f(z), c) \lif \lforall[y][(A(y, x) \lor A(f(y),
+      x))])]}[s]
+\]
+وبيّن وجه الحكم.
+
+(ب) ضع بنية أخرى وإسنادًا آخر لل!!{variable}s بحيث لا تكون
+ال!!{formula} مُرضاة بهما.
+\end{prob}
+
+\end{document}

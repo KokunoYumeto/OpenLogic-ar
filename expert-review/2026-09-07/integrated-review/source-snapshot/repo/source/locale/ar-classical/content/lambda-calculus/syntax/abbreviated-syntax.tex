@@ -1,0 +1,41 @@
+% Part: lambda-calculus
+% Chapter: syntax
+% Section: abbreviated-syntax
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{syn}{abb}
+\olsection{النحو المختصر}
+
+قد تطول كتابة الحدود على مقتضى~\olref[trm]{defn:term} وتثقل؛
+فلذلك نستعمل نحوًا أوجز، بشرط أن تبقى قراءة كل حد وحيدة.
+ومن الاصطلاحات الشائعة في ذلك ما يسمى \emph{الحدود المختصرة}، وقواعده الآتية.
+
+\begin{enumerate}
+\item إذا أسقطت الأقواس، جمع التطبيق من جهة اليسار إلى اليمين.
+  فإذا كانت~$M$ و$N$ و$P$ و~$Q$ حدودًا، فالكتابة~$MNPQ$ تختصر~$(((MN)P)Q)$.
+\item وإذا أسقطت الأقواس، امتد مجال تجريد لامبدا إلى أقصى ما تسمح به الكتابة.
+  ولذلك تقرأ~$\lambd[x][MNP]$ بمعنى~$(\lambd[x][MNP])$.
+\item ويجوز أن يجمع رمز لامبدا تجريد عدة متغيرات؛ فمثلًا
+  $\lambd[xyz][M]$ كتابة مختصرة للحد
+  $\lambd[x][\lambd[y][\lambd[z][M]]]$.
+\end{enumerate}
+
+ومن أمثلة هذه القواعد أن
+\[
+\lambd[xy][xxyx \lambd[z][xz]]
+\]
+تقوم مقام
+\[
+(\lambd[x][(\lambd[y][((((xx)y)x)(\lambd[z][(xz)]))])]).
+\]
+
+\begin{prob}
+اكتب الحد المختصر~$\lambd[g][(\lambd[x][g (x x)])
+  \lambd[x][g (x x)]]$ بإثبات جميع الأقواس.
+\end{prob}
+
+\end{document}
+

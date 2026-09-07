@@ -1,0 +1,72 @@
+% Part: sets-functions-relations
+% Chapter: relations
+% Section: operations
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid[ar]{sfr}{rel}{ops}
+\olsection{عمليات على العلاقات}
+
+قد ينفع أن نغير العلاقات أو نضم بعضها إلى بعض. ففي
+\olref[sfr][rel][ord]{prop:stricttopartial} أخذنا \emph{اتحاد} علاقتين،
+وهو اتحادهما حين تؤخذان مجموعتين من الأزواج. وفي
+\olref[sfr][rel][ord]{prop:partialtostrict} أخذنا الفرق النسبي
+بينهما. وها هنا عمليات أخرى على العلاقات.
+
+\begin{defn}\ollabel{relationoperations}
+خذ علاقتين $R$ و$S$، ومجموعة كيفما كانت $A$.
+
+نسمّي \emph{معكوس} $R$ المجموعة $R^{-1} = \Setabs{\tuple{y, x}}{\tuple{x,
+    y} \in R}$.
+
+ونسمّي \emph{الضرب النسبي} لـ$R$ و$S$ المجموعة $(R \mid S) =
+\{\tuple{x, z} : \exists y(Rxy \land Syz)\}$.
+
+و\emph{تقييد} $R$ على $A$ معرّف بـ$\funrestrictionto{R}{A}= R
+\cap A^2$.
+
+و\emph{تطبيق} $R$ على $A$ معرّف بـ$\funimage{R}{A} = \{y :
+(\exists x \in A)Rxy\}$.
+\end{defn}
+
+\begin{ex}
+خذ علاقة اللاحق $S \subseteq \Int^2$ على~$\Int$، وهي
+$S = \Setabs{\tuple{x, y} \in \Int^2}{x + 1 = y}$؛ فـ$Sxy$ يكافئ $x + 1 = y$.
+
+فمعكوسها $S^{-1}$ علاقة السابق على $\Int$، أي
+$\Setabs{\tuple{x,y}\in\Int^2}{x -1 =y}$.
+
+وأما $S\mid S$ فتعطي
+$ \Setabs{\tuple{x,y}\in\Int^2}{x + 2 =y}$.
+
+وتقييدها $\funrestrictionto{S}{\Nat}$ علاقة اللاحق على~$\Nat$.
+
+وتطبيقها يعطي $\funimage{S}{\{1,2,3\}}$ مساوية لـ$\{2, 3, 4\}$.
+\end{ex}
+
+\begin{defn}[الإغلاق المتعدي]
+خذ العلاقة الثنائية $R \subseteq A^2$.
+
+نعرّف \emph{الإغلاق المتعدي} لـ~$R$ بأنه $R^+ = \bigcup_{0 < n \in
+\Nat} R^n$؛ والقوى فيه معرفة عوديًا: $R^1 = R$ و$R^{n+1} = R^n
+\mid R$.
+
+وأما \emph{الإغلاق الانعكاسي المتعدي} لـ$R$ فتعريفه $R^* = R^+ \cup
+\Id{A}$.
+\end{defn}
+
+\begin{ex}
+في علاقة اللاحق $S \subseteq \Int^2$ يكون $S^2xy$ مكافئًا لـ$x + 2 =
+y$، و$S^3xy$ مكافئًا لـ$x + 3 = y$، وعلى هذا القياس.
+فـ$S^+xy$ إذا وفقط إذا كان $x + n = y$ لعدد $n \geq 1$.
+وحاصل ذلك أن $S^+xy$ يكافئ $x < y$، وأن $S^*xy$ يكافئ $x \le
+y$.
+\end{ex}
+
+\begin{prob}
+بيّن أن إغلاق $R$ المتعدي يحقق التعدية حقًا.
+\end{prob}
+
+\end{document}

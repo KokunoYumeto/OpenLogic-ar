@@ -1,0 +1,73 @@
+% part: intuitionistic-logic
+% chapter: semantics
+% section: relational-models
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{sem}{rel}
+
+\olsection{\usetoken{P}{relational model}}
+
+لكي نقدم دلالات دقيقة للمنطق القضي الحدسي، علينا أن نعرّف ما يُعد نموذجًا
+يمكننا أن نقوّم ال!!{formula}s بالنسبة إليه. وعلى أساس هذا التعريف يمكن
+أيضًا تعريف مفاهيم دلالية كالصلاحية والاستلزام. وتقدم ال!!{relational
+  model}s إحدى هذه الدلالات.
+
+\begin{defn}
+  !!^a{relational model} للمنطق القضي الحدسي ثلاثي
+  $\mModel{M}=\tuple{W,R,V}$، حيث:
+  \begin{enumerate}
+  \item $W$ مجموعة غير فارغة؛
+  \item $R$ ترتيب جزئي على~$W$ (أي علاقة ثنائية انعكاسية ومضادة للتناظر
+    ومتعدية)؛
+  \item $V$ دالة تسند إلى كل~!!{propositional
+    variable}~$p$ مجموعة جزئية من~$W$؛
+  \item $V$ رتيبة بالنسبة إلى~$R$؛ أي إذا كان~$w \in V(p)$ و$Rww'$،
+    كان~$w' \in V(p)$.
+  \end{enumerate}
+\end{defn}
+
+\begin{defn}\ollabel{defn:true-at-w}
+  نعرّف مفهوم \emph{صدق~$!A$ عند~$w$ في~$\mModel{M}$}، ورمزه
+  $\mSat{M}{!A}[w]$، استقرائيًا كما يأتي:
+  \begin{enumerate}
+  \item \indcase{!A}{p}{$\mSat{M}{\indfrm}[w]$ إذا وفقط إذا كان
+    $w \in V(p)$.}
+  \item \indcase{!A}{\lfalse}{لا يتحقق~$\mSat{M}{\indfrm}[w]$}.
+  \item \indcase{!A}{\lnot !B}{$\mSat{M}{\indfrm}[w]$ إذا وفقط إذا
+    لم توجد~$w'$ بحيث~$Rww'$ ويتحقق~$\mSat{M}{!B}[w']$}.
+  \item \indcase{!A}{!B \land !C}{$\mSat{M}{\indfrm}[w]$ إذا وفقط إذا
+    تحقق~$\mSat{M}{!B}[w]$ و$\mSat{M}{!C}[w]$}.
+  \item \indcase{!A}{!B \lor !C}{$\mSat{M}{\indfrm}[w]$ إذا وفقط إذا
+    تحقق~$\mSat{M}{!B}[w]$ أو~$\mSat{M}{!C}[w]$ (أو كلاهما)}.
+  \item \indcase{!A}{!B \lif !C}{$\mSat{M}{\indfrm}[w]$ إذا وفقط إذا
+    كان، لكل~$w'$ بحيث~$Rww'$، لا يتحقق~$\mSat{M}{!B}[w']$ أو يتحقق
+    $\mSat{M}{!C}[w']$} (أو كلاهما).
+  \end{enumerate}
+  ونكتب~$\mSat/{M}{!A}[w]$ إذا لم يتحقق~$\mSat{M}{!A}[w]$. وإذا كانت
+  $\Gamma$ مجموعة من ال!!{formula}s، كان~$\mSat{M}{\Gamma}[w]$ يعني
+  $\mSat{M}{!B}[w]$ لكل~$!B \in \Gamma$.
+\end{defn}
+
+\begin{prob}
+  أثبت أنه بحسب~\olref[int][sem][rel]{defn:true-at-w}،
+  $\mSat{M}{\lnot !A}[w]$ إذا وفقط إذا كان
+  $\mSat{M}{!A \lif \lfalse}[w]$.
+\end{prob}
+
+\begin{prop}\ollabel{prop:true-monotonic}
+  الصدق عند العوالم رتيب بالنسبة إلى~$R$؛ أي إذا كان
+  $\mSat{M}{!A}[w]$ و$Rww'$، كان~$\mSat{M}{!A}[w']$.
+\end{prop}
+
+\begin{proof}
+  تمرين.
+\end{proof}
+
+\begin{prob}
+  أثبت~\olref[int][sem][rel]{prop:true-monotonic}.
+\end{prob}
+
+\end{document}

@@ -1,0 +1,191 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{cardinals}{classing}
+\olsection{المتناهي، و\usetoken{S}{enumerable}، و\usetoken{S}{nonenumerable}}
+
+لما عرفنا الكاردينالات، بقي أن نميز أصنافها: المتناهية،
+و!!{enumerable}، و!!{nonenumerable}.
+
+وتقضي النتيجتان الآتيتان بأن الكاردينالات المتناهية ليست إلا الأعداد
+الترتيبية المتناهية، وهي \emph{أعدادنا الطبيعية} على تعريف
+\olref[z][infinity-again]{defnomega}.
+
+\begin{prop}\ollabel{finitecardisoequal}
+لتكن~$n, m \in \omega$. عندئذ~$n = m$ إذا وفقط إذا
+$\cardeq{n}{m}$.
+\end{prop}
+
+\begin{proof}
+أما جهة \emph{اليسار إلى اليمين} فظاهرة. وللجهة
+\emph{من اليمين إلى اليسار}، افترض~$\cardeq{n}{m}$ مع
+$n \neq m$. يوجب التثليث أن إما~$n \in m$ وإما~$m \in n$؛ ولنفرض،
+بلا إخلال بالعموم،~$n \in m$. فيكون~$n \subsetneq m$، وتوجد
+!!a{bijection}~$f \colon m \to n$؛ فيلزم أن~$m$ غير متناه بحسب
+ديدكند، خلافًا لـ\olref[z][infinity-again]{naturalnumbersarentinfinite}.
+\end{proof}
+
+\begin{cor}\ollabel{naturalsarecardinals}
+إذا كان~$n \in \omega$، فإن~$n$ كاردينال.
+\end{cor}
+
+\begin{proof}
+يتبع ذلك مباشرة.
+\end{proof}
+\noindent
+ومن ثم تتفق أيضًا تصورات شتى معقولة لكون الكاردينال «متناهيًا» أو
+«غير متناه»:
+\begin{thm}\ollabel{generalinfinitycharacter}لكل مجموعة~$A$، الشروط الآتية متكافئة:
+\begin{enumerate}
+	\item\ollabel{card:notinomega} $\card{A} \notin \omega$، أي إن
+	$\card{A}$ ليس عددًا طبيعيًا؛
+	\item\ollabel{card:omegaplus} $\omega \leq \card{A}$؛
+	\item\ollabel{card:infinite} $A$ غير متناهية بحسب ديدكند.
+\end{enumerate}
+\end{thm}
+
+\begin{proof}
+هذا لازم من~\olref[ord-arithmetic][using-addition]{ordinfinitycharacter}
+و\olref[cardinals][cardsasords]{lem:CardinalsBehaveRight}
+و\olref{naturalsarecardinals}.
+\end{proof}
+
+وبذلك يجوز أن نضع تعريفًا دقيقًا لألفاظ استعملناها بشيء من التسامح
+في~\olref[sfr][][]{part}.
+
+\begin{defn}\ollabel{defnfinite}
+نسمي~$A$ \emph{متناهية} إذا وفقط إذا كان~$\card{A}$ عددًا طبيعيًا،
+أي إذا كان~$\card{A} \in \omega$. وما لم يكن كذلك سمينا~$A$
+\emph{غير متناهية}.
+\end{defn}
+\noindent
+غير أن هذا التعريف قائم على~$\ZFC$؛ إذ احتجنا إلى الترتيب الجيد
+لضمان كاردينالية لكل مجموعة. وقد توجد، في غيابه، مجموعة لا هي متناهية
+ولا غير متناهية بحسب ديدكند. وسنعود إلى هذه المسائل في
+\olref[choice][]{chap}؛ أما هنا فنظل مستعملين الترتيب الجيد.
+
+ننتقل من الكاردينالات المتناهية إلى غير المتناهية، ونبدأ بنتيجتين.
+
+\begin{cor}\ollabel{omegaisacardinal}
+$\omega$ هو أصغر كاردينال غير متناهٍ.
+\end{cor}
+
+\begin{proof}
+$\omega$ كاردينال لأنه غير متناه بحسب ديدكند. ولو كان
+$\cardeq{\omega}{n}$ لبعض~$n \in \omega$، لكان~$n$ غير متناه بحسب
+ديدكند، وهذا يناقض
+\olref[z][infinity-again]{naturalnumbersarentinfinite}. وأما أن
+$\omega$ أصغر كاردينال غير متناه فمن نفس التعريف.
+\end{proof}
+
+\begin{cor}
+كل كاردينال غير متناهٍ عدد ترتيبي حدي.
+\end{cor}
+
+\begin{proof}
+ليكن~$\alpha$ عددًا ترتيبيًا خلفيًا غير متناه، ولتكن
+$\alpha = \beta \ordplus 1$ لبعض~$\beta$. ولو كان~$\beta\in\omega$،
+لكان~$\beta\ordplus 1\in\omega$، لأن~$\omega$ مغلقة تحت عملية الخلف؛
+وهذا يخالف كون~$\alpha$ غير متناه. فـ$\beta$ غير متناه أيضًا، ومن
+\olref[ord-arithmetic][using-addition]{ordinfinitycharacter} ينتج
+$\cardeq{\beta}{\beta \ordplus 1}$. وعندئذ
+$\card{\beta} = \card{\beta\ordplus 1} = \card{\alpha}$ بمقتضى
+\olref[cardinals][cardsasords]{lem:CardinalsBehaveRight}، فيلزم
+$\alpha \neq \card{\alpha}$.
+% تصحيح مصدر (0584-I1): ثبت لا تناهي beta بإغلاق omega تحت الخلف بدل الإحالة غير الكافية.
+\end{proof}
+
+وقد سبق في~\olref[sfr][siz][enm-alt]{defn:enumerable} التمييز بين
+المجموعات غير المتناهية !!{enumerable} و!!{nonenumerable}. ويؤدي ذلك
+التعريف إلى القضية الآتية.
+
+\begin{prop}
+$A$ هي !!{enumerable} إذا وفقط إذا كان~$\card{A} \leq \omega$، و$A$
+هي !!{nonenumerable} إذا وفقط إذا كان~$\omega < \card{A}$.
+\end{prop}
+
+\begin{proof}
+الادعاءان متكافئان بالتثليث؛ فيكفي إثبات أن~$A$ هي !!{enumerable}
+إذا وفقط إذا كان~$\card{A} \leq \omega$. فأما جهة
+\emph{اليمين إلى اليسار}، فإذا كان~$\card{A} \leq \omega$، كان
+$\cardle{A}{\omega}$ بمقتضى
+\olref[cardinals][cardsasords]{lem:CardinalsBehaveRight}
+و\olref{omegaisacardinal}. وأما جهة \emph{اليسار إلى اليمين}،
+فافترض أن~$A$ هي !!{enumerable}. وعندئذ يحصر
+\olref[sfr][siz][enm-alt]{defn:enumerable} الأمر في ثلاث حالات:
+\begin{enumerate}
+	\item إذا كان~$A = \emptyset$، فإن~$\card{A} = 0 \in \omega$، بحسب
+	\olref{naturalsarecardinals} و
+	\olref[cardinals][cardsasords]{lem:CardinalsBehaveRight}.
+	\item إذا كان~$\cardeq{n}{A}$، فإن~$\card{A} = n \in \omega$، بحسب
+	\olref{naturalsarecardinals} و
+	\olref[cardinals][cardsasords]{lem:CardinalsBehaveRight}.
+	\item إذا كان~$\cardeq{\omega}{A}$، فإن~$\card{A} = \omega$، بحسب
+	\olref{omegaisacardinal}.
+\end{enumerate}
+وفي كل حالة إذن~$\card{A} \leq \omega$.
+\end{proof}
+\noindent
+فللعدد~$\omega$ منزلة خاصة؛ فإن الأعداد الترتيبية القابلة للعد كثيرة،
+ولكن:
+
+\begin{cor}
+$\omega$ هو الكاردينال غير المتناهي الوحيد الذي هو !!{enumerable}.
+\end{cor}
+
+\begin{proof}
+ليكن~$\cardfont{a}$ كاردينالًا غير متناه هو !!a{enumerable}. فمن عدم
+تناهي~$\cardfont{a}$ يلزم~$\omega \leq \cardfont{a}$، ولما كان
+$\cardfont{a}$ كاردينالًا !!a{enumerable} لزم
+$\cardfont{a} = \card{\cardfont{a}} \leq \omega$. فبالتثليث
+$\cardfont{a} = \omega$.
+\end{proof}
+
+ولا ريب في أن الكاردينالات غير متناهية العدد. وقد يسأل سائل:
+\emph{كم كاردينالًا يوجد؟} والنتائج التالية تدعونا إلى إعادة النظر
+في صورة السؤال.
+
+\begin{prop}\ollabel{unioncardinalscardinal}
+إذا كان كل عنصر من~$X$ كاردينالًا، فإن~$\bigcup X$ كاردينال.
+\end{prop}
+
+\begin{proof}
+من اليسير أن~$\bigcup X$ عدد ترتيبي. خذ عددًا ترتيبيًا
+$\alpha \in \bigcup X$؛ فيلزم~$\alpha \in \cardfont{b} \in X$
+لبعض الكاردينال~$\cardfont{b}$. ولأن~$\cardfont{b}$ كاردينال،
+كان~$\cardless{\alpha}{\cardfont{b}}$. ولأن
+$\cardfont{b} \subseteq \bigcup X$، كان
+$\cardle{\cardfont{b}}{\bigcup X}$؛ ومن ثم
+$\cardneq{\alpha}{\bigcup X}$. وإذا عممنا ذلك ثبت أن~$\bigcup X$
+كاردينال.
+\end{proof}
+
+\begin{thm}\ollabel{lem:NoLargestCardinal}
+لا يوجد كاردينال أكبر.
+\end{thm}
+
+\begin{proof}
+لكل كاردينال~$\cardfont{a}$، توجب مبرهنة كانتور
+(\olref[sfr][siz][car]{thm:cantor}) مع
+\olref[cardinals][cardsasords]{lem:CardinalsExist} أن
+$\cardfont{a} < \card{\Pow{\cardfont{a}}}$.
+\end{proof}
+
+\begin{thm}
+لا توجد مجموعة جميع الكاردينالات.
+\end{thm}
+
+\begin{proof}
+افترض، طلبًا للمحال، أن
+$C = \Setabs{\cardfont{a}}{\cardfont{a} \text{ كاردينال}}$. يكون
+$\bigcup C$ كاردينالًا بـ\olref{unioncardinalscardinal}. ومن
+\olref{lem:NoLargestCardinal} يوجد كاردينال
+$\cardfont{b} > \bigcup C$. غير أن التعريف يعطي
+$\cardfont{b} \in C$، ومنه~$\cardfont{b} \subseteq \bigcup{C}$،
+ثم~$\cardfont{b} \leq \bigcup C$؛ وهذا تناقض.
+\end{proof}
+
+وقارن هذه الحجة بمفارقة راسل ومفارقة بورالي--فورتي كلتيهما.
+
+\end{document}

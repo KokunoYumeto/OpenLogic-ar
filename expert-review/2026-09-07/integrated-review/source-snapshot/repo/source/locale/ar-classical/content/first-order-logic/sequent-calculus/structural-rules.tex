@@ -1,0 +1,74 @@
+% Part: first-order-logic
+% Chapter: sequent-calculus
+% Section: structural-rules
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{seq}{srl}}
+      {\olfileid{pl}{seq}{srl}}
+
+\olsection{القواعد البنيوية}
+
+لا غنى كذلك عن قواعد لتغيير مواضع ال!!{sentence}s في جانبي التتابعية. فإن القاعدة المنطقية لا تعمل إلا إذا كانت ال!!{sentence}s المقصودة في أقصى اليمين أو أقصى اليسار؛ فلا بد من «التبادل» لنقل ال!!{sentence}s إلى مواضع العمل.
+وقد نحتاج أيضًا إلى جمع !!{sentence}s متطابقتين في واحدة، أو زيادة
+!!a{sentence} في أحد الجانبين.
+
+\subsection{الإضعاف}
+
+\begin{defish}
+\Axiom$ \Gamma \fCenter \Delta $
+\RightLabel{\LeftR{\Weakening}}
+\UnaryInf$ !A, \Gamma \fCenter \Delta$
+\DisplayProof
+\hfill
+\Axiom$ \Gamma \fCenter \Delta$
+\RightLabel{\RightR{\Weakening}}
+\UnaryInf$ \Gamma \fCenter \Delta, !A$
+\DisplayProof
+\end{defish}
+
+\subsection{الانكماش}
+
+\begin{defish}
+\Axiom$ !A, !A, \Gamma \fCenter \Delta $
+\RightLabel{\LeftR{\Contraction}}
+\UnaryInf$ !A, \Gamma \fCenter \Delta$
+\DisplayProof
+\hfill
+\Axiom$ \Gamma \fCenter \Delta, !A, !A$
+\RightLabel{\RightR{\Contraction}}
+\UnaryInf$ \Gamma \fCenter \Delta, !A$
+\DisplayProof
+\end{defish}
+
+\subsection{التبادل}
+
+\begin{defish}
+\Axiom$ \Gamma, !A, !B, \Pi \fCenter \Delta $
+\RightLabel{\LeftR{\Exchange}}
+\UnaryInf$ \Gamma, !B, !A, \Pi \fCenter \Delta$
+\DisplayProof
+\hfill
+\Axiom$ \Gamma \fCenter \Delta, !A, !B, \Lambda$
+\RightLabel{\RightR{\Exchange}}
+\UnaryInf$ \Gamma \fCenter \Delta, !B, !A, \Lambda$
+\DisplayProof
+\end{defish}
+
+وقد يُكتفى بخطَّي استدلال للدلالة على سلسلة من تطبيقات الإضعاف والانكماش والتبادل.
+
+وأما «القطع»، وهو القاعدة الآتية، فليس مما يتوقف عليه الحساب في المعنى الدقيق؛ غير أنه ييسّر إعادة استعمال ال!!{derivation}s وضم بعضها إلى بعض تيسيرًا كبيرًا.
+\begin{defish}
+\[
+\Axiom$ \Gamma \fCenter \Delta, !A$
+\Axiom$ !A, \Pi \fCenter \Lambda $
+\RightLabel{\Cut}
+\BinaryInf$ \Gamma, \Pi \fCenter \Delta, \Lambda$
+\DisplayProof
+\]
+\end{defish}
+
+\end{document}

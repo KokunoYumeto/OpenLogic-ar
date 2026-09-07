@@ -1,0 +1,97 @@
+% Part: propositional-logic
+% Chapter: syntax-and-semantics
+% Section: semantic-notions
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pl}{syn}{sem}
+
+\olsection{المفاهيم الدلالية}
+
+نعرّف المفاهيم الدلالية الآتية:
+
+\begin{defn}
+\begin{enumerate}
+\item تكون !!^a{formula}~$!A$ \emph{قابلةً للإرضاء} إذا وجد
+  تقييم~$\pAssign{v}$ يحقق $\pSat{v}{!A}$؛ وتكون
+  \emph{غير قابلة للإرضاء} إذا لم يوجد تقييم~$\pAssign{v}$ يحقق
+  $\pSat{v}{!A}$؛
+\item تكون !!^a{formula}~$!A$ \emph{تحصيلَ حاصل} إذا تحقق
+  $\pSat{v}{!A}$ لجميع !!{valuation}s~$\pAssign{v}$؛
+\item تكون !!^a{formula}~$!A$ \emph{عارضةً} إذا كانت قابلةً للإرضاء
+  ولم تكن تحصيلَ حاصل؛
+\item إذا كانت $\Gamma$ مجموعةً من !!{formula}s، فإن $\Gamma \Entails !A$
+  (أي «$\Gamma$ تستلزم~$!A$») إذا وفقط إذا تحقق $\pSat{v}{!A}$ لكل
+  !!{valuation}~$\pAssign{v}$ يحقق $\pSat{v}{\Gamma}$.
+\item إذا كانت $\Gamma$ مجموعةً من !!{formula}s، فإن $\Gamma$
+  \emph{قابلة للإرضاء} إذا وجد !!a{valuation}~$\pAssign{v}$ يحقق
+  $\pSat{v}{\Gamma}$، وتكون $\Gamma$
+  \emph{غير قابلة للإرضاء} فيما عدا ذلك.
+\end{enumerate}
+\end{defn}
+
+\begin{prob}
+ حدّد لكل واحدة من !!{formula}s الأربع الآتية ما إذا كانت
+ (أ)~قابلةً للإرضاء، و(ب)~تحصيلَ حاصل، و(ج)~عارضةً.
+\begin{enumerate}
+  \item \( ( \Obj p_0 \lif ( \lnot \Obj p_1 \lif \lnot \Obj p_0 ) ) \).
+  \item \( ( ( \Obj p_0 \land \lnot \Obj p_1 ) \lif ( \lnot \Obj p_0 \land \Obj p_2 )) \liff ( ( \Obj p_2 \lif \Obj p_0 ) \lif ( \Obj p_0 \lif \Obj p_1 )) \).
+  \item \( ( \Obj p_0 \liff \Obj p_1 ) \lif ( \Obj p_2 \liff \lnot \Obj p_1 ) \).
+  \item \( (( \Obj p_0 \liff ( \lnot \Obj p_1 \land \Obj p_2 )) \lor ( \Obj p_2 \lif ( \Obj p_0 \liff \Obj p_1 ))) \).
+\end{enumerate}
+\end{prob}
+
+\begin{prop}
+\ollabel{prop:semanticalfacts}
+\begin{enumerate}
+\item تكون $!A$ تحصيلَ حاصل إذا وفقط إذا كان
+  $\emptyset \Entails !A$؛
+\item إذا كان $\Gamma \Entails !A$ و$\Gamma \Entails !A \lif !B$، فإن
+  $\Gamma \Entails !B$؛
+\item إذا كانت $\Gamma$ قابلةً للإرضاء، فإن كل مجموعة جزئية منتهية
+  من~$\Gamma$ قابلةٌ للإرضاء أيضًا؛
+\item \ollabel{def:monotonicity} الرتابة: إذا كانت $\Gamma \subseteq \Delta$
+  وكان $\Gamma \Entails !A$، فإن $\Delta \Entails !A$ أيضًا؛
+\item \ollabel{def:Cut} التعدي: إذا كان $\Gamma \Entails !A$ و
+  $\Delta \cup \{ !A\} \Entails !B$، فإن $\Gamma \cup \Delta \Entails
+  !B$.
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+تمرين.
+\end{proof}
+
+\begin{prob}
+أثبت \olref[pl][syn][sem]{prop:semanticalfacts}
+\end{prob}
+
+\begin{prop}\ollabel{prop:entails-unsat}
+  $\Gamma \Entails !A$ إذا وفقط إذا كانت $\Gamma \cup \{\lnot !A\}$
+  غير قابلة للإرضاء.
+\end{prop}
+
+\begin{proof}
+تمرين.
+\end{proof}
+
+\begin{prob}
+أثبت \olref[pl][syn][sem]{prop:entails-unsat}
+\end{prob}
+
+\begin{thm}[مبرهنة الاستنتاج الدلالي]
+  \ollabel{thm:sem-deduction} $\Gamma \Entails !A \lif !B$ إذا وفقط
+  إذا كان $\Gamma \cup \{!A\} \Entails !B$.
+\end{thm}
+
+\begin{proof}
+تمرين.
+\end{proof}
+
+\begin{prob}
+أثبت \olref[pl][syn][sem]{thm:sem-deduction}
+\end{prob}
+
+\end{document}

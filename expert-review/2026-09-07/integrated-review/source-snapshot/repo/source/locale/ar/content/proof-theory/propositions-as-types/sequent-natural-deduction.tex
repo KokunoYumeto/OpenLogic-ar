@@ -1,0 +1,124 @@
+% part: intuitionistic-logic
+% chapter: propositions-as-types
+% section: sequent-natural-deduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{pty}{snd}
+
+\olsection{الاستنباط الطبيعي بالمتتاليات}
+
+نكتب~$\Gamma \Sequent !A$ إذا وُجد~!!{derivation} استنباط طبيعي تكون
+$\Gamma$ فروضه~!!{undischarged} و$!A$ نتيجته؛ ونكتب~$\Sequent !A$ إذا كانت
+$\Gamma$ خالية.
+
+ونكتب~$\Gamma,!A_1,\dots,!A_n$ بدل~$\Gamma\cup\{!A_1,\dots,!A_n\}$،
+و$\Gamma,\Delta$ بدل~$\Gamma\cup\Delta$.
+
+لاحظ أننا حين نحصل على~$\Gamma\Sequent !A\land !B$، أي حين يكون لدينا
+!!a{derivation} فروضه~$\Gamma$~!!{undischarged} وصيغته النهائية
+!!{formula}~$!A\land !B$، نستطيع بتطبيق~$\Elim{\land}$ في الأسفل الحصول على
+!!a{derivation} له الفروض~!!{undischarged} نفسها ونتيجته~$!A$. وبعبارة
+أخرى، إذا كان~$\Gamma\Sequent !A\land !B$، كان~$\Gamma\Sequent !A$.
+\begin{prooftree}
+  \Axiom$\Gamma \fCenter !A \land !B$
+  \RightLabel{$\Elim{\land}$}
+  \UnaryInf$\Gamma \fCenter !A$
+  \DisplayProof\qquad\bottomAlignProof
+  \Axiom$\Gamma \fCenter !A \land !B$
+  \RightLabel{$\Elim{\land}$}
+  \UnaryInf$\Gamma \fCenter !B$
+\end{prooftree}
+ويشير الوسم~$\Elim{\land}$ إلى الصلة بالقاعدة التي تحمل الاسم نفسه في
+الاستنباط الطبيعي.
+
+وبالمثل، افترض أن لدينا~$\Gamma,!A\Sequent !B$، أي لدينا~!!a{derivation}
+فروضه~$\Gamma,!A$~!!{undischarged} وصيغته النهائية~!!{formula}~$!B$. فإذا طبقنا قاعدة
+$\Intro{\lif}$ حصلنا على~!!a{derivation} تكون~$\Gamma$ فروضه
+!!{undischarged} و$!A\lif !B$ صيغته النهائية~!!{formula}، أي
+$\Gamma\Sequent !A\lif !B$. ولاحظ كيف جعل ذلك~!!{discharge} الفروض أكثر
+صراحة.
+\begin{prooftree}
+  \Axiom $\Gamma, !A \fCenter !B$
+  \RightLabel{$\Intro{\lif}$}
+  \UnaryInf $\Gamma \fCenter !A \lif !B$
+\end{prooftree}
+
+ويمكننا استخلاص نتائج من القواعد الأخرى بالطريقة نفسها، وترد مفصلةً هنا:
+\begin{gather*}
+  \Axiom $\Gamma \fCenter !A$
+  \Axiom $\Delta \fCenter !B$
+  \RightLabel{$\Intro{\land}$}
+  \BinaryInf $\Gamma,\Delta \fCenter !A \land !B$
+  \DisplayProof\\
+  \Axiom $\Gamma \fCenter !A \land !B$
+  \RightLabel{$\Elim{\land}_1$}
+  \UnaryInf $\Gamma \fCenter !A$
+  \DisplayProof
+  \qquad
+  \Axiom $\Gamma \fCenter !A \land !B$
+  \RightLabel{$\Elim{\land}_2$}
+  \UnaryInf $\Gamma \fCenter !B$
+  \DisplayProof
+  \\
+  \Axiom $\Gamma \fCenter !A$
+  \RightLabel{$\Intro{\lor}_1$}
+  \UnaryInf $\Gamma \fCenter !A \lor !B$
+  \DisplayProof\qquad
+  \Axiom $\Gamma \fCenter !B$
+  \RightLabel{$\Intro{\lor}_2$}
+  \UnaryInf $\Gamma \fCenter !A \lor !B$
+  \DisplayProof\\
+  \Axiom $\Gamma \fCenter !A \lor !B$
+  \Axiom $\Delta, !A \fCenter !C$
+  \Axiom $\Delta', !B \fCenter !C$
+  \RightLabel{$\Elim{\lor}$}
+  \TrinaryInf $\Gamma, \Delta, \Delta' \fCenter !C$
+  \DisplayProof
+  \\
+  \Axiom $\Gamma, !A \fCenter !B$
+  \RightLabel{$\Intro{\lif}$}
+  \UnaryInf $\Gamma \fCenter !A \lif !B$
+  \DisplayProof
+  \qquad
+  \Axiom $\Delta \fCenter !A \lif !B$
+  \Axiom $\Gamma \fCenter !A$
+  \RightLabel{$\Elim{\lif}$}
+  \BinaryInf $\Gamma, \Delta \fCenter !B$
+  \DisplayProof
+  \\
+  \Axiom $\Gamma \fCenter \lfalse$
+  \RightLabel{$\FalseInt$}
+  \UnaryInf $\Gamma \fCenter !A$
+  \DisplayProof
+\end{gather*}
+
+وكل فرض بمفرده~!!a{derivation} لـ~$!A$ من~$!A$؛ أي إن لدينا دائمًا
+$!A\Sequent !A$.
+
+\begin{prooftree}
+  \AxiomC{$ $}
+  \UnaryInfC{$!A \fCenter !A$}
+\end{prooftree}
+
+يمكن اتخاذ هذه القواعد مجتمعةً حسابًا لما يوجد من~!!{derivation}s الاستنباط
+الطبيعي. ويمكن أيضًا اتخاذها تنويعًا ترميزيًا للاستنباط الطبيعي تسجل فيه كل
+خطوة لا~!!{formula} الناتجة من~!!{derive} فحسب، بل كذلك الفروض
+!!{undischarged} التي انطلق منها ذلك~!!{derive}.
+
+\begin{prooftree}
+  \Axiom$!A \fCenter !A$
+  \UnaryInf$!A \fCenter !A \lor (!A \lif \lfalse)$
+  \Axiom$!B \fCenter !B$
+  \BinaryInf$!A,!B \fCenter \lfalse$
+  \UnaryInf$!B \fCenter !A \lif \lfalse$
+  \UnaryInf$!B \fCenter !A \lor (!A \lif \lfalse)$
+  \Axiom$!B \fCenter !B$
+  \BinaryInf$!B \fCenter \lfalse$
+  \UnaryInf$\fCenter !B \lif \lfalse$
+\end{prooftree}
+حيث~$!B$ اختصار لـ~$(!A\lor(!A\lif\lfalse))\lif\lfalse$.
+
+\end{document}

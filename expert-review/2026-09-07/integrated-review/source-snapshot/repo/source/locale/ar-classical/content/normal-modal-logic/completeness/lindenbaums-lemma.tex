@@ -1,0 +1,108 @@
+% Part: normal-modal-logic
+% Chapter: completeness
+% Section: lindenbaums-lemma
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{com}{lin}
+
+\olsection{مبرهنة ليندنباوم}
+
+نحتاج إلى نقل كل مجموعة $\Sigma$-متسقة من ال!!{formula}s إلى مجموعة
+$\Sigma$-متسقة \emph{تامة} تحتويها. وهذا ما تكفله مبرهنة ليندنباوم.
+وسنرى عند بناء النموذج القانوني أن لكل مجموعة $\Sigma$-متسقة تامة
+$\Delta$ عالمًا تصدق عنده ال!!{formula}s المنتمية إلى~$\Delta$ دون غيرها.
+فإذا ثبت التوسيع، ثبت أن كل مجموعة $\Sigma$-متسقة
+تصدق عند عالم من عوالم ذلك النموذج.
+
+\begin{thm}[مبرهنة ليندنباوم]\ollabel{thm:lindenbaum}
+  إذا كانت~$\Gamma$ $\Sigma$-متسقة، فثمة مجموعة $\Sigma$-متسقة تامة
+  $\Delta$ توسّع~$\Gamma$.
+\end{thm}
+
+\begin{proof}
+لتكن~$!A_0$، $!A_1$، \dots{} قائمة شاملة لجميع صيغ اللغة (ويجوز
+التكرار). فمثلًا، نبدأ بإدراج~$\Obj p_0$، وفي كل مرحلة~$n \ge 1$
+ندرج الصيغ المنتهية الكثيرة التي لا يتجاوز طولها~$n$ ولا تستعمل إلا
+المتغيرات~$\Obj p_0$، \dots،~$\Obj p_n$. ونعرّف مجموعات من
+ال!!{formula}s~$\Delta_n$ بالاستقراء على~$n$، ثم نضع
+$\Delta = \bigcup_n \Delta_n$. نضع أولًا~$\Delta_0 = \Gamma$.
+وبافتراض أن~$\Delta_n$ قد عُرّفت، نعرّف~$\Delta_{n+1}$ هكذا:
+\[
+\Delta_{n+1} =
+\begin{cases}
+  \Delta_n \cup \{!A_n\}, & \text{إذا كانت $\Delta_n \cup \{!A_n\}$
+    $\Sigma$-متسقة؛} \\
+  \Delta_n \cup \{\lnot !A_n\}, & \text{فيما عدا ذلك.}
+\end{cases}
+\]
+والآن لتكن~$\Delta = \bigcup_{n=0}^\infty \Delta_n$.
+
+ولنحقق الآن أن المجموعة~$\Delta$ المعرّفة بهذا البناء تستوفي المطلوب:
+أن يكون~$\Gamma \subseteq \Delta$، وأن تكون~$\Delta$ $\Sigma$-متسقة تامة.
+
+أما~$\Gamma \subseteq \Delta$ فظاهر، إذ~$\Delta_0 \subseteq
+\Delta$ بالبناء، و$\Delta_0 = \Gamma$.
+بل~$\Delta_n \subseteq \Delta$ لكل~$n$، لأن~$\Delta$ اتحاد المجموعات~$\Delta_n$.
+والمجموعات في هذا البناء متزايدة؛ فإننا نضيف في كل مرحلة !!a{formula}
+إلى ما سبق، فيكون $\Delta_n \subseteq \Delta_{n+1}$،
+وبتعدي~$\subseteq$ يكون $\Delta_n \subseteq \Delta_m$ إذا كان~$n \le m$.
+وأما التمام، فلأن كل مرحلة تضم إما~$!A_n$ وإما~$\lnot !A_n$،
+وقائمتنا لا تخلو من أي !!{formula}، وإن تكرر بعضها في~$!A_n$.
+فلكل~$!A$ يكون $!A \in \Delta$ أو~$\lnot !A \in \Delta$؛
+وذلك تمام~$\Delta$ بعينه.
+
+وأما اتساق~$\Delta$ بالنسبة إلى~$\Sigma$ فبرهانه من وجهين متعاقبين.
+نبين أولًا أن عدم اتساق~$\Delta$ مع~$\Sigma$ يرجع إلى عدم اتساق
+إحدى المراحل~$\Delta_n$ مع~$\Sigma$؛ ثم نثبت أن كل~$\Delta_n$
+$\Sigma$-متسقة، فيمتنع عدم اتساق الاتحاد.
+
+لنفترض أن~$\Delta$ $\Sigma$-غير متسقة.
+إذن $\Delta \Proves[\Sigma] \lfalse$، أي توجد مقدمات متناهية
+$!A_1$، \dots،~$!A_k \in \Delta$ تحقق
+$\Sigma \Proves !A_1 \lif (!A_2 \lif \cdots (!A_k \lif
+\lfalse)\dots)$. وبما أن~$\Delta = \bigcup_{n=0}^\infty \Delta_n$،
+فكل~$!A_i \in \Delta_{n_i}$ لمرحلة ما~$n_i$.
+نأخذ~$n$ أكبر الفهارس التي احتجنا إليها؛ فإن خلا الاشتقاق من المقدمات
+كفت المرحلة الأولى. ولكون~$n_i \le n$ يلزم~$\Delta_{n_i} \subseteq \Delta_n$.
+فتجتمع جميع~$!A_i$ في~$\Delta_n$ واحدة،
+ويشهد الاشتقاق نفسه على $\Delta_n \Proves[\Sigma] \lfalse$.
+فتكون~$\Delta_n$ $\Sigma$-غير متسقة، كما أردنا.
+
+ثم نثبت اتساق كل~$\Delta_n$ بالنسبة إلى~$\Sigma$ بالاستقراء على~$n$.
+أما البداية فـ~$\Delta_0 = \Gamma$، وقد فرضنا اتساق~$\Gamma$
+بالنسبة إلى~$\Sigma$، فتم المطلوب عند~$n = 0$.
+وافرض ثبوته عند~$n$؛ أي اتساق~$\Delta_n$ بالنسبة إلى~$\Sigma$.
+بالتعريف، تكون~$\Delta_{n+1}$ هي
+$\Delta_n \cup \{!A_n\}$ إن كانت هذه $\Sigma$-متسقة،
+وتكون $\Delta_n \cup \{\lnot!A_n\}$ فيما عدا ذلك.
+ففي الحال الأولى ثبت اتساق~$\Delta_{n+1}$ بالنسبة إلى~$\Sigma$
+بنفس شرط الاختيار. وفي الأخرى نستعمل
+\olref[prf][con]{prop:consistencyfacts}\olref[prf][con]{prop:consistencyfacts-c}:
+إحدى المجموعتين $\Delta_n \cup \{!A_n\}$ و$\Delta_n \cup \{\lnot!A_n\}$
+متسقة؛ فإذا امتنع اتساق الأولى تعيّن اتساق الثانية.
+وعليه فـ~$\Delta_{n+1}$ متسقة في الحالين.
+\end{proof}
+
+\begin{cor}\ollabel{cor:provability-characterization}
+  $\Gamma \Proves[\Sigma] !A$ إذا وفقط إذا كان~$!A \in \Delta$ لكل
+  مجموعة $\Sigma$-متسقة تامة~$\Delta$ توسع~$\Gamma$ (بما في ذلك حالة
+  $\Gamma = \emptyset$، فنحصل عندئذ على توصيف آخر للنسق الجهوي
+  $\Sigma$).
+\end{cor}
+
+\begin{proof}
+  إذا كان~$\Gamma \Proves[\Sigma] !A$، وأخذنا~$\Delta$ مجموعة
+  $\Sigma$-متسقة تامة توسّع~$\Gamma$، امتنع أن يكون~$!A \notin \Delta$.
+  إذ يلزم حينئذ~$\lnot!A \in \Delta$ بالقصوية، ولدينا
+  $\Delta \Proves[\Sigma] !A$ بالرتابة، و
+  $\Delta \Proves[\Sigma] \lnot!A$ بالانعكاسية؛ فتبطل دعوى اتساق~$\Delta$.
+  وأما الاتجاه الآخر فنثبته بالمقابل. إذا كان~$\Gamma \Proves/[\Sigma] !A$،
+  كانت $\Gamma \cup \{\lnot!A\}$ $\Sigma$-متسقة.
+  فبمبرهنة ليندنباوم لها توسعة متسقة تامة~$\Delta$
+  تحتوي~$\Gamma \cup \{\lnot!A\}$؛ وباتساقها يكون $!A \notin \Delta$.
+\end{proof}
+
+\end{document}

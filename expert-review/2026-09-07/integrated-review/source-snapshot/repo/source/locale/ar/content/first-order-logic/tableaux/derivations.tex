@@ -1,0 +1,91 @@
+% Part: first-order-logic
+% Chapter: tableaux
+% Section: derivations
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{tab}{der}}
+      {\olfileid{pl}{tab}{der}}
+
+\olsection{\usetoken{P}{tableau}}
+
+\begin{explain}
+قلنا ما الافتراض، وقدمنا قواعد الاستدلال. ومنهما تتولد
+!!^{tableau}s استقرائيًا: فكل !!{tableau} إما أن يكون فرعًا واحدًا
+يتألف من افتراض واحد أو أكثر، وإما أن ينتج من !!a{tableau} بتطبيق إحدى
+قواعد الاستدلال على فرع.
+\end{explain}
+
+\begin{defn}[!!^{tableau}]
+!!^a{tableau} للافتراضات~$\sFmla{S_1}{!A_1}$، \dots،
+$\sFmla{S_n}{!A_n}$ (حيث يكون كل~$S_i$ إما~$\True$ أو~$\False$) شجرة
+منتهية من ال!!{signed formula}s تحقق الشروط الآتية:
+\begin{enumerate}
+\item تكون ال!!{signed formula}s العليا وعددها~$n$ في الشجرة هي
+  $\sFmla{S_i}{!A_i}$، واحدة تحت الأخرى.
+\item تنتج كل !!{signed formula} في الشجرة ليست من الافتراضات عن تطبيق
+  صحيح لقاعدة استدلال على !!a{signed formula} في الفرع فوقها.
+\end{enumerate}
+يكون فرع !!a{tableau} \emph{مغلقًا} إذا وفقط إذا احتوى على كل من
+$\sFmla{\True}{!A}$ و$\sFmla{\False}{!A}$، ويكون \emph{مفتوحًا} فيما
+عدا ذلك. ويكون !!^a{tableau} كل فرع فيه مغلقًا \emph{!!{tableau}
+مغلقًا} (لمجموعة افتراضاته). وإذا لم يكن !!a{tableau} مغلقًا، أي إذا
+احتوى على فرع مفتوح واحد على الأقل، كان \emph{مفتوحًا}.
+\end{defn}
+
+\begin{ex}
+  كل مجموعة افتراضات بمفردها !!a{tableau}، لكنها لن تكون مغلقة بوجه
+  عام. (ومن الواضح أنها لا تكون مغلقة إلا إذا احتوت الافتراضات أصلًا
+  على زوج من ال!!{signed formula}s~$\sFmla{\True}{!A}$
+  و$\sFmla{\False}{!A}$.)
+
+  يمكننا أن نحصل من !!a{tableau} (مفتوح أو مغلق) على جدول جديد أكبر
+  بتطبيق إحدى قواعد الاستدلال على !!a{signed formula}
+  $\sFmla{S}{!A}$ فيه. وستلحق القاعدة !!{signed formula}s واحدة أو أكثر
+  بنهاية كل فرع يحتوي على ورود~$\sFmla{S}{!A}$ الذي نطبق عليه القاعدة.
+
+  اعتبر مثلًا الافتراض~$\sFmla{\True}{!A \land \lnot !A}$. وفيما يأتي
+  ال!!{tableau} (المفتوح) الذي يتألف من ذلك الافتراض وحده:
+  \begin{center}
+    \begin{tableau}{}
+      [\sFmla{\True}{\formula{A} \land \lnot \formula{A}}, just=\TAss]
+    \end{tableau}{}
+  \end{center}
+  ونحصل منه على !!{tableau} جديد بتطبيق قاعدة~$\TRule{\True}{\land}$
+  على الافتراض. وتتيح لنا تلك القاعدة إضافة سطرين جديدين إلى
+  ال!!{tableau}، هما~$\sFmla{\True}{!A}$ و
+  $\sFmla{\True}{\lnot !A}$:
+  \begin{center}
+    \begin{tableau}{}
+      [\sFmla{\True}{\formula{A} \land \lnot \formula{A}}, just=\TAss
+        [\sFmla{\True}{\formula{A}}, just={\TRule{\True}{\land}[1]},
+          [\sFmla{\True}{\lnot \formula{A}}, just={\TRule{\True}{\land}[1]}
+          ]
+        ]
+      ]
+    \end{tableau}{}
+  \end{center}
+  عندما نكتب ال!!{tableau}s، نسجل القواعد التي طبقناها على اليمين
+  (فمثلًا، تعني~$\TRule{\True}{\land} 1$ أن ال!!{signed formula} في ذلك
+  السطر ناتجة عن تطبيق قاعدة~$\TRule{\True}{\land}$ على ال!!{signed formula}
+  في السطر~$1$). ويحتوي هذا ال!!{tableau} الجديد الآن على
+  !!{signed formula}s إضافية، لكن لا يمكننا تطبيق قاعدة إلا على واحدة
+  منها ($\sFmla{\True}{\lnot !A}$)، وهي في هذه الحالة قاعدة
+  $\TRule{\True}{\lnot}$. وينتج من ذلك ال!!{tableau} المغلق الآتي:
+  \begin{center}
+    \begin{tableau}{}
+      [\sFmla{\True}{\formula{A} \land \lnot \formula{A}}, just=\TAss
+        [\sFmla{\True}{\formula{A}}, just={\TRule{\True}{\land}[1]}
+          [\sFmla{\True}{\lnot \formula{A}}, just={\TRule{\True}{\land}[1]}
+            [\sFmla{\False}{\formula{A}}, just={\TRule{\True}{\lnot}[3]}, close]
+          ]
+        ]
+      ]
+    \end{tableau}{}
+  \end{center}
+\end{ex}
+
+\end{document}

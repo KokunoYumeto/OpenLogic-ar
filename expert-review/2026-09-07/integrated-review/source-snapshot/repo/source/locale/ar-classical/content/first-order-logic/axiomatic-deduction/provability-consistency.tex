@@ -1,0 +1,95 @@
+% Part: first-order-logic
+% Chapter: axiomatic-deduction
+% Section: provability-consistency
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{axd}{prv}}
+      {\olfileid{pl}{axd}{prv}}
+
+\olsection{\usetoken{S}{derivability} والاتساق}
+
+نثبت في هذا الموضع خصائص لعلاقة !!{derivability}، لها شأنها في نفسها،
+كما نحتاج إلى كل واحدة منها في برهان مبرهنة الاكتمال.
+
+\begin{prop}\ollabel{prop:provability-contr}
+  إذا كان $\Gamma \Proves !A$ وكانت $\Gamma \cup \{!A\}$ غير متسقة،
+  فإن $\Gamma$ غير متسقة.
+\end{prop}
+
+\begin{proof}
+  من عدم اتساق~$\Gamma \cup \{!A\}$ يلزم~$\Gamma \cup \{!A\}
+  \Proves \lfalse$. وبالانعكاسية \olref[ptn]{prop:reflexivity}
+  لدينا~$\Gamma
+  \Proves !B$ لكل~$!B \in \Gamma$. ومع~$\Gamma \Proves !A$
+  المفروض نحصل على~$\Gamma \Proves !B$ لكل~$!B \in \Gamma \cup
+  \{!A\}$. فتعطينا \olref[ptn]{prop:transitivity}~$\Gamma \Proves
+  \lfalse$، وهو عدم اتساق~$\Gamma$.
+\end{proof}
+
+\begin{prop}
+\ollabel{prop:prov-incons}
+$\Gamma \Proves !A$ إذا وفقط إذا كانت $\Gamma \cup \{\lnot !A\}$ غير متسقة.
+\end{prop}
+
+\begin{proof}
+أما إذا كان~$\Gamma \Proves !A$، فإن~$\Gamma \cup \{\lnot !A\}
+\Proves !A$ بالرتابة \olref[ptn]{prop:monotonicity}.
+وكذلك~$\Gamma \cup
+\{\lnot !A\} \Proves \lnot !A$ بالانعكاسية \olref[ptn]{prop:reflexivity}.
+ثم نأخذ~$\Proves \lnot !A \lif (!A \lif \lfalse)$ من
+\olref[prp]{ax:lnot2}، ونجري \olref[ded]{prop:mp} مرتين،
+فيحصل~$\Gamma \cup \{\lnot !A\} \Proves \lfalse$.
+
+وأما إذا كانت~$\Gamma \cup \{\lnot !A\}$ غير متسقة، فلدينا~$\Gamma
+\cup \{\lnot !A\} \Proves \lfalse$، وبمبرهنة الاستنباط~$\Gamma
+\Proves \lnot !A \lif \lfalse$. ونأخذ~$\Gamma \Proves (\lnot !A
+\lif \lfalse) \lif \lnot\lnot !A$ من \olref[prp]{ax:lfalse2}،
+فتنتج~$\Gamma \Proves \lnot\lnot !A$ بـ\olref[ded]{prop:mp}.
+ومع~$\Gamma \Proves \lnot\lnot !A \lif !A$ (\olref[prp]{ax:dne})
+نحصل على~$\Gamma \Proves !A$ بإعادة \olref[ded]{prop:mp}.
+\end{proof}
+
+\begin{prob}
+أثبت أن $\Gamma \Proves \lnot !A$ إذا وفقط إذا كانت
+$\Gamma \cup \{!A\}$ غير متسقة.
+\end{prob}
+
+\begin{prop}\ollabel{prop:explicit-inc}
+  إذا كان $\Gamma \Proves !A$ و$\lnot !A \in \Gamma$، فإن $\Gamma$
+  غير متسقة.
+\end{prop}
+
+\begin{proof}
+  نأخذ~$\Gamma \Proves \lnot !A \lif (!A \lif \lfalse)$ من
+  \olref[prp]{ax:lnot2}، فنصل إلى~$\Gamma \Proves \lfalse$
+  بإجراء \olref[ded]{prop:mp} مرتين.
+\end{proof}
+
+
+\begin{prop}\ollabel{prop:provability-exhaustive}
+  إذا كانت كل من $\Gamma \cup \{!A\}$ و$\Gamma \cup \{\lnot !A\}$
+  غير متسقة، فإن $\Gamma$ غير متسقة.
+\end{prop}
+
+\begin{proof}
+تمرين.
+\end{proof}
+
+\tagprob{FOL}
+\begin{prob}
+  أثبت \olref[fol][axd][prv]{prop:provability-exhaustive}.
+\end{prob}
+\tagendprob
+
+\tagprob{notFOL}
+\begin{prob}
+  أثبت \olref[pl][axd][prv]{prop:provability-exhaustive}.
+\end{prob}
+\tagendprob
+
+
+\end{document}

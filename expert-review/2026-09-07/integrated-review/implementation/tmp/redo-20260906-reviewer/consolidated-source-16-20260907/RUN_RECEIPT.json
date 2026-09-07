@@ -1,0 +1,63 @@
+{
+  "schema": "openlogic-bounded-review-integration-v1",
+  "status": "FAIL",
+  "pid": 60196,
+  "process_create_time": 1788810576.7800434,
+  "cap_bytes": 1073741824,
+  "peak_observed_bytes": 865968128,
+  "steps": [
+    {
+      "name": "acceptance",
+      "status": "PASS",
+      "arguments": [
+        "build/generate_full_translation_acceptance_audit.py",
+        "--repo",
+        ".",
+        "--write",
+        "--json"
+      ],
+      "script_sha256": "419c069c71043dfd00c0d000b9d2de8dda25a8f946339b7e202b2f4efd1a8f2d",
+      "pid": 60264,
+      "process_create_time": 1788810576.9851863,
+      "exit_code": 0,
+      "log_sha256": "d6b9042a6110e8d6acdff3ee74d222621049471e35b950ab18133d0e1a474d4a"
+    },
+    {
+      "name": "reconciliation",
+      "status": "PASS",
+      "arguments": [
+        "build/finalize_classical_source_reconciliation.py",
+        "--repo",
+        ".",
+        "--write",
+        "--json"
+      ],
+      "script_sha256": "f610310fd8ec46582857ea4a08d5b4f7de2258321ffd39968bee2087091a06fb",
+      "pid": 57584,
+      "process_create_time": 1788810775.8927176,
+      "exit_code": 0,
+      "log_sha256": "7abcba2a90f347023b5765e5164658812c2818176ad8b6f7584fd76b3313debb"
+    },
+    {
+      "name": "source-readback-replay",
+      "status": "PASS",
+      "arguments": [
+        "-c",
+        "from pathlib import Path; import json; from build import finalize_classical_source_reconciliation as f; r=Path('.').resolve(); o,s=f.derive(r,r/'evidence/classical/SOURCE_RECONCILIATION_METADATA_20260905.json'); bad=[p for p,b in o.items() if (r/p).read_bytes()!=b]; print(json.dumps({'status':'FAIL' if bad else 'PASS','output_count':len(o),'mismatches':bad,'snapshot':s['source_snapshot_sha256']},indent=2)); raise SystemExit(bool(bad))"
+      ],
+      "pid": 57324,
+      "process_create_time": 1788810829.501134,
+      "exit_code": 0,
+      "log_sha256": "323850e7a770aed427d7d5a243ac5418e7215ada4d5a0858627fe28c98748eb4"
+    }
+  ],
+  "snapshot": "tmp/expert-index-consolidated-source-16-20260907",
+  "worker_sha256": "9c3b6ea79254504b6b735142d86079e07f39a45ca391628c512f6c416d1b5df9",
+  "scope": "Current source identity reconciliation and working reviewer-index generation; no final semantic/PDF/publication acceptance.",
+  "source_checkpoint": {
+    "closure_path": "evidence/classical/SOURCE_RECONCILIATION_CLOSURE_MANIFEST_20260905.json",
+    "closure_sha256": "8cf84ddffa2d862b0ff8181dd34e79559ceedabdf119d30c614253001b19a973"
+  },
+  "owned_pids_not_drained": [],
+  "failure": "Completed steps left captured descendants live"
+}

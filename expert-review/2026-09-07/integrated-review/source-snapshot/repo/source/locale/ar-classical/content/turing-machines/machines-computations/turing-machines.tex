@@ -1,0 +1,43 @@
+% Part: turing-machines
+% Chapter: machines-computations
+% Section: turing-machines
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{tur}{mac}{tur}
+\olsection{آلات تورنغ}
+
+\begin{explain}
+قد يبدو التعريف الصوري لآلة تورنغ شديد التجريد، وهو في حقيقته يسير؛ إذ يجمع في بنية رياضية واحدة ما يتوقف عليه عملها: أولًا، الحالات الممكنة؛ وثانيًا، رموز الشريط المسموح بها؛ وثالثًا، الحالة الابتدائية؛ ورابعًا، تعليمات الآلة.
+\end{explain}
+
+\begin{defn}[آلة تورنغ]
+\emph{آلة تورنغ} $M$ رباعية $\langle Q,\Sigma,q_0,\delta\rangle$ عناصرها:
+\begin{enumerate}
+\item مجموعة \emph{حالات}~$Q$ منتهية؛
+\item \emph{أبجدية} منتهية $\Sigma$ فيها $\TMendtape$ و$\TMblank$؛
+\item \emph{حالة ابتدائية}~$q_0 \in Q$؛
+\item \emph{مجموعة تعليمات} منتهية~$\delta\colon Q \times \Sigma
+  \pto Q \times \Sigma \times \{\TMleft,\TMright,\TMstay\}$.
+\end{enumerate}
+والدالة الجزئية~$\delta$ هي أيضًا \emph{دالة الانتقال} للآلة~$M$.
+\end{defn}
+
+\begin{explain}
+شريطنا لا يمتد إلى غير نهاية إلا في جهة واحدة. ولذلك نخص $\TMendtape$ بعلامة الطرف الأيسر، لتعرف البرامج متى تقارب الخروج من الشريط. وكان يمكن اشتراط ألا يكتب فوق هذه العلامة أبدًا، أي اشتراط $\delta(q,\TMendtape)=\tuple{q',\TMendtape,D}$ متى كانت $\delta(q,\TMendtape)$ معرفة. وقد أخذت بهذا كتب، ولسنا نأخذ به. فمن أراد حفظ $\TMendtape$ أمكنه مراعاة ذلك عند بناء آلته؛ وربما كان في إجازة الكتابة فوقها تيسير لبعض الأبنية.
+\end{explain}
+
+\begin{ex}
+\emph{آلة الزوجية:} نعبر عنها صوريًّا بالرباعية $\tuple{Q,\Sigma,q_0,\delta}$، مع التعريفات
+\begin{align*}
+Q & = \{ q_0, q_1 \} \\
+\Sigma & = \{ \TMendtape, \TMblank, \TMstroke \}, \\
+\delta(q_0, \TMstroke) & = \tuple{q_1, \TMstroke, \TMright},\\
+\delta(q_1, \TMstroke) & = \tuple{q_0, \TMstroke, \TMright},\\
+\delta(q_1, \TMblank)  & = \tuple{q_1, \TMblank, \TMright}.
+\end{align*}
+\end{ex}
+
+\end{document}

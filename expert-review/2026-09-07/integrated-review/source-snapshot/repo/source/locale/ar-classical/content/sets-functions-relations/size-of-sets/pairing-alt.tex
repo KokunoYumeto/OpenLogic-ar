@@ -1,0 +1,109 @@
+% Part:sets-functions-relations
+% Chapter: size-of-sets
+% Section: pairing-alt
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid[ar]{sfr}{siz}{pai-alt}
+
+\olsection{دالة مزاوجة بديلة}
+
+\begin{explain}
+ولـ$\Nat^2$ تعدادات أخرى أيسر في استخراج المعكوس، منها هذا.
+خذ قائمة الصحيحات الموجبة، واجعل بإزاء كل عدد مكانًا خاليًا.
+ثم املأ الأمكنة تباعًا بالأزواج $\tuple{n,m}$ بهذه الصنعة:
+ابدأ بما أوله~$0$، أي $\tuple{0,m}$؛ وضع أولها $\tuple{0,0}$
+في أول خال، واترك التالي، ثم ضع الثاني $\tuple{0,1}$ في الخالي
+الذي بعده، واترك آخر، وهكذا. فتحصل بداية التعداد غير المكتملة:
+\[\small
+\begin{array}{@{}c c c c c c c c c c c@{}}
+\mathbf 1 & \mathbf 2 & \mathbf 3 & \mathbf 4 & \mathbf 5 & \mathbf 6 & \mathbf 7 & \mathbf 8 & \mathbf 9 & \mathbf{10} & \dots \\ \\
+\tuple{0,0} &  & \tuple{0,1} &  & \tuple{0,2} &  & \tuple{0,3} & & \tuple{0,4} &  & \dots \\
+\end{array}
+\]
+ثم افعل بالأزواج $\tuple{1,m}$ مثل ذلك في الأمكنة الباقية خالية،
+فتملأ واحدًا وتدع واحدًا:
+\[\small
+\begin{array}{@{}c c c c c c c c c c c@{}}
+\mathbf 1 & \mathbf 2 & \mathbf 3 & \mathbf 4 & \mathbf 5 & \mathbf 6 & \mathbf 7 & \mathbf 8 & \mathbf 9 & \mathbf{10} & \dots \\ \\
+\tuple{0,0} & \tuple{1,0} & \tuple{0,1} &  & \tuple{0,2} & \tuple{1,1} &
+\tuple{0,3} & & \tuple{0,4} &  \tuple{1,2} & \dots \\
+\end{array}
+\]
+ثم أدخل $\tuple{2,m}$ و$\tuple{3,m}$ وما بعدها على القياس نفسه؛
+فيصير أول التعداد المكتمل:
+\[\small
+\begin{array}{@{}cc c c c c c c c c c@{}}
+\mathbf 1 & \mathbf 2 & \mathbf 3 & \mathbf 4 & \mathbf 5 & \mathbf 6 & \mathbf 7 & \mathbf 8 & \mathbf 9 & \mathbf{10} & \dots \\ \\
+\tuple{0,0} & \tuple{1,0} & \tuple{0,1} & \tuple{2,0}  & \tuple{0,2} &
+\tuple{1,1} & \tuple{0,3} & \tuple{3,0}  & \tuple{0,4} &  \tuple{1,2} & \dots \\
+\end{array}
+\]
+\begin{editorial}
+\textbf{تنبيه تصحيحي على الأصل (OLSIZ-003).}
+كرر الأصل أسرة الأزواج $\tuple{2,m}$ في هذا الموضع؛ والصواب
+$\tuple{3,m}$ في المرة الثانية، كما يبيّنه الصف التالي من الجدول.
+\end{editorial}
+وترقيم خانات المصفوفة بهذا التعداد لا يسلك الخط المتعرج السابق،
+بل يعطي هذا الترتيب:
+\[
+\begin{array}{ c | c | c | c | c | c | c | c }
+& \mathbf 0 & \mathbf 1 & \mathbf 2 & \mathbf 3 & \mathbf 4 & \mathbf 5 & \dots \\
+\hline
+\mathbf 0 & 1 & 3 & 5 & 7 & 9 & 11 & \dots \\
+\hline
+\mathbf 1 & 2 & 6 & 10 & 14 & 18 & \dots & \dots \\
+\hline
+\mathbf 2 & 4 & 12 & 20 & 28 & \dots & \dots & \dots \\
+\hline
+\mathbf 3 & 8 & 24 & 40 & \dots & \dots & \dots & \dots \\
+\hline
+\mathbf 4 & 16 & 48 & \dots & \dots & \dots & \dots & \dots \\
+\hline
+\mathbf 5 & 32 & \dots & \dots & \dots & \dots & \dots & \dots \\
+\hline
+\vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \ddots\\
+\end{array}
+\]
+فأزواج الصف~$0$ مواضعها فردية: موضع $\tuple{0,m}$ هو $2m+1$.
+وأزواج الصف الثاني $\tuple{1,m}$ مواضعها ضعف الفردي، أي
+$2 \cdot (2m+1)$. وأزواج الثالث $\tuple{2,m}$ مواضعها أربعة
+أمثاله، أي $4 \cdot (2m+1)$؛ ثم على هذا القياس. وعوامل
+$(2m+1)$ في الصفوف، أعني $1$، $2$، $4$، $8$، \dots، قوى~$2$:
+$1= 2^0$، $2 = 2^1$، $4 = 2^2$، $8 = 2^3$، \dots\@
+والأس هو المركبة الأولى للزوج؛ فعامل $\tuple{n,m}$ هو $2^n$.
+فتكون الصيغة الجامعة $2^n \cdot (2m+1)$. غير أن هذه القاعدة
+تعطي صحيحات \emph{موجبة}؛ فـ$\tuple{0,0}$ رتبته~$1$.
+ولكي نبدأ بالرتبة~$0$ ننقص~$1$ من الحاصل، فنحصل على الآتي:
+\end{explain}
+
+\begin{ex}
+خذ الدالة $h\colon \Nat^2 \to \Nat$ ذات القاعدة
+\[
+h(n,m) = 2^n (2m+1) - 1
+\]
+فهذه دالة مزاوجة لأزواج الطبيعيّات~$\Nat^2$.
+\end{ex}
+
+\begin{explain}
+وعلى هذا، في التعداد الثاني لـ$\Nat^2$ يكون رمز الزوج
+$\tuple{0,0}$ هو $h(0,0) = 2^0(2\cdot 0+1) - 1 = 0$؛
+ورمز $\tuple{1,2}$ هو $2^{1} \cdot (2 \cdot 2 + 1) - 1 = 2
+\cdot 5 - 1 = 9$؛ ورمز $\tuple{2,6}$ هو $2^{2} \cdot (2
+\cdot 6 + 1) - 1 = 51$.
+\end{explain}
+
+وقد يكفي ترميز أزواج الطبيعيّات~$\Nat^2$، ولا يشترط الشمول.
+فمعكوسات هذه الترميزات تكون دوال جزئية فحسب.
+
+\begin{ex}
+خذ الدالة $j\colon \Nat^2 \to \Nat^+$ ذات القاعدة
+\[
+j(n,m) = 2^n3^m
+\]
+فهذه دالة !!a{injective} $\Nat^2 \to \Nat$.
+\end{ex}
+
+\end{document}

@@ -1,0 +1,69 @@
+% Part: many-valued-logic
+% Chapter: syntax-and-semantics
+% Section: semantic-notions
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mvl}{syn}{sem}
+
+\olsection{مفاهيم دلالية}
+
+إذا أعطينا منطقًا متعدد القيم~$\Log L$ بمصفوفته، أمكن أن ننقل إليه
+المفاهيم الدلالية المألوفة لـ~$\Log L$ على الوجه الآتي.
+
+\begin{defn}
+\begin{enumerate}
+\item تكون~!!^a{formula}~$!A$ \emph{قابلة للإشباع} إذا وجد
+  $\pAssign{v}$ يحقق~$\pSat{v}{!A}$؛ وتكون \emph{غير قابلة
+  للإشباع} إذا لم يوجد~$\pAssign{v}$ يحقق~$\pSat{v}{!A}$؛
+\item وتكون~!!^a{formula}~$!A$ \emph{تحصيلًا منطقيًا} إذا تحقق
+  $\pSat{v}{!A}$ لجميع~!!{valuation}s~$v$؛
+\item وإذا كانت~$\Gamma$ مجموعة~!!{formula}s، كان
+  $\Gamma \Entails !A$، أي «$\Gamma$ تستلزم~$!A$»، إذا وفقط إذا
+  تحقق~$\pSat{v}{!A}$ لكل~!!{valuation}~$\pAssign{v}$ يحقق
+  $\pSat{v}{\Gamma}$.
+\item وإذا كانت~$\Gamma$ مجموعة~!!{formula}s، كانت~$\Gamma$
+  \emph{قابلة للإشباع} إذا وجد~!!a{valuation}~$\pAssign{v}$ يحقق
+  $\pSat{v}{\Gamma}$؛ وإلا
+  كانت~$\Gamma$ \emph{غير قابلة للإشباع}.
+\end{enumerate}
+\end{defn}
+
+ولهذه المفاهيم جملة من الخواص التي عرفناها في المنطق الكلاسيكي:
+
+\begin{prop}
+\ollabel{prop:semanticalfacts}
+\begin{enumerate}
+\item تكون~$!A$ تحصيلًا منطقيًا إذا وفقط إذا كان
+  $\emptyset \Entails !A$؛
+\item إذا كانت~$\Gamma$ قابلة للإشباع، كانت كل مجموعة جزئية منتهية
+  من~$\Gamma$ قابلة للإشباع أيضًا؛
+\item\ollabel{def:monotonicity}%
+الرتابة: إذا كان~$\Gamma \subseteq \Delta$ و$\Gamma \Entails !A$،
+  كان~$\Delta \Entails !A$ أيضًا؛
+\item\ollabel{def:Cut}%
+التعدي: إذا كان~$\Gamma \Entails !A$ و
+  $\Delta \cup \{ !A\} \Entails !B$، كان
+  $\Gamma \cup \Delta \Entails !B$؛
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+يترك إثباتها تمرينًا.
+\end{proof}
+
+\begin{prob}
+أثبت \olref[mvl][syn][sem]{prop:semanticalfacts}.
+\end{prob}
+
+في المنطق الكلاسيكي صلات وثيقة بين الاستلزام والشرط. فمنها صحة
+\emph{قاعدة الفصل}: إذا كان~$\Gamma \Entails !A$ و
+$\Gamma \Entails !A \lif !B$، لزم~$\Gamma \Entails !B$.
+ومنها مبرهنة الاستنباط الدلالية التي تصل~$\Entails$ بـ~$\lif$:
+$\Gamma \Entails !A \lif !B$ إذا وفقط إذا كان
+$\Gamma \cup \{!A\} \Entails !B$. لكن هذه النتائج \emph{لا} تلزم
+في كل منطق متعدد القيم؛ إذ يتوقف صدقها على دالة الصدق~$\tf{\lif}$.
+
+\end{document}

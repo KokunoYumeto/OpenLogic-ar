@@ -1,0 +1,156 @@
+% Part: lambda-calculus
+% Chapter: church-rosser
+% Section: parallel-beta-reduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{cr}{pb}
+
+\olsection{اختزال~$\beta$ المتوازي}
+
+نعرّف الآن \emph{اختزال~$\beta$ المتوازي}، ثم نقيم البرهان على أنه ذو خاصية تشيرش--روسر.
+
+\begin{defn}[اختزال~$\beta$ المتوازي، $\bredpar$] \ollabel{defn:bredpar}
+  للاختزال المتوازي ($\bredpar$) على الحدود التعريف الاستقرائي التالي:
+  \begin{enumerate}
+    \item \ollabel{defn:bredpar1} $x \bredpar x$.
+    \item \ollabel{defn:bredpar2} من~$N \bredpar N'$ يلزم
+      $\lambd[x][N] \bredpar \lambd[x][N']$.
+    \item \ollabel{defn:bredpar3} من~$P \bredpar P'$ و
+      $Q \bredpar Q'$ يلزم~$PQ \bredpar P'Q'$.
+    \item \ollabel{defn:bredpar4} من~$N \bredpar N'$ و
+      $Q \bredpar Q'$ يلزم
+      $(\lambd[x][N])Q \bredpar \Subst{N'}{Q'}{x}$.
+  \end{enumerate}
+\end{defn}
+
+يجوز في اختزال~$\beta$ المتوازي أن نقلّص أي عدد من مواضع الاختزال في خطوة واحدة.
+لكنه يخالف اختزال~$\beta$ في أن هذه الخطوة لا تتناول إلا مواضع الحد الأصلي،
+ولا تتناول ما ينشأ عنها من مواضع جديدة بعد اختزال~$\beta$ المتوازي.
+فالحد~$(\lambd[f][fx])(\lambd[y][y])$، مثلًا، لا ينتقل في خطوة متوازية إلا إلى نفسه أو إلى~$(\lambd[y][y])x$،
+ولا يبلغ~$x$ في تلك الخطوة. ومع أنه يختزل بحسب~$\beta$ إلى~$x$،
+فإن موضع هذا الاختزال لا يظهر إلا بعد خطوة من اختزال~$\beta$ المتوازي.
+فلا بد من خطوة ثانية من اختزال~$\beta$ المتوازي للوصول إلى~$x$.
+
+\begin{thm}\ollabel{thm:refl}
+  $M \bredpar M$.
+\end{thm}
+
+\begin{proof}
+  إثبات ذلك تمرين.
+\end{proof}
+
+\begin{prob}
+  أقم برهان \olref[lam][cr][pb]{thm:refl}.
+\end{prob}
+
+\begin{defn}[التطوير الكامل بحسب~$\beta$]\ollabel{defn:bcd}
+  \emph{التطوير الكامل بحسب~$\beta$}، ورمزه $\bcd{M}$، للحد~$M$
+  يحدد استقرائيًا كما يلي:
+  \begin{align}
+    \bcd{x} &= x \ollabel{defn:bcd1} \\
+    \bcd{(\lambd[x][N])} &= \lambd[x][\bcd{N}] \ollabel{defn:bcd2}\\
+    \bcd{(PQ)} &= \bcd{P}\bcd{Q} && \text{إذا لم يكن~$P$ تجريد~$\lambd$}
+    \ollabel{defn:bcd3} \\
+    \bcd{((\lambd[x][N])Q)} &= \Subst{\bcd{N}}{\bcd{Q}}{x} \ollabel{defn:bcd4}
+  \end{align}
+\end{defn}
+
+التطوير الكامل بحسب~$\beta$، كما يدل الاسم، اختزال متواز يستوفي جميع المواضع.
+ففي اختزال~$\beta$ المتوازي يجوز أن نترك بعض مواضع الاختزال،
+وأما التطوير الكامل فلا يترك منها شيئًا.
+ولذلك يكون التطوير الكامل للحد~$(\lambd[f][fx])(\lambd[y][y])$ هو~$(\lambd[y][y])x$، ولا يكون الحد نفسه.
+
+\begin{editorial}
+  يبقى في هذا التعريف أن طريقة تعريف الدوال عوديًا على حدود~$\lambd$ لم تعرض بعد.
+  وستستدرك هذه المسألة فيما بعد.
+\end{editorial}
+
+\begin{lem}\ollabel{lem:comp}
+  من~$M \bredpar M'$ و$R \bredpar R'$ يلزم~$\Subst{M}{R}{y}
+  \bredpar \Subst{M'}{R'}{y}$.
+\end{lem}
+
+\begin{proof}
+  نستقرئ~!!{derivation} العبارة~$M \bredpar M'$.
+  وحيث تدعو الحاجة نغير أسماء الممثلين بتحويل~$\alpha$ قبل تطبيق حالات الإحلال،
+  بحيث يحقق متغير التجريد~$x \ne y$، ولا يقع~$x$ حرًا في~$R$ ولا في~$R'$.
+  \begin{enumerate}
+    \item إذا كانت الخطوة الأخيرة \olref{defn:bredpar1}، فالإثبات تمرين.
+    \item إذا كانت الخطوة الأخيرة \olref{defn:bredpar2}، كان~$M$
+      هو~$\lambd[x][N]$، و$M'$ هو~$\lambd[x][N']$، مع
+      $N \bredpar N'$. فالمطلوب
+      $\Subst{(\lambd[x][N])}{R}{y} \bredpar
+      \Subst{(\lambd[x][N'])}{R'}{y}$، أو، بعبارة أخرى،
+      $\lambd[x][\Subst{N}{R}{y}] \bredpar
+      \lambd[x][\Subst{N'}{R'}{y}]$. وهذا يلزم من
+      \olref{defn:bredpar2} وفرض الاستقراء مباشرة.
+    \item إذا كانت الخطوة الأخيرة \olref{defn:bredpar3}، فالإثبات تمرين.
+    \item إذا كانت الخطوة الأخيرة \olref{defn:bredpar4}، كان~$M$
+      هو~$(\lambd[x][N])Q$، و$M'$ هو~$\Subst{N'}{Q'}{x}$. فالمطلوب
+      $\Subst{((\lambd[x][N])Q)}{R}{y} \bredpar
+      \Subst{\Subst{N'}{Q'}{x}}{R'}{y}$، أي
+      $(\lambd[x][\Subst{N}{R}{y}])\Subst{Q}{R}{y} \bredpar
+      \Subst{\Subst{N'}{R'}{y}}{\Subst{Q'}{R'}{y}}{x}$، وهو حاصل من
+      \olref{defn:bredpar4} وفرض الاستقراء.
+  \end{enumerate}
+\end{proof}
+
+\begin{prob}
+  أتمّ برهان \olref[lam][cr][pb]{lem:comp}.
+\end{prob}
+
+\begin{lem}\ollabel{lem:cont}
+  من~$M \bredpar M'$ يلزم~$M' \bredpar \bcd{M}$.
+\end{lem}
+\begin{proof}
+  نستقرئ~!!{derivation} العبارة~$M \bredpar M'$.
+  \begin{enumerate}
+    \item إذا كانت القاعدة الأخيرة \olref{defn:bredpar1}، فالإثبات تمرين.
+    \item إذا كانت القاعدة الأخيرة \olref{defn:bredpar2}، كان~$M$
+      هو~$\lambd[x][N]$، و$M'$ هو~$\lambd[x][N']$، مع
+      $N \bredpar N'$. ونطلب~$\lambd[x][N'] \bredpar
+      \bcd{(\lambd[x][N])}$، أي~$\lambd[x][N'] \bredpar
+      \lambd[x][\bcd{N}]$ بحسب \olref{defn:bcd2}.
+      ويحصل ذلك من \olref{defn:bredpar2} وفرض الاستقراء.
+    \item إذا كانت القاعدة الأخيرة \olref{defn:bredpar3}، كان~$M$ هو~$PQ$،
+      و$M'$ هو~$P'Q'$، لحدود~$P$ و$Q$ و$P'$ و$Q'$ تحقق
+      $P \bredpar P'$ و$Q \bredpar Q'$. ويفيد فرض الاستقراء
+      $P' \bredpar \bcd{P}$ و$Q' \bredpar \bcd{Q}$.
+      \begin{enumerate}
+        \item إن كان~$P$ هو~$\lambd[x][N]$ لبعض~$x$ و$N$،
+          فلا بد أن يكون~$P'$ هو~$\lambd[x][N']$ لبعض~$N'$ مع
+          $N \bredpar N'$. ومن فرض الاستقراء~$N' \bredpar \bcd{N}$
+          و$Q' \bredpar \bcd{Q}$، فينتج
+          $(\lambd[x][N'])Q' \bredpar
+          \Subst{\bcd{N}}{\bcd{Q}}{x}$ بالقاعدة \olref{defn:bredpar4}.
+        \item وإن لم يكن~$P$ تجريد~$\lambd$، حصلنا على
+          $P'Q' \bredpar \bcd{P}\bcd{Q}$ بالقاعدة \olref{defn:bredpar3}.
+          وطرفها الأيمن هو~$\bcd{PQ}$ بموجب \olref{defn:bcd3}.
+      \end{enumerate}
+    \item إذا كانت القاعدة الأخيرة \olref{defn:bredpar4}، كان~$M$ هو
+      $(\lambd[x][N])Q$، و$M'$ هو~$\Subst{N'}{Q'}{x}$ لبعض~$x$ و$N$
+      و$Q$ و$N'$ و$Q'$، مع~$N \bredpar N'$ و$Q \bredpar Q'$.
+      ومن فرض الاستقراء~$N' \bredpar \bcd{N}$ و
+      $Q' \bredpar \bcd{Q}$. فتفيد \olref{lem:comp}
+      $\Subst{N'}{Q'}{x} \bredpar \Subst{\bcd{N}}{\bcd{Q}}{x}$،
+      والطرف الأيمن هنا هو~$\bcd{((\lambd[x][N])Q)}$ نفسه.
+  \end{enumerate}
+\end{proof}
+
+\begin{prob}
+  أتمّ برهان \olref[lam][cr][pb]{lem:cont}.
+\end{prob}
+
+\begin{thm}\ollabel{thm:cr}
+  العلاقة~$\bredpar$ ذات خاصية تشيرش--روسر.
+\end{thm}
+
+\begin{proof}
+  هذه نتيجة مباشرة لـ\olref{lem:cont}.
+\end{proof}
+
+\end{document}
+

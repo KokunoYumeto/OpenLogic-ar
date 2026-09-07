@@ -1,0 +1,126 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{cardinals}{cardsasords}
+\olsection{الأعداد الكاردينالية بوصفها أعدادًا ترتيبية}
+
+في الواقع، ستستخدم نظريتنا في الأعداد الكاردينالية نظريتنا في الأعداد
+الترتيبية (من دون خجل). أي إننا سنعرّف الأعداد الكاردينالية بأنها
+أعداد ترتيبية معينة. وعلى وجه الخصوص، سنقدم التعريف الآتي:
+
+\begin{defn}\ollabel{defcardinalasordinal}
+إذا أمكن ترتيب~$A$ ترتيبًا جيدًا، فإن~$\card{A}$ هو أصغر عدد ترتيبي
+$\gamma$ بحيث~$\cardeq{A}{\gamma}$. ولأي عدد ترتيبي~$\gamma$، نقول
+إن~$\gamma$ \emph{عدد كاردينالي} إذا وفقط إذا كان
+$\gamma = \card{\gamma}$.
+\end{defn}
+
+استخدمنا للتو عبارة «يمكن ترتيب~$A$ ترتيبًا جيدًا». وكما هي الحال
+دائمًا تقريبًا في الرياضيات، فالتعبير الجهوي هنا مجرد وصف غير دقيق
+لادعاء وجودي: فالقول «يمكن ترتيب~$A$ ترتيبًا جيدًا» ليس إلا القول
+«توجد علاقة ترتب~$A$ ترتيبًا جيدًا».
+
+لكن في~\olref{defcardinalasordinal} مشكلة. نود أن يكون \emph{لكل}
+مجموعة حجم، أي أن توجد~$\card{A}$ لكل~$A$. غير أن التعريف الذي
+قدمناه للتو يبدأ بشرط: «\emph{إذا} أمكن ترتيب~$A$ ترتيبًا
+جيدًا\ldots». فإذا وجدت مجموعة~$A$ لا يمكن ترتيبها ترتيبًا جيدًا،
+أخفق تعريفنا ببساطة في تعريف شيء~$\card{A}$.
+
+ولذلك، كي نستخدم~\olref{defcardinalasordinal}، نحتاج إلى ضمان إمكان
+ترتيب كل مجموعة ترتيبًا جيدًا. لكن هذا الضمان، للأسف، غير متاح
+في~$\ZF$. ومن ثم، إذا أردنا استخدام~\olref{defcardinalasordinal}، فلا
+بديل من إضافة مسلّمة جديدة، مثل:
+\begin{axiom}[الترتيب الجيد]
+يمكن ترتيب كل مجموعة ترتيبًا جيدًا.
+\end{axiom}
+سنناقش في~\olref[choice][]{chap} ما إذا كانت مسلّمة الترتيب الجيد
+مقبولة. لكننا سنستخدمها بلا قيد من الآن فصاعدًا. وباستعمالها، يسهل
+إلى حد بعيد إثبات وجود الأعداد الكاردينالية (كما عُرّفت في
+\olref{defcardinalasordinal}) وحسن سلوكها:
+
+\begin{lem}\ollabel{lem:CardinalsExist}
+لكل مجموعة~$A$:
+\begin{enumerate}
+	\item\ollabel{cardaexists} توجد~$\card{A}$ وهي فريدة؛
+	\item\ollabel{cardaapprox} $\cardeq{\card{A}}{A}$؛
+	\item\ollabel{cardaidem} $\card{A}$ عدد كاردينالي، أي
+	$\card{A} = \card{\card{A}}$؛
+\end{enumerate}
+\end{lem}
+
+\begin{proof}
+ثبّت~$A$. بموجب الترتيب الجيد، يوجد ترتيب جيد~$\tuple{A, R}$. وبموجب
+\olref[ordinals][ordtype]{thmOrdinalRepresentation}، يكون
+$\tuple{A, R}$ متماثلًا مع عدد ترتيبي فريد~$\beta$. ومن ثم
+$\cardeq{A}{\beta}$. وبموجب الاستقراء المتناهي التجاوز، يوجد عدد
+ترتيبي~$\gamma$ فريد هو الأصغر بين الأعداد التي تحقق
+$\cardeq{A}{\gamma}$. وهكذا~$\card{A} = \gamma$، وهذا يثبت
+\olref{cardaexists} و\olref{cardaapprox}. ولإثبات
+\olref{cardaidem}، لاحظ أنه إذا كان~$\delta \in \gamma$، فإن
+$\cardless{\delta}{A}$ بحكم اختيارنا لـ$\gamma$، ومن ثم أيضًا
+$\cardless{\delta}{\gamma}$ لأن التساوي العددي علاقة تكافؤ
+(\olref[sfr][siz][equ]{equinumerosityisequi}). ولذلك
+$\gamma = \card{\gamma}$.
+%So, for reductio, suppose that there is some ordinal $\delta \in \gamma$ such that $\cardeq{\gamma}{\delta}$. Then, $\cardeq{\cardeq{A}{\gamma}}{\delta}$ so that $\cardeq{A}{\delta}$ by \olref[sfr][set][equ]{equinumerosityisequi}, which contradicts the choice of $\gamma$ as the least ordinal such that $\cardeq{A}{\gamma}$.
+\end{proof}
+
+تضمن النتيجة التالية مبدأ كانتور، بل وأكثر منه. (لاحظ أن الأعداد
+الكاردينالية ترث ترتيبها من الأعداد الترتيبية، أي إن
+$\cardfont{a} < \cardfont{b}$ إذا وفقط إذا كان
+$\cardfont{a} \in \cardfont{b}$. وسنستخدم في صياغة ذلك حروفًا قوطية
+للأشياء التي نعلم أنها أعداد كاردينالية. وهذا شائع إلى حد ما. ومن
+البدائل الشائعة استخدام الحروف اليونانية، لأن الأعداد الكاردينالية
+أعداد ترتيبية، لكن مع اختيارها من وسط الأبجدية، مثل:
+$\kappa, \lambda$.):
+\begin{lem}\ollabel{lem:CardinalsBehaveRight}
+لأي مجموعتين~$A$ و$B$:
+\begin{align*}
+	\cardeq{A}{B} &\text{ إذا وفقط إذا كان } \card{A} = \card{B}\\
+	\cardle{A}{B} &\text{ إذا وفقط إذا كان } \card{A} \leq \card{B}\\
+	\cardless{A}{B}&\text{ إذا وفقط إذا كان } \card{A} < \card{B}
+\end{align*}
+\end{lem}
+
+\begin{proof}
+سنثبت الاتجاه من اليسار إلى اليمين في الادعاء الثاني (أما الحالات
+الأخرى فمشابهة، ونتركها تمرينًا). انظر إذن في الرسم الآتي:
+\begin{center}
+	\begin{tikzpicture}
+	\node (nodea) {$A$};
+	\node[right = 6em of nodea] (nodeb) {$B$};
+	\node[below = 2em of nodea] (nodecarda) {$\card{A}$};
+	\node[below = 2em of nodeb] (nodecardb) {$\card{B}$};
+	\draw[->] (nodea)--(nodeb);
+	\draw[<->] (nodea)--(nodecarda);
+	\draw[<->] (nodeb)--(nodecardb);
+	\draw[->, dashed] (nodecarda)--(nodecardb);
+\end{tikzpicture}
+\end{center}
+تدل الأسهم ذات الرأسين على !!{bijection}s يضمن وجودها
+\olref{lem:CardinalsExist}. وبافتراض~$\cardle{A}{B}$، توجد
+!!a{injection}~$A\to B$. والآن، بتتبع الأسهم من~$\card{A}$ إلى~$A$
+ثم إلى~$B$ ثم إلى~$\card{B}$، نحصل على !!a{injection}
+$\card{A} \to \card{B}$ (السهم المتقطع).
+\end{proof}\noindent
+ويمكننا أيضًا استخدام~\olref{lem:CardinalsBehaveRight} لإعادة إثبات
+شرودر--برنشتاين. وهذا هو الادعاء القائل إنه إذا كان
+$\cardle{A}{B}$ و$\cardle{B}{A}$، فإن~$\cardeq{A}{B}$. وقد صغنا هذا
+بوصفه~\olref[sfr][siz][sb]{thm:schroder-bernstein}، لكننا أثبتناه
+أول مرة---ببعض الجهد---في~\olref[sfr][infinite][card-sb]{sec}.
+انظر الآن في:
+
+\begin{proof}[إعادة إثبات شرودر--برنشتاين]
+إذا كان~$\cardle{A}{B}$ و$\cardle{B}{A}$، فإن
+$\card{A} \leq \card{B}$ و$\card{B} \leq \card{A}$ بموجب
+\olref{lem:CardinalsBehaveRight}. ومن ثم~$\card{A} = \card{B}$
+و$\cardeq{A}{B}$ بموجب التثليث و\olref{lem:CardinalsBehaveRight}.
+\end{proof}
+\noindent
+ومع أن هذا برهان بالغ البساطة، فإنه يعتمد ضمنًا على الاستبدال (لضمان
+\olref[ordinals][ordtype]{thmOrdinalRepresentation}) وعلى الترتيب
+الجيد (لضمان~\olref{lem:CardinalsBehaveRight}). وعلى النقيض من ذلك،
+كان برهان~\olref[sfr][infinite][card-sb]{sec} أكثر استقلالًا بكثير
+(بل يمكن إجراؤه في~$\Zminus$).
+
+\end{document}

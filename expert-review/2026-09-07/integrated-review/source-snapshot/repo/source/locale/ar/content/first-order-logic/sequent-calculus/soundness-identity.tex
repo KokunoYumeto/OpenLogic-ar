@@ -1,0 +1,46 @@
+% Part: first-order-logic
+% Chapter: sequent-calculus
+% Section: soundness-identity
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{seq}{sid}
+
+\olsection{السلامة مع \usetoken{S}{identity}}
+
+\begin{prop}
+حساب~$\Log{LK}$ المزود بالتتابعيات الابتدائية وقواعد الهوية سليم.
+\end{prop}
+
+\begin{proof}
+التتابعيات الابتدائية التي على الصورة ${} \Sequent \eq[t][t]$ صالحة،
+لأن لكل !!{structure}~$\Struct M$، $\Sat{M}{\eq[t][t]}$. (لاحظ أننا
+نفترض أن الحد~$t$ مغلق، أي إنه لا يحتوي على متغيرات، ولذلك لا أهمية
+لإسنادات المتغيرات.)
+
+افترض أن الاستدلال الأخير في !!a{derivation} هو~$=$. عندئذ تكون المقدمة
+$\eq[t_1][t_2], \Gamma \Sequent \Delta, !A(t_1)$، وتكون النتيجة
+$\eq[t_1][t_2], \Gamma \Sequent \Delta, !A(t_2)$. اعتبر
+!!a{structure}~$\Struct M$. علينا أن نبين أن النتيجة صالحة، أي إنه إذا
+كان $\Sat{M}{\eq[t_1][t_2]}$ و$\Sat{M}{\Gamma}$، فإما أن
+$\Sat{M}{!C}$ لبعض $!C \in \Delta$، أو أن $\Sat{M}{!A(t_2)}$.
+
+بفرض الاستقراء، تكون المقدمة صالحة. وهذا يعني أنه إذا كان
+$\Sat{M}{\eq[t_1][t_2]}$ و$\Sat{M}{\Gamma}$، فإما (أ) أن يوجد
+$!C \in \Delta$ بحيث $\Sat{M}{!C}$، أو (ب) أن
+$\Sat{M}{!A(t_1)}$. في الحالة (أ) نكون قد انتهينا. اعتبر الحالة (ب).
+ليكن~$s$ إسناد متغيرات بحيث $s(x) = \Value{t_1}{M}$. ومن
+\olref[syn][ass]{prop:sentence-sat-true} نحصل على
+$\Sat{M}{!A(t_1)}[s]$. وبما أن~$\varAssign{s}{s}{x}$، فإنه من
+\olref[syn][ext]{prop:ext-formulas} نحصل على
+$\Sat{M}{!A(x)}[s]$. وبما أن~$\Sat{M}{\eq[t_1][t_2]}$، فإن
+$\Value{t_1}{M} = \Value{t_2}{M}$، ومن ثم
+$s(x) = \Value{t_2}{M}$. وبتطبيق
+\olref[syn][ext]{prop:ext-formulas} مرة أخرى، نحصل أيضًا على
+$\Sat{M}{!A(t_2)}[s]$. ومن \olref[syn][ass]{prop:sentence-sat-true}
+نحصل على~$\Sat{M}{!A(t_2)}$.
+\end{proof}
+
+\end{document}
