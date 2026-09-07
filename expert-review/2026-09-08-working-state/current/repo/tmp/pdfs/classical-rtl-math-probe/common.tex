@@ -1,0 +1,446 @@
+% Isolated runtime fixture. It is never imported by any reader driver.
+\documentclass[openany,oneside,14pt]{memoir}
+\newcommand*{\olpath}{../..}
+\newcommand*{\ollangid}{ar}
+\newcommand*{\ollanguage}{arabic}
+\usepackage{fontspec}
+% Install glyph-name-to-Unicode maps for the legacy Open Logic math fonts.
+% LuaLaTeX otherwise embeds those Type 1 subsets without /ToUnicode maps even
+% though the surrounding Arabic/OpenType fonts extract correctly.
+\usepackage{fixtounicode}
+% Plain TeX builds \mapsto from a bar-piece plus \rightarrow.  The CM symbol
+% font calls that first glyph `mapsto`, for which the generic map has no entry;
+% encode the piece as a vertical bar so extraction yields the faithful `|→`
+% composite rather than an opaque `(cid:55)` token.
+\fixtounicode{tfm=cmsy10,glyphs={mapsto},unicodes={007C}}
+\fixtounicode{tfm=cmsy7,glyphs={mapsto},unicodes={007C}}
+\fixtounicode{tfm=cmsy5,glyphs={mapsto},unicodes={007C}}
+\fixtounicode{tfm=txsyc,
+  glyphs={strict,strictinverse,squareright,squareleft},
+  unicodes={297D,297C,25A1 2192,2190 25A1}}
+\fixtounicode{tfm=msbm10,
+  glyphs={notprecedesoreql,notfollowsoreql},
+  unicodes={22E0,22E1}}
+\fixtounicode{tfm=stmary10,
+  glyphs={varolessthan,varogreaterthan},
+  unicodes={29C0,29C1}}
+\fixtounicode{tfm=cmex10,
+  glyphs={parenleftbigg,parenrightbigg,braceleftBigg,braceleftBig,
+    summationdisplay,hatwidest,tildewidest},
+  unicodes={0028,0029,007B,007B,2211,0302,0303}}
+\setmainfont{TeX Gyre Pagella}
+\setsansfont{TeX Gyre Heros}
+\setmonofont{Latin Modern Mono}
+\PassOptionsToPackage{reqno}{amsmath}
+\PassOptionsToPackage{provide=*,bidi=basic}{babel}
+\makeatletter
+\AddToHook{package/cleveref/before}{\DeclareOption{arabic}{}}
+\makeatother
+\input{\olpath/sty/open-logic.sty}
+\input{\olpath/sty/open-logic-defer.sty}
+\babelfont[arabic]{rm}[
+  Path=../../../00_control/fonts/scheherazade-2.100/,
+  UprightFont=Scheherazade-Regular.ttf,
+  BoldFont=Scheherazade-Bold.ttf,
+  AutoFakeSlant=0.15,Renderer=HarfBuzz,Scale=1.08
+]{Scheherazade-Regular.ttf}
+\babelfont[arabic]{sf}[
+  Path=../../../00_control/fonts/scheherazade-2.100/,
+  UprightFont=Scheherazade-Regular.ttf,
+  BoldFont=Scheherazade-Bold.ttf,
+  AutoFakeSlant=0.15,Renderer=HarfBuzz,Scale=1.08
+]{Scheherazade-Regular.ttf}
+\babelfont[arabic]{tt}{DejaVu Sans Mono}
+
+\input{../ar-classical/open-logic-rtl-math.tex}
+\ifdefined\OLCProbeInstallRTL
+  \OLClassicalInstallRTLMath
+\fi
+\hypersetup{unicode=true,pdflang={ar},hypertexnames=false,
+  pdftitle={Classical Arabic RTL mathematics runtime probe},
+  pdfauthor={Open Logic Project}}
+\pagestyle{plain}
+\setlength{\parindent}{0pt}
+\newcommand*{\ProbeID}[1]{\par\medskip\babelsublr{\texttt{#1}}\quad}
+% URI annotations give the analyzer stable, per-construct rectangles without
+% relying on font-specific character bounding-box heuristics.
+\newcommand*{\ProbeAtom}[2]{\href{https://example.org/rtl-geom/#1}{#2}}
+% Hyperref link whatsits placed directly in a transformed/nested math list can
+% inherit the complete surrounding list width.  Box the one P16 outer-function
+% anchor as its own text-direction object so its rectangle measures g(A), not
+% the following cases/array construction.
+\newcommand*{\ProbeBoxedMathAtom}[2]{%
+  \mathord{\hbox{\href{https://example.org/rtl-geom/#1}{\ensuremath{#2}}}}%
+}
+\newcommand*{\ProbeDirection}[1]{%
+  \typeout{OLC-RTL-DIRECTION=#1;primitive=\the\mathdirection;desired=\the\OLClassicalDesiredMathDirection}%
+}
+\newcommand*{\ProbeTriplet}[2]{%
+  \ProbeAtom{#1-A}{A}\ProbeAtom{#1-op}{#2}\ProbeAtom{#1-B}{B}%
+}
+\newcommand*{\ProbePairAt}[4]{%
+  $\ProbeTriplet{#1-#2-right}{#3}$&$\ProbeTriplet{#1-#2-left}{#4}$\\%
+}
+\newcommand*{\ProbePair}[3]{%
+  \ProbePairAt{P15}{#1}{#2}{#3}%
+}
+
+\begin{document}
+\selectlanguage{arabic}
+\ProbeDirection{begin-document}
+
+\begin{center}
+{\Large اختبار اتجاه الصيغ الرياضية}\par
+\small هذا مستند فحص معزول، لا يدخل في أي قارئ منشور.
+\end{center}
+
+\ProbeID{P01} $\ProbeAtom{P01-A}{A}
+ \ProbeAtom{P01-arrow}{\to}\ProbeAtom{P01-B}{B}$
+
+\ProbeID{P02}
+$\ProbeAtom{P02-lt-A}{A}\ProbeAtom{P02-lt-op}{<}\ProbeAtom{P02-lt-B}{B} \quad
+ \ProbeAtom{P02-le-A}{A}\ProbeAtom{P02-le-op}{\leq}\ProbeAtom{P02-le-B}{B} \quad
+ \ProbeAtom{P02-in-A}{A}\ProbeAtom{P02-in-op}{\in}\ProbeAtom{P02-in-B}{B} \quad
+ \ProbeAtom{P02-subset-A}{A}\ProbeAtom{P02-subset-op}{\subseteq}\ProbeAtom{P02-subset-B}{B}$
+
+\ProbeID{P03}
+$\ProbeAtom{P03-round-open}{(}\ProbeAtom{P03-round-A}{A}+\ProbeAtom{P03-round-B}{B}\ProbeAtom{P03-round-close}{)}\quad
+ \ProbeAtom{P03-square-open}{[}\ProbeAtom{P03-square-A}{A}+\ProbeAtom{P03-square-B}{B}\ProbeAtom{P03-square-close}{]}\quad
+ \ProbeAtom{P03-brace-open}{\{}\ProbeAtom{P03-brace-A}{A}+\ProbeAtom{P03-brace-B}{B}\ProbeAtom{P03-brace-close}{\}}\quad
+ \ProbeAtom{P03-angle-open}{\langle}\frac{\ProbeAtom{P03-angle-A}{A}}
+ {\ProbeAtom{P03-angle-B}{B}}\ProbeAtom{P03-angle-close}{\rangle}$
+
+\ProbeID{P04}
+$\ProbeAtom{P04-left-A}{A}\ProbeAtom{P04-left-op}{\leftarrow}\ProbeAtom{P04-left-B}{B}\quad
+ \ProbeAtom{P04-long-A}{A}\ProbeAtom{P04-long-op}{\longrightarrow}\ProbeAtom{P04-long-B}{B}\quad
+ \ProbeAtom{P04-implies-A}{A}\ProbeAtom{P04-implies-op}{\Rightarrow}\ProbeAtom{P04-implies-B}{B}\quad
+ \ProbeAtom{P04-iff-A}{A}\ProbeAtom{P04-iff-op}{\Leftrightarrow}\ProbeAtom{P04-iff-B}{B}\quad
+ \ProbeAtom{P04-map-A}{A}\ProbeAtom{P04-map-op}{\mapsto}\ProbeAtom{P04-map-B}{B}$
+
+\ProbeID{P05}
+$\ProbeAtom{P05-overright}{\overrightarrow{AB}}\quad
+ \ProbeAtom{P05-overleft}{\overleftarrow{AB}}\quad
+ \ProbeAtom{P05-underright}{\underrightarrow{AB}}\quad
+ \ProbeAtom{P05-underleft}{\underleftarrow{AB}}\quad
+ \ProbeAtom{P05-widehat}{\widehat{AB}}\quad
+ \ProbeAtom{P05-overline}{\overline{AB}}$
+
+\ProbeID{P06} $\displaystyle
+  \ProbeAtom{P06-fraction}{\frac{A+\frac{B}{C}}{D+E}}\quad
+  \ProbeAtom{P06-root}{\sqrt{A+B}}\quad
+  \ProbeAtom{P06-cuberoot}{\sqrt[3]{A+B}}\quad
+  \ProbeAtom{P06-scripts}{A_{B_C}^{D^E}}\quad
+  \ProbeAtom{P06-sum}{\sum_{i=0}^{n} A_i}$
+
+\hypertarget{probe-eq-one}{}
+\begin{equation}\label{eq:probe-one}
+  A \to B \quad\Longleftrightarrow\quad \neg B \to \neg A.
+\end{equation}
+
+\hypertarget{probe-eq-align}{}
+\begin{align}\label{eq:probe-align}
+  f(A) &= B + C,\\
+  g(B) &\leq D.
+\end{align}
+
+% Put the marker above the tall matrix/array box.  The extraction audit uses
+% marker-to-marker regions, so a vertically centred inline marker would cut
+% off the first row and admit the first row of the following cases display.
+\ProbeID{P07}\par\nobreak
+$\begin{pmatrix}
+ \ProbeAtom{P07-matrix-A}{A} & \ProbeAtom{P07-matrix-B}{B} \\
+ \ProbeAtom{P07-matrix-C}{C} & \ProbeAtom{P07-matrix-D}{D}
+ \end{pmatrix}
+ \quad
+ \begin{array}{c|c}
+ \ProbeAtom{P07-array-A}{A} & \ProbeAtom{P07-array-B}{B} \\
+ \ProbeAtom{P07-array-C}{C} & \ProbeAtom{P07-array-D}{D}
+ \end{array}$
+
+\ProbeID{P08}\par\nobreak
+$\ProbeAtom{P08-function}{f(A)}=\begin{cases}
+ \ProbeAtom{P08-case-B}{B}, & \ProbeTriplet{P08-condition-one}{\to},\\
+ \ProbeAtom{P08-case-D}{D}, & \ProbeTriplet{P08-condition-two}{\in}.
+\end{cases}$
+
+\ProbeID{P09} الإحالة إلى المعادلة~
+\hyperlink{probe-eq-one}{\ref*{eq:probe-one}} وإلى
+المعادلة المصفوفة~\hyperlink{probe-eq-align}{\ref*{eq:probe-align}}، والرابط
+\href{https://example.org/rtl-math/A-to-B}{\babelsublr{LINK-URI-A-to-B}}.
+
+\clearpage
+\ProbeID{P10} شجرة برهان ذات مقدمتين:
+\begin{prooftree}
+\AxiomC{$\ProbeAtom{P10-premise-one}{A \to B}$}
+\AxiomC{$\ProbeAtom{P10-premise-two}{A}$}
+\BinaryInfC{$\ProbeAtom{P10-conclusion}{B}$}
+\end{prooftree}
+
+\ProbeID{P11} جدول تحليلي صغير:
+% prooftrees owns \ensuremath through Forest's math-content style. A second
+% pair of dollar delimiters exits that math context and tests text-mode order.
+% Keep the same bare formula content used by the actual Open Logic tableaux.
+\begin{tableau}{}
+  [\ProbeTriplet{P11-root}{\to}, checked
+    [\ProbeTriplet{P11-left}{\in}]
+    [\ProbeTriplet{P11-right}{\subseteq}]
+  ]
+\end{tableau}
+
+\ProbeID{P12} اشتقاق مرقّم:
+\begin{derivation}
+  1. & $\ProbeAtom{P12-row-one}{A \to B}$ & premise \\
+  2. & $\ProbeAtom{P12-row-two}{A}$ & premise \\
+  3. & $\ProbeAtom{P12-row-three}{B}$ & 1, 2
+\end{derivation}
+
+\ProbeID{P13} رسم لا تُعكس إحداثياته، وتَرِد الصيغ في عقده:
+\begin{center}
+\babelsublr{%
+\begin{tikzpicture}[node distance=3cm]
+  \node (a) {$\ProbeAtom{P13-node-one}{A \to B}$};
+  \node[right of=a] (b) {$\ProbeAtom{P13-node-two}{B \to C}$};
+  \path[->] (a) edge node[above] {$\ProbeAtom{P13-edge}{f:A\to B}$} (b);
+\end{tikzpicture}
+}%
+\end{center}
+
+\ProbeID{P14} نطاق رياضي محلي من اليسار إلى اليمين:
+\babelsublr{\begin{OLClassicalLTRMathScope}
+  \ProbeDirection{inside-local-ltr-scope}
+  $\ProbeAtom{P14-A}{A}\ProbeAtom{P14-arrow}{\to}\ProbeAtom{P14-B}{B}$
+\end{OLClassicalLTRMathScope}}
+\ProbeDirection{after-local-ltr-scope}
+
+\clearpage
+\ProbeID{P15} جميع عضوي كل زوج في سجل العرض الاتجاهي المحدود:
+\begin{center}
+\babelsublr{\scriptsize
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}r@{\qquad}r@{}}
+\ProbePair{arrow}{\rightarrow}{\leftarrow}
+\ProbePair{long-arrow}{\longrightarrow}{\longleftarrow}
+\ProbePair{double-arrow}{\Rightarrow}{\Leftarrow}
+\ProbePair{long-double-arrow}{\Longrightarrow}{\Longleftarrow}
+\ProbePair{x-arrow}{\xrightarrow{\alpha}}{\xleftarrow{\alpha}}
+\ProbePair{x-long-double-arrow}{\xLongrightarrow{\alpha}}{\xLongleftarrow{\alpha}}
+\ProbePair{mapsto}{\mapsto}{\OLClassicalMapsFrom}
+\ProbePair{long-mapsto}{\longmapsto}{\OLClassicalLongMapsFrom}
+\ProbePair{counterfactual}{\boxright}{\OLClassicalBoxLeft}
+\ProbePair{strict-conditional}{\fishhookright}{\OLClassicalFishhookLeft}
+\ProbePair{literal-order}{<}{>}
+\ProbePair{order-eq}{\leq}{\geq}
+\ProbePair{membership}{\in}{\ni}
+\ProbePair{precedence}{\prec}{\succ}
+\ProbePair{precedence-eq}{\preceq}{\succeq}
+\ProbePair{negated-precedence-eq}{\npreceq}{\nsucceq}
+\ProbePair{curly-precedence-eq}{\preccurlyeq}{\succcurlyeq}
+\ProbePair{precedence-sim}{\precsim}{\succsim}
+\ProbePair{negated-order}{\nless}{\ngtr}
+\ProbePair{dotted-order}{\lessdot}{\gtrdot}
+\ProbePair{nonstandard-order}{\varolessthan}{\varogreaterthan}
+\end{tabular}}
+\end{center}
+\clearpage
+\begin{center}
+\babelsublr{\scriptsize
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}r@{\qquad}r@{}}
+\ProbePair{subset}{\subset}{\supset}
+\ProbePair{subset-eq}{\subseteq}{\supseteq}
+\ProbePair{negated-subset-eq}{\nsubseteq}{\nsupseteq}
+\ProbePair{proper-subset}{\subsetneq}{\supsetneq}
+\ProbePair{square-subset}{\sqsubset}{\sqsupset}
+\ProbePair{square-subset-eq}{\sqsubseteq}{\sqsupseteq}
+\ProbePair{restriction}{\upharpoonright}{\upharpoonleft}
+\ProbePair{triangle-order}{\lhd}{\rhd}
+\ProbePair{turnstile}{\vdash}{\dashv}
+$\ProbeTriplet{P15-invariant-models}{\models}$&\\[2pt]
+$\ProbeAtom{P15-over-accent-right}{\overrightarrow{AB}}$&
+  $\ProbeAtom{P15-over-accent-left}{\overleftarrow{AB}}$\\
+$\ProbeAtom{P15-under-accent-right}{\underrightarrow{AB}}$&
+  $\ProbeAtom{P15-under-accent-left}{\underleftarrow{AB}}$\\[2pt]
+$\ProbeTriplet{P15-alias-to}{\to}$&$\ProbeTriplet{P15-alias-gets}{\gets}$\\
+$\ProbeTriplet{P15-alias-le}{\le}$&$\ProbeTriplet{P15-alias-ge}{\ge}$\\
+$\ProbeTriplet{P15-alias-owns}{\owns}$&$\ProbeTriplet{P15-alias-restriction}{\restriction}$\\[2pt]
+$\ProbeTriplet{P15-invariant-leftrightarrow}{\leftrightarrow}$&
+  $\ProbeTriplet{P15-invariant-longleftrightarrow}{\longleftrightarrow}$\\
+$\ProbeTriplet{P15-invariant-Leftrightarrow}{\Leftrightarrow}$&
+  $\ProbeTriplet{P15-invariant-Longleftrightarrow}{\Longleftrightarrow}$\\
+$\ProbeTriplet{P15-invariant-equiv}{\equiv}$&
+  $\ProbeTriplet{P15-invariant-sim}{\sim}$\\
+$\ProbeTriplet{P15-invariant-simeq}{\simeq}$&
+  $\ProbeTriplet{P15-invariant-approx}{\approx}$\\
+$\ProbeTriplet{P15-invariant-land}{\land}$&
+  $\ProbeTriplet{P15-invariant-lor}{\lor}$\\
+$\ProbeTriplet{P15-invariant-ddots}{\ddots}$&
+  $\ProbeTriplet{P15-invariant-iddots}{\iddots}$\\
+$\ProbeTriplet{P15-invariant-triangleright}{\triangleright}$&
+\end{tabular}}
+\end{center}
+
+\clearpage
+\ProbeID{P16} وراثة الاتجاه في الحاويات المتداخلة ثم الاستثناء المحلي:
+
+$\ProbeAtom{P16-global-function}{f(A)}=\begin{cases}
+ \ProbeTriplet{P16-global-case-one}{\to},&A,\\
+ \ProbeTriplet{P16-global-case-two}{\subseteq},&B.
+\end{cases}\qquad
+\begin{array}{c|c}
+ \ProbeTriplet{P16-global-array-one}{\in}&A\\
+ \ProbeTriplet{P16-global-array-two}{\leq}&B
+\end{array}$
+
+\begin{tableau}{}
+  [\ProbeTriplet{P16-global-tableau-root}{\Rightarrow}, checked
+    [\ProbeTriplet{P16-global-tableau-left}{\prec}]
+    [\ProbeTriplet{P16-global-tableau-right}{\sqsubseteq}]
+  ]
+\end{tableau}
+
+\babelsublr{\begin{OLClassicalLTRMathScope}
+  \ProbeDirection{inside-local-ltr-nested-scope}
+  $\ProbeBoxedMathAtom{P16-local-function}{g(A)}=\begin{cases}
+    \ProbeTriplet{P16-local-case}{\to},&A
+  \end{cases}\qquad
+  \begin{array}{c}
+    \ProbeTriplet{P16-local-array}{\in}
+  \end{array}$
+\end{OLClassicalLTRMathScope}}
+\ProbeDirection{after-local-ltr-nested-scope}
+
+$\ProbeTriplet{P16-restored-global}{\to}$
+
+\clearpage
+\ProbeID{P17} سياسة موحّدة للوسوم: الطرف الفيزيائي الأيسر في النسخة العربية.
+\begin{equation}
+  \ProbeAtom{P17-equation-formula}{A\to B}
+  \tag{\ProbeAtom{P17-equation-tag}{EQ}}
+\end{equation}
+\begin{align}
+  \ProbeAtom{P17-align-formula}{A\in B}&=\ProbeAtom{P17-align-tail}{C}
+  \tag{\ProbeAtom{P17-align-tag}{AL}}
+\end{align}
+\begin{gather}
+  \ProbeAtom{P17-gather-formula}{A\subseteq B}
+  \tag{\ProbeAtom{P17-gather-tag}{GA}}
+\end{gather}
+\begin{multline}
+  \ProbeAtom{P17-multline-formula}{A\Rightarrow B+C+D+E+F}\\
+  \ProbeAtom{P17-multline-tail}{G+H}
+  \tag{\ProbeAtom{P17-multline-tag}{MU}}
+\end{multline}
+\begin{equation}
+\begin{split}
+  \ProbeAtom{P17-split-formula}{A\to B}&=C,\\
+  \ProbeAtom{P17-split-tail}{D\in E}&=F.
+\end{split}
+\tag{\ProbeAtom{P17-split-tag}{SP}}
+\end{equation}
+
+\clearpage
+\ProbeID{P18} فحص جميع أعضاء السجل داخل الاستثناء المحلي من اليسار إلى اليمين:
+\begin{OLClassicalLTRMathScope}
+\ProbeDirection{inside-local-ltr-registry-scope}
+\begin{center}
+\babelsublr{\scriptsize
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}r@{\qquad}r@{}}
+\ProbePairAt{P18}{arrow}{\rightarrow}{\leftarrow}
+\ProbePairAt{P18}{long-arrow}{\longrightarrow}{\longleftarrow}
+\ProbePairAt{P18}{double-arrow}{\Rightarrow}{\Leftarrow}
+\ProbePairAt{P18}{long-double-arrow}{\Longrightarrow}{\Longleftarrow}
+\ProbePairAt{P18}{x-arrow}{\xrightarrow{\alpha}}{\xleftarrow{\alpha}}
+\ProbePairAt{P18}{x-long-double-arrow}{\xLongrightarrow{\alpha}}{\xLongleftarrow{\alpha}}
+\ProbePairAt{P18}{mapsto}{\mapsto}{\OLClassicalMapsFrom}
+\ProbePairAt{P18}{long-mapsto}{\longmapsto}{\OLClassicalLongMapsFrom}
+\ProbePairAt{P18}{counterfactual}{\boxright}{\OLClassicalBoxLeft}
+\ProbePairAt{P18}{strict-conditional}{\fishhookright}{\OLClassicalFishhookLeft}
+\ProbePairAt{P18}{literal-order}{<}{>}
+\ProbePairAt{P18}{order-eq}{\leq}{\geq}
+\ProbePairAt{P18}{membership}{\in}{\ni}
+\ProbePairAt{P18}{precedence}{\prec}{\succ}
+\ProbePairAt{P18}{precedence-eq}{\preceq}{\succeq}
+\ProbePairAt{P18}{negated-precedence-eq}{\npreceq}{\nsucceq}
+\ProbePairAt{P18}{curly-precedence-eq}{\preccurlyeq}{\succcurlyeq}
+\ProbePairAt{P18}{precedence-sim}{\precsim}{\succsim}
+\ProbePairAt{P18}{negated-order}{\nless}{\ngtr}
+\ProbePairAt{P18}{dotted-order}{\lessdot}{\gtrdot}
+\ProbePairAt{P18}{nonstandard-order}{\varolessthan}{\varogreaterthan}
+\end{tabular}}
+\end{center}
+\clearpage
+\begin{center}
+\babelsublr{\scriptsize
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}r@{\qquad}r@{}}
+\ProbePairAt{P18}{subset}{\subset}{\supset}
+\ProbePairAt{P18}{subset-eq}{\subseteq}{\supseteq}
+\ProbePairAt{P18}{negated-subset-eq}{\nsubseteq}{\nsupseteq}
+\ProbePairAt{P18}{proper-subset}{\subsetneq}{\supsetneq}
+\ProbePairAt{P18}{square-subset}{\sqsubset}{\sqsupset}
+\ProbePairAt{P18}{square-subset-eq}{\sqsubseteq}{\sqsupseteq}
+\ProbePairAt{P18}{restriction}{\upharpoonright}{\upharpoonleft}
+\ProbePairAt{P18}{triangle-order}{\lhd}{\rhd}
+\ProbePairAt{P18}{turnstile}{\vdash}{\dashv}
+$\ProbeTriplet{P18-invariant-models}{\models}$&\\[2pt]
+$\ProbeAtom{P18-over-accent-right}{\overrightarrow{AB}}$&
+  $\ProbeAtom{P18-over-accent-left}{\overleftarrow{AB}}$\\
+$\ProbeAtom{P18-under-accent-right}{\underrightarrow{AB}}$&
+  $\ProbeAtom{P18-under-accent-left}{\underleftarrow{AB}}$\\[2pt]
+$\ProbeTriplet{P18-alias-to}{\to}$&$\ProbeTriplet{P18-alias-gets}{\gets}$\\
+$\ProbeTriplet{P18-alias-le}{\le}$&$\ProbeTriplet{P18-alias-ge}{\ge}$\\
+$\ProbeTriplet{P18-alias-owns}{\owns}$&$\ProbeTriplet{P18-alias-restriction}{\restriction}$\\
+\end{tabular}}
+\end{center}
+\end{OLClassicalLTRMathScope}
+\ProbeDirection{after-local-ltr-registry-scope}
+
+\clearpage
+\ProbeID{P19} فحص الحفظ المحدود للرموز غير ذات النظير واللكنات غير الاتجاهية:
+\begin{center}
+\babelsublr{\scriptsize
+\begin{tabular}{@{}r@{\qquad}r@{}}
+$\ProbeAtom{P19-fallback-nvdash}{\nvdash}$&$\ProbeAtom{P19-fallback-vDash}{\vDash}$\\
+$\ProbeAtom{P19-fallback-nvDash}{\nvDash}$&$\ProbeAtom{P19-fallback-Vdash}{\Vdash}$\\
+$\ProbeAtom{P19-fallback-nVdash}{\nVdash}$&$\ProbeAtom{P19-fallback-notin}{\notin}$\\
+$\ProbeAtom{P19-fallback-pto}{\pto}$&$\ProbeAtom{P19-fallback-rlexless}{\rlexless}$\\
+$\ProbeAtom{P19-fallback-xrightarrowdbl}{\xrightarrowdbl[\beta]{\alpha}}$&\\[2pt]
+$\ProbeAtom{P19-boxed-accent-acute}{\acute{AB}}$&$\ProbeAtom{P19-boxed-accent-grave}{\grave{AB}}$\\
+$\ProbeAtom{P19-boxed-accent-ddot}{\ddot{AB}}$&$\ProbeAtom{P19-boxed-accent-tilde}{\tilde{AB}}$\\
+$\ProbeAtom{P19-boxed-accent-bar}{\bar{AB}}$&$\ProbeAtom{P19-boxed-accent-breve}{\breve{AB}}$\\
+$\ProbeAtom{P19-boxed-accent-check}{\check{AB}}$&$\ProbeAtom{P19-boxed-accent-hat}{\hat{AB}}$\\
+$\ProbeAtom{P19-boxed-accent-vec}{\vec{AB}}$&$\ProbeAtom{P19-boxed-accent-dot}{\dot{AB}}$\\
+$\ProbeAtom{P19-boxed-accent-widetilde}{\widetilde{AB}}$&$\ProbeAtom{P19-boxed-accent-widehat}{\widehat{AB}}$\\
+$\ProbeAtom{P19-boxed-accent-mathring}{\mathring{AB}}$&
+\end{tabular}}
+\end{center}
+
+\clearpage
+\ProbeID{P20} إعادة فحص الحفظ نفسه داخل الاستثناء المحلي من اليسار إلى اليمين:
+\begin{OLClassicalLTRMathScope}
+\begin{center}
+\babelsublr{\scriptsize
+\begin{tabular}{@{}r@{\qquad}r@{}}
+$\ProbeAtom{P20-fallback-nvdash}{\nvdash}$&$\ProbeAtom{P20-fallback-vDash}{\vDash}$\\
+$\ProbeAtom{P20-fallback-nvDash}{\nvDash}$&$\ProbeAtom{P20-fallback-Vdash}{\Vdash}$\\
+$\ProbeAtom{P20-fallback-nVdash}{\nVdash}$&$\ProbeAtom{P20-fallback-notin}{\notin}$\\
+$\ProbeAtom{P20-fallback-pto}{\pto}$&$\ProbeAtom{P20-fallback-rlexless}{\rlexless}$\\
+$\ProbeAtom{P20-fallback-xrightarrowdbl}{\xrightarrowdbl[\beta]{\alpha}}$&\\[2pt]
+$\ProbeAtom{P20-boxed-accent-acute}{\acute{AB}}$&$\ProbeAtom{P20-boxed-accent-grave}{\grave{AB}}$\\
+$\ProbeAtom{P20-boxed-accent-ddot}{\ddot{AB}}$&$\ProbeAtom{P20-boxed-accent-tilde}{\tilde{AB}}$\\
+$\ProbeAtom{P20-boxed-accent-bar}{\bar{AB}}$&$\ProbeAtom{P20-boxed-accent-breve}{\breve{AB}}$\\
+$\ProbeAtom{P20-boxed-accent-check}{\check{AB}}$&$\ProbeAtom{P20-boxed-accent-hat}{\hat{AB}}$\\
+$\ProbeAtom{P20-boxed-accent-vec}{\vec{AB}}$&$\ProbeAtom{P20-boxed-accent-dot}{\dot{AB}}$\\
+$\ProbeAtom{P20-boxed-accent-widetilde}{\widetilde{AB}}$&$\ProbeAtom{P20-boxed-accent-widehat}{\widehat{AB}}$\\
+$\ProbeAtom{P20-boxed-accent-mathring}{\mathring{AB}}$&
+\end{tabular}}
+\end{center}
+\end{OLClassicalLTRMathScope}
+
+\ifdefined\OLCProbeInstallRTL
+  \OLClassicalCheckRTLMath
+\fi
+\typeout{OLC-RTL-SOURCE-SIGNATURE=P01-P20-v9}
+\ProbeDirection{end-document}
+\end{document}

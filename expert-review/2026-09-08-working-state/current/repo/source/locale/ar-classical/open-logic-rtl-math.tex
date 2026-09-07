@@ -1,0 +1,1527 @@
+% Opt-in mathematical direction for the separate classical-Arabic edition.
+% OL-RTL-SCOPE=ar-classical-only
+% OL-RTL-ORDER=source-tokens-unchanged
+% OL-RTL-MIRROR=typed-registry-once-visible-extraction
+% OL-RTL-COMPLEX=guarded-probe-before-reader-integration
+%
+% Load after the Open Logic and bidi stacks, then install last in the preamble:
+%   \input{open-logic-rtl-math.tex}
+%   \OLClassicalInstallRTLMath
+% Merely inputting this file changes no direction.  This layer never reverses
+% TeX tokens or noad lists, and never loads RyDArab, RamzArab, or luabidi.
+\ifdefined\OLClassicalInstallRTLMath\endinput\fi
+\ProvidesFile{open-logic-rtl-math.tex}[2026/09/05 opt-in structured RTL mathematics probe]
+\RequirePackage{xparse}
+
+\makeatletter
+\newif\ifOLClassicalRTLMathInstalled
+\newif\ifOLClassicalRTLMathSupported
+\newif\ifOLClassicalRTLMathRuntimeActive
+\newif\ifOLClassicalRTLRegistryMacrosOwned
+\newif\ifOLClassicalRTLMathHooksOwned
+\newif\ifOLClassicalSavedTagsLeft
+\newif\ifOLClassicalSavedActiveLessDefined
+\newif\ifOLClassicalSavedActiveGreaterDefined
+\newcount\OLClassicalSavedMathDirection
+\newcount\OLClassicalDesiredMathDirection
+\newcount\OLClassicalSavedLessMathCode
+\newcount\OLClassicalSavedGreaterMathCode
+\newcount\OLClassicalRTLRegistryPairCount
+\newcount\OLClassicalRTLRegistryInvariantCount
+\newcount\OLClassicalRTLRegistryAliasCount
+\newcount\OLClassicalRTLRegistryFallbackCount
+\newcount\OLClassicalRTLRegistryAccentCount
+\newtoks\OLClassicalSavedEveryMath
+\newtoks\OLClassicalSavedEveryDisplay
+\newtoks\OLClassicalInstalledEveryMath
+\newtoks\OLClassicalInstalledEveryDisplay
+\chardef\OLClassicalExpectedRTLRegistryPairCount=32
+\chardef\OLClassicalExpectedRTLRegistryInvariantCount=14
+\chardef\OLClassicalExpectedRTLRegistryAliasCount=6
+\chardef\OLClassicalExpectedRTLRegistryFallbackCount=9
+\chardef\OLClassicalExpectedRTLRegistryAccentCount=13
+
+\newcommand*{\OLClassicalRTLMathError}[2]{%
+  \PackageError{open-logic-rtl-math}{#1}{#2}%
+}
+
+% The probe-only maps-from names are deliberately namespaced.  They provide a
+% second canonical source member for paired testing without claiming a generic
+% \mapsfrom command in the pinned package stack.
+\newcommand*{\OLClassicalMapsFrom}{%
+  \DOTSB\leftarrow\protect\joinrel\mapstochar
+}
+\newcommand*{\OLClassicalLongMapsFrom}{%
+  \DOTSB\longleftarrow\protect\joinrel\mapstochar
+}
+
+% The shared Open Logic font family is ntxsyc.  Its adjacent slots are the
+% documented converse faces of the two right-facing conditional symbols that
+% the project declares as mathbin.  Keep the project atom class rather than the
+% class selected by an unrelated package-level declaration.
+\DeclareMathSymbol{\OLClassicalBoxLeft}{\mathbin}{symbolsC}{129}
+\DeclareMathSymbol{\OLClassicalFishhookLeft}{\mathbin}{symbolsC}{75}
+
+% Each pair is (source-right, source-left, implementation kind, atom class,
+% primary rationale).  The finite order is an audited public contract consumed
+% by the isolated QA.  Visible extraction deliberately follows the rendered
+% RTL row (for example B<-A); logical order is bound separately by source hash.
+\newcommand*{\OLClassicalRTLRegistryPairs}[1]{%
+  #1{rightarrow}{leftarrow}{simple}{mathrel}{UTR25-formula-relative}%
+  #1{longrightarrow}{longleftarrow}{long-single}{mathrel}{UTR25-formula-relative}%
+  #1{Rightarrow}{Leftarrow}{simple}{mathrel}{UTR25-formula-relative}%
+  #1{Longrightarrow}{Longleftarrow}{long-double}{mathrel}{UTR25-formula-relative}%
+  #1{xrightarrow}{xleftarrow}{boxed-x-arrow}{mathrel}{pinned-amsmath-extensible-pair}%
+  #1{xLongrightarrow}{xLongleftarrow}{boxed-x-long-double-arrow}{mathrel}{pinned-extarrows-extensible-pair}%
+  #1{mapsto}{OLClassicalMapsFrom}{mapsto}{mathrel}{formula-relative-map}%
+  #1{longmapsto}{OLClassicalLongMapsFrom}{long-mapsto}{mathrel}{formula-relative-map}%
+  #1{boxright}{OLClassicalBoxLeft}{simple}{mathbin}{pinned-ntxsyc-slot-pair}%
+  #1{fishhookright}{OLClassicalFishhookLeft}{simple}{mathbin}{pinned-ntxsyc-slot-pair}%
+  #1{literal-lt}{literal-gt}{literal}{mathrel}{Unicode-BidiMirroring}%
+  #1{leq}{geq}{simple}{mathrel}{Unicode-BidiMirroring}%
+  #1{in}{ni}{simple}{mathrel}{Unicode-BidiMirroring}%
+  #1{prec}{succ}{simple}{mathrel}{Unicode-BidiMirroring}%
+  #1{preceq}{succeq}{simple}{mathrel}{Unicode-BidiMirroring}%
+  #1{npreceq}{nsucceq}{simple}{mathrel}{Unicode-BidiMirroring}%
+  #1{preccurlyeq}{succcurlyeq}{simple}{mathrel}{Unicode-BidiMirroring}%
+  #1{precsim}{succsim}{simple}{mathrel}{Unicode-BidiMirroring}%
+  #1{nless}{ngtr}{simple}{mathrel}{Unicode-BidiMirroring}%
+  #1{lessdot}{gtrdot}{simple}{mathbin}{pinned-ams-symbol-pair}%
+  #1{varolessthan}{varogreaterthan}{simple}{mathbin}{pinned-stmaryrd-pair}%
+  #1{subset}{supset}{simple}{mathrel}{Unicode-BidiMirroring}%
+  #1{subseteq}{supseteq}{simple}{mathrel}{Unicode-BidiMirroring}%
+  #1{nsubseteq}{nsupseteq}{simple}{mathrel}{Unicode-BidiMirroring}%
+  #1{subsetneq}{supsetneq}{simple}{mathrel}{Unicode-BidiMirroring}%
+  #1{sqsubset}{sqsupset}{simple}{mathrel}{Unicode-BidiMirroring}%
+  #1{sqsubseteq}{sqsupseteq}{simple}{mathrel}{Unicode-BidiMirroring}%
+  #1{upharpoonright}{upharpoonleft}{simple}{mathrel}{Unicode-BidiMirroring}%
+  #1{lhd}{rhd}{simple}{mathbin}{Unicode-BidiMirroring}%
+  #1{vdash}{dashv}{simple}{mathrel}{Unicode-BidiMirroring}%
+  #1{overrightarrow}{overleftarrow}{over-accent}{mathord}{formula-relative-accent}%
+  #1{underrightarrow}{underleftarrow}{under-accent}{mathord}{formula-relative-accent}%
+}
+
+% These commands either are semantically invariant or must retain their macro
+% identity so native TRT can own their internal component order.  The long
+% bidirectional forms retain their visual shape because their component
+% arrowheads pass through the simple registry once. Delimiter placement is
+% engine-owned; a separate typed registry below mirrors their faces once.
+% The kernel \models composite is | joined to =; wrapping it in
+% a source-reversed peer would double-reverse its two TRT noads.
+\newcommand*{\OLClassicalRTLRegistryInvariants}[1]{%
+  #1{leftrightarrow}{symmetric}%
+  #1{longleftrightarrow}{derived-symmetric}%
+  #1{Leftrightarrow}{symmetric}%
+  #1{Longleftrightarrow}{derived-symmetric}%
+  #1{equiv}{symmetric}%
+  #1{sim}{symmetric}%
+  #1{simeq}{symmetric}%
+  #1{approx}{symmetric}%
+  #1{land}{symmetric}%
+  #1{lor}{symmetric}%
+  #1{models}{engine-composite}%
+  #1{ddots}{engine-composite-mirror}%
+  #1{iddots}{engine-composite-mirror}%
+  #1{triangleright}{semantic-left-end-sentinel}%
+}
+
+% Aliases dispatch directly to saved canonical endpoints.  This avoids a
+% double mirror through saved aliases such as \le -> \leq.
+\newcommand*{\OLClassicalRTLRegistryAliases}[1]{%
+  #1{to}{rightarrow}{leftarrow}%
+  #1{gets}{leftarrow}{rightarrow}%
+  #1{le}{leq}{geq}%
+  #1{ge}{geq}{leq}%
+  #1{owns}{ni}{in}%
+  #1{restriction}{upharpoonright}{upharpoonleft}%
+}
+
+% These live symbols have no verified same-class converse in the pinned
+% package stack.  Rather than guessing a new mathematical glyph, retain each
+% complete saved atom in a nested TLT formula and let the surrounding TRT list
+% place that atom.  This is an executable, finite fallback—not a silent
+% "invariant" label.  The census proves every live wrapper path that terminates
+% here, while the probe checks both the global TRT and local TLT presentations.
+\newcommand*{\OLClassicalRTLRegistryFallbacks}[1]{%
+  #1{nvdash}{scoped-ltr-atom}{mathrel}{no-proven-negated-left-tack-peer}%
+  #1{vDash}{scoped-ltr-atom}{mathrel}{no-proven-reverse-semantic-tack-peer}%
+  #1{nvDash}{scoped-ltr-atom}{mathrel}{no-proven-negated-reverse-semantic-tack-peer}%
+  #1{Vdash}{scoped-ltr-atom}{mathrel}{no-proven-reverse-forcing-tack-peer}%
+  #1{nVdash}{scoped-ltr-atom}{mathrel}{no-proven-negated-reverse-forcing-tack-peer}%
+  #1{notin}{scoped-ltr-atom}{mathrel}{no-proven-negated-reverse-membership-peer}%
+  #1{pto}{scoped-ltr-atom}{mathrel}{preserve-custom-partial-map-overlay}%
+  #1{rlexless}{scoped-ltr-atom}{mathrel}{preserve-project-spherical-order-glyph}%
+  #1{xrightarrowdbl}{scoped-ltr-optional-mandatory}{mathrel}{preserve-custom-double-shaft-overlay}%
+}
+
+% LuaTeX TRT displaces a multi-atom mathaccent nucleus.  These are the complete
+% kernel mathaccent family in the pinned format.  Each accent face is
+% notation-invariant (including the conventional vector shorthand); only its
+% placement is repaired by the same state-aware TLT-shell/TRT-base builder.
+% The list is parseable evidence for the census and is kept separate from the
+% relation fallback count because these commands have one mandatory argument.
+\newcommand*{\OLClassicalRTLBoxedAccentInvariants}[1]{%
+  #1{acute}{mathord}{kernel-mathaccent-placement-repair}%
+  #1{grave}{mathord}{kernel-mathaccent-placement-repair}%
+  #1{ddot}{mathord}{kernel-mathaccent-placement-repair}%
+  #1{tilde}{mathord}{kernel-mathaccent-placement-repair}%
+  #1{bar}{mathord}{kernel-mathaccent-placement-repair}%
+  #1{breve}{mathord}{kernel-mathaccent-placement-repair}%
+  #1{check}{mathord}{kernel-mathaccent-placement-repair}%
+  #1{hat}{mathord}{kernel-mathaccent-placement-repair}%
+  #1{vec}{mathord}{notation-invariant-vector-accent-placement-repair}%
+  #1{dot}{mathord}{kernel-mathaccent-placement-repair}%
+  #1{widetilde}{mathord}{kernel-mathaccent-placement-repair}%
+  #1{widehat}{mathord}{kernel-mathaccent-placement-repair}%
+  #1{mathring}{mathord}{kernel-mathaccent-placement-repair}%
+}
+
+% Exact macro inventory for ownership checks and deterministic restoration.
+\newcommand*{\OLClassicalRTLRegistryEntries}[1]{%
+  #1{rightarrow}#1{leftarrow}%
+  #1{longrightarrow}#1{longleftarrow}%
+  #1{Rightarrow}#1{Leftarrow}%
+  #1{Longrightarrow}#1{Longleftarrow}%
+  #1{xrightarrow}#1{xleftarrow}%
+  #1{xLongrightarrow}#1{xLongleftarrow}%
+  #1{mapsto}#1{OLClassicalMapsFrom}%
+  #1{longmapsto}#1{OLClassicalLongMapsFrom}%
+  #1{boxright}#1{OLClassicalBoxLeft}%
+  #1{fishhookright}#1{OLClassicalFishhookLeft}%
+  #1{leq}#1{geq}#1{in}#1{ni}#1{prec}#1{succ}%
+  #1{preceq}#1{succeq}#1{npreceq}#1{nsucceq}%
+  #1{preccurlyeq}#1{succcurlyeq}#1{precsim}#1{succsim}%
+  #1{nless}#1{ngtr}#1{lessdot}#1{gtrdot}%
+  #1{varolessthan}#1{varogreaterthan}#1{subset}#1{supset}%
+  #1{subseteq}#1{supseteq}#1{nsubseteq}#1{nsupseteq}%
+  #1{subsetneq}#1{supsetneq}#1{sqsubset}#1{sqsupset}%
+  #1{sqsubseteq}#1{sqsupseteq}%
+  #1{upharpoonright}#1{upharpoonleft}#1{lhd}#1{rhd}%
+  #1{vdash}#1{dashv}%
+  #1{overrightarrow}#1{overleftarrow}%
+  #1{underrightarrow}#1{underleftarrow}%
+  #1{to}#1{gets}#1{le}#1{ge}#1{owns}#1{restriction}%
+  #1{nvdash}#1{vDash}#1{nvDash}#1{Vdash}#1{nVdash}%
+  #1{notin}#1{pto}#1{rlexless}%
+  #1{xrightarrowdbl}%
+  #1{acute}#1{grave}#1{ddot}#1{tilde}#1{bar}#1{breve}%
+  #1{check}#1{hat}#1{vec}#1{dot}#1{widetilde}#1{widehat}%
+  #1{mathring}%
+}
+
+% LuaTeX defines TRT as numeric direction 1.  Check both interfaces so a
+% partial or emulated primitive set cannot be mistaken for the supported
+% engine.  Installation is allowed only at preamble top level: the saved
+% direction is then an edition-level value, never a disposable group value.
+\newcommand*{\OLClassicalRTLMathRequirements}{%
+  \OLClassicalRTLMathSupportedtrue
+  \ifdefined\directlua\else
+    \OLClassicalRTLMathSupportedfalse
+    \OLClassicalRTLMathError
+      {LuaLaTeX is required}
+      {This classical-edition layer uses LuaTeX's native math direction.}%
+  \fi
+  \ifdefined\mathdir\else
+    \OLClassicalRTLMathSupportedfalse
+    \OLClassicalRTLMathError
+      {The LuaTeX mathdir primitive is unavailable}
+      {Do not replace it with token reversal or a Unicode-bidi text filter.}%
+  \fi
+  \ifdefined\mathdirection\else
+    \OLClassicalRTLMathSupportedfalse
+    \OLClassicalRTLMathError
+      {The LuaTeX mathdirection primitive is unavailable}
+      {Use the pinned LuaLaTeX toolchain and rerun the guarded probe.}%
+  \fi
+  \ifdefined\babelsublr\else
+    \OLClassicalRTLMathSupportedfalse
+    \OLClassicalRTLMathError
+      {Babel's inline left-to-right embedding is unavailable}
+      {Load the pinned Arabic Babel stack before installing RTL mathematics.}%
+  \fi
+  \ifdefined\bbl@leqno@flip\else
+    \OLClassicalRTLMathSupportedfalse
+    \OLClassicalRTLMathError
+      {Babel's pinned physical-left equation adapter is unavailable}
+      {Load the pinned LuaTeX Babel bidi stack before installing RTL mathematics.}%
+  \fi
+  \ifnum\currentgrouplevel=\z@\else
+    \OLClassicalRTLMathSupportedfalse
+    \OLClassicalRTLMathError
+      {Install at top level in the preamble}
+      {For a local experiment, wrap complete math delimiters in the provided scope environment.}%
+  \fi
+  \ifdefined\iftagsleft@\else
+    \OLClassicalRTLMathSupportedfalse
+    \OLClassicalRTLMathError
+      {The AMS equation-tag interface is unavailable}
+      {Load amsmath before the classical RTL mathematics layer.}%
+  \fi
+  \@ifpackagewith{amsmath}{reqno}{}{%
+    \OLClassicalRTLMathSupportedfalse
+    \OLClassicalRTLMathError
+      {amsmath was not initialized for Babel-adjusted physical-left equation tags}
+      {Pass the reqno option to amsmath before Open Logic loads it; under Babel RTL this logical side becomes the physical left.}%
+  }%
+  \ifdefined\hat\else
+    \OLClassicalRTLMathSupportedfalse
+    \OLClassicalRTLMathError
+      {The mathematical accent \string\hat\space is unavailable}
+      {Load the standard mathematical stack before this classical-edition layer.}%
+  \fi
+  \ifdefined\widehat\else
+    \OLClassicalRTLMathSupportedfalse
+    \OLClassicalRTLMathError
+      {The mathematical accent \string\widehat\space is unavailable}
+      {Load the standard mathematical stack before this classical-edition layer.}%
+  \fi
+  \ifdefined\tilde\else
+    \OLClassicalRTLMathSupportedfalse
+    \OLClassicalRTLMathError
+      {The mathematical accent \string\tilde\space is unavailable}
+      {Load the standard mathematical stack before this classical-edition layer.}%
+  \fi
+  \ifdefined\widetilde\else
+    \OLClassicalRTLMathSupportedfalse
+    \OLClassicalRTLMathError
+      {The mathematical accent \string\widetilde\space is unavailable}
+      {Load the standard mathematical stack before this classical-edition layer.}%
+  \fi
+  \ifdefined\underrightarrow\else
+    \OLClassicalRTLMathSupportedfalse
+    \OLClassicalRTLMathError
+      {The AMS directional accents are unavailable}
+      {Load amsmath before the classical RTL mathematics layer.}%
+  \fi
+}
+
+\newcommand*{\OLClassicalSavedRegistry}[1]{%
+  \csname OLClassicalSavedRegistry@#1\endcsname
+}
+\newcommand*{\OLClassicalRegistryDispatch}[2]{%
+  \ifnum\OLClassicalDesiredMathDirection=\@ne
+    \OLClassicalSavedRegistry{#2}%
+  \else
+    \OLClassicalSavedRegistry{#1}%
+  \fi
+}
+
+% Dynamic save/bind/ownership operations are token-exact.  No saved command is
+% expanded while it is captured.
+\ExplSyntaxOn
+\cs_new_protected:Npn \ol_classical_registry_save_entry:n #1
+  {
+    \cs_if_exist:cTF {#1}
+      {
+        \cs_if_exist:cTF {OLClassicalSavedRegistry@#1}
+          {
+            \OLClassicalRTLMathError
+              {Duplicate~registry~entry~#1}
+              {The~typed~registry~must~own~each~command~exactly~once.}
+          }
+          {\cs_gset_eq:cc {OLClassicalSavedRegistry@#1} {#1}}
+      }
+      {
+        \OLClassicalRTLMathError
+          {Registry~command~#1~is~undefined}
+          {Load~the~pinned~mathematical~package~stack~before~this~layer.}
+      }
+  }
+\cs_new_protected:Npn \ol_classical_registry_bind_entry:nn #1#2
+  {\cs_gset_eq:cc {#1} {#2}}
+\cs_new_protected:Npn \ol_classical_registry_wrap_entry:nnn #1#2#3
+  {
+    \ol_classical_registry_save_entry:n {#1}
+    \cs_gset_protected:cpn {OLClassicalRegistryWrapper@#1}
+      {\OLClassicalRegistryDispatch{#2}{#3}}
+    \ol_classical_registry_bind_entry:nn
+      {#1} {OLClassicalRegistryWrapper@#1}
+  }
+\cs_new_protected:Npn \ol_classical_registry_restore_entry:n #1
+  {
+    \cs_gset_eq:cc {#1} {OLClassicalSavedRegistry@#1}
+    \cs_gundefine:c {OLClassicalSavedRegistry@#1}
+    \cs_gundefine:c {OLClassicalRegistryWrapper@#1}
+  }
+\cs_new_protected:Npn \ol_classical_registry_check_entry:n #1
+  {
+    \cs_if_eq:ccF {#1} {OLClassicalRegistryWrapper@#1}
+      {
+        \typeout{OLC-RTL-REGISTRY-DRIFT=entry/#1}%
+        \OLClassicalRTLRegistryMacrosOwnedfalse
+      }
+  }
+\cs_new_protected:Npn \ol_classical_registry_save_invariant:nn #1#2
+  {
+    \cs_if_exist:cTF {OLClassicalSavedInvariant@#1}
+      {
+        \OLClassicalRTLMathError
+          {Duplicate~invariant~registry~entry~#1}
+          {Every~invariant~must~be~classified~exactly~once.}
+      }
+      {
+        \cs_if_exist:cTF {#1}
+          {\cs_gset_eq:cc {OLClassicalSavedInvariant@#1} {#1}}
+          {
+            \OLClassicalRTLMathError
+              {Invariant~registry~command~#1~is~undefined}
+              {The~pinned~mathematical~package~stack~has~drifted.}
+          }
+      }
+  }
+\cs_new_protected:Npn \ol_classical_registry_check_invariant:nn #1#2
+  {
+    \cs_if_eq:ccF {#1} {OLClassicalSavedInvariant@#1}
+      {
+        \typeout{OLC-RTL-REGISTRY-DRIFT=invariant/#1}%
+        \OLClassicalRTLRegistryMacrosOwnedfalse
+      }
+  }
+\cs_new_protected:Npn \ol_classical_registry_forget_invariant:nn #1#2
+  {\cs_gundefine:c {OLClassicalSavedInvariant@#1}}
+\cs_new_protected:Npn \OLClassicalSetRTLMathHookOwnership
+  {
+    \OLClassicalRTLMathHooksOwnedtrue
+    \tl_set:No \l_tmpa_tl {\the\everymath}
+    \tl_set:No \l_tmpb_tl {\the\OLClassicalInstalledEveryMath}
+    \tl_if_eq:NNF \l_tmpa_tl \l_tmpb_tl
+      {\OLClassicalRTLMathHooksOwnedfalse}
+    \tl_set:No \l_tmpa_tl {\the\everydisplay}
+    \tl_set:No \l_tmpb_tl {\the\OLClassicalInstalledEveryDisplay}
+    \tl_if_eq:NNF \l_tmpa_tl \l_tmpb_tl
+      {\OLClassicalRTLMathHooksOwnedfalse}
+  }
+\cs_new_eq:NN \OLClassicalRegistrySaveEntry
+  \ol_classical_registry_save_entry:n
+\cs_new_eq:NN \OLClassicalRegistryBindEntry
+  \ol_classical_registry_bind_entry:nn
+\cs_new_eq:NN \OLClassicalRegistryWrapEntry
+  \ol_classical_registry_wrap_entry:nnn
+\cs_new_eq:NN \OLClassicalRegistryRestoreEntry
+  \ol_classical_registry_restore_entry:n
+\cs_new_eq:NN \OLClassicalRegistryCheckEntry
+  \ol_classical_registry_check_entry:n
+\cs_new_eq:NN \OLClassicalRegistrySaveInvariant
+  \ol_classical_registry_save_invariant:nn
+\cs_new_eq:NN \OLClassicalRegistryCheckInvariant
+  \ol_classical_registry_check_invariant:nn
+\cs_new_eq:NN \OLClassicalRegistryForgetInvariant
+  \ol_classical_registry_forget_invariant:nn
+\ExplSyntaxOff
+
+% Composite arrows preserve their source component order and exchange only the
+% endpoint face.  Native TRT then reverses the component row once and produces
+% a correctly assembled physical arrow.
+\newcommand*{\OLClassicalRegistryLongrightarrow}{%
+  \DOTSB\protect\relbar\protect\joinrel
+  \ifnum\OLClassicalDesiredMathDirection=\@ne
+    \OLClassicalSavedRegistry{leftarrow}%
+  \else
+    \OLClassicalSavedRegistry{rightarrow}%
+  \fi
+}
+\newcommand*{\OLClassicalRegistryLongleftarrow}{%
+  \DOTSB
+  \ifnum\OLClassicalDesiredMathDirection=\@ne
+    \OLClassicalSavedRegistry{rightarrow}%
+  \else
+    \OLClassicalSavedRegistry{leftarrow}%
+  \fi
+  \protect\joinrel\protect\relbar
+}
+\newcommand*{\OLClassicalRegistryLongRightarrow}{%
+  \DOTSB\protect\Relbar\protect\joinrel
+  \ifnum\OLClassicalDesiredMathDirection=\@ne
+    \OLClassicalSavedRegistry{Leftarrow}%
+  \else
+    \OLClassicalSavedRegistry{Rightarrow}%
+  \fi
+}
+\newcommand*{\OLClassicalRegistryLongLeftarrow}{%
+  \DOTSB
+  \ifnum\OLClassicalDesiredMathDirection=\@ne
+    \OLClassicalSavedRegistry{Rightarrow}%
+  \else
+    \OLClassicalSavedRegistry{Leftarrow}%
+  \fi
+  \protect\joinrel\protect\Relbar
+}
+\newcommand*{\OLClassicalRegistryMapsto}{%
+  \DOTSB\mapstochar
+  \ifnum\OLClassicalDesiredMathDirection=\@ne
+    \OLClassicalSavedRegistry{leftarrow}%
+  \else
+    \OLClassicalSavedRegistry{rightarrow}%
+  \fi
+}
+\newcommand*{\OLClassicalRegistryMapsFrom}{%
+  \DOTSB
+  \ifnum\OLClassicalDesiredMathDirection=\@ne
+    \OLClassicalSavedRegistry{rightarrow}%
+  \else
+    \OLClassicalSavedRegistry{leftarrow}%
+  \fi
+  \protect\joinrel\mapstochar
+}
+\newcommand*{\OLClassicalRegistryLongMapsto}{%
+  \DOTSB\mapstochar\protect\joinrel\protect\relbar\protect\joinrel
+  \ifnum\OLClassicalDesiredMathDirection=\@ne
+    \OLClassicalSavedRegistry{leftarrow}%
+  \else
+    \OLClassicalSavedRegistry{rightarrow}%
+  \fi
+}
+\newcommand*{\OLClassicalRegistryLongMapsFrom}{%
+  \DOTSB
+  \ifnum\OLClassicalDesiredMathDirection=\@ne
+    \OLClassicalSavedRegistry{rightarrow}%
+  \else
+    \OLClassicalSavedRegistry{leftarrow}%
+  \fi
+  \protect\joinrel\protect\relbar\protect\joinrel\mapstochar
+}
+
+% Extensible arrows are ordered composites, not one-noad symbols.  In TRT a
+% generic endpoint swap would expose the saved composite to a second reversal
+% through its internal fill.  Typeset the selected saved peer as one TLT
+% relation atom instead.  Only the saved shaft/fill composite is TLT.  Each
+% optional/mandatory label is a separately boxed TRT math list in the label's
+% current style, so a noncommutative label such as A\to B retains the edition's
+% formula direction rather than inheriting the shaft's implementation shell.
+\newcommand*{\OLClassicalBuildRTLXArrowLabel}[2]{%
+  \hbox{%
+    \OLClassicalSetLocalMathDirection\@ne
+    \m@th$#1#2$%
+  }%
+}
+\newcommand*{\OLClassicalRTLXArrowLabelPalette}[2]{%
+  \OLClassicalBuildRTLXArrowLabel{#1}{#2}%
+}
+\newcommand*{\OLClassicalRTLXArrowLabel}[1]{%
+  \mathpalette\OLClassicalRTLXArrowLabelPalette{#1}%
+}
+\newcommand*{\OLClassicalBuildBoxedXArrow}[4]{%
+  \hbox{%
+    \OLClassicalSetLocalMathDirection\z@
+    \m@th$#1%
+      \IfNoValueTF{#3}
+        {\OLClassicalSavedRegistry{#2}{\OLClassicalRTLXArrowLabel{#4}}}
+        {\OLClassicalSavedRegistry{#2}
+          [\OLClassicalRTLXArrowLabel{#3}]
+          {\OLClassicalRTLXArrowLabel{#4}}}%
+    $%
+  }%
+}
+\newcommand*{\OLClassicalBoxedXArrowChoices}[3]{%
+  \mathrel{\mathchoice
+    {\OLClassicalBuildBoxedXArrow\displaystyle{#1}{#2}{#3}}%
+    {\OLClassicalBuildBoxedXArrow\textstyle{#1}{#2}{#3}}%
+    {\OLClassicalBuildBoxedXArrow\scriptstyle{#1}{#2}{#3}}%
+    {\OLClassicalBuildBoxedXArrow\scriptscriptstyle{#1}{#2}{#3}}}%
+}
+\NewDocumentCommand{\OLClassicalRegistryXrightarrow}{o m}{%
+  \ifnum\OLClassicalDesiredMathDirection=\@ne
+    \OLClassicalBoxedXArrowChoices{xleftarrow}{#1}{#2}%
+  \else
+    \IfNoValueTF{#1}
+      {\OLClassicalSavedRegistry{xrightarrow}{#2}}
+      {\OLClassicalSavedRegistry{xrightarrow}[#1]{#2}}%
+  \fi
+}
+\NewDocumentCommand{\OLClassicalRegistryXleftarrow}{o m}{%
+  \ifnum\OLClassicalDesiredMathDirection=\@ne
+    \OLClassicalBoxedXArrowChoices{xrightarrow}{#1}{#2}%
+  \else
+    \IfNoValueTF{#1}
+      {\OLClassicalSavedRegistry{xleftarrow}{#2}}
+      {\OLClassicalSavedRegistry{xleftarrow}[#1]{#2}}%
+  \fi
+}
+\NewDocumentCommand{\OLClassicalRegistryXLongrightarrow}{o m}{%
+  \ifnum\OLClassicalDesiredMathDirection=\@ne
+    \OLClassicalBoxedXArrowChoices{xLongleftarrow}{#1}{#2}%
+  \else
+    \IfNoValueTF{#1}
+      {\OLClassicalSavedRegistry{xLongrightarrow}{#2}}
+      {\OLClassicalSavedRegistry{xLongrightarrow}[#1]{#2}}%
+  \fi
+}
+\NewDocumentCommand{\OLClassicalRegistryXLongleftarrow}{o m}{%
+  \ifnum\OLClassicalDesiredMathDirection=\@ne
+    \OLClassicalBoxedXArrowChoices{xLongrightarrow}{#1}{#2}%
+  \else
+    \IfNoValueTF{#1}
+      {\OLClassicalSavedRegistry{xLongleftarrow}{#2}}
+      {\OLClassicalSavedRegistry{xLongleftarrow}[#1]{#2}}%
+  \fi
+}
+
+% LuaTeX places a mathaccent as if its TRT nucleus began at the opposite edge;
+% for a two-atom base this displaces the accent by one complete nucleus width.
+% Build only the nondirectional accent operation in a TLT subformula, around a
+% separately typeset TRT base box.  The argument is never read backwards or
+% rewritten, and the resulting box is one ordinary atom in the outer RTL row.
+% The style selected by mathpalette is used for both nested formulae.  In a
+% local LTR exception the saved command is used directly, with no extra box.
+\newcommand*{\OLClassicalBuildRTLAccent}[3]{%
+  \mathord{\hbox{%
+    \OLClassicalSetLocalMathDirection\z@
+    \m@th$#1#2{\hbox{%
+      \OLClassicalSetLocalMathDirection\@ne
+      \m@th$#1#3$%
+    }}$%
+  }}%
+}
+% All one-argument accents use one dynamic wrapper shape.  The payload passed
+% through \mathpalette is exactly two brace groups: the saved command name and
+% the untouched source argument.  No accent is special-cased outside the typed
+% registry, so ownership, restoration, and the finite count stay synchronized.
+\newcommand*{\OLClassicalBoxedAccentPalette}[2]{%
+  \expandafter\OLClassicalBoxedAccentPaletteAux\expandafter{#1}#2%
+}
+\newcommand*{\OLClassicalBoxedAccentPaletteAux}[3]{%
+  \OLClassicalBuildRTLAccent{#1}{\OLClassicalSavedRegistry{#2}}{#3}%
+}
+
+% Directional accents use the same TLT shell / TRT base repair.  The opposite
+% saved accent is called while its endpoint command is locally rebound to the
+% raw saved glyph.  This prevents the endpoint registry from mirroring a
+% second time inside the accent shell.
+\newcommand*{\OLClassicalRawSavedLeftArrow}{%
+  \OLClassicalSavedRegistry{leftarrow}%
+}
+\newcommand*{\OLClassicalRawSavedRightArrow}{%
+  \OLClassicalSavedRegistry{rightarrow}%
+}
+\newcommand*{\OLClassicalOverRightRTLPresentation}[1]{%
+  \begingroup
+    \let\leftarrow\OLClassicalRawSavedLeftArrow
+    \OLClassicalSavedRegistry{overleftarrow}{#1}%
+  \endgroup
+}
+\newcommand*{\OLClassicalOverLeftRTLPresentation}[1]{%
+  \begingroup
+    \let\rightarrow\OLClassicalRawSavedRightArrow
+    \OLClassicalSavedRegistry{overrightarrow}{#1}%
+  \endgroup
+}
+\newcommand*{\OLClassicalUnderRightRTLPresentation}[1]{%
+  \begingroup
+    \let\leftarrow\OLClassicalRawSavedLeftArrow
+    \OLClassicalSavedRegistry{underleftarrow}{#1}%
+  \endgroup
+}
+\newcommand*{\OLClassicalUnderLeftRTLPresentation}[1]{%
+  \begingroup
+    \let\rightarrow\OLClassicalRawSavedRightArrow
+    \OLClassicalSavedRegistry{underrightarrow}{#1}%
+  \endgroup
+}
+\newcommand*{\OLClassicalOverRightPalette}[2]{%
+  \OLClassicalBuildRTLAccent{#1}{\OLClassicalOverRightRTLPresentation}{#2}%
+}
+\newcommand*{\OLClassicalOverLeftPalette}[2]{%
+  \OLClassicalBuildRTLAccent{#1}{\OLClassicalOverLeftRTLPresentation}{#2}%
+}
+\newcommand*{\OLClassicalUnderRightPalette}[2]{%
+  \OLClassicalBuildRTLAccent{#1}{\OLClassicalUnderRightRTLPresentation}{#2}%
+}
+\newcommand*{\OLClassicalUnderLeftPalette}[2]{%
+  \OLClassicalBuildRTLAccent{#1}{\OLClassicalUnderLeftRTLPresentation}{#2}%
+}
+\newcommand*{\OLClassicalRegistryOverrightarrow}[1]{%
+  \ifnum\OLClassicalDesiredMathDirection=\@ne
+    \mathpalette\OLClassicalOverRightPalette{#1}%
+  \else
+    \OLClassicalSavedRegistry{overrightarrow}{#1}%
+  \fi
+}
+\newcommand*{\OLClassicalRegistryOverleftarrow}[1]{%
+  \ifnum\OLClassicalDesiredMathDirection=\@ne
+    \mathpalette\OLClassicalOverLeftPalette{#1}%
+  \else
+    \OLClassicalSavedRegistry{overleftarrow}{#1}%
+  \fi
+}
+\newcommand*{\OLClassicalRegistryUnderrightarrow}[1]{%
+  \ifnum\OLClassicalDesiredMathDirection=\@ne
+    \mathpalette\OLClassicalUnderRightPalette{#1}%
+  \else
+    \OLClassicalSavedRegistry{underrightarrow}{#1}%
+  \fi
+}
+\newcommand*{\OLClassicalRegistryUnderleftarrow}[1]{%
+  \ifnum\OLClassicalDesiredMathDirection=\@ne
+    \mathpalette\OLClassicalUnderLeftPalette{#1}%
+  \else
+    \OLClassicalSavedRegistry{underleftarrow}{#1}%
+  \fi
+}
+
+% A fallback is an executable preservation rule, not a classification label.
+% It turns one complete saved atom into one outer atom while a nested TLT math
+% list preserves the source glyph and its metrics.  The surrounding TRT list
+% still owns placement of that atom.  The atom class is supplied by the typed
+% registry and therefore cannot silently drift to mathord.
+\newcommand*{\OLClassicalBuildScopedLTRAtom}[2]{%
+  \hbox{%
+    \OLClassicalSetLocalMathDirection\z@
+    \m@th$#1\OLClassicalSavedRegistry{#2}$%
+  }%
+}
+\newcommand*{\OLClassicalScopedLTRAtomChoices}[2]{%
+  \csname #1\endcsname{\mathchoice
+    {\OLClassicalBuildScopedLTRAtom\displaystyle{#2}}%
+    {\OLClassicalBuildScopedLTRAtom\textstyle{#2}}%
+    {\OLClassicalBuildScopedLTRAtom\scriptstyle{#2}}%
+    {\OLClassicalBuildScopedLTRAtom\scriptscriptstyle{#2}}}%
+}
+
+% The live custom double-shaft reduction is the sole fallback with an optional
+% lower label and mandatory upper label.  Freeze its shaft/fill composite in
+% TLT rather than guessing a visually similar left-facing overlay, while the
+% two label payloads remain separately boxed TRT lists as above.
+\newcommand*{\OLClassicalBuildScopedLTRXrightarrowdbl}[3]{%
+  \hbox{%
+    \OLClassicalSetLocalMathDirection\z@
+    \m@th$#1%
+      \IfNoValueTF{#2}
+        {\OLClassicalSavedRegistry{xrightarrowdbl}
+          {\OLClassicalRTLXArrowLabel{#3}}}%
+        {\OLClassicalSavedRegistry{xrightarrowdbl}
+          [\OLClassicalRTLXArrowLabel{#2}]
+          {\OLClassicalRTLXArrowLabel{#3}}}%
+    $%
+  }%
+}
+\newcommand*{\OLClassicalScopedLTRXrightarrowdblChoices}[2]{%
+  \mathrel{\mathchoice
+    {\OLClassicalBuildScopedLTRXrightarrowdbl\displaystyle{#1}{#2}}%
+    {\OLClassicalBuildScopedLTRXrightarrowdbl\textstyle{#1}{#2}}%
+    {\OLClassicalBuildScopedLTRXrightarrowdbl\scriptstyle{#1}{#2}}%
+    {\OLClassicalBuildScopedLTRXrightarrowdbl\scriptscriptstyle{#1}{#2}}}%
+}
+\NewDocumentCommand{\OLClassicalRegistryXrightarrowdbl}{o m}{%
+  \ifnum\OLClassicalDesiredMathDirection=\@ne
+    \OLClassicalScopedLTRXrightarrowdblChoices{#1}{#2}%
+  \else
+    \IfNoValueTF{#1}
+      {\OLClassicalSavedRegistry{xrightarrowdbl}{#2}}%
+      {\OLClassicalSavedRegistry{xrightarrowdbl}[#1]{#2}}%
+  \fi
+}
+
+% Literal < and > become math-active only while the runtime registry is
+% active.  Their original mathcodes and any pre-existing active meanings are
+% restored exactly.  The input characters and their catcodes never change.
+\newcommand*{\OLClassicalActiveLess}{%
+  \ifnum\OLClassicalDesiredMathDirection=\@ne
+    \OLClassicalSavedGreaterMathChar
+  \else
+    \OLClassicalSavedLessMathChar
+  \fi
+}
+\newcommand*{\OLClassicalActiveGreater}{%
+  \ifnum\OLClassicalDesiredMathDirection=\@ne
+    \OLClassicalSavedLessMathChar
+  \else
+    \OLClassicalSavedGreaterMathChar
+  \fi
+}
+\begingroup
+\catcode`\<=\active
+\catcode`\>=\active
+\gdef\OLClassicalActivateLiteralRegistry{%
+  \ifdefined<%
+    \global\OLClassicalSavedActiveLessDefinedtrue
+    \global\let\OLClassicalSavedActiveLess<%
+  \else
+    \global\OLClassicalSavedActiveLessDefinedfalse
+  \fi
+  \ifdefined>%
+    \global\OLClassicalSavedActiveGreaterDefinedtrue
+    \global\let\OLClassicalSavedActiveGreater>%
+  \else
+    \global\OLClassicalSavedActiveGreaterDefinedfalse
+  \fi
+  \global\let<\OLClassicalActiveLess
+  \global\let>\OLClassicalActiveGreater
+  \global\mathcode60="8000\relax
+  \global\mathcode62="8000\relax
+}
+\gdef\OLClassicalCheckLiteralRegistryOwnership{%
+  \typeout{OLC-RTL-LITERAL-MATHCODES=lt-\the\mathcode60;gt-\the\mathcode62}%
+  % LuaTeX accepts the classic active-math assignment "8000 above, but its
+  % readable extended mathcode sentinel is 0x1000000.  Checking the assignment
+  % spelling therefore rejects a correctly owned live state.
+  \ifnum\mathcode60="1000000\relax\else
+    \typeout{OLC-RTL-REGISTRY-DRIFT=literal-lt-mathcode}%
+    \OLClassicalRTLRegistryMacrosOwnedfalse
+  \fi
+  \ifnum\mathcode62="1000000\relax\else
+    \typeout{OLC-RTL-REGISTRY-DRIFT=literal-gt-mathcode}%
+    \OLClassicalRTLRegistryMacrosOwnedfalse
+  \fi
+  \ifx<\OLClassicalActiveLess\else
+    \typeout{OLC-RTL-REGISTRY-DRIFT=literal-lt-meaning}%
+    \OLClassicalRTLRegistryMacrosOwnedfalse
+  \fi
+  \ifx>\OLClassicalActiveGreater\else
+    \typeout{OLC-RTL-REGISTRY-DRIFT=literal-gt-meaning}%
+    \OLClassicalRTLRegistryMacrosOwnedfalse
+  \fi
+}
+\gdef\OLClassicalRestoreLiteralRegistry{%
+  \global\mathcode60=\OLClassicalSavedLessMathCode\relax
+  \global\mathcode62=\OLClassicalSavedGreaterMathCode\relax
+  \ifOLClassicalSavedActiveLessDefined
+    \global\let<\OLClassicalSavedActiveLess
+  \else
+    \global\let<\@undefined
+  \fi
+  \ifOLClassicalSavedActiveGreaterDefined
+    \global\let>\OLClassicalSavedActiveGreater
+  \else
+    \global\let>\@undefined
+  \fi
+}
+\endgroup
+
+% Pair-kind installers.  Only simple one-noad endpoints use the generic
+% dispatcher.  The composite and accent kinds bind the frozen builders above.
+\ExplSyntaxOn
+\cs_new_protected:cpn {OLClassicalInstallRegistryPair@simple}
+  #1#2#3#4
+  {
+    \OLClassicalRegistryWrapEntry{#1}{#1}{#2}
+    \OLClassicalRegistryWrapEntry{#2}{#2}{#1}
+  }
+\cs_new_protected:cpn {OLClassicalInstallRegistryPair@long-single}
+  #1#2#3#4
+  {
+    \OLClassicalRegistrySaveEntry{#1}
+    \OLClassicalRegistrySaveEntry{#2}
+    \OLClassicalRegistryBindEntry{#1}{OLClassicalRegistryLongrightarrow}
+    \OLClassicalRegistryBindEntry{#2}{OLClassicalRegistryLongleftarrow}
+    \cs_gset_eq:cc {OLClassicalRegistryWrapper@#1} {OLClassicalRegistryLongrightarrow}
+    \cs_gset_eq:cc {OLClassicalRegistryWrapper@#2} {OLClassicalRegistryLongleftarrow}
+  }
+\cs_new_protected:cpn {OLClassicalInstallRegistryPair@long-double}
+  #1#2#3#4
+  {
+    \OLClassicalRegistrySaveEntry{#1}
+    \OLClassicalRegistrySaveEntry{#2}
+    \OLClassicalRegistryBindEntry{#1}{OLClassicalRegistryLongRightarrow}
+    \OLClassicalRegistryBindEntry{#2}{OLClassicalRegistryLongLeftarrow}
+    \cs_gset_eq:cc {OLClassicalRegistryWrapper@#1} {OLClassicalRegistryLongRightarrow}
+    \cs_gset_eq:cc {OLClassicalRegistryWrapper@#2} {OLClassicalRegistryLongLeftarrow}
+  }
+\cs_new_protected:cpn {OLClassicalInstallRegistryPair@mapsto}
+  #1#2#3#4
+  {
+    \OLClassicalRegistrySaveEntry{#1}
+    \OLClassicalRegistrySaveEntry{#2}
+    \OLClassicalRegistryBindEntry{#1}{OLClassicalRegistryMapsto}
+    \OLClassicalRegistryBindEntry{#2}{OLClassicalRegistryMapsFrom}
+    \cs_gset_eq:cc {OLClassicalRegistryWrapper@#1} {OLClassicalRegistryMapsto}
+    \cs_gset_eq:cc {OLClassicalRegistryWrapper@#2} {OLClassicalRegistryMapsFrom}
+  }
+\cs_new_protected:cpn {OLClassicalInstallRegistryPair@long-mapsto}
+  #1#2#3#4
+  {
+    \OLClassicalRegistrySaveEntry{#1}
+    \OLClassicalRegistrySaveEntry{#2}
+    \OLClassicalRegistryBindEntry{#1}{OLClassicalRegistryLongMapsto}
+    \OLClassicalRegistryBindEntry{#2}{OLClassicalRegistryLongMapsFrom}
+    \cs_gset_eq:cc {OLClassicalRegistryWrapper@#1} {OLClassicalRegistryLongMapsto}
+    \cs_gset_eq:cc {OLClassicalRegistryWrapper@#2} {OLClassicalRegistryLongMapsFrom}
+  }
+\cs_new_protected:cpn {OLClassicalInstallRegistryPair@boxed-x-arrow}
+  #1#2#3#4
+  {
+    \OLClassicalRegistrySaveEntry{#1}
+    \OLClassicalRegistrySaveEntry{#2}
+    \OLClassicalRegistryBindEntry{#1}{OLClassicalRegistryXrightarrow}
+    \OLClassicalRegistryBindEntry{#2}{OLClassicalRegistryXleftarrow}
+    \cs_gset_eq:cc {OLClassicalRegistryWrapper@#1} {OLClassicalRegistryXrightarrow}
+    \cs_gset_eq:cc {OLClassicalRegistryWrapper@#2} {OLClassicalRegistryXleftarrow}
+  }
+\cs_new_protected:cpn {OLClassicalInstallRegistryPair@boxed-x-long-double-arrow}
+  #1#2#3#4
+  {
+    \OLClassicalRegistrySaveEntry{#1}
+    \OLClassicalRegistrySaveEntry{#2}
+    \OLClassicalRegistryBindEntry{#1}{OLClassicalRegistryXLongrightarrow}
+    \OLClassicalRegistryBindEntry{#2}{OLClassicalRegistryXLongleftarrow}
+    \cs_gset_eq:cc {OLClassicalRegistryWrapper@#1} {OLClassicalRegistryXLongrightarrow}
+    \cs_gset_eq:cc {OLClassicalRegistryWrapper@#2} {OLClassicalRegistryXLongleftarrow}
+  }
+\cs_new_protected:cpn {OLClassicalInstallRegistryPair@literal}
+  #1#2#3#4
+  {\OLClassicalActivateLiteralRegistry}
+\cs_new_protected:cpn {OLClassicalInstallRegistryPair@over-accent}
+  #1#2#3#4
+  {
+    \OLClassicalRegistrySaveEntry{#1}
+    \OLClassicalRegistrySaveEntry{#2}
+    \OLClassicalRegistryBindEntry{#1}{OLClassicalRegistryOverrightarrow}
+    \OLClassicalRegistryBindEntry{#2}{OLClassicalRegistryOverleftarrow}
+    \cs_gset_eq:cc {OLClassicalRegistryWrapper@#1} {OLClassicalRegistryOverrightarrow}
+    \cs_gset_eq:cc {OLClassicalRegistryWrapper@#2} {OLClassicalRegistryOverleftarrow}
+  }
+\cs_new_protected:cpn {OLClassicalInstallRegistryPair@under-accent}
+  #1#2#3#4
+  {
+    \OLClassicalRegistrySaveEntry{#1}
+    \OLClassicalRegistrySaveEntry{#2}
+    \OLClassicalRegistryBindEntry{#1}{OLClassicalRegistryUnderrightarrow}
+    \OLClassicalRegistryBindEntry{#2}{OLClassicalRegistryUnderleftarrow}
+    \cs_gset_eq:cc {OLClassicalRegistryWrapper@#1} {OLClassicalRegistryUnderrightarrow}
+    \cs_gset_eq:cc {OLClassicalRegistryWrapper@#2} {OLClassicalRegistryUnderleftarrow}
+  }
+\cs_new_protected:cpn {OLClassicalInstallRegistryFallback@scoped-ltr-atom}
+  #1#2#3
+  {
+    \ol_classical_registry_save_entry:n {#1}
+    \cs_gset_protected:cpn {OLClassicalRegistryWrapper@#1}
+      {
+        \ifnum\OLClassicalDesiredMathDirection=\@ne
+          \OLClassicalScopedLTRAtomChoices{#2}{#1}
+        \else
+          \OLClassicalSavedRegistry{#1}
+        \fi
+      }
+    \ol_classical_registry_bind_entry:nn
+      {#1} {OLClassicalRegistryWrapper@#1}
+  }
+\cs_new_protected:cpn
+  {OLClassicalInstallRegistryFallback@scoped-ltr-optional-mandatory}
+  #1#2#3
+  {
+    \str_if_eq:nnF {#1} {xrightarrowdbl}
+      {
+        \OLClassicalRTLMathError
+          {Unexpected~optional/mandatory~fallback~#1}
+          {Add~a~signature-preserving~builder~before~registering~it.}
+      }
+    \ol_classical_registry_save_entry:n {#1}
+    \ol_classical_registry_bind_entry:nn
+      {#1} {OLClassicalRegistryXrightarrowdbl}
+    \cs_gset_eq:cc
+      {OLClassicalRegistryWrapper@#1} {OLClassicalRegistryXrightarrowdbl}
+  }
+\cs_new_protected:Npn \ol_classical_registry_install_boxed_accent:nnn #1#2#3
+  {
+    \ol_classical_registry_save_entry:n {#1}
+    \cs_gset_protected:cpn {OLClassicalRegistryWrapper@#1} ##1
+      {
+        \ifnum\OLClassicalDesiredMathDirection=\@ne
+          \mathpalette\OLClassicalBoxedAccentPalette{{#1}{##1}}
+        \else
+          \OLClassicalSavedRegistry{#1}{##1}
+        \fi
+      }
+    \ol_classical_registry_bind_entry:nn
+      {#1} {OLClassicalRegistryWrapper@#1}
+  }
+\cs_new_eq:NN \OLClassicalRegistryInstallBoxedAccent
+  \ol_classical_registry_install_boxed_accent:nnn
+\ExplSyntaxOff
+
+\newcommand*{\OLClassicalInstallRegistryPair}[5]{%
+  \@ifundefined{OLClassicalInstallRegistryPair@#3}{%
+    \OLClassicalRTLMathError{Unknown typed-registry implementation kind #3}
+      {Classify the pair and add a reviewed installer before using it.}%
+  }{%
+    \global\advance\OLClassicalRTLRegistryPairCount\@ne
+    \csname OLClassicalInstallRegistryPair@#3\endcsname{#1}{#2}{#4}{#5}%
+    \typeout{OLC-RTL-REGISTRY-PAIR=#1/#2/#3/#4/#5}%
+  }%
+}
+\newcommand*{\OLClassicalInstallRegistryAlias}[3]{%
+  \@ifundefined{OLClassicalSavedRegistry@#2}{%
+    \OLClassicalRTLMathError{Unknown LTR registry endpoint #2 for alias #1}
+      {Register and test both canonical endpoints before adding the alias.}%
+  }{%
+    \@ifundefined{OLClassicalSavedRegistry@#3}{%
+      \OLClassicalRTLMathError{Unknown RTL registry endpoint #3 for alias #1}
+        {Register and test both canonical endpoints before adding the alias.}%
+    }{%
+      \global\advance\OLClassicalRTLRegistryAliasCount\@ne
+      \OLClassicalRegistryWrapEntry{#1}{#2}{#3}%
+      \typeout{OLC-RTL-REGISTRY-ALIAS=#1/#2/#3}%
+    }%
+  }%
+}
+\newcommand*{\OLClassicalInstallRegistryInvariant}[2]{%
+  \global\advance\OLClassicalRTLRegistryInvariantCount\@ne
+  \OLClassicalRegistrySaveInvariant{#1}{#2}%
+  \typeout{OLC-RTL-REGISTRY-INVARIANT=#1/#2}%
+}
+\newcommand*{\OLClassicalInstallRegistryFallback}[4]{%
+  \@ifundefined{OLClassicalInstallRegistryFallback@#2}{%
+    \OLClassicalRTLMathError{Unknown scoped-LTR fallback kind #2}
+      {Add an argument-preserving finite installer before using it.}%
+  }{%
+    \global\advance\OLClassicalRTLRegistryFallbackCount\@ne
+    \csname OLClassicalInstallRegistryFallback@#2\endcsname{#1}{#3}{#4}%
+    \typeout{OLC-RTL-REGISTRY-FALLBACK=#1/#2/#3/#4}%
+  }%
+}
+\newcommand*{\OLClassicalInstallRegistryBoxedAccent}[3]{%
+  \global\advance\OLClassicalRTLRegistryAccentCount\@ne
+  \OLClassicalRegistryInstallBoxedAccent{#1}{#2}{#3}%
+  \typeout{OLC-RTL-REGISTRY-BOXED-ACCENT=#1/#2/#3}%
+}
+\newcommand*{\OLClassicalActivateRTLRegistry}{%
+  \global\OLClassicalRTLRegistryPairCount\z@
+  \global\OLClassicalRTLRegistryAliasCount\z@
+  \global\OLClassicalRTLRegistryInvariantCount\z@
+  \global\OLClassicalRTLRegistryFallbackCount\z@
+  \global\OLClassicalRTLRegistryAccentCount\z@
+  \OLClassicalRTLRegistryPairs\OLClassicalInstallRegistryPair
+  \OLClassicalRTLRegistryAliases\OLClassicalInstallRegistryAlias
+  \OLClassicalRTLRegistryInvariants\OLClassicalInstallRegistryInvariant
+  \OLClassicalRTLRegistryFallbacks\OLClassicalInstallRegistryFallback
+  \OLClassicalRTLBoxedAccentInvariants\OLClassicalInstallRegistryBoxedAccent
+  \ifnum\OLClassicalRTLRegistryPairCount=\OLClassicalExpectedRTLRegistryPairCount\else
+    \OLClassicalRTLMathError{Typed registry pair count drifted}
+      {Do not accept an added, removed, or unclassified presentation pair.}%
+  \fi
+  \ifnum\OLClassicalRTLRegistryAliasCount=\OLClassicalExpectedRTLRegistryAliasCount\else
+    \OLClassicalRTLMathError{Typed registry alias count drifted}
+      {Keep the alias inventory synchronized with focused tests.}%
+  \fi
+  \ifnum\OLClassicalRTLRegistryInvariantCount=\OLClassicalExpectedRTLRegistryInvariantCount\else
+    \OLClassicalRTLMathError{Typed registry invariant count drifted}
+      {Classify every symmetric command explicitly.}%
+  \fi
+  \ifnum\OLClassicalRTLRegistryFallbackCount=\OLClassicalExpectedRTLRegistryFallbackCount\else
+    \OLClassicalRTLMathError{Scoped-LTR fallback count drifted}
+      {Every reachable unpaired atom must have one typed preservation path.}%
+  \fi
+  \ifnum\OLClassicalRTLRegistryAccentCount=\OLClassicalExpectedRTLRegistryAccentCount\else
+    \OLClassicalRTLMathError{Boxed accent count drifted}
+      {Keep the complete finite accent inventory synchronized with the census.}%
+  \fi
+  \typeout{OLC-RTL-REGISTRY=typed-coverage-v5}%
+  \typeout{OLC-RTL-REGISTRY-COUNTS=pairs-32;aliases-6;invariants-14;fallbacks-9;boxed-accents-13}%
+}
+
+% Append without discarding prior public math hooks.  Exact installed token
+% snapshots make any later replacement, insertion, or removal an ownership
+% failure; restoration never clobbers another owner's changed hook.
+% Legacy paired delimiter faces: native TRT places the source opening atom on
+% the physical right but does not mirror its glyph. Preserve the source atom
+% class, exchange only the small/large face, and never exchange left/right
+% syntax or touch tokens, radical recipes, text catcodes, or symmetric bars.
+% Slots are the installed fontmath.ltx definitions; private canonical peers
+% allow an exact macro-meaning check before owning a named delimiter.
+% OL-RTL-DELIMITERS=typed-face-only-preserved-atom-class-v1
+\newif\ifOLClassicalDelimiterRuntimeActive
+\newcommand*{\OLClassicalDelimiterPairs}[1]{%
+  #1{lbrace}{rbrace}{symbols}{66}{67}{largesymbols}{08}{09}%
+  #1{langle}{rangle}{symbols}{68}{69}{largesymbols}{0A}{0B}%
+  #1{lfloor}{rfloor}{symbols}{62}{63}{largesymbols}{04}{05}%
+  #1{lceil}{rceil}{symbols}{64}{65}{largesymbols}{06}{07}%
+  #1{lgroup}{rgroup}{largesymbols}{3A}{3B}{largesymbols}{3A}{3B}%
+  #1{lmoustache}{rmoustache}{largesymbols}{7A}{7B}{largesymbols}{40}{41}%
+}
+\newcommand*{\OLClassicalDeclareDelimiterPair}[8]{%
+  \expandafter\DeclareMathDelimiter\csname OLClassicalDelimiterLTR@#1\endcsname
+    {\mathopen}{#3}{"#4}{#6}{"#7}%
+  \expandafter\DeclareMathDelimiter\csname OLClassicalDelimiterLTR@#2\endcsname
+    {\mathclose}{#3}{"#5}{#6}{"#8}%
+  \expandafter\DeclareMathDelimiter\csname OLClassicalDelimiterRTL@#1\endcsname
+    {\mathopen}{#3}{"#5}{#6}{"#8}%
+  \expandafter\DeclareMathDelimiter\csname OLClassicalDelimiterRTL@#2\endcsname
+    {\mathclose}{#3}{"#4}{#6}{"#7}%
+}
+\OLClassicalDelimiterPairs\OLClassicalDeclareDelimiterPair
+\newcommand*{\OLClassicalDelimiterDispatch}[1]{%
+  \ifnum\OLClassicalDesiredMathDirection=\@ne
+    \csname OLClassicalDelimiterRTL@#1\endcsname
+  \else
+    \csname OLClassicalDelimiterSaved@#1\endcsname
+  \fi
+}
+\ExplSyntaxOn
+\cs_new_protected:Npn \ol_classical_delimiter_install:n #1
+  {
+    \cs_if_eq:ccF {#1} {OLClassicalDelimiterLTR@#1}
+      {\OLClassicalRTLMathError{Unsupported~delimiter~meaning~#1}
+        {The~pinned~small/large~delimiter~definition~must~match~exactly.}}
+    \cs_gset_eq:cc {OLClassicalDelimiterSaved@#1} {#1}
+    \cs_gset:cpn {OLClassicalDelimiterWrapper@#1}
+      {\OLClassicalDelimiterDispatch{#1}}
+    \cs_gset_eq:cc {#1} {OLClassicalDelimiterWrapper@#1}
+  }
+\cs_new_protected:Npn \ol_classical_delimiter_check:n #1
+  {\cs_if_eq:ccF {#1} {OLClassicalDelimiterWrapper@#1}
+    {\OLClassicalRTLMathError{Delimiter~owner~changed:~#1}
+      {Restore~the~intervening~owner~before~restoring~RTL~math.}}}
+\cs_new_protected:Npn \ol_classical_delimiter_restore:n #1
+  {
+    \ol_classical_delimiter_check:n {#1}
+    \cs_gset_eq:cc {#1} {OLClassicalDelimiterSaved@#1}
+    \cs_gundefine:c {OLClassicalDelimiterSaved@#1}
+    \cs_gundefine:c {OLClassicalDelimiterWrapper@#1}
+  }
+\cs_new_eq:NN \OLClassicalInstallNamedDelimiter \ol_classical_delimiter_install:n
+\cs_new_eq:NN \OLClassicalCheckNamedDelimiter \ol_classical_delimiter_check:n
+\cs_new_eq:NN \OLClassicalRestoreNamedDelimiter \ol_classical_delimiter_restore:n
+\ExplSyntaxOff
+\newcommand*{\OLClassicalInstallDelimiterPair}[8]{%
+  \OLClassicalInstallNamedDelimiter{#1}\OLClassicalInstallNamedDelimiter{#2}%
+}
+\newcommand*{\OLClassicalCheckDelimiterPair}[8]{%
+  \OLClassicalCheckNamedDelimiter{#1}\OLClassicalCheckNamedDelimiter{#2}%
+}
+\newcommand*{\OLClassicalRestoreDelimiterPair}[8]{%
+  \OLClassicalRestoreNamedDelimiter{#1}\OLClassicalRestoreNamedDelimiter{#2}%
+}
+% Character numbers, source atom classes, and peer character numbers.
+\newcommand*{\OLClassicalLiteralFences}[1]{%
+  #1{40}{4}{41}#1{41}{5}{40}#1{91}{4}{93}#1{93}{5}{91}%
+}
+\newcommand*{\OLClassicalSaveLiteralFence}[3]{%
+  \expandafter\xdef\csname OLClassicalFenceMath@#1\endcsname{\the\mathcode#1}%
+  \expandafter\xdef\csname OLClassicalFenceDel@#1\endcsname{\the\delcode#1}%
+  % Active/extended nonlegacy mathcodes are not admitted by this finite lane.
+  \count@=\mathcode#1\relax \divide\count@4096
+  \ifnum\count@=#2\else
+    \OLClassicalRTLMathError{Unsupported literal fence mathcode #1}
+      {Keep the pinned mathematical atom class; do not replace it silently.}%
+  \fi
+}
+\newcommand*{\OLClassicalApplyLiteralFence}[3]{%
+  \ifnum\OLClassicalDesiredMathDirection=\@ne
+    % Preserve class from the source side, take family/character from peer.
+    \count@=\csname OLClassicalFenceMath@#3\endcsname\relax
+    \@tempcnta=\count@ \divide\@tempcnta4096 \multiply\@tempcnta4096
+    \advance\count@-\@tempcnta \advance\count@\numexpr#2*4096\relax
+    \mathcode#1=\count@\relax
+    \delcode#1=\csname OLClassicalFenceDel@#3\endcsname\relax
+  \else
+    \mathcode#1=\csname OLClassicalFenceMath@#1\endcsname\relax
+    \delcode#1=\csname OLClassicalFenceDel@#1\endcsname\relax
+  \fi
+}
+\newcommand*{\OLClassicalApplyDelimiterCodes}{%
+  \ifOLClassicalDelimiterRuntimeActive
+    \OLClassicalLiteralFences\OLClassicalApplyLiteralFence
+  \fi
+}
+\newcommand*{\OLClassicalCheckLiteralFence}[3]{%
+  % Outside a complete math list the original codes remain owned unchanged;
+  % everymath/everydisplay apply only local assignments within that list.
+  \ifnum\mathcode#1=\csname OLClassicalFenceMath@#1\endcsname\relax\else
+    \OLClassicalRTLMathError{Literal fence mathcode owner changed: #1}
+      {Do not overwrite another owner.}%
+  \fi
+  \ifnum\delcode#1=\csname OLClassicalFenceDel@#1\endcsname\relax\else
+    \OLClassicalRTLMathError{Literal fence delcode owner changed: #1}
+      {Do not overwrite another owner.}%
+  \fi
+}
+\newcommand*{\OLClassicalActivateDelimiterRegistry}{%
+  \OLClassicalLiteralFences\OLClassicalSaveLiteralFence
+  \OLClassicalDelimiterPairs\OLClassicalInstallDelimiterPair
+  \global\OLClassicalDelimiterRuntimeActivetrue
+  \typeout{OLC-RTL-DELIMITERS=6-named-pairs;4-literal-faces;source-classes-preserved}%
+}
+\newcommand*{\OLClassicalCheckDelimiterRegistry}{%
+  \OLClassicalDelimiterPairs\OLClassicalCheckDelimiterPair
+  \OLClassicalLiteralFences\OLClassicalCheckLiteralFence
+}
+\newcommand*{\OLClassicalRestoreDelimiterRegistry}{%
+  \OLClassicalCheckDelimiterRegistry
+  \OLClassicalDelimiterPairs\OLClassicalRestoreDelimiterPair
+  \global\OLClassicalDelimiterRuntimeActivefalse
+}
+
+\newcommand*{\OLClassicalActivateMathListHooks}{%
+  \global\OLClassicalSavedEveryMath=\expandafter{\the\everymath}%
+  \global\OLClassicalSavedEveryDisplay=\expandafter{\the\everydisplay}%
+  \global\everymath\expandafter{\the\everymath\OLClassicalApplyDesiredMathDirection}%
+  \global\everydisplay\expandafter{\the\everydisplay\OLClassicalApplyDesiredMathDirection}%
+  \global\OLClassicalInstalledEveryMath=\expandafter{\the\everymath}%
+  \global\OLClassicalInstalledEveryDisplay=\expandafter{\the\everydisplay}%
+  \typeout{OLC-RTL-MATH-LIST-HOOKS=everymath+everydisplay-tail-v1}%
+}
+
+% The sole retained mechanism from installed luabidi 1.1 lines 339--350 is a
+% namespaced post-mlist direction-node wrapper.  It reads the one primitive
+% owned here and has no second state, package patching, or list reversal.
+\newcommand*{\OLClassicalInstallMathListDirectionCallback}{%
+  \directlua{
+    local owner = "openlogic.classical.rtl_math.ensure_math_dir"
+    if not (type(luatexbase) == "table")
+       or not (type(luatexbase.add_to_callback) == "function")
+       or not (type(luatexbase.in_callback) == "function") then
+      tex.error("OpenLogic RTL math: luatexbase callback API unavailable")
+    elseif luatexbase.in_callback("post_mlist_to_hlist_filter", owner) then
+      tex.error("OpenLogic RTL math: duplicate post-mlist callback owner")
+    else
+      openlogic_classical_rtl_math = openlogic_classical_rtl_math or {}
+      function openlogic_classical_rtl_math.ensure_math_dir(head)
+        if head == nil then
+          return head
+        end
+        local direction = tex.mathdirection
+        local first = node.new("dir")
+        first.direction = direction
+        head = node.insert_before(head, head, first)
+        local last = node.new("dir", 1)
+        last.direction = direction
+        head = node.insert_after(head, node.tail(head), last)
+        return head
+      end
+      openlogic_classical_rtl_math.installed_function =
+        openlogic_classical_rtl_math.ensure_math_dir
+      luatexbase.add_to_callback(
+        "post_mlist_to_hlist_filter",
+        openlogic_classical_rtl_math.ensure_math_dir,
+        owner)
+      texio.write_nl("term and log", "OLC-RTL-MLIST-CALLBACK=installed-once")
+    end
+  }%
+}
+\newcommand*{\OLClassicalCheckMathListDirectionCallback}{%
+  \directlua{
+    local owner = "openlogic.classical.rtl_math.ensure_math_dir"
+    local count = 0
+    if type(luatexbase) == "table"
+       and type(luatexbase.callback_descriptions) == "function" then
+      for _, description in ipairs(
+          luatexbase.callback_descriptions("post_mlist_to_hlist_filter")) do
+        if description == owner then
+          count = count + 1
+        end
+      end
+    end
+    if not (count == 1) then
+      tex.error("OpenLogic RTL math: post-mlist callback ownership drift")
+    elseif not (type(openlogic_classical_rtl_math) == "table")
+       or not (openlogic_classical_rtl_math.installed_function ==
+          openlogic_classical_rtl_math.ensure_math_dir) then
+      tex.error("OpenLogic RTL math: private callback identity drift")
+    else
+      texio.write_nl("term and log", "OLC-RTL-MLIST-CALLBACK-OWNERSHIP=PASS")
+    end
+  }%
+}
+\newcommand*{\OLClassicalRemoveMathListDirectionCallback}{%
+  \directlua{
+    local owner = "openlogic.classical.rtl_math.ensure_math_dir"
+    if not (type(luatexbase) == "table")
+       or not (type(luatexbase.in_callback) == "function")
+       or not (type(luatexbase.remove_from_callback) == "function")
+       or not (type(luatexbase.add_to_callback) == "function")
+       or not luatexbase.in_callback("post_mlist_to_hlist_filter", owner) then
+      tex.error("OpenLogic RTL math: refusing callback removal after ownership drift")
+    else
+      local removed, description = luatexbase.remove_from_callback(
+        "post_mlist_to_hlist_filter", owner)
+      local expected = type(openlogic_classical_rtl_math) == "table"
+        and openlogic_classical_rtl_math.installed_function or nil
+      if not (removed == expected) or not (description == owner) then
+        -- A later owner reused our public description.  Put that foreign
+        -- function back before failing; restoration must never delete it.
+        if type(removed) == "function" and type(description) == "string" then
+          luatexbase.add_to_callback(
+            "post_mlist_to_hlist_filter", removed, description)
+        end
+        tex.error("OpenLogic RTL math: callback function identity drift")
+      elseif openlogic_classical_rtl_math then
+        openlogic_classical_rtl_math.ensure_math_dir = nil
+        openlogic_classical_rtl_math.installed_function = nil
+      end
+    end
+  }%
+}
+
+\newcommand*{\OLClassicalSetRTLRegistryOwnership}{%
+  \OLClassicalRTLRegistryMacrosOwnedtrue
+  \OLClassicalRTLRegistryEntries\OLClassicalRegistryCheckEntry
+  \OLClassicalRTLRegistryInvariants\OLClassicalRegistryCheckInvariant
+  \OLClassicalCheckLiteralRegistryOwnership
+}
+\newcommand*{\OLClassicalCheckRTLRegistryOwnership}{%
+  \OLClassicalSetRTLRegistryOwnership
+  \ifOLClassicalRTLRegistryMacrosOwned\else
+    \OLClassicalRTLMathError
+      {The typed directional registry has ownership or classification drift}
+      {Do not silently reinstall or accept an unknown registry state.}%
+  \fi
+}
+\newcommand*{\OLClassicalCheckRTLMathHookOwnership}{%
+  \OLClassicalSetRTLMathHookOwnership
+  \ifOLClassicalRTLMathHooksOwned\else
+    \OLClassicalRTLMathError
+      {The everymath or everydisplay tail owner has drifted}
+      {Restore the later hook owner before checking or restoring this layer.}%
+  \fi
+}
+
+\let\OLClassicalSavedBabelEquationAdapter\relax
+\newcommand*{\OLClassicalBabelPhysicalLeftEquationAdapter}{%
+  \OLClassicalSavedBabelEquationAdapter
+  \def\veqno##1##2{\bbl@leqno@flip{##1##2}}%
+}
+
+\newcommand*{\OLClassicalActivateRTLMathRuntime}{%
+  \ifOLClassicalRTLMathRuntimeActive
+    \OLClassicalRTLMathError{The RTL mathematics runtime was activated twice}
+      {There must be exactly one registry and one post-mlist callback owner.}%
+  \else
+    \OLClassicalActivateMathListHooks
+    \OLClassicalActivateRTLRegistry
+    \OLClassicalActivateDelimiterRegistry
+    \OLClassicalInstallMathListDirectionCallback
+    % Babel and amsmath need opposite logical tag modes under TRT: reqno gives
+    % the align family a physical-left tag, while ordinary equation needs
+    % Babel's leqno flip.  Wrap Babel's final begin-document adapter after it
+    % exists, preserving its text-direction setup and changing only \veqno.
+    \global\let\OLClassicalSavedBabelEquationAdapter\bbl@ams@equation
+    \global\let\bbl@ams@equation\OLClassicalBabelPhysicalLeftEquationAdapter
+    \global\OLClassicalRTLMathRuntimeActivetrue
+    \OLClassicalCheckRTLMath
+  \fi
+}
+
+\newcommand*{\OLClassicalCheckRTLMath}{%
+  \ifOLClassicalRTLMathInstalled
+    \ifdefined\mathdirection
+      \ifnum\mathdirection=\@ne\relax
+      \else
+        \OLClassicalRTLMathError
+          {The installed mathematical direction is no longer TRT}
+          {A later package changed mathdirection. Reinspect load order; do not silently reinstall.}%
+      \fi
+      \ifnum\OLClassicalDesiredMathDirection=\@ne\relax\else
+        \OLClassicalRTLMathError
+          {The desired mathematical direction is no longer TRT}
+          {The state-aware list-boundary contract has drifted.}%
+      \fi
+    \else
+      \OLClassicalRTLMathError
+        {The LuaTeX mathdirection primitive disappeared}
+        {The current engine is not the engine on which the layer was installed.}%
+    \fi
+    \iftagsleft@
+      \OLClassicalRTLMathError
+        {The physical-left display-tag policy was superseded}
+        {Do not accept mixed equation and align tag sides.}%
+    \fi
+    \ifx\bbl@ams@equation\OLClassicalBabelPhysicalLeftEquationAdapter\else
+      \OLClassicalRTLMathError
+        {The Babel equation-tag adapter was superseded}
+        {Restore the intervening owner before checking or restoring this layer.}%
+    \fi
+    \ifOLClassicalRTLMathRuntimeActive
+      \OLClassicalCheckRTLRegistryOwnership
+      \OLClassicalCheckRTLMathHookOwnership
+      \OLClassicalCheckMathListDirectionCallback
+      \OLClassicalCheckDelimiterRegistry
+    \else
+      \OLClassicalRTLMathError
+        {The RTL mathematics runtime is not active}
+        {The begin-document activation hook was removed or bypassed.}%
+    \fi
+    \typeout{OLC-RTL-OWNERSHIP=PASS}%
+  \else
+    \OLClassicalRTLMathError
+      {RTL mathematics has not been installed}
+      {Call OLClassicalInstallRTLMath last in the classical-edition preamble.}%
+  \fi
+}
+
+\NewDocumentCommand{\OLClassicalInstallRTLMath}{}{%
+  \ifOLClassicalRTLMathInstalled\else
+    \OLClassicalRTLMathRequirements
+    \ifOLClassicalRTLMathSupported
+      \global\OLClassicalSavedMathDirection=\mathdirection
+      \global\OLClassicalDesiredMathDirection=\@ne
+      \global\OLClassicalSavedLessMathCode=\mathcode60\relax
+      \global\OLClassicalSavedGreaterMathCode=\mathcode62\relax
+      \global\mathchardef\OLClassicalSavedLessMathChar=\OLClassicalSavedLessMathCode
+      \global\mathchardef\OLClassicalSavedGreaterMathChar=\OLClassicalSavedGreaterMathCode
+      \iftagsleft@
+        \global\OLClassicalSavedTagsLefttrue
+      \else
+        \global\OLClassicalSavedTagsLeftfalse
+      \fi
+      % Babel's RTL adaptation turns AMS's logical-right algorithm into the
+      % physical-left policy.  Retain ownership of the matching boolean.
+      \tagsleft@false
+      % Numeric 1 is TRT in LuaTeX; unlike the archived implementation, this
+      % changes the math-list direction without reading or rewriting its tokens.
+      \global\mathdirection=\@ne\relax
+      \global\OLClassicalRTLMathInstalledtrue
+      \AddToHook{begindocument/end}[ol-classical-rtl-math-runtime]{%
+        \OLClassicalActivateRTLMathRuntime
+      }%
+      \AddToHook{enddocument}[ol-classical-rtl-math-ownership]{%
+        \OLClassicalCheckRTLMath
+      }%
+      \typeout{OL-CLASSICAL-RTL-MATH=native-mathdirection-TRT}%
+      \typeout{OL-CLASSICAL-RTL-MATH-SOURCE-ORDER=unchanged}%
+      \typeout{OL-CLASSICAL-RTL-MATH-MIRRORING=typed-registry-and-scoped-ltr-v5}%
+      \typeout{OL-CLASSICAL-RTL-MATH-NONDIRECTIONAL-ACCENTS=boxed-registry-v3}%
+      \typeout{OL-CLASSICAL-RTL-MATH-TAGS=physical-left-v1}%
+    \fi
+  \fi
+}
+
+\newcommand*{\OLClassicalRestoreRegistryEntry}[1]{%
+  \OLClassicalRegistryRestoreEntry{#1}%
+}
+\newcommand*{\OLClassicalRestoreRTLMathRuntime}{%
+  \OLClassicalCheckRTLRegistryOwnership
+  \OLClassicalCheckRTLMathHookOwnership
+  \OLClassicalCheckMathListDirectionCallback
+  \OLClassicalRestoreDelimiterRegistry
+  \OLClassicalRemoveMathListDirectionCallback
+  \ifx\bbl@ams@equation\OLClassicalBabelPhysicalLeftEquationAdapter
+    \global\let\bbl@ams@equation\OLClassicalSavedBabelEquationAdapter
+  \else
+    \OLClassicalRTLMathError
+      {Refusing to overwrite a later Babel equation-tag adapter}
+      {Restore the intervening owner first, then restore this layer.}%
+  \fi
+  \OLClassicalRTLRegistryEntries\OLClassicalRestoreRegistryEntry
+  \OLClassicalRTLRegistryInvariants\OLClassicalRegistryForgetInvariant
+  \OLClassicalRestoreLiteralRegistry
+  \global\everymath=\OLClassicalSavedEveryMath
+  \global\everydisplay=\OLClassicalSavedEveryDisplay
+  \global\OLClassicalRTLMathRuntimeActivefalse
+}
+
+% Restoration refuses to overwrite any intervening direction, macro,
+% mathcode, callback, tag-policy, or hook owner.  Unlike installation it is
+% intentionally available after begin-document activation: the registry and
+% callback do not exist until then, so a preamble-only restore command would
+% make the runtime ownership transaction impossible to reverse.
+\NewDocumentCommand{\OLClassicalRestoreMathDirection}{}{%
+  \ifOLClassicalRTLMathInstalled
+    \ifnum\currentgrouplevel=\z@
+      \ifnum\mathdirection=\@ne\relax
+        \iftagsleft@
+          \OLClassicalRTLMathError
+            {Refusing to overwrite a later display-tag policy change}
+            {Restore the intervening owner first, then call OLClassicalRestoreMathDirection again.}%
+        \else
+          \ifOLClassicalRTLMathRuntimeActive
+            \OLClassicalRestoreRTLMathRuntime
+          \fi
+          \ifOLClassicalSavedTagsLeft\tagsleft@true\else\tagsleft@false\fi
+          \global\OLClassicalDesiredMathDirection=\OLClassicalSavedMathDirection
+          \global\mathdirection=\OLClassicalSavedMathDirection\relax
+          \global\OLClassicalRTLMathInstalledfalse
+          \RemoveFromHook{begindocument/end}[ol-classical-rtl-math-runtime]%
+          \RemoveFromHook{enddocument}[ol-classical-rtl-math-ownership]%
+          \typeout{OL-CLASSICAL-RTL-MATH=restored}%
+        \fi
+      \else
+        \OLClassicalRTLMathError
+          {Refusing to overwrite a later mathematical-direction change}
+          {Restore the intervening owner first, then call OLClassicalRestoreMathDirection again.}%
+      \fi
+    \else
+      \OLClassicalRTLMathError
+        {Restore at top level outside a local group}
+        {The saved edition-level owners must not be restored from a disposable group.}%
+    \fi
+  \else
+    \OLClassicalRTLMathError
+      {There is no installed RTL mathematical direction to restore}
+      {No direction assignment was made by this layer.}%
+  \fi
+}
+
+% These scopes must surround complete math delimiters or math environments;
+% switching direction after a formula has begun is intentionally unsupported.
+% A local LTR exception is supported inside the globally installed classical
+% RTL edition.  A late local LTR-to-RTL switch is deliberately rejected:
+% LuaTeX/hyperref can defer link-box calculation until after the group has
+% restored the old direction, producing invalid annotation rectangles.  The
+% edition-level installer sets TRT before document construction and does not
+% have that failure mode.
+\newcommand*{\OLClassicalSetLocalMathDirection}[1]{%
+  \ifdefined\directlua
+    \ifdefined\mathdirection
+      \OLClassicalDesiredMathDirection=#1\relax
+      \mathdirection=#1\relax
+    \else
+      \OLClassicalRTLMathError
+        {The LuaTeX mathdirection primitive is unavailable}
+        {The local direction scope cannot be entered.}%
+    \fi
+  \else
+    \OLClassicalRTLMathError
+      {LuaLaTeX is required}
+      {The local direction scope cannot be entered.}%
+  \fi
+}
+\newcommand*{\OLClassicalApplyDesiredMathDirection}{%
+  \mathdirection=\OLClassicalDesiredMathDirection\relax
+  \OLClassicalApplyDelimiterCodes
+}
+\newcommand*{\OLClassicalRequireInstalledRTLMath}{%
+  \ifOLClassicalRTLMathInstalled
+    \OLClassicalSetLocalMathDirection\@ne
+  \else
+    \OLClassicalRTLMathError
+      {A late local switch to RTL mathematics is unsupported}
+      {Install RTL mathematics at preamble top level; use the local LTR scope only for complete exceptions.}%
+  \fi
+}
+\NewDocumentEnvironment{OLClassicalRTLMathScope}{}%
+  {\begingroup\OLClassicalRequireInstalledRTLMath}%
+  {\endgroup}
+\NewDocumentEnvironment{OLClassicalLTRMathScope}{}%
+  {\begingroup\OLClassicalSetLocalMathDirection\z@}%
+  {\endgroup}
+
+% Convenience forms create a complete inline formula.  The LTR form also
+% establishes Babel's matching inline text-direction embedding; changing only
+% \mathdirection inside an Arabic paragraph can otherwise give hyperref an
+% off-page annotation box even when the glyphs appear near the margin.  The
+% low-level environments continue to own math-list direction only, so callers
+% using them directly in RTL prose must wrap the complete formula in
+% \babelsublr.  In an existing math list both forms fail explicitly and leave
+% the argument in its current direction.
+\NewDocumentCommand{\OLClassicalRTLMath}{m}{%
+  \ifmmode
+    \OLClassicalRTLMathError
+      {OLClassicalRTLMath was called inside math mode}
+      {Place it outside math mode, or surround the complete formula with OLClassicalRTLMathScope.}%
+    #1%
+  \else
+    \begin{OLClassicalRTLMathScope}\ensuremath{#1}\end{OLClassicalRTLMathScope}%
+  \fi
+}
+\NewDocumentCommand{\OLClassicalLTRMath}{m}{%
+  \ifmmode
+    \OLClassicalRTLMathError
+      {OLClassicalLTRMath was called inside math mode}
+      {Place it outside math mode, or surround the complete formula with OLClassicalLTRMathScope.}%
+    #1%
+  \else
+    \ifdefined\babelsublr
+      \babelsublr{\begin{OLClassicalLTRMathScope}%
+        \ensuremath{#1}%
+      \end{OLClassicalLTRMathScope}}%
+    \else
+      \OLClassicalRTLMathError
+        {Babel's inline left-to-right embedding is unavailable}
+        {Load the pinned Arabic Babel stack before using OLClassicalLTRMath.}%
+      \begin{OLClassicalLTRMathScope}\ensuremath{#1}\end{OLClassicalLTRMathScope}%
+    \fi
+  \fi
+}
+
+\@onlypreamble\OLClassicalInstallRTLMath
+\makeatother
+\endinput

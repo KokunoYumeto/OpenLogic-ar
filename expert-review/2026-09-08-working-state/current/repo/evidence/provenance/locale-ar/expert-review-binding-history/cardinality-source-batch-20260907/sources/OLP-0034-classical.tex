@@ -1,0 +1,94 @@
+% Part:sets-functions-relations
+% Chapter: sets
+% Section: reduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid[ar]{sfr}{siz}{red}
+
+\olsection{الاختزال}
+
+\begin{editorial}
+نعيد هنا إثبات عدم القابلية للتعداد بطريق الاختزال، فتطابق النتائج ما في \olref[nen]{sec}. ومن أراد عرضًا أوجز قليلًا، موافقًا لنتائج \olref[nen-alt]{sec}، وجده في \olref[red-alt]{sec}.
+\end{editorial}
+
+قد ثبت بالحجة القطرية أن $\Pow{\PosInt}$ !!{nonenumerable}، وكان قد سبق ثبوت ذلك لـ$\Bin^\omega$، أي مجموعة المتتاليات اللانهائية من~$0$ و~$1$، فهي !!{nonenumerable}. ويمكن أن نجعل النتيجة الثانية سبيلًا آخر إلى إثبات أن $\Pow{\PosInt}$ !!{nonenumerable}: فنبرهن على أنه \emph{لو كانت $\Pow{\PosInt}$ !!{enumerable} لكانت $\Bin^\omega$ !!{enumerable} أيضًا}. وحيث علمنا أن $\Bin^\omega$ ليست !!{enumerable}، امتنع ذلك على $\Pow{\PosInt}$. وهذا هو \emph{اختزال} مسألة إلى أخرى؛ فإن مسألة تعداد $\Bin^\omega$ قد رددناها إلى مسألة تعداد $\Pow{\PosInt}$. فلو ظفرنا بحل الثانية، أعني تعداد $\Pow{\PosInt}$، لظفرنا به بحل الأولى، أعني تعداد $\Bin^\omega$.
+
+ومعنى اختزال تعداد مجموعة~$B$ إلى تعداد مجموعة~$A$ أن نجد طريقًا يحول تعداد~$A$ إلى تعداد~$B$. وأيسر ذلك أن نعين دالة~!!a{surjective} $f\colon A \to B$. فمتى كانت $x_1$، $x_2$، \dots{} تعدادًا لـ~$A$، كانت $f(x_1)$، $f(x_2)$، \dots{} تعدادًا لـ~$B$. فمطلبنا في المسألة الحاضرة دالة شاملة $f\colon \Pow{\PosInt} \to \Bin^\omega$.
+
+\begin{prob}
+لتكن دالة~!!{injective} $g\colon B \to A$ موجودة، ولتكن $B$~!!{nonenumerable}. بين أن $A$ كذلك، بأن تبين كيف تحول~$g$ تعداد~$A$، لو وجد، إلى تعداد~$B$.
+\end{prob}
+
+\begin{proof}[برهان {\olref[nen]{thm:nonenum-pownat}} بالاختزال]
+لنفرض أن $\Pow{\PosInt}$ !!{enumerable}، ونأخذ لها تعدادًا $Z_{1}$، $Z_{2}$، $Z_{3}$، \dots
+
+ونضع الدالة $f \colon \Pow{\PosInt} \to \Bin^\omega$ على الوجه الآتي: نجعل $f(Z)$ هي المتتالية $s$ التي تكون فيها $s(n) = 1$ إذا وفقط إذا كان $n \in Z$، وتكون $s(n) = 0$ فيما عدا ذلك. وهذا تعيين لا التباس فيه؛ فمتى كان $Z \subseteq \PosInt$، فإن $n \in \PosInt$ إما أن يكون !!a{element} من $Z$ وإما ألا يكون. فمجموعة الأعداد الصحيحة الموجبة الزوجية $2\PosInt = \{2,
+4, 6, \dots\}$ صورتها $010101\dots$، وصورة المجموعة الخالية $0000\dots$، وصورة $\PosInt$ نفسها $1111\dots$.
+
+وهذه الدالة !!{surjective} أيضًا. ذلك أن كل متتالية من~$0$ و~$1$ تعين مجموعة الأعداد الصحيحة الموجبة التي يقع~$1$ في مواضعها، فتكون المتتالية صورة تلك المجموعة. ولتفصيله، خذ $s \in \Bin^\omega$، وعين $Z
+\subseteq \PosInt$ بوضع
+\[
+Z = \Setabs{n \in \PosInt}{s(n) = 1}
+\]
+فيكون $f(Z) = s$، كما يظهر بمراجعة تعريف~$f$.
+
+فانظر الآن إلى القائمة
+\[
+f(Z_1), f(Z_2), f(Z_3), \dots
+\]
+إن $f$ !!{surjective}، فلا يخلو عنصر من $\Bin^\omega$ من أن يكون قيمة لـ~$f$ عند وسيط ما؛ وكل وسيط وارد في التعداد المفروض، فلا بد من ورود تلك القيمة في هذه القائمة. فهي إذن تعداد يستوفي~$\Bin^\omega$.
+
+وحاصل ذلك أن قابلية $\Pow{\PosInt}$ لأن تكون !!{enumerable} تستلزم أن تكون $\Bin^\omega$ !!{enumerable}. وقد ثبت أن $\Bin^\omega$ !!{nonenumerable} (\olref[nen]{thm:nonenum-bin-omega})، فلزم أن $\Pow{\PosInt}$ !!{nonenumerable}.
+\end{proof}
+
+\begin{editorial}
+\textbf{تنبيه تصحيحي على الأصل (OLSIZ-004).}
+سمّى الأصل المتتالية $s_k$ من غير أن يربط $k$؛ فاستُعمل الاسم
+$s$ في التعريف كله، إذ تحدد المجموعة $Z$ متتاليتها المميزة وحدها.
+\end{editorial}
+
+\begin{explain}
+وينبغي ضبط جهة الاختزال، إذ يقع اللبس فيها بسهولة. فوجود دالة~!!a{surjective} $g \colon \Bin^\omega \to B$ \emph{لا} يثبت أن $B$ !!{nonenumerable}. وشاهده الدالة $g
+\colon \Bin^\omega \to \Bin$ التي نعرفها بـ$g(s) = s(1)$: فهي تأخذ المتتالية من~$0$ و~$1$ فترسلها إلى أول !!{element} فيها. وهي !!{surjective}، لأن متتاليات منها تبدأ بـ$0$ ومنها ما يبدأ بـ$1$؛ على أن $\Bin$ منتهية. كذلك لا بد من كون الدالة~$f$ !!{surjective}، وإلا لم يتم البرهان؛ إذ لا يلزم حينئذ أن تستوفي $f(x_1)$، $f(x_2)$، \dots{} !!{element}s~$B$ كلها. وانظر مثلًا إلى العبارة
+\[
+h(n) = \underbrace{00\dots0}_{\text{$n$ أصفار}}111\dots
+\]
+أي إن $h(n)$ متتالية لا نهائية تبدأ بـ$n$ أصفار ثم تستمر بالآحاد.
+وهذا يعرّف دالة $h\colon \PosInt \to \Bin^\omega$، مع أن
+$\PosInt$ !!{enumerable}.
+\end{explain}
+
+\begin{editorial}
+\textbf{تنبيه تصحيحي على الأصل (OLSIZ-005).}
+جعل الأصل قيمة $h(n)$ سلسلة منتهية من الأصفار مع أن المدى
+$\Bin^\omega$ لا يضم إلا المتتاليات اللانهائية؛ فأضيف ذيل لا نهائي من الآحاد.
+\end{editorial}
+
+\begin{prob}
+أقم حجة اختزال على أن مجموعة جميع \emph{المجموعات المؤلفة من} أزواج الأعداد الصحيحة الموجبة !!{nonenumerable}.
+\end{prob}
+
+\begin{prob}\label{sfr:siz:red:prob:nat-nat}
+بين بالاختزال أن المجموعة~$X$ التي تضم جميع الدوال $f\colon \Nat \to \Nat$ !!{nonenumerable}. وتلميحه أن تعين دالة شاملة من $X$ إلى~$\Bin^\omega$.
+\end{prob}
+
+\begin{prob}
+استعمل الاختزال لإثبات أن $\Nat^\omega$ !!{nonenumerable}؛ والمراد بها مجموعة جميع المتتاليات اللانهائية من الأعداد الطبيعية.
+\end{prob}
+
+\begin{prob}
+سمّ $P$ مجموعة الدوال من الأعداد الصحيحة الموجبة إلى $\{0\}$، وسمّ $Q$ مجموعة الدوال \emph{الجزئية} من الأعداد الصحيحة الموجبة إلى $\{0\}$. والمطلوب إثبات أن $P$~!!{enumerable}، بخلاف $Q$. وتلميحه أن ترد مسألة تعداد $\Bin^\omega$ إلى تعداد~$Q$.
+\end{prob}
+
+\begin{prob}
+إذا كانت $S$ مجموعة الدوال~!!{surjective} من الأعداد الصحيحة الموجبة إلى \{0,1\}، أي كانت $S$ تضم جميع الدوال~!!{surjective}~$f\colon \PosInt \to \Bin$، فأثبت أن $S$ !!{nonenumerable}.
+\end{prob}
+
+\begin{prob}
+بين أن $\Real$، مجموعة الأعداد الحقيقية بأسرها، !!{nonenumerable}.
+\end{prob}
+
+\end{document}
