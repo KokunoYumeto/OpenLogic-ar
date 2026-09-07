@@ -1,0 +1,80 @@
+% Part:sets-functions-relations
+% Chapter: size-of-sets
+% Section: equinumerous-sets
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid[ar]{sfr}{siz}{equ}
+
+\olsection{التساوي العددي}
+
+إن تصورنا المعتاد لحجم المجموعة يكفينا ما دامت منتهية؛ فإذا صرنا إلى المجموعات اللانهائية احتجنا إلى تحقيقه. ولإقامة مقارنة صورية بين مجموعتين، \emph{أيًّا} كان حجمهما، نبدأ بضبط معنى تساويهما في الحجم. وفي هذا يقول فريغه:
+\begin{quote}
+متى أراد النادل أن يتحقق من تساوي عدد السكاكين والصحون على المائدة، لم يحتج إلى عد هذه ولا تلك. بل يكفيه أن يجعل إلى يمين كل صحن سكينًا، بحيث لا تكون سكين على المائدة إلا عن يمين صحن. فتقابل الصحون والسكاكين حينئذ تقابلًا لا اشتراك فيه، وتكفي هذه العلاقة المكانية نفسها لإقامته. \citep[\S70]{Frege1884}
+\end{quote}
+ونصوغ المعنى الذي يكشف عنه هذا المثال في التعريف الآتي.
+
+\begin{defn}\ollabel{comparisondef}
+نقول إن $A$ \emph{متساوية عددًا} مع $B$، ونرمز إلى ذلك بـ$\cardeq{A}{B}$، إذا وفقط إذا وجدت !!a{bijection} $f \colon A \to B$.
+\end{defn}
+
+\begin{prop}\ollabel{equinumerosityisequi}
+علاقة التساوي العددي من علاقات التكافؤ.
+\end{prop}
+
+\begin{proof}
+يكفينا إثبات الانعكاسية والتناظر والتعدي. ولتكن $A, B$ و$C$ مجموعات كيف اتفقت.
+
+\emph{الانعكاسية.} نأخذ دالة الهوية $\Id{A} \colon A \to A$، المعرفة بـ$\Id{A} (x) = x$ لكل $x \in A$. فهي !!a{bijection}، وبها يثبت $\cardeq{A}{A}$.
+
+\emph{التناظر.} من $\cardeq{A}{B}$ نحصل على !!a{bijection} $f\colon A \to B$. ولكون $f$ !!{bijective} يوجد معكوسها $f^{-1}$، وهو !!{bijective} أيضًا. فالدالة $f^{-1}\colon B \to A$ !!a{bijection} تشهد بأن $\cardeq{B}{A}$.
+
+\emph{التعدي.} إذا كان $\cardeq{A}{B}$ و$\cardeq{B}{C}$، وجدنا !!{bijection}s $f\colon A \to B$ و$g\colon B \to
+C$. وتركيبهما $\comp{f}{g}\colon A \to C$ !!{bijective}، فيثبت به $\cardeq{A}{C}$.
+\end{proof}
+
+\begin{prop}
+متى كان $\cardeq{A}{B}$، تكافأ كون $A$ !!{enumerable} وكون $B$ كذلك.
+\end{prop}
+
+\begin{editorial}
+مبنى البرهان الآتي على \olref[enm]{defn:enumerable} عند إدراج \olref[enm]{sec}؛ وإلا فمبناه على \olref[enm-alt]{defn:enumerable}.
+\end{editorial}
+
+\begin{proof}
+ليكن $\cardeq{A}{B}$، ولنأخذ !!{bijection} $f \colon A
+\to B$. وافرض أن $A$ !!{enumerable}.
+\oliflabeldef{sfr:siz:enm:defn:enumerable}{
+فإما $A = \emptyset$، وإما أن توجد دالة~!!a{surjective} $g\colon \PosInt \to A$. فإن كان $A = \emptyset$ لزم $B = \emptyset$؛ وإلا وجد !!a{element}~$y \in B$ ولم يوجد $x \in
+A$ يحقق $f(x) = y$. وأما إذا وجدت $g\colon \PosInt \to A$ !!{surjective}، فتركيبها $\comp{g}{f} \colon \PosInt \to B$ !!{surjective}. وبيانه أن نأخذ $y \in B$؛ فالدالة $f$ !!{surjective}، ولذلك يوجد $x \in A$ يحقق $f(x) = y$. ثم إن $g$ !!{surjective}، فيوجد $n \in \PosInt$ يحقق $g(n) =
+x$. فينتج
+\[
+(\comp{g}{f})(n) = f(g(n)) = f(x) = y
+\]
+فتكون $\comp{g}{f}$ !!{surjective}. وبذلك تكون $\comp{g}{f}$ تعدادًا لـ~$B$، وتكون $B$~!!{enumerable}.}
+{
+فإما $A  = \emptyset$، وإما أن توجد !!a{bijection}~$g$ مداها $A$، ومجالها $\Nat$ أو مقطع ابتدائي من الأعداد الطبيعية. فإن كان $A = \emptyset$ لزم $B =
+\emptyset$؛ وإلا وجد~$y \in B$ ولم يوجد $x
+\in A$ يحقق $f(x) = y$. وأما مع وجود !!{bijection}~$g$، فإن $\comp{g}{f}$ !!a{bijection} مداها~$B$ ومجالها هو مجال~$g$؛ أي $\Nat$ أو مقطع ابتدائي منه. ومن ثم تكون $B$ !!{enumerable}.}
+
+وأما إن كانت $B$ !!{enumerable}، فإن $A$ !!{enumerable} بالحجة نفسها، إذا استعملنا !!{bijection} $f^{-1}\colon B \to A$ في موضع~$f$.
+\end{proof}
+
+\begin{editorial}
+\textbf{تنبيه تصحيحي على الأصل (OLSIZ-006).}
+ورد $g(x)=y$ مرتين في فرع المجموعة الخالية قبل تعريف $g$؛ والدالة
+المتقابلة التي يقتضيها السياق هي $f$، فصُحح الموضعان إلى $f(x)=y$.
+\end{editorial}
+
+\begin{prob}
+إذا تحقق $\cardeq{A}{C}$ و$\cardeq{B}{D}$، مع $A \cap B =
+C \cap D = \emptyset$، فبرهن على $\cardeq{A \cup B}{C \cup D}$.
+\end{prob}
+
+\begin{prob}
+لتكن $A$ لا نهائية و!!{enumerable}. أثبت حينئذ $\cardeq{A}{\Nat}$.
+\end{prob}
+
+\end{document}

@@ -1,12 +1,14 @@
-# Integrated Arabic translation-review register
+# Arabic translation review — full recorded list
 
-Working register: 1,073 readable entries; counts are recorded entries, not unique terms or a completed full-work audit.
+Read the latest corrections first, then the earlier complete recorded snapshot. Every listed choice remains open to correction.
 
-**This total includes 7 unapplied proposals, labelled explicitly in the readable sections and occurrence table. These proposals are not current source wording.**
+- [Latest: all 23 applied decisions, locations and reasons](cardinality-update/ALL_23_DECISIONS.md).
+- [Earlier 1,073-entry recorded snapshot, organized by section](integrated-review/reviewer-index/README.md).
+- [Earlier sortable occurrence table](integrated-review/EXPERT_REVIEW_OCCURRENCES.csv).
+- [Earlier machine-readable register](integrated-review/EXPERT_REVIEW_INDEX.json.gz).
 
-- [Start with priority choices](integrated-review/EXPERT_REVIEW_START_HERE.md).
-- [Browse all recorded entries](integrated-review/reviewer-index/README.md).
-- [Sortable occurrence table](integrated-review/EXPERT_REVIEW_OCCURRENCES.csv).
-- [Machine-readable register](integrated-review/EXPERT_REVIEW_INDEX.json.gz).
+Seven of the latest decisions supersede the seven pairing proposals in the earlier snapshot; sixteen are additional correction records. Do not count superseded records twice or read their old proposal status as current. The update includes four Unicode mark-ordering records. These are counts of records, not unique terms.
 
-902 flagged choices; 534 unresolved lexical locations; 110 flags still need explicit questions. Entries distinguish recorded evidence, retrospective reasons and provisional choices open to correction. Exact source locations are supplied where proved; final PDF page numbers are not certified. This integrated source/reviewer update does not rebuild the books or certify a finished Classical reader. Earlier source snapshots and the separate 16-choice supplement remain preserved beside this subtree.
+The earlier snapshot reports 902 flagged choices, 534 unresolved lexical locations and 110 flags without explicit questions. Those are historical snapshot counts, not a new full-corpus audit. The 23 latest decisions all supply exact source locations, reasons and questions. Final PDF page mapping, exhaustive audit and the Classical reader are unfinished; existing reader PDFs have not been rebuilt with these changes.
+
+[Start here](EXPERT_REVIEW_START_HERE.md).
