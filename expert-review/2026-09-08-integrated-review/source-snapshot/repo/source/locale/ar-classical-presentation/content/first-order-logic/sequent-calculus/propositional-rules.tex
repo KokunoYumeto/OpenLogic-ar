@@ -1,0 +1,88 @@
+% Part: first-order-logic
+% Chapter: sequent-calculus
+% Section: propositional-rules
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{seq}{prl}}
+      {\olfileid{pl}{seq}{prl}}
+
+\olsection{قواعد الروابط القضوية}
+
+\subsection{قواعد $\lnot$}
+
+\begin{defish}
+\Axiom$ \OLId{greek-variable}{Gamma} \fCenter \OLId{greek-variable}{Delta}, !A $
+\RightLabel{\LeftR{\lnot}}
+\UnaryInf$ \lnot !A, \OLId{greek-variable}{Gamma} \fCenter \OLId{greek-variable}{Delta}$
+\DisplayProof
+\hfill
+\Axiom$!A, \OLId{greek-variable}{Gamma} \fCenter \OLId{greek-variable}{Delta}$
+\RightLabel{\RightR{\lnot}}
+\UnaryInf$ \OLId{greek-variable}{Gamma} \fCenter \OLId{greek-variable}{Delta}, \lnot !A $
+\DisplayProof
+\end{defish}
+
+\subsection{قواعد $\land$}
+
+\begin{defish}\noindent
+\begin{tabular}{l}
+\Axiom$ !A, \OLId{greek-variable}{Gamma} \fCenter \OLId{greek-variable}{Delta}$
+\RightLabel{\LeftR{\land}}
+\UnaryInf$ !A \land !B, \OLId{greek-variable}{Gamma} \fCenter \OLId{greek-variable}{Delta}$
+\DisplayProof
+\\[3ex]
+\Axiom$!B, \OLId{greek-variable}{Gamma} \fCenter \OLId{greek-variable}{Delta}$
+\RightLabel{\LeftR{\land}}
+\UnaryInf$!A \land !B, \OLId{greek-variable}{Gamma} \fCenter \OLId{greek-variable}{Delta}$
+\DisplayProof
+\end{tabular}
+\hfill
+\Axiom$\OLId{greek-variable}{Gamma} \fCenter \OLId{greek-variable}{Delta}, !A$
+\Axiom$ \OLId{greek-variable}{Gamma} \fCenter \OLId{greek-variable}{Delta}, !B$
+\RightLabel{\RightR{\land}}
+\BinaryInf$ \OLId{greek-variable}{Gamma} \fCenter \OLId{greek-variable}{Delta}, !A \land !B $
+\DisplayProof
+\end{defish}
+
+\subsection{قواعد $\lor$}
+
+\begin{defish}
+\Axiom$!A, \OLId{greek-variable}{Gamma} \fCenter \OLId{greek-variable}{Delta}$
+\Axiom$!B, \OLId{greek-variable}{Gamma} \fCenter \OLId{greek-variable}{Delta}$
+\RightLabel{\LeftR{\lor}}
+\BinaryInf$!A \lor !B, \OLId{greek-variable}{Gamma} \fCenter \OLId{greek-variable}{Delta}$
+\DisplayProof
+\hfill
+\begin{tabular}{r}
+\Axiom$\OLId{greek-variable}{Gamma} \fCenter \OLId{greek-variable}{Delta}, !A$
+\RightLabel{\RightR{\lor}}
+\UnaryInf$ \OLId{greek-variable}{Gamma} \fCenter \OLId{greek-variable}{Delta}, !A \lor !B$
+\DisplayProof
+\\[3ex]
+\Axiom$ \OLId{greek-variable}{Gamma} \fCenter \OLId{greek-variable}{Delta}, !B$
+\RightLabel{\RightR{\lor}}
+\UnaryInf$ \OLId{greek-variable}{Gamma} \fCenter \OLId{greek-variable}{Delta}, !A \lor !B$
+\DisplayProof
+\end{tabular}
+\end{defish}
+
+\subsection{قواعد $\lif$}
+
+\begin{defish}
+\Axiom$ \OLId{greek-variable}{Gamma} \fCenter \OLId{greek-variable}{Delta}, !A$
+\Axiom$ !B, \Pi \fCenter \Lambda$
+\RightLabel{\LeftR{\lif}}
+\BinaryInf$ !A \lif !B, \OLId{greek-variable}{Gamma}, \Pi \fCenter \OLId{greek-variable}{Delta}, \Lambda$
+\DisplayProof
+\hfill
+\Axiom$ !A, \OLId{greek-variable}{Gamma} \fCenter \OLId{greek-variable}{Delta}, !B$
+\RightLabel{\RightR{\lif}}
+\UnaryInf$ \OLId{greek-variable}{Gamma} \fCenter \OLId{greek-variable}{Delta}, !A \lif !B $
+\DisplayProof
+\end{defish}
+
+\end{document}

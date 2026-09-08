@@ -1,0 +1,136 @@
+% Part: proof-theory
+% Chapter: natural-deduction
+% Section: translation-N2i
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{nat}{tni}
+
+\olsection{في النقل من \Log{N2} إلى \Log{G2}}
+
+\begin{prop}\ollabel{prop:N2-to-G2}
+متى كان~$\Log{N2c}\ (\Log{N2i}) \Proves \OLId{greek-variable}{Gamma} \Sequent !A$، كان
+$\Log{G2c}\ (\Log{G2i}) + \Cut \Proves \OLId{greek-variable}{Gamma}' \Sequent \OLId{greek-variable}{Delta}$؛
+و~$\OLId{greek-variable}{Gamma}'$ هنا هي المجموعة المتعددة من~!!{formula}s التي تحصل من
+$\OLId{greek-variable}{Gamma}$ بإسقاط الوسوم، و~$\OLId{greek-variable}{Delta} = \{!A\}$ إذا لم تكن~$!A$ هي
+$\lfalse$، أما إن كانت إياها فـ~$\OLId{greek-variable}{Delta} = \emptyset$.
+\end{prop}
+
+\begin{proof}
+ونسلك مرة أخرى الاستقراء على ارتفاع~!!{proof}~$\delta$ للمتتالية
+$\OLId{greek-variable}{Gamma} \Sequent !A$. فإن كانت~$\delta$ هي المسلّمة
+$\OLId{latin-ordinary}{x}:!A \Sequent !A$، أخذنا~$\pi$ المسلّمة المقابلة
+$!A \Sequent !A$، أو~$\lfalse \Sequent \ $ متى كان
+$!A \ident \lfalse$.
+
+وإذا كانت آخر~$\delta$ قاعدة استدلال، قسمنا الأمر إلى الحالات الآتية:
+\begin{enumerate}
+  \item إذا كانت~$\OLId{latin-looped}{R}$ هي~\Intro{\lif} وصيغتها الرئيسة~$!B \lif !C$، وكان
+  $\OLId{latin-ordinary}{x}:!B$ موجودًا في سياق المقدمة دون النتيجة، انتهى~$\delta$ بما يأتي:
+  \[
+  \AxiomC{}
+  \RightLabel{$\delta_\OLMathNumeral{1}$}
+  \Deduce$\OLId{latin-ordinary}{x}:!B, \OLId{greek-variable}{Gamma} \fCenter !C$
+  \RightLabel{\Intro{\lif}}
+  \UnaryInf$\OLId{greek-variable}{Gamma} \fCenter !B \lif !C$
+  \DisplayProof
+  \]
+  يعطي فرض الاستقراء~!!a{proof}~$\pi_\OLMathNumeral{1}$ للمتتالية
+  $!B,\OLId{greek-variable}{Gamma}' \Sequent !C$، أو للمتتالية~$!B,\OLId{greek-variable}{Gamma}' \Sequent \ $ إذا
+  كان $!C \ident \lfalse$. وفي الحالة الأخيرة نطبّق أولًا
+  \RightR{\Weakening} لإضافة~$\lfalse$ إلى الطرف الأيمن. ثم ينتج لنا
+  $\pi$ في الحالتين بتطبيق~\RightR{\lif}.
+  \item إذا كانت~$\OLId{latin-looped}{R}$ هي~\Intro{\lif} غير أن~$\OLId{latin-ordinary}{x}:!B$ لم يكن موجودًا في سياق
+  المقدمة، انتهى~$\delta$ بما يأتي:
+  \[
+  \AxiomC{}
+  \RightLabel{$\delta_\OLMathNumeral{1}$}
+  \Deduce$\OLId{greek-variable}{Gamma} \fCenter !C$
+  \RightLabel{\Intro{\lif}}
+  \UnaryInf$\OLId{greek-variable}{Gamma} \fCenter !B \lif !C$
+  \DisplayProof
+  \]
+  يعطي فرض الاستقراء~!!a{proof}~$\pi_\OLMathNumeral{1}$ للمتتالية
+  $\OLId{greek-variable}{Gamma}' \Sequent !C$، أو للمتتالية ذات الطرف الأيمن الخالي إذا كان
+  $!C \ident \lfalse$. في الحالة الأخيرة نطبّق أولًا
+  \RightR{\Weakening} لإضافة~$\lfalse$، ثم نطبّق
+  \LeftR{\Weakening} بالصيغة~$!B$، وأخيرًا~\RightR{\lif}؛ وفي الحالة
+  الأولى نحتاج إلى التطبيقين الأخيرين فقط.
+  \item إذا كانت~$\OLId{latin-looped}{R}$ هي~\Elim{\lif}، انتهى~$\delta$ بما يأتي:
+  \[
+  \AxiomC{}
+  \RightLabel{$\delta_\OLMathNumeral{1}$}
+  \Deduce$\OLId{greek-variable}{Gamma}_\OLMathNumeral{1} \fCenter !B \lif !A$
+  \AxiomC{}
+  \RightLabel{$\delta_\OLMathNumeral{2}$}
+  \Deduce$\OLId{greek-variable}{Gamma}_\OLMathNumeral{2} \fCenter !B$
+  \RightLabel{\Elim{\lif}}
+  \BinaryInf$\OLId{greek-variable}{Gamma}_\OLMathNumeral{1}, \OLId{greek-variable}{Gamma}_\OLMathNumeral{2} \fCenter !A$
+  \DisplayProof
+  \]
+  حيث السياق~$\OLId{greek-variable}{Gamma}$ هو تجميع السياقين~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{1},\OLId{greek-variable}{Gamma}_\OLMathNumeral{2}$. يعطي فرض
+  الاستقراء !!{proof}s: برهانًا~$\pi_\OLMathNumeral{1}$ للمتتالية
+  $\OLId{greek-variable}{Gamma}_\OLMathNumeral{1}' \Sequent !B \lif !A$، وبرهانًا~$\pi_\OLMathNumeral{2}$ للمتتالية
+  $\OLId{greek-variable}{Gamma}_\OLMathNumeral{2}' \Sequent !B$ إذا كان~$!B \not\ident \lfalse$، أو للمتتالية
+  $\OLId{greek-variable}{Gamma}_\OLMathNumeral{2}' \Sequent \ $ إذا كان~$!B \ident \lfalse$. وفي الحالة
+  الثانية نضيف~\RightR{\Weakening} إلى~$\pi_\OLMathNumeral{2}$ كي تكون نتيجته
+  $\OLId{greek-variable}{Gamma}_\OLMathNumeral{2}' \Sequent \lfalse$.
+
+  إذا كان $!A \not\ident \lfalse$ ينتج لنا~!!{proof}~$\pi$ بالصورة:
+  \[
+  \AxiomC{}
+  \RightLabel{$\pi_\OLMathNumeral{1}$}
+  \Deduce$\OLId{greek-variable}{Gamma}_\OLMathNumeral{1}' \fCenter !B \lif !A$
+  \AxiomC{}
+  \RightLabel{$\pi_\OLMathNumeral{2}$}
+  \Deduce$\OLId{greek-variable}{Gamma}_\OLMathNumeral{2}' \fCenter !B$
+  \Axiom$!A \fCenter !A$
+  \RightLabel{\LeftR{\lif}}
+  \BinaryInf$!B \lif !A, \OLId{greek-variable}{Gamma}_\OLMathNumeral{2}' \fCenter !A$
+  \RightLabel{\Cut}
+  \BinaryInf$\OLId{greek-variable}{Gamma}_\OLMathNumeral{1}', \OLId{greek-variable}{Gamma}_\OLMathNumeral{2}' \fCenter !A$
+  \DisplayProof
+  \]
+  أما إذا كان $!A \ident \lfalse$ فنستخدم~$\lfalse \Sequent \ $ مقدمةً
+  يمنى لتطبيق~\LeftR{\lif}، فنحصل على~!!a{proof} للطرف الأيمن الخالي، ثم
+  نطبّق~\Cut؛ وعلى هذا يكون~!!{proof}~$\pi$ للمتتالية
+  $\OLId{greek-variable}{Gamma}_\OLMathNumeral{1}',\OLId{greek-variable}{Gamma}_\OLMathNumeral{2}' \Sequent \ $ ولا نطبّق إضعافًا يمينيًا عليها.
+  قد لا يساوي تجميع المجموعتين المتعددتين~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{1}',\OLId{greek-variable}{Gamma}_\OLMathNumeral{2}'$ المجموعة
+  المتعددة~$\OLId{greek-variable}{Gamma}'$ الناتجة من تجميع~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{1},\OLId{greek-variable}{Gamma}_\OLMathNumeral{2}$. فمثلًا، إذا كان
+  كل من~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{1}$ و$\OLId{greek-variable}{Gamma}_\OLMathNumeral{2}$ يحتوي~$\OLId{latin-ordinary}{x}:!C$، احتوى التجميع الأول نسختين من
+  $!C$، بينما لا ينتج من تجميع السياقين الموسومين إلا نسخة واحدة. نصحح ذلك
+  بإضافة استدلالات مناسبة من~\LeftR{\Contraction}.
+
+\item إذا كانت~$\OLId{latin-looped}{R}$ هي~\FalseCl، انتهى~$\delta$ بما يأتي:
+  \[
+  \AxiomC{}
+  \RightLabel{$\delta_\OLMathNumeral{1}$}
+  \Deduce$\OLId{latin-ordinary}{x}: \lnot !A, \OLId{greek-variable}{Gamma} \fCenter \lfalse$
+  \RightLabel{\FalseCl}
+  \UnaryInf$\OLId{greek-variable}{Gamma} \fCenter !A$
+  \DisplayProof
+  \]
+  يوجد، بفرض الاستقراء، !!a{proof}~$\pi_\OLMathNumeral{1}$ للمتتالية
+  $\lnot !A,\OLId{greek-variable}{Gamma}' \Sequent \ $. ونتخذ~!!{proof}~$\pi$ ليكون:
+  \[
+  \Axiom$!A \fCenter !A$
+  \RightLabel{\RightR{\lnot}}
+  \UnaryInf$\fCenter !A, \lnot !A$
+  \AxiomC{}
+  \RightLabel{$\pi_\OLMathNumeral{1}$}
+  \Deduce$\lnot !A, \OLId{greek-variable}{Gamma}' \fCenter $
+  \RightLabel{\Cut}
+  \BinaryInf$\OLId{greek-variable}{Gamma}' \fCenter !A$
+  \DisplayProof
+  \]
+  \item وتعالج بقية قواعد الاستدلال على هذا القياس؛ فتجمع السياقات
+  بالفواصل، وتحذف التكرارات الزائدة بانقباضات يسارية حيث تدعو الحاجة.
+\end{enumerate}
+ولا ينتج من ترجمة~\FalseCl{} وحدها إلا~!!a{proof}~$\pi$ فيه أكثر من
+!!{formula} واحدة عن اليمين. فترجمة~!!{proof} في~\Log{N2i} إنما هي
+!!{proof} في~\Log{G2i}.
+\end{proof}
+
+\end{document}

@@ -1,0 +1,111 @@
+% Explicit opt-in Arabic set symbols for the separate classical-style edition.
+% Union of Arab Academies (1988), printed p. 93 / PDF p. 105.
+% This changes presentation of five typed macros, never bare letters or tokens.
+% Registry: evidence/classical/SET_SYMBOL_MAPPING.json
+\RequirePackage{expl3}
+\providecommand*{\OLArabicSetFontPath}{../ar/fonts/vendor/xits-1.302/XITSMath-Regular.otf}
+\makeatletter
+\ExplSyntaxOn
+
+\msg_new:nnn {ol-classical-sets}{engine}
+  {This~typed~set-symbol~layer~requires~LuaLaTeX.}
+\msg_new:nnn {ol-classical-sets}{glyph}
+  {Pinned~mathematical~font~does~not~contain~U+#1.}
+\msg_new:nnn {ol-classical-sets}{dependency}
+  {Required~typed~set~macro~'#1'~does~not~exist.}
+\sys_if_engine_luatex:F {\msg_fatal:nn {ol-classical-sets}{engine}}
+
+\bool_new:N \g_ol_classical_sets_installed_bool
+\clist_const:Nn \c_ol_classical_set_required_glyphs_clist
+  {1EEA8,1EEB1,1EEAD,1EEA7,0660}
+
+% Each point size gets one immutable XITS instance.  The current math sizes
+% are queried at every use; installing at 10pt therefore cannot freeze a later
+% small/large environment at those original sizes.
+\cs_new_protected:Npn \ol_classical_set_select_font:n #1
+  {
+    \cs_if_exist:cF {g_ol_classical_set_font_#1}
+      {
+        \tex_global:D \exp_after:wN \tex_font:D
+          \cs:w g_ol_classical_set_font_#1\cs_end:
+          = "[\OLArabicSetFontPath]:mode=base" at #1pt\scan_stop:
+      }
+    \cs_set_eq:Nc \OLArabicSetSelectedGlyphFont
+      {g_ol_classical_set_font_#1}
+    \OLArabicSetSelectedGlyphFont
+  }
+\cs_new_protected:Npn \ol_classical_set_require_glyph:n #1
+  {
+    \iffontchar\OLArabicSetSelectedGlyphFont "#1\scan_stop:
+    \else
+      \msg_fatal:nnn {ol-classical-sets}{glyph}{#1}
+    \fi
+  }
+\cs_new_protected:Npn \ol_classical_set_preflight:
+  {
+    \check@mathfonts
+    \hbox
+      {
+        \textdir TLT
+        \ol_classical_set_select_font:n {\tf@size}
+        \clist_map_function:NN \c_ol_classical_set_required_glyphs_clist
+          \ol_classical_set_require_glyph:n
+      }
+  }
+\cs_new_protected:Npn \ol_classical_set_glyph_box:nn #1#2
+  {
+    \hbox
+      {
+        \textdir TLT
+        \ol_classical_set_select_font:n {#1}
+        \ol_classical_set_require_glyph:n {#2}
+        \char"#2\scan_stop:
+      }
+  }
+\cs_new_protected:Npn \OLArabicSetGlyph #1
+  {
+    \check@mathfonts
+    \mathchoice
+      {\ol_classical_set_glyph_box:nn {\tf@size} {#1}}
+      {\ol_classical_set_glyph_box:nn {\tf@size} {#1}}
+      {\ol_classical_set_glyph_box:nn {\sf@size} {#1}}
+      {\ol_classical_set_glyph_box:nn {\ssf@size} {#1}}
+  }
+
+\cs_new_protected:Npn \ol_classical_set_require_dependency:N #1
+  {\cs_if_exist:NF #1 {\msg_fatal:nnx {ol-classical-sets}{dependency}{\token_to_str:N #1}}}
+\NewDocumentCommand \OLInstallArabicSetSymbols { }
+  {
+    \bool_if:NF \g_ol_classical_sets_installed_bool
+      {
+        \ol_classical_set_require_dependency:N \Nat
+        \ol_classical_set_require_dependency:N \Int
+        \ol_classical_set_require_dependency:N \PosInt
+        \ol_classical_set_require_dependency:N \Rat
+        \ol_classical_set_require_dependency:N \Real
+        % Preflight every XITS scalar before saving or redefining any macro.
+        \ol_classical_set_preflight:
+        \cs_gset_eq:NN \OLInternationalNat \Nat
+        \cs_gset_eq:NN \OLInternationalInt \Int
+        \cs_gset_eq:NN \OLInternationalPosInt \PosInt
+        \cs_gset_eq:NN \OLInternationalRat \Rat
+        \cs_gset_eq:NN \OLInternationalReal \Real
+        % Open Logic's Nat includes zero; preserve that convention visibly.
+        % The outer mathord keeps a later source script outside the zero mark.
+        \cs_gset:Npn \Nat
+          {\ensuremath{\mathord{\OLArabicSetGlyph{1EEA8}^{\OLArabicSetGlyph{0660}}}}}
+        \cs_gset:Npn \Int
+          {\ensuremath{\mathord{\OLArabicSetGlyph{1EEB1}}}}
+        \cs_gset:Npn \PosInt
+          {\ensuremath{\mathord{\OLArabicSetGlyph{1EEB1}^{+}}}}
+        \cs_gset:Npn \Rat
+          {\ensuremath{\mathord{\OLArabicSetGlyph{1EEAD}}}}
+        \cs_gset:Npn \Real
+          {\ensuremath{\mathord{\OLArabicSetGlyph{1EEA7}}}}
+        \bool_gset_true:N \g_ol_classical_sets_installed_bool
+        \iow_term:n {OL-ARABIC-SETS=typed-dynamic-xits-v2}
+        \iow_term:n {OL-ARABIC-SETS-NAT-INCLUDES-ZERO=true}
+      }
+  }
+\ExplSyntaxOff
+\makeatother

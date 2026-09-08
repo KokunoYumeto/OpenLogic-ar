@@ -1,0 +1,118 @@
+% Part: lambda-calculus
+% Chapter: syntax
+% Section: beta
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{syn}{bet}
+\olsection{اختزال~$\beta$}
+
+إذا تأملنا~$(\lambd[\OLId{latin-ordinary}{m}][(\lambd[\OLId{latin-ordinary}{y}][\OLId{latin-ordinary}{y}]) \OLId{latin-ordinary}{m}])$ ظهر لنا أن بينه وبين~$\lambd[\OLId{latin-ordinary}{m}][\OLId{latin-ordinary}{m}]$ صلة:
+فالثاني ينبغي أن ينتج من تبسيط الأول.
+ومفهوم \emph{اختزال~$\beta$} هو الصياغة الصورية لهذا الحدس.
+
+\begin{defn}[تقلّص~$\beta$، $\bredone$] \ollabel{defn:betacontr}
+  علاقة \emph{تقلّص~$\beta$} ($\bredone$) أصغر علاقة متوافقة على الحدود تحقق
+  \[
+    (\lambd[\OLId{latin-ordinary}{x}][\OLId{latin-looped}{N}])\OLId{latin-looped}{Q} \bredone \Subst{\OLId{latin-looped}{N}}{\OLId{latin-looped}{Q}}{\OLId{latin-ordinary}{x}} 
+  \]
+  ونقول إن~$\OLId{latin-looped}{P}$ \emph{يتقلّص بحسب~$\beta$} إلى~$\OLId{latin-looped}{Q}$ متى كان~$\OLId{latin-looped}{P} \bredone
+  \OLId{latin-looped}{Q}$.
+  وكل حد على صورة~$(\lambd[\OLId{latin-ordinary}{x}][\OLId{latin-looped}{N}])\OLId{latin-looped}{Q}$ يسمى \emph{موضع اختزال}.
+\end{defn}
+
+\begin{prob} \ollabel{prob:def}
+  بيّن تفصيلًا التعريفات الاستقرائية المكافئة لتقلّص~$\beta$،
+  على مثال ما صنعناه لتغيير المتغير المقيد في~\olref[lam][syn][alp]{defn:aconvone}.
+\end{prob}
+  
+\begin{defn}[اختزال~$\beta$، $\bred$] \ollabel{defn:betared}
+  علاقة \emph{اختزال~$\beta$} ($\bred$) أصغر علاقة انعكاسية متعدية على الحدود
+  تشتمل على~$\bredone$. ونقول إن~$\OLId{latin-looped}{P}$ يختزل بحسب~$\beta$ إلى
+  $\OLId{latin-looped}{Q}$ متى كان~$\OLId{latin-looped}{P} \bred \OLId{latin-looped}{Q}$.
+\end{defn}
+
+وحيث لا يلتبس المراد، نستعمل~$\redone$ مكان~$\bredone$،
+و$\red$ مكان~$\bred$.
+
+فالمعنى غير الصوري لـ$\OLId{latin-looped}{M} \bred \OLId{latin-looped}{N}$ هو إمكان الانتقال من~$\OLId{latin-looped}{M}$ إلى
+$\OLId{latin-looped}{N}$ بصفر من خطوات تقلّص~$\beta$ أو بعدة خطوات منه.
+
+\begin{defn}[السواء بحسب~$\beta$]
+الحد الذي لا يقبل مزيدًا من التقلّص بحسب~$\beta$ يسمى \emph{سويًا بحسب~$\beta$}.
+\end{defn}
+
+إذا تحقق~$\OLId{latin-looped}{M} \bred \OLId{latin-looped}{N}$ وكان~$\OLId{latin-looped}{N}$ سويًا بحسب~$\beta$، سمينا~$\OLId{latin-looped}{N}$
+\emph{صورة سوية} للحد~$\OLId{latin-looped}{M}$. وهل يمكن أن تتعدد الصورة السوية لحد واحد؟
+سنرى لاحقًا أنها، إن وجدت، وحيدة.
+
+ونبيّن هذه المعاني بالأمثلة:
+\begin{enumerate}
+\item نحصل على الاختزال
+\begin{align*}
+(\lambd[\OLId{latin-ordinary}{x}][xxy]) \lambd[\OLId{latin-ordinary}{z}][\OLId{latin-ordinary}{z}] & \redone (\lambd[\OLId{latin-ordinary}{z}][\OLId{latin-ordinary}{z}])(\lambd[\OLId{latin-ordinary}{z}][\OLId{latin-ordinary}{z}]) \OLId{latin-ordinary}{y} \\
+& \redone (\lambd[\OLId{latin-ordinary}{z}][\OLId{latin-ordinary}{z}]) \OLId{latin-ordinary}{y} \\
+& \redone \OLId{latin-ordinary}{y}
+\end{align*}
+\item وقد يزيد ما نسميه تبسيطًا في تعقيد الحد:
+\begin{align*}
+(\lambd[\OLId{latin-ordinary}{x}][xxy])(\lambd[\OLId{latin-ordinary}{x}][xxy]) & \redone (\lambd[\OLId{latin-ordinary}{x}][xxy])(\lambd[\OLId{latin-ordinary}{x}][xxy])\OLId{latin-ordinary}{y} \\
+& \redone (\lambd[\OLId{latin-ordinary}{x}][xxy])(\lambd[\OLId{latin-ordinary}{x}][xxy])yy \\
+& \redone \dots
+\end{align*}
+\item وقد يبقى الحد بعده على حاله:
+\[
+(\lambd[\OLId{latin-ordinary}{x}][xx])(\lambd[\OLId{latin-ordinary}{x}][xx]) \redone (\lambd[\OLId{latin-ordinary}{x}][xx])(\lambd[\OLId{latin-ordinary}{x}][xx])
+\]
+\item وقد تتعدد طرق الاختزال؛ فمن ذلك
+\[
+(\lambd[\OLId{latin-ordinary}{x}][(\lambd[\OLId{latin-ordinary}{y}][yx]) \OLId{latin-ordinary}{z}]) \OLId{latin-ordinary}{v} \redone (\lambd[\OLId{latin-ordinary}{y}][yv]) \OLId{latin-ordinary}{z}
+\]
+إذا قلصنا التطبيق الخارجي أولًا، وكذلك
+\[
+(\lambd[\OLId{latin-ordinary}{x}][(\lambd[\OLId{latin-ordinary}{y}][yx]) \OLId{latin-ordinary}{z}]) \OLId{latin-ordinary}{v} \redone (\lambd[\OLId{latin-ordinary}{x}][zx]) \OLId{latin-ordinary}{v}
+\]
+إذا قلصنا التطبيق الداخلي أولًا. ومع هذا الاختلاف، يختزل الناتجان في هذا المثال إلى حد واحد،
+هو~$zv$.
+\end{enumerate}
+
+وليست وحدة المآل في المثال الأخير اتفاقًا عارضًا؛ بل هي شاهد على خاصية عميقة مهمة لحساب لامبدا،
+تسمى خاصية تشيرش--روسر.
+
+\begin{digress}
+  لما كان اختزال الحد بحسب~$\beta$ يجري، في العموم، بطرق مختلفة،
+  وضعت له استراتيجيات كثيرة؛ وأشهرها \emph{الاستراتيجية الطبيعية}.
+  وهي تقلّص دائمًا موضع الاختزال \emph{الأبعد إلى اليسار}،
+  وتعين موضعه بنقطة ابتداء كتابته في الحد.
+  ومن منفعتها أن إمكان الوصول إلى صورة سوية باستراتيجية ما يكافئ إمكان الوصول إليها بالاستراتيجية الطبيعية.
+  وهذه هي الاستراتيجية التي نتبعها فيما يأتي، إلا إذا نصصنا على خلافها.
+\end{digress}
+
+\begin{defn}[التكافؤ بحسب~$\beta$، $\equal$]
+  علاقة \emph{التكافؤ بحسب~$\beta$} ($\equal$) تعرّف استقرائيًا بالقواعد الآتية:
+  \begin{enumerate}
+  \item $\OLId{latin-looped}{M} \equal \OLId{latin-looped}{M}$.
+  \item من~$\OLId{latin-looped}{M} \equal \OLId{latin-looped}{N}$ يلزم~$\OLId{latin-looped}{N} \equal \OLId{latin-looped}{M}$.
+  \item من~$\OLId{latin-looped}{M} \equal \OLId{latin-looped}{N}$ و$\OLId{latin-looped}{N} \equal \OLId{latin-looped}{O}$ يلزم~$\OLId{latin-looped}{M} \equal \OLId{latin-looped}{O}$.
+  \item من~$\OLId{latin-looped}{M} \equal \OLId{latin-looped}{N}$ يلزم~$PM \equal PN$.
+  \item من~$\OLId{latin-looped}{M} \equal \OLId{latin-looped}{N}$ يلزم~$MQ \equal NQ$.
+  \item من~$\OLId{latin-looped}{M} \equal \OLId{latin-looped}{N}$ يلزم~$\lambd[\OLId{latin-ordinary}{x}][\OLId{latin-looped}{M}] \equal \lambd[\OLId{latin-ordinary}{x}][\OLId{latin-looped}{N}]$.
+  \item $(\lambd[\OLId{latin-ordinary}{x}][\OLId{latin-looped}{N}])\OLId{latin-looped}{Q} \equal \Subst{\OLId{latin-looped}{N}}{\OLId{latin-looped}{Q}}{\OLId{latin-ordinary}{x}}$.
+  \end{enumerate}
+\end{defn}
+
+فبالقواعد الثلاث الأولى تكون العلاقة تكافؤًا، وبالثلاث التالية تكون متوافقة،
+وبالقاعدة الأخيرة تشتمل على تقلّص~$\beta$.
+
+والمعنى غير الصوري أن تكافؤ حدين بحسب~$\beta$ يكافئ إمكان الانتقال من أحدهما إلى الآخر
+بصفر أو أكثر من خطوات تقلّص~$\beta$ أو خطوات معكوس تقلّص~$\beta$.
+ونعني بمعكوس تقلّص~$\beta$ أن~$\OLId{latin-looped}{M}$ يتقلّص عكسيًا بحسب~$\beta$ إلى~$\OLId{latin-looped}{N}$
+إذا وفقط إذا تقلّص~$\OLId{latin-looped}{N}$ بحسب~$\beta$ إلى~$\OLId{latin-looped}{M}$.
+
+وسنضيف إلى هذه القواعد قواعد أخرى توسع العلاقة.
+ونرمز إلى التكافؤ الناتج بـ$\equal[\OLId{latin-looped}{X}]$، حيث~$\OLId{latin-looped}{X}$ القاعدة المضافة.
+
+\end{document}
+

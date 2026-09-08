@@ -1,0 +1,43 @@
+% Part: computability
+% Chapter: computability-theory
+% Section: def-functions-self-reference
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{thy}{slf}
+\olsection{تعريف الدوال بالإحالة الذاتية}
+
+من وجوه الانتفاع بلمة النقطة الثابتة أن نعرف الدالة بالإحالة إلى نفسها. فلو أعطينا دوال قابلة للحساب $\OLId{latin-ordinary}{k}$ و$\OLId{latin-ordinary}{l}$ و~$\OLId{latin-ordinary}{m}$، ضمنت اللمة وجود دالة جزئية قابلة للحساب~$\OLId{latin-ordinary}{f}$ تحقق، لكل~$\OLId{latin-ordinary}{y}$،
+\[
+\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{y}) \simeq
+\begin{cases}
+\OLId{latin-ordinary}{k}(\OLId{latin-ordinary}{y}) & \text{إذا كان $l(y) = 0$} \\
+\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{m}(\OLId{latin-ordinary}{y})) & \text{خلاف ذلك.}
+\end{cases}
+\]
+ولتحصيل $\OLId{latin-ordinary}{f}$ على التعيين، نضع
+\[
+\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y}) \simeq
+\begin{cases}
+\OLId{latin-ordinary}{k}(\OLId{latin-ordinary}{y}) & \text{إذا كان $l(y) = 0$} \\
+\cfind{\OLId{latin-ordinary}{x}}(\OLId{latin-ordinary}{m}(\OLId{latin-ordinary}{y})) & \text{خلاف ذلك}
+\end{cases}
+\]
+ثم نأخذ بلمة النقطة الثابتة فهرسًا~$\OLId{latin-ordinary}{e}$ يحقق
+$\cfind{\OLId{latin-ordinary}{e}}(\OLId{latin-ordinary}{y})\simeq \OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{e},\OLId{latin-ordinary}{y})$.
+
+ومن أمثلة ذلك دالة «القاسم المشترك الأكبر» $\fn{gcd}(\OLId{latin-ordinary}{u},\OLId{latin-ordinary}{v})$، إذ نحدها بالمعادلة
+\[
+\fn{gcd}(\OLId{latin-ordinary}{u},\OLId{latin-ordinary}{v}) \simeq
+\begin{cases}
+\OLId{latin-ordinary}{v} & \text{إذا كان $u = 0$} \\
+\fn{gcd}(\fn{mod}(\OLId{latin-ordinary}{v}, \OLId{latin-ordinary}{u}), \OLId{latin-ordinary}{u}) & \text{خلاف ذلك}
+\end{cases}
+\]
+والمراد بـ$\fn{mod}(\OLId{latin-ordinary}{v},\OLId{latin-ordinary}{u})$ باقي قسمة $\OLId{latin-ordinary}{v}$ على~$\OLId{latin-ordinary}{u}$. فتثبت لمة النقطة الثابتة أن $\fn{gcd}$ جزئية قابلة للحساب. ويمكن رد هذا المثال إلى الصورة السابقة بجعل $\OLId{latin-ordinary}{y}$ ترميزًا للزوج $\tuple{\OLId{latin-ordinary}{u},\OLId{latin-ordinary}{v}}$. ثم نستقرئ على~$\OLId{latin-ordinary}{u}$ لنثبت أن $\fn{gcd}$ كلية أيضًا.
+
+ولا تنحصر التعريفات ذاتية الإحالة في هذه الأمثلة؛ بل يمكن تركيب ما هو أعقد منها كثيرًا. وأكثر لغات البرمجة تجيز، على وجه ما، أن تعرف الدالة بالإحالة إلى نفسها. غير أن هذا أضيق شأنًا من تعريفها بدلالة \emph{فهرس} لخوارزمية تحسبها؛ وتلك هي القدرة التي تمنحها مبرهنة النقطة الثابتة في عمومها.
+
+\end{document}

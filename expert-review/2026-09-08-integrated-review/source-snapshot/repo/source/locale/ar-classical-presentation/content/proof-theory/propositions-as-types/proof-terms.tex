@@ -1,0 +1,116 @@
+% part: intuitionistic-logic
+% chapter: propositions-as-types
+% section: proof-terms
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{pty}{ter}
+
+\olsection{في حدود البرهان}
+
+نوسم الفروض في~\Log{N1i} بمتغيرات (مثل~$!A^\OLId{latin-ordinary}{x}$) بوصفها وسوم تفريغ. وفي
+\Log{N2i} تحتوي كل متتالية~$\OLId{greek-variable}{Gamma}\Sequent !A$ قائمة أزواج من
+متغير--!!{formula} في السياق~$\OLId{greek-variable}{Gamma}$ على اليسار. ولذلك تحمل كل متتالية في
+!!a{proof} من~\Log{N2i} معلومات لا عن نتيجة~!!{proof} حتى تلك النقطة، أي
+عما~!!{prove} وهو~$!A$، فحسب، بل عن الفروض المفتوحة عند كل نقطة،
+أي~$\OLId{greek-variable}{Gamma}$، كذلك. فما الذي يحدث لو ضمّنا كل متتالية كذلك معلومات عن
+\emph{كيف}~!!{prove}~$!A$؟ يمكن لهذا الغرض تعريف نظام \emph{موسوم
+بالحدود}~\Log{tN2i} تكون متتالياته من الصورة~$\OLId{greek-variable}{Gamma}\Sequent \OLId{latin-looped}{N}:!A$.
+ويظل~$\OLId{greek-variable}{Gamma}$ و$!A$ كما كانا: مجموعة أزواج من الصورة~$\OLId{latin-ordinary}{x}:!B$، والـ
+!!{formula} التي أثبتها الـ~!!{proof} الجزئي المنتهي بالمتتالية من الفروض
+في~$\OLId{greek-variable}{Gamma}$. أما~$\OLId{latin-looped}{N}$ فهو حد معين يرمّز~!!{proof} المنتهي بتلك المتتالية.
+
+تُبنى الحدود التي نسندها إلى كل متتالية من المتغيرات~$\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y},\dots$، باستعمال
+رموز دوال ترمّز الاستدلالات المنفذة حتى تلك النقطة. ونحتاج إلى رمز دالة
+مستقل لكل قاعدة استدلال. وتسمى رموز الدوال المقابلة لقواعد~!!{introduction}
+``بانيات''، والمقابلة لقواعد~!!{elimination} ``هادمات''. ويأخذ كل رمز دالة
+من المعطيات عدد مقدمات القاعدة. فمثلًا، يجوز أن يكون رمزا الدالة لـ
+\Intro{\land} و\Elim{\land}[\OLClassicalDigits{1}] هما~$\OLId{latin-ordinary}{c}^\land$ (ثنائي الموضع) و
+$\OLId{latin-ordinary}{d}^\land_\OLMathNumeral{1}$ (أحادي الموضع). وعندئذ تصير هاتان القاعدتان في~\Log{tN2i}:
+\[
+\Axiom$\OLId{greek-variable}{Gamma}_\OLMathNumeral{1} \fCenter \OLId{latin-looped}{N}: !A$
+\Axiom$\OLId{greek-variable}{Gamma}_\OLMathNumeral{2} \fCenter \OLId{latin-looped}{M}: !B$
+\RightLabel{\Intro{\land}}
+\BinaryInf$\OLId{greek-variable}{Gamma}_\OLMathNumeral{1}, \OLId{greek-variable}{Gamma}_\OLMathNumeral{2} \fCenter \OLId{latin-ordinary}{c}^\land(\OLId{latin-looped}{N}, \OLId{latin-looped}{M}) : !A \land !B $
+\DisplayProof
+\quad
+\Axiom$\OLId{greek-variable}{Gamma} \fCenter \OLId{latin-looped}{N}: !A \land !B$
+\RightLabel{\Elim{\land}[\OLMathNumeral{1}]}
+\UnaryInf$\OLId{greek-variable}{Gamma} \fCenter \OLId{latin-ordinary}{d}^\land_\OLMathNumeral{1}(\OLId{latin-looped}{N}) : !A$
+\DisplayProof
+\]
+إذا فرّغت قاعدة استدلال فرضًا، أي إذا كانت لها مقدمة تشير إلى
+!!{formula} موسومة~$\OLId{latin-ordinary}{x}:!A$ لا تقع في سياق النتيجة، وجب أن نمثل ذلك في حد
+البرهان كذلك. وتقوم رموز الدوال المرتبطة بهذه القواعد \emph{بتقييد}
+المتغيرات المقابلة. فقاعدة~\Intro{\lif}، مثلًا، تنتقل من المقدمة
+$\OLId{latin-ordinary}{x}:!A,\OLId{greek-variable}{Gamma}\Sequent !B$ إلى~$\OLId{greek-variable}{Gamma}\Sequent !A\lif !B$. ويأخذ الباني
+$\OLId{latin-ordinary}{c}^{\lif}$ معطى واحدًا، لكنه يجب أن يشير كذلك إلى أن المتغير~$\OLId{latin-ordinary}{x}$ صار
+مقيّدًا. وهذه طريقة حد البرهان للتعبير عن تفريغ الفرض الموسوم بـ~$\OLId{latin-ordinary}{x}$.
+فإذا كان حد برهان المقدمة هو~$\OLId{latin-looped}{N}$، أمكن كتابة حد برهان النتيجة
+$\OLId{latin-ordinary}{c}^{\lif}([\OLId{latin-ordinary}{x}]\OLId{latin-looped}{N})$ وكتابة القاعدة هكذا:
+\[
+\Axiom$\OLId{latin-ordinary}{x}:!A, \OLId{greek-variable}{Gamma} \fCenter \OLId{latin-looped}{N}: !B$
+\RightLabel{\Intro{\lif}}
+\UnaryInf$\OLId{greek-variable}{Gamma} \fCenter \OLId{latin-ordinary}{c}^{\lif}([\OLId{latin-ordinary}{x}]\OLId{latin-looped}{N}) : !A \lif !B$
+\DisplayProof
+\]
+
+ولكي نستطيع إعادة بناء~!!a{proof} كاملًا، نحتاج إلى معلومات إضافية. فإذا لم
+تحدد~!!{formula}s مقدمات القاعدة~!!{formula} النتيجة تحديدًا كاملًا، وجب
+إضافة تلك المعلومات إلى الحد. وهذا هو الحال في~\Intro{\lif}، ولذلك نكتب
+$\OLId{latin-ordinary}{c}^{\lif}([\OLId{latin-ordinary}{x}:!A]\OLId{latin-looped}{N})$. وهو الحال كذلك في~\Intro{\lor} و\FalseInt، فنستعمل
+رموز دوال تحمل هذه المعلومات، مثلًا:
+\[
+\Axiom$\OLId{greek-variable}{Gamma} \fCenter \OLId{latin-looped}{N}:!A$
+\RightLabel{\Intro{\lor}[\OLMathNumeral{1}]}
+\UnaryInf$\OLId{greek-variable}{Gamma} \fCenter \OLId{latin-ordinary}{c}^{\lor{!B}}_\OLMathNumeral{1}(\OLId{latin-looped}{N}):!A \lor !B$
+\DisplayProof
+\quad
+\Axiom$\OLId{greek-variable}{Gamma} \fCenter \OLId{latin-looped}{N}:\lfalse$
+\RightLabel{\FalseInt}
+\UnaryInf$\OLId{greek-variable}{Gamma} \fCenter \OLId{latin-ordinary}{d}^\lfalse_{!A}(\OLId{latin-looped}{N}):!A$
+\DisplayProof
+\]
+
+تتيح هذه الأفكار بناء نظام استنباط طبيعي بصيغة المتتاليات تكون فيه كل
+متتالية من الصورة~$\OLId{greek-variable}{Gamma}\Sequent \OLId{latin-looped}{N}:!A$، ويكون~$\OLId{latin-looped}{N}$ \emph{حد برهان}.
+
+ويتضح وجود صلة وثيقة بين حدود البرهان هذه وحدود ما يسمى \emph{حساب لامبدا
+المنمّط}. واحترامًا لهذه الصلة سنستعمل الرموز الشائعة في أدبيات حساب لامبدا
+بدل رموز الباني والهادم العامة السابقة. فمثلًا، نكتب
+$\lambd[\typeof{\OLId{latin-ordinary}{x}}{!A}][\OLId{latin-looped}{N}]$ بدل~$\OLId{latin-ordinary}{c}^{\lif}([\OLId{latin-ordinary}{x}:!A]\OLId{latin-looped}{N})$، ونكتب~$(NM)$ بدل
+$\OLId{latin-ordinary}{d}^{\lif}(\OLId{latin-looped}{N},\OLId{latin-looped}{M})$، و$\pair{\OLId{latin-looped}{N}}{\OLId{latin-looped}{M}}$ بدل~$\OLId{latin-ordinary}{c}^\land(\OLId{latin-looped}{N},\OLId{latin-looped}{M})$، و$\proj{\OLId{latin-ordinary}{i}}{\OLId{latin-looped}{N}}$ بدل
+$\OLId{latin-ordinary}{d}^\land_\OLId{latin-ordinary}{i}(\OLId{latin-looped}{N})$.
+
+\begin{defn}
+  تتولد حدود البرهان استقرائيًا بالقواعد الآتية:
+  \begin{enumerate}
+  \item كل متغير~$\OLId{latin-ordinary}{x}$ حد برهان (المسلّمات).
+  \item إذا كان~$\OLId{latin-ordinary}{x}$ متغيرًا، و$!A$ !!a{formula}، و$\OLId{latin-looped}{N}$ حد برهان، فإن
+    $\lambd[\typeof{\OLId{latin-ordinary}{x}}{!A}][\OLId{latin-looped}{N}]$ حد برهان كذلك~(\Intro\lif).
+  \item إذا كان~$\OLId{latin-looped}{N}$ و$\OLId{latin-looped}{M}$ حدي برهان، كان~$(NM)$ حد برهان كذلك~(\Elim\lif).
+  \item إذا كان~$\OLId{latin-looped}{N}$ و$\OLId{latin-looped}{M}$ حدي برهان، كان~$\pair{\OLId{latin-looped}{N}}{\OLId{latin-looped}{M}}$ حد برهان كذلك
+    ~(\Intro\land).
+  \item إذا كان~$\OLId{latin-looped}{N}$ حد برهان، كان~$\proj{\OLId{latin-ordinary}{i}}{\OLId{latin-looped}{N}}$ حد برهان أيضًا، حيث~$\OLId{latin-ordinary}{i}$
+    إما~$\OLMathNumeral{1}$ وإما~$\OLMathNumeral{2}$~(\Elim\land[i]).
+  \item إذا كان~$\OLId{latin-looped}{N}$ حد برهان و$!A$ صيغة، كان~$\inj[!A]{\OLId{latin-ordinary}{i}}{\OLId{latin-looped}{N}}$ حد برهان،
+    حيث~$\OLId{latin-ordinary}{i}$ إما~$\OLMathNumeral{1}$ وإما~$\OLMathNumeral{2}$~(\Intro\lor[i]).
+  \item إذا كانت~$\OLId{latin-looped}{M},\OLId{latin-looped}{N}_\OLMathNumeral{1},\OLId{latin-looped}{N}_\OLMathNumeral{2}$ حدود برهان، وكان~$\OLId{latin-ordinary}{x}_\OLMathNumeral{1},\OLId{latin-ordinary}{x}_\OLMathNumeral{2}$ متغيرين، فإن
+    $\dcase{\OLId{latin-looped}{M}}{\OLId{latin-ordinary}{x}_\OLMathNumeral{1}}{\OLId{latin-looped}{N}_\OLMathNumeral{1}}{\OLId{latin-ordinary}{x}_\OLMathNumeral{2}}{\OLId{latin-looped}{N}_\OLMathNumeral{2}}$ حد برهان~(\Elim\lor).
+  \item إذا كان~$\OLId{latin-looped}{N}$ حد برهان و$!A$ !!a{formula}، فإن~$\abort{!A}{\OLId{latin-looped}{N}}$
+    حد برهان~(\FalseInt).
+  \end{enumerate}
+\end{defn}
+
+ليس كل حد برهان حدًا لـ~!!a{proof}. فالحد~$\pair{\OLId{latin-looped}{N}}{\OLId{latin-looped}{M}}$، مثلًا، يرمّز
+برهانًا ينتهي باستدلال~\Intro{\land}، ولذلك تكون~!!{formula} نهايته اقترانًا
+$!A\land !B$. ولا يمكن لهذا الاقتران أن يكون المقدمة الكبرى لقاعدة
+\Elim{\lif}، ولذلك لا يجوز أن يكون~$(\pair{\OLId{latin-looped}{N}}{\OLId{latin-looped}{M}}\OLId{latin-looped}{P})$ حد برهان لبرهان صحيح.
+ولا تكون حدود البرهان \emph{صحيحة} إلا إذا اتبعت قواعد~\Log{tN2i}. وترد
+هذه القواعد في~\olref{tab:tN2ip}.
+
+\subfile{rules-tN2}
+
+\end{document}

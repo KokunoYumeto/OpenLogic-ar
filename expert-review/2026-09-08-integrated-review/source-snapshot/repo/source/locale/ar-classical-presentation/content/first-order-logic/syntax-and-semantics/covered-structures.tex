@@ -1,0 +1,74 @@
+% Part: first-order-logic
+% Chapter: syntax-and-semantics
+% Section: covered-structures
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{syn}{cov}
+
+\olsection{\printtoken{P}{structure} المغطاة للغات الرتبة الأولى}
+
+\begin{explain}
+قد تقدم أن الحد الذي يخلو من ال!!{variable}s حد \emph{مغلق}.
+\end{explain}
+
+\begin{defn}[!!^{value} الحدود المغلقة]
+إذا كان $\OLId{latin-ordinary}{t}$ حدًا مغلقًا من اللغة~$\Lang L$، وكانت $\Struct M$
+!!a{structure} لـ~$\Lang L$، عُرّفت \emph{!!{value}}~$\Value{\OLId{latin-ordinary}{t}}{\OLId{latin-looped}{M}}$
+كما يأتي:
+\begin{enumerate}
+\item إذا كان $\OLId{latin-ordinary}{t}$ هو ال!!{constant}~$\OLId{latin-ordinary}{c}$ فحسب، فإن
+  $\Value{\OLId{latin-ordinary}{c}}{\OLId{latin-looped}{M}} = \Assign{\OLId{latin-ordinary}{c}}{\OLId{latin-looped}{M}}$.
+\item إذا كان $\OLId{latin-ordinary}{t}$ من الصورة $\Atom{f}{t_1, \ldots, t_n}$، فإن
+  \[
+  \Value{\OLId{latin-ordinary}{t}}{\OLId{latin-looped}{M}} = \Assign{\OLId{latin-ordinary}{f}}{\OLId{latin-looped}{M}}(\Value{\OLId{latin-ordinary}{t}_\OLMathNumeral{1}}{\OLId{latin-looped}{M}}, \ldots,
+  \Value{\OLId{latin-ordinary}{t}_\OLId{latin-ordinary}{n}}{\OLId{latin-looped}{M}}).
+  \]
+\end{enumerate}
+\end{defn}
+
+\begin{defn}[ال!!{structure} المغطاة]
+نسمي ال!!{structure} \emph{مغطاة} متى كان لكل عنصر من المجال
+حد مغلق يكون ذلك العنصر !!{value} له.
+\end{defn}
+
+\begin{ex}
+لنأخذ~$\Lang L$ لغةً ذات ال!!{constant}s~$\Obj{zero}$،
+و$\Obj{one}$، و$\Obj{two}$، و\dots، وفيها ال!!{predicate} الثنائية~$<$،
+وال!!{function}s الثنائية~$+$ و$\times$. ثم نعيّن~$\Struct M$
+!!a{structure} لهذه اللغة~$\Lang L$، مجالها
+$\Domain \OLId{latin-looped}{M} = \{\OLMathNumeral{0}, \OLMathNumeral{1}, \OLMathNumeral{2}, \ldots \}$، والتعيينات فيها
+$\Assign{\Obj{zero}}{\OLId{latin-looped}{M}} = \OLMathNumeral{0}$، و$\Assign{\Obj{one}}{\OLId{latin-looped}{M}} = \OLMathNumeral{1}$،
+و$\Assign{\Obj{two}}{\OLId{latin-looped}{M}} = \OLMathNumeral{2}$، وعلى هذا القياس. أما رمز العلاقة
+الثنائية~$<$، فنأخذ~$\Assign{<}{\OLId{latin-looped}{M}}$ مجموعة الأزواج
+$\tuple{\OLId{latin-ordinary}{c}_\OLMathNumeral{1}, \OLId{latin-ordinary}{c}_\OLMathNumeral{2}} \in \Domain{\OLId{latin-looped}{M}}^\OLMathNumeral{2}$ التي يكون فيها $\OLId{latin-ordinary}{c}_\OLMathNumeral{1}$ أصغر
+من~$\OLId{latin-ordinary}{c}_\OLMathNumeral{2}$. فمن أمثلتها $\tuple{\OLMathNumeral{1}, \OLMathNumeral{3}} \in \Assign{<}{\OLId{latin-looped}{M}}$، وأما
+$\tuple{\OLMathNumeral{2}, \OLMathNumeral{2}} \notin \Assign{<}{\OLId{latin-looped}{M}}$. وأما
+ال!!{function} الثنائية~$+$، فنجعل $\Assign{+}{\OLId{latin-looped}{M}}$ الجمع
+المعتاد؛ ومنه $\Assign{+}{\OLId{latin-looped}{M}}(\OLMathNumeral{2},\OLMathNumeral{3})=\OLMathNumeral{5}$. وعلى هذا نؤول
+ال!!{function} الثنائية~$\times$ بالضرب المعتاد. فتكون !!{value}
+~$\Obj{four}$ هي~$\OLMathNumeral{4}$، وتُحسب !!{value}
+~$\times(\Obj{two}, +(\Obj{three},\Obj{zero}))$، وهي بالترميز
+الوسطي $\Obj{two} \times (\Obj{three} + \Obj{zero})$، كما يأتي:
+\begin{multline*}
+\Value{\times(\Obj{two}, +(\Obj{three},\Obj{zero}))}{\OLId{latin-looped}{M}} =\\
+\begin{aligned}
+& \Assign{\times}{\OLId{latin-looped}{M}}(\Value{\Obj{two}}{\OLId{latin-looped}{M}}, \Value{+(\Obj{three}, \Obj{zero})}{\OLId{latin-looped}{M}})\\
+& = \Assign{\times}{\OLId{latin-looped}{M}}(\Value{\Obj{two}}{\OLId{latin-looped}{M}}, \Assign{+}{\OLId{latin-looped}{M}}(\Value{\Obj{three}}{\OLId{latin-looped}{M}},
+\Value{\Obj{zero}}{\OLId{latin-looped}{M}})) \\
+& = \Assign{\times}{\OLId{latin-looped}{M}}(\Assign{\Obj{two}}{\OLId{latin-looped}{M}}, \Assign{+}{\OLId{latin-looped}{M}}(\Assign{\Obj{three}}{\OLId{latin-looped}{M}},
+\Assign{\Obj{zero}}{\OLId{latin-looped}{M}})) \\
+& = \Assign{\times}{\OLId{latin-looped}{M}}(\OLMathNumeral{2}, \Assign{+}{\OLId{latin-looped}{M}}(\OLMathNumeral{3}, \OLMathNumeral{0})) \\
+& = \Assign{\times}{\OLId{latin-looped}{M}}(\OLMathNumeral{2}, \OLMathNumeral{3}) \\
+& = \OLMathNumeral{6}
+\end{aligned}
+\end{multline*}
+\end{ex}
+
+\begin{prob}
+هل $\Struct N$، وهو النموذج القياسي للحساب، بنية مغطاة؟ بيّن وجه جوابك.
+\end{prob}
+
+\end{document}

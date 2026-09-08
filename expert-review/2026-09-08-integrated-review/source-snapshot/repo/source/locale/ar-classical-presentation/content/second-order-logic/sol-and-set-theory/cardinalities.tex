@@ -1,0 +1,67 @@
+% Part: second-order-logic
+% Chapter: sol-and-set-theory
+% Section: cardinalities
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sol}{set}{crd}
+
+\olsection{أعداد المجموعات الأصلية}
+
+\begin{explain}
+كما عبّرنا عن تناهي المجال ولا نهائيته، وعن كونه !!{enumerable}
+أو~!!{nonenumerable}، فلنا أن نعرّف للمجموعة الجزئية
+من~$\Domain{\OLId{latin-looped}{M}}$ هذه الخصائص نفسها: التناهي واللا نهائية،
+وكونها !!{enumerable} أو~!!{nonenumerable}.
+\end{explain}
+
+\begin{prop}
+تكون الصيغة~$\fn{Inf}(\OLId{latin-looped}{X}) \ident$
+\begin{multline*}
+\lexists[\OLId{latin-ordinary}{u}][(\lforall[\OLId{latin-ordinary}{x}][(\OLId{latin-looped}{X}(\OLId{latin-ordinary}{x}) \lif \OLId{latin-looped}{X}(\OLId{latin-ordinary}{u}(\OLId{latin-ordinary}{x})))] \land {}\\
+  \lforall[\OLId{latin-ordinary}{x}][\lforall[\OLId{latin-ordinary}{y}][(\eq[\OLId{latin-ordinary}{u}(\OLId{latin-ordinary}{x})][\OLId{latin-ordinary}{u}(\OLId{latin-ordinary}{y})] \lif 
+      \eq[\OLId{latin-ordinary}{x}][\OLId{latin-ordinary}{y}])]] \land {} \\\lexists[\OLId{latin-ordinary}{y}][(\OLId{latin-looped}{X}(\OLId{latin-ordinary}{y}) \land \lforall[\OLId{latin-ordinary}{x}][(\OLId{latin-looped}{X}(\OLId{latin-ordinary}{x})
+      \lif \eq/[\OLId{latin-ordinary}{y}][\OLId{latin-ordinary}{u}(\OLId{latin-ordinary}{x})])])])]
+\end{multline*}
+مرضاة مع تعيين المتغيرات~$\OLId{latin-ordinary}{s}$ إذا وفقط إذا كانت~$\OLId{latin-ordinary}{s}(\OLId{latin-looped}{X})$ لانهائية.
+\end{prop}
+
+\begin{prop}
+تكون الصيغة~$\fn{Count}(\OLId{latin-looped}{X}) \ident $
+\begin{multline*}
+(\lnot\lexists[\OLId{latin-ordinary}{x}][\OLId{latin-looped}{X}(\OLId{latin-ordinary}{x})] \lor {}\\
+\lexists[\OLId{latin-ordinary}{z}][\lexists[\OLId{latin-ordinary}{u}][(\OLId{latin-looped}{X}(\OLId{latin-ordinary}{z}) \land 
+    \lforall[\OLId{latin-ordinary}{x}][(\OLId{latin-looped}{X}(\OLId{latin-ordinary}{x}) \lif \OLId{latin-looped}{X}(\OLId{latin-ordinary}{u}(\OLId{latin-ordinary}{x})))] \land {} \\ \lforall[\OLId{latin-looped}{Y}][((\OLId{latin-looped}{Y}(\OLId{latin-ordinary}{z}) \land
+      \lforall[\OLId{latin-ordinary}{x}][(\OLId{latin-looped}{Y}(\OLId{latin-ordinary}{x}) \lif \OLId{latin-looped}{Y}(\OLId{latin-ordinary}{u}(\OLId{latin-ordinary}{x})))]) \lif \OLId{latin-looped}{X} \subseteq \OLId{latin-looped}{Y})])]])
+\end{multline*}
+مرضاة مع تعيين المتغيرات~$\OLId{latin-ordinary}{s}$ إذا وفقط إذا كانت~$\OLId{latin-ordinary}{s}(\OLId{latin-looped}{X})$ !!{enumerable}.
+\end{prop}
+
+أثبتت مبرهنة كانتور وجود مجموعات !!{nonenumerable}، بل دلّت
+على أن للأحجام اللانهائية مراتب مختلفة لا نهاية لعددها.
+وتقيم نظرية المجموعات لهذه الأحجام حسابًا تامًا، فتجعل للمجموعات
+أعدادًا أصلية لانهائية. أما المجموعات المنتهية فتقاس أحجامها
+بالأعداد الطبيعية. وأول الأصليات اللانهائية أصلية المجموعات
+!!{denumerable}، واسمها~$\aleph_\OLMathNumeral{0}$، أي «ألف-صفر».
+وتليها~$\aleph_\OLMathNumeral{1}$، وهي أصغر حجم لا تكون المجموعة عنده قابلة
+للتعداد، أي لا يكون حجمها~$\aleph_\OLMathNumeral{0}$.
+ولتعريف كون~$\OLId{latin-looped}{X}$ ذات حجم~$\aleph_\OLMathNumeral{0}$ نضع
+$\fn{Aleph}_\OLMathNumeral{0}(\OLId{latin-looped}{X}) \liff \fn{Inf}(\OLId{latin-looped}{X}) \land \fn{Count}(\OLId{latin-looped}{X})$.
+وتكون~$\OLId{latin-looped}{X}$ ذات حجم~$\aleph_\OLMathNumeral{1}$ متى كانت لانهائية، وكان كل جزء
+منها إما منتهيًا، وإما من الحجم~$\aleph_\OLMathNumeral{0}$، وإما مكافئًا لها
+عدديًا، ولم تكن هي من الحجم~$\aleph_\OLMathNumeral{0}$.
+فعبارة ذلك الصورية هي
+$\fn{Aleph_1}(\OLId{latin-looped}{X}) \ident \fn{Inf}(\OLId{latin-looped}{X}) \land
+\lforall[\OLId{latin-looped}{Y}][(\OLId{latin-looped}{Y} \subseteq \OLId{latin-looped}{X} \lif
+  (\lnot\fn{Inf}(\OLId{latin-looped}{Y}) \lor \fn{Aleph}_\OLMathNumeral{0}(\OLId{latin-looped}{Y}) \lor \cardeq{\OLId{latin-looped}{X}}{\OLId{latin-looped}{Y}}))] \land \lnot
+\fn{Aleph}_\OLMathNumeral{0}(\OLId{latin-looped}{X})$. وعلى هذا النحو يعرّف الحجم~$\aleph_\OLMathNumeral{2}$،
+ثم ما يليه.
+
+ومن الأحجام ما يخصه النظر، وهو أصلية المتصل:
+حجم~$\Pow{\Nat}$، أو حجم~$\Real$، فهما سواء.
+ووصف مجموعة بأنها من حجم المتصل ممكن في منطق الرتبة الثانية
+أيضًا، غير أنه يحتاج إلى مزيد بيان.
+
+\end{document}

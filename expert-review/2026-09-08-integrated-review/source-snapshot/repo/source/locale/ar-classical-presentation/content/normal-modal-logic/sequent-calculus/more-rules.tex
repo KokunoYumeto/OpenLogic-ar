@@ -1,0 +1,364 @@
+% Part: normal-modal-logic
+% Chapter: sequent-calculus
+% Section: more-rules
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{seq}{mru}
+
+\olsection{قواعد سائر علاقات الإتاحة}
+
+إذا اختصت علاقة الإتاحة بصفة تحدد المنطق، احتيج إلى القواعد الزائدة
+المبينة في \olref{tab:more-rules}.
+
+\iftag{prvBox}{\iftag{prvDiamond}{% [] and <> primitive
+\begin{table}
+  \begin{center}
+    \def\arraystretch{3}
+    \begin{tabular}{cc}
+    \hline
+      \Axiom$!A, \OLId{greek-variable}{Gamma} \fCenter \OLId{greek-variable}{Delta}$
+      \RightLabel{T$\Box$}
+      \UnaryInf$\Box!A, \OLId{greek-variable}{Gamma} \fCenter \OLId{greek-variable}{Delta}$
+      \DisplayProof
+    &
+      \Axiom$\OLId{greek-variable}{Gamma} \fCenter \OLId{greek-variable}{Delta}, !A$
+      \RightLabel{T$\Diamond$}
+      \UnaryInf$\OLId{greek-variable}{Gamma} \fCenter \OLId{greek-variable}{Delta}, \Diamond!A$
+      \DisplayProof
+    \\[1ex]
+%    \hline
+    \multicolumn{\OLClassicalDigits{2}}{c}{
+      \Axiom$\OLId{greek-variable}{Gamma} \fCenter \OLId{greek-variable}{Delta}$
+      \RightLabel{D}
+      \UnaryInf$\Box\OLId{greek-variable}{Gamma} \fCenter \Diamond\OLId{greek-variable}{Delta}$
+      \DisplayProof}
+    \\[1ex]
+%    \hline
+      \Axiom$\OLId{greek-variable}{Gamma}, \Diamond\Pi \fCenter \Box\OLId{greek-variable}{Delta}, \Lambda, !A$
+      \RightLabel{B$\Box$}
+      \UnaryInf$\Box\OLId{greek-variable}{Gamma}, \Pi \fCenter \OLId{greek-variable}{Delta}, \Diamond\Lambda, \Box!A$
+      \DisplayProof
+      &
+      \Axiom$!A, \Diamond\OLId{greek-variable}{Gamma}, \Pi \fCenter \Box\Lambda, \OLId{greek-variable}{Delta}$
+      \RightLabel{B$\Diamond$}
+      \UnaryInf$\Diamond!A, \OLId{greek-variable}{Gamma}, \Box\Pi \fCenter \Lambda, \Diamond\OLId{greek-variable}{Delta}$
+      \DisplayProof
+    \\[1ex]
+%    \hline
+      \Axiom$\Box\OLId{greek-variable}{Gamma} \fCenter \Diamond\OLId{greek-variable}{Delta}, !A$
+      \RightLabel{4$\Box$}
+      \UnaryInf$\Box\OLId{greek-variable}{Gamma} \fCenter \Diamond\OLId{greek-variable}{Delta}, \Box!A$
+      \DisplayProof
+      &
+      \Axiom$!A, \Box\OLId{greek-variable}{Gamma} \fCenter \Diamond\OLId{greek-variable}{Delta}$
+      \RightLabel{4$\Diamond$}
+      \UnaryInf$\Diamond!A, \Box\OLId{greek-variable}{Gamma} \fCenter \Diamond\OLId{greek-variable}{Delta}$
+      \DisplayProof
+    \\[1ex]
+%    \hline
+      \Axiom$\Box\OLId{greek-variable}{Gamma}, \Diamond\Pi \fCenter \Box\OLId{greek-variable}{Delta},
+      \Diamond\Lambda, !A$
+      \RightLabel{5$\Box$}
+      \UnaryInf$\Box\OLId{greek-variable}{Gamma}, \Diamond\Pi \fCenter \Box\OLId{greek-variable}{Delta},
+      \Diamond\Lambda, \Box!A$
+      \DisplayProof
+&
+      \Axiom$!A, \Diamond\OLId{greek-variable}{Gamma}, \Box\Pi \fCenter \Diamond\OLId{greek-variable}{Delta}, \Box\Lambda$
+      \RightLabel{5$\Diamond$}
+      \UnaryInf$\Diamond!A,\Diamond\OLId{greek-variable}{Gamma},\Box\Pi \fCenter \Diamond\OLId{greek-variable}{Delta},\Box\Lambda$
+      \DisplayProof
+    \\[1ex]
+    \hline
+    \end{tabular}
+  \end{center}
+  \caption{قواعد جهوية زائدة.}
+  \ollabel{tab:more-rules}
+\end{table}
+}{ % only [] primitive
+\begin{table}
+  \begin{center}
+    \def\arraystretch{3}
+    \begin{tabular}{cc}
+    \hline
+      \Axiom$!A,\OLId{greek-variable}{Gamma} \fCenter \OLId{greek-variable}{Delta}$
+      \RightLabel{T$\Box$}
+      \UnaryInf$\Box!A, \OLId{greek-variable}{Gamma} \fCenter \OLId{greek-variable}{Delta}$
+      \DisplayProof
+    &
+    %\hline
+      \Axiom$\OLId{greek-variable}{Gamma} \fCenter$
+      \RightLabel{D$\Box$}
+      \UnaryInf$\Box\OLId{greek-variable}{Gamma} \fCenter$
+      \DisplayProof
+    \\[1ex]
+    %\hline
+      \Axiom$\OLId{greek-variable}{Gamma} \fCenter \Box\OLId{greek-variable}{Delta}, !A$
+      \RightLabel{B$\Box$}
+      \UnaryInf$\Box\OLId{greek-variable}{Gamma} \fCenter \OLId{greek-variable}{Delta}, \Box!A$
+      \DisplayProof
+    &
+    %\hline
+      \Axiom$\Box\OLId{greek-variable}{Gamma} \fCenter !A$
+      \RightLabel{4$\Box$}
+      \UnaryInf$\Box\OLId{greek-variable}{Gamma} \fCenter \Box!A$
+      \DisplayProof
+    \\[1ex]
+    %\hline
+    \multicolumn{\OLClassicalDigits{2}}{c}{\Axiom$\Box\OLId{greek-variable}{Gamma} \fCenter \Box\OLId{greek-variable}{Delta}, !A$
+      \RightLabel{5$\Box$}
+      \UnaryInf$\Box\OLId{greek-variable}{Gamma} \fCenter \Box\OLId{greek-variable}{Delta}, \Box!A$
+      \DisplayProof}
+    \\[1ex]
+    \hline
+    \end{tabular}
+  \end{center}
+  \caption{قواعد جهوية زائدة.}
+  \ollabel{tab:more-rules}
+\end{table}
+}}{% only <> primitive
+\begin{table}
+  \begin{center}
+    \def\arraystretch{3}
+    \begin{tabular}{cc}
+    \hline
+      \Axiom$\OLId{greek-variable}{Gamma} \fCenter \OLId{greek-variable}{Delta}, !A$
+      \RightLabel{T$\Diamond$}
+      \UnaryInf$\OLId{greek-variable}{Gamma} \fCenter \OLId{greek-variable}{Delta}, \Diamond!A$
+      \DisplayProof
+    &
+    %\hline
+      \Axiom$\fCenter \OLId{greek-variable}{Delta}$
+      \RightLabel{D$\Diamond$}
+      \UnaryInf$\fCenter \Diamond\OLId{greek-variable}{Delta}$
+      \DisplayProof
+    \\[1ex]
+    %\hline
+      \Axiom$!A, \Diamond\OLId{greek-variable}{Gamma} \fCenter \OLId{greek-variable}{Delta}$
+      \RightLabel{B$\Diamond$}
+      \UnaryInf$\Diamond!A, \OLId{greek-variable}{Gamma} \fCenter \Diamond\OLId{greek-variable}{Delta}$
+      \DisplayProof
+    &
+    %\hline
+      \Axiom$!A \fCenter \Diamond\OLId{greek-variable}{Delta}$
+      \RightLabel{4$\Diamond$}
+      \UnaryInf$\Diamond!A \fCenter \Diamond\OLId{greek-variable}{Delta}$
+      \DisplayProof
+    \\[1ex]
+    %\hline
+    \multicolumn{\OLClassicalDigits{2}}{c}{
+      \Axiom$!A, \Diamond\OLId{greek-variable}{Gamma} \fCenter \Diamond\OLId{greek-variable}{Delta}$
+      \RightLabel{5$\Diamond$}
+      \UnaryInf$\Diamond!A,\Diamond\OLId{greek-variable}{Gamma} \fCenter \Diamond\OLId{greek-variable}{Delta}$
+      \DisplayProof}
+    \\[1ex]
+    \hline
+    \end{tabular}
+  \end{center}
+  \caption{قواعد جهوية زائدة.}
+  \ollabel{tab:more-rules}
+\end{table}
+}
+
+وإذا ألحقت هذه القواعد بالقواعد المتقدمة حصلت أنساق سليمة تامة
+للمنطقيات المبينة في \olref{tab:logics-rules}.
+
+\begin{table}
+  \begin{center}
+    \begin{tabular}{lll}
+      \hline
+      المنطق & تكون $\OLId{latin-looped}{R}$ \dots & القواعد\\
+      \hline
+      $\Log{T} = \Log{KT}$ & انعكاسية & $\Box$،
+      \iftag{prvBox}{T$\Box$}{}%
+      \iftag{notprvBox,notprvDiamond}{}{، }%
+      \iftag{prvDiamond}{T$\Diamond$}{}
+      \\ \hline
+      $\Log{D} = \Log{KD}$ & تسلسلية & $\Box$،
+      \iftag{prvBox}{%
+        \iftag{prvDiamond}{D}{D$\Box$}}{D$\Diamond$}
+      \\ \hline
+      $\Log{K4}$ & متعدية & $\Box$،
+      \iftag{prvBox}{\OLClassicalDigits{4}$\Box$}{}% 
+      \iftag{notprvBox,notprvDiamond}{}{، }%
+      \iftag{prvDiamond}{\OLClassicalDigits{4}$\Diamond$}{}
+      \\ \hline
+      $\Log{B} = \Log{KTB}$ & انعكاسية، & $\Box$،
+      \iftag{prvBox}{T$\Box$}{}%
+      \iftag{notprvBox,notprvDiamond}{}{، }%
+      \iftag{prvDiamond}{T$\Diamond$}{}\\
+      & متناظرة &
+      \iftag{prvBox}{B$\Box$}{}%
+      \iftag{notprvBox,notprvDiamond}{}{، }%
+      \iftag{prvDiamond}{B$\Diamond$}{}
+      \\ \hline
+      $\Log{S4} = \Log{KT4}$ & انعكاسية، & $\Box$،
+      \iftag{prvBox}{T$\Box$}{}%
+      \iftag{notprvBox,notprvDiamond}{}{، }%
+      \iftag{prvDiamond}{T$\Diamond$}{}\\
+      & متعدية &
+      \iftag{prvBox}{\OLClassicalDigits{4}$\Box$}{}%
+      \iftag{notprvBox,notprvDiamond}{}{، }%
+      \iftag{prvDiamond}{\OLClassicalDigits{4}$\Diamond$}{}
+      \\ \hline
+      $\Log{S5} = \Log{KT5}$ & انعكاسية، & $\Box$،
+      \iftag{prvBox}{T$\Box$}{}%
+      \iftag{notprvBox,notprvDiamond}{}{، }%
+      \iftag{prvDiamond}{T$\Diamond$}{}\\
+      & متعدية (تترتب على الانعكاسية والإقليدية)، & \\
+      & إقليدية &
+      \iftag{prvBox}{\OLClassicalDigits{5}$\Box$}{}%
+      \iftag{notprvBox,notprvDiamond}{}{، }%
+      \iftag{prvDiamond}{\OLClassicalDigits{5}$\Diamond$}{}
+      \\ \hline
+    \end{tabular}
+  \end{center}
+  \caption{قواعد تتابعية لمنطقيات جهوية مختلفة.}
+  \ollabel{tab:logics-rules}
+\end{table}
+
+\iftag{prvBox}{
+\begin{ex}
+  هذه !!{derivation} تتابعية يتبين بها أن $\Log{K4} \Proves \Ax{4}$، أي
+  $\Box!A \lif \Box\Box!A$.
+  \begin{prooftree}
+    \Axiom$\Box!A \fCenter \Box!A$
+    \RightLabel{4$\Box$}
+    \UnaryInf$\Box!A \fCenter \Box\Box!A$
+    \RightLabel{\RightR{\lif}}
+    \UnaryInf$\fCenter \Box!A \lif \Box\Box!A$
+  \end{prooftree}
+\end{ex}
+}{\iftag{prvDiamond}{
+\begin{ex}
+  هذه !!{derivation} تتابعية يتبين بها أن $\Log{K4} \Proves \Ax{4}$، أي
+  $\Diamond\Diamond!A \lif \Diamond!A$.
+  \begin{prooftree}
+    \Axiom$\Diamond!A \fCenter \Diamond!A$
+    \RightLabel{4$\Diamond$}
+    \UnaryInf$\Diamond\Diamond!A \fCenter \Diamond!A$
+    \RightLabel{\RightR{\lif}}
+    \UnaryInf$\fCenter \Diamond\Diamond!A \lif \Diamond!A$
+  \end{prooftree}
+\end{ex}
+}{}}
+
+\iftag{prvBox}{\iftag{prvDiamond}{% <> and [] primitive
+\begin{ex}
+  هذه !!{derivation} تتابعية يتبين بها أن $\Log{S5} \Proves \Ax{5}$، أي
+  $\Diamond!A \lif \Box\Diamond!A$.
+  \begin{prooftree}
+    \Axiom$\Diamond!A \fCenter \Diamond!A$
+    \RightLabel{5$\Box$}
+    \UnaryInf$\Diamond!A \fCenter \Box\Diamond!A$
+    \RightLabel{\RightR{\lif}}
+    \UnaryInf$\fCenter \Diamond!A \lif \Box\Diamond!A$
+  \end{prooftree}
+\end{ex}
+}{% only Box primitive
+\begin{ex}
+  هذه !!{derivation} تتابعية يتبين بها أن $\Log{S5} \Proves \Ax{5}$، أي
+  $\Diamond!A \lif \Box\Diamond!A$.
+  \begin{prooftree}
+    \Axiom$\Box\lnot!A \fCenter \Box\lnot!A$
+    \RightLabel{\RightR{\lnot}}
+    \UnaryInf$\fCenter \Box\lnot!A, \lnot\Box\lnot!A$
+    \RightLabel{5$\Box$}
+    \UnaryInf$ \fCenter \Box\lnot!A, \Box\lnot\Box\lnot!A$
+    \RightLabel{\LeftR{\lnot}}
+    \UnaryInf$\lnot\Box\lnot!A \fCenter \Box\lnot\Box\lnot!A$
+    \RightLabel{\RightR{\lif}}
+    \UnaryInf$\fCenter \lnot\Box\lnot!A \lif \Box\lnot\Box\lnot!A$
+  \end{prooftree}
+\end{ex}
+}}{% only <> prmitive
+\begin{ex}
+  هذه !!{derivation} تتابعية يتبين بها أن $\Log{S5} \Proves \Ax{5}$، أي
+  $\Diamond!A \lif \Box\Diamond!A$.
+  \begin{prooftree}
+    \Axiom$\Diamond!A \fCenter\Diamond!A$
+    \RightLabel{\LeftR{\lnot}}
+    \UnaryInf$\lnot\Diamond !A, \Diamond!A \fCenter $
+    \RightLabel{5$\Diamond$}
+    \UnaryInf$\Diamond\lnot\Diamond!A, \Diamond!A \fCenter $
+    \RightLabel{\RightR{\lnot}}
+    \UnaryInf$\Diamond!A \fCenter \lnot\Diamond\lnot\Diamond!A$
+    \RightLabel{\RightR{\lif}}
+    \UnaryInf$\fCenter \Diamond!A \lif \lnot\Diamond\lnot\Diamond!A$
+  \end{prooftree}
+\end{ex}
+}
+\begin{ex}
+لا يتم حساب التتابعيات للنسق \Log{S5} من غير قاعدة \Cut{}؛ فإن
+\iftag{prvBox}{$\Diamond\Box !A \lif !A$}{$!A \lif
+\Box\Diamond !A$}، وهي صادقة صدقًا عامًا في~$\Log{S5}$، لا برهان لها
+من غير~\Cut. وهذه !!a{derivation} يجري فيها استعمال~\Cut:
+\begin{prooftree}
+\iftag{prvBox}{\iftag{prvDiamond}{% both [] and <> primitive
+\Axiom$\Box !A \fCenter \Box!A$
+\RightLabel{5$\Diamond$}
+\UnaryInf$\Diamond\Box!A \fCenter \Box!A$
+
+\Axiom$!A \fCenter !A$
+\RightLabel{T$\Box$}
+\UnaryInf$\Box!A \fCenter !A$
+\RightLabel{\Cut}
+\BinaryInf$\Diamond\Box!A \fCenter !A$
+\RightLabel{\RightR{\lif}}
+\UnaryInf$\fCenter \Diamond\Box!A \lif !A$
+}{% only [] primitive
+\Axiom$\Box !A \fCenter \Box!A$
+\RightLabel{\RightR{\lnot}}
+\UnaryInf$\fCenter \Box!A, \lnot\Box!A$
+\RightLabel{5$\Box$}
+\UnaryInf$\fCenter \Box!A, \Box\lnot\Box!A$
+\RightLabel{\RightR{\Exchange}}
+\UnaryInf$\fCenter \Box\lnot\Box!A, \Box!A$
+
+\Axiom$!A \fCenter !A$
+\RightLabel{T$\Box$}
+\UnaryInf$\Box!A \fCenter !A$
+\RightLabel{\Cut}
+\BinaryInf$ \fCenter \Box\lnot\Box!A, !A$
+\RightLabel{\LeftR{\lnot}}
+\UnaryInf$\lnot\Box\lnot\Box!A \fCenter !A$
+\RightLabel{\RightR{\lif}}
+\UnaryInf$\fCenter \lnot\Box\lnot\Box!A \lif !A$
+}}{% only <> primitive
+\Axiom$!A \fCenter !A$
+\RightLabel{T$\Diamond$}
+\UnaryInf$!A \fCenter \Diamond!A$
+
+\Axiom$\Diamond !A \fCenter \Diamond!A$
+\RightLabel{\LeftR{\lnot}}
+\UnaryInf$\lnot\Diamond!A , \Diamond!A \fCenter$
+\RightLabel{5$\Diamond$}
+\UnaryInf$\Diamond\lnot\Diamond!A , \Diamond!A\fCenter$
+\RightLabel{\RightR{\Exchange}}
+\UnaryInf$\Diamond!A, \Diamond\lnot\Diamond!A\fCenter $
+
+\RightLabel{\Cut}
+\BinaryInf$\Diamond\lnot\Diamond!A, !A\fCenter $
+\RightLabel{\RightR{\lnot}}
+\UnaryInf$!A \fCenter \lnot\Diamond\lnot\Diamond!A$
+\RightLabel{\RightR{\lif}}
+\UnaryInf$\fCenter !A \lif \lnot\Diamond\lnot\Diamond!A$
+}
+\end{prooftree}
+\end{ex}
+
+\begin{prob}
+أقم !!{derivation}s تتابعية لما يأتي:
+  \begin{enumerate}
+  \item $\Log{KT5} \Proves \Ax{B}$؛
+  \item $\Log{KT5} \Proves \Ax{4}$؛
+  \item $\Log{KDB4} \Proves \Ax{T}$؛
+  \item $\Log{KB4} \Proves \Ax{5}$؛
+  \item $\Log{KB5} \Proves \Ax{4}$؛
+  \item $\Log{KT} \Proves \Ax{D}$.
+  \end{enumerate}
+\end{prob}
+
+\end{document}

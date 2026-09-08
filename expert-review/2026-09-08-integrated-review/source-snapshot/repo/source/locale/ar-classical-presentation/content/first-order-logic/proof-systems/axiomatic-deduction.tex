@@ -1,0 +1,74 @@
+% Part: first-order-logic
+% Chapter: proof-systems
+% Section: axiomatic-deduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{prf}{axd}}
+      {\olfileid{pl}{prf}{axd}}
+
+\olsection{\usetoken{P}{derivation} بديهية}
+
+ال!!{derivation}s البديهية أقدم أنظمة ال!!{derivation} المنطقية
+وأبسطها. و!!{derivation}sها ليست سوى متتاليات من ال!!{sentence}s.
+وتُعدّ متتالية من ال!!{sentence}s !!{derivation} صحيحًا إذا حققت كل
+!!{sentence}~$!A$ فيها أحد الشروط الآتية:
+\begin{enumerate}
+\item أن تكون~$!A$ بديهية، أو
+\item أن تكون~$!A$ !!a{element} في مجموعة معطاة~$\OLId{greek-variable}{Gamma}$ من
+  ال!!{sentence}s، أو
+\item أن تسوّغ~$!A$ قاعدة استدلال.
+\end{enumerate}
+ولكي تكون~$!A$ بديهية، لا بد أن تكون على صورة واحد من عدد من مخططات
+ال!!{sentence} الثابتة. وثمة مجموعات كثيرة من مخططات البديهيات توفر
+نظام !!{derivation} مُرضيًا (سليمًا وكاملًا) لمنطق الرتبة الأولى.
+وينظم بعضها وفق الروابط التي تحكمها؛ فمثلًا، المخططات
+\[
+!A \lif (!B \lif !A) \qquad !B \lif (!B \lor !C) \qquad (!B \land !C) \lif !B
+\]
+بديهيات شائعة تحكم~$\lif$ و$\lor$ و~$\land$. وتهدف بعض أنظمة
+البديهيات إلى تقليل عدد البديهيات إلى أدنى حد. بل يمكن، بحسب الروابط
+المتخذة أوليةً، العثور على أنظمة بديهيات تتألف من بديهية واحدة.
+
+قاعدة الاستدلال قول شرطي يُبيّن شرطًا كافيًا لتسويغ
+!!a{sentence} في !!a{derivation}. ومن أشهرها إثبات المقدَّم:
+إذا سبق تسويغ~$!A$ و$!A \lif !B$، ساغ~$!B$.
+فالسطر الذي يشتمل في !!a{derivation} على ال!!{sentence}~$!B$
+يصح بهذه القاعدة إذا تقدم عليه كل من~$!A$ و$!A \lif !B$،
+حيث~$!A$ !!{sentence} ما، في ال!!{derivation} قبل~$!B$.
+
+تُعرّف علاقة~$\Proves$ القائمة على ال!!{derivation}s البديهية كما
+يأتي: $\OLId{greek-variable}{Gamma} \Proves !A$ إذا وفقط إذا وجد !!a{derivation} تكون فيه
+ال!!{sentence}~$!A$ الصيغة الأخيرة (وتكون كل ال!!{sentence}s التي
+يسوغها البند~(\OLClassicalDigits{2}) أعلاه في ذلك ال!!{derivation} من~$\OLId{greek-variable}{Gamma}$).
+\textbf{تنبيه تصحيحي على الأصل.} جُعلت جمل الفرض المستعملة في الاشتقاق
+جزءًا من مجموعة المقدمات، لا مساوية لها؛ فقد تكون المجموعة أوسع منها أو غير
+منتهية، ولا يستعمل الاشتقاق إلا عددًا منتهيًا من مقدماتها.
+وتكون~$!A$ مبرهنة إذا كان لـ~$!A$ !!a{derivation} تكون فيه~$\OLId{greek-variable}{Gamma}$
+خالية، أي إن كل !!{sentence} في ال!!{derivation} تسوّغ إما بالبند~(\OLClassicalDigits{1})
+وإما بالبند~(\OLClassicalDigits{3}). فمثلًا، هذا !!a{derivation} يبين أن
+$\Proves !A  \lif (!B \lif (!B \lor !A))$:
+\begin{derivation}
+  1. & $!B \lif (!B \lor !A)$ \\
+  2. & $(!B \lif (!B \lor !A)) \lif (!A  \lif (!B \lif (!B \lor !A)))$\\
+  3. & $!A  \lif (!B \lif (!B \lor !A))$
+\end{derivation}
+ال!!{sentence} في السطر~\OLClassicalDigits{1} على صورة البديهية $!A \lif (!A
+\lor !B)$ (بعد عكس دوري~$!A$ و$!B$). والجملة في السطر~\OLClassicalDigits{2} على صورة
+البديهية $!A \lif (!B \lif !A)$. ومن ثم فإن كلا السطرين مسوّغ. ويسوّغ
+السطر~\OLClassicalDigits{3} بقاعدة إثبات المقدَّم: فإذا اختصرناه بالرمز~$!D$، كان السطر~\OLClassicalDigits{2}
+على الصورة~$!C \lif !D$، حيث~$!C$ هو $!B \lif (!B \lor !A)$، أي
+السطر~\OLClassicalDigits{1}.
+
+المجموعة~$\OLId{greek-variable}{Gamma}$ غير متسقة إذا كان $\OLId{greek-variable}{Gamma} \Proves \lfalse$.
+وفي نظام البديهيات الكامل يثبت أيضًا $\lfalse \lif !A$ لكل~$!A$.
+فمتى كانت~$\OLId{greek-variable}{Gamma}$ غير متسقة، نتج $\OLId{greek-variable}{Gamma} \Proves !A$ لأي~$!A$.
+
+أول من وضع أنظمة ال!!{derivation}s البديهية للمنطق غوتلوب فريغه، في \emph{بيغريفسشريفت} سنة \OLClassicalDigits{1879}؛ ولهذا عُدّ الكتاب عند كثيرين أول مؤلفات المنطق الحديث.
+ثم أحكمها ألفرد نورث وايتهد وبرتراند راسل في \emph{برينسيبيا ماثماتيكا}، وأحكمها كذلك ديفيد هلبرت وتلامذته في عشرينيات القرن العشرين. فمن أسمائها الشائعة «أنظمة فريغه» و«أنظمة هلبرت».
+وهي واسعة الاستعمال، إذ يسهل في الغالب وضع نظام بديهي للمنطق المراد. ولشدة بساطة بنية ال!!{derivation}s، واقتصارها على قاعدة استدلال أو قاعدتين، يسهل نسبيًا إثبات نتائج \emph{عنها}. وأما استعمالها لإنشاء البرهان وكتابته فعسير جدًا.
+
+\end{document}

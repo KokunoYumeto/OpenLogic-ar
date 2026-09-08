@@ -1,0 +1,140 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{spine}{recursion}
+\olsection{مبرهنة (مبرهنات) العودية المتناهية التجاوز}
+
+يلزمنا أولًا أن نثبت أن~\olref[valpha]{defValphas} ينجح في تعريف
+ما قصده. والمطلوب الأعم أن تصح التعريفات بالعودية المتناهية التجاوز؛
+ولبيان ذلك عقدنا هذا القسم.
+
+\emph{تنبيه: دقائق هذا البحث تحتاج إلى عناية}. أما أصله الجامع
+فيسير: إن الاستقراء المتناهي التجاوز، منضمًا إلى الاستبدال، يصحح
+صورًا عدة من العودية المتناهية التجاوز.
+\footnote{يجوز للصيغ والحدود جميعًا أن تشتمل على معاملات، إلا حيث
+ننص على خلاف ذلك.}
+
+\begin{defn}
+ليكن~$\tau(\OLId{latin-ordinary}{x})$ حدًا، و$\OLId{latin-ordinary}{f}$ دالة، و$\OLId{greek-variable}{alpha}$ عددًا ترتيبيًا. نسمي
+$\OLId{latin-ordinary}{f}$ \emph{تقريب~$\OLId{greek-variable}{alpha}$} لـ$\tau$ إذا وفقط إذا تحقق الشرطان
+$\dom{\OLId{latin-ordinary}{f}} = \OLId{greek-variable}{alpha}$ و
+$(\forall \beta \in \OLId{greek-variable}{alpha})\OLId{latin-ordinary}{f}(\beta) = \tau(\funrestrictionto{\OLId{latin-ordinary}{f}}{\beta})$.
+\end{defn}
+
+\begin{lem}[العودية المحدودة]\ollabel{transrecursionfun}
+إذا أُعطي حد~$\tau(\OLId{latin-ordinary}{x})$ وعدد ترتيبي~$\OLId{greek-variable}{alpha}$، كان ثمة تقريب~$\OLId{greek-variable}{alpha}$
+واحد لا غير لـ$\tau$.
+\end{lem}
+\begin{proof}
+نثبت، لكل~$\gamma \leq \OLId{greek-variable}{alpha}$، وجود تقريب~$\gamma$ ووحدانيته.
+
+نبدأ بالوحدانية. خذ~$\OLId{latin-ordinary}{g}$ و$\OLId{latin-ordinary}{h}$ تقريبي~$\gamma$ و$\delta$، على الترتيب.
+يقتضي الاستقراء المتناهي التجاوز على وسيطاتهما أن~$\OLId{latin-ordinary}{g}(\beta) = \OLId{latin-ordinary}{h}(\beta)$
+لكل~$\beta \in \dom{\OLId{latin-ordinary}{g}} \cap \dom{\OLId{latin-ordinary}{h}} = \gamma \cap \delta = \min(\gamma, \delta)$.
+فالتقريبات، متى وجدت، وحيدة وتتفق حيث تشترك مجالاتها.
+
+وأما الوجود فنثبته بالاستقراء البسيط المتناهي التجاوز
+(\olref[ordinals][opps]{simpletransrecursion}) على الأعداد الترتيبية
+$\delta \leq \OLId{greek-variable}{alpha}$.
+
+الدالة الخالية تقريب~$\emptyset$ بلا ريب.
+
+وإذا كانت~$\OLId{latin-ordinary}{g}$ تقريب~$\gamma$، فإن~$\OLId{latin-ordinary}{g} \cup \{\tuple{\gamma, \tau(\OLId{latin-ordinary}{g})}\}$
+تقريب~$\ordsucc{\gamma}$.
+
+وأما إذا كان~$\gamma$ حديًا، وكانت~$\OLId{latin-ordinary}{g}_\delta$ تقريب~$\delta$ لكل
+$\delta < \gamma$، فنضع~$\OLId{latin-ordinary}{g} = \bigcup_{\delta \in \gamma} \OLId{latin-ordinary}{g}_\delta$.
+وهي دالة، لاتفاق دوال~$\OLId{latin-ordinary}{g}_\delta$ في القيم حيث تتلاقى مجالاتها.
+وإذا كان~$\delta \in \gamma$، وجدنا
+$\OLId{latin-ordinary}{g}(\delta) = \OLId{latin-ordinary}{g}_{\ordsucc{\delta}}(\delta) =
+\tau(\funrestrictionto{\OLId{latin-ordinary}{g}_{\ordsucc{\delta}}}{\delta}) =
+\tau(\funrestrictionto{\OLId{latin-ordinary}{g}}{\delta})$.
+
+فتمت حالات الاستقراء المتناهي التجاوز جميعًا.
+\end{proof}
+
+وليس من اللازم أن نعرّف دالة؛ فإن اقتصرنا على تعريف \emph{حد} أمكن
+رفع القيد~$\OLId{greek-variable}{alpha}$ من النتيجة السابقة. وسنستعمل في القضية الآتية
+وبرهانها، للحد~$\sigma$، الاصطلاح
+$\funrestrictionto{\sigma}{\OLId{greek-variable}{alpha}} = \Setabs{\tuple{\beta, \sigma(\beta)}}{\beta \in \OLId{greek-variable}{alpha}}$.
+
+\begin{thm}[العودية العامة]\ollabel{transrecursionschema}
+لكل حد~$\tau(\OLId{latin-ordinary}{x})$ يمكن تعريف حد~$\sigma(\OLId{latin-ordinary}{x})$ تعريفًا صريحًا يحقق
+$\sigma(\OLId{greek-variable}{alpha}) = \tau(\funrestrictionto{\sigma}{\OLId{greek-variable}{alpha}})$ لكل عدد
+ترتيبي~$\OLId{greek-variable}{alpha}$.
+\end{thm}
+
+\begin{proof}
+لكل~$\OLId{greek-variable}{alpha}$، تضمن~\olref{transrecursionfun} تقريب~$\OLId{greek-variable}{alpha}$ وحيدًا
+$\OLId{latin-ordinary}{f}_\OLId{greek-variable}{alpha}$ للحد~$\tau$. فلنعرّف~$\sigma(\OLId{greek-variable}{alpha})$ بأنه
+$\OLId{latin-ordinary}{f}_{\ordsucc{\OLId{greek-variable}{alpha}}}(\OLId{greek-variable}{alpha})$. وحينئذ:
+\begin{align*}
+\sigma(\OLId{greek-variable}{alpha}) &=
+\OLId{latin-ordinary}{f}_{\ordsucc{\OLId{greek-variable}{alpha}}}(\OLId{greek-variable}{alpha}) \\&=
+\tau(\funrestrictionto{\OLId{latin-ordinary}{f}_{\ordsucc{\OLId{greek-variable}{alpha}}}}{\OLId{greek-variable}{alpha}}) \\&=
+\tau(\Setabs{\tuple{\beta, \OLId{latin-ordinary}{f}_{\ordsucc{\OLId{greek-variable}{alpha}}}(\beta)}}{\beta \in \OLId{greek-variable}{alpha}}) \\&=
+\tau(\Setabs{\tuple{\beta, \OLId{latin-ordinary}{f}_{\ordsucc{\beta}}(\beta)}}{\beta \in \OLId{greek-variable}{alpha}})\\&=
+\tau(\funrestrictionto{\sigma}{\OLId{greek-variable}{alpha}})
+\end{align*}
+وذلك لأن~$\OLId{latin-ordinary}{f}_{\ordsucc{\beta}}(\beta) = \OLId{latin-ordinary}{f}_{\ordsucc{\OLId{greek-variable}{alpha}}}(\beta)$
+لكل~$\beta < \OLId{greek-variable}{alpha}$، كما ثبت في~\olref{transrecursionfun}.
+\end{proof}
+\noindent
+ولا بد من تذكر أن~\olref{transrecursionschema} \emph{مخطط}. فلا
+نتوقع من~$\sigma$ أن تعرّف دالة، أي \emph{مجموعة} من نوع معين؛
+وإلا كانت~$\dom{\sigma}$ مجموعة الأعداد الترتيبية كلها، وذلك محال
+بمفارقة بورالي--فورتي (\olref[ordinals][basic]{buraliforti}).
+
+وبقي وجه استناد تعريف مجموعات~$\OLId{latin-looped}{V}_\OLId{greek-variable}{alpha}$ إلى~\olref{transrecursionschema}.
+قد لا يظهر ذلك من أول الأمر؛ وتكشفه الصورة البسيطة الأخيرة من العودية
+المتناهية التجاوز.
+
+\begin{thm}[العودية البسيطة]\ollabel{simplerecursionschema}
+متى أُعطي حدان~$\tau(\OLId{latin-ordinary}{x})$ و$\theta(\OLId{latin-ordinary}{x})$ ومجموعة~$\OLId{latin-looped}{A}$، أمكن تعريف
+حد~$\sigma(\OLId{latin-ordinary}{x})$ صراحة بحيث:
+\begin{align*}
+\sigma(\emptyset) &= \OLId{latin-looped}{A}\\
+\sigma(\ordsucc{\OLId{greek-variable}{alpha}}) &= \tau(\sigma(\OLId{greek-variable}{alpha})) &&
+\text{لكل عدد ترتيبي }\OLId{greek-variable}{alpha}\\
+\sigma(\OLId{greek-variable}{alpha}) &= \theta(\ran{\funrestrictionto{\sigma}{\OLId{greek-variable}{alpha}}})&&
+\text{عندما يكون }\OLId{greek-variable}{alpha}\text{ عددًا ترتيبيًا حديًا}
+\end{align*}
+\end{thm}
+
+\begin{proof}
+نعرّف أولًا الحد~$\xi(\OLId{latin-ordinary}{x})$ هكذا:
+%t $\xi(x) = A$ if $x$ is not a function whose domain is an ordinal;
+%otherwise let:
+\[
+\xi(\OLId{latin-ordinary}{x}) =
+\begin{cases}
+\OLId{latin-looped}{A} &\text{إذا كان $x = \emptyset$، أو لم يكن $x$ دالة}\\
+&\hspace{1em}\text{مجالها عدد ترتيبي؛ وخلاف ذلك:}\\
+\tau(\OLId{latin-ordinary}{x}(\OLId{greek-variable}{alpha})) & \text{إذا كان $\dom{x} = \ordsucc{\alpha}$}\\
+\theta(\ran{\OLId{latin-ordinary}{x}}) & \text{إذا كان $\dom{x}$ عددًا ترتيبيًا حديًا}
+\end{cases}
+\]
+فبمقتضى~\olref{transrecursionschema} يوجد حد~$\sigma(\OLId{latin-ordinary}{x})$ بحيث
+$\sigma(\OLId{greek-variable}{alpha}) = \xi(\funrestrictionto{\sigma}{\OLId{greek-variable}{alpha}})$ لكل عدد
+ترتيبي~$\OLId{greek-variable}{alpha}$. ثم إن~$\funrestrictionto{\sigma}{\OLId{greek-variable}{alpha}}$ دالة
+مجالها~$\OLId{greek-variable}{alpha}$. ونثبت الشروط المطلوبة لـ$\sigma$ بالاستقراء البسيط
+المتناهي التجاوز (\olref[ordinals][opps]{simpletransrecursion}).
+
+في حالة الأساس~$\sigma(\emptyset) = \xi(\emptyset) = \OLId{latin-looped}{A}$.
+
+وفي حالة الخلف:
+$\sigma(\ordsucc{\OLId{greek-variable}{alpha}}) =
+\xi(\funrestrictionto{\sigma}{\ordsucc{\OLId{greek-variable}{alpha}}}) =
+\tau(\funrestrictionto{\sigma}{\ordsucc{\OLId{greek-variable}{alpha}}}(\OLId{greek-variable}{alpha})) =
+\tau(\sigma(\OLId{greek-variable}{alpha}))$.
+
+وفي الحالة الأخيرة~$\sigma(\OLId{greek-variable}{alpha}) = \xi(\funrestrictionto{\sigma}{\OLId{greek-variable}{alpha}}) =
+\theta(\ran{\funrestrictionto{\sigma}{\OLId{greek-variable}{alpha}}})$، إذا كان~$\OLId{greek-variable}{alpha}$ حديًا.
+\end{proof}
+\noindent
+ولتسويغ~\olref[valpha]{defValphas} نأخذ~$\OLId{latin-looped}{A} = \emptyset$
+و$\tau(\OLId{latin-ordinary}{x}) = \Pow{\OLId{latin-ordinary}{x}}$ و$\theta(\OLId{latin-ordinary}{x}) = \bigcup \OLId{latin-ordinary}{x}$؛ وبذلك يستقيم أخيرًا
+تعريف مجموعات~$\OLId{latin-looped}{V}_\OLId{greek-variable}{alpha}$.{}
+
+\end{document}

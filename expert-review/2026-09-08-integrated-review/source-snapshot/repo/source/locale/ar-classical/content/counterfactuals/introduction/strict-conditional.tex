@@ -1,0 +1,104 @@
+% Part: counterfactuals
+% Chapter: introduction
+% Section: strict-conditional
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cnt}{int}{str}
+
+\olsection{في الشرط الصارم}
+
+وضع لويس \emph{الشرط الصارم}~$\strictif$، ورأى أنه المقابل للاستلزام
+دون الشرط المادي. وفي منطق الموجهات الصدقي نحدّ~$!A \strictif !B$
+بـ~$\Box(!A \lif !B)$. فيصدق الشرط الصارم في عالم إذا وفقط إذا كان
+الشرط المادي الذي يقابله ضروريًا.
+
+فما حكم مفارقات الشرط المادي عند هذا الشرط؟ إن الشرط الصارم ذا المقدّم
+الكاذب قد يصدق وقد يكذب، وكذلك ما كان تاليه صادقًا. ثم إن
+$(!A \strictif !B) \lor (!B \strictif !A)$ ليست صالحة. وليس الشرط
+الصارم~$!A \strictif !B$ مكافئًا لـ~$\lnot !A \lor !B$، فلا يكون
+إذن دالة صدق.
+
+وتفصيل ذلك في الأحكام الآتية:
+\begin{align}
+  !A \strictif !B & \Entails \lnot !A \lor !B
+  \text{ لكن:}\\
+  \lnot !A \lor !B & \Entails/ !A \strictif !B\\
+  !B & \Entails/ !A \strictif !B\\
+  \lnot !A & \Entails/ !A \strictif !B\\
+  \lnot(!A \strictif !B) & \Entails/ !A \land \lnot !B
+  \text{ لكن:}\\
+  !A \land \lnot !B & \Entails \lnot(!A \strictif !B)
+  \intertext{ومع ذلك، يظل الشرط الصارم يدعم قاعدة إثبات المقدّم:}
+  !A, !A \strictif !B & \Entails !B
+  % تصحيح مصطلحي (COND-M1): سُمّيت قاعدة modus ponens إثبات المقدّم لا إثبات التالي.
+  \intertext{يمكن تجميع الشروط الصارمة:}
+  !A \strictif !B,  !A \strictif !C & \Entails !A \strictif (!B \land !C)
+  \intertext{تصح تقوية المقدّم للشرط الصارم:}
+  !A \strictif !B & \Entails (!A \land !C) \strictif !B
+  \intertext{الشرط الصارم متعدٍّ أيضًا:}
+  !A \strictif !B, !B \strictif !C & \Entails !A \strictif !C
+  \intertext{وأخيرًا، الشرط الصارم مكافئ لمقابله بالنقيض:}
+  !A \strictif !B & \Entails \lnot !B \strictif \lnot !A\\
+  \lnot !B \strictif \lnot !A & \Entails !A \strictif !B
+\end{align}
+
+\begin{prob}
+  أنشئ في~$\Log{S5}$ نماذج مضادة لعلاقات الاستلزام التي لا تثبت للشرط
+  الصارم، وهي:
+  \begin{enumerate}
+  \item $\lnot p \Entails/ \Box(p \lif q)$
+  \item $q \Entails/ \Box(p \lif q)$
+  \item $\lnot\Box(p \lif q) \Entails/ p \land \lnot q$
+  \item $\Entails/ \Box(p \lif q) \lor \Box(q \lif p)$
+  \end{enumerate}
+\end{prob}
+
+\begin{prob}
+  أثبت علاقات الاستلزام الصحيحة للشرط الصارم بإقامة براهين في~$\Log{S5}$
+  على ما يأتي:
+  \begin{enumerate}
+  \item  $\Box(!A \lif !B) \Entails \lnot !A \lor !B$
+  \item $!A \land \lnot !B \Entails \lnot\Box(!A \lif !B)$
+  \item $!A, \Box(!A \lif !B) \Entails !B$
+  \item $\Box(!A \lif !B), \Box(!A \lif !C) \Entails \Box(!A \lif (!B
+    \land !C))$
+  \item $\Box(!A \lif !B) \Entails \Box((!A \land !C) \lif !B)$
+  \item $\Box(!A \lif !B), \Box(!B \lif !C) \Entails \Box(!A
+    \lif !C)$
+  \item $\Box(!A \lif !B) \Entails \Box(\lnot !B \lif \lnot !A)$
+  \item $\Box(\lnot !B \lif \lnot !A) \Entails \Box(!A \lif !B)$
+  \end{enumerate}
+  \end{prob}
+
+وللشرط الصارم، مع ذلك، «مفارقات» تخصه. فنظير صدق الشرط المادي إذا كذب
+مقدمه أو صدق تاليه أن يصدق الشرط الصارم إذا كان مقدمه كاذبًا
+\emph{بالضرورة} أو كان تاليه صادقًا بالضرورة. ثم إن كل شرط صارم صادق
+صادق بالضرورة، وكل شرط صارم كاذب كاذب بالضرورة. أي إن لدينا
+\begin{align}
+  \Box \lnot !A & \Entails !A \strictif !B\\
+  \Box !B & \Entails !A \strictif !B\\
+  !A \strictif !B& \Entails \Box(!A \strictif !B)\\
+  \lnot(!A \strictif !B) & \Entails \Box\lnot(!A \strictif !B)
+\end{align}
+ولا إشكال في هذه النتائج إذا أُريد بـ~$\strictif$ «يستلزم»، لأن علاقات
+الاستلزام المنطقي حقائق رياضية، فلا تعرض لها الصدفة. وإنما يظهر الإشكال
+إذا جُعل~$\strictif$ رابطًا يصوغ «إذا \dots، فإن \dots»، ولا سيما في
+الحكمين الأخيرين. فمما لا ريب فيه أن من عبارات هذه الصورة ما يصدق عرضًا
+وما يكذب عرضًا؛ فهي ليست في جملتها ضرورية ولا ممتنعة.
+
+\begin{prob}
+  أقم في~$\Log{S5}$ البراهين الآتية:
+  \begin{enumerate}
+    \item  $\Box \lnot !A \Entails !A \strictif !B$
+    \item $!A \strictif !B \Entails \Box(!A \strictif !B)$
+    \item $\lnot(!A \strictif !B)  \Entails \Box\lnot(!A \strictif !B)$
+  \end{enumerate}
+  واستعن في ذلك بتعريف~$\strictif$.
+\end{prob}
+
+\end{document}
+
+

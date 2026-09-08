@@ -1,0 +1,270 @@
+% Part: normal-modal-logic
+% Chapter: tableaux
+% Section: rules-for-K
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{tab}{rul}
+
+\olsection{قواعد \Log{K}}
+
+أما الروابط القضية فتبقى لها قواعد ال!!{tableau}s الموقعة المعروفة،
+ولا يزيد الأمر على إثبات البادئات. فإذا أُجريت قاعدة على !!{formula}
+موقعة~$\sFmla{\OLId{latin-looped}{S}}{!A}[\sigma]$ حملت ال!!{formula}s الناتجة البادئة
+$\sigma$ نفسها. ووجه ذلك أن~$!A \land !B$ إذا صدقت في العالم المسمى
+بـ~$\sigma$، صدقت~$!A$ و$!B$ عند~$\sigma$؛ فلا تُثبت القاعدة
+نتيجتيها إلا لهذا العالم، ولا تقضي بشيء في غيره. وهذه القواعد مجتمعة
+في~\olref{tab:prop-rules}.
+
+\begin{table}
+  \[\def\arraystretch{3}\begin{array}{|c|c|}
+    \hline
+    \AxiomC{\sFmla{\True}{\lnot !A}[\sigma]}
+    \RightLabel{\TRule{\True}{\lnot}}
+    \UnaryInfC{\sFmla{\False}{!A}[\sigma]}
+    \DisplayProof
+    &
+    \AxiomC{\sFmla{\False}{\lnot !A}[\sigma]}
+    \RightLabel{\TRule{\False}{\lnot}}
+    \UnaryInfC{\sFmla{\True}{!A}[\sigma]}
+    \DisplayProof
+    \\[1ex]
+    \hline
+    \AxiomC{\sFmla{\True}{!A \land !B}[\sigma]}
+    \RightLabel{\TRule{\True}{\land}}
+    \UnaryInfC{\sFmla{\True}{!A}[\sigma]}
+    \noLine
+    \UnaryInfC{\sFmla{\True}{!B}[\sigma]}
+    \DisplayProof
+    &
+    \AxiomC{\sFmla{\False}{!A \land !B}[\sigma]}
+    \RightLabel{\TRule{\False}{\land}}
+    \UnaryInfC{$\sFmla{\False}{!A}[\sigma] \quad \mid \quad
+      \sFmla{\False}{!B}[\sigma]$}
+    \DisplayProof
+    \\[2ex]
+    \hline
+    \AxiomC{\sFmla{\True}{!A \lor !B}[\sigma]}
+    \RightLabel{\TRule{\True}{\lor}}
+    \UnaryInfC{$\sFmla{\True}{!A}[\sigma] \quad \mid \quad
+      \sFmla{\True}{!B}[\sigma]$}
+    \DisplayProof
+    &
+    \AxiomC{\sFmla{\False}{!A \lor !B}[\sigma]}
+    \RightLabel{\TRule{\False}{\lor}}
+    \UnaryInfC{\sFmla{\False}{!A}[\sigma]}
+    \noLine
+    \UnaryInfC{\sFmla{\False}{!B}[\sigma]}
+    \DisplayProof
+    \\[2ex]
+    \hline
+    \AxiomC{\sFmla{\True}{!A \lif !B}[\sigma]}
+    \RightLabel{\TRule{\True}{\lif}}
+    \UnaryInfC{$\sFmla{\False}{!A}[\sigma] \quad \mid
+      \quad \sFmla{\True}{!B}[\sigma]$}
+    \DisplayProof
+    &
+    \AxiomC{\sFmla{\False}{!A \lif !B}[\sigma]}
+    \RightLabel{\TRule{\False}{\lif}}
+    \UnaryInfC{\sFmla{\True}{!A}[\sigma]}
+    \noLine
+    \UnaryInfC{\sFmla{\False}{!B}[\sigma]}
+    \DisplayProof
+    \\[2ex]
+    \hline
+  \end{array}\]
+  \caption{قواعد ال!!{tableau} ذات البادئات للروابط القضية.}
+  \ollabel{tab:prop-rules}
+\end{table}
+
+وأما الإغلاق فشرطه شرط ال!!{tableau}s المعتادة مع زيادة مطابقة
+البادئات. فلا يكفي اتفاق ال!!{formula}s وحدها؛ وإنما تُغلق الشعبة إذا
+اجتمع فيها:
+\[
+\sFmla{\True}{!A}[\sigma] \quad\text{و}\quad \sFmla{\False}{!A}[\sigma]
+\]
+لبادئة ما~$\sigma$ و!!{formula}~$!A$.
+
+ونضع الافتراضات كما نضعها في ال!!{tableau}s المعتادة، غير أننا نقرنها
+جميعًا بالبادئة~$\OLMathNumeral{1}$. ولا خصوصية لهذه البادئة؛ فالمراد أن تتحد بادئة
+الافتراضات كلها، أيًّا كانت. وعليه نقول، مثلًا:
+\[
+!B_\OLMathNumeral{1}, \dots, !B_\OLId{latin-ordinary}{n} \Proves !A
+\]
+إذا وفقط إذا وجدت لوحة مغلقة للافتراضات:
+\[
+\sFmla{\True}{!B_\OLMathNumeral{1}}[\OLMathNumeral{1}], \dots, \sFmla{\True}{!B_\OLId{latin-ordinary}{n}}[\OLMathNumeral{1}],
+\sFmla{\False}{!A}[\OLMathNumeral{1}].
+\]
+
+وأما المؤثر\iftag{prvBox}{\iftag{prvDiamond}{ان الجهويان~$\Box$
+    و}{ الجهوي~$\Box$}}{}\iftag{prvDiamond}{ الجهوي~$\Diamond$}{}،
+فإذا أُجريت قاعدةٌ جهوية على !!a{formula} بادئتها~$\sigma$ كانت بادئة
+النتيجة~$\sigma.\OLId{latin-ordinary}{n}$. وإنما يختلف جواز اختيار~$\OLId{latin-ordinary}{n}$ باختلاف العلامة:
+$\True$ أو~$\False$.
+
+\iftag{prvBox}{تُطيل القاعدة~$\TRule{\True}{\Box}$ شعبة تحوي
+  $\sFmla{\True}{\Box !A}[\sigma]$ بإضافة
+  $\sFmla{\True}{!A}[\sigma.\OLId{latin-ordinary}{n}]$.\iftag{prvDiamond}{ وبالمثل،
+    }{}}{}\iftag{prvDiamond}{تُطيل القاعدة~$\TRule{\False}{\Diamond}$
+  شعبة تحوي~$\sFmla{\False}{\Diamond !A}[\sigma]$ بإضافة
+  $\sFmla{\False}{!A}[\sigma.\OLId{latin-ordinary}{n}]$.}{}
+وشرط تطبيق\iftag{notprvBox,notprvDiamond}{ها}{هما} أن تكون البادئة
+$\sigma.\OLId{latin-ordinary}{n}$ قد وردت \emph{من قبل} في الشعبة نفسها. ونسمي البادئة
+المحققة لهذا الشرط «مستعملة» في تلك الشعبة.
+
+\iftag{prvBox}{تُطيل القاعدة~$\TRule{\False}{\Box}$ شعبة تحوي
+  $\sFmla{\False}{\Box !A}[\sigma]$ بإضافة
+  $\sFmla{\False}{!A}[\sigma.\OLId{latin-ordinary}{n}]$.\iftag{prvDiamond}{ وبالمثل،
+    }{}}{}\iftag{prvDiamond}{تُطيل القاعدة~$\TRule{\True}{\Diamond}$
+  شعبة تحوي~$\sFmla{\True}{\Diamond !A}[\sigma]$ بإضافة
+  $\sFmla{\True}{!A}[\sigma.\OLId{latin-ordinary}{n}]$.}{}
+وأما \iftag{notprvBox,notprvDiamond}{هذه القاعدة}{هاتان القاعدتان}
+فشرط إجرائها أن تكون البادئة~$\sigma.\OLId{latin-ordinary}{n}$ \emph{لم} ترد من قبل في
+الشعبة. وتسمى البادئة حينئذ «جديدة» في الشعبة.
+
+ترد القواعد في~\olref{tab:rules-K}.
+
+\begin{table}
+  \begin{center}
+    \def\arraystretch{3}\def\fCenter{}
+    \begin{tabular}{|c|c|}
+    \hline
+    \iftag{prvBox}{
+      \AxiomC{\sFmla{\True}{\Box !A}[\sigma]}
+      \RightLabel{\TRule{\True}{\Box}}
+      \UnaryInfC{\sFmla{\True}{!A}[\sigma.n]}
+      \DisplayProof
+      &
+      \AxiomC{\sFmla{\False}{\Box !A}[\sigma]}
+      \RightLabel{\TRule{\False}{\Box}}
+      \UnaryInfC{\sFmla{\False}{!A}[\sigma.n]}
+      \DisplayProof\\
+      $\sigma.\OLId{latin-ordinary}{n}$ مستعملة & $\sigma.\OLId{latin-ordinary}{n}$ جديدة
+      \\[1ex]
+      \hline}{}
+    \iftag{prvDiamond}{
+      \AxiomC{\sFmla{\True}{\Diamond !A}[\sigma]}
+      \RightLabel{\TRule{\True}{\Diamond}}
+      \UnaryInfC{\sFmla{\True}{!A}[\sigma.n]}
+      \DisplayProof
+      &
+      \AxiomC{\sFmla{\False}{\Diamond !A}[\sigma]}
+      \RightLabel{\TRule{\False}{\Diamond}}
+      \UnaryInfC{\sFmla{\False}{!A}[\sigma.n]}
+      \DisplayProof\\
+      $\sigma.\OLId{latin-ordinary}{n}$ جديدة & $\sigma.\OLId{latin-ordinary}{n}$ مستعملة
+      \\[1ex]
+      \hline}{}
+    \end{tabular}
+  \end{center}
+  \caption{القواعد الجهوية لـ~\Log{K}.}
+  \ollabel{tab:rules-K}
+\end{table}
+
+ولا بد من قيد «مستعملة» في بادئة القاعدة
+\iftag{prvBox}{\TRule{\True}{\Box}}{\TRule{\False}{\Diamond}}؛
+فلو أُسقط لصح أن نعدّ ما يأتي !!{tableau} مغلقة:
+\iftag{notprvBox,notprvDiamond}{%
+  \iftag{prvBox}{%
+  \begin{oltableau}
+    [\pFmla{\True}{\Box \formula{A}}{1}, just = \TAss
+      [\pFmla{\False}{\lnot\Box\lnot \formula{A}}{1}, just = \TAss
+        [\pFmla{\True}{\formula{A}}{1.1}, just = {\TRule{\True}{\Box}[1]}
+          [\pFmla{\True}{\Box\lnot\formula{A}}{1},
+            just ={\TRule{\False}{\lnot}[2]}
+            [\pFmla{\True}{\lnot\formula{A}}{1.1},
+              just = {\TRule{\True}{\Box}[4]}
+              [\pFmla{\False}{\formula{A}}{1.1},
+                  just ={\TRule{\True}{\lnot}[5]}, close]
+            ]
+          ]
+        ]
+      ]
+    ]
+  \end{oltableau}
+  }{
+  \begin{oltableau}
+    [\pFmla{\True}{\lnot\Diamond\lnot \formula{A}}{\OLClassicalDigits{1}}, just = \TAss
+      [\pFmla{\False}{\Diamond\formula{A}}{\OLClassicalDigits{1}}, just = \TAss
+        [\pFmla{\False}{\formula{A}}{\OLClassicalDigits{1}.\OLClassicalDigits{1}}, just = {\TRule{\False}{\Diamond}[\OLClassicalDigits{2}]}
+          [\pFmla{\False}{\Diamond\lnot\formula{A}}{\OLClassicalDigits{1}},
+            just ={\TRule{\True}{\lnot}[\OLClassicalDigits{1}]}
+            [\pFmla{\False}{\lnot\formula{A}}{\OLClassicalDigits{1}.\OLClassicalDigits{1}},
+              just = {\TRule{\False}{\Diamond}[\OLClassicalDigits{4}]}
+              [\pFmla{\True}{\formula{A}}{\OLClassicalDigits{1}.\OLClassicalDigits{1}},
+                  just ={\TRule{\True}{\lnot}[\OLClassicalDigits{5}]}, close]
+            ]
+          ]
+        ]
+      ]
+    ]
+  \end{oltableau}
+}}{
+  \begin{oltableau}
+    [\pFmla{\True}{\Box \formula{A}}{1}, just = \TAss
+      [\pFmla{\False}{\Diamond \formula{A}}{1}, just = \TAss
+        [\pFmla{\True}{\formula{A}}{1.1}, just = {\TRule{\True}{\Box}[1]}
+          [\pFmla{\False}{\formula{A}}{1.1},
+            just = {\TRule{\False}{\Diamond}[2]}, close]
+        ]
+      ]
+    ]
+\end{oltableau}}
+
+مع أن~$\Box \formula{A} \Entails/ \Diamond \formula{A}$، فيلزم من
+إسقاط القيد أن يكون نظام البرهان غير سليم. وكذلك
+$\Diamond \formula{A} \Entails/
+\Box \formula{A}$؛ ولكن لو أسقطنا قيد «جديدة» في بادئة القاعدة
+\iftag{prvBox}{\TRule{\False}{\Box}}{\TRule{\True}{\Diamond}}
+لأُغلقت اللوحة الآتية: \iftag{notprvBox,notprvDiamond}{%
+  \iftag{prvBox}{%
+  \begin{oltableau}
+    [\pFmla{\True}{\lnot\Box\lnot \formula{A}}{1}, just = \TAss
+      [\pFmla{\False}{\Box \formula{A}}{1}, just = \TAss
+        % تصحيح مصدر (0462-I1): النتيجة السالبة مستخرجة من F\Box في السطر 2، لا من T\Box.
+        [\pFmla{\False}{\formula{A}}{1.1}, just = {\TRule{\False}{\Box}[2]}
+          [\pFmla{\False}{\Box\lnot\formula{A}}{1},
+            just ={\TRule{\True}{\lnot}[1]}
+            [\pFmla{\False}{\lnot\formula{A}}{1.1},
+              just = {\TRule{\False}{\Box}[4]}
+              [\pFmla{\True}{\formula{A}}{1.1},
+                  just ={\TRule{\False}{\lnot}[5]}, close]
+            ]
+          ]
+        ]
+      ]
+    ]
+  \end{oltableau}
+  }{
+  \begin{oltableau}
+    [\pFmla{\True}{\Diamond \formula{A}}{\OLClassicalDigits{1}}, just = \TAss
+      [\pFmla{\False}{\lnot\Diamond\lnot\formula{A}}{\OLClassicalDigits{1}}, just = \TAss
+        [\pFmla{\True}{\formula{A}}{\OLClassicalDigits{1}.\OLClassicalDigits{1}}, just = {\TRule{\True}{\Diamond}[\OLClassicalDigits{1}]}
+          [\pFmla{\True}{\Diamond\lnot\formula{A}}{\OLClassicalDigits{1}},
+            just ={\TRule{\False}{\lnot}[\OLClassicalDigits{2}]}
+            [\pFmla{\True}{\lnot\formula{A}}{\OLClassicalDigits{1}.\OLClassicalDigits{1}},
+              just = {\TRule{\True}{\Diamond}[\OLClassicalDigits{4}]}
+              [\pFmla{\False}{\formula{A}}{\OLClassicalDigits{1}.\OLClassicalDigits{1}},
+                  just ={\TRule{\True}{\lnot}[\OLClassicalDigits{5}]}, close]
+            ]
+          ]
+        ]
+      ]
+    ]
+  \end{oltableau}
+}}{
+  \begin{oltableau}
+    [\pFmla{\True}{\Diamond \formula{A}}{1}, just = \TAss,name=one
+      [\pFmla{\False}{\Box \formula{A}}{1}, just = \TAss, name=two
+        [\pFmla{\True}{\formula{A}}{1.1}, just = {\TRule{\True}{\Diamond}[1]}
+          [\pFmla{\False}{\formula{A}}{1.1},
+            just = {\TRule{\False}{\Box}[2]}, close]
+        ]
+      ]
+    ]
+  \end{oltableau}}
+
+\end{document}

@@ -1,0 +1,96 @@
+% Part: computability
+% Chapter: computability-theory
+% Section: prop-reduce
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{thy}{ppr}
+\olsection{خواص قابلية الاختزال}
+
+قولنا $\OLId{latin-looped}{A}\leq_\OLId{latin-ordinary}{m} \OLId{latin-looped}{B}$ معناه أن $\OLId{latin-looped}{A}$ تختزل إلى~$\OLId{latin-looped}{B}$. وفي هذا الرمز إشارة:
+متى كان $\OLId{latin-looped}{A}\leq_\OLId{latin-ordinary}{m} \OLId{latin-looped}{B}$ لم تكن $\OLId{latin-looped}{A}$ «أصعب من»~$\OLId{latin-looped}{B}$، وكانت $\OLId{latin-looped}{B}$ «لا تقل
+صعوبة عن»~$\OLId{latin-looped}{A}$. فكأن $\le_\OLId{latin-ordinary}{m}$ ترتيب للمجموعات، أو لمسائل القرار، بحسب
+تعقيدها، على مثال $\le$ في ترتيب الأعداد. والقضيتان الآتيتان تؤيدان هذا
+المعنى؛ فأولاهما تثبت تعدي $\le_\OLId{latin-ordinary}{m}$.
+
+\begin{prop}
+\ollabel{prop:trans-red}
+إذا كان $\OLId{latin-looped}{A}\leq_\OLId{latin-ordinary}{m} \OLId{latin-looped}{B}$ و$\OLId{latin-looped}{B}\leq_\OLId{latin-ordinary}{m} \OLId{latin-looped}{C}$، فإن $\OLId{latin-looped}{A}\leq_\OLId{latin-ordinary}{m} \OLId{latin-looped}{C}$.
+\end{prop}
+
+\begin{proof}
+نركب اختزال $\OLId{latin-looped}{A}$ إلى~$\OLId{latin-looped}{B}$ مع اختزال $\OLId{latin-looped}{B}$ إلى~$\OLId{latin-looped}{C}$، فنحصل على اختزال $\OLId{latin-looped}{A}$
+إلى~$\OLId{latin-looped}{C}$.
+\end{proof}
+
+\begin{prob}
+أقم البرهان على \olref{prop:trans-red} بإثبات أنه متى كانت $\OLId{latin-ordinary}{f}$ و~$\OLId{latin-ordinary}{g}$ اختزالين
+متعددين إلى واحد لـ$\OLId{latin-looped}{A}$ إلى~$\OLId{latin-looped}{B}$ ولـ$\OLId{latin-looped}{B}$ إلى~$\OLId{latin-looped}{C}$، على الترتيب، فإن
+$\comp{\OLId{latin-ordinary}{f}}{\OLId{latin-ordinary}{g}}$ اختزال متعدد إلى واحد لـ$\OLId{latin-looped}{A}$ إلى~$\OLId{latin-looped}{C}$.
+\end{prob}
+
+\begin{prop}
+\ollabel{prop:reduce}
+إذا أخذنا مجموعتين $\OLId{latin-looped}{A}$ و$\OLId{latin-looped}{B}$، وفرضنا $\OLId{latin-looped}{A}\leq_\OLId{latin-ordinary}{m} \OLId{latin-looped}{B}$، صح ما يأتي:
+\begin{enumerate}
+\item إذا كانت $\OLId{latin-looped}{B}$ قابلة للتعداد حسابيًا، كانت~$\OLId{latin-looped}{A}$ كذلك.
+\item إذا كانت $\OLId{latin-looped}{B}$ قابلة للحساب، كانت~$\OLId{latin-looped}{A}$ كذلك.
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+لنأخذ $\OLId{latin-ordinary}{f}$ اختزالًا متعددًا إلى واحد من $\OLId{latin-looped}{A}$ إلى~$\OLId{latin-looped}{B}$. أما الأمر
+الأول، فلنجعل $\OLId{latin-looped}{B}$ مجال دالة جزئية قابلة للحساب~$\OLId{latin-ordinary}{g}$؛ فتكون $\OLId{latin-looped}{A}$
+مجال~$\comp{\OLId{latin-ordinary}{f}}{\OLId{latin-ordinary}{g}}$، لأن
+\begin{align*}
+\OLId{latin-ordinary}{x} \in \OLId{latin-looped}{A} & \text{ إذا وفقط إذا كان } \OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x}) \in \OLId{latin-looped}{B} \\
+& \text{ إذا وفقط إذا كانت }  \OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x})) \fdefined.
+\end{align*}
+
+وأما الأمر الثاني، فإن قابلية $\OLId{latin-looped}{B}$ للحساب تقتضي أن تكون $\OLId{latin-looped}{B}$
+و~$\Complement{\OLId{latin-looped}{B}}$ قابلتين للتعداد حسابيًا
+(\olref[cmp]{thm:ce-comp}). ومن اليسير أن نرى أن $\OLId{latin-ordinary}{f}$ تصلح أيضًا
+اختزال متعدد إلى واحد لـ$\Complement{\OLId{latin-looped}{A}}$ إلى $\Complement{\OLId{latin-looped}{B}}$؛ ولذلك
+تكون $\OLId{latin-looped}{A}$ و~$\Complement{\OLId{latin-looped}{A}}$ !!{computably enumerable} بحسب الجزء الأول
+من هذا البرهان. فتلزم قابلية $\OLId{latin-looped}{A}$ للحساب من
+\olref[cmp]{thm:ce-comp}. (ولنا سبيل آخر، وهو أن نتحقق من
+$\Char{\OLId{latin-looped}{A}}=\comp{\OLId{latin-ordinary}{f}}{\Char{\OLId{latin-looped}{B}}}$؛ فإذا كانت $\Char{\OLId{latin-looped}{B}}$ قابلة للحساب،
+كانت~$\Char{\OLId{latin-looped}{A}}$ كذلك.)
+\end{proof}
+
+\begin{prob}
+لتكن $\OLId{latin-ordinary}{f}$ اختزالًا متعددًا إلى واحد لـ$\OLId{latin-looped}{A}$ إلى~$\OLId{latin-looped}{B}$. أثبت أن $\OLId{latin-ordinary}{f}$ كذلك
+اختزال متعدد إلى واحد لـ$\Complement{\OLId{latin-looped}{A}}$ إلى $\Complement{\OLId{latin-looped}{B}}$.
+\end{prob}
+
+\begin{prob}
+أثبت، لكل اختزال $\OLId{latin-ordinary}{f}$ متعدد إلى واحد من $\OLId{latin-looped}{A}$ إلى~$\OLId{latin-looped}{B}$، أن
+$\Char{\OLId{latin-looped}{A}}=\comp{\OLId{latin-ordinary}{f}}{\Char{\OLId{latin-looped}{B}}}$.
+\end{prob}
+
+\begin{digress}
+ونحتاج في مباحث أخرى، وبخاصة براهين عدم القابلية للقرار، إلى مفهوم
+أعم هو \emph{قابلية الاختزال بتورنغ}. فقد علمنا من
+\olref[cmp]{cor:comp-k} لا تقبل متممة~$\OLId{latin-looped}{K}_\OLMathNumeral{0}$ الاختزال إلى~$\OLId{latin-looped}{K}_\OLMathNumeral{0}$، لأنها
+غير قابلة للتعداد حسابيًا. غير أنك لو علمت أجوبة الأسئلة عن
+$\OLId{latin-looped}{K}_\OLMathNumeral{0}$، لعرفت أجوبة الأسئلة عن متممتها أيضًا. ويقال إن مجموعة $\OLId{latin-looped}{A}$
+قابلة للاختزال بتورنغ إلى~$\OLId{latin-looped}{B}$ إذا أمكن تعيين أجوبة الأسئلة عن~$\OLId{latin-looped}{A}$
+بإجراء قابل للحساب يستطيع طرح أسئلة عن~$\OLId{latin-looped}{B}$. فهذا أوسع من
+الاختزال متعددًا إلى واحد، الذي لا يجيز إلا (\OLClassicalDigits{1}) بطرح سؤال
+واحد عن $\OLId{latin-looped}{B}$، و(\OLClassicalDigits{2}) يجب أن تترجم إجابة «نعم» إلى إجابة «نعم» عن السؤال
+المتعلق بـ$\OLId{latin-looped}{A}$، وكذلك «لا». ويظل صحيحًا أنه إذا كانت $\OLId{latin-looped}{A}$ قابلة للاختزال
+بتورنغ إلى~$\OLId{latin-looped}{B}$ وكانت $\OLId{latin-looped}{B}$ قابلة للحساب، فإن $\OLId{latin-looped}{A}$ قابلة للحساب أيضًا
+(مع أن العبارة المناظرة لا تصح، كما رأينا، في القابلية للتعداد حسابيًا).
+
+فتأمل وجوه الاختزال المختلفة، واستبن ما بينها من
+فروق. وإنما نقصر هذا الفصل على الاختزال
+متعددًا إلى واحد. وللنوعين المذكورين في الفقرة
+السابقة نظيران في التعقيد الحسابي إذا زيد شرط عمل
+آلات تورنغ في زمن كثير الحدود: فنسخة التعقيد من قابلية الاختزال متعددًا
+إلى واحد تعرف بـ\emph{قابلية الاختزال بكارب}، أما نسخة التعقيد من
+قابلية الاختزال بتورنغ فتعرف بـ\emph{قابلية الاختزال بكوك}.
+\end{digress}
+
+\end{document}

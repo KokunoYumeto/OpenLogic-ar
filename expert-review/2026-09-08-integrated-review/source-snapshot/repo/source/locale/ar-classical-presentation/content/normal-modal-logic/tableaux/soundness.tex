@@ -1,0 +1,263 @@
+% Part: normal-modal-logic
+% Chapter: tableaux
+% Section: soundness
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{tab}{sou}
+
+\olsection{سلامة \Log{K}}
+
+\begin{editorial}
+  يُعاد هنا برهان السلامة للمنطق القضي الكلاسيكي من أوله، ليكون البرهان
+  مستغنيًا عما سواه. فمن سبق له برهان سلامة الجداول الدلالية المعتادة
+  وجد بعض المسائل مكررة. والمقصود أن يتاح الاختيار بين هذا العرض
+  المستقل وعرض آخر يبني على الحالة غير الجهوية.
+\end{editorial}
+
+\begin{explain}
+  سلامة ال!!{tableau}s ذات البادئات معناها أن الافتراضات
+  \[
+  \sFmla{\True}{!B_\OLMathNumeral{1}}[\OLMathNumeral{1}], \dots, \sFmla{\True}{!B_\OLId{latin-ordinary}{n}}[\OLMathNumeral{1}], \sFmla{\False}{!A}[\OLMathNumeral{1}]
+  \]
+  إذا كان لها !!{tableau} مغلق لزم~$!B_\OLMathNumeral{1}, \dots, !B_\OLId{latin-ordinary}{n} \Entails !A$.
+  والأيسر أن نأخذ عكس النقيض: إذا وجد نموذج~$\mModel{M}$ وعالم~$\OLId{latin-ordinary}{w}$
+  يحققان~$\mSat{\OLId{latin-looped}{M}}{!B_\OLId{latin-ordinary}{i}}[\OLId{latin-ordinary}{w}]$ لكل~$\OLId{latin-ordinary}{i}=\OLMathNumeral{1}$، \dots،~$\OLId{latin-ordinary}{n}$، مع
+  $\mSat/{\OLId{latin-looped}{M}}{!A}[\OLId{latin-ordinary}{w}]$، امتنع إغلاق أي !!{tableau} لهذه الافتراضات.
+  فهذا النموذج المضاد شاهد على قابلية افتراضات ال!!{tableau} للإرضاء.
+  وسبيل البرهان أن نثبت أن ال!!{formula}s ذات البادئات الواقعة على
+  فرع من !!a{tableau} إذا أمكن إرضاؤها، بقي بعد كل تطبيق لقاعدة
+  فرع ممتد واحد على الأقل يمكن إرضاؤه. ولما كان الفرع المغلق غير قابل
+  للإرضاء، وجب أن يبقى في كل !!{tableau} لمجموعة قابلة للإرضاء من
+  ال!!{formula}s ذات البادئات فرع مفتوح.
+
+  ونحتاج، لإجراء هذا البرهان في المنطق الجهوي، إلى بيان قابلية الإرضاء
+  للنماذج الجهوية والبادئات. فإذا استقر هذا المعنى تيسّر البرهان.
+\end{explain}
+
+\begin{defn}
+  لتكن~$\OLId{latin-looped}{P}$ مجموعة بادئات، أي~$\OLId{latin-looped}{P} \subseteq (\PosInt)^*
+  \setminus \{\emptyseq\}$، وليكن~$\mModel{M}$ نموذجًا.
+  نسمي الدالة~$\OLId{latin-ordinary}{f}\colon \OLId{latin-looped}{P} \to \OLId{latin-looped}{W}$ \emph{تأويلًا لـ}~$\OLId{latin-looped}{P}$ في~$\mModel{M}$
+  متى حفظت النفاذ، بمعنى أن~$Rf(\sigma)\OLId{latin-ordinary}{f}(\sigma.\OLId{latin-ordinary}{n})$ كلما كان
+  $\sigma$ و$\sigma.\OLId{latin-ordinary}{n}$ كلاهما في~$\OLId{latin-looped}{P}$.
+  ونسمي~$\OLId{latin-looped}{P}$ \emph{مغلقة تحت السوابق} متى كان~$\sigma.\OLId{latin-ordinary}{n} \in \OLId{latin-looped}{P}$
+  يوجب~$\sigma \in \OLId{latin-looped}{P}$.
+
+  وباختيار تأويل للبادئات~$\OLId{latin-looped}{P}$ يتحدد الإرضاء على الوجه الآتي:
+  \begin{enumerate}
+  \item يرضي $\mModel{M}$ الصيغة $\sFmla{\True}{!A}[\sigma]$ إذا وفقط إذا
+    كان $\mSat{\OLId{latin-looped}{M}}{!A}[\OLId{latin-ordinary}{f}(\sigma)]$.
+  \item يرضي $\mModel{M}$ الصيغة $\sFmla{\False}{!A}[\sigma]$ إذا وفقط إذا
+    كان $\mSat/{\OLId{latin-looped}{M}}{!A}[\OLId{latin-ordinary}{f}(\sigma)]$.
+  \end{enumerate}
+\end{defn}
+
+\begin{defn}
+  لتكن~$\OLId{greek-variable}{Gamma}$ مجموعة من ال!!{formula}s ذات البادئات، وليرمز
+  $\OLId{latin-looped}{P}(\OLId{greek-variable}{Gamma})$ إلى مجموع البادئات الواردة فيها. فإذا كان~$\OLId{latin-ordinary}{f}$ تأويلًا
+  لـ~$\OLId{latin-looped}{P}(\OLId{greek-variable}{Gamma})$ في~$\mModel{M}$، فمعنى أن~$\mModel{M}$ يرضي
+  $\OLId{greek-variable}{Gamma}$ بالنسبة إلى~$\OLId{latin-ordinary}{f}$، ورمزه~$\mSat{\OLId{latin-looped}{M}}{\OLId{greek-variable}{Gamma}}[\OLId{latin-ordinary}{f}]$، أن~$\mModel{M}$
+  يرضي كل !!{formula} ذات بادئة في~$\OLId{greek-variable}{Gamma}$ بالنسبة إلى~$\OLId{latin-ordinary}{f}$.
+  ونقول إن~$\OLId{greek-variable}{Gamma}$ \emph{قابلة للإرضاء} إذا وفقط إذا وجد نموذج
+  $\mModel{M}$ وتأويل~$\OLId{latin-ordinary}{f}$ لـ~$\OLId{latin-looped}{P}(\OLId{greek-variable}{Gamma})$ يحققان~$\mSat{\OLId{latin-looped}{M}}{\OLId{greek-variable}{Gamma}}[\OLId{latin-ordinary}{f}]$.
+\end{defn}
+
+\begin{prop}
+  إذا احتوت $\OLId{greek-variable}{Gamma}$ كلًا من $\sFmla{\True}{!A}[\sigma]$ و
+  $\sFmla{\False}{!A}[\sigma]$، لبعض !!{formula}~$!A$ وبادئة~$\sigma$،
+  فإن $\OLId{greek-variable}{Gamma}$ غير قابلة للإرضاء.
+\end{prop}
+
+\begin{proof}
+  لا يمكن أن يوجد نموذج~$\mModel{M}$ وتأويل~$\OLId{latin-ordinary}{f}$ لـ$\OLId{latin-looped}{P}(\OLId{greek-variable}{Gamma})$ بحيث
+  يتحقق كل من $\mSat{\OLId{latin-looped}{M}}{!A}[\OLId{latin-ordinary}{f}(\sigma)]$ و
+  $\mSat/{\OLId{latin-looped}{M}}{!A}[\OLId{latin-ordinary}{f}(\sigma)]$.
+\end{proof}
+
+\begin{thm}[السلامة]
+  \ollabel{thm:tableau-soundness}
+  إذا كانت~$\OLId{latin-looped}{P}(\OLId{greek-variable}{Gamma})$ مغلقة تحت السوابق وكان لـ$\OLId{greek-variable}{Gamma}$ !!{tableau}
+  مغلق، فإن $\OLId{greek-variable}{Gamma}$ غير قابلة للإرضاء.
+\end{thm}
+% تصحيح دلالي (0464-I1): برهان تمديد تأويل بادئة جديدة يحتاج أن يمنع وجود نسل سابق لها في مجموعة البادئات الابتدائية.
+
+\begin{proof}
+نقول عن فرع من !!a{tableau} إنه قابل للإرضاء إذا وفقط إذا أمكن إرضاء
+مجموعة ال!!{signed formula}s عليه؛ وعن !!a{tableau} إنه قابل للإرضاء
+إذا كان له فرع واحد على الأقل كذلك.
+
+وقواعد ال!!{tableau} تحفظ انغلاق بادئات كل فرع تحت السوابق. فمتى كانت
+$\sigma.\OLId{latin-ordinary}{n}$ جديدة على الفرع، لم تكن فيه بادئة من صورة~$\sigma.\OLId{latin-ordinary}{n}.\tau$؛
+ولهذا لا يوجب تمديد التأويل عند~$\sigma.\OLId{latin-ordinary}{n}$ علاقةً بعالم عُيّن من قبل.
+
+وموضع الحجة أن توسيع !!{tableau} قابل للإرضاء بإحدى قواعد الاستدلال
+يبقيه !!{tableau} قابلًا للإرضاء. وبثبوت ذلك تتم المبرهنة؛ إذ كل
+!!{tableau} مغلق ناشئ عن !!{tableau} ابتدائي ليس فيه إلا افتراضات
+من~$\OLId{greek-variable}{Gamma}$. فلو أمكن إرضاء~$\OLId{greek-variable}{Gamma}$ لأمكن إرضاء كل !!{tableau}
+ناشئ عنها. لكن ال!!{tableau} المغلق يمتنع إرضاؤه، لأن فروعه كلها
+مغلقة، وكل فرع مغلق غير قابل للإرضاء.
+
+فلنأخذ !!{tableau} قابلًا للإرضاء، أي !!a{tableau} له فرع يمكن إرضاؤه.
+القاعدة إما أن تزيد !!{signed formula}s في فرع، وإما أن تشعبه إلى
+فرعين. فإن كان في ال!!{tableau} فرع قابل للإرضاء لم تتناوله القاعدة،
+بقي في ال!!{tableau} الموسع على حاله، وثبت المطلوب. فلا يبقى إلا أن
+تتناول القاعدة فرعًا قابلًا للإرضاء.
+
+نرمز إلى مجموعة ال!!{signed formula}s على هذا الفرع بـ~$\OLId{greek-variable}{Gamma}$،
+ولتكن~$\sFmla{\OLId{latin-looped}{S}}{!A}[\sigma] \in \OLId{greek-variable}{Gamma}$ هي ال!!{signed formula}
+التي أُجريت عليها القاعدة. فإن لم تتشعب، وجب إثبات قابلية إرضاء
+$\OLId{greek-variable}{Gamma}$ مع نتائج القاعدة؛ وإن تشعبت، كفى أن يمكن إرضاء أحد الفرعين
+الناتجين على الأقل.
+
+فلنبدأ بالقواعد التي تمدّ الفرع من غير تشعيب.
+\begin{enumerate}
+\item إذا أُجريت~$\TRule{\True}{\lnot}$ على
+  $\sFmla{\True}{\lnot !B}[\sigma] \in \OLId{greek-variable}{Gamma}$،
+  صارت مجموعة ال!!{signed formula}s في الفرع الممتد
+  $\OLId{greek-variable}{Gamma} \cup
+  \{\sFmla{\False}{!B}[\sigma]\}$. ولنفرض~$\mSat{\OLId{latin-looped}{M}}{\OLId{greek-variable}{Gamma}}[\OLId{latin-ordinary}{f}]$؛
+  ففي جملة ما يصدق~$\mSat{\OLId{latin-looped}{M}}{\lnot !B}[\OLId{latin-ordinary}{f}(\sigma)]$، ومنه
+  $\mSat/{\OLId{latin-looped}{M}}{!B}[\OLId{latin-ordinary}{f}(\sigma)]$. فالنموذج~$\mModel{M}$ يرضي
+  $\sFmla{\False}{!B}[\sigma]$ بالنسبة إلى~$\OLId{latin-ordinary}{f}$.
+\item يُوسَّع الفرع بتطبيق $\TRule{\False}{\lnot}$ على
+  $\sFmla{\False}{\lnot !B}[\sigma] \in \OLId{greek-variable}{Gamma}$: تمرين.
+\item وإذا أُجريت~$\TRule{\True}{\land}$ على
+  $\sFmla{\True}{!B \land !C}[\sigma] \in \OLId{greek-variable}{Gamma}$،
+  زيد في الفرع !!{signed formula}s اثنتان، هما
+  $\sFmla{\True}{!B}[\sigma]$ و$\sFmla{\True}{!C}[\sigma]$.
+  فإن فرضنا~$\mSat{\OLId{latin-looped}{M}}{\OLId{greek-variable}{Gamma}}[\OLId{latin-ordinary}{f}]$، لزم خاصةً~$\mSat{\OLId{latin-looped}{M}}{!B \land
+    !C}[\OLId{latin-ordinary}{f}(\sigma)]$؛ ومنه~$\mSat{\OLId{latin-looped}{M}}{!B}[\OLId{latin-ordinary}{f}(\sigma)]$
+  و$\mSat{\OLId{latin-looped}{M}}{!C}[\OLId{latin-ordinary}{f}(\sigma)]$. فيرضي~$\mModel{M}$
+  كلاًّ من~$\sFmla{\True}{!B}[\sigma]$
+  و$\sFmla{\True}{!C}[\sigma]$ بالنسبة إلى~$\OLId{latin-ordinary}{f}$.
+\item يُوسَّع الفرع بتطبيق $\TRule{\False}{\lor}$ على
+  $\sFmla{\False}{!B \lor !C}[\sigma] \in \OLId{greek-variable}{Gamma}$: تمرين.
+\item وإذا أُجريت~$\TRule{\False}{\lif}$ على
+  $\sFmla{\False}{!B \lif !C}[\sigma] \in \OLId{greek-variable}{Gamma}$،
+  نتجت !!{signed formula}s اثنتان:
+  $\sFmla{\True}{!B}[\sigma]$ و$\sFmla{\False}{!C}[\sigma]$.
+  ولنفرض~$\mSat{\OLId{latin-looped}{M}}{\OLId{greek-variable}{Gamma}}[\OLId{latin-ordinary}{f}]$، فيلزم خاصةً
+  $\mSat/{\OLId{latin-looped}{M}}{!B \lif !C}[\OLId{latin-ordinary}{f}(\sigma)]$، ومن ثم
+  $\mSat{\OLId{latin-looped}{M}}{!B}[\OLId{latin-ordinary}{f}(\sigma)]$ و$\mSat/{\OLId{latin-looped}{M}}{!C}[\OLId{latin-ordinary}{f}(\sigma)]$.
+  فإذن~$\mModel{M}, \OLId{latin-ordinary}{f}$ يرضيان~$\sFmla{\True}{!B}[\sigma]$
+  و$\sFmla{\False}{!C}[\sigma]$ معًا.
+
+\iftag{prvBox}{%
+\item يُوسَّع الفرع بتطبيق $\TRule{\True}{\Box}$ على
+  $\sFmla{\True}{\Box !B}[\sigma] \in \OLId{greek-variable}{Gamma}$:
+  \iftag{probBox}{تمرين.}{وينتج من ذلك !!{signed
+      formula}~$\sFmla{\True}{!B}[\sigma.\OLId{latin-ordinary}{n}]$ جديدة على الفرع، لبعض
+    $\sigma.\OLId{latin-ordinary}{n} \in \OLId{latin-looped}{P}(\OLId{greek-variable}{Gamma})$ (إذ يجب أن تكون $\sigma.\OLId{latin-ordinary}{n}$ مستعملة).
+    افترض $\mSat{\OLId{latin-looped}{M}}{\OLId{greek-variable}{Gamma}}[\OLId{latin-ordinary}{f}]$، وبوجه خاص $\mSat{\OLId{latin-looped}{M}}{\Box
+      !B}[\OLId{latin-ordinary}{f}(\sigma)]$. ولأن $\OLId{latin-ordinary}{f}$ تأويل للبادئات، ولأن كلًا من
+    $\sigma$ و$\sigma.\OLId{latin-ordinary}{n} \in \OLId{latin-looped}{P}(\OLId{greek-variable}{Gamma})$، نعلم أن
+    $Rf(\sigma)\OLId{latin-ordinary}{f}(\sigma.\OLId{latin-ordinary}{n})$. ومن ثم $\mSat{\OLId{latin-looped}{M}}{!B}[\OLId{latin-ordinary}{f}(\sigma.\OLId{latin-ordinary}{n})]$،
+    أي إن $\mModel{M}, \OLId{latin-ordinary}{f}$ يرضيان $\sFmla{\True}{!B}[\sigma.\OLId{latin-ordinary}{n}]$.}
+
+\item يُوسَّع الفرع بتطبيق $\TRule{\False}{\Box}$ على
+  $\sFmla{\False}{\Box !B}[\sigma] \in \OLId{greek-variable}{Gamma}$:
+  \iftag{probBox}{تمرين.}{وينتج من ذلك !!{signed
+      formula}~$\sFmla{\False}{!B}[\sigma.\OLId{latin-ordinary}{n}]$ جديدة، حيث $\sigma.\OLId{latin-ordinary}{n}$
+    بادئة جديدة على الفرع، أي $\sigma.\OLId{latin-ordinary}{n} \notin \OLId{latin-looped}{P}(\OLId{greek-variable}{Gamma})$.
+    ولأن $\OLId{greek-variable}{Gamma}$ قابلة للإرضاء، يوجد نموذج~$\mModel{M}$ وتأويل~$\OLId{latin-ordinary}{f}$
+    لـ$\OLId{latin-looped}{P}(\OLId{greek-variable}{Gamma})$ بحيث $\mSat{\OLId{latin-looped}{M}}{\OLId{greek-variable}{Gamma}}[\OLId{latin-ordinary}{f}]$، وبوجه خاص
+    $\mSat/{\OLId{latin-looped}{M}}{\Box !B}[\OLId{latin-ordinary}{f}(\sigma)]$. وعلينا أن نبيّن أن
+    $\OLId{greek-variable}{Gamma} \cup \{\sFmla{\False}{!B}[\sigma.\OLId{latin-ordinary}{n}]\}$ قابلة للإرضاء.
+    ولهذا نعرّف تأويلًا لـ$\OLId{latin-looped}{P}(\OLId{greek-variable}{Gamma}) \cup \{\sigma.\OLId{latin-ordinary}{n}\}$ كما يأتي:
+
+  بما أن $\mSat/{\OLId{latin-looped}{M}}{\Box !B}[\OLId{latin-ordinary}{f}(\sigma)]$، يوجد $\OLId{latin-ordinary}{w} \in \OLId{latin-looped}{W}$ بحيث
+  $Rf(\sigma)\OLId{latin-ordinary}{w}$ و$\mSat/{\OLId{latin-looped}{M}}{!B}[\OLId{latin-ordinary}{w}]$. ولتكن $\OLId{latin-ordinary}{f}'$ مثل $\OLId{latin-ordinary}{f}$، إلا أن
+  $\OLId{latin-ordinary}{f}'(\sigma.\OLId{latin-ordinary}{n}) = \OLId{latin-ordinary}{w}$. وبما أن $\OLId{latin-ordinary}{f}'(\sigma) = \OLId{latin-ordinary}{f}(\sigma)$ و
+  $Rf(\sigma)\OLId{latin-ordinary}{w}$، فإن $Rf'(\sigma)\OLId{latin-ordinary}{f}'(\sigma.\OLId{latin-ordinary}{n})$، ولذلك تكون $\OLId{latin-ordinary}{f}'$
+  تأويلًا لـ$\OLId{latin-looped}{P}(\OLId{greek-variable}{Gamma}) \cup \{\sigma.\OLId{latin-ordinary}{n}\}$. ومن الواضح أن
+  $\mSat/{\OLId{latin-looped}{M}}{!B}[\OLId{latin-ordinary}{f}'(\sigma.\OLId{latin-ordinary}{n})]$. ولأن $\OLId{latin-ordinary}{f}(\sigma') = \OLId{latin-ordinary}{f}'(\sigma')$ لكل
+  بادئة $\sigma' \in \OLId{latin-looped}{P}(\OLId{greek-variable}{Gamma})$، فإن $\mSat{\OLId{latin-looped}{M}}{\OLId{greek-variable}{Gamma}}[\OLId{latin-ordinary}{f}']$. ومن ثم
+  يرضي $\mModel{M}, \OLId{latin-ordinary}{f}'$ المجموعة $\OLId{greek-variable}{Gamma} \cup
+  \{\sFmla{\False}{!B}[\sigma.\OLId{latin-ordinary}{n}]\}$.}
+  }{}
+
+\iftag{prvDiamond}{%
+\item يُوسَّع الفرع بتطبيق $\TRule{\True}{\Diamond}$ على
+  $\sFmla{\True}{\Diamond !B}[\sigma] \in \OLId{greek-variable}{Gamma}$:
+  \iftag{probDiamond}{تمرين.}{وينتج من ذلك !!{signed
+      formula}~$\sFmla{\True}{!B}[\sigma.\OLId{latin-ordinary}{n}]$ جديدة، حيث $\sigma.\OLId{latin-ordinary}{n}$
+    بادئة جديدة على الفرع، أي $\sigma.\OLId{latin-ordinary}{n} \notin \OLId{latin-looped}{P}(\OLId{greek-variable}{Gamma})$.
+    ولأن $\OLId{greek-variable}{Gamma}$ قابلة للإرضاء، يوجد نموذج~$\mModel{M}$ وتأويل~$\OLId{latin-ordinary}{f}$
+    لـ$\OLId{latin-looped}{P}(\OLId{greek-variable}{Gamma})$ بحيث $\mSat{\OLId{latin-looped}{M}}{\OLId{greek-variable}{Gamma}}[\OLId{latin-ordinary}{f}]$، وبوجه خاص
+    $\mSat{\OLId{latin-looped}{M}}{\Diamond !B}[\OLId{latin-ordinary}{f}(\sigma)]$. وعلينا أن نبيّن أن
+    $\OLId{greek-variable}{Gamma} \cup \{\sFmla{\True}{!B}[\sigma.\OLId{latin-ordinary}{n}]\}$ قابلة للإرضاء.
+    ولهذا نعرّف تأويلًا لـ$\OLId{latin-looped}{P}(\OLId{greek-variable}{Gamma}) \cup \{\sigma.\OLId{latin-ordinary}{n}\}$ كما يأتي:
+
+  بما أن $\mSat{\OLId{latin-looped}{M}}{\Diamond !B}[\OLId{latin-ordinary}{f}(\sigma)]$، يوجد $\OLId{latin-ordinary}{w} \in \OLId{latin-looped}{W}$ بحيث
+  $Rf(\sigma)\OLId{latin-ordinary}{w}$ و$\mSat{\OLId{latin-looped}{M}}{!B}[\OLId{latin-ordinary}{w}]$. ولتكن $\OLId{latin-ordinary}{f}'$ مثل $\OLId{latin-ordinary}{f}$، إلا أن
+  $\OLId{latin-ordinary}{f}'(\sigma.\OLId{latin-ordinary}{n}) = \OLId{latin-ordinary}{w}$. وبما أن $\OLId{latin-ordinary}{f}'(\sigma) = \OLId{latin-ordinary}{f}(\sigma)$ و
+  $Rf(\sigma)\OLId{latin-ordinary}{w}$، فإن $Rf'(\sigma)\OLId{latin-ordinary}{f}'(\sigma.\OLId{latin-ordinary}{n})$، ولذلك تكون $\OLId{latin-ordinary}{f}'$
+  تأويلًا لـ$\OLId{latin-looped}{P}(\OLId{greek-variable}{Gamma}) \cup \{\sigma.\OLId{latin-ordinary}{n}\}$. ومن الواضح أن
+  $\mSat{\OLId{latin-looped}{M}}{!B}[\OLId{latin-ordinary}{f}'(\sigma.\OLId{latin-ordinary}{n})]$. ولأن $\OLId{latin-ordinary}{f}(\sigma') = \OLId{latin-ordinary}{f}'(\sigma')$ لكل
+  بادئة $\sigma' \in \OLId{latin-looped}{P}(\OLId{greek-variable}{Gamma})$، فإن $\mSat{\OLId{latin-looped}{M}}{\OLId{greek-variable}{Gamma}}[\OLId{latin-ordinary}{f}']$. ومن ثم
+  يرضي $\mModel{M}, \OLId{latin-ordinary}{f}'$ المجموعة $\OLId{greek-variable}{Gamma} \cup
+  \{\sFmla{\True}{!B}[\sigma.\OLId{latin-ordinary}{n}]\}$.}
+\item يُوسَّع الفرع بتطبيق $\TRule{\False}{\Diamond}$ على
+  $\sFmla{\False}{\Diamond !B}[\sigma] \in \OLId{greek-variable}{Gamma}$:
+  \iftag{probDiamond}{تمرين.}{وينتج من ذلك !!{signed
+      formula}~$\sFmla{\False}{!B}[\sigma.\OLId{latin-ordinary}{n}]$ جديدة على الفرع، لبعض
+    $\sigma.\OLId{latin-ordinary}{n} \in \OLId{latin-looped}{P}(\OLId{greek-variable}{Gamma})$ (إذ يجب أن تكون $\sigma.\OLId{latin-ordinary}{n}$ مستعملة).
+    افترض $\mSat{\OLId{latin-looped}{M}}{\OLId{greek-variable}{Gamma}}[\OLId{latin-ordinary}{f}]$، وبوجه خاص
+    $\mSat/{\OLId{latin-looped}{M}}{\Diamond !B}[\OLId{latin-ordinary}{f}(\sigma)]$. ولأن $\OLId{latin-ordinary}{f}$ تأويل للبادئات،
+    ولأن كلًا من $\sigma$ و$\sigma.\OLId{latin-ordinary}{n} \in \OLId{latin-looped}{P}(\OLId{greek-variable}{Gamma})$، نعلم أن
+    $Rf(\sigma)\OLId{latin-ordinary}{f}(\sigma.\OLId{latin-ordinary}{n})$. ومن ثم $\mSat/{\OLId{latin-looped}{M}}{!B}[\OLId{latin-ordinary}{f}(\sigma.\OLId{latin-ordinary}{n})]$،
+    أي إن $\mModel{M}, \OLId{latin-ordinary}{f}$ يرضيان $\sFmla{\False}{!B}[\sigma.\OLId{latin-ordinary}{n}]$.}
+  }{}
+\end{enumerate}
+وأما القواعد التي تشعّب الفرع إلى فرعين فبيانها كما يأتي.
+\begin{enumerate}
+\item إذا أُجريت~$\TRule{\False}{\land}$ على
+  $\sFmla{\False}{!B \land !C}[\sigma] \in \OLId{greek-variable}{Gamma}$،
+  تشعب الفرع إلى أيسر تُزاد فيه~$\sFmla{\False}{!B}[\sigma]$،
+  وأيمن تُزاد فيه~$\sFmla{\False}{!C}[\sigma]$.
+  ولنفرض~$\mSat{\OLId{latin-looped}{M}}{\OLId{greek-variable}{Gamma}}[\OLId{latin-ordinary}{f}]$، فيكون خاصةً
+  $\mSat/{\OLId{latin-looped}{M}}{!B \land !C}[\OLId{latin-ordinary}{f}(\sigma)]$. فلا بد من
+  $\mSat/{\OLId{latin-looped}{M}}{!B}[\OLId{latin-ordinary}{f}(\sigma)]$ أو~$\mSat/{\OLId{latin-looped}{M}}{!C}[\OLId{latin-ordinary}{f}(\sigma)]$.
+  فإن كان الأول أرضى~$\mModel{M}, \OLId{latin-ordinary}{f}$
+  الصيغة~$\sFmla{\False}{!B}[\sigma]$، فيمكن إرضاء الفرع الأيسر؛
+  وإن كان الثاني أرضى~$\mModel{M}, \OLId{latin-ordinary}{f}$
+  الصيغة~$\sFmla{\False}{!C}[\sigma]$، فيمكن إرضاء الفرع الأيمن.
+\item يُوسَّع الفرع بتطبيق $\TRule{\True}{\lor}$ على
+    $\sFmla{\True}{!B \lor !C}[\sigma] \in \OLId{greek-variable}{Gamma}$: تمرين.
+\item يُوسَّع الفرع بتطبيق $\TRule{\True}{\lif}$ على
+    $\sFmla{\True}{!B \lif !C}[\sigma] \in \OLId{greek-variable}{Gamma}$: تمرين.
+\end{enumerate}
+\end{proof}
+
+\begin{prob}
+أكمل برهان \olref[nml][tab][sou]{thm:tableau-soundness}.
+\end{prob}
+
+\begin{cor}
+\ollabel{cor:entailment-soundness}
+إذا كان $\OLId{greek-variable}{Gamma} \Proves !A$، فإن $\OLId{greek-variable}{Gamma} \Entails !A$.
+\end{cor}
+
+\begin{proof}
+  إذا ثبت~$\OLId{greek-variable}{Gamma} \Proves !A$، وجدت صيغ~$!B_\OLMathNumeral{1}$، \dots، $!B_\OLId{latin-ordinary}{n} \in
+  \OLId{greek-variable}{Gamma}$ بحيث يكون للمجموعة~$\OLId{greek-variable}{Delta} = \{\sFmla{\False}{!A}[\OLMathNumeral{1}],
+  \sFmla{\True}{!B_\OLMathNumeral{1}}[\OLMathNumeral{1}], \dots, \sFmla{\True}{!B_\OLId{latin-ordinary}{n}}[\OLMathNumeral{1}]\}$
+  !!{tableau} مغلق. ونريد~$\OLId{greek-variable}{Gamma} \Entails !A$.
+  فلو انتفى ذلك لوجد نموذج~$\mModel{M}$ وعالم~$\OLId{latin-ordinary}{w}$ يحققان
+  $\mSat{\OLId{latin-looped}{M}}{!B_\OLId{latin-ordinary}{i}}[\OLId{latin-ordinary}{w}]$ لكل~$\OLId{latin-ordinary}{i}=\OLMathNumeral{1}$، \dots،~$\OLId{latin-ordinary}{n}$، مع
+  $\mSat/{\OLId{latin-looped}{M}}{!A}[\OLId{latin-ordinary}{w}]$. نضع~$\OLId{latin-ordinary}{f}(\OLMathNumeral{1}) = \OLId{latin-ordinary}{w}$، فتكون~$\OLId{latin-ordinary}{f}$ تأويلًا
+  لـ~$\OLId{latin-looped}{P}(\OLId{greek-variable}{Delta})$ في~$\mModel{M}$، ويكون~$\mModel{M}$ مرضيًا
+  لـ~$\OLId{greek-variable}{Delta}$ بالنسبة إلى~$\OLId{latin-ordinary}{f}$. وهذا خلاف
+  \olref{thm:tableau-soundness}، فإن~$\OLId{greek-variable}{Delta}$ لا تقبل الإرضاء لوجود
+  !!{tableau} مغلق لها. فثبت إذن~$\OLId{greek-variable}{Gamma} \Entails !A$.
+\end{proof}
+
+\begin{cor}
+\ollabel{cor:weak-soundness}
+إذا كان $\Proves !A$، فإن $!A$ صادقة في جميع النماذج.
+\end{cor}
+
+\end{document}

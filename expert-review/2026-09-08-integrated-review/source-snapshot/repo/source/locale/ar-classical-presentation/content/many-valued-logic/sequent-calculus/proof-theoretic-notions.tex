@@ -1,0 +1,162 @@
+% Part: many-valued-logics
+% Chapter: sequent-calculus
+% Section: proof-theoretic-notions
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mvl}{seq}{prf}
+
+\olsection{المعاني النظرية البرهانية}
+
+\begin{explain}
+تقدم لنا من المعاني الدلالية المهمة الصحة واللزوم وقابلية الإشباع؛
+ونقابلها الآن بـ\emph{معان نظرية برهانية}. وهذه لا يحدّها إشباع
+!!{sentence}s في~!!{structure}s، وإنما يحدّها~!!{derivability} تتابعات
+مخصوصة أو~!!{nonderivability}ها. وقد كان الوقوف على موافقة المعاني
+الدلالية لهذه المعاني البرهانية كشفًا مهمًا؛ ومضمون هذه الموافقة هو
+\emph{مبرهنتا السلامة} و\emph{الاكتمال}.
+\end{explain}
+
+\begin{defn}[المبرهنات]
+نسمي~!!^a{sentence}~$!A$ \emph{مبرهنة} متى وُجد~!!a{derivation} في
+$\Log{LK}$ للتتابع~$\quad \Sequent !A$. ونكتب~$\Proves !A$ متى كانت
+$!A$ مبرهنة، ونكتب~$\Proves/ !A$ إذا لم تكن.
+\end{defn}
+
+\begin{defn}[!!^{derivability}]
+نقول إن~!!^a{sentence}~$!A$ \emph{!!{derivable} من} مجموعة
+!!{sentence}s~$\OLId{greek-variable}{Gamma}$، ونرمز إلى ذلك بـ$\OLId{greek-variable}{Gamma} \Proves !A$، متى
+وُجدت مجموعة جزئية منتهية~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{0} \subseteq \OLId{greek-variable}{Gamma}$ ومتتالية
+$\OLId{greek-variable}{Gamma}_\OLMathNumeral{0}'$ مؤلفة من !!{sentence}s~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{0}$، وكان~$\Log{LK}$
+!!{derive}s~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{0}' \Sequent !A$. وأما إن لم تكن~$!A$
+!!{derivable} من~$\OLId{greek-variable}{Gamma}$ فنكتب~$\OLId{greek-variable}{Gamma} \Proves/ !A$.
+\end{defn}
+
+ولما كانت لنا قواعد التقليص والإضعاف والتبديل، لم يكن لترتيب
+!!{sentence}s في~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{0}'$ ولا لتعدد ورودها أثر: فإن كان التتابع
+$\OLId{greek-variable}{Gamma}_\OLMathNumeral{0}' \Sequent !A$ !!{derivable}، كان
+$\OLId{greek-variable}{Gamma}_\OLMathNumeral{0}'' \Sequent !A$ كذلك لكل~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{0}''$ تشتمل على
+!!{sentence}s نفسها التي تشتمل عليها~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{0}'$. ومثال ذلك: إذا كان
+$\OLId{greek-variable}{Gamma}_\OLMathNumeral{0} = \{!B, !C\}$، كانت كل من
+$\OLId{greek-variable}{Gamma}_\OLMathNumeral{0}' = \tuple{!B, !B, !C}$ و
+$\OLId{greek-variable}{Gamma}_\OLMathNumeral{0}'' = \tuple{!C, !C, !B}$ متتالية لا تحتوي إلا
+!!{sentence}s الموجودة في~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{0}$. فمتى كان التتابع المشتمل على
+إحداهما~!!{derivable} كان المشتمل على الأخرى كذلك، كما في:
+\begin{prooftree}
+  \AxiomC{}
+  \Deduce$!B, !B, !C \fCenter !A$
+  \RightLabel{\LeftR{\Contraction}}
+  \UnaryInf$!B, !C \fCenter !A$
+  \RightLabel{\LeftR{\Exchange}}
+  \UnaryInf$!C, !B \fCenter !A$
+  \RightLabel{\LeftR{\Weakening}}
+  \UnaryInf$!C, !C, !B \fCenter !A$
+\end{prooftree}
+وعليه، إذا كانت~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{0}$ مجموعة منتهية من !!{sentence}s، أطلقنا فيما
+يأتي~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{0} \Sequent !A$ على أي تتابع سابقه متتالية من
+!!{sentence}s~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{0}$، وأضمرنا ما تدعو إليه الحاجة من التقليصات
+والتبديلات والإضعافات.
+
+\begin{defn}[الاتساق]
+نسمي مجموعة الجمل~$\OLId{greek-variable}{Gamma}$ \emph{غير متسقة} إذا وفقط إذا وُجدت
+مجموعة جزئية منتهية~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{0} \subseteq \OLId{greek-variable}{Gamma}$ بحيث~$\Log{LK}$
+  !!{derive}s~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{0} \Sequent \quad$. وإذا لم تكن~$\OLId{greek-variable}{Gamma}$ غير
+  متسقة—أي إذا لم تشتق~$\Log{LK}$ التتابع~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{0} \Sequent \quad$
+  لأي مجموعة جزئية منتهية~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{0} \subseteq \OLId{greek-variable}{Gamma}$—سميناها \emph{متسقة}.
+\end{defn}
+
+\begin{prop}[الانعكاسية]
+\ollabel{prop:reflexivity}
+إذا كان~$!A \in \OLId{greek-variable}{Gamma}$، كان~$\OLId{greek-variable}{Gamma} \Proves !A$.
+\end{prop}
+
+\begin{proof}
+ذلك أن التتابع الابتدائي~$!A \Sequent !A$ !!{derivable}، وأن
+$\{!A\} \subseteq \OLId{greek-variable}{Gamma}$.
+\end{proof}
+
+\begin{prop}[الرتابة]
+\ollabel{prop:monotonicity}
+إذا كان~$\OLId{greek-variable}{Gamma} \subseteq \OLId{greek-variable}{Delta}$ و$\OLId{greek-variable}{Gamma} \Proves !A$، كان
+$\OLId{greek-variable}{Delta} \Proves !A$.
+\end{prop}
+
+\begin{proof}
+لنفرض~$\OLId{greek-variable}{Gamma} \Proves !A$؛ فهناك~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{0} \subseteq \OLId{greek-variable}{Gamma}$
+منتهية يكون~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{0} \Sequent !A$ معها !!{derivable}. وبما أن
+$\OLId{greek-variable}{Gamma} \subseteq \OLId{greek-variable}{Delta}$، كانت~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{0}$ مجموعة جزئية منتهية من
+$\OLId{greek-variable}{Delta}$ أيضًا. ولذلك يشهد~!!{derivation}~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{0} \Sequent !A$
+كذلك بأن~$\OLId{greek-variable}{Delta} \Proves !A$.
+\end{proof}
+
+\begin{prop}[التعدي]
+\ollabel{prop:transitivity}
+إذا كان~$\OLId{greek-variable}{Gamma} \Proves !A$ و$\{!A\} \cup \OLId{greek-variable}{Delta} \Proves !B$، كان
+$\OLId{greek-variable}{Gamma} \cup \OLId{greek-variable}{Delta} \Proves !B$.
+\end{prop}
+
+\begin{proof}
+متى كان~$\OLId{greek-variable}{Gamma} \Proves !A$، وُجدت~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{0} \subseteq \OLId{greek-variable}{Gamma}$
+منتهية و!!a{derivation}~$\pi_\OLMathNumeral{0}$ لـ$\OLId{greek-variable}{Gamma}_\OLMathNumeral{0} \Sequent !A$. وإذا كان
+$\{!A\} \cup \OLId{greek-variable}{Delta} \Proves !B$، وُجدت مجموعة جزئية منتهية
+$\OLId{greek-variable}{Delta}_\OLMathNumeral{0} \subseteq \OLId{greek-variable}{Delta}$ و!!a{derivation}~$\pi_\OLMathNumeral{1}$ لـ
+$!A, \OLId{greek-variable}{Delta}_\OLMathNumeral{0} \Sequent !B$. والبيان في~!!{derivation} الآتي:
+\begin{prooftree}
+  \AxiomC{}
+  \RightLabel{$\pi_\OLMathNumeral{0}$}
+  \Deduce$\OLId{greek-variable}{Gamma}_\OLMathNumeral{0} \fCenter !A$
+  \AxiomC{}
+  \RightLabel{$\pi_\OLMathNumeral{1}$}
+  \Deduce$!A, \OLId{greek-variable}{Delta}_\OLMathNumeral{0} \fCenter !B$
+  \RightLabel{\Cut}
+  \BinaryInf$\OLId{greek-variable}{Gamma}_\OLMathNumeral{0}, \OLId{greek-variable}{Delta}_\OLMathNumeral{0} \fCenter !B$
+\end{prooftree}
+ولما كان~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{0} \cup \OLId{greek-variable}{Delta}_\OLMathNumeral{0} \subseteq \OLId{greek-variable}{Gamma} \cup \OLId{greek-variable}{Delta}$، ثبت
+بذلك~$\OLId{greek-variable}{Gamma} \cup \OLId{greek-variable}{Delta} \Proves !B$.
+\end{proof}
+
+ويلزم من هذا، بوجه خاص، أنه إذا كان~$\OLId{greek-variable}{Gamma} \Proves !A$ و
+$!A \Proves !B$، كان~$\OLId{greek-variable}{Gamma} \Proves !B$. ويلزم أيضًا أنه إذا كان
+$!A_\OLMathNumeral{1}, \dots, !A_\OLId{latin-ordinary}{n} \Proves !B$ و$\OLId{greek-variable}{Gamma} \Proves !A_\OLId{latin-ordinary}{i}$ لكل~$\OLId{latin-ordinary}{i}$، كان
+$\OLId{greek-variable}{Gamma} \Proves !B$.
+
+\begin{prop}
+\ollabel{prop:incons}
+تكون~$\OLId{greek-variable}{Gamma}$ غير متسقة إذا وفقط إذا كان~$\OLId{greek-variable}{Gamma} \Proves {!A}$ لكل
+جملة~$!A$.
+\end{prop}
+
+\begin{proof}
+وهذا مما يترك تمرينًا.
+\end{proof}
+
+\begin{prob}
+برهن على~\olref[mvl][seq][prf]{prop:incons}.
+\end{prob}
+
+\begin{prop}[التراص]
+  \ollabel{prop:proves-compact}
+  \begin{enumerate}
+  \item إذا كان~$\OLId{greek-variable}{Gamma} \Proves !A$، وُجدت مجموعة جزئية منتهية
+    $\OLId{greek-variable}{Gamma}_\OLMathNumeral{0} \subseteq \OLId{greek-variable}{Gamma}$ بحيث~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{0} \Proves !A$.
+  \item إذا كانت كل مجموعة جزئية منتهية من~$\OLId{greek-variable}{Gamma}$ متسقة، كانت
+    $\OLId{greek-variable}{Gamma}$ متسقة.
+  \end{enumerate}
+\end{prop}
+
+\begin{proof}
+  \begin{enumerate}
+    \item متى كان~$\OLId{greek-variable}{Gamma} \Proves !A$، وُجدت مجموعة جزئية منتهية
+      $\OLId{greek-variable}{Gamma}_\OLMathNumeral{0} \subseteq \OLId{greek-variable}{Gamma}$ بحيث يكون للتتابع
+      $\OLId{greek-variable}{Gamma}_\OLMathNumeral{0} \Sequent !A$ !!a{derivation}. ومن ثم
+      $\OLId{greek-variable}{Gamma}_\OLMathNumeral{0} \Proves !A$.
+    \item إن كانت~$\OLId{greek-variable}{Gamma}$ غير متسقة، وُجدت مجموعة جزئية منتهية
+      $\OLId{greek-variable}{Gamma}_\OLMathNumeral{0} \subseteq \OLId{greek-variable}{Gamma}$ بحيث~$\Log{LK}$ !!{derive}s
+      $\OLId{greek-variable}{Gamma}_\OLMathNumeral{0} \Sequent \quad$. غير أن~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{0}$ عندئذ مجموعة جزئية
+      منتهية غير متسقة من~$\OLId{greek-variable}{Gamma}$.
+  \end{enumerate}
+\end{proof}
+
+\end{document}

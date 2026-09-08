@@ -1,0 +1,37 @@
+% Part: lambda-calculus
+% Chapter: introduction
+% Section: church-rosser
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{int}{cr}
+\olsection{خاصية تشيرش--روسر}
+
+\begin{thm}
+\ollabel{thm:church-rosser}
+لتكن~$M$ و$N_1$ و$N_2$ حدودًا بحيث~$M \red N_1$ و$M \red N_2$.
+عندئذ يوجد حد~$P$ بحيث~$N_1 \red P$ و$N_2 \red P$.
+\end{thm}
+
+\begin{cor}
+افترض أن~$M$ يمكن اختزاله إلى صورة سوية. عندئذ تكون هذه الصورة السوية
+وحيدة.
+\end{cor}
+
+\begin{proof}
+إذا كان~$M \red N_1$ و$M \red N_2$، فبالمبرهنة السابقة يوجد حد~$P$
+يختزل كل من~$N_1$ و$N_2$ إلى~$P$. وإذا كان كل من~$N_1$ و$N_2$ في صورة
+سوية، فلا يمكن أن يحدث هذا إلا إذا~$N_1 \ident P \ident N_2$.
+\end{proof}
+
+وأخيرًا، سنقول إن الحدين~$M$ و$N$ \emph{متكافئان بحسب~$\beta$}، أو
+\emph{متكافئان} فحسب، إذا كانا يختزلان إلى حد مشترك؛ أي إذا وجد~$P$ ما
+بحيث~$M \red P$ و$N \red P$. ونكتب هذا~$M \equal[\beta] N$. ويمكنك
+باستعمال~\olref{thm:church-rosser} التحقق من أن~$\equal[\beta]$ علاقة
+تكافؤ لها الخاصية الإضافية الآتية: لكل~$M$ و$N$، إذا كان~$M \red N$
+أو~$N \red M$، فإن~$M \equal[\beta] N$. (بل يمكن إثبات أن
+$\equal[\beta]$ هي \emph{أصغر} علاقة تكافؤ لها هذه الخاصية.)
+
+\end{document}

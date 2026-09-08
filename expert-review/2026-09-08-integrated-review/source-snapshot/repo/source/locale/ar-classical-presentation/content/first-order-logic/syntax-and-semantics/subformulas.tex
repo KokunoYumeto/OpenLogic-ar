@@ -1,0 +1,107 @@
+% Part: first-order-logic
+% Chapter: syntax-and-semantics
+% Section: subformulas
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{syn}{sbf}
+
+\olsection{\printtoken{P}{subformula}}
+
+\begin{explain}
+نحتاج كثيرًا إلى النظر في ال!!{formula}s التي تألّفت منها
+!!a{formula} معطاة؛ وتلك هي \emph{!!{subformula}s} لها. وكل
+!!{formula} تُعدّ !!a{subformula} من نفسها. أما الصيغة الجزئية من~$!A$
+إذا كانت غير~$!A$ نفسها، فتسمى \emph{!!{subformula} حقيقية}.
+\end{explain}
+
+\begin{defn}[!!^{subformula} مباشرة]
+إذا كانت $!A$ !!a{formula}، فتُعرّف \emph{ال!!{subformula}s
+المباشرة} لـ~$!A$ استقرائيًا كما يأتي:
+\begin{enumerate}
+\item ليس لل!!{formula}s الذرية !!{subformula}s مباشرة.
+
+\tagitem{prvNot}{\indcase{!A}{\lnot !B}{ال!!{subformula} المباشرة
+    الوحيدة لـ~$\indfrm$ هي~$!B$.}}{}
+
+\item \indcase{!A}{(!B \ast !C)}{ال!!{subformula}s المباشرة
+  لـ~$\indfrm$ هي $!B$ و$!C$ (حيث $\ast$ أي رابط ثنائي).}
+
+\tagitem{prvAll}{\indcase{!A}{\lforall[x][!B]}{ال!!{subformula}
+    المباشرة الوحيدة لـ~$\indfrm$ هي~$!B$.}}{}
+
+\tagitem{prvEx}{\indcase{!A}{\lexists[x][!B]}{ال!!{subformula}
+    المباشرة الوحيدة لـ~$\indfrm$ هي~$!B$.}}{}
+\end{enumerate}
+\end{defn}
+
+\begin{defn}[!!^{subformula} حقيقية]
+إذا كانت $!A$ !!a{formula}، فتُعرّف \emph{ال!!{subformula}s
+الحقيقية} لـ~$!A$ عوديًا كما يأتي:
+\begin{enumerate}
+\item ليس لل!!{formula}s الذرية !!{subformula}s حقيقية.
+
+\tagitem{prvNot}{\indcase{!A}{\lnot !B}{ال!!{subformula}s الحقيقية
+    لـ~$\indfrm$ هي~$!B$ مع جميع ال!!{subformula}s الحقيقية
+    لـ~$!B$.}}{}
+
+\item \indcase{!A}{(!B \ast !C)}{ال!!{subformula}s الحقيقية
+  لـ~$\indfrm$ هي $!B$ و$!C$، مع جميع ال!!{subformula}s الحقيقية
+  لـ~$!B$ وتلك الخاصة بـ~$!C$.}
+
+\tagitem{prvAll}{\indcase{!A}{\lforall[x][!B]}{ال!!{subformula}s
+    الحقيقية لـ~$\indfrm$ هي~$!B$ مع جميع ال!!{subformula}s الحقيقية
+    لـ~$!B$.}}{}
+
+\tagitem{prvEx}{\indcase{!A}{\lexists[x][!B]}{ال!!{subformula}s
+    الحقيقية لـ~$\indfrm$ هي~$!B$ مع جميع ال!!{subformula}s الحقيقية
+    لـ~$!B$.}}{}
+\end{enumerate}
+\end{defn}
+
+\begin{defn}[!!^{subformula}]
+ال!!{subformula}s لـ~$!A$ هي $!A$ نفسها مع جميع ال!!{subformula}s
+الحقيقية لها.
+\end{defn}
+
+\begin{explain}
+وبين تعريف ال!!{subformula}s المباشرة وتعريف ال!!{subformula}s
+الحقيقية فرق ينبغي تبيّنه. فقد عيّنّا في الأول ال!!{subformula}s
+المباشرة للصيغة~$!A$ بحسب كل صورة يجوز أن تكون عليها~$!A$، فكان
+تعريفًا صريحًا بالحالات، على ترتيب التعريف الاستقرائي لمجموعة
+ال!!{formula}s. وسلكنا في الثاني ترتيب تعريف مجموعة
+ال!!{formula}s أيضًا، غير أننا أدخلنا في كل حالة ال!!{subformula}s
+الحقيقية لل!!{formula}s الأصغر $!B$ و$!C$، إلى جانب هاتين
+ال!!{formula}s نفسيهما. وبذلك صار التعريف \emph{عوديًا}.
+وضابط العود في تعريف دالة على مجموعة محدّدة استقرائيًا، وهي هنا
+ال!!{formula}s، أن تستعمل بعض حالات التعريف الدالة نفسها.
+ولا يستقيم ذلك إلا إذا اقتصر الاستعمال على قيم الدالة عند وسائط
+سابقة للوسيط الجاري تعريف قيمته. فحين نحدّد «!!{subformula} حقيقية»
+لـ~$(!B \ast !C)$، إنما نأخذ ال!!{subformula}s الحقيقية
+لل!!{formula}s السابقة في البناء، أعني $!B$ و$!C$.
+\end{explain}
+
+\begin{prop}
+\ollabel{prop:subfrm-trans}
+إذا كانت $!B$ صيغة جزئية من~$!A$، وكانت $!C$ صيغة جزئية من~$!B$،
+لزم أن تكون $!C$ صيغة جزئية من~$!A$؛ أي إن علاقة الصيغة
+الجزئية علاقة متعدية.
+\end{prop}
+
+\begin{prob}
+أثبت \olref[fol][syn][sbf]{prop:subfrm-trans}.
+\end{prob}
+
+\begin{prop}
+\ollabel{prop:count-subfrms}
+لتكن $!A$ صيغة مجموع ما فيها من الروابط والمكممات $\OLId{latin-ordinary}{n}$.
+فعدد الصيغ الجزئية لـ~$!A$ لا يتجاوز $\OLMathNumeral{2}\OLId{latin-ordinary}{n}+\OLMathNumeral{1}$.
+\end{prop}
+
+\begin{prob}
+أثبت \olref[fol][syn][sbf]{prop:count-subfrms}.
+\end{prob}
+
+\end{document}

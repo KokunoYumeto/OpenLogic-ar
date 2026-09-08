@@ -1,0 +1,94 @@
+% Part: first-order-logic
+% Chapter: sequent-calculus
+% Section: proving-things-quant
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{seq}{prq}
+
+\olsection{\usetoken{P}{derivation} ذات المكممات}
+
+\begin{ex}
+أعط $\Log{LK}$-!!{derivation} للتتابعية
+$\lexists[\OLId{latin-ordinary}{x}][\lnot !A(\OLId{latin-ordinary}{x})] \Sequent \lnot \lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]$.
+
+مع المكممات لا بد من صيانة شرط المتغير المميَّز، وقد لا يصان إلا بتغيير ترتيب بعض الاستدلالات.
+والنافع في الغالب أن نبدأ، عند الطلب من أسفل، بالقواعد التي يلزمها هذا الشرط؛ فتقع أسفل البرهان بعد تمامه.
+وينفع كذلك تقدير صورة التتابعية الابتدائية سلفًا. فهي هنا من نحو~$!A(\OLId{latin-ordinary}{a}) \Sequent !A(\OLId{latin-ordinary}{a})$؛ ولهذا يلزم عند عكس القاعدتين اختيار حد واحد، نسميه
+$\OLId{latin-ordinary}{a}$، لكل من~$\lforall$ و$\lexists$. فإن اختلف الحدّان انتهينا إلى نحو~$!A(\OLId{latin-ordinary}{a}) \Sequent !A(\OLId{latin-ordinary}{b})$، وليس ذلك قابلًا للاشتقاق.
+
+ونبدأ بوضع المطلوب:
+\begin{prooftree}
+\AxiomC{}
+\UnaryInf$\lexists[\OLId{latin-ordinary}{x}][\lnot !A(\OLId{latin-ordinary}{x})] \fCenter \lnot \lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]$
+\end{prooftree}
+إما أن نأخذ~\LeftR{\exists} وإما~\RightR{\lnot}.
+ولما كانت~\LeftR{\exists} مقيدة بشرط المتغير المميَّز، كان تقديمها في البحث أنفع؛ فنبدأ بها:
+\begin{prooftree}
+\AxiomC{}
+\UnaryInf$ \lnot !A(\OLId{latin-ordinary}{a}) \fCenter \lnot \lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]$
+\RightLabel{\LeftR{\lexists}}
+\UnaryInf$ \lexists[\OLId{latin-ordinary}{x}][\lnot !A(\OLId{latin-ordinary}{x})] \fCenter \lnot \lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]$
+\end{prooftree}
+وبتطبيق قاعدتي~\LeftR{\lnot} و\RightR{\lnot} عكسيًا نحصل على
+\begin{prooftree}
+\AxiomC{}
+\UnaryInf$\lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})] \fCenter !A(\OLId{latin-ordinary}{a})$
+\RightLabel{\LeftR{\lnot}}
+\UnaryInf$\lnot !A(\OLId{latin-ordinary}{a}), \lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})] \fCenter $
+\RightLabel{\LeftR{\Exchange}}
+\UnaryInf$\lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})], \lnot !A(\OLId{latin-ordinary}{a}) \fCenter $
+\RightLabel{\RightR{\lnot}}
+\UnaryInf$ \lnot !A(\OLId{latin-ordinary}{a}) \fCenter \lnot \lforall[\OLId{latin-ordinary}{x}] !A(\OLId{latin-ordinary}{x})$
+\RightLabel{\LeftR{\lexists}}
+\UnaryInf$ \lexists[\OLId{latin-ordinary}{x}] \lnot !A(\OLId{latin-ordinary}{x}) \fCenter \lnot \lforall[\OLId{latin-ordinary}{x}] !A(\OLId{latin-ordinary}{x})$
+\end{prooftree}
+ولا يبقى الآن إلا~\LeftR{\forall}. وهذه لا يلزمها قيد المتغير المميَّز، فلا عائق من جهته.
+ولكي نبلغ التتابعية الابتدائية
+$!A(\OLId{latin-ordinary}{a}) \Sequent !A(\OLId{latin-ordinary}{a})$، نختار~$\OLId{latin-ordinary}{a}$ وسيطة لـ~$!A$ عند تطبيقها:
+\begin{prooftree}
+\Axiom$!A(\OLId{latin-ordinary}{a}) \fCenter !A(\OLId{latin-ordinary}{a})$
+\RightLabel{\LeftR{\lforall}}
+\UnaryInf$\lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})] \fCenter !A(\OLId{latin-ordinary}{a})$
+\RightLabel{\LeftR{\lnot}}
+\UnaryInf$\lnot !A(\OLId{latin-ordinary}{a}), \lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})] \fCenter $
+\RightLabel{\LeftR{\Exchange}}
+\UnaryInf$\lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})], \lnot !A(\OLId{latin-ordinary}{a}) \fCenter $
+\RightLabel{\RightR{\lnot}}
+\UnaryInf$ \lnot !A(\OLId{latin-ordinary}{a}) \fCenter \lnot \lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]$
+\RightLabel{\LeftR{\lexists}}
+\UnaryInf$ \lexists[\OLId{latin-ordinary}{x}][ \lnot !A(\OLId{latin-ordinary}{x})] \fCenter \lnot \lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]$
+\end{prooftree}
+وبعد تمام الشجرة نراجع شرط المتغير المميَّز، ولا سيما أن البحث في المكممات.
+القاعدة الوحيدة المستعملة التي تتقيد به هي~\LeftR{\exists}، ومتغيرها المميَّز~$\OLId{latin-ordinary}{a}$ لا يقع في تتابعيتها السفلى، وهي التتابعية النهائية.
+فهذا !!{derivation} صحيح.
+\end{ex}
+
+\begin{prob}
+أعط !!{derivation}s للتتابعيات الآتية:
+\begin{enumerate}
+\item $\Sequent (\lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})] \land \lforall[\OLId{latin-ordinary}{y}][!B(\OLId{latin-ordinary}{y})]) \lif
+\lforall[\OLId{latin-ordinary}{z}][(!A(\OLId{latin-ordinary}{z}) \land !B(\OLId{latin-ordinary}{z}))]$.
+\item $\Sequent (\lexists[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})] \lor \lexists[\OLId{latin-ordinary}{y}][!B(\OLId{latin-ordinary}{y})]) \lif
+\lexists[\OLId{latin-ordinary}{z}][(!A(\OLId{latin-ordinary}{z}) \lor !B(\OLId{latin-ordinary}{z}))]$.
+\item $\lforall[\OLId{latin-ordinary}{x}][(!A(\OLId{latin-ordinary}{x}) \lif !B)] \Sequent \lexists[\OLId{latin-ordinary}{y}][!A(\OLId{latin-ordinary}{y})] \lif !B$.
+\item $\lforall[\OLId{latin-ordinary}{x}][\lnot !A(\OLId{latin-ordinary}{x})] \Sequent \lnot\lexists[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]$.
+\item $\Sequent \lnot\lexists[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})] \lif \lforall[\OLId{latin-ordinary}{x}][\lnot !A(\OLId{latin-ordinary}{x})]$.
+\item $\Sequent \lnot\lexists[\OLId{latin-ordinary}{x}][\lforall[\OLId{latin-ordinary}{y}][((!A(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y}) \lif \lnot
+!A(\OLId{latin-ordinary}{y},\OLId{latin-ordinary}{y})) \land (\lnot !A(\OLId{latin-ordinary}{y},\OLId{latin-ordinary}{y}) \lif !A(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y})))]]$.
+\end{enumerate}
+\end{prob}
+
+\begin{prob}
+أعط !!{derivation}s للتتابعيات الآتية:
+\begin{enumerate}
+\item $\Sequent \lnot\lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})] \lif \lexists[\OLId{latin-ordinary}{x}][\lnot!A(\OLId{latin-ordinary}{x})]$.
+\item $(\lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})] \lif !B) \Sequent \lexists[\OLId{latin-ordinary}{y}][(!A(\OLId{latin-ordinary}{y}) \lif !B)]$.
+\item $\Sequent \lexists[\OLId{latin-ordinary}{x}][(!A(\OLId{latin-ordinary}{x}) \lif \lforall[\OLId{latin-ordinary}{y}][!A(\OLId{latin-ordinary}{y})])]$.
+\end{enumerate}
+(تتطلب هذه كلها القاعدة~$\RightR{\Contraction}$.)
+\end{prob}
+
+\end{document}

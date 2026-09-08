@@ -1,0 +1,70 @@
+% Part: lambda-calculus
+% Chapter: lambda-definability
+% Section: truth-values
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{ldf}{tvr}
+\olsection{قيم الصدق والعلاقات}
+
+لنا أن نرمز قيم الصدق في حساب لامبدا الخالص على الوجه الآتي:
+\begin{align*}
+  \fn{true} & \ident \lambd[\OLId{latin-ordinary}{x}][\lambd[\OLId{latin-ordinary}{y}][\OLId{latin-ordinary}{x}]]\\
+  \fn{false} & \ident \lambd[\OLId{latin-ordinary}{x}][\lambd[\OLId{latin-ordinary}{y}][\OLId{latin-ordinary}{y}]]
+\end{align*}
+
+ووجه هذا الترميز أن قيمة الصدق تقوم مقام \emph{دالة اختيار}: تأخذ
+وسيطين ثم تردّ أحدهما. فـ~$\fn{true}$ تختار الأول، و$\fn{false}$
+تختار الثاني. ولذلك يختزل~$\fn{true}\, \OLId{latin-looped}{M} \OLId{latin-looped}{N}$ أبدًا إلى~$\OLId{latin-looped}{M}$،
+ويختزل~$\fn{false}\, \OLId{latin-looped}{M} \OLId{latin-looped}{N}$ أبدًا إلى~$\OLId{latin-looped}{N}$.
+
+\begin{defn}
+تكون العلاقة~$\OLId{latin-looped}{R} \subseteq \Nat^\OLId{latin-ordinary}{k}$ !!{lambda definable} إذا وجد
+حد~$\OLId{latin-looped}{R}$ يحقق
+\begin{align*}
+  \OLId{latin-looped}{R}\, \num{\OLId{latin-ordinary}{n}_\OLMathNumeral{1}} \dots \num{\OLId{latin-ordinary}{n}_\OLId{latin-ordinary}{k}} & \bred \fn{true}
+  \intertext{متى تحقق~$R(n_1, \dots, n_k)$، و}
+  \OLId{latin-looped}{R}\, \num{\OLId{latin-ordinary}{n}_\OLMathNumeral{1}} \dots \num{\OLId{latin-ordinary}{n}_\OLId{latin-ordinary}{k}} & \bred \fn{false}
+\end{align*}
+إذا لم تتحقق.
+\end{defn}
+
+ومن أمثلة ذلك العلاقة~$\fn{IsZero} = \{\OLMathNumeral{0}\}$، وهي لا تتحقق إلا
+في~$\OLMathNumeral{0}$؛ فإنها !!{lambda definable} بالحد
+\[
+  \fn{IsZero} \ident \lambd[\OLId{latin-ordinary}{n}][\OLId{latin-ordinary}{n} (\lambd[\OLId{latin-ordinary}{x}][\fn{false}])\, \fn{true}].
+\]
+وبيان عمله أن أعداد تشيرش مكررات، أي دوال تطبق وسيطها الأول~$\OLId{latin-ordinary}{n}$ مرة
+في وسيطها الثاني. فنجعل مبدأ التكرار~$\fn{true}$، ونجعل كل خطوة تردّ
+$\fn{false}$ بصرف النظر عما ردّته الخطوة قبلها. وتطبق هذه الخطوة في
+القيمة المبدئية~$\OLId{latin-ordinary}{n}$ مرة؛ فيبقى الناتج~$\fn{true}$ إذا وفقط إذا لم
+تقع خطوة أصلًا، أي عندما~$\OLId{latin-ordinary}{n} = \OLMathNumeral{0}$.
+
+وبهذا التمثيل نفسه نضع دوال صدق أخرى. فالحدان الآتيان يمثلان النفي
+والاقتران:
+\begin{align*}
+  \fn{Not} & \ident \lambd[\OLId{latin-ordinary}{x}][\OLId{latin-ordinary}{x}\, \fn{false}\, \fn{true}]\\
+  \fn{And} & \ident \lambd[\OLId{latin-ordinary}{x}][\lambd[\OLId{latin-ordinary}{y}][xy \,\fn{false}]]
+\end{align*}
+تأخذ الدالة ``$\fn{Not}$'' وسيطًا واحدًا، فتردّ~$\fn{true}$ إذا
+كان~$\fn{false}$، وتردّ~$\fn{false}$ إذا كان~$\fn{true}$. وأما
+``$\fn{And}$'' فتأخذ قيمتي صدق، وينبغي أن تردّ~$\fn{true}$ إذا وفقط
+إذا كان كل من الوسيطين~$\fn{true}$. وقد مر أن قيم الصدق دوال اختيار؛
+فإذا كان~$\OLId{latin-ordinary}{x}$ قيمة صدق وطبق في وسيطين، ردّ الأول إذا كان~$\OLId{latin-ordinary}{x}$ هو
+$\fn{true}$، وردّ الثاني فيما عدا ذلك. وتأخذ~$\fn{And}$ وسيطيها
+$\OLId{latin-ordinary}{x}$ و$\OLId{latin-ordinary}{y}$، ثم تجعل~$\OLId{latin-ordinary}{y}$ و$\fn{false}$ وسيطي~$\OLId{latin-ordinary}{x}$. فإذا افترضنا أن
+$\OLId{latin-ordinary}{x}$ قيمة صدق، كان الناتج~$\OLId{latin-ordinary}{y}$ متى كان~$\OLId{latin-ordinary}{x}$ هو~$\fn{true}$، وكان
+$\fn{false}$ متى كان~$\OLId{latin-ordinary}{x}$ هو~$\fn{false}$؛ وهذا عين المطلوب.
+
+وإنما افترضنا في هذا البيان ألا تطبق~$\fn{And}$ إلا في قيم الصدق.
+فإن طبقتها في حدود أخرى، لم يلزم أن يكون الناتج، أي الصورة السوية إن
+كانت، قيمة صدق.
+
+\begin{prob}
+  عرّف الدالتين~$\fn{Or}$ و$\fn{Xor}$ اللتين تمثلان دالتي صدق الفصل
+  الشامل والفصل الحصري، مستعملًا ترميز قيم الصدق بحدود~$\lambd$.
+\end{prob}
+
+\end{document}

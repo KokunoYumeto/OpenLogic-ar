@@ -1,0 +1,49 @@
+% part: intuitionistic-logic
+% chapter: soundness-completeness
+% section: completeness-thm
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{sc}{cpl}
+
+\olsection{مبرهن التمام}
+
+\begin{thm}\ollabel{thm:completeness}
+  من~$\OLId{greek-variable}{Gamma} \Entails !A$ يلزم~$\OLId{greek-variable}{Gamma} \Proves !A$.
+\end{thm}
+
+\begin{proof}
+  نسلك طريق النقيض المقابل. ليكن~$\OLId{greek-variable}{Gamma} \Proves/ !A$. تعطي
+  \olref[lin]{lem:lindenbaum} مجموعة أولية
+  $\OLId{greek-variable}{Gamma}^* \supseteq \OLId{greek-variable}{Gamma}$ تبقى معها~$\OLId{greek-variable}{Gamma}^* \Proves/ !A$. ولنأخذ
+  النموذج القانوني~$\mModel{M(\Gamma^*)}$ للمجموعة~$\OLId{greek-variable}{Gamma}^*$ وفق
+  \olref[mod]{defn:canonical-model}. فإن كل~$!B \in \OLId{greek-variable}{Gamma}$ يحقق
+  $\OLId{greek-variable}{Gamma}^* \Proves !B$. ومن التعريف
+  $\OLId{greek-variable}{Gamma}^*(\emptyseq)=\OLId{greek-variable}{Gamma}^*$. فتعطي لمّة الصدق
+  (\olref[tru]{lem:truth})
+  $\mSat{\OLId{latin-looped}{M}(\OLId{greek-variable}{Gamma}^*)}{!B}[\emptyseq]$ لكل~$!B \in \OLId{greek-variable}{Gamma}$، مع
+  $\mSat/{\OLId{latin-looped}{M}(\OLId{greek-variable}{Gamma}^*)}{!A}[\emptyseq]$. وهذا شاهد على
+  $\OLId{greek-variable}{Gamma} \Entails/ !A$.
+\end{proof}
+
+\begin{prob}
+  أقم الدليل على أن اقتصار~$!A$ على !!{propositional variable}s و
+  $\lor$ و$\land$ يقتضي~$\Entails/ !A$. ثم استخرج من ذلك امتناع تعريف~$\lif$
+  في المنطق الحدسي بواسطة~$\lor$ و$\land$.
+\end{prob}
+
+\begin{prob}
+  برهن، مستعينًا بمبرهن التمام، أن~$\Proves !A \lor !B$ لا تكون إلا مع
+  $\Proves !A$ أو~$\Proves !B$. (تلميح: خذ
+  $\mSat/{\OLId{latin-looped}{M}_\OLMathNumeral{1}}{!A}$ و$\mSat/{\OLId{latin-looped}{M}_\OLMathNumeral{2}}{!B}$، وأنشئ منهما نموذجًا
+  $\mModel{M}$ يحقق~$\mSat/{\OLId{latin-looped}{M}}{!A \lor !B}$.)
+\end{prob}
+
+\begin{prob}
+  أقم الدليل على أن~$\mModel{M}$، إذا كان نموذجًا علائقيًا ذا ترتيب خطي،
+  حقق~$\mSat{\OLId{latin-looped}{M}}{(!A \lif !B)\lor(!B \lif !A)}$.
+\end{prob}
+
+\end{document}

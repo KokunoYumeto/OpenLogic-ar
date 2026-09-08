@@ -1,0 +1,198 @@
+% Part: propositional-logic
+% Chapter: syntax-and-semantics
+% Section: valuations-sat
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pl}{syn}{val}
+
+\olsection{ال\usetoken{P}{valuation} والإرضاء}
+
+\begin{defn}[!!^{valuation}s]
+مجموعة قيمتي الصدق، أعني «الصدق» و«الكذب»، هي $\{\True, \False\}$.
+و\emph{!!{valuation}} للغة $\Lang{L_0}$ دالة~$\pAssign{\OLId{latin-ordinary}{v}}$ تجعل لكل واحد من
+!!{propositional variable}s إحدى القيمتين $\True$ أو $\False$؛ أي إنها
+$\pAssign{\OLId{latin-ordinary}{v}} \colon
+\PVar \to \{\True, \False \}$.
+\end{defn}
+
+\begin{defn}
+  متى عُيّن !!a{valuation}~$\pAssign{\OLId{latin-ordinary}{v}}$، كانت دالة القيمة
+  $\pValue{\OLId{latin-ordinary}{v}} \colon \Frm[\OLId{latin-looped}{L}_\OLMathNumeral{0}] \to \{\True, \False \}$ معرّفة بالاستقراء الآتي:
+  \begin{align*}
+    \iftag{prvFalse}{\pValue{\OLId{latin-ordinary}{v}}(\lfalse) & = \False; \\}{}
+    \iftag{prvTrue}{\pValue{\OLId{latin-ordinary}{v}}(\ltrue) & = \True; \\}{}
+    \pValue{\OLId{latin-ordinary}{v}}(\Obj p_\OLId{latin-ordinary}{n}) & = \pAssign{\OLId{latin-ordinary}{v}}(\Obj p_\OLId{latin-ordinary}{n}); \\
+    \iftag{prvNot}{\pValue{\OLId{latin-ordinary}{v}}(\lnot !A) & = \begin{cases}
+        \True & \text{إذا كان } \pValue{\OLId{latin-ordinary}{v}}(!A) = \False;\\
+        \False & \text{فيما عدا ذلك.}
+      \end{cases} \\ }{}
+    \iftag{prvAnd}{\pValue{\OLId{latin-ordinary}{v}}(!A \land !B) & = \begin{cases}
+        \True &
+        \text{إذا كان $\pValue{v}(!A) = \True$ و$\pValue{v}(!B) = \True$؛}\\
+        \False &
+        \text{إذا كان $\pValue{v}(!A) = \False$ أو $\pValue{v}(!B) = \False$}.
+      \end{cases}\\}{}
+    \iftag{prvOr}{\pValue{\OLId{latin-ordinary}{v}}(!A \lor !B) & = \begin{cases}
+        \True &
+        \text{إذا كان $\pValue{v}(!A) = \True$ أو $\pValue{v}(!B) = \True$؛}\\
+        \False &
+        \text{إذا كان $\pValue{v}(!A) = \False$ و$\pValue{v}(!B) = \False$}.
+      \end{cases}\\}{}
+    \iftag{prvIf}{\pValue{\OLId{latin-ordinary}{v}}(!A \lif !B) & = \begin{cases}
+        \True &
+        \text{إذا كان $\pValue{v}(!A) = \False$ أو $\pValue{v}(!B) = \True$؛}\\
+        \False &
+        \text{إذا كان $\pValue{v}(!A) = \True$ و$\pValue{v}(!B) = \False$}.
+      \end{cases}\\}{}
+    \iftag{prvIff}{\pValue{\OLId{latin-ordinary}{v}}(!A \liff !B) & = \begin{cases}
+        \True &
+        \text{إذا كان $\pValue{v}(!A) = \pValue{v}(!B)$؛}\\
+        \False &
+        \text{إذا كان $\pValue{v}(!A) \neq \pValue{v}(!B)$}.
+      \end{cases}}{}
+\end{align*}
+\end{defn}
+
+\begin{explain}
+تقابل هذه البنود جداول الصدق الآتية:
+\begin{center}
+\iftag{prvNot}{
+  \begin{tabular}{|c||c|} \hline
+    $!A$ & $ \lnot !A$ \\
+    \hline \hline
+    $\True$ & $\False$ \\
+    $\False$ & $\True$ \\
+    \hline
+  \end{tabular}
+}{}
+\iftag{prvAnd}{
+  \begin{tabular}{|cc||c|} \hline
+    $!A$ & $!B$ & $!A \land !B$ \\
+    \hline \hline
+    $\True$ & $\True$ & $\True$ \\
+    $\True$ & $\False$ & $\False$ \\
+    $\False$ & $\True$ & $\False$ \\
+    $\False$ & $\False$ & $\False$ \\
+    \hline
+  \end{tabular}
+}{}
+\iftag{prvOr}{
+  \begin{tabular}{|cc||c|} \hline
+    $!A$ & $!B$ & $!A \lor !B$ \\
+    \hline \hline
+    $\True$ & $\True$ & $\True$ \\
+    $\True$ & $\False$ & $\True$ \\
+    $\False$ & $\True$ & $\True$ \\
+    $\False$ & $\False$ & $\False$ \\
+    \hline
+  \end{tabular}
+}{}%
+\iftag{notprvNot,notprvAnd,notprvOr,notprvIf}{}{\\[1em]}
+\iftag{prvIf}{
+  \begin{tabular}{|cc||c|} \hline
+    $!A$ & $!B$ & $!A \lif !B$ \\
+    \hline \hline
+    $\True$ & $\True$ & $\True$ \\
+    $\True$ & $\False$ & $\False$ \\
+    $\False$ & $\True$ & $\True$ \\
+    $\False$ & $\False$ & $\True$ \\
+    \hline
+  \end{tabular}
+}{}
+\iftag{prvIff}{
+  \begin{tabular}{|cc||c|} \hline
+    $!A$ & $!B$ & $!A \liff !B$ \\
+    \hline \hline
+    $\True$ & $\True$ & $\True$ \\
+    $\True$ & $\False$ & $\False$ \\
+    $\False$ & $\True$ & $\False$ \\
+    $\False$ & $\False$ & $\True$ \\
+    \hline
+  \end{tabular}
+}{}
+\end{center}
+\end{explain}
+
+\begin{prob}
+لنضف رابطًا ثلاثيًا إلى $\Lang{L_0}$ نرمز إليه بـ$\diamondsuit$،
+ولتكن قيمته محددةً على الوجه الآتي:
+\begin{gather*}
+  \pValue{\OLId{latin-ordinary}{v}}(\diamondsuit( !A , !B , !C ) ) = \begin{cases}
+    \pValue{\OLId{latin-ordinary}{v}}( !B ) &
+    \text{إذا كان $\pValue{v}(!A) = \True$؛}\\
+    \pValue{\OLId{latin-ordinary}{v}}( !C ) &
+    \text{إذا كان $\pValue{v}(!A) = \False $}.
+  \end{cases}
+\end{gather*}
+اكتب جدول الصدق لهذا الرابط.
+\end{prob}
+
+\begin{thm}[التحديد المحلي]
+\ollabel{thm:LocalDetermination} ليكن $\pAssign{\OLId{latin-ordinary}{v}_\OLMathNumeral{1}}$ و
+$\pAssign{\OLId{latin-ordinary}{v}_\OLMathNumeral{2}}$ من !!{valuation}s المتفقة على !!{propositional
+variable}s التي تقع في $!A$؛ ومعنى اتفاقهما أن $\pAssign{\OLId{latin-ordinary}{v}_\OLMathNumeral{1}}(\Obj p_\OLId{latin-ordinary}{n}) =
+\pAssign{\OLId{latin-ordinary}{v}_\OLMathNumeral{2}}(\Obj p_\OLId{latin-ordinary}{n})$ متى وقع $\Obj p_\OLId{latin-ordinary}{n}$ في
+!!{formula}~$!A$. فحينئذ تتفق $\pValue{\OLId{latin-ordinary}{v}_\OLMathNumeral{1}}$ و$\pValue{\OLId{latin-ordinary}{v}_\OLMathNumeral{2}}$ على~$!A$ أيضًا، أي
+$\pValue{\OLId{latin-ordinary}{v}_\OLMathNumeral{1}}(!A) = \pValue{\OLId{latin-ordinary}{v}_\OLMathNumeral{2}}(!A)$.
+\end{thm}
+
+\begin{proof}
+بالاستقراء على $!A$.
+\end{proof}
+
+\begin{defn}[الإرضاء]
+\ollabel{defn:satisfaction} هذا تعريف استقرائي لمعنى
+  \emph{إرضاء !!a{formula}~$!A$ بواسطة
+  !!a{valuation}~$\pAssign{\OLId{latin-ordinary}{v}}$}، أي $\pSat{\OLId{latin-ordinary}{v}}{!A}$، على الوجه الآتي.
+  (ونكتب $\pSat/{\OLId{latin-ordinary}{v}}{!A}$ للدلالة على «عدم تحقق $\pSat{\OLId{latin-ordinary}{v}}{!A}$».)
+\begin{enumerate}
+\tagitem{prvFalse}{%
+  \indcase{!A}{\lfalse}{$\pSat/{\OLId{latin-ordinary}{v}}{\indfrm}$.}}{}
+
+\tagitem{prvTrue}{%
+  \indcase{!A}{\ltrue}{$\pSat{\OLId{latin-ordinary}{v}}{\indfrm}$.}}{}
+
+\item \indcase{!A}{\Obj p_i}{$\pSat{\OLId{latin-ordinary}{v}}{\indfrm}$
+  إذا وفقط إذا كان $\pAssign{\OLId{latin-ordinary}{v}}(\Obj p_\OLId{latin-ordinary}{i}) = \True$.}
+
+\tagitem{prvNot}{%
+  \indcase{!A}{\lnot !B}{$\pSat{\OLId{latin-ordinary}{v}}{\indfrm}$ إذا وفقط إذا
+    $\pSat/{\OLId{latin-ordinary}{v}}{!B}$.}}{}
+
+\tagitem{prvAnd}{%
+  \indcase{!A}{(!B \land !C)}{$\pSat{\OLId{latin-ordinary}{v}}{\indfrm}$ إذا وفقط إذا تحقق كل من $\pSat{\OLId{latin-ordinary}{v}}{!B}$
+    و$\pSat{\OLId{latin-ordinary}{v}}{!C}$.}}{}
+
+\tagitem{prvOr}{%
+  \indcase{!A}{(!B \lor !C)}{$\pSat{\OLId{latin-ordinary}{v}}{\indfrm}$ إذا وفقط إذا تحقق
+    $\pSat{\OLId{latin-ordinary}{v}}{!B}$ أو $\pSat{\OLId{latin-ordinary}{v}}{!C}$ (أو تحققا معًا).}}{}
+
+\tagitem{prvIf}{%
+  \indcase{!A}{(!B \lif !C)}{$\pSat{\OLId{latin-ordinary}{v}}{\indfrm}$ إذا وفقط إذا تحقق $\pSat/{\OLId{latin-ordinary}{v}}{!B}$
+    أو $\pSat{\OLId{latin-ordinary}{v}}{!C}$ (أو تحققا معًا).}}{}
+
+\tagitem{prvIff}{%
+  \indcase{!A}{(!B \liff !C)}{$\pSat{\OLId{latin-ordinary}{v}}{\indfrm}$ إذا وفقط إذا تحقق كل من
+    $\pSat{\OLId{latin-ordinary}{v}}{!B}$ و$\pSat{\OLId{latin-ordinary}{v}}{!C}$، أو لم يتحقق $\pSat{\OLId{latin-ordinary}{v}}{!B}$
+    ولا $\pSat{\OLId{latin-ordinary}{v}}{!C}$.}}{}
+\end{enumerate}
+إذا كانت $\OLId{greek-variable}{Gamma}$ مجموعة من !!{formula}s، فإن $\pSat{\OLId{latin-ordinary}{v}}{\OLId{greek-variable}{Gamma}}$ يتحقق إذا وفقط إذا
+تحقق $\pSat{\OLId{latin-ordinary}{v}}{!A}$ لكل~$!A \in \OLId{greek-variable}{Gamma}$.
+\end{defn}
+
+\begin{prop}\ollabel{prop:sat-value}
+  $\pSat{\OLId{latin-ordinary}{v}}{!A}$ إذا وفقط إذا كان $\pValue{\OLId{latin-ordinary}{v}}(!A) = \True$.
+\end{prop}
+
+\begin{proof}
+  بالاستقراء على~$!A$.
+\end{proof}
+
+\begin{prob}
+  أثبت \olref[pl][syn][val]{prop:sat-value}
+\end{prob}
+
+\end{document}

@@ -1,0 +1,326 @@
+% Part: proof-theory
+% Chapter: normalization
+% Section: reductions
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{nor}{red}
+
+\olsection{في تحويلات الاختزال}
+
+إذا بلغ طول قطع في~!!a{proof} من~\Log{N1i} مقدار~$\OLMathNumeral{1}$، لم يكن المقطع إلا
+ظهورًا واحدًا لـ~!!{formula}. وهذه~!!{formula} نتيجة لاستدلال
+!!a{introduction} أو لـ~\FalseInt، وهي في الوقت نفسه مقدمة كبرى
+لاستدلال~!!a{elimination}. وفي برهان التطبيع «نختزل» هذا القطع: فنقيم
+مقام~!!{proof} الجزئي المنتهي بذلك الزوج من~!!{introduction}/!!{elimination}
+!!{proof} جديدًا حذف منه الاستدلالان. وربما أحدث الإحلال قطوعًا، إلا أن
+رتبتها تكون أدنى من رتبة القطع المختزل. فإذا أعملنا التحويل في قطع أقصى
+مختار علويًا وفي أقصى اليمين، كان~!!{proof} الجديد إما أقصر طولًا قطعيًا،
+لحذف قطع أقصى طوله~$\OLMathNumeral{1}$، وإما أدنى رتبة قطعية، إذا كان ذلك القطع هو
+الأقصى وحده في~!!{proof}.
+
+فإذا كان الاستدلالان، مثلًا،~\Intro{\lif} و\Elim{\lif}، وكانت
+$!A \ident !B \lif !C$، وكان~!!{proof} الجزئي~$\delta_\OLMathNumeral{1}$ منتهيًا هكذا:
+\[
+\AxiomC{$\Discharge{!B}{\OLId{latin-ordinary}{x}}$}
+\RightLabel{$\delta_\OLMathNumeral{2}$}
+\DeduceC{$!C$}
+\DischargeRule{\Intro{\lif}}{\OLId{latin-ordinary}{x}}
+\UnaryInfC{$!B \lif !C$}
+\AxiomC{}
+\RightLabel{$\delta_\OLMathNumeral{3}$}
+\DeduceC{$!B$}
+\RightLabel{\Elim{\lif}}
+\BinaryInfC{$!C$}
+\DisplayProof
+\]
+حذفنا هذا القطع بأن نقيم مقام البرهان الجزئي~$\delta_\OLMathNumeral{1}$ داخل~$\delta$
+الرسم الآتي:
+\[
+\AxiomC{}
+\RightLabel{$\delta_\OLMathNumeral{3}$}
+\DeduceC{$!B$}
+\RightLabel{$\Subst{\delta_\OLMathNumeral{2}}{\delta_\OLMathNumeral{3}}{!B^\OLId{latin-ordinary}{x}}$}
+\DeduceC{$!C$}
+\DisplayProof
+\]
+ونعني بـ~$\Subst{\delta_\OLMathNumeral{2}}{\delta_\OLMathNumeral{3}}{!B^\OLId{latin-ordinary}{x}}$ الـ~!!{proof} الناتج من
+$\delta_\OLMathNumeral{2}$ باستبدال نسخة كاملة من~!!{proof}~$\delta_\OLMathNumeral{3}$ بكل فرض~$!B$ موسوم
+بـ~$\OLId{latin-ordinary}{x}$. ونعيد تسمية المتغيرات الذاتية والمقيّدة في كل نسخة من~!!{proof}
+$\delta_\OLMathNumeral{3}$ بصورة حديثة ومتباينة زوجيًا تجنبًا للأسر، مع إبقاء وسوم الفروض
+المفتوحة وصيغها نفسها، وإن جاز أن يزداد عدد وقائعها. ولا يبقى في البرهان
+الجديد فرض مفتوح من الصورة~$!B$ موسوم بـ~$\OLId{latin-ordinary}{x}$. كما لا توجد فروض أخرى موسومة
+بـ~$\OLId{latin-ordinary}{x}$، لأننا نفترض كالمعتاد أن~!!{formula}s مختلفة لا تقع فروضًا بالوسم
+نفسه. ومن ثم يكون لـ~!!{proof} الجديد الفروض المفتوحة نفسها التي لـ
+$\delta_\OLMathNumeral{1}$؛ وكل استدلال في~$\delta_\OLMathNumeral{2}$ يفرّغ فروضًا يفرّغ الفروض نفسها في
+$\Subst{\delta_\OLMathNumeral{2}}{\delta_\OLMathNumeral{3}}{!B^\OLId{latin-ordinary}{x}}$، وكل استدلال في~$\delta_\OLMathNumeral{3}$ يفرّغ فروضًا
+قد تظهر منه نسخ متعددة تفرّغ الوقائع المقابلة.
+
+وكل قطع واقع كله داخل~$\delta_\OLMathNumeral{2}$، أو كله خارج~$\delta_\OLMathNumeral{1}$ وداخل~$\delta$،
+لا يتغير؛ إذ تبقى فيه~!!{formula}s والاستدلالات نفسها، فتبقى رتبته وطوله.
+وأما القطع داخل~$\delta_\OLMathNumeral{3}$ فربما نسخ، ولكل نسخة رتبته وطوله؛ وإنما تضبط
+تعدديته طريقة اختيار القطع الأقصى العلوي وفي أقصى اليمين. ومع أننا حذفنا
+قطعًا أقصى طوله~$\OLMathNumeral{1}$، فلا بد من بحث أمرين قبل أن نحكم بانخفاض مقياس~$\delta$.
+
+وهذان الأمران هما:
+\begin{enumerate}
+  \item باستبدال~$\delta_\OLMathNumeral{3}$ بكل فرض~$!B^\OLId{latin-ordinary}{x}$، نكون قد ضاعفنا جميع القطوع في
+  $\delta_\OLMathNumeral{3}$. فإذا كان بعضها أقصى، فقد يزيد طول القطع في~!!{proof} الجديد
+  على طول القطع في~!!{proof} القديم. ولمنع ذلك نطبّق تحويلات الاختزال فقط
+  على قطوع قصوى \emph{علوية وفي أقصى اليمين} معًا؛ أي لا يوجد قطع أقصى فوق
+  القطع المختزل في برهانه الجزئي، ولا على فرع في~$\delta$ إلى يمينه. فلو
+  وُجد قطع أقصى في~$\delta_\OLMathNumeral{3}$ لكان إلى يمين القطع المختزل هنا، ولو وُجد في
+  الجزء العلوي الآخر لانتُهكت العلوية. ويضمن هذا الاختيار أننا إما نقلل طول
+  القطع في~!!{proof} أو نقلل رتبته.
+  \item إذا كان فرض~$!B^\OLId{latin-ordinary}{x}$ في~$\delta_\OLMathNumeral{2}$ المقدمة الكبرى لاستدلال
+  !!a{elimination}، وكان آخر استدلال في~$\delta_\OLMathNumeral{3}$ هو~\Elim{\lor} أو
+  \Elim{\lexists} أو استدلال~!!a{introduction} أو~\FalseInt، فقد أنشأنا
+  قطعًا جديدًا بوصل~$\delta_\OLMathNumeral{3}$ بـ~$\delta_\OLMathNumeral{2}$ عند ذلك الفرض. فما كان مجرد
+  فرض في~$\delta_\OLMathNumeral{2}$ صار قطعًا طوله~$\OLMathNumeral{1}$ (نتيجة~!!a{introduction} أو
+  \FalseInt ومقدمةً كبرى لاستدلال~!!a{elimination})، أو صار آخر ظهور
+  لـ~!!{formula} في مقطع قطع (أي مقدمةً كبرى لاستدلال~!!a{elimination}
+  ونتيجةً لـ~\Elim{\lor} أو~\Elim{\lexists}). وإذا كانت~$!B^\OLId{latin-ordinary}{x}$ مقدمةً
+  صغرى لـ~\Elim{\lor} أو~\Elim{\lexists}، فقد كانت أصلًا أول ظهور
+  لـ~!!{formula} في مقطع، وربما في مقطع قطع. وقد يطول ذلك المقطع في
+  !!{proof} الجديد. على أن~!!{formula} التي تكوّن هذا القطع الجديد أو
+  مقطع القطع القائم هي~$!B$، وأن
+  $\depth{!B} < \depth{!B \lif !C}$. لذلك، مع أننا ربما أضفنا قطوعًا أو
+  زدنا أطوالها، فلا شيء منها قطع أقصى. ومن ثم إما أننا خفضنا رتبة القطع، أو
+  خفضنا طول القطع إن بقيت قطوع بالرتبة نفسها.
+\end{enumerate}
+
+ونسمي اختزال قطع طوله~$\OLMathNumeral{1}$ \emph{تحويل اختزال} (أو \emph{تحويل
+التفاف}). وقد أثبتت أنماط بعض أزواج القواعد في
+\olref{tab:reduction-conversions}، وتركت الأنماط الباقية تمارين.
+
+\begin{table}
+\begin{multline*}
+\bottomAlignProof
+\AxiomC{$\Discharge{!B}{\OLId{latin-ordinary}{x}}$}
+\RightLabel{$\delta_\OLMathNumeral{2}$}
+\shortDeduce
+\DeduceC{$!C$}
+\DischargeRule{\Intro{\lif}}{\OLId{latin-ordinary}{x}}
+\UnaryInfC{$!B \lif !C$}
+\AxiomC{}
+\RightLabel{$\delta_\OLMathNumeral{3}$}
+\shortDeduce
+\DeduceC{$!B$}
+\RightLabel{\Elim{\lif}}
+\BinaryInfC{$!C$}
+\DisplayProof
+\quad \longrightarrow\quad
+\shoveright{\bottomAlignProof
+\AxiomC{}
+\RightLabel{$\delta_\OLMathNumeral{3}$}
+\shortDeduce
+\DeduceC{$!B$}
+\RightLabel{$\Subst{\delta_\OLMathNumeral{2}}{\delta_\OLMathNumeral{3}}{!B^\OLId{latin-ordinary}{x}}$}
+\shortDeduce
+\DeduceC{$!C$}
+\DisplayProof}
+\\[4ex]
+\shoveleft{\bottomAlignProof
+\AxiomC{}
+\RightLabel{$\delta_\OLMathNumeral{2}$}
+\shortDeduce
+\DeduceC{$!B$}
+\AxiomC{}
+\RightLabel{$\delta_\OLMathNumeral{3}$}
+\shortDeduce
+\DeduceC{$!C$}
+\RightLabel{\Intro{\land}}
+\BinaryInfC{$!B \land !C$}
+\RightLabel{\Elim{\land}[\OLMathNumeral{1}]}
+\UnaryInfC{$!B$}
+\DisplayProof
+\quad \longrightarrow\quad
+\bottomAlignProof
+\AxiomC{}
+\RightLabel{$\delta_\OLMathNumeral{2}$}
+\shortDeduce
+\DeduceC{$!B$}
+\DisplayProof}\qquad
+\shoveright{\bottomAlignProof
+\AxiomC{}
+\RightLabel{$\delta_\OLMathNumeral{2}$}
+\shortDeduce
+\DeduceC{$!B$}
+\AxiomC{}
+\RightLabel{$\delta_\OLMathNumeral{3}$}
+\shortDeduce
+\DeduceC{$!C$}
+\RightLabel{\Intro{\land}}
+\BinaryInfC{$!B \land !C$}
+\RightLabel{\Elim{\land}[\OLMathNumeral{2}]}
+\UnaryInfC{$!C$}
+\DisplayProof
+\quad \longrightarrow\quad
+\bottomAlignProof
+\AxiomC{}
+\RightLabel{$\delta_\OLMathNumeral{3}$}
+\shortDeduce
+\DeduceC{$!C$}
+\DisplayProof}
+\\[4ex]
+\bottomAlignProof
+\AxiomC{}
+\RightLabel{$\delta_\OLMathNumeral{2}$}
+\shortDeduce
+\DeduceC{$!B$}
+\RightLabel{\Intro{\lor}[\OLMathNumeral{1}]}
+\UnaryInfC{$!B \lor !C$}
+\AxiomC{$\Discharge{!B}{\OLId{latin-ordinary}{x}}$}
+\RightLabel{$\delta_\OLMathNumeral{3}$}
+\shortDeduce
+\DeduceC{$!D$}
+\AxiomC{$\Discharge{!C}{\OLId{latin-ordinary}{y}}$}
+\RightLabel{$\delta_\OLMathNumeral{4}$}
+\shortDeduce
+\DeduceC{$!D$}
+\DischargeRule{\Elim{\lor}}{\OLId{latin-ordinary}{x}\,\OLId{latin-ordinary}{y}}
+\TrinaryInfC{$!D$}
+\DisplayProof
+\quad \longrightarrow\quad
+\shoveright{\bottomAlignProof
+\AxiomC{}
+\RightLabel{$\delta_\OLMathNumeral{2}$}
+\shortDeduce
+\DeduceC{$!B$}
+\RightLabel{$\Subst{\delta_\OLMathNumeral{3}}{\delta_\OLMathNumeral{2}}{!B^\OLId{latin-ordinary}{x}}$}
+\shortDeduce
+\DeduceC{$!D$}
+\DisplayProof}
+\\[2ex]
+\shoveleft{\bottomAlignProof
+\AxiomC{}
+\RightLabel{$\delta_\OLMathNumeral{2}$}
+\shortDeduce
+\DeduceC{$!B(\OLId{latin-ordinary}{c})$}
+\RightLabel{\Intro{\lforall}}
+\UnaryInfC{$\lforall[\OLId{latin-ordinary}{x}][!B(\OLId{latin-ordinary}{x})]$}
+\RightLabel{\Elim{\lforall}}
+\UnaryInfC{$!B(\OLId{latin-ordinary}{t})$}
+\DisplayProof
+\quad \longrightarrow\quad
+\bottomAlignProof
+\AxiomC{}
+\RightLabel{$\Subst{\delta_\OLMathNumeral{2}}{\OLId{latin-ordinary}{t}}{\OLId{latin-ordinary}{c}}$}
+\shortDeduce
+\DeduceC{$!B(\OLId{latin-ordinary}{t})$}
+\DisplayProof}
+\\[4ex]
+\shoveright{\bottomAlignProof
+\AxiomC{}
+\RightLabel{$\delta_\OLMathNumeral{2}$}
+\shortDeduce
+\DeduceC{$!B(\OLId{latin-ordinary}{t})$}
+\RightLabel{\Intro{\lexists}}
+\UnaryInfC{$\lexists[\OLId{latin-ordinary}{x}][!B(\OLId{latin-ordinary}{x})]$}
+\AxiomC{$\Discharge{!B(\OLId{latin-ordinary}{c})}{\OLId{latin-ordinary}{x}}$}
+\RightLabel{$\delta_\OLMathNumeral{3}$}
+\shortDeduce
+\DeduceC{$!D$}
+\DischargeRule{\Elim{\lexists}}{\OLId{latin-ordinary}{x}}
+\BinaryInfC{$!D$}
+\DisplayProof
+\quad \longrightarrow\quad
+\bottomAlignProof
+\AxiomC{}
+\RightLabel{$\delta_\OLMathNumeral{2}$}
+\shortDeduce
+\DeduceC{$!B(\OLId{latin-ordinary}{t})$}
+\RightLabel{$\Subst{\Subst{\delta_\OLMathNumeral{3}}{\OLId{latin-ordinary}{t}}{\OLId{latin-ordinary}{c}}}{\delta_\OLMathNumeral{2}}{!B(\OLId{latin-ordinary}{t})^\OLId{latin-ordinary}{x}}$}
+\shortDeduce
+\DeduceC{$!D$}
+\DisplayProof}
+\end{multline*}
+\caption{بعض تحويلات الاختزال في~\Log{N1i}.}
+\ollabel{tab:reduction-conversions}
+\end{table}
+
+\begin{prob}
+اكتب تحويل الاختزال لـ~\Intro{\lnot} متبوعةً بـ~\Elim{\lnot}.
+\end{prob}
+
+وبقيت حالة واحدة: فإن تعريف القطع يشمل ما إذا كان طوله~$\OLMathNumeral{1}$، وكانت~$!A$
+نتيجة~\FalseInt{} ومقدمة كبرى لاستدلال~!!a{elimination} معًا. ومعالجتها
+شبيهة بمعالجة الحالة التي تكون فيها~$!A$ نتيجة قاعدة~!!a{introduction}.
+فمثلًا، استبدل
+\[
+\bottomAlignProof
+\AxiomC{}
+\RightLabel{$\delta_\OLMathNumeral{2}$}
+\DeduceC{$\lfalse$}
+\RightLabel{\FalseInt}
+\UnaryInfC{$!B \lif !C$}
+\AxiomC{}
+\RightLabel{$\delta_\OLMathNumeral{3}$}
+\DeduceC{$!B$}
+\RightLabel{\Elim{\lif}}
+\BinaryInfC{$!C$}
+\DisplayProof
+\quad\text{بـ}\quad
+\bottomAlignProof
+\AxiomC{}
+\RightLabel{$\delta_\OLMathNumeral{2}$}
+\DeduceC{$\lfalse$}
+\RightLabel{\FalseInt}
+\UnaryInfC{$!C$}
+\DisplayProof
+\]
+وينبغي بعض الحذر في حالتي~$!A \ident (!B \lor !C)$ و
+$!A \ident \lexists[\OLId{latin-ordinary}{x}][!B(\OLId{latin-ordinary}{x})]$. فمثلًا، لو استبدلنا
+\[
+\bottomAlignProof
+\AxiomC{}
+\RightLabel{$\delta_\OLMathNumeral{2}$}
+\DeduceC{$\lfalse$}
+\RightLabel{\FalseInt}
+\UnaryInfC{$!B \lor !C$}
+\AxiomC{$\Discharge{!B}{\OLId{latin-ordinary}{x}}$}
+\RightLabel{$\delta_\OLMathNumeral{3}$}
+\DeduceC{$!D$}
+\AxiomC{$\Discharge{!C}{\OLId{latin-ordinary}{y}}$}
+\RightLabel{$\delta_\OLMathNumeral{4}$}
+\DeduceC{$!D$}
+\DischargeRule{\Elim{\lor}}{\OLId{latin-ordinary}{x}\,\OLId{latin-ordinary}{y}}
+\TrinaryInfC{$!D$}
+\DisplayProof
+\quad\text{بـ}\quad
+\bottomAlignProof
+\AxiomC{}
+\RightLabel{$\delta_\OLMathNumeral{2}$}
+\DeduceC{$\lfalse$}
+\RightLabel{\FalseInt}
+\UnaryInfC{$!D$}
+\DisplayProof
+\]
+لربما أنشأنا قطعًا جديدًا~!!{formula} قطعه~$!D$، ولا ضمان أن
+$\depth{!D} < \depth{!B \lor !C}$!{} لذلك ينبغي أن نسلك هنا المسلك نفسه
+الذي سلكناه في اختزال~\Intro{\lor}/\Elim{\lor}، فنستبدل به ما يأتي:
+\[
+\bottomAlignProof
+\AxiomC{}
+\RightLabel{$\delta_\OLMathNumeral{2}$}
+\DeduceC{$\lfalse$}
+\RightLabel{\FalseInt}
+\UnaryInfC{$!B$}
+\RightLabel{$\delta_\OLMathNumeral{3}$}
+\DeduceC{$!D$}
+\DisplayProof
+\quad\text{أو}\quad
+\bottomAlignProof
+\AxiomC{}
+\RightLabel{$\delta_\OLMathNumeral{2}$}
+\DeduceC{$\lfalse$}
+\RightLabel{\FalseInt}
+\UnaryInfC{$!C$}
+\RightLabel{$\delta_\OLMathNumeral{4}$}
+\DeduceC{$!D$}
+\DisplayProof
+\]
+
+\end{document}

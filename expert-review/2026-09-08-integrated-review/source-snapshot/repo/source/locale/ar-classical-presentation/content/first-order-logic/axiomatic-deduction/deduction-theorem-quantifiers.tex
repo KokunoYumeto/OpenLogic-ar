@@ -1,0 +1,84 @@
+% Part: first-order-logic
+% Chapter: axiomatic-deduction
+% Section: deduction-theorem-quantifiers
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{axd}{ddq}
+
+\olsection{مبرهنة الاستنباط مع المكمّمات}
+
+\begin{thm}[مبرهنة الاستنباط]
+\ollabel{thm:deduction-thm-q} تكون~$\OLId{greek-variable}{Gamma} \cup \{!A\} \Proves !B$
+إذا وفقط إذا كان~$\OLId{greek-variable}{Gamma} \Proves !A \lif !B$.
+\end{thm}
+
+\begin{proof}
+% استكمال برهاني (0120-I1): أُثبت الاتجاه العكسي، وأُتمّت حالة QR الوجودية التي تركها الأصل الإنجليزي تمرينًا.
+أما اتجاه ``إذا'' فهو الاتجاه اليسير المثبت في
+\olref[ded]{thm:deduction-thm}، ولا يتوقف على صورة آخر قاعدة. وأما اتجاه
+``فقط إذا'' للاشتقاقات الكمية فنتمّ الاستقراء السابق بإضافة صورتي~\QR{}.
+
+نعيد الاستقراء على طول !!{derivation} الصيغة~$!B$
+من~$\OLId{greek-variable}{Gamma} \cup \{!A\}$.
+
+أما الأساس فبرهانه بعينه برهان الأساس في
+\olref[ded]{thm:deduction-thm}.
+
+وأما الخطوة، فنفرض أن !!{derivation} الصيغة~$!B$ من
+$\OLId{greek-variable}{Gamma} \cup \{!A\}$ ينتهي إلى~$!B$ بقاعدة استدلال.
+إن كانت إثبات المقدَّم، جرى برهان
+\olref[ded]{thm:deduction-thm}. وإن كانت~\QR، فنأخذ أولًا الحالة
+$!B \ident !C \lif \lforall[\OLId{latin-ordinary}{x}][!D(\OLId{latin-ordinary}{x})]$.
+وقد سبقت !!a{formula} صورتها~$!C \lif !D(\OLId{latin-ordinary}{a})$
+في ال!!{derivation}، ولم يرد~$\OLId{latin-ordinary}{a}$ في~$!C$ ولا~$!A$ ولا~$\OLId{greek-variable}{Gamma}$.
+فيكون لدينا
+\begin{align*}
+  \OLId{greek-variable}{Gamma} \cup \{!A\} & \Proves !C \lif !D(\OLId{latin-ordinary}{a}),\\
+  \intertext{فيشمله فرض الاستقراء، ونحصل على}
+    \OLId{greek-variable}{Gamma} & \Proves !A \lif (!C \lif !D(\OLId{latin-ordinary}{a})).\\
+  \intertext{ثم نأخذ}
+  & \Proves (!A \lif (!C \lif !D(\OLId{latin-ordinary}{a}))) \lif ((!A \land !C) \lif !D(\OLId{latin-ordinary}{a}))\\
+  \intertext{ونجري إثبات المقدَّم فينتج}
+  \OLId{greek-variable}{Gamma} & \Proves (!A \land !C) \lif !D(\OLId{latin-ordinary}{a}).\\
+  \intertext{ولم يختل شرط المتغير المميَّز، فيصح إلحاق خطوة بهذا ال!!{derivation} بقاعدة \QR، فيحصل}
+    \OLId{greek-variable}{Gamma} & \Proves (!A \land !C) \lif \lforall[\OLId{latin-ordinary}{x}][!D(\OLId{latin-ordinary}{x})].\\
+    \intertext{ولدينا كذلك}
+    & \Proves ((!A \land !C) \lif \lforall[\OLId{latin-ordinary}{x}][!D(\OLId{latin-ordinary}{x})]) \lif (!A \lif (!C \lif \lforall[\OLId{latin-ordinary}{x}][!D(\OLId{latin-ordinary}{x})])),\\
+    \intertext{فينتهي إثبات المقدَّم إلى}
+    \OLId{greek-variable}{Gamma} & \Proves !A \lif (!C \lif \lforall[\OLId{latin-ordinary}{x}][!D(\OLId{latin-ordinary}{x})]),
+\end{align*}
+أي إن $\OLId{greek-variable}{Gamma} \Proves !A \lif !B$.
+
+وأما صورة~\QR{} الأخرى، فإذا كان
+$!B \ident \lexists[\OLId{latin-ordinary}{x}][!D(\OLId{latin-ordinary}{x})] \lif !C$، فقد سبقت في ال!!{derivation}
+الصيغة~$!D(\OLId{latin-ordinary}{a}) \lif !C$، ولم يرد~$\OLId{latin-ordinary}{a}$ في~$!C$ ولا~$!A$ ولا~$\OLId{greek-variable}{Gamma}$.
+فيعطينا فرض الاستقراء
+\[
+  \OLId{greek-variable}{Gamma} \Proves !A \lif (!D(\OLId{latin-ordinary}{a}) \lif !C).
+\]
+ونبدّل ترتيب المقدِّمين بقضية صادقة منطقيًا، فينتج
+\[
+  \OLId{greek-variable}{Gamma} \Proves !D(\OLId{latin-ordinary}{a}) \lif (!A \lif !C).
+\]
+وشرط الثابت المميَّز باقٍ، فتعطينا~\QR{}
+\[
+  \OLId{greek-variable}{Gamma} \Proves \lexists[\OLId{latin-ordinary}{x}][!D(\OLId{latin-ordinary}{x})] \lif (!A \lif !C).
+\]
+ثم نعيد ترتيب المقدِّمين بقضية صادقة منطقيًا أخرى، ونجري إثبات المقدَّم،
+فنخلص إلى
+\[
+  \OLId{greek-variable}{Gamma} \Proves !A \lif (\lexists[\OLId{latin-ordinary}{x}][!D(\OLId{latin-ordinary}{x})] \lif !C),
+\]
+أي~$\OLId{greek-variable}{Gamma} \Proves !A \lif !B$. فبهاتين الصورتين لـ~\QR{}، وبحالات
+الفرض والبديهية وإثبات المقدَّم المتقدمة، يتم الاستقراء.
+\end{proof}
+
+\begin{prob}
+  تحقّق تفصيلًا من بقاء شروط الثابت المميَّز في صورتي~\QR{} في برهان
+  \olref[fol][axd][ddq]{thm:deduction-thm-q}.
+\end{prob}
+
+\end{document}

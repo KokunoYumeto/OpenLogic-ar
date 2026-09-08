@@ -1,0 +1,194 @@
+% Part: model-theory
+% Chapter: interpolation
+% Section: interpolation-proof
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{int}{prf}
+
+\olsection{مبرهنة كريغ في الاستيفاء}
+
+\begin{thm}[مبرهنة كريغ في الاستيفاء]
+\ollabel{thm:interpol}
+إذا كان $\Entails !A \lif !B$، وجدت !!a{sentence}~$!C$ بحيث
+$\Entails !A \lif !C$ و$\Entails !C \lif !B$، وكان كل !!{constant}
+و!!{function} و!!{predicate} (عدا~$\eq$) في $!C$ واقعًا في $!A$ و$!B$
+معًا. وتسمى الـ!!{sentence}~$!C$ \emph{مستوفية} لـ$!A$ و$!B$.
+\end{thm}
+
+\begin{proof}
+لتكن $\Lang{L}_\OLMathNumeral{1}$ لغة $!A$، ولتكن $\Lang{L}_\OLMathNumeral{2}$ لغة $!B$، ونضع
+$\Lang{L}_\OLMathNumeral{0} = \Lang{L}_\OLMathNumeral{1} \cap \Lang{L}_\OLMathNumeral{2}$. ولكل
+$\OLId{latin-ordinary}{i} \in \{\OLMathNumeral{0},\OLMathNumeral{1},\OLMathNumeral{2}\}$، لتكن $\Lang{L}'_\OLId{latin-ordinary}{i}$ توسيعًا لـ$\Lang{L}_\OLId{latin-ordinary}{i}$ نضيف فيه
+ما لا يتناهى من الـ!!{constant}s الجديدة
+$\Obj c_\OLMathNumeral{0}, \Obj c_\OLMathNumeral{1}, \Obj c_\OLMathNumeral{2}, \dots$.
+
+أما إذا كانت $!A$ لا تقبل الإرضاء، فإن
+$\lexists[\OLId{latin-ordinary}{x}][\eq/[\OLId{latin-ordinary}{x}][\OLId{latin-ordinary}{x}]]$ تفي بشرط المستوفية. وأما إذا كانت $\lnot !B$ لا تقبل
+الإرضاء، أي كانت $!B$ صالحة، فإن
+$\lexists[\OLId{latin-ordinary}{x}][\eq[\OLId{latin-ordinary}{x}][\OLId{latin-ordinary}{x}]]$ تفي به. فتبقى لنا الحالة التي تكون فيها $!A$
+و$\lnot !B$ قابلتين للإرضاء جميعًا؛ وعليها نجري البرهان.
+
+نسلك في إثبات المبرهنة طريق المقابل، فنفرض انتفاء المستوفية لـ$!A$
+و$!B$. ومعنى ذلك أن $\{!A\}$ و$\{\lnot !B\}$ لا تقبلان
+الفصل في $\Lang{L}_\OLMathNumeral{0}$.
+
+والمطلوب أن نمد الزوج $(\{!A\},\{\lnot!B\})$ إلى زوج أعظمي لا يقبل الفصل،
+هو $(\OLId{greek-variable}{Gamma}^*,\OLId{greek-variable}{Delta}^*)$. فلتعدد $!A_\OLMathNumeral{0}$ و$!A_\OLMathNumeral{1}$ و$!A_\OLMathNumeral{2}$ و\dots
+الـ!!{sentence}s في $\Lang{L}'_\OLMathNumeral{1}$، ولتعدد $!B_\OLMathNumeral{0}$ و$!B_\OLMathNumeral{1}$ و$!B_\OLMathNumeral{2}$
+و\dots الـ!!{sentence}s في~$\Lang{L}'_\OLMathNumeral{2}$. نبني متتاليتين متزايدتين من
+مجموعات الـ!!{sentence}s $(\OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n},\OLId{greek-variable}{Delta}_\OLId{latin-ordinary}{n})$، لكل $\OLId{latin-ordinary}{n} \ge \OLMathNumeral{0}$.
+نبدأ بوضع $\OLId{greek-variable}{Gamma}_\OLMathNumeral{0}=\{!A\}$ و$\OLId{greek-variable}{Delta}_\OLMathNumeral{0}=\{\lnot !B\}$. فإذا تم بناء
+$(\OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n},\OLId{greek-variable}{Delta}_\OLId{latin-ordinary}{n})$، كان تعريف $\OLId{greek-variable}{Gamma}_{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}}$ و$\OLId{greek-variable}{Delta}_{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}}$
+على الوجه الآتي:
+\begin{enumerate}
+\item إذا كانت $\OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n} \cup \{!A_\OLId{latin-ordinary}{n}\}$ و$\OLId{greek-variable}{Delta}_\OLId{latin-ordinary}{n}$ غير قابلتين
+  للفصل في $\Lang{L}'_\OLMathNumeral{0}$، فضع
+  $\OLId{greek-variable}{Gamma}_{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}}=\OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n} \cup \{!A_\OLId{latin-ordinary}{n}\}$. وفوق ذلك، إذا كانت $!A_\OLId{latin-ordinary}{n}$
+  !!{formula} وجودية $\lexists[\OLId{latin-ordinary}{x}][!S]$، فاختر !!{constant} جديدًا~$\OLId{latin-ordinary}{c}$
+  لا يقع في $\OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n}$ أو $\OLId{greek-variable}{Delta}_\OLId{latin-ordinary}{n}$ أو $!A_\OLId{latin-ordinary}{n}$ أو $!B_\OLId{latin-ordinary}{n}$، وأضف
+  $\Subst{!S}{\OLId{latin-ordinary}{c}}{\OLId{latin-ordinary}{x}}$ إلى $\OLId{greek-variable}{Gamma}_{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}}$. وإذا كانت
+  $\OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n} \cup \{!A_\OLId{latin-ordinary}{n}\}$ و$\OLId{greek-variable}{Delta}_\OLId{latin-ordinary}{n}$ قابلتين للفصل، فضع
+  $\OLId{greek-variable}{Gamma}_{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}}=\OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n}$.
+\item إذا كانت $\OLId{greek-variable}{Gamma}_{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}}$ و$\OLId{greek-variable}{Delta}_\OLId{latin-ordinary}{n} \cup \{!B_\OLId{latin-ordinary}{n}\}$ غير قابلتين
+  للفصل في $\Lang{L}'_\OLMathNumeral{0}$، فضع
+  $\OLId{greek-variable}{Delta}_{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}}=\OLId{greek-variable}{Delta}_\OLId{latin-ordinary}{n} \cup \{!B_\OLId{latin-ordinary}{n}\}$. وفوق ذلك، إذا كانت $!B_\OLId{latin-ordinary}{n}$
+  !!{formula} وجودية $\lexists[\OLId{latin-ordinary}{x}][!S]$، فاختر !!{constant} جديدًا~$\OLId{latin-ordinary}{c}$
+  لا يقع في $\OLId{greek-variable}{Gamma}_{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}}$ أو $\OLId{greek-variable}{Delta}_\OLId{latin-ordinary}{n}$ أو $!A_\OLId{latin-ordinary}{n}$ أو $!B_\OLId{latin-ordinary}{n}$، وأضف
+  $\Subst{!S}{\OLId{latin-ordinary}{c}}{\OLId{latin-ordinary}{x}}$ إلى $\OLId{greek-variable}{Delta}_{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}}$. وإذا كانت $\OLId{greek-variable}{Gamma}_{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}}$ و
+  $\OLId{greek-variable}{Delta}_\OLId{latin-ordinary}{n} \cup \{!B_\OLId{latin-ordinary}{n}\}$ قابلتين للفصل، فضع
+  $\OLId{greek-variable}{Delta}_{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}}=\OLId{greek-variable}{Delta}_\OLId{latin-ordinary}{n}$.
+\end{enumerate}
+ثم نأخذ الاتحادين:
+\begin{align*}
+  \OLId{greek-variable}{Gamma}^* & = \bigcup_{\OLId{latin-ordinary}{n}\ge \OLMathNumeral{0}} \OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n}, &
+  \OLId{greek-variable}{Delta}^* & = \bigcup_{\OLId{latin-ordinary}{n}\ge \OLMathNumeral{0}} \OLId{greek-variable}{Delta}_\OLId{latin-ordinary}{n}.
+\end{align*}
+ولنثبت، باستقراء واحد على $\OLId{latin-ordinary}{n}$، الأمرين الآتيين معًا:
+\begin{enumerate}
+\item\ollabel{part-a} أن $\OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n}$ و$\OLId{greek-variable}{Delta}_\OLId{latin-ordinary}{n}$ غير قابلتين للفصل في
+  $\Lang{L}'_\OLMathNumeral{0}$؛
+\item\ollabel{part-b} أن $\OLId{greek-variable}{Gamma}_{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}}$ و$\OLId{greek-variable}{Delta}_\OLId{latin-ordinary}{n}$ غير قابلتين للفصل
+  في $\Lang{L}'_\OLMathNumeral{0}$.
+\end{enumerate}
+أما \olref[sep]{lem:sep1} فتثبت حالة البدء في \olref{part-a}. وأما
+\olref{part-b} فينقسم النظر في أساسها إلى ثلاث حالات:
+\begin{enumerate}
+\item إذا كانت $\OLId{greek-variable}{Gamma}_\OLMathNumeral{0} \cup \{!A_\OLMathNumeral{0}\}$ و$\OLId{greek-variable}{Delta}_\OLMathNumeral{0}$ قابلتين للفصل،
+  كان $\OLId{greek-variable}{Gamma}_\OLMathNumeral{1}=\OLId{greek-variable}{Gamma}_\OLMathNumeral{0}$، ولم تكن \olref{part-b} إلا
+  \olref{part-a}؛
+\item إذا كان $\OLId{greek-variable}{Gamma}_\OLMathNumeral{1}=\OLId{greek-variable}{Gamma}_\OLMathNumeral{0} \cup \{!A_\OLMathNumeral{0}\}$، كانت $\OLId{greek-variable}{Gamma}_\OLMathNumeral{1}$
+  و$\OLId{greek-variable}{Delta}_\OLMathNumeral{0}$ غير قابلتين للفصل بحسب البناء.
+\item وأما الحالة الباقية فهي أن تكون $!A_\OLMathNumeral{0}$ وجودية، وعندئذ
+  $\OLId{greek-variable}{Gamma}_\OLMathNumeral{1}=\OLId{greek-variable}{Gamma}_\OLMathNumeral{0} \cup \{\lexists[\OLId{latin-ordinary}{x}][!S],\Subst{!S}{\OLId{latin-ordinary}{c}}{\OLId{latin-ordinary}{x}}\}$.
+  وبحسب البناء، تكون $\OLId{greek-variable}{Gamma}_\OLMathNumeral{0} \cup \{\lexists[\OLId{latin-ordinary}{x}][!S]\}$ و
+  $\OLId{greek-variable}{Delta}_\OLMathNumeral{0}$ غير قابلتين للفصل، ومن ثم، بحسب \olref[sep]{lem:sep2}،
+  تكون $\OLId{greek-variable}{Gamma}_\OLMathNumeral{0} \cup \{\lexists[\OLId{latin-ordinary}{x}][!S],\Subst{!S}{\OLId{latin-ordinary}{c}}{\OLId{latin-ordinary}{x}}\}$ و
+  $\OLId{greek-variable}{Delta}_\OLMathNumeral{0}$ غير قابلتين للفصل أيضًا.
+\end{enumerate}
+فقد ثبت أساس الاستقراء في \olref{part-a} و\olref{part-b}. وأما
+خطوة الانتقال فبيانها كما يأتي. ففي \olref{part-a}، إن كان
+$\OLId{greek-variable}{Delta}_{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}}=\OLId{greek-variable}{Delta}_\OLId{latin-ordinary}{n} \cup \{!B_\OLId{latin-ordinary}{n}\}$، كانت $\OLId{greek-variable}{Gamma}_{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}}$ و
+$\OLId{greek-variable}{Delta}_{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}}$ غير قابلتين للفصل بحسب البناء (حتى إذا كانت $!B_\OLId{latin-ordinary}{n}$
+وجودية، بفضل \olref[sep]{lem:sep2}). وإذا كان
+$\OLId{greek-variable}{Delta}_{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}}=\OLId{greek-variable}{Delta}_\OLId{latin-ordinary}{n}$ (لأن $\OLId{greek-variable}{Gamma}_{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}}$ و
+$\OLId{greek-variable}{Delta}_\OLId{latin-ordinary}{n} \cup \{!B_\OLId{latin-ordinary}{n}\}$ قابلتان للفصل)، كفى فرض الاستقراء في
+\olref{part-b}. وأما الانتقال في \olref{part-b}، فإن كان
+$\OLId{greek-variable}{Gamma}_{\OLId{latin-ordinary}{n}+\OLMathNumeral{2}}=\OLId{greek-variable}{Gamma}_{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}} \cup \{!A_{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}}\}$، كانت $\OLId{greek-variable}{Gamma}_{\OLId{latin-ordinary}{n}+\OLMathNumeral{2}}$
+و$\OLId{greek-variable}{Delta}_{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}}$ غير قابلتين للفصل بحسب البناء (حتى إذا كانت $!A_{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}}$
+وجودية، بفضل \olref[sep]{lem:sep2}). وإذا كان
+$\OLId{greek-variable}{Gamma}_{\OLId{latin-ordinary}{n}+\OLMathNumeral{2}}=\OLId{greek-variable}{Gamma}_{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}}$، رجعنا إلى حالة
+\olref{part-a} التي فرغنا من إثباتها. وبهذا يتم الاستقراء في
+\olref{part-a} و\olref{part-b}.
+
+ومن ذلك يلزم أن $\OLId{greek-variable}{Gamma}^*$ و$\OLId{greek-variable}{Delta}^*$ لا تقبلان الفصل. إذ لو قبلتاه، لدل التراص
+على وجود عدد $\OLId{latin-ordinary}{n} \ge \OLMathNumeral{0}$ تقبل عنده $\OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n}$ و$\OLId{greek-variable}{Delta}_\OLId{latin-ordinary}{n}$ الفصل، وهو نقيض
+\olref{part-a}. ويلزم أيضًا اتساق $\OLId{greek-variable}{Gamma}^*$ و$\OLId{greek-variable}{Delta}^*$؛ فإن
+عدم اتساق الأولى أو الثانية يجيز الفصل بينهما بواسطة
+$\lexists[\OLId{latin-ordinary}{x}][\eq/[\OLId{latin-ordinary}{x}][\OLId{latin-ordinary}{x}]]$ أو $\lforall[\OLId{latin-ordinary}{x}][\eq[\OLId{latin-ordinary}{x}][\OLId{latin-ordinary}{x}]]$، على الترتيب.
+
+وبقي بيان أعظمية الاتساق: نثبتها لـ$\OLId{greek-variable}{Gamma}^*$ في $\Lang{L}'_\OLMathNumeral{1}$، ثم لـ
+$\OLId{greek-variable}{Delta}^*$ في $\Lang{L}'_\OLMathNumeral{2}$. فنفرض، طلبًا للخلف في الأولى، أن
+$!A_\OLId{latin-ordinary}{n} \notin \OLId{greek-variable}{Gamma}^*$ و$\lnot !A_\OLId{latin-ordinary}{n} \notin \OLId{greek-variable}{Gamma}^*$ لبعض
+$\OLId{latin-ordinary}{n} \ge \OLMathNumeral{0}$. إذا كان $!A_\OLId{latin-ordinary}{n} \notin \OLId{greek-variable}{Gamma}^*$، كانت
+$\OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n} \cup \{!A_\OLId{latin-ordinary}{n}\}$ قابلة للفصل عن $\OLId{greek-variable}{Delta}_\OLId{latin-ordinary}{n}$، ومن ثم وجدت
+$!C \in \Lang{L}'_\OLMathNumeral{0}$ بحيث:
+\begin{align*}
+  \OLId{greek-variable}{Gamma}^* & \Entails !A_\OLId{latin-ordinary}{n} \lif !C, &
+  \OLId{greek-variable}{Delta}^* & \Entails \lnot !C.
+\end{align*}
+وبالمثل، إذا كان $\lnot !A_\OLId{latin-ordinary}{n} \notin \OLId{greek-variable}{Gamma}^*$، وجدت
+$!C' \in \Lang{L}'_\OLMathNumeral{0}$ بحيث:
+\begin{align*}
+  \OLId{greek-variable}{Gamma}^* & \Entails \lnot !A_\OLId{latin-ordinary}{n} \lif !C', &
+  \OLId{greek-variable}{Delta}^* & \Entails \lnot !C'.
+\end{align*}
+فيلزم، بقواعد المنطق القضي، $\OLId{greek-variable}{Gamma}^* \Entails !C \lor !C'$ و
+$\OLId{greek-variable}{Delta}^* \Entails \lnot (!C \lor !C')$، فتفصل $!C \lor !C'$
+$\OLId{greek-variable}{Gamma}^*$ عن $\OLId{greek-variable}{Delta}^*$. وهذا محال. وعلى هذا النحو يثبت أن $\OLId{greek-variable}{Delta}^*$ أعظمية.
+
+ثم ننظر في $\OLId{greek-variable}{Gamma}^* \cap \OLId{greek-variable}{Delta}^*$، فنثبت أنها متسقة أعظميًا في
+$\Lang{L}'_\OLMathNumeral{0}$. أما الاتساق فظاهر، إذ هي تقاطع مجموعتين متسقتين. وأما
+الأعظمية، فخذ $!S \in \Lang{L}'_\OLMathNumeral{0}$. إن $\OLId{greek-variable}{Gamma}^*$ أعظمية في
+$\Lang{L}'_\OLMathNumeral{1} \supseteq \Lang{L}'_\OLMathNumeral{0}$، وبالمثل تكون $\OLId{greek-variable}{Delta}^*$ أعظمية
+في $\Lang{L}'_\OLMathNumeral{2} \supseteq \Lang{L}'_\OLMathNumeral{0}$. ومن ثم إما أن
+$!S \in \OLId{greek-variable}{Gamma}^*$ أو $\lnot !S \in \OLId{greek-variable}{Gamma}^*$، وإما أن
+$!S \in \OLId{greek-variable}{Delta}^*$ أو $\lnot !S \in \OLId{greek-variable}{Delta}^*$. فإذا كان
+$!S \in \OLId{greek-variable}{Gamma}^*$ و$\lnot !S \in \OLId{greek-variable}{Delta}^*$، فصلت $!S$ بين
+$\OLId{greek-variable}{Gamma}^*$ و$\OLId{greek-variable}{Delta}^*$. وإذا كان $\lnot !S \in \OLId{greek-variable}{Gamma}^*$ و
+$!S \in \OLId{greek-variable}{Delta}^*$، فصلت $\lnot !S$ بينهما. وقد امتنع الوجهان؛ فلا بد إذن من
+$!S \in \OLId{greek-variable}{Gamma}^* \cap \OLId{greek-variable}{Delta}^*$ أو
+$\lnot !S \in \OLId{greek-variable}{Gamma}^* \cap \OLId{greek-variable}{Delta}^*$، فيكون
+$\OLId{greek-variable}{Gamma}^* \cap \OLId{greek-variable}{Delta}^*$ أعظميًا.
+
+وحيث ثبت أن $\OLId{greek-variable}{Gamma}^*$ متسقة أعظميًا، فإن لها نموذجًا $\Struct{M}'_\OLMathNumeral{1}$ لا يضم
+!!{domain}ه~$\Domain{\OLId{latin-looped}{M}'_\OLMathNumeral{1}}$ إلا العناصر $\Assign{\OLId{latin-ordinary}{c}}{\OLId{latin-looped}{M}'_\OLMathNumeral{1}}$ التي تفسر
+الـ!!{constant}s ولا يفوته شيء منها؛ وهذا هو البناء الوارد في برهان مبرهنة الاكتمال
+(\olref[fol][com][cth]{thm:completeness}). وبالمثل، لـ$\OLId{greek-variable}{Delta}^*$ نموذج
+$\Struct{M}'_\OLMathNumeral{2}$ يكون !!{domain}ه~$\Domain{\OLId{latin-looped}{M}'_\OLMathNumeral{2}}$ معطى بتفسيرات
+$\Assign{\OLId{latin-ordinary}{c}}{\OLId{latin-looped}{M}'_\OLMathNumeral{2}}$ للـ!!{constant}s.
+
+لتكن $\Struct{M_1}$ ناتجة من $\Struct{M'_1}$ بحذف تفسيرات
+الـ!!{constant}s والـ!!{function}s والـ!!{predicate}s في
+$\Lang{L'_1} \setminus \Lang{L'_0}$، وبالمثل لـ$\Struct{M_2}$.
+عندئذ يكون التطبيق $\OLId{latin-ordinary}{h} \colon \OLId{latin-looped}{M}_\OLMathNumeral{1} \to \OLId{latin-looped}{M}_\OLMathNumeral{2}$ المعرّف بـ
+$\OLId{latin-ordinary}{h}(\Assign{\OLId{latin-ordinary}{c}}{\OLId{latin-looped}{M}'_\OLMathNumeral{1}})=\Assign{\OLId{latin-ordinary}{c}}{\OLId{latin-looped}{M}'_\OLMathNumeral{2}}$ تشاكلًا في $\Lang{L}'_\OLMathNumeral{0}$، لأن
+$\OLId{greek-variable}{Gamma}^* \cap \OLId{greek-variable}{Delta}^*$ متسقة أعظميًا في $\Lang{L}'_\OLMathNumeral{0}$ كما أثبتنا.
+وبيانه أن كل !!{sentence} من $\Lang{L}'_\OLMathNumeral{0}$ إما أن تنتمي إلى
+$\OLId{greek-variable}{Gamma}^*$ و$\OLId{greek-variable}{Delta}^*$ معًا، وإما ألا تنتمي إلى أي منهما: ولذلك
+$\Assign{\OLId{latin-ordinary}{c}}{\OLId{latin-looped}{M}'_\OLMathNumeral{1}} \in \Assign{\OLId{latin-looped}{P}}{\OLId{latin-looped}{M}'_\OLMathNumeral{1}}$ إذا وفقط إذا كان
+$\Atom{P}{c} \in \OLId{greek-variable}{Gamma}^*$، إذا وفقط إذا كان
+$\Atom{P}{c} \in \OLId{greek-variable}{Delta}^*$، إذا وفقط إذا كان
+$\Assign{\OLId{latin-ordinary}{c}}{\OLId{latin-looped}{M}'_\OLMathNumeral{2}} \in \Assign{\OLId{latin-looped}{P}}{\OLId{latin-looped}{M}'_\OLMathNumeral{2}}$. وتثبت سائر شروط
+التشاكل بمثل هذه الحجة.
+
+فلنبن الآن نموذجًا~$\Struct{M}$ للـ!!{language}
+$\Lang{L_1} \cup \Lang{L_2}$، وذلك على التفصيل الآتي:
+\begin{enumerate}
+\item الـ!!{domain}~$\Domain{\OLId{latin-looped}{M}}$ هو $\Domain{\OLId{latin-looped}{M}_\OLMathNumeral{2}}$ نفسه، أي مجموعة كل
+  العناصر $\Assign{\OLId{latin-ordinary}{c}}{\OLId{latin-looped}{M}'_\OLMathNumeral{2}}$؛
+\item إذا كان !!a{predicate}~$\OLId{latin-looped}{P}$ في
+  $\Lang{L_2} \setminus \Lang{L_1}$، فإن
+  $\Assign{\OLId{latin-looped}{P}}{\OLId{latin-looped}{M}}=\Assign{\OLId{latin-looped}{P}}{\OLId{latin-looped}{M}'_\OLMathNumeral{2}}$؛
+\item إذا كان محمول~$\OLId{latin-looped}{P}$ في $\Lang{L}_\OLMathNumeral{1}\setminus \Lang{L}_\OLMathNumeral{2}$، فإن
+  $\Assign{\OLId{latin-looped}{P}}{\OLId{latin-looped}{M}}=\OLId{latin-ordinary}{h}[\Assign{\OLId{latin-looped}{P}}{\OLId{latin-looped}{M}'_\OLMathNumeral{1}}]$، أي إن
+  $\tuple{\Assign{\OLId{latin-ordinary}{c}_\OLMathNumeral{1}}{\OLId{latin-looped}{M}'_\OLMathNumeral{2}},\dots,\Assign{\OLId{latin-ordinary}{c}_\OLId{latin-ordinary}{n}}{\OLId{latin-looped}{M}'_\OLMathNumeral{2}}} \in
+  \Assign{\OLId{latin-looped}{P}}{\OLId{latin-looped}{M}}$ إذا وفقط إذا كان
+  $\tuple{\Assign{\OLId{latin-ordinary}{c}_\OLMathNumeral{1}}{\OLId{latin-looped}{M}'_\OLMathNumeral{1}},\dots,\Assign{\OLId{latin-ordinary}{c}_\OLId{latin-ordinary}{n}}{\OLId{latin-looped}{M}'_\OLMathNumeral{1}}} \in
+  \Assign{\OLId{latin-looped}{P}}{\OLId{latin-looped}{M}'_\OLMathNumeral{1}}$.
+\item إذا كان !!a{predicate}~$\OLId{latin-looped}{P}$ في $\Lang{L}_\OLMathNumeral{0}$، فإن
+  $\Assign{\OLId{latin-looped}{P}}{\OLId{latin-looped}{M}}=\Assign{\OLId{latin-looped}{P}}{\OLId{latin-looped}{M}'_\OLMathNumeral{2}}=\OLId{latin-ordinary}{h}(\Assign{\OLId{latin-looped}{P}}{\OLId{latin-looped}{M}'_\OLMathNumeral{1}})$.
+\item تعالج !!^{function}s~$\Lang{L}_\OLMathNumeral{1} \cup \Lang{L}_\OLMathNumeral{2}$، ومنها
+  الـ!!{constant}s، بالطريقة نفسها.
+\end{enumerate}
+
+ويثبت آخرًا، بالاستقراء على الـ!!{formula}s، أن $\Struct{M}$ توافق
+$\Struct{M'_1}$ في جميع !!{formula}s~$\Lang{L_1}$، وتوافق
+$\Struct{M'_2}$ في جميع !!{formula}s~$\Lang{L_2}$. وبوجه خاص،
+$\Sat{\OLId{latin-looped}{M}}{!A}$ و$\Sat{\OLId{latin-looped}{M}}{\lnot!B}$، ومن ثم
+$\not\Entails !A \lif !B$. فتتم بذلك الحجة على مبرهنة كريغ في الاستيفاء.
+\end{proof}
+
+\end{document}

@@ -1,0 +1,40 @@
+% Part: lambda-calculus
+% Chapter: introduction
+% Section: church-rosser
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{int}{cr}
+\olsection{خاصية تشيرش--روسر}
+
+\begin{thm}
+\ollabel{thm:church-rosser}
+إذا كانت~$M$ و$N_1$ و$N_2$ حدودًا وكان~$M \red N_1$ و$M \red N_2$،
+وجد حد~$P$ يحقق~$N_1 \red P$ و$N_2 \red P$.
+\end{thm}
+
+\begin{cor}
+متى أمكن اختزال~$M$ إلى صورة سوية، لم تكن له إلا صورة سوية واحدة.
+\end{cor}
+
+\begin{proof}
+من~$M \red N_1$ و$M \red N_2$ ينتج، بالمبرهنة السابقة،
+وجود حد~$P$ ينتهي إليه كل من~$N_1$ و$N_2$ بالاختزال.
+فإذا كانا يختزلان إلى~$P$، وكان~$N_1$ و$N_2$ سويين،
+لم يتأت ذلك إلا مع~$N_1 \ident P \ident N_2$.
+\end{proof}
+
+ونقول أخيرًا إن الحدين~$M$ و$N$ \emph{متكافئان بحسب~$\beta$}،
+أو \emph{متكافئان} بإطلاق، متى انتهيا بالاختزال إلى حد واحد:
+أي متى وجد~$P$ يحقق~$M \red P$ و$N \red P$.
+ورمز ذلك~$M \equal[\beta] N$.
+وبالاستعانة بـ\olref{thm:church-rosser} يتحقق القارئ من أن
+$\equal[\beta]$ علاقة تكافؤ، وأنها تحقق أيضًا الشرط:
+لكل~$M$ و$N$، إن كان~$M \red N$ أو~$N \red M$
+كان~$M \equal[\beta] N$.
+بل يمكن إثبات أن~$\equal[\beta]$ \emph{أصغر} علاقة تكافؤ
+تحقق هذا الشرط.
+
+\end{document}

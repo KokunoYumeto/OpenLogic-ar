@@ -1,0 +1,203 @@
+% Part: incompleteness
+% Chapter: arithmetization-syntax
+% Section: proofs-in-ax
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{art}{pax}
+\olsection{\usetoken{P}{derivation} بديهية}
+
+\begin{explain}
+أرثمة !!{derivation}s البديهية تقتضي أولًا تمثيل !!{derivation}s بالأعداد. وإنما
+!!{derivation}s متتاليات من !!{formula}s؛ فمن هنا يكون ترميز كل
+!!{derivation} بشفرة المتتالية التي عناصرها شفرات ما فيه من !!{formula}s.
+\end{explain}
+
+\begin{defn}
+ليكن $\delta$ !!{derivation} بديهيًا، ولتكن !!{formula}s التي يتألف منها
+$!A_\OLMathNumeral{1}$، \dots،~$!A_\OLId{latin-ordinary}{n}$. نعرّف عندئذ $\Gn{\delta}$ بأنه
+\[
+\tuple{\Gn{!A_\OLMathNumeral{1}}, \dots, \Gn{!A_\OLId{latin-ordinary}{n}}}.
+\]
+\end{defn}
+
+\begin{ex}
+  ومثال ذلك !!{derivation} في غاية البساطة:
+  \begin{derivation}
+  1. & $!B \lif (!B \lor !A)$ \\
+  2. & $(!B \lif (!B \lor !A)) \lif (!A  \lif (!B \lif (!B \lor !A)))$\\
+  3. & $!A  \lif (!B \lif (!B \lor !A))$
+  \end{derivation}
+  فعدد غودل لهذا الـ!!{derivation} هو
+  \begin{align*}
+  \openTuple\, 
+    & \Gn{!B \lif (!B \lor !A)}, \\
+    &\Gn{(!B \lif (!B \lor !A)) \lif (!A  \lif (!B \lif (!B \lor !A)))},\\
+    & \Gn{!A  \lif (!B \lif (!B \lor !A))} \,\closeTuple.
+  \end{align*}
+\end{ex}
+
+\begin{explain}
+فهذا تمثيل !!{derivation}s بالأعداد؛ ويبقى بيان أن التصرف في هذه
+!!{derivation}s، والتعبير عن خواصها وعلاقاتها الأساسية، ممكنان بدوال وعلاقات
+عودية بدائية. فمن العمليات ما يسهل بيانه: إذا كان $\OLId{latin-ordinary}{d}$ عدد غودل
+لـ!!a{derivation}، كان $(\OLId{latin-ordinary}{d})_{\len{\OLId{latin-ordinary}{d}}-\OLMathNumeral{1}}$ عدد غودل
+للـ!!{formula} الختامية فيه. ومنها ما يحتاج إلى عمل أكثر؛ وسنبيّن طريقة
+ذلك، ولو على سبيل رسم البرهان. والمقصود إثبات أن القول «$\delta$
+!!a{derivation} لـ$!A$ من $\OLId{greek-variable}{Gamma}$» يحدد علاقة عودية بدائية بين عددي غودل
+لـ$\delta$ و$!A$.
+\end{explain}
+
+\begin{prop}
+\ollabel{prop:followsby}
+كل واحدة من العلاقات الآتية عودية بدائية:
+\begin{enumerate}
+\item كون $!A$ بديهية.
+\item تبرير السطر ذي الرتبة $\OLId{latin-ordinary}{i}$ في $\delta$ بقاعدة إثبات المقدّم.
+\item تبرير السطر ذي الرتبة $\OLId{latin-ordinary}{i}$ في $\delta$ بقاعدة \QR.
+\item كون $\delta$ !!{derivation} صحيحًا.
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+مدار البرهان على العلاقات المقابلة بين أعداد غودل لـ!!{formula}s
+وأعداد غودل لـ!!{derivation}s؛ فعلينا إثبات عوديتها البدائية.
+\begin{enumerate}
+\item أما البديهيات، فقائمة مخططاتها معطاة، ولا تكون $!A$ بديهية إلا
+  إذا وافقت صورة أحد تلك المخططات. والقائمة منتهية؛ فيكفي إذن أن يكون
+  اختبار موافقة $!A$ لكل مخطط عوديًا بدائيًا. خذ، مثلًا، مخطط البديهية
+  \[
+  !B \lif (!C \lif !B).
+  \]
+  إنما تكون $!A$ حالة لهذا المخطط إذا أمكن اختيار !!{formula}s $!B$
+  و$!C$ بحيث تتكون $!A$ بوصل «$($» ثم $!B$ ثم «$\lif$» ثم «$($»
+  ثم $!C$ ثم «$\lif$» ثم $!B$ ثم~«$))$». ولهذه الخاصية اختبار على
+  عدد غودل~$\OLId{latin-ordinary}{n}$ لـ$!A$: فوصل المتتاليات عودي بدائي، وعددا غودل
+  لـ$!B$ و$!C$ دون عدد غودل لـ$!A$؛ إذ يكون كل من $!B$ و$!C$،
+  متى تحققت العلاقة، من الـ!!{formula}s الجزئية لـ$!A$.
+  فليكن التعريف:
+  \begin{multline*}
+  \fn{IsAx}_{!B \lif (!C \lif !B)}(\OLId{latin-ordinary}{n}) \defiff \bexists{\OLId{latin-ordinary}{b}< \OLId{latin-ordinary}{n}}{
+    \bexists{\OLId{latin-ordinary}{c} < \OLId{latin-ordinary}{n}}{(\fn{Sent}(\OLId{latin-ordinary}{b}) \land \fn{Sent}(\OLId{latin-ordinary}{c}) \land {}}}\\ \OLId{latin-ordinary}{n} =
+  \Gn{(} \concat \OLId{latin-ordinary}{b} \concat \Gn{\lif} \concat \Gn{(} \concat \OLId{latin-ordinary}{c} \concat
+  \Gn{\lif} \concat \OLId{latin-ordinary}{b} \concat \Gn{))}).
+  \end{multline*}
+  فإذا عرّفنا نظير ذلك لكل مخطط بديهي، كان فصل هذه التعريفات هو
+  الخاصية $\fn{IsAx}(\OLId{latin-ordinary}{n})$، ومعناها أن «$\OLId{latin-ordinary}{n}$ عدد غودل لبديهية».
+\item أما السطر ذو الرتبة $\OLId{latin-ordinary}{i}$ في $\delta$، فشرط تبريره بإثبات المقدّم، اللازم والكافي،
+  وجود سطرين سابقين رتبتهما $\OLId{latin-ordinary}{j}$ و$\OLId{latin-ordinary}{k}<\OLId{latin-ordinary}{i}$، تكون الـ!!{sentence} في السطر~$\OLId{latin-ordinary}{j}$
+  صيغةً~$!A$، وتكون جملة السطر~$\OLId{latin-ordinary}{k}$ هي $!A\lif !B$، وجملة
+  السطر~$\OLId{latin-ordinary}{i}$ هي~$!B$.
+  \begin{multline*}
+    \fn{MP}(\OLId{latin-ordinary}{d}, \OLId{latin-ordinary}{i}) \defiff \bexists{\OLId{latin-ordinary}{j} < \OLId{latin-ordinary}{i}}{\bexists{\OLId{latin-ordinary}{k} < \OLId{latin-ordinary}{i}}{}}\\
+    (\OLId{latin-ordinary}{d})_\OLId{latin-ordinary}{k} = \Gn{(} \concat (\OLId{latin-ordinary}{d})_\OLId{latin-ordinary}{j}
+      \concat \Gn{\lif} \concat (\OLId{latin-ordinary}{d})_\OLId{latin-ordinary}{i} \concat \Gn{)}
+  \end{multline*}
+  فهذا تعريف بعلاقة عودية بدائية؛ لأن التكميم المحدود والوصل و$=$
+  كلها عودية بدائية.
+\item وأما السطر في $\delta$، فيبرره \QR{} إذا جاء على الصورة
+  $!B\lif\lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]$ وسبقه سطر $!B\lif !A(\OLId{latin-ordinary}{c})$،
+  حيث يوجد !!{constant}~$\OLId{latin-ordinary}{c}$ ولا يقع $\OLId{latin-ordinary}{c}$ في~$!B$. وتفصيل هذا الشرط المكافئ هو الآتي:
+  \begin{enumerate}
+  \item توجد !!a{sentence}~$!B$،
+  \item وتوجد !!a{formula}~$!A(\OLId{latin-ordinary}{x})$ لا متغير حرًا فيها غير~$\OLId{latin-ordinary}{x}$، على أن
+  \item تكون جملة السطر $\OLId{latin-ordinary}{i}$ هي $!B\lif\lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]$،
+  \item وتكون جملة سطر سابق $\OLId{latin-ordinary}{j}<\OLId{latin-ordinary}{i}$ هي $!B\lif\Subst{!A}{\OLId{latin-ordinary}{c}}{\OLId{latin-ordinary}{x}}$ لثابت~$\OLId{latin-ordinary}{c}$
+  \item يمتنع وروده في~$!B$.
+  \end{enumerate}
+  ولكل شرط من هذه الشروط اختبار عودي بدائي. وذلك أن أعداد غودل
+  لـ$!B$ و$!A(\OLId{latin-ordinary}{x})$ و$\OLId{latin-ordinary}{x}$ دون عدد غودل لصيغة السطر~$\OLId{latin-ordinary}{i}$، وأن عدد
+  غودل لـ$\OLId{latin-ordinary}{c}$ دون عدد غودل لصيغة السطر~$\OLId{latin-ordinary}{j}$:
+  \begin{multline*}
+    \fn{QR}_\OLMathNumeral{1}(\OLId{latin-ordinary}{d}, \OLId{latin-ordinary}{i}) \defiff \bexists{\OLId{latin-ordinary}{j}<\OLId{latin-ordinary}{i}}{\bexists{\OLId{latin-ordinary}{b} < (\OLId{latin-ordinary}{d})_\OLId{latin-ordinary}{i}}{\bexists{\OLId{latin-ordinary}{x} <
+        (\OLId{latin-ordinary}{d})_\OLId{latin-ordinary}{i}}{\bexists{\OLId{latin-ordinary}{a} < (\OLId{latin-ordinary}{d})_\OLId{latin-ordinary}{i}}{\bexists{\OLId{latin-ordinary}{c} < (\OLId{latin-ordinary}{d})_\OLId{latin-ordinary}{j}}{(}}}}}
+    \\ \fn{Var}(\OLId{latin-ordinary}{x}) \land \fn{Const}(\OLId{latin-ordinary}{c}) \land {} \\
+    (\OLId{latin-ordinary}{d})_\OLId{latin-ordinary}{i} = \Gn{(} \concat
+    \OLId{latin-ordinary}{b} \concat \Gn{\lif} \concat \Gn{\lforall} \concat \OLId{latin-ordinary}{x} \concat \OLId{latin-ordinary}{a}
+    \concat \Gn{)} \land {}\\
+    (\OLId{latin-ordinary}{d})_\OLId{latin-ordinary}{j} = \Gn{(} \concat \OLId{latin-ordinary}{b} \concat
+    \Gn{\lif} \concat \fn{Subst}(\OLId{latin-ordinary}{a},\OLId{latin-ordinary}{c},\OLId{latin-ordinary}{x}) \concat \Gn{)} \land {}\\ \fn{Sent}(\OLId{latin-ordinary}{b})
+    \land \fn{Sent}(\fn{Subst}(\OLId{latin-ordinary}{a},\OLId{latin-ordinary}{c},\OLId{latin-ordinary}{x})) \land {} \bforall{\OLId{latin-ordinary}{k} <
+      \len{\OLId{latin-ordinary}{b}}}{(\OLId{latin-ordinary}{b})_\OLId{latin-ordinary}{k} \neq (\OLId{latin-ordinary}{c})_\OLMathNumeral{0}})
+  \end{multline*}
+  والمراد بـ$\OLId{latin-ordinary}{c}$ و$\OLId{latin-ordinary}{x}$ هنا عددا غودل للثابت والمتغير بوصف كل منهما حدًا،
+  لا شفرتا الرمزين المفردين. فأما اختبار انحصار المتغيرات الحرة في $\OLId{latin-ordinary}{x}$
+  من~$!A(\OLId{latin-ordinary}{x})$، فبكون $\Subst{!A(\OLId{latin-ordinary}{x})}{\OLId{latin-ordinary}{c}}{\OLId{latin-ordinary}{x}}$ !!a{sentence}.
+  وأما امتناع ورود $\OLId{latin-ordinary}{c}$ في $!B$، فباشتراط أن يخالف كل رمز في~$!B$ الرمز~$\OLId{latin-ordinary}{c}$.
+
+  وتبقى الصورة الأخرى لقاعدة \QR{}، وقد جعلناها تمرينًا.
+\item ولتكن $\fn{SeqCode}(\OLId{latin-ordinary}{d})$ الخاصية العودية البدائية الدالة على أن~$\OLId{latin-ordinary}{d}$
+  رمز متتالية منتهية في الترميز المعتمد. وأما كون $\OLId{latin-ordinary}{d}$ عدد غودل
+  لـ!!{derivation} صحيح فيكافئ أن يكون متتالية غير خالية، وأن يكون
+  كل سطر فيها بديهية، أو حاصلًا بإثبات المقدّم، أو حاصلًا بقاعدة \QR.
+  وعليه نضع:
+  \[
+  \fn{Deriv}(\OLId{latin-ordinary}{d}) \defiff \fn{SeqCode}(\OLId{latin-ordinary}{d}) \land \len{\OLId{latin-ordinary}{d}}>\OLMathNumeral{0} \land
+  \bforall{\OLId{latin-ordinary}{i} < \len{\OLId{latin-ordinary}{d}}}{(\fn{IsAx}((\OLId{latin-ordinary}{d})_\OLId{latin-ordinary}{i}) \lor
+    \fn{MP}(\OLId{latin-ordinary}{d},\OLId{latin-ordinary}{i}) \lor \fn{QR}(\OLId{latin-ordinary}{d}, \OLId{latin-ordinary}{i}))}
+  \]
+  % تصحيح مصدر (R288-02): أُضيف حارس رمز المتتالية وشرط عدم خلوها كيلا تعد الشفرات الرديئة أو الخالية اشتقاقات صحيحة.
+\end{enumerate}
+\end{proof}
+
+\begin{prob}
+ضع للعلاقات الآتية تعريفات على مثال ما في
+\olref[inc][art][pax]{prop:followsby}:
+\begin{enumerate}
+\item $\fn{IsAx}_{!A \lif (!B \lif (!A \land !B))}(\OLId{latin-ordinary}{n})$,
+\item $\fn{IsAx}_{\lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})] \lif !A(\OLId{latin-ordinary}{t})}(\OLId{latin-ordinary}{n})$,
+\item $\fn{QR}_{\OLMathNumeral{2}}(\OLId{latin-ordinary}{d}, \OLId{latin-ordinary}{i})$ (وهي الصورة الأخرى لقاعدة \QR).
+\end{enumerate}
+\end{prob}
+
+\begin{prop}
+إذا كانت $\OLId{greek-variable}{Gamma}$ مجموعة عودية بدائية من !!{sentence}s، فالعلاقة
+$\Prf[\OLId{greek-variable}{Gamma}](\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y})$ عودية بدائية. ومعناها أن $\OLId{latin-ordinary}{y}$ عدد غودل
+لـ!!a{sentence}~$!A$، وأن $\OLId{latin-ordinary}{x}$ شفرة !!a{derivation} من~$\emptyset$
+لشرطية متداخلة تاليها~$!A$ ومقدماتها قائمة منتهية من جمل~$\OLId{greek-variable}{Gamma}$.
+\end{prop}
+
+\begin{proof}
+ليكن المحمول العودي البدائي~$\OLId{latin-looped}{R}_\OLId{greek-variable}{Gamma}(\OLId{latin-ordinary}{y})$ معبّرًا عن
+«$\OLId{latin-ordinary}{y}\in\OLId{greek-variable}{Gamma}$». والمطلوب عودية العلاقة $\Prf[\OLId{greek-variable}{Gamma}](\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y})$ بدائيًا؛
+فيحمل~$\OLId{latin-ordinary}{x}$ شاهد البرهان المغلق للشرطية المتداخلة، وتحمل المتتالية
+الوجودية مقدماتها المختارة من~$\OLId{greek-variable}{Gamma}$، على ما نصت عليه القضية.
+
+قد ثبت في القضية السابقة أن الخاصية $\fn{Deriv}(\OLId{latin-ordinary}{x})$، أي كون
+$\OLId{latin-ordinary}{x}$ شفرة !!{derivation} صحيح~$\delta$، عودية بدائية. غير أن ذلك
+التعريف لم يجعل الانتساب إلى $\OLId{greek-variable}{Gamma}$ وجهًا آخر لتبرير أسطر
+!!{derivation}؛ وكذلك لم يراع اختبار التبرير بقاعدة \QR{} امتناع ورود
+الثابت~$\OLId{latin-ordinary}{c}$ في~$\OLId{greek-variable}{Gamma}$. ولنا أن نعدّل التعريف حتى يدخل
+$\OLId{greek-variable}{Gamma}$ فيه مباشرة، إلا أن الطريق الأيسر استعمال
+$\fn{Deriv}$ مع مبرهنة الاستنباط. فإن $\OLId{greek-variable}{Gamma}\Proves !A$ يكافئ وجود قائمة
+منتهية من !!{sentence}s $!B_\OLMathNumeral{1}$، \dots، $!B_\OLId{latin-ordinary}{n}\in\OLId{greek-variable}{Gamma}$ تحقق
+$\{!B_\OLMathNumeral{1},\dots,!B_\OLId{latin-ordinary}{n}\}\Proves !A$. وبمبرهنة الاستنباط يتحقق هذا بالضبط حين
+$\Proves(!B_\OLMathNumeral{1}\lif(!B_\OLMathNumeral{2}\lif\cdots(!B_\OLId{latin-ordinary}{n}\lif !A)\cdots))$.
+واختبار كون !!a{sentence} ذات عدد غودل~$\OLId{latin-ordinary}{z}$ على هذه الصورة عودي بدائي.
+فلا نجعل $\OLId{latin-ordinary}{x}$ في هذا التمثيل عدد غودل لـ!!a{derivation}
+للـ!!{sentence} ذات عدد غودل~$\OLId{latin-ordinary}{y}$ \emph{من $\OLId{greek-variable}{Gamma}$} مباشرة، بل نجعله
+عدد غودل لـ!!a{derivation} من~$\emptyset$ لشرطية متداخلة على الصورة المتقدمة.
+
+نبدأ بمتتالية من !!{sentence}s، ونكوّن منها بعودية بدائية شرطيةً
+مقدماتها تلك الجمل، وتاليها الـ!!{sentence} المعطاة:
+\begin{align*}
+  \fn{hCond}(\OLId{latin-ordinary}{s}, \OLId{latin-ordinary}{y}, \OLMathNumeral{0}) & = \OLId{latin-ordinary}{y} \\
+  \fn{hCond}(\OLId{latin-ordinary}{s}, \OLId{latin-ordinary}{y}, \OLId{latin-ordinary}{n}+\OLMathNumeral{1}) & = \Gn{(} \concat (\OLId{latin-ordinary}{s})_{\OLId{latin-ordinary}{n}} \concat \Gn{\lif}
+  \concat \fn{hCond}(\OLId{latin-ordinary}{s}, \OLId{latin-ordinary}{y}, \OLId{latin-ordinary}{n}) \concat \Gn{)}\\
+  \fn{Cond}(\OLId{latin-ordinary}{s}, \OLId{latin-ordinary}{y}) & = \fn{hCond}(\OLId{latin-ordinary}{s}, \OLId{latin-ordinary}{y}, \len{\OLId{latin-ordinary}{s}})\\
+  \intertext{ومن ثم يمكننا تعريف $\Prf[\Gamma](x,y)$ بالصيغة}
+  \Prf[\OLId{greek-variable}{Gamma}](\OLId{latin-ordinary}{x}, \OLId{latin-ordinary}{y}) & \defiff \bexists{\OLId{latin-ordinary}{s} < \fn{sequenceBound}(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{x})}{(} \\
+  &\qquad (\OLId{latin-ordinary}{x})_{\len{\OLId{latin-ordinary}{x}}-\OLMathNumeral{1}} = \fn{Cond}(\OLId{latin-ordinary}{s},\OLId{latin-ordinary}{y}) \land {} \\
+  &\qquad\bforall{\OLId{latin-ordinary}{i}<\len{\OLId{latin-ordinary}{s}}}{(\OLId{latin-ordinary}{s})_\OLId{latin-ordinary}{i} \in \OLId{greek-variable}{Gamma}} \land {} \\
+  &\qquad\fn{Deriv}(\OLId{latin-ordinary}{x})).
+\end{align*}
+% تصحيح مصدر (C288-01): وُفّق منطوق القضية مع الشيء الذي يرمزه x في التعريف، وهو برهان مغلق لشرطية متداخلة لا اشتقاق مباشر من Gamma.
+وأما حد~$\OLId{latin-ordinary}{s}$، فوجهه أن كل $(\OLId{latin-ordinary}{s})_\OLId{latin-ordinary}{i}$ عدد غودل
+لـ!!{formula} جزئية من السطر الأخير في !!{derivation}، فهو دون
+$(\OLId{latin-ordinary}{x})_{\len{\OLId{latin-ordinary}{x}}-\OLMathNumeral{1}}$. وعدد المقدمات $!B\in\OLId{greek-variable}{Gamma}$، وهو طول~$\OLId{latin-ordinary}{s}$،
+دون طول السطر الأخير في~$\OLId{latin-ordinary}{x}$.
+\end{proof}
+
+\end{document}

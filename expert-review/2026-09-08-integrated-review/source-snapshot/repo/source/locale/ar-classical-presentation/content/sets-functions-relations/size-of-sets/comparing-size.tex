@@ -1,0 +1,95 @@
+% Part:sets-functions-relations
+% Chapter: size-of-sets
+% Section: comparing-sizes
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid[ar]{sfr}{siz}{car}
+
+\olsection{اختلاف أحجام المجموعات ومبرهنة كانتور}
+
+\begin{explain}
+بعد أن ضبطنا معنى تساوي المجموعتين في الحجم، نضبط معنى كون إحداهما أصغر من الأخرى. فنستعيض، في تعريف «لا تزيد حجمًا على»، عن اشتراط !!a{bijection} بين المجموعتين باشتراط !!a{injection} من الأولى إلى الثانية. فإذا وجدت تلك الدالة حكمنا بأن حجم الأولى أقل من حجم الثانية أو مساو له. ووجه ذلك في التصور أن !!a{injection} لا بد أن تجد في مداها من !!{element}s ما يفي بعدد !!{element}s مجالها؛ إذ لا يجتمع عنصران مختلفان من المجال في !!{element} واحد من المدى.
+\end{explain}
+
+\begin{defn}
+المجموعة $\OLId{latin-looped}{A}$ \emph{لا تزيد حجمًا على}~$\OLId{latin-looped}{B}$، ورمز ذلك $\cardle{\OLId{latin-looped}{A}}{\OLId{latin-looped}{B}}$، إذا وفقط إذا وجدت !!a{injection} $\OLId{latin-ordinary}{f} \colon \OLId{latin-looped}{A} \to \OLId{latin-looped}{B}$.
+\end{defn}
+
+ولهذه العلاقة الانعكاسية والتعدي، دون التناظر؛ وإثبات ذلك متروك للتمرين. ثم نخص من هذه المقارنة حال الصغر المحض، حيث لا تساوي بين الحجمين.
+
+\begin{defn}
+تكون $\OLId{latin-looped}{A}$ \emph{أصغر حجمًا من}~$\OLId{latin-looped}{B}$، ونكتب $\cardless{\OLId{latin-looped}{A}}{\OLId{latin-looped}{B}}$، إذا وفقط إذا وجدت !!a{injection}~$\OLId{latin-ordinary}{f}\colon \OLId{latin-looped}{A} \to \OLId{latin-looped}{B}$ ولم توجد !!{bijection}~$\OLId{latin-ordinary}{g}\colon \OLId{latin-looped}{A}
+\to \OLId{latin-looped}{B}$. فشرطا ذلك هما $\cardle{\OLId{latin-looped}{A}}{\OLId{latin-looped}{B}}$ و$\cardneq{\OLId{latin-looped}{A}}{\OLId{latin-looped}{B}}$.
+\end{defn}
+
+وهذه العلاقة لا انعكاسية، وهي متعدية؛ وللقارئ إثبات الأمرين تمرينًا. وبالترميز الجديد تكون المجموعة~$\OLId{latin-looped}{A}$ !!{enumerable} إذا وفقط إذا كان $\cardle{\OLId{latin-looped}{A}}{\Nat}$، وتكون $\OLId{latin-looped}{A}$ !!{nonenumerable} إذا وفقط إذا كان $\cardless{\Nat}{\OLId{latin-looped}{A}}$. ولذلك نستطيع أن نعبر عن
+\oliflabeldef{sfr:siz:nen-alt:thm:nonenum-pownat}{%
+\olref[sfr][siz][nen-alt]{thm:nonenum-pownat}
+بالقول إن
+$\cardless{\Nat}{\Pow{\Nat}}$}{%
+\olref[sfr][siz][nen]{thm:nonenum-pownat}
+بالقول إن $\cardless{\PosInt}{\Pow{\PosInt}}$}. وقد أثبت \citet{Cantor1892} أن الحكم الأخير \emph{لا يختص بهذه المجموعات، بل يعمها كلها}:
+
+\begin{thm}[كانتور]\ollabel{thm:cantor}
+$\cardless{\OLId{latin-looped}{A}}{\Pow{\OLId{latin-looped}{A}}}$ مهما تكن المجموعة $\OLId{latin-looped}{A}$.
+\end{thm}
+
+\begin{proof}
+لنضع $\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x}) = \{\OLId{latin-ordinary}{x}\}$. فهذه !!a{injection} $\OLId{latin-ordinary}{f} \colon \OLId{latin-looped}{A} \to \Pow{\OLId{latin-looped}{A}}$؛ لأن $\OLId{latin-ordinary}{x} \neq \OLId{latin-ordinary}{y}$ يستلزم $\{\OLId{latin-ordinary}{x}\} \neq \{\OLId{latin-ordinary}{y}\}$ بالامتدادية، ومنه $\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x}) \neq \OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{y})$. فثبت $\cardle{\OLId{latin-looped}{A}}{\Pow{\OLId{latin-looped}{A}}}$.
+
+\begin{editorial}
+إن أدرج \olref[nen]{sec} سقنا البرهان مفصلًا، وإلا أوردنا وجهًا أوجز يوافق \olref[nen-alt]{sec}.
+\end{editorial}
+
+\oliflabeldef{sfr:siz:nen:sec}{%
+ويبقى أن ننفي وجود دالة~!!a{surjective}~$\OLId{latin-ordinary}{g}\colon \OLId{latin-looped}{A} \to
+\Pow{\OLId{latin-looped}{A}}$؛ فإذا امتنع ذلك امتنعت الدالة~!!a{bijective} من باب أولى، وثبت $\cardneq{\OLId{latin-looped}{A}}{\Pow{\OLId{latin-looped}{A}}}$. فلتكن $\OLId{latin-ordinary}{g}\colon \OLId{latin-looped}{A} \to \Pow{\OLId{latin-looped}{A}}$ دالة مفروضة. ولكون $\OLId{latin-ordinary}{g}$ كلية، فإن كل $\OLId{latin-ordinary}{x} \in \OLId{latin-looped}{A}$ له صورة هي مجموعة جزئية $\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{x})
+\subseteq \OLId{latin-looped}{A}$. ولإثبات أن $\OLId{latin-ordinary}{g}$ غير شاملة نبني مجموعة جزئية~$\overline{\OLId{latin-looped}{A}} \subseteq \OLId{latin-looped}{A}$ يقتضي تعريفها ألا تقع في مدى~$\OLId{latin-ordinary}{g}$. نضع
+\[
+  \overline{\OLId{latin-looped}{A}} = \Setabs{\OLId{latin-ordinary}{x} \in \OLId{latin-looped}{A}}{\OLId{latin-ordinary}{x} \notin \OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{x})}.
+\]
+وحيث كانت~$\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{x})$ معرفة لكل $\OLId{latin-ordinary}{x} \in \OLId{latin-looped}{A}$، كانت $\overline{\OLId{latin-looped}{A}}$ مجموعة جزئية معينة من~$\OLId{latin-looped}{A}$. لكنها خارجة عن مدى~$\OLId{latin-ordinary}{g}$. وبيانه: خذ $\OLId{latin-ordinary}{x} \in \OLId{latin-looped}{A}$ على الإطلاق، فالمطلوب $\overline{\OLId{latin-looped}{A}} \neq
+\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{x})$. فإن كان $\OLId{latin-ordinary}{x} \in \OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{x})$ لم يصدق $\OLId{latin-ordinary}{x} \notin \OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{x})$، وبحسب تعريف~$\overline{\OLId{latin-looped}{A}}$ يلزم $\OLId{latin-ordinary}{x} \notin
+  \overline{\OLId{latin-looped}{A}}$. وإن كان $\OLId{latin-ordinary}{x} \in \overline{\OLId{latin-looped}{A}}$، صدقت عليه الصفة المحددة لـ~$\overline{\OLId{latin-looped}{A}}$، أي $\OLId{latin-ordinary}{x} \in \OLId{latin-looped}{A}$ و$\OLId{latin-ordinary}{x} \notin
+  \OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{x})$. ولما لم نخص $\OLId{latin-ordinary}{x}$ بشيء، ثبت لكل $\OLId{latin-ordinary}{x} \in
+  \OLId{latin-looped}{A}$ أن $\OLId{latin-ordinary}{x} \in \OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{x})$ إذا وفقط إذا كان $\OLId{latin-ordinary}{x} \notin \overline{\OLId{latin-looped}{A}}$؛ لذلك $\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{x}) \neq \overline{\OLId{latin-looped}{A}}$. فالمجموعة $\overline{\OLId{latin-looped}{A}}$ لا تقع في مدى~$\OLId{latin-ordinary}{g}$، وهذا يناقض فرض كون~$\OLId{latin-ordinary}{g}$ شاملة.
+
+}{والمطلوب الباقي هو $\cardneq{\OLId{latin-looped}{A}}{\Pow{\OLId{latin-looped}{A}}}$. فلو فرضنا خلافه، أي $\cardeq{\OLId{latin-looped}{A}}{\Pow{\OLId{latin-looped}{A}}}$، لوجدت !!{bijection} $\OLId{latin-ordinary}{g} \colon \OLId{latin-looped}{A} \to \Pow{\OLId{latin-looped}{A}}$. ولنضع
+\[
+    \OLId{latin-looped}{D} = \Setabs{\OLId{latin-ordinary}{x} \in \OLId{latin-looped}{A}}{\OLId{latin-ordinary}{x} \notin \OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{x})}
+\]
+فإن $\OLId{latin-looped}{D} \subseteq \OLId{latin-looped}{A}$، ولذلك $\OLId{latin-looped}{D} \in \Pow{\OLId{latin-looped}{A}}$. والدالة $\OLId{latin-ordinary}{g}$ !!a{bijection}، فلا بد من $\OLId{latin-ordinary}{y} \in \OLId{latin-looped}{A}$ يحقق $\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{y}) = \OLId{latin-looped}{D}$. وعندئذ نحصل على
+\[
+    \OLId{latin-ordinary}{y} \in \OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{y}) \text{ إذا وفقط إذا } \OLId{latin-ordinary}{y} \in \OLId{latin-looped}{D} \text{ إذا وفقط إذا } \OLId{latin-ordinary}{y} \notin \OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{y}).
+\]
+وقد وقع التناقض، فيثبت $\cardneq{\OLId{latin-looped}{A}}{\Pow{\OLId{latin-looped}{A}}}$.}{}
+\end{proof}
+
+\begin{editorial}
+\textbf{تنبيه تصحيحي على الأصل (OLSIZ-007).}
+اختير $\OLId{latin-ordinary}{x}$ اعتباطيًا من $\OLId{latin-looped}{A}$، غير أن الأصل قيّد النتيجة خطأً
+بـ$\OLId{latin-ordinary}{x}\in\overline{\OLId{latin-looped}{A}}$؛ فأعيد مجال التعميم إلى $\OLId{latin-ordinary}{x}\in \OLId{latin-looped}{A}$، وهو اللازم
+لإخراج $\overline{\OLId{latin-looped}{A}}$ من مدى $\OLId{latin-ordinary}{g}$.
+\end{editorial}
+
+\begin{explain}
+\oliflabeldef{sfr:siz:nen:thm:nonenum-pownat}{وتظهر وحدة الطريقة إذا قارنا برهان \olref{thm:cantor} ببرهان \olref[nen]{thm:nonenum-pownat}. فقد كنا نأخذ قائمة $\OLId{latin-looped}{Z}_\OLMathNumeral{1}$، $\OLId{latin-looped}{Z}_\OLMathNumeral{2}$، \dots{} من المجموعات الجزئية من~$\PosInt$، ونبني منها مجموعة أعداد~$\overline{\OLId{latin-looped}{Z}}$ لا تدخل القائمة. وذلك أن كل $\OLId{latin-ordinary}{n} \in
+\PosInt$ يحقق $\OLId{latin-ordinary}{n} \in \OLId{latin-looped}{Z}_\OLId{latin-ordinary}{n}$ إذا وفقط إذا كان $\OLId{latin-ordinary}{n} \notin \overline{\OLId{latin-looped}{Z}}$؛ فلا بد من عدد يكون !!a{element} لإحدى المجموعتين~$\OLId{latin-looped}{Z}_\OLId{latin-ordinary}{n}$ و$\overline{\OLId{latin-looped}{Z}}$ دون الأخرى. وهنا استعملنا عين هذا المعنى، إلا أن المؤشرات~$\OLId{latin-ordinary}{n}$ صارت !!{element}s~$\OLId{latin-looped}{A}$ بدلًا من~$\PosInt$. وقد عينّا المجموعة $\overline{\OLId{latin-looped}{A}}$ لتخالف~$\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{x})$ لكل $\OLId{latin-ordinary}{x} \in \OLId{latin-looped}{A}$، لأن $\OLId{latin-ordinary}{x} \in \OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{x})$ يكافئ $\OLId{latin-ordinary}{x} \notin \overline{\OLId{latin-looped}{A}}$. فلا يخلو الأمر هنا أيضًا من !!a{element} من~$\OLId{latin-looped}{A}$ يكون !!a{element} لإحدى المجموعتين~$\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{x})$ و$\overline{\OLId{latin-looped}{A}}$ دون صاحبتها. فكما خرجت $\overline{\OLId{latin-looped}{Z}}$ عن القائمة $\OLId{latin-looped}{Z}_\OLMathNumeral{1}$، $\OLId{latin-looped}{Z}_\OLMathNumeral{2}$، \dots، خرجت $\overline{\OLId{latin-looped}{A}}$ عن مدى~$\OLId{latin-ordinary}{g}$.}{}
+
+\oliflabeldef{sfr:siz:nen-alt:thm:nonenum-pownat}{ولنقابل كذلك برهان \olref{thm:cantor} ببرهان \olref[nen-alt]{thm:nonenum-pownat}. هناك أخذنا قائمة $\OLId{latin-looped}{N}_\OLMathNumeral{0}$، $\OLId{latin-looped}{N}_\OLMathNumeral{1}$، $\OLId{latin-looped}{N}_\OLMathNumeral{2}$، \dots{} من المجموعات الجزئية من~$\Nat$، فبنينا مجموعة أعداد~$\OLId{latin-looped}{D}$ لا ترد في القائمة. وسبب خروجها أن $\OLId{latin-ordinary}{n} \in \OLId{latin-looped}{N}_\OLId{latin-ordinary}{n}$ يكافئ $\OLId{latin-ordinary}{n} \notin
+\OLId{latin-looped}{D}$ لكل $\OLId{latin-ordinary}{n} \in \Nat$. والمعنى هنا واحد، سوى أن المؤشرات~$\OLId{latin-ordinary}{n}$ صارت !!{element}s~$\OLId{latin-looped}{A}$ عوضًا عن~$\Nat$. وقد وضعنا $\OLId{latin-looped}{D}$ على وجه تخالف به~$\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{x})$ لكل $\OLId{latin-ordinary}{x}
+\in \OLId{latin-looped}{A}$؛ إذ $\OLId{latin-ordinary}{x} \in \OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{x})$ إذا وفقط إذا كان $\OLId{latin-ordinary}{x} \notin \OLId{latin-looped}{D}$.}{}
+
+ومن وجوه النظر النافعة مقابلة هذا البرهان ببرهان مفارقة راسل، \olref[sfr][set][rus]{thm:russells-paradox}؛ فإن راسل استمد من مبرهنة كانتور ما هداه إلى مفارقته.
+\end{explain}
+
+\begin{prob}
+بين امتناع وجود !!a{injection} $\OLId{latin-ordinary}{g}\colon \Pow{\OLId{latin-looped}{A}} \to
+\OLId{latin-looped}{A}$ مهما تكن المجموعة~$\OLId{latin-looped}{A}$. وللتلميح، افرض أن $\OLId{latin-ordinary}{g}\colon \Pow{\OLId{latin-looped}{A}} \to \OLId{latin-looped}{A}$ !!{injective}، وضع $\OLId{latin-looped}{D} = \Setabs{\OLId{latin-ordinary}{g}(\OLId{latin-looped}{B})}{\OLId{latin-looped}{B} \subseteq \OLId{latin-looped}{A} \text{ و
+  } \OLId{latin-ordinary}{g}(\OLId{latin-looped}{B}) \notin \OLId{latin-looped}{B}}$، ثم خذ $\OLId{latin-ordinary}{x} = \OLId{latin-ordinary}{g}(\OLId{latin-looped}{D})$. واستخرج التناقض من كون $\OLId{latin-ordinary}{g}$ !!{injective}.
+\end{prob}
+
+\end{document}

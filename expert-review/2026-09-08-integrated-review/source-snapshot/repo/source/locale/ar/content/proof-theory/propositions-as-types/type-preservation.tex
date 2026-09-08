@@ -1,0 +1,106 @@
+% part: intuitionistic-logic
+% chapter: propositions-as-types
+% section: type-preservation
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{pty}{tpr}
+
+\olsection{حفظ النوع}
+
+يمكن أيضًا تعريف تحويلات الاختزال والتبديل المدروسة مباشرةً للنسقين
+\Log{tN2i} و\Log{tN3i}. ويعرّف النسق~\Log{tN3i} نوع حد لامبدا~$N$ بالنسبة
+إلى السياق~$\Gamma$ بأنه~!!{formula}~$!A$ التي يكون للمتتالية
+$\Gamma\Sequent N:!A$~!!a{proof} في~\Log{tN3i}. ولأن قواعد اختزال بيتا
+لحدود لامبدا تطابق تمامًا تحويلات الاختزال والتبديل على~!!{proof}s، تنتج
+نتيجة مهمة: يبقى نوع حد لامبدا بالنسبة إلى السياق~$\Gamma$ على حاله بعد
+كل خطوة واحدة من اختزال بيتا. وتسمى هذه الخاصية \emph{حفظ النوع}.
+
+\begin{prop}
+إذا كان نوع~$N$ هو~$!A$ بالنسبة إلى~$\Gamma$، وكان~$N\redone N'$ في خطوة
+اختزال واحدة، فإن نوع~$N'$ هو~$!A$ بالنسبة إلى~$\Gamma$.
+\end{prop}
+
+\begin{proof}
+  نستطيع بسهولة أن نثبت، بالاستقراء في~$N$ وفي ارتفاع~!!{proof}s~$\delta$
+  للمتتالية~$\Gamma\Sequent N:!A$، ما يأتي: إذا كان~$M$ حدًا جزئيًا من
+  $N$، احتوى~$\delta$~!!{proof}s جزئيًا~$\delta_1$ ينتهي بـ
+  $\Gamma'\Sequent M:!B$. وإذا كان~$M$ ردكسًا، انطبق تحويل على
+  $\delta_1$. وبتطبيق الاختزال على~$\delta_1$ نحصل على~!!a{proof}
+  $\delta_1'$ لـ~$\Gamma'\Sequent M':!B$. وبفحص تحويلات~\Log{tN3i} نجد
+  أن~$M'$ هو مختزَل~$M$. وإذا استبدلنا~$\delta_1'$ بـ~$\delta_1$ في
+  $\delta$ نتج~!!a{proof}~$\delta'$ لـ~$\Gamma\Sequent N':!A$، حيث ينتج
+  $N'$ من~$N$ باستبدال~$M'$ بالحد الجزئي~$M$.
+
+  انظر، مثلًا، في تحويل الاختزال لـ~\Intro{\land} يتبعه~\Elim{\land}:
+  \[
+  \bottomAlignProof
+  \AxiomC{}
+  \Deduce$\Gamma \fCenter N_1 : !B_1$
+  \AxiomC{}
+  \Deduce$\Gamma \fCenter N_2 : !B_2$
+  \RightLabel{\Intro{\land}}
+  \BinaryInf$\Gamma \fCenter \pair{N_1}{N_2} : !B_1 \land !B_2$
+  \RightLabel{\Elim{\land}[i]}
+  \UnaryInf$\Gamma \fCenter \proj{i}{\pair{N_1}{N_2}} : !B_i$
+  \DisplayProof
+  \quad\redone\quad
+  \bottomAlignProof
+  \AxiomC{}
+  \Deduce$\Gamma \fCenter N_i : !B_i$
+  \DisplayProof
+  \]
+  نرى أن حد برهان~!!{proof} الواقع على اليمين، أي~$\delta_1'$، هو~$N_i$.
+  وهو بالضبط نتيجة تطبيق خطوة اختزال بيتا على حد البرهان
+  $\proj{i}{\pair{N_1}{N_2}}$ لـ~!!{proof} الواقع على اليسار، أي
+  $\delta_1$.
+
+  أو انظر في استدلال~\Intro{\lif} يتبعه استدلال~\Elim{\lif}، وفي تحويل
+  الاختزال المطبق عليه:
+  \begin{multline*}
+  \bottomAlignProof
+  \AxiomC{$\delta_2$}
+  \Deduce$x: !B_1, \Gamma \fCenter N : !B_2$
+  \RightLabel{\Intro{\lif}}
+  \UnaryInf$\Gamma \fCenter \lambd[\typeof{x}{!B_1}][N] : !B_1 \lif !B_2$
+  \AxiomC{}
+  \RightLabel{$\delta_3$}
+  \Deduce$\Gamma \fCenter M : !B_1$
+  \RightLabel{\Elim{\lif}}
+  \BinaryInf$\Gamma \fCenter (\lambd[\typeof{x}{!B_1}][N] M) : !B_2$
+  \DisplayProof
+  \quad\redone\\
+  \bottomAlignProof
+  \AxiomC{}
+  \RightLabel{$\delta_3$}
+  \Deduce$\Gamma \fCenter M : !B_1$
+  \RightLabel{$\Subst{\delta_2}{\delta_3}{x:!B_1}$}
+  \Deduce$\Gamma \fCenter \Subst{N}{M}{x} : !B_2$
+  \DisplayProof
+  \end{multline*}
+  ومرة أخرى يكون حد برهان~!!{proof} الواقع على اليمين هو بالضبط نتيجة
+  اختزال حد برهان~!!{proof} الواقع على اليسار ببيتا خطوةً واحدة. ويبقى أن
+  نتحقق بعناية، بالاستقراء في ارتفاع~$\delta_2$، من أن استبدال~!!{proof}
+  $\delta_3$ لـ~$\Gamma\Sequent M:!B_1$ بكل بديهية من الصورة
+  $\Gamma'\Sequent x:!B_1$ في~$\delta_2$ ينتج فعلًا~!!a{proof}
+  $\Subst{\delta_2}{\delta_3}{x:!B_1}$ للمتتالية
+  $\Gamma\Sequent\Subst{N}{M}{x}:!B_2$.
+\end{proof}
+
+وللتطابق الوثيق بين~!!{proof}s وحدود لامبدا نتيجة أخرى. فإذا كان~$N$ حد
+لامبدا \emph{مغلقًا} من النوع~$!A$ وكان له ردكس~$M$، احتوى البرهان
+$\delta$ المقابل في~\Log{tN3i} للمتتالية~$\Sequent N:!A$~!!{proof} جزئيًا
+ينتهي بـ~$\Gamma'\Sequent M:!B$ وينطبق عليه تحويل. وإذا كان
+$N\redone N'$ باستبدال مختزَل~$M$ به، كانت نتيجة تطبيق الاختزال المقابل
+على~$\delta$~!!a{proof} لـ~$\Sequent N':!A$.
+
+أما خاصية \emph{التقدم} الصحيحة فتخص الحدود المغلقة الصحيحة النوع: يبيّن
+الاستقراء في اشتقاق التنميط، باستعمال لمّة الصيغ القانونية للقيم، أن كل حد
+مغلق صحيح النوع إما قيمة ذات الصيغة القانونية لنوعه، وإما يختزل في خطوة
+واحدة إلى حد آخر. ويضمن حفظ النوع أن الحد الناتج له النوع نفسه. ولذلك لا
+``تعلق'' عملية اختزال بيتا لحدود مغلقة صحيحة النوع؛ أما الحدود المفتوحة فقد
+تكون في صيغة عادية محايدة، فلا يشملها ادعاء التقدم هذا.
+
+\end{document}

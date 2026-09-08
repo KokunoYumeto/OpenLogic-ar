@@ -1,0 +1,115 @@
+% Part: proof-theory
+% Chapter: sequent-calculus
+% Section: translations
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{seq}{tr}
+
+\olsection{في التحويل بين~\Log{G1c} و\Log{G3c}}
+
+قد تقدم أن~\Log{G1c} و\Log{G3c} كليهما سليم وكامل للمنطق الكلاسيكي؛
+فكل واحد منهما يبرهن المتتاليات الصادقة في كل~!!{structure} وحدها. ومن
+ثم تتحد المتتاليات القابلة للبرهنة فيهما. ونثبت الآن هذا الاتحاد بحجة
+من نظرية البرهان نفسها، من غير توسط مبرهنتي السلامة والاكتمال. وهذه الحجة
+تعطينا \emph{تحويلات} تنقل~!!{proof}s في~\Log{G1c} إلى~!!{proof}s في
+\Log{G3c}، وتنقلها بالعكس.
+
+\begin{prop}
+إذا كان~$\Log{G1c}\Proves S$، فإن~$\Log{G3c}\Proves S$.
+\end{prop}
+
+\begin{proof}
+  نثبت أن كل~$\pi$~!!a{proof} في~\Log{G1c} يقابله~!!a{proof}
+  $\pi'$ للمتتالية~$S$ في~\Log{G3c}، وذلك بالاستقراء على
+  $n=\pheight{\pi}$.
+
+  فإن كان~$n=0$، كان~$\pi$ بديهية. أما~$\lfalse\Sequent\quad$ فهي
+  بديهية في~\Log{G3c} أيضًا، إذا أخذنا السياقين~$\Gamma$ و$\Delta$
+  فارغين. وأما~\Log{G1c} فيجيز~$!A\Sequent !A$ بديهية لأي~$!A$، على
+  حين لا تكون بديهيات الهوية في~\Log{G3c} إلا ذرية؛ وقد أثبتنا في
+  \olref[ex]{prop:G3c-axioms} أن كل المتتاليات~$!A\Sequent !A$
+  !!{provable} في~\Log{G3c}.
+
+  وإن كان~$n>0$، ختم~$\pi$ بالقاعدة~$R$. ويفيد فرض الاستقراء~!!{proof}s
+  لمقدمات القاعدة في~\Log{G3c}؛ أي يفيد تحويلات للـ!!{proof}s الجزئية
+  المباشرة إلى~\Log{G3c}. فإن كانت~$R$ من قواعد~\Log{G3c} أيضًا، أجريناها
+  % REVIEW-0713-M1: الأربع هي القواعد المنطقية؛ ويأتي الإضعاف والتقلص بعد ذلك.
+  على~!!{proof}s المقدمات بعد تحويلها. وأما القواعد المنطقية الأربع المختلفة بين
+  النظامين فتحاكى هكذا: نستعمل، قبل قاعدة~\Log{G3c}، الإضعاف المقبول في
+  \olref[adm]{prop:weak-G3c-adm}؛ فنضيف الصيغة الفعالة المفقودة في حالتي
+  \LeftR{\land} و\RightR{\lor}، أو نضيف الوقوع المحفوظ للصيغة الرئيسة
+  في حالتي~\LeftR{\lforall} و\RightR{\lexists}. فإن كانت~$R$ قاعدة
+  إضعاف في~\Log{G1c}، استعملنا نتيجة قبول الإضعاف نفسها؛ وإن كانت قاعدة
+  تقلص استعملنا~\olref[inv]{prop:G3c-cont-adm}.
+\end{proof}
+
+\begin{prop}
+إذا كان~$\Log{G3c}\Proves S$، فإن~$\Log{G1c}\Proves S$.
+\end{prop}
+
+\begin{proof}
+  نستقرئ مرة أخرى على~!!{height}~!!a{proof}~$\pi$ للمتتالية~$S$.
+  فكل بديهية من بديهيات~\Log{G3c} يمكن~!!{prove}ها في~\Log{G1c}، بأن
+  نبدأ من بديهية ثم نكرر قاعدتي~\LeftR{\Weakening}
+  و\RightR{\Weakening}:
+  \[
+  \Axiom$!C \fCenter !C$
+  \RightLabel{\LeftR{\Weakening}}
+  \Deduce$!C, \Gamma \fCenter !C$
+  \RightLabel{\RightR{\Weakening}}
+  \Deduce$!C, \Gamma \fCenter \Delta, !C$
+  \DisplayProof
+\qquad
+  \Axiom$\lfalse \fCenter$
+  \RightLabel{\LeftR{\Weakening}}
+  \Deduce$\lfalse, \Gamma \fCenter$
+  \RightLabel{\RightR{\Weakening}}
+  \Deduce$\lfalse, \Gamma \fCenter \Delta$
+  \DisplayProof
+  \]
+  فإذا ختم~$\pi$ بالقاعدة~$R$، أعطانا فرض الاستقراء~!!{proof}s للمقدمات
+  في~\Log{G1c}، ثم أجرينا القاعدة~$R$ نفسها على تلك~!!{proof}s. ويستثنى من ذلك
+  \LeftR{\land} و\RightR{\lor} و\LeftR{\lforall}
+  و\RightR{\lexists}، لاختلاف صورها في النظامين. فأما صورتا
+  \Log{G3c} الأوليان فتشتقان في~\Log{G1c} هكذا:
+  \[
+  \Axiom$!A, !B, \Gamma \fCenter \Delta$
+  \RightLabel{\LeftR{\land}}
+  \UnaryInf$!A \land !B, !B, \Gamma \fCenter \Delta$
+  \RightLabel{\LeftR{\land}}
+  \UnaryInf$!A \land !B, !A \land !B, \Gamma \fCenter \Delta$
+  \RightLabel{\LeftR{\Contraction}}
+  \UnaryInf$!A \land !B, \Gamma \fCenter \Delta$
+    \DisplayProof
+\qquad
+  \Axiom$\Gamma \fCenter \Delta, !A, !B$
+  \RightLabel{\RightR{\lor}}
+  \UnaryInf$\Gamma \fCenter \Delta, !A \lor !B, !B$
+  \RightLabel{\RightR{\lor}}
+  \UnaryInf$\Gamma \fCenter \Delta, !A \lor !B, !A \lor !B$
+  \RightLabel{\RightR{\Contraction}}
+  \UnaryInf$\Gamma \fCenter \Delta, !A \lor !B$
+    \DisplayProof
+  \]
+  وأما صورتا القاعدتين الكميتين فتشتقان على الوجه الآتي:
+  \[
+  \Axiom$!A(t), \lforall[x][!A(x)], \Gamma \fCenter \Delta$
+  \RightLabel{\LeftR{\lforall}}
+  \UnaryInf$\lforall[x][!A(x)], \lforall[x][!A(x)], \Gamma \fCenter \Delta$
+  \RightLabel{\LeftR{\Contraction}}
+  \UnaryInf$\lforall[x][!A(x)], \Gamma \fCenter \Delta$
+  \DisplayProof
+\qquad
+  \Axiom$\Gamma \fCenter \Delta, \lexists[x][!A(x)], !A(t)$
+  \RightLabel{\RightR{\lexists}}
+  \UnaryInf$\Gamma \fCenter \Delta, \lexists[x][!A(x)], \lexists[x][!A(x)]$
+  \RightLabel{\RightR{\Contraction}}
+  \UnaryInf$\Gamma \fCenter \Delta, \lexists[x][!A(x)]$
+  \DisplayProof
+  \]
+\end{proof}
+
+\end{document}

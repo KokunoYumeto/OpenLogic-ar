@@ -1,0 +1,62 @@
+% Part: sets-functions-relations
+% Chapter: functions
+% Section: composition
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid[ar]{sfr}{fun}{cmp}
+\olsection{تركيب الدوال}
+
+\begin{explain}
+\oliflabeldef{sfr:fun:inv:sec}{تقدم في \olref[inv]{sec} أن
+معكوس~$\OLId{latin-ordinary}{f}^{-\OLMathNumeral{1}}$ لـ!!a{bijection}~$\OLId{latin-ordinary}{f}$ دالة أيضًا. ومن عمليات الدوال
+التركيب. }{}فنركب $\OLId{latin-ordinary}{f}$ و~$\OLId{latin-ordinary}{g}$ فنحصل على دالة جديدة، بتطبيق $\OLId{latin-ordinary}{f}$
+أولًا ثم~$\OLId{latin-ordinary}{g}$. ولا يصح ذلك إلا إذا اتفق المدى والمجال بالقدر المطلوب:
+أن يكون مدى~$\OLId{latin-ordinary}{f}$ جزئية من مجال~$\OLId{latin-ordinary}{g}$.
+\oliflabeldef{sfr:rel:ops:sec}{وهذا نظير الضرب النسبي للعلاقات
+المذكور في \olref[rel][ops]{sec}.}{}
+
+وبيانه بالرسم في \olref{fig:composition}: فيه الدالتان
+$\OLId{latin-ordinary}{f} \colon \OLId{latin-looped}{A} \to \OLId{latin-looped}{B}$ و$\OLId{latin-ordinary}{g} \colon \OLId{latin-looped}{B} \to \OLId{latin-looped}{C}$ وتركيبهما~$(\comp{\OLId{latin-ordinary}{f}}{\OLId{latin-ordinary}{g}})$.
+فالدالة $(\comp{\OLId{latin-ordinary}{f}}{\OLId{latin-ordinary}{g}}) \colon \OLId{latin-looped}{A} \to \OLId{latin-looped}{C}$ تقابل كل !!{element}
+من~$\OLId{latin-looped}{A}$ بـ!!a{element} من~$\OLId{latin-looped}{C}$. وتعيين أي !!{element} من~$\OLId{latin-looped}{C}$
+يقابل !!a{element} من $\OLId{latin-looped}{A}$ يجري هكذا: نأخذ المدخل $\OLId{latin-ordinary}{x} \in \OLId{latin-looped}{A}$،
+ونطبق $\OLId{latin-ordinary}{f}$ على~$\OLId{latin-ordinary}{x}$ فنحصل على $\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x}) = \OLId{latin-ordinary}{y} \in \OLId{latin-looped}{B}$، ثم نطبق $\OLId{latin-ordinary}{g}$
+على~$\OLId{latin-ordinary}{y}$ فنحصل على $\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x})) = \OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{y}) = \OLId{latin-ordinary}{z} \in \OLId{latin-looped}{C}$.
+\begin{figure}
+  \olasset[\OLClassicalDigits{2}\olphotowidth]{assets/diagrams/composition.tikz}
+  \caption{التركيب $\OLId{latin-ordinary}{g} \circ \OLId{latin-ordinary}{f}$ حاصل تركيب الدالتين $\OLId{latin-ordinary}{f}$ و~$\OLId{latin-ordinary}{g}$.}
+  \ollabel{fig:composition}
+\end{figure}
+\end{explain}
+
+\begin{defn}[التركيب]
+خذ $\OLId{latin-ordinary}{f}\colon \OLId{latin-looped}{A} \to \OLId{latin-looped}{B}$ و$\OLId{latin-ordinary}{g}\colon \OLId{latin-looped}{B} \to \OLId{latin-looped}{C}$ دالتين.
+\emph{تركيب} $\OLId{latin-ordinary}{f}$ مع~$\OLId{latin-ordinary}{g}$ هو $\comp{\OLId{latin-ordinary}{f}}{\OLId{latin-ordinary}{g}} \colon \OLId{latin-looped}{A} \to \OLId{latin-looped}{C}$،
+وتعريفه $(\comp{\OLId{latin-ordinary}{f}}{\OLId{latin-ordinary}{g}})(\OLId{latin-ordinary}{x}) = \OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x}))$.
+\end{defn}
+
+\begin{ex}
+لتكن $\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x}) = \OLId{latin-ordinary}{x} + \OLMathNumeral{1}$ و$\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{x}) = \OLMathNumeral{2}\OLId{latin-ordinary}{x}$. فبحسب
+$(\comp{\OLId{latin-ordinary}{f}}{\OLId{latin-ordinary}{g}})(\OLId{latin-ordinary}{x}) = \OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x}))$ نأخذ لاحق المدخل~$\OLId{latin-ordinary}{x}$ أولًا،
+ثم نضرب الحاصل في اثنين؛ فيكون $(\comp{\OLId{latin-ordinary}{f}}{\OLId{latin-ordinary}{g}})(\OLId{latin-ordinary}{x}) = \OLMathNumeral{2}(\OLId{latin-ordinary}{x}+\OLMathNumeral{1})$.
+\end{ex}
+
+\begin{prob}
+إذا كانت $\OLId{latin-ordinary}{f} \colon \OLId{latin-looped}{A} \to \OLId{latin-looped}{B}$ و$\OLId{latin-ordinary}{g} \colon \OLId{latin-looped}{B} \to \OLId{latin-looped}{C}$ كلتاهما !!{injective}،
+فبرهن على أن $\comp{\OLId{latin-ordinary}{f}}{\OLId{latin-ordinary}{g}}\colon \OLId{latin-looped}{A} \to \OLId{latin-looped}{C}$ هي !!{injective}.
+\end{prob}
+
+\begin{prob}
+إذا كانت $\OLId{latin-ordinary}{f} \colon \OLId{latin-looped}{A} \to \OLId{latin-looped}{B}$ و$\OLId{latin-ordinary}{g} \colon \OLId{latin-looped}{B} \to \OLId{latin-looped}{C}$ كلتاهما !!{surjective}،
+فبرهن على أن $\comp{\OLId{latin-ordinary}{f}}{\OLId{latin-ordinary}{g}}\colon \OLId{latin-looped}{A} \to \OLId{latin-looped}{C}$ هي !!{surjective}.
+\end{prob}
+
+\begin{prob}
+خذ $\OLId{latin-ordinary}{f} \colon \OLId{latin-looped}{A} \to \OLId{latin-looped}{B}$ و$\OLId{latin-ordinary}{g} \colon \OLId{latin-looped}{B} \to \OLId{latin-looped}{C}$، وأثبت أن رسم
+$\comp{\OLId{latin-ordinary}{f}}{\OLId{latin-ordinary}{g}}$ البياني هو $\OLId{latin-looped}{R}_\OLId{latin-ordinary}{f} \mid \OLId{latin-looped}{R}_\OLId{latin-ordinary}{g}$.
+\end{prob}
+
+\end{document}

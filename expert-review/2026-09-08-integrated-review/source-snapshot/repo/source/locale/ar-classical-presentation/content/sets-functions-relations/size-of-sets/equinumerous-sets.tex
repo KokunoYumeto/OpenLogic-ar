@@ -1,0 +1,80 @@
+% Part:sets-functions-relations
+% Chapter: size-of-sets
+% Section: equinumerous-sets
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid[ar]{sfr}{siz}{equ}
+
+\olsection{التساوي العددي}
+
+إن تصورنا المعتاد لحجم المجموعة يكفينا ما دامت منتهية؛ فإذا صرنا إلى المجموعات اللانهائية احتجنا إلى تحقيقه. ولإقامة مقارنة صورية بين مجموعتين، \emph{أيًّا} كان حجمهما، نبدأ بضبط معنى تساويهما في الحجم. وفي هذا يقول فريغه:
+\begin{quote}
+متى أراد النادل أن يتحقق من تساوي عدد السكاكين والصحون على المائدة، لم يحتج إلى عد هذه ولا تلك. بل يكفيه أن يجعل إلى يمين كل صحن سكينًا، بحيث لا تكون سكين على المائدة إلا عن يمين صحن. فتقابل الصحون والسكاكين حينئذ تقابلًا لا اشتراك فيه، وتكفي هذه العلاقة المكانية نفسها لإقامته. \citep[\S70]{Frege1884}
+\end{quote}
+ونصوغ المعنى الذي يكشف عنه هذا المثال في التعريف الآتي.
+
+\begin{defn}\ollabel{comparisondef}
+نقول إن $\OLId{latin-looped}{A}$ \emph{متساوية عددًا} مع $\OLId{latin-looped}{B}$، ونرمز إلى ذلك بـ$\cardeq{\OLId{latin-looped}{A}}{\OLId{latin-looped}{B}}$، إذا وفقط إذا وجدت !!a{bijection} $\OLId{latin-ordinary}{f} \colon \OLId{latin-looped}{A} \to \OLId{latin-looped}{B}$.
+\end{defn}
+
+\begin{prop}\ollabel{equinumerosityisequi}
+علاقة التساوي العددي من علاقات التكافؤ.
+\end{prop}
+
+\begin{proof}
+يكفينا إثبات الانعكاسية والتناظر والتعدي. ولتكن $\OLId{latin-looped}{A}, \OLId{latin-looped}{B}$ و$\OLId{latin-looped}{C}$ مجموعات كيف اتفقت.
+
+\emph{الانعكاسية.} نأخذ دالة الهوية $\Id{\OLId{latin-looped}{A}} \colon \OLId{latin-looped}{A} \to \OLId{latin-looped}{A}$، المعرفة بـ$\Id{\OLId{latin-looped}{A}} (\OLId{latin-ordinary}{x}) = \OLId{latin-ordinary}{x}$ لكل $\OLId{latin-ordinary}{x} \in \OLId{latin-looped}{A}$. فهي !!a{bijection}، وبها يثبت $\cardeq{\OLId{latin-looped}{A}}{\OLId{latin-looped}{A}}$.
+
+\emph{التناظر.} من $\cardeq{\OLId{latin-looped}{A}}{\OLId{latin-looped}{B}}$ نحصل على !!a{bijection} $\OLId{latin-ordinary}{f}\colon \OLId{latin-looped}{A} \to \OLId{latin-looped}{B}$. ولكون $\OLId{latin-ordinary}{f}$ !!{bijective} توجد دالتها العكسية $\OLId{latin-ordinary}{f}^{-\OLMathNumeral{1}}$، وهي !!{bijective} أيضًا. فالدالة $\OLId{latin-ordinary}{f}^{-\OLMathNumeral{1}}\colon \OLId{latin-looped}{B} \to \OLId{latin-looped}{A}$ !!a{bijection} تشهد بأن $\cardeq{\OLId{latin-looped}{B}}{\OLId{latin-looped}{A}}$.
+
+\emph{التعدي.} إذا كان $\cardeq{\OLId{latin-looped}{A}}{\OLId{latin-looped}{B}}$ و$\cardeq{\OLId{latin-looped}{B}}{\OLId{latin-looped}{C}}$، وجدنا !!{bijection}s $\OLId{latin-ordinary}{f}\colon \OLId{latin-looped}{A} \to \OLId{latin-looped}{B}$ و$\OLId{latin-ordinary}{g}\colon \OLId{latin-looped}{B} \to
+\OLId{latin-looped}{C}$. والدالة المركبة منهما $\comp{\OLId{latin-ordinary}{f}}{\OLId{latin-ordinary}{g}}\colon \OLId{latin-looped}{A} \to \OLId{latin-looped}{C}$ !!{bijective}، فيثبت بها $\cardeq{\OLId{latin-looped}{A}}{\OLId{latin-looped}{C}}$.
+\end{proof}
+
+\begin{prop}
+متى كان $\cardeq{\OLId{latin-looped}{A}}{\OLId{latin-looped}{B}}$، تكافأ كون $\OLId{latin-looped}{A}$ !!{enumerable} وكون $\OLId{latin-looped}{B}$ كذلك.
+\end{prop}
+
+\begin{editorial}
+مبنى البرهان الآتي على \olref[enm]{defn:enumerable} عند إدراج \olref[enm]{sec}؛ وإلا فمبناه على \olref[enm-alt]{defn:enumerable}.
+\end{editorial}
+
+\begin{proof}
+ليكن $\cardeq{\OLId{latin-looped}{A}}{\OLId{latin-looped}{B}}$، ولنأخذ !!{bijection} $\OLId{latin-ordinary}{f} \colon \OLId{latin-looped}{A}
+\to \OLId{latin-looped}{B}$. وافرض أن $\OLId{latin-looped}{A}$ !!{enumerable}.
+\oliflabeldef{sfr:siz:enm:defn:enumerable}{
+فإما $\OLId{latin-looped}{A} = \emptyset$، وإما أن توجد دالة~!!a{surjective} $\OLId{latin-ordinary}{g}\colon \PosInt \to \OLId{latin-looped}{A}$. فإن كان $\OLId{latin-looped}{A} = \emptyset$ لزم $\OLId{latin-looped}{B} = \emptyset$؛ إذ لو لم تكن الثانية خالية، لوجد !!a{element}~$\OLId{latin-ordinary}{y} \in \OLId{latin-looped}{B}$ ولم يوجد $\OLId{latin-ordinary}{x} \in
+\OLId{latin-looped}{A}$ يحقق $\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x}) = \OLId{latin-ordinary}{y}$. وأما إذا وجدت $\OLId{latin-ordinary}{g}\colon \PosInt \to \OLId{latin-looped}{A}$ !!{surjective}، فالدالة المركبة $\comp{\OLId{latin-ordinary}{g}}{\OLId{latin-ordinary}{f}} \colon \PosInt \to \OLId{latin-looped}{B}$ !!{surjective}. وبيانه أن نأخذ $\OLId{latin-ordinary}{y} \in \OLId{latin-looped}{B}$؛ فالدالة $\OLId{latin-ordinary}{f}$ !!{surjective}، ولذلك يوجد $\OLId{latin-ordinary}{x} \in \OLId{latin-looped}{A}$ يحقق $\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x}) = \OLId{latin-ordinary}{y}$. ثم إن $\OLId{latin-ordinary}{g}$ !!{surjective}، فيوجد $\OLId{latin-ordinary}{n} \in \PosInt$ يحقق $\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{n}) =
+\OLId{latin-ordinary}{x}$. فينتج
+\[
+(\comp{\OLId{latin-ordinary}{g}}{\OLId{latin-ordinary}{f}})(\OLId{latin-ordinary}{n}) = \OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{n})) = \OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x}) = \OLId{latin-ordinary}{y}
+\]
+فتكون $\comp{\OLId{latin-ordinary}{g}}{\OLId{latin-ordinary}{f}}$ !!{surjective}. وبذلك تكون $\comp{\OLId{latin-ordinary}{g}}{\OLId{latin-ordinary}{f}}$ تعدادًا لـ~$\OLId{latin-looped}{B}$، وتكون $\OLId{latin-looped}{B}$~!!{enumerable}.}
+{
+فإما $\OLId{latin-looped}{A}  = \emptyset$، وإما أن توجد !!a{bijection}~$\OLId{latin-ordinary}{g}$ مداها $\OLId{latin-looped}{A}$، ومجالها $\Nat$ أو مقطع ابتدائي من الأعداد الطبيعية. فإن كان $\OLId{latin-looped}{A} = \emptyset$ لزم $\OLId{latin-looped}{B} =
+\emptyset$؛ إذ لو لم تكن الثانية خالية، لوجد~$\OLId{latin-ordinary}{y} \in \OLId{latin-looped}{B}$ ولم يوجد $\OLId{latin-ordinary}{x}
+\in \OLId{latin-looped}{A}$ يحقق $\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x}) = \OLId{latin-ordinary}{y}$. وأما مع وجود !!{bijection}~$\OLId{latin-ordinary}{g}$، فإن $\comp{\OLId{latin-ordinary}{g}}{\OLId{latin-ordinary}{f}}$ !!a{bijection} مداها~$\OLId{latin-looped}{B}$ ومجالها هو مجال~$\OLId{latin-ordinary}{g}$؛ أي $\Nat$ أو مقطع ابتدائي منه. ومن ثم تكون $\OLId{latin-looped}{B}$ !!{enumerable}.}
+
+وأما إن كانت $\OLId{latin-looped}{B}$ !!{enumerable}، فإن $\OLId{latin-looped}{A}$ !!{enumerable} بالحجة نفسها، إذا استعملنا !!{bijection} $\OLId{latin-ordinary}{f}^{-\OLMathNumeral{1}}\colon \OLId{latin-looped}{B} \to \OLId{latin-looped}{A}$ في موضع~$\OLId{latin-ordinary}{f}$.
+\end{proof}
+
+\begin{editorial}
+\textbf{تنبيه تصحيحي على الأصل (OLSIZ-006).}
+ورد $\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{x})=\OLId{latin-ordinary}{y}$ مرتين في فرع المجموعة الخالية قبل تعريف $\OLId{latin-ordinary}{g}$؛ والدالة
+المتقابلة التي يقتضيها السياق هي $\OLId{latin-ordinary}{f}$، فصُحح الموضعان إلى $\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x})=\OLId{latin-ordinary}{y}$.
+\end{editorial}
+
+\begin{prob}
+إذا تحقق $\cardeq{\OLId{latin-looped}{A}}{\OLId{latin-looped}{C}}$ و$\cardeq{\OLId{latin-looped}{B}}{\OLId{latin-looped}{D}}$، مع $\OLId{latin-looped}{A} \cap \OLId{latin-looped}{B} =
+\OLId{latin-looped}{C} \cap \OLId{latin-looped}{D} = \emptyset$، فبرهن على $\cardeq{\OLId{latin-looped}{A} \cup \OLId{latin-looped}{B}}{\OLId{latin-looped}{C} \cup \OLId{latin-looped}{D}}$.
+\end{prob}
+
+\begin{prob}
+لتكن $\OLId{latin-looped}{A}$ لا نهائية و!!{enumerable}. أثبت حينئذ $\cardeq{\OLId{latin-looped}{A}}{\Nat}$.
+\end{prob}
+
+\end{document}

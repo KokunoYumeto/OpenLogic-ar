@@ -1,0 +1,170 @@
+% Part: second-order-logic
+% Chapter: sol-and-set-theory
+% Section: power-of-continuum
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sol}{set}{pow}
+
+\olsection{قوة المتصل}
+
+\begin{explain}
+التكميم في الرتبة الثانية يتناول مجموعات !!{domain} الجزئية،
+ولا يتناول مجموعات تلك المجموعات الجزئية من !!{domain}.
+ولو أردنا هذا التكميم مباشرة لاحتجنا إلى منطق \emph{الرتبة الثالثة}.
+فمثلًا، مبرهنة كانتور تنفي وجود دالة !!{injective} من مجموعة
+قوى مجموعة إلى المجموعة نفسها. وقد نحاول أن نقول:
+«لكل مجموعة~$\OLId{latin-looped}{X}$ ولكل مجموعة~$\OLId{latin-looped}{P}$، إذا كانت~$\OLId{latin-looped}{P}$ مجموعة
+قوى~$\OLId{latin-looped}{X}$، فليس~$\cardle{\OLId{latin-looped}{P}}{\OLId{latin-looped}{X}}$».
+لكن كون~$\OLId{latin-looped}{P}$ مجموعة قوى~$\OLId{latin-looped}{X}$ معناه أن !!{element}s~$\OLId{latin-looped}{P}$
+هي مجموعات~$\OLId{latin-looped}{X}$ الجزئية كلها ولا غيرها، فنحتاج إلى عبارة
+من نحو~$\lforall[\OLId{latin-looped}{Y}][(\OLId{latin-looped}{P}(\OLId{latin-looped}{Y}) \liff \OLId{latin-looped}{Y} \subseteq \OLId{latin-looped}{X})]$.
+وموضع الإشكال هو~$\OLId{latin-looped}{P}(\OLId{latin-looped}{Y})$؛ إذ ليست هذه !!a{formula} من الرتبة
+الثانية: متغير العلاقة الأحادي الموضع، كـ$\OLId{latin-looped}{P}$، لا يأخذ في موضع
+وسيطه إلا حدًا.
+
+ومع ذلك يمكن \emph{محاكاة} التكميم على مجموعات المجموعات
+إذا اتسع المجال لذلك. نستخدم علاقة ثنائية الموضع~$\OLId{latin-looped}{R}$،
+تربط !!{element}s من !!{domain} بـ!!{element}s من !!{domain}.
+فمتى أعطينا~$\OLId{latin-looped}{R}$ جمعنا !!{element}s التي يرتبط بها عنصر~$\OLId{latin-ordinary}{x}$
+بالعلاقة~$\OLId{latin-looped}{R}$. وتكون~$\Setabs{\OLId{latin-ordinary}{y} \in \Domain{\OLId{latin-looped}{M}}}{\OLId{latin-looped}{R}(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y})}$
+المجموعة التي نرمز إليها بـ$\OLId{latin-ordinary}{x}$.
+وعكسًا، لتكن~$\OLId{latin-looped}{Z} \subseteq \Pow{\Domain{\OLId{latin-looped}{M}}}$ مجموعة من
+مجموعات~$\Domain{\OLId{latin-looped}{M}}$ الجزئية. فإن كان في~$\Domain{\OLId{latin-looped}{M}}$ من
+!!{element}s ما لا يقل عددًا عن مجموعات~$\OLId{latin-looped}{Z}$، وجدت
+علاقة~$\OLId{latin-looped}{R} \subseteq \Domain{\OLId{latin-looped}{M}}^\OLMathNumeral{2}$ يكون بها لكل مجموعة رمز:
+بوساطة~$\OLId{latin-looped}{R}$ يرمز بعض~$\OLId{latin-ordinary}{x}$ إلى كل~$\OLId{latin-looped}{Y} \in \OLId{latin-looped}{Z}$.
+\end{explain}
+
+\begin{defn}
+متى كان~$\OLId{latin-looped}{R} \subseteq \Domain{\OLId{latin-looped}{M}}^\OLMathNumeral{2}$ قلنا إن
+\emph{$\OLId{latin-ordinary}{x}$ يرمز بالعلاقة~$\OLId{latin-looped}{R}$} إلى
+$\Setabs{\OLId{latin-ordinary}{y} \in \Domain{\OLId{latin-looped}{M}}}{\OLId{latin-looped}{R}(\OLId{latin-ordinary}{x}, \OLId{latin-ordinary}{y})}$.
+\end{defn}
+
+إذا كان !!a{element}~$\OLId{latin-ordinary}{x} \in \Domain{\OLId{latin-looped}{M}}$ يرمز
+بالعلاقة~$\OLId{latin-looped}{R}$ إلى مجموعة~$\OLId{latin-looped}{Z} \subseteq \Domain{\OLId{latin-looped}{M}}$،
+كانت المجموعة~$\OLId{latin-looped}{Y} \subseteq \Domain{\OLId{latin-looped}{M}}$ ترمز إلى جملة من المجموعات:
+ما ترمز إليه !!{element}s~$\OLId{latin-looped}{Y}$.
+وبهذا قد تكون~$\OLId{latin-looped}{Y}$ رمزًا، بالعلاقة~$\OLId{latin-looped}{R}$، لـ$\Pow{\OLId{latin-looped}{X}}$.
+وشرط ذلك أن يكون لكل~$\OLId{latin-looped}{Z} \subseteq \OLId{latin-looped}{X}$ عنصر~$\OLId{latin-ordinary}{x} \in \OLId{latin-looped}{Y}$
+يرمز بالعلاقة~$\OLId{latin-looped}{R}$ إلى~$\OLId{latin-looped}{Z}$، وأن يكون كل~$\OLId{latin-ordinary}{x} \in \OLId{latin-looped}{Y}$
+رمزًا بالعلاقة~$\OLId{latin-looped}{R}$ لمجموعة~$\OLId{latin-looped}{Z} \subseteq \OLId{latin-looped}{X}$.
+
+\begin{prop}
+!!{formula}
+  \[
+  \fn{Codes}(\OLId{latin-ordinary}{x}, \OLId{latin-looped}{R}, \OLId{latin-looped}{Z}) \ident \lforall[\OLId{latin-ordinary}{y}][(\OLId{latin-looped}{Z}(\OLId{latin-ordinary}{y}) \liff
+    \OLId{latin-looped}{R}(\OLId{latin-ordinary}{x}, \OLId{latin-ordinary}{y}))]
+  \]
+تقرر أن~$\OLId{latin-ordinary}{s}(\OLId{latin-ordinary}{x})$ يرمز بالعلاقة~$\OLId{latin-ordinary}{s}(\OLId{latin-looped}{R})$ إلى~$\OLId{latin-ordinary}{s}(\OLId{latin-looped}{Z})$.
+وأما !!{formula}
+\begin{multline*}
+  \fn{Pow}(\OLId{latin-looped}{Y}, \OLId{latin-looped}{R}, \OLId{latin-looped}{X}) \ident \\
+  \lforall[\OLId{latin-looped}{Z}][(\OLId{latin-looped}{Z} \subseteq \OLId{latin-looped}{X} \lif \lexists[\OLId{latin-ordinary}{x}][(\OLId{latin-looped}{Y}(\OLId{latin-ordinary}{x}) \land
+    \fn{Codes}(\OLId{latin-ordinary}{x}, \OLId{latin-looped}{R}, \OLId{latin-looped}{Z}))])] \land {} \\ \lforall[\OLId{latin-ordinary}{x}][(\OLId{latin-looped}{Y}(\OLId{latin-ordinary}{x}) \lif
+  \lforall[\OLId{latin-looped}{Z}][(\fn{Codes}(\OLId{latin-ordinary}{x}, \OLId{latin-looped}{R}, \OLId{latin-looped}{Z}) \lif \OLId{latin-looped}{Z} \subseteq \OLId{latin-looped}{X})])]
+\end{multline*}
+فتقرر أن~$\OLId{latin-ordinary}{s}(\OLId{latin-looped}{Y})$ ترمز بالعلاقة~$\OLId{latin-ordinary}{s}(\OLId{latin-looped}{R})$ إلى مجموعة قوى~$\OLId{latin-ordinary}{s}(\OLId{latin-looped}{X})$؛
+أي إن عناصر~$\OLId{latin-ordinary}{s}(\OLId{latin-looped}{Y})$ ترمز بالعلاقة~$\OLId{latin-ordinary}{s}(\OLId{latin-looped}{R})$ إلى مجموعات~$\OLId{latin-ordinary}{s}(\OLId{latin-looped}{X})$
+الجزئية كلها دون غيرها.
+\end{prop}
+
+\begin{explain}
+بهذا الترميز نعبّر عن قضايا مجموعة القوى، فنجعل التكميم على
+رموز المجموعات الجزئية عوضًا عن المجموعات نفسها.
+ومن ذلك أن نصوغ مبرهنة كانتور بنفي وجود دالة !!{injective}
+من أي مجموعة~$\OLId{latin-looped}{Y}$ ترمز بالعلاقة~$\OLId{latin-looped}{R}$ إلى مجموعة قوى~$\OLId{latin-looped}{X}$، إلى~$\OLId{latin-looped}{X}$ نفسها.
+\end{explain}
+
+\begin{prop}
+الجملة التالية صحيحة منطقيًا:
+\begin{multline*}
+  \lforall[\OLId{latin-looped}{X}][\lforall[\OLId{latin-looped}{Y}][\lforall[\OLId{latin-looped}{R}][(\fn{Pow}(\OLId{latin-looped}{Y}, \OLId{latin-looped}{R}, \OLId{latin-looped}{X}) \lif \\
+      \lnot \lexists[\OLId{latin-ordinary}{u}][(\lforall[\OLId{latin-ordinary}{x}][\lforall[\OLId{latin-ordinary}{y}][((\OLId{latin-looped}{Y}(\OLId{latin-ordinary}{x}) \land \OLId{latin-looped}{Y}(\OLId{latin-ordinary}{y}) \land
+            \eq[\OLId{latin-ordinary}{u}(\OLId{latin-ordinary}{x})][\OLId{latin-ordinary}{u}(\OLId{latin-ordinary}{y})]) \lif
+            \eq[\OLId{latin-ordinary}{x}][\OLId{latin-ordinary}{y}])]] \land {}\\
+        \lforall[\OLId{latin-ordinary}{x}][(\OLId{latin-looped}{Y}(\OLId{latin-ordinary}{x}) \lif \OLId{latin-looped}{X}(\OLId{latin-ordinary}{u}(\OLId{latin-ordinary}{x})))])])]]]
+\end{multline*}
+\end{prop}
+
+\begin{explain}
+مجموعة قوى مجموعة !!a{denumerable} هي !!{nonenumerable}؛
+فأصليتها تزيد على أصلية أي مجموعة !!{denumerable}، أي
+$\aleph_\OLMathNumeral{0}$. وحجم~$\Pow{\Nat}$ هو «قوة المتصل»، إذ يساوي
+حجم مجموعة نقاط المستقيم الحقيقي~$\Real$.
+فإن اتسع !!{domain} لترميز مجموعة قوى مجموعة !!a{denumerable}،
+  أمكن أن نصف مجموعة بأنها من حجم المتصل بقولنا إنها تكافئ
+  عدديًا مجموعة~$\OLId{latin-looped}{Y}$ ترمز مجموعة قوى مجموعة~$\OLId{latin-looped}{X}$
+  من الحجم~$\aleph_\OLMathNumeral{0}$، بشرط أن يكون لكل مجموعة جزئية من~$\OLId{latin-looped}{X}$
+  رمز واحد لا غير في~$\OLId{latin-looped}{Y}$؛ وهو شرط التفرّد المثبت في
+  \(\fn{Cont}\) أدناه. فأما الترميز غير المتفرّد فلا يفيد إلا
+  حدًا أدنى لحجم~$\OLId{latin-looped}{Y}$. وإن ضاق المجال عن ذلك، فلم توجد
+فيه مجموعة جزئية مكافئة عدديًا لـ$\Real$، امتنع وجود علاقة
+  ترمز~$\Pow{\OLId{latin-looped}{X}}$ أيضًا.
+% تصحيح مصدر (0340-I1، 0340-I2): قُيد الحقن بالمجموعة Y وصُرّح بشرط تفرد رموز مجموعة القوى.
+\end{explain}
+
+\begin{prop}
+إذا كان~$\cardle{\Real}{\Domain{\OLId{latin-looped}{M}}}$ كانت !!{formula}
+\begin{multline*}
+\fn{Cont}(\OLId{latin-looped}{Y}) \ident 
+\lexists[\OLId{latin-looped}{X}][\lexists[\OLId{latin-looped}{R}][((\fn{Aleph}_\OLMathNumeral{0}(\OLId{latin-looped}{X}) \land
+      \fn{Pow}(\OLId{latin-looped}{Y}, \OLId{latin-looped}{R}, \OLId{latin-looped}{X})) \land \\ 
+      \lforall[\OLId{latin-ordinary}{x}][\lforall[\OLId{latin-ordinary}{y}][((\OLId{latin-looped}{Y}(\OLId{latin-ordinary}{x}) \land {} 
+      \OLId{latin-looped}{Y}(\OLId{latin-ordinary}{y}) \land \lforall[\OLId{latin-ordinary}{z}][\OLId{latin-looped}{R}(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{z}) \liff \OLId{latin-looped}{R}(\OLId{latin-ordinary}{y},\OLId{latin-ordinary}{z})]) \lif \eq[\OLId{latin-ordinary}{x}][\OLId{latin-ordinary}{y}])]])]]
+\end{multline*}
+تعبيرًا عن~$\cardeq{\OLId{latin-ordinary}{s}(\OLId{latin-looped}{Y})}{\Real}$.
+\end{prop}
+
+\begin{proof}
+تقرر~$\fn{Pow}(\OLId{latin-looped}{Y}, \OLId{latin-looped}{R}, \OLId{latin-looped}{X})$ أن~$\OLId{latin-ordinary}{s}(\OLId{latin-looped}{Y})$ ترمز
+بالعلاقة~$\OLId{latin-ordinary}{s}(\OLId{latin-looped}{R})$ إلى مجموعة قوى~$\OLId{latin-ordinary}{s}(\OLId{latin-looped}{X})$؛
+وتقرر~$\fn{Aleph}_\OLMathNumeral{0}(\OLId{latin-looped}{X})$ أن المجموعة الأصلية قابلة للتعداد.
+فـ$\OLId{latin-ordinary}{s}(\OLId{latin-looped}{Y})$ لا يقل حجمها عن قوة المتصل، وقد يزيد عليها إذا
+اجتمعت عناصر عدة من~$\OLId{latin-ordinary}{s}(\OLId{latin-looped}{Y})$ ترمز إلى الجزء نفسه من~$\OLId{latin-looped}{X}$.
+وإنما يمنع المقترن الأخير هذا الاحتمال؛ إذ يشترط أن يكون الربط
+بالعلاقة~$\OLId{latin-ordinary}{s}(\OLId{latin-looped}{R})$ بين عناصر~$\OLId{latin-ordinary}{s}(\OLId{latin-looped}{Y})$ ومجموعات~$\OLId{latin-ordinary}{s}(\OLId{latin-looped}{X})$ الجزئية
+!!{injective}.
+\end{proof}
+
+\begin{prop}
+يتحقق~$\cardeq{\Domain{\OLId{latin-looped}{M}}}{\Real}$ إذا وفقط إذا
+\begin{multline*}
+  \Sat{\OLId{latin-looped}{M}}{\lexists[\OLId{latin-looped}{X}][\lexists[\OLId{latin-looped}{Y}][\lexists[\OLId{latin-looped}{R}][(\fn{Aleph}_\OLMathNumeral{0}(\OLId{latin-looped}{X}) \land \fn{Pow}(\OLId{latin-looped}{Y}, \OLId{latin-looped}{R}, \OLId{latin-looped}{X}) \land {}\\
+      \lforall[\OLId{latin-ordinary}{x}][\lforall[\OLId{latin-ordinary}{y}][((\OLId{latin-looped}{Y}(\OLId{latin-ordinary}{x}) \land \OLId{latin-looped}{Y}(\OLId{latin-ordinary}{y}) \land
+        \lforall[\OLId{latin-ordinary}{z}][\OLId{latin-looped}{R}(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{z}) \liff \OLId{latin-looped}{R}(\OLId{latin-ordinary}{y},\OLId{latin-ordinary}{z})]) \lif \eq[\OLId{latin-ordinary}{x}][\OLId{latin-ordinary}{y}])]] \land {}\\
+      \lexists[\OLId{latin-ordinary}{u}][(\lforall[\OLId{latin-ordinary}{x}][\lforall[\OLId{latin-ordinary}{y}][(\eq[\OLId{latin-ordinary}{u}(\OLId{latin-ordinary}{x})][\OLId{latin-ordinary}{u}(\OLId{latin-ordinary}{y})] \lif \eq[\OLId{latin-ordinary}{x}][\OLId{latin-ordinary}{y}])]] \land {}
+        \\\lforall[\OLId{latin-ordinary}{x}][\OLId{latin-looped}{Y}(\OLId{latin-ordinary}{u}(\OLId{latin-ordinary}{x}))] \land {}
+        \\\lforall[\OLId{latin-ordinary}{y}][(\OLId{latin-looped}{Y}(\OLId{latin-ordinary}{y}) \lif \lexists[\OLId{latin-ordinary}{x}][\eq[\OLId{latin-ordinary}{y}][\OLId{latin-ordinary}{u}(\OLId{latin-ordinary}{x})]])])])]]]}. 
+\end{multline*}
+\end{prop}
+
+\begin{explain}
+مؤدى فرضية المتصل أن حجم المتصل هو أول أصلية
+!!{nonenumerable}؛ أي إن حجم~$\Pow{\Nat}$ هو~$\aleph_\OLMathNumeral{1}$.
+\end{explain}
+
+\begin{prop}
+صدق فرضية المتصل يكافئ الصحة المنطقية للجملة
+\[\fn{CH} \ident
+\lforall[\OLId{latin-looped}{X}][(\fn{Aleph}_\OLMathNumeral{1}(\OLId{latin-looped}{X}) \liff \fn{Cont}(\OLId{latin-looped}{X}))]\]
+\end{prop}
+
+ولا يلزم من هذا أن تكون~$\lnot \fn{CH}$ صحيحة منطقيًا إذا
+وفقط إذا كذبت فرضية المتصل. فالمجال !!a{enumerable} لا يشتمل
+على مجموعة جزئية حجمها~$\aleph_\OLMathNumeral{1}$، ولا على مجموعة جزئية
+من حجم المتصل. لذلك تصدق~$\fn{CH}$ دائمًا في مجال
+!!a{enumerable}. غير أن لنفي الفرضية جملة أخرى تكون
+صحيحة منطقيًا إذا وفقط إذا كذبت الفرضية:
+
+\begin{prop}
+كذب فرضية المتصل يكافئ الصحة المنطقية للجملة
+\[\fn{NCH} \ident
+\lforall[\OLId{latin-looped}{X}][(\fn{Cont}(\OLId{latin-looped}{X}) \lif \lexists[\OLId{latin-looped}{Y}][(\OLId{latin-looped}{Y} \subseteq \OLId{latin-looped}{X} \land \lnot
+    \fn{Count}(\OLId{latin-looped}{Y}) \land \lnot \cardeq{\OLId{latin-looped}{X}}{\OLId{latin-looped}{Y}})])]\]
+\end{prop}
+
+\end{document}

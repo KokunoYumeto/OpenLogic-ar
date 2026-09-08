@@ -1,0 +1,223 @@
+% Part: second-order-logic
+% Chapter: syntax-and-semantics
+% Section: satisfaction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sol}{syn}{sat}
+
+\olsection{الإرضاء}
+
+\begin{explain}
+تعريف علاقة الإرضاء~$\Sat{M}{!A}[s]$ لـ!!{formula}s الرتبة الثانية
+يقتضي أن تشمل تعريفاتنا !!{variable}s هذه الرتبة. أما مفهوم
+!!a{structure} فلا يتغير بالانتقال من الرتبة الأولى إلى الثانية.
+وإنما يتغير تعيين المتغيرات~$s$؛ فلا يكفي فيه إسناد القيم إلى
+!!{variable}s الرتبة الأولى، بل لا بد من إسناد ما يلائم
+!!{variable}s الرتبة الثانية أيضًا.
+\end{explain}
+
+\begin{defn}[تعيين المتغيرات]
+\emph{تعيين المتغيرات}~$s$ لـ!!a{structure}~$\Struct{M}$ دالة
+تختص كل متغير بما يأتي:
+\begin{enumerate}
+\item !!{variable} الأفراد~$\Obj{v_i}$ بعنصر من~$\Domain M$، فتكون
+  $s(\Obj{v_i}) \in \Domain{M}$؛
+\item متغير العلاقة ذي~$n$ مواضع~$\Obj{V_i^n}$ بعلاقة ذات~$n$
+  مواضع على~$\Domain{M}$، فتكون
+  $s(\Obj{V_i^n}) \subseteq \Domain{M}^n$؛
+\item متغير الدالة ذي~$n$ مواضع~$\Obj{u_i^n}$ بدالة ذات~$n$ مواضع
+  من~$\Domain{M}^n$ إلى~$\Domain{M}$، أي
+  $s(\Obj{u_i^n})\colon \Domain{M}^n \to \Domain{M}$؛
+\end{enumerate}
+\end{defn}
+
+\begin{explain}
+تعطي~!!^a{structure} !!a{value} لكل~!!{constant} و!!{function}،
+وعلاقة لكل محمول. وأما تعيين متغيرات الرتبة الثانية فيعطي متغيرات
+الأفراد أفرادًا، ومتغيرات الدوال دوال، ومتغيرات العلاقات علاقات.
+فإذا اجتمع هذان أمكن تعيين قيمة كل حد.
+\end{explain}
+
+\begin{defn}[\usetoken{S}{value} حد]
+ليكن~$t$ حدًا من اللغة~$\Lang L$، ولتكن~$\Struct M$
+!!a{structure} للغة~$\Lang L$، وليكن~$s$ تعيين~!!a{variable}
+لـ$\Struct M$. نعرّف \emph{!!{value}}~$\Value{t}{M}[s]$ ببنود
+تعريف قيمة حدود الرتبة الأولى، ونزيد عليها هذا البند:
+\begin{quote}
+\indcase{t}{\Atom{u}{t_1, \ldots, t_n}}{
+\[
+\Value{\indfrm}{M}[s] = s(u)(\Value{t_1}{M}[s], \ldots,
+\Value{t_n}{M}[s]).
+\]}
+\end{quote}
+\end{defn}
+
+\begin{defn}[المغاير في~$x$]
+ليكن~$s$ تعيين~!!a{variable} لـ!!a{structure}~$\Struct M$.
+كل تعيين~!!{variable}~$s'$ لـ$\Struct M$ يوافق~$s$ في جميع
+المواضع، ولا يجوز أن يخالفه إلا في القيمة المسندة إلى~$x$، يسمى
+\emph{مغايرًا في~$x$} لـ$s$. ومتى كان
+$s'$ مغايرًا في~$x$ لـ$s$ رمزنا إلى ذلك
+بـ$\varAssign{s'}{s}{x}$. ولا نشترط وقوع الاختلاف فعلًا.
+وكذلك يعرّف المغاير في متغير الرتبة الثانية~$X$ أو~$u$.
+\end{defn}
+
+\begin{defn}
+  ليكن~$s$ تعيين~!!a{variable} لـ!!a{structure}~$\Struct M$،
+  وليكن~$m \in \Domain{M}$. نرمز بـ$\Subst{s}{m}{x}$ إلى
+  تعيين~!!{variable} الذي يرد تعريفه في المعادلة:
+  \[\Subst{s}{m}{x}(y) = \begin{cases}
+    m & \text{إذا كان } y \ident x\\
+    s(y) & \text{فيما عدا ذلك،}
+  \end{cases}\]
+  وليكن~$X$ !!{variable} علاقة ذا~$n$ مواضع، ولتكن~$R \subseteq
+  \Domain{M}^n$. عندئذ يكون~$\Subst{s}{R}{X}$ تعيين~!!{variable}
+  المحدد بالمعادلة:
+  \[\Subst{s}{R}{X}(y) = \begin{cases}
+    R & \text{إذا كان } y \ident X\\
+    s(y) & \text{فيما عدا ذلك}.
+  \end{cases}\]
+  وأما إذا كان~$u$ !!{variable} دالة ذا~$n$ مواضع، وكانت
+  $f\colon \Domain{M}^n \to \Domain{M}$، فإن~$\Subst{s}{f}{u}$
+  تعيين~!!{variable} المحدد بالمعادلة:
+  \[\Subst{s}{f}{u}(y) = \begin{cases}
+    f & \text{إذا كان } y \ident u\\
+    s(y) & \text{فيما عدا ذلك}.
+  \end{cases}\]
+  ولا يختص~$y$ في هذه الحالات برتبة؛ فيجوز أن يكون أي~!!{variable}
+  من الرتبة الأولى أو الثانية.
+\end{defn}
+
+\begin{defn}[الإرضاء]
+نعرف إرضاء !!{formula}s الرتبة الثانية~$!A$ ببنود
+\olref[fol][syn][sat]{defn:satisfaction}، ونضيف إليها:
+\begin{enumerate}
+\item \indcase{!A}{\Atom{X^n}{t_1, \dots, t_n}}{$\Sat{M}{\indfrm}[s]$
+  إذا وفقط إذا كان
+  $\langle \Value{t_1}{M}[s], \dots, \Value{t_n}{M}[s] \rangle \in
+  s(X^n)$.}
+\tagitem{prvAll}{%
+  \indcase{!A}{\lforall[X][!B]}{$\Sat{M}{\indfrm}[s]$ إذا وفقط إذا
+  كان لكل~$R \subseteq \Domain{M}^n$
+  $\Sat{M}{!B}[\Subst{s}{R}{X}]$.}}{}
+
+\tagitem{prvEx}{%
+  \indcase{!A}{\lexists[X][!B]}{$\Sat{M}{\indfrm}[s]$ إذا وفقط إذا
+  وجد~$R \subseteq \Domain{M}^n$ واحد على الأقل يحقق
+  $\Sat{M}{!B}[\Subst{s}{R}{X}]$.}}{}
+
+\tagitem{prvAll}{%
+  \indcase{!A}{\lforall[u][!B]}{$\Sat{M}{\indfrm}[s]$ إذا وفقط إذا
+  كان لكل~$f\colon \Domain{M}^n \to \Domain{M}$
+  $\Sat{M}{!B}[\Subst{s}{f}{u}]$.}}{}
+
+\tagitem{prvEx}{%
+  \indcase{!A}{\lexists[u][!B]}{$\Sat{M}{\indfrm}[s]$ إذا وفقط إذا
+  وجدت~$f\colon \Domain{M}^n \to \Domain{M}$ واحدة على الأقل تحقق
+  $\Sat{M}{!B}[\Subst{s}{f}{u}]$.}}{}
+\end{enumerate}
+\end{defn}
+
+\begin{ex}
+  لننظر في !!{formula}~$\lforall[z][(\Atom{X}{z} \liff \lnot
+    \Atom{Y}{z})]$. ليس فيها تكميم من الرتبة الثانية، وإن كانت
+  !!{variable}s الرتبة الثانية~$X$ و$Y$ واردة فيها؛ ونعد كلا
+  المتغيرين هنا أحادي الموضع. وأما !!{sentence} المناظرة من الرتبة
+  الأولى
+  $\lforall[z][(\Atom{P}{z} \liff \lnot \Atom{R}{z})]$ فمؤداها أن
+  ما يندرج تحت تأويل~$P$ هو بعينه ما لا يندرج تحت تأويل~$R$ في المجال.
+  ففي~!!a{structure} يتحدد تأويل~!!a{predicate}~$P$
+  بالتأويل~$\Assign{P}{M}$. وأما !!{variable}s الرتبة الثانية
+  من قبيل~$X$ و$Y$ فلا تتولى !!{structure} نفسها تأويلها، بل يتولاه
+  تعيين~!!a{variable}. لذلك ليست !!{formula} الرتبة الثانية هذه
+  !!a{sentence}؛ إذ تشتمل على !!{variable}s حرة هي~$X$ و$Y$.
+  ولا يكفي في إرضائها ذكر !!a{structure}~$\Struct{M}$، حتى يضم
+  إليها تعيين~!!a{variable}~$s$.
+
+  يكون~$\Sat{M}{\lforall[z][(\Atom{X}{z} \liff \lnot
+    \Atom{Y}{z})]}[s]$ حين تكون !!{element}s~$s(X)$ هي بالضبط
+  ما ليس من !!{element}s~$s(Y)$، والعكس؛ أي إذا وفقط إذا
+  $s(Y) = \Domain{M} \setminus s(X)$. ولنأخذ
+  $\Domain{M} = \{1, 2, 3\}$. وليس في الصيغة !!{predicate}s
+  ولا !!{function}s ولا !!{constant}s؛ فلا يعنينا من
+  $\Struct{M}$ هنا إلا مجالها.
+  فإذا كان~$s_1(X) = \{1, 2\}$ و$s_1(Y) = \{3\}$ حصل
+  $\Sat{M}{\lforall[z][(\Atom{X}{z}
+      \liff \lnot \Atom{Y}{z})]}[s_1]$.
+
+  وأما إن كان~$s_2(X) = \{1, 2\}$ و
+  $s_2(Y) = \{2, 3\}$، فالحال بخلاف ذلك:
+  $\Sat/{M}{\lforall[z][(\Atom{X}{z} \liff \lnot
+      \Atom{Y}{z})]}[s_2]$. ووجهه أن
+  $\Sat{M}{\Atom{X}{z}}[\Subst{s_2}{2}{z}]$، لأن
+  $2 \in \Subst{s_2}{2}{z}(X)$، في حين أن
+  $\Sat/{M}{\lnot \Atom{Y}{z}}[\Subst{s_2}{2}{z}]$، لأن
+  $2 \in \Subst{s_2}{2}{z}(Y)$ أيضًا.
+\end{ex}
+
+\begin{ex}
+  يكون~$\Sat{M}{\lexists[Y][(\lexists[y][\Atom{Y}{y}] \land
+  \lforall[z][(\Atom{X}{z} \liff \lnot \Atom{Y}{z})])]}[s]$ إذا
+  وجد~$N \subseteq \Domain{M}$ يحقق
+  $\Sat{M}{(\lexists[y][\Atom{Y}{y}] \land \lforall[z][(\Atom{X}{z}
+  \liff \lnot \Atom{Y}{z})])}[\Subst{s}{N}{Y}]$.
+  ويتحقق ذلك متى اجتمع شرطان: أن يكون
+  $N \neq \emptyset$، ليحصل
+  $\Sat{M}{\lexists[y][\Atom{Y}{y}]}[\Subst{s}{N}{Y}]$،
+  وأن يكون~$N = \Domain{M} \setminus s(X)$ كما سبق.
+  فحاصل القول أن
+  $\Sat{M}{\lexists[Y][(\lexists[y][\Atom{Y}{y}] \land
+  \lforall[z][(\Atom{X}{z} \liff \lnot \Atom{Y}{z})])]}[s]$ إذا
+  وفقط إذا كانت~$\Domain{M} \setminus s(X)$ غير خالية، أي
+  $s(X) \neq \Domain{M}$. ومن أمثلة إرضاء !!{formula} أن يكون
+  $\Domain{M} = \{1, 2, 3\}$ و$s(X) = \{1, 2\}$؛ أما إذا كان
+  $s(X) = \{1, 2, 3\} = \Domain{M}$ فلا تُرضى.
+
+  ولما امتنع إرضاء !!{formula} عند~$s(X) = \Domain{M}$، كانت
+  !!{sentence}
+  \[
+  \lforall[X][\lexists[Y][(\lexists[y][\Atom{Y}{y}] \land
+      \lforall[z][(\Atom{X}{z} \liff \lnot \Atom{Y}{z})])]]
+  \]
+  غير مرضاة في كل حال. فمهما أخذنا !!{structure}~$\Struct{M}$،
+  أتاح التعيين~$s(X) = \Domain{M}$ إظهار كذب هذه !!{sentence}.
+  وأما الجملة
+  \[
+  \lexists[X][\lexists[Y][(\lexists[y][\Atom{Y}{y}] \land
+      \lforall[z][(\Atom{X}{z} \liff \lnot \Atom{Y}{z})])]]
+  \]
+  فإنها تُرضى مع أي تعيين~$s$. وذلك أنه يوجد دائمًا
+  $N \subseteq \Domain{M}$ مع~$N \neq \Domain{M}$؛ ومن ذلك
+  $N = \emptyset$.
+\end{ex}
+
+\begin{ex}
+  معنى !!{sentence} الرتبة الثانية
+  $\lforall[X][\lforall[y][X(y)]]$ أن كل علاقة ذات~$1$ موضع،
+  أي كل خاصية، تصدق على كل فرد. وهذا ممتنع؛ ففي كل
+  $\Struct{M}$ نستطيع أخذ تعيين متغيرات~$s$ يحقق
+  $s(X) = \emptyset$ و$s(y) = a \in \Domain{M}$، وحينئذ
+  $\Sat/{M}{X(y)}[s]$. ومن ثم تكون
+  $!A \lif \lforall[X][\lforall[y][X(y)]]$ مكافئة
+  لـ$\lnot !A$ في منطق الرتبة الثانية؛ أي يكون
+  $\Sat{M}{!A \lif \lforall[X][\lforall[y][X(y)]]}$ إذا وفقط إذا
+  $\Sat{M}{\lnot !A}$. فقد أمكن إذن تعريف~$\lnot$
+  في هذا المنطق بوساطة~$\lforall$ و$\lif$.
+\end{ex}
+
+\begin{prob}
+  بيّن أن بقية الروابط يمكن تعريفها أيضًا في منطق الرتبة الثانية
+  بوساطة~$\lforall$ و$\lif$:
+  \begin{enumerate}
+    \item أثبت تكافؤ~$!A \land !B$ في هذا المنطق مع
+    $\lforall[X][((!A \lif (!B \lif \lforall[x][X(x)])) \lif
+    \lforall[x][X(x)])]$.
+    \item اطلب صيغة من الرتبة الثانية مقتصرة على~$\lforall$
+    و$\lif$ تكافئ~$!A \lor !B$.
+  \end{enumerate}
+\end{prob}
+
+\end{document}

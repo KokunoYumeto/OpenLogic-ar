@@ -1,0 +1,132 @@
+% part: intuitionistic-logic
+% chapter: introduction
+% section: bhk-interpretation
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{int}{bhk}
+
+\olsection{تأويل براور--هايتنغ--كولموغوروف}
+
+\begin{editorial}
+  عرض براهين الصدق العام الحدسي بتأويل BHK في هذه المادة عسير المتابعة؛
+  ويحتاج إلى مزيد من البيان.
+\end{editorial}
+
+للروابط الحدسية تأويل بنائي غير صوري يسمى عادة تأويل
+براور--هايتنغ--كولموغوروف. وأصله مفهوم «البناء»، وهو قريب من البرهان
+البنائي. غير أنا نعدل هنا عن لفظ «البرهان» في سياق BHK، لئلا يلتبس
+بــ!!a{derivation} داخل نظام !!{derivation} صوري. ومن هذا الأصل يبين
+التأويل معاني الروابط الحدسية.
+
+\begin{enumerate}
+\item نأخذ معنى البناء للعبارة الذرية معلومًا ابتداءً.
+\item بناء~$!A_\OLMathNumeral{1} \land !A_\OLMathNumeral{2}$ زوج~$\tuple{\OLId{latin-looped}{M}_\OLMathNumeral{1}, \OLId{latin-looped}{M}_\OLMathNumeral{2}}$، يكون~$\OLId{latin-looped}{M}_\OLMathNumeral{1}$
+  بناءً لــ$!A_\OLMathNumeral{1}$ ويكون~$\OLId{latin-looped}{M}_\OLMathNumeral{2}$ بناءً لــ$!A_\OLMathNumeral{2}$.
+\item بناء~$!A_\OLMathNumeral{1} \lor !A_\OLMathNumeral{2}$ زوج~$\tuple{\OLId{latin-ordinary}{s}, \OLId{latin-looped}{M}}$: إما أن يكون~$\OLId{latin-ordinary}{s}=\OLMathNumeral{1}$
+  ويكون~$\OLId{latin-looped}{M}$ بناءً لــ$!A_\OLMathNumeral{1}$، وإما أن يكون~$\OLId{latin-ordinary}{s}=\OLMathNumeral{2}$ ويكون~$\OLId{latin-looped}{M}$ بناءً لــ$!A_\OLMathNumeral{2}$.
+\item بناء~$!A \lif !B$ دالة تنقل كل بناء لــ$!A$ إلى بناء لــ$!B$.
+\item لا بناء لــ$\lfalse$، أي للمحال.
+\item تحد~$\lnot !A$ بما يرادف~$!A \lif \lfalse$؛ فبناء~$\lnot !A$
+  دالة تنقل بناءً لــ$!A$ إلى بناء لــ$\lfalse$.
+\end{enumerate}
+
+\begin{ex}
+مثاله~$\lnot \lfalse$. بناؤها دالة تُخرج بناءً لــ$\lfalse$ متى أُدخل
+إليها بناء لــ$\lfalse$. ودالة الهوية~$\Id{}$ من هذا القبيل: فإذا دخلها
+بناء~$\OLId{latin-looped}{M}$ لــ$\lfalse$، كان~$\Id{}(\OLId{latin-looped}{M}) = \OLId{latin-looped}{M}$ بناءً لــ$\lfalse$.
+\end{ex}
+
+فالمعنى العام لــ$\lnot !A$ أن «بناء~$!A$ محال».
+
+\begin{ex}
+نريد بناء~$!A \lif \lnot \lnot !A$ لكل قضية~$!A$، أي بناء
+$!A \lif ((!A \lif \lfalse) \lif \lfalse)$. فلا بد من دالة~$\OLId{latin-ordinary}{f}$ تأخذ
+بناءً~$\OLId{latin-looped}{M}$ لــ$!A$ وترد بناءً~$\OLId{latin-ordinary}{f}(\OLId{latin-looped}{M})$ لــ
+$(!A \lif \lfalse) \lif \lfalse$. ولكي تنشئ~$\OLId{latin-ordinary}{f}$ بناء
+$(!A \lif \lfalse) \lif \lfalse$ نحد دالة~$\OLId{latin-ordinary}{g}$
+تخرج بناءً لــ$\lfalse$ إذا دخلها بناء~$\OLId{latin-ordinary}{h}$ لــ$!A \lif \lfalse$.
+وتعريف~$\OLId{latin-ordinary}{g}$ أن تطبق المدخل~$\OLId{latin-ordinary}{h}$ على بناء~$!A$، أعني~$\OLId{latin-looped}{M}$ الذي سبق أخذه.
+فمخرج~$\OLId{latin-ordinary}{h}$، وهو~$\OLId{latin-ordinary}{h}(\OLId{latin-looped}{M})$، بناء لــ$\lfalse$؛ ولذلك يكون
+$\OLId{latin-ordinary}{f}(\OLId{latin-looped}{M})(\OLId{latin-ordinary}{h}) = \OLId{latin-ordinary}{h}(\OLId{latin-looped}{M})$ بناءً لــ$\lfalse$ متى كان~$\OLId{latin-looped}{M}$ بناءً لــ$!A$.
+\end{ex}
+
+\begin{ex}
+ولنبن~$\lnot(!A \land \lnot !A)$، أي
+$(!A \land (!A \lif \lfalse)) \lif \lfalse$. المطلوب دالة~$\OLId{latin-ordinary}{f}$ تخرج
+بناءً لــ$\lfalse$ إذا دخلها بناء~$\OLId{latin-looped}{M}$ لــ
+$!A \land (!A \lif \lfalse)$. وبناء العطف~$!B_\OLMathNumeral{1} \land !B_\OLMathNumeral{2}$ زوج
+$\tuple{\OLId{latin-looped}{N}_\OLMathNumeral{1}, \OLId{latin-looped}{N}_\OLMathNumeral{2}}$، يكون~$\OLId{latin-looped}{N}_\OLMathNumeral{1}$ فيه بناءً لــ$!B_\OLMathNumeral{1}$ و$\OLId{latin-looped}{N}_\OLMathNumeral{2}$ بناءً
+لــ$!B_\OLMathNumeral{2}$. فلنحد دالتين~$\OLId{latin-ordinary}{p}_\OLMathNumeral{1}$ و$\OLId{latin-ordinary}{p}_\OLMathNumeral{2}$ تستخرجان من بناء
+$!B_\OLMathNumeral{1} \land !B_\OLMathNumeral{2}$ بناءي~$!B_\OLMathNumeral{1}$ و$!B_\OLMathNumeral{2}$ على الترتيب:
+\begin{align*}
+  \OLId{latin-ordinary}{p}_\OLMathNumeral{1}(\tuple{\OLId{latin-looped}{N}_\OLMathNumeral{1}, \OLId{latin-looped}{N}_\OLMathNumeral{2}}) &= \OLId{latin-looped}{N}_\OLMathNumeral{1}\\
+  \OLId{latin-ordinary}{p}_\OLMathNumeral{2}(\tuple{\OLId{latin-looped}{N}_\OLMathNumeral{1}, \OLId{latin-looped}{N}_\OLMathNumeral{2}}) &= \OLId{latin-looped}{N}_\OLMathNumeral{2}
+\end{align*}
+وعمل~$\OLId{latin-ordinary}{f}$ أن تطبق أولًا~$\OLId{latin-ordinary}{p}_\OLMathNumeral{1}$ على مدخلها~$\OLId{latin-looped}{M}$، فيخرج بناء لــ$!A$، ثم
+تطبق~$\OLId{latin-ordinary}{p}_\OLMathNumeral{2}$ على~$\OLId{latin-looped}{M}$، فيخرج بناء لــ$!A \lif \lfalse$. وهذا الأخير دالة
+$\OLId{latin-ordinary}{p}_\OLMathNumeral{2}(\OLId{latin-looped}{M})$ تخرج بناء لــ$\lfalse$ إذا دخلها بناء لــ$!A$. فإذا طبقنا
+$\OLId{latin-ordinary}{p}_\OLMathNumeral{2}(\OLId{latin-looped}{M})$ على~$\OLId{latin-ordinary}{p}_\OLMathNumeral{1}(\OLId{latin-looped}{M})$ خرج بناء لــ$\lfalse$؛ ومن ثم نضع
+$\OLId{latin-ordinary}{f}(\OLId{latin-looped}{M}) = \OLId{latin-ordinary}{p}_\OLMathNumeral{2}(\OLId{latin-looped}{M})(\OLId{latin-ordinary}{p}_\OLMathNumeral{1}(\OLId{latin-looped}{M}))$.
+\end{ex}
+
+\begin{ex}
+ولنبن~$((!A \land !B) \lif !C) \lif (!A \lif
+(!B \lif !C))$. فهذا البناء دالة~$\OLId{latin-ordinary}{f}$ تنقل بناء~$\OLId{latin-ordinary}{g}$ لــ
+$(!A \land !B) \lif !C$ إلى بناء لــ$(!A \lif (!B \lif !C))$.
+والبناء~$\OLId{latin-ordinary}{g}$ نفسه دالة من بناءات~$!A \land !B$ إلى بناءات~$!C$؛ وأما
+$\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{g})$ فدالة~$\OLId{latin-ordinary}{h}_\OLId{latin-ordinary}{g}$ من بناءات~$!A$ إلى دوال تنقل بناءات~$!B$ إلى
+بناءات~$!C$.
+
+وقد تشعب الوصف؛ فلنرتبه. نطلب دالة معينة~$\OLId{latin-ordinary}{h}_\OLId{latin-ordinary}{g}$ تكون مخرج~$\OLId{latin-ordinary}{f}$ عند
+المدخل~$\OLId{latin-ordinary}{g}$. يدخل~$\OLId{latin-ordinary}{h}_\OLId{latin-ordinary}{g}$ بناء~$\OLId{latin-looped}{M}$ لــ$!A$، ويجب أن يكون مخرج~$\OLId{latin-ordinary}{h}_\OLId{latin-ordinary}{g}(\OLId{latin-looped}{M})$
+دالة~$\OLId{latin-ordinary}{k}_\OLId{latin-looped}{M}$ تنقل بناءات~$\OLId{latin-looped}{N}$ لــ$!B$ إلى بناءات~$!C$. فنضع
+$\OLId{latin-ordinary}{k}_{\OLId{latin-ordinary}{g},\OLId{latin-looped}{M}}(\OLId{latin-looped}{N}) = \OLId{latin-ordinary}{g}(\tuple{\OLId{latin-looped}{M}, \OLId{latin-looped}{N}})$. وقد علم أن~$\tuple{\OLId{latin-looped}{M}, \OLId{latin-looped}{N}}$ بناء لــ
+$!A \land !B$؛ فتكون~$\OLId{latin-ordinary}{k}_{\OLId{latin-ordinary}{g},\OLId{latin-looped}{M}}$ بناء لــ$!B \lif !C$، إذ تنقل بناءات~$\OLId{latin-looped}{N}$
+لــ$!B$ إلى بناءات~$!C$. ثم نضع~$\OLId{latin-ordinary}{h}_\OLId{latin-ordinary}{g}(\OLId{latin-looped}{M}) = \OLId{latin-ordinary}{k}_{\OLId{latin-ordinary}{g},\OLId{latin-looped}{M}}$؛ فهذه دالة تنقل
+بناءات~$\OLId{latin-looped}{M}$ لــ$!A$ إلى بناءات~$\OLId{latin-ordinary}{k}_{\OLId{latin-ordinary}{g},\OLId{latin-looped}{M}}$ لــ$!B \lif !C$. وأخيرًا نضع
+$\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{g}) = \OLId{latin-ordinary}{h}_\OLId{latin-ordinary}{g}$؛ فتحصل الدالة التي تنقل بناءات~$\OLId{latin-ordinary}{g}$ لــ
+$(!A \land !B) \lif !C$ إلى بناءات~$!A \lif (!B \lif !C)$. وقد طال
+الطريق!{}
+\end{ex}
+
+تسمى~$!A \lor \lnot !A$ قانون الوسط المستبعد. وقد نبنيها لقضايا معينة
+$!A$، مثل~$\lfalse \lor \lnot \lfalse$، ولا نبنيها على العموم؛ لأن
+الفصل الحدسي يقتضي بناء أحد شقيه، مع أن قضايا، كحدسية غولدباخ، لم يتهيأ
+الآن إثباتها ولا دحضها. ومع ذلك لا يدحض قانون الوسط المستبعد؛ بل تصدق
+$\lnot \lnot (!A \lor \lnot !A)$.
+
+\begin{ex}
+لبرهنة $\lnot \lnot (!A \lor \lnot !A)$ نحتاج إلى دالة~$\OLId{latin-ordinary}{f}$ تحوّل
+بناءً لـ$\lnot(!A \lor \lnot !A)$، أي لـ
+$(!A \lor (!A \lif \lfalse)) \lif \lfalse$، إلى بناء لـ~$\lfalse$.
+وبعبارة أخرى، نحتاج إلى دالة~$\OLId{latin-ordinary}{f}$ يكون $\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{g})$ فيها بناء لـ~$\lfalse$
+إذا كان $\OLId{latin-ordinary}{g}$ بناءً لـ$\lnot(!A \lor \lnot !A)$.
+
+افترض أن $\OLId{latin-ordinary}{g}$ بناء لـ$\lnot(!A \lor \lnot !A)$؛ أي دالة تحوّل بناء
+$!A \lor \lnot !A$ إلى بناء لـ~$\lfalse$. وبناء
+$!A \lor \lnot !A$ زوج $\tuple{\OLId{latin-ordinary}{s}, \OLId{latin-looped}{M}}$ يكون فيه إما $\OLId{latin-ordinary}{s} = \OLMathNumeral{1}$ و$\OLId{latin-looped}{M}$
+بناءً لـ$!A$، وإما $\OLId{latin-ordinary}{s} = \OLMathNumeral{2}$ و$\OLId{latin-looped}{M}$ بناءً لـ$\lnot !A$. ولتكن $\OLId{latin-ordinary}{h}_\OLMathNumeral{1}$
+الدالة التي تربط بناء~$\OLId{latin-looped}{M}_\OLMathNumeral{1}$ لـ$!A$ ببناء لـ$!A \lor \lnot !A$:
+فهي تربط $\OLId{latin-looped}{M}_\OLMathNumeral{1}$ بـ$\tuple{\OLMathNumeral{1}, \OLId{latin-looped}{M}_\OLMathNumeral{1}}$. ولتكن $\OLId{latin-ordinary}{h}_\OLMathNumeral{2}$ الدالة التي تربط
+بناء~$\OLId{latin-looped}{M}_\OLMathNumeral{2}$ لـ$\lnot !A$ ببناء لـ$!A \lor \lnot !A$: فهي تربط
+$\OLId{latin-looped}{M}_\OLMathNumeral{2}$ بـ$\tuple{\OLMathNumeral{2}, \OLId{latin-looped}{M}_\OLMathNumeral{2}}$.
+
+لتكن $\OLId{latin-ordinary}{k}$ هي $\comp{\OLId{latin-ordinary}{h}_\OLMathNumeral{1}}{\OLId{latin-ordinary}{g}}$: إنها دالة تعيد، إذا أُعطيت بناءً لـ~$!A$،
+بناءً لـ~$\lfalse$؛ أي إنها بناء لـ$!A \lif \lfalse$ أو لـ$\lnot !A$.
+والآن لتكن $\OLId{latin-ordinary}{l}$ هي $\comp{\OLId{latin-ordinary}{h}_\OLMathNumeral{2}}{\OLId{latin-ordinary}{g}}$. إنها دالة تعطي، إذا أُعطيت بناءً
+لـ$\lnot !A$، بناءً لـ~$\lfalse$. ولأن $\OLId{latin-ordinary}{k}$ بناء لـ$\lnot !A$، فإن
+$\OLId{latin-ordinary}{l}(\OLId{latin-ordinary}{k})$ بناء لـ~$\lfalse$.
+
+وما فعلناه في مجموعه هو وصف الطريقة التي نحول بها بناء~$\OLId{latin-ordinary}{g}$ لـ
+$\lnot(!A \lor \lnot !A)$ إلى بناء لـ~$\lfalse$؛ أي إن الدالة~$\OLId{latin-ordinary}{f}$
+التي تربط بناء~$\OLId{latin-ordinary}{g}$ لـ$\lnot(!A \lor \lnot !A)$ ببناء~$\OLId{latin-ordinary}{l}(\OLId{latin-ordinary}{k})$ لـ
+$\lfalse$ هي بناء لـ$\lnot\lnot(!A \lor \lnot !A)$.
+\end{ex}
+
+فاستعمال تأويل BHK لإظهار الصدق العام الحدسي لل!!{formula}s لا يلبث أن
+يطول ويشتبه. وللمنطق الحدسي، لحسن الحظ، أنظمة !!{derivation} أيسر،
+وتأويلات دلالية أدق.
+\end{document}

@@ -1,0 +1,43 @@
+% Part: turing-machines
+% Chapter: machines-computations
+% Section: turing-machines
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{tur}{mac}{tur}
+\olsection{آلات تورنغ}
+
+\begin{explain}
+قد يبدو التعريف الصوري لآلة تورنغ شديد التجريد، وهو في حقيقته يسير؛ إذ يجمع في بنية رياضية واحدة ما يتوقف عليه عملها: أولًا، الحالات الممكنة؛ وثانيًا، رموز الشريط المسموح بها؛ وثالثًا، الحالة الابتدائية؛ ورابعًا، تعليمات الآلة.
+\end{explain}
+
+\begin{defn}[آلة تورنغ]
+\emph{آلة تورنغ} $\OLId{latin-looped}{M}$ رباعية $\langle \OLId{latin-looped}{Q},\Sigma,\OLId{latin-ordinary}{q}_\OLMathNumeral{0},\delta\rangle$ عناصرها:
+\begin{enumerate}
+\item مجموعة \emph{حالات}~$\OLId{latin-looped}{Q}$ منتهية؛
+\item \emph{أبجدية} منتهية $\Sigma$ فيها $\TMendtape$ و$\TMblank$؛
+\item \emph{حالة ابتدائية}~$\OLId{latin-ordinary}{q}_\OLMathNumeral{0} \in \OLId{latin-looped}{Q}$؛
+\item \emph{مجموعة تعليمات} منتهية~$\delta\colon \OLId{latin-looped}{Q} \times \Sigma
+  \pto \OLId{latin-looped}{Q} \times \Sigma \times \{\TMleft,\TMright,\TMstay\}$.
+\end{enumerate}
+والدالة الجزئية~$\delta$ هي أيضًا \emph{دالة الانتقال} للآلة~$\OLId{latin-looped}{M}$.
+\end{defn}
+
+\begin{explain}
+شريطنا لا يمتد إلى غير نهاية إلا في جهة واحدة. ولذلك نخص $\TMendtape$ بعلامة الطرف الأيسر، لتعرف البرامج متى تقارب الخروج من الشريط. وكان يمكن اشتراط ألا يكتب فوق هذه العلامة أبدًا، أي اشتراط $\delta(\OLId{latin-ordinary}{q},\TMendtape)=\tuple{\OLId{latin-ordinary}{q}',\TMendtape,\OLId{latin-looped}{D}}$ متى كانت $\delta(\OLId{latin-ordinary}{q},\TMendtape)$ معرفة. وقد أخذت بهذا كتب، ولسنا نأخذ به. فمن أراد حفظ $\TMendtape$ أمكنه مراعاة ذلك عند بناء آلته؛ وربما كان في إجازة الكتابة فوقها تيسير لبعض الأبنية.
+\end{explain}
+
+\begin{ex}
+\emph{آلة الزوجية:} نعبر عنها صوريًّا بالرباعية $\tuple{\OLId{latin-looped}{Q},\Sigma,\OLId{latin-ordinary}{q}_\OLMathNumeral{0},\delta}$، مع التعريفات
+\begin{align*}
+\OLId{latin-looped}{Q} & = \{ \OLId{latin-ordinary}{q}_\OLMathNumeral{0}, \OLId{latin-ordinary}{q}_\OLMathNumeral{1} \} \\
+\Sigma & = \{ \TMendtape, \TMblank, \TMstroke \}, \\
+\delta(\OLId{latin-ordinary}{q}_\OLMathNumeral{0}, \TMstroke) & = \tuple{\OLId{latin-ordinary}{q}_\OLMathNumeral{1}, \TMstroke, \TMright},\\
+\delta(\OLId{latin-ordinary}{q}_\OLMathNumeral{1}, \TMstroke) & = \tuple{\OLId{latin-ordinary}{q}_\OLMathNumeral{0}, \TMstroke, \TMright},\\
+\delta(\OLId{latin-ordinary}{q}_\OLMathNumeral{1}, \TMblank)  & = \tuple{\OLId{latin-ordinary}{q}_\OLMathNumeral{1}, \TMblank, \TMright}.
+\end{align*}
+\end{ex}
+
+\end{document}

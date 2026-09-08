@@ -1,0 +1,101 @@
+% Part: first-order-logic 
+% Chapter: axiomatic-deduction 
+% Section: rules-and-proofs
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{axd}{rul}}
+      {\olfileid{pl}{axd}{rul}}
+
+\olsection{القواعد و\usetoken{P}{derivation}}
+
+\begin{explain}
+  لعل أنساق ال!!{derivation}s البديهية أبسط أنساق ال!!{derivation}
+  المنطقية. فال!!^a{derivation} متتالية من ال!!{formula}s لا غير.
+  وإنما تعدّ !!a{derivation} إذا كانت كل !!{formula} فيها إما حالةً
+  من بديهية، وإما مأخوذة بقاعدة استدلال من !!{formula}s سبقتها،
+  واحدةً كانت أو أكثر. وال!!^a{derivation} !!{derive}s
+  ال!!{formula} التي تختم بها المتتالية.
+\end{explain}
+
+\begin{defn}[!!^{derivability}]
+إذا كانت~$\OLId{greek-variable}{Gamma}$ مجموعة من !!{formula}s اللغة~$\Lang L$،
+فالـ\emph{!!{derivation}} من~$\OLId{greek-variable}{Gamma}$ متتالية منتهية~$!A_\OLMathNumeral{1}$،
+\dots،~$!A_\OLId{latin-ordinary}{n}$ من ال!!{formula}s، لا يخلو فيها كل~$\OLId{latin-ordinary}{i} \le \OLId{latin-ordinary}{n}$
+من إحدى الحالات الآتية:
+\begin{enumerate}
+\item $!A_\OLId{latin-ordinary}{i} \in \OLId{greek-variable}{Gamma}$؛ أو
+\item $!A_\OLId{latin-ordinary}{i}$ بديهية؛ أو
+\item تلزم $!A_\OLId{latin-ordinary}{i}$ بقاعدة استدلال عن صيغة سابقة $!A_\OLId{latin-ordinary}{j}$، أو عن صيغتين
+  سابقتين $!A_\OLId{latin-ordinary}{j}$ و$!A_\OLId{latin-ordinary}{k}$، على أن يكون $\OLId{latin-ordinary}{j}<\OLId{latin-ordinary}{i}$، وأن يكون $\OLId{latin-ordinary}{k}<\OLId{latin-ordinary}{i}$ في
+  الحالة الثانية.
+\end{enumerate}
+\end{defn}
+
+% تصحيح مصدر (0118-I1): عُرّف الدعم المنتهي الذي تُقاس به شروط الفروض المستعملة.
+ونسمي ما أُخذ في ال!!{derivation} من~$\OLId{greek-variable}{Gamma}$ بمقتضى الوجه الأول
+\emph{دعم ال!!{derivation}}. وهو متناهٍ وإن لم تكن~$\OLId{greek-variable}{Gamma}$ متناهية؛
+فكل شرط يُردّ إلى مقدمات البرهان إنما يُردّ إلى هذا الدعم، لا إلى
+ما لم يُستعمل من~$\OLId{greek-variable}{Gamma}$.
+
+وصحة ال!!{derivation} تتبع ما نجيزه من قواعد الاستدلال وما نختاره
+من البديهيات. وقاعدة الاستدلال قضية شرطية تبيّن متى يجوز عدّ
+الخطوة~$!A_\OLId{latin-ordinary}{i}$ في !!a{derivation} استدلالًا صحيحًا.
+
+
+\begin{defn}[قاعدة الاستدلال]
+\emph{قاعدة الاستدلال} بيان شرط كافٍ لصحة خطوة استدلال
+في !!a{derivation} من~$\OLId{greek-variable}{Gamma}$.
+\end{defn}
+
+فالمتتالية ذات العنصر الواحد~$!A$، متى كان~$!A \in \OLId{greek-variable}{Gamma}$،
+تعدّ !!a{derivation} بنفسها. ومن ثم يصح أن نجعل الآتي
+قاعدة استدلال أولى:
+\begin{quote}
+  إذا كان $!A \in \OLId{greek-variable}{Gamma}$، فإن $!A$ دائمًا خطوة استدلال صحيحة في كل
+  !!{derivation} من~$\OLId{greek-variable}{Gamma}$.
+\end{quote}
+وكذلك إذا كانت~$!A$ بديهية، كان~$!A$ وحده !!a{derivation}؛
+فيصح أن نجعل الآتي قاعدة أخرى:
+\begin{quote}
+  إذا كانت $!A$ بديهية، فإن $!A$ خطوة استدلال صحيحة.
+\end{quote}
+وأما القواعد التي تنتفع بما سبق من !!{formula}s في المتتالية،
+فمنها القاعدة الآتية، وتسمّى \emph{إثبات المقدَّم}:
+\begin{quote}
+  إذا ظهرت $!B \lif !A$ و$!B$ في موضع أعلى من ال!!{derivation}،
+  فإن~$!A$ خطوة استدلال صحيحة.
+\end{quote}
+فإذا اقتصرنا على هذه القاعدة، صار تعريف ال!!{derivation}
+المتقدّم إلى أن~$!A_\OLMathNumeral{1}$، \dots،~$!A_\OLId{latin-ordinary}{n}$ !!a{derivation}
+إذا وفقط إذا تحقق لكل~$\OLId{latin-ordinary}{i} \le \OLId{latin-ordinary}{n}$ واحد مما يأتي:
+\begin{enumerate}
+\item $!A_\OLId{latin-ordinary}{i} \in \OLId{greek-variable}{Gamma}$؛ أو
+\item $!A_\OLId{latin-ordinary}{i}$ بديهية؛ أو
+\item لبعض $\OLId{latin-ordinary}{j} < \OLId{latin-ordinary}{i}$ تكون $!A_\OLId{latin-ordinary}{j}$ هي $!B \lif !A_\OLId{latin-ordinary}{i}$، ولبعض $\OLId{latin-ordinary}{k} < \OLId{latin-ordinary}{i}$ تكون
+  $!A_\OLId{latin-ordinary}{k}$ هي~$!B$.
+\end{enumerate}
+ومعنى الحالة الأخيرة أن~$!A_\OLId{latin-ordinary}{i}$ مأخوذة من~$!A_\OLId{latin-ordinary}{j}$
+($!B \lif !A_\OLId{latin-ordinary}{i}$) و$!A_\OLId{latin-ordinary}{k}$ ($!B$) بإثبات المقدَّم.
+فإذا فحصنا المتتالية من~$\OLMathNumeral{1}$ إلى~$\OLId{latin-ordinary}{n}$، ووجدنا في كل موضع
+!!a{formula}~$!A_\OLId{latin-ordinary}{i}$ إما في~$\OLId{greek-variable}{Gamma}$، وإما بديهية، وإما مما
+تسوّغه قاعدة استدلال، صحّ عدّ المتتالية كلّها !!{derivation}.
+
+
+\begin{defn}[!!^{derivability}]
+ال!!{formula}~$!A$ \emph{!!{derivable}} من~$\OLId{greek-variable}{Gamma}$،
+وترميز ذلك~$\OLId{greek-variable}{Gamma} \Proves !A$، متى وجد !!a{derivation}
+من~$\OLId{greek-variable}{Gamma}$ ينتهي إلى~$!A$.
+\end{defn}
+
+\begin{defn}[المبرهنات]
+ال!!^a{formula}~$!A$ \emph{مبرهنة} متى وجد !!a{derivation}
+لـ~$!A$ من المجموعة الخالية. فنكتب~$\Proves !A$ إذا كانت~$!A$
+مبرهنة، ونكتب~$\Proves/ !A$ إذا لم تكن.
+\end{defn}
+
+
+\end{document}

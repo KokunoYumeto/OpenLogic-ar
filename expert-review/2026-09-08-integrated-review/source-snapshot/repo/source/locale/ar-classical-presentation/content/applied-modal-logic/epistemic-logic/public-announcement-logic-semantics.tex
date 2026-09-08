@@ -1,0 +1,118 @@
+% Part: applied-modal-logics
+% Chapter: epistemic-logic
+% Section: public-announcement-logic-semantics
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{aml}{el}{psm}
+
+\olsection{دلالة منطق الإعلان العام}
+
+نماذج منطق الإعلان العام العلائقية هي نماذج المنطق المعرفي نفسها؛ وإنما
+الجديد دلالة مؤثر الإعلان العام.
+
+\begin{defn}\ollabel{defn:mmodels} يُعرَّف \emph{صدق !!a{formula}~$!A$
+  عند~$\OLId{latin-ordinary}{w}$} في نموذج~$\mModel M = \tuple{\OLId{latin-looped}{W},(\OLId{latin-looped}{R}_\OLId{latin-ordinary}{a})_{\OLId{latin-ordinary}{a} \in \OLId{latin-looped}{G}},\OLId{latin-looped}{V}}$، ورمزه
+  $\mSat{\OLId{latin-looped}{M}}{!A}[\OLId{latin-ordinary}{w}]$، استقرائيًا كما يأتي:
+  \begin{enumerate}
+  \tagitem{prvFalse}{\indcase{!A}{\lfalse}{لا يتحقق $\mSat{\OLId{latin-looped}{M}}{\lfalse}[\OLId{latin-ordinary}{w}]$ أبدًا.}}{}
+  \tagitem{prvTrue}{\indcase{!A}{\ltrue}{يتحقق $\mSat{\OLId{latin-looped}{M}}{\ltrue}[\OLId{latin-ordinary}{w}]$ دائمًا.}}{}
+  \item $\mSat{\OLId{latin-looped}{M}}{\OLId{latin-ordinary}{p}}[\OLId{latin-ordinary}{w}]$ إذا وفقط إذا كان $\OLId{latin-ordinary}{w} \in \OLId{latin-looped}{V}(\OLId{latin-ordinary}{p})$.
+  \tagitem{prvNot}{\indcase{!A}{\lnot !B}{$\mSat{\OLId{latin-looped}{M}}{\indfrm}[\OLId{latin-ordinary}{w}]$ إذا وفقط
+    إذا كان $\mSat/{\OLId{latin-looped}{M}}{!B}[\OLId{latin-ordinary}{w}]$.}}{}
+  \tagitem{prvAnd}{\indcase{!A}{(!B \land !C)}{$\mSat{\OLId{latin-looped}{M}}{\indfrm}[\OLId{latin-ordinary}{w}]$ إذا
+    وفقط إذا كان $\mSat{\OLId{latin-looped}{M}}{!B}[\OLId{latin-ordinary}{w}]$ و$\mSat{\OLId{latin-looped}{M}}{!C}[\OLId{latin-ordinary}{w}]$.}}{}
+  \tagitem{prvOr}{\indcase{!A}{(!B \lor !C)}{$\mSat{\OLId{latin-looped}{M}}{\indfrm}[\OLId{latin-ordinary}{w}]$ إذا
+    وفقط إذا كان $\mSat{\OLId{latin-looped}{M}}{!B}[\OLId{latin-ordinary}{w}]$ أو $\mSat{\OLId{latin-looped}{M}}{!C}[\OLId{latin-ordinary}{w}]$} (أو كلاهما).}{}
+  \tagitem{prvIf}{\indcase{!A}{(!B \lif !C)}{$\mSat{\OLId{latin-looped}{M}}{\indfrm}[\OLId{latin-ordinary}{w}]$ إذا
+    وفقط إذا كان $\mSat/{\OLId{latin-looped}{M}}{!B}[\OLId{latin-ordinary}{w}]$ أو $\mSat{\OLId{latin-looped}{M}}{!C}[\OLId{latin-ordinary}{w}]$.}}{}
+  \tagitem{prvIff}{\indcase{!A}{(!B \liff !C)}{$\mSat{\OLId{latin-looped}{M}}{\indfrm}[\OLId{latin-ordinary}{w}]$ إذا
+    وفقط إذا تحقق كل من $\mSat{\OLId{latin-looped}{M}}{!B}[\OLId{latin-ordinary}{w}]$ و$\mSat{\OLId{latin-looped}{M}}{!C}[\OLId{latin-ordinary}{w}]$، أو لم
+    يتحقق أي منهما.}}{}
+  \item\ollabel{defn:sub:mmodels-box}
+    \indcase{!A}{\Knows_a !B}{$\mSat{\OLId{latin-looped}{M}}{\indfrm}[\OLId{latin-ordinary}{w}]$ إذا وفقط إذا كان
+    $\mSat{\OLId{latin-looped}{M}}{!B}[\OLId{latin-ordinary}{w}']$ لكل $\OLId{latin-ordinary}{w}' \in \OLId{latin-looped}{W}$ بحيث $\OLId{latin-looped}{R}_\OLId{latin-ordinary}{a} ww'$.}
+  \item\ollabel{defn:sub:mmodels-pal}
+    \indcase{!A}{[!B] !C}{$\mSat{\OLId{latin-looped}{M}}{\indfrm}[\OLId{latin-ordinary}{w}]$ إذا وفقط إذا كان
+    $\mSat{\OLId{latin-looped}{M}}{!B}[\OLId{latin-ordinary}{w}]$ يستلزم $\mSat{\OLId{latin-looped}{M} \mid !B}{!C}[\OLId{latin-ordinary}{w}]$.}
+
+  
+  وأما $\mModel M \mid !B = \tuple{\OLId{latin-looped}{W}',(\OLId{latin-looped}{R}'_\OLId{latin-ordinary}{a})_{\OLId{latin-ordinary}{a} \in \OLId{latin-looped}{G}},\OLId{latin-looped}{V}'}$ فيحد كما يأتي:
+  \begin{enumerate}
+    \item $\OLId{latin-looped}{W}' = \Setabs{ \OLId{latin-ordinary}{u} \in \OLId{latin-looped}{W}}{\mSat{\OLId{latin-looped}{M}}{!B}[\OLId{latin-ordinary}{u}]}$. أي إن عوالم
+      $\mModel M \mid !B$ هي عوالم~$\mModel M$ التي تصدق فيها $!B$.
+    \item $\OLId{latin-looped}{R}'_\OLId{latin-ordinary}{a} = \OLId{latin-looped}{R}_\OLId{latin-ordinary}{a} \cap (\OLId{latin-looped}{W}' \times \OLId{latin-looped}{W}')$. فتُقصر علاقة الإتاحة لكل
+      فاعل ببساطة على العوالم الباقية في~$\OLId{latin-looped}{W}'$.
+    \item $\OLId{latin-looped}{V}'(\OLId{latin-ordinary}{p}) = \Setabs{ \OLId{latin-ordinary}{u} \in \OLId{latin-looped}{W}'}{\OLId{latin-ordinary}{u} \in \OLId{latin-looped}{V}(\OLId{latin-ordinary}{p}) }$. وبالمثل تظل
+      الإسنادات القضوية عند العوالم كما هي؛ وهذا يمثل فكرة أن الأحداث
+      المعلوماتية لا تغير قيم صدق المتغيرات القضوية.
+  \end{enumerate}
+  
+  \end{enumerate} 
+\end{defn}
+
+فيمتاز منطق الإعلان العام بأن صدق !!a{formula} في~$\mModel M$ قد لا
+يتقرر إلا بالرجوع إلى نموذج غير~$\mModel M$ نفسه.
+
+ثم إن الدلالة تجري مؤثر الإعلان مجرى~$\Box$؛ فإذا تعذر أن تعلن
+!!a{formula}~$!A$ إعلانًا صادقًا عند عالم، صدقت فيه~$[!A]!B$ صدقًا
+خاليًا، كما تصدق جميع !!{formula}s ذات~$\Box$ عند النقاط النهائية.
+
+\begin{figure}
+  \begin{center}
+    \begin{tikzpicture}[modal]
+      \node[world] (w1) [label={below left:$\OLId{latin-ordinary}{p}, \lnot \OLId{latin-ordinary}{q}$}]{$\OLId{latin-ordinary}{w}_\OLMathNumeral{1}$}; 
+      \node[world] (w2) [left=of w1, label={left:$\lnot \OLId{latin-ordinary}{p}, \lnot \OLId{latin-ordinary}{q}$}]{$\OLId{latin-ordinary}{w}_\OLMathNumeral{2}$}; 
+      \node[world] (w3) [above=of w1, label={right:$\OLId{latin-ordinary}{p}, \OLId{latin-ordinary}{q}$}] {$\OLId{latin-ordinary}{w}_\OLMathNumeral{3}$};
+      \draw[<->] (w1) to [swap] node {$\OLId{latin-ordinary}{b}$} (w2);
+      \draw[->,loop below] (w1) to node {$\OLId{latin-ordinary}{a}, \OLId{latin-ordinary}{b}$} (w1);
+      \draw[<->] (w1) to [swap] node {$\OLId{latin-ordinary}{a}$} (w3);
+      \draw[->,loop above] (w2) to node {$\OLId{latin-ordinary}{a}, \OLId{latin-ordinary}{b}$} (w2) ;
+      \draw[->,loop above] (w3) to node {$\OLId{latin-ordinary}{a}, \OLId{latin-ordinary}{b}$} (w3) ;
+      
+      \node[world](v1)[right of=w1, xshift=1.25in, label={right:$\OLId{latin-ordinary}{p}, \lnot \OLId{latin-ordinary}{q}$}]{$\OLId{latin-ordinary}{w}'_\OLMathNumeral{1}$};
+      \node[world](v3)[above of=v1,label={right:$\OLId{latin-ordinary}{p},\OLId{latin-ordinary}{q}$}]{$\OLId{latin-ordinary}{w}'_\OLMathNumeral{3}$};
+      \draw[<->] (v1) to node {$\OLId{latin-ordinary}{a}$} (v3);
+      \draw[->,loop below] (v1) to node {$\OLId{latin-ordinary}{a},\OLId{latin-ordinary}{b}$} (v1);
+      \draw[->,loop above] (v3) to node {$\OLId{latin-ordinary}{a},\OLId{latin-ordinary}{b}$} (v3) ;
+      
+      \node(m)[below=of w1]{$\mModel M$};
+      \node(m')[below=of v1]{$\mModel M \mid \OLId{latin-ordinary}{p}$}; 
+
+      \draw[-,dotted] (w1) to node {\footnotesize إعلان $\OLId{latin-ordinary}{p}$}(v1) ;
+     
+    \end{tikzpicture}
+  \end{center}
+  \caption{قبل الإعلان العام عن $\OLId{latin-ordinary}{p}$ وبعده.}
+  \ollabel{fig:announcement-example}
+\end{figure}
+
+والإعلان العام عن !!a{formula} تقليص للنموذج، أي قصر له على العوالم
+التي كانت ال!!{formula} صادقة فيها. وفي~\olref{fig:announcement-example}
+مثال لأثر إعلان~$\OLId{latin-ordinary}{p}$ على الملأ: يعلم الفاعل~$\OLId{latin-ordinary}{b}$ أن~$\OLId{latin-ordinary}{p}$ بسبب الإعلان،
+وأما الفاعل~$\OLId{latin-ordinary}{a}$ فلا يكتسب به علمًا جديدًا، لأنه كان يعلم من قبل أن~$\OLId{latin-ordinary}{p}$
+صادقة.
+
+وتحقيق ذلك أن لدينا $\mSat{\OLId{latin-looped}{M}}{\lnot \Knows_\OLId{latin-ordinary}{b} \OLId{latin-ordinary}{p}}[\OLId{latin-ordinary}{w}_\OLMathNumeral{1}]$، ولكن
+$\mSat{\OLId{latin-looped}{M} \mid \OLId{latin-ordinary}{p}}{\Knows_\OLId{latin-ordinary}{b} \OLId{latin-ordinary}{p}}[\OLId{latin-ordinary}{w}_\OLMathNumeral{1}]$. ويستلزم هذا
+$\mSat{\OLId{latin-looped}{M}}{[\OLId{latin-ordinary}{p}] \Knows_\OLId{latin-ordinary}{b} \OLId{latin-ordinary}{p}}[\OLId{latin-ordinary}{w}_\OLMathNumeral{1}]$. بل يثبت من أثر الإعلان ما هو أقوى؛ فإن
+$\mSat{\OLId{latin-looped}{M}}{[\OLId{latin-ordinary}{p}]\CKnows_{\{\OLId{latin-ordinary}{a},\OLId{latin-ordinary}{b}\}} \OLId{latin-ordinary}{p}}[\OLId{latin-ordinary}{w}_\OLMathNumeral{1}]$. أي إن~$\OLId{latin-ordinary}{p}$ يصير بعد إعلانه
+\emph{معرفة مشتركة}.
+
+فهل يعم هذا الحكم؟ وهل يجعل الإعلان الصادق عن~$!A$ الصيغة~$!A$
+\emph{دائمًا} معرفة مشتركة؟ الجواب لا؛ إذ قد تعلن !!{formula}s إعلانًا
+صادقًا ثم تبطل بعد إعلانها. وبيان ذلك في أثر إعلان
+$\OLId{latin-ordinary}{p} \land \lnot \Knows_\OLId{latin-ordinary}{b} \OLId{latin-ordinary}{p}$ عند~$\OLId{latin-ordinary}{w}_\OLMathNumeral{1}$ في
+\olref{fig:announcement-example}. يحتفظ النموذج $\mModel M \mid \OLId{latin-ordinary}{p}$
+بالعالمين~$\OLId{latin-ordinary}{w}_\OLMathNumeral{1}$ و~$\OLId{latin-ordinary}{w}_\OLMathNumeral{3}$، أما
+$\mModel M \mid (\OLId{latin-ordinary}{p} \land \lnot \Knows_\OLId{latin-ordinary}{b} \OLId{latin-ordinary}{p})$ فلا يحتفظ إلا بالعالم
+$\OLId{latin-ordinary}{w}_\OLMathNumeral{1}$. وفي هذا النموذج الأحادي العالم،
+$\mSat{\OLId{latin-looped}{M} \mid (\OLId{latin-ordinary}{p} \land \lnot \Knows_\OLId{latin-ordinary}{b} \OLId{latin-ordinary}{p})}{\Knows_\OLId{latin-ordinary}{b} \OLId{latin-ordinary}{p}}[\OLId{latin-ordinary}{w}_\OLMathNumeral{1}]$؛ ولذلك
+$\mSat/{\OLId{latin-looped}{M} \mid (\OLId{latin-ordinary}{p} \land \lnot \Knows_\OLId{latin-ordinary}{b} \OLId{latin-ordinary}{p})}{\OLId{latin-ordinary}{p} \land \lnot \Knows_\OLId{latin-ordinary}{b} \OLId{latin-ordinary}{p}}[\OLId{latin-ordinary}{w}_\OLMathNumeral{1}]$،
+ومن ثم
+$\mSat/{\OLId{latin-looped}{M}}{[\OLId{latin-ordinary}{p} \land \lnot \Knows_\OLId{latin-ordinary}{b} \OLId{latin-ordinary}{p}](\OLId{latin-ordinary}{p} \land \lnot \Knows_\OLId{latin-ordinary}{b} \OLId{latin-ordinary}{p})}[\OLId{latin-ordinary}{w}_\OLMathNumeral{1}]$.
+فهذه !!a{formula} تصير كاذبة بنفس إعلانها.
+
+\end{document}

@@ -1,0 +1,271 @@
+% Part: incompleteness
+% Chapter: representability-in-q
+% Section: minimization-representable
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{req}{min}
+\olsection{التصغير المنتظم قابل للتمثيل في $\Th{Q}$}
+
+ننتقل إلى البحث غير المحدود. لتكن $\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{z})$ منتظمة وقابلة للتمثيل في
+$\Th{Q}$، ولتكن !!{formula}~$!A_\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{z},\OLId{latin-ordinary}{y})$ تمثلها.
+ونعرّف $\OLId{latin-ordinary}{f}$ بوضع $\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{z})=\umin{\OLId{latin-ordinary}{x}}{[\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{z})=\OLMathNumeral{0}]}$.
+فالمطلوب !!a{formula}~$!A_\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{z},\OLId{latin-ordinary}{y})$ تمثل~$\OLId{latin-ordinary}{f}$.
+والقيمة~$\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{z})$ هي العدد~$\OLId{latin-ordinary}{x}$ المستوفي أمرين: أن يكون $\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{z})=\OLMathNumeral{0}$،
+وأن يكون أول عدد له هذه الخاصية؛ أي إن $\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{w},\OLId{latin-ordinary}{z})\neq\OLMathNumeral{0}$ لكل $\OLId{latin-ordinary}{w}<\OLId{latin-ordinary}{x}$.
+ولهذا نختار الصيغة
+\[
+!A_\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{z},\OLId{latin-ordinary}{y}) \ident !A_\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{y}, \OLId{latin-ordinary}{z}, \Obj 0) \land \lforall[\OLId{latin-ordinary}{w}][(\OLId{latin-ordinary}{w} < \OLId{latin-ordinary}{y} \lif \lnot
+  !A_\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{w}, \OLId{latin-ordinary}{z}, \Obj 0))].
+\]
+أما في الحالة العامة، فنضع موضع $\OLId{latin-ordinary}{z}$ المتغيرات $\OLId{latin-ordinary}{z}_\OLMathNumeral{0}$، \dots، $\OLId{latin-ordinary}{z}_\OLId{latin-ordinary}{k}$.
+
+ولنقدّم للبرهان، كما فعلنا من قبل، لممًا تبين ما تقدر $\Th{Q}$
+على إثباته.
+
+\begin{lem}
+\ollabel{lem:succ} إذا أخذنا !!{constant}~$\OLId{latin-ordinary}{a}$ وعددًا طبيعيًا~$\OLId{latin-ordinary}{n}$ كيفما كانا، صدقت
+\[
+\Th{Q} \Proves \eq[(\OLId{latin-ordinary}{a}' + \num \OLId{latin-ordinary}{n})][(\OLId{latin-ordinary}{a} + \num \OLId{latin-ordinary}{n})'].
+\]
+\end{lem}
+
+\begin{proof}
+نجري الاستقراء، كعادتنا، على~$\OLId{latin-ordinary}{n}$. ففي الأساس $\OLId{latin-ordinary}{n}=\OLMathNumeral{0}$،
+والمطلوب أن تثبت $\Th{Q}$ المساواة
+$\eq[(\OLId{latin-ordinary}{a}'+\Obj 0)][(\OLId{latin-ordinary}{a}+\Obj 0)']$. وبرهانها:
+\begin{align}
+  \Th{Q} & \Proves \eq[(\OLId{latin-ordinary}{a}' + \Obj 0)][\OLId{latin-ordinary}{a}'] \quad \text{بالبديهية $Q_4$}
+  \ollabel{step1}\\
+  \Th{Q} & \Proves  \eq[(\OLId{latin-ordinary}{a} + \Obj 0)][\OLId{latin-ordinary}{a}] \quad \text{بالبديهية $Q_4$}
+  \ollabel{step2} \\
+  \Th{Q} & \Proves \eq[(\OLId{latin-ordinary}{a} + \Obj 0)'][\OLId{latin-ordinary}{a}'] \quad \text{بـ\olref{step2}}
+  \ollabel{step3} \\
+  \Th{Q} & \Proves \eq[(\OLId{latin-ordinary}{a}' + \Obj 0)][(\OLId{latin-ordinary}{a} + \Obj 0)'] \quad
+  \text{بـ\olref{step1} و\olref{step3}}\notag
+\end{align}
+وفي الخطوة نفرض ثبوت
+$\Th{Q}\Proves\eq[(\OLId{latin-ordinary}{a}'+\num \OLId{latin-ordinary}{n})][(\OLId{latin-ordinary}{a}+\num \OLId{latin-ordinary}{n})']$.
+ولأن $\num{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}}$ هي $\num \OLId{latin-ordinary}{n}'$، يصير المطلوب أن تثبت $\Th{Q}$
+المساواة $\eq[(\OLId{latin-ordinary}{a}'+\num \OLId{latin-ordinary}{n}')][(\OLId{latin-ordinary}{a}+\num \OLId{latin-ordinary}{n}')']$. فنستدل هكذا:
+\begin{align}
+  \Th{Q} & \Proves \eq[(\OLId{latin-ordinary}{a}' + \num \OLId{latin-ordinary}{n}')][(\OLId{latin-ordinary}{a}' + \num \OLId{latin-ordinary}{n})'] \quad
+  \text{بالبديهية $!Q_5$} \ollabel{step5}\\
+  \Th{Q} & \Proves \eq[(\OLId{latin-ordinary}{a}' + \num \OLId{latin-ordinary}{n}')][(\OLId{latin-ordinary}{a} + \num \OLId{latin-ordinary}{n}')'] \quad
+  \text{بفرض الاستقراء والبديهية $!Q_5$ ومنطق المساواة} \ollabel{step6}\\
+  \Th{Q} & \Proves \eq[(\OLId{latin-ordinary}{a}' + \num \OLId{latin-ordinary}{n})'][(\OLId{latin-ordinary}{a} + \num \OLId{latin-ordinary}{n}')'] \quad
+  \text{بـ\olref{step5} و\olref{step6}.} \notag
+\end{align}
+\end{proof}
+
+ولا ينبغي أن نساوي هذه النتيجة بالقول إن $\Th{Q}$ تثبت
+$\lforall[\OLId{latin-ordinary}{x}][\lforall[\OLId{latin-ordinary}{y}][(\OLId{latin-ordinary}{x}'+\OLId{latin-ordinary}{y})=(\OLId{latin-ordinary}{x}+\OLId{latin-ordinary}{y})']]$؛ فذلك أقوى منها.
+وهذه الـ!!{sentence}، وإن صدقت في~$\Struct{N}$،
+لا تثبت في $\Th{Q}$.
+
+\begin{lem}
+\ollabel{lem:less-zero}
+$\Th{Q} \Proves \lforall[\OLId{latin-ordinary}{x}][\lnot \OLId{latin-ordinary}{x} < \Obj 0]$.
+\end{lem}
+
+\begin{proof}
+نسوق هنا حجة غير صورية، نرشد بها إلى بناء الـ!!{derivation} الصورية،
+ولا نكتب الاشتقاق كاملًا.
+
+المطلوب $\lnot \OLId{latin-ordinary}{a}<\Obj 0$ لثابت~$\OLId{latin-ordinary}{a}$ كيفما اختير.
+وبتعريف $<$ يرجع ذلك إلى إثبات
+$\lnot\lexists[\OLId{latin-ordinary}{y}][\eq[(\OLId{latin-ordinary}{y}'+\OLId{latin-ordinary}{a})][\Obj 0]]$ في $\Th{Q}$.
+فلنفرض $\lexists[\OLId{latin-ordinary}{y}][\eq[(\OLId{latin-ordinary}{y}'+\OLId{latin-ordinary}{a})][\Obj 0]]$ طلبًا للتناقض،
+ولنأخذ شاهدًا يحقق $\eq[(\OLId{latin-ordinary}{b}'+\OLId{latin-ordinary}{a})][\Obj 0]$.
+ومن $!Q_\OLMathNumeral{3}$ نحصل على
+$\eq[\OLId{latin-ordinary}{a}][\Obj 0]\lor\lexists[\OLId{latin-ordinary}{y}][\eq[\OLId{latin-ordinary}{a}][\OLId{latin-ordinary}{y}']]$، فتنقسم الحجة إلى حالتين.
+
+أما الأولى، فأن تكون $\eq[\OLId{latin-ordinary}{a}][\Obj 0]$.
+حينئذ تعطينا $\eq[(\OLId{latin-ordinary}{b}'+\OLId{latin-ordinary}{a})][\Obj 0]$ المساواة
+$\eq[(\OLId{latin-ordinary}{b}'+\Obj 0)][\Obj 0]$.
+ومن البديهية~$!Q_\OLMathNumeral{4}$ في $\Th{Q}$ نحصل على
+$\eq[(\OLId{latin-ordinary}{b}'+\Obj 0)][\OLId{latin-ordinary}{b}']$؛ فيلزم $\eq[\OLId{latin-ordinary}{b}'][\Obj 0]$.
+غير أن البديهية~$!Q_\OLMathNumeral{2}$ تعطي $\eq/[\OLId{latin-ordinary}{b}'][\Obj 0]$، فيقع التناقض.
+
+وأما الثانية، فأن يوجد $\OLId{latin-ordinary}{c}$ يحقق $\eq[\OLId{latin-ordinary}{a}][\OLId{latin-ordinary}{c}']$.
+ينتج إذن $\eq[(\OLId{latin-ordinary}{b}'+\OLId{latin-ordinary}{c}')][\Obj 0]$.
+فتعطي البديهية~$!Q_\OLMathNumeral{5}$ المساواة
+$\eq[(\OLId{latin-ordinary}{b}'+\OLId{latin-ordinary}{c})'][\Obj 0]$، وتعود المناقضة مع البديهية~$\OLId{latin-looped}{Q}_\OLMathNumeral{2}$.
+\end{proof}
+
+\begin{lem}
+\ollabel{lem:less-nsucc}
+إذا كان $\OLId{latin-ordinary}{n}$ عددًا طبيعيًا، فإن
+  \[
+  \Th{Q} \Proves
+  \lforall[\OLId{latin-ordinary}{x}][(\OLId{latin-ordinary}{x} < \num {\OLId{latin-ordinary}{n}+\OLMathNumeral{1}} \lif (\eq[\OLId{latin-ordinary}{x}][\Obj 0] \lor \dots \lor
+    \eq[\OLId{latin-ordinary}{x}][\num \OLId{latin-ordinary}{n}]))].
+  \]
+\end{lem}
+
+\begin{proof}
+نبرهن بالاستقراء على~$\OLId{latin-ordinary}{n}$. أما الأساس $\OLId{latin-ordinary}{n}=\OLMathNumeral{0}$، فالمطلوب
+$\OLId{latin-ordinary}{a}<\num \OLMathNumeral{1}\lif\eq[\OLId{latin-ordinary}{a}][\Obj 0]$، حيث $\OLId{latin-ordinary}{a}$ اعتباطي.
+لنفرض $\OLId{latin-ordinary}{a}<\num \OLMathNumeral{1}$؛ فبالبديهية المعرّفة لـ$<$ نحصل على
+$\lexists[\OLId{latin-ordinary}{y}][\eq[(\OLId{latin-ordinary}{y}'+\OLId{latin-ordinary}{a})][\Obj 0']]$، لأن
+$\num \OLMathNumeral{1}\ident\Obj 0'$.
+
+ليكن $\OLId{latin-ordinary}{b}$ شاهدًا لذلك، أي لتكن
+$\eq[(\OLId{latin-ordinary}{b}'+\OLId{latin-ordinary}{a})][\Obj 0']$. نريد $\eq[\OLId{latin-ordinary}{a}][\Obj 0]$.
+ومن البديهية~$!Q_\OLMathNumeral{3}$ إما أن تكون $\eq[\OLId{latin-ordinary}{a}][\Obj 0]$،
+وإما أن يوجد $\OLId{latin-ordinary}{c}$ يحقق $\eq[\OLId{latin-ordinary}{a}][\OLId{latin-ordinary}{c}']$.
+ففي الأولى حصل المطلوب. وفي الأخرى نفرض $\eq[\OLId{latin-ordinary}{a}][\OLId{latin-ordinary}{c}']$،
+فتنتج $\eq[(\OLId{latin-ordinary}{b}'+\OLId{latin-ordinary}{c}')][\Obj 0']$.
+وبالبديهية~$!Q_\OLMathNumeral{5}$ من $\Th{Q}$ ينتج
+$\eq[(\OLId{latin-ordinary}{b}'+\OLId{latin-ordinary}{c})'][\Obj 0']$، ثم بالبديهية~$!Q_\OLMathNumeral{1}$ نحصل على
+$\eq[(\OLId{latin-ordinary}{b}'+\OLId{latin-ordinary}{c})][\Obj 0]$. ومعناه بالبديهية~$!Q_\OLMathNumeral{8}$ أن
+$\OLId{latin-ordinary}{c}<\Obj 0$، وذلك يناقض \olref{lem:less-zero}.
+
+وأما الخطوة، فنثبت حالة $\OLId{latin-ordinary}{n}+\OLMathNumeral{1}$ على فرض حالة~$\OLId{latin-ordinary}{n}$.
+ليكن $\OLId{latin-ordinary}{a}<\num{\OLId{latin-ordinary}{n}+\OLMathNumeral{2}}$؛ ونستعمل $!Q_\OLMathNumeral{3}$ ثانيةً، فتكون إما
+$\eq[\OLId{latin-ordinary}{a}][\Obj 0]$، وإما يوجد $\OLId{latin-ordinary}{b}$ يحقق $\eq[\OLId{latin-ordinary}{a}][\OLId{latin-ordinary}{b}']$.
+أما الأولى فتعطي فورًا
+$\eq[\OLId{latin-ordinary}{a}][\Obj 0]\lor\dots\lor\eq[\OLId{latin-ordinary}{a}][\num{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}}]$.
+وأما الثانية فتعطي $\OLId{latin-ordinary}{b}'<\num{\OLId{latin-ordinary}{n}+\OLMathNumeral{2}}$، أي $\OLId{latin-ordinary}{b}'<\num{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}}'$.
+ومن البديهية~$!Q_\OLMathNumeral{8}$ يوجد $\OLId{latin-ordinary}{c}$ بحيث
+$\eq[(\OLId{latin-ordinary}{c}'+\OLId{latin-ordinary}{b}')][\num{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}}']$. ثم تعطي البديهية~$!Q_\OLMathNumeral{5}$
+$\eq[(\OLId{latin-ordinary}{c}'+\OLId{latin-ordinary}{b})'][\num{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}}']$، وتعطي البديهية~$!Q_\OLMathNumeral{1}$
+$\eq[(\OLId{latin-ordinary}{c}'+\OLId{latin-ordinary}{b})][\num{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}}]$. فيكون $\OLId{latin-ordinary}{b}<\num{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}}$ بالبديهية~$!Q_\OLMathNumeral{8}$.
+وبفرض الاستقراء نحصل على
+$\eq[\OLId{latin-ordinary}{b}][\Obj 0]\lor\dots\lor\eq[\OLId{latin-ordinary}{b}][\num \OLId{latin-ordinary}{n}]$.
+ومنها يستخرج بالمنطق
+$\eq[\OLId{latin-ordinary}{b}'][\Obj 0']\lor\dots\lor\eq[\OLId{latin-ordinary}{b}'][\num \OLId{latin-ordinary}{n}']$،
+فتنتج $\eq[\OLId{latin-ordinary}{a}][\num \OLMathNumeral{1}]\lor\dots\lor\eq[\OLId{latin-ordinary}{a}][\num{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}}]$،
+إذ كانت $\eq[\OLId{latin-ordinary}{a}][\OLId{latin-ordinary}{b}']$.
+\end{proof}
+
+\begin{lem}
+  \ollabel{lem:trichotomy} لأي عدد طبيعي~$\OLId{latin-ordinary}{m}$ تثبت العبارة الآتية:
+  \[
+  \Th{Q} \Proves
+  \lforall[\OLId{latin-ordinary}{y}][((\OLId{latin-ordinary}{y} < \num{\OLId{latin-ordinary}{m}} \lor \num{\OLId{latin-ordinary}{m}} < \OLId{latin-ordinary}{y}) \lor \eq[\OLId{latin-ordinary}{y}][\num{\OLId{latin-ordinary}{m}}])].
+  \]
+\end{lem}
+
+\begin{proof}
+الاستقراء هنا على~$\OLId{latin-ordinary}{m}$. نبدأ بـ$\OLId{latin-ordinary}{m}=\OLMathNumeral{0}$، فنستخرج من~$!Q_\OLMathNumeral{3}$
+$\Th{Q}\Proves
+\lforall[\OLId{latin-ordinary}{y}][(\eq[\OLId{latin-ordinary}{y}][\Obj 0]\lor\lexists[\OLId{latin-ordinary}{z}][\eq[\OLId{latin-ordinary}{y}][\OLId{latin-ordinary}{z}']])]$.
+وليكن $\OLId{latin-ordinary}{a}$ اعتباطيًا. فإما $\eq[\OLId{latin-ordinary}{a}][\Obj 0]$، وإما يوجد~$\OLId{latin-ordinary}{b}$ بحيث
+$\eq[\OLId{latin-ordinary}{a}][\OLId{latin-ordinary}{b}']$. في الأولى نحصل فورًا على
+$(\OLId{latin-ordinary}{a}<\Obj 0\lor\Obj 0<\OLId{latin-ordinary}{a})\lor\eq[\OLId{latin-ordinary}{a}][\Obj 0]$.
+وفي الثانية تكون $\eq[\OLId{latin-ordinary}{a}][\OLId{latin-ordinary}{b}']$، فنستنتج
+$\eq[(\OLId{latin-ordinary}{b}'+\Obj 0)][(\OLId{latin-ordinary}{a}+\Obj 0)]$ بمنطق $\eq$.
+ومن $!Q_\OLMathNumeral{4}$ نعلم $\eq[(\OLId{latin-ordinary}{a}+\Obj 0)][\OLId{latin-ordinary}{a}]$،
+فتلزم $\eq[(\OLId{latin-ordinary}{b}'+\Obj 0)][\OLId{latin-ordinary}{a}]$،
+ومنها $\lexists[\OLId{latin-ordinary}{z}][\eq[(\OLId{latin-ordinary}{z}'+\Obj 0)][\OLId{latin-ordinary}{a}]]$.
+وبتعريف $<$ في $!Q_\OLMathNumeral{8}$ تكون $\Obj 0<\OLId{latin-ordinary}{a}$.
+ومتى كانت $\Obj 0<\OLId{latin-ordinary}{a}$ ثبت أيضًا
+$(\Obj 0<\OLId{latin-ordinary}{a}\lor \OLId{latin-ordinary}{a}<\Obj 0)\lor\eq[\OLId{latin-ordinary}{a}][\Obj 0]$.
+
+ولخطوة الاستقراء نفرض
+\begin{align*}
+  \Th{Q} & \Proves \lforall[\OLId{latin-ordinary}{y}][((\OLId{latin-ordinary}{y} < \num{\OLId{latin-ordinary}{m}} \lor \num{\OLId{latin-ordinary}{m}} < \OLId{latin-ordinary}{y}) \lor
+    \eq[\OLId{latin-ordinary}{y}][\num{\OLId{latin-ordinary}{m}}])]
+  \intertext{ونريد أن نبيّن}
+  \Th{Q} & \Proves \lforall[\OLId{latin-ordinary}{y}][((\OLId{latin-ordinary}{y} < \num{\OLId{latin-ordinary}{m}+\OLMathNumeral{1}} \lor \num{\OLId{latin-ordinary}{m}+\OLMathNumeral{1}} < \OLId{latin-ordinary}{y}) \lor
+    \eq[\OLId{latin-ordinary}{y}][\num{\OLId{latin-ordinary}{m}+\OLMathNumeral{1}}])]
+\end{align*}
+خذ $\OLId{latin-ordinary}{a}$ اعتباطيًا. فبالبديهية $!Q_\OLMathNumeral{3}$، إما $\eq[\OLId{latin-ordinary}{a}][\Obj 0]$،
+وإما يوجد $\OLId{latin-ordinary}{b}$ يحقق $\eq[\OLId{latin-ordinary}{a}][\OLId{latin-ordinary}{b}']$.
+وفي الأولى تكون $\eq[\num \OLId{latin-ordinary}{m}'+\OLId{latin-ordinary}{a}][\num{\OLId{latin-ordinary}{m}+\OLMathNumeral{1}}]$ بالبديهية $!Q_\OLMathNumeral{4}$،
+فينتج $\OLId{latin-ordinary}{a}<\num{\OLId{latin-ordinary}{m}+\OLMathNumeral{1}}$ بالبديهية $!Q_\OLMathNumeral{8}$.
+
+يبقى فرع $\eq[\OLId{latin-ordinary}{a}][\OLId{latin-ordinary}{b}']$.
+وفرض الاستقراء يعطي
+$(\OLId{latin-ordinary}{b}<\num \OLId{latin-ordinary}{m}\lor\num \OLId{latin-ordinary}{m}<\OLId{latin-ordinary}{b})\lor\eq[\OLId{latin-ordinary}{b}][\num \OLId{latin-ordinary}{m}]$؛ فننظر في شقوقه.
+
+أما $\OLId{latin-ordinary}{b}<\num \OLId{latin-ordinary}{m}$، فيكافئ، بالبديهية $!Q_\OLMathNumeral{8}$،
+$\lexists[\OLId{latin-ordinary}{z}][\eq[(\OLId{latin-ordinary}{z}'+\OLId{latin-ordinary}{b})][\num \OLId{latin-ordinary}{m}]]$.
+ليكن $\OLId{latin-ordinary}{c}$ شاهدًا لهذه الخاصية. فمن $\eq[(\OLId{latin-ordinary}{c}'+\OLId{latin-ordinary}{b})][\num \OLId{latin-ordinary}{m}]$
+ينتج $\eq[(\OLId{latin-ordinary}{c}'+\OLId{latin-ordinary}{b})'][\num \OLId{latin-ordinary}{m}']$.
+وبالبديهية $!Q_\OLMathNumeral{5}$ لدينا $\eq[(\OLId{latin-ordinary}{c}'+\OLId{latin-ordinary}{b})'][(\OLId{latin-ordinary}{c}'+\OLId{latin-ordinary}{b}')]$؛
+فيكون $\eq[(\OLId{latin-ordinary}{c}'+\OLId{latin-ordinary}{b}')][\num \OLId{latin-ordinary}{m}']$.
+ثم نثبت $\lexists[\OLId{latin-ordinary}{u}][\eq[(\OLId{latin-ordinary}{u}'+\OLId{latin-ordinary}{b}')][\num{\OLId{latin-ordinary}{m}+\OLMathNumeral{1}}]]$
+بالتعميم الوجودي على~$\OLId{latin-ordinary}{c}$، إذ $\num \OLId{latin-ordinary}{m}'\ident\num{\OLId{latin-ordinary}{m}+\OLMathNumeral{1}}$.
+فمن $\OLId{latin-ordinary}{b}<\num \OLId{latin-ordinary}{m}$ وصلنا إلى $\OLId{latin-ordinary}{b}'<\num{\OLId{latin-ordinary}{m}+\OLMathNumeral{1}}$،
+ومنها إلى $\OLId{latin-ordinary}{a}<\num{\OLId{latin-ordinary}{m}+\OLMathNumeral{1}}$.
+
+وأما $\num \OLId{latin-ordinary}{m}<\OLId{latin-ordinary}{b}$، فمعناه
+$\lexists[\OLId{latin-ordinary}{z}][\eq[(\OLId{latin-ordinary}{z}'+\num \OLId{latin-ordinary}{m})][\OLId{latin-ordinary}{b}]]$.
+ليكن $\OLId{latin-ordinary}{c}$ شاهدًا مكان~$\OLId{latin-ordinary}{z}$، فتكون $\eq[(\OLId{latin-ordinary}{c}'+\num \OLId{latin-ordinary}{m})][\OLId{latin-ordinary}{b}]$.
+وبالمنطق ينتج $\eq[(\OLId{latin-ordinary}{c}'+\num \OLId{latin-ordinary}{m})'][\OLId{latin-ordinary}{b}']$،
+ثم بالبديهية $!Q_\OLMathNumeral{5}$ ينتج $\eq[(\OLId{latin-ordinary}{c}'+\num \OLId{latin-ordinary}{m}')][\OLId{latin-ordinary}{b}']$.
+ولما كانت $\eq[\OLId{latin-ordinary}{a}][\OLId{latin-ordinary}{b}']$، وكانت $\num \OLId{latin-ordinary}{m}'\ident\num{\OLId{latin-ordinary}{m}+\OLMathNumeral{1}}$،
+حصلت $\eq[(\OLId{latin-ordinary}{c}'+\num{\OLId{latin-ordinary}{m}+\OLMathNumeral{1}})][\OLId{latin-ordinary}{a}]$.
+فتعطي $!Q_\OLMathNumeral{8}$ أن $\num{\OLId{latin-ordinary}{m}+\OLMathNumeral{1}}<\OLId{latin-ordinary}{a}$.
+
+وأما الشق الأخير، $\eq[\OLId{latin-ordinary}{b}][\num \OLId{latin-ordinary}{m}]$، فيعطينا بالمنطق
+$\eq[\OLId{latin-ordinary}{b}'][\num \OLId{latin-ordinary}{m}']$، ثم $\eq[\OLId{latin-ordinary}{a}][\num{\OLId{latin-ordinary}{m}+\OLMathNumeral{1}}]$.
+
+فمن كل شق لحالة~$\OLId{latin-ordinary}{m}$ و$\OLId{latin-ordinary}{b}$ حصل الشق المناظر
+لحالة~$\OLId{latin-ordinary}{m}+\OLMathNumeral{1}$ و$\OLId{latin-ordinary}{a}$، وتمت خطوة الاستقراء.
+\end{proof}
+
+\begin{prop}
+\ollabel{prop:rep-minimization}
+إذا كانت $!A_\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{z},\OLId{latin-ordinary}{y})$ تمثل الدالة المنتظمة $\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{z})$ في~$\Th{Q}$،
+فالصيغة
+\[
+!A_\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{z},\OLId{latin-ordinary}{y}) \ident !A_\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{y}, \OLId{latin-ordinary}{z}, \Obj 0) \land \lforall[\OLId{latin-ordinary}{w}][(\OLId{latin-ordinary}{w} < \OLId{latin-ordinary}{y} \lif \lnot
+  !A_\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{w}, \OLId{latin-ordinary}{z}, \Obj 0))]
+\]
+تمثيل للدالة $\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{z})=\umin{\OLId{latin-ordinary}{x}}{[\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{z})=\OLMathNumeral{0}]}$.
+\end{prop}
+
+\begin{proof}
+نثبت الشرط الأول: متى كان $\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{n})=\OLId{latin-ordinary}{m}$ لزم
+$\Th{Q}\Proves !A_\OLId{latin-ordinary}{f}(\num \OLId{latin-ordinary}{n},\num \OLId{latin-ordinary}{m})$؛ أي
+\begin{align}
+  \Th{Q} & \Proves !A_\OLId{latin-ordinary}{g}(\num{\OLId{latin-ordinary}{m}}, \num{\OLId{latin-ordinary}{n}}, \Obj 0) \land \lforall[\OLId{latin-ordinary}{w}][(\OLId{latin-ordinary}{w} <
+    \num{\OLId{latin-ordinary}{m}} \lif \lnot !A_\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{w}, \num{\OLId{latin-ordinary}{n}}, \Obj 0))]. \notag
+  \intertext{ولما كانت $!A_g(x,z,y)$ تمثل $g(x,z)$ وكان $g(m,n)=0$
+    إذا كان $f(n)=m$، فلدينا}
+\Th{Q} & \Proves !A_\OLId{latin-ordinary}{g}(\num{\OLId{latin-ordinary}{m}}, \num{\OLId{latin-ordinary}{n}}, \Obj 0). \notag
+  \intertext{وإذا كان $f(n)=m$، فإن $g(k,n)\neq0$ لكل $k<m$. فضع
+    $l=g(k,n)$. ومن شرط الوحدانية في تمثيل الدالة يلزم
+    $\Th{Q}\Proves\lforall[y][(!A_g(\num{k},\num{n},y)\lif
+    \eq[y][\num{l}])]$؛ ولما كان $l\neq0$ أثبتت
+    $\Th{Q}$ أن $\num l\neq\Obj 0$ باللمة
+    \olref[bre]{lem:q-proves-neq}. ومن ثم}
+\Th{Q} & \Proves \lnot !A_\OLId{latin-ordinary}{g}(\num{\OLId{latin-ordinary}{k}}, \num{\OLId{latin-ordinary}{n}}, \Obj 0). \notag
+\intertext{فنحصل على}
+\Th{Q} & \Proves \lforall[\OLId{latin-ordinary}{w}][(\OLId{latin-ordinary}{w} < \num{\OLId{latin-ordinary}{m}} \lif \lnot
+  !A_\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{w}, \num{\OLId{latin-ordinary}{n}}, \Obj 0))]. \ollabel{rep-less}
+\end{align}
+فالحالة التي فيها $\OLId{latin-ordinary}{m}=\OLMathNumeral{0}$ تثبتها \olref{lem:less-zero}،
+والحالات الأخرى تثبتها \olref{lem:less-nsucc}.
+
+ثم نثبت شرط انفراد القيمة: إذا كان $\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{n})=\OLId{latin-ordinary}{m}$، فإن
+$\Th{Q}\Proves
+\lforall[\OLId{latin-ordinary}{y}][(!A_\OLId{latin-ordinary}{f}(\num \OLId{latin-ordinary}{n},\OLId{latin-ordinary}{y})\lif\eq[\OLId{latin-ordinary}{y}][\num \OLId{latin-ordinary}{m}])]$.
+وسنرسم الحجة بعبارة غير صورية أيضًا، ويستخرج القارئ منها الاشتقاق الصوري.
+
+لنفرض $!A_\OLId{latin-ordinary}{f}(\num \OLId{latin-ordinary}{n},\OLId{latin-ordinary}{b})$. فنستخرج الشق (أ)، وهو
+$!A_\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{b},\num \OLId{latin-ordinary}{n},\Obj 0)$، والشق (ب)، وهو
+$\lforall[\OLId{latin-ordinary}{w}][(\OLId{latin-ordinary}{w}<\OLId{latin-ordinary}{b}\lif\lnot !A_\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{w},\num \OLId{latin-ordinary}{n},\Obj 0))]$.
+وتعطينا \olref{lem:trichotomy}
+$(\OLId{latin-ordinary}{b}<\num \OLId{latin-ordinary}{m}\lor\num \OLId{latin-ordinary}{m}<\OLId{latin-ordinary}{b})\lor\eq[\OLId{latin-ordinary}{b}][\num \OLId{latin-ordinary}{m}]$.
+فإذا أبطلنا $\OLId{latin-ordinary}{b}<\num \OLId{latin-ordinary}{m}$ و$\num \OLId{latin-ordinary}{m}<\OLId{latin-ordinary}{b}$ بالتناقض، لم يبق إلا التساوي.
+
+أما $\num \OLId{latin-ordinary}{m}<\OLId{latin-ordinary}{b}$، فينتج منه $\lnot !A_\OLId{latin-ordinary}{g}(\num \OLId{latin-ordinary}{m},\num \OLId{latin-ordinary}{n},\Obj 0)$
+باستعمال (ب). لكن $\OLId{latin-ordinary}{m}=\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{n})$ يقتضي $\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{m},\OLId{latin-ordinary}{n})=\OLMathNumeral{0}$،
+فتكون $\Th{Q}\Proves !A_\OLId{latin-ordinary}{g}(\num \OLId{latin-ordinary}{m},\num \OLId{latin-ordinary}{n},\Obj 0)$،
+لأن $!A_\OLId{latin-ordinary}{g}$ تمثل~$\OLId{latin-ordinary}{g}$. وهذا تناقض.
+
+وأما $\OLId{latin-ordinary}{b}<\num \OLId{latin-ordinary}{m}$، فقد ثبت
+$\Th{Q}\Proves\lforall[\OLId{latin-ordinary}{w}][(\OLId{latin-ordinary}{w}<\num \OLId{latin-ordinary}{m}\lif
+\lnot !A_\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{w},\num \OLId{latin-ordinary}{n},\Obj 0))]$ في \olref{rep-less}.
+  فنستخرج $\lnot !A_\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{b},\num \OLId{latin-ordinary}{n},\Obj 0)$،
+  ونناقض (أ). وبذلك يتم البرهان.
+% تصحيح مصدر (C296-01): صُرّح باستدلال الوحدانية وعدم تساوي العددين المرمزين الذي يبرر نفي A_g عند الصفر.
+\end{proof}
+
+\end{document}

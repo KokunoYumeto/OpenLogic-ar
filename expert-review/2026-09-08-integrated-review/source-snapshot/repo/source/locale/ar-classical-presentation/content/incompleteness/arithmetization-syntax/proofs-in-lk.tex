@@ -1,0 +1,314 @@
+% Part: incompleteness
+% Chapter: arithmetization-syntax
+% Section: proofs-in-lk
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{art}{plk}
+\olsection{\usetoken{P}{derivation} في $\Log{LK}$}
+
+\begin{explain}
+حوسبة ال!!{derivation}s تقتضي تمثيل
+ال!!{derivation}s بالأعداد. ولما كانت
+ال!!{derivation}s أشجار تتابعات، ولكل
+استدلال فيها وسم، كان التمثيل العودي
+أقرب الطرق: نجعل ال!!{derivation}
+صفًا يتضمن التتابع الختامي، والوسم،
+ورموز ال!!{derivation}s الجزئية
+المنتهية بمقدمات الاستدلال الأخير.
+\end{explain}
+
+\begin{defn}
+للمتتالية المنتهية $\OLId{greek-variable}{Gamma}$ من
+!!{sentence}s، حيث $\OLId{greek-variable}{Gamma}=\tuple{!A_\OLMathNumeral{1}, \dots, !A_\OLId{latin-ordinary}{n}}$،
+نضع $\Gn{\OLId{greek-variable}{Gamma}}=\tuple{\Gn{!A_\OLMathNumeral{1}}, \dots, \Gn{!A_\OLId{latin-ordinary}{n}}}$.
+
+وإذا أعطي التتابع $\OLId{greek-variable}{Gamma} \Sequent \OLId{greek-variable}{Delta}$،
+عرّفنا عدد غودل لـ$\OLId{greek-variable}{Gamma} \Sequent \OLId{greek-variable}{Delta}$ هكذا:
+\[
+\Gn{\OLId{greek-variable}{Gamma} \Sequent \OLId{greek-variable}{Delta}} = \tuple{\Gn{\OLId{greek-variable}{Gamma}}, \Gn{\OLId{greek-variable}{Delta}}}
+\]
+
+وأما $\pi$، وهو !!a{derivation} في $\Log{LK}$،
+فنعين $\Gn{\pi}$ بتفصيل حالتيه:
+\begin{enumerate}
+\item إن اقتصر $\pi$ على التتابع الابتدائي
+  $\OLId{greek-variable}{Gamma} \Sequent \OLId{greek-variable}{Delta}$، جعلنا $\Gn{\pi}$
+  \[
+    \tuple{\OLMathNumeral{0}, \Gn{\OLId{greek-variable}{Gamma} \Sequent \OLId{greek-variable}{Delta}}}.
+  \]
+\item وإن كان آخر $\pi$ استدلالًا من مقدمة أو مقدمتين، نتيجته
+  $\OLId{greek-variable}{Gamma} \Sequent \OLId{greek-variable}{Delta}$، وكان $\pi_\OLMathNumeral{1}$ و$\pi_\OLMathNumeral{2}$ برهاني
+  مقدمتيه الجزئيين المباشرين، وضعنا $\Gn{\pi}$ مساويًا لـ
+  \begin{align*}
+    & \tuple{\OLMathNumeral{1}, \Gn{\pi_\OLMathNumeral{1}}, \Gn{\OLId{greek-variable}{Gamma} \Sequent \OLId{greek-variable}{Delta}}, \OLId{latin-ordinary}{k}} \text{ أو}\\ 
+    & \tuple{\OLMathNumeral{2}, \Gn{\pi_\OLMathNumeral{1}}, \Gn{\pi_\OLMathNumeral{2}}, \Gn{\OLId{greek-variable}{Gamma} \Sequent \OLId{greek-variable}{Delta}}, \OLId{latin-ordinary}{k}}, 
+  \end{align*}
+  على الترتيب. وتؤخذ قيمة $\OLId{latin-ordinary}{k}$ من الجدول، وفق القاعدة
+  التي ختم بها الاستدلال:
+
+  \begin{tabular}{lccccccc}
+    \text{القاعدة:} & \LeftR{\Weakening} & \RightR{\Weakening} &
+    \LeftR{\Contraction} & \RightR{\Contraction} &
+    \LeftR{\Exchange} & \RightR{\Exchange} \\
+    $\OLId{latin-ordinary}{k}$: & \OLClassicalDigits{1} & \OLClassicalDigits{2} & \OLClassicalDigits{3} & \OLClassicalDigits{4} & \OLClassicalDigits{5} & \OLClassicalDigits{6} \\[2ex]
+    \text{القاعدة:} & \LeftR{\lnot} & \RightR{\lnot} &
+    \LeftR{\land} & \RightR{\land} & 
+    \LeftR{\lor} & \RightR{\lor} \\
+    $\OLId{latin-ordinary}{k}$: & \OLClassicalDigits{7} & \OLClassicalDigits{8} & \OLClassicalDigits{9} & \OLClassicalDigits{10} & \OLClassicalDigits{11} & \OLClassicalDigits{12} \\[2ex]
+    \text{القاعدة:} & \LeftR{\lif} & \RightR{\lif} &
+    \LeftR{\lforall} & \RightR{\lforall} &
+    \LeftR{\lexists} & \RightR{\lexists} \\
+    $\OLId{latin-ordinary}{k}$: & \OLClassicalDigits{13} & \OLClassicalDigits{14} & \OLClassicalDigits{15} & \OLClassicalDigits{16} & \OLClassicalDigits{17} & \OLClassicalDigits{18} \\[2ex]
+    \text{القاعدة:} & \Cut & = \\
+    $\OLId{latin-ordinary}{k}$: & \OLClassicalDigits{19} & \OLClassicalDigits{20}
+  \end{tabular}
+\end{enumerate}
+\end{defn}
+
+\begin{ex}
+  خذ هذا ال!!{derivation} اليسير:
+  \begin{prooftree}
+    \Axiom$!A \fCenter !A$
+    \RightLabel{\LeftR{\land}}
+    \UnaryInf$!A \land !B \fCenter !A$
+    \RightLabel{\RightR{\lif}}
+    \UnaryInf$\fCenter (!A \land !B) \lif !A$
+  \end{prooftree}
+  فرمز الاشتقاق المؤلف من التتابع الابتدائي وحده هو
+  $\OLId{latin-ordinary}{p}_\OLMathNumeral{0}=\tuple{\OLMathNumeral{0},\Gn{!A \Sequent !A}}$.
+  ثم يكون رمز ال!!{derivation} المنتهي بنتيجة
+  $ \LeftR{\land}$ هو
+  $\OLId{latin-ordinary}{p}_\OLMathNumeral{1}=\tuple{\OLMathNumeral{1},\OLId{latin-ordinary}{p}_\OLMathNumeral{0},\Gn{!A \land !B \Sequent !A},\OLMathNumeral{9}}$.
+  وفيه $\OLMathNumeral{1}$ يدل على أن $ \LeftR{\land}$
+  أحادية المقدمة، ويليه $\OLId{latin-ordinary}{p}_\OLMathNumeral{0}$، وهو رمز ال!!{derivation}
+  الجزئي المباشر، ثم رمز النتيجة
+  $!A \land !B \Sequent !A$، ثم $\OLMathNumeral{9}$،
+  وهو رمز القاعدة $\LeftR{\land}$.
+  فيكون عدد غودل لل!!{derivation} كله
+  $\tuple{\OLMathNumeral{1},\OLId{latin-ordinary}{p}_\OLMathNumeral{1},\Gn{\Sequent (!A \land !B) \lif !A},\OLMathNumeral{14}}$،
+  أي
+  \[
+    \tuple{\OLMathNumeral{1}, \tuple{\OLMathNumeral{1}, \tuple{\OLMathNumeral{0}, \Gn{!A \Sequent !A}}, \Gn{!A \land !B \Sequent !A}, \OLMathNumeral{9}},
+      \Gn{\Sequent (!A \land !B) \lif !A}, \OLMathNumeral{14}}.
+  \]
+  % تصحيح مصدر (C286-02): ذُكرت حقول p_1 الأربعة بالترتيب، ومنها رمز الاشتقاق الجزئي المباشر p_0.
+\end{ex}
+
+\begin{explain}
+بعد تمثيل ال!!{derivation}s بالأعداد،
+يبقى إثبات أن معالجة هذه ال!!{derivation}s
+وخواصها وعلاقاتها الأساسية تكون عودية بدائية.
+فمن العمليات ما هو يسير: إذا كان~$\OLId{latin-ordinary}{p}$
+عدد غودل ل!!a{derivation}، أعطت
+$\fn{EndSeq}(\OLId{latin-ordinary}{p})=(\OLId{latin-ordinary}{p})_{(\OLId{latin-ordinary}{p})_\OLMathNumeral{0}+\OLMathNumeral{1}}$ عدد
+غودل لتتابعه الختامي، وأعطت
+$\fn{LastRule}(\OLId{latin-ordinary}{p})=(\OLId{latin-ordinary}{p})_{(\OLId{latin-ordinary}{p})_\OLMathNumeral{0}+\OLMathNumeral{2}}$ رمز
+  آخر قواعده. ولتكن $\fn{SeqCode}(\OLId{latin-ordinary}{u})$ الخاصية العودية البدائية
+  الدالة على أن~$\OLId{latin-ordinary}{u}$ رمز متتالية منتهية في الترميز المعتمد.
+  والخاصية $\fn{Sequent}(\OLId{latin-ordinary}{s})$،
+  التي نعرّفها بـ
+  \[
+  \fn{SeqCode}(\OLId{latin-ordinary}{s}) \land \len{\OLId{latin-ordinary}{s}} = \OLMathNumeral{2} \land
+  \fn{SeqCode}((\OLId{latin-ordinary}{s})_\OLMathNumeral{0}) \land \fn{SeqCode}((\OLId{latin-ordinary}{s})_\OLMathNumeral{1}) \land
+  \bforall{\OLId{latin-ordinary}{i}<\len{(\OLId{latin-ordinary}{s})_\OLMathNumeral{0}} + \len{(\OLId{latin-ordinary}{s})_\OLMathNumeral{1}}}{\fn{Sent}(((\OLId{latin-ordinary}{s})_\OLMathNumeral{0} \concat (\OLId{latin-ordinary}{s})_\OLMathNumeral{1})_\OLId{latin-ordinary}{i})}
+  \]
+تصدق على $\OLId{latin-ordinary}{s}$ إذا وفقط إذا رمز $\OLId{latin-ordinary}{s}$
+تتابعًا من !!{sentence}s. وأما العمليات
+الأصعب فنبيّن طريق معالجتها، ولو إجمالًا.
+وغايتنا أن تكون علاقة «$\pi$
+!!a{derivation} لـ$!A$ من $\OLId{greek-variable}{Gamma}$»
+عودية بدائية في عددي غودل لـ$\pi$ و$!A$.
+\end{explain}
+
+\begin{prop}\ollabel{prop:followsby}
+  الخاصية $\fn{Correct}(\OLId{latin-ordinary}{p})$ عودية بدائية، ومعناها صحة
+  الاستدلال الأخير في !!{derivation}~$\pi$ الذي عدد غودل له~$\OLId{latin-ordinary}{p}$.
+\end{prop}
+
+\begin{proof}
+  التتابع $\OLId{greek-variable}{Gamma} \Sequent \OLId{greek-variable}{Delta}$ ابتدائي
+  إذا وجدت !!a{sentence}~$!A$ يكون معها
+  $\OLId{greek-variable}{Gamma} \Sequent \OLId{greek-variable}{Delta}$ هو
+  $!A \Sequent !A$، أو وجد حد~$\OLId{latin-ordinary}{t}$
+  يكون معه $\OLId{greek-variable}{Gamma} \Sequent \OLId{greek-variable}{Delta}$
+  هو $\emptyset \Sequent \eq[\OLId{latin-ordinary}{t}][\OLId{latin-ordinary}{t}]$.
+  فننقل هذا إلى الأعداد: $\fn{InitSeq}(\OLId{latin-ordinary}{s})$
+  تكافئ الشرط
+  \begin{align*}
+  \bexists{\OLId{latin-ordinary}{x} < \OLId{latin-ordinary}{s}}{} (\fn{Sent}(\OLId{latin-ordinary}{x}) & \land
+  \OLId{latin-ordinary}{s} = \tuple{\tuple{\OLId{latin-ordinary}{x}},\tuple{\OLId{latin-ordinary}{x}}})
+  \lor {}\\
+  \bexists{\OLId{latin-ordinary}{t}<\OLId{latin-ordinary}{s}}{} (\fn{Term}(\OLId{latin-ordinary}{t}) & \land
+  \OLId{latin-ordinary}{s} = \tuple{\OLMathNumeral{0}, \tuple{\Gn{{\eq}(} \concat \OLId{latin-ordinary}{t} \concat \Gn{,} \concat \OLId{latin-ordinary}{t} \concat \Gn{)}}}).
+  \end{align*}
+
+  ولكل قاعدة~$\OLId{latin-looped}{R}$ نحتاج أيضًا إلى إثبات
+  العودية البدائية للعلاقة $\fn{FollowsBy}_\OLId{latin-looped}{R}(\OLId{latin-ordinary}{p})$.
+  ومعنى $\fn{FollowsBy}_\OLId{latin-looped}{R}(\OLId{latin-ordinary}{p})$ أن $\OLId{latin-ordinary}{p}$
+  عدد غودل ل!!{derivation}~$\pi$،
+  وأن ختام $\pi$ ينتج من
+  ال!!{derivation}s الجزئية المباشرة
+  لـ$\pi$ بتطبيق صحيح لـ~$\OLId{latin-looped}{R}$.
+
+  ومن أيسر الأمثلة قاعدة $\RightR{\land}$.
+  فإذا ختم $\pi$ بتطبيق صحيح لـ$\RightR{\land}$،
+  كانت صورته:
+  \begin{prooftree}
+    \AxiomC{}
+    \RightLabel{$\pi_\OLMathNumeral{1}$}
+    \Deduce$\OLId{greek-variable}{Gamma} \fCenter \OLId{greek-variable}{Delta}, !A$
+    
+    \AxiomC{}
+    \RightLabel{$\pi_\OLMathNumeral{2}$}
+    \Deduce$\OLId{greek-variable}{Gamma} \fCenter \OLId{greek-variable}{Delta}, !B$
+
+    \RightLabel{\RightR\land}
+    \BinaryInf$\OLId{greek-variable}{Gamma} \fCenter \OLId{greek-variable}{Delta}, !A \land !B$
+  \end{prooftree}
+  فصحة آخر استدلال في !!{derivation}~$\pi$
+  بحسب $\RightR{\land}$ تكافئ وجود متتاليتي
+  !!{sentence}s، هما $\OLId{greek-variable}{Gamma}$ و$\OLId{greek-variable}{Delta}$،
+  و!!{sentence}s اثنتين $!A$ و$!B$،
+  بحيث يختم $\pi_\OLMathNumeral{1}$ بـ$\OLId{greek-variable}{Gamma} \Sequent \OLId{greek-variable}{Delta},!A$،
+  ويختم $\pi_\OLMathNumeral{2}$ بـ$\OLId{greek-variable}{Gamma} \Sequent \OLId{greek-variable}{Delta},!B$،
+  ويختم $\pi$ بـ$\OLId{greek-variable}{Gamma} \Sequent \OLId{greek-variable}{Delta},!A \land !B$.
+  وليس علينا إلا نقل هذا الوصف إلى أعداد غودل.
+  فإذا وضعنا $\OLId{latin-ordinary}{s}=\Gn{\OLId{greek-variable}{Gamma} \Sequent \OLId{greek-variable}{Delta}}$،
+  كان $(\OLId{latin-ordinary}{s})_\OLMathNumeral{0}=\Gn{\OLId{greek-variable}{Gamma}}$ و$(\OLId{latin-ordinary}{s})_\OLMathNumeral{1}=\Gn{\OLId{greek-variable}{Delta}}$.
+  فتكون $\fn{FollowsBy}_{\RightR{\land}}(\OLId{latin-ordinary}{p})$
+  مكافئة لـ
+\begin{align*}
+& \bexists{\OLId{latin-ordinary}{g} < \OLId{latin-ordinary}{p}}{\bexists{\OLId{latin-ordinary}{d} < \OLId{latin-ordinary}{p}}{\bexists{\OLId{latin-ordinary}{a} < \OLId{latin-ordinary}{p}}{\bexists{\OLId{latin-ordinary}{b} < \OLId{latin-ordinary}{p}}{\quad}}}} \\
+& \qquad \fn{EndSeq}(\OLId{latin-ordinary}{p}) = 
+  \tuple{\OLId{latin-ordinary}{g}, \OLId{latin-ordinary}{d} \concat 
+    \tuple{\Gn{(} \concat \OLId{latin-ordinary}{a} \concat \Gn{\land} \concat \OLId{latin-ordinary}{b} \concat \Gn{)}}} \land {} \\
+& \qquad \fn{EndSeq}((\OLId{latin-ordinary}{p})_\OLMathNumeral{1}) = \tuple{\OLId{latin-ordinary}{g}, \OLId{latin-ordinary}{d} \concat \tuple{\OLId{latin-ordinary}{a}}} \land {}\\
+& \qquad \fn{EndSeq}((\OLId{latin-ordinary}{p})_\OLMathNumeral{2}) = \tuple{\OLId{latin-ordinary}{g}, \OLId{latin-ordinary}{d} \concat \tuple{\OLId{latin-ordinary}{b}}} \land {}\\
+& \qquad (\OLId{latin-ordinary}{p})_\OLMathNumeral{0} = \OLMathNumeral{2} \land \fn{LastRule}(\OLId{latin-ordinary}{p}) = \OLMathNumeral{10}.
+\end{align*}
+ومعنى الأسطر على الترتيب: توجد متتالية
+($\OLId{greek-variable}{Gamma}$) رمزها $\OLId{latin-ordinary}{g}$، ومتتالية ($\OLId{greek-variable}{Delta}$)
+رمزها $\OLId{latin-ordinary}{d}$، و!!a{formula} ($!A$) رمزها
+$\OLId{latin-ordinary}{a}$، و!!a{formula} ($!B$) رمزها $\OLId{latin-ordinary}{b}$؛
+على أن ختام $\pi$ هو
+$\OLId{greek-variable}{Gamma} \Sequent \OLId{greek-variable}{Delta},!A \land !B$،
+وختام $\pi_\OLMathNumeral{1}$ هو $\OLId{greek-variable}{Gamma} \Sequent \OLId{greek-variable}{Delta},!A$،
+وختام $\pi_\OLMathNumeral{2}$ هو $\OLId{greek-variable}{Gamma} \Sequent \OLId{greek-variable}{Delta},!B$.
+ولـ$\pi$ اشتقاقان جزئيان مباشران، وقاعدته
+الأخيرة $\RightR\land$ ذات الرقم~$\OLMathNumeral{10}$.
+
+وأما آخر استدلال في~$\pi$ فيصح بحسب
+$\RightR\lexists$ إذا وفقط إذا وجدت
+متتاليتان $\OLId{greek-variable}{Gamma}$ و$\OLId{greek-variable}{Delta}$،
+و!!a{formula}~$!A$، ومتغير~$\OLId{latin-ordinary}{x}$،
+وحد مغلق~$\OLId{latin-ordinary}{t}$، بحيث يكون ختام $\pi$
+هو $\OLId{greek-variable}{Gamma} \Sequent \OLId{greek-variable}{Delta},\lexists[\OLId{latin-ordinary}{x}][!A]$،
+وختام $\pi_\OLMathNumeral{1}$ هو
+$\OLId{greek-variable}{Gamma} \Sequent \OLId{greek-variable}{Delta},\Subst{!A}{\OLId{latin-ordinary}{t}}{\OLId{latin-ordinary}{x}}$.
+فبالترميز تكون $\fn{FollowsBy}_{\RightR\lexists}(\OLId{latin-ordinary}{p})$
+مكافئة للشرط
+\begin{align*}
+  & \bexists{\OLId{latin-ordinary}{g}<\OLId{latin-ordinary}{p}}{\bexists{\OLId{latin-ordinary}{d}<\OLId{latin-ordinary}{p}}{\bexists{\OLId{latin-ordinary}{a}<\OLId{latin-ordinary}{p}}{\bexists{\OLId{latin-ordinary}{x}<\OLId{latin-ordinary}{p}}{\bexists{\OLId{latin-ordinary}{t}<\OLId{latin-ordinary}{p}}{\quad}}}}}\\
+  & \qquad \fn{Var}(\OLId{latin-ordinary}{x}) \land \fn{ClTerm}(\OLId{latin-ordinary}{t}) \land {}\\
+  & \qquad \fn{EndSeq}(\OLId{latin-ordinary}{p}) = 
+  \tuple{
+    \OLId{latin-ordinary}{g},
+    \OLId{latin-ordinary}{d} \concat \tuple{\Gn{\lexists} \concat \OLId{latin-ordinary}{x} \concat \OLId{latin-ordinary}{a}}
+  } \land {}\\
+  & \qquad \fn{EndSeq}((\OLId{latin-ordinary}{p})_\OLMathNumeral{1}) = 
+  \tuple{
+    \OLId{latin-ordinary}{g},
+    \OLId{latin-ordinary}{d} \concat \tuple{\fn{Subst}(\OLId{latin-ordinary}{a}, \OLId{latin-ordinary}{t}, \OLId{latin-ordinary}{x})}
+  } \land {}\\
+  & \qquad (\OLId{latin-ordinary}{p})_\OLMathNumeral{0} = \OLMathNumeral{1} \land \fn{LastRule}(\OLId{latin-ordinary}{p}) = \OLMathNumeral{18}.
+\end{align*}
+ومن هذه العلاقات نعرّف $\fn{Correct}(\OLId{latin-ordinary}{p})$ هكذا:
+\begin{multline*}
+  \fn{Sequent}(\fn{EndSeq}(\OLId{latin-ordinary}{p})) \land {}\\ 
+  [(\fn{LastRule}(p) = 1 \land 
+  \fn{FollowsBy}_{\LeftR\Weakening}(p)) \lor \dots \lor {}\\
+  (\fn{LastRule}(p) = 20 \land \fn{FollowsBy}_{\eq}(p)) \lor {}\\
+  (p)_0 = 0 \land \fn{InitSeq}(\fn{EndSeq}(p))]
+\end{multline*}
+فيشترط السطر الأول أن يكون ختام $\OLId{latin-ordinary}{p}$
+تتابعًا من !!{sentence}s حقًا، ويتناول
+السطر الأخير حالة اقتصار $\OLId{latin-ordinary}{p}$ على تتابع ابتدائي.
+\end{proof}
+
+\begin{prob}
+  ضع تعريفًا للخواص الآتية على مثال
+  \olref[inc][art][plk]{prop:followsby}:
+  \begin{enumerate}
+  \item $\fn{FollowsBy}_{\Cut}(\OLId{latin-ordinary}{p})$,
+  \item $\fn{FollowsBy}_{\LeftR\lif}(\OLId{latin-ordinary}{p})$,
+  \item $\fn{FollowsBy}_{\eq}(\OLId{latin-ordinary}{p})$,
+  \item $\fn{FollowsBy}_{\RightR{\lforall}}(\OLId{latin-ordinary}{p})$.
+  \end{enumerate}
+  وعليك في الأخيرة أن تبيّن أيضًا عودية اختبار
+  شرط المتغير المميز بدائيًا، في آخر استدلال
+  من !!{derivation} ذي عدد غودل~$\OLId{latin-ordinary}{p}$؛ أي
+  عدم ورود المتغير المميز~$\OLId{latin-ordinary}{a}$ لقاعدة
+  $\RightR{\lforall}$ في التتابع الختامي.
+  \end{prob}
+
+\begin{prop}
+  \ollabel{prop:deriv}
+  العلاقة $\fn{Deriv}(\OLId{latin-ordinary}{p})$ عودية بدائية؛ وهي
+  تميّز كون $\OLId{latin-ordinary}{p}$ عدد غودل ل!!{derivation} صحيح~$\pi$.
+\end{prop}
+
+\begin{proof}
+  إن !!^a{derivation}~$\pi$ صحيح متى صحت
+  تطبيقات القواعد فيه كلها؛ أي متى انتهت
+  ال!!{derivation}s الجزئية جميعًا باستدلالات
+  صحيحة. ولتكن $\fn{TreeCode}(\OLId{latin-ordinary}{p})$ الخاصية العودية البدائية الدالة
+  على أن~$\OLId{latin-ordinary}{p}$ رمز شجرة اشتقاق منتهية ذات جذر في الترميز المعتمد.
+  فشرط $\fn{Deriv}(\OLId{latin-ordinary}{p})$ المكافئ هو
+  \[
+  \fn{TreeCode}(\OLId{latin-ordinary}{p}) \land
+  \bforall{\OLId{latin-ordinary}{i}<\len{\fn{SubtreeSeq}(\OLId{latin-ordinary}{p})}}{\fn{Correct}((\fn{SubtreeSeq}(\OLId{latin-ordinary}{p}))_\OLId{latin-ordinary}{i})}.
+  \]
+  % تصحيح مصدر (C286-01): أُثبت حارسا رمز المتتالية وشجرة الاشتقاق قبل استعمال الإسقاطات الكلية.
+\end{proof}
+
+\begin{prop}
+لتكن $\OLId{greek-variable}{Gamma}$ مجموعة !!{sentence}s عودية بدائية.
+فتكون العلاقة $\Prf[\OLId{greek-variable}{Gamma}](\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y})$، ومعناها «$\OLId{latin-ordinary}{x}$ رمز
+!!a{derivation}~$\pi$ لـ$\OLId{greek-variable}{Gamma}_\OLMathNumeral{0} \Sequent !A$ لبعض المجموعات المنتهية
+$\OLId{greek-variable}{Gamma}_\OLMathNumeral{0}\subseteq\OLId{greek-variable}{Gamma}$، وأن $\OLId{latin-ordinary}{y}$ عدد غودل لـ$!A$»، عودية بدائية.
+\end{prop}
+
+\begin{proof}
+ليكن المحمول العودي البدائي~$\OLId{latin-looped}{R}_\OLId{greek-variable}{Gamma}(\OLId{latin-ordinary}{y})$
+تعبيرًا عن «$\OLId{latin-ordinary}{y}\in\OLId{greek-variable}{Gamma}$».
+فنطلب إثبات عودية $\Prf[\OLId{greek-variable}{Gamma}](\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y})$
+البدائية: أي اختبار كون $\OLId{latin-ordinary}{y}$ عدد غودل
+لجملة~$!A$، وكون $\OLId{latin-ordinary}{x}$ رمز !!{derivation}
+في $\Log{LK}$ ختامه $\OLId{greek-variable}{Gamma}_\OLMathNumeral{0} \Sequent !A$.
+
+بمقتضى القضية السابقة، $\fn{Deriv}(\OLId{latin-ordinary}{x})$
+عودية بدائية، وتفيد أن $\OLId{latin-ordinary}{x}$ رمز
+!!{derivation} صحيح~$\pi$ في $\Log{LK}$.
+ومتى كان $\OLId{latin-ordinary}{x}$ كذلك، أعطت $\fn{EndSeq}(\OLId{latin-ordinary}{x})$
+رمز ختام $\pi$؛ فـ$(\fn{EndSeq}(\OLId{latin-ordinary}{x}))_\OLMathNumeral{0}$
+رمز طرفه الأيسر، و$(\fn{EndSeq}(\OLId{latin-ordinary}{x}))_\OLMathNumeral{1}$
+رمز طرفه الأيمن. وكون الطرف الأيمن
+لختام $\pi$ هو~$!A$ يعبّر عنه بـ
+$\len{(\fn{EndSeq}(\OLId{latin-ordinary}{x}))_\OLMathNumeral{1}}=\OLMathNumeral{1} \land ((\fn{EndSeq}(\OLId{latin-ordinary}{x}))_\OLMathNumeral{1})_\OLMathNumeral{0}=\OLId{latin-ordinary}{y}$.
+وأما الطرف الأيسر لختام $\pi$ فهو
+منتهٍ بنفس بنائه، فلا نحتاج إلا إلى
+اشتراط انتماء جمله كلها إلى~$\OLId{greek-variable}{Gamma}$.
+فنعرّف $\Prf[\OLId{greek-variable}{Gamma}](\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y})$ بالصيغة
+\begin{align*}
+\Prf[\OLId{greek-variable}{Gamma}](\OLId{latin-ordinary}{x}, \OLId{latin-ordinary}{y}) \defiff {}&
+\fn{Deriv}(\OLId{latin-ordinary}{x}) \land {} \\
+& \bforall{\OLId{latin-ordinary}{i} <
+  \len{(\fn{EndSeq}(\OLId{latin-ordinary}{x}))_\OLMathNumeral{0}}}{\OLId{latin-looped}{R}_\OLId{greek-variable}{Gamma}(((\fn{EndSeq}(\OLId{latin-ordinary}{x}))_\OLMathNumeral{0})_\OLId{latin-ordinary}{i})} \land {}\\
+& \len{(\fn{EndSeq}(\OLId{latin-ordinary}{x}))_\OLMathNumeral{1}} = \OLMathNumeral{1} \land ((\fn{EndSeq}(\OLId{latin-ordinary}{x}))_\OLMathNumeral{1})_\OLMathNumeral{0} = \OLId{latin-ordinary}{y}.
+\end{align*}
+\end{proof}
+
+\end{document}

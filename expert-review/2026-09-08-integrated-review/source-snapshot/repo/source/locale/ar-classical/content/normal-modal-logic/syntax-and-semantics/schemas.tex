@@ -1,0 +1,175 @@
+% Part: normal-modal-logic
+% Chapter: syntax-and-semantics
+% Section: schemas
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{syn}{sch}
+
+\olsection{المخططات والصلاحية}
+
+\begin{defn}
+  \emph{المخطط} مجموعة من ال!!{formula}s تضم جميع حالات الإحلال
+  ل!!{formula} موجهية ما~$!C$، ولا تضم سواها، أي
+  \[
+  \Setabs{!B}{\lexists[!D_1], \dots, \lexists[!D_n] \left(!B =
+  \SSubst{!C}{\subst{!D_1}{p_1}, \dots, \subst{!D_n}{p_n}} \right) }.
+  \]
+  وتسمى ال!!{formula}~$!C$ ال!!{formula} \emph{المميزة} للمخطط، وهي
+  وحيدة حتى إعادة تسمية ال!!{propositional variable}s. وتكون
+  !!^a{formula}~$!A$ \emph{حالة} من مخطط إذا كانت عنصرًا في المجموعة.
+\end{defn}
+
+من الملائم أن نرمز إلى المخطط بالتعبير الميتالغوي الناتج من إحلال
+`$!A$'، و`$!B$'، و\dots، محل المكونات الذرية لـ$!C$. فمثلًا، تدل
+التعبيرات الآتية على مخططات: `$!A$'، و`$!A \lif \Box!A$'، و
+`$!A \lif (!B \lif !A)$'. وهي تقابل ال!!{formula}s المميزة~$p$، و
+$p \lif \Box p$، و$p \lif (q \lif p)$. ويدل المخطط~`$!A$' على
+مجموعة \emph{جميع} ال!!{formula}s.
+
+\begin{defn}
+  يكون المخطط \emph{صادقًا} في نموذج إذا وفقط إذا كانت جميع حالاته
+  صادقة فيه؛ ويكون المخطط \emph{صالحًا} إذا وفقط إذا كان صادقًا في كل
+  نموذج.
+\end{defn}
+
+\begin{prop}\ollabel{prop:Kvalid}
+  المخطط الآتي~\Ax{K} صالح:
+  \begin{equation*}
+  \Box(!A \lif !B) \lif (\Box !A \lif \Box !B). \tag{\Ax{K}}
+  \end{equation*}
+\end{prop}
+
+\begin{proof}
+  المطلوب تعميم الصدق على كل حالة من المخطط، في كل عالم من كل
+  نموذج. فخذ~$\mModel{M} = \tuple{W,R,V}$ و$w \in W$ كيف اتفق.
+  وسبيل إثبات الشرط أن يُفرض مقدمه ويُستخرج تاليه؛ فلنفرض هنا
+  $\mSat{M}{\Box(!A \lif !B)}[w]$ و$\mSat{M}{\Box !A}[w]$،
+  ولنثبت~$\mSat{M}{\Box !B}[w]$. خذ~$w'$ بحيث~$Rww'$.
+  يفيد الفرض الأول~$\mSat{M}{!A \lif !B}[w']$،
+  ويفيد الثاني~$\mSat{M}{!A}[w']$؛ فينتج~$\mSat{M}{!B}[w']$.
+  ولما لم نخصّ~$w'$ بشيء، ثبت~$\mSat{M}{\Box !B}[w]$.
+\end{proof}
+
+\begin{prop}\ollabel{prop:Dual-valid}
+  مخطط الثنائية الآتي~\Dual{} صالح:
+  \begin{equation*}
+  \Diamond !A \liff \lnot\Box\lnot !A. \tag{\Dual}
+  \end{equation*}
+\end{prop}
+
+\begin{proof}
+  تمرين.
+\end{proof}
+
+\begin{prob}
+  أثبت~\olref[nml][syn][sch]{prop:Dual-valid}.
+\end{prob}
+
+\begin{prop}\ollabel{prop:soundMP}
+  إذا كانت~$!A$ و$!A \lif !B$ صادقتين في عالم من نموذج، كانت~$!B$
+  صادقة فيه أيضًا. ومن ثم فإن ال!!{formula}s الصالحة مغلقة تحت قاعدة
+  إثبات المقدَّم.
+\end{prop}
+
+\begin{prop}\ollabel{prop:valid-instances}
+  تكون !!^a{formula}~$!A$ صالحة إذا وفقط إذا كانت جميع حالات إحلالها
+  صالحة. وبعبارة أخرى، يكون المخطط صالحًا إذا وفقط إذا كانت
+  !!{formula}ه المميزة صالحة.
+\end{prop}
+
+\begin{proof}
+  اتجاه ``إذا'' واضح، لأن~$!A$ حالة إحلال من نفسها.
+
+  وأما الاتجاه الآخر فمداره على دعوى نذكرها أولًا. إذا كان
+  $\mModel{M} = \tuple{W, R, V}$ نموذجًا موجهيًا، وكانت
+  $!B \ident \SSubst{!A}{\subst{!D_1}{p_1},\dots,\subst{!D_n}{p_n}}$
+  حالة إحلال من~$!A$، فعرّف~$\mModel{M'} = \tuple{W, R, V'}$
+  بجعل~$V'(p_i) = \Setabs{w}{\mSat{M}{!D_i}[w]}$، وأبقِ تعيين
+  سائر المتغيرات على حاله. عندئذ~$\mSat{M}{!B}[w]$ متى وفقط متى
+  كان~$\mSat{M'}{!A}[w]$، لكل~$w \in W$. وبرهان هذه الدعوى تمرين.
+  فلو كانت~$!A$ صالحة، وكانت حالة منها~$!B$ غير صالحة، لوجدنا
+  نموذجًا~$\mModel{M} = \tuple{W, R, V}$ وعالمًا~$w \in W$ فيه
+  $\mSat/{M}{!B}[w]$. ومن الدعوى يلزم~$\mSat/{M'}{!A}[w]$،
+  فيخالف ذلك صلاحية~$!A$.
+\end{proof}
+
+\begin{prob}
+  أثبت الدعوى في جزء ``فقط إذا'' من برهان
+  \olref[nml][syn][sch]{prop:valid-instances}. (تلميح: استعمل
+  الاستقراء على~$!A$.)
+\end{prob}
+
+ولا يحملنّ هذا التكافؤ في الصلاحية على توهّم مثله في نموذج واحد.
+فإن صدق المخطط في نموذج يقتضي صدق صيغته المميزة فيه: إذا صدقت كل
+حالة من~$!A$ في~$\mModel{M}$، صدقت~$!A$ نفسها في~$\mModel{M}$.
+وأما العكس فلا يلزم؛ فقد تصدق~$!A$ في~$\mModel{M}$، وتكذب
+إحدى حالاتها في عالم من~$\mModel{M}$. وأبسط شاهد هو~$p$ في نموذج
+عالمه الوحيد~$w$، وتعيينه~$V(p) = \{w\}$. فهنا~$p$ صادقة
+في~$w$، مع أن~$\lfalse$ حالة من~$p$ وليست صادقة في~$w$.
+
+\begin{prob}
+  أثبت أن أيًا من ال!!{formula}s الآتية ليس صالحًا:
+  \begin{enumerate}
+    \item[\Ax{D}:] \quad $\Box p \lif \Diamond p$؛
+    \item[\Ax{T}:] \quad $\Box p \lif p$؛
+    \item[\Ax{B}:] \quad $p \lif \Box\Diamond p$؛
+    \item[\Ax{4}:] \quad $\Box p \lif \Box \Box p$؛
+    \item[\Ax{5}:] \quad $\Diamond p \lif \Box \Diamond p$.
+  \end{enumerate}
+\end{prob}
+
+\begin{table}[t]
+    \centering
+    \begin{tabular}{| l || l |}
+      \hline
+      {\emph{مخططات صالحة}} & {\emph{مخططات غير صالحة}} \\
+      \hline\hline
+      $\Box(!A \lif !B) \lif (\Diamond !A \lif \Diamond !B)$
+      & $\Box (!A \lor !B) \lif (\Box !A \lor \Box !B)$ \\
+      $\Diamond (!A \lif !B) \lif (\Box !A \lif \Diamond
+      !B)$
+      & $(\Diamond !A \land \Diamond !B) \lif \Diamond (!A
+      \land !B)$\\
+      $\Box (!A \land !B) \liff (\Box !A \land \Box !B)$
+      & $!A \lif \Box !A$ \\
+      $\Box !A \lif \Box (!B \lif !A)$
+      & $\Box \Diamond !A \lif !B$ \\
+      $\lnot \Diamond !A \lif \Box (!A \lif !B)$
+      & $\Box \Box !A \lif \Box !A$ \\
+      $\Diamond (!A \lor !B) \liff (\Diamond !A \lor
+      \Diamond !B)$
+      & $\Box \Diamond !A \lif \Diamond \Box !A$. \\
+      \hline
+    \end{tabular}
+    \caption{المخططات الصالحة وغير الصالحة.}
+    \ollabel{tab:valid-invalidSchemas}
+\end{table}
+
+\begin{prob}%\ollabel{ex:in/validSchemas}
+  أثبت أن المخططات في العمود الأول من
+  \olref[nml][syn][sch]{tab:valid-invalidSchemas} صالحة، وأن التي في
+  العمود الثاني غير صالحة.
+\end{prob}
+
+\begin{prob}
+  قرر هل المخططان الآتيان صالحان أم غير صالحين:
+  \begin{enumerate}
+  \item $(\Diamond !A \lif \Box !B) \lif (\Box !A \lif \Box
+    !B)$؛
+  \item $\Diamond(!A \lif !B) \lor \Box(!B \lif !A)$.
+  \end{enumerate}
+\end{prob}
+
+\begin{prob}
+  أوجد لكل واحد من المخططين الآتيين نموذجًا~$\mModel{M}$ تكون فيه كل
+  حالة من ال!!{formula} صادقة:
+  \begin{enumerate}
+  \item $p \lif \Diamond\Diamond p$؛
+  \item $\Diamond p \lif \Box p$.
+  \end{enumerate}
+\end{prob}
+
+\end{document}

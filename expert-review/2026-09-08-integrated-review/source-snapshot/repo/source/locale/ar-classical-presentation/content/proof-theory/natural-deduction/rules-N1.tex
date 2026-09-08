@@ -1,0 +1,136 @@
+% Part: proof-theory
+% Chapter: natural-deduction
+% Section: rules-N1
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\begin{table}
+\begin{center}
+\begin{tabular}[t]{@{}cc@{}}
+\bottomAlignProof
+\AxiomC{$\Discharge{!A}{\OLId{latin-ordinary}{x}}$}
+\shortDeduce
+\DeduceC{$!B$}
+\DischargeRule{\Intro{\lif}}{x}
+\UnaryInfC{$!A \lif !B$}
+\DisplayProof
+&
+\bottomAlignProof
+\AxiomC{$!A \lif !B$}
+\AxiomC{$!A$}
+\RightLabel{\Elim{\lif}}
+\BinaryInfC{$!B$}
+\DisplayProof
+\\[4ex]
+\bottomAlignProof
+\AxiomC{$!A$}
+\AxiomC{$!B$}
+\RightLabel{\Intro{\land}}
+\BinaryInfC{$!A \land !B$}
+\DisplayProof
+&
+\begin{tabular}[b]{@{}l@{}}
+\AxiomC{$!A \land !B$}
+\RightLabel{\Elim{\land}[1]}
+\UnaryInfC{$!A$}
+\DisplayProof
+\\[3ex]
+\bottomAlignProof
+\AxiomC{$!A \land !B$}
+\RightLabel{\Elim{\land}[2]}
+\UnaryInfC{$!B$}
+\DisplayProof
+\end{tabular}
+\\[4ex]
+\begin{tabular}{@{}l@{}}
+\AxiomC{$!A$}
+\RightLabel{\Intro{\lor}[1]}
+\UnaryInfC{$!A \lor !B$}
+\DisplayProof
+\\[3ex]
+\AxiomC{$!B$}
+\RightLabel{\Intro{\lor}[2]}
+\UnaryInfC{$!A \lor !B$}
+\DisplayProof
+\end{tabular}
+&
+\AxiomC{$!A \lor !B$}
+\AxiomC{$\Discharge{!A}{\OLId{latin-ordinary}{x}}$}
+\shortDeduce
+\DeduceC{$!C$}
+\AxiomC{$\Discharge{!B}{\OLId{latin-ordinary}{y}}$}
+\shortDeduce
+\DeduceC{$!C$}
+\DischargeRule{\Elim{\lor}}{x\,y}
+\TrinaryInfC{$!C$}
+\DisplayProof
+\bottomAlignProof
+\\[6ex]
+\bottomAlignProof
+\AxiomC{$\Discharge{!A}{\OLId{latin-ordinary}{x}}$}
+\shortDeduce
+\DeduceC{$\lfalse$}
+\DischargeRule{\Intro{\lnot}}{x}
+\UnaryInfC{$\lnot !A$}
+\DisplayProof
+&
+\bottomAlignProof
+\AxiomC{$\lnot !A$}
+\AxiomC{$!A$}
+\RightLabel{\Elim{\lnot}}
+\BinaryInfC{$\lfalse$}
+\DisplayProof
+\\[4ex]
+\bottomAlignProof
+\AxiomC{$!A(\OLId{latin-ordinary}{a})$}
+\RightLabel{\Intro{\lforall}}
+\UnaryInfC{$\lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]$}
+\DisplayProof
+&
+\bottomAlignProof
+\AxiomC{$\lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]$}
+\RightLabel{\Elim{\lforall}}
+\UnaryInfC{$!A(\OLId{latin-ordinary}{t})$}
+\DisplayProof
+\\[4ex]
+\bottomAlignProof
+\AxiomC{$!A(\OLId{latin-ordinary}{t})$}
+\RightLabel{\Intro{\lexists}}
+\UnaryInfC{$\lexists[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]$}
+\DisplayProof
+&
+\bottomAlignProof
+\AxiomC{$\lexists[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]$}
+\AxiomC{$\Discharge{!A(\OLId{latin-ordinary}{a})}{\OLId{latin-ordinary}{x}}$}
+\shortDeduce
+\DeduceC{$!C$}
+\DischargeRule{\Elim{\lexists}}{x}
+\BinaryInfC{$!C$}
+\DisplayProof
+\\[4ex]
+\bottomAlignProof
+\AxiomC{$\lfalse$}
+\RightLabel{\FalseInt}
+\UnaryInfC{$!A$}
+\DisplayProof
+&
+\bottomAlignProof
+\AxiomC{$\Discharge{\lnot!A}{\OLId{latin-ordinary}{x}}$}
+\shortDeduce
+\DeduceC{$\lfalse$}
+\DischargeRule{\FalseCl}{x}
+\UnaryInfC{$!A$}
+\DisplayProof
+\end{tabular}
+\end{center}
+\caption{هذه قواعد~\Log{N1i} و\Log{N1c}. ويشترط في~$\Intro{\lforall}$
+ألا يظهر~!!{constant}~$\OLId{latin-ordinary}{a}$ في النتيجة ولا في فرض مفتوح. وأما
+$\Elim{\lexists}$ فيشترط فيه ألا يظهر~$\OLId{latin-ordinary}{a}$ في المقدمة الكبرى ولا في
+النتيجة، ولا في فرض مفتوح سوى الفرض~$!A(\OLId{latin-ordinary}{a})^\OLId{latin-ordinary}{x}$ الذي يبرئه الاستدلال.
+وليس في~\Log{N1i} القاعدة~\FalseCl.}
+\ollabel{tab:N1}
+\end{table}
+
+\end{document}

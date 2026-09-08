@@ -1,0 +1,403 @@
+# Priority terminology review: part 12 of 93
+
+[← Previous / السابق](priority-011.md) · [Shard index / فهرس الأجزاء](README.md) · [Next / التالي →](priority-013.md)
+
+This renderable shard contains **10** choices. It preserves every distinct recorded occurrence for those choices. The canonical monolithic sheets remain one directory above for archival use.
+
+No final-reader PDF/AUX/SyncTeX evidence was supplied; source locations are shown, and final PDF pages remain unclaimed.
+
+| Global rank / score | Term / المصطلح | Arabic in use / العربية | Where / الموضع |
+| ---: | --- | --- | --- |
+| #105 / 112 | [propositional variable](#priority-ar-classical-0451-0500-propositional-variable-token-12c1fd7d75) | <span lang="ar" dir="rtl">متغير قضي</span> | OLP-0451 — مقدمة · classical · CA · [L21](../source-snapshot/repo/source/locale/ar-classical/content/normal-modal-logic/filtrations/introduction.tex#L21) · [+17 more source locations](#priority-ar-classical-0451-0500-propositional-variable-token-12c1fd7d75) |
+| #106 / 112 | [serial](#priority-ar-classical-0451-0500-seriality-3f3ffafe81) | <span lang="ar" dir="rtl">متسلسل / تسلسلي</span> | OLP-0456 — للمنطقين K وS5 خاصية النموذج المنتهي · classical · CA · [L76](../source-snapshot/repo/source/locale/ar-classical/content/normal-modal-logic/filtrations/S5-fmp.tex#L76) · [+32 more source locations](#priority-ar-classical-0451-0500-seriality-3f3ffafe81) |
+| #107 / 112 | [signed formula](#priority-ar-classical-0451-0500-signed-formula-token-df660bb883) | <span lang="ar" dir="rtl">صيغة موقعة</span> | OLP-0461 — مقدمة · classical · CA · [L20](../source-snapshot/repo/source/locale/ar-classical/content/normal-modal-logic/tableaux/introduction.tex#L20) · [+52 more source locations](#priority-ar-classical-0451-0500-signed-formula-token-df660bb883) |
+| #108 / 112 | [strict order](#priority-retro-0005-0050-emphasis-35ab10fec89ca3c9-9ae9f0ef70) | <span lang="ar" dir="rtl">ترتيب صارم</span> | OLP-0016 — الترتيبات · classical · CA · [L74](../source-snapshot/repo/source/locale/ar-classical/content/sets-functions-relations/relations/orders.tex#L74) · [+2 more source locations](#priority-retro-0005-0050-emphasis-35ab10fec89ca3c9-9ae9f0ef70) |
+| #109 / 112 | [structural rule](#priority-retro0051-0100-structural-rule-ad625c2adc) | <span lang="ar" dir="rtl">قاعدة بنيوية</span> | OLP-0073 — القواعد البنيوية · shared · MSA · [L13](../source-snapshot/repo/source/locale/ar/content/first-order-logic/sequent-calculus/structural-rules.tex#L13) · [+5 more source locations](#priority-retro0051-0100-structural-rule-ad625c2adc) |
+| #110 / 112 | [tableau / signed formula / prefix / branch / accessible prefix](#priority-term-tableau-prefix-family-d6b44865bb) | <span lang="ar" dir="rtl">جدول دلالي؛ صيغة موقّعة أو معلّمة؛ سابقة؛ شعبة؛ سابقة متاحة</span> | OLP-0513 — قواعد المنطق الحدسي · shared-with-classical-context-check · MSA · [L61–L62](../source-snapshot/repo/source/locale/ar/content/intuitionistic-logic/tableaux/rules.tex#L61-L62) · [+2 more source locations](#priority-term-tableau-prefix-family-d6b44865bb) |
+| #111 / 112 | [treat](#priority-retro-0005-0050-emphasis-f564d7a7a600f6ed-25fc721c6d) | <span lang="ar" dir="rtl">معاملة</span> | OLP-0013 — تأملات فلسفية · classical · CA · [L60](../source-snapshot/repo/source/locale/ar-classical/content/sets-functions-relations/relations/reflections.tex#L60) · [+5 more source locations](#priority-retro-0005-0050-emphasis-f564d7a7a600f6ed-25fc721c6d) |
+| #112 / 111 | [Dedekind algebra](#priority-retro0051-0100-dedekind-algebra-f243dfcdb0) | <span lang="ar" dir="rtl">جبر ديديكند</span> | OLP-0051 — جبرات ديديكند · shared · MSA · [L10](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/infinite/dedekind-algebra.tex#L10) · [+57 more source locations](#priority-retro0051-0100-dedekind-algebra-f243dfcdb0) |
+| #113 / 111 | [derivable](#priority-retro0051-0100-derivable-f7afe7fcaf) | <span lang="ar" dir="rtl">قابل للاشتقاق</span> | OLP-0064 — مقدمة · shared · MSA · [L47](../source-snapshot/repo/source/locale/ar/content/first-order-logic/proof-systems/introduction.tex#L47) · [+82 more source locations](#priority-retro0051-0100-derivable-f7afe7fcaf) |
+| #114 / 111 | [metatheory / metatheoretical](#priority-retro0051-0100-metatheory-c8301add9c) | <span lang="ar" dir="rtl">ما وراء النظرية</span> | OLP-0057 — مقدمة · shared · MSA · [L33](../source-snapshot/repo/source/locale/ar/content/propositional-logic/syntax-and-semantics/introduction.tex#L33) · [+5 more source locations](#priority-retro0051-0100-metatheory-c8301add9c) |
+
+<a id="priority-ar-classical-0451-0500-propositional-variable-token-12c1fd7d75"></a>
+## propositional variable — <span lang="ar" dir="rtl">متغير قضي</span>
+
+- **ID / الرقم:** `ar-classical-0451-0500-propositional-variable-token`
+- **Global priority rank / score:** #105 / 112
+- **Sense / المعنى:** atomic Boolean-valued symbol interpreted at worlds
+- **Why this choice / سبب الاختيار:** هذا متغير ذري في لغة المنطق لا متغير فردي؛ حفظ الرمز يمنع انزلاق المصطلح بسبب إعادة الصياغة.
+- **Useful alternatives / البدائل المفيدة:** متغير قضوي: اختلاف اشتقاقي مؤجل؛ لا أثر له على نوع المتغير.
+> ⚑ **PLEASE DOUBLE-CHECK THIS CHOICE / يُرجى التحقق من هذا الاختيار:** هل التوسعة الطباعية قضي أو قضوي متسقة مع سائر الكتاب؟
+
+- **Where first / أول موضع:** OLP-0451 — مقدمة · classical · CA · [L21](../source-snapshot/repo/source/locale/ar-classical/content/normal-modal-logic/filtrations/introduction.tex#L21) · [+17 more source locations](#priority-ar-classical-0451-0500-propositional-variable-token-12c1fd7d75)
+- **Every distinct recorded occurrence / كل موضع مسجل متميز:**
+  - **OLP-0451 — مقدمة**
+    - **EN:** `introduction.tex`
+      - [L21](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/normal-modal-logic/filtrations/introduction.tex#L21), [L92](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/normal-modal-logic/filtrations/introduction.tex#L92), [L100](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/normal-modal-logic/filtrations/introduction.tex#L100), [L120](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/normal-modal-logic/filtrations/introduction.tex#L120)
+    - **MSA:** `introduction.tex`
+      - [L20](../source-snapshot/repo/source/locale/ar/content/normal-modal-logic/filtrations/introduction.tex#L20) — current file differs from recorded snapshot
+      - [L84](../source-snapshot/repo/source/locale/ar/content/normal-modal-logic/filtrations/introduction.tex#L84), [L93](../source-snapshot/repo/source/locale/ar/content/normal-modal-logic/filtrations/introduction.tex#L93), [L113](../source-snapshot/repo/source/locale/ar/content/normal-modal-logic/filtrations/introduction.tex#L113) — moved lines, each re-found by one unique exact excerpt; current file differs from recorded snapshot
+    - **CA:** `introduction.tex`
+      - [L21](../source-snapshot/repo/source/locale/ar-classical/content/normal-modal-logic/filtrations/introduction.tex#L21) — current file differs from recorded snapshot
+      - [L93](../source-snapshot/repo/source/locale/ar-classical/content/normal-modal-logic/filtrations/introduction.tex#L93), [L107](../source-snapshot/repo/source/locale/ar-classical/content/normal-modal-logic/filtrations/introduction.tex#L107), [L131](../source-snapshot/repo/source/locale/ar-classical/content/normal-modal-logic/filtrations/introduction.tex#L131) — moved lines, each re-found by one unique exact excerpt; current file differs from recorded snapshot
+  - **OLP-0457 — المنطق S5 قابل للقرار**
+    - **EN:** `S5-decidable.tex`
+      - [L22](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/normal-modal-logic/filtrations/S5-decidable.tex#L22)
+    - **MSA:** `S5-decidable.tex`
+      - [L23](../source-snapshot/repo/source/locale/ar/content/normal-modal-logic/filtrations/S5-decidable.tex#L23) — moved lines, each re-found by one unique exact excerpt; current file differs from recorded snapshot
+    - **CA:** `S5-decidable.tex`
+      - [L23](../source-snapshot/repo/source/locale/ar-classical/content/normal-modal-logic/filtrations/S5-decidable.tex#L23) — moved lines, each re-found by one unique exact excerpt; current file differs from recorded snapshot
+  - **OLP-0468 — تمام K**
+    - **EN:** `completeness.tex`
+      - [L25–L26](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/normal-modal-logic/tableaux/completeness.tex#L25-L26) — recovered by a unique exact search (primary recorded term)
+    - **MSA:** `completeness.tex`
+      - [L24–L25](../source-snapshot/repo/source/locale/ar/content/normal-modal-logic/tableaux/completeness.tex#L24-L25) — recovered by a unique exact search (exact English term retained in Arabic source); current file differs from recorded snapshot
+    - **CA:** `completeness.tex`
+      - [L22](../source-snapshot/repo/source/locale/ar-classical/content/normal-modal-logic/tableaux/completeness.tex#L22) — current file differs from recorded snapshot
+
+<a id="priority-ar-classical-0451-0500-seriality-3f3ffafe81"></a>
+## serial — <span lang="ar" dir="rtl">متسلسل / تسلسلي</span>
+
+- **ID / الرقم:** `ar-classical-0451-0500-seriality`
+- **Global priority rank / score:** #106 / 112
+- **Sense / المعنى:** each world has at least one accessible successor
+- **Why this choice / سبب الاختيار:** تسلسل هنا شرط وجود خلف لكل عالم، ولا يقتضي خطية أو ترتيبًا كليًا؛ الأساس هو التعريف لا المعنى اللغوي المعتاد.
+- **Useful alternatives / البدائل المفيدة:** تتابعي: لا يرفع الالتباس وحده؛ إبقاء اللفظ مع بيان المعنى أضبط.
+> ⚑ **PLEASE DOUBLE-CHECK THIS CHOICE / يُرجى التحقق من هذا الاختيار:** هل ينبغي التصريح بشرط وجود الخلف عند أول تسلسل لتجنب إيحاء السلسلة الخطية؟
+
+- **Where first / أول موضع:** OLP-0456 — للمنطقين K وS5 خاصية النموذج المنتهي · classical · CA · [L76](../source-snapshot/repo/source/locale/ar-classical/content/normal-modal-logic/filtrations/S5-fmp.tex#L76) · [+32 more source locations](#priority-ar-classical-0451-0500-seriality-3f3ffafe81)
+- **Every distinct recorded occurrence / كل موضع مسجل متميز:**
+  - **OLP-0465 — قواعد علاقات الإتاحة الأخرى**
+    - **EN:** `more-rules.tex`
+      - [L112](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/normal-modal-logic/tableaux/more-rules.tex#L112)
+    - **MSA:** `more-rules.tex`
+      - [L112](../source-snapshot/repo/source/locale/ar/content/normal-modal-logic/tableaux/more-rules.tex#L112) — current file differs from recorded snapshot
+    - **CA:** `more-rules.tex`
+      - [L112](../source-snapshot/repo/source/locale/ar-classical/content/normal-modal-logic/tableaux/more-rules.tex#L112) — current file differs from recorded snapshot
+  - **OLP-0456 — للمنطقين K وS5 خاصية النموذج المنتهي**
+    - **EN:** `S5-fmp.tex`
+      - [L80](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/normal-modal-logic/filtrations/S5-fmp.tex#L80), [L81](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/normal-modal-logic/filtrations/S5-fmp.tex#L81)
+    - **MSA:** `S5-fmp.tex`
+      - [L76](../source-snapshot/repo/source/locale/ar/content/normal-modal-logic/filtrations/S5-fmp.tex#L76) — current file differs from recorded snapshot
+    - **CA:** `S5-fmp.tex`
+      - [L76](../source-snapshot/repo/source/locale/ar-classical/content/normal-modal-logic/filtrations/S5-fmp.tex#L76)
+  - **OLP-0459 — ترشيحات النماذج الإقليدية**
+    - **EN:** `euclidean-filtrations.tex`
+      - [L14](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/normal-modal-logic/filtrations/euclidean-filtrations.tex#L14), [L15](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/normal-modal-logic/filtrations/euclidean-filtrations.tex#L15), [L54](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/normal-modal-logic/filtrations/euclidean-filtrations.tex#L54)
+    - **MSA:** `euclidean-filtrations.tex`
+      - [L13](../source-snapshot/repo/source/locale/ar/content/normal-modal-logic/filtrations/euclidean-filtrations.tex#L13), [L15](../source-snapshot/repo/source/locale/ar/content/normal-modal-logic/filtrations/euclidean-filtrations.tex#L15), [L53](../source-snapshot/repo/source/locale/ar/content/normal-modal-logic/filtrations/euclidean-filtrations.tex#L53) — current file differs from recorded snapshot
+    - **CA:** `euclidean-filtrations.tex`
+      - [L13](../source-snapshot/repo/source/locale/ar-classical/content/normal-modal-logic/filtrations/euclidean-filtrations.tex#L13), [L15](../source-snapshot/repo/source/locale/ar-classical/content/normal-modal-logic/filtrations/euclidean-filtrations.tex#L15), [L54](../source-snapshot/repo/source/locale/ar-classical/content/normal-modal-logic/filtrations/euclidean-filtrations.tex#L54) — current file differs from recorded snapshot
+  - **OLP-0457 — المنطق S5 قابل للقرار**
+    - **EN:** `S5-decidable.tex`
+      - [L36](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/normal-modal-logic/filtrations/S5-decidable.tex#L36)
+    - **MSA:** `S5-decidable.tex`
+      - [L36](../source-snapshot/repo/source/locale/ar/content/normal-modal-logic/filtrations/S5-decidable.tex#L36) — moved lines, each re-found by one unique exact excerpt; current file differs from recorded snapshot
+    - **CA:** `S5-decidable.tex`
+      - [L36](../source-snapshot/repo/source/locale/ar-classical/content/normal-modal-logic/filtrations/S5-decidable.tex#L36) — moved lines, each re-found by one unique exact excerpt; current file differs from recorded snapshot
+  - **OLP-0458 — الترشيحات وخواص النفاذ**
+    - **EN:** `more-filtrations.tex`
+      - [L13](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/normal-modal-logic/filtrations/more-filtrations.tex#L13), [L14](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/normal-modal-logic/filtrations/more-filtrations.tex#L14)
+    - **MSA:** `more-filtrations.tex`
+      - [L13](../source-snapshot/repo/source/locale/ar/content/normal-modal-logic/filtrations/more-filtrations.tex#L13), [L14](../source-snapshot/repo/source/locale/ar/content/normal-modal-logic/filtrations/more-filtrations.tex#L14)
+    - **CA:** `more-filtrations.tex`
+      - [L13](../source-snapshot/repo/source/locale/ar-classical/content/normal-modal-logic/filtrations/more-filtrations.tex#L13)
+  - **OLP-0466 — سلامة القواعد الإضافية**
+    - **EN:** `more-soundness.tex`
+      - [L60](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/normal-modal-logic/tableaux/more-soundness.tex#L60), [L70](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/normal-modal-logic/tableaux/more-soundness.tex#L70), [L79](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/normal-modal-logic/tableaux/more-soundness.tex#L79)
+    - **MSA:** `more-soundness.tex`
+      - [L62](../source-snapshot/repo/source/locale/ar/content/normal-modal-logic/tableaux/more-soundness.tex#L62), [L72](../source-snapshot/repo/source/locale/ar/content/normal-modal-logic/tableaux/more-soundness.tex#L72), [L81](../source-snapshot/repo/source/locale/ar/content/normal-modal-logic/tableaux/more-soundness.tex#L81) — moved lines, each re-found by one unique exact excerpt; current file differs from recorded snapshot
+    - **CA:** `more-soundness.tex`
+      - [L62](../source-snapshot/repo/source/locale/ar-classical/content/normal-modal-logic/tableaux/more-soundness.tex#L62), [L72](../source-snapshot/repo/source/locale/ar-classical/content/normal-modal-logic/tableaux/more-soundness.tex#L72), [L82](../source-snapshot/repo/source/locale/ar-classical/content/normal-modal-logic/tableaux/more-soundness.tex#L82) — moved lines, each re-found by one unique exact excerpt; current file differs from recorded snapshot
+
+<a id="priority-ar-classical-0451-0500-signed-formula-token-df660bb883"></a>
+## signed formula — <span lang="ar" dir="rtl">صيغة موقعة</span>
+
+- **ID / الرقم:** `ar-classical-0451-0500-signed-formula-token`
+- **Global priority rank / score:** #107 / 112
+- **Sense / المعنى:** formula paired with a truth-value sign
+- **Why this choice / سبب الاختيار:** التوقيع علامة صدق أو كذب، لا توقيع اسم مؤلف؛ حُفظت العلامات T/F والرموز الموروثة.
+- **Useful alternatives / البدائل المفيدة:** صيغة معلّمة: بديل أوضح لبعض القراء لكنه لم يفرض بلا توحيد.
+> ⚑ **PLEASE DOUBLE-CHECK THIS CHOICE / يُرجى التحقق من هذا الاختيار:** هل موقعة واضحة أم معلّمة بقيمة صدق أسلم تعليميًا؟
+
+- **Where first / أول موضع:** OLP-0461 — مقدمة · classical · CA · [L20](../source-snapshot/repo/source/locale/ar-classical/content/normal-modal-logic/tableaux/introduction.tex#L20) · [+52 more source locations](#priority-ar-classical-0451-0500-signed-formula-token-df660bb883)
+- **Every distinct recorded occurrence / كل موضع مسجل متميز:**
+  - **OLP-0461 — مقدمة**
+    - **EN:** `introduction.tex`
+      - [L13](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/normal-modal-logic/tableaux/introduction.tex#L13), [L20](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/normal-modal-logic/tableaux/introduction.tex#L20), [L21](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/normal-modal-logic/tableaux/introduction.tex#L21), [L23](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/normal-modal-logic/tableaux/introduction.tex#L23), [L24](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/normal-modal-logic/tableaux/introduction.tex#L24), [L29](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/normal-modal-logic/tableaux/introduction.tex#L29), [L38](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/normal-modal-logic/tableaux/introduction.tex#L38), [L53](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/normal-modal-logic/tableaux/introduction.tex#L53)
+    - **MSA:** `introduction.tex`
+      - [L20](../source-snapshot/repo/source/locale/ar/content/normal-modal-logic/tableaux/introduction.tex#L20), [L21](../source-snapshot/repo/source/locale/ar/content/normal-modal-logic/tableaux/introduction.tex#L21), [L22](../source-snapshot/repo/source/locale/ar/content/normal-modal-logic/tableaux/introduction.tex#L22), [L24](../source-snapshot/repo/source/locale/ar/content/normal-modal-logic/tableaux/introduction.tex#L24), [L28](../source-snapshot/repo/source/locale/ar/content/normal-modal-logic/tableaux/introduction.tex#L28), [L37](../source-snapshot/repo/source/locale/ar/content/normal-modal-logic/tableaux/introduction.tex#L37), [L50](../source-snapshot/repo/source/locale/ar/content/normal-modal-logic/tableaux/introduction.tex#L50)
+    - **CA:** `introduction.tex`
+      - [L20](../source-snapshot/repo/source/locale/ar-classical/content/normal-modal-logic/tableaux/introduction.tex#L20), [L21](../source-snapshot/repo/source/locale/ar-classical/content/normal-modal-logic/tableaux/introduction.tex#L21), [L22](../source-snapshot/repo/source/locale/ar-classical/content/normal-modal-logic/tableaux/introduction.tex#L22), [L23](../source-snapshot/repo/source/locale/ar-classical/content/normal-modal-logic/tableaux/introduction.tex#L23), [L27](../source-snapshot/repo/source/locale/ar-classical/content/normal-modal-logic/tableaux/introduction.tex#L27), [L36](../source-snapshot/repo/source/locale/ar-classical/content/normal-modal-logic/tableaux/introduction.tex#L36), [L49](../source-snapshot/repo/source/locale/ar-classical/content/normal-modal-logic/tableaux/introduction.tex#L49)
+  - **OLP-0462 — قواعد K**
+    - **EN:** `rules-for-K.tex`
+      - [L14](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/normal-modal-logic/tableaux/rules-for-K.tex#L14), [L15](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/normal-modal-logic/tableaux/rules-for-K.tex#L15)
+    - **MSA:** `rules-for-K.tex`
+      - [L13](../source-snapshot/repo/source/locale/ar/content/normal-modal-logic/tableaux/rules-for-K.tex#L13), [L15](../source-snapshot/repo/source/locale/ar/content/normal-modal-logic/tableaux/rules-for-K.tex#L15) — current file differs from recorded snapshot
+    - **CA:** `rules-for-K.tex`
+      - [L13](../source-snapshot/repo/source/locale/ar-classical/content/normal-modal-logic/tableaux/rules-for-K.tex#L13), [L15](../source-snapshot/repo/source/locale/ar-classical/content/normal-modal-logic/tableaux/rules-for-K.tex#L15) — current file differs from recorded snapshot
+  - **OLP-0464 — سلامة K**
+    - **EN:** `soundness.tex`
+      - [L91](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/normal-modal-logic/tableaux/soundness.tex#L91), [L105](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/normal-modal-logic/tableaux/soundness.tex#L105), [L112](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/normal-modal-logic/tableaux/soundness.tex#L112), [L113](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/normal-modal-logic/tableaux/soundness.tex#L113), [L124](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/normal-modal-logic/tableaux/soundness.tex#L124), [L133](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/normal-modal-logic/tableaux/soundness.tex#L133), [L144](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/normal-modal-logic/tableaux/soundness.tex#L144), [L156](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/normal-modal-logic/tableaux/soundness.tex#L156), [L167](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/normal-modal-logic/tableaux/soundness.tex#L167), [L191](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/normal-modal-logic/tableaux/soundness.tex#L191), [L212](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/normal-modal-logic/tableaux/soundness.tex#L212)
+    - **MSA:** `soundness.tex`
+      - [L92](../source-snapshot/repo/source/locale/ar/content/normal-modal-logic/tableaux/soundness.tex#L92), [L109](../source-snapshot/repo/source/locale/ar/content/normal-modal-logic/tableaux/soundness.tex#L109), [L115](../source-snapshot/repo/source/locale/ar/content/normal-modal-logic/tableaux/soundness.tex#L115), [L116](../source-snapshot/repo/source/locale/ar/content/normal-modal-logic/tableaux/soundness.tex#L116), [L126](../source-snapshot/repo/source/locale/ar/content/normal-modal-logic/tableaux/soundness.tex#L126) — moved lines, each re-found by one unique exact excerpt; current file differs from recorded snapshot
+      - [L135](../source-snapshot/repo/source/locale/ar/content/normal-modal-logic/tableaux/soundness.tex#L135), [L146](../source-snapshot/repo/source/locale/ar/content/normal-modal-logic/tableaux/soundness.tex#L146) — recovered by a unique exact search (unique order-preserving assignment among exact excerpt matches within the same recorded source file); current file differs from recorded snapshot
+    - **CA:** `soundness.tex`
+      - [L89](../source-snapshot/repo/source/locale/ar-classical/content/normal-modal-logic/tableaux/soundness.tex#L89), [L104](../source-snapshot/repo/source/locale/ar-classical/content/normal-modal-logic/tableaux/soundness.tex#L104), [L109](../source-snapshot/repo/source/locale/ar-classical/content/normal-modal-logic/tableaux/soundness.tex#L109), [L110](../source-snapshot/repo/source/locale/ar-classical/content/normal-modal-logic/tableaux/soundness.tex#L110), [L119](../source-snapshot/repo/source/locale/ar-classical/content/normal-modal-logic/tableaux/soundness.tex#L119), [L129](../source-snapshot/repo/source/locale/ar-classical/content/normal-modal-logic/tableaux/soundness.tex#L129), [L140](../source-snapshot/repo/source/locale/ar-classical/content/normal-modal-logic/tableaux/soundness.tex#L140) — moved lines, each re-found by one unique exact excerpt; current file differs from recorded snapshot
+
+<a id="priority-retro-0005-0050-emphasis-35ab10fec89ca3c9-9ae9f0ef70"></a>
+## strict order — <span lang="ar" dir="rtl">ترتيب صارم</span>
+
+- **ID / الرقم:** `retro-0005-0050:emphasis:35ab10fec89ca3c9`
+- **Global priority rank / score:** #108 / 112
+- **Sense / المعنى:** The expression in its exact local mathematical/expository role as a explicitly emphasized expression; the occurrence excerpts and unit context disambiguate the sense.
+- **Why this choice / سبب الاختيار:** The Classical realization «ترتيب صارم» replaces MSA «الترتيب الصارم» for English «strict order» in an aligned explicitly emphasized expression. It preserves the same marked mathematical or expository referent while recasting the wording into the Classical register. Exact structural alignment and neighboring formulae constrain equivalence; no historical motivation is invented.
+- **Useful alternatives / البدائل المفيدة:** الترتيب الصارم — retained-in-msa — This remains the current MSA realization. It is a concrete comparison for expert review, not a rejected error.
+> ⚑ **PLEASE DOUBLE-CHECK THIS CHOICE / يُرجى التحقق من هذا الاختيار:** At OLP-0016, English line 83 and Classical line 74, does «ترتيب صارم» best preserve the sense of «strict order» as an explicitly emphasized expression, or should the MSA form «الترتيب الصارم» or another attested term be preferred?
+
+- **Where first / أول موضع:** OLP-0016 — الترتيبات · classical · CA · [L74](../source-snapshot/repo/source/locale/ar-classical/content/sets-functions-relations/relations/orders.tex#L74) · [+2 more source locations](#priority-retro-0005-0050-emphasis-35ab10fec89ca3c9-9ae9f0ef70)
+- **Every distinct recorded occurrence / كل موضع مسجل متميز:**
+  - **OLP-0016 — الترتيبات**
+    - **EN:** `orders.tex`
+      - [L83](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/relations/orders.tex#L83)
+    - **MSA:** `orders.tex`
+      - [L80](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/relations/orders.tex#L80) — current file differs from recorded snapshot
+    - **CA:** `orders.tex`
+      - [L74](../source-snapshot/repo/source/locale/ar-classical/content/sets-functions-relations/relations/orders.tex#L74)
+
+<a id="priority-retro0051-0100-structural-rule-ad625c2adc"></a>
+## structural rule — <span lang="ar" dir="rtl">قاعدة بنيوية</span>
+
+- **ID / الرقم:** `RETRO0051-0100-structural-rule`
+- **Global priority rank / score:** #109 / 112
+- **Sense / المعنى:** A rule manipulating context multiplicity, order, or transfer independently of a connective.
+- **Why this choice / سبب الاختيار:** بنيوية describes action on proof/context structure and remains distinct from semantic بنية.
+- **Useful alternatives / البدائل المفيدة:** قاعدة تركيبية — not selected — Would collide with syntax.; قاعدة هيكلية — possible alternative — Common but more physical in tone.
+> ⚑ **PLEASE DOUBLE-CHECK THIS CHOICE / يُرجى التحقق من هذا الاختيار:** Should structural rule be قاعدة بنيوية, قاعدة هيكلية, or قاعدة تركيبية in Arabic proof theory?
+
+- **Where first / أول موضع:** OLP-0073 — القواعد البنيوية · shared · MSA · [L13](../source-snapshot/repo/source/locale/ar/content/first-order-logic/sequent-calculus/structural-rules.tex#L13) · [+5 more source locations](#priority-retro0051-0100-structural-rule-ad625c2adc)
+- **Every distinct recorded occurrence / كل موضع مسجل متميز:**
+  - **OLP-0070 — القواعد والDerivations**
+    - **EN:** `rules-and-proofs.tex`
+      - [L68](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/first-order-logic/sequent-calculus/rules-and-proofs.tex#L68)
+    - **MSA:** [rules-and-proofs.tex](../source-snapshot/repo/source/locale/ar/content/first-order-logic/sequent-calculus/rules-and-proofs.tex)
+      - ⚠ **unresolved** — no line asserted; `unresolved-no-line-locator`; exact-search candidates, **not yet sense-resolved**: [L68](../source-snapshot/repo/source/locale/ar/content/first-order-logic/sequent-calculus/rules-and-proofs.tex#L68)
+    - **CA:** [rules-and-proofs.tex](../source-snapshot/repo/source/locale/ar-classical/content/first-order-logic/sequent-calculus/rules-and-proofs.tex)
+      - ⚠ **unresolved** — no line asserted; `unresolved-no-line-locator`; exact-search candidates, **not yet sense-resolved**: [L64](../source-snapshot/repo/source/locale/ar-classical/content/first-order-logic/sequent-calculus/rules-and-proofs.tex#L64)
+  - **OLP-0073 — القواعد البنيوية**
+    - **EN:** `structural-rules.tex`
+      - [L13](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/first-order-logic/sequent-calculus/structural-rules.tex#L13)
+    - **MSA:** `structural-rules.tex`
+      - [L13](../source-snapshot/repo/source/locale/ar/content/first-order-logic/sequent-calculus/structural-rules.tex#L13)
+    - **CA:** `structural-rules.tex`
+      - [L13](../source-snapshot/repo/source/locale/ar-classical/content/first-order-logic/sequent-calculus/structural-rules.tex#L13)
+
+<a id="priority-term-tableau-prefix-family-d6b44865bb"></a>
+## tableau / signed formula / prefix / branch / accessible prefix — <span lang="ar" dir="rtl">جدول دلالي؛ صيغة موقّعة أو معلّمة؛ سابقة؛ شعبة؛ سابقة متاحة</span>
+
+- **ID / الرقم:** `TERM-TABLEAU-PREFIX-FAMILY`
+- **Global priority rank / score:** #110 / 112
+- **Sense / المعنى:** the coordinated vocabulary of prefixed semantic tableaux
+- **Why this choice / سبب الاختيار:** The family must distinguish a tableau from a branch and a sign from the world-prefix sequence. «سابقة» captures a prefixed sequence but may be confused with logical antecedent; «شعبة» clearly marks a branch.
+- **Useful alternatives / البدائل المفيدة:** لوحة دلالية — Common alternative to جدول دلالي.; صيغة موسومة — Potentially clearer than موقّعة, which can evoke a signature.; بادئة — Direct computing-style equivalent for prefix; may be less established in logic.; فرع — More common than شعبة in graph/tree vocabulary.
+> ⚑ **PLEASE DOUBLE-CHECK THIS CHOICE / يُرجى التحقق من هذا الاختيار:** Which coordinated Arabic family should be standardized for semantic tableaux, signed formulas, prefixes, accessibility, and branches?
+
+- **Where first / أول موضع:** OLP-0513 — قواعد المنطق الحدسي · shared-with-classical-context-check · MSA · [L61–L62](../source-snapshot/repo/source/locale/ar/content/intuitionistic-logic/tableaux/rules.tex#L61-L62) · [+2 more source locations](#priority-term-tableau-prefix-family-d6b44865bb)
+- **Every distinct recorded occurrence / كل موضع مسجل متميز:**
+  - **OLP-0513 — قواعد المنطق الحدسي**
+    - **EN:** `rules.tex`
+      - [L62–L63](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/intuitionistic-logic/tableaux/rules.tex#L62-L63) — recovered by a unique exact search (primary recorded term)
+    - **MSA:** `rules.tex`
+      - [L61–L62](../source-snapshot/repo/source/locale/ar/content/intuitionistic-logic/tableaux/rules.tex#L61-L62) — recovered by a unique exact search (primary recorded term)
+    - **CA:** `rules.tex`
+      - [L13–L20](../source-snapshot/repo/source/locale/ar-classical/content/intuitionistic-logic/tableaux/rules.tex#L13-L20)
+
+<a id="priority-retro-0005-0050-emphasis-f564d7a7a600f6ed-25fc721c6d"></a>
+## treat — <span lang="ar" dir="rtl">معاملة</span>
+
+- **ID / الرقم:** `retro-0005-0050:emphasis:f564d7a7a600f6ed`
+- **Global priority rank / score:** #111 / 112
+- **Sense / المعنى:** The expression in its exact local mathematical/expository role as a explicitly emphasized expression; the occurrence excerpts and unit context disambiguate the sense.
+- **Why this choice / سبب الاختيار:** The Classical realization «معاملة» replaces MSA «نعامل» for English «treat» in an aligned explicitly emphasized expression. It preserves the same marked mathematical or expository referent while recasting the wording into the Classical register. Exact structural alignment and neighboring formulae constrain equivalence; no historical motivation is invented.
+- **Useful alternatives / البدائل المفيدة:** نعامل — retained-in-msa — This remains the current MSA realization. It is a concrete comparison for expert review, not a rejected error.
+> ⚑ **PLEASE DOUBLE-CHECK THIS CHOICE / يُرجى التحقق من هذا الاختيار:** At OLP-0013, English line 74 and Classical line 60, does «معاملة» best preserve the sense of «treat» as an explicitly emphasized expression, or should the MSA form «نعامل» or another attested term be preferred?
+
+- **Where first / أول موضع:** OLP-0013 — تأملات فلسفية · classical · CA · [L60](../source-snapshot/repo/source/locale/ar-classical/content/sets-functions-relations/relations/reflections.tex#L60) · [+5 more source locations](#priority-retro-0005-0050-emphasis-f564d7a7a600f6ed-25fc721c6d)
+- **Every distinct recorded occurrence / كل موضع مسجل متميز:**
+  - **OLP-0013 — تأملات فلسفية**
+    - **EN:** `reflections.tex`
+      - [L74](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/relations/reflections.tex#L74)
+    - **MSA:** `reflections.tex`
+      - [L67](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/relations/reflections.tex#L67)
+    - **CA:** `reflections.tex`
+      - [L60](../source-snapshot/repo/source/locale/ar-classical/content/sets-functions-relations/relations/reflections.tex#L60)
+  - **OLP-0046 — بعض التأملات الفلسفية**
+    - **EN:** `reflections.tex`
+      - [L94](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/arithmetization/reflections.tex#L94)
+    - **MSA:** `reflections.tex`
+      - [L86](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/arithmetization/reflections.tex#L86)
+    - **CA:** `reflections.tex`
+      - [L40](../source-snapshot/repo/source/locale/ar-classical/content/sets-functions-relations/arithmetization/reflections.tex#L40) — current file differs from recorded snapshot
+
+<a id="priority-retro0051-0100-dedekind-algebra-f243dfcdb0"></a>
+## Dedekind algebra — <span lang="ar" dir="rtl">جبر ديديكند</span>
+
+- **ID / الرقم:** `RETRO0051-0100-dedekind-algebra`
+- **Global priority rank / score:** #112 / 111
+- **Sense / المعنى:** A set with an injective successor-like self-map and distinguished non-image element whose closure is the set.
+- **Why this choice / سبب الاختيار:** The eponym is retained and جبر marks the three-component algebraic structure.
+- **Useful alternatives / البدائل المفيدة:** بنية ديديكند — not selected — Broader than the named algebra in the source.
+> ⚑ **PLEASE DOUBLE-CHECK THIS CHOICE / يُرجى التحقق من هذا الاختيار:** Is جبر ديديكند the preferred historical Arabic name for Dedekind algebra in foundations literature?
+
+- **Where first / أول موضع:** OLP-0051 — جبرات ديديكند · shared · MSA · [L10](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/infinite/dedekind-algebra.tex#L10) · [+57 more source locations](#priority-retro0051-0100-dedekind-algebra-f243dfcdb0)
+- **Every distinct recorded occurrence / كل موضع مسجل متميز:**
+  - **OLP-0053 — «برهان» ديديكند على وجود مجموعة لانهائية**
+    - **EN:** `dedekinds-proof.tex`
+      - [L15](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/infinite/dedekinds-proof.tex#L15), [L36](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/infinite/dedekinds-proof.tex#L36), [L38](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/infinite/dedekinds-proof.tex#L38), [L67](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/infinite/dedekinds-proof.tex#L67), [L92](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/infinite/dedekinds-proof.tex#L92)
+    - **MSA:** `dedekinds-proof.tex`
+      - [L15](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/infinite/dedekinds-proof.tex#L15), [L31](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/infinite/dedekinds-proof.tex#L31), [L32](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/infinite/dedekinds-proof.tex#L32), [L58](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/infinite/dedekinds-proof.tex#L58), [L82](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/infinite/dedekinds-proof.tex#L82)
+    - **CA:** `dedekinds-proof.tex`
+      - [L14](../source-snapshot/repo/source/locale/ar-classical/content/sets-functions-relations/infinite/dedekinds-proof.tex#L14), [L24](../source-snapshot/repo/source/locale/ar-classical/content/sets-functions-relations/infinite/dedekinds-proof.tex#L24), [L42](../source-snapshot/repo/source/locale/ar-classical/content/sets-functions-relations/infinite/dedekinds-proof.tex#L42), [L61](../source-snapshot/repo/source/locale/ar-classical/content/sets-functions-relations/infinite/dedekinds-proof.tex#L61)
+  - **OLP-0051 — جبرات ديديكند**
+    - **EN:** `dedekind-algebra.tex`
+      - [L10](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/infinite/dedekind-algebra.tex#L10), [L82](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/infinite/dedekind-algebra.tex#L82), [L93](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/infinite/dedekind-algebra.tex#L93), [L96](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/infinite/dedekind-algebra.tex#L96), [L99](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/infinite/dedekind-algebra.tex#L99), [L106–L107](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/infinite/dedekind-algebra.tex#L106-L107)
+    - **MSA:** [dedekind-algebra.tex](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/infinite/dedekind-algebra.tex)
+      - [L10](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/infinite/dedekind-algebra.tex#L10) — current file differs from recorded snapshot
+      - [L88](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/infinite/dedekind-algebra.tex#L88), [L98–L99](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/infinite/dedekind-algebra.tex#L98-L99), [L105](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/infinite/dedekind-algebra.tex#L105), [L113](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/infinite/dedekind-algebra.tex#L113) — moved lines, each re-found by one unique exact excerpt; current file differs from recorded snapshot
+      - ⚠ **unresolved** — recorded L96–L97; `unresolved-excerpt-not-found`; exact-search candidates, **not yet sense-resolved**: [L88](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/infinite/dedekind-algebra.tex#L88), [L98–L99](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/infinite/dedekind-algebra.tex#L98-L99), [L101–L102](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/infinite/dedekind-algebra.tex#L101-L102), [L105](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/infinite/dedekind-algebra.tex#L105), [L113](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/infinite/dedekind-algebra.tex#L113), [L98](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/infinite/dedekind-algebra.tex#L98), [L101](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/infinite/dedekind-algebra.tex#L101), [L10](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/infinite/dedekind-algebra.tex#L10), [L16](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/infinite/dedekind-algebra.tex#L16), [L30](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/infinite/dedekind-algebra.tex#L30), [L99](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/infinite/dedekind-algebra.tex#L99), [L102](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/infinite/dedekind-algebra.tex#L102), … (+1)
+    - **CA:** `dedekind-algebra.tex`
+      - [L10](../source-snapshot/repo/source/locale/ar-classical/content/sets-functions-relations/infinite/dedekind-algebra.tex#L10), [L81](../source-snapshot/repo/source/locale/ar-classical/content/sets-functions-relations/infinite/dedekind-algebra.tex#L81), [L90](../source-snapshot/repo/source/locale/ar-classical/content/sets-functions-relations/infinite/dedekind-algebra.tex#L90), [L91](../source-snapshot/repo/source/locale/ar-classical/content/sets-functions-relations/infinite/dedekind-algebra.tex#L91), [L94](../source-snapshot/repo/source/locale/ar-classical/content/sets-functions-relations/infinite/dedekind-algebra.tex#L94), [L102](../source-snapshot/repo/source/locale/ar-classical/content/sets-functions-relations/infinite/dedekind-algebra.tex#L102) — current file differs from recorded snapshot
+  - **OLP-0052 — جبرات ديديكند والاستقراء الحسابي**
+    - **EN:** `dedekind-induction.tex`
+      - [L10](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/infinite/dedekind-induction.tex#L10), [L12](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/infinite/dedekind-induction.tex#L12), [L12–L13](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/infinite/dedekind-induction.tex#L12-L13), [L17](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/infinite/dedekind-induction.tex#L17), [L24](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/infinite/dedekind-induction.tex#L24), [L30](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/infinite/dedekind-induction.tex#L30), [L38](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/infinite/dedekind-induction.tex#L38), [L66](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/infinite/dedekind-induction.tex#L66), [L74](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/infinite/dedekind-induction.tex#L74)
+    - **MSA:** `dedekind-induction.tex`
+      - [L10](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/infinite/dedekind-induction.tex#L10), [L12](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/infinite/dedekind-induction.tex#L12), [L12–L13](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/infinite/dedekind-induction.tex#L12-L13), [L17](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/infinite/dedekind-induction.tex#L17), [L24](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/infinite/dedekind-induction.tex#L24), [L30](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/infinite/dedekind-induction.tex#L30), [L38](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/infinite/dedekind-induction.tex#L38), [L64](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/infinite/dedekind-induction.tex#L64), [L70](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/infinite/dedekind-induction.tex#L70)
+    - **CA:** `dedekind-induction.tex`
+      - [L10](../source-snapshot/repo/source/locale/ar-classical/content/sets-functions-relations/infinite/dedekind-induction.tex#L10), [L12](../source-snapshot/repo/source/locale/ar-classical/content/sets-functions-relations/infinite/dedekind-induction.tex#L12), [L15](../source-snapshot/repo/source/locale/ar-classical/content/sets-functions-relations/infinite/dedekind-induction.tex#L15), [L22](../source-snapshot/repo/source/locale/ar-classical/content/sets-functions-relations/infinite/dedekind-induction.tex#L22), [L27](../source-snapshot/repo/source/locale/ar-classical/content/sets-functions-relations/infinite/dedekind-induction.tex#L27), [L33](../source-snapshot/repo/source/locale/ar-classical/content/sets-functions-relations/infinite/dedekind-induction.tex#L33), [L58](../source-snapshot/repo/source/locale/ar-classical/content/sets-functions-relations/infinite/dedekind-induction.tex#L58), [L61](../source-snapshot/repo/source/locale/ar-classical/content/sets-functions-relations/infinite/dedekind-induction.tex#L61)
+
+<a id="priority-retro0051-0100-derivable-f7afe7fcaf"></a>
+## derivable — <span lang="ar" dir="rtl">قابل للاشتقاق</span>
+
+- **ID / الرقم:** `RETRO0051-0100-derivable`
+- **Global priority rank / score:** #113 / 111
+- **Sense / المعنى:** There exists a derivation in the specified calculus.
+- **Why this choice / سبب الاختيار:** قابل للاشتقاق states existence of a formal derivation without implying semantic validity.
+- **Useful alternatives / البدائل المفيدة:** مبرهن — not selected — Can suggest theoremhood or an already supplied proof.; مستنتج — possible alternative — May be read as a completed act rather than a modal property.
+> ⚑ **PLEASE DOUBLE-CHECK THIS CHOICE / يُرجى التحقق من هذا الاختيار:** Is قابل للاشتقاق the preferred Arabic adjective for derivable, and should the token machinery inflect it by the gender of formula/sentence/sequent?
+
+- **Where first / أول موضع:** OLP-0064 — مقدمة · shared · MSA · [L47](../source-snapshot/repo/source/locale/ar/content/first-order-logic/proof-systems/introduction.tex#L47) · [+82 more source locations](#priority-retro0051-0100-derivable-f7afe7fcaf)
+- **Every distinct recorded occurrence / كل موضع مسجل متميز:**
+  - **OLP-0076 — Derivations ذات المكممات**
+    - **EN:** `proving-things-quant.tex`
+      - [L29](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/first-order-logic/sequent-calculus/proving-things-quant.tex#L29)
+    - **MSA:** `proving-things-quant.tex`
+      - [L25–L26](../source-snapshot/repo/source/locale/ar/content/first-order-logic/sequent-calculus/proving-things-quant.tex#L25-L26)
+    - **CA:** `proving-things-quant.tex`
+      - [L20](../source-snapshot/repo/source/locale/ar-classical/content/first-order-logic/sequent-calculus/proving-things-quant.tex#L20)
+  - **OLP-0075 — أمثلة على الDerivations**
+    - **EN:** `proving-things.tex`
+      - [L40](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/first-order-logic/sequent-calculus/proving-things.tex#L40)
+    - **MSA:** `proving-things.tex`
+      - [L36](../source-snapshot/repo/source/locale/ar/content/first-order-logic/sequent-calculus/proving-things.tex#L36) — current file differs from recorded snapshot
+    - **CA:** [proving-things.tex](../source-snapshot/repo/source/locale/ar-classical/content/first-order-logic/sequent-calculus/proving-things.tex)
+      - ⚠ **unresolved** — no line asserted; `unresolved-no-line-locator`
+  - **OLP-0088 — Derivations**
+    - **EN:** `derivations.tex`
+      - [L40](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/first-order-logic/natural-deduction/derivations.tex#L40)
+    - **MSA:** `derivations.tex`
+      - [L37](../source-snapshot/repo/source/locale/ar/content/first-order-logic/natural-deduction/derivations.tex#L37)
+    - **CA:** `derivations.tex`
+      - [L36](../source-snapshot/repo/source/locale/ar-classical/content/first-order-logic/natural-deduction/derivations.tex#L36)
+  - **OLP-0078 — Derivability والاتساق**
+    - **EN:** `provability-consistency.tex`
+      - [L83](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/first-order-logic/sequent-calculus/provability-consistency.tex#L83)
+    - **MSA:** `provability-consistency.tex`
+      - [L98](../source-snapshot/repo/source/locale/ar/content/first-order-logic/sequent-calculus/provability-consistency.tex#L98) — moved lines, each re-found by one unique exact excerpt; current file differs from recorded snapshot
+    - **CA:** `provability-consistency.tex`
+      - [L97](../source-snapshot/repo/source/locale/ar-classical/content/first-order-logic/sequent-calculus/provability-consistency.tex#L97) — current file differs from recorded snapshot
+  - **OLP-0091 — مفاهيم نظرية البرهان**
+    - **EN:** `proof-theoretic-notions.tex`
+      - [L40](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/first-order-logic/natural-deduction/proof-theoretic-notions.tex#L40), [L44](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/first-order-logic/natural-deduction/proof-theoretic-notions.tex#L44)
+    - **MSA:** `proof-theoretic-notions.tex`
+      - [L38](../source-snapshot/repo/source/locale/ar/content/first-order-logic/natural-deduction/proof-theoretic-notions.tex#L38), [L41](../source-snapshot/repo/source/locale/ar/content/first-order-logic/natural-deduction/proof-theoretic-notions.tex#L41)
+    - **CA:** `proof-theoretic-notions.tex`
+      - [L38](../source-snapshot/repo/source/locale/ar-classical/content/first-order-logic/natural-deduction/proof-theoretic-notions.tex#L38), [L42](../source-snapshot/repo/source/locale/ar-classical/content/first-order-logic/natural-deduction/proof-theoretic-notions.tex#L42)
+  - **OLP-0080 — Derivability والمكممات**
+    - **EN:** `provability-quantifiers.tex`
+      - [L43](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/first-order-logic/sequent-calculus/provability-quantifiers.tex#L43), [L50](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/first-order-logic/sequent-calculus/provability-quantifiers.tex#L50)
+    - **MSA:** `provability-quantifiers.tex`
+      - [L42](../source-snapshot/repo/source/locale/ar/content/first-order-logic/sequent-calculus/provability-quantifiers.tex#L42), [L49](../source-snapshot/repo/source/locale/ar/content/first-order-logic/sequent-calculus/provability-quantifiers.tex#L49)
+    - **CA:** `provability-quantifiers.tex`
+      - [L42](../source-snapshot/repo/source/locale/ar-classical/content/first-order-logic/sequent-calculus/provability-quantifiers.tex#L42), [L49](../source-snapshot/repo/source/locale/ar-classical/content/first-order-logic/sequent-calculus/provability-quantifiers.tex#L49)
+  - **OLP-0064 — مقدمة**
+    - **EN:** `introduction.tex`
+      - [L53](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/first-order-logic/proof-systems/introduction.tex#L53), [L58](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/first-order-logic/proof-systems/introduction.tex#L58)
+    - **MSA:** `introduction.tex`
+      - [L47](../source-snapshot/repo/source/locale/ar/content/first-order-logic/proof-systems/introduction.tex#L47), [L52](../source-snapshot/repo/source/locale/ar/content/first-order-logic/proof-systems/introduction.tex#L52)
+    - **CA:** `introduction.tex`
+      - [L28](../source-snapshot/repo/source/locale/ar-classical/content/first-order-logic/proof-systems/introduction.tex#L28), [L32](../source-snapshot/repo/source/locale/ar-classical/content/first-order-logic/proof-systems/introduction.tex#L32)
+  - **OLP-0074 — Derivations**
+    - **EN:** `derivations.tex`
+      - [L34](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/first-order-logic/sequent-calculus/derivations.tex#L34)
+    - **MSA:** `derivations.tex`
+      - [L33](../source-snapshot/repo/source/locale/ar/content/first-order-logic/sequent-calculus/derivations.tex#L33), [L34](../source-snapshot/repo/source/locale/ar/content/first-order-logic/sequent-calculus/derivations.tex#L34)
+    - **CA:** `derivations.tex`
+      - [L30](../source-snapshot/repo/source/locale/ar-classical/content/first-order-logic/sequent-calculus/derivations.tex#L30), [L31](../source-snapshot/repo/source/locale/ar-classical/content/first-order-logic/sequent-calculus/derivations.tex#L31)
+  - **OLP-0079 — Derivability والروابط القضوية**
+    - **EN:** `provability-propositional.tex`
+      - [L38](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/first-order-logic/sequent-calculus/provability-propositional.tex#L38), [L109](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/first-order-logic/sequent-calculus/provability-propositional.tex#L109), [L117](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/first-order-logic/sequent-calculus/provability-propositional.tex#L117)
+    - **MSA:** `provability-propositional.tex`
+      - [L37](../source-snapshot/repo/source/locale/ar/content/first-order-logic/sequent-calculus/provability-propositional.tex#L37) — current file differs from recorded snapshot
+      - [L117](../source-snapshot/repo/source/locale/ar/content/first-order-logic/sequent-calculus/provability-propositional.tex#L117), [L125](../source-snapshot/repo/source/locale/ar/content/first-order-logic/sequent-calculus/provability-propositional.tex#L125) — moved lines, each re-found by one unique exact excerpt; current file differs from recorded snapshot
+    - **CA:** `provability-propositional.tex`
+      - [L36](../source-snapshot/repo/source/locale/ar-classical/content/first-order-logic/sequent-calculus/provability-propositional.tex#L36), [L115](../source-snapshot/repo/source/locale/ar-classical/content/first-order-logic/sequent-calculus/provability-propositional.tex#L115), [L123](../source-snapshot/repo/source/locale/ar-classical/content/first-order-logic/sequent-calculus/provability-propositional.tex#L123) — current file differs from recorded snapshot
+  - **OLP-0095 — السلامة**
+    - **EN:** `soundness.tex`
+      - [L22](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/first-order-logic/natural-deduction/soundness.tex#L22), [L23](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/first-order-logic/natural-deduction/soundness.tex#L23), [L35](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/first-order-logic/natural-deduction/soundness.tex#L35)
+    - **MSA:** `soundness.tex`
+      - [L21](../source-snapshot/repo/source/locale/ar/content/first-order-logic/natural-deduction/soundness.tex#L21), [L22](../source-snapshot/repo/source/locale/ar/content/first-order-logic/natural-deduction/soundness.tex#L22), [L34](../source-snapshot/repo/source/locale/ar/content/first-order-logic/natural-deduction/soundness.tex#L34) — current file differs from recorded snapshot
+    - **CA:** `soundness.tex`
+      - [L21](../source-snapshot/repo/source/locale/ar-classical/content/first-order-logic/natural-deduction/soundness.tex#L21), [L22](../source-snapshot/repo/source/locale/ar-classical/content/first-order-logic/natural-deduction/soundness.tex#L22), [L35](../source-snapshot/repo/source/locale/ar-classical/content/first-order-logic/natural-deduction/soundness.tex#L35) — current file differs from recorded snapshot
+  - **OLP-0081 — السلامة**
+    - **EN:** `soundness.tex`
+      - [L22](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/first-order-logic/sequent-calculus/soundness.tex#L22), [L23](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/first-order-logic/sequent-calculus/soundness.tex#L23), [L35](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/first-order-logic/sequent-calculus/soundness.tex#L35), [L37](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/first-order-logic/sequent-calculus/soundness.tex#L37)
+    - **MSA:** `soundness.tex`
+      - [L21](../source-snapshot/repo/source/locale/ar/content/first-order-logic/sequent-calculus/soundness.tex#L21), [L22](../source-snapshot/repo/source/locale/ar/content/first-order-logic/sequent-calculus/soundness.tex#L22), [L34](../source-snapshot/repo/source/locale/ar/content/first-order-logic/sequent-calculus/soundness.tex#L34), [L35](../source-snapshot/repo/source/locale/ar/content/first-order-logic/sequent-calculus/soundness.tex#L35) — current file differs from recorded snapshot
+    - **CA:** `soundness.tex`
+      - [L20](../source-snapshot/repo/source/locale/ar-classical/content/first-order-logic/sequent-calculus/soundness.tex#L20), [L21](../source-snapshot/repo/source/locale/ar-classical/content/first-order-logic/sequent-calculus/soundness.tex#L21), [L31](../source-snapshot/repo/source/locale/ar-classical/content/first-order-logic/sequent-calculus/soundness.tex#L31), [L33](../source-snapshot/repo/source/locale/ar-classical/content/first-order-logic/sequent-calculus/soundness.tex#L33) — current file differs from recorded snapshot
+  - **OLP-0077 — مفاهيم نظرية البرهان**
+    - **EN:** `proof-theoretic-notions.tex`
+      - [L37](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/first-order-logic/sequent-calculus/proof-theoretic-notions.tex#L37), [L41](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/first-order-logic/sequent-calculus/proof-theoretic-notions.tex#L41), [L47](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/first-order-logic/sequent-calculus/proof-theoretic-notions.tex#L47), [L52](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/first-order-logic/sequent-calculus/proof-theoretic-notions.tex#L52), [L84](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/first-order-logic/sequent-calculus/proof-theoretic-notions.tex#L84), [L97](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/first-order-logic/sequent-calculus/proof-theoretic-notions.tex#L97)
+    - **MSA:** `proof-theoretic-notions.tex`
+      - [L37](../source-snapshot/repo/source/locale/ar/content/first-order-logic/sequent-calculus/proof-theoretic-notions.tex#L37), [L42](../source-snapshot/repo/source/locale/ar/content/first-order-logic/sequent-calculus/proof-theoretic-notions.tex#L42), [L47](../source-snapshot/repo/source/locale/ar/content/first-order-logic/sequent-calculus/proof-theoretic-notions.tex#L47), [L54](../source-snapshot/repo/source/locale/ar/content/first-order-logic/sequent-calculus/proof-theoretic-notions.tex#L54), [L85](../source-snapshot/repo/source/locale/ar/content/first-order-logic/sequent-calculus/proof-theoretic-notions.tex#L85), [L98](../source-snapshot/repo/source/locale/ar/content/first-order-logic/sequent-calculus/proof-theoretic-notions.tex#L98)
+    - **CA:** `proof-theoretic-notions.tex`
+      - [L36](../source-snapshot/repo/source/locale/ar-classical/content/first-order-logic/sequent-calculus/proof-theoretic-notions.tex#L36), [L41](../source-snapshot/repo/source/locale/ar-classical/content/first-order-logic/sequent-calculus/proof-theoretic-notions.tex#L41), [L46](../source-snapshot/repo/source/locale/ar-classical/content/first-order-logic/sequent-calculus/proof-theoretic-notions.tex#L46), [L53](../source-snapshot/repo/source/locale/ar-classical/content/first-order-logic/sequent-calculus/proof-theoretic-notions.tex#L53), [L84](../source-snapshot/repo/source/locale/ar-classical/content/first-order-logic/sequent-calculus/proof-theoretic-notions.tex#L84), [L97](../source-snapshot/repo/source/locale/ar-classical/content/first-order-logic/sequent-calculus/proof-theoretic-notions.tex#L97)
+
+<a id="priority-retro0051-0100-metatheory-c8301add9c"></a>
+## metatheory / metatheoretical — <span lang="ar" dir="rtl">ما وراء النظرية</span>
+
+- **ID / الرقم:** `RETRO0051-0100-metatheory`
+- **Global priority rank / score:** #114 / 111
+- **Sense / المعنى:** Reasoning about a logical system rather than within its object language.
+- **Why this choice / سبب الاختيار:** ما وراء النظرية makes the level shift explicit without a transliterated prefix.
+- **Useful alternatives / البدائل المفيدة:** النظرية الفوقية — possible alternative — Compact but can suggest hierarchy rather than metalinguistic level.
+> ⚑ **PLEASE DOUBLE-CHECK THIS CHOICE / يُرجى التحقق من هذا الاختيار:** Which term is preferred for metatheory in Arabic logic: ما وراء النظرية, النظرية الفوقية, or نظرية النظرية؟
+
+- **Where first / أول موضع:** OLP-0057 — مقدمة · shared · MSA · [L33](../source-snapshot/repo/source/locale/ar/content/propositional-logic/syntax-and-semantics/introduction.tex#L33) · [+5 more source locations](#priority-retro0051-0100-metatheory-c8301add9c)
+- **Every distinct recorded occurrence / كل موضع مسجل متميز:**
+  - **OLP-0057 — مقدمة**
+    - **EN:** `introduction.tex`
+      - [L37](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/propositional-logic/syntax-and-semantics/introduction.tex#L37)
+    - **MSA:** `introduction.tex`
+      - [L33](../source-snapshot/repo/source/locale/ar/content/propositional-logic/syntax-and-semantics/introduction.tex#L33)
+    - **CA:** [introduction.tex](../source-snapshot/repo/source/locale/ar-classical/content/propositional-logic/syntax-and-semantics/introduction.tex)
+      - ⚠ **unresolved** — no line asserted; `unresolved-no-line-locator`; exact-search candidates, **not yet sense-resolved**: [L24](../source-snapshot/repo/source/locale/ar-classical/content/propositional-logic/syntax-and-semantics/introduction.tex#L24)
+  - **OLP-0064 — مقدمة**
+    - **EN:** `introduction.tex`
+      - [L35](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/first-order-logic/proof-systems/introduction.tex#L35)
+    - **MSA:** `introduction.tex`
+      - [L31–L32](../source-snapshot/repo/source/locale/ar/content/first-order-logic/proof-systems/introduction.tex#L31-L32)
+    - **CA:** `introduction.tex`
+      - [L19](../source-snapshot/repo/source/locale/ar-classical/content/first-order-logic/proof-systems/introduction.tex#L19) — recovered by a unique exact search (recorded-excerpt exact context fragment)
+
+[← Previous / السابق](priority-011.md) · [Shard index / فهرس الأجزاء](README.md) · [Next / التالي →](priority-013.md)

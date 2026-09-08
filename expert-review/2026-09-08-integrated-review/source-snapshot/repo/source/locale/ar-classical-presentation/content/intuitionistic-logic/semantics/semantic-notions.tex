@@ -1,0 +1,74 @@
+% part: intuitionistic-logic
+% chapter: semantics
+% section: semantic-notions
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{sem}{sem}
+
+\olsection{مفاهيم دلالية}
+
+\begin{defn}
+  توصف~$!A$ بأنها \emph{صادقة في النموذج
+    $\mModel{M}=\tuple{\OLId{latin-looped}{W},\OLId{latin-looped}{R},\OLId{latin-looped}{V}}$}، ويكتب لذلك~$\mSat{\OLId{latin-looped}{M}}{!A}$، إذا وفقط إذا
+  تحقق~$\mSat{\OLId{latin-looped}{M}}{!A}[\OLId{latin-ordinary}{w}]$ لكل~$\OLId{latin-ordinary}{w} \in \OLId{latin-looped}{W}$. وأما~$!A$ فتسمى \emph{صالحة}،
+  ورمز صلاحيتها~$\Entails !A$، إذا وفقط إذا صدقت في النماذج جميعًا. وأما مجموعة
+  ال!!{formula}s~$\OLId{greek-variable}{Gamma}$ فتقال إنها \emph{تستلزم}~$!A$، ويكتب
+  $\OLId{greek-variable}{Gamma} \Entails !A$، إذا وفقط إذا لزم، في كل نموذج~$\mModel{M}$ وعند كل
+  $\OLId{latin-ordinary}{w}$ يتحقق فيه~$\mSat{\OLId{latin-looped}{M}}{\OLId{greek-variable}{Gamma}}[\OLId{latin-ordinary}{w}]$، أن يتحقق~$\mSat{\OLId{latin-looped}{M}}{!A}[\OLId{latin-ordinary}{w}]$.
+\end{defn}
+
+\begin{prop}\ollabel{prop:sat-entails}
+  \begin{enumerate}
+  \item\ollabel{prop:sat-entails1} من~$\mSat{\OLId{latin-looped}{M}}{\OLId{greek-variable}{Gamma}}[\OLId{latin-ordinary}{w}]$ و
+    $\OLId{greek-variable}{Gamma} \Entails !A$ يلزم~$\mSat{\OLId{latin-looped}{M}}{!A}[\OLId{latin-ordinary}{w}]$.
+  \item\ollabel{prop:sat-entails2} ومن~$\mSat{\OLId{latin-looped}{M}}{\OLId{greek-variable}{Gamma}}$ و
+    $\OLId{greek-variable}{Gamma} \Entails !A$ يلزم~$\mSat{\OLId{latin-looped}{M}}{!A}$.
+  \end{enumerate}
+\end{prop}
+
+\begin{proof}
+  \begin{enumerate}
+  \item ليكن~$\mSat{\OLId{latin-looped}{M}}{\OLId{greek-variable}{Gamma}}[\OLId{latin-ordinary}{w}]$ و$\OLId{greek-variable}{Gamma} \Entails !A$. فليس
+    $\mSat{\OLId{latin-looped}{M}}{!A}[\OLId{latin-ordinary}{w}]$ إلا مقتضى تعريف الاستلزام في هذا الموضع.
+  \item وليكن~$\mSat{\OLId{latin-looped}{M}}{\OLId{greek-variable}{Gamma}}$ و$\OLId{greek-variable}{Gamma} \Entails !A$. نأخذ
+    $\OLId{latin-ordinary}{w} \in \OLId{latin-looped}{W}$ كيفما اتفق؛ فيتحقق~$\mSat{\OLId{latin-looped}{M}}{\OLId{greek-variable}{Gamma}}[\OLId{latin-ordinary}{w}]$، ويلزم من
+    \olref{prop:sat-entails1} أن~$\mSat{\OLId{latin-looped}{M}}{!A}[\OLId{latin-ordinary}{w}]$. ولم نخص~$\OLId{latin-ordinary}{w}$
+    بشيء، فثبت~$\mSat{\OLId{latin-looped}{M}}{!A}$.
+  \end{enumerate}
+\end{proof}
+
+\begin{defn}\ollabel{defn:restrict}
+  ليكن~$\mModel{M}$ نموذجًا علائقيًا، وليكن~$\OLId{latin-ordinary}{w} \in \OLId{latin-looped}{W}$. أما
+  \emph{تقييد}~$\mModel{M}$ إلى~$\OLId{latin-ordinary}{w}$، ونعني به
+  $\mModel{M}_\OLId{latin-ordinary}{w}=\tuple{\OLId{latin-looped}{W}_\OLId{latin-ordinary}{w},\OLId{latin-looped}{R}_\OLId{latin-ordinary}{w},\OLId{latin-looped}{V}_\OLId{latin-ordinary}{w}}$، فتعريف أجزائه كما يأتي:
+  \begin{align*}
+    \OLId{latin-looped}{W}_\OLId{latin-ordinary}{w} & = \Setabs{\OLId{latin-ordinary}{u} \in \OLId{latin-looped}{W}}{Rwu},\\
+    \OLId{latin-looped}{R}_\OLId{latin-ordinary}{w} & = \OLId{latin-looped}{R} \cap (\OLId{latin-looped}{W}_\OLId{latin-ordinary}{w})^\OLMathNumeral{2}, \text{ و}\\
+    \OLId{latin-looped}{V}_\OLId{latin-ordinary}{w}(\OLId{latin-ordinary}{p}) & = \OLId{latin-looped}{V}(\OLId{latin-ordinary}{p}) \cap \OLId{latin-looped}{W}_\OLId{latin-ordinary}{w}.
+  \end{align*}
+\end{defn}
+
+\begin{prop}\ollabel{prop:restrict}
+  $\mSat{\OLId{latin-looped}{M}}{!A}[\OLId{latin-ordinary}{w}]$ إذا وفقط إذا تحقق~$\mSat{\OLId{latin-looped}{M}_\OLId{latin-ordinary}{w}}{!A}$.
+\end{prop}
+
+\begin{prob}
+  أقم البرهان على~\olref[int][sem][sem]{prop:restrict}.
+\end{prob}
+
+\begin{prop}
+  إذا كان كل نموذج~$\mModel{M}$ يحقق~$\mSat{\OLId{latin-looped}{M}}{\OLId{greek-variable}{Gamma}}$ يحقق كذلك
+  $\mSat{\OLId{latin-looped}{M}}{!A}$، لزم~$\OLId{greek-variable}{Gamma} \Entails !A$.
+\end{prop}
+
+\begin{proof}
+  ليكن~$\mSat{\OLId{latin-looped}{M}}{\OLId{greek-variable}{Gamma}}[\OLId{latin-ordinary}{w}]$. نطبق~\olref{prop:restrict} على كل
+  $!B \in \OLId{greek-variable}{Gamma}$، فيثبت~$\mSat{\OLId{latin-looped}{M}_\OLId{latin-ordinary}{w}}{\OLId{greek-variable}{Gamma}}$. فالفرض يقتضي إذن
+  $\mSat{\OLId{latin-looped}{M}_\OLId{latin-ordinary}{w}}{!A}$؛ ثم نعود إلى~\olref{prop:restrict}، فيلزم
+  $\mSat{\OLId{latin-looped}{M}}{!A}[\OLId{latin-ordinary}{w}]$، وهو المطلوب.
+\end{proof}
+
+\end{document}

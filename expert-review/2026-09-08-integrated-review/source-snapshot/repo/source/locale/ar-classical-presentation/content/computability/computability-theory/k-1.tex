@@ -1,0 +1,89 @@
+% Part: computability
+% Chapter: computability-theory
+% Section: k-1
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{thy}{k1}
+\olsection{مثال لقابلية الاختزال}
+
+ومن تطبيقات \olref[ppr]{prop:reduce} المثال الآتي.
+
+\begin{prop}
+\ollabel{prop:k1}
+لتكن
+\[
+\OLId{latin-looped}{K}_\OLMathNumeral{1} = \Setabs{\OLId{latin-ordinary}{e}}{\cfind{\OLId{latin-ordinary}{e}}(\OLMathNumeral{0}) \fdefined}.
+\]
+عندئذ تكون $\OLId{latin-looped}{K}_\OLMathNumeral{1}$ قابلة للتعداد حسابيًا، ولكنها غير قابلة للحساب.
+\end{prop}
+
+\begin{proof}
+لما كان $\OLId{latin-looped}{K}_\OLMathNumeral{1}=\Setabs{\OLId{latin-ordinary}{e}}{\lexists[\OLId{latin-ordinary}{s}][\OLId{latin-looped}{T}(\OLId{latin-ordinary}{e},\OLMathNumeral{0},\OLId{latin-ordinary}{s})]}$، فإن $\OLId{latin-looped}{K}_\OLMathNumeral{1}$ قابلة
+للتعداد حسابيًا بحسب \olref[eqc]{thm:exists-char}.
+
+وأما عدم قابلية $\OLId{latin-looped}{K}_\OLMathNumeral{1}$ للحساب، فنثبته باختزال $\OLId{latin-looped}{K}_\OLMathNumeral{0}$
+إليها.
+
+\begin{explain}
+وفي ذلك موضع دقة؛ فإن $\OLId{latin-looped}{K}_\OLMathNumeral{1}$ لا تجيب إلا عن
+حسابات دخلها $\OLMathNumeral{0}$. فتصوّر صديقًا يحسن الإجابة
+عن هذا النوع من الأسئلة، ونسمي أمثاله «عُرّافين». ثم جاءك
+سائل: هل $\tuple{\OLId{latin-ordinary}{e},\OLId{latin-ordinary}{x}}$ من $\OLId{latin-looped}{K}_\OLMathNumeral{0}$، أي هل تقف الآلة $\OLId{latin-ordinary}{e}$ عند
+الدخل $\OLId{latin-ordinary}{x}$؟ فلك أن تبني آلة أخرى $\OLId{latin-ordinary}{e}_\OLId{latin-ordinary}{x}$ لا تعتد،
+عند \emph{أي} دخل، بما أُدخل فيها، بل تشغّل~$\OLId{latin-ordinary}{e}$ عند الدخل $\OLId{latin-ordinary}{x}$.
+فيصير سؤال توقف $\OLId{latin-ordinary}{e}$ عند $\OLId{latin-ordinary}{x}$ مكافئًا لسؤال توقف
+$\OLId{latin-ordinary}{e}_\OLId{latin-ordinary}{x}$ عند $\OLMathNumeral{0}$ أو أي دخل آخر. وحين تسأل صديقك عن الآلة
+الجديدة $\OLId{latin-ordinary}{e}_\OLId{latin-ordinary}{x}$ عند الدخل $\OLMathNumeral{0}$، تحصل من جوابه على جواب
+السؤال الأول. فهذا هو وجه اختزال $\OLId{latin-looped}{K}_\OLMathNumeral{0}$ إلى~$\OLId{latin-looped}{K}_\OLMathNumeral{1}$.
+\end{explain}
+
+ولنحرر الحجة بالدالة الجزئية الشاملة القابلة للحساب: نعرّف $\OLId{latin-ordinary}{f}$ ذات
+الحجج الثلاثة بوضع
+\[
+\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y},\OLId{latin-ordinary}{z}) \simeq \cfind{\OLId{latin-ordinary}{x}}(\OLId{latin-ordinary}{y}).
+\]
+فهذه $\OLId{latin-ordinary}{f}$ لا تتوقف على دخلها الثالث. ولنأخذ فهرسًا $\OLId{latin-ordinary}{e}$ يحقق
+$\OLId{latin-ordinary}{f}=\cfind{\OLId{latin-ordinary}{e}}[\OLMathNumeral{3}]$؛ فيكون لدينا
+\[
+\cfind{\OLId{latin-ordinary}{e}}[\OLMathNumeral{3}](\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y},\OLId{latin-ordinary}{z}) \simeq \cfind{\OLId{latin-ordinary}{x}}(\OLId{latin-ordinary}{y}).
+\]
+فتعطينا مبرهنة $\OLId{latin-ordinary}{s}$-$\OLId{latin-ordinary}{m}$-$\OLId{latin-ordinary}{n}$ دالة $\OLId{latin-ordinary}{s}(\OLId{latin-ordinary}{e},\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y})$ تحقق، لكل $\OLId{latin-ordinary}{z}$،
+\begin{align*}
+\cfind{\OLId{latin-ordinary}{s}(\OLId{latin-ordinary}{e},\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y})}(\OLId{latin-ordinary}{z}) & \simeq \cfind{\OLId{latin-ordinary}{e}}[\OLMathNumeral{3}](\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y},\OLId{latin-ordinary}{z}) \\
+& \simeq \cfind{\OLId{latin-ordinary}{x}}(\OLId{latin-ordinary}{y}).
+\end{align*}
+
+\begin{explain}
+وبالرجوع إلى التصوير السابق، نجد أن $\OLId{latin-ordinary}{s}(\OLId{latin-ordinary}{e},\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y})$ فهرس الآلة التي تهمل
+أي دخل $\OLId{latin-ordinary}{z}$، وتحسب بدلًا منه $\cfind{\OLId{latin-ordinary}{x}}(\OLId{latin-ordinary}{y})$.
+\end{explain}
+
+ويلزم على الخصوص
+\[
+\cfind{\OLId{latin-ordinary}{s}(\OLId{latin-ordinary}{e},\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y})}(\OLMathNumeral{0}) \fdefined \quad \text{إذا وفقط إذا} \quad
+\cfind{\OLId{latin-ordinary}{x}}(\OLId{latin-ordinary}{y}) \fdefined.
+\]
+فمعنى ذلك أن $\tuple{\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y}}\in \OLId{latin-looped}{K}_\OLMathNumeral{0}$ إذا وفقط إذا كان
+$\OLId{latin-ordinary}{s}(\OLId{latin-ordinary}{e},\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y})\in \OLId{latin-looped}{K}_\OLMathNumeral{1}$. ولنثبت عددًا~$\OLId{latin-ordinary}{z}$ فهرسًا للدالة الجزئية غير
+المعرفة عند كل دخل؛ فيكون $\OLId{latin-ordinary}{z}\notin \OLId{latin-looped}{K}_\OLMathNumeral{1}$. وعليه نجعل الدالة~$\OLId{latin-ordinary}{g}$
+المعرّفة بـ
+\[
+\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{w}) =
+\begin{cases}
+\OLId{latin-ordinary}{s}(\OLId{latin-ordinary}{e},(\OLId{latin-ordinary}{w})_\OLMathNumeral{0},(\OLId{latin-ordinary}{w})_\OLMathNumeral{1}) & \text{إذا كان $w=\tuple{(w)_0,(w)_1}$،}\\
+\OLId{latin-ordinary}{z} & \text{في غير ذلك،}
+\end{cases}
+\]
+اختزالًا لـ$\OLId{latin-looped}{K}_\OLMathNumeral{0}$ إلى~$\OLId{latin-looped}{K}_\OLMathNumeral{1}$.
+
+% تصحيح مصدر (C246-01): اختُبر رمز الزوج بإعادة ترميزه، وعُرّفت قيمة g خارجه بثابت لا يقع في K_1.
+\textbf{تنبيه تصحيحي على الأصل.} عُرّفت قيمة~$\OLId{latin-ordinary}{g}$ خارج رموز الأزواج
+تعريفًا صريحًا خارج~$\OLId{latin-looped}{K}_\OLMathNumeral{1}$؛ لأن الإسقاطين $(\OLId{latin-ordinary}{w})_\OLMathNumeral{0}$ و$(\OLId{latin-ordinary}{w})_\OLMathNumeral{1}$ وحدهما
+لا يضمنان تكافؤ العضوية إذا لم يكن~$\OLId{latin-ordinary}{w}$ رمز زوج؛ ولذلك اختُبر ذلك
+بالمساواة $\OLId{latin-ordinary}{w}=\tuple{(\OLId{latin-ordinary}{w})_\OLMathNumeral{0},(\OLId{latin-ordinary}{w})_\OLMathNumeral{1}}$، لا بطول الإسقاط وحده.
+\end{proof}
+
+\end{document}

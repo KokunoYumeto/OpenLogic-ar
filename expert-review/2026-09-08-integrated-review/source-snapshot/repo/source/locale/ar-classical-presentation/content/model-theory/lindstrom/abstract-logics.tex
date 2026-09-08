@@ -1,0 +1,130 @@
+% Part: model-theory
+% Chapter: lindstrom
+% Section: abstract-logics
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{lin}{alg}
+\olsection{المنطقات المجردة}
+
+\begin{defn}
+نسمّي الزوج~$\tuple{\OLId{latin-looped}{L},\models_\OLId{latin-looped}{L}}$ \emph{منطقًا مجردًا} إذا كانت $\OLId{latin-looped}{L}$ دالة تسند إلى
+كل !!{language}~$\Lang{L}$ مجموعة~$\OLId{latin-looped}{L}(\Lang{L})$ من الـ!!{sentence}s،
+وكانت $\models_\OLId{latin-looped}{L}$ علاقة تصل بين الـ!!{structure}s للـ!!{language}~$\Lang{L}$
+و!!{element}s~$\OLId{latin-looped}{L}(\Lang{L})$. ومن أمثلة ذلك
+$\tuple{\OLId{latin-looped}{F},\models}$، وهو منطق الرتبة الأولى المعتاد: فالدالة $\OLId{latin-looped}{F}$
+تسند إلى الـ!!{language}~$\Lang{L}$ مجموعة !!{sentence}s الرتبة
+الأولى المبنية من الثوابت في $\Lang{L}$، و$\models$ علاقة الإرضاء في
+منطق الرتبة الأولى.
+\end{defn}
+
+لم يتغير هنا معنى الـ!!{structure} لـ!!{language}
+معينة عما كان عليه في منطق الرتبة الأولى. وإنما رفعنا القيد عن بناء الـ!!{sentence}s،
+فلم نشترط بناءها من الرموز الأساسية في $\Lang{L}$ على الوجه المألوف، ولا اشترطنا تعريف العلاقة
+$\models_\OLId{latin-looped}{L}$ بالاستقراء المتبع في منطق الرتبة الأولى. ولهذا وسّعنا
+التعريف حتى يتناول، مثلًا، الـ!!{sentence}s التي يشتمل فيها
+$\tuple{\OLId{latin-looped}{L},\models_\OLId{latin-looped}{L}}$ على اقترانات أو انفصالات غير متناهية الطول، أو على مكممات
+سوى $\lexists$ و$\lforall$، نحو «يوجد عدد لا نهائي من~$\OLId{latin-ordinary}{x}$ بحيث
+\dots»، بل قد يتناول سوابق كمّية لا يتناهى طولها. وحيث إن
+«الـ!!{sentence}s» في $\OLId{latin-looped}{L}(\Lang{L})$ ليست مقصورة على !!{sentence}s
+الرتبة الأولى المعتادة، خصصنا لها في هذا الفصل الـ!!{variable}s~$!E$
+و$!F$ و\dots، وجعلنا $!A$ و$!B$ و\dots للـ!!{formula}s
+المعتادة من الرتبة الأولى.
+
+\begin{defn}
+ليرمز $\Mod(\OLId{latin-looped}{L}){!E}$ إلى الفئة
+$\Setabs{\Struct{M}}{\Struct{M} \models_\OLId{latin-looped}{L} !E}$. فإن احتيج إلى تعيين
+الـ!!{language} في الرمز كتبنا $\Mod[\OLId{latin-looped}{L}](\OLId{latin-looped}{L}){!E}$. تكون !!{structure}s اثنتان
+$\Struct{M}$ و$\Struct{N}$ للغة $\Lang{L}$ \emph{متكافئتين أوليًا في}
+$\tuple{\OLId{latin-looped}{L},\models_\OLId{latin-looped}{L}}$، ونكتب
+$\Struct{M} \elemequiv[\OLId{latin-looped}{L}] \Struct{N}$، متى اتفقتا في صدق الـ!!{sentence}s
+من $\OLId{latin-looped}{L}(\Lang{L})$.
+\end{defn}
+
+\begin{defn}
+نقول عن المنطق المجرد $\tuple{\OLId{latin-looped}{L},\models_\OLId{latin-looped}{L}}$ للـ!!{language}~$\Lang{L}$
+إنه \emph{سوي} إذا اجتمعت فيه الخواص الآتية:
+\begin{enumerate}
+\item (\emph{رتابة $\OLId{latin-looped}{L}$}) للـ!!{language}s~$\Lang{L}$ و$\Lang{L'}$،
+  إذا كان $\Lang{L} \subseteq \Lang{L'}$، فإن
+  $\OLId{latin-looped}{L}(\Lang{L}) \subseteq \OLId{latin-looped}{L}(\Lang{L'})$.
+\item (\emph{خاصية التوسع}) لكل $!E \in \OLId{latin-looped}{L}(\Lang{L})$ توجد مجموعة
+  جزئية \emph{منتهية}~$\Lang{L'}$ من $\Lang{L}$ يكفي معها، للحكم بالعلاقة
+  $\Struct{M} \models_\OLId{latin-looped}{L} !E$، معرفة مختزل $\Struct{M}$ إلى
+  $\Lang{L'}$؛ أي إذا كان لـ$\Struct{M}$ و$\Struct{N}$ المختزل نفسه
+  إلى $\Lang{L'}$، فإن $\Struct{M} \models_\OLId{latin-looped}{L} !E$ إذا وفقط إذا كان
+  $\Struct{N} \models_\OLId{latin-looped}{L} !E$.
+\item (\emph{خاصية التشاكل}) إذا كان $\Struct{M} \models_\OLId{latin-looped}{L} !E$ و
+  $\Struct{M} \simeq \Struct{N}$، فإن $\Struct{N} \models_\OLId{latin-looped}{L} !E$ أيضًا.
+\item (\emph{خاصية إعادة التسمية}) لا تتبدل العلاقة $\models_\OLId{latin-looped}{L}$ بتبديل
+  الأسماء وحده: إذا نتجت الـ!!{language}~$\Lang{L}'$ من $\Lang{L}$ بإحلال
+  رمز~$\OLId{latin-looped}{P}'$ له الرتبة نفسها محل كل رمز~$\OLId{latin-looped}{P}$، وثابت متميز~$\OLId{latin-ordinary}{c}'$ محل كل
+  ثابت~$\OLId{latin-ordinary}{c}$، فإنه لكل !!{structure}~$\Struct{M}$ و!!{sentence}~$!E$،
+  يكون $\Struct{M} \models_\OLId{latin-looped}{L} !E$ إذا وفقط إذا كان
+  $\Struct{M}' \models_\OLId{latin-looped}{L} !E'$، حيث $\Struct{M}'$ هي
+  !!{structure}~$\Lang{L}'$ المقابلة لـ$\Struct{M}$، و
+  $!E' \in \OLId{latin-looped}{L}(\Lang{L}')$.
+\item (\emph{الخاصية البوليانية}) ينغلق المنطق المجرد
+  $\tuple{\OLId{latin-looped}{L},\models_\OLId{latin-looped}{L}}$ تحت الروابط البوليانية؛ وتفصيل ذلك أن لكل
+  $!E \in \OLId{latin-looped}{L}(\Lang{L})$ يوجد $!F \in \OLId{latin-looped}{L}(\Lang{L})$ بحيث
+  $\Struct{M} \models_\OLId{latin-looped}{L} !F$ إذا وفقط إذا كان
+  $\Struct{M} \not\models_\OLId{latin-looped}{L} !E$، ولكل $!E$ و$!F$ يوجد $!G$ بحيث
+  $\Mod(\OLId{latin-looped}{L}){!G}=\Mod(\OLId{latin-looped}{L}){!E} \cap \Mod(\OLId{latin-looped}{L}){!F}$. وبالمثل للـ!!{formula}s
+  الذرية وسائر الروابط.
+\item (\emph{خاصية الكم}) لكل ثابت~$\OLId{latin-ordinary}{c}$ في $\Lang{L}$ ولكل
+  $!E \in \OLId{latin-looped}{L}(\Lang{L})$ يوجد $!F \in \OLId{latin-looped}{L}(\Lang{L'})$ بحيث
+  \[
+  \Mod[\OLId{latin-looped}{L}'](\OLId{latin-looped}{L}){!F} = \Setabs{\Struct{M}}{\Expan{\OLId{latin-looped}{M}}{\OLId{latin-ordinary}{a}} \in
+  \Mod[\OLId{latin-looped}{L}](\OLId{latin-looped}{L}){!E} \text{ لبعض } \OLId{latin-ordinary}{a} \in \Domain{\OLId{latin-looped}{M}}},
+  \]
+  حيث $\Lang{L'}=\Lang{L} \setminus \{\OLId{latin-ordinary}{c}\}$، و$\Expan{\OLId{latin-looped}{M}}{\OLId{latin-ordinary}{a}}$ توسيع
+  $\Struct{M}$ إلى $\Lang{L}$ الذي يسند $\OLId{latin-ordinary}{a}$ إلى~$\OLId{latin-ordinary}{c}$.
+\item (\emph{خاصية النسبنة}) لكل !!a{sentence}~$!E \in \OLId{latin-looped}{L}(\Lang{L})$
+  ورموز $\OLId{latin-looped}{R},\OLId{latin-ordinary}{c}_\OLMathNumeral{1},\dots,\OLId{latin-ordinary}{c}_\OLId{latin-ordinary}{n}$ لا تقع في $\Lang{L}$، توجد
+  !!a{sentence}~$!F \in \OLId{latin-looped}{L}(\Lang{L} \cup \{\OLId{latin-looped}{R},\OLId{latin-ordinary}{c}_\OLMathNumeral{1},\ldots,\OLId{latin-ordinary}{c}_\OLId{latin-ordinary}{n}\})$ تسمى
+  \emph{نسبنة} $!E$ إلى $\Atom{R}{x,c_1,\dots,c_n}$، بحيث يكون لكل
+  !!{structure}~$\Struct{M}$:
+  \[
+  \Expan{\OLId{latin-looped}{M}}{\OLId{latin-looped}{X}, \OLId{latin-ordinary}{b}_\OLMathNumeral{1}, \ldots, \OLId{latin-ordinary}{b}_\OLId{latin-ordinary}{n}} \models_\OLId{latin-looped}{L} !F \text{ إذا وفقط إذا كان }
+  \Struct{N} \models_\OLId{latin-looped}{L} !E,
+  \]
+  حيث $\Struct{N}$ هي البنية الجزئية من $\Struct{M}$ ذات
+  الـ!!{domain}
+  $\Domain{\OLId{latin-looped}{N}}=\Setabs{\OLId{latin-ordinary}{a}\in\Domain{\OLId{latin-looped}{M}}}{\tuple{\OLId{latin-ordinary}{a},\OLId{latin-ordinary}{b}_\OLMathNumeral{1},\dots,\OLId{latin-ordinary}{b}_\OLId{latin-ordinary}{n}}\in \OLId{latin-looped}{X}}$
+  (انظر \olref[bas][sub]{rem:substructure})، على أن تكون $\Domain{\OLId{latin-looped}{N}}$
+  غير خالية وأن تحتوي $\Assign{\OLId{latin-ordinary}{c}}{\OLId{latin-looped}{M}}$ لكل ثابت~$\OLId{latin-ordinary}{c}$ في $\Lang{L}$؛ وأن
+  $\Expan{\OLId{latin-looped}{M}}{\OLId{latin-looped}{X},\OLId{latin-ordinary}{b}_\OLMathNumeral{1},\ldots,\OLId{latin-ordinary}{b}_\OLId{latin-ordinary}{n}}$ توسيع $\Struct{M}$ الذي يفسر $\OLId{latin-looped}{R}$ و
+  $\OLId{latin-ordinary}{c}_\OLMathNumeral{1}$، \dots، $\OLId{latin-ordinary}{c}_\OLId{latin-ordinary}{n}$ بـ$\OLId{latin-looped}{X}$ و$\OLId{latin-ordinary}{b}_\OLMathNumeral{1}$، \dots، $\OLId{latin-ordinary}{b}_\OLId{latin-ordinary}{n}$، على الترتيب (حيث
+  $\OLId{latin-looped}{X} \subseteq \Domain{\OLId{latin-looped}{M}}^{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}}$).
+\end{enumerate}
+\end{defn}
+
+\begin{defn}
+إذا أخذنا $\tuple{\OLId{latin-looped}{L}_\OLMathNumeral{1},\models_{\OLId{latin-looped}{L}_\OLMathNumeral{1}}}$ و$\tuple{\OLId{latin-looped}{L}_\OLMathNumeral{2},\models_{\OLId{latin-looped}{L}_\OLMathNumeral{2}}}$، وهما منطقان
+مجردان، قلنا إن الثاني \emph{لا يقل قدرة تعبيرية} عن الأول، ورمزنا إلى ذلك بـ
+$\tuple{\OLId{latin-looped}{L}_\OLMathNumeral{1},\models_{\OLId{latin-looped}{L}_\OLMathNumeral{1}}} \leq \tuple{\OLId{latin-looped}{L}_\OLMathNumeral{2},\models_{\OLId{latin-looped}{L}_\OLMathNumeral{2}}}$، إذا كان
+لكل !!{language}~$\Lang{L}$ ولكل !!{sentence}~$!E \in \OLId{latin-looped}{L}_\OLMathNumeral{1}(\Lang{L})$
+!!a{sentence}~$!F \in \OLId{latin-looped}{L}_\OLMathNumeral{2}(\Lang{L})$ بحيث
+$\Mod[\OLId{latin-looped}{L}](\OLId{latin-looped}{L}_\OLMathNumeral{1}){!E}=\Mod[\OLId{latin-looped}{L}](\OLId{latin-looped}{L}_\OLMathNumeral{2}){!F}$. ويكون المنطقان
+$\tuple{\OLId{latin-looped}{L}_\OLMathNumeral{1},\models_{\OLId{latin-looped}{L}_\OLMathNumeral{1}}}$ و$\tuple{\OLId{latin-looped}{L}_\OLMathNumeral{2},\models_{\OLId{latin-looped}{L}_\OLMathNumeral{2}}}$
+\emph{متكافئين} إذا كان
+$\tuple{\OLId{latin-looped}{L}_\OLMathNumeral{1},\models_{\OLId{latin-looped}{L}_\OLMathNumeral{1}}} \leq \tuple{\OLId{latin-looped}{L}_\OLMathNumeral{2},\models_{\OLId{latin-looped}{L}_\OLMathNumeral{2}}}$ و
+$\tuple{\OLId{latin-looped}{L}_\OLMathNumeral{2},\models_{\OLId{latin-looped}{L}_\OLMathNumeral{2}}} \leq \tuple{\OLId{latin-looped}{L}_\OLMathNumeral{1},\models_{\OLId{latin-looped}{L}_\OLMathNumeral{1}}}$.
+\end{defn}
+
+\begin{rem}
+  أما منطق الرتبة الأولى، وهو المنطق المجرد $\tuple{\OLId{latin-looped}{F},\models}$، فسوي؛
+  وأكثر الخواص المذكورة ظاهرة فيه. ويكفي التنبيه هنا إلى
+  رجوع خاصية التوسع إلى الامتدادية، وإلى أن نسبنة !!a{sentence}~$!E$ إلى
+  $\Atom{R}{x,c_1,\dots,c_n}$ تحصل بإحلال
+  $\lforall[\OLId{latin-ordinary}{x}][(\Atom{R}{x,c_1,\dots,c_n} \lif \ !F)]$ محل كل
+  !!{subformula}~$\lforall[\OLId{latin-ordinary}{x}][!F]$. ثم إننا إذا أخذنا
+  $\tuple{\OLId{latin-looped}{L},\models_\OLId{latin-looped}{L}}$ سويًا، وجدنا أن
+  $\tuple{\OLId{latin-looped}{F},\models} \leq \tuple{\OLId{latin-looped}{L},\models_\OLId{latin-looped}{L}}$، كما يبيّن الاستقراء على
+  !!{formula}s الرتبة الأولى. فلا يضيق عموم البحث إذا افترضنا
+  انتماء كل !!{sentence} من الرتبة الأولى إلى كل منطق سوي.
+\end{rem}
+
+\end{document}

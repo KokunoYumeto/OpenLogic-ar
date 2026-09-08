@@ -1,0 +1,70 @@
+% Part: counterfactuals
+% Chapter: minimal-change-semantics
+% Section: antecedent-strengthening
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cnt}{min}{agg}
+
+\olsection{تقوية المقدّم}
+
+تشير «تقوية المقدّم» إلى الاستدلال
+$!A \lif !C \Entails (!A \land !B) \lif !C$. وهو صالح للشرط المادي،
+لكنه غير صالح للشرطيات المخالفة للواقع. افترض أنه يصدق أن عود الثقاب
+سيشتعل لو حككته. (أي إنه لا عيب في العود أو سطح علبته، ولن أكسر العود،
+وهكذا.) لكن لا يصدق أن عود الثقاب سيشتعل لو حككته في الفضاء الخارجي.
+ولذلك فالاستدلال الآتي غير صالح:
+\begin{quote}
+  لو حُك عود الثقاب لاشتعل.
+
+  إذن، لو حُك عود الثقاب في الفضاء الخارجي لاشتعل.
+\end{quote}
+
+يفسر تحليل لويس--ستالنيكر للشرطيات هذا الأمر: فأقرب عالم أحك فيه عود
+الثقاب وأفعل ذلك في الفضاء الخارجي أبعد بكثير عن العالم الفعلي من أقرب
+عالم أحك فيه العود. ولذلك، فرغم أن العود يشتعل في العالم الثاني، فإنه
+لا يشتعل في الأول. وهذا هو المتوقع.
+
+\begin{ex}
+  تجعل دلالة الكرات هذا الاستدلال غير صالح، أي إن لدينا
+  $p \cif r \Entails/ (p \land q) \cif r$. انظر النموذج
+  $\mModel{M} = \tuple{W, O, V}$، حيث~$W = \{w, w_1, w_2\}$،
+  و$O_w = \{\{w\}, \{w, w_1\}, \{w, w_1, w_2\}\}$،
+  و$V(p) = \{w_1, w_2\}$، و$V(q) = \{w_2\}$،
+  و$V(r) = \{w_1\}$. توجد كرة تقبل~$p$ هي~$S = \{w, w_1\}$،
+  وتصدق~$p \lif r$ عند جميع العوالم فيها، ولذلك
+  $\mSat{M}{p \cif r}[w]$. وتوجد أيضًا كرة تقبل~$(p \land q)$ هي
+  $S' = \{w, w_1, w_2\}$، لكن
+  $\mSat/{M}{(p \land q) \lif r}[w_2]$؛ ولذلك
+  $\mSat/{M}{(p \land q) \cif r}[w]$
+  (انظر~\olref{fig:antecedent-strengthening}).
+
+\begin{figure}
+\begin{center}
+\begin{tikzpicture}[layerwidth=1.5,scale=.6]\tiny
+  \spheresystem{3}
+  \propositionintersect{-10}{3}{30}{5}
+  \begin{scope}
+    \clip plot[smooth,tension=1] coordinates
+          {(0,4.5) (30:.95) (4.5,-3.5)} -- (4.5,4.5) ;
+    \spherefill{2}
+  \end{scope}
+  \draw[proposition] plot[dashed,smooth,tension=1] coordinates
+          {(0,4.5) (30:.95) (4.5,-3.5)} ;
+  \proposition{30}{2}{30}{5}
+  \path (0,0) node[world] {$w$};
+  \spherepos{30}{2}{node[world] {$w_1$}}
+  \spherepos{-10}{3}{node[world] {$w_2$}}
+  \spherepos{-10}{4}{node {$q$}}
+  \spherepos{30}{4}{node {$r$}}
+  \draw (1,4.5) node[below] {$p$};
+\end{tikzpicture}
+\caption{نموذج مضاد لتقوية المقدّم}
+\ollabel{fig:antecedent-strengthening}
+\end{center}
+\end{figure}
+\end{ex}
+
+\end{document}

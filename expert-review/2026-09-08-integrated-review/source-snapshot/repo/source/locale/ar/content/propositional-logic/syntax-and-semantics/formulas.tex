@@ -1,0 +1,176 @@
+% Part: propositional-logic
+% Chapter: syntax-and-semantics
+% Section: formulas
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pl}{syn}{fml}
+
+\olsection{\usetoken{P}{formula} القضايا}
+
+تُبنى !!^{formula}s منطق القضايا من
+\emph{!!{propositional
+    variable}s}\iftag{prvFalse}{\iftag{prvTrue}{،}{ و} الثابت
+  القضوي~$\lfalse$}{}\iftag{prvTrue}{\iftag{prvFalse}{
+    و}{ و} الثابت القضوي~$\ltrue$}{} باستعمال \emph{روابط
+  منطقية}.
+
+\begin{enumerate}
+\item المجموعة~$\PVar$ !!^a{denumerable}، وتتألف من
+  !!{propositional variable}s: $\Obj p_0$، $\Obj p_1$، \dots
+\tagitem{prvFalse}{الثابت القضوي الدال على !!{falsity} هو~$\lfalse$.}{}
+\tagitem{prvTrue}{الثابت القضوي الدال على !!{truth} هو~$\ltrue$.}{}
+\item الروابط المنطقية:
+  \startycommalist
+  \iftag{prvNot}{\ycomma $\lnot$ (النفي)}{}%
+  \iftag{prvAnd}{\ycomma $\land$ (العطف)}{}%
+  \iftag{prvOr}{\ycomma $\lor$ (الفصل)}{}%
+  \iftag{prvIf}{\ycomma $\lif$ (!!{conditional})}{}%
+  \iftag{prvIff}{\ycomma $\liff$ (!!{biconditional})}{}%
+\item علامات الترقيم: القوسان ( و)، والفاصلة.
+\end{enumerate}
+
+نرمز إلى لغة منطق القضايا هذه بـ~$\Lang L_0$.
+
+\iftag{defNot,defOr,defAnd,defIf,defIff,defTrue,defFalse,defEx,defAll}{%
+بالإضافة إلى الروابط الأولية المقدمة أعلاه، نستعمل أيضًا الرموز
+\emph{المعرّفة} الآتية:
+\startycommalist
+  \iftag{defNot}{\ycomma $\lnot$ (النفي)}{}%
+  \iftag{defAnd}{\ycomma $\land$ (العطف)}{}%
+  \iftag{defOr}{\ycomma $\lor$ (الفصل)}{}%
+  \iftag{defIf}{\ycomma $\lif$ (!!{conditional})}{}%
+  \iftag{defIff}{\ycomma $\liff$ (!!{biconditional})}{}%
+  \iftag{defFalse}{\ycomma $\lfalse$ (!!{falsity})}{}%
+  \iftag{defTrue}{\ycomma $\ltrue$ (!!{truth})}}{}.
+
+\begin{tagblock}{defNot,defOr,defAnd,defIf,defIff,defTrue,defFalse,defEx,defAll}
+\begin{explain}
+الرمز المعرّف ليس جزءًا رسميًا من اللغة، بل يُدخل بوصفه اختصارًا غير
+رسمي: فهو يتيح لنا اختصار صيغ كانت ستغدو طويلة جدًا لو اقتصرنا على
+الرموز الأولية. وهذه ميزة واضحة. غير أن الميزة الأكبر هي أن البراهين
+تصير أقصر. فإذا كان رمز ما أوليًا، وجب تناوله على حدة في البراهين.
+ومن ثم، كلما كثرت الرموز الأولية طالت براهيننا.
+\end{explain}
+\end{tagblock}
+
+% Alternate symbols
+
+\begin{intro}
+قد تكون على معرفة بمصطلحات ورموز تختلف عن تلك التي نستعملها أعلاه. يشيع
+في كتب المنطق (وعند مدرّسيه) استعمال $\sim$ و$\neg$ و~!\ للدلالة على
+«النفي»، واستعمال $\wedge$ و$\cdot$ و$\&$ للدلالة على «العطف». أما
+الرموز الشائعة لـ«الشرط» أو «الاستلزام» فهي $\rightarrow$
+و$\Rightarrow$ و$\supset$.
+\iftag{prvIff,defIff}{أما رموز «الشرط الثنائي» أو «الاستلزام المتبادل»
+  أو «التكافؤ (المادي)» فهي $\leftrightarrow$ و$\Leftrightarrow$
+  و$\equiv$.}{}
+\iftag{prvFalse,defFalse}{تتنوع أسماء الرمز~$\lfalse$؛ فيسمى
+  «الكذب» أو «الباطل» أو «المحال» أو «القاع».}{}
+\iftag{prvTrue,defTrue}{تتنوع أسماء الرمز~$\ltrue$؛ فيسمى
+  «الصدق» أو «الحق» أو «القمة».}{}
+\end{intro}
+
+\begin{defn}[الصيغة]
+\ollabel{defn:formulas}
+تُعرّف المجموعة~$\Frm[L_0]$، وهي مجموعة \emph{!!{formula}s} منطق
+القضايا، استقرائيًا على النحو الآتي:
+\begin{enumerate}
+\tagitem{prvFalse}{$\lfalse$ هي !!{formula} ذرية.}{}
+
+\tagitem{prvTrue}{$\ltrue$ هي !!{formula} ذرية.}{}
+
+\item كل !!{propositional variable}~$\Obj p_i$ هو !!{formula}
+  ذرية.
+
+\tagitem{prvNot}{إذا كانت $!A$ !!a{formula}، فإن $\lnot !A$ هي
+  !!a{formula}.}{}
+
+\tagitem{prvAnd}{إذا كانت $!A$ و$!B$ من !!{formula}s، فإن $(!A \land
+  !B)$ هي !!a{formula}.}{}
+
+\tagitem{prvOr}{إذا كانت $!A$ و$!B$ من !!{formula}s، فإن $(!A \lor !B)$
+  هي !!a{formula}.}{}
+
+\tagitem{prvIf}{إذا كانت $!A$ و$!B$ من !!{formula}s، فإن $(!A \lif !B)$
+  هي !!a{formula}.}{}
+
+\tagitem{prvIff}{إذا كانت $!A$ و$!B$ من !!{formula}s، فإن $(!A \liff !B)$
+  هي !!a{formula}.}{}
+
+\tagitem{limitClause}{ولا يُعد أي شيء آخر !!a{formula}.}{}
+\end{enumerate}
+\end{defn}
+
+\begin{explain}
+تعريف مجموعة !!{formula}s هو \emph{تعريف استقرائي}. ففي جوهر الأمر،
+نبني مجموعة
+!!{formula}s عبر عدد لا نهائي من المراحل. وفي المرحلة الابتدائية نعلن
+أن جميع الصيغ الذرية صيغ؛ وهذا يقابل الحالات الأولى القليلة من
+التعريف، أي حالات
+\iftag{prvTrue}{$\ltrue$، }{}%
+\iftag{prvFalse}{$\lfalse$، }{}%
+$\Obj p_i$. وهكذا تعني «!!{formula} ذرية» أي !!{formula} من هذا
+الشكل.
+
+وتعطي الحالات الأخرى من التعريف قواعد لبناء !!{formula}s جديدة من
+!!{formula}s سبق بناؤها. وفي المرحلة الثانية يمكننا استعمال تلك
+القواعد لبناء !!{formula}s من !!{formula}s ذرية. وفي المرحلة الثالثة
+نبني صيغًا جديدة من الصيغ الذرية ومن الصيغ التي حصلنا عليها في
+المرحلة الثانية، وهكذا. ويُعد الشيء !!{formula} إذا بُني في نهاية
+المطاف في مرحلة من هذه المراحل، ولا يُعد أي شيء آخر كذلك.
+\end{explain}
+
+عند كتابة صيغة $(!B \ast !C)$ منشأة من $!B$ و$!C$ باستعمال رابط
+ثنائي الموضع~$\ast$، سنحذف غالبًا الزوج الخارجي من الأقواس ونكتب
+ببساطة~$!B \ast !C$.
+
+\begin{tagblock}{defNot,defOr,defAnd,defIf,defIff,defTrue,defFalse,defEx,defAll}
+\begin{defn}
+يجب فهم الصيغ المنشأة باستعمال المعاملات المعرّفة على النحو الآتي:
+
+\begin{tagenumerate}{defTrue,defFalse,defNot,defOr,defAnd,defIf,defIff,defEx,defAll}
+
+\tagitem{defTrue}{$\ltrue$ اختصار لـ
+  \iftag{prvFalse}{$\lnot\lfalse$}{$(!A \lor \lnot !A)$، حيث تكون
+    !!{formula}~$!A$ ذرية ثابتة ما}.}{}
+
+\tagitem{defFalse}{$\lfalse$ اختصار لـ
+  \iftag{prvTrue}{$\lnot\ltrue$}{$(!A \land \lnot !A)$، حيث تكون
+    !!{formula}~$!A$ ذرية ثابتة ما}.}{}
+
+\tagitem{defNot}{$\lnot !A$ اختصار لـ~$!A \lif \lfalse$.}{}
+
+\tagitem{defOr}{$!A \lor !B$ اختصار لـ
+  \iftag{prvAnd}{$\lnot(\lnot !A \land \lnot !B)$}{$\lnot !A \lif
+    !B$}.}{}
+
+\tagitem{defAnd}{$!A \land !B$ اختصار لـ
+  \iftag{prvOr}{$\lnot(\lnot !A \lor \lnot !B)$}{$\lnot (!A \lif
+    \lnot !B)$}.}{}
+
+\tagitem{defIf}{$!A \lif !B$ اختصار لـ
+  \iftag{prvOr}{$(\lnot !A \lor !B)$}{$\lnot (!A \land \lnot !B)$}.}{}
+
+\tagitem{defIff}{$!A \liff !B$ اختصار لـ~$(!A \lif !B) \land (!B
+  \lif !A)$.}{}
+\end{tagenumerate}
+\end{defn}
+\end{tagblock}
+
+\begin{defn}[الهوية التركيبية]
+يعبّر الرمز~$\ident$ عن الهوية التركيبية بين سلاسل الرموز؛ أي إن
+$!A \ident !B$ إذا وفقط إذا كان $!A$ و$!B$ سلسلتين من الرموز لهما
+الطول نفسه وتحتويان الرمز نفسه في كل موضع.
+\end{defn}
+
+يمكن أن تحف بالرمز~$\ident$ سلاسل ناتجة من الوصل؛ فمثلًا تعني
+$!A \ident (!B \lor !C)$ أن سلسلة الرموز~$!A$ هي السلسلة نفسها الناتجة
+من وصل قوس فاتح، والسلسلة~$!B$، والرمز~$\lor$، والسلسلة~$!C$، وقوس
+غالق، بهذا الترتيب. وإذا كان الأمر كذلك، علمنا أن الرمز الأول من~$!A$
+قوس فاتح، وأن~$!A$ تحتوي على~$!B$ بوصفها سلسلةً جزئية (تبدأ عند الرمز الثاني)،
+وأن هذه السلسلة الجزئية يليها~$\lor$، وهكذا.
+
+\end{document}

@@ -1,0 +1,160 @@
+% part: intuitionistic-logic
+% chapter: soundness-completeness
+% section: soundness-nd
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{sc}{snd}
+
+\olsection{سلامة الاستنباط الطبيعي}
+
+نقصد الآن إلى إقامة سلامة الاستنباط الطبيعي في الدلالات العلائقية. ومعنى
+السلامة هنا أن كل !!a{formula} تكون !!{derivable} من جملة افتراضات،
+تلزم عن تلك الافتراضات؛ فلا يجاوز الاشتقاق ما تستلزمه من !!{formula}.
+
+\begin{thm}[السلامة]
+  \ollabel{thm:soundness}
+  من~$\OLId{greek-variable}{Gamma} \Proves !A$ يلزم~$\OLId{greek-variable}{Gamma} \Entails !A$.
+\end{thm}
+
+\begin{proof}
+  دعوانا أنه متى ثبت~$\OLId{greek-variable}{Gamma} \Proves !A$ ثبت~$\OLId{greek-variable}{Gamma} \Entails !A$.
+  ونستقرئ لذلك في !!{derivation}~$!A$ من~$\OLId{greek-variable}{Gamma}$.
+
+  \begin{enumerate}
+  \item إن اقتصرت ال!!{derivation} على الافتراض~$!A$ وحده، فلنا
+    $!A \Proves !A$، والمطلوب~$!A \Entails !A$. فلنفرض
+    $\mSat{\OLId{latin-looped}{M}}{!A}[\OLId{latin-ordinary}{w}]$؛ وليس~$\mSat{\OLId{latin-looped}{M}}{!A}[\OLId{latin-ordinary}{w}]$ إلا الفرض نفسه.
+
+  \item وإن كان آخر ال!!{derivation} هو~$\Intro{\land}$:
+    \iftag{probAnd}{يُترك برهانه تمرينًا.}{لدينا اشتقاقا المقدمتين: ينتهي أحدهما
+      بـ$!B$ وافتراضاته غير المسقطة هي~$\OLId{greek-variable}{Gamma}$، وينتهي الآخر بـ$!C$
+      وافتراضاته غير المسقطة هي~$\OLId{greek-variable}{Delta}$. فثبت~$\OLId{greek-variable}{Gamma} \Proves !B$ و
+      $\OLId{greek-variable}{Delta} \Proves !C$. ويعطي فرض الاستقراء
+      $\OLId{greek-variable}{Gamma} \Entails !B$ و$\OLId{greek-variable}{Delta} \Entails !C$. والمطلوب
+      $\OLId{greek-variable}{Gamma} \cup \OLId{greek-variable}{Delta} \Entails !B \land !C$؛ لأن مجموعة الافتراضات غير
+      المسقطة في ال!!{derivation} بأسرها هي~$\OLId{greek-variable}{Gamma}\cup\OLId{greek-variable}{Delta}$. ليكن إذن
+      $\mSat{\OLId{latin-looped}{M}}{\OLId{greek-variable}{Gamma} \cup \OLId{greek-variable}{Delta}}[\OLId{latin-ordinary}{w}]$؛ فيلزم
+      $\mSat{\OLId{latin-looped}{M}}{\OLId{greek-variable}{Gamma}}[\OLId{latin-ordinary}{w}]$. وقد كان~$\OLId{greek-variable}{Gamma} \Entails !B$، فيثبت
+      $\mSat{\OLId{latin-looped}{M}}{!B}[\OLId{latin-ordinary}{w}]$؛ وعلى مثاله~$\mSat{\OLId{latin-looped}{M}}{!C}[\OLId{latin-ordinary}{w}]$. فينتج
+      $\mSat{\OLId{latin-looped}{M}}{!B \land !C}[\OLId{latin-ordinary}{w}]$.}
+
+  \item وإن كان آخر ال!!{derivation} هو~$\Elim{\land}$:
+    \iftag{probAnd}{يُترك برهانه تمرينًا.}{إن !!{derivation} المقدمة
+      $!B \land !C$ وافتراضاتها غير المسقطة هي~$\OLId{greek-variable}{Gamma}$؛ فهي تشهد بأن
+      $\OLId{greek-variable}{Gamma} \Proves !B \land !C$. فبالاستقراء
+      $\OLId{greek-variable}{Gamma} \Entails !B \land !C$، وعلينا إقامة
+      $\OLId{greek-variable}{Gamma} \Entails !B$. نأخذ~$\mSat{\OLId{latin-looped}{M}}{\OLId{greek-variable}{Gamma}}[\OLId{latin-ordinary}{w}]$؛ ومن
+      $\OLId{greek-variable}{Gamma} \Entails !B \land !C$ يلزم
+      $\mSat{\OLId{latin-looped}{M}}{!B \land !C}[\OLId{latin-ordinary}{w}]$، فيلزم~$\mSat{\OLId{latin-looped}{M}}{!B}[\OLId{latin-ordinary}{w}]$. وإن انتهت
+      $\Elim\land$ إلى~$!C$، جرى البرهان نفسه فثبت
+      $\OLId{greek-variable}{Gamma} \Entails !C$.}
+
+  \item وإن انتهت ال!!{derivation} إلى~$\Intro{\lor}$:
+    \iftag{probOr}{يُترك برهانه تمرينًا.}{لتكن المقدمة~$!B$؛ ولتكن مجموعة الافتراضات
+      غير المسقطة في ال!!{derivation} المنتهية بـ~$!B$ هي
+      $\OLId{greek-variable}{Gamma}$. فلنا~$\OLId{greek-variable}{Gamma} \Proves !B$، ومن الاستقراء
+      $\OLId{greek-variable}{Gamma} \Entails !B$. والمقصود إثبات
+      $\OLId{greek-variable}{Gamma} \Entails !B \lor !C$. ليكن~$\mSat{\OLId{latin-looped}{M}}{\OLId{greek-variable}{Gamma}}[\OLId{latin-ordinary}{w}]$؛
+      فبما أن~$\OLId{greek-variable}{Gamma} \Entails !B$، يثبت~$\mSat{\OLId{latin-looped}{M}}{!B}[\OLId{latin-ordinary}{w}]$، ويلزم عنه
+      $\mSat{\OLId{latin-looped}{M}}{!B \lor !C}[\OLId{latin-ordinary}{w}]$. وأما إذا كانت المقدمة~$!C$، فإن
+      $\OLId{greek-variable}{Gamma} \Entails !C$، ويجري الوجه نفسه.}
+
+  \item وإن انتهت ال!!{derivation} إلى~$\Elim{\lor}$:
+    \iftag{probOr}{يُترك برهانه تمرينًا.}{ال!!{derivation}s الثلاث التي تنتهي إلى
+      المقدمات هي: اشتقاق~$!B \lor !C$ وافتراضاته غير المسقطة هي
+      $\OLId{greek-variable}{Gamma}$؛ واشتقاق~$!D$ وافتراضاته غير المسقطة هي
+      $\OLId{greek-variable}{Delta}_\OLMathNumeral{1} \cup \{!B\}$؛ واشتقاق~$!D$ وافتراضاته غير المسقطة هي
+      $\OLId{greek-variable}{Delta}_\OLMathNumeral{2} \cup \{!C\}$. فثبت
+      $\OLId{greek-variable}{Gamma} \Proves !B \lor !C$ و
+      $\OLId{greek-variable}{Delta}_\OLMathNumeral{1} \cup \{!B\} \Proves !D$ و
+      $\OLId{greek-variable}{Delta}_\OLMathNumeral{2} \cup \{!C\} \Proves !D$. ويلزم بالاستقراء
+      $\OLId{greek-variable}{Gamma} \Entails !B \lor !C$ و
+      $\OLId{greek-variable}{Delta}_\OLMathNumeral{1} \cup \{!B\} \Entails !D$ و
+      $\OLId{greek-variable}{Delta}_\OLMathNumeral{2} \cup \{!C\} \Entails !D$. فبقي علينا
+      $\OLId{greek-variable}{Gamma} \cup \OLId{greek-variable}{Delta}_\OLMathNumeral{1} \cup \OLId{greek-variable}{Delta}_\OLMathNumeral{2} \Entails !D$.
+
+    ليكن~$\mSat{\OLId{latin-looped}{M}}{\OLId{greek-variable}{Gamma} \cup \OLId{greek-variable}{Delta}_\OLMathNumeral{1} \cup \OLId{greek-variable}{Delta}_\OLMathNumeral{2}}[\OLId{latin-ordinary}{w}]$. فنستخلص
+    $\mSat{\OLId{latin-looped}{M}}{\OLId{greek-variable}{Gamma}}[\OLId{latin-ordinary}{w}]$، ومن~$\OLId{greek-variable}{Gamma} \Entails !B \lor !C$ يلزم
+    $\mSat{\OLId{latin-looped}{M}}{!B \lor !C}[\OLId{latin-ordinary}{w}]$. وتعريف~$\mSat{\OLId{latin-looped}{M}}{}$ يقسم الأمر قسمين:
+    إما~$\mSat{\OLId{latin-looped}{M}}{!B}[\OLId{latin-ordinary}{w}]$ وإما~$\mSat{\OLId{latin-looped}{M}}{!C}[\OLId{latin-ordinary}{w}]$.
+    (أ) إن كان~$\mSat{\OLId{latin-looped}{M}}{!B}[\OLId{latin-ordinary}{w}]$، كان
+    $\mSat{\OLId{latin-looped}{M}}{\OLId{greek-variable}{Delta}_\OLMathNumeral{1} \cup \{!B\}}[\OLId{latin-ordinary}{w}]$؛ ومع
+    $\OLId{greek-variable}{Delta}_\OLMathNumeral{1} \cup \{!B\} \Entails !D$ يثبت~$\mSat{\OLId{latin-looped}{M}}{!D}[\OLId{latin-ordinary}{w}]$.
+    (ب) وإن كان~$\mSat{\OLId{latin-looped}{M}}{!C}[\OLId{latin-ordinary}{w}]$، كان
+    $\mSat{\OLId{latin-looped}{M}}{\OLId{greek-variable}{Delta}_\OLMathNumeral{2} \cup \{!C\}}[\OLId{latin-ordinary}{w}]$؛ ومع
+    $\OLId{greek-variable}{Delta}_\OLMathNumeral{2} \cup \{!C\} \Entails !D$ يثبت~$\mSat{\OLId{latin-looped}{M}}{!D}[\OLId{latin-ordinary}{w}]$.
+    فالحاصل على كلا الوجهين~$\mSat{\OLId{latin-looped}{M}}{!D}[\OLId{latin-ordinary}{w}]$، وهذا مرادنا.}
+
+  \item وإن خُتمت ال!!{derivation} بـ~$\Intro{\lif}$ وكانت النتيجة
+    $!B \lif !C$، فالمقدمة~$!C$، ومجموعة الافتراضات غير المسقطة في
+    ال!!{derivation} المنتهية إلى تلك المقدمة هي
+    $\OLId{greek-variable}{Gamma} \cup \{!B\}$. فيثبت
+    $\OLId{greek-variable}{Gamma} \cup \{!B\} \Proves !C$، وبالاستقراء
+    $\OLId{greek-variable}{Gamma} \cup \{!B\} \Entails !C$. والمطلوب
+    $\OLId{greek-variable}{Gamma} \Entails !B \lif !C$.
+
+    ليكن~$\mSat{\OLId{latin-looped}{M}}{\OLId{greek-variable}{Gamma}}[\OLId{latin-ordinary}{w}]$. نحتاج أن نثبت في كل~$\OLId{latin-ordinary}{w}'$ يحقق
+    $Rww'$ أنه متى كان~$\mSat{\OLId{latin-looped}{M}}{!B}[\OLId{latin-ordinary}{w}']$ كان~$\mSat{\OLId{latin-looped}{M}}{!C}[\OLId{latin-ordinary}{w}']$.
+    فلنأخذ~$Rww'$ و$\mSat{\OLId{latin-looped}{M}}{!B}[\OLId{latin-ordinary}{w}']$. تعطينا
+    \olref[sem][rel]{prop:true-monotonic}
+    $\mSat{\OLId{latin-looped}{M}}{\OLId{greek-variable}{Gamma}}[\OLId{latin-ordinary}{w}']$؛ ومع
+    $\OLId{greek-variable}{Gamma} \cup \{!B\} \Entails !C$ يثبت~$\mSat{\OLId{latin-looped}{M}}{!C}[\OLId{latin-ordinary}{w}']$،
+    فيتم هذا القسم.
+
+  \item وإن انتهت ال!!{derivation} بـ~$\Elim{\lif}$ إلى~$!C$،
+    فالمقدمتان~$!B \lif !C$ و$!B$، ولهما !!{derivation}s افتراضاتهما
+    غير المسقطة هي~$\OLId{greek-variable}{Gamma}$ و$\OLId{greek-variable}{Delta}$ على الترتيب. فلدينا
+    $\OLId{greek-variable}{Gamma} \Proves !B \lif !C$ و$\OLId{greek-variable}{Delta} \Proves !B$؛ ومن
+    الاستقراء~$\OLId{greek-variable}{Gamma} \Entails !B \lif !C$ و
+    $\OLId{greek-variable}{Delta} \Entails !B$. ولا يزال علينا
+    $\OLId{greek-variable}{Gamma} \cup \OLId{greek-variable}{Delta} \Entails !C$.
+
+    ليكن~$\mSat{\OLId{latin-looped}{M}}{\OLId{greek-variable}{Gamma} \cup \OLId{greek-variable}{Delta}}[\OLId{latin-ordinary}{w}]$. فمن
+    $\mSat{\OLId{latin-looped}{M}}{\OLId{greek-variable}{Gamma}}[\OLId{latin-ordinary}{w}]$ و$\OLId{greek-variable}{Gamma} \Entails !B \lif !C$ يلزم
+    $\mSat{\OLId{latin-looped}{M}}{!B \lif !C}[\OLId{latin-ordinary}{w}]$. أي إن كل~$\OLId{latin-ordinary}{w}'$ يحقق
+    $Rww'$ يلزم فيه من~$\mSat{\OLId{latin-looped}{M}}{!B}[\OLId{latin-ordinary}{w}']$ أن~$\mSat{\OLId{latin-looped}{M}}{!C}[\OLId{latin-ordinary}{w}']$.
+    ولانعكاسية~$\OLId{latin-looped}{R}$ يكون~$\OLId{latin-ordinary}{w}$ أحد هذه العوالم~$\OLId{latin-ordinary}{w}'$ التي تحقق~$Rww'$؛
+    فمتى ثبت~$\mSat{\OLId{latin-looped}{M}}{!B}[\OLId{latin-ordinary}{w}]$ ثبت~$\mSat{\OLId{latin-looped}{M}}{!C}[\OLId{latin-ordinary}{w}]$. ومن
+    $\mSat{\OLId{latin-looped}{M}}{\OLId{greek-variable}{Delta}}[\OLId{latin-ordinary}{w}]$ و$\OLId{greek-variable}{Delta} \Entails !B$ نعلم
+    $\mSat{\OLId{latin-looped}{M}}{!B}[\OLId{latin-ordinary}{w}]$؛ فثبت~$\mSat{\OLId{latin-looped}{M}}{!C}[\OLId{latin-ordinary}{w}]$، وهو المقصود.
+
+  \item وإن كان آخر ال!!{derivation} هو~$\FalseInt$ ونتيجتها~$!A$،
+    فالمقدمة~$\lfalse$، ومجموعة الافتراضات غير المسقطة في
+    !!{derivation} تلك المقدمة هي~$\OLId{greek-variable}{Gamma}$. فلدينا
+    $\OLId{greek-variable}{Gamma} \Proves \lfalse$، ومن فرض الاستقراء
+    $\OLId{greek-variable}{Gamma} \Entails \lfalse$. ونريد إقامة
+    $\OLId{greek-variable}{Gamma} \Entails !A$.
+
+    ولنأخذ بنقيض المطلوب: لو كان~$\OLId{greek-variable}{Gamma} \Entails/ !A$ لكان
+    نموذج~$\mModel{M}$ وعالم~$\OLId{latin-ordinary}{w}$ يتحقق فيهما~$\mSat{\OLId{latin-looped}{M}}{\OLId{greek-variable}{Gamma}}[\OLId{latin-ordinary}{w}]$ و
+    $\mSat/{\OLId{latin-looped}{M}}{!A}[\OLId{latin-ordinary}{w}]$. إلا أن~$\OLId{greek-variable}{Gamma} \Entails \lfalse$ يوجب
+    $\mSat{\OLId{latin-looped}{M}}{\lfalse}[\OLId{latin-ordinary}{w}]$، وهو محال، لأن التعريف يقضي بـ
+    $\mSat/{\OLId{latin-looped}{M}}{\lfalse}[\OLId{latin-ordinary}{w}]$. فثبت~$\OLId{greek-variable}{Gamma} \Entails !A$.
+  \item وإن انتهت ال!!{derivation} إلى~$\Intro\lnot$، فبرهانها تمرين.
+  \item وإن انتهت ال!!{derivation} إلى~$\Elim\lnot$، فبرهانها تمرين.
+  \end{enumerate}
+  % تصحيح ترجمة (0505-M1): حُققت «الافتراضات غير المسقطة» سياقيًا بدل إدخال اسم العملية في موضع الصفة.
+\end{proof}
+
+\begin{prob}
+  أتمّ ما بقي من برهان~\olref[int][sc][snd]{thm:soundness}. ولتستعمل في قسمي
+  $\Intro\lnot$ و$\Elim\lnot$ تعريف
+  $\mSat{\OLId{latin-looped}{M}}{\lnot !A}[\OLId{latin-ordinary}{w}]$ الوارد في
+  \olref[int][sem][rel]{defn:true-at-w}؛ فلا تجعل
+  $\lnot !A$ اختصارًا معرّفًا بـ~$!A \lif \lfalse$.
+\end{prob}
+
+\begin{prob}
+  أقم الدليل على أن ال!!{formula}s الآتية ليست !!{derivable} في المنطق
+  الحدسي:
+  \begin{enumerate}
+    \item $(!A \lif !B) \lor (!B \lif !A)$
+    \item $(\lnot\lnot !A \lif !A) \lif (!A \lor \lnot !A)$
+    \item $(!A \lif !B \lor !C) \lif \bigl((!A \lif !B)\lor(!A \lif !C)\bigr)$
+  \end{enumerate}
+\end{prob}
+
+\end{document}

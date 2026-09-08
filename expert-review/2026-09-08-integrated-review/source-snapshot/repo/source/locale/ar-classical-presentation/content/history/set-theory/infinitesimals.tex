@@ -1,0 +1,86 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{his}{set}{infinitesimals}
+\olsection{الكميات المتناهية الصغر والاشتقاق}
+
+انتهى نيوتن ولايبنتس، كل واحد منهما على استقلال، إلى حساب التفاضل والتكامل
+في أواخر القرن السابع عشر. ومن أجلّ ما استُعمل فيه هذا الحساب
+\emph{الاشتقاق}؛ ومقصوده، على وجه التقريب، أن يُحدّ «معدل تغير» الدالة
+عند نقطة، أي ميلها.
+
+ولنجل الفكرة بمثال محسوس: تأمل الدالة
+$\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x}) = \nicefrac{\OLId{latin-ordinary}{x}^\OLMathNumeral{2}}{\OLMathNumeral{4}} + \nicefrac{\OLMathNumeral{1}}{\OLMathNumeral{2}}$، وقد رُسمت فيما يأتي
+بالسواد:
+\begin{center}
+	\begin{tikzpicture}[scale=1]
+	\draw[->, gray] (-1,0) -- (4.25,0) node[right] {$\OLId{latin-ordinary}{x}$};
+	\draw[->, gray] (0,-0.25) -- (0,5.25) node[above] {$\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x})$};
+	
+	\foreach \x/\xtext in {1/1, 2/2, 3/3, 4/4}
+	\draw[shift={(\x,0)}, gray] (0pt,2pt) -- (0pt,-2pt) node[below] {$\xtext$};
+	
+	\foreach \y/\ytext in {1/1, 2/2, 3/3, 4/4, 5/5}
+	\draw[shift={(0,\y)}, gray] (2pt,0pt) -- (-2pt,0pt) node[left] {$\ytext$};
+	
+	\draw[oldiagcolorC] (0.5, 9/16) -- (3.5, 57/16) -- (3.5, 9/16)--cycle;
+	\draw[oldiagcolorD] (.5, 9/16) -- (2.5, 33/16) -- (2.5, 9/16) -- cycle;
+	\draw[oldiagcolorE] (.5, 9/16) -- (1.5, 17/16) -- (1.5, 9/16) -- cycle;
+	\draw[thick] (-1,.75) parabola bend (0,0.5) (4,4.5);
+	\end{tikzpicture}
+\end{center}
+ولنفرض أنا نريد ميل الدالة عند~$\OLId{latin-ordinary}{c} = \nicefrac{\OLMathNumeral{1}}{\OLMathNumeral{2}}$. فنرسم أولاً مثلثاً
+يقارب ميل وتره الميل عند تلك النقطة، وليكن هو المثلث الأحمر المتقدم. فإذا
+كان~$\beta$ طول قاعدته، كان ارتفاعه
+$\OLId{latin-ordinary}{f}(\nicefrac{\OLMathNumeral{1}}{\OLMathNumeral{2}}+\beta) - \OLId{latin-ordinary}{f}(\nicefrac{\OLMathNumeral{1}}{\OLMathNumeral{2}})$؛ ومن ثم يكون ميل الوتر:
+\[
+\frac{\OLId{latin-ordinary}{f}(\nicefrac{\OLMathNumeral{1}}{\OLMathNumeral{2}}+\beta) - \OLId{latin-ordinary}{f}(\nicefrac{\OLMathNumeral{1}}{\OLMathNumeral{2}})}{\beta}.
+\]
+فمثلثنا~!!{colorC}، وطول قاعدته~$\OLMathNumeral{3}$، يكون ميله مساوياً لـ$\OLMathNumeral{1}$ سواء بسواء.
+فإن أخذنا أصغر منه، أعني المثلث~!!{colorD} الذي طول قاعدته~$\OLMathNumeral{2}$، كان وتره
+أدنى إلى المطلوب، وميله~$\nicefrac{\OLMathNumeral{3}}{\OLMathNumeral{4}}$. ثم المثلث~!!{colorE} أصغر
+منه أيضاً، وطول قاعدته~$\OLMathNumeral{1}$، فيعطينا تقريباً أحسن، وميله
+~$\nicefrac{\OLMathNumeral{1}}{\OLMathNumeral{2}}$.
+
+وكلما صغّرنا المثلث ازداد تقريبنا جودة. فلنا أن نقول: إن وتر مثلث قاعدته
+\emph{متناهية في الصغر} يعطينا الميل عينه عند
+$\OLId{latin-ordinary}{c} = \nicefrac{\OLMathNumeral{1}}{\OLMathNumeral{2}}$. وبهذا نحصل على صيغة المشتقة الأولى للدالة~$\OLId{latin-ordinary}{f}$
+عند النقطة~$\OLId{latin-ordinary}{c}$:
+\[
+{\OLId{latin-ordinary}{f}'}(\OLId{latin-ordinary}{c}) = \frac{\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{c}+\beta) - \OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{c})}{\beta} \text{ حيث $\beta$ متناهية في الصغر.}
+\]
+وهذا، في الجملة، قول نيوتن ولايبنتس.
+
+ولكن ما هذه الكمية \emph{المتناهية في الصغر}؟ ها هنا موضع الإشكال؛ فإن
+كان~$\beta = \OLMathNumeral{0}$ لم تكن~$\OLId{latin-ordinary}{f}'$ محدودة حداً صحيحاً، لاشتمالها على القسمة
+على~$\OLMathNumeral{0}$. وإن كان~$\beta > \OLMathNumeral{0}$ لم نصب الميل نفسه، وإنما أصبنا
+\emph{تقريباً} منه.
+
+وليس هذا اعتراضاً حادثاً أُلصق بالماضين؛ فهذا بيركلي يخاطب أتباع نيوتن
+منتقداً:
+\begin{quote}
+I admit that signs may be made to denote either any thing or nothing:
+and consequently that in the original notation $\OLId{latin-ordinary}{c} + \beta$, $\beta$
+might have signified either an increment or nothing. But then which of
+these soever you make it signify, you must argue consistently with
+such its signification, and not proceed upon a double meaning: Which
+to do were a manifest sophism. (\citealt[\S{}XIII]{Berkeley1734},
+variables changed to match preceding text)
+\end{quote}
+وقد يدفع مدافع عن حساب المتناهيات في الصغر حجة بيركلي بأن القول بها مجاز
+لا حقيقة؛ أي إنه متى أُخذ مثلث \emph{صغير جداً} حصل تقريب \emph{واف
+بالغرض} للمماس. ولم يخل بيركلي من جواب عن هذا أيضاً: فلئن كفى في الهندسة،
+فإنه ينقض \emph{مكانة} الرياضيات؛ إذ
+\begin{quote}
+we are told that \emph{in rebus mathematicis errores qu\`{a}m minimi
+non sunt contemnendi}. [In the case of mathematics, the smallest
+errors are not to be neglected.] \citep[\S{}IX]{Berkeley1734}
+\end{quote}
+والكلام المائل منقول، أو كاد، من كتاب نيوتن~\emph{تربيع المنحنيات}
+(\OLClassicalDigits{1704}).
+
+وكان لاعتراض بيركلي الفلسفي غور ونفاذ؛ على أن حساب التفاضل والتكامل نجح
+نجاحاً عظيماً، ومضى الرياضيون يستعملونه من غير أن يوقعهم في خطأ.
+
+\end{document}

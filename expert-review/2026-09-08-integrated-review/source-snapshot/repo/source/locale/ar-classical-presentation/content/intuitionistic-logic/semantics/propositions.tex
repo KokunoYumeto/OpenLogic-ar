@@ -1,0 +1,51 @@
+% part: intuitionistic-logic
+% chapter: semantics
+% section: propositions
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{sem}{pro}
+
+\olsection{معنى القضايا}
+
+قد نحتاج إلى اسم لمجموعة العوالم من~!!a{relational model}
+~$\mModel{M}$ التي تصدق عندها~!!a{formula}~$!A$. فنسميها
+~\emph{القضية} التي تحددها~$!A$، ونرمز إليها بـ$\Prop{\OLId{latin-looped}{M}}{!A}$.
+
+\begin{defn}
+  نمد الدالة~$\OLId{latin-looped}{V}$ بطريق الاستقراء إلى التطبيق
+  $(!A \mapsto \Prop{\OLId{latin-looped}{M}}{!A}) \colon \Frm \to \Pow{\OLId{latin-looped}{W}}$ على الوجه الآتي:
+  \begin{enumerate}
+  \item $\Prop{\OLId{latin-looped}{M}}{\lfalse} = \emptyset$
+  \item $\Prop{\OLId{latin-looped}{M}}{\OLId{latin-ordinary}{p}} = \OLId{latin-looped}{V}(\OLId{latin-ordinary}{p})$
+  \item $\Prop{\OLId{latin-looped}{M}}{\lnot !B} = {}$
+    \[
+      \Setabs{\OLId{latin-ordinary}{w} \in \OLId{latin-looped}{W}}{\text{لكل $w'$ بحيث $Rww'$، يكون $w'
+          \notin \Prop{M}{!B}$}}.
+    \]
+  \item $\Prop{\OLId{latin-looped}{M}}{!B \land !C} = \Prop{\OLId{latin-looped}{M}}{!B} \cap \Prop{\OLId{latin-looped}{M}}{!C}$.
+  \item $\Prop{\OLId{latin-looped}{M}}{!B \lor !C} = \Prop{\OLId{latin-looped}{M}}{!B} \cup \Prop{\OLId{latin-looped}{M}}{!C}$.
+  \item $\Prop{\OLId{latin-looped}{M}}{!B \lif !C} = {}$
+    \[
+      \Setabs{\OLId{latin-ordinary}{w} \in \OLId{latin-looped}{W}}{\text{لكل $w'$ بحيث $Rww'$، إذا كان $w'
+          \in \Prop{M}{!B}$ كان $w' \in \Prop{M}{!C}$}}.
+    \]
+  \end{enumerate}
+\end{defn}
+
+\begin{prop}
+  \ollabel{prop:propositions-true}
+  يتحقق~$\mModel{M}{!A}[\OLId{latin-ordinary}{w}]$ إذا وفقط إذا كان~$\OLId{latin-ordinary}{w} \in \Prop{\OLId{latin-looped}{M}}{!A}$.
+\end{prop}
+
+\begin{proof}
+  تمرين.
+\end{proof}
+
+\begin{prob}
+  برهن~\olref[int][sem][pro]{prop:propositions-true}.
+\end{prob}
+
+\end{document}

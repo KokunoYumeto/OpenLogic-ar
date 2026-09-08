@@ -1,0 +1,156 @@
+% Part: normal-modal-logic
+% Chapter: frame-definability
+% Section: second-order-definability
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{frd}{st}
+
+\olsection{قابلية التعريف من الرتبة الثانية}
+
+قد تقبل خاصية الإطار التعريف الموجهي ولا تقبل التعريف من الرتبة
+الأولى. أما إذا أجزنا التكميم على المحمولات الأحادية، أي التكميم
+الأحادي من الرتبة الثانية، اتسع التعريف لكل خاصية تقبل التعريف
+الموجهي. والطريق إلى ذلك أن نصوغ شروط صدق !!{formula} موجهية
+في عالم بـ!!{formula}s من الرتبة الأولى، على وجه منتظم يسمى الترجمة
+القياسية. ولغتها لا تقتصر على !!{predicate} ثنائي~$\OLId{latin-looped}{Q}$
+يمثل الوصول، بل تجعل !!{predicate} أحاديًا~$\OLId{latin-looped}{P}_\OLId{latin-ordinary}{i}$ لكل ما يرد
+من !!{propositional variable}s~$\Obj p_\OLId{latin-ordinary}{i}$ في~$!A$.
+
+\begin{defn}
+  تُعرّف \emph{الترجمة القياسية}~$\ST_\OLId{latin-ordinary}{x}(!A)$ استقرائيًا كما يأتي:
+  % تصحيح مصدر (0426-I1): يُمنع أسر المتغيرات بتجديد المتغير المقيد في كل تداخل.
+  وفي فرعي المؤثرين يُختار المتغير المقيد جديدًا، مباينًا لمتغير
+  الترجمة الجاري ولكل متغير مقيد محيط به، ويجدد الاختيار عند كل تداخل؛
+  فالرمز المبين أدناه مثال تخطيطي لذلك المتغير الجديد.
+  \begin{enumerate}
+  \tagitem{prvFalse}{\indcase{!A}{\lfalse}{$\ST_\OLId{latin-ordinary}{x}(\indfrm) = \lfalse$.}}{}
+  \tagitem{prvTrue}{\indcase{!A}{\ltrue}{$\ST_\OLId{latin-ordinary}{x}(\indfrm) = \ltrue$.}}{}
+  \item \indcase{!A}{\Obj p_i}{$\ST_\OLId{latin-ordinary}{x}(\indfrm) = \Atom{P_i}{x}$.}
+  \tagitem{prvNot}{\indcase{!A}{\lnot !B}{$\ST_\OLId{latin-ordinary}{x}(\indfrm) = \lnot \ST_\OLId{latin-ordinary}{x}(!B)$.}}{}
+  \tagitem{prvAnd}{\indcase{!A}{(!B \land !C)}{$\ST_\OLId{latin-ordinary}{x}(\indfrm) = (\ST_\OLId{latin-ordinary}{x}(!B)
+      \land \ST_\OLId{latin-ordinary}{x}(!C))$.}}{}
+  \tagitem{prvOr}{\indcase{!A}{(!B \lor !C)}{$\ST_\OLId{latin-ordinary}{x}(\indfrm) = (\ST_\OLId{latin-ordinary}{x}(!B)
+      \lor \ST_\OLId{latin-ordinary}{x}(!C))$.}}{}
+  \tagitem{prvIf}{\indcase{!A}{(!B \lif !C)}{$\ST_\OLId{latin-ordinary}{x}(\indfrm) = (\ST_\OLId{latin-ordinary}{x}(!B)
+      \lif \ST_\OLId{latin-ordinary}{x}(!C))$.}}{}
+  \tagitem{prvIff}{\indcase{!A}{(!B \liff !C)}{$\ST_\OLId{latin-ordinary}{x}(\indfrm) = (\ST_\OLId{latin-ordinary}{x}(!B)
+      \liff \ST_\OLId{latin-ordinary}{x}(!C))$.}}{}
+  % تصحيح مصدر (0426-S1): أُعيد إغلاق صيغة فرع التكافؤ داخل حجة \indcase.
+  \tagitem{prvBox}{\indcase{!A}{\Box !B}{$\ST_\OLId{latin-ordinary}{x}(\indfrm) =
+      \lforall[\OLId{latin-ordinary}{y}][(\Atom{Q}{x,y} \lif \ST_\OLId{latin-ordinary}{y}(!B))]$.}}{}
+  \tagitem{prvDiamond}{\indcase{!A}{\Diamond !B}{$\ST_\OLId{latin-ordinary}{x}(\indfrm) =
+      \lexists[\OLId{latin-ordinary}{y}][(\Atom{Q}{x,y} \land \ST_\OLId{latin-ordinary}{y}(!B))]$.}}{}
+  \end{enumerate}
+\end{defn}
+
+فترجمة~$\ST_\OLId{latin-ordinary}{x}(\Box \OLId{latin-ordinary}{p} \lif \OLId{latin-ordinary}{p})$ هي
+$\lforall[\OLId{latin-ordinary}{y}][(\Atom{Q}{x,y} \lif \Atom{P}{y})] \lif \Atom{P}{x}$.
+وتتطلب !!{structure} لغة~$\ST_\OLId{latin-ordinary}{x}(!A)$ مجالًا، وعلاقة ثنائية
+لتفسير~$\OLId{latin-looped}{Q}$، ومجموعات جزئية تفسر ال!!{predicate}s الأحادية~$\OLId{latin-looped}{P}_\OLId{latin-ordinary}{i}$.
+فهذه ال!!a{structure} تشتمل على أجزاء النموذج الموجهي لـ$!A$
+نفسها: المجال عوالمه، وتفسير~$\OLId{latin-looped}{Q}$ وصوله، وتفسيرات~$\OLId{latin-looped}{P}_\OLId{latin-ordinary}{i}$
+هي المجموعات~$\OLId{latin-looped}{V}(\Obj p_\OLId{latin-ordinary}{i})$. ولذلك يتوافق صدق~$!A$ في النموذج
+الموجهي وصدق~$\ST_\OLId{latin-ordinary}{x}(!A)$ في ال!!{structure} المقابلة، كما نبين:
+
+\begin{prop}\ollabel{prop:st}
+  ليكن~$\mModel{M} = \tuple{\OLId{latin-looped}{W}, \OLId{latin-looped}{R}, \OLId{latin-looped}{V}}$، ولتكن~$\Struct{M'}$
+  ال!!{structure} من الرتبة الأولى ذات~$\Domain{\OLId{latin-looped}{M}'} = \OLId{latin-looped}{W}$، و
+  $\Assign{\OLId{latin-looped}{Q}}{\OLId{latin-looped}{M}'} = \OLId{latin-looped}{R}$، و$\Assign{\OLId{latin-looped}{P}_\OLId{latin-ordinary}{i}}{\OLId{latin-looped}{M}'} = \OLId{latin-looped}{V}(\Obj p_\OLId{latin-ordinary}{i})$، ولتكن
+  $\OLId{latin-ordinary}{s}(\OLId{latin-ordinary}{x}) = \OLId{latin-ordinary}{w}$. عندئذ
+  \[
+  \mSat{\OLId{latin-looped}{M}}{!A}[\OLId{latin-ordinary}{w}] \text{ إذا وفقط إذا كان } \Sat{\OLId{latin-looped}{M}'}{\ST_\OLId{latin-ordinary}{x}(!A)}[\OLId{latin-ordinary}{s}]
+  \]
+\end{prop}
+
+\begin{proof}
+  بالاستقراء على~$!A$.
+\end{proof}
+
+\begin{prop}
+  افترض أن~$!A$ !!{formula} موجهية وأن
+  $\mModel{F} = \tuple{\OLId{latin-looped}{W}, \OLId{latin-looped}{R}}$ إطار. ولتكن~$\Struct{F'}$
+  ال!!{structure} من الرتبة الأولى ذات~$\Domain{\OLId{latin-looped}{F}'} = \OLId{latin-looped}{W}$ و
+  $\Assign{\OLId{latin-looped}{Q}}{\OLId{latin-looped}{F}'} = \OLId{latin-looped}{R}$، ولتكن~$!A'$ صيغة الرتبة الثانية
+  \[
+  \lforall[\OLId{latin-looped}{X}_\OLMathNumeral{1}][\dots\lforall[\OLId{latin-looped}{X}_\OLId{latin-ordinary}{n}][\lforall[\OLId{latin-ordinary}{x}][
+        \SSubst{\ST_\OLId{latin-ordinary}{x}(!A)}{\subst{\OLId{latin-looped}{X}_\OLMathNumeral{1}}{\OLId{latin-looped}{P}_\OLMathNumeral{1}}, \dots,
+          \subst{\OLId{latin-looped}{X}_\OLId{latin-ordinary}{n}}{\OLId{latin-looped}{P}_\OLId{latin-ordinary}{n}}}]]],
+  \]
+  حيث~$\OLId{latin-looped}{P}_\OLMathNumeral{1}$، و\dots، و$\OLId{latin-looped}{P}_\OLId{latin-ordinary}{n}$ هي جميع ال!!{predicate}s الأحادية في
+  $\ST_\OLId{latin-ordinary}{x}(!A)$. عندئذ
+  \[
+  \mModel{F} \Entails !A \text{ إذا وفقط إذا كان } \Sat{\OLId{latin-looped}{F}'}{!A'}
+  \]
+\end{prop}
+
+\begin{proof}
+  معنى~$\Sat{\OLId{latin-looped}{F}'}{!A'}$ أن كل !!{structure}
+  $\mModel{M'}$ توسع~$\Struct{F'}$ مع~$\Domain{\OLId{latin-looped}{M}'} = \OLId{latin-looped}{W}$
+  و$\Assign{\OLId{latin-looped}{Q}}{\OLId{latin-looped}{M}'} = \OLId{latin-looped}{R}$ و$\Assign{\OLId{latin-looped}{P}_\OLId{latin-ordinary}{i}}{\OLId{latin-looped}{M}'} \subseteq \OLId{latin-looped}{W}$ لكل
+  $\OLId{latin-ordinary}{i} = \OLMathNumeral{1}$، و\dots، و$\OLId{latin-ordinary}{n}$، تحقق، لكل~$\OLId{latin-ordinary}{s}$ حيث~$\OLId{latin-ordinary}{s}(\OLId{latin-ordinary}{x}) \in \OLId{latin-looped}{W}$،
+  $\Sat{\OLId{latin-looped}{M}'}{\ST_\OLId{latin-ordinary}{x}(!A)}[\OLId{latin-ordinary}{s}]$. وبالرجوع إلى~\olref{prop:st}
+  يساوي هذا أن كل نموذج~$\mModel{M}$ مبني على~$\mModel{F}$
+  يحقق في كل~$\OLId{latin-ordinary}{w} \in \OLId{latin-looped}{W}$ أن~$\mSat{\OLId{latin-looped}{M}}{!A}[\OLId{latin-ordinary}{w}]$.
+  وهذا بعينه~$\mModel{F} \Entails !A$.
+\end{proof}
+
+% تصحيح مصدر (0426-I2): وُحِّد رمز المحمول الثنائي مع Q المستعمل في الترجمة والبنية.
+\begin{defn}
+  يكون صنف الأطر~$\mClass{F}$ \emph{قابلًا للتعريف من الرتبة
+  الثانية} إذا وُجدت !!a{sentence}~$!A$ في لغة الرتبة الثانية ذات
+  !!{predicate} ثنائي واحد~$\OLId{latin-looped}{Q}$ وذات مكممات لا تقع إلا على متغيرات
+  مجموعات أحادية، بحيث~$\mModel{F} = \tuple{\OLId{latin-looped}{W}, \OLId{latin-looped}{R}} \in \mClass{F}$
+  إذا وفقط إذا كان~$\Sat{\OLId{latin-looped}{M}}{!A}$ في ال!!{structure}~$\Struct{M}$ ذات
+  $\Domain{\OLId{latin-looped}{M}} = \OLId{latin-looped}{W}$ و$\Assign{\OLId{latin-looped}{Q}}{\OLId{latin-looped}{M}} = \OLId{latin-looped}{R}$.
+\end{defn}
+
+\begin{cor}
+  إذا كان صنف من الأطر قابلًا للتعريف بـ!!a{formula}~$!A$، كان صنف
+  علاقات الوصول المقابل قابلًا للتعريف بجملة أحادية من الرتبة الثانية.
+\end{cor}
+
+\begin{proof}
+  لجملة الرتبة الثانية الأحادية~$!A'$ في البرهان السابق الخاصية
+  المطلوبة.
+\end{proof}
+
+ولمثال، تأمل مرة أخرى ال!!{formula}~$\Box \OLId{latin-ordinary}{p} \lif \OLId{latin-ordinary}{p}$. إنها تعرّف
+الانعكاسية. والانعكاسية قابلة، بالطبع، للتعريف من الرتبة الأولى
+بال!!{sentence}~$\lforall[\OLId{latin-ordinary}{x}][\Atom{Q}{x,x}]$. لكنها قابلة أيضًا
+للتعريف بال!!{sentence} الأحادية من الرتبة الثانية
+\[
+\lforall[\OLId{latin-looped}{X}][\lforall[\OLId{latin-ordinary}{x}][(\lforall[\OLId{latin-ordinary}{y}][(\Atom{Q}{x,y} \lif \Atom{X}{y})]
+    \lif \Atom{X}{x})]].
+\]
+وهذا يعني، بالطبع، أن الجملتين متكافئتان. وفيما يأتي طريقة قد تقنعك
+بهذا مباشرة: افترض أولًا أن جملة الرتبة الثانية صادقة في
+!!a{structure}~$\Struct{M}$. ولما كان~$\OLId{latin-ordinary}{x}$ و$\OLId{latin-looped}{X}$ مكممين كليًا، وجب أن
+يصدق الباقي لأي~$\OLId{latin-ordinary}{x} \in \OLId{latin-looped}{W}$ ومجموعة~$\OLId{latin-looped}{X} \subseteq \OLId{latin-looped}{W}$، ومنها مثلًا
+المجموعة~$\Setabs{\OLId{latin-ordinary}{z}}{Rxz}$ حيث~$\OLId{latin-looped}{R} = \Assign{\OLId{latin-looped}{Q}}{\OLId{latin-looped}{M}}$. ومن ثم، لأي~$\OLId{latin-ordinary}{s}$
+يحقق~$\OLId{latin-ordinary}{s}(\OLId{latin-ordinary}{x}) \in \OLId{latin-looped}{W}$ و$\OLId{latin-ordinary}{s}(\OLId{latin-looped}{X}) = \Setabs{\OLId{latin-ordinary}{z}}{Rxz}$، يكون
+$\Sat{\OLId{latin-looped}{M}}{\lforall[\OLId{latin-ordinary}{y}][(\Atom{Q}{x,y} \lif
+    \Atom{X}{y})] \lif \Atom{X}{x}}[\OLId{latin-ordinary}{s}]$. لكن طريقة اختيارنا لـ$\OLId{latin-ordinary}{s}(\OLId{latin-looped}{X})$
+تعني أن~$\Sat{\OLId{latin-looped}{M}}{\lforall[\OLId{latin-ordinary}{y}][(\Atom{Q}{x,y} \lif
+    \Atom{Q}{x,y})] \lif \Atom{Q}{x,x}}[\OLId{latin-ordinary}{s}]$، وهذا يكافئ
+$\Atom{Q}{x,x}$ لأن المقدَّم صالح. ولما كان~$\OLId{latin-ordinary}{s}(\OLId{latin-ordinary}{x})$ اعتباطيًا، كان
+$\Sat{\OLId{latin-looped}{M}}{\lforall[\OLId{latin-ordinary}{x}][\Atom{Q}{x,x}]}$.
+
+افترض الآن أن~$\Sat{\OLId{latin-looped}{M}}{\lforall[\OLId{latin-ordinary}{x}][\Atom{Q}{x,x}]}$، وأثبت أن
+$\Sat{\OLId{latin-looped}{M}}{\lforall[\OLId{latin-looped}{X}][\lforall[\OLId{latin-ordinary}{x}][(\lforall[\OLId{latin-ordinary}{y}][(\Atom{Q}{x,y} \lif
+        \Atom{X}{y})] \lif \Atom{X}{x})]]}$. اختر أي تعيين~$\OLId{latin-ordinary}{s}$،
+وافترض~$\Sat{\OLId{latin-looped}{M}}{\lforall[\OLId{latin-ordinary}{y}][(\Atom{Q}{x,y} \lif
+    \Atom{X}{y})]}[\OLId{latin-ordinary}{s}]$. ولتكن~$\OLId{latin-ordinary}{s}'$ مغايرة~$\OLId{latin-ordinary}{s}$ عند~$\OLId{latin-ordinary}{y}$ بحيث~$\OLId{latin-ordinary}{s}'(\OLId{latin-ordinary}{y})
+= \OLId{latin-ordinary}{s}(\OLId{latin-ordinary}{x})$؛ عندئذ~$\Sat{\OLId{latin-looped}{M}}{\Atom{Q}{x,y} \lif \Atom{X}{y}}[\OLId{latin-ordinary}{s}']$، أي
+$\Sat{\OLId{latin-looped}{M}}{\Atom{Q}{x,x} \lif \Atom{X}{x}}[\OLId{latin-ordinary}{s}]$. ولما كان
+$\Sat{\OLId{latin-looped}{M}}{\lforall[\OLId{latin-ordinary}{x}][\Atom{Q}{x,x}]}$، كان المقدَّم صادقًا، ومن ثم
+$\Sat{\OLId{latin-looped}{M}}{\Atom{X}{x}}[\OLId{latin-ordinary}{s}]$، وهذا ما أردنا إثباته.
+
+ولأن بعض أصناف الأطر تقبل التعريف الموجهي دون التعريف من الرتبة
+الأولى، فليست كل~!!{sentence} أحادية من الرتبة الثانية على صورة~$!A'$
+مكافئةً لـ!!{sentence} من الرتبة الأولى. ولا توجد طريقة فعالة لتقرير
+أيها يكافئ جملة من الرتبة الأولى.
+
+\end{document}

@@ -1,0 +1,395 @@
+% Part: first-order-logic
+% Chapter: sequent-calculus
+% Section: soundness.tex
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{seq}{sou}}
+      {\olfileid{pl}{seq}{sou}}
+
+\olsection{السلامة}
+
+\begin{explain}
+السلامة في نظام !!^a{derivation}، كحساب التتابعيات، أن يمتنع عليه
+!!{derive} ما لا يصدق. فهي ضمان لأنظمة ال!!{derivation} من تجاوز الحق.
+وبحسب المعنى البرهاني الذي نبحثه، نطلب مثلًا الأمور الآتية:
+\begin{enumerate}
+\item كل~$!A$ !!{derivable} تكون \iftag{FOL}{صالحة}{تحصيل حاصل}؛
+\item إذا كانت !!a{sentence} !!{derivable} من جمل أخرى، فهي أيضًا
+  نتيجة لها؛
+\item إذا كانت مجموعة من ال!!{sentence}s غير متسقة، فهي غير قابلة
+  للإرضاء.
+\end{enumerate}
+هذه خصائص لا يستغني عنها نظام !!a{derivation}. فإذا تخلف شيء منها كان نظام ال!!{derivation} معيبًا، لأنه يتيح
+!!{derive} ما لا ينبغي إثباته. فإقامة السلامة لنظام ال!!{derivation} من أهم ما يلزم.
+
+وكل هذه المعاني البرهانية مردّه إلى
+!!{derivability} تتابعيات بعينها في حساب التتابعيات؛ فطريق إثبات
+(\OLClassicalDigits{1})--(\OLClassicalDigits{3}) أن ننظر في دلالة التتابعيات ال!!{derivable}.
+نعرّف أولًا صلاحية التتابعية، أي كونها \emph{صالحة}، ثم نثبت أن كل تتابعية
+!!{derivable} صالحة. وحينئذ تأتي (\OLClassicalDigits{1})--(\OLClassicalDigits{3}) نتائج تابعة.
+\end{explain}
+
+\begin{defn}
+\iftag{FOL}{!!^a{structure}~$\Struct
+  M$}{!!^a{valuation}~$\pAssign{\OLId{latin-ordinary}{v}}$} \emph{تُرضي} تتابعية
+$\OLId{greek-variable}{Gamma} \Sequent \OLId{greek-variable}{Delta}$ إذا وفقط إذا كان إما
+$\iftag{FOL}{\Sat/{\OLId{latin-looped}{M}}}{\pSat/{\OLId{latin-ordinary}{v}}}{!A}$ لبعض $!A \in \OLId{greek-variable}{Gamma}$، أو
+$\iftag{FOL}{\Sat{\OLId{latin-looped}{M}}}{\pSat{\OLId{latin-ordinary}{v}}}{!A}$ لبعض $!A \in \OLId{greek-variable}{Delta}$.
+
+تكون التتابعية \emph{صالحة} إذا وفقط إذا كانت كل
+\iftag{FOL}{!!{structure}~$\Struct M$}{!!{valuation}~$\pAssign{\OLId{latin-ordinary}{v}}$}
+ترضيها.
+\end{defn}
+
+\begin{thm}[السلامة]
+\ollabel{thm:sequent-soundness} إذا كان~$\Log{LK}$ !!{derive}s
+$\Theta \Sequent \Xi$، فإن~$\Theta \Sequent \Xi$ صالحة.
+\end{thm}
+
+\begin{proof}
+خذ~$\pi$، وهو !!a{derivation} لـ~$\Theta \Sequent \Xi$، واستقرئ على عدد استدلالاته~$\OLId{latin-ordinary}{n}$ في~$\pi$.
+
+أما إذا كان العدد~$\OLMathNumeral{0}$، فلا يشتمل~$\pi$ إلا على تتابعية ابتدائية.
+والتتابعية~$!A \Sequent !A$ صالحة، إذ لكل
+\iftag{FOL}{$\Struct M$}{$\pAssign{\OLId{latin-ordinary}{v}}$} إما
+$\iftag{FOL}{\Sat/{\OLId{latin-looped}{M}}}{\pSat/{\OLId{latin-ordinary}{v}}}{!A}$ وإما
+$\iftag{FOL}{\Sat{\OLId{latin-looped}{M}}}{\pSat{\OLId{latin-ordinary}{v}}}{!A}$.
+
+وأما إذا زاد العدد على~\OLClassicalDigits{0}، فالتفصيل بحسب الاستدلال الأخير.
+مقدماته صالحة بفرض الاستقراء، لأن كل !!{derivation} مؤدٍّ إلى مقدمة منها يشتمل على أقل من~$\OLId{latin-ordinary}{n}$ استدلالات.
+
+ننظر أولًا في الاستدلالات الممكنة ذات المقدمة الواحدة.
+\begin{enumerate}
+\item الاستدلال الأخير إضعاف. وعندئذ تكون~$\Theta \Sequent \Xi$
+  إما $!A, \OLId{greek-variable}{Gamma} \Sequent \OLId{greek-variable}{Delta}$ (إذا كان الاستدلال الأخير
+  \LeftR{\Weakening})، أو $\OLId{greek-variable}{Gamma} \Sequent \OLId{greek-variable}{Delta}, !A$ (إذا كان
+  \RightR{\Weakening})، وينتهي ال!!{derivation} بإحدى الصورتين:
+  \begin{prooftree}
+    \AxiomC{}
+    \Deduce$\OLId{greek-variable}{Gamma} \fCenter \OLId{greek-variable}{Delta}$
+    \RightLabel{\LeftR{\Weakening}}
+    \UnaryInf$!A, \OLId{greek-variable}{Gamma} \fCenter \OLId{greek-variable}{Delta}$
+    \DisplayProof\qquad\bottomAlignProof
+    \AxiomC{}
+    \Deduce$\OLId{greek-variable}{Gamma} \fCenter \OLId{greek-variable}{Delta}$
+    \RightLabel{\RightR{\Weakening}}
+    \UnaryInf$\OLId{greek-variable}{Gamma} \fCenter \OLId{greek-variable}{Delta}, !A$
+  \end{prooftree}
+  وبفرض الاستقراء، تكون~$\OLId{greek-variable}{Gamma} \Sequent \OLId{greek-variable}{Delta}$ صالحة، أي إنه لكل
+  \iftag{FOL}{!!{structure}~$\Struct{M}$}{!!{valuation}~$\pAssign{\OLId{latin-ordinary}{v}}$}،
+  يوجد إما $!C \in \OLId{greek-variable}{Gamma}$ بحيث
+  $\iftag{FOL}{\Sat/{\OLId{latin-looped}{M}}}{\pSat/{\OLId{latin-ordinary}{v}}}{!C}$، أو $!C \in \OLId{greek-variable}{Delta}$ بحيث
+  $\iftag{FOL}{\Sat{\OLId{latin-looped}{M}}}{\pSat{\OLId{latin-ordinary}{v}}}{!C}$.
+  
+  إذا كان $\iftag{FOL}{\Sat/{\OLId{latin-looped}{M}}}{\pSat/{\OLId{latin-ordinary}{v}}}{!C}$ لبعض
+  $!C \in \OLId{greek-variable}{Gamma}$، فإن~$!C \in \Theta$ أيضًا؛ ففي الإضعاف الأيسر
+  $\Theta = !A, \OLId{greek-variable}{Gamma}$، وأما في الإضعاف الأيمن فـ$\Theta=\OLId{greek-variable}{Gamma}$. ومن ثم يكون
+  $\iftag{FOL}{\Sat/{\OLId{latin-looped}{M}}}{\pSat/{\OLId{latin-ordinary}{v}}}{!C}$ لبعض $!C \in \Theta$.
+  وبالمثل، إذا كان $\iftag{FOL}{\Sat{\OLId{latin-looped}{M}}}{\pSat{\OLId{latin-ordinary}{v}}}{!C}$ لبعض
+  $!C \in \OLId{greek-variable}{Delta}$، فإن~$!C \in \Xi$ أيضًا؛ ففي الإضعاف الأيسر
+  $\Xi=\OLId{greek-variable}{Delta}$، وفي الإضعاف الأيمن $\Xi=\OLId{greek-variable}{Delta},!A$. ومن ثم يكون
+  $\iftag{FOL}{\Sat{\OLId{latin-looped}{M}}}{\pSat{\OLId{latin-ordinary}{v}}}{!C}$ لبعض $!C \in \Xi$.
+  وبناء عليه تكون~$\Theta \Sequent \Xi$ صالحة.
+  \textbf{تنبيه تصحيحي على الأصل (C081-01).} فُصلت حالتا الإضعاف؛ فالمعادلة
+  $\Theta=!A,\OLId{greek-variable}{Gamma}$ لا تصدق إلا في الإضعاف الأيسر، أما في الإضعاف
+  الأيمن فلا يتغير المقدم، ويزاد $!A$ في التالي.
+\item الاستدلال الأخير هو~\LeftR{\lnot}: عندئذ تكون مقدمة الاستدلال
+  الأخير~$\OLId{greek-variable}{Gamma} \Sequent \OLId{greek-variable}{Delta}, !A$، وتكون نتيجته
+  $\lnot !A, \OLId{greek-variable}{Gamma} \Sequent \OLId{greek-variable}{Delta}$، أي إن ال!!{derivation} ينتهي
+  هكذا:
+  \begin{prooftree}
+    \AxiomC{}
+    \Deduce$\OLId{greek-variable}{Gamma} \fCenter \OLId{greek-variable}{Delta}, !A$
+    \RightLabel{\LeftR{\lnot}}
+    \UnaryInf$\lnot !A, \OLId{greek-variable}{Gamma} \fCenter \OLId{greek-variable}{Delta}$
+  \end{prooftree}
+  ويكون~$\Theta = \lnot !A, \OLId{greek-variable}{Gamma}$، في حين يكون~$\Xi = \OLId{greek-variable}{Delta}$.
+
+  من فرض الاستقراء أن~$\OLId{greek-variable}{Gamma} \Sequent \OLId{greek-variable}{Delta}, !A$ صالحة.
+  فلكل \iftag{FOL}{$\Struct{M}$}{$\pAssign{\OLId{latin-ordinary}{v}}$} أحد ثلاثة أوجه:
+  (أ) يوجد $!C \in \OLId{greek-variable}{Gamma}$ مع~$\iftag{FOL}{\Sat/{\OLId{latin-looped}{M}}}{\pSat/{\OLId{latin-ordinary}{v}}}{!C}$؛
+  (ب) يوجد $!C \in \OLId{greek-variable}{Delta}$ مع
+  $\iftag{FOL}{\Sat{\OLId{latin-looped}{M}}}{\pSat{\OLId{latin-ordinary}{v}}}{!C}$؛
+  (ج) يتحقق $\iftag{FOL}{\Sat{\OLId{latin-looped}{M}}}{\pSat{\OLId{latin-ordinary}{v}}}{!A}$.
+  ولإثبات صلاحية~$\Theta \Sequent \Xi$ خذ
+  \iftag{FOL}{$\Struct{M}$ !!a{structure}}{$\pAssign{\OLId{latin-ordinary}{v}}$ !!a{valuation}}.
+  في (أ) لدينا~$!C \in \OLId{greek-variable}{Gamma}$ و
+  $\iftag{FOL}{\Sat/{\OLId{latin-looped}{M}}}{\pSat/{\OLId{latin-ordinary}{v}}}{!C}$؛ ولذلك يتحقق أيضًا~$!C \in \Theta$.
+  وفي (ب) لدينا~$!C \in \OLId{greek-variable}{Delta}$ و
+  $\iftag{FOL}{\Sat{\OLId{latin-looped}{M}}}{\pSat{\OLId{latin-ordinary}{v}}}{!C}$؛ ولذلك يتحقق أيضًا~$!C \in \Xi$.
+  وأما (ج)، فمن~$\iftag{FOL}{\Sat{\OLId{latin-looped}{M}}}{\pSat{\OLId{latin-ordinary}{v}}}{!A}$ يلزم
+  $\iftag{FOL}{\Sat/{\OLId{latin-looped}{M}}}{\pSat/{\OLId{latin-ordinary}{v}}}{\lnot !A}$.
+  وحيث إن $\lnot !A \in \Theta$، فقد وجد~$!C \in \Theta$ بحيث
+  $\iftag{FOL}{\Sat/{\OLId{latin-looped}{M}}}{\pSat/{\OLId{latin-ordinary}{v}}}{!C}$.
+  فكل وجه يحقق شرط الإرضاء، وتثبت صلاحية
+  $\Theta \Sequent \Xi$.
+\item الاستدلال الأخير هو~\RightR{\lnot}: تمرين.
+\item الاستدلال الأخير هو~\LeftR{\land}: توجد صورتان؛ فقد يُستنتج
+  $!A \land !B$ في اليسار من~$!A$ أو من~$!B$ في الجانب الأيسر من
+  المقدمة. وفي الحالة الأولى، ينتهي~$\pi$ هكذا:
+  \begin{prooftree}
+    \AxiomC{}
+    \Deduce$!A, \OLId{greek-variable}{Gamma} \fCenter \OLId{greek-variable}{Delta}$
+    \RightLabel{\LeftR{\land}}
+    \UnaryInf$!A \land !B, \OLId{greek-variable}{Gamma} \fCenter \OLId{greek-variable}{Delta}$
+  \end{prooftree}
+  ويكون~$\Theta = !A \land !B, \OLId{greek-variable}{Gamma}$، في حين يكون~$\Xi = \OLId{greek-variable}{Delta}$.
+  اعتبر \iftag{FOL}{!!a{structure}~$\Struct
+    M$}{!!a{valuation}~$\pAssign{\OLId{latin-ordinary}{v}}$}. وبما أن
+  $!A, \OLId{greek-variable}{Gamma} \Sequent \OLId{greek-variable}{Delta}$ صالحة بفرض الاستقراء، فإما (أ) أن
+  $\iftag{FOL}{\Sat/{\OLId{latin-looped}{M}}}{\pSat/{\OLId{latin-ordinary}{v}}}{!A}$، أو (ب) أن
+  $\iftag{FOL}{\Sat/{\OLId{latin-looped}{M}}}{\pSat/{\OLId{latin-ordinary}{v}}}{!C}$ لبعض $!C \in \OLId{greek-variable}{Gamma}$، أو
+  (ج) أن~$\iftag{FOL}{\Sat{\OLId{latin-looped}{M}}}{\pSat{\OLId{latin-ordinary}{v}}}{!C}$ لبعض $!C \in \OLId{greek-variable}{Delta}$.
+  في الحالة (أ)، يكون
+  $\iftag{FOL}{\Sat/{\OLId{latin-looped}{M}}}{\pSat/{\OLId{latin-ordinary}{v}}}{!A \land !B}$، ومن ثم يوجد
+  $!C \in \Theta$ (وهو تحديدًا~$!A \land !B$) بحيث
+  $\iftag{FOL}{\Sat/{\OLId{latin-looped}{M}}}{\pSat/{\OLId{latin-ordinary}{v}}}{!C}$. وفي الحالة (ب)، يوجد
+  $!C \in \OLId{greek-variable}{Gamma}$ بحيث $\iftag{FOL}{\Sat/{\OLId{latin-looped}{M}}}{\pSat/{\OLId{latin-ordinary}{v}}}{!C}$،
+  ويكون~$!C \in \Theta$ أيضًا. وفي الحالة (ج)، يوجد $!C \in \OLId{greek-variable}{Delta}$
+  بحيث $\iftag{FOL}{\Sat{\OLId{latin-looped}{M}}}{\pSat{\OLId{latin-ordinary}{v}}}{!C}$، ويكون~$!C \in \Xi$
+  أيضًا لأن~$\Xi = \OLId{greek-variable}{Delta}$. ولذلك، في كل حالة، ترضي
+  \iftag{FOL}{$\Struct M$}{$\pAssign{\OLId{latin-ordinary}{v}}$} التتابعية
+  $!A \land !B, \OLId{greek-variable}{Gamma} \Sequent \OLId{greek-variable}{Delta}$. وبما أن
+  \iftag{FOL}{$\Struct{M}$}{$\pAssign{\OLId{latin-ordinary}{v}}$} كانت اعتباطية، تكون
+  $!A \land !B, \OLId{greek-variable}{Gamma} \Sequent \OLId{greek-variable}{Delta}$ صالحة. وتعالج الحالة التي
+  يُستنتج فيها~$!A \land !B$ من~$!B$ بالطريقة نفسها، مع تغيير~$!A$
+  إلى~$!B$.
+\item الاستدلال الأخير هو~\RightR{\lor}: توجد صورتان؛ فقد يُستنتج
+  $!A \lor !B$ في اليمين من~$!A$ أو من~$!B$ في الجانب الأيمن من
+  المقدمة. وفي الحالة الأولى، ينتهي~$\pi$ هكذا:
+  \begin{prooftree}
+    \AxiomC{}
+    \Deduce$\OLId{greek-variable}{Gamma} \fCenter \OLId{greek-variable}{Delta}, !A$
+    \RightLabel{\RightR{\lor}}
+    \UnaryInf$\OLId{greek-variable}{Gamma} \fCenter \OLId{greek-variable}{Delta}, !A \lor !B$
+  \end{prooftree}
+  والآن~$\Theta = \OLId{greek-variable}{Gamma}$ و$\Xi = \OLId{greek-variable}{Delta}, !A \lor !B$. اعتبر
+  \iftag{FOL}{!!a{structure}~$\Struct{M}$}{!!a{valuation}~$\pAssign{\OLId{latin-ordinary}{v}}$}.
+  وبما أن~$\OLId{greek-variable}{Gamma} \Sequent \OLId{greek-variable}{Delta}, !A$ صالحة، فإما (أ) أن
+  $\iftag{FOL}{\Sat{\OLId{latin-looped}{M}}}{\pSat{\OLId{latin-ordinary}{v}}}{!A}$، أو (ب) أن
+  $\iftag{FOL}{\Sat/{\OLId{latin-looped}{M}}}{\pSat/{\OLId{latin-ordinary}{v}}}{!C}$ لبعض $!C \in \OLId{greek-variable}{Gamma}$، أو
+  (ج) أن~$\iftag{FOL}{\Sat{\OLId{latin-looped}{M}}}{\pSat{\OLId{latin-ordinary}{v}}}{!C}$ لبعض $!C \in \OLId{greek-variable}{Delta}$.
+  في الحالة (أ)، يكون~$\iftag{FOL}{\Sat{\OLId{latin-looped}{M}}}{\pSat{\OLId{latin-ordinary}{v}}}{!A \lor !B}$.
+  وفي الحالة (ب)، يوجد~$!C \in \OLId{greek-variable}{Gamma}$ بحيث
+  $\iftag{FOL}{\Sat/{\OLId{latin-looped}{M}}}{\pSat/{\OLId{latin-ordinary}{v}}}{!C}$. وفي الحالة (ج)، يوجد
+  $!C \in \OLId{greek-variable}{Delta}$ بحيث $\iftag{FOL}{\Sat{\OLId{latin-looped}{M}}}{\pSat{\OLId{latin-ordinary}{v}}}{!C}$.
+  ولذلك، في كل حالة، ترضي \iftag{FOL}{$\Struct{M}$}{$\pAssign{\OLId{latin-ordinary}{v}}$}
+  التتابعية~$\OLId{greek-variable}{Gamma} \Sequent \OLId{greek-variable}{Delta}, !A \lor !B$، أي
+  $\Theta \Sequent \Xi$. وبما أن
+  \iftag{FOL}{$\Struct{M}$}{$\pAssign{\OLId{latin-ordinary}{v}}$} كانت اعتباطية، تكون
+  $\Theta \Sequent \Xi$ صالحة. وتعالج الحالة التي يُستنتج فيها
+  $!A \lor !B$ من~$!B$ بالطريقة نفسها، مع تغيير~$!A$ إلى~$!B$.
+\item الاستدلال الأخير هو~\RightR{\lif}: عندئذ ينتهي~$\pi$ هكذا:
+  \begin{prooftree}
+    \AxiomC{}
+    \Deduce$!A, \OLId{greek-variable}{Gamma} \fCenter \OLId{greek-variable}{Delta}, !B$
+    \RightLabel{\RightR{\lif}}
+    \UnaryInf$\OLId{greek-variable}{Gamma} \fCenter \OLId{greek-variable}{Delta}, !A \lif !B$
+  \end{prooftree}
+  المقدمة صالحة بفرض الاستقراء؛ فنثبت صلاحية النتيجة.
+  خذ \iftag{FOL}{$\Struct{M}$}{$\pAssign{\OLId{latin-ordinary}{v}}$} كيف اتفق.
+  من صلاحية $!A, \OLId{greek-variable}{Gamma} \Sequent \OLId{greek-variable}{Delta}, !B$ يلزم أحد الأوجه:
+  (أ) $\iftag{FOL}{\Sat/{\OLId{latin-looped}{M}}}{\pSat/{\OLId{latin-ordinary}{v}}}{!A}$؛
+  (ب) $\iftag{FOL}{\Sat{\OLId{latin-looped}{M}}}{\pSat{\OLId{latin-ordinary}{v}}}{!B}$؛
+  (ج) $\iftag{FOL}{\Sat/{\OLId{latin-looped}{M}}}{\pSat/{\OLId{latin-ordinary}{v}}}{!C}$ لبعض
+  $~!C \in \OLId{greek-variable}{Gamma}$؛
+  (د) $\iftag{FOL}{\Sat{\OLId{latin-looped}{M}}}{\pSat{\OLId{latin-ordinary}{v}}}{!C}$ لبعض $!C \in \OLId{greek-variable}{Delta}$.
+  في (أ) و(ب) يتحقق
+  $\iftag{FOL}{\Sat{\OLId{latin-looped}{M}}}{\pSat{\OLId{latin-ordinary}{v}}}{!A \lif !B}$، فيوجد
+  $!C \in \OLId{greek-variable}{Delta}, !A \lif !B$ مع
+  $\iftag{FOL}{\Sat{\OLId{latin-looped}{M}}}{\pSat{\OLId{latin-ordinary}{v}}}{!C}$.
+  وفي (ج) يوجد $!C \in \OLId{greek-variable}{Gamma}$ مع
+  $\iftag{FOL}{\Sat/{\OLId{latin-looped}{M}}}{\pSat/{\OLId{latin-ordinary}{v}}}{!C}$، وفي (د) يوجد
+  $!C \in \OLId{greek-variable}{Delta}$ مع $\iftag{FOL}{\Sat{\OLId{latin-looped}{M}}}{\pSat{\OLId{latin-ordinary}{v}}}{!C}$.
+  فكل وجه يقتضي أن
+  \iftag{FOL}{$\Struct{M}$}{$\pAssign{\OLId{latin-ordinary}{v}}$} ترضي
+  $\OLId{greek-variable}{Gamma} \Sequent \OLId{greek-variable}{Delta}, !A \lif !B$.
+  ولما كان اختيار \iftag{FOL}{$\Struct{M}$}{$\pAssign{\OLId{latin-ordinary}{v}}$} مطلقًا، ثبتت صلاحية
+  $\OLId{greek-variable}{Gamma} \Sequent \OLId{greek-variable}{Delta}, !A \lif !B$. \iftag{FOL}{%
+\item الاستدلال الأخير هو~\LeftR{\lforall}: عندئذ توجد
+  !!a{formula}~$!A(\OLId{latin-ordinary}{x})$ وحد مغلق~$\OLId{latin-ordinary}{t}$ بحيث ينتهي~$\pi$ هكذا:
+  \begin{prooftree}
+    \AxiomC{}
+    \Deduce$!A(\OLId{latin-ordinary}{t}), \OLId{greek-variable}{Gamma} \fCenter \OLId{greek-variable}{Delta}$
+    \RightLabel{\LeftR{\lforall}}
+    \UnaryInf$\lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})], \OLId{greek-variable}{Gamma} \fCenter \OLId{greek-variable}{Delta}$
+  \end{prooftree}
+  ونريد أن نبين أن النتيجة~$\lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})], \OLId{greek-variable}{Gamma}
+  \Sequent \OLId{greek-variable}{Delta}$ صالحة. اعتبر !!a{structure}~$\Struct M$.
+  وبما أن المقدمة~$!A(\OLId{latin-ordinary}{t}), \OLId{greek-variable}{Gamma} \Sequent \OLId{greek-variable}{Delta}$ صالحة، فإما
+  (أ) أن~$\Sat/{\OLId{latin-looped}{M}}{!A(\OLId{latin-ordinary}{t})}$، أو (ب) أن~$\Sat/{\OLId{latin-looped}{M}}{!C}$ لبعض
+  $!C \in \OLId{greek-variable}{Gamma}$، أو (ج) أن~$\Sat{\OLId{latin-looped}{M}}{!C}$ لبعض $!C \in \OLId{greek-variable}{Delta}$.
+  في الحالة (أ)، من \olref[syn][sem]{prop:quant-terms}، إذا كان
+  $\Sat{\OLId{latin-looped}{M}}{\lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]}$ فإن~$\Sat{\OLId{latin-looped}{M}}{!A(\OLId{latin-ordinary}{t})}$. وبما أن
+  $\Sat/{\OLId{latin-looped}{M}}{!A(\OLId{latin-ordinary}{t})}$، يكون~$\Sat/{\OLId{latin-looped}{M}}{\lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]}$. وفي
+  الحالتين (ب) و(ج)، ترضي~$\Struct{M}$ أيضًا
+  $\lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})], \OLId{greek-variable}{Gamma} \Sequent \OLId{greek-variable}{Delta}$. وبما أن~$\Struct M$
+  كانت اعتباطية، تكون~$\lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})], \OLId{greek-variable}{Gamma} \Sequent \OLId{greek-variable}{Delta}$
+  صالحة.
+\item الاستدلال الأخير هو~\RightR{\lexists}: تمرين.
+\item الاستدلال الأخير هو~\RightR{\lforall}: عندئذ توجد
+  !!a{formula}~$!A(\OLId{latin-ordinary}{x})$ و!!a{constant}~$\OLId{latin-ordinary}{a}$ بحيث ينتهي~$\pi$ هكذا:
+  \begin{prooftree}
+    \AxiomC{}
+    \Deduce$\OLId{greek-variable}{Gamma} \fCenter \OLId{greek-variable}{Delta}, !A(\OLId{latin-ordinary}{a})$
+    \RightLabel{\RightR{\lforall}}
+    \UnaryInf$\OLId{greek-variable}{Gamma} \fCenter \OLId{greek-variable}{Delta}, \lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]$
+  \end{prooftree}
+  حيث يتحقق شرط المتغير المميَّز، أي إن~$\OLId{latin-ordinary}{a}$ لا يرد في~$!A(\OLId{latin-ordinary}{x})$ ولا
+  في~$\OLId{greek-variable}{Gamma}$ ولا في~$\OLId{greek-variable}{Delta}$. وبفرض الاستقراء، تكون مقدمة الاستدلال
+  الأخير صالحة. وعلينا أن نبين أن النتيجة صالحة أيضًا، أي إنه لأي
+  !!{structure}~$\Struct M$، إما (أ) أن~$\Sat{\OLId{latin-looped}{M}}{\lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]}$،
+  أو (ب) أن~$\Sat/{\OLId{latin-looped}{M}}{!C}$ لبعض $!C \in \OLId{greek-variable}{Gamma}$، أو (ج) أن
+  $\Sat{\OLId{latin-looped}{M}}{!C}$ لبعض $!C \in \OLId{greek-variable}{Delta}$.
+
+  خذ~$\Struct{M}$ !!{structure} كيف اتفق.
+  إن تحقق (ب) أو (ج) تم المطلوب. وإلا فلكل
+  $!C \in \OLId{greek-variable}{Gamma}$ يكون~$\Sat{\OLId{latin-looped}{M}}{!C}$، ولكل $!C \in \OLId{greek-variable}{Delta}$ يكون
+  $\Sat/{\OLId{latin-looped}{M}}{!C}$. فلا يبقى إلا إثبات (أ)، أي
+  $\Sat{\OLId{latin-looped}{M}}{\lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]}$.
+  وبحسب \olref[syn][ass]{prop:sat-quant}، يكفي إثبات
+  $\Sat{\OLId{latin-looped}{M}}{!A(\OLId{latin-ordinary}{x})}[\OLId{latin-ordinary}{s}]$ لكل إسناد~$\OLId{latin-ordinary}{s}$.
+  فخذ~$\OLId{latin-ordinary}{s}$ إسنادًا كيف اتفق، واجعل~$\Struct{M'}$ موافقة لـ
+  $\Struct{M}$ فيما عدا~$\Assign{\OLId{latin-ordinary}{a}}{\OLId{latin-looped}{M}'} = \OLId{latin-ordinary}{s}(\OLId{latin-ordinary}{x})$.
+  من \olref[syn][ext]{cor:extensionality-sent}، لكل $!C \in \OLId{greek-variable}{Gamma}$
+  يتحقق~$\Sat{\OLId{latin-looped}{M}'}{!C}$، إذ~$\OLId{latin-ordinary}{a}$ لا يقع في~$\OLId{greek-variable}{Gamma}$؛ ولكل
+  $!C \in \OLId{greek-variable}{Delta}$ يتحقق~$\Sat/{\OLId{latin-looped}{M}'}{!C}$.
+  والمقدمة صالحة، فلا بد من $\Sat{\OLId{latin-looped}{M}'}{!A(\OLId{latin-ordinary}{a})}$.
+  ثم من \olref[syn][ass]{prop:sentence-sat-true} يلزم
+  $\Sat{\OLId{latin-looped}{M}'}{!A(\OLId{latin-ordinary}{a})}[\OLId{latin-ordinary}{s}]$، لأن~$!A(\OLId{latin-ordinary}{a})$ جملة.
+  ولدينا $\varAssign{\OLId{latin-ordinary}{s}}{\OLId{latin-ordinary}{s}}{\OLId{latin-ordinary}{x}}$ مع $\OLId{latin-ordinary}{s}(\OLId{latin-ordinary}{x}) = \Value{\OLId{latin-ordinary}{a}}{\OLId{latin-looped}{M}'}[\OLId{latin-ordinary}{s}]$، على ما وضعنا به
+  $\Struct{M'}$. فتُطبق
+  \olref[syn][ext]{prop:ext-formulas} ويُستنتج
+  $\Sat{\OLId{latin-looped}{M}'}{!A(\OLId{latin-ordinary}{x})}[\OLId{latin-ordinary}{s}]$.
+  وحيث إن~$\OLId{latin-ordinary}{a}$ لا يقع في~$!A(\OLId{latin-ordinary}{x})$، تنقلنا
+  \olref[syn][ext]{prop:extensionality} إلى
+  $\Sat{\OLId{latin-looped}{M}}{!A(\OLId{latin-ordinary}{x})}[\OLId{latin-ordinary}{s}]$.
+  واختيار~$\OLId{latin-ordinary}{s}$ كان مطلقًا؛ فثبت
+  $\Sat{\OLId{latin-looped}{M}}{!A(\OLId{latin-ordinary}{x})}[\OLId{latin-ordinary}{s}]$ لكل إسناد متغيرات.
+\item الاستدلال الأخير هو~\LeftR{\lexists}: تمرين.
+}{}
+\end{enumerate}
+والآن لننظر في الاستدلالات الممكنة ذات المقدمتين.
+\begin{enumerate}
+\item الاستدلال الأخير قطع؛ وعندئذ ينتهي~$\pi$ هكذا:
+  \begin{prooftree}
+    \AxiomC{}
+    \Deduce$\OLId{greek-variable}{Gamma} \fCenter \OLId{greek-variable}{Delta}, !A$
+    \AxiomC{}
+    \Deduce$!A, \Pi \fCenter \Lambda$
+    \RightLabel{\Cut}
+    \BinaryInf$\OLId{greek-variable}{Gamma}, \Pi \fCenter \OLId{greek-variable}{Delta}, \Lambda$
+  \end{prooftree}
+  خذ \iftag{FOL}{$\Struct{M}$ !!a{structure}}{$\pAssign{\OLId{latin-ordinary}{v}}$
+    !!a{valuation}}. المقدمتان صالحتان بفرض الاستقراء؛ فترضي
+  \iftag{FOL}{$\Struct{M}$}{$\pAssign{\OLId{latin-ordinary}{v}}$} كلتيهما.
+  إما (أ) $\iftag{FOL}{\Sat/{\OLId{latin-looped}{M}}}{\pSat/{\OLId{latin-ordinary}{v}}}{!A}$، وإما (ب)
+  $\iftag{FOL}{\Sat{\OLId{latin-looped}{M}}}{\pSat{\OLId{latin-ordinary}{v}}}{!A}$.
+  في (أ) لا ترضي
+  \iftag{FOL}{$\Struct{M}$}{$\pAssign{\OLId{latin-ordinary}{v}}$} المقدمة اليسرى إلا بإرضاء
+  $\OLId{greek-variable}{Gamma} \Sequent \OLId{greek-variable}{Delta}$، فيلزم إرضاء النتيجة.
+  وفي (ب) لا ترضي
+  \iftag{FOL}{$\Struct{M}$}{$\pAssign{\OLId{latin-ordinary}{v}}$} المقدمة اليمنى إلا بإرضاء
+  $\Pi \Sequent \Lambda$؛ فتكون
+  \iftag{FOL}{$\Struct{M}$}{$\pAssign{\OLId{latin-ordinary}{v}}$} مُرضية للنتيجة أيضًا.
+\item الاستدلال الأخير هو~\RightR{\land}. وعندئذ ينتهي~$\pi$ هكذا:
+  \begin{prooftree}
+    \AxiomC{}
+    \Deduce$\OLId{greek-variable}{Gamma} \fCenter \OLId{greek-variable}{Delta}, !A$
+    \AxiomC{}
+    \Deduce$\OLId{greek-variable}{Gamma} \fCenter \OLId{greek-variable}{Delta}, !B$
+    \RightLabel{\RightR{\land}}
+    \BinaryInf$\OLId{greek-variable}{Gamma} \fCenter \OLId{greek-variable}{Delta}, !A \land !B$
+  \end{prooftree}
+  اعتبر \iftag{FOL}{!!a{structure}~$\Struct
+    M$}{!!a{valuation}~$\pAssign{\OLId{latin-ordinary}{v}}$}. فإذا كانت
+  \iftag{FOL}{$\Struct{M}$}{$\pAssign{\OLId{latin-ordinary}{v}}$} ترضي
+  $\OLId{greek-variable}{Gamma} \Sequent \OLId{greek-variable}{Delta}$، نكون قد انتهينا. فافترض أنها لا ترضيها.
+  وبما أن~$\OLId{greek-variable}{Gamma} \fCenter \OLId{greek-variable}{Delta}, !A$ صالحة بفرض الاستقراء، يكون
+  $\iftag{FOL}{\Sat{\OLId{latin-looped}{M}}}{\pSat{\OLId{latin-ordinary}{v}}}{!A}$. وبالمثل، بما أن
+  $\OLId{greek-variable}{Gamma} \Sequent \OLId{greek-variable}{Delta}, !B$ صالحة، يكون
+  $\iftag{FOL}{\Sat{\OLId{latin-looped}{M}}}{\pSat{\OLId{latin-ordinary}{v}}}{!B}$. لكن عندئذ يكون
+  $\iftag{FOL}{\Sat{\OLId{latin-looped}{M}}}{\pSat{\OLId{latin-ordinary}{v}}}{!A \land !B}$.
+\item الاستدلال الأخير هو~\LeftR{\lor}: تمرين.
+\item الاستدلال الأخير هو~\LeftR{\lif}. وعندئذ ينتهي~$\pi$ هكذا:
+  \begin{prooftree}
+    \AxiomC{}
+    \Deduce$\OLId{greek-variable}{Gamma} \fCenter \OLId{greek-variable}{Delta}, !A$
+    \AxiomC{}
+    \Deduce$!B, \Pi \fCenter \Lambda$
+    \RightLabel{\LeftR{\lif}}
+    \BinaryInf$!A \lif !B, \OLId{greek-variable}{Gamma}, \Pi \fCenter \OLId{greek-variable}{Delta}, \Lambda$
+  \end{prooftree}
+  اعتبر مرة أخرى
+  \iftag{FOL}{!!a{structure}~$\Struct{M}$}{!!a{valuation}~$\pAssign{\OLId{latin-ordinary}{v}}$}،
+  وافترض أن \iftag{FOL}{$\Struct{M}$}{$\pAssign{\OLId{latin-ordinary}{v}}$} لا ترضي
+  $\OLId{greek-variable}{Gamma}, \Pi \Sequent \OLId{greek-variable}{Delta}, \Lambda$. وعلينا أن نبين أن
+  $\iftag{FOL}{\Sat/{\OLId{latin-looped}{M}}}{\pSat/{\OLId{latin-ordinary}{v}}}{!A \lif !B}$. فإذا كانت
+  \iftag{FOL}{$\Struct{M}$}{$\pAssign{\OLId{latin-ordinary}{v}}$} لا ترضي
+  $\OLId{greek-variable}{Gamma}, \Pi \Sequent \OLId{greek-variable}{Delta}, \Lambda$، فهي لا ترضي
+  $\OLId{greek-variable}{Gamma} \Sequent \OLId{greek-variable}{Delta}$ ولا~$\Pi \Sequent \Lambda$. وبما أن
+  $\OLId{greek-variable}{Gamma} \Sequent \OLId{greek-variable}{Delta}, !A$ صالحة، يكون
+  $\iftag{FOL}{\Sat{\OLId{latin-looped}{M}}}{\pSat{\OLId{latin-ordinary}{v}}}{!A}$. وبما أن
+  $!B, \Pi \Sequent \Lambda$ صالحة، يكون
+  $\iftag{FOL}{\Sat/{\OLId{latin-looped}{M}}}{\pSat/{\OLId{latin-ordinary}{v}}}{!B}$. لكن عندئذ يكون
+  $\iftag{FOL}{\Sat/{\OLId{latin-looped}{M}}}{\pSat/{\OLId{latin-ordinary}{v}}}{!A \lif !B}$، وهو ما أردنا بيانه.
+\end{enumerate}
+\end{proof}
+
+\tagprob{FOL}
+\begin{prob}
+أكمل برهان \olref[fol][seq][sou]{thm:sequent-soundness}.
+\end{prob}
+\tagendprob
+
+\tagprob{notFOL}
+\begin{prob}
+أكمل برهان \olref[pl][seq][sou]{thm:sequent-soundness}.
+\end{prob}
+\tagendprob
+
+\begin{cor}
+\ollabel{cor:weak-soundness}
+إذا كان~$\Proves !A$، فإن~$!A$ \iftag{FOL}{صالحة}{تحصيل حاصل}.
+\end{cor}
+
+\begin{cor}
+\ollabel{cor:entailment-soundness}
+إذا كان~$\OLId{greek-variable}{Gamma} \Proves !A$، فإن~$\OLId{greek-variable}{Gamma} \Entails !A$.
+\end{cor}
+
+\begin{proof}
+من~$\OLId{greek-variable}{Gamma} \Proves !A$ توجد مجموعة جزئية منتهية
+$\OLId{greek-variable}{Gamma}_\OLMathNumeral{0} \subseteq \OLId{greek-variable}{Gamma}$ و!!a{derivation} لـ
+$\OLId{greek-variable}{Gamma}_\OLMathNumeral{0} \Sequent !A$. وبمقتضى \olref{thm:sequent-soundness}، فإن كل
+\iftag{FOL}{!!{structure}~$\Struct{M}$}{!!{valuation}~$\pAssign{\OLId{latin-ordinary}{v}}$}
+إما أن تكذّب بعض~$!B \in \OLId{greek-variable}{Gamma}_\OLMathNumeral{0}$ وإما أن تصدّق~$!A$.
+فإذا تحقق
+$\iftag{FOL}{\Sat{\OLId{latin-looped}{M}}}{\pSat{\OLId{latin-ordinary}{v}}}{\OLId{greek-variable}{Gamma}}$، امتنع الوجه الأول، ولزم
+$\iftag{FOL}{\Sat{\OLId{latin-looped}{M}}}{\pSat{\OLId{latin-ordinary}{v}}}{!A}$.
+\end{proof}
+
+\begin{cor}
+\ollabel{cor:consistency-soundness}
+إذا كانت~$\OLId{greek-variable}{Gamma}$ قابلة للإرضاء، فهي متسقة.
+\end{cor}
+
+\begin{proof}
+نثبت المقابل بالنقيض. لتكن~$\OLId{greek-variable}{Gamma}$ غير متسقة؛ فتوجد مجموعة منتهية
+$\OLId{greek-variable}{Gamma}_\OLMathNumeral{0} \subseteq \OLId{greek-variable}{Gamma}$ و!!a{derivation} لـ
+$\OLId{greek-variable}{Gamma}_\OLMathNumeral{0} \Sequent \quad$. ومن \olref{thm:sequent-soundness} أن
+$\OLId{greek-variable}{Gamma}_\OLMathNumeral{0} \Sequent \quad$ صالحة.
+ومعناه أن لكل
+\iftag{FOL}{!!{structure}~$\Struct{M}$}{!!{valuation}~$\pAssign{\OLId{latin-ordinary}{v}}$}
+شاهدًا~$!C \in \OLId{greek-variable}{Gamma}_\OLMathNumeral{0}$ بحيث
+$\iftag{FOL}{\Sat/{\OLId{latin-looped}{M}}}{\pSat/{\OLId{latin-ordinary}{v}}}{!C}$.
+ولما كانت $\OLId{greek-variable}{Gamma}_\OLMathNumeral{0} \subseteq \OLId{greek-variable}{Gamma}$، كان~$!C$ في~$\OLId{greek-variable}{Gamma}$ أيضًا.
+فلا توجد \iftag{FOL}{$\Struct{M}$}{$\pAssign{\OLId{latin-ordinary}{v}}$} ترضي
+$\OLId{greek-variable}{Gamma}$؛ أي إن~$\OLId{greek-variable}{Gamma}$ غير قابلة للإرضاء.
+\end{proof}
+
+\end{document}

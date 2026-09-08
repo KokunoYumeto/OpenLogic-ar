@@ -1,0 +1,106 @@
+% part: intuitionistic-logic
+% chapter: propositions-as-types
+% section: type-preservation
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{pty}{tpr}
+
+\olsection{في حفظ النوع}
+
+يمكن كذلك تعريف تحويلات الاختزال والتبديل المدروسة مباشرةً للنسقين
+\Log{tN2i} و\Log{tN3i}. ويعرّف النسق~\Log{tN3i} نوع حد لامبدا~$\OLId{latin-looped}{N}$ بالنسبة
+إلى السياق~$\OLId{greek-variable}{Gamma}$ بأنه~!!{formula}~$!A$ التي يكون للمتتالية
+$\OLId{greek-variable}{Gamma}\Sequent \OLId{latin-looped}{N}:!A$~!!a{proof} في~\Log{tN3i}. ولأن قواعد اختزال بيتا
+لحدود لامبدا تطابق تمامًا تحويلات الاختزال والتبديل على~!!{proof}s، تنتج
+نتيجة مهمة: يبقى نوع حد لامبدا بالنسبة إلى السياق~$\OLId{greek-variable}{Gamma}$ على حاله بعد
+كل خطوة واحدة من اختزال بيتا. وتسمى هذه الخاصية \emph{حفظ النوع}.
+
+\begin{prop}
+إذا كان نوع~$\OLId{latin-looped}{N}$ هو~$!A$ بالنسبة إلى~$\OLId{greek-variable}{Gamma}$، وكان~$\OLId{latin-looped}{N}\redone \OLId{latin-looped}{N}'$ في خطوة
+اختزال واحدة، فإن نوع~$\OLId{latin-looped}{N}'$ هو~$!A$ بالنسبة إلى~$\OLId{greek-variable}{Gamma}$.
+\end{prop}
+
+\begin{proof}
+  نستطيع بسهولة أن نثبت، بالاستقراء في~$\OLId{latin-looped}{N}$ وفي ارتفاع~!!{proof}s~$\delta$
+  للمتتالية~$\OLId{greek-variable}{Gamma}\Sequent \OLId{latin-looped}{N}:!A$، ما يأتي: إذا كان~$\OLId{latin-looped}{M}$ حدًا جزئيًا من
+  $\OLId{latin-looped}{N}$، احتوى~$\delta$~!!{proof}s جزئيًا~$\delta_\OLMathNumeral{1}$ ينتهي بـ
+  $\OLId{greek-variable}{Gamma}'\Sequent \OLId{latin-looped}{M}:!B$. وإذا كان~$\OLId{latin-looped}{M}$ ردكسًا، انطبق تحويل على
+  $\delta_\OLMathNumeral{1}$. وبتطبيق الاختزال على~$\delta_\OLMathNumeral{1}$ ينتج لنا~!!a{proof}
+  $\delta_\OLMathNumeral{1}'$ لـ~$\OLId{greek-variable}{Gamma}'\Sequent \OLId{latin-looped}{M}':!B$. وبفحص تحويلات~\Log{tN3i} نجد
+  أن~$\OLId{latin-looped}{M}'$ هو مختزَل~$\OLId{latin-looped}{M}$. وإذا استبدلنا~$\delta_\OLMathNumeral{1}'$ بـ~$\delta_\OLMathNumeral{1}$ في
+  $\delta$ نتج~!!a{proof}~$\delta'$ لـ~$\OLId{greek-variable}{Gamma}\Sequent \OLId{latin-looped}{N}':!A$، حيث ينتج
+  $\OLId{latin-looped}{N}'$ من~$\OLId{latin-looped}{N}$ باستبدال~$\OLId{latin-looped}{M}'$ بالحد الجزئي~$\OLId{latin-looped}{M}$.
+
+  انظر، مثلًا، في تحويل الاختزال لـ~\Intro{\land} يتبعه~\Elim{\land}:
+  \[
+  \bottomAlignProof
+  \AxiomC{}
+  \Deduce$\OLId{greek-variable}{Gamma} \fCenter \OLId{latin-looped}{N}_\OLMathNumeral{1} : !B_\OLMathNumeral{1}$
+  \AxiomC{}
+  \Deduce$\OLId{greek-variable}{Gamma} \fCenter \OLId{latin-looped}{N}_\OLMathNumeral{2} : !B_\OLMathNumeral{2}$
+  \RightLabel{\Intro{\land}}
+  \BinaryInf$\OLId{greek-variable}{Gamma} \fCenter \pair{\OLId{latin-looped}{N}_\OLMathNumeral{1}}{\OLId{latin-looped}{N}_\OLMathNumeral{2}} : !B_\OLMathNumeral{1} \land !B_\OLMathNumeral{2}$
+  \RightLabel{\Elim{\land}[\OLId{latin-ordinary}{i}]}
+  \UnaryInf$\OLId{greek-variable}{Gamma} \fCenter \proj{\OLId{latin-ordinary}{i}}{\pair{\OLId{latin-looped}{N}_\OLMathNumeral{1}}{\OLId{latin-looped}{N}_\OLMathNumeral{2}}} : !B_\OLId{latin-ordinary}{i}$
+  \DisplayProof
+  \quad\redone\quad
+  \bottomAlignProof
+  \AxiomC{}
+  \Deduce$\OLId{greek-variable}{Gamma} \fCenter \OLId{latin-looped}{N}_\OLId{latin-ordinary}{i} : !B_\OLId{latin-ordinary}{i}$
+  \DisplayProof
+  \]
+  نرى أن حد برهان~!!{proof} الواقع على اليمين، أي~$\delta_\OLMathNumeral{1}'$، هو~$\OLId{latin-looped}{N}_\OLId{latin-ordinary}{i}$.
+  وهو بالضبط نتيجة تطبيق خطوة اختزال بيتا على حد البرهان
+  $\proj{\OLId{latin-ordinary}{i}}{\pair{\OLId{latin-looped}{N}_\OLMathNumeral{1}}{\OLId{latin-looped}{N}_\OLMathNumeral{2}}}$ لـ~!!{proof} الواقع على اليسار، أي
+  $\delta_\OLMathNumeral{1}$.
+
+  أو انظر في استدلال~\Intro{\lif} يتبعه استدلال~\Elim{\lif}، وفي تحويل
+  الاختزال المطبق عليه:
+  \begin{multline*}
+  \bottomAlignProof
+  \AxiomC{$\delta_\OLMathNumeral{2}$}
+  \Deduce$\OLId{latin-ordinary}{x}: !B_\OLMathNumeral{1}, \OLId{greek-variable}{Gamma} \fCenter \OLId{latin-looped}{N} : !B_\OLMathNumeral{2}$
+  \RightLabel{\Intro{\lif}}
+  \UnaryInf$\OLId{greek-variable}{Gamma} \fCenter \lambd[\typeof{\OLId{latin-ordinary}{x}}{!B_\OLMathNumeral{1}}][\OLId{latin-looped}{N}] : !B_\OLMathNumeral{1} \lif !B_\OLMathNumeral{2}$
+  \AxiomC{}
+  \RightLabel{$\delta_\OLMathNumeral{3}$}
+  \Deduce$\OLId{greek-variable}{Gamma} \fCenter \OLId{latin-looped}{M} : !B_\OLMathNumeral{1}$
+  \RightLabel{\Elim{\lif}}
+  \BinaryInf$\OLId{greek-variable}{Gamma} \fCenter (\lambd[\typeof{\OLId{latin-ordinary}{x}}{!B_\OLMathNumeral{1}}][\OLId{latin-looped}{N}] \OLId{latin-looped}{M}) : !B_\OLMathNumeral{2}$
+  \DisplayProof
+  \quad\redone\\
+  \bottomAlignProof
+  \AxiomC{}
+  \RightLabel{$\delta_\OLMathNumeral{3}$}
+  \Deduce$\OLId{greek-variable}{Gamma} \fCenter \OLId{latin-looped}{M} : !B_\OLMathNumeral{1}$
+  \RightLabel{$\Subst{\delta_\OLMathNumeral{2}}{\delta_\OLMathNumeral{3}}{\OLId{latin-ordinary}{x}:!B_\OLMathNumeral{1}}$}
+  \Deduce$\OLId{greek-variable}{Gamma} \fCenter \Subst{\OLId{latin-looped}{N}}{\OLId{latin-looped}{M}}{\OLId{latin-ordinary}{x}} : !B_\OLMathNumeral{2}$
+  \DisplayProof
+  \end{multline*}
+  ومرة أخرى يكون حد برهان~!!{proof} الواقع على اليمين هو بالضبط نتيجة
+  اختزال حد برهان~!!{proof} الواقع على اليسار ببيتا خطوةً واحدة. ويبقى أن
+  نتحقق بعناية، بالاستقراء في ارتفاع~$\delta_\OLMathNumeral{2}$، من أن استبدال~!!{proof}
+  $\delta_\OLMathNumeral{3}$ لـ~$\OLId{greek-variable}{Gamma}\Sequent \OLId{latin-looped}{M}:!B_\OLMathNumeral{1}$ بكل بديهية من الصورة
+  $\OLId{greek-variable}{Gamma}'\Sequent \OLId{latin-ordinary}{x}:!B_\OLMathNumeral{1}$ في~$\delta_\OLMathNumeral{2}$ ينتج فعلًا~!!a{proof}
+  $\Subst{\delta_\OLMathNumeral{2}}{\delta_\OLMathNumeral{3}}{\OLId{latin-ordinary}{x}:!B_\OLMathNumeral{1}}$ للمتتالية
+  $\OLId{greek-variable}{Gamma}\Sequent\Subst{\OLId{latin-looped}{N}}{\OLId{latin-looped}{M}}{\OLId{latin-ordinary}{x}}:!B_\OLMathNumeral{2}$.
+\end{proof}
+
+وللتطابق الوثيق بين~!!{proof}s وحدود لامبدا نتيجة أخرى. فإذا كان~$\OLId{latin-looped}{N}$ حد
+لامبدا \emph{مغلقًا} من النوع~$!A$ وكان له ردكس~$\OLId{latin-looped}{M}$، احتوى البرهان
+$\delta$ المقابل في~\Log{tN3i} للمتتالية~$\Sequent \OLId{latin-looped}{N}:!A$~!!{proof} جزئيًا
+ينتهي بـ~$\OLId{greek-variable}{Gamma}'\Sequent \OLId{latin-looped}{M}:!B$ وينطبق عليه تحويل. وإذا كان
+$\OLId{latin-looped}{N}\redone \OLId{latin-looped}{N}'$ باستبدال مختزَل~$\OLId{latin-looped}{M}$ به، كانت نتيجة تطبيق الاختزال المقابل
+على~$\delta$~!!a{proof} لـ~$\Sequent \OLId{latin-looped}{N}':!A$.
+
+أما خاصية \emph{التقدم} الصحيحة فتخص الحدود المغلقة الصحيحة النوع: يبيّن
+الاستقراء في اشتقاق التنميط، باستعمال لمّة الصيغ القانونية للقيم، أن كل حد
+مغلق صحيح النوع إما قيمة ذات الصيغة القانونية لنوعه، وإما يختزل في خطوة
+واحدة إلى حد آخر. ويضمن حفظ النوع أن الحد الناتج له النوع نفسه. ولذلك لا
+``تعلق'' عملية اختزال بيتا لحدود مغلقة صحيحة النوع؛ أما الحدود المفتوحة فقد
+تكون في صيغة عادية محايدة، فلا يشملها ادعاء التقدم هذا.
+
+\end{document}

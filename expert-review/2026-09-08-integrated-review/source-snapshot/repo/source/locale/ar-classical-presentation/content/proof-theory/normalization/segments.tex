@@ -1,0 +1,102 @@
+% Part: proof-theory
+% Chapter: normalization
+% Section: segments
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{nor}{seg}
+
+\olsection{في المقاطع والقطوع}
+
+إذا تعقبت قاعدةُ~!!a{elimination} قاعدةَ~!!^a{introduction} كان ذلك
+التفافًا في~!!a{proof}، وتطبيع~!!a{proof} حذف أمثال هذه الالتفافات. لكن
+قاعدتي~\Elim{\lor} و\Elim{\lexists} تزيدان تعريف «الالتفاف المراد حذفه»
+تعقيدًا؛ لأن قاعدة~!!{elimination} لا يلزم أن تعقب قاعدة~!!{introduction}
+\emph{مباشرةً}، بل ربما توسطتهما~\Elim{\lor} أو~\Elim{\lexists}، مثلًا:
+\[
+\AxiomC{}
+\DeduceC{$\lexists[\OLId{latin-ordinary}{x}][!C(\OLId{latin-ordinary}{x})]$}
+\AxiomC{$\Discharge{!A}{\OLId{latin-ordinary}{x}}$}
+\DeduceC{$!B$}
+\DischargeRule{\Intro{\lif}}{\OLId{latin-ordinary}{x}}
+\UnaryInfC{$!A \lif !B$}
+\DischargeRule{\Elim{\lexists}}{\OLId{latin-ordinary}{y}}
+\BinaryInfC{$!A \lif !B$}
+\AxiomC{}
+\DeduceC{$!A$}
+\RightLabel{\Elim{\lif}}
+\BinaryInfC{$!B$}
+\DisplayProof
+\]
+وقد يقع بين~\Intro{\lif} و\Elim{\lif} أي عدد من تطبيقات~\Elim{\lor}
+أو~\Elim{\lexists}، مثلًا:
+\[
+\AxiomC{}
+\DeduceC{$\lexists[\OLId{latin-ordinary}{x}][!C(\OLId{latin-ordinary}{x})]$}
+\AxiomC{}
+\DeduceC{$!D \lor !E$}
+\AxiomC{$\Discharge{!A}{\OLId{latin-ordinary}{x}}$}
+\DeduceC{$!B$}
+\DischargeRule{\Intro{\lif}}{\OLId{latin-ordinary}{x}}
+\UnaryInfC{$!A \lif !B$}
+\AxiomC{$\Discharge{!A}{\OLId{latin-ordinary}{x}}$}
+\DeduceC{$!B$}
+\DischargeRule{\Intro{\lif}}{\OLId{latin-ordinary}{x}}
+\UnaryInfC{$!A \lif !B$}
+\RightLabel{\Elim{\lor}}
+\TrinaryInfC{$!A \lif !B$}
+\DischargeRule{\Elim{\lexists}}{\OLId{latin-ordinary}{y}}
+\BinaryInfC{$!A \lif !B$}
+\AxiomC{}
+\DeduceC{$!A$}
+\RightLabel{\Elim{\lif}}
+\BinaryInfC{$!B$}
+\DisplayProof
+\]
+ويظهر من المثال أن تطبيق~\Elim{\lif} الواحد قد يكون في التفافات عدة، إذ
+يقع بعد أكثر من تطبيق واحد لـ~\Intro{\lif}. ولكي نستوعب هذه الوجوه نعرف
+الالتفافات بأنواع مخصوصة من متتاليات وقائع~!!{formula} في برهان
+\Log{N1i}، ونسميها \emph{مقاطع}. والمقطع في مثالنا متتالية من وقائع
+$!A \lif !B$، تتبع فيها نتيجة~$\Elim{\lor}$ أو~$\Elim{\lexists}$
+مقدمتها الصغرى. وفيه مقطعان من هذا الضرب، في كل منهما ثلاث وقائع من
+$!A \lif !B$. والحد الدقيق هو الآتي.
+
+\begin{defn}
+\emph{المقطع} في~!!{proof}~$\delta$ من~\Log{N1i} متتالية الوقائع
+$!A_\OLMathNumeral{1}$، \dots، $!A_\OLId{latin-ordinary}{n}$ لـ~!!{formula}~$!A$ بعينها في~$\delta$، وتخضع
+للشروط الآتية:
+\begin{enumerate}
+  \item لا تكون~$!A_\OLMathNumeral{1}$ نتيجة~\Elim{\lor} أو~\Elim{\lexists}؛
+  \item لا تكون~$!A_\OLId{latin-ordinary}{n}$ مقدمةً صغرى لـ~\Elim{\lor} أو~\Elim{\lexists}؛
+  \item لكل~$\OLId{latin-ordinary}{i} = \OLMathNumeral{1}$، \dots، $\OLId{latin-ordinary}{n}-\OLMathNumeral{1}$، تكون~$!A_\OLId{latin-ordinary}{i}$ مقدمةً صغرى لـ
+  \Elim{\lor} أو~\Elim{\lexists}، وتكون~$!A_{\OLId{latin-ordinary}{i}+\OLMathNumeral{1}}$ نتيجة ذلك الاستدلال.
+\end{enumerate}
+وعدد~$\OLId{latin-ordinary}{n}$ هو \emph{طول} هذا المقطع.
+\end{defn}
+
+وليس كل مقطع التفافًا يراد حذفه؛ والمقاطع التي يراد حذفها هي
+\emph{القطوع}.
+
+\begin{defn}
+\emph{القطع} مقطع تكون~$!A_\OLId{latin-ordinary}{n}$ فيه المقدمة الكبرى لاستدلال~!!a{elimination}؛
+وإما أن يكون~$\OLId{latin-ordinary}{n}=\OLMathNumeral{1}$، وتكون~$!A_\OLMathNumeral{1}=!A_\OLId{latin-ordinary}{n}$ نتيجة استدلال~!!a{introduction}
+أو~\FalseInt، وإما أن يكون~$\OLId{latin-ordinary}{n}>\OLMathNumeral{1}$.
+\end{defn}
+
+ولا يشترط أن يبدأ مقطع القطع بنتيجة قاعدة~!!a{introduction}؛ وإنما
+يشترط أن ينتهي بالمقدمة الكبرى لقاعدة~!!a{elimination}. لكن المقطع الذي
+طوله~$\OLMathNumeral{1}$ لا يعد قطعًا إلا إذا كان نتيجة قاعدة~!!{introduction} أو
+\FalseInt.
+
+\begin{defn}
+\emph{رتبة} القطع هي~$\depth{!A}$. وأما \emph{رتبة القطع}
+$\cutrank{\delta}$ لـ~!!a{proof}~$\delta$ فهي أعظم رتب قطوع~$\delta$،
+ونجعلها~$\OLMathNumeral{0}$ إذا خلا من القطوع. ونسمي القطع \emph{أقصى} في~$\delta$ إذا
+كانت رتبته~$\cutrank{\delta}$، أي بلغت الغاية الممكنة. وأما
+\emph{طول القطع} لـ~$\delta$ فمجموع أطوال قطوعه القصوى كلها، ونجعله~$\OLMathNumeral{0}$
+إذا لم يوجد قطع.
+\end{defn}
+
+\end{document}

@@ -1,0 +1,110 @@
+% Part: sets-functions-relations
+% Chapter: arithmetization
+% Section: cuts
+%
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid[ar]{sfr}{arith}{cuts}
+\olsection{من $\Rat$ إلى $\Real$}
+
+تدل خاصية الاكتمال، في جوهرها، على أن كل نقطة $\OLId{greek-variable}{alpha}$ من المستقيم الحقيقي تفصل ما على جانبيها فصلًا تامًّا: فهي $\OLId{greek-variable}{alpha}$ أصغر حد علوي للجانب الأدنى، وهي $\OLId{greek-variable}{alpha}$ أكبر حد سفلي للجانب الأعلى. ومن هنا اقترح ديديكند، في \emph{بناء} الأعداد الحقيقية من النسبية، أن نجعل الأعداد الحقيقية \emph{قطوعًا} تفصل الأعداد النسبية. فنطابق مثلًا $\sqrt{\OLMathNumeral{2}}$ مع \emph{القطع} الفاصل بين النسبية $< \sqrt{\OLMathNumeral{2}}$ والنسبية $> \sqrt{\OLMathNumeral{2}}$.
+
+ولنحقق هذا التصور. إذا فصلنا الأعداد النسبية نصفين، كفى تعيين النصف \emph{الأدنى} لتعيين التقسيم كله تعيينًا وحيدًا. فنضبطه بالتعريف الآتي.
+
+\begin{defn}[القطع]
+\emph{القطع} $\OLId{greek-variable}{alpha}$ مقطع ابتدائي من الأعداد النسبية، غير خال، وليس هو النسبية كلها، ولا عنصر أعظم فيه. أي إن $\OLId{greek-variable}{alpha}$ قطع إذا وفقط إذا استوفى الشروط:
+\begin{enumerate}
+\item \emph{عدم الخلو والجزئية الحقيقية}: $\emptyset \neq \OLId{greek-variable}{alpha} \subsetneq \Rat$
+\item \emph{كونه ابتدائيًّا}: لكل $\OLId{latin-ordinary}{p},\OLId{latin-ordinary}{q} \in \Rat$، من $\OLId{latin-ordinary}{p} < \OLId{latin-ordinary}{q} \in \OLId{greek-variable}{alpha}$ يلزم $\OLId{latin-ordinary}{p} \in \OLId{greek-variable}{alpha}$
+\item \emph{انتفاء العنصر الأعظم}: لكل $\OLId{latin-ordinary}{p} \in \OLId{greek-variable}{alpha}$ يوجد $\OLId{latin-ordinary}{q} \in \OLId{greek-variable}{alpha}$ يحقق $\OLId{latin-ordinary}{p} < \OLId{latin-ordinary}{q}$
+\end{enumerate}
+ونجعل $\Real$ مجموعة هذه القطوع.
+\end{defn}
+
+فيصح بهذا أن نضع $\sqrt{\OLMathNumeral{2}} = \Setabs{\OLId{latin-ordinary}{p} \in \Rat}{\OLId{latin-ordinary}{p}^\OLMathNumeral{2} < \OLMathNumeral{2}\text{
+أو }\OLId{latin-ordinary}{p} < \OLMathNumeral{0}}$. ولا بد، بالطبع، من إثبات أن هذه المجموعة \emph{قطع} حقًّا، وتفصيله مؤخر إلى \olref[check]{sec}.
+
+ثم يلزمنا، كما لزم من قبل، أن نعين الدوال والعلاقات الأساسية على الكيانات التي عرفناها. ونبدأ بما هو أيسر، فنضع
+\begin{align*}
+	\OLId{greek-variable}{alpha} \leq \beta \text{ إذا وفقط إذا }\OLId{greek-variable}{alpha} \subseteq \beta
+\end{align*}
+وبهذا الترتيب نتمكن من \emph{صياغة} النتيجة المقصودة، وهي اكتمال مجموعة القطوع. فصورتها الكاملة: متى كانت $\OLId{latin-looped}{S}$ مجموعة غير خالية من القطوع ولها حد علوي، كان لـ$\OLId{latin-looped}{S}$ أصغر حد علوي. أي يوجد قطع $\lambda$ يحد $\OLId{latin-looped}{S}$ من أعلى، بمعنى\ 
+$(\forall \OLId{greek-variable}{alpha} \in \OLId{latin-looped}{S})\OLId{greek-variable}{alpha} \subseteq \lambda$، ويكون $\lambda$ أصغر القطوع التي تحقق ذلك، بمعنى\ 
+$(\forall \beta \in \Real)((\forall \OLId{greek-variable}{alpha} \in \OLId{latin-looped}{S})\OLId{greek-variable}{alpha} \subseteq \beta \lif \lambda \subseteq \beta)$.
+ونقيم الآن الدليل.
+
+\begin{thm}\ollabel{realcompleteness}
+مجموعة القطوع ذات خاصية الاكتمال.
+\end{thm}
+
+\begin{proof}
+خذ $\OLId{latin-looped}{S}$ مجموعة غير خالية من القطوع لها حد علوي، وضع $\lambda
+= \bigcup \OLId{latin-looped}{S}$.
+%\Setabs{p \in \Rat}{(\exists \alpha \in S)p \in \alpha}$$
+فنثبت أولًا أن $\lambda$ قطع:
+\begin{enumerate}
+\item لما كانت $\OLId{latin-looped}{S}$ غير خالية، وجد قطع في $\OLId{latin-looped}{S}$؛ والقطع غير خال، فيلزم $\emptyset \neq \lambda$. ولكون $\OLId{latin-looped}{S}$ مجموعة قطوع نجد $\lambda \subseteq \Rat$. ثم إن لـ$\OLId{latin-looped}{S}$ حدًّا علويًّا، وهو قطع حقيقي؛ فيوجد $\OLId{latin-ordinary}{p} \in
+\Rat$ خارج عن كل قطع $ \OLId{greek-variable}{alpha} \in \OLId{latin-looped}{S}$. فيكون $\OLId{latin-ordinary}{p}\notin \lambda$، ومنه $\lambda \subsetneq \Rat$.
+\item إذا كان $\OLId{latin-ordinary}{p} < \OLId{latin-ordinary}{q} \in \lambda$، وجد $ \OLId{greek-variable}{alpha} \in \OLId{latin-looped}{S}$ يحقق $\OLId{latin-ordinary}{q} \in \OLId{greek-variable}{alpha}$. والقطع $\OLId{greek-variable}{alpha}$ ابتدائي، فيلزم $\OLId{latin-ordinary}{p} \in \OLId{greek-variable}{alpha}$، ومنه $\OLId{latin-ordinary}{p} \in \lambda$.
+\item إذا كان $\OLId{latin-ordinary}{p} \in \lambda$، وجد $ \OLId{greek-variable}{alpha} \in \OLId{latin-looped}{S}$ يحقق $\OLId{latin-ordinary}{p} \in
+\OLId{greek-variable}{alpha}$. وليس للقطع $\OLId{greek-variable}{alpha}$ عنصر أعظم، فيوجد $\OLId{latin-ordinary}{q} \in \OLId{greek-variable}{alpha}$ يحقق $\OLId{latin-ordinary}{p} < \OLId{latin-ordinary}{q}$؛ فيكون $\OLId{latin-ordinary}{q} \in \lambda$.
+\end{enumerate}
+فثبت أنه قطع. ثم إن
+$(\forall \OLId{greek-variable}{alpha} \in \OLId{latin-looped}{S})\OLId{greek-variable}{alpha} \subseteq \bigcup \OLId{latin-looped}{S} = \lambda$، فتكون $\lambda$ حدًّا علويًّا لـ$\OLId{latin-looped}{S}$. وإذا كان $\beta \in \mathbb{R}$ حدًّا علويًّا آخر، أي كان $(\forall \OLId{greek-variable}{alpha} \in \OLId{latin-looped}{S})\OLId{greek-variable}{alpha} \subseteq \beta$، فإن كل $\OLId{latin-ordinary}{p} \in \Rat$ يحقق $\OLId{latin-ordinary}{p} \in \lambda$ ينتمي إلى قطع $ \OLId{greek-variable}{alpha} \in \OLId{latin-looped}{S}$ بحيث $\OLId{latin-ordinary}{p} \in \OLId{greek-variable}{alpha}$؛ فيلزم $\OLId{latin-ordinary}{p} \in \beta$. وهذا يثبت $\lambda
+\subseteq \beta$. فـ$\lambda$ هو \emph{أصغر} حد علوي لـ$\OLId{latin-looped}{S}$.
+\end{proof}
+
+فقد حصلنا على كيانات تحقق خاصية الاكتمال؛ وبعبارة أخرى، لا «فجوات» بين قطوعنا. ولو أجرينا القطع مرة أخرى في الأعداد الحقيقية عوضًا عن النسبية، لما حصلنا بذلك على كيانات جديدة تزيد شيئًا في المقصود.
+
+ونعين بعد ذلك العمليات على الأعداد الحقيقية. فنبدأ بتضمين النسبية فيها، جاعلين $\OLId{latin-ordinary}{p}_\Real =
+\Setabs{\OLId{latin-ordinary}{q} \in \Rat}{\OLId{latin-ordinary}{q} < \OLId{latin-ordinary}{p}}$ لكل $\OLId{latin-ordinary}{p} \in \Rat$. ثم نضع
+\begin{align*}
+	\OLId{greek-variable}{alpha} + \beta &= \Setabs{\OLId{latin-ordinary}{p} + \OLId{latin-ordinary}{q}}{\OLId{latin-ordinary}{p} \in \OLId{greek-variable}{alpha} \land \OLId{latin-ordinary}{q} \in \beta}\\
+	\OLId{greek-variable}{alpha} \times \beta &=
+	\Setabs{\OLId{latin-ordinary}{p} \times \OLId{latin-ordinary}{q}}{\OLMathNumeral{0} \leq \OLId{latin-ordinary}{p} \in \OLId{greek-variable}{alpha} \land \OLMathNumeral{0} \leq \OLId{latin-ordinary}{q} \in \beta} \cup \OLMathNumeral{0}_\Real & \text{إذا كان }\OLId{greek-variable}{alpha}, \beta \geq \OLMathNumeral{0}_\Real
+\end{align*}
+ولبيان سائر حالات الضرب نعرف أولًا السالب: %that $0_\Real \times \alpha = 0_\Real = \alpha \times 0_\Real$, and add:
+\begin{align*}
+	-\OLId{greek-variable}{alpha} &= \Setabs{\OLId{latin-ordinary}{p} - \OLId{latin-ordinary}{q}}{\OLId{latin-ordinary}{p} < \OLMathNumeral{0} \land \OLId{latin-ordinary}{q} \notin \OLId{greek-variable}{alpha}}
+\end{align*}
+ونجعل الطرح جمع المعكوس، فنضع
+\[
+	\OLId{greek-variable}{alpha} - \beta \defis \OLId{greek-variable}{alpha} + (\mathord{-}\beta).
+\]
+ونضع لكل قطع $\OLId{greek-variable}{alpha}$ أن
+$\OLMathNumeral{0}_\Real \times \OLId{greek-variable}{alpha} = \OLMathNumeral{0}_\Real = \OLId{greek-variable}{alpha} \times \OLMathNumeral{0}_\Real$.
+وبذلك نضع:
+\begin{align*}
+	\OLId{greek-variable}{alpha} \times \beta &\defis
+	\begin{cases}
+		\mathord{-}\OLId{greek-variable}{alpha} \times \mathord{-}\beta &\text{إذا كان }\OLId{greek-variable}{alpha} < \OLMathNumeral{0}_\Real\text{ و}\beta < \OLMathNumeral{0}_\Real\\
+		\mathord{-}(\mathord{-}\OLId{greek-variable}{alpha} \times \beta) &\text{إذا كان }\OLId{greek-variable}{alpha} < \OLMathNumeral{0}_\Real \text{ و}\beta > \OLMathNumeral{0}_\Real\\
+		\mathord{-}(\OLId{greek-variable}{alpha} \times \mathord{-}\beta) &\text{إذا كان }\OLId{greek-variable}{alpha} > \OLMathNumeral{0}_\Real \text{ و}\beta < \OLMathNumeral{0}_\Real
+	\end{cases}
+\end{align*}
+ثم نعين المعكوس الضربي لكل قطع غير صفري:
+\begin{align*}
+	\OLId{greek-variable}{alpha}^{-\OLMathNumeral{1}} &\defis
+	\begin{cases}
+		\Setabs{\OLId{latin-ordinary}{p} \in \Rat}{\OLId{latin-ordinary}{p} \leq \OLMathNumeral{0} \lor
+		(\exists \OLId{latin-ordinary}{q} \in \Rat)(\OLMathNumeral{0} < \OLId{latin-ordinary}{q} \land \OLId{latin-ordinary}{q} \notin \OLId{greek-variable}{alpha} \land
+		\OLId{latin-ordinary}{p} < \nicefrac{\OLMathNumeral{1}}{\OLId{latin-ordinary}{q}})}
+		&\text{إذا كان }\OLId{greek-variable}{alpha} > \OLMathNumeral{0}_\Real\\
+		\mathord{-}\bigl((\mathord{-}\OLId{greek-variable}{alpha})^{-\OLMathNumeral{1}}\bigr)
+		&\text{إذا كان }\OLId{greek-variable}{alpha} < \OLMathNumeral{0}_\Real.
+	\end{cases}
+\end{align*}
+ومعكوس $\mathord{-}\OLId{greek-variable}{alpha}$ في الفرع الثاني مأخوذ بالفرع الأول، إذ
+$\mathord{-}\OLId{greek-variable}{alpha}>\OLMathNumeral{0}_\Real$. وإذا كان $\beta\neq\OLMathNumeral{0}_\Real$ جعلنا
+\[
+	\OLId{greek-variable}{alpha} \div \beta \defis \OLId{greek-variable}{alpha} \times \beta^{-\OLMathNumeral{1}}.
+\]
+\textbf{تنبيه تصحيحي على الأصل.} أُثبتت حالتا الضرب في الصفر اللتان
+سقطتا من التقسيم بحسب الإشارة، ووُحّد رمز قطع الصفر مع الرمز $\OLMathNumeral{0}_\Real$
+الذي عُرّف به تضمين الأعداد النسبية. وأُظهرت كذلك تعريفات الطرح والمعكوس
+الضربي والقسمة التي لم تكن في المتن المطبوع، لئلا يطلب الملحق تحقيق
+عمليات لم يسبق تعيينها.
+ولا بد أن نتحقق من أن كل حد من هذه الحدود ينتج قطعًا دائمًا. ثم نقيم البرهان على أن القطوع بهذه العمليات تسلك السلوك المطلوب؛ وهو برهان يسير في معناه، وإن طال تفصيله. ونؤخر جميع ذلك إلى \olref[check]{sec}.
+\end{document}

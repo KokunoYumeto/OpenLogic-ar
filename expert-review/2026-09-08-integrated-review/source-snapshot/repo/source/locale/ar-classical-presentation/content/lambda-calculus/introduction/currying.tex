@@ -1,0 +1,65 @@
+% Part: lambda-calculus
+% Chapter: representability
+% Section: currying
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{rep}{cur} 
+\olsection{التكريع}
+
+مجرّد~$\lambd$، أي~$\lambd[\OLId{latin-ordinary}{x}][\OLId{latin-looped}{M}]$، يمثل دالة لا تأخذ إلا وسيطًا
+واحدًا. وقد يضيق هذا حين نطلب دالة ذات وسائط عدة.
+ومن سبيل رفع القيد أن نوسع حساب~$\lambd$ فنجيز فيه
+الأزواج والثلاثيات ونحوها، فتأخذ الدالة الثلاثية الموضع مثلًا،
+الممثلة بـ$\lambd[\OLId{latin-ordinary}{x}][\OLId{latin-looped}{M}]$، ثلاثيةً وسيطًا لها.
+غير أن \emph{التكريع} طريق أيسر إلى هذا الغرض.
+
+نوضح ذلك بمثال، فنفترض مؤقتًا وجود عملية~$+$ في
+حساب~$\lambd$. الجمع دالة ذات~$\OLMathNumeral{2}$ موضع، تأخذ وسيطين؛
+لكن مجرّد~$\lambd$ لا ينشئ إلا دالة أحادية الموضع،
+ولا يجيز التركيب تعبيرًا كـ$\lambd[(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y})][(\OLId{latin-ordinary}{x}+\OLId{latin-ordinary}{y})]$.
+فلننظر بدلًا من ذلك في الدالة الأحادية الموضع~$\OLId{latin-ordinary}{f}_\OLId{latin-ordinary}{x}(\OLId{latin-ordinary}{y})$
+التي يمثلها~$\lambd[\OLId{latin-ordinary}{y}][(\OLId{latin-ordinary}{x}+\OLId{latin-ordinary}{y})]$، فتزيد~$\OLId{latin-ordinary}{x}$ على وسيطها
+الوحيد~$\OLId{latin-ordinary}{y}$. وهذه في الحقيقة عائلة دوال، لا دالة واحدة:
+«أضف~$\OLId{latin-ordinary}{x}$» دالة لكل عدد~$\OLId{latin-ordinary}{x}$.
+ثم نعرّف دالة أحادية الموضع~$\OLId{latin-ordinary}{g}$ بالحد~$\lambd[\OLId{latin-ordinary}{x}][\OLId{latin-ordinary}{f}_\OLId{latin-ordinary}{x}]$.
+إذا أعطيناها الوسيط~$\OLId{latin-ordinary}{x}$، كانت قيمة~$\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{x})$ هي الدالة~$\OLId{latin-ordinary}{f}_\OLId{latin-ordinary}{x}$؛
+فقيمها إذن دوال. فإذا طبقنا~$\OLId{latin-ordinary}{g}$ على~$\OLId{latin-ordinary}{x}$،
+ثم طبقنا الحاصل على~$\OLId{latin-ordinary}{y}$، حصل~$(\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{x}))\OLId{latin-ordinary}{y} = \OLId{latin-ordinary}{f}_\OLId{latin-ordinary}{x}(\OLId{latin-ordinary}{y}) = \OLId{latin-ordinary}{x}+\OLId{latin-ordinary}{y}$.
+فتؤدي~$\OLId{latin-ordinary}{g}$، وهي أحادية الموضع، عمل دالة الجمع الثنائية الموضع.
+وهذا التحويل من دالة ثنائية الموضع إلى دالة أحادية الموضع
+قيمها دوال أحادية الموضع هو ما نعنيه بالتكريع.
+
+ولنأخذ الآن مثالًا من التركيب الصحيح لحساب~$\lambd$ نفسه.
+نريد تمثيل الدالة~$\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y}) = \OLId{latin-ordinary}{x}$، التي تأخذ وسيطين وتعيد
+أولهما. الحد~$\lambd[\OLId{latin-ordinary}{x}][\lambd[\OLId{latin-ordinary}{y}][\OLId{latin-ordinary}{x}]]$ يفي بذلك:
+فهو يقبل وسيطًا~$\OLId{latin-ordinary}{x}$ ويعيد الدالة~$\lambd[\OLId{latin-ordinary}{y}][\OLId{latin-ordinary}{x}]$.
+وهذه الدالة~$\lambd[\OLId{latin-ordinary}{y}][\OLId{latin-ordinary}{x}]$ تقبل وسيطًا ثانيًا~$\OLId{latin-ordinary}{y}$،
+ثم لا تعبأ به وتعيد~$\OLId{latin-ordinary}{x}$ في كل حال.
+فإذا طبقنا~$\lambd[\OLId{latin-ordinary}{x}][\lambd[\OLId{latin-ordinary}{y}][\OLId{latin-ordinary}{x}]]$ على وسيطين جرى الاختزال:
+\begin{align*}
+  (\lambd[\OLId{latin-ordinary}{x}][\lambd[\OLId{latin-ordinary}{y}][\OLId{latin-ordinary}{x}]])MN 
+  \bredone & (\lambd[\OLId{latin-ordinary}{y}][\OLId{latin-looped}{M}])\OLId{latin-looped}{N} \\
+  \bredone & \OLId{latin-looped}{M}
+\end{align*}
+
+وعلى العموم، إذا أردنا دالة ذات معلمات~$\OLId{latin-ordinary}{x}_\OLMathNumeral{1}$، \dots،~$\OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{n}$
+يحددها الحد~$\OLId{latin-looped}{N}$، كتبنا
+$\lambd[\OLId{latin-ordinary}{x}_\OLMathNumeral{1}][\lambd[\OLId{latin-ordinary}{x}_\OLMathNumeral{2}][\ldots\lambd[\OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{n}][\OLId{latin-looped}{N}]]]$.
+وبتطبيقها على~$\OLId{latin-ordinary}{n}$ من الوسائط يكون:
+\begin{multline*}
+  (\lambd[\OLId{latin-ordinary}{x}_\OLMathNumeral{1}][\lambd[\OLId{latin-ordinary}{x}_\OLMathNumeral{2}][\ldots\lambd[\OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{n}][\OLId{latin-looped}{N}]]]) \OLId{latin-looped}{M}_\OLMathNumeral{1} \dots \OLId{latin-looped}{M}_\OLId{latin-ordinary}{n} \bredone\\
+  \begin{aligned}
+  \bredone {} & (\Subst{(\lambd[\OLId{latin-ordinary}{x}_\OLMathNumeral{2}][\ldots\lambd[\OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{n}][\OLId{latin-looped}{N}]])}{\OLId{latin-looped}{M}_\OLMathNumeral{1}}{\OLId{latin-ordinary}{x}_\OLMathNumeral{1}}) \OLId{latin-looped}{M}_\OLMathNumeral{2}
+  \dots \OLId{latin-looped}{M}_\OLId{latin-ordinary}{n}\\
+   \eqs {} & (\lambd[\OLId{latin-ordinary}{x}_\OLMathNumeral{2}][\ldots\lambd[\OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{n}][\Subst{\OLId{latin-looped}{N}}{\OLId{latin-looped}{M}_\OLMathNumeral{1}}{\OLId{latin-ordinary}{x}_\OLMathNumeral{1}}]]) \OLId{latin-looped}{M}_\OLMathNumeral{2}
+            \dots \OLId{latin-looped}{M}_\OLId{latin-ordinary}{n} \\
+  \vdots & \\
+  \bredone {} &\Subst{\Subst{\OLId{latin-looped}{N}}{\OLId{latin-looped}{M}_\OLMathNumeral{1}}{\OLId{latin-ordinary}{x}_\OLMathNumeral{1}}\ldots}{\OLId{latin-looped}{M}_\OLId{latin-ordinary}{n}}{\OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{n}}
+  \end{aligned}
+\end{multline*}
+فمؤدى السطر الأخير إحلال~$\OLId{latin-looped}{M}_\OLId{latin-ordinary}{i}$ محل~$\OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{i}$ في متن تعريف
+الدالة؛ وهذا هو المطلوب من تطبيقها على وسائط متعددة.
+\end{document}

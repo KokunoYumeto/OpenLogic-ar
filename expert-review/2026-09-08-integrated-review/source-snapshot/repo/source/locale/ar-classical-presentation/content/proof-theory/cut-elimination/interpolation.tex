@@ -1,0 +1,595 @@
+% Part: proof-theory
+% Chapter: cut-elimination
+% Section: interpolation
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{cut}{itp}
+
+\olsection{في لمّة ماهارا ومبرهنة كريغ في الاستيفاء}
+
+مضمون مبرهنة الاستيفاء، وهي لوليم كريغ، أنه متى كان
+$!A \Entails !B$ وجدت~!!a{sentence}~$!C$، تسمى
+\emph{صيغة الاستيفاء}، تحقق~$!A \Entails !C$ و$!C \Entails !B$.
+ويشترط في اختيار صيغة الاستيفاء~$!C$ أن تكون كل
+!!{constant}s و!!{predicate}s الواقعة فيها واقعة في كل من~$!A$ و$!B$.
+(ونفرض أنه لا~!!{function}s.) إذ لولا هذا الشرط لأغنت~$!A$
+و$!B$ أنفسهما، على وجه لا يفيد، صيغتي استيفاء.
+
+وتصح المبرهنة في منطق الرتبة الأولى الكلاسيكي، حتى وصفت بأنها «آخر خاصية
+مهمة لمنطق الرتبة الأولى» اكتشفت. ومن منافعها تطبيقات في نظرية النماذج
+والاستدلال الآلي. وأصل الداعي إليها وأول تطبيقها من فلسفة العلم؛ إذ يبحث
+بها في الأوليات التي تقبل معها نظرية أو لا تقبل. ومنها تلزم مبرهنة بيث
+في قابلية التعريف، ومؤداها أن النظرية إذا عرفت مفهومًا ضمنًا أمكنها أن
+تعرفه تصريحًا.
+
+ولمبرهنة الاستيفاء، كسائر نتائج كثيرة في المنطق الرياضي، براهين من جهة
+نظرية النماذج وبراهين من جهة نظرية البرهان. وتمتاز الثانية بأنها لا تثبت
+وجود صيغة استيفاء فحسب، بل تعطي خوارزمية تستخرجها من~!!a{proof} صوري
+للمتتالية~$!A \Sequent !B$، مثل~!!a{proof} لها في
+\Log{G3c}.
+
+نرمز بـ~$\Lang L(!A)$ إلى مجموعة~!!{constant}s و!!{predicate}s الواقعة
+في~$!A$، ونضع~$\Lang L(\OLId{greek-variable}{Gamma}) = \bigcup \Setabs{\Lang L(!A)}{!A \in
+\OLId{greek-variable}{Gamma}}$. والفرض الجاري في هذا القسم كله أن~!!{formula}s التي نعالجها
+خالية من~!!{function}s.
+
+\begin{thm}[مبرهنة كريغ للاستيفاء]\ollabel{thm:interpolation}
+لتكن~!!{language}~$!A$ هي~$\Lang L(!A)$، ولغة~$!B$ هي
+$\Lang L(!B)$. إذا كان~$\Log{G3c} \Proves !A \Sequent !B$، وُجدت
+!!a{formula}~$!C$ في~!!{language}~$\Lang L(!C) \subseteq \Lang
+L(!A) \cap \Lang L(!B)$ بحيث~$\Log{G3c} \Proves !A \Sequent !C$
+و$\Log{G3c} \Proves !C \Sequent !B$.
+\end{thm}
+
+نثبت أولًا صورة أعم من مبرهنة الاستيفاء، لننتفع ببنية~!!{proof}s في
+\Log{G3c}. فنقسم مقدّم كل متتالية وتاليها قسمين، ونكتب~$\maeh{\OLId{greek-variable}{Gamma}_\OLMathNumeral{1}}{\OLId{greek-variable}{Gamma}_\OLMathNumeral{2}} \Sequent
+\maeh{\OLId{greek-variable}{Delta}_\OLMathNumeral{1}}{\OLId{greek-variable}{Delta}_\OLMathNumeral{2}}$ للدلالة على أن~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{1}$ و$\OLId{greek-variable}{Delta}_\OLMathNumeral{1}$
+ينتميان إلى الجزء الأول، وأن~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{2}$ و$\OLId{greek-variable}{Delta}_\OLMathNumeral{2}$ ينتميان إلى الجزء
+الثاني. ومن اللمّة الآتية تنتج مبرهنة الاستيفاء من فورها.
+
+\begin{lem}[لمّة ماهارا]\ollabel{lem:maehara} إذا كان~$\Log{G3c}
+\Proves \maeh{\OLId{greek-variable}{Gamma}_\OLMathNumeral{1}}{\OLId{greek-variable}{Gamma}_\OLMathNumeral{2}} \Sequent \maeh{\OLId{greek-variable}{Delta}_\OLMathNumeral{1}}{\OLId{greek-variable}{Delta}_\OLMathNumeral{2}}$،
+وُجدت~!!a{formula}~$!C$ في~!!{language}~$\Lang L(!C)
+\subseteq \Lang L(\OLId{greek-variable}{Gamma}_\OLMathNumeral{1},
+\OLId{greek-variable}{Delta}_\OLMathNumeral{1}) \cap \Lang L(\OLId{greek-variable}{Gamma}_\OLMathNumeral{2}, \OLId{greek-variable}{Delta}_\OLMathNumeral{2})$ بحيث~$\Log{G3c}
+\Proves \OLId{greek-variable}{Gamma}_\OLMathNumeral{1} \Sequent \OLId{greek-variable}{Delta}_\OLMathNumeral{1}, !C$ و$\Log{G3c} \Proves !C,
+\OLId{greek-variable}{Gamma}_\OLMathNumeral{2} \Sequent \OLId{greek-variable}{Delta}_\OLMathNumeral{2}$.
+\end{lem}
+
+\begin{proof}
+  لنفرض أن~$\pi \Proves \maeh{\OLId{greek-variable}{Gamma}_\OLMathNumeral{1}}{\OLId{greek-variable}{Gamma}_\OLMathNumeral{2}} \Sequent
+  \maeh{\OLId{greek-variable}{Delta}_\OLMathNumeral{1}}{\OLId{greek-variable}{Delta}_\OLMathNumeral{2}}$. نبرهن المطلوب بالاستقراء على
+  $\OLId{latin-ordinary}{n}=\pheight{\pi}$.
+
+  إذا كان~$\OLId{latin-ordinary}{n}=\OLMathNumeral{0}$، كانت~$\maeh{\OLId{greek-variable}{Gamma}_\OLMathNumeral{1}}{\OLId{greek-variable}{Gamma}_\OLMathNumeral{2}} \Sequent
+  \maeh{\OLId{greek-variable}{Delta}_\OLMathNumeral{1}}{\OLId{greek-variable}{Delta}_\OLMathNumeral{2}}$ مسلّمة، وظهرت~!!{formula} ذرية ما~$!A$
+  في كل من~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{1}, \OLId{greek-variable}{Gamma}_\OLMathNumeral{2}$ و$\OLId{greek-variable}{Delta}_\OLMathNumeral{1}, \OLId{greek-variable}{Delta}_\OLMathNumeral{2}$. ولدينا أربع
+  حالات بحسب انتماء~$!A$ إلى الجزء الأول أو الثاني في اليسار، وانتمائها
+  إلى الجزء الأول أو الثاني في اليمين.
+  \begin{enumerate}
+    \item $!A \in \OLId{greek-variable}{Gamma}_\OLMathNumeral{1}$ و$!A \in \OLId{greek-variable}{Delta}_\OLMathNumeral{1}$. نريد~$!C$ بحيث
+    تكون كل من~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{1} \Sequent \OLId{greek-variable}{Delta}_\OLMathNumeral{1}, !C$ و$!C, \OLId{greek-variable}{Gamma}_\OLMathNumeral{2}
+    \Sequent \OLId{greek-variable}{Delta}_\OLMathNumeral{2}$~!!{provable}. الأولى مسلّمة بالفعل أيًا كان
+    اختيار~$!C$، لأن~$!A$ تظهر في اليسار واليمين. والطريقة الوحيدة
+    لضمان كون~$!C, \OLId{greek-variable}{Gamma}_\OLMathNumeral{2} \Sequent \OLId{greek-variable}{Delta}_\OLMathNumeral{2}$~!!{provable} هي أن
+    نضع~$!C \ident \lfalse$.
+    \item $!A \in \OLId{greek-variable}{Gamma}_\OLMathNumeral{1}$ و$!A \in \OLId{greek-variable}{Delta}_\OLMathNumeral{2}$. عندئذ تكون
+    $\OLId{greek-variable}{Gamma}_\OLMathNumeral{1} \Sequent \OLId{greek-variable}{Delta}_\OLMathNumeral{1}, !A$ و$!A, \OLId{greek-variable}{Gamma}_\OLMathNumeral{2} \Sequent
+    \OLId{greek-variable}{Delta}_\OLMathNumeral{2}$ مسلّمتين، فيمكن اختيار~$!C \ident !A$.
+    \item $!A \in \OLId{greek-variable}{Gamma}_\OLMathNumeral{2}$ و$!A \in \OLId{greek-variable}{Delta}_\OLMathNumeral{1}$. عندئذ تكون
+    $!A, \OLId{greek-variable}{Gamma}_\OLMathNumeral{1} \Sequent \OLId{greek-variable}{Delta}_\OLMathNumeral{1}$ و$\OLId{greek-variable}{Gamma}_\OLMathNumeral{2} \Sequent \OLId{greek-variable}{Delta}_\OLMathNumeral{2},
+    !A$ مسلّمتين، غير أن~$!A$ تقع فيهما في الجهتين الخطأ، فلا تكون هي صيغة
+    الاستيفاء. غير أننا نستطيع باستعمال~$\RightR{\lnot}$ و
+    $\LeftR{\lnot}$ أن~!!{prove} المتتاليتين~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{1}
+    \Sequent \OLId{greek-variable}{Delta}_\OLMathNumeral{1}, \lnot!A$ و$\lnot !A, \OLId{greek-variable}{Gamma}_\OLMathNumeral{2} \Sequent
+    \OLId{greek-variable}{Delta}_\OLMathNumeral{2}$.
+    \item $!A \in \OLId{greek-variable}{Gamma}_\OLMathNumeral{2}$ و$!A \in \OLId{greek-variable}{Delta}_\OLMathNumeral{2}$. تمرين.
+  \end{enumerate}
+  ونترك تمرينًا حالتي كون~$\maeh{\OLId{greek-variable}{Gamma}_\OLMathNumeral{1}}{\OLId{greek-variable}{Gamma}_\OLMathNumeral{2}} \Sequent
+  \maeh{\OLId{greek-variable}{Delta}_\OLMathNumeral{1}}{\OLId{greek-variable}{Delta}_\OLMathNumeral{2}}$ مسلّمة بسبب~$\lfalse \in \OLId{greek-variable}{Gamma}_\OLMathNumeral{1}$ أو
+  $\lfalse \in \OLId{greek-variable}{Gamma}_\OLMathNumeral{2}$.
+
+  إذا كان~$\OLId{latin-ordinary}{n}>\OLMathNumeral{0}$، انتهى~$\pi$ باستدلال منطقي. وعلينا تمييز الحالات بحسب
+  القاعدة المستخدمة والجزء الذي تنتمي إليه الصيغة الرئيسة. وفي كل حالة
+  نستطيع استعمال فرض الاستقراء القائل إن اللمّة تصدق لكل~!!{proof}s
+  $\pi_\OLMathNumeral{1}$ بحيث~$\pheight{\pi_\OLMathNumeral{1}} < \OLId{latin-ordinary}{n}$، وبأي تقسيم لمتتالية نهاية
+  $\pi_\OLMathNumeral{1}$ إلى جزأين. فلنتأمل بعض الحالات المحددة.
+  \begin{enumerate}
+    \item ينتهي~$\pi$ بـ$\RightR{\lnot}$، وصيغته الرئيسة~$\lnot
+    !A$. ولدينا حالتان: بحسب انتماء~$\lnot !A$ إلى الجزء الأول أو
+    الثاني، ينتهي~$\pi$ بأحد الشكلين
+    \[
+    \AxiomC{}
+    \RightLabel{$\pi_\OLMathNumeral{1}$}
+    \Deduce$\maeh{!A, \OLId{greek-variable}{Gamma}_\OLMathNumeral{1}}{\OLId{greek-variable}{Gamma}_\OLMathNumeral{2}} \fCenter
+      \maeh{\OLId{greek-variable}{Delta}_\OLMathNumeral{1}}{\OLId{greek-variable}{Delta}_\OLMathNumeral{2}}$
+    \RightLabel{\RightR{\lnot}}
+    \UnaryInf$\maeh{\OLId{greek-variable}{Gamma}_\OLMathNumeral{1}}{\OLId{greek-variable}{Gamma}_\OLMathNumeral{2}} \fCenter
+      \maeh{\OLId{greek-variable}{Delta}_\OLMathNumeral{1}, \lnot !A}{\OLId{greek-variable}{Delta}_\OLMathNumeral{2}}$
+    \DisplayProof
+    \]
+    أو
+    \[
+    \AxiomC{}
+    \RightLabel{$\pi_\OLMathNumeral{1}$}
+    \Deduce$\maeh{\OLId{greek-variable}{Gamma}_\OLMathNumeral{1}}{!A, \OLId{greek-variable}{Gamma}_\OLMathNumeral{2}} \fCenter
+      \maeh{\OLId{greek-variable}{Delta}_\OLMathNumeral{1}}{\OLId{greek-variable}{Delta}_\OLMathNumeral{2}}$
+    \RightLabel{\RightR{\lnot}}
+    \UnaryInf$\maeh{\OLId{greek-variable}{Gamma}_\OLMathNumeral{1}}{\OLId{greek-variable}{Gamma}_\OLMathNumeral{2}} \fCenter
+      \maeh{\OLId{greek-variable}{Delta}_\OLMathNumeral{1}}{\OLId{greek-variable}{Delta}_\OLMathNumeral{2}, \lnot !A}$
+    \DisplayProof
+    \]
+    لاحظ أننا إذا وضعنا~!!{formula} الرئيسة~$\lnot !A$ في الجزء الأول،
+    وضعنا~!!{formula} الفعالة~$!A$ في الجزء الأول من المقدمة كذلك. وهذا
+    اختيار متاح لنا. وكان فرض الاستقراء سيصدق كذلك لو وضعنا الصيغة
+    الفعالة في الجزء الآخر، لكننا عندئذ لن نستطيع إيجاد صيغة استيفاء
+    (جرّب ذلك تمرينًا).
+
+    تأمل أولًا الوضع الأول، حيث تنتمي~$\lnot !A$ إلى الجزء الأول. بفرض
+    الاستقراء توجد صيغة استيفاء لمتتالية نهاية~$\pi_\OLMathNumeral{1}$، أي توجد
+    !!a{formula}~$!C_\OLMathNumeral{1}$ بحيث تكون كل من
+    \begin{align*}
+    !A, \OLId{greek-variable}{Gamma}_\OLMathNumeral{1} & \Sequent \OLId{greek-variable}{Delta}_\OLMathNumeral{1}, !C_\OLMathNumeral{1} &&\text{و} &
+    !C_\OLMathNumeral{1}, \OLId{greek-variable}{Gamma}_\OLMathNumeral{2} & \Sequent \OLId{greek-variable}{Delta}_\OLMathNumeral{2}
+    \intertext{قابلة للبرهنة. وما نحتاج إليه~!!a{formula}~$!C$ بحيث
+    تكون المتتاليتان الآتيتان~!!{provable}:}
+    \OLId{greek-variable}{Gamma}_\OLMathNumeral{1} & \Sequent \OLId{greek-variable}{Delta}_\OLMathNumeral{1}, \lnot !A, !C &&\text{و} &
+    !C, \OLId{greek-variable}{Gamma}_\OLMathNumeral{2} & \Sequent \OLId{greek-variable}{Delta}_\OLMathNumeral{2}
+    \end{align*}
+    ومن الواضح أنه يكفينا وضع~$!C \ident !C_\OLMathNumeral{1}$: فقد أخبرنا فرض
+    الاستقراء أن المتتالية اليمنى~!!{provable}، وتنتج المتتالية اليسرى
+    من المتتالية التي أعطاها فرض الاستقراء بتطبيق~$\RightR{\lnot}$.
+    ويعطينا فرض الاستقراء كذلك~$\Lang L(!C_\OLMathNumeral{1}) \subseteq \Lang L(!A,
+    \OLId{greek-variable}{Gamma}_\OLMathNumeral{1}, \OLId{greek-variable}{Delta}_\OLMathNumeral{1}) \cap \Lang L(\OLId{greek-variable}{Gamma}_\OLMathNumeral{2}, \OLId{greek-variable}{Delta}_\OLMathNumeral{2})$. وبما أن
+    $\Lang L(\lnot !A) = \Lang L(!A)$ و$\Lang L(!C) = \Lang L(!C_\OLMathNumeral{1})$،
+    يكون~$\Lang L(!C_\OLMathNumeral{1}) \subseteq \Lang L(\OLId{greek-variable}{Gamma}_\OLMathNumeral{1}, \OLId{greek-variable}{Delta}_\OLMathNumeral{1},
+    \lnot !A) \cap \Lang L(\OLId{greek-variable}{Gamma}_\OLMathNumeral{2}, \OLId{greek-variable}{Delta}_\OLMathNumeral{2})$.
+
+    أما في الوضع الثاني فالحال مختلفة قليلًا، إذ تنتمي~$\lnot !A$ إلى
+    الجزء الثاني. نضع~!!{formula} الفعالة في المقدمة في الجزء الثاني
+    أيضًا، ونطبق فرض الاستقراء فنحصل على
+    \begin{align*}
+    \OLId{greek-variable}{Gamma}_\OLMathNumeral{1} & \Sequent \OLId{greek-variable}{Delta}_\OLMathNumeral{1}, !C_\OLMathNumeral{1} &&\text{و} &
+    !C_\OLMathNumeral{1}, !A, \OLId{greek-variable}{Gamma}_\OLMathNumeral{2} & \Sequent \OLId{greek-variable}{Delta}_\OLMathNumeral{2}
+    \intertext{وهما قابلتان للبرهنة. وإذا طبقنا قاعدة~$\RightR{\lnot}$
+    مرة أخرى على الثانية، حصلنا على~!!{proof}s لـ}
+    \OLId{greek-variable}{Gamma}_\OLMathNumeral{1} & \Sequent \OLId{greek-variable}{Delta}_\OLMathNumeral{1}, !C_\OLMathNumeral{1} &&\text{و} &
+    !C_\OLMathNumeral{1}, \OLId{greek-variable}{Gamma}_\OLMathNumeral{2} & \Sequent \OLId{greek-variable}{Delta}_\OLMathNumeral{2}, \lnot !A
+    \end{align*}
+    وهاتان بالضبط المتتاليتان اللتان نريد أن تكونا~!!{provable} إذا كانت
+    $!C_\OLMathNumeral{1}$ صيغة استيفاء؛ فنضع مرة أخرى~$!C \ident !C_\OLMathNumeral{1}$. وكما سبق يكون
+    $\Lang L(!C_\OLMathNumeral{1}) \subseteq \Lang L(\OLId{greek-variable}{Gamma}_\OLMathNumeral{1}, \OLId{greek-variable}{Delta}_\OLMathNumeral{1}) \cap
+    \Lang L(\OLId{greek-variable}{Gamma}_\OLMathNumeral{2}, \OLId{greek-variable}{Delta}_\OLMathNumeral{2}, \lnot !A)$.
+
+    \item ينتهي~$\pi$ بـ$\RightR{\lif}$، وصيغته الرئيسة
+    !!{formula}~$!A
+    \lif !B$. ولدينا حالتان أيضًا، بحسب انتماء~$!A \lif !B$ إلى الجزء
+    الأول أو الثاني. ينتهي~!!{proof}~$\pi$ بأحد الشكلين
+    \[
+    \AxiomC{}
+    \RightLabel{$\pi_\OLMathNumeral{1}$}
+    \Deduce$\maeh{!A, \OLId{greek-variable}{Gamma}_\OLMathNumeral{1}}{\OLId{greek-variable}{Gamma}_\OLMathNumeral{2}} \fCenter
+      \maeh{\OLId{greek-variable}{Delta}_\OLMathNumeral{1}, !B}{\OLId{greek-variable}{Delta}_\OLMathNumeral{2}}$
+    \RightLabel{\RightR{\lif}}
+    \UnaryInf$\maeh{\OLId{greek-variable}{Gamma}_\OLMathNumeral{1}}{\OLId{greek-variable}{Gamma}_\OLMathNumeral{2}} \fCenter
+      \maeh{\OLId{greek-variable}{Delta}_\OLMathNumeral{1}, !A \lif !B}{\OLId{greek-variable}{Delta}_\OLMathNumeral{2}}$
+    \DisplayProof
+    \]
+    أو
+    \[
+    \AxiomC{}
+    \RightLabel{$\pi_\OLMathNumeral{1}$}
+    \Deduce$\maeh{\OLId{greek-variable}{Gamma}_\OLMathNumeral{1}}{!A, \OLId{greek-variable}{Gamma}_\OLMathNumeral{2}} \fCenter
+      \maeh{\OLId{greek-variable}{Delta}_\OLMathNumeral{1}}{\OLId{greek-variable}{Delta}_\OLMathNumeral{2}, !B}$
+    \RightLabel{\RightR{\lif}}
+    \UnaryInf$\maeh{\OLId{greek-variable}{Gamma}_\OLMathNumeral{1}}{\OLId{greek-variable}{Gamma}_\OLMathNumeral{2}} \fCenter
+      \maeh{\OLId{greek-variable}{Delta}_\OLMathNumeral{1}}{\OLId{greek-variable}{Delta}_\OLMathNumeral{2}, !A \lif !B}$
+    \DisplayProof
+    \]
+    وقد وضعنا مرة أخرى~!!{formula}s الفعالة في الجزء نفسه من المقدمة
+    الذي تنتمي إليه~!!{formula} الرئيسة في النتيجة. وفي الوضع الأول
+    نطبق فرض الاستقراء فنحصل على~!!{proof}s لـ
+    \begin{align*}
+    !A, \OLId{greek-variable}{Gamma}_\OLMathNumeral{1} & \Sequent \OLId{greek-variable}{Delta}_\OLMathNumeral{1}, !B, !C_\OLMathNumeral{1} &&\text{و} & !C_\OLMathNumeral{1}, \OLId{greek-variable}{Gamma}_\OLMathNumeral{2} & \Sequent \OLId{greek-variable}{Delta}_\OLMathNumeral{2}
+    \intertext{والمتتالية اليسرى مقدمة مناسبة لـ$\RightR{\lif}$؛ ومن
+    ثم تكون المتتاليتان الآتيتان~!!{provable}:}
+    \OLId{greek-variable}{Gamma}_\OLMathNumeral{1} & \Sequent \OLId{greek-variable}{Delta}_\OLMathNumeral{1}, !A \lif !B, !C_\OLMathNumeral{1} &&\text{و} & !C_\OLMathNumeral{1}, \OLId{greek-variable}{Gamma}_\OLMathNumeral{2} & \Sequent \OLId{greek-variable}{Delta}_\OLMathNumeral{2}
+    \end{align*}
+    ومؤدى ذلك أن~$!C_\OLMathNumeral{1}$ صيغة استيفاء لمتتالية نهاية~$\pi$ أيضًا،
+    فيمكن أن نضع~$!C \ident !C_\OLMathNumeral{1}$ مرة أخرى.
+
+    وتعالج الحالة الأخرى على هذا القياس.
+
+    \item ينتهي~$\pi$ بـ$\LeftR{\lif}$، وصيغته الرئيسة
+    !!{formula}~$!A
+    \lif !B$. إذا انتمت~$!A \lif !B$ إلى الجزء الأول، انتهى
+    !!{proof}~$\pi$ بالشكل
+    \[
+    \AxiomC{}
+    \RightLabel{$\pi_\OLMathNumeral{1}$}
+    \Deduce$\maeh{\OLId{greek-variable}{Gamma}_\OLMathNumeral{1}}{\OLId{greek-variable}{Gamma}_\OLMathNumeral{2}} \fCenter
+      \maeh{\OLId{greek-variable}{Delta}_\OLMathNumeral{1}, !A}{\OLId{greek-variable}{Delta}_\OLMathNumeral{2}}$
+    \AxiomC{}
+    \RightLabel{$\pi_\OLMathNumeral{2}$}
+    \Deduce$\maeh{!B, \OLId{greek-variable}{Gamma}_\OLMathNumeral{1}}{\OLId{greek-variable}{Gamma}_\OLMathNumeral{2}} \fCenter
+      \maeh{\OLId{greek-variable}{Delta}_\OLMathNumeral{1}}{\OLId{greek-variable}{Delta}_\OLMathNumeral{2}}$
+    \RightLabel{\LeftR{\lif}}
+    \BinaryInf$\maeh{!A \lif !B, \OLId{greek-variable}{Gamma}_\OLMathNumeral{1}}{\OLId{greek-variable}{Gamma}_\OLMathNumeral{2}} \fCenter
+      \maeh{\OLId{greek-variable}{Delta}_\OLMathNumeral{1}}{\OLId{greek-variable}{Delta}_\OLMathNumeral{2}}$
+    \DisplayProof
+    \]
+    ويعطينا فرض الاستقراء الآن أربع متتاليات~!!{provable}: اثنتان لصيغة
+    الاستيفاء~$!C_\OLMathNumeral{1}$ للمقدمة اليسرى، واثنتان لصيغة الاستيفاء~$!C_\OLMathNumeral{2}$
+    للمقدمة الثانية:
+    \begin{align*}
+    \OLId{greek-variable}{Gamma}_\OLMathNumeral{1} & \Sequent \OLId{greek-variable}{Delta}_\OLMathNumeral{1}, !A, !C_\OLMathNumeral{1} &&\text{(1)} &
+    !C_\OLMathNumeral{1}, \OLId{greek-variable}{Gamma}_\OLMathNumeral{2} & \Sequent \OLId{greek-variable}{Delta}_\OLMathNumeral{2} && \text{(2)}\\
+    !B, \OLId{greek-variable}{Gamma}_\OLMathNumeral{1} & \Sequent \OLId{greek-variable}{Delta}_\OLMathNumeral{1}, !C_\OLMathNumeral{2} &&\text{(3)} &
+    !C_\OLMathNumeral{2}, \OLId{greek-variable}{Gamma}_\OLMathNumeral{2} & \Sequent \OLId{greek-variable}{Delta}_\OLMathNumeral{2} && \text{(4)}
+    \end{align*}
+    ويمكن أن تكون المتتاليتان (\OLClassicalDigits{1}) و(\OLClassicalDigits{3}) مقدمتي~$\LeftR{\lif}$ إذا طبقنا
+    الإضعاف، فأضفنا~$!C_\OLMathNumeral{2}$ إلى يمين (\OLClassicalDigits{1}) و$!C_\OLMathNumeral{1}$ إلى يمين (\OLClassicalDigits{3}):
+    \[
+    \AxiomC{}
+    \Deduce$\OLId{greek-variable}{Gamma}_\OLMathNumeral{1} \fCenter \OLId{greek-variable}{Delta}_\OLMathNumeral{1}, !A, !C_\OLMathNumeral{1}, !C_\OLMathNumeral{2}$
+    \AxiomC{}
+    \Deduce$!B, \OLId{greek-variable}{Gamma}_\OLMathNumeral{1} \fCenter \OLId{greek-variable}{Delta}_\OLMathNumeral{1}, !C_\OLMathNumeral{1}, !C_\OLMathNumeral{2}$
+    \RightLabel{\LeftR{\lif}}
+    \BinaryInf$!A \lif !B, \OLId{greek-variable}{Gamma}_\OLMathNumeral{1} \fCenter \OLId{greek-variable}{Delta}_\OLMathNumeral{1}, !C_\OLMathNumeral{1}, !C_\OLMathNumeral{2}$
+    \DisplayProof
+    \]
+    وبتطبيق~$\RightR{\lor}$ ينتج لنا المتتالية
+    \[
+    !A \lif !B, \OLId{greek-variable}{Gamma}_\OLMathNumeral{1} \fCenter \OLId{greek-variable}{Delta}_\OLMathNumeral{1}, !C_\OLMathNumeral{1} \lor !C_\OLMathNumeral{2}.
+    \]
+    وهذا يرجح أن تكون~$!C_\OLMathNumeral{1} \lor !C_\OLMathNumeral{2}$ صيغة الاستيفاء عندئذ.
+    وهي كذلك بالفعل، إذ نستطيع أن~!!{prove} المتتالية الأخرى المطلوبة
+    انطلاقًا من المتتاليتين الباقيتين (\OLClassicalDigits{2}) و(\OLClassicalDigits{4}):
+    \[
+    \AxiomC{}
+    \Deduce$!C_\OLMathNumeral{1}, \OLId{greek-variable}{Gamma}_\OLMathNumeral{2} \fCenter \OLId{greek-variable}{Delta}_\OLMathNumeral{2}$
+    \AxiomC{}
+    \Deduce$!C_\OLMathNumeral{2}, \OLId{greek-variable}{Gamma}_\OLMathNumeral{2} \fCenter \OLId{greek-variable}{Delta}_\OLMathNumeral{2}$
+    \RightLabel{\LeftR{\lor}}
+    \BinaryInf$!C_\OLMathNumeral{1} \lor !C_\OLMathNumeral{2}, \OLId{greek-variable}{Gamma}_\OLMathNumeral{2} \fCenter \OLId{greek-variable}{Delta}_\OLMathNumeral{2}$
+    \DisplayProof
+    \]
+    يبقى التحقق من أن~$!C_\OLMathNumeral{1} \lor !C_\OLMathNumeral{2}$ تنتمي إلى اللغة الصحيحة. يعطينا
+    فرض الاستقراء
+    \begin{align*}
+    \Lang L(!C_\OLMathNumeral{1}) & \subseteq
+    \Lang L(\OLId{greek-variable}{Gamma}_\OLMathNumeral{1}, \OLId{greek-variable}{Delta}_\OLMathNumeral{1}, !A) \cap \Lang L(\OLId{greek-variable}{Gamma}_\OLMathNumeral{2}, \OLId{greek-variable}{Delta}_\OLMathNumeral{2}) &\text{و}\\
+    \Lang L(!C_\OLMathNumeral{2}) & \subseteq
+    \Lang L(!B, \OLId{greek-variable}{Gamma}_\OLMathNumeral{1}, \OLId{greek-variable}{Delta}_\OLMathNumeral{1}) \cap \Lang L(\OLId{greek-variable}{Gamma}_\OLMathNumeral{2}, \OLId{greek-variable}{Delta}_\OLMathNumeral{2})
+    \intertext{ولما كان}
+    \Lang L(!A) & \subseteq \Lang L(!A \lif !B) &\text{و}\\
+    \Lang L(!B) & \subseteq \Lang L(!A \lif !B)
+    \intertext{كان كل من}
+    \Lang L(!C_\OLMathNumeral{1}) & \subseteq
+    \Lang L(\OLId{greek-variable}{Gamma}_\OLMathNumeral{1}, \OLId{greek-variable}{Delta}_\OLMathNumeral{1}, !A \lif !B) \cap \Lang L(\OLId{greek-variable}{Gamma}_\OLMathNumeral{2}, \OLId{greek-variable}{Delta}_\OLMathNumeral{2}) &\text{و}\\
+    \Lang L(!C_\OLMathNumeral{2}) & \subseteq
+    \Lang L(\OLId{greek-variable}{Gamma}_\OLMathNumeral{1}, \OLId{greek-variable}{Delta}_\OLMathNumeral{1}, !A \lif !B) \cap \Lang L(\OLId{greek-variable}{Gamma}_\OLMathNumeral{2}, \OLId{greek-variable}{Delta}_\OLMathNumeral{2}).
+    \intertext{وبالتالي، لما كان~$\Lang L (!C_1 \lor !C_2) = {}$}
+    \Lang L(!C_\OLMathNumeral{1}) \cup \Lang L(!C_\OLMathNumeral{2}) & \subseteq
+    \Lang L(\OLId{greek-variable}{Gamma}_\OLMathNumeral{1}, \OLId{greek-variable}{Delta}_\OLMathNumeral{1}, !A \lif !B) \cap \Lang L(\OLId{greek-variable}{Gamma}_\OLMathNumeral{2}, \OLId{greek-variable}{Delta}_\OLMathNumeral{2}),
+    \end{align*}
+    وهو المطلوب.
+
+    وإذا انتمت~$!A \lif !B$ إلى الجزء الثاني اختلف الوضع، لكنه يعالج
+    على هذا القياس. ويعطينا فرض الاستقراء مرة أخرى أربع متتاليات
+    !!{provable}:
+    \begin{align*}
+    \OLId{greek-variable}{Gamma}_\OLMathNumeral{1} & \Sequent \OLId{greek-variable}{Delta}_\OLMathNumeral{1}, !C_\OLMathNumeral{1} &&\text{(1)} &
+    !C_\OLMathNumeral{1}, \OLId{greek-variable}{Gamma}_\OLMathNumeral{2} & \Sequent \OLId{greek-variable}{Delta}_\OLMathNumeral{2}, !A && \text{(2)}\\
+    \OLId{greek-variable}{Gamma}_\OLMathNumeral{1} & \Sequent \OLId{greek-variable}{Delta}_\OLMathNumeral{1}, !C_\OLMathNumeral{2} &&\text{(3)} &
+    !C_\OLMathNumeral{2}, !B, \OLId{greek-variable}{Gamma}_\OLMathNumeral{2} & \Sequent \OLId{greek-variable}{Delta}_\OLMathNumeral{2} && \text{(4)}
+    \end{align*}
+    والآن تكون المتتاليتان (\OLClassicalDigits{2}) و(\OLClassicalDigits{4})، بعد إضافة بعض~!!{formula}s
+    بالإضعاف، مقدمتي~$\LeftR{\lif}$:
+    \[
+    \AxiomC{}
+    \Deduce$!C_\OLMathNumeral{1}, !C_\OLMathNumeral{2}, \OLId{greek-variable}{Gamma}_\OLMathNumeral{2} \fCenter \OLId{greek-variable}{Delta}_\OLMathNumeral{2}, !A$
+    \AxiomC{}
+    \Deduce$!B, !C_\OLMathNumeral{1}, !C_\OLMathNumeral{2}, \OLId{greek-variable}{Gamma}_\OLMathNumeral{2} \fCenter \OLId{greek-variable}{Delta}_\OLMathNumeral{2}$
+    \RightLabel{\LeftR{\lif}}
+    \BinaryInf$!A \lif !B, !C_\OLMathNumeral{1}, !C_\OLMathNumeral{2}, \OLId{greek-variable}{Gamma}_\OLMathNumeral{2} \fCenter \OLId{greek-variable}{Delta}_\OLMathNumeral{2}$
+    \DisplayProof
+    \]
+    ونريد مرة أخرى تحويل هذه إلى متتالية فيها~!!{formula} واحدة مبنية من
+    $!C_\OLMathNumeral{1}$ و$!C_\OLMathNumeral{2}$، لكننا نحتاج إليها هذه المرة في المقدّم لأننا نتعامل
+    الآن مع الجزء الثاني. ويؤدي تطبيق~$\LeftR{\land}$ الغرض؛ فينبغي أن
+    نختار~$!C \ident (!C_\OLMathNumeral{1} \land !C_\OLMathNumeral{2})$ صيغة للاستيفاء. ومن حسن الحظ
+    أننا نستطيع استعمال المتتاليتين الباقيتين (\OLClassicalDigits{1}) و(\OLClassicalDigits{3}) كي~!!{prove}
+    المتتالية المقابلة للجزء الآخر:
+    \[
+    \AxiomC{}
+    \Deduce$\OLId{greek-variable}{Gamma}_\OLMathNumeral{1} \fCenter \OLId{greek-variable}{Delta}_\OLMathNumeral{1}, !C_\OLMathNumeral{1}$
+    \AxiomC{}
+    \Deduce$\OLId{greek-variable}{Gamma}_\OLMathNumeral{1} \fCenter \OLId{greek-variable}{Delta}_\OLMathNumeral{1}, !C_\OLMathNumeral{2}$
+    \RightLabel{\RightR{\land}}
+    \BinaryInf$\OLId{greek-variable}{Gamma}_\OLMathNumeral{1} \fCenter \OLId{greek-variable}{Delta}_\OLMathNumeral{1}, !C_\OLMathNumeral{1} \land !C_\OLMathNumeral{2}$
+    \DisplayProof
+    \]
+    وكما سبق، يكون~$\Lang L(!C_\OLMathNumeral{1} \land !C_\OLMathNumeral{2}) \subseteq \Lang
+    L(\OLId{greek-variable}{Gamma}_\OLMathNumeral{1}, \OLId{greek-variable}{Delta}_\OLMathNumeral{1}) \cap \Lang L(\OLId{greek-variable}{Gamma}_\OLMathNumeral{2}, \OLId{greek-variable}{Delta}_\OLMathNumeral{2}, !A \lif
+    !B)$.
+
+    \item ينتهي~$\pi$ بـ$\RightR{\lforall}$، وصيغته الرئيسة
+    !!{formula}~$\lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]$:
+    \[
+    \AxiomC{}
+    \RightLabel{$\pi_\OLMathNumeral{1}$}
+    \Deduce$\maeh{\OLId{greek-variable}{Gamma}_\OLMathNumeral{1}}{\OLId{greek-variable}{Gamma}_\OLMathNumeral{2}} \fCenter
+    \maeh{\OLId{greek-variable}{Delta}_\OLMathNumeral{1}, !A(\OLId{latin-ordinary}{c})}{\OLId{greek-variable}{Delta}_\OLMathNumeral{2}}$
+    \RightLabel{\RightR{\lforall}}
+    \UnaryInf$\maeh{\OLId{greek-variable}{Gamma}_\OLMathNumeral{1}}{\OLId{greek-variable}{Gamma}_\OLMathNumeral{2}} \fCenter
+      \maeh{\OLId{greek-variable}{Delta}_\OLMathNumeral{1}, \lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]}{\OLId{greek-variable}{Delta}_\OLMathNumeral{2}}$
+    \DisplayProof
+    \]
+    أو
+    \[
+    \AxiomC{}
+    \RightLabel{$\pi_\OLMathNumeral{1}$}
+    \Deduce$\maeh{\OLId{greek-variable}{Gamma}_\OLMathNumeral{1}}{\OLId{greek-variable}{Gamma}_\OLMathNumeral{2}} \fCenter
+      \maeh{\OLId{greek-variable}{Delta}_\OLMathNumeral{1}}{\OLId{greek-variable}{Delta}_\OLMathNumeral{2}, !A(\OLId{latin-ordinary}{c})}$
+    \RightLabel{\RightR{\lforall}}
+    \UnaryInf$\maeh{\OLId{greek-variable}{Gamma}_\OLMathNumeral{1}}{\OLId{greek-variable}{Gamma}_\OLMathNumeral{2}} \fCenter
+      \maeh{\OLId{greek-variable}{Delta}_\OLMathNumeral{1}}{\OLId{greek-variable}{Delta}_\OLMathNumeral{2}, \lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]}$
+    \DisplayProof
+    \]
+    في الوضع الأول يعطينا فرض الاستقراء~!!{proof}s لـ
+    $\OLId{greek-variable}{Gamma}_\OLMathNumeral{1} \Sequent \OLId{greek-variable}{Delta}_\OLMathNumeral{1}, !A(\OLId{latin-ordinary}{c}), !C_\OLMathNumeral{1}$ و$!C_\OLMathNumeral{1}, \OLId{greek-variable}{Gamma}_\OLMathNumeral{2}
+    \Sequent \OLId{greek-variable}{Delta}_\OLMathNumeral{2}$. ويمكن تطبيق~$\RightR{\lforall}$ على الأولى
+    فنحصل على~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{1} \Sequent \OLId{greek-variable}{Delta}_\OLMathNumeral{1}, \lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})], !C_\OLMathNumeral{1}$.
+    (شرط المتغير المميز متحقق لأنه كان متحققًا أصلًا في قاعدة
+    $\RightR{\lforall}$ في نهاية~$\pi$.) وعلى هذا تكون~$!C_\OLMathNumeral{1}$ صيغة
+    استيفاء إذا تحقق الشرط~$\Lang L(!C_\OLMathNumeral{1}) \subseteq \Lang L(\OLId{greek-variable}{Gamma}_\OLMathNumeral{1},
+    \OLId{greek-variable}{Delta}_\OLMathNumeral{1}, \lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]) \cap \Lang L(\OLId{greek-variable}{Gamma}_\OLMathNumeral{2}, \OLId{greek-variable}{Delta}_\OLMathNumeral{2})$.
+    ويعطينا فرض الاستقراء~$\Lang L(!C_\OLMathNumeral{1}) \subseteq \Lang L(\OLId{greek-variable}{Gamma}_\OLMathNumeral{1},
+    \OLId{greek-variable}{Delta}_\OLMathNumeral{1}, !A(\OLId{latin-ordinary}{c})) \cap \Lang L(\OLId{greek-variable}{Gamma}_\OLMathNumeral{2}, \OLId{greek-variable}{Delta}_\OLMathNumeral{2})$. فلذلك لا يبقى
+    إلا القلق بشأن~$\OLId{latin-ordinary}{c}$: هل يجوز أن تظهر في~$!C_\OLMathNumeral{1}$؟ لا يمكن. فلو ظهرت
+    فيها لكان كل من~$\OLId{latin-ordinary}{c} \in \Lang L(\OLId{greek-variable}{Gamma}_\OLMathNumeral{1}, \OLId{greek-variable}{Delta}_\OLMathNumeral{1}, !A(\OLId{latin-ordinary}{c}))$، وهو
+    صحيح، و$\OLId{latin-ordinary}{c} \in \Lang L(\OLId{greek-variable}{Gamma}_\OLMathNumeral{2}, \OLId{greek-variable}{Delta}_\OLMathNumeral{2})$. غير أن~$\OLId{latin-ordinary}{c}$ كانت عندئذ
+    ستظهر في نتيجة استدلال~$\RightR{\lforall}$ في~$\pi$، خلافًا لشرط
+    المتغير المميز.
+
+    والحالة الأخرى مماثلة.
+
+    \item ينتهي~$\pi$ بـ$\RightR{\lexists}$، وصيغته الرئيسة
+    !!{formula}~$\lexists[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]$. ولدينا وضعان مرة أخرى. نتأمل
+    الوضع الذي تنتمي فيه~$\lexists[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]$ إلى الجزء الأول، ونترك
+    الآخر تمرينًا.
+
+    في الوضع الأول ينتهي~$\pi$ بالشكل
+    \[
+    \AxiomC{}
+    \RightLabel{$\pi_\OLMathNumeral{1}$}
+    \Deduce$\maeh{\OLId{greek-variable}{Gamma}_\OLMathNumeral{1}}{\OLId{greek-variable}{Gamma}_\OLMathNumeral{2}} \fCenter
+      \maeh{\OLId{greek-variable}{Delta}_\OLMathNumeral{1}, \lexists[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})], !A(\OLId{latin-ordinary}{t})}{\OLId{greek-variable}{Delta}_\OLMathNumeral{2}}$
+    \RightLabel{\RightR{\lexists}}
+    \UnaryInf$\maeh{\OLId{greek-variable}{Gamma}_\OLMathNumeral{1}}{\OLId{greek-variable}{Gamma}_\OLMathNumeral{2}} \fCenter
+      \maeh{\OLId{greek-variable}{Delta}_\OLMathNumeral{1}, \lexists[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]}{\OLId{greek-variable}{Delta}_\OLMathNumeral{2}}$
+    \DisplayProof
+    \]
+    ويعطينا فرض الاستقراء~!!{proof}s لـ$\OLId{greek-variable}{Gamma}_\OLMathNumeral{1} \Sequent
+    \OLId{greek-variable}{Delta}_\OLMathNumeral{1}, \lexists[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})], !A(\OLId{latin-ordinary}{t}), !C_\OLMathNumeral{1}$ و$!C_\OLMathNumeral{1}, \OLId{greek-variable}{Gamma}_\OLMathNumeral{2}
+    \Sequent \OLId{greek-variable}{Delta}_\OLMathNumeral{2}$. ويمكن تطبيق~$\RightR{\lexists}$ على الأولى
+    فنحصل على~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{1} \Sequent \OLId{greek-variable}{Delta}_\OLMathNumeral{1}, \lexists[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})], !C_\OLMathNumeral{1}$.
+    وعلى هذا تكون~$!C_\OLMathNumeral{1}$ صيغة استيفاء مرة أخرى إذا تحقق الشرط
+    $\Lang L(!C_\OLMathNumeral{1}) \subseteq \Lang L(\OLId{greek-variable}{Gamma}_\OLMathNumeral{1}, \OLId{greek-variable}{Delta}_\OLMathNumeral{1},
+    \lexists[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]) \cap \Lang L(\OLId{greek-variable}{Gamma}_\OLMathNumeral{2}, \OLId{greek-variable}{Delta}_\OLMathNumeral{2})$. أما فرض
+    الاستقراء فيعطينا~$\Lang L(!C_\OLMathNumeral{1}) \subseteq \Lang L(\OLId{greek-variable}{Gamma}_\OLMathNumeral{1},
+    \OLId{greek-variable}{Delta}_\OLMathNumeral{1}, \lexists[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})], !A(\OLId{latin-ordinary}{t})) \cap \Lang L(\OLId{greek-variable}{Gamma}_\OLMathNumeral{2},
+    \OLId{greek-variable}{Delta}_\OLMathNumeral{2})$.
+
+    ولأننا افترضنا عدم وجود~!!{function}s، فلا يجوز أن يكون الحد~$\OLId{latin-ordinary}{t}$
+    إلا متغيرًا أو~!!a{constant}. إذا كان متغيرًا فلا يضيف رمزًا إلى
+    اللغة، فنأخذ~$!C_\OLMathNumeral{1}$ صيغة للاستيفاء. وإذا كان ثابتًا، ولنكتب
+    $\OLId{latin-ordinary}{t} \ident \OLId{latin-ordinary}{b}$، فلا مشكلة كذلك إذا كان~$\OLId{latin-ordinary}{b} \notin \Lang L(!C_\OLMathNumeral{1})$ أو
+    كان~$\OLId{latin-ordinary}{b} \in \Lang L(\OLId{greek-variable}{Gamma}_\OLMathNumeral{1}, \OLId{greek-variable}{Delta}_\OLMathNumeral{1},
+    \lexists[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]) \cap \Lang L(\OLId{greek-variable}{Gamma}_\OLMathNumeral{2}, \OLId{greek-variable}{Delta}_\OLMathNumeral{2})$؛ فنأخذ
+    $!C_\OLMathNumeral{1}$ صيغة للاستيفاء. لا نحتاج إلى التجريد إلا إذا كان~$\OLId{latin-ordinary}{b} \in
+    \Lang L(!C_\OLMathNumeral{1})$ ولم يكن~$\OLId{latin-ordinary}{b}$ مشتركًا بين لغتي الجزأين. عندئذ نستبدل
+    كل ظهور لـ$\OLId{latin-ordinary}{b}$ في~$!C_\OLMathNumeral{1}$ بـ!!a{variable}~$\OLId{latin-ordinary}{y}$، فنكتب
+    $!C_\OLMathNumeral{1} \ident \Subst{!C_\OLMathNumeral{1}'}{\OLId{latin-ordinary}{b}}{\OLId{latin-ordinary}{y}}$، حيث لا تحتوي~$!C_\OLMathNumeral{1}'$ على~$\OLId{latin-ordinary}{b}$.
+    وإضافة إلى ذلك، إما أن يكون~$\OLId{latin-ordinary}{b} \notin \Lang L(\OLId{greek-variable}{Gamma}_\OLMathNumeral{1}, \OLId{greek-variable}{Delta}_\OLMathNumeral{1},
+    \lexists[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})])$ أو~$\OLId{latin-ordinary}{b} \notin \Lang L(\OLId{greek-variable}{Gamma}_\OLMathNumeral{2}, \OLId{greek-variable}{Delta}_\OLMathNumeral{2})$.
+    وفي الحالتين نأخذ، على الترتيب،~$!C \ident
+    \lforall[\OLId{latin-ordinary}{y}][!C_\OLMathNumeral{1}'(\OLId{latin-ordinary}{y})]$ أو~$!C \ident \lexists[\OLId{latin-ordinary}{y}][!C_\OLMathNumeral{1}'(\OLId{latin-ordinary}{y})]$.
+    ففي الحالة الأولى لدينا:
+    \[
+    \AxiomC{}
+    \Deduce$\OLId{greek-variable}{Gamma}_\OLMathNumeral{1} \fCenter
+      \OLId{greek-variable}{Delta}_\OLMathNumeral{1}, \lexists[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})], !A(\OLId{latin-ordinary}{b}), !C_\OLMathNumeral{1}'(\OLId{latin-ordinary}{b})$
+    \RightLabel{\RightR{\lexists}}
+    \UnaryInf$\OLId{greek-variable}{Gamma}_\OLMathNumeral{1} \fCenter \OLId{greek-variable}{Delta}_\OLMathNumeral{1}, \lexists[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})], !C_\OLMathNumeral{1}'(\OLId{latin-ordinary}{b})$
+    \RightLabel{\RightR{\lforall}}
+    \UnaryInf$\OLId{greek-variable}{Gamma}_\OLMathNumeral{1} \fCenter
+      \OLId{greek-variable}{Delta}_\OLMathNumeral{1}, \lexists[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})], \lforall[\OLId{latin-ordinary}{y}][!C_\OLMathNumeral{1}'(\OLId{latin-ordinary}{y})]$
+    \DisplayProof
+    \]
+    و
+    \[
+    \AxiomC{}
+    \Deduce$!C_\OLMathNumeral{1}'(\OLId{latin-ordinary}{b}), \lforall[\OLId{latin-ordinary}{y}][!C_\OLMathNumeral{1}'(\OLId{latin-ordinary}{y})], \OLId{greek-variable}{Gamma}_\OLMathNumeral{2} \fCenter \OLId{greek-variable}{Delta}_\OLMathNumeral{2}$
+    \RightLabel{\LeftR{\lforall}}
+    \UnaryInf$\lforall[\OLId{latin-ordinary}{y}][!C_\OLMathNumeral{1}'(\OLId{latin-ordinary}{y})], \OLId{greek-variable}{Gamma}_\OLMathNumeral{2} \fCenter \OLId{greek-variable}{Delta}_\OLMathNumeral{2}$
+    \DisplayProof
+    \]
+    وتأتي~!!{proof}s المتتاليتين العلويتين من فرض الاستقراء (وفي
+    الثانية نطبق مقبولية الإضعاف مع~$\lforall[\OLId{latin-ordinary}{y}][!C_\OLMathNumeral{1}'(\OLId{latin-ordinary}{y})]$ في
+    المقدّم). ويتحقق شرط المتغير المميز في~$\RightR{\lforall}$ في
+    !!{proof} الأول لأن~$\OLId{latin-ordinary}{b} \notin \Lang L(\OLId{greek-variable}{Gamma}_\OLMathNumeral{1}, \OLId{greek-variable}{Delta}_\OLMathNumeral{1},
+    \lexists[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})])$، ولأن~$!C_\OLMathNumeral{1}'$ عُرّفت بحيث لا تحتوي~$\OLId{latin-ordinary}{b}$.
+
+    وفي الحالة الثانية لدينا، من فرض الاستقراء مع مقبولية الإضعاف بـ
+    $\lexists[\OLId{latin-ordinary}{y}][!C_\OLMathNumeral{1}'(\OLId{latin-ordinary}{y})]$:
+    \[
+    \AxiomC{}
+    \Deduce$\OLId{greek-variable}{Gamma}_\OLMathNumeral{1} \fCenter
+      \OLId{greek-variable}{Delta}_\OLMathNumeral{1}, \lexists[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})], !A(\OLId{latin-ordinary}{b}), \lexists[\OLId{latin-ordinary}{y}][!C_\OLMathNumeral{1}'(\OLId{latin-ordinary}{y})], !C_\OLMathNumeral{1}'(\OLId{latin-ordinary}{b})$
+    \RightLabel{\RightR{\lexists}}
+    \UnaryInf$\OLId{greek-variable}{Gamma}_\OLMathNumeral{1} \fCenter
+      \OLId{greek-variable}{Delta}_\OLMathNumeral{1}, \lexists[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})], \lexists[\OLId{latin-ordinary}{y}][!C_\OLMathNumeral{1}'(\OLId{latin-ordinary}{y})], !C_\OLMathNumeral{1}'(\OLId{latin-ordinary}{b})$
+    \RightLabel{\RightR{\lexists}}
+    \UnaryInf$\OLId{greek-variable}{Gamma}_\OLMathNumeral{1} \fCenter
+      \OLId{greek-variable}{Delta}_\OLMathNumeral{1}, \lexists[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})], \lexists[\OLId{latin-ordinary}{y}][!C_\OLMathNumeral{1}'(\OLId{latin-ordinary}{y})]$
+    \DisplayProof
+    \]
+    و
+    \[
+    \AxiomC{}
+    \Deduce$!C_\OLMathNumeral{1}'(\OLId{latin-ordinary}{b}), \OLId{greek-variable}{Gamma}_\OLMathNumeral{2} \fCenter \OLId{greek-variable}{Delta}_\OLMathNumeral{2}$
+    \RightLabel{\LeftR{\lexists}}
+    \UnaryInf$\lexists[\OLId{latin-ordinary}{y}][!C_\OLMathNumeral{1}'(\OLId{latin-ordinary}{y})], \OLId{greek-variable}{Gamma}_\OLMathNumeral{2} \fCenter \OLId{greek-variable}{Delta}_\OLMathNumeral{2}$
+    \DisplayProof
+    \]
+    ويتحقق شرط المتغير المميز في~$\LeftR{\lexists}$ في~!!{proof}
+    الثاني لأن~$\OLId{latin-ordinary}{b} \notin \Lang L(\OLId{greek-variable}{Gamma}_\OLMathNumeral{2}, \OLId{greek-variable}{Delta}_\OLMathNumeral{2})$، ولأن~$!C_\OLMathNumeral{1}'$
+    عُرّفت بحيث لا تحتوي~$\OLId{latin-ordinary}{b}$.
+  \end{enumerate}
+  والحالات الأخرى مماثلة، ونتركها تمارين.
+\end{proof}
+
+\begin{prob}
+لنفرض أن لدينا الرابط~$\lnand$ ذا القاعدتين
+\[
+\Axiom$\OLId{greek-variable}{Gamma} \fCenter \OLId{greek-variable}{Delta}, !A$
+\Axiom$\OLId{greek-variable}{Gamma} \fCenter \OLId{greek-variable}{Delta}, !B$
+\RightLabel{\LeftR{\lnand}}
+\BinaryInf$!A \lnand !B, \OLId{greek-variable}{Gamma} \fCenter \OLId{greek-variable}{Delta}$
+\DisplayProof
+\quad
+\Axiom$!A, !B, \OLId{greek-variable}{Gamma} \fCenter \OLId{greek-variable}{Delta}$
+\RightLabel{\RightR{\lnand}}
+\UnaryInf$\OLId{greek-variable}{Gamma} \fCenter \OLId{greek-variable}{Delta}, !A \lnand !B$
+\DisplayProof
+\]
+بيّن أن لمّة ماهارا تظل صادقة بمعالجة الحالات في برهان
+\olref{lem:maehara} التي ينتهي فيها~$\pi$ بإحدى هاتين القاعدتين.
+\end{prob}
+
+بعد إثبات لمّة ماهارا، نستطيع استخدامها لبرهنة مبرهنة كريغ للاستيفاء.
+
+\begin{proof}[برهان \olref{thm:interpolation}]
+  لنفرض أن~$!A \Sequent !B$~!!{provable}. طبّق~\olref{lem:maehara}
+  على~$\maeh{!A}{\ } \Sequent \maeh{\ }{!B}$ لتحصل على صيغة
+  الاستيفاء~$!C$. وعندئذ~$\Proves !A \Sequent !C$ و$\Proves !C
+  \Sequent !B$.
+\end{proof}
+
+لنفرض أن~$\OLId{greek-variable}{Gamma}$ نظرية (مجموعة~!!{sentence}s) في
+!!a{language}~$\Lang L$ تحتوي~!!{predicate}~$\OLId{latin-looped}{R}$ ذا~$\OLId{latin-ordinary}{n}$ مواضع. نقول
+إن~$\OLId{greek-variable}{Gamma}$ \emph{تعرّف}~$\OLId{latin-looped}{R}$ \emph{ضمنيًا} إذا وفقط إذا
+\begin{align*}
+\OLId{greek-variable}{Gamma}, \OLId{greek-variable}{Gamma}'
+& \Entails \lforall[\OLId{latin-ordinary}{x}_\OLMathNumeral{1}][\dots\lforall[\OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{n}][(\OLId{latin-looped}{R}(\OLId{latin-ordinary}{x}_\OLMathNumeral{1},\dots,\OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{n}) \liff
+\OLId{latin-looped}{R}'(\OLId{latin-ordinary}{x}_\OLMathNumeral{1}, \dots, \OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{n}))]],
+\intertext{حيث~$\Gamma'$ هي~$\Gamma$ بعد استبدال كل ظهور لـ$R$ بـ
+$R' \notin \Lang L$. وتكون~$\Gamma$ قد \emph{عرّفت}~$R$
+\emph{صراحة} إذا وجدت~$!A(x_1, \dots, x_n)$ لا تحتوي~$R$ بحيث}
+\OLId{greek-variable}{Gamma} &\Entails
+\lforall[\OLId{latin-ordinary}{x}_\OLMathNumeral{1}][\dots\lforall[\OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{n}][(\OLId{latin-looped}{R}(\OLId{latin-ordinary}{x}_\OLMathNumeral{1},\dots,\OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{n}) \liff !A(\OLId{latin-ordinary}{x}_\OLMathNumeral{1},
+\dots, \OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{n}))]].
+\end{align*}
+ومن الواضح أن تعريف~$\OLId{greek-variable}{Gamma}$ لـ$\OLId{latin-looped}{R}$ صراحة يستلزم تعريفها له ضمنيًا.
+أما العكس فليس واضحًا، لكنه يصدق مع ذلك:
+
+\begin{lem}[مبرهنة بيث في قابلية التعريف]
+  إذا عرّفت~$\OLId{greek-variable}{Gamma}$ العلاقة~$\OLId{latin-looped}{R}$ ضمنيًا، عرّفتها صراحة كذلك.
+\end{lem}
+
+\begin{proof}
+  لنفرض أن~$\OLId{greek-variable}{Gamma}$ تعرّف~$\OLId{latin-looped}{R}$ ضمنيًا. لتكن~$\OLId{latin-looped}{R}'$ و$\OLId{greek-variable}{Gamma}'$ كما سبق،
+  ولتكن~$\Lang L' = \Lang L(\OLId{greek-variable}{Gamma}') = \Lang L \setminus \{\OLId{latin-looped}{R}\}
+  \cup \{\OLId{latin-looped}{R}'\}$. وبالفرض لدينا
+  \begin{align*}
+    \OLId{greek-variable}{Gamma}, \OLId{greek-variable}{Gamma}' &
+    \Sequent \lforall[\OLId{latin-ordinary}{x}_\OLMathNumeral{1}][\dots\lforall[\OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{n}][(\OLId{latin-looped}{R}(\OLId{latin-ordinary}{x}_\OLMathNumeral{1},\dots,\OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{n})
+    \liff \OLId{latin-looped}{R}'(\OLId{latin-ordinary}{x}_\OLMathNumeral{1}, \dots, \OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{n}))]].
+  \intertext{لتكن~$c_1$, \dots,~$c_n$~!!{constant}s لا تظهر في
+  $\Gamma$. وتعطينا لمّة القابلية للعكس}
+    \OLId{greek-variable}{Gamma}, \OLId{greek-variable}{Gamma}', \OLId{latin-looped}{R}(\OLId{latin-ordinary}{c}_\OLMathNumeral{1},\dots,\OLId{latin-ordinary}{c}_\OLId{latin-ordinary}{n}) & \Sequent  \OLId{latin-looped}{R}'(\OLId{latin-ordinary}{c}_\OLMathNumeral{1}, \dots, \OLId{latin-ordinary}{c}_\OLId{latin-ordinary}{n}).
+  \intertext{عرّف}
+    \Lang L_\OLMathNumeral{1} &= \Lang L(\OLId{greek-variable}{Gamma}, \OLId{latin-looped}{R}(\OLId{latin-ordinary}{c}_\OLMathNumeral{1},\dots,\OLId{latin-ordinary}{c}_\OLId{latin-ordinary}{n})), &
+    \Lang L_\OLMathNumeral{2} &= \Lang L(\OLId{greek-variable}{Gamma}',\OLId{latin-looped}{R}'(\OLId{latin-ordinary}{c}_\OLMathNumeral{1},\dots,\OLId{latin-ordinary}{c}_\OLId{latin-ordinary}{n})).
+  \intertext{وطبّق لمّة ماهارا على}
+    \maeh{\OLId{greek-variable}{Gamma}, \OLId{latin-looped}{R}(\OLId{latin-ordinary}{c}_\OLMathNumeral{1},\dots,\OLId{latin-ordinary}{c}_\OLId{latin-ordinary}{n})}{\OLId{greek-variable}{Gamma}'} & \Sequent
+      \maeh{\ }{\OLId{latin-looped}{R}'(\OLId{latin-ordinary}{c}_\OLMathNumeral{1}, \dots, \OLId{latin-ordinary}{c}_\OLId{latin-ordinary}{n})}.
+  \intertext{فنحصل على صيغة استيفاء~$!C(c_1,\dots,c_n)$ بحيث}
+    \OLId{greek-variable}{Gamma}, \OLId{latin-looped}{R}(\OLId{latin-ordinary}{c}_\OLMathNumeral{1},\dots,\OLId{latin-ordinary}{c}_\OLId{latin-ordinary}{n}) & \Sequent !C(\OLId{latin-ordinary}{c}_\OLMathNumeral{1}, \dots, \OLId{latin-ordinary}{c}_\OLId{latin-ordinary}{n}) \\
+    !C(\OLId{latin-ordinary}{c}_\OLMathNumeral{1}, \dots, \OLId{latin-ordinary}{c}_\OLId{latin-ordinary}{n}), \OLId{greek-variable}{Gamma}' & \Sequent \OLId{latin-looped}{R}'(\OLId{latin-ordinary}{c}_\OLMathNumeral{1}, \dots, \OLId{latin-ordinary}{c}_\OLId{latin-ordinary}{n}).
+  \intertext{ولهاتين المتتاليتين~!!{proof}s. وتعطينا لمّة ماهارا}
+    \Lang L(!C) &\subseteq \Lang L_\OLMathNumeral{1} \cap \Lang L_\OLMathNumeral{2} \\
+      &= (\Lang L(\OLId{greek-variable}{Gamma}) \setminus \{\OLId{latin-looped}{R}\})
+         \cup \{\OLId{latin-ordinary}{c}_\OLMathNumeral{1},\dots,\OLId{latin-ordinary}{c}_\OLId{latin-ordinary}{n}\}.
+  \intertext{لتكن~$!A(x_1,\dots,x_n)$ ناتجة من~$!C(c_1,\dots,c_n)$
+  باستبدال الثابت الجديد~$c_i$ بالمتغير~$x_i$ لكل~$i$. عندئذ لا تحتوي
+  $!A$ الرمز~$R$. واستبدل~$R'$ في كل موضع بـ$R$ في~!!{proof} المتتالية
+  الثانية لتحصل على~!!a{proof} لـ}
+    !A(\OLId{latin-ordinary}{c}_\OLMathNumeral{1}, \dots, \OLId{latin-ordinary}{c}_\OLId{latin-ordinary}{n}), \OLId{greek-variable}{Gamma} & \Sequent \OLId{latin-looped}{R}(\OLId{latin-ordinary}{c}_\OLMathNumeral{1}, \dots, \OLId{latin-ordinary}{c}_\OLId{latin-ordinary}{n}).
+  \end{align*}
+  والمتتالية الأولى هي
+  $\OLId{greek-variable}{Gamma}, \OLId{latin-looped}{R}(\OLId{latin-ordinary}{c}_\OLMathNumeral{1},\dots,\OLId{latin-ordinary}{c}_\OLId{latin-ordinary}{n}) \Sequent !A(\OLId{latin-ordinary}{c}_\OLMathNumeral{1},\dots,\OLId{latin-ordinary}{c}_\OLId{latin-ordinary}{n})$.
+  وبالجمع القضوي بين المتتاليتين ينتج لنا
+  \[
+    \OLId{greek-variable}{Gamma} \Sequent \OLId{latin-looped}{R}(\OLId{latin-ordinary}{c}_\OLMathNumeral{1},\dots,\OLId{latin-ordinary}{c}_\OLId{latin-ordinary}{n}) \liff !A(\OLId{latin-ordinary}{c}_\OLMathNumeral{1},\dots,\OLId{latin-ordinary}{c}_\OLId{latin-ordinary}{n}).
+  \]
+  ثم نطبق~$\RightR{\lforall}$ باستعمال الثوابت الجديدة تباعًا فنحصل على
+  !!a{proof} لـ
+  \[
+    \OLId{greek-variable}{Gamma} \Sequent \lforall[\OLId{latin-ordinary}{x}_\OLMathNumeral{1}][\dots\lforall[\OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{n}][(\OLId{latin-looped}{R}(\OLId{latin-ordinary}{x}_\OLMathNumeral{1},\dots,\OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{n}) \liff !A(\OLId{latin-ordinary}{x}_\OLMathNumeral{1}, \dots, \OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{n}))]].
+  \]
+  وهذا يبيّن أن~$!A(\OLId{latin-ordinary}{x}_\OLMathNumeral{1}, \dots, \OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{n})$ تعرّف~$\OLId{latin-looped}{R}$ صراحة في~$\OLId{greek-variable}{Gamma}$.
+\end{proof}
+
+وثمة نتيجة ثالثة تكافئ الاستيفاء، ويمكن مثلها برهنتها باستعمال لمّة
+ماهارا، وهي: إذا كانت~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{1}$ و$\OLId{greek-variable}{Gamma}_\OLMathNumeral{2}$ نظريتين متسقتين تحتويان
+نظرية تامة~$\OLId{greek-variable}{Gamma}$ في اللغة~$\Lang L(\OLId{greek-variable}{Gamma}) \subseteq
+\Lang L(\OLId{greek-variable}{Gamma}_\OLMathNumeral{1}) \cap \Lang L(\OLId{greek-variable}{Gamma}_\OLMathNumeral{2})$، كانت
+$\OLId{greek-variable}{Gamma}_\OLMathNumeral{1} \cup \OLId{greek-variable}{Gamma}_\OLMathNumeral{2}$ متسقة.
+
+تذكّر أن النظرية التامة هي التي يكون فيها، لكل~!!{sentence}~$!A$ في
+لغتها، إما~$\OLId{greek-variable}{Gamma} \Proves !A$ أو~$\OLId{greek-variable}{Gamma} \Proves \lnot !A$. ولأن
+$\OLId{greek-variable}{Gamma}_\OLMathNumeral{1}$ و$\OLId{greek-variable}{Gamma}_\OLMathNumeral{2}$ امتدادان متسقان لـ$\OLId{greek-variable}{Gamma}$، فلا بد أن تكون
+$\OLId{greek-variable}{Gamma}$ متسقة. ومن ثم، إذا كانت~$!A$~!!a{sentence} في اللغة
+$\Lang L(\OLId{greek-variable}{Gamma}_\OLMathNumeral{1}) \cap \Lang L(\OLId{greek-variable}{Gamma}_\OLMathNumeral{2})$، امتنع أن يكون معًا
+$\OLId{greek-variable}{Gamma}_\OLMathNumeral{1} \Entails !A$ و$\OLId{greek-variable}{Gamma}_\OLMathNumeral{2} \Entails \lnot !A$. ولرؤية ذلك،
+افترض وجود~$!A$ كهذه. إذا كان~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{1} \Entails !A$، لزم أن يكون
+$\OLId{greek-variable}{Gamma} \Entails !A$؛ وإلا استلزم تمام~$\OLId{greek-variable}{Gamma}$ أن
+$\OLId{greek-variable}{Gamma} \Entails \lnot !A$، وبما أن~$\OLId{greek-variable}{Gamma} \subseteq \OLId{greek-variable}{Gamma}_\OLMathNumeral{1}$،
+كان~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{1} \Entails \lnot !A$، فتغدو~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{1}$ غير متسقة. إذن
+$\OLId{greek-variable}{Gamma} \Entails !A$، وبما أن~$\OLId{greek-variable}{Gamma} \subseteq \OLId{greek-variable}{Gamma}_\OLMathNumeral{2}$، يكون
+$\OLId{greek-variable}{Gamma}_\OLMathNumeral{2} \Entails !A$. ولذلك~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{2} \Entails/ \lnot !A$، وإلا
+كانت~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{2}$ غير متسقة.
+
+وعدم وجود~!!a{sentence}~$!A$ في~!!{language} المشتركة
+$\Lang L(\OLId{greek-variable}{Gamma}_\OLMathNumeral{1}) \cap \Lang L(\OLId{greek-variable}{Gamma}_\OLMathNumeral{2})$ بحيث
+$\OLId{greek-variable}{Gamma}_\OLMathNumeral{1} \Entails !A$ و$\OLId{greek-variable}{Gamma}_\OLMathNumeral{2} \Entails \lnot !A$ هو كل ما يلزم
+للبرهان، الذي نقدمه هنا برهانيًا باستعمال لمّة ماهارا.
+
+\begin{thm}[مبرهنة روبنسون في الاتساق المشترك]
+لنفرض أن~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{1}$ و$\OLId{greek-variable}{Gamma}_\OLMathNumeral{2}$ نظريتان متسقتان، وأنه لا توجد~$!A$ في
+!!{language}~$\Lang L(\OLId{greek-variable}{Gamma}_\OLMathNumeral{1}) \cap \Lang L(\OLId{greek-variable}{Gamma}_\OLMathNumeral{2})$ بحيث يكون
+$\OLId{greek-variable}{Gamma}_\OLMathNumeral{1} \Entails !A$ و$\OLId{greek-variable}{Gamma}_\OLMathNumeral{2} \Entails \lnot !A$. عندئذ تكون
+$\OLId{greek-variable}{Gamma}_\OLMathNumeral{1} \cup \OLId{greek-variable}{Gamma}_\OLMathNumeral{2}$ متسقة.
+\end{thm}
+
+\begin{proof}
+  افترض، خلافًا للمطلوب، أن~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{1} \cup \OLId{greek-variable}{Gamma}_\OLMathNumeral{2}$ غير متسقة. عندئذ
+  للمتتالية~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{1}, \OLId{greek-variable}{Gamma}_\OLMathNumeral{2} \Sequent \ $~!!a{proof}. طبّق لمّة
+  ماهارا على~$\maeh{\OLId{greek-variable}{Gamma}_\OLMathNumeral{1}}{\OLId{greek-variable}{Gamma}_\OLMathNumeral{2}} \Sequent \maeh{\ }{\ }$
+  لتحصل على~!!a{sentence}~$!A$ في~!!{language}~$\Lang L(\OLId{greek-variable}{Gamma}_\OLMathNumeral{1})
+  \cap \Lang L(\OLId{greek-variable}{Gamma}_\OLMathNumeral{2})$ بحيث~$\Proves \OLId{greek-variable}{Gamma}_\OLMathNumeral{1} \Sequent !A$ و
+  $\Proves !A, \OLId{greek-variable}{Gamma}_\OLMathNumeral{2} \Sequent \quad$. ومن الأخيرة ينتج لنا
+  $\Proves \OLId{greek-variable}{Gamma}_\OLMathNumeral{2} \Sequent \lnot !A$. لكننا افترضنا عدم وجود
+  !!{sentence} كهذه.
+\end{proof}
+
+افترضنا ضمنًا فيما سبق أن النظريات~$\OLId{greek-variable}{Gamma}$ و$\OLId{greek-variable}{Gamma}_\OLMathNumeral{1}$ و$\OLId{greek-variable}{Gamma}_\OLMathNumeral{2}$
+منتهية. وبفضل التراص تصدق النتائج كذلك على النظريات اللانهائية.
+
+\end{document}

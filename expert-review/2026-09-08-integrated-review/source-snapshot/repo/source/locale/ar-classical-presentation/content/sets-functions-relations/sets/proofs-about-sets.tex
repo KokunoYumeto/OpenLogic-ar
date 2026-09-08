@@ -1,0 +1,93 @@
+% Part: sets-functions-relations
+% Chapter: sets
+% Section: proofs-about-sets
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sfr}{set}{prf}
+\olsection{في إقامة البراهين على المجموعات}
+
+\begin{editorial}
+استُعيض عن هذا القسم بـ\verb|content/methods/proofs|، ولذلك لا يدخل في
+هذا الفصل على الوضع الافتراضي.
+\end{editorial}
+
+\begin{explain}
+تختصر لنا المجموعات والترميزات المتقدمة سبيل تعيين المجموعات وبيان
+العلاقات بينها؛ غير أن الأمر كثيرًا ما يحتاج أيضًا إلى إثبات دعاوى في
+تلك العلاقات. فإن لم تألف البرهان الرياضي، فنتدرج في مثال يسير خطوة
+خطوة. نريد أن نثبت، لكل مجموعتين $\OLId{latin-looped}{X}$ و$\OLId{latin-looped}{Y}$، الهوية
+$\OLId{latin-looped}{X} \cap (\OLId{latin-looped}{X} \cup \OLId{latin-looped}{Y}) = \OLId{latin-looped}{X}$. وسبيل إثبات هوية كهذه أن نرجع إلى أن المجموعة
+لا تتعين إلا بـ!!{element}s المنتمية إليها: فمجموعتان متطابقتان إذا وفقط
+إذا اشتركتا في !!{element}s نفسها. فيلزمنا هنا أولًا أن نثبت أن كل
+!!{element} من $\OLId{latin-looped}{X} \cap (\OLId{latin-looped}{X} \cup \OLId{latin-looped}{Y})$ هو !!{element} من $\OLId{latin-looped}{X}$، ثم أن نثبت
+بالعكس أن كل !!{element} من $\OLId{latin-looped}{X}$ هو !!{element} من
+$\OLId{latin-looped}{X} \cap (\OLId{latin-looped}{X} \cup \OLId{latin-looped}{Y})$. أي نثبت (أ)
+$\OLId{latin-looped}{X} \cap (\OLId{latin-looped}{X} \cup \OLId{latin-looped}{Y}) \subseteq \OLId{latin-looped}{X}$، ثم (ب) $\OLId{latin-looped}{X} \subseteq \OLId{latin-looped}{X} \cap (\OLId{latin-looped}{X} \cup \OLId{latin-looped}{Y})$.
+
+والدعوى العامة من نحو «كل !!{element}~$\OLId{latin-ordinary}{z}$ من $\OLId{latin-looped}{X} \cap (\OLId{latin-looped}{X}
+\cup \OLId{latin-looped}{Y})$ هو !!{element} من $\OLId{latin-looped}{X}$» تثبت بأن نأخذ أولًا عنصرًا اعتباطيًا
+$\OLId{latin-ordinary}{z} \in \OLId{latin-looped}{X} \cap (\OLId{latin-looped}{X} \cup \OLId{latin-looped}{Y})$، ثم نستخرج من هذا الفرض~$\OLId{latin-ordinary}{z} \in \OLId{latin-looped}{X}$. ويسمى
+هذا النمط أحيانًا «البرهان الشرطي العام». ونحتاج معه إلى استعمال
+التعريفات الواردة في الفرض والنتيجة، وهما هنا تعريفَا «$\cap$» و«$\cup$».
+فتقام حجة (أ) هكذا:
+
+\begin{quote}
+(أ) نثبت أولًا $\OLId{latin-looped}{X} \cap (\OLId{latin-looped}{X} \cup \OLId{latin-looped}{Y}) \subseteq \OLId{latin-looped}{X}$. ومعنى ذلك، بتعريف
+$\subseteq$، أن $\OLId{latin-ordinary}{z} \in \OLId{latin-looped}{X} \cap (\OLId{latin-looped}{X} \cup \OLId{latin-looped}{Y})$ يستلزم
+$\OLId{latin-ordinary}{z} \in \OLId{latin-looped}{X}$، لكل~$\OLId{latin-ordinary}{z}$. فافترض~$\OLId{latin-ordinary}{z} \in \OLId{latin-looped}{X} \cap (\OLId{latin-looped}{X} \cup \OLId{latin-looped}{Y})$. ولما كان
+$\OLId{latin-ordinary}{z}$~!!{element} من تقاطع مجموعتين إذا وفقط إذا كان~!!{element} من
+  % REVIEW-0721-N1: هذه خصوصية من اقتران ثابت، لا استدلال بطريق الأولى.
+  كلتيهما، لزم~$\OLId{latin-ordinary}{z} \in \OLId{latin-looped}{X}$ ولزم أيضًا~$\OLId{latin-ordinary}{z} \in \OLId{latin-looped}{X} \cup \OLId{latin-looped}{Y}$. وبخاصة
+$\OLId{latin-ordinary}{z} \in \OLId{latin-looped}{X}$، وهو المطلوب.
+\end{quote}
+
+فتم الشطر الأول. وقد استعملنا في آخره أن لزوم الاقتران
+($\OLId{latin-ordinary}{z} \in \OLId{latin-looped}{X}$ و$\OLId{latin-ordinary}{z} \in \OLId{latin-looped}{X} \cup \OLId{latin-looped}{Y}$) عن فرض يوجب لزوم كل واحد من طرفيه عن
+ذلك الفرض. وهذه هي قاعدة «حذف الاقتران»، أي حذف الرابط~$\land$. وننتقل
+إلى (ب):
+
+\begin{quote}
+(ب) نثبت الآن $\OLId{latin-looped}{X} \subseteq \OLId{latin-looped}{X} \cap (\OLId{latin-looped}{X} \cup \OLId{latin-looped}{Y})$؛ أي إن تعريف
+$\subseteq$ يطلب أن يستلزم~$\OLId{latin-ordinary}{z} \in \OLId{latin-looped}{X}$ كون~$\OLId{latin-ordinary}{z} \in \OLId{latin-looped}{X} \cap
+(\OLId{latin-looped}{X} \cup \OLId{latin-looped}{Y})$، لكل~$\OLId{latin-ordinary}{z}$. فافترض~$\OLId{latin-ordinary}{z} \in \OLId{latin-looped}{X}$. ولإثبات~$\OLId{latin-ordinary}{z} \in \OLId{latin-looped}{X}
+\cap (\OLId{latin-looped}{X} \cup \OLId{latin-looped}{Y})$، يكفينا بتعريف «$\cap$» إثبات (\OLClassicalDigits{1})
+$\OLId{latin-ordinary}{z} \in \OLId{latin-looped}{X}$، و(\OLClassicalDigits{2}) $\OLId{latin-ordinary}{z} \in \OLId{latin-looped}{X} \cup \OLId{latin-looped}{Y}$. أما (\OLClassicalDigits{1}) فهو الفرض بعينه. وأما (\OLClassicalDigits{2})،
+فلأن~$\OLId{latin-ordinary}{z}$ يكون~!!{element} من اتحاد مجموعات إذا وفقط إذا كان~!!{element}
+من واحدة منها على الأقل، وكان~$\OLId{latin-ordinary}{z} \in \OLId{latin-looped}{X}$، وكان~$\OLId{latin-looped}{X} \cup \OLId{latin-looped}{Y}$ اتحاد~$\OLId{latin-looped}{X}$
+و$\OLId{latin-looped}{Y}$، فقد تحقق المطلوب. ومن ثم~$\OLId{latin-ordinary}{z} \in \OLId{latin-looped}{X} \cup \OLId{latin-looped}{Y}$. فثبت (\OLClassicalDigits{1})
+$\OLId{latin-ordinary}{z} \in \OLId{latin-looped}{X}$ و(\OLClassicalDigits{2}) $\OLId{latin-ordinary}{z} \in \OLId{latin-looped}{X} \cup \OLId{latin-looped}{Y}$؛ ولذلك، بتعريف «$\cap$»،
+$\OLId{latin-ordinary}{z} \in \OLId{latin-looped}{X} \cap (\OLId{latin-looped}{X} \cup \OLId{latin-looped}{Y})$.
+\end{quote}
+
+وفي هذا تفصيل مقصود ليظهر وجه الاستدلال في المجموعات وعلاقاتها. أما في
+العادة فنستغني عن كثير من التصريح، ولا نعيد كل تعريف. ولذلك يجيء البرهان
+في متن أرفع مستوى موجزًا على الصورة الآتية.
+\end{explain}
+
+
+\begin{prop}[الامتصاص]
+لكل مجموعتين $\OLId{latin-looped}{X}$ و$\OLId{latin-looped}{Y}$،
+\[
+\OLId{latin-looped}{X} \cap (\OLId{latin-looped}{X} \cup \OLId{latin-looped}{Y}) = \OLId{latin-looped}{X}
+\]
+\end{prop}
+
+\begin{proof}
+(أ) إذا كان $\OLId{latin-ordinary}{z} \in \OLId{latin-looped}{X} \cap (\OLId{latin-looped}{X} \cup \OLId{latin-looped}{Y})$، لزم $\OLId{latin-ordinary}{z} \in \OLId{latin-looped}{X}$، ومن ثم
+  $\OLId{latin-looped}{X} \cap (\OLId{latin-looped}{X} \cup \OLId{latin-looped}{Y}) \subseteq \OLId{latin-looped}{X}$.
+
+(ب) وإذا كان $\OLId{latin-ordinary}{z} \in \OLId{latin-looped}{X}$، كان $\OLId{latin-ordinary}{z} \in \OLId{latin-looped}{X} \cup \OLId{latin-looped}{Y}$ أيضًا، فكان
+  $\OLId{latin-ordinary}{z} \in \OLId{latin-looped}{X} \cap (\OLId{latin-looped}{X} \cup \OLId{latin-looped}{Y})$. ومن ثم
+  $\OLId{latin-looped}{X} \subseteq \OLId{latin-looped}{X} \cap (\OLId{latin-looped}{X} \cup \OLId{latin-looped}{Y})$.
+\end{proof}
+
+\begin{prob}
+أثبت بالتفصيل أن $\OLId{latin-looped}{X} \cup (\OLId{latin-looped}{X} \cap \OLId{latin-looped}{Y}) = \OLId{latin-looped}{X}$، ثم صغ البرهان في عبارة
+وجيزة. (تلميح: في اتجاه $\OLId{latin-looped}{X} \cup (\OLId{latin-looped}{X} \cap \OLId{latin-looped}{Y}) \subseteq \OLId{latin-looped}{X}$ تحتاج
+إلى تقسيم البرهان إلى حالات، أي إلى قاعدة حذف الرابط~$\lor$.)
+\end{prob}
+
+\end{document}

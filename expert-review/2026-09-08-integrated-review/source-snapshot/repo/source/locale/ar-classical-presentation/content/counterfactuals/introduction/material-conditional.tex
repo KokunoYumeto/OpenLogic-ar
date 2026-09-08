@@ -1,0 +1,64 @@
+% Part: counterfactuals
+% Chapter: introduction
+% Section: material-conditional
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cnt}{int}{mat}
+
+\olsection{في الشرط المادي}
+
+أبسط صيغ الشرط في الإنجليزية قول على مثال «إذا \dots، فإن \dots»،
+ويحل في كل موضع من~\dots{} قول تام؛ ومنه «إذا كان الخادم هو الفاعل،
+فإن البستاني بريء». ويُعلّم في مبادئ المنطق أن يُمثّل الشرط بالرابط
+$\lif$: فإذا رمزنا إلى الجزأين اللذين ناب عنهما~\dots، مثلًا،
+بـ!!{formula}~$!A$ و$!B$، كان رمز الشرط بجملته~$!A \lif !B$.
+
+والرابط~$\lif$ \emph{دالة صدق}: فقيمة~$!A \lif !B$، وهي~$\True$
+أو~$\False$، لا تتوقف إلا على قيمتي~$!A$ و$!B$. وذلك أن
+$!A \lif !B$ يصدق إذا وفقط إذا كذب~$!A$ أو صدق~$!B$، ويكذب فيما
+سوى ذلك. فإذا كان إسناد قيم الصدق~$\pAssign \OLId{latin-ordinary}{v}$، وضعنا
+$\pSat{\OLId{latin-ordinary}{v}}{!A \lif !B}$ إذا وفقط إذا تحقق~$\pSat/{\OLId{latin-ordinary}{v}}{!A}$ أو
+$\pSat{\OLId{latin-ordinary}{v}}{!B}$. والرابط~$\lif$ بهذه الدلالة هو المسمّى
+\emph{الشرط المادي}.
+
+وتلزم عن هذا الحدّ طائفة من الحقائق المنطقية الأولية. فأولها صحة مبرهنة
+الاستنباط في الشرط المادي:
+\begin{align}
+  \text{إذا كان } \OLId{greek-variable}{Gamma}, !A \Entails !B \text{ فإن } \OLId{greek-variable}{Gamma} \Entails !A \lif !B
+\end{align}
+وهو، لكونه دالة صدق، يجعل~$!A \lif !B$ و$\lnot !A \lor !B$ متكافئتين:
+\begin{align}
+  !A \lif !B & \Entails \lnot !A \lor !B\\
+  \lnot !A \lor !B & \Entails !A \lif !B
+  \intertext{يستلزم تالي الشرط المادي الشرط نفسه، وكذلك يستلزمه نفي مقدمه:}
+  !B & \Entails !A \lif !B\\
+  \lnot !A & \Entails !A \lif !B
+  \intertext{نفي الشرط المادي مكافئ لاقتران مقدمه بنفي تاليه: فإذا كان
+    $!A \lif !B$ كاذبًا، كان~$!A \land \lnot !B$ صادقًا، والعكس:}
+  \lnot(!A \lif !B) & \Entails !A \land \lnot !B\\
+  !A \land \lnot !B & \Entails \lnot(!A \lif !B)
+  \intertext{يدعم الشرط المادي قاعدة إثبات المقدّم:}
+  !A, !A \lif !B & \Entails !B
+  % تصحيح مصطلحي (COND-M1): سُمّيت قاعدة modus ponens إثبات المقدّم لا إثبات التالي.
+  \intertext{يمكن تجميع الشروط المادية:}
+  !A \lif !B,  !A \lif !C & \Entails !A \lif (!B \land !C)
+  \intertext{يمكننا دائمًا تقوية المقدّم، أي إن الشرط \emph{رتيب}:}
+  !A \lif !B & \Entails (!A \land !C) \lif !B
+  \intertext{الشرط المادي متعدٍّ، أي إن قاعدة السلسلة صالحة:}
+  !A \lif !B, !B \lif !C & \Entails !A \lif !C
+  \intertext{الشرط المادي مكافئ لمقابله بالنقيض:}
+  !A \lif !B & \Entails \lnot !B \lif \lnot !A\\
+  \lnot !B \lif \lnot !A & \Entails !A \lif !B
+\end{align}
+
+وهذه وجوه استدلال نافعة لا حرج فيها في الرياضيات. إلا أن كتب الفلسفة
+واللغة تورد كثيرًا من الأمثلة التي يُدّعى أنها تنقض نظائرها في الكلام
+غير الرياضي. وهي تدل، إن سلمت، على أن الشرط المادي~$\lif$ ليس دائمًا
+أنسب الروابط لتمثيل العبارة الإنجليزية التي صورتها «إذا \dots، فإن
+\dots».
+
+\end{document}
+

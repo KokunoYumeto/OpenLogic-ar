@@ -1,0 +1,66 @@
+% Part: counterfactuals
+% Chapter: minimal-change-semantics
+% Section: contraposition
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cnt}{min}{cpo}
+
+\olsection{في المقابلة بالنقيض}
+
+يكافئ الشرط المادي والشرط الصارم مقابلهما بالنقيض، وليس الشرط المخالف
+للواقع كذلك. ومن شواهد ذلك مثال كراتزر:
+\begin{quote}
+  لو لم يمت غوته سنة \OLClassicalDigits{1832}، لكان ميتًا الآن (مع ذلك).
+
+  لو لم يكن غوته ميتًا الآن، لكان قد مات سنة \OLClassicalDigits{1832}.
+\end{quote}
+أما الأولى فصادقة، إذ لا يعيش البشر مئات السنين. وأما الثانية فكذبها
+ظاهر: فلو لم يكن غوته ميتًا الآن لكان حيًا، فلا يكون قد مات سنة \OLClassicalDigits{1832}.
+
+\begin{ex}\ollabel{ex:contraposition-counterex}
+  وتبين دلالة الكرات فساد المقابلة بالنقيض، أي إن
+  $\OLId{latin-ordinary}{p} \cif \OLId{latin-ordinary}{q} \Entails/ \lnot \OLId{latin-ordinary}{q} \cif \lnot \OLId{latin-ordinary}{p}$. ولتدل~$\OLId{latin-ordinary}{p}$ على «لم يمت
+  غوته سنة \OLClassicalDigits{1832}»، و$\OLId{latin-ordinary}{q}$ على «غوته ميت الآن». ونمثل ذلك بنموذج
+  $\mModel{M_1} = \tuple{\OLId{latin-looped}{W}, \OLId{latin-looped}{O}, \OLId{latin-looped}{V}}$ حيث
+  $\OLId{latin-looped}{W} = \{\OLId{latin-ordinary}{w}, \OLId{latin-ordinary}{w}_\OLMathNumeral{1}, \OLId{latin-ordinary}{w}_\OLMathNumeral{2}\}$،
+  و$\OLId{latin-looped}{O}_\OLId{latin-ordinary}{w} = \{\{\OLId{latin-ordinary}{w}\}, \{\OLId{latin-ordinary}{w}, \OLId{latin-ordinary}{w}_\OLMathNumeral{1}\}, \{\OLId{latin-ordinary}{w}, \OLId{latin-ordinary}{w}_\OLMathNumeral{1}, \OLId{latin-ordinary}{w}_\OLMathNumeral{2}\}\}$،
+  و$\OLId{latin-looped}{V}(\OLId{latin-ordinary}{p}) = \{\OLId{latin-ordinary}{w}_\OLMathNumeral{1}, \OLId{latin-ordinary}{w}_\OLMathNumeral{2}\}$، و$\OLId{latin-looped}{V}(\OLId{latin-ordinary}{q}) = \{\OLId{latin-ordinary}{w}, \OLId{latin-ordinary}{w}_\OLMathNumeral{1}\}$. ومن ثم يكون~$\OLId{latin-ordinary}{w}$
+  العالم الفعلي، وفيه مات غوته سنة \OLClassicalDigits{1832} ولا يزال ميتًا؛ ويمثل~$\OLId{latin-ordinary}{w}_\OLMathNumeral{1}$
+  العالم القريب الذي مات فيه، مثلًا، سنة \OLClassicalDigits{1833} ولا يزال ميتًا؛ ويمثل
+  $\OLId{latin-ordinary}{w}_\OLMathNumeral{2}$ عالمًا بعيدًا بقي فيه حيًا.
+\begin{figure}
+\begin{center}
+\begin{tikzpicture}[scale=.6,layerwidth=1.5]\tiny
+  \spheresystem{3}
+  \begin{scope}
+    \clip \propositionplot{0}{.8}{50}{4.5} -- (4.5,-4.5) -- (-4.5,-4.5) -- (-4.5,4.5) -- (4.5,4.5);
+    \spherelayer{3}
+  \end{scope}
+  \propositionintersect{0}{2}{110}{5.5}
+  \proposition{0}{.8}{50}{4.5}
+  \path (0,0) node[world] {$\OLId{latin-ordinary}{w}$};
+  \spherepos{0}{2}{node[world] {$\OLId{latin-ordinary}{w}_\OLMathNumeral{1}$}}
+  \spherepos{-50}{3}{node[world] {$\OLId{latin-ordinary}{w}_\OLMathNumeral{2}$}}
+  \spherepos{28}{3}{node {$\OLId{latin-ordinary}{q}$}}
+  \spherepos{42}{3}{node {$\lnot \OLId{latin-ordinary}{q}$}}
+  \spherepos{-55}{4}{node {$\OLId{latin-ordinary}{p}$}}
+  \spherepos{-67}{4}{node {$\lnot \OLId{latin-ordinary}{p}$}}
+\end{tikzpicture}
+\caption{نموذج مضاد للمقابلة بالنقيض}
+\ollabel{fig:contraposition}
+\end{center}
+\end{figure}
+ومن الكرات كرة تقبل~$\OLId{latin-ordinary}{p}$، هي~$\OLId{latin-looped}{S} = \{\OLId{latin-ordinary}{w}, \OLId{latin-ordinary}{w}_\OLMathNumeral{1}\}$، ويصدق~$\OLId{latin-ordinary}{p} \lif \OLId{latin-ordinary}{q}$ في
+عوالمها كلها؛ ومن ثم~$\mSat{\OLId{latin-looped}{M}_\OLMathNumeral{1}}{\OLId{latin-ordinary}{p} \cif \OLId{latin-ordinary}{q}}[\OLId{latin-ordinary}{w}]$. لكن الكرة التي تقبل
+$\lnot \OLId{latin-ordinary}{q}$، وهي~$\{\OLId{latin-ordinary}{w}, \OLId{latin-ordinary}{w}_\OLMathNumeral{1}, \OLId{latin-ordinary}{w}_\OLMathNumeral{2}\}$، تضم العالم~$\OLId{latin-ordinary}{w}_\OLMathNumeral{2}$ حيث يكذب~$\OLId{latin-ordinary}{q}$
+ويصدق~$\OLId{latin-ordinary}{p}$؛ ولذلك
+$\mSat/{\OLId{latin-looped}{M}_\OLMathNumeral{1}}{\lnot \OLId{latin-ordinary}{q} \lif \lnot \OLId{latin-ordinary}{p}}[\OLId{latin-ordinary}{w}_\OLMathNumeral{2}]$.
+\end{ex}
+
+\end{document}
+
+
+

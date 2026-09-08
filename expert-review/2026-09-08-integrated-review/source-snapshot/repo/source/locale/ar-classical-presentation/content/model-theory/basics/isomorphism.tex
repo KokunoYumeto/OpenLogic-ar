@@ -1,0 +1,127 @@
+% Part: model-theory
+% Chapter: basics
+% Section: isomorphism
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{bas}{iso}
+\olsection{بنى متشاكلة}
+
+تشابه !!{structure}s الرتبة الأولى على وجهين. فقد تتفق في
+ال!!{sentence}s التي تصدق فيها؛ وتسمى الـ!!{structure}s عندئذ
+\emph{متكافئة أوليًا}. وليس هذا الاتفاق مانعًا من اختلاف كبير
+بينها: فقد تصدق فيها الـ!!{sentence}s نفسها، وتكون إحداها
+!!{enumerable} والأخرى غير معدودة. فإن للـ!!a{structure} خصائص
+لا تعبّر عنها لغة الرتبة الأولى، إما لقلة ما في اللغة من رموز،
+وإما لحدود تلازم منطق الرتبة الأولى، كما تدل مبرهنة لوفنهايم--سكولم.
+وأما الوجه الآخر لتشابه الـ!!{structure}s فأشد: أن تتحد صورتها
+البنيوية، ولا تختلف إلا في الأشياء التي تتألف منها. وهذا هو
+المعنى الذي نضبطه بمفهوم \emph{التشاكل}.
+
+\begin{defn}
+\ollabel{defn:elem-equiv}
+لتكن !!{structure}s اثنتان $\Struct{M}$ و$\Struct M'$ للـ!!{language}
+نفسها~$\Lang{L}$. نقول إن $\Struct{M}$ \emph{مكافئة أوليًا لـ}
+$\Struct M'$، ونكتب $\Struct{M} \equiv \Struct M'$، إذا وفقط إذا كان،
+لكل !!{sentence}~$!A$ في~$\Lang{L}$، $\Sat{\OLId{latin-looped}{M}}{!A}$ إذا وفقط إذا كان
+$\Sat{\OLId{latin-looped}{M}'}{!A}$.
+\end{defn}
+
+\begin{defn}
+\ollabel{defn:isomorphism} لتكن !!{structure}s اثنتان $\Struct{M}$
+و$\Struct M'$ للـ!!{language} نفسها~$\Lang L$. نقول إن $\Struct{M}$
+\emph{متشاكلة مع}~$\Struct M'$، ونكتب $\Struct{M} \simeq \Struct M'$،
+إذا وفقط إذا وجدت دالة $\OLId{latin-ordinary}{h} \colon \Domain{\OLId{latin-looped}{M}} \to \Domain{\OLId{latin-looped}{M}'}$ بحيث:
+\begin{enumerate}
+\item تكون $\OLId{latin-ordinary}{h}$~!!{injective}: إذا كان $\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{x}) = \OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{y})$، فإن $\OLId{latin-ordinary}{x} = \OLId{latin-ordinary}{y}$؛
+\item تكون $\OLId{latin-ordinary}{h}$~!!{surjective}: لكل $\OLId{latin-ordinary}{y} \in \Domain{\OLId{latin-looped}{M}'}$ يوجد
+  $\OLId{latin-ordinary}{x} \in \Domain{\OLId{latin-looped}{M}}$ بحيث $\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{x}) = \OLId{latin-ordinary}{y}$؛
+\item \ollabel{defn:iso-const}لكل !!{constant}~$\OLId{latin-ordinary}{c}$:
+  $\OLId{latin-ordinary}{h}(\Assign{\OLId{latin-ordinary}{c}}{\OLId{latin-looped}{M}}) = \Assign{\OLId{latin-ordinary}{c}}{\OLId{latin-looped}{M}'}$؛
+\item \ollabel{defn:iso-pred}لكل !!{predicate}~$\OLId{latin-looped}{P}$ ذي $\OLId{latin-ordinary}{n}$ مواضع:
+  \[
+  \tuple{\OLId{latin-ordinary}{a}_\OLMathNumeral{1}, \dots, \OLId{latin-ordinary}{a}_\OLId{latin-ordinary}{n}}\in \Assign{\OLId{latin-looped}{P}}{\OLId{latin-looped}{M}} \quad\text{إذا وفقط إذا}\quad
+  \tuple{\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{a}_\OLMathNumeral{1}), \dots, \OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{a}_\OLId{latin-ordinary}{n})} \in \Assign{\OLId{latin-looped}{P}}{\OLId{latin-looped}{M}'};
+  \]
+\item \ollabel{defn:iso-func}لكل !!{function}~$\OLId{latin-ordinary}{f}$ ذات $\OLId{latin-ordinary}{n}$ مواضع:
+  \[
+  \OLId{latin-ordinary}{h}(\Assign{\OLId{latin-ordinary}{f}}{\OLId{latin-looped}{M}}(\OLId{latin-ordinary}{a}_\OLMathNumeral{1}, \dots, \OLId{latin-ordinary}{a}_\OLId{latin-ordinary}{n})) =
+  \Assign{\OLId{latin-ordinary}{f}}{\OLId{latin-looped}{M}'}(\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{a}_\OLMathNumeral{1}), \dots, \OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{a}_\OLId{latin-ordinary}{n})).
+  \]
+\end{enumerate}
+\end{defn}
+
+\begin{thm}
+\ollabel{thm:isom}
+إذا كان $\Struct{M} \iso \Struct M'$، فإن $\Struct{M} \elemequiv
+\Struct{M'}$.
+\end{thm}
+
+\begin{proof}
+لنأخذ $\OLId{latin-ordinary}{h}$ تشاكلًا من $\Struct{M}$ على $\Struct M'$. إذا كان
+لدينا تعيين~$\OLId{latin-ordinary}{s}$، فـ $\OLId{latin-ordinary}{h} \circ \OLId{latin-ordinary}{s}$ تركيب $\OLId{latin-ordinary}{h}$ و$\OLId{latin-ordinary}{s}$، أي التعيين
+في $\Struct{M'}$ الذي يحقق $(\OLId{latin-ordinary}{h} \circ \OLId{latin-ordinary}{s})(\OLId{latin-ordinary}{x}) = \OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{s}(\OLId{latin-ordinary}{x}))$.
+ونثبت بالاستقراء على $\OLId{latin-ordinary}{t}$ و$!A$ دعويين أقوى من المطلوب:
+\begin{enumerate}
+  \item[a.] $\OLId{latin-ordinary}{h}(\Value{\OLId{latin-ordinary}{t}}{\OLId{latin-looped}{M}}[\OLId{latin-ordinary}{s}]) = \Value{\OLId{latin-ordinary}{t}}{\OLId{latin-looped}{M}'}[\OLId{latin-ordinary}{h}\circ \OLId{latin-ordinary}{s}]$.
+  \item[b.] $\Sat{\OLId{latin-looped}{M}}{!A}[\OLId{latin-ordinary}{s}]$ إذا وفقط إذا كان
+    $\Sat{\OLId{latin-looped}{M}'}{!A}[\OLId{latin-ordinary}{h} \circ \OLId{latin-ordinary}{s}]$.
+\end{enumerate}
+أما الأولى، فبرهانها استقراء على تعقيد~$\OLId{latin-ordinary}{t}$، وتفصيله كما يأتي.
+\begin{enumerate}
+\item إذا كان $\OLId{latin-ordinary}{t} \ident \OLId{latin-ordinary}{c}$، فإن $\Value{\OLId{latin-ordinary}{c}}{\OLId{latin-looped}{M}}[\OLId{latin-ordinary}{s}] = \Assign{\OLId{latin-ordinary}{c}}{\OLId{latin-looped}{M}}$
+  و$\Value{\OLId{latin-ordinary}{c}}{\OLId{latin-looped}{M}'}[\OLId{latin-ordinary}{h} \circ \OLId{latin-ordinary}{s}] = \Assign{\OLId{latin-ordinary}{c}}{\OLId{latin-looped}{M}'}$. ولذلك
+  $\OLId{latin-ordinary}{h}(\Value{\OLId{latin-ordinary}{t}}{\OLId{latin-looped}{M}}[\OLId{latin-ordinary}{s}]) = \OLId{latin-ordinary}{h}(\Assign{\OLId{latin-ordinary}{c}}{\OLId{latin-looped}{M}}) = \Assign{\OLId{latin-ordinary}{c}}{\OLId{latin-looped}{M}'}$ (بالبند
+  \olref{defn:iso-const} من \olref{defn:isomorphism}) $=
+  \Value{\OLId{latin-ordinary}{t}}{\OLId{latin-looped}{M}'}[\OLId{latin-ordinary}{h} \circ \OLId{latin-ordinary}{s}]$.
+\item إذا كان $\OLId{latin-ordinary}{t} \ident \OLId{latin-ordinary}{x}$، فإن $\Value{\OLId{latin-ordinary}{x}}{\OLId{latin-looped}{M}}[\OLId{latin-ordinary}{s}] = \OLId{latin-ordinary}{s}(\OLId{latin-ordinary}{x})$ و
+  $\Value{\OLId{latin-ordinary}{x}}{\OLId{latin-looped}{M}'}[\OLId{latin-ordinary}{h} \circ \OLId{latin-ordinary}{s}] = \OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{s}(\OLId{latin-ordinary}{x}))$. ومن ثم
+  $\OLId{latin-ordinary}{h}(\Value{\OLId{latin-ordinary}{x}}{\OLId{latin-looped}{M}}[\OLId{latin-ordinary}{s}]) = \OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{s}(\OLId{latin-ordinary}{x})) = \Value{\OLId{latin-ordinary}{x}}{\OLId{latin-looped}{M}'}[\OLId{latin-ordinary}{h} \circ \OLId{latin-ordinary}{s}]$.
+\item إذا كان $\OLId{latin-ordinary}{t} \ident \OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{t}_\OLMathNumeral{1}, \dots, \OLId{latin-ordinary}{t}_\OLId{latin-ordinary}{n})$، فإن
+  \begin{align*}
+    \Value{\OLId{latin-ordinary}{t}}{\OLId{latin-looped}{M}}[\OLId{latin-ordinary}{s}] & = \Assign{\OLId{latin-ordinary}{f}}{\OLId{latin-looped}{M}}(\Value{\OLId{latin-ordinary}{t}_\OLMathNumeral{1}}{\OLId{latin-looped}{M}}[\OLId{latin-ordinary}{s}], \dots, \Value{\OLId{latin-ordinary}{t}_\OLId{latin-ordinary}{n}}{\OLId{latin-looped}{M}}[\OLId{latin-ordinary}{s}]) \quad\text{و}\\
+  \Value{\OLId{latin-ordinary}{t}}{\OLId{latin-looped}{M}'}[\OLId{latin-ordinary}{h} \circ \OLId{latin-ordinary}{s}] & = \Assign{\OLId{latin-ordinary}{f}}{\OLId{latin-looped}{M}'}(\Value{\OLId{latin-ordinary}{t}_\OLMathNumeral{1}}{\OLId{latin-looped}{M}'}[\OLId{latin-ordinary}{h} \circ
+    \OLId{latin-ordinary}{s}], \dots, \Value{\OLId{latin-ordinary}{t}_\OLId{latin-ordinary}{n}}{\OLId{latin-looped}{M}'}[\OLId{latin-ordinary}{h} \circ \OLId{latin-ordinary}{s}]).
+  \end{align*}
+  وبفرض الاستقراء نعلم، لكل $\OLId{latin-ordinary}{i}$، أن
+  $\OLId{latin-ordinary}{h}(\Value{\OLId{latin-ordinary}{t}_\OLId{latin-ordinary}{i}}{\OLId{latin-looped}{M}}[\OLId{latin-ordinary}{s}]) = \Value{\OLId{latin-ordinary}{t}_\OLId{latin-ordinary}{i}}{\OLId{latin-looped}{M}'}[\OLId{latin-ordinary}{h}\circ \OLId{latin-ordinary}{s}]$. لذلك
+  \begin{align}
+    \OLId{latin-ordinary}{h}(\Value{\OLId{latin-ordinary}{t}}{\OLId{latin-looped}{M}}[\OLId{latin-ordinary}{s}])
+    & = \OLId{latin-ordinary}{h}(\Assign{\OLId{latin-ordinary}{f}}{\OLId{latin-looped}{M}}(\Value{\OLId{latin-ordinary}{t}_\OLMathNumeral{1}}{\OLId{latin-looped}{M}}[\OLId{latin-ordinary}{s}], \dots, \Value{\OLId{latin-ordinary}{t}_\OLId{latin-ordinary}{n}}{\OLId{latin-looped}{M}}[\OLId{latin-ordinary}{s}])) \notag\\
+    & = \Assign{\OLId{latin-ordinary}{f}}{\OLId{latin-looped}{M}'}(\OLId{latin-ordinary}{h}(\Value{\OLId{latin-ordinary}{t}_\OLMathNumeral{1}}{\OLId{latin-looped}{M}}[\OLId{latin-ordinary}{s}]), \dots,
+    \OLId{latin-ordinary}{h}(\Value{\OLId{latin-ordinary}{t}_\OLId{latin-ordinary}{n}}{\OLId{latin-looped}{M}}[\OLId{latin-ordinary}{s}])) \ollabel{iso-1}\\
+    & = \Assign{\OLId{latin-ordinary}{f}}{\OLId{latin-looped}{M}'}(\Value{\OLId{latin-ordinary}{t}_\OLMathNumeral{1}}{\OLId{latin-looped}{M}'}[\OLId{latin-ordinary}{h} \circ \OLId{latin-ordinary}{s}], \dots,
+    \Value{\OLId{latin-ordinary}{t}_\OLId{latin-ordinary}{n}}{\OLId{latin-looped}{M}'}[\OLId{latin-ordinary}{h} \circ \OLId{latin-ordinary}{s}]) \ollabel{iso-2}\\
+    & = \Value{\OLId{latin-ordinary}{t}}{\OLId{latin-looped}{M}'}[\OLId{latin-ordinary}{h}\circ \OLId{latin-ordinary}{s}] \notag
+  \end{align}
+  أما \olref{iso-1} فمقتضى البند \olref{defn:iso-func} من
+  \olref{defn:isomorphism}، وأما \olref{iso-2} فمقتضى فرض الاستقراء.
+\end{enumerate}
+وأما الجزء (b) فنترك برهانه للقارئ تمرينًا.
+
+وأما إذا كانت $!A$ جملة، فلا يتوقف صدقها على التعيينين~$\OLId{latin-ordinary}{s}$
+و$\OLId{latin-ordinary}{h} \circ \OLId{latin-ordinary}{s}$، فيلزم
+$\Sat{\OLId{latin-looped}{M}}{!A}$ إذا وفقط إذا كان $\Sat{\OLId{latin-looped}{M}'}{!A}$.
+\end{proof}
+
+\begin{prob}
+أتمّ برهان الجزء (b) من \olref[mod][bas][iso]{thm:isom} مفصلًا،
+وعيّن أين استُعملت كل خاصية من الخواص الخمس المحددة للتشاكل
+في \olref[mod][bas][iso]{defn:isomorphism}.
+\end{prob}
+
+\begin{defn}
+\emph{التشاكل الذاتي} لبنية~$\Struct{M}$ هو تشاكل من
+$\Struct{M}$ على نفسها.
+\end{defn}
+
+\begin{prob}
+لتكن بنية~$\Struct{M}$، ولتكن $\OLId{latin-looped}{X}$ مجموعة جزئية قابلة
+للتعريف في $\Struct{M}$، وليكن $\OLId{latin-ordinary}{h}$ تشاكلًا ذاتيًا لـ$\Struct{M}$.
+أثبت أن $\OLId{latin-looped}{X} = \Setabs{\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{x})}{\OLId{latin-ordinary}{x} \in \OLId{latin-looped}{X}}$، أي إن $\OLId{latin-looped}{X}$ ثابتة تحت $\OLId{latin-ordinary}{h}$.
+\end{prob}
+
+
+\end{document}

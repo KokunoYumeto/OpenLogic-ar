@@ -1,0 +1,166 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{ordinals}{iso}
+\olsection{تماثلات الترتيب}
+
+نبدأ بطريقة نقارن بها بين الترتيبات الجيدة؛ فبها يتبين \emph{مدى}
+ثبات بنيتها.
+
+\begin{defn}
+\emph{الترتيب الجيد} هو الزوج~$\tuple{\OLId{latin-looped}{A}, <}$ إذا كانت~$<$ ترتب
+$\OLId{latin-looped}{A}$ ترتيبًا جيدًا. ونقول إن الترتيبين الجيدين~$\tuple{\OLId{latin-looped}{A}, <}$
+و$\tuple{\OLId{latin-looped}{B}, \lessdot}$ \emph{متماثلان ترتيبيًا} إذا وفقط إذا وجد
+!!a{bijection}~$\OLId{latin-ordinary}{f} \colon \OLId{latin-looped}{A} \to \OLId{latin-looped}{B}$ يحقق الشرط الآتي: $\OLId{latin-ordinary}{x} < \OLId{latin-ordinary}{y}$ إذا
+وفقط إذا كان~$\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x}) \lessdot \OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{y})$. وحينئذ نكتب
+$\ordeq{\tuple{\OLId{latin-looped}{A}, <}}{\tuple{\OLId{latin-looped}{B}, \lessdot}}$، ونسمي~$\OLId{latin-ordinary}{f}$
+\emph{تماثلًا ترتيبيًا}.
+\end{defn}
+\noindent
+ونقتصر فيما يلي على لفظ «التماثل» اختصارًا لـ«تماثل الترتيب». والمعنى
+الحدسي أن التماثلات !!{bijection}s تحفظ البنية. ولنذكر أولًا بعض
+خواصها اليسيرة.
+
+\begin{lem}\ollabel{isoscompose}
+إذا رُكّبت التماثلات كان تركيبها تماثلًا؛ فإذا كان~$\OLId{latin-ordinary}{f} \colon \OLId{latin-looped}{A} \to \OLId{latin-looped}{B}$
+و$\OLId{latin-ordinary}{g} \colon \OLId{latin-looped}{B} \to \OLId{latin-looped}{C}$ تماثلين، كان~$(\OLId{latin-ordinary}{g} \circ \OLId{latin-ordinary}{f}) \colon \OLId{latin-looped}{A} \to \OLId{latin-looped}{C}$
+تماثلًا كذلك.
+\end{lem}
+\begin{prob}
+أقم البرهان على~\olref[sth][ordinals][iso]{isoscompose}.
+\end{prob}
+\begin{proof}
+يُترك إثباتها للقارئ تمرينًا.
+\end{proof}
+\begin{cor}\ollabel{ordisoisequiv}
+العلاقة~$\ordeq{\OLId{latin-looped}{X}}{\OLId{latin-looped}{Y}}$ علاقة تكافؤ.
+\end{cor}
+\begin{prop}\ollabel{ordisounique}
+إذا تماثل الترتيبان الجيدان~$\tuple{\OLId{latin-looped}{A}, <}$ و$\tuple{\OLId{latin-looped}{B}, \lessdot}$،
+لم يكن بينهما إلا تماثل واحد.
+\end{prop}
+
+\begin{proof}
+لنفرض أن~$\OLId{latin-ordinary}{f}$ و$\OLId{latin-ordinary}{g}$ تماثلان~$\OLId{latin-looped}{A} \to \OLId{latin-looped}{B}$. وسبيلنا إلى إثبات تساويهما
+الاستقراء الوارد في~\olref[wo]{propwoinduction}.
+  نثبّت~$\OLId{latin-ordinary}{a}\in \OLId{latin-looped}{A}$، ونأخذ فرض الاستقراء
+  $(\forall \OLId{latin-ordinary}{b} < \OLId{latin-ordinary}{a})\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{b}) = \OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{b})$، ثم نثبّت~$\OLId{latin-ordinary}{x} \in \OLId{latin-looped}{B}$.
+
+إن كان~$\OLId{latin-ordinary}{x} \lessdot \OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{a})$، لزم~$\OLId{latin-ordinary}{f}^{-\OLMathNumeral{1}}(\OLId{latin-ordinary}{x}) < \OLId{latin-ordinary}{a}$، ثم
+$\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{f}^{-\OLMathNumeral{1}}(\OLId{latin-ordinary}{x})) \lessdot \OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{a})$، إذ إن~$\OLId{latin-ordinary}{f}$ و$\OLId{latin-ordinary}{g}$ تماثلان. ولما كان
+$\OLId{latin-ordinary}{f}^{-\OLMathNumeral{1}}(\OLId{latin-ordinary}{x}) < \OLId{latin-ordinary}{a}$ أعطى فرض الاستقراء
+$\OLId{latin-ordinary}{x} =\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{f}^{-\OLMathNumeral{1}}(\OLId{latin-ordinary}{x})) = \OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{f}^{-\OLMathNumeral{1}}(\OLId{latin-ordinary}{x}))$؛ فيكون~$\OLId{latin-ordinary}{x} \lessdot \OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{a})$.
+وبالحجة نفسها، إن كان~$\OLId{latin-ordinary}{x} \lessdot \OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{a})$ كان~$\OLId{latin-ordinary}{x} \lessdot \OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{a})$.
+
+إذن~$(\forall \OLId{latin-ordinary}{x} \in \OLId{latin-looped}{B})(\OLId{latin-ordinary}{x} \lessdot \OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{a}) \liff \OLId{latin-ordinary}{x} \lessdot \OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{a}))$.
+ومن~\olref[sfr][rel][ord]{prop:extensionality-strictlinearorders}
+يلزم~$\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{a}) = \OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{a})$. وعليه
+$(\forall \OLId{latin-ordinary}{a} \in \OLId{latin-looped}{A})\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{a}) = \OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{a})$، بحسب~\olref[wo]{propwoinduction}.
+\end{proof}\noindent
+هذا أول ما يكشف عن ثبات بنية الترتيبات الجيدة. ولكي نستوفي البيان
+نحتاج إلى ترميز آخر.
+
+\begin{defn}
+متى كان~$\tuple{\OLId{latin-looped}{A}, <}$ ترتيبًا جيدًا و$\OLId{latin-ordinary}{a} \in \OLId{latin-looped}{A}$، وضعنا
+$\OLId{latin-looped}{A}_\OLId{latin-ordinary}{a} = \Setabs{\OLId{latin-ordinary}{x} \in \OLId{latin-looped}{A}}{\OLId{latin-ordinary}{x} < \OLId{latin-ordinary}{a}}$. وتسمى~$\OLId{latin-looped}{A}_\OLId{latin-ordinary}{a}$ \emph{قطعة ابتدائية
+حقيقية} من~$\OLId{latin-looped}{A}$؛ أما~$\OLId{latin-looped}{A}$ نفسها فنعدها قطعة ابتدائية غير حقيقية من~$\OLId{latin-looped}{A}$.
+ونرمز بـ$<_\OLId{latin-ordinary}{a}$ إلى تقييد~$<$ بهذه القطعة، أي إلى
+$\funrestrictionto{\mathord{<}}{\OLId{latin-looped}{A}_\OLId{latin-ordinary}{a}^\OLMathNumeral{2}}$.
+\end{defn}
+\noindent
+وبهذا الترميز نصوغ امتناع تماثل أي ترتيب جيد مع قطعة ابتدائية حقيقية
+منه، ثم نبرهنه.
+
+\begin{lem}\ollabel{wellordnotinitial}
+إذا كان~$\tuple{\OLId{latin-looped}{A}, <}$ ترتيبًا جيدًا و$\OLId{latin-ordinary}{a} \in \OLId{latin-looped}{A}$، لزم
+$\ordneq{\tuple{\OLId{latin-looped}{A}, <}}{\tuple{\OLId{latin-looped}{A}_\OLId{latin-ordinary}{a}, <_\OLId{latin-ordinary}{a}}}$.
+\end{lem}
+
+\begin{proof}
+لنفرض، طلبًا للخلف، أن~$\OLId{latin-ordinary}{f} \colon \OLId{latin-looped}{A} \to \OLId{latin-looped}{A}_\OLId{latin-ordinary}{a}$ تماثل. ولأن~$\OLId{latin-ordinary}{f}$ تقابل
+و$\OLId{latin-looped}{A}_\OLId{latin-ordinary}{a} \subsetneq \OLId{latin-looped}{A}$، نأخذ~$\OLId{latin-ordinary}{b} \in \OLId{latin-looped}{A}$، بمقتضى
+\olref[wo]{wo:strictorder}، أصغر !!{element} في~$\OLId{latin-looped}{A}$ بحسب~$<$
+مما يحقق~$\OLId{latin-ordinary}{b} \neq \OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{b})$. وسنثبت
+$(\forall \OLId{latin-ordinary}{x} \in \OLId{latin-looped}{A})(\OLId{latin-ordinary}{x}<\OLId{latin-ordinary}{b} \liff \OLId{latin-ordinary}{x} < \OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{b}))$؛ إذ ينتج من ذلك، بمقتضى
+\olref[sfr][rel][ord]{prop:extensionality-strictlinearorders}،
+أن~$\OLId{latin-ordinary}{b} = \OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{b})$، وهو الخلف المطلوب.
+
+أما إذا كان~$\OLId{latin-ordinary}{x} < \OLId{latin-ordinary}{b}$، فإن~$\OLId{latin-ordinary}{x} = \OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x})$ بحكم اختيار~$\OLId{latin-ordinary}{b}$. ثم
+$\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x}) < \OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{b})$ لحفظ~$\OLId{latin-ordinary}{f}$ الترتيب، فيلزم~$\OLId{latin-ordinary}{x} < \OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{b})$.
+
+وأما إذا كان~$\OLId{latin-ordinary}{x} < \OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{b})$، فإن~$\OLId{latin-ordinary}{f}^{-\OLMathNumeral{1}}(\OLId{latin-ordinary}{x}) < \OLId{latin-ordinary}{b}$ لأن~$\OLId{latin-ordinary}{f}$ تماثل؛ فيكون
+$\OLId{latin-ordinary}{f}^{-\OLMathNumeral{1}}(\OLId{latin-ordinary}{x}) = \OLId{latin-ordinary}{x}$ بحكم اختيار~$\OLId{latin-ordinary}{b}$، ويلزم~$\OLId{latin-ordinary}{x} < \OLId{latin-ordinary}{b}$.
+\end{proof}
+
+وفي النتيجة التالية معنى يمكن تقريبه بالقول: إن «القطعة الابتدائية»
+من التماثل تبقى تماثلًا.
+
+\begin{lem}\ollabel{wellordinitialsegment}
+ليكن~$\tuple{\OLId{latin-looped}{A}, <}$ و$\tuple{\OLId{latin-looped}{B}, \lessdot}$ ترتيبين جيدين. متى كان
+$\OLId{latin-ordinary}{f} \colon \OLId{latin-looped}{A} \to \OLId{latin-looped}{B}$ تماثلًا و$\OLId{latin-ordinary}{a} \in \OLId{latin-looped}{A}$، كان
+$\funrestrictionto{\OLId{latin-ordinary}{f}}{\OLId{latin-looped}{A}_{\OLId{latin-ordinary}{a}}} : \OLId{latin-looped}{A}_\OLId{latin-ordinary}{a} \to \OLId{latin-looped}{B}_{\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{a})}$ تماثلًا.
+\end{lem}
+
+\begin{proof}
+من كون~$\OLId{latin-ordinary}{f}$ تماثلًا نحصل على:
+%Since $f$ is an isomorphism, $b < a$ iff $f(b) \lessdot f(a)$, so that
+\begin{align*}
+\funimage{\OLId{latin-ordinary}{f}}{\OLId{latin-looped}{A}_\OLId{latin-ordinary}{a}} &= \funimage{\OLId{latin-ordinary}{f}}{\Setabs{\OLId{latin-ordinary}{x} \in \OLId{latin-looped}{A}}{\OLId{latin-ordinary}{x} < \OLId{latin-ordinary}{a}}}\\
+&= \Setabs{\OLId{latin-ordinary}{y} \in \OLId{latin-looped}{B}}{\OLId{latin-ordinary}{f}^{-\OLMathNumeral{1}}(\OLId{latin-ordinary}{y})<\OLId{latin-ordinary}{a}} \\
+&= \Setabs{\OLId{latin-ordinary}{y} \in \OLId{latin-looped}{B}}{\OLId{latin-ordinary}{y} \lessdot \OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{a})} \\
+&=\OLId{latin-looped}{B}_{\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{a})}
+\end{align*}
+وأما حفظ~$\funrestrictionto{\OLId{latin-ordinary}{f}}{\OLId{latin-looped}{A}_\OLId{latin-ordinary}{a}}$ للترتيب فموروث من حفظ~$\OLId{latin-ordinary}{f}$ له.
+\end{proof}
+
+ونثبت الآن، في نتيجتين، أن المقارنة بين الترتيبات الجيدة ممكنة دائمًا.
+
+\begin{lem}\ollabel{lemordsegments}
+ليكن~$\tuple{\OLId{latin-looped}{A}, <}$ و$\tuple{\OLId{latin-looped}{B}, \lessdot}$ ترتيبين جيدين. إذا كان
+$\ordeq{\tuple{\OLId{latin-looped}{A}_{\OLId{latin-ordinary}{a}_\OLMathNumeral{1}}, <_{\OLId{latin-ordinary}{a}_\OLMathNumeral{1}}}}{\tuple{\OLId{latin-looped}{B}_{\OLId{latin-ordinary}{b}_\OLMathNumeral{1}}, \lessdot_{\OLId{latin-ordinary}{b}_\OLMathNumeral{1}}}}$
+و$\ordeq{\tuple{\OLId{latin-looped}{A}_{{\OLId{latin-ordinary}{a}_\OLMathNumeral{2}}}, <_{\OLId{latin-ordinary}{a}_\OLMathNumeral{2}}}}{\tuple{\OLId{latin-looped}{B}_{{\OLId{latin-ordinary}{b}_\OLMathNumeral{2}}}, \lessdot_{\OLId{latin-ordinary}{b}_\OLMathNumeral{2}}}}$،
+فإن~${\OLId{latin-ordinary}{a}_\OLMathNumeral{1}} < {\OLId{latin-ordinary}{a}_\OLMathNumeral{2}} \text{ إذا وفقط إذا كان } {\OLId{latin-ordinary}{b}_\OLMathNumeral{1}} \lessdot {\OLId{latin-ordinary}{b}_\OLMathNumeral{2}}$.
+\end{lem}
+
+\begin{proof}
+نبرهن الاتجاه \emph{من اليسار إلى اليمين}؛ ويجري الآخر على مثاله.
+لنفرض
+$\ordeq{\tuple{\OLId{latin-looped}{A}_{\OLId{latin-ordinary}{a}_\OLMathNumeral{1}}, <_{\OLId{latin-ordinary}{a}_\OLMathNumeral{1}}}}{\tuple{\OLId{latin-looped}{B}_{\OLId{latin-ordinary}{b}_\OLMathNumeral{1}}, \lessdot_{\OLId{latin-ordinary}{b}_\OLMathNumeral{1}}}}$
+و$\ordeq{\tuple{\OLId{latin-looped}{A}_{{\OLId{latin-ordinary}{a}_\OLMathNumeral{2}}}, <_{\OLId{latin-ordinary}{a}_\OLMathNumeral{2}}}}{\tuple{\OLId{latin-looped}{B}_{{\OLId{latin-ordinary}{b}_\OLMathNumeral{2}}}, \lessdot_{\OLId{latin-ordinary}{b}_\OLMathNumeral{2}}}}$،
+وليكن~$\OLId{latin-ordinary}{f} \colon \OLId{latin-looped}{A}_{{\OLId{latin-ordinary}{a}_\OLMathNumeral{2}}} \to \OLId{latin-looped}{B}_{{\OLId{latin-ordinary}{b}_\OLMathNumeral{2}}}$ التماثل الثاني. فإذا كان
+${\OLId{latin-ordinary}{a}_\OLMathNumeral{1}} < {\OLId{latin-ordinary}{a}_\OLMathNumeral{2}}$، كان
+$\ordeq{\tuple{\OLId{latin-looped}{A}_{\OLId{latin-ordinary}{a}_\OLMathNumeral{1}}, <_{\OLId{latin-ordinary}{a}_\OLMathNumeral{1}}}}{\tuple{\OLId{latin-looped}{B}_{\OLId{latin-ordinary}{f}({\OLId{latin-ordinary}{a}_\OLMathNumeral{1}})}, \lessdot_{\OLId{latin-ordinary}{f}({\OLId{latin-ordinary}{a}_\OLMathNumeral{1}})}}}$
+بمقتضى~\olref{wellordinitialsegment}. ومن ثم
+$\ordeq{\tuple{\OLId{latin-looped}{B}_{\OLId{latin-ordinary}{b}_\OLMathNumeral{1}}, \lessdot_{\OLId{latin-ordinary}{b}_\OLMathNumeral{1}}}}{\tuple{\OLId{latin-looped}{B}_{\OLId{latin-ordinary}{f}({\OLId{latin-ordinary}{a}_\OLMathNumeral{1}})}, \lessdot_{\OLId{latin-ordinary}{f}({\OLId{latin-ordinary}{a}_\OLMathNumeral{1}})}}}$،
+فينتج~${\OLId{latin-ordinary}{b}_\OLMathNumeral{1}} = \OLId{latin-ordinary}{f}({\OLId{latin-ordinary}{a}_\OLMathNumeral{1}})$ من~\olref{wellordnotinitial}. وأخيرًا
+${\OLId{latin-ordinary}{b}_\OLMathNumeral{1}} \lessdot {\OLId{latin-ordinary}{b}_\OLMathNumeral{2}}$، إذ مدى~$\OLId{latin-ordinary}{f}$ هو~$\OLId{latin-looped}{B}_{{\OLId{latin-ordinary}{b}_\OLMathNumeral{2}}}$.
+\end{proof}
+
+\begin{thm}\ollabel{thm:woalwayscomparable}
+كل ترتيبين جيدين يتماثل أحدهما مع قطعة ابتدائية من الآخر، ولا يلزم
+أن تكون تلك القطعة حقيقية.
+\end{thm}
+
+\begin{proof}
+نأخذ ترتيبين جيدين~$\tuple{\OLId{latin-looped}{A}, <}$ و$\tuple{\OLId{latin-looped}{B}, \lessdot}$، ونضع
+بمسلّمة الفصل:
+\[
+\OLId{latin-ordinary}{f} = \Setabs{\tuple{\OLId{latin-ordinary}{a}, \OLId{latin-ordinary}{b}} \in \OLId{latin-looped}{A} \times \OLId{latin-looped}{B}}{
+\ordeq{\tuple{\OLId{latin-looped}{A}_\OLId{latin-ordinary}{a}, <_\OLId{latin-ordinary}{a}}}{\tuple{\OLId{latin-looped}{B}_\OLId{latin-ordinary}{b}, \lessdot_\OLId{latin-ordinary}{b}}}}.
+\]
+تقتضي~\olref{lemordsegments} أن~$\OLId{latin-ordinary}{a}_\OLMathNumeral{1} < \OLId{latin-ordinary}{a}_\OLMathNumeral{2}$ إذا وفقط إذا كان
+$\OLId{latin-ordinary}{b}_\OLMathNumeral{1} \lessdot \OLId{latin-ordinary}{b}_\OLMathNumeral{2}$، لكل~$\tuple{\OLId{latin-ordinary}{a}_\OLMathNumeral{1}, \OLId{latin-ordinary}{b}_\OLMathNumeral{1}}, \tuple{\OLId{latin-ordinary}{a}_\OLMathNumeral{2}, \OLId{latin-ordinary}{b}_\OLMathNumeral{2}} \in \OLId{latin-ordinary}{f}$.
+فيكون~$\OLId{latin-ordinary}{f} \colon \dom{\OLId{latin-ordinary}{f}} \to \ran{\OLId{latin-ordinary}{f}}$ تماثلًا.
+
+وإذا كان~$\OLId{latin-ordinary}{a}_\OLMathNumeral{2} \in \dom{\OLId{latin-ordinary}{f}}$ و$\OLId{latin-ordinary}{a}_\OLMathNumeral{1} < \OLId{latin-ordinary}{a}_\OLMathNumeral{2}$، لزم~$\OLId{latin-ordinary}{a}_\OLMathNumeral{1} \in \dom{\OLId{latin-ordinary}{f}}$
+بمقتضى~\olref{wellordinitialsegment}؛ ومن ثم فإن~$\dom{\OLId{latin-ordinary}{f}}$ قطعة
+ابتدائية من~$\OLId{latin-looped}{A}$. وكذلك~$\ran{\OLId{latin-ordinary}{f}}$ قطعة ابتدائية من~$\OLId{latin-looped}{B}$. ولنفرض
+خلاف المطلوب، أي أن القطعتين \emph{حقيقيتان}. نأخذ~$\OLId{latin-ordinary}{a}$ أصغر
+!!{element} بحسب~$<$ في~$\OLId{latin-looped}{A} \setminus \dom{\OLId{latin-ordinary}{f}}$، فيكون~$\dom{\OLId{latin-ordinary}{f}} = \OLId{latin-looped}{A}_\OLId{latin-ordinary}{a}$؛
+ونأخذ~$\OLId{latin-ordinary}{b}$ أصغر !!{element} بحسب~$\lessdot$ في~$\OLId{latin-looped}{B} \setminus \ran{\OLId{latin-ordinary}{f}}$،
+فيكون~$\ran{\OLId{latin-ordinary}{f}} = \OLId{latin-looped}{B}_\OLId{latin-ordinary}{b}$. إذن~$\OLId{latin-ordinary}{f} \colon \OLId{latin-looped}{A}_\OLId{latin-ordinary}{a} \to \OLId{latin-looped}{B}_\OLId{latin-ordinary}{b}$ تماثل، فيلزم
+$\tuple{\OLId{latin-ordinary}{a}, \OLId{latin-ordinary}{b}} \in \OLId{latin-ordinary}{f}$، وهذا تناقض.
+\end{proof}
+
+\end{document}

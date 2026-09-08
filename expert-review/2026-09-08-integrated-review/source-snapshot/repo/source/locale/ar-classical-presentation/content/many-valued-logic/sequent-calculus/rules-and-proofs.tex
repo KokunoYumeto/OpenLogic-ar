@@ -1,0 +1,76 @@
+% Part: many-valued-logic
+% Chapter: sequent-calculus
+% Section: rules-and-proofs
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mvl}{seq}{rul}
+
+\olsection{القواعد وال\usetoken{P}{derivation}}
+
+نجعل~$\OLId{greek-variable}{Gamma}, \OLId{greek-variable}{Delta}, \Pi, \Lambda$ فيما يأتي أسماء لمتتاليات
+منتهية من ال!!{sentence}s، وندخل في ذلك المتتالية الخالية.
+
+\begin{defn}[التتابعية]
+\emph{التتابعية ذات الجوانب~$\OLId{latin-ordinary}{n}$} تعبير من الصورة
+\[
+\OLId{greek-variable}{Gamma}_\OLMathNumeral{1} \nSequent \dots \nSequent \OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n}
+\]
+حيث كل~$\OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{i}$ متتالية منتهية (وربما خالية) من !!{sentence}s
+اللغة~$\Lang L$.
+\end{defn}
+
+\begin{defn}[التتابعية الابتدائية]
+\emph{التتابعية الابتدائية ذات الجوانب~$\OLId{latin-ordinary}{n}$} تتابعية ذات جوانب~$\OLId{latin-ordinary}{n}$ من
+الصورة~$!A \nSequent \dots \nSequent !A$ لأي !!{sentence}~$!A$ في
+اللغة.
+
+وقد تشتمل اللغة على رابط صفري الرتبة~$\star$، وهو ثابت من ثوابت
+القضايا. وحينئذ نعدّ التتابعية~$\dots \nSequent \star \nSequent \dots$
+ابتدائية أيضًا، على أن يوضع~$\star$ وحده في الموضع الموافق لقيمة
+الصدق~$\tf{\star} \in \OLId{latin-looped}{V}$، وتخلو سائر المواضع.
+\end{defn}
+
+إذا كان المنطق ذا~$\OLId{latin-ordinary}{n}$ من القيم ورمزه~$\Log{L}$، خُصّ كل رابط فيه
+بقاعدة منطقية لكل قيمة صدق يجوز أن يأخذها في~$\Log{L}$.
+وأما ال!!^{derivation}s في حساب التتابعيات ذي الجوانب~$\OLId{latin-ordinary}{n}$ للمنطق~$\Log{L}$،
+فهي أشجار رؤوسها العليا تتابعيات ابتدائية. وكل تتابعية تقع تحت واحدة
+أو أكثر إنما تصح في الشجرة إذا نتجت مما فوقها بتطبيق صحيح لإحدى
+قواعد روابط~$\Log{L}$.
+
+\begin{defn}[المبرهنات]
+تكون !!^a{sentence}~$!A$ \emph{مبرهنة} في منطق ذي~$\OLId{latin-ordinary}{n}$ من القيم
+$\Log{L}$ إذا وُجد !!a{derivation} للتتابعية ذات الجوانب~$\OLId{latin-ordinary}{n}$ التي
+تحتوي~$!A$ وحدها في كل موضع يقابل قيمة صدق مميّزة في~$\Log{L}$،
+وتخلو سائر المواضع. ونكتب
+$\Proves[\Log{L}] !A$ إذا كانت~$!A$ مبرهنة، ونكتب
+$\Proves/[\Log{L}] !A$ إذا لم تكن كذلك.
+\end{defn}
+
+\begin{defn}[!!^{derivability}]
+تكون !!^a{sentence}~$!A$ \emph{!!{derivable} من} مجموعة
+!!{sentence}s~$\OLId{greek-variable}{Gamma}$ في منطق ذي~$\OLId{latin-ordinary}{n}$ من القيم~$\Log{L}$، أي
+$\OLId{greek-variable}{Gamma} \Proves[\Log{L}] !A$، إذا وفقط إذا وُجدت مجموعة جزئية
+منتهية~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{0} \subseteq \OLId{greek-variable}{Gamma}$ ومتتالية~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{0}'$ من
+ال!!{sentence}s في~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{0}$ بحيث يكون للتتابعية الآتية
+!!a{derivation}:
+\[ \Lambda_\OLMathNumeral{1} \nSequent \dots \nSequent \Lambda_\OLId{latin-ordinary}{n} \]
+حيث تكون~$\Lambda_\OLId{latin-ordinary}{i}$ هي~$!A$ إذا كان الموضع~$\OLId{latin-ordinary}{i}$ يقابل قيمة صدق
+مميّزة، وتكون~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{0}'$ إذا كان يقابل قيمة صدق غير مميّزة. وإذا لم
+تكن~$!A$ !!{derivable} من~$\OLId{greek-variable}{Gamma}$، كتبنا
+$\OLId{greek-variable}{Gamma} \Proves/[\Log{L}] !A$.
+\end{defn}
+
+ولنعتبر منطق~\L ukasiewicz الثلاثي القيم، فحساب تتابعياته ذو ثلاثة
+جوانب. في التتابعية~$\OLId{greek-variable}{Gamma} \nSequent \Pi \nSequent \OLId{greek-variable}{Delta}$
+موضع~$\OLId{greek-variable}{Gamma}$ للقيمة~$\False$، وموضع~$\OLId{greek-variable}{Delta}$ للقيمة~$\True$،
+وموضع~$\Pi$ للقيمة~$\Undef$. وابتدائياته على الصورة
+$!A \nSequent !A \nSequent !A$. ثم إن~$\True$ وحدها مميّزة؛
+ولهذا كان~$\OLId{greek-variable}{Gamma} \Proves[\LogLuk[\OLMathNumeral{3}]] !A$ مكافئًا لوجود
+!!a{derivation} للتتابعية~$\OLId{greek-variable}{Gamma} \nSequent \OLId{greek-variable}{Gamma} \nSequent !A$.
+ولو عُدّت~$\Undef$ مميّزة أيضًا، لكان المطلوب !!a{derivation}
+للتتابعية~$\OLId{greek-variable}{Gamma} \nSequent !A \nSequent !A$.
+
+\end{document}

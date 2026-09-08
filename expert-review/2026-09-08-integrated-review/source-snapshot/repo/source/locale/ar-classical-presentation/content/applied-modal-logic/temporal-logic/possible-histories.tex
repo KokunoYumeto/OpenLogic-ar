@@ -1,0 +1,65 @@
+% Part: applied-modal-logics
+% Chapter: temporal-logic
+% Section: possible-histories
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{aml}{tl}{poss}
+
+\olsection{في التواريخ الممكنة}
+
+لما كانت النماذج العلائقية التي تقدمت للمنطق الزمني لا تقيد علاقة النفاذ،
+اتسعت لضروب كثيرة من البنية، ومنها تفرع الماضي والمستقبل. غير أنا قد نريد
+تمثيل هذا التفرع تمثيلًا أصرح بالجهة، فنجعل متتاليات الحوادث تواريخ ممكنة.
+ولا يوجب ذلك تغيير اللغة نفسها؛ وإن جاز أن نلحق بها المؤثرين الجهويين
+المعهودين~$\Box$ و$\Diamond$، أو نزيد علاقات نفاذ معرفية تمثل تغير معرفة
+الفاعلين على مر الزمن.
+
+\begin{defn}
+  \emph{نموذج التواريخ الممكنة} للغة الزمنية هو الثلاثي
+  $\mModel{M}=\tuple{\OLId{latin-looped}{T},\OLId{latin-looped}{C},\OLId{latin-looped}{V}}$، وفيه:
+  \begin{enumerate}
+    \item $\OLId{latin-looped}{T}$ مجموعة غير فارغة، تُفسر عناصرها بوصفها حالات في الزمن.
+    \item $\OLId{latin-looped}{C}$ مجموعة من مسارات التنفيذ، أي \emph{التواريخ الممكنة}
+      لنظام ما؛ وبعبارة أخرى،~$\OLId{latin-looped}{C}$ مجموعة من المتتاليات~$\sigma$ للحالات
+      $\OLId{latin-ordinary}{s}_\OLMathNumeral{1}$، $\OLId{latin-ordinary}{s}_\OLMathNumeral{2}$،~$\OLId{latin-ordinary}{s}_\OLMathNumeral{3}$، \dots، حيث كل~$\OLId{latin-ordinary}{s}_\OLId{latin-ordinary}{i} \in \OLId{latin-looped}{T}$.
+    \item $\OLId{latin-looped}{V}$ دالة تسند إلى كل~!!{propositional
+      variable}~$\OLId{latin-ordinary}{p}$ مجموعة~$\OLId{latin-looped}{V}(\OLId{latin-ordinary}{p})$ من النقاط الزمنية.
+  \end{enumerate}
+  ونفترض، طلبًا للتيسير، أن كل تاريخ في~$\OLId{latin-looped}{C}$ تكون جميع لواحقه فيها أيضًا.
+  فإذا كانت~$\OLId{latin-ordinary}{s}_\OLMathNumeral{1}$، $\OLId{latin-ordinary}{s}_\OLMathNumeral{2}$،~$\OLId{latin-ordinary}{s}_\OLMathNumeral{3}$ متتالية في~$\OLId{latin-looped}{C}$، كانت~$\OLId{latin-ordinary}{s}_\OLMathNumeral{2}$، $\OLId{latin-ordinary}{s}_\OLMathNumeral{3}$
+  وكذلك~$\OLId{latin-ordinary}{s}_\OLMathNumeral{3}$ متتاليتين فيها. وإذا اجتمعت حالتان~$\OLId{latin-ordinary}{s}_\OLId{latin-ordinary}{i}$ و$\OLId{latin-ordinary}{s}_\OLId{latin-ordinary}{j}$ في
+  متتالية~$\sigma$، قلنا إن~$\OLId{latin-ordinary}{s}_\OLId{latin-ordinary}{i} \prec_\sigma \OLId{latin-ordinary}{s}_\OLId{latin-ordinary}{j}$ متى كان $\OLId{latin-ordinary}{i}<\OLId{latin-ordinary}{j}$.
+  وإذا كان~$\OLId{latin-ordinary}{t} \in \OLId{latin-looped}{V}(\OLId{latin-ordinary}{p})$ قلنا إن~$\OLId{latin-ordinary}{p}$ \emph{صادق عند}~$\OLId{latin-ordinary}{t}$.
+\end{defn}
+
+وإنما يتغير التقويم من جهة واحدة: فصدق !!a{formula} عند النقطة الزمنية~$\OLId{latin-ordinary}{t}$
+في النموذج~$\mModel M$ يقوّم الآن بالإضافة إلى تاريخ~$\sigma$ تظهر فيه~$\OLId{latin-ordinary}{t}$
+حالةً. وأما دلالات ال!!{propositional variable}s والروابط الدالية الصدق
+فباقية على ما في~\olref[sem]{defn:tmodels}، إذ لا يشير شيء منها إلى
+$\sigma$. والذي نعيد حده هو مؤثر المستقبل~$\Ftemp$، ثم نضيف المؤثر
+$\Diamond$ بالنظر إلى هذه التواريخ.
+
+\begin{defn}\ollabel{defn:phmodels}
+  \emph{صدق !!a{formula}~$!A$ عند~$\OLId{latin-ordinary}{t},\sigma$} في~$\mModel M$، ورمزه
+  $\mSat{\OLId{latin-looped}{M}}{!A}[\OLId{latin-ordinary}{t},\sigma]$:
+  \begin{enumerate}
+  \item\ollabel{defn:sub:phmodels-f} \indcase{!A}{\Ftemp
+    !B}{$\mSat{\OLId{latin-looped}{M}}{\indfrm}[\OLId{latin-ordinary}{t},\sigma]$ إذا وفقط إذا كان
+    $\mSat{\OLId{latin-looped}{M}}{!B}[\OLId{latin-ordinary}{t}',\sigma]$ لبعض~$\OLId{latin-ordinary}{t}' \in \OLId{latin-looped}{T}$ بحيث
+    $\OLId{latin-ordinary}{t} \prec_\sigma \OLId{latin-ordinary}{t}'$.}
+  \item\ollabel{defn:sub:phmodels-diamond} \indcase{!A}{\Diamond
+    !B}{$\mSat{\OLId{latin-looped}{M}}{\indfrm}[\OLId{latin-ordinary}{t},\sigma]$ إذا وفقط إذا كان
+    $\mSat{\OLId{latin-looped}{M}}{!B}[\OLId{latin-ordinary}{t},\sigma']$ لبعض~$\sigma' \in \OLId{latin-looped}{C}$ تظهر فيه~$\OLId{latin-ordinary}{t}$.}
+  \end{enumerate}
+\end{defn}
+
+وعلى هذا القياس تحد مؤثرات أخرى زمنية وجهوية. وقد صار في وسعنا أن نمثل
+قضية تجمع الزمان والجهة؛ فقولنا «لن يقع~$\OLId{latin-ordinary}{p}$ في هذا التاريخ، مع إمكان وقوعه
+في تاريخ بديل» نرمز إليه بالصيغة~$\lnot \Ftemp \OLId{latin-ordinary}{p} \land \Diamond \Ftemp \OLId{latin-ordinary}{p}$. وهي تصدق عند
+نقطة في تاريخ لا يصير فيه~$\OLId{latin-ordinary}{p}$ صادقًا في حالة آتية، إذا وجد تاريخ بديل
+يصير فيه~$\OLId{latin-ordinary}{p}$ صادقًا في المستقبل.
+
+\end{document}

@@ -1,0 +1,62 @@
+% Part: computability
+% Chapter: computability-theory
+% Section: complement-ce
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{thy}{cmp}
+\olsection{المجموعات القابلة للتعداد حسابيًا ليست منغلقة تحت المتممة}
+
+إذا كانت $\OLId{latin-looped}{A}$ قابلة للتعداد حسابيًا، أيلزم أن تكون متممة~$\OLId{latin-looped}{A}$، أعني
+$\Complement{\OLId{latin-looped}{A}}=\Nat\setminus \OLId{latin-looped}{A}$، قابلة للتعداد حسابيًا؟
+ليس ذلك بلازم، كما تبيّن المبرهنة التالية ونتيجتها.
+
+\begin{thm}
+\ollabel{thm:ce-comp}
+لكل مجموعة أعداد طبيعية $\OLId{latin-looped}{A}$، تتكافأ قابلية $\OLId{latin-looped}{A}$ للحساب
+مع كون $\OLId{latin-looped}{A}$ و$\Complement{\OLId{latin-looped}{A}}$ جميعًا قابلتين للتعداد
+حسابيًا.
+\end{thm}
+
+\begin{proof}
+أما الوجه الأول فظاهر؛ فإن قابلية $\OLId{latin-looped}{A}$ للحساب تستلزم قابلية $\Complement{\OLId{latin-looped}{A}}$
+له ($\Char{\OLId{latin-looped}{A}}=\OLMathNumeral{1}\tsub\Char{\Complement{\OLId{latin-looped}{A}}}$)، ومن ثم
+تكونان كلتاهما قابلتين للتعداد حسابيًا.
+
+وأما العكس، فلنفرض أن $\OLId{latin-looped}{A}$ و~$\Complement{\OLId{latin-looped}{A}}$ قابلتان
+للتعداد حسابيًا. نجعل $\OLId{latin-looped}{A}$ مجال~$\cfind{\OLId{latin-ordinary}{d}}$،
+و$\Complement{\OLId{latin-looped}{A}}$ مجال~$\cfind{\OLId{latin-ordinary}{e}}$، ونعرّف $\OLId{latin-ordinary}{h}$ كما يأتي:
+\[
+\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{x}) = \umin{\OLId{latin-ordinary}{s}}{(\OLId{latin-looped}{T}(\OLId{latin-ordinary}{d},\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{s}) \lor \OLId{latin-looped}{T}(\OLId{latin-ordinary}{e},\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{s}))}.
+\]
+فالدالة~$\OLId{latin-ordinary}{h}$ تبحث عند الدخل~$\OLId{latin-ordinary}{x}$ عن سجل حساب متوقف لـ
+~$\cfind{\OLId{latin-ordinary}{d}}$ أو عن سجل حساب متوقف لـ~$\cfind{\OLId{latin-ordinary}{e}}$. فإذا كان $\OLId{latin-ordinary}{x}\in \OLId{latin-looped}{A}$،
+% تصحيح صياغة كلاسيكية (C242-01): وُحّد حرف الجر في معمولي البحث المتوازيين.
+نجحت في الحالة الأولى، وإذا كان $\OLId{latin-ordinary}{x}\in\Complement{\OLId{latin-looped}{A}}$، نجحت في الحالة
+الثانية. فلا بد من نجاح البحث؛ وتكون~$\OLId{latin-ordinary}{h}$ كلية قابلة للحساب. ثم إن كل
+~$\OLId{latin-ordinary}{x}$ يحقق $\OLId{latin-ordinary}{x}\in \OLId{latin-looped}{A}$ إذا وفقط إذا صدقت $\OLId{latin-looped}{T}(\OLId{latin-ordinary}{d},\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{x}))$، أي إذا كانت
+$\cfind{\OLId{latin-ordinary}{d}}$ هي المعرفة. وحيث تقبل العلاقة $\OLId{latin-looped}{T}(\OLId{latin-ordinary}{d},\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{x}))$ الحساب،
+تقبل~$\OLId{latin-looped}{A}$ الحساب أيضًا.
+\end{proof}
+
+\begin{explain}
+ويقرب ذلك بوصف إجرائي: لقرار $\OLId{latin-looped}{A}$ نبحث عند الدخل
+$\OLId{latin-ordinary}{x}$ عن سجل توقف لـ$\cfind{\OLId{latin-ordinary}{d}}$ أو $\cfind{\OLId{latin-ordinary}{e}}$. ولا يفوتنا
+أحدهما؛ فإن توقف $\cfind{\OLId{latin-ordinary}{d}}$، كان $\OLId{latin-ordinary}{x}$ من~$\OLId{latin-looped}{A}$، وإلا كان $\OLId{latin-ordinary}{x}$ من
+~$\Complement{\OLId{latin-looped}{A}}$.
+\end{explain}
+
+\begin{cor}
+\ollabel{cor:comp-k}
+$\Complement{\OLId{latin-looped}{K}_\OLMathNumeral{0}}$ غير قابلة للتعداد حسابيًا.
+\end{cor}
+
+\begin{proof}
+قد علمنا قابلية $\OLId{latin-looped}{K}_\OLMathNumeral{0}$ للتعداد حسابيًا مع عدم قابليتها للحساب. ولو كانت
+$\Complement{\OLId{latin-looped}{K}_\OLMathNumeral{0}}$ قابلة للتعداد حسابيًا، لكانت $\OLId{latin-looped}{K}_\OLMathNumeral{0}$ قابلة للحساب
+بحسب \olref{thm:ce-comp}، خلافًا لـ\olref[ncp]{thm:K-0}.
+\end{proof}
+
+\end{document}

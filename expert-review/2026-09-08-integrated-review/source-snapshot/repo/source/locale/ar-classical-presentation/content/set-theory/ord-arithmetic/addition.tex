@@ -1,0 +1,201 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{ord-arithmetic}{add}
+\olsection{الجمع الترتيبي}
+
+لنفرض أننا نريد جمع~$\OLId{greek-variable}{alpha}$ و$\beta$. نضع نسخة من~$\beta$ عقب
+نسخة من~$\OLId{greek-variable}{alpha}$ مباشرة. وإنما نأخذ \emph{نسختين} لأن
+\olref[ordinals][basic]{ordinalsaresubsets} يبين أن إما
+$\OLId{greek-variable}{alpha} \subseteq \beta$ أو~$\beta \subseteq \OLId{greek-variable}{alpha}$. ومعنى هذا في
+الحدس أن نجتاز خطوات نمطها~$\OLId{greek-variable}{alpha}$، ثم نجتاز خطوات نمطها~$\beta$.
+والترتيب الناتج جيد، فيتماثل، بموجب
+\olref[ordinals][ordtype]{thmOrdinalRepresentation}، مع عدد ترتيبي
+واحد. وذلك العدد هو الذي نسميه \emph{مجموع}~$\OLId{greek-variable}{alpha}$ و$\beta$.
+
+هذه جملة الفكرة وراء الجمع الترتيبي. ولضبطها نبدأ بمعنى أخذ
+\emph{نسخ} من المجموعات: نستعمل وسمين اعتباطيين، هما~$\OLMathNumeral{0}$ و$\OLMathNumeral{1}$، لنعلم
+من أين جاء كل شيء.
+
+\begin{defn}\ollabel{defdissum}
+\emph{الجمع المنفصل} لـ$\OLId{latin-looped}{A}$ و$\OLId{latin-looped}{B}$ هو
+$\OLId{latin-looped}{A} \disjointsum \OLId{latin-looped}{B} = (\OLId{latin-looped}{A}\times \{\OLMathNumeral{0}\}) \cup (\OLId{latin-looped}{B} \times \{\OLMathNumeral{1}\})$.
+\end{defn}
+
+ثم نضع ترتيبًا على أزواج الأعداد الترتيبية.
+
+\begin{defn}
+لأي أعداد ترتيبية~$\OLId{greek-variable}{alpha}_\OLMathNumeral{1}, \OLId{greek-variable}{alpha}_\OLMathNumeral{2}, \beta_\OLMathNumeral{1}, \beta_\OLMathNumeral{2}$، نقول إن:
+\begin{align*}
+	\tuple{\OLId{greek-variable}{alpha}_\OLMathNumeral{1}, \OLId{greek-variable}{alpha}_\OLMathNumeral{2}} \rlexless \tuple{\beta_\OLMathNumeral{1}, \beta_\OLMathNumeral{2}}\text{ إذا وفقط إذا كان }&
+	\text{إما $\alpha_2 \in \beta_2$،}\\
+	& \text{أو كان معًا $\alpha_2 = \beta_2$ و$\alpha_1 \in \beta_1$}
+\end{align*}
+\end{defn}
+
+وهذا ترتيب \emph{معجمي معكوس}؛ إذ يبدأ بالعنصر الثاني، ثم يرجع إلى
+الأول. وقد أردنا أن يكون~$\OLId{greek-variable}{alpha} \ordplus \beta$ نمط ترتيب نسخة من
+$\OLId{greek-variable}{alpha}$ تأتي بعدها نسخة من~$\beta$، فنقول:
+
+\begin{defn}\ollabel{defordplus}
+لأي عددين ترتيبيين~$\OLId{greek-variable}{alpha}$ و$\beta$، يكون مجموعهما
+$\OLId{greek-variable}{alpha} \ordplus \beta =
+\ordtype{\OLId{greek-variable}{alpha} \disjointsum \beta, \rlexless}$.
+\end{defn}
+\noindent
+وفي هذا تسامح يسير في الرمز؛ فحقنا أن نكتب
+«$\Setabs{\tuple{\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y}}\in(\OLId{greek-variable}{alpha}\disjointsum\beta)^\OLMathNumeral{2}}{\OLId{latin-ordinary}{x} \rlexless \OLId{latin-ordinary}{y}}$»
+مكان «$\rlexless$». وسنبقي هذا التسامح طلبًا للاختصار.
+
+وتدل النتيجة الآتية، مع
+\olref[ordinals][ordtype]{thmOrdinalRepresentation}، على سلامة
+التعريف:
+
+\begin{lem}\ollabel{ordsumlessiswo}
+$\tuple{\OLId{greek-variable}{alpha} \disjointsum \beta, \rlexless}$ ترتيب جيد، لأي عددين
+ترتيبيين~$\OLId{greek-variable}{alpha}$ و$\beta$.
+\end{lem}
+
+\begin{proof}
+اتصال~$\rlexless$ على~$\OLId{greek-variable}{alpha} \disjointsum \beta$ بيّن. ولإثبات حسن
+التأسيس، ثبت مجموعة غير خالية~$\OLId{latin-looped}{X} \subseteq \OLId{greek-variable}{alpha} \disjointsum \beta$.
+ولتكن~$\OLId{latin-looped}{Y}$ مجموعة عناصر~$\OLId{latin-looped}{X}$ التي إحداثيها الثاني أصغر ما يمكن، أي
+$\OLId{latin-looped}{Y} = \Setabs{\tuple{\gamma, \OLId{latin-ordinary}{i}} \in \OLId{latin-looped}{X}}{(\forall \tuple{\delta, \OLId{latin-ordinary}{j}} \in \OLId{latin-looped}{X})\OLId{latin-ordinary}{i} \leq \OLId{latin-ordinary}{j}}$.
+ثم خذ من~$\OLId{latin-looped}{Y}$ العنصر الذي إحداثيه الأول أصغر.
+\end{proof}
+\noindent
+فقد حصلنا على تعريف صريح حسن للجمع الترتيبي. ومن خواصه القريبة، مع
+تذكر~$\OLMathNumeral{1} = \{\OLMathNumeral{0}\}$ من~\olref[z][infinity-again]{defnomega}، ما يأتي:
+\begin{prop}
+$\OLId{greek-variable}{alpha} \ordplus \OLMathNumeral{1} = \ordsucc{\OLId{greek-variable}{alpha}}$، لأي عدد ترتيبي~$\OLId{greek-variable}{alpha}$.
+\end{prop}
+
+\begin{proof}
+اعتبر التماثل~$\OLId{latin-ordinary}{f}$ من
+$\ordsucc{\OLId{greek-variable}{alpha}} = \OLId{greek-variable}{alpha} \cup \{\OLId{greek-variable}{alpha}\}$ إلى
+$\OLId{greek-variable}{alpha}\disjointsum\OLMathNumeral{1} = (\OLId{greek-variable}{alpha} \times \{\OLMathNumeral{0}\})
+\cup (\{\OLMathNumeral{0}\} \times \{\OLMathNumeral{1}\})$، المعطى بـ
+$\OLId{latin-ordinary}{f}(\gamma) = \tuple{\gamma, \OLMathNumeral{0}}$ لكل~$\gamma \in \OLId{greek-variable}{alpha}$، وبـ
+$\OLId{latin-ordinary}{f}(\OLId{greek-variable}{alpha}) = \tuple{\OLMathNumeral{0}, \OLMathNumeral{1}}$.
+\end{proof}
+\noindent
+وللجمع كذلك أوصاف عودية يسهل إثباتها.
+
+\begin{lem}\ollabel{ordadditionrecursion}
+لأي عددين ترتيبيين~$\OLId{greek-variable}{alpha}, \beta$، لدينا:
+\begin{align*}
+	\OLId{greek-variable}{alpha}\ordplus \OLMathNumeral{0} &= \OLId{greek-variable}{alpha}\\
+	\OLId{greek-variable}{alpha} \ordplus  (\beta\ordplus \OLMathNumeral{1}) &= (\OLId{greek-variable}{alpha} \ordplus  \beta) \ordplus  \OLMathNumeral{1}\\
+	\OLId{greek-variable}{alpha}  \ordplus  \beta &= \supstrict_{\delta < \beta}(\OLId{greek-variable}{alpha} \ordplus  \delta) && \text{إذا كان $\beta$ عددًا ترتيبيًا حديًا}
+\end{align*}
+\end{lem}
+
+\begin{proof}
+ننظر في الحالات على ترتيبها. أولًا:
+\begin{align*}
+	\OLId{greek-variable}{alpha} \ordplus  \OLMathNumeral{0}
+	&= \ordtype{\OLId{greek-variable}{alpha} \times \{\OLMathNumeral{0}\}, \rlexless}\\
+	&= \OLId{greek-variable}{alpha}\\
+	\OLId{greek-variable}{alpha} \ordplus (\beta \ordplus  \OLMathNumeral{1})
+	%&= \ordtype{(\alpha\times \{0\}) \cup (\ordtype{\beta \ordplus  1}\times \{1\}), \rlexless} \\
+	&= \ordtype{(\OLId{greek-variable}{alpha}\times \{\OLMathNumeral{0}\}) \cup (\ordsucc{\beta}\times \{\OLMathNumeral{1}\}), \rlexless} \\
+	&= \ordtype{(\OLId{greek-variable}{alpha}\times \{\OLMathNumeral{0}\}) \cup (\beta \times \{\OLMathNumeral{1}\}), \rlexless} \ordplus \OLMathNumeral{1}\\
+	&= (\OLId{greek-variable}{alpha} \ordplus  \beta) \ordplus  \OLMathNumeral{1}
+\end{align*}
+والآن لتكن~$\beta \neq \emptyset$ حدية. متى كان~$\delta < \beta$،
+كان~$\delta\ordplus \OLMathNumeral{1} < \beta$ أيضًا، ومن ثم كان
+$\OLId{greek-variable}{alpha} \ordplus \delta$ مقطعًا ابتدائيًا حقيقيًا من
+$\OLId{greek-variable}{alpha} \ordplus \beta$. فيكون~$\OLId{greek-variable}{alpha} \ordplus \beta$ حدًا أعلى
+صارمًا للمجموعة
+$\OLId{latin-looped}{X} = \Setabs{\OLId{greek-variable}{alpha} \ordplus \delta}{\delta < \beta}$. ثم إذا كان
+$\OLId{greek-variable}{alpha} \leq \gamma < \OLId{greek-variable}{alpha} \ordplus \beta$، كان بالضرورة
+$\gamma = \OLId{greek-variable}{alpha} \ordplus \delta$ لبعض~$\delta < \beta$. ولهذا
+$\OLId{greek-variable}{alpha} \ordplus \beta =
+\supstrict_{\delta< \beta}(\OLId{greek-variable}{alpha}\ordplus \delta)$.
+\end{proof}
+
+غير أن في الأمر وجهًا آخر. فقد كان في وسعنا أن نعرّف الجمع الترتيبي
+بـ\emph{مجرد} مبرهنة العودية المتناهية التجاوز، فنقرر معادلات
+العودية الواردة في~\olref{ordadditionrecursion}، مع استعمال
+«$\ordsucc{\beta}$» مكان «$\beta \ordplus \OLMathNumeral{1}$».
+
+فللعمليات على الأعداد الترتيبية طريقان: طريق \emph{تركيبي} نبني فيه
+مجموعة مرتبة ترتيبًا جيدًا ثم نأخذ نمط ترتيبها، وطريق \emph{عودي}
+نقرر فيه معادلات العودية. وإذا أحكم العمل اتفق الطريقان؛ لأن مبرهنة
+العودية المتناهية التجاوز تضمن أن تلك المعادلات تعين أعدادًا ترتيبية
+\emph{فريدة}.
+
+والحساب الترتيبي يشبه، من وجوه كثيرة، حساب الأعداد الطبيعية؛ ومن ذلك:
+
+\begin{lem}\ollabel{ordinaladditionisnice}
+إذا كانت~$\OLId{greek-variable}{alpha}, \beta, \gamma$ أعدادًا ترتيبية، فإن:
+\begin{enumerate}
+	\item\ollabel{ordaddition1} إذا كان~$\beta < \gamma$، فإن
+	$\OLId{greek-variable}{alpha} \ordplus \beta < \OLId{greek-variable}{alpha} \ordplus \gamma$؛
+	\item\ollabel{ordaddition2} إذا كان~$\OLId{greek-variable}{alpha} \ordplus \beta =
+	\OLId{greek-variable}{alpha}\ordplus \gamma$، فإن~$\beta = \gamma$؛
+	\item\ollabel{ordaddition3} $\OLId{greek-variable}{alpha} \ordplus (\beta \ordplus
+	\gamma) = (\OLId{greek-variable}{alpha} \ordplus \beta) \ordplus \gamma$، أي إن الجمع
+	تجميعي؛
+	\item\ollabel{ordaddition4} إذا كان~$\OLId{greek-variable}{alpha} \leq \beta$، فإن
+	$\OLId{greek-variable}{alpha} \ordplus \gamma \leq \beta \ordplus \gamma$.
+\end{enumerate}
+\end{lem}
+
+\begin{proof}
+نبرهن~\olref{ordaddition3} ونكل الباقي إلى التمرين. نستعمل الاستقراء
+البسيط المتناهي التجاوز على~$\gamma$، مع
+\olref{ordadditionrecursion}. فإذا~$\gamma = \OLMathNumeral{0}$:
+\[
+(\OLId{greek-variable}{alpha} \ordplus  \beta) \ordplus  \OLMathNumeral{0} = \OLId{greek-variable}{alpha} \ordplus  \beta  = \OLId{greek-variable}{alpha} \ordplus  (\beta \ordplus  \OLMathNumeral{0})
+\]
+وإذا~$\gamma = \delta\ordplus \OLMathNumeral{1}$، فافترض استقرائيًا أن
+$(\OLId{greek-variable}{alpha} \ordplus  \beta) \ordplus  \delta =
+\OLId{greek-variable}{alpha} \ordplus  (\beta \ordplus \delta)$؛ ثم استعمل
+\olref{ordadditionrecursion} ثلاث مرات:
+\begin{align*}
+	(\OLId{greek-variable}{alpha} \ordplus  \beta) \ordplus  (\delta \ordplus  \OLMathNumeral{1}) & = ((\OLId{greek-variable}{alpha} \ordplus  \beta) \ordplus  \delta)\ordplus \OLMathNumeral{1}\\
+	& = (\OLId{greek-variable}{alpha} \ordplus  (\beta \ordplus  \delta)) \ordplus  \OLMathNumeral{1}\\
+	& = \OLId{greek-variable}{alpha} \ordplus  ((\beta \ordplus  \delta)\ordplus \OLMathNumeral{1})\\
+	& = \OLId{greek-variable}{alpha} \ordplus  (\beta \ordplus  (\delta\ordplus \OLMathNumeral{1}))
+\end{align*}	
+وأما إذا كانت~$\gamma$ عددًا ترتيبيًا حديًا، فافترض استقرائيًا أنه
+متى كان~$\delta \in \gamma$، فإن
+$(\OLId{greek-variable}{alpha} \ordplus  \beta) \ordplus  \delta =
+\OLId{greek-variable}{alpha} \ordplus  (\beta \ordplus  \delta)$؛ وعندئذ:
+\begin{align*}
+	(\OLId{greek-variable}{alpha} \ordplus  \beta) \ordplus  \gamma & = \supstrict_{\delta < \gamma}((\OLId{greek-variable}{alpha} \ordplus  \beta) \ordplus  \delta) \\
+	&= \supstrict_{\delta < \gamma}(\OLId{greek-variable}{alpha} \ordplus  (\beta \ordplus  \delta))\\
+	&= \OLId{greek-variable}{alpha} \ordplus  \supstrict_{\delta < \gamma}(\beta \ordplus  \delta)\\
+	& = \OLId{greek-variable}{alpha} \ordplus  (\beta \ordplus  \gamma)
+\end{align*}
+\end{proof}
+
+\begin{prob}
+أثبت بقية~\olref[sth][ord-arithmetic][add]{ordinaladditionisnice}.
+\end{prob}
+
+بهذه الخواص يبدو الجمع الترتيبي مألوفًا، غير أنه يفارق جمع الأعداد
+الطبيعية في وجه جوهري.
+
+\begin{prop}\ollabel{ordsumnotcommute}
+الجمع الترتيبي {ليس} تبادليًا؛
+$\OLMathNumeral{1} \ordplus \omega = \omega < \omega \ordplus \OLMathNumeral{1}$.
+\end{prop}
+
+\begin{proof}
+لاحظ أن~$\OLMathNumeral{1} \ordplus \omega = \supstrict_{\OLId{latin-ordinary}{n} < \omega} (\OLMathNumeral{1} \ordplus \OLId{latin-ordinary}{n})
+= \omega \in \omega \cup \{\omega\} = \ordsucc{\omega} = \omega
+\ordplus \OLMathNumeral{1}$.
+\end{proof}
+\noindent
+وقد يفجأ هذا أول النظر، ولكنه لا ينبغي أن يفجأ. فإن
+$\OLMathNumeral{1} \ordplus \omega$ هو نمط الترتيب الحاصل بإدخال عنصر زائد
+\emph{قبل} الأعداد الطبيعية كلها. وكما في حجة فندق هيلبرت في
+\olref[sfr][infinite][hilbert]{sec}، لا يغير ذلك العنصر الأول نمط
+الترتيب الكلي في الحدس. وأما~$\omega \ordplus \OLMathNumeral{1}$ فهو نمط الترتيب
+الحاصل بإلحاق عنصر \emph{بعد} الأعداد الطبيعية كلها؛ وبين الحالين
+فرق بين.
+
+\end{document}

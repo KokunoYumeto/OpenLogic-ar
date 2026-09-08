@@ -1,0 +1,66 @@
+% Part: normal-modal-logic
+% Chapter: completeness
+% Section: completeness-K
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{com}{cmk}
+
+\olsection{التحديد والتمام لـ\Log{K}}
+
+قد تم من بناء النموذج القانوني ما نحتاج إليه لإثبات التمام.
+فالعمدة أن ال!!{formula}s الصادقة في النموذج القانوني للنسق~$\Sigma$
+هي عين ال!!{derivable} من~$\Sigma$.
+ونسمي النموذج المتصف بهذه المطابقة نموذجًا \emph{يحدّد}~$\Sigma$،
+على المعنى الآتي.
+
+\begin{defn}
+  \emph{يحدّد} النموذج~$\mModel{M}$ منطقًا جهويًا نظاميًا~$\Sigma$
+  بالضبط حين يكون~$\mSat{\OLId{latin-looped}{M}}{!A}$ إذا وفقط إذا كان
+  $\Sigma \Proves !A$، لكل ال!!{formula}s~$!A$.
+\end{defn}
+
+\begin{thm}[التحديد]\ollabel{thm:determination}
+  % تصحيح اتساق (0448-I1): لا يعرّف النموذج القانوني أعلاه إلا للنسق المتسق ذي عالم واحد على الأقل.
+  إذا كان~$\Sigma$ منطقًا جهويًا نظاميًا متسقًا، فإن
+  $\mSat{\OLId{latin-looped}{M}^\Sigma}{!A}$ إذا وفقط إذا كان~$\Sigma \Proves !A$.
+\end{thm}
+
+\begin{proof}
+  لنفرض $\mSat{\OLId{latin-looped}{M}^\Sigma}{!A}$. فمعنى ذلك
+  $\mSat{\OLId{latin-looped}{M}^\Sigma}{!A}[\OLId{greek-variable}{Delta}]$ عند كل مجموعة $\Sigma$-متسقة تامة
+  $\OLId{greek-variable}{Delta}$. وبلمّة الصدق يلزم~$!A \in \OLId{greek-variable}{Delta}$ لكل مجموعة
+  $\Sigma$-متسقة تامة~$\OLId{greek-variable}{Delta}$.
+  نطبق الآن \olref[lin]{cor:provability-characterization}
+  في حال $ \OLId{greek-variable}{Gamma} = \emptyset$، فنستنتج~$\Sigma \Proves !A$.
+
+  وأما العكس، فليكن~$\Sigma \Proves !A$.
+  كل مجموعة $\Sigma$-متسقة تامة~$\OLId{greek-variable}{Delta}$ تشتمل على~$!A$،
+  بحكم \olref[ccs]{prop:ccs-properties}\olref[ccs]{prop:ccs-closed}.
+  فبلمّة الصدق نحصل على~$\mSat{\OLId{latin-looped}{M}^\Sigma}{!A}[\OLId{greek-variable}{Delta}]$ لكل~$\OLId{greek-variable}{Delta} \in
+  \OLId{latin-looped}{W}^\Sigma$؛ وهذا هو~$\mSat{\OLId{latin-looped}{M}^\Sigma}{!A}$.
+\end{proof}
+
+ولأن النموذج القانوني لـ~\Log{K} يحدّد~\Log{K}، نحصل فورًا على تمام
+\Log{K} نتيجة لازمة:
+
+\begin{cor}\ollabel{cor:Kcomplete}
+  المنطق الجهوي الأساسي~\Log{K} تام بالنسبة إلى فئة جميع النماذج؛
+  أي إنه إذا كان~$\Entails !A$، كان~$\Log{K} \Proves !A$.
+\end{cor}
+
+\begin{proof}
+  بالمقابل، إذا كان~$\Log{K} \Proves/ !A$، فبالتحديد
+  $\mSat/{\OLId{latin-looped}{M}^{\Log{K}}}{!A}$، ومن ثم ليست~$!A$ صالحة.
+\end{proof}
+
+ولا يلزم من التحديد وحده تمام نسق~$\Sigma$ بالنسبة إلى فئة مخصوصة
+من النماذج. فلو أردنا تمام~\Log{KTB4} بالنسبة إلى النماذج الانعكاسية
+المتناظرة المتعدية، لم يكف أن يحدّد النموذج القانوني نسقه؛ بل لا بد
+أن يكون هو نفسه من تلك الفئة. ولهذا يتعين في كل نسق~$\Sigma$
+إثبات انتماء نموذجه القانوني إلى الفئة المقصودة.
+وهذا ليس نتيجة ظاهرة من البناء، بل قد لا يصح أصلًا.
+
+\end{document}

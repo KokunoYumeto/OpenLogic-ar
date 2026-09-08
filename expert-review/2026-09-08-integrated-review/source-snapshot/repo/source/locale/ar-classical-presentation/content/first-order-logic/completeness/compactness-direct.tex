@@ -1,0 +1,170 @@
+% Part: first-order-logic
+% Chapter: completeness
+% Section: compactness-direct
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{com}{cpd}}
+      {\olfileid{pl}{com}{cpd}}
+
+\olsection{برهان مباشر لمبرهنة التراص}
+
+للتراص برهان مباشر لا يستند إلى مبرهنة الاكتمال، وإن أخذ بطريقة
+برهانها. فقد بدأنا هناك بمجموعة متسقة~$\OLId{greek-variable}{Gamma}$ من ال!!{sentence}s،
+ومددناها إلى مجموعة متسقة\iftag{FOL}{، مشبعة،}{}
+و!!{complete}~$\OLId{greek-variable}{Gamma}^*$ من ال!!{sentence}s. ثم أثبتنا صدق
+!!{sentence}s~$\OLId{greek-variable}{Gamma}$ كلها في
+\iftag{FOL}{نموذج الحدود~$\Struct{M(\Gamma^*)}$}{!!{valuation}~$\pAssign{\OLId{latin-ordinary}{v}(\OLId{greek-variable}{Gamma}^*)}$}
+المنشأ من~$\OLId{greek-variable}{Gamma}^*$، فثبت أن $\OLId{greek-variable}{Gamma}$ تقبل الإرضاء.
+
+والطريق نفسه يثبت أن كل مجموعة من ال!!{sentence}s تقبل الإرضاء
+منتهيًا تقبله مطلقًا. وإنما يلزم أن نعيد النتائج السابقة للمّة الصدق
+بفرض «قابلة للإرضاء منتهيًا» في موضع فرض «متسقة».
+
+\begin{prop}
+\ollabel{prop:fsat-ccs}
+افترض أن $\OLId{greek-variable}{Gamma}$ مجموعة من ال!!{sentence}s، !!{complete} وقابلة للإرضاء
+منتهيًا. عندئذ:
+\begin{enumerate}
+\tagitem{prvAnd}{$(!A \land !B) \in \OLId{greek-variable}{Gamma}$
+  إذا وفقط إذا كان كل من $!A \in \OLId{greek-variable}{Gamma}$ و $!B \in \OLId{greek-variable}{Gamma}$.}{}
+
+\tagitem{prvOr}{$(!A \lor !B) \in \OLId{greek-variable}{Gamma}$ إذا وفقط إذا كان إما
+  $!A \in \OLId{greek-variable}{Gamma}$ وإما $!B \in \OLId{greek-variable}{Gamma}$.}{}
+
+\tagitem{prvIf}{$(!A \lif !B) \in \OLId{greek-variable}{Gamma}$ إذا وفقط إذا كان إما
+  $!A \notin \OLId{greek-variable}{Gamma}$ وإما $!B \in \OLId{greek-variable}{Gamma}$.}{}
+\end{enumerate}
+\end{prop}
+
+\tagprob{FOL}
+\begin{prob}
+أثبت \olref[fol][com][cpd]{prop:fsat-ccs}. وتجنب استعمال $\Proves$.
+\end{prob}
+\tagendprob
+
+\tagprob{notFOL}
+\begin{prob}
+أثبت \olref[pl][com][cpd]{prop:fsat-ccs}. وتجنب استعمال $\Proves$.
+\end{prob}
+\tagendprob
+
+\iftag{FOL}{%
+\begin{lem}
+\ollabel{lem:fsat-henkin} يمكن توسيع كل مجموعة من ال!!{sentence}s
+قابلة للإرضاء منتهيًا~$\OLId{greek-variable}{Gamma}$ إلى مجموعة مشبعة قابلة للإرضاء
+منتهيًا~$\OLId{greek-variable}{Gamma}'$.
+\end{lem}
+}{}
+
+\tagprob{FOL}
+\begin{prob}
+برهن \olref[fol][com][cpd]{lem:fsat-henkin}. (إرشاد: مدار البرهان
+على أن قبول $\OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n}$ الإرضاء منتهيًا يستتبع قبول
+$\OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n} \cup \{!D_\OLId{latin-ordinary}{n}\}$ له؛ وأثبت ذلك من غير توسل بال!!{derivation}s
+ولا بالاتساق.)
+\end{prob}
+\tagendprob
+
+\iftag{FOL}{
+\begin{prop}\ollabel{prop:fsat-instances}
+افترض أن $\OLId{greek-variable}{Gamma}$ مجموعة من ال!!{sentence}s كاملة، وقابلة للإرضاء
+منتهيًا، ومشبعة.
+\begin{tagenumerate}{prvEx,prvAll}
+\tagitem{prvEx}{$\lexists[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})] \in \OLId{greek-variable}{Gamma}$ إذا وفقط إذا كان
+  $!A(\OLId{latin-ordinary}{t}) \in \OLId{greek-variable}{Gamma}$ لبعض حد مغلق~$\OLId{latin-ordinary}{t}$ على الأقل.}{}
+\tagitem{prvAll}{$\lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})] \in \OLId{greek-variable}{Gamma}$ إذا وفقط إذا كان
+  $!A(\OLId{latin-ordinary}{t}) \in \OLId{greek-variable}{Gamma}$ لكل حد مغلق~$\OLId{latin-ordinary}{t}$.}{}
+\end{tagenumerate}
+\end{prop}
+}{}
+
+\tagprob{FOL}
+\begin{prob}
+أثبت \olref[fol][com][cpd]{prop:fsat-instances}.
+\end{prob}
+\tagendprob
+
+\begin{lem}
+\ollabel{lem:fsat-lindenbaum} يمكن توسيع كل مجموعة من ال!!{sentence}s
+قابلة للإرضاء منتهيًا~$\OLId{greek-variable}{Gamma}$ إلى مجموعة~$\OLId{greek-variable}{Gamma}^*$ !!a{complete}
+وقابلة للإرضاء منتهيًا.
+\end{lem}
+
+\tagprob{FOL}
+\begin{prob}
+برهن \olref[fol][com][cpd]{lem:fsat-lindenbaum}. (إرشاد: أثبت أولًا
+أن $\OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n}$ إذا قبلت الإرضاء منتهيًا، قبلته على الأقل إحدى
+المجموعتين $\OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n} \cup \{!A_\OLId{latin-ordinary}{n}\}$ و
+$\OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n} \cup \{\lnot !A_\OLId{latin-ordinary}{n}\}$.)
+\end{prob}
+\tagendprob
+
+\tagprob{notFOL}
+\begin{prob}
+برهن \olref[pl][com][cpd]{lem:fsat-lindenbaum}. (إرشاد: أثبت أولًا
+أن $\OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n}$ إذا قبلت الإرضاء منتهيًا، قبلته على الأقل إحدى
+المجموعتين $\OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n} \cup \{!A_\OLId{latin-ordinary}{n}\}$ و
+$\OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n} \cup \{\lnot !A_\OLId{latin-ordinary}{n}\}$.)
+\end{prob}
+\tagendprob
+
+\begin{thm}[التراص]
+\ollabel{thm:compactness-direct} لتكن $\OLId{greek-variable}{Gamma}$ مجموعة من ال!!{sentence}s.
+تكون $\OLId{greek-variable}{Gamma}$ قابلة للإرضاء إذا وفقط إذا كانت قابلة للإرضاء منتهيًا.
+\end{thm}
+
+\begin{proof}
+أما إذا كانت $\OLId{greek-variable}{Gamma}$ قابلة للإرضاء، فهناك
+\iftag{FOL}{!!a{structure}~$\Struct{M}$}{!!a{valuation}~$\pAssign{\OLId{latin-ordinary}{v}}$}
+تحقق $\iftag{FOL}{\Sat{\OLId{latin-looped}{M}}}{\pSat{\OLId{latin-ordinary}{v}}}{!A}$ لكل $!A \in \OLId{greek-variable}{Gamma}$.
+وهذه $\iftag{FOL}{\Struct{M}}{\pAssign{\OLId{latin-ordinary}{v}}}$ ترضي كل جزء منتهٍ
+من~$\OLId{greek-variable}{Gamma}$ أيضًا، فالمجموعة $\OLId{greek-variable}{Gamma}$ قابلة للإرضاء منتهيًا.
+
+وأما العكس، فلتكن $\OLId{greek-variable}{Gamma}$ قابلة للإرضاء منتهيًا.\iftag{FOL}{
+  نأخذ من \olref{lem:fsat-henkin} مجموعة مشبعة قابلة للإرضاء
+  منتهيًا $\OLId{greek-variable}{Gamma}' \supseteq \OLId{greek-variable}{Gamma}$.}{} وتتيح
+\olref{lem:fsat-lindenbaum} مدَّ $\iftag{FOL}{\OLId{greek-variable}{Gamma}'}{\OLId{greek-variable}{Gamma}}$
+إلى مجموعة~$\OLId{greek-variable}{Gamma}^*$ !!a{complete} تقبل الإرضاء
+منتهيًا\iftag{FOL}{، ويبقى إشباع $\OLId{greek-variable}{Gamma}^*$ محفوظًا}{}.
+وننشئ \iftag{FOL}{نموذج
+  الحدود~$\Struct{M(\Gamma^*)}$}{!!{valuation}~$\pAssign{\OLId{latin-ordinary}{v}(\OLId{greek-variable}{Gamma}^*)}$}
+على نحو \olref[mod]{defn:termmodel}.\iftag{FOL}{ فإن
+\olref[mod]{prop:quant-termmodel} لم تتوقف على اتساق $\OLId{greek-variable}{Gamma}^*$،
+ولا على كونها !!{complete} أو مشبعة؛ وإنما اعتمدت على كون
+$\Struct{M(\Gamma^*)}$ مغطاة.}{} ويصح برهان لمّة الصدق
+(\olref[mod]{lem:truth}) بعد إحلال
+\olref{prop:fsat-ccs} محل \olref[ccs]{prop:ccs}
+\iftag{FOL}{، وإحلال
+\olref{prop:fsat-instances} محل \olref[hen]{prop:saturated-instances}}{}.
+\iftag{FOL}{وأما إذا اشتملت $\OLId{greek-variable}{Gamma}$ على~$\eq$، فنعرّف~$\approx$
+بين الحدود المغلقة ونأخذ خارج نموذج الحدود كما في
+\olref[ide]{defn:term-model-factor}. وخواص
+\olref[ide]{prop:approx-equiv} باقية إذا جعلنا قابلية الإرضاء
+منتهيًا مكان الاتساق: فإن الإخفاق في أي من الانعكاسية أو التماثل أو
+التعدية أو التوافق مع الدوال والمحمولات تكشفه مجموعة جزئية منتهية
+لا تقبل الإرضاء. وعليه يجري برهان حالة الهوية من لمّة الصدق كما في
+\olref[ide]{lem:truth}. فالنموذج الناتج يرضي كل ما في~$\OLId{greek-variable}{Gamma}$ في
+كلتا الحالتين.}{}
+\end{proof}
+
+\tagprob{FOL}
+\begin{prob}
+فصّل برهان لمّة الصدق
+(\olref[fol][com][mod]{lem:truth})، مع التعديلات التي يحتاج إليها
+برهان \olref[fol][com][cpd]{thm:compactness-direct}.
+\end{prob}
+\tagendprob
+
+\tagprob{notFOL}
+\begin{prob}
+فصّل برهان لمّة الصدق
+(\olref[pl][com][mod]{lem:truth})، مع التعديلات التي يحتاج إليها
+برهان \olref[pl][com][cpd]{thm:compactness-direct}.
+\end{prob}
+\tagendprob
+
+\end{document}

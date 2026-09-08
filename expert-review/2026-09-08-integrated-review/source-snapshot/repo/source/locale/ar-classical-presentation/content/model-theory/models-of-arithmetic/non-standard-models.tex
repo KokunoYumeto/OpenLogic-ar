@@ -1,0 +1,118 @@
+% Part: model-theory
+% Chapter: models-of-arithmetic
+% Section: non-standard-models
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{mar}{nst}
+\section{النماذج غير القياسية}
+
+\begin{explain}
+معيار القياسية هو التشاكل: تكون !!a{structure} للغة
+$\Lang{L_A}$ قياسية متى تشاكلت مع~$\Struct{N}$؛ وأما
+!!a{structure} التي لا تتشاكل مع~$\Struct{N}$ فهي غير قياسية.
+\end{explain}
+
+\begin{defn}
+تكون !!{structure}~$\Struct{M}$ للغة $\Lang{L_A}$ \emph{غير قياسية}
+إذا لم تكن متشاكلة مع~$\Struct{N}$. وتسمى الـ!!{element}s
+$\OLId{latin-ordinary}{x} \in \Domain{\OLId{latin-looped}{M}}$ التي تساوي $\Value{\num{\OLId{latin-ordinary}{n}}}{\OLId{latin-looped}{M}}$ لبعض
+$\OLId{latin-ordinary}{n} \in \Nat$ \emph{أعدادًا قياسية} (في $\Struct{M}$)، وما عداها
+\emph{أعدادًا غير قياسية}.
+\end{defn}
+
+\begin{explain}
+تقتضي \olref[stm]{prop:standard-domain} أن كل !!{structure}
+قياسية للغة~$\Lang{L_A}$ لا تضم إلا !!{element}s قياسية.
+لكن العكس لا يلزم على العموم: فقد تكون الـ!!{structure}
+غير قياسية ومجالها مستنفدًا بالأعداد القياسية، كما طُلب
+في تمرين القسم السابق. وإنما الذي يلزم هو أن وجود
+!!{element} غير قياسي يمنع قياسية الـ!!{structure}.
+\end{explain}
+
+\begin{prop}
+إذا احتوت !!a{structure}~$\Struct{M}$ للغة $\Lang{L_A}$ عددًا غير
+قياسي، كانت $\Struct{M}$ غير قياسية.
+\end{prop}
+
+\begin{proof}
+لو كانت $\Struct{M}$ قياسية وفيها عدد غير قياسي~$\OLId{latin-ordinary}{x}$،
+لوجد تشاكل $\OLId{latin-ordinary}{g}\colon \Nat \to \Domain{\OLId{latin-looped}{M}}$. وباستقراء يسير
+على~$\OLId{latin-ordinary}{n}$ نحصل على
+$\OLId{latin-ordinary}{g}(\Value{\num{\OLId{latin-ordinary}{n}}}{\OLId{latin-looped}{N}})=\Value{\num{\OLId{latin-ordinary}{n}}}{\OLId{latin-looped}{M}}$. فالدالة $\OLId{latin-ordinary}{g}$
+ترسل الأعداد القياسية في~$\Struct{N}$ إلى القياسية في~$\Struct{M}$.
+وحينئذ يبقى العدد غير القياسي في $\Struct{M}$ خارج صورتها،
+فتخالف $\OLId{latin-ordinary}{g}$ شرط !!{surjective}، وهذا تناقض.
+\end{proof}
+
+\begin{prob}
+تذكر أن $\Th{Q}$ تحتوي البديهيات
+\begin{align*}
+& \lforall[\OLId{latin-ordinary}{x}][\lforall[\OLId{latin-ordinary}{y}][(\eq[\OLId{latin-ordinary}{x}'][\OLId{latin-ordinary}{y}'] \lif \eq[\OLId{latin-ordinary}{x}][\OLId{latin-ordinary}{y}])]] \tag{$!Q_\OLMathNumeral{1}$}\\
+& \lforall[\OLId{latin-ordinary}{x}][\eq/[\Obj 0][\OLId{latin-ordinary}{x}']] \tag{$!Q_\OLMathNumeral{2}$}\\
+& \lforall[\OLId{latin-ordinary}{x}][(\eq[\OLId{latin-ordinary}{x}][\Obj 0] \lor \lexists[\OLId{latin-ordinary}{y}][\eq[\OLId{latin-ordinary}{x}][\OLId{latin-ordinary}{y}']])] \tag{$!Q_\OLMathNumeral{3}$}
+\end{align*}
+أعط !!{structure}s~$\Struct{M_1}$ و$\Struct{M_2}$ و$\Struct{M_3}$ بحيث
+\begin{enumerate}
+\item $\Sat{\OLId{latin-looped}{M}_\OLMathNumeral{1}}{!Q_\OLMathNumeral{1}}$ و$\Sat{\OLId{latin-looped}{M}_\OLMathNumeral{1}}{!Q_\OLMathNumeral{2}}$ و$\Sat/{\OLId{latin-looped}{M}_\OLMathNumeral{1}}{!Q_\OLMathNumeral{3}}$؛
+\item $\Sat{\OLId{latin-looped}{M}_\OLMathNumeral{2}}{!Q_\OLMathNumeral{1}}$ و$\Sat/{\OLId{latin-looped}{M}_\OLMathNumeral{2}}{!Q_\OLMathNumeral{2}}$ و$\Sat{\OLId{latin-looped}{M}_\OLMathNumeral{2}}{!Q_\OLMathNumeral{3}}$؛ و
+\item $\Sat/{\OLId{latin-looped}{M}_\OLMathNumeral{3}}{!Q_\OLMathNumeral{1}}$ و$\Sat{\OLId{latin-looped}{M}_\OLMathNumeral{3}}{!Q_\OLMathNumeral{2}}$ و$\Sat{\OLId{latin-looped}{M}_\OLMathNumeral{3}}{!Q_\OLMathNumeral{3}}$.
+\end{enumerate}
+ويكفي في كل مثال تعيين~$\Assign{\Obj{0}}{\OLId{latin-looped}{M}_\OLId{latin-ordinary}{i}}$ و
+$\Assign{\prime}{\OLId{latin-looped}{M}_\OLId{latin-ordinary}{i}}$ لكل منها.
+\end{prob}
+
+\begin{explain}
+أما إنشاء !!{structure}s غير قياسية للغة $\Lang{L_A}$
+فيسير: نأخذ الـ!!{domain}~$\Int$، ونؤول الرموز غير المنطقية
+بالمعاني المعتادة. ففيه أعداد سالبة لا تساوي قيمة
+$\num{\OLId{latin-ordinary}{n}}$ لأي~$\OLId{latin-ordinary}{n}$، فالبنية غير قياسية. لكنها ليست
+\emph{نموذجًا} للحساب بمعنى الاتفاق مع~$\Struct{N}$ في الجمل
+الصادقة؛ فإن $\lforall[\OLId{latin-ordinary}{x}][\eq/[\OLId{latin-ordinary}{x}'][\Obj{0}]]$ تكذب فيها،
+مثلًا. وأما وجود نماذج غير قياسية توافق الحساب نفسه،
+فتثبته مبرهنة التراص بسهولة.
+\end{explain}
+
+\begin{prop}
+لتكن $\Th{TA} = \Setabs{!A}{\Sat{\OLId{latin-looped}{N}}{!A}}$ نظرية~$\Struct{N}$.
+لـ$\Th{TA}$ نموذج غير قياسي !!a{enumerable}.
+\end{prop}
+
+\begin{proof}
+نزيد $\Lang{L_A}$~!!{constant} جديدًا~$\OLId{latin-ordinary}{c}$، ونأخذ
+مجموعة الـ!!{sentence}s
+\[
+\OLId{greek-variable}{Gamma} = \Th{TA} \cup \{\eq/[\OLId{latin-ordinary}{c}][\num{\OLMathNumeral{0}}], \eq/[\OLId{latin-ordinary}{c}][\num{\OLMathNumeral{1}}],
+\eq/[\OLId{latin-ordinary}{c}][\num{\OLMathNumeral{2}}], \dots\}.
+\]
+أي نموذج~$\Struct{M^c}$ لـ$\OLId{greek-variable}{Gamma}$ يشتمل على
+!!a{element}~$\OLId{latin-ordinary}{x} =
+\Assign{\OLId{latin-ordinary}{c}}{\OLId{latin-looped}{M}}$ غير قياسي، إذ $\OLId{latin-ordinary}{x} \neq \Value{\num{\OLId{latin-ordinary}{n}}}{\OLId{latin-looped}{M}}$
+لكل $\OLId{latin-ordinary}{n} \in \Nat$. ولدينا أيضًا $\Sat{\OLId{latin-looped}{M}^\OLId{latin-ordinary}{c}}{\Th{TA}}$،
+لأن $\Th{TA} \subseteq \OLId{greek-variable}{Gamma}$. فإذا رددنا $\Struct{M^c}$
+إلى !!a{structure}~$\Struct{M}$ للغة $\Lang{L_A}$ بإسقاط~$\OLId{latin-ordinary}{c}$
+من التأويل، بقي $\OLId{latin-ordinary}{x}$ غير القياسي في المجال، وبقي
+$\Sat{\OLId{latin-looped}{M}}{\Th{TA}}$. وإنما يبقى هذا الصدق لأن $\OLId{latin-ordinary}{c}$
+لا يقع في~$\Th{TA}$. فحسبنا إثبات وجود نموذج لـ$\OLId{greek-variable}{Gamma}$.
+
+ولإيجاد نموذج لـ$\OLId{greek-variable}{Gamma}$ نستعمل التراص: نثبت إرضاء كل جزء
+منتهٍ من~$\OLId{greek-variable}{Gamma}$، فيلزم إرضاء $\OLId{greek-variable}{Gamma}$ كلها. خذ
+$\OLId{greek-variable}{Gamma}_\OLMathNumeral{0} \subseteq \OLId{greek-variable}{Gamma}$ منتهية. وما في $\OLId{greek-variable}{Gamma}_\OLMathNumeral{0}$
+إما !!{sentence}s من~$\Th{TA}$، وإما صيغ من الشكل
+$\eq/[\OLId{latin-ordinary}{c}][\num{\OLId{latin-ordinary}{n}}]$، وعددها منتهٍ. نجعل $\OLId{latin-ordinary}{k}$ أكبر عدد
+يظهر في صيغة $\eq/[\OLId{latin-ordinary}{c}][\num{\OLId{latin-ordinary}{k}}] \in \OLId{greek-variable}{Gamma}_\OLMathNumeral{0}$، ونضع $\OLId{latin-ordinary}{k}=\OLMathNumeral{0}$
+إن لم ترد صيغة من هذا الشكل. ثم نبني $\Struct{N_k}$
+بتوسيع~$\Struct{N}$ وجعل $\Assign{\OLId{latin-ordinary}{c}}{\OLId{latin-looped}{N}_\OLId{latin-ordinary}{k}}=\OLId{latin-ordinary}{k}+\OLMathNumeral{1}$.
+فيكون $\Sat{\OLId{latin-looped}{N}_\OLId{latin-ordinary}{k}}{\OLId{greek-variable}{Gamma}_\OLMathNumeral{0}}$: فإن $!A \in \Th{TA}$
+يقتضي $\Sat{\OLId{latin-looped}{N}_\OLId{latin-ordinary}{k}}{!A}$، لأن $\Struct{N_k}$ توافق
+$\Struct{N}$ فيما عدا~$\OLId{latin-ordinary}{c}$، ولا يقع $\OLId{latin-ordinary}{c}$ في~$!A$.
+وأما $\Sat{\OLId{latin-looped}{N}_\OLId{latin-ordinary}{k}}{\eq/[\OLId{latin-ordinary}{c}][\num{\OLId{latin-ordinary}{n}}]}$ فلأن $\OLId{latin-ordinary}{n} \le \OLId{latin-ordinary}{k}$
+و$\Value{\OLId{latin-ordinary}{c}}{\OLId{latin-looped}{N}_\OLId{latin-ordinary}{k}}=\OLId{latin-ordinary}{k}+\OLMathNumeral{1}$. فقد ثبت إرضاء كل جزء منتهٍ،
+ومن ثم إرضاء $\OLId{greek-variable}{Gamma}$ بالتراص. واللغة الموسعة قابلة للعد،
+فتعطينا مبرهنة لوفنهايم--سكولم النزولية نموذجًا !!{enumerable}؛
+ومختزله إلى اللغة الأصلية هو المطلوب.
+\end{proof}
+
+\end{document}

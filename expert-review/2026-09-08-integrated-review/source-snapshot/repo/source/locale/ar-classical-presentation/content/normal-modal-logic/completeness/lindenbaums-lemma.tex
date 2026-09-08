@@ -1,0 +1,108 @@
+% Part: normal-modal-logic
+% Chapter: completeness
+% Section: lindenbaums-lemma
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{com}{lin}
+
+\olsection{مبرهنة ليندنباوم}
+
+نحتاج إلى نقل كل مجموعة $\Sigma$-متسقة من ال!!{formula}s إلى مجموعة
+$\Sigma$-متسقة \emph{تامة} تحتويها. وهذا ما تكفله مبرهنة ليندنباوم.
+وسنرى عند بناء النموذج القانوني أن لكل مجموعة $\Sigma$-متسقة تامة
+$\OLId{greek-variable}{Delta}$ عالمًا تصدق عنده ال!!{formula}s المنتمية إلى~$\OLId{greek-variable}{Delta}$ دون غيرها.
+فإذا ثبت التوسيع، ثبت أن كل مجموعة $\Sigma$-متسقة
+تصدق عند عالم من عوالم ذلك النموذج.
+
+\begin{thm}[مبرهنة ليندنباوم]\ollabel{thm:lindenbaum}
+  إذا كانت~$\OLId{greek-variable}{Gamma}$ $\Sigma$-متسقة، فثمة مجموعة $\Sigma$-متسقة تامة
+  $\OLId{greek-variable}{Delta}$ توسّع~$\OLId{greek-variable}{Gamma}$.
+\end{thm}
+
+\begin{proof}
+لتكن~$!A_\OLMathNumeral{0}$، $!A_\OLMathNumeral{1}$، \dots{} قائمة شاملة لجميع صيغ اللغة (ويجوز
+التكرار). فمثلًا، نبدأ بإدراج~$\Obj p_\OLMathNumeral{0}$، وفي كل مرحلة~$\OLId{latin-ordinary}{n} \ge \OLMathNumeral{1}$
+ندرج الصيغ المنتهية الكثيرة التي لا يتجاوز طولها~$\OLId{latin-ordinary}{n}$ ولا تستعمل إلا
+المتغيرات~$\Obj p_\OLMathNumeral{0}$، \dots،~$\Obj p_\OLId{latin-ordinary}{n}$. ونعرّف مجموعات من
+ال!!{formula}s~$\OLId{greek-variable}{Delta}_\OLId{latin-ordinary}{n}$ بالاستقراء على~$\OLId{latin-ordinary}{n}$، ثم نضع
+$\OLId{greek-variable}{Delta} = \bigcup_\OLId{latin-ordinary}{n} \OLId{greek-variable}{Delta}_\OLId{latin-ordinary}{n}$. نضع أولًا~$\OLId{greek-variable}{Delta}_\OLMathNumeral{0} = \OLId{greek-variable}{Gamma}$.
+وبافتراض أن~$\OLId{greek-variable}{Delta}_\OLId{latin-ordinary}{n}$ قد عُرّفت، نعرّف~$\OLId{greek-variable}{Delta}_{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}}$ هكذا:
+\[
+\OLId{greek-variable}{Delta}_{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}} =
+\begin{cases}
+  \OLId{greek-variable}{Delta}_\OLId{latin-ordinary}{n} \cup \{!A_\OLId{latin-ordinary}{n}\}, & \text{إذا كانت $\Delta_n \cup \{!A_n\}$
+    $\Sigma$-متسقة؛} \\
+  \OLId{greek-variable}{Delta}_\OLId{latin-ordinary}{n} \cup \{\lnot !A_\OLId{latin-ordinary}{n}\}, & \text{فيما عدا ذلك.}
+\end{cases}
+\]
+والآن لتكن~$\OLId{greek-variable}{Delta} = \bigcup_{\OLId{latin-ordinary}{n}=\OLMathNumeral{0}}^\infty \OLId{greek-variable}{Delta}_\OLId{latin-ordinary}{n}$.
+
+ولنحقق الآن أن المجموعة~$\OLId{greek-variable}{Delta}$ المعرّفة بهذا البناء تستوفي المطلوب:
+أن يكون~$\OLId{greek-variable}{Gamma} \subseteq \OLId{greek-variable}{Delta}$، وأن تكون~$\OLId{greek-variable}{Delta}$ $\Sigma$-متسقة تامة.
+
+أما~$\OLId{greek-variable}{Gamma} \subseteq \OLId{greek-variable}{Delta}$ فظاهر، إذ~$\OLId{greek-variable}{Delta}_\OLMathNumeral{0} \subseteq
+\OLId{greek-variable}{Delta}$ بالبناء، و$\OLId{greek-variable}{Delta}_\OLMathNumeral{0} = \OLId{greek-variable}{Gamma}$.
+بل~$\OLId{greek-variable}{Delta}_\OLId{latin-ordinary}{n} \subseteq \OLId{greek-variable}{Delta}$ لكل~$\OLId{latin-ordinary}{n}$، لأن~$\OLId{greek-variable}{Delta}$ اتحاد المجموعات~$\OLId{greek-variable}{Delta}_\OLId{latin-ordinary}{n}$.
+والمجموعات في هذا البناء متزايدة؛ فإننا نضيف في كل مرحلة !!a{formula}
+إلى ما سبق، فيكون $\OLId{greek-variable}{Delta}_\OLId{latin-ordinary}{n} \subseteq \OLId{greek-variable}{Delta}_{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}}$،
+وبتعدي~$\subseteq$ يكون $\OLId{greek-variable}{Delta}_\OLId{latin-ordinary}{n} \subseteq \OLId{greek-variable}{Delta}_\OLId{latin-ordinary}{m}$ إذا كان~$\OLId{latin-ordinary}{n} \le \OLId{latin-ordinary}{m}$.
+وأما التمام، فلأن كل مرحلة تضم إما~$!A_\OLId{latin-ordinary}{n}$ وإما~$\lnot !A_\OLId{latin-ordinary}{n}$،
+وقائمتنا لا تخلو من أي !!{formula}، وإن تكرر بعضها في~$!A_\OLId{latin-ordinary}{n}$.
+فلكل~$!A$ يكون $!A \in \OLId{greek-variable}{Delta}$ أو~$\lnot !A \in \OLId{greek-variable}{Delta}$؛
+وذلك تمام~$\OLId{greek-variable}{Delta}$ بعينه.
+
+وأما اتساق~$\OLId{greek-variable}{Delta}$ بالنسبة إلى~$\Sigma$ فبرهانه من وجهين متعاقبين.
+نبين أولًا أن عدم اتساق~$\OLId{greek-variable}{Delta}$ مع~$\Sigma$ يرجع إلى عدم اتساق
+إحدى المراحل~$\OLId{greek-variable}{Delta}_\OLId{latin-ordinary}{n}$ مع~$\Sigma$؛ ثم نثبت أن كل~$\OLId{greek-variable}{Delta}_\OLId{latin-ordinary}{n}$
+$\Sigma$-متسقة، فيمتنع عدم اتساق الاتحاد.
+
+لنفترض أن~$\OLId{greek-variable}{Delta}$ $\Sigma$-غير متسقة.
+إذن $\OLId{greek-variable}{Delta} \Proves[\Sigma] \lfalse$، أي توجد مقدمات متناهية
+$!A_\OLMathNumeral{1}$، \dots،~$!A_\OLId{latin-ordinary}{k} \in \OLId{greek-variable}{Delta}$ تحقق
+$\Sigma \Proves !A_\OLMathNumeral{1} \lif (!A_\OLMathNumeral{2} \lif \cdots (!A_\OLId{latin-ordinary}{k} \lif
+\lfalse)\dots)$. وبما أن~$\OLId{greek-variable}{Delta} = \bigcup_{\OLId{latin-ordinary}{n}=\OLMathNumeral{0}}^\infty \OLId{greek-variable}{Delta}_\OLId{latin-ordinary}{n}$،
+فكل~$!A_\OLId{latin-ordinary}{i} \in \OLId{greek-variable}{Delta}_{\OLId{latin-ordinary}{n}_\OLId{latin-ordinary}{i}}$ لمرحلة ما~$\OLId{latin-ordinary}{n}_\OLId{latin-ordinary}{i}$.
+نأخذ~$\OLId{latin-ordinary}{n}$ أكبر الفهارس التي احتجنا إليها؛ فإن خلا الاشتقاق من المقدمات
+كفت المرحلة الأولى. ولكون~$\OLId{latin-ordinary}{n}_\OLId{latin-ordinary}{i} \le \OLId{latin-ordinary}{n}$ يلزم~$\OLId{greek-variable}{Delta}_{\OLId{latin-ordinary}{n}_\OLId{latin-ordinary}{i}} \subseteq \OLId{greek-variable}{Delta}_\OLId{latin-ordinary}{n}$.
+فتجتمع جميع~$!A_\OLId{latin-ordinary}{i}$ في~$\OLId{greek-variable}{Delta}_\OLId{latin-ordinary}{n}$ واحدة،
+ويشهد الاشتقاق نفسه على $\OLId{greek-variable}{Delta}_\OLId{latin-ordinary}{n} \Proves[\Sigma] \lfalse$.
+فتكون~$\OLId{greek-variable}{Delta}_\OLId{latin-ordinary}{n}$ $\Sigma$-غير متسقة، كما أردنا.
+
+ثم نثبت اتساق كل~$\OLId{greek-variable}{Delta}_\OLId{latin-ordinary}{n}$ بالنسبة إلى~$\Sigma$ بالاستقراء على~$\OLId{latin-ordinary}{n}$.
+أما البداية فـ~$\OLId{greek-variable}{Delta}_\OLMathNumeral{0} = \OLId{greek-variable}{Gamma}$، وقد فرضنا اتساق~$\OLId{greek-variable}{Gamma}$
+بالنسبة إلى~$\Sigma$، فتم المطلوب عند~$\OLId{latin-ordinary}{n} = \OLMathNumeral{0}$.
+وافرض ثبوته عند~$\OLId{latin-ordinary}{n}$؛ أي اتساق~$\OLId{greek-variable}{Delta}_\OLId{latin-ordinary}{n}$ بالنسبة إلى~$\Sigma$.
+بالتعريف، تكون~$\OLId{greek-variable}{Delta}_{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}}$ هي
+$\OLId{greek-variable}{Delta}_\OLId{latin-ordinary}{n} \cup \{!A_\OLId{latin-ordinary}{n}\}$ إن كانت هذه $\Sigma$-متسقة،
+وتكون $\OLId{greek-variable}{Delta}_\OLId{latin-ordinary}{n} \cup \{\lnot!A_\OLId{latin-ordinary}{n}\}$ فيما عدا ذلك.
+ففي الحال الأولى ثبت اتساق~$\OLId{greek-variable}{Delta}_{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}}$ بالنسبة إلى~$\Sigma$
+بنفس شرط الاختيار. وفي الأخرى نستعمل
+\olref[prf][con]{prop:consistencyfacts}\olref[prf][con]{prop:consistencyfacts-c}:
+إحدى المجموعتين $\OLId{greek-variable}{Delta}_\OLId{latin-ordinary}{n} \cup \{!A_\OLId{latin-ordinary}{n}\}$ و$\OLId{greek-variable}{Delta}_\OLId{latin-ordinary}{n} \cup \{\lnot!A_\OLId{latin-ordinary}{n}\}$
+متسقة؛ فإذا امتنع اتساق الأولى تعيّن اتساق الثانية.
+وعليه فـ~$\OLId{greek-variable}{Delta}_{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}}$ متسقة في الحالين.
+\end{proof}
+
+\begin{cor}\ollabel{cor:provability-characterization}
+  $\OLId{greek-variable}{Gamma} \Proves[\Sigma] !A$ إذا وفقط إذا كان~$!A \in \OLId{greek-variable}{Delta}$ لكل
+  مجموعة $\Sigma$-متسقة تامة~$\OLId{greek-variable}{Delta}$ توسع~$\OLId{greek-variable}{Gamma}$ (بما في ذلك حالة
+  $\OLId{greek-variable}{Gamma} = \emptyset$، فنحصل عندئذ على توصيف آخر للنسق الجهوي
+  $\Sigma$).
+\end{cor}
+
+\begin{proof}
+  إذا كان~$\OLId{greek-variable}{Gamma} \Proves[\Sigma] !A$، وأخذنا~$\OLId{greek-variable}{Delta}$ مجموعة
+  $\Sigma$-متسقة تامة توسّع~$\OLId{greek-variable}{Gamma}$، امتنع أن يكون~$!A \notin \OLId{greek-variable}{Delta}$.
+  إذ يلزم حينئذ~$\lnot!A \in \OLId{greek-variable}{Delta}$ بالقصوية، ولدينا
+  $\OLId{greek-variable}{Delta} \Proves[\Sigma] !A$ بالرتابة، و
+  $\OLId{greek-variable}{Delta} \Proves[\Sigma] \lnot!A$ بالانعكاسية؛ فتبطل دعوى اتساق~$\OLId{greek-variable}{Delta}$.
+  وأما الاتجاه الآخر فنثبته بالمقابل. إذا كان~$\OLId{greek-variable}{Gamma} \Proves/[\Sigma] !A$،
+  كانت $\OLId{greek-variable}{Gamma} \cup \{\lnot!A\}$ $\Sigma$-متسقة.
+  فبمبرهنة ليندنباوم لها توسعة متسقة تامة~$\OLId{greek-variable}{Delta}$
+  تحتوي~$\OLId{greek-variable}{Gamma} \cup \{\lnot!A\}$؛ وباتساقها يكون $!A \notin \OLId{greek-variable}{Delta}$.
+\end{proof}
+
+\end{document}

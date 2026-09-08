@@ -1,0 +1,117 @@
+% Part: sets-functions-relations
+% Chapter: infinite
+% Section: dedekind
+%
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid[ar]{sfr}{infinite}{dedekind}
+\olsection{جبرات ديديكند}
+
+ليست الغاية أن تكون الأعداد الطبيعية غير متناهية وحسب؛ بل لا بد من خواص جبرية تنتظم بها أحكام الجمع والضرب وسائر العمليات.
+
+أصلُ مذهب ديديكند أن تُتخذ \emph{دالة اللاحق} أساسًا، ثم تُميَّز الأعداد بالخواص الآتية:
+\begin{enumerate}
+	\item ثمة عدد، هو $\OLMathNumeral{0}$، لا يكون لاحقًا لعدد
+	\\أي إن $\OLMathNumeral{0} \notin \ran{\OLId{latin-ordinary}{s}}$
+	\\أي إن $\forall \OLId{latin-ordinary}{x}\ \OLId{latin-ordinary}{s}(\OLId{latin-ordinary}{x}) \neq \OLMathNumeral{0}$
+	\item إذا تمايز عددان تمايز لاحقاهما
+	\\أي إن $\OLId{latin-ordinary}{s}$ هي !!a{injection}
+	\\أي إن $\forall \OLId{latin-ordinary}{x} \forall \OLId{latin-ordinary}{y} (\OLId{latin-ordinary}{s}(\OLId{latin-ordinary}{x}) = \OLId{latin-ordinary}{s}(\OLId{latin-ordinary}{y}) \lif \OLId{latin-ordinary}{x} = \OLId{latin-ordinary}{y})$
+	\item\ollabel{repeatedapplication} كل عدد يُنال من
+	$\OLMathNumeral{0}$ بتكرير تطبيق دالة اللاحق.
+\end{enumerate}
+أما الشرطان الأولان فيسهل التعبير عنهما بمنطق الرتبة الأولى، كما تقدم. وأما \olref{repeatedapplication} فلا يفي به ذلك المنطق وحده. وهنا موضع إصابة ديديكند: إذ صاغ الشرط
+\olref{repeatedapplication} بلغة المجموعات على الوجه الآتي:
+\begin{enumerate}
+	\item[\OLClassicalDigits{3}$'$.] الأعداد الطبيعية أصغر مجموعة تحتوي الصفر وتكون
+	\emph{منغلقة تحت دالة اللاحق}؛ ومعنى الانغلاق أن تطبيق $\OLId{latin-ordinary}{s}$ على أي
+	!!{element} منها يعطي !!{element} آخر منها.
+\end{enumerate}
+ولنُفصِّل هذا المعنى شيئًا فشيئًا.
+
+\begin{defn}\ollabel{Closure}
+	لتكن $\OLId{latin-looped}{A}$ مجموعة، ولتكن $\OLId{latin-ordinary}{f}\colon \OLId{latin-looped}{A}\to \OLId{latin-looped}{A}$. تكون المجموعة
+	$\OLId{latin-looped}{X}\subseteq \OLId{latin-looped}{A}$ \emph{منغلقة} تحت $\OLId{latin-ordinary}{f}$ {إذا وفقط إذا} كان
+	$(\forall \OLId{latin-ordinary}{x} \in \OLId{latin-looped}{X})\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x}) \in \OLId{latin-looped}{X}$. ولكل $\OLId{latin-ordinary}{o}\in \OLId{latin-looped}{A}$ نعرّف:
+	$$\closureofunder{\OLId{latin-ordinary}{f}}{\OLId{latin-ordinary}{o}} = \bigcap\Setabs{\OLId{latin-looped}{X}}{\OLId{latin-looped}{X}\subseteq \OLId{latin-looped}{A}\text{ و}\OLId{latin-ordinary}{o} \in \OLId{latin-looped}{X}\text{ و}\OLId{latin-looped}{X}
+	\text{ منغلقة تحت $f$}}$$
+\end{defn}
+
+\textbf{تنبيه تصحيحي على الأصل (C051-01).} قُيّد تعريف الإغلاق بدالة
+$\OLId{latin-ordinary}{f}\colon \OLId{latin-looped}{A}\to \OLId{latin-looped}{A}$، وجُعلت المجموعات المتقاطعة جزئيات من $\OLId{latin-looped}{A}$؛ فعبارة
+«لكل دالة» لا تكفل أن يبقى تطبيق $\OLId{latin-ordinary}{f}$ داخل المجال ولا تعيّن المجموعة
+المحيطة التي يؤخذ فيها التقاطع.
+
+إذن $\closureofunder{\OLId{latin-ordinary}{f}}{\OLId{latin-ordinary}{o}}$ هي تقاطع جميع المجموعات المنغلقة تحت $\OLId{latin-ordinary}{f}$
+التي $\OLId{latin-ordinary}{o}$ فيها !!a{element}. ومن ثم، حدسيًا، تكون
+$\closureofunder{\OLId{latin-ordinary}{f}}{\OLId{latin-ordinary}{o}}$ \emph{أصغر} مجموعة منغلقة تحت $\OLId{latin-ordinary}{f}$، و$\OLId{latin-ordinary}{o}$ فيها
+!!a{element}. وتجعل النتيجة الآتية هذه الفكرة الحدسية دقيقة؛
+\begin{lem}\ollabel{closureproperties}
+	لكل مجموعة $\OLId{latin-looped}{A}$، ولكل دالة $\OLId{latin-ordinary}{f}\colon \OLId{latin-looped}{A}\to \OLId{latin-looped}{A}$، ولكل $\OLId{latin-ordinary}{o} \in \OLId{latin-looped}{A}$:
+	\begin{enumerate}
+		\item\ollabel{closurehaselem} $\OLId{latin-ordinary}{o} \in \closureofunder{\OLId{latin-ordinary}{f}}{\OLId{latin-ordinary}{o}}$؛ و
+		\item\ollabel{closureclosed} $\closureofunder{\OLId{latin-ordinary}{f}}{\OLId{latin-ordinary}{o}}$ منغلقة تحت $\OLId{latin-ordinary}{f}$؛ و
+		\item\ollabel{closuresmallest} إذا كانت $\OLId{latin-looped}{X}$ منغلقة تحت $\OLId{latin-ordinary}{f}$ وكان $\OLId{latin-ordinary}{o} \in
+		\OLId{latin-looped}{X}$، فإن $\closureofunder{\OLId{latin-ordinary}{f}}{\OLId{latin-ordinary}{o}} \subseteq \OLId{latin-looped}{X}$
+	\end{enumerate}
+\end{lem}
+
+\begin{proof}
+أول ما يلزم إثبات وجود التقاطع. وثمة مجموعة منغلقة تحت $\OLId{latin-ordinary}{f}$ يكون $\OLId{latin-ordinary}{o}$ فيها
+!!a{element}، وهي $\OLId{latin-looped}{A}$ نفسها. فالتقاطع $\closureofunder{\OLId{latin-ordinary}{f}}{\OLId{latin-ordinary}{o}}$، المأخوذ على
+\emph{جميع} هذه المجموعات، موجود. ويبقى تحقيق البنود
+\olref{closurehaselem}--\olref{closuresmallest}.
+
+أما \olref{closurehaselem}، فإن $\OLId{latin-ordinary}{o} \in
+\closureofunder{\OLId{latin-ordinary}{f}}{\OLId{latin-ordinary}{o}}$؛ إذ $\OLId{latin-ordinary}{o}$ هو !!a{element} في كل مجموعة من المجموعات التي أُخذ تقاطعها.
+
+وأما \olref{closureclosed}، فليكن $\OLId{latin-ordinary}{x} \in
+\closureofunder{\OLId{latin-ordinary}{f}}{\OLId{latin-ordinary}{o}}$. متى كان $\OLId{latin-ordinary}{o} \in \OLId{latin-looped}{X}$ وكانت $\OLId{latin-looped}{X}$ منغلقة تحت $\OLId{latin-ordinary}{f}$ لزم $\OLId{latin-ordinary}{x} \in \OLId{latin-looped}{X}$، ثم لزم $\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x}) \in \OLId{latin-looped}{X}$ بانغلاق $\OLId{latin-looped}{X}$ تحت $\OLId{latin-ordinary}{f}$.
+فهذا جار في جميع المجموعات الداخلة في التقاطع؛ ومن ثم $\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x}) \in \closureofunder{\OLId{latin-ordinary}{f}}{\OLId{latin-ordinary}{o}}$.
+
+وأما \olref{closuresmallest}، فحسبنا الخاصية العامة للتقاطع: إذا كان $\OLId{latin-looped}{X}
+\in \OLId{latin-looped}{C}$ كان $\bigcap \OLId{latin-looped}{C} \subseteq \OLId{latin-looped}{X}$.
+\end{proof}
+
+وعلى هذه الخواص ينبني التعريف الآتي:
+
+\begin{defn}
+\emph{جبر ديديكند} هو مجموعة $\OLId{latin-looped}{A}$ مع دالة $\OLId{latin-ordinary}{f}
+\colon \OLId{latin-looped}{A} \to \OLId{latin-looped}{A}$ وعنصر ما $\OLId{latin-ordinary}{o} \in \OLId{latin-looped}{A}$ بحيث:
+	\begin{enumerate}
+		\item \ollabel{ded:proper} $\OLId{latin-ordinary}{o} \notin \ran{\OLId{latin-ordinary}{f}}$
+		\item \ollabel{ded:injection} $\OLId{latin-ordinary}{f}$ هي !!a{injection}
+		\item \ollabel{ded:closure} $\OLId{latin-looped}{A} = \closureofunder{\OLId{latin-ordinary}{f}}{\OLId{latin-ordinary}{o}}$
+	\end{enumerate}
+\end{defn}
+
+إذا كان $\OLId{latin-looped}{A} = \closureofunder{\OLId{latin-ordinary}{f}}{\OLId{latin-ordinary}{o}}$، فالنتيجة المتقدمة تقضي بأن $\OLId{latin-looped}{A}$ أصغر مجموعة منغلقة تحت $\OLId{latin-ordinary}{f}$ يكون $\OLId{latin-ordinary}{o}$ فيها !!a{element}. وكل جبر ديديكند لانهائي بحسب ديديكند؛ يدل على ذلك الشرطان
+\olref{ded:proper} و\olref{ded:injection} من التعريف. وأبلغ من هذا أن وجود أي مجموعة لانهائية بحسب ديديكند يتيح إنشاء جبر ديديكند.
+
+\begin{thm}\ollabel{thm:DedekindInfiniteAlgebra}
+إذا وجدت مجموعة لانهائية بحسب ديديكند، وجد جبر ديديكند.
+\end{thm}
+
+\begin{proof}
+لتكن $\OLId{latin-looped}{D}$ مجموعة لانهائية بحسب ديديكند. فثمة دالة متباينة $\OLId{latin-ordinary}{g} \colon \OLId{latin-looped}{D} \to
+\OLId{latin-looped}{D}$ وعنصر $\OLId{latin-ordinary}{o}  \in \OLId{latin-looped}{D} \setminus \ran{\OLId{latin-ordinary}{g}}$. ضع $\OLId{latin-looped}{A} =
+\closureofunder{\OLId{latin-ordinary}{g}}{\OLId{latin-ordinary}{o}}$؛ فإن \olref{closureproperties} تثبت وجود $\OLId{latin-looped}{A}$ وانتماء
+$\OLId{latin-ordinary}{o} \in \OLId{latin-looped}{A}$. ثم ضع $\OLId{latin-ordinary}{f} =
+\funrestrictionto{\OLId{latin-ordinary}{g}}{\OLId{latin-looped}{A}}$. والمطلوب أن $\OLId{latin-looped}{A}, \OLId{latin-ordinary}{f}, \OLId{latin-ordinary}{o}$ جبر ديديكند؛ فنحقق شروطه واحدًا واحدًا.
+
+أما \olref{ded:proper}، فبما أن $\OLId{latin-ordinary}{o} \notin \ran{\OLId{latin-ordinary}{g}}$ و$\ran{\OLId{latin-ordinary}{f}}
+\subseteq \ran{\OLId{latin-ordinary}{g}}$، يلزم $\OLId{latin-ordinary}{o}\notin \ran{\OLId{latin-ordinary}{f}}$.
+
+وأما \olref{ded:injection}، فإن $\OLId{latin-ordinary}{g}$ متباينة على $\OLId{latin-looped}{D}$، وتقييد الدالة المتباينة متباين؛ فكذا $\OLId{latin-ordinary}{f} \subseteq \OLId{latin-ordinary}{g}$.
+
+وأما \olref{ded:closure}، فمن \olref{closureproperties} أن $\OLId{latin-looped}{A}$ منغلقة تحت $\OLId{latin-ordinary}{g}$، فـ~$\OLId{latin-looped}{A}$ بالأولى منغلقة تحت $\OLId{latin-ordinary}{f}$. فيلزم
+$\closureofunder{\OLId{latin-ordinary}{f}}{\OLId{latin-ordinary}{o}} \subseteq \OLId{latin-looped}{A}$ بحسب \olref{closureproperties}.
+ومن جهة أخرى، $\closureofunder{\OLId{latin-ordinary}{f}}{\OLId{latin-ordinary}{o}}$ منغلقة تحت $\OLId{latin-ordinary}{f}$، وحيث إن $\OLId{latin-ordinary}{f} =
+\funrestrictionto{\OLId{latin-ordinary}{g}}{\OLId{latin-looped}{A}}$ فإن $\closureofunder{\OLId{latin-ordinary}{f}}{\OLId{latin-ordinary}{o}}$ منغلقة تحت $\OLId{latin-ordinary}{g}$ أيضًا. فيلزم
+$\OLId{latin-looped}{A} \subseteq \closureofunder{\OLId{latin-ordinary}{f}}{\OLId{latin-ordinary}{o}}$ من
+\olref{closureproperties}. وبالاحتواءين يثبت المطلوب.
+\end{proof}
+
+\end{document}

@@ -1,0 +1,180 @@
+% Part: normal-modal-logic
+% Chapter: frame-definability
+% Section: properties-accessibility
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{frd}{acc}
+
+\olsection{خصائص علاقات الوصول}
+
+لكثير من ال!!{formula}s الموجهية صلة بخصائص يسيرة مألوفة لعلاقة
+الوصول، حتى تكون مميزة لها. وأحد وجهي هذه الصلة أن النموذج إذا
+اتصف بخاصية معينة صدقت فيه !!{formula} تقابلها، مع جميع حالات
+إحلالها. ونبدأ بخمسة أمثلة كلاسيكية، نقرن في كل منها نوع العلاقة
+بالصيغة التي يضمن صدقها.
+
+\begin{thm}\ollabel{thm:soundschemas}
+  ليكن~$\mModel{M} = \tuple{\OLId{latin-looped}{W}, \OLId{latin-looped}{R}, \OLId{latin-looped}{V}}$ نموذجًا. إذا كانت لـ$\OLId{latin-looped}{R}$ الخاصية
+  المبينة في الجانب الأيسر من~\olref{tab:five}، كانت كل حالة من
+  ال!!{formula} في الجانب الأيمن صادقة في~$\mModel{M}$.
+\end{thm}
+
+\begin{table}[t]
+    \begin{tabular}{| l || l |}
+      \hline
+      {\emph{إذا كانت~$\OLId{latin-looped}{R}$ \dots}} & {\emph{فإن \dots صادقة في~$\mModel{M}$:}} \\
+      \hline \hline
+      \emph{تسلسلية}: $\forall \OLId{latin-ordinary}{u} \exists \OLId{latin-ordinary}{v} Ruv$ & \hbox to.43\textwidth
+           {$\Box \OLId{latin-ordinary}{p} \lif \Diamond \OLId{latin-ordinary}{p}$ \hfill (\Ax{D})} \\
+      \hline
+      \emph{انعكاسية}: $\forall \OLId{latin-ordinary}{w} Rww$
+      & \hbox to.43\textwidth
+          {$\Box \OLId{latin-ordinary}{p} \lif \OLId{latin-ordinary}{p}$ \hfill (\Ax{T})} \\
+      \hline
+      \emph{متناظرة}: &  \hbox to .\OLClassicalDigits{43}\textwidth
+           {$\OLId{latin-ordinary}{p} \lif \Box\Diamond \OLId{latin-ordinary}{p}$ \hfill (\Ax{B})} \\
+           $\forall \OLId{latin-ordinary}{u}\forall \OLId{latin-ordinary}{v}(Ruv \lif Rvu)$ & \\
+      \hline
+      \emph{متعدية}: & \hbox to.43\textwidth
+           {$\Box \OLId{latin-ordinary}{p} \lif \Box \Box \OLId{latin-ordinary}{p}$ \hfill (\Ax{4})} \\
+      $\forall \OLId{latin-ordinary}{u} \forall \OLId{latin-ordinary}{v} \forall \OLId{latin-ordinary}{w} ((Ruv \land Rvw) \lif Ruw)$ & \\
+      \hline
+      \emph{إقليدية}: & \hbox to .\OLClassicalDigits{43}\textwidth
+        {$\Diamond \OLId{latin-ordinary}{p} \lif \Box\Diamond \OLId{latin-ordinary}{p}$ \hfill (\Ax{5})} \\
+      $\forall \OLId{latin-ordinary}{w} \forall \OLId{latin-ordinary}{u} \forall \OLId{latin-ordinary}{v} ((Rwu \land Rwv) \lif Ruv)$ &\\
+      \hline
+    \end{tabular}
+    \caption{خمس حقائق مطابقة.}
+    \ollabel{tab:five}
+  \end{table}
+
+
+\begin{proof}
+  نبيّن حالة~\Ax{B}. صدق المخطط في النموذج معناه صدق جميع
+  حالاته في جميع عوالمه؛ فخذ الحالة~$!A \lif \Box\Diamond !A$
+  من~\Ax{B}، وعالمًا~$\OLId{latin-ordinary}{w} \in \OLId{latin-looped}{W}$. نفرض صدق المقدّم~$!A$ في~$\OLId{latin-ordinary}{w}$،
+  ونطلب صدق~$\Box \Diamond !A$ في~$\OLId{latin-ordinary}{w}$. فلا بد من صدق
+  $\Diamond !A$ في كل~$\OLId{latin-ordinary}{w}'$ يصل إليه~$\OLId{latin-ordinary}{w}$.
+  فإذا كان~$\OLId{latin-ordinary}{w}'$ يحقق~$Rww'$، أعطى التناظر~$Rw'\OLId{latin-ordinary}{w}$، كما
+  في~\olref{fig:Bsymm}. ومن~$\mSat{\OLId{latin-looped}{M}}{!A}[\OLId{latin-ordinary}{w}]$ يلزم إذن
+  $\mSat{\OLId{latin-looped}{M}}{\Diamond !A}[\OLId{latin-ordinary}{w}']$. وهذا لكل~$\OLId{latin-ordinary}{w}'$ يحقق~$Rww'$،
+  فثبت~$\mSat{\OLId{latin-looped}{M}}{\Box\Diamond!A}[\OLId{latin-ordinary}{w}]$.
+
+  ونترك الحالات الأخرى تمارين.
+\end{proof}
+
+\begin{prob}
+  أكمل برهان~\olref[nml][frd][acc]{thm:soundschemas}.
+\end{prob}
+
+\begin{figure}
+  \begin{center}
+    \begin{tikzpicture}[modal]
+      \node[world] (w1) [label={below:$\mSat{{}}{\formula{A}}$\\
+          $\mSat{{}}{\Box\Diamond \formula{A}}$}] {$\OLId{latin-ordinary}{w}$};
+      \node[world] (w2) [label=below:{$\mSat{{}}{\Diamond \formula{A}}$},
+        right=of w1] {$\OLId{latin-ordinary}{w}'$};
+      \draw[->, bend left] (w1) to (w2);
+      \draw[->, bend left] (w2) to (w1);
+    \end{tikzpicture}
+  \end{center}
+\caption{الحجة المستندة إلى التناظر.}
+\ollabel{fig:Bsymm}
+\end{figure}
+
+لاحظ أن الاستلزامات العكسية لـ\olref{thm:soundschemas} لا تصدق: فليس
+صحيحًا أن علاقة الوصول في نموذج تحقق مخططًا لا بد أن تكون لها الخاصية
+المقابلة. وفي حالة~\Ax{T} والنماذج الانعكاسية، يسهل تقديم مثال لنموذج
+تفشل فيه~\Ax{T} نفسها: لتكن~$\OLId{latin-looped}{W} = \{\OLId{latin-ordinary}{w}\}$، و$\OLId{latin-looped}{R} = \emptyset$، و
+$\OLId{latin-looped}{V}(\OLId{latin-ordinary}{p}) = \emptyset$. عندئذ ليست~$\OLId{latin-looped}{R}$ انعكاسية، لكن
+$\mSat{\OLId{latin-looped}{M}}{\Box \OLId{latin-ordinary}{p}}[\OLId{latin-ordinary}{w}]$ و$\mSat/{\OLId{latin-looped}{M}}{\OLId{latin-ordinary}{p}}[\OLId{latin-ordinary}{w}]$. غير أنه ليس لدينا هنا إلا
+حالة واحدة من~\Ax{T} تفشل في~$\mModel{M}$؛ أما الحالات الأخرى، مثل
+$\Box \lnot \OLId{latin-ordinary}{p} \lif \lnot \OLId{latin-ordinary}{p}$، فهي صادقة. ومن الأصعب تقديم أمثلة تكون
+فيها \emph{كل حالة إحلال} لـ\Ax{T} صادقة في~$\mModel{M}$ من دون أن
+يكون~$\mModel{M}$ انعكاسيًا. لكن توجد نماذج كهذه أيضًا:
+
+\begin{prop}\ollabel{prop:reflexive}
+  ليكن~$\mModel{M} = \tuple{\OLId{latin-looped}{W}, \OLId{latin-looped}{R}, \OLId{latin-looped}{V}}$ نموذجًا بحيث~$\OLId{latin-looped}{W} = \{\OLId{latin-ordinary}{u}, \OLId{latin-ordinary}{v}\}$
+  و$\OLId{latin-looped}{R} = \{\tuple{\OLId{latin-ordinary}{u},\OLId{latin-ordinary}{v}}, \tuple{\OLId{latin-ordinary}{v},\OLId{latin-ordinary}{u}}\}$. وافترض أنه لكل~$\OLId{latin-ordinary}{p}$:
+  $\OLId{latin-ordinary}{u} \in \OLId{latin-looped}{V}(\OLId{latin-ordinary}{p}) \Leftrightarrow \OLId{latin-ordinary}{v} \in \OLId{latin-looped}{V}(\OLId{latin-ordinary}{p})$. عندئذ:
+  \begin{enumerate}
+  \item لكل~$!A$: يصدق~$\mSat{\OLId{latin-looped}{M}}{!A}[\OLId{latin-ordinary}{u}]$ إذا وفقط إذا كان
+    $\mSat{\OLId{latin-looped}{M}}{!A}[\OLId{latin-ordinary}{v}]$ (استعمل الاستقراء على~$!A$).
+  \item كل حالة من~\Ax{T} صادقة في~$\mModel{M}$.
+  \end{enumerate}
+  ولما كان~$\mModel{M}$ غير انعكاسي (بل هو في الواقع
+  \emph{لا انعكاسي})، يفشل عكس~\olref{thm:soundschemas} في حالة
+  \Ax{T} (ويمكن تقديم حجج مشابهة لبعض المخططات الأخرى المذكورة في
+  \olref{thm:soundschemas}، وإن لم يمكن ذلك لها جميعًا).
+\end{prop}
+
+\begin{prob}
+  أثبت الدعويين في~\olref[nml][frd][acc]{prop:reflexive}.
+\end{prob}
+
+ومع اقتصار معظم بحثنا على ال!!{formula}s الخمس~\Ax{D}، و\Ax{T}،
+و\Ax{B}، و\Ax{4}، و\Ax{5}، نثبت في~\olref{tab:anotherfive}
+خصائص أخرى. نقول إن علاقة الوصول~$\OLId{latin-looped}{R}$ دالية جزئيًا إذا لم يصل
+العالم إلا إلى عالم واحد على الأكثر؛ فإن وصل كل عالم إلى عالم واحد
+بالضبط كانت دالية. فالدالية تجمع التسلسل والدالية الجزئية، وتسميتها
+من عمل العلاقة عمل الدالة، كلية كانت أو جزئية.
+وأما الكثافة الضعيفة فأن يوجد، متى كان~$Ruv$، عالم~$\OLId{latin-ordinary}{w}$
+«بين»~$\OLId{latin-ordinary}{u}$ و$\OLId{latin-ordinary}{v}$. وهي تعكس جهة الوصف في التعدي من هذا الوجه:
+التعدي يجيز الانتقال إلى~$\OLId{latin-ordinary}{v}$ من~$\OLId{latin-ordinary}{u}$ مباشرة إذا أمكن الوصول
+بواسطة~$\OLId{latin-ordinary}{w}$؛ فيختصر الوصول إلى~$\OLId{latin-ordinary}{v}$ من~$\OLId{latin-ordinary}{u}$.
+والكثافة الضعيفة تتيح بلوغ~$\OLId{latin-ordinary}{v}$ من~$\OLId{latin-ordinary}{u}$ بطريق يمر بعالم~$\OLId{latin-ordinary}{w}$
+إذا وُجد الطريق المباشر.
+وأما التوجيه الضعيف فأن يكون، متى وصلنا إلى~$\OLId{latin-ordinary}{u}$ و$\OLId{latin-ordinary}{v}$ من~$\OLId{latin-ordinary}{w}$،
+عالم~$\OLId{latin-ordinary}{t}$ يمكن بلوغه من كليهما، أي من~$\OLId{latin-ordinary}{u}$ ومن~$\OLId{latin-ordinary}{v}$.
+وهذه هي المسماة أيضًا «خاصية الماسة» أو «الالتقاء».
+
+\begin{table}[t]
+    \begin{tabular}{| p{.\OLClassicalDigits{50}\textwidth} || p{.\OLClassicalDigits{43}\textwidth} |}
+      \hline
+      {\emph{إذا كانت~$\OLId{latin-looped}{R}$ \dots}} & {\emph{فإن \dots صادقة في~$\mModel{M}$:}} \\
+      \hline \hline
+      \emph{دالية جزئيًا}: &
+      \multirow{\OLClassicalDigits{2}}{*}{$\Diamond \OLId{latin-ordinary}{p} \lif \Box \OLId{latin-ordinary}{p}$} \\
+      $ \forall \OLId{latin-ordinary}{w} \forall \OLId{latin-ordinary}{u} \forall \OLId{latin-ordinary}{v} ((Rwu \land Rwv) \lif \OLId{latin-ordinary}{u} =\OLId{latin-ordinary}{v} )$ & \\
+      \hline
+      \multirow{\OLClassicalDigits{2}}{*}{\emph{دالية}: $\forall \OLId{latin-ordinary}{w} \exists \OLId{latin-ordinary}{v} \forall \OLId{latin-ordinary}{u}(Rwu \liff \eq[\OLId{latin-ordinary}{u}][\OLId{latin-ordinary}{v}]) $}
+      & \multirow{\OLClassicalDigits{2}}{*}{$\Diamond \OLId{latin-ordinary}{p} \liff \Box \OLId{latin-ordinary}{p}$} \\
+      & \\
+      \hline
+      \emph{كثيفة بضعف}: &  \multirow{\OLClassicalDigits{2}}{*}{$\Box \Box \OLId{latin-ordinary}{p} \lif
+        \Box \OLId{latin-ordinary}{p}$} \\
+      $\forall \OLId{latin-ordinary}{u}\forall \OLId{latin-ordinary}{v}(Ruv \lif \exists \OLId{latin-ordinary}{w}(Ruw \land Rwv))$ & \\
+      \hline
+      \emph{متصلة بضعف}: &
+      \multirow{\OLClassicalDigits{3}}{*}{\hbox to.43\textwidth{$
+        \begin{array}{@{}l@{}}
+          \Box ((\OLId{latin-ordinary}{p} \land \Box \OLId{latin-ordinary}{p}) \lif \OLId{latin-ordinary}{q}) \lor {} \\
+          \qquad \Box ((\OLId{latin-ordinary}{q} \land \Box \OLId{latin-ordinary}{q}) \lif \OLId{latin-ordinary}{p})
+        \end{array}$ \hfill (\Ax{L})}
+      } \\
+      $\forall \OLId{latin-ordinary}{w} \forall \OLId{latin-ordinary}{u} \forall \OLId{latin-ordinary}{v} ((Rwu \land Rwv) \lif {}$ &\\
+      \qquad $(Ruv \lor \OLId{latin-ordinary}{u}=\OLId{latin-ordinary}{v} \lor Rvu))$ & \\
+      \hline
+      \emph{موجهة بضعف}: & \multirow{\OLClassicalDigits{3}}{*}{\hbox to .\OLClassicalDigits{43}\textwidth
+        {$\Diamond\Box \OLId{latin-ordinary}{p} \lif \Box\Diamond \OLId{latin-ordinary}{p}$\hfill (\Ax{G})}} \\
+      $\forall \OLId{latin-ordinary}{w} \forall \OLId{latin-ordinary}{u} \forall \OLId{latin-ordinary}{v} ((Rwu \land Rwv) \lif {}$ & \\
+      \qquad $\exists \OLId{latin-ordinary}{t} (Rut \land Rvt))$ & \\
+      \hline
+    \end{tabular}
+    \caption{خمس حقائق مطابقة أخرى.}
+    \ollabel{tab:anotherfive}
+  \end{table}
+
+\begin{prob}
+  ليكن~$\mModel{M} = \tuple{\OLId{latin-looped}{W}, \OLId{latin-looped}{R}, \OLId{latin-looped}{V}}$ نموذجًا. أثبت أنه إذا حققت~$\OLId{latin-looped}{R}$
+  الخصائص في الجانب الأيسر من
+  \olref[nml][frd][acc]{tab:anotherfive}، كانت كل حالة من الصيغة
+  المقابلة في الجانب الأيمن صادقة في~$\mModel{M}$.
+\end{prob}
+
+
+
+\end{document}

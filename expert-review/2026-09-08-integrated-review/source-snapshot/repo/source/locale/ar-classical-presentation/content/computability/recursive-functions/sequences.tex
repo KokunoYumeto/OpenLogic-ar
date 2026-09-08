@@ -1,0 +1,193 @@
+% Part: computability
+% Chapter: recursive-functions
+% Section: sequences
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{rec}{seq}
+\olsection{المتتاليات}
+
+قد بان اتساع ما تتناوله الدوال العودية البدائية. ويزداد ذلك اتساعًا
+إذا هيأنا وسيلة لمعالجة \emph{المتتاليات}. فنرمز إلى كل متتالية
+منتهية من الأعداد الطبيعية بعدد طبيعي على هذا الوجه: نجعل للمتتالية
+$\langle \OLId{latin-ordinary}{a}_\OLMathNumeral{0},\OLId{latin-ordinary}{a}_\OLMathNumeral{1},\OLId{latin-ordinary}{a}_\OLMathNumeral{2},\dots,\OLId{latin-ordinary}{a}_\OLId{latin-ordinary}{k}\rangle$ العدد
+\[
+\OLId{latin-ordinary}{p}_\OLMathNumeral{0}^{\OLId{latin-ordinary}{a}_\OLMathNumeral{0}+\OLMathNumeral{1}} \cdot \OLId{latin-ordinary}{p}_\OLMathNumeral{1}^{\OLId{latin-ordinary}{a}_\OLMathNumeral{1}+\OLMathNumeral{1}} \cdot \OLId{latin-ordinary}{p}_\OLMathNumeral{2}^{\OLId{latin-ordinary}{a}_\OLMathNumeral{2}+\OLMathNumeral{1}} \cdot \dots \cdot
+\OLId{latin-ordinary}{p}_\OLId{latin-ordinary}{k}^{\OLId{latin-ordinary}{a}_\OLId{latin-ordinary}{k}+\OLMathNumeral{1}}.
+\]
+وإنما زدنا واحدًا في الأسس لئلا يختلط، مثلًا، رمزا المتتاليتين
+$\langle\OLMathNumeral{2},\OLMathNumeral{7},\OLMathNumeral{3}\rangle$ و$\langle\OLMathNumeral{2},\OLMathNumeral{7},\OLMathNumeral{3},\OLMathNumeral{0},\OLMathNumeral{0}\rangle$ بعضهما ببعض.
+ويجوز أن نجعل كلًا من $\OLMathNumeral{0}$ و~$\OLMathNumeral{1}$ رمزًا للمتتالية الخالية؛
+وللتعيين، ليدل $\emptyseq$ على~$\OLMathNumeral{0}$.
+
+وصحة هذا الترميز مبنية على المبرهنة الأساسية في
+الحساب: لكل عدد طبيعي $\OLId{latin-ordinary}{n}\ge\OLMathNumeral{2}$ تحليل واحد لا غير على الصورة
+\[
+\OLId{latin-ordinary}{n} = \OLId{latin-ordinary}{p}_\OLMathNumeral{0}^{\OLId{latin-ordinary}{a}_\OLMathNumeral{0}} \cdot \OLId{latin-ordinary}{p}_\OLMathNumeral{1}^{\OLId{latin-ordinary}{a}_\OLMathNumeral{1}} \cdot \dots \cdot \OLId{latin-ordinary}{p}_\OLId{latin-ordinary}{k}^{\OLId{latin-ordinary}{a}_\OLId{latin-ordinary}{k}}
+\]
+مع $\OLId{latin-ordinary}{a}_\OLId{latin-ordinary}{k}\ge\OLMathNumeral{1}$. فيكون التطبيق
+$\tuple{}(\OLId{latin-ordinary}{a}_\OLMathNumeral{0},\dots,\OLId{latin-ordinary}{a}_\OLId{latin-ordinary}{k})=\tuple{\OLId{latin-ordinary}{a}_\OLMathNumeral{0},\dots,\OLId{latin-ordinary}{a}_\OLId{latin-ordinary}{k}}$ أحاديًا؛ إذ تختلف
+أعداد الترميز باختلاف المتتاليات، ولا يرمز العدد الواحد إلى متتاليتين
+مختلفتين.
+
+ولنثبت الآن العودية البدائية للعمليات التي نحتاج إليها: معرفة طول المتتالية وعنصرها ذي الرتبة $\OLId{latin-ordinary}{i}$،
+وإلحاق عنصر بها، ووصلها بمتتالية أخرى.
+
+\begin{prop}
+  الدالة $\len{\OLId{latin-ordinary}{s}}$، التي تعيد طول المتتالية $\OLId{latin-ordinary}{s}$، عودية بدائية.
+\end{prop}
+
+\begin{proof}
+  لتكن $\OLId{latin-looped}{R}(\OLId{latin-ordinary}{i},\OLId{latin-ordinary}{s})$ العلاقة المعرفة بـ
+  \[
+  \OLId{latin-looped}{R}(\OLId{latin-ordinary}{i}, \OLId{latin-ordinary}{s}) \text{ إذا وفقط إذا }
+  \OLId{latin-ordinary}{p}_\OLId{latin-ordinary}{i} \mid \OLId{latin-ordinary}{s} \land \OLId{latin-ordinary}{p}_{\OLId{latin-ordinary}{i}+\OLMathNumeral{1}} \nmid \OLId{latin-ordinary}{s}.
+  \]
+  فالعودية البدائية لـ$\OLId{latin-looped}{R}$ ظاهرة. وإذا كان $\OLId{latin-ordinary}{s}$ يرمز إلى متتالية غير خالية،
+  أي
+  \[
+  \OLId{latin-ordinary}{s} = \OLId{latin-ordinary}{p}_\OLMathNumeral{0}^{\OLId{latin-ordinary}{a}_\OLMathNumeral{0}+\OLMathNumeral{1}} \cdot \dots \cdot \OLId{latin-ordinary}{p}_{\OLId{latin-ordinary}{k}}^{\OLId{latin-ordinary}{a}_{\OLId{latin-ordinary}{k}}+\OLMathNumeral{1}},
+  \]
+  صدقت $\OLId{latin-looped}{R}(\OLId{latin-ordinary}{i},\OLId{latin-ordinary}{s})$ إذا كان $\OLId{latin-ordinary}{p}_\OLId{latin-ordinary}{i}$ أكبر عدد أولي بحيث $\OLId{latin-ordinary}{p}_\OLId{latin-ordinary}{i}\mid \OLId{latin-ordinary}{s}$، أي
+  إذا كان $\OLId{latin-ordinary}{i}=\OLId{latin-ordinary}{k}$. ومن ثم يكون طول $\OLId{latin-ordinary}{s}$ هو $\OLId{latin-ordinary}{i}+\OLMathNumeral{1}$ إذا وفقط إذا كان
+  $\OLId{latin-ordinary}{p}_\OLId{latin-ordinary}{i}$ أكبر عدد أولي يقسم~$\OLId{latin-ordinary}{s}$، فلنا أن نضع
+  \[
+  \len{\OLId{latin-ordinary}{s}} =
+  \begin{cases}
+    \OLMathNumeral{0} & \text{إذا كان $s=0$ أو $s=1$} \\
+    \OLMathNumeral{1} + \bmin{\OLId{latin-ordinary}{i} < \OLId{latin-ordinary}{s}}{\OLId{latin-looped}{R}(\OLId{latin-ordinary}{i}, \OLId{latin-ordinary}{s})} & \text{في غير ذلك}
+  \end{cases}
+  \]
+  وصح استعمال التصغير المحدود لأن $\OLId{latin-ordinary}{i}$ الذي يحقق
+  $\OLId{latin-looped}{R}(\OLId{latin-ordinary}{i},\OLId{latin-ordinary}{s})$ وحيد متى كان $\OLId{latin-ordinary}{s}$ رمز متتالية، ولأن هذا $\OLId{latin-ordinary}{i}$، إن وجد، دون~$\OLId{latin-ordinary}{s}$
+  نفسها.
+\end{proof}
+
+\begin{prop}
+  الدالة $\fn{append}(\OLId{latin-ordinary}{s},\OLId{latin-ordinary}{a})$، التي تعيد نتيجة إلحاق $\OLId{latin-ordinary}{a}$ بالمتتالية
+  $\OLId{latin-ordinary}{s}$، عودية بدائية.
+\end{prop}
+
+\begin{proof}
+  تعريف $\fn{append}$ على الوجه الآتي:
+  \[
+  \fn{append}(\OLId{latin-ordinary}{s},\OLId{latin-ordinary}{a}) =
+  \begin{cases}
+    \OLMathNumeral{2}^{\OLId{latin-ordinary}{a}+\OLMathNumeral{1}} & \text{إذا كان $s=0$ أو $s=1$} \\
+    \OLId{latin-ordinary}{s} \cdot \OLId{latin-ordinary}{p}_{\len{\OLId{latin-ordinary}{s}}}^{\OLId{latin-ordinary}{a}+\OLMathNumeral{1}} & \text{في غير ذلك.}
+  \end{cases}
+  \]
+\end{proof}
+
+\begin{prop}
+  الدالة $\fn{element}(\OLId{latin-ordinary}{s},\OLId{latin-ordinary}{i})$، التي تعيد عنصر $\OLId{latin-ordinary}{s}$ ذا الرتبة $\OLId{latin-ordinary}{i}$
+  (مع تسمية العنصر الأول ذا الرتبة~$\OLMathNumeral{0}$)، أو تعيد $\OLMathNumeral{0}$ إذا كان $\OLId{latin-ordinary}{i}$ أكبر
+  من أو مساويًا لطول $\OLId{latin-ordinary}{s}$، عودية بدائية.
+\end{prop}
+
+\begin{proof}
+نستخرج $\OLId{latin-ordinary}{a}$، وهو عنصر~$\OLId{latin-ordinary}{s}$ ذو الرتبة $\OLId{latin-ordinary}{i}$، من الشرط القائل إن
+$\OLId{latin-ordinary}{p}_\OLId{latin-ordinary}{i}^{\OLId{latin-ordinary}{a}+\OLMathNumeral{1}}$ أكبر قوة لـ~$\OLId{latin-ordinary}{p}_\OLId{latin-ordinary}{i}$ تقسم~$\OLId{latin-ordinary}{s}$؛ أي إذا كان
+$\OLId{latin-ordinary}{p}_\OLId{latin-ordinary}{i}^{\OLId{latin-ordinary}{a}+\OLMathNumeral{1}}\mid \OLId{latin-ordinary}{s}$ ولكن $\OLId{latin-ordinary}{p}_\OLId{latin-ordinary}{i}^{\OLId{latin-ordinary}{a}+\OLMathNumeral{2}}\nmid \OLId{latin-ordinary}{s}$. ومن ثم:
+  \[
+  \fn{element}(\OLId{latin-ordinary}{s},\OLId{latin-ordinary}{i}) =
+  \begin{cases}
+    \OLMathNumeral{0} & \mbox{إذا كان $i \geq \len{s}$} \\
+    \bmin{\OLId{latin-ordinary}{a} < \OLId{latin-ordinary}{s}}{(\OLId{latin-ordinary}{p}_\OLId{latin-ordinary}{i}^{\OLId{latin-ordinary}{a}+\OLMathNumeral{2}} \nmid \OLId{latin-ordinary}{s})} & \text{في غير ذلك.}
+  \end{cases}
+  \]
+\end{proof}
+
+ونختصر أسماء الدوال المتقدمة بترميز
+أوجز: فنكتب $(\OLId{latin-ordinary}{s})_\OLId{latin-ordinary}{i}$ مكان $\fn{element}(\OLId{latin-ordinary}{s},\OLId{latin-ordinary}{i})$، ونجعل
+$\tuple{\OLId{latin-ordinary}{s}_\OLMathNumeral{0},\dots,\OLId{latin-ordinary}{s}_\OLId{latin-ordinary}{k}}$ عبارة مختصرة عن
+\[
+\fn{append}(\fn{append}(\dots \fn{append}(\emptyseq,\OLId{latin-ordinary}{s}_\OLMathNumeral{0})
+\dots),\OLId{latin-ordinary}{s}_\OLId{latin-ordinary}{k}).
+\]
+فإذا كان طول $\OLId{latin-ordinary}{s}$ مساويًا لـ~$\OLId{latin-ordinary}{k}$، فعناصر $\OLId{latin-ordinary}{s}$ هي
+$(\OLId{latin-ordinary}{s})_\OLMathNumeral{0}$، …،~$(\OLId{latin-ordinary}{s})_{\OLId{latin-ordinary}{k}-\OLMathNumeral{1}}$.
+
+\begin{prop}
+الدالة $\fn{concat}(\OLId{latin-ordinary}{s},\OLId{latin-ordinary}{t})$، التي تصل متتاليتين، عودية بدائية.
+\end{prop}
+
+\begin{proof}
+  والمطلوب أن نعرّف $\fn{concat}$ بحيث تحقق
+  \[
+    \fn{concat}(\tuple{\OLId{latin-ordinary}{a}_\OLMathNumeral{0}, \dots, \OLId{latin-ordinary}{a}_\OLId{latin-ordinary}{k}}, \tuple{\OLId{latin-ordinary}{b}_\OLMathNumeral{0}, \dots, \OLId{latin-ordinary}{b}_\OLId{latin-ordinary}{l}}) =
+    \tuple{\OLId{latin-ordinary}{a}_\OLMathNumeral{0}, \dots, \OLId{latin-ordinary}{a}_\OLId{latin-ordinary}{k}, \OLId{latin-ordinary}{b}_\OLMathNumeral{0}, \dots, \OLId{latin-ordinary}{b}_\OLId{latin-ordinary}{l}}.
+  \]
+  فنستعين بالدالة $\fn{hconcat}(\OLId{latin-ordinary}{s},\OLId{latin-ordinary}{t},\OLId{latin-ordinary}{n})$، وهي التي تلحق الرموز $\OLId{latin-ordinary}{n}$ الأولى
+  من $\OLId{latin-ordinary}{t}$ بـ~$\OLId{latin-ordinary}{s}$. وتعريفها بالعودية البدائية كما يأتي:
+  \begin{align*}
+    \fn{hconcat}(\OLId{latin-ordinary}{s},\OLId{latin-ordinary}{t},\OLMathNumeral{0}) & = \OLId{latin-ordinary}{s}\\
+    \fn{hconcat}(\OLId{latin-ordinary}{s},\OLId{latin-ordinary}{t},\OLId{latin-ordinary}{n}+\OLMathNumeral{1}) & = \fn{append}(\fn{hconcat}(\OLId{latin-ordinary}{s},\OLId{latin-ordinary}{t},\OLId{latin-ordinary}{n}),(\OLId{latin-ordinary}{t})_\OLId{latin-ordinary}{n})
+    \intertext{ثم يمكننا تعريف $\fn{concat}$ بـ}
+    \fn{concat}(\OLId{latin-ordinary}{s},\OLId{latin-ordinary}{t}) & = \fn{hconcat}(\OLId{latin-ordinary}{s},\OLId{latin-ordinary}{t},\len{\OLId{latin-ordinary}{t}}).
+  \end{align*}
+\end{proof}
+
+سنكتب $\OLId{latin-ordinary}{s}\concat \OLId{latin-ordinary}{t}$ بدلًا من $\fn{concat}(\OLId{latin-ordinary}{s},\OLId{latin-ordinary}{t})$.
+
+ونحتاج أيضًا إلى حد لعدد ترميز المتتالية يُعرف من طولها وأكبر
+عناصرها. فلتكن $\OLId{latin-ordinary}{s}$ متتالية ذات طول~$\OLId{latin-ordinary}{k}$، ولتكن عناصرها جميعًا دون
+عدد~$\OLId{latin-ordinary}{x}$ أو مساوية له. فعدد عوامل $\OLId{latin-ordinary}{s}$ الأولية لا يزيد على $\OLId{latin-ordinary}{k}$، وأكبر
+هذه العوامل لا يجاوز~$\OLId{latin-ordinary}{p}_{\OLId{latin-ordinary}{k}-\OLMathNumeral{1}}$، وأقصى أس لكل عامل هو $\OLId{latin-ordinary}{x}+\OLMathNumeral{1}$ في التحليل
+الأولي لـ~$\OLId{latin-ordinary}{s}$. لذلك نضع $\fn{sequenceBound}(\OLId{latin-ordinary}{x},\OLMathNumeral{0})=\OLMathNumeral{1}$، وإذا
+كان $\OLId{latin-ordinary}{k}>\OLMathNumeral{0}$ عرفنا
+\[
+\fn{sequenceBound}(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{k}) = \OLId{latin-ordinary}{p}_{\OLId{latin-ordinary}{k}-\OLMathNumeral{1}}^{\OLId{latin-ordinary}{k} \cdot (\OLId{latin-ordinary}{x}+\OLMathNumeral{1})},
+\]
+فلا يجاوز عدد ترميز المتتالية~$\OLId{latin-ordinary}{s}$ المتقدمة
+~$\fn{sequenceBound}(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{k})$.
+
+ومتى حصل حد كهذا للمتتاليات، أمكن تعريف دوال جديدة
+بالبحث المحدود. فالدالة $\fn{concat}$، مثلًا، يمكن طلبها بهذا البحث؛
+وإنما يلزمنا أن نضع \emph{مواصفة} عودية بدائية لما نطلبه،
+وهو عدد ترميز المتتالية الموصولة، وأن نحد مقدار البحث. والصيغة المقترحة هي:
+\begin{align*}
+  \fn{concat}(\OLId{latin-ordinary}{s},\OLId{latin-ordinary}{t}) = {} & \bmin{\OLId{latin-ordinary}{v} < \fn{sequenceBound}(\OLId{latin-ordinary}{s}+\OLId{latin-ordinary}{t},\len{\OLId{latin-ordinary}{s}} +
+    \len{\OLId{latin-ordinary}{t}})}{} \\
+  & \quad(\len{\OLId{latin-ordinary}{v}} = \len{\OLId{latin-ordinary}{s}} + \len{\OLId{latin-ordinary}{t}} \land {}\\
+    & \qquad \bforall{\OLId{latin-ordinary}{i} < \len{\OLId{latin-ordinary}{s}}}{(\OLId{latin-ordinary}{v})_\OLId{latin-ordinary}{i} = (\OLId{latin-ordinary}{s})_\OLId{latin-ordinary}{i}} \land {} \\
+    & \qquad \bforall{\OLId{latin-ordinary}{j} < \len{\OLId{latin-ordinary}{t}}}{(\OLId{latin-ordinary}{v})_{\len{\OLId{latin-ordinary}{s}}+\OLId{latin-ordinary}{j}} = (\OLId{latin-ordinary}{t})_\OLId{latin-ordinary}{j}})
+\end{align*}
+
+% تصحيح مصدر (C220-01): فُصل الشرطان الكليان لئلا يصير شرط t خاليًا عند خلو s.
+\textbf{تنبيه تصحيحي على الأصل.} فُصل الشرطان الكليان على عنصري
+$\OLId{latin-ordinary}{s}$ و$\OLId{latin-ordinary}{t}$؛ لأن إدخال شرط~$\OLId{latin-ordinary}{t}$ في نطاق التكميم على~$\OLId{latin-ordinary}{s}$ يجعله صادقًا
+صدقًا خاليًا متى كانت~$\OLId{latin-ordinary}{s}$ خالية.
+
+\begin{prob}
+أثبت وجود دالة عودية بدائية~$\fn{sconcat}(\OLId{latin-ordinary}{s})$ تحقق
+\[
+\fn{sconcat}(\tuple{\OLId{latin-ordinary}{s}_\OLMathNumeral{0}, \dots, \OLId{latin-ordinary}{s}_\OLId{latin-ordinary}{k}}) = \OLId{latin-ordinary}{s}_\OLMathNumeral{0} \concat \dots \concat \OLId{latin-ordinary}{s}_\OLId{latin-ordinary}{k}.
+\]
+\end{prob}
+
+\begin{prob}
+أثبت وجود دالة عودية بدائية~$\fn{tail}(\OLId{latin-ordinary}{s})$ تحقق
+\begin{align*}
+  \fn{tail}(\emptyseq) & = \OLMathNumeral{0} \text{، و}\\
+  \fn{tail}(\tuple{\OLId{latin-ordinary}{s}_\OLMathNumeral{0}, \dots, \OLId{latin-ordinary}{s}_{\OLId{latin-ordinary}{k}}}) & = \tuple{\OLId{latin-ordinary}{s}_\OLMathNumeral{1}, \dots, \OLId{latin-ordinary}{s}_{\OLId{latin-ordinary}{k}}}.
+\end{align*}
+\end{prob}
+
+\begin{prop}
+  \ollabel{prop:subseq}
+  الدالة $\fn{subseq}(\OLId{latin-ordinary}{s},\OLId{latin-ordinary}{i},\OLId{latin-ordinary}{n})$ التي تعيد المتتالية الجزئية من $\OLId{latin-ordinary}{s}$ ذات
+  الطول~$\OLId{latin-ordinary}{n}$، ابتداء من العنصر ذي الرتبة $\OLId{latin-ordinary}{i}$، عودية بدائية.
+\end{prop}
+
+\begin{proof}
+  تمرين.
+\end{proof}
+
+\begin{prob}
+  أقم الحجة على \olref[cmp][rec][seq]{prop:subseq}.
+\end{prob}
+  
+\end{document}

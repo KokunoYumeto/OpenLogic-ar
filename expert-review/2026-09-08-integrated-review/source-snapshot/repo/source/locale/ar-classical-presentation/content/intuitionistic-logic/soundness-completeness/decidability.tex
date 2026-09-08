@@ -1,0 +1,133 @@
+% part: intuitionistic-logic
+% chapter: soundness-completeness
+% section: decidability
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{sc}{dec}
+
+\olsection{القابلية للقرار}
+
+كلما كان~$\OLId{greek-variable}{Gamma} \Proves/ !A$ أعطانا برهان التمام نموذجًا عوالمه غير
+متناهية، يشهد بـ~$\OLId{greek-variable}{Gamma} \Entails/ !A$. أما النتيجة الآتية فتبيّن أن
+إقامة~$\Entails !A$ لا تحتاج إلا إلى إقامة
+$\mSat{\OLId{latin-looped}{M}}{!A}$ في النماذج المنتهية جميعًا؛ ونعني بالمنتهي ما كانت
+مجموعة عوالمه منتهية.
+
+\begin{thm}\ollabel{thm:decidability}
+  متى كان~$\Entails/ !A$ وُجد نموذج منته~$\mModel{M'}$ يحقق
+  $\mSat/{\OLId{latin-looped}{M}'}{!A}$.
+\end{thm}
+
+\begin{proof}
+  ليكن~$\mModel{M}=\tuple{\OLId{latin-looped}{W},\OLId{latin-looped}{R},\OLId{latin-looped}{V}}$ نموذجًا، ولنأخذ~$\OLId{latin-ordinary}{w}_\OLMathNumeral{0}\in \OLId{latin-looped}{W}$ بحيث
+  $\mSat/{\OLId{latin-looped}{M}}{!A}[\OLId{latin-ordinary}{w}_\OLMathNumeral{0}]$. نسمّي~$\OLId{latin-looped}{P}$ مجموعة ال!!{propositional variable}s
+  الواقعة في~$!A$، ونسمي~$\Sigma$ إغلاق~$\{!A\}$ بأخذ
+  الصيغ الجزئية: فـ~$\Sigma$ تضم الصيغ الجزئية
+  لـ~$!A$ كلها، وهي لذلك منتهية.
+
+  ونحدّ علاقة التكافؤ~$\sim_\Sigma$ على~$\OLId{latin-looped}{W}$ كما يأتي:
+  \[
+    \OLId{latin-ordinary}{u}\sim_\Sigma \OLId{latin-ordinary}{v}
+    \quad\text{إذا وفقط إذا}\quad
+    \bigl(\mSat{\OLId{latin-looped}{M}}{!B}[\OLId{latin-ordinary}{u}]\ \text{إذا وفقط إذا}\
+    \mSat{\OLId{latin-looped}{M}}{!B}[\OLId{latin-ordinary}{v}]\bigr)
+    \quad\text{لكل }!B\in\Sigma.
+  \]
+  ولتكن~$[\OLId{latin-ordinary}{u}]_\Sigma$ فئة تكافؤ~$\OLId{latin-ordinary}{u}$. ثم نعرّف
+  $\mModel{M'}=\tuple{\OLId{latin-looped}{W}',\OLId{latin-looped}{R}',\OLId{latin-looped}{V}'}$ بهذه الحدود:
+  \[
+    \OLId{latin-looped}{W}'=\Setabs{[\OLId{latin-ordinary}{u}]_\Sigma}{\OLId{latin-ordinary}{u}\in \OLId{latin-looped}{W}},
+  \]
+  \[
+    \OLId{latin-looped}{R}'{[\OLId{latin-ordinary}{u}]_\Sigma}{[\OLId{latin-ordinary}{v}]_\Sigma}
+    \quad\text{إذا وفقط إذا}\quad
+    \bigl(\mSat{\OLId{latin-looped}{M}}{!B}[\OLId{latin-ordinary}{u}]\ \text{يستلزم}\
+    \mSat{\OLId{latin-looped}{M}}{!B}[\OLId{latin-ordinary}{v}]\bigr)
+    \quad\text{لكل }!B\in\Sigma,
+  \]
+  و
+  \[
+    \OLId{latin-looped}{V}'(\OLId{latin-ordinary}{p})=
+    \begin{cases}
+      \Setabs{[\OLId{latin-ordinary}{u}]_\Sigma}{\OLId{latin-ordinary}{u}\in \OLId{latin-looped}{W}\text{ و }\mSat{\OLId{latin-looped}{M}}{\OLId{latin-ordinary}{p}}[\OLId{latin-ordinary}{u}]}
+        & \text{إذا كان }\OLId{latin-ordinary}{p}\in\Sigma,\\
+      \varnothing & \text{خلاف ذلك.}
+    \end{cases}
+  \]
+  وليس لاختيار ممثل الفئة أثر في هذه التعريفات. وأما~$\OLId{latin-looped}{R}'$
+  فانعكاسيتها وتعدّيها ظاهران. فإذا اجتمع
+  $\OLId{latin-looped}{R}'{[\OLId{latin-ordinary}{u}]_\Sigma}{[\OLId{latin-ordinary}{v}]_\Sigma}$ و
+  $\OLId{latin-looped}{R}'{[\OLId{latin-ordinary}{v}]_\Sigma}{[\OLId{latin-ordinary}{u}]_\Sigma}$، اتفق~$\OLId{latin-ordinary}{u}$ و$\OLId{latin-ordinary}{v}$ في صدق الصيغ كلها
+  من~$\Sigma$، فيكون~$[\OLId{latin-ordinary}{u}]_\Sigma=[\OLId{latin-ordinary}{v}]_\Sigma$. فثبت أن~$\OLId{latin-looped}{R}'$ ترتيب
+  جزئي. و~$\OLId{latin-looped}{V}'$ رتيبة أيضًا بالنسبة إلى~$\OLId{latin-looped}{R}'$؛ فإذن
+  $\mModel{M'}$ هو !!a{relational model}.
+
+  وكل فئة في~$\OLId{latin-looped}{W}'$ يعيّنها ما يصدق من صيغ~$\Sigma$ عند ممثليها؛
+  ومن ذلك نحصل على الحد
+  \[
+    |\OLId{latin-looped}{W}'|\leq \OLMathNumeral{2}^{|\Sigma|}.
+  \]
+  فـ~$\OLId{latin-looped}{W}'$ منتهية على الخصوص.
+
+  ونقيم الآن بالاستقراء البنيوي لمّة الترشيح لكل~!!{formula}~$!B$
+  في~$\Sigma$:
+  \[
+    \mSat{\OLId{latin-looped}{M}}{!B}[\OLId{latin-ordinary}{u}]
+    \quad\text{إذا وفقط إذا}\quad
+    \mSat{\OLId{latin-looped}{M}'}{!B}[{[\OLId{latin-ordinary}{u}]_\Sigma}]
+    \qquad(!B\in\Sigma).
+  \]
+  أما ال!!{propositional variable}s و$\lfalse$ و$\land$ و$\lor$
+  فحالاتها تأتي بلا واسطة
+  من تعريف~$\OLId{latin-looped}{V}'$ وفرض الاستقراء. والمحتاج إلى بيان هو حفظ النفي والشرط
+  عند هذا الاختيار لـ~$\OLId{latin-looped}{R}'$.
+
+  لنأخذ حالة~$!B\ident !C\lif !D$. إذا كان أولًا
+  $\mSat{\OLId{latin-looped}{M}}{!C\lif !D}[\OLId{latin-ordinary}{u}]$، وأخذنا
+  $\OLId{latin-looped}{R}'{[\OLId{latin-ordinary}{u}]_\Sigma}{[\OLId{latin-ordinary}{v}]_\Sigma}$، فإن
+  $!C\lif !D\in\Sigma$؛ وتعريف~$\OLId{latin-looped}{R}'$ ينقل صدقها إلى~$\OLId{latin-ordinary}{v}$،
+  فيثبت~$\mSat{\OLId{latin-looped}{M}}{!C\lif !D}[\OLId{latin-ordinary}{v}]$. فإذا تحقق
+  $\mSat{\OLId{latin-looped}{M}'}{!C}[{[\OLId{latin-ordinary}{v}]_\Sigma}]$، ثبت بالاستقراء
+  $\mSat{\OLId{latin-looped}{M}}{!C}[\OLId{latin-ordinary}{v}]$؛ وانعكاسية~$\OLId{latin-looped}{R}$ تعطينا حينئذ
+  $\mSat{\OLId{latin-looped}{M}}{!D}[\OLId{latin-ordinary}{v}]$. ثم نطبق فرض الاستقراء ثانيةً فنحصل على
+  $\mSat{\OLId{latin-looped}{M}'}{!D}[{[\OLId{latin-ordinary}{v}]_\Sigma}]$. وبهذا يثبت
+  $\mSat{\OLId{latin-looped}{M}'}{!C\lif !D}[{[\OLId{latin-ordinary}{u}]_\Sigma}]$.
+
+  وأما العكس، فلو كان~$\mSat/{\OLId{latin-looped}{M}}{!C\lif !D}[\OLId{latin-ordinary}{u}]$ لكان عالم~$\OLId{latin-ordinary}{v}$ يحقق
+  $Ruv$ و$\mSat{\OLId{latin-looped}{M}}{!C}[\OLId{latin-ordinary}{v}]$ و$\mSat/{\OLId{latin-looped}{M}}{!D}[\OLId{latin-ordinary}{v}]$. ورتابة الصدق في
+  النموذج الأول تقتضي انتقال الصدق من~$\OLId{latin-ordinary}{u}$ إلى~$\OLId{latin-ordinary}{v}$ لكل صيغة من~$\Sigma$،
+  فيثبت~$\OLId{latin-looped}{R}'{[\OLId{latin-ordinary}{u}]_\Sigma}{[\OLId{latin-ordinary}{v}]_\Sigma}$. ويعطي فرض الاستقراء صدق~$!C$
+  وعدم صدق~$!D$ عند~$[\OLId{latin-ordinary}{v}]_\Sigma$ في~$\mModel{M'}$؛ فينتج
+  $\mSat/{\OLId{latin-looped}{M}'}{!C\lif !D}[{[\OLId{latin-ordinary}{u}]_\Sigma}]$.
+
+  وأما حالة~$!B\ident\lnot !C$ فوجهها نظير ذلك. فمن
+  $\mSat{\OLId{latin-looped}{M}}{\lnot !C}[\OLId{latin-ordinary}{u}]$ و
+  $\OLId{latin-looped}{R}'{[\OLId{latin-ordinary}{u}]_\Sigma}{[\OLId{latin-ordinary}{v}]_\Sigma}$ ينقل تعريف~$\OLId{latin-looped}{R}'$ صدق
+  $\lnot !C\in\Sigma$ إلى~$\OLId{latin-ordinary}{v}$. ولانعكاسية~$\OLId{latin-looped}{R}$ لا يصدق~$!C$ عند~$\OLId{latin-ordinary}{v}$؛
+  فلا يصدق بالاستقراء عند~$[\OLId{latin-ordinary}{v}]_\Sigma$ في~$\mModel{M'}$. وإن
+  كان~$\mSat/{\OLId{latin-looped}{M}}{\lnot !C}[\OLId{latin-ordinary}{u}]$، وُجد~$\OLId{latin-ordinary}{v}$ يحقق~$Ruv$ ويصدق عنده~$!C$
+  أي عند~$\OLId{latin-ordinary}{v}$. فرتابة الصدق تعطينا~$\OLId{latin-looped}{R}'{[\OLId{latin-ordinary}{u}]_\Sigma}{[\OLId{latin-ordinary}{v}]_\Sigma}$،
+  ويعطينا فرض الاستقراء شاهدًا يثبت
+  $\mSat/{\OLId{latin-looped}{M}'}{\lnot !C}[{[\OLId{latin-ordinary}{u}]_\Sigma}]$.
+
+  وقد كانت ال!!{formula}~$!A$ من~$\Sigma$؛ فتنتج لمّة الترشيح
+  $\mSat/{\OLId{latin-looped}{M}'}{!A}[{[\OLId{latin-ordinary}{w}_\OLMathNumeral{0}]_\Sigma}]$. فصار~$\mModel{M'}$ نموذجًا
+  مضادًا منتهيًا لـ~$!A$، وتم المطلوب.
+\end{proof}
+
+\begin{prob}
+أتمّ التفاصيل المباشرة في برهان~\olref[int][sc][dec]{thm:decidability}:
+أثبت حسن تعريف~$\OLId{latin-looped}{R}'$ و$\OLId{latin-looped}{V}'$، وكون~$\OLId{latin-looped}{R}'$ ترتيبًا جزئيًا و~$\OLId{latin-looped}{V}'$
+رتيبة، ثم أقم حالات المتغيرات القضوية و$\lfalse$ و$\land$ و$\lor$ في
+لمّة الترشيح.
+\end{prob}
+
+وتعطي~\olref{thm:decidability} طريقًا خوارزميًا للفصل في
+$\Entails !A$: نقتصر في الفحص على النماذج العلائقية التي عدد عوالمها
+لا يزيد على~$\OLMathNumeral{2}^{|\Sigma|}$، وعلى المتغيرات القضوية الواقعة
+في~$!A$.
+
+\end{document}

@@ -1,0 +1,126 @@
+% Part: model-theory
+% Chapter: lindstrom
+% Section: lindstrom-proof
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{lin}{prf}
+
+\olsection{مبرهنة ليندستروم}
+
+\begin{lem}
+\ollabel{lem:lindstrom}
+لتكن $!E \in \OLId{latin-looped}{L}(\Lang{L})$، ولتكن $\Lang{L}$ منتهية. فإن
+وجد $\OLId{latin-ordinary}{n} \in \Nat$ تتحقق معه، لكل !!{structure}s اثنتين $\Struct{M}$ و
+$\Struct{N}$، القضية الآتية: إذا كان $\Struct{M} \equiv_\OLId{latin-ordinary}{n} \Struct{N}$ و
+$\Struct{M} \models_\OLId{latin-looped}{L} !E$، فإن $\Struct{N} \models_\OLId{latin-looped}{L} !E$ أيضًا؛
+فإن $!E$ تكافئ~!!{sentence} من الرتبة الأولى؛ أي توجد $!D$ من الرتبة
+الأولى بحيث $\Mod(\OLId{latin-looped}{L}){!E}=\Mod(\OLId{latin-looped}{L}){!D}$.
+\end{lem}
+
+\begin{proof}
+ليكن $\OLId{latin-ordinary}{n}$ بحيث تتفق أي !!{structure}s متكافئتين حتى~$\OLId{latin-ordinary}{n}$، $\Struct{M}$
+و$\Struct{N}$، على القيمة المسندة إلى~$!E$. وقد ثبت في
+\olref[bas][pis]{prop:qr-finite} أن !!{language} منتهية لا تشتمل، إذا سوّينا بين المتكافئات
+منطقيًا، إلا على عدد منتهٍ من !!{sentence}s الرتبة الأولى التي لا
+تتجاوز رتبة كمها~$\OLId{latin-ordinary}{n}$. ولكل !!{structure} ثابتة~$\Struct{M}$، لتكن
+$!D_{\Struct{M}}$ اقتران ممثل واحد من كل فئة تكافؤ منطقي للـ!!{sentence}s
+$!A$ من الرتبة الأولى الصادقة في~$\Struct{M}$ والتي تحقق
+$\QuantRank{!A} \le \OLId{latin-ordinary}{n}$ (فهذا الاقتران منتهٍ)، بحيث
+$\Struct{N} \models !D_{\Struct{M}}$ إذا وفقط إذا كان
+$\Struct{N} \equiv_\OLId{latin-ordinary}{n} \Struct{M}$. ثم ضع
+$!D = \textstyle\bigvee
+\Setabs{!D_{\Struct{M}}}{\Struct{M} \models_\OLId{latin-looped}{L} !E}$؛ وهذا الانفصال منتهٍ
+أيضًا حتى التكافؤ المنطقي.
+
+فنحصل على $\Mod(\OLId{latin-looped}{L}){!E}=\Mod(\OLId{latin-looped}{L}){!D}$، وبيان الوجهين كما يأتي. إن كان
+$\Struct{N} \models_\OLId{latin-looped}{L} !D$، وجد $\Struct{M} \models_\OLId{latin-looped}{L} !E$ بحيث
+$\Struct{N} \models !D_{\Struct{M}}$، ومن ثم
+$\Struct{N} \models_\OLId{latin-looped}{L} !E$ أيضًا (بفرض اللمة). وأما العكس، فإن كان
+$\Struct{N} \models_\OLId{latin-looped}{L} !E$، كان $!D_\Struct{N}$ أحد حدود الانفصال في
+$!D$، ولما كان $\Struct{N} \models !D_\Struct{N}$، كان كذلك
+$\Struct{N} \models_\OLId{latin-looped}{L} !D$.
+\end{proof}
+
+\begin{thm}[مبرهنة ليندستروم]
+  \ollabel{thm:lindstrom} إذا كان $\tuple{\OLId{latin-looped}{L},\models_\OLId{latin-looped}{L}}$ منطقًا مجردًا سويًا
+  يجمع خاصيتي التراص ولوفنهايم--سكولم، فإن
+  $\tuple{\OLId{latin-looped}{L},\models_\OLId{latin-looped}{L}} \le \tuple{\OLId{latin-looped}{F},\models}$ (ومن ثم يكون
+  $\tuple{\OLId{latin-looped}{L},\models_\OLId{latin-looped}{L}}$ مكافئًا لمنطق الرتبة الأولى).
+\end{thm}
+
+\begin{proof}
+ترجع المسألة، بمقتضى \olref{lem:lindstrom}، إلى إثبات أنه لكل
+$!E \in \OLId{latin-looped}{L}(\Lang{L})$، حيث $\Lang{L}$ منتهية، يوجد $\OLId{latin-ordinary}{n} \in \Nat$ بحيث
+إنه لأي !!{structure}s اثنتين $\Struct{M}$ و$\Struct{N}$: إذا كان
+$\Struct{M} \equiv_\OLId{latin-ordinary}{n} \Struct{N}$، اتفقت $\Struct{M}$ و$\Struct{N}$
+على~$!E$. فعندئذ تكافئ $!E$~!!{sentence} من الرتبة الأولى، فيترتب على ذلك
+$\tuple{\OLId{latin-looped}{L},\models_\OLId{latin-looped}{L}} \le \tuple{\OLId{latin-looped}{F},\models}$. وحيث إن البحث في
+!!{language} منتهية علائقية محضة، تجيز لنا
+\olref[bas][pis]{thm:b-n-f} إحلال القضية الجبرية المقابلة
+$\OLId{latin-looped}{I}_\OLId{latin-ordinary}{n}(\emptyset,\emptyset)$ محل القضية
+$\Struct{M} \equiv_\OLId{latin-ordinary}{n} \Struct{N}$.
+
+فلنأخذ $!E$، ولنفرض خلاف المطلوب: أنه لكل $\OLId{latin-ordinary}{n}$ توجد
+!!{structure}s~$\Struct{M}_\OLId{latin-ordinary}{n}$ و$\Struct{N}_\OLId{latin-ordinary}{n}$ بحيث
+$\OLId{latin-looped}{I}_\OLId{latin-ordinary}{n}(\emptyset,\emptyset)$، لكن، مثلًا،
+$\Struct{M}_\OLId{latin-ordinary}{n} \models_\OLId{latin-looped}{L} !E$ و$\Struct{N}_\OLId{latin-ordinary}{n} \not\models_\OLId{latin-looped}{L} !E$. وتجيز لنا خاصية
+التشاكل أن نفرض أن جميع الـ$\Struct{M}_\OLId{latin-ordinary}{n}$ تفسر ثوابت اللغة
+بالأشياء نفسها؛ ثم إن اللغة لا تحتوي إلا عددًا منتهيًا من
+الـ!!{sentence}s الذرية؛ فلنا أن نفترض اتفاق هذه البنى في الـ!!{sentence}s الذرية
+التي تحققها، وإلا اقتصرنا على متتالية جزئية من الـ$\Struct{M}$. ولتكن
+$\Struct{M_\infty}$ اتحاد جميع الـ$\Struct{M}_\OLId{latin-ordinary}{n}$، أي الـ!!{structure}
+الصغرى الوحيدة التي تحتوي كل $\Struct{M}_\OLId{latin-ordinary}{n}$ بنية جزئية. وكما في برهان
+\olref[lsp]{thm:abstract-p-isom}، لتكن $\Struct{M_\infty}^*$ توسيع
+$\Struct{M_\infty}$ ذي الـ!!{domain}
+$\Domain{\OLId{latin-looped}{M}_\infty} \cup \Domain{\OLId{latin-looped}{M}_\infty}^{<\omega}$، في
+الـ!!{language} الموسعة التي تضم محمولي الوصل $\OLId{latin-looped}{P}$ و$\OLId{latin-looped}{Q}$.
+
+ونجري البناء نفسه لتعريف $\Struct{N}_\OLId{latin-ordinary}{n}$ و$\Struct{N_\infty}$ و
+$\Struct{N_\infty}^*$. ولتكن الآن $\Struct{U}$ هي الـ!!{structure} التي
+يضم !!{domain}ها !!{domain}s~$\Struct{M_\infty}^*$ و
+$\Struct{N_\infty}^*$، وكذلك الأعداد الطبيعية~$\Nat$ مع ترتيبها
+الطبيعي~$\le$، في الـ!!{language} ذات محمولات إضافية تمثل الـ!!{domain}s
+$\Domain{\OLId{latin-looped}{M}_\infty}$ و$\Domain{\OLId{latin-looped}{N}_\infty}$ و
+$\Domain{\OLId{latin-looped}{M}_\infty}^{<\omega}$ و$\Domain{\OLId{latin-looped}{N}_\infty}^{<\omega}$، فضلًا
+عن محمولات ترمّز مجالات $\Struct{M}_\OLId{latin-ordinary}{n}$ و$\Struct{N}_\OLId{latin-ordinary}{n}$ بمعنى أن:
+\begin{align*}
+  \Domain{\OLId{latin-looped}{M}_\OLId{latin-ordinary}{n}} & = \Setabs{\OLId{latin-ordinary}{a} \in \Domain{\OLId{latin-looped}{M}_\infty}}{\OLId{latin-looped}{R}(\OLId{latin-ordinary}{a}, \OLId{latin-ordinary}{n})}; &
+  \Domain{\OLId{latin-looped}{N}_\OLId{latin-ordinary}{n}} & = \Setabs{\OLId{latin-ordinary}{a} \in \Domain{\OLId{latin-looped}{N}_\infty}}{\OLId{latin-looped}{S}(\OLId{latin-ordinary}{a},\OLId{latin-ordinary}{n})}; \\
+  \Domain{\OLId{latin-looped}{M}_\infty}^{<\omega}_\OLId{latin-ordinary}{n} & = \Setabs{\OLId{latin-ordinary}{a} \in \Domain{\OLId{latin-looped}{M}_\infty}^{<\omega}}{\OLId{latin-looped}{R}(\OLId{latin-ordinary}{a},\OLId{latin-ordinary}{n})}; &
+  \Domain{\OLId{latin-looped}{N}_\infty}^{<\omega}_\OLId{latin-ordinary}{n} & = \Setabs{\OLId{latin-ordinary}{a} \in \Domain{\OLId{latin-looped}{N}_\infty}^{<\omega}}{\OLId{latin-looped}{S}(\OLId{latin-ordinary}{a},\OLId{latin-ordinary}{n})}.
+\end{align*}
+وللـ!!{structure}~$\Struct{U}$ أيضًا علاقة ثلاثية~$\OLId{latin-looped}{J}$ بحيث
+$\OLId{latin-looped}{J}(\OLId{latin-ordinary}{n},\mathbf{a},\mathbf{b})$ إذا وفقط إذا كان
+$\OLId{latin-looped}{I}_\OLId{latin-ordinary}{n}(\mathbf{a},\mathbf{b})$.
+
+ويمكن الآن صوغ !!a{sentence}~$!D$ من المنطق~$\OLId{latin-looped}{L}$، في الـ!!{language}
+$\Lang{L}$ الموسعة بـ$\OLId{latin-looped}{R}$ و$\OLId{latin-looped}{S}$ و$\OLId{latin-looped}{J}$ وغيرها، تقول إن $\le$ ترتيب خطي
+منفصل له عنصر أول ولا عنصر أخير، وإن
+$\Struct{M}_\OLId{latin-ordinary}{n} \models_\OLId{latin-looped}{L} !E$ و$\Struct{N}_\OLId{latin-ordinary}{n} \not\models_\OLId{latin-looped}{L} !E$، وإنه لكل
+$\OLId{latin-ordinary}{n}$ في الترتيب يكون $\OLId{latin-looped}{J}(\OLId{latin-ordinary}{n},\mathbf{a},\mathbf{b})$ إذا وفقط إذا كان
+$\OLId{latin-looped}{I}_\OLId{latin-ordinary}{n}(\mathbf{a},\mathbf{b})$.
+
+نلحق باللغة ثابتًا جديدًا~$\OLId{latin-ordinary}{n}^*$، ثم نضم إلى $!D$ نمطًا يقتضي أن
+$\bar \OLId{latin-ordinary}{n} < \OLId{latin-ordinary}{n}^*$ لكل $\OLId{latin-ordinary}{n} \in \Nat$ قياسي (وبصورة مكافئة، يفرض لكل عدد
+قياسي~$\OLId{latin-ordinary}{n}$ أن تحت $\OLId{latin-ordinary}{n}^*$ ما لا يقل عن $\OLId{latin-ordinary}{n}$ عنصرًا). ولا يعسر تحقيق أي جزء منتهٍ من هذا
+النمط مع $!D$ في $\Struct{U}$؛ إذ يكفي اختيار عنصر قياسي بالغ الكبر.
+فتقتضي خاصية التراص وجود نموذج~$\Struct{V}$ لـ$!D$ وللنمط بأسره، وفي
+ترتيبه عنصر~$\OLId{latin-ordinary}{n}^*$ يعلو كل عنصر قياسي. وبوجه خاص، تحتوي
+$\Struct{V}$~!!{structure}s جزئيتين $\Struct{M_{n^*}}$ و
+$\Struct{N_{n^*}}$ بحيث $\Struct{M_{n^*}} \models_\OLId{latin-looped}{L} !E$ و
+$\Struct{N_{n^*}} \not\models_\OLId{latin-looped}{L} !E$. وحينئذ نعرّف مجموعة
+$\mathcal{I}$ من أزواج متتاليات طولها~$\OLId{latin-ordinary}{k}$ من $\Domain{\OLId{latin-looped}{M}_{\OLId{latin-ordinary}{n}^*}}$ و
+$\Domain{\OLId{latin-looped}{N}_{\OLId{latin-ordinary}{n}^*}}$، بوضع
+$\tuple{\mathbf{a},\mathbf{b}} \in \mathcal{I}$ إذا وفقط إذا كان
+$\OLId{latin-looped}{J}(\OLId{latin-ordinary}{n}^*-\OLId{latin-ordinary}{k},\mathbf{a},\mathbf{b})$، حيث $\OLId{latin-ordinary}{k}$ طول $\mathbf{a}$ و
+$\mathbf{b}$. وحيث إن $\OLId{latin-ordinary}{n}^*$ يعلو كل عدد قياسي، لزم أن
+$\OLId{latin-ordinary}{n}^*-\OLId{latin-ordinary}{k}>\OLMathNumeral{0}$ لكل $\OLId{latin-ordinary}{k}$ قياسي، وتشهد المجموعة $\mathcal{I}$ أن
+$\Struct{M_{n^*}} \simeq_\OLId{latin-ordinary}{p} \Struct{N_{n^*}}$. غير أن
+\olref[lsp]{thm:abstract-p-isom} تقضي بأن $\Struct{M_{n^*}}$ مكافئة لـ
+$\Struct{N_{n^*}}$ في~$\OLId{latin-looped}{L}$؛ فتناقض اختلافهما المفروض، وثبت المطلوب.
+\end{proof}
+
+\end{document}

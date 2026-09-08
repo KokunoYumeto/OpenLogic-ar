@@ -1,0 +1,172 @@
+% Part: sets-functions-relations
+% Chapter: functions
+% Section: inverses
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid[ar]{sfr}{fun}{inv}
+\olsection{معكوسات الدوال}
+
+\begin{explain}
+إذا كانت الدوال تعيينات، فهل يجوز ردّ التعيين على أعقابه؟
+فدالة اللاحق $\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x}) = \OLId{latin-ordinary}{x} + \OLMathNumeral{1}$ يرد فعلها $\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{y}) = \OLId{latin-ordinary}{y} - \OLMathNumeral{1}$؛ إذ
+تعيد الثانية ما غيّرته~$\OLId{latin-ordinary}{f}$.
+
+غير أن المجالين معتبران هنا. فقاعدة~$\OLId{latin-ordinary}{g}$ تعرّف دالة
+$\Int \to \Int$، ولا تعرّف \emph{دالة} $\Nat
+\to \Nat$؛ لأن $\OLId{latin-ordinary}{g}(\OLMathNumeral{0}) \notin \Nat$. فحتى في هذا المثال اليسير
+ليس إمكان العكس مطلقًا، بل قد يتوقف على المجال والمجال المقابل.
+
+ويضبط هذا المعنى اصطلاح معكوس الدالة.
+\end{explain}
+
+\begin{defn}
+الدالة $\OLId{latin-ordinary}{g} \colon \OLId{latin-looped}{B} \to \OLId{latin-looped}{A}$ \emph{معكوس} للدالة $\OLId{latin-ordinary}{f}
+\colon \OLId{latin-looped}{A} \to \OLId{latin-looped}{B}$ متى كان $\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{y})) = \OLId{latin-ordinary}{y}$ و$\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x})) = \OLId{latin-ordinary}{x}$ لكل
+$\OLId{latin-ordinary}{x} \in \OLId{latin-looped}{A}$ و$\OLId{latin-ordinary}{y} \in \OLId{latin-looped}{B}$.
+\end{defn}
+
+فإن كان لـ$\OLId{latin-ordinary}{f}$ معكوس~$\OLId{latin-ordinary}{g}$، استعملنا له كثيرًا الرمز $\OLId{latin-ordinary}{f}^{-\OLMathNumeral{1}}$ مكان~$\OLId{latin-ordinary}{g}$.
+
+\begin{explain}
+ولنبحث متى يوجد المعكوس. قد نقترح لمعكوس $\OLId{latin-ordinary}{f}\colon \OLId{latin-looped}{A} \to \OLId{latin-looped}{B}$
+دالة $\OLId{latin-ordinary}{g}\colon \OLId{latin-looped}{B} \to \OLId{latin-looped}{A}$ «نعرفها بـ»
+\[
+\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{y}) = \text{«ذلك» $x$ الذي يحقق $f(x) = y$.}
+\]
+وإنما وضعت «نعرفها بـ» و«ذلك» بين علامتي التنصيص لأن الكلام
+لا يصلح تعريفًا على إطلاقه. فلا بد أولًا من~$\OLId{latin-ordinary}{x}$ واحد لا غير
+يحقق $\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x}) = \OLId{latin-ordinary}{y}$، ليتعين مخرج~$\OLId{latin-ordinary}{g}$؛ ولا بد ثانيًا من هذا التعيين
+لكل $\OLId{latin-ordinary}{y} \in \OLId{latin-looped}{B}$. فإن وجد $\OLId{latin-ordinary}{x}_\OLMathNumeral{1}$ و$\OLId{latin-ordinary}{x}_\OLMathNumeral{2} \in \OLId{latin-looped}{A}$، مع $\OLId{latin-ordinary}{x}_\OLMathNumeral{1} \neq \OLId{latin-ordinary}{x}_\OLMathNumeral{2}$
+و$\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x}_\OLMathNumeral{1}) = \OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x}_\OLMathNumeral{2})$، تعددت القيمة المقترحة لـ$\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{y})$ عند
+$\OLId{latin-ordinary}{y} = \OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x}_\OLMathNumeral{1}) = \OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x}_\OLMathNumeral{2})$. وإن لم يوجد~$\OLId{latin-ordinary}{x}$ يحقق $\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x}) = \OLId{latin-ordinary}{y}$،
+لم تتعين $\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{y})$ أصلًا. فتعريف $\OLId{latin-ordinary}{g}$ يقتضي أن تكون $\OLId{latin-ordinary}{f}$ !!{injective} و!!{surjective} معًا.
+
+ولنفرق بين مسألتين. إذا أعطيت~$\OLId{latin-ordinary}{f}\colon \OLId{latin-looped}{A} \to \OLId{latin-looped}{B}$، فمتى توجد
+$\OLId{latin-ordinary}{g}\colon \OLId{latin-looped}{B} \to \OLId{latin-looped}{A}$ بحيث $\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x})) = \OLId{latin-ordinary}{x}$؟ هذه $\OLId{latin-ordinary}{g}$ ترد فعل~$\OLId{latin-ordinary}{f}$،
+وتسمى \emph{معكوسًا أيسر} لـ~$\OLId{latin-ordinary}{f}$. ومتى توجد $\OLId{latin-ordinary}{h}\colon \OLId{latin-looped}{B} \to \OLId{latin-looped}{A}$
+بحيث $\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{y})) = \OLId{latin-ordinary}{y}$؟ هذه $\OLId{latin-ordinary}{h}$ \emph{معكوس أيمن} لـ~$\OLId{latin-ordinary}{f}$،
+و$\OLId{latin-ordinary}{f}$ ترد فعل~$\OLId{latin-ordinary}{h}$.
+\end{explain}
+
+\begin{prop}
+لتكن $\OLId{latin-ordinary}{f}\colon \OLId{latin-looped}{A} \to \OLId{latin-looped}{B}$ !!{injective}، وليكن $\OLId{latin-looped}{A} \neq \emptyset$.
+فلها \emph{معكوس أيسر}~$\OLId{latin-ordinary}{g}\colon \OLId{latin-looped}{B} \to \OLId{latin-looped}{A}$ لـ~$\OLId{latin-ordinary}{f}$ يحقق $\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x})) = \OLId{latin-ordinary}{x}$
+لكل $\OLId{latin-ordinary}{x} \in \OLId{latin-looped}{A}$.
+\end{prop}
+
+\begin{explain}
+\textbf{تنبيه على سهو الأصل.} أسقط متن القضية الإنجليزي شرط
+$\OLId{latin-looped}{A}\neq\emptyset$، وبرهانها لا يستغني عنه إذ يختار~$\OLId{latin-ordinary}{a}\in \OLId{latin-looped}{A}$.
+فالدالة الخالية $\emptyset\to\{\OLMathNumeral{0}\}$ متباينة ولا معكوس أيسر لها،
+لأنه لا دالة من~$\{\OLMathNumeral{0}\}$ إلى~$\emptyset$. والتحقيق أن المتباينة
+يكون لها معكوس أيسر إذا وفقط إذا كانت~$\OLId{latin-looped}{A}$ غير خالية أو كان~$\OLId{latin-looped}{B}$
+خاليًا؛ وأثبتنا الصورة التي يجري عليها هذا البرهان.
+\end{explain}
+
+\begin{proof}
+افرض $\OLId{latin-ordinary}{f}\colon \OLId{latin-looped}{A} \to \OLId{latin-looped}{B}$ !!{injective} و$\OLId{latin-looped}{A} \neq \emptyset$، وخذ $\OLId{latin-ordinary}{y} \in \OLId{latin-looped}{B}$.
+فإن كان $\OLId{latin-ordinary}{y} \in \ran{\OLId{latin-ordinary}{f}}$ وجد $\OLId{latin-ordinary}{x} \in \OLId{latin-looped}{A}$ مع $\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x}) = \OLId{latin-ordinary}{y}$، ولأن
+$\OLId{latin-ordinary}{f}$ !!{injective} كان~$\OLId{latin-ordinary}{x} \in \OLId{latin-looped}{A}$ هذا وحيدًا. فنضع $\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{y}) = \OLId{latin-ordinary}{x}$؛
+أي نجعل $\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{y})$ ذلك $\OLId{latin-ordinary}{x} \in \OLId{latin-looped}{A}$ الذي يحقق $\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x}) = \OLId{latin-ordinary}{y}$.
+وإن كان $\OLId{latin-ordinary}{y} \notin \ran{\OLId{latin-ordinary}{f}}$ جاز تعيينه لأي~$\OLId{latin-ordinary}{a} \in \OLId{latin-looped}{A}$.
+فنثبت $\OLId{latin-ordinary}{a} \in \OLId{latin-looped}{A}$ ونعرّف $\OLId{latin-ordinary}{g}\colon \OLId{latin-looped}{B} \to \OLId{latin-looped}{A}$ هكذا:
+\[
+\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{y}) = \begin{cases}
+    \OLId{latin-ordinary}{x} & \text{إذا كان $f(x) = y$}\\
+    \OLId{latin-ordinary}{a} & \text{إذا كان $y \notin \ran{f}$.}
+\end{cases}
+\]
+فقد تعيّنت لكل $\OLId{latin-ordinary}{y} \in \OLId{latin-looped}{B}$؛ إذ لكل $\OLId{latin-ordinary}{y} \in \ran{\OLId{latin-ordinary}{f}}$ عنصر واحد
+$\OLId{latin-ordinary}{x} \in \OLId{latin-looped}{A}$ يحقق $\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x}) = \OLId{latin-ordinary}{y}$. ومتى كان $\OLId{latin-ordinary}{y} = \OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x})$ أعطى التعريف
+$\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{y}) = \OLId{latin-ordinary}{x}$، أي $\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x})) = \OLId{latin-ordinary}{x}$.
+\end{proof}
+
+\begin{prob}
+برهن على أن الدالة $\OLId{latin-ordinary}{f}\colon \OLId{latin-looped}{A} \to \OLId{latin-looped}{B}$، إن كان لها معكوس أيسر~$\OLId{latin-ordinary}{g}$، يلزم
+أن تكون $\OLId{latin-ordinary}{f}$ !!{injective}.
+\end{prob}
+
+\begin{prop}
+لتكن $\OLId{latin-ordinary}{f}\colon \OLId{latin-looped}{A} \to \OLId{latin-looped}{B}$ !!{surjective}. فلها \emph{معكوس أيمن}~$\OLId{latin-ordinary}{h}\colon \OLId{latin-looped}{B} \to \OLId{latin-looped}{A}$
+لـ~$\OLId{latin-ordinary}{f}$ يحقق $\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{y})) = \OLId{latin-ordinary}{y}$ لكل~$\OLId{latin-ordinary}{y} \in \OLId{latin-looped}{B}$.
+\end{prop}
+
+\begin{proof}
+افرض $\OLId{latin-ordinary}{f}\colon \OLId{latin-looped}{A} \to \OLId{latin-looped}{B}$ !!{surjective}، وخذ $\OLId{latin-ordinary}{y} \in \OLId{latin-looped}{B}$.
+فبما أن $\OLId{latin-ordinary}{f}$ !!{surjective} يوجد $\OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{y} \in \OLId{latin-looped}{A}$ يحقق $\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{y}) = \OLId{latin-ordinary}{y}$.
+نضع $\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{y}) = \OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{y}$؛ أي نختار لكل $\OLId{latin-ordinary}{y} \in \OLId{latin-looped}{B}$ عنصرًا $\OLId{latin-ordinary}{x} \in \OLId{latin-looped}{A}$
+بحيث $\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x}) = \OLId{latin-ordinary}{y}$. وشمول $\OLId{latin-ordinary}{f}$، أي كونها !!{surjective}، يضمن
+وجود ما نختاره.\footnote{لأن $\OLId{latin-ordinary}{f}$ !!{surjective} تكون، لكل~$\OLId{latin-ordinary}{y} \in \OLId{latin-looped}{B}$،
+المجموعة $\Setabs{\OLId{latin-ordinary}{x}}{\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x}) = \OLId{latin-ordinary}{y}}$ غير خالية. وتعريف~$\OLId{latin-ordinary}{h}$ يقتضي اختيار
+عنصر $\OLId{latin-ordinary}{x}$ واحد من كل واحدة منها. وليس إمكان هذه الاختيارات جميعًا
+بديهيًا؛ بل يفترض بديهية مستقلة. فهذه القضية تستعمل بديهية
+الاختيار، وهي مسألة \oliflabeldef{sth:choice::chap}{سنعاودها في \olref[sth][choice][]{chap}}{نتجاوز تفصيلها هنا}.
+ولا تلزم البديهية في حالات مخصوصة كثيرة، كأن يكون $\OLId{latin-looped}{A} = \Nat$
+أو يكون منتهيًا، أو تكون $\OLId{latin-ordinary}{f}$ !!{bijective}. ففي هذه الحالة
+الأخيرة، حيث $\OLId{latin-ordinary}{f}$ !!{bijective}، لكل $\OLId{latin-ordinary}{y} \in \OLId{latin-looped}{B}$ مجموعة
+$\Setabs{\OLId{latin-ordinary}{x}}{\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x}) = \OLId{latin-ordinary}{y}}$ لا تضم إلا !!{element} واحدًا؛ فلا اختيار
+بين بدائل أصلًا.}
+فإذا كان $\OLId{latin-ordinary}{x} = \OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{y})$ كان، بمقتضى التعريف، $\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x}) = \OLId{latin-ordinary}{y}$؛ أي لكل
+$\OLId{latin-ordinary}{y} \in \OLId{latin-looped}{B}$ يتحقق $\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{y})) = \OLId{latin-ordinary}{y}$.
+\end{proof}
+
+\begin{prob}
+برهن على أن الدالة $\OLId{latin-ordinary}{f}\colon \OLId{latin-looped}{A} \to \OLId{latin-looped}{B}$، إن كان لها معكوس أيمن~$\OLId{latin-ordinary}{h}$، يلزم
+أن تكون $\OLId{latin-ordinary}{f}$ !!{surjective}.
+\end{prob}
+
+\begin{explain}
+وبجمع وجوه البرهان السابق يتبين أن لكل !!{bijection} معكوسًا:
+دالة واحدة تكون معكوسًا أيسر وأيمن لـ~$\OLId{latin-ordinary}{f}$ معًا.
+\end{explain}
+
+\begin{prop}\ollabel{prop:bijection-inverse}
+لتكن $\OLId{latin-ordinary}{f}\colon \OLId{latin-looped}{A} \to \OLId{latin-looped}{B}$ !!{bijective}. فتوجد
+دالة~$\OLId{latin-ordinary}{f}^{-\OLMathNumeral{1}}\colon \OLId{latin-looped}{B} \to \OLId{latin-looped}{A}$ تحقق، لكل $\OLId{latin-ordinary}{x} \in \OLId{latin-looped}{A}$،
+$\OLId{latin-ordinary}{f}^{-\OLMathNumeral{1}}(\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x})) = \OLId{latin-ordinary}{x}$، ولكل $\OLId{latin-ordinary}{y} \in \OLId{latin-looped}{B}$، $\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{f}^{-\OLMathNumeral{1}}(\OLId{latin-ordinary}{y})) = \OLId{latin-ordinary}{y}$.
+\end{prop}
+
+\begin{proof}
+إثباتها تمرين.
+\end{proof}
+
+\begin{prob}
+برهن على \olref[sfr][fun][inv]{prop:bijection-inverse}: عرّف~$\OLId{latin-ordinary}{f}^{-\OLMathNumeral{1}}$
+أولًا، ثم أثبت أنها دالة، ثم أنها معكوس لـ~$\OLId{latin-ordinary}{f}$؛ أي
+$\OLId{latin-ordinary}{f}^{-\OLMathNumeral{1}}(\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x})) = \OLId{latin-ordinary}{x}$ و$\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{f}^{-\OLMathNumeral{1}}(\OLId{latin-ordinary}{y})) = \OLId{latin-ordinary}{y}$ لكل $\OLId{latin-ordinary}{x} \in \OLId{latin-looped}{A}$ و$\OLId{latin-ordinary}{y} \in \OLId{latin-looped}{B}$.
+\end{prob}
+
+\begin{explain}
+ولاستخراج المعكوس وجه أعم قليلًا. رأينا في \olref[kin]{sec} أن كل
+دالة $\OLId{latin-ordinary}{f}$ تستحث !!a{surjection} $\OLId{latin-ordinary}{f}' \colon \OLId{latin-looped}{A} \to \ran{\OLId{latin-ordinary}{f}}$ إذا وضعنا
+$\OLId{latin-ordinary}{f}'(\OLId{latin-ordinary}{x}) = \OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x})$ لكل $\OLId{latin-ordinary}{x} \in \OLId{latin-looped}{A}$. فإن كانت $\OLId{latin-ordinary}{f}$ !!{injective} صارت
+$\OLId{latin-ordinary}{f}'$ !!{bijective}؛ فلها معكوس وحيد بمقتضى \olref{prop:bijection-inverse}.
+ونتسامح أحيانًا تسامحًا يسيرًا في العبارة فنسمي معكوس $\OLId{latin-ordinary}{f}'$
+«معكوس~$\OLId{latin-ordinary}{f}$».
+\end{explain}
+
+\begin{prop}\ollabel{prop:left-right}%
+إذا كان لـ$\OLId{latin-ordinary}{f}\colon \OLId{latin-looped}{A} \to \OLId{latin-looped}{B}$ معكوس أيسر~$\OLId{latin-ordinary}{g}$ ومعكوس أيمن~$\OLId{latin-ordinary}{h}$، لزم $\OLId{latin-ordinary}{h} = \OLId{latin-ordinary}{g}$.
+\end{prop}
+
+\begin{proof}
+إثباتها تمرين.
+\end{proof}
+
+\begin{prob}
+برهن على \olref[sfr][fun][inv]{prop:left-right}.
+\end{prob}
+
+\begin{prop}\ollabel{prop:inverse-unique}
+معكوس الدالة~$\OLId{latin-ordinary}{f}$ واحد إن وجد.
+\end{prop}
+
+\begin{proof}
+ليكن $\OLId{latin-ordinary}{g}$ و$\OLId{latin-ordinary}{h}$ معكوسين لـ~$\OLId{latin-ordinary}{f}$. فـ$\OLId{latin-ordinary}{g}$ معكوس أيسر لـ~$\OLId{latin-ordinary}{f}$ خاصة،
+و$\OLId{latin-ordinary}{h}$ معكوس أيمن. ومن \olref{prop:left-right} ينتج $\OLId{latin-ordinary}{g} = \OLId{latin-ordinary}{h}$.
+\end{proof}
+
+\end{document}

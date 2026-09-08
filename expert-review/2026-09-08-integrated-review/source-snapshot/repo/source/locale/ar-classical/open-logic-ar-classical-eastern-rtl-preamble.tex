@@ -1,0 +1,181 @@
+% Shared preamble for the distinct Classical-Arabic/Eastern-numeral/RTL reader.
+% This file is intentionally unavailable to the MSA reader drivers.
+\ifdefined\OLClassicalEasternRTLPreambleLoaded\endinput\fi
+\def\OLClassicalEasternRTLPreambleLoaded{1}
+\ProvidesFile{open-logic-ar-classical-eastern-rtl-preamble.tex}
+  [2026/09/05 isolated Classical Arabic reader preamble]
+
+\ifdefined\directlua\else
+  \PackageError{open-logic-ar-classical-eastern-rtl}
+    {LuaLaTeX is required}
+    {Use the guarded Classical Arabic build entry.}
+\fi
+
+\newcommand*{\olpath}{../..}
+\newcommand*{\OLClassicalPresentationRoot}{../ar-classical-presentation}
+\newcommand*{\OLClassicalContentLocale}{ar-classical-presentation}
+
+% The shared Arabic locale/configuration is loaded under its real locale id.
+% After the style stack is complete, \ollangid is changed to ar-classical so
+% every locale-rooted import resolves only inside the frozen Classical tree.
+\newcommand*{\ollangid}{ar}
+\newcommand*{\ollanguage}{arabic}
+
+\usepackage{fontspec}
+% The inherited Open Logic math stack contains legacy Type 1 fonts.  Supply
+% their glyph-name mappings so mathematical symbols remain searchable and
+% copyable in the Classical reader rather than appearing as raw CID labels.
+\usepackage{fixtounicode}
+% CM's \mapsto is a `mapsto` bar-piece followed by \rightarrow.  Supply the
+% one mapping absent from the generic glyph list, at all three normal math
+% sizes, so copy/extraction produces the meaningful `|→` composite.
+\fixtounicode{tfm=cmsy10,glyphs={mapsto},unicodes={007C}}
+\fixtounicode{tfm=cmsy7,glyphs={mapsto},unicodes={007C}}
+\fixtounicode{tfm=cmsy5,glyphs={mapsto},unicodes={007C}}
+% Exact legacy-font mappings used by the finite RTL registry and by large
+% extensible constructs.  Although Open Logic selects the `ntxsyc` LaTeX font
+% family, LuaTeX names the embedded Type 1 CMap `txsyc`; fixtounicode must bind
+% that backend name.  Multi-scalar mappings describe the two visibly composite
+% square-arrow faces without inventing a Unicode character.
+\fixtounicode{tfm=txsyc,
+  glyphs={strict,strictinverse,squareright,squareleft},
+  unicodes={297D,297C,25A1 2192,2190 25A1}}
+\fixtounicode{tfm=msbm10,
+  glyphs={notprecedesoreql,notfollowsoreql},
+  unicodes={22E0,22E1}}
+\fixtounicode{tfm=stmary10,
+  glyphs={varolessthan,varogreaterthan},
+  unicodes={29C0,29C1}}
+\fixtounicode{tfm=cmex10,
+  glyphs={parenleftbigg,parenrightbigg,braceleftBigg,braceleftBig,
+    summationdisplay,hatwidest,tildewidest},
+  unicodes={0028,0029,007B,007B,2211,0302,0303}}
+\usepackage{gitinfo2}
+\setmainfont{TeX Gyre Pagella}
+\setsansfont{TeX Gyre Heros}
+\setmonofont{Latin Modern Mono}
+
+% With Babel's RTL display adaptation, amsmath's logical right-tag algorithm
+% lands on the physical left.  Select that algorithm at package load; changing
+% only \iftagsleft@ later leaves the align family internally inconsistent.
+\PassOptionsToPackage{reqno}{amsmath}
+\PassOptionsToPackage{provide=*,bidi=basic}{babel}
+\makeatletter
+\AddToHook{package/cleveref/before}{\DeclareOption{arabic}{}}
+\makeatother
+
+% The closure component resolves references against the canonical-reader AUX.
+% The complete-reader driver does not define these two commands and therefore
+% never loads xr-hyper or a foreign AUX file.
+\ifdefined\OLClassicalExternalReaderJob
+  \usepackage{xr-hyper}
+  \externaldocument{\OLClassicalExternalReaderJob}
+    [\OLClassicalExternalReaderPDF]
+\fi
+
+\input{\olpath/sty/open-logic.sty}
+\input{\olpath/sty/open-logic-defer.sty}
+
+\DeclareRobustCommand{\OLPolishUpperL}{\foreignlanguage{english}{Ł}}
+\DeclareRobustCommand{\OLPolishLowerL}{\foreignlanguage{english}{ł}}
+\renewcommand*{\L}{\OLPolishUpperL}
+\renewcommand*{\l}{\OLPolishLowerL}
+\renewcommand*{\bar}[1]{\overline{#1}}
+
+% A bar nested inside the upstream \Th macro must survive \mathbf and retain
+% useful Unicode extraction under LuaLaTeX.
+\ExplSyntaxOn
+\cs_new:Npn \ol_classical_build_theory_bar:n #1
+  { \mathord{\text{\foreignlanguage{english}{\bfseries #1\char"0305}}} }
+\RenewDocumentCommand \Th { m }
+  {
+    \tl_if_head_eq_meaning:nNTF {#1} \bar
+      { \exp_args:No \ol_classical_build_theory_bar:n { \tl_tail:n {#1} } }
+      { \mathbf{#1} }
+  }
+\ExplSyntaxOff
+
+% Every target in this edition is an accepted Classical-Arabic source file.
+\let\OLUnLocalizedHook\relax
+\RenewDocumentCommand{\olpartid}{o m}{\renewcommand*{\theolpart}{#2}}
+
+\babelfont[arabic]{rm}[
+  Path=../../../00_control/fonts/scheherazade-2.100/,
+  UprightFont=Scheherazade-Regular.ttf,
+  BoldFont=Scheherazade-Bold.ttf,
+  AutoFakeSlant=0.15,
+  Renderer=HarfBuzz,
+  Scale=1.08
+]{Scheherazade-Regular.ttf}
+\babelfont[arabic]{sf}[
+  Path=../../../00_control/fonts/scheherazade-2.100/,
+  UprightFont=Scheherazade-Regular.ttf,
+  BoldFont=Scheherazade-Bold.ttf,
+  AutoFakeSlant=0.15,
+  Renderer=HarfBuzz,
+  Scale=1.08
+]{Scheherazade-Regular.ttf}
+\babelfont[arabic]{tt}{DejaVu Sans Mono}
+
+% From this point onward, both driver entry points and starred locale-rooted
+% imports resolve to the generated, reversible notation-presentation tree.
+% The accepted Classical source remains untouched in ar-classical/content;
+% the guarded build recorder rejects any direct read from that authority.
+\renewcommand*{\ollangid}{\OLClassicalContentLocale}
+\input{\OLClassicalPresentationRoot/open-logic-materialization-contract.tex}
+
+% A working snapshot is useful for static audit but may never authorize TeX.
+% The final materializer emits these exact short atoms only after validating
+% the frozen 722-unit source-closure authority.
+\def\OLClassicalExpectedMaterializationStatus{PASS}
+\def\OLClassicalExpectedMaterializationMode{final}
+\def\OLClassicalExpectedMaterializationEligibility{true}
+\ifx\OLClassicalMaterializationStatus\OLClassicalExpectedMaterializationStatus\else
+  \PackageError{open-logic-ar-classical-eastern-rtl}
+    {Classical notation presentation is not final}
+    {Run the fail-closed final materializer against the frozen source-closure receipt.}
+\fi
+\ifx\OLClassicalMaterializationMode\OLClassicalExpectedMaterializationMode\else
+  \PackageError{open-logic-ar-classical-eastern-rtl}
+    {Classical notation presentation mode is not final}
+    {A working materialization snapshot cannot be compiled.}
+\fi
+\ifx\OLClassicalMaterializationReleaseEligible\OLClassicalExpectedMaterializationEligibility\else
+  \PackageError{open-logic-ar-classical-eastern-rtl}
+    {Classical notation presentation is not release eligible}
+    {Regenerate it from the frozen source-closure authority.}
+\fi
+
+% Four reversible, typed presentation layers. The RTL installation is last so
+% no subsequent layer can silently replace the edition-level math direction.
+\input{open-logic-numerals-ar-classical.tex}
+\OLClassicalInstallNumerals
+\input{open-logic-letters-ar-classical.tex}
+\OLInstallClassicalLetters
+\input{open-logic-sets-ar-classical.tex}
+\OLInstallArabicSetSymbols
+\input{open-logic-rtl-math.tex}
+\OLClassicalInstallRTLMath
+
+\AtBeginDocument{\selectlanguage{arabic}\begingroup\lccode`\~="060C\lowercase{\endgroup\def~}{\foreignlanguage{arabic}{\char"060C}}\catcode"060C=\active}
+\AddToHook{begindocument/end}[ol-classical-edition-contract]{%
+  \OLCheckClassicalLetters
+  \OLClassicalCheckRTLMath
+  \typeout{OL-CLASSICAL-EDITION=classical-eastern-rtl-v1}%
+  \typeout{OL-CLASSICAL-CONTENT-LOCALE=\OLClassicalContentLocale}%
+  \typeout{OL-CLASSICAL-PRINTED-DIGITS=U+0660--U+0669}%
+  \typeout{OL-CLASSICAL-NAT-INCLUDES-ZERO=true}%
+  \typeout{OL-CLASSICAL-SOURCE-ORDER=unchanged}%
+}
+
+\makeatletter
+\renewcommand*{\@gitFootRev}{}
+\makeatother
+\renewcommand*{\ifgitinfo}{}
+
+\includeenv{editorial}
+\problemsperchapter
+\let\cleardoublepage\clearpage
+\pagestyle{plain}
+
+\endinput

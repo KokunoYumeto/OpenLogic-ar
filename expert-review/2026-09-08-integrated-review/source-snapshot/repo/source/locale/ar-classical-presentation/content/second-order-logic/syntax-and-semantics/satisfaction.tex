@@ -1,0 +1,223 @@
+% Part: second-order-logic
+% Chapter: syntax-and-semantics
+% Section: satisfaction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sol}{syn}{sat}
+
+\olsection{الإرضاء}
+
+\begin{explain}
+تعريف علاقة الإرضاء~$\Sat{\OLId{latin-looped}{M}}{!A}[\OLId{latin-ordinary}{s}]$ لـ!!{formula}s الرتبة الثانية
+يقتضي أن تشمل تعريفاتنا !!{variable}s هذه الرتبة. أما مفهوم
+!!a{structure} فلا يتغير بالانتقال من الرتبة الأولى إلى الثانية.
+وإنما يتغير تعيين المتغيرات~$\OLId{latin-ordinary}{s}$؛ فلا يكفي فيه إسناد القيم إلى
+!!{variable}s الرتبة الأولى، بل لا بد من إسناد ما يلائم
+!!{variable}s الرتبة الثانية أيضًا.
+\end{explain}
+
+\begin{defn}[تعيين المتغيرات]
+\emph{تعيين المتغيرات}~$\OLId{latin-ordinary}{s}$ لـ!!a{structure}~$\Struct{M}$ دالة
+تختص كل متغير بما يأتي:
+\begin{enumerate}
+\item !!{variable} الأفراد~$\Obj{v_i}$ بعنصر من~$\Domain \OLId{latin-looped}{M}$، فتكون
+  $\OLId{latin-ordinary}{s}(\Obj{v_i}) \in \Domain{\OLId{latin-looped}{M}}$؛
+\item متغير العلاقة ذي~$\OLId{latin-ordinary}{n}$ مواضع~$\Obj{V_i^n}$ بعلاقة ذات~$\OLId{latin-ordinary}{n}$
+  مواضع على~$\Domain{\OLId{latin-looped}{M}}$، فتكون
+  $\OLId{latin-ordinary}{s}(\Obj{V_i^n}) \subseteq \Domain{\OLId{latin-looped}{M}}^\OLId{latin-ordinary}{n}$؛
+\item متغير الدالة ذي~$\OLId{latin-ordinary}{n}$ مواضع~$\Obj{u_i^n}$ بدالة ذات~$\OLId{latin-ordinary}{n}$ مواضع
+  من~$\Domain{\OLId{latin-looped}{M}}^\OLId{latin-ordinary}{n}$ إلى~$\Domain{\OLId{latin-looped}{M}}$، أي
+  $\OLId{latin-ordinary}{s}(\Obj{u_i^n})\colon \Domain{\OLId{latin-looped}{M}}^\OLId{latin-ordinary}{n} \to \Domain{\OLId{latin-looped}{M}}$؛
+\end{enumerate}
+\end{defn}
+
+\begin{explain}
+تعطي~!!^a{structure} !!a{value} لكل~!!{constant} و!!{function}،
+وعلاقة لكل محمول. وأما تعيين متغيرات الرتبة الثانية فيعطي متغيرات
+الأفراد أفرادًا، ومتغيرات الدوال دوال، ومتغيرات العلاقات علاقات.
+فإذا اجتمع هذان أمكن تعيين قيمة كل حد.
+\end{explain}
+
+\begin{defn}[\usetoken{S}{value} حد]
+ليكن~$\OLId{latin-ordinary}{t}$ حدًا من اللغة~$\Lang L$، ولتكن~$\Struct M$
+!!a{structure} للغة~$\Lang L$، وليكن~$\OLId{latin-ordinary}{s}$ تعيين~!!a{variable}
+لـ$\Struct M$. نعرّف \emph{!!{value}}~$\Value{\OLId{latin-ordinary}{t}}{\OLId{latin-looped}{M}}[\OLId{latin-ordinary}{s}]$ ببنود
+تعريف قيمة حدود الرتبة الأولى، ونزيد عليها هذا البند:
+\begin{quote}
+\indcase{t}{\Atom{u}{t_1, \ldots, t_n}}{
+\[
+\Value{\indfrm}{\OLId{latin-looped}{M}}[\OLId{latin-ordinary}{s}] = \OLId{latin-ordinary}{s}(\OLId{latin-ordinary}{u})(\Value{\OLId{latin-ordinary}{t}_\OLMathNumeral{1}}{\OLId{latin-looped}{M}}[\OLId{latin-ordinary}{s}], \ldots,
+\Value{\OLId{latin-ordinary}{t}_\OLId{latin-ordinary}{n}}{\OLId{latin-looped}{M}}[\OLId{latin-ordinary}{s}]).
+\]}
+\end{quote}
+\end{defn}
+
+\begin{defn}[المغاير في~$\OLId{latin-ordinary}{x}$]
+ليكن~$\OLId{latin-ordinary}{s}$ تعيين~!!a{variable} لـ!!a{structure}~$\Struct M$.
+كل تعيين~!!{variable}~$\OLId{latin-ordinary}{s}'$ لـ$\Struct M$ يوافق~$\OLId{latin-ordinary}{s}$ في جميع
+المواضع، ولا يجوز أن يخالفه إلا في القيمة المسندة إلى~$\OLId{latin-ordinary}{x}$، يسمى
+\emph{مغايرًا في~$\OLId{latin-ordinary}{x}$} لـ$\OLId{latin-ordinary}{s}$. ومتى كان
+$\OLId{latin-ordinary}{s}'$ مغايرًا في~$\OLId{latin-ordinary}{x}$ لـ$\OLId{latin-ordinary}{s}$ رمزنا إلى ذلك
+بـ$\varAssign{\OLId{latin-ordinary}{s}'}{\OLId{latin-ordinary}{s}}{\OLId{latin-ordinary}{x}}$. ولا نشترط وقوع الاختلاف فعلًا.
+وكذلك يعرّف المغاير في متغير الرتبة الثانية~$\OLId{latin-looped}{X}$ أو~$\OLId{latin-ordinary}{u}$.
+\end{defn}
+
+\begin{defn}
+  ليكن~$\OLId{latin-ordinary}{s}$ تعيين~!!a{variable} لـ!!a{structure}~$\Struct M$،
+  وليكن~$\OLId{latin-ordinary}{m} \in \Domain{\OLId{latin-looped}{M}}$. نرمز بـ$\Subst{\OLId{latin-ordinary}{s}}{\OLId{latin-ordinary}{m}}{\OLId{latin-ordinary}{x}}$ إلى
+  تعيين~!!{variable} الذي يرد تعريفه في المعادلة:
+  \[\Subst{\OLId{latin-ordinary}{s}}{\OLId{latin-ordinary}{m}}{\OLId{latin-ordinary}{x}}(\OLId{latin-ordinary}{y}) = \begin{cases}
+    \OLId{latin-ordinary}{m} & \text{إذا كان } \OLId{latin-ordinary}{y} \ident \OLId{latin-ordinary}{x}\\
+    \OLId{latin-ordinary}{s}(\OLId{latin-ordinary}{y}) & \text{فيما عدا ذلك،}
+  \end{cases}\]
+  وليكن~$\OLId{latin-looped}{X}$ !!{variable} علاقة ذا~$\OLId{latin-ordinary}{n}$ مواضع، ولتكن~$\OLId{latin-looped}{R} \subseteq
+  \Domain{\OLId{latin-looped}{M}}^\OLId{latin-ordinary}{n}$. عندئذ يكون~$\Subst{\OLId{latin-ordinary}{s}}{\OLId{latin-looped}{R}}{\OLId{latin-looped}{X}}$ تعيين~!!{variable}
+  المحدد بالمعادلة:
+  \[\Subst{\OLId{latin-ordinary}{s}}{\OLId{latin-looped}{R}}{\OLId{latin-looped}{X}}(\OLId{latin-ordinary}{y}) = \begin{cases}
+    \OLId{latin-looped}{R} & \text{إذا كان } \OLId{latin-ordinary}{y} \ident \OLId{latin-looped}{X}\\
+    \OLId{latin-ordinary}{s}(\OLId{latin-ordinary}{y}) & \text{فيما عدا ذلك}.
+  \end{cases}\]
+  وأما إذا كان~$\OLId{latin-ordinary}{u}$ !!{variable} دالة ذا~$\OLId{latin-ordinary}{n}$ مواضع، وكانت
+  $\OLId{latin-ordinary}{f}\colon \Domain{\OLId{latin-looped}{M}}^\OLId{latin-ordinary}{n} \to \Domain{\OLId{latin-looped}{M}}$، فإن~$\Subst{\OLId{latin-ordinary}{s}}{\OLId{latin-ordinary}{f}}{\OLId{latin-ordinary}{u}}$
+  تعيين~!!{variable} المحدد بالمعادلة:
+  \[\Subst{\OLId{latin-ordinary}{s}}{\OLId{latin-ordinary}{f}}{\OLId{latin-ordinary}{u}}(\OLId{latin-ordinary}{y}) = \begin{cases}
+    \OLId{latin-ordinary}{f} & \text{إذا كان } \OLId{latin-ordinary}{y} \ident \OLId{latin-ordinary}{u}\\
+    \OLId{latin-ordinary}{s}(\OLId{latin-ordinary}{y}) & \text{فيما عدا ذلك}.
+  \end{cases}\]
+  ولا يختص~$\OLId{latin-ordinary}{y}$ في هذه الحالات برتبة؛ فيجوز أن يكون أي~!!{variable}
+  من الرتبة الأولى أو الثانية.
+\end{defn}
+
+\begin{defn}[الإرضاء]
+نعرف إرضاء !!{formula}s الرتبة الثانية~$!A$ ببنود
+\olref[fol][syn][sat]{defn:satisfaction}، ونضيف إليها:
+\begin{enumerate}
+\item \indcase{!A}{\Atom{X^n}{t_1, \dots, t_n}}{$\Sat{\OLId{latin-looped}{M}}{\indfrm}[\OLId{latin-ordinary}{s}]$
+  إذا وفقط إذا كان
+  $\langle \Value{\OLId{latin-ordinary}{t}_\OLMathNumeral{1}}{\OLId{latin-looped}{M}}[\OLId{latin-ordinary}{s}], \dots, \Value{\OLId{latin-ordinary}{t}_\OLId{latin-ordinary}{n}}{\OLId{latin-looped}{M}}[\OLId{latin-ordinary}{s}] \rangle \in
+  \OLId{latin-ordinary}{s}(\OLId{latin-looped}{X}^\OLId{latin-ordinary}{n})$.}
+\tagitem{prvAll}{%
+  \indcase{!A}{\lforall[X][!B]}{$\Sat{\OLId{latin-looped}{M}}{\indfrm}[\OLId{latin-ordinary}{s}]$ إذا وفقط إذا
+  كان لكل~$\OLId{latin-looped}{R} \subseteq \Domain{\OLId{latin-looped}{M}}^\OLId{latin-ordinary}{n}$
+  $\Sat{\OLId{latin-looped}{M}}{!B}[\Subst{\OLId{latin-ordinary}{s}}{\OLId{latin-looped}{R}}{\OLId{latin-looped}{X}}]$.}}{}
+
+\tagitem{prvEx}{%
+  \indcase{!A}{\lexists[X][!B]}{$\Sat{\OLId{latin-looped}{M}}{\indfrm}[\OLId{latin-ordinary}{s}]$ إذا وفقط إذا
+  وجد~$\OLId{latin-looped}{R} \subseteq \Domain{\OLId{latin-looped}{M}}^\OLId{latin-ordinary}{n}$ واحد على الأقل يحقق
+  $\Sat{\OLId{latin-looped}{M}}{!B}[\Subst{\OLId{latin-ordinary}{s}}{\OLId{latin-looped}{R}}{\OLId{latin-looped}{X}}]$.}}{}
+
+\tagitem{prvAll}{%
+  \indcase{!A}{\lforall[u][!B]}{$\Sat{\OLId{latin-looped}{M}}{\indfrm}[\OLId{latin-ordinary}{s}]$ إذا وفقط إذا
+  كان لكل~$\OLId{latin-ordinary}{f}\colon \Domain{\OLId{latin-looped}{M}}^\OLId{latin-ordinary}{n} \to \Domain{\OLId{latin-looped}{M}}$
+  $\Sat{\OLId{latin-looped}{M}}{!B}[\Subst{\OLId{latin-ordinary}{s}}{\OLId{latin-ordinary}{f}}{\OLId{latin-ordinary}{u}}]$.}}{}
+
+\tagitem{prvEx}{%
+  \indcase{!A}{\lexists[u][!B]}{$\Sat{\OLId{latin-looped}{M}}{\indfrm}[\OLId{latin-ordinary}{s}]$ إذا وفقط إذا
+  وجدت~$\OLId{latin-ordinary}{f}\colon \Domain{\OLId{latin-looped}{M}}^\OLId{latin-ordinary}{n} \to \Domain{\OLId{latin-looped}{M}}$ واحدة على الأقل تحقق
+  $\Sat{\OLId{latin-looped}{M}}{!B}[\Subst{\OLId{latin-ordinary}{s}}{\OLId{latin-ordinary}{f}}{\OLId{latin-ordinary}{u}}]$.}}{}
+\end{enumerate}
+\end{defn}
+
+\begin{ex}
+  لننظر في !!{formula}~$\lforall[\OLId{latin-ordinary}{z}][(\Atom{X}{z} \liff \lnot
+    \Atom{Y}{z})]$. ليس فيها تكميم من الرتبة الثانية، وإن كانت
+  !!{variable}s الرتبة الثانية~$\OLId{latin-looped}{X}$ و$\OLId{latin-looped}{Y}$ واردة فيها؛ ونعد كلا
+  المتغيرين هنا أحادي الموضع. وأما !!{sentence} المناظرة من الرتبة
+  الأولى
+  $\lforall[\OLId{latin-ordinary}{z}][(\Atom{P}{z} \liff \lnot \Atom{R}{z})]$ فمؤداها أن
+  ما يندرج تحت تأويل~$\OLId{latin-looped}{P}$ هو بعينه ما لا يندرج تحت تأويل~$\OLId{latin-looped}{R}$ في المجال.
+  ففي~!!a{structure} يتحدد تأويل~!!a{predicate}~$\OLId{latin-looped}{P}$
+  بالتأويل~$\Assign{\OLId{latin-looped}{P}}{\OLId{latin-looped}{M}}$. وأما !!{variable}s الرتبة الثانية
+  من قبيل~$\OLId{latin-looped}{X}$ و$\OLId{latin-looped}{Y}$ فلا تتولى !!{structure} نفسها تأويلها، بل يتولاه
+  تعيين~!!a{variable}. لذلك ليست !!{formula} الرتبة الثانية هذه
+  !!a{sentence}؛ إذ تشتمل على !!{variable}s حرة هي~$\OLId{latin-looped}{X}$ و$\OLId{latin-looped}{Y}$.
+  ولا يكفي في إرضائها ذكر !!a{structure}~$\Struct{M}$، حتى يضم
+  إليها تعيين~!!a{variable}~$\OLId{latin-ordinary}{s}$.
+
+  يكون~$\Sat{\OLId{latin-looped}{M}}{\lforall[\OLId{latin-ordinary}{z}][(\Atom{X}{z} \liff \lnot
+    \Atom{Y}{z})]}[\OLId{latin-ordinary}{s}]$ حين تكون !!{element}s~$\OLId{latin-ordinary}{s}(\OLId{latin-looped}{X})$ هي بالضبط
+  ما ليس من !!{element}s~$\OLId{latin-ordinary}{s}(\OLId{latin-looped}{Y})$، والعكس؛ أي إذا وفقط إذا
+  $\OLId{latin-ordinary}{s}(\OLId{latin-looped}{Y}) = \Domain{\OLId{latin-looped}{M}} \setminus \OLId{latin-ordinary}{s}(\OLId{latin-looped}{X})$. ولنأخذ
+  $\Domain{\OLId{latin-looped}{M}} = \{\OLMathNumeral{1}, \OLMathNumeral{2}, \OLMathNumeral{3}\}$. وليس في الصيغة !!{predicate}s
+  ولا !!{function}s ولا !!{constant}s؛ فلا يعنينا من
+  $\Struct{M}$ هنا إلا مجالها.
+  فإذا كان~$\OLId{latin-ordinary}{s}_\OLMathNumeral{1}(\OLId{latin-looped}{X}) = \{\OLMathNumeral{1}, \OLMathNumeral{2}\}$ و$\OLId{latin-ordinary}{s}_\OLMathNumeral{1}(\OLId{latin-looped}{Y}) = \{\OLMathNumeral{3}\}$ حصل
+  $\Sat{\OLId{latin-looped}{M}}{\lforall[\OLId{latin-ordinary}{z}][(\Atom{X}{z}
+      \liff \lnot \Atom{Y}{z})]}[\OLId{latin-ordinary}{s}_\OLMathNumeral{1}]$.
+
+  وأما إن كان~$\OLId{latin-ordinary}{s}_\OLMathNumeral{2}(\OLId{latin-looped}{X}) = \{\OLMathNumeral{1}, \OLMathNumeral{2}\}$ و
+  $\OLId{latin-ordinary}{s}_\OLMathNumeral{2}(\OLId{latin-looped}{Y}) = \{\OLMathNumeral{2}, \OLMathNumeral{3}\}$، فالحال بخلاف ذلك:
+  $\Sat/{\OLId{latin-looped}{M}}{\lforall[\OLId{latin-ordinary}{z}][(\Atom{X}{z} \liff \lnot
+      \Atom{Y}{z})]}[\OLId{latin-ordinary}{s}_\OLMathNumeral{2}]$. ووجهه أن
+  $\Sat{\OLId{latin-looped}{M}}{\Atom{X}{z}}[\Subst{\OLId{latin-ordinary}{s}_\OLMathNumeral{2}}{\OLMathNumeral{2}}{\OLId{latin-ordinary}{z}}]$، لأن
+  $\OLMathNumeral{2} \in \Subst{\OLId{latin-ordinary}{s}_\OLMathNumeral{2}}{\OLMathNumeral{2}}{\OLId{latin-ordinary}{z}}(\OLId{latin-looped}{X})$، في حين أن
+  $\Sat/{\OLId{latin-looped}{M}}{\lnot \Atom{Y}{z}}[\Subst{\OLId{latin-ordinary}{s}_\OLMathNumeral{2}}{\OLMathNumeral{2}}{\OLId{latin-ordinary}{z}}]$، لأن
+  $\OLMathNumeral{2} \in \Subst{\OLId{latin-ordinary}{s}_\OLMathNumeral{2}}{\OLMathNumeral{2}}{\OLId{latin-ordinary}{z}}(\OLId{latin-looped}{Y})$ أيضًا.
+\end{ex}
+
+\begin{ex}
+  يكون~$\Sat{\OLId{latin-looped}{M}}{\lexists[\OLId{latin-looped}{Y}][(\lexists[\OLId{latin-ordinary}{y}][\Atom{Y}{y}] \land
+  \lforall[\OLId{latin-ordinary}{z}][(\Atom{X}{z} \liff \lnot \Atom{Y}{z})])]}[\OLId{latin-ordinary}{s}]$ إذا
+  وجد~$\OLId{latin-looped}{N} \subseteq \Domain{\OLId{latin-looped}{M}}$ يحقق
+  $\Sat{\OLId{latin-looped}{M}}{(\lexists[\OLId{latin-ordinary}{y}][\Atom{Y}{y}] \land \lforall[\OLId{latin-ordinary}{z}][(\Atom{X}{z}
+  \liff \lnot \Atom{Y}{z})])}[\Subst{\OLId{latin-ordinary}{s}}{\OLId{latin-looped}{N}}{\OLId{latin-looped}{Y}}]$.
+  ويتحقق ذلك متى اجتمع شرطان: أن يكون
+  $\OLId{latin-looped}{N} \neq \emptyset$، ليحصل
+  $\Sat{\OLId{latin-looped}{M}}{\lexists[\OLId{latin-ordinary}{y}][\Atom{Y}{y}]}[\Subst{\OLId{latin-ordinary}{s}}{\OLId{latin-looped}{N}}{\OLId{latin-looped}{Y}}]$،
+  وأن يكون~$\OLId{latin-looped}{N} = \Domain{\OLId{latin-looped}{M}} \setminus \OLId{latin-ordinary}{s}(\OLId{latin-looped}{X})$ كما سبق.
+  فحاصل القول أن
+  $\Sat{\OLId{latin-looped}{M}}{\lexists[\OLId{latin-looped}{Y}][(\lexists[\OLId{latin-ordinary}{y}][\Atom{Y}{y}] \land
+  \lforall[\OLId{latin-ordinary}{z}][(\Atom{X}{z} \liff \lnot \Atom{Y}{z})])]}[\OLId{latin-ordinary}{s}]$ إذا
+  وفقط إذا كانت~$\Domain{\OLId{latin-looped}{M}} \setminus \OLId{latin-ordinary}{s}(\OLId{latin-looped}{X})$ غير خالية، أي
+  $\OLId{latin-ordinary}{s}(\OLId{latin-looped}{X}) \neq \Domain{\OLId{latin-looped}{M}}$. ومن أمثلة إرضاء !!{formula} أن يكون
+  $\Domain{\OLId{latin-looped}{M}} = \{\OLMathNumeral{1}, \OLMathNumeral{2}, \OLMathNumeral{3}\}$ و$\OLId{latin-ordinary}{s}(\OLId{latin-looped}{X}) = \{\OLMathNumeral{1}, \OLMathNumeral{2}\}$؛ أما إذا كان
+  $\OLId{latin-ordinary}{s}(\OLId{latin-looped}{X}) = \{\OLMathNumeral{1}, \OLMathNumeral{2}, \OLMathNumeral{3}\} = \Domain{\OLId{latin-looped}{M}}$ فلا تُرضى.
+
+  ولما امتنع إرضاء !!{formula} عند~$\OLId{latin-ordinary}{s}(\OLId{latin-looped}{X}) = \Domain{\OLId{latin-looped}{M}}$، كانت
+  !!{sentence}
+  \[
+  \lforall[\OLId{latin-looped}{X}][\lexists[\OLId{latin-looped}{Y}][(\lexists[\OLId{latin-ordinary}{y}][\Atom{Y}{y}] \land
+      \lforall[\OLId{latin-ordinary}{z}][(\Atom{X}{z} \liff \lnot \Atom{Y}{z})])]]
+  \]
+  غير مرضاة في كل حال. فمهما أخذنا !!{structure}~$\Struct{M}$،
+  أتاح التعيين~$\OLId{latin-ordinary}{s}(\OLId{latin-looped}{X}) = \Domain{\OLId{latin-looped}{M}}$ إظهار كذب هذه !!{sentence}.
+  وأما الجملة
+  \[
+  \lexists[\OLId{latin-looped}{X}][\lexists[\OLId{latin-looped}{Y}][(\lexists[\OLId{latin-ordinary}{y}][\Atom{Y}{y}] \land
+      \lforall[\OLId{latin-ordinary}{z}][(\Atom{X}{z} \liff \lnot \Atom{Y}{z})])]]
+  \]
+  فإنها تُرضى مع أي تعيين~$\OLId{latin-ordinary}{s}$. وذلك أنه يوجد دائمًا
+  $\OLId{latin-looped}{N} \subseteq \Domain{\OLId{latin-looped}{M}}$ مع~$\OLId{latin-looped}{N} \neq \Domain{\OLId{latin-looped}{M}}$؛ ومن ذلك
+  $\OLId{latin-looped}{N} = \emptyset$.
+\end{ex}
+
+\begin{ex}
+  معنى !!{sentence} الرتبة الثانية
+  $\lforall[\OLId{latin-looped}{X}][\lforall[\OLId{latin-ordinary}{y}][\OLId{latin-looped}{X}(\OLId{latin-ordinary}{y})]]$ أن كل علاقة ذات~$\OLMathNumeral{1}$ موضع،
+  أي كل خاصية، تصدق على كل فرد. وهذا ممتنع؛ ففي كل
+  $\Struct{M}$ نستطيع أخذ تعيين متغيرات~$\OLId{latin-ordinary}{s}$ يحقق
+  $\OLId{latin-ordinary}{s}(\OLId{latin-looped}{X}) = \emptyset$ و$\OLId{latin-ordinary}{s}(\OLId{latin-ordinary}{y}) = \OLId{latin-ordinary}{a} \in \Domain{\OLId{latin-looped}{M}}$، وحينئذ
+  $\Sat/{\OLId{latin-looped}{M}}{\OLId{latin-looped}{X}(\OLId{latin-ordinary}{y})}[\OLId{latin-ordinary}{s}]$. ومن ثم تكون
+  $!A \lif \lforall[\OLId{latin-looped}{X}][\lforall[\OLId{latin-ordinary}{y}][\OLId{latin-looped}{X}(\OLId{latin-ordinary}{y})]]$ مكافئة
+  لـ$\lnot !A$ في منطق الرتبة الثانية؛ أي يكون
+  $\Sat{\OLId{latin-looped}{M}}{!A \lif \lforall[\OLId{latin-looped}{X}][\lforall[\OLId{latin-ordinary}{y}][\OLId{latin-looped}{X}(\OLId{latin-ordinary}{y})]]}$ إذا وفقط إذا
+  $\Sat{\OLId{latin-looped}{M}}{\lnot !A}$. فقد أمكن إذن تعريف~$\lnot$
+  في هذا المنطق بوساطة~$\lforall$ و$\lif$.
+\end{ex}
+
+\begin{prob}
+  بيّن أن بقية الروابط يمكن تعريفها أيضًا في منطق الرتبة الثانية
+  بوساطة~$\lforall$ و$\lif$:
+  \begin{enumerate}
+    \item أثبت تكافؤ~$!A \land !B$ في هذا المنطق مع
+    $\lforall[\OLId{latin-looped}{X}][((!A \lif (!B \lif \lforall[\OLId{latin-ordinary}{x}][\OLId{latin-looped}{X}(\OLId{latin-ordinary}{x})])) \lif
+    \lforall[\OLId{latin-ordinary}{x}][\OLId{latin-looped}{X}(\OLId{latin-ordinary}{x})])]$.
+    \item اطلب صيغة من الرتبة الثانية مقتصرة على~$\lforall$
+    و$\lif$ تكافئ~$!A \lor !B$.
+  \end{enumerate}
+\end{prob}
+
+\end{document}

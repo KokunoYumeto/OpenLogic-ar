@@ -1,0 +1,122 @@
+% Part: propositional-logic
+% Chapter: propositional-logic 
+% Section: completeness
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pl}{prp}{com}
+
+\olsection{في اكتمال منطق القضايا}
+
+\begin{defn}
+\ollabel{def:MaxCon}
+نسمي المجموعة~$\OLId{greek-variable}{Gamma}$ من~!!{formula}s \emph{متسقة على نحو أعظمي} إذا
+كانت متسقة، ولم تكن محتواة احتواءً حقيقيًا في مجموعة متسقة؛ أي إذا كانت
+$\OLId{greek-variable}{Delta}$ متسقة وتحقق~$\OLId{greek-variable}{Gamma}\subseteq\OLId{greek-variable}{Delta}$، لزم~$\OLId{greek-variable}{Gamma}=\OLId{greek-variable}{Delta}$.
+\end{defn}
+
+\begin{lem}[لمّة الصدق]
+  \ollabel{lem:truth}
+إذا كانت~$\OLId{greek-variable}{Gamma}$ متسقة على نحو أعظمي، ثبت ما يأتي:
+\begin{enumerate}
+\item \ollabel{lem:truth-1} $!A\in\OLId{greek-variable}{Gamma}$ إذا وفقط إذا كان
+  $\lnot !A\notin\OLId{greek-variable}{Gamma}$؛
+\item \ollabel{lem:truth-2} $\OLId{greek-variable}{Gamma}\Proves !A$ إذا وفقط إذا كان
+  $!A\in\OLId{greek-variable}{Gamma}$؛
+\item \ollabel{lem:truth-3} $!A\lif !B\in\OLId{greek-variable}{Gamma}$ إذا وفقط إذا كان
+  إما~$!A\notin\OLId{greek-variable}{Gamma}$ أو~$!B\in\OLId{greek-variable}{Gamma}$.
+\end{enumerate}
+\end{lem}
+
+\begin{proof}
+\begin{enumerate}
+\item إذا كان~$!A\in\OLId{greek-variable}{Gamma}$، أوجب الاتساق
+  $\lnot !A\notin\OLId{greek-variable}{Gamma}$. ولإثبات العكس، افترض~$\lnot !A\notin\OLId{greek-variable}{Gamma}$
+  و$!A\notin\OLId{greek-variable}{Gamma}$. فلا تنتمي واحدة منهما إلى~$\OLId{greek-variable}{Gamma}$، وحينئذ يقضي
+  \olref[axd]{prop:phi} بأن إحدى~$\OLId{greek-variable}{Gamma}\cup\{!A\}$
+  و~$\OLId{greek-variable}{Gamma}\cup\{\lnot !A\}$ متسقة، وهي امتداد حقيقي لـ$\OLId{greek-variable}{Gamma}$؛ وذلك
+  يناقض أعظميتها. فلابد من~$!A\in\OLId{greek-variable}{Gamma}$.
+\item أما إذا كان~$!A\in\OLId{greek-variable}{Gamma}$، فـ$\OLId{greek-variable}{Gamma}\Proves !A$ ظاهر. وللعكس،
+  افترض~$\OLId{greek-variable}{Gamma}\Proves !A$. فلو كان~$!A\notin\OLId{greek-variable}{Gamma}$، لكان
+  $\lnot !A\in\OLId{greek-variable}{Gamma}$ بحسب~\olref{lem:truth-1}. فيجتمع
+  $\OLId{greek-variable}{Gamma}\Proves !A$ و$\OLId{greek-variable}{Gamma}\Proves\lnot !A$، وهو تناقض.
+\item تمرين.
+\end{enumerate}
+\end{proof}
+
+والاتجاه من اليسار إلى اليمين في
+\olref{lem:truth}\olref{lem:truth-2} معناه أن~$\OLId{greek-variable}{Gamma}$ \emph{مغلقة
+استنباطيًا}: فمتى كان~$\OLId{greek-variable}{Gamma}\Proves !A$، كان~$!A\in\OLId{greek-variable}{Gamma}$، أيًا كان~$!A$.
+
+\begin{prob}
+  أتمم برهان~\olref{lem:truth}.
+\end{prob}
+
+\begin{thm}[الاكتمال]
+\ollabel{thm:completeness}
+كل~$\OLId{greek-variable}{Gamma}$ متسقة قابلة للإرضاء.
+\end{thm}
+
+\begin{proof}
+لتكن~$!A_\OLMathNumeral{0},!A_\OLMathNumeral{1},\dots$ قائمة تستوعب جميع~!!{formula}s اللغة. وننشئ
+تعاوديًا متتالية متزايدة من مجموعات~!!{formula}s
+$\OLId{greek-variable}{Gamma}_\OLMathNumeral{0},\OLId{greek-variable}{Gamma}_\OLMathNumeral{1},\dots$ على الوجه الآتي:
+\begin{align*}
+\OLId{greek-variable}{Gamma}_\OLMathNumeral{0} & = \OLId{greek-variable}{Gamma}\\
+\OLId{greek-variable}{Gamma}_{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}} &  =
+\begin{cases}
+  \OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n} \cup \{!A_\OLId{latin-ordinary}{n}\} & \text{إذا كانت $\Gamma_n\cup\{!A_n\}$
+    متسقة؛}\\
+  \OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n} \cup \{\lnot !A_\OLId{latin-ordinary}{n}\} & \text{فيما عدا ذلك.}
+\end{cases}
+\end{align*}
+ثم نضع:
+\[
+\OLId{greek-variable}{Gamma}^*=\bigcup_{\OLMathNumeral{0}\le \OLId{latin-ordinary}{n}}\OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n}.
+\]
+ويتم البرهان إذا أثبتنا الأمور الآتية على ترتيبها:
+\begin{enumerate}
+\item أن المجموعة~$\OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n}$ متسقة لكل~$\OLId{latin-ordinary}{n}$ (بالاستقراء على~$\OLId{latin-ordinary}{n}$، مع استعمال
+  \olref[axd]{prop:phi})؛
+\item وأن~$\OLId{greek-variable}{Gamma}^*$ متسقة؛
+\item وأن~$\OLId{greek-variable}{Gamma}^*$ أعظمية.
+\end{enumerate}
+وبعد ذلك نعرّف تقييمًا~$\OLId{latin-ordinary}{v}$ بحيث~$\OLId{latin-ordinary}{v}(\OLId{latin-ordinary}{p}_\OLId{latin-ordinary}{i})=\True$ إذا وفقط إذا كان
+$\OLId{latin-ordinary}{p}_\OLId{latin-ordinary}{i}\in\OLId{greek-variable}{Gamma}^*$. ثم يثبت الاستقراء على~$!A$ أن الانتماء إلى
+$\OLId{greek-variable}{Gamma}^*$ يوافق الصدق بحسب~$\OLId{latin-ordinary}{v}$ في~!!{sentence}s المركبة أيضًا:
+$\overline{\OLId{latin-ordinary}{v}}(!A)=\True$ إذا وفقط إذا كان~$!A\in\OLId{greek-variable}{Gamma}^*$. ومن ثم يحقق
+$\OLId{latin-ordinary}{v}$ المجموعة~$\OLId{greek-variable}{Gamma}^*$؛ وبما أن~$\OLId{greek-variable}{Gamma}\subseteq\OLId{greek-variable}{Gamma}^*$، كانت
+$\OLId{greek-variable}{Gamma}$ قابلة للإرضاء، وهو المطلوب.
+\end{proof}
+
+\begin{cor}
+متى كان~$\OLId{greek-variable}{Gamma}\Entails !A$، كان~$\OLId{greek-variable}{Gamma}\Proves !A$.
+\end{cor}
+
+\begin{proof}
+إذا كان~$\OLId{greek-variable}{Gamma}\Proves/ !A$، كانت~$\OLId{greek-variable}{Gamma}\cup\{\lnot !A\}$ متسقة
+بمقتضى~\olref[axd]{prop:prov-incons}. فتكون
+$\OLId{greek-variable}{Gamma}\cup\{\lnot !A\}$ قابلة للإرضاء بمبرهنة الاكتمال، ويلزم من ذلك
+$\OLId{greek-variable}{Gamma}\Entails/ !A$.
+\end{proof}
+
+\begin{prop}[مبرهنة التراص]
+\ollabel{prop:compactness}
+تكون~$\OLId{greek-variable}{Gamma}$ قابلة للإرضاء إذا وفقط إذا كانت كل مجموعة جزئية
+\emph{منتهية}~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{0}$ منها كذلك.
+\end{prop}
+
+\begin{proof}
+إن~$\OLId{greek-variable}{Gamma}$ غير قابلة للإرضاء إذا وفقط إذا كانت غير متسقة. وهذا مكافئ
+لوجود مجموعة جزئية منتهية~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{0}$ من~$\OLId{greek-variable}{Gamma}$ غير متسقة، وهو بدوره
+مكافئ لوجود مجموعة جزئية منتهية~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{0}$ من~$\OLId{greek-variable}{Gamma}$ غير قابلة للإرضاء.
+\end{proof}
+
+\begin{cor}
+$\OLId{greek-variable}{Gamma}\Entails !A$ إذا وفقط إذا وُجدت مجموعة منتهية~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{0}$، هي جزء
+من~$\OLId{greek-variable}{Gamma}$، وتحقق~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{0}\Entails !A$.
+\end{cor}
+
+\end{document}

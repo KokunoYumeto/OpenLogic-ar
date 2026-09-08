@@ -1,0 +1,49 @@
+% Part: first-order-logic
+% Chapter: natural-deduction
+% Section: soundness-identity
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{ntd}{sid}
+
+\olsection{السلامة مع \usetoken{S}{identity}}
+
+\begin{prop}
+الاستنتاج الطبيعي المزود بقواعد~$\eq$ سليم.
+\end{prop}
+
+\begin{proof}
+أما الإدخال، فكل !!{formula} صورتها~$\eq[t][t]$ صالحة؛ إذ في كل
+!!{structure}~$\Struct M$ يتحقق~$\Sat{M}{\eq[t][t]}$.
+ونحن نفرض الحد~$t$ مغلقًا، خاليًا من المتغيرات؛ فلا يتوقف الحكم هنا
+على إسناد المتغيرات.
+
+وأما الحذف، فنفرض أن خاتمة !!a{derivation} هي~\Elim{\eq}،
+فيكون ال!!{derivation} على هذه الصورة:
+\begin{prooftree}
+  \AxiomC{$\Gamma_1$}
+  \RightLabel{$\delta_1$}
+  \DeduceC{$\eq[t_1][t_2]$}
+  \AxiomC{$\Gamma_2$}
+  \RightLabel{$\delta_2$}
+  \DeduceC{$!A(t_1)$}
+  \RightLabel{\Elim{\eq}}
+  \BinaryInfC{$!A(t_2)$}
+\end{prooftree}
+قد أمكن !!{derive} المقدمتين~$\eq[t_1][t_2]$ و$!A(t_1)$ من
+الافتراضات ال!!{undischarged}~$\Gamma_1$ و$\Gamma_2$، كلٍّ على ترتيبه.
+فيبقى أن نثبت لزوم~$!A(t_2)$ عن~$\Gamma_1 \cup \Gamma_2$.
+نأخذ !!a{structure}~$\Struct{M}$ تحقق~$\Sat{M}{\Gamma_1 \cup \Gamma_2}$؛
+فبفرض الاستقراء~$\Sat{M}{!A(t_1)}$ و
+$\Sat{M}{\eq[t_1][t_2]}$، ومن ثم~$\Value{t_1}{M} = \Value{t_2}{M}$.
+نأخذ~$s$ إسنادًا كيفما اتفق، ونضع
+$m = \Value{t_1}{M} = \Value{t_2}{M}$. فتفيد
+\olref[fol][syn][ext]{prop:ext-formulas} أن~$\Sat{M}{!A(t_1)}[s]$
+يكافئ~$\Sat{M}{!A(x)}[\Subst{s}{m}{x}]$، وهذا بدوره يكافئ
+$\Sat{M}{!A(t_2)}[s]$. وحيث ثبت~$\Sat{M}{!A(t_1)}$،
+ثبت~$\Sat{M}{!A(t_2)}$ كما أردنا.
+\end{proof}
+
+\end{document}

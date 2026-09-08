@@ -1,0 +1,58 @@
+% Part: first-order-logic
+% Chapter: sequent-calculus
+% Section: provability-quantifiers
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{seq}{qpr}
+\olsection{\usetoken{S}{derivability} والمكممات}
+
+\begin{explain}
+  تتطلب مبرهنة الاكتمال أيضًا أن تفضي قواعد حساب التتابعيات إلى
+  الوقائع المتعلقة بـ~$\Proves$ والمثبتة في هذا القسم.
+\end{explain}
+
+\begin{thm}
+\ollabel{thm:strong-generalization} إذا كان $c$ رمزًا ثابتًا لا يرد
+في $\Gamma$ ولا في $!A(x)$، وكان $\Gamma \Proves !A(c)$، فإن
+$\Gamma \Proves \lforall[x][!A(x)]$.
+\end{thm}
+
+\begin{proof}
+ليكن $\pi_0$ $\Log{LK}$-!!{derivation} للتتابعية
+$\Gamma_0 \Sequent !A(c)$، حيث $\Gamma_0 \subseteq \Gamma$ منتهية.
+وبإضافة استدلال $\RightR{\lforall}$ نحصل على !!a{derivation}
+للتتابعية $\Gamma_0 \Sequent \lforall[x][!A(x)]$، لأن $c$ لا يرد في
+$\Gamma$ ولا في $!A(x)$، ومن ثم يتحقق شرط المتغير المميَّز.
+\end{proof}
+
+\begin{prop}
+\ollabel{prop:provability-quantifiers}
+\begin{tagenumerate}{prvEx,prvAll}
+\tagitem{prvEx}{$!A(t) \Proves \lexists[x][!A(x)]$.}{}
+\tagitem{prvAll}{$\lforall[x][!A(x)] \Proves !A(t)$.}{}
+\end{tagenumerate}
+\end{prop}
+
+\begin{proof}
+\begin{tagenumerate}{prvEx,prvAll}
+\tagitem{prvEx}{التتابعية $!A(t) \Sequent \lexists[x][!A(x)]$
+  !!{derivable}:
+  \begin{prooftree}
+    \Axiom$!A(t) \fCenter !A(t)$
+    \RightLabel{\RightR{\lexists}}
+    \UnaryInf$!A(t) \fCenter \lexists[x][!A(x)]$
+    \end{prooftree}}{}
+\tagitem{prvAll}{التتابعية $\lforall[x][!A(x)] \Sequent !A(t)$
+  !!{derivable}:
+  \begin{prooftree}
+    \Axiom$!A(t) \fCenter !A(t)$
+    \RightLabel{\LeftR{\lforall}}
+    \UnaryInf$\lforall[x][!A(x)] \fCenter !A(t)$
+    \end{prooftree}}{}
+\end{tagenumerate}
+\end{proof}
+
+\end{document}

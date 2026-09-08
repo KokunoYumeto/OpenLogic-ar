@@ -1,0 +1,50 @@
+% Part: many-valued-logic
+% Chapter: syntax-and-semantics
+% Section: valuations-sat
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mvl}{syn}{val}
+
+\olsection{\usetoken{P}{valuation} والإشباع}
+
+\begin{defn}[!!^{valuation}s]
+إذا كانت~$\OLId{latin-looped}{V}$ مجموعة قيم صدق، فـ\emph{!!{valuation}} اللغة
+$\Lang{L}$ في~$\OLId{latin-looped}{V}$ هو دالة~$\pAssign{\OLId{latin-ordinary}{v}}$ تسند~!!a{element} من~$\OLId{latin-looped}{V}$
+إلى كل واحد من~!!{propositional variable}s اللغة؛ أي
+$\pAssign{\OLId{latin-ordinary}{v}} \colon \PVar \to \OLId{latin-looped}{V}$.
+\end{defn}
+
+\begin{defn}\ollabel{defn:pValue}
+  إذا كان~!!a{valuation}~$\pAssign{\OLId{latin-ordinary}{v}}$ في مجموعة قيم الصدق~$\OLId{latin-looped}{V}$
+  لمنطق متعدد القيم~$\Log L$، عرفت دالة التقييم
+  $\pValue{\OLId{latin-ordinary}{v}} \colon \Frm[\OLId{latin-looped}{L}] \to \OLId{latin-looped}{V}$ بالاستقراء الآتي:
+  \begin{enumerate}
+    \item $\pValue{\OLId{latin-ordinary}{v}}(\Obj p_\OLId{latin-ordinary}{n}) = \pAssign{\OLId{latin-ordinary}{v}}(\Obj p_\OLId{latin-ordinary}{n})$؛
+    \item إذا كان~$\star$ رابطًا ذا~$\OLMathNumeral{0}$ من المواضع، كان
+    $\pValue{\OLId{latin-ordinary}{v}}(\star) = \tf{\star}[\Log L]$؛
+    \item إذا كان~$\star$ رابطًا ذا~$\OLId{latin-ordinary}{n}$ من المواضع، و$\OLId{latin-ordinary}{n}>\OLMathNumeral{0}$، كان
+    \[
+      \pValue{\OLId{latin-ordinary}{v}}(\star(!A_\OLMathNumeral{1}, \dots, !A_\OLId{latin-ordinary}{n})) = \tf{\star}[\Log L]
+      (\pValue{\OLId{latin-ordinary}{v}}(!A_\OLMathNumeral{1}), \dots, \pValue{\OLId{latin-ordinary}{v}}(!A_\OLId{latin-ordinary}{n})).
+    \]
+  \end{enumerate}
+\end{defn}
+
+\begin{defn}[الإشباع]
+\ollabel{defn:satisfaction} تكون~!!{formula}~$!A$ \emph{مشبعة}
+  في~!!a{valuation}~$\pAssign{\OLId{latin-ordinary}{v}}$، ونكتب
+  $\pSat{\OLId{latin-ordinary}{v}}{!A}[\Log L]$، إذا وفقط إذا كان
+  $\pValue{\OLId{latin-ordinary}{v}}(!A)[\Log L] \in \OLId{latin-looped}{V}^+$؛ حيث~$\OLId{latin-looped}{V}^+$ مجموعة قيم الصدق
+  المميزة للمنطق~$\Log L$.
+  
+  ونرمز بـ~$\pSat/{\OLId{latin-ordinary}{v}}{!A}[\Log L]$ إلى قولنا «ليس
+  $\pSat{\OLId{latin-ordinary}{v}}{!A}[\Log L]$.» وإذا كانت~$\OLId{greek-variable}{Gamma}$ مجموعة
+  !!{formula}s، كان~$\pSat{\OLId{latin-ordinary}{v}}{\OLId{greek-variable}{Gamma}}[\Log L]$ إذا وفقط إذا تحقق
+  $\pSat{\OLId{latin-ordinary}{v}}{!A}[\Log L]$ لكل~$!A \in \OLId{greek-variable}{Gamma}$.
+\end{defn}
+
+\end{document}
+

@@ -1,0 +1,40 @@
+% Part: lambda-calculus
+% Chapter: introduction
+% Section: church-rosser
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{int}{cr}
+\olsection{خاصية تشيرش--روسر}
+
+\begin{thm}
+\ollabel{thm:church-rosser}
+إذا كانت~$\OLId{latin-looped}{M}$ و$\OLId{latin-looped}{N}_\OLMathNumeral{1}$ و$\OLId{latin-looped}{N}_\OLMathNumeral{2}$ حدودًا وكان~$\OLId{latin-looped}{M} \red \OLId{latin-looped}{N}_\OLMathNumeral{1}$ و$\OLId{latin-looped}{M} \red \OLId{latin-looped}{N}_\OLMathNumeral{2}$،
+وجد حد~$\OLId{latin-looped}{P}$ يحقق~$\OLId{latin-looped}{N}_\OLMathNumeral{1} \red \OLId{latin-looped}{P}$ و$\OLId{latin-looped}{N}_\OLMathNumeral{2} \red \OLId{latin-looped}{P}$.
+\end{thm}
+
+\begin{cor}
+متى أمكن اختزال~$\OLId{latin-looped}{M}$ إلى صورة سوية، لم تكن له إلا صورة سوية واحدة.
+\end{cor}
+
+\begin{proof}
+من~$\OLId{latin-looped}{M} \red \OLId{latin-looped}{N}_\OLMathNumeral{1}$ و$\OLId{latin-looped}{M} \red \OLId{latin-looped}{N}_\OLMathNumeral{2}$ ينتج، بالمبرهنة السابقة،
+وجود حد~$\OLId{latin-looped}{P}$ ينتهي إليه كل من~$\OLId{latin-looped}{N}_\OLMathNumeral{1}$ و$\OLId{latin-looped}{N}_\OLMathNumeral{2}$ بالاختزال.
+فإذا كانا يختزلان إلى~$\OLId{latin-looped}{P}$، وكان~$\OLId{latin-looped}{N}_\OLMathNumeral{1}$ و$\OLId{latin-looped}{N}_\OLMathNumeral{2}$ سويين،
+لم يتأت ذلك إلا مع~$\OLId{latin-looped}{N}_\OLMathNumeral{1} \ident \OLId{latin-looped}{P} \ident \OLId{latin-looped}{N}_\OLMathNumeral{2}$.
+\end{proof}
+
+ونقول أخيرًا إن الحدين~$\OLId{latin-looped}{M}$ و$\OLId{latin-looped}{N}$ \emph{متكافئان بحسب~$\beta$}،
+أو \emph{متكافئان} بإطلاق، متى انتهيا بالاختزال إلى حد واحد:
+أي متى وجد~$\OLId{latin-looped}{P}$ يحقق~$\OLId{latin-looped}{M} \red \OLId{latin-looped}{P}$ و$\OLId{latin-looped}{N} \red \OLId{latin-looped}{P}$.
+ورمز ذلك~$\OLId{latin-looped}{M} \equal[\beta] \OLId{latin-looped}{N}$.
+وبالاستعانة بـ\olref{thm:church-rosser} يتحقق القارئ من أن
+$\equal[\beta]$ علاقة تكافؤ، وأنها تحقق أيضًا الشرط:
+لكل~$\OLId{latin-looped}{M}$ و$\OLId{latin-looped}{N}$، إن كان~$\OLId{latin-looped}{M} \red \OLId{latin-looped}{N}$ أو~$\OLId{latin-looped}{N} \red \OLId{latin-looped}{M}$
+كان~$\OLId{latin-looped}{M} \equal[\beta] \OLId{latin-looped}{N}$.
+بل يمكن إثبات أن~$\equal[\beta]$ \emph{أصغر} علاقة تكافؤ
+تحقق هذا الشرط.
+
+\end{document}

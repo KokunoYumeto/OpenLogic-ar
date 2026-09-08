@@ -1,0 +1,156 @@
+% Part: incompleteness
+% Chapter: introduction
+% Section: decidability
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{int}{dec}
+
+\olsection{عدم قابلية القرار وعدم الاكتمال}
+
+تقوم حجة غودل لمبرهنتي عدم الاكتمال على حوسبة
+التركيب. غير أن مجرد فرض أن النظرية !!{represents}
+العلاقات !!{decidable} كلها يكفي لنتائج مهمة
+من غير تلك الحوسبة. وطريقها حجة قطرية تشبه
+حجة امتناع تقرير مسألة التوقف.
+
+\begin{thm}
+إذا كانت $\Gamma$ نظرية متسقة !!{represents}
+كل علاقة !!{decidable}، امتنع أن تكون $\Gamma$
+!!{decidable}.
+\end{thm}
+
+\begin{proof}
+لنفرض $\Gamma$ !!{decidable}؛ ونثبت أن
+تمثيلها، أي كونها !!{represents} كل علاقة
+!!{decidable}، يلزم منه عدم اتساقها.
+
+الخواص !!^{decidable}، وهي العلاقات الأحادية،
+تمثل ب!!{formula}s ذات متغير حر واحد.
+ولنعدد هذه ال!!{formula}s تعدادًا قابلًا
+للحساب: $!A_0(x)$، و$!A_1(x)$، و\dots.
+ثم نضع المجموعة $D\subseteq\Nat$ الآتية:
+\[
+D = \Setabs{n}{\Gamma \Proves \lnot !A_n(\num{n})}.
+\]
+فـ$D$ !!{decidable}؛ إذ نختبر $n\in D$
+بحساب $!A_n(x)$، ثم تكوين $\lnot !A_n(\num{n})$.
+وذلك عمل آلي: نحل الحد $\num{n}$ محل كل
+ورود حر لـ$x$ في $!A_n(x)$، ونصدّر بـ$\lnot$
+الجملة $!A_n(\num{n})$. ومن فرض أن $\Gamma$
+!!{decidable} يمكن اختبار
+$\lnot !A_n(\num{n})\in\Gamma$. فإن صح،
+كان $n\in D$؛ وإن لم يصح كان $n\notin D$.
+فقد تبين أن $D$ !!{decidable}.
+
+ولأن $\Gamma$ !!{represents} كل خاصية
+!!{decidable}، فإنها !!{represents}~$D$.
+وال!!{formula}s التي !!{represents}~$D$
+في $\Gamma$ لا تخرج عن $!A_0(x)$ و$!A_1(x)$
+و\dots. فثمة $d$ بحيث !!{represents}
+$!A_d(x)$ المجموعة $D$ في~$\Gamma$.
+ولو كان $d\notin D$، لأعطى كون $!A_d(x)$
+!!{represents}~$D$ أن
+$\Gamma\Proves\lnot !A_d(\num{d})$.
+فيستوفي $d$ شرط تعريف~$D$، ويكون $d\in D$،
+خلاف $d\notin D$. فبالخلف يثبت $d\in D$.
+
+ومن $d\in D$ وتعريف~$D$ نحصل على
+$\Gamma\Proves\lnot !A_d(\num{d})$.
+لكن $!A_d(x)$ !!{represents}~$D$ في $\Gamma$،
+فيلزم $\Gamma\Proves !A_d(\num{d})$ أيضًا.
+فتكون $\Gamma$ غير متسقة.
+\end{proof}
+
+\begin{explain}
+إذن لا تجتمع لنظرية متسقة خاصيتا أنها
+!!{represents} جميع العلاقات !!{decidable}
+وأنها !!{decidable}. وسنثبت أن $\Th{Q}$
+!!{represents} تلك العلاقات !!{decidable} كلها.
+فتشاركها في التمثيل كل نظرية تتضمن $\Th{Q}$،
+ومنها $\Th{PA}$ و$\Th{TA}$؛ وهذه النظريات
+المذكورة ليست !!{decidable}. واتساق النظريات
+الثلاث المذكورة معلوم لصدقها في النموذج القياسي.
+
+ومن هذه النتيجة تؤخذ أيضًا صيغة ضعيفة للمبرهنة
+الأولى: كل نظرية !!{axiomatizable} و!!{complete}
+تكون !!{decidable}. فلا يمكن لنظرية متسقة
+!!{axiomatizable}، تكون !!{represents}
+الخواص !!{decidable} جميعًا، أن تكون
+!!{complete}.
+\end{explain}
+
+\begin{thm}
+كل نظرية $\Gamma$ !!{axiomatizable}
+و!!{complete} تكون !!{decidable}.
+\end{thm}
+
+\begin{proof}
+النظرية غير المتسقة !!{decidable}؛ لأنها
+تحتوي ال!!{sentence}s كلها، فيجاب عن
+«هل $!A\in\Gamma$؟» بنعم دائمًا. وهذا
+إجراء قرار لها.
+
+فلتكن $\Gamma$ متسقة، ولتكن !!{axiomatizable}
+و!!{complete}. ومن كون $\Gamma$
+!!{axiomatizable} يلزم أنها !!{computably enumerable}:
+نسرد ال!!{derivation}s الصحيحة من بديهيات~$\Gamma$
+بدالة قابلة للحساب، ثم نحسب من كل
+!!{derivation} صحيح ال!!{sentence} التي
+!!{derive}ها. فينتج من تركيب العملين
+تعداد قابل للحساب لمبرهنات~$\Gamma$.
+وال!!{sentence} المعنية تكون مبرهنة
+في~$\Gamma$ إذا وفقط إذا لم تكن $\lnot !A$
+مبرهنة، لاتساق $\Gamma$ وكونها !!{complete}.
+فلنقرر $!A\in\Gamma$ بتعداد مبرهنات $\Gamma$.
+إن ظهر $!A$، علمنا $\Gamma\Proves !A$؛
+وإن ظهر $\lnot !A$، علمنا
+$\Gamma\Proves/ !A$. ولا بد أن تقع
+إحدى الحالتين، لأن $\Gamma$ !!{complete}،
+فينتهي الإجراء إلى جواب.
+\end{proof}
+
+\begin{cor}
+\ollabel{cor:incompleteness}
+النظرية $\Gamma$ المتسقة !!{axiomatizable}، التي
+!!{represents} كل خاصية !!{decidable}، لا تكون !!{complete}.
+\end{cor}
+
+\begin{proof}
+لو كانت $\Gamma$ !!{complete} للزم أنها
+!!{decidable} بالمبرهنة الأخيرة، لأنها
+!!{axiomatizable} ومتسقة. إلا أن كونها
+!!{represents} كل خاصية !!{decidable}
+يمنع كونها !!{decidable} بالمبرهنة الأولى.
+\end{proof}
+
+\begin{prob}
+برهن أن $\Th{TA}=\Setabs{!A}{\Sat{N}{!A}}$ ليست
+!!{axiomatizable}. ولك أن تفترض أن $\Th{TA}$ تمثل جميع الخواص
+القابلة للقرار.
+\end{prob}
+
+فمتى ثبت أن $\Th{Q}$، مثلًا، !!{represents}
+كل خاصية !!{decidable}، حكمت النتيجة
+بعدم تمام $\Th{Q}$. لكن البرهان لا
+يعيّن !!{sentence} مستقلة، وإنما يثبت
+وجود !!a{sentence} كذلك. ولتعيين مثال
+نحتاج إلى حوسبة التركيب وطريقة غودل الأصلية.
+ويبقى علينا بالطبع أصل الفرض: أن
+$\Th{Q}$ !!{represents} جميع الخواص
+!!{decidable} بالفعل.
+
+ولا يفهم من ذلك أن كل نظرية \emph{مهمة}
+ناقصة أو ممتنعة القرار. فثمة نظريات
+تصف حقائق رياضية مهمة، ولا تستوفي
+شروط غودل. ومنها
+$\Th{Pres}=\Setabs{!A\in\Lang{L_{A^+}}}{\Sat{N}{!A}}$،
+أي نظرية ال!!{sentence}s الصادقة في
+النموذج القياسي من لغة الحساب بعد حذف~$\times$.
+فهي تامة وقابلة للقرار، وتسمى حساب بريسبرغر.
+وتثبت كل حقيقة عن الأعداد الطبيعية يمكن
+صوغها بـ$\Obj{0}$ و$\prime$ و~$+$ وحدها.
+
+\end{document}

@@ -1,0 +1,132 @@
+% Part: first-order-logic
+% Chapter: natural-deduction
+% Section: provability-consistency
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{ntd}{prv}}
+      {\olfileid{pl}{ntd}{prv}}
+      
+\olsection{\usetoken{S}{derivability} والاتساق}
+
+لعلاقة ال!!{derivability} خصائص نثبتها في هذا الموضع؛ لها شأن في
+نفسها، وفوق ذلك نحتاج إلى كل واحدة منها في برهان مبرهنة الاكتمال.
+
+\begin{prop}\ollabel{prop:provability-contr}
+  إذا كان~$\OLId{greek-variable}{Gamma} \Proves !A$ وكانت~$\OLId{greek-variable}{Gamma} \cup \{!A\}$ غير متسقة،
+  فإن~$\OLId{greek-variable}{Gamma}$ غير متسقة.
+\end{prop}
+
+\begin{proof}
+نأخذ ال!!{derivation} لـ~$!A$ من~$\OLId{greek-variable}{Gamma}$ ونسمّيه~$\delta_\OLMathNumeral{1}$،
+وال!!{derivation} لـ~$\lfalse$ من~$\OLId{greek-variable}{Gamma} \cup \{!A\}$ ونسمّيه~$\delta_\OLMathNumeral{2}$.
+وبالجمع بينهما على الوجه الآتي يمكن !!{derive}:
+\begin{prooftree}
+\AxiomC{$\OLId{greek-variable}{Gamma}, \Discharge{!A}{\OLMathNumeral{1}}$}
+\RightLabel{$\delta_\OLMathNumeral{2}$}
+\DeduceC{$\lfalse$}
+\DischargeRule{\Intro{\lnot}}{1}
+\UnaryInfC{$\lnot !A$}
+\AxiomC{$\OLId{greek-variable}{Gamma}$}
+\RightLabel{$\delta_\OLMathNumeral{1}$}
+\DeduceC{$!A$}
+\RightLabel{\Elim{\lnot}}
+\BinaryInfC{$\lfalse$}
+\end{prooftree}
+وقد صار في ال!!{derivation} المركّب الافتراض~$!A$ !!{discharged}؛
+فلم يبق إلا !!a{derivation} من~$\OLId{greek-variable}{Gamma}$.
+\end{proof}
+
+\begin{prop}
+\ollabel{prop:prov-incons}
+$\OLId{greek-variable}{Gamma} \Proves !A$ إذا وفقط إذا كانت~$\OLId{greek-variable}{Gamma} \cup \{\lnot !A\}$ غير
+متسقة.
+\end{prop}
+
+\begin{proof}
+أما إذا كان~$\OLId{greek-variable}{Gamma} \Proves !A$، فلدينا
+!!a{derivation}~$\delta_\OLMathNumeral{0}$ لـ~$!A$، افتراضاته ال!!{undischarged}
+من~$\OLId{greek-variable}{Gamma}$. نضم إليه افتراض النفي، فيحصل !!a{derivation} لـ~$\lfalse$
+من~$\OLId{greek-variable}{Gamma} \cup \{\lnot !A\}$ على هذه الصورة:
+\begin{prooftree}
+  \AxiomC{$\lnot !A$}
+  \AxiomC{$\OLId{greek-variable}{Gamma}$}
+  \RightLabel{$\delta_\OLMathNumeral{0}$}
+  \DeduceC{$!A$}
+  \RightLabel{\Elim{\lnot}}
+  \BinaryInfC{$\lfalse$}
+\end{prooftree}
+
+وأما إذا كانت~$\OLId{greek-variable}{Gamma} \cup \{\lnot !A\}$ غير متسقة، فليكن~$\delta_\OLMathNumeral{1}$
+ال!!{derivation} الذي ينتهي إلى~$\lfalse$، وافتراضاته ال!!{undischarged}
+في~$\OLId{greek-variable}{Gamma} \cup \{\lnot !A\}$. نرفع افتراض النفي، فيحصل
+!!a{derivation} لـ~$!A$ من~$\OLId{greek-variable}{Gamma}$ وحدها بقاعدة~$\FalseCl$:
+\begin{prooftree}
+  \AxiomC{$\OLId{greek-variable}{Gamma}, \Discharge{\lnot !A}{\OLMathNumeral{1}}$}
+  \RightLabel{$\delta_\OLMathNumeral{1}$}
+  \DeduceC{$\lfalse$}
+  \DischargeRule{\FalseCl}{1}
+  \UnaryInfC{$!A$}
+\end{prooftree}
+\end{proof}
+
+\begin{prob}
+أثبت أن~$\OLId{greek-variable}{Gamma} \Proves \lnot !A$ إذا وفقط إذا كانت
+$\OLId{greek-variable}{Gamma} \cup \{!A\}$ غير متسقة.
+\end{prob}
+
+\begin{prop}\ollabel{prop:explicit-inc}
+  إذا كان~$\OLId{greek-variable}{Gamma} \Proves !A$ وكان~$\lnot !A \in \OLId{greek-variable}{Gamma}$، فإن
+  $\OLId{greek-variable}{Gamma}$ غير متسقة.
+\end{prop}
+
+\begin{proof}
+  نفرض~$\OLId{greek-variable}{Gamma} \Proves !A$ و$\lnot !A \in \OLId{greek-variable}{Gamma}$، ونأخذ
+  !!a{derivation}~$\delta$ لـ~$!A$ من~$\OLId{greek-variable}{Gamma}$. وليس علينا بعد ذلك
+  إلا إجراء قاعدة~$\Elim{\lnot}$ مرة واحدة:
+  \begin{prooftree}
+    \AxiomC{$\lnot !A$}
+    \AxiomC{$\OLId{greek-variable}{Gamma}$}
+    \RightLabel{$\delta$}
+    \DeduceC{$!A$}
+    \RightLabel{\Elim{\lnot}}
+    \BinaryInfC{$\lfalse$}
+  \end{prooftree}
+  وحيث إن~$\lnot !A \in \OLId{greek-variable}{Gamma}$، لم يخرج شيء من الافتراضات
+  ال!!{undischarged} عن~$\OLId{greek-variable}{Gamma}$؛ فقد ثبت إذن
+  $\OLId{greek-variable}{Gamma} \Proves \lfalse$.
+\end{proof}
+
+\begin{prop}\ollabel{prop:provability-exhaustive}
+  إذا كانت كل من~$\OLId{greek-variable}{Gamma} \cup \{!A\}$ و$\OLId{greek-variable}{Gamma} \cup \{\lnot !A\}$
+  غير متسقة، فإن~$\OLId{greek-variable}{Gamma}$ غير متسقة.
+\end{prop}
+
+\begin{proof}
+نأخذ !!{derivation}s~$\delta_\OLMathNumeral{1}$ و$\delta_\OLMathNumeral{2}$؛ أولهما لـ~$\lfalse$
+من~$\OLId{greek-variable}{Gamma} \cup \{ !A \}$، وثانيهما لـ~$\lfalse$ من
+$\OLId{greek-variable}{Gamma} \cup \{ \lnot !A
+\}$. وبإدخال النفي في كل منهما ثم حذفه يمكن !!{derive}:
+\begin{prooftree}
+\AxiomC{$\OLId{greek-variable}{Gamma}, \Discharge{\lnot !A}{\OLMathNumeral{2}}$}
+\RightLabel{$\delta_\OLMathNumeral{2}$}
+\DeduceC{$\lfalse$}
+\DischargeRule{\Intro{\lnot}}{2}
+\UnaryInfC{$\lnot \lnot !A$}
+\AxiomC{$\OLId{greek-variable}{Gamma}, \Discharge{!A}{\OLMathNumeral{1}}$}
+\RightLabel{$\delta_\OLMathNumeral{1}$}
+\DeduceC{$\lfalse$}
+\DischargeRule{\Intro{\lnot}}{1}
+\UnaryInfC{$\lnot !A$}
+\RightLabel{\Elim{\lnot}}
+\BinaryInfC{$\lfalse$}
+\end{prooftree}
+والافتراضان~$!A$ و$\lnot !A$ كلاهما !!{discharged}؛ فالحاصل
+!!a{derivation} لـ~$\lfalse$ من~$\OLId{greek-variable}{Gamma}$ وحدها، وهذا هو عدم
+اتساق~$\OLId{greek-variable}{Gamma}$.
+\end{proof}
+
+\end{document}

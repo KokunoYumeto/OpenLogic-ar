@@ -1,0 +1,100 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{ordinals}{opps}
+\olsection{الأعداد الترتيبية الخلفية والحدية}
+
+يكثر استعمال الأعداد الترتيبية في الفصول الآتية؛ فلنمهد لها ببعض
+المفاهيم اليسيرة.
+
+\begin{defn}
+\emph{خلف} العدد الترتيبي~$\OLId{greek-variable}{alpha}$ هو~$\ordsucc{\OLId{greek-variable}{alpha}} =\OLId{greek-variable}{alpha} \cup \{\OLId{greek-variable}{alpha}\}$.
+ويسمى~$\OLId{greek-variable}{alpha}$ عددًا ترتيبيًا \emph{خلفيًا} إذا كان
+$\ordsucc{\beta} = \OLId{greek-variable}{alpha}$ لعدد ترتيبي~$\beta$. أما~$\OLId{greek-variable}{alpha}$ فيسمى
+عددًا ترتيبيًا \emph{حديًا} إذا وفقط إذا كان غير خال وغير خلفي.
+\end{defn}
+\noindent
+ووجه صحة هذا التعريف لـ\emph{الخلف} يظهر من القضية التالية.
+
+\begin{prop}
+لكل عدد ترتيبي~$\OLId{greek-variable}{alpha}$ تصح الأمور الآتية:
+\begin{enumerate}
+\item $\OLId{greek-variable}{alpha} \in \ordsucc{\OLId{greek-variable}{alpha}}$؛
+\item $\ordsucc{\OLId{greek-variable}{alpha}}$ عدد ترتيبي؛
+\item ليس من عدد ترتيبي~$\beta$ بحيث~$\OLId{greek-variable}{alpha} \in \beta \in \ordsucc{\OLId{greek-variable}{alpha}}$.
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+من التعريف مباشرة~$\OLId{greek-variable}{alpha} \in \OLId{greek-variable}{alpha} \cup \{\OLId{greek-variable}{alpha}\} = \ordsucc{\OLId{greek-variable}{alpha}}$.
+ثم إن~$\ordsucc{\OLId{greek-variable}{alpha}}$ مجموعة متعدية من الأعداد الترتيبية، فهي
+عدد ترتيبي بمقتضى~\olref[basic]{corordtransitiveord}. وأما
+$\OLId{greek-variable}{alpha} \in \beta \in \ordsucc{\OLId{greek-variable}{alpha}}$ فمحال، إذ يلزم منه
+$\beta \in \OLId{greek-variable}{alpha}$ أو~$\beta = \OLId{greek-variable}{alpha}$، وكلاهما يناقض
+\olref[basic]{ordordered}.
+\end{proof}
+\noindent
+ويتفرع عن ذلك وجه آخر للاستقراء المتناهي التجاوز.
+
+\begin{thm}[الاستقراء المتناهي التجاوز البسيط]\ollabel{simpletransrecursion}
+لتكن~$\phi(\OLId{latin-ordinary}{x})$ صيغة تتوافر فيها الشروط التالية:
+\begin{enumerate}
+\item $\phi(\emptyset)$؛
+\item لكل عدد ترتيبي~$\OLId{greek-variable}{alpha}$، يلزم من~$\phi(\OLId{greek-variable}{alpha})$ أن~$\phi(\ordsucc{\OLId{greek-variable}{alpha}})$؛
+\item إذا كان~$\OLId{greek-variable}{alpha}$ عددًا ترتيبيًا حديًا وكان
+$(\forall \beta \in \OLId{greek-variable}{alpha})\phi(\beta)$، لزم~$\phi(\OLId{greek-variable}{alpha})$.
+\end{enumerate}
+إذن~$\forall \OLId{greek-variable}{alpha} \phi(\OLId{greek-variable}{alpha})$.
+\end{thm}
+
+\begin{proof}
+نبرهن المقابل بالنقيض. فإن وجد عدد ترتيبي يحقق~$\lnot\phi$،
+فليكن~$\gamma$ أصغره. إما~$\gamma = \emptyset$، وفيه مخالفة الشرط~\OLClassicalDigits{1}؛
+وإما~$\gamma = \ordsucc{\OLId{greek-variable}{alpha}}$ لبعض~$\OLId{greek-variable}{alpha}$، فتقتضي أصغرية
+$\gamma$ أن~$\phi(\OLId{greek-variable}{alpha})$، ويلزم من الشرط~\OLClassicalDigits{2} أن~$\phi(\gamma)$؛
+وإما أن يكون~$\gamma$ حديًا، فتقتضي أصغريته
+$(\forall \beta \in \gamma)\phi(\beta)$، ويلزم من الشرط~\OLClassicalDigits{3} أن~$\phi(\gamma)$.
+ولا تخلو الحال من إحدى هذه الثلاث، وفي كل منها تناقض.
+\end{proof}
+\noindent
+ونضيف ترميزًا أخيرًا نحتاج إليه فيما يأتي.
+
+\begin{defn}\ollabel{defsupstrict}
+لمجموعة الأعداد الترتيبية~$\OLId{latin-looped}{X}$ نضع
+$\supstrict(\OLId{latin-looped}{X}) = \bigcup_{\OLId{greek-variable}{alpha} \in \OLId{latin-looped}{X}} \ordsucc{\OLId{greek-variable}{alpha}}$.
+\end{defn}
+\noindent
+والرمز «lsub» اختصار لـ«أصغر حد علوي صارم».
+\footnote{تكتب بعض الكتب «$\text{sup}(\OLId{latin-looped}{X})$» بهذا المعنى، وتكتب أخرى
+«$\text{sup}(\OLId{latin-looped}{X})$» لأصغر حد علوي \emph{غير صارم}، أي~$\bigcup \OLId{latin-looped}{X}$.
+ومتى كان لـ$\OLId{latin-looped}{X}$ عنصر أكبر~$\OLId{greek-variable}{alpha}$ اختلف المعنيان: فأصغر حد علوي
+\emph{صارم} هو~$\ordsucc{\OLId{greek-variable}{alpha}}$، وأصغر حد علوي
+\emph{غير صارم} هو~$\OLId{greek-variable}{alpha}$ نفسه.}
+وبيان ذلك في القضية التالية.
+
+\begin{prop}
+إذا كانت~$\OLId{latin-looped}{X}$ مجموعة أعداد ترتيبية، فإن~$\supstrict(\OLId{latin-looped}{X})$ أصغر عدد
+ترتيبي يتجاوز كل عدد ترتيبي في~$\OLId{latin-looped}{X}$.
+\end{prop}
+
+\begin{proof}
+نضع~$\OLId{latin-looped}{Y} = \Setabs{\ordsucc{\OLId{greek-variable}{alpha}}}{\OLId{greek-variable}{alpha} \in \OLId{latin-looped}{X}}$، فيكون
+$\supstrict(\OLId{latin-looped}{X}) = \bigcup \OLId{latin-looped}{Y}$. الأعداد الترتيبية متعدية، وكل عنصر
+من أحدها عدد ترتيبي؛ ومن ثم فإن~$\supstrict(\OLId{latin-looped}{X})$ مجموعة متعدية من
+الأعداد الترتيبية، فهي عدد ترتيبي بحسب~\olref[basic]{corordtransitiveord}.
+
+فإذا كان~$\OLId{greek-variable}{alpha} \in \OLId{latin-looped}{X}$، كان~$\ordsucc{\OLId{greek-variable}{alpha}} \in \OLId{latin-looped}{Y}$، ولزم
+$\ordsucc{\OLId{greek-variable}{alpha}} \subseteq \bigcup \OLId{latin-looped}{Y} = \supstrict(\OLId{latin-looped}{X})$، ثم
+$\OLId{greek-variable}{alpha} \in \supstrict(\OLId{latin-looped}{X})$. إذن~$\supstrict(\OLId{latin-looped}{X})$ أكبر تمامًا من
+كل عدد ترتيبي في~$\OLId{latin-looped}{X}$.
+
+ولنأخذ~$\gamma$ حدًا علويًا صارمًا كيفما اتفق لـ$\OLId{latin-looped}{X}$؛ فيصح
+$\OLId{greek-variable}{alpha} \in \gamma$ لكل~$\OLId{greek-variable}{alpha} \in \OLId{latin-looped}{X}$. وبما أن~$\gamma$ عدد
+ترتيبي، يكون~$\ordsucc{\OLId{greek-variable}{alpha}} \subseteq \gamma$ لكل~$\OLId{greek-variable}{alpha} \in \OLId{latin-looped}{X}$.
+ومن ثم~$\bigcup \OLId{latin-looped}{Y} = \supstrict(\OLId{latin-looped}{X}) \subseteq \gamma$، أي
+$\supstrict(\OLId{latin-looped}{X}) \leq \gamma$. فثبت أن~$\supstrict(\OLId{latin-looped}{X})$ هو \emph{أصغر}
+حد علوي صارم لـ$\OLId{latin-looped}{X}$.
+\end{proof}
+
+\end{document}

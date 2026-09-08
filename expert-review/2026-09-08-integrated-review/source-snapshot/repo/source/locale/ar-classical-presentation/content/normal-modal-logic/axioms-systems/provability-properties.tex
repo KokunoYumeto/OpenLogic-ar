@@ -1,0 +1,50 @@
+% Part: normal-modal-logic
+% Chapter: axioms-systems
+% Section: provability-properties
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{prf}{prp}
+
+\olsection{خصائص \usetoken{S}{derivability}}
+
+\begin{prop}\ollabel{prop:derivabilityfacts}
+  إذا كان~$\Sigma$ نسقًا جهويًا وكانت~$\OLId{greek-variable}{Gamma}$ مجموعة من ال!!{formula}s
+  الجهوية، فإن قابلية الاشتقاق تحقق الخصائص الآتية:
+  \begin{enumerate}
+  \item\ollabel{prop:derivabilityfacts-monotonicity} \emph{الرتابة}: إذا
+    كان~$\OLId{greek-variable}{Gamma} \Proves[\Sigma] !A$ و$\OLId{greek-variable}{Gamma} \subseteq \OLId{greek-variable}{Delta}$، فإن
+    $\OLId{greek-variable}{Delta} \Proves[\Sigma] !A$؛
+  \item\ollabel{prop:derivabilityfacts-reflexivity}
+    \emph{الانعكاسية}: إذا كان~$!A \in \OLId{greek-variable}{Gamma}$، فإن
+    $\OLId{greek-variable}{Gamma} \Proves[\Sigma] !A$؛
+  \item\ollabel{prop:derivabilityfacts-cut} \emph{القطع}: إذا كان
+    $\OLId{greek-variable}{Gamma} \Proves[\Sigma] !A$ و$\OLId{greek-variable}{Delta} \cup \{!A\}
+    \Proves[\Sigma] !B$، فإن~$\OLId{greek-variable}{Gamma} \cup \OLId{greek-variable}{Delta} \Proves[\Sigma] !B$؛
+  \item\ollabel{prop:derivabilityfacts-deduction} \emph{مبرهنة الاستنتاج}:
+    $\OLId{greek-variable}{Gamma} \cup \{!B\} \Proves[\Sigma] !A$ إذا وفقط إذا كان
+    $\OLId{greek-variable}{Gamma} \Proves[\Sigma] !B \lif !A$؛
+  \item \ollabel{prop:derivabilityfacts-ruleT}% \emph{Rule T}: If
+    إذا كان~$\OLId{greek-variable}{Gamma} \Proves[\Sigma] !A_\OLMathNumeral{1}$ و\dots{} و
+    $\OLId{greek-variable}{Gamma} \Proves[\Sigma] !A_\OLId{latin-ordinary}{n}$، وكانت
+    $!A_\OLMathNumeral{1} \lif (!A_\OLMathNumeral{2} \lif \cdots (!A_\OLId{latin-ordinary}{n} \lif !B)\cdots)$ مثال إحلال
+    لقضية صادقة صدقًا تحليليًا، فإن~$\OLId{greek-variable}{Gamma} \Proves[\Sigma] !B$.
+  \end{enumerate}
+\end{prop}
+
+وإثبات هذه الخصائص تمرين يسير. ولبيان الانتفاع بالجزء
+\olref{prop:derivabilityfacts-ruleT} من~\olref{prop:derivabilityfacts}،
+نأخذ المثال الآتي: إذا ثبت~$\OLId{greek-variable}{Gamma} \Proves[\Sigma] !A \lor !B$ وثبت
+$\OLId{greek-variable}{Gamma} \Proves[\Sigma] \lnot !A$، لزم~$\OLId{greek-variable}{Gamma} \Proves[\Sigma] !B$.
+واختصارًا للعبارة سنكتب~$\OLId{greek-variable}{Gamma}, !A \Proves[\Sigma] !B$ عوضًا عن
+$\OLId{greek-variable}{Gamma} \cup \{!A\} \Proves[\Sigma] !B$.
+
+\begin{defn}
+  يقال للمجموعة~$\OLId{greek-variable}{Gamma}$ إنها \emph{مغلقة استنتاجيًا} بالنسبة إلى النسق
+  $\Sigma$ إذا كانت مشتملة على كل ما يشتق منها؛ أي إذا وفقط إذا كان
+  $\OLId{greek-variable}{Gamma} \Proves[\Sigma] !A$ يقتضي $!A \in \OLId{greek-variable}{Gamma}$.
+\end{defn}
+
+\end{document}

@@ -1,0 +1,58 @@
+% Part: computability
+% Chapter: computability-theory
+% Section: total
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{thy}{tot}
+\olsection{عدم قابلية تقرير الكلية}
+
+ومن استعمالات مبرهنة $\OLId{latin-ordinary}{s}$-$\OLId{latin-ordinary}{m}$-$\OLId{latin-ordinary}{n}$ في إثبات عدم قابلية
+الحساب المثال الآتي. نجعل $\fn{Tot}$ مجموعة فهارس الدوال الكلية القابلة
+للحساب، فيكون
+\[
+\fn{Tot} = \Setabs{\OLId{latin-ordinary}{x}}{\text{لكل $y$، تكون $\cfind{x}(y)\fdefined$}}.
+\]
+
+\begin{prop}
+\ollabel{prop:total}
+المجموعة $\fn{Tot}$ غير قابلة للحساب.
+\end{prop}
+
+\begin{proof}
+نثبت انتفاء قابلية $\fn{Tot}$ للحساب باختزال $\OLId{latin-looped}{K}$
+إليها. فنعرّف $\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y})$ على الوجه الآتي:
+\[
+\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y}) \simeq
+\begin{cases}
+\OLMathNumeral{0} & \text{إذا كان $x \in K$} \\
+\fundefined & \text{خلاف ذلك.}
+\end{cases}
+\]
+أما $\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y})$ فلا اعتماد لها على $\OLId{latin-ordinary}{y}$ أصلًا.
+ومن اليسير حساب $\OLId{latin-ordinary}{h}$ جزئيًا: نتلقى $\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y}$، ونحسب~$\OLId{latin-ordinary}{h}$ بمحاكاة
+الدالة~$\cfind{\OLId{latin-ordinary}{x}}$ عند الدخل~$\OLId{latin-ordinary}{x}$؛ فإن توقف الحساب، أعطت
+$\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y})$ القيمة~$\OLMathNumeral{0}$ ووقفت. فالدالة $\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y})$ هي
+$\Zero(\umin{\OLId{latin-ordinary}{s}}{\OLId{latin-looped}{T}(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{s})})$، و$\Zero$ دالة الصفر الثابتة.
+
+ومن مبرهنة $\OLId{latin-ordinary}{s}$-$\OLId{latin-ordinary}{m}$-$\OLId{latin-ordinary}{n}$ نحصل على دالة عودية بدائية~$\OLId{latin-ordinary}{k}(\OLId{latin-ordinary}{x})$، بحيث لكل
+$\OLId{latin-ordinary}{x}$ و~$\OLId{latin-ordinary}{y}$،
+\[
+\cfind{\OLId{latin-ordinary}{k}(\OLId{latin-ordinary}{x})}(\OLId{latin-ordinary}{y}) \simeq
+\begin{cases}
+\OLMathNumeral{0} & \text{إذا كان $x \in K$} \\
+\fundefined & \text{خلاف ذلك.}
+\end{cases}
+\]
+فتكون $\cfind{\OLId{latin-ordinary}{k}(\OLId{latin-ordinary}{x})}$ كلية حين $\OLId{latin-ordinary}{x} \in \OLId{latin-looped}{K}$، وغير معرّفة في أي موضع
+إن لم يكن. فهذه $\OLId{latin-ordinary}{k}$ اختزال من $\OLId{latin-looped}{K}$ إلى~$\fn{Tot}$.
+\end{proof}
+
+\begin{digress}
+بل إن $\fn{Tot}$ لا تقبل التعداد الحسابي أصلًا؛ فتعقيدها في
+منزلة أعلى من «الهرم الحسابي». ولا نتناول هنا إثبات هذه الزيادة.
+\end{digress}
+
+\end{document}

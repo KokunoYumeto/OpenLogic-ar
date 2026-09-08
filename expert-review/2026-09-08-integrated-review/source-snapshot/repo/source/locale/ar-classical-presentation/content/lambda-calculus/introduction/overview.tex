@@ -1,0 +1,67 @@
+% Part: lambda-calculus
+% Chapter: introduction
+% Section: overview
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{int}{ovr}
+\olsection{نظرة عامة}
+
+وضع ألونزو تشيرش حساب لامبدا في أوائل ثلاثينيات القرن العشرين
+ليكون أساسًا للمنطق البنائي، \emph{لا} ليكون نموذجًا للدوال القابلة
+للحساب. ثم لم يلبث أن ثبت تكافؤه مع تعريفات أخرى للقابلية للحساب،
+منها دوال تورنغ القابلة للحساب والدوال العودية الجزئية.
+وكان في هذا التكافؤ يومئذ شيء من المفاجأة، فزاد توصيف القابلية
+للحساب به جدارة بالنظر.
+
+بترميز لامبدا نشير إلى الدالة بالتعبير الرمزي الذي يعرّفها نفسه،
+فلا نحتاج أولًا إلى تسميتها باسم مستقل. فبدل قولنا:
+«لتكن~$\OLId{latin-ordinary}{f}$ الدالة المعرفة بالمعادلة~$\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x}) = \OLId{latin-ordinary}{x} + \OLMathNumeral{3}$»، نقول:
+«لتكن~$\OLId{latin-ordinary}{f}$ الدالة~$\lambd[\OLId{latin-ordinary}{x}][(\OLId{latin-ordinary}{x} + \OLMathNumeral{3})]$».
+فالتعبير~$\lambd[\OLId{latin-ordinary}{x}][(\OLId{latin-ordinary}{x}+\OLMathNumeral{3})]$ \emph{اسم} للدالة التي تزيد وسيطها
+ثلاثة. وليس~$\OLId{latin-ordinary}{x}$ فيه إلا متغيرًا صوريًا يشغل موضع الوسيط؛
+ولذلك يصح أن ندل على الدالة نفسها بـ$\lambd[\OLId{latin-ordinary}{y}][(\OLId{latin-ordinary}{y} + \OLMathNumeral{3})]$.
+ولا يبطل هذا الترميز بوجود معلمات أخرى.
+فإذا كانت~$\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{x}, \OLId{latin-ordinary}{y})$ دالة في متغيرين، وكان~$\OLId{latin-ordinary}{k}$ عددًا طبيعيًا،
+كانت~$\lambd[\OLId{latin-ordinary}{x}][\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{k})]$ الدالة التي ترسل كل~$\OLId{latin-ordinary}{x}$ إلى~$\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{x}, \OLId{latin-ordinary}{k})$.
+
+هذه الطريقة في إنشاء اسم الدالة من تعبير رمزي هي
+\emph{تجريد لامبدا}. ويقابل التجريد \emph{التطبيق}:
+متى أعطينا دالة~$\OLId{latin-ordinary}{f}$، على الأعداد الطبيعية مثلًا، أمكن
+\emph{تطبيقها} على قيمة مثل \OLClassicalDigits{2}، فنكتب النتيجة في الترميز
+المعتاد~$\OLId{latin-ordinary}{f}(\OLMathNumeral{2})$.
+
+وإذا جمعنا التجريد والتطبيق أمكن تبسيط الناتج بإحلال الوسيط
+المطبّق عليه محل المتغير المجرّد. فالتعبير
+\[
+(\lambd[\OLId{latin-ordinary}{x}][(\OLId{latin-ordinary}{x} + \OLMathNumeral{3})])(\OLMathNumeral{2})
+\]
+يُبسّط إلى~$\OLMathNumeral{2} + \OLMathNumeral{3}$.
+
+إلى هنا لم نزد على مفاهيم مألوفة إلا ترميزًا جديدًا.
+لكن حساب لامبدا نفسه يفارق تصور نظرية المجموعات مفارقة أعمق؛
+ففيه:
+\begin{enumerate}
+\item كل تعبير يدل على دالة.
+\item تُعرّف الدوال بتجريد لامبدا.
+\item يجوز تطبيق أي شيء على أي شيء آخر.
+\end{enumerate}
+فمتى كان~$\OLId{latin-looped}{F}$ حدًا من حدوده، عُدّ~$\OLId{latin-looped}{F}(\OLId{latin-looped}{F})$ ذا معنى دائمًا.
+وهذا الإطار الذي يجيز التطبيق بلا تلك القيود يسمى حساب
+لامبدا \emph{غير المنمّط}؛ ومعنى ذلك أنه لا قيد فيه على ما
+يطبّق على ماذا.
+
+\begin{digress}
+ولحساب لامبدا صورة أخرى مهمة هي الحساب \emph{المنمّط}.
+تشبه الصورة غير المنمطة من وجوه كثيرة، لكنها أيسر كثيرًا في
+التوفيق مع الإطار الكلاسيكي لنظرية المجموعات، وتختلف عنها في
+بعض الخصائص اختلافًا بعيدًا.
+
+وقد صار البحث في حساب لامبدا من أسس علم الحاسوب النظري وتصميم
+لغات البرمجة. ولغة LISP، التي وضعها جون مكارثي في خمسينيات
+القرن العشرين، مثال مبكر للغات التي أخذت بهذه الأفكار.
+\end{digress}
+
+\end{document}

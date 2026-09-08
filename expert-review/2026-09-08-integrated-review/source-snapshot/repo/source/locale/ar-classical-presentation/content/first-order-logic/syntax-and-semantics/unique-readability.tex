@@ -1,0 +1,198 @@
+% Part: first-order-logic
+% Chapter: syntax-and-semantics
+% Section: unique-readability
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{syn}{unq}
+
+\olsection{وحدانية القراءة}
+
+\begin{explain}
+من مقتضى تعريف ال!!{formula}s الذي اخترناه أن يكون لكل !!{formula}
+\emph{قراءة وحيدة}. فطريق بنائها بحسب قواعد تكوين ال!!{formula}s
+واحد في جوهره، وكذلك طريق «تأويلها». ولولا هذا لجازت
+!!{formula}s ملتبسة، أي !!{formula}s تتعدد قراءاتها أو تأويلاتها.
+وليس المراد اجتناب اللبس وحده، بل إن أكثر ما يأتي من تعريفات
+وبراهين لا يستقيم إلا بثبوت هذه الخاصية.
+
+ويتبيّن وجه الحاجة إلى ذلك بالنظر في قواعد لتكوين ال!!{formula}s
+لا تحفظ وحدانية القراءة. فلنفرض أننا أغفلنا الأقواس في قاعدة
+تكوين الروابط، فأجزنا مثلًا ما يأتي:
+\begin{quote}
+إذا كانت $!A$ و$!B$ !!{formula}s، فإن $!A \lif !B$ كذلك.
+\end{quote}
+فعلى هذا، إذا كان المبدأ صيغة ذرية~$!D$، جاز أن نؤلّف $!D
+\lif !D$. ومنها، مع $!D$، نحصل على $!D \lif !D
+\lif !D$. لكن يمكن فعل ذلك بطريقتين:
+\begin{enumerate}
+\item نأخذ $!D$ على أنها $!A$، و$!D \lif !D$ على أنها $!B$.
+\item نأخذ $!A$ على أنها $!D \lif !D$، وتكون $!B$ هي~$!D$.
+\end{enumerate}
+ولكل طريق من هذين طريق في «قراءة» ال!!{formula}~$!D \lif !D \lif
+!D$. فهي من الصورة $!B \lif !C$، حيث $!B$ هي $!D$ و$!C$ هي $!D
+\lif !D$، لكنها \emph{أيضًا} من الصورة $!B \lif !C$، حيث $!B$ هي
+$!D \lif !D$ و$!C$ هي~$!D$.
+
+ومتى جاز ذلك لم تطّرد تعريفاتنا. فمن ذلك تعريف
+!!{main operator} للصيغة؛ فإننا نقول: إذا كانت الصيغة على صورة $!B \lif !C$ يكون
+!!{main operator} هو الورود المشار إليه للرمز~$\lif$. فإن
+جاز حمل الصيغة $!D \lif !D \lif !D$ مع $!B \lif !C$
+بالطريقتين المختلفتين المذكورتين أعلاه، حصلنا في الحالة الأولى على
+الورود الأول لـ~$\lif$ بوصفه !!{main operator}، وفي الثانية على
+الورود الثاني. غير أننا نريد !!{main operator} أن يكون
+\emph{دالة} في ال!!{formula}؛ أي يجب أن يكون لكل !!{formula} ورود
+واحد بالضبط ل!!{main operator}.
+\end{explain}
+
+\begin{lem}
+يتساوى عدد الأقواس اليسرى وعدد الأقواس اليمنى في أي
+!!a{formula}~$!A$.
+\end{lem}
+
+\begin{proof}
+البرهان بالاستقراء على بناء~$!A$، وله مقامان: أولهما أن نثبت
+الخاصية للصيغ الذرية كلها، وهو أساس الاستقراء؛ وثانيهما أن نثبت
+انتقال الخاصية من الصيغ التي نؤلّف منها إلى الصيغ الجديدة
+المؤلّفة، متى كانت ثابتة للأولى.
+
+فلنرمز بـ$\OLId{latin-ordinary}{l}(!A)$ إلى عدد الأقواس اليسرى، وبـ$\OLId{latin-ordinary}{r}(!A)$ إلى عدد الأقواس
+اليمنى في~$!A$؛ وعلى هذا القياس يكون $\OLId{latin-ordinary}{l}(\OLId{latin-ordinary}{t})$ و$\OLId{latin-ordinary}{r}(\OLId{latin-ordinary}{t})$ عددي الأقواس
+اليسرى واليمنى في الحد~$\OLId{latin-ordinary}{t}$.
+
+\begin{prob}
+    أثبت أنه لكل حد~$\OLId{latin-ordinary}{t}$، لدينا $\OLId{latin-ordinary}{l}(\OLId{latin-ordinary}{t}) = \OLId{latin-ordinary}{r}(\OLId{latin-ordinary}{t})$.
+\end{prob}
+
+\begin{enumerate}
+\tagitem{prvFalse}{\indcase{!A}{\lfalse}{$\indfrm$ فيها $\OLMathNumeral{0}$ من الأقواس
+    اليسرى و$\OLMathNumeral{0}$ من الأقواس اليمنى.}}{}
+
+\tagitem{prvTrue}{\indcase{!A}{\ltrue}{$\indfrm$ فيها $\OLMathNumeral{0}$ من الأقواس
+    اليسرى و$\OLMathNumeral{0}$ من الأقواس اليمنى.}}{}
+
+\item \indcase{!A}{\Atom{R}{t_1,\dots,t_n}}{$\OLId{latin-ordinary}{l}(\indfrm) = \OLMathNumeral{1} + \OLId{latin-ordinary}{l}(\OLId{latin-ordinary}{t}_\OLMathNumeral{1}) +
+  \dots + \OLId{latin-ordinary}{l}(\OLId{latin-ordinary}{t}_\OLId{latin-ordinary}{n}) = \OLMathNumeral{1} + \OLId{latin-ordinary}{r}(\OLId{latin-ordinary}{t}_\OLMathNumeral{1}) + \dots + \OLId{latin-ordinary}{r}(\OLId{latin-ordinary}{t}_\OLId{latin-ordinary}{n}) = \OLId{latin-ordinary}{r}(\indfrm)$. وهنا
+  نستخدم الحقيقة المتروكة تمرينًا، وهي أن $\OLId{latin-ordinary}{l}(\OLId{latin-ordinary}{t}) = \OLId{latin-ordinary}{r}(\OLId{latin-ordinary}{t})$ لكل
+  حد~$\OLId{latin-ordinary}{t}$.}
+
+\item \indcase{!A}{\eq[t_1][t_2]}{$\OLId{latin-ordinary}{l}(\indfrm) = \OLId{latin-ordinary}{l}(\OLId{latin-ordinary}{t}_\OLMathNumeral{1}) + \OLId{latin-ordinary}{l}(\OLId{latin-ordinary}{t}_\OLMathNumeral{2}) =
+  \OLId{latin-ordinary}{r}(\OLId{latin-ordinary}{t}_\OLMathNumeral{1}) + \OLId{latin-ordinary}{r}(\OLId{latin-ordinary}{t}_\OLMathNumeral{2}) = \OLId{latin-ordinary}{r}(\indfrm)$.}
+
+\tagitem{prvNot}{\indcase{!A}{\lnot !B}{بفرضية الاستقراء،
+    $\OLId{latin-ordinary}{l}(!B) = \OLId{latin-ordinary}{r}(!B)$. ومن ثم $\OLId{latin-ordinary}{l}(\indfrm) = \OLId{latin-ordinary}{l}(!B) = \OLId{latin-ordinary}{r}(!B) =
+    \OLId{latin-ordinary}{r}(\indfrm)$.}}{}
+
+\item \indcase{!A}{(!B \ast !C)}{بفرضية الاستقراء، $\OLId{latin-ordinary}{l}(!B) =
+  \OLId{latin-ordinary}{r}(!B)$ و$\OLId{latin-ordinary}{l}(!C) = \OLId{latin-ordinary}{r}(!C)$. ومن ثم $\OLId{latin-ordinary}{l}(\indfrm) = \OLMathNumeral{1} + \OLId{latin-ordinary}{l}(!B) + \OLId{latin-ordinary}{l}(!C) =
+  \OLMathNumeral{1} + \OLId{latin-ordinary}{r}(!B) + \OLId{latin-ordinary}{r}(!C) = \OLId{latin-ordinary}{r}(\indfrm)$.}
+
+\tagitem{prvAll}{\indcase{!A}{\lforall[x][!B]}{بفرضية الاستقراء،
+    $\OLId{latin-ordinary}{l}(!B) = \OLId{latin-ordinary}{r}(!B)$. ومن ثم $\OLId{latin-ordinary}{l}(\indfrm) = \OLId{latin-ordinary}{l}(!B) = \OLId{latin-ordinary}{r}(!B) =
+    \OLId{latin-ordinary}{r}(\indfrm)$.}}{}
+
+% Print case for \lexists if prvEx and not prvAll
+\tagitem{prvAll,notprvEx}{}{\indcase{!A}{\lexists[x][!B]}{بفرضية
+    الاستقراء، $\OLId{latin-ordinary}{l}(!B) = \OLId{latin-ordinary}{r}(!B)$. ومن ثم $\OLId{latin-ordinary}{l}(\indfrm) = \OLId{latin-ordinary}{l}(!B) = \OLId{latin-ordinary}{r}(!B) =
+    \OLId{latin-ordinary}{r}(\indfrm)$.}}
+
+% Just say similarly if prvEx and prvAll
+\tagitem{notprvAll,notprvEx}{}{\indcase{!A}{\lexists[x][!B]}{وبالمثل.}}
+\end{enumerate}
+\end{proof}
+
+\begin{defn}[المقطع الابتدائي الحقيقي]
+تكون سلسلة الرموز~$!B$ \emph{مقطعًا ابتدائيًا حقيقيًا} من سلسلة
+الرموز~$!A$ إذا كان وصل~$!B$ بسلسلة رموز غير خالية ينتج~$!A$.
+\end{defn}
+
+\begin{lem}\ollabel{lem:no-prefix}
+إذا كانت $!A$ !!a{formula}، وكانت $!B$ مقطعًا ابتدائيًا حقيقيًا من
+$!A$، فإن $!B$ ليست !!a{formula}.
+\end{lem}
+
+\begin{proof}
+تمرين.
+\end{proof}
+
+\begin{prob}
+أثبت \olref[fol][syn][unq]{lem:no-prefix}.
+\end{prob}
+
+\begin{prop}
+\ollabel{prop:unique-atomic}
+إذا كانت $!A$ !!{formula} ذرية، فإنها تحقق شرطًا واحدًا، وواحدًا فقط،
+من الشروط الآتية.
+\begin{enumerate}
+\tagitem{prvFalse}{$!A \ident \lfalse$.}{}
+\tagitem{prvTrue}{$!A \ident \ltrue$.}{}
+\item $!A \ident \Atom{R}{t_1,\dots,t_n}$، حيث $\OLId{latin-looped}{R}$ !!{predicate}
+  ذات $\OLId{latin-ordinary}{n}$ مواضع، و$\OLId{latin-ordinary}{t}_\OLMathNumeral{1}$، \dots، $\OLId{latin-ordinary}{t}_\OLId{latin-ordinary}{n}$ حدود، ويُعيَّن كل من $\OLId{latin-looped}{R}$،
+  و$\OLId{latin-ordinary}{t}_\OLMathNumeral{1}$، \dots، $\OLId{latin-ordinary}{t}_\OLId{latin-ordinary}{n}$ تعيينًا وحيدًا.
+\item $!A \ident \eq[\OLId{latin-ordinary}{t}_\OLMathNumeral{1}][\OLId{latin-ordinary}{t}_\OLMathNumeral{2}]$، حيث $\OLId{latin-ordinary}{t}_\OLMathNumeral{1}$ و$\OLId{latin-ordinary}{t}_\OLMathNumeral{2}$ حدان معيّنان
+  تعيينًا وحيدًا.
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+تمرين.
+\end{proof}
+
+\begin{prob}
+أثبت \olref[fol][syn][unq]{prop:unique-atomic}. وللاستعانة: صغ نظير
+\olref[fol][syn][unq]{lem:no-prefix} في الحدود، ثم أقم البرهان عليه.
+\end{prob}
+
+\begin{prop}[وحدانية القراءة]
+تحقق كل !!{formula} شرطًا واحدًا، وواحدًا فقط، من الشروط الآتية.
+\begin{enumerate}
+\item $!A$ ذرية.
+
+\tagitem{prvNot}{$!A$ من الصورة $\lnot !B$.}{}
+
+\tagitem{prvAnd}{$!A$ من الصورة $(!B \land !C)$.}{}
+
+\tagitem{prvOr}{$!A$ من الصورة $(!B \lor !C)$.}{}
+
+\tagitem{prvIf}{$!A$ من الصورة $(!B \lif !C)$.}{}
+
+\tagitem{prvIff}{$!A$ من الصورة $(!B \liff !C)$.}{}
+
+\tagitem{prvAll}{$!A$ من الصورة $\lforall[\OLId{latin-ordinary}{x}][!B]$.}{}
+
+\tagitem{prvEx}{$!A$ من الصورة $\lexists[\OLId{latin-ordinary}{x}][!B]$.}{}
+\end{enumerate}
+وفي كل حالة لا يكون تعيين $!B$، أو تعيين $!B$ و$!C$، إلا واحدًا.
+ومن معنى ذلك مثلًا امتناع أزواج مختلفة $!B$، و$!C$، و$!B'$،
+و$!C'$ بحيث تكون $!A$ من الصورتين
+\iftag{prvIf}{$(!B \lif !C)$ و$(!B' \lif !C')$.}{
+    \iftag{prvOr}{$(!B \lor !C)$ و$(!B' \lor !C')$.}{
+      \iftag{prvAnd}{$(!B \land !C)$ و$(!B' \land !C')$.}{}}}
+\end{prop}
+
+\begin{proof}
+بحسب قواعد التكوين، لا تبدأ !!a{formula} غير ذرية إلا بقوس
+فاتح~(، أو \iftag{prvNot}{$\lnot$،}{} أو بمكمم. وأما
+كل !!{formula} أولها أحد الرموز الآتية فلا بد من كونها ذرية:
+!!a{predicate}، أو !!a{function}، أو !!a{constant}، أو
+!!a{variable}\iftag{prvFalse}{، أو $\lfalse$}{}\iftag{prvTrue}{، أو $\ltrue$}{}.
+
+فلم يبق إلا بيان أنه إذا كانت $!A$ من
+الصورة $(!B \ast !C)$، وكانت أيضًا من الصورة $(!B'
+\mathbin{\ast'} !C')$، فإن $!B \ident !B'$، و$!C \ident !C'$،
+و$\ast = {\ast'}$.
+
+فلنفرض أن $!A \ident (!B \ast !C)$ و$!A \ident (!B'
+\mathbin{\ast'} !C')$ معًا. فإما أن $!B \ident !B'$ أو لا.
+فإن كان الأول، لزم أن $\ast = {\ast'}$ و$!C \ident !C'$،
+إذ تكونان حينئذ سلسلتين جزئيتين من~$!A$ تبدآن في الموضع نفسه
+وطولهما واحد. والحالة الأخرى هي $!B \not\ident !B'$. ولما كانت
+$!B$ و$!B'$ كلتاهما سلسلتين جزئيتين من~$!A$ تبدآن في الموضع نفسه،
+فلا بد أن تكون إحداهما مقطعًا ابتدائيًا حقيقيًا من الأخرى. وهذا
+ممتنع بمقتضى \olref{lem:no-prefix}.
+\end{proof}
+
+
+\end{document}

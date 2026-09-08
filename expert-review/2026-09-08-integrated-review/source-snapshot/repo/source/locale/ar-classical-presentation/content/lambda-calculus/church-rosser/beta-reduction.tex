@@ -1,0 +1,90 @@
+% Part: lambda-calculus
+% Chapter: church-rosser
+% Section: beta-reduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{cr}{b}
+
+\olsection{اختزال~$\beta$}
+
+\begin{lem}\ollabel{lem:one-par}
+  من~$\OLId{latin-looped}{M} \bredone \OLId{latin-looped}{M}'$ يلزم~$\OLId{latin-looped}{M} \bredpar \OLId{latin-looped}{M}'$.
+\end{lem}
+\begin{proof}
+  نستقرئ اشتقاق~$\OLId{latin-looped}{M} \bredone \OLId{latin-looped}{M}'$ من أصغر علاقة متوافقة، فتقع أربع حالات:
+  \begin{enumerate}
+  \item في تقلص الجذر يكون~$\OLId{latin-looped}{M}=(\lambd[\OLId{latin-ordinary}{x}][\OLId{latin-looped}{N}])\OLId{latin-looped}{Q}$ و
+    $\OLId{latin-looped}{M}'=\Subst{\OLId{latin-looped}{N}}{\OLId{latin-looped}{Q}}{\OLId{latin-ordinary}{x}}$. ولما كان~$\OLId{latin-looped}{N}\bredpar \OLId{latin-looped}{N}$ و$\OLId{latin-looped}{Q}\bredpar \OLId{latin-looped}{Q}$
+    بموجب \olref[pb]{thm:refl}، أعطت
+    \olref[pb]{defn:bredpar}\olref[pb]{defn:bredpar4} المطلوب.
+  \item وإن وقع التقلص تحت تجريد، كان~$\OLId{latin-looped}{M}=\lambd[\OLId{latin-ordinary}{x}][\OLId{latin-looped}{P}]$ و
+    $\OLId{latin-looped}{M}'=\lambd[\OLId{latin-ordinary}{x}][\OLId{latin-looped}{P}']$ مع~$\OLId{latin-looped}{P}\bredone \OLId{latin-looped}{P}'$. يفيد فرض الاستقراء
+    $\OLId{latin-looped}{P}\bredpar \OLId{latin-looped}{P}'$، ثم تفيد \olref[pb]{defn:bredpar2} المطلوب.
+  \item وإن وقع في الطرف الأيسر من تطبيق~$PQ$، جمعنا فرض
+    الاستقراء لذلك الطرف إلى~$\OLId{latin-looped}{Q}\bredpar \OLId{latin-looped}{Q}$ بالانعكاس، ثم طبقنا
+    \olref[pb]{defn:bredpar3}.
+  \item وإن وقع في الطرف الأيمن، جمعنا~$\OLId{latin-looped}{P}\bredpar \OLId{latin-looped}{P}$ بالانعكاس
+    إلى فرض الاستقراء للطرف الأيمن، ثم طبقنا القاعدة نفسها.
+  \end{enumerate}
+  % تصحيح مصدر (0370-I1): شمل الاستقراء حالات التوافق الثلاث فضلًا على تقلص الجذر.
+\end{proof}
+
+\begin{lem}\ollabel{lem:par-red}
+  من~$\OLId{latin-looped}{M} \bredpar \OLId{latin-looped}{M}'$ يلزم~$\OLId{latin-looped}{M} \bred \OLId{latin-looped}{M}'$.
+\end{lem}
+
+\begin{proof}
+  نستقرئ~!!{derivation} العبارة~$\OLId{latin-looped}{M} \bredpar \OLId{latin-looped}{M}'$، ونفصل بحسب آخر قاعدة:
+  \begin{enumerate}
+  \item إن كانت~\olref[pb]{defn:bredpar1}، لم يكن~$\OLId{latin-looped}{M}$ و$\OLId{latin-looped}{M}'$ إلا~$\OLId{latin-ordinary}{x}$،
+    ولدينا~$\OLId{latin-ordinary}{x} \bred \OLId{latin-ordinary}{x}$.
+  \item وإن كانت~\olref[pb]{defn:bredpar2}، كان~$\OLId{latin-looped}{M}$ هو~$\lambd[\OLId{latin-ordinary}{x}][\OLId{latin-looped}{N}]$
+    و$\OLId{latin-looped}{M}'$ هو~$\lambd[\OLId{latin-ordinary}{x}][\OLId{latin-looped}{N}']$، لبعض~$\OLId{latin-ordinary}{x}$ و$\OLId{latin-looped}{N}$ و$\OLId{latin-looped}{N}'$، مع~$\OLId{latin-looped}{N} \bredpar \OLId{latin-looped}{N}'$.
+    ومن فرض الاستقراء~$\OLId{latin-looped}{N} \bred \OLId{latin-looped}{N}'$؛ فتنتج~$\lambd[\OLId{latin-ordinary}{x}][\OLId{latin-looped}{N}] \bred \lambd[\OLId{latin-ordinary}{x}][\OLId{latin-looped}{N}']$
+    بإجراء تقلصات~$\bredone$ نفسها التي أعطت~$\OLId{latin-looped}{N} \bred \OLId{latin-looped}{N}'$.
+  \item وإن كانت~\olref[pb]{defn:bredpar3}، كان~$\OLId{latin-looped}{M}$ هو~$PQ$ و$\OLId{latin-looped}{M}'$ هو~$\OLId{latin-looped}{P}'\OLId{latin-looped}{Q}'$،
+    لبعض~$\OLId{latin-looped}{P}$ و$\OLId{latin-looped}{Q}$ و$\OLId{latin-looped}{P}'$ و$\OLId{latin-looped}{Q}'$، مع~$\OLId{latin-looped}{P} \bredpar \OLId{latin-looped}{P}'$ و$\OLId{latin-looped}{Q} \bredpar \OLId{latin-looped}{Q}'$.
+    ويفيد فرض الاستقراء~$\OLId{latin-looped}{P} \bred \OLId{latin-looped}{P}'$ و$\OLId{latin-looped}{Q} \bred \OLId{latin-looped}{Q}'$.
+    فنحصل على~$PQ \bred \OLId{latin-looped}{P}'\OLId{latin-looped}{Q}'$ بإجراء الاختزال~$\OLId{latin-looped}{P} \bred \OLId{latin-looped}{P}'$
+    ثم الاختزال~$\OLId{latin-looped}{Q} \bred \OLId{latin-looped}{Q}'$.
+  \item وإن كانت~\olref[pb]{defn:bredpar4}، كان~$\OLId{latin-looped}{M}$ هو~$(\lambd[\OLId{latin-ordinary}{x}][\OLId{latin-looped}{N}])\OLId{latin-looped}{Q}$
+    و$\OLId{latin-looped}{M}'$ هو~$\Subst{\OLId{latin-looped}{N}'}{\OLId{latin-looped}{Q}'}{\OLId{latin-ordinary}{x}}$، لبعض~$\OLId{latin-ordinary}{x}$ و$\OLId{latin-looped}{N}$ و$\OLId{latin-looped}{N}'$ و$\OLId{latin-looped}{Q}$ و$\OLId{latin-looped}{Q}'$،
+    مع~$\OLId{latin-looped}{N} \bredpar \OLId{latin-looped}{N}'$ و$\OLId{latin-looped}{Q} \bredpar \OLId{latin-looped}{Q}'$.
+    ومن فرض الاستقراء~$\OLId{latin-looped}{Q} \bred \OLId{latin-looped}{Q}'$ و$\OLId{latin-looped}{N} \bred \OLId{latin-looped}{N}'$.
+    فبلوغ~$(\lambd[\OLId{latin-ordinary}{x}][\OLId{latin-looped}{N}])\OLId{latin-looped}{Q} \bred \Subst{\OLId{latin-looped}{N}'}{\OLId{latin-looped}{Q}'}{\OLId{latin-ordinary}{x}}$
+    يكون بإجراء~$\OLId{latin-looped}{N} \bred \OLId{latin-looped}{N}'$، ثم~$\OLId{latin-looped}{Q} \bred \OLId{latin-looped}{Q}'$،
+    ثم تقليص~$(\lambd[\OLId{latin-ordinary}{x}][\OLId{latin-looped}{N}'])\OLId{latin-looped}{Q}'$ إلى~$\Subst{\OLId{latin-looped}{N}'}{\OLId{latin-looped}{Q}'}{\OLId{latin-ordinary}{x}}$.
+  \end{enumerate}
+\end{proof}
+
+\begin{lem}\ollabel{lem:str}
+  العلاقة~$\bred$ أصغر علاقة متعدية تشتمل على~$\bredpar$.
+\end{lem}
+
+\begin{proof}
+  لتكن~$\xred$ أصغر العلاقات المتعدية التي تشتمل على~$\bredpar$.
+
+  أما~$\bred \subseteq \xred$، فلنفرض~$\OLId{latin-looped}{M} \bred \OLId{latin-looped}{M}'$، أي
+  $\OLId{latin-looped}{M} \ident \OLId{latin-looped}{M}_\OLMathNumeral{1} \bredone \dots \bredone \OLId{latin-looped}{M}_\OLId{latin-ordinary}{k} \ident \OLId{latin-looped}{M}'$.
+  وتفيد~\olref{lem:one-par} أن~$\OLId{latin-looped}{M} \ident \OLId{latin-looped}{M}_\OLMathNumeral{1} \bredpar \dots \bredpar \OLId{latin-looped}{M}_\OLId{latin-ordinary}{k} \ident \OLId{latin-looped}{M}'$.
+  ولما كانت~$\xred$ تشتمل على~$\bredpar$ وتتصف بالتعدي، نتج~$\OLId{latin-looped}{M} \xred \OLId{latin-looped}{M}'$.
+
+  وأما~$\xred \subseteq \bred$، فلنفرض~$\OLId{latin-looped}{M} \xred \OLId{latin-looped}{M}'$، أي
+  $\OLId{latin-looped}{M} \ident \OLId{latin-looped}{M}_\OLMathNumeral{1} \bredpar \dots \bredpar \OLId{latin-looped}{M}_\OLId{latin-ordinary}{k} \ident \OLId{latin-looped}{M}'$.
+  وتفيد~\olref{lem:par-red} أن~$\OLId{latin-looped}{M} \ident \OLId{latin-looped}{M}_\OLMathNumeral{1} \bred \dots \bred \OLId{latin-looped}{M}_\OLId{latin-ordinary}{k} \ident \OLId{latin-looped}{M}'$.
+  ومن تعدي~$\bred$ ينتج~$\OLId{latin-looped}{M} \bred \OLId{latin-looped}{M}'$.
+\end{proof}
+
+\begin{thm}\ollabel{thm:cr}
+  العلاقة~$\bred$ ذات خاصية تشيرش--روسر.
+\end{thm}
+
+\begin{proof}
+  تجمع~\olref[dap]{thm:str} و\olref[pb]{thm:cr} و\olref{lem:str}
+  فتنتج المبرهنة مباشرة.
+\end{proof}
+
+\end{document}

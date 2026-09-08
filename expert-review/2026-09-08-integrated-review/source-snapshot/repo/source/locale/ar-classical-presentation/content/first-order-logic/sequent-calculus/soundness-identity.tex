@@ -1,0 +1,46 @@
+% Part: first-order-logic
+% Chapter: sequent-calculus
+% Section: soundness-identity
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{seq}{sid}
+
+\olsection{السلامة مع \usetoken{S}{identity}}
+
+\begin{prop}
+حساب~$\Log{LK}$ المزود بالتتابعيات الابتدائية وقواعد الهوية سليم.
+\end{prop}
+
+\begin{proof}
+أولًا، التتابعيات الابتدائية من الصورة ${} \Sequent \eq[\OLId{latin-ordinary}{t}][\OLId{latin-ordinary}{t}]$ صالحة:
+فلكل !!{structure}~$\Struct M$ يتحقق $\Sat{\OLId{latin-looped}{M}}{\eq[\OLId{latin-ordinary}{t}][\OLId{latin-ordinary}{t}]}$.
+والحد~$\OLId{latin-ordinary}{t}$ مفروض مغلقًا، أي بلا متغيرات؛ فلا مدخل هنا لإسنادات المتغيرات.
+
+افترض أن الاستدلال الأخير في !!a{derivation} هو~$=$. عندئذ تكون المقدمة
+$\eq[\OLId{latin-ordinary}{t}_\OLMathNumeral{1}][\OLId{latin-ordinary}{t}_\OLMathNumeral{2}], \OLId{greek-variable}{Gamma} \Sequent \OLId{greek-variable}{Delta}, !A(\OLId{latin-ordinary}{t}_\OLMathNumeral{1})$، وتكون النتيجة
+$\eq[\OLId{latin-ordinary}{t}_\OLMathNumeral{1}][\OLId{latin-ordinary}{t}_\OLMathNumeral{2}], \OLId{greek-variable}{Gamma} \Sequent \OLId{greek-variable}{Delta}, !A(\OLId{latin-ordinary}{t}_\OLMathNumeral{2})$. اعتبر
+!!a{structure}~$\Struct M$. علينا أن نبين أن النتيجة صالحة، أي إنه إذا
+كان $\Sat{\OLId{latin-looped}{M}}{\eq[\OLId{latin-ordinary}{t}_\OLMathNumeral{1}][\OLId{latin-ordinary}{t}_\OLMathNumeral{2}]}$ و$\Sat{\OLId{latin-looped}{M}}{\OLId{greek-variable}{Gamma}}$، فإما أن
+$\Sat{\OLId{latin-looped}{M}}{!C}$ لبعض $!C \in \OLId{greek-variable}{Delta}$، أو أن $\Sat{\OLId{latin-looped}{M}}{!A(\OLId{latin-ordinary}{t}_\OLMathNumeral{2})}$.
+
+المقدمة صالحة بفرض الاستقراء. فمتى تحقق
+$\Sat{\OLId{latin-looped}{M}}{\eq[\OLId{latin-ordinary}{t}_\OLMathNumeral{1}][\OLId{latin-ordinary}{t}_\OLMathNumeral{2}]}$ و$\Sat{\OLId{latin-looped}{M}}{\OLId{greek-variable}{Gamma}}$، فإما (أ) أن يوجد
+$!C \in \OLId{greek-variable}{Delta}$ مع $\Sat{\OLId{latin-looped}{M}}{!C}$، وإما (ب) أن يتحقق
+$\Sat{\OLId{latin-looped}{M}}{!A(\OLId{latin-ordinary}{t}_\OLMathNumeral{1})}$. أما (أ) ففيه المطلوب.
+وأما (ب)، فخذ~$\OLId{latin-ordinary}{s}$ إسنادًا بحيث $\OLId{latin-ordinary}{s}(\OLId{latin-ordinary}{x}) = \Value{\OLId{latin-ordinary}{t}_\OLMathNumeral{1}}{\OLId{latin-looped}{M}}$.
+تعطي \olref[syn][ass]{prop:sentence-sat-true}
+$\Sat{\OLId{latin-looped}{M}}{!A(\OLId{latin-ordinary}{t}_\OLMathNumeral{1})}[\OLId{latin-ordinary}{s}]$. ومن~$\varAssign{\OLId{latin-ordinary}{s}}{\OLId{latin-ordinary}{s}}{\OLId{latin-ordinary}{x}}$، مع
+\olref[syn][ext]{prop:ext-formulas}، يلزم
+$\Sat{\OLId{latin-looped}{M}}{!A(\OLId{latin-ordinary}{x})}[\OLId{latin-ordinary}{s}]$.
+ثم إن~$\Sat{\OLId{latin-looped}{M}}{\eq[\OLId{latin-ordinary}{t}_\OLMathNumeral{1}][\OLId{latin-ordinary}{t}_\OLMathNumeral{2}]}$ يقتضي
+$\Value{\OLId{latin-ordinary}{t}_\OLMathNumeral{1}}{\OLId{latin-looped}{M}} = \Value{\OLId{latin-ordinary}{t}_\OLMathNumeral{2}}{\OLId{latin-looped}{M}}$، فيكون
+$\OLId{latin-ordinary}{s}(\OLId{latin-ordinary}{x}) = \Value{\OLId{latin-ordinary}{t}_\OLMathNumeral{2}}{\OLId{latin-looped}{M}}$.
+فإذا أعدنا تطبيق \olref[syn][ext]{prop:ext-formulas} حصل
+$\Sat{\OLId{latin-looped}{M}}{!A(\OLId{latin-ordinary}{t}_\OLMathNumeral{2})}[\OLId{latin-ordinary}{s}]$، وبـ
+\olref[syn][ass]{prop:sentence-sat-true} نحصل على~$\Sat{\OLId{latin-looped}{M}}{!A(\OLId{latin-ordinary}{t}_\OLMathNumeral{2})}$، وهو المطلوب.
+\end{proof}
+
+\end{document}

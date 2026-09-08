@@ -1,0 +1,182 @@
+% Part: methods
+% Chapter: induction
+% Section: relations
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mth}{ind}{rel}
+
+\olsection{العلاقات والدوال}
+
+إذا عُرّفت مجموعة من الكائنات، كالأعداد الطبيعية أو الحدود السليمة،
+تعريفًا استقرائيًّا، جاز أن نعرّف كذلك \emph{علاقات على} أفرادها
+بالاستقراء. فليكن الحد السليم~$\OLId{latin-ordinary}{t}_\OLMathNumeral{1}$ حدًّا فرعيًّا من الحد السليم~$\OLId{latin-ordinary}{t}_\OLMathNumeral{2}$
+متى وقع جزءًا منه، ولنرمز إلى ذلك بـ$\OLId{latin-ordinary}{t}_\OLMathNumeral{1} \sqsubseteq \OLId{latin-ordinary}{t}_\OLMathNumeral{2}$. ومن الظاهر
+أن كل حد سليم فرع من نفسه: $\OLId{latin-ordinary}{t} \sqsubseteq \OLId{latin-ordinary}{t}$. وهذه العلاقة تقبل
+التعريف الاستقرائي الآتي:
+
+\begin{defn}
+  تُعرَّف بالاستقراء على~$\OLId{latin-ordinary}{t}_\OLMathNumeral{2}$ علاقةُ كون الحد السليم~$\OLId{latin-ordinary}{t}_\OLMathNumeral{1}$ حداً فرعياً
+  لـ~$\OLId{latin-ordinary}{t}_\OLMathNumeral{2}$، أي $\OLId{latin-ordinary}{t}_\OLMathNumeral{1} \sqsubseteq \OLId{latin-ordinary}{t}_\OLMathNumeral{2}$، كما يأتي:
+  \begin{enumerate}
+  \item إذا كان $\OLId{latin-ordinary}{t}_\OLMathNumeral{2}$ حرفاً، فإن $\OLId{latin-ordinary}{t}_\OLMathNumeral{1} \sqsubseteq \OLId{latin-ordinary}{t}_\OLMathNumeral{2}$ إذا وفقط إذا كان
+    $\OLId{latin-ordinary}{t}_\OLMathNumeral{1} = \OLId{latin-ordinary}{t}_\OLMathNumeral{2}$.
+  \item إذا كان $\OLId{latin-ordinary}{t}_\OLMathNumeral{2}$ هو $[\OLId{latin-ordinary}{s}_\OLMathNumeral{1} \circ \OLId{latin-ordinary}{s}_\OLMathNumeral{2}]$، فإن
+    $\OLId{latin-ordinary}{t}_\OLMathNumeral{1} \sqsubseteq \OLId{latin-ordinary}{t}_\OLMathNumeral{2}$ إذا وفقط إذا كان $\OLId{latin-ordinary}{t}_\OLMathNumeral{1} = \OLId{latin-ordinary}{t}_\OLMathNumeral{2}$، أو
+    $\OLId{latin-ordinary}{t}_\OLMathNumeral{1} \sqsubseteq \OLId{latin-ordinary}{s}_\OLMathNumeral{1}$، أو $\OLId{latin-ordinary}{t}_\OLMathNumeral{1} \sqsubseteq \OLId{latin-ordinary}{s}_\OLMathNumeral{2}$.
+  \end{enumerate}
+\end{defn}
+
+ومن هذا التعريف، مثلًا، نحصل على $
+\mathrm{a} \sqsubseteq [\mathrm{b} \circ \mathrm{a}]$. فإن البند~(\OLClassicalDigits{2})
+يجعل $
+\mathrm{a} \sqsubseteq [\mathrm{b} \circ \mathrm{a}]$ مكافئًا لصدق
+$\mathrm{a} = [\mathrm{b} \circ \mathrm{a}]$، أو
+$\mathrm{a} \sqsubseteq \mathrm{b}$، أو
+$\mathrm{a} \sqsubseteq \mathrm{a}$. والأولان كاذبان: فواضح أن
+$\mathrm{a}$ غير مطابق لـ$[\mathrm{b} \circ \mathrm{a}]$؛ وبالبند~(\OLClassicalDigits{1})
+يكون $\mathrm{a} \sqsubseteq \mathrm{b}$ إذا وفقط إذا كان
+$\mathrm{a} = \mathrm{b}$، وهو كاذب. وأما البند~(\OLClassicalDigits{1}) نفسه فيجعل
+$\mathrm{a} \sqsubseteq \mathrm{a}$ إذا وفقط إذا كان
+$\mathrm{a} = \mathrm{a}$، وهذا صادق.
+
+ويتوقف إحكام هذا التعريف على حقيقة لم تثبت بعد: أن كل حد سليم~$\OLId{latin-ordinary}{t}$
+إما حرف منفرد، وإما أن له حدين سليمين $\OLId{latin-ordinary}{s}_\OLMathNumeral{1}$ و$\OLId{latin-ordinary}{s}_\OLMathNumeral{2}$
+\emph{متعينين على وجه فريد} بحيث $\OLId{latin-ordinary}{t} = [\OLId{latin-ordinary}{s}_\OLMathNumeral{1} \circ \OLId{latin-ordinary}{s}_\OLMathNumeral{2}]$. ومعنى التفرد
+أنه إذا كان $\OLId{latin-ordinary}{t} = [\OLId{latin-ordinary}{s}_\OLMathNumeral{1} \circ \OLId{latin-ordinary}{s}_\OLMathNumeral{2}]$ لم يصح أن يكون \emph{أيضًا}
+$= [\OLId{latin-ordinary}{r}_\OLMathNumeral{1} \circ \OLId{latin-ordinary}{r}_\OLMathNumeral{2}]$ مع $\OLId{latin-ordinary}{s}_\OLMathNumeral{1} \neq \OLId{latin-ordinary}{r}_\OLMathNumeral{1}$ أو $\OLId{latin-ordinary}{s}_\OLMathNumeral{2} \neq \OLId{latin-ordinary}{r}_\OLMathNumeral{2}$.
+فلو جاز ذلك لناقض البند~(\OLClassicalDigits{2}) نفسه: ربما أعطت قراءة $\OLId{latin-ordinary}{t}_\OLMathNumeral{2}$ على صورة
+$[\OLId{latin-ordinary}{s}_\OLMathNumeral{1} \circ \OLId{latin-ordinary}{s}_\OLMathNumeral{2}]$ الحكم $\OLId{latin-ordinary}{t}_\OLMathNumeral{1} \sqsubseteq \OLId{latin-ordinary}{t}_\OLMathNumeral{2}$، ثم أعطت قراءته على
+صورة $[\OLId{latin-ordinary}{r}_\OLMathNumeral{1} \circ \OLId{latin-ordinary}{r}_\OLMathNumeral{2}]$ نفي $\OLId{latin-ordinary}{t}_\OLMathNumeral{1} \sqsubseteq \OLId{latin-ordinary}{t}_\OLMathNumeral{2}$. وقبل إثبات امتناع
+هذا في الحدود السليمة، ننظر في مثال يقع فيه بالفعل.
+
+\begin{defn}
+  نعرّف \emph{الحدود الخالية من الأقواس} استقرائياً كما يأتي:
+  \begin{enumerate}
+  \item كل حرف حد خالٍ من الأقواس.
+  \item إذا كان $\OLId{latin-ordinary}{s}_\OLMathNumeral{1}$ و$\OLId{latin-ordinary}{s}_\OLMathNumeral{2}$ حدين خاليين من الأقواس، فإن
+    $\OLId{latin-ordinary}{s}_\OLMathNumeral{1} \circ \OLId{latin-ordinary}{s}_\OLMathNumeral{2}$ حد خالٍ من الأقواس.
+  \item لا شيء آخر حد خالٍ من الأقواس.
+  \end{enumerate}
+\end{defn}
+
+ومن الحدود الخالية من الأقواس: $\mathrm{a}$، و
+$\mathrm{b} \circ \mathrm{d}$، و
+$\mathrm{b} \circ \mathrm{a} \circ \mathrm{b}$. ولو عرّفنا «الحد
+الفرعي» لهذه الحدود على قياس التعريف السابق، لكان البند الثاني:
+\begin{center}
+  إذا كان $\OLId{latin-ordinary}{t}_\OLMathNumeral{2} = \OLId{latin-ordinary}{s}_\OLMathNumeral{1} \circ \OLId{latin-ordinary}{s}_\OLMathNumeral{2}$، فإن $\OLId{latin-ordinary}{t}_\OLMathNumeral{1} \sqsubseteq \OLId{latin-ordinary}{t}_\OLMathNumeral{2}$ إذا وفقط إذا
+  كان $\OLId{latin-ordinary}{t}_\OLMathNumeral{1} = \OLId{latin-ordinary}{t}_\OLMathNumeral{2}$، أو $\OLId{latin-ordinary}{t}_\OLMathNumeral{1} \sqsubseteq \OLId{latin-ordinary}{s}_\OLMathNumeral{1}$، أو
+  $\OLId{latin-ordinary}{t}_\OLMathNumeral{1} \sqsubseteq \OLId{latin-ordinary}{s}_\OLMathNumeral{2}$.
+\end{center}
+
+غير أن $\mathrm{b} \circ \mathrm{a} \circ \mathrm{b}$ يقع على الصورة
+$\OLId{latin-ordinary}{s}_\OLMathNumeral{1} \circ \OLId{latin-ordinary}{s}_\OLMathNumeral{2}$، حيث
+\begin{align*}
+  \OLId{latin-ordinary}{s}_\OLMathNumeral{1} & = \mathrm{b} \text{ و} & \OLId{latin-ordinary}{s}_\OLMathNumeral{2} & = \mathrm{a} \circ \mathrm{b}.
+\intertext{وهو أيضاً من الصورة $r_1 \circ r_2$، حيث}
+  \OLId{latin-ordinary}{r}_\OLMathNumeral{1} & = \mathrm{b} \circ \mathrm{a} \text{ و} & \OLId{latin-ordinary}{r}_\OLMathNumeral{2} &= \mathrm{b}.
+\end{align*}
+فهل $\mathrm{a} \circ \mathrm{b}$ حد فرعي من
+$\mathrm{b} \circ \mathrm{a} \circ \mathrm{b}$؟ تجيب القراءة الأولى
+بنعم، والثانية بلا.
+
+وتسمى فرادة الطريق الذي يُبنى به الحد السليم من حدود سليمة أخرى
+\emph{قابلية القراءة الفريدة}. ولما كانت التعريفات الاستقرائية
+للعلاقات على هذه الكائنات ذات شأن، وجب أن نثبت تحقق هذه الخاصية.
+
+\begin{prop}
+  لنفترض أن $\OLId{latin-ordinary}{t}$ حد سليم. عندئذ إما أن يكون $\OLId{latin-ordinary}{t}$ حرفاً منفرداً، وإما أن
+  يوجد حدان سليمان محددان على نحو فريد، $\OLId{latin-ordinary}{s}_\OLMathNumeral{1}$ و$\OLId{latin-ordinary}{s}_\OLMathNumeral{2}$، بحيث
+  $\OLId{latin-ordinary}{t} = [\OLId{latin-ordinary}{s}_\OLMathNumeral{1} \circ \OLId{latin-ordinary}{s}_\OLMathNumeral{2}]$.
+\end{prop}
+
+\begin{proof}
+  إذا كان $\OLId{latin-ordinary}{t}$ حرفًا منفردًا حصل الشرط. فلنفرض إذن أن $\OLId{latin-ordinary}{t}$ ليس حرفًا
+  منفردًا. فيلزم من التعريف الاستقرائي أن يكون على صورة
+  $[\OLId{latin-ordinary}{s}_\OLMathNumeral{1} \circ \OLId{latin-ordinary}{s}_\OLMathNumeral{2}]$ لحدين سليمين $\OLId{latin-ordinary}{s}_\OLMathNumeral{1}$ و~$\OLId{latin-ordinary}{s}_\OLMathNumeral{2}$. ولم يبق إلا تفردهما؛
+  أي إذا كان $\OLId{latin-ordinary}{t} = [\OLId{latin-ordinary}{r}_\OLMathNumeral{1} \circ \OLId{latin-ordinary}{r}_\OLMathNumeral{2}]$، لزم أن
+  $\OLId{latin-ordinary}{s}_\OLMathNumeral{1} = \OLId{latin-ordinary}{r}_\OLMathNumeral{1}$ و$\OLId{latin-ordinary}{s}_\OLMathNumeral{2} = \OLId{latin-ordinary}{r}_\OLMathNumeral{2}$.
+
+  فلنفرض أن $\OLId{latin-ordinary}{t} = [\OLId{latin-ordinary}{s}_\OLMathNumeral{1} \circ \OLId{latin-ordinary}{s}_\OLMathNumeral{2}]$ وأن $\OLId{latin-ordinary}{t} = [\OLId{latin-ordinary}{r}_\OLMathNumeral{1} \circ \OLId{latin-ordinary}{r}_\OLMathNumeral{2}]$ أيضًا،
+  وأن $\OLId{latin-ordinary}{s}_\OLMathNumeral{1}$ و$\OLId{latin-ordinary}{s}_\OLMathNumeral{2}$ و$\OLId{latin-ordinary}{r}_\OLMathNumeral{1}$ و$\OLId{latin-ordinary}{r}_\OLMathNumeral{2}$ حدود سليمة. نريد إثبات
+  $\OLId{latin-ordinary}{s}_\OLMathNumeral{1} = \OLId{latin-ordinary}{r}_\OLMathNumeral{1}$ و$\OLId{latin-ordinary}{s}_\OLMathNumeral{2} = \OLId{latin-ordinary}{r}_\OLMathNumeral{2}$. ولا بد أولًا من تطابق $\OLId{latin-ordinary}{s}_\OLMathNumeral{1}$ و$\OLId{latin-ordinary}{r}_\OLMathNumeral{1}$؛
+  وإلا كان أحدهما قطعة ابتدائية صحيحة من الآخر، وذلك ممتنع بموجب
+  \olref[sti]{prop:initial} ما دام $\OLId{latin-ordinary}{s}_\OLMathNumeral{1}$ و~$\OLId{latin-ordinary}{r}_\OLMathNumeral{1}$ حدين سليمين. وإذا
+  ثبت $\OLId{latin-ordinary}{s}_\OLMathNumeral{1} = \OLId{latin-ordinary}{r}_\OLMathNumeral{1}$ ظهر كذلك $\OLId{latin-ordinary}{s}_\OLMathNumeral{2} = \OLId{latin-ordinary}{r}_\OLMathNumeral{2}$.
+\end{proof}
+
+وكما تُعرّف العلاقات، تُعرّف الدوال استقرائيًّا. فمن ذلك الدالة~$\OLId{latin-ordinary}{f}$
+التي تسند إلى الحد السليم أقصى عمق لأقواسه المتداخلة $[\dots]$،
+وتعريفها:
+
+\begin{defn}
+  \ollabel{defn:depth} يُعرَّف \emph{عمق} الحد السليم، $\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{t})$، استقرائياً
+  كما يأتي:
+  \[
+  \OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{t}) = \begin{cases}
+    \OLMathNumeral{0} & \text{ إذا كان $t$ حرفاً}\\
+    \max(\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{s}_\OLMathNumeral{1}), \OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{s}_\OLMathNumeral{2})) + \OLMathNumeral{1} & \text{ إذا كان $t = [s_1 \circ s_2]$.}
+  \end{cases}
+  \]
+\end{defn}
+
+ومن أمثلة حسابها:
+\begin{align*}
+  \OLId{latin-ordinary}{f}([\mathrm{a} \circ \mathrm{b}]) & =
+    \max(\OLId{latin-ordinary}{f}(\mathrm{a}),\OLId{latin-ordinary}{f}(\mathrm{b})) + \OLMathNumeral{1} \\
+  &= \max(\OLMathNumeral{0}, \OLMathNumeral{0}) + \OLMathNumeral{1} = \OLMathNumeral{1} \text{، و}\\
+  \OLId{latin-ordinary}{f}([[\mathrm{a} \circ \mathrm{b}] \circ \mathrm{c}]) & =
+    \max(\OLId{latin-ordinary}{f}([\mathrm{a} \circ \mathrm{b}]), \OLId{latin-ordinary}{f}(\mathrm{c})) + \OLMathNumeral{1} \\
+  & = \max(\OLMathNumeral{1},\OLMathNumeral{0}) + \OLMathNumeral{1} = \OLMathNumeral{2}.
+\end{align*}
+
+ومعلوم أن $\OLId{latin-ordinary}{s}_\OLMathNumeral{1}$ و$\OLId{latin-ordinary}{s}_\OLMathNumeral{2}$ حدان سليمان، وأن كل حد سليم إما حرف وإما على
+الصورة $[\OLId{latin-ordinary}{s}_\OLMathNumeral{1} \circ \OLId{latin-ordinary}{s}_\OLMathNumeral{2}]$. ويعود التفرد هنا فيكون شرطًا لازمًا؛ ولبيان
+ذلك نرجع إلى الحدود الخالية من الأقواس المتقدمة. فيكون «التعريف»
+النظير:
+\[
+  \OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{t}) =
+  \begin{cases}
+    \OLMathNumeral{0} & \text{ إذا كان $t$ حرفاً}\\
+   \max(\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{s}_\OLMathNumeral{1}), \OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{s}_\OLMathNumeral{2})) + \OLMathNumeral{1} & \text{ إذا كان $t = s_1 \circ s_2$.}
+  \end{cases}
+\]
+ثم ننظر في الحد الخالي من الأقواس
+$\mathrm{a} \circ \mathrm{b} \circ \mathrm{c} \circ \mathrm{d}$.
+فله أكثر من قراءة؛ منها أن يؤخذ على أنه
+$\OLId{latin-ordinary}{s}_\OLMathNumeral{1} \circ \OLId{latin-ordinary}{s}_\OLMathNumeral{2}$، حيث
+\begin{align*}
+  \OLId{latin-ordinary}{s}_\OLMathNumeral{1} & = \mathrm{a} \text{ و} &
+  \OLId{latin-ordinary}{s}_\OLMathNumeral{2} & = \mathrm{b} \circ \mathrm{c} \circ \mathrm{d},
+\intertext{أو على أنه $r_1 \circ r_2$، حيث}
+  \OLId{latin-ordinary}{r}_\OLMathNumeral{1} & = \mathrm{a} \circ \mathrm{b} \text{ و} &
+  \OLId{latin-ordinary}{r}_\OLMathNumeral{2} &= \mathrm{c} \circ \mathrm{d}.
+\end{align*}
+وحساب $\OLId{latin-ordinary}{g}$ على القراءة الأولى يعطي:
+\begin{align*}
+  \OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{s}_\OLMathNumeral{1} \circ \OLId{latin-ordinary}{s}_\OLMathNumeral{2}) & =
+  \max(\OLId{latin-ordinary}{g}(\mathrm{a}), \OLId{latin-ordinary}{g}(\mathrm{b} \circ \mathrm{c} \circ \mathrm{d})) + \OLMathNumeral{1} \\ & =
+  \max(\OLMathNumeral{0},\OLMathNumeral{2}) + \OLMathNumeral{1} = \OLMathNumeral{3}
+  \intertext{بينما نحصل بحسب القراءة الأخرى على}
+  \OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{r}_\OLMathNumeral{1} \circ \OLId{latin-ordinary}{r}_\OLMathNumeral{2}) & =
+  \max(\OLId{latin-ordinary}{g}(\mathrm{a} \circ \mathrm{b}), \OLId{latin-ordinary}{g}(\mathrm{c} \circ \mathrm{d})) + \OLMathNumeral{1} \\ &
+  = \max(\OLMathNumeral{1},\OLMathNumeral{1}) + \OLMathNumeral{1} = \OLMathNumeral{2}.
+\end{align*}
+ولما كان من شرط الدالة أن تعطي قيمة واحدة، لم يكن «تعريفنا» لـ~$\OLId{latin-ordinary}{g}$
+تعريفًا لدالة أصلًا.
+
+\begin{prob}
+  ضع تعريفًا استقرائيًّا للدالة $\OLId{latin-ordinary}{l}$، حيث $\OLId{latin-ordinary}{l}(\OLId{latin-ordinary}{t})$ عدد الرموز في الحد
+  السليم~$\OLId{latin-ordinary}{t}$.
+\end{prob}
+
+\begin{prob}
+  أثبت بالاستقراء البنيوي على الحدود السليمة $\OLId{latin-ordinary}{t}$ أن $\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{t}) < \OLId{latin-ordinary}{l}(\OLId{latin-ordinary}{t})$ (حيث
+  $\OLId{latin-ordinary}{l}(\OLId{latin-ordinary}{t})$ عدد الرموز في~$\OLId{latin-ordinary}{t}$، و$\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{t})$ عمق $\OLId{latin-ordinary}{t}$ كما عُرّف في
+  \olref[mth][ind][rel]{defn:depth}).
+\end{prob}
+
+\end{document}

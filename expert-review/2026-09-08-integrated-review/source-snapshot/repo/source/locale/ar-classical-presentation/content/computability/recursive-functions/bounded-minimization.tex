@@ -1,0 +1,67 @@
+% Part: computability
+% Chapter: recursive-functions
+% Section: bounded-minimization
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{rec}{bmi}
+\olsection{التصغير المحدود}
+
+\begin{explain}
+قد تدعو الحاجة إلى تعريف دالة بأصغر عدد يحقق خاصية أو
+علاقة~$\OLId{latin-looped}{P}$. ومتى كانت $\OLId{latin-looped}{P}$ قابلة للقرار، أمكن البحث عن ذلك العدد
+بتجريب $\OLMathNumeral{0}$ و$\OLMathNumeral{1}$ و$\OLMathNumeral{2}$ و… على الترتيب، حتى نجد أول ما
+يحقق~$\OLId{latin-looped}{P}$. وهذا بحث غير محدود، فلا يلزم بقاؤه في جملة الدوال
+العودية البدائية. وأما إذا طلبنا أصغر عدد
+\emph{أدنى من حد معطى مستقلًا}، بقي الأمر في نطاق العودية البدائية.
+وبيانه على وجه أعم: لنأخذ علاقة عودية بدائية~$\OLId{latin-looped}{R}(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{z})$،
+ولنطلب الدالة التي تسند إلى كل $\OLId{latin-ordinary}{x}$ و~$\OLId{latin-ordinary}{y}$ أصغر $\OLId{latin-ordinary}{z}<\OLId{latin-ordinary}{y}$ تصدق معه
+$\OLId{latin-looped}{R}(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{z})$. يتأتى حسابها بفحص $\OLId{latin-looped}{R}(\OLId{latin-ordinary}{x},\OLMathNumeral{0})$، ثم $\OLId{latin-looped}{R}(\OLId{latin-ordinary}{x},\OLMathNumeral{1})$، وهكذا إلى
+$\OLId{latin-looped}{R}(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y}-\OLMathNumeral{1})$. فما الدليل على عوديتها البدائية؟
+\end{explain}
+
+\begin{prop}
+متى كانت $\OLId{latin-looped}{R}(\vec \OLId{latin-ordinary}{x},\OLId{latin-ordinary}{z})$ عودية بدائية، كانت $\OLId{latin-ordinary}{m}_\OLId{latin-looped}{R}(\vec{\OLId{latin-ordinary}{x}},\OLId{latin-ordinary}{y})$
+عودية بدائية كذلك. وقيمتها أصغر~$\OLId{latin-ordinary}{z}$ أدنى من~$\OLId{latin-ordinary}{y}$ يحقق
+$\OLId{latin-looped}{R}(\vec \OLId{latin-ordinary}{x},\OLId{latin-ordinary}{z})$ إن وجد، وإلا فقيمتها $\OLId{latin-ordinary}{y}$. ونرمز إلى هذه الدالة~$\OLId{latin-ordinary}{m}_\OLId{latin-looped}{R}$ بـ
+\[
+\bmin{\OLId{latin-ordinary}{z} < \OLId{latin-ordinary}{y}}{\OLId{latin-looped}{R}(\vec{\OLId{latin-ordinary}{x}}, \OLId{latin-ordinary}{z})}.
+\]
+\end{prop}
+
+\begin{proof}
+أما حد البدء فلا يوجد~$\OLId{latin-ordinary}{z}<\OLMathNumeral{0}$ يحقق $\OLId{latin-looped}{R}(\vec{\OLId{latin-ordinary}{x}},\OLId{latin-ordinary}{z})$، لامتناع
+$\OLId{latin-ordinary}{z}<\OLMathNumeral{0}$ أصلًا؛ فلا بد من $\OLId{latin-ordinary}{m}_\OLId{latin-looped}{R}(\vec \OLId{latin-ordinary}{x},\OLMathNumeral{0})=\OLMathNumeral{0}$.
+
+وأما إذا صار الحد $\OLId{latin-ordinary}{y}+\OLMathNumeral{1}$، فلا يخلو الأمر من ثلاث حالات:
+\begin{enumerate}
+\item يوجد $\OLId{latin-ordinary}{z}<\OLId{latin-ordinary}{y}$ بحيث تصدق $\OLId{latin-looped}{R}(\vec{\OLId{latin-ordinary}{x}},\OLId{latin-ordinary}{z})$، وعندئذ
+$\OLId{latin-ordinary}{m}_\OLId{latin-looped}{R}(\vec{\OLId{latin-ordinary}{x}},\OLId{latin-ordinary}{y}+\OLMathNumeral{1})=\OLId{latin-ordinary}{m}_\OLId{latin-looped}{R}(\vec{\OLId{latin-ordinary}{x}},\OLId{latin-ordinary}{y})$.
+\item لا يوجد $\OLId{latin-ordinary}{z}$ كهذا أدنى من $\OLId{latin-ordinary}{y}$، لكن $\OLId{latin-looped}{R}(\vec{\OLId{latin-ordinary}{x}},\OLId{latin-ordinary}{y})$ تصدق، وعندئذ
+$\OLId{latin-ordinary}{m}_\OLId{latin-looped}{R}(\vec{\OLId{latin-ordinary}{x}},\OLId{latin-ordinary}{y}+\OLMathNumeral{1})=\OLId{latin-ordinary}{y}$.
+\item لا يوجد $\OLId{latin-ordinary}{z}<\OLId{latin-ordinary}{y}+\OLMathNumeral{1}$ بحيث تصدق $\OLId{latin-looped}{R}(\vec{\OLId{latin-ordinary}{x}},\OLId{latin-ordinary}{z})$، وعندئذ
+$\OLId{latin-ordinary}{m}_\OLId{latin-looped}{R}(\vec{\OLId{latin-ordinary}{x}},\OLId{latin-ordinary}{y}+\OLMathNumeral{1})=\OLId{latin-ordinary}{y}+\OLMathNumeral{1}$.
+\end{enumerate}
+فبدءًا بالقيمة $\OLId{latin-ordinary}{m}_\OLId{latin-looped}{R}(\vec \OLId{latin-ordinary}{x},\OLMathNumeral{0})$ نعرّف الدالة بالعودية البدائية كما يأتي:
+\begin{align*}
+\OLId{latin-ordinary}{m}_\OLId{latin-looped}{R}(\vec{\OLId{latin-ordinary}{x}}, \OLMathNumeral{0}) & = \OLMathNumeral{0}\\
+\OLId{latin-ordinary}{m}_\OLId{latin-looped}{R}(\vec{\OLId{latin-ordinary}{x}}, \OLId{latin-ordinary}{y}+\OLMathNumeral{1}) & =
+\begin{cases}
+\OLId{latin-ordinary}{m}_\OLId{latin-looped}{R}(\vec{\OLId{latin-ordinary}{x}}, \OLId{latin-ordinary}{y}) & \text{إذا كان $m_R(\vec x, y) \neq y$}\\
+\OLId{latin-ordinary}{y} & \text{إذا كان $m_R(\vec x, y) = y$ وصدقت $R(\vec{x}, y)$}\\
+\OLId{latin-ordinary}{y}+\OLMathNumeral{1} & \text{في غير ذلك.}
+\end{cases}
+\end{align*}
+ووجه الاستدلال في شرط الفرع الأول أن وجود $\OLId{latin-ordinary}{z}<\OLId{latin-ordinary}{y}$ يحقق $\OLId{latin-looped}{R}(\vec \OLId{latin-ordinary}{x},\OLId{latin-ordinary}{z})$ يكافئ
+$\OLId{latin-ordinary}{m}_\OLId{latin-looped}{R}(\vec \OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y})\neq \OLId{latin-ordinary}{y}$.
+\end{proof}
+
+\begin{prob}
+لتكن $\OLId{latin-looped}{R}(\vec \OLId{latin-ordinary}{x},\OLId{latin-ordinary}{z})$ عودية بدائية. استخرج بالعودية البدائية من
+~$\Char{\OLId{latin-looped}{R}}$ الدالة $\OLId{latin-ordinary}{m}'_\OLId{latin-looped}{R}(\vec{\OLId{latin-ordinary}{x}},\OLId{latin-ordinary}{y})$، جاعلًا قيمتها أصغر~$\OLId{latin-ordinary}{z}$ أدنى من~$\OLId{latin-ordinary}{y}$
+يحقق $\OLId{latin-looped}{R}(\vec{\OLId{latin-ordinary}{x}},\OLId{latin-ordinary}{z})$ إن وجد، و$\OLMathNumeral{0}$ إن لم يوجد.
+\end{prob}
+
+\end{document}

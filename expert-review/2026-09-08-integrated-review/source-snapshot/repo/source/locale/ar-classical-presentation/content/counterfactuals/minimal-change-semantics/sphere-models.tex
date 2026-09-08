@@ -1,0 +1,105 @@
+% Part: conditional-logics
+% Chapter: minimal-change-semantics
+% Section: sphere-models
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{con}{min}{sph}
+
+\olsection{في نماذج الكرات}
+
+من سبل إقامة دلالة صورية للشرطيات المخالفة للواقع أن نصوغ تصور لويس
+غير الصوري بنيةً رياضية. فنجعل الكرات المحيطة بعالم~$\OLId{latin-ordinary}{w}$ مجموعات من
+العوالم؛ ولأنها متداخلة، لزم أن تترتب المجموعات المحيطة بـ$\OLId{latin-ordinary}{w}$ ترتيبًا
+خطيًا بعلاقة الاحتواء.
+
+\begin{defn}
+  \emph{نموذج الكرات} ثلاثي~$\mModel{M} = \tuple{\OLId{latin-looped}{W}, \OLId{latin-looped}{O}, \OLId{latin-looped}{V}}$؛ فيه
+  $\OLId{latin-looped}{W}$ مجموعة عوالم غير خالية، و$\OLId{latin-looped}{V}\colon \PVar \to \Pow{\OLId{latin-looped}{W}}$ تقييم،
+  و$\OLId{latin-looped}{O}\colon \OLId{latin-looped}{W} \to \Pow{\Pow{\OLId{latin-looped}{W}}}$ دالة تخص كل عالم~$\OLId{latin-ordinary}{w}$ بـ
+  \emph{نظام كرات}~$\OLId{latin-looped}{O}_\OLId{latin-ordinary}{w}$. ولكل~$\OLId{latin-ordinary}{w}$ تكون~$\OLId{latin-looped}{O}_\OLId{latin-ordinary}{w}$ مجموعة من مجموعات
+  العوالم تستوفي ما يأتي:
+  \begin{enumerate}
+  \item أن تكون~$\OLId{latin-looped}{O}_\OLId{latin-ordinary}{w}$ \emph{متمركزة} عند~$\OLId{latin-ordinary}{w}$: $\{\OLId{latin-ordinary}{w}\} \in \OLId{latin-looped}{O}_\OLId{latin-ordinary}{w}$.
+  \item وأن تكون~$\OLId{latin-looped}{O}_\OLId{latin-ordinary}{w}$ \emph{متداخلة}: فإذا كان~$\OLId{latin-looped}{S}_\OLMathNumeral{1}$، $\OLId{latin-looped}{S}_\OLMathNumeral{2} \in \OLId{latin-looped}{O}_\OLId{latin-ordinary}{w}$،
+    تحقق~$\OLId{latin-looped}{S}_\OLMathNumeral{1} \subseteq \OLId{latin-looped}{S}_\OLMathNumeral{2}$ أو~$\OLId{latin-looped}{S}_\OLMathNumeral{2} \subseteq \OLId{latin-looped}{S}_\OLMathNumeral{1}$؛ أي إن~$\OLId{latin-looped}{O}_\OLId{latin-ordinary}{w}$
+    مرتبة خطيًا بـ$\subseteq$.
+  \item وأن تكون~$\OLId{latin-looped}{O}_\OLId{latin-ordinary}{w}$ مغلقة تحت الاتحادات غير الخالية.
+  \item وأن تكون~$\OLId{latin-looped}{O}_\OLId{latin-ordinary}{w}$ مغلقة تحت التقاطعات غير الخالية.
+  \end{enumerate}
+\end{defn}
+
+ومعنى~$\OLId{latin-looped}{O}_\OLId{latin-ordinary}{w}$ في التصور الحدسي أن العوالم «المحيطة» بـ$\OLId{latin-ordinary}{w}$ طبقات تختلف
+في بعدها عن~$\OLId{latin-ordinary}{w}$. وأدخل الكرات~$\OLId{latin-ordinary}{w}$ وحده، أي~$\{\OLId{latin-ordinary}{w}\}$، لأن~$\OLId{latin-ordinary}{w}$ أقرب إلى
+نفسه من عالم في كرة أخرى. فإذا كان~$\OLId{latin-looped}{S} \subsetneq \OLId{latin-looped}{S}'$، كانت عوالم
+$\OLId{latin-looped}{S}' \setminus \OLId{latin-looped}{S}$ أبعد عن~$\OLId{latin-ordinary}{w}$ من عوالم~$\OLId{latin-looped}{S}$، وكانت~$\OLId{latin-looped}{S}' \setminus \OLId{latin-looped}{S}$
+هي «الطبقة» بين~$\OLId{latin-looped}{S}$ وبين ما يقع خارج~$\OLId{latin-looped}{S}'$. غير أن الكرة نفسها تضم كل
+العوالم الداخلة تحت سطحها الخارجي، ولا تقتصر على طبقة واحدة.
+
+\begin{figure}
+\begin{center}
+\begin{tikzpicture}[layerwidth=1.5,scale=.6]\tiny
+  \spheresystem{3}
+  \propositionintersect{0}{3}{60}{6}
+  \path (0,0) node[world] {$\OLId{latin-ordinary}{w}$};
+  \spherepos{-30}{2}{node[world] {$\OLId{latin-ordinary}{w}_\OLMathNumeral{2}$}}
+  \spherepos{220}{2}{node[world] {$\OLId{latin-ordinary}{w}_\OLMathNumeral{3}$}}
+  \spherepos{90}{2}{node[world] {$\OLId{latin-ordinary}{w}_\OLMathNumeral{1}$}}
+  \spherepos[shift={(.1,0)}]{10}{3}{node[world] {$\OLId{latin-ordinary}{w}_\OLMathNumeral{5}$}}
+  \spherepos[shift={(.1,0)}]{-10}{3}{node[world] {$\OLId{latin-ordinary}{w}_\OLMathNumeral{6}$}}
+  \spherepos{225}{3}{node[world] {$\OLId{latin-ordinary}{w}_\OLMathNumeral{4}$}}
+  \spherepos{20}{4}{node[world] {$\OLId{latin-ordinary}{w}_\OLMathNumeral{7}$}}
+  \path (5,0) node[left] {$\OLId{latin-ordinary}{p}$};
+\end{tikzpicture}
+\caption{تصوير لنموذج من الكرات}
+\ollabel{fig:sphere-model}
+\end{center}
+\end{figure}
+
+يمثل الرسم في~\olref{fig:sphere-model} نموذج الكرات الذي فيه
+$\OLId{latin-looped}{W} = \{\OLId{latin-ordinary}{w}, \OLId{latin-ordinary}{w}_\OLMathNumeral{1}, \dots, \OLId{latin-ordinary}{w}_\OLMathNumeral{7}\}$ و$\OLId{latin-looped}{V}(\OLId{latin-ordinary}{p}) = \{\OLId{latin-ordinary}{w}_\OLMathNumeral{5}, \OLId{latin-ordinary}{w}_\OLMathNumeral{6}, \OLId{latin-ordinary}{w}_\OLMathNumeral{7}\}$.
+وأعمقها~$\OLId{latin-looped}{S}_\OLMathNumeral{1} = \{\OLId{latin-ordinary}{w}\}$. ثم إن أقرب العوالم إلى~$\OLId{latin-ordinary}{w}$ هي~$\OLId{latin-ordinary}{w}_\OLMathNumeral{1}$ و$\OLId{latin-ordinary}{w}_\OLMathNumeral{2}$
+و$\OLId{latin-ordinary}{w}_\OLMathNumeral{3}$، فتليها الكرة~$\OLId{latin-looped}{S}_\OLMathNumeral{2} = \{\OLId{latin-ordinary}{w}, \OLId{latin-ordinary}{w}_\OLMathNumeral{1}, \OLId{latin-ordinary}{w}_\OLMathNumeral{2}, \OLId{latin-ordinary}{w}_\OLMathNumeral{3}\}$. وأبعد من ذلك
+$\OLId{latin-ordinary}{w}_\OLMathNumeral{4}$ و$\OLId{latin-ordinary}{w}_\OLMathNumeral{5}$ و$\OLId{latin-ordinary}{w}_\OLMathNumeral{6}$، فتكون الكرة الخارجية
+$\OLId{latin-looped}{S}_\OLMathNumeral{3} = \{\OLId{latin-ordinary}{w}, \OLId{latin-ordinary}{w}_\OLMathNumeral{1}, \dots, \OLId{latin-ordinary}{w}_\OLMathNumeral{6}\}$. وعلى هذا يكون نظام الكرات المحيطة
+بـ$\OLId{latin-ordinary}{w}$ هو~$\OLId{latin-looped}{O}_\OLId{latin-ordinary}{w} = \{\OLId{latin-looped}{S}_\OLMathNumeral{1}, \OLId{latin-looped}{S}_\OLMathNumeral{2}, \OLId{latin-looped}{S}_\OLMathNumeral{3}\}$. وأما~$\OLId{latin-ordinary}{w}_\OLMathNumeral{7}$ فخارج كل كرة تحيط
+بـ$\OLId{latin-ordinary}{w}$. وأقرب عالمين يصدق فيهما~$\OLId{latin-ordinary}{p}$ هما~$\OLId{latin-ordinary}{w}_\OLMathNumeral{5}$ و$\OLId{latin-ordinary}{w}_\OLMathNumeral{6}$؛ ولذلك تغدو
+أصغر كرة تقبل~$\OLId{latin-ordinary}{p}$ هي~$\OLId{latin-looped}{S}_\OLMathNumeral{3}$.
+% تصحيح لفظي (0524-N1): استعيد وصف الكرة الأعمق بدل اللفظ الدخيل غير الدال.
+
+ولكي نحد إرضاء صيغة~$!A$ عند عالم~$\OLId{latin-ordinary}{w}$ من نموذج كرات~$\mModel M$،
+أي~$\mSat{\OLId{latin-looped}{M}}{!A}[\OLId{latin-ordinary}{w}]$، نزيد في تعريف الإرضاء بندًا يخص
+$!B \cif !C$:
+
+\begin{defn}
+  يتحقق~$\mSat{\OLId{latin-looped}{M}}{!B \cif !C}[\OLId{latin-ordinary}{w}]$ إذا وفقط إذا وقع أحد الأمرين:
+  \begin{enumerate}
+  \item\ollabel{sphere-vac} لكل~$\OLId{latin-ordinary}{u} \in \bigcup \OLId{latin-looped}{O}_\OLId{latin-ordinary}{w}$،
+    $\mSat/{\OLId{latin-looped}{M}}{!B}[\OLId{latin-ordinary}{u}]$؛ أو
+  \item\ollabel{sphere-nonvac} لبعض~$\OLId{latin-looped}{S} \in \OLId{latin-looped}{O}_\OLId{latin-ordinary}{w}$،
+    \begin{enumerate}
+      \item $\mSat{\OLId{latin-looped}{M}}{!B}[\OLId{latin-ordinary}{u}]$ لبعض~$\OLId{latin-ordinary}{u} \in \OLId{latin-looped}{S}$؛ و
+      \item لكل~$\OLId{latin-ordinary}{v} \in \OLId{latin-looped}{S}$، إما~$\mSat/{\OLId{latin-looped}{M}}{!B}[\OLId{latin-ordinary}{v}]$ أو
+        $\mSat{\OLId{latin-looped}{M}}{!C}[\OLId{latin-ordinary}{v}]$.
+    \end{enumerate}
+  \end{enumerate}
+\end{defn}
+
+فمقتضى التعريف أن~$\mSat{\OLId{latin-looped}{M}}{!B \cif !C}[\OLId{latin-ordinary}{w}]$ يتحقق إذا وفقط إذا كذب
+المقدّم~$!B$ في كل موضع من الكرات المحيطة بـ$\OLId{latin-ordinary}{w}$، أو وُجدت كرة~$\OLId{latin-looped}{S}$
+تقبل~$!B$ وصدق الشرط المادي~$!B \lif !C$ عند جميع عوالم هذه الكرة
+«القابلة لـ~$!B$». ولم نشترط أن تكون~$\OLId{latin-looped}{S}$ \emph{أعمق} كرة تقبل~$!B$،
+وإن أوهمه الشرح الحدسي. غير أن تحقق شرط~\olref{sphere-nonvac} لكرّة~$\OLId{latin-looped}{S}$
+يستلزم تحققه لكل كرة تقبل~$!B$ وتندرج في~$\OLId{latin-looped}{S}$؛ فإذا وُجدت أعمق كرة
+تقبل~$!B$ تحقق لها الشرط خاصة.
+
+ولا يوجب تعريف نماذج الكرات وجود أعمق كرة تقبل~$!B$؛ فقد توجد متتالية
+غير منتهية
+$\OLId{latin-looped}{S}_\OLMathNumeral{1} \supsetneq \OLId{latin-looped}{S}_\OLMathNumeral{2} \supsetneq \dots \supsetneq \{\OLId{latin-ordinary}{w}\}$ من الكرات
+تقبل~$!B$، فلا توجد أعمق كرة تقبل~$!B$. وحينئذ يتحقق
+$\mSat{\OLId{latin-looped}{M}}{!B \cif !C}[\OLId{latin-ordinary}{w}]$ إذا وفقط إذا صدق~$!B \lif !C$ في الكرات
+$\OLId{latin-looped}{S}_\OLId{latin-ordinary}{i}$، $\OLId{latin-looped}{S}_{\OLId{latin-ordinary}{i}+\OLMathNumeral{1}}$، \dots{} كلها ابتداءً من فهرس~$\OLId{latin-ordinary}{i}$ ما.
+
+\end{document}

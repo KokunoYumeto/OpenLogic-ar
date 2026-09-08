@@ -1,0 +1,85 @@
+% Part: normal-modal-logic
+% Chapter: frame-definability
+% Section: first-order-definability
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{frd}{fol}
+
+\olsection{قابلية التعريف من الرتبة الأولى}
+
+سبق أن عرّفنا جملة من خصائص الوصول بـ!!{formula}s موجهية؛
+فالتناظر، مثلًا، تعرّفه ال!!{formula}~\Ax{B}، أي~$\OLId{latin-ordinary}{p} \lif \Box\Diamond \OLId{latin-ordinary}{p}$.
+لكن الشروط السابقة كلها تقبل أيضًا التعبير بـ!!{formula}s من
+الرتبة الأولى، في !!a{language} لا تضم إلا !!{predicate} ثنائيًا
+واحدًا. فقولنا
+$\lforall[\OLId{latin-ordinary}{x}][\lforall[\OLId{latin-ordinary}{y}][(\Atom{Q}{x,y} \lif \Atom{Q}{y, x})]]$
+يعرّف التناظر: ذلك أن !!{structure} من الرتبة الأولى~$\Struct{M}$،
+حيث~$\Domain{\OLId{latin-looped}{M}} = \OLId{latin-looped}{W}$ و$\Assign{\OLId{latin-looped}{Q}}{\OLId{latin-looped}{M}} = \OLId{latin-looped}{R}$، تحقق هذه الصيغة
+متى وفقط متى كانت~$\OLId{latin-looped}{R}$ متناظرة. فنضع لهذا المعنى التعريف الآتي:
+
+\begin{defn}
+  يكون صنف الأطر~$\mClass{F}$ \emph{قابلًا للتعريف من الرتبة الأولى}
+  إذا وُجدت !!a{sentence}~$!A$ في لغة الرتبة الأولى ذات
+  !!{predicate} ثنائي واحد~$\OLId{latin-looped}{Q}$، بحيث
+  $\mModel{F} = \tuple{\OLId{latin-looped}{W}, \OLId{latin-looped}{R}} \in \mClass{F}$ إذا وفقط إذا كان
+  $\Sat{\OLId{latin-looped}{M}}{!A}$ في ال!!{structure} من الرتبة الأولى~$\Struct{M}$ ذات
+  $\Domain{\OLId{latin-looped}{M}} = \OLId{latin-looped}{W}$ و$\Assign{\OLId{latin-looped}{Q}}{\OLId{latin-looped}{M}} = \OLId{latin-looped}{R}$.
+\end{defn}
+
+غير أن اتفاق الطريقتين في الخصائص وال!!{formula}s الموجهية
+السابقة لا يعمّ جميع الأحوال. فقد تعرّف !!{formula} موجهية صنفًا
+لا يُعرّف من الرتبة الأولى؛ وقد يكون صنف من الأطر قابلًا للتعريف
+من الرتبة الأولى، ولا يكون قابلًا للتعريف بصيغة موجهية.
+
+يعطي مثالًا مضادًا للدعوى الأولى صيغة لوب:
+\begin{equation}
+\Box(\Box \OLId{latin-ordinary}{p} \lif \OLId{latin-ordinary}{p}) \lif \Box \OLId{latin-ordinary}{p}. \tag{\Ax{W}}
+\end{equation}
+تعرّف~\Ax{W} صنف الأطر المتعدية والمعكوسة الحسنة التأسيس. وتكون
+العلاقة حسنة التأسيس إذا لم توجد متتالية لا نهائية
+$\OLId{latin-ordinary}{w}_\OLMathNumeral{1}$، و$\OLId{latin-ordinary}{w}_\OLMathNumeral{2}$، و\dots{} بحيث~$Rw_\OLMathNumeral{2}\OLId{latin-ordinary}{w}_\OLMathNumeral{1}$، و$Rw_\OLMathNumeral{3}\OLId{latin-ordinary}{w}_\OLMathNumeral{2}$، و\dots. فمثلًا،
+العلاقة~$<$ على~$\Nat$ حسنة التأسيس، بينما العلاقة~$<$ على~$\Int$
+ليست كذلك. وتكون العلاقة معكوسة حسنة التأسيس إذا وفقط إذا كان
+معكوسها حسن التأسيس. ومن ثم فالعلاقات المعكوسة الحسنة التأسيس هي التي
+لا توجد فيها متتالية لا نهائية~$\OLId{latin-ordinary}{w}_\OLMathNumeral{1}$، و$\OLId{latin-ordinary}{w}_\OLMathNumeral{2}$، و\dots{} بحيث
+$Rw_\OLMathNumeral{1}\OLId{latin-ordinary}{w}_\OLMathNumeral{2}$، و$Rw_\OLMathNumeral{2}\OLId{latin-ordinary}{w}_\OLMathNumeral{3}$، و\dots.
+
+لكن لا توجد !!{formula} من الرتبة الأولى تعرّف العلاقات المتعدية
+المعكوسة الحسنة التأسيس. افترض، خلاف ذلك، أن~$\Sat{\OLId{latin-looped}{M}}{!F}$ إذا وفقط
+إذا كانت~$\OLId{latin-looped}{R} = \Assign{\OLId{latin-looped}{Q}}{\OLId{latin-looped}{M}}$ متعدية ومعكوسة حسنة التأسيس. ولكل
+$\OLId{latin-ordinary}{n} \ge \OLMathNumeral{2}$، لتكن~$!A_\OLId{latin-ordinary}{n}$ ال!!{formula}
+\[
+(\Atom{Q}{a_1,a_2} \land \dots \land
+    \Atom{Q}{a_{n-1},a_{n}})
+\]
+وتأمل الآن مجموعة ال!!{formula}s
+\[
+\OLId{greek-variable}{Gamma} = \{!F, !A_\OLMathNumeral{2}, !A_\OLMathNumeral{3}, \dots\}.
+\]
+كل مجموعة جزئية منتهية~$\OLId{greek-variable}{Delta}$ من~$\OLId{greek-variable}{Gamma}$ قابلة للتحقيق. نأخذ
+$\OLId{latin-ordinary}{k} \ge \OLMathNumeral{2}$ أكبر عدد وردت~$!A_\OLId{latin-ordinary}{k}$ له في~$\OLId{greek-variable}{Delta}$؛ وإن لم ترد فيها
+صيغة من هذا النوع، أخذنا~$\OLId{latin-ordinary}{k}=\OLMathNumeral{2}$. ولنجعل
+$\Domain{\OLId{latin-looped}{M}_\OLId{latin-ordinary}{k}} = \{\OLMathNumeral{1}, \dots, \OLId{latin-ordinary}{k}\}$، و$\Assign{\OLId{latin-ordinary}{a}_\OLId{latin-ordinary}{i}}{\OLId{latin-looped}{M}_\OLId{latin-ordinary}{k}} = \OLId{latin-ordinary}{i}$
+للثوابت التي تحتاجها~$\OLId{greek-variable}{Delta}$، و$\Assign{\OLId{latin-looped}{Q}}{\OLId{latin-looped}{M}_\OLId{latin-ordinary}{k}} = <$؛
+أما بقية الثوابت فتعين اعتباطًا في المجال.
+ولما كانت~$<$ على~$\{\OLMathNumeral{1}, \dots, \OLId{latin-ordinary}{k}\}$ متعدية ومعكوسة حسنة التأسيس،
+حصل~$\Sat{\OLId{latin-looped}{M}_\OLId{latin-ordinary}{k}}{!F}$. ويعطي البناء~$\Sat{\OLId{latin-looped}{M}_\OLId{latin-ordinary}{k}}{!A_\OLId{latin-ordinary}{i}}$
+لكل~$!A_\OLId{latin-ordinary}{i} \in \OLId{greek-variable}{Delta}$. فمن تراص منطق الرتبة الأولى تتحقق~$\OLId{greek-variable}{Gamma}$
+في !!{structure} ما~$\Struct{M}$. وحينئذ يلزم من~$\Sat{\OLId{latin-looped}{M}}{!F}$
+أن تكون~$\Assign{\OLId{latin-looped}{Q}}{\OLId{latin-looped}{M}}$ معكوسة حسنة التأسيس.
+غير أن~$\Assign{\OLId{latin-ordinary}{a}_\OLMathNumeral{1}}{\OLId{latin-looped}{M}}$، و$\Assign{\OLId{latin-ordinary}{a}_\OLMathNumeral{2}}{\OLId{latin-looped}{M}}$، و\dots{}
+سلسلة لا نهائية من النوع الممنوع، وهذا تناقض.
+
+وأما المثال المضاد في الاتجاه الآخر فخاصية الكلية: لكل~$\OLId{latin-ordinary}{u}$ و$\OLId{latin-ordinary}{v}$
+يكون~$Ruv$. وهي من الرتبة الأولى، إذ تعرّفها
+$\lforall[\OLId{latin-ordinary}{x}][\lforall[\OLId{latin-ordinary}{y}][\Atom{Q}{x,y}]]$. ومع ذلك لا توجد صيغة
+موجهية تصلح في الأطر الكلية وحدها جميعًا. والسبب نتيجة لها
+أهميتها: ما يصلح في جميع الأطر الكلية هو بعينه ما يصلح في جميع
+الأطر الانعكاسية المتناظرة المتعدية. ولما كان في هذه الأخيرة أطر
+غير كلية، كانت كل~!!{formula} صالحة في الأطر الكلية صالحة أيضًا
+في بعض الأطر غير الكلية، فلا تميز الكلية.
+
+\end{document}

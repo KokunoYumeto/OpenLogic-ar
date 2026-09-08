@@ -1,0 +1,67 @@
+% Part: first-order-logic
+% Chapter: introduction
+% Section: models-theories
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{int}{mod}
+
+\olsection{النماذج والنظريات}
+
+بعد ضبط نحو منطق الرتبة الأولى ودلالته، ننظر في خواص
+ال!!{structure}s والمفاهيم الدلالية، وفي تعريف أنساق
+ال!!{derivation} ودراستها. ومن المسائل أن تُعطى مجموعة من
+ال!!{sentence}s، فنطلب ال!!{structure}s التي تصدق فيها
+ال!!{sentence}s كلها. فإذا كانت مجموعة ال!!{sentence}s~$\OLId{greek-variable}{Gamma}$
+معطاة، سمينا ال!!^a{structure}~$\Struct{M}$ المرضية لها
+\emph{نموذجًا لـ~$\OLId{greek-variable}{Gamma}$}. قد نبدأ إذن بـ~$\OLId{greek-variable}{Gamma}$ ونطلب
+نماذجها: ما هي، وما الحدود اللازمة لأحجامها؟ وقد نبدأ على العكس
+بــ!!{structure} أو طائفة من ال!!{structure}s، فنطلب
+ال!!{sentence}s الصادقة فيها. وهل توجد !!{sentence}s
+\emph{تميز} هذه ال!!{structure}s، فلا تصدق إلا فيها؟
+هذه مسائل \emph{نظرية النماذج}، وهي أيضًا أصل
+\emph{المنهج البديهي}: أن نصف طائفة من ال!!{structure}s
+بــ!!{sentence}s تكون بديهيات النظرية. ويصح ذلك لأن
+ال!!{sentence}s اللازمة منطقيًا عن البديهيات هي بعينها الصادقة
+في جميع نماذج البديهيات.
+
+% تصحيح مصدر (0147-I1): قُيّد المثال بالحوامل غير الخالية، وفق اصطلاح البنى في الكتاب، وهو قيد أغفله الأصل وخط الأساس.
+ومن أيسر الأمثلة الترتيب المسبق: علاقة~$\OLId{latin-looped}{R}$ على مجموعة غير خالية~$\OLId{latin-looped}{A}$
+تجتمع فيها الانعكاسية والتعدي. فإذا أعطيت مجموعة~$\OLId{latin-looped}{A}$ وعلاقة
+ثنائية $\OLId{latin-looped}{R} \subseteq \OLId{latin-looped}{A} \times \OLId{latin-looped}{A}$، فقد أعطيت ما يلزم لتعريف
+!!a{structure} للغة فيها رمز علاقة ثنائي واحد~$\Obj P$.
+نضع $\Domain{\OLId{latin-looped}{M}} = \OLId{latin-looped}{A}$ و$\Assign{\Obj P}{\OLId{latin-looped}{M}} = \OLId{latin-looped}{R}$.
+ولأن $\OLId{latin-looped}{R}$ ترتيب مسبق، أمكن وصف انعكاسيتها وتعديها
+بمجموعة~$\OLId{greek-variable}{Gamma}$ من ال!!{sentence}s:
+
+\begin{align*}
+  & \lforall[\Obj v_\OLMathNumeral{0}][\Atom{\Obj P}{\Obj v_0,\Obj v_0}]\\
+  & \lforall[\Obj v_\OLMathNumeral{0}][\lforall[\Obj v_\OLMathNumeral{1}][\lforall[\Obj v_\OLMathNumeral{2}][((\Atom{\Obj P}{\Obj v_0,\Obj v_1} \land \Atom{\Obj P}{\Obj v_1,\Obj v_2}) \lif \Atom{\Obj P}{\Obj v_0,\Obj v_2})]]]
+\end{align*}
+هاتان ال!!{sentence}s ترميز لعبارتي «لكل~$\OLId{latin-ordinary}{x}$،
+$Rxx$»، وهي انعكاسية $\OLId{latin-looped}{R}$، و«متى كان $Rxy$ و$Ryz$ كان
+$Rxz$»، وهي تعدي $\OLId{latin-looped}{R}$. فتكون ال!!^a{structure}~$\Struct{M}$
+نموذجًا لهاتين ال!!{sentence}s~$\OLId{greek-variable}{Gamma}$ إذا وفقط إذا كانت
+$\OLId{latin-looped}{R}$، أي $\Assign{\Obj P}{\OLId{latin-looped}{M}}$، ترتيبًا مسبقًا على~$\OLId{latin-looped}{A}$،
+أي $\Domain{\OLId{latin-looped}{M}}$. فنماذج $\OLId{greek-variable}{Gamma}$ والترتيبات المسبقة على المجموعات غير الخالية سواءٌ.
+وكل خاصية تصدق على جميع الترتيبات المسبقة ذات الحوامل غير الخالية، ويمكن التعبير عنها
+بلغة ليس فيها !!{predicate} غير~$\Obj P$، كالانعكاسية
+والتعدي، تلزم عن ال!!{sentence}s الاثنتين في~$\OLId{greek-variable}{Gamma}$؛
+والعكس كذلك. فما نثبته لنماذج~$\OLId{greek-variable}{Gamma}$ قد أثبتناه
+للترتيبات المسبقة ذات الحوامل غير الخالية كلها.
+
+ولكل نظرية وفئة نماذج، مثل $\OLId{greek-variable}{Gamma}$ وفئة الترتيبات المسبقة،
+مسائل تخص ما تقدر لغتها على التعبير عنه وما تعجز عنه.
+ومن خواص ال!!{structure}s ما يعنينا في جميع اللغات وفئات
+النماذج، وهو حجم ال!!{domain}. فيمكن، مثلًا، التعبير عن
+أن في ال!!{domain} عددًا قدره $\OLId{latin-ordinary}{n}$ من ال!!{element}s
+لا غير، لكل~$\OLId{latin-ordinary}{n} \in \PosInt$. وبمجموعة غير منتهية من
+ال!!{sentence}s يمكن التعبير عن لاتناهي ال!!{domain}.
+أما تناهي المجال، أو كون مجموعة المجال !!{nonenumerable}،
+فلا يمكن التعبير عنهما. وهذه الحدود لقدرة لغات الرتبة الأولى
+تترتب على مبرهنتي التراص ولوفنهايم--سكولم.
+
+
+\end{document}

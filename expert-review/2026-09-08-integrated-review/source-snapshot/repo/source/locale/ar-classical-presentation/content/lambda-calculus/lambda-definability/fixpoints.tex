@@ -1,0 +1,170 @@
+% Part: lambda-calculus
+% Chapter: lambda-definability
+% Section: fixpoints
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{ldf}{fp}
+
+\olsection{النقاط الثابتة}
+
+نريد، مثلًا، أن نعرّف دالة المضروب تعريفًا عوديًا بحد~$\fn{Fac}$
+يحقق
+\[
+\fn{Fac} \ident \lambd[\OLId{latin-ordinary}{n}][\fn{IsZero}\, \OLId{latin-ordinary}{n}\, \num \OLMathNumeral{1} (\fn{Mult}\, \OLId{latin-ordinary}{n} (\fn{Fac}(\fn{Pred} \, \OLId{latin-ordinary}{n})))]
+\]
+فالمراد أن يكون مضروب~$\OLId{latin-ordinary}{n}$ مساويًا لـ~$\OLMathNumeral{1}$ عند~$\OLId{latin-ordinary}{n} = \OLMathNumeral{0}$، ومساويًا
+لحاصل ضرب~$\OLId{latin-ordinary}{n}$ في مضروب~$\OLId{latin-ordinary}{n}-\OLMathNumeral{1}$ فيما عدا ذلك. غير أن هذه العبارة لا
+تصلح بذاتها تعريفًا لحد~$\fn{Fac}$؛ لأن~$\fn{Fac}$ نفسه قد عاد
+في الطرف الأيمن، والتعريف بالإحالة إلى الذات ليس من قواعد حساب لامبدا.
+أما إذا كتبنا، مثلًا،
+\[
+\fn{Mult} \ident \lambd[ab][\OLId{latin-ordinary}{a} (\fn{Add}\, \OLId{latin-ordinary}{b}) \num \OLMathNumeral{0}]
+\]
+فليس في الطرف الأيمن إلا حدود سبقت معرفتها، ومنها~$\fn{Add}$؛ فيمكن
+أن نحل تعريف~$\fn{Add}$ محله، فنحصل على حد لامبدا خالص لـ~$\fn{Mult}$.
+وإن اشتمل تعريف~$\fn{Add}$ نفسه على اسم معرف، كما يقع في
+$\fn{Add}'$، كررنا الإحلال حتى لا يبقى إلا تركيب لامبدا الخالص.
+
+ولا ينتهي هذا المسلك إذا كان التعريف عوديًا كتعريف~$\fn{Fac}$.
+فإحلال العبارة المعرفة لـ~$\fn{Fac}$ محل ورود~$\fn{Fac}$ في الطرف الأيمن
+يعطي:
+\begin{align*}
+  \fn{Fac} & \ident
+  \lambd[\OLId{latin-ordinary}{n}][\fn{IsZero}\, \OLId{latin-ordinary}{n}\, \num{\OLMathNumeral{1}}\,
+    (\fn{Mult}\, \OLId{latin-ordinary}{n}
+      ((\lambd[\OLId{latin-ordinary}{n}][\fn{IsZero}\, \OLId{latin-ordinary}{n}\, \num{\OLMathNumeral{1}}\,
+        (\fn{Mult}\, \OLId{latin-ordinary}{n}\, (\fn{Fac}(\fn{Pred}\, \OLId{latin-ordinary}{n})))])
+      (\fn{Pred}\, \OLId{latin-ordinary}{n})))]
+\end{align*}
+ولا يزال~$\fn{Fac}$ حاضرًا في الطرف الأيمن. وكلما أعدنا الإحلال طال
+الحد وبقي الاسم، فلا تبلغ العملية حد لامبدا خالصًا. فهذه الحيلة لا
+تعرّف المضروب، ولا سائر الدوال العودية.
+
+لكن في المعادلة العودية دلالة نافعة. فلنفرض أن~$\OLId{latin-ordinary}{f}$ حد يمثل دالة
+المضروب، ولنضع
+\[
+\fn{Fac}' \ident \lambd[\OLId{latin-ordinary}{g}][\lambd[\OLId{latin-ordinary}{n}][\fn{IsZero} \, \OLId{latin-ordinary}{n} \, \num \OLMathNumeral{1}\, (\fn{Mult} \, \OLId{latin-ordinary}{n}\, (\OLId{latin-ordinary}{g} (\fn{Pred} \OLId{latin-ordinary}{n})))]]
+\]
+وهذا الحد، عند تطبيقه في~$\OLId{latin-ordinary}{f}$، أي~$\fn{Fac}'\,\OLId{latin-ordinary}{f}$، يمثل دالة المضروب
+أيضًا. فإذا نظرنا إلى~$\fn{Fac}'$ على أنها دالة تأخذ دالة وتردّ
+دالة، كانت قيمة~$\fn{Fac'}\, \OLId{latin-ordinary}{f}$ هي~$\OLId{latin-ordinary}{f}$ نفسها، متى كانت~$\OLId{latin-ordinary}{f}$ دالة
+المضروب. وتسمى الدالة~$\OLId{latin-ordinary}{f}$ التي تحقق~$\fn{Fac}' \, \OLId{latin-ordinary}{f} \equal[\beta] \OLId{latin-ordinary}{f}$
+\emph{نقطة ثابتة} لـ~$\fn{Fac}'$. ومن ثم فدالة المضروب نقطة ثابتة
+لـ~$\fn{Fac}'$.
+
+وفي حساب لامبدا حدود تستخرج لحد معطى نقطة ثابتة؛ وبها نحول حدًا
+كـ~$\fn{Fac}'$ إلى تعريف فعلي للمضروب.
+
+\begin{defn}
+  \ollabel{defn:Turing-Y}
+  \emph{مركّب~Y} هو الحد:
+  \[
+  \OLId{latin-looped}{Y} \ident (\lambd[ux][\OLId{latin-ordinary}{x}(uux)])(\lambd[ux][\OLId{latin-ordinary}{x}(uux)]).
+  \]
+\end{defn}
+
+\begin{thm}
+  للحد~$\OLId{latin-looped}{Y}$ الخاصية~$Yg \red \OLId{latin-ordinary}{g}(Yg)$ لأي حد~$\OLId{latin-ordinary}{g}$؛ ولذلك يكون~$Yg$
+  نقطة ثابتة لـ~$\OLId{latin-ordinary}{g}$.
+\end{thm}
+
+\begin{proof}
+  رمز إلى~$(\lambd[ux][\OLId{latin-ordinary}{x}(uux)])$ بـ~$\OLId{latin-looped}{U}$ اختصارًا، فيكون~$\OLId{latin-looped}{Y} \ident UU$.
+  وحينئذ
+  \begin{align*}
+    \OLId{latin-looped}{Y} \OLId{latin-ordinary}{g} &\ident (\lambd[ux][\OLId{latin-ordinary}{x}(uux)])\OLId{latin-looped}{U}\,\OLId{latin-ordinary}{g} \\
+    &\red (\lambd[\OLId{latin-ordinary}{x}][\OLId{latin-ordinary}{x}(UUx)])\OLId{latin-ordinary}{g}\\
+    & \red \OLId{latin-ordinary}{g}(UUg) \ident \OLId{latin-ordinary}{g}(Yg).
+  \end{align*}
+  فالحدان~$\OLId{latin-ordinary}{g}(Yg)$ و$Yg$ يختزلان كلاهما إلى~$\OLId{latin-ordinary}{g}(Yg)$؛ ومن ثم
+  $\OLId{latin-ordinary}{g}(Yg) \equal[\beta] Yg$، وهو عين كون~$Yg$ نقطة ثابتة لـ~$\OLId{latin-ordinary}{g}$.
+\end{proof}
+
+ولما كان~$Yg$ موضع اختزال، جاز أن نسلك به اختزالًا لا ينتهي:
+\begin{align*}
+  \OLId{latin-looped}{Y} \OLId{latin-ordinary}{g} &\red \OLId{latin-ordinary}{g} (\OLId{latin-looped}{Y} \OLId{latin-ordinary}{g}) \\
+    &\red \OLId{latin-ordinary}{g} (\OLId{latin-ordinary}{g} (\OLId{latin-looped}{Y} \OLId{latin-ordinary}{g})) \\
+    &\red \OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{g} (\OLId{latin-ordinary}{g} (\OLId{latin-looped}{Y} \OLId{latin-ordinary}{g})))\\
+    &\ldots
+\end{align*}
+فيجوز أن نتصور~$Yg$ كأنه~$\OLId{latin-ordinary}{g}$ مطبقة في ذاتها عددًا لا نهاية له من
+المرات. وإذا طبقنا~$\OLId{latin-ordinary}{g}$ فيه مرة أخرى، لم نزد---بهذا التصور---شيئًا؛
+فتطبيق~$\OLId{latin-ordinary}{g}$ في~$\OLId{latin-ordinary}{g}$ المطبقة عددًا لا نهاية له من المرات في~$Yg$
+يظل تطبيقًا لـ~$\OLId{latin-ordinary}{g}$ في~$Yg$ عددًا لا نهاية له من المرات.
+
+وينبغي التمييز هنا بين مسالك الاختزال. فمتتالية اختزال~$\beta$ السابقة، المبدوءة
+بـ~$Yg$، لا تنتهي. وإذا طبقنا~$Yg$ في حد ما، كان من مسالك اختزال
+$(Yg)\OLId{latin-looped}{N}$ المرور بالحدود~$(\OLId{latin-ordinary}{g}(Yg))\OLId{latin-looped}{N}$ ثم~$(\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{g}(Yg)))\OLId{latin-looped}{N}$، وهكذا بلا نهاية.
+ومع ذلك قد يوجد مسلك \emph{آخر} ينتهي إلى صورة سوية.
+
+ولنر ذلك في المضروب. عرّف~$\fn{Fac}$ بأنه~$\OLId{latin-looped}{Y}\, \fn{Fac}'$، أي نقطة
+ثابتة لـ~$\fn{Fac'}$. عندئذ:
+\begin{align*}
+  \fn{Fac}\,\num \OLMathNumeral{3}
+  &\red \OLId{latin-looped}{Y}\, \fn{Fac}' \, \num \OLMathNumeral{3} \\
+  &\red \fn{Fac}' (\OLId{latin-looped}{Y} \,\fn{Fac}') \, \num \OLMathNumeral{3} \\
+  &\ident (\lambd[\OLId{latin-ordinary}{x}][\lambd[\OLId{latin-ordinary}{n}][\fn{IsZero} \, \OLId{latin-ordinary}{n}\, \num \OLMathNumeral{1}\,
+      (\fn{Mult}\, \OLId{latin-ordinary}{n}\, (\OLId{latin-ordinary}{x} (\fn{Pred}\, \OLId{latin-ordinary}{n})))]]) \, \fn{Fac} \, \num \OLMathNumeral{3}\\
+  & \red \fn{IsZero} \, \num \OLMathNumeral{3}\, \num \OLMathNumeral{1}\,
+      (\fn{Mult}\, \num \OLMathNumeral{3}\, (\fn{Fac} (\fn{Pred}\, \num \OLMathNumeral{3}))) \\
+  &\red  \fn{Mult}\, \num \OLMathNumeral{3} \, (\fn{Fac} \, \num \OLMathNumeral{2}).
+  \intertext{وبالمثل،}
+  \fn{Fac}\,\num \OLMathNumeral{2}
+  &\red  \fn{Mult}\, \num \OLMathNumeral{2} \, (\fn{Fac} \, \num \OLMathNumeral{1}) \\
+  \fn{Fac}\,\num \OLMathNumeral{1}
+  &\red  \fn{Mult}\, \num \OLMathNumeral{1} \, (\fn{Fac} \, \num \OLMathNumeral{0})
+  \intertext{لكن}
+  \fn{Fac}\,\num \OLMathNumeral{0}
+  &\red \fn{Fac}' (\OLId{latin-looped}{Y} \,\fn{Fac}') \, \num \OLMathNumeral{0} \\
+  &\ident (\lambd[\OLId{latin-ordinary}{x}][\lambd[\OLId{latin-ordinary}{n}][\fn{IsZero} \, \OLId{latin-ordinary}{n}\, \num \OLMathNumeral{1}\,
+      (\fn{Mult}\, \OLId{latin-ordinary}{n}\, (\OLId{latin-ordinary}{x} (\fn{Pred}\, \OLId{latin-ordinary}{n})))]]) \, \fn{Fac} \, \num \OLMathNumeral{0}\\
+  & \red \fn{IsZero} \, \num \OLMathNumeral{0}\, \num \OLMathNumeral{1}\,
+      (\fn{Mult}\, \num \OLMathNumeral{0}\, (\fn{Fac} (\fn{Pred}\, \num \OLMathNumeral{0}))).\\
+  &\red \num \OLMathNumeral{1}.
+  \intertext{ومن ثم، بجمع ذلك،}
+  \fn{Fac}\,\num \OLMathNumeral{3}
+  &\red  \fn{Mult}\, \num \OLMathNumeral{3} \,
+  (\fn{Mult} \, \num \OLMathNumeral{2}\, (\fn{Mult} \, \num \OLMathNumeral{1}\, \num \OLMathNumeral{1})).
+\end{align*}
+
+وهذا البناء لا يختص بـ~$\fn{Fac'}$، بل يجري في كل تعريف عودي.
+فإذا كانت لنا المعادلة
+\begin{align*}
+\OLId{latin-ordinary}{g}\,\OLId{latin-ordinary}{x}_\OLMathNumeral{1}\dots \OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{n} & \equal[\beta] \OLId{latin-looped}{N}
+\intertext{حيث يجوز أن يحتوي~$N$ على~$g$ و$x_1$، \dots،~$x_n$.
+وعندئذ يوجد دائمًا حد~$G \ident (Y \lambd[g][\lambd[x_1\dots x_n][N]])$
+بحيث}
+\OLId{latin-looped}{G}\,\OLId{latin-ordinary}{x}_\OLMathNumeral{1} \dots \OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{n} & \equal[\beta] \Subst{\OLId{latin-looped}{N}}{\OLId{latin-looped}{G}}{\OLId{latin-ordinary}{g}}.
+\intertext{إذ بحسب مبرهنة النقطة الثابتة،}
+\OLId{latin-looped}{G} \ident (\OLId{latin-looped}{Y} \lambd[\OLId{latin-ordinary}{g}][\lambd[\OLId{latin-ordinary}{x}_\OLMathNumeral{1}\dots \OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{n}][\OLId{latin-looped}{N}]]) & \red \lambd[\OLId{latin-ordinary}{g}][\lambd[\OLId{latin-ordinary}{x}_\OLMathNumeral{1}\dots \OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{n}][\OLId{latin-looped}{N}]](\OLId{latin-looped}{Y} \lambd[\OLId{latin-ordinary}{g}][\lambd[\OLId{latin-ordinary}{x}_\OLMathNumeral{1}\dots \OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{n}][\OLId{latin-looped}{N}]])\\
+& \ident (\lambd[\OLId{latin-ordinary}{g}][\lambd[\OLId{latin-ordinary}{x}_\OLMathNumeral{1}\dots \OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{n}][\OLId{latin-looped}{N}]])\,\OLId{latin-looped}{G}
+\intertext{وبالتالي}
+\OLId{latin-looped}{G}\,\OLId{latin-ordinary}{x}_\OLMathNumeral{1} \dots \OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{n}
+& \red (\lambd[\OLId{latin-ordinary}{g}][\lambd[\OLId{latin-ordinary}{x}_\OLMathNumeral{1}\dots \OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{n}][\OLId{latin-looped}{N}]])\,\OLId{latin-looped}{G}\,\OLId{latin-ordinary}{x}_\OLMathNumeral{1}\dots \OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{n}\\
+& \red (\lambd[\OLId{latin-ordinary}{x}_\OLMathNumeral{1}\dots \OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{n}][\Subst{\OLId{latin-looped}{N}}{\OLId{latin-looped}{G}}{\OLId{latin-ordinary}{g}}])\,\OLId{latin-ordinary}{x}_\OLMathNumeral{1}\dots \OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{n}\\
+  & \red \Subst{\OLId{latin-looped}{N}}{\OLId{latin-looped}{G}}{\OLId{latin-ordinary}{g}}.
+\end{align*}
+وهذا عين السلوك الذي نصت عليه المعادلة العودية.
+
+ومركّب~$\OLId{latin-looped}{Y}$ في \olref{defn:Turing-Y} من وضع آلان تورنغ. ولألونزو
+تشيرش صيغة أخرى نرمز إليها بـ~$\OLId{latin-looped}{Y}_\OLId{latin-looped}{C}$:
+\[
+\OLId{latin-looped}{Y}_\OLId{latin-looped}{C} \ident \lambd[\OLId{latin-ordinary}{g}][(\lambd[\OLId{latin-ordinary}{x}][\OLId{latin-ordinary}{g}(xx)])(\lambd[\OLId{latin-ordinary}{x}][\OLId{latin-ordinary}{g}(xx)])].
+\]
+ومركّب تشيرش أضعف قليلًا من مركّب تورنغ: فهو يحقق
+$\OLId{latin-looped}{Y}_Cg \equal[\beta] \OLId{latin-ordinary}{g}(\OLId{latin-looped}{Y}_Cg)$، ولا يحقق~$\OLId{latin-looped}{Y}_Cg \bred \OLId{latin-ordinary}{g}(\OLId{latin-looped}{Y}_Cg)$.
+وليكن~$\OLId{latin-looped}{V}$ الحد~$\lambd[\OLId{latin-ordinary}{x}][\OLId{latin-ordinary}{g}(xx)]$، حتى يكون~$\OLId{latin-looped}{Y}_\OLId{latin-looped}{C} \ident \lambd[\OLId{latin-ordinary}{g}][VV]$.
+فنجد
+\begin{align*}
+  VV & \ident (\lambd[\OLId{latin-ordinary}{x}][\OLId{latin-ordinary}{g}(xx)])\OLId{latin-looped}{V} \red \OLId{latin-ordinary}{g}(VV)
+  \text{ ومن ثم}\\
+  \OLId{latin-looped}{Y}_Cg & \ident (\lambd[\OLId{latin-ordinary}{g}][VV])\OLId{latin-ordinary}{g} \red VV \red \OLId{latin-ordinary}{g}(VV) \text{، وكذلك}\\
+  \OLId{latin-ordinary}{g}(\OLId{latin-looped}{Y}_Cg) & \ident \OLId{latin-ordinary}{g}((\lambd[\OLId{latin-ordinary}{g}][VV])\OLId{latin-ordinary}{g}) \red \OLId{latin-ordinary}{g}(VV).
+\end{align*}
+فالحدان~$\OLId{latin-looped}{Y}_Cg$ و$\OLId{latin-ordinary}{g}(\OLId{latin-looped}{Y}_Cg)$ يردان إلى حد مشترك هو~$\OLId{latin-ordinary}{g}(VV)$؛ ولذلك
+$\OLId{latin-looped}{Y}_Cg \equal[\beta] \OLId{latin-ordinary}{g}(\OLId{latin-looped}{Y}_Cg)$. وهذه المساواة تكفي لكثير من التطبيقات.
+
+\end{document}

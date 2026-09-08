@@ -1,0 +1,163 @@
+% Part: sets-functions-relations
+% Chapter: arithmetization
+% Section: checking-details
+%
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid[ar]{sfr}{arith}{check}
+\olsection{الحلقات والحقول المرتبة}
+
+تكرر في الفصل قولنا إن التعريفات تسلك «كما ينبغي». فنفصل في هذا الملحق التقني المراد من ذلك، ونبين على وجه الإجمال طريق البرهان على سلامة هذا السلوك.
+
+قد عرفنا الجمع والضرب على $\Int$ في \olref[int]{sec}. ومطلبنا أن تمنح هاتان العمليتان $\Int$ البنية التي قصدناها لها، وهي على التعيين بنية الحلقة التبديلية.
+
+\begin{defn}
+\emph{الحلقة التبديلية} مجموعة $\OLId{latin-looped}{S}$ عين فيها عنصران $\OLMathNumeral{0}$ و$\OLMathNumeral{1}$ وعمليتان $+$ و$\times$، واستوفت الصيغ الثماني:
+\begin{align*}
+		\emph{التجميعية}&&\OLId{latin-ordinary}{a} + (\OLId{latin-ordinary}{b}+ \OLId{latin-ordinary}{c}) & = (\OLId{latin-ordinary}{a} + \OLId{latin-ordinary}{b}) + \OLId{latin-ordinary}{c} \\
+		&& (\OLId{latin-ordinary}{a} \times \OLId{latin-ordinary}{b}) \times \OLId{latin-ordinary}{c} & = \OLId{latin-ordinary}{a} \times (\OLId{latin-ordinary}{b}\times \OLId{latin-ordinary}{c})\\
+		\emph{التبديلية}&&\OLId{latin-ordinary}{a} + \OLId{latin-ordinary}{b} &= \OLId{latin-ordinary}{b}+ \OLId{latin-ordinary}{a}  \\
+		&&  \OLId{latin-ordinary}{a} \times \OLId{latin-ordinary}{b}&= \OLId{latin-ordinary}{b}\times \OLId{latin-ordinary}{a}\\ 
+		\emph{العنصران المحايدان}&&\OLId{latin-ordinary}{a} + \OLMathNumeral{0} &= \OLId{latin-ordinary}{a} \\
+		&& \OLId{latin-ordinary}{a} \times \OLMathNumeral{1} &= \OLId{latin-ordinary}{a}\\
+		\emph{المعكوس الجمعي}&&(\exists \OLId{latin-ordinary}{b}\in \OLId{latin-looped}{S})\OLMathNumeral{0}&=\OLId{latin-ordinary}{a} + \OLId{latin-ordinary}{b}\\
+		\emph{التوزيعية}&&\OLId{latin-ordinary}{a} \times (\OLId{latin-ordinary}{b}+ \OLId{latin-ordinary}{c} ) &= (\OLId{latin-ordinary}{a} \times \OLId{latin-ordinary}{b}) + (\OLId{latin-ordinary}{a} \times \OLId{latin-ordinary}{c})
+	\end{align*}
+	ونفهم هذه الصيغ جميعًا مكممة كليًّا، مع تقييد المتغيرات بـ$\OLId{latin-looped}{S}$. وليس من شرط العنصرين $\OLMathNumeral{0}$ و~$\OLMathNumeral{1}$ أن يكونا العددين الطبيعيين المعروفين بهذين الاسمين.
+\end{defn}
+
+فإثبات أن الأعداد الصحيحة حلقة تبديلية يرجع إلى تحقيق هذه الشروط الثمانية. وليس واحد منها {صعبًا}، وإن كان في استيفائها شيء من المشقة. ونمثل لذلك ببرهان \emph{التجميعية} للجمع.
+
+\begin{proof}
+خذ $\OLId{latin-ordinary}{i}, \OLId{latin-ordinary}{j}, \OLId{latin-ordinary}{k} \in \Int$. فتوجد $\OLId{latin-ordinary}{a}_\OLMathNumeral{1}, \OLId{latin-ordinary}{b}_\OLMathNumeral{1}, \OLId{latin-ordinary}{a}_\OLMathNumeral{2}, \OLId{latin-ordinary}{b}_\OLMathNumeral{2}, \OLId{latin-ordinary}{a}_\OLMathNumeral{3}, \OLId{latin-ordinary}{b}_\OLMathNumeral{3} \in
+\Nat$ تحقق $\OLId{latin-ordinary}{i} = \equivrep{\OLId{latin-ordinary}{a}_\OLMathNumeral{1}, \OLId{latin-ordinary}{b}_\OLMathNumeral{1}}{}$ و$\OLId{latin-ordinary}{j} =
+\equivrep{\OLId{latin-ordinary}{a}_\OLMathNumeral{2},\OLId{latin-ordinary}{b}_\OLMathNumeral{2}}{}$ و$\OLId{latin-ordinary}{k} = \equivrep{\OLId{latin-ordinary}{a}_\OLMathNumeral{3}, \OLId{latin-ordinary}{b}_\OLMathNumeral{3}}{}$. ونختصر في هذا القسم كله بكتابة «$\equivrep{\OLId{latin-ordinary}{x}, \OLId{latin-ordinary}{y}}{}$» مكان «$\equivrep{\OLId{latin-ordinary}{x}, \OLId{latin-ordinary}{y}}{\Intequiv}$» تيسيرًا للقراءة. فنحسب
+\begin{align*}
+	\OLId{latin-ordinary}{i} + (\OLId{latin-ordinary}{j} + \OLId{latin-ordinary}{k}) &= \equivrep{\OLId{latin-ordinary}{a}_\OLMathNumeral{1}, \OLId{latin-ordinary}{b}_\OLMathNumeral{1}}{}+(\equivrep{\OLId{latin-ordinary}{a}_\OLMathNumeral{2}, \OLId{latin-ordinary}{b}_\OLMathNumeral{2}}{} + \equivrep{\OLId{latin-ordinary}{a}_\OLMathNumeral{3}, \OLId{latin-ordinary}{b}_\OLMathNumeral{3}}{}) \\
+	&= \equivrep{\OLId{latin-ordinary}{a}_\OLMathNumeral{1},  \OLId{latin-ordinary}{b}_\OLMathNumeral{1}}{} + \equivrep{\OLId{latin-ordinary}{a}_\OLMathNumeral{2}+\OLId{latin-ordinary}{a}_\OLMathNumeral{3}, \OLId{latin-ordinary}{b}_\OLMathNumeral{2}+\OLId{latin-ordinary}{b}_\OLMathNumeral{3}}{}\\
+	&= \equivrep{\OLId{latin-ordinary}{a}_\OLMathNumeral{1} + (\OLId{latin-ordinary}{a}_\OLMathNumeral{2} + \OLId{latin-ordinary}{a}_\OLMathNumeral{3}), \OLId{latin-ordinary}{b}_\OLMathNumeral{1} + (\OLId{latin-ordinary}{b}_\OLMathNumeral{2} + \OLId{latin-ordinary}{b}_\OLMathNumeral{3})}{}\\
+	&= \equivrep{(\OLId{latin-ordinary}{a}_\OLMathNumeral{1} + \OLId{latin-ordinary}{a}_\OLMathNumeral{2}) + \OLId{latin-ordinary}{a}_\OLMathNumeral{3}, (\OLId{latin-ordinary}{b}_\OLMathNumeral{1} + \OLId{latin-ordinary}{b}_\OLMathNumeral{2}) + \OLId{latin-ordinary}{b}_\OLMathNumeral{3}}{}\\
+	&= \equivrep{\OLId{latin-ordinary}{a}_\OLMathNumeral{1} + \OLId{latin-ordinary}{a}_\OLMathNumeral{2}, \OLId{latin-ordinary}{b}_\OLMathNumeral{1} + \OLId{latin-ordinary}{b}_\OLMathNumeral{2}}{} + \equivrep{\OLId{latin-ordinary}{a}_\OLMathNumeral{3}, \OLId{latin-ordinary}{b}_\OLMathNumeral{3}}{}\\
+	&= (\equivrep{\OLId{latin-ordinary}{a}_\OLMathNumeral{1}, \OLId{latin-ordinary}{b}_\OLMathNumeral{1}}{} + \equivrep{\OLId{latin-ordinary}{a}_\OLMathNumeral{2}, \OLId{latin-ordinary}{b}_\OLMathNumeral{2}}{}) + \equivrep{\OLId{latin-ordinary}{a}_\OLMathNumeral{3}, \OLId{latin-ordinary}{b}_\OLMathNumeral{3}}{}\\
+	&= (\OLId{latin-ordinary}{i}+\OLId{latin-ordinary}{j}) + \OLId{latin-ordinary}{k}
+\end{align*}
+والاعتماد في هذه التحويلات على قوانين الجمع في $\Nat$.
+\end{proof}
+
+ونبين على النهج نفسه \emph{وجود المعكوس الجمعي}.
+
+\begin{proof}
+خذ $\OLId{latin-ordinary}{i} \in \Int$، واكتب $\OLId{latin-ordinary}{i} = \equivrep{\OLId{latin-ordinary}{a},\OLId{latin-ordinary}{b}}{}$ لبعض $\OLId{latin-ordinary}{a},\OLId{latin-ordinary}{b} \in
+\Nat$. ثم ضع $\OLId{latin-ordinary}{j} = \equivrep{\OLId{latin-ordinary}{b},\OLId{latin-ordinary}{a}}{} \in \Int$. فمن قوانين الطبيعية $(\OLId{latin-ordinary}{a}+\OLId{latin-ordinary}{b}) + \OLMathNumeral{0} = \OLMathNumeral{0} + (\OLId{latin-ordinary}{a}+\OLId{latin-ordinary}{b})$؛ فيلزم بالتعريف $\tuple{\OLId{latin-ordinary}{a}+\OLId{latin-ordinary}{b}, \OLId{latin-ordinary}{b}+\OLId{latin-ordinary}{a}} \sim_\Int \tuple{\OLMathNumeral{0},\OLMathNumeral{0}}$، ومنه $\equivrep{\OLId{latin-ordinary}{a}+\OLId{latin-ordinary}{b}, \OLId{latin-ordinary}{b}+\OLId{latin-ordinary}{a}}{} = \equivrep{\OLMathNumeral{0}, \OLMathNumeral{0}}{} = \OLMathNumeral{0}_\Int$. ولذلك $\OLId{latin-ordinary}{i} + \OLId{latin-ordinary}{j} =
+\equivrep{\OLId{latin-ordinary}{a},\OLId{latin-ordinary}{b}}{}+\equivrep{\OLId{latin-ordinary}{b},\OLId{latin-ordinary}{a}}{}=\equivrep{\OLId{latin-ordinary}{a}+\OLId{latin-ordinary}{b}, \OLId{latin-ordinary}{b}+\OLId{latin-ordinary}{a}}{}= \equivrep{\OLMathNumeral{0},
+\OLMathNumeral{0}}{} = \OLMathNumeral{0}_\Int$، وهو المطلوب.
+\end{proof}
+
+وأما \emph{التوزيعية} فبرهانها بالحساب الآتي.
+
+\begin{proof}
+نأخذ، كما تقدم، $\OLId{latin-ordinary}{i} = \equivrep{\OLId{latin-ordinary}{a}_\OLMathNumeral{1}, \OLId{latin-ordinary}{b}_\OLMathNumeral{1}}{}$ و$\OLId{latin-ordinary}{j} =
+\equivrep{\OLId{latin-ordinary}{a}_\OLMathNumeral{2},\OLId{latin-ordinary}{b}_\OLMathNumeral{2}}{}$ و$\OLId{latin-ordinary}{k} = \equivrep{\OLId{latin-ordinary}{a}_\OLMathNumeral{3}, \OLId{latin-ordinary}{b}_\OLMathNumeral{3}}{}$؛ فنجد:
+\begin{align*}
+	\OLId{latin-ordinary}{i} \times (\OLId{latin-ordinary}{j} + \OLId{latin-ordinary}{k}) 
+	&= \equivrep{\OLId{latin-ordinary}{a}_\OLMathNumeral{1}, \OLId{latin-ordinary}{b}_\OLMathNumeral{1}}{} \times (\equivrep{\OLId{latin-ordinary}{a}_\OLMathNumeral{2},\OLId{latin-ordinary}{b}_\OLMathNumeral{2}}{} + \equivrep{\OLId{latin-ordinary}{a}_\OLMathNumeral{3}, \OLId{latin-ordinary}{b}_\OLMathNumeral{3}}{})\\
+	&= \equivrep{\OLId{latin-ordinary}{a}_\OLMathNumeral{1}, \OLId{latin-ordinary}{b}_\OLMathNumeral{1}}{} \times \equivrep{\OLId{latin-ordinary}{a}_\OLMathNumeral{2} + \OLId{latin-ordinary}{a}_\OLMathNumeral{3},\OLId{latin-ordinary}{b}_\OLMathNumeral{2}+\OLId{latin-ordinary}{b}_\OLMathNumeral{3}}{}\\
+	&= \equivrep{\OLId{latin-ordinary}{a}_\OLMathNumeral{1}  (\OLId{latin-ordinary}{a}_\OLMathNumeral{2} + \OLId{latin-ordinary}{a}_\OLMathNumeral{3}) + \OLId{latin-ordinary}{b}_\OLMathNumeral{1}  (\OLId{latin-ordinary}{b}_\OLMathNumeral{2}+\OLId{latin-ordinary}{b}_\OLMathNumeral{3}), \OLId{latin-ordinary}{a}_\OLMathNumeral{1}  (\OLId{latin-ordinary}{b}_\OLMathNumeral{2} + \OLId{latin-ordinary}{b}_\OLMathNumeral{3}) + \OLId{latin-ordinary}{b}_\OLMathNumeral{1} (\OLId{latin-ordinary}{a}_\OLMathNumeral{2} + \OLId{latin-ordinary}{a}_\OLMathNumeral{3})}{}\\
+	&= \equivrep{\OLId{latin-ordinary}{a}_\OLMathNumeral{1} \OLId{latin-ordinary}{a}_\OLMathNumeral{2} + \OLId{latin-ordinary}{a}_\OLMathNumeral{1}\OLId{latin-ordinary}{a}_\OLMathNumeral{3} + \OLId{latin-ordinary}{b}_\OLMathNumeral{1} \OLId{latin-ordinary}{b}_\OLMathNumeral{2}+\OLId{latin-ordinary}{b}_\OLMathNumeral{1}\OLId{latin-ordinary}{b}_\OLMathNumeral{3}, \OLId{latin-ordinary}{a}_\OLMathNumeral{1} \OLId{latin-ordinary}{b}_\OLMathNumeral{2} + \OLId{latin-ordinary}{a}_\OLMathNumeral{1}\OLId{latin-ordinary}{b}_\OLMathNumeral{3} + \OLId{latin-ordinary}{a}_\OLMathNumeral{2}\OLId{latin-ordinary}{b}_\OLMathNumeral{1} + \OLId{latin-ordinary}{a}_\OLMathNumeral{3}\OLId{latin-ordinary}{b}_\OLMathNumeral{1}}{}\\		
+%		&= \equivrep{a_1 a_2 + b_1b_2 + a_1a_3 + b_1 b_2+b_1b_3, a_1 b_2 + a_1b_3 + a_2b_1 + a_3b_1}{}\\		
+	&= \equivrep{\OLId{latin-ordinary}{a}_\OLMathNumeral{1}\OLId{latin-ordinary}{a}_\OLMathNumeral{2} + \OLId{latin-ordinary}{b}_\OLMathNumeral{1}\OLId{latin-ordinary}{b}_\OLMathNumeral{2}, \OLId{latin-ordinary}{a}_\OLMathNumeral{1}\OLId{latin-ordinary}{b}_\OLMathNumeral{2} + \OLId{latin-ordinary}{a}_\OLMathNumeral{2}\OLId{latin-ordinary}{b}_\OLMathNumeral{1}}{} + \equivrep{\OLId{latin-ordinary}{a}_\OLMathNumeral{1}\OLId{latin-ordinary}{a}_\OLMathNumeral{3} + \OLId{latin-ordinary}{b}_\OLMathNumeral{1}\OLId{latin-ordinary}{b}_\OLMathNumeral{3}, \OLId{latin-ordinary}{a}_\OLMathNumeral{1}\OLId{latin-ordinary}{b}_\OLMathNumeral{3} + \OLId{latin-ordinary}{a}_\OLMathNumeral{3}\OLId{latin-ordinary}{b}_\OLMathNumeral{1}}{}\\
+	&= (\equivrep{\OLId{latin-ordinary}{a}_\OLMathNumeral{1}, \OLId{latin-ordinary}{b}_\OLMathNumeral{1}}{} \times \equivrep{\OLId{latin-ordinary}{a}_\OLMathNumeral{2},\OLId{latin-ordinary}{b}_\OLMathNumeral{2}}{}) + (\equivrep{\OLId{latin-ordinary}{a}_\OLMathNumeral{1}, \OLId{latin-ordinary}{b}_\OLMathNumeral{1}}{} \times  \equivrep{\OLId{latin-ordinary}{a}_\OLMathNumeral{3}, \OLId{latin-ordinary}{b}_\OLMathNumeral{3}}{})\\
+	&= (\OLId{latin-ordinary}{i} \times \OLId{latin-ordinary}{j}) + (\OLId{latin-ordinary}{i} \times \OLId{latin-ordinary}{k})
+\end{align*}
+\end{proof}
+
+وأما الشروط الخمسة الباقية فإثباتها تمرين. وباستيفائها يثبت أن $\Int$ حلقة تبديلية؛ أي إن الجمع والضرب اللذين عرفناهما يؤديان ما طلبناه منهما.
+
+\begin{prob}
+حقق أن $\Int$ حلقة تبديلية.
+\end{prob}
+
+ولا ينتهي العمل بذلك؛ فقد عرفنا على $\Int$، إلى جانب الجمع والضرب، علاقة الترتيب $\leq$. فينبغي تحقيق سلامتها أيضًا، أي إثبات أن $\Int$ حلقة \emph{مرتبة}.\footnote{مر في \olref[sfr][rel][ord]{def:linearorder} أن الترتيب الكلي علاقة انعكاسية متعدية مضادة للتناظر متصلة. ويسمى الاتصال أحيانًا في هذا السياق \emph{التثليث}؛ إذ لكل $\OLId{latin-ordinary}{a}$ و$\OLId{latin-ordinary}{b}$ يتحقق $\OLId{latin-ordinary}{a} \leq \OLId{latin-ordinary}{b} \lor \OLId{latin-ordinary}{a}
+= \OLId{latin-ordinary}{b} \lor \OLId{latin-ordinary}{a} \geq \OLId{latin-ordinary}{b}$.}
+
+\begin{defn}
+\emph{الحلقة المرتبة} حلقة تبديلية عين فيها ترتيب كلي $\leq$ يحقق:
+\begin{align*}
+	\OLId{latin-ordinary}{a} \leq \OLId{latin-ordinary}{b} &\lif \OLId{latin-ordinary}{a} + \OLId{latin-ordinary}{c} \leq \OLId{latin-ordinary}{b} + \OLId{latin-ordinary}{c}\\
+	(\OLId{latin-ordinary}{a} \leq \OLId{latin-ordinary}{b} \land \OLMathNumeral{0} \leq \OLId{latin-ordinary}{c}) &\lif \OLId{latin-ordinary}{a} \times \OLId{latin-ordinary}{c} \leq \OLId{latin-ordinary}{b} \times \OLId{latin-ordinary}{c}
+\end{align*}
+\end{defn}
+
+\begin{prob}
+حقق أن $\Int$ حلقة مرتبة.
+\end{prob}
+
+فإثبات أن $\Int$ على هذا البناء حلقة مرتبة يجري على حساب مألوف، وإن طال بعض الطول؛ ونكل استيفاءه إلى القارئ.
+
+وبهذا يفرغ النظر في الصحيحة، ونطلب للنسبية أحكامًا قريبة منها. والمقصود خاصة أنها \emph{حقل} مرتب، وفق ما عرفناه من $+$ و$\times$ و$\leq$:
+\begin{defn}\ollabel{orderedfield}
+% تصحيح تعريفي (0047-I1): استُبعدت الحلقة الصفرية بإضافة الشرط القياسي 0 != 1.
+\emph{الحقل المرتب} حلقة مرتبة يكون فيها $\OLMathNumeral{0} \neq \OLMathNumeral{1}$، ويضاف إلى شروطها:
+\begin{align*}
+	\emph{المعكوس الضربي}& & (\forall \OLId{latin-ordinary}{a} \in \OLId{latin-looped}{S} \setminus \{\OLMathNumeral{0}\})(\exists \OLId{latin-ordinary}{b} \in \OLId{latin-looped}{S}) \OLId{latin-ordinary}{a}\times \OLId{latin-ordinary}{b}& = \OLMathNumeral{1}
+\end{align*}
+\end{defn}
+
+\textbf{تنبيه تصحيحي على الأصل.} أُضيف شرط $\OLMathNumeral{0} \neq \OLMathNumeral{1}$ إلى تعريف
+الحقل؛ إذ كانت الشروط المطبوعة تجيز الحلقة ذات العنصر الواحد، وفيها
+$\OLMathNumeral{0}=\OLMathNumeral{1}$، مع أنها ليست حقلًا بالاصطلاح المقصود هنا.
+
+فبعد أن تثبت كون $\Int$ حلقة مرتبة، يسهل عليك إثبات أن $\Rat$ حقل مرتب، وإن احتاج الإثبات إلى شيء من العمل.
+
+\begin{prob}
+حقق أن $\Rat$ حقل مرتب.
+\end{prob}
+
+فإذا فرغنا من الصحيحة والنسبية بقيت الحقيقية. ومطلبنا أن $\Real$ حقل مرتب \emph{كامل}؛ أي حقل مرتب ذو خاصية الاكتمال. وقد ثبت في \olref[cuts]{realcompleteness} أن $\Real$ كاملة، وبقي استيفاء الحساب الذي يثبت أن $\Real$ حقل مرتب، وفيه طول.
+
+وقبل الشروع في \emph{ذلك} التمرين، نحقق أمورًا أقرب مأخذًا. فمنها أن $\OLId{greek-variable}{alpha} + \beta$ كما عرفناه \emph{قطع} حقًّا، متى كان $\OLId{greek-variable}{alpha}$ و$\beta$ قطعين. وبيانه الآتي.
+
+\begin{proof}
+% استكمال برهاني (0047-I2): أُثبتت حقيقية مجموعة المجاميع بدل افتراضها من كون الحدين قطعين.
+لما كان $\OLId{greek-variable}{alpha}$ و$\beta$ قطعين، كانت $\OLId{greek-variable}{alpha} + \beta = \Setabs{\OLId{latin-ordinary}{p}
++ \OLId{latin-ordinary}{q}}{\OLId{latin-ordinary}{p} \in \OLId{greek-variable}{alpha} \land \OLId{latin-ordinary}{q} \in \beta}$ مجموعة غير خالية. واختر
+$\OLId{latin-ordinary}{r}\in\Rat\setminus\OLId{greek-variable}{alpha}$ و$\OLId{latin-ordinary}{s}\in\Rat\setminus\beta$؛ فمن ابتدائية
+القطعين يكون $\OLId{latin-ordinary}{p}<\OLId{latin-ordinary}{r}$ و$\OLId{latin-ordinary}{q}<\OLId{latin-ordinary}{s}$ لكل $\OLId{latin-ordinary}{p}\in\OLId{greek-variable}{alpha}$ و$\OLId{latin-ordinary}{q}\in\beta$، فيغدو $\OLId{latin-ordinary}{r}+\OLId{latin-ordinary}{s}$
+حدًّا أعلى لا يقع في مجموعة المجاميع؛ فهي جزء حقيقي من $\Rat$. وإذا كان
+$\OLId{latin-ordinary}{x} < \OLId{latin-ordinary}{p} + \OLId{latin-ordinary}{q}$ لبعض $\OLId{latin-ordinary}{p} \in \OLId{greek-variable}{alpha}$ و$\OLId{latin-ordinary}{q} \in \beta$، حصل $\OLId{latin-ordinary}{x} - \OLId{latin-ordinary}{p} < \OLId{latin-ordinary}{q}$، ومن ابتدائية القطع $\OLId{latin-ordinary}{x} - \OLId{latin-ordinary}{p} \in \beta$؛ فيكون $\OLId{latin-ordinary}{x} = \OLId{latin-ordinary}{p} + (\OLId{latin-ordinary}{x} - \OLId{latin-ordinary}{p}) \in
+\OLId{greek-variable}{alpha} + \beta$. فالمجموعة $\OLId{greek-variable}{alpha} + \beta$ مقطع ابتدائي من $\Rat$. وأخيرًا، خذ $\OLId{latin-ordinary}{p} + \OLId{latin-ordinary}{q} \in \OLId{greek-variable}{alpha} + \beta$؛ فبما أن $\OLId{greek-variable}{alpha}$ و$\beta$ قطعان، يوجد $\OLId{latin-ordinary}{p}_\OLMathNumeral{1} \in \OLId{greek-variable}{alpha}$ و$\OLId{latin-ordinary}{q}_\OLMathNumeral{1} \in \beta$ بحيث $\OLId{latin-ordinary}{p} < \OLId{latin-ordinary}{p}_\OLMathNumeral{1}$ و$\OLId{latin-ordinary}{q} < \OLId{latin-ordinary}{q}_\OLMathNumeral{1}$. ومنه $\OLId{latin-ordinary}{p} + \OLId{latin-ordinary}{q} < \OLId{latin-ordinary}{p}_\OLMathNumeral{1} + \OLId{latin-ordinary}{q}_\OLMathNumeral{1} \in \OLId{greek-variable}{alpha} +
+\beta$، فلا عنصر أعظم في $\OLId{greek-variable}{alpha} + \beta$.
+\end{proof}
+
+وعلى هذا النحو يمكن تحقيق أن $\OLId{greek-variable}{alpha} - \beta$ و$\OLId{greek-variable}{alpha}
+\times \beta$ و$\OLId{greek-variable}{alpha} \div \beta$ قطوع أيضًا؛ مع استثناء كون $\beta$ قطع الصفر في القسمة. ونترك استيفاء هذه الحجج للقارئ.
+
+\begin{prob}
+حقق أن $\Real$ حقل مرتب.
+\end{prob}
+
+وبقي أمر يسير أرجئ تحقيقه. فقد وضعنا في \olref[cuts]{sec} أن $\sqrt{\OLMathNumeral{2}} =
+\Setabs{\OLId{latin-ordinary}{p} \in \Rat}{\OLId{latin-ordinary}{p} < \OLMathNumeral{0} \text{ أو }\OLId{latin-ordinary}{p}^\OLMathNumeral{2} < \OLMathNumeral{2}}$، ولا بد من إثبات أن هذه المجموعة \emph{قطع}.
+
+\begin{proof}
+% استكمال برهاني (0047-I3): عولجت العناصر غير الموجبة قبل حجة التقريب المخصصة للعناصر الموجبة.
+كون هذه المجموعة مقطعًا ابتدائيًّا حقيقيًّا غير خال من النسبية ظاهر. فيبقى انتفاء العنصر الأعظم؛ فإذا كان~$\OLId{latin-ordinary}{p}\leq\OLMathNumeral{0}$ كان~$\OLId{latin-ordinary}{p}<\OLMathNumeral{1}$، وكان~$\OLMathNumeral{1}$ في المجموعة لأن~$\OLMathNumeral{1}^\OLMathNumeral{2}<\OLMathNumeral{2}$. وتبقى حال العدد النسبي الموجب~$\OLId{latin-ordinary}{p}$ الذي يحقق $\OLId{latin-ordinary}{p}^\OLMathNumeral{2} < \OLMathNumeral{2}$؛ فنضع $\OLId{latin-ordinary}{q} = \frac{\OLMathNumeral{2}\OLId{latin-ordinary}{p}+\OLMathNumeral{2}}{\OLId{latin-ordinary}{p}+\OLMathNumeral{2}}$، ثم نثبت $\OLId{latin-ordinary}{p} < \OLId{latin-ordinary}{q}$ و$\OLId{latin-ordinary}{q}^\OLMathNumeral{2} < \OLMathNumeral{2}$. أما $\OLId{latin-ordinary}{p} < \OLId{latin-ordinary}{q}$ فمن الحساب
+\begin{align*}
+	\OLId{latin-ordinary}{p}^\OLMathNumeral{2} &< \OLMathNumeral{2}\\
+	\OLId{latin-ordinary}{p}^\OLMathNumeral{2} + \OLMathNumeral{2}\OLId{latin-ordinary}{p} &< \OLMathNumeral{2} + \OLMathNumeral{2}\OLId{latin-ordinary}{p}\\
+	\OLId{latin-ordinary}{p}(\OLId{latin-ordinary}{p} + \OLMathNumeral{2}) &< \OLMathNumeral{2} + \OLMathNumeral{2}\OLId{latin-ordinary}{p}\\
+	\OLId{latin-ordinary}{p} &< \tfrac{\OLMathNumeral{2}+\OLMathNumeral{2}\OLId{latin-ordinary}{p}}{\OLId{latin-ordinary}{p}+\OLMathNumeral{2}} = \OLId{latin-ordinary}{q}
+\end{align*}
+وأما $\OLId{latin-ordinary}{q}^\OLMathNumeral{2} < \OLMathNumeral{2}$ فينتج كما يأتي:
+\begin{align*}
+	\OLId{latin-ordinary}{p}^\OLMathNumeral{2} &< \OLMathNumeral{2}\\
+	\OLMathNumeral{2}\OLId{latin-ordinary}{p}^\OLMathNumeral{2} + \OLMathNumeral{4}\OLId{latin-ordinary}{p} + \OLMathNumeral{2} &< \OLId{latin-ordinary}{p}^\OLMathNumeral{2} + \OLMathNumeral{4}\OLId{latin-ordinary}{p}+ \OLMathNumeral{4}\\
+	\OLMathNumeral{4}\OLId{latin-ordinary}{p}^\OLMathNumeral{2} + \OLMathNumeral{8}\OLId{latin-ordinary}{p} + \OLMathNumeral{4} &< \OLMathNumeral{2}(\OLId{latin-ordinary}{p}^\OLMathNumeral{2} + \OLMathNumeral{4}\OLId{latin-ordinary}{p} + \OLMathNumeral{4})\\
+	(\OLMathNumeral{2}\OLId{latin-ordinary}{p}+\OLMathNumeral{2})^\OLMathNumeral{2} & <\OLMathNumeral{2}(\OLId{latin-ordinary}{p}+\OLMathNumeral{2})^\OLMathNumeral{2}\\
+	\tfrac{(\OLMathNumeral{2}\OLId{latin-ordinary}{p}+\OLMathNumeral{2})^\OLMathNumeral{2}}{(\OLId{latin-ordinary}{p}+\OLMathNumeral{2})^\OLMathNumeral{2}} &< \OLMathNumeral{2}\\
+	\OLId{latin-ordinary}{q}^\OLMathNumeral{2} &< \OLMathNumeral{2}
+\end{align*}
+\end{proof}
+\end{document}

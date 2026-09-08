@@ -1,0 +1,112 @@
+% Part: incompleteness
+% Chapter: incompleteness-provability
+% Section: lob-thm
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{inp}{tar}
+
+\olsection{عدم قابلية الصدق للتعريف}
+
+لا يتحدد معنى \emph{قابلية التعريف} إلا مع دلالة صورية للغة
+الحساب. فقد بيّنّا صيغ هذه اللغة وجملها، وتأويلها المقصود أن
+تُقرأ الجمل أخبارًا عن الأعداد الطبيعية؛ والأخبار قد تصدق وقد
+تكذب. لتكن $\Struct{N}$ الـ!!{structure} التي مجالها $\Nat$
+والتي تعطي رموز الحساب تأويلها القياسي.
+فمعنى $\Sat{\OLId{latin-looped}{N}}{!A}$ أن «$!A$ صادقة في التأويل القياسي».
+
+\begin{defn}
+العلاقة $\OLId{latin-looped}{R}(\OLId{latin-ordinary}{x}_\OLMathNumeral{1},\dots,\OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{k})$ بين الأعداد الطبيعية
+\emph{قابلة للتعريف} في $\Struct{N}$ متى وجدت صيغة
+$!A(\OLId{latin-ordinary}{x}_\OLMathNumeral{1},\dots,\OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{k})$ من لغة الحساب تجعل، لكل
+$\OLId{latin-ordinary}{n}_\OLMathNumeral{1},\dots,\OLId{latin-ordinary}{n}_\OLId{latin-ordinary}{k}$، صدق $\OLId{latin-looped}{R}(\OLId{latin-ordinary}{n}_\OLMathNumeral{1},\dots,\OLId{latin-ordinary}{n}_\OLId{latin-ordinary}{k})$ مكافئًا لـ
+$\Sat{\OLId{latin-looped}{N}}{!A(\num \OLId{latin-ordinary}{n}_\OLMathNumeral{1},\dots,\num \OLId{latin-ordinary}{n}_\OLId{latin-ordinary}{k})}$.
+\end{defn}
+
+ومعنى ذلك على وجه آخر أن قابلية العلاقة للتعريف في
+$\Struct{N}$ تكافئ قابليتها للتمثيل في $\Th{TA}$،
+حيث $\Th{TA} = \Setabs{!A}{\Sat{\OLId{latin-looped}{N}}{!A}}$ نظرية جميع جمل
+الحساب الصادقة. فإن لم يظهر لك هذا التكافؤ، فارجع إلى التعريفين
+وقابل بين شرطيهما للتحقق منه.
+
+\begin{lem}
+كل علاقة تقبل الحساب تقبل التعريف في $\Struct{N}$.
+\end{lem}
+
+\begin{proof}
+الصيغة الممثلة للعلاقة في $\Th{Q}$ تعرّف العلاقة بعينها في
+$\Struct{N}$، كما يُتحقق منه مباشرة.
+\end{proof}
+
+فهل يلزم العكس؟ أي هل كل علاقة يمكن تعريفها في $\Struct{N}$
+قابلة للحساب؟ ليس الأمر كذلك، كما يبيّن المثال الآتي:
+
+\begin{lem}
+يمكن تعريف علاقة التوقف في $\Struct{N}$.
+\end{lem}
+
+\begin{proof}
+تقضي مبرهنة الصورة السوية لكليني بأن كل دالة جزئية قابلة للحساب
+$\OLId{latin-ordinary}{f}$ لها دليل $\OLId{latin-ordinary}{e}$ يحقق $\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x}) = \OLId{latin-looped}{U}(\umin{\OLId{latin-ordinary}{s}}{\OLId{latin-looped}{T}(\OLId{latin-ordinary}{e},\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{s})})$
+لكل $\OLId{latin-ordinary}{x} \in \Nat$. وهنا $\OLId{latin-looped}{U}$ دالة و$\OLId{latin-looped}{T}$ علاقة عوديتان بدائيتان،
+فالحساب الخاص بكل منهما كلي. وعليه يكون $\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x})$ معرفًا،
+أي يتوقف الحساب، بالضبط حين يوجد $\OLId{latin-ordinary}{s}$ يحقق $\OLId{latin-looped}{T}(\OLId{latin-ordinary}{e},\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{s})$.
+
+نأخذ $\OLId{latin-looped}{H}$ علاقة التوقف، أي
+\[
+\OLId{latin-looped}{H} = \Setabs{\tuple{\OLId{latin-ordinary}{e},\OLId{latin-ordinary}{x}}}{\lexists[\OLId{latin-ordinary}{s}][\OLId{latin-looped}{T}(\OLId{latin-ordinary}{e}, \OLId{latin-ordinary}{x}, \OLId{latin-ordinary}{s})]}.
+\]
+ولتكن $!D_\OLId{latin-looped}{T}$ صيغة تعرّف $\OLId{latin-looped}{T}$ في $\Struct{N}$، فنحصل على
+\[
+\OLId{latin-looped}{H} = \Setabs{\tuple{\OLId{latin-ordinary}{e},\OLId{latin-ordinary}{x}}}{\Sat{\OLId{latin-looped}{N}}{\lexists[\OLId{latin-ordinary}{s}][!D_\OLId{latin-looped}{T}(\num \OLId{latin-ordinary}{e}, \num \OLId{latin-ordinary}{x}, \OLId{latin-ordinary}{s})]}},
+\]
+فتكون $\lexists[\OLId{latin-ordinary}{s}][!D_\OLId{latin-looped}{T}(\OLId{latin-ordinary}{z}, \OLId{latin-ordinary}{x}, \OLId{latin-ordinary}{s})]$ تعريفًا لـ$\OLId{latin-looped}{H}$ في
+$\Struct{N}$.
+\end{proof}
+
+\begin{prob}
+أثبت قابلية العلاقة
+$\OLId{latin-looped}{Q}(\OLId{latin-ordinary}{n}) \defiff \OLId{latin-ordinary}{n} \in \Setabs{\Gn{!A}}{\Th{Q} \Proves !A}$
+للتعريف في الحساب.
+\end{prob}
+
+يبقى السؤال عن $\Th{TA}$ نفسها: أتقبل التعريف في الحساب؟
+وبالتحديد، هل يمكن تعريف المجموعة
+$\Setabs{\Gn{!A}}{\Sat{\OLId{latin-looped}{N}}{!A}}$ حسابيًا؟ مبرهنة تارسكي
+تثبت امتناع ذلك.
+
+\begin{thm}
+\ollabel{thm:tarski}
+لا يمكن تعريف مجموعة الـ!!{sentence}s الحسابية الصادقة
+في لغة الحساب.
+\end{thm}
+
+\begin{proof}
+لو عرّفتها $!D(\OLId{latin-ordinary}{x})$، لكان $\Sat{\OLId{latin-looped}{N}}{!A}$ مكافئًا لـ
+$\Sat{\OLId{latin-looped}{N}}{!D(\gn{!A})}$. وبلمّة النقطة الثابتة توجد جملة $!A$
+تحقق $\Th{Q} \Proves !A \liff \lnot !D(\gn{!A})$،
+فيترتب عليها $\Sat{\OLId{latin-looped}{N}}{!A \liff \lnot !D(\gn{!A})}$.
+إذن $\Sat{\OLId{latin-looped}{N}}{!A}$ تكافئ $\Sat{\OLId{latin-looped}{N}}{\lnot !D(\gn{!A})}$،
+خلاف الفرض القائل إن $!D(\OLId{latin-ordinary}{y})$ تعرّف جمل الحساب الصادقة.
+\end{proof}
+
+ووسّع تارسكي هذا التحليل ليشمل معنى الصدق في الفلسفة.
+فقال: لكل لغة $\OLId{latin-looped}{L}$، ينبغي أن يستوفي المفهوم الملائم لصدق جمل
+$\OLId{latin-looped}{L}$ الشرط الآتي، لكل جملة $\OLId{latin-looped}{X}$:
+\begin{quote}
+«$\OLId{latin-looped}{X}$» صادقة إذا وفقط إذا $\OLId{latin-looped}{X}$.
+\end{quote}
+ومن أمثلته المشهورة بالإنجليزية، في ترجمتها:
+\begin{quote}
+«الثلج أبيض» صادقة إذا وفقط إذا كان الثلج أبيض.
+\end{quote}
+ولكن اللغة التي تقوى على تمثيل الدالة القطرية تتيح، لأي محمول
+لغوي $\OLId{latin-looped}{T}(\OLId{latin-ordinary}{x})$، بناء جملة $\OLId{latin-looped}{X}$ تحقق «$\OLId{latin-looped}{X}$ إذا وفقط إذا لم تكن
+$\OLId{latin-looped}{T}(\text{«$X$»})$». ولا نريد لمحمول الصدق أن يجعل جملة واحدة
+صادقة وكاذبة معًا. لذلك خلص تارسكي إلى أن تعريف محمول صدق
+لجميع جمل لغة ما يستلزم الخروج، بوجه من الوجوه، عن تلك اللغة:
+فمحمول صدق اللغة لا يمكن تعريفه في اللغة نفسها.
+
+\end{document}

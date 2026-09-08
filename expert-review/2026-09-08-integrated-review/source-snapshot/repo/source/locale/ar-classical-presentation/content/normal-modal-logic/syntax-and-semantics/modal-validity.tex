@@ -1,0 +1,71 @@
+% Part: normal-modal-logic
+% Chapter: syntax-and-semantics
+% Section: modal-validity
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{syn}{val}
+
+\olsection{الصلاحية}
+
+\begin{explain}
+  من ال!!^{formula}s ما يصدق في كل عالم من كل نموذج؛ ولهذه مزية
+  أنها تمثل ما يصدق من القضايا الموجهية مهما اختلف تفسير
+  $\Box$ و$\Diamond$، بشرط أن يكون التفسير نظاميًا، أي ناشئًا عن
+  علاقة وصول على العوالم الممكنة. ونسمي هذه ال!!{formula}s
+  \emph{صالحة}. فالصيغة~$\Box(\OLId{latin-ordinary}{p} \land \OLId{latin-ordinary}{q}) \lif \Box \OLId{latin-ordinary}{p}$ مثال لها.
+  وليس كل ما قد يُتوقع من ال!!{formula}s على تفسير~$\Box$ بجهة
+  الصدق صالحًا؛ فإن~$\Box \OLId{latin-ordinary}{p} \lif \OLId{latin-ordinary}{p}$ لا تصح في جميع النماذج.
+  ووجه ذلك أن اختلاف علاقات الوصول يتيح تفسير~$\Box$ و$\Diamond$
+  على أنحاء مختلفة. فالأولى أن نميز الصلاحية في \emph{جميع}
+  النماذج من الصلاحية في نماذج \emph{من نوع مخصوص}.
+  وسيتبين أن~$\Box \OLId{latin-ordinary}{p} \lif \OLId{latin-ordinary}{p}$ تصدق إذا كان كل عالم يصل إلى نفسه،
+  أعني إذا كانت~$\OLId{latin-looped}{R}$ انعكاسية. وباصطلاح الصلاحية النسبية نوجز هذا
+  فنقول: الصيغة~$\Box \OLId{latin-ordinary}{p} \lif \OLId{latin-ordinary}{p}$ صالحة في صنف النماذج الانعكاسية.
+\end{explain}
+
+\begin{defn}
+  تكون !!^a{formula}~$!A$ \emph{صالحة} في صنف النماذج~$\mClass{C}$
+  إذا كانت صادقة في كل نموذج من~$\mClass{C}$ (أي في كل عالم من كل
+  نموذج في~$\mClass{C}$). وإذا كانت~$!A$ صالحة في~$\mClass{C}$، كتبنا
+  $\mClass{C} \Entails !A$؛ ونكتب~$\Entails !A$ إذا كانت~$!A$ صالحة
+  في صنف \emph{جميع} النماذج.
+\end{defn}
+
+\begin{prop}\ollabel{prop:subset-class}
+  إذا كانت~$!A$ صالحة في~$\mClass{C}$، فهي صالحة أيضًا في كل صنف
+  $\mClass{C}' \subseteq \mClass{C}$.
+\end{prop}
+
+\begin{prop}\ollabel{prop:Nec-rule}
+  إذا كانت~$!A$ صالحة، فإن~$\Box!A$ صالحة أيضًا.
+\end{prop}
+
+\begin{proof}
+  لنفرض~$\Entails !A$، ولننظر في~$\Entails \Box!A$. خذ نموذجًا
+  $\mModel{M} = \tuple{\OLId{latin-looped}{W}, \OLId{latin-looped}{R}, \OLId{latin-looped}{V}}$ وعالمًا~$\OLId{latin-ordinary}{w} \in \OLId{latin-looped}{W}$ كيف اتفق.
+  كلما كان~$Rww'$ لزم~$\mSat{\OLId{latin-looped}{M}}{!A}[\OLId{latin-ordinary}{w}']$ من صلاحية~$!A$؛
+  فحصل~$\mSat{\OLId{latin-looped}{M}}{\Box!A}[\OLId{latin-ordinary}{w}]$. وإذ لم نخصّ~$\mModel{M}$ ولا~$\OLId{latin-ordinary}{w}$
+  بصفة، ثبت~$\Entails \Box!A$.
+\end{proof}
+
+\begin{prob}
+  أثبت أن الصيغ الآتية صالحة:
+  \begin{enumerate}
+  \item $\Box \OLId{latin-ordinary}{p} \lif \Box (\OLId{latin-ordinary}{q} \lif \OLId{latin-ordinary}{p})$؛
+  \item $\Box \lnot \lfalse$؛
+  \item $\Box \OLId{latin-ordinary}{p} \lif (\Box \OLId{latin-ordinary}{q} \lif \Box \OLId{latin-ordinary}{p})$.
+  \end{enumerate}
+\end{prob}
+
+\begin{prob}
+  أثبت أن~$!A \lif \Box!A$ صالحة في صنف النماذج~$\mClass{C}$ من
+  الصورة~$\mModel{M} = \tuple{\OLId{latin-looped}{W}, \OLId{latin-looped}{R}, \OLId{latin-looped}{V}}$ حيث~$\OLId{latin-looped}{W} = \{\OLId{latin-ordinary}{w}\}$. وبالمثل،
+  أثبت أن~$!B \lif \Box !A$ و$\Diamond !A \lif !B$ صالحتان في صنف
+  النماذج~$\mModel{M} = \tuple{\OLId{latin-looped}{W}, \OLId{latin-looped}{R}, \OLId{latin-looped}{V}}$ التي فيها
+  $\OLId{latin-looped}{R} = \emptyset$.
+\end{prob}
+
+\end{document}

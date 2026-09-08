@@ -1,0 +1,114 @@
+% Part: model-theory
+% Chapter: lindstrom
+% Section: ls-property
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{lin}{lsp}
+
+\olsection{خاصيتا التراص ولوفنهايم--سكولم}
+
+نعطي الآن التوسيعين الواضحين للتراص ولوفنهايم--سكولم إلى حالة المنطقات
+المجردة.
+
+\begin{defn}
+للمنطق المجرد $\tuple{L,\models_L}$ \emph{خاصية التراص} إذا كانت كل
+مجموعة~$\Gamma$ من !!{sentence}s~$L(\Lang{L})$ قابلة للإرضاء متى كانت
+كل $\Gamma_0 \subseteq \Gamma$ منتهية قابلة للإرضاء.
+\end{defn}
+
+\begin{defn}
+للمنطق $\tuple{L,\models_L}$ \emph{خاصية لوفنهايم--سكولم النزولية} إذا
+كان لكل $\Gamma$ قابلة للإرضاء نموذج !!a{enumerable}.
+\end{defn}
+
+
+مفهوم التشاكل الجزئي من \olref[bas][pis]{defn:partialisom} «جبري» محض
+(أي إنه معطى من غير إحالة إلى !!{sentence}s اللغة، بل إلى الثوابت التي
+توفرها الـ!!{language}~$\Lang{L}$ للـ!!{structure}s فقط)، ومن ثم ينطبق
+على حالة المنطقات المجردة. وفي حالة منطق الرتبة الأولى نعلم من
+\olref[bas][pis]{thm:p-isom2} أن أي !!{structure}s متشاكلتين جزئيًا
+متكافئتان أوليًا. ولا ينتقل ذلك البرهان إلى المنطقات المجردة، لأن
+الاستقراء على الـ!!{formula}s قد لا يكون متاحًا لـ$!E \in L(\Lang{L})$
+اعتباطية؛ غير أن المبرهنة تظل صحيحة متى تحققت خاصية لوفنهايم--سكولم.
+
+\begin{thm}
+\ollabel{thm:abstract-p-isom}
+افترض أن $\tuple{L,\models_L}$ منطق سوي له خاصية لوفنهايم--سكولم.
+عندئذ تكون أي !!{structure}s متشاكلتين جزئيًا متكافئتين أوليًا في
+$\tuple{L,\models_L}$.
+\end{thm}
+
+\begin{proof}
+افترض أن $\Struct{M} \simeq_p \Struct{N}$، لكن لبعض $!E$ يكون أيضًا
+$\Struct{M} \models_L !E$ و$\Struct{N} \not\models_L !E$. وبخاصية
+التشاكل يجوز أن نفترض أن $\Domain{M}$ و$\Domain{N}$ متباينان، وبخاصية
+التوسع يجوز أن نفترض أن $!E \in L(\Lang{L})$ للـ!!{language} المنتهية
+$\Lang{L}$. ولتكن $\mathcal{I}$ مجموعة من التشاكلات الجزئية بين
+$\Struct{M}$ و$\Struct{N}$، وافترض أيضًا من غير إخلال بالعموم أنه إذا
+كان $p \in \mathcal{I}$ و$q \subseteq p$، فإن $q \in \mathcal{I}$.
+
+$\Domain{M}^{<\omega}$ مجموعة المتتاليات المنتهية من !!{element}s
+$\Domain{M}$. ولتكن $S$ العلاقة الثلاثية على $\Domain{M}^{<\omega}$
+التي تمثل الوصل؛ أي إذا كانت
+$\mathbf{a},\mathbf{b},\mathbf{c} \in \Domain{M}^{<\omega}$، فإن
+$S(\mathbf{a},\mathbf{b},\mathbf{c})$ إذا وفقط إذا كانت $\mathbf{c}$
+وصل $\mathbf{a}$ و$\mathbf{b}$. ولتكن $T$ العلاقة الثلاثية التي يكون
+فيها $T(\mathbf{a},b,\mathbf{c})$، لـ$b \in \Domain{M}$ و
+$\mathbf{a},\mathbf{c} \in \Domain{M}^{<\omega}$، إذا وفقط إذا كان
+$\mathbf{a}=a_1,\dots,a_n$ و$\mathbf{c}=a_1,\dots,a_n,b$. اختر
+!!{predicate}s جديدين $P$ و$Q$ ذوي ثلاثة مواضع، وكوّن
+الـ!!{structure}~$\Struct{M}^*$ التي كونها
+$\Domain{M} \cup \Domain{M}^{<\omega}$، والتي تحتوي $\Struct{M}$
+بنية جزئية وتفسر $P$ و$Q$ بعلاقتي الوصل $S$ و$T$ (فتكون
+$\Struct{M}^*$ في الـ!!{language}~$\Lang{L} \cup \{P,Q\}$).
+
+عرّف $\Domain{N}^{<\omega}$ و$S'$ و$T'$ و$P'$ و$Q'$ و$\Struct{N}^*$
+على نحو مماثل. ولما كان بالفرض $\Struct{M} \simeq_p \Struct{N}$، وجدت
+علاقة~$I$ بين $\Domain{M}^{<\omega}$ و$\Domain{N}^{<\omega}$ بحيث
+$I(\mathbf{a},\mathbf{b})$ إذا وفقط إذا كانت $\mathbf{a}$ و
+$\mathbf{b}$ متشاكلتين وتحققان شرط الذهاب والإياب من
+\olref[bas][pis]{defn:partialisom}. ولتكن الآن $\Struct{U}$ هي
+الـ!!{structure} التي !!{domain}ها اتحاد !!{domain}s~$\Struct{M}^*$
+و$\Struct{N}^*$، وتحتوي $\Struct{M}^*$ و$\Struct{N}^*$ بوصفهما
+!!{structure}s جزئية، في الـ!!{language} ذات !!{predicate} ثنائي
+إضافي~$R$ يفسر بالعلاقة~$I$ و!!{predicate}s تدل على الـ!!{domain}s
+$\Domain{M}^*$ و$\Domain{N}^*$.
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}[node distance=2cm, auto, thick, >=stealth']
+    \draw [rounded corners] (0,0) -- (8,0) -- (8,4) -- (0,4) --  cycle;
+    \draw (2,2) circle (0.5cm);
+    \draw (2,2) circle (1.25cm);
+    \draw (6,2) circle (0.5cm);
+    \draw (6,2) circle (1.25cm);
+    \path node at (0.75,3.5) {\large $\Struct{U}$};
+    \path node at (2,2) {\large $\Struct{M}$};
+    \path node at (6,2) {\large $\Struct{N}$};
+    \path node at (3.5,1) {\large $\Struct{M}^*$};
+    \path node at (7.5,1) {\large $\Struct{N}^*$};
+    \node (Idom) at (2.8,2) {};
+    \node (Irng) at (5.2,2) {};
+    \draw[<->, bend left] (Idom) to node {\large $I$} (Irng) ;
+  \end{tikzpicture}
+  \caption{الـ!!{structure}~$\Struct{U}$ والتشاكل الجزئي الداخلي.}
+\end{figure}
+
+الملاحظة الحاسمة هي أنه توجد في !!{language} الـ!!{structure}~$\Struct{U}$
+!!{sentence}~$!D_1$ من المنطق المجرد~$L$ تصدق في $\Struct{U}$ وتقول إن
+$\Struct{M} \models_L !E$ و$\Struct{N} \not\models_L !E$ (وهذا يتطلب
+خاصية النسبنة)، كما توجد !!{sentence}~$!D_2$ \emph{من الرتبة الأولى}
+تصدق في $\Struct{U}$ وتقول إن $\Struct{M} \simeq_p \Struct{N}$ بواسطة
+التشاكل الجزئي~$I$. وبخاصية لوفنهايم--سكولم تصدق $!D_1$ و$!D_2$ معًا
+في نموذج !!a{enumerable}~$\Struct{U_0}$ يحتوي بنيتين جزئيتين متشاكلتين
+جزئيًا $\Struct{M_0}$ و$\Struct{N_0}$ بحيث
+$\Struct{M_0} \models_L !E$ و$\Struct{N_0} \not\models_L !E$. لكن
+الـ!!{structure}s الجزئية !!{enumerable} المتشاكلة جزئيًا متشاكلة بالفعل
+بحسب \olref[bas][pis]{thm:p-isom1}، خلافًا لخاصية التشاكل للمنطقات
+المجردة السوية.
+\end{proof}
+
+\end{document}

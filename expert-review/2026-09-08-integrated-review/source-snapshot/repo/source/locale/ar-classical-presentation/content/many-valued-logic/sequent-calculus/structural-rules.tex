@@ -1,0 +1,52 @@
+% Part: many-valued-logic
+% Chapter: sequent-calculus
+% Section: structural-rules
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mvl}{seq}{str}
+
+\olsection{القواعد البنيوية}
+
+القواعد البنيوية في حساب التتابعيات ذي الجوانب~$\OLId{latin-ordinary}{n}$ على مثال القواعد
+الكلاسيكية؛ غير أنها تُجرى في كل موضع~$\OLId{latin-ordinary}{i}$ على حدة.
+
+\begin{defish}
+\begin{center}
+\AxiomC{$ \OLId{greek-variable}{Gamma}_\OLMathNumeral{1} \nSequent \dots \nSequent \phantom{!A,}\OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{i} \nSequent \dots \nSequent \OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n} $}
+\RightLabel{$\iR{\Weakening}{\OLId{latin-ordinary}{i}}$}
+\UnaryInfC{$\OLId{greek-variable}{Gamma}_\OLMathNumeral{1} \nSequent \dots \nSequent !A, \OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{i} \nSequent \dots \nSequent \OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n}$}
+\DisplayProof
+\\[2ex]
+\AxiomC{$ \OLId{greek-variable}{Gamma}_\OLMathNumeral{1} \nSequent \dots \nSequent !A, !A, \OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{i} \nSequent \dots \nSequent \OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n} $}
+\RightLabel{$\iR{\Contraction}{\OLId{latin-ordinary}{i}}$}
+\UnaryInfC{$\OLId{greek-variable}{Gamma}_\OLMathNumeral{1} \nSequent \dots \nSequent \phantom{!A,}!A, \OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{i} \nSequent
+\dots \nSequent \OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n}$}
+\DisplayProof
+\\[2ex]
+\AxiomC{$ \OLId{greek-variable}{Gamma}_\OLMathNumeral{1} \nSequent \dots \nSequent \OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{i}, !A, !B, \OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{i}' \nSequent \dots \nSequent \OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n} $}
+\RightLabel{$\iR{\Exchange}{\OLId{latin-ordinary}{i}}$}
+\UnaryInfC{$\OLId{greek-variable}{Gamma}_\OLMathNumeral{1} \nSequent \dots \nSequent \OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{i}, !B, !A, \OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{i}' \nSequent \dots
+\nSequent \OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n}$}
+\DisplayProof
+\end{center}
+\end{defish}
+
+وقد نجمع طائفة متعاقبة من استدلالات الإضعاف والانكماش والتبادل،
+فنرسم لها خط استدلال مزدوجًا بدل إظهار كل خطوة منها.
+
+ولقاعدة~\Cut{} صور عدة، واحدة لكل تركيب من موضعين مختلفين في
+التتابعية~$\OLId{latin-ordinary}{i} \neq \OLId{latin-ordinary}{j}$:
+\begin{defish}
+\[
+\AxiomC{$ \OLId{greek-variable}{Gamma}_\OLMathNumeral{1} \nSequent \dots \nSequent !A, \OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{i} \nSequent \dots \nSequent \OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n} $}
+\AxiomC{$ \OLId{greek-variable}{Delta}_\OLMathNumeral{1} \nSequent \dots \nSequent !A, \OLId{greek-variable}{Delta}_\OLId{latin-ordinary}{j} \nSequent \dots \nSequent \OLId{greek-variable}{Delta}_\OLId{latin-ordinary}{n} $}
+\RightLabel{$\iR{\Cut}{\OLId{latin-ordinary}{i},\OLId{latin-ordinary}{j}}$}
+\BinaryInfC{$\OLId{greek-variable}{Gamma}_\OLMathNumeral{1},\OLId{greek-variable}{Delta}_\OLMathNumeral{1} \nSequent \dots \nSequent \OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n}, \OLId{greek-variable}{Delta}_\OLId{latin-ordinary}{n}$}
+\DisplayProof
+\]
+\end{defish}
+
+\end{document}

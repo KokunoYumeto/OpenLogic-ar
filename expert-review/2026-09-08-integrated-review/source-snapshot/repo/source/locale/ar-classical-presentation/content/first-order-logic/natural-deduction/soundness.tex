@@ -1,0 +1,319 @@
+% Part: first-order-logic
+% Chapter: natural-deduction
+% Section: soundness
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{ntd}{sou}}
+      {\olfileid{pl}{ntd}{sou}}
+      
+\olsection{السلامة}
+
+\begin{explain}
+نسق !!^a{derivation}، كالاستنتاج الطبيعي، \emph{سليم} متى امتنع عليه
+!!{derive} ما لا يلزم في الحقيقة. فالسلامة ضمان لأنساق ال!!{derivation}
+من مجاوزة ما تسوّغه المقدمات. ويتبيّن المراد بحسب الخاصية البرهانية
+المبحوث عنها؛ فمن ذلك:
+\begin{enumerate}
+\item كل ما هو !!{derivable} من نوع !!{sentence} يكون \iftag{FOL}{صالحًا}{تحصيل حاصل}؛
+\item إذا كانت !!a{sentence} !!{derivable} من جمل أخرى، فهي أيضًا
+  نتيجة لها؛
+\item إذا كانت مجموعة من ال!!{sentence}s غير متسقة، فهي غير قابلة
+  للإرضاء.
+\end{enumerate}
+هذه خصائص لا غنى عنها لنسق !!a{derivation}؛ فإن تخلّفت واحدة منها
+كان نسق ال!!{derivation} قاصرًا، إذ أمكنه !!{derive} ما لا حق له في
+إثباته. فمن أجل ذلك كان إثبات سلامة نسق ال!!{derivation} من أوكد
+ما يلزم في دراسته.
+\end{explain}
+
+\begin{thm}[السلامة]
+\ollabel{thm:soundness}
+إذا كانت~$!A$ !!{derivable} من الافتراضات ال!!{undischarged}
+$\OLId{greek-variable}{Gamma}$، فإن~$\OLId{greek-variable}{Gamma} \Entails !A$.
+\end{thm}
+
+\begin{proof}
+نأخذ~$\delta$، وهو !!a{derivation} لـ~$!A$، ونجعل عدد الاستدلالات
+في~$\delta$ أساسًا للاستقراء.
+
+أما الأساس، فعدد الاستدلالات فيه~$\OLMathNumeral{0}$؛ فلا يشتمل~$\delta$ إلا على
+!!{sentence} واحدة، هي~$!A$، مأخوذة افتراضًا. وهذا الافتراض
+!!{undischarged}؛ فإن الافتراضات لا تصير !!{discharged} إلا باستدلال،
+وليس هنا استدلال. فكل
+\iftag{FOL}{!!{structure}~$\Struct{M}$}{!!{valuation}~$\pAssign{\OLId{latin-ordinary}{v}}$}
+ترضى فيها الافتراضات ال!!{undischarged} في البرهان ترضى فيها~$!A$
+بالضرورة.
+
+وأما الخطوة، فنفرض أن في~$\delta$ عددًا من الاستدلالات قدره~$\OLId{latin-ordinary}{n}$.
+وقد أمكن !!{derive} مقدمات الاستدلال الأخير بـ!!{derivation}s جزئية،
+في كل منها أقل من~$\OLId{latin-ordinary}{n}$ استدلالًا. فبحسب فرض
+الاستقراء تلزم كل مقدمة من تلك المقدمات عن الافتراضات ال!!{undischarged}
+في ال!!{derivation}s الجزئية التي انتهت إليها. ويبقى أن نبيّن لزوم
+النتيجة~$!A$ عن الافتراضات ال!!{undischarged} في البرهان بأسره.
+
+ولبيان ذلك نفصّل بحسب القاعدة التي ختم بها البرهان، ونبدأ بالقواعد
+ذوات المقدمة الواحدة.
+\begin{enumerate}
+\item إن كان آخر الاستدلالات~\Intro{\lnot}، فصورة ال!!{derivation}
+  هي:
+  \begin{prooftree}
+    \AxiomC{$\OLId{greek-variable}{Gamma}, \Discharge{!A}{\OLId{latin-ordinary}{n}}$}
+    \RightLabel{$\delta_\OLMathNumeral{1}$}
+    \DeduceC{$\lfalse$}
+    \DischargeRule{\Intro{\lnot}}{n}
+    \UnaryInfC{$\lnot !A$}
+  \end{prooftree}
+  بفرض الاستقراء يلزم~$\lfalse$ عن الافتراضات ال!!{undischarged}
+  $\OLId{greek-variable}{Gamma} \cup \{!A\}$ في~$\delta_\OLMathNumeral{1}$. ولنأخذ
+  \iftag{FOL}{!!a{structure}~$\Struct{M}$}{!!a{valuation}~$\pAssign{\OLId{latin-ordinary}{v}}$}.
+  المطلوب أن يترتب على~$\iftag{FOL}{\Sat{\OLId{latin-looped}{M}}}{\pSat{\OLId{latin-ordinary}{v}}}{\OLId{greek-variable}{Gamma}}$
+  صدق~$\iftag{FOL}{\Sat{\OLId{latin-looped}{M}}}{\pSat{\OLId{latin-ordinary}{v}}}{\lnot !A}$. فإن فرضنا للخلف
+  $\iftag{FOL}{\Sat{\OLId{latin-looped}{M}}}{\pSat{\OLId{latin-ordinary}{v}}}{\OLId{greek-variable}{Gamma}}$ مع
+  $\iftag{FOL}{\Sat/{\OLId{latin-looped}{M}}}{\pSat/{\OLId{latin-ordinary}{v}}}{\lnot !A}$، أي
+  $\iftag{FOL}{\Sat{\OLId{latin-looped}{M}}}{\pSat{\OLId{latin-ordinary}{v}}}{!A}$، حصل
+  $\iftag{FOL}{\Sat{\OLId{latin-looped}{M}}}{\pSat{\OLId{latin-ordinary}{v}}}{\OLId{greek-variable}{Gamma} \cup \{!A\}}$.
+  ويلزم منه، بفرض الاستقراء، إرضاء الباطل، وهو محال. فلا بد من
+  $\iftag{FOL}{\Sat{\OLId{latin-looped}{M}}}{\pSat{\OLId{latin-ordinary}{v}}}{\lnot !A}$.
+
+
+\item وإن كان آخرها~\Elim{\land}، فإما أن نستنتج~$!A$
+  وإما~$!B$ من المقدمة~$!A \land !B$. نبيّن الوجه الأول؛ وفيه
+  ال!!{derivation}~$\delta$ على هذه الصورة:
+  \begin{prooftree}
+    \AxiomC{$\OLId{greek-variable}{Gamma}$}
+    \RightLabel{$\delta_\OLMathNumeral{1}$}
+    \DeduceC{$!A \land !B$}
+    \RightLabel{\Elim{\land}}
+    \UnaryInfC{$!A$}
+  \end{prooftree}
+  بفرض الاستقراء تلزم~$!A \land !B$ عن الافتراضات
+  ال!!{undischarged}~$\OLId{greek-variable}{Gamma}$ في~$\delta_\OLMathNumeral{1}$. ولنأخذ
+  \iftag{FOL}{!!a{structure}~$\Struct{M}$}{!!a{valuation}~$\pAssign{\OLId{latin-ordinary}{v}}$}؛
+  فينبغي أن يترتب على~$\iftag{FOL}{\Sat{\OLId{latin-looped}{M}}}{\pSat{\OLId{latin-ordinary}{v}}}{\OLId{greek-variable}{Gamma}}$
+  صدق~$\iftag{FOL}{\Sat{\OLId{latin-looped}{M}}}{\pSat{\OLId{latin-ordinary}{v}}}{!A}$. فإذا فرضنا
+  $\iftag{FOL}{\Sat{\OLId{latin-looped}{M}}}{\pSat{\OLId{latin-ordinary}{v}}}{\OLId{greek-variable}{Gamma}}$، كان فرض الاستقراء
+  ($\OLId{greek-variable}{Gamma} \Entails !A \land !B$) مقتضيًا
+  $\iftag{FOL}{\Sat{\OLId{latin-looped}{M}}}{\pSat{\OLId{latin-ordinary}{v}}}{!A \land !B}$. وتعريف الإرضاء
+  يجعل~$\iftag{FOL}{\Sat{\OLId{latin-looped}{M}}}{\pSat{\OLId{latin-ordinary}{v}}}{!A \land !B}$ مكافئًا لاجتماع
+  $\iftag{FOL}{\Sat{\OLId{latin-looped}{M}}}{\pSat{\OLId{latin-ordinary}{v}}}{!A}$ و
+  $\iftag{FOL}{\Sat{\OLId{latin-looped}{M}}}{\pSat{\OLId{latin-ordinary}{v}}}{!B}$، وفي الأول المطلوب.
+  وأما استنتاج~$!B$ من~$!A \land !B$ فبيانه على هذا النحو نفسه.
+
+
+\item وإن كان آخرها~\Intro{\lor}، فاستنتاج
+  $!A \lor !B$ يكون من~$!A$ أو من~$!B$. نأخذ الوجه الأول،
+  وصورة ال!!{derivation} فيه:
+  \begin{prooftree}
+    \AxiomC{$\OLId{greek-variable}{Gamma}$}
+    \RightLabel{$\delta_\OLMathNumeral{1}$}
+    \DeduceC{$!A$}
+    \RightLabel{\Intro{\lor}}
+    \UnaryInfC{$!A \lor !B$}
+  \end{prooftree}
+  بفرض الاستقراء تلزم~$!A$ عن الافتراضات ال!!{undischarged}
+  $\OLId{greek-variable}{Gamma}$ في~$\delta_\OLMathNumeral{1}$. ولنأخذ
+  \iftag{FOL}{!!a{structure}~$\Struct{M}$}{!!a{valuation}~$\pAssign{\OLId{latin-ordinary}{v}}$}.
+  المطلوب أن يلزم من~$\iftag{FOL}{\Sat{\OLId{latin-looped}{M}}}{\pSat{\OLId{latin-ordinary}{v}}}{\OLId{greek-variable}{Gamma}}$
+  صدق~$\iftag{FOL}{\Sat{\OLId{latin-looped}{M}}}{\pSat{\OLId{latin-ordinary}{v}}}{!A \lor !B}$. فإذا كان
+  $\iftag{FOL}{\Sat{\OLId{latin-looped}{M}}}{\pSat{\OLId{latin-ordinary}{v}}}{\OLId{greek-variable}{Gamma}}$، كان
+  $\iftag{FOL}{\Sat{\OLId{latin-looped}{M}}}{\pSat{\OLId{latin-ordinary}{v}}}{!A}$، إذ~$\OLId{greek-variable}{Gamma} \Entails !A$
+  بفرض الاستقراء؛ ومن تعريف الفصل يلزم
+  $\iftag{FOL}{\Sat{\OLId{latin-looped}{M}}}{\pSat{\OLId{latin-ordinary}{v}}}{!A \lor !B}$.
+  وأما استنتاج~$!A \lor !B$ من~$!B$ فحجته نظير هذه.
+
+
+\item وإن كان آخرها~\Intro{\lif}، فقد استنتجنا~$!A \lif !B$
+  من برهان جزئي افتتح بافتراض~$!A$ وانتهى إلى~$!B$، هكذا:
+  \begin{prooftree}
+    \AxiomC{$\OLId{greek-variable}{Gamma}, \Discharge{!A}{\OLId{latin-ordinary}{n}}$}
+    \RightLabel{$\delta_\OLMathNumeral{1}$}
+    \DeduceC{$!B$}
+    \DischargeRule{\Intro{\lif}}{n}
+    \UnaryInfC{$!A \lif !B$}
+  \end{prooftree}
+  بفرض الاستقراء تلزم~$!B$ عن الافتراضات ال!!{undischarged} في
+  $\delta_\OLMathNumeral{1}$، أي~$\OLId{greek-variable}{Gamma} \cup \{!A\} \Entails !B$. ولنأخذ
+  \iftag{FOL}{!!a{structure}~$\Struct{M}$}{!!a{valuation}~$\pAssign{\OLId{latin-ordinary}{v}}$}.
+  وليس من الافتراضات ال!!{undischarged} في~$\delta$ إلا~$\OLId{greek-variable}{Gamma}$،
+  إذ سقط~$!A$ في الاستدلال الأخير. فالمطلوب
+  $\OLId{greek-variable}{Gamma} \Entails !A \lif !B$. نفرض للخلف وجود
+  \iftag{FOL}{!!{structure}~$\Struct{M}$}{!!{valuation}~$\pAssign{\OLId{latin-ordinary}{v}}$}
+  يتحقق فيه~$\iftag{FOL}{\Sat{\OLId{latin-looped}{M}}}{\pSat{\OLId{latin-ordinary}{v}}}{\OLId{greek-variable}{Gamma}}$، لكن
+  $\iftag{FOL}{\Sat/{\OLId{latin-looped}{M}}}{\pSat/{\OLId{latin-ordinary}{v}}}{!A \lif !B}$؛
+  أي إن~$\iftag{FOL}{\Sat{\OLId{latin-looped}{M}}}{\pSat{\OLId{latin-ordinary}{v}}}{!A}$ و
+  $\iftag{FOL}{\Sat/{\OLId{latin-looped}{M}}}{\pSat/{\OLId{latin-ordinary}{v}}}{!B}$. غير أن~$!B$، بفرضنا،
+  نتيجة لـ~$\OLId{greek-variable}{Gamma} \cup \{!A\}$؛ فيلزم
+  $\iftag{FOL}{\Sat{\OLId{latin-looped}{M}}}{\pSat{\OLId{latin-ordinary}{v}}}{!B}$، وهو نقيض المفروض.
+  فثبت~$\OLId{greek-variable}{Gamma} \Entails !A \lif !B$.
+
+
+\item وإن كان آخرها~\FalseInt، فخاتمة~$\delta$ هي:
+  \begin{prooftree}
+    \AxiomC{$\OLId{greek-variable}{Gamma}$}
+    \RightLabel{$\delta_\OLMathNumeral{1}$}
+    \DeduceC{$\lfalse$}
+    \RightLabel{\FalseInt}
+    \UnaryInfC{$!A$}
+  \end{prooftree}
+  بفرض الاستقراء~$\OLId{greek-variable}{Gamma} \Entails \lfalse$، والمطلوب
+  $\OLId{greek-variable}{Gamma} \Entails !A$. فإن لم يكن، وجد
+  $\iftag{FOL}{\Struct{M}}{\pAssign{\OLId{latin-ordinary}{v}}}$ يتحقق فيه
+  $\iftag{FOL}{\Sat{\OLId{latin-looped}{M}}}{\pSat{\OLId{latin-ordinary}{v}}}{\OLId{greek-variable}{Gamma}}$ و
+  $\iftag{FOL}{\Sat/{\OLId{latin-looped}{M}}}{\pSat/{\OLId{latin-ordinary}{v}}}{!A}$. ولما كان
+  $\iftag{FOL}{\Sat/{\OLId{latin-looped}{M}}}{\pSat/{\OLId{latin-ordinary}{v}}}{\lfalse}$ حاصلًا على كل حال،
+  لزم~$\OLId{greek-variable}{Gamma} \Entails/ \lfalse$، مناقضًا فرض الاستقراء.
+
+
+\item الاستدلال الأخير هو~\FalseCl: تمرين.
+
+\iftag{FOL}{
+\item وإن كان آخرها~\Intro{\lforall}، فصورة~$\delta$ هي:
+  \begin{prooftree}
+    \AxiomC{$\OLId{greek-variable}{Gamma}$}
+    \RightLabel{$\delta_\OLMathNumeral{1}$}
+    \DeduceC{$!A(\OLId{latin-ordinary}{a})$}
+    \RightLabel{\Intro{\lforall}}
+    \UnaryInfC{$\lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]$}
+  \end{prooftree}
+  المقدمة~$!A(\OLId{latin-ordinary}{a})$ تلزم عن الافتراضات ال!!{undischarged}~$\OLId{greek-variable}{Gamma}$
+  بفرض الاستقراء. نأخذ بنية~$\Struct{M}$ تحقق~$\Sat{\OLId{latin-looped}{M}}{\OLId{greek-variable}{Gamma}}$،
+  ونبيّن~$\Sat{\OLId{latin-looped}{M}}{\lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]}$. ولما كانت
+  $\lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]$ !!a{sentence}، كفى أن نأخذ إسناد متغيرات
+  كيفما اتفق~$\OLId{latin-ordinary}{s}$ ونثبت~$\Sat{\OLId{latin-looped}{M}}{!A(\OLId{latin-ordinary}{x})}[\OLId{latin-ordinary}{s}]$
+  (\olref[syn][ass]{prop:sat-quant}). وأعضاء~$\OLId{greek-variable}{Gamma}$ كلّها جمل؛
+  فلدينا~$\Sat{\OLId{latin-looped}{M}}{!B}[\OLId{latin-ordinary}{s}]$ لكل~$!B \in \OLId{greek-variable}{Gamma}$، بحكم
+  \olref[syn][sat]{defn:satisfaction}. نبني~$\Struct{M'}$ موافقةً
+  لـ~$\Struct{M}$ في كل شيء سوى~$\Assign{\OLId{latin-ordinary}{a}}{\OLId{latin-looped}{M}'} = \OLId{latin-ordinary}{s}(\OLId{latin-ordinary}{x})$.
+  وحيث لا يرد~$\OLId{latin-ordinary}{a}$ في~$\OLId{greek-variable}{Gamma}$، يبقى~$\Sat{\OLId{latin-looped}{M}'}{\OLId{greek-variable}{Gamma}}$، بمقتضى
+  \olref[syn][ext]{cor:extensionality-sent}. ومن
+  $\OLId{greek-variable}{Gamma} \Entails !A(\OLId{latin-ordinary}{a})$ ينتج~$\Sat{\OLId{latin-looped}{M}'}{!A(\OLId{latin-ordinary}{a})}$.
+  ولأن~$!A(\OLId{latin-ordinary}{a})$ !!a{sentence}، فلدينا~$\Sat{\OLId{latin-looped}{M}'}{!A(\OLId{latin-ordinary}{a})}[\OLId{latin-ordinary}{s}]$ بحسب
+  \olref[syn][ass]{prop:sentence-sat-true}. ثم إن
+  $\Sat{\OLId{latin-looped}{M}'}{!A(\OLId{latin-ordinary}{x})}[\OLId{latin-ordinary}{s}]$ يكافئ~$\Sat{\OLId{latin-looped}{M}'}{!A(\OLId{latin-ordinary}{a})}$، بمقتضى
+  \olref[syn][ext]{prop:ext-formulas}؛ فإن~$!A(\OLId{latin-ordinary}{a})$ هي
+  $\Subst{!A(\OLId{latin-ordinary}{x})}{\OLId{latin-ordinary}{a}}{\OLId{latin-ordinary}{x}}$. فقد ثبت~$\Sat{\OLId{latin-looped}{M}'}{!A(\OLId{latin-ordinary}{x})}[\OLId{latin-ordinary}{s}]$.
+  ولعدم ورود~$\OLId{latin-ordinary}{a}$ في~$!A(\OLId{latin-ordinary}{x})$، تنقلنا
+  \olref[syn][ext]{prop:extensionality} إلى~$\Sat{\OLId{latin-looped}{M}}{!A(\OLId{latin-ordinary}{x})}[\OLId{latin-ordinary}{s}]$.
+  ولم نخصّ~$\OLId{latin-ordinary}{s}$ بشيء؛ فصحّ المطلوب لكل إسناد، ومن ثم
+  $\Sat{\OLId{latin-looped}{M}}{\lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]}$.
+
+
+\item الاستدلال الأخير هو~\Intro{\lexists}: تمرين.
+
+\item الاستدلال الأخير هو~\Elim{\forall}: تمرين.
+}{}
+\end{enumerate}
+
+وأما الاستدلالات ذوات المقدمات المتعددة فننظر فيها الآن، وهي:
+\Elim{\lnot} و\Elim{\lor} و\Intro{\land} و\iftag{FOL}{\Elim{\lif} و
+  \Elim{\lexists}}{\Elim{\lif}}.
+\textbf{تنبيه تصحيحي على الأصل (C095-01).} أُعيدت $\Elim{\lnot}$ إلى قائمة
+القواعد ذات المقدمات المتعددة؛ فهي مذكورة في تعداد الحالات اللاحق، وقد
+سقط اسمها من هذه الإشارة التمهيدية وحدها.
+\begin{enumerate}
+
+\item إن كان آخرها~\Intro{\land}، فقد استنتجنا~$!A \land !B$
+  من المقدمتين~$!A$ و$!B$، وصورة~$\delta$ هي:
+  \begin{prooftree}
+    \AxiomC{$\OLId{greek-variable}{Gamma}_\OLMathNumeral{1}$}
+    \RightLabel{$\delta_\OLMathNumeral{1}$}
+    \DeduceC{$!A$}
+    \AxiomC{$\OLId{greek-variable}{Gamma}_\OLMathNumeral{2}$}
+    \RightLabel{$\delta_\OLMathNumeral{2}$}
+    \DeduceC{$!B$}
+    \RightLabel{\Intro{\land}}
+    \BinaryInfC{$!A \land !B$}
+  \end{prooftree}
+  بفرض الاستقراء تلزم~$!A$ عن الافتراضات ال!!{undischarged}
+  $\OLId{greek-variable}{Gamma}_\OLMathNumeral{1}$ في~$\delta_\OLMathNumeral{1}$، كما تلزم~$!B$ عن الافتراضات
+  ال!!{undischarged}~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{2}$ في~$\delta_\OLMathNumeral{2}$.
+  وأما الافتراضات ال!!{undischarged} في~$\delta$ فمجموعها
+  $\OLId{greek-variable}{Gamma}_\OLMathNumeral{1} \cup \OLId{greek-variable}{Gamma}_\OLMathNumeral{2}$؛ فيبقى إثبات
+  $\OLId{greek-variable}{Gamma}_\OLMathNumeral{1} \cup \OLId{greek-variable}{Gamma}_\OLMathNumeral{2} \Entails !A \land !B$. نأخذ
+  \iftag{FOL}{!!a{structure}~$\Struct{M}$}{!!a{valuation}~$\pAssign{\OLId{latin-ordinary}{v}}$}
+  تحقق~$\iftag{FOL}{\Sat{\OLId{latin-looped}{M}}}{\pSat{\OLId{latin-ordinary}{v}}}{\OLId{greek-variable}{Gamma}_\OLMathNumeral{1} \cup \OLId{greek-variable}{Gamma}_\OLMathNumeral{2}}$.
+  فمن~$\iftag{FOL}{\Sat{\OLId{latin-looped}{M}}}{\pSat{\OLId{latin-ordinary}{v}}}{\OLId{greek-variable}{Gamma}_\OLMathNumeral{1}}$ يلزم
+  $\iftag{FOL}{\Sat{\OLId{latin-looped}{M}}}{\pSat{\OLId{latin-ordinary}{v}}}{!A}$، إذ~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{1} \Entails !A$؛
+  ومن~$\iftag{FOL}{\Sat{\OLId{latin-looped}{M}}}{\pSat{\OLId{latin-ordinary}{v}}}{\OLId{greek-variable}{Gamma}_\OLMathNumeral{2}}$ يلزم
+  $\iftag{FOL}{\Sat{\OLId{latin-looped}{M}}}{\pSat{\OLId{latin-ordinary}{v}}}{!B}$، إذ~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{2} \Entails !B$.
+  وباجتماعهما نحصل على~$\iftag{FOL}{\Sat{\OLId{latin-looped}{M}}}{\pSat{\OLId{latin-ordinary}{v}}}{!A \land !B}$.
+
+
+\item الاستدلال الأخير هو~\Elim{\lor}: تمرين.
+
+\item وإن كان آخرها~\Elim{\lif}، فقد استنتجنا~$!B$
+  من~$!A \lif !B$ و$!A$. فال!!{derivation}~$\delta$ صورته:
+  \begin{prooftree}
+    \AxiomC{$\OLId{greek-variable}{Gamma}_\OLMathNumeral{1}$}
+    \RightLabel{$\delta_\OLMathNumeral{1}$}
+    \DeduceC{$!A \lif !B$}
+    \AxiomC{$\OLId{greek-variable}{Gamma}_\OLMathNumeral{2}$}
+    \RightLabel{$\delta_\OLMathNumeral{2}$}
+    \DeduceC{$!A$}
+    \RightLabel{\Elim{\lif}}
+    \BinaryInfC{$!B$}
+  \end{prooftree}
+  بفرض الاستقراء تلزم~$!A \lif !B$ عن الافتراضات ال!!{undischarged}
+  $\OLId{greek-variable}{Gamma}_\OLMathNumeral{1}$ في~$\delta_\OLMathNumeral{1}$، وتلزم~$!A$ عن الافتراضات
+  ال!!{undischarged}~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{2}$ في~$\delta_\OLMathNumeral{2}$. نأخذ
+  \iftag{FOL}{!!a{structure}~$\Struct{M}$}{!!a{valuation}~$\pAssign{\OLId{latin-ordinary}{v}}$}.
+  والمطلوب أن يترتب على
+  $\iftag{FOL}{\Sat{\OLId{latin-looped}{M}}}{\pSat{\OLId{latin-ordinary}{v}}}{\OLId{greek-variable}{Gamma}_\OLMathNumeral{1} \cup \OLId{greek-variable}{Gamma}_\OLMathNumeral{2}}$
+  صدق~$\iftag{FOL}{\Sat{\OLId{latin-looped}{M}}}{\pSat{\OLId{latin-ordinary}{v}}}{!B}$. فإذا فرضنا
+  $\iftag{FOL}{\Sat{\OLId{latin-looped}{M}}}{\pSat{\OLId{latin-ordinary}{v}}}{\OLId{greek-variable}{Gamma}_\OLMathNumeral{1} \cup \OLId{greek-variable}{Gamma}_\OLMathNumeral{2}}$، لزم من
+  $\OLId{greek-variable}{Gamma}_\OLMathNumeral{1} \Entails !A \lif !B$ صدق
+  $\iftag{FOL}{\Sat{\OLId{latin-looped}{M}}}{\pSat{\OLId{latin-ordinary}{v}}}{!A \lif !B}$، ولزم من
+  $\OLId{greek-variable}{Gamma}_\OLMathNumeral{2} \Entails !A$ صدق~$\iftag{FOL}{\Sat{\OLId{latin-looped}{M}}}{\pSat{\OLId{latin-ordinary}{v}}}{!A}$.
+  فلا بد من~$\iftag{FOL}{\Sat{\OLId{latin-looped}{M}}}{\pSat{\OLId{latin-ordinary}{v}}}{!B}$؛ إذ لو كان
+  $\iftag{FOL}{\Sat/{\OLId{latin-looped}{M}}}{\pSat/{\OLId{latin-ordinary}{v}}}{!B}$، لاجتمع ذلك مع
+  $\iftag{FOL}{\Sat{\OLId{latin-looped}{M}}}{\pSat{\OLId{latin-ordinary}{v}}}{!A}$، فيلزم
+  $\iftag{FOL}{\Sat/{\OLId{latin-looped}{M}}}{\pSat/{\OLId{latin-ordinary}{v}}}{!A \lif !B}$، مناقضًا
+  $\iftag{FOL}{\Sat{\OLId{latin-looped}{M}}}{\pSat{\OLId{latin-ordinary}{v}}}{!A \lif !B}$.
+
+
+\item الاستدلال الأخير هو~\Elim{\lnot}: تمرين.
+  
+\tagitem{FOL}{الاستدلال الأخير هو~\Elim{\lexists}: تمرين.}{}
+\end{enumerate}
+\end{proof}
+
+\tagprob{FOL}
+\begin{prob}
+أكمل برهان \olref[fol][ntd][sou]{thm:soundness}.
+\end{prob}
+\tagendprob
+
+\tagprob{notFOL}
+\begin{prob}
+أكمل برهان \olref[pl][ntd][sou]{thm:soundness}.
+\end{prob}
+\tagendprob
+
+\begin{cor}
+\ollabel{cor:weak-soundness}
+إذا كان~$\Proves !A$، فإن~$!A$ \iftag{FOL}{صالحة}{تحصيل حاصل}.
+\end{cor}
+
+\begin{cor}
+\ollabel{cor:consistency-soundness}
+إذا كانت~$\OLId{greek-variable}{Gamma}$ قابلة للإرضاء، فهي متسقة.
+\end{cor}
+
+\begin{proof}
+نأخذ المقابل بالنقيض. فإذا كانت~$\OLId{greek-variable}{Gamma}$ غير متسقة، كان
+$\OLId{greek-variable}{Gamma} \Proves \lfalse$؛ أي وجد !!a{derivation} لـ~$\lfalse$،
+افتراضاته ال!!{undischarged} في~$\OLId{greek-variable}{Gamma}$. وبمبرهنة
+\olref{thm:soundness} يلزم أن تكون كل
+\iftag{FOL}{!!{structure}~$\Struct{M}$}{!!{valuation}~$\pAssign{\OLId{latin-ordinary}{v}}$}
+ترضي~$\OLId{greek-variable}{Gamma}$ مرضيةً لـ~$\lfalse$ أيضًا. غير أن
+$\iftag{FOL}{\Sat/{\OLId{latin-looped}{M}}}{\pSat/{\OLId{latin-ordinary}{v}}}{\lfalse}$ في كل
+\iftag{FOL}{!!{structure}~$\Struct{M}$}{!!{valuation}~$\pAssign{\OLId{latin-ordinary}{v}}$}.
+فلا توجد \iftag{FOL}{$\Struct{M}$}{$\pAssign{\OLId{latin-ordinary}{v}}$} ترضي~$\OLId{greek-variable}{Gamma}$؛
+ومعناه أن~$\OLId{greek-variable}{Gamma}$ غير قابلة للإرضاء.
+\end{proof}
+
+\end{document}

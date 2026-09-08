@@ -1,0 +1,126 @@
+% Part:sets-functions-relations
+% Chapter: size-of-sets
+% Section: non-enumerability
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid[ar]{sfr}{siz}{nen}
+
+\olsection{مجموعات \printtoken{S}{nonenumerable}}
+
+\begin{editorial}
+المقصود هنا إثبات أن $\Bin^\omega$ و$\Pow{\PosInt}$ غير قابلتين للتعداد، على التعريف المتقدم في \olref[enm]{sec}. وروعي في هذا العرض أن يكون أيسر مدخلًا وأبسط بيانًا، مع زيادة شيء من التفصيل، من العرض الذي في \olref[enm-alt]{sec}.
+\end{editorial}
+
+من المجموعات ما لا نهاية له، كمجموعة الأعداد الصحيحة الموجبة~$\PosInt$. وقد كانت المجموعات اللانهائية التي تقدمت أمثلتها كلها !!{enumerable}؛ وليس ذلك شأن كل مجموعة لا نهائية. فالمجموعة التي تنتفي عنها هذه الخاصية هي \emph{!!{nonenumerable}}.
+
+وقد يستغرب المرء أول الأمر وجود مجموعات !!{nonenumerable}. ووجه ذلك أن المجموعة غير الخالية !!{enumerable}~$\OLId{latin-looped}{A}$ تقبل دالة~!!a{surjective} $\OLId{latin-ordinary}{f} \colon \PosInt \to \OLId{latin-looped}{A}$، وأما المجموعة !!{nonenumerable} فلا تقبلها. فمهما أرسلنا !!{element}s~$\PosInt$، على ما فيها من اللانهاية، إلى~$\OLId{latin-looped}{A}$، لم نستوف بذلك~$\OLId{latin-looped}{A}$. فكأن !!{element}s~$\OLId{latin-looped}{A}$ «أكثر عددًا» حتى من الأعداد الصحيحة الموجبة التي لا نهاية لها.
+
+\textbf{تنبيه تصحيحي على الأصل.} قُيّدت دعوى وجود الدالة الشاملة بكون
+المجموعة غير خالية؛ إذ لا توجد دالة كلية من الصحيحات الموجبة إلى المجموعة الخالية،
+مع أن الخالية داخلة في المجموعات المعدودة بحسب التعريف المتقدم.
+
+وطريق إثبات أن المجموعة غير الخالية !!{nonenumerable} أن ننفي إمكان تلك الدالة الشاملة؛ ومعناه أن عناصر~$\OLId{latin-looped}{A}$ لا تستوعبها قائمة لا نهائية تمتد في جهة واحدة. ويكفينا لذلك أن نبين أن كل قائمة من !!{element}s~$\OLId{latin-looped}{A}$ يفوتها عنصر على الأقل، أي إن الدالة $\OLId{latin-ordinary}{f}\colon \PosInt \to \OLId{latin-looped}{A}$ لا تكون !!{surjective} أيًّا كانت. ولهذا نستعمل \emph{طريقة كانتور القطرية}: نأخذ قائمة من !!{element}s~$\OLId{latin-looped}{A}$، ولتكن $\OLId{latin-ordinary}{x}_\OLMathNumeral{1}$، $\OLId{latin-ordinary}{x}_\OLMathNumeral{2}$، \dots، ثم نبني عنصرًا من~$\OLId{latin-looped}{A}$ يقتضي نفس بنائه خروجه عن القائمة.
+
+ولنبدأ بالمجموعة~$\Bin^\omega$: عناصرها جميع المتتاليات اللانهائية التي لا فجوات فيها، ولا تشتمل إلا على~$\OLMathNumeral{0}$ و~$\OLMathNumeral{1}$.
+
+\begin{thm}
+\ollabel{thm:nonenum-bin-omega}
+$\Bin^\omega$~!!{nonenumerable}.
+\end{thm}
+
+\begin{proof}
+لنفرض خلاف المطلوب، فتكون $\Bin^\omega$ !!{enumerable}، وتوجد قائمة $\OLId{latin-ordinary}{s}_{\OLMathNumeral{1}}$، $\OLId{latin-ordinary}{s}_{\OLMathNumeral{2}}$، $\OLId{latin-ordinary}{s}_{\OLMathNumeral{3}}$، $\OLId{latin-ordinary}{s}_{\OLMathNumeral{4}}$، \dots{} تستوفي !!{element}s~$\Bin^\omega$. وكل~$\OLId{latin-ordinary}{s}_\OLId{latin-ordinary}{i}$ في هذه القائمة متتالية لا نهائية من~$\OLMathNumeral{0}$ و~$\OLMathNumeral{1}$. فإذا كان~$\OLId{latin-ordinary}{j}$ رتبة العنصر، و~$\OLId{latin-ordinary}{i}$ رتبة المتتالية في القائمة، سمينا ذلك العنصر $\OLId{latin-ordinary}{s}_\OLId{latin-ordinary}{i}(\OLId{latin-ordinary}{j})$. فالمتتالية ذات الرتبة~$\OLId{latin-ordinary}{i}$، وهي $\OLId{latin-ordinary}{s}_\OLId{latin-ordinary}{i}$، صورتها
+\[
+\OLId{latin-ordinary}{s}_\OLId{latin-ordinary}{i}(\OLMathNumeral{1}), \OLId{latin-ordinary}{s}_\OLId{latin-ordinary}{i}(\OLMathNumeral{2}), \OLId{latin-ordinary}{s}_\OLId{latin-ordinary}{i}(\OLMathNumeral{3}), \dots
+\]
+
+ونعرض القائمة في مصفوفة، نجعل لكل متتالية~$\OLId{latin-ordinary}{s}_\OLId{latin-ordinary}{i}$ صفًّا ترتب فيه عناصرها:
+\[
+\begin{array}{c|c|c|c|c|c}
+& \OLMathNumeral{1} & \OLMathNumeral{2} & \OLMathNumeral{3} & \OLMathNumeral{4} & \dots \\\hline
+\OLMathNumeral{1} & \mathbf{s_{1}(1)} & \OLId{latin-ordinary}{s}_{\OLMathNumeral{1}}(\OLMathNumeral{2}) & \OLId{latin-ordinary}{s}_{\OLMathNumeral{1}}(\OLMathNumeral{3}) & \OLId{latin-ordinary}{s}_\OLMathNumeral{1}(\OLMathNumeral{4}) & \dots \\\hline
+\OLMathNumeral{2} & \OLId{latin-ordinary}{s}_{\OLMathNumeral{2}}(\OLMathNumeral{1})& \mathbf{s_{2}(2)} & \OLId{latin-ordinary}{s}_\OLMathNumeral{2}(\OLMathNumeral{3}) & \OLId{latin-ordinary}{s}_\OLMathNumeral{2}(\OLMathNumeral{4}) & \dots \\\hline
+\OLMathNumeral{3} & \OLId{latin-ordinary}{s}_{\OLMathNumeral{3}}(\OLMathNumeral{1})& \OLId{latin-ordinary}{s}_{\OLMathNumeral{3}}(\OLMathNumeral{2}) & \mathbf{s_3(3)} & \OLId{latin-ordinary}{s}_\OLMathNumeral{3}(\OLMathNumeral{4}) & \dots \\\hline
+\OLMathNumeral{4} & \OLId{latin-ordinary}{s}_{\OLMathNumeral{4}}(\OLMathNumeral{1})& \OLId{latin-ordinary}{s}_{\OLMathNumeral{4}}(\OLMathNumeral{2}) & \OLId{latin-ordinary}{s}_\OLMathNumeral{4}(\OLMathNumeral{3}) & \mathbf{s_4(4)} & \dots \\\hline
+\vdots & \vdots & \vdots & \vdots & \vdots & \mathbf{\ddots}
+\end{array}
+\]
+فالأعداد المحاذية للصفوف تبين رتب المتتاليات في القائمة $\OLId{latin-ordinary}{s}_\OLMathNumeral{1}$، $\OLId{latin-ordinary}{s}_\OLMathNumeral{2}$، \dots؛ والأعداد فوق الأعمدة تبين رتب !!{element}s كل متتالية على حدتها. فالرمز $\OLId{latin-ordinary}{s}_{\OLMathNumeral{1}}(\OLMathNumeral{1})$، مثلًا، اسم للعدد الواقع أولًا، سواء كان $\OLMathNumeral{0}$ أم~$\OLMathNumeral{1}$؛ فهو أول !!{element} في المتتالية $\OLId{latin-ordinary}{s}_{\OLMathNumeral{1}}$، وعلى هذا القياس سائر الخانات.
+
+ونستخرج من هذه القائمة متتالية لا نهائية $\overline{\OLId{latin-ordinary}{s}}$، مؤلفة من~$\OLMathNumeral{0}$ و~$\OLMathNumeral{1}$، لا تكون واحدًا من أعضائها. وإنما يتبع تعريف $\overline{\OLId{latin-ordinary}{s}}$ القائمة المعطاة $\OLId{latin-ordinary}{s}_\OLMathNumeral{1}$، $\OLId{latin-ordinary}{s}_\OLMathNumeral{2}$، \dots. فأي قائمة لا نهائية من متتاليات لا نهائية من~$\OLMathNumeral{0}$ و~$\OLMathNumeral{1}$ تمدنا بمتتالية~$\overline{\OLId{latin-ordinary}{s}}$ لا تظهر فيها.
+
+وتعيين $\overline{\OLId{latin-ordinary}{s}}$ إنما يكون بتعيين !!{element}sها كلها؛ أي بتعيين $\overline{\OLId{latin-ordinary}{s}}(\OLId{latin-ordinary}{n})$ لكل $\OLId{latin-ordinary}{n} \in \PosInt$. فنقرأ قطر المصفوفة المتقدمة---ومن هنا جاءت تسمية الطريقة---ونبدل كل $\OLMathNumeral{1}$ بـ~$\OLMathNumeral{0}$، وكل $\OLMathNumeral{0}$ بـ~$\OLMathNumeral{1}$. وحاصل هذا أن قيمة $\overline{\OLId{latin-ordinary}{s}}(\OLId{latin-ordinary}{n})$ تكون $\OLMathNumeral{0}$ أو $\OLMathNumeral{1}$ تبعًا لكون !!{element} ذي الرتبة~$\OLId{latin-ordinary}{n}$ من القطر، أعني $\OLId{latin-ordinary}{s}_\OLId{latin-ordinary}{n}(\OLId{latin-ordinary}{n})$، هو $\OLMathNumeral{1}$ أو $\OLMathNumeral{0}$:
+\[
+\overline{\OLId{latin-ordinary}{s}}(\OLId{latin-ordinary}{n}) =
+\begin{cases}
+\OLMathNumeral{1} & \text{إذا كان $s_{n}(n) = 0$}\\
+\OLMathNumeral{0} & \text{إذا كان $s_{n}(n) = 1$}.
+\end{cases}
+\]
+ويقوم مقام هذا التعريف بالحالات الحد الموجز
+$\overline{\OLId{latin-ordinary}{s}}(\OLId{latin-ordinary}{n}) = \OLMathNumeral{1} - \OLId{latin-ordinary}{s}_\OLId{latin-ordinary}{n}(\OLId{latin-ordinary}{n})$.
+
+وقد تحقق أن $\overline{\OLId{latin-ordinary}{s}}$ متتالية لا نهائية من~$\OLMathNumeral{0}$ و~$\OLMathNumeral{1}$؛ إذ هي مقابلة المتتالية التي نقرؤها من قيم~$\OLMathNumeral{0}$ و~$\OLMathNumeral{1}$ على القطر، بعد قلب كل قيمة. فهي إذن، أي $\overline{\OLId{latin-ordinary}{s}}$، !!a{element} من~$\Bin^\omega$. وأما امتناع ورودها في القائمة $\OLId{latin-ordinary}{s}_\OLMathNumeral{1}$، $\OLId{latin-ordinary}{s}_\OLMathNumeral{2}$، \dots{} فبيانه الآتي.
+
+أما أول متتالية، $\OLId{latin-ordinary}{s}_\OLMathNumeral{1}$، فلا تساويها؛ لأنها تخالف $\OLId{latin-ordinary}{s}_\OLMathNumeral{1}$ في أول !!{element}. ومهما تكن $\OLId{latin-ordinary}{s}_\OLMathNumeral{1}(\OLMathNumeral{1})$ فقد جعلنا $\overline{\OLId{latin-ordinary}{s}}(\OLMathNumeral{1})$ مقابلها. وأما الثانية فلا تساويها أيضًا، إذ تخالف $\overline{\OLId{latin-ordinary}{s}}$ المتتالية $\OLId{latin-ordinary}{s}_\OLMathNumeral{2}$ في موضعها الثاني: إن كانت $\OLId{latin-ordinary}{s}_\OLMathNumeral{2}(\OLMathNumeral{2})$ هي $\OLMathNumeral{0}$، كانت $\overline{\OLId{latin-ordinary}{s}}(\OLMathNumeral{2})$ هي $\OLMathNumeral{1}$، وبالعكس. وهكذا يجري الأمر في سائر المواضع.
+
+ولتقرير ذلك على العموم، لو وردت $\overline{\OLId{latin-ordinary}{s}}$ في القائمة لكان لها رتبة~$\OLId{latin-ordinary}{k}$، ولكان $\overline{\OLId{latin-ordinary}{s}} = \OLId{latin-ordinary}{s}_{\OLId{latin-ordinary}{k}}$. وتساوي المتتاليتين هو اتفاقهما في كل موضع؛ فيلزم لكل~$\OLId{latin-ordinary}{n}$ أن $\overline{\OLId{latin-ordinary}{s}}(\OLId{latin-ordinary}{n}) =
+\OLId{latin-ordinary}{s}_{\OLId{latin-ordinary}{k}}(\OLId{latin-ordinary}{n})$. فإذا خصصنا هذا الحكم بالحالة $\OLId{latin-ordinary}{n} = \OLId{latin-ordinary}{k}$ لزم $\overline{\OLId{latin-ordinary}{s}}(\OLId{latin-ordinary}{k}) = \OLId{latin-ordinary}{s}_{\OLId{latin-ordinary}{k}}(\OLId{latin-ordinary}{k})$. ولكن $\OLId{latin-ordinary}{s}_\OLId{latin-ordinary}{k}(\OLId{latin-ordinary}{k})$ لا تخرج عن $\OLMathNumeral{0}$ و~$\OLMathNumeral{1}$. فإن كانت $\OLMathNumeral{0}$، كانت $\overline{\OLId{latin-ordinary}{s}}(\OLId{latin-ordinary}{k})$ هي~$\OLMathNumeral{1}$ بمقتضى تعريف $\overline{\OLId{latin-ordinary}{s}}$. وإن كانت $\OLId{latin-ordinary}{s}_\OLId{latin-ordinary}{k}(\OLId{latin-ordinary}{k}) = \OLMathNumeral{1}$ اقتضى تعريف $\overline{\OLId{latin-ordinary}{s}}$ أن $\overline{\OLId{latin-ordinary}{s}}(\OLId{latin-ordinary}{k}) = \OLMathNumeral{0}$. فالحالتان تفضيان إلى $\overline{\OLId{latin-ordinary}{s}}(\OLId{latin-ordinary}{k}) \neq \OLId{latin-ordinary}{s}_{\OLId{latin-ordinary}{k}}(\OLId{latin-ordinary}{k})$، وهو التناقض.
+
+فقد أخذنا قائمة من !!{element}s~$\Bin^\omega$ هي $\OLId{latin-ordinary}{s}_\OLMathNumeral{1}$، $\OLId{latin-ordinary}{s}_\OLMathNumeral{2}$، \dots{}، ومنها بنينا المتتالية~$\overline{\OLId{latin-ordinary}{s}}$ وبرهنا أنها لا ترد فيها. وهي مع ذلك متتالية من~$\OLMathNumeral{0}$ و~$\OLMathNumeral{1}$، ما دامت المتتاليات~$\OLId{latin-ordinary}{s}_\OLId{latin-ordinary}{i}$ كلها من~$\OLMathNumeral{0}$ و~$\OLMathNumeral{1}$؛ أي إن $\overline{\OLId{latin-ordinary}{s}} \in
+\Bin^\omega$. فلا تستوفي قائمة \emph{جميع} !!{element}s~$\Bin^\omega$، لأن أي قائمة مفروضة تتيح بناء متتالية~$\overline{\OLId{latin-ordinary}{s}}$ خارجة عنها. وهكذا يبطل فرض القائمة المستوفية لجميع متتاليات~$\Bin^\omega$.
+\end{proof}
+
+\begin{explain}
+إنما سمي هذا الاستدلال قطريًّا لأخذ تعريف~$\overline{\OLId{latin-ordinary}{s}}$ من قطر المصفوفة. وليس وجود المصفوفة شرطًا في الاستدلال القطري؛ فقد نستعمل معناه لإثبات أن مجموعات ليست !!{enumerable}، من غير أن نرسم مصفوفة أو نعين قطرًا ظاهرًا.
+\end{explain}
+
+\begin{thm}
+\ollabel{thm:nonenum-pownat}
+$\Pow{\PosInt}$ ليست !!{enumerable}.
+\end{thm}
+
+\begin{proof}
+نستعمل المعنى نفسه: فكل قائمة من مجموعات جزئية من~$\PosInt$ تفوتها مجموعة جزئية من $\PosInt$. ولتكن قائمة المجموعات الجزئية من~$\PosInt$ المعطاة
+\[
+\OLId{latin-looped}{Z}_{\OLMathNumeral{1}}, \OLId{latin-looped}{Z}_{\OLMathNumeral{2}}, \OLId{latin-looped}{Z}_{\OLMathNumeral{3}}, \dots
+\]
+ونضع مجموعة~$\overline{\OLId{latin-looped}{Z}}$ بهذه الصفة: لكل $\OLId{latin-ordinary}{n} \in \PosInt$، يكون $\OLId{latin-ordinary}{n} \in \overline{\OLId{latin-looped}{Z}}$ إذا وفقط إذا كان $\OLId{latin-ordinary}{n} \notin \OLId{latin-looped}{Z}_{\OLId{latin-ordinary}{n}}$، أي
+\[
+\overline{\OLId{latin-looped}{Z}} = \Setabs{\OLId{latin-ordinary}{n} \in \PosInt}{\OLId{latin-ordinary}{n} \notin \OLId{latin-looped}{Z}_\OLId{latin-ordinary}{n}}
+\]
+فالمجموعة $\overline{\OLId{latin-looped}{Z}}$ لا تضم إلا أعدادًا صحيحة موجبة، شأن كل~$\OLId{latin-looped}{Z}_\OLId{latin-ordinary}{n}$ بحسب الفرض؛ ولذلك $\overline{\OLId{latin-looped}{Z}} \in
+\Pow{\PosInt}$. وأما $\overline{\OLId{latin-looped}{Z}}$ نفسها فخارجة عن القائمة؛ ويكفي لإثبات ذلك أن نبرهن، لكل $\OLId{latin-ordinary}{k} \in \PosInt$، على $\overline{\OLId{latin-looped}{Z}} \neq
+\OLId{latin-looped}{Z}_\OLId{latin-ordinary}{k}$.
+
+خذ $\OLId{latin-ordinary}{k} \in \PosInt$ كيف اتفق. إن تعريف $\overline{\OLId{latin-looped}{Z}}$ يقضي، لكل $\OLId{latin-ordinary}{n} \in \PosInt$، بأن $\OLId{latin-ordinary}{n} \in \overline{\OLId{latin-looped}{Z}}$ يكافئ $\OLId{latin-ordinary}{n} \notin \OLId{latin-looped}{Z}_\OLId{latin-ordinary}{n}$. فبوضع $\OLId{latin-ordinary}{n}=\OLId{latin-ordinary}{k}$ نجد أن $\OLId{latin-ordinary}{k} \in \overline{\OLId{latin-looped}{Z}}$ يكافئ $\OLId{latin-ordinary}{k} \notin \OLId{latin-looped}{Z}_\OLId{latin-ordinary}{k}$. وهذا وحده يثبت $\overline{\OLId{latin-looped}{Z}} \neq \OLId{latin-looped}{Z}_\OLId{latin-ordinary}{k}$؛ إذ $\OLId{latin-ordinary}{k}$ !!a{element} لإحداهما دون الأخرى، فليست $\overline{\OLId{latin-looped}{Z}}$ و$\OLId{latin-looped}{Z}_\OLId{latin-ordinary}{k}$ متفقتين في !!{element}sهما. وحيث لم نخص $\OLId{latin-ordinary}{k}$ بشيء، لم تكن $\overline{\OLId{latin-looped}{Z}}$ واحدة من $\OLId{latin-looped}{Z}_\OLMathNumeral{1}$، $\OLId{latin-looped}{Z}_\OLMathNumeral{2}$، \dots.
+\end{proof}
+
+\begin{explain}
+وإن لم نذكر القطر في البرهان، أمكن إظهاره بتصوير المجموعات $\OLId{latin-looped}{Z}_\OLMathNumeral{1}$، $\OLId{latin-looped}{Z}_\OLMathNumeral{2}$، \dots{} صفوفًا في مصفوفة، يوضع فيها كل !!{element}~$\OLId{latin-ordinary}{j} \in \OLId{latin-looped}{Z}_\OLId{latin-ordinary}{i}$ في العمود ذي الرتبة~$\OLId{latin-ordinary}{j}$. فلو كانت المجموعات الأربع الأولى $\{\OLMathNumeral{1},\OLMathNumeral{2},\OLMathNumeral{3},\dots\}$، $\{\OLMathNumeral{2}, \OLMathNumeral{4}, \OLMathNumeral{6}, \dots\}$، $\{\OLMathNumeral{1},\OLMathNumeral{2},\OLMathNumeral{5}\}$، و$\{\OLMathNumeral{3},\OLMathNumeral{4},\OLMathNumeral{5},\dots\}$، لكان أول المصفوفة
+\[
+\begin{array}{r@{}rrrrrrr}
+  \OLId{latin-looped}{Z}_\OLMathNumeral{1} = \{ & \mathbf{1}, & \OLMathNumeral{2}, & \OLMathNumeral{3}, & \OLMathNumeral{4}, & \OLMathNumeral{5}, & \OLMathNumeral{6}, & \dots\}\\
+  \OLId{latin-looped}{Z}_\OLMathNumeral{2} = \{ &  & \mathbf{2}, &  & \OLMathNumeral{4}, &  & \OLMathNumeral{6}, & \dots\}\\
+  \OLId{latin-looped}{Z}_\OLMathNumeral{3} = \{ & \OLMathNumeral{1}, & \OLMathNumeral{2}, &  &  & \OLMathNumeral{5}\phantom{,} &  & \}\\
+  \OLId{latin-looped}{Z}_\OLMathNumeral{4} = \{ &  &  & \OLMathNumeral{3}, & \mathbf{4}, & \OLMathNumeral{5}, & \OLMathNumeral{6}, & \dots\}\\
+  \vdots & & & & & \ddots
+\end{array}
+\]
+فلاستخراج $\overline{\OLId{latin-looped}{Z}}$ ننزل على القطر: كل عدد وجدناه عليه حذفناه، وكل قيمة~$\OLId{latin-ordinary}{j}$ كانت خانتها القطرية في الصف والعمود ذوي الرتبة~$\OLId{latin-ordinary}{j}$ خالية أدرجناها. ففي هذا المثال نحذف $\OLMathNumeral{1}$ و$\OLMathNumeral{2}$، ونثبت~$\OLMathNumeral{3}$، ونحذف~$\OLMathNumeral{4}$، ونمضي على هذا الوجه.
+\end{explain}
+
+\begin{prob}
+أقم حجة قطرية تبين أن $\Pow{\Nat}$ !!{nonenumerable}.
+\end{prob}
+
+\begin{prob}\label{sfr:siz:nen:prob:f-posint}
+بين باستدلال قطري صريح أن مجموعة الدوال $\OLId{latin-ordinary}{f} \colon \PosInt \to \PosInt$ !!{nonenumerable}. والمطلوب أنه متى أعطيت قائمة $\OLId{latin-ordinary}{f}_\OLMathNumeral{1}$، $\OLId{latin-ordinary}{f}_\OLMathNumeral{2}$، \dots{} من الدوال، لكل واحدة منها النوع $\OLId{latin-ordinary}{f}_\OLId{latin-ordinary}{i}\colon
+\PosInt \to \PosInt$، أمكن إيجاد دالة $\overline{\OLId{latin-ordinary}{f}}\colon \PosInt \to
+\PosInt$ لا ترد في القائمة.
+\end{prob}
+
+\end{document}

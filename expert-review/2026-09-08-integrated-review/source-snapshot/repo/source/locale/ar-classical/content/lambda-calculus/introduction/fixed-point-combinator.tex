@@ -1,0 +1,41 @@
+% Part: lambda-calculus
+% Chapter: introduction
+% Section: fixed-point-combinator
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{int}{fix}
+\olsection{مؤلفات النقطة الثابتة}
+
+لتكن لدينا عبارة لامبدا~$g$، ولنطلب حدًا آخر~$k$ يكون فيه~$k$
+مكافئًا بحسب~$\beta$ للحد~$gk$. نعرّف الحدين
+\[
+\fn{diag}(x) = xx
+\]
+و
+\[
+l(x) = g(\fn{diag}(x))
+\]
+على مقتضى اصطلاحاتنا؛ فـ$l$ هو الحد~$\lambd[x][g(xx)]$.
+ثم نأخذ~$k$ مساويًا للحد~$ll$، فنجد
+\begin{align*}
+k & = (\lambd[x][g(xx)])(\lambd[x][g(xx)]) \\
+& \red  g((\lambd[x][g(xx)])(\lambd[x][g(xx)])) \\
+& = gk.
+\end{align*}
+وعليه، إذا وضعنا
+\[
+Y = \lambd[g][((\lambd[x][g(xx)])(\lambd[x][g(xx)]))]
+\]
+كان~$Yg$ و$g(Yg)$ قابلين للاختزال إلى حد واحد، فينتج
+$Yg \equiv_\beta g(Yg)$. وهذا هو «مؤلف كاري». وأما إذا وضعنا
+\[
+Y = (\lambd[xg][g(xxg)])(\lambd[xg][g(xxg)])
+\]
+فإن~$Yg$ يختزل إلى~$g(Yg)$ نفسه؛ وهذه نتيجة أقوى من مجرد التكافؤ.
+وتسمى هذه الصيغة الأخيرة من~$Y$ «مؤلف تورنغ».
+
+\end{document}
+

@@ -1,0 +1,160 @@
+% Part: normal-modal-logic
+% Chapter: axioms-systems
+% Section: proofs-in-K
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{prf}{prk}
+
+\olsection{براهين في \Log{K}}
+
+نتمرن الآن على البرهان في أصغر نسق جهوي، فنقيم براهين
+للـ!!{formula}s الصالحة المذكورة في الجانب الأيسر
+من~\olref[syn][sch]{tab:valid-invalidSchemas}، ونبين أنها كلها
+تقبل البرهان في~\Log{K}.
+
+\begin{prop}
+  $\Log{K} \Proves \Box!A \lif \Box (!B\lif !A)$
+\end{prop}
+
+\begin{proof}
+  \begin{derivation}
+    1. & $!A \lif (!B \lif !A)$ & \Taut \\
+    2. & $\Box(!A \lif (!B \lif !A))$ & \Nec, 1 \\
+    3. & $\Box(!A \lif (!B \lif !A)) \lif
+    (\Box!A \lif \Box(!B \lif !A))$ & \Ax{K}\\
+    4. & $\Box!A \lif \Box (!B\lif !A)$ & \MP, 2, 3
+  \end{derivation}
+\end{proof}
+
+\begin{prop}
+  $\Log{K} \Proves \Box(!A \land !B) \lif (\Box !A \land \Box!B)$
+\end{prop}
+
+\begin{proof}
+\begin{derivation}
+  1. & $(!A \land !B) \lif !A$ & \Taut \\
+  2. & $\Box((!A \land !B) \lif !A)$ & \Nec \\
+  3. & $\Box((!A \land !B) \lif !A) \lif (\Box(!A \land !B) \lif \Box!A)$
+  & \Ax{K} \\
+  4. & $\Box(!A \land !B) \lif \Box!A$ & \MP, 2, 3 \\
+  5. & $(!A \land !B) \lif !B$ & \Taut \\
+  6. & $\Box((!A \land !B) \lif !B)$ & \Nec \\
+  7. & $\Box((!A \land !B) \lif !B) \lif (\Box(!A \land !B) \lif \Box!B)$
+  & \Ax{K} \\
+  8. & $\Box(!A \land !B) \lif \Box!B$ & \MP, 6, 7 \\
+  9. & $(\Box(!A \land !B) \lif \Box!A) \lif{}$ \\
+  & \qquad $((\Box(!A \land !B) \lif \Box!B) \lif{}$ \\
+  & \qquad $(\Box(!A \land !B) \lif (\Box !A \land \Box!B)))$ & \Taut\\
+  10. &  $(\Box(!A \land !B) \lif \Box!B) \lif{}$ \\
+  & \qquad $(\Box(!A \land !B) \lif (\Box !A \land \Box!B))$ & \MP, 4, 9\\
+  11. & $\Box(!A \land !B) \lif (\Box !A \land \Box!B)$ & \MP, 8, 10.
+\end{derivation}
+ومسوّغ ال!!{formula} في السطر~$\OLMathNumeral{9}$ أنها حالة إحلال من التحصيل المنطقي
+\[
+(\OLId{latin-ordinary}{p} \lif \OLId{latin-ordinary}{q}) \lif ((\OLId{latin-ordinary}{p} \lif \OLId{latin-ordinary}{r}) \lif (\OLId{latin-ordinary}{p} \lif (\OLId{latin-ordinary}{q} \land \OLId{latin-ordinary}{r}))).
+\]
+\end{proof}
+
+\begin{prop}
+  $\Log{K}\Proves (\Box!A \land \Box!B) \lif \Box (!A \land !B)$
+\end{prop}
+
+\begin{proof}
+  \begin{derivation}
+    1. & $!A \lif (!B \lif (!A \land !B))$ & \Taut \\
+    2. & $\Box(!A \lif (!B \lif (!A \land !B)))$ & \Nec, 1 \\
+    3. & $\Box(!A \lif (!B \lif (!A \land !B))) \lif (\Box!A \lif \Box(!B \lif (!A \land !B)))$ & \Ax{K}\\
+    4. & $\Box!A \lif \Box(!B \lif (!A \land !B))$ & \MP, 2, 3\\
+    5. & $\Box(!B \lif (!A \land !B)) \lif (\Box!B \lif \Box(!A \land !B))$ & \Ax{K} \\
+    6. & $(\Box!A \lif \Box(!B \lif (!A \land !B))) \lif {}$ \\
+    & \qquad $(\Box(!B \lif (!A \land !B)) \lif (\Box!B \lif \Box(!A \land !B))) \lif {}$\\
+    & \qquad $(\Box!A \lif (\Box !B \lif \Box(!A \land !B)))$ & \Taut\\
+    7. & $(\Box(!B \lif (!A \land !B)) \lif (\Box!B \lif \Box(!A \land !B))) \lif {}$\\
+    & \qquad $(\Box!A \lif (\Box !B \lif \Box(!A \land !B)))$ & \MP, 4, 6\\
+    8. & $\Box!A \lif (\Box !B \lif \Box(!A \land !B))$ & \MP, 5, 7\\
+    9. & $(\Box!A \lif (\Box !B \lif \Box(!A \land !B))) \lif {}$\\
+    & \qquad $((\Box!A \land \Box!B) \lif \Box(!A \land !B))$ & \Taut\\
+    10. & $(\Box!A \land \Box!B) \lif \Box(!A \land !B)$ & \MP, 8, 9
+  \end{derivation}
+  إن !!{formula}s في السطرين $\OLMathNumeral{6}$ و$\OLMathNumeral{9}$ أمثلة للقضايا الصادقة صدقا
+  تحليليا
+  \begin{align*}
+    (\OLId{latin-ordinary}{p} \lif \OLId{latin-ordinary}{q}) & \lif ((\OLId{latin-ordinary}{q} \lif \OLId{latin-ordinary}{r}) \lif (\OLId{latin-ordinary}{p} \lif \OLId{latin-ordinary}{r})) \\
+    (\OLId{latin-ordinary}{p} \lif (\OLId{latin-ordinary}{q} \lif \OLId{latin-ordinary}{r})) & \lif ((\OLId{latin-ordinary}{p} \land \OLId{latin-ordinary}{q}) \lif \OLId{latin-ordinary}{r})
+  \end{align*}
+\end{proof}
+
+\begin{prop}
+  \iftag{prvBox}{$\Log{K} \Proves \lnot\Box \OLId{latin-ordinary}{p} \lif \Diamond \lnot
+    \OLId{latin-ordinary}{p}$}{$\Log{K} \Proves \Box\lnot \OLId{latin-ordinary}{p} \lif \lnot\Diamond \OLId{latin-ordinary}{p}$}
+\end{prop}
+
+\begin{proof}
+  \iftag{prvBox}{\iftag{prvDiamond}{% Box and Diamond are primitive
+  \begin{derivation}
+    1. & $\Diamond \lnot \OLId{latin-ordinary}{p} \liff \lnot\Box\lnot\lnot \OLId{latin-ordinary}{p}$ & \Dual\\
+    2. & $(\Diamond \lnot \OLId{latin-ordinary}{p} \liff \lnot\Box\lnot\lnot \OLId{latin-ordinary}{p}) \lif {}$ \\
+    & \qquad $(\lnot \Box \lnot\lnot \OLId{latin-ordinary}{p} \lif \Diamond \lnot \OLId{latin-ordinary}{p})$& \Taut\\
+    3. & $\lnot \Box \lnot\lnot \OLId{latin-ordinary}{p} \lif \Diamond \lnot \OLId{latin-ordinary}{p}$ & \MP, 1, 2\\
+    4. & $\lnot\lnot \OLId{latin-ordinary}{p} \lif \OLId{latin-ordinary}{p}$ & \Taut\\
+    5. & $\Box(\lnot\lnot \OLId{latin-ordinary}{p} \lif \OLId{latin-ordinary}{p})$ & \Nec, 4\\
+    6. & $\Box(\lnot\lnot \OLId{latin-ordinary}{p} \lif \OLId{latin-ordinary}{p}) \lif (\Box \lnot\lnot \OLId{latin-ordinary}{p} \lif \Box \OLId{latin-ordinary}{p})$ & \Ax{K}\\
+    7. & $(\Box \lnot\lnot \OLId{latin-ordinary}{p} \lif \Box \OLId{latin-ordinary}{p})$ & \MP, 5, 6\\
+    8. & $(\Box \lnot\lnot \OLId{latin-ordinary}{p} \lif \Box \OLId{latin-ordinary}{p}) \lif (\lnot \Box \OLId{latin-ordinary}{p} \lif \lnot\Box\lnot\lnot \OLId{latin-ordinary}{p})$ & \Taut\\
+    9. & $\lnot \Box \OLId{latin-ordinary}{p} \lif \lnot\Box\lnot\lnot \OLId{latin-ordinary}{p}$ & \MP, 7, 8\\
+    10. & $(\lnot \Box \OLId{latin-ordinary}{p} \lif \lnot\Box\lnot\lnot \OLId{latin-ordinary}{p}) \lif {}$ \\
+    & \qquad $((\lnot \Box \lnot\lnot \OLId{latin-ordinary}{p} \lif \Diamond \lnot \OLId{latin-ordinary}{p}) \lif (\lnot \Box \OLId{latin-ordinary}{p} \lif \Diamond\lnot \OLId{latin-ordinary}{p}))$ & \Taut\\
+    11. & $(\lnot \Box \lnot\lnot \OLId{latin-ordinary}{p} \lif \Diamond \lnot \OLId{latin-ordinary}{p}) \lif (\lnot \Box \OLId{latin-ordinary}{p} \lif \Diamond\lnot \OLId{latin-ordinary}{p})$ & \MP, 9, 10\\
+    12. & $\lnot\Box \OLId{latin-ordinary}{p} \lif \Diamond \lnot \OLId{latin-ordinary}{p}$ & \MP, 3, 11\\
+  \end{derivation}
+  إن !!{formula}s في السطرين $\OLMathNumeral{8}$ و$\OLMathNumeral{10}$ أمثلة للقضيتين الصادقتين صدقا
+  تحليليا
+  \begin{align*}
+    & (\OLId{latin-ordinary}{p} \lif \OLId{latin-ordinary}{q}) \lif (\lnot \OLId{latin-ordinary}{q} \lif \lnot \OLId{latin-ordinary}{p}) \\
+    & (\OLId{latin-ordinary}{p} \lif \OLId{latin-ordinary}{q}) \lif ((\OLId{latin-ordinary}{q} \lif \OLId{latin-ordinary}{r}) \lif (\OLId{latin-ordinary}{p} \lif \OLId{latin-ordinary}{r})).
+  \end{align*}
+  }{% Diamond is defined
+  \begin{derivation}
+    1. & $\lnot\lnot \OLId{latin-ordinary}{p} \lif \OLId{latin-ordinary}{p}$ & \Taut\\
+    2. & $\Box(\lnot\lnot \OLId{latin-ordinary}{p} \lif \OLId{latin-ordinary}{p})$ & \Nec, 1\\
+    3. & $\Box(\lnot\lnot \OLId{latin-ordinary}{p} \lif \OLId{latin-ordinary}{p}) \lif (\Box \lnot\lnot \OLId{latin-ordinary}{p} \lif \Box \OLId{latin-ordinary}{p})$ & \Ax{K}\\
+    4. & $(\Box \lnot\lnot \OLId{latin-ordinary}{p} \lif \Box \OLId{latin-ordinary}{p})$ & \MP, 2, 3\\
+    5. & $(\Box \lnot\lnot \OLId{latin-ordinary}{p} \lif \Box \OLId{latin-ordinary}{p}) \lif (\lnot \Box \OLId{latin-ordinary}{p} \lif \lnot\Box\lnot\lnot \OLId{latin-ordinary}{p})$ & \Taut\\
+    6. & $\lnot \Box \OLId{latin-ordinary}{p} \lif \lnot\Box\lnot\lnot \OLId{latin-ordinary}{p}$ & \MP, 4, 5\\
+    & $\lnot\Box \OLId{latin-ordinary}{p} \lif \Diamond \lnot \OLId{latin-ordinary}{p}$
+  \end{derivation}
+  ويُقرأ السطر الأخير $\lnot \Box \OLId{latin-ordinary}{p} \lif \Diamond\lnot \OLId{latin-ordinary}{p}$؛
+  فتلك قراءة الاختصار $\Diamond$ المعرّف بـ$\lnot\Box\lnot$.
+  وأما !!{formula} السطر~$\OLMathNumeral{5}$ فحالة من التحصيل المنطقي
+  \[
+    (\OLId{latin-ordinary}{p} \lif \OLId{latin-ordinary}{q}) \lif (\lnot \OLId{latin-ordinary}{q} \lif \lnot \OLId{latin-ordinary}{p}).
+  \]
+  }}{% Box is defined
+  \begin{derivation}
+    1. & $\Diamond  \OLId{latin-ordinary}{p} \liff \lnot\Box\lnot \OLId{latin-ordinary}{p}$ & \Dual\\
+    2. & $(\Diamond \OLId{latin-ordinary}{p} \liff \lnot\Box\lnot \OLId{latin-ordinary}{p}) \lif
+    (\Diamond \OLId{latin-ordinary}{p} \lif \lnot \Box \lnot \OLId{latin-ordinary}{p})$& \Taut\\
+    3. & $\Diamond \OLId{latin-ordinary}{p} \lif \lnot \Box \lnot \OLId{latin-ordinary}{p}$ & \MP, 1, 2\\
+    4. & $(\Diamond \OLId{latin-ordinary}{p} \lif \lnot \Box \lnot \OLId{latin-ordinary}{p}) \lif (\Box\lnot \OLId{latin-ordinary}{p} \lif \lnot\Diamond \OLId{latin-ordinary}{p})$ & \Taut\\
+    5. & $\Box\lnot \OLId{latin-ordinary}{p} \lif \lnot\Diamond \OLId{latin-ordinary}{p}$ & \MP, 3, 4
+  \end{derivation}
+  إن !!{formula} في السطر~$\OLMathNumeral{4}$ مثال للقضية الصادقة صدقا تحليليا
+  \begin{align*}
+    & (\OLId{latin-ordinary}{p} \lif \lnot \OLId{latin-ordinary}{q}) \lif (\OLId{latin-ordinary}{q} \lif \lnot \OLId{latin-ordinary}{p}).
+  \end{align*}
+}
+\end{proof}
+
+\begin{prob}
+  أوجد !!{derivation}s في~$\Log{K}$ لـ!!{formula}s الآتية:
+  \begin{enumerate}
+    \item $\Box \lnot \OLId{latin-ordinary}{p} \lif \Box(\OLId{latin-ordinary}{p} \lif \OLId{latin-ordinary}{q})$
+    \item $(\Box \OLId{latin-ordinary}{p} \lor \Box \OLId{latin-ordinary}{q}) \lif \Box(\OLId{latin-ordinary}{p} \lor \OLId{latin-ordinary}{q})$
+    \item $\Diamond \OLId{latin-ordinary}{p} \lif \Diamond(\OLId{latin-ordinary}{p} \lor \OLId{latin-ordinary}{q})$
+  \end{enumerate}
+\end{prob}
+
+\end{document}

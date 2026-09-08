@@ -1,0 +1,66 @@
+% part: intuitionistic-logic
+% chapter: soundness-completeness
+% section: canonical-model
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{sc}{mod}
+
+\olsection{النموذج القانوني}
+
+نختار لعوالم هذا النموذج متتاليات منتهية~$\sigma$ من الأعداد الطبيعية،
+بحيث~$\sigma \in \Nat^*$. وتعريف~$\Nat^*$ استقرائي على الوجه الآتي:
+\begin{enumerate}
+\item $\emptyseq \in \Nat^*$.
+\item متى كان~$\sigma \in \Nat^*$ و$\OLId{latin-ordinary}{n} \in \Nat$، كان
+  $\sigma.\OLId{latin-ordinary}{n} \in \Nat^*$؛ ونعني بـ~$\sigma.\OLId{latin-ordinary}{n}$
+  $\sigma \concat \tuple{\OLId{latin-ordinary}{n}}$، وبـ~$\sigma \concat \sigma'$ وصل
+  $\sigma$ بـ~$\sigma'$.
+\item وليس في~$\Nat^*$ شيء وراء ما يقتضيه هذان الشرطان.
+\end{enumerate}
+ولهذا جاز أن تكون~$\Nat^*$ أساسًا لتعريفات استقرائية.
+
+ولتكن~$\tuple{!B_\OLMathNumeral{1}, !C_\OLMathNumeral{1}}$، $\tuple{!B_\OLMathNumeral{2}, !C_\OLMathNumeral{2}}$، \dots، تعدادًا
+لأزواج ال!!{formula}s كلها. إذا أُعطيت مجموعة
+ال!!{formula}s~$\OLId{greek-variable}{Delta}$، عرّفنا~$\OLId{greek-variable}{Delta}(\sigma)$ بالاستقراء التالي:
+\begin{enumerate}
+\item $\OLId{greek-variable}{Delta}(\emptyseq) = \OLId{greek-variable}{Delta}$.
+\item $\OLId{greek-variable}{Delta}(\sigma.\OLId{latin-ordinary}{n}) = {}$
+  \[
+  \begin{cases}
+    (\OLId{greek-variable}{Delta}(\sigma) \cup \{!B_\OLId{latin-ordinary}{n}\})^* &
+    \text{إذا كان $\Delta(\sigma) \cup \{!B_n\} \Proves/ !C_n$} \\
+    \OLId{greek-variable}{Delta}(\sigma) & \text{خلاف ذلك}
+  \end{cases}
+  \]
+\end{enumerate}
+والمراد بـ~$(\OLId{greek-variable}{Delta}(\sigma) \cup \{!B_\OLId{latin-ordinary}{n}\})^*$ مجموعة
+ال!!{formula}s الأولية التي نحصل عليها من
+\olref[lin]{lem:lindenbaum} حين نطبقها على
+$\OLId{greek-variable}{Delta}(\sigma) \cup \{!B_\OLId{latin-ordinary}{n}\}$ وعلى ال!!{formula}~$!C_\OLId{latin-ordinary}{n}$. ومن مقتضى
+هذا الاختيار أنه متى كان~$\OLId{greek-variable}{Delta}(\sigma) \cup \{!B_\OLId{latin-ordinary}{n}\} \Proves/ !C_\OLId{latin-ordinary}{n}$
+ثبت~$\OLId{greek-variable}{Delta}(\sigma.\OLId{latin-ordinary}{n}) \Proves !B_\OLId{latin-ordinary}{n}$ وبقي
+$\OLId{greek-variable}{Delta}(\sigma.\OLId{latin-ordinary}{n}) \Proves/ !C_\OLId{latin-ordinary}{n}$. كذلك يتحقق
+$\OLId{greek-variable}{Delta}(\sigma) \subseteq \OLId{greek-variable}{Delta}(\sigma.\OLId{latin-ordinary}{n})$ لكل~$\OLId{latin-ordinary}{n}$. فإذا كانت
+$\OLId{greek-variable}{Delta}$ أولية، لزم أن تكون~$\OLId{greek-variable}{Delta}(\sigma)$ أولية لكل~$\sigma$.
+
+\begin{defn}\ollabel{defn:canonical-model}
+  لتكن~$\OLId{greek-variable}{Delta}$ أولية. نسمّي \emph{النموذج القانوني}
+  $\mModel{M(\Delta)}$ للمجموعة~$\OLId{greek-variable}{Delta}$ النموذج الذي أجزاؤه كما يأتي:
+  \begin{enumerate}
+  \item $\OLId{latin-looped}{W} = \Nat^*$، أي مجموعة المتتاليات المنتهية من الأعداد الطبيعية.
+  \item $\OLId{latin-looped}{R}$ ترتيب جزئي يحدّه التكافؤ الآتي:~$\OLId{latin-looped}{R}\sigma\sigma'$ إذا وفقط إذا
+    كانت~$\sigma$ قطعة ابتدائية من~$\sigma'$؛ ومعنى ذلك أن
+    $\sigma'=\sigma\concat\sigma''$ لمتتالية~$\sigma''$ ما.
+  \item $\OLId{latin-looped}{V}(\OLId{latin-ordinary}{p}) = \Setabs{\sigma}{\OLId{latin-ordinary}{p} \in \OLId{greek-variable}{Delta}(\sigma)}$.
+  \end{enumerate}
+\end{defn}
+
+والتحقق من كون~$\OLId{latin-looped}{R}$ ترتيبًا جزئيًا يسير. وأما شرط الرتابة في~$\OLId{latin-looped}{V}$
+فحاصل أيضًا: إذ من~$\OLId{greek-variable}{Delta}(\sigma)\subseteq\OLId{greek-variable}{Delta}(\sigma.\OLId{latin-ordinary}{n})$ يلزم بالاستقراء
+$\OLId{greek-variable}{Delta}(\sigma)\subseteq\OLId{greek-variable}{Delta}(\sigma')$ كلما تحقق
+$\OLId{latin-looped}{R}\sigma\sigma'$.
+
+\end{document}

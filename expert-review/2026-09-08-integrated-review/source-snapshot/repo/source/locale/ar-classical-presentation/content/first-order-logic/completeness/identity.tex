@@ -1,0 +1,197 @@
+% Part: first-order-logic
+% Chapter: completeness
+% Section: identity
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{com}{ide}
+\olsection{الهوية}
+
+\begin{explain}
+أثبتنا بالبناء السابق ما يلزم لاكتمال منطق الرتبة الأولى حين تخلو
+المجموعات~$\OLId{greek-variable}{Gamma}$ من~$\eq$: فإن نموذج الحدود يرضي كل
+$!A \in \OLId{greek-variable}{Gamma}^*$ خالية من~$\eq$، فيرضي كل $!A \in \OLId{greek-variable}{Gamma}$.
+وأما مع وجود $\eq$ فلا يفي ذلك البناء بالغرض. فقد تضم $\OLId{greek-variable}{Gamma}^*$
+!!a{sentence}~$\eq[\OLId{latin-ordinary}{t}][\OLId{latin-ordinary}{t}']$، وقيمة الحد في نموذج الحدود هي نفسه.
+فإذا اختلف الحدان $\OLId{latin-ordinary}{t}$ و$\OLId{latin-ordinary}{t}'$، اختلفت قيمتاهما، وهما $\OLId{latin-ordinary}{t}$ و$\OLId{latin-ordinary}{t}'$
+على الترتيب، فتكذب $\eq[\OLId{latin-ordinary}{t}][\OLId{latin-ordinary}{t}']$. وعلاج هذا الخلل ببناء يسمى «أخذ
+خارج القسمة».
+\end{explain}
+
+\begin{defn}
+  إذا كانت $\OLId{greek-variable}{Gamma}^*$ مجموعة جمل متسقة و!!{complete} في~$\Lang L$،
+  وضعنا العلاقة $\approx$ بين الحدود المغلقة في~$\Lang L$ على هذا الوجه:
+  \[
+  \OLId{latin-ordinary}{t} \approx \OLId{latin-ordinary}{t}' \text{\quad إذا وفقط إذا \quad} \eq[\OLId{latin-ordinary}{t}][\OLId{latin-ordinary}{t}'] \in \OLId{greek-variable}{Gamma}^*
+  \]
+\end{defn}
+
+\begin{prop}
+\ollabel{prop:approx-equiv}
+للعلاقة $\approx$ الخصائص الآتية:
+\begin{enumerate}
+\item $\approx$ انعكاسية.
+\item $\approx$ تماثلية.
+\item  $\approx$ تعدية.
+\item إذا كان $\OLId{latin-ordinary}{t} \approx \OLId{latin-ordinary}{t}'$، وكانت $\OLId{latin-ordinary}{f}$ !!a{function}، وكانت $\OLId{latin-ordinary}{t}_\OLMathNumeral{1}$،
+  \dots، $\OLId{latin-ordinary}{t}_{\OLId{latin-ordinary}{i}-\OLMathNumeral{1}}$، $\OLId{latin-ordinary}{t}_{\OLId{latin-ordinary}{i}+\OLMathNumeral{1}}$، \dots، $\OLId{latin-ordinary}{t}_\OLId{latin-ordinary}{n}$ حدودًا مغلقة، فإن
+\[
+\Atom{f}{t_1,\dots, t_{i-1}, t, t_{i+1}, \dots, t_n} \approx
+\Atom{f}{t_1,\dots, t_{i-1}, t', t_{i+1}, \dots, t_n}.
+\]
+\item إذا كان $\OLId{latin-ordinary}{t} \approx \OLId{latin-ordinary}{t}'$، وكان $\OLId{latin-looped}{R}$ !!a{predicate}، وكانت $\OLId{latin-ordinary}{t}_\OLMathNumeral{1}$،
+  \dots، $\OLId{latin-ordinary}{t}_{\OLId{latin-ordinary}{i}-\OLMathNumeral{1}}$، $\OLId{latin-ordinary}{t}_{\OLId{latin-ordinary}{i}+\OLMathNumeral{1}}$، \dots، $\OLId{latin-ordinary}{t}_\OLId{latin-ordinary}{n}$ حدودًا مغلقة، فإن
+\begin{multline*}
+\Atom{R}{t_1,\dots, t_{i-1}, t, t_{i+1}, \dots, t_n} \in \OLId{greek-variable}{Gamma}^* \text{ إذا وفقط إذا } \\
+\Atom{R}{t_1,\dots, t_{i-1}, t', t_{i+1}, \dots, t_n} \in \OLId{greek-variable}{Gamma}^*.
+\end{multline*}
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+الاتساق وكون $\OLId{greek-variable}{Gamma}^*$ !!{complete} يجعلان $\eq[\OLId{latin-ordinary}{t}][\OLId{latin-ordinary}{t}'] \in
+\OLId{greek-variable}{Gamma}^*$ مكافئًا لـ$\OLId{greek-variable}{Gamma}^* \Proves \eq[\OLId{latin-ordinary}{t}][\OLId{latin-ordinary}{t}']$؛ فتنحصر مطالب
+البرهان في الأحكام الآتية:
+\begin{enumerate}
+\item $\OLId{greek-variable}{Gamma}^* \Proves \eq[\OLId{latin-ordinary}{t}][\OLId{latin-ordinary}{t}]$ لكل الحدود المغلقة~$\OLId{latin-ordinary}{t}$.
+\item إذا كان $\OLId{greek-variable}{Gamma}^* \Proves \eq[\OLId{latin-ordinary}{t}][\OLId{latin-ordinary}{t}']$، فإن
+  $\OLId{greek-variable}{Gamma}^* \Proves \eq[\OLId{latin-ordinary}{t}'][\OLId{latin-ordinary}{t}]$.
+\item إذا كان $\OLId{greek-variable}{Gamma}^* \Proves \eq[\OLId{latin-ordinary}{t}][\OLId{latin-ordinary}{t}']$ و$\OLId{greek-variable}{Gamma}^* \Proves
+  \eq[\OLId{latin-ordinary}{t}'][\OLId{latin-ordinary}{t}'']$، فإن $\OLId{greek-variable}{Gamma}^* \Proves \eq[\OLId{latin-ordinary}{t}][\OLId{latin-ordinary}{t}'']$.
+\item إذا كان $\OLId{greek-variable}{Gamma}^* \Proves \eq[\OLId{latin-ordinary}{t}][\OLId{latin-ordinary}{t}']$، فإن
+\[
+\OLId{greek-variable}{Gamma}^* \Proves
+\eq[\Atom{f}{t_1,\dots,t_{i-1},t,t_{i+1},\dots,t_n}][\Atom{f}{t_1,\dots,t_{i-1},t',t_{i+1},\dots,t_n}]
+\]
+لكل !!{function}~$\OLId{latin-ordinary}{f}$ ذات $\OLId{latin-ordinary}{n}$ مواضع ولكل حدود مغلقة $\OLId{latin-ordinary}{t}_\OLMathNumeral{1}$، \dots،
+$\OLId{latin-ordinary}{t}_{\OLId{latin-ordinary}{i}-\OLMathNumeral{1}}$، $\OLId{latin-ordinary}{t}_{\OLId{latin-ordinary}{i}+\OLMathNumeral{1}}$، \dots،~$\OLId{latin-ordinary}{t}_\OLId{latin-ordinary}{n}$.
+\item إذا كان $\OLId{greek-variable}{Gamma}^* \Proves \eq[\OLId{latin-ordinary}{t}][\OLId{latin-ordinary}{t}']$ و
+$\OLId{greek-variable}{Gamma}^* \Proves
+\Atom{R}{t_1,\dots,t_{i-1},t,t_{i+1},\dots,t_n}$، فإن
+$\OLId{greek-variable}{Gamma}^* \Proves \Atom{R}{t_1,\dots,t_{i-1},t',t_{i+1},\dots,t_n}$
+لكل !!{predicate}~$\OLId{latin-looped}{R}$ ذي $\OLId{latin-ordinary}{n}$ مواضع ولكل حدود مغلقة $\OLId{latin-ordinary}{t}_\OLMathNumeral{1}$، \dots،
+$\OLId{latin-ordinary}{t}_{\OLId{latin-ordinary}{i}-\OLMathNumeral{1}}$، $\OLId{latin-ordinary}{t}_{\OLId{latin-ordinary}{i}+\OLMathNumeral{1}}$، \dots،~$\OLId{latin-ordinary}{t}_\OLId{latin-ordinary}{n}$.
+\end{enumerate}
+\end{proof}
+
+\begin{prob}
+أكمل برهان~\olref[fol][com][ide]{prop:approx-equiv}.
+\end{prob}
+
+\begin{defn}
+لتكن $\OLId{greek-variable}{Gamma}^*$ مجموعة متسقة و!!{complete} في لغة~$\Lang L$، وليكن
+$\OLId{latin-ordinary}{t}$ حدًا مغلقًا، والعلاقة $\approx$ هي المتقدمة. نرمز بـ$\Trm[\OLId{latin-looped}{L}]_\OLMathNumeral{0}$
+إلى مجموعة الحدود المغلقة في~$\Lang L$، ونضع:
+\[
+\equivrep{\OLId{latin-ordinary}{t}}{\approx} = \Setabs{\OLId{latin-ordinary}{t}'}{\OLId{latin-ordinary}{t}'\in \Trm[\OLId{latin-looped}{L}]_\OLMathNumeral{0}, \OLId{latin-ordinary}{t} \approx \OLId{latin-ordinary}{t}'}
+\]
+و$\equivclass{\Trm[\OLId{latin-looped}{L}]_\OLMathNumeral{0}}{\approx} = \Setabs{\equivrep{\OLId{latin-ordinary}{t}}{\approx}}{\OLId{latin-ordinary}{t} \in \Trm[\OLId{latin-looped}{L}]_\OLMathNumeral{0}}$.
+\end{defn}
+
+\begin{defn}
+\ollabel{defn:term-model-factor}
+خذ $\Struct M = \Struct M(\OLId{greek-variable}{Gamma}^*)$، نموذج الحدود الخاص بـ~$\OLId{greek-variable}{Gamma}^*$
+في \olref[mod]{defn:termmodel}. ونعرّف
+$\Struct{\equivclass{M}{\approx}}$ بأنها ال!!{structure} المحددة بما يأتي:
+\begin{enumerate}
+\item $\Domain{\equivclass{\OLId{latin-looped}{M}}{\approx}} = \equivclass{\Trm[\OLId{latin-looped}{L}]_\OLMathNumeral{0}}{\approx}$.
+\item $\Assign{\OLId{latin-ordinary}{c}}{\equivclass{\OLId{latin-looped}{M}}{\approx}} = \equivrep{\OLId{latin-ordinary}{c}}{\approx}$
+\item $\Assign{\OLId{latin-ordinary}{f}}{\equivclass{\OLId{latin-looped}{M}}{\approx}}(\equivrep{\OLId{latin-ordinary}{t}_\OLMathNumeral{1}}{\approx}, \dots,
+  \equivrep{\OLId{latin-ordinary}{t}_\OLId{latin-ordinary}{n}}{\approx}) = \equivrep{\Atom{f}{t_1,\dots, t_n}}{\approx}$
+\item $\tuple{\equivrep{\OLId{latin-ordinary}{t}_\OLMathNumeral{1}}{\approx}, \dots, \equivrep{\OLId{latin-ordinary}{t}_\OLId{latin-ordinary}{n}}{\approx}} \in
+  \Assign{\OLId{latin-looped}{R}}{\equivclass{\OLId{latin-looped}{M}}{\approx}}$ إذا وفقط إذا كان
+  $\Sat{\OLId{latin-looped}{M}}{\Atom{R}{t_1,\dots, t_n}}$؛ أي إذا وفقط إذا كان
+  $\Atom{R}{t_1,\dots, t_n} \in \OLId{greek-variable}{Gamma}^*$.
+\end{enumerate}
+\end{defn}
+
+\begin{explain}
+في تعريف كل من $\Assign{\OLId{latin-ordinary}{f}}{\equivclass{\OLId{latin-looped}{M}}{\approx}}$ و
+$\Assign{\OLId{latin-looped}{R}}{\equivclass{\OLId{latin-looped}{M}}{\approx}}$ سمّينا عناصر
+$\equivclass{\Trm[\OLId{latin-looped}{L}]_\OLMathNumeral{0}}{\approx}$ بأسماء من الصورة
+$\equivrep{\OLId{latin-ordinary}{t}}{\approx}$؛ فاعتمدنا في وصفها على \emph{ممثلين}~$\OLId{latin-ordinary}{t} \in
+\equivrep{\OLId{latin-ordinary}{t}}{\approx}$. ولا يصح التعريف إلا إذا استغنى ناتجه عن اختيار
+الممثل: فلو اخترنا~$\OLId{latin-ordinary}{t}'$ مع بقاء الصنف نفسه
+($\equivrep{\OLId{latin-ordinary}{t}}{\approx} = \equivrep{\OLId{latin-ordinary}{t}'}{\approx}$)، وجب ألا تتغير
+النتيجة. انظر مثلًا إلى $\OLId{latin-looped}{R}$ وهو !!{predicate} أحادي الموضع.
+يقضي البند الأخير بأن $\equivrep{\OLId{latin-ordinary}{t}}{\approx} \in \Assign{\OLId{latin-looped}{R}}{\equivclass{\OLId{latin-looped}{M}}{\approx}}$
+إذا وفقط إذا كان $\Sat{\OLId{latin-looped}{M}}{\Atom{R}{t}}$. فلو أخذنا حدًا آخر~$\OLId{latin-ordinary}{t}'$
+% تصحيح مصدر (0133-I1): صحّحنا حدَّ الفرض من t إلى الممثل البديل t'، وهو خطأ صوري موروث من الأصل وخط الأساس.
+حيث $\OLId{latin-ordinary}{t} \approx \OLId{latin-ordinary}{t}'$، وافترضنا $\Sat/{\OLId{latin-looped}{M}}{\Atom{R}{t'}}$، لاقتضى
+التعريف $\equivrep{\OLId{latin-ordinary}{t}'}{\approx} \notin \Assign{\OLId{latin-looped}{R}}{\equivclass{\OLId{latin-looped}{M}}{\approx}}$.
+لكن $\OLId{latin-ordinary}{t} \approx \OLId{latin-ordinary}{t}'$ يوجب $\equivrep{\OLId{latin-ordinary}{t}}{\approx} =
+\equivrep{\OLId{latin-ordinary}{t}'}{\approx}$، ويستحيل الجمع بين
+$\equivrep{\OLId{latin-ordinary}{t}}{\approx} \in \Assign{\OLId{latin-looped}{R}}{\equivclass{\OLId{latin-looped}{M}}{\approx}}$ و
+$\equivrep{\OLId{latin-ordinary}{t}}{\approx} \notin \Assign{\OLId{latin-looped}{R}}{\equivclass{\OLId{latin-looped}{M}}{\approx}}$.
+وتمنع \olref{prop:approx-equiv} وقوع هذا الاختلاف.
+\end{explain}
+
+\begin{prop}
+$\Struct{\equivclass{M}{\approx}}$ معرّفة تعريفًا سليمًا؛ أي إذا كانت
+$\OLId{latin-ordinary}{t}_\OLMathNumeral{1}$، \dots، $\OLId{latin-ordinary}{t}_\OLId{latin-ordinary}{n}$، $\OLId{latin-ordinary}{t}_\OLMathNumeral{1}'$، \dots، $\OLId{latin-ordinary}{t}_\OLId{latin-ordinary}{n}'$ حدودًا مغلقة، وكان
+$\OLId{latin-ordinary}{t}_\OLId{latin-ordinary}{i} \approx \OLId{latin-ordinary}{t}_\OLId{latin-ordinary}{i}'$ لكل $\OLId{latin-ordinary}{i}$ يحقق $\OLMathNumeral{1} \le \OLId{latin-ordinary}{i} \le \OLId{latin-ordinary}{n}$، فإن
+\begin{enumerate}
+\item $\equivrep{\Atom{f}{t_1,\dots, t_n}}{\approx} =
+    \equivrep{\Atom{f}{t_1',\dots, t_n'}}{\approx}$؛ أي إن
+  \[
+  \Atom{f}{t_1,\dots, t_n} \approx \Atom{f}{t_1',\dots, t_n'}
+  \]
+  و
+\item $\Sat{\OLId{latin-looped}{M}}{\Atom{R}{t_1,\dots, t_n}}$ إذا وفقط إذا كان
+  $\Sat{\OLId{latin-looped}{M}}{\Atom{R}{t_1',\dots, t_n'}}$؛ أي إن
+  \[
+    \Atom{R}{t_1,\dots, t_n} \in \OLId{greek-variable}{Gamma}^* \text{ إذا وفقط إذا }
+    \Atom{R}{t_1',\dots, t_n'} \in \OLId{greek-variable}{Gamma}^*.
+  \]
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+نطبق \olref{prop:approx-equiv} استقراءً على~$\OLId{latin-ordinary}{n}$، فيثبت المطلوب.
+\end{proof}
+
+وقبل إثبات لمّة الصدق نحتاج إلى لمّة القيم، كما احتجنا إليها في نموذج الحدود.
+
+\begin{lem}
+\ollabel{lem:val-in-termmodel-factored} ليكن $\Struct M = \Struct M
+ (\OLId{greek-variable}{Gamma}^*)$؛ عندئذ $\Value{\OLId{latin-ordinary}{t}}{\equivclass{\OLId{latin-looped}{M}}{\approx}} = \equivrep{\OLId{latin-ordinary}{t}}
+ {\approx}$ لكل حد مغلق~$\OLId{latin-ordinary}{t}$.
+\end{lem}
+\begin{proof}
+يسلك البرهان مسلك \olref[mod]{lem:val-in-termmodel} نفسه.
+\end{proof}
+
+\begin{prob}
+أكمل برهان~\olref[fol][com][ide]{lem:val-in-termmodel-factored}.
+\end{prob}
+
+\begin{lem}
+\ollabel{lem:truth}
+$\Sat{\equivclass{\OLId{latin-looped}{M}}{\approx}}{!A}$ إذا وفقط إذا كان
+$!A \in \OLId{greek-variable}{Gamma}^*$ لكل الجمل~$!A$.
+\end{lem}
+
+\begin{proof}
+نستقرئ~$!A$ على نحو برهان \olref[mod]{lem:truth}. ولا يبقى من
+الحالات ما يستدعي زيادة بيان إلا $!A \ident \eq[\OLId{latin-ordinary}{t}][\OLId{latin-ordinary}{t}']$، وبيانها:
+\begin{align*}
+\Sat{\equivclass{\OLId{latin-looped}{M}}{\approx}}{\eq[\OLId{latin-ordinary}{t}][\OLId{latin-ordinary}{t}']} & \text{ إذا وفقط إذا } \equivrep{\OLId{latin-ordinary}{t}}{\approx} = \equivrep{\OLId{latin-ordinary}{t}'}{\approx}
+\text{ (بحسب تعريف $\Struct{\equivclass{M}{\approx}}$)}\\
+& \text{ إذا وفقط إذا } \OLId{latin-ordinary}{t} \approx \OLId{latin-ordinary}{t}' \text{ (بحسب تعريف $\equivrep{t}{\approx}$)}\\
+& \text{ إذا وفقط إذا } \eq[\OLId{latin-ordinary}{t}][\OLId{latin-ordinary}{t}'] \in \OLId{greek-variable}{Gamma}^* \text{ (بحسب تعريف $\approx$).}
+\end{align*}
+\end{proof}
+
+\begin{digress}
+إن $\Struct{M(\Gamma^*)}$ !!{enumerable} ولانهائي دائمًا، لكن
+$\Struct{\equivclass{M}{\approx}}$ قد يكون منتهيًا؛ إذ ربما لم يبق
+إلا عدد منتهٍ من الأصناف $\equivrep{\OLId{latin-ordinary}{t}}{\approx}$. ولا غرابة في
+ذلك، فقد تتضمن $\OLId{greek-variable}{Gamma}$ !!{sentence}s لا تصدق إلا في
+!!{structure} منتهية. ومثال ذلك $\lforall[\OLId{latin-ordinary}{x}][\lforall[\OLId{latin-ordinary}{y}][\OLId{latin-ordinary}{x} =
+\OLId{latin-ordinary}{y}]]$؛ فهي !!{sentence} متسقة، ولا ترضيها إلا !!{structure}s
+التي لا يوجد في !!a{domain} لها إلا !!{element} واحد.
+\end{digress}
+
+\end{document}

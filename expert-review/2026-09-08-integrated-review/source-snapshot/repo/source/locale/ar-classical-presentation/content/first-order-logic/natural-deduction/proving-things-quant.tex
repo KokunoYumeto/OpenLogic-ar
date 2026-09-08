@@ -1,0 +1,228 @@
+% Part: first-order-logic
+% Chapter: natural-deduction
+% Section: proving-things-quant
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{ntd}{prq}
+
+\olsection{\usetoken{P}{derivation} مع المكممات}
+
+\begin{ex}
+لا بد مع المكممات من حفظ شرط المتغير المميَّز؛ وقد يدعو حفظه إلى تغيير ترتيب الاستدلالات.
+والأنفع في الغالب أن نبدأ بالقواعد المقيدة به عند البحث، فتكون أدنى موضعًا في البرهان التام.
+
+لنر كيف نعطي !!a{derivation} لل!!{formula}
+$\lexists[\OLId{latin-ordinary}{x}][\lnot !A(\OLId{latin-ordinary}{x})] \lif \lnot \lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]$.
+نبدأ كالمعتاد، فنكتب:
+\begin{prooftree}
+\AxiomC{}
+\UnaryInfC{$\lexists[\OLId{latin-ordinary}{x}][\lnot !A(\OLId{latin-ordinary}{x})]\lif \lnot \lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]$}
+\end{prooftree}
+نبدأ بكتابة ما يلزم لتسويغ الخطوة الأخيرة باستعمال قاعدة~\Intro{\lif}.
+\begin{prooftree}
+\AxiomC{$\Discharge{\lexists[\OLId{latin-ordinary}{x}][\lnot !A(\OLId{latin-ordinary}{x})]}{\OLMathNumeral{1}}$}
+\DeduceC{$\lnot \lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]$}
+\DischargeRule{\Intro{\lif}}{1}
+\UnaryInfC{$\lexists[\OLId{latin-ordinary}{x}][\lnot !A(\OLId{latin-ordinary}{x})]\lif \lnot \lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]$}
+\end{prooftree}
+لا تظهر قاعدة نعملها مباشرة في~$\lnot \lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]$؛ فنهيئ ال!!{derivation} لاستعمال~\Elim{\lexists}.
+وهنا يلزم اختيار ثابت لا يقع في~$\lexists[\OLId{latin-ordinary}{x}][\lnot !A(\OLId{latin-ordinary}{x})]$ ولا في فرض يعتمد عليه الاستدلال، صيانةً لشرط المتغير المميَّز.
+وحيث لا تظهر !!{constant}s أصلًا، فكل اختيار صالح.
+\begin{prooftree}
+\AxiomC{$\Discharge{\lexists[\OLId{latin-ordinary}{x}][\lnot !A(\OLId{latin-ordinary}{x})]}{\OLMathNumeral{1}}$}
+\AxiomC{$\Discharge{\lnot !A(\OLId{latin-ordinary}{a})}{\OLMathNumeral{2}}$}
+\DeduceC{$\lnot \lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]$}
+\DischargeRule{\Elim{\lexists}}{2}
+\BinaryInfC{$\lnot \lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]$}
+\DischargeRule{\Intro{\lif}}{1}
+\UnaryInfC{$\lexists[\OLId{latin-ordinary}{x}][\lnot !A(\OLId{latin-ordinary}{x})] \lif \lnot \lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]$}
+\end{prooftree}
+ولإثبات~$\lnot \lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]$ نجرب~\Intro{\lnot}.
+فنطلب تناقضًا، مع جواز أخذ
+$\lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]$ فرضًا زائدًا. ويجوز أن يستعمل التناقض الفرض~$\lnot !A(\OLId{latin-ordinary}{a})$، إذ سيسقطه~\Elim{\lexists}.
+وترتيب ذلك هكذا:
+\begin{prooftree}
+\AxiomC{$\Discharge{\lexists[\OLId{latin-ordinary}{x}][\lnot !A(\OLId{latin-ordinary}{x})]}{\OLMathNumeral{1}}$}
+\AxiomC{$\Discharge{\lnot !A(\OLId{latin-ordinary}{a})}{\OLMathNumeral{2}}, \Discharge{\lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]}{\OLMathNumeral{3}}$}
+\DeduceC{$\lfalse$}
+\DischargeRule{\Intro{\lnot}}{3}
+\UnaryInfC{$\lnot \lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]$}
+\DischargeRule{\Elim{\lexists}}{2}
+\BinaryInfC{$\lnot \lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]$}
+\DischargeRule{\Intro{\lif}}{1}
+\UnaryInfC{$\lexists[\OLId{latin-ordinary}{x}][\lnot !A(\OLId{latin-ordinary}{x})]\lif \lnot \lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]$}
+\end{prooftree}
+وقد قرب التناقض. أسهل ما نعمله الآن~\Elim{\lforall}، ولا شرط فيه للمتغير المميَّز.
+يجوز إحلال أي حد مناسب محل~$\OLId{latin-ordinary}{x}$ المكمم كليًا، فنختار~$\OLId{latin-ordinary}{a}$ ليتحقق التناقض:
+\begin{prooftree}
+\AxiomC{$\Discharge{\lexists[\OLId{latin-ordinary}{x}][\lnot !A(\OLId{latin-ordinary}{x})]}{\OLMathNumeral{1}}$}
+\AxiomC{$\Discharge{\lnot !A(\OLId{latin-ordinary}{a})}{\OLMathNumeral{2}}$}
+\AxiomC{$\Discharge{\lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]}{\OLMathNumeral{3}}$}
+\RightLabel{\Elim{\lforall}}
+\UnaryInfC{$!A(\OLId{latin-ordinary}{a})$}
+\RightLabel{\Elim{\lnot}}
+\BinaryInfC{$\lfalse$}
+\DischargeRule{\Intro{\lnot}}{3}
+\UnaryInfC{$\lnot \lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]$}
+\DischargeRule{\Elim{\lexists}}{2}
+\BinaryInfC{$\lnot \lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]$}
+\DischargeRule{\Intro{\lif}}{1}
+\UnaryInfC{$\lexists[\OLId{latin-ordinary}{x}][\lnot !A(\OLId{latin-ordinary}{x})]\lif \lnot \lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]$}
+\end{prooftree}
+
+والآن نراجع شرط المتغير المميَّز، كما ينبغي في براهين المكممات.
+لم نستعمل من القواعد المقيدة به إلا~\Elim{\exists}، والمتغير المميَّز~$\OLId{latin-ordinary}{a}$ لا يقع في الفروض التي يعتمد عليها الاستدلال.
+فهذا !!{derivation} صحيح.
+\end{ex}
+
+\begin{ex}
+وقد يكون المطلوب اشتقاق !!a{formula} من !!{formula}s أخرى، فتبقى عندئذ فروض غير مسقطة.
+فلا يكفي ضبط النتيجة المرادة؛ بل لا بد من ضبط الفروض معها.
+
+لنر كيف نعطي !!a{derivation} لل!!{formula}~$\lexists[\OLId{latin-ordinary}{x}][!C(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{b})]$
+من الافتراضين~$\lexists[\OLId{latin-ordinary}{x}][(!A(\OLId{latin-ordinary}{x}) \land !B(\OLId{latin-ordinary}{x}))]$ و
+$\lforall[\OLId{latin-ordinary}{x}][(!B(\OLId{latin-ordinary}{x}) \lif !C(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{b}))]$. نبدأ كالمعتاد بكتابة النتيجة في
+الأسفل.
+\begin{prooftree}
+\AxiomC{}
+\UnaryInfC{$\lexists[\OLId{latin-ordinary}{x}][!C(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{b})]$}
+\end{prooftree}
+
+لنا مقدمتان. فإن استعملنا الأولى لطلب
+!!a{derivation} لـ~$\lexists[\OLId{latin-ordinary}{x}][!C(\OLId{latin-ordinary}{x}, \OLId{latin-ordinary}{b})]$ من
+$\lexists[\OLId{latin-ordinary}{x}][(!A(\OLId{latin-ordinary}{x}) \land !B(\OLId{latin-ordinary}{x}))]$، كان الطريق~\Elim{\lexists}.
+ولأن لهذه القاعدة شرط المتغير المميَّز، نقدمها في البحث، فنحصل على:
+\begin{prooftree}
+\AxiomC{$\lexists[\OLId{latin-ordinary}{x}][(!A(\OLId{latin-ordinary}{x}) \land !B(\OLId{latin-ordinary}{x}))]$}
+\AxiomC{$\Discharge{!A(\OLId{latin-ordinary}{a}) \land !B(\OLId{latin-ordinary}{a})}{\OLMathNumeral{1}}$}
+\DeduceC{$\lexists[\OLId{latin-ordinary}{x}][!C(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{b})]$}
+\DischargeRule{\Elim{\lexists}}{1}
+\BinaryInfC{$\lexists[\OLId{latin-ordinary}{x}][!C(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{b})]$}
+\end{prooftree}
+يشترك الافتراضان اللذان نعمل بهما في~$!B$. وقد يكون من المفيد في هذه
+المرحلة أن نطبق~\Elim{\land} لفصل~$!B(\OLId{latin-ordinary}{a})$.
+\begin{prooftree}
+\AxiomC{$\lexists[\OLId{latin-ordinary}{x}][(!A(\OLId{latin-ordinary}{x}) \land !B(\OLId{latin-ordinary}{x})])$}
+\AxiomC{$\Discharge{!A(\OLId{latin-ordinary}{a}) 
+\land !B(\OLId{latin-ordinary}{a})}{\OLMathNumeral{1}}$}
+\RightLabel{\Elim{\land}}
+\UnaryInfC{$!B(\OLId{latin-ordinary}{a})$}
+\DeduceC{$\lexists[\OLId{latin-ordinary}{x}][!C(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{b})]$}
+\DischargeRule{\Elim{\lexists}}{1}
+\BinaryInfC{$\lexists[\OLId{latin-ordinary}{x}][!C(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{b})]$}
+\end{prooftree}
+
+وأما الفرض الثاني فهو~$\lforall[\OLId{latin-ordinary}{x}][(!B(\OLId{latin-ordinary}{x}) \lif
+!C(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{b}))]$. لا شرط هنا للمتغير المميَّز؛ فنضع محل~$\OLId{latin-ordinary}{x}$ ال!!{constant}~$\OLId{latin-ordinary}{a}$ بقاعدة~\Elim{\lforall}، فينتج
+$!B(\OLId{latin-ordinary}{a}) \lif !C(\OLId{latin-ordinary}{a}, \OLId{latin-ordinary}{b})$.
+فقد اجتمع~$!B(\OLId{latin-ordinary}{a}) \lif !C(\OLId{latin-ordinary}{a},\OLId{latin-ordinary}{b})$ و$!B(\OLId{latin-ordinary}{a})$، والخطوة التالية تطبيق~\Elim{\lif} مباشرة:
+\begin{prooftree}
+\AxiomC{$\lexists[\OLId{latin-ordinary}{x}][(!A(\OLId{latin-ordinary}{x}) \land !B(\OLId{latin-ordinary}{x}))]$}
+\AxiomC{$\lforall[\OLId{latin-ordinary}{x}][(!B(\OLId{latin-ordinary}{x}) \lif !C(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{b}))]$}
+\RightLabel{\Elim{\lforall}}
+\UnaryInfC{$!B(\OLId{latin-ordinary}{a}) \lif !C(\OLId{latin-ordinary}{a},\OLId{latin-ordinary}{b})$}
+\AxiomC{$\Discharge{!A(\OLId{latin-ordinary}{a}) 
+\land !B(\OLId{latin-ordinary}{a})}{\OLMathNumeral{1}}$}
+\RightLabel{\Elim{\land}}
+\UnaryInfC{$!B(\OLId{latin-ordinary}{a})$}
+\RightLabel{\Elim{\lif}}
+\BinaryInfC{$!C(\OLId{latin-ordinary}{a},\OLId{latin-ordinary}{b})$}
+\DeduceC{$\lexists[\OLId{latin-ordinary}{x}][!C(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{b})]$}
+\DischargeRule{\Elim{\lexists}}{1}
+\insertBetweenHyps{\hspace{-5em}}
+\BinaryInfC{$\lexists[\OLId{latin-ordinary}{x}][!C(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{b})]$}
+\end{prooftree}
+لقد أوشكنا!{} فبتطبيق واحد لـ~\Intro{\lexists} نبلغ غايتنا.
+\begin{prooftree}
+\AxiomC{$\lexists[\OLId{latin-ordinary}{x}][(!A(\OLId{latin-ordinary}{x}) \land !B(\OLId{latin-ordinary}{x}))]$}
+\AxiomC{$\lforall[\OLId{latin-ordinary}{x}][(!B(\OLId{latin-ordinary}{x}) \lif !C(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{b}))]$}
+\RightLabel{\Elim{\lforall}}
+\UnaryInfC{$!B(\OLId{latin-ordinary}{a}) \lif !C(\OLId{latin-ordinary}{a},\OLId{latin-ordinary}{b})$}
+\AxiomC{$\Discharge{!A(\OLId{latin-ordinary}{a}) 
+\land !B(\OLId{latin-ordinary}{a})}{\OLMathNumeral{1}}$}
+\RightLabel{\Elim{\land}}
+\UnaryInfC{$!B(\OLId{latin-ordinary}{a})$}
+\RightLabel{\Elim{\lif}}
+\BinaryInfC{$!C(\OLId{latin-ordinary}{a},\OLId{latin-ordinary}{b})$}
+\RightLabel{\Intro{\lexists}}
+\UnaryInfC{$\lexists[\OLId{latin-ordinary}{x}][!C(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{b})]$}
+\DischargeRule{\Elim{\lexists}}{1}
+\insertBetweenHyps{\hspace{-5em}}
+\BinaryInfC{$\lexists[\OLId{latin-ordinary}{x}][!C(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{b})]$}
+\end{prooftree}
+وبما أننا حرصنا في كل خطوة على ألا تُنتهك شروط المتغير المميَّز،
+يمكننا الوثوق بأن هذا !!{derivation} صحيح.
+\end{ex}
+
+\begin{ex}
+أعط !!a{derivation} لل!!{formula}~$\lnot\lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]$ من
+الافتراضين~$\lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})] \lif \lexists[\OLId{latin-ordinary}{y}][!B(\OLId{latin-ordinary}{y})]$ و
+$\lnot\lexists[\OLId{latin-ordinary}{y}][!B(\OLId{latin-ordinary}{y})]$. نبدأ كالمعتاد بكتابة ال!!{formula}
+المطلوبة في الأسفل.
+\begin{prooftree}
+\AxiomC{}
+\UnaryInfC{$\lnot\lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]$}
+\end{prooftree}
+السطر الأخير في ال!!{derivation} نفي، ولذلك فلنجرب استعمال
+\Intro{\lnot}. وسيتطلب هذا أن نعرف كيف !!{derive} تناقضًا.
+\begin{prooftree}
+\AxiomC{$\Discharge{\lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]}{\OLMathNumeral{1}}$}
+\DeduceC{$\lfalse$}
+\DischargeRule{\Intro{\lnot}}{1}
+\UnaryInfC{$\lnot\lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]$}
+\end{prooftree}
+قد تصلح~\Elim{\lforall}، لكن نفعها للمطلوب غير بيّن.
+فلنرجع إلى الفروض: إن~$\lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})] \lif \lexists[\OLId{latin-ordinary}{y}][!B(\OLId{latin-ordinary}{y})]$
+ومعه~$\lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]$ يهيئان تطبيق~\Elim{\lif}:
+\begin{prooftree}
+\AxiomC{$\lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})] \lif \lexists[\OLId{latin-ordinary}{y}][!B(\OLId{latin-ordinary}{y})]$}
+\AxiomC{$\Discharge{\lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]}{\OLMathNumeral{1}}$}
+\RightLabel{\Elim{\lif}}
+\BinaryInfC{$\lexists[\OLId{latin-ordinary}{y}][!B(\OLId{latin-ordinary}{y})]$}
+\DeduceC{$\lfalse$}
+\DischargeRule{\Intro{\lnot}}{1}
+\UnaryInfC{$\lnot\lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]$}
+\end{prooftree}
+وبقي الفرض الأخير؛ وبه نبلغ التناقض باستعمال~\Elim{\lnot}:
+\begin{prooftree}
+\AxiomC{$\lnot\lexists[\OLId{latin-ordinary}{y}][!B(\OLId{latin-ordinary}{y})]$}
+\AxiomC{$\lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})] \lif \lexists[\OLId{latin-ordinary}{y}][!B(\OLId{latin-ordinary}{y})]$}
+\AxiomC{$\Discharge{\lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]}{\OLMathNumeral{1}}$}
+\RightLabel{\Elim{\lif}}
+\BinaryInfC{$\lexists[\OLId{latin-ordinary}{y}][!B(\OLId{latin-ordinary}{y})]$}
+\RightLabel{\Elim{\lnot}}
+\BinaryInfC{$\lfalse$}
+\DischargeRule{\Intro{\lnot}}{1}
+\UnaryInfC{$\lnot\lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]$}
+\end{prooftree}
+\end{ex}
+
+\begin{prob}
+أعط !!{derivation}s تبين ما يأتي:
+\begin{enumerate}
+\item $\Proves (\lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})] \land \lforall[\OLId{latin-ordinary}{y}][!B(\OLId{latin-ordinary}{y})]) \lif
+\lforall[\OLId{latin-ordinary}{z}][(!A(\OLId{latin-ordinary}{z}) \land !B(\OLId{latin-ordinary}{z}))]$.
+\item $\Proves (\lexists[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})] \lor \lexists[\OLId{latin-ordinary}{y}][!B(\OLId{latin-ordinary}{y})]) \lif
+\lexists[\OLId{latin-ordinary}{z}][(!A(\OLId{latin-ordinary}{z}) \lor !B(\OLId{latin-ordinary}{z}))]$.
+\item $\lforall[\OLId{latin-ordinary}{x}][(!A(\OLId{latin-ordinary}{x}) \lif !B)] \Proves \lexists[\OLId{latin-ordinary}{y}][!A(\OLId{latin-ordinary}{y})] \lif !B$.
+\item $\lforall[\OLId{latin-ordinary}{x}][\lnot !A(\OLId{latin-ordinary}{x})] \Proves \lnot\lexists[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]$.
+\item $\Proves \lnot\lexists[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})] \lif \lforall[\OLId{latin-ordinary}{x}][\lnot !A(\OLId{latin-ordinary}{x})]$.
+\item $\Proves \lnot\lexists[\OLId{latin-ordinary}{x}][\lforall[\OLId{latin-ordinary}{y}][((!A(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y}) \lif \lnot
+!A(\OLId{latin-ordinary}{y},\OLId{latin-ordinary}{y})) \land (\lnot !A(\OLId{latin-ordinary}{y},\OLId{latin-ordinary}{y}) \lif !A(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y})))]]$.
+\end{enumerate}
+\end{prob}
+
+\begin{prob}
+أعط !!{derivation}s تبين ما يأتي:
+\begin{enumerate}
+\item $\Proves \lnot\lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})] \lif \lexists[\OLId{latin-ordinary}{x}][\lnot!A(\OLId{latin-ordinary}{x})]$.
+\item $(\lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})] \lif !B) \Proves \lexists[\OLId{latin-ordinary}{y}][(!A(\OLId{latin-ordinary}{y}) \lif !B)]$.
+\item $\Proves \lexists[\OLId{latin-ordinary}{x}][(!A(\OLId{latin-ordinary}{x}) \lif \lforall[\OLId{latin-ordinary}{y}][!A(\OLId{latin-ordinary}{y})])]$.
+\end{enumerate}
+(تتطلب هذه كلها قاعدة~$\FalseCl$.)
+\end{prob}
+
+\end{document}

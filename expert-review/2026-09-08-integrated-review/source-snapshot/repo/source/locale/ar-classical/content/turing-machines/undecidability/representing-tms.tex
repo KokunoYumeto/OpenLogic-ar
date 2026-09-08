@@ -1,0 +1,199 @@
+% Part: turing-machines
+% Chapter: undecidability
+% Section: representing-tms
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{tur}{und}{rep}
+\olsection{تمثيل آلات تورنغ}
+
+\begin{explain}
+تمثيل آلة تورنغ وسلوكها بـ!!a{sentence} من الرتبة الأولى يقتضي
+اختيار لغة تلائم هذا الغرض. ولها صنفان من التعبيرات:
+!!{predicate}s تصف تهيئات الآلة، وتعبيرات نرقم بها خطوات التنفيذ،
+أي «اللحظات»، ومواضع الشريط.
+
+فنضع صنفين من ال!!{predicate}s الثنائية المحل: لكل حالة~$q$
+!!a{predicate}~$\Obj Q_q$، ولكل رمز شريط~$\sigma$
+!!a{predicate}~$\Obj S_\sigma$. فبالصنف الأول نبيّن حالة~$M$
+وموضع رأسها، وبالثاني نبيّن ما في الشريط من رموز.
+
+ولا بد، لتعيين موضع الرأس وعدد الخطوات المنفذة، من تعبير عن
+الأعداد. فنتخذ لذلك !!a{constant}~$\Obj 0$ ودالة خلف أحادية
+المحل~$\prime$. واصطلاحنا أن نكتب علامة هذه الدالة \emph{بعد}
+وسيطها، مع إسقاط القوسين.
+
+ويقابل كل عدد~$n$ حد مخصوص~$\num{n}$، نسميه
+\emph{العدد القياسي} لـ~$n$، وبه نمثل العدد في~$\Lang L_M$.
+فـ$\num{0}$ هو $\Obj 0$، و$\num{1}$ هو $\Obj 0'$،
+و$\num{2}$ هو $\Obj 0''$، وعلى هذا القياس. وحد ذلك بدقة:
+\begin{align*}
+\num{0} & = \Obj 0 \\
+\num{n+1} &= \num{n}'
+\end{align*}
+فالحد $\num{0}$، وهو $\Obj 0$، اسم للخانة القصوى في اليسار،
+واسم أيضًا للزمن السابق لأول خطوة تنفيذ، أي زمن التهيئة الابتدائية.
+والحد $\num{1}$، وهو $\Obj 0'$، اسم للخانة التالية لها يمينًا،
+وللزمن الذي يلي أول خطوة تنفيذ؛ وهكذا فيما بعد.
+
+ونزيد !!a{predicate}~$<$، نستعمله لترتيب المواضع فيكون معناه
+«إلى يسار»، ولترتيب خطوات التنفيذ فيكون معناه «قبل».
+
+ثم نورد، بعد تعيين اللغة، «بديهيات» $!T(M,w)$؛ وهي
+ال!!{sentence}s التي يدل مجموعها على سلوك~$M$ عند الدخل~$w$.
+فمنها !!{sentence}s تفرض شروطًا على $\Obj 0$ و$\prime$ و$<$،
+ومنها !!{sentence}s لتهيئة الدخل، ومنها !!{sentence}s تبين
+تهيئة~$M$ الحاصلة عقب تنفيذ تعليمة بعينها.
+\end{explain}
+
+\begin{defn}
+  \ollabel{defn:tm-descr}
+لتكن $M=\tuple{Q,\Sigma,q_0,\delta}$ آلة تورنغ. نعيّن اللغة
+$\Lang L_M$ بالأجزاء الآتية:
+\begin{enumerate}
+\item !!{predicate} ثنائي المحل $ \Obj Q_q(x,y)$ لكل حالة~$q\in Q$.
+  والمقصود بـ$\Obj Q_q(\num{m},\num{n})$ أن $M$ تكون، بعد $n$
+  خطوة، في الحالة~$q$ ورأسها على الخانة رقم~$m$.
+\item !!{predicate} ثنائي المحل $\Obj S_\sigma(x,y)$ لكل رمز
+  $\sigma\in\Sigma$. والمقصود بـ$\Obj S_\sigma(\num{m},\num{n})$
+  أن الخانة رقم~$m$ تحتوي، بعد $n$ خطوة، الرمز~$\sigma$.
+\item !!a{constant}~$\Obj 0$.
+\item !!a{function} أحادية المحل~$\prime$.
+\item !!a{predicate} ثنائي المحل~$<$.
+\end{enumerate}
+\end{defn}
+
+وهذه ال!!{sentence}s الواصفة لعمل الآلة~$M$ عند الدخل
+$w=\sigma_{i_1}\dots\sigma_{i_k}$:
+\begin{enumerate}
+\item بديهيات الأعداد والعلاقة~$<$:
+\begin{enumerate}
+\item !!^a{sentence} مفادها أن كل عدد دون خلفه:
+\[
+\lforall[x][x < x']
+\]
+\item !!^a{sentence} تنص على تعدي $<$:
+\[
+\lforall[x][\lforall[y][\lforall[z][
+      ((x < y \land y < z) \lif x < z)]]]
+\]
+\end{enumerate}
+\item بديهيات تهيئة الدخل:
+\begin{enumerate}
+\item عند تمام $0$ من الخطوات، أي قبل التنفيذ، تكون $M$ على الحالة
+  الابتدائية~$q_0$ ورأسها ماسح للخانة رقم~$1$:
+\[
+\Obj Q_{q_0}(\num{1},\num{0})
+\]
+\item الخانات $k+1$ الأولى تحمل الرموز $\TMendtape$،
+  و$\sigma_{i_1}$،~\dots، و$\sigma_{i_k}$:
+\[
+\Obj S_\TMendtape(\num{0}, \num{0}) \land
+\Obj S_{\sigma_{i_1}}(\num{1}, \num{0}) \land
+\dots \land
+\Obj S_{\sigma_{i_k}}(\num{k}, \num{0})
+\]
+\item وسائر الشريط خال من غير علامة الفراغ:
+\[
+\lforall[x][(\num{k} < x \lif \Obj S_\TMblank(x, \num{0}))]
+\]
+\end{enumerate}
+\item بديهيات الانتقال بين التهيئتين المتعاقبتين:
+
+ولنرمز بـ$!A(x,y)$ إلى اقتران ال!!{sentence}s كلها مما صورته
+\[
+\lforall[z][
+  (((z < x \lor x < z) \land \Obj S_\sigma(z, y))
+  \lif \Obj S_\sigma(z, y'))]
+\]
+وذلك لكل $\sigma\in\Sigma$. فمعنى $!A(\num{m},\num{n})$ أن
+الشريط بعد $n+1$ خطوة، باستثناء الخانة رقم~$m$، لم يتغير عما
+كان عليه بعد $n$ خطوة.
+\begin{enumerate}
+\item \ollabel{rep-right} نقابل كل تعليمة
+$\delta(q_i,\sigma)=\tuple{q_j,\sigma',\TMright}$ بال!!{sentence}:
+\begin{align*}
+& \lforall[x][\lforall[y][(
+   (\Obj Q_{q_i}(x, y) \land \Obj S_{\sigma}(x, y)) \lif {}]] \\
+&\qquad   (\Obj Q_{q_j}(x', y') \land \Obj S_{\sigma'}(x, y') \land
+!A(x, y)))
+\end{align*}
+ومفاد ذلك: إذا مضت~$y$ خطوة وكانت الآلة في الحالة~$q_i$ على
+الخانة~$x$ ورمزها~$\sigma$، فإنها عند تمام $y+1$ خطوة تكون على
+الخانة~$x+1$ في الحالة~$q_j$، وتحمل الخانة~$x$ الرمز
+$\sigma'$؛ وأما ما عدا~$x$ من الخانات فيبقى على ما كان فيه
+من الرموز بعد~$y$ خطوة.
+
+\item \ollabel{rep-left} نقابل كل تعليمة
+$\delta(q_i,\sigma)=\tuple{q_j,\sigma',\TMleft}$ بال!!{sentence}:
+\begin{align*}
+& \lforall[x][\lforall[y][
+    ((\Obj Q_{q_i}(x', y) \land \Obj S_{\sigma}(x', y)) \lif {}]]\\
+& \qquad   (\Obj Q_{q_j}(x, y') \land \Obj S_{\sigma'}(x', y') \land
+!A(x', y))) \land {}\\
+& \lforall[y][((\Obj Q_{q_i}(\num{0}, y) \land \Obj S_{\sigma}(\num{0},
+    y)) \lif {}]\\
+& \qquad (\Obj Q_{q_j}(\num{0}, y') \land \Obj S_{\sigma'}(\num{0},
+  y') \land !A(\num{0}, y)))
+\end{align*}
+وتأمل وجه هذه الصياغة: لم نقل «إذا كانت الآلة تمسح الخانة~$x$،
+~\dots»، بل «إذا كانت تمسح الخانة~$x+1$، \dots». فإنها بالتحرك
+يسارًا تصير في الخطوة التالية إلى الخانة~$x$، في حين تقع الكتابة
+على الخانة~$x+1$. وإنما عدلنا إلى هذا التعبير لأن اللغة لا تتضمن
+طرحًا ولا دالة سلف.
+
+ولما كانت الأعداد ذات الصورة $x+1$ هي $1$، و$2$،~\dots،
+بقيت حالة الخانة~$0$ خارج هذا الشرط: فقد يؤمر الرأس فيها بالتحرك
+يسارًا، ولا موضع له إلى اليسار، فيبقى مكانه. ولهذه الحالة
+وضعنا المقترن الثاني. فهو يقول: إذا كانت الآلة بعد $y$ خطوة
+تمسح الخانة~$0$ في الحالة~$q_i$، وكان في الخانة~$0$
+الرمز~$\sigma$، فإنها بعد $y+1$ خطوة تظل على الخانة~$0$،
+وتصير إلى الحالة~$q_j$، ويكون في الخانة~$0$ الرمز
+$\sigma'$؛ وأما الخانات غير~$0$ فتبقى رموزها كما كانت بعد~$y$
+خطوة.
+\item \ollabel{rep-stay} نقابل كل تعليمة
+$\delta(q_i,\sigma)=\tuple{q_j,\sigma',\TMstay}$ بال!!{sentence}:
+\begin{align*}
+& \lforall[x][\lforall[y][(
+   (\Obj Q_{q_i}(x, y) \land \Obj S_{\sigma}(x, y)) \lif {}]] \\
+&\qquad   (\Obj Q_{q_j}(x, y') \land \Obj S_{\sigma'}(x, y') \land
+!A(x, y)))
+\end{align*}
+\end{enumerate}
+\end{enumerate}
+ونسمي $!T(M,w)$ اقتران ال!!{sentence}s المتقدمة جميعًا، الخاصة
+بالآلة~$M$ والدخل~$w$.
+
+وأما توقف~$M$ في نهاية المطاف، فنعبر عنه ب!!{sentence}
+مفادها أن دالة الانتقال تصير غير معرّفة بعد عدد من الخطوات.
+فلتكن $X$ مجموعة الأزواج $\tuple{q,\sigma}$ التي تكون فيها
+$\delta(q,\sigma)$ غير معرّفة؛ ولتكن $!E(M,w)$ ال!!{sentence}
+\[
+\lexists[x][\lexists[y][(\bigvee_{\tuple{q, \sigma} \in
+      X}(\Obj Q_q(x, y) \land \Obj S_\sigma(x, y)))]]
+\]
+
+وإن خصصنا للآلة حالة توقف~$h$، اختصر التعبير؛ فتكون
+ال!!{sentence}~$!E(M,w)$
+\[
+\lexists[x][\lexists[y][\Obj Q_h(x, y)]]
+\]
+دالةً على توقف الآلة في نهاية المطاف.
+
+\begin{prop}
+\ollabel{prop:mlessk}
+من $m<k$ يلزم $!T(M,w)\Entails\num{m}<\num{k}$.
+\end{prop}
+
+\begin{proof}
+برهانه متروك للتمرين.
+\end{proof}
+
+\begin{prob}
+برهن \olref[tur][und][rep]{prop:mlessk}.
+(إرشاد: اجعل الاستقراء على $k-m$.)
+\end{prob}
+
+\end{document}

@@ -1,0 +1,191 @@
+% Part: first-order-logic
+% Chapter: completeness
+% Section: compactness
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{com}{com}}
+      {\olfileid{pl}{com}{com}}
+
+\olsection{مبرهنة التراص}
+
+من ثمرات الاكتمال مبرهنة التراص: إذا قبلت كل مجموعة جزئية
+\emph{منتهية} من مجموعة ال!!{sentence}s الإرضاء، قبلته المجموعة
+بأسرها، وإن كانت غير منتهية. وليس هذا مما يُعلم بأول النظر؛ فقد يتوهم
+وجود مجموعة غير منتهية من ال!!{sentence}s لا يقع تناقضها في أي جزء
+منتهٍ، بل ينشأ من اجتماع ما لا نهاية له منها. والتراص ينفي هذا
+الاحتمال: فلا توجد مجموعة غير منتهية من ال!!{sentence}s تمتنع عن
+الإرضاء مع قبول كل جزء منتهٍ منها له. وكما للاكتمال عبارة في
+الاستلزام، فللتراص مثلها: ما يلزم عن مجموعة غير منتهية من
+ال!!{sentence}s يلزم عن جزء منتهٍ منها.
+
+\begin{defn}
+  تسمى مجموعة ال!!{sentence}s~$\OLId{greek-variable}{Gamma}$ \emph{قابلة للإرضاء منتهيًا} إذا
+  وفقط إذا كانت كل $\OLId{greek-variable}{Gamma}_\OLMathNumeral{0} \subseteq \OLId{greek-variable}{Gamma}$ منتهية قابلة للإرضاء.
+\end{defn}
+
+\begin{thm}[مبرهنة التراص]
+\ollabel{thm:compactness}
+تصدق العبارتان الآتيتان لكل مجموعة من ال!!{sentence}s~$\OLId{greek-variable}{Gamma}$ ولكل
+!!{sentence}~$!A$:
+\begin{enumerate}
+  \item يتحقق $\OLId{greek-variable}{Gamma} \Entails !A$ إذا وفقط إذا وجدت
+    $\OLId{greek-variable}{Gamma}_\OLMathNumeral{0} \subseteq \OLId{greek-variable}{Gamma}$ منتهية بحيث $\OLId{greek-variable}{Gamma}_\OLMathNumeral{0} \Entails !A$.
+  \item تكون $\OLId{greek-variable}{Gamma}$ قابلة للإرضاء إذا وفقط إذا كانت قابلة للإرضاء
+    منتهيًا.
+\end{enumerate}
+\end{thm}
+
+\begin{proof}
+نثبت البند (\OLClassicalDigits{2}). أما إذا قبلت $\OLId{greek-variable}{Gamma}$ الإرضاء، فهناك
+\iftag{FOL}{!!a{structure}~$\Struct{M}$}{!!a{valuation}~$\pAssign{\OLId{latin-ordinary}{v}}$}
+بحيث يتحقق $\iftag{FOL}{\Sat{\OLId{latin-looped}{M}}}{\pSat{\OLId{latin-ordinary}{v}}}{!A}$ لكل $!A \in
+\OLId{greek-variable}{Gamma}$. فتكون $\iftag{FOL}{\Struct{M}}{\pAssign{\OLId{latin-ordinary}{v}}}$ نفسها مرضية لكل
+جزء منتهٍ من~$\OLId{greek-variable}{Gamma}$. وهذا معنى قبول $\OLId{greek-variable}{Gamma}$ الإرضاء منتهيًا.
+
+وأما العكس، فلتكن $\OLId{greek-variable}{Gamma}$ قابلة للإرضاء منتهيًا. فكل
+مجموعة منتهية~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{0} \subseteq \OLId{greek-variable}{Gamma}$ قابلة للإرضاء، وتقتضي السلامة
+(\iftag{FOL}{%
+  \tagrefs{prfAX/{fol:axd:sou:cor:consistency-soundness},
+    prfSC/{fol:seq:sou:cor:consistency-soundness},
+    prfND/{fol:ntd:sou:cor:consistency-soundness},
+    prfTab/{fol:tab:sou:cor:consistency-soundness}}}{%
+  \tagrefs{prfAX/{pl:axd:sou:cor:consistency-soundness},
+    prfSC/{pl:seq:sou:cor:consistency-soundness},
+    prfND/{pl:ntd:sou:cor:consistency-soundness},
+    prfTab/{pl:tab:sou:cor:consistency-soundness}}}),
+اتساق كل مجموعة جزئية منتهية. فيثبت اتساق $\OLId{greek-variable}{Gamma}$ نفسها بمقتضى
+\iftag{FOL}{%
+  \tagrefs{prfAX/{fol:axd:ptn:prop:proves-compact},
+    prfSC/{fol:seq:ptn:prop:proves-compact},
+    prfND/{fol:ntd:ptn:prop:proves-compact},
+    prfTab/{fol:tab:ptn:prop:proves-compact}}}{%
+  \tagrefs{prfAX/{pl:axd:ptn:prop:proves-compact},
+    prfSC/{pl:seq:ptn:prop:proves-compact},
+    prfND/{pl:ntd:ptn:prop:proves-compact},
+    prfTab/{pl:tab:ptn:prop:proves-compact}}}.
+ثم ينقلنا الاكتمال (\olref[cth]{thm:completeness}) من اتساق $\OLId{greek-variable}{Gamma}$
+إلى قابليتها للإرضاء.
+\end{proof}
+
+\tagprob{FOL}
+\begin{prob}
+أثبت (\OLClassicalDigits{1}) من \olref[fol][com][com]{thm:compactness}.
+\end{prob}
+\tagendprob
+
+\tagprob{notFOL}
+\begin{prob}
+أثبت (\OLClassicalDigits{1}) من \olref[pl][com][com]{thm:compactness}.
+\end{prob}
+\tagendprob
+
+\iftag{FOL}{%
+\begin{ex}
+كل نموذج~$\Struct{M}$ لنظرية~$\OLId{greek-variable}{Gamma}$ يعيّن فيه كل حد مغلق~$\OLId{latin-ordinary}{t}$
+!!a{element} من~$\Domain{\OLId{latin-looped}{M}}$. فهل نستطيع ضمان العكس، أي أن كل
+!!{element} من~$\Domain{\OLId{latin-looped}{M}}$ تعيّنه بعض الحدود المغلقة؟ وبعبارة
+النماذج: أتوجد نظرية~$\OLId{greek-variable}{Gamma}$ لا تكون نماذجها إلا مغطاة؟ يجيب
+التراص بالنفي متى كان لـ~$\OLId{greek-variable}{Gamma}$ نموذج غير منتهٍ. خذ
+$\Struct{M}$ نموذجًا غير منتهٍ لـ~$\OLId{greek-variable}{Gamma}$، و$\OLId{latin-ordinary}{c}$ !!a{constant}
+مستحدثًا لا يقع في لغة~$\OLId{greek-variable}{Gamma}$. وعرّف $\OLId{greek-variable}{Delta}$ بأنها مجموعة
+ال!!{sentence}s $\eq/[\OLId{latin-ordinary}{c}][\OLId{latin-ordinary}{t}]$ لكل $\OLId{latin-ordinary}{t}$ حد مغلق في لغة~$\OLId{greek-variable}{Gamma}$،
+أي في~$\Lang{L}$:
+  \[
+  \OLId{greek-variable}{Delta} = \Setabs{\eq/[\OLId{latin-ordinary}{c}][\OLId{latin-ordinary}{t}]}{\OLId{latin-ordinary}{t} \in \Trm[\OLId{latin-looped}{L}]_\OLMathNumeral{0}}.
+  \]
+كل جزء منتهٍ من $\OLId{greek-variable}{Gamma} \cup \OLId{greek-variable}{Delta}$ يمكن كتابته
+$\OLId{greek-variable}{Gamma}' \cup \OLId{greek-variable}{Delta}'$ مع $\OLId{greek-variable}{Gamma}' \subseteq \OLId{greek-variable}{Gamma}$ و
+$\OLId{greek-variable}{Delta}' \subseteq \OLId{greek-variable}{Delta}$. ولا يقع في $\OLId{greek-variable}{Delta}'$، لتناهيها، إلا
+عدد منتهٍ من الحدود المغلقة. اختر $\OLId{latin-ordinary}{a} \in \Domain{\OLId{latin-looped}{M}}$ وهو
+!!a{element} من $\Domain{\OLId{latin-looped}{M}}$ لا تعيّنه هذه الحدود، ولتكن
+$\Struct{M'}$ ال!!{structure} الموافقة لـ$\Struct{M}$ مع زيادة
+$\Assign{\OLId{latin-ordinary}{c}}{\OLId{latin-looped}{M}'} = \OLId{latin-ordinary}{a}$. فيكون $\OLId{latin-ordinary}{a} \neq \Value{\OLId{latin-ordinary}{t}}{\OLId{latin-looped}{M}}$ لكل حد مغلق~$\OLId{latin-ordinary}{t}$
+في~$\OLId{greek-variable}{Delta}'$، ومن ثم $\Sat{\OLId{latin-looped}{M}'}{\OLId{greek-variable}{Delta}'}$. ومن
+$\Sat{\OLId{latin-looped}{M}}{\OLId{greek-variable}{Gamma}}$ و$\OLId{greek-variable}{Gamma}' \subseteq \OLId{greek-variable}{Gamma}$، مع أن $\OLId{latin-ordinary}{c}$ لا يقع
+في~$\OLId{greek-variable}{Gamma}$، يلزم $\Sat{\OLId{latin-looped}{M}'}{\OLId{greek-variable}{Gamma}'}$ كذلك. فثبت
+$\Sat{\OLId{latin-looped}{M}'}{\OLId{greek-variable}{Gamma}' \cup \OLId{greek-variable}{Delta}'}$ لكل جزء منتهٍ
+$\OLId{greek-variable}{Gamma}' \cup \OLId{greek-variable}{Delta}'$ من $\OLId{greek-variable}{Gamma} \cup \OLId{greek-variable}{Delta}$. إذن كل جزء
+منتهٍ من $\OLId{greek-variable}{Gamma} \cup \OLId{greek-variable}{Delta}$ قابل للإرضاء، فيقضي التراص بقابلية
+$\OLId{greek-variable}{Gamma} \cup \OLId{greek-variable}{Delta}$ للإرضاء. خذ نموذجًا~$\Struct{M}$
+لـ~$\OLId{greek-variable}{Gamma} \cup \OLId{greek-variable}{Delta}$؛ فرَدُّه إلى اللغة الأصلية~$\Lang{L}$
+نموذج لـ~$\OLId{greek-variable}{Gamma}$ غير مغطى، إذ العنصر المفسر لـ~$\OLId{latin-ordinary}{c}$ في التوسيع
+يخالف $\Value{\OLId{latin-ordinary}{t}}{\OLId{latin-looped}{M}}$ لكل حد مغلق~$\OLId{latin-ordinary}{t}$ من~$\Lang{L}$.
+\end{ex}
+
+\begin{ex}
+لتكن !!a{language}~$\Lang{L}$ مشتملة على ال!!{predicate}~$<$،
+وال!!{constant}s $\Obj{0}$ و$\Obj{1}$، وال!!{function}s~$+$ و~$\times$
+و~$-$. نجعل $\OLId{greek-variable}{Gamma}$ مجموعة ال!!{sentence}s في هذه ال!!{language}
+الصادقة في ال!!{structure}~$\Struct{Q}$، ومجالها~$\Rat$ والتفسيرات
+فيها على المعنى المعتاد. فـ~$\OLId{greek-variable}{Gamma}$ تضم جميع
+!!{sentence}s~$\Lang{L}$ التي تصدق على الأعداد النسبية. وليس
+في~$\Rat$، بل ولا في~$\Real$، عدد~$\OLId{latin-ordinary}{r}$ يزيد على~$\OLMathNumeral{0}$ ويقل عن
+$\OLMathNumeral{1}/\OLId{latin-ordinary}{k}$ لكل $\OLId{latin-ordinary}{k} \in \PosInt$. وعدد بهذه الصفة، لو وجد، لكان
+\emph{متناهيًا في الصغر}: غير صفر، ومع ذلك صغيرًا بلا حد.
+سنستخرج بالتراص نماذج لـ~$\OLId{greek-variable}{Gamma}$ توجد فيها هذه الأعداد.
+وليس في اللغة !!a{function} للقسمة؛ فالقسمة على صفر غير معرفة،
+وتفسير ال!!{function}s لا بد أن يكون بدوال كلية. لكن التعبير عن
+$\OLId{latin-ordinary}{r} < \OLMathNumeral{1}/\OLId{latin-ordinary}{k}$ ممكن، لأنه مكافئ لـ$\OLId{latin-ordinary}{r} \cdot \OLId{latin-ordinary}{k} < \OLMathNumeral{1}$. خذ $\OLId{latin-ordinary}{c}$
+!!a{constant} جديدًا، وعرّف $\OLId{greek-variable}{Delta}$:
+\[
+\{\Obj{0} < \OLId{latin-ordinary}{c}\}
+\cup \Setabs{ \OLId{latin-ordinary}{c} \times \num \OLId{latin-ordinary}{k} < \Obj{1} }{\OLId{latin-ordinary}{k} \in \PosInt}
+\]
+حيث $\num{\OLId{latin-ordinary}{k}} = (\Obj{1} + (\Obj{1} + \dots + (\Obj{1} +
+\Obj{1})\dots))$، وفيه $\OLId{latin-ordinary}{k}$ نسخ من~$\Obj{1}$. إذا أخذنا جزءًا
+منتهيًا~$\OLId{greek-variable}{Delta}_\OLMathNumeral{0}$ من~$\OLId{greek-variable}{Delta}$، أمكن اختيار عدد صحيح موجب~$\OLId{latin-looped}{K}$
+بحيث $\OLId{latin-ordinary}{k} < \OLId{latin-looped}{K}$ لكل !!{sentence}~$\OLId{latin-ordinary}{c} \times \num{\OLId{latin-ordinary}{k}} < \Obj{1}$
+في~$\OLId{greek-variable}{Delta}_\OLMathNumeral{0}$. نوسّع $\Struct{Q}$ إلى~$\Struct{Q'}$ بجعل
+$\Assign{\OLId{latin-ordinary}{c}}{\OLId{latin-looped}{Q}'} = \OLMathNumeral{1}/\OLId{latin-looped}{K}$؛ فنجد $\Sat{\OLId{latin-looped}{Q}'}{\OLId{greek-variable}{Gamma}_\OLMathNumeral{0} \cup \OLId{greek-variable}{Delta}_\OLMathNumeral{0}}$
+لكل $\OLId{greek-variable}{Gamma}_\OLMathNumeral{0} \subseteq \OLId{greek-variable}{Gamma}$ منتهية. فالمجموعة $\OLId{greek-variable}{Gamma} \cup \OLId{greek-variable}{Delta}$
+قابلة للإرضاء منتهيًا (فصّل هذا الإثبات تمرينًا)، ومن ثم
+$\OLId{greek-variable}{Gamma} \cup \OLId{greek-variable}{Delta}$ قابلة للإرضاء بالتراص. وكل نموذج~$\Struct{S}$
+لـ~$\OLId{greek-variable}{Gamma} \cup \OLId{greek-variable}{Delta}$ فيه متناهٍ في الصغر، أعني~$\Assign{\OLId{latin-ordinary}{c}}{\OLId{latin-looped}{S}}$.
+\end{ex}
+}{}
+
+\tagprob{FOL}
+\begin{prob}
+في نموذج الحساب المعياري~$\Struct{N}$ لا يوجد !!{element}~$\OLId{latin-ordinary}{k} \in
+\Domain{\OLId{latin-looped}{N}}$ يرضي كل !!{formula}~$\num{\OLId{latin-ordinary}{n}} < \OLId{latin-ordinary}{x}$، حيث
+$\num{\OLId{latin-ordinary}{n}}$ هي $\Obj{0}^{\prime\dots\prime}$ وبها $\OLId{latin-ordinary}{n}$ من رموز
+$\prime$. أثبت بالتراص أن ال!!{sentence}s في لغة الحساب الصادقة في
+نموذجه المعياري~$\Struct{N}$ تصدق أيضًا في
+!!a{structure}~$\Struct{N'}$ فيها !!a{element} \emph{يرضي بالفعل}
+كل !!{formula}~$\num{\OLId{latin-ordinary}{n}} < \OLId{latin-ordinary}{x}$.
+\end{prob}
+\tagendprob
+
+\iftag{FOL}{
+\begin{ex}
+يعبّر منطق الرتبة الأولى، بوجود ال!!{identity}، عن حد أدنى لحجم
+ال!!{domain}. فال!!{sentence}~$!A_{\ge \OLId{latin-ordinary}{n}}$، ومعناها «ثمة
+$\OLId{latin-ordinary}{n}$ أشياء متمايزة على الأقل»، لا تصدق إلا حيث يكون في
+$\Domain{\OLId{latin-looped}{M}}$ ما لا يقل عن~$\OLId{latin-ordinary}{n}$ أشياء. فلو وضعنا
+  \[
+  \OLId{greek-variable}{Delta} = \Setabs{!A_{\ge \OLId{latin-ordinary}{n}}}{\OLId{latin-ordinary}{n} \ge \OLMathNumeral{1}}
+  \]
+لم يكن لـ~$\OLId{greek-variable}{Delta}$ نموذج منتهٍ. وبإلحاق~$\OLId{greek-variable}{Delta}$ بأي نظرية نضمن
+أن نماذج $\OLId{greek-variable}{Gamma} \cup \OLId{greek-variable}{Delta}$ هي نماذج~$\OLId{greek-variable}{Gamma}$ غير المنتهية،
+لا يزيد عليها نموذج ولا ينقص منها.
+
+فاللاتناهي قابل للتعبير في منطق الرتبة الأولى، وأما التناهي فيمنع
+التراص التعبير عنه على هذا النحو. لنفرض وجود مجموعة من
+ال!!{sentence}s~$\Lambda$ تصدق في جميع ال!!{structure}s المنتهية
+ولا تصدق في غيرها. سنبين أن $\OLId{greek-variable}{Delta} \cup \Lambda$ قابلة للإرضاء
+منتهيًا. خذ $\OLId{greek-variable}{Delta}' \cup \Lambda' \subseteq \OLId{greek-variable}{Delta} \cup \Lambda$
+منتهية، حيث $\OLId{greek-variable}{Delta}' \subseteq \OLId{greek-variable}{Delta}$ و$\Lambda' \subseteq \Lambda$.
+إن كانت $\OLId{greek-variable}{Delta}'=\emptyset$ وضعنا $\OLId{latin-ordinary}{n}=\OLMathNumeral{0}$، وإلا اخترنا $\OLId{latin-ordinary}{n}$ أكبر عدد
+يحقق $!A_{\ge \OLId{latin-ordinary}{n}} \in \OLId{greek-variable}{Delta}'$. والمجموعة $\Lambda$ تصدق في كل
+بنية منتهية؛ فلها نموذج~$\Struct{M}$ فيه عدد منتهٍ لا يقل عن~$\OLId{latin-ordinary}{n}$
+من ال!!{element}s. فيكون $\Sat{\OLId{latin-looped}{M}}{\OLId{greek-variable}{Delta}' \cup \Lambda'}$.
+ثم يعطي التراص نموذجًا غير منتهٍ لـ~$\OLId{greek-variable}{Delta} \cup \Lambda$،
+وهو يناقض انحصار صدق $\Lambda$ في ال!!{structure}s المنتهية.
+\end{ex}
+}{}
+
+\end{document}

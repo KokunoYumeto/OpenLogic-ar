@@ -1,0 +1,119 @@
+% Part: computability
+% Chapter: computability-theory
+% Section: rice-theorem
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{thy}{rce}
+\olsection{مبرهنة رايس}
+
+إذا رجعنا إلى البرهان وجدنا أن ما تختص به $\fn{Tot}$ لا يدخل
+في حجة \olref[tot]{prop:total}. وإنما جعلنا $\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y})$ موافقة
+للدالة الثابتة $\OLId{latin-ordinary}{j}(\OLId{latin-ordinary}{y})=\OLMathNumeral{0}$ متى كان $\OLId{latin-ordinary}{x}$ في $\OLId{latin-looped}{K}$، لا غير؛ وكان
+يجوز أن نجعلها موافقة لأي دالة جزئية قابلة
+للحساب في تلك الحالة. ومن هذه الملاحظة تنشأ مبرهنة أعم، حاصلها على وجه
+التقريب أن كل خاصية غير تافهة للدوال القابلة للحساب
+يمتنع قرارها.
+
+ونستحضر أن $\cfind{\OLMathNumeral{0}}$، و$\cfind{\OLMathNumeral{1}}$، و$\cfind{\OLMathNumeral{2}}$،~\dots هو تعدادنا
+المعياري للدوال الجزئية القابلة للحساب.
+
+\begin{thm}[مبرهنة رايس]
+  لتكن $\OLId{latin-looped}{C}$ أي مجموعة من الدوال الجزئية القابلة للحساب، ولتكن $\OLId{latin-looped}{A} =
+  \Setabs{\OLId{latin-ordinary}{n}}{\cfind{\OLId{latin-ordinary}{n}} \in \OLId{latin-looped}{C}}$. إذا كانت $\OLId{latin-looped}{A}$ قابلة للحساب، فإما أن
+  تكون $\OLId{latin-looped}{C}$ خالية، وإما أن تكون $\OLId{latin-looped}{C}$ مجموعة جميع الدوال الجزئية
+  القابلة للحساب.
+\end{thm}
+
+نسمّي $\OLId{latin-looped}{A}$ \emph{مجموعة فهارس} إذا لم تميز بين فهرسين لدالة واحدة:
+فمتى كان $\OLId{latin-ordinary}{n}$ و$\OLId{latin-ordinary}{m}$ «يحسبان» الدالة نفسها، انتميا جميعًا
+إلى $\OLId{latin-looped}{A}$ أو خرجا منها جميعًا. وظاهر أن
+المجموعة~$\OLId{latin-looped}{A}$ الواردة في المبرهنة على هذه الصفة. وبالعكس، متى كانت $\OLId{latin-looped}{A}$
+مجموعة فهارس، وجعلنا $\OLId{latin-looped}{C}$ مجموعة الدوال التي تحسبها، كان
+$\OLId{latin-looped}{A} = \Setabs{\OLId{latin-ordinary}{n}}{\cfind{\OLId{latin-ordinary}{n}} \in \OLId{latin-looped}{C}}$.
+
+\begin{explain}
+فتكون عبارة مبرهنة رايس بهذا الاصطلاح: لا مجموعة فهارس غير تافهة
+تقبل القرار. ولا يستبين المراد حتى نميز
+\emph{البرامج}، أيا كانت لغة كتابتها، من الدوال
+التي تحسبها. فللبرامج، من حيث هي تراكيب رمزية،
+أسئلة يقبل جوابها الحساب: أفي البرنامج أكثر من \OLClassicalDigits{150} رمزًا؟ أيتجاوز \OLClassicalDigits{22}
+سطرًا؟ أتوجد فيه عبارة «while»؟ أترد «hello world» وسيطةً
+لعبارة «print»؟ وأما مبرهنة رايس فتمنع القرار الحسابي لكل سؤال غير تافه عن
+\emph{سلوك} البرنامج. ومثاله: أيتوقف
+البرنامج عند الدخل $\OLMathNumeral{0}$؟ أيتوقف عند دخل ما؟ أيعطي في حال من الأحوال عددًا زوجيًا؟
+\end{explain}
+
+\begin{proof}[برهان مبرهنة رايس]
+لنفرض أن $\OLId{latin-looped}{C}$ غير خالية، وأنها لا تشمل كل الدوال الجزئية القابلة
+للحساب، ولنجعل $\OLId{latin-looped}{A}$ مجموعة فهارس دوال~$\OLId{latin-looped}{C}$. ونثبت أنه
+لو أمكن حساب $\OLId{latin-looped}{A}$ لأمكن حل مسألة التوقف؛ فيلزم أن $\OLId{latin-looped}{A}$ لا
+تقبل الحساب.
+
+ولا يضيق عموم البرهان إذا فرضنا الدالة $\OLId{latin-ordinary}{f}$ التي لا تُعرّف
+في أي موضع خارجة عن $\OLId{latin-looped}{C}$؛ وإلا أقمنا متممة $\OLId{latin-looped}{C}$ مقامها في الحجة
+الآتية. ونأخذ $\OLId{latin-ordinary}{g}$ من~$\OLId{latin-looped}{C}$. فلو استطعنا قرار
+$\OLId{latin-looped}{A}$ لميزنا الفهارس الحاسبة لـ~$\OLId{latin-ordinary}{f}$ من الحاسبة لـ~$\OLId{latin-ordinary}{g}$،
+واستعملنا هذا التمييز في حل مسألة التوقف.
+
+وبيان ذلك أن الدوال الجزئية الشاملة القابلة للحساب تتيح لنا
+تعريف الدالة
+\[
+\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y}) \simeq
+\begin{cases}
+\text{غير معرّفة} & \text{إذا كانت $\cfind{x}(x) \fundefined$} \\
+\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{y}) & \text{خلاف ذلك.}
+\end{cases}
+\]
+فإذا أردنا حساب $\OLId{latin-ordinary}{h}$ بدأنا بحساب $\cfind{\OLId{latin-ordinary}{x}}(\OLId{latin-ordinary}{x})$؛ فإن انتهى
+شرعنا في حساب~$\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{y})$، فإن انتهت \emph{هذه} العملية كذلك أخرجنا
+قيمتها. والصياغة الأدق أن نكتب
+\[
+\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y}) \simeq \Proj{\OLMathNumeral{2}}{\OLMathNumeral{0}}(\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{y}),\fn{Un}(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{x})).
+\]
+حيث $\Proj{\OLMathNumeral{2}}{\OLMathNumeral{0}}(\OLId{latin-ordinary}{z}_\OLMathNumeral{0},\OLId{latin-ordinary}{z}_\OLMathNumeral{1})=\OLId{latin-ordinary}{z}_\OLMathNumeral{0}$ دالة الإسقاط الثنائية التي تعيد
+الوسيطة رقم~$\OLMathNumeral{0}$، وهي قابلة للحساب.
+
+فـ$\OLId{latin-ordinary}{h}$ تركيب من دوال جزئية قابلة للحساب؛ ولا يتعين الطرف الأيمن
+بالقيمة~$\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{y})$ إلا إذا تعينت $\fn{Un}(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{x})$ و$\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{y})$
+جميعًا، ويتعين كلما تعينتا.
+
+فلنثبت~$\OLId{latin-ordinary}{x}$: إن كانت $\cfind{\OLId{latin-ordinary}{x}}(\OLId{latin-ordinary}{x})$ غير معرّفة كانت
+$\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y})$ غير معرّفة لكل~$\OLId{latin-ordinary}{y}$؛ وإذا كانت $\cfind{\OLId{latin-ordinary}{x}}(\OLId{latin-ordinary}{x})$ معرّفة كان
+$\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y}) \simeq \OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{y})$. فلكل~$\OLId{latin-ordinary}{x}$ ثابتة، لا تخلو
+$\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y})$ من أن توافق $\OLId{latin-ordinary}{f}$ أو توافق $\OLId{latin-ordinary}{g}$؛ فقرار ما إذا كانت
+$\cfind{\OLId{latin-ordinary}{x}}(\OLId{latin-ordinary}{x})$ معرّفة هو بعينه تقرير أي الحالتين حاصل. لكن هذا يكافئ
+تقرير ما إذا كانت $\OLId{latin-ordinary}{h}_\OLId{latin-ordinary}{x}(\OLId{latin-ordinary}{y}) \simeq \OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y})$ تنتمي إلى~$\OLId{latin-looped}{C}$، ولو كانت $\OLId{latin-looped}{A}$
+قابلة للحساب لأمكننا فعل ذلك تمامًا.
+
+وتحرير ذلك أن $\OLId{latin-ordinary}{h}$، لكونها جزئية قابلة للحساب، هي الدالة
+$\cfind{\OLId{latin-ordinary}{e}}[\OLMathNumeral{2}]$ عند فهرس ما~$\OLId{latin-ordinary}{e}$. وتفيد مبرهنة $\OLId{latin-ordinary}{s}$-$\OLId{latin-ordinary}{m}$-$\OLId{latin-ordinary}{n}$ بوجود دالة
+عودية بدائية~$\OLId{latin-ordinary}{s}$ بحيث، لكل~$\OLId{latin-ordinary}{x}$،
+$\cfind{\OLId{latin-ordinary}{s}(\OLId{latin-ordinary}{e},\OLId{latin-ordinary}{x})}(\OLId{latin-ordinary}{y})\simeq \OLId{latin-ordinary}{h}_\OLId{latin-ordinary}{x}(\OLId{latin-ordinary}{y})$. والآن، لكل $\OLId{latin-ordinary}{x}$، إذا كانت
+$\cfind{\OLId{latin-ordinary}{x}}(\OLId{latin-ordinary}{x}) \fdefined$ فإن $\cfind{\OLId{latin-ordinary}{s}(\OLId{latin-ordinary}{e},\OLId{latin-ordinary}{x})}$ هي الدالة نفسها~$\OLId{latin-ordinary}{g}$،
+فيكون $\OLId{latin-ordinary}{s}(\OLId{latin-ordinary}{e},\OLId{latin-ordinary}{x})$ في $\OLId{latin-looped}{A}$. وأما إذا كانت $\cfind{\OLId{latin-ordinary}{x}}(\OLId{latin-ordinary}{x})
+\uparrow$ فإن $\cfind{\OLId{latin-ordinary}{s}(\OLId{latin-ordinary}{e},\OLId{latin-ordinary}{x})}$ هي الدالة نفسها~$\OLId{latin-ordinary}{f}$، فلا يكون
+$\OLId{latin-ordinary}{s}(\OLId{latin-ordinary}{e},\OLId{latin-ordinary}{x})$ في~$\OLId{latin-looped}{A}$. وبعبارة أخرى، لكل~$\OLId{latin-ordinary}{x}$، يكون $\OLId{latin-ordinary}{x} \in \OLId{latin-looped}{K}$ إذا وفقط إذا
+كان $\OLId{latin-ordinary}{s}(\OLId{latin-ordinary}{e},\OLId{latin-ordinary}{x}) \in \OLId{latin-looped}{A}$. فلو قبلت $\OLId{latin-looped}{A}$ الحساب لقبلته $\OLId{latin-looped}{K}$، وهو
+محال. فثبت عدم قابلية $\OLId{latin-looped}{A}$ للحساب.
+\end{proof}
+
+ولهذه المبرهنة تطبيقات واسعة، منها النتيجة المباشرة الآتية.
+\begin{cor}
+المجموعات الآتية غير قابلة للقرار.
+\begin{enumerate}
+\item $\Setabs{\OLId{latin-ordinary}{x}}{\text{العدد $17$ في مدى $\cfind{x}$}}$
+\item $\Setabs{\OLId{latin-ordinary}{x}}{\text{$\cfind{x}$ ثابتة}}$
+\item $\Setabs{\OLId{latin-ordinary}{x}}{\text{$\cfind{x}$ كلية}}$
+\item $\Setabs{\OLId{latin-ordinary}{x}}{\text{متى كان $y < y'$ وكانت $\cfind{x}(y) \fdefined$،
+    فإذا كانت $\cfind{x}(y') \fdefined$ كان $\cfind{x}(y) < \cfind{x}(y')$}}$
+\end{enumerate}
+\end{cor}
+
+\begin{proof}
+  إذ كل واحدة من هذه مجموعة فهارس غير تافهة.
+\end{proof}
+
+\end{document}

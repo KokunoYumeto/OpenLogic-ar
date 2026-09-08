@@ -1,0 +1,118 @@
+% Part: propositional-logic
+% Chapter: propositional-logic
+% Section: preliminaries
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pl}{syn}{pre}
+
+\olsection{تمهيدات}
+
+\begin{thm}[\emph{مبدأ الاستقراء على !!{formula}s}]
+  \ollabel{thm:induction}
+  إذا كانت خاصية ما~$P$ متحققة لجميع ما هو ذري من !!{formula}s، وكانت
+  بحيث
+  \begin{enumerate}
+    \tagitem{prvNot}{تتحقق لـ~$\lnot !A$ كلما تحققت
+      لـ~$!A$؛}{}
+    \tagitem{prvAnd}{تتحقق لـ~$(!A \land !B)$
+      كلما تحققت لـ~$!A$ و~$!B$؛}{}
+    \tagitem{prvOr}{تتحقق لـ~$(!A \lor !B)$
+      كلما تحققت لـ~$!A$ و~$!B$؛}{}
+    \tagitem{prvIf}{تتحقق لـ~$(!A \lif !B)$
+      كلما تحققت لـ~$!A$ و~$!B$؛}{}
+    \tagitem{prvIff}{تتحقق لـ~$(!A \liff !B)$
+      كلما تحققت لـ~$!A$ و~$!B$؛}{}
+  \end{enumerate}
+  فإن $P$ تتحقق لجميع !!{formula}s.
+\end{thm}
+
+\begin{proof}
+  لتكن $S$ مجموعة كل ما يتمتع بالخاصية~$P$ من !!{formula}s. من الواضح
+  أن $S \subseteq \Frm[L_0]$. تستوفي~$S$ جميع شروط
+  \olref[fml]{defn:formulas}: فهي تحتوي على كل ما هو ذري من
+  !!{formula}s ومنغلقة تحت !!{operator}s. و~$\Frm[L_0]$ هو
+  أصغر صنف من هذا القبيل، ومن ثم $\Frm[L_0] \subseteq S$. وعليه
+  $\Frm[L_0] = S$، وكل صيغة تتمتع بالخاصية~$P$.
+\end{proof}
+
+\begin{prop}\ollabel{prop:balanced}
+   كل !!{formula} في~$\Frm[L_0]$ \emph{متوازنة}، بمعنى أن فيها من
+   الأقواس اليسرى بقدر ما فيها من الأقواس اليمنى.
+\end{prop}
+
+\begin{prob}
+أثبت \olref[pl][syn][pre]{prop:balanced}
+\end{prob}
+
+\begin{prop} \ollabel{prop:noinit}
+لا يكون أي مقطع ابتدائي حقيقي من !!a{formula} هو نفسه !!a{formula}.
+\end{prop}
+
+\begin{prob}
+  أثبت \olref[pl][syn][pre]{prop:noinit}
+\end{prob}
+
+\begin{prop}[وحدانية القراءة]
+لكل !!{formula}~$!A$ في $ \Frm[L_0]$ تحليل واحد بالضبط بوصفها واحدة من
+الصور الآتية
+\begin{enumerate}
+\tagitem{prvFalse}{$\lfalse$.}{}
+
+\tagitem{prvTrue}{$\ltrue$.}{}
+
+\item $\Obj p_n$ لمتغير ما $\Obj p_n \in  \PVar$.
+
+\tagitem{prvNot}{$\lnot !B$ لـ~$!B$ بوصفه !!{formula} ما.}{}
+
+\tagitem{prvAnd}{$(!B \land !C)$ لـ~$!B$ و~$!C$ من !!{formula}s.}{}
+
+\tagitem{prvOr}{$(!B \lor !C)$ لـ~$!B$ و~$!C$ من !!{formula}s.}{}
+
+\tagitem{prvIf}{$(!B \lif !C)$ لـ~$!B$ و~$!C$ من !!{formula}s.}{}
+
+\tagitem{prvIff}{$(!B \liff !C)$ لـ~$!B$ و~$!C$ من !!{formula}s.}{}
+\end{enumerate}
+وفوق ذلك، هذا التحليل \emph{وحيد}.
+\end{prop}
+
+\begin{proof}
+بالاستقراء على $!A$. فمثلًا، افترض أن لـ~$!A$ تحليلين متميزين على
+أنها $(!B \lif !C)$ و~$(!B' \lif !C')$. عندئذ يجب أن يكون $!B$ و~$!B'$
+متطابقين (وإلا لكان أحدهما مقطعًا ابتدائيًا حقيقيًا من الآخر)؛ فإذا كان
+تحليلا~$!A$ متميزين فلا بد أن يكون ذلك لأن $!C$ و~$!C'$ تحليلان
+متميزان لسلسلة الرموز نفسها، وهذا مستحيل بفرض الاستقراء.
+\end{proof}
+
+
+\begin{defn}[الإحلال المنتظم]
+إذا كان $!A$ و~$!B$ من !!{formula}s، وكان $\Obj p_i$ !!{propositional
+variable}، فإن $\Subst{!A}{!B}{\Obj p_i}$ يرمز إلى نتيجة
+استبدال كل ظهور لـ~$\Obj p_i$ بظهور لـ~$!B$ في~$!A$؛
+وبالمثل، يرمز إلى الإحلال المتزامن لـ~$\Obj p_1$، \dots،~$\Obj p_n$ بما
+يقابلها من !!{formula}s $!B_1$، \dots،~$!B_n$ بالرمز
+$\SSubst{!A}{\subst{!B_1}{\Obj p_1},\dots,\subst{!B_n}{\Obj p_n}}$.
+\end{defn}
+
+\begin{prob} لكل واحدة من خمس !!{formula}s أدناه، حدّد ما إذا كان يمكن
+ التعبير عن !!{formula} على صورة إحلال \( \Subst{!A}{!B}{\Obj p_i} \)
+ حيث تكون \( !A \) هي (i) \( \Obj p_0 \)؛ و(ii) \( ( \lnot \Obj p_0 \land \Obj
+ p_1) \)؛ و(iii) \( ( ( \lnot \Obj p_0 \lif \Obj p_1 ) \land \Obj
+ p_2 ) \). وفي كل حالة حدّد الإحلال ذا الصلة.
+  \begin{enumerate}
+    \item \( \Obj p_1 \)
+    \item \( ( \lnot \Obj p_0 \land \Obj p_0 ) \)
+    \item \( ( ( \Obj p_0 \lor \Obj p_1 ) \land \Obj p_2 )  \)
+    \item \( \lnot ( ( \Obj p_0 \lif \Obj p_1 ) \land \Obj p_2 ) \)
+    \item \( (( \lnot ( \Obj p_0 \lif \Obj p_1 ) \lif ( \Obj p_0 \lor \Obj p_1 )) \land \lnot ( \Obj p_0 \land \Obj p_1 )) \)
+  \end{enumerate}
+\end{prob}
+
+\begin{prob}
+أعط تعريفًا صارمًا رياضيًا لـ~$\Subst{!A}{!B}{p}$ بطريق
+الاستقراء.
+\end{prob}
+
+\end{document}

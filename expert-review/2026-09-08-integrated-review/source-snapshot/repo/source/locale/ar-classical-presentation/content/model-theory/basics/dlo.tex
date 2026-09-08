@@ -1,0 +1,84 @@
+% Part: model-theory
+% Chapter: basics
+% Section: dlo
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{bas}{dlo}
+\section{الترتيبات الخطية الكثيفة}
+
+\begin{defn}
+  \emph{الترتيب الخطي الكثيف بلا طرفين} هو !!a{structure}~$\Struct{M}$
+  للـ!!{language} التي تحتوي !!{predicate} واحدًا ذا موضعين~$<$ يحقق
+  الجمل الآتية:
+  \begin{enumerate}
+  \item $\lforall[\OLId{latin-ordinary}{x}][\lnot \OLId{latin-ordinary}{x} < \OLId{latin-ordinary}{x}]$؛
+  \item $\lforall[\OLId{latin-ordinary}{x}][\lforall[\OLId{latin-ordinary}{y}][\lforall[\OLId{latin-ordinary}{z}][(\OLId{latin-ordinary}{x} < \OLId{latin-ordinary}{y} \lif (\OLId{latin-ordinary}{y} < \OLId{latin-ordinary}{z} \lif \OLId{latin-ordinary}{x}
+    <\OLId{latin-ordinary}{z} ))]]]$؛
+  \item $\lforall[\OLId{latin-ordinary}{x}][\lforall[\OLId{latin-ordinary}{y}][(\OLId{latin-ordinary}{x}< \OLId{latin-ordinary}{y} \lor \eq[\OLId{latin-ordinary}{x}][\OLId{latin-ordinary}{y}] \lor \OLId{latin-ordinary}{y} < \OLId{latin-ordinary}{x})]]$؛
+  \item $\lforall[\OLId{latin-ordinary}{x}][\lexists[\OLId{latin-ordinary}{y}][\OLId{latin-ordinary}{x} < \OLId{latin-ordinary}{y}]]$؛
+  \item $\lforall[\OLId{latin-ordinary}{x}][\lexists[\OLId{latin-ordinary}{y}][\OLId{latin-ordinary}{y} < \OLId{latin-ordinary}{x}]]$؛
+  \item $\lforall[\OLId{latin-ordinary}{x}][\lforall[\OLId{latin-ordinary}{y}][(\OLId{latin-ordinary}{x} < \OLId{latin-ordinary}{y} \lif \lexists[\OLId{latin-ordinary}{z}][(\OLId{latin-ordinary}{x} < \OLId{latin-ordinary}{z} \land
+        \OLId{latin-ordinary}{z} < \OLId{latin-ordinary}{y}))]]]$.
+ \end{enumerate}
+\end{defn}
+
+\begin{thm}\ollabel{thm:cantorQ}
+  كل ترتيبين خطيين كثيفين !!{enumerable} بلا طرفين متشاكلان.
+\end{thm}
+
+\begin{proof}
+  لنأخذ $\Struct{M_1}$ و$\Struct{M_2}$ ترتيبين خطيين كثيفين
+  !!{enumerable} بلا طرفين، ولنضع ${<_\OLMathNumeral{1}} = \Assign{<}{\OLId{latin-looped}{M}_\OLMathNumeral{1}}$ و
+  ${<_\OLMathNumeral{2}} = \Assign{<}{\OLId{latin-looped}{M}_\OLMathNumeral{2}}$. ولتكن $\PIso{I}$ جميع التشاكلات
+  الجزئية بينهما. فـ $\PIso{I}$ غير خالية، لأن
+  $\emptyset \in \PIso{I}$. نريد إثبات الذهاب والإياب لـ $\PIso{I}$؛
+  إذ ينتج منهما $\Struct{M_1} \iso[\OLId{latin-ordinary}{p}] \Struct{M_2}$، ثم يكفي
+  الرجوع إلى \olref[pis]{thm:p-isom1}.
+
+  أما الذهاب لـ $\PIso{I}$، فنأخذ $\OLId{latin-ordinary}{p} \in \PIso{I}$ و
+  $\OLId{latin-ordinary}{a} \in \Domain{\OLId{latin-looped}{M}_\OLMathNumeral{1}}$. إن كانت $\OLId{latin-ordinary}{p}$ خالية، اخترنا أي
+  $\OLId{latin-ordinary}{b} \in \Domain{\OLId{latin-looped}{M}_\OLMathNumeral{2}}$ ووضعنا $\OLId{latin-ordinary}{q} = \{\langle \OLId{latin-ordinary}{a},\OLId{latin-ordinary}{b}\rangle\}$.
+  وإن كان $\OLId{latin-ordinary}{a}$ في مجال $\OLId{latin-ordinary}{p}$، كفانا $\OLId{latin-ordinary}{q}=\OLId{latin-ordinary}{p}$. فبقيت حال $\OLId{latin-ordinary}{p}$
+  غير الخالية و$\OLId{latin-ordinary}{a}$ خارج مجالها. نكتب $\OLId{latin-ordinary}{p}(\OLId{latin-ordinary}{a}_\OLId{latin-ordinary}{i})=\OLId{latin-ordinary}{b}_\OLId{latin-ordinary}{i}$، حيث $\OLId{latin-ordinary}{i}=\OLMathNumeral{1}$،
+  \dots،~$\OLId{latin-ordinary}{n}$، ونرتب المدخلات بحيث
+  $\OLId{latin-ordinary}{a}_\OLMathNumeral{1} <_\OLMathNumeral{1} \OLId{latin-ordinary}{a}_\OLMathNumeral{2} <_\OLMathNumeral{1} \cdots <_\OLMathNumeral{1} \OLId{latin-ordinary}{a}_\OLId{latin-ordinary}{n}$، ولا إخلال بذلك بالعموم.
+  ثم نختار $\OLId{latin-ordinary}{b} \in \Domain{\OLId{latin-looped}{M}_\OLMathNumeral{2}}$ بحسب الحالات الآتية:
+  \begin{enumerate}
+  \item إذا كان $\OLId{latin-ordinary}{a} <_\OLMathNumeral{1} \OLId{latin-ordinary}{a}_\OLMathNumeral{1}$، فليكن $\OLId{latin-ordinary}{b} \in \Domain{\OLId{latin-looped}{M}_\OLMathNumeral{2}}$ بحيث
+    $\OLId{latin-ordinary}{b} <_\OLMathNumeral{2} \OLId{latin-ordinary}{b}_\OLMathNumeral{1}$؛
+  \item إذا كان $\OLId{latin-ordinary}{a}_\OLId{latin-ordinary}{n} <_\OLMathNumeral{1} \OLId{latin-ordinary}{a}$، فليكن $\OLId{latin-ordinary}{b} \in \Domain{\OLId{latin-looped}{M}_\OLMathNumeral{2}}$ بحيث
+    $\OLId{latin-ordinary}{b}_\OLId{latin-ordinary}{n} <_\OLMathNumeral{2} \OLId{latin-ordinary}{b}$؛
+ \item إذا كان $\OLId{latin-ordinary}{a}_\OLId{latin-ordinary}{i} <_\OLMathNumeral{1} \OLId{latin-ordinary}{a} <_\OLMathNumeral{1} \OLId{latin-ordinary}{a}_{\OLId{latin-ordinary}{i}+\OLMathNumeral{1}}$ لبعض $\OLId{latin-ordinary}{i}$، فليكن
+   $\OLId{latin-ordinary}{b} \in \Domain{\OLId{latin-looped}{M}_\OLMathNumeral{2}}$ بحيث $\OLId{latin-ordinary}{b}_\OLId{latin-ordinary}{i} <_\OLMathNumeral{2} \OLId{latin-ordinary}{b} <_\OLMathNumeral{2} \OLId{latin-ordinary}{b}_{\OLId{latin-ordinary}{i}+\OLMathNumeral{1}}$.
+  \end{enumerate}
+  ولا يعسر وجود $\OLId{latin-ordinary}{b}$ على الوجه المطلوب، فإن $\Struct{M_2}$
+  كثيف بلا طرفين. نضع $\OLId{latin-ordinary}{q} = \OLId{latin-ordinary}{p} \cup \{ \langle \OLId{latin-ordinary}{a}, \OLId{latin-ordinary}{b} \rangle \}$،
+  فتكون $\OLId{latin-ordinary}{q} \in \PIso{I}$ وتوسّع $\OLId{latin-ordinary}{p}$ كما أردنا. فثبت الذهاب،
+  والإياب نظيره. وعليه $\Struct{M_1} \iso[\OLId{latin-ordinary}{p}] \Struct{M_2}$؛
+  وتنتج من \olref[pis]{thm:p-isom1} العلاقة
+  $\Struct{M_1} \iso \Struct{M_2}$.
+\end{proof}
+
+\begin{prob}
+  أتم برهان \olref[mod][bas][dlo]{thm:cantorQ} بالتحقق من أن
+  $\PIso{I}$ تحقق خاصية الإياب.
+\end{prob}
+
+\begin{rem}
+  كل ترتيب خطي كثيف $\Struct{S}$، إذا كان !!{enumerable} وبلا
+  طرفين، لزم من \olref{thm:cantorQ} أن $\Struct{S} \iso \Struct{Q}$،
+  حيث $\Struct{Q} = (\Rat, <)$ هو الترتيب الخطي الكثيف
+  !!{enumerable} على الأعداد النسبية~$\Rat$. ولنعد إلى
+  الـ!!{structure}~$\Struct{R} = (\Real, <)$ في
+  \olref[thm]{remark:R}. فقد وجدنا !!a{enumerable}
+  !!{structure}~$\Struct{S}$ تحقق $\Struct{R} \elemequiv \Struct{S}$.
+  وهذه $\Struct{S}$ ترتيب خطي كثيف !!a{enumerable} بلا طرفين،
+  فهي متشاكلة مع الـ!!{structure}~$\Struct{Q}$، ومن ثم مكافئة
+  لها أوليًا. وبالتعدي نحصل على $\Struct{R} \elemequiv \Struct{Q}$.
+  ولنا طريق مباشر إلى ذلك: نثبت $\Struct{R} \iso[\OLId{latin-ordinary}{p}] \Struct{Q}$
+  بحجة الذهاب والإياب المتقدمة نفسها.
+\end{rem}
+\end{document}

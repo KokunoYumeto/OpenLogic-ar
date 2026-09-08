@@ -1,0 +1,33 @@
+% Part: lambda-calculus
+% Chapter: introduction
+% Section: basic-pr-lambda
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{int}{bas}
+\olsection{الدوال العودية البدائية الأساسية \usetoken{S}{lambda definable}}
+
+\begin{lem}
+كل واحدة من الدوال~$\Zero$ و$\Succ$ و$\Proj{n}{i}$ هي !!{lambda definable}.
+\end{lem}
+
+\begin{proof}
+أما~$\Zero$ فيمثلها الحد
+$\lambd[x][\lambd[y][y]]$.
+
+وأما دالة الخلف~$\Succ$ فتعريفها
+$\fn{Succ}(u) = \lambd[x][\lambd[y][x(uxy)]]$. ولتتأمل وجه هذا التعريف:
+لكل عدد~$\num{n}$ نعدّه مكرّرًا، ولكل دالة~$f$، تكون
+$\fn{Succ}(\num{n},f)$ دالة تأخذ~$y$، فتطبق~$f$
+$n$ مرة، بادئةً من~$y$، ثم تزيد تطبيقًا واحدًا.
+
+وأما الإسقاطات فأمرها بيّن:
+$\fn{Proj}^n_i(x_0, \dots, x_{n-1}) = x_i$. فمقتضى اصطلاحنا أن
+$\fn{Proj}^n_i$ هي حد لامبدا
+$\lambd[x_0][\dots \lambd[x_{n-1}][x_i]]$.
+\end{proof}
+
+\end{document}
+

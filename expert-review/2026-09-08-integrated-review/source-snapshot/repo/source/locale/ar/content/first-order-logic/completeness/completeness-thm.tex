@@ -1,0 +1,121 @@
+% Part: first-order-logic
+% Chapter: completeness
+% Section: completeness-theorem
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{com}{cth}}
+      {\olfileid{pl}{com}{cth}}
+
+\olsection{مبرهنة الاكتمال}
+
+\begin{explain}
+لنجمع نتائجنا، فنصل إلى مبرهنة الاكتمال.
+\end{explain}
+
+\begin{thm}[مبرهنة الاكتمال]
+\ollabel{thm:completeness}
+لتكن $\Gamma$ مجموعة من ال!!{sentence}s. إذا كانت $\Gamma$ متسقة، فهي
+قابلة للإرضاء.
+\end{thm}
+
+\begin{proof}
+افترض أن $\Gamma$ متسقة.\iftag{FOL}{ بحسب \olref[hen]{lem:henkin}،
+  توجد مجموعة متسقة مشبعة $\Gamma' \supseteq \Gamma$.}{} وبحسب
+\olref[lin]{lem:lindenbaum} توجد
+$\Gamma^* \supseteq \iftag{FOL}{\Gamma'}{\Gamma}$ متسقة و!!{complete}.
+\iftag{FOL}{
+  لما كان $\Gamma' \subseteq \Gamma^*$، فإن $\Gamma^*$ تحتوي، لكل
+  !!{formula}~$!A(x)$، !!a{sentence} من الصورة
+  \iftag{prvEx}
+        {$\lexists[x][!A(x)] \lif !A(c)$}
+        {$\lnot\lforall[x][!A(x)] \lif \lnot !A(c)$}
+  ومن ثم تكون $\Gamma^*$ مشبعة. وإذا كانت $\Gamma$ لا تحتوي~$\eq$،
+  فبحسب}{بحسب}
+\olref[mod]{lem:truth},
+$\iftag{FOL}{\Sat{M(\Gamma^*)}}{\pSat{v(\Gamma^*)}}{!A}$ إذا وفقط إذا
+كان $!A \in \Gamma^*$. وينتج من ذلك بوجه خاص أنه لكل $!A \in
+\Gamma$، يتحقق $\iftag{FOL}{\Sat{M(\Gamma^*)}}{\pSat{v(\Gamma^*)}}{!A}$،
+فتكون $\Gamma$ قابلة للإرضاء.\iftag{FOL}{
+  وإذا كانت $\Gamma$ تحتوي~$\eq$، فإن \olref[ide]{lem:truth} تعطينا،
+  لكل ال!!{sentence}s~$!A$، أن $\Sat{\equivclass{M}{\approx}}{!A}$ إذا
+  وفقط إذا كان $!A \in \Gamma^*$. وبوجه خاص، يتحقق
+  $\Sat{\equivclass{M}{\approx}}{!A}$ لكل $!A \in \Gamma$، فتكون
+  $\Gamma$ قابلة للإرضاء.}{}
+\end{proof}
+
+\begin{cor}[مبرهنة الاكتمال، الصيغة الثانية]
+\ollabel{cor:completeness}
+لكل $\Gamma$ ولكل !!{sentence}~$!A$: إذا كان $\Gamma \Entails !A$،
+فإن $\Gamma \Proves !A$.
+\end{cor}
+
+\begin{proof}
+لاحظ أن كلًا من $\Gamma$ في \olref{cor:completeness} و
+\olref{thm:completeness} مكمّم كليًا. ولكي لا نخلط بينهما، لنعِد صياغة
+\olref{thm:completeness} باستعمال متغير مختلف: لكل مجموعة من
+ال!!{sentence}s~$\Delta$، إذا كانت $\Delta$ متسقة فهي قابلة للإرضاء.
+وبالمقابل المعاكس، إذا لم تكن $\Delta$ قابلة للإرضاء فهي غير متسقة.
+وسنستعمل ذلك لبرهان النتيجة.
+
+افترض أن $\Gamma \Entails !A$. عندئذ تكون $\Gamma \cup \{\lnot !A\}$
+غير قابلة للإرضاء بحسب \olref[syn][sem]{prop:entails-unsat}. وإذا اتخذنا
+$\Gamma \cup \{\lnot !A\}$ هي $\Delta$، أعطتنا الصيغة السابقة من
+\olref{thm:completeness} أن $\Gamma \cup \{\lnot !A\}$ غير متسقة.
+وبحسب
+\iftag{FOL}{%
+  \tagrefs{prfAX/{fol:axd:prv:prop:prov-incons},
+    prfSC/{fol:seq:prv:prop:prov-incons},
+    prfND/{fol:ntd:prv:prop:prov-incons},
+    prfTab/{fol:tab:prv:prop:prov-incons}}}{%
+  \tagrefs{prfAX/{pl:axd:prv:prop:prov-incons},
+    prfSC/{pl:seq:prv:prop:prov-incons},
+    prfND/{pl:ntd:prv:prop:prov-incons},
+    prfTab/{pl:tab:prv:prop:prov-incons}}},
+نحصل على $\Gamma \Proves !A$.
+\end{proof}
+
+\tagprob{FOL}
+\begin{prob}
+استعمل \olref[fol][com][cth]{cor:completeness} لبرهان
+\olref[fol][com][cth]{thm:completeness}، مبيّنًا بذلك أن صيغتي مبرهنة
+الاكتمال متكافئتان.
+\end{prob}
+\tagendprob
+
+\tagprob{notFOL}
+\begin{prob}
+استعمل \olref[pl][com][cth]{cor:completeness} لبرهان
+\olref[pl][com][cth]{thm:completeness}، مبيّنًا بذلك أن صيغتي مبرهنة
+الاكتمال متكافئتان.
+\end{prob}
+\tagendprob
+
+\tagprob{FOL}
+\begin{prob}
+لكي يكون نسق !!a{derivation} كاملًا، يجب أن تكون قواعده قوية بما يكفي
+لإثبات أن كل مجموعة غير قابلة للإرضاء غير متسقة. فأي قواعد
+ال!!{derivation} كانت لازمة لبرهان الاكتمال؟ وهل توجد من هذه القواعد
+قاعدة لم تُستعمل في أي موضع من البرهان؟ وللإجابة عن هذين السؤالين، ضع
+قائمة أو مخططًا يبيّن أي قواعد ال!!{derivation} استُعملت في أي النتائج
+المؤدية إلى برهان \olref[fol][com][cth]{thm:completeness}. واحرص على
+تسجيل كل استعمال ضمني للقواعد في هذه البراهين.
+\end{prob}
+\tagendprob
+
+\tagprob{notFOL}
+\begin{prob}
+لكي يكون نسق !!a{derivation} كاملًا، يجب أن تكون قواعده قوية بما يكفي
+لإثبات أن كل مجموعة غير قابلة للإرضاء غير متسقة. فأي قواعد
+ال!!{derivation} كانت لازمة لبرهان الاكتمال؟ وهل توجد من هذه القواعد
+قاعدة لم تُستعمل في أي موضع من البرهان؟ وللإجابة عن هذين السؤالين، ضع
+قائمة أو مخططًا يبيّن أي قواعد ال!!{derivation} استُعملت في أي النتائج
+المؤدية إلى برهان \olref[pl][com][cth]{thm:completeness}. واحرص على
+تسجيل كل استعمال ضمني للقواعد في هذه البراهين.
+\end{prob}
+\tagendprob
+
+\end{document}

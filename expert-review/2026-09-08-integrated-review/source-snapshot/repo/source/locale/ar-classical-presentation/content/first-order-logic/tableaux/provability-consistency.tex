@@ -1,0 +1,142 @@
+% Part: first-order-logic
+% Chapter: tableaux
+% Section: provability-consistency
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{tab}{prv}}
+      {\olfileid{pl}{tab}{prv}}
+
+\olsection{\usetoken{S}{derivability} والاتساق}
+
+نثبت هنا خصائص لعلاقة ال!!{derivability}، لها أهميتها في نفسها،
+ونحتاج إلى كل واحدة منها في برهان مبرهنة الاكتمال.
+
+
+\begin{prop}\ollabel{prop:provability-contr}
+  إذا كان $\OLId{greek-variable}{Gamma} \Proves !A$ وكانت $\OLId{greek-variable}{Gamma} \cup \{!A\}$ غير متسقة،
+  فإن $\OLId{greek-variable}{Gamma}$ غير متسقة.
+\end{prop}
+
+\begin{proof}
+نأخذ مجموعتين منتهيتين $\OLId{greek-variable}{Gamma}_\OLMathNumeral{0} = \{!B_\OLMathNumeral{1}, \dots, !B_\OLId{latin-ordinary}{n}\}$ و$\OLId{greek-variable}{Gamma}_\OLMathNumeral{1}
+  =\{!C_\OLMathNumeral{1}, \dots, !C_\OLId{latin-ordinary}{m}\} \subseteq \OLId{greek-variable}{Gamma}$ بحيث
+  \begin{align*}
+    \{\sFmla{\False}{!A}, &
+    \sFmla{\True}{!B_\OLMathNumeral{1}}, \dots, \sFmla{\True}{!B_\OLId{latin-ordinary}{n}}\} \\
+    \{\sFmla{\True}{!A}, &
+    \sFmla{\True}{!C_\OLMathNumeral{1}}, \dots, \sFmla{\True}{!C_\OLId{latin-ordinary}{m}}\}
+  \end{align*}
+  لهما !!{tableau}s مغلقة. وبإجراء~\Cut{} على~$!A$ نضمّهما
+  في !!{tableau} مغلق واحد، فيثبت عدم اتساق~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{0}
+  \cup \OLId{greek-variable}{Gamma}_\OLMathNumeral{1}$. ولأن~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{0}
+  \subseteq \OLId{greek-variable}{Gamma}$ و$\OLId{greek-variable}{Gamma}_\OLMathNumeral{1} \subseteq \OLId{greek-variable}{Gamma}$، كان~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{0} \cup
+  \OLId{greek-variable}{Gamma}_\OLMathNumeral{1} \subseteq \OLId{greek-variable}{Gamma}$؛ ومن ثم عدم اتساق~$\OLId{greek-variable}{Gamma}$.
+\end{proof}
+
+\begin{prop}
+\ollabel{prop:prov-incons}
+$\OLId{greek-variable}{Gamma} \Proves !A$ إذا وفقط إذا كانت $\OLId{greek-variable}{Gamma} \cup \{\lnot !A\}$ غير متسقة.
+\end{prop}
+
+\begin{proof}
+أما إذا كان~$\OLId{greek-variable}{Gamma} \Proves !A$، فلدينا !!{tableau} مغلق لـ
+\[
+\{\sFmla{\False}{!A},
+\sFmla{\True}{!B_\OLMathNumeral{1}}, \dots, \sFmla{\True}{!B_\OLId{latin-ordinary}{n}}\}
+\]
+نقدّم له إجراء~$\TRule{\True}{\lnot}$، فيصير !!{tableau} مغلقًا لـ
+\[
+\{\sFmla{\True}{\lnot !A},
+\sFmla{\True}{!B_\OLMathNumeral{1}}, \dots, \sFmla{\True}{!B_\OLId{latin-ordinary}{n}}\}.
+\]
+
+وأما إذا كان للمجموعة الأخيرة !!{tableau} مغلق، فنردّه إلى
+!!{tableau} مغلق للأولى: نحذف كل نتيجة أُخذت بقاعدة
+\TRule{\True}{\lnot} من الافتراض الأول~$\sFmla{\True}{\lnot !A}$،
+ونحذف هذا الافتراض، ونضع مكانه~$\sFmla{\False}{!A}$.
+ولبيان بقاء الإغلاق نفصّل: إن كان الفرع قد أغلق لاشتماله على نتيجة
+\TRule{\True}{\lnot} المأخوذة من~$\sFmla{\True}{\lnot !A}$،
+وهي~$\sFmla{\False}{!A}$، بقي الفرع المقابل في ال!!{tableau} الجديد
+مغلقًا، لأن تلك النتيجة صارت افتراضًا. وإن كان إغلاق الفرع القديم
+لاجتماع~$\sFmla{\True}{\lnot !A}$ و$\sFmla{\False}{\lnot
+  !A}$، أجرينا~$\TRule{\False}{\lnot}$ على
+$\sFmla{\False}{\lnot !A}$، فنتج~$\sFmla{\True}{!A}$،
+وأغلق الفرع مع الافتراض المضاف~$\sFmla{\False}{!A}$.
+\end{proof}
+
+\begin{prob}
+أثبت أن $\OLId{greek-variable}{Gamma} \Proves \lnot !A$ إذا وفقط إذا كانت $\OLId{greek-variable}{Gamma} \cup \{!A\}$ غير متسقة.
+\end{prob}
+
+\begin{prop}\ollabel{prop:explicit-inc}
+  إذا كان $\OLId{greek-variable}{Gamma} \Proves !A$ و$\lnot !A \in \OLId{greek-variable}{Gamma}$، فإن $\OLId{greek-variable}{Gamma}$
+  غير متسقة.
+\end{prop}
+
+\begin{proof}
+  نفرض~$\OLId{greek-variable}{Gamma} \Proves !A$ و$\lnot !A \in \OLId{greek-variable}{Gamma}$، فنأخذ
+  $!B_\OLMathNumeral{1}$, \dots, $!B_\OLId{latin-ordinary}{n} \in \OLId{greek-variable}{Gamma}$ بحيث
+  \[
+  \{\sFmla{\False}{!A}, \sFmla{\True}{!B_\OLMathNumeral{1}}, \dots, \sFmla{\True}{!B_\OLId{latin-ordinary}{n}}\}
+  \]
+  لها جدول دلالي مغلق. نجعل مكان الافتراض~\sFmla{\False}{!A}
+  الافتراض~\sFmla{\True}{\lnot !A}، ثم نثبت بعد الافتراضات نتيجة
+  \TRule{\True}{\lnot} على~\sFmla{\True}{\lnot !A}.
+  فما كان من !!{sentence} في ال!!{tableau} مبرّرًا بالسطر~$\OLMathNumeral{1}$
+  من ال!!{tableau} القديم، صار مبرّرًا بالسطر~$\OLId{latin-ordinary}{n}+\OLMathNumeral{2}$.
+  فإغلاق ال!!{tableau} القديم يستتبع إغلاق الجديد، ويثبت به عدم
+  اتساق~$\OLId{greek-variable}{Gamma}$، إذ لم تخرج الافتراضات عن~$\OLId{greek-variable}{Gamma}$.
+\end{proof}
+
+\begin{prop}\ollabel{prop:provability-exhaustive}
+  إذا كانت كل من $\OLId{greek-variable}{Gamma} \cup \{!A\}$ و$\OLId{greek-variable}{Gamma} \cup \{\lnot !A\}$
+  غير متسقة، فإن $\OLId{greek-variable}{Gamma}$ غير متسقة.
+\end{prop}
+
+\begin{proof}
+  نأخذ~$!B_\OLMathNumeral{1}$, \dots, $!B_\OLId{latin-ordinary}{n} \in \OLId{greek-variable}{Gamma}$ و$!C_\OLMathNumeral{1}$, \dots,
+  $!C_\OLId{latin-ordinary}{m} \in \OLId{greek-variable}{Gamma}$ بحيث
+  \begin{align*}
+    \{\sFmla{\True}{!A}, &
+    \sFmla{\True}{!B_\OLMathNumeral{1}}, \dots, \sFmla{\True}{!B_\OLId{latin-ordinary}{n}}\} \text{ و}\\
+    \{\sFmla{\True}{\lnot !A}, &
+    \sFmla{\True}{!C_\OLMathNumeral{1}}, \dots, \sFmla{\True}{!C_\OLId{latin-ordinary}{m}}\}
+  \end{align*}
+  لهما !!{tableau}s مغلقة. ونبني منهما !!{tableau} واحدًا يثبت عدم
+  اتساق~$\OLId{greek-variable}{Gamma}$: نجمع~$\sFmla{\True}{!B_\OLMathNumeral{1}}$،
+  \dots، $\sFmla{\True}{!B_\OLId{latin-ordinary}{n}}$ مع~$\sFmla{\True}{!C_\OLMathNumeral{1}}$، \dots،
+  $\sFmla{\True}{!C_\OLId{latin-ordinary}{m}}$ افتراضاتٍ، ثم نجري~\Cut{}.
+  فينشأ فرعان، أولهما يبتدئ بـ~$\sFmla{\True}{!A}$،
+  وثانيهما بـ~$\sFmla{\False}{!A}$.
+
+  % تصحيح مصدر (0106-I1): أغفل الأصل الإنجليزي وخط الأساس العربي تجديد الثوابت المستجدة قبل إلحاق جدولين مستقلين.
+  وقبل إلحاق الجدولين بالفرعين نعيد تسمية كل ثابت مستجد فيهما تسميةً جديدةً، بحيث لا يرد في افتراضات الجدول الآخر ولا في شيء واقع فوق موضع الإلحاق.
+  نلحق بالجانب الأيسر ما تحت الافتراضات من ال!!{tableau} الأول.
+  وتبقى إجراءاته صحيحة؛ فإن افتراضات ال!!{tableau} الأول جميعًا،
+  ومنها~$\sFmla{\True}{!A}$، حاضرة على هذا الجانب.
+  فتغلق الفروع جميعًا تحت~$\sFmla{\True}{!A}$.
+
+  ونلحق بالجانب الأيمن ما تحت الافتراضات من ال!!{tableau} الثاني،
+  بعد إسقاط نتائج~$\TRule{\True}{\lnot}$ على
+  $\sFmla{\True}{\lnot !A}$. فإن نتيجة~$\TRule{\True}{\lnot}$
+  على~$\sFmla{\True}{\lnot !A}$ هي~$\sFmla{\False}{!A}$،
+  وهي حاضرة أصلًا، إذ أنتجتها~\Cut{} في يمين ال!!{tableau} المركّب.
+
+  فإن كان إغلاق فرع من الجدول الثاني ناشئًا من اجتماع الافتراض
+  $\sFmla{\True}{\lnot !A}$، الذي لم يبق افتراضًا في ال!!{tableau}
+  المركّب، مع~$\sFmla{\False}{\lnot !A}$، أجرينا
+  $\TRule{\False}{\lnot}$ على~$\sFmla{\False}{\lnot !A}$،
+  فحصل~$\sFmla{\True}{!A}$. وعندئذ يغلق الفرع المقابل في
+  ال!!{tableau} المركّب مع نتيجة~\Cut{} اليمنى،
+  وهي~$\sFmla{\False}{!A}$. وأما الفرع الذي أغلق في ال!!{tableau}
+  الثاني لسبب آخر، فيبقى نظيره مغلقًا في ال!!{tableau} المركّب؛
+  لأن ال!!{signed formula}s، سوى~$\sFmla{\True}{\lnot !A}$،
+  باقية على الفرع، فما ورد منها في ال!!{tableau} الثاني القديم
+  يرد في الفرع المقابل من ال!!{tableau} المركّب.
+  \end{proof}
+
+\end{document}

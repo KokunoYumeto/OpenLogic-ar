@@ -1,0 +1,87 @@
+% Part: second-order-logic
+% Chapter: syntax-and-semantics
+% Section: terms-formulas
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sol}{syn}{frm}
+
+\olsection{الحدود و\printtoken{P}{formula}}
+
+كما في منطق الرتبة الأولى، تبنى تعبيرات منطق الرتبة الثانية من معجم
+أساسي يحتوي \emph{!!{variable}s} و\emph{!!{constant}s}
+و\emph{!!{predicate}s}، وأحيانًا \emph{!!{function}s}. ومنها، مع
+الروابط المنطقية والمكممات وعلامات الترقيم كالأقواس والفواصل، تتكون
+\emph{الحدود} و\emph{!!{formula}s}. والفرق هو أن منطق الرتبة الثانية
+يحتوي، فضلًا عن متغيرات الأفراد، متغيرات للعلاقات والدوال، ويسمح
+بالتكميم عليها. ولذلك تكون الرموز المنطقية لمنطق الرتبة الثانية هي رموز
+منطق الرتبة الأولى مضافًا إليها ما يأتي:
+
+\begin{enumerate}
+\item مجموعة !!{denumerable} من !!{variable}s العلاقات من الرتبة
+  الثانية لكل رتبة~$n$: $\Obj V_0^n$، و$\Obj V_1^n$، و$\Obj V_2^n$،
+  و\dots
+\item مجموعة !!{denumerable} من !!{variable}s الدوال من الرتبة
+  الثانية: $\Obj u_0^n$، و$\Obj u_1^n$، و$\Obj u_2^n$، و\dots
+\end{enumerate}
+
+وكما نستعمل~$x$ و$y$ و$z$ متغيرات فوقية لمتغيرات الرتبة الأولى
+$\Obj v_i$، سنستعمل~$X$ و$Y$ و$Z$، إلخ، متغيرات فوقية لـ
+$\Obj V_i^n$، ونستعمل~$u$ و$v$، إلخ، متغيرات فوقية لـ$\Obj u_i^n$.
+
+\begin{explain}
+تحدد الرموز غير المنطقية للغة من الرتبة الثانية بالطريقة نفسها التي
+تحدد بها لغة من الرتبة الأولى: بسرد !!{constant}s و!!{function}s
+و!!{predicate}s فيها.
+
+تدرج الـ!!{identity}~$\eq$ عادةً في منطق الرتبة الأولى. وفي منطق
+الرتبة الأولى تكون الرموز غير المنطقية للغة~$\Lang{L}$ حاسمة لكي
+نستطيع التعبير عن أي شيء مهم. وثمة بالطبع !!{sentence}s لا تستعمل
+رموزًا غير منطقية، لكن يصعب قول شيء مهم باستعمال~$\eq$ وحدها. أما في
+منطق الرتبة الثانية، فلأن لدينا موردًا غير محدود من متغيرات العلاقات
+والدوال، نستطيع أن نقول كل ما يمكن قوله في لغة من الرتبة الأولى حتى
+من دون مورد خاص من الرموز غير المنطقية.
+\end{explain}
+
+\begin{defn}[حدود الرتبة الثانية]
+تعرف مجموعة \emph{حدود الرتبة الثانية} للغة~$\Lang L$، أي
+$\TrmSOL[L]$، بإضافة البند الآتي إلى
+\olref[fol][syn][frm]{defn:terms}:
+\begin{enumerate}
+\item إذا كان~$u$ متغيرًا داليًا ذا~$n$ مواضع، وكانت
+$t_1$، و\dots، و$t_n$ حدودًا، فإن~$\Atom{u}{t_1, \ldots, t_n}$ حد.
+\end{enumerate}
+\end{defn}
+
+\begin{explain}
+وهكذا يبدو حد الرتبة الثانية كحد الرتبة الأولى تمامًا، غير أنه حيث
+يحتوي حد الرتبة الأولى على !!a{function}~$\Obj{f^n_i}$ قد يحتوي حد
+الرتبة الثانية بدلًا منها على متغير دالي~$\Obj{u^n_i}$.
+\end{explain}
+
+\begin{defn}[\usetoken{s}{formula} الرتبة الثانية]
+تعرف مجموعة \emph{!!{formula}s الرتبة الثانية}~$\FrmSOL[L]$ للغة
+$\Lang L$ بإضافة البنود الآتية إلى
+\olref[fol][syn][frm]{defn:formulas}:
+\begin{enumerate}
+\item إذا كان~$X$ متغيرًا محموليًا ذا~$n$ مواضع، وكانت
+$t_1$، و\dots، و$t_n$ حدودًا من الرتبة الثانية للغة~$\Lang L$، فإن
+$\Atom{X}{t_1,\ldots, t_n}$ !!{formula} ذرية.
+
+\tagitem{prvAll}{إذا كانت~$!A$ !!a{formula} وكان~$u$ متغيرًا داليًا،
+  فإن~$\lforall[u][!A]$ !!a{formula}.}{}
+
+\tagitem{prvAll}{إذا كانت~$!A$ !!a{formula} وكان~$X$ متغيرًا محموليًا،
+  فإن~$\lforall[X][!A]$ !!a{formula}.}{}
+
+\tagitem{prvEx}{إذا كانت~$!A$ !!a{formula} وكان~$u$ متغيرًا داليًا،
+  فإن~$\lexists[u][!A]$ !!a{formula}.}{}
+
+\tagitem{prvEx}{إذا كانت~$!A$ !!a{formula} وكان~$X$ متغيرًا محموليًا،
+  فإن~$\lexists[X][!A]$ !!a{formula}.}{}
+\end{enumerate}
+\end{defn}
+
+\end{document}

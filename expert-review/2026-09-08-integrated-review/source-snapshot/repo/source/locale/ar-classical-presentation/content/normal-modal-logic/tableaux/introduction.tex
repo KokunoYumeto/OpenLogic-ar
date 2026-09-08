@@ -1,0 +1,56 @@
+% Part: normal-modal-logic
+% Chapter: tableaux
+% Section: introduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{tab}{int}
+
+\olsection{مقدمة}
+
+ال!!^{tableau}s أشجار مخصوصة تتفرع إلى أسفل، وعُقَدها !!{signed
+  formula}s. والمراد بذلك أزواج تجمع علامة صدق ($\True$ أو
+$\False$) و!!a{sentence}، على أحد الوجهين:
+\[
+\sFmla{\True}{!A} \text{ أو } \sFmla{\False}{!A}.
+\]
+نبتدئ !!^a{tableau} بجملة من \emph{الافتراضات}، ثم لا نزيد
+!!{signed formula} إلا بقاعدة من قواعد الاستدلال. فمن القواعد ما يلحق
+!!{signed formula}s واحدة أو أكثر بطرف الشجرة، ومنها ما ينشئ طرفين
+جديدين، فتتشعب الشجرة شعبتين. وتكون ال!!{signed formula}s الناتجة ذات
+!!{formula} أقل تعقيدًا مما في ال!!{signed formula} التي أُجريت عليها
+القاعدة. فإذا اجتمع في شعبة~$\sFmla{\True}{!A}$ و$\sFmla{\False}{!A}$
+قلنا إنها \emph{مغلقة}. ومتى أُغلقت شعب !!a{tableau} كلها أُغلقت
+ال!!{tableau} بأسرها. فال!!{tableau} المغلقة !!a{derivation} تثبت أن
+مجموعة ال!!{signed formula}s التي افتُتحت بها ال!!{tableau} غير قابلة
+للإرضاء. وبهذا نعرّف العلاقة~$\Proves$: يكون~$\OLId{greek-variable}{Gamma} \Proves !A$
+إذا وفقط إذا وجدت مجموعة منتهية
+$\OLId{greek-variable}{Gamma}_\OLMathNumeral{0}=\{!B_\OLMathNumeral{1},\dots,!B_\OLId{latin-ordinary}{n}\}\subseteq\OLId{greek-variable}{Gamma}$ لها !!{tableau} مغلقة
+تبدأ بالافتراضات:
+\[
+\{\sFmla{\False}{!A}, \sFmla{\True}{!B_\OLMathNumeral{1}}, \dots, \sFmla{\True}{!B_\OLId{latin-ordinary}{n}}\}.
+\]
+
+وأما المنطق الجهوي فيحتاج إلى توسيع معنى !!{signed formula} وإلى
+قواعد للمؤثرات~\iftag{prvBox}{$\Box$\iftag{prvDiamond}{ و
+    $\Diamond$}{}}{$\Diamond$}. فلا تقتصر ال!!{formula}s، بعد العلامة
+($\True$ أو~$\False$)، في ال!!{tableau}s الجهوية على ذلك، بل تلحقها
+\emph{بادئات}~$\sigma$، وهي متتاليات غير خالية من الأعداد الصحيحة
+الموجبة؛ أي~$\sigma \in (\PosInt)^*\setminus\{\emptyseq\}$.
+ونكتبها من غير القوسين~$\tuple{\ }$، ونجعل بين ال!!{element}s المفردة
+نقطًا~$.$ عوض الفواصل~$,$. فإذا كانت~$\sigma$ بادئة كان~$\sigma.\OLId{latin-ordinary}{n}$
+اختصارًا لـ~$\sigma\concat\tuple{\OLId{latin-ordinary}{n}}$؛ فإن كان~$\sigma=\OLMathNumeral{1}.\OLMathNumeral{2}.\OLMathNumeral{1}$ مثلًا،
+كان~$\sigma.\OLMathNumeral{3}$ هو~$\OLMathNumeral{1}.\OLMathNumeral{2}.\OLMathNumeral{1}.\OLMathNumeral{3}$. وعلى هذا تكون
+\[
+\sFmla{\True}{\Box !A \lif !A}[\OLMathNumeral{1}.\OLMathNumeral{2}]
+\]
+هي \emph{!!{signed formula} ذات بادئة} (أو اختصارًا \emph{!!{formula}
+  ذات بادئة}).
+
+ومأخذ هذا الاصطلاح أن البادئة اسم لعالم في نموذج يُرجى أن يرضي
+ال!!{formula}s الواقعة على شعبة من !!a{tableau}. فإن سمّت~$\sigma$
+عالمًا، سمّت~$\sigma.\OLId{latin-ordinary}{n}$ عالمًا ينفذ إليه العالم المسمى بـ~$\sigma$.
+
+\end{document}

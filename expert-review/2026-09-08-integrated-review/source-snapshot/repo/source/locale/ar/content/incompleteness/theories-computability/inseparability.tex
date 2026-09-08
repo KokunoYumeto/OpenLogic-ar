@@ -1,0 +1,47 @@
+% Part: incompleteness
+% Chapter: theories-computability
+% Section: inseparability
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{tcp}{ins}
+
+\olsection{الجمل القابلة للإثبات والدحض في $\Th{Q}$ غير قابلة للفصل حسابيًا}
+
+
+لتكن $\Th{\bar Q}$ مجموعة الجمل التي تكون {\em نفياتها} قابلة
+للإثبات في~$\Th{Q}$؛ أي
+$\Th{\bar Q}=\Setabs{!A}{\Th{Q}\Proves\lnot !A}$. وتذكّر أن
+المجموعتين المتباينتين $A$ و$B$ تسميان غير قابلتين للفصل حسابيًا إذا
+لم توجد مجموعة قابلة للحساب~$C$ بحيث $A\subseteq C$ و
+$B\subseteq\Complement{C}$.
+
+\begin{lem}
+$\Th{Q}$ و$\Th{\bar Q}$ غير قابلتين للفصل حسابيًا.
+\end{lem}
+
+\begin{proof}
+افترض أن $C$ مجموعة قابلة للحساب بحيث $\Th{Q}\subseteq C$ و
+$\Th{\bar Q}\subseteq\Complement{C}$. ولتكن $R(x,y)$ العلاقة
+\begin{quote}
+يرمز $x$ صيغة~$!D(u)$ وتنتمي $!D(\num y)$ إلى~$C$.
+\end{quote}
+سنبيّن أن $R(x,y)$ علاقة شاملة قابلة للحساب، فنحصل على تناقض.
+
+افترض أن $S(y)$ قابلة للحساب وتمثلها $!D_S(u)$ في~$\Th{Q}$. عندئذ
+\begin{eqnarray*}
+S(n) & \lif & \Th{Q} \Proves !D_S(\num n) \\
+& \lif & !D_S(\num n) \in C
+\end{eqnarray*}
+و
+\begin{eqnarray*}
+\lnot S(n) & \lif & \Th{Q} \Proves \lnot !D_S(\num n) \\
+& \lif & !D_S(\num n) \in \Th{\bar Q} \\
+& \lif & !D_S(\num n) \not\in C
+\end{eqnarray*}
+ومن ثم تكافئ $S(y)$ العلاقة $R(\#(!D_S(u)),y)$.
+\end{proof}
+
+\end{document}

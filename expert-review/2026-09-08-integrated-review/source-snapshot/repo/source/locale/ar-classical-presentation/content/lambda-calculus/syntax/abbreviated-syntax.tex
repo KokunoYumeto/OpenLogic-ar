@@ -1,0 +1,41 @@
+% Part: lambda-calculus
+% Chapter: syntax
+% Section: abbreviated-syntax
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{syn}{abb}
+\olsection{النحو المختصر}
+
+قد تطول كتابة الحدود على مقتضى~\olref[trm]{defn:term} وتثقل؛
+فلذلك نستعمل نحوًا أوجز، بشرط أن تبقى قراءة كل حد وحيدة.
+ومن الاصطلاحات الشائعة في ذلك ما يسمى \emph{الحدود المختصرة}، وقواعده الآتية.
+
+\begin{enumerate}
+\item إذا أسقطت الأقواس، جمع التطبيق من جهة اليسار إلى اليمين.
+  فإذا كانت~$\OLId{latin-looped}{M}$ و$\OLId{latin-looped}{N}$ و$\OLId{latin-looped}{P}$ و~$\OLId{latin-looped}{Q}$ حدودًا، فالكتابة~$MNPQ$ تختصر~$(((MN)\OLId{latin-looped}{P})\OLId{latin-looped}{Q})$.
+\item وإذا أسقطت الأقواس، امتد مجال تجريد لامبدا إلى أقصى ما تسمح به الكتابة.
+  ولذلك تقرأ~$\lambd[\OLId{latin-ordinary}{x}][MNP]$ بمعنى~$(\lambd[\OLId{latin-ordinary}{x}][MNP])$.
+\item ويجوز أن يجمع رمز لامبدا تجريد عدة متغيرات؛ فمثلًا
+  $\lambd[xyz][\OLId{latin-looped}{M}]$ كتابة مختصرة للحد
+  $\lambd[\OLId{latin-ordinary}{x}][\lambd[\OLId{latin-ordinary}{y}][\lambd[\OLId{latin-ordinary}{z}][\OLId{latin-looped}{M}]]]$.
+\end{enumerate}
+
+ومن أمثلة هذه القواعد أن
+\[
+\lambd[xy][xxyx \lambd[\OLId{latin-ordinary}{z}][xz]]
+\]
+تقوم مقام
+\[
+(\lambd[\OLId{latin-ordinary}{x}][(\lambd[\OLId{latin-ordinary}{y}][((((xx)\OLId{latin-ordinary}{y})\OLId{latin-ordinary}{x})(\lambd[\OLId{latin-ordinary}{z}][(xz)]))])]).
+\]
+
+\begin{prob}
+اكتب الحد المختصر~$\lambd[\OLId{latin-ordinary}{g}][(\lambd[\OLId{latin-ordinary}{x}][\OLId{latin-ordinary}{g} (\OLId{latin-ordinary}{x} \OLId{latin-ordinary}{x})])
+  \lambd[\OLId{latin-ordinary}{x}][\OLId{latin-ordinary}{g} (\OLId{latin-ordinary}{x} \OLId{latin-ordinary}{x})]]$ بإثبات جميع الأقواس.
+\end{prob}
+
+\end{document}
+

@@ -1,0 +1,289 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{choice}{vitali}
+\olsection{ملحق: مفارقة فيتالي}
+
+لا يستقيم لنا حكم راسخ في قبول بناء باناخ--تارسكي حتى ننظر في برهانه.
+غير أن بسطه يفتقر إلى قدر من الجبر يجاوز ما يتسع له هذا الموضع. ونستطيع
+مع ذلك أن نسوق إشارات وجيزة تنير بعض سبيل البرهان،\footnote{لمعالجة
+أوفى بكثير، انظر~\cite{Weston2003} أو~\cite{Wagon2016}.} وذلك بالنظر
+في النتيجة الآتية.
+
+\begin{thm}[مفارقة فيتالي (في $\ZFC$)]\ollabel{vitaliparadox}
+يمكن تفكيك أية دائرة قطعًا معدودة العدد، ثم تعاد هذه القطع، بالدوران
+والإزاحة، فتؤلف دائرتين مماثلتين للدائرة الأولى.
+\end{thm}
+
+وبرهان مفارقة فيتالي أيسر كثيرًا من برهان باناخ--تارسكي. ونسبناها إلى
+فيتالي لأنها ناشئة عن بنائه، في~\citeyear{Vitali1905}، مجموعة غير
+قابلة للقياس. وأما جهة نظرية المجموعات في البرهانين فمتقاربة جدًا.
+والفارق الأعظم أن تفكيك باناخ--تارسكي متناه، وتفكيك فيتالي غير متناه
+لكنه معدود. وبعبارة~\citet{Weston2003}، فإن مفارقة فيتالي «ليست
+قطعًا بمثل إدهاش مفارقة باناخ--تارسكي، لكنها تبين أن المفارقات
+الهندسية قد تقع حتى في أوضاع `بسيطة'.»
+
+ومفارقة فيتالي في شكل ذي بعدين، وهو الدائرة؛ فلنعمل على
+المستوى~$\Real^\OLMathNumeral{2}$. ولتكن~$\rotationsgroup$ مجموعة دورانات النقاط في
+اتجاه عقارب الساعة، حول الأصل، بزوايا معاملاتُها نسبية:
+$\OLMathNumeral{2}\pi \OLId{latin-ordinary}{q}$، حيث~$\OLId{latin-ordinary}{q} \in \Rat \cap [\OLMathNumeral{0},\OLMathNumeral{1})$. ولـ~$\rotationsgroup$ الخواص
+الجبرية الآتية، وسيتضح معناها من البرهان إن لم يتضح من العبارة.
+
+\begin{lem}\ollabel{rotationsgroupabelian}
+تكوّن~$\rotationsgroup$ {group} أبيلية تحت تركيب الدوال.
+\end{lem}
+
+\begin{proof}
+لنكتب~$\OLMathNumeral{0}_{\rotationsgroup}$ للدوران بزاوية~$\OLMathNumeral{0}$. فهذا محايد في
+$\rotationsgroup$، لأن
+$\comp{\OLMathNumeral{0}_{\rotationsgroup}}{\rho} = \comp{\rho}{\OLMathNumeral{0}_{\rotationsgroup}} =
+\rho$ لكل~$\rho \in \rotationsgroup$.
+
+وهي مغلقة تحت التركيب؛ فإذا كان~$\rho$ و$\sigma$ دورانين بزاويتين
+$\OLMathNumeral{2}\pi \OLId{latin-ordinary}{q}$ و$\OLMathNumeral{2}\pi \OLId{latin-ordinary}{r}$، كان تركيبهما دورانًا بزاوية
+$\OLMathNumeral{2}\pi((\OLId{latin-ordinary}{q}+\OLId{latin-ordinary}{r}) \bmod \OLMathNumeral{1})$، وهذا عدد نسبي يقع في~$[\OLMathNumeral{0},\OLMathNumeral{1})$.
+
+ولكل عنصر معكوس. فإذا كان~$\rho \in \rotationsgroup$ دورانه بزاوية
+$\OLMathNumeral{2}\pi \OLId{latin-ordinary}{q}$، كان معكوسه الدوران بزاوية~$\OLMathNumeral{0}$ إن كان~$\OLId{latin-ordinary}{q}=\OLMathNumeral{0}$، وبزاوية
+$\OLMathNumeral{2}\pi(\OLMathNumeral{1}-\OLId{latin-ordinary}{q})$ إن كان~$\OLId{latin-ordinary}{q}>\OLMathNumeral{0}$؛ وفي الحالين
+$\rho^{-\OLMathNumeral{1}} \in \rotationsgroup$ و
+$\rho \circ \rho^{-\OLMathNumeral{1}} = \OLMathNumeral{0}_\rotationsgroup$.
+
+والتركيب تجميعي:
+$\comp{\rho}{(\comp{\sigma}{\tau})} =
+\comp{(\comp{\rho}{\sigma})}{\tau}$ لكل
+$\rho, \sigma, \tau \in \rotationsgroup$.
+
+وهو تبادلي أيضًا:~$\comp{\rho}{\sigma} =
+\comp{\sigma}{\rho}$ لكل~$\rho, \sigma \in \rotationsgroup$.
+\end{proof}
+
+بل يمكن شطر~$\rotationsgroup$ نصفين، ثم استرداد المجموعة كلها من أي
+واحد منهما.
+
+\begin{lem}\ollabel{disjointgroup}
+يوجد تقسيم لـ$\rotationsgroup$ إلى مجموعتين منفصلتين،
+$\rotationsgroup_{\OLMathNumeral{1}}$ و$\rotationsgroup_{\OLMathNumeral{2}}$، وكل منهما أساس لاستعادة
+$\rotationsgroup$.
+\end{lem}
+
+\begin{proof}
+اجعل~$\rotationsgroup_{\OLMathNumeral{1}}$ مؤلفة من الدورانات ذات الزوايا~$\OLMathNumeral{2}\pi \OLId{latin-ordinary}{q}$ حيث
+$\OLId{latin-ordinary}{q} \in \Rat \cap [\OLMathNumeral{0},\nicefrac{\OLMathNumeral{1}}{\OLMathNumeral{2}})$، ولتكن
+$\rotationsgroup_{\OLMathNumeral{2}} = \rotationsgroup \setminus
+\rotationsgroup_\OLMathNumeral{1}$، أي الدورانات التي يكون فيها
+$\OLId{latin-ordinary}{q} \in \Rat \cap [\nicefrac{\OLMathNumeral{1}}{\OLMathNumeral{2}},\OLMathNumeral{1})$. ويدل الجبر الأولي على أن
+تضعيف~$\OLId{latin-ordinary}{q}$ بترديد~$\OLMathNumeral{1}$ يرسل كل نصف منهما تقابليًا إلى
+$\Rat \cap [\OLMathNumeral{0},\OLMathNumeral{1})$. فمن ثم، لكل~$\OLId{latin-ordinary}{i}=\OLMathNumeral{1},\OLMathNumeral{2}$:
+\[
+	\Setabs{\comp{\rho}{\rho}}{\rho \in \rotationsgroup_\OLId{latin-ordinary}{i}} =
+	\rotationsgroup.
+\]
+\end{proof}
+
+وبهذه الحقيقة عن الزمر نثبت~\olref{vitaliparadox}. لتكن
+$\onesphere$ دائرة الوحدة، أي النقاط التي بعدها من أصل المستوى وحدة
+بعينها، وهي
+$\Setabs{\tuple{\OLId{latin-ordinary}{r},\OLId{latin-ordinary}{s}} \in \Real^\OLMathNumeral{2}}{\sqrt{\OLId{latin-ordinary}{r}^\OLMathNumeral{2}+\OLId{latin-ordinary}{s}^\OLMathNumeral{2}}=\OLMathNumeral{1}}$. ونقسم
+$\onesphere$ باعتبار العلاقة الآتية عليها:
+\[
+	\OLId{latin-ordinary}{r} \sim \OLId{latin-ordinary}{s} \emph{ إذا وفقط إذا كان }(\exists \rho \in \rotationsgroup)\rho(\OLId{latin-ordinary}{r}) = \OLId{latin-ordinary}{s}.
+\]
+فترتبط نقطتان من~$\onesphere$ إذا وفقط إذا أمكن الانتقال من إحداهما
+إلى الأخرى بدوران ذي معامل نسبي حول الأصل. وكما ينبغي أن يكون:
+
+\begin{lem}
+$\sim$ علاقة تكافؤ.
+\end{lem}
+
+\begin{proof}
+ظاهر من~\olref{rotationsgroupabelian}.
+\end{proof}
+
+والآن نستعمل الاختيار فنحصل على مجموعة~$\OLId{latin-looped}{C}$ فيها عنصر واحد بالضبط من
+كل صنف تكافؤ لـ~$\onesphere$ بحسب~$\sim$. أي نأخذ دالة اختيار~$\OLId{latin-ordinary}{f}$
+على مجموعة أصناف التكافؤ،\footnote{لأن
+$\rotationsgroup$ !!{enumerable}، تكون كل !!{element} من~$\OLId{latin-looped}{E}$
+!!{enumerable}. ولأن~$\onesphere$ !!{nonenumerable}، ينتج من
+\olref{vitalicover} و
+\olref[card-arithmetic][simp]{kappaunionkappasize} أن~$\OLId{latin-looped}{E}$
+!!{nonenumerable}. ومن ثم فهذا استخدام للاختيار \emph{غير} المعدود.}
+\[
+	\OLId{latin-looped}{E} = \Setabs{\equivrep{\OLId{latin-ordinary}{r}}{\sim}}{\OLId{latin-ordinary}{r} \in \onesphere},
+\]
+ولنضع~$\OLId{latin-looped}{C} = \ran{\OLId{latin-ordinary}{f}}$. ولكل دوران~$\rho \in \rotationsgroup$ تتألف
+$\funimage{\rho}{\OLId{latin-looped}{C}}$ من النقاط التي يرسل إليها~$\rho$ كل نقطة في~$\OLId{latin-looped}{C}$.
+وتبين اللمتان
+الآتيتان أن هذه المجموعات تغطي الدائرة كلها من غير تداخل.
+
+\begin{lem}\ollabel{vitalicover}
+$\onesphere = \bigcup_{\rho \in \rotationsgroup} \funimage{\rho}{\OLId{latin-looped}{C}}$.
+\end{lem}
+
+\begin{proof}
+خذ~$\OLId{latin-ordinary}{s} \in \onesphere$؛ يوجد~$\OLId{latin-ordinary}{r} \in \OLId{latin-looped}{C}$ بحيث
+$\OLId{latin-ordinary}{r} \in \equivrep{\OLId{latin-ordinary}{s}}{\sim}$، أي~$\OLId{latin-ordinary}{r} \sim \OLId{latin-ordinary}{s}$، أي
+$\rho(\OLId{latin-ordinary}{r}) = \OLId{latin-ordinary}{s}$ لبعض~$\rho \in \rotationsgroup$.
+\end{proof}
+
+\begin{lem}\ollabel{vitalinooverlap}
+إذا كان~$\rho_\OLMathNumeral{1} \neq \rho_\OLMathNumeral{2}$، فإن
+$\funimage{\rho_\OLMathNumeral{1}}{\OLId{latin-looped}{C}} \cap \funimage{\rho_\OLMathNumeral{2}}{\OLId{latin-looped}{C}} = \emptyset$.
+\end{lem}
+
+\begin{proof}
+افترض~$\OLId{latin-ordinary}{s} \in \funimage{\rho_{\OLMathNumeral{1}}}{\OLId{latin-looped}{C}} \cap
+\funimage{\rho_{\OLMathNumeral{2}}}{\OLId{latin-looped}{C}}$. فيكون
+$\OLId{latin-ordinary}{s} = \rho_{\OLMathNumeral{1}}(\OLId{latin-ordinary}{r}_{\OLMathNumeral{1}}) = \rho_{\OLMathNumeral{2}}(\OLId{latin-ordinary}{r}_{\OLMathNumeral{2}})$ لبعض
+$\OLId{latin-ordinary}{r}_{\OLMathNumeral{1}}, \OLId{latin-ordinary}{r}_{\OLMathNumeral{2}} \in \OLId{latin-looped}{C}$. وعليه
+$\rho^{-\OLMathNumeral{1}}_\OLMathNumeral{2}(\rho_\OLMathNumeral{1}(\OLId{latin-ordinary}{r}_\OLMathNumeral{1})) = \OLId{latin-ordinary}{r}_\OLMathNumeral{2}$، و
+$\comp{\rho_\OLMathNumeral{1}}{\rho^{-\OLMathNumeral{1}}_\OLMathNumeral{2}} \in \rotationsgroup$، ومن ثم
+$\OLId{latin-ordinary}{r}_{\OLMathNumeral{1}} \sim \OLId{latin-ordinary}{r}_{\OLMathNumeral{2}}$. فيلزم~$\OLId{latin-ordinary}{r}_\OLMathNumeral{1} = \OLId{latin-ordinary}{r}_\OLMathNumeral{2}$، لأن~$\OLId{latin-looped}{C}$ لا تختار من كل صنف
+تكافؤ بحسب~$\sim$ إلا عنصرًا واحدًا. ولذلك
+$\OLId{latin-ordinary}{s} = \rho_\OLMathNumeral{1}(\OLId{latin-ordinary}{r}_\OLMathNumeral{1}) = \rho_\OLMathNumeral{2}(\OLId{latin-ordinary}{r}_\OLMathNumeral{1})$، ومنه~$\rho_\OLMathNumeral{1} = \rho_\OLMathNumeral{2}$.
+\end{proof}
+
+ولنطبق الآن ما تقدم من حقائق الجبر على الدائرة.
+
+\begin{lem}\ollabel{pseudobanachtarski}
+يوجد تقسيم لـ$\onesphere$ إلى مجموعتين منفصلتين~$\OLId{latin-looped}{D}_{\OLMathNumeral{1}}$ و$\OLId{latin-looped}{D}_{\OLMathNumeral{2}}$،
+بحيث يمكن تقسيم~$\OLId{latin-looped}{D}_{\OLMathNumeral{1}}$ إلى عدد معدود من المجموعات التي يمكن تدويرها
+لتكوين نسخة من~$\onesphere$ (وكذلك~$\OLId{latin-looped}{D}_{\OLMathNumeral{2}}$).
+\end{lem}
+
+\begin{proof}
+باستعمال~$\rotationsgroup_{\OLMathNumeral{1}}$ و$\rotationsgroup_{\OLMathNumeral{2}}$ من
+\olref{disjointgroup}، ضع:
+\begin{align*}
+	\OLId{latin-looped}{D}_{\OLMathNumeral{1}} &= \bigcup_{\rho \in \rotationsgroup_\OLMathNumeral{1}} \funimage{\rho}{\OLId{latin-looped}{C}} &
+	\OLId{latin-looped}{D}_{\OLMathNumeral{2}} &= \bigcup_{\rho \in \rotationsgroup_\OLMathNumeral{2}} \funimage{\rho}{\OLId{latin-looped}{C}}
+\end{align*}
+فهذا تقسيم لـ~$\onesphere$ بحسب~\olref{vitalicover}، و$\OLId{latin-looped}{D}_\OLMathNumeral{1}$ و$\OLId{latin-looped}{D}_\OLMathNumeral{2}$
+منفصلتان بحسب~\olref{vitalinooverlap}. ومن نفس البناء ينقسم~$\OLId{latin-looped}{D}_\OLMathNumeral{1}$ إلى
+مجموعات معدودة، هي~$\funimage{\rho}{\OLId{latin-looped}{C}}$ لكل
+$\rho \in \rotationsgroup_\OLMathNumeral{1}$. ويمكن تدويرها حتى تؤلف نسخة من
+$\onesphere$، لأن
+$\onesphere = \bigcup_{\rho \in
+\rotationsgroup}\funimage{\rho}{\OLId{latin-looped}{C}} = \bigcup_{\rho \in
+\rotationsgroup_\OLMathNumeral{1}}\funimage{(\comp{\rho}{\rho})}{\OLId{latin-looped}{C}}$ بموجب
+\olref{disjointgroup} و\olref{vitalicover}. والحجة نفسها جارية على
+$\OLId{latin-looped}{D}_\OLMathNumeral{2}$. \end{proof}\noindent
+وتلزم مفارقة فيتالي من فورها. فنحن نولد نسختين من~$\onesphere$ من
+$\onesphere$ نفسها: نقسمها قطعًا معدودة العدد، وهي مختلف مجموعات
+$\funimage{\rho}{\OLId{latin-looped}{C}}$، ثم نحركها حركات صلبة؛ فندور كل قطعة من~$\OLId{latin-looped}{D}_\OLMathNumeral{1}$،
+ونزيح كل قطعة من~$\OLId{latin-looped}{D}_\OLMathNumeral{2}$ أولًا ثم ندورها.
+
+وخلاصة مسلك البرهان أننا بدأنا بخصائص جبرية لزمرة الدورانات في
+المستوى، وبها قسمنا~$\onesphere$ أصناف تكافؤ، ثم جاء وجه «المفارقة»
+من استعمال الاختيار لانتقاء عنصر من كل صنف.
+
+وهذا بعينه مسلك برهان باناخ--تارسكي؛ وإنما تزيد خصائص الجبر اللازمة له
+تعقيدًا عظيمًا على التي احتجنا إليها في مفارقة فيتالي، وليس لتلك
+الخصائص الجبرية اتصال بالاختيار. ولنوجزها.
+
+نبدأ في برهان باناخ--تارسكي بنظير~\olref{disjointgroup}: كل
+\emph{زمرة حرة} تنقسم أربع قطع يمكن، في التصور، «تحريكها» حتى نسترد
+نسختين من الزمرة كلها.\footnote{ترجع حقيقة إمكان استخدام
+\emph{أربع} قطع إلى~\cite{Robinson1947}. ولبرهان حديث، انظر
+\citet[Theorem 5.2]{Wagon2016}. ونتبع~\citet[p.~3]{Weston2003} في
+وصف ذلك بأنه «تحريك» قطع الزمرة.} ثم نبين أن دورانين مخصوصين حول
+أصل~$\Real^\OLMathNumeral{3}$ يولدان زمرة حرة من الدورانات~$\OLId{latin-looped}{F}$.\footnote{انظر
+\citet[Theorem 2.1]{Wagon2016}.} ولم نستعمل الاختيار إلى هنا.
+
+ولنرمز إلى سطح كرة الوحدة في~$\Real^\OLMathNumeral{3}$ بـ
+\[
+  \OLId{latin-looped}{S}^\OLMathNumeral{2} = \Setabs{\OLId{latin-ordinary}{x}\in\Real^\OLMathNumeral{3}}{\lVert \OLId{latin-ordinary}{x}\rVert=\OLMathNumeral{1}}.
+\]
+
+لكن فعل~$\OLId{latin-looped}{F}$ على سطح الكرة ليس حرًا؛ فلكل دوران غير محايد نقطتان
+ثابتتان على محوره. لذلك نحذف أولًا مجموعة الاستثناءات المعدودة
+\[
+	\OLId{latin-looped}{D} = \Setabs{\OLId{latin-ordinary}{x} \in \OLId{latin-looped}{S}^\OLMathNumeral{2}}{(\exists \rho \in \OLId{latin-looped}{F} \setminus \{\OLMathNumeral{1}_\OLId{latin-looped}{F}\})\rho(\OLId{latin-ordinary}{x})=\OLId{latin-ordinary}{x}}.
+\]
+وعلى~$\OLId{latin-looped}{S}^\OLMathNumeral{2} \setminus \OLId{latin-looped}{D}$ يصير فعل~$\OLId{latin-looped}{F}$ حرًا. ثم نقسم السطح
+المنقوص إلى مدارات~$\OLId{latin-looped}{F}$، ونستعمل الاختيار لانتقاء نقطة واحدة من كل
+مدار. وننقل تقسيم~$\OLId{latin-looped}{F}$ إلى السطح المنقوص كما في
+\olref{pseudobanachtarski}، فنحصل على تفكيك مفارقي له إلى قطع متناهية
+العدد.
+
+ويبقى رد~$\OLId{latin-looped}{D}$. والزمرة~$\OLId{latin-looped}{F}$ معدودة لأنها متولدة بمولدين؛ ولكل دوران
+غير محايد نقطتا تثبيت فقط على~$\OLId{latin-looped}{S}^\OLMathNumeral{2}$، فتكون~$\OLId{latin-looped}{D}$ معدودة. اختر محورًا لا
+تقع نقطتا تقاطعه مع~$\OLId{latin-looped}{S}^\OLMathNumeral{2}$ في~$\OLId{latin-looped}{D}$. ولكل~$\OLId{latin-ordinary}{d},\OLId{latin-ordinary}{d}'\in \OLId{latin-looped}{D}$ ولكل~$\OLId{latin-ordinary}{k}>\OLMathNumeral{0}$، لا
+يوجد إلا عدد منته من الزوايا~$\theta$ التي يحقق دوران ذلك المحور بها
+$\sigma_\theta^\OLId{latin-ordinary}{k}(\OLId{latin-ordinary}{d})=\OLId{latin-ordinary}{d}'$. فاتحاد هذه الزوايا معدود؛ فنختار زاوية خارجه،
+ولتكن~$\sigma$ الدوران بها. عندئذ تكون المجموعات
+$\funimage{\sigma^\OLId{latin-ordinary}{n}}{\OLId{latin-looped}{D}}$، حيث~$\OLId{latin-ordinary}{n} < \omega$، منفصلة اثنتين اثنتين.
+وضع~$\OLId{latin-looped}{D}^* = \bigcup_{\OLId{latin-ordinary}{n} < \omega}\funimage{\sigma^\OLId{latin-ordinary}{n}}{\OLId{latin-looped}{D}}$. فعندئذ
+$\funimage{\sigma}{\OLId{latin-looped}{D}^*} = \OLId{latin-looped}{D}^* \setminus \OLId{latin-looped}{D}$. فيمتص تدوير~$\OLId{latin-looped}{D}^*$
+بـ~$\sigma$، مع إبقاء سائر السطح ثابتًا، فيعرّف تقابلًا من~$\OLId{latin-looped}{S}^\OLMathNumeral{2}$ إلى
+$\OLId{latin-looped}{S}^\OLMathNumeral{2} \setminus \OLId{latin-looped}{D}$؛ فهو امتصاص لـ$\OLId{latin-looped}{D}$ بتفكيك من قطعتين. ثم ننقل
+التفكيك المفارقي للسطح المنقوص بهذا الامتصاص، ونرد~$\OLId{latin-looped}{D}$، فننال نسختين
+من سطح الكرة. وهذا يثبت~\citep{Hausdorff1914}:
+% تصحيح مصدر عربي (0600-N1، 0600-N2): فُصل سطح R^3 عن دائرة R^2، وأُثبت وجود دوران الامتصاص.
+
+\begin{thm}[مفارقة هاوسدورف (في $\ZFC$)]
+يمكن تفكيك سطح أية كرة قطعًا متناهية العدد، ثم تعاد هذه القطع، بالدوران
+والإزاحة، فتؤلف نسختين منفصلتين من تلك الكرة.
+\end{thm}
+
+ويحتاج تمام مبرهنة باناخ--تارسكي، حيث يدخل باطن الكرة لا سطحها وحده،
+إلى حيلتين جبريتين أخريين. وليستا في الحقيقة إلا تمامًا للصنعة
+الجبرية. ولذلك يقول ويستون:
+\begin{quote}	
+  [\ldots] النتيجة الخاصة بالزمر الحرة هي \emph{الخطوة الأساسية} في
+  برهان مفارقة باناخ--تارسكي. ومن وجهة النظر هذه، ليست مفارقة
+  باناخ--تارسكي عبارة عن~$\Real^\OLMathNumeral{3}$ بقدر ما هي عبارة عن تعقيد زمرة
+  [الإزاحات والدورانات في~$\Real^\OLMathNumeral{3}$]. \cite[p.~16]{Weston2003}
+\end{quote}
+فإمكان التفكيك المتناهي في باناخ--تارسكي، أو التفكيك غير المتناهي
+المعدود في فيتالي، مرده إلى خصائص معينة في نظرية الزمر بحسب العمل في
+بعدين أو ثلاثة.
+
+وهذه الخاتمة تفسد شيئًا من نكتة آخر~\olref[banach]{sec}. فإن اسم
+«باناخ--تارسكي» مرسوم في بعدين، فينبغي تفكيكه قطعًا غير متناهية معدودة
+حتى يعاد ترتيبها إلى «باناخ--تارسكي باناخ--تارسكي». ولا تصلح النكتة
+إلا إذا كتبت في ثلاثة أبعاد؛ فلنترك ذلك تمرينًا للقارئ.
+
+وبقي تعليق. قلنا في~\olref[banach]{sec} إن «قطع» الكرة لا تكون قابلة
+للقياس، بل تكون بعثرات غير متناهية لا سبيل إلى تصويرها. وكذلك ما
+اخترناه للحصول على~\olref{pseudobanachtarski}. وهذا محتاج إلى بيان.
+
+فنوجز الخلفية مرة أخرى، وليس هذا إلا موجزًا، ومن أراد التفصيل فليرجع
+إلى مدخل في نظرية القياس. قياس مجموعة~$\OLId{latin-looped}{X}$ إسناد قيمة~$\mu(\OLId{latin-looped}{E}) \in \Real$
+إلى كل~$\OLId{latin-looped}{E}$ في «جبر~$\sigma$» على~$\OLId{latin-looped}{X}$. والذي يعنينا أن~$\mu$ تحقق
+الإضافة المعدودة: قياس اتحاد معدود لمجموعات منفصلة هو مجموع قياسات
+آحاده، أي
+$\mu(\bigcup_{\OLId{latin-ordinary}{n} < \omega} \OLId{latin-looped}{X}_\OLId{latin-ordinary}{n}) = \sum_{\OLId{latin-ordinary}{n} < \omega}\mu(\OLId{latin-looped}{X}_\OLId{latin-ordinary}{n})$ متى
+كانت~$\OLId{latin-looped}{X}_\OLId{latin-ordinary}{n}$ منفصلة. والمجموعة غير القابلة للقياس هي التي لا يمكن إسناد
+قياس مناسب إليها. فباستعمال~$\rotationsgroup$ المتقدمة نحصل على:
+
+\begin{cor}[فيتالي]
+ليكن~$\mu$ قياسًا بحيث~$\mu(\onesphere) = \OLMathNumeral{1}$، وبحيث
+$\mu(\OLId{latin-looped}{X}) = \mu(\OLId{latin-looped}{Y})$ إذا كانت~$\OLId{latin-looped}{X}$ و$\OLId{latin-looped}{Y}$ متطابقتين هندسيًا. عندئذ تكون
+$\funimage{\rho}{\OLId{latin-looped}{C}}$ غير قابلة للقياس لكل
+$\rho \in \rotationsgroup$.
+\end{cor}
+
+\begin{proof}
+افترض نقيض ذلك. فليكن
+$\mu(\funimage{\sigma}{\OLId{latin-looped}{C}}) = \OLId{latin-ordinary}{r}$ لبعض
+$\sigma \in \rotationsgroup$ وبعض~$\OLId{latin-ordinary}{r} \in \Real$. ولكل
+$\rho \in \rotationsgroup$ تكون~$\funimage{\rho}{\OLId{latin-looped}{C}}$ و
+$\funimage{\sigma}{\OLId{latin-looped}{C}}$ متطابقتين هندسيًا، ومن ثم
+$\mu(\funimage{\rho}{\OLId{latin-looped}{C}}) = \OLId{latin-ordinary}{r}$ لكل~$\rho \in \rotationsgroup$.
+وبحسب~\olref{vitalicover} و\olref{vitalinooverlap}، تكون
+$\onesphere =
+\bigcup_{\rho \in \rotationsgroup}\funimage{\rho}{\OLId{latin-looped}{C}}$ اتحادًا
+معدودًا لمجموعات منفصلة اثنتين اثنتين. فتقضي الإضافة المعدودة بأن
+$\mu(\onesphere) = \OLMathNumeral{1}$ هو مجموع قياسات مختلف
+$\funimage{\rho}{\OLId{latin-looped}{C}}$، أي:
+\[
+	\OLMathNumeral{1} = \mu(\onesphere) = \sum_{\rho \in \rotationsgroup}\mu(\funimage{\rho}{\OLId{latin-looped}{C}}) = \sum_{\rho \in \rotationsgroup}\OLId{latin-ordinary}{r}
+\]
+لكن~$\OLId{latin-ordinary}{r} \geq \OLMathNumeral{0}$ لأن~$\mu$ قياس؛ فإذا كان~$\OLId{latin-ordinary}{r} = \OLMathNumeral{0}$، كان
+$\sum_{\rho \in \rotationsgroup}\OLId{latin-ordinary}{r} = \OLMathNumeral{0}$، وإذا كان~$\OLId{latin-ordinary}{r} > \OLMathNumeral{0}$، كان
+$\sum_{\rho \in \rotationsgroup}\OLId{latin-ordinary}{r} = \infty$؛ وهو تناقض.
+\end{proof}
+
+\end{document}

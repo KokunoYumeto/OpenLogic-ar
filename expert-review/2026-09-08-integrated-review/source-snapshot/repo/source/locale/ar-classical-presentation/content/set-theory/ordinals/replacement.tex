@@ -1,0 +1,72 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{ordinals}{replacement}
+\olsection{الاستبدال}
+
+كان وجه إدخال الأعداد الترتيبية في~\olref[sth][ordinals][vn]{sec}
+أنها تصلح أنماطًا للترتيب، أي ممثلات قياسية للترتيبات الجيدة. ولا يتم
+هذا إلا بإثبات أن \emph{كل ترتيب جيد يتماثل مع عدد ترتيبي ما}.
+فعندئذ نعرّف~$\ordtype{\OLId{latin-looped}{A}, <}$ بأنه العدد الترتيبي~$\OLId{greek-variable}{alpha}$ الذي
+يحقق~$\tuple{\OLId{latin-looped}{A}, <} \isomorphic \OLId{greek-variable}{alpha}$.
+
+غير أن المسلّمات المتقدمة وحدها \emph{لا تكفي} لإثبات هذه النتيجة.
+وسيأتي بيان العجز في~\olref[replacement][strength]{sec}؛ وحسبنا الآن
+أن نعرف أن البرهان لا يتم بها. فلا بد من أصل جديد، وهو الآتي.
+
+\begin{axiom}[مخطط الاستبدال]
+إذا أُعطيت صيغة~$\phi(\OLId{latin-ordinary}{x}, \OLId{latin-ordinary}{y})$، عُدّ القول الآتي مسلّمة:
+\begin{quote}
+لكل~$\OLId{latin-looped}{A}$، إذا كان~$(\forall \OLId{latin-ordinary}{x} \in \OLId{latin-looped}{A})\lexists![\OLId{latin-ordinary}{y}][\phi(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y})]$،
+وجدت المجموعة~$\Setabs{\OLId{latin-ordinary}{y}}{(\exists \OLId{latin-ordinary}{x} \in \OLId{latin-looped}{A})\phi(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y})}$.
+\end{quote}
+\end{axiom}
+\noindent
+وهذا مخطط كالفصل، لا مسلّمة مفردة: فإن الصيغ~$\phi$ غير متناهية
+العدد، ولكل منها مسلّمة. وله صياغة أخرى مكافئة، هي المعتادة:
+
+\begin{defish}
+لكل صيغة~$\phi(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y})$ لا يرد فيها «$\OLId{latin-looped}{B}$»، تُؤخذ الصيغة الآتية مسلّمة:
+\[
+\forall \OLId{latin-looped}{A}[(\forall \OLId{latin-ordinary}{x} \in \OLId{latin-looped}{A})\lexists![\OLId{latin-ordinary}{y}][\phi(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y})] \lif
+\exists \OLId{latin-looped}{B}\forall \OLId{latin-ordinary}{y} (\OLId{latin-ordinary}{y} \in \OLId{latin-looped}{B} \liff (\exists \OLId{latin-ordinary}{x} \in \OLId{latin-looped}{A})\phi(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y}))]
+\]
+\end{defish}
+
+وقد يثقل فهم هذه الصيغة لأول وهلة لتشابك أجزائها. أما النتيجة
+القريبة التالية فلعلها \emph{أبين} في الكشف عن المعنى الحدسي المقصود.
+\footnote{الحد تعبير يعيّن شيئًا واحدًا لا غير كلما عُيّنت قيم
+متغيراته الحرة. فـ«$\emptyset$» يعيّن المجموعة الخالية؛ و«$\{\OLId{latin-ordinary}{x}\}$»
+يعيّن أحادية~$\OLId{latin-ordinary}{x}$، مهما يكن~$\OLId{latin-ordinary}{x}$؛ و«$\OLId{latin-ordinary}{x} \cup \OLId{latin-ordinary}{y}$» يعيّن اتحاد~$\OLId{latin-ordinary}{x}$
+و$\OLId{latin-ordinary}{y}$، أيًا كانا.}
+
+\begin{cor}
+لكل حد~$\tau(\OLId{latin-ordinary}{x})$ ومجموعة~$\OLId{latin-looped}{A}$ توجد المجموعة:
+\[
+\Setabs{\tau(\OLId{latin-ordinary}{x})}{\OLId{latin-ordinary}{x} \in \OLId{latin-looped}{A}} = \Setabs{\OLId{latin-ordinary}{y}}{(\exists \OLId{latin-ordinary}{x} \in \OLId{latin-looped}{A})\OLId{latin-ordinary}{y} = \tau(\OLId{latin-ordinary}{x})}.
+\]
+\end{cor}
+
+\begin{proof}
+بما أن~$\tau$ \emph{حد}، فإن~$\forall \OLId{latin-ordinary}{x} \lexists![\OLId{latin-ordinary}{y}][\tau(\OLId{latin-ordinary}{x}) = \OLId{latin-ordinary}{y}]$،
+ومن باب أولى~$(\forall \OLId{latin-ordinary}{x} \in \OLId{latin-looped}{A})\lexists![\OLId{latin-ordinary}{y}][\tau(\OLId{latin-ordinary}{x}) = \OLId{latin-ordinary}{y}]$.
+فيقضي الاستبدال بوجود~$\Setabs{\OLId{latin-ordinary}{y}}{(\exists \OLId{latin-ordinary}{x} \in \OLId{latin-looped}{A})\tau(\OLId{latin-ordinary}{x}) = \OLId{latin-ordinary}{y}}$.
+\end{proof}
+\noindent
+ومن هنا تظهر مناسبة اسم «الاستبدال»: نبدأ بمجموعة~$\OLId{latin-looped}{A}$، ثم ننشئ
+المجموعة~$\Setabs{\tau(\OLId{latin-ordinary}{x})}{\OLId{latin-ordinary}{x} \in \OLId{latin-looped}{A}}$ بأن نستبدل بكل عنصر من~$\OLId{latin-looped}{A}$
+صورته تحت~$\tau$. وقياسًا على ترميز صورة المجموعة تحت الدالة،
+يجوز أن نرمز بـ$\funimage{\tau}{\OLId{latin-looped}{A}}$ إلى~$\Setabs{\tau(\OLId{latin-ordinary}{x})}{\OLId{latin-ordinary}{x} \in \OLId{latin-looped}{A}}$.
+
+ولا يغيبنّ الفرق الحاسم: إن~$\tau$ \emph{حد}، وليس من شرطه أن
+يسمي \emph{دالة} بالمعنى المحدد في~\olref[sfr][fun][rel]{sec}،
+أي مجموعة من الأزواج المرتبة. فلو كانت~$\OLId{latin-ordinary}{f}$ دالة بهذا المعنى، لكانت
+$\funimage{\OLId{latin-ordinary}{f}}{\OLId{latin-looped}{A}} = \Setabs{\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x})}{\OLId{latin-ordinary}{x} \in \OLId{latin-looped}{A}}$ مجرد مجموعة جزئية من
+$\ran{\OLId{latin-ordinary}{f}}$، ووجودها مضمون بمسلّمات~$\Zminus$ وحدها.
+\footnote{يكفي أن نأخذ
+$\Setabs{\OLId{latin-ordinary}{y} \in \bigcup \bigcup \OLId{latin-ordinary}{f}}{(\exists \OLId{latin-ordinary}{x} \in \OLId{latin-looped}{A})\OLId{latin-ordinary}{y} = \OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x})}$.}
+أما الاستبدال فيزيد مسلّماتنا \emph{قوة}، كما سيظهر في
+\olref[sth][replacement][]{chap}.
+
+\end{document}

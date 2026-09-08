@@ -1,0 +1,1749 @@
+{
+  "schema": "openlogic-classical-independent-semantic-review-v1",
+  "batch": "0601-0700",
+  "review_date": "2026-09-05",
+  "status": "REVIEW_COMPLETE_REPAIRS_REQUIRED",
+  "acceptance": "NOT_ACCEPTED_AS_FINAL",
+  "scope": "Independent read-only source-level semantic and formal review of OLP-0601..OLP-0700 against the pinned English source, frozen MSA baseline, and Classical Arabic style specification. Only this review JSON and its companion Markdown report were authored; no translation source, baseline, terminology ledger, TeX, Git, network publication, or state-log mutation was performed.",
+  "source_roots": {
+    "english": "source-snapshot/english",
+    "msa_and_target_repo": "source-snapshot/repo",
+    "path_resolution": "For each unit, source_path, arabic_path, target_path, source_role, and upstream_words are the entries for the same id in the hash-bound evidence/classical/BASELINE.json. Compact unit records below contain [id, English SHA-256, MSA SHA-256, Classical-target SHA-256, outcome]."
+  },
+  "evidence_hashes": {
+    "evidence/classical/STYLE_SPEC.md": "449f1a0d8dbb4e93e7a9f5a8e42ccde8f0f01574eafed37223969461185197d9",
+    "evidence/classical/BASELINE.json": "c10a6321b79a210febba49b3fc216a7fb22b729a738af71d57dc1aea9e105beb",
+    "evidence/classical/terminology/README.md": "43d8bcc75273164a6a8b60a9b5a661e04de897d29bd39d057007f85cc06799b2",
+    "evidence/classical/terminology/retro-0601-0722.json": "df36a9a89110253fc644619d6d029da07c14a0943abf1bcb64e1714d0375d4a7",
+    "build/validate_classical_overlay.py": "f8cb9a5a01c631664a381601b5f846f406d3c6352c42fbed8ca64f3a4ba3bec4"
+  },
+  "method": {
+    "units_total": 100,
+    "source_bearing_or_formal_units": 91,
+    "no_prose_import_drivers": 9,
+    "upstream_english_words": 62788,
+    "reading": "Every unit was enumerated. The 91 source-bearing or formal units were read against English, MSA, and Classical witnesses, with attention to definitions, hypotheses, polarity, quantifier scope, formulas, proof trees, examples, exercises, source repairs, and Classical-Arabic argumentative flow. The nine title/import-only drivers were compared structurally in all three witnesses.",
+    "hash_readback": "All 300 English/MSA/Classical files were independently SHA-256 read back. Every English and MSA hash matches BASELINE.json. The compact unit records bind every current Classical target directly because no 0601-0700 batch receipts exist.",
+    "terminology_policy": "The terminology questions are retrospective reconstructions from the current passages. No dictionary attestation is invented; authority status is not-checked. Each question is open to correction and is not a human-dependent hold.",
+    "source_repair_policy": "A departure from the frozen English was not called an error merely because it departed. Correct repairs of demonstrable English formula/proof defects were retained and are summarized separately; unresolved or insufficiently documented departures are findings.",
+    "limitations": [
+      "This is a source-level semantic/formal audit, not rendered typography or bidirectional-layout acceptance.",
+      "No TeX engine was run.",
+      "No proof assistant checked the mathematics; formal findings are reasoned audits of the stated calculi and derivations.",
+      "PASS means no additional defect was found in this bounded review, not a guarantee of absence.",
+      "No external terminology authority was queried in this task."
+    ]
+  },
+  "static_validation": {
+    "schema": "openlogic-classical-static-validation-v1",
+    "invocation": "python -B build/validate_classical_overlay.py --ids 601-700 --json",
+    "status": "INCOMPLETE",
+    "exit_code": 2,
+    "selected_units": 100,
+    "baseline_verified_units": 100,
+    "counts": {
+      "changed-prose-awaiting-semantic-review": 91,
+      "unchanged-prose": 9
+    },
+    "failures": [],
+    "all_reported_per_unit_checks_satisfied": true,
+    "semantic_equivalence_proven": false,
+    "interpretation": "The nonzero result is the validator's expected workflow state: this range has no selected batch declarations or structural-review records. It reported no lexical/formal invariant failure. This independent audit supplies semantic evidence but records repairs rather than converting the static result into acceptance."
+  },
+  "structural_classification": {
+    "no_prose_import_drivers": [
+      "OLP-0602",
+      "OLP-0613",
+      "OLP-0620",
+      "OLP-0621",
+      "OLP-0646",
+      "OLP-0657",
+      "OLP-0664",
+      "OLP-0674",
+      "OLP-0681"
+    ],
+    "reference_alphabet_tables": ["OLP-0641", "OLP-0642"],
+    "auxiliary_formal_fragments": ["OLP-0660", "OLP-0666", "OLP-0667", "OLP-0682", "OLP-0692", "OLP-0693"],
+    "prose_bearing_drivers": ["OLP-0601", "OLP-0633", "OLP-0640", "OLP-0685", "OLP-0690"],
+    "notation_note": "OLP-0641 and OLP-0642 deliberately remain Greek/Latin/Fraktur reference tables. STYLE_SPEC makes third-edition Arabic notation mapping a separate presentation layer; these source alphabets must not be silently replaced during prose review."
+  },
+  "disposition_counts": {
+    "PASS": 37,
+    "PASS_AUXILIARY_FORMAL": 6,
+    "PASS_STRUCTURAL_NO_PROSE": 9,
+    "PASS_STRUCTURAL_REFERENCE_TABLE": 2,
+    "PASS_WITH_DOCUMENTED_SOURCE_CORRECTION": 32,
+    "REPAIR_RECOMMENDED": 14,
+    "units_total": 100,
+    "findings_total": 14,
+    "units_affected_by_findings": 14
+  },
+  "findings": [
+    {
+      "id": "0606-M1",
+      "unit_id": "OLP-0606",
+      "origin": "inherited_msa_retained_in_classical",
+      "severity": "medium",
+      "kind": "formula_misidentified_as_element",
+      "target": {
+        "path": "source/locale/ar-classical/content/methods/proofs/inference-patterns.tex",
+        "sha256": "17984c5614953c57aa59237caa15612b0b8454d819a5668af89a654c68af1938",
+        "lines": [124, 125]
+      },
+      "issue": "The phrase «فليكن x∈A عنصرًا اعتباطيًا من A» grammatically makes the proposition x∈A, rather than x, the arbitrary element. The proof then relies on x∈A as a hypothesis, so the distinction is mathematically material.",
+      "required_fix": {
+        "operation": "replace_lines",
+        "lines": [124, 125],
+        "text": "  $x$: إذا كان~$x \\in A$ كان~$x \\in A \\cup B$. فليكن~$x$\n  عنصرًا اعتباطيًّا من~$A$، ولنفرض~$x \\in A$؛ ونريد إثبات"
+      },
+      "confidence": "high"
+    },
+    {
+      "id": "0607-N1",
+      "unit_id": "OLP-0607",
+      "origin": "new_classical_wording",
+      "severity": "low",
+      "kind": "case_agreement",
+      "target": {
+        "path": "source/locale/ar-classical/content/methods/proofs/example-1.tex",
+        "sha256": "7d38f36c5a4086548017f3c92475b268619dae36a044c6ac2526e46a5cc07113",
+        "lines": [89]
+      },
+      "issue": "«تمت بهذا الحالة الأولى» has the wrong demonstrative agreement.",
+      "required_fix": {
+        "operation": "replace_text",
+        "line": 89,
+        "replace": "تمت بهذا الحالة الأولى",
+        "with": "تمت بهذه الحالة الأولى"
+      },
+      "confidence": "high"
+    },
+    {
+      "id": "0624-M1",
+      "unit_id": "OLP-0624",
+      "origin": "inherited_msa_retained_in_classical",
+      "severity": "medium",
+      "kind": "lost_tex_accent_escape",
+      "target": {
+        "path": "source/locale/ar-classical/content/history/biographies/gerhard-gentzen.tex",
+        "sha256": "2f0854c70b2e981683fb5f135588947b04bba8cdda3bc9489f99d704ba1c77d4",
+        "lines": [27]
+      },
+      "issue": "The German title changed frozen English \\\"{u} to the literal sequence \"{u}, losing the TeX accent command and the ü in Untersuchungen über.",
+      "required_fix": {
+        "operation": "replace_text",
+        "line": 27,
+        "replace": "Untersuchungen \"{u}ber",
+        "with": "Untersuchungen \\\"{u}ber"
+      },
+      "confidence": "high"
+    },
+    {
+      "id": "0625-M1",
+      "unit_id": "OLP-0625",
+      "origin": "inherited_msa_retained_in_classical",
+      "severity": "medium",
+      "kind": "lost_tex_accent_escape",
+      "target": {
+        "path": "source/locale/ar-classical/content/history/biographies/kurt-goedel.tex",
+        "sha256": "51fc8e5cb60002b9ba134e7b735519f078f8b0d7843a571b1c1cc89ba6281fc3",
+        "lines": [13]
+      },
+      "issue": "The photo caption argument changed frozen English G{\\\"o}del to G{\"o}del, losing the TeX accent command.",
+      "required_fix": {
+        "operation": "replace_text",
+        "line": 13,
+        "replace": "Kurt G{\"o}del",
+        "with": "Kurt G{\\\"o}del"
+      },
+      "confidence": "high"
+    },
+    {
+      "id": "0628-N1",
+      "unit_id": "OLP-0628",
+      "origin": "new_classical_wording",
+      "severity": "medium",
+      "kind": "malformed_question",
+      "target": {
+        "path": "source/locale/ar-classical/content/history/biographies/julia-robinson.tex",
+        "sha256": "141ab302b3ff4b2c248e4b094fb3ef150a1ee68bb8385c0ceaeec2f038f4e9f8",
+        "lines": [44, 45]
+      },
+      "issue": "«ألكثيرة حدود ... حل» contains a typographical intrusion and lacks the governing construction needed to ask whether a polynomial equation has an integer solution.",
+      "required_fix": {
+        "operation": "replace_lines",
+        "lines": [44, 45],
+        "text": "العاشرة: هل توجد خوارزمية تقرر في زمن متناه هل لمعادلة كثيرة حدود ذات معاملات\nصحيحة، كالمعادلة $3x^2 - 2y +3 = 0$، حل في الأعداد الصحيحة أم لا؟"
+      },
+      "confidence": "high"
+    },
+    {
+      "id": "0643-I1",
+      "unit_id": "OLP-0643",
+      "origin": "inherited_english_and_msa",
+      "severity": "high",
+      "kind": "unproved_generalization_base_case",
+      "target": {
+        "path": "source/locale/ar-classical/content/first-order-logic/axiomatic-deduction/provability.tex",
+        "sha256": "c3e161c2d341cda5a78ba0e001ff50fc02a54e7a75550008bac85e6dcf8d9048",
+        "lines": [200, 220]
+      },
+      "issue": "The proof of Generalization asserts in its axiom base case that if A is an axiom then ∀xA is also an axiom. The axiom families defined for this calculus are not declared closed under universal closure, and the assertion cannot be justified by the theorem currently being proved. The remaining MP case does not repair this base-case gap.",
+      "required_fix": {
+        "operation": "replace_proof_or_define_system_closure",
+        "requirements": [
+          "Either explicitly add universal closure to the calculus's axiom convention and propagate that change through its definitions and soundness proof,",
+          "or give a non-circular derivation of the universal closure for every propositional and quantifier axiom family using the calculus's actual quantifier axioms/rules before applying induction."
+        ]
+      },
+      "confidence": "high"
+    },
+    {
+      "id": "0649-N1",
+      "unit_id": "OLP-0649",
+      "origin": "new_classical_wording",
+      "severity": "medium",
+      "kind": "defined_mistranslated_as_bounded",
+      "target": {
+        "path": "source/locale/ar-classical/content/intuitionistic-logic/semantics/propositions.tex",
+        "sha256": "3c257d20d196d341c08174e70ae0886771686e92ac1b67f50a9780be8fd773e7",
+        "lines": [13, 15]
+      },
+      "issue": "English 'the proposition defined by A' became «القضية المحدودة بـA». محدودة means bounded/limited and changes the semantic relation; the MSA witness correctly uses «التي تعرّفها A».",
+      "required_fix": {
+        "operation": "replace_text",
+        "line": 15,
+        "replace": "القضية} المحدودة بـ$!A$",
+        "with": "القضية} التي تحددها~$!A$"
+      },
+      "confidence": "high"
+    },
+    {
+      "id": "0650-N1",
+      "unit_id": "OLP-0650",
+      "origin": "new_classical_wording",
+      "severity": "medium",
+      "kind": "accumulator_conflated_with_sum",
+      "target": {
+        "path": "source/locale/ar-classical/content/lambda-calculus/lambda-definability/lists.tex",
+        "sha256": "9eee490e61c7ef21ff291008e7c4a3595ce91f2c9e17cfb93ae9ec1ff69db28a",
+        "lines": [16, 19]
+      },
+      "issue": "The polymorphic list accumulator/right fold is called «دالة جمعها». In mathematical context جمع strongly suggests arithmetic addition, but the combining function s is arbitrary.",
+      "required_fix": {
+        "operation": "replace_text",
+        "line": 16,
+        "replace": "دالة «جمعها»",
+        "with": "دالة التراكم فيها"
+      },
+      "confidence": "medium-high",
+      "expert_review_useful": true,
+      "open_to_correction": true
+    },
+    {
+      "id": "0652-N1",
+      "unit_id": "OLP-0652",
+      "origin": "inherited_msa_worsened_in_classical",
+      "severity": "high",
+      "kind": "broken_consistency_definition_scope",
+      "target": {
+        "path": "source/locale/ar-classical/content/many-valued-logic/sequent-calculus/proof-theoretic-notions.tex",
+        "sha256": "5fb95b072a1248ca3bea7474b10c12f3bd259db1ddbdf50238fd92df7a585e44",
+        "lines": [62, 68]
+      },
+      "issue": "The second half of the definition has malformed negation and quantifier scope, then appends «وما لم تكن كذلك» without a grammatical antecedent. It obscures that consistency means there is no finite Γ0 subset of Γ for which LK derives the empty succedent.",
+      "required_fix": {
+        "operation": "replace_lines",
+        "lines": [65, 68],
+        "text": "وإذا لم تكن~$\\Gamma$ غير متسقة—أي إذا لم تشتق~$\\Log{LK}$ التتابع~$\\Gamma_0 \\Sequent \\quad$ لأي مجموعة جزئية منتهية~$\\Gamma_0 \\subseteq \\Gamma$—سميناها \\emph{متسقة}."
+      },
+      "confidence": "high"
+    },
+    {
+      "id": "0676-M1",
+      "unit_id": "OLP-0676",
+      "origin": "inherited_msa_retained_in_classical",
+      "severity": "medium",
+      "kind": "missing_openlogic_formula_marker",
+      "target": {
+        "path": "source/locale/ar-classical/content/proof-theory/normalization/reductions.tex",
+        "sha256": "1ca747132ebffa2e9861ca8fba709cc43da7a3e71af63b1149d495cfeae35468",
+        "lines": [84, 85]
+      },
+      "issue": "The frozen English has the labelled assumption $!B^x$; both Arabic witnesses drop the Open Logic formula marker and print $B^x$ at the minor-premise reference.",
+      "required_fix": {
+        "operation": "replace_text",
+        "line": 85,
+        "replace": "$B^x$",
+        "with": "$!B^x$"
+      },
+      "confidence": "high"
+    },
+    {
+      "id": "0677-N1",
+      "unit_id": "OLP-0677",
+      "origin": "new_classical_wording",
+      "severity": "high",
+      "kind": "introduction_elimination_order_reversed",
+      "target": {
+        "path": "source/locale/ar-classical/content/proof-theory/normalization/segments.tex",
+        "sha256": "ab5085994e85f50eb8b1aae0712104a131f11b1815af09805083d452bc5bb6b8",
+        "lines": [13, 17]
+      },
+      "issue": "Line 13 says an introduction rule follows an elimination rule, reversing the source definition of a detour. Line 16 then states the intended order, so the paragraph contradicts itself.",
+      "required_fix": {
+        "operation": "replace_text",
+        "line": 13,
+        "replace": "إذا تعقبت قاعدة~!!^a{introduction} قاعدة~!!a{elimination}",
+        "with": "إذا تعقبت قاعدةُ~!!a{elimination} قاعدةَ~!!^a{introduction}"
+      },
+      "confidence": "high"
+    },
+    {
+      "id": "0684-T1",
+      "unit_id": "OLP-0684",
+      "origin": "inherited_msa_retained_in_classical",
+      "severity": "medium",
+      "kind": "tableaux_truth_table_terminology_collision",
+      "target": {
+        "path": "source/locale/ar-classical/content/proof-theory/proof-search/tableaux.tex",
+        "sha256": "b8492d6d838ed5b5a380d9f54c97c2e9f4c16b1c92f395c030fb122c5f2b2e39",
+        "lines": [11, 13, 16, 17, 20, 32, 115, 145]
+      },
+      "issue": "The proof method 'tableaux' is repeatedly named «جداول الصدق», the standard literal name for truth tables, even while line 17 separately calls the same objects «جداول دلالية». This can make readers identify a branching proof/model-search calculus with tabular truth-value enumeration.",
+      "required_fix": {
+        "operation": "normalize_term_in_unit",
+        "preferred": "الجداول الدلالية",
+        "alternatives": ["اللوحات الدلالية", "أشجار الصدق"],
+        "reservation": "Reserve جداول الصدق for truth tables. Apply the chosen tableaux term to the title, system names, signed-tableau definition, proof-search paragraph, and tableau-to-sequent translation paragraph."
+      },
+      "confidence": "medium-high",
+      "expert_review_useful": true,
+      "open_to_correction": true
+    },
+    {
+      "id": "0686-M1",
+      "unit_id": "OLP-0686",
+      "origin": "inherited_msa_retained_in_classical",
+      "severity": "high",
+      "kind": "introduction_elimination_order_reversed",
+      "target": {
+        "path": "source/locale/ar-classical/content/proof-theory/propositions-as-types/introduction.tex",
+        "sha256": "89e88feb85458a4ad5e33afcddde702802fc24b7a6165c65ec13309967dcbf53",
+        "lines": [76, 97]
+      },
+      "issue": "The prose says implication introduction follows implication elimination, while the displayed redex directly below has introduction first and elimination second. The frozen English says introduction is followed by elimination.",
+      "required_fix": {
+        "operation": "replace_text",
+        "line": 76,
+        "replace": "إذا تبعت قاعدة~$\\Intro\\lif{}$ فورًا قاعدة~$\\Elim\\lif{}$",
+        "with": "إذا تبعت قاعدةُ~$\\Elim\\lif{}$ قاعدةَ~$\\Intro\\lif{}$ فورًا"
+      },
+      "confidence": "high"
+    },
+    {
+      "id": "0687-D1",
+      "unit_id": "OLP-0687",
+      "origin": "msa_source_repair_retained_in_classical",
+      "severity": "high",
+      "kind": "normalization_theorem_left_unproved",
+      "target": {
+        "path": "source/locale/ar-classical/content/proof-theory/propositions-as-types/normalization.tex",
+        "sha256": "f050c471381646f580415c4de4d43479c5904c21d913a564f1a060cdd8a008e4",
+        "lines": [120, 153]
+      },
+      "issue": "The Arabic correctly diagnoses that the frozen English induction is invalid, but then places an explicit statement that the normalization theorem remains unproved inside a proof environment. The following strong-normalization and confluence discussion depends on additional metatheorems. This is honest source repair, not mistranslation, but it leaves a central theorem without a proof and creates a substantial edition/source divergence.",
+      "required_fix": {
+        "operation": "supply_valid_proof_or_mark_editorial_status",
+        "requirements": [
+          "Preferred: replace lines 126-141 with a valid reducibility-candidates proof (or an equivalent proof) for the exact typed proof-term calculus used here.",
+          "If a full proof is kept out of scope, remove the pseudo-proof environment, label the diagnosis as an editorial/source-erratum note, and cite a proof whose calculus and reduction rules match this chapter.",
+          "Do not restore the invalid frozen-English rank argument."
+        ]
+      },
+      "confidence": "high"
+    }
+  ],
+  "finding_ids_by_unit": {
+    "OLP-0606": ["0606-M1"],
+    "OLP-0607": ["0607-N1"],
+    "OLP-0624": ["0624-M1"],
+    "OLP-0625": ["0625-M1"],
+    "OLP-0628": ["0628-N1"],
+    "OLP-0643": ["0643-I1"],
+    "OLP-0649": ["0649-N1"],
+    "OLP-0650": ["0650-N1"],
+    "OLP-0652": ["0652-N1"],
+    "OLP-0676": ["0676-M1"],
+    "OLP-0677": ["0677-N1"],
+    "OLP-0684": ["0684-T1"],
+    "OLP-0686": ["0686-M1"],
+    "OLP-0687": ["0687-D1"]
+  },
+  "confirmed_source_corrections": [
+    {
+      "units": ["OLP-0608", "OLP-0609", "OLP-0610", "OLP-0615", "OLP-0635"],
+      "assessment": "The Arabic witnesses correctly repair, respectively, a missing parenthesis in an inclusion formula, a wrong set-membership condition in contradiction, a duplicated inclusion direction, the induction base/index for naturals beginning at zero, and the missing puncture condition in a limit definition. These should not be reverted to frozen-English bytes."
+    },
+    {
+      "units": ["OLP-0639"],
+      "assessment": "The Arabic Hilbert-curve passage replaces an invalid/hand-waving frozen-source argument with an explicit uniformly Cauchy construction, continuity proof, and compactness/subsequence surjectivity argument. The current proof is coherent; its substantial provenance should remain visible in edition notes."
+    },
+    {
+      "units": ["OLP-0647", "OLP-0651", "OLP-0653"],
+      "assessment": "The targets correctly repair malformed representability notation, supply the omitted alpha-conversion explanation, and correct language, predecessor, parity-quantifier, and block-condition errors in nonstandard arithmetic."
+    },
+    {
+      "units": ["OLP-0655", "OLP-0656", "OLP-0658", "OLP-0659", "OLP-0660", "OLP-0661", "OLP-0662", "OLP-0663", "OLP-0665", "OLP-0668", "OLP-0669", "OLP-0670", "OLP-0671", "OLP-0673", "OLP-0675", "OLP-0678", "OLP-0679", "OLP-0683"],
+      "assessment": "These proof-theory targets retain material repairs of frozen-source variable names, contexts, rule labels, eigenvariable conditions, malformed proof trees, false-succedent cases, translation directions, and the unsupported claim that every arbitrary reduction order terminates. Independent reading found the repaired arguments materially preferable; finding 0676-M1 is a separate surviving formal-marker defect."
+    },
+    {
+      "units": ["OLP-0691", "OLP-0694", "OLP-0696", "OLP-0697", "OLP-0698", "OLP-0699"],
+      "assessment": "The targets correctly repair source substitution order, malformed proof-tree syntax, type-preservation/context formulas, biconditional sequent rules, an induction base omitting the false-left axiom, the XOR left-rule label, and reversed prose truth conditions for structural rules. The prose notation π₂(x) in OLP-0695 is not a defect: \\proj{2}{x} is defined to render π₂(x)."
+    }
+  ],
+  "terminology_coverage": {
+    "contract": "evidence/classical/terminology/README.md",
+    "existing_retro_file": "evidence/classical/terminology/retro-0601-0722.json",
+    "existing_retro_status": "RECONCILIATION_INCOMPLETE",
+    "assessment": "The existing retrospective ledger still labels these Classical targets as not yet constructed and has no decision/occurrence records for this range. The questions below are a current hash-bound expert-review index, not a claim of exhaustive official terminology attestation or completed occurrence reconciliation.",
+    "recording_mode": "retrospective-reconstruction",
+    "authority_status": "not-checked",
+    "human_dependency": false,
+    "open_to_correction": true,
+    "questions_count": 35
+  },
+  "provisional_terminology_questions": [
+    {
+      "id": "T-DEFINIENDUM-DEFINIENS",
+      "english_term": "definiendum / definiens",
+      "sense": "the expression being defined / the expression that gives its definition",
+      "chosen_arabic": "المعرَّف / المُعرِّف",
+      "locations": [
+        {"unit_id": "OLP-0605", "path": "source/locale/ar-classical/content/methods/proofs/using-definitions.tex", "lines": [16, 17, 38, 40]},
+        {"unit_id": "OLP-0606", "path": "source/locale/ar-classical/content/methods/proofs/inference-patterns.tex", "lines": [23]}
+      ],
+      "alternatives": ["اللفظ المعرَّف / عبارة التعريف", "المحدود / الحدّ الشارح"],
+      "rationale": "The chosen pair is compact and morphologically parallel, but it depends almost entirely on vocalization and can collapse in unvocalized reading.",
+      "expert_question": "Is this vocalization-only distinction established in an Arabic mathematical dictionary, or should the definiens receive a lexically distinct name?",
+      "basis": "inherited-unverified",
+      "authority_status": "not-checked",
+      "recording_mode": "retrospective-reconstruction",
+      "expert_review_useful": true,
+      "open_to_correction": true
+    },
+    {
+      "id": "T-EXCLUDED-MIDDLE",
+      "english_term": "law/principle of excluded middle",
+      "sense": "A or not-A",
+      "chosen_arabic": "مبدأ الثالث المرفوع",
+      "locations": [
+        {"unit_id": "OLP-0608", "path": "source/locale/ar-classical/content/methods/proofs/example-2.tex", "lines": [82]}
+      ],
+      "alternatives": ["قانون الوسط المرفوع", "قانون الثالث المرفوع"],
+      "rationale": "الثالث المرفوع has a long logical pedigree and matches the source's 'third' idiom, but Arabic teaching traditions also use الوسط المرفوع and vary between مبدأ and قانون.",
+      "expert_question": "Which head form is preferred by the governing official logic/mathematics lexicon for a pedagogical text?",
+      "basis": "inherited-unverified",
+      "authority_status": "not-checked",
+      "recording_mode": "retrospective-reconstruction",
+      "expert_review_useful": true,
+      "open_to_correction": true
+    },
+    {
+      "id": "T-MODUS-PONENS",
+      "english_term": "modus ponens",
+      "sense": "inference from A and A→B to B",
+      "chosen_arabic": "القياس الشرطي",
+      "locations": [
+        {"unit_id": "OLP-0615", "path": "source/locale/ar-classical/content/methods/induction/induction-on-N.tex", "lines": [27, 29]},
+        {"unit_id": "OLP-0654", "path": "source/locale/ar-classical/content/normal-modal-logic/syntax-and-semantics/normal-modal-logics.tex", "lines": [24]}
+      ],
+      "alternatives": ["إثبات المقدَّم", "قاعدة الفصل", "وضع المقدَّم"],
+      "rationale": "القياس الشرطي is intelligible and inherited, but may suggest the broader traditional conditional syllogism rather than this single Hilbert rule.",
+      "expert_question": "Which term best distinguishes modus ponens from conditional syllogisms and from the sequent cut/factoring rule?",
+      "basis": "inherited-unverified",
+      "authority_status": "not-checked",
+      "recording_mode": "retrospective-reconstruction",
+      "expert_review_useful": true,
+      "open_to_correction": true
+    },
+    {
+      "id": "T-VACUOUS-QUANTIFICATION",
+      "english_term": "vacuous quantification",
+      "sense": "a quantified statement true because its restricting class is empty",
+      "chosen_arabic": "التكميم الخالي",
+      "locations": [
+        {"unit_id": "OLP-0616", "path": "source/locale/ar-classical/content/methods/induction/strong-induction.tex", "lines": [31]}
+      ],
+      "alternatives": ["التكميم الفارغ", "السور الخالي", "الصدق الخلوي"],
+      "rationale": "The current wording maps vacuity to خلوّ and remains readable, but may be confused with a quantifier that has no bound occurrence rather than vacuous truth over an empty class.",
+      "expert_question": "Does the official terminology distinguish vacuous truth from a vacuous binder, and what terms does it use for each?",
+      "basis": "ai-proposed",
+      "authority_status": "not-checked",
+      "recording_mode": "retrospective-reconstruction",
+      "expert_review_useful": true,
+      "open_to_correction": true
+    },
+    {
+      "id": "T-UNIQUE-READABILITY",
+      "english_term": "unique readability",
+      "sense": "uniqueness of syntactic decomposition",
+      "chosen_arabic": "قابلية القراءة الفريدة / وحيدة القراءة",
+      "locations": [
+        {"unit_id": "OLP-0619", "path": "source/locale/ar-classical/content/methods/induction/relations.tex", "lines": [87]},
+        {"unit_id": "OLP-0645", "path": "source/locale/ar-classical/content/first-order-logic/syntax-and-semantics/introduction.tex", "lines": [24, 25]}
+      ],
+      "alternatives": ["فرادة القراءة", "وحدانية التحليل التركيبي", "القراءة الوحيدة"],
+      "rationale": "Both current phrases communicate the idea, but using two heads within 27 units obscures that they name one theorem/property; 'readability' can also sound typographical rather than syntactic.",
+      "expert_question": "Which single term should be normalized across syntax chapters, and should it explicitly mention decomposition/parsing?",
+      "basis": "inherited-unverified",
+      "authority_status": "not-checked",
+      "recording_mode": "retrospective-reconstruction",
+      "expert_review_useful": true,
+      "open_to_correction": true
+    },
+    {
+      "id": "T-PROPER-INITIAL-SEGMENT",
+      "english_term": "proper initial segment",
+      "sense": "an initial segment strictly shorter than the whole symbol string",
+      "chosen_arabic": "القطعة الابتدائية الصحيحة",
+      "locations": [
+        {"unit_id": "OLP-0618", "path": "source/locale/ar-classical/content/methods/induction/structural-induction.tex", "lines": [62]}
+      ],
+      "alternatives": ["القطعة الابتدائية الحقيقية", "المقطع الابتدائي غير الكامل"],
+      "rationale": "صحيحة mirrors one established rendering of 'proper', but without context can be read as 'correct' rather than 'strict/non-equal'.",
+      "expert_question": "Does the relevant mathematical lexicon standardize proper subset/segment as صحيح, حقيقي, or تامّ/غير تامّ?",
+      "basis": "inherited-unverified",
+      "authority_status": "not-checked",
+      "recording_mode": "retrospective-reconstruction",
+      "expert_review_useful": true,
+      "open_to_correction": true
+    },
+    {
+      "id": "T-SUBTERM",
+      "english_term": "subterm",
+      "sense": "a constituent term in an inductively generated expression",
+      "chosen_arabic": "حد فرعي",
+      "locations": [
+        {"unit_id": "OLP-0619", "path": "source/locale/ar-classical/content/methods/induction/relations.tex", "lines": [82]}
+      ],
+      "alternatives": ["حد جزئي", "حد مضمَّن"],
+      "rationale": "فرعي is transparent, but later proof-theory prose also uses جزئي for proper subterms; normalization matters in induction and cut-rank arguments.",
+      "expert_question": "Should subterm and proper subterm be standardized as حد فرعي / حد فرعي صحيح, or as حد جزئي / حد جزئي حقيقي?",
+      "basis": "inherited-unverified",
+      "authority_status": "not-checked",
+      "recording_mode": "retrospective-reconstruction",
+      "expert_review_useful": true,
+      "open_to_correction": true
+    },
+    {
+      "id": "T-TRANSFINITE-NUMBERS",
+      "english_term": "transfinite numbers",
+      "sense": "Cantor's ordinal/cardinal numbers beyond the finite",
+      "chosen_arabic": "الأعداد المتناهية التجاوز",
+      "locations": [
+        {"unit_id": "OLP-0622", "path": "source/locale/ar-classical/content/history/biographies/georg-cantor.tex", "lines": [26]}
+      ],
+      "alternatives": ["الأعداد عبر المتناهية", "الأعداد فوق المتناهية", "الأعداد المتعدية للمتناهي"],
+      "rationale": "The current analytic phrase expresses crossing the finite but is uncommon and can momentarily parse as 'finitely exceeding'.",
+      "expert_question": "What form is attested for Cantor's transfinite numbers in the Union/ALECSO mathematical dictionaries and Arabic set-theory literature?",
+      "basis": "ai-proposed",
+      "authority_status": "not-checked",
+      "recording_mode": "retrospective-reconstruction",
+      "expert_review_useful": true,
+      "open_to_correction": true
+    },
+    {
+      "id": "T-RECURSIVE-FUNCTION",
+      "english_term": "recursive function",
+      "sense": "recursion-theoretic computable function, not a software routine calling itself",
+      "chosen_arabic": "الدوال الاستدعائية / الدوال العودية",
+      "locations": [
+        {"unit_id": "OLP-0627", "path": "source/locale/ar-classical/content/history/biographies/rozsa-peter.tex", "lines": [36, 42]},
+        {"unit_id": "OLP-0648", "path": "source/locale/ar-classical/content/incompleteness/representability-in-q/c.tex", "lines": [27, 30, 31]}
+      ],
+      "alternatives": ["الدوال العودية"],
+      "rationale": "استدعائية is common in programming for recursive calls, while عودية is already used in the technical computability passage. The two passages concern the same recursion-theoretic family.",
+      "expert_question": "Should OLP-0627 be normalized to عودية to avoid a programming-only reading, and what distinction should be kept between recursive and primitive recursive?",
+      "basis": "inherited-unverified",
+      "authority_status": "not-checked",
+      "recording_mode": "retrospective-reconstruction",
+      "expert_review_useful": true,
+      "open_to_correction": true
+    },
+    {
+      "id": "T-INFINITESIMAL",
+      "english_term": "infinitesimal",
+      "sense": "a nonzero magnitude smaller in absolute value than every positive real bound",
+      "chosen_arabic": "كمية متناهية في الصغر",
+      "locations": [
+        {"unit_id": "OLP-0634", "path": "source/locale/ar-classical/content/history/set-theory/infinitesimals.tex", "lines": [47, 51, 55]}
+      ],
+      "alternatives": ["كمية لا متناهية الصغر", "صُغْرية", "مقدار متناهٍ في الصغر"],
+      "rationale": "The phrase is immediately intelligible, but متناهية في الصغر can be misread as merely very small or as finite-small rather than infinitesimal.",
+      "expert_question": "Which noun/phrase is officially used for infinitesimal, and does it distinguish historical indivisibles from modern nonstandard infinitesimals?",
+      "basis": "inherited-unverified",
+      "authority_status": "not-checked",
+      "recording_mode": "retrospective-reconstruction",
+      "expert_review_useful": true,
+      "open_to_correction": true
+    },
+    {
+      "id": "T-PATHOLOGY-SPACE-FILLING",
+      "english_term": "pathology / space-filling curve",
+      "sense": "counterintuitive late-nineteenth-century examples / a continuous surjection from an interval onto a planar region",
+      "chosen_arabic": "الظواهر الشاذة / منحنى مالئ للفضاء",
+      "locations": [
+        {"unit_id": "OLP-0636", "path": "source/locale/ar-classical/content/history/set-theory/pathologies.tex", "lines": [6, 23]},
+        {"unit_id": "OLP-0637", "path": "source/locale/ar-classical/content/history/set-theory/mythology.tex", "lines": [28]},
+        {"unit_id": "OLP-0639", "path": "source/locale/ar-classical/content/history/set-theory/hilbert-curve.tex", "lines": [147]}
+      ],
+      "alternatives": ["الأمثلة المرضية / المنحنى المملِّئ للفضاء", "الشذوذات الرياضية / منحنى يملأ الفضاء"],
+      "rationale": "شاذة avoids a medical calque; مالئ is concise. Both are reasonable but need coordination with established Arabic analysis/topology terminology.",
+      "expert_question": "Are ظواهر شاذة and منحنى مالئ للفضاء the preferred technical forms in Arabic topology histories?",
+      "basis": "ai-proposed",
+      "authority_status": "not-checked",
+      "recording_mode": "retrospective-reconstruction",
+      "expert_review_useful": true,
+      "open_to_correction": true
+    },
+    {
+      "id": "T-POINTWISE-UNIFORM-COMPACT",
+      "english_term": "pointwise limit / uniformly Cauchy / uniformly convergent / compact",
+      "sense": "analysis/topology vocabulary used in the repaired Hilbert-curve proof",
+      "chosen_arabic": "النهاية النقطية / كوشية بانتظام / تتقارب بانتظام / متراصة",
+      "locations": [
+        {"unit_id": "OLP-0639", "path": "source/locale/ar-classical/content/history/set-theory/hilbert-curve.tex", "lines": [96, 115, 133]}
+      ],
+      "alternatives": ["النهاية نقطةً فنقطة / كوشي بانتظام / التقارب المنتظم / مدمجة"],
+      "rationale": "The passage adds technical analysis absent from the frozen proof. The chosen terms are coherent, but compact has two competing Arabic traditions and كوشية needs grammatical normalization.",
+      "expert_question": "Which coordinated analysis vocabulary should govern pointwise/uniform convergence and compactness, especially متراص versus مدمج?",
+      "basis": "ai-proposed",
+      "authority_status": "not-checked",
+      "recording_mode": "retrospective-reconstruction",
+      "expert_review_useful": true,
+      "open_to_correction": true
+    },
+    {
+      "id": "T-FRAKTUR",
+      "english_term": "Fraktur alphabet/typeface",
+      "sense": "the blackletter glyph family used for mathematical symbols",
+      "chosen_arabic": "حروف فراكتور",
+      "locations": [
+        {"unit_id": "OLP-0642", "path": "source/locale/ar-classical/content/reference/fraktur-alphabet/fraktur-alphabet.tex", "lines": [8]}
+      ],
+      "alternatives": ["حروف الخط القوطي", "الأبجدية الفراكتورية", "خط فراكتور"],
+      "rationale": "Transliteration preserves the typeface's proper name and avoids equating all blackletter with Gothic, but readers may need a descriptive gloss.",
+      "expert_question": "Should the heading retain transliterated فراكتور alone or add الخط القوطي/الأسود as a gloss?",
+      "basis": "ai-proposed",
+      "authority_status": "not-checked",
+      "recording_mode": "retrospective-reconstruction",
+      "expert_review_useful": true,
+      "open_to_correction": true
+    },
+    {
+      "id": "T-MAXIMALLY-CONSISTENT",
+      "english_term": "maximally consistent set",
+      "sense": "a consistent set with no proper consistent extension",
+      "chosen_arabic": "البالغة غاية الاتساق / المتسقة القصوى",
+      "locations": [
+        {"unit_id": "OLP-0644", "path": "source/locale/ar-classical/content/first-order-logic/completeness/maximally-consistent-sets.tex", "lines": [14, 16, 38]}
+      ],
+      "alternatives": ["مجموعة متسقة أعظمية", "مجموعة قصوى الاتساق"],
+      "rationale": "The heading and definition currently use two realizations. قصوى can mean maximum rather than maximal; غاية الاتساق is elegant but not obviously the named property.",
+      "expert_question": "Which Arabic form preserves the order-theoretic distinction between maximal and maximum and should be used uniformly?",
+      "basis": "inherited-unverified",
+      "authority_status": "not-checked",
+      "recording_mode": "retrospective-reconstruction",
+      "expert_review_useful": true,
+      "open_to_correction": true
+    },
+    {
+      "id": "T-POLISH-NOTATION",
+      "english_term": "Polish notation",
+      "sense": "prefix notation eliminating parentheses",
+      "chosen_arabic": "الترميز البولندي",
+      "locations": [
+        {"unit_id": "OLP-0645", "path": "source/locale/ar-classical/content/first-order-logic/syntax-and-semantics/introduction.tex", "lines": [21]}
+      ],
+      "alternatives": ["التدوين البولندي", "الترميز السابق/البادئ"],
+      "rationale": "The established proper-name calque is concise, while a descriptive gloss would explain the syntactic property to unfamiliar readers.",
+      "expert_question": "Is الترميز البولندي sufficiently established, and should the first occurrence add «الترميز البادئ»?",
+      "basis": "inherited-unverified",
+      "authority_status": "not-checked",
+      "recording_mode": "retrospective-reconstruction",
+      "expert_review_useful": true,
+      "open_to_correction": true
+    },
+    {
+      "id": "T-ARITY",
+      "english_term": "arity",
+      "sense": "number of argument places of a function/predicate/connective",
+      "chosen_arabic": "رتبة n / ذو n من المواضع",
+      "locations": [
+        {"unit_id": "OLP-0645", "path": "source/locale/ar-classical/content/first-order-logic/syntax-and-semantics/introduction.tex", "lines": [31]},
+        {"unit_id": "OLP-0647", "path": "source/locale/ar-classical/content/incompleteness/representability-in-q/c-representable.tex", "lines": [13, 14]}
+      ],
+      "alternatives": ["عدد المواضع", "عَدَدِيّة الحجج", "تكافؤ n-ي"],
+      "rationale": "رتبة is compact but collides nearby with logical order, proof rank, and matrix rank. ذو n من المواضع is unambiguous but syntactically heavier.",
+      "expert_question": "What term should be standard for arity so that it cannot be confused with first-order/second-order or cut rank?",
+      "basis": "inherited-unverified",
+      "authority_status": "not-checked",
+      "recording_mode": "retrospective-reconstruction",
+      "expert_review_useful": true,
+      "open_to_correction": true
+    },
+    {
+      "id": "T-COMPUTABILITY-OPERATIONS",
+      "english_term": "unbounded search / regular function / characteristic function / projection / representability",
+      "sense": "operations and properties in the recursion-theoretic class C",
+      "chosen_arabic": "البحث غير المحدود / الدالة المنتظمة / الدالة المميزة / الإسقاطات / قابلية التمثيل",
+      "locations": [
+        {"unit_id": "OLP-0647", "path": "source/locale/ar-classical/content/incompleteness/representability-in-q/c-representable.tex", "lines": [51, 91]},
+        {"unit_id": "OLP-0648", "path": "source/locale/ar-classical/content/incompleteness/representability-in-q/c.tex", "lines": [18, 19, 24]}
+      ],
+      "alternatives": ["التصغير غير المحدود / الدالة الكلية الشرط / دالة البيان / دوال المسقط / التمثيل الصوري"],
+      "rationale": "These choices jointly define a computability class, so isolated synonym changes risk collapsing search/minimization, totality, and representability distinctions.",
+      "expert_question": "Can an Arabic computability specialist review this group as one coordinated vocabulary rather than approving each word in isolation?",
+      "basis": "inherited-unverified",
+      "authority_status": "not-checked",
+      "recording_mode": "retrospective-reconstruction",
+      "expert_review_useful": true,
+      "open_to_correction": true
+    },
+    {
+      "id": "T-ACCUMULATOR-RIGHT-FOLD",
+      "english_term": "accumulator / right fold",
+      "sense": "Church-encoded list eliminator combining elements with an initial value",
+      "chosen_arabic": "دالة جمعها / الطي من اليمين",
+      "locations": [
+        {"unit_id": "OLP-0650", "path": "source/locale/ar-classical/content/lambda-calculus/lambda-definability/lists.tex", "lines": [16, 22]}
+      ],
+      "alternatives": ["دالة التراكم / الطي اليميني", "المُراكِم / الاختزال من اليمين"],
+      "rationale": "الطي من اليمين is semantically apt for foldr; دالة جمعها is too close to arithmetic summation for an arbitrary combining function and is separately finding 0650-N1.",
+      "expert_question": "Should accumulator be المُراكِم, دالة التراكم, or described through الطي; and what is the standard Arabic pair for foldl/foldr?",
+      "basis": "ai-proposed",
+      "authority_status": "not-checked",
+      "recording_mode": "retrospective-reconstruction",
+      "expert_review_useful": true,
+      "open_to_correction": true
+    },
+    {
+      "id": "T-SEQUENT-MANY-VALUED",
+      "english_term": "proof-theoretic notions / sequent / sequence",
+      "sense": "syntactic derivability notions and the distinction between a sequent and an ordered antecedent sequence",
+      "chosen_arabic": "المعاني النظرية البرهانية / تتابع / متتالية",
+      "locations": [
+        {"unit_id": "OLP-0652", "path": "source/locale/ar-classical/content/many-valued-logic/sequent-calculus/proof-theoretic-notions.tex", "lines": [11, 16, 24, 31, 37, 44, 58]}
+      ],
+      "alternatives": ["المفاهيم البرهانية-النظرية / متتالية / سلسلة"],
+      "rationale": "The passage alternates تتابع and متتالية while it must also speak of an antecedent sequence; without a stable distinction readers may not know which object is the sequent itself.",
+      "expert_question": "Which terms should be reserved respectively for sequent, sequence, and multiset in the many-valued and ordinary sequent-calculus chapters?",
+      "basis": "inherited-unverified",
+      "authority_status": "not-checked",
+      "recording_mode": "retrospective-reconstruction",
+      "expert_review_useful": true,
+      "open_to_correction": true
+    },
+    {
+      "id": "T-WELL-FOUNDED",
+      "english_term": "well-founded",
+      "sense": "a relation with no infinite descending chain",
+      "chosen_arabic": "راسخة",
+      "locations": [
+        {"unit_id": "OLP-0653", "path": "source/locale/ar-classical/content/model-theory/basics/nonstandard-arithmetic.tex", "lines": [67, 70]}
+      ],
+      "alternatives": ["حسنة التأسيس", "مؤسَّسة جيدًا", "عديمة السلاسل النازلة اللامتناهية"],
+      "rationale": "راسخة is fluent and concise but does not transparently signal the formal no-descending-chain property; other units in the corpus use حسن التأسيس.",
+      "expert_question": "Should the corpus standardize on راسخة or حسنة التأسيس for well-founded relations/models?",
+      "basis": "ai-proposed",
+      "authority_status": "not-checked",
+      "recording_mode": "retrospective-reconstruction",
+      "expert_review_useful": true,
+      "open_to_correction": true
+    },
+    {
+      "id": "T-NONSTANDARD-ARITHMETIC",
+      "english_term": "standard part / immediate predecessor / cofinite / elementarily equivalent",
+      "sense": "model-theoretic structure of nonstandard arithmetic",
+      "chosen_arabic": "الجزء القياسي / السلف المباشر / متناهية المتممة / مكافئ أوليًا",
+      "locations": [
+        {"unit_id": "OLP-0653", "path": "source/locale/ar-classical/content/model-theory/basics/nonstandard-arithmetic.tex", "lines": [91, 95, 193, 204, 206, 208, 213]}
+      ],
+      "alternatives": ["القسم المعياري / السابق المباشر / متممتها منتهية / مكافئ ابتدائيًا"],
+      "rationale": "All four terms are plausible but densely interact in one theorem. أوليًا can be read temporally, and قياسي/معياري varies across model-theory traditions.",
+      "expert_question": "Are these the established coordinated terms in Arabic model theory, especially elementary equivalence and standard part?",
+      "basis": "inherited-unverified",
+      "authority_status": "not-checked",
+      "recording_mode": "retrospective-reconstruction",
+      "expert_review_useful": true,
+      "open_to_correction": true
+    },
+    {
+      "id": "T-NORMAL-MODAL-NECESSITATION",
+      "english_term": "normal modal logic / necessitation",
+      "sense": "a modal logic closed under uniform substitution, modus ponens and the rule A/□A",
+      "chosen_arabic": "المنطق الموجهي العادي / الإلزام",
+      "locations": [
+        {"unit_id": "OLP-0654", "path": "source/locale/ar-classical/content/normal-modal-logic/syntax-and-semantics/normal-modal-logics.tex", "lines": [11, 16, 46, 58]}
+      ],
+      "alternatives": ["المنطق الجهوي النظامي / قاعدة الضرورة", "المنطق المعياري للجهات / قاعدة اللزوم"],
+      "rationale": "عادي is a literal rendering of normal and الإلزام can be mistaken for semantic consequence. Elsewhere the project has used الجهوي النظامي, so this is also a corpus consistency question.",
+      "expert_question": "Which pair best preserves normality and necessitation without conflating them with ordinary logic or semantic entailment?",
+      "basis": "inherited-unverified",
+      "authority_status": "not-checked",
+      "recording_mode": "retrospective-reconstruction",
+      "expert_review_useful": true,
+      "open_to_correction": true
+    },
+    {
+      "id": "T-PRENEX-MIDSEQUENT-HERBRAND",
+      "english_term": "prenex / midsequent / Herbrand disjunction",
+      "sense": "quantifiers in front, the separating sequent in a cut-free proof, and a finite disjunction of ground instances",
+      "chosen_arabic": "سُوَرية المقدمة / المتتالية الوسطى / فصل هيربراند",
+      "locations": [
+        {"unit_id": "OLP-0661", "path": "source/locale/ar-classical/content/proof-theory/cut-elimination/midsequent.tex", "lines": [11, 13, 15, 16, 28, 35, 40, 88]}
+      ],
+      "alternatives": ["صيغة الأسوار السابقة / المتتالية الفاصلة / مفصول هيربراند", "الصيغة المسبوقة بالأسوار / التتابع الأوسط / فصل هربراند"],
+      "rationale": "These terms form a single proof-theoretic argument. سُوَرية المقدمة may be mistaken for the antecedent of a sequent; فصل can mean both disjunction and chapter/section.",
+      "expert_question": "What coordinated terminology should distinguish prenex prefix, sequent antecedent, midsequent, and Herbrand disjunction?",
+      "basis": "ai-proposed",
+      "authority_status": "not-checked",
+      "recording_mode": "retrospective-reconstruction",
+      "expert_review_useful": true,
+      "open_to_correction": true
+    },
+    {
+      "id": "T-DISCHARGE-LABEL",
+      "english_term": "discharge / discharge label",
+      "sense": "closing specified assumption occurrences in natural deduction",
+      "chosen_arabic": "تبرئة / علامة التبرئة; تفريغ / وسم التفريغ",
+      "locations": [
+        {"unit_id": "OLP-0668", "path": "source/locale/ar-classical/content/proof-theory/natural-deduction/rules-proofs.tex", "lines": [55, 67, 120, 130, 168]},
+        {"unit_id": "OLP-0670", "path": "source/locale/ar-classical/content/proof-theory/natural-deduction/translation-G2i.tex", "lines": [40, 120, 124, 152, 170]},
+        {"unit_id": "OLP-0688", "path": "source/locale/ar-classical/content/proof-theory/propositions-as-types/proof-terms.tex", "lines": [13, 50]}
+      ],
+      "alternatives": ["إسقاط الفرض / علامة الإسقاط", "إغلاق الفرض / وسم الإغلاق"],
+      "rationale": "تبرئة is idiomatic for releasing an assumption from obligation; تفريغ is also inherited but suggests emptying. Alternation inside one proof-theory span makes labels harder to track.",
+      "expert_question": "Which verb and noun should be normalized for discharging assumptions and for the labels that control discharge?",
+      "basis": "inherited-unverified",
+      "authority_status": "not-checked",
+      "recording_mode": "retrospective-reconstruction",
+      "expert_review_useful": true,
+      "open_to_correction": true
+    },
+    {
+      "id": "T-EIGENVARIABLE",
+      "english_term": "eigenvariable/eigenconstant",
+      "sense": "a fresh parameter constrained by a quantifier-rule side condition",
+      "chosen_arabic": "المتغير المميز / المتغير الذاتي",
+      "locations": [
+        {"unit_id": "OLP-0665", "path": "source/locale/ar-classical/content/proof-theory/natural-deduction/quantifiers.tex", "lines": [13, 24, 139, 145, 161, 175, 176]},
+        {"unit_id": "OLP-0668", "path": "source/locale/ar-classical/content/proof-theory/natural-deduction/rules-proofs.tex", "lines": [114, 116]},
+        {"unit_id": "OLP-0675", "path": "source/locale/ar-classical/content/proof-theory/normalization/permutations.tex", "lines": [309, 312, 359]},
+        {"unit_id": "OLP-0683", "path": "source/locale/ar-classical/content/proof-theory/proof-search/search-algorithm.tex", "lines": [123, 124]}
+      ],
+      "alternatives": ["المتغير الخاص", "المعلم الجديد", "الثابت المميز"],
+      "rationale": "The same freshness condition receives two terms. ذاتي may evoke eigen- literally, while مميز better signals a designated parameter; several rules actually use a constant rather than a variable.",
+      "expert_question": "Should eigenvariable and eigenconstant be distinguished explicitly, and which head term should be used throughout quantifier proofs?",
+      "basis": "inherited-unverified",
+      "authority_status": "not-checked",
+      "recording_mode": "retrospective-reconstruction",
+      "expert_review_useful": true,
+      "open_to_correction": true
+    },
+    {
+      "id": "T-NORMALIZATION-CONVERSIONS",
+      "english_term": "normalization / permutation conversion / reduction conversion / cut segment / strong normalization",
+      "sense": "transformations eliminating natural-deduction detours and their termination property",
+      "chosen_arabic": "التطبيع / تحويل التبديل / تحويل الاختزال / مقطع قطع / التطبيع القوي",
+      "locations": [
+        {"unit_id": "OLP-0673", "path": "source/locale/ar-classical/content/proof-theory/normalization/normalization-thm.tex", "lines": [15, 28, 36, 38, 39, 42]},
+        {"unit_id": "OLP-0675", "path": "source/locale/ar-classical/content/proof-theory/normalization/permutations.tex", "lines": [11, 297, 303, 308]},
+        {"unit_id": "OLP-0676", "path": "source/locale/ar-classical/content/proof-theory/normalization/reductions.tex", "lines": [11, 71, 83, 86, 240]}
+      ],
+      "alternatives": ["التسوية / تحويل المبادلة / تحويل الرد / شريحة القطع / التسوية القوية"],
+      "rationale": "The current family is internally understandable, but each word also has neighboring meanings in computation, algebra, and typography. A coordinated expert decision is safer than local synonym changes.",
+      "expert_question": "Are these the standard Arabic proof-theory terms, and how should reduction, conversion, detour, segment, and cut be kept distinct?",
+      "basis": "ai-proposed",
+      "authority_status": "not-checked",
+      "recording_mode": "retrospective-reconstruction",
+      "expert_review_useful": true,
+      "open_to_correction": true
+    },
+    {
+      "id": "T-PROOF-SEARCH-FAIRNESS",
+      "english_term": "fair proof-search strategy",
+      "sense": "a search schedule that eventually processes every persistent applicable choice",
+      "chosen_arabic": "الإنصاف",
+      "locations": [
+        {"unit_id": "OLP-0683", "path": "source/locale/ar-classical/content/proof-theory/proof-search/search-algorithm.tex", "lines": [21, 27]}
+      ],
+      "alternatives": ["عدالة الاستراتيجية", "شمول الجدولة", "استراتيجية لا تهمل فرعًا"],
+      "rationale": "الإنصاف is a natural rendering of fairness but has a strong ethical ordinary sense; a definition makes it usable, yet indexing and cross-corpus consistency matter.",
+      "expert_question": "Is الإنصاف established for fair search/scheduling, or should the first occurrence use a descriptive technical gloss?",
+      "basis": "ai-proposed",
+      "authority_status": "not-checked",
+      "recording_mode": "retrospective-reconstruction",
+      "expert_review_useful": true,
+      "open_to_correction": true
+    },
+    {
+      "id": "T-SEMANTIC-TABLEAUX",
+      "english_term": "tableau / semantic tableau / truth tree",
+      "sense": "a branching signed-formula proof and model-search calculus",
+      "chosen_arabic": "جدول الصدق / جدول دلالي / شجرة صدق",
+      "locations": [
+        {"unit_id": "OLP-0684", "path": "source/locale/ar-classical/content/proof-theory/proof-search/tableaux.tex", "lines": [11, 13, 17, 18, 20, 32, 115, 145]}
+      ],
+      "alternatives": ["الجدول الدلالي", "اللوحة الدلالية", "شجرة الصدق"],
+      "rationale": "جدول الصدق collides with truth table, whereas the passage itself offers جدول دلالي and شجرة صدق. This terminology defect is separately finding 0684-T1.",
+      "expert_question": "Which Arabic term unambiguously names tableaux while reserving جدول الصدق for truth tables?",
+      "basis": "inherited-unverified",
+      "authority_status": "not-checked",
+      "recording_mode": "retrospective-reconstruction",
+      "expert_review_useful": true,
+      "open_to_correction": true
+    },
+    {
+      "id": "T-TYPE-SYSTEM-VOCABULARY",
+      "english_term": "type / product type / sum type / empty type / well-typed / type preservation / progress",
+      "sense": "simply typed lambda-calculus and Curry-Howard metatheory",
+      "chosen_arabic": "نمط ونوع / نمط ضربي وجمعي وخال / صحيح النوع / حفظ النوع / التقدم",
+      "locations": [
+        {"unit_id": "OLP-0686", "path": "source/locale/ar-classical/content/proof-theory/propositions-as-types/introduction.tex", "lines": [38, 40, 46, 49, 100, 101]},
+        {"unit_id": "OLP-0687", "path": "source/locale/ar-classical/content/proof-theory/propositions-as-types/normalization.tex", "lines": [121, 144, 145]},
+        {"unit_id": "OLP-0696", "path": "source/locale/ar-classical/content/proof-theory/propositions-as-types/type-preservation.tex", "lines": [11, 19, 99, 101, 102]},
+        {"unit_id": "OLP-0697", "path": "source/locale/ar-classical/content/proof-theory/propositions-as-types/types.tex", "lines": [67, 76]}
+      ],
+      "alternatives": ["نوع / نوع حاصل ضرب / نوع مجموع / النوع الخالي / حسن التنميط / صيانة النوع / خاصية السير", "نمط / نمط جدائي / نمط اتحادي / نمط باطل"],
+      "rationale": "نمط and نوع alternate within one chapter family. A stable choice must also avoid conflict with logical sort and with ordinary 'kind'. Progress is a named metatheorem, not generic advancement.",
+      "expert_question": "Which coordinated Arabic type-theory vocabulary should be used for type, sort, typing, well-typedness, preservation, progress, product and sum?",
+      "basis": "inherited-unverified",
+      "authority_status": "not-checked",
+      "recording_mode": "retrospective-reconstruction",
+      "expert_review_useful": true,
+      "open_to_correction": true
+    },
+    {
+      "id": "T-REDEX-REDUCT-CONFLUENCE",
+      "english_term": "redex / reduct(um) / confluence / Church-Rosser",
+      "sense": "a reducible expression, its one-step result, and joinability of divergent reductions",
+      "chosen_arabic": "ردكس / مختزَل / التلاقي / خاصية تشيرش--روسر",
+      "locations": [
+        {"unit_id": "OLP-0687", "path": "source/locale/ar-classical/content/proof-theory/propositions-as-types/normalization.tex", "lines": [27, 38, 41, 130, 156, 157, 168, 174, 179, 194, 196]},
+        {"unit_id": "OLP-0691", "path": "source/locale/ar-classical/content/proof-theory/propositions-as-types/reduction.tex", "lines": [53, 54, 57]}
+      ],
+      "alternatives": ["عبارة قابلة للاختزال / ناتج الاختزال / التوافق", "المُختزَل منه / الصورة المختزلة / الالتقاء"],
+      "rationale": "ردكس is precise international shorthand but opaque without a gloss. مختزَل can denote either the source or result depending Arabic morphology; التلاقي is clear if distinguished from mere local confluence.",
+      "expert_question": "Should redex be transliterated or descriptively translated, and which vocalization/phrase unambiguously names the reductum?",
+      "basis": "ai-proposed",
+      "authority_status": "not-checked",
+      "recording_mode": "retrospective-reconstruction",
+      "expert_review_useful": true,
+      "open_to_correction": true
+    },
+    {
+      "id": "T-SEQUENT-SIDES",
+      "english_term": "antecedent / succedent of a sequent",
+      "sense": "the left and right multisets in Γ ⇒ Δ",
+      "chosen_arabic": "المقدّم / التالي; المقدِّمة / المؤخِّرة",
+      "locations": [
+        {"unit_id": "OLP-0698", "path": "source/locale/ar-classical/content/proof-theory/sequent-calculus/admissible-derivable.tex", "lines": [46, 47]},
+        {"unit_id": "OLP-0700", "path": "source/locale/ar-classical/content/proof-theory/sequent-calculus/introduction.tex", "lines": [41, 42, 59]}
+      ],
+      "alternatives": ["السابق / اللاحق", "الطرف الأيسر / الطرف الأيمن", "المقدَّم / المؤخَّر"],
+      "rationale": "Two incompatible pairs occur in adjacent units. مقدمة also means premise or introduction; التالي can mean the next item rather than a succedent.",
+      "expert_question": "Which pair should be reserved for sequent antecedent/succedent across all calculi, distinct from inference premises and chapter introductions?",
+      "basis": "inherited-unverified",
+      "authority_status": "not-checked",
+      "recording_mode": "retrospective-reconstruction",
+      "expert_review_useful": true,
+      "open_to_correction": true
+    },
+    {
+      "id": "T-CONTRACTION-RULE",
+      "english_term": "contraction",
+      "sense": "the structural rule merging duplicate formula occurrences",
+      "chosen_arabic": "التقليص / الانكماش / التقلص",
+      "locations": [
+        {"unit_id": "OLP-0652", "path": "source/locale/ar-classical/content/many-valued-logic/sequent-calculus/proof-theoretic-notions.tex", "lines": [37, 59]},
+        {"unit_id": "OLP-0655", "path": "source/locale/ar-classical/content/proof-theory/cut-elimination/ce-largest.tex", "lines": [77, 120, 261]},
+        {"unit_id": "OLP-0659", "path": "source/locale/ar-classical/content/proof-theory/cut-elimination/introduction.tex", "lines": [83]},
+        {"unit_id": "OLP-0661", "path": "source/locale/ar-classical/content/proof-theory/cut-elimination/midsequent.tex", "lines": [156, 170]},
+        {"unit_id": "OLP-0699", "path": "source/locale/ar-classical/content/proof-theory/sequent-calculus/interpretation-rules.tex", "lines": [83, 118, 119, 121, 124, 125]},
+        {"unit_id": "OLP-0700", "path": "source/locale/ar-classical/content/proof-theory/sequent-calculus/introduction.tex", "lines": [79]}
+      ],
+      "alternatives": ["قاعدة الدمج", "القبض", "الاختزال البنيوي"],
+      "rationale": "Three Arabic names denote one structural rule inside this 100-unit span. This is a direct index/retrievability problem even where each individual word is understandable.",
+      "expert_question": "Which single term should be canonical for structural contraction, and how should it be kept distinct from beta contraction/reduction?",
+      "basis": "inherited-unverified",
+      "authority_status": "not-checked",
+      "recording_mode": "retrospective-reconstruction",
+      "expert_review_useful": true,
+      "open_to_correction": true
+    },
+    {
+      "id": "T-EXCLUSIVE-OR",
+      "english_term": "exclusive or (XOR)",
+      "sense": "true exactly when one of A and B is true",
+      "chosen_arabic": "أو مانعة للجمع",
+      "locations": [
+        {"unit_id": "OLP-0699", "path": "source/locale/ar-classical/content/proof-theory/sequent-calculus/interpretation-rules.tex", "lines": [32, 33]}
+      ],
+      "alternatives": ["أو الحصرية", "الفصل المانع للجمع", "أحدهما دون الآخر"],
+      "rationale": "مانعة الجمع is a traditional logical classification and the local sentence defines it exactly; modern technical readers may instead expect XOR/أو الحصرية.",
+      "expert_question": "Should the traditional phrase be retained alone, or paired at first occurrence with أو الحصرية/XOR for modern discoverability?",
+      "basis": "inherited-unverified",
+      "authority_status": "not-checked",
+      "recording_mode": "retrospective-reconstruction",
+      "expert_review_useful": true,
+      "open_to_correction": true
+    },
+    {
+      "id": "T-ADMISSIBLE-DERIVABLE",
+      "english_term": "admissible rule / derivable rule / height-preserving admissible",
+      "sense": "a rule eliminable without changing theorems / a schematically simulable rule / admissibility without height increase",
+      "chosen_arabic": "قاعدة مقبولة / قابلة للاشتقاق / مقبولة مع حفظ الارتفاع",
+      "locations": [
+        {"unit_id": "OLP-0698", "path": "source/locale/ar-classical/content/proof-theory/sequent-calculus/admissible-derivable.tex", "lines": [20, 68, 80, 132, 138, 173, 179, 188, 189]}
+      ],
+      "alternatives": ["قاعدة جائزة / قاعدة مشتقة / جائزة حافظة للارتفاع", "قاعدة مقبول استعمالها / قابلة للاستنباط"],
+      "rationale": "The current trio preserves the formal distinction, but مقبولة can sound socially approved rather than conservative over provability, and derivable/derived must remain distinct.",
+      "expert_question": "Are مقبولة and قابلة للاشتقاق the standard proof-theory pair, and what fixed phrase should name height-preserving admissibility?",
+      "basis": "inherited-unverified",
+      "authority_status": "not-checked",
+      "recording_mode": "retrospective-reconstruction",
+      "expert_review_useful": true,
+      "open_to_correction": true
+    },
+    {
+      "id": "T-CURRY-HOWARD",
+      "english_term": "Curry-Howard correspondence / propositions as types / proof terms",
+      "sense": "the correspondence between propositions and types, proofs and typed programs",
+      "chosen_arabic": "مقابلة كاري--هوارد / القضايا بوصفها أنماطًا / حدود البرهان",
+      "locations": [
+        {"unit_id": "OLP-0690", "path": "source/locale/ar-classical/content/proof-theory/propositions-as-types/propositions-as-types.tex", "lines": [8, 11]},
+        {"unit_id": "OLP-0686", "path": "source/locale/ar-classical/content/proof-theory/propositions-as-types/introduction.tex", "lines": [11, 27, 46, 103, 104, 105, 124]},
+        {"unit_id": "OLP-0688", "path": "source/locale/ar-classical/content/proof-theory/propositions-as-types/proof-terms.tex", "lines": [11, 13]}
+      ],
+      "alternatives": ["مراسلة كاري--هوارد / القضايا أنواع / مصطلحات البرهان", "تماثل كاري--هوارد / القضايا كأنماط / حدود إثباتية"],
+      "rationale": "مقابلة and حد are consistent with broader project prose, but correspondence and term have specialized meanings; the type/noun choice must agree with T-TYPE-SYSTEM-VOCABULARY.",
+      "expert_question": "Which established Arabic terms should name the Curry-Howard correspondence and proof terms without suggesting merely a side-by-side comparison or a theorem boundary?",
+      "basis": "ai-proposed",
+      "authority_status": "not-checked",
+      "recording_mode": "retrospective-reconstruction",
+      "expert_review_useful": true,
+      "open_to_correction": true
+    }
+  ],
+  "unit_record_fields": [
+    "id",
+    "english_sha256",
+    "msa_sha256",
+    "classical_target_sha256",
+    "outcome"
+  ],
+  "units": [
+    [
+      "OLP-0601",
+      "bed9153f391e0937825c1f86e9d808ef90aa3cb93eb33f0ee1a632a4d13aa2b6",
+      "6bff984efaecc4217cc3cd9d2d32869f4bfa6e804ef8face81a4872cbfeb5dba",
+      "f73a773f3f9245bf05436291e5713a137c185be8581f75fed8a1812ee9aba198",
+      "PASS"
+    ],
+    [
+      "OLP-0602",
+      "26a34bb3d34de40ca0d16d8f1b88d156d3c694d1c7c6e9147454fcc5144c65f6",
+      "f58072c06661b0f05bea3a5416606a1705bcd3c2a78be83a0052ddf8249a74d9",
+      "f58072c06661b0f05bea3a5416606a1705bcd3c2a78be83a0052ddf8249a74d9",
+      "PASS_STRUCTURAL_NO_PROSE"
+    ],
+    [
+      "OLP-0603",
+      "ae06d0471d8f4c8565a11f9dbd7bb77513f837bb495032b6356cafbaa319ad83",
+      "bb811f4526180c3e26d8c9975ad0dcbbf9b597059971dd1f2f147d22f7f83296",
+      "179ee2892bb50c6c5607eef0f6d8ea0ab35ef76b15d8f7473106f59f40879cb1",
+      "PASS"
+    ],
+    [
+      "OLP-0604",
+      "84908cb7ef78b1ec62e2ccc41376d5bc039c6e44e1855c386d7b112c69d5ce64",
+      "a982e6a16373f9fd95ad8b0526f478890ce73dab34de90019f77a27789d47e11",
+      "1657d4a27d7958b018a32da53a85126d329ca6500b1b085da72708d2a6b2e010",
+      "PASS"
+    ],
+    [
+      "OLP-0605",
+      "0496b9489f10eb402e2eb91b503c7b522c2e73349e1481ceb9781f2e191a3bce",
+      "42073e6cfa5df1cd4bc1542b6db7daf63335c70a44349a5079a8714a50a21e24",
+      "c87de7841e3352b677cba56c00c394fec7a2cf27daed7d58fce5f1ac65630f06",
+      "PASS"
+    ],
+    [
+      "OLP-0606",
+      "dec51f23018334023107ecfaa7a2f31fdf964b2b0cb7aebaeeb4e1688ed6dd31",
+      "82907fda0309eb29f436680abaa9d6ef49ad0ddf34c9318be5e27144a6a09c32",
+      "17984c5614953c57aa59237caa15612b0b8454d819a5668af89a654c68af1938",
+      "REPAIR_RECOMMENDED"
+    ],
+    [
+      "OLP-0607",
+      "d9536cc5ffc9bcaa7dee417fe8bbfb1c7f7dc99a5abec3fdf5fd58ea4593922a",
+      "e82c11daad1735a2fb401d9268379cde2ee8013e65f319b4c9b4f62dfd82a6ba",
+      "7d38f36c5a4086548017f3c92475b268619dae36a044c6ac2526e46a5cc07113",
+      "REPAIR_RECOMMENDED"
+    ],
+    [
+      "OLP-0608",
+      "cbef120cea559b153f4e6b828d2fe7942050d3534e3bb61e642fd467f897aa80",
+      "60540f1a7b95d3655daf4df12ff762bc38631c6fecd221e590ee84b916034587",
+      "e0a3113d812ad7bc75eb0cb8a5c457507a3f9233838839e2ba8feafc64d175e2",
+      "PASS_WITH_DOCUMENTED_SOURCE_CORRECTION"
+    ],
+    [
+      "OLP-0609",
+      "3eda384520d99069031c01f168564f639980118e7fd145ca105e8092fbe438dd",
+      "e4fd0b47ee9a70bdbd404149752b6875a116ce8730d70c65c63c2df689ee9f07",
+      "552727b33e4716a6580fff3877c3e281a59de328a1814d9e675701fab2983604",
+      "PASS_WITH_DOCUMENTED_SOURCE_CORRECTION"
+    ],
+    [
+      "OLP-0610",
+      "e7c40a1f3481f3529d96e136191c8b9c98b27080ddae1a9cec732d0301775670",
+      "1e1c57a6fb7eb90cf921b76d264c394e03114fece26167a3a54b2cbd69d899ab",
+      "54aac626ae9912b9bf720a3150ea68ea5f73600dcb5452beaffd2cbf43053d4a",
+      "PASS_WITH_DOCUMENTED_SOURCE_CORRECTION"
+    ],
+    [
+      "OLP-0611",
+      "47c3b4332e0c28351984e78cba0008e54deb442704710bf7d4f2ffa34e4e6c5e",
+      "31a0d59ab5da6c290f84d9e09eb49983603bc837e74e45bbf957fdc0a05a514f",
+      "810b2f2c4d9e8ec274826ef880de755ad21f8e17924eba04a5d3801647e86ea5",
+      "PASS"
+    ],
+    [
+      "OLP-0612",
+      "69bf95954428e38a55dfca85aa13d62ba2b9992afa406364da4a0b251d86fa44",
+      "5975f5886e68aae8b7a60cce4ed2274c0a6ea10c725f461cea4d4249cf89c708",
+      "d111a7bb482f4eb1faa1a8380744bca649a0d59a1705ad9af8e1a2c480d7ca57",
+      "PASS"
+    ],
+    [
+      "OLP-0613",
+      "fe221d57ce250433893679a71d00b74fbe41d562d29cd2299e40502df3271b16",
+      "a4484c46f142d6d67fde54764a0988411ba895719c942e8c583e3ecdc4f9b9a8",
+      "a4484c46f142d6d67fde54764a0988411ba895719c942e8c583e3ecdc4f9b9a8",
+      "PASS_STRUCTURAL_NO_PROSE"
+    ],
+    [
+      "OLP-0614",
+      "7ed230622f1371a6fde2530a9f2037643ee3400ab429c488554f3f3d1a853d59",
+      "74f82c58f8fa39793001de31e5437f3730f8a6d989665c8b10f0cefc9a28626a",
+      "364fc33956b3536cd0cdfd5b56582ede2478025812581340a259590b944a48e4",
+      "PASS"
+    ],
+    [
+      "OLP-0615",
+      "3c0d810002766a55df30e29fe1ee6f71aee463a3562fa8590dc43bb7b5b8e072",
+      "f79b5b3e2f51d1e24853c405574aa461edeb1cdd1b7315d223b0f5c942ea9384",
+      "37706f8ae6acfe5ed804dc3d9a29dec881d748004bca4410272bba9f26913224",
+      "PASS_WITH_DOCUMENTED_SOURCE_CORRECTION"
+    ],
+    [
+      "OLP-0616",
+      "6bcb6eea209d16b55fcca74181bc548edf6978be7a3b7c48caeb15db712b5eec",
+      "a17efe42530adb21521c049e6568d8a2b32b29c9e9cf71fe255ec520370a7a43",
+      "23ba02586dc2e10cfa060646d37dbba2772741bb34afac8a8233015481deb67f",
+      "PASS"
+    ],
+    [
+      "OLP-0617",
+      "c9acf225c06feb663a8cc96b505782decfb70d12dd2f76d3cde0627a5b3ea8e1",
+      "a2172800a5906b166bf0301333e596092e7a309ffbcc8237e7b78b43a054a52f",
+      "7dab831c012230eb0327309307b503dd8e5c714969aa78fdb9c4e8c6d1cd01fc",
+      "PASS"
+    ],
+    [
+      "OLP-0618",
+      "b4cbd21821127a8c6d55063e229d17e4f3ee74b5208769f317192da94df54428",
+      "2af6a4e22efccdc8aa7b08c6b9a578883ec779e9e6647181ed8e09353aac0528",
+      "fd2c1e3f25c5328830ba4c5fd3536a25335171f9f49e85216690572fcdd4c145",
+      "PASS"
+    ],
+    [
+      "OLP-0619",
+      "7361c3481d3028c64b48e89a1b784e6cc827acd5aafc7273664ba999a9668c7e",
+      "8e1da73b83054cdabab24bd065ff90cf1f3a2cd9b9b75170ff1923f98b5a752d",
+      "c77bb3029b49bcc428b0a3aca66a1729445a1c41b0437c7ee6f1602c8f54fa2d",
+      "PASS"
+    ],
+    [
+      "OLP-0620",
+      "f259aecdfd4ba07957fd0604ae81411ac215b6312f3c4008e4743636c0e4a06c",
+      "f389b08a94d25cea2db4cddd2eaa0303eb6b540408210d6a3c003619156ce3de",
+      "f389b08a94d25cea2db4cddd2eaa0303eb6b540408210d6a3c003619156ce3de",
+      "PASS_STRUCTURAL_NO_PROSE"
+    ],
+    [
+      "OLP-0621",
+      "0edbf5468702cdce37345da1a3bd16e8674e66739b8d2af4aab25d507c9436b0",
+      "284edb02c6e2946b655bb74603bc820d7a42bdf27338879a3f62a823fa292a25",
+      "284edb02c6e2946b655bb74603bc820d7a42bdf27338879a3f62a823fa292a25",
+      "PASS_STRUCTURAL_NO_PROSE"
+    ],
+    [
+      "OLP-0622",
+      "bbced7b9e0a88d802138fe1411686d8c8e94d54249eb7d769b5f5b8cec68257a",
+      "d1f82450e76d0ad6180afb560d53026aec8e13ca4bde2104a325397382e45de7",
+      "4db8ae8234a649e98994792ae166b48c46c6b6a716b9c51036ae72415d3d8055",
+      "PASS"
+    ],
+    [
+      "OLP-0623",
+      "3709a815983eed2dc646d935097bc9e738ae4666be71eed90824e5ea8ecbfa53",
+      "05541e0c909c6dad6b0ed3e31080d8e65d062ca2e4f154d0398747c8b9a417e1",
+      "609631838fed0866038916789c3342c16d8b1093cc44a6be563151a61fb6773b",
+      "PASS"
+    ],
+    [
+      "OLP-0624",
+      "41ec3f95138582b671a3d9158ad12ddf9199d02ac16b838bb7ebf336b230fd87",
+      "5fd3d9479983b93802716092c172559efd6d39c036712984a3f42b67b62ff91d",
+      "2f0854c70b2e981683fb5f135588947b04bba8cdda3bc9489f99d704ba1c77d4",
+      "REPAIR_RECOMMENDED"
+    ],
+    [
+      "OLP-0625",
+      "774b6ae4b65b84158c18a0d1592e62253b88f8440456f2003df0111358975529",
+      "ec6475ea5ce30bd10c0dabbe31077252e715706f7559033a02304753294decf1",
+      "51fc8e5cb60002b9ba134e7b735519f078f8b0d7843a571b1c1cc89ba6281fc3",
+      "REPAIR_RECOMMENDED"
+    ],
+    [
+      "OLP-0626",
+      "db8ba1078c0380309e686bb69373a26782ec90539880fff48d2cf4e08b89247b",
+      "ba6dc201d74b6934ac5221b2675cc07f7dce2a5964be355fb9c62461ab96c43a",
+      "e461e457cb4c2ca4376ebec4abe60b7e9cb81adec5f5cd70a799a1cdec12cc1e",
+      "PASS"
+    ],
+    [
+      "OLP-0627",
+      "7f2a2184f5f6fef0e4b236ca0f55db386e9cdb3c241c6296d4ab4f31deff7955",
+      "2a883210b424798ff35db64b84a7b59235a4107352f5020eee787227a462d2b0",
+      "b8d0970a81b99049e52b955272322546fcfbfd6ca36658e9fec4164c4003820a",
+      "PASS"
+    ],
+    [
+      "OLP-0628",
+      "bf33d0298a815add622d73d8c7bab3431eca05379f56a570eb8834fe490b84f0",
+      "a0ccc3532e6fee46b12309977481c933285fc740723024279f763c0fb3d3f2b6",
+      "141ab302b3ff4b2c248e4b094fb3ef150a1ee68bb8385c0ceaeec2f038f4e9f8",
+      "REPAIR_RECOMMENDED"
+    ],
+    [
+      "OLP-0629",
+      "26988d38ef22124806835047b5cf8155e76655d11c66a86158a14ed07519c081",
+      "e3f504ce224e342b886ee00de0e352db7e0064acf3aee71ab728df7b4d25fb40",
+      "66702647cfaf0c104b29f31423670b4927693e4afa3932b3ae72442cdb56155c",
+      "PASS"
+    ],
+    [
+      "OLP-0630",
+      "8203154440eba980439cd72fbbcc3503654c4d023c1eb6721ce9f5120b73895f",
+      "0170fa3804e5e5b6583c6ecf90bf6e482c711ca69e78e21a0f374ac64b1f3181",
+      "760af1abd46f87a726bf040116cb6b1be8023833e0abd428eb918462bf35df9e",
+      "PASS"
+    ],
+    [
+      "OLP-0631",
+      "ec91b61db399f1f5f6421f68bb095df943591c0f0d2428f3bedd36059397c1cd",
+      "4843c4feb7c51a5cf0a1ba9112bf83a4d226748fbea410197f9687c3e9541379",
+      "a9d19c2e0a475f989aa31c8cf3c93c8aa37dc6aa7d7f76deedbc72e334b85421",
+      "PASS"
+    ],
+    [
+      "OLP-0632",
+      "d8bfb0c221d8b32c6afd40006964d1e17c320e08b31ff915b1d2a9feb68c82ce",
+      "4324a1084ebe9a52003f293333ea5b9c6d185eec7a70775502a87d36a80a915c",
+      "c2e0aa1194422a7f0433c6cbc4e5e979b387fc33dac0ae23cce75106058079b0",
+      "PASS"
+    ],
+    [
+      "OLP-0633",
+      "82d3ad3c4515616475879c280ebe41e74667f20f6b5a2a055d5ebfed620ae66c",
+      "5fa81d5cb243f7cf80ffb519dd9b6b698bf5ca5cb904f0d11e7ea901d5dea6c7",
+      "383021c048c2c962bc8fcd09ff31c74fa77442ae38efba5eb07520825f327d35",
+      "PASS"
+    ],
+    [
+      "OLP-0634",
+      "3786a8e92d38becf74effa7b233c16f9bca37d5f6b0ac90d7049e71e77118436",
+      "a44a5bf31e78a81e3df1fbcd7610f7fa60253295f477f9c7e60a746404ebac85",
+      "470d6bb555a8838285634542c063c5f512f0630d2b8f938f5ddaca694ebe43d9",
+      "PASS"
+    ],
+    [
+      "OLP-0635",
+      "df5d36d65e7abafe7503527229866dfc618527177e567b16ce33ec01c683783d",
+      "b14e4e07bd300252250d18d919e1fe8352452633dde4b11a31a2414d3087c17e",
+      "3e867d25926defb5219b61eec55dd5e589173474a4c3a19839864dbd87927a46",
+      "PASS_WITH_DOCUMENTED_SOURCE_CORRECTION"
+    ],
+    [
+      "OLP-0636",
+      "e48c454ab4d3058f89b6ce709da28387e9d633459425ffac9cd67b64d3de96e8",
+      "a3d0839f7914e3e0e73dae5dee964504e27b6225d935677344002420b5ae118e",
+      "86884daea1a7b6e77e0e4b4a714826a20a0e29cf699cef67ec27ea5c91208662",
+      "PASS"
+    ],
+    [
+      "OLP-0637",
+      "2ffceffef7cc6445f66391a252c598448190642ea60f60a748c6fe5e6a1ec55e",
+      "4436857296ae7a3e735ab9258468fb4b7086d15d838fc5ca77f27a9e61818fb0",
+      "8b987b0db233726d61b4fbfad2f107794ac6ac21a50e0307361e0026ca1810fb",
+      "PASS"
+    ],
+    [
+      "OLP-0638",
+      "6abfeede65f95ac668d6e679053e537b0beb2ffcd566c1cdbdc223b0b767c737",
+      "d8a282c6e41bcc1070f9849a0acf13c8d3339e9e7bead3cdf4a5e88d55b32a8a",
+      "87037f9c4933d09df0aee0f9759a05225fb716e3f1a152b4222539887aff6854",
+      "PASS"
+    ],
+    [
+      "OLP-0639",
+      "bda8e7a38876ea87b03d2564ab16b39e2b1d1d6ec75a73fae27ca1faa73ab832",
+      "d849cd7eab6ea09ddfd7cafb09761e5b938d41760bd5552f39a69ac21944fc1f",
+      "d657f4cb4a094ee218afbad134fdbf30d0a50806bd079897f4797393e00efb76",
+      "PASS_WITH_DOCUMENTED_SOURCE_CORRECTION"
+    ],
+    [
+      "OLP-0640",
+      "1e302b41c3baef0828d08807ae0e2d0579d07aeb7247a1dd2a6a8679a31208ed",
+      "2a856a1b1ebb73d0981295e38ad7c5360b108e5b64c33bb369d69cafad9c8491",
+      "0ac201adc70e8451548fdeaa8c200f62a854bcf7a1e8d3a96528d0d247de94ba",
+      "PASS"
+    ],
+    [
+      "OLP-0641",
+      "8f30ac2b643a8da42255f860baa3176b2ce87110d0f4a504cda6155c4b99c8c6",
+      "85d4e71dad5e7a05ac6346ae44ffd122cbb0aa66f6de0fa0a1bb007fbf16e56d",
+      "36d0859f34a1102ae2b53ea23924d24fcc037e465dd7bb86920fd10ddd8d2106",
+      "PASS_STRUCTURAL_REFERENCE_TABLE"
+    ],
+    [
+      "OLP-0642",
+      "746ec51566b461c16bdf153e75b4cac0655a5f34b21f17be95a878448a577e41",
+      "d3a0d4e39b3a3b5d3e47b70ad18b4230fe1c70670ffd4569a699927c0fc02566",
+      "e563e93f715efc81beff4bb4b1027a78703b24201014a5b37590b3760d264326",
+      "PASS_STRUCTURAL_REFERENCE_TABLE"
+    ],
+    [
+      "OLP-0643",
+      "ce39569c807bdbe83a1d43638f94af123c5551e2c01487e7b38ef4c373d89022",
+      "b9cdbbad9cab3ad1311e0550958880fd8d7590a0e969a9074fb9da1644d53111",
+      "c3e161c2d341cda5a78ba0e001ff50fc02a54e7a75550008bac85e6dcf8d9048",
+      "REPAIR_RECOMMENDED"
+    ],
+    [
+      "OLP-0644",
+      "c369885c6575d5106d042c4da0eca79b3bece0e49dcaf1e165d27691343ca82c",
+      "5d69de67324b7260dd63ae49bc148742062f84ff9b28438c514a676c807d564a",
+      "4ce2f64184baa24caf20d2a450f6cda8f24a02f1aef44242e01e42518cbe2761",
+      "PASS"
+    ],
+    [
+      "OLP-0645",
+      "88e9446773c05e0441662edac722b4bac4d10fc1793e0e924abc3488266b3c22",
+      "a6dad96f8e25de159777da0b8c4547c18a1a8683604bebe7c49d9ad7f42c7ddf",
+      "89c6209a1ac43fd85fd7a02999085899332d99076c1ac3a496e6a98abe7d7d59",
+      "PASS"
+    ],
+    [
+      "OLP-0646",
+      "1880c6998c14e22cab80c82e365930f3d21a109bed8cbff73f0af1f493cfaa09",
+      "4e31f46b87b06c7ece12758ca39a30d3cd528e30919eb2f9aee575635f7211c7",
+      "4e31f46b87b06c7ece12758ca39a30d3cd528e30919eb2f9aee575635f7211c7",
+      "PASS_STRUCTURAL_NO_PROSE"
+    ],
+    [
+      "OLP-0647",
+      "0703dafc87bb4ccd5c6eeb697d51c70f9baac3cacca4d464f007210d9e873216",
+      "411c78b2412bb9dbf751e5aa8cb4edfc937d8076f9bdf168d1bab767111fbdfb",
+      "073395537e068e5afc902e94678342c434d36bfbe548d1016547618e8d94bec0",
+      "PASS_WITH_DOCUMENTED_SOURCE_CORRECTION"
+    ],
+    [
+      "OLP-0648",
+      "6a6a1f8aaa86664555249c132e8ffc3b4d6cc1b3cccd1a71c3259410202b0752",
+      "7e4bfd63d65a4928bc380e4f1811c9eee7f92024a458acc13dd0161bce631d9f",
+      "ea740379bc2229ef82695a00c17a48e4b8feae13f84422184523d2fcf92deaf3",
+      "PASS"
+    ],
+    [
+      "OLP-0649",
+      "2b6f494870916b37912a5208ed6e9203b0631f9538169a7e9a5a825e51802061",
+      "b444fe3e82fb9f7835bec9ea99dfbc8868a37b87d52bc1b0680b6e44f0e862b1",
+      "3c257d20d196d341c08174e70ae0886771686e92ac1b67f50a9780be8fd773e7",
+      "REPAIR_RECOMMENDED"
+    ],
+    [
+      "OLP-0650",
+      "c7121718f9c43522034b81adec1250c53177131538ffcfc8aceca2762a17b1bd",
+      "75ee9ac2441265f1caecfcd178bd81414a39d7ee40c2638c63bf0ebc23b6e17f",
+      "9eee490e61c7ef21ff291008e7c4a3595ce91f2c9e17cfb93ae9ec1ff69db28a",
+      "REPAIR_RECOMMENDED"
+    ],
+    [
+      "OLP-0651",
+      "fa3c320d448b1b0ae122af52bcd4db08771cb04568874d2e77e58f73345248d9",
+      "613ce8642cec8facc963025272b4ae1ec7cdc7d16215dd5ea23f73124938de88",
+      "08f60e1e22b10e92fb67b387e3c067ac02cba15deb0779542705c24d37502ba9",
+      "PASS_WITH_DOCUMENTED_SOURCE_CORRECTION"
+    ],
+    [
+      "OLP-0652",
+      "932f852e0aa0fbcfeb0398de561bdcfab8be88a8865fdad6d54b68fdbe0d9ec0",
+      "d30f21490bd6cf778be865823ba5b1ec7a1639e6a015e00de83f3143beb1f422",
+      "5fb95b072a1248ca3bea7474b10c12f3bd259db1ddbdf50238fd92df7a585e44",
+      "REPAIR_RECOMMENDED"
+    ],
+    [
+      "OLP-0653",
+      "dd7b887e3d6de8666302d81e5049e5de34c22701b3fbcc2ad33cb2f29a0b8948",
+      "b9797ce8ff179ffe4533fc0dad87a38588f01dece0766006aa06bf9c317caff5",
+      "b402cd4ecad09a044075de75e2b2b56dcdd7064fab8ec83bd55a607913bbfb1e",
+      "PASS_WITH_DOCUMENTED_SOURCE_CORRECTION"
+    ],
+    [
+      "OLP-0654",
+      "fef4ca446bce14d7a56030aed9e59c929a7a3c262850b88077498beba1a856ef",
+      "686e65e07006249b962fafdc02ce6d6abb4ff0efb7b39c5001c5adbf4e881abd",
+      "f6982a355981d5c0e4249cfb629bde28a1c3855104659ce3dd39565f8d0000a5",
+      "PASS"
+    ],
+    [
+      "OLP-0655",
+      "64ec0682ec49bb67f7e7078f615bf988dea82ff6061a577f8b8d2321480e340f",
+      "310a00523202a8e7afa86c64bf66778368d466019b906f91012bc9fc7fd364bf",
+      "ce6866158eb37f484d2851bbf7e37774e3d0a61c6c780f161e24331764f072fc",
+      "PASS_WITH_DOCUMENTED_SOURCE_CORRECTION"
+    ],
+    [
+      "OLP-0656",
+      "23f7c0ab26f8ab7c5db86c56f83287df46fc8dd6473632632b77ea59bfea7a80",
+      "f08953fed04bc683d2950f6982c3db8d966a271121cc2b51a0acd1560fdb9d4e",
+      "6b393e484edcd4c639ebc756429fc4d6c0f0bf587d45c268d363d2692262cc38",
+      "PASS_WITH_DOCUMENTED_SOURCE_CORRECTION"
+    ],
+    [
+      "OLP-0657",
+      "e99ff46f34ae092bc70018d621f18bfc6b5b08957f62eb5a81ec2615c2fd8953",
+      "676bf618a3f5d7bab13e84585535b7984febd54f0a33aa3fe58736e842dea77b",
+      "676bf618a3f5d7bab13e84585535b7984febd54f0a33aa3fe58736e842dea77b",
+      "PASS_STRUCTURAL_NO_PROSE"
+    ],
+    [
+      "OLP-0658",
+      "bbc03497792453598681584f4aa58b8a9bbcac9c3fb288fd71c794e1cfed6a0c",
+      "cb8600b790576d92d7d678ac41f9d5699593ad0f9c14c9b68289806eb1f68eb9",
+      "3d293816993f947c9d8057fdba327c83c713b3195c48989b21fad8d0ebf91e8a",
+      "PASS_WITH_DOCUMENTED_SOURCE_CORRECTION"
+    ],
+    [
+      "OLP-0659",
+      "29f5d3373c0ead285b26a31c1349d79eadb0d871fdb8b9b2c8e4e7fcaa8f012c",
+      "e358e7f402d598b0d38e2d3f9fcec2f9c88a7398fc2edd3a23c9822d61ba9bcd",
+      "86b56ed01d8f258eeec4af848423e22f307886340cd46b0784608129d703c86b",
+      "PASS_WITH_DOCUMENTED_SOURCE_CORRECTION"
+    ],
+    [
+      "OLP-0660",
+      "860312dea2eabc1f0dad2257edf368b5a6f2202a4760401495485bf8d5299c25",
+      "2a2b85d48e801cd6aa63fbd2aaf6d90aef65ba8d83191181a351c3bf3f4237bf",
+      "143292c51fa021781c41c7e6b7ec2f046240ca9b4d150a11eada88cc4042278f",
+      "PASS_AUXILIARY_FORMAL"
+    ],
+    [
+      "OLP-0661",
+      "43256252e3edd0d03b8e10d16dc26bb972c63982700e939e92341e2cd4fb1714",
+      "bd4f30b35a4aec585a02c5b97b8af8864d87413163307f8d9568763ab1cbecfd",
+      "5956567ca9e848fd75c8c5b59c51b147163d5c0399f870a5d1f348452ced2a85",
+      "PASS_WITH_DOCUMENTED_SOURCE_CORRECTION"
+    ],
+    [
+      "OLP-0662",
+      "36f20c49cf1442555849d58b691558280acacf07ed706376ca96b41fec5ce367",
+      "e718f87867a2c03a4958fbe487fe11f2a8d64370f357687630fe38c4ca651c81",
+      "3666a296d1acf665d38f8c6f72faf6eb04b192c4e6737b5415d1dff74003cad7",
+      "PASS_WITH_DOCUMENTED_SOURCE_CORRECTION"
+    ],
+    [
+      "OLP-0663",
+      "4a7afe4fd8c0f248d291ad17853b266b4150a6fd53a0635013c488aabbc7018b",
+      "b509bdf87fae8fad62036c8833bdf6ae8db133b764191ddd48aed8366fa01354",
+      "e2e945522ce6c0b93a05a0063aade6b142156d15e391be72cbfd291998bc4589",
+      "PASS_WITH_DOCUMENTED_SOURCE_CORRECTION"
+    ],
+    [
+      "OLP-0664",
+      "3d1b130e65a4988520a1a0e0bfb1b72c140d5279b23cebd995f01d69755083f6",
+      "671228a5cbf896764eb2b913508e1c4a9bde0b9f24a9b37b9086afa7532dbfe5",
+      "671228a5cbf896764eb2b913508e1c4a9bde0b9f24a9b37b9086afa7532dbfe5",
+      "PASS_STRUCTURAL_NO_PROSE"
+    ],
+    [
+      "OLP-0665",
+      "f659fa8c840e145231972ce409fbbde75eeb7e42ec4cefc4f4317b244c83a528",
+      "3c8870375d3724a35897592bf5c96eb67777d146c7912803c16d5e3dcb589daa",
+      "98dd2595b354cd88bd50a66191931ea0bfee9040f76cfffa7d052ca170ddfb20",
+      "PASS_WITH_DOCUMENTED_SOURCE_CORRECTION"
+    ],
+    [
+      "OLP-0666",
+      "235d43cc5cf2fb2c3730d1fdd08cebffa5a5c618ea4cf6e49dafec7a1782ee0c",
+      "28098136dae63edceb5ba2c50591445b582ed1376cd712eb64f273d733b04227",
+      "433b843150ac3fe552dde14157c9c5afaed10b731cbd486862df7cc82c1faea0",
+      "PASS_AUXILIARY_FORMAL"
+    ],
+    [
+      "OLP-0667",
+      "de8762e959e0af5bbe4408c47e504971dd708b417ae05b4d4d68a09a0f9491dd",
+      "a576df049e19a28e729d01fe3dfb806aa6a85f302ef549ba34765cfdbc80d0c5",
+      "7aef65e78068d4d5e123cebd681db7894d63eac3c4dbba539cfc2ca24b958d1a",
+      "PASS_AUXILIARY_FORMAL"
+    ],
+    [
+      "OLP-0668",
+      "401980e35bc8666a063fa4c30c545afd56cb0e5a95993c1c710e8e0cb15509e1",
+      "33d7e37e67abc035f9db259e753abc6c2c6b5ba8a080b5e225ec1a0df6e7645b",
+      "a1a0afe7cf59df4b8fdb180cae1a0eceb4041fe01367386cc1c54fddf15ad325",
+      "PASS_WITH_DOCUMENTED_SOURCE_CORRECTION"
+    ],
+    [
+      "OLP-0669",
+      "7bbcd1e76eea4d6e21e06a63ce38207f393e0e326d4a1c089f2ba2289cb2c865",
+      "2f896195673724941b84ba1e0ba176ea9de3492d2409686f8dc6ee4f864c3c55",
+      "7ac5a78166734ce9872ff3e419ce502f36f35b311de1eba06179ee77762f6507",
+      "PASS_WITH_DOCUMENTED_SOURCE_CORRECTION"
+    ],
+    [
+      "OLP-0670",
+      "77ca62c0fbd87b5453d2e3684f3bc8fc4552267948dd31c62cd9093c77472393",
+      "77dbc0bf028f6d9553ad4b9b7d1aabc01b1c86ef4ae844469fb1e1dea0fbe502",
+      "f9530b986bb88bf7e5e60c0db9becdbbdf0acf672dfeef435918ce6910f50df3",
+      "PASS_WITH_DOCUMENTED_SOURCE_CORRECTION"
+    ],
+    [
+      "OLP-0671",
+      "d86df7cf8214e1be21b79edb8b2403189d9e5aea9655c9d0a289f15a06f70085",
+      "f8012aadde1351da2f5541760e2e92758870311aebda0b5db2a41b20b1a21f91",
+      "df6473444477357d84d254af55b455a823b3d4325ded488864a13eda0a636f73",
+      "PASS_WITH_DOCUMENTED_SOURCE_CORRECTION"
+    ],
+    [
+      "OLP-0672",
+      "e7d822cb037c302eab15903e0b9111f4143cf9feab4dbb2e22e8c3411bc88f89",
+      "507fea84182f3a6223268bf013eb4c87e58f921479b5427e33f5d6ffea1d4900",
+      "cc530573dcc3ce9af36a656a117998d4d8f0a782ea489399322478040e3e08a9",
+      "PASS"
+    ],
+    [
+      "OLP-0673",
+      "9d53604ab4e2466f9f7494374dd967a9f267ea1cb1843860c088444af7b56862",
+      "2c2bd319b13d4c43588b5702ba9ef3bbe90b1f9e7fa6b977c6e226146ec47867",
+      "f8f1c609e7041c747f6d382b69fd963640c00f4d56fcafb61f01268dd4b13041",
+      "PASS_WITH_DOCUMENTED_SOURCE_CORRECTION"
+    ],
+    [
+      "OLP-0674",
+      "be1be227ff38872ed4194551daf55be05c765cf66e83498cc08d0d6c8844cd57",
+      "69056a0ddf68d5b1b44d68e0d6e13afa42a2bd35ee3d158a77e0c1ea1811df2a",
+      "69056a0ddf68d5b1b44d68e0d6e13afa42a2bd35ee3d158a77e0c1ea1811df2a",
+      "PASS_STRUCTURAL_NO_PROSE"
+    ],
+    [
+      "OLP-0675",
+      "594005d50c359946d7ff673f0b6eb86dcf0c56e8cd9bd001a66981bdf6602310",
+      "68f7dc44529574f03fd172017b50adaae9685b905a4efef678654766a3d4a4cf",
+      "6fe78374c9e39abd2f7a6375665eca7a6c3b2391572adeb3ba7a7991b2052e5e",
+      "PASS_WITH_DOCUMENTED_SOURCE_CORRECTION"
+    ],
+    [
+      "OLP-0676",
+      "97d1a7e894ca1acaceafe77023cda83c19b85717dc5e97f5b5bd0ef751d0d419",
+      "a6efc991f94b645082df1955f30da36ec608d273f515f6b885ed99ae22b2ff07",
+      "1ca747132ebffa2e9861ca8fba709cc43da7a3e71af63b1149d495cfeae35468",
+      "REPAIR_RECOMMENDED"
+    ],
+    [
+      "OLP-0677",
+      "d010c5a559ecb648995f44d8a7da6150a6979e61f5ada1a10990fc149ddde243",
+      "656e851f5db9f6bccb31b382d0ab48eff7ce063130d0397e85c4ea04282557c9",
+      "ab5085994e85f50eb8b1aae0712104a131f11b1815af09805083d452bc5bb6b8",
+      "REPAIR_RECOMMENDED"
+    ],
+    [
+      "OLP-0678",
+      "a4c49477d57cd7f79e43992953978e3c672db43ff1d0010edb42603665ba34f4",
+      "01efd7d42fc0b8c94265b5fd80efaee5537b7a308bd6c548b638e084770b5d0b",
+      "33433a3b0d597fbd2f93a9bd2e0b0ba818e5073a71a07899aef789124f129ba1",
+      "PASS_WITH_DOCUMENTED_SOURCE_CORRECTION"
+    ],
+    [
+      "OLP-0679",
+      "e5bb86c0415c28d010d433610349f0b1defa84eb33d80a5f8242dcb1c6308840",
+      "c8fcfcb18c87aa8483d83947ff8c5e2ed998f5a79a24ed44c541f8dd108e58c3",
+      "6f129a42daafd92cbaabab1d9696f1be54bca7a308c0d60058e7188bed6d724b",
+      "PASS_WITH_DOCUMENTED_SOURCE_CORRECTION"
+    ],
+    [
+      "OLP-0680",
+      "8f6b2e6c0ec8a7e1a00ef22d7f840643b6fa02aa8b7b9e2e09b40e6efd60933b",
+      "5322c500aae9f845c55117ab42f578d9b64ad7c7d69abb450a2189f43cfde6e7",
+      "a7216b32dea2ee0fa8db46150a3ca42eca0641ec656b0aceb47b0fbff95d7f20",
+      "PASS"
+    ],
+    [
+      "OLP-0681",
+      "034e18d6cebbf15dc804eb5bb383e4a989f2bba60613d5ec59668bb03c5075e8",
+      "bea95cb03063f760f64fd1fb12e743c7acd95f7a4634b361f180887eb0a5f8e2",
+      "bea95cb03063f760f64fd1fb12e743c7acd95f7a4634b361f180887eb0a5f8e2",
+      "PASS_STRUCTURAL_NO_PROSE"
+    ],
+    [
+      "OLP-0682",
+      "c0938bb04a66e01c9abbe93289be6fce6c185cb032b1415b4a8a03d6fa542a38",
+      "7f15985b2e34a1f0f6e39c55bd802e4398e7161d681ff36dea8a6a598310193f",
+      "17e4e713602b71b62822332e7a545a2297fafadcd4f1645115bdf9988f89c554",
+      "PASS_AUXILIARY_FORMAL"
+    ],
+    [
+      "OLP-0683",
+      "cb91e07077ec7c1eccf4abef3ff86af7c4dd21838986adff2fac5037439be095",
+      "81f8f7e0b7bc2ac7728454f187bf70bcf8c2b19bb95ce42f96876dd944f9291c",
+      "e8c1e4edbe343683f6b57a7e1f8cf255367ded9e857586f5359bf54b6b8b0a08",
+      "PASS_WITH_DOCUMENTED_SOURCE_CORRECTION"
+    ],
+    [
+      "OLP-0684",
+      "21be4b2a208c359f5fd90b18911e1363fbb03292d09a8d8a756707abae255884",
+      "c372301c848545e6a9df9aa143d89ed3252f51104cceb47639dac51673e0b4cf",
+      "b8492d6d838ed5b5a380d9f54c97c2e9f4c16b1c92f395c030fb122c5f2b2e39",
+      "REPAIR_RECOMMENDED"
+    ],
+    [
+      "OLP-0685",
+      "8f25f4d43c10bb3ef51d57ee0e08d3d2ff2db67f55f94a0381fa2ce922b7f843",
+      "14adeb5b0f55da55d8acd5348d3b2191696c5c0c9f2f01d26d5cd1c6e3eff26d",
+      "9745e865b9bd692dfdd3a5b9bdd5def11f6493c3c8d2be048a83f40af9bd2f63",
+      "PASS"
+    ],
+    [
+      "OLP-0686",
+      "340db7b4220e6c9596deaeaa90c7091ac94cb43630d014e14012ab92bb26a15d",
+      "1f91f112381b6015300139ee5d2c32af416c40975e43eeacee1bd2b8bf195d6b",
+      "89e88feb85458a4ad5e33afcddde702802fc24b7a6165c65ec13309967dcbf53",
+      "REPAIR_RECOMMENDED"
+    ],
+    [
+      "OLP-0687",
+      "abb9f9bc4d5a50031e5db507cf7a164d07625cccefc98a9c2c90ae0eb03223cc",
+      "235afd624c026dfe7ec76a43648dca1504f5952bafc3aaecc04667874496eca8",
+      "f050c471381646f580415c4de4d43479c5904c21d913a564f1a060cdd8a008e4",
+      "REPAIR_RECOMMENDED"
+    ],
+    [
+      "OLP-0688",
+      "902be4badf2f41ac113c0ccc78f7e784149e151da319f7f9e5a95207471fa716",
+      "4c24421e3fda2c85664e6d4d8b21785711f91b88dcee37db4c74463bf7faa9bb",
+      "20310df99e200423310dcc2abec6f0f6bf878714554634ae5c31e5b8df8064a3",
+      "PASS"
+    ],
+    [
+      "OLP-0689",
+      "ef162d32fcfeba5dc884bba4bfb795d7e758d409741d6cc671eb189e3c6f4e63",
+      "ddab66d8882f8a4e4895227a75caa5e4bb2dcc54c705dd4720f8f9768e395bcf",
+      "102d5fe9709e4327620477b35c0d6ae6bd095baee87a9da6aecd16f59c06be3c",
+      "PASS"
+    ],
+    [
+      "OLP-0690",
+      "8e9e7241ac6a83d5fc5f21742cf2b9e59451c7cbf3e8da324b3c1c3443501bc0",
+      "0cb9a69674c39a583170f4a13136af25d4ca128c3a95d96097e9ebeceedcb335",
+      "79139dd3e385075e048ee63edc8ce1ce65138c6deb394322ce84ef72ed2d7606",
+      "PASS"
+    ],
+    [
+      "OLP-0691",
+      "2611124bd3d4c4a0028b4786ff23a9e773da2c59950678e08e4e4099c4dee705",
+      "e3219c6b71962f873d8497efd3190c7d002e5218e9d4bd5b82ccacc5e87d87f4",
+      "bc6221a16b3c7c25dcd1419114d63232d6c20f22bd56d3d39f87348cd83d929d",
+      "PASS_WITH_DOCUMENTED_SOURCE_CORRECTION"
+    ],
+    [
+      "OLP-0692",
+      "f454a80ca9e593a7e2ff12db317e9830a63c603b4094d6cf9f8177a927bed044",
+      "77373878c94a422b9a49adc638ae9b62eaa048fc020d4bbe7af579fd2788abc7",
+      "8add4874c76c1b8f592ad482d2a6b4fd5f8d297e0dfea23bef74f5b6ff5bb30b",
+      "PASS_AUXILIARY_FORMAL"
+    ],
+    [
+      "OLP-0693",
+      "920460915c6fb200b4ab1a785aa84affce15e404b04512f11319b5976a2a66c0",
+      "1a4bd228bf49516a05e16336e8eaf545776df0a03dfee87c088cf05b6b09aabb",
+      "9364c487590853589d99955b2350cddcec4f841b38e5a4e3b3b1698868a4d611",
+      "PASS_AUXILIARY_FORMAL"
+    ],
+    [
+      "OLP-0694",
+      "6fbab7c45c11e351116316cfcfd77f71931428c35c32303dbd93413235eb679a",
+      "53e5b2c4d4ac557f648e9d29360fc819506cb0bb59d6e5147d5e5da7f00a6790",
+      "ab3bc6fe7bb3e4eb51ec0fc8f5de4f88407180d86dc5edc617b49c98937b4095",
+      "PASS_WITH_DOCUMENTED_SOURCE_CORRECTION"
+    ],
+    [
+      "OLP-0695",
+      "cde54c448a688241f931d3d516a3cf7286a78fed2a11609b81471b1ab641cdf8",
+      "0f2e064577b8b9a19499b0fc43970766d376a647907ce3bccb86454c44b8698e",
+      "a84641f17838d9218ce03166b68fb6e11b54d815f7e49047eeb15201257dd627",
+      "PASS"
+    ],
+    [
+      "OLP-0696",
+      "75ba84fa67befc0aea744fd4094b0936dbd38c273dcb5e60919b123486a2cdf7",
+      "5068fb82c317e473c11e20fbd236cd59599010ad07bf0db16a00513fa77f77b5",
+      "e00029513e6236b65076a5553f1d9b5b50f76eb2e7c208f93ba9d6bb73ebc985",
+      "PASS_WITH_DOCUMENTED_SOURCE_CORRECTION"
+    ],
+    [
+      "OLP-0697",
+      "0129408d5454176b6a10e8bd7cf503d66373d3d2fa13c9f3c2fb517de665b7c6",
+      "c49d9b5be986873e0baa2bc919c8866d7fb87c09ec92430e9936385d6af07a30",
+      "b366ae2d3a29d13d58e8470abce32fdfa7773136ad035693a9c01d109ca76584",
+      "PASS_WITH_DOCUMENTED_SOURCE_CORRECTION"
+    ],
+    [
+      "OLP-0698",
+      "42bd3c0e07c6be9b6c82e85adee3933c295c10411c3d60a4778221db0b864862",
+      "043ceb4ea8c2c7118137071bd193f69111e91f2c7a6e6f9f2afaa4cfd1fafda2",
+      "d9833a40322f88b7d588d74878711afa46be17d936effa0d01a4c64c45de423a",
+      "PASS_WITH_DOCUMENTED_SOURCE_CORRECTION"
+    ],
+    [
+      "OLP-0699",
+      "54866e2d7c5736d5719a516e6193f8e805fb78504089ec01844d0b7cc5bd79db",
+      "903c23524987937a3d90c72d2cba996024c3808bb90a4ad648fecc20bb8046fe",
+      "b32a1dd808d71e3c3a1c33287ebf39820710a1464e06d28b084dc99bdd55abdd",
+      "PASS_WITH_DOCUMENTED_SOURCE_CORRECTION"
+    ],
+    [
+      "OLP-0700",
+      "2d6db9e0bb62467e90e007ae01cdd74d16e48f0110fc332ccbe67b1b3c47ae0f",
+      "4a8ad730030a46aaeac33a2345c6b619d88e60437d9a510de10fe9f70a915df1",
+      "f9d4e2f1156880661e378a0ea540fa078a553e8870f4fc8fef05e2cc62b33fbb",
+      "PASS"
+    ]
+  ]
+}

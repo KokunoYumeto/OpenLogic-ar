@@ -1,0 +1,105 @@
+% Part: conditional-logics
+% Chapter: minimal-change-semantics
+% Section: sphere-models
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{con}{min}{sph}
+
+\olsection{في نماذج الكرات}
+
+من سبل إقامة دلالة صورية للشرطيات المخالفة للواقع أن نصوغ تصور لويس
+غير الصوري بنيةً رياضية. فنجعل الكرات المحيطة بعالم~$w$ مجموعات من
+العوالم؛ ولأنها متداخلة، لزم أن تترتب المجموعات المحيطة بـ$w$ ترتيبًا
+خطيًا بعلاقة الاحتواء.
+
+\begin{defn}
+  \emph{نموذج الكرات} ثلاثي~$\mModel{M} = \tuple{W, O, V}$؛ فيه
+  $W$ مجموعة عوالم غير خالية، و$V\colon \PVar \to \Pow{W}$ تقييم،
+  و$O\colon W \to \Pow{\Pow{W}}$ دالة تخص كل عالم~$w$ بـ
+  \emph{نظام كرات}~$O_w$. ولكل~$w$ تكون~$O_w$ مجموعة من مجموعات
+  العوالم تستوفي ما يأتي:
+  \begin{enumerate}
+  \item أن تكون~$O_w$ \emph{متمركزة} عند~$w$: $\{w\} \in O_w$.
+  \item وأن تكون~$O_w$ \emph{متداخلة}: فإذا كان~$S_1$، $S_2 \in O_w$،
+    تحقق~$S_1 \subseteq S_2$ أو~$S_2 \subseteq S_1$؛ أي إن~$O_w$
+    مرتبة خطيًا بـ$\subseteq$.
+  \item وأن تكون~$O_w$ مغلقة تحت الاتحادات غير الخالية.
+  \item وأن تكون~$O_w$ مغلقة تحت التقاطعات غير الخالية.
+  \end{enumerate}
+\end{defn}
+
+ومعنى~$O_w$ في التصور الحدسي أن العوالم «المحيطة» بـ$w$ طبقات تختلف
+في بعدها عن~$w$. وأدخل الكرات~$w$ وحده، أي~$\{w\}$، لأن~$w$ أقرب إلى
+نفسه من عالم في كرة أخرى. فإذا كان~$S \subsetneq S'$، كانت عوالم
+$S' \setminus S$ أبعد عن~$w$ من عوالم~$S$، وكانت~$S' \setminus S$
+هي «الطبقة» بين~$S$ وبين ما يقع خارج~$S'$. غير أن الكرة نفسها تضم كل
+العوالم الداخلة تحت سطحها الخارجي، ولا تقتصر على طبقة واحدة.
+
+\begin{figure}
+\begin{center}
+\begin{tikzpicture}[layerwidth=1.5,scale=.6]\tiny
+  \spheresystem{3}
+  \propositionintersect{0}{3}{60}{6}
+  \path (0,0) node[world] {$w$};
+  \spherepos{-30}{2}{node[world] {$w_2$}}
+  \spherepos{220}{2}{node[world] {$w_3$}}
+  \spherepos{90}{2}{node[world] {$w_1$}}
+  \spherepos[shift={(.1,0)}]{10}{3}{node[world] {$w_5$}}
+  \spherepos[shift={(.1,0)}]{-10}{3}{node[world] {$w_6$}}
+  \spherepos{225}{3}{node[world] {$w_4$}}
+  \spherepos{20}{4}{node[world] {$w_7$}}
+  \path (5,0) node[left] {$p$};
+\end{tikzpicture}
+\caption{تصوير لنموذج من الكرات}
+\ollabel{fig:sphere-model}
+\end{center}
+\end{figure}
+
+يمثل الرسم في~\olref{fig:sphere-model} نموذج الكرات الذي فيه
+$W = \{w, w_1, \dots, w_7\}$ و$V(p) = \{w_5, w_6, w_7\}$.
+وأعمقها~$S_1 = \{w\}$. ثم إن أقرب العوالم إلى~$w$ هي~$w_1$ و$w_2$
+و$w_3$، فتليها الكرة~$S_2 = \{w, w_1, w_2, w_3\}$. وأبعد من ذلك
+$w_4$ و$w_5$ و$w_6$، فتكون الكرة الخارجية
+$S_3 = \{w, w_1, \dots, w_6\}$. وعلى هذا يكون نظام الكرات المحيطة
+بـ$w$ هو~$O_w = \{S_1, S_2, S_3\}$. وأما~$w_7$ فخارج كل كرة تحيط
+بـ$w$. وأقرب عالمين يصدق فيهما~$p$ هما~$w_5$ و$w_6$؛ ولذلك تغدو
+أصغر كرة تقبل~$p$ هي~$S_3$.
+% تصحيح لفظي (0524-N1): استعيد وصف الكرة الأعمق بدل اللفظ الدخيل غير الدال.
+
+ولكي نحد إرضاء صيغة~$!A$ عند عالم~$w$ من نموذج كرات~$\mModel M$،
+أي~$\mSat{M}{!A}[w]$، نزيد في تعريف الإرضاء بندًا يخص
+$!B \cif !C$:
+
+\begin{defn}
+  يتحقق~$\mSat{M}{!B \cif !C}[w]$ إذا وفقط إذا وقع أحد الأمرين:
+  \begin{enumerate}
+  \item\ollabel{sphere-vac} لكل~$u \in \bigcup O_w$،
+    $\mSat/{M}{!B}[u]$؛ أو
+  \item\ollabel{sphere-nonvac} لبعض~$S \in O_w$،
+    \begin{enumerate}
+      \item $\mSat{M}{!B}[u]$ لبعض~$u \in S$؛ و
+      \item لكل~$v \in S$، إما~$\mSat/{M}{!B}[v]$ أو
+        $\mSat{M}{!C}[v]$.
+    \end{enumerate}
+  \end{enumerate}
+\end{defn}
+
+فمقتضى التعريف أن~$\mSat{M}{!B \cif !C}[w]$ يتحقق إذا وفقط إذا كذب
+المقدّم~$!B$ في كل موضع من الكرات المحيطة بـ$w$، أو وُجدت كرة~$S$
+تقبل~$!B$ وصدق الشرط المادي~$!B \lif !C$ عند جميع عوالم هذه الكرة
+«القابلة لـ~$!B$». ولم نشترط أن تكون~$S$ \emph{أعمق} كرة تقبل~$!B$،
+وإن أوهمه الشرح الحدسي. غير أن تحقق شرط~\olref{sphere-nonvac} لكرّة~$S$
+يستلزم تحققه لكل كرة تقبل~$!B$ وتندرج في~$S$؛ فإذا وُجدت أعمق كرة
+تقبل~$!B$ تحقق لها الشرط خاصة.
+
+ولا يوجب تعريف نماذج الكرات وجود أعمق كرة تقبل~$!B$؛ فقد توجد متتالية
+غير منتهية
+$S_1 \supsetneq S_2 \supsetneq \dots \supsetneq \{w\}$ من الكرات
+تقبل~$!B$، فلا توجد أعمق كرة تقبل~$!B$. وحينئذ يتحقق
+$\mSat{M}{!B \cif !C}[w]$ إذا وفقط إذا صدق~$!B \lif !C$ في الكرات
+$S_i$، $S_{i+1}$، \dots{} كلها ابتداءً من فهرس~$i$ ما.
+
+\end{document}

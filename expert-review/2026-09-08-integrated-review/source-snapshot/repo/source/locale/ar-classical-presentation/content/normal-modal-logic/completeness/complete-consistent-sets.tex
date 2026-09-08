@@ -1,0 +1,153 @@
+% Part: normal-modal-logic
+% Chapter: completeness
+% Section: complete-consistent-sets
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{com}{ccs}
+
+\olsection{المجموعات $\Sigma$-المتسقة التامة}
+
+لتكن~$\Sigma$ مجموعة من ال!!{formula}s الجهية نتخذها بديهيات
+لمنطق جهوي نظامي، أو مبادئ معرّفة له. فاتساق مجموعة~$\OLId{greek-variable}{Gamma}$
+بالنسبة إلى~$\Sigma$ معناه $\OLId{greek-variable}{Gamma} \Proves/[\Sigma] \lfalse$؛
+أي امتناع !!{derivation} لـ
+$!A_\OLMathNumeral{1} \lif (!A_\OLMathNumeral{2} \lif \cdots (!A_\OLId{latin-ordinary}{n} \lif \lfalse)\dots)$ من~$\Sigma$
+مع كون~$!A_\OLId{latin-ordinary}{i} \in \OLId{greek-variable}{Gamma}$ لكل~$\OLId{latin-ordinary}{i}$.
+وسنبني نموذجًا «قانونيًا» تكون عوالمه مجموعات من نوع أخص:
+فهي $\Sigma$-متسقة، ولا تقف عند مجرد الاتساق مع~$\Sigma$،
+بل تبلغ الغاية فيه بأن تفصل في كل !!{formula} جهية.
+فلكل~$!A$ يلزم أن يكون~$!A \in \OLId{greek-variable}{Gamma}$ أو $\lnot !A \in \OLId{greek-variable}{Gamma}$،
+على ما يضبطه التعريف الآتي:
+
+\begin{defn}
+  تكون المجموعة~$\OLId{greek-variable}{Gamma}$ \emph{$\Sigma$-متسقة تامة} إذا وفقط إذا
+  كانت $\Sigma$-متسقة، وكان، لكل~$!A$، إما~$!A \in \OLId{greek-variable}{Gamma}$ أو
+  $\lnot !A \in \OLId{greek-variable}{Gamma}$.
+\end{defn}
+
+وتجمع المجموعات $\Sigma$-المتسقة التامة~$\OLId{greek-variable}{Gamma}$ خصائص ينتفع بها
+في بناء النموذج. فمنها الإغلاق الاستنتاجي:
+إذا كان~$\OLId{greek-variable}{Gamma} \Proves[\Sigma] !A$ لزم~$!A \in \OLId{greek-variable}{Gamma}$؛
+ومن ثم ينتمي كل مثال إحلال لـ!!a{formula}~$!A \in \Sigma$ إلى~$\OLId{greek-variable}{Gamma}$.
+ومنها أن الانتماء إلى~$\OLId{greek-variable}{Gamma}$ يجري على شروط صدق الروابط القضوية.
+وهذه المطابقة بين العضوية والصدق هي ما نحتاج إليه في تعريف
+«النموذج القانوني».
+
+\begin{prop}\ollabel{prop:ccs-properties}
+  افترض أن~$\OLId{greek-variable}{Gamma}$ مجموعة $\Sigma$-متسقة تامة. عندئذ:
+  \begin{enumerate}
+  \item \ollabel{prop:ccs-closed}%
+    $\OLId{greek-variable}{Gamma}$ مغلقة استنتاجيًا في~$\Sigma$.
+  \item \ollabel{prop:ccs-sigma}%
+    $\Sigma \subseteq \OLId{greek-variable}{Gamma}$.
+  \tagitem{prvFalse}{\ollabel{prop:ccs-lfalse}%
+    $\lfalse \notin \OLId{greek-variable}{Gamma}$}{}
+  \tagitem{prvTrue}{\ollabel{prop:ccs-ltrue}%
+    $\ltrue \in \OLId{greek-variable}{Gamma}$}{}
+  \item \ollabel{prop:ccs-lnot}%
+    $\lnot!A \in \OLId{greek-variable}{Gamma}$ إذا وفقط إذا كان~$!A \notin \OLId{greek-variable}{Gamma}$.
+  \tagitem{prvAnd}{\ollabel{prop:ccs-land}%
+    $!A \land !B \in \OLId{greek-variable}{Gamma}$ إذا وفقط إذا كان~$!A \in \OLId{greek-variable}{Gamma}$ و
+    $!B \in \OLId{greek-variable}{Gamma}$}{}
+  \tagitem{prvOr}{\ollabel{prop:ccs-lor}%
+    $!A \lor !B \in \OLId{greek-variable}{Gamma}$ إذا وفقط إذا كان~$!A \in \OLId{greek-variable}{Gamma}$ أو
+    $!B \in \OLId{greek-variable}{Gamma}$}{}
+  \tagitem{prvIf}{\ollabel{prop:ccs-lif}%
+    $!A \lif !B \in \OLId{greek-variable}{Gamma}$ إذا وفقط إذا كان~$!A \notin \OLId{greek-variable}{Gamma}$ أو
+    $!B \in \OLId{greek-variable}{Gamma}$}{}
+  \tagitem{prvIff}{\ollabel{prop:ccs-liff}%
+    $!A \liff !B \in \OLId{greek-variable}{Gamma}$ إذا وفقط إذا كان إما~$!A \in \OLId{greek-variable}{Gamma}$
+    و$!B \in \OLId{greek-variable}{Gamma}$، أو~$!A \notin \OLId{greek-variable}{Gamma}$ و$!B \notin \OLId{greek-variable}{Gamma}$}{}
+  \end{enumerate}
+\end{prop}
+
+\begin{proof}
+  \begin{enumerate}
+  \item لنفرض $\OLId{greek-variable}{Gamma} \Proves[\Sigma] !A$ مع~$!A \notin \OLId{greek-variable}{Gamma}$.
+    بما أن~$\OLId{greek-variable}{Gamma}$ $\Sigma$-متسقة تامة، فلا بد من~$\lnot!A \in \OLId{greek-variable}{Gamma}$.
+    فيلزم عدم اتساق~$\OLId{greek-variable}{Gamma}$، إذ نضم النفي إلى ما اشتققناه ونستعمل
+    $!A, \lnot !A \Proves[\Sigma] \lfalse$؛ وهذا يخالف الفرض.
+
+  \item إذا كان~$!A \in \Sigma$، فإن~$\OLId{greek-variable}{Gamma} \Proves[\Sigma] !A$،
+    ومن ثم~$!A \in \OLId{greek-variable}{Gamma}$ بالإغلاق الاستنتاجي، أي بالحالة
+    \olref{prop:ccs-closed}.
+
+  \tagitem{prvFalse}{إذا كان~$\lfalse \in \OLId{greek-variable}{Gamma}$، فإن
+    $\OLId{greek-variable}{Gamma} \Proves[\Sigma] \lfalse$، فتكون~$\OLId{greek-variable}{Gamma}$
+    $\Sigma$-غير متسقة.}{}
+
+  \tagitem{prvTrue}{$\OLId{greek-variable}{Gamma} \Proves[\Sigma] \ltrue$، ومن ثم
+    $\ltrue \in \OLId{greek-variable}{Gamma}$ بالإغلاق الاستنتاجي، أي بالحالة
+    \olref{prop:ccs-closed}.}{}
+
+  \item من~$\lnot!A \in \OLId{greek-variable}{Gamma}$ يلزم $!A \notin \OLId{greek-variable}{Gamma}$،
+    وإلا اجتمعت الصيغة ونفيها وخولف الاتساق.
+    وأما إذا كان~$!A \notin \OLId{greek-variable}{Gamma}$، فلا بد من~$\lnot !A \in \OLId{greek-variable}{Gamma}$،
+    لأن~$\OLId{greek-variable}{Gamma}$ $\Sigma$-متسقة تامة، ولا تدع الصيغة ونفيها كليهما خارجها.
+
+  \tagitem{prvAnd}{\iftag{probAnd}{تمرين.}{افترض أن
+      $!A \land !B \in \OLId{greek-variable}{Gamma}$. ولما كانت
+      $(!A \land !B) \lif !A$ مثال إحلال لقضية صادقة صدقًا تحليليًا،
+      كان~$!A \in \OLId{greek-variable}{Gamma}$ بالإغلاق الاستنتاجي، أي بالحالة
+      \olref{prop:ccs-closed}. وكذلك~$!B \in \OLId{greek-variable}{Gamma}$. ومن ناحية أخرى،
+      افترض أن~$!A \in \OLId{greek-variable}{Gamma}$ و$!B \in \OLId{greek-variable}{Gamma}$. عندئذ يقتضي الإغلاق
+      الاستنتاجي أن~$(!A \land !B) \in \OLId{greek-variable}{Gamma}$، لأن
+      $!A \lif (!B \lif (!A \land !B))$ مثال إحلال لقضية صادقة صدقًا
+      تحليليًا.}}{}
+
+  \tagitem{prvOr}{\iftag{probOr}{تمرين.}{افترض أن
+      $!A \lor !B \in \OLId{greek-variable}{Gamma}$، وأن~$!A \notin \OLId{greek-variable}{Gamma}$ و
+      $!B \notin \OLId{greek-variable}{Gamma}$. ولما كانت~$\OLId{greek-variable}{Gamma}$ $\Sigma$-متسقة تامة،
+      كان~$\lnot!A \in \OLId{greek-variable}{Gamma}$ و$\lnot !B \in \OLId{greek-variable}{Gamma}$. ومن ثم
+      $\lnot(!A \lor !B) \in \OLId{greek-variable}{Gamma}$، لأن
+      $\lnot !A \lif (\lnot !B \lif \lnot (!A \lor !B))$ مثال إحلال
+      لقضية صادقة صدقًا تحليليًا. وهذا يعني أن~$\OLId{greek-variable}{Gamma}$
+      $\Sigma$-غير متسقة، وهو تناقض. والعكس مباشر: إذا كان
+      $!A \in \OLId{greek-variable}{Gamma}$ أو~$!B \in \OLId{greek-variable}{Gamma}$، فإن الإغلاق الاستنتاجي
+      يقتضي~$!A \lor !B \in \OLId{greek-variable}{Gamma}$.}}{}
+
+  \tagitem{prvIf}{\iftag{probIf}{تمرين.}{افترض أن
+      $!A \lif !B \in \OLId{greek-variable}{Gamma}$ و$!A \in \OLId{greek-variable}{Gamma}$؛ عندئذ
+      $\OLId{greek-variable}{Gamma} \Proves[\Sigma] !B$، ومن ثم~$!B \in \OLId{greek-variable}{Gamma}$ بالإغلاق
+      الاستنتاجي. وبالعكس، إذا كان~$!A \lif !B \notin \OLId{greek-variable}{Gamma}$، فبما
+      أن~$\OLId{greek-variable}{Gamma}$ $\Sigma$-متسقة تامة، يكون
+      $\lnot (!A \lif !B) \in \OLId{greek-variable}{Gamma}$. ولما كانت
+      $\lnot(!A \lif !B) \lif !A$ مثال إحلال لقضية صادقة صدقًا
+      تحليليًا، كان~$!A \in \OLId{greek-variable}{Gamma}$ بالإغلاق الاستنتاجي. ولما كانت
+      $\lnot(!A \lif !B) \lif \lnot !B$ مثالًا كذلك، كان
+      $\lnot !B \in \OLId{greek-variable}{Gamma}$. ومن ثم~$!B \notin \OLId{greek-variable}{Gamma}$ لاتساق
+      $\OLId{greek-variable}{Gamma}$ مع~$\Sigma$.}}{}
+
+  % استكمال برهان مصدر (0443-I1): صُرّح بحالة خروج الصيغتين باستعمال نفييهما.
+  \tagitem{prvIff}{\iftag{probIff}{تمرين.}{افترض أن
+      $!A \liff !B \in \OLId{greek-variable}{Gamma}$. إذا كان~$!A \in \OLId{greek-variable}{Gamma}$، كان
+      $!B \in \OLId{greek-variable}{Gamma}$، لأن~$(!A \liff !B) \lif (!A \lif !B)$ مثال
+      إحلال لقضية صادقة صدقًا تحليليًا. وبالمثل، إذا كان
+      $!B \in \OLId{greek-variable}{Gamma}$، كان~$!A \in \OLId{greek-variable}{Gamma}$. ومن ثم فإما أن يكون
+      $!A \in \OLId{greek-variable}{Gamma}$ و$!B \in \OLId{greek-variable}{Gamma}$، أو لا يكون
+      $!A \in \OLId{greek-variable}{Gamma}$ ولا~$!B \in \OLId{greek-variable}{Gamma}$.
+
+      وبالعكس، افترض أن~$!A \liff !B \notin \OLId{greek-variable}{Gamma}$. ولما كانت
+      $\OLId{greek-variable}{Gamma}$ $\Sigma$-متسقة تامة، كان
+      $\lnot (!A \liff !B) \in \OLId{greek-variable}{Gamma}$. ولما كانت
+      $\lnot(!A \liff !B) \lif (!A \lif \lnot !B)$ مثال إحلال لقضية
+      صادقة صدقًا تحليليًا، فإذا كان~$!A \in \OLId{greek-variable}{Gamma}$، كان
+      $\lnot !B \in \OLId{greek-variable}{Gamma}$، ومن ثم~$!B \notin \OLId{greek-variable}{Gamma}$ لاتساق
+      $\OLId{greek-variable}{Gamma}$ مع~$\Sigma$. وبالمثل، إذا كان~$!B \in \OLId{greek-variable}{Gamma}$، كان
+      $!A \notin \OLId{greek-variable}{Gamma}$. ولو خرجت الصيغتان كلتاهما من~$\OLId{greek-variable}{Gamma}$،
+      لدخل نفياهما فيها بالتمام، ولاستلزم هذان النفيان التكافؤ بقضية
+      صادقة صدقًا تحليليًا؛ فيناقض ذلك فرض خروج التكافؤ من~$\OLId{greek-variable}{Gamma}$.
+      ومن ثم لا يكون~$!A \in \OLId{greek-variable}{Gamma}$ و
+      $!B \in \OLId{greek-variable}{Gamma}$ معًا، ولا يكون~$!A \notin \OLId{greek-variable}{Gamma}$ و
+      $!B \notin \OLId{greek-variable}{Gamma}$ معًا.}}{}
+  \end{enumerate}
+\end{proof}
+
+\begin{probtag}{probAnd,probOr,probIf,probIff}
+  أكمل برهان~\olref[nml][com][ccs]{prop:ccs-properties}.
+\end{probtag}
+
+\end{document}

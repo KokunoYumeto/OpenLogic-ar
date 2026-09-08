@@ -1,0 +1,377 @@
+% Part: proof-theory
+% Chapter: normalization
+% Section: permutations
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{nor}{per}
+
+\olsection{في تحويلات التبديل}
+
+القطع في~\Log{N1i} هو المقطع الذي ينتهي بالمقدمة الكبرى لقاعدة
+!!a{elimination}. ومن عمل برهان التطبيع تقصير القطوع القصوى، لينقص بذلك
+طول القطع في~!!{proof}. وإذا زاد طول القطع على~$\OLMathNumeral{1}$ تعددت صور نهايته؛
+وذلك بحسب كون آخر ظهور لـ~!!{formula}~$!A$ فيه نتيجة لـ
+(\Elim{\lor} أو~\Elim{\lexists})، وبحسب استدلال~!!{elimination} الذي
+تكون تلك الصيغة مقدمته الكبرى.
+
+فإذا كان الاستدلالان، مثلًا،~\Elim{\lor} و\Elim{\land}، وكانت
+$!A \ident !B \land !C$، وكان~!!{proof} الجزئي~$\delta_\OLMathNumeral{1}$ منتهيًا هكذا:
+\[
+\AxiomC{}
+\RightLabel{$\delta_\OLMathNumeral{2}$}
+\DeduceC{$!D \lor !E$}
+\AxiomC{$\Discharge{!D}{\OLId{latin-ordinary}{x}}$}
+\RightLabel{$\delta_\OLMathNumeral{3}$}
+\DeduceC{$!B \land !C$}
+\AxiomC{$\Discharge{!E}{\OLId{latin-ordinary}{y}}$}
+\RightLabel{$\delta_\OLMathNumeral{4}$}
+\DeduceC{$!B \land !C$}
+\DischargeRule{\Elim{\lor}}{\OLId{latin-ordinary}{x}\,\OLId{latin-ordinary}{y}}
+\TrinaryInfC{$!B \land !C$}
+\RightLabel{\Elim{\land}[\OLMathNumeral{1}]}
+\UnaryInfC{$!B$}
+\DisplayProof
+\]
+كان آخر ظهور لـ~!!{formula}~$!A_\OLId{latin-ordinary}{n}$ في القطع نتيجة~\Elim{\lor}، وهو
+الظهور الأسفل لـ~$!B \land !C$. وأما الظهور السابق له من~!!{formula}
+$!A_{\OLId{latin-ordinary}{n}-\OLMathNumeral{1}}$ فهو إحدى المقدمتين الصغريين لـ~\Elim{\lor}.
+
+ولتقصير القطع نعكس ترتيب استدلالي~\Elim{\lor} و\Elim{\land}، أي
+«نبدلهما». فنقيم مقام البرهان الجزئي~$\delta_\OLMathNumeral{1}$، داخل~$\delta$، ما يأتي:
+\[
+\AxiomC{}
+\RightLabel{$\delta_\OLMathNumeral{2}$}
+\DeduceC{$!D \lor !E$}
+\AxiomC{$\Discharge{!D}{\OLId{latin-ordinary}{x}}$}
+\RightLabel{$\delta_\OLMathNumeral{3}$}
+\DeduceC{$!B \land !C$}
+\RightLabel{\Elim{\land}[\OLMathNumeral{1}]}
+\UnaryInfC{$!B$}
+\AxiomC{$\Discharge{!E}{\OLId{latin-ordinary}{y}}$}
+\RightLabel{$\delta_\OLMathNumeral{4}$}
+\DeduceC{$!B \land !C$}
+\RightLabel{\Elim{\land}[\OLMathNumeral{1}]}
+\UnaryInfC{$!B$}
+\DischargeRule{\Elim{\lor}}{\OLId{latin-ordinary}{x}\,\OLId{latin-ordinary}{y}}
+\TrinaryInfC{$!B$}
+\DisplayProof
+\]
+فالقطوع التي كانت نهايتها مقدمة~\Elim{\land} تحت~\Elim{\lor} صارت
+نهايتها مقدمة أحد استدلالي~\Elim{\land} الواقعين فوق المقدمتين الصغريين
+لـ~\Elim{\lor}؛ فنقص طول كل منها بمقدار~$\OLMathNumeral{1}$.
+
+ثم إن كل قطع واقع كله في~$\delta_\OLMathNumeral{2}$ أو~$\delta_\OLMathNumeral{3}$ أو~$\delta_\OLMathNumeral{4}$، أو
+واقع كله خارج~$\delta_\OLMathNumeral{1}$ وداخل~$\delta$، باق على حاله: يشتمل على
+!!{formula}s نفسها ويمر بالاستدلالات نفسها؛ فرتبته وطوله هما رتبة القطع
+المقابل في~$\delta$ وطوله. فلم تزد رتبة القطع في~!!{proof} الجديد، وصار
+طول القطع في~!!{proof} الجديد دون طوله في~!!{proof} القديم.
+
+\begin{prob}
+ينقص طول قطع واحد على الأقل بمقدار~$\OLMathNumeral{1}$ بعد تحويل تبديل. وإذا بدّلنا
+\Elim{\land} عبر~\Elim{\lor}، نقص، في الحقيقة، طول مقطعي قطع، ومن ثم
+ينقص طول القطع في~!!{proof} بمقدار~$\OLMathNumeral{2}$ على الأقل. فهل يجوز أن ينقص طول
+القطع في~!!a{proof} بأكثر من~$\OLMathNumeral{2}$ بتحويل واحد من هذا النوع؟ وهل يجوز أن
+تنقص \emph{رتبة} القطع؟
+\end{prob}
+
+ونسمي نقل~!!a{elimination} إلى ما فوق قاعدة~\Elim{\lor} أو
+\Elim{\lexists} \emph{تحويل تبديل}. وقد أثبتت أنماط بعض أزواج القواعد
+في~\olref{tab:permutation-conversions}، وتركت بقيتها تمارين.
+
+% \begin{table}
+% \begin{multline*}
+% \shoveleft{\AxiomC{$!D \lor !E$}
+% \AxiomC{$\Discharge{!D}{x}$}
+% \shortDeduce
+% \DeduceC{$!B \land !C$}
+% \AxiomC{$\Discharge{!E}{y}$}
+% \shortDeduce
+% \DeduceC{$!B \land !C$}
+% \DischargeRule{\Elim{\lor}}{x\,y}
+% \TrinaryInfC{$!B \land !C$}
+% \RightLabel{\Elim{\land}[1]}
+% \UnaryInfC{$!B$}
+% \DisplayProof}\\
+% \shoveright{\longrightarrow\ 
+% \AxiomC{$!D \lor !E$}
+% \AxiomC{$\Discharge{!D}{x}$}
+% \shortDeduce
+% \DeduceC{$!B \land !C$}
+% \RightLabel{\Elim{\land}[1]}
+% \UnaryInfC{$!B$}
+% \AxiomC{$\Discharge{!E}{y}$}
+% \shortDeduce
+% \DeduceC{$!B \land !C$}
+% \RightLabel{\Elim{\land}[1]}
+% \UnaryInfC{$!B$}
+% \DischargeRule{\Elim{\lor}}{x\,y}
+% \TrinaryInfC{$!B$}
+% \DisplayProof}
+% \\
+% \shoveleft{\AxiomC{$!D \lor !E$}
+% \AxiomC{$\Discharge{!D}{x}$}
+% \shortDeduce
+% \DeduceC{$!B \lif !C$}
+% \AxiomC{$\Discharge{!E}{y}$}
+% \shortDeduce
+% \DeduceC{$!B \lif !C$}
+% \DischargeRule{\Elim{\lor}}{x\,y}
+% \TrinaryInfC{$!B \lif !C$}
+% \AxiomC{$!B$}
+% \RightLabel{\Elim{\lif}}
+% \BinaryInfC{$!C$}
+% \DisplayProof}\\
+% \shoveright{\longrightarrow\ 
+% \AxiomC{$!D \lor !E$}
+% \AxiomC{$\Discharge{!D}{x}$}
+% \shortDeduce
+% \DeduceC{$!B \lif !C$}
+% \AxiomC{$!B$}
+% \RightLabel{\Elim{\lif}}
+% \BinaryInfC{$!C$}
+% \AxiomC{$\Discharge{!E}{y}$}
+% \shortDeduce
+% \DeduceC{$!B \lif !C$}
+% \AxiomC{$!B$}
+% \RightLabel{\Elim{\lif}}
+% \BinaryInfC{$!C$}
+% \DischargeRule{\Elim{\lor}}{x\,y}
+% \TrinaryInfC{$!C$}
+% \DisplayProof}
+% \\
+% \shoveleft{\AxiomC{$!D \lor !E$}
+% \AxiomC{$\Discharge{!D}{x}$}
+% \shortDeduce
+% \DeduceC{$!B \lif !C$}
+% \AxiomC{$\Discharge{!E}{y}$}
+% \shortDeduce
+% \DeduceC{$!B \lif !C$}
+% \DischargeRule{\Elim{\lor}}{x\,y}
+% \TrinaryInfC{$!B \lif !C$}
+% \AxiomC{$!B$}
+% \RightLabel{\Elim{\lif}}
+% \BinaryInfC{$!C$}
+% \DisplayProof}\\
+% \shoveright{\longrightarrow\ 
+% \AxiomC{$!D \lor !E$}
+% \AxiomC{$\Discharge{!D}{x}$}
+% \shortDeduce
+% \DeduceC{$!B \lif !C$}
+% \AxiomC{$!B$}
+% \RightLabel{\Elim{\lif}}
+% \BinaryInfC{$!C$}
+% \AxiomC{$\Discharge{!E}{y}$}
+% \shortDeduce
+% \DeduceC{$!B \lif !C$}
+% \AxiomC{$!B$}
+% \RightLabel{\Elim{\lif}}
+% \BinaryInfC{$!C$}
+% \DischargeRule{\Elim{\lor}}{x\,y}
+% \TrinaryInfC{$!C$}
+% \DisplayProof}
+% \\
+% \shoveleft{\AxiomC{$!D \lor !E$}
+% \AxiomC{$\Discharge{!D}{x}$}
+% \shortDeduce
+% \DeduceC{$\lforall[x][!B(x)]$}
+% \AxiomC{$\Discharge{!E}{y}$}
+% \shortDeduce
+% \DeduceC{$\lforall[x][!B(x)]$}
+% \DischargeRule{\Elim{\lor}}{x\,y}
+% \TrinaryInfC{$\lforall[x][!B(x)]$}
+% \RightLabel{\Elim{\lforall}}
+% \UnaryInfC{$!B(t)$}
+% \DisplayProof}\\
+% \shoveright{\longrightarrow\ 
+% \AxiomC{$!D \lor !E$}
+% \AxiomC{$\Discharge{!D}{x}$}
+% \shortDeduce
+% \DeduceC{$\lforall[x][!B(x)]$}
+% \RightLabel{\Elim{\lforall}}
+% \UnaryInfC{$!B(t)$}
+% \AxiomC{$\Discharge{!E}{y}$}
+% \shortDeduce
+% \DeduceC{$\lforall[x][!B(x)]$}
+% \RightLabel{\Elim{\lforall}}
+% \UnaryInfC{$!B(t)$}
+% \DischargeRule{\Elim{\lor}}{x\,y}
+% \TrinaryInfC{$!B(t)$}
+% \DisplayProof}
+% \end{multline*}
+% \caption{Some permutation conversions for \Log{N1i}.}
+% \ollabel{tab:permutation-conversions}
+% \end{table}
+
+{\small
+\begin{longtable}{@{}l@{}}
+\AxiomC{$!D \lor !E$}
+\AxiomC{$\Discharge{!D}{\OLId{latin-ordinary}{x}}$}
+\shortDeduce
+\DeduceC{$!B \land !C$}
+\AxiomC{$\Discharge{!E}{\OLId{latin-ordinary}{y}}$}
+\shortDeduce
+\DeduceC{$!B \land !C$}
+\DischargeRule{\Elim{\lor}}{x\,y}
+\TrinaryInfC{$!B \land !C$}
+\RightLabel{\Elim{\land}[1]}
+\UnaryInfC{$!B$}
+\DisplayProof
+$\longrightarrow$\\[6ex]
+\quad\AxiomC{$!D \lor !E$}
+\AxiomC{$\Discharge{!D}{\OLId{latin-ordinary}{x}}$}
+\shortDeduce
+\DeduceC{$!B \land !C$}
+\RightLabel{\Elim{\land}[1]}
+\UnaryInfC{$!B$}
+\AxiomC{$\Discharge{!E}{\OLId{latin-ordinary}{y}}$}
+\shortDeduce
+\DeduceC{$!B \land !C$}
+\RightLabel{\Elim{\land}[1]}
+\UnaryInfC{$!B$}
+\DischargeRule{\Elim{\lor}}{x\,y}
+\TrinaryInfC{$!B$}
+\DisplayProof
+\\[10ex]
+\AxiomC{$!D \lor !E$}
+\AxiomC{$\Discharge{!D}{\OLId{latin-ordinary}{x}}$}
+\shortDeduce
+\DeduceC{$!B \lif !C$}
+\AxiomC{$\Discharge{!E}{\OLId{latin-ordinary}{y}}$}
+\shortDeduce
+\DeduceC{$!B \lif !C$}
+\DischargeRule{\Elim{\lor}}{x\,y}
+\TrinaryInfC{$!B \lif !C$}
+\AxiomC{$!B$}
+\RightLabel{\Elim{\lif}}
+\BinaryInfC{$!C$}
+\DisplayProof
+$\longrightarrow$\\[6ex]
+\AxiomC{$!D \lor !E$}
+\AxiomC{$\Discharge{!D}{\OLId{latin-ordinary}{x}}$}
+\shortDeduce
+\DeduceC{$!B \lif !C$}
+\AxiomC{$!B$}
+\RightLabel{\Elim{\lif}}
+\BinaryInfC{$!C$}
+\AxiomC{$\Discharge{!E}{\OLId{latin-ordinary}{y}}$}
+\shortDeduce
+\DeduceC{$!B \lif !C$}
+\AxiomC{$!B$}
+\RightLabel{\Elim{\lif}}
+\BinaryInfC{$!C$}
+\DischargeRule{\Elim{\lor}}{x\,y}
+\TrinaryInfC{$!C$}
+\DisplayProof
+\\[10ex]
+\AxiomC{$!D \lor !E$}
+\AxiomC{$\Discharge{!D}{\OLId{latin-ordinary}{x}}$}
+\shortDeduce
+\DeduceC{$\lforall[\OLId{latin-ordinary}{x}][!B(\OLId{latin-ordinary}{x})]$}
+\AxiomC{$\Discharge{!E}{\OLId{latin-ordinary}{y}}$}
+\shortDeduce
+\DeduceC{$\lforall[\OLId{latin-ordinary}{x}][!B(\OLId{latin-ordinary}{x})]$}
+\DischargeRule{\Elim{\lor}}{x\,y}
+\TrinaryInfC{$\lforall[\OLId{latin-ordinary}{x}][!B(\OLId{latin-ordinary}{x})]$}
+\RightLabel{\Elim{\lforall}}
+\UnaryInfC{$!B(\OLId{latin-ordinary}{t})$}
+\DisplayProof
+\quad$\longrightarrow$\\[8ex]
+\quad\AxiomC{$!D \lor !E$}
+\AxiomC{$\Discharge{!D}{\OLId{latin-ordinary}{x}}$}
+\shortDeduce
+\DeduceC{$\lforall[\OLId{latin-ordinary}{x}][!B(\OLId{latin-ordinary}{x})]$}
+\RightLabel{\Elim{\lforall}}
+\UnaryInfC{$!B(\OLId{latin-ordinary}{t})$}
+\AxiomC{$\Discharge{!E}{\OLId{latin-ordinary}{y}}$}
+\shortDeduce
+\DeduceC{$\lforall[\OLId{latin-ordinary}{x}][!B(\OLId{latin-ordinary}{x})]$}
+\RightLabel{\Elim{\lforall}}
+\UnaryInfC{$!B(\OLId{latin-ordinary}{t})$}
+\DischargeRule{\Elim{\lor}}{x\,y}
+\TrinaryInfC{$!B(\OLId{latin-ordinary}{t})$}
+\DisplayProof
+\\
+\caption{بعض تحويلات التبديل في~\Log{N1i}.}
+\ollabel{tab:permutation-conversions}
+\end{longtable}
+}
+
+\begin{prob}
+اكتب تحويلات التبديل لـ~\Elim{\lor} متبوعةً بـ~\Elim{\lor} أو
+\Elim{\lnot}.
+\end{prob}
+
+\begin{prob}
+اكتب تحويلات التبديل لـ~\Elim{\lexists} متبوعةً بـ~\Elim{\lexists}.
+واشرح لماذا لا يُنتهك شرط المتغير الذاتي في الحالة الثانية.
+\end{prob}
+
+ويبقى أن نتحقق من بقاء شرط المتغير الذاتي بعد تحويل التبديل. فلننظر في:
+\[
+\AxiomC{}
+\RightLabel{$\delta_\OLMathNumeral{2}$}
+\DeduceC{$!D \lor !E$}
+\AxiomC{$\Discharge{!D}{\OLId{latin-ordinary}{x}}$}
+\RightLabel{$\delta_\OLMathNumeral{3}$}
+\DeduceC{$\lexists[\OLId{latin-ordinary}{x}][!B(\OLId{latin-ordinary}{x})]$}
+\AxiomC{$\Discharge{!E}{\OLId{latin-ordinary}{y}}$}
+\RightLabel{$\delta_\OLMathNumeral{4}$}
+\DeduceC{$\lexists[\OLId{latin-ordinary}{x}][!B(\OLId{latin-ordinary}{x})]$}
+\DischargeRule{\Elim{\lor}}{\OLId{latin-ordinary}{x}\,\OLId{latin-ordinary}{y}}
+\TrinaryInfC{$\lexists[\OLId{latin-ordinary}{x}][!B(\OLId{latin-ordinary}{x})]$}
+\AxiomC{$\Discharge{!B(\OLId{latin-ordinary}{c})}{\OLId{latin-ordinary}{z}}$}
+\RightLabel{$\delta_\OLMathNumeral{5}$}
+\DeduceC{$!C$}
+\DischargeRule{\Elim{\lexists}}{\OLId{latin-ordinary}{z}}
+\BinaryInfC{$!C$}
+\DisplayProof
+\]
+وقبل أن نستبدل بهذا البرهان نأخذ من~$\delta_\OLMathNumeral{5}$ نسختين، ونعيد تسمية
+المتغيرات الذاتية ووسوم التفريغ فيهما اتقاء الأسر، حتى يكون الزوجان
+$(\OLId{latin-ordinary}{c}_\OLId{latin-looped}{D},\OLId{latin-ordinary}{z}_\OLId{latin-looped}{D})$ و$(\OLId{latin-ordinary}{c}_\OLId{latin-looped}{E},\OLId{latin-ordinary}{z}_\OLId{latin-looped}{E})$ حديثين ومتميزين زوجيًا. ثم نقيم مكانه ما يأتي:
+\[
+\AxiomC{}
+\RightLabel{$\delta_\OLMathNumeral{2}$}
+\DeduceC{$!D \lor !E$}
+\AxiomC{$\Discharge{!D}{\OLId{latin-ordinary}{x}}$}
+\RightLabel{$\delta_\OLMathNumeral{3}$}
+\DeduceC{$\lexists[\OLId{latin-ordinary}{x}][!B(\OLId{latin-ordinary}{x})]$}
+\AxiomC{$\Discharge{!B(\OLId{latin-ordinary}{c}_\OLId{latin-looped}{D})}{\OLId{latin-ordinary}{z}_\OLId{latin-looped}{D}}$}
+\RightLabel{$\delta_\OLMathNumeral{5}^{(\OLId{latin-looped}{D})}$}
+\DeduceC{$!C$}
+\DischargeRule{\Elim{\lexists}}{\OLId{latin-ordinary}{z}_\OLId{latin-looped}{D}}
+\BinaryInfC{$!C$}
+\AxiomC{$\Discharge{!E}{\OLId{latin-ordinary}{y}}$}
+\RightLabel{$\delta_\OLMathNumeral{4}$}
+\DeduceC{$\lexists[\OLId{latin-ordinary}{x}][!B(\OLId{latin-ordinary}{x})]$}
+\AxiomC{$\Discharge{!B(\OLId{latin-ordinary}{c}_\OLId{latin-looped}{E})}{\OLId{latin-ordinary}{z}_\OLId{latin-looped}{E}}$}
+\RightLabel{$\delta_\OLMathNumeral{5}^{(\OLId{latin-looped}{E})}$}
+\DeduceC{$!C$}
+\DischargeRule{\Elim{\lexists}}{\OLId{latin-ordinary}{z}_\OLId{latin-looped}{E}}
+\BinaryInfC{$!C$}
+\DischargeRule{\Elim{\lor}}{\OLId{latin-ordinary}{x}\,\OLId{latin-ordinary}{y}}
+\TrinaryInfC{$!C$}
+\DisplayProof
+\]
+وقد يخشى أن يظهر المتغير الذاتي~$\OLId{latin-ordinary}{c}$، مثلًا، في~$!D$. والفرض~$!D$ مفرغ
+فوق~\Elim{\lexists} الأصلي، فلا يقع في~!!{proof} الأصلي فرضًا مفتوحًا
+فوق المقدمة الكبرى لاستدلال~\Elim{\lexists}، ومن ثم يصح شرط المتغير
+الذاتي هناك. وأما في~!!{proof} الجديد فلا يفرغ~$!D$ إلا بعد استدلالي
+\Elim{\lexists}، فيلوح أن الشرط قد اختل. غير أنا نفرض انتظام~!!{proof}s:
+فكل متغير ذاتي مختص باستدلال واحد، ولا يظهر في~!!{proof} إلا فوق المقدمة
+الصغرى لـ~\Elim{\lexists}. وعلى الخصوص لا يظهر~$\OLId{latin-ordinary}{c}$ في~$\delta_\OLMathNumeral{3}$ ولا
+$\delta_\OLMathNumeral{4}$؛ ثم إن إعادة التسمية بالمتغيرات الحديثة تمنع الأسر بين
+النسختين.
+
+وفي المثال فائدة أخرى: فإن في~!!{proof} الجديد نسختين من~$\delta_\OLMathNumeral{5}$.
+فإذا اشتمل~$\delta_\OLMathNumeral{5}$ على قطع أقصى، لم يلزم نقصان طول القطع، بل ربما زاد
+بالنسخ. فلا نعمل تحويل التبديل إلا حيث نعلم خلو~$\delta_\OLMathNumeral{5}$ من قطع أقصى.
+ونضمن هذا بأن نختار دائمًا قطعًا أقصى \emph{علويًا}؛ أي قطعًا لا يشتمل
+!!{proof}ه الجزئي، وهو~$\delta_\OLMathNumeral{1}$ هنا، على قطع أقصى ينتهي فوق آخر استدلال
+في ذلك~!!{proof} الجزئي. وبذلك يمتنع وجود قطع أقصى آخر في~$\delta_\OLMathNumeral{5}$، بل
+في~$\delta_\OLMathNumeral{2}$ أو~$\delta_\OLMathNumeral{3}$ أو~$\delta_\OLMathNumeral{4}$ أيضًا.
+
+\end{document}

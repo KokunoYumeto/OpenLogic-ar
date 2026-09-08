@@ -1,0 +1,188 @@
+% Part: normal-modal-logic
+% Chapter: filtrations
+% Section: filtrations-def
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{fil}{fil}
+
+\olsection{الترشيحات}
+
+لا نفرد تعريفًا لترشيح وحيد لـ~$\mModel{M}$
+عبر~$\OLId{greek-variable}{Gamma}$؛ بل نحدّ الشروط التي بها يكون
+النموذج~$\mModel{M^*}$ ترشيحًا لـ~$\mModel{M}$.
+فالترشيحات كلها تتفق في مجموعة عوالمها~$\OLId{latin-looped}{W}^*$
+وفي تقييمها~$\OLId{latin-looped}{V}^*$، وإنما قد تختلف علاقات
+  النفاذ~$\OLId{latin-looped}{R}^*$ بينها. ولا يستقيم عدّ~$\mModel{M^*}$ ترشيحًا إلا
+بشروط في~$\OLId{latin-looped}{R}^*$؛ وهي بعينها الشروط اللازمة
+لإثبات النتيجة الرئيسة:
+$\mSat{\OLId{latin-looped}{M}}{!A}[\OLId{latin-ordinary}{w}]$ إذا وفقط إذا كان
+$\mSat{\OLId{latin-looped}{M}^*}{!A}[{[\OLId{latin-ordinary}{w}]}]$، متى كان~$!A \in \OLId{greek-variable}{Gamma}$.
+
+\begin{defn}\ollabel{defn:filtration}
+  لتكن~$\OLId{greek-variable}{Gamma}$ مغلقة تحت أخذ الصيغ الجزئية، ولتكن
+  $\mModel{M}=\tuple{\OLId{latin-looped}{W},\OLId{latin-looped}{R},\OLId{latin-looped}{V}}$. \emph{ترشيح~$\mModel{M}$ عبر~$\OLId{greek-variable}{Gamma}$}
+  هو أي نموذج~$\mModel{M^*}=\tuple{\OLId{latin-looped}{W}^*,\OLId{latin-looped}{R}^*,\OLId{latin-looped}{V}^*}$ بحيث:
+  \begin{enumerate}
+  \item $\OLId{latin-looped}{W}^*=\Setabs{[\OLId{latin-ordinary}{w}]}{\OLId{latin-ordinary}{w} \in \OLId{latin-looped}{W}}$؛
+  \item \ollabel{defn:filtration-R}%
+    لأي~$\OLId{latin-ordinary}{u},\OLId{latin-ordinary}{v} \in \OLId{latin-looped}{W}$:
+    \begin{enumerate}
+    \item \ollabel{defn:filtration-R1}%
+      إذا كان~$Ruv$، كان~$\OLId{latin-looped}{R}^*[\OLId{latin-ordinary}{u}][\OLId{latin-ordinary}{v}]$؛
+    \tagitem{prvBox}{\ollabel{defn:filtration-R2}%
+      إذا كان~$\OLId{latin-looped}{R}^*[\OLId{latin-ordinary}{u}][\OLId{latin-ordinary}{v}]$، فلكل~$\Box !A \in \OLId{greek-variable}{Gamma}$، إذا كان
+      $\mSat{\OLId{latin-looped}{M}}{\Box!A}[\OLId{latin-ordinary}{u}]$ كان~$\mSat{\OLId{latin-looped}{M}}{!A}[\OLId{latin-ordinary}{v}]$}{}؛
+    \tagitem{prvDiamond}{\ollabel{defn:filtration-R3}%
+      إذا كان~$\OLId{latin-looped}{R}^*[\OLId{latin-ordinary}{u}][\OLId{latin-ordinary}{v}]$، فلكل~$\Diamond !A \in \OLId{greek-variable}{Gamma}$، إذا كان
+      $\mSat{\OLId{latin-looped}{M}}{!A}[\OLId{latin-ordinary}{v}]$ كان~$\mSat{\OLId{latin-looped}{M}}{\Diamond!A}[\OLId{latin-ordinary}{u}]$.}{}
+    \end{enumerate}
+  \item $\OLId{latin-looped}{V}^*(\OLId{latin-ordinary}{p})=\Setabs{[\OLId{latin-ordinary}{u}]}{\OLId{latin-ordinary}{u} \in \OLId{latin-looped}{V}(\OLId{latin-ordinary}{p})}$.
+  \end{enumerate}
+\end{defn}
+
+ينبغي أن نميّز هنا ما يقتضيه تعريف~$\OLId{latin-looped}{V}^*(\OLId{latin-ordinary}{p})$
+مما لا يقتضيه. فهي مجموعة فئات التكافؤ~$[\OLId{latin-ordinary}{w}]$
+للعوالم~$\OLId{latin-ordinary}{w}$ التي تصدق فيها~$\OLId{latin-ordinary}{p}$ في~$\mModel{M}$.
+فمن~$\OLId{latin-ordinary}{w} \in \OLId{latin-looped}{V}(\OLId{latin-ordinary}{p})$ يلزم~$[\OLId{latin-ordinary}{w}] \in \OLId{latin-looped}{V}^*(\OLId{latin-ordinary}{p})$
+بالتعريف. أما العكس، فلا يلزم~$\OLId{latin-ordinary}{w} \in \OLId{latin-looped}{V}(\OLId{latin-ordinary}{p})$
+من~$[\OLId{latin-ordinary}{w}] \in \OLId{latin-looped}{V}^*(\OLId{latin-ordinary}{p})$ على الإطلاق.
+فـ~$[\OLId{latin-ordinary}{w}] \in \OLId{latin-looped}{V}^*(\OLId{latin-ordinary}{p})$ لا يعطينا إلا
+$[\OLId{latin-ordinary}{w}]=[\OLId{latin-ordinary}{u}]$ لـ\emph{بعض}~$\OLId{latin-ordinary}{u} \in \OLId{latin-looped}{V}(\OLId{latin-ordinary}{p})$.
+ومعنى~$[\OLId{latin-ordinary}{w}]=[\OLId{latin-ordinary}{u}]$ أن~$\OLId{latin-ordinary}{w} \equiv \OLId{latin-ordinary}{u}$.
+فإذا كان~$[\OLId{latin-ordinary}{w}] \in \OLId{latin-looped}{V}^*(\OLId{latin-ordinary}{p})$، لم يكن لنا من
+التعريف وحده إلا $\OLId{latin-ordinary}{w} \equiv \OLId{latin-ordinary}{u}$ لبعض~$\OLId{latin-ordinary}{u} \in \OLId{latin-looped}{V}(\OLId{latin-ordinary}{p})$.
+
+\begin{thm}\ollabel{thm:filtrations}
+  إذا كان~$\mModel{M^*}$ ترشيحًا لـ~$\mModel{M}$ عبر~$\OLId{greek-variable}{Gamma}$، فعندئذ
+  لكل~$!A \in \OLId{greek-variable}{Gamma}$ ولكل~$\OLId{latin-ordinary}{w} \in \OLId{latin-looped}{W}$، يكون~$\mSat{\OLId{latin-looped}{M}}{!A}[\OLId{latin-ordinary}{w}]$ إذا
+  وفقط إذا كان~$\mSat{\OLId{latin-looped}{M}^*}{!A}[{[\OLId{latin-ordinary}{w}]}]$.
+\end{thm}
+
+\begin{proof}
+  نستقرئ على~$!A$، مستعملين انغلاق~$\OLId{greek-variable}{Gamma}$
+  تحت أخذ الصيغ الجزئية. فلما كانت~$!A \in \OLId{greek-variable}{Gamma}$
+  وكانت $\OLId{greek-variable}{Gamma}$ مغلقة تحت أخذ ال!!{formula}s
+  الجزئية، دخلت ال!!{formula}s الجزئية لـ~$!A$
+  كلها~$\in \OLId{greek-variable}{Gamma}$. فيصح تطبيق فرض الاستقراء
+  في كل خطوة على ال!!{formula}s الجزئية لـ~$!A$.
+  \begin{enumerate}
+    \tagitem{prvFalse}{\indcase{!A}{\lfalse}{لا
+        $\mSat{\OLId{latin-looped}{M}}{\indfrm}[\OLId{latin-ordinary}{w}]$ ولا~$\mSat{\OLId{latin-looped}{M}^*}{\indfrm}[{[\OLId{latin-ordinary}{w}]}]$.}}{}
+    \tagitem{prvTrue}{\indcase{!A}{\ltrue}{يتحقق كل من
+        $\mSat{\OLId{latin-looped}{M}}{\indfrm}[\OLId{latin-ordinary}{w}]$ و$\mSat{\OLId{latin-looped}{M}^*}{\indfrm}[{[\OLId{latin-ordinary}{w}]}]$.}}{}
+    \item \indcase{!A}{p}{الاتجاه من اليسار إلى اليمين مباشر، إذ لا
+      يتحقق~$\mSat{\OLId{latin-looped}{M}}{\indfrm}[\OLId{latin-ordinary}{w}]$ إلا إذا كان~$\OLId{latin-ordinary}{w} \in \OLId{latin-looped}{V}(\OLId{latin-ordinary}{p})$، وهذا
+      يستلزم~$[\OLId{latin-ordinary}{w}] \in \OLId{latin-looped}{V}^*(\OLId{latin-ordinary}{p})$؛ أي~$\mSat{\OLId{latin-looped}{M}^*}{\indfrm}[{[\OLId{latin-ordinary}{w}]}]$.
+      وبالعكس، افترض~$\mSat{\OLId{latin-looped}{M}^*}{\indfrm}[{[\OLId{latin-ordinary}{w}]}]$، أي
+      $[\OLId{latin-ordinary}{w}] \in \OLId{latin-looped}{V}^*(\OLId{latin-ordinary}{p})$. عندئذ يوجد~$\OLId{latin-ordinary}{v} \in \OLId{latin-looped}{V}(\OLId{latin-ordinary}{p})$ بحيث~$\OLId{latin-ordinary}{w} \equiv \OLId{latin-ordinary}{v}$.
+      ومن ثم يتحقق بالطبع~$\mSat{\OLId{latin-looped}{M}}{\OLId{latin-ordinary}{p}}[\OLId{latin-ordinary}{v}]$. ولأن~$\OLId{latin-ordinary}{w} \equiv \OLId{latin-ordinary}{v}$، يصدق
+      $\OLId{latin-ordinary}{w}$ و$\OLId{latin-ordinary}{v}$ ال!!{formula}s نفسها من~$\OLId{greek-variable}{Gamma}$. وبما أن~$\OLId{latin-ordinary}{p} \in
+      \OLId{greek-variable}{Gamma}$ بحسب الفرض وأن~$\mSat{\OLId{latin-looped}{M}}{\OLId{latin-ordinary}{p}}[\OLId{latin-ordinary}{v}]$، يكون
+      $\mSat{\OLId{latin-looped}{M}}{\indfrm}[\OLId{latin-ordinary}{w}]$.}
+
+    \tagitem{prvNot}{\iftag{probNot}{تمرين.}{\indcase{!A}{\lnot
+          !B}{$\mSat{\OLId{latin-looped}{M}}{\indfrm}[\OLId{latin-ordinary}{w}]$ إذا وفقط إذا كان
+          $\mSat/{\OLId{latin-looped}{M}}{!B}[\OLId{latin-ordinary}{w}]$. وبفرض الاستقراء، يكون
+          $\mSat/{\OLId{latin-looped}{M}}{!B}[\OLId{latin-ordinary}{w}]$ إذا وفقط إذا كان
+          $\mSat/{\OLId{latin-looped}{M}^*}{!B}[{[\OLId{latin-ordinary}{w}]}]$. وأخيرًا، يكون
+          $\mSat/{\OLId{latin-looped}{M}^*}{!B}[{[\OLId{latin-ordinary}{w}]}]$ إذا وفقط إذا كان
+          $\mSat{\OLId{latin-looped}{M}^*}{\indfrm}[{[\OLId{latin-ordinary}{w}]}]$.}}}{}
+
+    \tagitem{prvAnd}{\iftag{probAnd}{تمرين.}{\indcase{!A}{(!B \land
+          !C)}{$\mSat{\OLId{latin-looped}{M}}{\indfrm}[\OLId{latin-ordinary}{w}]$ إذا وفقط إذا كان
+          $\mSat{\OLId{latin-looped}{M}}{!B}[\OLId{latin-ordinary}{w}]$ و$\mSat{\OLId{latin-looped}{M}}{!C}[\OLId{latin-ordinary}{w}]$. وبفرض الاستقراء، يكون
+          $\mSat{\OLId{latin-looped}{M}}{!B}[\OLId{latin-ordinary}{w}]$ إذا وفقط إذا كان
+          $\mSat{\OLId{latin-looped}{M}^*}{!B}[{[\OLId{latin-ordinary}{w}]}]$، ويكون~$\mSat{\OLId{latin-looped}{M}}{!C}[\OLId{latin-ordinary}{w}]$ إذا وفقط
+          إذا كان~$\mSat{\OLId{latin-looped}{M}^*}{!C}[{[\OLId{latin-ordinary}{w}]}]$. كما أن
+          $\mSat{\OLId{latin-looped}{M}^*}{\indfrm}[{[\OLId{latin-ordinary}{w}]}]$ إذا وفقط إذا كان
+          $\mSat{\OLId{latin-looped}{M}^*}{!B}[{[\OLId{latin-ordinary}{w}]}]$ و$\mSat{\OLId{latin-looped}{M}^*}{!C}[{[\OLId{latin-ordinary}{w}]}]$.}}}{}
+
+    \tagitem{prvOr}{\iftag{probOr}{تمرين.}{\indcase{!A}{(!B \lor
+          !C)}{$\mSat{\OLId{latin-looped}{M}}{\indfrm}[\OLId{latin-ordinary}{w}]$ إذا وفقط إذا كان
+          $\mSat{\OLId{latin-looped}{M}}{!B}[\OLId{latin-ordinary}{w}]$ أو~$\mSat{\OLId{latin-looped}{M}}{!C}[\OLId{latin-ordinary}{w}]$. وبفرض الاستقراء،
+          يكون~$\mSat{\OLId{latin-looped}{M}}{!B}[\OLId{latin-ordinary}{w}]$ إذا وفقط إذا كان
+          $\mSat{\OLId{latin-looped}{M}^*}{!B}[{[\OLId{latin-ordinary}{w}]}]$، ويكون~$\mSat{\OLId{latin-looped}{M}}{!C}[\OLId{latin-ordinary}{w}]$ إذا وفقط
+          إذا كان~$\mSat{\OLId{latin-looped}{M}^*}{!C}[{[\OLId{latin-ordinary}{w}]}]$. كما أن
+          $\mSat{\OLId{latin-looped}{M}^*}{\indfrm}[{[\OLId{latin-ordinary}{w}]}]$ إذا وفقط إذا كان
+          $\mSat{\OLId{latin-looped}{M}^*}{!B}[{[\OLId{latin-ordinary}{w}]}]$ أو~$\mSat{\OLId{latin-looped}{M}^*}{!C}[{[\OLId{latin-ordinary}{w}]}]$.}}}{}
+
+    \tagitem{prvIf}{\iftag{probIf}{تمرين.}{\indcase{!A}{(!B \lif
+          !C)}{$\mSat{\OLId{latin-looped}{M}}{\indfrm}[\OLId{latin-ordinary}{w}]$ إذا وفقط إذا كان
+          $\mSat/{\OLId{latin-looped}{M}}{!B}[\OLId{latin-ordinary}{w}]$ أو~$\mSat{\OLId{latin-looped}{M}}{!C}[\OLId{latin-ordinary}{w}]$. وبفرض الاستقراء،
+          يكون~$\mSat{\OLId{latin-looped}{M}}{!B}[\OLId{latin-ordinary}{w}]$ إذا وفقط إذا كان
+          $\mSat{\OLId{latin-looped}{M}^*}{!B}[{[\OLId{latin-ordinary}{w}]}]$، ويكون~$\mSat{\OLId{latin-looped}{M}}{!C}[\OLId{latin-ordinary}{w}]$ إذا وفقط
+          إذا كان~$\mSat{\OLId{latin-looped}{M}^*}{!C}[{[\OLId{latin-ordinary}{w}]}]$. كما أن
+          $\mSat{\OLId{latin-looped}{M}^*}{\indfrm}[{[\OLId{latin-ordinary}{w}]}]$ إذا وفقط إذا كان
+          $\mSat/{\OLId{latin-looped}{M}^*}{!B}[{[\OLId{latin-ordinary}{w}]}]$ أو~$\mSat{\OLId{latin-looped}{M}^*}{!C}[{[\OLId{latin-ordinary}{w}]}]$.}}}{}
+
+    \tagitem{prvIff}{\iftag{probIff}{تمرين.}{\indcase{!A}{(!B \liff
+          !C)}{$\mSat{\OLId{latin-looped}{M}}{\indfrm}[\OLId{latin-ordinary}{w}]$ إذا وفقط إذا صدق
+          $\mSat{\OLId{latin-looped}{M}}{!B}[\OLId{latin-ordinary}{w}]$ و$\mSat{\OLId{latin-looped}{M}}{!C}[\OLId{latin-ordinary}{w}]$، أو صدق
+          $\mSat/{\OLId{latin-looped}{M}}{!B}[\OLId{latin-ordinary}{w}]$ و$\mSat/{\OLId{latin-looped}{M}}{!C}[\OLId{latin-ordinary}{w}]$. وبفرض الاستقراء،
+          يكون~$\mSat{\OLId{latin-looped}{M}}{!B}[\OLId{latin-ordinary}{w}]$ إذا وفقط إذا كان
+          $\mSat{\OLId{latin-looped}{M}^*}{!B}[{[\OLId{latin-ordinary}{w}]}]$، ويكون~$\mSat{\OLId{latin-looped}{M}}{!C}[\OLId{latin-ordinary}{w}]$ إذا وفقط
+          إذا كان~$\mSat{\OLId{latin-looped}{M}^*}{!C}[{[\OLId{latin-ordinary}{w}]}]$. كما أن
+          $\mSat{\OLId{latin-looped}{M}^*}{\indfrm}[{[\OLId{latin-ordinary}{w}]}]$ إذا وفقط إذا صدق
+          $\mSat{\OLId{latin-looped}{M}^*}{!B}[{[\OLId{latin-ordinary}{w}]}]$ و$\mSat{\OLId{latin-looped}{M}^*}{!C}[{[\OLId{latin-ordinary}{w}]}]$، أو صدق
+          $\mSat/{\OLId{latin-looped}{M}^*}{!B}[{[\OLId{latin-ordinary}{w}]}]$ و$\mSat/{\OLId{latin-looped}{M}^*}{!C}[{[\OLId{latin-ordinary}{w}]}]$.}}}{}
+
+    \tagitem{prvBox}{\iftag{probBox}{تمرين.}{\indcase{!A}{\Box
+          !B}{افترض~$\mSat{\OLId{latin-looped}{M}}{\indfrm}[\OLId{latin-ordinary}{w}]$؛ ولإثبات
+          $\mSat{\OLId{latin-looped}{M}^*}{\indfrm}[{[\OLId{latin-ordinary}{w}]}]$، ليكن~$\OLId{latin-ordinary}{v}$ بحيث
+          $\OLId{latin-looped}{R}^*[\OLId{latin-ordinary}{w}][\OLId{latin-ordinary}{v}]$. ومن
+          \olref{defn:filtration}\olref{defn:filtration-R2} نحصل على
+          $\mSat{\OLId{latin-looped}{M}}{!B}[\OLId{latin-ordinary}{v}]$، وبفرض الاستقراء نحصل على
+          $\mSat{\OLId{latin-looped}{M}^*}{!B}[{[\OLId{latin-ordinary}{v}]}]$. ولما كان~$\OLId{latin-ordinary}{v}$ اعتباطيًا، ينتج
+          $\mSat{\OLId{latin-looped}{M}^*}{\indfrm}[{[\OLId{latin-ordinary}{w}]}]$.
+
+          وبالعكس، افترض~$\mSat{\OLId{latin-looped}{M}^*}{\indfrm}[{[\OLId{latin-ordinary}{w}]}]$، وليكن~$\OLId{latin-ordinary}{v}$
+          اعتباطيًا بحيث~$Rwv$. ومن
+          \olref{defn:filtration}\olref{defn:filtration-R1} نحصل على
+          $\OLId{latin-looped}{R}^*[\OLId{latin-ordinary}{w}][\OLId{latin-ordinary}{v}]$، ومن ثم~$\mSat{\OLId{latin-looped}{M}^*}{!B}[{[\OLId{latin-ordinary}{v}]}]$؛ وبفرض
+          الاستقراء~$\mSat{\OLId{latin-looped}{M}}{!B}[\OLId{latin-ordinary}{v}]$، ولما كان~$\OLId{latin-ordinary}{v}$ اعتباطيًا ينتج
+          $\mSat{\OLId{latin-looped}{M}}{\indfrm}[\OLId{latin-ordinary}{w}]$.}}}{}
+
+    \tagitem{prvDiamond}{\iftag{probDiamond}{تمرين.}{\indcase{!A}{\Diamond
+          !B}{افترض~$\mSat{\OLId{latin-looped}{M}}{\indfrm}[\OLId{latin-ordinary}{w}]$. عندئذ يوجد~$\OLId{latin-ordinary}{v} \in \OLId{latin-looped}{W}$
+          بحيث~$Rwv$ و$\mSat{\OLId{latin-looped}{M}}{!B}[\OLId{latin-ordinary}{v}]$. وبفرض الاستقراء
+          $\mSat{\OLId{latin-looped}{M}^*}{!B}[{[\OLId{latin-ordinary}{v}]}]$، ومن
+          \olref{defn:filtration}\olref{defn:filtration-R1} نحصل على
+          $\OLId{latin-looped}{R}^*[\OLId{latin-ordinary}{w}][\OLId{latin-ordinary}{v}]$. ومن ثم~$\mSat{\OLId{latin-looped}{M}^*}{\indfrm}[{[\OLId{latin-ordinary}{w}]}]$.
+
+          وافترض الآن~$\mSat{\OLId{latin-looped}{M}^*}{\indfrm}[{[\OLId{latin-ordinary}{w}]}]$. عندئذ يوجد
+          $[\OLId{latin-ordinary}{v}] \in \OLId{latin-looped}{W}^*$ بحيث~$\OLId{latin-looped}{R}^*[\OLId{latin-ordinary}{w}][\OLId{latin-ordinary}{v}]$ و
+          $\mSat{\OLId{latin-looped}{M}^*}{!B}[{[\OLId{latin-ordinary}{v}]}]$. وبفرض الاستقراء
+          $\mSat{\OLId{latin-looped}{M}}{!B}[\OLId{latin-ordinary}{v}]$. وبحسب
+          \olref{defn:filtration}\olref{defn:filtration-R3} نحصل على
+          $\mSat{\OLId{latin-looped}{M}}{\indfrm}[\OLId{latin-ordinary}{w}]$.}}}{}
+  \end{enumerate}
+\end{proof}
+
+\begin{prob}
+  أكمل برهان~\olref[nml][fil][fil]{thm:filtrations}.
+\end{prob}
+
+ومن حفظ الصدق عند كل عالم ننتقل إلى حفظ الصدق في النموذج كله،
+ثم إلى حفظ الصلاحية في فئة النماذج.
+
+\begin{cor}
+  لتكن~$\OLId{greek-variable}{Gamma}$ مغلقة تحت أخذ الصيغ الجزئية. عندئذ:
+  \begin{enumerate}
+  \item إذا كان~$\mModel{M^*}$ ترشيحًا لـ~$\mModel{M}$ عبر~$\OLId{greek-variable}{Gamma}$،
+    فلكل~$!A \in \OLId{greek-variable}{Gamma}$: يكون~$\mSat{\OLId{latin-looped}{M}}{!A}$ إذا وفقط إذا كان
+    $\mSat{\OLId{latin-looped}{M}^*}{!A}$.
+  \item إذا كانت~$\mClass{C}$ فئة من النماذج، وكان لكل نموذج منها
+    ترشيح واحد على الأقل عبر~$\OLId{greek-variable}{Gamma}$، وكانت
+    $\OLId{greek-variable}{Gamma}(\mClass{C})$ فئة ترشيحات~$\OLId{greek-variable}{Gamma}$ لنماذج~$\mClass{C}$،
+    فإن أي !!{formula}~$!A \in \OLId{greek-variable}{Gamma}$ تكون صالحة في~$\mClass{C}$ إذا
+    وفقط إذا كانت صالحة في~$\OLId{greek-variable}{Gamma}(\mClass{C})$.
+  \end{enumerate}
+\end{cor}
+% تصحيح دلالي (0453-I1): يلزم وجود ترشيح لكل نموذج في الفئة؛ وتأتي إنشاءات الوجود في القسم التالي.
+
+
+
+\end{document}

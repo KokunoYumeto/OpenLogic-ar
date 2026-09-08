@@ -1,0 +1,380 @@
+% Part: first-order-logic 
+% Chapter: axiomatic-deduction 
+% Section: provability
+
+% verification of properties of provability needed for maximally 
+% consistent sets in the completeness chapter.
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{axd}{prv}}
+      {\olfileid{pl}{axd}{prv}}
+
+\olsection{أحكام \usetoken{S}{derivability}}
+
+\begin{editorial}
+نحمل في هذا القسم شرط الجدة في~\QR{} على الفروض المستعملة فعلًا في البرهان،
+لا على ما لم يستعمل من أعضاء مجموعة محيطة. وهذا اصطلاح الدعم المنتهي الذي
+تقوم عليه الرتابة والتراص.
+\end{editorial}
+
+\begin{prop}[الرتابة] متى كان~$\Gamma \subseteq \Delta$ و
+$\Gamma \Proves !A$، كان كذلك~$\Delta \Proves !A$.
+\end{prop}
+
+\begin{proof}
+كل~$\Gamma_0 \subseteq \Gamma$ منتهية داخلة أيضاً في~$\Delta$ دخول
+مجموعة جزئية منتهية؛ فـ!!a{derivation} لـ$\Gamma_0 \Proves !A$ تشهد
+كذلك بـ$\Delta \Proves !A$.
+\end{proof}
+
+\begin{prop}\ollabel{prop:provability}
+يكون~$\Gamma \Proves !A$ إذا وفقط إذا كانت~$\Gamma\cup \{\lnot!A \}$
+غير متسقة.
+\end{prop}
+
+\begin{proof}
+أما أولاً فافرض~$\Gamma \Proves !A$. توجد إذن مجموعة منتهية
+$\Gamma_0 \subseteq \Gamma$ تحقق~$\Gamma_0 \Proves !A$، فيلزم
+$\Gamma_0 \cup \{\lnot !A\} \Proves \lfalse$، فتكون
+$\Gamma \cup \{\lnot !A\}$ غير متسقة. وأما العكس، فلتكن
+$\Gamma \cup \{\lnot !A\}$ غير متسقة؛ فعندئذ توجد مجموعة منتهية
+$\Gamma_0 \subseteq \Gamma$ تحقق
+$\Gamma_0 \cup \{\lnot !A\} \Proves \lfalse$. وتنتج مبرهنة الاستنباط
+$\Gamma_0 \Proves \lnot !A \lif \lfalse$، وتعطينا \textbf{Ax0}
+$\Gamma_0 \Proves (\lnot !A \lif \lfalse) \lif !A$. فنستخرج بـMP
+$\Gamma_0 \Proves !A$، ثم بالرتابة~$\Gamma \Proves !A$.
+\end{proof}
+
+\begin{prop}\ollabel{prop:provability-properties}
+\begin{enumerate}
+\item \ollabel{prop:provability-contr} متى كان~$\Gamma \Proves !A$ و
+$\Gamma \cup \{ !A\} \Proves \lfalse$، كانت~$\Gamma$ غير متسقة.
+
+\item \ollabel{prop:provability-lnot} متى كان
+$\Gamma \cup \{!A\} \Proves \lfalse$، كان
+$\Gamma \Proves \lnot !A$.
+
+\item \ollabel{prop:provability-exhaustive} متى كان
+$\Gamma \cup \{!A\} \Proves \lfalse$ و
+$\Gamma \cup \{\lnot !A\} \Proves \lfalse$، كان
+$\Gamma \Proves \lfalse$.
+
+\tagitem{prvOr}{\ollabel{prop:provability-lor-left} متى كان
+$\Gamma \cup \{!A\} \Proves \lfalse$ و
+$\Gamma \cup \{!B\} \Proves \lfalse$، كان
+$\Gamma \cup \{!A \lor !B\} \Proves \lfalse$.}{}
+
+\tagitem{prvOr}{\ollabel{prop:provability-lor-right} متى كان
+$\Gamma \Proves !A$ أو~$\Gamma \Proves !B$، كان
+$\Gamma \Proves !A \lor !B$.}{}
+
+\tagitem{prvAnd}{\ollabel{prop:provability-land-left} متى كان
+$\Gamma \Proves !A \land !B$، كان~$\Gamma \Proves !A$ و
+$\Gamma \Proves !B$.}{}
+
+\tagitem{prvAnd}{\ollabel{prop:provability-land-right} متى كان
+$\Gamma \Proves !A$ و$\Gamma \Proves !B$، كان
+$\Gamma \Proves !A \land !B$.}{}
+
+\tagitem{prvIf}{\ollabel{prop:provability-mp} متى كان
+$\Gamma \Proves !A$ و$\Gamma \Proves !A \lif !B$، كان
+$\Gamma \Proves !B$.}{}
+
+\tagitem{prvIf}{\ollabel{prop:provability-lif} متى كان
+$\Gamma \Proves \lnot !A$ أو~$\Gamma \Proves !B$، كان
+$\Gamma \Proves !A \lif !B$.}{}
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+\begin{enumerate}
+\item عيّن مجموعتين منتهيتين~$\Gamma_0,\Gamma_1 \subseteq \Gamma$
+تحققان~$\Gamma_0 \cup \{!A\} \Proves \lfalse$ و
+$\Gamma_1 \Proves !A$.
+
+\begin{derivation}
+1. & $\Gamma_0 \cup \{!A\} \Proves \lfalse$ & فرض \\
+2. & $\Gamma_1 \Proves !A$ & فرض \\
+3. & $\Gamma_0 \cup \Gamma_1 \Proves \lfalse$ & القطع \\
+\end{derivation}
+
+وبما أن~$\Gamma_0 \subseteq \Gamma$ و$\Gamma_1 \subseteq \Gamma$، فإن
+$\Gamma_0 \cup \Gamma_1 \subseteq \Gamma$، فينتج
+$\Gamma \Proves \lfalse$.
+
+\item عيّن مجموعة منتهية~$\Gamma_0 \subseteq \Gamma$ تحقق
+$\Gamma_0 \cup\{!A\} \Proves \lfalse$.
+
+\begin{derivation}
+1. & $\Gamma_0 \cup\{!A\} \Proves \lfalse$ & فرض \\
+2. & $\Gamma_0 \Proves !A \lif \lfalse$ & مبرهنة الاستنباط \\
+3. & $\Gamma_0 \Proves (!A \lif \lfalse) \lif \lnot !A$ & Ax0 \\
+4. & $\Gamma_0 \Proves \lnot !A$ & MP 2, 3 \\
+\end{derivation}
+
+\item عيّن مجموعتين منتهيتين~$\Gamma_0,\Gamma_1 \subseteq \Gamma$
+تحققان~$\Gamma_0 \cup \{ !A \} \Proves \lfalse$ و
+$\Gamma_1 \cup \{\lnot !A \} \Proves \lfalse$.
+
+\begin{derivation}
+1. & $\Gamma_0 \cup\{!A\} \Proves \lfalse$ & فرض \\
+2. & $\Gamma_0 \Proves !A \lif \lfalse$ & مبرهنة الاستنباط \\
+3. & $\Gamma_1 \cup \{\lnot !A \} \Proves \lfalse$ & فرض \\
+4. & $\Gamma_0 \Proves (!A \lif \lfalse) \lif \lnot !A$ & Ax0 \\
+5. & $\Gamma_0 \Proves \lnot !A$ & MP 2, 4 \\
+6. & $\Gamma_0 \cup \Gamma_1 \Proves \lfalse$ & القطع 3، 5 \\
+\end{derivation}
+
+ولما كان~$\Gamma_0 \subseteq \Gamma$ و$\Gamma_1 \subseteq \Gamma$، كان
+$\Gamma_0 \cup \Gamma_1 \subseteq \Gamma$؛ ولذلك
+$\Gamma \Proves \lfalse$.
+
+% prop:provability-lor-left 
+\tagitem{defOr}{}{
+\iftag{probOr}{تمرين.}{تمرين.}}
+
+% prop:provability-lor-right 
+\tagitem{defOr}{}{\iftag{probOr}{تمرين.}{
+لنفرض~$\Gamma_0 \Proves !A$.
+
+\begin{derivation}
+1. & $\Gamma_0 \Proves !A$ & فرض \\
+2. & $\Gamma_0 \Proves !A \lif (!A \lor !B)$ & Ax0 \\
+3. & $\Gamma_0 \Proves !A \lor !B$ & MP 1, 2 \\
+\end{derivation}
+
+فينتج~$\Gamma \Proves !A \lor !B$. ونظير ذلك يبرهن حالة
+$\Gamma \Proves !B$.}}
+
+% prop:provability-land-left 
+\tagitem{defAnd}{}{\iftag{probAnd}{تمرين}{
+لنفرض~$\Gamma_0 \Proves !A \land !B$.
+
+\begin{derivation}
+1. & $\Gamma_0 \Proves !A \land !B$ & فرض \\
+2. & $\Gamma_0 \Proves (!A\land !B) \lif !A $ & Ax0 \\
+3. & $\Gamma_0 \Proves !A$ & MP 1, 2 \\
+\end{derivation}
+
+فيلزم~$\Gamma \Proves !A$. وعلى مثاله يبيّن~!!{derivation} آخر أن
+$\Gamma \Proves !B$.}}
+
+% prop:provability-land-right
+\tagitem{defAnd}{}{\iftag{probAnd}{تمرين.}{تمرين.}}
+
+% prop:provability-mp 
+\tagitem{defIf}{}{\iftag{probIf}{تمرين.}{لنفرض
+$\Gamma_0 \Proves !A$ و$\Gamma_0 \Proves !A \lif !B$ معًا.
+
+\begin{derivation}
+1. & $\Gamma_0 \Proves !A$ & فرض \\
+2. & $\Gamma_0 \Proves !A \lif !B $ & فرض \\
+3. & $\Gamma_0 \Proves !B$ & MP 1, 2 \\
+\end{derivation}
+
+ولأن~$\Gamma_0 \subseteq \Gamma$، لزم~$\Gamma \Proves !B$.}}
+
+% prop:provability-lif 
+\tagitem{defIf}{}{\iftag{probIf}{تمرين.}{افرض أولاً
+$\Gamma \Proves \lnot !A$.
+
+\begin{derivation}
+1. & $\Gamma_0 \Proves \lnot !A$ & فرض \\
+2. & $\Gamma_0 \Proves \lnot !A \lif (!A \lif !B) $ & Ax0 \\
+3. & $\Gamma_0 \Proves !A \lif !B$ & MP 1, 2 \\
+\end{derivation}
+
+وأما حالة~$\Gamma \Proves !B$ فبرهانها نظير ذلك:
+
+\begin{derivation}
+1. & $\Gamma_0 \Proves !B$ & فرض \\
+2. & $\Gamma_0 \Proves !B \lif (!A \lif !B) $ & Ax0 \\
+3. & $\Gamma_0 \Proves !A \lif !B$ & MP 1, 2 \\
+\end{derivation}}}
+
+\end{enumerate}
+\end{proof}
+
+\begin{probtag}{probOr,probAnd,probIf}
+أتمم برهان~\olref[fol][axd][prv]{prop:provability-properties}.
+\end{probtag}
+
+\begin{thm}[التعميم]\ollabel{thm:Generalization}
+متى كان~$\Gamma \Proves !A$، ولم يكن~$x$ حراً في شيء من~!!{formula}
+$\Gamma$، كان~$\Gamma \Proves \lforall[x][!A]$.
+\end{thm}
+
+\begin{proof}
+خذ برهانًا منتهيًا لـ~$!A$ من~$\Gamma$، ولتكن~$\Gamma_0$ مجموعة
+!!{formula}s~$\Gamma$ التي عمل بها. وعيّن~!!a{constant}~$c\in\mathcal E$ لا يقع في
+شيء من صيغ البرهان، ولا يساوي أي ثابت مميز عمل لتسويغ تطبيق لـ~\QR{} فيه،
+ثم أحل~$c$ محل كل وقوع حر لـ~$x$ في كل خطوة. ولما كان
+$x$ غير حر في~$\Gamma_0$ بقيت خطوات الفرض على حالها. ويظهر بالاستقراء في
+خطوات البرهان أن المتتالية المستحدثة برهان لـ
+$\Subst{!A}{c}{x}$ من~$\Gamma_0$: فالتعويض يحفظ أمثلة مسلمات الروابط
+والمكمّمات ومسلّمات الهوية ذات الحدود المغلقة، ويحفظ MP وصورتي~\QR{}،
+ويحفظ كذلك شرط الجدة فيهما لأن~$c$ اختير جديدًا. فيكون
+$\Gamma_0 \Proves \Subst{!A}{c}{x}$.
+
+ثم نشتق:
+\begin{derivation}
+1. & $\Gamma_0 \Proves \Subst{!A}{c}{x}$ & كما تقدم \\
+2. & $\Gamma_0 \Proves \Subst{!A}{c}{x} \lif
+  (\ltrue \lif \Subst{!A}{c}{x})$ & \olref[prp]{ax:lif1} \\
+3. & $\Gamma_0 \Proves \ltrue \lif \Subst{!A}{c}{x}$ & MP 1، 2 \\
+4. & $\Gamma_0 \Proves \ltrue \lif \lforall[x][!A]$ & \QR{} 3 \\
+5. & $\Gamma_0 \Proves \ltrue$ & \olref[prp]{ax:ltrue} \\
+6. & $\Gamma_0 \Proves \lforall[x][!A]$ & MP 4، 5
+\end{derivation}
+وإنما جاز~\QR{} في الخطوة~4 لأن~$c$ لا يقع في~$\Gamma_0$ ولا في~$\ltrue$
+ولا في~$!A$.
+ثم تعطينا الرتابة~$\Gamma \Proves \lforall[x][!A]$، وهو المطلوب.
+\end{proof}
+
+\begin{thm}\ollabel{thm:WeakGen}
+(\emph{التعميم الضعيف على الثوابت}) إذا كان~$\Gamma \Proves !A$، وكان
+$c$ !!a{constant} لا يقع في~$\Gamma$، وُجد متغير~$x$ لا يقع في~$!A$
+يحقق~$\Gamma \Proves \lforall[x][\Subst{!A}{x}{c}]$، ويخلو البرهان
+من~$c$.
+\end{thm}
+
+\begin{proof}
+% تصحيح برهاني (0643-I2): عولجت مسلّمتا المكمّمات وصورتا QR بتجديد الثوابت ثم تبديل ثابتين تقابليًا.
+خذ برهانًا منتهيًا~$\Pi$ لـ~$!A$ من~$\Gamma$، وليكن~$\Gamma_0$
+دعمه المتناهي. طبّق \olref[qua]{lem:qr-freshening} على~$\Pi$ مع طائفة
+المنع~$\{c\}$؛ فينتج برهان~$\Pi^*$ خاتمته~$!A$ ودعمه داخل
+في~$\Gamma_0$، ولا يساوي~$c$ شيء من ثوابته المميزة. ولما كان~$\Pi^*$
+متناهيًا، اختر~$d\in\mathcal E$ لا يقع في شيء من صيغه ولا يساوي ثابتًا
+مميزًا على عقدة~\QR{} فيه. وعيّن متغيرًا~$x$ لا يقع في~$!A$.
+
+ولتكن~$\rho$ إعادة التسمية المنتظمة التقابلية للثوابت التي تبدّل~$c$ و~$d$
+وتثبت ما سواهما؛ وضع~$!A_d=\rho(!A)$، واكتب هذا اختصارًا~$!A[d/c]$
+لأن~$d$ لم يقع في~$!A$. فإذا أجرينا~$\rho$ في كل سطر
+من~$\Pi^*$ حصلنا على برهان لـ~$\rho(!A)$ من~$\Gamma_0$. فدعم هذا البرهان باق لأن~$c$
+لا يقع في~$\Gamma$، ومسلمات الروابط محفوظة. وتبقى مسلّمتا المكمّمات حالتين
+منهما، إذ تبعث~$\rho$ كل حد مغلق~$t$ إلى الحد المغلق~$\rho(t)$؛ وتحفظ
+كذلك مسلمات الهوية ذات الحدود المغلقة، وتحفظ~MP. وأما تطبيق~\QR{} ذو
+الثابت المميز~$a$، فإن~$a\ne c,d$ بالتجديد؛ فتحفظ~$\rho$ مقدمته
+وخاتمته وشرط الجدة في كلتا صورتي~\QR{}.
+ويخلو البرهان الناتج من~$c$.
+
+ضع~$!A_x=\Subst{!A}{x}{c}$. ولأن~$x$ و~$d$ لا يقعان في~$!A$، فإحلال~$d$
+محل~$x$ في~$!A_x$ هو~$!A_d=\rho(!A)=!A[d/c]$ نفسه. ومن البرهان المتقدم نشتق:
+\begin{derivation}
+1. & $\Gamma_0 \Proves !A_d$ & كما تقدم \\
+2. & $\Gamma_0 \Proves !A_d \lif (\ltrue \lif !A_d)$
+   & \olref[prp]{ax:lif1} \\
+3. & $\Gamma_0 \Proves \ltrue \lif !A_d$ & MP 1، 2 \\
+4. & $\Gamma_0 \Proves \ltrue \lif \lforall[x][!A_x]$
+   & \QR{} 3، بالثابت المميز~$d$ \\
+5. & $\Gamma_0 \Proves \ltrue$ & \olref[prp]{ax:ltrue} \\
+6. & $\Gamma_0 \Proves \lforall[x][!A_x]$ & MP 4، 5
+\end{derivation}
+ويجوز~\QR{} لأن~$d$ لا يقع في~$\Gamma_0$ ولا في~$\ltrue$ ولا في~$!A_x$.
+ثم تعطينا الرتابة
+$\Gamma \Proves \lforall[x][\Subst{!A}{x}{c}]$ ببرهان يخلو من~$c$.
+\end{proof}
+
+\begin{explain}
+نريد أن نستبدل بشرط~\olref{thm:WeakGen}، وهو ألا يقع~$x$ في~$!A$
+البتة، شرطين أضعف منه: ألا يكون~$x$ حراً في~$!A$، وأن يكون~!!{free for}
+$c$ فيها. ويتأتى ذلك بتبديل~!!{variable} مقيد، فنثبت هذا أولاً.
+\end{explain}
+
+\begin{lem}
+\ollabel{lem:free-for}
+متى كان~$x$ حراً لـ$c$ في~$!A$، ولم يكن~$y$ حراً في~$!A$، كان~$x$
+!!{free for}~$y$ في~$\Subst{!A}{y}{c}$.
+\end{lem}
+
+\begin{proof}
+لو لم يكن~$x$ !!{free for}~$y$ في~$\Subst{!A}{y}{c}$، لوقع ظهور حر
+لـ$y$ في~$\Subst{!A}{y}{c}$ داخل مجال السور~$\lforall[x]$. ولكن~$y$
+ليس حراً في~$!A$ بحكم الفرض، فكل ظهور من هذه الظهورات آت من التعويض
+$\Subst{}{y}{c}$. فيقع إذن ظهور لـ$c$ داخل مجال~$\lforall[x]$، ولا
+يكون~$x$ !!{free for}~$c$ في~$!A$.
+\end{proof}
+
+\begin{lem}[تغيير المتغير المقيد]
+\ollabel{lem:ChangeBdVar}
+متى لم يكن~$x$ ولا~$y$ حراً في~$!A$، وكان كل منهما~!!{free for}~$c$ في
+$!A$، كان
+$\Proves \lforall[x][\Subst{!A}{x}{c}] \equiv
+\lforall[y][\Subst{!A}{y}{c}]$، ولا يتضمن البرهان~$c$.
+\end{lem}
+
+\begin{proof}
+بحسب الفروض، يكون~$y$ !!{free for}~$c$ في~$!A$، ولا يكون~$x$ حراً
+في~$!A$؛ فباللمّة المتقدمة~\olref{lem:free-for} يكون~$y$
+!!{free for}~$x$ في~$\Subst{!A}{x}{c}$. فتكون
+$\lforall[x][\Subst{!A}{x}{c} \lif
+\Subst{!A}{x}{c} \Subst{}{y}{x}]$ مسلّمة (\textbf{Ax1}). ولما كان~$x$
+غير حر في~$!A$، كان
+$\Subst{!A}{x}{c} \Subst{}{y}{x} = \Subst{!A}{y}{c}$؛ ومن ثم
+\[
+\Proves \lforall[x][\Subst{!A}{x}{c}] \lif \Subst{!A}{y}{c}.
+\]
+ثم تعطينا مبرهنة الاستنباط
+$\lforall[x][\Subst{!A}{x}{c}] \Proves \Subst{!A}{y}{c}$. ولما كان~$y$
+غير حر في~$!A$، لم يكن حراً كذلك في
+$\lforall[x][\Subst{!A}{x}{c}]$؛ فيعطينا التعميم، مع اختيار ثابته
+المميز المستجد من~$\mathcal E\setminus\{c\}$،
+$\lforall[x][\Subst{!A}{x}{c}] \Proves
+\lforall[y][\Subst{!A}{y}{c}]$، ثم تعود مبرهنة الاستنباط فتعطي
+$\Proves \lforall[x][\Subst{!A}{x}{c}] \lif
+\lforall[y][\Subst{!A}{y}{c}]$. وأما الجهة الأخرى
+$\Proves \lforall[y][\Subst{!A}{y}{c}] \lif
+\lforall[x][\Subst{!A}{x}{c}]$ فبرهانها متناظر تماماً، مع اختيار الثابت
+المميز على الوجه نفسه. وجميع الصيغ والخطوات المتقدمة خالية من~$c$، كما أن
+بناء مبرهنة الاستنباط لا يستحدثه؛ فتنتج القضية بـTaut ببرهان يخلو من~$c$.
+\end{proof}
+
+\begin{thm}[التعميم القوي على الثوابت]
+\ollabel{thm:StrongGen}
+متى كان~$\Gamma \Proves !A$، ولم يقع~!!{constant}~$c$ في~$\Gamma$،
+وكان~$x$ غير حر في~$!A$ ولكنه~!!{free for}~$c$ فيها، كان
+$\Gamma \Proves \lforall[x][\Subst{!A}{x}{c}]$.
+\end{thm}
+
+\begin{proof}
+لما كان~$\Gamma \Proves !A$، وكان~$c$ غير واقع في~$\Gamma$، أوجد لنا
+التعميم الضعيف~!!a{variable}~$y$ لا يقع في~$!A$، بحيث
+$\Gamma \Proves \lforall[y][\Subst{!A}{y}{c}]$. ولأن~$y$ لا يقع في
+$!A$ البتة، فهو غير حر فيها، وهو~!!{free for}~$c$ فيها أيضاً. وإذا كان
+$x$، على ما في فرض المبرهنة، غير حر في~$!A$ و!!{free for}~$c$ فيها،
+تمت شروط تبديل~!!{variable} مقيد، فيكون
+$\Proves \lforall[x][\Subst{!A}{x}{c}] \equiv
+\lforall[y][\Subst{!A}{y}{c}]$، ويلزم منه
+$\Gamma \Proves \lforall[x][\Subst{!A}{x}{c}]$.
+\end{proof}
+
+\begin{thm}
+\ollabel{thm:provability-quantifiers}
+\begin{tagenumerate}{prvEx,prvAll}
+\tagitem{prvEx}{متى كان~$\Gamma \Proves !A(t)$، كان
+$\Gamma \Proves \lexists[x][!A(x)]$.}{}
+\tagitem{prvAll}{متى كان~$\Gamma \Proves \lforall[x][!A(x)]$، كان
+$\Gamma \Proves !A(t)$.}{}
+\end{tagenumerate}
+\end{thm}
+
+\begin{proof}
+\begin{tagenumerate}{prvEx,prvAll}
+%%Need axioms for exists
+\tagitem{prvEx}{تمرين.}{}
+\tagitem{prvAll}{لنفرض~$\Gamma_0 \Proves \lforall[x][!A(x)]$.
+
+\begin{derivation}
+1. & $\Gamma_0 \Proves \lforall[x][!A(x)]$ & فرض \\
+2. & $\Gamma_0 \Proves \lforall[x][!A(x)] \lif \Subst{!A}{t}{x}$ & Ax1 \\
+3. & $\Gamma_0 \Proves \Subst{!A}{t}{x}$ & MP 1, 2 \\
+\end{derivation}}{}
+
+\end{tagenumerate}
+\end{proof}
+
+\end{document}

@@ -1,0 +1,124 @@
+% Part: model-theory
+% Chapter: interpolation
+% Section: definability
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{int}{def}
+
+\olsection{مبرهنة قابلية التعريف}
+
+تثمر مبرهنة الاستيفاء نتائج مهمة، منها مبرهنة بث في قابلية التعريف.
+فالعلاقة~$\OLId{latin-looped}{R}$ ذات $\OLId{latin-ordinary}{n}$ مواضع يصح تعريفها بإيراد !!a{formula}~$!C$ ذات
+$\OLId{latin-ordinary}{n}$~!!{variable}s حرة، خالية من~$\OLId{latin-looped}{R}$؛ فيكون ذلك تعريفًا \emph{صريحًا} لـ$\OLId{latin-looped}{R}$
+بدلالة~$!C$. وعلى هذا يقال إن نظرية~$\Sigma(\OLId{latin-looped}{P})$ في !!a{language}
+تشتمل على الـ!!{predicate}~$\OLId{latin-looped}{P}$ ذي $\OLId{latin-ordinary}{n}$ مواضع تعرّف~$\OLId{latin-looped}{P}$ صراحة إذا
+اشتملت على تعريف صريح محرر في تلك اللغة، أو استلزمته وإن لم يرد فيها، أي:
+\[
+\Sigma(\OLId{latin-looped}{P}) \Entails \lforall[\OLId{latin-ordinary}{x}_\OLMathNumeral{1}][\dots
+  \lforall[\OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{n}][(\Atom{P}{x_1,\dots, x_n} \liff !C(\OLId{latin-ordinary}{x}_\OLMathNumeral{1}, \dots,
+    \OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{n}))]].
+\]
+وليس التصريح وحده سبيلًا إلى تعريف العلاقة، إذا أريد بالتعريف تعيينها
+تعيينًا تامًا. فقد تقتضي النظرية أن يتعين تفسير~$\OLId{latin-looped}{P}$ في كل نموذج بمجرد تعيين بقية الـ!!{language}.
+ومؤدى مبرهنة قابلية التعريف أن النظرية متى عيّنت تفسير~$\OLId{latin-looped}{P}$
+على هذا الوجه، أي \emph{عرّفت $\OLId{latin-looped}{P}$ ضمنيًا}، لزم أن تعرّفه صراحة أيضًا.
+
+\begin{defn}
+لتكن $\Lang{L}$~!!a{language} خالية من الـ!!{predicate}~$\OLId{latin-looped}{P}$.
+تعرّف مجموعة~$\Sigma(\OLId{latin-looped}{P})$ من !!{sentence}s~$\Lang{L} \cup \{\OLId{latin-looped}{P}\}$
+المحمول~$\OLId{latin-looped}{P}$ \emph{تعريفًا صريحًا} إذا وفقط إذا وجدت
+!!a{formula}~$!C(\OLId{latin-ordinary}{x}_\OLMathNumeral{1},\dots,\OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{n})$ من $\Lang{L}$ بحيث
+\[
+\Sigma(\OLId{latin-looped}{P}) \Entails \lforall[\OLId{latin-ordinary}{x}_\OLMathNumeral{1}][\dots
+  \lforall[\OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{n}][(\Atom{P}{x_1,\dots, x_n} \liff !C(\OLId{latin-ordinary}{x}_\OLMathNumeral{1}, \dots,
+    \OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{n}))]].
+\]
+\end{defn}
+
+\begin{defn}
+لتكن $\Lang{L}$~!!a{language} لا يرد فيها الـ!!{predicate}s~$\OLId{latin-looped}{P}$ و
+$\OLId{latin-looped}{P}'$. تعرّف مجموعة~$\Sigma(\OLId{latin-looped}{P})$ من !!{sentence}s~$\Lang{L} \cup \{\OLId{latin-looped}{P}\}$
+المحمول~$\OLId{latin-looped}{P}$ \emph{تعريفًا ضمنيًا} إذا وفقط إذا كان
+\[
+\Sigma(\OLId{latin-looped}{P}) \cup \Sigma(\OLId{latin-looped}{P}') \Entails \lforall[\OLId{latin-ordinary}{x}_\OLMathNumeral{1}][\dots
+  \lforall[\OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{n}][(\Atom{P}{x_1,\dots, x_n} \liff \Atom{P'}{x_1,\dots,
+      x_n})]],
+\]
+حيث $\Sigma(\OLId{latin-looped}{P}')$ ناتجة من إحلال $\OLId{latin-looped}{P}'$ محل $\OLId{latin-looped}{P}$ بانتظام في $\Sigma(\OLId{latin-looped}{P})$.
+\end{defn}
+
+وتفسير هذا الشرط: أنه مهما أخذنا نموذجًا~$\Struct{M}$ وعلاقتين
+$\OLId{latin-looped}{R},\OLId{latin-looped}{R}' \subseteq \Domain{\OLId{latin-looped}{M}}^\OLId{latin-ordinary}{n}$، إذا كان كل من
+$\Expan{\OLId{latin-looped}{M}}{\OLId{latin-looped}{R}} \Entails \Sigma(\OLId{latin-looped}{P})$ و
+$\Expan{\OLId{latin-looped}{M}}{\OLId{latin-looped}{R}'} \Entails \Sigma(\OLId{latin-looped}{P}')$، فإن $\OLId{latin-looped}{R}=\OLId{latin-looped}{R}'$؛ حيث
+$\Expan{\OLId{latin-looped}{M}}{\OLId{latin-looped}{R}}$ هي الـ!!{structure}~$\Struct{M'}$ لتوسيع $\Lang{L}$
+إلى $\Lang{L} \cup \{\OLId{latin-looped}{P}\}$ بحيث $\Assign{\OLId{latin-looped}{P}}{\OLId{latin-looped}{M}'}=\OLId{latin-looped}{R}$، وبالمثل لـ
+$\Expan{\OLId{latin-looped}{M}}{\OLId{latin-looped}{R}'}$.
+
+\begin{thm}[مبرهنة بث في قابلية التعريف]
+تعرّف مجموعة~$\Sigma(\OLId{latin-looped}{P})$ من !!{sentence}s~$\Lang{L} \cup \{\OLId{latin-looped}{P}\}$
+المحمول~$\OLId{latin-looped}{P}$ تعريفًا ضمنيًا إذا وفقط إذا كانت $\Sigma(\OLId{latin-looped}{P})$ تعرّف~$\OLId{latin-looped}{P}$
+تعريفًا صريحًا.
+\end{thm}
+
+\begin{proof}
+إذا كانت $\Sigma(\OLId{latin-looped}{P})$ تعرّف $\OLId{latin-looped}{P}$ تعريفًا صريحًا، كان
+\begin{align*}
+  \Sigma(\OLId{latin-looped}{P}) & \Entails & \lforall[\OLId{latin-ordinary}{x}_\OLMathNumeral{1}][\dots \lforall[\OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{n}]
+    [(\Atom{P}{x_1,\dots, x_n} \liff !C(\OLId{latin-ordinary}{x}_\OLMathNumeral{1},\dots,\OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{n}))]]\\
+  \Sigma(\OLId{latin-looped}{P}') & \Entails & \lforall[\OLId{latin-ordinary}{x}_\OLMathNumeral{1}][\dots \lforall[\OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{n}]
+    [(\Atom{P'}{x_1,\dots, x_n} \liff !C(\OLId{latin-ordinary}{x}_\OLMathNumeral{1},\dots,\OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{n}))]]
+\end{align*}
+فيثبت المطلوب من هذين معًا. وأما العكس، فنفرض أن $\Sigma(\OLId{latin-looped}{P})$ تعرّف~$\OLId{latin-looped}{P}$ تعريفًا
+ضمنيًا، ونبدأ بإلحاق الـ!!{constant}s~$\OLId{latin-ordinary}{c}_\OLMathNumeral{1}$، \dots،~$\OLId{latin-ordinary}{c}_\OLId{latin-ordinary}{n}$ بـ
+$\Lang{L}$. فيلزم حينئذ
+\[
+\Sigma(\OLId{latin-looped}{P}) \cup \Sigma(\OLId{latin-looped}{P}') \Entails
+\Atom{P}{c_1, \dots, c_n} \to \Atom{P'}{c_1, \dots, c_n}.
+\]
+ومن التراص نحصل على مجموعتين منتهيتين
+$\OLId{greek-variable}{Delta}_\OLMathNumeral{0} \subseteq \Sigma(\OLId{latin-looped}{P})$ و$\OLId{greek-variable}{Delta}_\OLMathNumeral{1} \subseteq \Sigma(\OLId{latin-looped}{P}')$ بحيث
+\[
+\OLId{greek-variable}{Delta}_\OLMathNumeral{0} \cup \OLId{greek-variable}{Delta}_\OLMathNumeral{1} \Entails
+\Atom{P}{c_1, \dots, c_n} \to \Atom{P'}{c_1, \dots, c_n}.
+\]
+لتكن $!D(\OLId{latin-looped}{P})$ اقتران جميع الـ!!{sentence}s~$!A(\OLId{latin-looped}{P})$ بحيث إما أن
+$!A(\OLId{latin-looped}{P}) \in \OLId{greek-variable}{Delta}_\OLMathNumeral{0}$ أو أن $!A(\OLId{latin-looped}{P}') \in \OLId{greek-variable}{Delta}_\OLMathNumeral{1}$، ولتكن $!D(\OLId{latin-looped}{P}')$
+اقتران جميع الـ!!{sentence}s~$!A(\OLId{latin-looped}{P}')$ بحيث إما أن
+$!A(\OLId{latin-looped}{P}) \in \OLId{greek-variable}{Delta}_\OLMathNumeral{0}$ أو أن $!A(\OLId{latin-looped}{P}') \in \OLId{greek-variable}{Delta}_\OLMathNumeral{1}$. عندئذ
+$!D(\OLId{latin-looped}{P}) \land !D(\OLId{latin-looped}{P}') \Entails \Atom{P}{c_1,\dots,c_n} \to
+\Atom{P'}{c_1,\dots,c_n}$. وإذا نقلنا أجزاء هذا الاستلزام إلى مواضعها المناسبة، اقتصر ورود كل
+!!{predicate} على أحد جانبي $\Entails$:
+\[
+!D(\OLId{latin-looped}{P}) \land \Atom{P}{c_1, \dots, c_n} \Entails
+!D(\OLId{latin-looped}{P}') \to \Atom{P'}{c_1, \dots, c_n}.
+\]
+فتقتضي مبرهنة كريغ في الاستيفاء وجود !!a{sentence}~$!C(\OLId{latin-ordinary}{c}_\OLMathNumeral{1},\dots,\OLId{latin-ordinary}{c}_\OLId{latin-ordinary}{n})$ لا
+تحتوي $\OLId{latin-looped}{P}$ أو $\OLId{latin-looped}{P}'$ بحيث:
+\begin{align*}
+  !D(\OLId{latin-looped}{P}) \land \Atom{P}{c_1, \dots, c_n} & \Entails !C(\OLId{latin-ordinary}{c}_\OLMathNumeral{1},\dots, \OLId{latin-ordinary}{c}_\OLId{latin-ordinary}{n}); \\
+  !C(\OLId{latin-ordinary}{c}_\OLMathNumeral{1},\dots, \OLId{latin-ordinary}{c}_\OLId{latin-ordinary}{n}) & \Entails !D(\OLId{latin-looped}{P}') \to \Atom{P'}{c_1, \dots, c_n}.
+\end{align*}
+أما الاستلزام الأول فيعطي
+$!D(\OLId{latin-looped}{P}) \Entails \Atom{P}{c_1,\dots,c_n} \lif !C(\OLId{latin-ordinary}{c}_\OLMathNumeral{1},\dots,\OLId{latin-ordinary}{c}_\OLId{latin-ordinary}{n})$.
+وأما الثاني فنستعمل فيه أن نموذج $\Lang{L} \cup \{\OLId{latin-looped}{P}\}$
+$\Expan{\OLId{latin-looped}{M}}{\OLId{latin-looped}{R}} \models !A(\OLId{latin-looped}{P})$ إذا وفقط إذا كان نموذج
+$\Lang{L} \cup \{\OLId{latin-looped}{P}'\}$ المقابل $\Expan{\OLId{latin-looped}{M}}{\OLId{latin-looped}{R}} \models !A(\OLId{latin-looped}{P}')$؛ فينتج $!C(\OLId{latin-ordinary}{c}_\OLMathNumeral{1},\dots,\OLId{latin-ordinary}{c}_\OLId{latin-ordinary}{n}) \Entails !D(\OLId{latin-looped}{P}) \lif
+\Atom{P}{c_1,\dots,c_n}$، ومنه:
+\[
+!D(\OLId{latin-looped}{P}) \Entails !C(\OLId{latin-ordinary}{c}_\OLMathNumeral{1},\dots,\OLId{latin-ordinary}{c}_\OLId{latin-ordinary}{n}) \to \Atom{P}{c_1,\dots, c_n}.
+\]
+فإذا جمعنا النتيجتين حصل
+$!D(\OLId{latin-looped}{P}) \Entails \Atom{P}{c_1,\dots,c_n} \liff
+!C(\OLId{latin-ordinary}{c}_\OLMathNumeral{1},\dots,\OLId{latin-ordinary}{c}_\OLId{latin-ordinary}{n})$، ثم تقتضي الرتابة والتعميم:
+\[
+\Sigma(\OLId{latin-looped}{P}) \Entails
+\lforall[\OLId{latin-ordinary}{x}_\OLMathNumeral{1}][\dots\lforall[\OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{n}][(\Atom{P}{x_1,\dots, x_n} \liff
+    !C(\OLId{latin-ordinary}{x}_\OLMathNumeral{1},\dots, \OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{n}))]].
+\]
+\end{proof}
+
+\end{document}

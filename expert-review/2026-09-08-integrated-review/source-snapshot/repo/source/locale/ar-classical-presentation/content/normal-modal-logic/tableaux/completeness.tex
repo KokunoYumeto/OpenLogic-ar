@@ -1,0 +1,228 @@
+% Part: normal-modal-logic
+% Chapter: tableaux
+% Section: completeness
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{tab}{cpl}
+
+\olsection{تمام \Log{K}}
+
+\begin{explain}
+  ولإثبات تمام طريقة ال!!{tableau}s يكفي أن نبين أنه متى لم يوجد
+  !!{tableau} مغلق لـ~$\OLId{greek-variable}{Gamma} \Proves !A$، كان~$\OLId{greek-variable}{Gamma} \Entails/ !A$؛
+  أي أمكن بناء نموذج مضاد. ومعنى عدم وجوده أن كل طريق إلى بنائه لا يفضي
+  إلى الإغلاق. فيكفي أن نختار من تلك الطرق طريقًا
+  \emph{منتظمًا يستنفد القواعد}: فإن امتنع الإغلاق عمومًا امتنع فيه
+  أيضًا، ولو وجد !!{tableau} مغلق لأفضى هذا الطريق المستنفد إلى
+  الإغلاق. ونجد في فرع مفتوح من ال!!{tableau} الناتج جميع ما يحتاج إليه
+  بناء النموذج المضاد. نأخذ البادئات المستعملة في ذلك الفرع عوالم،
+  ونجعل !!a{propositional variable}~$\OLId{latin-ordinary}{p}$ صادقة عند~$\sigma$ إذا وفقط إذا
+  وردت~$\sFmla{\True}{\OLId{latin-ordinary}{p}}[\sigma]$ في الفرع.
+\end{explain}
+
+\begin{defn}
+  الفرع التام في !!a{tableau} هو الذي لا تنقصه نتائج القواعد الواجبة
+  عليه: فمتى احتوى !!{formula} ذات بادئة~$\sFmla{\OLId{latin-looped}{S}}{!A}[\sigma]$
+  تصلح لتطبيق قاعدة، احتوى كذلك:
+  \begin{enumerate}
+    \item جميع ال!!{formula}s ذات البادئات الناتجة عن القاعدة، إن
+      كانت قاعدة قضية لا تشعّب الفرع؛
+    \item واحدة من !!{formula}s النتيجة على الأقل، إن كانت القاعدة
+      القضية تشعّب الفرع؛
+    \item نتيجة ممكنة واحدة على الأقل، إن كانت القاعدة الجهوية
+      تقتضي بادئة جديدة؛
+    \item النتيجة عند كل بادئة مستعملة في الفرع تصلح لتطبيق القاعدة،
+      إن كانت القاعدة الجهوية تشترط بادئة مستعملة.
+  \end{enumerate}
+\end{defn}
+
+\begin{explain}
+فمن ذلك أن الفرع التام يحتوي~$\sFmla{\True}{!B}[\sigma]$
+و$\sFmla{\True}{!C}[\sigma]$ متى احتوى
+$\sFmla{\True}{!B \land !C}[\sigma]$. ومتى احتوى
+$\sFmla{\True}{!B \lor !C}[\sigma]$ لم يخل من واحدة على الأقل من
+$\sFmla{\True}{!B}[\sigma]$ و$\sFmla{\True}{!C}[\sigma]$.
+وإن احتوى
+\iftag{prvBox} {$\sFmla{\False}{\Box !B}[\sigma]$}
+{$\sFmla{\True}{\Diamond !B}[\sigma]$} وجب أن يحتوي
+\iftag{prvBox} {$\sFmla{\False}{!B}[\sigma.\OLId{latin-ordinary}{n}]$}
+{$\sFmla{\True}{!B}[\sigma.\OLId{latin-ordinary}{n}]$} لعدد~$\OLId{latin-ordinary}{n}$ واحد على الأقل.
+وأما إذا احتوى
+\iftag{prvBox} {$\sFmla{\True}{\Box !B}[\sigma]$}
+{$\sFmla{\False}{\Diamond !B}[\sigma]$} فيجب أن يحتوي
+\iftag{prvBox} {$\sFmla{\True}{!B}[\sigma.\OLId{latin-ordinary}{n}]$}
+{$\sFmla{\False}{!B}[\sigma.\OLId{latin-ordinary}{n}]$} لكل~$\OLId{latin-ordinary}{n}$ تكون~$\sigma.\OLId{latin-ordinary}{n}$
+مستعملة في الفرع.
+\end{explain}
+
+\begin{prop}\ollabel{prop:complete-tableau}
+  لكل $\OLId{greek-variable}{Gamma}$ منتهية !!a{tableau} يكون كل فرع فيه إما مغلقًا وإما تامًا.
+\end{prop}
+
+\begin{proof}
+  نبدأ بفرع مفتوح في !!a{tableau} لـ~$\OLId{greek-variable}{Gamma}$.
+  فيه عدد منتهٍ من ال!!{formula}s ذات البادئات التي تصلح لإجراء
+  قاعدة. فنرتب هذه ال!!{formula}s ترتيبًا ثابتًا، كترتيبها من أعلى
+  إلى أسفل، ثم نجري على كل واحدة لم تستوفِ الشروط (\OLClassicalDigits{1})--(\OLClassicalDigits{4}) ما
+  يلزمها من القواعد. فإن حدث تشعيب واصلنا العمل عند طرف كل فرع
+  ناتج، مستوفين ال!!{formula}s الباقية. ولتناهي عدد ال!!{formula}s
+  ذات البادئات وعدد البادئات المستعملة في هذه المرحلة، تنتهي هذه
+  الدورة إلى فروع تمدّ الفرع الأول، وإن كثرت. ثم نعيد العمل في كل
+  واحد منها، ونكرر ذلك، ولا نعيد قاعدةً قد استُوفيت نتائجها المطلوبة.
+
+  ولا يمتد هذا العمل إلى غير نهاية. فإن الصيغ الجزئية للصيغ الابتدائية
+  منتهية، وما يظهر عند كل بادئة صيغ موقعة منها. ثم إن كل بادئة جديدة
+  تولدها قاعدة جهوية تحمل صيغة دون صيغة بادئتها الأم في العمق الجهوي؛
+  فلا يجاوز طول سلاسل البادئات أكبر عمق جهوي في~$\OLId{greek-variable}{Gamma}$. ولكل بادئة
+  عدد منتهٍ من الصيغ والقواعد. فتتناهى البادئات والصيغ المولدة، وتنتهي
+  العملية إلى فروع مغلقة أو مفتوحة تامة.
+\end{proof}
+% تصحيح برهاني (0468-I1/I2): لا يلزم إتمام الفرع المغلق، وأُثبت انتهاء الاستيفاء بقياس العمق الجهوي والصيغ الجزئية.
+
+\begin{thm}[التمام]
+  \ollabel{thm:tableau-completeness}
+  إذا كانت $\OLId{greek-variable}{Gamma}$ منتهية ولم يكن لها !!{tableau} مغلق، فإن $\OLId{greek-variable}{Gamma}$
+  قابلة للإرضاء.
+\end{thm}
+
+\begin{proof}
+إن خلت~$\OLId{greek-variable}{Gamma}$ أرضاها أي نموذج ذي عالم واحد؛ فلنفرضها غير خالية.
+بمقتضى القضية يوجد لـ~$\OLId{greek-variable}{Gamma}$ !!a{tableau} كل فرع فيه مغلق أو تام. ولما لم يوجد
+لها !!{tableau} مغلق، كان لها !!a{tableau} فيه فرع مفتوح وتام.
+نأخذ~$\OLId{greek-variable}{Delta}$ مجموعة ال!!{formula}s ذات البادئات في هذا الفرع،
+و$\OLId{latin-looped}{P}(\OLId{greek-variable}{Delta})$ مجموعة ما ورد فيه من البادئات.
+ولعدم خلو~$\OLId{greek-variable}{Gamma}$ لا تخلو~$\OLId{latin-looped}{P}(\OLId{greek-variable}{Delta})$، فتصلح مجموعةً لعوالم نموذج.
+% تصحيح برهاني (0468-I3): فُصلت حالة Γ الخالية حتى لا ينتج نموذج بمجموعة عوالم خالية.
+
+ثم نبني~$\mModel{M(\Delta)} = \tuple{\OLId{latin-looped}{P}(\OLId{greek-variable}{Delta}), \OLId{latin-looped}{R}, \OLId{latin-looped}{V}}$، جاعلين
+عوالمه البادئات الواقعة في~$\OLId{greek-variable}{Delta}$، وعلاقة الإتاحة فيه:
+\[
+\OLId{latin-looped}{R}\sigma\sigma' \quad \text{إذا وفقط إذا} \quad
+\sigma'=\sigma.\OLId{latin-ordinary}{n} \quad \text{لبعض~$n$}
+\]
+ويُعطى إسناده بـ
+\[
+\OLId{latin-looped}{V}(\OLId{latin-ordinary}{p}) = \Setabs{\sigma}{\sFmla{\True}{\OLId{latin-ordinary}{p}}[\sigma] \in \OLId{greek-variable}{Delta}}.
+\]
+وموضع البرهان بالاستقراء على~$!A$ أمران: إذا كان
+$\sFmla{\True}{!A}[\sigma] \in
+\OLId{greek-variable}{Delta}$ كان~$\mSat{\OLId{latin-looped}{M}(\OLId{greek-variable}{Delta})}{!A}[\sigma]$؛ وإذا كان
+$\sFmla{\False}{!A}[\sigma] \in \OLId{greek-variable}{Delta}$ كان
+$\mSat/{\OLId{latin-looped}{M}(\OLId{greek-variable}{Delta})}{!A}[\sigma]$.
+
+\begin{enumerate}
+  \item \indcase{!A}{p}{إذا كان $\sFmla{\True}{\indfrm}[\sigma] \in \OLId{greek-variable}{Delta}$،
+    فإن $\sigma \in \OLId{latin-looped}{V}(\OLId{latin-ordinary}{p})$ (بحسب تعريف~$\OLId{latin-looped}{V}$)، ومن ثم
+    $\mSat{\OLId{latin-looped}{M}(\OLId{greek-variable}{Delta})}{\indfrm}[\sigma]$.
+
+    وإذا كان $\sFmla{\False}{\indfrm}[\sigma] \in \OLId{greek-variable}{Delta}$، فإن
+    $\sFmla{\True}{\indfrm}[\sigma] \notin \OLId{greek-variable}{Delta}$، وإلا لكان الفرع
+    مغلقًا. ولذلك $\sigma \notin \OLId{latin-looped}{V}(\OLId{latin-ordinary}{p})$، ومن ثم
+    $\mSat/{\OLId{latin-looped}{M}(\OLId{greek-variable}{Delta})}{\indfrm}[\sigma]$.}
+  \item \indcase{!A}{\lnot !B}{\iftag{probNot}{تمرين.}{إذا كان
+      $\sFmla{\True}{\indfrm}[\sigma] \in \OLId{greek-variable}{Delta}$، فإن
+      $\sFmla{\False}{!B}[\sigma] \in \OLId{greek-variable}{Delta}$ لأن الفرع تام. وبفرض
+      الاستقراء، $\mSat/{\OLId{latin-looped}{M}(\OLId{greek-variable}{Delta})}{!B}[\sigma]$، ومن ثم
+      $\mSat{\OLId{latin-looped}{M}(\OLId{greek-variable}{Delta})}{\indfrm}[\sigma]$.
+
+      وإذا كان $\sFmla{\False}{\indfrm}[\sigma] \in \OLId{greek-variable}{Delta}$، فإن
+      $\sFmla{\True}{!B}[\sigma] \in \OLId{greek-variable}{Delta}$ لأن الفرع تام. وبفرض
+      الاستقراء، $\mSat{\OLId{latin-looped}{M}(\OLId{greek-variable}{Delta})}{!B}[\sigma]$، ومن ثم
+      $\mSat/{\OLId{latin-looped}{M}(\OLId{greek-variable}{Delta})}{\indfrm}[\sigma]$.}}
+  \item \indcase{!A}{!B \land !C}{\iftag{probAnd}{تمرين.}{إذا كان
+      $\sFmla{\True}{\indfrm}[\sigma] \in \OLId{greek-variable}{Delta}$، فإن كلًا من
+      $\sFmla{\True}{!B}[\sigma] \in \OLId{greek-variable}{Delta}$ و
+      $\sFmla{\True}{!C}[\sigma] \in \OLId{greek-variable}{Delta}$ لأن الفرع تام. وبفرض
+      الاستقراء، $\mSat{\OLId{latin-looped}{M}(\OLId{greek-variable}{Delta})}{!B}[\sigma]$ و
+      $\mSat{\OLId{latin-looped}{M}(\OLId{greek-variable}{Delta})}{!C}[\sigma]$. ومن ثم
+      $\mSat{\OLId{latin-looped}{M}(\OLId{greek-variable}{Delta})}{\indfrm}[\sigma]$.
+
+      وإذا كان $\sFmla{\False}{\indfrm}[\sigma] \in \OLId{greek-variable}{Delta}$، فإما
+      أن يكون $\sFmla{\False}{!B}[\sigma] \in \OLId{greek-variable}{Delta}$ أو يكون
+      $\sFmla{\False}{!C}[\sigma] \in \OLId{greek-variable}{Delta}$ لأن الفرع تام. وبفرض
+      الاستقراء، إما $\mSat/{\OLId{latin-looped}{M}(\OLId{greek-variable}{Delta})}{!B}[\sigma]$ أو
+      $\mSat/{\OLId{latin-looped}{M}(\OLId{greek-variable}{Delta})}{!C}[\sigma]$. ومن ثم
+      $\mSat/{\OLId{latin-looped}{M}(\OLId{greek-variable}{Delta})}{\indfrm}[\sigma]$.}}
+  \item \indcase{!A}{!B \lor !C}{\iftag{probOr}{تمرين.}{إذا كان
+      $\sFmla{\True}{\indfrm}[\sigma] \in \OLId{greek-variable}{Delta}$، فإما أن يكون
+      $\sFmla{\True}{!B}[\sigma] \in \OLId{greek-variable}{Delta}$ أو يكون
+      $\sFmla{\True}{!C}[\sigma] \in \OLId{greek-variable}{Delta}$ لأن الفرع تام. وبفرض
+      الاستقراء، إما $\mSat{\OLId{latin-looped}{M}(\OLId{greek-variable}{Delta})}{!B}[\sigma]$ أو
+      $\mSat{\OLId{latin-looped}{M}(\OLId{greek-variable}{Delta})}{!C}[\sigma]$. ومن ثم
+      $\mSat{\OLId{latin-looped}{M}(\OLId{greek-variable}{Delta})}{\indfrm}[\sigma]$.
+
+      وإذا كان $\sFmla{\False}{\indfrm}[\sigma] \in \OLId{greek-variable}{Delta}$، فإن
+      كلًا من $\sFmla{\False}{!B}[\sigma] \in \OLId{greek-variable}{Delta}$ و
+      $\sFmla{\False}{!C}[\sigma] \in \OLId{greek-variable}{Delta}$ لأن الفرع تام. وبفرض
+      الاستقراء، يتحقق كل من $\mSat/{\OLId{latin-looped}{M}(\OLId{greek-variable}{Delta})}{!B}[\sigma]$ و
+      $\mSat/{\OLId{latin-looped}{M}(\OLId{greek-variable}{Delta})}{!C}[\sigma]$. ومن ثم
+      $\mSat/{\OLId{latin-looped}{M}(\OLId{greek-variable}{Delta})}{\indfrm}[\sigma]$.}}
+  \item \indcase{!A}{!B \lif !C}{\iftag{probIf}{تمرين.}{إذا كان
+      $\sFmla{\True}{\indfrm}[\sigma] \in \OLId{greek-variable}{Delta}$، فإما أن يكون
+      $\sFmla{\False}{!B}[\sigma] \in \OLId{greek-variable}{Delta}$ أو يكون
+      $\sFmla{\True}{!C}[\sigma] \in \OLId{greek-variable}{Delta}$ لأن الفرع تام. وبفرض
+      الاستقراء، إما $\mSat/{\OLId{latin-looped}{M}(\OLId{greek-variable}{Delta})}{!B}[\sigma]$ أو
+      $\mSat{\OLId{latin-looped}{M}(\OLId{greek-variable}{Delta})}{!C}[\sigma]$. ومن ثم
+      $\mSat{\OLId{latin-looped}{M}(\OLId{greek-variable}{Delta})}{\indfrm}[\sigma]$.
+
+      وإذا كان $\sFmla{\False}{\indfrm}[\sigma] \in \OLId{greek-variable}{Delta}$، فإن
+      كلًا من $\sFmla{\True}{!B}[\sigma] \in \OLId{greek-variable}{Delta}$ و
+      $\sFmla{\False}{!C}[\sigma] \in \OLId{greek-variable}{Delta}$ لأن الفرع تام. وبفرض
+      الاستقراء، يتحقق كل من $\mSat{\OLId{latin-looped}{M}(\OLId{greek-variable}{Delta})}{!B}[\sigma]$ و
+      $\mSat/{\OLId{latin-looped}{M}(\OLId{greek-variable}{Delta})}{!C}[\sigma]$. ومن ثم
+      $\mSat/{\OLId{latin-looped}{M}(\OLId{greek-variable}{Delta})}{\indfrm}[\sigma]$.}}
+  \item \indcase{!A}{\Box !B}{\iftag{probBox}{تمرين.}{إذا كان
+      $\sFmla{\True}{\indfrm}[\sigma] \in \OLId{greek-variable}{Delta}$، فإن
+      $\sFmla{\True}{!B}[\sigma.\OLId{latin-ordinary}{n}] \in \OLId{greek-variable}{Delta}$ لكل $\sigma.\OLId{latin-ordinary}{n}$
+      مستعملة على الفرع، لأن الفرع تام؛ أي لكل $\sigma'
+      \in \OLId{latin-looped}{P}(\OLId{greek-variable}{Delta})$ بحيث $\OLId{latin-looped}{R}\sigma\sigma'$. وبفرض الاستقراء،
+      $\mSat{\OLId{latin-looped}{M}(\OLId{greek-variable}{Delta})}{!B}[\sigma']$ لكل $\sigma'$ بحيث
+      $\OLId{latin-looped}{R}\sigma\sigma'$. ومن ثم $\mSat{\OLId{latin-looped}{M}(\OLId{greek-variable}{Delta})}{\indfrm}[\sigma]$.
+
+      وإذا كان $\sFmla{\False}{\indfrm}[\sigma] \in \OLId{greek-variable}{Delta}$، فلبعض
+      $\sigma.\OLId{latin-ordinary}{n}$ يكون $\sFmla{\False}{!B}[\sigma.\OLId{latin-ordinary}{n}] \in \OLId{greek-variable}{Delta}$ لأن
+      الفرع تام. وبفرض الاستقراء،
+      $\mSat/{\OLId{latin-looped}{M}(\OLId{greek-variable}{Delta})}{!B}[\sigma.\OLId{latin-ordinary}{n}]$. ولأن
+      $\OLId{latin-looped}{R}\sigma(\sigma.\OLId{latin-ordinary}{n})$، توجد~$\sigma'$ بحيث
+      $\mSat/{\OLId{latin-looped}{M}(\OLId{greek-variable}{Delta})}{!B}[\sigma']$. ومن ثم
+      $\mSat/{\OLId{latin-looped}{M}(\OLId{greek-variable}{Delta})}{\indfrm}[\sigma]$.}}
+  \item \indcase{!A}{\Diamond !B}{\iftag{probDiamond}{تمرين.}{إذا كان
+      $\sFmla{\True}{\indfrm}[\sigma] \in \OLId{greek-variable}{Delta}$، فلبعض
+      $\sigma.\OLId{latin-ordinary}{n}$ يكون $\sFmla{\True}{!B}[\sigma.\OLId{latin-ordinary}{n}] \in \OLId{greek-variable}{Delta}$ لأن
+      الفرع تام. وبفرض الاستقراء، $\mSat{\OLId{latin-looped}{M}(\OLId{greek-variable}{Delta})}{!B}[\sigma.\OLId{latin-ordinary}{n}]$.
+      ولأن $\OLId{latin-looped}{R}\sigma(\sigma.\OLId{latin-ordinary}{n})$، توجد~$\sigma'$ بحيث
+      $\mSat{\OLId{latin-looped}{M}(\OLId{greek-variable}{Delta})}{!B}[\sigma']$. ومن ثم
+      $\mSat{\OLId{latin-looped}{M}(\OLId{greek-variable}{Delta})}{\indfrm}[\sigma]$.
+
+      وإذا كان $\sFmla{\False}{\indfrm}[\sigma] \in \OLId{greek-variable}{Delta}$، فإن
+      $\sFmla{\False}{!B}[\sigma.\OLId{latin-ordinary}{n}] \in \OLId{greek-variable}{Delta}$ لكل $\sigma.\OLId{latin-ordinary}{n}$
+      مستعملة على الفرع، لأن الفرع تام؛ أي لكل $\sigma'
+      \in \OLId{latin-looped}{P}(\OLId{greek-variable}{Delta})$ بحيث $\OLId{latin-looped}{R}\sigma\sigma'$. وبفرض الاستقراء،
+      $\mSat/{\OLId{latin-looped}{M}(\OLId{greek-variable}{Delta})}{!B}[\sigma']$ لكل $\sigma'$ بحيث
+      $\OLId{latin-looped}{R}\sigma\sigma'$. ومن ثم $\mSat/{\OLId{latin-looped}{M}(\OLId{greek-variable}{Delta})}{\indfrm}[\sigma]$.}}
+\end{enumerate}
+نأخذ الآن~$\OLId{latin-ordinary}{f}$ دالة الهوية على~$\OLId{latin-looped}{P}(\OLId{greek-variable}{Delta})$، أي~$\OLId{latin-ordinary}{f}(\sigma)=\sigma$.
+فهذه~$\OLId{latin-ordinary}{f}$ تأويل للبادئات في~$\mModel{M(\Delta)}$، والاستقراء المتقدم
+يثبت أن~$\mModel{M(\Delta)}$ يرضي~$\OLId{greek-variable}{Delta}$ بالنسبة إلى~$\OLId{latin-ordinary}{f}$.
+ومن~$\OLId{greek-variable}{Gamma} \subseteq \OLId{greek-variable}{Delta}$ ينتج~$\mSat{\OLId{latin-looped}{M}(\OLId{greek-variable}{Delta})}{\OLId{greek-variable}{Gamma}}[\OLId{latin-ordinary}{f}]$.
+\end{proof}
+
+\begin{prob}
+أكمل برهان \olref[nml][tab][cpl]{thm:tableau-completeness}.
+\end{prob}
+
+\begin{cor}
+\ollabel{cor:entailment-completeness}
+إذا كانت $\OLId{greek-variable}{Gamma}$ منتهية وكان $\OLId{greek-variable}{Gamma} \Entails !A$، فإن
+$\OLId{greek-variable}{Gamma} \Proves !A$.
+\end{cor}
+
+\begin{cor}
+\ollabel{cor:weak-completeness}
+إذا كانت $!A$ صادقة في جميع النماذج، فإن $\Proves !A$.
+\end{cor}
+
+\end{document}

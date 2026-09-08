@@ -1,0 +1,68 @@
+% Part: computability
+% Chapter: computability-theory
+% Section: reducibility
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{thy}{red}
+\olsection{قابلية الاختزال}
+
+\begin{explain}
+قد حصل لنا مثال على الأقل، هو $\OLId{latin-looped}{K}_\OLMathNumeral{0}$، لمجموعة تقبل التعداد الحسابي
+ولا تقبل الحساب، وليست منفردة بهذه الصفة. وبطريقة
+الاختزال نثبت هذه الخواص لمجموعات أخرى، من غير أن نستأنف
+في كل مرة البرهان من أصوله.
+
+ومعنى «اختزال» المجموعة $\OLId{latin-looped}{A}$ إلى المجموعة~$\OLId{latin-looped}{B}$، على العموم، أن نستخرج من أجوبة
+السؤال عن انتماء ال!!{element}s إلى~$\OLId{latin-looped}{B}$ أجوبة السؤال عن انتمائها
+إلى~$\OLId{latin-looped}{A}$. ونخص بالبحث هنا «قابلية الاختزال متعددًا إلى واحد»؛
+وللاختزال مفاهيم أخرى كثيرة تختلف خواصها. وللاختزال
+منزلة أساسية في التعقيد الحسابي أيضًا، حيث يُنظر، فوق إمكان الحساب، في
+كفاءته. فالمجموعة «تامة في NP» إذا كانت في NP وأمكن
+اختزال كل مسألة في NP إليها باختزال شبيه بما سنصفه
+أدناه، مع زيادة شرط: أن يحسب الاختزال في زمن كثير الحدود.
+
+وقد جرى الاختزال ضمنًا فيما تقدم. فلنعرّف المجموعة~$\OLId{latin-looped}{K}$ بوضع
+\[
+\OLId{latin-looped}{K} = \Setabs{\OLId{latin-ordinary}{x}}{\cfind{\OLId{latin-ordinary}{x}}(\OLId{latin-ordinary}{x}) \fdefined},
+\]
+أي $\OLId{latin-looped}{K}=\Setabs{\OLId{latin-ordinary}{x}}{\OLId{latin-ordinary}{x}\in \OLId{latin-looped}{W}_\OLId{latin-ordinary}{x}}$. ويبين برهاننا على عدم قابلية مشكلة
+التوقف للحل (\olref[hlt]{thm:halting-problem})، على نحو مباشر جدًا، أن
+$\OLId{latin-looped}{K}$ غير قابلة للحساب. وتذكر أن $\OLId{latin-looped}{K}_\OLMathNumeral{0}$ هي المجموعة
+\[
+\OLId{latin-looped}{K}_\OLMathNumeral{0} = \Setabs{\tuple{\OLId{latin-ordinary}{e}, \OLId{latin-ordinary}{x}}}{\cfind{\OLId{latin-ordinary}{e}}(\OLId{latin-ordinary}{x}) \fdefined },
+\]
+أي $\OLId{latin-looped}{K}_\OLMathNumeral{0}=\Setabs{\tuple{\OLId{latin-ordinary}{e},\OLId{latin-ordinary}{x}}}{\OLId{latin-ordinary}{x}\in \OLId{latin-looped}{W}_\OLId{latin-ordinary}{e}}$. ومن السهل نقل البرهان على
+عدم قابلية~$\OLId{latin-looped}{K}$ للحساب إلى عدم قابلية~$\OLId{latin-looped}{K}_\OLMathNumeral{0}$ للحساب؛ إذ لو كانت
+$\OLId{latin-looped}{K}_\OLMathNumeral{0}$ قابلة للحساب، لأمكننا تقرير ما إذا كان !!a{element}~$\OLId{latin-ordinary}{x}$ في $\OLId{latin-looped}{K}$
+بالاكتفاء بالسؤال: هل الزوج $\tuple{\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{x}}$ في $\OLId{latin-looped}{K}_\OLMathNumeral{0}$. والدالة~$\OLId{latin-ordinary}{f}$
+التي تعين $\OLId{latin-ordinary}{x}$ إلى $\tuple{\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{x}}$ مثال \emph{لاختزال} $\OLId{latin-looped}{K}$ إلى $\OLId{latin-looped}{K}_\OLMathNumeral{0}$.
+\end{explain}
+
+\begin{defn}
+لنأخذ مجموعتين من الأعداد الطبيعية $\OLId{latin-looped}{A}$ و$\OLId{latin-looped}{B}$. تسمى الدالة القابلة للحساب
+~$\OLId{latin-ordinary}{f}\colon\Nat\to\Nat$ \emph{اختزالًا متعددًا إلى واحد} لـ$\OLId{latin-looped}{A}$ إلى~$\OLId{latin-looped}{B}$
+إذا تحقق، لكل عدد طبيعي~$\OLId{latin-ordinary}{x}$، الشرط الآتي، ولا تسمى بذلك إلا حينئذ:
+\[
+\OLId{latin-ordinary}{x} \in \OLId{latin-looped}{A} \quad \text{إذا وفقط إذا} \quad \OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x}) \in \OLId{latin-looped}{B}.
+\]
+فمتى وجد $\OLId{latin-ordinary}{f}$ على هذه الصفة، كانت $\OLId{latin-looped}{A}$ \emph{قابلة للاختزال متعددًا
+إلى واحد} إلى~$\OLId{latin-looped}{B}$، وكتبنا $\OLId{latin-looped}{A}\leq_\OLId{latin-ordinary}{m} \OLId{latin-looped}{B}$. وإذا كانت $\OLId{latin-looped}{A}$ قابلة للاختزال
+متعددًا إلى واحد إلى $\OLId{latin-looped}{B}$ والعكس، قيل إن $\OLId{latin-looped}{A}$ و$\OLId{latin-looped}{B}$ \emph{متكافئتان
+متعددًا إلى واحد}، وكتبنا $\OLId{latin-looped}{A}\equiv_\OLId{latin-ordinary}{m} \OLId{latin-looped}{B}$.
+\end{defn}
+
+فإن كانت $\OLId{latin-ordinary}{f}$ في التعريف أحادية أيضًا، قلنا إن $\OLId{latin-looped}{A}$
+\emph{قابلة للاختزال واحدًا إلى واحد} إلى~$\OLId{latin-looped}{B}$. وأكثر الاختزالات التي
+سنوردها يفي بهذا الشرط الأقوى، وإن لم نحتج إليه في الاستدلال.
+
+\begin{digress}
+وقابلية الاختزال واحدًا إلى واحد أقوى حقًا
+من قابلية الاختزال متعددًا إلى واحد، وإن لم يظهر ذلك لأول النظر. فثمة
+مجموعتان لا نهائيتان $\OLId{latin-looped}{A}$ و~$\OLId{latin-looped}{B}$ تكون $\OLId{latin-looped}{A}$ فيهما قابلة للاختزال متعددًا
+إلى واحد إلى~$\OLId{latin-looped}{B}$، ولكنها ليست قابلة للاختزال واحدًا إلى واحد إلى~$\OLId{latin-looped}{B}$.
+\end{digress}
+
+\end{document}

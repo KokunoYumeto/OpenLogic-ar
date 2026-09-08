@@ -1,0 +1,226 @@
+% Part: model-theory
+% Chapter: basics
+% Section: partial-iso
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{bas}{pis}
+\section{التشاكلات الجزئية}
+
+\begin{defn}
+  لتكن !!{structure}s اثنتان $\Struct{M}$ و$\Struct{N}$. \emph{التشاكل
+  الجزئي} من $\Struct{M}$ إلى $\Struct{N}$ دالة جزئية منتهية~$\OLId{latin-ordinary}{p}$ تأخذ
+  مدخلاتها من $\Domain \OLId{latin-looped}{M}$ وتعيد قيمًا في $\Domain \OLId{latin-looped}{N}$، وتحقق شروط التشاكل
+  الواردة في \olref[iso]{defn:isomorphism} على مجالها:
+  \begin{enumerate}
+  \item تكون $\OLId{latin-ordinary}{p}$~!!{injective}؛
+  \item لكل !!{constant}~$\OLId{latin-ordinary}{c}$: إذا كانت $\OLId{latin-ordinary}{p}(\Assign{\OLId{latin-ordinary}{c}}{\OLId{latin-looped}{M}})$ معرّفة، فإن
+    $\OLId{latin-ordinary}{p}(\Assign{\OLId{latin-ordinary}{c}}{\OLId{latin-looped}{M}}) = \Assign{\OLId{latin-ordinary}{c}}{\OLId{latin-looped}{N}}$؛
+  \item لكل !!{predicate}~$\OLId{latin-looped}{P}$ ذي $\OLId{latin-ordinary}{n}$ مواضع: إذا كانت $\OLId{latin-ordinary}{a}_\OLMathNumeral{1}$، \dots،
+    $\OLId{latin-ordinary}{a}_\OLId{latin-ordinary}{n}$ في مجال $\OLId{latin-ordinary}{p}$، فإن $\langle \OLId{latin-ordinary}{a}_\OLMathNumeral{1}, \dots, \OLId{latin-ordinary}{a}_\OLId{latin-ordinary}{n}\rangle \in
+    \Assign \OLId{latin-looped}{P} \OLId{latin-looped}{M}$ إذا وفقط إذا كان
+    $\langle \OLId{latin-ordinary}{p}(\OLId{latin-ordinary}{a}_\OLMathNumeral{1}), \dots, \OLId{latin-ordinary}{p}(\OLId{latin-ordinary}{a}_\OLId{latin-ordinary}{n}) \rangle \in \Assign \OLId{latin-looped}{P} \OLId{latin-looped}{N}$؛
+  \item لكل !!{function}~$\OLId{latin-ordinary}{f}$ ذات $\OLId{latin-ordinary}{n}$ مواضع: إذا كانت $\OLId{latin-ordinary}{a}_\OLMathNumeral{1}$، \dots،
+    $\OLId{latin-ordinary}{a}_\OLId{latin-ordinary}{n}$ في مجال $\OLId{latin-ordinary}{p}$، فإن $\OLId{latin-ordinary}{p}(\Assign \OLId{latin-ordinary}{f} \OLId{latin-looped}{M} (\OLId{latin-ordinary}{a}_\OLMathNumeral{1}, \dots,\OLId{latin-ordinary}{a}_\OLId{latin-ordinary}{n}))
+    = \Assign \OLId{latin-ordinary}{f} \OLId{latin-looped}{N} (\OLId{latin-ordinary}{p}(\OLId{latin-ordinary}{a}_\OLMathNumeral{1}), \dots, \OLId{latin-ordinary}{p}(\OLId{latin-ordinary}{a}_\OLId{latin-ordinary}{n}))$.
+  \end{enumerate}
+  وكون $\OLId{latin-ordinary}{p}$ منتهية يعني أن $\dom{\OLId{latin-ordinary}{p}}$ منتهٍ.
+\end{defn}
+
+ومن ذلك أن الدالة الخالية~$\emptyset$ تعدّ تشاكلًا جزئيًا بين كل
+!!{structure}s اثنتين.
+
+\begin{defn}\ollabel{defn:partialisom}
+  تكون !!{structure}s اثنتان $\Struct{M}$ و$\Struct{N}$
+  \emph{متشاكلتين جزئيًا}، ونكتب $\Struct{M} \iso[\OLId{latin-ordinary}{p}] \Struct{N}$، إذا
+  وفقط إذا وجدت مجموعة غير خالية~$\OLId{latin-looped}{I}$ من التشاكلات الجزئية بين
+  $\Struct{M}$ و$\Struct{N}$ تحقق خاصية \emph{الذهاب والإياب}:
+  \begin{enumerate}
+  \item (\emph{الذهاب}) لكل $\OLId{latin-ordinary}{p} \in \OLId{latin-looped}{I}$ و$\OLId{latin-ordinary}{a} \in \Domain \OLId{latin-looped}{M}$ يوجد
+    $\OLId{latin-ordinary}{q} \in \OLId{latin-looped}{I}$ بحيث $\OLId{latin-ordinary}{p} \subseteq \OLId{latin-ordinary}{q}$ ويكون $\OLId{latin-ordinary}{a}$ في مجال $\OLId{latin-ordinary}{q}$؛
+  \item (\emph{الإياب}) لكل $\OLId{latin-ordinary}{p} \in \OLId{latin-looped}{I}$ و$\OLId{latin-ordinary}{b} \in \Domain \OLId{latin-looped}{N}$ يوجد
+    $\OLId{latin-ordinary}{q} \in \OLId{latin-looped}{I}$ بحيث $\OLId{latin-ordinary}{p} \subseteq \OLId{latin-ordinary}{q}$ ويكون $\OLId{latin-ordinary}{b}$ في مدى $\OLId{latin-ordinary}{q}$.
+  \end{enumerate}
+\end{defn}
+
+\begin{thm}\ollabel{thm:p-isom1}
+  إذا كان $\Struct{M} \iso[\OLId{latin-ordinary}{p}] \Struct{N}$ وكانت $\Struct{M}$ و
+  $\Struct{N}$~!!{enumerable}، فإن $\Struct{M} \iso \Struct{N}$.
+\end{thm}
+
+\begin{proof}
+  بما أن $\Struct{M}$ و$\Struct{N}$~!!{enumerable}، فلنكتب
+  $\Domain{\OLId{latin-looped}{M}} = \{\OLId{latin-ordinary}{a}_\OLMathNumeral{0}, \OLId{latin-ordinary}{a}_\OLMathNumeral{1}, \ldots \}$ و
+  $\Domain{\OLId{latin-looped}{N}} = \{\OLId{latin-ordinary}{b}_\OLMathNumeral{0}, \OLId{latin-ordinary}{b}_\OLMathNumeral{1}, \ldots \}$. نختار أولًا $\OLId{latin-ordinary}{p}_\OLMathNumeral{0} \in \OLId{latin-looped}{I}$،
+  ثم نبني تشاكلات جزئية متزايدة
+  $\OLId{latin-ordinary}{p}_\OLMathNumeral{0} \subseteq \OLId{latin-ordinary}{p}_\OLMathNumeral{1} \subseteq \OLId{latin-ordinary}{p}_\OLMathNumeral{2} \subseteq \cdots$، فنناوب
+  بين الذهاب والإياب على الوجه الآتي:
+  \begin{enumerate}
+  \item إذا كان $\OLId{latin-ordinary}{n}+\OLMathNumeral{1}$ فرديًا، أي إذا كان $\OLId{latin-ordinary}{n} = \OLMathNumeral{2}\OLId{latin-ordinary}{r}$، فاستعمل خاصية الذهاب
+    لإيجاد $\OLId{latin-ordinary}{p}_{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}} \in \OLId{latin-looped}{I}$ بحيث $\OLId{latin-ordinary}{p}_\OLId{latin-ordinary}{n} \subseteq \OLId{latin-ordinary}{p}_{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}}$ ويكون $\OLId{latin-ordinary}{a}_\OLId{latin-ordinary}{r}$
+    في مجال $\OLId{latin-ordinary}{p}_{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}}$؛
+  \item إذا كان $\OLId{latin-ordinary}{n}+\OLMathNumeral{1}$ زوجيًا، أي إذا كان $\OLId{latin-ordinary}{n}=\OLMathNumeral{2}\OLId{latin-ordinary}{r}+\OLMathNumeral{1}$، فاستعمل خاصية الإياب
+    لإيجاد $\OLId{latin-ordinary}{p}_{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}} \in \OLId{latin-looped}{I}$ بحيث $\OLId{latin-ordinary}{p}_\OLId{latin-ordinary}{n} \subseteq \OLId{latin-ordinary}{p}_{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}}$ ويكون $\OLId{latin-ordinary}{b}_\OLId{latin-ordinary}{r}$
+    في مدى $\OLId{latin-ordinary}{p}_{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}}$.
+  \end{enumerate}
+ثم نضع:
+\[
+\OLId{latin-ordinary}{p} = \bigcup_{\OLId{latin-ordinary}{n}\ge \OLMathNumeral{0}} \OLId{latin-ordinary}{p}_\OLId{latin-ordinary}{n},
+\]
+كان $\OLId{latin-ordinary}{p}$ تشاكلًا بين $\Struct{M}$ و$\Struct{N}$.
+\end{proof}
+
+\begin{prob}
+  استوفِ تفاصيل البرهان على أن $\OLId{latin-ordinary}{p}$ المعرفة في
+  \olref[mod][bas][pis]{thm:p-isom1} تشاكل.
+\end{prob}
+
+\begin{thm}\ollabel{thm:p-isom2}
+  لتكن $\Struct{M}$ و$\Struct{N}$~!!{structure}s للـ!!{language} علائقية
+  محضة (أي !!a{language} لا تحتوي إلا !!{predicate}s، ولا تحتوي
+  !!{function}s أو ثوابت). إذا كان $\Struct{M} \iso[\OLId{latin-ordinary}{p}] \Struct{N}$،
+  فإن $\Struct{M} \elemequiv \Struct{N}$ أيضًا.
+\end{thm}
+
+\begin{proof}
+  % تصحيح مصدر (0189-I1): قُيّد التشاكل الجزئي بعائلة الذهاب والإياب، وقُيّدت المتغيرات الحرة، وصُرّح بحجّة المدّ التي أغفلها الأصل وخط الأساس.
+  اختر عائلةً $\OLId{latin-looped}{I}$ من التشاكلات الجزئية تشهد خاصية الذهاب والإياب.
+  ونثبت بالاستقراء على الـ!!{formula}s الدعوى الآتية: إذا كانت
+  متغيرات~$!A$ الحرة محصورة في $\OLId{latin-ordinary}{x}_\OLMathNumeral{1}$، \dots،~$\OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{n}$، وكان $\OLId{latin-ordinary}{p}\in \OLId{latin-looped}{I}$
+  يرسل كل $\OLId{latin-ordinary}{a}_\OLId{latin-ordinary}{i}$ إلى $\OLId{latin-ordinary}{b}_\OLId{latin-ordinary}{i}$، وكان $\OLId{latin-ordinary}{s}_\OLMathNumeral{1}(\OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{i})=\OLId{latin-ordinary}{a}_\OLId{latin-ordinary}{i}$ و$\OLId{latin-ordinary}{s}_\OLMathNumeral{2}(\OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{i})=\OLId{latin-ordinary}{b}_\OLId{latin-ordinary}{i}$
+  لكل $\OLId{latin-ordinary}{i}=\OLMathNumeral{1}$، \dots،~$\OLId{latin-ordinary}{n}$، فإن $\Sat{\OLId{latin-looped}{M}}{!A}[\OLId{latin-ordinary}{s}_\OLMathNumeral{1}]$ إذا وفقط إذا كان
+  $\Sat{\OLId{latin-looped}{N}}{!A}[\OLId{latin-ordinary}{s}_\OLMathNumeral{2}]$. الحالة الذرية من كون~$\OLId{latin-ordinary}{p}$ تشاكلًا جزئيًا،
+  وحالات الروابط مباشرة. وفي حالتي المكمّمين نستعمل خاصيتي الذهاب
+  والإياب لمدّ~$\OLId{latin-ordinary}{p}$ إلى $\OLId{latin-ordinary}{q}\in \OLId{latin-looped}{I}$ يضم الشاهد الجديد في مجاله أو مداه،
+  ثم نطبق فرض الاستقراء. فإذا كان~$!A$ جملة أخذنا $\OLId{latin-ordinary}{n}=\OLMathNumeral{0}$ وأي~$\OLId{latin-ordinary}{p}\in \OLId{latin-looped}{I}$،
+  فحصل $\Struct{M} \elemequiv \Struct{N}$.
+\end{proof}
+
+\begin{rem}
+ولا تبطل النتيجة إذا كانت في اللغة !!{function}s؛ وإنما ننظر
+حينئذ في التشاكل الذي تولّده $\OLId{latin-ordinary}{p}$ بين الـ!!{structure} الجزئية
+من $\Struct{M}$ المولّدة بالعناصر $\OLId{latin-ordinary}{a}_\OLMathNumeral{1}$، \dots، $\OLId{latin-ordinary}{a}_\OLId{latin-ordinary}{n}$،
+والـ!!{structure} الجزئية من $\Struct{N}$ المولّدة بالعناصر
+$\OLId{latin-ordinary}{b}_\OLMathNumeral{1}$، \dots، $\OLId{latin-ordinary}{b}_\OLId{latin-ordinary}{n}$.
+\end{rem}
+
+ولنا أن نفصّل النتيجة السابقة مرحلةً مرحلة: نقابل بين عدد
+المكممات المتداخلة في !!a{formula} وعدد المرات التي نستطيع فيها
+توسيع التشاكلات الجزئية. ولأجل ذلك نضع التعريفات الآتية.
+
+\begin{defn}
+  إذا أعطيت !!{formula}~$!A$، فـ\emph{رتبة الكم} لـ$!A$، ورمزها
+  $\QuantRank{!A} \in \Nat$، تحدّ بالاستقراء بأكبر عدد من المكممات
+  المتداخلة في $!A$. وتكون !!{structure}s اثنتان $\Struct{M}$ و
+  $\Struct{N}$ \emph{متكافئتين حتى الرتبة~$\OLId{latin-ordinary}{n}$}، ونكتب
+  $\Struct{M} \elemequiv[\OLId{latin-ordinary}{n}] \Struct{N}$، إذا اتفقتا على جميع الجمل ذات
+  رتبة الكم الأصغر من أو المساوية لـ$\OLId{latin-ordinary}{n}$.
+\end{defn}
+
+\begin{prop}\ollabel{prop:qr-finite}
+  لتكن $\Lang{L}$~!!{language} علائقية محضة منتهية، أي !!{language}
+  تحتوي عددًا منتهيًا من الـ!!{predicate}s والـ!!{constant}s ولا تحتوي
+  !!{function}s. لكل $\OLId{latin-ordinary}{n},\OLId{latin-ordinary}{k} \in \Nat$ لا يوجد، حتى التكافؤ المنطقي، إلا
+  عدد منتهٍ من !!{formula}s الرتبة الأولى في الـ!!{language}~$\Lang{L}$ التي لا تزيد
+  رتبة كمها على~$\OLId{latin-ordinary}{n}$ وتقع متغيراتها الحرة ضمن $\OLId{latin-ordinary}{x}_\OLMathNumeral{1}$، \dots،~$\OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{k}$.
+\end{prop}
+
+\begin{proof}
+  نستقرئ على $\OLId{latin-ordinary}{n}$، ونثبت الدعوى في كل مرحلة لجميع قيم $\OLId{latin-ordinary}{k}$ معًا.
+\end{proof}
+
+\begin{defn}
+  لتكن !!a{structure}~$\Struct{M}$. نرمز بـ$\Domain \OLId{latin-looped}{M}^{<\omega}$ إلى
+  مجموعة جميع المتتاليات المنتهية على $\Domain{\OLId{latin-looped}{M}}$. ونستعمل
+  $\mathbf{a}, \mathbf{b}, \mathbf{c}, \ldots$ للدلالة على متتاليات
+  منتهية. وإذا كانت $\mathbf{a} \in \Domain{\OLId{latin-looped}{M}}^{<\omega}$ و
+  $\OLId{latin-ordinary}{a} \in \Domain{\OLId{latin-looped}{M}}$، فإن $\mathbf{a}\OLId{latin-ordinary}{a}$ تمثل \emph{وصل}
+  $\mathbf{a}$ بـ$\OLId{latin-ordinary}{a}$.
+\end{defn}
+
+\begin{defn}
+  لتكن !!{structure}s اثنتان $\Struct{M}$ و$\Struct{N}$. نعرّف علائق
+  $\OLId{latin-looped}{I}_\OLId{latin-ordinary}{n} \subseteq \Domain \OLId{latin-looped}{M}^{<\omega} \times \Domain \OLId{latin-looped}{N}^{<\omega}$ بين
+  متتاليات متساوية الطول، بالاستقراء على $\OLId{latin-ordinary}{n}$ كما يأتي:
+   \begin{enumerate}
+   \item تكون $\OLId{latin-looped}{I}_\OLMathNumeral{0}(\mathbf{a},\mathbf{b})$ إذا وفقط إذا حققت
+     $\mathbf{a}$ و$\mathbf{b}$ الـ!!{formula}s الذرية نفسها في
+     $\Struct{M}$ و$\Struct{N}$؛ أي إذا كان طول المتتاليتين~$\OLId{latin-ordinary}{k}$، وكان
+     $\OLId{latin-ordinary}{s}_\OLMathNumeral{1}(\OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{i})=\OLId{latin-ordinary}{a}_\OLId{latin-ordinary}{i}$ و$\OLId{latin-ordinary}{s}_\OLMathNumeral{2}(\OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{i})=\OLId{latin-ordinary}{b}_\OLId{latin-ordinary}{i}$، وكانت $!A$ ذرية وجميع
+     !!{variable}s فيها من بين $\OLId{latin-ordinary}{x}_\OLMathNumeral{1}$، \dots،~$\OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{k}$، فإن
+     $\Sat{\OLId{latin-looped}{M}}{!A}[\OLId{latin-ordinary}{s}_\OLMathNumeral{1}]$ إذا وفقط إذا كان $\Sat{\OLId{latin-looped}{N}}{!A}[\OLId{latin-ordinary}{s}_\OLMathNumeral{2}]$.
+   \item تكون $\OLId{latin-looped}{I}_{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}}(\mathbf{a},\mathbf{b})$ إذا وفقط إذا كان لكل
+     $\OLId{latin-ordinary}{a}\in \Domain \OLId{latin-looped}{M}$ عنصر~$\OLId{latin-ordinary}{b}\in \Domain \OLId{latin-looped}{N}$ بحيث
+     $\OLId{latin-looped}{I}_\OLId{latin-ordinary}{n}(\mathbf{a}\OLId{latin-ordinary}{a},\mathbf{b}\OLId{latin-ordinary}{b})$، والعكس بالعكس.
+   \end{enumerate}
+\end{defn}
+
+
+\begin{defn}
+  نكتب $\Struct{M} \approx_\OLId{latin-ordinary}{n} \Struct{N}$ إذا تحققت
+  $\OLId{latin-looped}{I}_\OLId{latin-ordinary}{n}(\emptyseq,\emptyseq)$ في $\Struct{M}$ و$\Struct{N}$ (حيث
+  $\emptyseq$ هي المتتالية الخالية).
+\end{defn}
+
+\begin{thm}\ollabel{thm:b-n-f}
+  لتكن $\Lang{L}$~!!{language} علائقية محضة. إذا كانت
+  $\OLId{latin-looped}{I}_\OLId{latin-ordinary}{n}(\mathbf{a},\mathbf{b})$ وكان طول المتتاليتين~$\OLId{latin-ordinary}{k}$، فإن لكل $!A$
+  تقع متغيراتها الحرة ضمن $\OLId{latin-ordinary}{x}_\OLMathNumeral{1}$، \dots،~$\OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{k}$ وتحقق
+  $\QuantRank{!A} \le \OLId{latin-ordinary}{n}$، يكون $\Sat{\OLId{latin-looped}{M}}{!A}[\mathbf{a}]$ إذا وفقط إذا
+  كان $\Sat{\OLId{latin-looped}{N}}{!A}[\mathbf{b}]$ (حيث تحقق $\mathbf{a}$ مرة أخرى~$!A$
+  إذا حققها أي تعيين~$\OLId{latin-ordinary}{s}$ بحيث $\OLId{latin-ordinary}{s}(\OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{i})=\OLId{latin-ordinary}{a}_\OLId{latin-ordinary}{i}$). وإذا كانت $\Lang{L}$
+  منتهية، صح العكس أيضًا.
+\end{thm}
+
+\begin{proof}
+  أما جهة اللزوم، فاستقراء يسير على $!A$ يبيّن أن
+  $\OLId{latin-looped}{I}_\OLId{latin-ordinary}{n}(\mathbf{a},\mathbf{b})$ تستلزم اتفاق $\mathbf{a}$ و$\mathbf{b}$
+  في الـ!!{formula}s التي لا تزيد رتبة كمها على~$\OLId{latin-ordinary}{n}$، والتي تقع
+  متغيراتها الحرة في القائمة الثابتة الموافقة لإحداثياتهما.
+  وأما العكس، فنستقرئ فيه على $\OLId{latin-ordinary}{n}$، ونعتمد
+  \olref{prop:qr-finite}. فهي تضمن، لكل $\OLId{latin-ordinary}{n}$ ولكل قائمة منتهية
+  ثابتة من المتغيرات الحرة، أن فئات التكافؤ المنطقي
+  للـ!!{formula}s ذات رتبة الكم التي لا تتجاوز~$\OLId{latin-ordinary}{n}$ منتهية العدد.
+
+  عند $\OLId{latin-ordinary}{n}=\OLMathNumeral{0}$، نعلم بالفرض أن $\mathbf{a}$ و$\mathbf{b}$ تتفقان
+  في الـ!!{formula}s الخالية من الكم؛ فتتفقان خاصة في الصيغ
+  الذرية، وهذا بعينه $\OLId{latin-looped}{I}_\OLMathNumeral{0}(\mathbf{a},\mathbf{b})$.
+
+  وللحالة $\OLId{latin-ordinary}{n}+\OLMathNumeral{1}$ نفرض اتفاق $\mathbf{a}$ و$\mathbf{b}$ في
+  الـ!!{formula}s التي لا تزيد رتبة كمها على $\OLId{latin-ordinary}{n}+\OLMathNumeral{1}$.
+  لإثبات $\OLId{latin-looped}{I}_{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}}(\mathbf{a},\mathbf{b})$ ننظر أولًا في جهة
+  الذهاب: لكل $\OLId{latin-ordinary}{a} \in \Domain \OLId{latin-looped}{M}$ نطلب $\OLId{latin-ordinary}{b} \in \Domain \OLId{latin-looped}{N}$ بحيث
+  $\OLId{latin-looped}{I}_\OLId{latin-ordinary}{n}(\mathbf{a}\OLId{latin-ordinary}{a},\mathbf{b}\OLId{latin-ordinary}{b})$. وبفرض الاستقراء يكفي أن
+  نجد، لكل $\OLId{latin-ordinary}{a} \in \Domain \OLId{latin-looped}{M}$، عنصرًا $\OLId{latin-ordinary}{b} \in \Domain \OLId{latin-looped}{N}$
+  تتفق عنده $\mathbf{a}\OLId{latin-ordinary}{a}$ و$\mathbf{b}\OLId{latin-ordinary}{b}$ في الـ!!{formula}s
+  التي لا تزيد رتبة كمها على~$\OLId{latin-ordinary}{n}$.
+
+  فلنأخذ $\OLId{latin-ordinary}{a} \in \Domain \OLId{latin-looped}{M}$. نختار ممثلًا لكل فئة تكافؤ منطقي
+  للـ!!{formula}s~$!B(\OLId{latin-ordinary}{x},\mathbf{y})$ التي لا تزيد رتبة كمها على~$\OLId{latin-ordinary}{n}$،
+  وتقع متغيراتها الحرة في القائمة الثابتة $\OLId{latin-ordinary}{x},\mathbf{y}$،
+  وتحققها $\mathbf{a}\OLId{latin-ordinary}{a}$ في $\Struct{M}$. ونجعل $!T^\OLId{latin-ordinary}{a}_\OLId{latin-ordinary}{n}$
+  اقتران الممثلين المختارين. وهم عدد منتهٍ، فيكون الاقتران
+  !!{formula} واحدة من الرتبة الأولى. وعندئذ تحقق $\mathbf{a}$
+  الصيغة $\lexists[\OLId{latin-ordinary}{x}][!T^\OLId{latin-ordinary}{a}_\OLId{latin-ordinary}{n}(\OLId{latin-ordinary}{x},\mathbf{y})]$، ولا تزيد رتبة
+  كمها على $\OLId{latin-ordinary}{n}+\OLMathNumeral{1}$. فيلزم بالفرض أن تحقق $\mathbf{b}$ الصيغة
+  نفسها في $\Struct{N}$؛ فيوجد $\OLId{latin-ordinary}{b} \in \Domain \OLId{latin-looped}{N}$ تحقق عنده
+  $\mathbf{b}\OLId{latin-ordinary}{b}$ الصيغة $!T^\OLId{latin-ordinary}{a}_\OLId{latin-ordinary}{n}$. ومن ثم تتفق $\mathbf{b}\OLId{latin-ordinary}{b}$
+  في الـ!!{formula}s ذات رتبة الكم التي لا تتجاوز~$\OLId{latin-ordinary}{n}$
+  مع $\mathbf{a}\OLId{latin-ordinary}{a}$؛ إذ في المختار ممثل لكل صيغة صادقة،
+  أو لنفيها إن كانت كاذبة. وبنظير هذا النظر نثبت جهة الإياب:
+  لكل $\OLId{latin-ordinary}{b} \in \Domain \OLId{latin-looped}{N}$ يوجد $\OLId{latin-ordinary}{a}\in \Domain \OLId{latin-looped}{M}$ تتفق عنده
+  $\mathbf{a}\OLId{latin-ordinary}{a}$ و$\mathbf{b}\OLId{latin-ordinary}{b}$ في الـ!!{formula}s ذات رتبة
+  الكم التي لا تتجاوز~$\OLId{latin-ordinary}{n}$. فتم البرهان.
+\end{proof}
+
+\begin{cor}\ollabel{cor:b-n-f}
+  إذا كانت $\Struct{M}$ و$\Struct{N}$~!!{structure}s علائقية محضة في
+  !!{language} منتهية، فإن $\Struct{M} \approx_\OLId{latin-ordinary}{n}\Struct{N}$ إذا وفقط
+  إذا كان $\Struct{M} \elemequiv[\OLId{latin-ordinary}{n}] \Struct{N}$. وبوجه خاص،
+  $\Struct{M} \elemequiv \Struct{N}$ إذا وفقط إذا كان، لكل $\OLId{latin-ordinary}{n}$،
+  $\Struct{M} \approx_\OLId{latin-ordinary}{n} \Struct{N}$.
+\end{cor}
+
+\end{document}

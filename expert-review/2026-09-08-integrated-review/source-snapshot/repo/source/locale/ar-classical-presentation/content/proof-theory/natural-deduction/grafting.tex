@@ -1,0 +1,79 @@
+% Part: proof-theory
+% Chapter: natural-deduction
+% Section: grafting
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{nat}{gra}
+
+\olsection{في تطعيم \usetoken{P}{proof}}
+
+!!^{proof}s في~\Log{N1c} و\Log{N1i} إنما هي~!!{proof}s لـ!!{formula}s~$!A$
+من فروض~$!B$. فإذا كان لـ$!B$ نفسها~!!a{proof}، سألنا: كيف نصل~!!{proof}
+$!B$ بـ!!{proof}~$!A$ من~$!B$، حتى نحصل على~!!a{proof} لـ$!A$ لا
+يستند إلى الفرض~$!B$؟
+
+ومن الوجوه أن نحذف الفرض~$!B$ من~!!{proof}~$!A$ بإعمال
+$\Intro{\lif}$، ثم نصل~!!{proof} الناتج لـ$!B \lif !A$
+بـ!!{proof}~$!B$، فينتج
+\[
+\AxiomC{$\Discharge{!B}{\OLId{latin-ordinary}{x}}$}
+\DeduceC{$!A$}
+\DischargeRule{\Intro{\lif}}{\OLId{latin-ordinary}{x}}
+\UnaryInfC{$!B \lif !A$}
+\AxiomC{}
+\DeduceC{$!B$}
+\RightLabel{\Elim{\lif}}
+\BinaryInfC{$!A$}
+\DisplayProof
+\]
+وهذا طريق مباشر، غير أنه مشوب بفضول: فما وجه إدخال~$\lif$ إذا كنا
+نحذفه من فورنا؟ والأولى أن نستغني عن هذا «الالتفاف» المار بـ~$!B \lif !A$.
+(ومؤدى مبرهنة التطبيع أن الاستغناء عن هذه الالتفافات ممكن دائمًا.)
+
+وفي~\Log{N1c} و\Log{N1i} يسهل اجتنابه: نقيم مقام الفروض~$!B^\OLId{latin-ordinary}{x}$
+كامل~!!{proof}~$!B$. ولما كان «تطعيم»~!!{proof}s بفروض براهين أخرى كثير
+النفع، أثبتناه في التعريف الآتي.
+
+\begin{defn}
+ليكن~$\delta_\OLMathNumeral{1}$~!!{proof} في~\Log{N1c} (أو~!!{proof} في
+\Log{N1i}) لـ$!A$ من الفرض المفتوح~$!B^\OLId{latin-ordinary}{x}$، وليكن~$\delta_\OLMathNumeral{2}$~!!{proof}
+في~\Log{N1c} (أو~!!{proof} في~\Log{N1i}) لـ$!B$. فنعرف
+$\Subst{\delta_\OLMathNumeral{1}}{\delta_\OLMathNumeral{2}}{!B^\OLId{latin-ordinary}{x}}$ بأنه ما يحصل من إحلال~$\delta_\OLMathNumeral{2}$ محل
+كل ظهور غير مبرأ للفرض~$!B^\OLId{latin-ordinary}{x}$ في~$\delta_\OLMathNumeral{1}$.
+\end{defn}
+
+إذا لم يكن في~$\delta_\OLMathNumeral{1}$ و$\delta_\OLMathNumeral{2}$~!!{formula}s فرض متغايرة تحمل
+علامة واحدة، ولم يشتمل فرض مفتوح في~$\delta_\OLMathNumeral{2}$ على متغير مميز من
+$\delta_\OLMathNumeral{1}$، كان~$\Subst{\delta_\OLMathNumeral{1}}{\delta_\OLMathNumeral{2}}{!B^\OLId{latin-ordinary}{x}}$~!!{proof} صحيحًا،
+وفروضه المفتوحة مجموع فروض~$\delta_\OLMathNumeral{1}$ وفروض~$\delta_\OLMathNumeral{2}$. وهذان الشرطان
+متحققان عند تطعيم~!!{proof}s عادة؛ فالأول حاصل متى كان~$\delta_\OLMathNumeral{1}$ و$\delta_\OLMathNumeral{2}$
+برهانين جزئيين من~!!{proof} أكبر، والثاني إن تخلف أصلحناه بإعادة تسمية
+المتغيرات المميزة في~$\delta_\OLMathNumeral{1}$.
+
+ولهذا التعريف نظير في~\Log{N2c} و\Log{N2i}.
+
+\begin{defn}
+إذا كان~$\delta_\OLMathNumeral{1}$~!!{proof} في~\Log{N2c} (أو~!!{proof} في
+\Log{N2i}) لـ$\OLId{latin-ordinary}{x}:!B, \OLId{greek-variable}{Gamma}_\OLMathNumeral{1} \Sequent !A$، وكان~$\delta_\OLMathNumeral{2}$~!!{proof}
+في~\Log{N2c} (أو~!!{proof} في~\Log{N2i}) لـ
+$\OLId{greek-variable}{Gamma}_\OLMathNumeral{2} \Sequent !B$، فإن~$\Subst{\delta_\OLMathNumeral{1}}{\delta_\OLMathNumeral{2}}{\OLId{latin-ordinary}{x}:!B}$ هو
+ناتج استبدال~$\delta_\OLMathNumeral{2}$ بكل مسلّمة~$\OLId{latin-ordinary}{x}:!B \Sequent !B$ في~$\delta_\OLMathNumeral{1}$،
+وإضافة~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{2}$ إلى سياق كل متتالية تقع تحت تلك المسلّمات.
+\end{defn}
+
+\begin{prop}
+إذا كان~$\delta_\OLMathNumeral{1} \Proves \OLId{latin-ordinary}{x}:!B, \OLId{greek-variable}{Gamma}_\OLMathNumeral{1} \Sequent !A$ و
+$\delta_\OLMathNumeral{2} \Proves \OLId{greek-variable}{Gamma}_\OLMathNumeral{2} \Sequent !B$، فإن
+$\Subst{\delta_\OLMathNumeral{1}}{\delta_\OLMathNumeral{2}}{\OLId{latin-ordinary}{x}:!B} \Proves \OLId{greek-variable}{Gamma}_\OLMathNumeral{1}, \OLId{greek-variable}{Gamma}_\OLMathNumeral{2} \Sequent
+!A$، بشرط ألا يظهر أي متغير مميز من~$\delta_\OLMathNumeral{1}$ في~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{2}$.
+\end{prop}
+
+
+\begin{proof}
+  بالاستقراء على~$\pheight{\delta_\OLMathNumeral{1}}$.
+\end{proof}
+
+\end{document}

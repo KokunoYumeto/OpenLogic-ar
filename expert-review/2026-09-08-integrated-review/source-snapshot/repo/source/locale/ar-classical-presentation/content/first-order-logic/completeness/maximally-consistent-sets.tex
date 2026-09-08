@@ -1,0 +1,169 @@
+% Part: first-order-logic
+% Chapter: completeness
+% Section: maximally-consistent-sets
+
+% Definition of maximally consistent sets. Properties of maximally
+% consistent sets required for the completeness proof are in
+% maximally-consistent-sets.tex in the chapter on the proof system used.
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{com}{mcs}
+\olsection{مجموعات \usetoken{P}{sentence} البالغة غاية الاتساق}
+
+\begin{defn}[المجموعة المتسقة القصوى]
+\ollabel{mcs}
+تُسمى مجموعة~$\OLId{greek-variable}{Gamma}$ من~!!{sentence}s
+\emph{متسقة قصوى} إذا وفقط إذا تحقق الشرطان الآتيان:
+\begin{enumerate}
+\item أن تكون~$\OLId{greek-variable}{Gamma}$ متسقة، و
+\item أن يلزم من~$\OLId{greek-variable}{Gamma} \subsetneq \OLId{greek-variable}{Gamma}'$ كون~$\OLId{greek-variable}{Gamma}'$ غير متسقة.
+\end{enumerate}
+\end{defn}
+
+\begin{explain}
+وللحد السابق عبارة أخرى تكافئه: تُسمى مجموعة~$\OLId{greek-variable}{Gamma}$ من الجمل
+\emph{متسقة قصوى} إذا وفقط إذا تحقق الآتي:
+\begin{enumerate}
+\item أن تكون~$\OLId{greek-variable}{Gamma}$ متسقة، و
+\item أن يلزم من اتساق~$\OLId{greek-variable}{Gamma} \cup \{ !A \}$ كون~$!A \in \OLId{greek-variable}{Gamma}$.
+\end{enumerate}
+أي لا يسعنا أن نزيد مجموعة متسقة قصوى~!!{sentence}s ليست في~$\OLId{greek-variable}{Gamma}$
+أصلاً، على مجموعة~$\OLId{greek-variable}{Gamma}$، إلا صارت المجموعة الأوسع الحاصلة غير متسقة.
+\end{explain}
+
+\begin{explain}
+وإنما عظمت منزلة المجموعات المتسقة القصوى في برهان الاكتمال لأنا نضمن أن
+كل مجموعة متسقة من~!!{sentence}s~$\OLId{greek-variable}{Gamma}$ داخلة في مجموعة متسقة قصوى
+$\OLId{greek-variable}{Gamma}^*$؛ وأن هذه المجموعة القصوى تشتمل، لكل~!!{sentence}~$!A$، إما
+على~$!A$ وإما على نفيها~$\lnot !A$. وهذا صادق، بوجه أخص، في
+!!{sentence}s الذرية. فلنا، من مجموعة متسقة قصوى في لغة زيدت بما يلائم
+من~!!{constant}s، أن ننشئ~!!a{structure} نحدّ فيها تأويل~!!{predicate}s
+بما ينتمي إلى~$\OLId{greek-variable}{Gamma}^*$ من~!!{sentence}s الذرية. ثم يمكن إثبات أن هذه
+!!{structure} تُصدق كل~!!{sentence}s في~$\OLId{greek-variable}{Gamma}^*$، فتُصدق من ثم ما في
+$\OLId{greek-variable}{Gamma}$ أيضاً. ولا يتم برهان هذا إلا بأن يكون~$\lnot !A \in \OLId{greek-variable}{Gamma}^*$
+إذا وفقط إذا كان~$!A \notin \OLId{greek-variable}{Gamma}^*$، وأن يكون
+$(!A \lor !B) \in \OLId{greek-variable}{Gamma}^*$ إذا وفقط إذا كان~$!A \in \OLId{greek-variable}{Gamma}^*$ أو
+$!B \in \OLId{greek-variable}{Gamma}^*$، وعلى هذا القياس.
+\end{explain}
+
+\begin{prop}
+\ollabel{prop:mcs}
+لتكن~$\OLId{greek-variable}{Gamma}$ متسقة قصوى؛ فعندئذ:
+\begin{enumerate}
+\item \ollabel{prop:mcs-prov-in} متى كان~$\OLId{greek-variable}{Gamma} \Proves !A$، كان
+$!A \in \OLId{greek-variable}{Gamma}$.
+
+\item \ollabel{prop:mcs-either-or} لكل~$!A$، يكون إما~$!A \in \OLId{greek-variable}{Gamma}$ أو
+$\lnot !A \in \OLId{greek-variable}{Gamma}$.
+
+\tagitem{prvAnd}{\ollabel{prop:mcs-and} يتحقق
+$(!A \land !B) \in \OLId{greek-variable}{Gamma}$ إذا وفقط إذا تحقق كل من
+$!A \in \OLId{greek-variable}{Gamma}$ و$!B \in \OLId{greek-variable}{Gamma}$.}{}
+
+\tagitem{prvOr}{\ollabel{prop:mcs-or} يتحقق
+$(!A \lor !B) \in \OLId{greek-variable}{Gamma}$ إذا وفقط إذا كان إما~$!A \in \OLId{greek-variable}{Gamma}$
+وإما~$!B \in \OLId{greek-variable}{Gamma}$.}{}
+
+\tagitem{prvIf}{\ollabel{prop:mcs-if} يتحقق
+$(!A \lif !B) \in \OLId{greek-variable}{Gamma}$ إذا وفقط إذا كان إما~$!A \notin \OLId{greek-variable}{Gamma}$
+وإما~$!B \in \OLId{greek-variable}{Gamma}$.}{}
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+نجعل~$\OLId{greek-variable}{Gamma}$، فيما يأتي كله، متسقة قصوى.
+\begin{enumerate}
+\item متى كان~$\OLId{greek-variable}{Gamma} \Proves !A$، كان~$!A \in \OLId{greek-variable}{Gamma}$.
+
+افرض~$\OLId{greek-variable}{Gamma} \Proves !A$، ثم افرض، طلباً للتناقض، أن
+$!A \notin \OLId{greek-variable}{Gamma}$. ولما كانت~$\OLId{greek-variable}{Gamma}$ متسقة قصوى، لزم أن تكون
+$\OLId{greek-variable}{Gamma} \cup \{!A\}$ غير متسقة؛ ولذلك
+$\OLId{greek-variable}{Gamma} \cup \{!A\} \Proves \lfalse$. وبحسب
+\tagrefs{prfSC/{fol:seq:prv:prop:provability-contr},prfND/{fol:ntd:prv:prop:provability-contr}}،
+تكون~$\OLId{greek-variable}{Gamma}$ غير متسقة، وهو خلاف ما فُرض من اتساقها. فيمتنع
+$!A \notin \OLId{greek-variable}{Gamma}$، ويلزم~$!A \in \OLId{greek-variable}{Gamma}$.
+
+\item لكل~$!A$، يكون إما~$!A \in \OLId{greek-variable}{Gamma}$ أو~$\lnot !A \in \OLId{greek-variable}{Gamma}$.
+
+وافرض، ابتغاء التناقض، وجود~$!A$ يحقق~$!A \notin \OLId{greek-variable}{Gamma}$ و
+$\lnot !A \notin \OLId{greek-variable}{Gamma}$. وبما أن~$\OLId{greek-variable}{Gamma}$ متسقة قصوى، تكون
+$\OLId{greek-variable}{Gamma} \cup \{!A\}$ و$\OLId{greek-variable}{Gamma} \cup \{\lnot !A\}$ كلتاهما غير
+متسقة؛ فيكون~$\OLId{greek-variable}{Gamma} \cup \{!A\} \Proves \lfalse$ و
+$\OLId{greek-variable}{Gamma} \cup \{\lnot !A\} \Proves \lfalse$. وبحسب
+\tagrefs{prfSC/{fol:seq:prv:prop:provability-exhaustive},prfND/{fol:ntd:prv:prop:provability-exhaustive}}،
+تكون~$\OLId{greek-variable}{Gamma}$ غير متسقة، وذلك تناقض. فلا توجد~!!a{sentence}
+$!A$ كذلك، ولكل~$!A$ يكون إما~$!A \in \OLId{greek-variable}{Gamma}$ أو
+$\lnot !A \in \OLId{greek-variable}{Gamma}$.
+
+\tagitem{defAnd}{}{%
+\iftag{probAnd}{تمرين.}{%
+يتحقق~$(!A \land !B) \in \OLId{greek-variable}{Gamma}$ إذا وفقط إذا تحقق كل من
+$!A \in \OLId{greek-variable}{Gamma}$ و$!B \in \OLId{greek-variable}{Gamma}$:
+
+فأما جهة اللزوم، فافرض~$(!A \land !B) \in \OLId{greek-variable}{Gamma}$. عندئذ
+$\OLId{greek-variable}{Gamma} \Proves !A \land !B$. وبموجب
+\tagrefs{prfSC/{fol:seq:prv:prop:provability-land-left},prfND/{fol:ntd:prv:prop:provability-land-left}}،
+يكون~$\OLId{greek-variable}{Gamma} \Proves !A$ و$\OLId{greek-variable}{Gamma} \Proves !B$. ثم بحسب
+\olref{prop:mcs-prov-in} يكون~$!A \in \OLId{greek-variable}{Gamma}$ و$!B \in \OLId{greek-variable}{Gamma}$، وهو
+المقصود.
+
+وأما جهة العكس، فليكن~$!A \in \OLId{greek-variable}{Gamma}$ و$!B \in \OLId{greek-variable}{Gamma}$. فيكون
+$\OLId{greek-variable}{Gamma} \Proves !A$ و$\OLId{greek-variable}{Gamma} \Proves !B$. وبموجب
+\tagrefs{prfSC/{fol:seq:prv:prop:provability-land-right},prfND/{fol:ntd:prv:prop:provability-land-right}}،
+يكون~$\OLId{greek-variable}{Gamma} \Proves !A \land !B$. ثم من~\olref{prop:mcs-prov-in}
+ينتج~$(!A \land !B) \in \OLId{greek-variable}{Gamma}$.}}
+
+\tagitem{defOr}{}{%
+\iftag{probOr}{تمرين.}{%
+يتحقق~$(!A \lor !B) \in \OLId{greek-variable}{Gamma}$ إذا وفقط إذا كان إما
+$!A \in \OLId{greek-variable}{Gamma}$ وإما~$!B \in \OLId{greek-variable}{Gamma}$.
+
+ولإثبات نقيض جهة اللزوم، افرض~$!A \notin \OLId{greek-variable}{Gamma}$ و
+$!B \notin \OLId{greek-variable}{Gamma}$. ونريد إثبات~$(!A \lor !B) \notin \OLId{greek-variable}{Gamma}$.
+ولما كانت~$\OLId{greek-variable}{Gamma}$ متسقة قصوى، يكون
+$\OLId{greek-variable}{Gamma} \cup \{!A\} \Proves \lfalse$ و
+$\OLId{greek-variable}{Gamma} \cup \{!B\} \Proves \lfalse$. وبموجب
+\tagrefs{prfSC/{fol:seq:prv:prop:provability-lor-left},prfND/{fol:ntd:prv:prop:provability-lor-left}}،
+تكون~$\OLId{greek-variable}{Gamma} \cup \{(!A \lor !B)\}$ غير متسقة؛ فيلزم
+$(!A \lor !B) \notin \OLId{greek-variable}{Gamma}$، وهو المراد.
+
+وأما جهة العكس، فافرض~$!A \in \OLId{greek-variable}{Gamma}$ أو~$!B \in \OLId{greek-variable}{Gamma}$؛ فيكون
+$\OLId{greek-variable}{Gamma} \Proves !A$ أو~$\OLId{greek-variable}{Gamma} \Proves !B$. وبحسب
+\tagrefs{prfSC/{fol:seq:prv:prop:provability-lor-right},prfND/{fol:ntd:prv:prop:provability-lor-right}}،
+يكون~$\OLId{greek-variable}{Gamma} \Proves !A \lor !B$. ثم من~\olref{prop:mcs-prov-in} ينتج
+$(!A \lor !B) \in \OLId{greek-variable}{Gamma}$، وهو المطلوب.}}
+
+\tagitem{defIf}{}{%
+\iftag{probIf}{تمرين.}{%
+يتحقق~$(!A \lif !B) \in \OLId{greek-variable}{Gamma}$ إذا وفقط إذا كان إما
+$!A \notin \OLId{greek-variable}{Gamma}$ وإما~$!B \in \OLId{greek-variable}{Gamma}$:
+
+فأما جهة اللزوم، فليكن~$(!A \lif !B) \in \OLId{greek-variable}{Gamma}$، ولنفرض ابتغاء
+التناقض~$!A \in \OLId{greek-variable}{Gamma}$ و$!B \notin \OLId{greek-variable}{Gamma}$. ومن هذين الفرضين يكون
+$\OLId{greek-variable}{Gamma} \Proves !A \lif !B$ و$\OLId{greek-variable}{Gamma} \Proves !A$. وبحسب
+\tagrefs{prfSC/{fol:seq:prv:prop:provability-mp},prfND/{fol:ntd:prv:prop:provability-mp}}،
+يكون~$\OLId{greek-variable}{Gamma} \Proves !B$. ولكن~\olref{prop:mcs-prov-in} تعطينا حينئذ
+$!B \in \OLId{greek-variable}{Gamma}$، وذلك يناقض~$!B \notin \OLId{greek-variable}{Gamma}$.
+
+وأما جهة العكس، فانظر أولاً في حالة~$!A \notin \OLId{greek-variable}{Gamma}$. بحسب
+\olref{prop:mcs-either-or} يكون~$\lnot !A \in \OLId{greek-variable}{Gamma}$، فينتج
+$\OLId{greek-variable}{Gamma} \Proves \lnot !A$. وبحسب
+\tagrefs{prfSC/{fol:seq:prv:prop:provability-lif},prfND/{fol:ntd:prv:prop:provability-lif}}،
+يكون~$\OLId{greek-variable}{Gamma} \Proves !A \lif !B$. وبتطبيق~\olref{prop:mcs-prov-in}
+ثانية نحصل على~$(!A \lif !B) \in \OLId{greek-variable}{Gamma}$، وهو المطلوب.
+
+ثم انظر في حالة~$!B \in \OLId{greek-variable}{Gamma}$. فعندئذ~$\OLId{greek-variable}{Gamma} \Proves !B$، وبحسب
+\tagrefs{prfSC/{fol:seq:prv:prop:provability-lif},prfND/{fol:ntd:prv:prop:provability-lif}}،
+يكون~$\OLId{greek-variable}{Gamma} \Proves !A \lif !B$. ومن~\olref{prop:mcs-prov-in} ينتج
+$(!A \lif !B) \in \OLId{greek-variable}{Gamma}$.}}
+\end{enumerate}
+\end{proof}
+
+\begin{prob}
+أتمم برهان~\olref[fol][com][mcs]{prop:mcs}.
+\end{prob}
+
+\end{document}

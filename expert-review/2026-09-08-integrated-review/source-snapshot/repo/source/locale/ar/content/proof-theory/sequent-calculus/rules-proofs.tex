@@ -1,0 +1,181 @@
+% Part: proof-theory
+% Chapter: sequent-calculus
+% Section: rules-proofs
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{seq}{rp}
+
+\olsection{القواعد و\usetoken{P}{proof}}
+
+نبدأ بوضع بعض التعريفات وتثبيت بعض المصطلحات.
+
+لننظر، مثلًا، في قاعدتي~\Log{G3c} اللتين تتيحان~!!{proving} متتاليات
+تحتوي~$!A\land !B$ انطلاقًا من متتاليات تحتوي~$!A$ و$!B$:
+\[
+\Axiom$ !A, !B, \Gamma \fCenter \Delta$
+\RightLabel{\LeftR{\land}}
+\UnaryInf$ !A \land !B, \Gamma \fCenter \Delta$
+\DisplayProof
+\qquad
+\Axiom$\Gamma \fCenter \Delta, !A$
+\Axiom$ \Gamma \fCenter \Delta, !B$
+\RightLabel{\RightR{\land}}
+\BinaryInf$ \Gamma \fCenter \Delta, !A \land !B $
+\DisplayProof
+\]
+تسمى المتتاليات الواقعة فوق الخط \emph{مقدمات}، وتسمى المتتالية الواقعة
+تحته \emph{نتيجة}. وتسمى~!!{formula}s الموجودة في~$\Gamma$ و$\Delta$
+في كل قاعدة \emph{السياق} أو~!!{formula}s \emph{الجانبية}. أما
+!!{formula} في النتيجة التي ليست جزءًا من السياق فتسمى~!!{formula}
+\emph{الرئيسة}، وتسمى~!!{formula}s الموجودة في المقدمات لا في السياق
+!!{formula}s \emph{الفعالة} (أو \emph{المساعدة}).
+
+قواعد الكميات أعقد قليلًا. فقواعد~$\lforall$ في~\Log{G1c} مثلًا هي:
+\[\Axiom$ !A(t), \Gamma \fCenter \Delta$
+\RightLabel{\LeftR{\lforall}}
+\UnaryInf$ \lforall[x][!A(x)],\Gamma \fCenter \Delta$
+\DisplayProof
+\qquad
+\Axiom$ \Gamma \fCenter \Delta, !A(a) $
+\RightLabel{\RightR{\lforall}}
+\UnaryInf$ \Gamma \fCenter \Delta, \lforall[x][!A(x)]$
+\DisplayProof
+\]
+في قاعدة~\LeftR{\lforall} تكون~!!{formula} الفعالة هي~$!A(t)$، حيث
+$t$ حد مغلق، أي حد بلا متغيرات. ويكون مثل هذا الاستدلال صحيحًا---أي
+مطابقًا لمخطط قاعدة~\LeftR{\lforall}---إذا وجدت~!!{formula}~$!A$
+ومتغير~$x$ وحد مغلق~$t$ بحيث تكون~!!{formula} الرئيسة في النتيجة
+$\lforall[x][!A]$ وتكون~!!{formula} الفعالة في المقدمة
+$\Subst{!A}{t}{x}$. وتعمل قاعدة~\RightR{\lforall} على النحو نفسه، إلا
+أن~!!{formula} الفعالة في المقدمة يجب أن تكون~$\Subst{!A}{a}{x}$، حيث~$a$
+!!a{constant}. ويسمى هذا الثابت \emph{المتغير المميَّز} لاستدلال
+\RightR{\lforall}. ولا يصح الاستدلال إلا إذا لم تحتوي المتتالية السفلى
+$a$؛ أي إذا لم يقع~$a$ في~$\Gamma$ أو~$\Delta$ أو~$!A$. وهذا هو
+\emph{شرط المتغير المميَّز}.
+
+تتكون أنظمة المتتاليات مثل~\Log{G1c} و\Log{G3c} من مجموعة قواعد محددة
+مخططيًا كهذه، ومعها بعض المتتاليات المحددة مخططيًا أيضًا التي تعد
+بديهيات. أما~!!^{proof}s في مثل هذا النظام فهي أشجار منتهية من
+المتتاليات، تُعرَّف استقرائيًا من البديهيات باستعمال قواعد الاستدلال. فكل
+ورقة بديهية، وكل متتالية أخرى تتبع من المتتاليات الواقعة فوقها مباشرة
+بإحدى قواعد الاستدلال في النظام.
+
+\begin{defn}\ollabel{defn:proof}
+تُعرَّف~\emph{!!^{proof}s} في نظام متتاليات استقرائيًا بوصفها أشجارًا
+منتهية من المتتاليات كما يأتي:
+\begin{enumerate}
+  \item\ollabel{defn:prf:axiom} كل بديهية~!!a{proof}.
+  \item\ollabel{defn:prf:one-prem} إذا كان~$\pi_1$~!!a{proof} ينتهي
+  بمتتالية~$S_1$، وكانت~$S$ متتالية تتبع من~$S_1$ بقاعدة أحادية
+  المقدمة~$R$، فإن
+  \[
+  \AxiomC{}
+  \RightLabel{$\pi_1$}
+  \DeduceC{$S_1$}
+  \RightLabel{$R$}
+  \UnaryInfC{$S$}
+  \DisplayProof
+  \]
+  هو~!!a{proof}.
+  \item\ollabel{defn:prf:two-prem} إذا كان~$\pi_1$ و$\pi_2$~!!{proof}s
+  ينتهيان بالمتتاليتين~$S_1$ و$S_2$، وكانت~$S$ متتالية تتبع من~$S_1$
+  و~$S_2$ بقاعدة ثنائية المقدمة~$R$، فإن
+  \[
+  \AxiomC{}
+  \RightLabel{$\pi_1$}
+  \DeduceC{$S_1$}
+  \AxiomC{}
+  \RightLabel{$\pi_2$}
+  \DeduceC{$S_2$}
+  \RightLabel{$R$}
+  \BinaryInfC{$S$}
+  \DisplayProof
+  \]
+  هو~!!a{proof}.
+\end{enumerate}
+\end{defn}
+
+يعرّف~\Olref{defn:proof}~!!{proof}s بوصفها أشجارًا من المتتاليات. ونتصور
+هذه الأشجار نامية «إلى أعلى». والعقد العليا (الأوراق) بديهيات وتسمى
+\emph{متتاليات ابتدائية}. أما المتتالية السفلى فتسمى \emph{المتتالية
+النهائية}. وإذا كان~$\pi$~!!a{proof} متتاليته النهائية~$S$، نكتب أيضًا
+$\pi\Proves S$. وإذا وجد~!!a{proof} لمتتالية~$S$، كتبنا~$\Proves S$،
+وقد نشير إلى النظام الذي يوجد فيه البرهان إلى يسار رمز~$\Proves$؛ مثلًا
+$\Log{G1c}\Proves !A,!B\Sequent !A\land !B$. وكل متتالية في
+!!a{proof}، عدا المتتاليات الابتدائية، هي \emph{نتيجة} استدلال بقاعدة
+ما~$R$. وتسمى المتتالية أو المتتاليتان الواقعتان مباشرة فوق متتالية في
+!!a{proof} (أي أبوا العقدة) \emph{مقدمات} الاستدلال.
+
+تسمى~!!{proof}s المستعملة في البناء الاستقرائي لـ!!a{proof}
+\emph{!!{proof}s جزئية} له. وتسمى~!!{proof}s الجزئية المنتهية بمقدمات
+استدلال \emph{!!{proof}s جزئية مباشرة} لذلك الاستدلال.
+
+كثيرًا ما يلزم قياس تعقيد~!!{proof}s بعدد طبيعي. ويمكن ببساطة عدّ
+المتتاليات في~!!a{proof}، لكن المقياس الأنفع غالبًا هو~!!{height}
+!!a{proof}: وهو أكبر عدد من خطوات الاستدلال، أو الحواف، في فرع من
+المتتالية النهائية إلى متتالية ابتدائية. ويمكن أيضًا إعطاؤه تعريفًا
+استقرائيًا.
+
+\begin{defn}
+يُعرَّف~\emph{!!{height}}~$\pheight{\pi}$ لـ!!a{proof}~$\pi$ استقرائيًا
+كما يأتي:
+\begin{enumerate}
+  \item إذا اقتصر~$\pi$ على بديهية واحدة، كان~$\pheight{\pi}=0$.
+  \item إذا انتهى~$\pi$ باستدلال ذي مقدمة واحدة وكان~$\pi_1$ هو
+  الـ!!{proof} الجزئي المباشر، كان~$\pheight{\pi}=\pheight{\pi_1}+1$.
+  \item إذا انتهى~$\pi$ باستدلال ذي مقدمتين وكان~$\pi_1$ و$\pi_2$
+  الـ!!{proof}s الجزئية المباشرة، كان
+  $\pheight{\pi}=\max(\pheight{\pi_1},\pheight{\pi_2})+1$.
+\end{enumerate}
+إذا كان للمتتالية~$S$~!!a{proof} ارتفاعه~$\le n$، كتبنا~$\Proves[n]S$.
+\end{defn}
+
+\begin{ex}
+في~\Log{G3c} تكون كل متتالية من الصورة~$!C,\Gamma\Sequent\Delta,!C$
+بديهية، على أن تكون~$!C$ ذرية. ولتكن~$!D$ و$!E$ جملتين ذريتين. عندئذ
+تكون~$!D,!E\Sequent !D$ و$!D,!E\Sequent !E$ حالتين من البديهية
+$!C,\Gamma\Sequent\Delta,!C$. فمثلًا، إذا أخذنا~$!C\ident !E$ و
+$\Gamma=\{!D\}$ و$\Delta=\emptyset$، حصلنا بالضبط على
+$!D,!E\Sequent !E$. (تذكر أننا نتعامل مع متعددات مجموعات؛ ولذلك فإن
+$!D,!E\Sequent !E$ و$!E,!D\Sequent !E$ هما المتتالية نفسها.)
+
+ولأن~$!D,!E\Sequent !D$ حالة من بديهيات~\Log{G3c}، فإنه يعد وحده
+!!a{proof} في~\Log{G3c}، وكذلك~$!D,!E\Sequent !E$ بحسب
+\olref{defn:proof}\olref{defn:prf:axiom}. ولنسميهما~$\pi_1$ و$\pi_2$.
+وبحسب~\olref{defn:prf:two-prem}، يمكننا أخذ هذين~!!{proof}s وتوليد واحد
+جديد~($\pi_3$) بقاعدة~\RightR{\land} ثنائية المقدمة:
+\[
+\Axiom$!D, !E \fCenter !D$
+\Axiom$!D, !E \fCenter !E$
+\RightLabel{\RightR{\land}}
+\BinaryInf$!D, !E  \fCenter !D \land !E $
+\DisplayProof
+\]
+ومن~$\pi_3$ نحصل بدوره على~!!{proof}~$\pi_4$:
+\[
+\Axiom$!D, !E \fCenter !D$
+\Axiom$!D, !E \fCenter !E$
+\RightLabel{\RightR{\land}}
+\insertBetweenHyps{\hspace{5ex}}
+\BinaryInf$!D, !E  \fCenter !D \land !E $
+\LeftSubproofLabel{$\pi_3$}
+\RightLabel{\LeftR{\land}}
+\UnaryInf$!D \land !E  \fCenter !D \land !E$
+\RightSubproofLabel{$\pi_4$}
+\DisplayProof
+\]
+با استعمال قاعدة~\LeftR{\land} أحادية المقدمة (وبحسب
+\olref{defn:proof}\olref{defn:prf:one-prem}). والـ!!{proof} الجزئي
+المباشر للاستدلال الأخير في~$\pi_4$ هو~$\pi_3$. والـ!!{proof}s الجزئية
+المباشرة لاستدلال~\RightR{\land} هي~$\pi_1$ و$\pi_2$. وتشمل
+الـ!!{proof}s الجزئية لـ$\pi_4$ كلًا من~$\pi_1$ و$\pi_2$ و$\pi_3$
+و$\pi_4$ نفسه. ولدينا~$\pheight{\pi_1}=\pheight{\pi_2}=0$ و
+$\pheight{\pi_3}=1$ و$\pheight{\pi_4}=2$. وقد أثبتنا أن
+$\Log{G3c}\Proves[2] !D\land !E\Sequent !D\land !E$ لأي~$!D$ و$!E$
+ذريتين.
+\end{ex}
+
+\end{document}

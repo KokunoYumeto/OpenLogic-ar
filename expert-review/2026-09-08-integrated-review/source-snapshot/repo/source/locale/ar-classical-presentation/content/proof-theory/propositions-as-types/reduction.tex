@@ -1,0 +1,191 @@
+% part: intuitionistic-logic
+% chapter: propositions-as-types
+% section: reduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{pty}{red}
+
+\olsection{في الاختزال}
+
+في~!!{derivation}s الاستنباط الطبيعي تكون قاعدة~!!a{introduction} تتبعها
+قاعدة~!!a{elimination} التفافًا يمكن ``اختزاله''. فمثلًا، يلغي
+استدلال~$\Intro{\land}$ يتبعه~$\Elim{\land}$ أحدهما الآخر، لأن نتيجة
+$\Elim{\land}$ تكون دائمًا أحد حدي الاقتران الذي ينتجه~$\Intro{\land}$،
+ومقدمتا~$\Intro{\land}$ هما حدا الاقتران نفسيهما. ولذلك، إذا احتجنا إلى
+!!a{derivation} لأي من الحدين، أمكننا استعمال ذلك~!!{derivation} مباشرةً
+بغير إدخال الاقتران ثم حذفه. ولدينا:
+\begin{gather*}
+  \bottomAlignProof
+  \AxiomC{}
+  \RightLabel{$\delta_\OLMathNumeral{1}$}
+  \DeduceC{$!A_\OLMathNumeral{1}$}
+  \AxiomC{}
+  \RightLabel{$\delta_\OLMathNumeral{2}$}
+  \DeduceC{$!A_\OLMathNumeral{2}$}
+  \RightLabel{$\Intro{\land}$}
+  \BinaryInfC{$!A_\OLMathNumeral{1} \land !A_\OLMathNumeral{2}$}
+  \RightLabel{$\Elim{\land}_\OLId{latin-ordinary}{i}$}
+  \UnaryInfC{$!A_\OLId{latin-ordinary}{i}$}
+  \DisplayProof\bottomAlignProof
+  \quad
+  \redone
+  \quad
+  \AxiomC{}
+  \RightLabel{$\delta_\OLId{latin-ordinary}{i}$}
+  \DeduceC{$!A_\OLId{latin-ordinary}{i}$}
+  \DisplayProof
+\end{gather*}
+
+يسعنا أن ننظر في علاقة اختزال مماثلة على حدود البرهان المقابلة يقترحها هذا
+التبسيط. فإذا كان~$\OLId{latin-looped}{N}_\OLMathNumeral{1}$ حد برهان~$\delta_\OLMathNumeral{1}$ و$\OLId{latin-looped}{N}_\OLMathNumeral{2}$ حد برهان~$\delta_\OLMathNumeral{2}$،
+قلنا إن حد برهان البرهان الواقع على اليسار يختزل في خطوة واحدة إلى حد برهان
+البرهان الواقع على اليمين:
+\[
+  \proj{\OLId{latin-ordinary}{i}}{\pair{\OLId{latin-looped}{N}_\OLMathNumeral{1}}{\OLId{latin-looped}{N}_\OLMathNumeral{2}}} \redone \OLId{latin-looped}{N}_\OLId{latin-ordinary}{i}
+\]
+وهذه في حساب لامبدا المنمّط قاعدة \emph{اختزال بيتا} للنمط الضربي.
+
+يسمى في الاستنباط الطبيعي زوج من الاستدلالات، مثل~$\Intro{\land}$ يتبعه
+$\Elim{\land}$، أي زوج يخضع للاختزال، \emph{قطعًا}. وفي حساب لامبدا المنمّط
+يسمى الحد الواقع على يسار~$\redone$ \emph{ردكسًا}، والحد الواقع على يمينه
+\emph{مختزَلًا}. وعلى خلاف حساب لامبدا غير المنمّط، حيث لا يعد ردكسًا إلا
+$(\lambd[\OLId{latin-ordinary}{x}][\OLId{latin-looped}{N}])\OLId{latin-looped}{Q}$، يوسَّع نحو حساب لامبدا المنمّط ليشمل الحدود التي تحتوي
+$\pair{\OLId{latin-looped}{N}}{\OLId{latin-looped}{M}}$ و$\proj{\OLId{latin-ordinary}{i}}{\OLId{latin-looped}{N}}$ و$\inj[!A]{\OLId{latin-ordinary}{i}}{\OLId{latin-looped}{N}}$ و
+$\dcase{\OLId{latin-looped}{N}}{\OLId{latin-ordinary}{x}_\OLMathNumeral{1}}{\OLId{latin-looped}{M}_\OLMathNumeral{1}}{\OLId{latin-ordinary}{x}_\OLMathNumeral{2}}{\OLId{latin-looped}{M}_\OLMathNumeral{2}}$ و$\abort{!A}{\OLId{latin-looped}{N}}$، مع الردكسات المقابلة.
+
+ولدينا على هذا القياس اختزال للفصل:
+\begin{gather*}
+  \bottomAlignProof
+  \AxiomC{}
+  \RightLabel{$\delta$}
+  \DeduceC{$!A_\OLId{latin-ordinary}{i}$}
+  \RightLabel{$\Intro{\lor}$}
+  \UnaryInfC{$!A_\OLMathNumeral{1} \lor !A_\OLMathNumeral{2}$}
+  \AxiomC{$\Discharge{!A_\OLMathNumeral{1}}{\OLId{latin-ordinary}{x}_\OLMathNumeral{1}}$}
+  \RightLabel{$\delta_\OLMathNumeral{1}$}
+  \DeduceC{$!C$}
+  \AxiomC{$\Discharge{!A_\OLMathNumeral{2}}{\OLId{latin-ordinary}{x}_\OLMathNumeral{2}}$}
+  \RightLabel{$\delta_\OLMathNumeral{2}$}
+  \DeduceC{$!C$}
+  \DischargeRule{$\Elim{\lor}$}{\OLId{latin-ordinary}{x}_\OLMathNumeral{1},\OLId{latin-ordinary}{x}_\OLMathNumeral{2}}
+  \TrinaryInfC{$!C$}
+  \DisplayProof\bottomAlignProof
+  \quad
+  \redone
+  \quad
+  \AxiomC{}
+  \RightLabel{$\delta$}
+  \DeduceC{$!A_\OLId{latin-ordinary}{i}$}
+  \RightLabel{$\delta_\OLId{latin-ordinary}{i}$}
+  \DeduceC{$!C$}
+  \DisplayProof
+\end{gather*}
+ويقابل ذلك الاختزال الآتي على حدود البرهان:
+\begin{gather*}
+  \dcase{\inj[!A_{\OLMathNumeral{3}-\OLId{latin-ordinary}{i}}]{\OLId{latin-ordinary}{i}}{\OLId{latin-looped}{M}}}{\OLId{latin-ordinary}{x}_\OLMathNumeral{1}}{\OLId{latin-looped}{N}_\OLMathNumeral{1}}{\OLId{latin-ordinary}{x}_\OLMathNumeral{2}}{\OLId{latin-looped}{N}_\OLMathNumeral{2}}
+  \redone \Subst{\OLId{latin-looped}{N}_\OLId{latin-ordinary}{i}}{\OLId{latin-looped}{M}}{\OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{i}}.
+\end{gather*}
+حيث~$\OLId{latin-looped}{M}$ حد برهان~$\delta$، و$\OLId{latin-looped}{N}_\OLId{latin-ordinary}{i}$ حد برهان~$\delta_\OLId{latin-ordinary}{i}$. وهذه قاعدة اختزال
+بيتا للأنماط الجمعية. والترميز~$!A_{\OLMathNumeral{3}-\OLId{latin-ordinary}{i}}$ في الحقن هو حد الفصل المحذوف من
+المقدمة. ويعني~$\Subst{\OLId{latin-looped}{N}_\OLId{latin-ordinary}{i}}{\OLId{latin-looped}{M}}{\OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{i}}$ إحلال~$\OLId{latin-looped}{M}$ محل كل وقوع حر للمتغير
+$\OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{i}$ في~$\OLId{latin-looped}{N}_\OLId{latin-ordinary}{i}$.
+
+ويقابل اختزال النمط الدالي حذف التفاف من~$\Intro\lif$ يتبعه~$\Elim\lif$.
+\begin{gather*}
+  \bottomAlignProof
+  \AxiomC{$\Discharge{!A}{\OLId{latin-ordinary}{x}}$}
+  \RightLabel{$\delta$}
+  \DeduceC{$!B$}
+  \DischargeRule{$\Intro{\lif}$}{\OLId{latin-ordinary}{x}}
+  \UnaryInfC{$!A \lif !B$}
+  \AxiomC{}
+  \RightLabel{$\delta'$}
+  \DeduceC{$!A$}
+  \RightLabel{$\Elim{\lif}$}
+  \BinaryInfC{$!B$}
+  \DisplayProof\bottomAlignProof
+  \quad
+  \redone
+  \quad
+  \AxiomC{}
+  \RightLabel{$\delta'$}
+  \DeduceC{$!A$}
+  \RightLabel{$\delta$}
+  \DeduceC{$!B$}
+  \DisplayProof
+\end{gather*}
+أما في حدود البرهان فليس ذلك سوى اختزال بيتا المعتاد:
+\begin{gather*}
+  (\lambd[\typeof{\OLId{latin-ordinary}{x}}{!A}][\OLId{latin-looped}{N}]\OLId{latin-looped}{M})
+  \redone \Subst{\OLId{latin-looped}{N}}{\OLId{latin-looped}{M}}{\OLId{latin-ordinary}{x}}.
+\end{gather*}
+
+وإلى جانب تحويلات الاختزال على~!!{proof}s، يمكننا النظر في تحويلات
+التبديل. وهي تنطبق على~!!{proof}s أو براهينها الجزئية التي تنتهي بقاعدة
+$\Elim{\lor}$ تتبعها قاعدة~!!{elimination} أخرى، مثلًا:
+\begin{multline*}
+  \bottomAlignProof
+  \AxiomC{}
+  \RightLabel{$\delta$}
+  \DeduceC{$!A_\OLId{latin-ordinary}{i}$}
+  \RightLabel{$\Intro{\lor}$}
+  \UnaryInfC{$!A_\OLMathNumeral{1} \lor !A_\OLMathNumeral{2}$}
+  \AxiomC{$\Discharge{!A_\OLMathNumeral{1}}{\OLId{latin-ordinary}{x}_\OLMathNumeral{1}}$}
+  \RightLabel{$\delta_\OLMathNumeral{1}$}
+  \DeduceC{$!C_\OLMathNumeral{1} \land !C_\OLMathNumeral{2}$}
+  \AxiomC{$\Discharge{!A_\OLMathNumeral{2}}{\OLId{latin-ordinary}{x}_\OLMathNumeral{2}}$}
+  \RightLabel{$\delta_\OLMathNumeral{2}$}
+  \DeduceC{$!C_\OLMathNumeral{1} \land !C_\OLMathNumeral{2}$}
+  \DischargeRule{$\Elim{\lor}$}{\OLId{latin-ordinary}{x}_\OLMathNumeral{1},\OLId{latin-ordinary}{x}_\OLMathNumeral{2}}
+  \TrinaryInfC{$!C_\OLMathNumeral{1} \land !C_\OLMathNumeral{2}$}
+  \RightLabel{\Elim{\land}[\OLId{latin-ordinary}{i}]}
+  \UnaryInfC{$!C_\OLId{latin-ordinary}{i}$}
+  \DisplayProof\bottomAlignProof
+  \quad
+  \redone
+  \\
+  \AxiomC{}
+  \RightLabel{$\delta$}
+  \DeduceC{$!A_\OLId{latin-ordinary}{i}$}
+  \RightLabel{$\Intro{\lor}$}
+  \UnaryInfC{$!A_\OLMathNumeral{1} \lor !A_\OLMathNumeral{2}$}
+  \AxiomC{$\Discharge{!A_\OLMathNumeral{1}}{\OLId{latin-ordinary}{x}_\OLMathNumeral{1}}$}
+  \RightLabel{$\delta_\OLMathNumeral{1}$}
+  \DeduceC{$!C_\OLMathNumeral{1} \land !C_\OLMathNumeral{2}$}
+  \RightLabel{\Elim{\land}[\OLId{latin-ordinary}{i}]}
+  \UnaryInfC{$!C_\OLId{latin-ordinary}{i}$}
+  \AxiomC{$\Discharge{!A_\OLMathNumeral{2}}{\OLId{latin-ordinary}{x}_\OLMathNumeral{2}}$}
+  \RightLabel{$\delta_\OLMathNumeral{2}$}
+  \DeduceC{$!C_\OLMathNumeral{1} \land !C_\OLMathNumeral{2}$}
+  \RightLabel{\Elim{\land}[\OLId{latin-ordinary}{i}]}
+  \UnaryInfC{$!C_\OLId{latin-ordinary}{i}$}
+  \DischargeRule{$\Elim{\lor}$}{\OLId{latin-ordinary}{x}_\OLMathNumeral{1},\OLId{latin-ordinary}{x}_\OLMathNumeral{2}}
+  \TrinaryInfC{$!C_\OLId{latin-ordinary}{i}$}
+  \DisplayProof
+\end{multline*}
+إذا كانت حدود برهان~$\delta$ و$\delta_\OLMathNumeral{1}$ و$\delta_\OLMathNumeral{2}$ هي، على الترتيب،
+$\OLId{latin-looped}{M}$ و$\OLId{latin-looped}{N}_\OLMathNumeral{1}$ و$\OLId{latin-looped}{N}_\OLMathNumeral{2}$، كانت قاعدة الاختزال المقابلة لحدود البرهان، أي حدود
+لامبدا، هي:
+\[
+  \proj{\OLId{latin-ordinary}{i}}{\dcase{\OLId{latin-looped}{M}}{\OLId{latin-ordinary}{x}_\OLMathNumeral{1}}{\OLId{latin-looped}{N}_\OLMathNumeral{1}}{\OLId{latin-ordinary}{x}_\OLMathNumeral{2}}{\OLId{latin-looped}{N}_\OLMathNumeral{2}}} \redone
+  \dcase{\OLId{latin-looped}{M}}{\OLId{latin-ordinary}{x}_\OLMathNumeral{1}}{\proj{\OLId{latin-ordinary}{i}}{\OLId{latin-looped}{N}_\OLMathNumeral{1}}}{\OLId{latin-ordinary}{x}_\OLMathNumeral{2}}{\proj{\OLId{latin-ordinary}{i}}{\OLId{latin-looped}{N}_\OLMathNumeral{2}}}.
+\]
+
+وبالطبع لا نحذف الالتفافات عند نهايات~!!{proof}s وحدها، بل نحذفها كذلك
+داخل~!!{proof}s بتطبيق تحويل الاختزال على~!!{proof} جزئي ينتهي بالتفاف.
+وكذلك ينطبق اختزال بيتا على الحدود الجزئية من حدود لامبدا. فإذا كان~$\OLId{latin-looped}{N}$
+حدًا جزئيًا من~$\OLId{latin-looped}{M}$، وكان~$\OLId{latin-looped}{N}\redone \OLId{latin-looped}{N}'$، أمكننا استبدال~$\OLId{latin-looped}{N}'$ بالحد الجزئي
+$\OLId{latin-looped}{N}$ في~$\OLId{latin-looped}{M}$ لنحصل على~$\OLId{latin-looped}{M}'$. ونكتب عندئذ كذلك~$\OLId{latin-looped}{M}\redone \OLId{latin-looped}{M}'$.
+وإذا وجدت متتالية
+$\OLId{latin-looped}{M}=\OLId{latin-looped}{M}_\OLMathNumeral{1}\redone \OLId{latin-looped}{M}_\OLMathNumeral{2}\redone \OLId{latin-looped}{M}_\OLMathNumeral{3}\redone\dots\redone \OLId{latin-looped}{M}_\OLId{latin-ordinary}{k}=\OLId{latin-looped}{M}'$، بما في ذلك
+حالة~$\OLId{latin-ordinary}{k}=\OLMathNumeral{1}$، أي~$\OLId{latin-looped}{M}=\OLId{latin-looped}{M}'$، كتبنا~$\OLId{latin-looped}{M}\red \OLId{latin-looped}{M}'$.
+
+يسمى~!!{proof} الذي لا يمكن تطبيق أي تحويل على أي~!!{proof} جزئي منه
+\emph{عاديًا}. وعلى نحو مماثل، يسمى حد لامبدا الذي لا يمكن تطبيق أي تحويل
+عليه أو على أي حد جزئي منه \emph{عاديًا}. ويسمى حد لامبدا العادي كذلك
+\emph{صيغة عادية}.
+
+\end{document}

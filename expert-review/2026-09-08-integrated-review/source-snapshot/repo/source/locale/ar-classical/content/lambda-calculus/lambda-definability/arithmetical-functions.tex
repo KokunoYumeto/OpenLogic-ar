@@ -1,0 +1,146 @@
+% Part: lambda-calculus
+% Chapter: lambda-definability
+% Section: arithmetical-functions
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{rep}{arf}
+\olsection{الدوال الحسابية \usetoken{S}{lambda definable}}
+
+\begin{prop}
+  \ollabel{prop:succ-ld}
+  دالة الخلف~$\Succ$ من الدوال !!{lambda definable}.
+\end{prop}
+
+\begin{proof}
+نختار الحد الذي !!{lambda define}s دالة الخلف كما يلي:
+\begin{align*}
+  \fn{Succ} & \ident \lambd[a][\lambd[fx][f ({a} f x)]].
+  \intertext{ومقتضى اصطلاحات الاختصار أن هذا هو}
+  \fn{Succ} & \ident \lambd[a][\lambd[f][\lambd[x][(f (({a} f) x))]]].
+  \intertext{تأخذ~$\fn{Succ}$ عددًا~$a$، فتعطي دالة أخرى هي~$\lambd[fx][f ({a} f x)]$.
+    وليست هذه الدالة في ذات كتابتها عدد تشيرش. لكنها تختزل إلى عدد تشيرش
+    متى كان~$a$ عدد تشيرش. وبيانه:}
+   (\lambd[a][\lambd[fx][f ({a} f x)]])\,\num{n} & \redone
+   \lambd[fx][f ({\num{n}} f x)].
+   \intertext{وفي الداخل يقع~$\num{n}fx$ موضع اختزال؛ فإن~$\num{n}$
+     هو $\lambd[fx][f^nx]$. ومن ثم~$\num{n}fx \red f^nx$،
+     فيكون اختزال الحد كله}
+   \fn{Succ}\, \num n & \red \lambd[fx][f(f^n(x))],
+\end{align*}
+وهذه هي~$\num{n+1}$.
+\end{proof}
+
+\begin{ex}
+  ولنبسط ما يجري عند تطبيق~$\fn{Succ}$ في~$\num{0}$،
+  أي في~$\lambd[fx][x]$، بإثبات الحدود تامة:
+  \begin{align*}
+    \fn{Succ}\, \num{0} & \ident (\lambd[a][\lambd[f][\lambd[x][(f (({a} f) x))]]])(\lambd[f][\lambd[x][x]])\\
+    & \redone \lambd[f][\lambd[x][(f (({(\lambd[f][\lambd[x][x]])} f) x))]] \\
+    & \redone \lambd[f][\lambd[x][(f ({(\lambd[x][x])} x))]] \\
+    & \redone \lambd[f][\lambd[x][(f x)]] \ident \num{1}\\
+  \end{align*}
+\end{ex}
+
+\begin{prob}
+  هذا الحد
+  \begin{align*}
+    \fn{Succ}' & \ident \lambd[{n}][\lambd[fx][{n} f (f x)]]
+  \end{align*}
+  !!{lambda define}s دالة الخلف أيضًا؛ فبيّن وجه ذلك.
+\end{prob}
+
+\begin{prop}
+  \ollabel{prop:add-ld}
+  دالة الجمع~$\Add$ من الدوال !!{lambda definable}.
+\end{prop}
+
+\begin{proof}
+لنا أن !!{lambda define} الجمع بأحد الحدين:
+\begin{align*}
+  \fn{Add} & \ident \lambd[{a}{b}][\lambd[fx][{a} f ({b} f x)]]
+\intertext{أو بالحد الآخر}
+  \fn{Add}' & \ident \lambd[{a}{b}][{a}\, \fn{Succ} \, {b}].
+\intertext{أما الأول فبيانه: تأخذ~$\fn{Add}$ العددين~$ {a}$ و$ {b}$.
+  ثم تعطي دالة تأخذ~$f$ و$x$ وتردّ~$af(bfx)$.
+  فإذا كان~$a$ و$b$ عددي تشيرش~$\num{n}$ و$\num{m}$،
+  اختزل الناتج إلى $f^{n+m}(x)$، أي إلى $f^{n}(f^{m}(x))$ نفسه.
+  وتفصيل الاختزال:}
+  (\lambd[{a}{b}][\lambd[fx][{a} f ({b} f x)]])\num n\,\num m & \red
+  \lambd[fx][\num{n}\, f (\num {m}\, f x)] \\
+  & \red \lambd[fx][\num{n}\, f (f^m x)] \\
+  & \red \lambd[fx][f^n (f^m x)] \ident \num {n+m}.
+\intertext{وأما التمثيل الثاني للجمع~$\fn{Add'}$ فطريقه غير ذلك.
+  إذ نطبقه في عددي تشيرش~$\num{n}$ و$\num{m}$ فنحصل على}
+\fn{Add}' \num n \,\num m
+& \red \num{n}\, \fn{Succ}\, \num{m}.
+\intertext{والأصل أن~$\num{n} f x$ يختزل دائمًا إلى~$f^n(x)$. فيلزم}
+  \num{n}\,  \fn{Succ}\, \num{m} & \red \fn{Succ}^n(\num{m}).
+\end{align*}
+ثم إن~$\fn{Succ}$ !!{lambda define}s دالة الخلف؛ وتكرار دالة
+الخلف~$n$ مرة ابتداءً من~$m$ يعطي~$n+m$.
+فآخر الاختزال إذن هو~$\num{n+m}$.
+\end{proof}
+
+\begin{prop}
+  \ollabel{prop:mult-ld}
+  الضرب !!{lambda definable} بهذا الحد:
+  \[
+  \fn{Mult} \ident \lambd[ab][\lambd[fx][a (b f) x]]
+  \]
+\end{prop}
+
+\begin{proof}
+  لنتتبع تطبيق~$\fn{Mult}$ في عددي تشيرش~$\num{n}$ و$\num{m}$.
+  يختزل~$\fn{Mult} \, \num{n} \, \num{m}$
+  إلى~$\lambd[fx][\num{n}(\num{m}\, f)x]$.
+  والحد~$\num{m} f$ يعرّف دالة تكرر تطبيق~$f$ في وسيطها~$m$ مرة.
+  ولذلك يكون فعل~$\num{n} (\num{m} f) x$
+  أن يكرر الدالة «طبّق~$f$ بمقدار~$m$ من المرات»
+  نفسها~$n$ مرة، بادئًا من~$x$.
+  فكأننا طبقنا~$f$ في~$x$ بمقدار~$n\cdot m$ من المرات؛
+  والصورة السوية لذلك هي عدد تشيرش~$\num{nm}$ بعينه.
+\end{proof}
+
+\begin{editorial}
+ويجوز مزيد من التبسيط باختزال~$\eta$ فنكتب
+\[
+  \fn{Mult} \ident \lambd[ab][\lambd[f][a (b f)]].
+\]
+
+غير أن هذا يقتضي تقديم شرح اختزال~$\eta$ أولًا.
+\end{editorial}
+
+\begin{prob}
+لنا أن !!{lambda define} الضرب بالحد
+\[
+  \fn{Mult}' \ident \lambd[ab][a (\fn{Add}\, b) \num{0}].
+\]
+بيّن كيف يؤدي هذا الحد المطلوب.
+\end{prob}
+
+وأما رفع العدد إلى قوة بحد~$\lambd$، إذا كان الأس موجبًا، فيمثله هذا الحد الموجز:
+\[
+  \fn{Exp} \ident \lambd[be][e b].
+\]
+فيه الوسيط الأول~$b$ هو الأساس، والثاني~$e$ هو الأس.
+ووجهه الحدسي أن~$e f$ هو~$f^e$ بمقتضى ترميز الأعداد الذي اخترناه.
+فإن خفي هذا الوجه، فطريق آخر لرفع العدد إلى قوة هو الضرب المتكرر،
+وهذا الحد يشمل الأس الصفري أيضًا:
+\[
+  \fn{Exp}' \ident \lambd[be][e (\fn{Mult}\, b) \num{1}].
+\]
+
+تنبيه على عبارة الأصل: أطلق الأصل الإنجليزي القول في الحد الأول،
+وإنما يصح ذلك مع الأس الموجب. فأما إن كان الأس صفرًا، فحاصل الاختزال
+الدالة المحايدة، وليست عدد تشيرش الممثل للواحد؛ فلا يتم بها شرط
+التعريف بلامبدا المتقدم. وأما حد الضرب المتكرر فيعطي عدد تشيرش
+الممثل للواحد. ونجعل هنا قيمة كل قوة ذات أس صفري واحدًا، ولو كان
+أساسها صفرًا، ليعم تعريف دالة القوى جميع أزواج الأعداد الطبيعية.
+
+وأما السابق والطرح على أعداد تشيرش فليسا بهذا اليسر الذي قد يظن؛
+وسبيلنا إلى تعريفهما هنا أن نستعمل ترميز الأزواج.
+
+\end{document}

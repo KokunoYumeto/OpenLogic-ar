@@ -1,0 +1,82 @@
+% Part: applied-modal-logics
+% Chapter: epistemic-logic
+% Section: language-epistemic-logic
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{aml}{el}{lan}
+
+\olsection{لغة منطق المعرفة}
+
+\begin{defn}
+لتكن~$\OLId{latin-looped}{G}$ مجموعة رموز الفاعلين. فاللغة الأساسية لمنطق المعرفة المتعدد
+الفاعلين تتركب مما يأتي:
+\begin{enumerate}
+  \tagitem{prvFalse}{الثابت القضي الدال على !!{falsity}~$\lfalse$.}{}
+  \tagitem{prvTrue}{الثابت القضي الدال على !!{truth}~$\ltrue$.}{}
+  \item مجموعة !!{denumerable} من ال!!{propositional variable}s:
+    $\Obj p_\OLMathNumeral{0}$، $\Obj p_\OLMathNumeral{1}$، $\Obj p_\OLMathNumeral{2}$، \dots
+  \item الروابط القضية: \startycommalist
+  \iftag{prvNot}{\ycomma $\lnot$ (النفي)}{}%
+  \iftag{prvAnd}{\ycomma $\land$ (العطف)}{}%
+  \iftag{prvOr}{\ycomma $\lor$ (الفصل)}{}%
+  \iftag{prvIf}{\ycomma $\lif$ (!!{conditional})}{}%
+  \iftag{prvIff}{\ycomma $\liff$ (!!{biconditional})}{}.
+  \item مؤثر المعرفة~$\Knows_\OLId{latin-ordinary}{a}$، حيث~$\OLId{latin-ordinary}{a} \in \OLId{latin-looped}{G}$.
+\end{enumerate}
+\end{defn}
+
+فإن اقتصر غرضنا على معرفة فاعل واحد استغنينا عن ذكر المجموعة~$\OLId{latin-looped}{G}$ وعن
+تمييز آحاد الفاعلين، ولم يبق إلا المؤثر الأساسي~$\Knows$.
+
+\begin{defn}
+وأما \emph{!!^{formula}s} اللغة المعرفية فتحد استقرائيًا كما يأتي:
+\begin{enumerate}
+\tagitem{prvFalse}{$\lfalse$ !!{formula} ذرية.}{}
+
+\tagitem{prvTrue}{$\ltrue$ !!{formula} ذرية.}{}
+
+\item كل متغير قضي~$\Obj p_\OLId{latin-ordinary}{i}$ هو !!{formula} (ذرية).
+
+\tagitem{prvNot}{إذا كانت~$!A$ !!a{formula}، كانت~$\lnot !A$
+  !!a{formula}.}{}
+
+\tagitem{prvAnd}{إذا كانت~$!A$ و$!B$ !!{formula}s، كانت
+  $(!A \land !B)$ !!a{formula}.}{}
+
+\tagitem{prvOr}{إذا كانت~$!A$ و$!B$ !!{formula}s، كانت
+  $(!A \lor !B)$ !!a{formula}.}{}
+
+\tagitem{prvIf}{إذا كانت~$!A$ و$!B$ !!{formula}s، كانت
+  $(!A \lif !B)$ !!a{formula}.}{}
+
+\tagitem{prvIff}{إذا كانت~$!A$ و$!B$ !!{formula}s، كانت
+  $(!A \liff !B)$ !!a{formula}.}{}
+
+\item إذا كانت~$!A$ !!a{formula} وكان~$\OLId{latin-ordinary}{a} \in \OLId{latin-looped}{G}$، كانت~$\Knows_\OLId{latin-ordinary}{a} !A$
+  !!a{formula}.
+
+\tagitem{limitClause}{لا شيء غير ذلك !!a{formula}.}{}
+\end{enumerate}
+\end{defn}
+
+وتكون !!a{formula}~$!A$ \emph{خالية من الجهة} إذا وفقط إذا لم يقع فيها
+$\Knows_\OLId{latin-ordinary}{a}$ لأي~$\OLId{latin-ordinary}{a} \in \OLId{latin-looped}{G}$.
+
+\begin{defn}
+  المؤثر~$\Knows$ يمثل معرفة الفرد؛ وأما~$\EKnows$، الذي يقرأ عادة
+  «يعلم الجميع»، فيمثل معرفة الجماعة. فإذا كان~$\OLId{latin-looped}{G}' \subseteq \OLId{latin-looped}{G}$ عرّفنا
+  $\EKnows_{\OLId{latin-looped}{G}'} !A$ اختصارًا لـ
+  \[\bigwedge_{\OLId{latin-ordinary}{b} \in \OLId{latin-looped}{G}'} \Knows_\OLId{latin-ordinary}{b} !A.\]
+\end{defn}
+
+وثمة معنى أقوى هو \emph{المعرفة المشتركة} بين جماعة الفاعلين~$\OLId{latin-looped}{G}$. فإذا
+كانت معلومة معرفة مشتركة بينهم، علمها كل واحد، وعلم كل واحد أن غيره
+يعلمها، وعلم كل واحد أن غيره يعلم أن غيره يعلمها~\dots من غير نهاية.
+فهذا أقوى كثيرًا من مجرد معرفة الجماعة؛ إذ يسهل بناء نماذج علائقية تكون
+فيها !!a{formula} معلومة للجماعة ولا تكون معرفة مشتركة. ونرمز بــ
+$\CKnows_\OLId{latin-looped}{G} !A$ إلى قولنا: «من المعرفة المشتركة بين~$\OLId{latin-looped}{G}$ أن~$!A$».
+
+\end{document}

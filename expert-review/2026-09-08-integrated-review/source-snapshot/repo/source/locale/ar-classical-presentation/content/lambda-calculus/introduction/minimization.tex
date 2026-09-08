@@ -1,0 +1,65 @@
+% Part: lambda-calculus
+% Chapter: introduction
+% Section: minimization
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{int}{min}
+\olsection{الدوال \usetoken{S}{lambda definable} مغلقة تحت التصغير}
+
+\begin{lem}
+لتكن~$\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y})$ !!{lambda definable}، ولتعرّف~$\OLId{latin-ordinary}{g}$ بالمعادلة
+\[
+\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{x}) \simeq \umin{\OLId{latin-ordinary}{y}}{\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y})}.
+\]
+فإن~$\OLId{latin-ordinary}{g}$ أيضًا !!{lambda definable}.
+\end{lem}
+
+\begin{proof}
+نجمل وجه البرهان أولًا. إذا أعطينا~$\OLId{latin-ordinary}{x}$، استعنا بحد النقطة الثابتة
+اللامبداوي~$\OLId{latin-looped}{Y}$ لتعريف دالة~$\OLId{latin-ordinary}{h}_\OLId{latin-ordinary}{x}(\OLId{latin-ordinary}{n})$ تطلب~$\OLId{latin-ordinary}{y}$ ابتداءً من~$\OLId{latin-ordinary}{n}$.
+وعندئذ يكون~$\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{x})$ هو~$\OLId{latin-ordinary}{h}_\OLId{latin-ordinary}{x}(\OLMathNumeral{0})$. أما~$\OLId{latin-ordinary}{h}_\OLId{latin-ordinary}{x}$ فنطلبها حلًا لمعادلة النقطة الثابتة الآتية:
+\[
+\OLId{latin-ordinary}{h}_\OLId{latin-ordinary}{x}(\OLId{latin-ordinary}{n}) \simeq
+\begin{cases}
+\OLId{latin-ordinary}{n} & \text{إذا كان $f(x,n) = 0$} \\
+\OLId{latin-ordinary}{h}_\OLId{latin-ordinary}{x}(\OLId{latin-ordinary}{n}+\OLMathNumeral{1}) & \text{في غير ذلك.}
+\end{cases}
+\]
+
+وأما التفصيل، فإن~$\OLId{latin-ordinary}{f}$، لكونها قابلة للتعريف بلامبدا، هي
+!!{lambda defined} بحد~$\OLId{latin-looped}{F}$. وقد سبق أن لدينا حد لامبدا~$\OLId{latin-looped}{D}$ يحقق
+$\OLId{latin-looped}{D}(\OLId{latin-looped}{M}, \OLId{latin-looped}{N}, \bar{\OLMathNumeral{0}}) \red \OLId{latin-looped}{M}$ و$\OLId{latin-looped}{D}(\OLId{latin-looped}{M}, \OLId{latin-looped}{N}, \bar{\OLMathNumeral{1}}) \red \OLId{latin-looped}{N}$. نثبت~$\OLId{latin-ordinary}{x}$ في هذه الخطوة؛ ولكي !!{lambda define} حدٌ الدالة~$\OLId{latin-ordinary}{h}_\OLId{latin-ordinary}{x}$،
+نطلب حدًا~$\OLId{latin-looped}{H}$ يعتمد على~$\OLId{latin-ordinary}{x}$ ويحقق
+\[
+\OLId{latin-looped}{H}(\num{\OLId{latin-ordinary}{n}}) \equiv \OLId{latin-looped}{D}(\num{\OLId{latin-ordinary}{n}}, \OLId{latin-looped}{H}(\OLId{latin-looped}{S}(\num{\OLId{latin-ordinary}{n}})), \OLId{latin-looped}{F}(\OLId{latin-ordinary}{x}, \num{\OLId{latin-ordinary}{n}})).
+\]
+ويتيح لنا حد النقطة الثابتة~$\OLId{latin-looped}{Y}$ هذا الإنشاء. نأخذ أولًا~$\OLId{latin-looped}{U}$ مساويًا للحد
+\[
+\lambd[\OLId{latin-ordinary}{h}][\lambd[\OLId{latin-ordinary}{z}][\OLId{latin-looped}{D}(\OLId{latin-ordinary}{z},(\OLId{latin-ordinary}{h}(Sz)),\OLId{latin-looped}{F}(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{z}))]],
+\]
+ثم نأخذ~$\OLId{latin-looped}{H}$ مساويًا للحد~$YU$. والمتغير الحر الوحيد في~$\OLId{latin-looped}{H}$ هو~$\OLId{latin-ordinary}{x}$.
+فلنثبت أن~$\OLId{latin-looped}{H}$ يفي بالمعادلة المذكورة.
+
+من تعريف~$\OLId{latin-looped}{Y}$ ينتج
+\[
+\OLId{latin-looped}{H} = YU \equiv \OLId{latin-looped}{U}(YU) = \OLId{latin-looped}{U}(\OLId{latin-looped}{H}).
+\]
+ومن ثم، لكل عدد طبيعي~$\OLId{latin-ordinary}{n}$،
+\begin{align*}
+\OLId{latin-looped}{H}(\num{\OLId{latin-ordinary}{n}}) & \equiv \OLId{latin-looped}{U}(\OLId{latin-looped}{H}, \num{\OLId{latin-ordinary}{n}}) \\
+& \red \OLId{latin-looped}{D}(\num{\OLId{latin-ordinary}{n}}, \OLId{latin-looped}{H}(\OLId{latin-looped}{S}(\num{\OLId{latin-ordinary}{n}})), \OLId{latin-looped}{F}(\OLId{latin-ordinary}{x}, \num{\OLId{latin-ordinary}{n}})),
+\end{align*}
+وهذا هو المطلوب. ثم إذا وضعنا العدد~$\num{\OLId{latin-ordinary}{m}}$ موضع~$\OLId{latin-ordinary}{x}$ في السطر الأخير،
+فإن التعبير يختزل إلى~$\num{\OLId{latin-ordinary}{n}}$ متى اختزل~$\OLId{latin-looped}{F}(\num{\OLId{latin-ordinary}{m}}, \num{\OLId{latin-ordinary}{n}})$ إلى~$\num{\OLMathNumeral{0}}$،
+وإلى~$\OLId{latin-looped}{H}(\OLId{latin-looped}{S}(\num{\OLId{latin-ordinary}{n}}))$ متى اختزل~$\OLId{latin-looped}{F}(\num{\OLId{latin-ordinary}{m}}, \num{\OLId{latin-ordinary}{n}})$ إلى عدد آخر.
+
+ويبقى أن نأخذ~$\OLId{latin-looped}{G}$ مساويًا لـ$\lambd[\OLId{latin-ordinary}{x}][\OLId{latin-looped}{H}(\num \OLMathNumeral{0})]$. فهذا الحد
+$\OLId{latin-looped}{G}$ !!{lambda define}s~$\OLId{latin-ordinary}{g}$: فإن~$\OLId{latin-looped}{G}(\num \OLId{latin-ordinary}{m})$، عند كل~$\OLId{latin-ordinary}{m}$،
+يختزل إلى~$\overline {\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{m})}$ إن كانت~$\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{m})$ معرّفة، وأما إن لم تكن معرّفة فلا صورة سوية له.
+\end{proof}
+
+\end{document}
+

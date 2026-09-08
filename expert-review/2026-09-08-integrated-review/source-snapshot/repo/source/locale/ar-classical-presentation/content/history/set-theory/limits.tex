@@ -1,0 +1,83 @@
+% Part: history
+% Chapter: set-theory
+% Section: limits
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+	
+\olfileid{his}{set}{limits}	
+
+\olsection{التعريف الصارم للنهايات}
+	
+والوجه المعتمد اليوم في حل الإشكال المتقدم أن نستغني عن المتناهيات في
+الصغر، وبيان ذلك فيما يأتي.
+
+قد رأينا أن تقريب الميل يتحسن كلما صغرت~$\beta$. بل كلما جعلنا~$\beta$
+أدنى ما نشاء من~$\OLMathNumeral{0}$، كان خارج قسمة الفرق
+$\frac{\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{c}+\beta)-\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{c})}{\beta}$ «أقرب بلا حد» إلى الميل المقصود. فلا حاجة
+بنا إلى سؤال ما يقع \emph{عند}~$\beta = \OLMathNumeral{0}$؛ وحسبنا أن ننظر إلى
+\emph{نزوع} خارج القسمة حين تدنو~$\beta$ من~$\OLMathNumeral{0}$.
+
+وعلى هذه الصياغة، تصير المسألة العامة أن نعطي معنى لعبارات من قبيل:
+\begin{center}
+كلما اقتربت~$\OLId{latin-ordinary}{x}$ من~$\OLId{latin-ordinary}{c}$، اقتربت~$\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{x})$ بلا حد من~$\ell$.
+\end{center}
+ويُرمز إلى ذلك على سبيل الإيجاز هكذا:
+\[
+\lim_{\OLId{latin-ordinary}{x} \rightarrow \OLId{latin-ordinary}{c}}\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{x}) = \ell.
+\]
+وفي القرن التاسع عشر أقام فايرشتراس، اعتماداً على عمل تقدم لكوشي، لهذا
+التعبير حداً بالغ الإحكام. وخلاصته أن في وسعنا أن نجعل $\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{x})$ من~$\ell$
+على أي مقدار من القرب نشاؤه، إذا قرّبنا~$\OLId{latin-ordinary}{x}$ من~$\OLId{latin-ordinary}{c}$ القدر الملائم. وبعبارة
+محررة، نجعل معنى $\lim_{\OLId{latin-ordinary}{x} \rightarrow \OLId{latin-ordinary}{c}} \OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{x}) = \ell$ هو:
+\[
+(\forall\epsilon > \OLMathNumeral{0})(\exists \delta > \OLMathNumeral{0})\forall \OLId{latin-ordinary}{x} \left(\OLMathNumeral{0} < |\OLId{latin-ordinary}{x}-\OLId{latin-ordinary}{c}| < \delta \lif |\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{x})-\ell| < \epsilon\right).
+\]
+والخطّان العموديان ها هنا علامة القيمة المطلقة؛ أي إن~$|\OLId{latin-ordinary}{x}| = \OLId{latin-ordinary}{x}$ متى
+كان~$\OLId{latin-ordinary}{x} \geq \OLMathNumeral{0}$، وإن~$|\OLId{latin-ordinary}{x}| = -\OLId{latin-ordinary}{x}$ متى كان~$\OLId{latin-ordinary}{x} < \OLMathNumeral{0}$. ورسم \emph{هذه} الدالة
+هو الآتي:
+\begin{center}
+	\begin{tikzpicture}[scale=1]
+	\draw[->, gray] (-2.5,0) -- (2.5,0) node[right] {$\OLId{latin-ordinary}{x}$};
+	\draw[->, gray] (0,-.2) -- (0,2.5) node[above] {$|\OLId{latin-ordinary}{x}|$};
+	
+	\foreach \x/\xtext in {-2/-2, -1/-1, 1/1, 2/2}
+	\draw[shift={(\x,0)}] (0pt,2pt) -- (0pt,-2pt) node[below] {{$\xtext$}};
+	
+	\foreach \y/\ytext in {1/1, 2/2}
+	\draw[shift={(0,\y)}] (2pt,0pt) -- (-2pt,0pt) node[left] {{$\ytext$}};
+	
+	\draw[thick] (-2.5, 2.5)--(0,0)--(2.5, 2.5);
+	\end{tikzpicture}
+\end{center}
+ومؤدى التعريف، تقريباً، أنك تستطيع إنزال «الخطأ» دون $\epsilon$
+(أي~$|\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{x}) - \ell| < \epsilon$)، بأن تختار مدخلات لا يزيد بعدها من~$\OLId{latin-ordinary}{c}$
+على~$\delta$ (أي~$|\OLId{latin-ordinary}{x} - \OLId{latin-ordinary}{c}| < \delta$).
+
+فإذا حددنا معنى النهاية استغنينا بها عن المتناهيات في الصغر استغناء
+تاماً، وقلنا إن ميل~$\OLId{latin-ordinary}{f}$ عند~$\OLId{latin-ordinary}{c}$ يعطى بالآتي:
+\[
+	{\OLId{latin-ordinary}{f}}'(\OLId{latin-ordinary}{c}) = \lim_{\OLId{latin-ordinary}{x} \rightarrow \OLMathNumeral{0}}\left(\frac{\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{c} +\OLId{latin-ordinary}{x}) - \OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{c})}{\OLId{latin-ordinary}{x}}\right) \text{ إذا كانت النهاية موجودة}.
+\]
+ولا بد من فهم الحاجة إلى القيد «إذا كانت النهاية موجودة». ولنعتبر المثال
+اليسير~$\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x}) = |\OLId{latin-ordinary}{x}|$، وهو الذي تقدم رسمه. فإن~$\OLId{latin-ordinary}{f}'(\OLMathNumeral{0})$ لا حد صحيح لها؛ إذ
+إذا دنونا من~$\OLMathNumeral{0}$ «من اليمين» كان الميل أبداً~$\OLMathNumeral{1}$، وإذا دنونا من~$\OLMathNumeral{0}$ «من
+اليسار» كان أبداً~$-\OLMathNumeral{1}$؛ فلا تكون النهاية موجودة. ولهذا نقول إن
+الدالة~$\OLId{latin-ordinary}{f}$ \emph{قابلة للاشتقاق} عند~$\OLId{latin-ordinary}{x}$ إذا وفقط إذا وُجدت هذه النهاية.
+
+وهكذا عالجنا الاشتقاق بمفهوم \emph{النهاية}، وبهذا المفهوم نفسه نحدّ
+الدالة \emph{المتصلة}. (وقد تنبّه بولتسانو إلى ذلك بحلول سنة \OLClassicalDigits{1817}.)
+وطريقة كوشي--فايرشتراس في الاتصال هي: أن الدالة~$\OLId{latin-ordinary}{f}$ تكون، على وجه
+التقريب، متصلة عند نقطة إذا أمكنك، كلما طلبت دقة معلومة في مخرجها، أن
+تضمنها باشتراط دقة معلومة في مدخلها. وعلى التحقيق، تكون~$\OLId{latin-ordinary}{f}$ متصلة عند~$\OLId{latin-ordinary}{c}$
+إذا كان الفرق بين~$\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{c} + \OLId{latin-ordinary}{x})$ و$\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{c})$ نفسها يدنو من~$\OLMathNumeral{0}$ كلما دنت~$\OLId{latin-ordinary}{x}$ من
+الصفر. أي إن~$\OLId{latin-ordinary}{f}$ \emph{متصلة} عند~$\OLId{latin-ordinary}{c}$ إذا وفقط إذا كان
+~$\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{c}) = \lim_{\OLId{latin-ordinary}{x} \rightarrow \OLId{latin-ordinary}{c}} \OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x})$.
+
+ولو استزدنا من هذا دخلنا في التحليل الحقيقي، وليس هو مقصدنا، وإنما مقصدنا
+نظرية المجموعات. فلنقف عند حاصل الأمر: تعلم الرياضيون في القرن التاسع
+عشر أن يستغنوا عن المتناهيات في الصغر بمفهوم \emph{النهاية} المحدود حداً
+محكماً.
+
+\end{document}

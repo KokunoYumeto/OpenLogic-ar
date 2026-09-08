@@ -1,0 +1,122 @@
+% Part: model-theory
+% Chapter: models-of-arithmetic
+% Section: computable-models
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{mar}{cmp}
+\section{نماذج الحساب القابلة للحساب}
+
+\begin{explain}
+للنموذج القياسي~$\Struct{N}$ مزيتان: مجاله الأعداد الطبيعية
+$\Nat$، وهي الأشياء المقصودة بالكلام في لغة الحساب، والحد
+العددي القياسي~$\num{\OLId{latin-ordinary}{n}}$ يدل فيه على~$\OLId{latin-ordinary}{n}$ نفسه. ثم إن تأويل
+كل رمز غير منطقي من~$\Lang{L_A}$ \emph{قابل للحساب}.
+فالدوال التي تؤول الخلف والجمع والضرب، أعني
+$\Assign{\prime}{\OLId{latin-looped}{N}}$ و$\Assign{+}{\OLId{latin-looped}{N}}$ و$\Assign{\times}{\OLId{latin-looped}{N}}$،
+دوال عددية قابلة للحساب بآلة تورنغ، بل تقبل التعريف
+بالاستدعاء البدائي. وكذلك علاقة الأصغر من في~$\Struct{N}$،
+أي $\Assign{<}{\OLId{latin-looped}{N}}$، قابلة للقرار.
+
+أما النماذج غير القياسية للنظريات الحسابية، كـ$\Th{Q}$
+و$\Th{PA}$، فلا تخلو من عناصر غير قياسية؛ ولهذا تُعرض
+مجالاتها عادةً مشتملة على !!{element}s زائدة على~$\Nat$.
+غير أن كل !!{structure} قابلة للعد وغير منتهية يمكن نقلها
+إلى أي مجموعة !!{denumerable}، ومنها~$\Nat$.
+فتوجد إذن نماذج غير قياسية مجالها~$\Nat$ نفسه.
+وفي نموذج كهذا~$\Struct{M}$ لا تؤدي الأعداد كلها أدوارها
+المعتادة؛ فلا بد من $\OLId{latin-ordinary}{k}$ يختلف عن $\Value{\num{\OLId{latin-ordinary}{n}}}{\OLId{latin-looped}{M}}$
+لكل~$\OLId{latin-ordinary}{n} \in \Nat$.
+\end{explain}
+
+\begin{defn}
+تكون !!^a{structure}~$\Struct{M}$ للغة $\Lang{L_A}$ \emph{قابلة
+للحساب} إذا وفقط إذا كان $\Domain{\OLId{latin-looped}{M}}=\Nat$، وكانت
+$\Assign{\prime}{\OLId{latin-looped}{M}}$ و$\Assign{+}{\OLId{latin-looped}{M}}$ و$\Assign{\times}{\OLId{latin-looped}{M}}$ دوال قابلة
+للحساب، وكانت $\Assign{<}{\OLId{latin-looped}{M}}$ علاقة قابلة للقرار.
+\end{defn}
+
+\begin{ex}\ollabel{ex:comp-model-q}
+تذكر البنية $\Struct{K}$ من \olref[mdq]{ex:model-K-of-Q}. كان مجالها
+$\Domain{\OLId{latin-looped}{K}}=\Nat \cup \{\OLId{latin-ordinary}{a}\}$ وتفسيراتها
+\begin{align*}
+  \Assign{\Obj{0}}{\OLId{latin-looped}{K}} & = \OLMathNumeral{0}\\
+  \Assign{\prime}{\OLId{latin-looped}{K}}(\OLId{latin-ordinary}{x}) & =
+  \begin{cases}
+    \OLId{latin-ordinary}{x}+\OLMathNumeral{1} & \text{إذا كان $x\in \Nat$}\\
+    \OLId{latin-ordinary}{a} & \text{إذا كان $x = a$}
+  \end{cases}\\
+  \Assign{+}{\OLId{latin-looped}{K}}(\OLId{latin-ordinary}{x}, \OLId{latin-ordinary}{y}) & =
+  \begin{cases}
+    \OLId{latin-ordinary}{x}+\OLId{latin-ordinary}{y} & \text{إذا كان $x$ و$y \in\Nat$}\\
+    \OLId{latin-ordinary}{a} & \text{فيما عدا ذلك}
+  \end{cases}\\
+  \Assign{\times}{\OLId{latin-looped}{K}}(\OLId{latin-ordinary}{x}, \OLId{latin-ordinary}{y}) & =
+  \begin{cases}
+    xy & \text{إذا كان $x$ و$y \in\Nat$}\\
+    \OLMathNumeral{0} & \text{إذا كان $x=0$ أو $y=0$}\\
+    \OLId{latin-ordinary}{a} & \text{فيما عدا ذلك}\\
+  \end{cases}\\
+  \Assign{<}{\OLId{latin-looped}{K}} & =
+  \Setabs{\tuple{\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y}}}{\OLId{latin-ordinary}{x}, \OLId{latin-ordinary}{y} \in \Nat \text{ و } \OLId{latin-ordinary}{x}<\OLId{latin-ordinary}{y}} \cup
+  \Setabs{\tuple{\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{a}}}{\OLId{latin-ordinary}{x} \in \Domain{\OLId{latin-looped}{K}}}
+\end{align*}
+ومع ذلك فإن $\Domain{\OLId{latin-looped}{K}}$~!!{denumerable}، فتساوي~$\Nat$
+عددًا. ومن أمثلة ذلك الدالة $\OLId{latin-ordinary}{g}\colon \Nat \to \Domain{\OLId{latin-looped}{K}}$
+ذات $\OLId{latin-ordinary}{g}(\OLMathNumeral{0})=\OLId{latin-ordinary}{a}$ و$\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{n})=\OLId{latin-ordinary}{n}-\OLMathNumeral{1}$ لـ$\OLId{latin-ordinary}{n}>\OLMathNumeral{0}$؛ فهي !!a{bijection}.
+نجعلها تشاكلًا بين نموذج جديد~$\Struct{K'}$ لـ$\Th{Q}$
+والبنية $\Struct{K}$. ولا بد عند بناء $\Struct{K'}$
+من تغيير الدوال والعلاقات المسندة إلى رموز $\Lang{L_A}$،
+لأن !!{element}s أخرى من~$\Nat$ ستقوم مقام الأعداد
+القياسية وغير القياسية.
+
+فالعدد $\OLMathNumeral{0}$ يقوم الآن مقام~$\OLId{latin-ordinary}{a}$، لا مقام أصغر عدد قياسي؛
+والقائم مقام أصغر عدد قياسي هو~$\OLMathNumeral{1}$. لذلك نضع
+$\Assign{\Obj{0}}{\OLId{latin-looped}{K}'}=\OLMathNumeral{1}$. ويتغير تأويل الخلف كذلك:
+فالعدد القياسي في هذا النموذج، أي $\OLId{latin-ordinary}{n}>\OLMathNumeral{0}$، يرسل إلى
+$\OLId{latin-ordinary}{n}+\OLMathNumeral{1}$. وأما $\OLMathNumeral{0}$ فيقوم مقام~$\OLId{latin-ordinary}{a}$، وهو خلف نفسه،
+فنضع $\Assign{\prime}{\OLId{latin-looped}{K}'}(\OLMathNumeral{0})=\OLMathNumeral{0}$. وعلى هذا النحو
+يكون تأويل الجمع والضرب:
+\begin{align*}
+\Assign{+}{\OLId{latin-looped}{K}'}(\OLId{latin-ordinary}{x}, \OLId{latin-ordinary}{y}) & =
+  \begin{cases}
+    \OLId{latin-ordinary}{x}+\OLId{latin-ordinary}{y}-\OLMathNumeral{1} & \text{إذا كان $x$ و$y >0$}\\
+    \OLMathNumeral{0} & \text{فيما عدا ذلك}
+  \end{cases}\\
+  \Assign{\times}{\OLId{latin-looped}{K}'}(\OLId{latin-ordinary}{x}, \OLId{latin-ordinary}{y}) & =
+  \begin{cases}
+    \OLMathNumeral{1} & \text{إذا كان $x = 1$ أو $y = 1$}\\
+    xy - \OLId{latin-ordinary}{x} - \OLId{latin-ordinary}{y} + \OLMathNumeral{2} & \text{إذا كان $x$ و$y > 1$}\\
+    \OLMathNumeral{0} & \text{فيما عدا ذلك}\\
+  \end{cases}
+\end{align*}
+ولدينا $\tuple{\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y}} \in \Assign{<}{\OLId{latin-looped}{K}'}$ إذا وفقط إذا كان $\OLId{latin-ordinary}{x}<\OLId{latin-ordinary}{y}$ و
+$\OLId{latin-ordinary}{x}>\OLMathNumeral{0}$ و$\OLId{latin-ordinary}{y}>\OLMathNumeral{0}$، أو إذا كان $\OLId{latin-ordinary}{y}=\OLMathNumeral{0}$.
+
+هذه كلها دوال قابلة للحساب على الأعداد الطبيعية،
+و$\Assign{<}{\OLId{latin-looped}{K}'}$ علاقة قابلة للقرار على~$\Nat$.
+لكن قابلية الحساب لا تجعلها الخلف والجمع والضرب
+المعتادة على~$\Nat$، ولا تجعل $\Assign{<}{\OLId{latin-looped}{K}'}$
+هي العلاقة~$<$ المعتادة على~$\Nat$.
+\end{ex}
+
+\begin{prob}
+أعط !!a{structure}~$\Struct{L'}$ ذات $\Domain{\OLId{latin-looped}{L}'}=\Nat$ ومتشاكلة مع
+$\Struct{L}$ من \olref[mod][mar][mdq]{ex:model-L-of-Q}.
+\end{prob}
+
+\begin{explain}
+تدل \Olref{ex:comp-model-q} على وجود نماذج غير قياسية
+قابلة للحساب لـ$\Th{Q}$ على المجال~$\Nat$.
+وأما $\Th{PA}$، ومن ثم $\Th{TA}$، فلا تقبل مثل ذلك،
+كما تقضي المبرهنة الآتية.
+\end{explain}
+
+\begin{thm}[مبرهنة تننباوم]
+كل نموذج قابل للحساب لـ$\Th{PA}$ قياسي؛ أي إن $\Struct{N}$ هو النموذج
+الوحيد حتى التشاكل.
+\end{thm}
+
+\end{document}

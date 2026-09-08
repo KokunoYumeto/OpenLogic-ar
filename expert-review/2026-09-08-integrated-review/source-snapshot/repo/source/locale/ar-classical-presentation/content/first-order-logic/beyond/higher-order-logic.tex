@@ -1,0 +1,113 @@
+% Part: first-order-logic
+% Chapter: beyond
+% Section: higher-order-logic
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{byd}{hol}
+
+\olsection{منطق الرتب العليا}
+
+بالانتقال من الرتبة الأولى إلى الثانية صار لنا أن نتناول، في
+اللغة الصورية نفسها، مجموعات الأشياء التي في !!{domain}
+الرتبة الأولى. ولا موجب للوقوف هنا: ففي الرتبة الثالثة نتناول
+مجموعات من مجموعات الأشياء، أو مجموعات تجمع الأشياء ومجموعاتها؛
+وفي الرابعة مجموعات من تلك الأنواع. ويتكرر هذا البناء كلما شئنا.
+
+وكثيرًا ما يُصاغ منطق الرتب العليا بالدوال بدل العلاقات، ولا
+فرق جوهريًا بين الوجهين بعد إجراء المطابقات الطبيعية. فلنأخذ
+«أصنافًا» أساسية $\OLId{latin-looped}{A}$، و$\OLId{latin-looped}{B}$، و$\OLId{latin-looped}{C}$، و~\dots، نسميها من الآن
+«أنماطًا»، ولننشئ أنماطًا أخرى بالشرط الآتي:
+\begin{quote}
+إذا كان $\sigma$ و$\tau$ نمطين منتهيين، كان $\sigma \to \tau$ كذلك.
+\end{quote}
+الأنماط علامات تركيبية تصنّف الأشياء المقصودة في
+!!{domain}نا؛ فالنمط $\sigma \to \tau$ للأشياء التي هي دوال
+من أشياء النمط~$\sigma$ إلى أشياء النمط~$\tau$. ومن ذلك أن
+نضع نمطًا~$\Omega$ لقيمتي الصدق «صادق» و«كاذب»، ونمطًا~$\Nat$
+للأعداد الطبيعية. فعندئذ تكون أشياء النمط $\Nat \to \Omega$
+بمثابة العلاقات الأحادية، أي المجموعات الجزئية من~$\Nat$؛
+وأشياء النمط $\Nat \to
+\Nat$ دوال بين الأعداد الطبيعية؛ وأشياء النمط
+$(\Nat \to \Nat) \to \Nat$ «دوال دالية»، أي دوال من نمط أعلى
+ترسل الدوال إلى أعداد.
+
+ولنا أن نعتبر منطق الرتب العليا منطقًا متعدد الأصناف، كما
+فعلنا في الرتبة الثانية، فنجعل لكل نمط من الأشياء صنفًا.
+ولكن الأبين غالبًا أن نبني تركيبه من أصوله. فمن أمثلة ذلك
+تعريف الأنماط المنتهية بالاستقراء هكذا:
+\begin{enumerate}
+\item $\Nat$ نمط منتهٍ.
+\item إذا كان $\sigma$ و$\tau$ نمطين منتهيين، كان $\sigma
+  \to \tau$ كذلك.
+\item إذا كان $\sigma$ و$\tau$ نمطين منتهيين، كان $\sigma \times
+  \tau$ كذلك.
+\end{enumerate}
+يدل $\Nat$، حدسيًا، على نمط الأعداد الطبيعية، ويدل $\sigma \to
+\tau$ على نمط الدوال من~$\sigma$ إلى~$\tau$، ويدل $\sigma \times
+\tau$ على نمط أزواج الأشياء، أحدهما من~$\sigma$ والآخر من~$\tau$.
+ويمكننا عندئذ تعريف مجموعة من الحدود استقرائيًا كما يأتي:
+\begin{enumerate}
+\item لكل نمط~$\sigma$ مخزون من المتغيرات $\OLId{latin-ordinary}{x}$، و$\OLId{latin-ordinary}{y}$، و$\OLId{latin-ordinary}{z}$، و\dots
+  من النمط~$\sigma$.
+\item $\Obj 0$ حد من النمط~$\Nat$.
+\item $\Obj S$ (الخلف) حد من النمط $\Nat \to \Nat$.
+\item إذا كان $\OLId{latin-ordinary}{s}$ حدًا من النمط~$\sigma$، وكان $\OLId{latin-ordinary}{t}$ حدًا من النمط
+  $\Nat \to (\sigma \to \sigma)$، كان $\Obj{R}_{st}$ حدًا من النمط
+  $\Nat \to \sigma$.
+\item إذا كان $\OLId{latin-ordinary}{s}$ حدًا من النمط $\tau \to \sigma$ وكان $\OLId{latin-ordinary}{t}$ حدًا من
+  النمط~$\tau$، كان $\OLId{latin-ordinary}{s}(\OLId{latin-ordinary}{t})$ حدًا من النمط~$\sigma$.
+\item إذا كان $\OLId{latin-ordinary}{s}$ حدًا من النمط~$\sigma$ وكان $\OLId{latin-ordinary}{x}$ متغيرًا من
+  النمط~$\tau$، كان $\lambd[\OLId{latin-ordinary}{x}][\OLId{latin-ordinary}{s}]$ حدًا من النمط $\tau \to \sigma$.
+\item إذا كان $\OLId{latin-ordinary}{s}$ حدًا من النمط~$\sigma$ وكان $\OLId{latin-ordinary}{t}$ حدًا من
+  النمط~$\tau$، كان $\tuple{\OLId{latin-ordinary}{s}, \OLId{latin-ordinary}{t}}$ حدًا من النمط $\sigma \times
+  \tau$.
+\item إذا كان $\OLId{latin-ordinary}{s}$ حدًا من النمط~$\sigma \times \tau$، كان $\OLId{latin-ordinary}{p}_\OLMathNumeral{1}(\OLId{latin-ordinary}{s})$
+  حدًا من النمط~$\sigma$، و$\OLId{latin-ordinary}{p}_\OLMathNumeral{2}(\OLId{latin-ordinary}{s})$ حدًا من النمط~$\tau$.
+\end{enumerate}
+وتقريب معنى $\Obj{R}_{st}$ أنه الدالة التي تعرّف عوديًا بالمعادلتين
+\begin{align*}
+\Obj{R}_{st}(\OLMathNumeral{0}) & = \OLId{latin-ordinary}{s} \\
+\Obj{R}_{st}(\OLId{latin-ordinary}{x}+\OLMathNumeral{1}) & = \OLId{latin-ordinary}{t}(\OLId{latin-ordinary}{x}, \OLId{latin-looped}{R}_{st}(\OLId{latin-ordinary}{x})),
+\end{align*}
+ويدل $\tuple{\OLId{latin-ordinary}{s}, \OLId{latin-ordinary}{t}}$ على الزوج الذي مركبته الأولى~$\OLId{latin-ordinary}{s}$ ومركبته
+الثانية~$\OLId{latin-ordinary}{t}$، ويدل $\OLId{latin-ordinary}{p}_\OLMathNumeral{1}(\OLId{latin-ordinary}{s})$ و$\OLId{latin-ordinary}{p}_\OLMathNumeral{2}(\OLId{latin-ordinary}{s})$ على العنصرين الأول والثاني
+(«الإسقاطين») من~$\OLId{latin-ordinary}{s}$. وأما $\lambd[\OLId{latin-ordinary}{x}][\OLId{latin-ordinary}{s}]$ فيدل على الدالة~$\OLId{latin-ordinary}{f}$
+المعرفة بـ
+\[
+\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x}) = \OLId{latin-ordinary}{s}
+\]
+لكل~$\OLId{latin-ordinary}{x}$ من النمط~$\tau$؛ ومن ثم يعطينا البند (\OLClassicalDigits{6}) صورة من الاستيعاب،
+نعرّف بها الدوال باستعمال الحدود. وتُبنى ال!!{formula}s من
+عبارات ال!!{identity}~$\eq[\OLId{latin-ordinary}{s}][\OLId{latin-ordinary}{t}]$ بين حدود من النمط نفسه، والروابط
+القضوية المعتادة، والتسوير على الأنماط العليا. فنجعل
+المعادلات الأساسية الضابطة لهذه الحدود بديهيات للنسق، ونضمّ إليها
+قواعد المنطق المعتادة للمكممات وال!!{identity}.
+
+فإن زدنا على نسق الأنماط المنتهية نمطًا~$\Omega$ لقيم الصدق،
+زدنا معه بديهيات تضبط استعماله. بل يمكن، بحسن ترتيب التعريفات،
+الاستغناء عن ال!!{formula}s المركبة كلها بحدود من النمط~$\Omega$!{}
+ثم يعدّل نسق الإثبات على وفق ذلك، فنحصل في الجوهر على
+\emph{نظرية الأنماط البسيطة} التي وضعها ألونزو تشرش في
+ثلاثينيات القرن العشرين.
+
+ولدلالة الأنماط العليا وجوه، كما لدلالة الرتبة الثانية.
+ففي الدلالة التامة تتراوح متغيرات النمط $\sigma
+\to \tau$ على \emph{جميع} الدوال من أشياء النمط~$\sigma$
+إلى أشياء النمط~$\tau$. وهذه الدلالة أقوى من أن يكون لها
+نسق !!{derivation} فعّال تام. وأما الدلالة الأضعف، فتتألف فيها
+!!a{structure} من مجموعات~$\OLId{latin-looped}{T}_\tau$ لكل نمط~$\tau$، ومعها
+عمليات التطبيق والإسقاط وغيرها على الوجه المناسب. وبضبط هذه
+التفاصيل تثبت مبرهنات تمام لأنساق ال!!{derivation} من الأنواع
+الموصوفة آنفًا.
+
+ومن نفع منطق الأنماط العليا أنه يتسع لقدر كبير من الرياضيات
+على نحو طبيعي؛ فبدءًا من~$\Nat$ تُعرّف الأعداد الحقيقية والدوال
+المتصلة وما إليها. وله مزية خاصة في المنطق الحدسي، إذ تقبل
+الأنماط تأويلات بنائية واضحة. ويمكن بناء دلالات للأنماط العليا
+على المنطق الحدسي بدل الكلاسيكي، فتتضح بها تلك التأويلات؛ ولها
+من وجوه كثيرة فائدة أزيد من نظائرها الكلاسيكية.
+
+\end{document}

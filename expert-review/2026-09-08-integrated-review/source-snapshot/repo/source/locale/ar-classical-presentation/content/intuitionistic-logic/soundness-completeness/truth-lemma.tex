@@ -1,0 +1,97 @@
+% part: intuitionistic-logic
+% chapter: soundness-completeness
+% section: truth-lemma
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{sc}{tru}
+
+\olsection{لمّة الصدق}
+
+هذه اللمّة تبين الصلة بين الإشباع في النموذج القانوني وبين كون
+ال!!{formula}s من !!{element}s المجموعة الأولية~$\OLId{greek-variable}{Delta}$.
+
+\begin{lem}\ollabel{lem:truth}
+  متى كانت~$\OLId{greek-variable}{Delta}$ أولية، تحقق~$\mSat{\OLId{latin-looped}{M}(\OLId{greek-variable}{Delta})}{!A}[\sigma]$ إذا
+  وفقط إذا تحقق~$\OLId{greek-variable}{Delta}(\sigma) \Proves !A$.
+\end{lem}
+
+\begin{proof}
+  نستقرئ في تركيب~$!A$.
+  \begin{enumerate}
+    \item \indcase{!A}{\lfalse}{أولية~$\OLId{greek-variable}{Delta}(\sigma)$ تقتضي
+      اتساقها؛ فيثبت~$\OLId{greek-variable}{Delta}(\sigma) \Proves/ \indfrm$. والتعريف يقضي بـ
+      $\mSat/{\OLId{latin-looped}{M}(\OLId{greek-variable}{Delta})}{\indfrm}[\sigma]$.}
+    \item \indcase{!A}{p}{من تعريف~$\mSat{{}}{}$ نعلم أن
+      $\mSat{\OLId{latin-looped}{M}(\OLId{greek-variable}{Delta})}{\indfrm}[\sigma]$ إذا وفقط إذا كان
+      $\sigma \in \OLId{latin-looped}{V}(\OLId{latin-ordinary}{p})$، وهذا يكافئ
+      $\OLId{greek-variable}{Delta}(\sigma) \Proves \indfrm$.}
+    \item \indcase{!A}{\lnot !B}{وجه هذه الحالة كوجه الشرط الذي نتيجته
+      $\lfalse$، وتفصيله فيما يأتي. ليكن أولًا
+      $\OLId{greek-variable}{Delta}(\sigma)\Proves\lnot !B$. فكل~$\sigma'$ يحقق
+      $\OLId{latin-looped}{R}\sigma\sigma'$ يحقق كذلك
+      $\OLId{greek-variable}{Delta}(\sigma)\subseteq\OLId{greek-variable}{Delta}(\sigma')$، فيلزم
+      $\OLId{greek-variable}{Delta}(\sigma')\Proves\lnot !B$. ولو تحقق
+      $\mSat{\OLId{latin-looped}{M}(\OLId{greek-variable}{Delta})}{!B}[\sigma']$، لثبت بالاستقراء
+      $\OLId{greek-variable}{Delta}(\sigma')\Proves !B$، وذلك يناقض اتساق
+      $\OLId{greek-variable}{Delta}(\sigma')$. فلا يصدق~$!B$ في امتداد~$\sigma'$ أصلًا،
+      ومعناه~$\mSat{\OLId{latin-looped}{M}(\OLId{greek-variable}{Delta})}{\lnot !B}[\sigma]$.
+
+      وأما عكس هذا الاتجاه فنقيمه بطريق النقيض المقابل. ليكن
+      $\OLId{greek-variable}{Delta}(\sigma)\Proves/\lnot !B$؛ فيلزم
+      $\OLId{greek-variable}{Delta}(\sigma)\cup\{!B\}\Proves/\lfalse$. إذ لو اشتُق
+      $\lfalse$ بعد ضم~$!B$، لأعطى إدخال النفي
+      $\lnot !B$ من~$\OLId{greek-variable}{Delta}(\sigma)$. ونأخذ
+      $\tuple{!B,\lfalse}=\tuple{!B_\OLId{latin-ordinary}{n},!C_\OLId{latin-ordinary}{n}}$ لبعض~$\OLId{latin-ordinary}{n}$. فيكون
+      $\OLId{greek-variable}{Delta}(\sigma.\OLId{latin-ordinary}{n})=(\OLId{greek-variable}{Delta}(\sigma)\cup\{!B\})^*$، ويلزم
+      $\OLId{greek-variable}{Delta}(\sigma.\OLId{latin-ordinary}{n})\Proves !B$. فبالاستقراء
+      $\mSat{\OLId{latin-looped}{M}(\OLId{greek-variable}{Delta})}{!B}[\sigma.\OLId{latin-ordinary}{n}]$؛ ومع
+      $\OLId{latin-looped}{R}\sigma(\sigma.\OLId{latin-ordinary}{n})$ يثبت
+      $\mSat/{\OLId{latin-looped}{M}(\OLId{greek-variable}{Delta})}{\lnot !B}[\sigma]$.}
+    \item \indcase{!A}{!B \land
+      !C}{$\mSat{\OLId{latin-looped}{M}(\OLId{greek-variable}{Delta})}{\indfrm}[\sigma]$ يكافئ اجتماع
+      $\mSat{\OLId{latin-looped}{M}(\OLId{greek-variable}{Delta})}{!B}[\sigma]$ و
+      $\mSat{\OLId{latin-looped}{M}(\OLId{greek-variable}{Delta})}{!C}[\sigma]$. وبالاستقراء
+      $\mSat{\OLId{latin-looped}{M}(\OLId{greek-variable}{Delta})}{!B}[\sigma]$ إذا وفقط إذا كان
+      $\OLId{greek-variable}{Delta}(\sigma) \Proves !B$، ومثله في~$!C$. واجتماع
+      $\OLId{greek-variable}{Delta}(\sigma) \Proves !B$ و$\OLId{greek-variable}{Delta}(\sigma) \Proves !C$ يكافئ
+      $\OLId{greek-variable}{Delta}(\sigma) \Proves \indfrm$.}
+    \item \indcase{!A}{!B \lor
+      !C}{$\mSat{\OLId{latin-looped}{M}(\OLId{greek-variable}{Delta})}{\indfrm}[\sigma]$ يكافئ أحد الأمرين:
+      $\mSat{\OLId{latin-looped}{M}(\OLId{greek-variable}{Delta})}{!B}[\sigma]$ أو
+      $\mSat{\OLId{latin-looped}{M}(\OLId{greek-variable}{Delta})}{!C}[\sigma]$. وهما بالاستقراء يكافئان
+      $\OLId{greek-variable}{Delta}(\sigma) \Proves !B$ أو
+      $\OLId{greek-variable}{Delta}(\sigma) \Proves !C$. فلا يبقى إلا أن نبين أن هذين يكافئان
+      $\OLId{greek-variable}{Delta}(\sigma) \Proves \indfrm$. أما الذهاب من اليسار إلى
+      اليمين فبيّن، وأما الرجوع من اليمين إلى اليسار فمبناه
+      أولية~$\OLId{greek-variable}{Delta}(\sigma)$.}
+    \item \indcase{!A}{!B \lif !C}{نبدأ بإثبات النقيض المقابل للاتجاه
+      من اليسار إلى اليمين. ليكن
+      $\OLId{greek-variable}{Delta}(\sigma) \Proves/ !B \lif !C$؛ فيلزم
+      $\OLId{greek-variable}{Delta}(\sigma) \cup \{!B\} \Proves/ !C$. والزوج
+      $\tuple{!B, !C}$ هو~$\tuple{!B_\OLId{latin-ordinary}{n}, !C_\OLId{latin-ordinary}{n}}$ لبعض~$\OLId{latin-ordinary}{n}$، فيكون
+      $\OLId{greek-variable}{Delta}(\sigma.\OLId{latin-ordinary}{n}) = (\OLId{greek-variable}{Delta}(\sigma) \cup \{!B\})^*$، ويثبت
+      $\OLId{greek-variable}{Delta}(\sigma.\OLId{latin-ordinary}{n}) \Proves !B$ مع
+      $\OLId{greek-variable}{Delta}(\sigma.\OLId{latin-ordinary}{n}) \Proves/ !C$. وبالاستقراء نجد
+      $\mSat{\OLId{latin-looped}{M}(\OLId{greek-variable}{Delta})}{!B}[\sigma.\OLId{latin-ordinary}{n}]$ و
+      $\mSat/{\OLId{latin-looped}{M}(\OLId{greek-variable}{Delta})}{!C}[\sigma.\OLId{latin-ordinary}{n}]$. ولما كان
+      $\OLId{latin-looped}{R}\sigma(\sigma.\OLId{latin-ordinary}{n})$، لزم
+      $\mSat/{\OLId{latin-looped}{M}(\OLId{greek-variable}{Delta})}{\indfrm}[\sigma]$.
+
+      ولنأخذ الآن~$\OLId{greek-variable}{Delta}(\sigma) \Proves !B \lif !C$، مع
+      $\OLId{latin-looped}{R}\sigma\sigma'$. فبما أن
+      $\OLId{greek-variable}{Delta}(\sigma) \subseteq \OLId{greek-variable}{Delta}(\sigma')$، يلزم من
+      $\OLId{greek-variable}{Delta}(\sigma') \Proves !B$ أن
+      $\OLId{greek-variable}{Delta}(\sigma') \Proves !C$. أي إن كل~$\sigma'$ يحقق
+      $\OLId{latin-looped}{R}\sigma\sigma'$ يحقق أحد الأمرين:~$\OLId{greek-variable}{Delta}(\sigma') \Proves/ !B$ أو
+      $\OLId{greek-variable}{Delta}(\sigma') \Proves !C$. وبفرض الاستقراء، متى كان
+      $\OLId{latin-looped}{R}\sigma\sigma'$ كان إما
+      $\mSat/{\OLId{latin-looped}{M}(\OLId{greek-variable}{Delta})}{!B}[\sigma']$ وإما
+      $\mSat{\OLId{latin-looped}{M}(\OLId{greek-variable}{Delta})}{!C}[\sigma']$؛ فثبت
+      $\mSat{\OLId{latin-looped}{M}(\OLId{greek-variable}{Delta})}{\indfrm}[\sigma]$.}
+  \end{enumerate}
+\end{proof}
+
+\end{document}

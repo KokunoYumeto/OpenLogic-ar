@@ -1,0 +1,128 @@
+% Part: turing-machines
+% Chapter: machines-computations
+% Section: combining-machines
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{tur}{mac}{cmb}
+\olsection{تركيب آلات تورنغ}
+
+\begin{explain}
+كانت آلات أمثلتنا يسيرة نسبيًّا، على أن آلات تورنغ تحل كل مسألة تحلها لغة برمجة حديثة. ولبلوغ الأبنية الأعقد، نحتاج إلى معرفة كيف نركب الآلات؛ فنرد الإجراء المعقد إلى أجزاء أيسر منه، ونبني لكل جزء آلة، ثم نجمعها في آلة واحدة تتولى المسألة كلها. فمتى وجدنا تقسيمًا ملائمًا للمسألة أمكن إنجازها على مراحل بهذه الوسيلة. وستظهر أهمية هذا خاصة عند تناول مسألة التوقف في القسم التالي.
+
+فلنأخذ الآلتين $\OLId{latin-looped}{M}=\tuple{\OLId{latin-looped}{Q},\Sigma,\OLId{latin-ordinary}{q}_\OLMathNumeral{0},\delta}$ و$\OLId{latin-looped}{M}'=\tuple{\OLId{latin-looped}{Q}',\Sigma',\OLId{latin-ordinary}{q}_\OLMathNumeral{0}',\delta'}$. نريد أن يكون وضع الشريط بعد توقف $\OLId{latin-looped}{M}$ مبدأ تشغيل~$\OLId{latin-looped}{M}'$. ولإنشاء آلة واحدة $\OLId{latin-looped}{M}\frown \OLId{latin-looped}{M}'$ تؤدي ذلك، نصنع الآتي:
+\begin{enumerate}
+\item نغير أرقام حالات~$\OLId{latin-looped}{Q}'$ للآلة~$\OLId{latin-looped}{M}'$ أو أسماءها حتى لا تشترك $\OLId{latin-looped}{M}$ و~$\OLId{latin-looped}{M}'$ في حالة، أي $\OLId{latin-looped}{Q}\cap \OLId{latin-looped}{Q}'=\emptyset$.
+\item نجعل حالات $\OLId{latin-looped}{M}\frown \OLId{latin-looped}{M}'$ المجموعة $\OLId{latin-looped}{Q}\cup \OLId{latin-looped}{Q}'$.
+\item ونجعل الأبجدية $\Sigma\cup\Sigma'$.
+\item وحالة البداية~$\OLId{latin-ordinary}{q}_\OLMathNumeral{0}$.
+\item ونعين دالة الانتقال $\delta''$ بالحد:
+\[\delta''(\OLId{latin-ordinary}{q},\sigma) =
+    \begin{cases}
+      \delta(\OLId{latin-ordinary}{q},\sigma) & \text{إذا كان $q \in Q$ وكانت $\delta(q,\sigma)$ معرّفة}\\
+      \delta'(\OLId{latin-ordinary}{q},\sigma) & \text{إذا كان $q \in Q'$}\\
+      \tuple{\OLId{latin-ordinary}{q}_\OLMathNumeral{0}', \sigma, \TMstay} & \text{إذا كان $q \in Q$ وكانت
+      $\delta(q,\sigma)$ غير معرّفة}
+    \end{cases}\]
+\end{enumerate}
+فالمركبة تستعمل تعليمات~$\OLId{latin-looped}{M}$ ما دامت حالتها $\OLId{latin-ordinary}{q}\in \OLId{latin-looped}{Q}$، وتعليمات $\OLId{latin-looped}{M}'$ إذا كانت حالتها~$\OLId{latin-ordinary}{q}\in \OLId{latin-looped}{Q}'$. وإذا كانت في $\OLId{latin-ordinary}{q}\in \OLId{latin-looped}{Q}$ تقرأ~$\sigma$ ولا انتقال لـ$\OLId{latin-looped}{M}$ عليه، أي بلغنا موضع توقف $\OLId{latin-looped}{M}$، نقلناها إلى حالة بداية~$\OLId{latin-looped}{M}'$، من غير تغيير للشريط ولا لموضع الرأس.
+
+غير أن الآلة~$\OLId{latin-looped}{M}$، إن لم تكن منضبطة، لم يتعين لنا مكان الرأس عند توقف~$\OLId{latin-looped}{M}$. فلا يلزم أن تكون الخانة~$\OLMathNumeral{1}$ هي الممسوحة في تهيئة توقف~$\OLId{latin-looped}{M}$. فلا يغفل عن هذا عند تركيب الآلات.
+\end{explain}
+
+\begin{ex}
+\emph{تركيب الآلات:} لننشئ آلة تبدأ بكتلتين من $\TMstroke$ طولهما $\OLId{latin-ordinary}{n}$ و~$\OLId{latin-ordinary}{m}$، وتقف وفي الشريط كتلة واحدة فيها $\OLMathNumeral{2}(\OLId{latin-ordinary}{m}+\OLId{latin-ordinary}{n})$ من $\TMstroke$. ويكفينا لهذا تركيب آلتي الجمع والمضاعفة اللتين عرفناهما. فنبدأ بمخطط آلة الجمع:
+\[
+\begin{tikzpicture}[->,>=stealth',shorten >=\OLMathNumeral{1}pt,auto,node distance=\OLMathNumeral{2}.\OLMathNumeral{8}cm,
+                    semithick]
+  \tikzstyle{every state}=[fill=none,draw=black,text=black]
+
+  \node[initial,state] (\OLId{latin-looped}{A})              {$\OLId{latin-ordinary}{q}_\OLMathNumeral{0}$};
+  \node[state]         (\OLId{latin-looped}{B}) [right of=\OLId{latin-looped}{A}] {$\OLId{latin-ordinary}{q}_\OLMathNumeral{1}$};
+  \node[state]         (\OLId{latin-looped}{C}) [right of=\OLId{latin-looped}{B}] {$\OLId{latin-ordinary}{q}_\OLMathNumeral{2}$};
+
+  \path (\OLId{latin-looped}{A}) edge node {\TMtrans{\TMblank}{\TMstroke}{\TMstay}} (\OLId{latin-looped}{B})
+            edge [loop above] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (\OLId{latin-looped}{A})
+        (\OLId{latin-looped}{B}) edge [loop above] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (\OLId{latin-looped}{B})
+            edge node {\TMtrans{\TMblank}{\TMblank}{\TMleft}} (\OLId{latin-looped}{C})
+        (\OLId{latin-looped}{C}) edge [loop above] node {\TMtrans{\TMstroke}{\TMblank}{\TMstay}} (\OLId{latin-looped}{C});
+\end{tikzpicture}
+\]
+وعوضًا عن الوقوف في~$\OLId{latin-ordinary}{q}_\OLMathNumeral{2}$، نتابع الحساب لمضاعفة الناتج. وقد كانت آلة المضاعفة تمحو أول علامة من دخلها وتكتب علامتين في موضع خرج مستقل. فنزيد ما يرد الرأس إلى أول علامة من خرج آلة الجمع:
+\[
+\begin{tikzpicture}[->,>=stealth',shorten >=\OLMathNumeral{1}pt,auto,node distance=\OLMathNumeral{2}.\OLMathNumeral{8}cm,
+                    semithick]
+  \tikzstyle{every state}=[fill=none,draw=black,text=black]
+
+  \node[initial,state] (\OLId{latin-looped}{A})              {$\OLId{latin-ordinary}{q}_\OLMathNumeral{0}$};
+  \node[state]         (\OLId{latin-looped}{B}) [right of=\OLId{latin-looped}{A}] {$\OLId{latin-ordinary}{q}_\OLMathNumeral{1}$};
+  \node[state]         (\OLId{latin-looped}{C}) [right of=\OLId{latin-looped}{B}] {$\OLId{latin-ordinary}{q}_\OLMathNumeral{2}$};
+  \node[state]         (\OLId{latin-looped}{D}) [below left of=\OLId{latin-looped}{C}] {$\OLId{latin-ordinary}{q}_\OLMathNumeral{3}$};
+  \node[state]         (\OLId{latin-looped}{E}) [below left of=\OLId{latin-looped}{D}] {$\OLId{latin-ordinary}{q}_\OLMathNumeral{4}$};
+
+  \path (\OLId{latin-looped}{A}) edge node {\TMtrans{\TMblank}{\TMstroke}{\TMstay}} (\OLId{latin-looped}{B})
+            edge [loop above] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (\OLId{latin-looped}{A})
+        (\OLId{latin-looped}{B}) edge [loop above] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (\OLId{latin-looped}{B})
+            edge node {\TMtrans{\TMblank}{\TMblank}{\TMleft}} (\OLId{latin-looped}{C})
+        (\OLId{latin-looped}{C}) edge node {\TMtrans{\TMstroke}{\TMblank}{\TMleft}} (\OLId{latin-looped}{D})
+        (\OLId{latin-looped}{D}) edge [loop left] node {\TMtrans{\TMstroke}{\TMstroke}{\TMleft}} (\OLId{latin-looped}{D})
+            edge node[left, xshift=-\OLMathNumeral{2}mm] {\TMtrans{\TMendtape}{\TMendtape}{\TMright}} (\OLId{latin-looped}{E});
+\end{tikzpicture}
+\]
+وبعد ذلك يكفي وصل آلة المضاعفة بالحالة~$\OLId{latin-ordinary}{q}_\OLMathNumeral{4}$. فنغير أسماء حالاتها لتبدأ من~$\OLId{latin-ordinary}{q}_\OLMathNumeral{4}$ لا من~$\OLId{latin-ordinary}{q}_\OLMathNumeral{0}$، فلا تتكرر حالة البدء. ويكون المخطط المركب كما في \olref{fig:combined}.
+\begin{figure}
+\[
+\begin{tikzpicture}[->,>=stealth',shorten >=\OLMathNumeral{1}pt,auto,node distance=\OLMathNumeral{2}.\OLMathNumeral{8}cm,
+                    semithick]
+  \tikzstyle{every state}=[fill=none,draw=black,text=black]
+  \node[initial,state] (\OLId{latin-looped}{A})              {$\OLId{latin-ordinary}{q}_\OLMathNumeral{0}$};
+  \node[state]         (\OLId{latin-looped}{B}) [right of=\OLId{latin-looped}{A}] {$\OLId{latin-ordinary}{q}_\OLMathNumeral{1}$};
+  \node[state]         (\OLId{latin-looped}{C}) [right of=\OLId{latin-looped}{B}] {$\OLId{latin-ordinary}{q}_\OLMathNumeral{2}$};
+  \node[state]         (\OLId{latin-looped}{D}) [below left of=\OLId{latin-looped}{C}] {$\OLId{latin-ordinary}{q}_\OLMathNumeral{3}$};
+  \node[state]         (\OLId{latin-looped}{E}) [below left of=\OLId{latin-looped}{D}] {$\OLId{latin-ordinary}{q}_\OLMathNumeral{4}$};
+  \node[state]         (\OLMathNumeral{2}) [right of=\OLId{latin-looped}{E}] {$\OLId{latin-ordinary}{q}_\OLMathNumeral{5}$};
+  \node[state]         (\OLMathNumeral{3}) [right of=\OLMathNumeral{2}] {$\OLId{latin-ordinary}{q}_\OLMathNumeral{6}$};
+  \node[state]         (\OLMathNumeral{4}) [below of=\OLMathNumeral{3}] {$\OLId{latin-ordinary}{q}_\OLMathNumeral{7}$};
+  \node[state]         (\OLMathNumeral{5}) [left of=\OLMathNumeral{4}]  {$\OLId{latin-ordinary}{q}_\OLMathNumeral{8}$};
+  \node[state]         (\OLMathNumeral{6}) [left of=\OLMathNumeral{5}]  {$\OLId{latin-ordinary}{q}_\OLMathNumeral{9}$};
+
+  \path (\OLId{latin-looped}{A}) edge node {\TMtrans{\TMblank}{\TMstroke}{\TMstay}} (\OLId{latin-looped}{B})
+            edge [loop above] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (\OLId{latin-looped}{A})
+        (\OLId{latin-looped}{B}) edge [loop above] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (\OLId{latin-looped}{B})
+            edge node {\TMtrans{\TMblank}{\TMblank}{\TMleft}} (\OLId{latin-looped}{C})
+        (\OLId{latin-looped}{C}) edge node {\TMtrans{\TMstroke}{\TMblank}{\TMleft}} (\OLId{latin-looped}{D})
+        (\OLId{latin-looped}{D}) edge [loop left] node {\TMtrans{\TMstroke}{\TMstroke}{\TMleft}} (\OLId{latin-looped}{D})
+            edge node[left, xshift=-\OLMathNumeral{2}mm] {\TMtrans{\TMendtape}{\TMendtape}{\TMright}} (\OLId{latin-looped}{E})
+    (\OLId{latin-looped}{E}) edge node {\TMtrans{\TMstroke}{\TMblank}{\TMright}} (\OLMathNumeral{2})
+    (\OLMathNumeral{2}) edge [loop above] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (\OLMathNumeral{2})
+      edge node {\TMtrans{\TMblank}{\TMblank}{\TMright}} (\OLMathNumeral{3})
+    (\OLMathNumeral{3}) edge [loop above] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (\OLMathNumeral{3})
+        edge node {\TMtrans{\TMblank}{\TMstroke}{\TMright}} (\OLMathNumeral{4})
+    (\OLMathNumeral{4}) edge [loop below] node {\TMtrans{\TMblank}{\TMstroke}{\TMleft}} (\OLMathNumeral{4})
+        edge node {\TMtrans{\TMstroke}{\TMstroke}{\TMleft}} (\OLMathNumeral{5})
+    (\OLMathNumeral{5}) edge [loop below]  node {\TMtrans{\TMstroke}{\TMstroke}{\TMleft}} (\OLMathNumeral{5})
+        edge              node {\TMtrans{\TMblank}{\TMblank}{\TMleft}} (\OLMathNumeral{6})
+    (\OLMathNumeral{6}) edge [loop below] node {\TMtrans{\TMstroke}{\TMstroke}{\TMleft}} (\OLMathNumeral{6})
+        edge              node {\TMtrans{\TMblank}{\TMblank}{\TMright}} (\OLId{latin-looped}{E});
+\end{tikzpicture}
+\]
+\caption{تركيب آلة الجمع مع آلة المضاعفة}
+\ollabel{fig:combined}
+\end{figure}
+\end{ex}
+
+\begin{prop}
+إذا كانت $\OLId{latin-looped}{M}$ و$\OLId{latin-looped}{M}'$ منضبطتين، تحسبان على الترتيب $\OLId{latin-ordinary}{f}\colon
+    \Nat^\OLId{latin-ordinary}{k}\to\Nat$ و$\OLId{latin-ordinary}{f}'\colon\Nat\to\Nat$، كانت $\OLId{latin-looped}{M}\frown \OLId{latin-looped}{M}'$ منضبطة وحاسبة لـ~$\comp{\OLId{latin-ordinary}{f}}{\OLId{latin-ordinary}{f}'}$.
+\end{prop}
+
+\begin{proof}
+الآلة $\OLId{latin-looped}{M}$ منضبطة، فيكون الرأس على الخانة~$\OLMathNumeral{1}$ عند توقفها بخرج $\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{n}_\OLMathNumeral{1},\dots,\OLId{latin-ordinary}{n}_\OLId{latin-ordinary}{k})=\OLId{latin-ordinary}{m}$. فإذا نقلناها إلى حالة بداية~$\OLId{latin-looped}{M}'$، انتهى الحساب بخرج $\OLId{latin-ordinary}{f}'(\OLId{latin-ordinary}{m})$، وعاد الرأس عند التوقف إلى الخانة~$\OLMathNumeral{1}$. وتستوفى كذلك سائر شروط \olref[dis]{defn:disciplined}.
+\end{proof}
+
+\begin{prob}
+أنشئ آلة تورنغ منضبطة تحسب $\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x})=\OLId{latin-ordinary}{x}+\OLMathNumeral{2}$، بأن تأخذ~$\OLId{latin-looped}{M}$ من \cref{tur:mac:dis:prob:disc-succ} وتبني $\OLId{latin-looped}{M}\frown \OLId{latin-looped}{M}$.
+\end{prob}
+\end{document}

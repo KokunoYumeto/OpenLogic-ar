@@ -1,0 +1,67 @@
+% Part: lambda-calculus
+% Chapter: introduction
+% Section: minimization
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{int}{min}
+\olsection{الدوال \usetoken{S}{lambda definable} مغلقة تحت التصغير}
+
+\begin{lem}
+افترض أن~$f(x,y)$ !!{lambda definable}. ولتكن~$g$ معرّفة بـ
+\[
+g(x) \simeq \umin{y}{f(x,y)}.
+\]
+عندئذ تكون~$g$ !!{lambda definable}.
+\end{lem}
+
+\begin{proof}
+الفكرة التقريبية كما يأتي. إذا أعطينا~$x$، استعملنا حد النقطة الثابتة
+اللامبداوي~$Y$ لتعريف دالة~$h_x(n)$ تبحث عن~$y$ ابتداءً من~$n$؛ وعندئذ
+لا تكون~$g(x)$ إلا~$h_x(0)$. ويمكن التعبير عن~$h_x$ بوصفها حلًا لمعادلة
+نقطة ثابتة:
+\[
+h_x(n) \simeq
+\begin{cases}
+n & \text{إذا كان $f(x,n) = 0$} \\
+h_x(n+1) & \text{في غير ذلك.}
+\end{cases}
+\]
+
+وفيما يأتي التفاصيل. بما أن~$f$ قابلة للتعريف بلامبدا، فهي
+!!{lambda defined} بحد ما~$F$. وتذكر أن لدينا أيضًا حد لامبدا~$D$ بحيث
+$D(M, N, \bar{0}) \red M$ و$D(M, N, \bar{1}) \red N$. ولنثبت~$x$ مؤقتًا؛
+فلكي !!{lambda define} حد ما~$h_x$ نريد إيجاد حد~$H$ (يعتمد على~$x$) يحقق
+\[
+H(\num{n}) \equiv D(\num{n}, H(S(\num{n})), F(x, \num{n})).
+\]
+ويمكننا فعل ذلك باستعمال حد النقطة الثابتة~$Y$. أولًا، ليكن~$U$ هو الحد
+\[
+\lambd[h][\lambd[z][D(z,(h(Sz)),F(x,z))]],
+\]
+ثم ليكن~$H$ هو الحد~$YU$. ولاحظ أن المتغير الحر الوحيد في~$H$ هو~$x$.
+ولنبين أن~$H$ يحقق المعادلة أعلاه.
+
+بتعريف~$Y$ لدينا
+\[
+H = YU \equiv U(YU) = U(H).
+\]
+وبخاصة، لكل عدد طبيعي~$n$، لدينا
+\begin{align*}
+H(\num{n}) & \equiv U(H, \num{n}) \\
+& \red D(\num{n}, H(S(\num{n})), F(x, \num{n})),
+\end{align*}
+كما هو مطلوب. ولاحظ أنك إذا أحللت العدد~$\num{m}$ محل~$x$ في السطر
+الأخير، اختزل التعبير إلى~$\num{n}$ إذا اختزل~$F(\num{m}, \num{n})$
+إلى~$\num{0}$، واختزل إلى~$H(S(\num{n}))$ إذا اختزل
+$F(\num{m}, \num{n})$ إلى أي عدد آخر.
+
+ولإتمام البرهان، ليكن~$G$ هو~$\lambd[x][H(\num 0)]$. عندئذ
+$G$ !!{lambda define}s~$g$؛ أي إن~$G(\num m)$، لكل~$m$، يختزل
+إلى~$\overline {g(m)}$ إذا كانت~$g(m)$ معرّفة، ولا تكون له صورة سوية في
+غير ذلك.
+\end{proof}
+
+\end{document}

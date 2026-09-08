@@ -1,0 +1,92 @@
+% part: intuitionistic-logic
+% chapter: semantics
+% section: topological-semantics
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{sem}{top}
+
+\olsection{الدلالات الطوبولوجية}
+
+وللمنطق الحدسي وجه آخر من الدلالة، أساسه مفهوم الطوبولوجيا في الرياضيات.
+
+\begin{defn}
+  لتكن~$\OLId{latin-looped}{X}$ مجموعة. نعني بـ\emph{الطوبولوجيا على~$\OLId{latin-looped}{X}$} مجموعة
+  $\Top{O}\subseteq\Pow{\OLId{latin-looped}{X}}$ تتصف بالخواص المذكورة أدناه. وتدعى
+  !!{element}s~$\Top{O}$ \emph{المجموعات المفتوحة} لتلك الطوبولوجيا؛
+  وأما~$\OLId{latin-looped}{X}$ مأخوذة مع~$\Top{O}$ فتدعى \emph{فضاءً طوبولوجيًا}.
+  \begin{enumerate}
+  \item الخلو والفضاء كله من المجموعات المفتوحة:
+    $\emptyset$، $\OLId{latin-looped}{X} \in \Top{O}$.
+  \item لا يخرج التقاطع المنتهي عن المجموعات المفتوحة: فمن
+    $\OLId{latin-looped}{U}$، $\OLId{latin-looped}{V} \in \Top{O}$ يلزم~$\OLId{latin-looped}{U} \cap \OLId{latin-looped}{V} \in \Top{O}$.
+  \item وكذلك الاتحاد، أيًا كانت أسرة المجموعات: فإن كان
+    $\OLId{latin-looped}{U}_\OLId{latin-ordinary}{i} \in \Top{O}$ لكل~$\OLId{latin-ordinary}{i} \in \OLId{latin-looped}{I}$، كان
+    $\bigcup \Setabs{\OLId{latin-looped}{U}_\OLId{latin-ordinary}{i}}{\OLId{latin-ordinary}{i} \in \OLId{latin-looped}{I}} \in \Top{O}$.
+  \end{enumerate}
+\end{defn}
+
+وقد نقتصر على الرمز~$\OLId{latin-looped}{X}$ للدلالة على الفضاء الطوبولوجي متى عُلمت المجموعات
+المفتوحة من سياق الكلام. ولا يراد بذلك أن~$\OLId{latin-looped}{X}$ وحدها طوبولوجيا؛ فإن
+الطوبولوجيا أسرة المجموعات المفتوحة، وإنما تصير~$\OLId{latin-looped}{X}$ فضاءً طوبولوجيًا
+بانضمام تلك الأسرة إليها.
+
+\begin{defn}
+  \emph{النموذج الطوبولوجي} للمنطق القضي الحدسي هو الثلاثي
+  $\mModel{X}=\tuple{\OLId{latin-looped}{X},\Top{O},\OLId{latin-looped}{V}}$؛ فيه~$\Top{O}$ طوبولوجيا على~$\OLId{latin-looped}{X}$،
+  و$\OLId{latin-looped}{V}$ دالة تجعل لكل متغير قضي مجموعة مفتوحة من~$\Top{O}$.
+
+  فإذا أُعطي النموذج الطوبولوجي~$\mModel{X}$، عرّفنا~$\Prop{\OLId{latin-looped}{X}}{!A}$
+  بالاستقراء الآتي:
+  \begin{enumerate}
+  \item $\Prop{\OLId{latin-looped}{X}}{\lfalse}=\emptyset$؛
+  \item $\Prop{\OLId{latin-looped}{X}}{\OLId{latin-ordinary}{p}}=\OLId{latin-looped}{V}(\OLId{latin-ordinary}{p})$؛
+  \item $\Prop{\OLId{latin-looped}{X}}{!A \land !B}=\Prop{\OLId{latin-looped}{X}}{!A}\cap\Prop{\OLId{latin-looped}{X}}{!B}$؛
+  \item $\Prop{\OLId{latin-looped}{X}}{!A \lor !B}=\Prop{\OLId{latin-looped}{X}}{!A}\cup\Prop{\OLId{latin-looped}{X}}{!B}$؛
+  \item $\Prop{\OLId{latin-looped}{X}}{!A \lif !B}=\Interior{(\OLId{latin-looped}{X}\setminus\Prop{\OLId{latin-looped}{X}}{!A})\cup
+    \Prop{\OLId{latin-looped}{X}}{!B}}$.
+  \end{enumerate}
+  والمراد بـ~$\Interior{\OLId{latin-looped}{V}}$ الدالة التي تقابل المجموعة~$\OLId{latin-looped}{V} \subseteq \OLId{latin-looped}{X}$
+  بـ\emph{داخلها}: أي اتحاد المجموعات المفتوحة الواقعة فيها جميعًا.
+  وصورة هذا التعريف:
+  \[
+  \Interior{\OLId{latin-looped}{V}}=\bigcup\Setabs{\OLId{latin-looped}{U}}{\OLId{latin-looped}{U} \subseteq \OLId{latin-looped}{V} \text{ و } \OLId{latin-looped}{U} \in \Top{O}}.
+  \]
+\end{defn}
+
+وداخل كل مجموعة مفتوح، إذ هو اتحاد مجموعات مفتوحة؛ فثبت أن
+$\Prop{\OLId{latin-looped}{X}}{!A}$ مجموعة مفتوحة في كل حال.
+
+وعلى شدة تجريد هذه الدلالات، يمكن تقريب وجه اختيارها. لنجعل~!!{element}s،
+أي «نقاط»،~$\OLId{latin-looped}{X}$ مواضع يُحكم عندها على العبارات. فتكون النقاط التي تصدق
+عندها~$!A$، مأخوذة جملةً، هي القضية المعبر عنها بـ~$!A$. وليس كل مجموع
+من النقاط صالحًا لأن يكون قضية، بل الذي يصلح لذلك إنما هو
+!!{element}s~$\Top{O}$. ومعنى~$!A \Entails !B$ أن~$!B$ تصدق في كل
+نقطة تصدق فيها~$!A$؛ وهذا يكافئ
+$\Prop{\OLId{latin-looped}{X}}{!A}\subseteq\Prop{\OLId{latin-looped}{X}}{!B}$ لكل~$\OLId{latin-looped}{X}$. وأما عبارة
+المحال~$\lfalse$ فلا تصدق في نقطة أصلًا، ومن ثم~$\Prop{\OLId{latin-looped}{X}}{\lfalse}=\emptyset$.
+
+فلننظر الآن في صلة القضايا المعبر عنها بـ~$!B \land !C$ و$!B \lor !C$
+و$!B \lif !C$ بالقضيتين المعبر عنهما بـ~$!B$ و$!C$: ما الصلة التي
+تقتضيها صحة القوانين الحدسية، حتى يكون~$!A \Proves !B$ إذا وفقط إذا كان
+$\Prop{\OLId{latin-looped}{X}}{!A}\subseteq\Prop{\OLId{latin-looped}{X}}{!B}$؟ لا بد من~$\lfalse \Proves !A$ لكل
+$!A$، وهذا حاصل لأن~$\emptyset\subseteq \OLId{latin-looped}{U}$ لكل~$\OLId{latin-looped}{U}$. ومن
+$!B \land !C \Proves !B$ يلزم اشتراط
+$\Prop{\OLId{latin-looped}{X}}{!B \land !C}\subseteq\Prop{\OLId{latin-looped}{X}}{!B}$، وكذلك
+$\Prop{\OLId{latin-looped}{X}}{!B \land !C}\subseteq\Prop{\OLId{latin-looped}{X}}{!C}$. وأكبر ما يفي بالشرطين
+$\OLId{latin-looped}{W} \subseteq \OLId{latin-looped}{U}$ و$\OLId{latin-looped}{W} \subseteq \OLId{latin-looped}{V}$ هو~$\OLId{latin-looped}{U} \cap \OLId{latin-looped}{V}$. وعلى الجهة الأخرى،
+$!B \Proves !B \lor !C$ و$!C \Proves !B \lor !C$؛ فلا بد إذن من
+$\Prop{\OLId{latin-looped}{X}}{!B}\subseteq\Prop{\OLId{latin-looped}{X}}{!B \lor !C}$ و
+$\Prop{\OLId{latin-looped}{X}}{!C}\subseteq\Prop{\OLId{latin-looped}{X}}{!B \lor !C}$. وأصغر مجموعة~$\OLId{latin-looped}{W}$ تحقق
+$\OLId{latin-looped}{U} \subseteq \OLId{latin-looped}{W}$ و$\OLId{latin-looped}{V} \subseteq \OLId{latin-looped}{W}$ هي~$\OLId{latin-looped}{U} \cup \OLId{latin-looped}{V}$.
+
+وأما~$\lif$ فوجه تعريفها أدق: إذ تعبّر~$!A \lif !B$ عن أضعف قضية
+يلزم عنها~$!B$ إذا ضُمّت إليها~$!A$. وكون~$!A \lif !B$ مع~$!A$
+تستلزم~$!B$ ظاهر من~$(!A \lif !B)\land !A \Proves !B$. فالمطلوب أن تكون
+$\Prop{\OLId{latin-looped}{X}}{!A \lif !B}$ أعظم مجموعة مفتوحة يتحقق لها
+$\Prop{\OLId{latin-looped}{X}}{!A \lif !B}\cap\Prop{\OLId{latin-looped}{X}}{!A}\subseteq\Prop{\OLId{latin-looped}{X}}{!B}$؛ ومن هذا
+ينشأ التعريف المتقدم.
+
+\end{document}

@@ -1,0 +1,154 @@
+% Part: lambda-calculus
+% Chapter: lambda-definability
+% Section: primitive-recursive-functions
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{ldf}{prf}
+\olsection{الدوال العودية البدائية \usetoken{S}{lambda definable}}
+
+الدوال العودية البدائية، كما تقدم، هي الدوال التي تُبنى من الدوال
+الأساس~$\Zero$ و$\Succ$ و$\Proj{n}{i}$ بإعمال التركيب والعودية البدائية.
+
+\begin{lem}
+  \ollabel{lem:basic}
+  الدوال الأساس في العودية البدائية، وهي~$\Zero$ و$\Succ$
+  والإسقاطات~$\Proj{n}{i}$، كلها !!{lambda definable}.
+\end{lem}
+
+\begin{proof}
+فالحدود التي تكون بها هذه الدوال !!{lambda defined} هي:
+\begin{align*}
+  \fn{Zero} & \ident \lambd[a][\lambd[fx][x]]\\
+  \fn{Succ} & \ident \lambd[a][\lambd[fx][f (a f x)]] \\
+  \fn{Proj}^n_i & \ident \lambd[x_0\dots x_{n-1}][x_i]
+\end{align*}
+\end{proof}
+
+\begin{lem}
+  \ollabel{lem:comp} لتكن~$f$ ذات~$k$ من الوسائط، ولتكن
+  $g_0, \dots, g_{k-1}$ ذوات~$n$ من الوسائط؛ ولتكن هذه الدوال
+  !!{lambda definable} بالحدود~$F$ و$G_0$، \dots،~$G_{k-1}$.
+  فإذا عرّفت~$h$ منها بالتركيب، كانت~$h$ !!{lambda definable}
+  بالحد~$H$.
+\end{lem}
+
+\begin{proof}
+  نأخذ للحد الذي !!{lambda define}~$h$ ما يأتي:
+  \[
+  H \ident \lambd[x_0 \dots x_{n-1}][F\, (G_0 x_0 \dots
+    x_{n-1}) \dots (G_{k-1} x_0 \dots x_{n-1})]
+  \]
+  وصحة ذلك مما يثبت مباشرة، فنترك تفصيله تمرينًا.
+\end{proof}
+
+\begin{prob}
+  أكمل إثبات \olref[lam][ldf][prf]{lem:comp} ببيان أن
+  $H\num{n_0}\dots\num{n_{n-1}} \red \num{h(n_0, \dots,
+    n_{n-1})}$.
+\end{prob}
+
+وليس من شروط \olref{lem:comp} أن تكون~$f$ و$g_0$،
+\dots،~$g_{k-1}$ عودية بدائية؛ وإنما الشرط أن تكون كلية
+و!!{lambda definable}.
+
+\begin{lem}\ollabel{lem:prim}
+  لتكن~$f$ ذات~$n$ من الوسائط، و$g$ ذات~$n+2$ من الوسائط،
+  ولتكونا !!{lambda definable} بالحدين~$F$ و$G$. فإذا كانت الدالة
+  $h$ معرّفة من~$f$ و$g$ بالعودية البدائية، كانت~$h$ أيضًا
+  !!{lambda definable}.
+\end{lem}
+
+\begin{proof}
+  تعريف~$h$ هو بالمعادلتين
+  \begin{align*}
+    h(x_1, \dots, x_n, 0) &= f(x_1, \dots, x_n)\\
+    h(x_1, \dots, x_n, y+1) & = g(x_1, \dots, x_n, y, h(x_1, \dots, x_n, y)).
+  \end{align*}
+  ومعنى ذلك أن التحديث الذي تعينه الدالة~$g$ يكرر عدد~$y$ من المرات،
+  على أن يبدأ من الحالة~$f(x_1, \dots, x_n)$. وهذا هو بعينه النمط الذي يلائم
+  أعداد تشيرش، إذ حقيقتها أنها مكرّرات.
+
+  ونقتصر، تيسيرًا للكتابة، على~$n=1$: فيكون~$x$ وسيطًا واحدًا،
+  ويكون~$y$ وسيط العودية. والحد الذي تكون به~$h$ !!{lambda defined}
+  هو:
+  \begin{align*}
+    H \ident & \lambd[x][\lambd[y][\fn{Snd} (y
+        D \tuple{\num{0}, F x})]]
+    \intertext{حيث}
+    D \ident & \lambd[p][\tuple{\fn{Succ} (\fn{Fst}\, p), (G x
+          (\fn{Fst}\, p) (\fn{Snd}\, p))}]
+  \end{align*}
+  والحالة المحفوظة في أثناء التكرار زوج: أوله قيمة~$y$ في تلك
+  الخطوة، وثانيه قيمة~$h$ الموافقة لها. وفي كل خطوة ننشئ زوجًا جديدًا:
+  أوله خلف قيمة~$y$ الحالية، وثانيه قيمة~$h$ الجديدة التي تعينها~$g$.
+  فإذا استوفينا التكرار
+  أخذنا المركبة الثانية، فكانت القيمة النهائية لـ~$h$. ونحقق ذلك الآن.
+
+  المطلوب، لكل~$n$ و$m$، أن يكون~$H\,\num{n}\,\num{m} \red
+  \num{h(n,m)}$. ضع
+  $D_n \ident \Subst{D}{\num{n}}{x}$. ونثبت أولًا
+  $D_n^m \tuple{\num{0}, F\, \num{n}} \red
+  \tuple{\num{m}, \num{h(n, m)}}$ بالاستقراء على~$m$.
+
+  أما عند~$m=0$ فالمطلوب أن
+  $D_n^0 \tuple{\num{0}, F\, \num{n}} \red
+  \tuple{\num{0}, \num{h(n, 0)}}$.
+  لكن~$D_n^0 \tuple{\num{0}, F\, \num{n}}$ هو نفس الزوج
+  $\tuple{\num{0}, F\, \num{n}}$. ثم إن~$F$ !!{lambda define}s~$f$،
+  فيختزل هذا إلى~$\tuple{\num{0}, \num{f(n)}}$؛
+  ولأن~$f(n) = h(n, 0)$ فهذا هو~$\tuple{\num{0}, \num{h(n,0)}}$.
+
+  وأما خطوة الاستقراء، فافترض
+  $D_n^m \tuple{\num{0}, F\, \num{n}} \red
+  \tuple{\num{m}, \num{h(n, m)}}$. نريد أن يلزم منه
+  $D_n^{m+1} \tuple{\num{0}, F\, \num{n}} \red
+  \tuple{\num{m+1}, \num{h(n, m+1)}}$، وهذا ما تبينه الاختزالات:
+  \begin{align*}
+    D_n^{m+1} \tuple{\num{0}, F\, \num{n}}
+    & \ident D_n(D_n^{m} \tuple{\num{0}, F\, \num{n}})\\
+    & \red D_n\,\tuple{\num{m}, \num{h(n, m)}} \text{\qquad (بفرض الاستقراء)}\\
+    & \ident (\lambd[p][
+      \tuple{
+        \fn{Succ} (\fn{Fst}\, p), (G \, \num{n} (\fn{Fst}\, p) (\fn{Snd}\, p))
+    }]) \tuple{\num{m}, \num{h(n,m)}}\\
+    & \redone
+    \tuple{\fn{Succ} (\fn{Fst}\, \tuple{\num{m}, \num{h(n,m)}}),\\
+      & \qquad (G \, \num{n} (\fn{Fst}\, \tuple{\num{m}, \num{h(n,m)}}) (\fn{Snd}\, \tuple{\num{m}, \num{h(n,m)}}))}\\
+    & \red
+    \tuple{\fn{Succ}\, \num{m}, (G \, \num{n} \,\num{m} \, \num{h(n,m)})}\\
+    & \red \tuple{\num{m+1}, \num{g(n, m, h(n, m))}}
+  \end{align*}
+  لكن~$g(n, m, h(n, m)) = h(n, m+1)$، فتتم خطوة الاستقراء.
+
+  بقي أن نصل هذه النتيجة بالتعريف الأول. فنحسب:
+  \begin{align*}
+    H\,\num n\,\num m &\ident \lambd[x][\lambd[y][\fn{Snd} (y
+        (\lambd[p].\tuple{\fn{Succ} (\fn{Fst}\, p), (G\, x\,
+          (\fn{Fst}\, p)\, (\fn{Snd}\, p))}) \tuple{\num{0}, F x})]]\\
+    & \qquad\,\num n\, \num m\\
+    & \red \fn{Snd} (\num m \,
+    \underbrace{(\lambd[p].\tuple{\fn{Succ} (\fn{Fst}\, p), (G \,\num n\,
+      (\fn{Fst}\, p) (\fn{Snd}\, p))})}_{D_n} \tuple{\num{0}, F \num n})\\
+    & \ident \fn{Snd} (\num m \, D_n\, \tuple{\num{0}, F \num n})\\
+    & \red \fn{Snd} \,(D_n^m  \tuple{\num{0}, F \num n})\\
+    & \red \fn{Snd} \,\tuple{\num{m}, \num{h(n, m)}} \\
+    & \red \num{h(n,m)}.
+  \end{align*}
+\end{proof}
+
+
+\begin{prop}
+  كل دالة عودية بدائية !!{lambda definable}.
+\end{prop}
+
+\begin{proof}
+  فالدوال الأساس كلها !!{lambda definable} بحسب \olref{lem:basic}؛
+  ثم تفيد \olref{lem:comp} و\olref{lem:prim} أن صنف الدوال
+  !!{lambda definable} مغلق تحت التركيب والعودية البدائية. ومن ثم
+  يشمل كل دالة عودية بدائية.
+\end{proof}
+
+\end{document}

@@ -1,0 +1,162 @@
+% Part: normal-modal-logic
+% Chapter: syntax-and-semantics
+% Section: tautological-instances
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{syn}{tau}
+
+\olsection{حالات التحصيل المنطقي}
+
+\begin{explain}
+التحصيل المنطقي، في الصيغ الخالية من الجهات، ما يصدق تحت كل تعيين
+لقيم الصدق؛ ومن ثم يصدق في كل عالم من كل نموذج. أما ال!!{formula}s
+التي يرد فيها~$\Box$ و$\Diamond$، فلم نعرّف لها التحصيل المنطقي
+بهذا الطريق. فما حكم~$\Box \OLId{latin-ordinary}{p} \lor \lnot \Box \OLId{latin-ordinary}{p}$ مثلًا، وهي حالة
+من الثالث المرفوع؟ هنا نحتاج إلى \emph{حالة التحصيل المنطقي}:
+أي !!a{formula} تحصل بالإحلال في تحصيل منطقي غير موجهي.
+والمتوقع أن تكون كل حالة من هذا القبيل صالحة، لكن التوقع لا يغني
+عن البرهان الآتي.
+\end{explain}
+
+\begin{defn}
+  تكون ال!!{formula} الموجهية~$!B$ \emph{حالة تحصيل منطقي} إذا وفقط
+  إذا وُجد تحصيل منطقي خالٍ من الجهات~$!A$ ذو !!{propositional
+    variable}s~$\OLId{latin-ordinary}{p}_\OLMathNumeral{1}$، و\dots، و$\OLId{latin-ordinary}{p}_\OLId{latin-ordinary}{n}$، ووُجدت !!{formula}s~$!D_\OLMathNumeral{1}$،
+  و\dots، و$!D_\OLId{latin-ordinary}{n}$ بحيث
+  $!B \ident \SSubst{!A}{\subst{!D_\OLMathNumeral{1}}{\OLId{latin-ordinary}{p}_\OLMathNumeral{1}},
+    \dots, \subst{!D_\OLId{latin-ordinary}{n}}{\OLId{latin-ordinary}{p}_\OLId{latin-ordinary}{n}}}$.
+\end{defn}
+
+\begin{lem}\ollabel{lem:valid-taut}
+  افترض أن~$!A$ !!{formula} خالية من الجهات و!!{propositional
+  variable}sها هي~$\OLId{latin-ordinary}{p}_\OLMathNumeral{1}$، و\dots، و$\OLId{latin-ordinary}{p}_\OLId{latin-ordinary}{n}$، ولتكن~$!D_\OLMathNumeral{1}$، و\dots،
+  و$!D_\OLId{latin-ordinary}{n}$ !!{formula}s موجهية. عندئذ، لأي تعيين~$\pAssign{\OLId{latin-ordinary}{v}}$ وأي
+  نموذج~$\mModel{M} = \tuple{\OLId{latin-looped}{W}, \OLId{latin-looped}{R}, \OLId{latin-looped}{V}}$ وأي~$\OLId{latin-ordinary}{w} \in \OLId{latin-looped}{W}$ بحيث
+  $\pAssign{\OLId{latin-ordinary}{v}}(\OLId{latin-ordinary}{p}_\OLId{latin-ordinary}{i}) = \True$ إذا وفقط إذا كان~$\mSat{\OLId{latin-looped}{M}}{!D_\OLId{latin-ordinary}{i}}[\OLId{latin-ordinary}{w}]$،
+  يكون~$\pSat{\OLId{latin-ordinary}{v}}{!A}$ إذا وفقط إذا كان
+  $\mSat{\OLId{latin-looped}{M}}{\SSubst{!A}{\subst{!D_\OLMathNumeral{1}}{\OLId{latin-ordinary}{p}_\OLMathNumeral{1}}, \dots,
+      \subst{!D_\OLId{latin-ordinary}{n}}{\OLId{latin-ordinary}{p}_\OLId{latin-ordinary}{n}}}}[\OLId{latin-ordinary}{w}]$.
+\end{lem}
+
+\begin{proof}
+  بالاستقراء على~$!A$.
+  % تصحيح لغوي (0416-N1): أُسند الحكم صراحة إلى كل واحد من الحدين.
+  \begin{enumerate}
+  \tagitem{prvFalse}{\indcase{!A}{\lfalse}{يصدق كل من
+      $\pSat/{\OLId{latin-ordinary}{v}}{\lfalse}$ و$\mSat/{\OLId{latin-looped}{M}}{\lfalse}[\OLId{latin-ordinary}{w}]$}.}{}
+  \tagitem{prvTrue}{\indcase{!A}{\ltrue}{يصدق كل من
+      $\pSat{\OLId{latin-ordinary}{v}}{\ltrue}$ و$\mSat{\OLId{latin-looped}{M}}{\ltrue}[\OLId{latin-ordinary}{w}]$}.}{}
+  \item \indcase{!A}{p_i}{%
+    \begin{align*}
+      \pSat{\OLId{latin-ordinary}{v}}{\OLId{latin-ordinary}{p}_\OLId{latin-ordinary}{i}} \Leftrightarrow {} & \pAssign{\OLId{latin-ordinary}{v}}(\OLId{latin-ordinary}{p}_\OLId{latin-ordinary}{i}) = \True \\
+      & \qquad \text{بتعريف~$\pSat{v}{p_i}$}\\
+      \Leftrightarrow {} & \mSat{\OLId{latin-looped}{M}}{!D_\OLId{latin-ordinary}{i}}[\OLId{latin-ordinary}{w}] \\
+      &\qquad \text{بحسب الفرض}\\
+      \Leftrightarrow {} & \mSat{\OLId{latin-looped}{M}}{\SSubst{\OLId{latin-ordinary}{p}_\OLId{latin-ordinary}{i}}{\subst{!D_\OLMathNumeral{1}}{\OLId{latin-ordinary}{p}_\OLMathNumeral{1}}, \dots,
+          \subst{!D_\OLId{latin-ordinary}{n}}{\OLId{latin-ordinary}{p}_\OLId{latin-ordinary}{n}}}}[\OLId{latin-ordinary}{w}]\\
+      &\qquad \text{لأن~$\SSubst{p_i}{\subst{!D_1}{p_1}, \dots,
+          \subst{!D_n}{p_n}} \ident !D_i$}.
+      \end{align*}}
+  \tagitem{prvNot}{\indcase{!A}{\lnot !B}{%
+      \begin{align*}
+        \pSat{\OLId{latin-ordinary}{v}}{\lnot !B} \Leftrightarrow {} & \pSat/{\OLId{latin-ordinary}{v}}{!B}\\
+        &\qquad \text{بتعريف~$\pSat{v}{}$؛}\\
+        \Leftrightarrow {} & \mSat/{\OLId{latin-looped}{M}}{\SSubst{!B}{\subst{!D_\OLMathNumeral{1}}{\OLId{latin-ordinary}{p}_\OLMathNumeral{1}}, \dots,
+          \subst{!D_\OLId{latin-ordinary}{n}}{\OLId{latin-ordinary}{p}_\OLId{latin-ordinary}{n}}}}[\OLId{latin-ordinary}{w}]\\
+        &\qquad \text{بفرض الاستقراء}\\
+        \Leftrightarrow {} &
+        \mSat{\OLId{latin-looped}{M}}{\SSubst{\lnot !B}{\subst{!D_\OLMathNumeral{1}}{\OLId{latin-ordinary}{p}_\OLMathNumeral{1}}, \dots,
+          \subst{!D_\OLId{latin-ordinary}{n}}{\OLId{latin-ordinary}{p}_\OLId{latin-ordinary}{n}}}}[\OLId{latin-ordinary}{w}]\\
+        &\qquad \text{بتعريف~$\mSat{M}{}[w]$}.
+      \end{align*}}}{}
+  \tagitem{prvAnd}{\indcase{!A}{(!B \land !C)}{%
+      \begin{align*}
+        \pSat{\OLId{latin-ordinary}{v}}{!B \land !C} \Leftrightarrow {} &
+        \pSat{\OLId{latin-ordinary}{v}}{!B} \text{ و } \pSat{\OLId{latin-ordinary}{v}}{!C}\\
+        &\qquad \text{بتعريف~$\pSat{v}{}$}\\
+        \Leftrightarrow {} &
+        \mSat{\OLId{latin-looped}{M}}{\SSubst{!B}{\subst{!D_\OLMathNumeral{1}}{\OLId{latin-ordinary}{p}_\OLMathNumeral{1}}, \dots,
+            \subst{!D_\OLId{latin-ordinary}{n}}{\OLId{latin-ordinary}{p}_\OLId{latin-ordinary}{n}}}}[\OLId{latin-ordinary}{w}] \text{ و } \\
+        & \mSat{\OLId{latin-looped}{M}}{\SSubst{!C}{\subst{!D_\OLMathNumeral{1}}{\OLId{latin-ordinary}{p}_\OLMathNumeral{1}}, \dots,
+          \subst{!D_\OLId{latin-ordinary}{n}}{\OLId{latin-ordinary}{p}_\OLId{latin-ordinary}{n}}}}[\OLId{latin-ordinary}{w}]\\
+        &\qquad \text{بفرض الاستقراء}\\
+        \Leftrightarrow{} &
+        \mSat{\OLId{latin-looped}{M}}{\SSubst{(!B \land !C)}{\subst{!D_\OLMathNumeral{1}}{\OLId{latin-ordinary}{p}_\OLMathNumeral{1}}, \dots,
+          \subst{!D_\OLId{latin-ordinary}{n}}{\OLId{latin-ordinary}{p}_\OLId{latin-ordinary}{n}}}}[\OLId{latin-ordinary}{w}]\\
+        &\qquad \text{بتعريف~$\mSat{M}{}[w]$}.
+      \end{align*}}}{}
+  \tagitem{prvOr}{\indcase{!A}{(!B \lor !C)}{%
+      \begin{align*}
+        \pSat{\OLId{latin-ordinary}{v}}{!B \lor !C} \Leftrightarrow{} &
+        \pSat{\OLId{latin-ordinary}{v}}{!B} \text{ أو } \pSat{\OLId{latin-ordinary}{v}}{!C}\\
+        &\qquad \text{بتعريف~$\pSat{v}{}$؛}\\
+        \Leftrightarrow{} & \mSat{\OLId{latin-looped}{M}}{\SSubst{!B}{\subst{!D_\OLMathNumeral{1}}{\OLId{latin-ordinary}{p}_\OLMathNumeral{1}}, \dots,
+            \subst{!D_\OLId{latin-ordinary}{n}}{\OLId{latin-ordinary}{p}_\OLId{latin-ordinary}{n}}}}[\OLId{latin-ordinary}{w}] \text{ أو }\\
+        & \mSat{\OLId{latin-looped}{M}}{\SSubst{!C}{\subst{!D_\OLMathNumeral{1}}{\OLId{latin-ordinary}{p}_\OLMathNumeral{1}}, \dots,
+          \subst{!D_\OLId{latin-ordinary}{n}}{\OLId{latin-ordinary}{p}_\OLId{latin-ordinary}{n}}}}[\OLId{latin-ordinary}{w}]\\
+        &\qquad \text{بفرض الاستقراء}\\
+        \Leftrightarrow{} &
+        \mSat{\OLId{latin-looped}{M}}{\SSubst{(!B \lor !C)}{\subst{!D_\OLMathNumeral{1}}{\OLId{latin-ordinary}{p}_\OLMathNumeral{1}}, \dots,
+          \subst{!D_\OLId{latin-ordinary}{n}}{\OLId{latin-ordinary}{p}_\OLId{latin-ordinary}{n}}}}[\OLId{latin-ordinary}{w}]\\
+        &\qquad \text{بتعريف~$\mSat{M}{}[w]$}.
+      \end{align*}}}{}
+  \tagitem{prvIf}{\indcase{!A}{(!B \lif !C)}{%
+      \begin{align*}
+        \pSat{\OLId{latin-ordinary}{v}}{!B \lif !C} \Leftrightarrow{} &
+        \pSat/{\OLId{latin-ordinary}{v}}{!B} \text{ أو } \pSat{\OLId{latin-ordinary}{v}}{!C}\\
+        &\qquad \text{بتعريف~$\pSat{v}{}$}\\
+        \Leftrightarrow{} &
+        \mSat/{\OLId{latin-looped}{M}}{\SSubst{!B}{\subst{!D_\OLMathNumeral{1}}{\OLId{latin-ordinary}{p}_\OLMathNumeral{1}}, \dots,
+            \subst{!D_\OLId{latin-ordinary}{n}}{\OLId{latin-ordinary}{p}_\OLId{latin-ordinary}{n}}}}[\OLId{latin-ordinary}{w}] \text{ أو }\\
+        & \mSat{\OLId{latin-looped}{M}}{\SSubst{!C}{\subst{!D_\OLMathNumeral{1}}{\OLId{latin-ordinary}{p}_\OLMathNumeral{1}}, \dots,
+          \subst{!D_\OLId{latin-ordinary}{n}}{\OLId{latin-ordinary}{p}_\OLId{latin-ordinary}{n}}}}[\OLId{latin-ordinary}{w}]\\
+        &\qquad \text{بفرض الاستقراء}\\
+        \Leftrightarrow{} &
+        \mSat{\OLId{latin-looped}{M}}{\SSubst{(!B \lif !C)}{\subst{!D_\OLMathNumeral{1}}{\OLId{latin-ordinary}{p}_\OLMathNumeral{1}}, \dots,
+          \subst{!D_\OLId{latin-ordinary}{n}}{\OLId{latin-ordinary}{p}_\OLId{latin-ordinary}{n}}}}[\OLId{latin-ordinary}{w}]\\
+        &\qquad \text{بتعريف~$\mSat{M}{}[w]$}.
+      \end{align*}}}{}
+  \tagitem{prvIff}{\indcase{!A}{(!B \liff !C)}{%
+      \begin{align*}
+        \pSat{\OLId{latin-ordinary}{v}}{!B \liff !C} \Leftrightarrow {} &
+        \text{إما } \pSat{\OLId{latin-ordinary}{v}}{!B} \text{ و } \pSat{\OLId{latin-ordinary}{v}}{!C}\\
+        & \text{أو } \pSat/{\OLId{latin-ordinary}{v}}{!B} \text{ و } \pSat/{\OLId{latin-ordinary}{v}}{!C}\\
+        &\qquad \text{بتعريف~$\pSat{v}{}$}\\
+        \Leftrightarrow {} &
+        \text{إما } \mSat{\OLId{latin-looped}{M}}{\SSubst{!B}{\subst{!D_\OLMathNumeral{1}}{\OLId{latin-ordinary}{p}_\OLMathNumeral{1}}, \dots,
+            \subst{!D_\OLId{latin-ordinary}{n}}{\OLId{latin-ordinary}{p}_\OLId{latin-ordinary}{n}}}}[\OLId{latin-ordinary}{w}] \text{ و }\\
+        & \qquad \mSat{\OLId{latin-looped}{M}}{\SSubst{!C}{\subst{!D_\OLMathNumeral{1}}{\OLId{latin-ordinary}{p}_\OLMathNumeral{1}}, \dots,
+          \subst{!D_\OLId{latin-ordinary}{n}}{\OLId{latin-ordinary}{p}_\OLId{latin-ordinary}{n}}}}[\OLId{latin-ordinary}{w}]\\
+        &  \text{ أو } \mSat/{\OLId{latin-looped}{M}}{\SSubst{!B}{\subst{!D_\OLMathNumeral{1}}{\OLId{latin-ordinary}{p}_\OLMathNumeral{1}}, \dots,
+            \subst{!D_\OLId{latin-ordinary}{n}}{\OLId{latin-ordinary}{p}_\OLId{latin-ordinary}{n}}}}[\OLId{latin-ordinary}{w}] \text{ و }\\
+        & \qquad \mSat/{\OLId{latin-looped}{M}}{\SSubst{!C}{\subst{!D_\OLMathNumeral{1}}{\OLId{latin-ordinary}{p}_\OLMathNumeral{1}}, \dots,
+          \subst{!D_\OLId{latin-ordinary}{n}}{\OLId{latin-ordinary}{p}_\OLId{latin-ordinary}{n}}}}[\OLId{latin-ordinary}{w}]\\
+        &\qquad\text{بفرض الاستقراء}\\
+        \Leftrightarrow {} &
+        \mSat{\OLId{latin-looped}{M}}{\SSubst{(!B \liff !C)}{\subst{!D_\OLMathNumeral{1}}{\OLId{latin-ordinary}{p}_\OLMathNumeral{1}}, \dots,
+          \subst{!D_\OLId{latin-ordinary}{n}}{\OLId{latin-ordinary}{p}_\OLId{latin-ordinary}{n}}}}[\OLId{latin-ordinary}{w}]\\
+        &\qquad \text{بتعريف~$\mSat{M}{}[w]$}.
+      \end{align*}}}{}
+  \end{enumerate}
+  \end{proof}
+
+\begin{prop}\ollabel{prop:valid-taut}
+  كل حالات التحصيل المنطقي صالحة.
+\end{prop}
+
+\begin{proof}
+  نسلك طريق المعاكس النقيض. ولنفترض أنه في نموذج ما~$\mModel{M}$
+  وعالم~$\OLId{latin-ordinary}{w}$ تتحقق
+  $\mSat/{\OLId{latin-looped}{M}}{\SSubst{!A}{\subst{!D_\OLMathNumeral{1}}{\OLId{latin-ordinary}{p}_\OLMathNumeral{1}}, \dots,
+  \subst{!D_\OLId{latin-ordinary}{n}}{\OLId{latin-ordinary}{p}_\OLId{latin-ordinary}{n}}}}[\OLId{latin-ordinary}{w}]$.
+  ونختار التعيين~$\pAssign{\OLId{latin-ordinary}{v}}$ بإيجاب~$\pAssign{\OLId{latin-ordinary}{v}}(\OLId{latin-ordinary}{p}_\OLId{latin-ordinary}{i}) = \True$
+  متى وفقط متى كان~$\mSat{\OLId{latin-looped}{M}}{!D_\OLId{latin-ordinary}{i}}[\OLId{latin-ordinary}{w}]$؛ أما~$\pAssign{\OLId{latin-ordinary}{v}}$
+  فليأخذ قيمًا كيف اتفق عند~$\OLId{latin-ordinary}{q} \notin \{\OLId{latin-ordinary}{p}_\OLMathNumeral{1}, \dots, \OLId{latin-ordinary}{p}_\OLId{latin-ordinary}{n} \}$.
+  فتفيد~\olref{lem:valid-taut} أن~$\pSat/{\OLId{latin-ordinary}{v}}{!A}$،
+  وبذلك لا تكون~$!A$ تحصيلًا منطقيًا.
+\end{proof}
+
+\end{document}

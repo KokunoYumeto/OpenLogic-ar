@@ -1,0 +1,154 @@
+% Part: lambda-calculus
+% Chapter: lambda-definability
+% Section: primitive-recursive-functions
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{ldf}{prf}
+\olsection{الدوال العودية البدائية \usetoken{S}{lambda definable}}
+
+الدوال العودية البدائية، كما تقدم، هي الدوال التي تُبنى من الدوال
+الأساس~$\Zero$ و$\Succ$ و$\Proj{\OLId{latin-ordinary}{n}}{\OLId{latin-ordinary}{i}}$ بإعمال التركيب والعودية البدائية.
+
+\begin{lem}
+  \ollabel{lem:basic}
+  الدوال الأساس في العودية البدائية، وهي~$\Zero$ و$\Succ$
+  والإسقاطات~$\Proj{\OLId{latin-ordinary}{n}}{\OLId{latin-ordinary}{i}}$، كلها !!{lambda definable}.
+\end{lem}
+
+\begin{proof}
+فالحدود التي تكون بها هذه الدوال !!{lambda defined} هي:
+\begin{align*}
+  \fn{Zero} & \ident \lambd[\OLId{latin-ordinary}{a}][\lambd[fx][\OLId{latin-ordinary}{x}]]\\
+  \fn{Succ} & \ident \lambd[\OLId{latin-ordinary}{a}][\lambd[fx][\OLId{latin-ordinary}{f} (\OLId{latin-ordinary}{a} \OLId{latin-ordinary}{f} \OLId{latin-ordinary}{x})]] \\
+  \fn{Proj}^\OLId{latin-ordinary}{n}_\OLId{latin-ordinary}{i} & \ident \lambd[\OLId{latin-ordinary}{x}_\OLMathNumeral{0}\dots \OLId{latin-ordinary}{x}_{\OLId{latin-ordinary}{n}-\OLMathNumeral{1}}][\OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{i}]
+\end{align*}
+\end{proof}
+
+\begin{lem}
+  \ollabel{lem:comp} لتكن~$\OLId{latin-ordinary}{f}$ ذات~$\OLId{latin-ordinary}{k}$ من الوسائط، ولتكن
+  $\OLId{latin-ordinary}{g}_\OLMathNumeral{0}, \dots, \OLId{latin-ordinary}{g}_{\OLId{latin-ordinary}{k}-\OLMathNumeral{1}}$ ذوات~$\OLId{latin-ordinary}{n}$ من الوسائط؛ ولتكن هذه الدوال
+  !!{lambda definable} بالحدود~$\OLId{latin-looped}{F}$ و$\OLId{latin-looped}{G}_\OLMathNumeral{0}$، \dots،~$\OLId{latin-looped}{G}_{\OLId{latin-ordinary}{k}-\OLMathNumeral{1}}$.
+  فإذا عرّفت~$\OLId{latin-ordinary}{h}$ منها بالتركيب، كانت~$\OLId{latin-ordinary}{h}$ !!{lambda definable}
+  بالحد~$\OLId{latin-looped}{H}$.
+\end{lem}
+
+\begin{proof}
+  نأخذ للحد الذي !!{lambda define}~$\OLId{latin-ordinary}{h}$ ما يأتي:
+  \[
+  \OLId{latin-looped}{H} \ident \lambd[\OLId{latin-ordinary}{x}_\OLMathNumeral{0} \dots \OLId{latin-ordinary}{x}_{\OLId{latin-ordinary}{n}-\OLMathNumeral{1}}][\OLId{latin-looped}{F}\, (\OLId{latin-looped}{G}_\OLMathNumeral{0} \OLId{latin-ordinary}{x}_\OLMathNumeral{0} \dots
+    \OLId{latin-ordinary}{x}_{\OLId{latin-ordinary}{n}-\OLMathNumeral{1}}) \dots (\OLId{latin-looped}{G}_{\OLId{latin-ordinary}{k}-\OLMathNumeral{1}} \OLId{latin-ordinary}{x}_\OLMathNumeral{0} \dots \OLId{latin-ordinary}{x}_{\OLId{latin-ordinary}{n}-\OLMathNumeral{1}})]
+  \]
+  وصحة ذلك مما يثبت مباشرة، فنترك تفصيله تمرينًا.
+\end{proof}
+
+\begin{prob}
+  أكمل إثبات \olref[lam][ldf][prf]{lem:comp} ببيان أن
+  $\OLId{latin-looped}{H}\num{\OLId{latin-ordinary}{n}_\OLMathNumeral{0}}\dots\num{\OLId{latin-ordinary}{n}_{\OLId{latin-ordinary}{n}-\OLMathNumeral{1}}} \red \num{\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{n}_\OLMathNumeral{0}, \dots,
+    \OLId{latin-ordinary}{n}_{\OLId{latin-ordinary}{n}-\OLMathNumeral{1}})}$.
+\end{prob}
+
+وليس من شروط \olref{lem:comp} أن تكون~$\OLId{latin-ordinary}{f}$ و$\OLId{latin-ordinary}{g}_\OLMathNumeral{0}$،
+\dots،~$\OLId{latin-ordinary}{g}_{\OLId{latin-ordinary}{k}-\OLMathNumeral{1}}$ عودية بدائية؛ وإنما الشرط أن تكون كلية
+و!!{lambda definable}.
+
+\begin{lem}\ollabel{lem:prim}
+  لتكن~$\OLId{latin-ordinary}{f}$ ذات~$\OLId{latin-ordinary}{n}$ من الوسائط، و$\OLId{latin-ordinary}{g}$ ذات~$\OLId{latin-ordinary}{n}+\OLMathNumeral{2}$ من الوسائط،
+  ولتكونا !!{lambda definable} بالحدين~$\OLId{latin-looped}{F}$ و$\OLId{latin-looped}{G}$. فإذا كانت الدالة
+  $\OLId{latin-ordinary}{h}$ معرّفة من~$\OLId{latin-ordinary}{f}$ و$\OLId{latin-ordinary}{g}$ بالعودية البدائية، كانت~$\OLId{latin-ordinary}{h}$ أيضًا
+  !!{lambda definable}.
+\end{lem}
+
+\begin{proof}
+  تعريف~$\OLId{latin-ordinary}{h}$ هو بالمعادلتين
+  \begin{align*}
+    \OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{x}_\OLMathNumeral{1}, \dots, \OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{n}, \OLMathNumeral{0}) &= \OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x}_\OLMathNumeral{1}, \dots, \OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{n})\\
+    \OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{x}_\OLMathNumeral{1}, \dots, \OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{n}, \OLId{latin-ordinary}{y}+\OLMathNumeral{1}) & = \OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{x}_\OLMathNumeral{1}, \dots, \OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{n}, \OLId{latin-ordinary}{y}, \OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{x}_\OLMathNumeral{1}, \dots, \OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{n}, \OLId{latin-ordinary}{y})).
+  \end{align*}
+  ومعنى ذلك أن التحديث الذي تعينه الدالة~$\OLId{latin-ordinary}{g}$ يكرر عدد~$\OLId{latin-ordinary}{y}$ من المرات،
+  على أن يبدأ من الحالة~$\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x}_\OLMathNumeral{1}, \dots, \OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{n})$. وهذا هو بعينه النمط الذي يلائم
+  أعداد تشيرش، إذ حقيقتها أنها مكرّرات.
+
+  ونقتصر، تيسيرًا للكتابة، على~$\OLId{latin-ordinary}{n}=\OLMathNumeral{1}$: فيكون~$\OLId{latin-ordinary}{x}$ وسيطًا واحدًا،
+  ويكون~$\OLId{latin-ordinary}{y}$ وسيط العودية. والحد الذي تكون به~$\OLId{latin-ordinary}{h}$ !!{lambda defined}
+  هو:
+  \begin{align*}
+    \OLId{latin-looped}{H} \ident & \lambd[\OLId{latin-ordinary}{x}][\lambd[\OLId{latin-ordinary}{y}][\fn{Snd} (\OLId{latin-ordinary}{y}
+        \OLId{latin-looped}{D} \tuple{\num{\OLMathNumeral{0}}, \OLId{latin-looped}{F} \OLId{latin-ordinary}{x}})]]
+    \intertext{حيث}
+    \OLId{latin-looped}{D} \ident & \lambd[\OLId{latin-ordinary}{p}][\tuple{\fn{Succ} (\fn{Fst}\, \OLId{latin-ordinary}{p}), (\OLId{latin-looped}{G} \OLId{latin-ordinary}{x}
+          (\fn{Fst}\, \OLId{latin-ordinary}{p}) (\fn{Snd}\, \OLId{latin-ordinary}{p}))}]
+  \end{align*}
+  والحالة المحفوظة في أثناء التكرار زوج: أوله قيمة~$\OLId{latin-ordinary}{y}$ في تلك
+  الخطوة، وثانيه قيمة~$\OLId{latin-ordinary}{h}$ الموافقة لها. وفي كل خطوة ننشئ زوجًا جديدًا:
+  أوله خلف قيمة~$\OLId{latin-ordinary}{y}$ الحالية، وثانيه قيمة~$\OLId{latin-ordinary}{h}$ الجديدة التي تعينها~$\OLId{latin-ordinary}{g}$.
+  فإذا استوفينا التكرار
+  أخذنا المركبة الثانية، فكانت القيمة النهائية لـ~$\OLId{latin-ordinary}{h}$. ونحقق ذلك الآن.
+
+  المطلوب، لكل~$\OLId{latin-ordinary}{n}$ و$\OLId{latin-ordinary}{m}$، أن يكون~$\OLId{latin-looped}{H}\,\num{\OLId{latin-ordinary}{n}}\,\num{\OLId{latin-ordinary}{m}} \red
+  \num{\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{n},\OLId{latin-ordinary}{m})}$. ضع
+  $\OLId{latin-looped}{D}_\OLId{latin-ordinary}{n} \ident \Subst{\OLId{latin-looped}{D}}{\num{\OLId{latin-ordinary}{n}}}{\OLId{latin-ordinary}{x}}$. ونثبت أولًا
+  $\OLId{latin-looped}{D}_\OLId{latin-ordinary}{n}^\OLId{latin-ordinary}{m} \tuple{\num{\OLMathNumeral{0}}, \OLId{latin-looped}{F}\, \num{\OLId{latin-ordinary}{n}}} \red
+  \tuple{\num{\OLId{latin-ordinary}{m}}, \num{\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{n}, \OLId{latin-ordinary}{m})}}$ بالاستقراء على~$\OLId{latin-ordinary}{m}$.
+
+  أما عند~$\OLId{latin-ordinary}{m}=\OLMathNumeral{0}$ فالمطلوب أن
+  $\OLId{latin-looped}{D}_\OLId{latin-ordinary}{n}^\OLMathNumeral{0} \tuple{\num{\OLMathNumeral{0}}, \OLId{latin-looped}{F}\, \num{\OLId{latin-ordinary}{n}}} \red
+  \tuple{\num{\OLMathNumeral{0}}, \num{\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{n}, \OLMathNumeral{0})}}$.
+  لكن~$\OLId{latin-looped}{D}_\OLId{latin-ordinary}{n}^\OLMathNumeral{0} \tuple{\num{\OLMathNumeral{0}}, \OLId{latin-looped}{F}\, \num{\OLId{latin-ordinary}{n}}}$ هو نفس الزوج
+  $\tuple{\num{\OLMathNumeral{0}}, \OLId{latin-looped}{F}\, \num{\OLId{latin-ordinary}{n}}}$. ثم إن~$\OLId{latin-looped}{F}$ !!{lambda define}s~$\OLId{latin-ordinary}{f}$،
+  فيختزل هذا إلى~$\tuple{\num{\OLMathNumeral{0}}, \num{\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{n})}}$؛
+  ولأن~$\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{n}) = \OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{n}, \OLMathNumeral{0})$ فهذا هو~$\tuple{\num{\OLMathNumeral{0}}, \num{\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{n},\OLMathNumeral{0})}}$.
+
+  وأما خطوة الاستقراء، فافترض
+  $\OLId{latin-looped}{D}_\OLId{latin-ordinary}{n}^\OLId{latin-ordinary}{m} \tuple{\num{\OLMathNumeral{0}}, \OLId{latin-looped}{F}\, \num{\OLId{latin-ordinary}{n}}} \red
+  \tuple{\num{\OLId{latin-ordinary}{m}}, \num{\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{n}, \OLId{latin-ordinary}{m})}}$. نريد أن يلزم منه
+  $\OLId{latin-looped}{D}_\OLId{latin-ordinary}{n}^{\OLId{latin-ordinary}{m}+\OLMathNumeral{1}} \tuple{\num{\OLMathNumeral{0}}, \OLId{latin-looped}{F}\, \num{\OLId{latin-ordinary}{n}}} \red
+  \tuple{\num{\OLId{latin-ordinary}{m}+\OLMathNumeral{1}}, \num{\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{n}, \OLId{latin-ordinary}{m}+\OLMathNumeral{1})}}$، وهذا ما تبينه الاختزالات:
+  \begin{align*}
+    \OLId{latin-looped}{D}_\OLId{latin-ordinary}{n}^{\OLId{latin-ordinary}{m}+\OLMathNumeral{1}} \tuple{\num{\OLMathNumeral{0}}, \OLId{latin-looped}{F}\, \num{\OLId{latin-ordinary}{n}}}
+    & \ident \OLId{latin-looped}{D}_\OLId{latin-ordinary}{n}(\OLId{latin-looped}{D}_\OLId{latin-ordinary}{n}^{\OLId{latin-ordinary}{m}} \tuple{\num{\OLMathNumeral{0}}, \OLId{latin-looped}{F}\, \num{\OLId{latin-ordinary}{n}}})\\
+    & \red \OLId{latin-looped}{D}_\OLId{latin-ordinary}{n}\,\tuple{\num{\OLId{latin-ordinary}{m}}, \num{\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{n}, \OLId{latin-ordinary}{m})}} \text{\qquad (بفرض الاستقراء)}\\
+    & \ident (\lambd[\OLId{latin-ordinary}{p}][
+      \tuple{
+        \fn{Succ} (\fn{Fst}\, \OLId{latin-ordinary}{p}), (\OLId{latin-looped}{G} \, \num{\OLId{latin-ordinary}{n}} (\fn{Fst}\, \OLId{latin-ordinary}{p}) (\fn{Snd}\, \OLId{latin-ordinary}{p}))
+    }]) \tuple{\num{\OLId{latin-ordinary}{m}}, \num{\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{n},\OLId{latin-ordinary}{m})}}\\
+    & \redone
+    \tuple{\fn{Succ} (\fn{Fst}\, \tuple{\num{\OLId{latin-ordinary}{m}}, \num{\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{n},\OLId{latin-ordinary}{m})}}),\\
+      & \qquad (\OLId{latin-looped}{G} \, \num{\OLId{latin-ordinary}{n}} (\fn{Fst}\, \tuple{\num{\OLId{latin-ordinary}{m}}, \num{\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{n},\OLId{latin-ordinary}{m})}}) (\fn{Snd}\, \tuple{\num{\OLId{latin-ordinary}{m}}, \num{\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{n},\OLId{latin-ordinary}{m})}}))}\\
+    & \red
+    \tuple{\fn{Succ}\, \num{\OLId{latin-ordinary}{m}}, (\OLId{latin-looped}{G} \, \num{\OLId{latin-ordinary}{n}} \,\num{\OLId{latin-ordinary}{m}} \, \num{\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{n},\OLId{latin-ordinary}{m})})}\\
+    & \red \tuple{\num{\OLId{latin-ordinary}{m}+\OLMathNumeral{1}}, \num{\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{n}, \OLId{latin-ordinary}{m}, \OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{n}, \OLId{latin-ordinary}{m}))}}
+  \end{align*}
+  لكن~$\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{n}, \OLId{latin-ordinary}{m}, \OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{n}, \OLId{latin-ordinary}{m})) = \OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{n}, \OLId{latin-ordinary}{m}+\OLMathNumeral{1})$، فتتم خطوة الاستقراء.
+
+  بقي أن نصل هذه النتيجة بالتعريف الأول. فنحسب:
+  \begin{align*}
+    \OLId{latin-looped}{H}\,\num \OLId{latin-ordinary}{n}\,\num \OLId{latin-ordinary}{m} &\ident \lambd[\OLId{latin-ordinary}{x}][\lambd[\OLId{latin-ordinary}{y}][\fn{Snd} (\OLId{latin-ordinary}{y}
+        (\lambd[\OLId{latin-ordinary}{p}].\tuple{\fn{Succ} (\fn{Fst}\, \OLId{latin-ordinary}{p}), (\OLId{latin-looped}{G}\, \OLId{latin-ordinary}{x}\,
+          (\fn{Fst}\, \OLId{latin-ordinary}{p})\, (\fn{Snd}\, \OLId{latin-ordinary}{p}))}) \tuple{\num{\OLMathNumeral{0}}, \OLId{latin-looped}{F} \OLId{latin-ordinary}{x}})]]\\
+    & \qquad\,\num \OLId{latin-ordinary}{n}\, \num \OLId{latin-ordinary}{m}\\
+    & \red \fn{Snd} (\num \OLId{latin-ordinary}{m} \,
+    \underbrace{(\lambd[\OLId{latin-ordinary}{p}].\tuple{\fn{Succ} (\fn{Fst}\, \OLId{latin-ordinary}{p}), (\OLId{latin-looped}{G} \,\num \OLId{latin-ordinary}{n}\,
+      (\fn{Fst}\, \OLId{latin-ordinary}{p}) (\fn{Snd}\, \OLId{latin-ordinary}{p}))})}_{\OLId{latin-looped}{D}_\OLId{latin-ordinary}{n}} \tuple{\num{\OLMathNumeral{0}}, \OLId{latin-looped}{F} \num \OLId{latin-ordinary}{n}})\\
+    & \ident \fn{Snd} (\num \OLId{latin-ordinary}{m} \, \OLId{latin-looped}{D}_\OLId{latin-ordinary}{n}\, \tuple{\num{\OLMathNumeral{0}}, \OLId{latin-looped}{F} \num \OLId{latin-ordinary}{n}})\\
+    & \red \fn{Snd} \,(\OLId{latin-looped}{D}_\OLId{latin-ordinary}{n}^\OLId{latin-ordinary}{m}  \tuple{\num{\OLMathNumeral{0}}, \OLId{latin-looped}{F} \num \OLId{latin-ordinary}{n}})\\
+    & \red \fn{Snd} \,\tuple{\num{\OLId{latin-ordinary}{m}}, \num{\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{n}, \OLId{latin-ordinary}{m})}} \\
+    & \red \num{\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{n},\OLId{latin-ordinary}{m})}.
+  \end{align*}
+\end{proof}
+
+
+\begin{prop}
+  كل دالة عودية بدائية !!{lambda definable}.
+\end{prop}
+
+\begin{proof}
+  فالدوال الأساس كلها !!{lambda definable} بحسب \olref{lem:basic}؛
+  ثم تفيد \olref{lem:comp} و\olref{lem:prim} أن صنف الدوال
+  !!{lambda definable} مغلق تحت التركيب والعودية البدائية. ومن ثم
+  يشمل كل دالة عودية بدائية.
+\end{proof}
+
+\end{document}

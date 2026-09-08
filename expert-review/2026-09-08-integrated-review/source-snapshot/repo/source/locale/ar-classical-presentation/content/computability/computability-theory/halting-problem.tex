@@ -1,0 +1,95 @@
+% Part: computability
+% Chapter: computability-theory
+% Section: halting-problem
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{thy}{hlt}
+\olsection{مشكلة التوقف}
+
+اقتضى بناء الدالة الجزئية الشاملة القابلة للحساب أن تكون
+~$\fn{Un}(\OLId{latin-ordinary}{e},\OLId{latin-ordinary}{x})$ معرّفة إذا وفقط إذا انتهى حساب الدالة ذات الرمز
+~$\OLId{latin-ordinary}{e}$ عند الدخل~$\OLId{latin-ordinary}{x}$ إلى قيمة. فهل يمكن البت بالحساب في
+وقوع ذلك؟ الجواب بالنفي. ومعناه في نموذج آلة
+تورنغ أن السؤال عن توقف آلة معطاة عند دخل معطى لا يقبل القرار
+الحسابي. ومن هنا تسمى النتيجة الآتية «عدم قابلية مشكلة التوقف
+للقرار». ولها عندنا برهانان: أولهما متصل بما تقدم، وثانيهما
+مباشر.
+
+\begin{thm}
+\ollabel{thm:halting-problem}
+لتكن
+\[
+\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{e}, \OLId{latin-ordinary}{x})  =
+\begin{cases}
+\OLMathNumeral{1} & \text{إذا كانت\/ $\fn{Un}(e, x)$ معرفة} \\
+\OLMathNumeral{0} & \text{في غير ذلك.}
+\end{cases}
+\]
+عندئذ لا تكون $\OLId{latin-ordinary}{h}$ قابلة للحساب.
+\end{thm}
+
+\begin{proof}
+لنفرض قابلية $\OLId{latin-ordinary}{h}$ للحساب؛ فنستخرج من هذا الفرض دالة كلية
+شاملة قابلة للحساب، وذلك بوضع
+\[
+\fn{Un'}(\OLId{latin-ordinary}{e},\OLId{latin-ordinary}{x}) =
+\begin{cases}
+\fn{Un}(\OLId{latin-ordinary}{e},\OLId{latin-ordinary}{x}) & \text{إذا كان $h(e,x) = 1$} \\
+\OLMathNumeral{0} & \text{في غير ذلك.}
+\end{cases}
+\]
+فتكون $\fn{Un'}(\OLId{latin-ordinary}{e},\OLId{latin-ordinary}{x})$ كلية، وتلزم قابليتها للحساب من قابلية~$\OLId{latin-ordinary}{h}$
+له. وبيان ذلك، مثلًا، أن نعرّف $\OLId{latin-ordinary}{g}$ بالعودية البدائية:
+\begin{align*}
+\OLId{latin-ordinary}{g}(\OLMathNumeral{0}, \OLId{latin-ordinary}{e}, \OLId{latin-ordinary}{x}) & \simeq \OLMathNumeral{0} \\
+\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{y}+\OLMathNumeral{1}, \OLId{latin-ordinary}{e}, \OLId{latin-ordinary}{x}) & \simeq \fn{Un}(\OLId{latin-ordinary}{e},\OLId{latin-ordinary}{x});
+\end{align*}
+وعندئذ
+\[
+\fn{Un'}(\OLId{latin-ordinary}{e},\OLId{latin-ordinary}{x}) \simeq \OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{e},\OLId{latin-ordinary}{x}),\OLId{latin-ordinary}{e},\OLId{latin-ordinary}{x}).
+\]
+وحيث توافق $\fn{Un'}(\OLId{latin-ordinary}{e},\OLId{latin-ordinary}{x})$ الدالة $\fn{Un}(\OLId{latin-ordinary}{e},\OLId{latin-ordinary}{x})$ في كل موضع تُعرّف فيه الثانية،
+تكون $\fn{Un'}$ شاملة للدوال الجزئية القابلة للحساب التي تكون
+كلية. وهذا خلاف \olref[nou]{thm:no-univ}.
+\end{proof}
+
+\begin{proof}
+وللبرهان الآخر، نفرض قابلية $\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{e},\OLId{latin-ordinary}{x})$ للحساب، ونعرّف $\OLId{latin-ordinary}{g}$ بوضع
+\[
+\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{x}) =
+\begin{cases}
+  \OLMathNumeral{0}                & \text{إذا كان $h(x,x) = 0$} \\
+  \fundefined & \text{في غير ذلك.}
+\end{cases}
+\]
+فهذه $\OLId{latin-ordinary}{g}$ جزئية قابلة للحساب؛ إذ يعرّفها، مثلًا،
+$\umin{\OLId{latin-ordinary}{y}}{\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{x})=\OLMathNumeral{0}}$. ولذلك يوجد~$\OLId{latin-ordinary}{e}$ بحيث
+$\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{x})\simeq\fn{Un}(\OLId{latin-ordinary}{e},\OLId{latin-ordinary}{x})$ لكل~$\OLId{latin-ordinary}{x}$. فلننظر: أَتُعرّف $\OLId{latin-ordinary}{g}$ عند $\OLId{latin-ordinary}{e}$ أم لا؟ إن كانت
+معرّفة، لزم $\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{e},\OLId{latin-ordinary}{e})=\OLMathNumeral{0}$ بحسب تعريف~$\OLId{latin-ordinary}{g}$ (إذ لا يمكن أن تكون~$\OLId{latin-ordinary}{g}$ معرفة
+إلا إذا كان $\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{e},\OLId{latin-ordinary}{e})=\OLMathNumeral{0}$). ويعني هذا، بحسب تعريف~$\OLId{latin-ordinary}{h}$، أن $\fn{Un}(\OLId{latin-ordinary}{e},\OLId{latin-ordinary}{e})$ غير
+معرفة. ومن افتراضنا أن $\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{x})\simeq\fn{Un}(\OLId{latin-ordinary}{e},\OLId{latin-ordinary}{x})$ لكل~$\OLId{latin-ordinary}{x}$، نحصل على أن
+$\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{e})$ غير معرفة، وهذا تناقض. وإن كانت $\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{e})$ غير
+معرّفة، لزم $\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{e},\OLId{latin-ordinary}{e})\neq\OLMathNumeral{0}$، ومن ثم $\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{e},\OLId{latin-ordinary}{e})=\OLMathNumeral{1}$. ويترتب على ذلك أن
+$\fn{Un}(\OLId{latin-ordinary}{e},\OLId{latin-ordinary}{e})$ معرفة. لكن لما كان $\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{x})\simeq\fn{Un}(\OLId{latin-ordinary}{e},\OLId{latin-ordinary}{x})$، لكانت
+$\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{e})$ معرفة أيضًا. فكل من الفرضين يؤدي إلى التناقض.
+\end{proof}
+
+\begin{tagblock}{TMs}
+\begin{explain}
+ونعبّر عن هذه الحجة بآلات تورنغ على الوجه الآتي. لنفرض آلة تورنغ~$\OLId{latin-looped}{H}$ تتلقى
+دخلًا هو وصف آلة تورنغ~$\OLId{latin-looped}{E}$ ودخلًا~$\OLId{latin-ordinary}{x}$، وتقرر ما إذا كانت $\OLId{latin-looped}{E}$ تتوقف
+عند الدخل~$\OLId{latin-ordinary}{x}$. فنبني منها آلة تورنغ أخرى~$\OLId{latin-looped}{G}$ تتلقى دخلًا
+واحدًا~$\OLId{latin-ordinary}{x}$، وتشغل $\OLId{latin-looped}{H}$ لتقرر ما إذا كانت الآلة $\OLId{latin-looped}{M}_\OLId{latin-ordinary}{x}$ ذات الفهرس~$\OLId{latin-ordinary}{x}$
+تتوقف عند الدخل~$\OLId{latin-ordinary}{x}$، ثم تأتي بما يخالف الجواب. فإن أفادت $\OLId{latin-looped}{H}$ بأن
+$\OLId{latin-looped}{M}_\OLId{latin-ordinary}{x}$ تتوقف عند الدخل~$\OLId{latin-ordinary}{x}$، دخلت $\OLId{latin-looped}{G}$ في حلقة لا نهائية؛ وإذا أفادت
+$\OLId{latin-looped}{H}$ بأن $\OLId{latin-looped}{M}_\OLId{latin-ordinary}{x}$ لا تتوقف عند الدخل~$\OLId{latin-ordinary}{x}$، توقفت $\OLId{latin-looped}{G}$ فحسب. أفتتوقف $\OLId{latin-looped}{G}$
+إذا أُدخل فيها فهرسها؟ تلزم من الحجة المتقدمة مساواة توقفها لعدم
+توقفها، وهو محال. ففرض وجود آلة تورنغ~$\OLId{latin-looped}{H}$ على تلك الصفة
+باطل.
+\end{explain}
+\end{tagblock}
+
+\end{document}

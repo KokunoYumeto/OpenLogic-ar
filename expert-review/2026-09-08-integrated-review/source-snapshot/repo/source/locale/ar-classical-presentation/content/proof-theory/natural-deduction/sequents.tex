@@ -1,0 +1,150 @@
+% Part: proof-theory
+% Chapter: natural-deduction
+% Section: sequents
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{nat}{seq}
+
+\olsection{في الاستنباط الطبيعي بالمتتاليات: \Log{N2c} و\Log{N2i}}
+
+يدل~!!^a{proof}~$\delta$ في~\Log{N1c} أو~\Log{N1i} على أن~!!{formula}
+التي في نهايته، وهي~$!A$، تلزم من فروضه المفتوحة. فإذا كانت~$\OLId{greek-variable}{Gamma}$
+مجموعة~!!{formula}s~$!B$ التي يقع منها~$!B^\OLId{latin-ordinary}{x}$ فرضًا مفتوحًا في~$\delta$،
+رمزنا إلى ذلك بـ~$\delta \Proves \OLId{greek-variable}{Gamma} \Sequent !A$. ومن هنا يستبين
+إمكان بناء استنباط طبيعي يعمل في المتتاليات. فكل متتالية في هذا النظام
+تبين الفروض المفتوحة التي تعتمد عليها~!!{formula} الواقعة عن اليمين،
+أي فروض~!!{proof} الجزئي المنتهي بتلك المتتالية. وهذا هو الاستنباط
+الطبيعي بالمتتاليات، أو الاستنباط الطبيعي «على طريقة المتتاليات»،
+ونسمي النظامين الحاصلين~\Log{N2c} و\Log{N2i}.
+
+ولكي تقرب المطابقة بين~\Log{N1} و\Log{N2}، نجعل المجموعات~$\OLId{greek-variable}{Gamma}$
+الواقعة عن اليسار مؤلفة من~!!{formula}s موسومة~$\OLId{latin-ordinary}{x}:!B$. وقواعد~\Log{N1}
+لا تعمل إلا في~!!{formula}s المقدمات، أي~!!{formula}s التي تنتهي بها
+!!{proof}s الجزئية المباشرة؛ فنجعل قواعد~\Log{N2} لا تعمل إلا في تالي
+المتتالية. وأما الصيغ الموسومة عن يسار المتتاليات فنسميها
+\emph{السياق}.
+
+وبإزاء الفروض تكون المتتاليات العليا في براهين~\Log{N2} مسلّمات من الصورة
+\[\OLId{latin-ordinary}{x}:!A \Sequent !A.\]
+ثم تطابق القواعد قواعد~\Log{N1} على التمام، وهي مثبتة في~\olref{tab:N2}.
+
+\subfile{rules-N2}
+
+وكما أجزنا في~\Log{N1c} و\Log{N1i} لقواعد~$\Intro{\lif}$ و
+$\Intro{\lnot}$ و$\Elim{\lor}$ و$\Elim{\lexists}$ أن تبرئ فروضًا أو
+لا تبرئها، نجيز التطبيقات الصحيحة للقواعد المقابلة في~\Log{N2c}
+و\Log{N2i}، ولو لم تقع~!!{formula}s السياق المقابلة~$!A$ و$!B$
+و$!A(\OLId{latin-ordinary}{a})$ في سياق المقدمة المعنية.
+
+\begin{prop}
+إذا كان~$\delta$~!!a{proof} في~\Log{N1c} أو~\Log{N1i} لـ$!A$، وُجد
+!!a{proof}~$\delta'$ لـ$\OLId{greek-variable}{Gamma} \Sequent !A$ في~\Log{N2c}، أو في
+\Log{N2i}، حيث~$\OLId{greek-variable}{Gamma}$ مجموعة كل~$\OLId{latin-ordinary}{x}:!B$ التي يكون فيها~$!B^\OLId{latin-ordinary}{x}$ فرضًا
+مفتوحًا في~$\delta$.
+\end{prop}
+
+\begin{proof}
+  نسلك الاستقراء على~$\OLId{latin-ordinary}{n}=\pheight{\delta}$. فإذا كان~$\OLId{latin-ordinary}{n}=\OLMathNumeral{0}$، لم يكن
+  $\delta$ إلا الفرض المفتوح~$!A^\OLId{latin-ordinary}{x}$. وعندئذ~$\OLId{greek-variable}{Gamma}=\{\OLId{latin-ordinary}{x}:!A\}$، وتكون
+  $\OLId{greek-variable}{Gamma} \Sequent !A$ مسلّمة في~\Log{N2c} أو~\Log{N2i}.
+
+  وإن كان~$\OLId{latin-ordinary}{n}>\OLMathNumeral{0}$ قسمنا بحسب آخر الاستدلال في~$\delta$؛ ونبين حالة واحدة،
+  ونكل سائر الحالات إلى التمرين.
+
+  لنفرض أن آخر الاستدلال~$\Intro{\lif}$. عندئذ ينتهي~$\delta$ بـ
+  \[
+  \AxiomC{$\Discharge{!B}{\OLId{latin-ordinary}{x}}$}
+  \RightLabel{$\delta_\OLMathNumeral{1}$}
+  \DeduceC{$!C$}
+  \DischargeRule{\Intro{\lif}}{\OLId{latin-ordinary}{x}}
+  \UnaryInfC{$!B \lif !C$}
+  \DisplayProof
+  \]
+  وبفرض الاستقراء يوجد~!!a{proof}~$\delta_\OLMathNumeral{1}'$ في~\Log{N2c}، أو في
+  \Log{N2i}، لـ$\OLId{greek-variable}{Gamma}' \Sequent !C$، حيث~$\OLId{greek-variable}{Gamma}'$ هي الفروض الموسومة
+  المفتوحة في~$\delta_\OLMathNumeral{1}$. فإذا كان~$!B^\OLId{latin-ordinary}{x}$ فرضًا مفتوحًا في~$\delta_\OLMathNumeral{1}$،
+  بُرئ عند استدلال~$\Intro{\lif}$، وكانت فروض~$\delta$ المفتوحة هي
+  $\OLId{greek-variable}{Gamma}=\OLId{greek-variable}{Gamma}'\setminus\{\OLId{latin-ordinary}{x}:!B\}$. وبعبارة أخرى، يكون~$\delta_\OLMathNumeral{1}'$
+  !!a{proof} لـ$\OLId{latin-ordinary}{x}:!B, \OLId{greek-variable}{Gamma} \Sequent !C$، ويمكننا اتخاذ~$\delta'$ هو
+  \[
+  \AxiomC{}
+  \RightLabel{$\delta_\OLMathNumeral{1}'$}
+  \Deduce$\OLId{latin-ordinary}{x}:!B, \OLId{greek-variable}{Gamma} \fCenter !C$
+  \RightLabel{\Intro{\lif}}
+  \UnaryInf$\OLId{greek-variable}{Gamma} \fCenter !B \lif !C$
+  \DisplayProof
+  \]
+  وإذا لم يكن~$!B^\OLId{latin-ordinary}{x}$ فرضًا مفتوحًا في~$\delta_\OLMathNumeral{1}$، لم يبرئ
+  $\Intro{\lif}$ فرضًا، وكانت الفروض المفتوحة في~$\delta$ و$\delta_\OLMathNumeral{1}$
+  واحدة. ولأن وجود صيغة السياق~$\OLId{latin-ordinary}{x}:!B$ في مقدمة~$\Intro{\lif}$
+  ليس لازمًا في~\Log{N2c} و\Log{N2i}، أمكننا اتخاذ~$\delta'$ هو
+  \[
+  \AxiomC{}
+  \RightLabel{$\delta_\OLMathNumeral{1}'$}
+  \Deduce$\OLId{greek-variable}{Gamma} \fCenter !C$
+  \RightLabel{\Intro{\lif}}
+  \UnaryInf$\OLId{greek-variable}{Gamma} \fCenter !B \lif !C$
+  \DisplayProof
+  \]
+
+  والحالات التي ينتهي فيها~$\delta$ بقاعدة أخرى مماثلة.
+\end{proof}
+
+\begin{prop}
+إذا كان~$\delta$~!!a{proof} في~\Log{N2c} أو~\Log{N2i} لـ
+$\OLId{greek-variable}{Gamma} \Sequent !A$، وُجد~!!a{proof}~$\delta'$ في~\Log{N1c}، أو في
+\Log{N1i}، تكون~!!{formula} نهايته~$!A$، وفروضه المفتوحة~$!B^\OLId{latin-ordinary}{x}$ لكل
+$\OLId{latin-ordinary}{x}:!B \in \OLId{greek-variable}{Gamma}$.
+\end{prop}
+
+\begin{proof}
+  ونسلك أيضًا الاستقراء على~!!{height}~$\OLId{latin-ordinary}{n}$ للـ$\delta$. فإذا كان
+  $\OLId{latin-ordinary}{n}=\OLMathNumeral{0}$، كان~$\delta$ المسلّمة~$\OLId{latin-ordinary}{x}:!A \Sequent !A$. ويكون~!!{proof}
+  $\delta'$ هو الفرض~$!A^\OLId{latin-ordinary}{x}$.
+
+  وإن كان~$\OLId{latin-ordinary}{n}>\OLMathNumeral{0}$ قسمنا بحسب آخر الاستدلال في~$\delta$. فلو كان ذلك
+  الاستدلال~$\Intro{\lif}$ مثلًا، انتهى~$\delta$ بـ
+  \[
+  \bottomAlignProof
+  \AxiomC{}
+  \RightLabel{$\delta_\OLMathNumeral{1}$}
+  \Deduce$\OLId{latin-ordinary}{x}:!B, \OLId{greek-variable}{Gamma} \fCenter !C$
+  \RightLabel{\Intro{\lif}}
+  \UnaryInf$\OLId{greek-variable}{Gamma} \fCenter !B \lif !C$
+  \DisplayProof
+  \quad\text{ أو }\quad
+  \bottomAlignProof
+  \AxiomC{}
+  \RightLabel{$\delta_\OLMathNumeral{1}$}
+  \Deduce$\OLId{greek-variable}{Gamma} \fCenter !C$
+  \RightLabel{\Intro{\lif}}
+  \UnaryInf$\OLId{greek-variable}{Gamma} \fCenter !B \lif !C$
+  \DisplayProof
+  \]
+  وبفرض الاستقراء يوجد~!!a{proof}~$\delta_\OLMathNumeral{1}'$ في~\Log{N1c}، أو في
+  \Log{N1i}، لـ$!C$. وفي الحالة الأولى يكون~$!B^\OLId{latin-ordinary}{x}$ فرضًا مفتوحًا في
+  $\delta_\OLMathNumeral{1}'$، ولا يكون كذلك في الحالة الثانية. ويمكننا اتخاذ
+  !!{proof}~$\delta'$ هو، على الترتيب،
+  \[
+  \bottomAlignProof
+  \AxiomC{$\Discharge{!B}{\OLId{latin-ordinary}{x}}$}
+  \RightLabel{$\delta_\OLMathNumeral{1}'$}
+  \DeduceC{$!C$}
+  \DischargeRule{\Intro{\lif}}{\OLId{latin-ordinary}{x}}
+  \UnaryInfC{$!B \lif !C$}
+  \DisplayProof
+  \quad\text{ أو }\quad
+  \bottomAlignProof
+  \AxiomC{}
+  \RightLabel{$\delta_\OLMathNumeral{1}'$}
+  \DeduceC{$!C$}
+  \RightLabel{\Intro{\lif}}
+  \UnaryInfC{$!B \lif !C$}
+  \DisplayProof
+  \]
+\end{proof}
+
+\end{document}

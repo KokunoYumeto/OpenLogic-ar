@@ -1,0 +1,81 @@
+% Part: incompleteness
+% Chapter: theories-computability
+% Section: extensions-of-q-not-decidable
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{tcp}{cqn}
+
+\olsection{امتدادات $\Th{Q}$ المتسقة غير قابلة للقرار}
+
+\begin{explain}
+الاتساق، كما تقدم، أن تكون النظرية \emph{متسقة} بمعنى أنها لا تثبت
+$!A$ و$\lnot !A$ معًا، أيًّا كانت الصيغة $!A$. فالتناقض يستلزم كل
+شيء، ولذلك تصير النظرية غير المتسقة تافهة: تثبت فيها كل جملة.
+ومن البيّن أن الاتساق-$\omega$ يستلزم الاتساق، دون العكس؛ فثمة
+نظريات متسقة ليست متسقة-$\omega$. فإذا اقتصرنا في فرض
+\olref[oqn]{thm:oconsis-q} على الاتساق المعتاد، حصلنا على مبرهنة
+أقوى، وهو ما سنفعله.
+\end{explain}
+
+\begin{lem}
+يمتنع وجود «علاقة شاملة قابلة للحساب». والمراد أنه لا توجد علاقة
+ثنائية قابلة للحساب $\OLId{latin-looped}{R}(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y})$ تستوفي هذا الشرط: لكل علاقة أحادية
+قابلة للحساب $\OLId{latin-looped}{S}(\OLId{latin-ordinary}{y})$ عدد $\OLId{latin-ordinary}{k}$ يجعل، لكل $\OLId{latin-ordinary}{y}$، صدق $\OLId{latin-looped}{S}(\OLId{latin-ordinary}{y})$ مكافئًا لصدق
+$\OLId{latin-looped}{R}(\OLId{latin-ordinary}{k},\OLId{latin-ordinary}{y})$.
+\end{lem}
+
+\begin{proof}
+لنفرض وجود علاقة شاملة قابلة للحساب $\OLId{latin-looped}{R}(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y})$، ولنعرّف $\OLId{latin-looped}{S}(\OLId{latin-ordinary}{y})$ بأنها
+$\lnot \OLId{latin-looped}{R}(\OLId{latin-ordinary}{y},\OLId{latin-ordinary}{y})$. حينئذ تكون $\OLId{latin-looped}{S}(\OLId{latin-ordinary}{y})$ قابلة للحساب، فيوجد عدد $\OLId{latin-ordinary}{k}$ تكون
+عنده $\OLId{latin-looped}{S}(\OLId{latin-ordinary}{y})$ مكافئة لـ$\OLId{latin-looped}{R}(\OLId{latin-ordinary}{k},\OLId{latin-ordinary}{y})$. فتكون $\OLId{latin-looped}{S}(\OLId{latin-ordinary}{k})$ مكافئة لـ$\OLId{latin-looped}{R}(\OLId{latin-ordinary}{k},\OLId{latin-ordinary}{k})$
+ولنقيضها $\lnot \OLId{latin-looped}{R}(\OLId{latin-ordinary}{k},\OLId{latin-ordinary}{k})$ معًا، وهذا هو التناقض.
+\end{proof}
+
+
+\begin{thm}
+كل نظرية $\Th{T}$ متسقة تشتمل على $\Th{Q}$ تكون
+$\Th{T}$ غير قابلة للقرار.
+\end{thm}
+
+
+\begin{proof}
+لنفرض أن $\Th{T}$ امتداد متسق قابل للقرار لـ$\Th{Q}$.
+وسنبني بواسطة $\Th{T}$ علاقة شاملة قابلة للحساب، فيلزم المحال.
+
+نعرّف $\OLId{latin-looped}{R}(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y})$ بالشرط الآتي، اللازم والكافي لصدقها:
+\begin{quote}
+$\OLId{latin-ordinary}{x}$ شفرة لصيغة $!D(\OLId{latin-ordinary}{u})$، و$\Th{T}$ تثبت $!D(\num \OLId{latin-ordinary}{y})$.
+\end{quote}
+فمن فرض قابلية $\Th{T}$ للقرار تكون $\OLId{latin-looped}{R}$ قابلة للحساب. وأما شمول
+$\OLId{latin-looped}{R}$ فبيانه أن كل علاقة قابلة للحساب $\OLId{latin-looped}{S}(\OLId{latin-ordinary}{y})$ تقبل التمثيل في
+$\Th{Q}$، ومن ثم في $\Th{T}$، بصيغة $!D_\OLId{latin-looped}{S}(\OLId{latin-ordinary}{u})$. فلكل $\OLId{latin-ordinary}{n}$:
+\begin{eqnarray*}
+\OLId{latin-looped}{S}(\OLId{latin-ordinary}{n}) & \lif & \OLId{latin-looped}{T} \vdash !D_\OLId{latin-looped}{S}(\num \OLId{latin-ordinary}{n}) \\
+& \lif & \OLId{latin-looped}{R}(\Gn{!D_\OLId{latin-looped}{S}(\OLId{latin-ordinary}{u})}, \OLId{latin-ordinary}{n})
+\end{eqnarray*}
+وكذلك
+\begin{eqnarray*}
+\lnot \OLId{latin-looped}{S}(\OLId{latin-ordinary}{n}) & \lif & \OLId{latin-looped}{T} \vdash \lnot !D_\OLId{latin-looped}{S}(\num \OLId{latin-ordinary}{n}) \\
+& \lif & \OLId{latin-looped}{T} \not\vdash !D_\OLId{latin-looped}{S}(\num \OLId{latin-ordinary}{n}) \quad \text{(لأن $\Th{T}$
+  متسقة)} \\
+& \lif & \lnot \OLId{latin-looped}{R}(\Gn{!D_\OLId{latin-looped}{S}(\OLId{latin-ordinary}{u})}, \OLId{latin-ordinary}{n}).
+\end{eqnarray*}
+وبذلك يكون، لكل $\OLId{latin-ordinary}{y}$، صدق $\OLId{latin-looped}{S}(\OLId{latin-ordinary}{y})$ مكافئًا لصدق
+$\OLId{latin-looped}{R}(\Gn{!D_\OLId{latin-looped}{S}(\OLId{latin-ordinary}{u})},\OLId{latin-ordinary}{y})$. فقد ثبت أن $\OLId{latin-looped}{R}$ شاملة، خلافًا للّمة المتقدمة.
+\end{proof}
+
+ونطلق «الحساب الصادق» على النظرية
+$\Setabs{!A}{\Sat{\Nat}{!A}}$، أي جميع جمل لغة الحساب التي تصدق
+في التأويل القياسي.
+
+\begin{cor}
+لا يقبل الحساب الصادق القرار.
+\end{cor}
+
+%In Section~\olref{undefinability:truth:section} we will state a stronger
+%result, due to Tarski.
+
+\end{document}

@@ -1,0 +1,58 @@
+% Part: sets-functions-relations
+% Chapter: arithmetization
+% Section: rationals
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid[ar]{sfr}{arith}{rat}
+\olsection{من $\Int$ إلى $\Rat$}
+
+قد رأينا بناء الأعداد الصحيحة من الأعداد الطبيعية بأدوات من نظرية المجموعات الساذجة. ونبني النسبية من الصحيحة على نهج قريب منه. وأصل النظر ملاحظتان:
+\begin{enumerate}
+\item كل عدد نسبي يقبل الصورة $\nicefrac{\OLId{latin-ordinary}{i}}{\OLId{latin-ordinary}{j}}$، حيث $\OLId{latin-ordinary}{i}$ و$\OLId{latin-ordinary}{j}$ صحيحان، و$\OLId{latin-ordinary}{j}$ ليس صفرًا.
+\item والمعلومات التي يتضمنها $\nicefrac{\OLId{latin-ordinary}{i}}{\OLId{latin-ordinary}{j}}$ يمكن إيداعها في الزوج المرتب $\tuple{ \OLId{latin-ordinary}{i}, \OLId{latin-ordinary}{j}}$.
+\end{enumerate}
+فيتبادر أن نجعل الأعداد النسبية \emph{هي} الأزواج المرتبة من $\Int \times (\Int \setminus \{\OLMathNumeral{0}_\Int\})$. غير أن هذا لا يستقيم وحده، كما لم يستقم نظيره آنفًا؛ إذ نريد $\nicefrac{\OLMathNumeral{3}}{\OLMathNumeral{2}} = \nicefrac{\OLMathNumeral{6}}{\OLMathNumeral{4}}$، مع أن $\tuple{ \OLMathNumeral{3}, \OLMathNumeral{2}}\neq \tuple{ \OLMathNumeral{6},
+\OLMathNumeral{4}}$. والمطلب على وجه العموم هو
+\[
+	\nicefrac{\OLId{latin-ordinary}{a}}{\OLId{latin-ordinary}{b}} = \nicefrac{\OLId{latin-ordinary}{c}}{\OLId{latin-ordinary}{d}} \text{ إذا وفقط إذا } \OLId{latin-ordinary}{a} \times \OLId{latin-ordinary}{d} = \OLId{latin-ordinary}{b} \times \OLId{latin-ordinary}{c}
+\]
+فنضع لذلك {علاقة تكافؤ} على $\Int \times
+(\Int \setminus \{\OLMathNumeral{0}_\Int\})$ بالحد
+\[
+	\tuple{ \OLId{latin-ordinary}{a}, \OLId{latin-ordinary}{b} }\Ratequiv \tuple{ \OLId{latin-ordinary}{c}, \OLId{latin-ordinary}{d}} \text{ إذا وفقط إذا }\OLId{latin-ordinary}{a} \times \OLId{latin-ordinary}{d} = \OLId{latin-ordinary}{b} \times \OLId{latin-ordinary}{c}
+\]
+ويجب تحقيق كونها علاقة تكافؤ. وبرهانه قريب من برهان $\Intequiv$، فنتركه تمرينًا.
+\begin{prob}
+بين أن $\Ratequiv$ من علاقات التكافؤ.
+\end{prob}
+وبثبوت ذلك يصح التعريف الآتي:
+\begin{defn}
+الأعداد النسبية فئات أزواج الأعداد الصحيحة تحت علاقة التكافؤ $\Ratequiv$، بشرط ألا يكون الحد الثاني في الزوج صفرًا. أي إن $\Rat =
+\equivclass{(\Int \times (\Int\setminus \{\OLMathNumeral{0}_\Int\}))}{\Ratequiv}$.
+\end{defn}
+
+ثم نعين العمليات الأساسية، كما صنعنا في الصحيحة. فإذا رمزنا بـ$\equivrep{\OLId{latin-ordinary}{i},\OLId{latin-ordinary}{j}}{\Ratequiv}$ إلى فئة التكافؤ تحت $\Ratequiv$ التي تضم $\tuple{\OLId{latin-ordinary}{i}, \OLId{latin-ordinary}{j}}$ بوصفه !!a{element} منها، كانت حدود العمليات:
+\begin{align*}
+	\equivrep{\OLId{latin-ordinary}{a}, \OLId{latin-ordinary}{b}}{\Ratequiv} + \equivrep{\OLId{latin-ordinary}{c}, \OLId{latin-ordinary}{d}}{\Ratequiv} &= \equivrep{ad + bc,  bd}{\Ratequiv}\\
+	\equivrep{\OLId{latin-ordinary}{a}, \OLId{latin-ordinary}{b}}{\Ratequiv} \times \equivrep{\OLId{latin-ordinary}{c}, \OLId{latin-ordinary}{d}}{\Ratequiv} &= \equivrep{\OLId{latin-ordinary}{a}  \OLId{latin-ordinary}{c}, \OLId{latin-ordinary}{b} \OLId{latin-ordinary}{d}}{\Ratequiv}.
+\intertext{لتعريف $r \leq s$ على هذه الأعداد النسبية، نستعمل حقيقة أن
+$r \le s$ إذا وفقط إذا كان $s - r$ غير سالب، أي إن $s - r$ يمكن كتابته
+على صورة $\nicefrac{i}{j}$ حيث يكون $i$ غير سالب ويكون $j$~موجبًا:}
+	\equivrep{\OLId{latin-ordinary}{a}, \OLId{latin-ordinary}{b}}{\Ratequiv} \leq \equivrep{\OLId{latin-ordinary}{c}, \OLId{latin-ordinary}{d}}{\Ratequiv} &\text{ إذا وفقط إذا }
+	\equivrep{\OLId{latin-ordinary}{c}, \OLId{latin-ordinary}{d}}{\Ratequiv} - \equivrep{\OLId{latin-ordinary}{a}, \OLId{latin-ordinary}{b}}{\Ratequiv} =
+	\equivrep{\OLId{latin-ordinary}{i}_\Int, \OLId{latin-ordinary}{j}_\Int}{\Ratequiv}
+\end{align*}
+حيث يوجد $\OLId{latin-ordinary}{i} \in \Nat$ و$\OLMathNumeral{0} \neq \OLId{latin-ordinary}{j} \in \Nat$ يحققان ذلك.
+
+ولا بد بعد الوضع من البرهان على أن التعريفات تجري \emph{كما هو مطلوب}؛ وتفصيله في \olref[check]{sec}، حيث نثبت أنها تفي بالغرض. ونحتاج أخيرًا إلى معاملة الأعداد الصحيحة \emph{معاملة} النسبية، فنضع لكل $\OLId{latin-ordinary}{i} \in \Int$ العدد $\OLId{latin-ordinary}{i}_\Rat =
+\equivrep{\OLId{latin-ordinary}{i}, \OLMathNumeral{1}_\Int}{\Ratequiv}$. وسيأتي في \olref[check]{sec} أيضًا تحقق سلامة هذا الوضع.
+
+\begin{prob}
+حقق $(\OLId{latin-ordinary}{i} + \OLId{latin-ordinary}{j})_\Rat = \OLId{latin-ordinary}{i}_\Rat+ \OLId{latin-ordinary}{j}_\Rat$، و$(\OLId{latin-ordinary}{i} \times \OLId{latin-ordinary}{j})_\Rat =
+\OLId{latin-ordinary}{i}_\Rat \times \OLId{latin-ordinary}{j}_\Rat$، و$\OLId{latin-ordinary}{i} \leq \OLId{latin-ordinary}{j} \liff \OLId{latin-ordinary}{i}_\Rat \leq \OLId{latin-ordinary}{j}_\Rat$، مهما يكن $\OLId{latin-ordinary}{i}, \OLId{latin-ordinary}{j} \in \Int$.
+\end{prob}
+
+\end{document}

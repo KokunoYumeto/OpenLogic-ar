@@ -1,0 +1,112 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+	
+\olfileid{sth}{replacement}{finiteaxiomatizability}
+\olsection{ملحق: قابلية الوضع في مسلّمات منتهية}
+نختم الفصل بنتائج تستخرج من الاستبدال. أولها لـ\citet{Montague1961}؛
+وينبغي التنبه إلى أن البرهان ليس \emph{داخل}~$\ZF$، بل هو برهان
+\emph{عن}~$\ZF$:
+\begin{thm}\ollabel{zfnotfinitely}
+	لا يمكن وضع~$\ZF$ في مسلّمات منتهية. وأعم من ذلك: إذا كانت~$\Th{T}$
+	منتهية وكان~$\Th{T} \Proves \ZF$، كانت~$\Th{T}$ غير متسقة.
+	
+	(ونقصر النظر ضمنًا على جمل الرتبة الأولى التي ليس في رمزها الأولي
+	من غير المنطقيات إلا~$\in$، ونقصد بـ$\Th{T} \Proves \ZF$ أن
+	$\Th{T} \Proves \phi$ لكل~$\phi \in \ZF$.)
+\end{thm}
+\begin{proof}
+	ثبت نظرية منتهية~$\Th{T}$ بحيث~$\Th{T} \Proves \ZF$. ومن ثم تثبت
+	$\Th{T}$ الانعكاس، أعني~\olref[sth][replacement][ref]{reflectionschema}.
+	ولما كانت~$\Th{T}$ منتهية، جاز جمعها في اقتران واحد~$\theta$.
+	وبعكس هذه الصيغة ينتج
+	$\Th{T} \Proves \exists \beta(\theta \liff \theta^{\OLId{latin-looped}{V}_\beta})$.
+	ومن البين أن~$\Th{T} \Proves \theta$، ومن ثم
+	$\Th{T} \Proves \exists \beta\ \theta^{\OLId{latin-looped}{V}_\beta}$.
+	
+	ولنرمز بـ$\psi(\OLId{latin-looped}{X})$ اختصارًا إلى:
+	\[
+		\theta^\OLId{latin-looped}{X} \land \OLId{latin-looped}{X}\text{ مرحلة} \land (\forall \OLId{latin-looped}{Y} \in \OLId{latin-looped}{X})(\OLId{latin-looped}{Y}\text{ مرحلة}\lif \lnot \theta^{\OLId{latin-looped}{Y}})
+	\]
+	ومعناه التقريبي أن~$\OLId{latin-looped}{X}$ نموذج مرحلي لـ$\theta$، وهو أدنى من هذه
+	الجهة بحسب~$\in$. وإذا استحضرنا
+	$\Th{T} \Proves \exists \beta\ \theta^{\OLId{latin-looped}{V}_\beta}$، واستعملنا خواص
+	الرتب الأساسية داخل~$\ZF$، ومن ثم داخل~$\Th{T}$، حصلنا على:
+	\begin{equation}
+		\Th{T} \Proves \exists \OLId{latin-looped}{M} \psi(\OLId{latin-looped}{M}). \tag{*}\label{Mpsi}
+	\end{equation}
+	وباستخدام المقترن الأول من~$\psi(\OLId{latin-looped}{X})$، متى كان~$\Th{T} \Proves \sigma$،
+	كان~$\Th{T} \Proves \forall \OLId{latin-looped}{X}(\psi(\OLId{latin-looped}{X}) \lif \sigma^\OLId{latin-looped}{X})$.
+	وبمقتضى~\eqref{Mpsi}:
+	\begin{align*}
+		\Th{T} &\Proves \forall \OLId{latin-looped}{X}(\psi(\OLId{latin-looped}{X}) \lif (\exists \OLId{latin-looped}{N} \psi(\OLId{latin-looped}{N}))^\OLId{latin-looped}{X})\\
+	\intertext{وباستخدام هذا، ثم \eqref{Mpsi} مرة أخرى:}
+		\Th{T} &\Proves \exists \OLId{latin-looped}{M}(\psi(\OLId{latin-looped}{M}) \land (\exists \OLId{latin-looped}{N} \psi(\OLId{latin-looped}{N}))^\OLId{latin-looped}{M})
+	\intertext{ومن ثم، بوجه خاص:}
+		\Th{T} &\Proves \exists \OLId{latin-looped}{M}(\psi(\OLId{latin-looped}{M}) \land (\exists \OLId{latin-looped}{N} \in \OLId{latin-looped}{M})((\OLId{latin-looped}{N}\text{ مرحلة})^\OLId{latin-looped}{M} \land (\theta^\OLId{latin-looped}{N})^\OLId{latin-looped}{M}))
+	\intertext{وباستدلال أولي عن إطلاق المراحل والرتب:}
+		\Th{T} &\Proves \exists \OLId{latin-looped}{M}(\psi(\OLId{latin-looped}{M}) \land (\exists \OLId{latin-looped}{N} \in \OLId{latin-looped}{M})(\OLId{latin-looped}{N}\text{ مرحلة} \land \theta^\OLId{latin-looped}{N}))
+	\end{align*}
+	فتكون~$\Th{T}$ غير متسقة.
+	\footnote{يتطلب هذا «الاستدلال الأولي»
+	إثبات بعض حقائق الإطلاق المتعلقة بمراحل الهرم ورتبه.}
+\end{proof}
+
+وهذه نتيجة من الجنس نفسه، نبه إليها~\citet[223]{Potter2004}:
+
+\begin{prop}\ollabel{finiteextensionofZ}
+	لتكن~$\Th{T}$ امتدادًا لـ$\Z$ بعدد منته من المسلّمات الجديدة. إذا
+	كان~$\Th{T} \Proves \ZF$، فإن~$\Th{T}$ غير متسقة. (والقيود
+	الضمنية هنا هي نفسها التي في~\olref{zfnotfinitely}.)
+\end{prop}
+\begin{proof}
+	اجعل~$\theta$ اقتران مسلّمات~$\Th{T}$ كلها \emph{إلا} مثيلات الفصل
+	غير المتناهية. وعرّف~$\psi$ من~$\theta$ كما في
+	\olref{zfnotfinitely}. فعندئذ يمكننا، استنادًا إلى المراحل، إثبات
+	$\Th{T} \Proves \exists \OLId{latin-looped}{M} \psi(\OLId{latin-looped}{M})$.
+	
+	وكما في~\olref{zfnotfinitely}، نستطيع إثبات المخطط الآتي: إذا كان
+	$\Th{T} \Proves \sigma$، كان
+	$\Th{T} \Proves \forall \OLId{latin-looped}{X}(\psi(\OLId{latin-looped}{X}) \lif \sigma^\OLId{latin-looped}{X})$. وبعد ذلك يتم
+	البرهان تمامًا كما في~\olref{zfnotfinitely}.
+	
+	غير أن إقامة هذا المخطط تحتاج إلى زيادة يسيرة في العمل عما احتاج
+	إليه في~\olref{zfnotfinitely}. فمثيلات
+	الفصل داخلة في~$\Th{T}$، وليست من مقترنات~$\theta$. وندفع هذا بأن
+	نثبت أن~$\Th{T} \Proves \forall \OLId{latin-looped}{X}(\OLId{latin-looped}{X}\text{ مرحلة} \lif \sigma^\OLId{latin-looped}{X})$
+	لكل مثيل فصل~$\sigma$؛ ونكل تفصيله إلى القارئ.
+\end{proof}
+\begin{prob}
+	بيّن أنه لكل مثيل فصل~$\sigma$ يكون:
+	$\Z \Proves \forall \OLId{latin-looped}{X}(\OLId{latin-looped}{X}\text{ مرحلة} \lif \sigma^\OLId{latin-looped}{X})$.
+	(استخدمنا هذا المخطط في
+	\olref[sth][replacement][finiteaxiomatizability]{finiteextensionofZ}.)
+\end{prob}
+\begin{prob}
+	بيّن أنه لكل~$\phi \in \Z$ يكون
+	$\ZF \Proves \phi^{\OLId{latin-looped}{V}_{\omega+\omega}}$.
+\end{prob}
+\begin{prob}
+	تحقق من سائر النتائج المخططية التي استعملت في برهاني
+	\olref[sth][replacement][finiteaxiomatizability]{zfnotfinitely} و
+	\olref[sth][replacement][finiteaxiomatizability]{finiteextensionofZ}.
+\end{prob}
+
+وقد أشرنا في~\olref[sth][replacement][absinf]{sec} إلى أن هذا يثبت
+أن الاستبدال أقوى تمامًا من
+\olref[ordinals][ordtype]{thmOrdinalRepresentation}. وبتعبير أدق:
+إذا كانت~$\Z$ + «كل ترتيب جيد متماثل مع عدد ترتيبي فريد» متسقة، لم
+تقدر على إثبات بعض مثيلات الاستبدال.
+
+
+	%	By assumption, $\psi^{V_\alpha}$ has the form:
+	%	\[
+	%		(\forall A \in V_\alpha)(\exists S \in V_\alpha)(\forall x \in V_\alpha)(x \in S \liff (\phi^{V_\alpha}(x) \land x \in A))
+	%	\]
+	%	To establish this holds, fix $A \in V_\alpha$. Using Separation, obtain:
+	%	\[
+	%		S = \Setabs{x \in A}{\phi^{V_\alpha}(x)}
+	%	\]
+	%	Now $S \in V_\alpha$, since $S \subseteq A \in V_\alpha$, and clearly $(\forall x \in V_\alpha)(x \in S \liff (\phi^{V_\alpha}(x) \land x \in A)$.
+
+\end{document}

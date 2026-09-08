@@ -1,0 +1,193 @@
+% Part: proof-theory
+% Chapter: natural-deduction
+% Section: quantifiers
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{nat}{qua}
+
+\olsection{في انتظام \usetoken{P}{proof} والتعويض}
+
+تنشأ من قواعد الأسوار صعوبات سببها «شروط المتغير المميز» في
+$\Elim{\lexists}$ و$\Intro{\lforall}$. وأكثرها يزول إذا ضمنّا ألا يعاد
+استعمال~!!{constant}~$c$ في هذه الاستدلالات. ومن أجل ذلك نضع التعريف
+الآتي.
+
+\begin{defn}
+نسمي~!!{proof} الاستنباط الطبيعي~$\delta$ \emph{منتظمًا} إذا استوفى
+الشرطين الآتيين:
+\begin{enumerate}
+  \item ألا يستعمل متغير مميز~$a$ بهذا الوصف في أكثر من استدلال واحد
+  لـ$\Elim{\lexists}$ أو~$\Intro{\lforall}$؛
+  \item وإذا كان~$a$ هو المتغير المميز في استدلال~$\Elim{\lexists}$
+  أو~$\Intro{\lforall}$، ألا يظهر إلا في~!!{proof} الجزئي المباشر المؤدي
+  إلى المقدمة الصغرى أو إلى المقدمة، على الترتيب.
+\end{enumerate}
+\end{defn}
+
+\begin{lem}\ollabel{lem:subst-regular} إذا كان~$\delta$ منتظمًا،
+وينتهي بـ$!C$، وكان~$c$~!!a{constant} لا يُستخدم متغيرًا مميزًا في
+$\delta$، وكان~$t$ حدًا لا يحتوي أي متغير مميز من~$\delta$، فإن
+$\Subst{\delta}{t}{c}$ الناتج من~$\delta$ باستبدال كل ظهور لـ$c$ بـ
+$t$ هو~!!{proof} منتظم. وتكون~!!{formula} نهاية
+$\Subst{\delta}{t}{c}$ هي~$\Subst{!C}{t}{c}$. وإذا كان~$!A^x$ فرضًا
+مفتوحًا في~$\delta$، كان~$\Subst{!A}{t}{c}^x$ فرضًا مفتوحًا في
+$\Subst{\delta}{t}{c}$.
+\end{lem}
+
+\begin{proof}
+  نسلك الاستقراء على~$\pheight{\delta}$. فإن كان~$\pheight{\delta}=0$
+  لم يكن فيه غير الفرض~$!A^x$، وعندئذ يكون~$\Subst{\delta}{t}{c}$ هو
+  $\Subst{!A}{t}{c}^x$.
+
+  وإن كان~$\pheight{\delta}>0$ قسمنا بحسب آخر استدلال في~$\delta$.
+  فأما قواعد الروابط القضوية فحالاتها يسيرة نتركها تمارين، وأما هنا
+  فنبحث الحالات التي يكون آخر~$\delta$ فيها استدلالًا سُوَريًا.
+  \begin{enumerate}
+    \item إذا كان آخر الاستدلال~$\Intro{\lforall}$، كان~$\delta$
+    على الصورة
+    \[
+    \AxiomC{}
+    \RightLabel{$\delta'$}
+    \DeduceC{$!A(a,c)$}
+    \RightLabel{\Intro{\lforall}}
+    \UnaryInfC{$\lforall[x][!A(x,c)]$}
+    \DisplayProof
+    \]
+    وبفرض الاستقراء يكون~$\Subst{\delta'}{t}{c}$~!!{proof} منتظمًا لـ
+    $!A(a,t)$. ولأن~$a$ متغير مميز في~$\delta$، فلا تظهر~$a$ في~$t$.
+    ومن ثم يكون آخر الاستدلال في~$\Subst{\delta}{t}{c}$،
+    \[
+    \AxiomC{}
+    \RightLabel{$\Subst{\delta'}{t}{c}$}
+    \DeduceC{$!A(a,t)$}
+    \RightLabel{\Intro{\lforall}}
+    \UnaryInfC{$\lforall[x][!A(x,t)]$}
+    \DisplayProof
+    \]
+    صحيحًا: لما كان~$t$ لا يحتوي~$a$، لم تحتوها النتيجة ولا أي فرض
+    مفتوح.
+    \item إذا كان آخر الاستدلال~$\Elim{\lforall}$، كان~$\delta$
+    على الصورة
+    \[
+    \AxiomC{}
+    \RightLabel{$\delta'$}
+    \DeduceC{$\lforall[x][!A(x,c)]$}
+    \RightLabel{\Elim{\lforall}}
+    \UnaryInfC{$!A(s(c),c)$}
+    \DisplayProof
+    \]
+    وبفرض الاستقراء يكون~$\Subst{\delta'}{t}{c}$~!!{proof} منتظمًا لـ
+    $\lforall[x][!A(x,t)]$. (وقد يحتوي الحد~$s(c)$ في النتيجة~$c$،
+    وقد لا يحتويها.) ويكون آخر الاستدلال في
+    $\Subst{\delta}{t}{c}$،
+    \[
+    \AxiomC{}
+    \RightLabel{$\Subst{\delta'}{t}{c}$}
+    \DeduceC{$\lforall[x][!A(x,t)]$}
+    \RightLabel{\Elim{\lforall}}
+    \UnaryInfC{$!A(s(t),t)$}
+    \DisplayProof
+    \]
+    صحيحًا، ويكون~$!A(s(t),t) \ident \Subst{!A(s(c),c)}{t}{c}$.
+    وحالة~$\Intro{\lexists}$ مماثلة.
+  \item إذا كان آخر الاستدلال~$\Elim{\lexists}$، كان~$\delta$
+    على الصورة
+    \[
+    \AxiomC{}
+    \RightLabel{$\delta_1'$}
+    \DeduceC{$\lexists[x][!A(x,c)]$}
+    \AxiomC{$\Discharge{!A(a,c)}{x}$}
+    \RightLabel{$\delta_2'$}
+    \DeduceC{$!C$}
+    \DischargeRule{\Elim{\lexists}}{x}
+    \BinaryInfC{$!C$}
+    \DisplayProof
+    \]
+    وبفرض الاستقراء يكون~$\Subst{\delta_1'}{t}{c}$ و
+    $\Subst{\delta_2'}{t}{c}$~!!{proof}s منتظمين: الأول لـ
+    $\lexists[x][!A(x,t)]$، والثاني لـ$\Subst{!C}{t}{c}$ من الفرض
+    المفتوح~$!A(a,t)^x$. ولأن~$a$ متغير مميز في~$\delta$، فلا تظهر
+    $a$ في~$t$. ومن ثم يكون آخر الاستدلال في
+    $\Subst{\delta}{t}{c}$،
+    \[
+    \AxiomC{}
+    \RightLabel{$\Subst{\delta_1'}{t}{c}$}
+    \DeduceC{$\lexists[x][!A(x,t)]$}
+    \AxiomC{$\Discharge{!A(a,t)}{x}$}
+    \RightLabel{$\Subst{\delta_2'}{t}{c}$}
+    \DeduceC{$\Subst{!C}{t}{c}$}
+    \DischargeRule{\Elim{\lexists}}{x}
+    \BinaryInfC{$\Subst{!C}{t}{c}$}
+    \DisplayProof
+    \]
+    صحيحًا: لا تظهر~$a$ في المقدمة الكبرى
+    $\lexists[x][!A(x,t)]$، ولا في النتيجة~$\Subst{!C}{t}{c}$، ولا في
+    أي فرض مفتوح سوى الفرض المبرأ~$!A(a,t)^x$.
+  \end{enumerate}
+\end{proof}
+
+\begin{prop}\ollabel{prop:regular}
+إذا كان~$\delta$~!!a{proof} في~\Log{N1c} أو~\Log{N1i}، وجد
+!!{proof} منتظم~$\delta'$ مماثل له في البنية، ومن ثم في~!!{height}، ولا
+يفارق~$\delta$ إلا في إبدال المتغيرات المميزة.
+\end{prop}
+
+\begin{proof}
+نسمي، لهذا البرهان وحده، استدلال المتغير المميز في~$\delta$
+\emph{نظيفًا} إذا لم يستعمل متغيره المميز في استدلال آخر بهذا الوصف،
+ولم يظهر ذلك المتغير في~$\delta$ خارج~!!{proof} الاستدلال الجزئي
+المباشر؛ وما عدا ذلك فنسميه \emph{متسخًا}. وليكن~$n$ عدد الاستدلالات
+المتسخة في~$\delta$. ونبرهن بالاستقراء القوي على~$n$ أن~$\delta$ يحول إلى
+!!{proof} المنتظم المطلوب~$\delta'$. فإذا كان~$n=0$ كانت استدلالات
+المتغير المميز في~$\delta$ كلها نظيفة، فكان~$\delta$ منتظمًا وانتهى
+الأمر. وإن لم يكن، أخذنا أعلى استدلال متسخ لمتغير مميز، وليكن مثلًا
+$\Intro{\lforall}$. وعندئذ يكون~!!{proof} الجزئي~$\delta_1$ من
+$\delta$ المنتهي به على الصورة
+    \[
+    \AxiomC{}
+    \RightLabel{$\delta_2$}
+    \DeduceC{$!A(c)$}
+    \RightLabel{\Intro{\lforall}}
+    \UnaryInfC{$\lforall[x][!A(x)]$}
+    \DisplayProof
+    \]
+وتنبّه إلى أن~$c$ لا تظهر في~$\lforall[x][!A(x)]$ ولا في فرض مفتوح لأنها
+متغير مميز. ويكون البرهان~$\delta_2$ منتظمًا، لأن كل استدلال لمتغير
+مميز فيه نظيف بحكم اختيارنا أعلى استدلال متسخ. ولتكن~$a$~!!a{constant}
+لا تظهر في~$\delta$.
+وبفضل~\olref{lem:subst-regular} يكون~$\Subst{\delta_2}{a}{c}$ برهانًا
+منتظمًا لـ$!A(a)$. وبشرط المتغير المميز لا يحتوي أي فرض مفتوح في
+$\delta_2$ الثابت~$c$، ومن ثم لا يحتوي أي فرض مفتوح في
+$\Subst{\delta_2}{a}{c}$ الثابت~$a$. وعلى هذا يمكننا تطبيق
+$\Intro{\lforall}$. وإذا استبدلنا بـ$\delta_1$ في~$\delta$ البرهان
+$\delta_1'$،
+    \[
+    \AxiomC{}
+    \RightLabel{$\Subst{\delta_2}{a}{c}$}
+    \DeduceC{$!A(a)$}
+    \RightLabel{\Intro{\lforall}}
+    \UnaryInfC{$\lforall[x][!A(x)]$}
+    \DisplayProof
+    \]
+نكون قد أقمنا استدلالًا نظيفًا مقام استدلال متسخ لمتغير مميز، ولم نغير
+إلا المتغير المميز~$c$ إلى~$a$. فيبقى في البرهان الناتج عدد من
+استدلالات المتغير المميز المتسخة أقل من~$n$، ومن فرض الاستقراء القوي
+تلزم النتيجة.
+\end{proof}
+
+\begin{prob}
+صف الحالة في برهان~\olref{prop:regular} التي يكون فيها أعلى استدلال
+لمتغير مميز هو~$\Elim{\lexists}$.
+\end{prob}
+
+ولن نذكر القضية المتقدمة كلما استعملناها، بل نفرض فيما يأتي انتظام كل
+!!{proof}s التي ننظر فيها؛ فإن لم تكن منتظمة بدّلنا متغيراتها المميزة
+حتى تنتظم.
+
+تصدق~\Olref{lem:subst-regular} و\olref{prop:regular} كذلك على
+\Log{N2c} و\Log{N2i}. ونترك البرهانين تمرينين.
+
+\end{document}

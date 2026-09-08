@@ -1,0 +1,42 @@
+% Part: first-order-logic
+% Chapter: introduction
+% Section: substitution
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{int}{sub}
+
+\olsection{الإحلال}
+
+لنأخذ مثالًا يبيّن اتصال هذه المباحث، وكيف يمهد ضبط النحو والدلالة
+لما بعدها. ينبغي أن تتيح أنساق ال!!{derivation} لنا
+!!{derive} $\Atom{\Obj P}{\Obj a}$ من
+$\lforall[\Obj v_\OLMathNumeral{0}][\Atom{\Obj P}{\Obj v_0}]$، وقد نختار أن
+نجعل هذا قاعدة استدلال. لكن القاعدة يجب أن تصاغ على العموم،
+لا مقصورة على~$\Obj P$ و$\Obj a$ و$\Obj v_\OLMathNumeral{0}$؛ بل لكل
+!!{formula}~$!A$، وحد~$\OLId{latin-ordinary}{t}$، و!!{variable}~$\OLId{latin-ordinary}{x}$. وال!!{constant}s،
+كما تقدم، حدود؛ وسيأتي النظر في حدود مركبة من
+ال!!{constant}s وال!!{function}s أيضًا. فنريد عبارة من قبيل:
+«متى أمكن !!{derive} $\lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]$، جاز استنتاج
+$!A(\OLId{latin-ordinary}{t})$، وهي ما ينتج عن حذف $\lforall[\OLId{latin-ordinary}{x}]$ وإحلال~$\OLId{latin-ordinary}{t}$
+محل~$\OLId{latin-ordinary}{x}$». فما حقيقة «إحلال $\OLId{latin-ordinary}{t}$ محل~$\OLId{latin-ordinary}{x}$»؟ وكيف تتصل
+$!A(\OLId{latin-ordinary}{x})$ بـ~$!A(\OLId{latin-ordinary}{t})$؟ وأيصح هذا في كل حال؟
+
+لأجل ذلك نعرّف عملية \emph{الإحلال}. وليس أمرها مجرد وضع~$\OLId{latin-ordinary}{t}$
+مكان كل~$\OLId{latin-ordinary}{x}$ في~$!A$؛ ولا كل~$\OLId{latin-ordinary}{t}$ يصلح أن يحل محل كل~$\OLId{latin-ordinary}{x}$.
+نضبط هذه القيود بالتعريف الاستقرائي مرة أخرى. فإذا تم الضبط،
+صارت العبارة «استنتج $!A(\OLId{latin-ordinary}{t})$ من $\lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]$» قاعدة
+محددة بدقة. ونستطيع حينئذ إثبات صوابها، أي إن
+$\lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]$ تستلزم~$!A(\OLId{latin-ordinary}{t})$. ولإثبات هذا نحتاج إلى
+نتيجة قد لا يظهر وجه الحاجة إليها في البدء: فالقول بأن
+$\lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]$ تستلزم~$!A(\OLId{latin-ordinary}{t})$ مبني على أن تحقق
+$\Sat{\OLId{latin-looped}{M}}{!A(\OLId{latin-ordinary}{t})}$ إنما يتبع قيمة الحد~$\OLId{latin-ordinary}{t}$. فإذا كان $\OLId{latin-ordinary}{m}$
+هو ال!!{element} من~$\Domain{\OLId{latin-looped}{M}}$ الذي يعيّنه~$\OLId{latin-ordinary}{t}$، كان
+$\Sat{\OLId{latin-looped}{M}}{!A(\OLId{latin-ordinary}{t})}[\OLId{latin-ordinary}{s}]$ إذا وفقط إذا كان
+$\Sat{\OLId{latin-looped}{M}}{!A(\OLId{latin-ordinary}{x})}[\Subst{\OLId{latin-ordinary}{s}}{\OLId{latin-ordinary}{m}}{\OLId{latin-ordinary}{x}}]$. ويعم هذا الحكم ما إذا
+اشتمل $\OLId{latin-ordinary}{t}$ على !!{variable}s؛ غير أن عمومه يقتضي العناية
+بعبارته الدقيقة.
+
+\end{document}

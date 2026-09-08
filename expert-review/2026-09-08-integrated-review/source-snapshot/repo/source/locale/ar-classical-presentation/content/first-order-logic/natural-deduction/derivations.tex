@@ -1,0 +1,101 @@
+% Part: first-order-logic
+% Chapter: natural-deduction
+% Section: derivations
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{ntd}{der}}
+      {\olfileid{pl}{ntd}{der}}
+
+\olsection{\usetoken{P}{derivation}}
+
+\begin{explain}
+قد عُرف الفرض وقواعد الاستدلال؛ ومنهما تُنشأ
+!!^{derivation}s الاستنتاج الطبيعي بالاستقراء.
+فكل !!{derivation} إما فرض مفرد، وإما واحد أو اثنان أو ثلاثة من ال!!{derivation}s يتلوها استدلال صحيح.
+\end{explain}
+
+\begin{defn}[!!^{derivation}]
+يكون \Article{derivation} \emph{!!{derivation}} لـ!!a{sentence}~$!A$
+من افتراضات~$\OLId{greek-variable}{Gamma}$ شجرة منتهية من ال!!{sentence}s تحقق الشروط الآتية:
+\begin{enumerate}
+\item تكون ال!!{sentence}s العليا في الشجرة إما عناصر في~$\OLId{greek-variable}{Gamma}$، أو
+  !!{discharged} باستدلال في الشجرة.
+\item تكون ال!!{sentence} السفلى في الشجرة هي~$!A$.
+\item تكون كل !!{sentence} في الشجرة، عدا الجملة~$!A$ الواقعة في
+  الأسفل، مقدمة لتطبيق صحيح لقاعدة استدلال تقع نتيجته مباشرة تحت تلك
+  ال!!{sentence} في الشجرة.
+\end{enumerate}
+ونقول عندئذ إن~$!A$ هي \emph{نتيجة} ال!!{derivation}، وإن~$\OLId{greek-variable}{Gamma}$ هي
+افتراضاته ال!!{undischarged}.
+
+إذا وجد !!a{derivation} لـ~$!A$ من~$\OLId{greek-variable}{Gamma}$، قلنا إن~$!A$
+\emph{!!{derivable}} من~$\OLId{greek-variable}{Gamma}$، أو بالرموز: $\OLId{greek-variable}{Gamma} \Proves !A$.
+وإذا وجد !!a{derivation} لـ~$!A$ تكون فيه كل الافتراضات
+!!{discharged}، كتبنا~$\Proves !A$.
+\end{defn}
+
+\begin{ex}
+كل افتراض قائم بذاته !!a{derivation}. فمثلًا، تكون~$!A$ بمفردها
+!!a{derivation}، وكذلك~$!B$ بمفردها. ويمكننا الحصول على !!{derivation}
+جديد منهما بتطبيق قاعدة~$\Intro{\land}$ مثلًا:
+\begin{prooftree}
+\AxiomC{$!A$}
+\AxiomC{$!B$}
+\RightLabel{\Intro{\land}}
+\BinaryInfC{$!A \land !B$}
+\end{prooftree}
+والقاعدة عامة؛ فلنا أن نضع موضع~$!A$
+و$!B$ ما شئنا من !!{sentence}s، كـ~$!C$ و$!D$.
+فتصير النتيجة $!C \land !D$، ويكون الآتي
+\begin{prooftree}
+\AxiomC{$!C$}
+\AxiomC{$!D$}
+\RightLabel{\Intro{\land}}
+\BinaryInfC{$!C \land !D$}
+\end{prooftree}
+!!{derivation} صحيحًا. وبالطبع يمكننا كذلك تبديل الافتراضين، فتقوم~$!D$
+مقام~$!A$، وتقوم~$!C$ مقام~$!B$. ولذلك يكون
+\begin{prooftree}
+\AxiomC{$!D$}
+\AxiomC{$!C$}
+\RightLabel{\Intro{\land}}
+\BinaryInfC{$!D \land !C$}
+\end{prooftree}
+!!{derivation} صحيحًا أيضًا.
+
+ثم نلحق قاعدة أخرى، كـ~$\Intro{\lif}$، فنستنتج شرطية، ويجوز معها
+!!{discharge} كل فرض يطابق مقدَّمها.
+فال!!{derivation}s الآتية صحيحة:
+\begin{prooftree}
+\AxiomC{$\Discharge{!C}{\OLMathNumeral{1}}$}
+\AxiomC{$!D$}
+\RightLabel{\Intro{\land}}
+\BinaryInfC{$!C \land !D$}
+\DischargeRule{\Intro{\lif}}{1}
+\UnaryInfC{$!C \lif (!C \land !D)$}
+\DisplayProof\bottomAlignProof
+\AxiomC{$!C$}
+\AxiomC{$\Discharge{!D}{\OLMathNumeral{1}}$}
+\RightLabel{\Intro{\land}}
+\BinaryInfC{$!C \land !D$}
+\DischargeRule{\Intro{\lif}}{1}
+\UnaryInfC{$!D \lif (!C \land !D)$}
+\end{prooftree}
+وهما تبينان، على الترتيب، أن~$!D \Proves !C \lif (!C \land !D)$ وأن
+$!C \Proves !D \lif (!C \land !D)$.
+
+ولا يُنسى أن إسقاط الفروض جائز لا لازم. بل يجوز تطبيق القاعدة وإن لم يوجد الفرض أصلًا في ال!!{derivation}.
+فالمثال الآتي صحيح، مع أنه لا فرض~$!A$ يصير
+!!{discharged}:
+\begin{prooftree}
+  \AxiomC{$!B$}
+  \DischargeRule{\Intro{\lif}}{1}
+  \UnaryInfC{$!A \lif !B$}
+\end{prooftree}
+\end{ex}
+
+\end{document}

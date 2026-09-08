@@ -1,0 +1,121 @@
+% Part:sets-functions-relations
+% Chapter: size-of-sets
+% Section: pairing
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid[ar]{sfr}{siz}{pai}
+\olsection{دوال المزاوجة والرموز}
+
+\begin{explain}
+طريقة كانتور المتعرجة تظهر للعين قابلية $\Nat^\OLId{latin-ordinary}{n}$ للتعداد.
+ولنخص مصفوفة $\Nat^\OLMathNumeral{2}$ بالنظر. بتتبع المسار وعدّ مواضعه يتبين
+أن $\tuple{\OLMathNumeral{1},\OLMathNumeral{2}}$ يقابله العدد~$\OLMathNumeral{7}$. فهل لنا إلى حساب ذلك من
+غير تتبع سبيل؟ المطلوب \emph{معكوس} التعداد المتعرج
+$\OLId{latin-ordinary}{g}\colon \Nat^\OLMathNumeral{2} \to \Nat$، بحيث
+\[
+\OLId{latin-ordinary}{g}(\tuple{\OLMathNumeral{0},\OLMathNumeral{0}}) = \OLMathNumeral{0}, \;
+\OLId{latin-ordinary}{g}(\tuple{\OLMathNumeral{0},\OLMathNumeral{1}}) = \OLMathNumeral{1}, \;
+\OLId{latin-ordinary}{g}(\tuple{\OLMathNumeral{1},\OLMathNumeral{0}}) = \OLMathNumeral{2}, \; \dots,
+\OLId{latin-ordinary}{g}(\tuple{\OLMathNumeral{1},\OLMathNumeral{2}}) = \OLMathNumeral{7}, \; \dots
+\]
+فبه نعيّن موضع $\tuple{\OLId{latin-ordinary}{n}, \OLId{latin-ordinary}{m}}$ في التعداد تعيينًا مباشرًا.
+
+وتعريف $\OLId{latin-ordinary}{g}$ المباشر يبنى على ملاحظتين. إحداهما أن خانة الصف $\OLId{latin-ordinary}{n}$
+والعمود $\OLId{latin-ordinary}{m}$ إذا كانت قيمتها~$\OLId{latin-ordinary}{v}$، كانت قيمة خانة الصف $(\OLId{latin-ordinary}{n}+\OLMathNumeral{1})$
+والعمود $(\OLId{latin-ordinary}{m}-\OLMathNumeral{1})$ هي $\OLId{latin-ordinary}{v} + \OLMathNumeral{1}$. والأخرى أن الصف الأول الأعداد
+المثلثية $\OLMathNumeral{0}$، $\OLMathNumeral{1}$، $\OLMathNumeral{3}$، $\OLMathNumeral{6}$، وهكذا. والعدد المثلثي ذو الرتبة $\OLId{latin-ordinary}{k}$
+هو مجموع الطبيعيّات $\leq \OLId{latin-ordinary}{k}$، ويساوي
+$\OLId{latin-ordinary}{k}(\OLId{latin-ordinary}{k}+\OLMathNumeral{1})/\OLMathNumeral{2}$. فنجمع الملاحظتين في الدالة:
+\[
+  \OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{n},\OLId{latin-ordinary}{m}) = \frac{(\OLId{latin-ordinary}{n}+\OLId{latin-ordinary}{m}+\OLMathNumeral{1})(\OLId{latin-ordinary}{n}+\OLId{latin-ordinary}{m})}{\OLMathNumeral{2}} + \OLId{latin-ordinary}{n}
+\]
+\textbf{تنبيه تصحيحي على الأصل (C031-01).} الحد $\OLId{latin-ordinary}{k}(\OLId{latin-ordinary}{k}+\OLMathNumeral{1})/\OLMathNumeral{2}$ يجمع الطبيعيّات التي
+لا تتجاوز $\OLId{latin-ordinary}{k}$، لا التي تقل عنه؛ فأصلحنا حد الجمع وأبقينا دالة المزاوجة.
+ونختصر كثيرًا بـ$\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{n}, \OLId{latin-ordinary}{m})$ بدل $\OLId{latin-ordinary}{g}(\tuple{\OLId{latin-ordinary}{n}, \OLId{latin-ordinary}{m}})$ تخفيفًا للرسم.
+والمعنى: احسب أولًا العدد المثلثي ذا الرتبة $(\OLId{latin-ordinary}{n}+\OLId{latin-ordinary}{m})$،
+ثم زد عليه $\OLId{latin-ordinary}{n}$. فيعطي ذلك قيم المصفوفة المطلوبة؛ ومنه أن
+$\tuple{\OLMathNumeral{1}, \OLMathNumeral{2}}$ يقابل $\frac{\OLMathNumeral{4} \times \OLMathNumeral{3}}{\OLMathNumeral{2}} +
+\OLMathNumeral{1} = \OLMathNumeral{7}$.
+
+فـ$\OLId{latin-ordinary}{g}$ \emph{معكوس} تعداد لمجموعة أزواج، واسم هذا الصنف
+\emph{دوال المزاوجة}.
+\end{explain}
+
+\begin{defn}[دالة المزاوجة]
+الدالة $\OLId{latin-ordinary}{f}\colon \OLId{latin-looped}{A} \times \OLId{latin-looped}{B} \to \Nat$ \emph{دالة مزاوجة} حسابية
+متى كانت $\OLId{latin-ordinary}{f}$ متباينة. ونقول إن $\OLId{latin-ordinary}{f}$ \emph{ترمّز} $\OLId{latin-looped}{A} \times \OLId{latin-looped}{B}$،
+وإن $\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y})$ \emph{رمز} $\tuple{\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y}}$.
+\end{defn}
+
+\begin{explain}
+فبدالة المزاوجة نرمّز أزواج الطبيعيّات مثلًا؛ إذ يمثل كل
+\emph{زوج} عدد \emph{واحد}. وبمعكوسها \emph{نفك الترميز}،
+فنعرف أي زوج دل عليه العدد.
+\end{explain}
+
+\begin{prob}
+ضع تعدادًا لجميع الأعداد النسبية غير السالبة.
+\end{prob}
+
+\begin{prob}
+برهن على أن $\Rat$ هي !!{enumerable}، مستحضرًا أن كل نسبي
+يكتب $\OLId{latin-ordinary}{z}/\OLId{latin-ordinary}{m}$ حيث $\OLId{latin-ordinary}{z} \in \Int$ و$\OLId{latin-ordinary}{m} \in \Nat^+$.
+\end{prob}
+
+\begin{prob}
+ضع تعدادًا للمجموعة $\Bin^*$.
+\end{prob}
+
+\begin{prob}
+تقدم في المنطق التمهيدي أن كل جدول صدق ممكن يعبّر عن دالة صدق؛
+فدوال الصدق هي جميع الدوال $\Bin^\OLId{latin-ordinary}{k} \to \Bin$ لبعض~$\OLId{latin-ordinary}{k}$.
+برهن على قابلية مجموعة دوال الصدق كلها للتعداد.
+\end{prob}
+
+\begin{prob}
+خذ مجموعة غير منتهية !!{enumerable} كيفما اتفقت؛ وأثبت أن مجموعة
+جزئياتها المنتهية كلها هي !!{enumerable}.
+\end{prob}
+
+\begin{prob}
+يقال إن جزئية $\OLId{latin-looped}{A}$ من $\Nat$ \emph{متممتها منتهية} إذا وفقط إذا وجدت
+جزئية منتهية $\OLId{latin-looped}{F}\subseteq\Nat$ بحيث $\OLId{latin-looped}{A}=\Nat\setminus \OLId{latin-looped}{F}$؛ أي إذا وفقط إذا
+كانت $\Nat\setminus \OLId{latin-looped}{A}$ منتهية. ولتكن $\OLId{latin-looped}{I}$ المجموعة التي !!{element}sها
+جزئيات $\Nat$ المنتهية وذات المتممات المنتهية، ولا غيرها. أثبت أن $\OLId{latin-looped}{I}$
+هي !!{enumerable}.
+\end{prob}
+
+\begin{editorial}
+\textbf{تنبيه تصحيحي على الأصل (OLSIZ-002).} صُرّح بأن المتممة مأخوذة
+داخل $\Nat$ لجزئية منتهية منها؛ فقد اضطرب نظم العبارة في الأصل،
+وعينت العبارة المكافئة في النص الإنجليزي هذا المعنى.
+\end{editorial}
+
+\begin{prob}
+برهن على أن اتحاد عائلة !!{enumerable} من مجموعات !!{enumerable}
+هو مجموعة !!{enumerable}. أي إذا أعطيت $\OLId{latin-looped}{A}_\OLMathNumeral{1}$، $\OLId{latin-looped}{A}_\OLMathNumeral{2}$، \dots{}، وكانت كل
+$\OLId{latin-looped}{A}_\OLId{latin-ordinary}{i}$ !!{enumerable}، فإن اتحادها $\bigcup_{\OLId{latin-ordinary}{i}=\OLMathNumeral{1}}^\infty
+\OLId{latin-looped}{A}_\OLId{latin-ordinary}{i}$ هو مجموعة !!{enumerable} أيضًا. [تنبيه: المسألة صعبة!]
+\end{prob}
+
+\begin{prob}
+خذ دالة مزاوجة $\OLId{latin-ordinary}{f} \colon \OLId{latin-looped}{A} \times \OLId{latin-looped}{B} \to \Nat$ كيفما اتفقت.
+رتّب أعضاء $\ran{\OLId{latin-ordinary}{f}}$ تصاعديًا وأعد فهرستها، ثم فك رموزها بمعكوس $\OLId{latin-ordinary}{f}$
+على مداها، وبرهن أن ذلك يتيح بناء تعداد لـ$\OLId{latin-looped}{A} \times \OLId{latin-looped}{B}$ إذا كان حاصل
+الضرب غير خال. وبيّن حكم الحالة الخالية على حدة؛ فإن كان الحاصل منتهيًا
+غير خال كرر آخر عنصر عند اعتماد تعريف التعداد بدالة شاملة من $\PosInt$،
+أو افهرس عناصره بمقطع ابتدائي عند اعتماد التعريف البديل.
+\end{prob}
+
+\textbf{تنبيه تصحيحي على الأصل (C031-02).} ليس معكوس دالة المزاوجة، من حيث هو،
+تعدادًا؛ لأن مجاله $\ran{\OLId{latin-ordinary}{f}}$ قد لا يكون $\Nat$ ولا $\PosInt$ ولا مقطعًا
+ابتدائيًا. ولذلك صُرّح بإعادة فهرسة الرموز وبالحالتين المنتهية والخالية.
+
+\begin{prob}
+عيّن دالة ترمّز المجموعة $\Nat^\OLMathNumeral{3}$.
+\end{prob}
+
+\end{document}

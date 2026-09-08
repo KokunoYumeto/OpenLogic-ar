@@ -1,0 +1,75 @@
+% Part: first-order-logic
+% Chapter: sequent-calculus
+% Section: equality
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{seq}{ide}
+
+\olsection{\usetoken{P}{derivation} مع \usetoken{S}{identity}}
+
+إذا أُدخلت !!{identity} في !!^{derivation}s، لزم أن نزيد تتابعيات ابتدائية وقواعد استدلال.
+
+\begin{defn}[التتابعيات الابتدائية لـ~$\eq$]
+إذا كان $\OLId{latin-ordinary}{t}$ حدًا مغلقًا، فإن ${} \Sequent \eq[\OLId{latin-ordinary}{t}][\OLId{latin-ordinary}{t}]$ تتابعية ابتدائية.
+\end{defn}
+
+قواعد~$\eq$ هي الآتية ($\OLId{latin-ordinary}{t}_\OLMathNumeral{1}$ و$\OLId{latin-ordinary}{t}_\OLMathNumeral{2}$ حدان مغلقان):
+
+\begin{defish}
+\Axiom$ \eq[\OLId{latin-ordinary}{t}_\OLMathNumeral{1}][\OLId{latin-ordinary}{t}_\OLMathNumeral{2}], \OLId{greek-variable}{Gamma} \fCenter \OLId{greek-variable}{Delta}, !A(\OLId{latin-ordinary}{t}_\OLMathNumeral{1}) $
+\RightLabel{$\eq$}
+\UnaryInf$\eq[\OLId{latin-ordinary}{t}_\OLMathNumeral{1}][\OLId{latin-ordinary}{t}_\OLMathNumeral{2}], \OLId{greek-variable}{Gamma} \fCenter \OLId{greek-variable}{Delta}, !A(\OLId{latin-ordinary}{t}_\OLMathNumeral{2})$
+\DisplayProof
+\hfill
+\Axiom$\eq[\OLId{latin-ordinary}{t}_\OLMathNumeral{1}][\OLId{latin-ordinary}{t}_\OLMathNumeral{2}], \OLId{greek-variable}{Gamma} \fCenter \OLId{greek-variable}{Delta}, !A(\OLId{latin-ordinary}{t}_\OLMathNumeral{2}) $
+\RightLabel{$\eq$}
+\UnaryInf$\eq[\OLId{latin-ordinary}{t}_\OLMathNumeral{1}][\OLId{latin-ordinary}{t}_\OLMathNumeral{2}], \OLId{greek-variable}{Gamma}  \fCenter \OLId{greek-variable}{Delta}, !A(\OLId{latin-ordinary}{t}_\OLMathNumeral{1})$
+\DisplayProof
+\end{defish}
+
+\begin{ex}
+إذا كان $\OLId{latin-ordinary}{s}$ و$\OLId{latin-ordinary}{t}$ حدين مغلقين، فإن $\eq[\OLId{latin-ordinary}{s}][\OLId{latin-ordinary}{t}], !A(\OLId{latin-ordinary}{s})
+\Proves !A(\OLId{latin-ordinary}{t})$:
+\begin{prooftree}
+\Axiom$ !A(\OLId{latin-ordinary}{s}) \fCenter !A(\OLId{latin-ordinary}{s})$
+\RightLabel{\LeftR{\Weakening}}
+\UnaryInf$\eq[\OLId{latin-ordinary}{s}][\OLId{latin-ordinary}{t}], !A(\OLId{latin-ordinary}{s})  \fCenter !A(\OLId{latin-ordinary}{s})$
+\RightLabel{$\eq$}
+\UnaryInf$\eq[\OLId{latin-ordinary}{s}][\OLId{latin-ordinary}{t}], !A(\OLId{latin-ordinary}{s})  \fCenter !A(\OLId{latin-ordinary}{t})$
+\end{prooftree}
+وهذا هو المبدأ المعروف باستبدال المتطابقات، ويسمى أيضًا قانون لايبنتس.
+
+يثبت~$\Log{LK}$ أن~$\eq$ تناظرية ومتعدية:
+\begin{prooftree}
+\Axiom$ \fCenter \eq[\OLId{latin-ordinary}{t}_\OLMathNumeral{1}][\OLId{latin-ordinary}{t}_\OLMathNumeral{1}] $
+\RightLabel{\LeftR{\Weakening}}
+\UnaryInf$ \eq[\OLId{latin-ordinary}{t}_\OLMathNumeral{1}][\OLId{latin-ordinary}{t}_\OLMathNumeral{2}] \fCenter \eq[\OLId{latin-ordinary}{t}_\OLMathNumeral{1}][\OLId{latin-ordinary}{t}_\OLMathNumeral{1}] $
+\RightLabel{$\eq$}
+\UnaryInf$ \eq[\OLId{latin-ordinary}{t}_\OLMathNumeral{1}][\OLId{latin-ordinary}{t}_\OLMathNumeral{2}] \fCenter \eq[\OLId{latin-ordinary}{t}_\OLMathNumeral{2}][\OLId{latin-ordinary}{t}_\OLMathNumeral{1}]$
+\DisplayProof\qquad\bottomAlignProof
+\Axiom$ \eq[\OLId{latin-ordinary}{t}_\OLMathNumeral{1}][\OLId{latin-ordinary}{t}_\OLMathNumeral{2}] \fCenter \eq[\OLId{latin-ordinary}{t}_\OLMathNumeral{1}][\OLId{latin-ordinary}{t}_\OLMathNumeral{2}] $
+\RightLabel{\LeftR{\Weakening}}
+\UnaryInf$\eq[\OLId{latin-ordinary}{t}_\OLMathNumeral{2}][\OLId{latin-ordinary}{t}_\OLMathNumeral{3}], \eq[\OLId{latin-ordinary}{t}_\OLMathNumeral{1}][\OLId{latin-ordinary}{t}_\OLMathNumeral{2}]  \fCenter \eq[\OLId{latin-ordinary}{t}_\OLMathNumeral{1}][\OLId{latin-ordinary}{t}_\OLMathNumeral{2}] $
+\RightLabel{$\eq$}
+\UnaryInf$\eq[\OLId{latin-ordinary}{t}_\OLMathNumeral{2}][\OLId{latin-ordinary}{t}_\OLMathNumeral{3}], \eq[\OLId{latin-ordinary}{t}_\OLMathNumeral{1}][\OLId{latin-ordinary}{t}_\OLMathNumeral{2}]  \fCenter \eq[\OLId{latin-ordinary}{t}_\OLMathNumeral{1}][\OLId{latin-ordinary}{t}_\OLMathNumeral{3}]$
+\RightLabel{\LeftR{\Exchange}}
+\UnaryInf$\eq[\OLId{latin-ordinary}{t}_\OLMathNumeral{1}][\OLId{latin-ordinary}{t}_\OLMathNumeral{2}], \eq[\OLId{latin-ordinary}{t}_\OLMathNumeral{2}][\OLId{latin-ordinary}{t}_\OLMathNumeral{3}]  \fCenter \eq[\OLId{latin-ordinary}{t}_\OLMathNumeral{1}][\OLId{latin-ordinary}{t}_\OLMathNumeral{3}]$
+\end{prooftree}
+أما في ال!!{derivation} الأيسر فال!!{formula}~$\eq[\OLId{latin-ordinary}{x}][\OLId{latin-ordinary}{t}_\OLMathNumeral{1}]$ هي المختارة لـ~$!A(\OLId{latin-ordinary}{x})$.
+وأما في الأيمن فنختار لـ~$!A(\OLId{latin-ordinary}{x})$ الصيغة~$\eq[\OLId{latin-ordinary}{t}_\OLMathNumeral{1}][\OLId{latin-ordinary}{x}]$.
+\end{ex}
+
+\begin{prob}
+أعط !!{derivation}s للتتابعيات الآتية:
+\begin{enumerate}
+\item $\Sequent \lforall[\OLId{latin-ordinary}{x}][\lforall[\OLId{latin-ordinary}{y}][((\OLId{latin-ordinary}{x} = \OLId{latin-ordinary}{y} \land !A(\OLId{latin-ordinary}{x})) \lif !A(\OLId{latin-ordinary}{y}))]]$
+\item $\lexists[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})] \land \lforall[\OLId{latin-ordinary}{y}][\lforall[\OLId{latin-ordinary}{z}][((!A(\OLId{latin-ordinary}{y}) \land
+    !A(\OLId{latin-ordinary}{z})) \lif \OLId{latin-ordinary}{y} = \OLId{latin-ordinary}{z})]] \Sequent 
+\lexists[\OLId{latin-ordinary}{x}][(!A(\OLId{latin-ordinary}{x}) \land \lforall[\OLId{latin-ordinary}{y}][(!A(\OLId{latin-ordinary}{y}) \lif \OLId{latin-ordinary}{y} = \OLId{latin-ordinary}{x})])]$
+\end{enumerate}
+\end{prob}
+
+\end{document}

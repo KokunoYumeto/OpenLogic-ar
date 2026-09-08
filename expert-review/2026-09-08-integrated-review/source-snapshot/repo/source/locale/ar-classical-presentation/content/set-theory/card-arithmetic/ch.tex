@@ -1,0 +1,145 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{card-arithmetic}{ch}
+
+\olsection{فرضية الاستمرارية}
+
+تشير النتيجة المتقدمة، وهي صادقة الإشارة، إلى أن أس الكاردينالات يغدو
+يسيرًا جدًا لو كفلنا أن تجري الكاردينالات غير المتناهية على سنن واضح
+مع قوى~$\OLMathNumeral{2}$؛ أي مع أخذ مجموعات القوى، بمقتضى
+\olref[opps]{lem:SizePowerset2Exp}. غير أنه لا يسوغ أن نفرض ابتداءً أن
+سلوكها مع مجموعات القوى على هذا السنن.
+
+ولنستفتح البحث بوضع اصطلاح حسن.
+
+\begin{defn}
+حيث $\cardsucc{\cardfont{\OLId{latin-ordinary}{a}}}$ هو أصغر كاردينال أكبر قطعاً من
+$\cardfont{\OLId{latin-ordinary}{a}}$، نعرّف متتاليتين غير متناهيتين:
+\begin{align*}
+	\aleph_{\OLMathNumeral{0}} &\defis \omega &
+	\beth_{\OLMathNumeral{0}} &\defis \omega\\
+	\aleph_{\OLId{greek-variable}{alpha} \ordplus \OLMathNumeral{1}} &\defis \cardsucc{(\aleph_{\OLId{greek-variable}{alpha}})} &
+	\beth_{\OLId{greek-variable}{alpha}+\OLMathNumeral{1}} &\defis \cardexpo{\OLMathNumeral{2}}{\beth_{\OLId{greek-variable}{alpha}}}\\
+	\aleph_{\OLId{greek-variable}{alpha}} &\defis \bigcup_{\beta< \OLId{greek-variable}{alpha}} \aleph_{\beta} &
+	\beth_{\OLId{greek-variable}{alpha}} &\defis \bigcup_{\beta < \OLId{greek-variable}{alpha}}\beth_{\beta} &
+	\text{إذا كان $\alpha$ عدداً ترتيبياً حدياً.}
+	\end{align*}
+\end{defn}
+
+وتعريف~$\cardsucc{\cardfont{\OLId{latin-ordinary}{a}}}$ مستقيم؛ فإن
+\olref[cardinals][classing]{lem:NoLargestCardinal} يقضي بأنه لكل
+كاردينال~$\cardfont{\OLId{latin-ordinary}{a}}$ كاردينال أكبر منه، ثم يضمن الاستقراء المتناهي
+التجاوز وجود أصغر الكاردينالات التي تكبر~$\cardfont{\OLId{latin-ordinary}{a}}$. وأما سائر
+حدود متتاليتي~$\aleph$ و$\beth$ فتتكفل بها العودية المتناهية التجاوز.
+% تصحيح مصطلحي (0590-N1): وُحدت أسرة الاستقراء والعودية المتناهيين في التجاوز.
+
+وكان كانتور هو الذي أدخل الرمز «$\aleph$»، وهو \emph{ألف}، أول حروف
+الهجاء العبراني وأول الكلمة العبرانية الدالة على «غير متناهٍ». ثم أدخل
+بيرس الرمز «$\beth$»، وهو \emph{بيت}، ثاني حروف ذلك الهجاء.
+\footnote{استعمل بيرس هذا الترميز في رسالة إلى كانتور مؤرخة في
+ديسمبر \OLClassicalDigits{1900}. ومن المؤسف أنه قدم فيها أيضاً حجة خاطئة على أن
+$\beth_\OLId{greek-variable}{alpha}$ لا يوجد عندما $\OLId{greek-variable}{alpha} \geq \omega$.}
+وبهذين الرمزين نصف الكاردينالات غير المتناهية.
+
+\begin{prop}
+$\aleph_\OLId{greek-variable}{alpha}$ و$\beth_\OLId{greek-variable}{alpha}$ كاردينالان، لكل عدد ترتيبي
+$\OLId{greek-variable}{alpha}$.
+\end{prop}
+
+\begin{proof}
+كلا الحكمين ثابت باستقراء يسير ما فوق المتناهي. فإن
+$\aleph_\OLMathNumeral{0} = \beth_\OLMathNumeral{0} = \omega$ كاردينال، كما في
+\olref[cardinals][classing]{omegaisacardinal}. وإذا كان
+$\aleph_\OLId{greek-variable}{alpha}$ و$\beth_\OLId{greek-variable}{alpha}$ كاردينالين، كان
+$\aleph_{\OLId{greek-variable}{alpha}+\OLMathNumeral{1}}$ و$\beth_{\OLId{greek-variable}{alpha}+\OLMathNumeral{1}}$ كاردينالين بنص التعريف.
+وأما عند الحدود، فاتحاد مجموعة من الكاردينالات كاردينال بموجب
+\olref[cardinals][classing]{unioncardinalscardinal}.
+\end{proof}
+\noindent
+ثم إن كل كاردينال غير متناهٍ هو واحد من أعداد~$\aleph$.
+
+\begin{prop}
+إذا كان $\cardfont{\OLId{latin-ordinary}{a}}$ كاردينالاً غير متناهٍ، فإن
+$\cardfont{\OLId{latin-ordinary}{a}} = \aleph_\gamma$ لبعض $\gamma$ فريد.
+\end{prop}
+
+\begin{proof}
+نسلك الاستقراء ما فوق المتناهي على الكاردينالات. وفي خطوة الاستقراء،
+افترض أنه إذا كان $\cardfont{\OLId{latin-ordinary}{b}} < \cardfont{\OLId{latin-ordinary}{a}}$ فإن
+$\cardfont{\OLId{latin-ordinary}{b}} = \aleph_{\gamma_\cardfont{\OLId{latin-ordinary}{b}}}$. فإن كان
+$\cardfont{\OLId{latin-ordinary}{a}} = \cardsucc{\cardfont{\OLId{latin-ordinary}{b}}}$ لبعض $\cardfont{\OLId{latin-ordinary}{b}}$، لزم
+$\cardfont{\OLId{latin-ordinary}{a}} = \cardsucc{(\aleph_{\gamma_\cardfont{\OLId{latin-ordinary}{b}}})}=
+\aleph_{\gamma_\cardfont{\OLId{latin-ordinary}{b}}+\OLMathNumeral{1}}$. وإن لم يكن~$\cardfont{\OLId{latin-ordinary}{a}}$ خلفًا لأي
+كاردينال، فلكون الكاردينالات أعدادًا ترتيبية يكون
+$\cardfont{\OLId{latin-ordinary}{a}} = \bigcup_{\cardfont{\OLId{latin-ordinary}{b}} < \cardfont{\OLId{latin-ordinary}{a}}} \cardfont{\OLId{latin-ordinary}{b}} =
+\bigcup_{\cardfont{\OLId{latin-ordinary}{b}} < \cardfont{\OLId{latin-ordinary}{a}}}{\aleph_{\gamma_\cardfont{\OLId{latin-ordinary}{b}}}}$؛
+ومن ثم~$\cardfont{\OLId{latin-ordinary}{a}} = \aleph_\gamma$، حيث
+$\gamma = \bigcup_{\cardfont{\OLId{latin-ordinary}{b}} < \cardfont{\OLId{latin-ordinary}{a}}}
+\gamma_\cardfont{\OLId{latin-ordinary}{b}}$. وأخيرًا، يفيد التعريف والاستقراء ما فوق
+المتناهي أن الخريطة~$\OLId{greek-variable}{alpha}\mapsto\aleph_\OLId{greek-variable}{alpha}$ متزايدة قطعًا؛ فلا
+يكون~$\gamma$ إلا فريدًا.
+\end{proof}
+
+ولما كان كل كاردينال غير متناهٍ واحدًا من أعداد~$\aleph$، حسن أن
+نسأل: أكل كاردينال غير متناهٍ واحد من أعداد~$\beth$ أيضًا؟ لو صح ذلك
+لاطرد سلوك الكاردينالات غير المتناهية مع أخذ مجموعات القوى، ولكان لنا
+الحكم الآتي.
+
+\begin{defish}
+\emph{فرضية الاستمرارية المعممة} (GCH). لكل $\OLId{greek-variable}{alpha}$،
+$\aleph_\OLId{greek-variable}{alpha} = \beth_\OLId{greek-variable}{alpha}$.
+\end{defish}
+
+ولو صحت GCH لانفتح لنا باب عريض إلى تبسيط أس الكاردينالات. ومن ذلك أنه
+إذا كان~$\cardfont{\OLId{latin-ordinary}{a}}$ غير متناهٍ و$\OLMathNumeral{1} \leq \cardfont{\OLId{latin-ordinary}{b}} < \cardfont{\OLId{latin-ordinary}{a}}$،
+أمكن إثبات انحصار
+$\cardexpo{\cardfont{\OLId{latin-ordinary}{a}}}{\cardfont{\OLId{latin-ordinary}{b}}}$ بين
+$\cardfont{\OLId{latin-ordinary}{a}}\leq \cardexpo{\cardfont{\OLId{latin-ordinary}{a}}}{\cardfont{\OLId{latin-ordinary}{b}}} \leq
+\cardsucc{\cardfont{\OLId{latin-ordinary}{a}}}$. ثم توضع شروط دقيقة تفصل أي الوجهين واقع: أهو
+$\cardfont{\OLId{latin-ordinary}{a}} = \cardexpo{\cardfont{\OLId{latin-ordinary}{a}}}{\cardfont{\OLId{latin-ordinary}{b}}}$ أم
+$\cardexpo{\cardfont{\OLId{latin-ordinary}{a}}}{\cardfont{\OLId{latin-ordinary}{b}}} =
+\cardsucc{\cardfont{\OLId{latin-ordinary}{a}}}$؟\footnote{يحدد الشرط مفهوم
+\emph{النهائية المشتركة}.}
+
+بيد أن GCH \emph{فرضية} لا \emph{مبرهنة}. فقد أثبت
+\citet{Godel1938} أنه إذا كانت $\ZFC$ متسقة، فإن
+$\ZFC + \text{GCH}$ متسقة أيضاً. ثم تبين أننا نستطيع، على السواء، أن
+نضيف~$\lnot$GCH إلى~$\ZFC$. وخذ أبسط حالة غير بديهية من GCH، وهي:
+
+\begin{defish}
+\emph{فرضية الاستمرارية} (CH). $\aleph_\OLMathNumeral{1} = \beth_\OLMathNumeral{1}$.
+\end{defish}
+
+أثبت~\citet{Cohen1963} أنه إذا كانت~$\ZFC$ متسقة فإن
+$\ZFC + \lnot\text{CH}$ متسقة أيضاً. ففرضية الاستمرارية إذن مستقلة
+عن~$\ZFC$.
+
+وإنما سميت فرضية الاستمرارية بهذا الاسم لأن «الاستمرارية» اسم آخر لخط
+الأعداد الحقيقية،~$\Real$. وقد علمنا من
+\olref[opps]{continuumis2aleph0} أن
+$\card{\Real} = \beth_\OLMathNumeral{1}$. فمؤدى الفرضية ألا يكون بين كاردينالية
+الأعداد الطبيعية،~$\aleph_\OLMathNumeral{0} = \beth_\OLMathNumeral{0}$، وكاردينالية الاستمرارية،
+$\beth_\OLMathNumeral{1}$، كاردينال.
+
+فإذا راعينا استقلال (G)CH عن~$\ZFC$، فما الذي يقال في صدقها؟ للكلام
+في ذلك مجال واسع، وقد انصرف شطر وافر من العمل الحديث في نظرية
+المجموعات إلى هذه المسائل. غير أن هنا نكتتين يحسن التنبيه عليهما.
+
+أما الأولى، فنتائج الاستقلال الصورية لا توجب من فورها أن تكون قيمة صدق
+GCH أو CH غير متعينة؛ فلعل إضافة بديهيات أخرى تبدو طبيعية تكفي لحسم
+المسألة على أحد جانبيها. وهذا هو الجواب الذي دعا إليه غودل نفسه.
+
+وأما الثانية، فلا ريب أن استقلال CH عن~$\ZFC$ عجيب، ولكنه ليس محال
+التصور على التحقيق. وحاصل الفكرة أن الانتقال من الكاردينالات إلى
+أخلافها قد يفتقر، على قدر ما تخبرنا به~$\ZFC$، إلى آلة أدق من مجرد أخذ
+مجموعات القوى.
+ %تنقلنا عملية أخذ مجموعات القوى من مرحلة من التراتبية إلى مرحلتها
+ %الخلفية (من $V_{\alpha}$ إلى $V_{\alpha+1}$).
+
+ومن رام الاستزادة بعد هاتين الملاحظتين فليرجع إلى ما كتبه الفلاسفة
+والرياضيون أصحاب المذاهب في هذا الخلاف.\footnote{وقد ترغب في
+أن تبدأ بقراءة \citet[\S15.6]{Potter2004}.}
+
+\end{document}

@@ -1,0 +1,67 @@
+% Part: model-theory
+% Chapter: basics
+% Section: reducts-and-expansions
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{bas}{red}
+\section{المختزلات والتوسيعات}
+
+قد تدعو الحاجة إلى مقابلة لغات تشترك في بعض الرموز، ثم مقابلة
+ال!!{structure}s التي تؤولها. وأشهر ذلك أن تدخل رموز
+!!a{language}~$\Lang{L}$ كلها في
+!!a{language}~$\Lang{L'}$، فيكون $\Lang{L} \subseteq \Lang{L'}$.
+وعندئذ نوسّع !!{structure}~$\Struct{M}$ للغة~$\Lang{L}$ إلى
+!!{structure} للغة~$\Lang{L'}$، بأن نؤول الرموز الزائدة ونبقي
+تأويل الرموز المشتركة على حاله. وبالعكس، نأخذ
+!!{structure}~$\Struct{M'}$ للغة~$\Lang{L'}$ فنستخرج منها
+!!{structure} للغة $\Lang{L}$ بإسقاط تأويل كل رمز ليس في~$\Lang{L}$؛
+فكأننا «نسيناه».
+
+\begin{defn}
+\ollabel{defn:reduct}
+لتكن $\Lang L \subseteq \Lang L'$، ولتكن $\Struct M$~!!{structure}
+للغة~$\Lang L$، ولتكن $\Struct M'$~!!{structure} للغة~$\Lang L'$.
+نسمي $\Struct M$ \emph{مختزَل}~$\Struct M'$ إلى~$\Lang L$، ونسمي
+$\Struct M'$ \emph{توسيع}~$\Struct M$ إلى~$\Lang L'$، إذا وفقط إذا
+\begin{enumerate}
+\item $\Domain{\OLId{latin-looped}{M}} = \Domain{\OLId{latin-looped}{M}'}$.
+\item لكل !!{constant}~$\OLId{latin-ordinary}{c} \in \Lang L$، $\Assign{\OLId{latin-ordinary}{c}}{\OLId{latin-looped}{M}} =
+  \Assign{\OLId{latin-ordinary}{c}}{\OLId{latin-looped}{M}'}$.
+\item لكل !!{function}~$\OLId{latin-ordinary}{f} \in \Lang L$، $\Assign{\OLId{latin-ordinary}{f}}{\OLId{latin-looped}{M}} =
+  \Assign{\OLId{latin-ordinary}{f}}{\OLId{latin-looped}{M}'}$.
+\item لكل !!{predicate}~$\OLId{latin-looped}{P} \in \Lang L$، $\Assign{\OLId{latin-looped}{P}}{\OLId{latin-looped}{M}} =
+  \Assign{\OLId{latin-looped}{P}}{\OLId{latin-looped}{M}'}$.
+\end{enumerate}
+\end{defn}
+
+\begin{prop}
+\ollabel{prop:reduct}
+إذا كانت !!{structure}~$\Struct{M}$ للغة~$\Lang{L}$ مختزَل
+!!{structure}~$\Struct{M'}$ للغة~$\Lang{L'}$، فإنه لجميع
+ال!!{sentence}s~$!A$ في~$\Lang{L}$،
+\[
+\Sat{\OLId{latin-looped}{M}}{!A} \text{ إذا وفقط إذا كان } \Sat{\OLId{latin-looped}{M}'}{!A}.
+\]
+\end{prop}
+
+\begin{proof}
+  تمرين.
+\end{proof}
+
+\begin{prob}
+أثبت \olref[mod][bas][red]{prop:reduct}.
+\end{prob}
+
+\begin{defn}
+% تصحيح مصطلحي (C184-01): رُدّ n-place إلى «ذو/ذات n مواضع» بدل «n-محلية» المبهمة؛ والاختيار مفتوح لمراجعة خبير في مصطلح arity.
+لنأخذ !!{structure}~$\Struct{M}$ للغة~$\Lang{L}$، ولتكن
+$\Lang{L'} = \Lang{L} \cup \{\OLId{latin-looped}{P}\}$ توسيع~$\Lang{L}$ الناتج عن إضافة
+!!{predicate} واحد ذو $\OLId{latin-ordinary}{n}$ مواضع~$\OLId{latin-looped}{P}$، ولتكن $\OLId{latin-looped}{R} \subseteq \Domain{\OLId{latin-looped}{M}}^\OLId{latin-ordinary}{n}$
+علاقة ذات $\OLId{latin-ordinary}{n}$ مواضع. عندئذ نرمز بـ $\Expan{\OLId{latin-looped}{M}}{\OLId{latin-looped}{R}}$ إلى التوسيع~$\Struct{M'}$
+لـ~$\Struct{M}$ الذي فيه $\Assign{\OLId{latin-looped}{P}}{\OLId{latin-looped}{M}'} = \OLId{latin-looped}{R}$.
+\end{defn}
+
+\end{document}

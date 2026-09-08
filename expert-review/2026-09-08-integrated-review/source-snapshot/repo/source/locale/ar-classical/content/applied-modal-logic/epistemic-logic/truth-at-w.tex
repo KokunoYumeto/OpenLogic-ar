@@ -1,0 +1,111 @@
+% Part: applied-modal-logics
+% Chapter: epistemic-logic
+% Section: truth-at-w
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{aml}{el}{trw}
+
+\olsection{الصدق عند عالم}
+
+يعين كل نموذج معرفي، كما في المنطق الجهوي النظامي، ال!!{formula}s الصادقة
+عند كل عالم منه. ونعبر عن أصل الدلالة العلائقية بقولنا: «يصدق
+النموذج~$\mModel{M}$ !!{formula}~$!A$ عند العالم~$w$». وتحد علاقة الصدق
+استقرائيًا؛ وهي في المؤثرات غير الجهوية عين ما تقدم في المنطق الجهوي
+النظامي.
+
+\begin{defn}\ollabel{defn:mmodels}
+  \emph{صدق !!a{formula}~$!A$ عند~$w$} في~$\mModel M$، ورمزه
+  $\mSat{M}{!A}[w]$، يحد استقرائيًا بما يأتي:
+  \begin{enumerate}
+  \tagitem{prvFalse}{\indcase{!A}{\lfalse}{لا يتحقق أبدًا
+    $\mSat{M}{\lfalse}[w]$}.}{}
+  \tagitem{prvTrue}{\indcase{!A}{\ltrue}{يتحقق دائمًا
+    $\mSat{M}{\ltrue}[w]$}.}{}
+  \item $\mSat{M}{p}[w]$ إذا وفقط إذا كان~$w \in V(p)$.
+  \tagitem{prvNot}{\indcase{!A}{\lnot !B}{$\mSat{M}{\indfrm}[w]$ إذا
+    وفقط إذا كان~$\mSat/{M}{!B}[w]$}.}{}
+  \tagitem{prvAnd}{\indcase{!A}{(!B \land !C)}{$\mSat{M}{\indfrm}[w]$
+    إذا وفقط إذا كان~$\mSat{M}{!B}[w]$ و$\mSat{M}{!C}[w]$}.}{}
+  \tagitem{prvOr}{\indcase{!A}{(!B \lor !C)}{$\mSat{M}{\indfrm}[w]$
+    إذا وفقط إذا كان~$\mSat{M}{!B}[w]$ أو~$\mSat{M}{!C}[w]$}
+    (أو كلاهما).}{}
+  \tagitem{prvIf}{\indcase{!A}{(!B \lif !C)}{$\mSat{M}{\indfrm}[w]$
+    إذا وفقط إذا كان~$\mSat/{M}{!B}[w]$ أو~$\mSat{M}{!C}[w]$}.}{}
+  \tagitem{prvIff}{\indcase{!A}{(!B \liff !C)}{$\mSat{M}{\indfrm}[w]$
+    إذا وفقط إذا تحقق كل من~$\mSat{M}{!B}[w]$ و$\mSat{M}{!C}[w]$، أو
+    لم يتحقق أي من~$\mSat{M}{!B}[w]$ و$\mSat{M}{!C}[w]$}.}{}
+  \item\ollabel{defn:sub:mmodels-box}
+    \indcase{!A}{\Knows_a !B}{$\mSat{M}{\indfrm}[w]$ إذا وفقط إذا كان
+    $\mSat{M}{!B}[w']$ لكل~$w' \in W$ بحيث~$R_a ww'$}
+  \end{enumerate}
+\end{defn}
+
+وهنا ينبغي تقييد علاقات النفاذ. فإن مقتضى
+\olref{defn:sub:mmodels-box} أن تصدق !!a{formula}~$\Knows_a !B$ عند~$w$
+إذا لم يوجد~$w'$ يحقق~$R_a ww'$. وهذا بعينه حكم المنطق الجهوي النظامي:
+إذا لم يكن للعالم لاحق صدقت عنده كل صيغ~$\Box$ صدقًا خاليًا. غير أن حمل
+$\Knows$ على \emph{المعرفة} يجعل هذا بعيدًا عن المراد؛ إذ لا نريد حالًا
+يعلم فيها الفاعل~$!A$ و$\lnot !A$ معًا.
+
+ومن وجوه دفع ذلك أن نجعل علاقة النفاذ في منطق المعرفة \emph{انعكاسية}
+أبدًا؛ فيكون العالم الفعلي متسقًا مع معلومات الفاعل. ولهذا يستعمل في منطق
+المعرفة عادةً~S5، وإن جاز العدول إلى أنساق أضعف بحسب المعنى الدقيق المراد
+من علاقة~$\Knows_a$.
+
+\begin{figure}
+  \begin{center}
+    \begin{tikzpicture}[modal]
+      \node[world] (w1) [label={[align=right]right:\mTrue{p}\\ \mFalse{q}}]{$w_1$};
+      \node[world] (w2) [label={[align=right]right:\mTrue{p}\\ \mTrue{q}},
+        above right=of w1]{$w_2$};
+      \node[world] (w3) [label={[align=right]right:\mFalse{p}\\ \mFalse{q}},
+        below right=of w1] {$w_3$};
+      \draw[<->] (w1) to node {$a$} (w2);
+      \draw[->,loop left] (w1) to node {$a,b$} (w1);
+      \draw[<->] (w1) to [swap] node {$b$} (w3);
+      \draw[->,loop above] (w2) to node {$a,b$} (w2) ;
+      \draw[->,loop below] (w3) to node {$a,b$} (w3) ;
+    \end{tikzpicture}
+  \end{center}
+  \caption{نموذج معرفي بسيط.}
+  \ollabel{fig:simple}
+\end{figure}
+
+\begin{prob}
+  حدّد أي العبارات الآتية تصح في~\olref[aml][el][trw]{fig:simple}:
+  \begin{enumerate}
+    \item $\mSat{M}{\lnot q}[w_1]$؛
+    \item $\mSat{M}{\Knows_a \lnot q}[w_1]$؛
+    \item $\mSat{M}{\Knows_b \lnot q}[w_1]$؛
+    \item $\mSat{M}{\Knows_b q \lor \Knows_b \lnot q}[w_2]$؛
+    \item $\mSat{M}{\Knows_a( \Knows_b q \lor \Knows_b \lnot q)}[w_2]$؛
+    \item $\mSat{M}{\EKnows_{\{a,b\}} \lnot q}[w_3]$؛
+    \end{enumerate}
+\end{prob}
+
+وإذا ثبت هذا الحد للصدق عند عالم، انتقلت إليه سائر المفاهيم الدلالية من
+المنطق الجهوي النظامي، كالصلاحية الجهوية والاستلزام، مع حمل المؤثرات
+الجهوية على تأويلها المعرفي الجديد.
+
+ويبقى شرط الصدق لمؤثر المعرفة المشتركة~$\CKnows_G$. فقد تقدم في
+\olref[sfr][rel][ops]{sec} أن \emph{الإغلاق المتعدي}~$R^+$ لعلاقة~$R$
+يحد بأنه:
+\begin{align*}
+  R^+ &= \bigcup_{ n \in \mathbb{N},\ n \ge 1} R^n,
+\intertext{حيث}
+  R^1 & = R \text{ و}\\
+  R^{n+1} & = \Setabs{\tuple{x,z}}{\exists y (R^n xy \land Ryz)}.
+\end{align*}
+% تصحيح اصطلاحي (0486-I1): رُقّمت قوى العلاقة من 1 على الاصطلاح المعتاد من غير تغيير الإغلاق المتعدي المقصود.
+فإذا كانت~$G$ مجموعة الفاعلين، عرّفنا
+$R_G=(\bigcup_{b \in G}R_b)^+$ بأنه الإغلاق المتعدي لاتحاد علاقات نفاذهم.
+
+\begin{defn}
+إذا كان~$G' \subseteq G$، جعلنا~$\mSat{M}{\CKnows_{G'} !A}[w]$ إذا
+وفقط إذا كان~$\mSat{M}{!A}[w']$ لكل~$w'$ بحيث~$R_{G'}ww'$.
+\end{defn}
+
+\end{document}

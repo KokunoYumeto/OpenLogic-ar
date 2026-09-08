@@ -1,0 +1,136 @@
+% Part: proof-theory
+% Chapter: proof-search
+% Section: search-algorithm
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{ps}{sal}
+
+\olsection{في خوارزمية البحث في~\Log{G3c}}
+
+نصف للنسق~\Log{G3c} خوارزمية بحث. وليست هي الطريق الوحيد ولا الأكفأ،
+لكنها صحيحة: فإن كان للمتتالية~$\OLId{greek-variable}{Gamma}\Sequent\OLId{greek-variable}{Delta}$~!!a{proof} انتهت
+الخوارزمية فوجدت~!!a{proof}. وهي مضمونة أيضًا: فإن انتهت بغير
+!!a{proof}، أو لم تنته أصلًا، كانت~$\OLId{greek-variable}{Gamma}\Sequent\OLId{greek-variable}{Delta}$ غير صالحة.
+
+ولا بد فيها من خاصية أصلية: أن «تختزل» كل~!!{formula} في
+$\OLId{greek-variable}{Gamma}\Sequent\OLId{greek-variable}{Delta}$، وفي كل متتالية تنشأ في أثناء البحث؛ أي تجعلها
+الصيغة الرئيسة لقاعدة استدلال مطبقة إلى الخلف، وتعيد ذلك كلما وجب. وهذه
+الخاصية نسميها \emph{الإنصاف}.
+
+وتجري الخوارزمية على مراحل، حاصل كل مرحلة منها شجرة متتاليات. ومن حاصل
+المرحلة تبنى التي تليها باختزال~!!a{formula} في كل متتالية عليا لم تكن
+مسلّمة.
+
+مبدأ المرحلة~$\OLMathNumeral{0}$ هو~$\OLId{greek-variable}{Gamma}\Sequent\OLId{greek-variable}{Delta}$. ولتحقيق الإنصاف نلحق
+بـ!!{formula}s~$\OLId{greek-variable}{Gamma}$ و$\OLId{greek-variable}{Delta}$ أعدادًا مؤشرات، ونجعل لكل~!!{formula}s
+المختلفة عددًا مختلفًا؛ فقد نعد~!!{formula}s من اليسار إلى اليمين، ونكتب
+الأعداد مؤشرات علوية. فإذا كان المطلوب، مثلًا،~!!a{proof}
+لـ~$!A,!B\Sequent !C$، كان حاصل المرحلة~$\OLMathNumeral{0}$ هو
+$!A^\OLMathNumeral{1},!B^\OLMathNumeral{2}\Sequent !C^\OLMathNumeral{3}$. ونسمي أكبر~$\OLId{latin-ordinary}{n}$ يقع مؤشرًا علويًا في هذه
+المتتالية المفهرسة \emph{مؤشرها الأقصى}، وهو~$\OLMathNumeral{3}$ في المثال.
+
+وإذا اشتملت المتتالية على أسوار، وجب أن نعين الحدود المستعملة عند اختزال
+$\lexists[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]$ عن اليمين أو~$\lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]$ عن اليسار.
+ولا نحتاج إلا إلى حدود مبنية من~!!{constant}s~$\Obj c_\OLMathNumeral{0}$ و
+$\Obj c_\OLMathNumeral{1}$ و$\Obj c_\OLMathNumeral{2}$، \dots، باستعمال رموز الدوال الواقعة في~$\OLId{greek-variable}{Gamma}$
+و$\OLId{greek-variable}{Delta}$. ونفرض لجميع هذه الحدود تعدادًا ثابتًا، حتى يصح أن نقول، مثلًا،
+«أول~!!{constant} لا يقع في
+$\OLId{greek-variable}{Gamma}\Sequent\OLId{greek-variable}{Delta}$». ولكل متتالية مفهرسة في الشجرة التي تولدها
+الخوارزمية مجموعة مرتبطة من~!!{constant}s. ومجموعة~!!{constant}s المسندة إلى المتتالية
+في المرحلة~$\OLMathNumeral{0}$ هي مجموعة جميع~!!{constant}s الواقعة فيها إن وُجدت، وهي
+$\{\Obj c_\OLMathNumeral{0}\}$ إذا لم تحتوِ أي~!!{constant}s.
+
+ولنفرض أن المرحلة~$\OLId{latin-ordinary}{n}$ ولدت شجرة متتاليات مفهرسة، ومعها مجموعات
+!!{constant}s المرتبطة. ففي المرحلة~$\OLId{latin-ordinary}{n}+\OLMathNumeral{1}$ نعمل في كل متتالية عليا ما يأتي.
+
+إن وجدت~!!a{formula}~$!A$ في جانبي المتتالية، أو اشتمل جانبها الأيسر على
+$\lfalse$، لم نصنع شيئًا؛ لأن لهذه المتتاليات~!!{proof}s في~\Log{G3c}،
+وقد تم العمل في هذه المتتالية العليا.
+
+وإن لم توجد في المتتالية~!!{formula} غير ذرية، أجهضنا الخوارزمية؛ إذ لا
+برهان لـ~$\OLId{greek-variable}{Gamma}\Sequent\OLId{greek-variable}{Delta}$.
+
+وإلا اخترنا~!!{formula} غير الذرية~$!A$ ذات أصغر مؤشر~$\OLId{latin-ordinary}{i}$. وعندئذ تكون
+المتتالية العليا إما~$!A^\OLId{latin-ordinary}{i},\Pi\Sequent\Lambda$ وإما
+$\Pi\Sequent\Lambda,!A^\OLId{latin-ordinary}{i}$. ولتكن~$\OLId{latin-ordinary}{k}$ المؤشر الأقصى للمتتالية، ولتكن~$\OLId{latin-looped}{C}$
+مجموعة~!!{constant}s المسندة إليها.
+
+ثم «نختزل»~$!A^\OLId{latin-ordinary}{i}$: فنولد متتاليات عليا جديدة بحسب قاعدة الاستدلال التي
+يعينها~!!{main operator} لـ~$!A$، وبحسب وقوع~$!A^\OLId{latin-ordinary}{i}$ يسارًا أو يمينًا.
+
+\begin{enumerate}
+  \item إذا كان~$!A\ident !B\land !C$ ووقع على اليسار، فأضف متتالية عليا
+  جديدة فوق~$(!B\land !C)^\OLId{latin-ordinary}{i},\Pi\Sequent\Lambda$:
+  \[
+  \Axiom$!B^{\OLId{latin-ordinary}{k}+\OLMathNumeral{1}}, !C^{\OLId{latin-ordinary}{k}+\OLMathNumeral{2}}, \Pi \fCenter \Lambda$
+  \RightLabel{\LeftR{\land}}
+  \UnaryInf$(!B \land !C)^\OLId{latin-ordinary}{i}, \Pi \fCenter \Lambda$
+  \DisplayProof
+  \]
+  ومجموعة~!!{constant}s المسندة إلى المتتالية الجديدة هي~$\OLId{latin-looped}{C}$.
+  \item إذا كان~$!A\ident !B\land !C$ ووقع على اليمين، فأضف متتاليتين
+  عليين جديدتين فوق~$\Pi\Sequent\Lambda,(!B\land !C)^\OLId{latin-ordinary}{i}$:
+  \[
+  \Axiom$\Pi \fCenter \Lambda, !B^{\OLId{latin-ordinary}{k}+\OLMathNumeral{1}}$
+  \Axiom$\Pi \fCenter \Lambda, !C^{\OLId{latin-ordinary}{k}+\OLMathNumeral{1}}$
+  \RightLabel{\RightR{\land}}
+  \BinaryInf$\Pi \fCenter \Lambda, (!B \land !C)^\OLId{latin-ordinary}{i}$
+  \DisplayProof
+  \]
+  ومجموعة~!!{constant}s المسندة إلى كل متتالية جديدة هي~$\OLId{latin-looped}{C}$.
+
+  \item حالات~$!A\ident\lnot !B$ و$!A\ident !B\lor !C$ و
+  $!A\ident !B\lif !C$ مماثلة، وتُترك تمارين.
+
+  \item إذا كان~$!A\ident\lexists[\OLId{latin-ordinary}{x}][!B(\OLId{latin-ordinary}{x})]$ ووقع على اليسار، فأضف
+  متتالية عليا جديدة فوق~$\lexists[\OLId{latin-ordinary}{x}][!B(\OLId{latin-ordinary}{x})]^\OLId{latin-ordinary}{i},\Pi\Sequent\Lambda$:
+  \[
+  \Axiom$!B(\OLId{latin-ordinary}{c})^{\OLId{latin-ordinary}{k}+\OLMathNumeral{1}}, \Pi \fCenter \Lambda$
+  \RightLabel{\LeftR{\lexists}}
+  \UnaryInf$\lexists[\OLId{latin-ordinary}{x}][!B(\OLId{latin-ordinary}{x})]^\OLId{latin-ordinary}{i}, \Pi \fCenter \Lambda$
+  \DisplayProof
+  \]
+  حيث~$\OLId{latin-ordinary}{c}$ أول~!!{constant} لا ينتمي إلى~$\OLId{latin-looped}{C}$. ومجموعة~!!{constant}s
+  المسندة إلى المتتالية الجديدة هي~$\OLId{latin-looped}{C}\cup\{\OLId{latin-ordinary}{c}\}$.
+  \item إذا كان~$!A\ident\lexists[\OLId{latin-ordinary}{x}][!B(\OLId{latin-ordinary}{x})]$ ووقع على اليمين، فأضف
+  متتالية عليا جديدة فوق~$\Pi\Sequent\Lambda,\lexists[\OLId{latin-ordinary}{x}][!B(\OLId{latin-ordinary}{x})]$:
+  \[
+  \Axiom$\Pi \fCenter \Lambda, \lexists[\OLId{latin-ordinary}{x}][!B(\OLId{latin-ordinary}{x})]^{\OLId{latin-ordinary}{k}+\OLMathNumeral{1}}, !B(\OLId{latin-ordinary}{t})^{\OLId{latin-ordinary}{k}+\OLMathNumeral{2}}$
+  \RightLabel{\RightR{\lexists}}
+  \UnaryInf$\Pi \fCenter \Lambda, \lexists[\OLId{latin-ordinary}{x}][!B(\OLId{latin-ordinary}{x})]^\OLId{latin-ordinary}{i}$
+  \DisplayProof
+  \]
+  حيث~$\OLId{latin-ordinary}{t}$ أول حد لا يحتوي إلا~!!{constant}s في~$\OLId{latin-looped}{C}$ ولم يُستعمل من قبل في
+  اختزال~$\lexists[\OLId{latin-ordinary}{x}][!B(\OLId{latin-ordinary}{x})]$ على اليمين تحت هذه المتتالية. وإذا استُعملت
+  كل هذه الحدود، نعيد استعمال أول حد في التعداد الثابت مبني فقط من ثوابت
+  $\OLId{latin-looped}{C}$، بدل إدخال ثابت قد يقع خارج~$\OLId{latin-looped}{C}$. ومجموعة~!!{constant}s المسندة إلى
+  المتتالية الجديدة هي~$\OLId{latin-looped}{C}$.
+  \item حالات~$!A\ident\lforall[\OLId{latin-ordinary}{x}][!B(\OLId{latin-ordinary}{x})]$ مماثلة، وتُترك تمارين.
+\end{enumerate}
+
+فإذا لم نضف في المرحلة~$\OLId{latin-ordinary}{n}+\OLMathNumeral{1}$ متتالية جديدة إلى متتالية عليا، انتهت
+الخوارزمية ناجحة. وحينئذ نكون قد وجدنا~!!a{proof} لـ
+$\OLId{greek-variable}{Gamma}\Sequent\OLId{greek-variable}{Delta}$، نحصل عليه من شجرة المرحلة~$\OLId{latin-ordinary}{n}+\OLMathNumeral{1}$ بحذف المؤشرات
+كلها. فالمتتاليات العليا كلها إما من الصورة
+$!A,\Pi\Sequent\Lambda,!A$ وإما من الصورة
+$\lfalse,\Pi\Sequent\Lambda$. وجميع الاستدلالات صحيحة في~\Log{G3c}،
+وذلك بيّن في الاستدلالات القضاياوية. ثم إن مجموعة~$\OLId{latin-looped}{C}$ من~!!{constant}s
+المسندة إلى متتالية تشتمل، في كل خطوة، على جميع~!!{constant}s الواقعة
+فيها؛ ولذلك يتحقق
+شرط المتغير الذاتي في الاختزال باستعمال~\LeftR{\lexists} و
+\RightR{\lforall}، لأن المتغير الذاتي~$\OLId{latin-ordinary}{c}$ كان~!!a{constant} لا ينتمي إلى
+المجموعة~$\OLId{latin-looped}{C}$ المسندة إلى النتيجة، فلم يقع~$\OLId{latin-ordinary}{c}$ في النتيجة كذلك. فنحصل على:
+
+\begin{prop}
+خوارزمية البحث عن البرهان في~\Log{G3c} صحيحة: فإن توقفت ناجحة، كان
+للمتتالية الابتدائية~$\OLId{greek-variable}{Gamma}\Sequent\OLId{greek-variable}{Delta}$~!!a{proof}.
+\end{prop}
+
+
+
+
+
+\end{document}

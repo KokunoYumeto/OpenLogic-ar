@@ -1,0 +1,119 @@
+% Part: first-order-logic
+% Chapter: completeness
+% Section: completeness-theorem
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{com}{cth}}
+      {\olfileid{pl}{com}{cth}}
+
+\olsection{مبرهنة الاكتمال}
+
+\begin{explain}
+إذا ضممنا النتائج المتقدمة بعضها إلى بعض، تمت لنا مبرهنة الاكتمال.
+\end{explain}
+
+\begin{thm}[مبرهنة الاكتمال]
+\ollabel{thm:completeness}
+لتكن $\OLId{greek-variable}{Gamma}$ مجموعة من ال!!{sentence}s. إذا كانت $\OLId{greek-variable}{Gamma}$ متسقة، فهي
+قابلة للإرضاء.
+\end{thm}
+
+\begin{proof}
+لتكن $\OLId{greek-variable}{Gamma}$ متسقة.\iftag{FOL}{ تتيح \olref[hen]{lem:henkin} مجموعة
+  متسقة مشبعة $\OLId{greek-variable}{Gamma}' \supseteq \OLId{greek-variable}{Gamma}$.}{} ثم تتيح
+\olref[lin]{lem:lindenbaum} مجموعة
+$\OLId{greek-variable}{Gamma}^* \supseteq \iftag{FOL}{\OLId{greek-variable}{Gamma}'}{\OLId{greek-variable}{Gamma}}$ متسقة و!!{complete}.
+\iftag{FOL}{
+  ومن $\OLId{greek-variable}{Gamma}' \subseteq \OLId{greek-variable}{Gamma}^*$ نعلم أن $\OLId{greek-variable}{Gamma}^*$ تضم، لكل
+  !!{formula}~$!A(\OLId{latin-ordinary}{x})$، !!a{sentence} على الصورة
+  \iftag{prvEx}
+        {$\lexists[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})] \lif !A(\OLId{latin-ordinary}{c})$}
+        {$\lnot\lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})] \lif \lnot !A(\OLId{latin-ordinary}{c})$}؛
+  فالمجموعة $\OLId{greek-variable}{Gamma}^*$ مشبعة كذلك. فإن كانت $\OLId{greek-variable}{Gamma}$ خالية من~$\eq$،
+  أفادت}{وتفيد}
+\olref[mod]{lem:truth} أن
+$\iftag{FOL}{\Sat{\OLId{latin-looped}{M}(\OLId{greek-variable}{Gamma}^*)}}{\pSat{\OLId{latin-ordinary}{v}(\OLId{greek-variable}{Gamma}^*)}}{!A}$ إذا وفقط إذا
+كان $!A \in \OLId{greek-variable}{Gamma}^*$. فيثبت خصوصًا لكل $!A \in
+\OLId{greek-variable}{Gamma}$ أن $\iftag{FOL}{\Sat{\OLId{latin-looped}{M}(\OLId{greek-variable}{Gamma}^*)}}{\pSat{\OLId{latin-ordinary}{v}(\OLId{greek-variable}{Gamma}^*)}}{!A}$،
+وهذا إرضاء لـ$\OLId{greek-variable}{Gamma}$.\iftag{FOL}{
+  وأما إذا اشتملت $\OLId{greek-variable}{Gamma}$ على~$\eq$، فنستعمل \olref[ide]{lem:truth}:
+  لكل ال!!{sentence}s~$!A$، يتحقق $\Sat{\equivclass{\OLId{latin-looped}{M}}{\approx}}{!A}$
+  إذا وفقط إذا كان $!A \in \OLId{greek-variable}{Gamma}^*$. ومن ثم
+  $\Sat{\equivclass{\OLId{latin-looped}{M}}{\approx}}{!A}$ لكل $!A \in \OLId{greek-variable}{Gamma}$، فيثبت
+  إرضاء $\OLId{greek-variable}{Gamma}$ في هذه الحالة أيضًا.}{}
+\end{proof}
+
+\begin{cor}[مبرهنة الاكتمال، الصيغة الثانية]
+\ollabel{cor:completeness}
+لكل $\OLId{greek-variable}{Gamma}$ ولكل !!{sentence}~$!A$: إذا كان $\OLId{greek-variable}{Gamma} \Entails !A$،
+فإن $\OLId{greek-variable}{Gamma} \Proves !A$.
+\end{cor}
+
+\begin{proof}
+الرمز $\OLId{greek-variable}{Gamma}$ في كل من \olref{cor:completeness} و
+\olref{thm:completeness} واقع تحت التكميم الكلي. ولرفع احتمال الخلط،
+نورد \olref{thm:completeness} برمز آخر: كل مجموعة من
+ال!!{sentence}s~$\OLId{greek-variable}{Delta}$ إذا اتسقت $\OLId{greek-variable}{Delta}$ كانت قابلة للإرضاء.
+ومقابل ذلك بالنقيض أن $\OLId{greek-variable}{Delta}$ إذا لم تقبل الإرضاء لم تكن متسقة.
+وهذه هي العبارة التي نطبقها هنا.
+
+ليكن $\OLId{greek-variable}{Gamma} \Entails !A$. فالمجموعة $\OLId{greek-variable}{Gamma} \cup \{\lnot !A\}$
+لا تقبل الإرضاء بمقتضى \olref[syn][sem]{prop:entails-unsat}. نأخذ
+$\OLId{greek-variable}{Gamma} \cup \{\lnot !A\}$ مكان $\OLId{greek-variable}{Delta}$ في العبارة المتقدمة من
+\olref{thm:completeness}، فيثبت عدم اتساق $\OLId{greek-variable}{Gamma} \cup \{\lnot !A\}$.
+ثم بتطبيق
+\iftag{FOL}{%
+  \tagrefs{prfAX/{fol:axd:prv:prop:prov-incons},
+    prfSC/{fol:seq:prv:prop:prov-incons},
+    prfND/{fol:ntd:prv:prop:prov-incons},
+    prfTab/{fol:tab:prv:prop:prov-incons}}}{%
+  \tagrefs{prfAX/{pl:axd:prv:prop:prov-incons},
+    prfSC/{pl:seq:prv:prop:prov-incons},
+    prfND/{pl:ntd:prv:prop:prov-incons},
+    prfTab/{pl:tab:prv:prop:prov-incons}}},
+نحصل على $\OLId{greek-variable}{Gamma} \Proves !A$.
+\end{proof}
+
+\tagprob{FOL}
+\begin{prob}
+استخرج من \olref[fol][com][cth]{cor:completeness}
+\olref[fol][com][cth]{thm:completeness}، ليتم بذلك إثبات تكافؤ
+عبارتي مبرهنة الاكتمال.
+\end{prob}
+\tagendprob
+
+\tagprob{notFOL}
+\begin{prob}
+استخرج من \olref[pl][com][cth]{cor:completeness}
+\olref[pl][com][cth]{thm:completeness}، ليتم بذلك إثبات تكافؤ
+عبارتي مبرهنة الاكتمال.
+\end{prob}
+\tagendprob
+
+\tagprob{FOL}
+\begin{prob}
+اكتمال نسق !!a{derivation} يقتضي أن تكفي قواعده لإثبات عدم اتساق
+كل مجموعة لا تقبل الإرضاء. فأي قواعد ال!!{derivation} اعتمد عليها
+برهان الاكتمال؟ وأيها، إن وُجد، لم يستعمل في شيء منه؟ حقق ذلك بجدول
+أو مخطط يصل قواعد ال!!{derivation} بالنتائج التي استعملتها في الطريق
+إلى \olref[fol][com][cth]{thm:completeness}؛ ولا تُسقط استعمالًا
+لقاعدة لمجرد أن البرهان طواه ولم يصرح به.
+\end{prob}
+\tagendprob
+
+\tagprob{notFOL}
+\begin{prob}
+اكتمال نسق !!a{derivation} يقتضي أن تكفي قواعده لإثبات عدم اتساق
+كل مجموعة لا تقبل الإرضاء. فأي قواعد ال!!{derivation} اعتمد عليها
+برهان الاكتمال؟ وأيها، إن وُجد، لم يستعمل في شيء منه؟ حقق ذلك بجدول
+أو مخطط يصل قواعد ال!!{derivation} بالنتائج التي استعملتها في الطريق
+إلى \olref[pl][com][cth]{thm:completeness}؛ ولا تُسقط استعمالًا
+لقاعدة لمجرد أن البرهان طواه ولم يصرح به.
+\end{prob}
+\tagendprob
+
+\end{document}

@@ -1,0 +1,72 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{z}{pairs}
+\olsection{في تكوين الأزواج}
+
+والمسلّمة التي تلي ما سبق هي:
+
+\begin{axiom}[الأزواج]
+لكل مجموعتين~$\OLId{latin-ordinary}{a},\OLId{latin-ordinary}{b}$ توجد المجموعة~$\{\OLId{latin-ordinary}{a},\OLId{latin-ordinary}{b}\}$.
+\[
+	\forall \OLId{latin-ordinary}{a} \forall \OLId{latin-ordinary}{b} \exists \OLId{latin-looped}{P} \forall \OLId{latin-ordinary}{x} (\OLId{latin-ordinary}{x} \in \OLId{latin-looped}{P} \liff (\OLId{latin-ordinary}{x} = \OLId{latin-ordinary}{a} \lor \OLId{latin-ordinary}{x} = \OLId{latin-ordinary}{b}))
+\]
+\end{axiom}
+
+ويسوغها التصور التكراري هكذا. افرض أن~$\OLId{latin-ordinary}{a}$ متاحة في المرحلة~$\OLId{latin-looped}{S}$، وأن
+$\OLId{latin-ordinary}{b}$ متاحة في المرحلة~$\OLId{latin-looped}{T}$، ولتكن~$\OLId{latin-looped}{M}$ المتأخرة من~$\OLId{latin-looped}{S}$ و$\OLId{latin-looped}{T}$. فكل من~$\OLId{latin-ordinary}{a}$
+و$\OLId{latin-ordinary}{b}$ متاح في المرحلة~$\OLId{latin-looped}{M}$، ومن ثم تكون~$\{\OLId{latin-ordinary}{a},\OLId{latin-ordinary}{b}\}$ تجمعًا ممكنًا في كل
+مرحلة تلي~$\OLId{latin-looped}{M}$.
+
+ولكن من أين نعلم وجود مرحلة بعد~$\OLId{latin-looped}{M}$؟ إن لم توجد بطل هذا التسويغ. فلا
+تثبت مسلّمة الأزواج حتى نزيد في رواية~\olref[sth][z][story]{sec}
+الأصل الآتي:
+\begin{enumerate}
+	\item[] \stagessucc. لا توجد مرحلة أخيرة.
+\end{enumerate}
+فهل له مسوغ؟ لم تنص رواية شونفيلد \emph{صراحة} على امتناع المرحلة
+الأخيرة. لكنه، وإن كان زيادة دقيقة على الرواية، ملائم لأصل تكون
+المجموعات على مراحل. فسنسلمه فيما يأتي، ونسلم معه بمسلّمة الأزواج.
+
+ومن هذه المسلّمة نثبت وجود مجموعات كثيرة أخرى؛ فمن ذلك:
+
+\begin{prop}\ollabel{prop:pairsconsequences}
+لكل مجموعتين~$\OLId{latin-ordinary}{a}$ و$\OLId{latin-ordinary}{b}$ توجد المجموعات الآتية:
+	\begin{enumerate}
+		\item\ollabel{singleton} $\{\OLId{latin-ordinary}{a}\}$
+		\item\ollabel{binunion} $\OLId{latin-ordinary}{a} \cup \OLId{latin-ordinary}{b}$
+		\item\ollabel{tuples} $\tuple{\OLId{latin-ordinary}{a}, \OLId{latin-ordinary}{b}}$
+	\end{enumerate}
+\end{prop}
+
+\begin{proof}
+\olref{singleton}. بالأزواج توجد~$\{\OLId{latin-ordinary}{a}, \OLId{latin-ordinary}{a}\}$، وهي~$\{\OLId{latin-ordinary}{a}\}$
+بالامتدادية.
+
+\olref{binunion}. بالأزواج توجد~$\{\OLId{latin-ordinary}{a}, \OLId{latin-ordinary}{b}\}$؛ ثم بالاتحاد توجد
+$\OLId{latin-ordinary}{a} \cup \OLId{latin-ordinary}{b} = \bigcup \{\OLId{latin-ordinary}{a}, \OLId{latin-ordinary}{b}\}$.
+
+\olref{tuples}. من~\olref{singleton} توجد~$\{\OLId{latin-ordinary}{a}\}$، ومن الأزواج توجد
+$\{\OLId{latin-ordinary}{a},\OLId{latin-ordinary}{b}\}$. وبتطبيق الأزواج مرة ثانية توجد
+$\{\{\OLId{latin-ordinary}{a}\}, \{\OLId{latin-ordinary}{a}, \OLId{latin-ordinary}{b}\}\} = \tuple{\OLId{latin-ordinary}{a}, \OLId{latin-ordinary}{b}}$.
+\end{proof}
+
+\begin{prob}
+أثبت أنه لكل مجموعات~$\OLId{latin-ordinary}{a},\OLId{latin-ordinary}{b},\OLId{latin-ordinary}{c}$ توجد المجموعة~$\{\OLId{latin-ordinary}{a},\OLId{latin-ordinary}{b},\OLId{latin-ordinary}{c}\}$.
+\end{prob}
+
+\begin{prob}
+أثبت أنه لكل مجموعات~$\OLId{latin-ordinary}{a}_\OLMathNumeral{1},\ldots,\OLId{latin-ordinary}{a}_\OLId{latin-ordinary}{n}$ توجد المجموعة
+$\{\OLId{latin-ordinary}{a}_\OLMathNumeral{1},\ldots,\OLId{latin-ordinary}{a}_\OLId{latin-ordinary}{n}\}$.
+\end{prob}
+
+%\begin{proof} بتطبيق الأزواج مرتين، توجد $\{\{a_1, a_2\}, \{a_1,
+%   a_3\}\}$. وبموجب الاتحاد والامتدادية، توجد $\bigcup \{\{a_1,
+%   a_2\}, \{a_1, a_3\}\} = \{a_1, a_2, a_3\}$. كرر هذه
+%   الحيلة كلما لزم. \end{proof}
+
+\end{document}
+
+
+

@@ -1,0 +1,166 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{his}{set}{hilbertcurve}
+
+\olsection{ملحق: منحنيات هيلبرت المالئة للفضاء}
+
+تقدم في~\olref[pathology]{sec} أن برهان كانتور على مساواة نقاط الخط لنقاط
+المربع عدداً (\olref[his][set][cantorplane]{thm:cantorplane}) حمل بيانو
+على أن يسأل: أيكون \emph{منحنى} يملأ الفضاء؟ فأثبت سنة \OLClassicalDigits{1890} أن ذلك ممكن.
+ونبين في هذا القسم، بياناً حدسياً غير صوري، إنشاء منحنى هيلبرت المالئ
+للفضاء، بعد تعديل يسير.\footnote{ومن أراد بياناً أحكم فلينظر
+\cite{Rose2010}. والتعديل هو زيادة الأجزاء الحمراء من المنحنيات الآتية،
+ليكون التحقق من اتصال المنحنى أيسر قليلاً.}
+
+نريد أن نحدّ دالة~$\OLId{latin-ordinary}{h} \colon \unitline \to \unitsquare$ بأنها نهاية
+متتالية من الدوال المتصلة $\OLId{latin-ordinary}{h}_\OLId{latin-ordinary}{n} \colon \unitline \to \unitsquare$، حيث
+~$\OLId{latin-ordinary}{n} \geq \OLMathNumeral{1}$. فنصف الإنشاء أولاً، ثم نثبت أنه يملأ الفضاء، ثم إنه منحنى.
+
+ونجعل المدى المقابل للدالة~$\OLId{latin-ordinary}{h}$ مربع الوحدة~$\unitsquare$. وهذا تقريبها
+الأول، أعني الدالة~$\OLId{latin-ordinary}{h}_\OLMathNumeral{1} \colon \unitline \to \unitsquare$:
+\begin{center}
+	\begin{tikzpicture}
+	\draw[gray] (0pt, 0pt) rectangle (80pt, 80pt);
+	\draw[step = 40pt, gray, very thin] (0pt, 0pt) grid (80pt, 80pt);
+	\draw[oldiagcolorC, thick] (20pt, 0)--(20pt, 20pt);
+	\draw[oldiagcolorC, thick] (60pt, 0)--(60pt, 20pt);		
+	\begin{scope}[xshift=20pt, yshift=20pt]
+	\draw [black, thick, l-system={Hilbert curve, step=40pt, angle=90, axiom=L, order=1}]  lindenmayer system;
+	\end{scope}
+	\end{tikzpicture}
+\end{center}
+ولكي يتبين الإنشاء فرضنا على المربع شبكة~$\OLMathNumeral{2} \times \OLMathNumeral{2}$. فتصور المنحنى
+بادئاً من الربع الأسفل الأيسر، ثم ماراً إلى الأعلى الأيسر، فالأعلى الأيمن،
+فالأسفل الأيمن آخراً. وهذه المرتبة الثانية من الإنشاء، أي
+~$\OLId{latin-ordinary}{h}_\OLMathNumeral{2} \colon \unitline \to \unitsquare$:
+\begin{center}
+	\begin{tikzpicture}
+	\draw[gray] (0pt, 0pt) rectangle (80pt, 80pt);
+	\draw[step = 20pt, gray, very thin] (0pt, 0pt) grid (80pt, 80pt);
+	\draw[oldiagcolorC, thick] (0pt, 10pt)--(10pt, 10pt);
+	\draw[oldiagcolorC, thick] (70pt, 10pt)--(80pt, 10pt);
+	\draw[thick, oldiagcolorE] (10pt, 30pt)--(10pt, 50pt); 
+	\draw[thick, oldiagcolorE] (30pt, 50pt)--(50pt, 50pt); 
+	\draw[thick, oldiagcolorE] (70pt, 50pt)--(70pt, 30pt); \begin{scope}[xshift=10pt, yshift=30pt]
+	\draw [thick, rotate=270,black, l-system={Hilbert curve, step=20pt, angle=90, axiom=L, order=1}]  lindenmayer system;
+	\end{scope}
+	\begin{scope}[xshift=10pt, yshift=50pt]
+	\draw [thick, black, l-system={Hilbert curve, step=20pt, angle=90, axiom=L, order=1}]  lindenmayer system;
+	\end{scope}
+	\begin{scope}[xshift=50pt, yshift=50pt]
+	\draw [thick, black, l-system={Hilbert curve, step=20pt, angle=90, axiom=L, order=1}]  lindenmayer system;
+	\end{scope}
+	\begin{scope}[xshift=70pt, yshift=10pt]
+	\draw [thick, rotate=90,black, l-system={Hilbert curve, step=20pt, angle=90, axiom=L, order=1}]  lindenmayer system;
+	\end{scope}
+	\end{tikzpicture}
+\end{center}
+وتكشف الألوان المختلفة وجه إنشاء~$\OLId{latin-ordinary}{h}_\OLMathNumeral{2}$. فنضع أولاً في أرباع المربع نسخاً
+مصغرة من الجزء غير~!!{colorC} من~$\OLId{latin-ordinary}{h}_\OLMathNumeral{1}$: في الأسفل الأيسر، ثم الأعلى
+الأيسر، فالأعلى الأيمن، فالأسفل الأيمن، وقد رُسمت بالسواد. ثم نصل الصور
+الأربع بخطوط~!!{colorE}، ونصل الشكل آخر الأمر بحد المربع
+(بخطوط~!!{colorC}).
+
+ثم نأتي إلى~$\OLId{latin-ordinary}{h}_\OLMathNumeral{3} \colon \unitline \to \unitsquare$. فكما أُنشئت
+$\OLId{latin-ordinary}{h}_\OLMathNumeral{2}$ من أربع صور مصغرة موصولة للجزء غير الأحمر من~$\OLId{latin-ordinary}{h}_\OLMathNumeral{1}$، كذلك تُنشأ
+$\OLId{latin-ordinary}{h}_\OLMathNumeral{3}$ من أربع صور مصغرة للجزء غير الأحمر من~$\OLId{latin-ordinary}{h}_\OLMathNumeral{2}$، مرسومة بالسواد، ثم
+توصل إحداها بالأخرى بخطوط~!!{colorE}، وتوصل في النهاية بحد المربع
+(بخطوط~!!{colorC}).
+\begin{center}
+	\begin{tikzpicture}
+	\draw[gray] (0pt, 0pt) rectangle (80pt, 80pt);
+	\draw[step = 10pt, gray, very thin] (0pt, 0pt) grid (80pt, 80pt);
+	\draw[thick, oldiagcolorC](5pt, 0pt)--(5pt, 5pt); 
+	\draw[thick, oldiagcolorC] (75pt, 0pt)--(75pt, 5pt); 
+	\draw[thick, oldiagcolorE] (5pt, 35pt)--(5pt, 45pt); 
+	\draw[thick, oldiagcolorE] (35pt, 45pt)--(45pt, 45pt); 
+	\draw[thick, oldiagcolorE] (75pt, 45pt)--(75pt, 35pt); \begin{scope}[xshift=5pt, yshift=35pt]
+	\draw [rotate=270, thick, black, l-system={Hilbert curve, step=10pt, angle=90, axiom=L, order=2}]  lindenmayer system;
+	\end{scope}
+	\begin{scope}[xshift=5pt, yshift=45pt]
+	\draw [thick, black, l-system={Hilbert curve, step=10pt, angle=90, axiom=L, order=2}]  lindenmayer system;
+	\end{scope}
+	\begin{scope}[xshift=45pt, yshift=45pt]
+	\draw [thick, black, l-system={Hilbert curve, step=10pt, angle=90, axiom=L, order=2}]  lindenmayer system;
+	\end{scope}
+	\begin{scope}[xshift=75pt, yshift=5pt]
+	\draw [thick, rotate=90,black, l-system={Hilbert curve, step=10pt, angle=90, axiom=L, order=2}]  lindenmayer system;
+	\end{scope}
+	\end{tikzpicture}
+\end{center}
+وقد بان الآن القانون العام الذي نحدّ به كل دالة متصلة
+$\OLId{latin-ordinary}{h}_{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}} \colon \unitline \to \unitsquare$ من الدالة
+$\OLId{latin-ordinary}{h}_\OLId{latin-ordinary}{n} \colon \unitline \to \unitsquare$. ثم نحدّ المنحنى~$\OLId{latin-ordinary}{h}$
+\emph{نفسه} بأنه النهاية النقطية للدوال المتعاقبة~$\OLId{latin-ordinary}{h}_\OLMathNumeral{1}$،~$\OLId{latin-ordinary}{h}_\OLMathNumeral{2}$،
+\dots\@؛ أي لكل~$\OLId{latin-ordinary}{x} \in \unitline$:
+\begin{align*}
+	\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{x}) &= \lim_{\OLId{latin-ordinary}{n} \rightarrow \infty} \OLId{latin-ordinary}{h}_\OLId{latin-ordinary}{n}(\OLId{latin-ordinary}{x})
+\end{align*}
+
+ويلزمنا أولاً أن نثبت وجود هذه النهاية، وأن التقارب أقوى من التقارب
+النقطي المجرد. فإننا عند رسم~$\OLId{latin-ordinary}{h}_\OLId{latin-ordinary}{n}$ نفرض شبكة~$\OLMathNumeral{2}^\OLId{latin-ordinary}{n} \times \OLMathNumeral{2}^\OLId{latin-ordinary}{n}$ على
+$\unitsquare$. وبمبرهنة فيثاغورس يكون طول قطر كل خلية فيها
+\[
+\sqrt{\left(\nicefrac{\OLMathNumeral{1}}{\OLMathNumeral{2}^{\OLId{latin-ordinary}{n}}}\right)^\OLMathNumeral{2}+\left(\nicefrac{\OLMathNumeral{1}}{\OLMathNumeral{2}^{\OLId{latin-ordinary}{n}}}\right)^\OLMathNumeral{2}}
+= \sqrt{\OLMathNumeral{2}}\,\OLMathNumeral{2}^{-\OLId{latin-ordinary}{n}}.
+\]
+ويكفل تداخل الإنشاء أنه، إذا كان~$\OLId{latin-ordinary}{m} \geq \OLId{latin-ordinary}{n}$، وقع~$\OLId{latin-ordinary}{h}_\OLId{latin-ordinary}{m}(\OLId{latin-ordinary}{x})$ و$\OLId{latin-ordinary}{h}_\OLId{latin-ordinary}{n}(\OLId{latin-ordinary}{x})$ في
+إغلاق خلية المستوى~$\OLId{latin-ordinary}{n}$ الموافقة للمعلمة~$\OLId{latin-ordinary}{x}$. ومن ثم
+\[
+\sup_{\OLId{latin-ordinary}{x} \in \unitline}\lVert \OLId{latin-ordinary}{h}_\OLId{latin-ordinary}{m}(\OLId{latin-ordinary}{x})-\OLId{latin-ordinary}{h}_\OLId{latin-ordinary}{n}(\OLId{latin-ordinary}{x})\rVert
+\leq \sqrt{\OLMathNumeral{2}}\,\OLMathNumeral{2}^{-\OLId{latin-ordinary}{n}}\qquad(\OLId{latin-ordinary}{m} \geq \OLId{latin-ordinary}{n}).
+\]
+فتكون المتتالية~$(\OLId{latin-ordinary}{h}_\OLId{latin-ordinary}{n})$ كوشية بانتظام، ولذلك تتقارب بانتظام إلى~$\OLId{latin-ordinary}{h}$،
+ولدينا
+\[
+\sup_{\OLId{latin-ordinary}{x} \in \unitline}\lVert \OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{x})-\OLId{latin-ordinary}{h}_\OLId{latin-ordinary}{n}(\OLId{latin-ordinary}{x})\rVert
+\leq \sqrt{\OLMathNumeral{2}}\,\OLMathNumeral{2}^{-\OLId{latin-ordinary}{n}} = \OLId{latin-looped}{O}(\OLMathNumeral{2}^{-\OLId{latin-ordinary}{n}}).
+\]
+وكل~$\OLId{latin-ordinary}{h}_\OLId{latin-ordinary}{n}$ متصلة، لأنها تمثّل القطع المستقيمة المتوالية تمثيلاً بارامترياً
+متصلاً. فتكون~$\OLId{latin-ordinary}{h}$ متصلة، إذ هي نهاية منتظمة لدوال متصلة. ولبيان ذلك من
+قريب، خذ~$\OLId{latin-ordinary}{x} \in \unitline$ و$\epsilon>\OLMathNumeral{0}$، ثم اختر~$\OLId{latin-ordinary}{n}$ حتى يصغر الحد
+المنتظم المتقدم عن~$\epsilon/\OLMathNumeral{3}$. ومن اتصال~$\OLId{latin-ordinary}{h}_\OLId{latin-ordinary}{n}$ يوجد~$\delta>\OLMathNumeral{0}$ بحيث
+متى كان~$|\OLId{latin-ordinary}{x}-\OLId{latin-ordinary}{y}|<\delta$، كان
+$\lVert \OLId{latin-ordinary}{h}_\OLId{latin-ordinary}{n}(\OLId{latin-ordinary}{x})-\OLId{latin-ordinary}{h}_\OLId{latin-ordinary}{n}(\OLId{latin-ordinary}{y})\rVert<\epsilon/\OLMathNumeral{3}$. وعندئذ توجب متباينة المثلث
+$\lVert \OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{x})-\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{y})\rVert<\epsilon$.
+
+ولنثبت الآن أن~$\OLId{latin-ordinary}{h}$ يملأ الفضاء، أي إنه شامل على~$\unitsquare$. خذ
+$\OLId{latin-ordinary}{p} \in \unitsquare$. ولكل~$\OLId{latin-ordinary}{n}$ عيّن خلية~$\OLId{latin-looped}{Q}_\OLId{latin-ordinary}{n}$ في شبكة المستوى~$\OLId{latin-ordinary}{n}$
+تشتمل على~$\OLId{latin-ordinary}{p}$. ولما كان~$\OLId{latin-ordinary}{h}_\OLId{latin-ordinary}{n}$ يمر بكل خلية من تلك الشبكة، أمكن تعيين
+$\OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{n} \in \unitline$ حتى يكون~$\OLId{latin-ordinary}{h}_\OLId{latin-ordinary}{n}(\OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{n}) \in \OLId{latin-looped}{Q}_\OLId{latin-ordinary}{n}$. ولأن~$\unitline$
+متراصة، كان للمتتالية~$(\OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{n})$ متتالية جزئية~$(\OLId{latin-ordinary}{x}_{\OLId{latin-ordinary}{n}_\OLId{latin-ordinary}{k}})$ تنزع إلى نقطة
+$\OLId{latin-ordinary}{x} \in \unitline$. ثم يعطينا اتصال~$\OLId{latin-ordinary}{h}$ وتقارب~$\OLId{latin-ordinary}{h}_\OLId{latin-ordinary}{n}$ المنتظم
+\[
+\lVert \OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{x})-\OLId{latin-ordinary}{p}\rVert
+\leq \lVert \OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{x})-\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{x}_{\OLId{latin-ordinary}{n}_\OLId{latin-ordinary}{k}})\rVert
+ + \lVert \OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{x}_{\OLId{latin-ordinary}{n}_\OLId{latin-ordinary}{k}})-\OLId{latin-ordinary}{h}_{\OLId{latin-ordinary}{n}_\OLId{latin-ordinary}{k}}(\OLId{latin-ordinary}{x}_{\OLId{latin-ordinary}{n}_\OLId{latin-ordinary}{k}})\rVert
+ + \lVert \OLId{latin-ordinary}{h}_{\OLId{latin-ordinary}{n}_\OLId{latin-ordinary}{k}}(\OLId{latin-ordinary}{x}_{\OLId{latin-ordinary}{n}_\OLId{latin-ordinary}{k}})-\OLId{latin-ordinary}{p}\rVert \longrightarrow \OLMathNumeral{0},
+\]
+لأن الحد الأخير لا يجاوز قطر~$\OLId{latin-looped}{Q}_{\OLId{latin-ordinary}{n}_\OLId{latin-ordinary}{k}}$، وهو
+$\sqrt{\OLMathNumeral{2}}\,\OLMathNumeral{2}^{-\OLId{latin-ordinary}{n}_\OLId{latin-ordinary}{k}}$. فينتج~$\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{x})=\OLId{latin-ordinary}{p}$. ولما كانت~$\OLId{latin-ordinary}{p}$ كيف اتفقت، ثبت أن
+كل نقطة من~$\unitsquare$ واقعة على المنحنى؛ فـ~$\OLId{latin-ordinary}{h}$ يملأ الفضاء!
+
+وبقي أن نبرهن أن~$\OLId{latin-ordinary}{h}$ \emph{منحنى} حقاً؛ فلا بد أولاً من تحديد هذا
+المفهوم. والتعريف الحديث مبني على حد وضعه جوردان سنة \OLClassicalDigits{1887}، قبل ظهور أول
+منحنى مالئ للفضاء بسنوات قلائل:
+
+\begin{defn}
+المنحنى تصوير متصل من~$\unitline$ إلى~$\Real^\OLMathNumeral{2}$.
+\end{defn}
+
+وهذا الحد قريب جداً من التصور: فالمنحنى، بحسب الحدس، تصوير \emph{متصل}
+ينقل خطاً معيارياً إلى المستوى~$\Real^\OLMathNumeral{2}$. ودالتنا~$\OLId{latin-ordinary}{h}$ تصوير من
+~$\unitline$ إلى~$\unitsquare \subseteq \Real^\OLMathNumeral{2}$، وقد أثبتنا اتصالها،
+فهي إذن منحنى.
+
+ويجوز أن نصل هذا البرهان رأساً بالوصف الهندسي للإنشاء. فلنرمز بـ$\OLId{latin-looped}{I}$ إلى
+فاصل مفتوح من~$\unitline$ تصوّره~$\OLId{latin-ordinary}{h}_\OLId{latin-ordinary}{n}$ داخل خلية معينة من شبكة
+المستوى~$\OLId{latin-ordinary}{n}$. وهذا~$\OLId{latin-looped}{I}$ موجود لأن المسار يدخل كل خلية. ومتى كان~$\OLId{latin-ordinary}{x} \in \OLId{latin-looped}{I}$
+بقيت صوره التالية في إغلاق الخلية الموافقة نفسها؛ وهذا بعينه هو التداخل
+الذي أعطانا حد التقارب المنتظم المتقدم. وأما العبارة المحكمة للاتصال فهي
+عبارة~$\epsilon$/$\delta$ المذكورة في~\olref[limits]{sec}، وقد حققتها
+التقديرات السابقة من متباينة المثلث.
+
+\end{document}

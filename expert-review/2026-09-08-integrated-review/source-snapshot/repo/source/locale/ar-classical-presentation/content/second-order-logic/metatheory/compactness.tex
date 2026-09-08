@@ -1,0 +1,70 @@
+% Part: second-order-logic
+% Chapter: metatheory
+% Section: compactness
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sol}{met}{com}
+
+\olsection{منطق الرتبة الثانية غير متراص}
+
+\begin{explain}
+مجموعة الجمل~$\OLId{greek-variable}{Gamma}$ \emph{قابلة للإرضاء منتهيًا} إذا كانت
+كل مجموعة جزئية منتهية منها قابلة للإرضاء.
+وفي منطق الرتبة الأولى، متى كانت مجموعة من !!{sentence}s~$\OLId{greek-variable}{Gamma}$
+قابلة للإرضاء منتهيًا لزم أن تكون قابلة للإرضاء.
+هذه الخاصية هي \emph{التراص}. ولها عبارة مكافئة بلغة الاستلزام:
+من~$\OLId{greek-variable}{Gamma} \Entails !A$ يلزم وجود مجموعة جزئية
+منتهية~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{0} \subseteq \OLId{greek-variable}{Gamma}$ تحقق~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{0} \Entails !A$.
+وفي هذه العبارة تظهر الخاصية نتيجة مباشرة للاكتمال:
+إذ إن~$\OLId{greek-variable}{Gamma} \Entails !A$ يقتضي~$\OLId{greek-variable}{Gamma} \Proves !A$ بالاكتمال،
+وكل !!{derivation} إنما يستعمل عددًا منتهيًا من
+!!{sentence}s~$\OLId{greek-variable}{Gamma}$.
+
+وأما الرتبة الثانية فلا تتصف بالتراص. فقد تكون مجموعة من
+!!{sentence}s هذه الرتبة قابلة للإرضاء منتهيًا ولا تكون قابلة
+للإرضاء؛ وقد تستلزم~$!A$ مع أن أي مجموعة جزئية منتهية منها
+لا تستلزم~$!A$.
+\end{explain}
+
+\begin{thm}
+\ollabel{thm:sol-not-compact}
+لا يتصف منطق الرتبة الثانية بالتراص.
+\end{thm}
+
+\begin{proof}
+قد ثبت أن
+\[
+\fn{Inf} \ident \lexists[\OLId{latin-ordinary}{u}][(\lforall[\OLId{latin-ordinary}{x}][\lforall[\OLId{latin-ordinary}{y}][(\eq[\OLId{latin-ordinary}{u}(\OLId{latin-ordinary}{x})][\OLId{latin-ordinary}{u}(\OLId{latin-ordinary}{y})]
+      \lif \eq[\OLId{latin-ordinary}{x}][\OLId{latin-ordinary}{y}])]] \land \lexists[\OLId{latin-ordinary}{y}][\lforall[\OLId{latin-ordinary}{x}][\eq/[\OLId{latin-ordinary}{y}][\OLId{latin-ordinary}{u}(\OLId{latin-ordinary}{x})]]])]
+\]
+تُرضى في !!a{structure} إذا وفقط إذا كان مجالها لانهائيًا.
+ولتكن~$!A^{\ge \OLId{latin-ordinary}{n}}$ جملة تفيد أن في المجال~$\OLId{latin-ordinary}{n}$ من
+!!{element}s على الأقل؛ ومن ذلك:
+\[
+!A^{\ge \OLId{latin-ordinary}{n}} \ident \lexists[\OLId{latin-ordinary}{x}_\OLMathNumeral{1}][\dots\lexists[\OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{n}][(\eq/[\OLId{latin-ordinary}{x}_\OLMathNumeral{1}][\OLId{latin-ordinary}{x}_\OLMathNumeral{2}]
+    \land \eq/[\OLId{latin-ordinary}{x}_\OLMathNumeral{1}][\OLId{latin-ordinary}{x}_\OLMathNumeral{3}] \land \dots \land \eq/[\OLId{latin-ordinary}{x}_{\OLId{latin-ordinary}{n}-\OLMathNumeral{1}}][\OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{n}])]].
+\]
+نأخذ مجموعة !!{sentence}s
+\[
+\OLId{greek-variable}{Gamma} = \{\lnot \fn{Inf}, !A^{\ge \OLMathNumeral{1}}, !A^{\ge \OLMathNumeral{2}}, !A^{\ge \OLMathNumeral{3}}, \dots\}.
+\]
+هي قابلة للإرضاء منتهيًا. فلكل مجموعة جزئية منتهية~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{0}
+\subseteq \OLId{greek-variable}{Gamma}$ نستطيع اختيار~$\OLId{latin-ordinary}{k}$ بحيث~$!A^{\ge \OLId{latin-ordinary}{k}} \in \OLId{greek-variable}{Gamma}$،
+ولا يكون~$!A^{\ge \OLId{latin-ordinary}{n}} \in \OLId{greek-variable}{Gamma}_\OLMathNumeral{0}$ لأي~$\OLId{latin-ordinary}{n}>\OLId{latin-ordinary}{k}$.
+فإذا كان مجال~$\Domain{\OLId{latin-looped}{M}}$ مؤلفًا من~$\OLId{latin-ordinary}{k}$ من !!{element}s،
+حصل~$\Sat{\OLId{latin-looped}{M}}{\OLId{greek-variable}{Gamma}_\OLMathNumeral{0}}$.
+لكن~$\OLId{greek-variable}{Gamma}$ لا تُرضى؛ إذ من~$\Sat{\OLId{latin-looped}{M}}{\lnot \fn{Inf}}$
+يلزم أن يكون~$\Domain{\OLId{latin-looped}{M}}$ منتهيًا. وليكن عدد عناصره~$\OLId{latin-ordinary}{k}$،
+فيكون~$\Sat/{\OLId{latin-looped}{M}}{!A^{\ge \OLId{latin-ordinary}{k}+\OLMathNumeral{1}}}$.
+\end{proof}
+
+\begin{prob}
+اطلب مجموعة~$\OLId{greek-variable}{Gamma}$ و!!a{sentence}~$!A$ يكون بهما
+$\OLId{greek-variable}{Gamma} \Entails !A$، مع أن كل مجموعة جزئية
+منتهية~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{0} \subseteq \OLId{greek-variable}{Gamma}$ تحقق~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{0} \Entails/ !A$.
+\end{prob}
+
+\end{document}

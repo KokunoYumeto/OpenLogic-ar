@@ -1,0 +1,90 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{choice}{woproblem}
+\olsection{مشكلة الترتيب الجيد}
+
+لا يخفى أن قبول الترتيب الجيد تتعلق به نتائج كثيرة. غير أن البحث في
+هذا الأصل قد جرى غالبًا على أصل يكافئه، وهو مسلّمة الاختيار. فلنصرف
+النظر إليها الآن، ثم نقيم البرهان على التكافؤ.
+
+في~\citeyear{Cantor1883} أظهر كانتور نصرته لمسلّمة الترتيب الجيد،
+ووصفها بأنها «قانون للفكر يبدو لي أساسيًا، غنيًا بنتائجه، وجديرًا
+بملاحظة خاصة لعمومية صلاحيته»؛ وهذا بنقل~\citeauthor{Potter2004}
+\citeyear[p.~243]{Potter2004}. ثم انتهى كانتور إلى أن هذه «المسلّمة»
+نفسها محتاجة إلى برهان، ووافقه جمهور الرياضيين.
+
+وزعم زيرميلو أنه حل الإشكال في~\citeyear{Zermelo1904}. ولا بد لفهم
+حله من تعريفات.
+
+\begin{defn}
+تكون الدالة~$\OLId{latin-ordinary}{f}$ \emph{دالة اختيار} إذا وفقط إذا كان~$\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x}) \in \OLId{latin-ordinary}{x}$
+لكل~$\OLId{latin-ordinary}{x} \in \dom{\OLId{latin-ordinary}{f}}$. وتكون~$\OLId{latin-ordinary}{f}$ \emph{دالة اختيار لـ$\OLId{latin-looped}{A}$} إذا وفقط
+إذا كانت~$\OLId{latin-ordinary}{f}$ دالة اختيار و$\dom{\OLId{latin-ordinary}{f}} = \OLId{latin-looped}{A} \setminus \{\emptyset\}$.
+\end{defn}
+
+ومعنى ذلك في التصور أن دالة الاختيار لـ~$\OLId{latin-looped}{A}$ تعين، من كل مجموعة غير
+خالية~$\OLId{latin-ordinary}{x} \in \OLId{latin-looped}{A}$، عنصرًا مخصوصًا~$\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x})$ ينتمي إلى~$\OLId{latin-ordinary}{x}$. فمسلّمة
+الاختيار هي:
+
+\begin{axiom}[الاختيار]
+	لكل مجموعة دالة اختيار.
+\end{axiom}
+
+وقد بين زيرميلو أن الاختيار يستلزم الترتيب الجيد، وأن العكس كذلك.
+
+\begin{thm}[في $\ZF$]\ollabel{thmwochoice}
+الترتيب الجيد والاختيار متكافئان.
+\end{thm}
+
+\begin{proof}
+\emph{من اليسار إلى اليمين.} لتكن~$\OLId{latin-looped}{A}$ مجموعة من المجموعات. توجد
+$\bigcup \OLId{latin-looped}{A}$ بمسلّمة الاتحاد؛ وبالترتيب الجيد يوجد ترتيب~$<$ يجعل
+$\bigcup \OLId{latin-looped}{A}$ مرتبة ترتيبًا جيدًا. ثم ضع
+$\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x}) = \text{أصغر عنصر في $x$ بحسب $<$}$. فتكون هذه دالة اختيار
+لـ~$\OLId{latin-looped}{A}$.
+
+\emph{من اليمين إلى اليسار.} خذ~$\OLId{latin-looped}{A}$. إن كانت~$\OLId{latin-looped}{A} = \emptyset$، كان
+الترتيب الخالي ترتيبًا جيدًا لها وتم الأمر. فلتكن إذن
+$\OLId{latin-looped}{A} \neq \emptyset$. يقتضي الاختيار وجود دالة اختيار~$\OLId{latin-ordinary}{f}$
+لـ~$\Pow{\OLId{latin-looped}{A}} \setminus \{\emptyset\}$. ثم عرّف بالعود ما فوق المتناهي
+حدًا على الوجه الآتي:
+\begin{align*}
+	\OLId{latin-ordinary}{g}(\OLMathNumeral{0}) &= \OLId{latin-ordinary}{f}(\OLId{latin-looped}{A})\\
+	\OLId{latin-ordinary}{g}(\OLId{greek-variable}{alpha}) &=
+		\begin{cases}
+			\text{توقف!{}} &\text{إذا كان }\OLId{latin-looped}{A} = \funimage{\OLId{latin-ordinary}{g}}{\OLId{greek-variable}{alpha}}\\
+			\OLId{latin-ordinary}{f}(\OLId{latin-looped}{A} \setminus \funimage{\OLId{latin-ordinary}{g}}{\OLId{greek-variable}{alpha}}) & \text{خلاف ذلك}\\	
+		\end{cases}
+\end{align*}
+ولفظ «توقف!» رمز مختصر عن تعريف يطول بسطه: إذا تحقق
+$\OLId{latin-looped}{A} = \funimage{\OLId{latin-ordinary}{g}}{\OLId{greek-variable}{alpha}}$ أول مرة، جعلنا
+$\OLId{latin-ordinary}{g}(\delta) = \OLId{latin-looped}{A}$ لكل~$\delta \geq \OLId{greek-variable}{alpha}$. ولا يكفل لنا أول الأمر إلا
+تعريف حد، كما تبين الملاحظات بعد
+\olref[sth][spine][recursion]{transrecursionschema}؛ وسنثبت أنه دالة.
+
+لما كانت~$\OLId{latin-ordinary}{f}$ دالة اختيار، فلكل~$\OLId{greek-variable}{alpha}$ يسبق أول موضع للتوقف يكون
+$\OLId{latin-ordinary}{g}(\OLId{greek-variable}{alpha}) = \OLId{latin-ordinary}{f}(\OLId{latin-looped}{A} \setminus \funimage{\OLId{latin-ordinary}{g}}{\OLId{greek-variable}{alpha}}) \in \OLId{latin-looped}{A} \setminus
+\funimage{\OLId{latin-ordinary}{g}}{\OLId{greek-variable}{alpha}}$؛ أي~$\OLId{latin-ordinary}{g}(\OLId{greek-variable}{alpha}) \notin \funimage{\OLId{latin-ordinary}{g}}{\OLId{greek-variable}{alpha}}$.
+فإذا سبق~$\OLId{greek-variable}{alpha}$ و$\beta$ أول موضع للتوقف، وكان
+$\OLId{latin-ordinary}{g}(\OLId{greek-variable}{alpha}) = \OLId{latin-ordinary}{g}(\beta)$، لزم~$\OLId{latin-ordinary}{g}(\beta) \notin
+\funimage{\OLId{latin-ordinary}{g}}{\OLId{greek-variable}{alpha}}$، أي~$\beta \notin \OLId{greek-variable}{alpha}$، وكذلك
+$\OLId{greek-variable}{alpha} \notin \beta$. ومن التثليث~$\OLId{greek-variable}{alpha} = \beta$. فقيد~$\OLId{latin-ordinary}{g}$ على
+القيم السابقة للتوقف !!{injective}.
+
+ثم لا بد أن يقع التوقف فعلًا؛ أي يوجد أصغر عدد ترتيبي~$\OLId{greek-variable}{alpha}$ بحيث
+$\OLId{latin-looped}{A} = \OLId{latin-ordinary}{g}[\OLId{greek-variable}{alpha}]$. فإن لم يكن، كانت~$\OLId{latin-ordinary}{g}$ !!{injective} على كل عدد
+ترتيبي، فحصلنا على~$\cardless{\OLId{greek-variable}{alpha}}{\OLId{latin-looped}{A}}$ لكل عدد ترتيبي~$\OLId{greek-variable}{alpha}$،
+وذلك يناقض~\olref[hartogs]{HartogsLemma} مطبقة على~$\OLId{latin-looped}{A}$. وعند أول
+مرحلة توقف~$\OLId{greek-variable}{alpha}$، يكون
+$\OLId{latin-ordinary}{g}\restrict\OLId{greek-variable}{alpha} \colon \OLId{greek-variable}{alpha} \to \OLId{latin-looped}{A}$ !!a{bijection}؛ لأن قيمه قبل
+التوقف متمايزة و$\OLId{latin-ordinary}{g}[\OLId{greek-variable}{alpha}] = \OLId{latin-looped}{A}$.
+
+فمن مجموع ذلك يستعمل~$\OLId{latin-ordinary}{g}\restrict\OLId{greek-variable}{alpha}$ في ترتيب~$\OLId{latin-looped}{A}$ ترتيبًا جيدًا.
+\end{proof}
+
+فالترتيب الجيد والاختيار لا يثبت أحدهما دون صاحبه ولا يسقط دونه. ويبقى
+بعد هذا: أيثبتان أم يسقطان؟
+
+\end{document}

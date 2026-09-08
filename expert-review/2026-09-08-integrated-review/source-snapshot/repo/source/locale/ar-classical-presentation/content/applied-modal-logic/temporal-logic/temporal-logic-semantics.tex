@@ -1,0 +1,130 @@
+% Part: applied-modal-logics
+% Chapter: temporal-logic
+% Section: temporal-logic-semantics
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{aml}{tl}{sem}
+
+\olsection{دلالة المنطق الزمني}
+
+\begin{defn}
+تتركب اللغة الأساسية للمنطق الزمني مما يأتي:
+\begin{enumerate}
+  \tagitem{prvFalse}{الثابت القضي الدال على !!{falsity}~$\lfalse$.}{}
+  \tagitem{prvTrue}{الثابت القضي الدال على !!{truth}~$\ltrue$.}{}
+  \item مجموعة !!{denumerable} من ال!!{propositional variable}s:
+    $\Obj p_\OLMathNumeral{0}$، $\Obj p_\OLMathNumeral{1}$، $\Obj p_\OLMathNumeral{2}$، \dots
+  \item الروابط القضية: \startycommalist
+  \iftag{prvNot}{\ycomma $\lnot$ (النفي)}{}%
+  \iftag{prvAnd}{\ycomma $\land$ (العطف)}{}%
+  \iftag{prvOr}{\ycomma $\lor$ (الفصل)}{}%
+  \iftag{prvIf}{\ycomma $\lif$ (!!{conditional})}{}%
+  \iftag{prvIff}{\ycomma $\liff$ (!!{biconditional})}{}.
+  \item مؤثرا الماضي~$\Ptemp$ و$\Htemp$.
+  \item مؤثرا المستقبل~$\Ftemp$ و$\Gtemp$.
+\end{enumerate}
+\end{defn}
+
+وسيأتي بعد هذا ذكر ما يجوز أن يزاد عليها من ضروب المؤثرات الجهوية.
+
+\begin{defn}
+وأما \emph{!!^{formula}s} اللغة الزمنية فتحدّ استقرائيًا على الوجه الآتي:
+\begin{enumerate}
+\tagitem{prvFalse}{$\lfalse$ !!{formula} ذرية.}{}
+
+\tagitem{prvTrue}{$\ltrue$ !!{formula} ذرية.}{}
+
+\item كل متغير قضي~$\Obj p_\OLId{latin-ordinary}{i}$ هو !!{formula} (ذرية).
+
+\tagitem{prvNot}{إذا كانت~$!A$ !!a{formula}، كانت~$\lnot !A$
+  !!a{formula}.}{}
+
+\tagitem{prvAnd}{إذا كانت~$!A$ و$!B$ !!{formula}s، كانت
+  $(!A \land !B)$ !!a{formula}.}{}
+
+\tagitem{prvOr}{إذا كانت~$!A$ و$!B$ !!{formula}s، كانت
+  $(!A \lor !B)$ !!a{formula}.}{}
+
+\tagitem{prvIf}{إذا كانت~$!A$ و$!B$ !!{formula}s، كانت
+  $(!A \lif !B)$ !!a{formula}.}{}
+
+\tagitem{prvIff}{إذا كانت~$!A$ و$!B$ !!{formula}s، كانت
+  $(!A \liff !B)$ !!a{formula}.}{}
+
+% تصحيح مصدر (0478-I1): استُعمل الماكرو الزمني Ftemp بدل الحرف F العاري الوارد مرة في الأصل الإنجليزي.
+\item إذا كانت~$!A$ !!a{formula}، فإن~$\Ptemp !A$ و$\Htemp !A$
+  و$\Ftemp !A$ و$\Gtemp !A$ كلها !!{formula}s.
+
+\tagitem{limitClause}{لا شيء غير ذلك !!a{formula}.}{}
+\end{enumerate}
+\end{defn}
+
+وتفسر هذه اللغة بنماذج علائقية، على نحو ما تصنع سائر ضروب المنطق المقصدي.
+
+\begin{defn}
+  \emph{نموذج} اللغة الزمنية هو الثلاثي
+  $\mModel{M}=\tuple{\OLId{latin-looped}{T},\prec,\OLId{latin-looped}{V}}$، وفيه:
+  \begin{enumerate}
+  \item $\OLId{latin-looped}{T}$ مجموعة غير فارغة، تُفسر عناصرها بوصفها نقاطًا في الزمن.
+  \item $\prec$ علاقة ثنائية على~$\OLId{latin-looped}{T}$.
+  \item $\OLId{latin-looped}{V}$ دالة تسند إلى كل~!!{propositional
+    variable}~$\OLId{latin-ordinary}{p}$ مجموعة~$\OLId{latin-looped}{V}(\OLId{latin-ordinary}{p})$ من النقاط الزمنية.
+  \end{enumerate}
+  فإذا كان~$\OLId{latin-ordinary}{t} \prec \OLId{latin-ordinary}{t}'$ قلنا إن~$\OLId{latin-ordinary}{t}$ \emph{يسبق}~$\OLId{latin-ordinary}{t}'$؛ وإذا كان
+  $\OLId{latin-ordinary}{t} \in \OLId{latin-looped}{V}(\OLId{latin-ordinary}{p})$ قلنا إن~$\OLId{latin-ordinary}{p}$ \emph{صادق عند}~$\OLId{latin-ordinary}{t}$.
+\end{defn}
+
+ولا نفرض في هذا الموضع شرطًا على علاقة السبق~$\prec$؛ فلذلك لا تتقيد بنية
+النموذج الزمني عندنا الآن: فقد يكون الزمن فيه خطيًا، أو متفرعًا، أو دائريًا،
+أو على أي هيئة أخرى.
+
+وكما في المنطق الجهوي النظامي، يعين كل نموذج زمني ال!!{formula}s الصادقة
+عند كل نقطة منه. ونعبّر عن أصل هذه الدلالة العلائقية بقولنا: «يصدق
+النموذج~$\mModel{M}$ !!{formula}~$!A$ عند النقطة~$\OLId{latin-ordinary}{t}$». وتحد علاقة الصدق
+استقرائيًا؛ وهي في المؤثرات غير الجهوية عين العلاقة المتقدمة في المنطق
+الجهوي النظامي.
+
+\begin{defn}\ollabel{defn:tmodels}
+  \emph{صدق !!a{formula}~$!A$ عند~$\OLId{latin-ordinary}{t}$} في~$\mModel M$، ورمزه
+  $\mSat{\OLId{latin-looped}{M}}{!A}[\OLId{latin-ordinary}{t}]$، يحد استقرائيًا بما يأتي:
+  \begin{enumerate}
+  \tagitem{prvFalse}{\indcase{!A}{\lfalse}{لا يتحقق أبدًا
+    $\mSat{\OLId{latin-looped}{M}}{\lfalse}[\OLId{latin-ordinary}{t}]$}.}{}
+  \tagitem{prvTrue}{\indcase{!A}{\ltrue}{يتحقق دائمًا
+    $\mSat{\OLId{latin-looped}{M}}{\ltrue}[\OLId{latin-ordinary}{t}]$}.}{}
+  \item $\mSat{\OLId{latin-looped}{M}}{\OLId{latin-ordinary}{p}}[\OLId{latin-ordinary}{t}]$ إذا وفقط إذا كان~$\OLId{latin-ordinary}{t} \in \OLId{latin-looped}{V}(\OLId{latin-ordinary}{p})$.
+  \tagitem{prvNot}{\indcase{!A}{\lnot !B}{$\mSat{\OLId{latin-looped}{M}}{\indfrm}[\OLId{latin-ordinary}{t}]$ إذا
+    وفقط إذا كان~$\mSat/{\OLId{latin-looped}{M}}{!B}[\OLId{latin-ordinary}{t}]$}.}{}
+  \tagitem{prvAnd}{\indcase{!A}{(!B \land !C)}{$\mSat{\OLId{latin-looped}{M}}{\indfrm}[\OLId{latin-ordinary}{t}]$
+    إذا وفقط إذا كان~$\mSat{\OLId{latin-looped}{M}}{!B}[\OLId{latin-ordinary}{t}]$ و$\mSat{\OLId{latin-looped}{M}}{!C}[\OLId{latin-ordinary}{t}]$}.}{}
+  \tagitem{prvOr}{\indcase{!A}{(!B \lor !C)}{$\mSat{\OLId{latin-looped}{M}}{\indfrm}[\OLId{latin-ordinary}{t}]$
+    إذا وفقط إذا كان~$\mSat{\OLId{latin-looped}{M}}{!B}[\OLId{latin-ordinary}{t}]$ أو~$\mSat{\OLId{latin-looped}{M}}{!C}[\OLId{latin-ordinary}{t}]$}
+    (أو كلاهما).}{}
+  \tagitem{prvIf}{\indcase{!A}{(!B \lif !C)}{$\mSat{\OLId{latin-looped}{M}}{\indfrm}[\OLId{latin-ordinary}{t}]$
+    إذا وفقط إذا كان~$\mSat/{\OLId{latin-looped}{M}}{!B}[\OLId{latin-ordinary}{t}]$ أو~$\mSat{\OLId{latin-looped}{M}}{!C}[\OLId{latin-ordinary}{t}]$}.}{}
+  \tagitem{prvIff}{\indcase{!A}{(!B \liff !C)}{$\mSat{\OLId{latin-looped}{M}}{\indfrm}[\OLId{latin-ordinary}{t}]$
+    إذا وفقط إذا تحقق كل من~$\mSat{\OLId{latin-looped}{M}}{!B}[\OLId{latin-ordinary}{t}]$ و$\mSat{\OLId{latin-looped}{M}}{!C}[\OLId{latin-ordinary}{t}]$، أو
+    لم يتحقق أي من~$\mSat{\OLId{latin-looped}{M}}{!B}[\OLId{latin-ordinary}{t}]$ و$\mSat{\OLId{latin-looped}{M}}{!C}[\OLId{latin-ordinary}{t}]$}.}{}
+  \item\ollabel{defn:sub:mmodels-p}
+    \indcase{!A}{\Ptemp !B}{$\mSat{\OLId{latin-looped}{M}}{\indfrm}[\OLId{latin-ordinary}{t}]$ إذا وفقط إذا كان
+    $\mSat{\OLId{latin-looped}{M}}{!B}[\OLId{latin-ordinary}{t}']$ لبعض~$\OLId{latin-ordinary}{t}' \in \OLId{latin-looped}{T}$ بحيث~$\OLId{latin-ordinary}{t}' \prec \OLId{latin-ordinary}{t}$}
+  \item\ollabel{defn:sub:mmodels-h}
+    \indcase{!A}{\Htemp !B}{$\mSat{\OLId{latin-looped}{M}}{\indfrm}[\OLId{latin-ordinary}{t}]$ إذا وفقط إذا كان
+    $\mSat{\OLId{latin-looped}{M}}{!B}[\OLId{latin-ordinary}{t}']$ لكل~$\OLId{latin-ordinary}{t}' \in \OLId{latin-looped}{T}$ بحيث~$\OLId{latin-ordinary}{t}' \prec \OLId{latin-ordinary}{t}$}
+  \item\ollabel{defn:sub:mmodels-f}
+    \indcase{!A}{\Ftemp !B}{$\mSat{\OLId{latin-looped}{M}}{\indfrm}[\OLId{latin-ordinary}{t}]$ إذا وفقط إذا كان
+    $\mSat{\OLId{latin-looped}{M}}{!B}[\OLId{latin-ordinary}{t}']$ لبعض~$\OLId{latin-ordinary}{t}' \in \OLId{latin-looped}{T}$ بحيث~$\OLId{latin-ordinary}{t} \prec \OLId{latin-ordinary}{t}'$}
+  \item\ollabel{defn:sub:mmodels-g}
+    \indcase{!A}{\Gtemp !B}{$\mSat{\OLId{latin-looped}{M}}{\indfrm}[\OLId{latin-ordinary}{t}]$ إذا وفقط إذا كان
+    $\mSat{\OLId{latin-looped}{M}}{!B}[\OLId{latin-ordinary}{t}']$ لكل~$\OLId{latin-ordinary}{t}' \in \OLId{latin-looped}{T}$ بحيث~$\OLId{latin-ordinary}{t} \prec \OLId{latin-ordinary}{t}'$}
+  \end{enumerate}
+\end{defn}
+
+ومن هذه الدلالة يظهر أن~$\Ptemp$ و$\Htemp$ متقابلان، وأن~$\Ftemp$
+و$\Gtemp$ كذلك. ولذلك يصح أن نعرّف~$\Htemp !A$ بأنه
+$\lnot \Ptemp \lnot !A$، وأن نعرّف~$\Gtemp$ من~$\Ftemp$ على نظيره.
+
+\end{document}

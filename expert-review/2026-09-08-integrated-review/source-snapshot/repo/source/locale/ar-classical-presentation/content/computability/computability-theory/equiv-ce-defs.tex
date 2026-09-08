@@ -1,0 +1,160 @@
+% Part: computability
+% Chapter: computability-theory
+% Section: equiv-ce-defs
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{thy}{eqc}
+
+\olsection[تعريفات المجموعات القابلة للتعداد حسابيًا]{تعريفات متكافئة
+  للمجموعات القابلة للتعداد حسابيًا}
+
+لقابلية المجموعة للتعداد حسابيًا أوصاف متكافئة مهمة، تجمعها
+المبرهنة الآتية.
+
+\begin{thm}
+\ollabel{thm:ce-equiv}
+إذا كانت $\OLId{latin-looped}{S}$ مجموعة أعداد طبيعية، فالعبارات الآتية متكافئة:
+\begin{enumerate}
+\item\ollabel{case:ce} $\OLId{latin-looped}{S}$ قابلة للتعداد حسابيًا.
+\item\ollabel{case:ran-pc} $\OLId{latin-looped}{S}$ مدى دالة \emph{جزئية} قابلة للحساب.
+\item\ollabel{case:ran-prim} $\OLId{latin-looped}{S}$ خالية أو مدى دالة عودية بدائية.
+\item\ollabel{case:ce-domain} $\OLId{latin-looped}{S}$ \emph{مجال} دالة جزئية قابلة للحساب.
+\end{enumerate}
+\end{thm}
+
+\begin{explain}
+معنى البنود الثلاثة الأولى أن المجموعة غير
+الخالية القابلة للتعداد حسابيًا لا يختلف أمرها إذا عددناها بدالة قابلة للحساب، أو جزئية
+قابلة للحساب، أو عودية بدائية. وأما البند الرابع فيقرر أنه متى كانت
+$\OLId{latin-looped}{S}$ قابلة للتعداد حسابيًا، فإنه يوجد فهرس~$\OLId{latin-ordinary}{e}$ بحيث
+\[
+\OLId{latin-looped}{S} = \Setabs{\OLId{latin-ordinary}{x}}{\cfind{\OLId{latin-ordinary}{e}}(\OLId{latin-ordinary}{x}) \fdefined}.
+\]
+فـ$\OLId{latin-looped}{S}$ تجمع المداخل التي ينتهي عندها حساب
+$\cfind{\OLId{latin-ordinary}{e}}$. ومن أجل ذلك يقال لهذه المجموعات أحيانًا
+\emph{شبه قابلة للقرار}: إن كان العدد منها جاءك بعد حين جواب
+«نعم»، وإن لم يكن منها لم يأتك جواب «لا».{}
+\end{explain}
+
+\begin{proof}
+كل عودية بدائية قابلة للحساب، وكل قابلة للحساب
+جزئية قابلة للحساب؛ ولذلك \olref{case:ran-prim} تستلزم
+\olref{case:ce}، وتستلزم \olref{case:ce} بدورها
+~\olref{case:ran-pc}. (وأما إذا كانت $\OLId{latin-looped}{S}$ خالية، فـ$\OLId{latin-looped}{S}$ مدى الدالة
+الجزئية القابلة للحساب غير المعرّفة في أي موضع.) فلا يبقى، إذا أثبتنا أن
+\olref{case:ran-pc} تستلزم \olref{case:ran-prim}، شيء لإتمام تكافؤ
+البنود الثلاثة الأولى.
+
+فلنفرض أن $\OLId{latin-looped}{S}$ مدى الدالة الجزئية القابلة للحساب $\cfind{\OLId{latin-ordinary}{e}}$. إن
+كانت $\OLId{latin-looped}{S}$ خالية فقد تم المطلوب؛ وإلا أخذنا $\OLId{latin-ordinary}{a}$ من~$\OLId{latin-looped}{S}$. وتجيز مبرهنة
+كليني للصورة السوية أن نكتب
+\[
+\cfind{\OLId{latin-ordinary}{e}}(\OLId{latin-ordinary}{x}) = \OLId{latin-looped}{U}(\umin{\OLId{latin-ordinary}{s}}{\OLId{latin-looped}{T}(\OLId{latin-ordinary}{e}, \OLId{latin-ordinary}{x}, \OLId{latin-ordinary}{s})}).
+\]
+وبوجه خاص، تكون $\cfind{\OLId{latin-ordinary}{e}}(\OLId{latin-ordinary}{x})\fdefined$ و$=\OLId{latin-ordinary}{y}$ إذا وفقط إذا وجد $\OLId{latin-ordinary}{s}$
+بحيث تصدق $\OLId{latin-looped}{T}(\OLId{latin-ordinary}{e},\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{s})$ ويكون $\OLId{latin-looped}{U}(\OLId{latin-ordinary}{s})=\OLId{latin-ordinary}{y}$. فلنعرّف $\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{z})$ بوضع
+\[
+\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{z}) = \begin{cases}
+  \OLId{latin-looped}{U}((\OLId{latin-ordinary}{z})_\OLMathNumeral{1}) & \text{إذا صدقت $T(e, (z)_0, (z)_1)$} \\
+  \OLId{latin-ordinary}{a}        & \text{في غير ذلك.}
+\end{cases}
+\]
+عندئذ تكون $\OLId{latin-ordinary}{f}$ عودية بدائية لأن $\OLId{latin-looped}{T}$ و$\OLId{latin-looped}{U}$ كذلك.
+\iftag{TMs}{وبعبارة آلات تورنغ، إذا كان $\OLId{latin-ordinary}{z}$ يرمز زوجًا
+$\tuple{(\OLId{latin-ordinary}{z})_\OLMathNumeral{0},(\OLId{latin-ordinary}{z})_\OLMathNumeral{1}}$ بحيث تكون $(\OLId{latin-ordinary}{z})_\OLMathNumeral{1}$ حسابًا متوقفًا للآلة~$\OLId{latin-looped}{M}_\OLId{latin-ordinary}{e}$
+عند الدخل $(\OLId{latin-ordinary}{z})_\OLMathNumeral{0}$، أعادت $\OLId{latin-ordinary}{f}$ خرج الحساب؛ وإلا أعادت~$\OLId{latin-ordinary}{a}$.}{}
+
+% تصحيح مصدر (C239-01): أُثبت الفرع الثالث الخالي للأمر الثلاثي \iftag.
+\textbf{تنبيه تصحيحي على الأصل.} أُثبت الفرع الثالث الخالي للأمر
+الشرطي؛ فالأمر ثلاثي الحجج، وإسقاط حجة منه يبتلع ما بعده عند
+التوسيع.
+
+والمطلوب أن $\OLId{latin-looped}{S}$ عين مدى~$\OLId{latin-ordinary}{f}$؛ أي إن كل عدد طبيعي~$\OLId{latin-ordinary}{y}$ يحقق $\OLId{latin-ordinary}{y}\in \OLId{latin-looped}{S}$
+إذا وفقط إذا وقع في مدى~$\OLId{latin-ordinary}{f}$. أما الوجه الأول، فنفرض $\OLId{latin-ordinary}{y}\in \OLId{latin-looped}{S}$.
+عندئذ يكون $\OLId{latin-ordinary}{y}$ في مدى $\cfind{\OLId{latin-ordinary}{e}}$، ولذلك توجد قيمتان $\OLId{latin-ordinary}{x}$ و~$\OLId{latin-ordinary}{s}$ تصدق
+عندهما $\OLId{latin-looped}{T}(\OLId{latin-ordinary}{e},\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{s})$ ويكون $\OLId{latin-looped}{U}(\OLId{latin-ordinary}{s})=\OLId{latin-ordinary}{y}$. لكن عندئذ
+$\OLId{latin-ordinary}{y}=\OLId{latin-ordinary}{f}(\tuple{\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{s}})$. وأما العكس، فلنأخذ $\OLId{latin-ordinary}{y}$ في مدى~$\OLId{latin-ordinary}{f}$. عندئذ إما
+$\OLId{latin-ordinary}{y}=\OLId{latin-ordinary}{a}$، وإما أنه يوجد~$\OLId{latin-ordinary}{z}$ بحيث تصدق $\OLId{latin-looped}{T}(\OLId{latin-ordinary}{e},(\OLId{latin-ordinary}{z})_\OLMathNumeral{0},(\OLId{latin-ordinary}{z})_\OLMathNumeral{1})$ ويكون
+$\OLId{latin-looped}{U}((\OLId{latin-ordinary}{z})_\OLMathNumeral{1})=\OLId{latin-ordinary}{y}$. ولما كانت، في الحالة الأخيرة،
+$\cfind{\OLId{latin-ordinary}{e}}((\OLId{latin-ordinary}{z})_\OLMathNumeral{0})\fdefined=\OLId{latin-ordinary}{y}$، فإن $\OLId{latin-ordinary}{y}$ في~$\OLId{latin-looped}{S}$ في الحالتين.
+
+(يعني الترميز $\cfind{\OLId{latin-ordinary}{e}}(\OLId{latin-ordinary}{x})\fdefined=\OLId{latin-ordinary}{y}$ أن «$\cfind{\OLId{latin-ordinary}{e}}(\OLId{latin-ordinary}{x})$ معرفة
+وتساوي $\OLId{latin-ordinary}{y}$». ولنا أن نكتفي بكتابة $\cfind{\OLId{latin-ordinary}{e}}(\OLId{latin-ordinary}{x})=\OLId{latin-ordinary}{y}$ بالقدر نفسه، غير أن
+زيادة السهم تنبّه أحيانًا إلى جزئية الدالة.)
+
+وبقي من برهان \olref{thm:ce-equiv} إثبات تكافؤ
+\olref{case:ce} و~\olref{case:ce-domain}. نبدأ بإثبات أن
+\olref{case:ce} تستلزم~\olref{case:ce-domain}. أما المجموعة الخالية فهي مجال الدالة غير المعرّفة في أي موضع. وأما غير الخالية فنفرض $\OLId{latin-looped}{S}$ مدى دالة
+قابلة للحساب~$\OLId{latin-ordinary}{f}$، أي
+\[
+\OLId{latin-looped}{S} = \Setabs{\OLId{latin-ordinary}{y}}{\text{لبعض $x$، } \OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x}) = \OLId{latin-ordinary}{y}}.
+\]
+ولتكن
+\[
+\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{y}) = \umin{\OLId{latin-ordinary}{x}}{(\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x}) = \OLId{latin-ordinary}{y})}.
+\]
+فتكون $\OLId{latin-ordinary}{g}$ جزئية قابلة للحساب، ولا تتعين $\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{y})$ إلا حين
+يصدق $\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x})=\OLId{latin-ordinary}{y}$ لعدد ما~$\OLId{latin-ordinary}{x}$، وتتعين كلما صدق. فمجال~$\OLId{latin-ordinary}{g}$ هو بعينه مدى~$\OLId{latin-ordinary}{f}$.
+\iftag{TMs}{وبعبارة آلات تورنغ: إذا أعطيت آلة تورنغ~$\OLId{latin-looped}{F}$ تعدد عناصر
+~$\OLId{latin-looped}{S}$، فلتكن $\OLId{latin-looped}{G}$ آلة تورنغ شبه تقرر $\OLId{latin-looped}{S}$ بالبحث في مخارج~$\OLId{latin-looped}{F}$ لترى هل
+عنصر معطى في المجموعة؛ فتتوقف إذا كان فيها، وتواصل البحث إلى الأبد إذا
+لم يكن فيها.}{}
+
+وأما كون \olref{case:ce-domain} مستلزمًا لـ~\olref{case:ce}، فبيانه أن نفرض
+أن $\OLId{latin-looped}{S}$ مجال الدالة الجزئية القابلة للحساب~$\cfind{\OLId{latin-ordinary}{e}}$، أي
+\[
+\OLId{latin-looped}{S} = \Setabs{\OLId{latin-ordinary}{x}}{\cfind{\OLId{latin-ordinary}{e}}(\OLId{latin-ordinary}{x}) \fdefined}.
+\]
+فإن كانت $\OLId{latin-looped}{S}$ خالية تم المطلوب؛ وإلا أخذنا $\OLId{latin-ordinary}{a}$ من~$\OLId{latin-looped}{S}$، وعرّفنا $\OLId{latin-ordinary}{f}$ بوضع
+\[
+\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{z}) = \begin{cases}
+(\OLId{latin-ordinary}{z})_\OLMathNumeral{0} & \text{إذا صدقت $T(e,(z)_0,(z)_1)$} \\
+\OLId{latin-ordinary}{a} & \text{في غير ذلك.}
+\end{cases}
+\]
+وعندئذ، كما سبق، يكون العدد $\OLId{latin-ordinary}{x}$ في مدى~$\OLId{latin-ordinary}{f}$ إذا وفقط إذا كانت
+$\cfind{\OLId{latin-ordinary}{e}}(\OLId{latin-ordinary}{x})\fdefined$، أي إذا وفقط إذا كان $\OLId{latin-ordinary}{x}\in \OLId{latin-looped}{S}$.
+\iftag{TMs}{وبعبارة آلات تورنغ: إذا أعطيت آلة $\OLId{latin-looped}{M}_\OLId{latin-ordinary}{e}$ شبه تقرر $\OLId{latin-looped}{S}$،
+فعدد عناصر $\OLId{latin-looped}{S}$ بالمرور على جميع حسابات آلات تورنغ الممكنة وإعادة
+المداخل التي تقابل حسابات متوقفة.}{}
+\end{proof}
+
+ومن البند~\olref{case:ce-domain} في \olref{thm:ce-equiv} نحصل على طريقة
+لتعداد المجموعات القابلة للتعداد حسابيًا: نجعل، لكل~$\OLId{latin-ordinary}{e}$، الرمز $\OLId{latin-looped}{W}_\OLId{latin-ordinary}{e}$ لمجال
+$\cfind{\OLId{latin-ordinary}{e}}$، أي
+\[
+\OLId{latin-looped}{W}_\OLId{latin-ordinary}{e} = \Setabs{\OLId{latin-ordinary}{x}}{\cfind{\OLId{latin-ordinary}{e}}(\OLId{latin-ordinary}{x}) \fdefined}.
+\]
+وعندئذ، إذا كانت $\OLId{latin-looped}{A}$ أي مجموعة قابلة للتعداد حسابيًا، كان
+$\OLId{latin-looped}{A}=\OLId{latin-looped}{W}_\OLId{latin-ordinary}{e}$ لبعض~$\OLId{latin-ordinary}{e}$.
+
+وللمجموعات القابلة للتعداد حسابيًا توصيف آخر كما يأتي.
+
+\begin{thm}
+\ollabel{thm:exists-char}
+تكون المجموعة $\OLId{latin-looped}{S}$ قابلة للتعداد حسابيًا إذا وفقط إذا وجدت علاقة قابلة
+للحساب $\OLId{latin-looped}{R}(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y})$ بحيث
+\[
+\OLId{latin-looped}{S} = \Setabs{ \OLId{latin-ordinary}{x} }{ \lexists[\OLId{latin-ordinary}{y}][\OLId{latin-looped}{R}(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y})] }.
+\]
+\end{thm}
+
+\begin{proof}
+أما الاتجاه الأول، فلنفرض قابلية $\OLId{latin-looped}{S}$ للتعداد حسابيًا. فيكون
+$\OLId{latin-looped}{S}=\OLId{latin-looped}{W}_\OLId{latin-ordinary}{e}$ لبعض $\OLId{latin-ordinary}{e}$. ولهذه القيمة من~$\OLId{latin-ordinary}{e}$ يمكننا كتابة $\OLId{latin-looped}{S}$ هكذا:
+\[
+\OLId{latin-looped}{S} = \Setabs{ \OLId{latin-ordinary}{x} }{ \lexists[\OLId{latin-ordinary}{y}][\OLId{latin-looped}{T}(\OLId{latin-ordinary}{e}, \OLId{latin-ordinary}{x}, \OLId{latin-ordinary}{y})] }.
+\]
+وأما الاتجاه العكسي، فنفرض
+$\OLId{latin-looped}{S}=\Setabs{\OLId{latin-ordinary}{x}}{\lexists[\OLId{latin-ordinary}{y}][\OLId{latin-looped}{R}(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y})]}$. عرف $\OLId{latin-ordinary}{f}$ بـ
+\[
+\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x}) \simeq \umin{\OLId{latin-ordinary}{y}}{\OLId{latin-looped}{R}(\OLId{latin-ordinary}{x}, \OLId{latin-ordinary}{y})}.
+\]
+عندئذ تكون $\OLId{latin-ordinary}{f}$ جزئية قابلة للحساب، وتكون $\OLId{latin-looped}{S}$ مجال~$\OLId{latin-ordinary}{f}$.
+\end{proof}
+
+
+\end{document}

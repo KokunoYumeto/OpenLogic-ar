@@ -1,0 +1,182 @@
+# Renderable terminology review shards / أجزاء مراجعة المصطلحات
+
+These small, deterministic files are the browser-friendly review surface. Start with the ranked queue one directory above; it links directly into the appropriate priority shard. Canonical monolithic Markdown, JSON and CSV remain available for preservation and bulk processing.
+
+Each generated detail shard is capped at **225 KiB** and is normally partitioned near **180 KiB**, while a location-rich decision is never split or truncated.
+
+No final PDF page is inferred. A page appears only when the generator receives final PDF, AUX and SyncTeX evidence.
+
+## Priority shards / أجزاء الأولوية
+
+- [Part 001](priority-001.md) — global ranks 1–5; 5 choices
+- [Part 002](priority-002.md) — global ranks 11–19; 9 choices
+- [Part 003](priority-003.md) — global ranks 21–30; 10 choices
+- [Part 004](priority-004.md) — global ranks 31–40; 10 choices
+- [Part 005](priority-005.md) — global ranks 41–50; 10 choices
+- [Part 006](priority-006.md) — global ranks 51–60; 10 choices
+- [Part 007](priority-007.md) — global ranks 61–70; 10 choices
+- [Part 008](priority-008.md) — global ranks 71–80; 10 choices
+- [Part 009](priority-009.md) — global ranks 81–90; 10 choices
+- [Part 010](priority-010.md) — global ranks 91–100; 10 choices
+- [Part 011](priority-011.md) — global ranks 101–110; 10 choices
+- [Part 012](priority-012.md) — global ranks 111–120; 10 choices
+- [Part 013](priority-013.md) — global ranks 121–130; 10 choices
+- [Part 014](priority-014.md) — global ranks 131–140; 10 choices
+- [Part 015](priority-015.md) — global ranks 141–150; 10 choices
+- [Part 016](priority-016.md) — global ranks 151–160; 10 choices
+- [Part 017](priority-017.md) — global ranks 161–170; 10 choices
+- [Part 018](priority-018.md) — global ranks 171–180; 10 choices
+- [Part 019](priority-019.md) — global ranks 181–190; 10 choices
+- [Part 020](priority-020.md) — global ranks 191–200; 10 choices
+- [Part 021](priority-021.md) — global ranks 201–210; 10 choices
+- [Part 022](priority-022.md) — global ranks 211–220; 10 choices
+- [Part 023](priority-023.md) — global ranks 221–230; 10 choices
+- [Part 024](priority-024.md) — global ranks 231–240; 10 choices
+- [Part 025](priority-025.md) — global ranks 241–250; 10 choices
+- [Part 026](priority-026.md) — global ranks 251–260; 10 choices
+- [Part 027](priority-027.md) — global ranks 261–270; 10 choices
+- [Part 028](priority-028.md) — global ranks 271–280; 10 choices
+- [Part 029](priority-029.md) — global ranks 281–290; 10 choices
+- [Part 030](priority-030.md) — global ranks 291–300; 10 choices
+- [Part 031](priority-031.md) — global ranks 301–310; 10 choices
+- [Part 032](priority-032.md) — global ranks 311–320; 10 choices
+- [Part 033](priority-033.md) — global ranks 321–330; 10 choices
+- [Part 034](priority-034.md) — global ranks 331–340; 10 choices
+- [Part 035](priority-035.md) — global ranks 341–350; 10 choices
+- [Part 036](priority-036.md) — global ranks 351–360; 10 choices
+- [Part 037](priority-037.md) — global ranks 361–370; 10 choices
+- [Part 038](priority-038.md) — global ranks 371–380; 10 choices
+- [Part 039](priority-039.md) — global ranks 381–390; 10 choices
+- [Part 040](priority-040.md) — global ranks 391–400; 10 choices
+- [Part 041](priority-041.md) — global ranks 401–410; 10 choices
+- [Part 042](priority-042.md) — global ranks 411–420; 10 choices
+- [Part 043](priority-043.md) — global ranks 421–430; 10 choices
+- [Part 044](priority-044.md) — global ranks 431–440; 10 choices
+- [Part 045](priority-045.md) — global ranks 441–450; 10 choices
+- [Part 046](priority-046.md) — global ranks 451–460; 10 choices
+- [Part 047](priority-047.md) — global ranks 461–469; 9 choices
+- [Part 048](priority-048.md) — global ranks 471–480; 10 choices
+- [Part 049](priority-049.md) — global ranks 481–490; 10 choices
+- [Part 050](priority-050.md) — global ranks 491–500; 10 choices
+- [Part 051](priority-051.md) — global ranks 501–510; 10 choices
+- [Part 052](priority-052.md) — global ranks 511–520; 10 choices
+- [Part 053](priority-053.md) — global ranks 521–530; 10 choices
+- [Part 054](priority-054.md) — global ranks 531–540; 10 choices
+- [Part 055](priority-055.md) — global ranks 541–550; 10 choices
+- [Part 056](priority-056.md) — global ranks 551–560; 10 choices
+- [Part 057](priority-057.md) — global ranks 561–570; 10 choices
+- [Part 058](priority-058.md) — global ranks 571–580; 10 choices
+- [Part 059](priority-059.md) — global ranks 581–590; 10 choices
+- [Part 060](priority-060.md) — global ranks 591–600; 10 choices
+- [Part 061](priority-061.md) — global ranks 601–610; 10 choices
+- [Part 062](priority-062.md) — global ranks 611–620; 10 choices
+- [Part 063](priority-063.md) — global ranks 621–630; 10 choices
+- [Part 064](priority-064.md) — global ranks 631–640; 10 choices
+- [Part 065](priority-065.md) — global ranks 641–650; 10 choices
+- [Part 066](priority-066.md) — global ranks 651–660; 10 choices
+- [Part 067](priority-067.md) — global ranks 661–670; 10 choices
+- [Part 068](priority-068.md) — global ranks 671–680; 10 choices
+- [Part 069](priority-069.md) — global ranks 681–690; 10 choices
+- [Part 070](priority-070.md) — global ranks 691–700; 10 choices
+- [Part 071](priority-071.md) — global ranks 701–710; 10 choices
+- [Part 072](priority-072.md) — global ranks 711–720; 10 choices
+- [Part 073](priority-073.md) — global ranks 721–730; 10 choices
+- [Part 074](priority-074.md) — global ranks 731–740; 10 choices
+- [Part 075](priority-075.md) — global ranks 741–750; 10 choices
+- [Part 076](priority-076.md) — global ranks 751–760; 10 choices
+- [Part 077](priority-077.md) — global ranks 761–770; 10 choices
+- [Part 078](priority-078.md) — global ranks 771–780; 10 choices
+- [Part 079](priority-079.md) — global ranks 781–790; 10 choices
+- [Part 080](priority-080.md) — global ranks 791–800; 10 choices
+- [Part 081](priority-081.md) — global ranks 801–810; 10 choices
+- [Part 082](priority-082.md) — global ranks 811–820; 10 choices
+- [Part 083](priority-083.md) — global ranks 821–830; 10 choices
+- [Part 084](priority-084.md) — global ranks 831–840; 10 choices
+- [Part 085](priority-085.md) — global ranks 841–850; 10 choices
+- [Part 086](priority-086.md) — global ranks 851–860; 10 choices
+- [Part 087](priority-087.md) — global ranks 861–870; 10 choices
+- [Part 088](priority-088.md) — global ranks 871–880; 10 choices
+- [Part 089](priority-089.md) — global ranks 881–890; 10 choices
+- [Part 090](priority-090.md) — global ranks 891–900; 10 choices
+- [Part 091](priority-091.md) — global ranks 901–910; 10 choices
+- [Part 092](priority-092.md) — global ranks 911–920; 10 choices
+- [Part 093](priority-093.md) — global ranks 921–921; 1 choices
+
+## Complete shards / الأجزاء الكاملة
+
+- [Part 001](complete-001.md) — 15 choices; a bijection … Additive Inverse
+- [Part 002](complete-002.md) — 15 choices; Additive Inverse … an injective
+- [Part 003](complete-003.md) — 15 choices; ancestor … appropriate credit
+- [Part 004](complete-004.md) — 15 choices; arbitrarily large finite models … array
+- [Part 005](complete-005.md) — 15 choices; as … axiomatic derivation
+- [Part 006](complete-006.md) — 15 choices; axiomatic derivation/system … bijection / bijective
+- [Part 007](complete-007.md) — 15 choices; bijections … bottom
+- [Part 008](complete-008.md) — 15 choices; bounded universal and existential quantifiers … Cartesian product
+- [Part 009](complete-009.md) — 15 choices; Cartesian product … closed/open branch or tableau
+- [Part 010](complete-010.md) — 15 choices; closure / closed under a function … compactness
+- [Part 011](complete-011.md) — 15 choices; compactness theorem … composition of functions; first f then g
+- [Part 012](complete-012.md) — 15 choices; comprehension … conjunction elimination
+- [Part 013](complete-013.md) — 15 choices; connected … contingent
+- [Part 014](complete-014.md) — 15 choices; continuum (real-number set) … counterfactual / subjunctive conditional / indicative conditional
+- [Part 015](complete-015.md) — 15 choices; countermodel … decidable/decidability
+- [Part 016](complete-016.md) — 15 choices; decode … denumerable
+- [Part 017](complete-017.md) — 13 choices; denumerable … derived textbooks
+- [Part 018](complete-018.md) — 15 choices; designated truth value … discharge of assumptions
+- [Part 019](complete-019.md) — 15 choices; discharged … do
+- [Part 020](complete-020.md) — 15 choices; do not hold … eigenvariable
+- [Part 021](complete-021.md) — 15 choices; eigenvariable … empty relation; universal relation
+- [Part 022](complete-022.md) — 15 choices; empty set … enumeration
+- [Part 023](complete-023.md) — 15 choices; enumeration … equivalence class
+- [Part 024](complete-024.md) — 15 choices; equivalence class … everyone knows / common knowledge
+- [Part 025](complete-025.md) — 15 choices; everything in one set is in the other too … field
+- [Part 026](complete-026.md) — 15 choices; filtration … fixed-point combinator
+- [Part 027](complete-027.md) — 15 choices; for the inverse candidate to be defined, f must be both injective and surjective … formulas
+- [Part 028](complete-028.md) — 15 choices; Fraktur alphabet/typeface … functional; higher-type function
+- [Part 029](complete-029.md) — 15 choices; Functions … graph
+- [Part 030](complete-030.md) — 15 choices; Graph of a function … horse
+- [Part 031](complete-031.md) — 15 choices; identify … if ℘(ℕ) is enumerable then 2^ω is also enumerable
+- [Part 032](complete-032.md) — 15 choices; image … infinite
+- [Part 033](complete-033.md) — 15 choices; infinite … injective
+- [Part 034](complete-034.md) — 15 choices; injective … intersection (set theory)
+- [Part 035](complete-035.md) — 15 choices; Introduction … irreflexive
+- [Part 036](complete-036.md) — 15 choices; irreflexive … it is rigorous
+- [Part 037](complete-037.md) — 15 choices; it makes A true (false) iff the original model does … lemma
+- [Part 038](complete-038.md) — 15 choices; length … logical matrix; designated truth values
+- [Part 039](complete-039.md) — 15 choices; logical operator … maximally consistent set
+- [Part 040](complete-040.md) — 15 choices; may not yet be complete … modular arithmetic; congruence modulo n
+- [Part 041](complete-041.md) — 15 choices; modus ponens … multiset
+- [Part 042](complete-042.md) — 15 choices; n-ary function … new/used prefix
+- [Part 043](complete-043.md) — 15 choices; no … nonderivability
+- [Part 044](complete-044.md) — 15 choices; nonenumerable … open source
+- [Part 045](complete-045.md) — 15 choices; open-source, collaborative textbook … ordered pair
+- [Part 046](complete-046.md) — 15 choices; Ordered pair … pairing function; encode; code; decode
+- [Part 047](complete-047.md) — 15 choices; pairing functions … Partial order
+- [Part 048](complete-048.md) — 15 choices; partial order / preorder in intuitionistic Kripke semantics … Polish notation
+- [Part 049](complete-049.md) — 15 choices; positive … prefix
+- [Part 050](complete-050.md) — 15 choices; premise … proof
+- [Part 051](complete-051.md) — 15 choices; proof by cases … propositional connectives
+- [Part 052](complete-052.md) — 15 choices; propositional logic … R-equivalent
+- [Part 053](complete-053.md) — 15 choices; range … reduct / expansion
+- [Part 054](complete-054.md) — 15 choices; reduct / expansion … regular minimization
+- [Part 055](complete-055.md) — 15 choices; regular minimization … requires encoding of pairs
+- [Part 056](complete-056.md) — 15 choices; resolution method / resolution refutation … Russell's Paradox
+- [Part 057](complete-057.md) — 15 choices; Russell's Paradox … Second, formally.
+- [Part 058](complete-058.md) — 11 choices; second-order logic … sequence
+- [Part 059](complete-059.md) — 10 choices; sequent … serial, Euclidean, weakly dense/connected/directed, partially functional, converse well-founded
+- [Part 060](complete-060.md) — 15 choices; set … sigma-algebra
+- [Part 061](complete-061.md) — 15 choices; signed formula … standard part / immediate predecessor / cofinite / elementarily equivalent
+- [Part 062](complete-062.md) — 15 choices; state … structural rule
+- [Part 063](complete-063.md) — 15 choices; structural rule … subtree
+- [Part 064](complete-064.md) — 15 choices; subtree … surjective function; surjection
+- [Part 065](complete-065.md) — 15 choices; surjective functions … tableau
+- [Part 066](complete-066.md) — 15 choices; tableau / signed formula / prefix / branch / accessible prefix … The final modal example evaluates to False, not Undef.
+- [Part 067](complete-067.md) — 15 choices; The Notion of Size, and Schr\"oder-Bernstein … topological semantics
+- [Part 068](complete-068.md) — 15 choices; topological semantics / topology / topological space … Transitivity.
+- [Part 069](complete-069.md) — 15 choices; Transitivity: … truth tree
+- [Part 070](complete-070.md) — 15 choices; truth value … undischarged
+- [Part 071](complete-071.md) — 15 choices; undischarged assumption … universal set
+- [Part 072](complete-072.md) — 15 choices; unsatisfiable … value
+- [Part 073](complete-073.md) — 15 choices; value of f … word over A
+- [Part 074](complete-074.md) — 5 choices; work in progress … zeroth, first, second elements of a list
+
+[Back to start-here queue / العودة إلى قائمة البدء](../EXPERT_REVIEW_START_HERE.md)

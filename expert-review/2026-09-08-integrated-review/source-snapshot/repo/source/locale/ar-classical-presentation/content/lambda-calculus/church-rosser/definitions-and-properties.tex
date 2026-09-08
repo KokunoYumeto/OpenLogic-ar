@@ -1,0 +1,74 @@
+% Part: lambda-calculus
+% Chapter: church-rosser
+% Section: definitions-and-properties
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{cr}{dap}
+
+\olsection{التعريف والخصائص}
+
+نعرّف في هذا الفصل خاصية تشيرش--روسر، ثم نبيّن جملة من الخواص المتصلة بها.
+
+\begin{defn}[خاصية تشيرش--روسر، CR] العلاقة~$\xredone$ على الحدود
+  ذات \emph{خاصية تشيرش--روسر} إذا كان تحقق
+  $\OLId{latin-looped}{M} \xredone \OLId{latin-looped}{P}$ و$\OLId{latin-looped}{M} \xredone \OLId{latin-looped}{Q}$ يستلزم وجود حد~$\OLId{latin-looped}{N}$ يحقق
+  $\OLId{latin-looped}{P} \xredone \OLId{latin-looped}{N}$ و$\OLId{latin-looped}{Q} \xredone \OLId{latin-looped}{N}$.
+\end{defn}
+
+يمكن أن نتخذ حساب لامبدا نموذجًا للحساب: فتكون الحدود السوية فيه قيمًا،
+وتكون علاقة الاختزال قواعد لإجراء الحساب.
+ومؤدى خاصية تشيرش--روسر أن تعدد سبل إجراء الحساب لا يوجب تعدد قيمة العبارة.
+
+ومن الجبر الابتدائي مثال يقرب ذلك؛ فحساب
+$\OLMathNumeral{4} \times (\OLMathNumeral{1}+\OLMathNumeral{2}) + \OLMathNumeral{3}$ يجري بأكثر من طريق.
+نختزله إلى~$\OLMathNumeral{4} \times \OLMathNumeral{3}+\OLMathNumeral{3}$ إذا بدأنا باختزال~$\OLMathNumeral{1}+\OLMathNumeral{2}$ إلى~$\OLMathNumeral{3}$،
+أو إلى~$\OLMathNumeral{4} \times \OLMathNumeral{1}+\OLMathNumeral{4} \times \OLMathNumeral{2}+\OLMathNumeral{3}$ إذا بدأنا بتوزيع~$\OLMathNumeral{4} \times (\OLMathNumeral{1}+\OLMathNumeral{2})$.
+ثم تنتهي كلتا العبارتين بمزيد من الاختزال إلى~$\OLMathNumeral{12}+\OLMathNumeral{3}$.
+
+إذا جعلنا~$\xredone$ اختزال~$\beta$، لزم من خاصية تشيرش--روسر أن الصورة السوية،
+متى وجدت، لا تتعدد. فلنفرض أن~$\OLId{latin-looped}{M}$ يختزل إلى~$\OLId{latin-looped}{P}$ وإلى~$\OLId{latin-looped}{Q}$،
+وأن الناتجين سويان. تقتضي الخاصية وجود حد~$\OLId{latin-looped}{N}$ يختزل إليه كل من~$\OLId{latin-looped}{P}$ و$\OLId{latin-looped}{Q}$.
+ولما كان~$\OLId{latin-looped}{P}$ و$\OLId{latin-looped}{Q}$ سويين، لم يكن اختزالهما إلى~$\OLId{latin-looped}{N}$ إلا اختزالًا لا يغيّر شيئًا.
+فـ$\OLId{latin-looped}{P}$ و$\OLId{latin-looped}{Q}$ و$\OLId{latin-looped}{N}$ متطابقة، وبهذا يسوغ إطلاق \emph{الصورة} السوية للحد.
+
+فإذا عدّ حساب لامبدا نموذجًا للحساب، كانت الصورة السوية بمنزلة النتيجة النهائية
+للحساب الذي ابتدأ من الحد. وقد ثبت أن النتيجة النهائية لا تزيد على واحدة،
+إن وجدت؛ كما أن حساب~$\OLMathNumeral{4} \times (\OLMathNumeral{1}+\OLMathNumeral{2})+\OLMathNumeral{3}$ لا يعطي إلا~$\OLMathNumeral{15}$.
+
+\begin{thm} \ollabel{thm:str}
+  لتكن العلاقة~$\xredone$ ذات خاصية تشيرش--روسر، ولتكن~$\xred$ أصغر علاقة متعدية
+  تشتمل على~$\xredone$. فإن~$\xred$ أيضًا ذات خاصية تشيرش--روسر.
+\end{thm}
+
+\begin{proof}
+  لنفرض~$\OLId{latin-looped}{M} \xred \OLId{latin-looped}{P}$ و$\OLId{latin-looped}{M} \xred \OLId{latin-looped}{Q}$؛ فتوجد المتتاليتان
+  \begin{align*}
+    \OLId{latin-looped}{M} & \xredone \OLId{latin-looped}{P}_\OLMathNumeral{1} \xredone \dots \xredone \OLId{latin-looped}{P}_\OLId{latin-ordinary}{m} \text{ و}\\
+    \OLId{latin-looped}{M} & \xredone \OLId{latin-looped}{Q}_\OLMathNumeral{1} \xredone \dots \xredone \OLId{latin-looped}{Q}_\OLId{latin-ordinary}{n}\text{،}
+  \end{align*}
+  حيث~$\OLId{latin-looped}{P}_\OLId{latin-ordinary}{m}=\OLId{latin-looped}{P}$ و$\OLId{latin-looped}{Q}_\OLId{latin-ordinary}{n}=\OLId{latin-looped}{Q}$.
+  نثبت المطلوب بإنشاء شبكة~$\OLId{latin-looped}{N}$ من الحدود، ارتفاعها~$\OLId{latin-ordinary}{m} + \OLMathNumeral{1}$ وعرضها~$\OLId{latin-ordinary}{n} + \OLMathNumeral{1}$.
+  ونرمز بـ$\OLId{latin-looped}{N}_{\OLId{latin-ordinary}{i},\OLId{latin-ordinary}{j}}$ إلى الحد الذي في الصف~$\OLId{latin-ordinary}{i}$ والعمود~$\OLId{latin-ordinary}{j}$.
+  
+  وننشئ~$\OLId{latin-looped}{N}$ بحيث~$\OLId{latin-looped}{N}_{\OLId{latin-ordinary}{i},\OLId{latin-ordinary}{j}} \xredone \OLId{latin-looped}{N}_{\OLId{latin-ordinary}{i}+\OLMathNumeral{1},\OLId{latin-ordinary}{j}}$ و$\OLId{latin-looped}{N}_{\OLId{latin-ordinary}{i},\OLId{latin-ordinary}{j}} \xredone \OLId{latin-looped}{N}_{\OLId{latin-ordinary}{i},\OLId{latin-ordinary}{j}+\OLMathNumeral{1}}$، على الوجه الآتي:
+  \begin{align*}
+    \OLId{latin-looped}{N}_{\OLMathNumeral{0},\OLMathNumeral{0}} &= \OLId{latin-looped}{M} \\
+    \OLId{latin-looped}{N}_{\OLId{latin-ordinary}{i},\OLMathNumeral{0}} &= \OLId{latin-looped}{P}_\OLId{latin-ordinary}{i} && \text{إذا كان } \OLMathNumeral{1} \le \OLId{latin-ordinary}{i} \le \OLId{latin-ordinary}{m} \\
+    \OLId{latin-looped}{N}_{\OLMathNumeral{0},\OLId{latin-ordinary}{j}} &= \OLId{latin-looped}{Q}_\OLId{latin-ordinary}{j} && \text{إذا كان } \OLMathNumeral{1} \le \OLId{latin-ordinary}{j} \le \OLId{latin-ordinary}{n} \\
+  \intertext{وفي غير ذلك:}
+    \OLId{latin-looped}{N}_{\OLId{latin-ordinary}{i},\OLId{latin-ordinary}{j}} &= \OLId{latin-looped}{R}
+  \end{align*}
+  فيه~$\OLId{latin-looped}{R}$ حد يحقق~$\OLId{latin-looped}{N}_{\OLId{latin-ordinary}{i}-\OLMathNumeral{1},\OLId{latin-ordinary}{j}} \xredone \OLId{latin-looped}{R}$ و$\OLId{latin-looped}{N}_{\OLId{latin-ordinary}{i},\OLId{latin-ordinary}{j}-\OLMathNumeral{1}}
+  \xredone \OLId{latin-looped}{R}$.
+  ووجوده مضمون بخاصية تشيرش--روسر للعلاقة~$\xredone$.
+
+  وينتج عن الإنشاء~$\OLId{latin-looped}{N}_{\OLId{latin-ordinary}{m},\OLMathNumeral{0}} \xredone \dots \xredone \OLId{latin-looped}{N}_{\OLId{latin-ordinary}{m},\OLId{latin-ordinary}{n}}$ و$\OLId{latin-looped}{N}_{\OLMathNumeral{0},\OLId{latin-ordinary}{n}} \xredone \dots \xredone \OLId{latin-looped}{N}_{\OLId{latin-ordinary}{m},\OLId{latin-ordinary}{n}}$.
+  ثم إن~$\OLId{latin-looped}{N}_{\OLId{latin-ordinary}{m},\OLMathNumeral{0}}$ هو~$\OLId{latin-looped}{P}$، و$\OLId{latin-looped}{N}_{\OLMathNumeral{0},\OLId{latin-ordinary}{n}}$ هو~$\OLId{latin-looped}{Q}$.
+  فيحصل المطلوب من تعريف~$\xred$.
+\end{proof}
+
+\end{document}
+

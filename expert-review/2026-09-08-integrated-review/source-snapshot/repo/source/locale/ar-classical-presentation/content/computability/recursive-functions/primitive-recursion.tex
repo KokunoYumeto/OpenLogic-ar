@@ -1,0 +1,115 @@
+% Part: computability
+% Chapter: recursive-functions
+% Section: primitive-recursion
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{rec}{pre}
+\olsection{العودية البدائية}
+
+كل عدد طبيعي يُنال بالبدء من~$\OLMathNumeral{0}$
+وتكرار عملية اللاحق~$+\OLMathNumeral{1}$ مرات متناهية؛ فهو إما~$\OLMathNumeral{0}$
+وإما لاحق … لاحق~$\OLMathNumeral{0}$. وهذه الخاصية تتيح لنا تعيين دالة
+$\OLId{latin-ordinary}{h}\colon\Nat \to \Nat$ على وجه مخصوص:
+(أ) نضع قيمة $\OLId{latin-ordinary}{h}$ عند الحجة~$\OLMathNumeral{0}$؛ و(ب) نبيّن كيف نستخرج، من
+القيمة $\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{x})$، القيمة $\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{x}+\OLMathNumeral{1})$. أما (أ) فيعطينا $\OLId{latin-ordinary}{h}(\OLMathNumeral{0})$ من غير واسطة،
+فتتعين $\OLId{latin-ordinary}{h}$ عند~$\OLMathNumeral{0}$. وأما (ب) فنستعملها أولًا عند $\OLId{latin-ordinary}{x}=\OLMathNumeral{0}$
+لنحسب $\OLId{latin-ordinary}{h}(\OLMathNumeral{1})=\OLId{latin-ordinary}{h}(\OLMathNumeral{0}+\OLMathNumeral{1})$ من~$\OLId{latin-ordinary}{h}(\OLMathNumeral{0})$. ثم نعيد استعمالها عند $\OLId{latin-ordinary}{x}=\OLMathNumeral{1}$
+فنحسب $\OLId{latin-ordinary}{h}(\OLMathNumeral{2})=\OLId{latin-ordinary}{h}(\OLMathNumeral{1}+\OLMathNumeral{1})$ من~$\OLId{latin-ordinary}{h}(\OLMathNumeral{1})$، وهكذا. ومهما أخذنا عددًا طبيعيًا~$\OLId{latin-ordinary}{x}$، بلغنا بعد خطوات متناهية
+موضع تعريف $\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{x}+\OLMathNumeral{1})$ من~$\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{x})$، فتكون $\OLId{latin-ordinary}{h}$ معرفة
+عند كل $\OLId{latin-ordinary}{x}\in\Nat$.
+
+ومن أمثلة ذلك أن نعيّن $\OLId{latin-ordinary}{h}\colon\Nat\to\Nat$ بالمعادلتين الآتيتين:
+\begin{align*}
+\OLId{latin-ordinary}{h}(\OLMathNumeral{0}) & =  \OLMathNumeral{1}\\
+\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{x}+\OLMathNumeral{1}) & =  \OLMathNumeral{2} \cdot \OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{x})
+\end{align*}
+فإن كانت عملية الضرب معلومة لنا، وفت هاتان المعادلتان
+بالمطلوب في (أ) و(ب). وإذا أجرينا المعادلة الثانية مرة بعد مرة حصل
+\begin{align*}
+  \OLId{latin-ordinary}{h}(\OLMathNumeral{1}) & = \OLMathNumeral{2}\cdot \OLId{latin-ordinary}{h}(\OLMathNumeral{0}) = \OLMathNumeral{2},\\
+  \OLId{latin-ordinary}{h}(\OLMathNumeral{2}) & = \OLMathNumeral{2}\cdot \OLId{latin-ordinary}{h}(\OLMathNumeral{1}) = \OLMathNumeral{2}\cdot \OLMathNumeral{2},\\
+  \OLId{latin-ordinary}{h}(\OLMathNumeral{3}) & = \OLMathNumeral{2} \cdot \OLId{latin-ordinary}{h}(\OLMathNumeral{2}) = \OLMathNumeral{2}\cdot \OLMathNumeral{2} \cdot \OLMathNumeral{2},\\
+  & \vdots
+\end{align*}
+فيتبين أن الدالة~$\OLId{latin-ordinary}{h}$ المعينة بهذا الطريق هي $\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{x})=\OLMathNumeral{2}^\OLId{latin-ordinary}{x}$.
+
+ومن الخاصية المتقدمة للأعداد الطبيعية يلزم وجود دالة واحدة لا غير~$\OLId{latin-ordinary}{h}$ تفي
+بالشرطين. ونسمّي هاتين المعادلتين \emph{تعريفًا بالعودية
+البدائية} للدالة~$\OLId{latin-ordinary}{h}$. أما «العودية» فلأن تعريف~$\OLId{latin-ordinary}{h}$، وبخاصة معادلته
+الثانية، يرجع إلى $\OLId{latin-ordinary}{h}$ نفسها في الطرف الأيمن. وأما «البدائية» فلأن
+تعريف $\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{x}+\OLMathNumeral{1})$ لا يستعمل من قيم الدالة إلا~$\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{x})$، وهي السابقة لها مباشرة.
+فهذا أبسط وجوه التعريف العودي على~$\Nat$.
+
+ولا يقتصر هذا الوجه على المثال المتقدم؛ بل نعرّف به ما هو أسبق، كالجمع والضرب.
+وهاتان دالتان ثنائيتا الحجة، ولذلك نثبت أحد موضعي
+الحجج ونجري العودية على الآخر. فإذا أردنا تعريف $\Add(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y})$، مثلًا، يمكننا تثبيت
+~$\OLId{latin-ordinary}{x}$ وتعريف القيمة أولًا عند $\OLId{latin-ordinary}{y}=\OLMathNumeral{0}$، ثم تعريفها عند $\OLId{latin-ordinary}{y}+\OLMathNumeral{1}$ بدلالة~$\OLId{latin-ordinary}{y}$.
+وحيث أبقينا $\OLId{latin-ordinary}{x}$ ثابتًا، فإنه يرد في طرفي كل من معادلتي التعريف.
+\begin{align*}
+\Add(\OLId{latin-ordinary}{x},\OLMathNumeral{0}) & =  \OLId{latin-ordinary}{x}\\
+\Add(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y}+\OLMathNumeral{1}) & =  \Add(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y})+\OLMathNumeral{1}
+\end{align*}
+وبهاتين المعادلتين تتعين $\Add$ مهما كانت قيمتا $\OLId{latin-ordinary}{x}$ و~$\OLId{latin-ordinary}{y}$. فلطلب
+$\Add(\OLMathNumeral{2},\OLMathNumeral{3})$، مثلًا، نطبق معادلتي التعريف عند $\OLId{latin-ordinary}{x}=\OLMathNumeral{2}$: نستعمل الأولى
+لإيجاد $\Add(\OLMathNumeral{2},\OLMathNumeral{0})=\OLMathNumeral{2}$، ثم نستعمل الثانية تباعًا فنجد
+$\Add(\OLMathNumeral{2},\OLMathNumeral{1})=\OLMathNumeral{2}+\OLMathNumeral{1}=\OLMathNumeral{3}$ و$\Add(\OLMathNumeral{2},\OLMathNumeral{2})=\OLMathNumeral{3}+\OLMathNumeral{1}=\OLMathNumeral{4}$ و$\Add(\OLMathNumeral{2},\OLMathNumeral{3})=\OLMathNumeral{4}+\OLMathNumeral{1}=\OLMathNumeral{5}$.
+
+وقد ورد في تعريف $\Add$ الرمز $+$ في الطرف الأيمن من المعادلة
+الثانية؛ غير أن استعماله مقصور على زيادة~$\OLMathNumeral{1}$. فلم نستعمل في الحقيقة إلا دالة اللاحق
+$\Succ(\OLId{latin-ordinary}{z})=\OLId{latin-ordinary}{z}+\OLMathNumeral{1}$ وطبقناها على القيمة السابقة $\Add(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y})$ لتعريف
+$\Add(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y}+\OLMathNumeral{1})$. فكأن التعريف العودي يستند إلى
+دالة واحدة نجريها على القيمة السابقة. ولا مانع، بل قد تدعو
+الحاجة، إلى أن تعتمد تلك الدالة على غير هذه القيمة؛ فنجعل
+$\OLId{latin-ordinary}{x}$ و~$\OLId{latin-ordinary}{y}$ من حججها أيضًا. ومثاله:
+\begin{align*}
+  \Mult(\OLId{latin-ordinary}{x},\OLMathNumeral{0}) & =  \OLMathNumeral{0} \\
+  \Mult(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y}+\OLMathNumeral{1}) & =  \Add(\Mult(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y}),\OLId{latin-ordinary}{x})
+\end{align*}
+فهذا تعريف للدالة $\Mult$ بالعودية البدائية: نجري فيه الدالة $\Add$ على
+القيمة السابقة $\Mult(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y})$ والحجة الأولى~$\OLId{latin-ordinary}{x}$ جميعًا. وبه
+تتعين الدالة~$\Mult(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y})$ لكل حجتين $\OLId{latin-ordinary}{x}$ و~$\OLId{latin-ordinary}{y}$. ومن ذلك أن قيمة
+ $\Mult(\OLMathNumeral{2},\OLMathNumeral{3})$ تتحدد بحساب $\Mult(\OLMathNumeral{2},\OLMathNumeral{0})$ ثم $\Mult(\OLMathNumeral{2},\OLMathNumeral{1})$ ثم $\Mult(\OLMathNumeral{2},\OLMathNumeral{2})$
+ثم~$\Mult(\OLMathNumeral{2},\OLMathNumeral{3})$ تباعًا:
+\begin{align*}
+  \Mult(\OLMathNumeral{2},\OLMathNumeral{0}) & = \OLMathNumeral{0}\\
+  \Mult(\OLMathNumeral{2},\OLMathNumeral{1}) & = \Mult(\OLMathNumeral{2},\OLMathNumeral{0}+\OLMathNumeral{1}) =
+  \Add(\Mult(\OLMathNumeral{2},\OLMathNumeral{0}), \OLMathNumeral{2}) = \Add(\OLMathNumeral{0}, \OLMathNumeral{2}) = \OLMathNumeral{2}\\
+  \Mult(\OLMathNumeral{2},\OLMathNumeral{2}) & = \Mult(\OLMathNumeral{2},\OLMathNumeral{1}+\OLMathNumeral{1}) =
+  \Add(\Mult(\OLMathNumeral{2},\OLMathNumeral{1}), \OLMathNumeral{2}) = \Add(\OLMathNumeral{2}, \OLMathNumeral{2}) = \OLMathNumeral{4}\\
+  \Mult(\OLMathNumeral{2},\OLMathNumeral{3}) & = \Mult(\OLMathNumeral{2},\OLMathNumeral{2}+\OLMathNumeral{1}) =
+  \Add(\Mult(\OLMathNumeral{2},\OLMathNumeral{2}), \OLMathNumeral{2}) = \Add(\OLMathNumeral{4}, \OLMathNumeral{2}) = \OLMathNumeral{6}
+\end{align*}
+
+وعلى هذا يكون النمط العام كما يأتي. إذا أردنا تعريف دالة
+~$\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{x}_\OLMathNumeral{0},\dots,\OLId{latin-ordinary}{x}_{\OLId{latin-ordinary}{k}-\OLMathNumeral{1}},\OLId{latin-ordinary}{y})$ بالعودية البدائية، أوردنا معادلتين: الأولى تعيّن
+$\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{x}_\OLMathNumeral{0},\dots,\OLId{latin-ordinary}{x}_{\OLId{latin-ordinary}{k}-\OLMathNumeral{1}},\OLMathNumeral{0})$ من غير إحالة إلى~$\OLId{latin-ordinary}{h}$. والثانية تعيّن
+$\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{x}_\OLMathNumeral{0},\dots,\OLId{latin-ordinary}{x}_{\OLId{latin-ordinary}{k}-\OLMathNumeral{1}},\OLId{latin-ordinary}{y}+\OLMathNumeral{1})$ بدلالة $\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{x}_\OLMathNumeral{0},\dots,\OLId{latin-ordinary}{x}_{\OLId{latin-ordinary}{k}-\OLMathNumeral{1}},\OLId{latin-ordinary}{y})$ والحجج
+الأخرى $\OLId{latin-ordinary}{x}_\OLMathNumeral{0}$، …،~$\OLId{latin-ordinary}{x}_{\OLId{latin-ordinary}{k}-\OLMathNumeral{1}}$ و~$\OLId{latin-ordinary}{y}$. ولا نستعمل في المعادلة الثانية من قيم
+الدالة~$\OLId{latin-ordinary}{h}$ إلا السابقة مباشرة. فإن جعلنا العمليتين اللتين يؤديهما
+الطرفان الأيمنان دالتين، وسميناهما $\OLId{latin-ordinary}{f}$ و~$\OLId{latin-ordinary}{g}$، صار النمط العام
+لتعريف دالة جديدة~$\OLId{latin-ordinary}{h}$ بالعودية البدائية كما يأتي:
+\begin{align*}
+  \OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{x}_\OLMathNumeral{0}, \dots, \OLId{latin-ordinary}{x}_{\OLId{latin-ordinary}{k}-\OLMathNumeral{1}}, \OLMathNumeral{0}) & = \OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x}_\OLMathNumeral{0}, \dots, \OLId{latin-ordinary}{x}_{\OLId{latin-ordinary}{k}-\OLMathNumeral{1}})\\
+  \OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{x}_\OLMathNumeral{0}, \dots, \OLId{latin-ordinary}{x}_{\OLId{latin-ordinary}{k}-\OLMathNumeral{1}}, \OLId{latin-ordinary}{y}+\OLMathNumeral{1}) & =
+  \OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{x}_\OLMathNumeral{0}, \dots, \OLId{latin-ordinary}{x}_{\OLId{latin-ordinary}{k}-\OLMathNumeral{1}}, \OLId{latin-ordinary}{y}, \OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{x}_\OLMathNumeral{0}, \dots, \OLId{latin-ordinary}{x}_{\OLId{latin-ordinary}{k}-\OLMathNumeral{1}}, \OLId{latin-ordinary}{y}))
+\end{align*}
+ففي مثال $\Add$ نجد $\OLId{latin-ordinary}{k}=\OLMathNumeral{1}$ و$\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x}_\OLMathNumeral{0})=\OLId{latin-ordinary}{x}_\OLMathNumeral{0}$ (دالة الهوية)، و
+$\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{x}_\OLMathNumeral{0},\OLId{latin-ordinary}{y},\OLId{latin-ordinary}{z})=\OLId{latin-ordinary}{z}+\OLMathNumeral{1}$ (الدالة الثلاثية الحجج التي تعيد لاحق حجتها الثالثة):
+\begin{align*}
+  \Add(\OLId{latin-ordinary}{x}_\OLMathNumeral{0}, \OLMathNumeral{0}) & = \OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x}_\OLMathNumeral{0}) = \OLId{latin-ordinary}{x}_\OLMathNumeral{0}\\
+  \Add(\OLId{latin-ordinary}{x}_\OLMathNumeral{0}, \OLId{latin-ordinary}{y}+\OLMathNumeral{1}) & = \OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{x}_\OLMathNumeral{0}, \OLId{latin-ordinary}{y}, \Add(\OLId{latin-ordinary}{x}_\OLMathNumeral{0}, \OLId{latin-ordinary}{y})) =
+  \Succ(\Add(\OLId{latin-ordinary}{x}_\OLMathNumeral{0}, \OLId{latin-ordinary}{y}))
+\end{align*}
+وأما مثال $\Mult$ ففيه $\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x}_\OLMathNumeral{0})=\OLMathNumeral{0}$ (الدالة الثابتة التي تعيد~$\OLMathNumeral{0}$
+دائمًا) و$\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{x}_\OLMathNumeral{0},\OLId{latin-ordinary}{y},\OLId{latin-ordinary}{z})=\Add(\OLId{latin-ordinary}{z},\OLId{latin-ordinary}{x}_\OLMathNumeral{0})$ (الدالة الثلاثية الحجج التي تعيد
+مجموع حجتيها الأخيرة والأولى):
+\begin{align*}
+  \Mult(\OLId{latin-ordinary}{x}_\OLMathNumeral{0},\OLMathNumeral{0}) & =  \OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x}_\OLMathNumeral{0}) = \OLMathNumeral{0} \\
+  \Mult(\OLId{latin-ordinary}{x}_\OLMathNumeral{0},\OLId{latin-ordinary}{y}+\OLMathNumeral{1}) & =  \OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{x}_\OLMathNumeral{0}, \OLId{latin-ordinary}{y}, \Mult(\OLId{latin-ordinary}{x}_\OLMathNumeral{0},\OLId{latin-ordinary}{y})) =
+  \Add(\Mult(\OLId{latin-ordinary}{x}_\OLMathNumeral{0},\OLId{latin-ordinary}{y}), \OLId{latin-ordinary}{x}_\OLMathNumeral{0})
+\end{align*}
+
+\end{document}

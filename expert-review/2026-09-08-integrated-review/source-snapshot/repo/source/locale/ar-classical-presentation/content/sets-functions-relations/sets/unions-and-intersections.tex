@@ -1,0 +1,170 @@
+% الجزء: sets-functions-relations
+% الفصل: sets
+% القسم: unions-and-intersections
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid[ar]{sfr}{set}{uni}
+\olsection{الاتحادات والتقاطعات}
+
+\begin{explain}
+سبق في \olref[sfr][set][bas]{sec} تعريف المجموعات بالتجريد، أي بالصورة
+$\Setabs{\OLId{latin-ordinary}{x}}{\phi(\OLId{latin-ordinary}{x})}$. والخاصية~$\phi$ المستعملة فيه قد تذكر مجموعات
+سبق تعريفها. فإذا كانت $\OLId{latin-looped}{A}$ و~$\OLId{latin-looped}{B}$ مجموعتين، جمعت
+$\Setabs{\OLId{latin-ordinary}{x}}{\OLId{latin-ordinary}{x} \in \OLId{latin-looped}{A} \lor \OLId{latin-ordinary}{x} \in \OLId{latin-looped}{B}}$ كل ما هو من !!{element}s $\OLId{latin-looped}{A}$ أو~$\OLId{latin-looped}{B}$؛
+فهي تضم !!{element}s $\OLId{latin-looped}{A}$ و~$\OLId{latin-looped}{B}$ معًا. وفي \olref{fig:union} تصوير ذلك:
+فالناحية المظللة تمثل !!{element}s المجموعتين $\OLId{latin-looped}{A}$ و~$\OLId{latin-looped}{B}$ مجتمعة.
+
+\begin{figure}
+  \olasset{assets/diagrams/union.tikz}
+  \caption{الاتحاد $\OLId{latin-looped}{A} \cup \OLId{latin-looped}{B}$ يجمع !!{element}s $\OLId{latin-looped}{A}$ و~$\OLId{latin-looped}{B}$ في مجموعة واحدة.}
+  \ollabel{fig:union}
+\end{figure}
+
+ولكثرة نفع هذه العملية وورودها---أعني جمع المجموعات---نضع لها اسمًا
+اصطلاحيًا ورمزًا.
+\end{explain}
+
+\begin{defn}[الاتحاد]
+\emph{اتحاد} $\OLId{latin-looped}{A}$ و$\OLId{latin-looped}{B}$، ورمزه $\OLId{latin-looped}{A} \cup \OLId{latin-looped}{B}$، مجموعة الأشياء التي هي من !!{element}s $\OLId{latin-looped}{A}$ أو $\OLId{latin-looped}{B}$
+أو كلتيهما:
+\[
+\OLId{latin-looped}{A} \cup \OLId{latin-looped}{B} = \Setabs{\OLId{latin-ordinary}{x}}{\OLId{latin-ordinary}{x} \in \OLId{latin-looped}{A} \lor \OLId{latin-ordinary}{x} \in \OLId{latin-looped}{B}}
+\]
+\end{defn}
+
+\begin{ex}
+لا أثر لتكرار !!{element}s؛ فإذا اشتركت مجموعتان في !!a{element}
+لم يحتج اتحادهما إلى ذكر ذلك !!{element} إلا مرة واحدة، كما في
+$\{ \OLId{latin-ordinary}{a}, \OLId{latin-ordinary}{b}, \OLId{latin-ordinary}{c}\} \cup \{ \OLId{latin-ordinary}{a}, \OLMathNumeral{0}, \OLMathNumeral{1}\} = \{\OLId{latin-ordinary}{a}, \OLId{latin-ordinary}{b}, \OLId{latin-ordinary}{c}, \OLMathNumeral{0}, \OLMathNumeral{1}\}$.
+
+واتحاد المجموعة بإحدى مجموعاتها الجزئية هو المجموعة الأصلية نفسها: $\{\OLId{latin-ordinary}{a},
+\OLId{latin-ordinary}{b}, \OLId{latin-ordinary}{c} \} \cup \{\OLId{latin-ordinary}{a} \} = \{\OLId{latin-ordinary}{a}, \OLId{latin-ordinary}{b}, \OLId{latin-ordinary}{c}\}$.
+
+وكذلك ضم الخالية إلى مجموعة يبقي المجموعة على حالها: $\{\OLId{latin-ordinary}{a},
+\OLId{latin-ordinary}{b}, \OLId{latin-ordinary}{c} \} \cup \emptyset = \{\OLId{latin-ordinary}{a}, \OLId{latin-ordinary}{b}, \OLId{latin-ordinary}{c} \}$.
+\end{ex}
+
+\begin{prob}
+برهن على أن $\OLId{latin-looped}{A} \subseteq \OLId{latin-looped}{B}$ يستلزم $\OLId{latin-looped}{A} \cup \OLId{latin-looped}{B} = \OLId{latin-looped}{B}$.
+\end{prob}
+
+\begin{explain}
+وأما العملية «المزدوجة» للاتحاد فتجمع !!{element}s التي هي من
+!!{element}s~$\OLId{latin-looped}{A}$ ومن !!{element}s~$\OLId{latin-looped}{B}$ معًا. واسم هذه العملية
+\emph{التقاطع}، وصورتها في \olref{fig:intersection}.
+\begin{figure}
+  \olasset{assets/diagrams/intersection.tikz}
+  \caption{التقاطع $\OLId{latin-looped}{A} \cap \OLId{latin-looped}{B}$ يجمع ما بين المجموعتين من !!{element}s مشتركة.}
+  \ollabel{fig:intersection}
+\end{figure}
+\end{explain}
+
+\begin{defn}[التقاطع]
+\emph{تقاطع} $\OLId{latin-looped}{A}$ و$\OLId{latin-looped}{B}$، ورمزه $\OLId{latin-looped}{A} \cap \OLId{latin-looped}{B}$، مجموعة الأشياء التي هي من
+!!{element}s $\OLId{latin-looped}{A}$ و~$\OLId{latin-looped}{B}$ معًا:
+\[
+\OLId{latin-looped}{A} \cap \OLId{latin-looped}{B} = \Setabs{\OLId{latin-ordinary}{x}}{\OLId{latin-ordinary}{x} \in \OLId{latin-looped}{A} \land \OLId{latin-ordinary}{x} \in \OLId{latin-looped}{B}}
+\]
+فإن خلا التقاطع سميت المجموعتان \emph{متباينتين}؛ أي لا !!{element}s
+مشتركة بينهما.
+\end{defn}
+
+\begin{ex}
+متى انتفت !!{element}s المشتركة بين مجموعتين خلا تقاطعهما، نحو:
+$\{ \OLId{latin-ordinary}{a}, \OLId{latin-ordinary}{b}, \OLId{latin-ordinary}{c}\} \cap \{ \OLMathNumeral{0}, \OLMathNumeral{1}\} = \emptyset$.
+
+ومتى وجدت !!{element}s مشتركة بين مجموعتين، كان تقاطعهما المجموعة
+التي تضمها جميعًا ولا تضم غيرها، نحو:
+$\{\OLId{latin-ordinary}{a}, \OLId{latin-ordinary}{b}, \OLId{latin-ordinary}{c} \} \cap \{\OLId{latin-ordinary}{a}, \OLId{latin-ordinary}{b}, \OLId{latin-ordinary}{d} \} = \{\OLId{latin-ordinary}{a}, \OLId{latin-ordinary}{b}\}$.
+
+وتقاطع المجموعة بإحدى مجموعاتها الجزئية هو تلك المجموعة الجزئية:
+$\{\OLId{latin-ordinary}{a}, \OLId{latin-ordinary}{b}, \OLId{latin-ordinary}{c}\} \cap \{\OLId{latin-ordinary}{a}, \OLId{latin-ordinary}{b}\} = \{\OLId{latin-ordinary}{a}, \OLId{latin-ordinary}{b}\}$.
+
+وأما التقاطع مع الخالية فخالٍ أبدًا: $\{\OLId{latin-ordinary}{a}, \OLId{latin-ordinary}{b}, \OLId{latin-ordinary}{c} \}
+\cap \emptyset = \emptyset$.
+\end{ex}
+
+\begin{prob}
+أقم برهانًا دقيقًا على أن $\OLId{latin-looped}{A} \subseteq \OLId{latin-looped}{B}$ يستلزم $\OLId{latin-looped}{A} \cap \OLId{latin-looped}{B} = \OLId{latin-looped}{A}$.
+\end{prob}
+
+\begin{explain}
+وليس الاتحاد والتقاطع مقصورين على مجموعتين. ولتعميمهما وجه موجز:
+نجمع أولًا المجموعات المراد اتحادها أو تقاطعها في مجموعة واحدة.
+فالاتحاد يجمع كل ما ينتمي إلى !!{element} واحد على الأقل من تلك
+المجموعة، وأما التقاطع فيجمع كل ما ينتمي إلى كل !!{element} منها.
+\end{explain}
+
+\begin{defn}
+لتكن $\OLId{latin-looped}{A}$ مجموعة من المجموعات. فاتحادها $\bigcup \OLId{latin-looped}{A}$ يجمع
+!!{element}s جميع !!{element}s~$\OLId{latin-looped}{A}$:
+\begin{align*}
+\bigcup \OLId{latin-looped}{A} & = \Setabs{\OLId{latin-ordinary}{x}}{\OLId{latin-ordinary}{x} \text{ ينتمي إلى !!a{element} من } \OLId{latin-looped}{A}},
+\text{ أي}\\
+& = \Setabs{\OLId{latin-ordinary}{x}}{\text{يوجد } \OLId{latin-looped}{B} \in \OLId{latin-looped}{A}
+  \text{ بحيث } \OLId{latin-ordinary}{x} \in \OLId{latin-looped}{B}}
+\end{align*}
+\end{defn}
+
+\begin{defn}
+لتكن $\OLId{latin-looped}{A}$ مجموعة غير خالية من المجموعات. فتقاطعها $\bigcap \OLId{latin-looped}{A}$ يجمع ما تشترك
+فيه جميع عناصر~$\OLId{latin-looped}{A}$ من الأشياء:
+\begin{align*}
+\bigcap \OLId{latin-looped}{A} & = \Setabs{\OLId{latin-ordinary}{x}}{\OLId{latin-ordinary}{x} \text{ ينتمي إلى كل !!{element} من } \OLId{latin-looped}{A}},
+\text{ أي}\\
+ & = \Setabs{\OLId{latin-ordinary}{x}}{\text{لكل } \OLId{latin-looped}{B} \in \OLId{latin-looped}{A}, \OLId{latin-ordinary}{x} \in \OLId{latin-looped}{B}}
+\end{align*}
+\end{defn}
+
+\textbf{تنبيه تصحيحي على الأصل.} اشترطنا ألا تخلو عائلة التقاطع؛ لأن
+التعريف المعروض لا يعيّن تقاطع العائلة الخالية من غير تعيين مجموعة كلية
+تحصر عناصره. ولا يلحق هذا الشرط اتحاد العائلة.
+
+\begin{ex}
+لتكن $\OLId{latin-looped}{A} = \{ \{ \OLId{latin-ordinary}{a}, \OLId{latin-ordinary}{b} \}, \{ \OLId{latin-ordinary}{a}, \OLId{latin-ordinary}{d}, \OLId{latin-ordinary}{e} \}, \{ \OLId{latin-ordinary}{a}, \OLId{latin-ordinary}{d} \} \}$.
+فيكون $\bigcup \OLId{latin-looped}{A} = \{ \OLId{latin-ordinary}{a}, \OLId{latin-ordinary}{b}, \OLId{latin-ordinary}{d}, \OLId{latin-ordinary}{e} \}$ و$\bigcap \OLId{latin-looped}{A} = \{ \OLId{latin-ordinary}{a} \}$.
+\end{ex}
+\begin{prob}
+	أثبت أنه إذا كانت $\OLId{latin-looped}{A}$ مجموعة وكان $\OLId{latin-looped}{A} \in \OLId{latin-looped}{B}$، فإن
+$\OLId{latin-looped}{A} \subseteq \bigcup \OLId{latin-looped}{B}$.
+\end{prob}
+
+وكذلك يكون التعريف لمتتالية مجموعات $\OLId{latin-looped}{A}_\OLMathNumeral{1}$، $\OLId{latin-looped}{A}_\OLMathNumeral{2}$، \dots
+\begin{align*}
+\bigcup_\OLId{latin-ordinary}{i} \OLId{latin-looped}{A}_\OLId{latin-ordinary}{i} & = \Setabs{\OLId{latin-ordinary}{x}}{\OLId{latin-ordinary}{x} \text{ ينتمي إلى إحدى المجموعات } \OLId{latin-looped}{A}_\OLId{latin-ordinary}{i}}\\
+\bigcap_\OLId{latin-ordinary}{i} \OLId{latin-looped}{A}_\OLId{latin-ordinary}{i} & = \Setabs{\OLId{latin-ordinary}{x}}{\OLId{latin-ordinary}{x} \text{ ينتمي إلى كل } \OLId{latin-looped}{A}_\OLId{latin-ordinary}{i}}.
+\end{align*}
+
+وإن أعطيت \emph{مجموعة فهرسة} $\OLId{latin-looped}{I}$، وجعلت مجموعة $\OLId{latin-looped}{A}_\OLId{latin-ordinary}{i}$ لكل $\OLId{latin-ordinary}{i} \in \OLId{latin-looped}{I}$،
+جاز استعمال اختصار الاتحاد الآتي؛ وأما اختصار التقاطع فنشترط فيه أن تكون
+مجموعة الفهرسة غير خالية:
+\begin{align*}
+	\bigcup_{\OLId{latin-ordinary}{i} \in \OLId{latin-looped}{I}} \OLId{latin-looped}{A}_\OLId{latin-ordinary}{i} & = \bigcup \Setabs{\OLId{latin-looped}{A}_\OLId{latin-ordinary}{i} }{\OLId{latin-ordinary}{i} \in \OLId{latin-looped}{I}}\\
+	\bigcap_{\OLId{latin-ordinary}{i} \in \OLId{latin-looped}{I}} \OLId{latin-looped}{A}_\OLId{latin-ordinary}{i} & = \bigcap\Setabs{\OLId{latin-looped}{A}_\OLId{latin-ordinary}{i}}{\OLId{latin-ordinary}{i} \in \OLId{latin-looped}{I}}
+\end{align*}
+
+ويبقى أن ننظر فيما هو من !!{element}s~$\OLId{latin-looped}{A}$ وليس في~$\OLId{latin-looped}{B}$؛ وتمثيله
+في \olref{difference}.
+
+\begin{figure}
+  \olasset{assets/diagrams/difference.tikz}
+  \caption{الفرق $\OLId{latin-looped}{A} \setminus \OLId{latin-looped}{B}$ يجمع !!{element}s~$\OLId{latin-looped}{A}$ التي ليست من !!{element}s~$\OLId{latin-looped}{B}$.}
+  \ollabel{difference}
+\end{figure}
+
+\begin{defn}[الفرق]
+\emph{فرق المجموعتين}~$\OLId{latin-looped}{A} \setminus \OLId{latin-looped}{B}$ هو مجموعة جميع !!{element}s
+$\OLId{latin-looped}{A}$ التي ليست من !!{element}s~$\OLId{latin-looped}{B}$، أي
+\[
+\OLId{latin-looped}{A}\setminus \OLId{latin-looped}{B} = \Setabs{\OLId{latin-ordinary}{x}}{\OLId{latin-ordinary}{x}\in \OLId{latin-looped}{A} \text{ و } \OLId{latin-ordinary}{x} \notin \OLId{latin-looped}{B}}.
+\]
+\end{defn}
+
+\begin{prob}
+برهن على أن $\OLId{latin-looped}{A} \subsetneq \OLId{latin-looped}{B}$ يقتضي $\OLId{latin-looped}{B} \setminus \OLId{latin-looped}{A} \neq \emptyset$.
+\end{prob}
+
+\end{document}

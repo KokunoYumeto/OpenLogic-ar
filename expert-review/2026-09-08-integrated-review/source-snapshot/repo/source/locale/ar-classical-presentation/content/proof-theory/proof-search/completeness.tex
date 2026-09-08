@@ -1,0 +1,180 @@
+% Part: proof-theory
+% Chapter: proof-search
+% Section: completeness
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{ps}{cpl}
+
+\olsection{في الاكتمال}
+
+ونثبت الآن ضمان خوارزمية البحث عن البرهان: فإذا أجهضت أو مضت بغير توقف،
+لم يوجد~!!{proof} للمتتالية الابتدائية~$\OLId{greek-variable}{Gamma} \Sequent \OLId{greek-variable}{Delta}$. وسبيل
+الإثبات أن ننشئ~!!a{structure}~$\Struct M$ يتحقق فيه~$\Sat{\OLId{latin-looped}{M}}{!A}$ لكل
+$!A \in \OLId{greek-variable}{Gamma}$، و$\Sat/{\OLId{latin-looped}{M}}{!A}$ لكل~$!A \in \OLId{greek-variable}{Delta}$. فتكون جميع
+!!{formula}s~$\OLId{greek-variable}{Gamma}$ صادقة، وجميع~!!{formula}s~$\OLId{greek-variable}{Delta}$ كاذبة، في
+$\Struct M$؛ أي تكون~$\OLId{greek-variable}{Gamma} \Sequent \OLId{greek-variable}{Delta}$ غير صالحة. ولما كان
+\Log{G3c} سليمًا، امتنع لها~!!{proof}~$\OLId{greek-variable}{Gamma} \Sequent \OLId{greek-variable}{Delta}$.
+
+ونبني~$\Struct{M}$ من زوج~$\Theta,\Xi$ من~!!{formula}s ومن مجموعة~$\OLId{latin-looped}{C}$
+من~!!{constant}s. وهذه~$\Theta,\Xi$ و$\OLId{latin-looped}{C}$ نستخرجها من \emph{فرع فشل}
+لتشغيل لم ينجح فيه البحث عن البرهان، إما لإجهاضه وإما لعدم توقفه. وفرع
+الفشل متتالية
+منتهية أو لامتناهية من المتتاليات~$\Pi_\OLId{latin-ordinary}{n} \Sequent \Lambda_\OLId{latin-ordinary}{n}$
+ومجموعات~!!{constant}s~$\OLId{latin-looped}{C}_\OLId{latin-ordinary}{n}$، بحيث
+تكون~$\Pi_\OLMathNumeral{0} \Sequent \Lambda_\OLMathNumeral{0}$ هي المتتالية النهائية
+$\OLId{greek-variable}{Gamma} \Sequent \OLId{greek-variable}{Delta}$، وتكون~$\Pi_{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}} \Sequent \Lambda_{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}}$ مقدمةً
+لـ~$\Pi_\OLId{latin-ordinary}{n} \Sequent \Lambda_\OLId{latin-ordinary}{n}$ وُلّدت في المرحلة~$\OLId{latin-ordinary}{n}+\OLMathNumeral{1}$ ولم تجد الخوارزمية
+لها~!!a{proof}. ولا بد من مقدمة كهذه لكل~$\OLId{latin-ordinary}{n}$ ليس أخيرًا في الفرع، وإلا
+لاهتدت الخوارزمية إلى~!!a{proof}. وإذا كان الفرع منتهيًا كانت
+المتتالية الأخيرة~$\Pi_\OLId{latin-ordinary}{n} \Sequent \Lambda_\OLId{latin-ordinary}{n}$ موضع الإجهاض. ونجعل~$\OLId{latin-looped}{C}_\OLId{latin-ordinary}{n}$
+مجموعة~!!{constant}s المرتبطة بالمتتالية~$\Pi_\OLId{latin-ordinary}{n} \Sequent \Lambda_\OLId{latin-ordinary}{n}$.
+
+فإذا أجهضت الخوارزمية عند متتالية عليا ليس فيها إلا~!!{formula}s ذرية،
+كان الفرع المنتهي بها فرع فشل. وإن لم تتوقف، توالت منها أشجار أكبر من
+سابقاتها. ونجمع تصورها في شجرة نامية لامتناهية، هي ما كان يحصل لو نفذت
+الخوارزمية عددًا لامتناهيًا من الخطوات. وهذه الشجرة، وإن كانت لامتناهية،
+متناهية التشعب؛ فلكل عقدة ابن أو ابنان، هما المتتاليتان فوقها مباشرة.
+وتقضي مبرهنة كونيغ بأن لكل شجرة لامتناهية متناهية التشعب فرعًا لامتناهيًا؛
+وهذا الفرع هو فرع الفشل حين يدوم البحث أبدًا.
+
+إذا كانت متتالية~$\Pi_\OLId{latin-ordinary}{n} \Sequent \Lambda_\OLId{latin-ordinary}{n}$ و$\OLId{latin-looped}{C}_\OLId{latin-ordinary}{n}$ فرع فشل، فلتكن
+$\Theta=\bigcup_\OLId{latin-ordinary}{n}\Pi_\OLId{latin-ordinary}{n}$ و$\Xi=\bigcup_\OLId{latin-ordinary}{n}\Lambda_\OLId{latin-ordinary}{n}$ (بعد حذف المؤشرات
+والوقائع المتكررة لـ~!!{formula}s)، ولتكن~$\OLId{latin-looped}{C}=\bigcup_\OLId{latin-ordinary}{n} \OLId{latin-looped}{C}_\OLId{latin-ordinary}{n}$.
+
+وبهذا تهيأت مادة تعريف~$\Struct{M}$.
+\begin{enumerate}
+\item المجال~$\Domain{\OLId{latin-looped}{M}}$ هو مجموعة الحدود التي يمكن تكوينها من~$\OLId{latin-looped}{C}$ ومن
+!!{function}s الواقعة في~$\OLId{greek-variable}{Gamma} \Sequent \OLId{greek-variable}{Delta}$ إن وُجدت، بغير أي
+!!{variable}s.
+\item إذا كان~$\OLId{latin-ordinary}{c}\in \OLId{latin-looped}{C}$، فإن~$\Assign{\OLId{latin-ordinary}{c}}{\OLId{latin-looped}{M}}=\OLId{latin-ordinary}{c}$.
+\item إذا كان~$\OLId{latin-ordinary}{f}$ !!{function} ذا~$\OLId{latin-ordinary}{m}$ مواضع في~$\OLId{greek-variable}{Gamma} \Sequent \OLId{greek-variable}{Delta}$،
+وكان~$\OLId{latin-ordinary}{t}_\OLMathNumeral{1},\dots,\OLId{latin-ordinary}{t}_\OLId{latin-ordinary}{m}\in\Domain{\OLId{latin-looped}{M}}$، فإن
+$\Assign{\OLId{latin-ordinary}{f}}{\OLId{latin-looped}{M}}(\OLId{latin-ordinary}{t}_\OLMathNumeral{1},\dots,\OLId{latin-ordinary}{t}_\OLId{latin-ordinary}{m})=\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{t}_\OLMathNumeral{1},\dots,\OLId{latin-ordinary}{t}_\OLId{latin-ordinary}{m})$.
+\item إذا كان~$\OLId{latin-looped}{R}$ !!{predicate} ذا~$\OLId{latin-ordinary}{m}$ مواضع في
+$\OLId{greek-variable}{Gamma} \Sequent \OLId{greek-variable}{Delta}$، فإن
+$\Assign{\OLId{latin-looped}{R}}{\OLId{latin-looped}{M}}=\Setabs{\tuple{\OLId{latin-ordinary}{t}_\OLMathNumeral{1},\dots,\OLId{latin-ordinary}{t}_\OLId{latin-ordinary}{m}}\in\Domain{\OLId{latin-looped}{M}}^\OLId{latin-ordinary}{m}}
+{\OLId{latin-looped}{R}(\OLId{latin-ordinary}{t}_\OLMathNumeral{1},\dots,\OLId{latin-ordinary}{t}_\OLId{latin-ordinary}{m})\in\Theta}$.
+\end{enumerate}
+فـ~$\Struct{M}$ \emph{نموذج حدود}: مجاله مجموعة حدود، وتفسر فيه
+!!{constant}s و!!{function}s بما يضمن~$\Value{\OLId{latin-ordinary}{t}}{\OLId{latin-looped}{M}}=\OLId{latin-ordinary}{t}$. ثم تستعمل
+!!{formula}s الذرية في~$\Theta$ لتعريف~$\Assign{\OLId{latin-looped}{R}}{\OLId{latin-looped}{M}}$ على وجه يضمن أن
+$\Sat{\OLId{latin-looped}{M}}{\OLId{latin-looped}{R}(\OLId{latin-ordinary}{t}_\OLMathNumeral{1},\dots,\OLId{latin-ordinary}{t}_\OLId{latin-ordinary}{m})}$ إذا وفقط إذا كان
+$\OLId{latin-looped}{R}(\OLId{latin-ordinary}{t}_\OLMathNumeral{1},\dots,\OLId{latin-ordinary}{t}_\OLId{latin-ordinary}{m})\in\Theta$.
+
+\begin{lem}\ollabel{lem:truth}
+لكل~$!A\in\Theta\cup\Xi$:
+\begin{enumerate}
+  \item إذا كان~$!A\in\Theta$، فإن~$\Sat{\OLId{latin-looped}{M}}{!A}$.
+  \item إذا كان~$!A\in\Xi$، فإن~$\Sat/{\OLId{latin-looped}{M}}{!A}$.
+\end{enumerate}
+\end{lem}
+
+\begin{proof}
+  نسلك الاستقراء على~$\depth{!A}$.
+
+افترض أولًا أن~$!A$ ذرية؛ أي إما~$!A\ident\lfalse$ وإما
+$!A\ident \OLId{latin-looped}{R}(\OLId{latin-ordinary}{t}_\OLMathNumeral{1},\dots,\OLId{latin-ordinary}{t}_\OLId{latin-ordinary}{m})$.
+
+لأن~$\Pi_\OLId{latin-ordinary}{n} \Sequent \Lambda_\OLId{latin-ordinary}{n}$ فرع فشل، لا يجوز أن تحتوي أي~$\Pi_\OLId{latin-ordinary}{n}$ على
+$\lfalse$ (وإلا كانت~$\Pi_\OLId{latin-ordinary}{n} \Sequent \Lambda_\OLId{latin-ordinary}{n}$ مسلّمة). وبحسب تعريف
+$\Struct{M}$، يكون~$\Sat{\OLId{latin-looped}{M}}{\OLId{latin-looped}{R}(\OLId{latin-ordinary}{t}_\OLMathNumeral{1},\dots,\OLId{latin-ordinary}{t}_\OLId{latin-ordinary}{m})}$ إذا وفقط إذا كان
+$\OLId{latin-looped}{R}(\OLId{latin-ordinary}{t}_\OLMathNumeral{1},\dots,\OLId{latin-ordinary}{t}_\OLId{latin-ordinary}{m})\in\Theta$. وتنتج عن الأمرين معًا العبارة: إذا كان
+$!A\in\Theta$، فإن~$\Sat{\OLId{latin-looped}{M}}{!A}$.
+
+إذا كانت~$!A$ ذرية و$!A\in\Pi_\OLId{latin-ordinary}{n}$، فإن~$!A\in\Pi_{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}}$؛ وإذا كان
+$!A\in\Lambda_\OLId{latin-ordinary}{n}$، فإن~$!A\in\Lambda_{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}}$. (وهذا ناتج من الطريقة التي
+تولّد بها خوارزمية البحث المتتاليات اللاحقة.) لذلك، إذا كان
+$!A\in\Theta\cap\Xi$، كان~$!A\in\Pi_\OLId{latin-ordinary}{n}\cap\Lambda_\OLId{latin-ordinary}{n}$ لبعض~$\OLId{latin-ordinary}{n}$. وهذا يعني
+أن~$\Pi_\OLId{latin-ordinary}{n} \Sequent \Lambda_\OLId{latin-ordinary}{n}$ مسلّمة، مع أن فرع الفشل لا يجوز أن يحتوي
+مسلّمات. إذن، بحسب الإنشاء، $!A\notin\Theta\cap\Xi$ لكل~$!A$ ذرية؛ ومن ثم
+إذا كان~$!A\in\Xi$ كان~$!A\notin\Theta$. ويستلزم تعريف~$\Struct{M}$ عندئذ
+أن~$\Sat/{\OLId{latin-looped}{M}}{!A}$.
+
+وفي خطوة الاستقراء نفرض صحة (\OLClassicalDigits{1}) و(\OLClassicalDigits{2}) لكل~!!{formula}s ذات~!!{depth}
+أدنى من~$!A$، ثم نثبت (\OLClassicalDigits{1}) و(\OLClassicalDigits{2}) لـ~$!A$ بحسب الحالات.
+
+لاحظ أولًا أنه إذا وقع~$!A^\OLId{latin-ordinary}{i}$ غير ذري في
+$\Pi_\OLId{latin-ordinary}{n} \Sequent \Lambda_\OLId{latin-ordinary}{n}$، فإنه يقع كذلك في
+$\Pi_{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}} \Sequent \Lambda_{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}}$ ما لم يكن~$\OLId{latin-ordinary}{i}$ أصغر مؤشر بين وقائع
+الصيغ غير الذرية في~$\Pi_\OLId{latin-ordinary}{n} \Sequent \Lambda_\OLId{latin-ordinary}{n}$. وكل مؤشر جديد تضيفه
+الخوارزمية أكبر من جميع المؤشرات الموجودة، ولذلك نصل في النهاية إلى
+$\Pi_\OLId{latin-ordinary}{n} \Sequent \Lambda_\OLId{latin-ordinary}{n}$ يقع فيها~$!A^\OLId{latin-ordinary}{i}$ ويكون~$\OLId{latin-ordinary}{i}$ أصغر مؤشر بين
+وقائع الصيغ غير الذرية. وفي المرحلة~$\OLId{latin-ordinary}{n}+\OLMathNumeral{1}$ تختزل الخوارزمية~$!A^\OLId{latin-ordinary}{i}$.
+وبعبارة أخرى، إذا كان~$!A\in\Theta$، فلبعض~$\OLId{latin-ordinary}{n}$ يكون
+$\Pi_\OLId{latin-ordinary}{n}=\Pi_\OLId{latin-ordinary}{n}',!A^\OLId{latin-ordinary}{i}$ ويكون~$\OLId{latin-ordinary}{i}$ أصغر مؤشر غير ذري. وإذا كان~$!A\in\Xi$،
+فلبعض~$\OLId{latin-ordinary}{n}$ يكون~$\Lambda_\OLId{latin-ordinary}{n}=\Lambda_\OLId{latin-ordinary}{n}',!A^\OLId{latin-ordinary}{i}$ ويكون~$\OLId{latin-ordinary}{i}$ أصغر مؤشر غير ذري.
+
+\begin{enumerate}
+  \item إذا كان~$!A\in\Theta$ و$!A\ident !B\land !C$، فلبعض~$\OLId{latin-ordinary}{n}$ يكون
+  $\Pi_\OLId{latin-ordinary}{n}=\Pi_\OLId{latin-ordinary}{n}',(!B\land !C)^\OLId{latin-ordinary}{i}$. وتكون
+  $\Pi_{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}}\Sequent\Lambda_{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}}$ المقدمة المقابلة لـ~\LeftR{\land}؛ أي
+  $\Pi_{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}}=\Pi_\OLId{latin-ordinary}{n}',!B^\OLId{latin-ordinary}{k},!C^{\OLId{latin-ordinary}{k}+\OLMathNumeral{1}}$. ومن ثم~$!B,!C\in\Theta$. وبفرض
+  الاستقراء~$\Sat{\OLId{latin-looped}{M}}{!B}$ و$\Sat{\OLId{latin-looped}{M}}{!C}$. وينتج من تعريف~$\Sat{\OLId{latin-looped}{M}}{}$ أن
+  $\Sat{\OLId{latin-looped}{M}}{!B\land !C}$.
+
+  \item إذا كان~$!A\in\Xi$ و$!A\ident !B\land !C$، فلبعض~$\OLId{latin-ordinary}{n}$ يكون
+  $\Lambda_\OLId{latin-ordinary}{n}=\Lambda_\OLId{latin-ordinary}{n}',!B\land !C$. وتكون
+  $\Pi_{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}}\Sequent\Lambda_{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}}$ إحدى مقدمتي~\RightR{\land} اللتين
+  نتيجتهما~$\Pi_\OLId{latin-ordinary}{n}\Sequent\Lambda_\OLId{latin-ordinary}{n}',!B\land !C$؛ أي إما
+  $\Lambda_{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}}=\Lambda_\OLId{latin-ordinary}{n}',!B^\OLId{latin-ordinary}{k}$ وإما
+  $\Lambda_{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}}=\Lambda_\OLId{latin-ordinary}{n}',!C^\OLId{latin-ordinary}{k}$. ومن ثم إما~$!B\in\Xi$ وإما
+  $!C\in\Xi$. وبفرض الاستقراء، إما~$\Sat/{\OLId{latin-looped}{M}}{!B}$ وإما
+  $\Sat/{\OLId{latin-looped}{M}}{!C}$. وينتج من تعريف~$\Sat{\OLId{latin-looped}{M}}{}$ أن
+  $\Sat/{\OLId{latin-looped}{M}}{!B\land !C}$.
+  
+  \item حالات~$!A\ident\lnot !B$ و$!A\ident !B\lor !C$ و
+  $!A\ident !B\lif !C$ مماثلة، وتُترك تمارين.
+
+  \item إذا كان~$!A\in\Theta$ و$!A\ident\lexists[\OLId{latin-ordinary}{x}][!B(\OLId{latin-ordinary}{x})]$، فلبعض~$\OLId{latin-ordinary}{n}$
+  يكون~$\Pi_\OLId{latin-ordinary}{n}=\Pi_\OLId{latin-ordinary}{n}',\lexists[\OLId{latin-ordinary}{x}][!B(\OLId{latin-ordinary}{x})]^\OLId{latin-ordinary}{i}$. وتكون
+  $\Pi_{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}}\Sequent\Lambda_{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}}$ المقدمة المقابلة لـ
+  \LeftR{\lexists}؛ أي~$\Pi_{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}}=\Pi_\OLId{latin-ordinary}{n}',!B(\OLId{latin-ordinary}{c})^\OLId{latin-ordinary}{k}$ لثابت~$\OLId{latin-ordinary}{c}$. ومن ثم
+  $!B(\OLId{latin-ordinary}{c})\in\Theta$ و$\OLId{latin-ordinary}{c}\in \OLId{latin-looped}{C}$. وبفرض الاستقراء~$\Sat{\OLId{latin-looped}{M}}{!B(\OLId{latin-ordinary}{c})}$، ومن تعريف
+  $\Sat{\OLId{latin-looped}{M}}{}$ ينتج لنا~$\Sat{\OLId{latin-looped}{M}}{\lexists[\OLId{latin-ordinary}{x}][!B(\OLId{latin-ordinary}{x})]}$.
+
+  \item إذا كان~$!A\in\Xi$ و$!A\ident\lexists[\OLId{latin-ordinary}{x}][!B(\OLId{latin-ordinary}{x})]$، فلبعض~$\OLId{latin-ordinary}{n}$ يكون
+  $\Lambda_\OLId{latin-ordinary}{n}=\Lambda_\OLId{latin-ordinary}{n}',\lexists[\OLId{latin-ordinary}{x}][!B(\OLId{latin-ordinary}{x})]^\OLId{latin-ordinary}{i}$. ولأن
+  $\lexists[\OLId{latin-ordinary}{x}][!B(\OLId{latin-ordinary}{x})]$ يبقى في يمين المتتالية المقدمة بمؤشر جديد كلما
+  اختُزل، فإنه يُختزل عددًا لامتناهيًا من المرات في يمين فرع الفشل متى وقع
+  هناك. وكل حد~$\OLId{latin-ordinary}{t}\in\Domain{\OLId{latin-looped}{M}}$ يصير في النهاية ``أول حد لا يحتوي إلا
+  ثوابت في~$\OLId{latin-looped}{C}_\OLId{latin-ordinary}{n}$ ولم يُستعمل من قبل في اختزال~$\lexists[\OLId{latin-ordinary}{x}][!B(\OLId{latin-ordinary}{x})]$ على
+  اليمين'' على فرع الفشل. ولذلك، لكل~$\OLId{latin-ordinary}{t}\in\Domain{\OLId{latin-looped}{M}}$، يكون
+  $!B(\OLId{latin-ordinary}{t})\in\Lambda_\OLId{latin-ordinary}{n}$ لبعض~$\OLId{latin-ordinary}{n}$، ومن ثم~$!B(\OLId{latin-ordinary}{t})\in\Xi$. وبفرض الاستقراء
+  $\Sat/{\OLId{latin-looped}{M}}{!B(\OLId{latin-ordinary}{t})}$ لكل~$\OLId{latin-ordinary}{t}\in\Domain{\OLId{latin-looped}{M}}$. وينتج من تعريف~$\Sat{\OLId{latin-looped}{M}}{}$ أن
+  $\Sat/{\OLId{latin-looped}{M}}{\lexists[\OLId{latin-ordinary}{x}][!B(\OLId{latin-ordinary}{x})]}$.
+
+  \item حالات~$!A\ident\lforall[\OLId{latin-ordinary}{x}][!B(\OLId{latin-ordinary}{x})]$ مماثلة، وتُترك تمارين.
+\end{enumerate}
+\end{proof}
+
+\begin{cor}\ollabel{cor:complete}
+خوارزمية البحث عن البرهان في~\Log{G3c} كاملة: فإن أجهضت أو لم تتوقف،
+كانت المتتالية الابتدائية~$\OLId{greek-variable}{Gamma} \Sequent \OLId{greek-variable}{Delta}$ غير صالحة، فلا
+!!{proof} لها.
+\end{cor}
+
+\begin{proof}
+  إذا أجهضت الخوارزمية أو لم تتوقف، وجد فرع فشل نعرف منه
+  $\Struct{M}$. ومن~\olref{lem:truth} يكون~$\Sat{\OLId{latin-looped}{M}}{!A}$ لكل
+  $!A\in\OLId{greek-variable}{Gamma}$ و$\Sat/{\OLId{latin-looped}{M}}{!A}$ لكل~$!A\in\OLId{greek-variable}{Delta}$. (تذكّر أن
+  $\Pi_\OLMathNumeral{0}=\OLId{greek-variable}{Gamma}$ و$\Lambda_\OLMathNumeral{0}=\OLId{greek-variable}{Delta}$، ومن ثم~$\OLId{greek-variable}{Gamma}\subseteq\Theta$ و
+  $\OLId{greek-variable}{Delta}\subseteq\Xi$.) وعلى هذا تكون~$\OLId{greek-variable}{Gamma} \Sequent \OLId{greek-variable}{Delta}$ غير صالحة.
+  وبسلامة~\Log{G3c}، لا يوجد لها~!!{proof}.
+\end{proof}
+
+\begin{cor}
+النسق~\Log{G3c} كامل: إذا كانت~$\OLId{greek-variable}{Gamma} \Sequent \OLId{greek-variable}{Delta}$ صالحة، فإن
+$\Log{G3c}\Proves\OLId{greek-variable}{Gamma} \Sequent \OLId{greek-variable}{Delta}$.
+\end{cor}
+
+\begin{proof}
+  نثبت المقابل النقيض. لنفرض أن
+  $\Log{G3c}\Proves/\OLId{greek-variable}{Gamma} \Sequent \OLId{greek-variable}{Delta}$. لا بد أن تُجهض خوارزمية
+  البحث عن البرهان أو ألا تتوقف، إذ لا يوجد~!!{proof} يمكن العثور عليه.
+  وبموجب~\olref{cor:complete}، تكون~$\OLId{greek-variable}{Gamma} \Sequent \OLId{greek-variable}{Delta}$ غير صالحة.
+\end{proof}
+
+\end{document}

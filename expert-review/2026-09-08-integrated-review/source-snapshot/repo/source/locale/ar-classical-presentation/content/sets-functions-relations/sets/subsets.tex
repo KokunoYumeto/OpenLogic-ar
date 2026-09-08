@@ -1,0 +1,98 @@
+% الجزء: sets-functions-relations
+% الفصل: sets
+% القسم: subsets
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid[ar]{sfr}{set}{sub}
+\olsection{المجموعات الجزئية ومجموعات القوى}
+
+\begin{explain}
+من وجوه النظر في مجموعتين أن نسأل: أكل ما في إحداهما في الأخرى؟
+وهذا وجه كثير الورود في المقارنة بين المجموعات. فلأهميته نخص الحالة
+التي يكون فيها \emph{كل ما في مجموعة موجودًا في الأخرى أيضًا} برمز.
+\end{explain}
+
+\begin{defn}[المجموعة الجزئية]
+المجموعة $\OLId{latin-looped}{A}$ \emph{مجموعة جزئية} من~$\OLId{latin-looped}{B}$ متى كان كل !!{element} من $\OLId{latin-looped}{A}$
+أيضًا !!a{element} من~$\OLId{latin-looped}{B}$، ونكتب لذلك $\OLId{latin-looped}{A} \subseteq \OLId{latin-looped}{B}$.
+فإن لم تكن $\OLId{latin-looped}{A}$ مجموعة جزئية من~$\OLId{latin-looped}{B}$ كتبنا $\OLId{latin-looped}{A} \not\subseteq \OLId{latin-looped}{B}$.
+وإن كان $\OLId{latin-looped}{A} \subseteq \OLId{latin-looped}{B}$ مع $\OLId{latin-looped}{A} \neq \OLId{latin-looped}{B}$، فكتابته $\OLId{latin-looped}{A} \subsetneq \OLId{latin-looped}{B}$،
+وتسمى $\OLId{latin-looped}{A}$ حينئذ \emph{مجموعة جزئية فعلية} من $\OLId{latin-looped}{B}$.
+\end{defn}
+
+\begin{ex}
+كل مجموعة جزئية من نفسها، والخالية $\emptyset$ جزئية من كل مجموعة.
+ومن أمثلة ذلك أن الأعداد الطبيعية الزوجية مجموعة جزئية من الأعداد
+الطبيعية، وأن $\{ \OLId{latin-ordinary}{a}, \OLId{latin-ordinary}{b} \} \subseteq \{ \OLId{latin-ordinary}{a}, \OLId{latin-ordinary}{b}, \OLId{latin-ordinary}{c} \}$.
+وأما $\{ \OLId{latin-ordinary}{a}, \OLId{latin-ordinary}{b}, \OLId{latin-ordinary}{e}
+\}$ فليست مجموعة جزئية من $\{ \OLId{latin-ordinary}{a}, \OLId{latin-ordinary}{b}, \OLId{latin-ordinary}{c} \}$.
+\end{ex}
+
+\begin{ex}
+ليست العضوية هي الجزئية: فالعدد $\OLMathNumeral{2}$ هو !!{element} في مجموعة الأعداد
+الصحيحة، وأما مجموعة الأعداد الزوجية فمجموعة جزئية منها. وقد يجتمع
+الوصفان لمجموعة بالنسبة إلى أخرى، فيصدق عليها \emph{كلا الأمرين}: كونها
+!!a{element} وكونها مجموعة جزئية. ومثاله $\{\OLMathNumeral{0}\} \in \{\OLMathNumeral{0}, \{\OLMathNumeral{0}\}\}$ مع $\{\OLMathNumeral{0}\} \subseteq \{\OLMathNumeral{0},
+\{\OLMathNumeral{0}\}\}$.
+\end{ex}
+
+معيار الامتدادية لتساوي المجموعات هو أن $\OLId{latin-looped}{A} = \OLId{latin-looped}{B}$ إذا وفقط إذا كان
+كل !!{element} من~$\OLId{latin-looped}{A}$ أيضًا !!a{element} من~$\OLId{latin-looped}{B}$، وبالعكس.
+فأما شطره الأول فهو بعينه معنى $\OLId{latin-looped}{A} \subseteq \OLId{latin-looped}{B}$: كل !!{element}
+من~$\OLId{latin-looped}{A}$ هو !!a{element} من~$\OLId{latin-looped}{B}$. وأما إذا بدّلنا $\OLId{latin-looped}{A}$ و$\OLId{latin-looped}{B}$، كان
+$\OLId{latin-looped}{B} \subseteq \OLId{latin-looped}{A}$ معناه أن كل !!{element} من~$\OLId{latin-looped}{B}$ هو !!a{element}
+من~$\OLId{latin-looped}{A}$؛ وهذا هو شطر «بالعكس». فحاصل الامتدادية أن المجموعتين تتساويان
+إذا وفقط إذا كانت كل واحدة منهما جزئية من صاحبتها.
+
+\begin{prop}
+شرط $\OLId{latin-looped}{A} = \OLId{latin-looped}{B}$ اللازم والكافي اجتماع $\OLId{latin-looped}{A} \subseteq \OLId{latin-looped}{B}$ و$\OLId{latin-looped}{B} \subseteq \OLId{latin-looped}{A}$.
+\end{prop}
+
+ولنضع هنا رمزًا آخر ينفع فيما يأتي. فقد قلنا في تعريف كون $\OLId{latin-looped}{A}$ جزئية
+من~$\OLId{latin-looped}{B}$: «كل !!{element} من~$\OLId{latin-looped}{A}$ هو \dots»، وجعلنا موضع «$\dots$»
+قولنا «!!a{element} من $\OLId{latin-looped}{B}$». وهذا \emph{النمط} من القول كثير الدوران؛
+فحسن أن نجعل له اختصارًا صوريًا.
+
+\begin{defn}\ollabel{forallxina}
+الرمز $(\forall \OLId{latin-ordinary}{x} \in \OLId{latin-looped}{A})\phi$ اختصار لـ$\forall \OLId{latin-ordinary}{x}(\OLId{latin-ordinary}{x} \in \OLId{latin-looped}{A} \lif
+\phi)$، وكذلك $(\exists \OLId{latin-ordinary}{x} \in \OLId{latin-looped}{A})\phi$ اختصار لـ$\exists \OLId{latin-ordinary}{x}(\OLId{latin-ordinary}{x}
+\in \OLId{latin-looped}{A} \land \phi)$.
+\end{defn}
+
+وعلى هذا الاصطلاح يكون $\OLId{latin-looped}{A} \subseteq \OLId{latin-looped}{B}$ إذا وفقط إذا كان $(\forall
+\OLId{latin-ordinary}{x} \in \OLId{latin-looped}{A})\OLId{latin-ordinary}{x} \in \OLId{latin-looped}{B}$.
+
+ولننظر الآن في جمع المجموعات الجزئية كلها من مجموعة معطاة في مجموعة واحدة.
+
+\begin{defn}[مجموعة القوى]
+\emph{مجموعة قوى}~$\OLId{latin-looped}{A}$ هي المجموعة الجامعة لجميع المجموعات الجزئية
+من~$\OLId{latin-looped}{A}$، ورمزها $\Pow{\OLId{latin-looped}{A}}$:
+  \[
+    \Pow{\OLId{latin-looped}{A}} = \Setabs{\OLId{latin-looped}{B}}{\OLId{latin-looped}{B} \subseteq \OLId{latin-looped}{A}}
+  \]
+\end{defn}
+
+\begin{ex}
+إذا طلبنا جميع جزئيات $\{ \OLId{latin-ordinary}{a}, \OLId{latin-ordinary}{b}, \OLId{latin-ordinary}{c} \}$ وجدناها:
+$\emptyset$، و$\{\OLId{latin-ordinary}{a} \}$، و$\{\OLId{latin-ordinary}{b}\}$، و$\{\OLId{latin-ordinary}{c}\}$، و$\{\OLId{latin-ordinary}{a}, \OLId{latin-ordinary}{b}\}$، و$\{\OLId{latin-ordinary}{a}, \OLId{latin-ordinary}{c}\}$، و$\{\OLId{latin-ordinary}{b},
+\OLId{latin-ordinary}{c}\}$، و$\{\OLId{latin-ordinary}{a}, \OLId{latin-ordinary}{b}, \OLId{latin-ordinary}{c}\}$. فالمجموعة التي تجمع هذه كلها هي
+$\Pow{\{\OLId{latin-ordinary}{a},\OLId{latin-ordinary}{b},\OLId{latin-ordinary}{c}\}}$، أي:
+\[
+\Pow{\{ \OLId{latin-ordinary}{a}, \OLId{latin-ordinary}{b}, \OLId{latin-ordinary}{c} \}} = \{\emptyset, \{\OLId{latin-ordinary}{a} \}, \{\OLId{latin-ordinary}{b}\}, \{\OLId{latin-ordinary}{c}\}, \{\OLId{latin-ordinary}{a}, \OLId{latin-ordinary}{b}\},
+\{\OLId{latin-ordinary}{b}, \OLId{latin-ordinary}{c}\}, \{\OLId{latin-ordinary}{a}, \OLId{latin-ordinary}{c}\}, \{\OLId{latin-ordinary}{a}, \OLId{latin-ordinary}{b}, \OLId{latin-ordinary}{c}\}\}
+\]
+\end{ex}
+
+\begin{prob}
+اذكر جزئيات $\{\OLId{latin-ordinary}{a}, \OLId{latin-ordinary}{b}, \OLId{latin-ordinary}{c}, \OLId{latin-ordinary}{d}\}$ جميعًا.
+\end{prob}
+
+\begin{prob}
+بيّن أن $\OLId{latin-looped}{A}$ إذا كان عدد !!{element}sها $\OLId{latin-ordinary}{n}$، كان عدد !!{element}s
+المجموعة $\Pow{\OLId{latin-looped}{A}}$ هو $\OLMathNumeral{2}^\OLId{latin-ordinary}{n}$.
+\end{prob}
+
+\end{document}

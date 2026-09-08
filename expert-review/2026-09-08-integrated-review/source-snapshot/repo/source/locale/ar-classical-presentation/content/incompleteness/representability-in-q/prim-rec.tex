@@ -1,0 +1,57 @@
+% Part: incompleteness
+% Chapter: representability-in-q
+% Section: prim-rec
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{req}{pri}
+\olsection{محاكاة العودية البدائية}
+
+وبدالة بيتا يتبين كيف يقوم التصغير المنتظم مقام التعريف بالعودية
+البدائية. لتكن الدالتان $\OLId{latin-ordinary}{f}(\vec \OLId{latin-ordinary}{x})$ و$\OLId{latin-ordinary}{g}(\vec \OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y},\OLId{latin-ordinary}{z})$ معطاتين.
+فالدالة~$\OLId{latin-ordinary}{h}(\vec \OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y})$ المبنية من $\OLId{latin-ordinary}{f}$ و$\OLId{latin-ordinary}{g}$ بالعودية البدائية تحقق:
+\begin{align*}
+\OLId{latin-ordinary}{h}(\vec \OLId{latin-ordinary}{x}, \OLMathNumeral{0}) & =  \OLId{latin-ordinary}{f}(\vec \OLId{latin-ordinary}{x}) \\
+\OLId{latin-ordinary}{h}(\vec \OLId{latin-ordinary}{x}, \OLId{latin-ordinary}{y}+\OLMathNumeral{1}) & =  \OLId{latin-ordinary}{g}(\vec \OLId{latin-ordinary}{x}, \OLId{latin-ordinary}{y}, \OLId{latin-ordinary}{h}(\vec \OLId{latin-ordinary}{x}, \OLId{latin-ordinary}{y})).
+\end{align*}
+والمطلوب أن نعرّف $\OLId{latin-ordinary}{h}$ من $\OLId{latin-ordinary}{f}$ و$\OLId{latin-ordinary}{g}$ بالتركيب والتصغير المنتظم وحدهما.
+ولنا في ذلك الدوال الأساسية وما تعرّف منها بالعمليتين نفسيهما،
+ومن جملتها~$\beta$.
+
+\begin{lem}
+\ollabel{lem:prim-rec}
+كل دالة $\OLId{latin-ordinary}{h}$ تعرّف من $\OLId{latin-ordinary}{f}$ و$\OLId{latin-ordinary}{g}$ بالعودية البدائية يمكن تعريفها من
+$\OLId{latin-ordinary}{f}$ و$\OLId{latin-ordinary}{g}$ والدوال $\Zero$ و$\Succ$ و$\Proj{\OLId{latin-ordinary}{n}}{\OLId{latin-ordinary}{i}}$ و$\Add$
+و$\Mult$ و$\Char{=}$، بالتركيب والتصغير المنتظم.
+\end{lem}
+
+\begin{proof}
+نبدأ بدالة مساعدة $\hat \OLId{latin-ordinary}{h}(\vec \OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y})$، نجعل قيمتها أصغر عدد~$\OLId{latin-ordinary}{d}$
+يكون $\OLId{latin-ordinary}{d}$ فيه شفرةً لمتتالية تستوفي الشرطين:
+\begin{enumerate}
+\item $(\OLId{latin-ordinary}{d})_\OLMathNumeral{0}=\OLId{latin-ordinary}{f}(\vec \OLId{latin-ordinary}{x})$،
+\item ولكل $\OLId{latin-ordinary}{i}<\OLId{latin-ordinary}{y}$ تصدق $(\OLId{latin-ordinary}{d})_{\OLId{latin-ordinary}{i}+\OLMathNumeral{1}}=\OLId{latin-ordinary}{g}(\vec \OLId{latin-ordinary}{x},\OLId{latin-ordinary}{i},(\OLId{latin-ordinary}{d})_\OLId{latin-ordinary}{i})$،
+\end{enumerate}
+والكتابة $(\OLId{latin-ordinary}{d})_\OLId{latin-ordinary}{i}$ هنا اختصار لـ$\beta(\OLId{latin-ordinary}{d},\OLId{latin-ordinary}{i})$.
+فالمحصّل أن $\hat \OLId{latin-ordinary}{h}$ تعيد شفرة المتتالية
+$\tuple{\OLId{latin-ordinary}{h}(\vec \OLId{latin-ordinary}{x},\OLMathNumeral{0}),\OLId{latin-ordinary}{h}(\vec \OLId{latin-ordinary}{x},\OLMathNumeral{1}),\dots,\OLId{latin-ordinary}{h}(\vec \OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y})}$.
+ومن ثم نكتب $\hat \OLId{latin-ordinary}{h}$ هكذا:
+\[
+\hat \OLId{latin-ordinary}{h}(\vec \OLId{latin-ordinary}{x}, \OLId{latin-ordinary}{y}) = \umin{\OLId{latin-ordinary}{d}}{(\beta(\OLId{latin-ordinary}{d},\OLMathNumeral{0}) = \OLId{latin-ordinary}{f}(\vec \OLId{latin-ordinary}{x}) \land \bforall{\OLId{latin-ordinary}{i} <
+  \OLId{latin-ordinary}{y}}{\beta(\OLId{latin-ordinary}{d},\OLId{latin-ordinary}{i}+\OLMathNumeral{1}) = \OLId{latin-ordinary}{g}(\vec \OLId{latin-ordinary}{x}, \OLId{latin-ordinary}{i},\beta(\OLId{latin-ordinary}{d},\OLId{latin-ordinary}{i})})}.
+\]
+فليس في هذا التعريف استعمال للعودية البدائية؛ وإنما فيه تصغير،
+وانتظام ما يجري عليه التصغير مضمون بلمة دالة بيتا
+\olref[bet]{lem:beta}.
+
+وبعد هذا التعريف تكون
+\[
+\OLId{latin-ordinary}{h}(\vec \OLId{latin-ordinary}{x}, \OLId{latin-ordinary}{y}) = \beta(\hat \OLId{latin-ordinary}{h}(\vec \OLId{latin-ordinary}{x}, \OLId{latin-ordinary}{y}), \OLId{latin-ordinary}{y}),
+\]
+فيتم تعريف $\OLId{latin-ordinary}{h}$ من الدالتين المعطاتين والدوال الأساسية، ولا يستعمل فيه
+إلا التركيب والتصغير المنتظم.
+\end{proof}
+
+\end{document}

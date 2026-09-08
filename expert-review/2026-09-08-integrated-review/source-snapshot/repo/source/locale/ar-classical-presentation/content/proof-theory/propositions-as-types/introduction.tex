@@ -1,0 +1,127 @@
+% part: intuitionistic-logic
+% chapter: propositions-as-types
+% section: introduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{pty}{int}
+
+\olsection{تمهيد في مقابلة القضايا بالأنماط}
+
+حساب لامبدا نموذج بسيط للحوسبة. وهو يعمل على حدود مبنية من المتغيرات. فإذا
+كان~$\OLId{latin-looped}{N}$ و$\OLId{latin-looped}{M}$ حدين، كان~$(NM)$ حدًا كذلك (``تطبيق~$\OLId{latin-looped}{N}$ على~$\OLId{latin-looped}{M}$''). وإذا كان
+$\OLId{latin-looped}{N}$ حدًا، كان~$\lambd[\OLId{latin-ordinary}{x}][\OLId{latin-looped}{N}]$ حدًا. وإذا احتوى~$\OLId{latin-looped}{N}$ المتغير~$\OLId{latin-ordinary}{x}$، فإن وقائع
+$\OLId{latin-ordinary}{x}$ المقابلة في~$\lambd[\OLId{latin-ordinary}{x}][\OLId{latin-looped}{N}]$ تكون مقيّدة بالمعامل~$\lambd[\OLId{latin-ordinary}{x}]$، فلا تعود
+حرة. ويقال إن حدًا من الصورة~$(\lambd[\OLId{latin-ordinary}{x}][\OLId{latin-looped}{N}]\OLId{latin-looped}{M})$ \emph{ينقبض بيتا} إلى
+$\Subst{\OLId{latin-looped}{N}}{\OLId{latin-looped}{M}}{\OLId{latin-ordinary}{x}}$، أي إلى نتيجة استبدال~$\OLId{latin-looped}{M}$ بكل وقوع حر لـ~$\OLId{latin-ordinary}{x}$ في~$\OLId{latin-looped}{N}$.
+ويتحول~$\OLId{latin-looped}{N}$ بتحويل بيتا إلى~$\OLId{latin-looped}{N}'$ إذا نتج~$\OLId{latin-looped}{N}'$ من~$\OLId{latin-looped}{N}$ بانقباض بيتا لحد جزئي،
+ونكتب~$\OLId{latin-looped}{N}\redone \OLId{latin-looped}{N}'$. والحوسبة في حساب~$\lambd$ متتالية
+$\OLId{latin-looped}{N}\redone \OLId{latin-looped}{N}_\OLMathNumeral{1}\redone \OLId{latin-looped}{N}_\OLMathNumeral{2}\redone\dots$. فإذا انتهت المتتالية بحد~$\OLId{latin-looped}{N}_\OLId{latin-ordinary}{k}$ لا
+يمكن انقباض بيتا لأي حد جزئي منه، سُمّي \emph{سويًا} أو صورة سوية لـ~$\OLId{latin-looped}{N}$.
+وفكر في الحوسبة في حساب~$\lambd$ بوصفها متتاليات كهذه. تتوقف الحوسبة إذا
+نتجت صورة سوية، وتكون تلك الصورة ناتج الحوسبة. ويتبين أن هذا النموذج البسيط
+تام تورنغ: فكل دالة جزئية عودية يمكن حسابها بحد في حساب~$\lambd$.
+
+اكتشف هاسكل كاري ووليام هوارد، كل على حدة، تشابهًا وثيقًا بين الاستنباط
+الطبيعي وحساب~$\lambd$. فالحد~$\lambd[\OLId{latin-ordinary}{x}][\OLId{latin-looped}{N}]$ دالة بحسب الحدس: المتغير~$\OLId{latin-ordinary}{x}$
+هو المعطى، و$\OLId{latin-looped}{N}$ يبين كيف نحسب القيمة انطلاقًا منه. ويكون
+$(\lambd[\OLId{latin-ordinary}{x}][\OLId{latin-looped}{N}]\OLId{latin-looped}{M})$ تطبيق الدالة~$\lambd[\OLId{latin-ordinary}{x}][\OLId{latin-looped}{N}]$ على المعطى~$\OLId{latin-looped}{M}$، ويبين
+انقباض بيتا كيفية تقييمه: نستبدل~$\OLId{latin-looped}{M}$ بـ~$\OLId{latin-ordinary}{x}$ في~$\OLId{latin-looped}{N}$، ثم نواصل تقييم الحد
+الناتج. فكر الآن في هذه الدوال بوصفها ذات مجال ومدى ثابتين. فإذا كان مجال
+$\lambd[\OLId{latin-ordinary}{x}][\OLId{latin-looped}{N}]$ هو~$\OLId{latin-looped}{A}$ ومداه~$\OLId{latin-looped}{B}$، وجب أن نعد~$\OLId{latin-ordinary}{x}$ متغيرًا لا يأخذ إلا
+معطيات من~$\OLId{latin-looped}{A}$، وأن نعد~$\OLId{latin-looped}{N}$ منتجًا قيمًا من~$\OLId{latin-looped}{B}$. ولذلك لا يكون
+$(\lambd[\OLId{latin-ordinary}{x}][\OLId{latin-looped}{N}]\OLId{latin-looped}{M})$ ذا معنى إلا إذا كان~$\lambd[\OLId{latin-ordinary}{x}][\OLId{latin-looped}{N}]$ دالة~$\OLId{latin-looped}{A}\to \OLId{latin-looped}{B}$ وكان
+$\OLId{latin-looped}{M}\in \OLId{latin-looped}{A}$. وإذا أضفنا هذه المعلومات إلى حساب~$\lambd$ حصلنا على حساب
+$\lambd$ \emph{المنمّط}. وليست كل عبارة~$(\lambd[\OLId{latin-ordinary}{x}][\OLId{latin-looped}{N}]\OLId{latin-looped}{M})$ مشروعة في
+الحساب المنمّط، بل تقتصر المشروعة على العبارات التي تتلاءم فيها ``أنماط''
+$\lambd[\OLId{latin-ordinary}{x}][\OLId{latin-looped}{N}]$ و$\OLId{latin-looped}{M}$؛ أي يكون نمط~$\lambd[\OLId{latin-ordinary}{x}][\OLId{latin-looped}{N}]$ هو~$\OLId{latin-looped}{A}\to \OLId{latin-looped}{B}$ ونمط~$\OLId{latin-looped}{M}$
+هو~$\OLId{latin-looped}{A}$. ولا يكون نمط~$\lambd[\OLId{latin-ordinary}{x}][\OLId{latin-looped}{N}]$ هو~$\OLId{latin-looped}{A}\to \OLId{latin-looped}{B}$ إلا إذا كان نمط~$\OLId{latin-ordinary}{x}$ هو
+$\OLId{latin-looped}{A}$ ونمط~$\OLId{latin-looped}{N}$ هو~$\OLId{latin-looped}{B}$. وبوجه عام ليست كل عبارة~$(\OLId{latin-looped}{M}_\OLMathNumeral{1}\OLId{latin-looped}{M}_\OLMathNumeral{2})$ مشروعة، بل
+تقتصر الحدود المشروعة منها على ما كان فيه نمط~$\OLId{latin-looped}{M}_\OLMathNumeral{1}$ هو~$\OLId{latin-looped}{A}\to \OLId{latin-looped}{B}$ ونمط
+$\OLId{latin-looped}{M}_\OLMathNumeral{2}$ هو~$\OLId{latin-looped}{A}$؛ وعندئذ يكون نمط~$(\OLId{latin-looped}{M}_\OLMathNumeral{1}\OLId{latin-looped}{M}_\OLMathNumeral{2})$ هو~$\OLId{latin-looped}{B}$.
+
+تقابل قواعد التنميط هذه بوضوح~!!{derivation}s في الاستنباط الطبيعي، حيث
+تمثّل الأنماط~!!{formula}s، وتقابل~!!{derivation}s نفسها حدود~$\lambd$.
+فمثلًا، يقابل~!!a{derivation} لـ~$!A\lif !B$ حدًا
+$\lambd[\typeof{\OLId{latin-ordinary}{x}}{!A}][\OLId{latin-looped}{N}]$ نمطه الدالي~$!A\lif !B$. وتقابل قواعد
+الاستدلال في الاستنباط الطبيعي قواعد التنميط في حساب لامبدا المنمّط، مثلًا:
+\begin{prooftree}
+  \AxiomC{$\Discharge{!A}{\OLId{latin-ordinary}{x}}$}
+  \DeduceC{$!B$}
+  \DischargeRule{\Intro\lif}{x}
+  \UnaryInfC{$!A \lif !B$}
+  \DisplayProof\bottomAlignProof
+  \quad\text{تقابل}\quad
+  \Axiom$\OLId{latin-ordinary}{x}: !A \fCenter \OLId{latin-looped}{N}: !B$
+  \UnaryInf$ \fCenter \lambd[\typeof{\OLId{latin-ordinary}{x}}{!A}][\OLId{latin-looped}{N}] : !A \lif !B$
+\end{prooftree}
+وتعني القاعدة على اليمين أنه إذا كان نمط~$\OLId{latin-ordinary}{x}$ هو~$!A$ ونمط~$\OLId{latin-looped}{N}$ هو~$!B$،
+كان نمط~$\lambd[\typeof{\OLId{latin-ordinary}{x}}{!A}][\OLId{latin-looped}{N}]$ هو~$!A\lif !B$.
+
+تقابل قاعدة~$\Elim\lif$ قاعدة التنميط لحدود التطبيق، أي:
+\[
+  \AxiomC{$!A \lif !B$}
+  \AxiomC{$!A$}
+  \RightLabel{\Elim\lif}
+  \BinaryInfC{$!B$}
+  \DisplayProof
+  \quad\text{تقابل}\quad
+  \Axiom$\fCenter \OLId{latin-looped}{M}_\OLMathNumeral{1}: !A \lif !B$
+  \Axiom$\fCenter \OLId{latin-looped}{M}_\OLMathNumeral{2}: !A$
+  \BinaryInf$ \fCenter (\OLId{latin-looped}{M}_\OLMathNumeral{1}\OLId{latin-looped}{M}_\OLMathNumeral{2}) : !B$
+  \DisplayProof
+\]
+إذا تبعت قاعدةُ~$\Elim\lif{}$ قاعدةَ~$\Intro\lif{}$ فورًا، أمكن تبسيط
+!!{derivation}:
+\begin{gather*}
+  \AxiomC{$\Discharge{!A}{\OLId{latin-ordinary}{x}}$}
+  \DeduceC{$!B$}
+  \DischargeRule{\Intro\lif}{\OLId{latin-ordinary}{x}}
+  \UnaryInfC{$!A \lif !B$}
+  \AxiomC{}
+  \DeduceC{$!A$}
+  \RightLabel{\Elim\lif}
+  \BinaryInfC{$!B$}
+  \DisplayProof
+  \quad\redone\quad
+  \AxiomC{}
+  \DeduceC{$!A$}
+  \DeduceC{$!B$}
+  \DisplayProof
+\end{gather*}
+وهذا يقابل انقباض بيتا لحدود لامبدا:
+\[
+(\lambd[\typeof{\OLId{latin-ordinary}{x}}{!A}][\OLId{latin-looped}{N}]\OLId{latin-looped}{M}) \quad\redone\quad
+\Subst{\OLId{latin-looped}{N}}{\OLId{latin-looped}{M}}{\OLId{latin-ordinary}{x}}.
+\]
+
+وتوجد مقابلات مماثلة بين قواعد~$\land$ والأنماط ``الضربية''، وبين قواعد
+$\lor$ والأنماط ``الجمعية''.
+
+تسمى هذه المقابلة بين حدود حساب لامبدا البسيط المنمّط و!!{derivation}s
+الاستنباط الطبيعي مقابلة ``كاري--هوارد'' أو ``البراهين بوصفها برامج'' أو
+``القضايا بوصفها أنماطًا''. وإلى جانب مقابلة~!!{formula}s (القضايا) للأنماط
+والبراهين للحدود، يمكن تلخيص المقابلات هكذا:
+\begin{center}
+  \begin{tabular}{c c}
+    المنطق & البرنامج \\
+    \hline
+    القضية/!!{formula} & النمط \\
+    البرهان & الحد \\
+    الفرض & المتغير \\
+    الفرض المفرّغ & المتغير المقيّد \\
+    الفرض غير المفرّغ & المتغير الحر \\
+    $!A \lif !B$ & النمط الدالي \\
+    $!A \land !B$ & النمط الضربي \\
+    $!A \lor !B$ & النمط الجمعي \\
+    $\lfalse$ & النمط الخالي \\
+    \hline
+  \end{tabular}
+\end{center}
+
+مقابلة كاري--هوارد إحدى ركائز مساعدات البرهان الآلية وفاحصات أنماط البرامج،
+لأن فحص برهان يشهد لقضية، كما فعلنا أعلاه، لا يعدو فحص ما إذا كان برنامج
+(حد) يحمل النمط المعلن.
+\end{document}

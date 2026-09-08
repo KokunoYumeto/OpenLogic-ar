@@ -1,0 +1,265 @@
+% Part: model-theory
+% Chapter: models-of-arithmetic
+% Section: models-of-pa
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{mar}{mpa}
+\section{نماذج $\Th{PA}$}
+
+\begin{explain}
+كل نموذج غير قياسي لـ~$\Th{TA}$ نموذج لـ~$\Th{PA}$ أيضًا.
+وقد علمنا وجود نماذج غير قياسية لـ~$\Th{TA}$، فيثبت وجودها
+لـ~$\Th{PA}$. وعلمنا أن فيها «أعدادًا» غير قياسية، أي
+!!{element}s من المجال تأتي «بعد» جميع الأعداد القياسية.
+فكيف تنتظم هذه العناصر، وما مقدار كثرتها؟ قد رأينا أن
+النظرية الأضعف~$\Th{Q}$ تقبل نموذجًا ليس فيه إلا عدد غير
+قياسي واحد. ولكن تلك الـ!!{structure}s البسيطة لا تصلح
+نماذج لـ$\Th{PA}$ ولا لـ$\Th{TA}$.
+
+والسبيل إلى معرفة بنية نماذج $\Th{PA}$ أو $\Th{TA}$ أن ننظر
+فيما يكون !!{derivable} فيهما. فإن $\Th{PA}$ وحدها تثبت
+$\lforall[\OLId{latin-ordinary}{x}][\eq/[\OLId{latin-ordinary}{x}][\OLId{latin-ordinary}{x}']]$ و
+$\lforall[\OLId{latin-ordinary}{x}][\lforall[\OLId{latin-ordinary}{y}][\eq[(\OLId{latin-ordinary}{x}+\OLId{latin-ordinary}{y})][(\OLId{latin-ordinary}{y}+\OLId{latin-ordinary}{x})]]]$؛ فالبنى البسيطة
+التي تكذب فيها هذه الـ!!{sentence}s خارجة من نماذج~$\Th{PA}$.
+
+لنأخذ~$\Struct{M}$ نموذجًا لـ~$\Th{PA}$. كلما كان
+$\Th{PA} \Proves !A$، كان $\Sat{\OLId{latin-looped}{M}}{!A}$.
+ونعود إلى الاختصارات: $\nszero$ لـ$\Assign{\Obj{0}}{\OLId{latin-looped}{M}}$،
+و$\nssucc$ لـ$\Assign{\prime}{\OLId{latin-looped}{M}}$، و$\nsplus$ لـ$\Assign{+}{\OLId{latin-looped}{M}}$،
+و$\nstimes$ لـ$\Assign{\times}{\OLId{latin-looped}{M}}$، و$\nsless$ لـ$\Assign{<}{\OLId{latin-looped}{M}}$.
+فكل !!{sentence}~$!A$ تعبّر عن شرط في
+$\nszero$ و$\nssucc$ و$\nsplus$ و$\nstimes$ و$\nsless$؛
+ومتى كان $\Sat{\OLId{latin-looped}{M}}{!A}$، وجب تحقق الشرط.
+فـ $\Sat{\OLId{latin-looped}{M}}{!Q_\OLMathNumeral{1}}$، أي
+$\Sat{\OLId{latin-looped}{M}}{\lforall[\OLId{latin-ordinary}{x}][\lforall[\OLId{latin-ordinary}{y}][(\eq[\OLId{latin-ordinary}{x}'][\OLId{latin-ordinary}{y}'] \lif \eq[\OLId{latin-ordinary}{x}][\OLId{latin-ordinary}{y}])]]}$،
+يوجب، مثلًا، أن تكون $\nssucc$~!!{injective}.
+\end{explain}
+
+\begin{prop}
+تكون $\nsless$ في $\Struct{M}$ ترتيبًا خطيًا صارمًا، أي إنها تحقق:
+\begin{enumerate}
+\item ليس $\OLId{latin-ordinary}{x} \nsless \OLId{latin-ordinary}{x}$ لأي~$\OLId{latin-ordinary}{x} \in \Domain{\OLId{latin-looped}{M}}$.
+\item إذا كان $\OLId{latin-ordinary}{x} \nsless \OLId{latin-ordinary}{y}$ و$\OLId{latin-ordinary}{y} \nsless \OLId{latin-ordinary}{z}$، فإن $\OLId{latin-ordinary}{x} \nsless \OLId{latin-ordinary}{z}$.
+\item لأي $\OLId{latin-ordinary}{x} \neq \OLId{latin-ordinary}{y}$، إما $\OLId{latin-ordinary}{x} \nsless \OLId{latin-ordinary}{y}$ وإما $\OLId{latin-ordinary}{y} \nsless \OLId{latin-ordinary}{x}$.
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+تثبت $\Th{PA}$ ما يأتي:
+\begin{enumerate}
+\item $\lforall[\OLId{latin-ordinary}{x}][\lnot \OLId{latin-ordinary}{x} < \OLId{latin-ordinary}{x}]$
+\item $\lforall[\OLId{latin-ordinary}{x}][\lforall[\OLId{latin-ordinary}{y}][\lforall[\OLId{latin-ordinary}{z}][((\OLId{latin-ordinary}{x} < \OLId{latin-ordinary}{y} \land \OLId{latin-ordinary}{y} < \OLId{latin-ordinary}{z}) \lif \OLId{latin-ordinary}{x} < \OLId{latin-ordinary}{z})]]]$
+\item $\lforall[\OLId{latin-ordinary}{x}][\lforall[\OLId{latin-ordinary}{y}][((\OLId{latin-ordinary}{x} < \OLId{latin-ordinary}{y} \lor \OLId{latin-ordinary}{y} < \OLId{latin-ordinary}{x}) \lor \eq[\OLId{latin-ordinary}{x}][\OLId{latin-ordinary}{y}])]]$
+\end{enumerate}
+\end{proof}
+
+\begin{prop}
+\ollabel{prop:M-discrete} $\nszero$ أصغر !!{element} في~$\Domain{\OLId{latin-looped}{M}}$
+بحسب ترتيب~$\nsless$. ولكل~$\OLId{latin-ordinary}{x}$، يكون $\OLId{latin-ordinary}{x} \nsless \OLId{latin-ordinary}{x}^\nssucc$، ويكون
+$\OLId{latin-ordinary}{x}^\nssucc$ أصغر !!{element} بحسب~$\nsless$ له هذه الخاصية. ولكل
+$\OLId{latin-ordinary}{x} \neq \nszero$ يوجد $\OLId{latin-ordinary}{y}$ وحيد بحيث $\OLId{latin-ordinary}{y}^\nssucc = \OLId{latin-ordinary}{x}$. (نسمي $\OLId{latin-ordinary}{y}$
+«سلف»~$\OLId{latin-ordinary}{x}$ في~$\Struct{M}$، ونرمز إليه بـ~$^\nssucc \OLId{latin-ordinary}{x}$.)
+\end{prop}
+
+\begin{proof}
+تمرين.
+\end{proof}
+
+\begin{prob}
+جد !!{sentence}s في~$\Lang{L_A}$ تكون !!{derivable} في~$\Th{PA}$
+(ومن ثم صادقة في~$\Struct{N}$) وتضمن خصائص $\nszero$ و$\nssucc$
+و$\nsless$ الواردة في
+\olref[mod][mar][mpa]{prop:M-discrete}.
+\end{prob}
+
+\begin{prop}
+كل الـ!!{element}s القياسية في~$\Struct{M}$ أصغر (بحسب~$\nsless$) من
+جميع الـ!!{element}s غير القياسية.
+\end{prop}
+
+\begin{proof}
+لنكتب $\OLId{latin-ordinary}{n}$ اختصارًا لـ$\Value{\num{\OLId{latin-ordinary}{n}}}{\OLId{latin-looped}{M}}$، وهو
+!!{element} قياسي في~$\Struct{M}$. فإن $\Th{Q}$ وحدها
+تثبت، لكل~$\OLId{latin-ordinary}{n} \in \Nat$، الصيغة
+$\lforall[\OLId{latin-ordinary}{x}][(\OLId{latin-ordinary}{x} < \num{\OLId{latin-ordinary}{n}}' \lif (\eq[\OLId{latin-ordinary}{x}][\num{\OLMathNumeral{0}}] \lor
+  \eq[\OLId{latin-ordinary}{x}][\num{\OLMathNumeral{1}}] \lor \dots \lor \eq[\OLId{latin-ordinary}{x}][\num{\OLId{latin-ordinary}{n}}]))]$.
+وليس ثمة !!{element}s قبل $\nszero$ بحسب~$\nsless$.
+فإذا كان $\OLId{latin-ordinary}{n}$ قياسيًا و$\OLId{latin-ordinary}{x}$ غير قياسي، امتنع $\OLId{latin-ordinary}{x} \nsless \OLId{latin-ordinary}{n}$.
+وغير القياسي، بالتعريف، لا يساوي $\Value{\num{\OLId{latin-ordinary}{n}}}{\OLId{latin-looped}{M}}$
+لأي $\OLId{latin-ordinary}{n} \in \Nat$؛ فيمتنع التساوي أيضًا، أي $\OLId{latin-ordinary}{x} \neq \OLId{latin-ordinary}{n}$.
+فلم يبق، لخطية الترتيب $\nsless$، إلا $\OLId{latin-ordinary}{n} \nsless \OLId{latin-ordinary}{x}$.
+\end{proof}
+
+\begin{prop}
+كل !!{element} غير قياسي~$\OLId{latin-ordinary}{x}$ في~$\Domain{\OLId{latin-looped}{M}}$ هو عنصر في المجموعة الجزئية
+\[
+\dots ^{\nssucc\nssucc\nssucc}\OLId{latin-ordinary}{x} \nsless ^{\nssucc\nssucc}\OLId{latin-ordinary}{x} \nsless
+^{\nssucc}\OLId{latin-ordinary}{x} \nsless \OLId{latin-ordinary}{x} \nsless \OLId{latin-ordinary}{x}^{\nssucc} \nsless \OLId{latin-ordinary}{x}^{\nssucc\nssucc}
+\nsless \OLId{latin-ordinary}{x}^{\nssucc\nssucc\nssucc} \nsless \dots
+\]
+ونسمي هذه المجموعة الجزئية \emph{كتلة~$\OLId{latin-ordinary}{x}$}، ونرمز إليها بـ$[\OLId{latin-ordinary}{x}]$.
+وليس لها أصغر عنصر ولا أكبر !!{element}. ويمكن وصفها بأنها مجموعة
+كل $\OLId{latin-ordinary}{y} \in \Domain{\OLId{latin-looped}{M}}$ بحيث يوجد عدد قياسي~$\OLId{latin-ordinary}{n}$ يحقق
+$\OLId{latin-ordinary}{x} \nsplus \OLId{latin-ordinary}{n} = \OLId{latin-ordinary}{y}$ أو $\OLId{latin-ordinary}{y} \nsplus \OLId{latin-ordinary}{n} = \OLId{latin-ordinary}{x}$.
+\end{prop}
+
+\begin{proof}
+وجود~$[\OLId{latin-ordinary}{x}]$ حاصل، لأن كل !!{element} غير قياسي~$\OLId{latin-ordinary}{y}$
+في~$\Domain{\OLId{latin-looped}{M}}$ له خلف واحد~$\OLId{latin-ordinary}{y}^\nssucc$ وسلف واحد
+$^\nssucc \OLId{latin-ordinary}{y}$. وإذا أخذنا !!{element}s متعاقبة $\OLId{latin-ordinary}{y}$ و$\OLId{latin-ordinary}{y}^\nssucc$،
+كان $\OLId{latin-ordinary}{y} \nsless \OLId{latin-ordinary}{y}^\nssucc$، وكان $\OLId{latin-ordinary}{y}^\nssucc$ أول !!{element}
+في $\Domain{\OLId{latin-looped}{M}}$ بحسب~$\nsless$ يأتي بعد $\OLId{latin-ordinary}{y}$ بحسب~$\nsless$.
+ولدوام $^\nssucc \OLId{latin-ordinary}{y} \nsless \OLId{latin-ordinary}{y}$ و$\OLId{latin-ordinary}{y} \nsless \OLId{latin-ordinary}{y}^\nssucc$،
+لا أصغر في $[\OLId{latin-ordinary}{x}]$ ولا أكبر !!{element}. وإذا كان
+$\OLId{latin-ordinary}{y} \in [\OLId{latin-ordinary}{x}]$، كان $\OLId{latin-ordinary}{x} \in [\OLId{latin-ordinary}{y}]$، إذ لا بد من
+$\OLId{latin-ordinary}{y}^{\nssucc\dots\nssucc} = \OLId{latin-ordinary}{x}$ أو
+$\OLId{latin-ordinary}{x}^{\nssucc\dots\nssucc} = \OLId{latin-ordinary}{y}$. والحالة
+$\OLId{latin-ordinary}{y}^{\nssucc\dots\nssucc} = \OLId{latin-ordinary}{x}$، حيث $\OLId{latin-ordinary}{n}$ عدد رموز~$\nssucc$،
+تكافئ $\OLId{latin-ordinary}{y} \nsplus \OLId{latin-ordinary}{n} = \OLId{latin-ordinary}{x}$؛ فإن
+$\Th{PA} \Proves \lforall[\OLId{latin-ordinary}{x}][\eq[\OLId{latin-ordinary}{x}^{\prime\dots\prime}][(\OLId{latin-ordinary}{x} +
+    \num{\OLId{latin-ordinary}{n}})]]$، متى كان $\OLId{latin-ordinary}{n}$ عدد رموز~$\prime$.
+\end{proof}
+
+\begin{prop}
+إذا كان $[\OLId{latin-ordinary}{x}] \neq [\OLId{latin-ordinary}{y}]$ و$\OLId{latin-ordinary}{x} \nsless \OLId{latin-ordinary}{y}$، فإن $\OLId{latin-ordinary}{u} \nsless \OLId{latin-ordinary}{v}$ لكل
+$\OLId{latin-ordinary}{u} \in [\OLId{latin-ordinary}{x}]$ ولكل $\OLId{latin-ordinary}{v} \in [\OLId{latin-ordinary}{y}]$.
+\end{prop}
+
+\begin{proof}
+نستند أولًا إلى
+$\Th{PA} \Proves \lforall[\OLId{latin-ordinary}{x}][\lforall[\OLId{latin-ordinary}{y}][(\OLId{latin-ordinary}{x} < \OLId{latin-ordinary}{y} \lif (\OLId{latin-ordinary}{x}' < \OLId{latin-ordinary}{y}
+    \lor \OLId{latin-ordinary}{x}' = \OLId{latin-ordinary}{y}))]]$. فمن $\OLId{latin-ordinary}{u} \nsless \OLId{latin-ordinary}{v}$ ينتج
+$\OLId{latin-ordinary}{u} \nsplus \OLId{latin-ordinary}{n}^\nssucc \nsless \OLId{latin-ordinary}{v}$ لكل~$\OLId{latin-ordinary}{n}$، ما دام $[\OLId{latin-ordinary}{u}] \neq [\OLId{latin-ordinary}{v}]$.
+
+نثبت أن كل $\OLId{latin-ordinary}{u} \in [\OLId{latin-ordinary}{x}]$ يسبق~$\OLId{latin-ordinary}{y}$ بحسب~$\nsless$.
+لدينا $\OLId{latin-ordinary}{x} \nsless \OLId{latin-ordinary}{y}$ بالفرض. فإن كان $\OLId{latin-ordinary}{u} \nsless \OLId{latin-ordinary}{x}$،
+لزم $\OLId{latin-ordinary}{u} \nsless \OLId{latin-ordinary}{y}$ بالتعدي. وإن كان $\OLId{latin-ordinary}{x} \nsless \OLId{latin-ordinary}{u}$
+وكان $\OLId{latin-ordinary}{u} \in [\OLId{latin-ordinary}{x}]$، كتبنا $\OLId{latin-ordinary}{u} = \OLId{latin-ordinary}{x}\nsplus \OLId{latin-ordinary}{n}^\nssucc$
+لبعض~$\OLId{latin-ordinary}{n}$، فيلزم $\OLId{latin-ordinary}{u} \nsless \OLId{latin-ordinary}{y}$ بما تقدم.
+
+ثم نأخذ $\OLId{latin-ordinary}{v} \in [\OLId{latin-ordinary}{y}]$ قبل~$\OLId{latin-ordinary}{y}$ بحسب~$\nsless$، فيكون
+$\OLId{latin-ordinary}{v} \nsplus \OLId{latin-ordinary}{m}^\nssucc = \OLId{latin-ordinary}{y}$ لبعض $\OLId{latin-ordinary}{m}$ قياسي.
+ولا يصح $\OLId{latin-ordinary}{v} \nsless \OLId{latin-ordinary}{x}$، إذ يلزم منه
+$\OLId{latin-ordinary}{y} = \OLId{latin-ordinary}{v} \nsplus \OLId{latin-ordinary}{m}^\nssucc \nsless \OLId{latin-ordinary}{x}$. وكذلك $\OLId{latin-ordinary}{x} \neq \OLId{latin-ordinary}{v}$؛
+فلو تساويا لكان $\OLId{latin-ordinary}{x} \nsplus \OLId{latin-ordinary}{m}^\nssucc = \OLId{latin-ordinary}{v} \nsplus \OLId{latin-ordinary}{m}^\nssucc = \OLId{latin-ordinary}{y}$،
+ولزم $[\OLId{latin-ordinary}{x}] = [\OLId{latin-ordinary}{y}]$. فلا بد من $\OLId{latin-ordinary}{x} \nsless \OLId{latin-ordinary}{v}$.
+وعندئذ $\OLId{latin-ordinary}{x} \nsplus \OLId{latin-ordinary}{n}^\nssucc \nsless \OLId{latin-ordinary}{v}$ لكل~$\OLId{latin-ordinary}{n}$.
+فإذا كان $\OLId{latin-ordinary}{x} \nsless \OLId{latin-ordinary}{u}$ و$\OLId{latin-ordinary}{u} \in [\OLId{latin-ordinary}{x}]$، حصل $\OLId{latin-ordinary}{u} \nsless \OLId{latin-ordinary}{v}$؛
+وإذا كان $\OLId{latin-ordinary}{u} \nsless \OLId{latin-ordinary}{x}$، حصل $\OLId{latin-ordinary}{u} \nsless \OLId{latin-ordinary}{v}$ بالتعدي.
+
+وأما إذا كان $\OLId{latin-ordinary}{y} \nsless \OLId{latin-ordinary}{v}$، فـ $\OLId{latin-ordinary}{u} \nsless \OLId{latin-ordinary}{v}$ أيضًا؛
+إذ قد ثبت $\OLId{latin-ordinary}{u} \nsless \OLId{latin-ordinary}{y}$، ولدينا $\OLId{latin-ordinary}{y} \nsless \OLId{latin-ordinary}{v}$.
+\end{proof}
+
+\begin{cor}
+إذا كان $[\OLId{latin-ordinary}{x}] \neq [\OLId{latin-ordinary}{y}]$، فإن $[\OLId{latin-ordinary}{x}] \cap [\OLId{latin-ordinary}{y}] = \emptyset$.
+\end{cor}
+
+\begin{proof}
+ليكن $\OLId{latin-ordinary}{z} \in [\OLId{latin-ordinary}{x}]$، ولنفرض $\OLId{latin-ordinary}{x} \nsless \OLId{latin-ordinary}{y}$. فتكون
+$\OLId{latin-ordinary}{z} \nsless \OLId{latin-ordinary}{u}$ لكل $\OLId{latin-ordinary}{u} \in [\OLId{latin-ordinary}{y}]$. فإن كان $\OLId{latin-ordinary}{z} \in [\OLId{latin-ordinary}{y}]$،
+لزم $\OLId{latin-ordinary}{z} \nsless \OLId{latin-ordinary}{z}$، وهو ممتنع. وبنظير الحجة يتم
+البرهان في حال $\OLId{latin-ordinary}{y} \nsless \OLId{latin-ordinary}{x}$.
+\end{proof}
+
+\begin{explain}
+وبذلك ينسجم ترتيب الكتل المختلفة مع~$\nsless$:
+للكتلتين المختلفتين، $[\OLId{latin-ordinary}{x}] \nsless [\OLId{latin-ordinary}{y}]$ إذا وفقط إذا
+كان $\OLId{latin-ordinary}{x} \nsless \OLId{latin-ordinary}{y}$؛ وهو مكافئ لأن يكون $\OLId{latin-ordinary}{u} \nsless \OLId{latin-ordinary}{v}$
+لكل $\OLId{latin-ordinary}{u} \in [\OLId{latin-ordinary}{x}]$ و$\OLId{latin-ordinary}{v} \in [\OLId{latin-ordinary}{y}]$. والكتلة القياسية~$[\OLMathNumeral{0}]$
+أصغر الكتل، ولا تشترك مع كتلة غير قياسية في عنصر،
+كما لا تتقاطع كتلتان غير قياسيتين مختلفتان.
+فلا سبيل إلى «بلوغ» كتلة أخرى بتكرار أخذ الخلف أو السلف.
+\end{explain}
+
+\begin{prop}
+إذا كان $\OLId{latin-ordinary}{x}$ و$\OLId{latin-ordinary}{y}$ غير قياسيين، فإن $\OLId{latin-ordinary}{x} \nsless \OLId{latin-ordinary}{x} \nsplus \OLId{latin-ordinary}{y}$ و
+$\OLId{latin-ordinary}{x} \nsplus \OLId{latin-ordinary}{y} \notin [\OLId{latin-ordinary}{x}]$.
+\end{prop}
+
+\begin{proof}
+من كون $\OLId{latin-ordinary}{y}$ غير قياسي نعلم $\OLId{latin-ordinary}{y} \neq \nszero$. ثم إن
+$\Th{PA} \Proves \lforall[\OLId{latin-ordinary}{x}][(\OLId{latin-ordinary}{y} \neq \Obj{0} \lif \OLId{latin-ordinary}{x} < (\OLId{latin-ordinary}{x}+\OLId{latin-ordinary}{y}))]$.
+فلو كان $\OLId{latin-ordinary}{x} \nsplus \OLId{latin-ordinary}{y} \in [\OLId{latin-ordinary}{x}]$، للزم، مع
+$\OLId{latin-ordinary}{x} \nsless \OLId{latin-ordinary}{x} \nsplus \OLId{latin-ordinary}{y}$، أن
+$\OLId{latin-ordinary}{x} \nsplus \OLId{latin-ordinary}{n}^\nssucc = \OLId{latin-ordinary}{x} \nsplus \OLId{latin-ordinary}{y}$.
+لكن $\Th{PA} \Proves \lforall[\OLId{latin-ordinary}{x}][\lforall[\OLId{latin-ordinary}{y}][\lforall[\OLId{latin-ordinary}{z}][(\eq[(\OLId{latin-ordinary}{x}+\OLId{latin-ordinary}{y})][(\OLId{latin-ordinary}{x}+\OLId{latin-ordinary}{z})] \lif \OLId{latin-ordinary}{y} = \OLId{latin-ordinary}{z})]]]$،
+وهو قانون الاختزال للجمع. فينتج $\OLId{latin-ordinary}{y} = \OLId{latin-ordinary}{n}^\nssucc$
+لبعض $\OLId{latin-ordinary}{n}$ قياسي، خلافًا لكون $\OLId{latin-ordinary}{y}$ غير قياسي.
+\end{proof}
+
+\begin{prop}
+لا توجد كتلة غير قياسية صغرى.
+\end{prop}
+
+\begin{proof}
+نعلم $\Th{PA} \Proves \lforall[\OLId{latin-ordinary}{x}][\lexists[\OLId{latin-ordinary}{y}][(\eq[(\OLId{latin-ordinary}{y}+\OLId{latin-ordinary}{y})][\OLId{latin-ordinary}{x}] \lor
+      \eq[(\OLId{latin-ordinary}{y}+\OLId{latin-ordinary}{y})'][\OLId{latin-ordinary}{x}])]]$. فكل $\OLId{latin-ordinary}{x}$ يقسم على~$\OLMathNumeral{2}$،
+ويكون الباقي صفرًا أو~$\OLMathNumeral{1}$. فإذا كان $\OLId{latin-ordinary}{x}$ غير قياسي،
+وجب أن يكون $\OLId{latin-ordinary}{y}$ غير قياسي. والقضية السابقة تعطينا
+$\OLId{latin-ordinary}{y} \nsless \OLId{latin-ordinary}{y} \nsplus \OLId{latin-ordinary}{y}$ و$\OLId{latin-ordinary}{y} \nsplus \OLId{latin-ordinary}{y} \notin [\OLId{latin-ordinary}{y}]$؛
+وتعطينا كذلك $\OLId{latin-ordinary}{y} \nsless (\OLId{latin-ordinary}{y} \nsplus \OLId{latin-ordinary}{y})^\nssucc$ و
+$(\OLId{latin-ordinary}{y} \nsplus \OLId{latin-ordinary}{y})^\nssucc \notin [\OLId{latin-ordinary}{y}]$.
+ولأن $\OLId{latin-ordinary}{x} = \OLId{latin-ordinary}{y} \nsplus \OLId{latin-ordinary}{y}$ أو $\OLId{latin-ordinary}{x} = (\OLId{latin-ordinary}{y} \nsplus \OLId{latin-ordinary}{y})^\nssucc$،
+فـ $\OLId{latin-ordinary}{y} \nsless \OLId{latin-ordinary}{x}$ و$\OLId{latin-ordinary}{y} \notin [\OLId{latin-ordinary}{x}]$. وهذه كتلة أصغر.
+\end{proof}
+
+\begin{prop}
+لا توجد كتلة كبرى.
+\end{prop}
+
+\begin{proof}
+تمرين.
+\end{proof}
+
+\begin{prob}
+بيّن أنه لا توجد كتلة كبرى في أي نموذج غير قياسي لـ~$\Th{PA}$.
+\end{prob}
+
+\begin{prop}
+\ollabel{prop:blocks-dense}
+ترتيب الكتل كثيف. أي إنه إذا كان $\OLId{latin-ordinary}{x} \nsless \OLId{latin-ordinary}{y}$ و$[\OLId{latin-ordinary}{x}] \neq [\OLId{latin-ordinary}{y}]$،
+فثمة كتلة~$[\OLId{latin-ordinary}{z}]$ تختلف عن كلتيهما وتقع بينهما.
+\end{prop}
+
+\begin{proof}
+لنفرض $\OLId{latin-ordinary}{x} \nsless \OLId{latin-ordinary}{y}$. نقسم $\OLId{latin-ordinary}{x} \nsplus \OLId{latin-ordinary}{y}$ على اثنين،
+كما تقدم، مع السماح بباقٍ: فيوجد $\OLId{latin-ordinary}{z} \in \Domain{\OLId{latin-looped}{M}}$
+بحيث $\OLId{latin-ordinary}{x} \nsplus \OLId{latin-ordinary}{y} = \OLId{latin-ordinary}{z} \nsplus \OLId{latin-ordinary}{z}$ أو
+$\OLId{latin-ordinary}{x} \nsplus \OLId{latin-ordinary}{y} = (\OLId{latin-ordinary}{z} \nsplus \OLId{latin-ordinary}{z})^\nssucc$.
+فالعنصر~$\OLId{latin-ordinary}{z}$ «متوسط» $\OLId{latin-ordinary}{x}$ و$\OLId{latin-ordinary}{y}$، ويحقق
+$\OLId{latin-ordinary}{x} \nsless \OLId{latin-ordinary}{z}$ و$\OLId{latin-ordinary}{z} \nsless \OLId{latin-ordinary}{y}$.
+\end{proof}
+
+\begin{prob}
+اكتب برهانًا مفصلًا لـ
+\olref[mod][mar][mpa]{prop:blocks-dense}. أي !!{sentence} يجب أن
+!!{derive}ها $\Th{PA}$ كي تضمن وجود~$\OLId{latin-ordinary}{z}$؟ ولماذا يكون $\OLId{latin-ordinary}{x} \nsless \OLId{latin-ordinary}{z}$
+و$\OLId{latin-ordinary}{z} \nsless \OLId{latin-ordinary}{y}$، ولماذا يكون $[\OLId{latin-ordinary}{x}] \neq [\OLId{latin-ordinary}{z}]$ و$[\OLId{latin-ordinary}{z}] \neq [\OLId{latin-ordinary}{y}]$؟
+\end{prob}
+
+\begin{explain}
+فإذا قصرنا النظر على نموذج غير قياسي قابل للعد، انتظمت
+كتله غير القياسية كالأعداد النسبية: ترتيب خطي كثيف
+!!a{denumerable} بلا طرفين. وكل ترتيبين !!{denumerable}
+بهذه الصفة متشاكلان. ومن ثم، لكل نموذجين غير قياسيين
+!!{enumerable}~$\Struct{M}_\OLMathNumeral{1}$ و$\Struct{M}_\OLMathNumeral{2}$ للحساب الصادق،
+يتشاكل المختزلان إلى اللغة التي ليس فيها إلا $<$ و$=$.
+وبيان بناء التشاكل~$\OLId{latin-ordinary}{h}$ أن الجزأين القياسيين من $\Struct{M}_\OLMathNumeral{1}$
+و$\Struct{M}_\OLMathNumeral{2}$ يتشاكلان مع النموذج القياسي~$\Struct{N}$،
+فيتشاكل أحدهما مع الآخر. وأما كتل الجزأين غير القياسيين،
+فترتيبها كترتيب الأعداد النسبية، فيتشاكل ترتيب الكتل.
+ثم نمدّ هذا التشاكل إلى \emph{داخل} كل كتلة، بمقابلة
+عنصر مختار من كل منهما، وجعل صورة خلف~$\OLId{latin-ordinary}{x}$
+في~$\Struct{M}_\OLMathNumeral{1}$ خلف صورة~$\OLId{latin-ordinary}{x}$ في~$\Struct{M}_\OLMathNumeral{2}$.
+غير أن ذلك \emph{لا} يقتضي تشاكل $\mathfrak{M}_\OLMathNumeral{1}$
+و$\mathfrak{M}_\OLMathNumeral{2}$ في لغة الحساب كلها؛ فالتشاكل إنما يكون
+بالنسبة إلى !!a{language}. وقد تُعرّف عمليتا الجمع والضرب
+على $\Domain{\OLId{latin-looped}{M}_\OLMathNumeral{1}}$ و$\Domain{\OLId{latin-looped}{M}_\OLMathNumeral{2}}$ بوجوه لا تتشاكل.
+ومن مبرهنة فوت المشهورة ينتج هذا أيضًا: فعدد النماذج
+القابلة للعد لنظرية تامة، حتى التشاكل، لا يكون~\OLClassicalDigits{2}.
+\end{explain}
+\end{document}

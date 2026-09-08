@@ -1,0 +1,106 @@
+% Part: first-order-logic
+% Chapter: syntax-and-semantics
+% Section: Structures
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{syn}{str}
+
+\olsection{\printtoken{P}{structure} للغات الرتبة الأولى}
+
+\begin{explain}
+لغة الرتبة الأولى إذا نُظر إليها في ذاتها كانت \emph{غير مؤوَّلة}؛
+إذ لا معنى معيّنًا لرموز ال!!{constant}s وال!!{function}s
+وال!!{predicate}s بمجردها. وإنما نعيّن معانيها باختيار
+\article{structure} \emph{!!{structure}}. ففيها يتعيّن
+\emph{المجال}: الأشياء التي تدل عليها ال!!{constant}s، وتجري
+عليها ال!!{function}s، وتتراوح عليها المكممات. ويتعيّن فيها كذلك
+مدلول كل واحد من ال!!{constant}s، وكيف تنقل !!a{function} الأشياء
+إلى أشياء، وعلى أي الأشياء تصدق ال!!{predicate}s.
+وعلى ال!!^{structure}s تُبنى المفاهيم \emph{الدلالية} في المنطق،
+كالنتيجة والصلاحية وقابلية الإرضاء. وقد تختلف تسميتها في
+المؤلفات، فيقال «بنى» أو «تأويلات» أو «نماذج».
+\end{explain}
+
+\begin{defn}[!!^{structure}s]
+تتألف \Article{structure} \emph{!!{structure}}~$\Struct M$ للغة
+$\Lang{L}$ من منطق الرتبة الأولى من العناصر الآتية:
+\begin{enumerate}
+\item \emph{المجال:} مجموعة غير خالية، $\Domain \OLId{latin-looped}{M}$
+\item \emph{تأويل ال!!{constant}s:} لكل !!{constant}~$\OLId{latin-ordinary}{c}$ من
+  $\Lang{L}$، !!a{element}~$\Assign{\OLId{latin-ordinary}{c}}{\OLId{latin-looped}{M}} \in \Domain \OLId{latin-looped}{M}$
+\item \emph{تأويل ال!!{predicate}s:} لكل !!{predicate} ذات
+  $\OLId{latin-ordinary}{n}$ مواضع~$\OLId{latin-looped}{R}$ من~$\Lang{L}$ (عدا~$\eq$)، علاقة ذات $\OLId{latin-ordinary}{n}$ مواضع
+  $\Assign{\OLId{latin-looped}{R}}{\OLId{latin-looped}{M}} \subseteq \Domain{\OLId{latin-looped}{M}}^\OLId{latin-ordinary}{n}$
+\item \emph{تأويل ال!!{function}s:} لكل !!{function} ذات
+  $\OLId{latin-ordinary}{n}$ مواضع~$\OLId{latin-ordinary}{f}$ من~$\Lang{L}$، دالة ذات $\OLId{latin-ordinary}{n}$ مواضع
+  $\Assign{\OLId{latin-ordinary}{f}}{\OLId{latin-looped}{M}} \colon \Domain{\OLId{latin-looped}{M}}^\OLId{latin-ordinary}{n} \to \Domain{\OLId{latin-looped}{M}}$
+\end{enumerate}
+\end{defn}
+
+\begin{ex}
+تتألف !!^a{structure}~$\Struct M$ للغة الحساب من مجموعة، ومن عنصر
+من~$\Domain \OLId{latin-looped}{M}$، هو $\Assign{\Obj 0}{\OLId{latin-looped}{M}}$، تأويلًا لل!!{constant}
+~$\Obj 0$، ومن دالة أحادية المحل
+$\Assign{\Obj \prime}{\OLId{latin-looped}{M}} \colon \Domain{\OLId{latin-looped}{M}} \to \Domain \OLId{latin-looped}{M}$،
+ودالتين ثنائيتي المحل $\Assign{\Obj +}{\OLId{latin-looped}{M}}$ و$\Assign{\Obj
+  \times}{\OLId{latin-looped}{M}}$، كلتاهما $\Domain \OLId{latin-looped}{M}^\OLMathNumeral{2} \to \Domain \OLId{latin-looped}{M}$، وعلاقة ثنائية
+المحل $\Assign{\Obj <}{\OLId{latin-looped}{M}} \subseteq \Domain{\OLId{latin-looped}{M}}^\OLMathNumeral{2}$.
+
+وأوضح مثال لهذه البنية أن نختار ما يأتي:
+\begin{enumerate}
+\item $\Domain \OLId{latin-looped}{N} = \Nat$
+\item $\Assign{\Obj 0}{\OLId{latin-looped}{N}} = \OLMathNumeral{0}$
+\item $\Assign{\Obj \prime}{\OLId{latin-looped}{N}}(\OLId{latin-ordinary}{n}) = \OLId{latin-ordinary}{n} + \OLMathNumeral{1}$ لكل $\OLId{latin-ordinary}{n} \in \Nat$
+\item $\Assign{\Obj +}{\OLId{latin-looped}{N}}(\OLId{latin-ordinary}{n}, \OLId{latin-ordinary}{m}) = \OLId{latin-ordinary}{n} + \OLId{latin-ordinary}{m}$ لكل $\OLId{latin-ordinary}{n}, \OLId{latin-ordinary}{m} \in \Nat$
+\item $\Assign{\Obj \times}{\OLId{latin-looped}{N}}(\OLId{latin-ordinary}{n}, \OLId{latin-ordinary}{m}) = \OLId{latin-ordinary}{n}\cdot \OLId{latin-ordinary}{m}$ لكل $\OLId{latin-ordinary}{n}, \OLId{latin-ordinary}{m} \in \Nat$
+\item $\Assign{\Obj <}{\OLId{latin-looped}{N}} = \Setabs{\tuple{\OLId{latin-ordinary}{n}, \OLId{latin-ordinary}{m}}}{\OLId{latin-ordinary}{n} \in \Nat, \OLId{latin-ordinary}{m} \in
+  \Nat, \OLId{latin-ordinary}{n} < \OLId{latin-ordinary}{m}}$
+\end{enumerate}
+وهذه البنية~$\Struct N$ للغة~$\Lang L_\OLId{latin-looped}{A}$ تسمى
+\emph{النموذج القياسي للحساب}؛ فإن الرموز غير المنطقية
+لـ~$\Lang L_\OLId{latin-looped}{A}$ تأخذ فيها المعاني الحسابية المعهودة.
+
+وليست هذه كل ال!!{structure}s الممكنة لـ~$\Lang L_\OLId{latin-looped}{A}$، بل غيرها كثير.
+فلنا أن نجعل الأعداد الصحيحة~$\Int$ مجالًا مكان~$\Nat$، ثم نختار
+تأويلات~$\Obj 0$، و$\Obj \prime$، و$\Obj +$، و$\Obj
+\times$، و$\Obj <$ على وفق ذلك. ولنا أيضًا أن نضع
+لـ~$\Lang L_\OLId{latin-looped}{A}$ بنى لا صلة لها بالأعداد أصلًا.
+\end{ex}
+
+\begin{ex}
+أما البنية~$\Struct M$ للغة نظرية المجموعات~$\Lang L_\OLId{latin-looped}{Z}$، فيكفي
+لتعيينها مجموعة غير خالية وعلاقة ثنائية المحل. فيجوز، بمقتضى
+التعريف الصوري، أن نأخذ مجموعة الناس مع العلاقة «$\OLId{latin-ordinary}{x}$ أكبر سنًا من~$\OLId{latin-ordinary}{y}$»
+بوصفهما !!a{structure} لـ~$\Lang L_\OLId{latin-looped}{Z}$، كما يمكن استخدام~$\Nat$ مع
+$\OLId{latin-ordinary}{n} \ge \OLId{latin-ordinary}{m}$، حيث $\OLId{latin-ordinary}{n}, \OLId{latin-ordinary}{m} \in \Nat$.
+
+ومن ال!!{structure}s الجديرة بالنظر للغة~$\Lang L_\OLId{latin-looped}{Z}$ ما تكون
+!!{element}s مجاله مجموعات بالفعل، ويكون مدلول~$\Obj \in$
+فيه نفس العلاقة «$\OLId{latin-ordinary}{x}$ !!a{element} من~$\OLId{latin-ordinary}{y}$»، ال!!{structure}
+~$\Struct{{HF}}$ المؤلفة من \emph{المجموعات المنتهية وراثيًا}:
+\begin{enumerate}
+\item $\Domain{{{HF}}} = \emptyset \cup \Pow{\emptyset} \cup
+  \Pow{\Pow{\emptyset}} \cup \Pow{\Pow{\Pow{\emptyset}}} \cup \dots$;
+\item $\Assign{\Obj \in}{{{HF}}} = \Setabs{\tuple{\OLId{latin-ordinary}{x}, \OLId{latin-ordinary}{y}}}{\OLId{latin-ordinary}{x}, \OLId{latin-ordinary}{y} \in
+  \Domain{{{HF}}}, \OLId{latin-ordinary}{x} \in \OLId{latin-ordinary}{y}}$.
+\end{enumerate}
+\end{ex}
+
+\begin{digress}
+وللشروط التي نضعها في تعريف !!a{structure} أثر في المنطق نفسه.
+فمنع المجال الخالي يقتضي، مع المعنى المعتاد لإرضاء الجمل المكممة
+أو صدقها، أن تكون
+$\lexists[\OLId{latin-ordinary}{x}][(!A(\OLId{latin-ordinary}{x}) \lor \lnot !A(\OLId{latin-ordinary}{x}))]$ صالحة، أي حقيقة منطقية.
+واشتراط أن تدل ال!!{constant}s كلها على أشياء من المجال يجعل
+التعميم الوجودي استدلالًا سليمًا: من $!A(\OLId{latin-ordinary}{a})$ يلزم
+$\lexists[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]$. أما إن أجزنا أن تدل الأسماء على ما خارج المجال،
+أو ألا تدل على شيء، فقد أخذنا بمسلك \emph{المنطق الحر}؛
+وفيه يحتاج التعميم الوجودي إلى مقدمة زائدة: من $!A(\OLId{latin-ordinary}{a})$
+و$\lexists[\OLId{latin-ordinary}{x}][\eq[\OLId{latin-ordinary}{x}][\OLId{latin-ordinary}{a}]]$ يلزم
+$\lexists[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]$.
+\end{digress}
+
+\end{document}

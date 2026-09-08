@@ -1,0 +1,106 @@
+% Part: normal-modal-logic
+% Chapter: syntax-and-semantics
+% Section: language-modal-logic
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{syn}{lan}
+
+\olsection{لغة المنطق الموجهي الأساسي}
+
+\begin{defn}
+تحتوي اللغة الأساسية للمنطق الموجهي على
+\begin{enumerate}
+  \tagitem{prvFalse}{ثابت القضايا للدلالة على !!{falsity}~$\lfalse$.}{}
+  \tagitem{prvTrue}{ثابت القضايا للدلالة على !!{truth}~$\ltrue$.}{}
+  \item مجموعة !!{denumerable}s من !!{propositional variable}s:
+    $\Obj p_0$، و$\Obj p_1$، و$\Obj p_2$، و\dots
+  \item روابط القضايا: \startycommalist
+  \iftag{prvNot}{\ycomma $\lnot$ (النفي)}{}%
+  \iftag{prvAnd}{\ycomma $\land$ (الاقتران)}{}%
+  \iftag{prvOr}{\ycomma $\lor$ (الفصل)}{}%
+  \iftag{prvIf}{\ycomma $\lif$ (!!{conditional})}{}%
+  \iftag{prvIff}{\ycomma $\liff$ (!!{biconditional})}{}.
+  \tagitem{prvBox}{المؤثر الموجهي~$\Box$.}{}
+  \tagitem{prvDiamond}{المؤثر الموجهي~$\Diamond$.}{}
+\end{enumerate}
+\end{defn}
+
+\begin{defn}
+تُعرّف \emph{!!^{formula}s} اللغة الموجهية الأساسية استقرائيًا كما
+يأتي:
+\begin{enumerate}
+\tagitem{prvFalse}{$\lfalse$ !!{formula} ذرية.}{}
+
+\tagitem{prvTrue}{$\ltrue$ !!{formula} ذرية.}{}
+
+\item كل !!{propositional variable}~$\Obj p_i$ !!{formula} (ذرية).
+
+\tagitem{prvNot}{إذا كانت~$!A$ !!a{formula}، فإن~$\lnot !A$
+  !!a{formula}.}{}
+
+\tagitem{prvAnd}{إذا كانت~$!A$ و$!B$ !!{formula}s، فإن
+  $(!A \land !B)$ !!a{formula}.}{}
+
+\tagitem{prvOr}{إذا كانت~$!A$ و$!B$ !!{formula}s، فإن
+  $(!A \lor !B)$ !!a{formula}.}{}
+
+\tagitem{prvIf}{إذا كانت~$!A$ و$!B$ !!{formula}s، فإن
+  $(!A \lif !B)$ !!a{formula}.}{}
+
+\tagitem{prvIff}{إذا كانت~$!A$ و$!B$ !!{formula}s، فإن
+  $(!A \liff !B)$ !!a{formula}.}{}
+
+\tagitem{prvBox}{إذا كانت~$!A$ !!a{formula}، فإن~$\Box !A$
+  !!a{formula}.}{}
+
+\tagitem{prvDiamond}{إذا كانت~$!A$ !!a{formula}، فإن~$\Diamond !A$
+  !!a{formula}.}{}
+
+\tagitem{limitClause}{لا شيء آخر !!a{formula}.}{}
+\end{enumerate}
+\end{defn}
+
+\begin{tagblock}{defNot,defOr,defAnd,defIf,defIff,defTrue,defFalse,defBox,defDiamond}
+\begin{defn}
+تُفهم الصيغ المبنية بالمؤثرات المعرّفة كما يأتي:
+
+\begin{tagenumerate}{defTrue,defFalse,defNot,defOr,defAnd,defIf,defIff,defBox,defDiamond}
+
+\tagitem{defTrue}{$\ltrue$ اختصار لـ
+  \iftag{prvFalse}{$\lnot\lfalse$}{$(!A \lor \lnot !A)$ لبعض
+    !!{formula} ذرية ثابتة~$!A$}.}{}
+
+\tagitem{defFalse}{$\lfalse$ اختصار لـ
+  \iftag{prvTrue}{$\lnot\ltrue$}{$(!A \land \lnot !A)$ لبعض
+    !!{formula} ذرية ثابتة~$!A$}.}{}
+
+\tagitem{defNot}{$\lnot !A$ اختصار لـ$!A \lif \lfalse$.}{}
+
+\tagitem{defOr}{$!A \lor !B$ اختصار لـ
+  \iftag{prvAnd}{$\lnot(\lnot !A \land \lnot !B)$}{$\lnot !A \lif
+    !B$}.}{}
+
+\tagitem{defAnd}{$!A \land !B$ اختصار لـ
+  \iftag{prvOr}{$\lnot(\lnot !A \lor \lnot !B)$}{$\lnot (!A \lif
+    \lnot !B)$}.}{}
+
+\tagitem{defIf}{$!A \lif !B$ اختصار لـ
+  \iftag{prvOr}{$(\lnot !A \lor !B)$}{$\lnot (!A \land \lnot !B)$}.}{}
+
+\tagitem{defIff}{$!A \liff !B$ اختصار لـ$(!A \lif !B) \land (!B
+  \lif !A)$.}{}
+
+\tagitem{defBox}{$\Box !A$ اختصار لـ$\lnot\Diamond\lnot !A$. }{}
+
+\tagitem{defDiamond}{$\Diamond !A$ اختصار لـ$\lnot\Box\lnot !A$.}{}
+\end{tagenumerate}
+\end{defn}
+\end{tagblock}
+
+إذا كانت !!a{formula}~$!A$ لا تحتوي~$\Box$ ولا~$\Diamond$، قلنا إنها
+\emph{خالية من الجهات}.
+
+\end{document}

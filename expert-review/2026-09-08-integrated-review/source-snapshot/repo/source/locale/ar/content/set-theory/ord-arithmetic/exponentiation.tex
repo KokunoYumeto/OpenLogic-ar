@@ -1,0 +1,59 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{ord-arithmetic}{expo}
+\olsection{الأس الترتيبي}
+
+ننتقل الآن إلى الأس الترتيبي. وللأسف، لا يوجد تعريف تركيبي
+\emph{جميل} للأس الترتيبي.
+
+لا شك أن تعريفات تركيبية صريحة \emph{توجد}. وفيما يأتي أحدها. لتكن
+$\text{finfun}(\alpha,\beta)$ مجموعة جميع الدوال
+$f \colon \alpha \to \beta$ التي تكون فيها
+$\Setabs{\gamma \in \alpha}{f(\gamma) \neq 0}$ مساوية في العدد لعدد
+طبيعي ما. وعرّف ترتيبًا جيدًا على~$\text{finfun}(\alpha,\beta)$ بأن
+$f \sqsubset g$ إذا وفقط إذا كان~$f \neq g$ و
+$f(\gamma_0) < g(\gamma_0)$، حيث
+$\gamma_0 = \text{max}\Setabs{\gamma \in \alpha}{f(\gamma) \neq
+g(\gamma)}$. ويمكننا عندئذ تعريف~$\ordexpo{\alpha}{\beta}$ بأنه
+$\ordtype{\text{finfun}(\beta, \alpha), \sqsubset}$. يستخدم بوتر هذا
+التعريف الصريح، ثم يشرح مباشرة:
+\begin{quote}
+	لا يحدد اختيار هذا الترتيب إلا رغبتنا في الحصول على تعريف للأس
+	الترتيبي يحقق الشرط العودي الملائم\ldots، كما أن تصوره أصعب بكثير
+	من تصور الجمع المرتب أو الضرب المرتب.
+	\citep[p.~199]{Potter2004}
+\end{quote}
+هذا صحيح تمامًا. فقد شرحنا الجمع بأنه «نسخة من~$\alpha$ تتبعها نسخة
+من~$\beta$»، والضرب بأنه «متتالية نمطها~$\beta$ من نسخ~$\alpha$».
+لكن ليس لدينا شيء موجز نقوله عن~$\text{finfun}(\gamma, \alpha)$.
+ولذلك سنقدم بدلًا من ذلك تعريف الأس الترتيبي \emph{بواسطة} العودية
+المتناهية التجاوز فحسب، أي:
+
+\begin{defn}\ollabel{ordexporecursion}
+\begin{align*}
+	\ordexpo{\alpha}{0} &= 1\\
+	\ordexpo{\alpha}{\beta\ordplus 1} &=\ordexpo{\alpha}{\beta} \ordtimes \alpha\\
+	\ordexpo{\alpha}{\beta} &= \bigcup_{\delta < \beta}\ordexpo{\alpha}{\delta}& & \text{عندما يكون $\beta$ عددًا ترتيبيًا حديًا}
+\end{align*}
+\end{defn}
+
+لو كنا نعمل \emph{بوصفنا} منظّري مجموعات، فقد نرغب في استكشاف بعض
+خصائص الأس الترتيبي. لكن ليس لدينا الكثير لنضيفه، سوى ملاحظة الحقيقة
+غير المفاجئة بأن الأس الترتيبي ليس تبادليًا. وهكذا يكون
+$\ordexpo{2}{\omega} =
+\bigcup_{\delta < \omega}\ordexpo{2}{\delta} = \omega$، بينما
+$\ordexpo{\omega}{2} = \omega \ordtimes \omega$. لكن ينبغي ألا
+\emph{نتوقع} أن يكون الأس تبادليًا، لأنه ليس تبادليًا في الأعداد
+الطبيعية:~$\ordexpo{2}{3} = 8 < 9 = \ordexpo{3}{2}$.
+
+\begin{prob}
+أثبت، باستعمال الاستقراء المتناهي التجاوز، أنه إذا عرّفنا
+$\ordexpo{\alpha}{\beta} =
+\ordtype{\text{finfun}(\beta, \alpha), \sqsubset}$، فإننا نحصل على
+معادلات العودية في
+\olref[sth][ord-arithmetic][expo]{ordexporecursion}.
+\end{prob}
+
+\end{document}

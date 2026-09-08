@@ -1,0 +1,124 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{z}{infinity-again}	
+\olsection{في اللانهاية}
+
+تكفي المسلّمات السابقة لإثبات مجموعات غير متناهية العدد، بشرط وجود
+مجموعة ما. فافرض وجود مجموعة؛ عندئذ توجد~$\emptyset$ بموجب
+\olref[sth][z][sep]{prop:emptyexists}. ولكل مجموعة~$\OLId{latin-ordinary}{x}$ توجد
+$\OLId{latin-ordinary}{x} \cup \{\OLId{latin-ordinary}{x}\}$ بموجب~\olref[sth][z][pairs]{prop:pairsconsequences}.
+وبتكرار هذه العملية نحصل على:
+\begin{enumerate}
+	\item[\OLClassicalDigits{0}.] $\emptyset$ %& $0$ & stage $0$\\
+	\item[\OLClassicalDigits{1}.] $ \{\emptyset\}$ %& $1$ & stage $1$\\
+	\item[\OLClassicalDigits{2}.] $\{\emptyset, \{\emptyset\}\}$ %& $2$ & stage $2$\\
+	\item[\OLClassicalDigits{3}.] $\{\emptyset, \{\emptyset\}, \{\emptyset, \{\emptyset\}\}\}$ %&$3$ & stage $3$\\
+	\item[\OLClassicalDigits{4}.] $\{\emptyset, \{\emptyset\}, \{\emptyset, \{\emptyset\}\}, \{\emptyset, \{\emptyset\}, \{\emptyset, \{\emptyset\}\}\}\}$% & $4$ & stage $4$ 
+\end{enumerate}
+ويسهل التحقق من تباين هذه المجموعات.
+
+وقد ابتدأنا العدد بـ~$\OLMathNumeral{0}$ لوجوه؛ منها سهولة التحقق من أن المجموعة
+المسماة «$\OLId{latin-ordinary}{n}$» ذات~$\OLId{latin-ordinary}{n}$ من العناصر سواء، وأنها، بحسب التصور، تتكون في
+المرحلة رقم~$\OLId{latin-ordinary}{n}$.
+
+غير أن ذلك يثبت \emph{مجموعات غير متناهية العدد}، ولا يثبت
+\emph{مجموعة غير منتهية} كثيرة العناصر. والفرق جوهري؛ فإن لم نجد
+مجموعة لا نهائية بمعنى ددكند تعذر بناء جبر ددكندي، ونحن نحتاج إلى هذا
+الجبر لنتخذه مجموعة الأعداد الطبيعية. قارن
+\olref[sfr][infinite][dedekindsproof]{sec}.
+
+والأهم أن المسلّمات الموضوعة إلى هنا \emph{لا} تكفل مجموعة لا نهائية؛
+فلا بد من مسلّمة جديدة:
+
+\begin{axiom}[اللانهاية]
+توجد مجموعة~$\OLId{latin-looped}{I}$ تحقق~$\emptyset \in \OLId{latin-looped}{I}$، ويكون
+$\OLId{latin-ordinary}{x} \cup \{\OLId{latin-ordinary}{x}\} \in \OLId{latin-looped}{I}$ كلما كان~$\OLId{latin-ordinary}{x} \in \OLId{latin-looped}{I}$.
+\begin{align*}
+	\exists \OLId{latin-looped}{I}( & (\exists \OLId{latin-ordinary}{o} \in \OLId{latin-looped}{I})\forall \OLId{latin-ordinary}{x}\ \OLId{latin-ordinary}{x} \notin \OLId{latin-ordinary}{o} \land {}\\
+	& (\forall \OLId{latin-ordinary}{x} \in \OLId{latin-looped}{I})(\exists \OLId{latin-ordinary}{s} \in \OLId{latin-looped}{I})\forall \OLId{latin-ordinary}{z}(\OLId{latin-ordinary}{z} \in \OLId{latin-ordinary}{s} \liff (\OLId{latin-ordinary}{z} \in \OLId{latin-ordinary}{x} \lor \OLId{latin-ordinary}{z} = \OLId{latin-ordinary}{x})))
+\end{align*}
+\end{axiom}
+
+وظاهر أن المجموعة~$\OLId{latin-looped}{I}$ التي تقررها مسلّمة اللانهاية لا نهائية بمعنى
+ددكند: عنصرها المميز~$\emptyset$، والتطبيق الحقني على
+$\OLId{latin-looped}{I}$ معطى بـ$\OLId{latin-ordinary}{s}(\OLId{latin-ordinary}{x}) = \OLId{latin-ordinary}{x}\cup\{\OLId{latin-ordinary}{x}\}$. وقد شرحت
+\olref[sfr][infinite][dedekind]{thm:DedekindInfiniteAlgebra} استخراج
+جبر ددكندي من مجموعة لا نهائية بمعنى ددكند؛ وهذا الجبر هو الذي سنعامله
+معاملة مجموعة الأعداد الطبيعية. وعلى الضبط:
+\begin{defn}\ollabel{defnomega}
+لتكن~$\OLId{latin-looped}{I}$ مجموعة تقررها مسلّمة اللانهاية، ولتكن~$\OLId{latin-ordinary}{s}$ الدالة
+$\OLId{latin-ordinary}{s}(\OLId{latin-ordinary}{x}) = \OLId{latin-ordinary}{x} \cup \{\OLId{latin-ordinary}{x}\}$. ولتكن~$\omega = \closureofunder{\OLId{latin-ordinary}{s}}{\emptyset}$.
+نسمي عناصر~$\omega$ \emph{الأعداد الطبيعية}، ونقول إن~$\OLId{latin-ordinary}{n}$ حاصل تطبيق
+$\OLId{latin-ordinary}{s}$ على~$\emptyset$ عدد~$\OLId{latin-ordinary}{n}$ من المرات.
+\end{defn}
+
+وبالرجوع إلى القائمة السابقة يتبين أن المجموعة الموسومة «$\OLId{latin-ordinary}{n}$» تُعامل
+\emph{بوصفها} العدد~$\OLId{latin-ordinary}{n}$.
+
+وسيأتي الكلام على شأن هذا الاصطلاح في~\olref[sth][z][nat]{sec}. وهو
+يمكننا الآن من إثبات نتيجة ظاهرة:
+
+\begin{prop}\ollabel{naturalnumbersarentinfinite}
+لا يكون عدد طبيعي غير متناهٍ على معنى ددكند.
+\end{prop}
+
+\begin{proof}
+نسلك الاستقراء المقرر في
+\olref[sfr][infinite][induction]{thm:dedinfiniteinduction}. ومن البيّن
+أن~$\OLMathNumeral{0} = \emptyset$ ليس لا نهائيًا بمعنى ددكند. وفي خطوة الاستقراء نثبت
+النقيض المقابل: لو كان~$\OLId{latin-ordinary}{s}(\OLId{latin-ordinary}{n})$، على المحال، لا نهائيًا بمعنى ددكند،
+لكان~$\OLId{latin-ordinary}{n}$ كذلك.
+
+فافرض~$\OLId{latin-ordinary}{s}(\OLId{latin-ordinary}{n})$ لا نهائيًا بمعنى ددكند، أي يوجد !!{injection}~$\OLId{latin-ordinary}{f}$
+بحيث~$\ran{\OLId{latin-ordinary}{f}}\subsetneq \dom{\OLId{latin-ordinary}{f}} = \OLId{latin-ordinary}{s}(\OLId{latin-ordinary}{n}) = \OLId{latin-ordinary}{n} \cup \{\OLId{latin-ordinary}{n}\}$. وهناك حالتان
+ينبغي النظر فيهما.
+
+\emph{الحالة \OLClassicalDigits{1}: $\OLId{latin-ordinary}{n} \notin \ran{\OLId{latin-ordinary}{f}}$.} حينئذ~$\ran{\OLId{latin-ordinary}{f}} \subseteq \OLId{latin-ordinary}{n}$
+و$\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{n}) \in \OLId{latin-ordinary}{n}$. ضع~$\OLId{latin-ordinary}{g} = \funrestrictionto{\OLId{latin-ordinary}{f}}{\OLId{latin-ordinary}{n}}$؛ فيكون
+$\ran{\OLId{latin-ordinary}{g}} = \ran{\OLId{latin-ordinary}{f}} \setminus \{\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{n})\} \subsetneq \OLId{latin-ordinary}{n} = \dom{\OLId{latin-ordinary}{g}}$.
+ومن ثم يكون~$\OLId{latin-ordinary}{n}$ لا نهائيًا بمعنى ددكند.
+
+\emph{الحالة \OLClassicalDigits{2}: $\OLId{latin-ordinary}{n} \in \ran{\OLId{latin-ordinary}{f}}$.} اختر
+$\OLId{latin-ordinary}{m} \in \dom{\OLId{latin-ordinary}{f}} \setminus \ran{\OLId{latin-ordinary}{f}}$، وعرّف دالة~$\OLId{latin-ordinary}{h}$ مجالها
+$\OLId{latin-ordinary}{s}(\OLId{latin-ordinary}{n}) = \OLId{latin-ordinary}{n} \cup \{\OLId{latin-ordinary}{n}\}$:
+\[
+\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{x}) = 
+	\begin{cases}
+		\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x}) & \text{إذا كان }\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x}) \neq \OLId{latin-ordinary}{n}\\
+		\OLId{latin-ordinary}{m} & \text{إذا كان }\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x})=\OLId{latin-ordinary}{n}
+	\end{cases}
+\]
+فتتفق~$\OLId{latin-ordinary}{h}$ و$\OLId{latin-ordinary}{f}$ في كل موضع إلا في أن
+$\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{f}^{-\OLMathNumeral{1}}(\OLId{latin-ordinary}{n})) = \OLId{latin-ordinary}{m} \neq \OLId{latin-ordinary}{n} = \OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{f}^{-\OLMathNumeral{1}}(\OLId{latin-ordinary}{n}))$. ولما كانت~$\OLId{latin-ordinary}{f}$
+!!a{injection}، لزم~$\OLId{latin-ordinary}{n} \notin \ran{\OLId{latin-ordinary}{h}}$، وكذلك
+$\ran{\OLId{latin-ordinary}{h}} \subsetneq \dom{\OLId{latin-ordinary}{h}} = \OLId{latin-ordinary}{s}(\OLId{latin-ordinary}{n})$. فحجة الحالة~\OLClassicalDigits{1} تجعل~$\OLId{latin-ordinary}{n}$
+لا نهائيًا بمعنى ددكند.
+\end{proof}
+
+ويبقى بعد ذلك مسوغ مسلّمة اللانهاية. والجواب المختصر أن روايتنا تحتاج
+إلى أصل آخر، هو:
+\begin{enumerate}
+	\item[] \stagesinf. توجد مرحلة لا نهائية. أي توجد مرحلة (أ) ليست المرحلة الأولى، و(ب) تسبقها بعض المراحل، لكنها (ج) ليس لها سابق مباشر.
+\end{enumerate}
+فتلزم مسلّمة اللانهاية عن هذا الأصل مباشرة؛ لأن العدد الطبيعي~$\OLId{latin-ordinary}{n}$
+يتكون في المرحلة~$\OLId{latin-ordinary}{n}$، فتتكون المجموعة~$\omega$ عند أول مرحلة لا
+نهائية، وتكون~$\omega$ شاهدًا للمسلّمة.
+
+لكن السؤال يعود في مسوغ~\stagesinf. فهو، مثل~\stagessucc، غير منصوص
+عليه في رواية الهرم التراكمي-التكراري. بل لا شيء في مجرد تكون
+المجموعات مرحلة بعد مرحلة يضطرنا إلى إثبات مرحلة \emph{لا نهائية}؛
+إذ لا تناقض في تصور المراحل مرتبة كالأعداد الطبيعية.
+
+وهنا تظهر معضلة. فقد بحثنا في
+\olref[sfr][infinite][dedekindsproof]{sec} «برهان» ددكند على وجود
+مجموعة من الأفكار لا نهائية بمعنى ددكند، ولعله لم يقنعك. فإذا لم يكن
+\stagesinf{} لازمًا عن التصور التكراري للمجموعة، أو عن «قوانين الفكر»،
+بقينا من غير مسوغ داخلي لوجود مجموعة لا نهائية بمعنى ددكند.
+
+وفي المسألة كلام كثير وراء هذا. وحسبنا أن يكون القارئ قد بلغ موضعًا
+يستطيع فيه النظر فيما \emph{يلزم} لتسويغ مسلّمة أو مبدأ. وسنسلم فيما
+يأتي بـ~\stagesinf{}.
+
+\end{document}

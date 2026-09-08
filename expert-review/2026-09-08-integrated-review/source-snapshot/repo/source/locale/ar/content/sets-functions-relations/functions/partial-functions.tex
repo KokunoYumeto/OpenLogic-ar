@@ -1,0 +1,74 @@
+% Part: sets-functions-relations
+% Chapter: functions
+% Section: partial-functions
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+
+\begin{document}
+
+\olfileid[ar]{sfr}{fun}{par}
+
+\olsection{الدوال الجزئية}
+
+\begin{explain}
+من المفيد أحيانًا تخفيف شروط تعريف الدالة بحيث لا يُشترط أن يكون
+مخرجها معرّفًا لكل مدخل ممكن. وتسمى التعيينات من هذا القبيل
+\emph{دوالًا جزئية}.
+\end{explain}
+
+\begin{defn}
+إن \emph{الدالة الجزئية} $f \colon A \pto B$ تعيينٌ يرسل كل
+!!{element} من~$A$ إلى !!{element} واحد على الأكثر من~$B$.
+إذا عيّنت $f$ عنصرًا من~$B$ للمدخل $x \in A$، نقول إن قيمة $f(x)$
+\emph{معرّفة}، وإلا فهي \emph{غير معرّفة}. وإذا كانت قيمة $f(x)$ معرّفة،
+نكتب $f(x) \fdefined$، وإلا نكتب $f(x) \fundefined$. أما
+\emph{مجال} الدالة الجزئية~$f$ فهو المجموعة الجزئية من~$A$ المؤلفة
+من جميع العناصر التي تكون الدالة معرّفة عندها؛ أي $\dom{f} = \Setabs{x \in A}{f(x) \fdefined}$.
+\end{defn}
+
+\begin{ex}
+كل دالة $f\colon A \to B$ هي دالة جزئية أيضًا. أما الدوال
+الجزئية المعرّفة عند كل عنصر من~$A$---أي ما سميناه حتى الآن
+دالة فحسب---فتسمى أيضًا دوالًا \emph{كلية}.
+\end{ex}
+
+\begin{ex}
+الدالة الجزئية $f \colon \Real \pto \Real$ المعطاة بـ$f(x) = 1/x$
+غير معرّفة عند $x = 0$، ومعرّفة في كل موضع آخر.
+\end{ex}
+
+\begin{prob}
+إذا أُعطيت الدالة الجزئية $f\colon A \pto B$، فعرّف الدالة الجزئية $g\colon B \pto
+A$ كما يأتي: لكل $y \in B$، إذا وُجد عنصر وحيد $x \in A$ بحيث
+$f(x) = y$، فليكن $g(y) = x$؛ وإلا فـ$g(y) \fundefined$. بيّن أنه
+إذا كانت $f$ متباينة، فإن $g(f(x)) = x$ لكل $x \in \dom{f}$، وكذلك
+$f(g(y)) = y$ لكل $y \in \ran{f}$.
+\end{prob}
+
+\begin{defn}[الرسم البياني لدالة جزئية]
+لتكن $f\colon A \pto B$ دالة جزئية. إن \emph{الرسم البياني} لـ~$f$
+هو العلاقة $R_f \subseteq A \times B$ المعرّفة بـ
+\[
+R_f = \Setabs{\tuple{x,y}}{f(x) = y}.
+\]
+\end{defn}
+
+\begin{prop}
+افترض أن $R \subseteq A \times B$ تتصف بالخاصية الآتية: متى صدق $Rxy$
+و$Rxy'$ كان $y = y'$. عندئذ تكون $R$ الرسم البياني للدالة الجزئية
+$f\colon A \pto B$ المعرّفة كما يأتي: إذا وُجد $y$ بحيث
+$Rxy$، كان $f(x) = y$؛ وإلا فـ$f(x) \fundefined$. وإذا كانت $R$
+\emph{تسلسلية} أيضًا، أي إذا كان لكل $x \in A$ عنصر $y \in B$ بحيث
+$Rxy$، فإن $f$ كلية.
+\end{prop}
+
+\begin{proof}
+افترض أن ثمة $y$ بحيث $Rxy$. ولو وُجد $y'
+\neq y$ آخر بحيث $Rxy'$، لانتهكت الخاصية المفروضة على~$R$.
+ومن ثم، إذا وُجد $y$ بحيث $Rxy$، كان ذلك $y$
+وحيدًا، فتكون $f$ معرّفة تعريفًا سليمًا. ومن الواضح أن $R_f = R$ وأن $f$
+كلية إذا كانت~$R$ تسلسلية.
+\end{proof}
+
+\end{document}

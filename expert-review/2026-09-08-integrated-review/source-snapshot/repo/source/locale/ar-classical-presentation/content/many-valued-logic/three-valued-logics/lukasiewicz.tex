@@ -1,0 +1,228 @@
+% Part: many-valued-logic
+% Chapter: three-valued-logics
+% Section: lukasiewicz
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mvl}{thr}{luk}
+
+\olsection{منطق~\L ukasiewicz}
+
+من أقدم ما نشر مفصلًا في المنطق المتعدد القيم اقتراح الفيلسوف
+البولندي يان~\L ukasiewicz سنة~\OLClassicalDigits{1921}. وكان باعثه مسألة أرسطو في
+المعركة البحرية: فقول القائل «ستقع معركة بحرية غدًا» لا يظهر،
+\emph{اليوم}، صادقًا ولا كاذبًا؛ لأن ما يعيّن صدقه لم يقع بعد.
+فأدخل~\L ukasiewicz لمثل هذه القضايا «المستقبلية العرضية» قيمة ثالثة.
+\begin{quote}
+يجوز لي، من غير تناقض، أن أفترض أن كوني في وارسو في ساعة معينة من
+السنة المقبلة---كظهر يوم~\OLClassicalDigits{21} ديسمبر---ليس الآن متعينًا بالإيجاب ولا
+بالسلب. فيكون وجودي هناك في تلك الساعة ممكنًا، لا ضروريًا. وعلى هذا
+الفرض لا يصدق الآن القول «سأكون في وارسو ظهر يوم~\OLClassicalDigits{21} ديسمبر من السنة
+المقبلة»، ولا يكذب. فلو صدق الآن لزم أن يكون وجودي المستقبلي في وارسو
+ضروريًا، وذلك خلاف الفرض؛ ولو كذب لزم أن يكون مستحيلًا، وذلك خلافه
+أيضًا. فليست القضية الآن صادقة ولا كاذبة، ولا بد لها من قيمة ثالثة
+غير «$\OLMathNumeral{0}$»، أي الكذب، وغير «$\OLMathNumeral{1}$»، أي الصدق. ولنرمز إليها بـ
+«$\frac{\OLMathNumeral{1}}{\OLMathNumeral{2}}$»؛ فهي تمثل «الممكن»، وتنضم قيمة ثالثة إلى الصادق
+والكاذب.
+\end{quote}
+وسنرمز هنا إلى قيمة~\L ukasiewicz الثالثة بـ~$\Undef$.
+\footnote{مراد~\L ukasiewicz بـ«الممكن» في هذا الموضع غير المعنى
+المألوف اليوم؛ فهو الممكن الذي ليس بضروري.}
+
+وعلى هذا الفهم يسهل وضع دوال الصدق لـ~$\lnot$ و$\land$ و$\lor$.
+فنفي القضية المستقبلية العرضية مستقبلية عرضية كذلك، ومن ثم
+$\tf{\lnot}(\Undef) = \Undef$. وإذا كان أحد مقترني الاقتران غير
+محدد والآخر صادقًا، لم يتعين الاقتران: فقد ينتهي صادقًا أو كاذبًا
+بحسب ما ينتهي إليه المقترن المستقبلي. ولذلك
+\[
+    \tf{\land}(\True, \Undef) =
+\tf{\land}(\Undef, \True) =
+\Undef.
+\]
+وأما إن كان المقترن الآخر كاذبًا، امتنع أن يصير الاقتران صادقًا،
+فيكون
+\[\tf{\land}(\False, \Undef) =
+\tf{\land}(\Undef, \False) = \False.\]
+وإذا كانت الوسائط قيمًا متعينة، أي~$\True$ أو~$\False$، بقيت سائر
+القيم كما هي في المنطق الكلاسيكي.
+
+وأما الشرط ففيه تفصيل أكثر. لتكن~$\OLId{latin-ordinary}{q}$ قضية مستقبلية عرضية. إذا كان
+$\OLId{latin-ordinary}{p}$ كاذبًا، صدق~$\OLId{latin-ordinary}{p} \lif \OLId{latin-ordinary}{q}$ كيفما انتهى~$\OLId{latin-ordinary}{q}$؛ فنضع
+$\tf{\lif}(\False, \Undef) = \True$. وإذا كان~$\OLId{latin-ordinary}{p}$ صادقًا، صدق
+$\OLId{latin-ordinary}{q} \lif \OLId{latin-ordinary}{p}$ كيفما انتهى~$\OLId{latin-ordinary}{q}$؛ ولذلك
+$\tf{\lif}(\Undef, \True) = \True$. وإذا كان~$\OLId{latin-ordinary}{p}$ صادقًا، جاز أن
+ينتهي~$\OLId{latin-ordinary}{p} \lif \OLId{latin-ordinary}{q}$ إلى الصدق أو الكذب، فنضع
+$\tf{\lif}(\True, \Undef) = \Undef$. وعلى نظيره، إذا كان~$\OLId{latin-ordinary}{p}$
+كاذبًا، جاز أن ينتهي~$\OLId{latin-ordinary}{q} \lif \OLId{latin-ordinary}{p}$ إلى الوجهين؛ ومن ثم
+$\tf{\lif}(\Undef, \False) = \Undef$. بقي أن يكون~$\OLId{latin-ordinary}{p}$ و$\OLId{latin-ordinary}{q}$
+كلاهما مستقبليًا عرضيًا. ومقتضى الدافع الأول أن تكون القيمة حينئذ
+$\Undef$؛ إلا أن هذا يسلب~$!A \lif !A$ كونه تحصيلًا منطقيًا.
+وقد رضي~\L ukasiewicz بالتخلي عن~$!A \lor \lnot !A$ وعن
+$\lnot(!A \land \lnot !A)$، لكنه لم يرض بسهولة بالتخلي عن
+$!A \lif !A$؛ فاشترط~$\tf{\lif}(\Undef, \Undef) = \True$.
+
+\begin{defn}\ollabel{def:lukasiewicz}
+مصفوفة منطق~\L ukasiewicz الثلاثي القيم هي:
+\begin{enumerate}
+  \item الجزء الخالي من الثوابت~$\Lang L_\OLMathNumeral{0}^{-}$ من لغة القضايا القياسية، ذو الروابط
+  $\lnot$ و$\land$ و$\lor$ و$\lif$.
+  % تصحيح مصدر مشترك (MVL-L0-I1): حُددت اللغة الخالية من lfalse التي تفسر المصفوفة جميع روابطها.
+  \item مجموعة قيم الصدق~$\OLId{latin-looped}{V} = \{\True, \Undef, \False\}$.
+  \item القيمة المميزة وحدها هي~$\True$؛ أي~$\OLId{latin-looped}{V}^+ = \{\True\}$.
+  \item دوال الصدق مبينة في الجداول الآتية:
+  \begin{center}
+    \begin{tabular}{c|c}
+      $\tf{\lnot}$ & \\
+      \hline
+      $\True$ & $\False$ \\
+      $\Undef$ & $\Undef$ \\
+      $\False$ & $\True$
+    \end{tabular}
+    \quad
+    \begin{tabular}{c|ccc}
+      $\tf{\land}[\LogLuk[\OLMathNumeral{3}]]$ & $\True$ & $\Undef$ & $\False$ \\
+      \hline
+      $\True$ & $\True$ & $\Undef$ & $\False$ \\
+      $\Undef$ & $\Undef$ & $\Undef$ & $\False$\\
+      $\False$ & $\False$ & $\False$ & $\False$
+    \end{tabular}
+    \\[2ex]
+    \begin{tabular}{c|ccc}
+      $\tf{\lor}[\LogLuk[\OLMathNumeral{3}]]$ & $\True$ & $\Undef$ & $\False$ \\
+      \hline
+      $\True$ & $\True$ & $\True$ & $\True$ \\
+      $\Undef$ & $\True$ & $\Undef$ & $\Undef$ \\
+      $\False$ & $\True$ & $\Undef$ & $\False$
+    \end{tabular}
+    \quad
+    \begin{tabular}{c|ccc}
+      $\tf{\lif}[\LogLuk[\OLMathNumeral{3}]]$ & $\True$ & $\Undef$ & $\False$ \\
+      \hline
+      $\True$ & $\True$ & $\Undef$ & $\False$ \\
+      $\Undef$ & $\True$ & $\True$ & $\Undef$  \\
+      $\False$ & $\True$ & $\True$ & $\True$
+    \end{tabular}
+  \end{center}
+\end{enumerate}
+\end{defn}
+
+ومن السهل أن كل~!!{formula}~$!A$ لا يدخل في تركيبها إلا~$\lnot$
+و$\land$ و$\lor$ تأخذ~$\Undef$ إذا أسند~$\Undef$ إلى جميع
+!!{propositional variable}s فيها. فلا يكون، مثلًا، التحصيلان
+الكلاسيكيان~$\OLId{latin-ordinary}{p} \lor \lnot \OLId{latin-ordinary}{p}$ و$\lnot(\OLId{latin-ordinary}{p} \land \lnot \OLId{latin-ordinary}{p})$ تحصيلين
+في~$\LogLuk[\OLMathNumeral{3}]$؛ إذ~$\pValue{\OLId{latin-ordinary}{v}}(!A) = \Undef$ متى كان
+$\pAssign \OLId{latin-ordinary}{v}(\OLId{latin-ordinary}{p}) = \Undef$.
+
+وأما~!!{valuation}s التي يكون فيها~$\pAssign \OLId{latin-ordinary}{v}(\OLId{latin-ordinary}{p}) = \True$ أو
+$\False$، فتوافق فيها~$\pValue \OLId{latin-ordinary}{v}(!A)$ قيمة الصدق الكلاسيكية.
+
+\begin{prop}
+  إذا كان~$\pAssign \OLId{latin-ordinary}{v}(\OLId{latin-ordinary}{p}) \in \{\True, \False\}$ لكل~$\OLId{latin-ordinary}{p}$ في~$!A$،
+  كان~$\pValue \OLId{latin-ordinary}{v}[\LogLuk[\OLMathNumeral{3}]](!A) = \pValue \OLId{latin-ordinary}{v}[\LogCL](!A)$.
+\end{prop}
+
+\begin{prob}\label{mvl:thr:luk:prob:luk-iff} إذا عرّفنا
+  $\pValue \OLId{latin-ordinary}{v}(!A \liff !B) = \pValue \OLId{latin-ordinary}{v}((!A \lif !B) \land (!B \lif
+  !A))$ في~$\LogLuk[\OLMathNumeral{3}]$، فما جدول صدق~$\liff$؟
+\end{prob}
+
+وكثير من التحصيلات الكلاسيكية تحصيلات أيضًا في~\LogLuk[\OLClassicalDigits{3}]، ومنها
+$\lnot \OLId{latin-ordinary}{p} \lif (\OLId{latin-ordinary}{p} \lif \OLId{latin-ordinary}{q})$. ويمكن التثبت منها، كما في المنطق
+الكلاسيكي، بجدول الصدق:
+\begin{center}
+\begin{tabular}{cc|cccccc}
+  $\OLId{latin-ordinary}{p}$ & $\OLId{latin-ordinary}{q}$ & $\lnot$ & $\OLId{latin-ordinary}{p}$ & $\lif$ & $\smash{(}\OLId{latin-ordinary}{p}$ & $\lif$ & $\OLId{latin-ordinary}{q}\smash{)}$ \\ \hline
+  \True & \True & \False & \True & \True & \True & \True & \True \\
+  \True & \Undef & \False & \True & \True & \True & \Undef & \Undef \\
+  \True & \False & \False & \True & \True & \True & \False & \False \\
+  \Undef & \True & \Undef & \Undef & \True & \Undef & \True & \True \\
+  \Undef & \Undef & \Undef & \Undef & \True & \Undef & \True & \Undef \\
+  \Undef & \False & \Undef & \Undef & \True & \Undef & \Undef & \False \\
+  \False & \True & \True & \False & \True & \False & \True & \True \\
+  \False & \Undef & \True & \False & \True & \False & \True & \Undef \\
+  \False & \False & \True & \False & \True & \False & \True & \False \\
+\end{tabular}
+\end{center}
+
+\begin{prob}
+  بيّن أن الصيغ الآتية تحصيلات منطقية في~\LogLuk[\OLClassicalDigits{3}]:
+  \begin{enumerate}
+    \item $\OLId{latin-ordinary}{p} \lif (\OLId{latin-ordinary}{q} \lif \OLId{latin-ordinary}{p})$
+    \item\label{mvl:thr:luk:prob:luk-taut-2} $\lnot(\OLId{latin-ordinary}{p} \land \OLId{latin-ordinary}{q}) \liff (\lnot \OLId{latin-ordinary}{p} \lor \lnot \OLId{latin-ordinary}{q})$
+    \item\label{mvl:thr:luk:prob:luk-taut-3} $\lnot(\OLId{latin-ordinary}{p} \lor \OLId{latin-ordinary}{q}) \liff (\lnot \OLId{latin-ordinary}{p} \land \lnot \OLId{latin-ordinary}{q})$
+  \end{enumerate}
+  (في \olref[mvl][thr][luk]{prob:luk-taut-2} و
+  \olref[mvl][thr][luk]{prob:luk-taut-3}، خذ~$!A \liff !B$
+  اختصارًا لـ~$(!A \lif !B) \land (!B \lif !A)$، أو استعمل جوابك
+  عن \olref[mvl][thr][luk]{prob:luk-iff}.)
+\end{prob}
+
+\begin{prob}
+  بيّن أن التحصيلات الكلاسيكية الآتية لا تكون تحصيلات في~\LogLuk[\OLClassicalDigits{3}]:
+  \begin{enumerate}
+    \item $(\lnot \OLId{latin-ordinary}{p} \land \OLId{latin-ordinary}{p}) \lif \OLId{latin-ordinary}{q}$
+    \item $((\OLId{latin-ordinary}{p} \lif \OLId{latin-ordinary}{q}) \lif \OLId{latin-ordinary}{p}) \lif \OLId{latin-ordinary}{p}$
+    \item $(\OLId{latin-ordinary}{p} \lif (\OLId{latin-ordinary}{p} \lif \OLId{latin-ordinary}{q})) \lif (\OLId{latin-ordinary}{p} \lif \OLId{latin-ordinary}{q})$
+  \end{enumerate}
+\end{prob}
+
+وقد يحمل ذلك على الظن أن كل تحصيل كلاسيكي، وإن لم يكن تحصيلًا في
+$\LogLuk[\OLMathNumeral{3}]$، لا بد أن يأخذ في كل~!!{valuation} واحدة من القيمتين
+$\True$ و$\Undef$. وليس الأمر كذلك، وهذه الصيغة مثال مضاد:
+\[
+  \lnot(\OLId{latin-ordinary}{p} \lif \lnot \OLId{latin-ordinary}{p}) \lor \lnot(\lnot \OLId{latin-ordinary}{p} \lif \OLId{latin-ordinary}{p})
+\]
+فإنها تأخذ~$\False$ إذا أخذ~$\OLId{latin-ordinary}{p}$ القيمة~$\Undef$.
+
+\begin{prob}
+  أي العلاقات الآتية تصح في منطق~\L ukasiewicz؟ ضع لكل واحدة جدول صدق.
+  \begin{enumerate}
+    \item $\OLId{latin-ordinary}{p}, \OLId{latin-ordinary}{p} \lif \OLId{latin-ordinary}{q} \Entails \OLId{latin-ordinary}{q}$
+    \item $\lnot\lnot \OLId{latin-ordinary}{p} \Entails \OLId{latin-ordinary}{p}$
+    \item $\OLId{latin-ordinary}{p} \land \OLId{latin-ordinary}{q} \Entails \OLId{latin-ordinary}{p}$
+    \item $\OLId{latin-ordinary}{p} \Entails \OLId{latin-ordinary}{p} \land \OLId{latin-ordinary}{p}$
+    \item $\OLId{latin-ordinary}{p} \Entails \OLId{latin-ordinary}{p} \lor \OLId{latin-ordinary}{q}$
+  \end{enumerate}
+\end{prob}
+
+وكان رجاء~\L ukasiewicz أن يبني على نسقه الثلاثي منطقًا للإمكان،
+بأن يزيد الرابط الأحادي~$\Diamond !A$، أي «$!A$ ممكنة»، ونظيره
+$\Box !A$، أي «$!A$ ضرورية»:
+\begin{center}
+  \begin{tabular}{c|c}
+    $\tf{\Diamond}$ & \\
+    \hline
+    $\True$ & $\True$ \\
+    $\Undef$ & $\True$ \\
+    $\False$ & $\False$
+  \end{tabular}
+  \quad
+  \begin{tabular}{c|c}
+    $\tf{\Box}$ & \\
+    \hline
+    $\True$ & $\True$ \\
+    $\Undef$ & $\False$ \\
+    $\False$ & $\False$
+  \end{tabular}
+\end{center}
+فمؤدى الجدولين أن~$\OLId{latin-ordinary}{p}$ ممكن إذا وفقط إذا لم يتعين كاذبًا بالفعل،
+وأن~$\OLId{latin-ordinary}{p}$ ضروري إذا وفقط إذا تعين صادقًا بالفعل.
+
+\begin{prob}
+  بيّن أن~$\Box \OLId{latin-ordinary}{p} \liff \lnot\Diamond \lnot \OLId{latin-ordinary}{p}$ و
+  $\Diamond \OLId{latin-ordinary}{p} \liff \lnot \Box \lnot \OLId{latin-ordinary}{p}$ تحصيلان منطقيان في
+  $\LogLuk[\OLMathNumeral{3}]$ بعد توسيعه بجدولي صدق~$\Box$ و$\Diamond$.
+\end{prob}
+
+لكن قصور هذا المنطق الجهي المقترح يظهر سريعًا. فمهما آل الأمر، يمتنع
+أن يتبين~$\OLId{latin-ordinary}{p} \land \lnot \OLId{latin-ordinary}{p}$ صادقًا؛ فهو مستحيل، وإن لم يتعين الآن
+فكان غير محدد. فينبغي إذن أن تكون~$\lnot \Diamond(\OLId{latin-ordinary}{p} \land \lnot \OLId{latin-ordinary}{p})$
+تحصيلًا منطقيًا. غير أن~$\pAssign \OLId{latin-ordinary}{v}(\OLId{latin-ordinary}{p}) = \Undef$ يجعل
+% تصحيح مصدر (0394-I2): يعطي جدولا النفي والإمكان هنا القيمة الكاذبة.
+$\pValue \OLId{latin-ordinary}{v}(\lnot \Diamond(\OLId{latin-ordinary}{p} \land \lnot \OLId{latin-ordinary}{p})) = \False$.
+فقد أصاب~\L ukasiewicz في أن قيمتي صدق لا تفيان بتمييزات الجهة،
+كالإمكان والضرورة، لكن مجرد إضافة قيمة ثالثة لا يفي بها أيضًا.
+
+\end{document}

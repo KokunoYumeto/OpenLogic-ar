@@ -1,0 +1,106 @@
+% Part: incompleteness
+% Chapter: representability-in-q
+% Section: composition-representable
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{req}{cmp}
+\olsection{التركيب قابل للتمثيل في $\Th{Q}$}
+
+لتكن $\OLId{latin-ordinary}{h}$ هي الدالة التي يعرّفها التركيب
+\[
+\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{x}_\OLMathNumeral{0},\dots,\OLId{latin-ordinary}{x}_{\OLId{latin-ordinary}{l}-\OLMathNumeral{1}}) = \OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{g}_\OLMathNumeral{0}(\OLId{latin-ordinary}{x}_\OLMathNumeral{0},\dots,\OLId{latin-ordinary}{x}_{\OLId{latin-ordinary}{l}-\OLMathNumeral{1}}), \dots,
+\OLId{latin-ordinary}{g}_{\OLId{latin-ordinary}{k}-\OLMathNumeral{1}}(\OLId{latin-ordinary}{x}_\OLMathNumeral{0},\dots,\OLId{latin-ordinary}{x}_{\OLId{latin-ordinary}{l}-\OLMathNumeral{1}})).
+\]
+وقد عُيّنت من قبل !!{formula}s $!A_\OLId{latin-ordinary}{f},!A_{\OLId{latin-ordinary}{g}_\OLMathNumeral{0}},\dots,!A_{\OLId{latin-ordinary}{g}_{\OLId{latin-ordinary}{k}-\OLMathNumeral{1}}}$
+لتمثيل الدوال $\OLId{latin-ordinary}{f}$ و$\OLId{latin-ordinary}{g}_\OLMathNumeral{0}$، \dots، و$\OLId{latin-ordinary}{g}_{\OLId{latin-ordinary}{k}-\OLMathNumeral{1}}$، بالترتيب.
+فالمطلوب الآن !!a{formula}~$!A_\OLId{latin-ordinary}{h}$ تمثل~$\OLId{latin-ordinary}{h}$.
+
+نأخذ أولًا أيسر الحالات، وهي أن تكون الدوال كلها أحادية الموضع:
+$\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{x})=\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{x}))$. ولتكن $!A_\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{y},\OLId{latin-ordinary}{z})$ ممثلةً لـ$\OLId{latin-ordinary}{f}$،
+و$!A_\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y})$ ممثلةً لـ$\OLId{latin-ordinary}{g}$؛ فنطلب !!a{formula}~$!A_\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{z})$
+لتمثيل~$\OLId{latin-ordinary}{h}$. ومفتاح البناء أن $\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{x})=\OLId{latin-ordinary}{z}$ تكافئ وجود~$\OLId{latin-ordinary}{y}$
+تصدق معها $\OLId{latin-ordinary}{z}=\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{y})$ و$\OLId{latin-ordinary}{y}=\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{x})$ معًا. فمتى كانت $\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{x})=\OLId{latin-ordinary}{z}$،
+كانت $\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{x})$ هي الشاهد~$\OLId{latin-ordinary}{y}$؛ ومتى وجد مثل هذا $\OLId{latin-ordinary}{y}$،
+أنتجت $\OLId{latin-ordinary}{y}=\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{x})$ مع $\OLId{latin-ordinary}{z}=\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{y})$ المساواة $\OLId{latin-ordinary}{z}=\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{x}))$.
+ولهذا نختار $\lexists[\OLId{latin-ordinary}{y}][(!A_\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y})\land !A_\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{y},\OLId{latin-ordinary}{z}))]$
+لتكون $!A_\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{z})$، ثم نتحقق من أن $\Th{Q}$ تثبت
+ما يلزم من !!{formula}s.
+
+\begin{prop}
+\ollabel{prop:rep1}
+متى كان $\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{n})=\OLId{latin-ordinary}{m}$ لزم $\Th{Q}\Proves !A_\OLId{latin-ordinary}{h}(\num{\OLId{latin-ordinary}{n}},\num{\OLId{latin-ordinary}{m}})$.
+\end{prop}
+
+\begin{proof}
+ليكن $\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{n})=\OLId{latin-ordinary}{m}$، أي $\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{n}))=\OLId{latin-ordinary}{m}$، ولنسمّ القيمة الوسطى $\OLId{latin-ordinary}{k}=\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{n})$.
+فنحصل على ما يأتي:
+\begin{align*}
+  \Th{Q} & \Proves !A_\OLId{latin-ordinary}{g}(\num{\OLId{latin-ordinary}{n}}, \num{\OLId{latin-ordinary}{k}})
+  \intertext{لأن $!A_g$ تمثل~$g$، و}
+  \Th{Q} & \Proves !A_\OLId{latin-ordinary}{f}(\num{\OLId{latin-ordinary}{k}}, \num{\OLId{latin-ordinary}{m}})
+  \intertext{لأن $!A_f$ تمثل~$f$. ومن ثم}
+  \Th{Q} & \Proves !A_\OLId{latin-ordinary}{g}(\num{\OLId{latin-ordinary}{n}}, \num{\OLId{latin-ordinary}{k}}) \land !A_\OLId{latin-ordinary}{f}(\num{\OLId{latin-ordinary}{k}}, \num{\OLId{latin-ordinary}{m}})
+  \intertext{وبالتالي أيضًا}
+  \Th{Q} & \Proves \lexists[\OLId{latin-ordinary}{y}][(!A_\OLId{latin-ordinary}{g}(\num{\OLId{latin-ordinary}{n}}, \OLId{latin-ordinary}{y}) \land !A_\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{y}, \num{\OLId{latin-ordinary}{m}}))],
+\end{align*}
+وهذه هي بالضبط $\Th{Q}\Proves !A_\OLId{latin-ordinary}{h}(\num{\OLId{latin-ordinary}{n}},\num{\OLId{latin-ordinary}{m}})$.
+\end{proof}
+
+\begin{prop}
+\ollabel{prop:rep2}
+متى كان $\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{n})=\OLId{latin-ordinary}{m}$ لزم $\Th{Q}\Proves\lforall[\OLId{latin-ordinary}{z}][(!A_\OLId{latin-ordinary}{h}(\num{\OLId{latin-ordinary}{n}},\OLId{latin-ordinary}{z})\lif
+\OLId{latin-ordinary}{z}=\num{\OLId{latin-ordinary}{m}})]$.
+\end{prop}
+
+\begin{proof}
+نفرض $\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{n})=\OLId{latin-ordinary}{m}$، وهو $\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{n}))=\OLId{latin-ordinary}{m}$، ونضع $\OLId{latin-ordinary}{k}=\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{n})$.
+ومن شرط انفراد القيمة في التمثيل نستخرج:
+\begin{align*}
+  \Th{Q} & \Proves \lforall[\OLId{latin-ordinary}{y}][(!A_\OLId{latin-ordinary}{g}(\num{\OLId{latin-ordinary}{n}}, \OLId{latin-ordinary}{y}) \lif \eq[\OLId{latin-ordinary}{y}][\num{\OLId{latin-ordinary}{k}}])]
+  \intertext{لأن $!A_g$ تمثل~$g$، و}
+  \Th{Q} & \Proves \lforall[\OLId{latin-ordinary}{z}][(!A_\OLId{latin-ordinary}{f}(\num{\OLId{latin-ordinary}{k}}, \OLId{latin-ordinary}{z}) \lif \eq[\OLId{latin-ordinary}{z}][\num{\OLId{latin-ordinary}{m}}])]
+  \intertext{لأن $!A_f$ تمثل~$f$. وبقليل من المنطق يمكننا أن نبيّن أيضًا أن}
+  \Th{Q} & \Proves \lforall[\OLId{latin-ordinary}{z}][(\lexists[\OLId{latin-ordinary}{y}][(!A_\OLId{latin-ordinary}{g}(\num{\OLId{latin-ordinary}{n}}, \OLId{latin-ordinary}{y}) \land
+      !A_\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{y}, \OLId{latin-ordinary}{z}))] \lif \eq[\OLId{latin-ordinary}{z}][\num{\OLId{latin-ordinary}{m}}])].
+\end{align*}
+وهذا، مع تغيير اسم المتغير المربوط، هو $\Th{Q}\Proves\lforall[\OLId{latin-ordinary}{y}][(!A_\OLId{latin-ordinary}{h}(\num \OLId{latin-ordinary}{n},\OLId{latin-ordinary}{y})\lif
+\eq[\OLId{latin-ordinary}{y}][\num \OLId{latin-ordinary}{m}])]$.
+\end{proof}
+
+وعلى هذه الطريقة يجري البرهان في الحالة العامة، حين تكون رتبتا
+$\OLId{latin-ordinary}{f}$ و$\OLId{latin-ordinary}{g}_\OLId{latin-ordinary}{i}$ أكبر من~$\OLMathNumeral{1}$، وإن طالت الكتابة.
+
+\begin{prop}
+\ollabel{prop:rep-composition}
+لتكن $!A_\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{y}_\OLMathNumeral{0},\dots,\OLId{latin-ordinary}{y}_{\OLId{latin-ordinary}{k}-\OLMathNumeral{1}},\OLId{latin-ordinary}{z})$ ممثلة للدالة
+$\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{y}_\OLMathNumeral{0},\dots,\OLId{latin-ordinary}{y}_{\OLId{latin-ordinary}{k}-\OLMathNumeral{1}})$ في~$\Th{Q}$، ولتكن
+$!A_{\OLId{latin-ordinary}{g}_\OLId{latin-ordinary}{i}}(\OLId{latin-ordinary}{x}_\OLMathNumeral{0},\dots,\OLId{latin-ordinary}{x}_{\OLId{latin-ordinary}{l}-\OLMathNumeral{1}},\OLId{latin-ordinary}{y})$ ممثلة للدالة
+$\OLId{latin-ordinary}{g}_\OLId{latin-ordinary}{i}(\OLId{latin-ordinary}{x}_\OLMathNumeral{0},\dots,\OLId{latin-ordinary}{x}_{\OLId{latin-ordinary}{l}-\OLMathNumeral{1}})$ في~$\Th{Q}$ لكل $\OLId{latin-ordinary}{i}<\OLId{latin-ordinary}{k}$.
+% تصحيح صياغة كلاسيكية (C295-01): عُيّن مجال الكم بالمؤشر i<k بدل لفظ «رتبة» الملتبس.
+عندئذ تكون الصيغة
+\begin{multline*}
+  \lexists[\OLId{latin-ordinary}{y}_\OLMathNumeral{0}\dots][\lexists[\OLId{latin-ordinary}{y}_{\OLId{latin-ordinary}{k}-\OLMathNumeral{1}}][(!A_{\OLId{latin-ordinary}{g}_\OLMathNumeral{0}}(\OLId{latin-ordinary}{x}_\OLMathNumeral{0},\dots,\OLId{latin-ordinary}{x}_{\OLId{latin-ordinary}{l}-\OLMathNumeral{1}},\OLId{latin-ordinary}{y}_\OLMathNumeral{0}) \land
+      \dots \land {}]]\\
+  !A_{\OLId{latin-ordinary}{g}_{\OLId{latin-ordinary}{k}-\OLMathNumeral{1}}}(\OLId{latin-ordinary}{x}_\OLMathNumeral{0},\dots,\OLId{latin-ordinary}{x}_{\OLId{latin-ordinary}{l}-\OLMathNumeral{1}},\OLId{latin-ordinary}{y}_{\OLId{latin-ordinary}{k}-\OLMathNumeral{1}}) \land !A_\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{y}_\OLMathNumeral{0},\dots,\OLId{latin-ordinary}{y}_{\OLId{latin-ordinary}{k}-\OLMathNumeral{1}},\OLId{latin-ordinary}{z}))
+\end{multline*}
+تمثيلًا للدالة
+\[
+\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{x}_\OLMathNumeral{0}, \dots, \OLId{latin-ordinary}{x}_{\OLId{latin-ordinary}{l}-\OLMathNumeral{1}}) = \OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{g}_\OLMathNumeral{0}(\OLId{latin-ordinary}{x}_\OLMathNumeral{0}, \dots, \OLId{latin-ordinary}{x}_{\OLId{latin-ordinary}{l}-\OLMathNumeral{1}}), \dots, \OLId{latin-ordinary}{g}_{\OLId{latin-ordinary}{k}-\OLMathNumeral{1}}(\OLId{latin-ordinary}{x}_\OLMathNumeral{0},
+\dots, \OLId{latin-ordinary}{x}_{\OLId{latin-ordinary}{l}-\OLMathNumeral{1}})).
+\]
+\end{prop}
+
+\begin{proof}
+يُترك تفصيله تمرينًا.
+\end{proof}
+
+\begin{prob}
+اتخذ برهانَي \olref[inc][req][cmp]{prop:rep1} و
+\olref[inc][req][cmp]{prop:rep2} مثالًا، ثم فصّل برهان
+\olref[inc][req][cmp]{prop:rep-composition}.
+\end{prob}
+
+\end{document}

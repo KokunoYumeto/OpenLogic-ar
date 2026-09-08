@@ -1,0 +1,113 @@
+% Part: many-valued-logic
+% Chapter: three-valued-logics
+% Section: goedel
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mvl}{thr}{god}
+
+\olsection{منطقات غودل}
+
+وضع كورت غودل سلسلة من المنطقات ذات~$\OLId{latin-ordinary}{n}$ من القيم؛ يشتمل كل واحد
+منها على جميع~!!{formula}s الصحيحة حدسيًا، ويشتمل عليه المنطق
+الكلاسيكي. وهذا أول أفراد السلسلة غير التافهة:
+
+\begin{defn}\ollabel{defn:goedel}
+مصفوفة \emph{منطق غودل الثلاثي القيم}~$\LogGod$ هي:
+\begin{enumerate}
+  \item لغة القضايا القياسية~$\Lang L_\OLMathNumeral{0}$ ذات الروابط
+  $\lfalse$ و$\lnot$ و$\land$ و$\lor$ و$\lif$.
+  \item مجموعة قيم الصدق~$\OLId{latin-looped}{V} = \{\True, \Undef, \False\}$.
+  \item القيمة المميزة وحدها هي~$\True$؛ أي~$\OLId{latin-looped}{V}^+ = \{\True\}$.
+  \item في الثابت~$\lfalse$ يكون~$\tf{\lfalse} = \False$؛ وأما
+  دوال صدق سائر الروابط فتعطيها الجداول:
+  \begin{center}
+    \begin{tabular}{c|c}
+      $\tf{\lnot}[\LogGod]$ & \\
+      \hline
+      $\True$ & $\False$ \\
+      $\Undef$ & $\False$ \\
+      $\False$ & $\True$
+    \end{tabular}
+    \quad
+    \begin{tabular}{c|ccc}
+      $\tf{\land}[\LogGod]$ & $\True$ & $\Undef$ & $\False$ \\
+      \hline
+      $\True$ & $\True$ & $\Undef$ & $\False$ \\
+      $\Undef$ & $\Undef$ & $\Undef$ & $\False$\\
+      $\False$ & $\False$ & $\False$ & $\False$
+    \end{tabular}
+    \\[2ex]
+    \begin{tabular}{c|ccc}
+      $\tf{\lor}[\LogGod]$ & $\True$ & $\Undef$ & $\False$ \\
+      \hline
+      $\True$ & $\True$ & $\True$ & $\True$ \\
+      $\Undef$ & $\True$ & $\Undef$ & $\Undef$ \\
+      $\False$ & $\True$ & $\Undef$ & $\False$
+    \end{tabular}
+    \quad
+    \begin{tabular}{c|ccc}
+      $\tf{\lif}[\LogGod]$ & $\True$ & $\Undef$ & $\False$ \\
+      \hline
+      $\True$ & $\True$ & $\Undef$ & $\False$ \\
+      $\Undef$ & $\True$ & $\True$ & $\False$  \\
+      $\False$ & $\True$ & $\True$ & $\True$
+    \end{tabular}
+  \end{center}
+\end{enumerate}
+\end{defn}
+
+وجدولا~$\land$ و$\lor$ هنا هما الجدولان نفسيهما في منطق~\L
+ukasiewicz وفي منطق كليني القوي؛ وإنما يختلف~$\lnot$ و$\lif$ في
+هذه المنطقات. ففي منطق غودل~$\tf{\lnot}(\Undef) = \False$.
+وكذلك، بخلاف منطق~\L ukasiewicz ومنطق كليني، يكون
+$\tf{\lif}(\Undef, \False) = \False$؛ وأما
+$\tf{\lif}(\Undef, \Undef) = \True$، فيخالف منطق كليني ويوافق
+منطق~\L ukasiewicz.
+
+وارتباط هذا المنطق بالمنطق الحدسي ظاهر في~$\LogGod[\OLMathNumeral{3}]$: فكل حقيقة
+حدسية تحصيل في~$\LogGod[\OLMathNumeral{3}]$، وكثير من التحصيلات الكلاسيكية التي لا تصح حدسيًا لا
+تكون تحصيلات في~$\LogGod[\OLMathNumeral{3}]$ أيضًا. فمن أمثلتها هذه الصيغ:
+\begin{align*}
+  & \OLId{latin-ordinary}{p} \lor \lnot \OLId{latin-ordinary}{p} && (\OLId{latin-ordinary}{p} \lif \OLId{latin-ordinary}{q}) \lif (\lnot \OLId{latin-ordinary}{p} \lor \OLId{latin-ordinary}{q}) \\
+  & \lnot\lnot \OLId{latin-ordinary}{p} \lif \OLId{latin-ordinary}{p} && \lnot(\lnot \OLId{latin-ordinary}{p} \land \lnot \OLId{latin-ordinary}{q}) \lif (\OLId{latin-ordinary}{p} \lor \OLId{latin-ordinary}{q}) \\
+  & ((\OLId{latin-ordinary}{p} \lif \OLId{latin-ordinary}{q}) \lif \OLId{latin-ordinary}{p}) \lif \OLId{latin-ordinary}{p} && \lnot(\OLId{latin-ordinary}{p} \lif \OLId{latin-ordinary}{q}) \lif (\OLId{latin-ordinary}{p} \land \lnot \OLId{latin-ordinary}{q})
+\end{align*}
+ومع ذلك توجد تحصيلات لـ~$\LogGod[\OLMathNumeral{3}]$ لا تصح حدسيًا، ومنها
+$\lnot\lnot \OLId{latin-ordinary}{p} \lor \lnot \OLId{latin-ordinary}{p}$ و~$(\OLId{latin-ordinary}{p} \lif \OLId{latin-ordinary}{q}) \lor (\OLId{latin-ordinary}{q} \lif \OLId{latin-ordinary}{p})$.
+
+\begin{prob}
+  ضع جداول صدق تثبت أن الصيغ الآتية تحصيلات في~$\LogGod[\OLMathNumeral{3}]$:
+  \begin{align*}
+    & \lnot\lnot \OLId{latin-ordinary}{p} \lor \lnot \OLId{latin-ordinary}{p}\\
+    & (\OLId{latin-ordinary}{p} \lif \OLId{latin-ordinary}{q}) \lor (\OLId{latin-ordinary}{q} \lif \OLId{latin-ordinary}{p}) \\
+    & \lnot(\OLId{latin-ordinary}{p} \land \OLId{latin-ordinary}{q}) \lif (\lnot \OLId{latin-ordinary}{p} \lor \lnot \OLId{latin-ordinary}{q}) \\
+    & (\OLId{latin-ordinary}{p} \lif \OLId{latin-ordinary}{q}) \lor (\OLId{latin-ordinary}{q} \lif \OLId{latin-ordinary}{r}) \lor (\OLId{latin-ordinary}{r} \lif \OLId{latin-ordinary}{s})
+  \end{align*}
+\end{prob}
+
+\begin{prob}
+  ضع جداول صدق تثبت أن الصيغ الآتية ليست تحصيلات في~$\LogGod[\OLMathNumeral{3}]$:
+  % تصحيح أسلوبي (0396-N1): استُعمل فعل الأمر بدل المصدر.
+  \begin{align*}
+    & (\OLId{latin-ordinary}{p} \lif \OLId{latin-ordinary}{q}) \lif (\lnot \OLId{latin-ordinary}{p} \lor \OLId{latin-ordinary}{q}) \\
+    & \lnot(\lnot \OLId{latin-ordinary}{p} \land \lnot \OLId{latin-ordinary}{q}) \lif (\OLId{latin-ordinary}{p} \lor \OLId{latin-ordinary}{q}) \\
+    & ((\OLId{latin-ordinary}{p} \lif \OLId{latin-ordinary}{q}) \lif \OLId{latin-ordinary}{p}) \lif \OLId{latin-ordinary}{p} \\
+    & \lnot(\OLId{latin-ordinary}{p} \lif \OLId{latin-ordinary}{q}) \lif (\OLId{latin-ordinary}{p} \land \lnot \OLId{latin-ordinary}{q})
+  \end{align*}
+\end{prob}
+
+\begin{prob}
+  أي العلاقات الآتية تصح في منطق غودل؟ ضع جدول صدق لكل واحدة.
+  \begin{enumerate}
+    \item $\OLId{latin-ordinary}{p}, \OLId{latin-ordinary}{p} \lif \OLId{latin-ordinary}{q} \Entails \OLId{latin-ordinary}{q}$
+    \item $\OLId{latin-ordinary}{p} \lor \OLId{latin-ordinary}{q}, \lnot \OLId{latin-ordinary}{p} \Entails \OLId{latin-ordinary}{q}$
+    \item $\OLId{latin-ordinary}{p} \land \OLId{latin-ordinary}{q} \Entails \OLId{latin-ordinary}{p}$
+    \item $\OLId{latin-ordinary}{p} \Entails \OLId{latin-ordinary}{p} \land \OLId{latin-ordinary}{p}$
+    \item $\OLId{latin-ordinary}{p} \Entails \OLId{latin-ordinary}{p} \lor \OLId{latin-ordinary}{q}$
+  \end{enumerate}
+\end{prob}
+
+\end{document}

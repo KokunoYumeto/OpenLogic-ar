@@ -1,0 +1,166 @@
+% Part: first-order-logic
+% Chapter: models-theories
+% Section: set-theory
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{mat}{set}
+
+\olsection{نظرية المجموعات}
+
+تكاد نظرية المجموعات تتسع لبناء الرياضيات كلها. ولهذا البناء
+مطالب، أولها وضع بديهيات للعلاقة~$\in$. وقد وُضعت لها أنساق
+متعددة، تتعارض أحيانًا في بعض خواص~$\in$. وأشهرها
+$\Log{ZFC}$، أي نظرية زرميلو--فرينكل مع بديهية الاختيار؛
+وهي أوسع تلك الأنساق استعمالًا ودراسة، إذ تكفي بديهياتها لإثبات
+جلّ ما يتوقع الرياضيون إثباته. غير أن البحث في ذلك مسبوق بسؤال:
+كيف \emph{نعبّر} في هذه اللغة عما نريده من مسائل الرياضيات؟
+فليس في اللغة !!{constant}s ولا !!{function}s، فلا يظهر أولًا
+كيف نسمّي مجموعات بعينها، مثل $\emptyset$ و$\Nat$، أو نصف
+عمليات المجموعات، مثل $\OLId{latin-looped}{X} \cup \OLId{latin-looped}{Y}$ و$\Pow{\OLId{latin-looped}{X}}$، فضلًا عن
+التراكيب الأخرى، كالعلاقات والدوال، التي تبدو مشتملة على غير
+المجموعات.
+
+ولنبدأ بعلاقة «هو مجموعة جزئية من»، فإنها تقارب علاقة «هو عنصر
+من» في الأهمية. نستطيع \emph{تعريف} الأولى بالثانية، وذلك بأن
+نجد !!a{formula}~$!A(\OLId{latin-ordinary}{x}, \OLId{latin-ordinary}{y})$ من لغة نظرية المجموعات يرضيها
+الزوج~$\tuple{\OLId{latin-looped}{X}, \OLId{latin-looped}{Y}}$ إذا وفقط إذا كان $\OLId{latin-looped}{X} \subseteq \OLId{latin-looped}{Y}$.
+وإنما تكون $\OLId{latin-looped}{X}$ مجموعة جزئية من $\OLId{latin-looped}{Y}$ متى كانت كل
+!!{element}s~$\OLId{latin-looped}{X}$ !!{element}s في~$\OLId{latin-looped}{Y}$ أيضًا. فتعريف
+$\subseteq$ هو الصيغة
+\[
+\lforall[\OLId{latin-ordinary}{z}][(\OLId{latin-ordinary}{z} \in \OLId{latin-ordinary}{x} \lif \OLId{latin-ordinary}{z} \in \OLId{latin-ordinary}{y})]
+\]
+فحيث نريد العلاقة~$\subseteq$ في صيغة، نضع مكانها هذه العبارة،
+مع الإحلال المناسب محل $\OLId{latin-ordinary}{x}$ و$\OLId{latin-ordinary}{y}$، وتغيير اسم المتغير المقيد~$\OLId{latin-ordinary}{z}$
+إذا احتيج إليه. ومن أمثلة ذلك امتدادية المجموعات: إذا كانت
+مجموعتان~$\OLId{latin-ordinary}{x}$ و$\OLId{latin-ordinary}{y}$، كل واحدة منهما محتواة في الأخرى، فهما مجموعة
+واحدة. نكتب ذلك
+$\lforall[\OLId{latin-ordinary}{x}][\lforall[\OLId{latin-ordinary}{y}][((\OLId{latin-ordinary}{x} \subseteq \OLId{latin-ordinary}{y} \land \OLId{latin-ordinary}{y}
+    \subseteq \OLId{latin-ordinary}{x}) \lif \OLId{latin-ordinary}{x} = \OLId{latin-ordinary}{y})]]$؛ فإذا رددنا $\subseteq$
+إلى التعريف المتقدم حصل
+\[
+\lforall[\OLId{latin-ordinary}{x}][\lforall[\OLId{latin-ordinary}{y}][((\lforall[\OLId{latin-ordinary}{z}][(\OLId{latin-ordinary}{z} \in \OLId{latin-ordinary}{x} \lif \OLId{latin-ordinary}{z} \in \OLId{latin-ordinary}{y})] \land
+    \lforall[\OLId{latin-ordinary}{z}][(\OLId{latin-ordinary}{z} \in \OLId{latin-ordinary}{y} \lif \OLId{latin-ordinary}{z} \in \OLId{latin-ordinary}{x})]) \lif \OLId{latin-ordinary}{x} = \OLId{latin-ordinary}{y})]].
+\]
+وهذه هي «بديهية الامتدادية»، إحدى بديهيات~$\Log{ZFC}$.
+
+ليس في اللغة !!{constant} لـ~$\emptyset$؛ غير أن عبارة «$\OLId{latin-ordinary}{x}$
+خالية» تؤدى بـ~$\lnot \lexists[\OLId{latin-ordinary}{y}][\OLId{latin-ordinary}{y} \in \OLId{latin-ordinary}{x}]$. فتكون عبارة
+«$\emptyset$ موجودة» ال!!{sentence}~$\lexists[\OLId{latin-ordinary}{x}][\lnot
+\lexists[\OLId{latin-ordinary}{y}][\OLId{latin-ordinary}{y} \in \OLId{latin-ordinary}{x}]]$. وهذه بديهية أخرى من بديهيات~$\Log{ZFC}$.
+(لاحظ أن بديهية الامتدادية تقتضي وجود مجموعة خالية واحدة فقط.) ومتى
+أردنا ذكر $\emptyset$ في لغة نظرية المجموعات، كتبنا ذلك على
+صورة «توجد مجموعة خالية و\dots». وللتعبير، مثلًا، عن أن $\emptyset$
+مجموعة جزئية من كل مجموعة، يمكننا أن نكتب
+\[
+\lexists[\OLId{latin-ordinary}{x}][(\lnot\lexists[\OLId{latin-ordinary}{y}][\OLId{latin-ordinary}{y} \in \OLId{latin-ordinary}{x}] \land \lforall[\OLId{latin-ordinary}{z}][\OLId{latin-ordinary}{x} \subseteq
+    \OLId{latin-ordinary}{z}])]
+\]
+على أن $\OLId{latin-ordinary}{x} \subseteq \OLId{latin-ordinary}{z}$ يجب، بالطبع، أن يستبدل بدوره بتعريفه.
+
+وفي عمليات المجموعات، مثل $\OLId{latin-looped}{X} \cup \OLId{latin-looped}{Y}$ و$\Pow{\OLId{latin-looped}{X}}$، نسلك
+مسلكًا شبيهًا بذلك. فلا رموز دوال في لغة نظرية المجموعات، لكننا
+نستطيع التعبير عن العلاقتين الداليتين $\OLId{latin-looped}{X} \cup \OLId{latin-looped}{Y} = \OLId{latin-looped}{Z}$ و$\Pow{\OLId{latin-looped}{X}} = \OLId{latin-looped}{Y}$
+بالصيغتين
+\begin{align*}
+& \lforall[\OLId{latin-ordinary}{u}][((\OLId{latin-ordinary}{u} \in \OLId{latin-ordinary}{x} \lor \OLId{latin-ordinary}{u} \in \OLId{latin-ordinary}{y}) \liff \OLId{latin-ordinary}{u} \in \OLId{latin-ordinary}{z})]\\
+& \lforall[\OLId{latin-ordinary}{u}][(\OLId{latin-ordinary}{u} \subseteq \OLId{latin-ordinary}{x} \liff \OLId{latin-ordinary}{u} \in \OLId{latin-ordinary}{y} )]
+\end{align*}
+لأن !!{element}s $\OLId{latin-looped}{X} \cup \OLId{latin-looped}{Y}$ هي بالضبط المجموعات التي تكون
+!!{element}s في~$\OLId{latin-looped}{X}$ أو !!{element}s في~$\OLId{latin-looped}{Y}$، و!!{element}s
+$\Pow{\OLId{latin-looped}{X}}$ هي بالضبط المجموعات الجزئية من~$\OLId{latin-looped}{X}$. ولا يلزم من ذلك جواز
+استعمال $\OLId{latin-ordinary}{x} \cup \OLId{latin-ordinary}{y}$ أو $\Pow{\OLId{latin-ordinary}{x}}$ كما لو كانا حدين؛ إذ لا يمكننا إلا
+استعمال ال!!{formula}s الكاملة التي تعرّف العلاقتين $\OLId{latin-looped}{X} \cup \OLId{latin-looped}{Y} = \OLId{latin-looped}{Z}$
+و$\Pow{\OLId{latin-looped}{X}} = \OLId{latin-looped}{Y}$. ومجرد التعريف لا يثبت أن هاتين العلاقتين تُرضيان، ولا أن الاتحادات
+ومجموعات القوى موجودة لكل ما نختاره من المجموعات. فمثلًا،
+ال!!{sentence} $\lforall[\OLId{latin-ordinary}{x}][\lexists[\OLId{latin-ordinary}{y}][\Pow{\OLId{latin-ordinary}{x}} = \OLId{latin-ordinary}{y}]]$ بديهية أخرى
+من بديهيات~$\Log{ZFC}$ (بديهية مجموعة القوى).
+
+وأما الأزواج المرتبة والدوال، فلا بد من بيان كيف تُجعل أنواعًا
+من المجموعات. فمن تعريفات الزوج المرتب $\tuple{\OLId{latin-ordinary}{x}, \OLId{latin-ordinary}{y}}$ أن يكون
+المجموعة $\{\{\OLId{latin-ordinary}{x}\}, \{\OLId{latin-ordinary}{x}, \OLId{latin-ordinary}{y}\}\}$. وليس لنا في أصل اللغة، كما
+تقدم، أن نضيف !!a{function} تسمّي هذه المجموعة، بل نعرّف العلاقة
+$\tuple{\OLId{latin-ordinary}{x}, \OLId{latin-ordinary}{y}} = \OLId{latin-ordinary}{z}$، أي $\{\{\OLId{latin-ordinary}{x}\}, \{\OLId{latin-ordinary}{x}, \OLId{latin-ordinary}{y}\}\} = \OLId{latin-ordinary}{z}$، بالصيغة
+\[
+\lforall[\OLId{latin-ordinary}{u}][(\OLId{latin-ordinary}{u} \in \OLId{latin-ordinary}{z} \liff (\lforall[\OLId{latin-ordinary}{v}][(\OLId{latin-ordinary}{v} \in \OLId{latin-ordinary}{u} \liff \OLId{latin-ordinary}{v} = \OLId{latin-ordinary}{x})] \lor
+  \lforall[\OLId{latin-ordinary}{v}][(\OLId{latin-ordinary}{v} \in \OLId{latin-ordinary}{u} \liff (\OLId{latin-ordinary}{v} = \OLId{latin-ordinary}{x} \lor \OLId{latin-ordinary}{v} = \OLId{latin-ordinary}{y}))]))]
+\]
+وتقول هذه الصيغة إن !!{element}s~$\OLId{latin-ordinary}{u}$ في~$\OLId{latin-ordinary}{z}$ هي بالضبط المجموعات التي
+يكون !!{element}ها الوحيد هو $\OLId{latin-ordinary}{x}$، أو تكون !!{element}sها الوحيدة هي
+$\OLId{latin-ordinary}{x}$ و~$\OLId{latin-ordinary}{y}$ (وبعبارة
+أخرى، المجموعات المطابقة إما لـ~$\{\OLId{latin-ordinary}{x}\}$ وإما لـ~$\{\OLId{latin-ordinary}{x}, \OLId{latin-ordinary}{y}\}$). وبه
+يمكن التعبير عن علاقات أخرى، منها $\OLId{latin-looped}{X} \times \OLId{latin-looped}{Y} = \OLId{latin-looped}{Z}$:
+\[
+\lforall[\OLId{latin-ordinary}{z}][(\OLId{latin-ordinary}{z} \in \OLId{latin-looped}{Z} \liff \lexists[\OLId{latin-ordinary}{x}][\lexists[\OLId{latin-ordinary}{y}][(\OLId{latin-ordinary}{x} \in
+        \OLId{latin-looped}{X} \land \OLId{latin-ordinary}{y} \in \OLId{latin-looped}{Y} \land \tuple{\OLId{latin-ordinary}{x}, \OLId{latin-ordinary}{y}} = \OLId{latin-ordinary}{z})]])]
+\]
+
+وللدالة $\OLId{latin-ordinary}{f} \colon \OLId{latin-looped}{X} \to \OLId{latin-looped}{Y}$ أن تُمثّل بالعلاقة $\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x})
+= \OLId{latin-ordinary}{y}$، أي بمجموعة الأزواج~$\Setabs{\tuple{\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y}}}{\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x}) = \OLId{latin-ordinary}{y}}$.
+فتكون المجموعة~$\OLId{latin-ordinary}{f}$ دالة من $\OLId{latin-looped}{X}$ إلى $\OLId{latin-looped}{Y}$ بثلاثة شروط: أولها أن
+تكون علاقة $\subseteq \OLId{latin-looped}{X} \times \OLId{latin-looped}{Y}$؛ وثانيها الكلية، أي أن لكل
+$\OLId{latin-ordinary}{x} \in \OLId{latin-looped}{X}$ بعض $\OLId{latin-ordinary}{y} \in \OLId{latin-looped}{Y}$ يحقق $\tuple{\OLId{latin-ordinary}{x}, \OLId{latin-ordinary}{y}} \in \OLId{latin-ordinary}{f}$؛
+وثالثها الدالية، أي إن $\tuple{\OLId{latin-ordinary}{x}, \OLId{latin-ordinary}{y}}, \tuple{\OLId{latin-ordinary}{x}, \OLId{latin-ordinary}{y}'} \in \OLId{latin-ordinary}{f}$
+يقتضي $\OLId{latin-ordinary}{y} = \OLId{latin-ordinary}{y}'$، فلا تتعدد القيمة. ولهذا تُكتب عبارة «$\OLId{latin-ordinary}{f}$ دالة
+من $\OLId{latin-looped}{X}$ إلى $\OLId{latin-looped}{Y}$» هكذا:
+\begin{align*}
+ \lforall[\OLId{latin-ordinary}{u}][(\OLId{latin-ordinary}{u} \in \OLId{latin-ordinary}{f} \lif {}] & \lexists[\OLId{latin-ordinary}{x}][\lexists[\OLId{latin-ordinary}{y}][(\OLId{latin-ordinary}{x} \in \OLId{latin-looped}{X} \land \OLId{latin-ordinary}{y} \in
+      \OLId{latin-looped}{Y} \land \tuple{\OLId{latin-ordinary}{x}, \OLId{latin-ordinary}{y}} = \OLId{latin-ordinary}{u})]]) \land {}\\
+ \lforall[\OLId{latin-ordinary}{x}][(\OLId{latin-ordinary}{x} \in \OLId{latin-looped}{X} \lif {}] &
+      (\lexists[\OLId{latin-ordinary}{y}][(\OLId{latin-ordinary}{y} \in \OLId{latin-looped}{Y} \land \mathrm{maps}(\OLId{latin-ordinary}{f}, \OLId{latin-ordinary}{x}, \OLId{latin-ordinary}{y}))] \land {}\\
+& (\lforall[\OLId{latin-ordinary}{y}][\lforall[\OLId{latin-ordinary}{y}'][((\mathrm{maps}(\OLId{latin-ordinary}{f}, \OLId{latin-ordinary}{x}, \OLId{latin-ordinary}{y}) \land
+    \mathrm{maps}(\OLId{latin-ordinary}{f}, \OLId{latin-ordinary}{x}, \OLId{latin-ordinary}{y}')) \lif \OLId{latin-ordinary}{y} = \OLId{latin-ordinary}{y}')]]))
+\end{align*}
+حيث تختصر $\mathrm{maps}(\OLId{latin-ordinary}{f}, \OLId{latin-ordinary}{x}, \OLId{latin-ordinary}{y})$ الصيغة $\lexists[\OLId{latin-ordinary}{v}][(\OLId{latin-ordinary}{v} \in \OLId{latin-ordinary}{f} \land
+  \tuple{\OLId{latin-ordinary}{x}, \OLId{latin-ordinary}{y}} = \OLId{latin-ordinary}{v})]$ (وهذه ال!!{formula} تعبر عن «$\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x}) = \OLId{latin-ordinary}{y}$»).
+
+وبعد هذا يسهل التعبير، مثلًا، عن كون $\OLId{latin-ordinary}{f}\colon \OLId{latin-looped}{X} \to \OLId{latin-looped}{Y}$
+!!{injective}:
+\begin{multline*}
+ \OLId{latin-ordinary}{f} \colon \OLId{latin-looped}{X} \to \OLId{latin-looped}{Y} \land \lforall[\OLId{latin-ordinary}{x}][\lforall[\OLId{latin-ordinary}{x}'][((\OLId{latin-ordinary}{x} \in \OLId{latin-looped}{X} \land \OLId{latin-ordinary}{x}' \in
+     \OLId{latin-looped}{X} \land {}]] \\
+ \lexists[\OLId{latin-ordinary}{y}][(\mathrm{maps}(\OLId{latin-ordinary}{f}, \OLId{latin-ordinary}{x}, \OLId{latin-ordinary}{y}) \land \mathrm{maps}(\OLId{latin-ordinary}{f},
+        \OLId{latin-ordinary}{x}', \OLId{latin-ordinary}{y}))]) \lif \OLId{latin-ordinary}{x} = \OLId{latin-ordinary}{x}')
+\end{multline*}
+تكون الدالة~$\OLId{latin-ordinary}{f}\colon \OLId{latin-looped}{X} \to \OLId{latin-looped}{Y}$ !!{injective} إذا وفقط إذا كان
+$\OLId{latin-ordinary}{x} = \OLId{latin-ordinary}{x}'$ كلما أرسلت $\OLId{latin-ordinary}{x}, \OLId{latin-ordinary}{x}' \in \OLId{latin-looped}{X}$ إلى قيمة واحدة~$\OLId{latin-ordinary}{y}$. وإذا اختصرنا
+هذه الصيغة إلى $\mathrm{inj}(\OLId{latin-ordinary}{f}, \OLId{latin-looped}{X}, \OLId{latin-looped}{Y})$، أمكننا أن نصوغ بلغة نظرية المجموعات نتيجة غير يسيرة، هي مبرهنة كانتور: لا توجد
+دالة !!{injective} من $\Pow{\OLId{latin-looped}{X}}$ إلى $\OLId{latin-looped}{X}$:
+\[
+\lforall[\OLId{latin-looped}{X}][\lforall[\OLId{latin-looped}{Y}][(\Pow{\OLId{latin-looped}{X}} = \OLId{latin-looped}{Y} \lif
+    \lnot\lexists[\OLId{latin-ordinary}{f}][\mathrm{inj}(\OLId{latin-ordinary}{f}, \OLId{latin-looped}{Y}, \OLId{latin-looped}{X})])]]
+\]
+
+وقد يبدو أن نظرية المجموعات تحتاج إلى بديهية تجعل لكل خاصية
+معرِّفة مجموعة. فإذا كانت $!A(\OLId{latin-ordinary}{x})$ صيغة في لغة المجموعات
+فيها المتغير~$\OLId{latin-ordinary}{x}$ حرًا، أمكن النظر في ال!!{sentence}
+\[
+\lexists[\OLId{latin-ordinary}{y}][\lforall[\OLId{latin-ordinary}{x}][(\OLId{latin-ordinary}{x} \in \OLId{latin-ordinary}{y} \liff !A(\OLId{latin-ordinary}{x}))]].
+\]
+وتقرر هذه ال!!{sentence} أن ثمة مجموعة~$\OLId{latin-ordinary}{y}$ تكون !!{element}sها كل
+قيم $\OLId{latin-ordinary}{x}$ التي ترضي~$!A(\OLId{latin-ordinary}{x})$ وتلك القيم وحدها. ويسمى هذا المخطط «مبدأ
+الاستيعاب». ومع ما يبدو فيه من النفع، فهو غير متسق. خذ
+$!A(\OLId{latin-ordinary}{x}) \ident \lnot \OLId{latin-ordinary}{x} \in \OLId{latin-ordinary}{x}$؛ عندئذ يقرر مبدأ الاستيعاب
+\[
+\lexists[\OLId{latin-ordinary}{y}][\lforall[\OLId{latin-ordinary}{x}][(\OLId{latin-ordinary}{x} \in \OLId{latin-ordinary}{y} \liff \OLId{latin-ordinary}{x} \notin \OLId{latin-ordinary}{x})]],
+\]
+أي إنه يقرر وجود مجموعة جميع المجموعات غير المنتمية إلى نفسها. ويمتنع
+وجود مثل هذه المجموعة؛ وتلك مفارقة راسل. والواقع أن
+$\Log{ZFC}$ تحتوي نسخة مقيدة---ومتسقة---من هذا المبدأ، هي مبدأ الفصل:
+\[
+\lforall[\OLId{latin-ordinary}{z}][\lexists[\OLId{latin-ordinary}{y}][\lforall[\OLId{latin-ordinary}{x}][(\OLId{latin-ordinary}{x} \in \OLId{latin-ordinary}{y} \liff (\OLId{latin-ordinary}{x} \in \OLId{latin-ordinary}{z} \land
+      !A(\OLId{latin-ordinary}{x})))]]].
+\]
+
+\begin{prob}
+بين أن مبدأ الاستيعاب غير متسق بإعطاء !!a{derivation} يبين أن
+\[
+\lexists[\OLId{latin-ordinary}{y}][\lforall[\OLId{latin-ordinary}{x}][(\OLId{latin-ordinary}{x} \in \OLId{latin-ordinary}{y} \liff \OLId{latin-ordinary}{x} \notin \OLId{latin-ordinary}{x})]] \Proves \lfalse.
+\]
+وللاستعانة، أثبت أولًا أن $(\OLId{latin-looped}{A} \lif \lnot \OLId{latin-looped}{A}) \land (\lnot \OLId{latin-looped}{A} \lif \OLId{latin-looped}{A})
+\Proves \lfalse$.
+\end{prob}
+\end{document}

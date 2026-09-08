@@ -1,0 +1,160 @@
+% Part: first-order-logic
+% Chapter: natural-deduction
+% Section: proof-theoretic-notions
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{ntd}{ptn}}
+      {\olfileid{pl}{ntd}{ptn}}
+
+\olsection{مفاهيم نظرية البرهان}
+
+\begin{editorial}
+في هذا القسم بيان علاقة قابلية الإثبات ومعنى الاتساق في الاستنتاج
+الطبيعي.
+\end{editorial}
+
+\begin{explain}
+قد تقدّم تعريف الصلاحية والاستلزام وقابلية الإرضاء، وهي مفاهيم دلالية.
+ولها نظائر من \emph{مفاهيم نظرية البرهان} نبيّنها الآن. وليس مدار هذه
+النظائر على إرضاء ال!!{sentence}s في
+\iftag{FOL}{ال!!{structure}s}{ال!!{valuation}s}، وإنما مدارها على
+!!{derivability} بعض ال!!{sentence}s من غيرها أو !!{nonderivability}ها.
+ومن النتائج الجليلة أن المعاني الدلالية ونظائرها البرهانية تتطابق؛
+وهذا هو الذي تقرره \emph{مبرهنتا السلامة} و\emph{الاكتمال}.
+\end{explain}
+
+
+\begin{defn}[المبرهنات]
+ال!!{sentence}~$!A$ تسمّى \emph{مبرهنةً} متى وجد !!a{derivation} لـ~$!A$
+في الاستنتاج الطبيعي، وجميع افتراضاته !!{discharged}. ويرمز إلى ذلك
+بـ~$\Proves !A$؛ فإن لم تكن~$!A$ مبرهنة رمزنا إلى ذلك بـ~$\Proves/ !A$.
+\end{defn}
+
+\begin{defn}[!!^{derivability}]
+نقول إن !!^a{sentence}~$!A$ \emph{!!{derivable} من} مجموعة
+!!{sentence}s~$\OLId{greek-variable}{Gamma}$، ونكتب~$\OLId{greek-variable}{Gamma} \Proves !A$، متى وجد
+!!{derivation} نتيجته~$!A$، لا يخرج أيّ افتراض فيه عن كونه
+!!{discharged} أو من عناصر~$\OLId{greek-variable}{Gamma}$. وأما إذا لم تكن~$!A$
+!!{derivable} من~$\OLId{greek-variable}{Gamma}$ فترميز ذلك~$\OLId{greek-variable}{Gamma} \Proves/ !A$.
+\end{defn}
+
+\begin{defn}[الاتساق]
+مجموعة ال!!{sentence}s~$\OLId{greek-variable}{Gamma}$ \emph{غير متسقة} إذا وفقط إذا
+كان~$\OLId{greek-variable}{Gamma} \Proves \lfalse$. فإن انتفى عدم الاتساق عن~$\OLId{greek-variable}{Gamma}$،
+أي كان~$\OLId{greek-variable}{Gamma} \Proves/ \lfalse$، سمّيناها \emph{متسقة}.
+\end{defn}
+
+\begin{prop}[الانعكاسية]
+\ollabel{prop:reflexivity}
+إذا كان~$!A \in \OLId{greek-variable}{Gamma}$، فإن~$\OLId{greek-variable}{Gamma} \Proves !A$.
+\end{prop}
+
+\begin{proof}
+يكفي أن نأخذ الافتراض~$!A$ وحده؛ فهو !!a{derivation} لـ~$!A$، وكل
+افتراض !!{undischarged} فيه، وهو~$!A$ نفسه، ينتمي إلى~$\OLId{greek-variable}{Gamma}$.
+\end{proof}
+  
+
+\begin{prop}[الرتابة]
+\ollabel{prop:monotonicity}
+إذا كان~$\OLId{greek-variable}{Gamma} \subseteq \OLId{greek-variable}{Delta}$ وكان~$\OLId{greek-variable}{Gamma} \Proves !A$، فإن
+$\OLId{greek-variable}{Delta} \Proves !A$.
+\end{prop}
+
+\begin{proof}
+يكفي !!{derivation} لـ~$!A$ من~$\OLId{greek-variable}{Gamma}$ بعينه؛ إذ هو
+!!a{derivation} لـ~$!A$ من~$\OLId{greek-variable}{Delta}$ أيضًا، لدخول المجموعة الأولى في الثانية.
+\end{proof}
+
+\begin{prop}[التعدي]
+\ollabel{prop:transitivity}
+إذا كان~$\OLId{greek-variable}{Gamma} \Proves !A$ وكان~$\{!A\} \cup \OLId{greek-variable}{Delta} \Proves !B$،
+فإن~$\OLId{greek-variable}{Gamma} \cup \OLId{greek-variable}{Delta} \Proves !B$.
+\end{prop}
+
+\begin{proof}
+من~$\OLId{greek-variable}{Gamma} \Proves !A$ نأخذ !!a{derivation}~$\delta_\OLMathNumeral{0}$ لـ~$!A$،
+افتراضاته ال!!{undischarged} كلّها في~$\OLId{greek-variable}{Gamma}$. ومن
+$\{!A\} \cup \OLId{greek-variable}{Delta} \Proves !B$ نأخذ !!a{derivation}~$\delta_\OLMathNumeral{1}$
+لـ~$!B$، افتراضاته ال!!{undischarged} كلّها في
+$\{!A\} \cup \OLId{greek-variable}{Delta}$. ونركّب الاشتقاقين على الوجه الآتي:
+\begin{prooftree}
+  \AxiomC{$\OLId{greek-variable}{Delta}, \Discharge{!A}{\OLMathNumeral{1}}$}
+  \RightLabel{$\delta_\OLMathNumeral{1}$}
+  \DeduceC{$!B$}
+  \DischargeRule{\Intro{\lif}}{1}
+  \UnaryInfC{$!A \lif !B$}
+  \AxiomC{$\OLId{greek-variable}{Gamma}$}
+  \RightLabel{$\delta_\OLMathNumeral{0}$}
+  \DeduceC{$!A$}
+  \RightLabel{\Elim{\lif}}
+  \BinaryInfC{$!B$}
+\end{prooftree}
+فلا يبقى من الافتراضات ال!!{undischarged} إلا ما كان في~$\OLId{greek-variable}{Gamma} \cup
+\OLId{greek-variable}{Delta}$، وبذلك ثبت~$\OLId{greek-variable}{Gamma} \cup \OLId{greek-variable}{Delta} \Proves !B$.
+\end{proof}
+
+وإذا كانت المجموعة~$\OLId{greek-variable}{Gamma} = \{!A_\OLMathNumeral{1}, !A_\OLMathNumeral{2}, \ldots, !A_\OLId{latin-ordinary}{k}\}$ منتهية،
+اختصرنا فكتبنا~$!A_\OLMathNumeral{1},!A_\OLMathNumeral{2},\ldots,!A_\OLId{latin-ordinary}{k} \Proves !B$
+مكان~$\OLId{greek-variable}{Gamma} \Proves !B$. ومن ذلك أن قولنا~$!A \Proves !B$
+معناه~$\{!A\} \Proves !B$.
+
+ومن التعدي أنه متى كان~$\OLId{greek-variable}{Gamma} \Proves !A$ و$!A \Proves !B$،
+لزم~$\OLId{greek-variable}{Gamma} \Proves !B$. وبإجرائه مرارًا، إذا كان
+$!A_\OLMathNumeral{1}, \dots, !A_\OLId{latin-ordinary}{n} \Proves !B$ وكان~$\OLId{greek-variable}{Gamma} \Proves !A_\OLId{latin-ordinary}{i}$ لكل~$\OLId{latin-ordinary}{i}$،
+حصل~$\OLId{greek-variable}{Gamma} \Proves !B$.
+
+\begin{prop}
+\ollabel{prop:incons}
+العبارات الآتية متكافئة:
+    \begin{enumerate}
+      \item \( \OLId{greek-variable}{Gamma} \) غير متسقة.
+      \item \( \OLId{greek-variable}{Gamma} \Proves {!A} \) لكل !!{sentence}~\( {!A} \).
+      \item \( \OLId{greek-variable}{Gamma} \Proves {!A} \) و\( \OLId{greek-variable}{Gamma} \Proves \lnot {!A} \) لبعض !!{sentence}~\( {!A} \).
+    \end{enumerate}
+\end{prop}
+
+\begin{proof}
+تمرين.
+\end{proof}
+
+\tagprob{FOL}
+\begin{prob}
+أثبت \olref[fol][ntd][ptn]{prop:incons}.
+\end{prob}
+\tagendprob
+
+\tagprob{notFOL}
+\begin{prob}
+أثبت \olref[pl][ntd][ptn]{prop:incons}.
+\end{prob}
+\tagendprob
+
+\begin{prop}[التراص]
+  \ollabel{prop:proves-compact}
+  \begin{enumerate}
+  \item إذا كان~$\OLId{greek-variable}{Gamma} \Proves !A$، وجدت مجموعة جزئية منتهية
+    $\OLId{greek-variable}{Gamma}_\OLMathNumeral{0} \subseteq \OLId{greek-variable}{Gamma}$ بحيث~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{0} \Proves !A$.
+  \item إذا كانت كل مجموعة جزئية منتهية من~$\OLId{greek-variable}{Gamma}$ متسقة، فإن
+    $\OLId{greek-variable}{Gamma}$ متسقة.
+  \end{enumerate}
+\end{prop}
+
+\begin{proof}
+  \begin{enumerate}
+    \item من~$\OLId{greek-variable}{Gamma} \Proves !A$ نأخذ !!a{derivation}~$\delta$
+      لـ~$!A$ من~$\OLId{greek-variable}{Gamma}$، ونسمّي~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{0}$ مجموعة الافتراضات
+      ال!!{undischarged} في~$\delta$. وكل !!{derivation} منته؛ ومن ثم
+      لا تضمّ~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{0}$ إلا عددًا منتهيًا من ال!!{sentence}s.
+      فالاشتقاق~$\delta$ نفسه !!a{derivation} لـ~$!A$ من مجموعة
+      منتهية~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{0} \subseteq \OLId{greek-variable}{Gamma}$.
+    \item نأخذ المقابل بالنقيض للفقرة~(\OLClassicalDigits{1})، مخصّصين إياها بالحالة
+      $!A \ident \lfalse$.
+  \end{enumerate}
+\end{proof}
+
+\end{document}

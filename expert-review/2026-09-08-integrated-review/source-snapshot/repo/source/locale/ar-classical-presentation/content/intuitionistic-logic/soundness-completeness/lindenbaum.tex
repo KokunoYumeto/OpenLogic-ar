@@ -1,0 +1,150 @@
+% part: intuitionistic-logic
+% chapter: soundness-completeness
+% section: lindenbaum
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{sc}{lin}
+
+\olsection{لمّة ليندنباوم}
+
+سبيل برهان التمام للمنطق الحدسي أن نفرض~$\OLId{greek-variable}{Gamma} \Proves/ !A$، ثم ننشئ
+نموذجًا~$\mModel{M}$ يكون فيه~$\mSat{\OLId{latin-looped}{M}}{\OLId{greek-variable}{Gamma}}$ و$\mSat/{\OLId{latin-looped}{M}}{!A}$.
+
+أما المنطق الكلاسيكي فتُردّ فيه !!{derivability} إلى الاتساق: فإن
+!!a{formula}~$!A$ تكون !!{derivable} من مجموعة
+ال!!{formula}s إذا وفقط إذا صار ضم نفي~$!A$ إليها موجبًا لعدم الاتساق.
+وليس هذا الرد جائزًا في المنطق الحدسي. فعدم اتساق~$\lnot !A$
+لا يعطينا فيه إلا~$\Proves \lnot\lnot !A$؛ وبما أن
+$\lnot\lnot !A \lif !A$ ليست صالحة حدسيًا على العموم، لم يلزم
+$\Proves !A$.
+
+فلا بد إذن، عند إنشاء النموذج~$\mModel{M}$، من إبقاء عدم
+!!{derivability}~$!A$ ملحوظًا؛ فهذه~$!A$ هي ال!!{formula} التي نعنيها.
+ولذلك لا يصح أن نبني النموذج~$\mModel{M}$ على مجموعة كاملة
+$\OLId{greek-variable}{Gamma}^* \supseteq \OLId{greek-variable}{Gamma}$؛ إذ كل مجموعة كاملة~$\OLId{greek-variable}{Gamma}^*$ تحقق
+$\OLId{greek-variable}{Gamma}^* \Proves !A \lor \lnot !A$.
+
+ونأخذ عوضًا عن المجموعة الكاملة~$\OLId{greek-variable}{Gamma}^*$ مجموعةً أولية من الصيغ،
+بالمعنى الذي نحدّه الآن.
+
+\begin{defn}\ollabel{defn:prime}
+  مجموعة ال!!{formula}s~$\OLId{greek-variable}{Gamma}$ \emph{أولية} إذا وفقط إذا اجتمعت لها
+  الشروط الآتية:
+  \begin{enumerate}
+  \item\ollabel{defn:prime1} اتساق~$\OLId{greek-variable}{Gamma}$، أي
+    $\OLId{greek-variable}{Gamma} \Proves/ \lfalse$؛
+  \item\ollabel{defn:prime2} أن يلزم من~$\OLId{greek-variable}{Gamma} \Proves !A$ أن
+    $!A \in \OLId{greek-variable}{Gamma}$؛
+  \item\ollabel{defn:prime3} وأن يلزم من~$!A \lor !B \in \OLId{greek-variable}{Gamma}$ أحد
+    الأمرين:~$!A \in \OLId{greek-variable}{Gamma}$ أو~$!B \in \OLId{greek-variable}{Gamma}$.
+  \end{enumerate}
+\end{defn}
+
+\begin{lem}[لمّة ليندنباوم]
+  \ollabel{lem:lindenbaum} متى كان~$\OLId{greek-variable}{Gamma} \Proves/ !A$ أمكن إيجاد
+  $\OLId{greek-variable}{Gamma}^* \supseteq \OLId{greek-variable}{Gamma}$ تكون فيها~$\OLId{greek-variable}{Gamma}^*$ أولية مع
+  $\OLId{greek-variable}{Gamma}^* \Proves/ !A$.
+\end{lem}
+
+\begin{proof}
+  نعدّ~$!B_\OLMathNumeral{1} \lor !C_\OLMathNumeral{1}$، $!B_\OLMathNumeral{2} \lor !C_\OLMathNumeral{2}$، \dots، جميع
+  ال!!{formula}s التي صورتها~$!B \lor !C$. ثم ننشئ متتالية متزايدة من
+  مجموعات ال!!{formula}s~$\OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n}$؛ فتكون
+  $\OLId{greek-variable}{Gamma}_{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}}$ هي~$\OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n}$ مع !!{formula} جديدة واحدة.
+  ونجعل~$\OLId{greek-variable}{Gamma}^*$ اتحاد المجموعات~$\OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n}$ كلها. ويكون اختيار
+  ال!!{formula}s المضافة على وجه يجمع لـ~$\OLId{greek-variable}{Gamma}^*$ الأولية مع بقاء
+  $\OLId{greek-variable}{Gamma}^* \Proves/ !A$. ولهذا نطلب في كل خطوة أول فصل~$!B_\OLId{latin-ordinary}{i} \lor !C_\OLId{latin-ordinary}{i}$
+  يتصف بما يأتي:
+  \begin{enumerate}
+  \item\ollabel{gamma-1} $\OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n} \Proves !B_\OLId{latin-ordinary}{i} \lor !C_\OLId{latin-ordinary}{i}$؛
+  \item\ollabel{gamma-2} $!B_\OLId{latin-ordinary}{i} \notin \OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n}$ و
+    $!C_\OLId{latin-ordinary}{i} \notin \OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n}$.
+  \end{enumerate}
+  ثم نزيد على~$\OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n}$ إما~$!B_\OLId{latin-ordinary}{i}$، إن كان
+  $\OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n} \cup \{!B_\OLId{latin-ordinary}{i}\} \Proves/ !A$، وإما~$!C_\OLId{latin-ordinary}{i}$ في سائر الأحوال.
+  وسنقيم الدليل على كفاية هذا الصنيع. ولنسمِّ~$\OLId{latin-ordinary}{i}(\OLId{latin-ordinary}{n})$ أصغر~$\OLId{latin-ordinary}{i}$ تتحقق له
+  \olref{gamma-1} و\olref{gamma-2}.
+
+  فنضع~$\OLId{greek-variable}{Gamma}_\OLMathNumeral{0} = \OLId{greek-variable}{Gamma}$، ثم
+  \[
+  \OLId{greek-variable}{Gamma}_{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}} = \begin{cases}
+    \OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n} \cup \{!B_{\OLId{latin-ordinary}{i}(\OLId{latin-ordinary}{n})}\} &
+    \text{إذا كان $\Gamma_n \cup \{!B_{i(n)}\} \Proves/ !A$} \\
+    \OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n} \cup \{!C_{\OLId{latin-ordinary}{i}(\OLId{latin-ordinary}{n})}\} & \text{خلاف ذلك}
+    \end{cases}
+  \]
+  فإن لم تتعين~$\OLId{latin-ordinary}{i}(\OLId{latin-ordinary}{n})$، أي إن كان كل تحقق لـ
+  $\OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n} \Proves !B \lor !C$ مصحوبًا بأحد الأمرين~$!B \in \OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n}$ أو
+  $!C \in \OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n}$، أبقينا~$\OLId{greek-variable}{Gamma}_{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}}=\OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n}$. ولتكن أخيرًا
+  $\OLId{greek-variable}{Gamma}^* = \bigcup_{\OLId{latin-ordinary}{n}=\OLMathNumeral{0}}^\infty \OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n}$.
+
+  أول ما نثبته أن كل~$\OLId{latin-ordinary}{n}$ يحقق~$\OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n} \Proves/ !A$. نستقرئ
+  في~$\OLId{latin-ordinary}{n}$: فعند~$\OLId{latin-ordinary}{n}=\OLMathNumeral{0}$ هذا هو فرض اللمّة، أعني
+  $\OLId{greek-variable}{Gamma} \Proves/ !A$. ولخطوة الاستقراء ليكن~$\OLId{latin-ordinary}{n}\geq \OLMathNumeral{0}$، ولنفرض
+  $\OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n} \Proves/ !A$؛ فالمطلوب~$\OLId{greek-variable}{Gamma}_{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}} \Proves/ !A$. فإن لم تتعين
+  $\OLId{latin-ordinary}{i}(\OLId{latin-ordinary}{n})$، كانت~$\OLId{greek-variable}{Gamma}_{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}}=\OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n}$ وتم الانتقال. فلنفرض
+  تعين~$\OLId{latin-ordinary}{i}(\OLId{latin-ordinary}{n})$، ونختصر بكتابة~$\OLId{latin-ordinary}{i}=\OLId{latin-ordinary}{i}(\OLId{latin-ordinary}{n})$.
+
+  ونبرهن هذا الانتقال بإثبات نقيضه المقابل. ليكن~$\OLId{greek-variable}{Gamma}_{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}} \Proves !A$.
+  وبحسب الإنشاء، إما أن تكون~$\OLId{greek-variable}{Gamma}_{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}}=\OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n}\cup\{!B_\OLId{latin-ordinary}{i}\}$ حين
+  $\OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n}\cup\{!B_\OLId{latin-ordinary}{i}\}\Proves/!A$، وإما أن تكون
+  $\OLId{greek-variable}{Gamma}_{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}}=\OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n}\cup\{!C_\OLId{latin-ordinary}{i}\}$ فيما عدا ذلك. والأول ممتنع، إذ
+  يلزم عنه~$\OLId{greek-variable}{Gamma}_{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}}\Proves/!A$. فتعين إذن
+  $\OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n}\cup\{!B_\OLId{latin-ordinary}{i}\}\Proves !A$ و
+  $\OLId{greek-variable}{Gamma}_{\OLId{latin-ordinary}{n}+\OLMathNumeral{1}}=\OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n}\cup\{!C_\OLId{latin-ordinary}{i}\}$. وتعريف~$\OLId{latin-ordinary}{i}(\OLId{latin-ordinary}{n})$ يعطينا
+  $\OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n}\Proves !B_\OLId{latin-ordinary}{i}\lor !C_\OLId{latin-ordinary}{i}$. ومعنا
+  $\OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n}\cup\{!B_\OLId{latin-ordinary}{i}\}\Proves !A$ و
+  $\OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n}\cup\{!C_\OLId{latin-ordinary}{i}\}\Proves !A$؛ فينتج
+  $\OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n}\Proves !A$، كما أردنا.
+
+  ولو ثبت~$\OLId{greek-variable}{Gamma}^* \Proves !A$، لكفت مجموعة جزئية منتهية
+  $\OLId{greek-variable}{Gamma}'\subseteq\OLId{greek-variable}{Gamma}^*$ في أن~$\OLId{greek-variable}{Gamma}'\Proves !A$. وكل
+  $!D\in\OLId{greek-variable}{Gamma}'$ يقع في~$\OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{i}$ لبعض~$\OLId{latin-ordinary}{i}$. نأخذ~$\OLId{latin-ordinary}{n}$ أعظم
+  هذه المؤشرات؛ ولأن~$\OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{i}\subseteq\OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n}$ متى كان~$\OLId{latin-ordinary}{i}\leq \OLId{latin-ordinary}{n}$،
+  يكون~$\OLId{greek-variable}{Gamma}'\subseteq\OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n}$؛ فيلزم
+  $\OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n}\Proves !A$، مناقضًا لما ثبت من
+  $\OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n}\Proves/!A$.
+
+  وبقي بيان أولية~$\OLId{greek-variable}{Gamma}^*$، أي استيفاؤها
+  \olref{defn:prime1} و\olref{defn:prime2} و\olref{defn:prime3} من
+  \olref{defn:prime}.
+
+  أما أولًا، فإن~$\OLId{greek-variable}{Gamma}^*\Proves/!A$ يوجب اتساق~$\OLId{greek-variable}{Gamma}^*$، فثبت
+  \olref{defn:prime1}.
+
+  ونثبت بعد ذلك أن~$\OLId{greek-variable}{Gamma}^*\Proves !B\lor !C$ يقتضي إما
+  $!B\in\OLId{greek-variable}{Gamma}^*$ وإما~$!C\in\OLId{greek-variable}{Gamma}^*$. وهذا كافٍ لـ
+  \olref{defn:prime3}، إذ من~$!B\lor !C\in\OLId{greek-variable}{Gamma}^*$ يلزم
+  $\OLId{greek-variable}{Gamma}^*\Proves !B\lor !C$. ولنفرض خلاف المطلوب:
+  $\OLId{greek-variable}{Gamma}^*\Proves !B\lor !C$، مع~$!B\notin\OLId{greek-variable}{Gamma}^*$ و
+  $!C\notin\OLId{greek-variable}{Gamma}^*$. ومن~$\OLId{greek-variable}{Gamma}^*\Proves !B\lor !C$ نجد~$\OLId{latin-ordinary}{n}$
+  يتحقق له~$\OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n}\Proves !B\lor !C$. والفصل~$!B\lor !C$ له موضع
+  في التعداد، وليكن~$!B_\OLId{latin-ordinary}{j}\lor !C_\OLId{latin-ordinary}{j}$. فهذا~$!B_\OLId{latin-ordinary}{j}\lor !C_\OLId{latin-ordinary}{j}$ يفي بشرطي
+  تعريف~$\OLId{latin-ordinary}{i}(\OLId{latin-ordinary}{n})$؛ لأن
+  $\OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n}\Proves !B_\OLId{latin-ordinary}{j}\lor !C_\OLId{latin-ordinary}{j}$، مع تحقق
+  $!B_\OLId{latin-ordinary}{j}\notin\OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n}$ و~$!C_\OLId{latin-ordinary}{j}\notin\OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n}$. ومن المرحلة~$\OLId{latin-ordinary}{n}$
+  فصاعدًا يبقى الموضع~$\OLId{latin-ordinary}{j}$ مستوفيًا للشرطين ما لم يُنتخب؛ لأن
+  $\OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{n}\subseteq\OLId{greek-variable}{Gamma}_\OLId{latin-ordinary}{m}$ يحفظ الاشتقاق، ولأن~$!B_\OLId{latin-ordinary}{j}$ و$!C_\OLId{latin-ordinary}{j}$ لا
+  ينتميان إلى~$\OLId{greek-variable}{Gamma}^*$ بحسب الفرض. فيكون~$\OLId{latin-ordinary}{i}(\OLId{latin-ordinary}{m})\leq \OLId{latin-ordinary}{j}$ في كل
+  مرحلة~$\OLId{latin-ordinary}{m}\geq \OLId{latin-ordinary}{n}$ تسبق انتخاب~$\OLId{latin-ordinary}{j}$. وإذا اختير موضع~$\OLId{latin-ordinary}{i}(\OLId{latin-ordinary}{m})$ أُضيف أحد فصليه، فلا
+  يستوفي الشرطين بعد ذلك. وليس للمؤشرات~$\OLId{latin-ordinary}{i}\leq \OLId{latin-ordinary}{j}$ إلا عدد منتهٍ؛ فلا بد
+  من مرحلة~$\OLId{latin-ordinary}{m}\geq \OLId{latin-ordinary}{n}$ يكون فيها~$\OLId{latin-ordinary}{j}=\OLId{latin-ordinary}{i}(\OLId{latin-ordinary}{m})$. ويلزم عندئذ إما
+  $!B\in\OLId{greek-variable}{Gamma}_{\OLId{latin-ordinary}{m}+\OLMathNumeral{1}}$ وإما~$!C\in\OLId{greek-variable}{Gamma}_{\OLId{latin-ordinary}{m}+\OLMathNumeral{1}}$، مناقضًا لفرض
+  $!B\notin\OLId{greek-variable}{Gamma}^*$ و$!C\notin\OLId{greek-variable}{Gamma}^*$.
+  % تصحيح مصدر (0506-I1، 0506-I2): شملت خطوة الاستقراء n=0، واستُبدلت حجة العد الرتيب بحجة إنصاف منتهية المؤشرات.
+
+  وأخيرًا، ليكن~$\OLId{greek-variable}{Gamma}^*\Proves !B$؛ فيثبت
+  $\OLId{greek-variable}{Gamma}^*\Proves !B\lor !B$. وقد بينّا أن
+  $\OLId{greek-variable}{Gamma}^*\Proves !B\lor !B$ يقتضي~$!B\in\OLId{greek-variable}{Gamma}^*$. فتستوفي
+  $\OLId{greek-variable}{Gamma}^*$ بذلك~\olref{defn:prime2} من~\olref{defn:prime}.
+\end{proof}
+
+\begin{prob}
+أقم البرهان على أن~$\OLId{greek-variable}{Gamma} \Proves/ \bot$ يقتضي كون~$\OLId{greek-variable}{Gamma}$ متسقة في
+المنطق الكلاسيكي؛ أي وجود تقييم تصدق به جميع الصيغ في~$\OLId{greek-variable}{Gamma}$.
+\end{prob}
+
+\end{document}

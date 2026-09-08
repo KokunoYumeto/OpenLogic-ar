@@ -1,0 +1,146 @@
+% Part: second-order-logic
+% Chapter: syntax-and-semantics
+% Section: size-of-domain
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sol}{syn}{siz}
+
+\olsection{وصف المجالات: الـ\usetoken{S}{enumerable} منها و\usetoken{P}{domain} اللانهائية}
+
+المجموعة~$\OLId{latin-looped}{M}$ لانهائية بمعنى ديديكند إذا وفقط إذا وجدت دالة
+!!a{injective}~$\OLId{latin-ordinary}{f}\colon \OLId{latin-looped}{M} \to \OLId{latin-looped}{M}$ ليست !!{surjective}، أي
+$\ran{\OLId{latin-ordinary}{f}} \neq \OLId{latin-looped}{M}$. ولنا في منطق الرتبة الأولى أن نأخذ
+!!{function} أحادية الموضع~$\OLId{latin-ordinary}{f}$، فنقرر أن الدالة~$\Assign{\OLId{latin-ordinary}{f}}{\OLId{latin-looped}{M}}$
+المسندة إليها في !!a{structure}~$\Struct{M}$ هي !!{injective}
+وأن~$\ran{\OLId{latin-ordinary}{f}} \neq \Domain{\OLId{latin-looped}{M}}$ بالصيغة:
+\[
+\lforall[\OLId{latin-ordinary}{x}][\lforall[\OLId{latin-ordinary}{y}][(\eq[\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x})][\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{y})] \lif \eq[\OLId{latin-ordinary}{x}][\OLId{latin-ordinary}{y}])]] \land
+\lexists[\OLId{latin-ordinary}{y}][\lforall[\OLId{latin-ordinary}{x}][\eq/[\OLId{latin-ordinary}{y}][\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x})]]].
+\]
+فإن أرضت~$\Struct{M}$ هذه !!{sentence}، كانت
+$\Assign{\OLId{latin-ordinary}{f}}{\OLId{latin-looped}{M}}: \Domain{\OLId{latin-looped}{M}} \to \Domain{\OLId{latin-looped}{M}}$ !!{injective}،
+ولزم أن يكون~$\Domain{\OLId{latin-looped}{M}}$ لانهائيًا. وإن كان~$\Domain{\OLId{latin-looped}{M}}$
+لانهائيًا، وجدت الدالة المطلوبة، وأمكن اختيارها تأويلًا
+لـ$\Assign{\OLId{latin-ordinary}{f}}{\OLId{latin-looped}{M}}$، فترضى !!{sentence} في~$\Struct{M}$.
+لكن هذا الطريق مشروط بأن يكون في اللغة الرمز غير المنطقي~$\OLId{latin-ordinary}{f}$
+المخصص لهذا الغرض. أما في الرتبة الثانية فنقول إن مثل هذه الدالة
+\emph{موجود}، ولا نحتاج إلى~$\OLId{latin-ordinary}{f}$؛ فتحصل !!{sentence} من منطق
+الرتبة الثانية الخالص:
+\[
+\fn{Inf} \ident \lexists[\OLId{latin-ordinary}{u}][(\lforall[\OLId{latin-ordinary}{x}][\lforall[\OLId{latin-ordinary}{y}][(\eq[\OLId{latin-ordinary}{u}(\OLId{latin-ordinary}{x})][\OLId{latin-ordinary}{u}(\OLId{latin-ordinary}{y})]
+      \lif \eq[\OLId{latin-ordinary}{x}][\OLId{latin-ordinary}{y}])]] \land \lexists[\OLId{latin-ordinary}{y}][\lforall[\OLId{latin-ordinary}{x}][\eq/[\OLId{latin-ordinary}{y}][\OLId{latin-ordinary}{u}(\OLId{latin-ordinary}{x})]]])].
+\]
+وعندئذ~$\Sat{\OLId{latin-looped}{M}}{\fn{Inf}}$ إذا وفقط إذا كان~$\Domain{\OLId{latin-looped}{M}}$ لانهائيًا.
+ثم نضع~$\fn{Fin} \ident \lnot \fn{Inf}$، فيكون
+$\Sat{\OLId{latin-looped}{M}}{\fn{Fin}}$ إذا وفقط إذا كان~$\Domain{\OLId{latin-looped}{M}}$ منتهيًا.
+ولا تبلغ !!{sentence} واحدة من الرتبة الأولى الخالصة هذا المبلغ
+في التعبير عن لا نهائية !!{domain}، وإن بلغته مجموعة لانهائية
+من الجمل. وأما التناهي فلا توجد مجموعة من !!{sentence}s
+الرتبة الأولى الخالصة تُرضى في !!a{structure} إذا وفقط إذا
+كان مجالها منتهيًا.
+
+\begin{prop}
+يكون~$\Sat{\OLId{latin-looped}{M}}{\fn{Inf}}$ إذا وفقط إذا كان~$\Domain{\OLId{latin-looped}{M}}$ لانهائيًا.
+\end{prop}
+
+\begin{proof}
+معنى~$\Sat{\OLId{latin-looped}{M}}{\fn{Inf}}$ أن يكون
+  $\Sat{\OLId{latin-looped}{M}}{\lforall[\OLId{latin-ordinary}{x}][\lforall[\OLId{latin-ordinary}{y}][(\eq[\OLId{latin-ordinary}{u}(\OLId{latin-ordinary}{x})][\OLId{latin-ordinary}{u}(\OLId{latin-ordinary}{y})] \lif \eq[\OLId{latin-ordinary}{x}][\OLId{latin-ordinary}{y}])]]
+    \land \lexists[\OLId{latin-ordinary}{y}][\lforall[\OLId{latin-ordinary}{x}][\eq/[\OLId{latin-ordinary}{y}][\OLId{latin-ordinary}{u}(\OLId{latin-ordinary}{x})]]]}[\OLId{latin-ordinary}{s}]$
+  لبعض~$\OLId{latin-ordinary}{s}$.
+فمتى تحقق ذلك كانت~$\OLId{latin-ordinary}{s}(\OLId{latin-ordinary}{u})$ دالة !!a{injective}، ووجد
+$\OLId{latin-ordinary}{y} \in \Domain{\OLId{latin-looped}{M}}$ ليس في مدى~$\OLId{latin-ordinary}{s}(\OLId{latin-ordinary}{u})$.
+وعكسًا، إن وجدت دالة !!a{injective}~$\OLId{latin-ordinary}{f}\colon \Domain{\OLId{latin-looped}{M}} \to \Domain{\OLId{latin-looped}{M}}$
+تحقق~$\ran{\OLId{latin-ordinary}{f}} \neq \Domain{\OLId{latin-looped}{M}}$، أخذنا تعيينًا~$\OLId{latin-ordinary}{s}$
+يحقق~$\OLId{latin-ordinary}{s}(\OLId{latin-ordinary}{u}) = \OLId{latin-ordinary}{f}$، فحصل المطلوب.
+\end{proof}
+
+والمجموعة~$\OLId{latin-looped}{M}$ !!{enumerable} متى أمكن تعدادها على الصورة
+\[
+\OLId{latin-ordinary}{m}_\OLMathNumeral{0}, \OLId{latin-ordinary}{m}_\OLMathNumeral{1}, \OLId{latin-ordinary}{m}_\OLMathNumeral{2}, \dots
+\]
+بحيث ترد !!{element}s فيها بلا تكرار، ويجوز أن ينتهي التعداد.
+ومتى كانت~$\OLId{latin-looped}{M}$ غير خالية، تكافأ وجود هذا التعداد ووجود
+!!a{element}~$\OLId{latin-ordinary}{z} \in \OLId{latin-looped}{M}$ ودالة~$\OLId{latin-ordinary}{f}\colon \OLId{latin-looped}{M} \to \OLId{latin-looped}{M}$ تكون بها
+  $\OLId{latin-ordinary}{z}$، و$\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{z})$، و$\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{z}))$، و\dots جميع !!{element}s~$\OLId{latin-looped}{M}$.
+  فإن أعطينا التعداد، أخذنا~$\OLId{latin-ordinary}{z} = \OLId{latin-ordinary}{m}_\OLMathNumeral{0}$ و$\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{m}_\OLId{latin-ordinary}{k}) = \OLId{latin-ordinary}{m}_{\OLId{latin-ordinary}{k}+\OLMathNumeral{1}}$،
+  أو~$\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{m}_\OLId{latin-ordinary}{k}) = \OLId{latin-ordinary}{m}_\OLId{latin-ordinary}{k}$ إن كان~$\OLId{latin-ordinary}{m}_\OLId{latin-ordinary}{k}$ آخر !!{element} فيه؛
+  فيحصل بذلك !!{element} والدالة المطلوبان؛ والمدار المنتهي يكرر
+  آخر عنصر، غير أنه يمر بعناصر~$\OLId{latin-looped}{M}$ كلها.
+  وإن أعطينا مثل~$\OLId{latin-ordinary}{z}$ و$\OLId{latin-ordinary}{f}$، مر المدار~$\OLId{latin-ordinary}{z}$، و$\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{z})$،
+  و$\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{z}))$، و\dots بكل عناصر~$\OLId{latin-looped}{M}$، وربما كرر منها.
+  فنُبقي أول ورود لكل عنصر ونطرح ما تكرر بعده؛ فإن كانت~$\OLId{latin-looped}{M}$
+  منتهية وقفنا بعد آخر ورود أول. وهكذا نحصل على تعداد بلا تكرار،
+  فتكون~$\OLId{latin-looped}{M}$ !!{enumerable}.
+وبالتعبير عن وجود~$\OLId{latin-ordinary}{z}$ و$\OLId{latin-ordinary}{f}$ في الرتبة الثانية نحصل على
+!!{sentence} تصدق في !!a{structure} إذا وفقط إذا كانت
+!!{structure} !!{enumerable}:
+\[
+\fn{Count} \ident
+\lexists[\OLId{latin-ordinary}{z}][\lexists[\OLId{latin-ordinary}{u}][\lforall[\OLId{latin-looped}{X}][((\OLId{latin-looped}{X}(\OLId{latin-ordinary}{z}) \land
+      \lforall[\OLId{latin-ordinary}{x}][(\OLId{latin-looped}{X}(\OLId{latin-ordinary}{x}) \lif \OLId{latin-looped}{X}(\OLId{latin-ordinary}{u}(\OLId{latin-ordinary}{x})))]) \lif \lforall[\OLId{latin-ordinary}{x}][\OLId{latin-looped}{X}(\OLId{latin-ordinary}{x})])]]]
+\]
+% تصحيح مصدر (0329-I1): فُصل المدار المغطي، الذي قد يكرر، عن التعداد الخالي من التكرار المستخرج منه.
+
+\begin{prop}
+يكون~$\Sat{\OLId{latin-looped}{M}}{\fn{Count}}$ إذا وفقط إذا كان~$\Domain{\OLId{latin-looped}{M}}$ !!{enumerable}.
+\end{prop}
+
+\begin{proof}
+لتكن~$\Domain{\OLId{latin-looped}{M}}$ !!{enumerable}، ولنعددها
+بـ$\OLId{latin-ordinary}{m}_\OLMathNumeral{0}$، و$\OLId{latin-ordinary}{m}_\OLMathNumeral{1}$، و\dots. نحذف المكرر من التعداد حتى لا يرد
+$\OLId{latin-ordinary}{m}_\OLId{latin-ordinary}{k}$ مرتين. ونضع~$\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{m}_\OLId{latin-ordinary}{k}) = \OLId{latin-ordinary}{m}_{\OLId{latin-ordinary}{k}+\OLMathNumeral{1}}$،
+و$\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{m}_\OLId{latin-ordinary}{k})=\OLId{latin-ordinary}{m}_\OLId{latin-ordinary}{k}$ إذا كان~$\OLId{latin-ordinary}{m}_\OLId{latin-ordinary}{k}$ آخر عناصر التعداد المنتهي.
+ثم نضع~$\OLId{latin-ordinary}{s}(\OLId{latin-ordinary}{z}) = \OLId{latin-ordinary}{m}_\OLMathNumeral{0}$ و$\OLId{latin-ordinary}{s}(\OLId{latin-ordinary}{u}) = \OLId{latin-ordinary}{f}$، وندعي أن
+\[
+\Sat{\OLId{latin-looped}{M}}{\lforall[\OLId{latin-looped}{X}][((\OLId{latin-looped}{X}(\OLId{latin-ordinary}{z}) \land \lforall[\OLId{latin-ordinary}{x}][(\OLId{latin-looped}{X}(\OLId{latin-ordinary}{x}) \lif \OLId{latin-looped}{X}(\OLId{latin-ordinary}{u}(\OLId{latin-ordinary}{x})))])
+    \lif \lforall[\OLId{latin-ordinary}{x}][\OLId{latin-looped}{X}(\OLId{latin-ordinary}{x})])]}[\OLId{latin-ordinary}{s}]
+\]
+خذ~$\OLId{latin-looped}{S} \subseteq \Domain{\OLId{latin-looped}{M}}$ كيفما اتفق، ولنفترض
+$\Sat{\OLId{latin-looped}{M}}{(\OLId{latin-looped}{X}(\OLId{latin-ordinary}{z}) \land \lforall[\OLId{latin-ordinary}{x}][(\OLId{latin-looped}{X}(\OLId{latin-ordinary}{x}) \lif
+\OLId{latin-looped}{X}(\OLId{latin-ordinary}{u}(\OLId{latin-ordinary}{x})))])}[\Subst{\OLId{latin-ordinary}{s}}{\OLId{latin-looped}{S}}{\OLId{latin-looped}{X}}]$.
+ينتج حينئذ~$\Subst{\OLId{latin-ordinary}{s}}{\OLId{latin-looped}{S}}{\OLId{latin-looped}{X}}(\OLId{latin-ordinary}{z}) \in \OLId{latin-looped}{S}$،
+وأنه متى كان~$\OLId{latin-ordinary}{x} \in \OLId{latin-looped}{S}$ كان~$(\Subst{\OLId{latin-ordinary}{s}}{\OLId{latin-looped}{S}}{\OLId{latin-looped}{X}}(\OLId{latin-ordinary}{u}))(\OLId{latin-ordinary}{x}) \in \OLId{latin-looped}{S}$.
+ولما كان~$\varAssign{\Subst{\OLId{latin-ordinary}{s}}{\OLId{latin-looped}{S}}{\OLId{latin-looped}{X}}}{\OLId{latin-ordinary}{s}}{\OLId{latin-looped}{X}}$،
+فهذا بعينه قولنا~$\OLId{latin-ordinary}{m}_\OLMathNumeral{0} \in \OLId{latin-looped}{S}$، وأن~$\OLId{latin-ordinary}{x} \in \OLId{latin-looped}{S}$
+يستلزم~$\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x}) \in \OLId{latin-looped}{S}$. وعليه
+$\OLId{latin-ordinary}{m}_\OLMathNumeral{0} \in \OLId{latin-looped}{S}$، و$\OLId{latin-ordinary}{m}_\OLMathNumeral{1} = \OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{m}_\OLMathNumeral{0}) \in \OLId{latin-looped}{S}$، و
+$\OLId{latin-ordinary}{m}_\OLMathNumeral{2} = \OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{m}_\OLMathNumeral{0})) \in \OLId{latin-looped}{S}$، وهكذا في سائر التعداد.
+فيلزم~$\OLId{latin-looped}{S} = \Domain{\OLId{latin-looped}{M}}$، ويحصل
+$\Sat{\OLId{latin-looped}{M}}{\lforall[\OLId{latin-ordinary}{x}][\OLId{latin-looped}{X}(\OLId{latin-ordinary}{x})]}[\Subst{\OLId{latin-ordinary}{s}}{\OLId{latin-looped}{S}}{\OLId{latin-looped}{X}}]$.
+ولأن~$\OLId{latin-looped}{S} \subseteq \Domain{\OLId{latin-looped}{M}}$ لم تُخص بشرط، ثبت
+$\Sat{\OLId{latin-looped}{M}}{\fn{Count}}$.
+
+وللعكس، نفرض~$\Sat{\OLId{latin-looped}{M}}{\fn{Count}}$، أي
+\[
+\Sat{\OLId{latin-looped}{M}}{\lforall[\OLId{latin-looped}{X}][((\OLId{latin-looped}{X}(\OLId{latin-ordinary}{z}) \land \lforall[\OLId{latin-ordinary}{x}][(\OLId{latin-looped}{X}(\OLId{latin-ordinary}{x}) \lif \OLId{latin-looped}{X}(\OLId{latin-ordinary}{u}(\OLId{latin-ordinary}{x})))])
+    \lif \lforall[\OLId{latin-ordinary}{x}][\OLId{latin-looped}{X}(\OLId{latin-ordinary}{x})])]}[\OLId{latin-ordinary}{s}]
+\]
+لبعض~$\OLId{latin-ordinary}{s}$. ضع~$\OLId{latin-ordinary}{m} = \OLId{latin-ordinary}{s}(\OLId{latin-ordinary}{z})$ و$\OLId{latin-ordinary}{f} = \OLId{latin-ordinary}{s}(\OLId{latin-ordinary}{u})$، وخذ
+$\OLId{latin-looped}{S} = \{\OLId{latin-ordinary}{m}, \OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{m}), \OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{m})), \dots\}$. فالمجموعة~$\OLId{latin-looped}{S}$
+!!{enumerable} بهذا التعريف. ومن الفرض نحصل على
+\[
+\Sat{\OLId{latin-looped}{M}}{(\OLId{latin-looped}{X}(\OLId{latin-ordinary}{z}) \land \lforall[\OLId{latin-ordinary}{x}][(\OLId{latin-looped}{X}(\OLId{latin-ordinary}{x}) \lif \OLId{latin-looped}{X}(\OLId{latin-ordinary}{u}(\OLId{latin-ordinary}{x})))])
+    \lif \lforall[\OLId{latin-ordinary}{x}][\OLId{latin-looped}{X}(\OLId{latin-ordinary}{x})]}[\Subst{\OLId{latin-ordinary}{s}}{\OLId{latin-looped}{S}}{\OLId{latin-looped}{X}}]
+\]
+ويتحقق~$\Sat{\OLId{latin-looped}{M}}{\OLId{latin-looped}{X}(\OLId{latin-ordinary}{z})}[\Subst{\OLId{latin-ordinary}{s}}{\OLId{latin-looped}{S}}{\OLId{latin-looped}{X}}]$، إذ
+$\OLId{latin-looped}{S} \ni \OLId{latin-ordinary}{m} = \Subst{\OLId{latin-ordinary}{s}}{\OLId{latin-looped}{S}}{\OLId{latin-looped}{X}}(\OLId{latin-ordinary}{z})$. ويتحقق كذلك
+$\Sat{\OLId{latin-looped}{M}}{\lforall[\OLId{latin-ordinary}{x}][(\OLId{latin-looped}{X}(\OLId{latin-ordinary}{x}) \lif
+\OLId{latin-looped}{X}(\OLId{latin-ordinary}{u}(\OLId{latin-ordinary}{x})))]}[\Subst{\OLId{latin-ordinary}{s}}{\OLId{latin-looped}{S}}{\OLId{latin-looped}{X}}]$، لأن~$\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x}) \in \OLId{latin-looped}{S}$ كلما كان~$\OLId{latin-ordinary}{x} \in \OLId{latin-looped}{S}$.
+فقد أُرضي المقدم والشرطية معًا، فوجب إرضاء التالي:
+$\Sat{\OLId{latin-looped}{M}}{\lforall[\OLId{latin-ordinary}{x}][\OLId{latin-looped}{X}(\OLId{latin-ordinary}{x})]}[\Subst{\OLId{latin-ordinary}{s}}{\OLId{latin-looped}{S}}{\OLId{latin-looped}{X}}]$.
+وهذا يقتضي~$\OLId{latin-looped}{S} = \Domain{\OLId{latin-looped}{M}}$، فتكون~$\Domain{\OLId{latin-looped}{M}}$ !!{enumerable}،
+كما أن~$\OLId{latin-looped}{S}$ كذلك بحسب تعريفها.
+\end{proof}
+
+\begin{prob}
+!!{sentence}~$\fn{Inf} \land \fn{Count}$ تصدق في المجالات
+!!{denumerable}، ولا تصدق في غيرها. غيّر تعريف~$\fn{Count}$
+لتحصل على !!{sentence} أخرى تقرر مباشرة أن المجال
+!!{denumerable}، ثم أثبت أنها تؤدي هذا المعنى.
+\end{prob}
+
+\end{document}

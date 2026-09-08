@@ -1,0 +1,341 @@
+% Part: first-order-logic
+% Chapter: tableaux
+% Section: proving-things-quant
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{tab}{prq}
+
+\olsection{\usetoken{P}{tableau} مع المكمّمات}
+
+\begin{ex}
+إذا اشتمل العمل على المكمّمات وجبت مراعاة شرط المتغير المميَّز،
+وقد يتوقف استيفاؤه على تقديم بعض الاستدلالات وتأخير بعض.
+ومن حسن التدبير أن نبدأ بالقواعد المقيّدة بهذا الشرط؛ فتقع في أعلى
+ال!!{tableau} عند تمامه.
+
+ولنبيّن بناء !!a{tableau} لل!!{sentence}
+$\lexists[\OLId{latin-ordinary}{x}][\lnot !A(\OLId{latin-ordinary}{x})] \lif \lnot \lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]$.
+نثبت أولًا الافتراض، على عادتنا:
+\begin{oltableau}
+[\sFmla{\False}{\lexists[x][\lnot \formula{A}(x)]\lif \lnot
+    \lforall[x][\formula{A}(x)]}, just=\TAss]
+\end{oltableau}
+ال!!{main operator} هنا~$\lif$؛ فنجري
+$\TRule{\False}{\lif}$:
+\begin{oltableau}
+[\sFmla{\False}{\lexists[x][\lnot \formula{A}(x)]\lif \lnot
+    \lforall[x][\formula{A}(x)]}, just=\TAss, checked
+  [\sFmla{\True}{\lexists[x][\lnot \formula{A}(x)]},
+    just={\TRule{\False}{\lif}[1]}
+    [\sFmla{\False}{\lnot\lforall[x][\formula{A}(x)]},
+      just={\TRule{\False}{\lif}[1]}]
+  ]
+]
+\end{oltableau}
+ثم نأخذ السطر~$\OLMathNumeral{2}$ بقاعدة~$\TRule{\True}{\lexists}$.
+ولا بد لها من !!{constant} جديد. ولم يرد بعد شيء من
+ال!!{constant}s، فيتسع الاختيار؛ فلنأخذ~$\OLId{latin-ordinary}{a}$:
+\begin{oltableau}
+[\sFmla{\False}{\lexists[x][\lnot \formula{A}(x)]\lif \lnot
+    \lforall[x][\formula{A}(x)]}, just=\TAss, checked
+  [\sFmla{\True}{\lexists[x][\lnot \formula{A}(x)]},
+    just={\TRule{\False}{\lif}[1]}, checked
+    [\sFmla{\False}{\lnot\lforall[x][\formula{A}(x)]},
+      just={\TRule{\False}{\lif}[1]}
+      [\sFmla{\True}{\lnot\formula{A}(a)}, just={\TRule{\True}{\lexists}[2]}]
+    ]
+  ]
+]
+\end{oltableau}
+ثم نجري~$\TRule{\False}{\lnot}$ على السطر~$\OLMathNumeral{3}$:
+\begin{oltableau}
+[\sFmla{\False}{\lexists[x][\lnot \formula{A}(x)]\lif \lnot
+    \lforall[x][\formula{A}(x)]}, just=\TAss, checked
+  [\sFmla{\True}{\lexists[x][\lnot \formula{A}(x)]},
+    just={\TRule{\False}{\lif}[1]}, checked
+    [\sFmla{\False}{\lnot\lforall[x][\formula{A}(x)]},
+      just={\TRule{\False}{\lif}[1]}, checked
+      [\sFmla{\True}{\lnot\formula{A}(a)}, just={\TRule{\True}{\lexists}[2]}
+        [\sFmla{\True}{\lforall[x][\formula{A}(x)]},
+          just = {\TRule{\False}{\lnot}[3]}
+        ]
+      ]
+    ]
+  ]
+]
+\end{oltableau}
+ولكي يتم !!{tableau} مغلق، نجري~$\TRule{\True}{\lnot}$
+على السطر~$\OLMathNumeral{4}$، ونتبعها بـ~$\TRule{\True}{\lforall}$ على السطر~$\OLMathNumeral{5}$:
+\begin{oltableau}
+[\sFmla{\False}{\lexists[x][\lnot \formula{A}(x)]\lif \lnot
+    \lforall[x][\formula{A}(x)]}, just=\TAss, checked
+  [\sFmla{\True}{\lexists[x][\lnot \formula{A}(x)]},
+    just={\TRule{\False}{\lif}[1]}, checked
+    [\sFmla{\False}{\lnot\lforall[x][\formula{A}(x)]},
+      just={\TRule{\False}{\lif}[1]}, checked
+      [\sFmla{\True}{\lnot\formula{A}(a)}, just={\TRule{\True}{\lexists}[2]}
+        [\sFmla{\True}{\lforall[x][\formula{A}(x)]},
+          just = {\TRule{\False}{\lnot}[3]}
+          [\sFmla{\False}{\formula{A}(a)}, just={\TRule{\True}{\lnot}[4]}
+            [\sFmla{\True}{\formula{A}(a)},
+              just={\TRule{\True}{\lforall}[5]}, close
+            ]
+          ]
+        ]
+      ]
+    ]
+  ]
+]
+\end{oltableau}
+\end{ex}
+
+\begin{ex}
+وننظر الآن في بناء !!a{tableau} للمجموعة
+\[
+\sFmla{\False}{\lexists[\OLId{latin-ordinary}{x}][!C(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{b})]},
+\sFmla{\True}{\lexists[\OLId{latin-ordinary}{x}][(!A(\OLId{latin-ordinary}{x}) \land !B(\OLId{latin-ordinary}{x}))]},
+\sFmla{\True}{\lforall[\OLId{latin-ordinary}{x}][(!B(\OLId{latin-ordinary}{x}) \lif !C(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{b}))]}.
+\]
+نضع الافتراضات في أوله:
+\begin{oltableau}
+  [\sFmla{\False}{\lexists[x][\formula{C}(x,b)]}, just=\TAss
+    [\sFmla{\True}{\lexists[x][(\formula{A}(x) \land \formula{B}(x))]},
+      just=\TAss
+      [\sFmla{\True}{\lforall[x][(\formula{B}(x) \lif \formula{C}(x,b))]},
+        just=\TAss]
+    ]
+  ]
+\end{oltableau}
+نقدّم هنا، كما تقدّم، القاعدة المشروطة بالمتغير المميَّز، وهي
+$\TRule{\True}{\lexists}$ على السطر~$\OLMathNumeral{2}$.
+وقد ورد ال!!{constant}~$\OLId{latin-ordinary}{b}$ في الافتراضات، فلا بد من غيره؛
+فنختار~$\OLId{latin-ordinary}{a}$ مرة أخرى:
+\begin{oltableau}
+  [\sFmla{\False}{\lexists[x][\formula{C}(x,b)]}, just=\TAss
+    [\sFmla{\True}{\lexists[x][(\formula{A}(x) \land \formula{B}(x))]},
+      just=\TAss, checked
+      [\sFmla{\True}{\lforall[x][(\formula{B}(x) \lif \formula{C}(x,b))]},
+        just=\TAss
+        [\sFmla{\True}{\formula{A}(a) \land \formula{B}(a)},
+          just={\TRule{\True}{\lexists}[2]}]
+      ]
+    ]
+  ]
+\end{oltableau}
+أما إجراء~$\TRule{\False}{\lexists}$ على السطر~$\OLMathNumeral{1}$ أو
+$\TRule{\True}{\lforall}$ على السطر~$\OLMathNumeral{3}$، فيقتضي تعيين الحد~$\OLId{latin-ordinary}{t}$
+الذي يحل محل~$\OLId{latin-ordinary}{x}$. وليس في هاتين القاعدتين شرط المتغير المميَّز؛
+فلنا اختيار أي حد مغلق. وقد تدعو الحاجة إلى تكرار القاعدة بحدود
+$\OLId{latin-ordinary}{t}$ مختلفة. والأغلب أن ينفع اختيار حد سبق وروده في ال!!{tableau}،
+وهما هنا~$\OLId{latin-ordinary}{a}$ و~$\OLId{latin-ordinary}{b}$؛ والذي يظهر في هذا المثال أن~$\OLId{latin-ordinary}{a}$ أقرب إلى
+إغلاق الفرع:
+\begin{oltableau}
+  [\sFmla{\False}{\lexists[x][\formula{C}(x,b)]}, just=\TAss
+    [\sFmla{\True}{\lexists[x][(\formula{A}(x) \land \formula{B}(x))]},
+      just=\TAss, checked
+      [\sFmla{\True}{\lforall[x][(\formula{B}(x) \lif \formula{C}(x,b))]}, just=\TAss
+        [\sFmla{\True}{\formula{A}(a) \land \formula{B}(a)}, just={\TRule{\True}{\lexists}[2]}
+          [\sFmla{\False}{\formula{C}(a,b)}, just={\TRule{\False}{\lexists}[1]}
+            [\sFmla{\True}{\formula{B}(a) \lif \formula{C}(a,b)},
+              just={\TRule{\True}{\lforall}[3]}
+            ]
+          ]
+        ]
+      ]
+    ]
+  ]
+\end{oltableau}
+ونترك ال!!{signed formula}s في السطرين~$\OLMathNumeral{1}$ و$\OLMathNumeral{3}$ بلا علامة صح؛
+فقد نحتاج إليهما مرة أخرى. ثم نجري~$\TRule{\True}{\land}$
+على السطر~$\OLMathNumeral{4}$:
+\begin{oltableau}
+  [\sFmla{\False}{\lexists[x][\formula{C}(x,b)]}, just=\TAss
+    [\sFmla{\True}{\lexists[x][(\formula{A}(x) \land \formula{B}(x))]},
+      just=\TAss, checked
+      [\sFmla{\True}{\lforall[x][(\formula{B}(x) \lif \formula{C}(x,b))]}, just=\TAss
+        [\sFmla{\True}{\formula{A}(a) \land \formula{B}(a)},
+          just={\TRule{\True}{\lexists}[2]}, checked
+          [\sFmla{\False}{\formula{C}(a,b)}, just={\TRule{\False}{\lexists}[1]}
+            [\sFmla{\True}{\formula{B}(a) \lif \formula{C}(a,b)},
+              just={\TRule{\True}{\lforall}[3]}
+              [\sFmla{\True}{\formula{A}(a)}, just={\TRule{\True}{\land}[4]}
+                [\sFmla{\True}{\formula{B}(a)}, just={\TRule{\True}{\land}[4]}
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    ]
+  ]
+\end{oltableau}
+وبإجراء~$\TRule{\True}{\lif}$ على السطر~$\OLMathNumeral{6}$ يغلق ال!!{tableau}:
+\begin{oltableau}
+  [\sFmla{\False}{\lexists[x][\formula{C}(x,b)]}, just=\TAss
+    [\sFmla{\True}{\lexists[x][(\formula{A}(x) \land \formula{B}(x))]},
+      just=\TAss, checked
+      [\sFmla{\True}{\lforall[x][(\formula{B}(x) \lif \formula{C}(x,b))]},
+        just=\TAss
+        [\sFmla{\True}{\formula{A}(a) \land \formula{B}(a)},
+          just={\TRule{\True}{\lexists}[2]}, checked
+          [\sFmla{\False}{\formula{C}(a,b)},
+            just={\TRule{\False}{\lexists}[1]}
+            [\sFmla{\True}{\formula{B}(a) \lif \formula{C}(a,b)},
+              just={\TRule{\True}{\lforall}[3]}, checked
+              [\sFmla{\True}{\formula{A}(a)},
+                just={\TRule{\True}{\land}[4]}
+                [\sFmla{\True}{\formula{B}(a)},
+                  just={\TRule{\True}{\land}[4]}
+                  [\sFmla{\False}{\formula{B}(a)},
+                    just={\TRule{\True}{\lif}[6]},close
+                  ]
+                  [\sFmla{\True}{\formula{C}(a,b)},
+                    just={\TRule{\True}{\lif}[6]},close
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    ]
+  ]
+\end{oltableau}
+
+
+\end{ex}
+
+\begin{ex}
+والآن نبني !!a{tableau} للمجموعة
+\[
+\sFmla{\True}{\lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]}, \sFmla{\True}{\lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})] 
+  \lif \lexists[\OLId{latin-ordinary}{y}][!B(\OLId{latin-ordinary}{y})]}, \sFmla{\True}{\lnot\lexists[\OLId{latin-ordinary}{y}][!B(\OLId{latin-ordinary}{y})]}.
+\]
+نفتتحه بتدوين الافتراضات:
+\begin{oltableau}
+  [\sFmla{\True}{\lforall[x][\formula{A}(x)]}, just=\TAss
+    [\sFmla{\True}{\lforall[x][\formula{A}(x)] \lif
+        \lexists[y][\formula{B}(y)]}, just=\TAss
+      [\sFmla{\True}{\lnot\lexists[y][\formula{B}(y)]}, just=\TAss
+      ]
+    ]
+  ]
+\end{oltableau}
+نبدأ بـ~$\TRule{\True}{\lnot}$ على السطر~$\OLMathNumeral{3}$.
+ومن تتمّة تقديم القواعد المشروطة بالمتغير المميَّز أن نؤخر قواعد
+المكمّمات الخالية من هذا الشرط حتى نحتاج إليها. وكذلك نؤخر القواعد
+التي تشعّب الفروع:
+\begin{oltableau}
+  [\sFmla{\True}{\lforall[x][\formula{A}(x)]}, just=\TAss
+    [\sFmla{\True}{\lforall[x][\formula{A}(x)] \lif
+        \lexists[y][\formula{B}(y)]}, just=\TAss
+      [\sFmla{\True}{\lnot\lexists[y][\formula{B}(y)]}, just=\TAss, checked
+        [\sFmla{\False}{\lexists[y][\formula{B}(y)]}, just={\TRule{\True}{\lnot}[3]}]
+      ]
+    ]
+  ]
+\end{oltableau}
+السطر الجديد~$\OLMathNumeral{4}$ تقابله~$\TRule{\False}{\lexists}$،
+وهي من قواعد المكمّمات غير المشروطة بالمتغير المميَّز.
+فلنؤخرها، ولنجر~$\TRule{\True}{\lif}$ على السطر~$\OLMathNumeral{2}$:
+\begin{oltableau}
+  [\sFmla{\True}{\lforall[x][\formula{A}(x)]}, just=\TAss
+    [\sFmla{\True}{\lforall[x][\formula{A}(x)] \lif
+        \lexists[y][\formula{B}(y)]}, just=\TAss, checked
+      [\sFmla{\True}{\lnot\lexists[y][\formula{B}(y)]}, just=\TAss, checked
+        [\sFmla{\False}{\lexists[y][\formula{B}(y)]},
+          just={\TRule{\True}{\lnot}[3]},
+          [\sFmla{\False}{\lforall[x][\formula{A}(x)]}, just={\TRule{\True}{\lif}[2]}]
+          [\sFmla{\True}{\lexists[y][\formula{B}(y)]}, just={\TRule{\True}{\lif}[2]}]
+        ]
+      ]
+    ]
+  ]
+\end{oltableau}
+كلتا ال!!{signed formula}s الناشئتين تقبل قاعدةً مشروطة بالمتغير
+المميَّز، فنقدّمهما في الخطوة التالية:
+\begin{oltableau}
+  [\sFmla{\True}{\lforall[x][\formula{A}(x)]}, just=\TAss
+    [\sFmla{\True}{\lforall[x][\formula{A}(x)] \lif
+        \lexists[y][\formula{B}(y)]}, just=\TAss, checked
+      [\sFmla{\True}{\lnot\lexists[y][\formula{B}(y)]}, just=\TAss, checked
+        [\sFmla{\False}{\lexists[y][\formula{B}(y)]},
+          just={\TRule{\True}{\lnot}[3]}
+          [\sFmla{\False}{\lforall[x][\formula{A}(x)]}, just={\TRule{\True}{\lif}[2]},checked
+            [\sFmla{\False}{\formula{A}(b)}, just={\TRule{\False}{\lforall}[5]}]
+          ]
+          [\sFmla{\True}{\lexists[y][\formula{B}(y)]}, just={\TRule{\True}{\lif}[2]},checked
+            [\sFmla{\True}{\formula{B}(c)}, just={\TRule{\True}{\lexists}[5]}]
+          ]
+        ]
+      ]
+    ]
+  ]
+\end{oltableau}
+وبقي لإغلاق الفرعين أن نرجع إلى ال!!{signed formula}s في السطرين~$\OLMathNumeral{1}$
+و~$\OLMathNumeral{4}$. والقاعدتان المقابلتان، وهما~\TRule{\True}{\lforall} و
+\TRule{\False}{\lexists}، لا تشترطان المتغير المميَّز؛ فنختار من
+الحدود المغلقة ما يلائم، وهما في هذا الموضع~$\OLId{latin-ordinary}{b}$ و~$\OLId{latin-ordinary}{c}$ على الترتيب:
+\begin{oltableau}
+  [\sFmla{\True}{\lforall[x][\formula{A}(x)]}, just=\TAss
+    [\sFmla{\True}{\lforall[x][\formula{A}(x)] \lif
+        \lexists[y][\formula{B}(y)]}, just=\TAss, checked
+      [\sFmla{\True}{\lnot\lexists[y][\formula{B}(y)]}, just=\TAss, checked
+        [\sFmla{\False}{\lexists[y][\formula{B}(y)]},
+          just={\TRule{\True}{\lnot}[3]}
+          [\sFmla{\False}{\lforall[x][\formula{A}(x)]},
+            just={\TRule{\True}{\lif}[2]},checked
+            [\sFmla{\False}{\formula{A}(b)},
+              just={\TRule{\False}{\lforall}[5]}
+              [\sFmla{\True}{\formula{A}(b)},
+                just={\TRule{\True}{\lforall}[1]},close
+              ]
+            ]
+          ]
+          [\sFmla{\True}{\lexists[y][\formula{B}(y)]},
+            just={\TRule{\True}{\lif}[2]},checked
+            [\sFmla{\True}{\formula{B}(c)},
+              just={\TRule{\True}{\lexists}[5]}
+              [\sFmla{\False}{\formula{B}(c)},
+                just={\TRule{\False}{\lexists}[4]},close
+              ]
+            ]
+          ]
+        ]
+      ]
+    ]
+  ]
+\end{oltableau}
+\end{ex}
+
+\begin{prob}
+أنشئ !!{tableau}s مغلقة لما يأتي:
+\begin{enumerate}
+\item $\sFmla{\False}{(\lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})] \land \lforall[\OLId{latin-ordinary}{y}][!B(\OLId{latin-ordinary}{y})])
+\lif \lforall[\OLId{latin-ordinary}{z}][(!A(\OLId{latin-ordinary}{z}) \land !B(\OLId{latin-ordinary}{z}))]}$.
+\item $\sFmla{\False}{(\lexists[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})] \lor \lexists[\OLId{latin-ordinary}{y}][!B(\OLId{latin-ordinary}{y})])
+\lif \lexists[\OLId{latin-ordinary}{z}][(!A(\OLId{latin-ordinary}{z}) \lor !B(\OLId{latin-ordinary}{z}))]}$.
+\item $\sFmla{\True}{\lforall[\OLId{latin-ordinary}{x}][(!A(\OLId{latin-ordinary}{x}) \lif !B)]},
+\sFmla{\False}{\lexists[\OLId{latin-ordinary}{y}][!A(\OLId{latin-ordinary}{y})] \lif !B}$.
+\item $\sFmla{\True}{\lforall[\OLId{latin-ordinary}{x}][\lnot !A(\OLId{latin-ordinary}{x})]},
+\sFmla{\False}{\lnot\lexists[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})]}$.
+\item $\sFmla{\False}{\lnot\lexists[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})] \lif \lforall[\OLId{latin-ordinary}{x}][\lnot
+!A(\OLId{latin-ordinary}{x})]}$.
+\item $\sFmla{\False}{\lnot\lexists[\OLId{latin-ordinary}{x}][\lforall[\OLId{latin-ordinary}{y}][((!A(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y}) \lif
+\lnot !A(\OLId{latin-ordinary}{y},\OLId{latin-ordinary}{y})) \land (\lnot !A(\OLId{latin-ordinary}{y},\OLId{latin-ordinary}{y}) \lif !A(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y})))]]}$.
+\end{enumerate}
+\end{prob}
+
+\begin{prob}
+أنشئ !!{tableau}s مغلقة لما يأتي:
+\begin{enumerate}
+\item $\sFmla{\False}{\lnot\lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})] \lif \lexists[\OLId{latin-ordinary}{x}][\lnot!A(\OLId{latin-ordinary}{x})]}$.
+\item $\sFmla{\True}{(\lforall[\OLId{latin-ordinary}{x}][!A(\OLId{latin-ordinary}{x})] \lif !B)}, \sFmla{\False}{\lexists[\OLId{latin-ordinary}{y}][(!A(\OLId{latin-ordinary}{y}) \lif !B)]}$.
+\item $\sFmla{\False}{\lexists[\OLId{latin-ordinary}{x}][(!A(\OLId{latin-ordinary}{x}) \lif \lforall[\OLId{latin-ordinary}{y}][!A(\OLId{latin-ordinary}{y})])]}$.
+\end{enumerate}
+\end{prob}
+
+\end{document}

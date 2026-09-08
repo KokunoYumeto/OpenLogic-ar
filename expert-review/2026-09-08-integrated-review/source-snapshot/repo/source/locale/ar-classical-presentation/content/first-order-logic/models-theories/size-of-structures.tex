@@ -1,0 +1,71 @@
+% Part: first-order-logic
+% Chapter: models-theories
+% Section: size-of-structures
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{mat}{siz}
+
+\olsection{التعبير عن حجم ال\printtoken{P}{structure}}
+
+\begin{explain}
+قد نعبر عن بعض خواص البنى من غير حاجة إلى رمز غير منطقي.
+فمن ال!!{sentence}s ما يصدق في !!a{structure} إذا وفقط إذا كان
+!!{domain} تلك ال!!{structure} مشتملًا على عدد معيّن~$\OLId{latin-ordinary}{n}$
+من ال!!{element}s، إما على الأقل، وإما على الأكثر، وإما بالضبط.
+\end{explain}
+
+\begin{prop}
+تصدق ال!!{sentence}
+\begin{multline*}
+  !A_{\ge \OLId{latin-ordinary}{n}} \ident \lexists[\OLId{latin-ordinary}{x}_\OLMathNumeral{1}][\lexists[\OLId{latin-ordinary}{x}_\OLMathNumeral{2}][\dots\lexists[\OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{n}][{}]]]\\
+  \begin{aligned}
+  (\eq/[\OLId{latin-ordinary}{x}_\OLMathNumeral{1}][\OLId{latin-ordinary}{x}_\OLMathNumeral{2}] \land {}
+  \eq/[\OLId{latin-ordinary}{x}_\OLMathNumeral{1}][\OLId{latin-ordinary}{x}_\OLMathNumeral{3}] \land \eq/[\OLId{latin-ordinary}{x}_\OLMathNumeral{1}][\OLId{latin-ordinary}{x}_\OLMathNumeral{4}] \land \dots \land \eq/[\OLId{latin-ordinary}{x}_\OLMathNumeral{1}][\OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{n}] \land {}\\
+\eq/[\OLId{latin-ordinary}{x}_\OLMathNumeral{2}][\OLId{latin-ordinary}{x}_\OLMathNumeral{3}] \land \eq/[\OLId{latin-ordinary}{x}_\OLMathNumeral{2}][\OLId{latin-ordinary}{x}_\OLMathNumeral{4}] \land \dots \land {} \eq/[\OLId{latin-ordinary}{x}_\OLMathNumeral{2}][\OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{n}] \land {} \\
+\vdots\\
+\eq/[\OLId{latin-ordinary}{x}_{\OLId{latin-ordinary}{n}-\OLMathNumeral{1}}][\OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{n}])
+\end{aligned}
+\end{multline*}
+في !!a{structure}~$\Struct M$ إذا وفقط إذا كان $\Domain \OLId{latin-looped}{M}$ يحتوي على
+$\OLId{latin-ordinary}{n}$ من ال!!{element}s على الأقل. وبناء عليه، يكون
+$\Sat{\OLId{latin-looped}{M}}{\lnot !A_{\ge \OLId{latin-ordinary}{n}+\OLMathNumeral{1}}}$ إذا وفقط إذا كان $\Domain \OLId{latin-looped}{M}$ يحتوي على
+$\OLId{latin-ordinary}{n}$ من ال!!{element}s على الأكثر.
+
+\end{prop}
+
+\begin{prop}
+تصدق ال!!{sentence}
+\begin{multline*}
+!A_{= \OLId{latin-ordinary}{n}} \ident \lexists[\OLId{latin-ordinary}{x}_\OLMathNumeral{1}][\lexists[\OLId{latin-ordinary}{x}_\OLMathNumeral{2}][\dots\lexists[\OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{n}][{}]]] \\
+\begin{aligned}
+  (\eq/[\OLId{latin-ordinary}{x}_\OLMathNumeral{1}][\OLId{latin-ordinary}{x}_\OLMathNumeral{2}] \land {}
+  \eq/[\OLId{latin-ordinary}{x}_\OLMathNumeral{1}][\OLId{latin-ordinary}{x}_\OLMathNumeral{3}] \land \eq/[\OLId{latin-ordinary}{x}_\OLMathNumeral{1}][\OLId{latin-ordinary}{x}_\OLMathNumeral{4}] \land \dots \land \eq/[\OLId{latin-ordinary}{x}_\OLMathNumeral{1}][\OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{n}] \land {}\\
+\eq/[\OLId{latin-ordinary}{x}_\OLMathNumeral{2}][\OLId{latin-ordinary}{x}_\OLMathNumeral{3}] \land \eq/[\OLId{latin-ordinary}{x}_\OLMathNumeral{2}][\OLId{latin-ordinary}{x}_\OLMathNumeral{4}] \land \dots \land {} \eq/[\OLId{latin-ordinary}{x}_\OLMathNumeral{2}][\OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{n}] \land {} \\
+\vdots\\
+\eq/[\OLId{latin-ordinary}{x}_{\OLId{latin-ordinary}{n}-\OLMathNumeral{1}}][\OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{n}] \land {} \\
+\lforall[\OLId{latin-ordinary}{y}][(\eq[\OLId{latin-ordinary}{y}][\OLId{latin-ordinary}{x}_\OLMathNumeral{1}] \lor \dots \lor \eq[\OLId{latin-ordinary}{y}][\OLId{latin-ordinary}{x}_\OLId{latin-ordinary}{n}])]
+\end{aligned}
+\end{multline*}
+في !!a{structure}~$\Struct M$ إذا وفقط إذا كان $\Domain \OLId{latin-looped}{M}$ يحتوي على
+$\OLId{latin-ordinary}{n}$ من ال!!{element}s بالضبط.
+\end{prop}
+
+\begin{prop}
+تكون ال!!{structure} لا نهائية إذا وفقط إذا كانت نموذجًا لـ
+\[
+\{!A_{\ge \OLMathNumeral{1}}, !A_{\ge \OLMathNumeral{2}}, !A_{\ge \OLMathNumeral{3}}, \dots \}.
+\]
+\end{prop}
+
+وأما جملة منطقية صرفة واحدة تصدق في~$\Struct M$ إذا وفقط إذا
+كان $\Domain \OLId{latin-looped}{M}$ لا نهائيًا، فلا توجد. ومع ذلك يمكن وضع
+!!{sentence}s ذات !!{predicate}s غير منطقية لا يكون لها إلا
+نماذج لا نهائية، وإن لم تكن كل !!{structure} لا نهائية نموذجًا لها.
+وأما الانتهاء، وكون البنية !!{nonenumerable}، فلا يمكن التعبير
+عن أي منهما حتى بمجموعة لا نهائية من ال!!{sentence}s.
+وهذه النتائج من مقتضيات مبرهنتي التراص ولوفنهايم--سكولم.
+
+\end{document}

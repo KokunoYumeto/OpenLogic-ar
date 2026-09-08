@@ -1,0 +1,76 @@
+% الجزء: sets-functions-relations
+% الفصل: relations
+% القسم: equivalence-relations
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid[ar]{sfr}{rel}{eqv}
+
+\olsection{علاقات التكافؤ}
+
+تجتمع في علاقة الهوية على المجموعة ثلاث خصائص: الانعكاسية والتناظر
+والتعدية. والعلاقات~$\OLId{latin-looped}{R}$ الجامعة لهذه الثلاث كثيرة الورود.
+
+\begin{defn}[علاقة التكافؤ]
+\emph{علاقة التكافؤ} علاقة $\OLId{latin-looped}{R} \subseteq \OLId{latin-looped}{A}^\OLMathNumeral{2}$ تجمع الانعكاسية والتناظر
+والتعدية. ويقال إن !!^{element}s $\OLId{latin-ordinary}{x}$ و$\OLId{latin-ordinary}{y}$ من~$\OLId{latin-looped}{A}$
+\emph{متكافئان وفق $\OLId{latin-looped}{R}$} متى كان~$Rxy$.
+\end{defn}
+
+ومن علاقة التكافؤ تؤخذ \emph{فئات التكافؤ}. وذلك أن العلاقة تقسم
+المجال كتلًا: تتعلق الأشياء في كل كتلة بعضها ببعض، ولا يتعلق شيء
+من كتلة بشيء من أخرى. وقد ينفع أن يكون الكلام على هذه الكتل
+\emph{مباشرة}؛ فلهذا نعرّفها كما يأتي.
+
+\begin{defn}\ollabel{def:equivalenceclass}
+لتكن $\OLId{latin-looped}{R} \subseteq \OLId{latin-looped}{A}^\OLMathNumeral{2}$ علاقة تكافؤ. إذا أخذ $\OLId{latin-ordinary}{x} \in \OLId{latin-looped}{A}$ كانت
+\emph{فئة تكافؤ} $\OLId{latin-ordinary}{x}$ في~$\OLId{latin-looped}{A}$ هي المجموعة $\equivrep{\OLId{latin-ordinary}{x}}{\OLId{latin-looped}{R}}
+= \Setabs{\OLId{latin-ordinary}{y} \in \OLId{latin-looped}{A}}{Rxy}$. وأما \emph{مجموعة قسمة} $\OLId{latin-looped}{A}$ بالنسبة
+إلى~$\OLId{latin-looped}{R}$ فهي $\equivclass{\OLId{latin-looped}{A}}{\OLId{latin-looped}{R}} = \Setabs{\equivrep{\OLId{latin-ordinary}{x}}{\OLId{latin-looped}{R}}}{\OLId{latin-ordinary}{x} \in \OLId{latin-looped}{A}}$؛
+أي المجموعة الجامعة لفئات التكافؤ هذه.
+\end{defn}
+
+وتشهد النتيجة الآتية لصحة هذا التعريف، إذ تبين أن فئات التكافؤ
+هي حقًا الكتل التي تتجزأ إليها~$\OLId{latin-looped}{A}$:
+
+\begin{prop}
+لتكن $\OLId{latin-looped}{R} \subseteq \OLId{latin-looped}{A}^\OLMathNumeral{2}$ علاقة تكافؤ. حينئذ يتكافأ $Rxy$ مع
+$\equivrep{\OLId{latin-ordinary}{x}}{\OLId{latin-looped}{R}} = \equivrep{\OLId{latin-ordinary}{y}}{\OLId{latin-looped}{R}}$.
+\end{prop}
+
+\begin{proof}
+أما من اليسار إلى اليمين، فنفرض $Rxy$ ونأخذ $\OLId{latin-ordinary}{z} \in
+\equivrep{\OLId{latin-ordinary}{x}}{\OLId{latin-looped}{R}}$. فبالتعريف $Rxz$، وبما أن $\OLId{latin-looped}{R}$ تكافؤ يلزم $Ryz$.
+وتفصيل اللزوم: من $Rxy$ وتناظر~$\OLId{latin-looped}{R}$ نحصل على $Ryx$، ثم من
+$Rxz$ وتعدية~$\OLId{latin-looped}{R}$ نحصل على~$Ryz$. إذن $\OLId{latin-ordinary}{z} \in \equivrep{\OLId{latin-ordinary}{y}}{\OLId{latin-looped}{R}}$،
+وبعموم الاختيار $\equivrep{\OLId{latin-ordinary}{x}}{\OLId{latin-looped}{R}} \subseteq \equivrep{\OLId{latin-ordinary}{y}}{\OLId{latin-looped}{R}}$.
+وبمثل ذلك $\equivrep{\OLId{latin-ordinary}{y}}{\OLId{latin-looped}{R}} \subseteq \equivrep{\OLId{latin-ordinary}{x}}{\OLId{latin-looped}{R}}$؛ فالامتدادية
+تقضي بأن $\equivrep{\OLId{latin-ordinary}{x}}{\OLId{latin-looped}{R}} = \equivrep{\OLId{latin-ordinary}{y}}{\OLId{latin-looped}{R}}$.
+
+وأما من اليمين إلى اليسار، فنفرض $\equivrep{\OLId{latin-ordinary}{x}}{\OLId{latin-looped}{R}} =
+\equivrep{\OLId{latin-ordinary}{y}}{\OLId{latin-looped}{R}}$. وانعكاسية $\OLId{latin-looped}{R}$ تعطي $Ryy$، ومنه
+$\OLId{latin-ordinary}{y} \in \equivrep{\OLId{latin-ordinary}{y}}{\OLId{latin-looped}{R}}$. فيكون $\OLId{latin-ordinary}{y} \in \equivrep{\OLId{latin-ordinary}{x}}{\OLId{latin-looped}{R}}$ أيضًا،
+لأن $\equivrep{\OLId{latin-ordinary}{x}}{\OLId{latin-looped}{R}} = \equivrep{\OLId{latin-ordinary}{y}}{\OLId{latin-looped}{R}}$ بالفرض؛ أي $Rxy$.
+\end{proof}
+
+\begin{ex}
+ومن أمثلة التكافؤ الحساب بترديد عدد. خذ $\OLId{latin-ordinary}{a}$ و$\OLId{latin-ordinary}{b}$ و$\OLId{latin-ordinary}{n} \in \PosInt$.
+نقول $\OLId{latin-ordinary}{a} \equiv_\OLId{latin-ordinary}{n} \OLId{latin-ordinary}{b}$ إذا وفقط إذا اتفق باقي قسمة $\OLId{latin-ordinary}{a}$ على~$\OLId{latin-ordinary}{n}$
+وباقي قسمة $\OLId{latin-ordinary}{b}$ على~$\OLId{latin-ordinary}{n}$. وصورته الرمزية أن $\OLId{latin-ordinary}{a} \equiv_\OLId{latin-ordinary}{n} \OLId{latin-ordinary}{b}$ إذا وفقط
+إذا وجد $\OLId{latin-ordinary}{k} \in \Int$ يحقق $\OLId{latin-ordinary}{a} - \OLId{latin-ordinary}{b} = kn$. فـ$\equiv_\OLId{latin-ordinary}{n}$ علاقة تكافؤ
+لكل~$\OLId{latin-ordinary}{n}$، وعدد الفئات المتمايزة $\OLId{latin-ordinary}{n}$ بالضبط، وهي الناشئة عن~$\equiv_\OLId{latin-ordinary}{n}$؛ أي إن
+$\equivclass{\Nat}{\equiv_\OLId{latin-ordinary}{n}}$ عدد !!{element}sها $\OLId{latin-ordinary}{n}$.
+فمنها الأعداد القابلة للقسمة على $\OLId{latin-ordinary}{n}$ بلا باق، وهي
+$\equivrep{\OLMathNumeral{0}}{\equiv_\OLId{latin-ordinary}{n}}$؛ ثم ما بقي من قسمته على $\OLId{latin-ordinary}{n}$ العدد~$\OLMathNumeral{1}$،
+وهو $\equivrep{\OLMathNumeral{1}}{\equiv_\OLId{latin-ordinary}{n}}$؛ و\ldots؛ إلى ما بقي من قسمته على~$\OLId{latin-ordinary}{n}$
+العدد~$\OLId{latin-ordinary}{n}-\OLMathNumeral{1}$، وهو~$\equivrep{\OLId{latin-ordinary}{n}-\OLMathNumeral{1}}{\equiv_\OLId{latin-ordinary}{n}}$.
+\end{ex}
+
+\begin{prob}
+برهن على أن $\equiv_\OLId{latin-ordinary}{n}$ علاقة تكافؤ لكل $\OLId{latin-ordinary}{n} \in \PosInt$، وأن
+عدد عناصر $\equivclass{\Nat}{\equiv_\OLId{latin-ordinary}{n}}$ هو $\OLId{latin-ordinary}{n}$ بالضبط.
+\end{prob}
+
+\end{document}

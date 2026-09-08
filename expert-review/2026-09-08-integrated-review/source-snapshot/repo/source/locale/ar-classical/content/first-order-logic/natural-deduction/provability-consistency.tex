@@ -1,0 +1,132 @@
+% Part: first-order-logic
+% Chapter: natural-deduction
+% Section: provability-consistency
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{ntd}{prv}}
+      {\olfileid{pl}{ntd}{prv}}
+      
+\olsection{\usetoken{S}{derivability} والاتساق}
+
+لعلاقة ال!!{derivability} خصائص نثبتها في هذا الموضع؛ لها شأن في
+نفسها، وفوق ذلك نحتاج إلى كل واحدة منها في برهان مبرهنة الاكتمال.
+
+\begin{prop}\ollabel{prop:provability-contr}
+  إذا كان~$\Gamma \Proves !A$ وكانت~$\Gamma \cup \{!A\}$ غير متسقة،
+  فإن~$\Gamma$ غير متسقة.
+\end{prop}
+
+\begin{proof}
+نأخذ ال!!{derivation} لـ~$!A$ من~$\Gamma$ ونسمّيه~$\delta_1$،
+وال!!{derivation} لـ~$\lfalse$ من~$\Gamma \cup \{!A\}$ ونسمّيه~$\delta_2$.
+وبالجمع بينهما على الوجه الآتي يمكن !!{derive}:
+\begin{prooftree}
+\AxiomC{$\Gamma, \Discharge{!A}{1}$}
+\RightLabel{$\delta_2$}
+\DeduceC{$\lfalse$}
+\DischargeRule{\Intro{\lnot}}{1}
+\UnaryInfC{$\lnot !A$}
+\AxiomC{$\Gamma$}
+\RightLabel{$\delta_1$}
+\DeduceC{$!A$}
+\RightLabel{\Elim{\lnot}}
+\BinaryInfC{$\lfalse$}
+\end{prooftree}
+وقد صار في ال!!{derivation} المركّب الافتراض~$!A$ !!{discharged}؛
+فلم يبق إلا !!a{derivation} من~$\Gamma$.
+\end{proof}
+
+\begin{prop}
+\ollabel{prop:prov-incons}
+$\Gamma \Proves !A$ إذا وفقط إذا كانت~$\Gamma \cup \{\lnot !A\}$ غير
+متسقة.
+\end{prop}
+
+\begin{proof}
+أما إذا كان~$\Gamma \Proves !A$، فلدينا
+!!a{derivation}~$\delta_0$ لـ~$!A$، افتراضاته ال!!{undischarged}
+من~$\Gamma$. نضم إليه افتراض النفي، فيحصل !!a{derivation} لـ~$\lfalse$
+من~$\Gamma \cup \{\lnot !A\}$ على هذه الصورة:
+\begin{prooftree}
+  \AxiomC{$\lnot !A$}
+  \AxiomC{$\Gamma$}
+  \RightLabel{$\delta_0$}
+  \DeduceC{$!A$}
+  \RightLabel{\Elim{\lnot}}
+  \BinaryInfC{$\lfalse$}
+\end{prooftree}
+
+وأما إذا كانت~$\Gamma \cup \{\lnot !A\}$ غير متسقة، فليكن~$\delta_1$
+ال!!{derivation} الذي ينتهي إلى~$\lfalse$، وافتراضاته ال!!{undischarged}
+في~$\Gamma \cup \{\lnot !A\}$. نرفع افتراض النفي، فيحصل
+!!a{derivation} لـ~$!A$ من~$\Gamma$ وحدها بقاعدة~$\FalseCl$:
+\begin{prooftree}
+  \AxiomC{$\Gamma, \Discharge{\lnot !A}{1}$}
+  \RightLabel{$\delta_1$}
+  \DeduceC{$\lfalse$}
+  \DischargeRule{\FalseCl}{1}
+  \UnaryInfC{$!A$}
+\end{prooftree}
+\end{proof}
+
+\begin{prob}
+أثبت أن~$\Gamma \Proves \lnot !A$ إذا وفقط إذا كانت
+$\Gamma \cup \{!A\}$ غير متسقة.
+\end{prob}
+
+\begin{prop}\ollabel{prop:explicit-inc}
+  إذا كان~$\Gamma \Proves !A$ وكان~$\lnot !A \in \Gamma$، فإن
+  $\Gamma$ غير متسقة.
+\end{prop}
+
+\begin{proof}
+  نفرض~$\Gamma \Proves !A$ و$\lnot !A \in \Gamma$، ونأخذ
+  !!a{derivation}~$\delta$ لـ~$!A$ من~$\Gamma$. وليس علينا بعد ذلك
+  إلا إجراء قاعدة~$\Elim{\lnot}$ مرة واحدة:
+  \begin{prooftree}
+    \AxiomC{$\lnot !A$}
+    \AxiomC{$\Gamma$}
+    \RightLabel{$\delta$}
+    \DeduceC{$!A$}
+    \RightLabel{\Elim{\lnot}}
+    \BinaryInfC{$\lfalse$}
+  \end{prooftree}
+  وحيث إن~$\lnot !A \in \Gamma$، لم يخرج شيء من الافتراضات
+  ال!!{undischarged} عن~$\Gamma$؛ فقد ثبت إذن
+  $\Gamma \Proves \lfalse$.
+\end{proof}
+
+\begin{prop}\ollabel{prop:provability-exhaustive}
+  إذا كانت كل من~$\Gamma \cup \{!A\}$ و$\Gamma \cup \{\lnot !A\}$
+  غير متسقة، فإن~$\Gamma$ غير متسقة.
+\end{prop}
+
+\begin{proof}
+نأخذ !!{derivation}s~$\delta_1$ و$\delta_2$؛ أولهما لـ~$\lfalse$
+من~$\Gamma \cup \{ !A \}$، وثانيهما لـ~$\lfalse$ من
+$\Gamma \cup \{ \lnot !A
+\}$. وبإدخال النفي في كل منهما ثم حذفه يمكن !!{derive}:
+\begin{prooftree}
+\AxiomC{$\Gamma, \Discharge{\lnot !A}{2}$}
+\RightLabel{$\delta_2$}
+\DeduceC{$\lfalse$}
+\DischargeRule{\Intro{\lnot}}{2}
+\UnaryInfC{$\lnot \lnot !A$}
+\AxiomC{$\Gamma, \Discharge{!A}{1}$}
+\RightLabel{$\delta_1$}
+\DeduceC{$\lfalse$}
+\DischargeRule{\Intro{\lnot}}{1}
+\UnaryInfC{$\lnot !A$}
+\RightLabel{\Elim{\lnot}}
+\BinaryInfC{$\lfalse$}
+\end{prooftree}
+والافتراضان~$!A$ و$\lnot !A$ كلاهما !!{discharged}؛ فالحاصل
+!!a{derivation} لـ~$\lfalse$ من~$\Gamma$ وحدها، وهذا هو عدم
+اتساق~$\Gamma$.
+\end{proof}
+
+\end{document}

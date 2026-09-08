@@ -1,0 +1,70 @@
+% Part: computability
+% Chapter: recursive-functions
+% Section: trees
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{rec}{tre}
+\olsection{الأشجار}
+
+كما رمزنا إلى المتتاليات بأعداد طبيعية، ومثلنا خصائصها وعملياتها
+بعلائق ودوال عودية بدائية تجري على تلك الأعداد، يجوز أن نصنع
+بالأشجار مثل ذلك. ونستعين لهذا الغرض بالمتتاليات ورموزها. والشجرة إما
+عقدة منفردة، وإما عقدة تتصل بجملة من الأشجار
+الجزئية؛ ويجوز في كلتا الحالتين أن تحمل العقدة لصيقة. وهذه العقدة هي \emph{جذر} الشجرة،
+وما يتصل بها من الأشجار الجزئية هو \emph{أشجارها الجزئية المباشرة}.
+
+فترميز الأشجار عودي، ورمز الشجرة متتالية $\tuple{\OLId{latin-ordinary}{k},\OLId{latin-ordinary}{d}_\OLMathNumeral{1},\dots,\OLId{latin-ordinary}{d}_\OLId{latin-ordinary}{k}}$، حيث $\OLId{latin-ordinary}{k}$ عدد
+الأشجار الجزئية المباشرة، وحيث $\OLId{latin-ordinary}{d}_\OLMathNumeral{1}$، …،~$\OLId{latin-ordinary}{d}_\OLId{latin-ordinary}{k}$ رموز هذه الأشجار
+الجزئية. فإن كانت للعقد لصائق، ألحقناها برموز الأشجار الجزئية
+المباشرة. وعلى هذا فالشجرة المؤلفة من عقدة واحدة ذات لصيقة~$\OLId{latin-ordinary}{l}$ يرمز إليها
+بـ$\tuple{\OLMathNumeral{0},\OLId{latin-ordinary}{l}}$، ونرمز إلى شجرة تتألف من جذر (ذو لصيقة~$\OLId{latin-ordinary}{l}_\OLMathNumeral{1}$) متصل
+بعقدتين منفردتين (ذواتي اللصيقتين $\OLId{latin-ordinary}{l}_\OLMathNumeral{2}$ و$\OLId{latin-ordinary}{l}_\OLMathNumeral{3}$) بـ
+$\tuple{\OLMathNumeral{2},\tuple{\OLMathNumeral{0},\OLId{latin-ordinary}{l}_\OLMathNumeral{2}},\tuple{\OLMathNumeral{0},\OLId{latin-ordinary}{l}_\OLMathNumeral{3}},\OLId{latin-ordinary}{l}_\OLMathNumeral{1}}$.
+
+\begin{prop}
+  \ollabel{prop:subtreeseq}
+  الدالة $\fn{SubtreeSeq}(\OLId{latin-ordinary}{t})$، التي تعيد رمز متتالية عناصرها رموز جميع
+  الأشجار الجزئية للشجرة ذات الرمز~$\OLId{latin-ordinary}{t}$، عودية بدائية.
+\end{prop}
+
+\begin{proof}
+  نبدأ بأن $\fn{ISubtrees}(\OLId{latin-ordinary}{t})=\fn{subseq}(\OLId{latin-ordinary}{t},\OLMathNumeral{1},(\OLId{latin-ordinary}{t})_\OLMathNumeral{0})$ عودية
+  بدائية، وأنها تعيد رموز الأشجار الجزئية المباشرة لشجرة~$\OLId{latin-ordinary}{t}$. ثم
+  نعرّف دالة مساعدة $\fn{hSubtreeSeq}(\OLId{latin-ordinary}{t},\OLId{latin-ordinary}{n})$ تحسب متتالية جميع
+  الأشجار الجزئية التي لا يزيد بعدها عن الجذر على $\OLId{latin-ordinary}{n}$ عقد. أما الأشجار الجزئية
+  لـ~$\OLId{latin-ordinary}{t}$ التي بعدها $\OLMathNumeral{0}$ عقد عن الجذر، أعني التي تبدأ من جذر~$\OLId{latin-ordinary}{t}$، فمتتاليتها
+  مؤلفة من~$\OLId{latin-ordinary}{t}$ وحدها. ولطلب جميع الأشجار
+  الجزئية حتى المستوى~$\OLId{latin-ordinary}{n}+\OLMathNumeral{1}$ من الشجرة $\OLId{latin-ordinary}{t}$، نصل متتالية ما بلغ المستوى
+  $\OLId{latin-ordinary}{n}$ بمتتالية جميع الأشجار الجزئية المباشرة لما وقع في المستويات
+  حتى $\OLId{latin-ordinary}{n}$. ولجمع هذه في قائمة واحدة نستعمل الأمر الآتي: متى كانت $\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{x})$ دالة عودية
+  بدائية تعيد رموز متتاليات، فإن الدالة $\OLId{latin-ordinary}{g}_\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{s},\OLId{latin-ordinary}{k})$ التي تصل قيم $\OLId{latin-ordinary}{f}$
+  لأول $\OLId{latin-ordinary}{k}$ من عناصر $\OLId{latin-ordinary}{s}$ عودية بدائية أيضًا:
+    \begin{align*}
+      \OLId{latin-ordinary}{g}_\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{s}, \OLMathNumeral{0}) & = \emptyseq\\
+      \OLId{latin-ordinary}{g}_\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{s}, \OLId{latin-ordinary}{k}+\OLMathNumeral{1}) & = \OLId{latin-ordinary}{g}_\OLId{latin-ordinary}{f}(\OLId{latin-ordinary}{s}, \OLId{latin-ordinary}{k}) \concat \OLId{latin-ordinary}{f}((\OLId{latin-ordinary}{s})_\OLId{latin-ordinary}{k})
+    \end{align*}
+    فمثلًا، إذا كانت $\OLId{latin-ordinary}{s}$ متتالية أشجار، فإن
+    $\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{s})=\OLId{latin-ordinary}{g}_{\fn{ISubtrees}}(\OLId{latin-ordinary}{s},\len{\OLId{latin-ordinary}{s}})$ تعطي متتالية الأشجار الجزئية
+    المباشرة لعناصر~$\OLId{latin-ordinary}{s}$. ومنها نحصل على تعريف
+    $\fn{hSubtreeSeq}$ بـ
+    \begin{align*}
+      \fn{hSubtreeSeq}(\OLId{latin-ordinary}{t}, \OLMathNumeral{0}) & = \tuple{\OLId{latin-ordinary}{t}} \\
+      \fn{hSubtreeSeq}(\OLId{latin-ordinary}{t}, \OLId{latin-ordinary}{n}+\OLMathNumeral{1}) & = \fn{hSubtreeSeq}(\OLId{latin-ordinary}{t}, \OLId{latin-ordinary}{n}) \concat
+      \OLId{latin-ordinary}{h}(\fn{hSubtreeSeq}(\OLId{latin-ordinary}{t}, \OLId{latin-ordinary}{n})).
+    \end{align*}
+    ولا يتجاوز أقصى مستوى في الشجرة ذات الرمز~$\OLId{latin-ordinary}{t}$، وهو أبعد مسافة بين
+    الجذر وورقة، عدد الترميز~$\OLId{latin-ordinary}{t}$. فتكون قيمة
+    $\fn{hSubtreeSeq}(\OLId{latin-ordinary}{t},\OLId{latin-ordinary}{t})$ متتالية رموز جميع الأشجار الجزئية للشجرة
+    ذات الرمز~$\OLId{latin-ordinary}{t}$.
+\end{proof}
+
+\begin{prob}
+  قد يكرر تعريف $\fn{hSubtreeSeq}$ الوارد في برهان
+  \olref[cmp][rec][tre]{prop:subtreeseq} بعض الرموز. فضع بدلًا منه تعريفًا
+  لا يورد رمز أي شجرة جزئية في القائمة الناتجة إلا مرة واحدة.
+\end{prob}
+
+\end{document}

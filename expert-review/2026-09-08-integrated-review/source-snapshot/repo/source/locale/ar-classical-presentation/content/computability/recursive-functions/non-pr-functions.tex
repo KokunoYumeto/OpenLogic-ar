@@ -1,0 +1,87 @@
+% Part: computability
+% Chapter: recursive-functions
+% Section: non-pr-functions
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{rec}{npr}
+\olsection{دوال غير عودية بدائية}
+
+ليست كل دالة يتأتى حسابها بحسب
+الحدس عودية بدائية. ولبيان ذلك نتأمل إمكان سرد جميع الدوال
+العودية البدائية الأحادية الحجة في قائمة $\OLId{latin-ordinary}{f}_\OLMathNumeral{0}$ و$\OLId{latin-ordinary}{f}_\OLMathNumeral{1}$ و$\OLId{latin-ordinary}{f}_\OLMathNumeral{2}$ و…،
+يُحسب بها $\OLId{latin-ordinary}{f}_\OLId{latin-ordinary}{x}$ عند الدخل $\OLId{latin-ordinary}{y}$ بطريقة فعالة. ومعنى هذا
+أن الدالة $\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y})$ التي تعريفها
+\[
+\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y}) = \OLId{latin-ordinary}{f}_\OLId{latin-ordinary}{x}(\OLId{latin-ordinary}{y})
+\]
+قابلة للحساب. وحينئذ تكون الدالة الآتية قابلة للحساب كذلك:
+\begin{eqnarray*}
+\OLId{latin-ordinary}{h}(\OLId{latin-ordinary}{x}) & = & \OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{x}) + \OLMathNumeral{1} \\
+& = & \OLId{latin-ordinary}{f}_\OLId{latin-ordinary}{x}(\OLId{latin-ordinary}{x}) +\OLMathNumeral{1}.
+\end{eqnarray*}
+ومهما أخذنا دالة عودية بدائية $\OLId{latin-ordinary}{f}_\OLId{latin-ordinary}{i}$، خالفتها $\OLId{latin-ordinary}{h}$؛ إذ تختلف قيمة $\OLId{latin-ordinary}{f}_\OLId{latin-ordinary}{i}$ عند $\OLId{latin-ordinary}{i}$ عن القيمة التي أعطتها الدالة القطرية. لذلك
+تكون $\OLId{latin-ordinary}{h}$ قابلة للحساب، ولا تكون عودية بدائية. وكذلك الحكم
+في $\OLId{latin-ordinary}{g}$. فهذا إجراء «فعال» لحجة كانتور القطرية.
+
+ولنا أمثلة أصرح على اجتماع قابلية الحساب وانتفاء العودية البدائية. فليكن
+الرمز $\OLId{latin-ordinary}{g}^\OLId{latin-ordinary}{n}(\OLId{latin-ordinary}{x})$، مثلًا، على $\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{g}(\dots \OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{x})))$، وفيه $\OLId{latin-ordinary}{n}$ من ورود
+$\OLId{latin-ordinary}{g}$؛ ولنعرف متتالية الدوال $\OLId{latin-ordinary}{g}_\OLMathNumeral{0},\OLId{latin-ordinary}{g}_\OLMathNumeral{1},\dots$ بـ
+\begin{eqnarray*}
+\OLId{latin-ordinary}{g}_\OLMathNumeral{0}(\OLId{latin-ordinary}{x}) & = & \OLId{latin-ordinary}{x}+\OLMathNumeral{1} \\
+\OLId{latin-ordinary}{g}_{\OLId{latin-ordinary}{n} + \OLMathNumeral{1}}(\OLId{latin-ordinary}{x}) & = & \OLId{latin-ordinary}{g}_\OLId{latin-ordinary}{n}^\OLId{latin-ordinary}{x}(\OLId{latin-ordinary}{x})
+\end{eqnarray*}
+تحقّق أن كل $\OLId{latin-ordinary}{g}_\OLId{latin-ordinary}{n}$ عودية بدائية. ثم لاحظ أن نمو كل دالة تالية
+يفوق نمو سابقتها كثيرًا؛ فـ$\OLId{latin-ordinary}{g}_\OLMathNumeral{1}(\OLId{latin-ordinary}{x})$ تساوي $\OLMathNumeral{2}\OLId{latin-ordinary}{x}$، و$\OLId{latin-ordinary}{g}_\OLMathNumeral{2}(\OLId{latin-ordinary}{x})$ تساوي
+$\OLMathNumeral{2}^\OLId{latin-ordinary}{x}\cdot \OLId{latin-ordinary}{x}$، وتنمو $\OLId{latin-ordinary}{g}_\OLMathNumeral{3}(\OLId{latin-ordinary}{x})$ نموًا يقارب برجًا أسيًا يتألف من $\OLId{latin-ordinary}{x}$
+نسخ من العدد~$\OLMathNumeral{2}$. ودالة أكرمان--بيتر هي في جوهرها الدالة $\OLId{latin-looped}{G}(\OLId{latin-ordinary}{x})=\OLId{latin-ordinary}{g}_\OLId{latin-ordinary}{x}(\OLId{latin-ordinary}{x})$،
+ويثبت أن نموها يجاوز نمو كل دالة عودية بدائية.
+
+ونرجع الآن إلى تعداد الدوال العودية البدائية. فقد جعلنا
+لكل دالة منها ترميزًا رمزيًا؛ فيكفينا أن نعدد هذه الترميزات.
+وإسناد عدد طبيعي $\#(\OLId{latin-looped}{F})$ إلى كل ترميز $\OLId{latin-looped}{F}$ يتم عوديًا كما يأتي:
+\begin{eqnarray*}
+\#(\OLMathNumeral{0}) & = & \langle \OLMathNumeral{0} \rangle \\
+\#(\OLId{latin-looped}{S}) & = & \langle \OLMathNumeral{1} \rangle \\
+\#(\Proj{\OLId{latin-ordinary}{n}}{\OLId{latin-ordinary}{i}}) & = & \langle \OLMathNumeral{2}, \OLId{latin-ordinary}{n}, \OLId{latin-ordinary}{i} \rangle \\
+\#(\fn{Comp}_{\OLId{latin-ordinary}{k},\OLId{latin-ordinary}{l}}[\OLId{latin-looped}{H},\OLId{latin-looped}{G}_\OLMathNumeral{0},\dots,\OLId{latin-looped}{G}_{\OLId{latin-ordinary}{k}-\OLMathNumeral{1}}]) & = & \langle
+\OLMathNumeral{3},\OLId{latin-ordinary}{k},\OLId{latin-ordinary}{l},\#(\OLId{latin-looped}{H}),\#(\OLId{latin-looped}{G}_\OLMathNumeral{0}),\dots,\#(\OLId{latin-looped}{G}_{\OLId{latin-ordinary}{k}-\OLMathNumeral{1}}) \rangle \\
+\#(\fn{Rec}_\OLId{latin-ordinary}{l}[\OLId{latin-looped}{G},\OLId{latin-looped}{H}]) & = & \langle \OLMathNumeral{4}, \OLId{latin-ordinary}{l}, \#(\OLId{latin-looped}{G}), \#(\OLId{latin-looped}{H}) \rangle
+\end{eqnarray*}
+وقد استعملنا أن متتالية الأعداد تؤخذ عددًا
+طبيعيًا، بحسب الترميز المتقدم. فصار لكل ترميز رمزي
+عدد طبيعي. وليس كل متتالية، ولا كل عدد، رمزًا لترميز
+صحيح؛ غير أن هذا لا يفسد التعداد، إذ نجعل $\OLId{latin-ordinary}{f}_\OLId{latin-ordinary}{i}$ الدالة العودية البدائية الأحادية
+الحجة ذات الترميز الذي رمزه $\OLId{latin-ordinary}{i}$ إذا كان $\OLId{latin-ordinary}{i}$ يرمز ترميزًا كهذا، ونجعلها
+الدالة الثابتة $\OLMathNumeral{0}$ في غير ذلك. فبهذا حصلت طريقة صريحة
+لتعداد الدوال العودية البدائية الأحادية الحجة.
+
+(وقد تتكرر الدالة الواحدة في القائمة، كالدالة الثابتة صفرًا. وليس
+التكرار ناشئًا من اختيارنا رموز الأعداد وحده؛ فإن للدالة الثابتة صفرًا
+نفسها أكثر من ترميز رمزي. وسيأتي أن دفع هذه
+التكرارات لا يتأتى بطريقة قابلة للحساب؛ فمن ذلك أنه لا توجد دالة قابلة للحساب تحكم
+هل يمثل ترميز معطى الدالة الثابتة صفرًا أم لا.)
+
+فلنأخذ الآن $\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y})$ معرّفة بـ$\OLId{latin-ordinary}{f}_\OLId{latin-ordinary}{x}(\OLId{latin-ordinary}{y})$، ولتكن $\OLId{latin-ordinary}{f}_\OLId{latin-ordinary}{x}$ من
+التعداد المتقدم. وبأي وجه نعلم قابلية $\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y})$ للحساب؟ وجهه بحسب
+الحدس أننا لحساب $\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y})$ نحلل الرمز $\OLId{latin-ordinary}{x}$، ونتبين هل يدل على دالة
+أحادية الحجة؛ فإن دل عليها حسبنا قيمتها عند الدخل~$\OLId{latin-ordinary}{y}$.
+
+\begin{tagblock}{TMs}
+\begin{digress}
+ولعلك ترى إمكان كتابة برنامج يؤدي ذلك، وإن احتاج إلى شيء من العمل،
+بلغة جافا أو ++C مثلًا. فلنا حينئذ أن نستند إلى أطروحة
+تشرش--تورنغ: كل ما يقبل الحساب بحسب الحدس يتأتى
+حسابه بآلة تورنغ.
+
+وأقرب إلى البرهان المباشر على قابلية $\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y})$ للحساب أن نصف آلة
+تورنغ تحسبها وصفًا صريحًا؛ فنستغني عن أطروحة تشرش--تورنغ
+وعن الرجوع إلى الحدس. وسنهيئ قريبًا ما يكفي من الأدوات لإثبات
+قابلية $\OLId{latin-ordinary}{g}(\OLId{latin-ordinary}{x},\OLId{latin-ordinary}{y})$ للحساب بواسطة نموذج يمكن
+\emph{محاكاته} على آلة تورنغ، أعني الدوال العودية.
+\end{digress}
+\end{tagblock}
+
+\end{document}

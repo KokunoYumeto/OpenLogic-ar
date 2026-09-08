@@ -1,0 +1,291 @@
+# Priority terminology review: part 84 of 93
+
+[← Previous / السابق](priority-083.md) · [Shard index / فهرس الأجزاء](README.md) · [Next / التالي →](priority-085.md)
+
+This renderable shard contains **10** choices. It preserves every distinct recorded occurrence for those choices. The canonical monolithic sheets remain one directory above for archival use.
+
+No final-reader PDF/AUX/SyncTeX evidence was supplied; source locations are shown, and final PDF pages remain unclaimed.
+
+| Global rank / score | Term / المصطلح | Arabic in use / العربية | Where / الموضع |
+| ---: | --- | --- | --- |
+| #824 / 0 | [abstract logic / normal / relativization / expressive](#priority-locale-ar-chosen-464ee705244abb4b-7eed41c527) | <span lang="ar" dir="rtl">منطق مجرد / سوي / نسبنة / ذو قدرة تعبيرية</span> | ⚠ OLP-0204 — introduction · shared Arabic locale terminology ledger · The locale ledger explicitly names this OLP unit, but does not prove one source edition, path…; [details](#priority-locale-ar-chosen-464ee705244abb4b-7eed41c527) |
+| #825 / 0 | [actual infinity; potential infinity](#priority-locale-ar-chosen-f34f840200c65a42-9bc9baf9ee) | <span lang="ar" dir="rtl">لانهاية فعلية؛ لانهاية بالقوة</span> | OLP-0028 — مقدمة · shared Arabic locale terminology ledger · MSA · [L13–L16](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/size-of-sets/introduction.tex#L13-L16) · [+2 more source locations](#priority-locale-ar-chosen-f34f840200c65a42-9bc9baf9ee) |
+| #826 / 0 | [alphabet (formal language)](#priority-locale-ar-chosen-8006a89f2cb6f7bb-b74679ef76) | <span lang="ar" dir="rtl">أبجدية</span> | OLP-0254 — مقدمة · shared Arabic locale terminology ledger · MSA · [L29](../source-snapshot/repo/source/locale/ar/content/turing-machines/machines-computations/introduction.tex#L29) · [+5 more source locations](#priority-locale-ar-chosen-8006a89f2cb6f7bb-b74679ef76) |
+| #827 / 0 | [ancestor; successor; predecessor; child; parent](#priority-locale-ar-chosen-bdaa55999d9d5322-c49de93be7) | <span lang="ar" dir="rtl">سلف؛ لاحق؛ سابق؛ ابن؛ عقدة أصل</span> | OLP-0212 — التركيب · shared Arabic locale terminology ledger · MSA · [L44](../source-snapshot/repo/source/locale/ar/content/computability/recursive-functions/composition.tex#L44) · [+5 more source locations](#priority-locale-ar-chosen-bdaa55999d9d5322-c49de93be7) |
+| #828 / 0 | [arithmetical induction; induction schema; parameter; recursive definition](#priority-locale-ar-chosen-ac2996c793babc2e-83f61ef785) | <span lang="ar" dir="rtl">الاستقراء الحسابي؛ مخطط الاستقراء؛ معلمة؛ تعريف عودي</span> | ⚠ OLP-0052 — جبرات ديديكند والاستقراء الحسابي · shared Arabic locale terminology ledger · The locale ledger explicitly names this OLP unit, but does not prove one source edition, path…; [details](#priority-locale-ar-chosen-ac2996c793babc2e-83f61ef785) |
+| #829 / 0 | [Arithmetization (construction of number systems)](#priority-locale-ar-chosen-f5f611b6672d041f-ff58b4ed10) | <span lang="ar" dir="rtl">البناء الحسابي للنظم العددية</span> | OLP-0041 — البناء الحسابي للنظم العددية · shared Arabic locale terminology ledger · MSA · [L8](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/arithmetization/arithmetization.tex#L8) · [+2 more source locations](#priority-locale-ar-chosen-f5f611b6672d041f-ff58b4ed10) |
+| #830 / 0 | [axiom](#priority-locale-ar-chosen-4b6b22bb5c337dc1-341e29712b) | <span lang="ar" dir="rtl">بديهية</span> | OLP-0277 — تعريفات · shared Arabic locale terminology ledger · MSA · [L199](../source-snapshot/repo/source/locale/ar/content/incompleteness/introduction/definitions.tex#L199) · [+14 more source locations](#priority-locale-ar-chosen-4b6b22bb5c337dc1-341e29712b) |
+| #831 / 0 | [Benacerraf; Frege; Wittgenstein; concept horse paradox](#priority-locale-ar-chosen-e1facea9cacc61f0-c954802a01) | <span lang="ar" dir="rtl">بيناسيراف؛ فريغه؛ فيتغنشتاين؛ مفارقة مفهوم الحصان</span> | OLP-0013 — تأملات فلسفية · shared Arabic locale terminology ledger · MSA · [L35](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/relations/reflections.tex#L35) · [+14 more source locations](#priority-locale-ar-chosen-e1facea9cacc61f0-c954802a01) |
+| #832 / 0 | [bounded universal and existential quantifiers](#priority-locale-ar-chosen-33584af1745401ed-8239c2acc1) | <span lang="ar" dir="rtl">المكممان الكلي والوجودي المقيّدان</span> | OLP-0006 — المجموعات الجزئية ومجموعات القوى · shared Arabic locale terminology ledger · MSA · [L63–L66](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/sets/subsets.tex#L63-L66) · [+2 more source locations](#priority-locale-ar-chosen-33584af1745401ed-8239c2acc1) |
+| #833 / 0 | [branch; maximal chain; subtree](#priority-locale-ar-chosen-b49c59ba8535485b-b2c0edb481) | <span lang="ar" dir="rtl">فرع؛ سلسلة قصوى؛ شجرة جزئية</span> | OLP-0018 — الأشجار · shared Arabic locale terminology ledger · MSA · [L88–L89](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/relations/trees.tex#L88-L89) · [+11 more source locations](#priority-locale-ar-chosen-b49c59ba8535485b-b2c0edb481) |
+
+<a id="priority-locale-ar-chosen-464ee705244abb4b-7eed41c527"></a>
+## abstract logic / normal / relativization / expressive — <span lang="ar" dir="rtl">منطق مجرد / سوي / نسبنة / ذو قدرة تعبيرية</span>
+
+- **ID / الرقم:** `locale-ar-chosen-464ee705244abb4b`
+- **Global priority rank / score:** #824 / 0
+- **Sense / المعنى:** Lindstrom chapter; OLP-0204--0207
+- **Why this choice / سبب الاختيار:** لم تخلط العربية بين normal logic والنموذج القياسي
+- **Useful alternatives / البدائل المفيدة:** منطق تجريدي / عادي / تقييد / معبّر — adverse or rejected form recorded in source ledger; تفصل النسبنة تقييد المجال بصيغة داخل منطق مجرد، والسواء اسم لحزمة الخواص لا للاتساق — alias or note recorded in source ledger
+> ⚑ **PLEASE DOUBLE-CHECK THIS CHOICE / يُرجى التحقق من هذا الاختيار:** Is «منطق مجرد / سوي / نسبنة / ذو قدرة تعبيرية» the best Arabic rendering of “abstract logic / normal / relativization / expressive” in the stated mathematical sense? هل هذه الصياغة العربية هي الأدق في هذا المعنى الرياضي؟ Review context / سياق المراجعة: definitions and Lindstrom hypotheses replayed; independent review pending
+
+- **Where first / أول موضع:** ⚠ OLP-0204 — introduction · shared Arabic locale terminology ledger · The locale ledger explicitly names this OLP unit, but does not prove one source edition, path…; [details](#priority-locale-ar-chosen-464ee705244abb4b-7eed41c527)
+- **Every distinct recorded occurrence / كل موضع مسجل متميز:**
+  - **OLP-0204 — introduction**
+    - ℹ No discrete source occurrence supplied / لم يُسجّل موضع نصي منفصل. The locale ledger explicitly names this OLP unit, but does not prove one source edition, path and line for the choice.
+
+<a id="priority-locale-ar-chosen-f34f840200c65a42-9bc9baf9ee"></a>
+## actual infinity; potential infinity — <span lang="ar" dir="rtl">لانهاية فعلية؛ لانهاية بالقوة</span>
+
+- **ID / الرقم:** `locale-ar-chosen-f34f840200c65a42`
+- **Global priority rank / score:** #825 / 0
+- **Sense / المعنى:** Actual infinity in the historical account of Cantor's infinite collections; the paired potential-infinity term is not instantiated by the cited passage.
+- **Why this choice / سبب الاختيار:** Current assessment (2026-09-06; open to correction): The MSA text's لانهاية فعلية and the Classical text's لانهاية بالفعل both make actuality explicit in the source's attributed medieval wording. Neither should be read as asserting physical existence or a process completed at a particular time. The ledger also proposes لانهاية بالقوة, but the cited English and Arabic passages do not use potential infinity; that half of the paired entry remains an uninstantiated candidate. This is a present assessment of the distinction, not historical evidence for the original translator's reasons.
+- **Assessment provenance / توثيق التقييم:** New assessment, not a claim about the original translator's reasoning. [Original explanation and checked source witnesses / التعليل السابق وشواهد المصدر](../source-snapshot/repo/evidence/provenance/locale-ar/expert-review-amendments/semantic-first20-20260906.json).
+- **Useful alternatives / البدائل المفيدة:** لانهاية حقيقية بوصفها الرأس الوحيد؛ حذف القيد الفلسفي؛ مساواة الفعلية بالمنجزة زمنيًا — adverse or rejected form recorded in source ledger; الفعلية تقابل actual في التمييز المدرسي التاريخي بين اللانهاية بالفعل واللانهاية بالقوة؛ لا يقرر النص هنا نظرية مستقلة في فلسفة الرياضيات — alias or note recorded in source ledger
+> ⚑ **PLEASE DOUBLE-CHECK THIS CHOICE / يُرجى التحقق من هذا الاختيار:** Does لانهاية بالفعل better preserve the attributed actuality/potentiality contrast than لانهاية فعلية, and how should the uninstantiated counterpart لانهاية بالقوة be recorded without presenting it as a translated occurrence?
+
+- **Where first / أول موضع:** OLP-0028 — مقدمة · shared Arabic locale terminology ledger · MSA · [L13–L16](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/size-of-sets/introduction.tex#L13-L16) · [+2 more source locations](#priority-locale-ar-chosen-f34f840200c65a42-9bc9baf9ee)
+- **Every distinct recorded occurrence / كل موضع مسجل متميز:**
+  - **OLP-0028 — مقدمة**
+    - **EN:** `introduction.tex`
+      - [L13–L15](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/size-of-sets/introduction.tex#L13-L15)
+    - **MSA:** `introduction.tex`
+      - [L13–L16](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/size-of-sets/introduction.tex#L13-L16)
+    - **CA:** `introduction.tex`
+      - [L13–L15](../source-snapshot/repo/source/locale/ar-classical/content/sets-functions-relations/size-of-sets/introduction.tex#L13-L15)
+  - ⚠ **Component still unresolved / جزء ما زال غير مربوط بموضع:** potential infinity / لانهاية بالقوة
+
+<a id="priority-locale-ar-chosen-8006a89f2cb6f7bb-b74679ef76"></a>
+## alphabet (formal language) — <span lang="ar" dir="rtl">أبجدية</span>
+
+- **ID / الرقم:** `locale-ar-chosen-8006a89f2cb6f7bb`
+- **Global priority rank / score:** #826 / 0
+- **Sense / المعنى:** formal languages and computer science
+- **Why this choice / سبب الاختيار:** يشير الرأس إلى المجموعة A التي تؤخذ منها حروف السلاسل لا إلى نظام كتابة بعينه
+- **Useful alternatives / البدائل المفيدة:** الهجاء — adverse or rejected form recorded in source ledger; مجموعة رموز: شرح دلالي لا رأس بديل — alias or note recorded in source ledger
+> ⚑ **PLEASE DOUBLE-CHECK THIS CHOICE / يُرجى التحقق من هذا الاختيار:** Is «أبجدية» the best Arabic rendering of “alphabet (formal language)” in the stated mathematical sense? هل هذه الصياغة العربية هي الأدق في هذا المعنى الرياضي؟ Review context / سياق المراجعة: internal subject review; expert review pending
+
+- **Where first / أول موضع:** OLP-0254 — مقدمة · shared Arabic locale terminology ledger · MSA · [L29](../source-snapshot/repo/source/locale/ar/content/turing-machines/machines-computations/introduction.tex#L29) · [+5 more source locations](#priority-locale-ar-chosen-8006a89f2cb6f7bb-b74679ef76)
+- **Every distinct recorded occurrence / كل موضع مسجل متميز:**
+  - **OLP-0256 — آلات تورنغ**
+    - **EN:** `turing-machines.tex`
+      - [L27](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/turing-machines/machines-computations/turing-machines.tex#L27)
+    - **MSA:** `turing-machines.tex`
+      - [L25](../source-snapshot/repo/source/locale/ar/content/turing-machines/machines-computations/turing-machines.tex#L25)
+    - **CA:** `turing-machines.tex`
+      - [L20](../source-snapshot/repo/source/locale/ar-classical/content/turing-machines/machines-computations/turing-machines.tex#L20)
+  - **OLP-0254 — مقدمة**
+    - **EN:** `introduction.tex`
+      - [L35](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/turing-machines/machines-computations/introduction.tex#L35)
+    - **MSA:** `introduction.tex`
+      - [L29](../source-snapshot/repo/source/locale/ar/content/turing-machines/machines-computations/introduction.tex#L29)
+    - **CA:** `introduction.tex`
+      - [L15](../source-snapshot/repo/source/locale/ar-classical/content/turing-machines/machines-computations/introduction.tex#L15)
+
+<a id="priority-locale-ar-chosen-bdaa55999d9d5322-c49de93be7"></a>
+## ancestor; successor; predecessor; child; parent — <span lang="ar" dir="rtl">سلف؛ لاحق؛ سابق؛ ابن؛ عقدة أصل</span>
+
+- **ID / الرقم:** `locale-ar-chosen-bdaa55999d9d5322`
+- **Global priority rank / score:** #827 / 0
+- **Sense / المعنى:** trees and strict partial orders
+- **Why this choice / سبب الاختيار:** حُفظت كل اتجاهات x وy والزائد z؛ لا يوحي لفظ الأصل بأن لكل عقدة سابقة، إذ تثبت القضية واحدًا على الأكثر
+- **Useful alternatives / البدائل المفيدة:** خلف؛ تابع؛ جد بوصفها رؤوسًا وحيدة؛ قلب اتجاه السابق واللاحق — adverse or rejected form recorded in source ledger; إذا أمكن بلوغ y من x صعودًا فـx سلف y؛ وإذا x&lt;y ولا عنصر بينهما فـy لاحق x وx سابق أو أصل y — alias or note recorded in source ledger
+> ⚑ **PLEASE DOUBLE-CHECK THIS CHOICE / يُرجى التحقق من هذا الاختيار:** Is «سلف؛ لاحق؛ سابق؛ ابن؛ عقدة أصل» the best Arabic rendering of “ancestor; successor; predecessor; child; parent” in the stated mathematical sense? هل هذه الصياغة العربية هي الأدق في هذا المعنى الرياضي؟ Review context / سياق المراجعة: independent semantic self-replay passed; human review none; expert review pending
+
+- **Where first / أول موضع:** OLP-0212 — التركيب · shared Arabic locale terminology ledger · MSA · [L44](../source-snapshot/repo/source/locale/ar/content/computability/recursive-functions/composition.tex#L44) · [+5 more source locations](#priority-locale-ar-chosen-bdaa55999d9d5322-c49de93be7)
+- **Every distinct recorded occurrence / كل موضع مسجل متميز:**
+  - **OLP-0543 — في اللانهاية**
+    - **EN:** `infinity-again.tex`
+      - [L108](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/set-theory/z/infinity-again.tex#L108)
+    - **MSA:** `infinity-again.tex`
+      - [L107](../source-snapshot/repo/source/locale/ar/content/set-theory/z/infinity-again.tex#L107)
+    - **CA:** `infinity-again.tex`
+      - [L103](../source-snapshot/repo/source/locale/ar-classical/content/set-theory/z/infinity-again.tex#L103)
+  - **OLP-0212 — التركيب**
+    - **EN:** `composition.tex`
+      - [L46](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/computability/recursive-functions/composition.tex#L46)
+    - **MSA:** `composition.tex`
+      - [L44](../source-snapshot/repo/source/locale/ar/content/computability/recursive-functions/composition.tex#L44)
+    - **CA:** `composition.tex`
+      - [L44](../source-snapshot/repo/source/locale/ar-classical/content/computability/recursive-functions/composition.tex#L44)
+
+<a id="priority-locale-ar-chosen-ac2996c793babc2e-83f61ef785"></a>
+## arithmetical induction; induction schema; parameter; recursive definition — <span lang="ar" dir="rtl">الاستقراء الحسابي؛ مخطط الاستقراء؛ معلمة؛ تعريف عودي</span>
+
+- **ID / الرقم:** `locale-ar-chosen-ac2996c793babc2e`
+- **Global priority rank / score:** #828 / 0
+- **Sense / المعنى:** Dedekind induction and recursion in OLP-0052
+- **Why this choice / سبب الاختيار:** حُفظت جميع المتغيرات الحرة المعروضة ومجالات التكميم واتجاهات lif؛ وبقي o عنصر جبر ديديكند لا الرقم 0
+- **Useful alternatives / البدائل المفيدة:** الاستقراء الرياضي بوصفه الرأس الوحيد؛ بارامتر؛ تعريف تكراري يوحي بالتكرار وحده؛ خلط المعلمة بالمتغير الحر — adverse or rejected form recorded in source ledger; الحسابي يتبع عنوان المصدر Arithmetical هنا، مع بقاء الرياضي مرادفًا شائعًا؛ والمعلمة اسم لكائن ثابت أثناء تطبيق الصيغة لا متغيرًا حرًا إضافيًا غير معروض — alias or note recorded in source ledger
+> ⚑ **PLEASE DOUBLE-CHECK THIS CHOICE / يُرجى التحقق من هذا الاختيار:** Is «الاستقراء الحسابي؛ مخطط الاستقراء؛ معلمة؛ تعريف عودي» the best Arabic rendering of “arithmetical induction; induction schema; parameter; recursive definition” in the stated mathematical sense? هل هذه الصياغة العربية هي الأدق في هذا المعنى الرياضي؟ Review context / سياق المراجعة: set and formula induction forms, parameter quantifiers and six recursive arithmetic equations replayed exactly; independent review pending
+
+- **Where first / أول موضع:** ⚠ OLP-0052 — جبرات ديديكند والاستقراء الحسابي · shared Arabic locale terminology ledger · The locale ledger explicitly names this OLP unit, but does not prove one source edition, path…; [details](#priority-locale-ar-chosen-ac2996c793babc2e-83f61ef785)
+- **Every distinct recorded occurrence / كل موضع مسجل متميز:**
+  - **OLP-0052 — جبرات ديديكند والاستقراء الحسابي**
+    - ℹ No discrete source occurrence supplied / لم يُسجّل موضع نصي منفصل. The locale ledger explicitly names this OLP unit, but does not prove one source edition, path and line for the choice.
+
+<a id="priority-locale-ar-chosen-f5f611b6672d041f-ff58b4ed10"></a>
+## Arithmetization (construction of number systems) — <span lang="ar" dir="rtl">البناء الحسابي للنظم العددية</span>
+
+- **ID / الرقم:** `locale-ar-chosen-f5f611b6672d041f`
+- **Global priority rank / score:** #829 / 0
+- **Sense / المعنى:** number-system construction in naive set theory
+- **Why this choice / سبب الاختيار:** يحفظ العنوان وظيفة الفصل كما تصرح الافتتاحية، مع بقاء معرف arith وكل الواردات السبعة وترتيبها بلا تغيير
+- **Useful alternatives / البدائل المفيدة:** الحوسبة؛ الترميز الحسابي بوصفه الرأس هنا — adverse or rejected form recorded in source ledger; التأسيس الحسابي: بديل موجز؛ يخصص العنوان الحالي بالسياق الذي يبني Int ثم Rat ثم Real من Nat، ولا يسوي هذا الاستعمال بترميز الصياغة بأعداد غودل — alias or note recorded in source ledger
+> ⚑ **PLEASE DOUBLE-CHECK THIS CHOICE / يُرجى التحقق من هذا الاختيار:** Is «البناء الحسابي للنظم العددية» the best Arabic rendering of “Arithmetization (construction of number systems)” in the stated mathematical sense? هل هذه الصياغة العربية هي الأدق في هذا المعنى الرياضي؟ Review context / سياق المراجعة: source-bound semantic review passed; independent review pending; chapter build deferred to OLP-0048
+
+- **Where first / أول موضع:** OLP-0041 — البناء الحسابي للنظم العددية · shared Arabic locale terminology ledger · MSA · [L8](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/arithmetization/arithmetization.tex#L8) · [+2 more source locations](#priority-locale-ar-chosen-f5f611b6672d041f-ff58b4ed10)
+- **Every distinct recorded occurrence / كل موضع مسجل متميز:**
+  - **OLP-0041 — البناء الحسابي للنظم العددية**
+    - **EN:** `arithmetization.tex`
+      - [L8](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/arithmetization/arithmetization.tex#L8)
+    - **MSA:** `arithmetization.tex`
+      - [L8](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/arithmetization/arithmetization.tex#L8)
+    - **CA:** `arithmetization.tex`
+      - [L8](../source-snapshot/repo/source/locale/ar-classical/content/sets-functions-relations/arithmetization/arithmetization.tex#L8)
+
+<a id="priority-locale-ar-chosen-4b6b22bb5c337dc1-341e29712b"></a>
+## axiom — <span lang="ar" dir="rtl">بديهية</span>
+
+- **ID / الرقم:** `locale-ar-chosen-4b6b22bb5c337dc1`
+- **Global priority rank / score:** #830 / 0
+- **Sense / المعنى:** formal logic
+- **Why this choice / سبب الاختيار:** المقابل الرياضي العربي الأشيع؛ وهو هنا اسم فني لمبدأ مفترض لا ادعاء بأنه واضح بذاته
+- **Useful alternatives / البدائل المفيدة:** موضوعة — adverse or rejected form recorded in source ledger; مسلمة — alias or note recorded in source ledger
+> ⚑ **PLEASE DOUBLE-CHECK THIS CHOICE / يُرجى التحقق من هذا الاختيار:** Is «بديهية» the best Arabic rendering of “axiom” in the stated mathematical sense? هل هذه الصياغة العربية هي الأدق في هذا المعنى الرياضي؟ Review context / سياق المراجعة: internal subject review; expert review pending
+
+- **Where first / أول موضع:** OLP-0277 — تعريفات · shared Arabic locale terminology ledger · MSA · [L199](../source-snapshot/repo/source/locale/ar/content/incompleteness/introduction/definitions.tex#L199) · [+14 more source locations](#priority-locale-ar-chosen-4b6b22bb5c337dc1-341e29712b)
+- **Every distinct recorded occurrence / كل موضع مسجل متميز:**
+  - **OLP-0504 — سلامة Derivations البديهية**
+    - **EN:** `soundness-axd.tex`
+      - [L38](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/intuitionistic-logic/soundness-completeness/soundness-axd.tex#L38)
+    - **MSA:** `soundness-axd.tex`
+      - [L36](../source-snapshot/repo/source/locale/ar/content/intuitionistic-logic/soundness-completeness/soundness-axd.tex#L36)
+    - **CA:** `soundness-axd.tex`
+      - [L37](../source-snapshot/repo/source/locale/ar-classical/content/intuitionistic-logic/soundness-completeness/soundness-axd.tex#L37)
+  - **OLP-0277 — تعريفات**
+    - **EN:** `definitions.tex`
+      - [L214](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/incompleteness/introduction/definitions.tex#L214)
+    - **MSA:** `definitions.tex`
+      - [L199](../source-snapshot/repo/source/locale/ar/content/incompleteness/introduction/definitions.tex#L199)
+    - **CA:** `definitions.tex`
+      - [L210](../source-snapshot/repo/source/locale/ar-classical/content/incompleteness/introduction/definitions.tex#L210)
+  - **OLP-0319 — مبرهنة عدم الاكتمال الثانية**
+    - **EN:** `second-incompleteness-thm.tex`
+      - [L125](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/incompleteness/incompleteness-provability/second-incompleteness-thm.tex#L125)
+    - **MSA:** `second-incompleteness-thm.tex`
+      - [L118](../source-snapshot/repo/source/locale/ar/content/incompleteness/incompleteness-provability/second-incompleteness-thm.tex#L118)
+    - **CA:** `second-incompleteness-thm.tex`
+      - [L124](../source-snapshot/repo/source/locale/ar-classical/content/incompleteness/incompleteness-provability/second-incompleteness-thm.tex#L124)
+  - **OLP-0591 — نقاط aleph الثابتة**
+    - **EN:** `fix.tex`
+      - [L68](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/set-theory/card-arithmetic/fix.tex#L68)
+    - **MSA:** `fix.tex`
+      - [L8](../source-snapshot/repo/source/locale/ar/content/set-theory/card-arithmetic/fix.tex#L8)
+    - **CA:** `fix.tex`
+      - [L8](../source-snapshot/repo/source/locale/ar-classical/content/set-theory/card-arithmetic/fix.tex#L8)
+  - **OLP-0311 — النظريات التي تقبل تأويل ThQ غير قابلة للقرار**
+    - **EN:** `interpretability.tex`
+      - [L31](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/incompleteness/theories-computability/interpretability.tex#L31)
+    - **MSA:** `interpretability.tex`
+      - [L27](../source-snapshot/repo/source/locale/ar/content/incompleteness/theories-computability/interpretability.tex#L27)
+    - **CA:** `interpretability.tex`
+      - [L28](../source-snapshot/repo/source/locale/ar-classical/content/incompleteness/theories-computability/interpretability.tex#L28)
+
+<a id="priority-locale-ar-chosen-e1facea9cacc61f0-c954802a01"></a>
+## Benacerraf; Frege; Wittgenstein; concept horse paradox — <span lang="ar" dir="rtl">بيناسيراف؛ فريغه؛ فيتغنشتاين؛ مفارقة مفهوم الحصان</span>
+
+- **ID / الرقم:** `locale-ar-chosen-e1facea9cacc61f0`
+- **Global priority rank / score:** #831 / 0
+- **Sense / المعنى:** philosophy of mathematics and language
+- **Why this choice / سبب الاختيار:** حُفظت نسبة الحجج بحذر: جعل بيناسيراف الحجة مشهورة؛ والمفارقة لفريغه؛ والاعتراض وجّهه فيتغنشتاين إلى راسل
+- **Useful alternatives / البدائل المفيدة:** بنسيراف؛ فريجه؛ فتغنشتاين بوصفها تهجئات وحيدة مفروضة — adverse or rejected form recorded in source ledger; أسماء أعلام وفكرة فلسفية مثبتة أيضًا بمفتاح الاستشهاد Benacerraf1965 وبالسياق الوصفي — alias or note recorded in source ledger
+> ⚑ **PLEASE DOUBLE-CHECK THIS CHOICE / يُرجى التحقق من هذا الاختيار:** Is «بيناسيراف؛ فريغه؛ فيتغنشتاين؛ مفارقة مفهوم الحصان» the best Arabic rendering of “Benacerraf; Frege; Wittgenstein; concept horse paradox” in the stated mathematical sense? هل هذه الصياغة العربية هي الأدق في هذا المعنى الرياضي؟ Review context / سياق المراجعة: independent source audit plus semantic self-replay passed; human review none; Arabic bibliographic review pending
+
+- **Where first / أول موضع:** OLP-0013 — تأملات فلسفية · shared Arabic locale terminology ledger · MSA · [L35](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/relations/reflections.tex#L35) · [+14 more source locations](#priority-locale-ar-chosen-e1facea9cacc61f0-c954802a01)
+- **Every distinct recorded occurrence / كل موضع مسجل متميز:**
+  - **OLP-0035 — التساوي العددي**
+    - **EN:** `equinumerous-sets.tex`
+      - [L17](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/size-of-sets/equinumerous-sets.tex#L17)
+    - **MSA:** `equinumerous-sets.tex`
+      - [L16](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/size-of-sets/equinumerous-sets.tex#L16)
+    - **CA:** `equinumerous-sets.tex`
+      - [L13](../source-snapshot/repo/source/locale/ar-classical/content/sets-functions-relations/size-of-sets/equinumerous-sets.tex#L13)
+  - **OLP-0013 — تأملات فلسفية**
+    - **EN:** `reflections.tex`
+      - [L38](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/relations/reflections.tex#L38), [L67](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/relations/reflections.tex#L67), [L68](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/relations/reflections.tex#L68)
+    - **MSA:** `reflections.tex`
+      - [L35](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/relations/reflections.tex#L35), [L61](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/relations/reflections.tex#L61), [L62](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/relations/reflections.tex#L62)
+    - **CA:** `reflections.tex`
+      - [L34](../source-snapshot/repo/source/locale/ar-classical/content/sets-functions-relations/relations/reflections.tex#L34), [L55](../source-snapshot/repo/source/locale/ar-classical/content/sets-functions-relations/relations/reflections.tex#L55), [L56](../source-snapshot/repo/source/locale/ar-classical/content/sets-functions-relations/relations/reflections.tex#L56)
+  - **OLP-0175 — لمحة عامة**
+    - **EN:** `introduction.tex`
+      - [L35](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/first-order-logic/beyond/introduction.tex#L35)
+    - **MSA:** `introduction.tex`
+      - [L31](../source-snapshot/repo/source/locale/ar/content/first-order-logic/beyond/introduction.tex#L31)
+    - **CA:** `introduction.tex`
+      - [L29](../source-snapshot/repo/source/locale/ar-classical/content/first-order-logic/beyond/introduction.tex#L29)
+
+<a id="priority-locale-ar-chosen-33584af1745401ed-8239c2acc1"></a>
+## bounded universal and existential quantifiers — <span lang="ar" dir="rtl">المكممان الكلي والوجودي المقيّدان</span>
+
+- **ID / الرقم:** `locale-ar-chosen-33584af1745401ed`
+- **Global priority rank / score:** #832 / 0
+- **Sense / المعنى:** logic and set-builder notation
+- **Why this choice / سبب الاختيار:** يحفظ التكافؤين: (∀x∈A)φ اختصار للاستلزام، و(∃x∈A)φ اختصار للاقتران
+- **Useful alternatives / البدائل المفيدة:** المكممان المحدودان بوصفه رأسًا وحيدًا — adverse or rejected form recorded in source ledger; السوران المقيدان: مرشح مرادفي يحتاج ربطًا بمصدر؛ المقصود تقييد المتغير بمجموعة لا تقرير محدودية عددية — alias or note recorded in source ledger
+> ⚑ **PLEASE DOUBLE-CHECK THIS CHOICE / يُرجى التحقق من هذا الاختيار:** Is «المكممان الكلي والوجودي المقيّدان» the best Arabic rendering of “bounded universal and existential quantifiers” in the stated mathematical sense? هل هذه الصياغة العربية هي الأدق في هذا المعنى الرياضي؟ Review context / سياق المراجعة: internal subject review; expert review pending
+
+- **Where first / أول موضع:** OLP-0006 — المجموعات الجزئية ومجموعات القوى · shared Arabic locale terminology ledger · MSA · [L63–L66](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/sets/subsets.tex#L63-L66) · [+2 more source locations](#priority-locale-ar-chosen-33584af1745401ed-8239c2acc1)
+- **Every distinct recorded occurrence / كل موضع مسجل متميز:**
+  - **OLP-0006 — المجموعات الجزئية ومجموعات القوى**
+    - **EN:** `subsets.tex`
+      - [L63–L66](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/sets/subsets.tex#L63-L66)
+    - **MSA:** `subsets.tex`
+      - [L63–L66](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/sets/subsets.tex#L63-L66)
+    - **CA:** `subsets.tex`
+      - [L59–L62](../source-snapshot/repo/source/locale/ar-classical/content/sets-functions-relations/sets/subsets.tex#L59-L62)
+
+<a id="priority-locale-ar-chosen-b49c59ba8535485b-b2c0edb481"></a>
+## branch; maximal chain; subtree — <span lang="ar" dir="rtl">فرع؛ سلسلة قصوى؛ شجرة جزئية</span>
+
+- **ID / الرقم:** `locale-ar-chosen-b49c59ba8535485b`
+- **Global priority rank / score:** #833 / 0
+- **Sense / المعنى:** trees and orders
+- **Why this choice / سبب الاختيار:** حُفظ شرطان: قابلية أي عنصرين في B للمقارنة، وعدم إمكان إضافة عنصر خارجي مع بقائه قابلًا للمقارنة بجميع عناصر B
+- **Useful alternatives / البدائل المفيدة:** مسار بوصفه مرادفًا تامًا للفرع؛ شجرة فرعية بوصفها الرأس الوحيد — adverse or rejected form recorded in source ledger; الفرع سلسلة قصوى لا مجرد مسار منته؛ الشجرة الجزئية من Nat* مغلقة نزولًا تحت علاقة الامتداد — alias or note recorded in source ledger
+> ⚑ **PLEASE DOUBLE-CHECK THIS CHOICE / يُرجى التحقق من هذا الاختيار:** Is «فرع؛ سلسلة قصوى؛ شجرة جزئية» the best Arabic rendering of “branch; maximal chain; subtree” in the stated mathematical sense? هل هذه الصياغة العربية هي الأدق في هذا المعنى الرياضي؟ Review context / سياق المراجعة: independent semantic self-replay passed; human review none; expert review pending
+
+- **Where first / أول موضع:** OLP-0018 — الأشجار · shared Arabic locale terminology ledger · MSA · [L88–L89](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/relations/trees.tex#L88-L89) · [+11 more source locations](#priority-locale-ar-chosen-b49c59ba8535485b-b2c0edb481)
+- **Every distinct recorded occurrence / كل موضع مسجل متميز:**
+  - **OLP-0676 — في تحويلات الاختزال**
+    - **EN:** `reductions.tex`
+      - [L82](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/proof-theory/normalization/reductions.tex#L82)
+    - **MSA:** `reductions.tex`
+      - [L74](../source-snapshot/repo/source/locale/ar/content/proof-theory/normalization/reductions.tex#L74)
+    - **CA:** `reductions.tex`
+      - [L73](../source-snapshot/repo/source/locale/ar-classical/content/proof-theory/normalization/reductions.tex#L73)
+  - **OLP-0221 — الأشجار**
+    - **EN:** `trees.tex`
+      - [L74](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/computability/recursive-functions/trees.tex#L74)
+    - **MSA:** `trees.tex`
+      - [L67](../source-snapshot/repo/source/locale/ar/content/computability/recursive-functions/trees.tex#L67)
+    - **CA:** `trees.tex`
+      - [L67](../source-snapshot/repo/source/locale/ar-classical/content/computability/recursive-functions/trees.tex#L67)
+  - **OLP-0018 — الأشجار**
+    - **EN:** `trees.tex`
+      - [L92](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/relations/trees.tex#L92)
+    - **MSA:** `trees.tex`
+      - [L88–L89](../source-snapshot/repo/source/locale/ar/content/sets-functions-relations/relations/trees.tex#L88-L89)
+    - **CA:** `trees.tex`
+      - [L83](../source-snapshot/repo/source/locale/ar-classical/content/sets-functions-relations/relations/trees.tex#L83)
+  - **OLP-0229 — مقدمة**
+    - **EN:** `introduction.tex`
+      - [L12](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/computability/computability-theory/introduction.tex#L12)
+    - **MSA:** `introduction.tex`
+      - [L12](../source-snapshot/repo/source/locale/ar/content/computability/computability-theory/introduction.tex#L12)
+    - **CA:** `introduction.tex`
+      - [L12](../source-snapshot/repo/source/locale/ar-classical/content/computability/computability-theory/introduction.tex#L12)
+
+[← Previous / السابق](priority-083.md) · [Shard index / فهرس الأجزاء](README.md) · [Next / التالي →](priority-085.md)

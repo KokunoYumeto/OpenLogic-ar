@@ -1,0 +1,110 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+\olfileid{sth}{card-arithmetic}{expotough}
+
+\olsection[بعض التبسيطات]{بعض التبسيطات في أس الكاردينالات}
+
+قد كان تعريف~$\canonord$ مشتملًا على شيء من التفصيل، غير أن ثمرته
+كانت الحكم النافع في جمع الكاردينالات وضربها، أعني
+\olref[simp]{cardplustimesmax}. وأما أس الكاردينالات فيما فوق المتناهي
+فلا ينقاد لتبسيط يقاربه في المباشرة. ولنبدأ، بيانًا لذلك، بحكم يمد
+نمطًا معروفًا في المقادير المتناهية، وإن جاء برهانه مجردًا غاية التجريد.
+
+\begin{prop}\ollabel{simplecardexpo}
+$\cardexpo{\cardfont{a}}{\cardfont{b} \cardplus \cardfont{c}} =
+\cardexpo{\cardfont{a}}{\cardfont{b}} \cardtimes
+\cardexpo{\cardfont{a}}{\cardfont{c}}$، و
+$\cardexpo{(\cardexpo{\cardfont{a}}{\cardfont{b}})}{\cardfont{c}} =
+\cardexpo{\cardfont{a}}{\cardfont{b} \cardtimes \cardfont{c}}$، لأي
+كاردينالات $\cardfont{a}, \cardfont{b}, \cardfont{c}$.
+\end{prop}
+
+\begin{proof}
+أما الدعوى الأولى، فانظر إلى دالة
+$f \colon (\cardfont{b}\disjointsum\cardfont{c}) \to \cardfont{a}$.
+واجعل لها شطرين، بأن تعرف~$f_\cardfont{b}(\beta) = f(\beta, 0)$ لكل
+$\beta \in \cardfont{b}$، و$f_\cardfont{c}(\gamma) = f(\gamma, 1)$
+لكل $\gamma \in \cardfont{c}$. فتكون الخريطة
+$f \mapsto \tuple{f_{\cardfont{b}}, f_{\cardfont{c}}}$
+!!a{bijection} من
+$\funfromto{\cardfont{b} \disjointsum \cardfont{c}}{\cardfont{a}}$ إلى
+$(\funfromto{\cardfont{b}}{\cardfont{a}} \times
+\funfromto{\cardfont{c}}{\cardfont{a}})$.
+
+وأما الدعوى الثانية، فخذ دالة
+$f \colon \cardfont{c} \to
+(\funfromto{\cardfont{b}}{\cardfont{a}})$؛ فلكل
+$\gamma \in \cardfont{c}$ دالة
+$f(\gamma) \colon \cardfont{b} \to \cardfont{a}$. ثم عرّف
+$f^*(\beta, \gamma) = (f(\gamma))(\beta)$ لكل
+$\tuple{\beta, \gamma} \in \cardfont{b} \times \cardfont{c}$.
+وعندئذ تكون الخريطة~$f \mapsto f^*$ هي !!a{bijection} من
+$\funfromto{\cardfont{c}}{(\funfromto{\cardfont{b}}{\cardfont{a}})}$
+إلى $\funfromto{\cardfont{b} \times \cardfont{c}}{\cardfont{a}}$.
+\end{proof}
+
+ومقصودنا أن نهتدي إلى سبيل ميسرة لحساب
+$\cardexpo{\cardfont{a}}{\cardfont{b}}$ إذا كانت الكاردينالات غير
+متناهية. والحكم الآتي يخطو بنا إلى ذلك خطوة نافعة.
+
+\begin{prop}\ollabel{cardexpo2reduct}
+إذا كان $2 \leq \cardfont{a} \leq \cardfont{b}$ وكان
+$\cardfont{b}$ غير متناهٍ، فإن
+$\cardexpo{\cardfont{a}}{\cardfont{b}} =
+\cardexpo{2}{\cardfont{b}}$.
+\end{prop}
+
+\begin{proof}
+\begin{align*}
+	\cardexpo{2}{\cardfont{b}} &\leq
+	\cardexpo{\cardfont{a}}{\cardfont{b}}\text{، لأن $2 \leq \cardfont{a}$}\\
+	&\leq \cardexpo{(\cardexpo{2}{\cardfont{a}})}{\cardfont{b}}
+	\text{، بحسب \olref[opps]{cantorcor}}\\
+	&= \cardexpo{2}{\cardfont{a} \cardtimes \cardfont{b}}
+	\text{، بحسب \olref{simplecardexpo}} \\
+	&= \cardexpo{2}{\cardfont{b}}
+	\text{، بحسب \olref[simp]{cardplustimesmax}}.
+\end{align*}
+\end{proof}
+
+ولا مطمع في الغالب أن نمضي في التبسيط أبعد من هذا، إذ
+$\cardfont{b} < \cardexpo{2}{\cardfont{b}}$ بحسب
+\olref[card-arithmetic][opps]{cantorcor}. بيد أن هذا لا يفصل لنا القول
+في~$\cardexpo{\cardfont{a}}{\cardfont{b}}$ حين
+$\cardfont{b} < \cardfont{a}$. فإن كان~$\cardfont{b}$
+متناهيًا، فالأمر معلوم.
+
+\begin{prop}
+إذا كان $\cardfont{a}$ غير متناهٍ وكان $0<n<\omega$، فإن
+$\cardexpo{\cardfont{a}}{n} = \cardfont{a}$.
+\end{prop}
+
+\begin{proof}
+$\cardexpo{\cardfont{a}}{n} = \cardfont{a} \cardtimes \cardfont{a}
+\cardtimes \ldots \cardtimes \cardfont{a} = \cardfont{a}$، بحسب
+\olref[simp]{cardplustimesmax}.
+\end{proof}
+\noindent
+بل يمكننا في أحوال أخرى أيضًا أن نحصر مقدار
+$\cardexpo{\cardfont{a}}{\cardfont{b}}$ حصرًا تامًا.
+
+\begin{prop}
+إذا كان $2 \leq \cardfont{b} < \cardfont{a} \leq
+\cardexpo{2}{\cardfont{b}}$ وكان $\cardfont{b}$ غير متناهٍ، فإن
+$\cardexpo{\cardfont{a}}{\cardfont{b}} =
+\cardexpo{2}{\cardfont{b}}$.
+\end{prop}
+
+\begin{proof}
+$\cardexpo{2}{\cardfont{b}}\leq
+\cardexpo{\cardfont{a}}{\cardfont{b}} \leq
+\cardexpo{(\cardexpo{2}{\cardfont{b}})}{\cardfont{b}} =
+\cardexpo{2}{\cardfont{b}\cardtimes\cardfont{b}} =
+\cardexpo{2}{\cardfont{b}}$، وذلك بحجة من جنس ما مضى في
+\olref{cardexpo2reduct}.
+\end{proof}
+\noindent
+فإذا جاوزنا هذا الحد اشتد لطف المسألة ودقتها.
+
+\end{document}
