@@ -1,0 +1,68 @@
+% Part: sets-functions-relations
+% Chapter: infinite
+% Section: dedekind-induction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid[ar]{sfr}{infinite}{induction}
+\olsection[الاستقراء الحسابي]{جبرات ديديكند والاستقراء الحسابي}
+
+والثمرة المقصودة أن جبر ديديكند---بل \emph{كل} جبر ديديكند---يقوم مقام الأعداد الطبيعية. ووجه ذلك هذه النتيجة القريبة:
+
+\begin{thm}[الاستقراء الحسابي]\ollabel{thm:dedinfiniteinduction}
+لتكن ${\OLId{latin-looped}{N}}, {\OLId{latin-ordinary}{s}}, {\OLId{latin-ordinary}{o}}$ مكوّنات جبر ديديكند. عندئذ، لكل مجموعة ${\OLId{latin-looped}{X}}$:  
+	\begin{center}
+		إذا كان ${\OLId{latin-ordinary}{o}} \in {\OLId{latin-looped}{X}}$ وكان $(\forall {{\OLId{latin-ordinary}{n}}} \in {\OLId{latin-looped}{N}} \cap {\OLId{latin-looped}{X}}){{\OLId{latin-ordinary}{s}}}({{\OLId{latin-ordinary}{n}}}) \in {\OLId{latin-looped}{X}}$، {فإن} ${\OLId{latin-looped}{N}} \subseteq {\OLId{latin-looped}{X}}$.
+	\end{center}
+\end{thm}
+
+\begin{proof}
+تعريف جبر ديديكند يقتضي ${\OLId{latin-looped}{N}} = \closureofunder{{\OLId{latin-ordinary}{s}}}{{\OLId{latin-ordinary}{o}}}$.
+فإذا تحقق ${{\OLId{latin-ordinary}{o}}} \in {\OLId{latin-looped}{X}}$ وتحقق $(\forall {{\OLId{latin-ordinary}{n}}} \in {\OLId{latin-looped}{N}})({\OLId{latin-ordinary}{n}} \in {\OLId{latin-looped}{X}} \lif
+{{\OLId{latin-ordinary}{s}}}({{\OLId{latin-ordinary}{n}}}) \in {\OLId{latin-looped}{X}})$، كان ${\OLId{latin-looped}{N}} = \closureofunder{{\OLId{latin-ordinary}{s}}}{{\OLId{latin-ordinary}{o}}} \subseteq {\OLId{latin-looped}{X}}$، وهو المطلوب.
+\end{proof}
+
+الاستقراء من خواص الأعداد الطبيعية المميِّزة لها. فإذا وُجدت مجموعة لانهائية بحسب ديديكند، أنشأنا منها جبر ديديكند، واتخذناه قائمًا مقام الأعداد الطبيعية؛ وهذا هو المقصود.
+
+ورد الاستقراء في \olref{thm:dedinfiniteinduction} بلغة
+\emph{نظرية المجموعات}. وله صيغة أقرب إلى المألوف، يسهل استخراجها منها:
+
+\begin{cor}\ollabel{natinductionschema}
+لتكن ${\OLId{latin-looped}{N}}, {\OLId{latin-ordinary}{s}}, {\OLId{latin-ordinary}{o}}$ مكوّنات جبر ديديكند. عندئذ، لكل صيغة
+$\phi({\OLId{latin-ordinary}{x}})$ قد تكون لها معلمات:
+\begin{center}
+	إذا كانت $\phi({\OLId{latin-ordinary}{o}})$ وكان $(\forall {{\OLId{latin-ordinary}{n}}} \in {\OLId{latin-looped}{N}})(\phi({\OLId{latin-ordinary}{n}})\lif
+	\phi({{\OLId{latin-ordinary}{s}}}({{\OLId{latin-ordinary}{n}}})))$، {فإن} $(\forall {\OLId{latin-ordinary}{n}} \in {\OLId{latin-looped}{N}})\phi({\OLId{latin-ordinary}{n}})$
+\end{center}
+\end{cor}
+
+\begin{proof}
+خذ ${\OLId{latin-looped}{X}} = \Setabs{{\OLId{latin-ordinary}{n}} \in {\OLId{latin-looped}{N}}}{\phi({\OLId{latin-ordinary}{n}})}$، ثم طبِّق
+\olref{thm:dedinfiniteinduction}، فتحصل النتيجة.
+\end{proof}
+
+وقولنا إن للصيغة «معلمات» معناه على التقريب أن لنا أن نأخذ أشياء
+${\OLId{latin-ordinary}{c}}_{\OLMathNumeral{1}}, \ldots, {\OLId{latin-ordinary}{c}}_{\OLId{latin-ordinary}{k}}$ ونستعمل $\phi({\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{c}}_{\OLMathNumeral{1}}, \ldots, {\OLId{latin-ordinary}{c}}_{\OLId{latin-ordinary}{k}})$. وأما العبارة الدقيقة التي لا تذكر «المعلمات» فهذه: لكل صيغة
+$\phi({\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{v}}_{\OLMathNumeral{1}}, \ldots, {\OLId{latin-ordinary}{v}}_{\OLId{latin-ordinary}{k}})$ أُظهرت جميع متغيراتها الحرة، يكون:
+	\begin{align*}
+			\forall {\OLId{latin-ordinary}{v}}_{\OLMathNumeral{1}} \ldots \forall {\OLId{latin-ordinary}{v}}_{\OLId{latin-ordinary}{k}}((&\phi({\OLId{latin-ordinary}{o}}, {\OLId{latin-ordinary}{v}}_{\OLMathNumeral{1}},\ldots, {\OLId{latin-ordinary}{v}}_{\OLId{latin-ordinary}{k}}) \land {}\\
+			&	(\forall {\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{N}})(\phi({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{v}}_{\OLMathNumeral{1}}, \ldots, {\OLId{latin-ordinary}{v}}_{\OLId{latin-ordinary}{k}}) \lif \phi({\OLId{latin-ordinary}{s}}({\OLId{latin-ordinary}{x}}), {\OLId{latin-ordinary}{v}}_{\OLMathNumeral{1}},\ldots, {\OLId{latin-ordinary}{v}}_{\OLId{latin-ordinary}{k}}))) \lif {}\\
+			&\hspace{3em} (\forall {\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{N}})\phi({\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{v}}_{\OLMathNumeral{1}},\ldots, {\OLId{latin-ordinary}{v}}_{\OLId{latin-ordinary}{k}}))
+	\end{align*}
+
+ففي ذكر «المعلمات» اختصار ييسّر القراءة؛ وسنكثر من استعماله في
+\olref[sth][][]{part}.
+
+وأما جبرات ديديكند فيمكن تعريف الدوال الحسابية المعتادة في كل واحد منها: الجمع والضرب والأس. غير أن هذا يحتاج إلى عمل، وأداته
+\emph{التعريف العودي}. وسنشرح هذه الأداة ونثبت مشروعيتها في موضع متأخر، ضمن بحث أعم كثيرًا. ولمن أراد الاستزادة أن يعود إلى هذا الموضع بعد
+\olref[sth][ord-arithmetic][]{chap}، أو ينظر في عرض آخر، مثل
+\citealt[صص.~95--8]{Potter2004}. وحين تكون ${\OLId{latin-looped}{N}}, {\OLId{latin-ordinary}{s}}, {\OLId{latin-ordinary}{o}}$ مكوّنات جبر ديديكند، سنتمكن أخيرًا من وضع الأحكام الآتية:
+\begin{align*}
+	{{\OLId{latin-ordinary}{a}}} + {{\OLId{latin-ordinary}{o}}} &= {{\OLId{latin-ordinary}{a}}} & & & {{\OLId{latin-ordinary}{a}}} \times {{\OLId{latin-ordinary}{o}}} &= {{\OLId{latin-ordinary}{o}}} & & & {{\OLId{latin-ordinary}{a}}}^{{\OLId{latin-ordinary}{o}}} &= {\OLId{latin-ordinary}{s}}({\OLId{latin-ordinary}{o}})\\
+{{\OLId{latin-ordinary}{a}}} + {{\OLId{latin-ordinary}{s}}}({{\OLId{latin-ordinary}{b}}}) &= {{\OLId{latin-ordinary}{s}}}({{\OLId{latin-ordinary}{a}}}+{{\OLId{latin-ordinary}{b}}}) &&& {{\OLId{latin-ordinary}{a}}} \times {{\OLId{latin-ordinary}{s}}}({{\OLId{latin-ordinary}{b}}}) &= ({{\OLId{latin-ordinary}{a}}}\times {{\OLId{latin-ordinary}{b}}}) + {{\OLId{latin-ordinary}{a}}}  & & & {{\OLId{latin-ordinary}{a}}}^{{{\OLId{latin-ordinary}{s}}}({{\OLId{latin-ordinary}{b}}})} &= {{\OLId{latin-ordinary}{a}}}^{{\OLId{latin-ordinary}{b}}} \times {{\OLId{latin-ordinary}{a}}}
+\end{align*}
+ثم نبرهن أن هذه الدوال تحقق الخواص المنتظرة منها.
+
+\end{document}

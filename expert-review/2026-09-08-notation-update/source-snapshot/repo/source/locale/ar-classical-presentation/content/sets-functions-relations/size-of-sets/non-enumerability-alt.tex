@@ -1,0 +1,109 @@
+% Part:sets-functions-relations
+% Chapter: size-of-sets
+% Section: non-enumerability-alt
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid[ar]{sfr}{siz}{nen-alt}
+
+\olsection{مجموعات \printtoken{S}{nonenumerable}}
+
+\begin{editorial}
+نبين هنا أن $\Bin^\omega$ و$\Pow{\Nat}$ غير قابلتين للتعداد، ونعتمد تعريفات \olref[enm-alt]{sec}. فالمشترط دالة تقابلية مع~$\Nat$، لا دالة شاملة من~$\PosInt$.
+\end{editorial}
+
+\begin{explain}
+مجموعة الأعداد الطبيعية~$\Nat$ لا نهائية، وكونها !!{enumerable} بين بنفسه. وإنما الأمر اللافت وجود مجموعات \emph{!!{nonenumerable}}، أي ليست !!{enumerable} (انظر \olref[sfr][siz][enm-alt]{defn:enumerable}).
+
+وقد يستغرب هذا؛ فإن كون ${\OLId{latin-looped}{A}}$ !!{nonenumerable} يقتضي \emph{انتفاء} كل !!{bijection} ${\OLId{latin-ordinary}{f}}
+\colon \Nat \to {\OLId{latin-looped}{A}}$. بل لا توجد دالة ترسل !!{element}s~$\Nat$، على كثرتها التي لا تنتهي، إلى~${\OLId{latin-looped}{A}}$ وتستوفي~${\OLId{latin-looped}{A}}$. فإذا كانت ${\OLId{latin-looped}{A}}$ !!{nonenumerable}، ففي~${\OLId{latin-looped}{A}}$ !!{element}s «أكثر» من الأعداد الطبيعية.
+
+فسبيل إثبات أن المجموعة !!{nonenumerable} أن ننفي وجود !!{bijection} على الوجه المطلوب. ويكفي لذلك أن نبرهن أن كل محاولة لتعداد !!{element}s~${\OLId{latin-looped}{A}}$ تفوت !!{element} واحدًا على الأقل؛ فتكون كل دالة ${\OLId{latin-ordinary}{f}}\colon \Nat \to {\OLId{latin-looped}{A}}$ غير !!{surjective}. وطريقة كانتور \emph{القطرية} سبيل عام إلى هذا النفي: تعطى قائمة من !!{element}s~${\OLId{latin-looped}{A}}$، ولتكن ${\OLId{latin-ordinary}{x}}_{\OLMathNumeral{1}}$، ${\OLId{latin-ordinary}{x}}_{\OLMathNumeral{2}}$، \dots، فننشئ !!{element} من~${\OLId{latin-looped}{A}}$ يمتنع، بحكم إنشائه، أن يكون في القائمة.
+
+وليتضح الأمر بالمثال، نبدأ بالمجموعة~$\Bin^\omega$ التي تضم جميع السلاسل اللانهائية من~${\OLMathNumeral{0}}$ و~${\OLMathNumeral{1}}$. (فالرمز «$\Bin$» يدل على الثنائية، ويكفينا أن نعده اسمًا للمجموعة ذات العنصرين $\{{\OLMathNumeral{0}},{\OLMathNumeral{1}}\}$.)\oliflabeldef{sfr:card-arithmetic:card-opps:sec}{\footnote{والتحقيق أن $\Bin^\omega$ مجموعة جميع متتاليات $\omega$ المؤلفة من~${\OLMathNumeral{0}}$ و~${\OLMathNumeral{1}}$، أي المجموعة $\funfromto{\omega}{\{{\OLMathNumeral{0}},{\OLMathNumeral{1}}\}}$. وإنما يتبين معنى هذا في \olref[sfr][card-arithmetic][card-opps]{sec}.}{} أما هذه العبارة التي فيها شيء من التجوز فلا يترتب عليها لبس فيما نحن فيه.}
+\end{explain}
+
+\begin{thm}
+\ollabel{thm:nonenum-bin-omega}
+$\Bin^\omega$~!!{nonenumerable}.
+\end{thm}
+
+\begin{proof}
+خذ تعدادًا كيف اتفق لمجموعة جزئية من~$\Bin^\omega$. فتكون بين أيدينا قائمة ${\OLId{latin-ordinary}{s}}_{{\OLMathNumeral{0}}}$، ${\OLId{latin-ordinary}{s}}_{{\OLMathNumeral{1}}}$، ${\OLId{latin-ordinary}{s}}_{{\OLMathNumeral{2}}}$، \dots{}، وكل~${\OLId{latin-ordinary}{s}}_{\OLId{latin-ordinary}{n}}$ سلسلة لا نهائية من~${\OLMathNumeral{0}}$ و~${\OLMathNumeral{1}}$. وللرمز ${\OLId{latin-ordinary}{s}}_{\OLId{latin-ordinary}{n}}({\OLId{latin-ordinary}{m}})$ مؤشران: ${\OLId{latin-ordinary}{m}}$ يحدد رتبة الرقم، و${\OLId{latin-ordinary}{n}}$ يحدد السلسلة. فنرسم القائمة مصفوفة يقع فيها ${\OLId{latin-ordinary}{s}}_{\OLId{latin-ordinary}{n}}({\OLId{latin-ordinary}{m}})$ في الصف ذي الرتبة~${\OLId{latin-ordinary}{n}}$ والعمود ذي الرتبة~${\OLId{latin-ordinary}{m}}$:
+
+\[
+\begin{array}{c|c|c|c|c|c}
+& {\OLMathNumeral{0}} & {\OLMathNumeral{1}} & {\OLMathNumeral{2}} & {\OLMathNumeral{3}} & \dots \\\hline
+{\OLMathNumeral{0}} & \mathbf{s_{0}(0)} & {\OLId{latin-ordinary}{s}}_{{\OLMathNumeral{0}}}({\OLMathNumeral{1}}) & {\OLId{latin-ordinary}{s}}_{{\OLMathNumeral{0}}}({\OLMathNumeral{2}}) & {\OLId{latin-ordinary}{s}}_{\OLMathNumeral{0}}({\OLMathNumeral{3}}) & \dots \\\hline
+{\OLMathNumeral{1}} & {\OLId{latin-ordinary}{s}}_{{\OLMathNumeral{1}}}({\OLMathNumeral{0}})& \mathbf{s_{1}(1)} & {\OLId{latin-ordinary}{s}}_{\OLMathNumeral{1}}({\OLMathNumeral{2}}) & {\OLId{latin-ordinary}{s}}_{\OLMathNumeral{1}}({\OLMathNumeral{3}}) & \dots \\\hline
+{\OLMathNumeral{2}} & {\OLId{latin-ordinary}{s}}_{{\OLMathNumeral{2}}}({\OLMathNumeral{0}})& {\OLId{latin-ordinary}{s}}_{{\OLMathNumeral{2}}}({\OLMathNumeral{1}}) & \mathbf{s_2(2)} & {\OLId{latin-ordinary}{s}}_{\OLMathNumeral{2}}({\OLMathNumeral{3}}) & \dots \\\hline
+{\OLMathNumeral{3}} & {\OLId{latin-ordinary}{s}}_{{\OLMathNumeral{3}}}({\OLMathNumeral{0}})& {\OLId{latin-ordinary}{s}}_{{\OLMathNumeral{3}}}({\OLMathNumeral{1}}) & {\OLId{latin-ordinary}{s}}_{\OLMathNumeral{3}}({\OLMathNumeral{2}}) & \mathbf{s_3(3)} & \dots \\\hline
+\vdots & \vdots & \vdots & \vdots & \vdots & \mathbf{\ddots}
+\end{array}
+\]
+وننشئ سلسلة لا نهائية~${\OLId{latin-ordinary}{d}}$ من~${\OLMathNumeral{0}}$ و~${\OLMathNumeral{1}}$ لا ترد في هذه القائمة. وطريق إنشائها تعيين خاناتها كلها، أي تعيين ${\OLId{latin-ordinary}{d}}({\OLId{latin-ordinary}{n}})$ لكل ${\OLId{latin-ordinary}{n}} \in
+\Nat$. فنقرأ قطر المصفوفة---ومن هنا اسم الطريقة القطرية---ونستبدل كل~${\OLMathNumeral{1}}$ بـ~${\OLMathNumeral{0}}$، وكل~${\OLMathNumeral{0}}$ بـ~${\OLMathNumeral{1}}$. وضبط ذلك أن نجعل ${\OLId{latin-ordinary}{d}}({\OLId{latin-ordinary}{n}})$ مساويًا لـ${\OLMathNumeral{0}}$ أو~${\OLMathNumeral{1}}$ تبعًا لكون !!{element} ذي الرتبة~${\OLId{latin-ordinary}{n}}$ على القطر، أعني ${\OLId{latin-ordinary}{s}}_{\OLId{latin-ordinary}{n}}({\OLId{latin-ordinary}{n}})$، مساويًا لـ${\OLMathNumeral{1}}$ أو~${\OLMathNumeral{0}}$:
+
+\[
+{\OLId{latin-ordinary}{d}}({\OLId{latin-ordinary}{n}}) =
+\begin{cases}
+{\OLMathNumeral{1}} & \text{إذا كان ${\OLId{latin-ordinary}{s}}_{{\OLId{latin-ordinary}{n}}}({\OLId{latin-ordinary}{n}}) = {\OLMathNumeral{0}}$}\\
+{\OLMathNumeral{0}} & \text{إذا كان ${\OLId{latin-ordinary}{s}}_{{\OLId{latin-ordinary}{n}}}({\OLId{latin-ordinary}{n}}) = {\OLMathNumeral{1}}$}
+\end{cases}
+\]
+فيتحقق ${\OLId{latin-ordinary}{d}} \in \Bin^\omega$؛ إذ هي سلسلة لا نهائية من~${\OLMathNumeral{0}}$ و~${\OLMathNumeral{1}}$. وقد عينّا~${\OLId{latin-ordinary}{d}}$ بحيث ${\OLId{latin-ordinary}{d}}({\OLId{latin-ordinary}{n}}) \neq {\OLId{latin-ordinary}{s}}_{\OLId{latin-ordinary}{n}}({\OLId{latin-ordinary}{n}})$ لكل ${\OLId{latin-ordinary}{n}} \in
+\Nat$؛ فهي، أي~${\OLId{latin-ordinary}{d}}$، تخالف~${\OLId{latin-ordinary}{s}}_{\OLId{latin-ordinary}{n}}$ في الخانة ذات الرتبة~${\OLId{latin-ordinary}{n}}$. إذن ${\OLId{latin-ordinary}{d}} \neq {\OLId{latin-ordinary}{s}}_{\OLId{latin-ordinary}{n}}$ لكل ${\OLId{latin-ordinary}{n}}\in \Nat$، فلا تكون~${\OLId{latin-ordinary}{d}}$ في القائمة ${\OLId{latin-ordinary}{s}}_{\OLMathNumeral{0}}$، ${\OLId{latin-ordinary}{s}}_{\OLMathNumeral{1}}$، ${\OLId{latin-ordinary}{s}}_{\OLMathNumeral{2}}$، \dots
+
+فمهما أعطينا تعدادًا لمجموعة جزئية من $\Bin^\omega$، وجدنا !!{element} من~$\Bin^\omega$ خارجًا عنه. فلا تعداد يستوفي المجموعة~$\Bin^\omega$؛ أي إن~$\Bin^\omega$ !!{nonenumerable}.
+\end{proof}
+
+\begin{editorial}
+\textbf{تنبيه تصحيحي على الأصل (OLSIZ-008).}
+عكس الأصل وصفي المؤشرين؛ فالجدول يضع ${\OLId{latin-ordinary}{s}}_{\OLId{latin-ordinary}{n}}({\OLId{latin-ordinary}{m}})$ في الصف ${\OLId{latin-ordinary}{n}}$
+والعمود ${\OLId{latin-ordinary}{m}}$، ولذلك هي الخانة ${\OLId{latin-ordinary}{m}}$ من السلسلة ${\OLId{latin-ordinary}{n}}$.
+
+\textbf{تنبيه تصحيحي على الأصل (OLSIZ-009).}
+كرر الأصل التحويل من ${\OLMathNumeral{1}}$ إلى ${\OLMathNumeral{0}}$ وأسقط التحويل المقابل؛
+فأُثبت التحويلان ${\OLMathNumeral{1}}\mapsto{\OLMathNumeral{0}}$ و${\OLMathNumeral{0}}\mapsto{\OLMathNumeral{1}}$ اللذان تعطيهما صيغة الحالات.
+\end{editorial}
+
+\begin{explain}
+واسم «الاستدلال القطري» مأخوذ من استعمال قطر المصفوفة في تعريف~${\OLId{latin-ordinary}{d}}$. غير أن المصفوفة ليست من لوازمه؛ فقد نثبت أن مجموعة !!{nonenumerable} بمعنى مماثل، من غير مصفوفة مرسومة ولا قطر ظاهر. وبيان ذلك في النتيجة الآتية.
+\end{explain}
+
+\begin{thm}
+\ollabel{thm:nonenum-pownat}
+$\Pow{\Nat}$ ليست !!{enumerable}.
+\end{thm}
+
+\begin{proof}
+نسلك المسلك نفسه، فنبين أن أي قائمة من المجموعات الجزئية من~$\Nat$ تفوتها مجموعة جزئية من~$\Nat$. ولتكن ${\OLId{latin-looped}{N}}_{\OLMathNumeral{0}}, {\OLId{latin-looped}{N}}_{\OLMathNumeral{1}}, {\OLId{latin-looped}{N}}_{\OLMathNumeral{2}}, \ldots$ قائمة مفروضة من المجموعات الجزئية من~$\Nat$. ونعين مجموعة~${\OLId{latin-looped}{D}}$ بهذه الصفة: ${\OLId{latin-ordinary}{n}} \in {\OLId{latin-looped}{D}}$ إذا وفقط إذا كان ${\OLId{latin-ordinary}{n}} \notin
+{\OLId{latin-looped}{N}}_{{\OLId{latin-ordinary}{n}}}$، أي
+\[
+{\OLId{latin-looped}{D}} = \Setabs{{\OLId{latin-ordinary}{n}} \in \Nat}{{\OLId{latin-ordinary}{n}} \notin {\OLId{latin-looped}{N}}_{\OLId{latin-ordinary}{n}}}
+\]
+فإن ${\OLId{latin-looped}{D}}\subseteq \Nat$ ظاهر. وأما~${\OLId{latin-looped}{D}}$ فلا ترد في القائمة؛ إذ ${\OLId{latin-ordinary}{n}} \in {\OLId{latin-looped}{D}}$ يكافئ ${\OLId{latin-ordinary}{n}}\notin {\OLId{latin-looped}{N}}_{\OLId{latin-ordinary}{n}}$ بمقتضى التعريف، ومنه ${\OLId{latin-looped}{D}} \neq {\OLId{latin-looped}{N}}_{\OLId{latin-ordinary}{n}}$ لكل ${\OLId{latin-ordinary}{n}} \in \Nat$.
+\end{proof}
+
+\begin{explain}
+لم نذكر قطرًا في البرهان، ولكن يظهر معناه إذا رسمنا المجموعات ${\OLId{latin-looped}{N}}_{\OLMathNumeral{0}}$، ${\OLId{latin-looped}{N}}_{\OLMathNumeral{1}}$، \dots{} في مصفوفة. فنجعل ${\OLId{latin-looped}{N}}_{\OLId{latin-ordinary}{n}}$ في الصف ذي الرتبة~${\OLId{latin-ordinary}{n}}$، ونكتب~${\OLId{latin-ordinary}{m}}$ في العمود ذي الرتبة~${\OLId{latin-ordinary}{m}}$ إذا وفقط إذا كان ${\OLId{latin-ordinary}{m}} \in {\OLId{latin-looped}{N}}_{\OLId{latin-ordinary}{n}}$. ولو كانت المجموعات الأربع الأولى $\{{\OLMathNumeral{0}},{\OLMathNumeral{1}},{\OLMathNumeral{2}},\dots\}$، $\{{\OLMathNumeral{1}}, {\OLMathNumeral{3}}, {\OLMathNumeral{5}}, \dots\}$، $\{{\OLMathNumeral{0}},{\OLMathNumeral{1}},{\OLMathNumeral{4}}\}$، و$\{{\OLMathNumeral{2}},{\OLMathNumeral{3}},{\OLMathNumeral{4}},\dots\}$، لابتدأت المصفوفة هكذا:
+\[
+\begin{array}{r@{}rrrrrrr}
+  {\OLId{latin-looped}{N}}_{\OLMathNumeral{0}} = \{ & \mathbf{0}, & {\OLMathNumeral{1}}, & {\OLMathNumeral{2}}, & & & & \dots\}\\
+  {\OLId{latin-looped}{N}}_{\OLMathNumeral{1}} = \{ &  & \mathbf{1}, &  & {\OLMathNumeral{3}}, &  & {\OLMathNumeral{5}}, & \dots\}\\
+  {\OLId{latin-looped}{N}}_{\OLMathNumeral{2}} = \{ & {\OLMathNumeral{0}}, & {\OLMathNumeral{1}}, &  &  & {\OLMathNumeral{4}}\phantom{,} &  & \}\\
+  {\OLId{latin-looped}{N}}_{\OLMathNumeral{3}} = \{ &  &  & {\OLMathNumeral{2}}, & \mathbf{3}, & {\OLMathNumeral{4}}, & & \dots\}\\
+  &\vdots & & & & & & \ddots\phantom{\}}
+  \end{array}
+\]
+فنحصل على~${\OLId{latin-looped}{D}}$ بالنزول على القطر، جاعلين ${\OLId{latin-ordinary}{n}} \in {\OLId{latin-looped}{D}}$ إذا وفقط إذا كان~${\OLId{latin-ordinary}{n}}$ \emph{غائبًا} عن موضعه القطري. ففي هذا المثال نستبعد~${\OLMathNumeral{0}}$ و~${\OLMathNumeral{1}}$، ونثبت~${\OLMathNumeral{2}}$، ونستبعد~${\OLMathNumeral{3}}$، ثم نمضي على ذلك.
+\end{explain}
+
+\begin{prob}
+أقم حجة قطرية صريحة تبين أن مجموعة جميع الدوال ${\OLId{latin-ordinary}{f}} \colon \Nat \to
+\Nat$ !!{nonenumerable}. أي بين أن كل قائمة ${\OLId{latin-ordinary}{f}}_{\OLMathNumeral{1}}$، ${\OLId{latin-ordinary}{f}}_{\OLMathNumeral{2}}$، \dots{} من الدوال التي نوع كل منها ${\OLId{latin-ordinary}{f}}_{\OLId{latin-ordinary}{i}}\colon \Nat \to \Nat$ تفوتها دالة ${\OLId{latin-ordinary}{g}} \colon \Nat \to \Nat$ من النوع نفسه.
+\end{prob}
+
+\end{document}

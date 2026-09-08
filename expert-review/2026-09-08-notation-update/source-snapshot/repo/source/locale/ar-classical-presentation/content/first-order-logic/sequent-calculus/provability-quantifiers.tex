@@ -1,0 +1,58 @@
+% Part: first-order-logic
+% Chapter: sequent-calculus
+% Section: provability-quantifiers
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{seq}{qpr}
+\olsection{\usetoken{S}{derivability} والمكممات}
+
+\begin{explain}
+  ومن مقدمات برهان الاكتمال أن تستخرج قواعد حساب التتابعيات أحكام~$\Proves$ التي نثبتها في هذا القسم.
+\end{explain}
+
+\begin{thm}
+\ollabel{thm:strong-generalization} إذا كان ${\OLId{latin-ordinary}{c}}$ رمزًا ثابتًا لا يرد
+في ${\OLId{greek-variable}{Gamma}}$ ولا في $!A({\OLId{latin-ordinary}{x}})$، وكان ${\OLId{greek-variable}{Gamma}} \Proves !A({\OLId{latin-ordinary}{c}})$، فإن
+${\OLId{greek-variable}{Gamma}} \Proves \lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$.
+\end{thm}
+
+\begin{proof}
+خذ $\pi_{\OLMathNumeral{0}}$، وهو $\Log{LK}$-!!{derivation} لـ
+${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \Sequent !A({\OLId{latin-ordinary}{c}})$، لمجموعة منتهية ${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \subseteq {\OLId{greek-variable}{Gamma}}$.
+نُلحق به $\RightR{\lforall}$، فيحصل !!a{derivation} لـ
+${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \Sequent \lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$.
+ويصح هذا الإلحاق لأن ${\OLId{latin-ordinary}{c}}$ لا يقع في
+${\OLId{greek-variable}{Gamma}}$ ولا في $!A({\OLId{latin-ordinary}{x}})$؛ فشرط المتغير المميَّز محفوظ.
+\end{proof}
+
+\begin{prop}
+\ollabel{prop:provability-quantifiers}
+\begin{tagenumerate}{prvEx,prvAll}
+\tagitem{prvEx}{$!A({\OLId{latin-ordinary}{t}}) \Proves \lexists[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$.}{}
+\tagitem{prvAll}{$\lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})] \Proves !A({\OLId{latin-ordinary}{t}})$.}{}
+\end{tagenumerate}
+\end{prop}
+
+\begin{proof}
+\begin{tagenumerate}{prvEx,prvAll}
+\tagitem{prvEx}{التتابعية $!A({\OLId{latin-ordinary}{t}}) \Sequent \lexists[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$
+  !!{derivable}:
+  \begin{prooftree}
+    \Axiom$!A({\OLId{latin-ordinary}{t}}) \fCenter !A({\OLId{latin-ordinary}{t}})$
+    \RightLabel{\RightR{\lexists}}
+    \UnaryInf$!A({\OLId{latin-ordinary}{t}}) \fCenter \lexists[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$
+    \end{prooftree}}{}
+\tagitem{prvAll}{التتابعية $\lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})] \Sequent !A({\OLId{latin-ordinary}{t}})$
+  !!{derivable}:
+  \begin{prooftree}
+    \Axiom$!A({\OLId{latin-ordinary}{t}}) \fCenter !A({\OLId{latin-ordinary}{t}})$
+    \RightLabel{\LeftR{\lforall}}
+    \UnaryInf$\lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})] \fCenter !A({\OLId{latin-ordinary}{t}})$
+    \end{prooftree}}{}
+\end{tagenumerate}
+\end{proof}
+
+\end{document}

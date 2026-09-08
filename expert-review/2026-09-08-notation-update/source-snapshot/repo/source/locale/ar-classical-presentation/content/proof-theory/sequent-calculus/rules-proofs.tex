@@ -1,0 +1,178 @@
+% Part: proof-theory
+% Chapter: sequent-calculus
+% Section: rules-proofs
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{seq}{rp}
+
+\olsection{في القواعد و\usetoken{P}{proof}}
+
+نقدم أولًا ما نحتاج إليه من التعريفات، ونضبط ألفاظها.
+
+فمن ذلك قاعدتا~\Log{G3c} اللتان تتيحان~!!{proving} متتاليات تشتمل على
+$!A\land !B$ من متتاليات تشتمل على~$!A$ و$!B$:
+\[
+\Axiom$ !A, !B, {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}$
+\RightLabel{\LeftR{\land}}
+\UnaryInf$ !A \land !B, {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}$
+\DisplayProof
+\qquad
+\Axiom${\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, !A$
+\Axiom$ {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, !B$
+\RightLabel{\RightR{\land}}
+\BinaryInf$ {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, !A \land !B $
+\DisplayProof
+\]
+فالواقع فوق الخط من المتتاليات يسمى \emph{مقدمات}، والواقع تحته يسمى
+\emph{النتيجة}. وأما~!!{formula}s التي في~${\OLId{greek-variable}{Gamma}}$ و${\OLId{greek-variable}{Delta}}$ في كل قاعدة
+فهي \emph{السياق}، وتسمى كذلك~!!{formula}s \emph{الجانبية}. وما كان في
+النتيجة من~!!{formula} خارج السياق فهو~!!{formula} \emph{الرئيسة}؛ وما
+كان في المقدمات من~!!{formula}s خارج السياق فهو~!!{formula}s
+\emph{الفعالة}، ويقال لها أيضًا \emph{المساعدة}.
+
+وأما قواعد الكميات ففيها مزيد دقة. فقواعد~$\lforall$ في~\Log{G1c} مثلًا:
+\[\Axiom$ !A({\OLId{latin-ordinary}{t}}), {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}$
+\RightLabel{\LeftR{\lforall}}
+\UnaryInf$ \lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})],{\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}$
+\DisplayProof
+\qquad
+\Axiom$ {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, !A({\OLId{latin-ordinary}{a}}) $
+\RightLabel{\RightR{\lforall}}
+\UnaryInf$ {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, \lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$
+\DisplayProof
+\]
+في قاعدة~\LeftR{\lforall} تكون~!!{formula} الفعالة~$!A({\OLId{latin-ordinary}{t}})$، ويكون
+${\OLId{latin-ordinary}{t}}$ حدًا مغلقًا، أي خاليًا من المتغيرات. ولا يصح هذا الاستدلال---أي لا
+يطابق مخطط~\LeftR{\lforall}---إلا إذا وجدت~!!{formula}~$!A$ ومتغير~${\OLId{latin-ordinary}{x}}$
+وحد مغلق~${\OLId{latin-ordinary}{t}}$، وكانت~!!{formula} الرئيسة في النتيجة
+$\lforall[{\OLId{latin-ordinary}{x}}][!A]$، والـ!!{formula} الفعالة في المقدمة
+$\Subst{!A}{{\OLId{latin-ordinary}{t}}}{{\OLId{latin-ordinary}{x}}}$. وعلى هذا النحو تعمل~\RightR{\lforall}، إلا أن
+!!{formula} المقدمة الفعالة يجب أن تكون~$\Subst{!A}{{\OLId{latin-ordinary}{a}}}{{\OLId{latin-ordinary}{x}}}$، حيث~${\OLId{latin-ordinary}{a}}$
+!!a{constant}. وهذا الثابت هو \emph{المتغير المميَّز} لاستدلال
+\RightR{\lforall}. وشرط صحة الاستدلال ألا تحتوي المتتالية السفلى~${\OLId{latin-ordinary}{a}}$؛
+أي ألا يقع~${\OLId{latin-ordinary}{a}}$ في~${\OLId{greek-variable}{Gamma}}$ أو~${\OLId{greek-variable}{Delta}}$ أو~$!A$. وهذا بعينه
+\emph{شرط المتغير المميَّز}.
+
+يتألف نظام المتتاليات، كـ\Log{G1c} و\Log{G3c}، من قواعد معينة بالمخططات
+المتقدمة، ومن متتاليات معينة مخططيًا تتخذ بديهيات. وأما~!!^{proof}s فيه
+فأشجار منتهية من المتتاليات، تنشأ استقرائيًا من البديهيات بقواعد
+الاستدلال: كل ورقة فيها بديهية، وكل متتالية سوى الأوراق تترتب، بقاعدة من
+قواعد النظام، على المتتاليات التي تعلوها مباشرة.
+
+\begin{defn}\ollabel{defn:proof}
+تُنشأ~\emph{!!^{proof}s} نظام المتتاليات استقرائيًا، وهي أشجار منتهية من
+المتتاليات، على الوجه الآتي:
+\begin{enumerate}
+  \item\ollabel{defn:prf:axiom} البديهية الواحدة~!!a{proof}.
+  \item\ollabel{defn:prf:one-prem} إذا كان~$\pi_{\OLMathNumeral{1}}$~!!a{proof} خاتمته
+  المتتالية~${\OLId{latin-looped}{S}}_{\OLMathNumeral{1}}$، وكانت~${\OLId{latin-looped}{S}}$ تترتب على~${\OLId{latin-looped}{S}}_{\OLMathNumeral{1}}$ بقاعدة ذات مقدمة واحدة~${\OLId{latin-looped}{R}}$، فإن
+  \[
+  \AxiomC{}
+  \RightLabel{$\pi_{\OLMathNumeral{1}}$}
+  \DeduceC{${\OLId{latin-looped}{S}}_{\OLMathNumeral{1}}$}
+  \RightLabel{${\OLId{latin-looped}{R}}$}
+  \UnaryInfC{${\OLId{latin-looped}{S}}$}
+  \DisplayProof
+  \]
+  يكون~!!a{proof}.
+  \item\ollabel{defn:prf:two-prem} وإذا كان~$\pi_{\OLMathNumeral{1}}$ و$\pi_{\OLMathNumeral{2}}$~!!{proof}s
+  خاتمتاهما~${\OLId{latin-looped}{S}}_{\OLMathNumeral{1}}$ و${\OLId{latin-looped}{S}}_{\OLMathNumeral{2}}$، وكانت~${\OLId{latin-looped}{S}}$ مترتبة على~${\OLId{latin-looped}{S}}_{\OLMathNumeral{1}}$
+  و~${\OLId{latin-looped}{S}}_{\OLMathNumeral{2}}$ بقاعدة ذات مقدمتين~${\OLId{latin-looped}{R}}$، فإن
+  \[
+  \AxiomC{}
+  \RightLabel{$\pi_{\OLMathNumeral{1}}$}
+  \DeduceC{${\OLId{latin-looped}{S}}_{\OLMathNumeral{1}}$}
+  \AxiomC{}
+  \RightLabel{$\pi_{\OLMathNumeral{2}}$}
+  \DeduceC{${\OLId{latin-looped}{S}}_{\OLMathNumeral{2}}$}
+  \RightLabel{${\OLId{latin-looped}{R}}$}
+  \BinaryInfC{${\OLId{latin-looped}{S}}$}
+  \DisplayProof
+  \]
+  يكون~!!a{proof}.
+\end{enumerate}
+\end{defn}
+
+يجعل~\Olref{defn:proof}~!!{proof}s أشجارًا من المتتاليات، ونتصور نموها
+إلى أعلى. فعقدها العليا، وهي الأوراق، بديهيات تسمى \emph{متتاليات
+ابتدائية}؛ والمتتالية السفلى هي \emph{المتتالية النهائية}. فإذا كان
+$\pi$~!!a{proof} خاتمته~${\OLId{latin-looped}{S}}$، كتبنا كذلك~$\pi\Proves {\OLId{latin-looped}{S}}$. وإذا وجد
+!!a{proof} للمتتالية~${\OLId{latin-looped}{S}}$، كتبنا~$\Proves {\OLId{latin-looped}{S}}$، وربما أثبتنا اسم النظام
+الذي فيه البرهان إلى يسار~$\Proves$؛ ومثاله
+$\Log{G1c}\Proves !A,!B\Sequent !A\land !B$. وكل متتالية في~!!a{proof}
+سوى الابتدائية \emph{نتيجة} لاستدلال بقاعدة~${\OLId{latin-looped}{R}}$. والمتتالية أو
+المتتاليتان اللتان تعلوان متتالية ما مباشرة في~!!a{proof}، أي أبوا
+العقدة، هما \emph{مقدمات} ذلك الاستدلال.
+
+والـ!!{proof}s الداخلة في البناء الاستقرائي لـ!!a{proof} تسمى
+\emph{!!{proof}s جزئية} منه؛ وتسمى~!!{proof}s الجزئية المنتهية بمقدمات استدلال بعينه
+\emph{!!{proof}s جزئية مباشرة} لذلك الاستدلال.
+
+وكثيرًا ما نقيس تعقيد~!!{proof}s بعدد طبيعي. وقد نعد المتتاليات في
+!!a{proof}، غير أن الأنفع في الغالب هو~!!{height}~!!a{proof}: أي أكبر
+عدد لخطوات الاستدلال، أو للحواف، في فرع يمتد من المتتالية النهائية إلى
+متتالية ابتدائية. وله تعريف استقرائي أيضًا.
+
+\begin{defn}
+يُعرَّف~\emph{!!{height}}~$\pheight{\pi}$ لـ!!a{proof}~$\pi$ استقرائيًا
+على الوجه الآتي:
+\begin{enumerate}
+  \item إن اقتصر~$\pi$ على بديهية واحدة، فـ$\pheight{\pi}={\OLMathNumeral{0}}$.
+  \item وإن ختم~$\pi$ استدلال ذو مقدمة واحدة، وكان~$\pi_{\OLMathNumeral{1}}$ هو
+  الـ!!{proof} الجزئي المباشر، فـ$\pheight{\pi}=\pheight{\pi_{\OLMathNumeral{1}}}+{\OLMathNumeral{1}}$.
+  \item وإن ختم~$\pi$ استدلال ذو مقدمتين، وكان~$\pi_{\OLMathNumeral{1}}$ و$\pi_{\OLMathNumeral{2}}$
+  هما الـ!!{proof}s الجزئية المباشرة، فـ
+  $\pheight{\pi}=\max(\pheight{\pi_{\OLMathNumeral{1}}},\pheight{\pi_{\OLMathNumeral{2}}})+{\OLMathNumeral{1}}$.
+\end{enumerate}
+ومتى كان للمتتالية~${\OLId{latin-looped}{S}}$~!!a{proof} ارتفاعه~$\le {\OLId{latin-ordinary}{n}}$، كتبنا~$\Proves[{\OLId{latin-ordinary}{n}}]{\OLId{latin-looped}{S}}$.
+\end{defn}
+
+\begin{ex}
+كل متتالية على الصورة~$!C,{\OLId{greek-variable}{Gamma}}\Sequent{\OLId{greek-variable}{Delta}},!C$ بديهية في~\Log{G3c}،
+إذا كانت~$!C$ ذرية. ولتكن~$!D$ و$!E$ جملتين ذريتين؛ فتكون
+$!D,!E\Sequent !D$ و$!D,!E\Sequent !E$ صورتين خاصتين من البديهية
+$!C,{\OLId{greek-variable}{Gamma}}\Sequent{\OLId{greek-variable}{Delta}},!C$. فإذا وضعنا، مثلًا،~$!C\ident !E$ و
+${\OLId{greek-variable}{Gamma}}=\{!D\}$ و${\OLId{greek-variable}{Delta}}=\emptyset$، نتجت بعينها المتتالية
+$!D,!E\Sequent !E$. ولأن السياقات متعددات مجموعات، فإن
+$!D,!E\Sequent !E$ و$!E,!D\Sequent !E$ متتالية واحدة.
+
+ولما كانت~$!D,!E\Sequent !D$ صورة من بديهيات~\Log{G3c}، كانت وحدها
+!!a{proof} في~\Log{G3c}؛ وكذلك~$!D,!E\Sequent !E$ بمقتضى
+\olref{defn:proof}\olref{defn:prf:axiom}. ولنسمهما~$\pi_{\OLMathNumeral{1}}$ و$\pi_{\OLMathNumeral{2}}$.
+ثم يجيز~\olref{defn:prf:two-prem} أن نركب من هذين~!!{proof}s واحدًا
+جديدًا~($\pi_{\OLMathNumeral{3}}$) بقاعدة~\RightR{\land} ذات المقدمتين:
+\[
+\Axiom$!D, !E \fCenter !D$
+\Axiom$!D, !E \fCenter !E$
+\RightLabel{\RightR{\land}}
+\BinaryInf$!D, !E  \fCenter !D \land !E $
+\DisplayProof
+\]
+ومن~$\pi_{\OLMathNumeral{3}}$ ننتقل إلى~!!{proof}~$\pi_{\OLMathNumeral{4}}$:
+\[
+\Axiom$!D, !E \fCenter !D$
+\Axiom$!D, !E \fCenter !E$
+\RightLabel{\RightR{\land}}
+\insertBetweenHyps{\hspace{5ex}}
+\BinaryInf$!D, !E  \fCenter !D \land !E $
+\LeftSubproofLabel{$\pi_{\OLMathNumeral{3}}$}
+\RightLabel{\LeftR{\land}}
+\UnaryInf$!D \land !E  \fCenter !D \land !E$
+\RightSubproofLabel{$\pi_{\OLMathNumeral{4}}$}
+\DisplayProof
+\]
+وذلك باستعمال قاعدة~\LeftR{\land} ذات المقدمة الواحدة، وفق
+\olref{defn:proof}\olref{defn:prf:one-prem}. فالـ!!{proof} الجزئي
+المباشر لاستدلال~$\pi_{\OLMathNumeral{4}}$ الأخير هو~$\pi_{\OLMathNumeral{3}}$؛ والـ!!{proof}s الجزئية
+المباشرة لاستدلال~\RightR{\land} هما~$\pi_{\OLMathNumeral{1}}$ و$\pi_{\OLMathNumeral{2}}$. وأما
+الـ!!{proof}s الجزئية لـ$\pi_{\OLMathNumeral{4}}$ فتشمل~$\pi_{\OLMathNumeral{1}}$ و$\pi_{\OLMathNumeral{2}}$ و$\pi_{\OLMathNumeral{3}}$
+و$\pi_{\OLMathNumeral{4}}$ نفسه. ثم إن~$\pheight{\pi_{\OLMathNumeral{1}}}=\pheight{\pi_{\OLMathNumeral{2}}}={\OLMathNumeral{0}}$ و
+$\pheight{\pi_{\OLMathNumeral{3}}}={\OLMathNumeral{1}}$ و$\pheight{\pi_{\OLMathNumeral{4}}}={\OLMathNumeral{2}}$. فثبت أن
+$\Log{G3c}\Proves[{\OLMathNumeral{2}}] !D\land !E\Sequent !D\land !E$ لكل~$!D$ و$!E$
+ذريتين.
+\end{ex}
+
+\end{document}

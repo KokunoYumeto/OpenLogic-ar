@@ -1,0 +1,239 @@
+% Part: proof-theory
+% Chapter: cut-elimination
+% Section: midsequent
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{cut}{mid}
+
+\olsection{في مبرهنة المتتالية الوسطى ومبرهنة هيربراند}
+
+ومن أجلّ ما يترتب على حذف القطع مبرهنة المتتالية الوسطى. ومؤداها أنه إذا
+وجد~!!a{proof}~$\pi$ لـ${\OLId{greek-variable}{Gamma}} \Sequent {\OLId{greek-variable}{Delta}}$، وكانت كل !!{formula}
+فيه سوَرية المقدمة، وجد~!!a{proof}~$\pi'$ يشتمل على متتالية
+${\OLId{latin-looped}{S}} \ident \Pi \Sequent \Lambda$ تسمى \emph{المتتالية الوسطى}؛ وتكون
+الاستدلالات التي فوق~${\OLId{latin-looped}{S}}$ في~$\pi'$ كلها قضوية، والتي تحت~${\OLId{latin-looped}{S}}$ كلها
+سوَرية. (ونسمي~!!^a{formula}~$!A$ \emph{سوَرية المقدمة}، أو نقول إنها
+في \emph{الصيغة سوَرية المقدمة}، متى كانت على الصورة
+\[\mathsf{Q}_{\OLMathNumeral{1}}{\OLId{latin-ordinary}{x}}_{\OLMathNumeral{1}}\dots\mathsf{Q}_{\OLId{latin-ordinary}{n}}{\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{n}}\,!B({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{1}},\dots,{\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{n}})\]
+حيث يكون كل~$\mathsf{Q}_{\OLId{latin-ordinary}{i}}$ إما~$\lforall$ وإما~$\lexists$.) وتؤدي
+مبرهنة المتتالية الوسطى بدورها إلى مبرهنة هيربراند. وصورتها العامة عسرة
+العبارة بعض العسر، وخلاصتها أن لكل~!!{provable}~!!{sentence}~$!A$ في
+منطق الرتبة الأولى قضية تحصيل حاصل~$!A'$ يصح أن~!!{prove} منها~$!A$.
+وأما صورتها الخاصة بـ!!{sentence}s من
+الصورة~$\lexists[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$، حيث~$!B$ خالية من الأسوار:
+
+\begin{thm}[مبرهنة هيربراند]
+لنفرض أن~$!B({\OLId{latin-ordinary}{x}})$ خالية من الأسوار وأن
+$\Proves \lexists[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$. عندئذ توجد حدود~${\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}$, \dots,~${\OLId{latin-ordinary}{t}}_{\OLId{latin-ordinary}{n}}$
+بحيث~$\Proves !B({\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}) \lor \dots \lor !B({\OLId{latin-ordinary}{t}}_{\OLId{latin-ordinary}{n}})$.
+\end{thm}
+
+ونسمي~!!{formula}~$!B({\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}) \lor \dots \lor !B({\OLId{latin-ordinary}{t}}_{\OLId{latin-ordinary}{n}})$
+\emph{فصل هيربراند} لـ$\lexists[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$. ولما كانت~$!B$ خالية من
+الأسوار، كان الفصل كذلك. فإن كان~!!{provable}، فهو~!!{provable} ببرهان
+خال من القطع، وله من ثم~!!a{proof} لا يستعمل إلا الاستدلالات القضوية؛
+فثبت أنه تحصيل حاصل.
+
+موضع العسر من مبرهنة هيربراند إثبات فصل هيربراند لكل
+!!{provable}~!!{formula}~$\lexists[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$. وأما العكس، وهو قابلية
+$\lexists[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$ للبرهنة متى كان لها فصل هيربراند، فهين؛ لأن فصل
+هيربراند يستلزم~$\lexists[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$. وهذا، على سبيل المثال،
+!!a{proof} في~\Log{G3c} للحالة~${\OLId{latin-ordinary}{n}}={\OLMathNumeral{2}}$:
+\[
+\Axiom$!B({\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}) \fCenter \lexists[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})], !B({\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}), !B({\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}})$
+\Axiom$!B({\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}}) \fCenter \lexists[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})], !B({\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}), !B({\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}})$
+\RightLabel{\LeftR{\lor}}
+\BinaryInf$!B({\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}) \lor !B({\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}}) \fCenter \lexists[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})], !B({\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}), !B({\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}})$
+\RightLabel{\RightR{\lexists}}
+\UnaryInf$!B({\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}) \lor !B({\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}}) \fCenter \lexists[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})], !B({\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}})$
+\RightLabel{\RightR{\lexists}}
+\UnaryInf$!B({\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}) \lor !B({\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}}) \fCenter \lexists[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$
+\DisplayProof
+\]
+
+ولنستخرج فصل هيربراند من~!!a{proof}~$\pi$ لـ
+$\Sequent \lexists[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$. نبدأ بالحالة التي تجتمع فيها جميع
+استدلالات~$\RightR{\lexists}$ في آخر~!!{proof} الخالي من القطع~$\pi$:
+\[
+\AxiomC{}
+\RightLabel{$\pi_{\OLMathNumeral{1}}$}
+\Deduce$ \fCenter \lexists[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})], !B({\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}), \dots, !B({\OLId{latin-ordinary}{t}}_{\OLId{latin-ordinary}{n}})$
+\RightLabel{\RightR{\lexists}}
+\UnaryInf$ \fCenter \lexists[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})], !B({\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}}), \dots, !B({\OLId{latin-ordinary}{t}}_{\OLId{latin-ordinary}{n}})$
+\RightLabel{$({\OLId{latin-ordinary}{n}}-{\OLMathNumeral{1}}) \times \RightR{\lexists}$}
+\Deduce$ \fCenter \lexists[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$
+\DisplayProof
+\]
+فإن كانت هذه جميع استدلالات~$\RightR{\lexists}$ في~$\pi$ التي تكون
+فيها~$\lexists[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$ فعالة، لم يقع في~$\pi_{\OLMathNumeral{1}}$ استدلال سوَري آخر؛
+وذلك أن~$!B({\OLId{latin-ordinary}{x}})$ لا سور فيها، وأن متتالية النهاية لا~!!{formula}s في
+يسارها. وعندئذ تكون
+$\fCenter \lexists[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})], !B({\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}), \dots, !B({\OLId{latin-ordinary}{t}}_{\OLId{latin-ordinary}{n}})$ المتتالية
+الوسطى لـ$\pi$. وفوق ذلك، لما لم توجد استدلالات سوَرية فوق المتتالية
+الوسطى، احتوتها كل المتتاليات الواقعة فوقها، ولم تكن فيها
+$\lexists[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$ فعالة ولا رئيسة. ومن ثم يمكن حذفها من~!!{proof}
+$\pi_{\OLMathNumeral{1}}$، فنحصل على~!!a{proof} لـ
+$\fCenter !B({\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}), \dots, !B({\OLId{latin-ordinary}{t}}_{\OLId{latin-ordinary}{n}})$، وباستخدام~${\OLId{latin-ordinary}{n}}-{\OLMathNumeral{1}}$ تطبيقًا لـ
+$\RightR{\lor}$ ينتج لنا~!!a{proof} لفصل هيربراند
+$\Sequent !B({\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}) \lor \dots \lor !B({\OLId{latin-ordinary}{t}}_{\OLId{latin-ordinary}{n}})$.
+
+لكن لا يجوز لنا أن نفترض، حتى في~!!{proof} خال من القطع لـ
+$\Sequent \lexists[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$، أن استدلالات~$\RightR{\lexists}$ كلها
+كتلة واحدة في آخره؛ فقد تتخللها استدلالات تكون فيها إحدى~$!B({\OLId{latin-ordinary}{t}}_{\OLId{latin-ordinary}{i}})$
+رئيسة. ومن أجل هذا نحتاج إلى مبرهنة المتتالية الوسطى.
+
+\begin{thm}[مبرهنة المتتالية الوسطى]\ollabel{thm:midsequent} إذا وُجد
+  في~\Log{G3c}~!!{proof}~$\pi$ لـ${\OLId{greek-variable}{Gamma}} \Sequent {\OLId{greek-variable}{Delta}}$ تكون فيه كل
+  !!{formula}s في~${\OLId{greek-variable}{Gamma}}$ و${\OLId{greek-variable}{Delta}}$ سوَرية المقدمة، وُجد~!!a{proof}
+  $\pi'$ يحتوي متتالية~$\Pi \Sequent \Lambda$ بحيث تكون كل
+  الاستدلالات تحتها سوَرية، وكل الاستدلالات فوقها قضوية.
+\end{thm}
+
+\begin{proof}
+  عرّف \emph{رتبة} الاستدلال السُّوَري في~$\pi$ بأنها عدد الاستدلالات
+  القضوية الواقعة تحته، وعرّف رتبة~$\pi$، أي~${\OLId{latin-ordinary}{o}}(\pi)$، بأنها مجموع رتب
+  كل استدلالاته السُّوَرية. إذا كان~${\OLId{latin-ordinary}{o}}(\pi)={\OLMathNumeral{0}}$، لم يكن تحت أي استدلال
+  سُوَري استدلال قضوي، فنكون قد انتهينا. فإن لم يقع في~$\pi$ استدلال
+  سُوَري أصلًا، كانت المتتالية النهائية نفسها متتالية وسطى. وإلا، فلأن
+  الاستدلالات السُّوَرية أحادية المقدمة، تؤلف الاستدلالات السُّوَرية
+  الواقعة في أسفل البرهان سلسلة واحدة، ومقدمة أعلاها هي المتتالية الوسطى.
+
+  وإذا كان~${\OLId{latin-ordinary}{o}}(\pi)>{\OLMathNumeral{0}}$، فاختر أدنى استدلال سُوَري رتبته~$>{\OLMathNumeral{0}}$. ولأن
+  رتبته موجبة، فلا بد من وجود استدلال قضوي تحته. ولأنه أدنى استدلال
+  سُوَري من هذا القبيل، لا يجوز أن تكون نتيجته مقدمة لاستدلال سُوَري؛
+  وإلا كان ذلك الاستدلال السُّوَري الثاني الأدنى تحته استدلال قضوي
+  كذلك. ونميز الحالات الكثيرة بحسب نوع الاستدلال السُّوَري ونوع
+  الاستدلال القضوي الواقع تحته. ولأن متتالية النهاية لا تتألف إلا من
+  صيغ سوَرية المقدمة، لا يجوز أن تكون الصيغة الرئيسة للاستدلال السُّوَري
+  فعالة في الاستدلال القضوي التالي. وإلا كان لصيغة ذلك الاستدلال الرئيسة
+  سور في نطاق رابط قضوي. وبخاصية~!!{formula} الجزئية، لزم أن تكون هذه
+  !!{formula} جزئية من~!!a{formula} في متتالية النهاية. ومن ثم
+  تكون~!!{formula} الرئيسة للاستدلال السُّوَري~!!a{element} من سياق
+  الاستدلال القضوي الأدنى.
+
+  وفيما يأتي مثالان:
+
+أولًا، لنفرض أن لدينا~$\RightR{\lforall}$ ينتهي في المقدمة اليمنى لـ
+$\LeftR{\lif}$. عندئذ ينتهي~!!{proof} الجزئي المعني من~$\pi$ بـ
+!!{proof} الجزئي~$\pi_{\OLMathNumeral{1}}$:
+\[
+\AxiomC{}
+\RightLabel{$\pi_{\OLMathNumeral{2}}$}
+\Deduce${\OLId{greek-variable}{Gamma}}' \fCenter {\OLId{greek-variable}{Delta}}', \lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})], !B$
+\AxiomC{}
+\RightLabel{$\pi_{\OLMathNumeral{3}}$}
+\Deduce$!C, {\OLId{greek-variable}{Gamma}}' \fCenter {\OLId{greek-variable}{Delta}}', !A({\OLId{latin-ordinary}{c}})$
+\RightLabel{\RightR{\lforall}}
+\UnaryInf$!C, {\OLId{greek-variable}{Gamma}}' \fCenter {\OLId{greek-variable}{Delta}}', \lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$
+\RightLabel{\LeftR{\lif}}
+\BinaryInf$!B \lif !C, {\OLId{greek-variable}{Gamma}}' \fCenter {\OLId{greek-variable}{Delta}}', \lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$
+\DisplayProof
+\]
+يمكننا افتراض أن~$\pi$ منتظم، ومن ثم لا يظهر المتغير المميز~${\OLId{latin-ordinary}{c}}$ خارج
+$\pi_{\OLMathNumeral{3}}$؛ وبوجه خاص لا يظهر في~$!B \lif !C$ ولا في~$\pi_{\OLMathNumeral{2}}$. والآن
+تأمل البرهان~$\pi_{\OLMathNumeral{1}}'$:
+\[
+\AxiomC{}
+\RightLabel{$\pi_{\OLMathNumeral{2}}'$}
+\Deduce${\OLId{greek-variable}{Gamma}}' \fCenter {\OLId{greek-variable}{Delta}}', \lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})], !A({\OLId{latin-ordinary}{c}}), !B$
+\AxiomC{}
+\RightLabel{$\pi_{\OLMathNumeral{3}}$}
+\Deduce$!C, {\OLId{greek-variable}{Gamma}}' \fCenter {\OLId{greek-variable}{Delta}}', \lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})], !A({\OLId{latin-ordinary}{c}})$
+\RightLabel{\LeftR{\lif}}
+\BinaryInf$!B \lif !C, {\OLId{greek-variable}{Gamma}}' \fCenter {\OLId{greek-variable}{Delta}}', \lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})], !A({\OLId{latin-ordinary}{c}})$
+\RightLabel{\RightR{\lforall}}
+\UnaryInf$!B \lif !C, {\OLId{greek-variable}{Gamma}}' \fCenter {\OLId{greek-variable}{Delta}}', \lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})], \lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$
+\DisplayProof
+\]
+حيث ينتج~$\pi_{\OLMathNumeral{2}}'$ من~$\pi_{\OLMathNumeral{2}}$ بإضعافه بـ$!A({\OLId{latin-ordinary}{c}})$ في اليمين. (ولا يضيف
+ذلك أي استدلال، وبوجه خاص لا يضيف استدلالات سوَرية قد تؤثر في الرتبة.
+كما أنه لا يخل بأي شرط لمتغير مميز في~$\pi_{\OLMathNumeral{2}}$، إذ لا يُستخدم أي ثابت
+في~$!A({\OLId{latin-ordinary}{c}})$ متغيرًا مميزًا في~$\pi_{\OLMathNumeral{2}}$.) ويظل شرط المتغير المميز في
+$\RightR{\lforall}$ متحققًا، لأن~${\OLId{latin-ordinary}{c}}$ لا تظهر في~$!B \lif !C$.
+
+نستدعي مقبولية التقليص فنحصل على~!!a{proof}~$\pi_{\OLMathNumeral{1}}''$ لـ
+$!B \lif !C, {\OLId{greek-variable}{Gamma}}' \fCenter {\OLId{greek-variable}{Delta}}', \lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$. ولم
+يغير برهان مقبولية~$\RightR{\Contraction}$ لـ$\lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$،
+ولا برهان قابلية~$\RightR{\lforall}$ للعكس المستخدم فيه، رتبة أي
+استدلال؛ فقد حذفا استدلالات في أقصى الأحوال. ولذلك لا توجد استدلالات
+سوَرية في~$\pi_{\OLMathNumeral{1}}''$ أكثر مما في~$\pi_{\OLMathNumeral{1}}$، ولكل استدلال سُوَري في
+$\pi_{\OLMathNumeral{1}}''$ عدد الاستدلالات القضوية نفسه تحته كما للاستدلال المقابل في
+$\pi_{\OLMathNumeral{1}}$، باستثناء~$\RightR{\lforall}$ الأخير: كان تحته
+$\LeftR{\lif}$ في~$\pi$، وقد نقلناه إلى فوقه في~$\pi_{\OLMathNumeral{1}}''$. استبدل
+$\pi_{\OLMathNumeral{1}}''$ بـ$\pi_{\OLMathNumeral{1}}$ في~$\pi$. ويكون للـ!!{proof} الناتج رتبة أدنى،
+لأن رتبة استدلال~$\RightR{\lforall}$ على الأقل نقصت بمقدار~${\OLMathNumeral{1}}$. ثم
+طبّق فرض الاستقراء.
+
+والحالات التي يكون فيها الاستدلال السُّوَري هو~$\RightR{\lexists}$
+أسهل، إذ لا نحتاج إلى التقليص ولا إلى القلق بشأن شرط متغير مميز. فافترض
+مثلًا أن~$\RightR{\lexists}$ يتبعه~$\RightR{\land}$، وهذه المرة بوصفه
+المقدمة اليسرى. يكون~!!{proof} الجزئي المعني هو~$\pi_{\OLMathNumeral{1}}$:
+\[
+\AxiomC{}
+\RightLabel{$\pi_{\OLMathNumeral{2}}$}
+\Deduce${\OLId{greek-variable}{Gamma}}' \fCenter {\OLId{greek-variable}{Delta}}', \lexists[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})], !A({\OLId{latin-ordinary}{t}}), !B$
+\RightLabel{\RightR{\lexists}}
+\UnaryInf${\OLId{greek-variable}{Gamma}}' \fCenter {\OLId{greek-variable}{Delta}}', \lexists[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})], !B$
+\AxiomC{}
+\RightLabel{$\pi_{\OLMathNumeral{3}}$}
+\Deduce${\OLId{greek-variable}{Gamma}}' \fCenter {\OLId{greek-variable}{Delta}}', \lexists[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})], !C$
+\RightLabel{\RightR{\land}}
+\BinaryInf${\OLId{greek-variable}{Gamma}}' \fCenter {\OLId{greek-variable}{Delta}}', \lexists[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})], !B \land !C$
+\DisplayProof
+\]
+استبدل~$\pi_{\OLMathNumeral{1}}'$ بـ$\pi_{\OLMathNumeral{1}}$ في~$\pi$:
+\[
+\AxiomC{}
+\RightLabel{$\pi_{\OLMathNumeral{2}}$}
+\Deduce${\OLId{greek-variable}{Gamma}}' \fCenter {\OLId{greek-variable}{Delta}}', \lexists[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})], !A({\OLId{latin-ordinary}{t}}), !B$
+\AxiomC{}
+\RightLabel{$\pi_{\OLMathNumeral{3}}'$}
+\Deduce${\OLId{greek-variable}{Gamma}}' \fCenter {\OLId{greek-variable}{Delta}}', \lexists[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})], !A({\OLId{latin-ordinary}{t}}), !C$
+\RightLabel{\RightR{\land}}
+\BinaryInf${\OLId{greek-variable}{Gamma}}' \fCenter {\OLId{greek-variable}{Delta}}', \lexists[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})], !A({\OLId{latin-ordinary}{t}}), !B \land !C$
+\RightLabel{\RightR{\lexists}}
+\UnaryInf${\OLId{greek-variable}{Gamma}}' \fCenter {\OLId{greek-variable}{Delta}}', \lexists[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})], !B \land !C$
+\DisplayProof
+\]
+حيث ينتج~$\pi_{\OLMathNumeral{3}}'$ من~$\pi_{\OLMathNumeral{3}}$ بإضعافه بـ$!A({\OLId{latin-ordinary}{t}})$ في اليمين. ولا يتضمن
+هذا الإضعاف إلا إضافة~$!A({\OLId{latin-ordinary}{t}})$ إلى يمين كل متتالية في~$\pi_{\OLMathNumeral{3}}$، فلا يغير
+رتبة أي استدلال سُوَري. وتكون رتب الاستدلالات السُّوَرية في~$\pi'$
+كما هي في~$\pi$، سوى أن رتبة استدلال~$\RightR{\lexists}$ الذي بُدّل
+موضعه مع~$\RightR{\land}$ نقصت بمقدار~${\OLMathNumeral{1}}$. فينطبق فرض الاستقراء.
+\end{proof}
+
+\begin{prob}
+صف الحالتين في برهان~\olref{thm:midsequent} اللتين ينتهي في إحداهما
+$\LeftR{\lexists}$ في مقدمة~$\RightR{\lif}$، وينتهي في الأخرى
+$\LeftR{\lforall}$ في المقدمة اليسرى لـ$\LeftR{\lor}$.
+\end{prob}
+
+\begin{proof}[برهان مبرهنة هيربراند]
+لنفرض أن~$\pi$ ينتهي بـ$\Sequent \lexists[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$. وبفضل
+\olref{thm:midsequent} نستطيع تحويل~$\pi$ إلى~!!a{proof}~$\pi'$ ذي
+متتالية وسطى~${\OLId{latin-looped}{S}}$، ولا بد أن تكون على الصورة
+\[
+\Sequent \lexists[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})], !B({\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}), \dots, !B({\OLId{latin-ordinary}{t}}_{\OLId{latin-ordinary}{n}}).
+\]
+ولأن كل الاستدلالات فوق~${\OLId{latin-looped}{S}}$ قضوية، لا يجوز أن تكون
+$\lexists[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$ رئيسة في استدلال فوق~${\OLId{latin-looped}{S}}$. ولأنها ليست ذرية، لا
+يجوز أن تكون رئيسة في مسلّمة. ولأن~$\lexists[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$ لا يجوز أن تكون
+صيغة جزئية حقيقية من~$!B({\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}})$، إذ إن~$!B({\OLId{latin-ordinary}{x}})$ خالية من الأسوار، فلا
+يمكن كذلك أن تكون فعالة فوق~${\OLId{latin-looped}{S}}$. ومن ثم يعطي حذف
+$\lexists[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$ من~!!{proof} الجزئي المنتهي بـ${\OLId{latin-looped}{S}}$~!!{proof}
+صحيحًا لـ$\Sequent !B({\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}), \dots, !B({\OLId{latin-ordinary}{t}}_{\OLId{latin-ordinary}{n}})$، ومنه يمكن الحصول على
+!!a{proof} لـ$\Sequent !B({\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}) \lor \dots \lor !B({\OLId{latin-ordinary}{t}}_{\OLId{latin-ordinary}{n}})$ بتطبيق
+$\RightR{\lor}$ عدد~${\OLId{latin-ordinary}{n}}-{\OLMathNumeral{1}}$ من المرات.
+\end{proof}
+
+% \begin{prob}
+% أوجد فصل هيربراند لـ$\lexists[x][\lforall[y][(!A(x) \lif
+% !A(y))]]$ بإيجاد~!!{proof} خال من القطع لـ$\Sequent
+% \lexists[x][\lforall[y][(!A(x) \lif !A(y))]]$ وتطبيق التحويل في
+% \olref{thm:midsequent} لإيجاد متتالية وسطى عند الحاجة.
+% \end{prob}
+
+\end{document}

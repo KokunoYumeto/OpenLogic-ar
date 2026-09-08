@@ -1,0 +1,70 @@
+% Part: counterfactuals
+% Chapter: minimal-change-semantics
+% Section: antecedent-strengthening
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cnt}{min}{agg}
+
+\olsection{في تقوية المقدّم}
+
+يراد بـ«تقوية المقدّم» الانتقال في الاستدلال
+$!A \lif !C \Entails (!A \land !B) \lif !C$. وهذا صحيح في الشرط
+المادي، لا في الشرط المخالف للواقع. فلنفترض أن العود يشتعل لو حككته؛
+أي إن العود ووجه علبته سليمان، وإني لا أكسره، ونحو ذلك. لكن لا يصدق
+أنه يشتعل لو حككته في الفضاء الخارجي. فليس الاستدلال الآتي بصحيح:
+\begin{quote}
+  لو حُك عود الثقاب لاشتعل.
+
+  إذن، لو حُك عود الثقاب في الفضاء الخارجي لاشتعل.
+\end{quote}
+
+ويبين تحليل لويس--ستالنيكر سبب ذلك: فأقرب عالم أحك فيه العود في الفضاء
+الخارجي أبعد من العالم الفعلي بكثير من أقرب عالم أحكه فيه فحسب. فالعود
+يشتعل في الثاني ولا يشتعل في الأول، وهو عين ما نتوقعه.
+
+\begin{ex}
+  وتبطل دلالة الكرات هذا الاستدلال، أي إن
+  ${\OLId{latin-ordinary}{p}} \cif {\OLId{latin-ordinary}{r}} \Entails/ ({\OLId{latin-ordinary}{p}} \land {\OLId{latin-ordinary}{q}}) \cif {\OLId{latin-ordinary}{r}}$. انظر النموذج
+  $\mModel{M} = \tuple{{\OLId{latin-looped}{W}}, {\OLId{latin-looped}{O}}, {\OLId{latin-looped}{V}}}$، حيث~${\OLId{latin-looped}{W}} = \{{\OLId{latin-ordinary}{w}}, {\OLId{latin-ordinary}{w}}_{\OLMathNumeral{1}}, {\OLId{latin-ordinary}{w}}_{\OLMathNumeral{2}}\}$،
+  و${\OLId{latin-looped}{O}}_{\OLId{latin-ordinary}{w}} = \{\{{\OLId{latin-ordinary}{w}}\}, \{{\OLId{latin-ordinary}{w}}, {\OLId{latin-ordinary}{w}}_{\OLMathNumeral{1}}\}, \{{\OLId{latin-ordinary}{w}}, {\OLId{latin-ordinary}{w}}_{\OLMathNumeral{1}}, {\OLId{latin-ordinary}{w}}_{\OLMathNumeral{2}}\}\}$،
+  و${\OLId{latin-looped}{V}}({\OLId{latin-ordinary}{p}}) = \{{\OLId{latin-ordinary}{w}}_{\OLMathNumeral{1}}, {\OLId{latin-ordinary}{w}}_{\OLMathNumeral{2}}\}$، و${\OLId{latin-looped}{V}}({\OLId{latin-ordinary}{q}}) = \{{\OLId{latin-ordinary}{w}}_{\OLMathNumeral{2}}\}$،
+  و${\OLId{latin-looped}{V}}({\OLId{latin-ordinary}{r}}) = \{{\OLId{latin-ordinary}{w}}_{\OLMathNumeral{1}}\}$. توجد كرة تقبل~${\OLId{latin-ordinary}{p}}$ هي~${\OLId{latin-looped}{S}} = \{{\OLId{latin-ordinary}{w}}, {\OLId{latin-ordinary}{w}}_{\OLMathNumeral{1}}\}$،
+  ويصدق~${\OLId{latin-ordinary}{p}} \lif {\OLId{latin-ordinary}{r}}$ في جميع عوالمها، ولذلك
+  $\mSat{{\OLId{latin-looped}{M}}}{{\OLId{latin-ordinary}{p}} \cif {\OLId{latin-ordinary}{r}}}[{\OLId{latin-ordinary}{w}}]$. وتوجد أيضًا كرة تقبل~$({\OLId{latin-ordinary}{p}} \land {\OLId{latin-ordinary}{q}})$ هي
+  ${\OLId{latin-looped}{S}}' = \{{\OLId{latin-ordinary}{w}}, {\OLId{latin-ordinary}{w}}_{\OLMathNumeral{1}}, {\OLId{latin-ordinary}{w}}_{\OLMathNumeral{2}}\}$؛ غير أن
+  $\mSat/{{\OLId{latin-looped}{M}}}{({\OLId{latin-ordinary}{p}} \land {\OLId{latin-ordinary}{q}}) \lif {\OLId{latin-ordinary}{r}}}[{\OLId{latin-ordinary}{w}}_{\OLMathNumeral{2}}]$؛ ولذلك
+  $\mSat/{{\OLId{latin-looped}{M}}}{({\OLId{latin-ordinary}{p}} \land {\OLId{latin-ordinary}{q}}) \cif {\OLId{latin-ordinary}{r}}}[{\OLId{latin-ordinary}{w}}]$
+  (انظر~\olref{fig:antecedent-strengthening}).
+
+\begin{figure}
+\begin{center}
+\begin{tikzpicture}[layerwidth=1.5,scale=.6]\tiny
+  \spheresystem{3}
+  \propositionintersect{-10}{3}{30}{5}
+  \begin{scope}
+    \clip plot[smooth,tension=1] coordinates
+          {(0,4.5) (30:.95) (4.5,-3.5)} -- (4.5,4.5) ;
+    \spherefill{2}
+  \end{scope}
+  \draw[proposition] plot[dashed,smooth,tension=1] coordinates
+          {(0,4.5) (30:.95) (4.5,-3.5)} ;
+  \proposition{30}{2}{30}{5}
+  \path (0,0) node[world] {${\OLId{latin-ordinary}{w}}$};
+  \spherepos{30}{2}{node[world] {${\OLId{latin-ordinary}{w}}_{\OLMathNumeral{1}}$}}
+  \spherepos{-10}{3}{node[world] {${\OLId{latin-ordinary}{w}}_{\OLMathNumeral{2}}$}}
+  \spherepos{-10}{4}{node {${\OLId{latin-ordinary}{q}}$}}
+  \spherepos{30}{4}{node {${\OLId{latin-ordinary}{r}}$}}
+  \draw (1,4.5) node[below] {${\OLId{latin-ordinary}{p}}$};
+\end{tikzpicture}
+\caption{نموذج مضاد لتقوية المقدّم}
+\ollabel{fig:antecedent-strengthening}
+\end{center}
+\end{figure}
+\end{ex}
+
+\end{document}
+
+

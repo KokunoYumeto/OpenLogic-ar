@@ -1,0 +1,136 @@
+% Part: normal-modal-logic
+% Chapter: syntax-and-semantics
+% Section: truth-at-w
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{syn}{trw}
+
+\olsection{الصدق في عالم}
+
+متى عُيّن النموذج الموجهي، تعيّن به صدق ال!!{formula}s الموجهية
+في عوالمه. فأصل الدلالة العلائقية هو قولنا: النموذج~$\mModel{M}$
+يُصدق ال!!{formula}~$!A$ في العالم~${\OLId{latin-ordinary}{w}}$. وسنحدّ هذه العلاقة
+بالاستقراء، بحيث تبقى أحكام الروابط غير الموجهية موافقة لجداول
+الصدق المألوفة.
+
+\begin{defn}\ollabel{defn:mmodels}
+  يُعرّف \emph{صدق !!a{formula}~$!A$ في~${\OLId{latin-ordinary}{w}}$} ضمن~$\mModel M$، ويرمز
+  إليه بـ$\mSat{{\OLId{latin-looped}{M}}}{!A}[{\OLId{latin-ordinary}{w}}]$، استقرائيًا كما يأتي:
+  \begin{enumerate}
+  \tagitem{prvFalse}{\indcase{!A}{\lfalse}{لا يصدق أبدًا
+    $\mSat{{\OLId{latin-looped}{M}}}{\lfalse}[{\OLId{latin-ordinary}{w}}]$}.}{}
+  \tagitem{prvTrue}{\indcase{!A}{\ltrue}{يصدق دائمًا
+    $\mSat{{\OLId{latin-looped}{M}}}{\ltrue}[{\OLId{latin-ordinary}{w}}]$}.}{}
+  \item $\mSat{{\OLId{latin-looped}{M}}}{{\OLId{latin-ordinary}{p}}}[{\OLId{latin-ordinary}{w}}]$ إذا وفقط إذا كان~${\OLId{latin-ordinary}{w}} \in {\OLId{latin-looped}{V}}({\OLId{latin-ordinary}{p}})$.
+  \tagitem{prvNot}{\indcase{!A}{\lnot !B}{$\mSat{{\OLId{latin-looped}{M}}}{\indfrm}[{\OLId{latin-ordinary}{w}}]$ إذا
+    وفقط إذا كان~$\mSat/{{\OLId{latin-looped}{M}}}{!B}[{\OLId{latin-ordinary}{w}}]$}.}{}
+  \tagitem{prvAnd}{\indcase{!A}{(!B \land !C)}{$\mSat{{\OLId{latin-looped}{M}}}{\indfrm}[{\OLId{latin-ordinary}{w}}]$
+    إذا وفقط إذا كان~$\mSat{{\OLId{latin-looped}{M}}}{!B}[{\OLId{latin-ordinary}{w}}]$ و$\mSat{{\OLId{latin-looped}{M}}}{!C}[{\OLId{latin-ordinary}{w}}]$}.}{}
+  \tagitem{prvOr}{\indcase{!A}{(!B \lor !C)}{$\mSat{{\OLId{latin-looped}{M}}}{\indfrm}[{\OLId{latin-ordinary}{w}}]$
+    إذا وفقط إذا كان~$\mSat{{\OLId{latin-looped}{M}}}{!B}[{\OLId{latin-ordinary}{w}}]$ أو~$\mSat{{\OLId{latin-looped}{M}}}{!C}[{\OLId{latin-ordinary}{w}}]$}
+    (أو كلاهما).}{}
+  \tagitem{prvIf}{\indcase{!A}{(!B \lif !C)}{$\mSat{{\OLId{latin-looped}{M}}}{\indfrm}[{\OLId{latin-ordinary}{w}}]$
+    إذا وفقط إذا كان~$\mSat/{{\OLId{latin-looped}{M}}}{!B}[{\OLId{latin-ordinary}{w}}]$ أو~$\mSat{{\OLId{latin-looped}{M}}}{!C}[{\OLId{latin-ordinary}{w}}]$}.}{}
+  \tagitem{prvIff}{\indcase{!A}{(!B \liff !C)}{$\mSat{{\OLId{latin-looped}{M}}}{\indfrm}[{\OLId{latin-ordinary}{w}}]$
+    إذا وفقط إذا كان إما كل من~$\mSat{{\OLId{latin-looped}{M}}}{!B}[{\OLId{latin-ordinary}{w}}]$ و$\mSat{{\OLId{latin-looped}{M}}}{!C}[{\OLId{latin-ordinary}{w}}]$،
+    أو لا~$\mSat{{\OLId{latin-looped}{M}}}{!B}[{\OLId{latin-ordinary}{w}}]$ ولا~$\mSat{{\OLId{latin-looped}{M}}}{!C}[{\OLId{latin-ordinary}{w}}]$}.}{}
+  \item\ollabel{defn:sub:mmodels-box}
+    \indcase{!A}{\Box !B}{$\mSat{{\OLId{latin-looped}{M}}}{\indfrm}[{\OLId{latin-ordinary}{w}}]$ إذا وفقط إذا كان
+    $\mSat{{\OLId{latin-looped}{M}}}{!B}[{\OLId{latin-ordinary}{w}}']$ لكل~${\OLId{latin-ordinary}{w}}' \in {\OLId{latin-looped}{W}}$ يحقق~$Rww'$.}
+  \item\ollabel{defn:sub:mmodels-diamond}
+    \indcase{!A}{\Diamond !B}{$\mSat{{\OLId{latin-looped}{M}}}{\indfrm}[{\OLId{latin-ordinary}{w}}]$ إذا وفقط إذا كان
+    $\mSat{{\OLId{latin-looped}{M}}}{!B}[{\OLId{latin-ordinary}{w}}']$ لبعض~${\OLId{latin-ordinary}{w}}' \in {\OLId{latin-looped}{W}}$ يحقق~$Rww'$.}
+  \end{enumerate}
+\end{defn}
+
+وينبغي تمييز الصدق في العالم من الصدق في العوالم التي يصل إليها.
+فبمقتضى البند~\olref{defn:sub:mmodels-box} تصدق
+!!a{formula}~$\Box !B$ في~${\OLId{latin-ordinary}{w}}$ إذا لم يوجد~${\OLId{latin-ordinary}{w}}'$ يحقق~$Rww'$؛
+فصدق~$\Box !B$ في~${\OLId{latin-ordinary}{w}}$ حينئذ \emph{صدق خالٍ}. وقد تصدق
+$\Box !B$ في~${\OLId{latin-ordinary}{w}}$ مع أن~$!B$ لا تصدق فيه. وكذلك لا يكفي صدق
+$!B$ في~${\OLId{latin-ordinary}{w}}$ لإثبات~$\Diamond !B$ فيه. وإنما يكفي ذلك إذا كان~$Rww$،
+كما إذا كانت~${\OLId{latin-looped}{R}}$ انعكاسية. أما إذا لم يوجد~${\OLId{latin-ordinary}{w}}'$ يحقق~$Rww'$،
+فإن~$\mSat/{{\OLId{latin-looped}{M}}}{\Diamond !A}[{\OLId{latin-ordinary}{w}}]$ لأي~$!A$.
+
+\begin{prob}
+  تأمل نموذج~\olref[nml][syn][rel]{fig:simple}. أي العبارات الآتية
+  تصدق؟
+    \begin{enumerate}
+    \item $\mSat{{\OLId{latin-looped}{M}}}{{\OLId{latin-ordinary}{q}}}[{\OLId{latin-ordinary}{w}}_{\OLMathNumeral{1}}]$؛
+    \item $\mSat{{\OLId{latin-looped}{M}}}{\lnot {\OLId{latin-ordinary}{q}}}[{\OLId{latin-ordinary}{w}}_{\OLMathNumeral{3}}]$؛
+    \item $\mSat{{\OLId{latin-looped}{M}}}{{\OLId{latin-ordinary}{p}} \lor {\OLId{latin-ordinary}{q}}}[{\OLId{latin-ordinary}{w}}_{\OLMathNumeral{1}}]$؛
+    \item $\mSat{{\OLId{latin-looped}{M}}}{\Box ({\OLId{latin-ordinary}{p}} \lor {\OLId{latin-ordinary}{q}})}[{\OLId{latin-ordinary}{w}}_{\OLMathNumeral{1}}]$؛
+    \item $\mSat{{\OLId{latin-looped}{M}}}{\Box {\OLId{latin-ordinary}{q}}}[{\OLId{latin-ordinary}{w}}_{\OLMathNumeral{3}}]$؛
+    \item $\mSat{{\OLId{latin-looped}{M}}}{\Box \bot}[{\OLId{latin-ordinary}{w}}_{\OLMathNumeral{3}}]$؛
+    \item $\mSat{{\OLId{latin-looped}{M}}}{\Diamond {\OLId{latin-ordinary}{q}}}[{\OLId{latin-ordinary}{w}}_{\OLMathNumeral{1}}]$؛
+    \item $\mSat{{\OLId{latin-looped}{M}}}{\Box {\OLId{latin-ordinary}{q}}}[{\OLId{latin-ordinary}{w}}_{\OLMathNumeral{1}}]$؛
+    \item $\mSat{{\OLId{latin-looped}{M}}}{\lnot \Box\Box \lnot {\OLId{latin-ordinary}{q}}}[{\OLId{latin-ordinary}{w}}_{\OLMathNumeral{1}}]$.
+    \end{enumerate}
+\end{prob}
+
+% Prove duality of \Box and \Diamond
+\begin{tagblock}{prvDiamond}
+\begin{prop}\ollabel{prop:dual}
+  \begin{enumerate}
+  \item $\mSat{{\OLId{latin-looped}{M}}}{\Box !A}[{\OLId{latin-ordinary}{w}}]$ إذا وفقط إذا كان
+    $\mSat{{\OLId{latin-looped}{M}}}{\lnot\Diamond\lnot !A}[{\OLId{latin-ordinary}{w}}]$.
+  \item $\mSat{{\OLId{latin-looped}{M}}}{\Diamond !A}[{\OLId{latin-ordinary}{w}}]$ إذا وفقط إذا كان
+    $\mSat{{\OLId{latin-looped}{M}}}{\lnot\Box\lnot !A}[{\OLId{latin-ordinary}{w}}]$.
+  \end{enumerate}
+\end{prop}
+
+\begin{proof}
+  \begin{enumerate}
+    \item $\mSat{{\OLId{latin-looped}{M}}}{\lnot\Diamond\lnot !A}[{\OLId{latin-ordinary}{w}}]$ إذا وفقط إذا كان
+      $\mSat/{{\OLId{latin-looped}{M}}}{\Diamond\lnot !A}[{\OLId{latin-ordinary}{w}}]$، بحسب تعريف~$\mSat{{\OLId{latin-looped}{M}}}{}[{\OLId{latin-ordinary}{w}}]$.
+      و$\mSat{{\OLId{latin-looped}{M}}}{\Diamond\lnot !A}[{\OLId{latin-ordinary}{w}}]$ إذا وفقط إذا وُجد~${\OLId{latin-ordinary}{w}}'$ يحقق
+      $Rww'$ وكان~$\mSat{{\OLId{latin-looped}{M}}}{\lnot !A}[{\OLId{latin-ordinary}{w}}']$. ومن ثم يكون
+      $\mSat/{{\OLId{latin-looped}{M}}}{\Diamond\lnot !A}[{\OLId{latin-ordinary}{w}}]$ إذا وفقط إذا كان، لكل~${\OLId{latin-ordinary}{w}}'$ يحقق
+      $Rww'$، لدينا~$\mSat/{{\OLId{latin-looped}{M}}}{\lnot !A}[{\OLId{latin-ordinary}{w}}']$. ولدينا أيضًا
+      $\mSat/{{\OLId{latin-looped}{M}}}{\lnot !A}[{\OLId{latin-ordinary}{w}}']$ إذا وفقط إذا كان~$\mSat{{\OLId{latin-looped}{M}}}{!A}[{\OLId{latin-ordinary}{w}}']$.
+      وبجمع ذلك، يكون~$\mSat{{\OLId{latin-looped}{M}}}{\lnot\Diamond\lnot !A}[{\OLId{latin-ordinary}{w}}]$ إذا وفقط
+      إذا كان، لكل~${\OLId{latin-ordinary}{w}}'$ يحقق~$Rww'$، لدينا~$\mSat{{\OLId{latin-looped}{M}}}{!A}[{\OLId{latin-ordinary}{w}}']$. وبحسب
+      تعريف~$\mSat{{\OLId{latin-looped}{M}}}{}[{\OLId{latin-ordinary}{w}}]$ مرة أخرى، يتحقق ذلك إذا وفقط إذا كان
+      $\mSat{{\OLId{latin-looped}{M}}}{\Box !A}[{\OLId{latin-ordinary}{w}}]$.
+    \item \iftag{probDiamond}{تمرين.}{$\mSat{{\OLId{latin-looped}{M}}}{\lnot\Box\lnot !A}[{\OLId{latin-ordinary}{w}}]$
+      إذا وفقط إذا كان~$\mSat/{{\OLId{latin-looped}{M}}}{\Box\lnot !A}[{\OLId{latin-ordinary}{w}}]$.
+      و$\mSat{{\OLId{latin-looped}{M}}}{\Box\lnot !A}[{\OLId{latin-ordinary}{w}}]$ إذا وفقط إذا كان، لكل~${\OLId{latin-ordinary}{w}}'$ يحقق
+      $Rww'$، لدينا~$\mSat{{\OLId{latin-looped}{M}}}{\lnot !A}[{\OLId{latin-ordinary}{w}}']$. ومن ثم يكون
+      $\mSat/{{\OLId{latin-looped}{M}}}{\Box\lnot !A}[{\OLId{latin-ordinary}{w}}]$ إذا وفقط إذا وُجد~${\OLId{latin-ordinary}{w}}'$ يحقق
+      $Rww'$ وكان~$\mSat/{{\OLId{latin-looped}{M}}}{\lnot !A}[{\OLId{latin-ordinary}{w}}']$. ولدينا أيضًا
+      $\mSat/{{\OLId{latin-looped}{M}}}{\lnot !A}[{\OLId{latin-ordinary}{w}}']$ إذا وفقط إذا كان~$\mSat{{\OLId{latin-looped}{M}}}{!A}[{\OLId{latin-ordinary}{w}}']$.
+      وبجمع ذلك، يكون~$\mSat{{\OLId{latin-looped}{M}}}{\lnot\Box\lnot !A}[{\OLId{latin-ordinary}{w}}]$ إذا وفقط إذا
+      وُجد~${\OLId{latin-ordinary}{w}}'$ يحقق~$Rww'$ وكان~$\mSat{{\OLId{latin-looped}{M}}}{!A}[{\OLId{latin-ordinary}{w}}']$. وبحسب تعريف
+      $\mSat{{\OLId{latin-looped}{M}}}{}[{\OLId{latin-ordinary}{w}}]$ مرة أخرى، يتحقق ذلك إذا وفقط إذا كان
+      $\mSat{{\OLId{latin-looped}{M}}}{\Diamond !A}[{\OLId{latin-ordinary}{w}}]$.}
+  \end{enumerate}
+\end{proof}
+
+\begin{probtag}{probDiamond}
+  أكمل برهان~\olref[nml][syn][trw]{prop:dual}.
+\end{probtag}
+\end{tagblock}
+
+\begin{prob}
+  ليكن~$\mModel{M} = \tuple{{\OLId{latin-looped}{W}}, {\OLId{latin-looped}{R}}, {\OLId{latin-looped}{V}}}$ نموذجًا، وافترض أن~${\OLId{latin-ordinary}{w}}_{\OLMathNumeral{1}}, {\OLId{latin-ordinary}{w}}_{\OLMathNumeral{2}} \in
+  {\OLId{latin-looped}{W}}$ يحققان:
+  \begin{enumerate}
+  \item ${\OLId{latin-ordinary}{w}}_{\OLMathNumeral{1}} \in {\OLId{latin-looped}{V}}({\OLId{latin-ordinary}{p}})$ إذا وفقط إذا كان~${\OLId{latin-ordinary}{w}}_{\OLMathNumeral{2}} \in {\OLId{latin-looped}{V}}({\OLId{latin-ordinary}{p}})$ (لكل
+    !!{propositional variable}~${\OLId{latin-ordinary}{p}}$)؛ و
+  \item لكل~${\OLId{latin-ordinary}{w}} \in {\OLId{latin-looped}{W}}$: يصدق~$Rw_{\OLMathNumeral{1}}{\OLId{latin-ordinary}{w}}$ إذا وفقط إذا كان~$Rw_{\OLMathNumeral{2}}{\OLId{latin-ordinary}{w}}$.
+  \end{enumerate}
+  أثبت، باستعمال الاستقراء على ال!!{formula}s، أنه لجميع
+  ال!!{formula}s~$!A$: يصدق~$\mSat{{\OLId{latin-looped}{M}}}{!A}[{\OLId{latin-ordinary}{w}}_{\OLMathNumeral{1}}]$ إذا وفقط إذا كان
+  $\mSat{{\OLId{latin-looped}{M}}}{!A}[{\OLId{latin-ordinary}{w}}_{\OLMathNumeral{2}}]$.
+\end{prob}
+
+\begin{probtag}{prvDiamond}
+  ليكن~$\mModel{M} = \tuple{{\OLId{latin-looped}{W}}, {\OLId{latin-looped}{R}}, {\OLId{latin-looped}{V}}}$. أثبت أن
+  $\mSat{{\OLId{latin-looped}{M}}}{\lnot\Diamond !A}[{\OLId{latin-ordinary}{w}}]$ إذا وفقط إذا كان
+  $\mSat{{\OLId{latin-looped}{M}}}{\Box\lnot!A}[{\OLId{latin-ordinary}{w}}]$.
+\end{probtag}
+
+\end{document}

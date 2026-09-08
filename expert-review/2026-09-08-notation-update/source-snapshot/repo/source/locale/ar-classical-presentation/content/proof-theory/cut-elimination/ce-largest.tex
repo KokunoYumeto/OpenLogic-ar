@@ -1,0 +1,320 @@
+% الجزء: نظرية البرهان
+% الفصل: حذف القطع
+% القسم: ce-largest
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{cut}{inv}
+
+\olsection{في إزالة القطوع العظمى رتبة}
+
+يستفاد من برهان \olref[seq][inv]{lem:G3c-invert} الأمر الآتي: إذا كان
+النسق \Log{G3c}~!!{prove}s نتيجة قاعدة منطقية، سوى
+\RightR{\lexists} و\LeftR{\lforall}، فهو~!!{prove}s كل مقدمة من مقدمات
+تلك القاعدة من غير أن يزيد !!{height} البرهان. بل يصح أن نقوي النتيجة،
+فنثبت هذا الحكم نفسه في~$\Log{G3c} + \CutCS$.
+
+ونجعل، كما تقدم، \emph{رتبة القطع} في استدلال \CutCS{} هي عمق
+!!{formula} القطع الذي فيه.
+
+\begin{lem}\ollabel{lem:inv-G3c-cut}
+إذا كان $\Log{G3c} + \CutCS$~!!{prove}s نتيجة قاعدة منطقية~${\OLId{latin-looped}{R}}$، ليست
+\RightR{\lexists} ولا \LeftR{\lforall}، بـ!!a{proof}~$\pi$، فإنه
+!!{prove}s كل مقدمة أيضًا بـ!!{proof}~$\pi'$ (أو بـ!!{proof}s~$\pi'$،
+$\pi''$ إن كانت القاعدة ذات مقدمة واحدة أو مقدمتين). ومع ذلك يتحقق أن
+(أ)~$\pheight{\pi'}\le\pheight{\pi}$ (وكذلك
+$\pheight{\pi''}\le\pheight{\pi}$)، و(ب)~يكون عدد استدلالات \CutCS{}
+ورتبها في~$\pi'$ (وفي $\pi''$) هو نفسه في~$\pi$.
+\end{lem}
+
+\begin{proof}
+وبيان ذلك أن ننظر في براهين
+\cref{pt:seq:inv:lem:G3c-invert,pt:seq:inv:lem:invert-quant}. فالاستقراء
+فيها جار على~$\pheight{\pi}$. أما الأساس فيستبدل مسلّمة بمسلّمة، فيصح
+الشرطان (أ) و(ب) بلا مزيد بيان. وإذا كانت آخر قاعدة في~$\pi$ هي القاعدة
+المقصودة~${\OLId{latin-looped}{R}}$، كانت !!{proof}sها الفرعية المباشرة، وهي
+!!{proof}s~$\pi_{\OLId{latin-ordinary}{i}}$، عين المطلوب، وصح الشرطان كذلك. وأما سائر الحالات
+فنعمل فرض الاستقراء في !!{proof}s~$\pi$ الفرعية المباشرة، أي المنتهية
+بمقدمة أو مقدمات آخر استدلال~${\OLId{latin-looped}{S}}$، ثم نعيد القاعدة نفسها~${\OLId{latin-looped}{S}}$ على ما نتج.
+ولما كان الشرطان (أ) و(ب) صحيحين في !!{proof}s البرهان الجديد الفرعية
+المباشرة، صحا في البرهان كله. فلم يبق إلا أن يكون آخر الاستدلال~\CutCS.
+ونبينه، كما فعلنا من قبل، بمثال واحد: لنفرض أن
+$\pi$ هو !!a{proof} لنتيجة \LeftR{\land}، وهي $!B \land !C, {\OLId{greek-variable}{Gamma}}
+\Sequent {\OLId{greek-variable}{Delta}}$، وأنه ينتهي بــ~\CutCS:
+\[
+\AxiomC{}
+\RightLabel{$\pi_{\OLMathNumeral{1}}$}
+\Deduce$!B \land !C, {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, !A$
+\AxiomC{}
+\RightLabel{$\pi_{\OLMathNumeral{2}}$}
+\Deduce$!A, !B \land !C, {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}$
+\RightLabel{\CutCS}
+\BinaryInf$!B \land !C, {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}$
+\DisplayProof
+\]
+ينطبق فرض الاستقراء على $\pi_{\OLMathNumeral{1}}$ و~$\pi_{\OLMathNumeral{2}}$ (وهما كذلك !!{proof}s لأمثلة
+من نتيجة $\LeftR{\land}$)، ويعطينا !!{proof}s~$\pi_{\OLMathNumeral{1}}'$ و~$\pi_{\OLMathNumeral{2}}'$ لكل من
+$!B, !C, {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, !A$ و$!A, !B, !C, {\OLId{greek-variable}{Gamma}} \fCenter
+{\OLId{greek-variable}{Delta}}$ على الترتيب. ونجمعهما باستعمال \CutCS{} لنحصل على~$\pi'$:
+\[
+\AxiomC{}
+\RightLabel{$\pi_{\OLMathNumeral{1}}'$}
+\Deduce$!B, !C, {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, !A$
+\AxiomC{}
+\RightLabel{$\pi_{\OLMathNumeral{2}}'$}
+\Deduce$!A, !B, !C, {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}$
+\RightLabel{\CutCS}
+\BinaryInf$!B, !C, {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}$
+\DisplayProof
+\]
+وعلى هذا يظهر تحقق الشرطين (أ) و(ب).
+\end{proof}
+
+وهذا الوجه لا يستقيم إذا استعملنا \Cut{} مكان \CutCS؛ إذ تشتمل نتيجة
+!!{proof} الأخير عندئذ على نسختين من~$!B, !C, {\OLId{greek-variable}{Gamma}}$ في المقدم ونسختين
+من~${\OLId{greek-variable}{Delta}}$ في التالي. وحينئذ لا بد من مقبولية الانكماش، مع أن برهان
+\olref[seq][inv]{prop:G3c-cont-adm} نفسه يستعمل مبرهنة قابلية العكس، فيدور
+الاستدلال.
+
+ومن \cref{pt:cut:inv:lem:inv-G3c-cut} يستخرج برهان آخر لحذف القطع. ولسنا
+فيه نزيل المواضع العليا لاستدلالات \CutCS{} واحدًا بعد واحد، بل نقصد
+مواضع استدلالات \CutCS{} التي بلغت الرتبة القصوى. فنبدأ بـ!!a{proof}~$\pi$
+في~$\Log{G3c} + \CutCS$، ونزيل منه قطعًا حيث وقع، وربما أقمنا مكانه قطوعًا
+أدنى رتبة، ثم نكرر العمل حتى لا يبقى قطع. وإنما يشترط ألا يكون فوق القطع
+المعالج قطع مساو له في الرتبة أو أعلى منه.
+
+\begin{lem}\ollabel{lem:max-cut-red-G3c} ليكن~$\pi$~!!a{proof} في
+$\Log{G3c}+\CutCS$ آخره استدلال~\CutCS{} رتبته~${\OLId{latin-ordinary}{n}}$، ولا يستعمل فيما سواه
+إلا قواعد~$\Log{G3c}$ واستدلالات \CutCS{} رتبتها~$<{\OLId{latin-ordinary}{n}}$. فحينئذ يوجد برهان
+$\pi'$ للمتتالية النهائية عينها في~$\Log{G3c} + \CutCS$، وكل استدلال
+\CutCS{} فيه رتبته~$<{\OLId{latin-ordinary}{n}}$.
+\end{lem}
+
+\begin{proof}
+آخر !!{proof}~$\pi$ على هذا الرسم:
+\[
+\AxiomC{}
+\RightLabel{$\pi_{\OLMathNumeral{1}}$}
+\Deduce${\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, !A$
+\AxiomC{}
+\RightLabel{$\pi_{\OLMathNumeral{2}}$}
+\Deduce$!A, {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}$
+\RightLabel{\CutCS}
+\BinaryInf${\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}$
+\DisplayProof
+\]
+نميّز حالات بحسب صورة~$!A$.
+
+لنفرض أن $!A$ ذرية. لاحظ أنه، بمقتضى الشرط القائل إن كل استدلال \CutCS{}
+في~$\pi_{\OLMathNumeral{1}}$ و$\pi_{\OLMathNumeral{2}}$ لا بد أن تكون رتبته $< \depth{!A} = {\OLMathNumeral{0}}$، لا يجوز أن يوجد أي
+استدلال \CutCS{} في~$\pi_{\OLMathNumeral{1}}$ أو~$\pi_{\OLMathNumeral{2}}$. نبيّن بالاستقراء على
+$\pheight{\pi_{\OLMathNumeral{2}}}$ أن لـ${\OLId{greek-variable}{Gamma}} \Sequent {\OLId{greek-variable}{Delta}}$ برهانًا خاليًا من القطع.
+إذا كان $\pheight{\pi_{\OLMathNumeral{2}}}={\OLMathNumeral{0}}$، فإن $!A, {\OLId{greek-variable}{Gamma}} \Sequent {\OLId{greek-variable}{Delta}}$ مسلّمة.
+فإذا لم تكن $!A$ رئيسة، كان بعض $!C$ الذري !!a{element} في كل من~${\OLId{greek-variable}{Gamma}}$
+و${\OLId{greek-variable}{Delta}}$، وكانت ${\OLId{greek-variable}{Gamma}} \Sequent {\OLId{greek-variable}{Delta}}$ نفسها مسلّمة. وإذا كانت $!A$
+رئيسة، فإن ${\OLId{greek-variable}{Delta}}={\OLId{greek-variable}{Delta}}', !A$. وفي هذه الحالة ينتهي $\pi_{\OLMathNumeral{1}}$ بــ
+${\OLId{greek-variable}{Gamma}} \Sequent {\OLId{greek-variable}{Delta}}', !A, !A$. ونحصل على برهان خال من القطع لــ
+${\OLId{greek-variable}{Gamma}} \Sequent {\OLId{greek-variable}{Delta}}', !A$ بتطبيق
+\olref[seq][inv]{prop:G3c-cont-adm} (مقبولية الانكماش). وإذا كان
+$\pheight{\pi_{\OLMathNumeral{2}}}>{\OLMathNumeral{0}}$، فإنه ينتهي بقاعدة~${\OLId{latin-looped}{S}}$. خذ مقدمة من مقدمات تلك القاعدة؛
+صورتها $!A, {\OLId{greek-variable}{Gamma}}', \Pi \Sequent {\OLId{greek-variable}{Delta}}', \Lambda$، حيث $\Pi$ و$\Lambda$
+هما !!{formula}s الفعالة للقاعدة~${\OLId{latin-looped}{S}}$. يعطي تطبيق
+\olref[seq][adm]{prop:weak-G3c-adm} على~$\pi_{\OLMathNumeral{1}}$ و$\pi_{\OLMathNumeral{2}}$ !!{proof}s لكل من
+${\OLId{greek-variable}{Gamma}}, {\OLId{greek-variable}{Gamma}}', \Pi \Sequent {\OLId{greek-variable}{Delta}}, {\OLId{greek-variable}{Delta}}', \Lambda, !A$ و
+$!A, {\OLId{greek-variable}{Gamma}}, {\OLId{greek-variable}{Gamma}}', \Pi \Sequent {\OLId{greek-variable}{Delta}}, {\OLId{greek-variable}{Delta}}', \Lambda$، وينطبق
+عليهما فرض الاستقراء. وعلى هذا ينتج لنا !!a{proof} لــ${\OLId{greek-variable}{Gamma}}, {\OLId{greek-variable}{Gamma}}', \Pi
+\Sequent {\OLId{greek-variable}{Delta}}, {\OLId{greek-variable}{Delta}}', \Lambda$، لكل مقدمة من مقدمات~${\OLId{latin-looped}{S}}$. وبتطبيق ${\OLId{latin-looped}{S}}$
+ينتج لنا ${\OLId{greek-variable}{Gamma}}, {\OLId{greek-variable}{Gamma}} \Sequent {\OLId{greek-variable}{Delta}}, {\OLId{greek-variable}{Delta}}$، ثم يزوّدنا
+\olref[seq][inv]{prop:G3c-cont-adm} بالبرهان الخالي من القطع لــ${\OLId{greek-variable}{Gamma}}
+\Sequent {\OLId{greek-variable}{Delta}}$.
+
+إذا لم تكن $!A$ ذرية، نميّز حالات بحسب !!{main operator} لــ$!A$. وفي كل
+حالة نطبّق \olref{lem:inv-G3c-cut} لنحصل على !!{proof}s لمقدمات قاعدتي
+اليسار واليمين اللتين تكون $!A$ صيغتهما الرئيسة. ثم نتابع كما في الحالة~E
+من برهان \olref[top]{lem:cut-adm-G3c}.
+\begin{enumerate}
+  \item $!A \ident \lnot !B$. ينتهي !!{proof}s~$\pi_{\OLMathNumeral{1}}$ و$\pi_{\OLMathNumeral{2}}$ بكل من
+  ${\OLId{greek-variable}{Gamma}} \Sequent {\OLId{greek-variable}{Delta}}, \lnot !B$ و$\lnot !B, {\OLId{greek-variable}{Gamma}} \Sequent
+  {\OLId{greek-variable}{Delta}}$. وبحسب \olref{lem:inv-G3c-cut} يوجد !!{proof}s~$\pi_{\OLMathNumeral{1}}'$ و
+  $\pi_{\OLMathNumeral{2}}'$ لــ$!B, {\OLId{greek-variable}{Gamma}} \Sequent {\OLId{greek-variable}{Delta}}$ و${\OLId{greek-variable}{Gamma}} \Sequent {\OLId{greek-variable}{Delta}},
+  !B$. ويكون !!{proof}~$\pi'$ كما يأتي:
+  \[
+  \AxiomC{}
+  \RightLabel{$\pi_{\OLMathNumeral{2}}'$}
+  \Deduce${\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, !B$
+  \AxiomC{}
+  \RightLabel{$\pi_{\OLMathNumeral{1}}'$}
+  \Deduce$!B, {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}$
+  \RightLabel{\CutCS}
+  \BinaryInf${\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}$
+  \DisplayProof
+  \]
+  \item $!A \ident (!B \lor !C)$. ينتهي !!{proof}s~$\pi_{\OLMathNumeral{1}}$ و$\pi_{\OLMathNumeral{2}}$
+  بكل من ${\OLId{greek-variable}{Gamma}} \Sequent {\OLId{greek-variable}{Delta}}, !B \lor !C$ و$!B \lor !C, {\OLId{greek-variable}{Gamma}}
+  \Sequent {\OLId{greek-variable}{Delta}}$. وبحسب \olref{lem:inv-G3c-cut} (قابلية عكس
+  \RightR{\lor} مطبقة على~$\pi_{\OLMathNumeral{1}}$)، يوجد !!a{proof}~$\pi_{\OLMathNumeral{1}}'$ لــ
+  ${\OLId{greek-variable}{Gamma}} \Sequent {\OLId{greek-variable}{Delta}}, !B, !C$. وبحسب \olref{lem:inv-G3c-cut}
+  (قابلية عكس \LeftR{\lor} مطبقة على~$\pi_{\OLMathNumeral{2}}$)، يوجد !!a{proof}~$\pi_{\OLMathNumeral{2}}'$
+  لــ$!B, {\OLId{greek-variable}{Gamma}} \Sequent {\OLId{greek-variable}{Delta}}$ و!!a{proof}~$\pi_{\OLMathNumeral{2}}''$ لــ$!C, {\OLId{greek-variable}{Gamma}}
+  \Sequent {\OLId{greek-variable}{Delta}}$. وبتطبيق \olref[seq][adm]{prop:weak-G3c-adm} على
+  $\pi_{\OLMathNumeral{2}}''$ نحصل كذلك على !!a{proof}~$\pi_{\OLMathNumeral{2}}'''$ لــ$!C, {\OLId{greek-variable}{Gamma}} \Sequent
+  {\OLId{greek-variable}{Delta}}, !B$. ويكون !!{proof}~$\pi'$:
+  \[
+  \AxiomC{}
+  \RightLabel{$\pi_{\OLMathNumeral{1}}'$}
+  \Deduce${\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, !B, !C$
+  \AxiomC{}
+  \RightLabel{$\pi_{\OLMathNumeral{2}}'''$}
+  \Deduce$!C, {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, !B$
+  \RightLabel{\CutCS}
+  \BinaryInf${\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, !B$
+  \AxiomC{}
+  \RightLabel{$\pi_{\OLMathNumeral{2}}'$}
+  \Deduce$!B, {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}$
+  \RightLabel{\CutCS}
+  \BinaryInf${\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}$
+  \DisplayProof
+  \]
+  \item $!A \ident (!B \land !C)$. تمرين.
+  \item $!A \ident (!B \lif !C)$. ينتهي !!{proof}s~$\pi_{\OLMathNumeral{1}}$ و$\pi_{\OLMathNumeral{2}}$
+  بكل من ${\OLId{greek-variable}{Gamma}} \Sequent {\OLId{greek-variable}{Delta}}, !B \lif !C$ و$!B \lif !C, {\OLId{greek-variable}{Gamma}}
+  \Sequent {\OLId{greek-variable}{Delta}}$. وبحسب \olref{lem:inv-G3c-cut} (قابلية عكس
+  \RightR{\lif} مطبقة على~$\pi_{\OLMathNumeral{1}}$)، يوجد !!a{proof}~$\pi_{\OLMathNumeral{1}}'$ لــ
+  $!B, {\OLId{greek-variable}{Gamma}} \Sequent {\OLId{greek-variable}{Delta}}, !C$. وبحسب \olref{lem:inv-G3c-cut}
+  (قابلية عكس \LeftR{\lif} مطبقة على~$\pi_{\OLMathNumeral{2}}$)، يوجد !!a{proof}~$\pi_{\OLMathNumeral{2}}'$
+  لــ${\OLId{greek-variable}{Gamma}} \Sequent {\OLId{greek-variable}{Delta}}, !B$ و!!a{proof}~$\pi_{\OLMathNumeral{2}}''$ لــ$!C, {\OLId{greek-variable}{Gamma}}
+  \Sequent {\OLId{greek-variable}{Delta}}$. وبتطبيق \olref[seq][adm]{prop:weak-G3c-adm} على
+  $\pi_{\OLMathNumeral{2}}''$ نحصل كذلك على !!a{proof}~$\pi_{\OLMathNumeral{2}}'''$ لــ$!C, !B, {\OLId{greek-variable}{Gamma}}
+  \Sequent {\OLId{greek-variable}{Delta}}$. ويكون !!{proof}~$\pi'$:
+  \[
+  \AxiomC{}
+  \RightLabel{$\pi_{\OLMathNumeral{2}}'$}
+  \Deduce${\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, !B$
+  \AxiomC{}
+  \RightLabel{$\pi_{\OLMathNumeral{1}}'$}
+  \Deduce$!B, {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, !C$
+  \AxiomC{}
+  \RightLabel{$\pi_{\OLMathNumeral{2}}'''$}
+  \Deduce$!C, !B, {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}$
+  \RightLabel{\CutCS}
+  \BinaryInf$!B, {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}$
+  \RightLabel{\CutCS}
+  \BinaryInf${\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}$
+  \DisplayProof
+  \]
+  \item $!A \ident \lforall[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$. ينتهي !!{proof}s~$\pi_{\OLMathNumeral{1}}$ و
+  $\pi_{\OLMathNumeral{2}}$ بكل من ${\OLId{greek-variable}{Gamma}} \Sequent {\OLId{greek-variable}{Delta}}, \lforall[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$ و
+  $\lforall[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})], {\OLId{greek-variable}{Gamma}} \Sequent {\OLId{greek-variable}{Delta}}$. وبحسب
+  \olref{lem:inv-G3c-cut} يوجد !!a{proof}~$\pi_{\OLMathNumeral{1}}'$ لــ${\OLId{greek-variable}{Gamma}} \Sequent
+  {\OLId{greek-variable}{Delta}}, !B({\OLId{latin-ordinary}{c}})$.
+
+  تأمل الآن !!{proof}~$\pi_{\OLMathNumeral{2}}$. إنه ينتهي بــ$\lforall[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})],
+  {\OLId{greek-variable}{Gamma}} \Sequent {\OLId{greek-variable}{Delta}}$. وبينما نتحرك صعودًا ابتداء من المتتالية النهائية
+  لــ$\pi_{\OLMathNumeral{2}}$، نعلّم كل ورود لــ$\lforall[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$ على يسار متتالية «يقود
+  إلى» ورود $\lforall[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$ في المتتالية النهائية لــ$\pi_{\OLMathNumeral{2}}$، أي:
+  (أ)~علّم $\lforall[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$ في المتتالية النهائية لــ$\pi_{\OLMathNumeral{2}}$.
+  (ب)~إذا وردت $\lforall[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$ في سياق نتيجة قاعدة وكانت معلّمة،
+  فعلّم الورود المناظر في مقدمة القاعدة أو مقدماتها. (ج)~إذا كانت
+  $\lforall[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$ رئيسة في نتيجة قاعدة \LeftR{\lforall} وكانت معلّمة،
+  فعلّم الورودين الفعالين المناظرين لــ$\lforall[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$ و$!B({\OLId{latin-ordinary}{t}})$ في
+  المقدمة.
+
+  تأمل الآن كل هذه الورودات المعلّمة لــ$\lforall[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$. لا يكون أي
+  منها فعالًا في قاعدة غير \LeftR{\lforall} (فلا تُعلّم إلا !!{formula}s
+  الفعالة لقاعدة \LeftR{\lforall}). احذف من~$\pi_{\OLMathNumeral{2}}$ كل الورودات المعلّمة
+  لــ$\lforall[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$.
+  إذا كان الناتج !!{proof} صحيحًا، فلم تكن الورودات المعلّمة لــ
+  $\lforall[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$ فعالة قط، بل أتت كلها مباشرة من مسلّمات. وينتهي
+  !!{proof} بــ${\OLId{greek-variable}{Gamma}} \Sequent {\OLId{greek-variable}{Delta}}$، ويمكننا أن نستبدل به $\pi$.
+  وبذلك نكون قد أزلنا قطعًا ذا رتبة قصوى.
+
+  وإلا، فالناتج ليس برهانًا صحيحًا، لأننا حذفنا !!{formula}s
+  $\lforall[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$ كانت فعالة في بعض استدلالات \LeftR{\lforall}.
+  وقد حوّلنا هذه إلى «استدلالات» من الصورة
+  \[
+  \AxiomC{}
+  \RightLabel{$\pi_{\OLId{latin-ordinary}{t}}$}
+  \Deduce$!B({\OLId{latin-ordinary}{t}}), \Pi \fCenter \Lambda$
+  \RightLabel{\LeftR{\lforall}}
+  \UnaryInf$\Pi \fCenter \Lambda$
+  \DisplayProof
+  \]
+  استبدل بكل «استدلال» علوي من هذا النوع ما يأتي:
+  \[
+  \AxiomC{}
+  \RightLabel{$\Subst{\pi_{\OLMathNumeral{1}}'}{{\OLId{latin-ordinary}{t}}}{{\OLId{latin-ordinary}{c}}}[\Pi \Sequent \Lambda]$}
+  \Deduce${\OLId{greek-variable}{Gamma}}, \Pi \fCenter {\OLId{greek-variable}{Delta}}, \Lambda, !B({\OLId{latin-ordinary}{t}})$
+  \AxiomC{}
+  \RightLabel{$\pi_{\OLId{latin-ordinary}{t}}[{\OLId{greek-variable}{Gamma}} \Sequent {\OLId{greek-variable}{Delta}}]$}
+  \Deduce$!B({\OLId{latin-ordinary}{t}}), {\OLId{greek-variable}{Gamma}}, \Pi \fCenter {\OLId{greek-variable}{Delta}}, \Lambda$
+  \RightLabel{\CutCS}
+  \BinaryInf${\OLId{greek-variable}{Gamma}}, \Pi \fCenter {\OLId{greek-variable}{Delta}}, \Lambda$
+  \DisplayProof
+  \]
+  وأضف ${\OLId{greek-variable}{Gamma}}$ إلى يسار كل متتالية أسفله، و${\OLId{greek-variable}{Delta}}$ إلى يمينها. كرر ذلك
+  حتى تُستبدل جميع «استدلالات» \LeftR{\lforall} التي تحتوي مقدمتها على
+  $!B({\OLId{latin-ordinary}{t}})$ معلّمة باستدلال \CutCS{} على $!B({\OLId{latin-ordinary}{t}})$ ما. وتكون المتتالية النهائية
+  لــ!!{proof} الناتج (وهو الآن !!{proof} صحيح) من الصورة
+  ${\OLId{greek-variable}{Gamma}}, \dots, {\OLId{greek-variable}{Gamma}} \Sequent {\OLId{greek-variable}{Delta}}, \dots, {\OLId{greek-variable}{Delta}}$. طبّق مقبولية
+  الانكماش لتحوّله إلى !!a{proof} لــ${\OLId{greek-variable}{Gamma}} \Sequent {\OLId{greek-variable}{Delta}}$، واستبدل به
+  $\pi$. وعلى هذا استبدلنا قطعًا واحدًا على $\lforall[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$ بقطوع
+  (قد تكون كثيرة) على $!B({\OLId{latin-ordinary}{t}})$، لكنها كلها أدنى رتبة. وتبقى أي قطوع كانت
+  موجودة أصلًا في $\pi_{\OLMathNumeral{1}}$ أو $\pi_{\OLMathNumeral{2}}$، لكنها كذلك كلها أدنى رتبة.
+\end{enumerate}
+\end{proof}
+
+\begin{prob}
+تحقق من الحالة $!A \ident (!B \land !C)$ في برهان
+\olref{lem:max-cut-red-G3c}. أي بيّن أنه إذا وجد !!a{proof}~$\pi$ ينتهي بــ
+\[
+\AxiomC{}
+\RightLabel{$\pi_{\OLMathNumeral{1}}$}
+\Deduce${\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, !B \land !C$
+\AxiomC{}
+\RightLabel{$\pi_{\OLMathNumeral{2}}$}
+\Deduce$!B \land !C, {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}$
+\RightLabel{\CutCS}
+\BinaryInf${\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}$
+\DisplayProof
+\]
+وكان كل من $\pi_{\OLMathNumeral{1}}$ و$\pi_{\OLMathNumeral{2}}$ لا يحتوي إلا قطوعًا رتبتها
+$<\depth{!B \land !C}$، فهناك !!a{proof}~$\pi'$ لــ${\OLId{greek-variable}{Gamma}} \Sequent
+{\OLId{greek-variable}{Delta}}$ لا يحتوي إلا قطوعًا رتبتها $<\depth{!B \land !C}$.
+\end{prob}
+
+% \begin{prob}
+% تحقق من الحالة $!A \ident \lexists[x][!B(x)]$ في برهان
+% \olref{lem:inv-G3c-cut}.
+% \end{prob}
+
+
+تثبت \olref{lem:max-cut-red-G3c} أنه يمكننا استبدال استدلال \CutCS{} ذي
+الرتبة الأعلى في !!a{proof} باستدلالات \CutCS{} أدنى رتبة. ويمكننا مرة
+أخرى استعمال هذه المبرهنة لإزالة أي عدد من استدلالات \CutCS{} من
+!!a{proof}، وذلك بتطبيقها تباعًا على !!{proof}s الفرعية العليا المنتهية
+بــ\CutCS{} ذي الرتبة القصوى.
+
+\begin{thm}\ollabel{thm:cut-elim-G3c-largest}
+يمكن تحويل أي !!{proof}~$\pi$ في $\Log{G3c} + \CutCS$ إلى برهان في~\Log{G3c}.
+\end{thm}
+
+\begin{proof}
+  نثبت أولًا أنه يمكن إزالة كل القطوع ذات الرتبة القصوى في~$\pi$. لتكن
+  ${\OLId{latin-ordinary}{d}}$ الرتبة القصوى للقطوع الواقعة في~$\pi$، وليكن ${\OLId{latin-ordinary}{n}}$ عدد القطوع ذات
+  الرتبة~${\OLId{latin-ordinary}{d}}$. البرهان بالاستقراء على~${\OLId{latin-ordinary}{n}}$. إذا كان ${\OLId{latin-ordinary}{n}}={\OLMathNumeral{0}}$ فلا شيء نثبته.
+  وإذا كان ${\OLId{latin-ordinary}{n}}>{\OLMathNumeral{0}}$، فاختر قطعًا علويًا رتبته~${\OLId{latin-ordinary}{d}}$، وليكن $\pi_{\OLMathNumeral{1}}$ هو
+  !!{proof} الفرعي المنتهي به. وبحسب \olref{lem:max-cut-red-G3c} يوجد
+  !!a{proof}~$\pi_{\OLMathNumeral{1}}'$ للمتتالية النهائية نفسها، وكل قطوعه رتبتها $<{\OLId{latin-ordinary}{d}}$.
+  استبدل $\pi_{\OLMathNumeral{1}}$ بــ$\pi_{\OLMathNumeral{1}}'$ في~$\pi$. ينتج من ذلك !!a{proof} يحتوي
+  ${\OLId{latin-ordinary}{n}}-{\OLMathNumeral{1}}$ قطعًا من الرتبة~${\OLId{latin-ordinary}{d}}$، فينطبق فرض الاستقراء.
+
+  والآن تتبع النتيجة بالاستقراء على~${\OLId{latin-ordinary}{d}}$. فإذا كان ${\OLId{latin-ordinary}{d}}={\OLMathNumeral{0}}$، كانت جميع القطوع
+  ذرية، ويمكن إزالة جميعها بحسب النتيجة السابقة. وإذا كان ${\OLId{latin-ordinary}{d}}>{\OLMathNumeral{0}}$، تعطينا
+  النتيجة السابقة برهانًا استُبدلت فيه كل القطوع ذات الرتبة~${\OLId{latin-ordinary}{d}}$ بقطوع
+  رتبتها~$<{\OLId{latin-ordinary}{d}}$. ولما كانت ${\OLId{latin-ordinary}{d}}$ هي الرتبة القصوى للقطوع في~$\pi$، أصبح لدينا
+  برهان رتبة قطوعه القصوى $<{\OLId{latin-ordinary}{d}}$، فينطبق فرض الاستقراء.
+\end{proof}
+
+\end{document}

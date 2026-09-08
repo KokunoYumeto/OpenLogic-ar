@@ -1,0 +1,136 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{spine}{rank}
+\olsection{الرتبة}
+
+لما عرّفنا المراحل بمجموعات~${\OLId{latin-looped}{V}}_{\OLId{greek-variable}{alpha}}$، وثبت أن كل مجموعة جزء من
+مرحلة ما، أمكن أن نعرّف \emph{رتبة} المجموعة. ورتبة~${\OLId{latin-looped}{A}}$ في الحدس
+هي أول مرحلة تتكون فيها~${\OLId{latin-looped}{A}}$؛ وأما حدها الدقيق فهو الآتي.
+
+\begin{defn}\ollabel{defnsetrank}
+لكل مجموعة~${\OLId{latin-looped}{A}}$، تكون~$\setrank{{\OLId{latin-looped}{A}}}$ أصغر عدد ترتيبي~${\OLId{greek-variable}{alpha}}$ يحقق
+${\OLId{latin-looped}{A}} \subseteq {\OLId{latin-looped}{V}}_{\OLId{greek-variable}{alpha}}$.
+\end{defn}
+\begin{prop}\ollabel{ranksexist}
+	توجد~$\setrank{{\OLId{latin-looped}{A}}}$ لكل~${\OLId{latin-looped}{A}}$.
+\end{prop}
+\begin{proof}
+	متروك تمرينًا.
+\end{proof}
+\begin{prob}
+	أثبت~\olref[sth][spine][rank]{ranksexist}.
+\end{prob}
+\noindent
+وبفضل الترتيب الجيد للرتب نستخرج نتائج نافعة، أولها:
+\begin{prop}\ollabel{valphalowerrank}
+لكل عدد ترتيبي~${\OLId{greek-variable}{alpha}}$،
+${\OLId{latin-looped}{V}}_{\OLId{greek-variable}{alpha}} = \Setabs{{\OLId{latin-ordinary}{x}}}{\setrank{{\OLId{latin-ordinary}{x}}} \in {\OLId{greek-variable}{alpha}}}$.
+\end{prop}
+
+\begin{proof}
+إذا كان~$\setrank{{\OLId{latin-ordinary}{x}}} \in {\OLId{greek-variable}{alpha}}$، كان
+${\OLId{latin-ordinary}{x}} \subseteq {\OLId{latin-looped}{V}}_{\setrank{{\OLId{latin-ordinary}{x}}}} \in {\OLId{latin-looped}{V}}_{\OLId{greek-variable}{alpha}}$؛ فيلزم
+${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{V}}_{\OLId{greek-variable}{alpha}}$، لأن~${\OLId{latin-looped}{V}}_{\OLId{greek-variable}{alpha}}$ مقتدرة، باستعمال
+\olref[Valphabasic]{Valphabasicprops} مرات. وفي العكس، إذا كان
+${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{V}}_{\OLId{greek-variable}{alpha}}$، كان~${\OLId{latin-ordinary}{x}} \subseteq {\OLId{latin-looped}{V}}_{\OLId{greek-variable}{alpha}}$، ومن ثم
+$\setrank{{\OLId{latin-ordinary}{x}}} \leq {\OLId{greek-variable}{alpha}}$. ويبيّن استقراء بسيط متناهٍ في التجاوز أن
+${\OLId{latin-ordinary}{x}} \notin {\OLId{latin-looped}{V}}_{\setrank{{\OLId{latin-ordinary}{x}}}}$؛ ويلزم لذلك~$\setrank{{\OLId{latin-ordinary}{x}}} \neq {\OLId{greek-variable}{alpha}}$،
+ومن ثم~$\setrank{{\OLId{latin-ordinary}{x}}} \in {\OLId{greek-variable}{alpha}}$.
+\end{proof}
+\begin{prob}
+	أكمل الاستقراء البسيط المتناهي التجاوز المذكور في
+	\olref[sth][spine][rank]{valphalowerrank}.
+\end{prob}
+
+\begin{prop}\ollabel{rankmemberslower}
+إذا كان~${\OLId{latin-looped}{B}} \in {\OLId{latin-looped}{A}}$، فإن~$\setrank{{\OLId{latin-looped}{B}}} \in \setrank{{\OLId{latin-looped}{A}}}$.
+\end{prop}
+
+\begin{proof}
+${\OLId{latin-looped}{A}} \subseteq {\OLId{latin-looped}{V}}_{\setrank{{\OLId{latin-looped}{A}}}} =
+\Setabs{{\OLId{latin-ordinary}{x}}}{\setrank{{\OLId{latin-ordinary}{x}}} \in \setrank{{\OLId{latin-looped}{A}}}}$ بموجب
+\olref{valphalowerrank}.
+\end{proof}
+\noindent
+ومن هذه الحقيقة نحصل على ضرب من الاستقراء يثبت الأحكام في
+\emph{جميع المجموعات}:
+
+\begin{thm}[مخطط الاستقراء بـ$\in$]
+لكل صيغة~$\phi$:
+\[
+	\forall {\OLId{latin-looped}{A}}((\forall {\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}})\phi({\OLId{latin-ordinary}{x}}) \lif \phi({\OLId{latin-looped}{A}})) \lif \forall {\OLId{latin-looped}{A}} \phi({\OLId{latin-looped}{A}}).
+\]
+\end{thm}
+
+\begin{proof}
+نبرهن بالمقابل. افترض~$\lnot \forall {\OLId{latin-looped}{A}} \phi({\OLId{latin-looped}{A}})$. يقتضي الاستقراء
+المتناهي التجاوز
+(\olref[ordinals][basic]{ordinductionschema}) وجود مجموعة لا تحقق
+$\phi$ ورتبتها أصغر رتبة ممكنة؛ أي يوجد~${\OLId{latin-looped}{A}}$ بحيث~$\lnot \phi({\OLId{latin-looped}{A}})$ و
+$\forall {\OLId{latin-ordinary}{x}}(\setrank{{\OLId{latin-ordinary}{x}}} \in \setrank{{\OLId{latin-looped}{A}}} \lif \phi({\OLId{latin-ordinary}{x}}))$. فإذا كان
+${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}$، كان~$\setrank{{\OLId{latin-ordinary}{x}}} \in \setrank{{\OLId{latin-looped}{A}}}$ من
+\olref{rankmemberslower}، ومنه~$\phi({\OLId{latin-ordinary}{x}})$. وهكذا
+$(\forall {\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}})\phi({\OLId{latin-ordinary}{x}}) \land \lnot \phi({\OLId{latin-looped}{A}})$.
+\end{proof}\noindent
+ومعنى ذلك بغير الرموز أن نقول إن~$\phi$ \emph{وراثية} إذا وفقط إذا
+كان تحقق~$\phi$ في كل !!{element} من مجموعة موجبًا لتحقق~$\phi$ في
+المجموعة نفسها. فمخطط الاستقراء بـ$\in$ يقول: إذا كانت~$\phi$ وراثية،
+فإن كل مجموعة تحقق~$\phi$.
+
+ونختم، إلى حين، بحث الرتب بإثبات دعاوى تقدمت الإشارة إليها.
+
+\begin{prop}\ollabel{ranksupstrict}
+$\setrank{{\OLId{latin-looped}{A}}} = \supstrict_{{\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}}\setrank{{\OLId{latin-ordinary}{x}}}$.
+\end{prop}
+
+\begin{proof}
+ضع~${\OLId{greek-variable}{alpha}} = \supstrict_{{\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}}\setrank{{\OLId{latin-ordinary}{x}}}$. من
+\olref{rankmemberslower} ينتج~${\OLId{greek-variable}{alpha}} \leq \setrank{{\OLId{latin-looped}{A}}}$. ومن جهة
+أخرى، إذا كان~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}$، كان~$\setrank{{\OLId{latin-ordinary}{x}}} \in {\OLId{greek-variable}{alpha}}$، ومن ثم
+${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{V}}_{\OLId{greek-variable}{alpha}}$ بموجب~\olref{valphalowerrank}. فيكون
+${\OLId{latin-looped}{A}} \subseteq {\OLId{latin-looped}{V}}_{\OLId{greek-variable}{alpha}}$، أي~$\setrank{{\OLId{latin-looped}{A}}} \leq {\OLId{greek-variable}{alpha}}$؛ فتتعين
+$\setrank{{\OLId{latin-looped}{A}}} = {\OLId{greek-variable}{alpha}}$.
+\end{proof}
+
+\begin{cor}\ollabel{ordsetrankalpha}
+لكل عدد ترتيبي~${\OLId{greek-variable}{alpha}}$، $\setrank{{\OLId{greek-variable}{alpha}}} = {\OLId{greek-variable}{alpha}}$.
+\end{cor}
+
+\begin{proof}
+افترض، في الاستقراء المتناهي التجاوز، أن
+$\setrank{\beta} = \beta$ لكل~$\beta \in {\OLId{greek-variable}{alpha}}$. عندئذ
+$\setrank{{\OLId{greek-variable}{alpha}}} = \supstrict_{\beta \in {\OLId{greek-variable}{alpha}}}\setrank{\beta}
+= \supstrict_{\beta \in {\OLId{greek-variable}{alpha}}}\beta = {\OLId{greek-variable}{alpha}}$ بموجب
+\olref{ranksupstrict}.
+%	First note that $\setrank{\alpha} \neq \beta$ for any $\beta \in
+%	\alpha$. For otherwise we would have $\beta = \setrank{\beta} \in
+%	\setrank{\alpha} = \beta$ by \olref{rankmemberslower}, i.e.,
+%	$\beta \in \beta$, a contradiction. 
+%
+%	Now note that $\alpha \subseteq V_\alpha$. For $\alpha =
+%	\Setabs{\beta}{\beta \in \alpha}$ by
+%	\olref[sfr][ordinals][basic]{ordissetofsmallerord}. And if
+%	$\beta \in \alpha$ then $\beta \subseteq V_{\setrank{\beta}} =
+%	V_\beta \in V_\alpha$, hence $\beta \in V_\alpha$, by
+%	\olref[sfr][spine][Valphabasic]{Valphabasicprops} twice. 
+\end{proof}
+
+وأخيرًا نثبت سريعًا ما وُعد به في آخر~\olref[foundation]{sec}، وهو أن
+$\ZFminus$ تثبت
+$\emph{الانتظام} \Rightarrow \emph{التأسيس}$. ومفهوم «الرتبة»
+و\olref{rankmemberslower} مباحان في هذا البرهان؛ لأنهما، كما ذكر في
+صدر هذا القسم، يُعرضان باستعمال~$\ZFminus + \text{الانتظام}$.
+
+\begin{prop}[العمل في~$\ZFminus + \text{الانتظام}$]\ollabel{zfminusregularityfoundation}
+يصدق التأسيس.
+\end{prop}
+
+\begin{proof}
+ثبّت~${\OLId{latin-looped}{A}} \neq \emptyset$، واختر~${\OLId{latin-looped}{B}} \in {\OLId{latin-looped}{A}}$ ذا أصغر رتبة ممكنة. إذا
+كان~${\OLId{latin-ordinary}{c}} \in {\OLId{latin-looped}{B}}$، كان~$\setrank{{\OLId{latin-ordinary}{c}}} \in \setrank{{\OLId{latin-looped}{B}}}$ بموجب
+\olref{rankmemberslower}؛ ولذلك~${\OLId{latin-ordinary}{c}} \notin {\OLId{latin-looped}{A}}$، باختيار~${\OLId{latin-looped}{B}}$.
+\end{proof}
+
+\end{document}

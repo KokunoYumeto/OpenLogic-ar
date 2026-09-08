@@ -1,0 +1,114 @@
+% الجزء: sets-functions-relations
+% الفصل: relations
+% القسم: relations-as-sets
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid[ar]{sfr}{rel}{set}
+\olsection{العلاقات بوصفها مجموعات}
+
+\begin{explain}
+من المجموعات المهمة المذكورة في \olref[sfr][set][imp]{sec}
+$\Nat$ و$\Int$ و$\Rat$ و$\Real$. وبين !!{element}s هذه المجموعات
+علاقات مألوفة؛ فلكل منها \emph{علاقة ترتيب} معروفة، وثمة علاقة
+\emph{«مطابق لـ»} بين كل شيء ونفسه دون غيره. وسنعرض علاقات كثيرة
+جديرة بالنظر، والممكن منها أكثر مما سنعرض. فلنبدأ، قبل تفصيلها،
+ببيان أن العلاقات يمكن أخذها ضربًا مخصوصًا من المجموعات.
+
+ويحتاج ذلك إلى أمرين من \olref[sfr][set][pai]{sec}. أحدهما
+\emph{الزوج المرتب}: فمن ${\OLId{latin-ordinary}{a}}$ و${\OLId{latin-ordinary}{b}}$ نصنع~$\tuple{{\OLId{latin-ordinary}{a}}, {\OLId{latin-ordinary}{b}}}$، والترتيب فيه
+\emph{معتبر}؛ فإذا كان ${\OLId{latin-ordinary}{a}} \neq {\OLId{latin-ordinary}{b}}$ كان $\tuple{{\OLId{latin-ordinary}{a}}, {\OLId{latin-ordinary}{b}}} \neq \tuple{{\OLId{latin-ordinary}{b}}, {\OLId{latin-ordinary}{a}}}$.
+وهذا بخلاف الزوج غير المرتب، أي المجموعة التي عدد عناصرها ${\OLMathNumeral{2}}$، إذ
+$\{{\OLId{latin-ordinary}{a}}, {\OLId{latin-ordinary}{b}}\}=\{{\OLId{latin-ordinary}{b}}, {\OLId{latin-ordinary}{a}}\}$. والآخر \emph{الضرب الديكارتي}: فالمجموعتان
+${\OLId{latin-looped}{A}}$ و${\OLId{latin-looped}{B}}$ تعطيان~${\OLId{latin-looped}{A}} \times {\OLId{latin-looped}{B}}$، وهي مجموعة كل زوج $\tuple{{\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}}$
+حيث ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}$ و${\OLId{latin-ordinary}{y}} \in {\OLId{latin-looped}{B}}$. وبخاصة، ${\OLId{latin-looped}{A}}^{{\OLMathNumeral{2}}}= {\OLId{latin-looped}{A}} \times {\OLId{latin-looped}{A}}$ يجمع
+الأزواج المرتبة من~${\OLId{latin-looped}{A}}$ كلها.
+
+ولنخص بالنظر العلاقة $<$ على مجموعة الأعداد الطبيعية~$\Nat$.
+اجمع أزواج الأعداد $\tuple{{\OLId{latin-ordinary}{n}}, {\OLId{latin-ordinary}{m}}}$ التي تحقق ${\OLId{latin-ordinary}{n}}<{\OLId{latin-ordinary}{m}}$ في المجموعة:
+\[
+  {\OLId{latin-looped}{R}}=\Setabs{\tuple{{\OLId{latin-ordinary}{n}}, {\OLId{latin-ordinary}{m}}}}{{\OLId{latin-ordinary}{n}}, {\OLId{latin-ordinary}{m}} \in \Nat \text{ و } {\OLId{latin-ordinary}{n}}<{\OLId{latin-ordinary}{m}}}.
+\]
+فكون ${\OLId{latin-ordinary}{n}}$ أصغر من ${\OLId{latin-ordinary}{m}}$ وعضوية الزوج $\tuple{{\OLId{latin-ordinary}{n}}, {\OLId{latin-ordinary}{m}}}$ في~${\OLId{latin-looped}{R}}$
+متكافئان، أي:
+\[
+      {\OLId{latin-ordinary}{n}}<{\OLId{latin-ordinary}{m}}\text{ إذا وفقط إذا }\tuple{{\OLId{latin-ordinary}{n}}, {\OLId{latin-ordinary}{m}}} \in {\OLId{latin-looped}{R}}.
+\]
+فلا يفوتنا شيء من المعلومات إن جعلنا ${\OLId{latin-looped}{R}}$ \emph{نفس} العلاقة $<$
+على~$\Nat$.
+
+وعلى هذا الوجه نمثل كل علاقة بين الأعداد بجزئية من $\Nat^{{\OLMathNumeral{2}}}$.
+والعكس كذلك: فكل مجموعة أزواج ${\OLId{latin-looped}{S}} \subseteq \Nat^{{\OLMathNumeral{2}}}$ تقابلها علاقة
+بين الأعداد، تقوم بين ${\OLId{latin-ordinary}{n}}$ و${\OLId{latin-ordinary}{m}}$ إذا وفقط إذا كان $\tuple{{\OLId{latin-ordinary}{n}}, {\OLId{latin-ordinary}{m}}} \in {\OLId{latin-looped}{S}}$.
+ومن هذا يصح التعريف الآتي.
+\end{explain}
+
+\begin{defn}[العلاقة الثنائية]
+\emph{العلاقة الثنائية} على المجموعة ${\OLId{latin-looped}{A}}$ كل مجموعة جزئية من~${\OLId{latin-looped}{A}}^{{\OLMathNumeral{2}}}$.
+فإذا كانت ${\OLId{latin-looped}{R}} \subseteq {\OLId{latin-looped}{A}}^{{\OLMathNumeral{2}}}$ علاقة على~${\OLId{latin-looped}{A}}$، و${\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}} \in {\OLId{latin-looped}{A}}$،
+جاز أن نكتب $Rxy$ (أو $xRy$) اختصارًا لـ$\tuple{{\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}} \in {\OLId{latin-looped}{R}}$.
+\end{defn}
+
+\begin{ex}
+  \ollabel{relations}
+لنرتب أزواج الأعداد الطبيعية $\Nat^{{\OLMathNumeral{2}}}$ في مصفوفة ذات بعدين:
+\[
+  \begin{array}{ccccc}
+  \mathbf{\tuple{ 0,0 }} & \tuple{ {\OLMathNumeral{0}},{\OLMathNumeral{1}} } &
+    \tuple{ {\OLMathNumeral{0}},{\OLMathNumeral{2}} } & \tuple{ {\OLMathNumeral{0}},{\OLMathNumeral{3}} } & \ldots\\
+  \tuple{ {\OLMathNumeral{1}},{\OLMathNumeral{0}} } & \mathbf{\tuple{ 1,1 }} &
+    \tuple{ {\OLMathNumeral{1}},{\OLMathNumeral{2}} } & \tuple{ {\OLMathNumeral{1}},{\OLMathNumeral{3}} } & \ldots\\
+  \tuple{ {\OLMathNumeral{2}},{\OLMathNumeral{0}} } & \tuple{ {\OLMathNumeral{2}},{\OLMathNumeral{1}} } &
+    \mathbf{\tuple{ 2,2 }} & \tuple{ {\OLMathNumeral{2}},{\OLMathNumeral{3}} } & \ldots\\
+  \tuple{ {\OLMathNumeral{3}},{\OLMathNumeral{0}} } & \tuple{ {\OLMathNumeral{3}},{\OLMathNumeral{1}} } & \tuple{ {\OLMathNumeral{3}},{\OLMathNumeral{2}} } &
+    \mathbf{\tuple{ 3,3 }} & \ldots\\
+  \vdots & \vdots & \vdots & \vdots & \mathbf{\ddots}
+  \end{array}
+\]
+وقد ميّز خط القطر بالعريض؛ فإن جزئية $\Nat^{\OLMathNumeral{2}}$ التي تضم أزواجه، أي:
+\[
+  \{\tuple{{\OLMathNumeral{0}},{\OLMathNumeral{0}} }, \tuple{ {\OLMathNumeral{1}},{\OLMathNumeral{1}} }, \tuple{ {\OLMathNumeral{2}},{\OLMathNumeral{2}} }, \dots\},
+  \]
+هي \emph{علاقة الهوية على}~$\Nat$. ولشيوع هذه العلاقة نجعل
+$\Id{{\OLId{latin-looped}{A}}}=\Setabs{\tuple{ {\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{x}} }}{{\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}}$ لكل مجموعة ${\OLId{latin-looped}{A}}$.
+وأما الأزواج التي فوق القطر، فمجموعتها:
+\[
+  {\OLId{latin-looped}{L}} = \{\tuple{ {\OLMathNumeral{0}},{\OLMathNumeral{1}} },\tuple{ {\OLMathNumeral{0}},{\OLMathNumeral{2}} },\ldots,\tuple{ {\OLMathNumeral{1}},{\OLMathNumeral{2}} },
+  \tuple{ {\OLMathNumeral{1}},{\OLMathNumeral{3}} }, \dots, \tuple{ {\OLMathNumeral{2}},{\OLMathNumeral{3}} }, \tuple{ {\OLMathNumeral{2}},{\OLMathNumeral{4}} },\ldots\},
+\]
+وهي علاقة \emph{أصغر من}؛ فـ$Lnm$ يكافئ ${\OLId{latin-ordinary}{n}}<{\OLId{latin-ordinary}{m}}$.
+وأما ما تحت القطر فمجموعته:
+\[
+  {\OLId{latin-looped}{G}}=\{ \tuple{ {\OLMathNumeral{1}},{\OLMathNumeral{0}} },\tuple{ {\OLMathNumeral{2}},{\OLMathNumeral{0}} },\tuple{
+    {\OLMathNumeral{2}},{\OLMathNumeral{1}} }, \tuple{ {\OLMathNumeral{3}},{\OLMathNumeral{0}} },\tuple{ {\OLMathNumeral{3}},{\OLMathNumeral{1}} },\tuple{ {\OLMathNumeral{3}},{\OLMathNumeral{2}} }, \dots\},
+\]
+وهي علاقة \emph{أكبر من}؛ فـ$Gnm$ يكافئ ${\OLId{latin-ordinary}{n}}>{\OLId{latin-ordinary}{m}}$. وإذا ضممنا
+${\OLId{latin-looped}{L}}$ إلى ${\OLId{latin-looped}{I}}$، حيث ${\OLId{latin-looped}{I}} = \Id{\Nat}$، وسمينا الاتحاد ${\OLId{latin-looped}{K}}={\OLId{latin-looped}{L}}\cup {\OLId{latin-looped}{I}}$ حصلت علاقة \emph{أصغر من أو
+يساوي}، إذ $Knm$ يكافئ ${\OLId{latin-ordinary}{n}} \le {\OLId{latin-ordinary}{m}}$. وكذلك ${\OLId{latin-looped}{H}}={\OLId{latin-looped}{G}} \cup {\OLId{latin-looped}{I}}$ هي
+\emph{علاقة أكبر من أو يساوي.} فهذه العلاقات ${\OLId{latin-looped}{L}}$ و${\OLId{latin-looped}{G}}$ و${\OLId{latin-looped}{K}}$ و${\OLId{latin-looped}{H}}$
+صنف مخصوص يسمى \emph{الترتيبات}. وأما ${\OLId{latin-looped}{L}}$ و${\OLId{latin-looped}{G}}$ فلا تقوم واحدة منهما
+بين عدد ونفسه: فلا ${\OLId{latin-looped}{L}}$ ولا ${\OLId{latin-looped}{G}}$ تربط العدد بنفسه؛ أي لكل ${\OLId{latin-ordinary}{n}}$ يمتنع
+$Lnn$ و$Gnn$. وهذه الخاصية تسمى \emph{اللاانعكاسية}، فإذا اتصف
+بها ترتيب سمي \emph{ترتيبًا صارمًا.}
+\end{ex}
+
+\textbf{تنبيه تصحيحي على الأصل (C012-01).} صُرّح هنا بأن ${\OLId{latin-looped}{I}}$ علاقة الهوية على
+$\Nat$؛ فقد استعملها الأصل بهذا المعنى من غير أن يثبت لها هذا الاختصار.
+
+\begin{explain}
+ولئن كانت الترتيبات والهوية من العلاقات الطبيعية المهمة، فتعريفنا
+أعم منها؛ إذ \emph{كل} جزئية من ${\OLId{latin-looped}{A}}^{{\OLMathNumeral{2}}}$ علاقة على~${\OLId{latin-looped}{A}}$، وإن بدت
+مصطنعة بعيدة عن المألوف. فـ$\emptyset$ علاقة على كل مجموعة، تسمى
+\emph{العلاقة الخالية}، ولا تقوم بين زوج من العناصر. و${\OLId{latin-looped}{A}}^{{\OLMathNumeral{2}}}$ نفسها
+علاقة على~${\OLId{latin-looped}{A}}$، تقوم بين كل زوج، واسمها \emph{العلاقة الشاملة}.
+بل تعد المجموعة
+${\OLId{latin-looped}{E}}=\Setabs{\tuple{{\OLId{latin-ordinary}{n}}, {\OLId{latin-ordinary}{m}}}}{{\OLId{latin-ordinary}{n}}>{\OLMathNumeral{5}} \text{ أو } {\OLId{latin-ordinary}{m}} \times {\OLId{latin-ordinary}{n}} \ge {\OLMathNumeral{34}}}$ علاقة أيضًا.
+\end{explain}
+
+\begin{prob}
+عيّن !!{element}s العلاقة $\subseteq$ على مجموعة $\Pow{\{{\OLId{latin-ordinary}{a}}, {\OLId{latin-ordinary}{b}}, {\OLId{latin-ordinary}{c}}\}}$.
+\end{prob}
+
+\end{document}

@@ -1,0 +1,43 @@
+% Part: turing-machines
+% Chapter: undecidability
+% Section: decision-problem
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{tur}{und}{dec}
+\olsection{مسألة القرار}
+
+منطق الرتبة الأولى \emph{قابل للتقرير} إذا وفقط إذا أمكن، بطريقة
+فعلية، معرفة أكانت !!{sentence} معطاة صادقة منطقيًا أم لا.
+وسيتبين انتفاء هذه الطريقة؛ فمسألة تقرير الصدق المنطقي لجمل
+الرتبة الأولى لا تقبل الحل.
+
+وسبيل إثبات هذه النتيجة السلبية المهمة أن نبين عجز آلة تورنغ عن
+حل مسألة القرار. أي لا توجد آلة، كلما أعطيت !!{sentence} من الرتبة
+الأولى على شريطها، انتهت إلى التوقف بخرج ${\OLMathNumeral{1}}$ أو~${\OLMathNumeral{0}}$ بحسب صدق
+ال!!{sentence} منطقيًا أو عدمه. فلو كانت «دالة الصدق المنطقي»
+قابلة للحساب فعليًا، لاقتضت أطروحة تشرتش--تورنغ إمكان حسابها بآلة
+تورنغ؛ إذ كل دالة قابلة للحساب فعليًا قابلة للحساب بهذه الآلة.
+فامتناع الثاني يقتضي امتناع الأول.
+
+ونحتج لذلك باختزال مسألة التوقف إلى مسألة القرار. وقد ثبت أن
+الدالة~${\OLId{latin-ordinary}{h}}({\OLId{latin-ordinary}{e}},{\OLId{latin-ordinary}{w}})$، ذات القيمة~${\OLMathNumeral{1}}$ إذا توقفت الآلة التي يصفها~${\OLId{latin-ordinary}{e}}$
+عند الدخل~${\OLId{latin-ordinary}{w}}$، والقيمة~${\OLMathNumeral{0}}$ فيما عدا ذلك، لا تقبل الحساب بآلة
+تورنغ. ونبين الآن أن وجود آلة تقرر الصدق المنطقي لجمل الرتبة
+الأولى يستلزم وجود آلة تحسب~${\OLId{latin-ordinary}{h}}$. ولما امتنع حساب ${\OLId{latin-ordinary}{h}}$ بآلة
+تورنغ، امتنع وجود آلة القرار المطلوبة.
+
+وأول ما نحتاج إليه: أن لكل دخل~${\OLId{latin-ordinary}{w}}$ وآلة تورنغ~${\OLId{latin-looped}{M}}$ يمكن أن
+نصف فعليًا !!a{sentence}~$!T({\OLId{latin-looped}{M}},{\OLId{latin-ordinary}{w}})$ تمثل تعليمات~${\OLId{latin-looped}{M}}$
+والدخل~${\OLId{latin-ordinary}{w}}$، و!!a{sentence}~$!E({\OLId{latin-looped}{M}},{\OLId{latin-ordinary}{w}})$ معناها «تتوقف ${\OLId{latin-looped}{M}}$
+في نهاية المطاف»، على أن يتحقق:
+\begin{quote}
+  $\Entails !T({\OLId{latin-looped}{M}},{\OLId{latin-ordinary}{w}}) \lif !E({\OLId{latin-looped}{M}},{\OLId{latin-ordinary}{w}})$ إذا وفقط إذا توقفت ${\OLId{latin-looped}{M}}$ عند الدخل~${\OLId{latin-ordinary}{w}}$.
+\end{quote}
+فيكون معظم البرهان إنشاء الجملتين $!T({\OLId{latin-looped}{M}},{\OLId{latin-ordinary}{w}})$ و~$!E({\OLId{latin-looped}{M}},{\OLId{latin-ordinary}{w}})$،
+وإثبات أن $!T({\OLId{latin-looped}{M}},{\OLId{latin-ordinary}{w}})\lif !E({\OLId{latin-looped}{M}},{\OLId{latin-ordinary}{w}})$ صادقة منطقيًا بالضبط حين
+تتوقف~${\OLId{latin-looped}{M}}$ عند الدخل~${\OLId{latin-ordinary}{w}}$.
+
+\end{document}

@@ -1,0 +1,59 @@
+% Part: many-valued-logic
+% Chapter: syntax-and-semantics
+% Section: introduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mvl}{syn}{int}
+
+\olsection{مقدمة}
+
+في المنطق الكلاسيكي نبني~!!{formula}s من~!!{propositional variable}s
+بروابط القضايا~$\lnot$ و$\land$ و$\lor$ و$\lif$ و$\liff$.
+ثم نجعل لدلالته قيمتي الصدق~$\True$ و$\False$. فـ
+  !!{propositional variable}s تفسرها~!!a{valuation}~$\pAssign{{\OLId{latin-ordinary}{v}}}$
+  تسند إلى كل واحد منها إحدى القيمتين~$\True$ و$\False$؛ أي لا تسند
+  إلى~!!{propositional variable}s إلا قيمة واحدة لكل واحد منها. ومن هذا
+التعيين يحدد كل~!!{valuation} قيمة~$\pValue{{\OLId{latin-ordinary}{v}}}(!A)$ لكل
+!!{formula}~$!A$. وتكون~!!^a{formula} مشبعة في~!!a{valuation}
+$\pAssign{{\OLId{latin-ordinary}{v}}}$، ويرمز إلى ذلك بـ~$\pSat{{\OLId{latin-ordinary}{v}}}{!A}$، إذا وفقط إذا كان
+$\pValue{{\OLId{latin-ordinary}{v}}}(!A) = \True$.
+
+وأما المنطقات المتعددة القيم فتعمم هذا البناء الثنائي، إذ تجيز قيم
+صدق سوى~$\True$ و$\False$. فيكون~!!a{valuation}~$\pAssign{{\OLId{latin-ordinary}{v}}}$ فيها
+دالة تسند إلى كل~!!{propositional variable}~${\OLId{latin-ordinary}{p}}$ عنصرًا من مجموعة
+قيم الصدق الجائزة، ولنسم هذه المجموعة عادة~${\OLId{latin-looped}{V}}$. وبهذا الاعتبار يكون
+المنطق الكلاسيكي نفسه منطقًا متعدد القيم، ومجموعة قيم صدقه
+${\OLId{latin-looped}{V}} = \{\True, \False\}$؛ وتحسب فيه~$\pValue{{\OLId{latin-ordinary}{v}}}(!A)$ بجداول الصدق
+المألوفة للروابط.
+
+% تصحيحات أسلوبية (0385-M1، 0385-N1، 0385-N2): صُحح تركيب الإضافة، وفُصلت مجموعة القيم عن المصفوفة، وأزيل إيهام إسناد القيمتين معًا.
+
+فإذا وسعنا قيم الصدق لم يعد تفسير الروابط التي نقرأها «و» و«أو»
+و«ليس» و«إذا---فإن» متعينًا على وجه واحد؛ بل ظهرت وجوه طبيعية شتى
+لحساب~$\pValue{{\OLId{latin-ordinary}{v}}}(!A)$. ولذلك لا يكفي في تعيين المنطق المتعدد القيم
+أن نذكر مجموعة قيمه، بل لا بد من تعيين \emph{دوال الصدق} المختارة
+لكل رابط. فإذا اخترناها لمنطق~$\Log L$، عين كل تقييم قيمة
+$\pValue{{\OLId{latin-ordinary}{v}}}(!A)[\Log L]$ تعيينًا وحيدًا، كما في المنطق الكلاسيكي.
+فالمنطقان، من هذه الجهة، \emph{داليّا الصدق}.
+
+وبعد ضبط هذه الأصول الدلالية نعرّف نظائر التحصيل المنطقي والاستلزام
+وقابلية الإشباع. ففي المنطق الكلاسيكي تكون~!!a{formula} تحصيلًا
+منطقيًا إذا تحقق~$\pValue{{\OLId{latin-ordinary}{v}}}(!A) = \True$ لكل~$\pAssign{{\OLId{latin-ordinary}{v}}}$.
+أما في المنطق المتعدد القيم فلا بد من تعميم آخر؛ إذ قد تخلو مجموعة
+قيم الصدق~${\OLId{latin-looped}{V}}$ من القيمة~$\True$ أصلًا. فقد تتخذ بعض المنطقات، مثلًا، جميع الأعداد
+النسبية بين~${\OLMathNumeral{0}}$ و${\OLMathNumeral{1}}$ قيمًا للصدق، وحينئذ يقوم~${\OLMathNumeral{1}}$ عادة مقام~$\True$.
+وقد تقوم بهذا المقام في منطق آخر عدة قيم، لا قيمة واحدة. فنخص كل
+منطق متعدد القيم بمجموعة~${\OLId{latin-looped}{V}}^+$ من \emph{القيم المميزة}. وعندئذ تكون
+!!a{formula} مشبعة في~!!a{valuation}~$\pAssign{{\OLId{latin-ordinary}{v}}}$، أي
+$\pSat{{\OLId{latin-ordinary}{v}}}{!A}[\Log L]$، إذا وفقط إذا كان
+$\pValue{{\OLId{latin-ordinary}{v}}}(!A)[\Log L] \in {\OLId{latin-looped}{V}}^+$. وتكون~!!^a{formula}~$!A$
+تحصيلًا منطقيًا لذلك المنطق، أي~$\Entails[\Log L] !A$، إذا وفقط إذا
+كان~$\pValue{{\OLId{latin-ordinary}{v}}}(!A)[\Log L] \in {\OLId{latin-looped}{V}}^+$ لكل~$\pAssign{{\OLId{latin-ordinary}{v}}}$. وأخيرًا تكون~$!A$
+مستلزمة من مجموعة~!!{formula}s، أي~${\OLId{greek-variable}{Gamma}} \Entails[\Log L] !A$،
+إذا كان كل~!!{valuation} يشبع جميع~!!{formula}s في~${\OLId{greek-variable}{Gamma}}$ يشبع
+$!A$ أيضًا.
+
+\end{document}

@@ -1,0 +1,59 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{ord-arithmetic}{expo}
+\olsection{الأس الترتيبي}
+
+ننتقل إلى الأس الترتيبي، وليس له، على الأسف، تعريف تركيبي
+\emph{حسن الصورة}.
+
+أما التعريفات التركيبية الصريحة فـ\emph{موجودة}، ومن أمثلتها الآتي.
+لتكن~$\text{finfun}({\OLId{greek-variable}{alpha}},\beta)$ مجموعة الدوال
+${\OLId{latin-ordinary}{f}} \colon {\OLId{greek-variable}{alpha}} \to \beta$ التي تكون فيها
+$\Setabs{\gamma \in {\OLId{greek-variable}{alpha}}}{{\OLId{latin-ordinary}{f}}(\gamma) \neq {\OLMathNumeral{0}}}$ مساوية في العدد لعدد
+طبيعي. ونرتب~$\text{finfun}({\OLId{greek-variable}{alpha}},\beta)$ ترتيبًا جيدًا بجعل
+${\OLId{latin-ordinary}{f}} \sqsubset {\OLId{latin-ordinary}{g}}$ إذا وفقط إذا كان~${\OLId{latin-ordinary}{f}} \neq {\OLId{latin-ordinary}{g}}$ و
+${\OLId{latin-ordinary}{f}}(\gamma_{\OLMathNumeral{0}}) < {\OLId{latin-ordinary}{g}}(\gamma_{\OLMathNumeral{0}})$، حيث
+$\gamma_{\OLMathNumeral{0}} = \text{max}\Setabs{\gamma \in {\OLId{greek-variable}{alpha}}}{{\OLId{latin-ordinary}{f}}(\gamma) \neq
+{\OLId{latin-ordinary}{g}}(\gamma)}$. وعندئذ يجوز تعريف~$\ordexpo{{\OLId{greek-variable}{alpha}}}{\beta}$ بأنه
+$\ordtype{\text{finfun}(\beta, {\OLId{greek-variable}{alpha}}), \sqsubset}$. وقد أخذ بوتر
+بهذا التعريف الصريح، ثم قال في الحال:
+\begin{quote}
+	لا يحدد اختيار هذا الترتيب إلا رغبتنا في الحصول على تعريف للأس
+	الترتيبي يحقق الشرط العودي الملائم\ldots، كما أن تصوره أصعب بكثير
+	من تصور الجمع المرتب أو الضرب المرتب.
+	\citep[p.~199]{Potter2004}
+\end{quote}
+وهو كما قال. فقد فسرنا الجمع بأنه «نسخة من~${\OLId{greek-variable}{alpha}}$ تتبعها نسخة
+من~$\beta$»، وفسرنا الضرب بأنه «متتالية نمطها~$\beta$ من نسخ
+${\OLId{greek-variable}{alpha}}$». ولا نجد عبارة موجزة تقابل ذلك في
+$\text{finfun}(\gamma, {\OLId{greek-variable}{alpha}})$. لذلك نعرّف الأس الترتيبي
+\emph{بالعودية} المتناهية التجاوز وحدها، فنقول:
+
+\begin{defn}\ollabel{ordexporecursion}
+\begin{align*}
+	\ordexpo{{\OLId{greek-variable}{alpha}}}{{\OLMathNumeral{0}}} &= {\OLMathNumeral{1}}\\
+	\ordexpo{{\OLId{greek-variable}{alpha}}}{\beta\ordplus {\OLMathNumeral{1}}} &=\ordexpo{{\OLId{greek-variable}{alpha}}}{\beta} \ordtimes {\OLId{greek-variable}{alpha}}\\
+	\ordexpo{{\OLId{greek-variable}{alpha}}}{\beta} &= \bigcup_{\delta < \beta}\ordexpo{{\OLId{greek-variable}{alpha}}}{\delta}& & \text{عندما يكون $\beta$ عددًا ترتيبيًا حديًا}
+\end{align*}
+\end{defn}
+
+ولو كان غرضنا هنا عمل منظّري المجموعات، لكان من المناسب استقصاء خواص
+الأس الترتيبي. وليس عندنا الآن إلا أن ننبه إلى أمر متوقع: فهو غير
+تبادلي. إذ
+$\ordexpo{{\OLMathNumeral{2}}}{\omega} =
+\bigcup_{\delta < \omega}\ordexpo{{\OLMathNumeral{2}}}{\delta} = \omega$، في حين أن
+$\ordexpo{\omega}{{\OLMathNumeral{2}}} = \omega \ordtimes \omega$. ولا وجه أصلًا
+لـ\emph{توقع} التبادل، فإن أس الأعداد الطبيعية نفسه غير تبادلي:
+$\ordexpo{{\OLMathNumeral{2}}}{{\OLMathNumeral{3}}} = {\OLMathNumeral{8}} < {\OLMathNumeral{9}} = \ordexpo{{\OLMathNumeral{3}}}{{\OLMathNumeral{2}}}$.
+
+\begin{prob}
+أثبت، بالاستقراء المتناهي التجاوز، أننا إذا عرّفنا
+$\ordexpo{{\OLId{greek-variable}{alpha}}}{\beta} =
+\ordtype{\text{finfun}(\beta, {\OLId{greek-variable}{alpha}}), \sqsubset}$، حصلنا على
+معادلات العودية المذكورة في
+\olref[sth][ord-arithmetic][expo]{ordexporecursion}.
+\end{prob}
+
+\end{document}

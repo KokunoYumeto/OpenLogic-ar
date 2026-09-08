@@ -1,0 +1,309 @@
+% Part: incompleteness
+% Chapter: representability-in-q
+% Section: sigma1-completeness
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{inp}{s1c}
+\olsection{تمام \texorpdfstring{$\Sigma_{\OLMathNumeral{1}}$}{Sigma-1}}
+
+مع أن $\Th{Q}$ وامتداداتها المتسقة القابلة للمحورة غير تامة،
+قد رأينا $\Th{Q}$ تثبت كثيرًا من الحقائق الأساسية عن أسماء الأعداد.
+ويمكن توسيع هذه النتيجة توسعًا كبيرًا. ولتبيين ما يصل إليه الإثبات في
+$\Th{Q}$، نميّز !!{formula}s من الأصناف ${\OLId{greek-variable}{Delta}}_{\OLMathNumeral{0}}$ و
+$\Sigma_{\OLMathNumeral{1}}$ و$\Pi_{\OLMathNumeral{1}}$.
+فالـ!!{formula} من الصنف $\Sigma_{\OLMathNumeral{1}}$، على وجه التقريب،
+هي ما صورتها $\lexists[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$، وتكون $!B$ مبنية بالروابط القضوية
+والمكممات المحدودة وحدها. وسنثبت أن كل $!A$ تكون !!{sentence}
+من الصنف $\Sigma_{\OLMathNumeral{1}}$ وتصدق في $\Struct{N}$،
+تستوفي $\Th{Q}\Proves !A$ (\olref{thm:sigma1-completeness}).
+
+\begin{defn}
+\ollabel{defn:bd-quant}
+الـ\emph{!!{formula} الوجودية المحدودة} ما كانت على الصورة
+$\lexists[{\OLId{latin-ordinary}{x}}][({\OLId{latin-ordinary}{x}}<{\OLId{latin-ordinary}{t}}\land !A({\OLId{latin-ordinary}{x}}))]$، حيث ${\OLId{latin-ordinary}{t}}$ حد لا يرد فيه المتغير المكمَّم،
+واختصار كتابتها المتعارف عليه $\bexists{{\OLId{latin-ordinary}{x}}<{\OLId{latin-ordinary}{t}}}{!A({\OLId{latin-ordinary}{x}})}$.
+%
+والـ\emph{!!{formula} الكلية المحدودة} ما كانت على الصورة
+$\lforall[{\OLId{latin-ordinary}{x}}][({\OLId{latin-ordinary}{x}}<{\OLId{latin-ordinary}{t}}\lif !A({\OLId{latin-ordinary}{x}}))]$، حيث ${\OLId{latin-ordinary}{t}}$ حد لا يرد فيه المتغير المكمَّم،
+واختصارها المتعارف عليه $\bforall{{\OLId{latin-ordinary}{x}}<{\OLId{latin-ordinary}{t}}}{!A({\OLId{latin-ordinary}{x}})}$.
+\end{defn}
+
+\begin{defn}
+\ollabel{defn:delta0-sigma1-pi1-frm}
+نعدّ الـ!!{formula}~$!B$ من الصنف ${\OLId{greek-variable}{Delta}}_{\OLMathNumeral{0}}$ متى كان بناؤها من
+!!{formula}s ذرية، ولم يستعمل فيه إلا الروابط القضوية والتكميم المحدود.
+%
+ونعدّ الـ!!{formula}~$!A$ من الصنف $\Sigma_{\OLMathNumeral{1}}$ متى كانت
+$!A\ident\lexists[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$، وكانت $!B$ من الصنف ${\OLId{greek-variable}{Delta}}_{\OLMathNumeral{0}}$.
+%
+ونعدّ الـ!!{formula}~$!A$ من الصنف $\Pi_{\OLMathNumeral{1}}$ متى كانت
+$!A\ident\lforall[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$، وكانت $!B$ من الصنف ${\OLId{greek-variable}{Delta}}_{\OLMathNumeral{0}}$.
+\end{defn}
+
+\begin{lem}
+\ollabel{lem:q-proves-clterm-id} إذا كان ${\OLId{latin-ordinary}{t}}$ حدًا مغلقًا وقيمته
+$\Value{{\OLId{latin-ordinary}{t}}}{{\OLId{latin-looped}{N}}}={\OLId{latin-ordinary}{n}}$، لزم $\Th{Q}\Proves\eq[{\OLId{latin-ordinary}{t}}][\num {\OLId{latin-ordinary}{n}}]$.
+\end{lem}
+
+\begin{proof}
+البرهان بالاستقراء على تعقيد~${\OLId{latin-ordinary}{t}}$. ففي الأساس
+$\Value{\Obj 0}{{\OLId{latin-looped}{N}}}={\OLMathNumeral{0}}$، وتثبت $\Th{Q}\Proves\eq[\Obj 0][\num {\OLMathNumeral{0}}]$،
+إذ $\num {\OLMathNumeral{0}}\ident\Obj 0$.
+%
+وللخطوة نأخذ الحدين ${\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}$ و${\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}}$ مع
+$\Value{{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}}{{\OLId{latin-looped}{N}}}={\OLId{latin-ordinary}{n}}_{\OLMathNumeral{1}}$ و$\Value{{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}}}{{\OLId{latin-looped}{N}}}={\OLId{latin-ordinary}{n}}_{\OLMathNumeral{2}}$،
+ونفرض $\Th{Q}\Proves\eq[{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}][\num{{\OLId{latin-ordinary}{n}}_{\OLMathNumeral{1}}}]$
+و$\Th{Q}\Proves\eq[{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}}][\num{{\OLId{latin-ordinary}{n}}_{\OLMathNumeral{2}}}]$.
+
+أما الخلف، فـ$\Value{({\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}')}{{\OLId{latin-looped}{N}}}={\OLId{latin-ordinary}{n}}_{\OLMathNumeral{1}}+{\OLMathNumeral{1}}$.
+ونحصل على $\Th{Q}\Proves\eq[{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}'][{\num {\OLId{latin-ordinary}{n}}_{\OLMathNumeral{1}}}']$
+بقواعد الهوية في الرتبة الأولى، مستعملين فرض الاستقراء والـ!!{formula}
+$\eq[\num{{\OLId{latin-ordinary}{n}}_{\OLMathNumeral{1}}}'][\num{{\OLId{latin-ordinary}{n}}_{\OLMathNumeral{1}}}']$.
+ومن تعريف أسماء الأعداد ينتج
+$\Th{Q}\Proves\eq[{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}'][\num{{\OLId{latin-ordinary}{n}}_{\OLMathNumeral{1}}+{\OLMathNumeral{1}}}]$.
+
+وأما الجمع، فقيمة حده
+\[
+      \Value{({\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}} + {\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}})}{{\OLId{latin-looped}{N}}}
+    = \Value{{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}}{{\OLId{latin-looped}{N}}} + \Value{{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}}}{{\OLId{latin-looped}{N}}}
+    = {\OLId{latin-ordinary}{n}}_{\OLMathNumeral{1}} + {\OLId{latin-ordinary}{n}}_{\OLMathNumeral{2}}.
+\]
+فمن فرض الاستقراء وقواعد الهوية نحصل أولًا على
+$\Th{Q}\Proves\eq[{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}+{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}}][\num{{\OLId{latin-ordinary}{n}}_{\OLMathNumeral{1}}}+{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}}]$،
+ثم نحصل على
+$\Th{Q}\Proves\eq[{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}+{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}}][\num{{\OLId{latin-ordinary}{n}}_{\OLMathNumeral{1}}}+\num{{\OLId{latin-ordinary}{n}}_{\OLMathNumeral{2}}}]$
+بتطبيق قواعد الهوية مرة ثانية.
+وتعطينا \olref[inc][req][bre]{lem:q-proves-add}
+$\Th{Q}\Proves
+\eq[\num{{\OLId{latin-ordinary}{n}}_{\OLMathNumeral{1}}}+\num{{\OLId{latin-ordinary}{n}}_{\OLMathNumeral{2}}}][\num{{\OLId{latin-ordinary}{n}}_{\OLMathNumeral{1}}+{\OLId{latin-ordinary}{n}}_{\OLMathNumeral{2}}}]$؛
+فتلزم $\Th{Q}\Proves\eq[{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}+{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}}][\num{{\OLId{latin-ordinary}{n}}_{\OLMathNumeral{1}}+{\OLId{latin-ordinary}{n}}_{\OLMathNumeral{2}}}]$.
+
+وأما $\times$، فحجته نظير هذه، مع استعمال
+\olref[inc][req][bre]{lem:q-proves-mult}.
+%
+وهذه جميع وجوه بناء الحدود المغلقة في الحساب. فيثبت
+$\Th{Q}\Proves\eq[{\OLId{latin-ordinary}{t}}][\num {\OLId{latin-ordinary}{n}}]$ لكل حد مغلق~${\OLId{latin-ordinary}{t}}$ قيمته
+$\Value{{\OLId{latin-ordinary}{t}}}{{\OLId{latin-looped}{N}}}={\OLId{latin-ordinary}{n}}$.
+\end{proof}
+
+\begin{prob}
+فصّل حجة $\times$ في
+\olref{lem:q-proves-clterm-id}.
+\end{prob}
+
+\begin{lem}
+\ollabel{lem:atomic-completeness}
+ليكن ${\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}$ و${\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}}$ حدين مغلقين. فتصدق الأحكام الآتية:
+\begin{enumerate}
+\item متى كان $\Value{{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}}{{\OLId{latin-looped}{N}}}=\Value{{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}}}{{\OLId{latin-looped}{N}}}$،
+    لزم $\Th{Q}\Proves\eq[{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}][{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}}]$.
+\item متى كان $\Value{{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}}{{\OLId{latin-looped}{N}}}\neq\Value{{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}}}{{\OLId{latin-looped}{N}}}$،
+    لزم $\Th{Q}\Proves\eq/[{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}][{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}}]$.
+\item متى كان $\Value{{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}}{{\OLId{latin-looped}{N}}}<\Value{{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}}}{{\OLId{latin-looped}{N}}}$،
+    لزم $\Th{Q}\Proves {\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}<{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}}$.
+\item متى كان $\Value{{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}}}{{\OLId{latin-looped}{N}}}\leq\Value{{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}}{{\OLId{latin-looped}{N}}}$،
+    لزم $\Th{Q}\Proves\lnot({\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}<{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}})$.
+\end{enumerate}
+\end{lem}
+
+\begin{proof}
+نأخذ الحدين ${\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}$ و${\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}}$، ونسمّي قيمتيهما
+${\OLId{latin-ordinary}{n}}=\Value{{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}}{{\OLId{latin-looped}{N}}}$ و${\OLId{latin-ordinary}{m}}=\Value{{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}}}{{\OLId{latin-looped}{N}}}$.
+
+أما $!A\ident {\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}={\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}}$، فنعلم من
+\olref{lem:q-proves-clterm-id} أن
+$\Th{Q}\Proves\eq[{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}][\num {\OLId{latin-ordinary}{n}}]$
+و$\Th{Q}\Proves\eq[{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}}][\num {\OLId{latin-ordinary}{m}}]$.
+إذا كان ${\OLId{latin-ordinary}{n}}={\OLId{latin-ordinary}{m}}$ ثبتت $\Th{Q}\Proves\eq[\num {\OLId{latin-ordinary}{n}}][\num {\OLId{latin-ordinary}{m}}]$،
+فينتج $\Th{Q}\Proves\eq[{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}][{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}}]$ بتعدي الهوية.
+وإذا كان ${\OLId{latin-ordinary}{n}}\neq {\OLId{latin-ordinary}{m}}$ ثبتت
+$\Th{Q}\Proves\eq/[\num {\OLId{latin-ordinary}{n}}][\num {\OLId{latin-ordinary}{m}}]$؛
+ومن تعدي الهوية أيضًا يلزم $\Th{Q}\Proves\eq/[{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}][{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}}]$.
+
+وأما $!A\ident {\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}<{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}}$، فمرجع الحالتين إلى
+البديهية~$!Q_{\OLMathNumeral{8}}$، ونصها
+${\OLId{latin-ordinary}{x}}<{\OLId{latin-ordinary}{y}}\liff\lexists[{\OLId{latin-ordinary}{z}}][\eq[{\OLId{latin-ordinary}{z}}'+{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{y}}]]$ لكل ${\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}}$.
+
+إن صدقت $\Sat{{\OLId{latin-looped}{N}}}{{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}<{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}}}$، وُجد ${\OLId{latin-ordinary}{k}}\in\Nat$
+يحقق ${\OLId{latin-ordinary}{n}}+{\OLId{latin-ordinary}{k}}+{\OLMathNumeral{1}}={\OLId{latin-ordinary}{m}}$. وباللمة \olref{lem:q-proves-clterm-id} لدينا
+$\Th{Q}\Proves\eq[{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}][\num {\OLId{latin-ordinary}{n}}]$
+و$\Th{Q}\Proves\eq[{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}}][\num {\OLId{latin-ordinary}{m}}]$.
+ومن أول هذه اللمة نحصل على
+$\Th{Q}\Proves\eq[{\num {\OLId{latin-ordinary}{k}}}'+\num {\OLId{latin-ordinary}{n}}][\num {\OLId{latin-ordinary}{m}}]$.
+فتعطي قواعد الهوية
+$\Th{Q}\Proves\eq[{\num {\OLId{latin-ordinary}{k}}}'+{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}][{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}}]$،
+ومنها $\Th{Q}\Proves\lexists[{\OLId{latin-ordinary}{z}}][\eq[{\OLId{latin-ordinary}{z}}'+{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}][{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}}]]$.
+وعندئذ نستعمل اتجاه~$!Q_{\OLMathNumeral{8}}$ من اليمين إلى اليسار فنثبت
+$\Th{Q}\Proves {\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}<{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}}$.
+
+وإن كانت $\Sat/{{\OLId{latin-looped}{N}}}{{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}<{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}}}$، أي ${\OLId{latin-ordinary}{m}}\leq {\OLId{latin-ordinary}{n}}$، فالحجة بالخلف.
+%
+نعمل داخل~$\Th{Q}$ ونفرض ${\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}<{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}}$.
+بالاتجاه الآخر من~$!Q_{\OLMathNumeral{8}}$ يوجد~${\OLId{latin-ordinary}{z}}$ يحقق $\eq[{\OLId{latin-ordinary}{z}}'+{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}][{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}}]$.
+ولأن $\Th{Q}\Proves\eq[{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}][\num {\OLId{latin-ordinary}{n}}]$
+و$\Th{Q}\Proves\eq[{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}}][\num {\OLId{latin-ordinary}{m}}]$، ينتج
+$\eq[{\OLId{latin-ordinary}{z}}'+\num {\OLId{latin-ordinary}{n}}][\num {\OLId{latin-ordinary}{m}}]$.
+%
+ثم نستعمل استقراءً خارجيًا على~${\OLId{latin-ordinary}{m}}$، ومعه~$!Q_{\OLMathNumeral{5}}$ وإلغاء الخلفين بقواعد
+الهوية والبديهية الأولى، فنحصل على
+$\eq[{\OLId{latin-ordinary}{z}}'+\num{{\OLId{latin-ordinary}{n}}-{\OLId{latin-ordinary}{m}}}][\Obj 0]$.
+إن كان ${\OLId{latin-ordinary}{m}}={\OLId{latin-ordinary}{n}}$، صارت $\eq[{\OLId{latin-ordinary}{z}}'][\Obj 0]$، وتناقض~$!Q_{\OLMathNumeral{2}}$.
+وإن كان ${\OLId{latin-ordinary}{m}}<{\OLId{latin-ordinary}{n}}$، صارت
+$\eq[({\OLId{latin-ordinary}{z}}'+\num{{\OLId{latin-ordinary}{n}}-{\OLId{latin-ordinary}{m}}-{\OLMathNumeral{1}}})'][\Obj 0]$ باستعمال~$!Q_{\OLMathNumeral{5}}$ مرة أخرى،
+فتناقض~$!Q_{\OLMathNumeral{2}}$ أيضًا. وإذن $\Th{Q}\Proves\lnot({\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}<{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}})$.
+\end{proof}
+
+\begin{lem}
+\ollabel{lem:bounded-quant-equiv}
+لتكن $!A$ !!a{formula}، وليكن ${\OLId{latin-ordinary}{t}}$ حدًا مغلقًا،
+ولتكن ${\OLId{latin-ordinary}{k}}=\Value{{\OLId{latin-ordinary}{t}}}{{\OLId{latin-looped}{N}}}$. عندئذ لدينا التكافؤان:
+\begin{enumerate}
+\item $\Th{Q}\Proves\bforall{{\OLId{latin-ordinary}{x}}<{\OLId{latin-ordinary}{t}}}{!A({\OLId{latin-ordinary}{x}})}$ إذا وفقط إذا
+    $\Th{Q}\Proves !A(\num {\OLMathNumeral{0}})\land\dots\land !A(\num{{\OLId{latin-ordinary}{k}}-{\OLMathNumeral{1}}})$.
+\item $\Th{Q}\Proves\bexists{{\OLId{latin-ordinary}{x}}<{\OLId{latin-ordinary}{t}}}{!A({\OLId{latin-ordinary}{x}})}$ إذا وفقط إذا
+    $\Th{Q}\Proves !A(\num {\OLMathNumeral{0}})\lor\dots\lor !A(\num{{\OLId{latin-ordinary}{k}}-{\OLMathNumeral{1}}})$.
+\end{enumerate}
+\end{lem}
+
+\begin{proof}
+نبرهن التكافؤ الخاص بالمكمم الكلي المحدود.
+إذا كانت $\Value{{\OLId{latin-ordinary}{t}}}{{\OLId{latin-looped}{N}}}={\OLMathNumeral{0}}$، ثبت الطرف الأيسر في~$\Th{Q}$،
+إذ لا يوجد ${\OLId{latin-ordinary}{x}}<\num {\OLMathNumeral{0}}$ بمقتضى
+\olref[inc][req][min]{lem:less-zero}.
+وأما الطرف الآخر فالاقتران فيه خال، ونجعله $\ltrue$،
+وهو ثابت كذلك في~$\Th{Q}$.
+%
+يبقى أن تكون $\Value{{\OLId{latin-ordinary}{t}}}{{\OLId{latin-looped}{N}}}={\OLId{latin-ordinary}{k}}+{\OLMathNumeral{1}}$ لعدد طبيعي~${\OLId{latin-ordinary}{k}}$.
+وتجيز لنا \olref{lem:q-proves-clterm-id} أن نستبدل بالصيغة المعطاة
+!!a{formula} على الصورة $\bforall{{\OLId{latin-ordinary}{x}}<\num{{\OLId{latin-ordinary}{k}}+{\OLMathNumeral{1}}}}{!A({\OLId{latin-ordinary}{x}})}$.
+
+في الاتجاه الأول، لنفرض
+$\Th{Q}\Proves\bforall{{\OLId{latin-ordinary}{x}}<\num{{\OLId{latin-ordinary}{k}}+{\OLMathNumeral{1}}}}{!A({\OLId{latin-ordinary}{x}})}$،
+ولنأخذ ${\OLId{latin-ordinary}{n}}\leq {\OLId{latin-ordinary}{k}}$.
+ولدينا $\Th{Q}\Proves\num {\OLId{latin-ordinary}{n}}<\num{{\OLId{latin-ordinary}{k}}+{\OLMathNumeral{1}}}$
+باللمة \olref{lem:atomic-completeness}،
+فيستخرج بالمنطق $\Th{Q}\Proves !A(\num {\OLId{latin-ordinary}{n}})$.
+نكرر ذلك ${\OLId{latin-ordinary}{k}}+{\OLMathNumeral{1}}$ مرة، لكل ${\OLId{latin-ordinary}{n}}\leq {\OLId{latin-ordinary}{k}}$ مرة،
+فنحصل على $\Th{Q}\Proves !A(\num {\OLMathNumeral{0}})\land\dots\land !A(\num {\OLId{latin-ordinary}{k}})$،
+وهو المطلوب.
+
+وفي الاتجاه المقابل، نفرض
+$\Th{Q}\Proves !A(\num {\OLMathNumeral{0}})\land\dots\land !A(\num {\OLId{latin-ordinary}{k}})$.
+ثم نعمل في $\Th{Q}$ على فرض ${\OLId{latin-ordinary}{x}}<\num{{\OLId{latin-ordinary}{k}}+{\OLMathNumeral{1}}}$.
+ومن \olref[inc][req][min]{lem:less-nsucc} نحصل على
+${\OLId{latin-ordinary}{x}}=\num {\OLMathNumeral{0}}\lor\dots\lor {\OLId{latin-ordinary}{x}}=\num {\OLId{latin-ordinary}{k}}$،
+فيثبت بالمنطق~$!A({\OLId{latin-ordinary}{x}})$ في كل حالة، ثم يثبت التعميم
+$\bforall{{\OLId{latin-ordinary}{x}}<\num{{\OLId{latin-ordinary}{k}}+{\OLMathNumeral{1}}}}{!A({\OLId{latin-ordinary}{x}})}$.
+
+وأما التكافؤ الخاص بالـ!!{formula}s ذات التكميم الوجودي المحدود
+فحجته على هذا المثال.
+\end{proof}
+
+\begin{prob}
+فصّل حجة الحالة الوجودية من
+\olref{lem:bounded-quant-equiv}.
+\end{prob}
+
+\begin{lem}
+\ollabel{lem:delta0-completeness}
+كل $!A$ تكون !!{sentence} من الصنف ${\OLId{greek-variable}{Delta}}_{\OLMathNumeral{0}}$ وتصدق في
+$\Struct{N}$، تحقق $\Th{Q}\Proves !A$.
+\end{lem}
+
+\begin{proof}
+نجري الاستقراء على تعقيد بنية الـ!!{formula} من حيث الروابط والمكممات؛
+فتعويض أسماء الأعداد لا يزيد هذه البنية.
+%
+أما الأساس ففي \olref{lem:atomic-completeness}، فننتقل إلى الخطوة.
+ونأخذ الروابط القضوية بعد رد الشرطية والتكافؤ إلى النفي والاقتران والفصل.
+وليتضح التفصيل، نقسم النفي بحسب بنية الـ!!{formula} الواقعة في نطاقه.
+
+\begin{enumerate}
+\item إذا صدقت $(!A\land !B)$ في $\Struct{N}$، صدقت
+$!A$ و$!B$ معًا في~$\Struct{N}$.
+فيعطي فرض الاستقراء $\Th{Q}\Proves !A$
+و$\Th{Q}\Proves !B$، ويعطي المنطق $\Th{Q}\Proves(!A\land !B)$.
+%
+\item وإذا صدقت $\lnot(!A\land !B)$ في $\Struct{N}$،
+صدقت إحدى $\lnot !A$ و$\lnot !B$ في~$\Struct{N}$.
+نأخذ الأولى من غير إخلال بالعموم؛
+فيكون $\Th{Q}\Proves\lnot !A$ بفرض الاستقراء،
+ثم $\Th{Q}\Proves\lnot(!A\land !B)$ بالمنطق.
+%
+\item وإذا صدقت $(!A\lor !B)$ في $\Struct{N}$،
+فإما أن تصدق $!A$ في $\Struct{N}$، وإما أن تصدق $!B$ في $\Struct{N}$.
+وليكن الأول، إذ حجة الثاني مثله.
+بفرض الاستقراء $\Th{Q}\Proves !A$،
+فتلزم $\Th{Q}\Proves(!A\lor !B)$ بالمنطق.
+%
+\item وإذا صدقت $\lnot(!A\lor !B)$ في $\Struct{N}$،
+صدقت $\lnot !A$ و$\lnot !B$ جميعًا في $\Struct{N}$.
+فتثبت $\Th{Q}\Proves\lnot !A$
+و$\Th{Q}\Proves\lnot !B$ بفرض الاستقراء،
+ومنهما $\Th{Q}\Proves\lnot(!A\lor !B)$ بالمنطق.
+%
+\item وأما صدق $\bforall{{\OLId{latin-ordinary}{x}}<{\OLId{latin-ordinary}{t}}}{!A({\OLId{latin-ordinary}{x}})}$ في~$\Struct{N}$،
+حيث ${\OLId{latin-ordinary}{t}}$ حد مغلق و${\OLId{latin-ordinary}{k}}=\Value{{\OLId{latin-ordinary}{t}}}{{\OLId{latin-looped}{N}}}$، فنستعمل فيه فرض الاستقراء والمنطق.
+فمتى صدقت $!A(\num {\OLId{latin-ordinary}{n}})$ في~$\Struct{N}$ لكل
+${\OLId{latin-ordinary}{n}}<\Value{{\OLId{latin-ordinary}{t}}}{{\OLId{latin-looped}{N}}}$، حصل
+$\Th{Q}\Proves !A(\num {\OLMathNumeral{0}})\land\dots\land !A(\num{{\OLId{latin-ordinary}{k}}-{\OLMathNumeral{1}}})$.
+فتعطينا \olref{lem:bounded-quant-equiv}
+$\Th{Q}\Proves\bforall{{\OLId{latin-ordinary}{x}}<{\OLId{latin-ordinary}{t}}}{!A({\OLId{latin-ordinary}{x}})}$.
+%
+\item وأما التكميم الوجودي المحدود، حين تكون !!a{sentence} على الصورة
+$\bexists{{\OLId{latin-ordinary}{x}}<{\OLId{latin-ordinary}{t}}}{!A({\OLId{latin-ordinary}{x}})}$، فحجته نظير حجة التكميم الكلي المحدود.
+%
+\item وإذا صدقت $\lnot\bforall{{\OLId{latin-ordinary}{x}}<{\OLId{latin-ordinary}{t}}}{!A({\OLId{latin-ordinary}{x}})}$ في
+$\Struct{N}$، حيث ${\OLId{latin-ordinary}{t}}$ حد مغلق، كانت هذه الـ!!{sentence}
+مكافئة للـ!!{sentence} $\bexists{{\OLId{latin-ordinary}{x}}<{\OLId{latin-ordinary}{t}}}{\lnot !A({\OLId{latin-ordinary}{x}})}$،
+والتكافؤ قابل للاشتقاق في~$\Th{Q}$.
+فنرجع إلى حجة التكميم الوجودي المحدود.
+%
+\item وكذلك، إذا صدقت $\lnot\bexists{{\OLId{latin-ordinary}{x}}<{\OLId{latin-ordinary}{t}}}!A({\OLId{latin-ordinary}{x}})$ في
+$\Struct{N}$، حيث ${\OLId{latin-ordinary}{t}}$ حد مغلق، كانت هذه الـ!!{sentence} مكافئة في
+$\Th{Q}$ للصيغة $\bforall{{\OLId{latin-ordinary}{x}}<{\OLId{latin-ordinary}{t}}}{\lnot !A({\OLId{latin-ordinary}{x}})}$.
+فنرجع إلى حجة التكميم الكلي المحدود.
+%
+\item وأخيرًا، إذا صدقت $\lnot !A$ في $\Struct{N}$،
+فقد فرغنا من سائر الحالات إلا أن تكون $!A$ ذرية، أو أن تكون
+$\lnot !A\ident\lnot\lnot !B$ لـ!!{sentence}~$!B$
+من الصنف ${\OLId{greek-variable}{Delta}}_{\OLMathNumeral{0}}$.
+إن كانت $!A$ ذرية، حصل $\Th{Q}\Proves\lnot !A$
+من \olref{lem:atomic-completeness}.
+وإن كانت $\lnot !A\ident\lnot\lnot !B$،
+فهي تكافئ~$!B$ تكافؤًا يثبته المنطق في~$\Th{Q}$.
+والجملة $!B$ صادقة في~$\Struct{N}$، لأن
+$\lnot !A$ صادقة في~$\Struct{N}$.
+فيعطي فرض الاستقراء، مع إزالة النفي المزدوج ثم إعادته،
+$\Th{Q}\Proves\lnot !A$.
+\end{enumerate}
+\end{proof}
+
+\begin{prob}
+فصّل حجة الحالة الوجودية من
+\olref{lem:delta0-completeness}.
+\end{prob}
+
+\begin{thm}
+\ollabel{thm:sigma1-completeness}
+كل $!A$ تكون !!{sentence} من الصنف $\Sigma_{\OLMathNumeral{1}}$ وتصدق في
+$\Struct{N}$، تحقق $\Th{Q}\Proves !A$.
+\end{thm}
+
+\begin{proof}
+لتكن $\lexists{{\OLId{latin-ordinary}{x}}}!A({\OLId{latin-ordinary}{x}})$ !!{sentence} من الصنف $\Sigma_{\OLMathNumeral{1}}$
+صادقة في~$\Struct{N}$. فيوجد عدد طبيعي~${\OLId{latin-ordinary}{n}}$ وإسناد متغيرات~${\OLId{latin-ordinary}{s}}$
+مع ${\OLId{latin-ordinary}{s}}({\OLId{latin-ordinary}{x}})={\OLId{latin-ordinary}{n}}$ و$\Sat{{\OLId{latin-looped}{N}}}{!A({\OLId{latin-ordinary}{x}})}[{\OLId{latin-ordinary}{s}}]$.
+وبالخواص المعروفة لعلاقة التحقيق نحصل على
+$\Sat{{\OLId{latin-looped}{N}}}{!A(\num {\OLId{latin-ordinary}{n}})}$.
+لكن $!A(\num {\OLId{latin-ordinary}{n}})$ !!{formula} مغلقة من الصنف ${\OLId{greek-variable}{Delta}}_{\OLMathNumeral{0}}$،
+فتعطي \olref{lem:delta0-completeness}
+$\Th{Q}\Proves !A(\num {\OLId{latin-ordinary}{n}})$.
+وبالتعميم الوجودي نحصل على
+$\Th{Q}\Proves\lexists[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$.
+\end{proof}
+
+\end{document}

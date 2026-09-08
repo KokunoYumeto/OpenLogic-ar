@@ -1,0 +1,49 @@
+% Part: first-order-logic
+% Chapter: natural-deduction
+% Section: soundness-identity
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{ntd}{sid}
+
+\olsection{السلامة مع \usetoken{S}{identity}}
+
+\begin{prop}
+الاستنتاج الطبيعي المزود بقواعد~$\eq$ سليم.
+\end{prop}
+
+\begin{proof}
+أما الإدخال، فكل !!{formula} صورتها~$\eq[{\OLId{latin-ordinary}{t}}][{\OLId{latin-ordinary}{t}}]$ صالحة؛ إذ في كل
+!!{structure}~$\Struct M$ يتحقق~$\Sat{{\OLId{latin-looped}{M}}}{\eq[{\OLId{latin-ordinary}{t}}][{\OLId{latin-ordinary}{t}}]}$.
+ونحن نفرض الحد~${\OLId{latin-ordinary}{t}}$ مغلقًا، خاليًا من المتغيرات؛ فلا يتوقف الحكم هنا
+على إسناد المتغيرات.
+
+وأما الحذف، فنفرض أن خاتمة !!a{derivation} هي~\Elim{\eq}،
+فيكون ال!!{derivation} على هذه الصورة:
+\begin{prooftree}
+  \AxiomC{${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}}$}
+  \RightLabel{$\delta_{\OLMathNumeral{1}}$}
+  \DeduceC{$\eq[{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}][{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}}]$}
+  \AxiomC{${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{2}}$}
+  \RightLabel{$\delta_{\OLMathNumeral{2}}$}
+  \DeduceC{$!A({\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}})$}
+  \RightLabel{\Elim{\eq}}
+  \BinaryInfC{$!A({\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}})$}
+\end{prooftree}
+قد أمكن !!{derive} المقدمتين~$\eq[{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}][{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}}]$ و$!A({\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}})$ من
+الافتراضات ال!!{undischarged}~${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}}$ و${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{2}}$، كلٍّ على ترتيبه.
+فيبقى أن نثبت لزوم~$!A({\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}})$ عن~${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}} \cup {\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{2}}$.
+نأخذ !!a{structure}~$\Struct{M}$ تحقق~$\Sat{{\OLId{latin-looped}{M}}}{{\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}} \cup {\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{2}}}$؛
+فبفرض الاستقراء~$\Sat{{\OLId{latin-looped}{M}}}{!A({\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}})}$ و
+$\Sat{{\OLId{latin-looped}{M}}}{\eq[{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}][{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}}]}$، ومن ثم~$\Value{{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}}{{\OLId{latin-looped}{M}}} = \Value{{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}}}{{\OLId{latin-looped}{M}}}$.
+نأخذ~${\OLId{latin-ordinary}{s}}$ إسنادًا كيفما اتفق، ونضع
+${\OLId{latin-ordinary}{m}} = \Value{{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}}{{\OLId{latin-looped}{M}}} = \Value{{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}}}{{\OLId{latin-looped}{M}}}$. فتفيد
+\olref[fol][syn][ext]{prop:ext-formulas} أن~$\Sat{{\OLId{latin-looped}{M}}}{!A({\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}})}[{\OLId{latin-ordinary}{s}}]$
+يكافئ~$\Sat{{\OLId{latin-looped}{M}}}{!A({\OLId{latin-ordinary}{x}})}[\Subst{{\OLId{latin-ordinary}{s}}}{{\OLId{latin-ordinary}{m}}}{{\OLId{latin-ordinary}{x}}}]$، وهذا بدوره يكافئ
+$\Sat{{\OLId{latin-looped}{M}}}{!A({\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}})}[{\OLId{latin-ordinary}{s}}]$. وحيث ثبت~$\Sat{{\OLId{latin-looped}{M}}}{!A({\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}})}$،
+ثبت~$\Sat{{\OLId{latin-looped}{M}}}{!A({\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}})}$ كما أردنا.
+\end{proof}
+
+\end{document}

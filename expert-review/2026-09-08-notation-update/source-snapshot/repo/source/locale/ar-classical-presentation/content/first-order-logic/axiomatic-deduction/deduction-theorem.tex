@@ -1,0 +1,138 @@
+% Part: first-order-logic
+% Chapter: axiomatic-deduction
+% Section: deduction-theorem
+
+% verification of properties of provability needed for maximally
+% consistent sets in the completeness chapter.
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{axd}{ded}}
+      {\olfileid{pl}{axd}{ded}}
+
+\olsection{مبرهنة الاستنباط}
+
+قد ظهر أن كتابة ال!!{derivation}s في النسق البديهي ذات مؤونة،
+وأن العثور على ال!!{derivation}s قد يعسر. وغالبًا ما يكفينا،
+بدل سرد متتاليات طويلة من ال!!{formula}s، أن نثبت وجود
+ال!!{derivation}s بنتائج يسيرة. وقد تقدّم منها ثلاث:
+فبـ\olref[ptn]{prop:reflexivity} نحكم بـ~${\OLId{greek-variable}{Gamma}}
+\Proves !A$ متى كان~$!A \in
+{\OLId{greek-variable}{Gamma}}$؛ وبـ\olref[ptn]{prop:monotonicity} يلزم من~${\OLId{greek-variable}{Gamma}} \Proves !A$
+أن~${\OLId{greek-variable}{Gamma}} \cup \{!B\} \Proves !A$؛
+وبـ\olref[ptn]{prop:transitivity} يلزم من~${\OLId{greek-variable}{Gamma}} \Proves !A$
+و$!A \Proves !B$ أن~${\OLId{greek-variable}{Gamma}} \Proves !B$.
+ونضم إليها الآن صورةً من إثبات المقدَّم تتعلق بوجود الاشتقاقات
+نفسه:
+
+
+\begin{prop}
+  \ollabel{prop:mp} إذا كان ${\OLId{greek-variable}{Gamma}} \Proves !A$ و${\OLId{greek-variable}{Gamma}} \Proves !A \lif
+  !B$، فإن ${\OLId{greek-variable}{Gamma}} \Proves !B$.
+\end{prop}
+
+\begin{proof}
+  يكفي أولًا أن نلاحظ~$\{!A, !A \lif !B\} \Proves !B$:
+  \begin{derivation}
+    1. & $!A$ & \Hyp\\
+    2. & $!A \lif !B$ & \Hyp\\
+    3. & $!B$ & 1، 2، إثبات المقدَّم
+  \end{derivation}
+  وبحسب \olref[ptn]{prop:transitivity}، نحصل على ${\OLId{greek-variable}{Gamma}} \Proves !B$.
+\end{proof}
+
+وأعظم ما ننتفع به في هذا الباب مبرهنة الاستنباط:
+
+\begin{thm}[مبرهنة الاستنباط]
+\ollabel{thm:deduction-thm}
+\iftag{FOL}{متى كان~${\OLId{greek-variable}{Gamma}} \cup \{!A\} \Proves !B$ باشتقاق لا يعمل
+إلا بالفروض والبديهيات وقاعدة إثبات المقدَّم، كان
+${\OLId{greek-variable}{Gamma}} \Proves !A \lif !B$. وفي الجهة الأخرى، متى كان
+${\OLId{greek-variable}{Gamma}} \Proves !A \lif !B$، كان~${\OLId{greek-variable}{Gamma}} \cup \{!A\} \Proves !B$
+من غير هذا القيد.}{تكون~${\OLId{greek-variable}{Gamma}} \cup \{!A\} \Proves !B$ إذا وفقط
+إذا كان~${\OLId{greek-variable}{Gamma}} \Proves !A \lif !B$.}
+\end{thm}
+
+\begin{proof}
+أما اتجاه «إذا»، فمن~${\OLId{greek-variable}{Gamma}} \Proves !A \lif !B$ يلزم
+${\OLId{greek-variable}{Gamma}} \cup \{!A\} \Proves !A \lif !B$ بمقتضى
+\olref[ptn]{prop:monotonicity}. ولدينا~${\OLId{greek-variable}{Gamma}} \cup \{!A\} \Proves !A$
+بمقتضى \olref[ptn]{prop:reflexivity}. فبـ\olref{prop:mp} نحصل على
+${\OLId{greek-variable}{Gamma}} \cup \{!A\} \Proves !B$.
+
+
+وأما اتجاه «فقط إذا»، فنستقرئ على طول !!{derivation} الصيغة
+$!B$ من~${\OLId{greek-variable}{Gamma}} \cup \{!A\}$.
+
+في الأساس نأخذ !!{derivation} طوله~${\OLMathNumeral{1}}$.
+فال!!^a{derivation} لـ~$!B$ من~${\OLId{greek-variable}{Gamma}} \cup \{!A\}$ إذا كان
+طوله~${\OLMathNumeral{1}}$ لم يشتمل إلا على~$!B$. ولا تصح هذه الخطوة إلا إذا
+كان~$!B \in {\OLId{greek-variable}{Gamma}} \cup \{!A\}$ أو كانت بديهية.
+فإن كان~$!B \in {\OLId{greek-variable}{Gamma}}$ أو كانت بديهية، حصل~${\OLId{greek-variable}{Gamma}} \Proves !B$.
+وبالبديهية~${\OLId{greek-variable}{Gamma}}
+\Proves !B \lif (!A \lif !B)$، وهي \olref[prp]{ax:lif1}،
+تعطينا \olref{prop:mp} النتيجة~${\OLId{greek-variable}{Gamma}} \Proves !A \lif !B$.
+وإن كان~$!B \in \{ !A\}$، صح~${\OLId{greek-variable}{Gamma}} \Proves !A \lif !B$؛
+إذ ال!!{formula}~$!A \lif !B$ هي~$!A \lif !A$،
+وقد أمكن !!{derive} هذه في \olref[pro]{ex:identity}.
+
+وفي الخطوة نأخذ !!a{derivation} لـ~$!B$ من
+${\OLId{greek-variable}{Gamma}} \cup \{!A\}$ خاتمته~$!B$ مبرّرة بإثبات المقدَّم.
+فإن لم تكن كذلك، كان~$!B \in {\OLId{greek-variable}{Gamma}}$ أو~$!B
+\ident !A$ أو كانت~$!B$ بديهية؛ فيجري عليها تعليل الأساس.
+أما إذا كانت بإثبات المقدَّم، فقد سبقت في ال!!{derivation}
+$!C \lif !B$ و$!C$ لبعض ال!!{formula}~$!C$؛ أي
+${\OLId{greek-variable}{Gamma}} \cup \{!A\} \Proves !C \lif !B$ و${\OLId{greek-variable}{Gamma}} \cup \{!A\}
+\Proves !C$. وال!!{derivation}s المنتهية بهاتين الخطوتين أقصر،
+فيشملها فرض الاستقراء، ويحصل منه:
+\begin{align*}
+  & {\OLId{greek-variable}{Gamma}} \Proves !A \lif (!C \lif !B); \\
+  & {\OLId{greek-variable}{Gamma}} \Proves !A \lif !C.
+\end{align*}
+ومن جهة أخرى، لدينا
+\[
+{\OLId{greek-variable}{Gamma}} \Proves (!A \lif (!C \lif !B)) \lif
+((!A\lif !C)  \lif (!A \lif !B)),
+\]
+بمقتضى \olref[prp]{ax:lif2}. نطبق \olref{prop:mp} مرتين،
+فنصل إلى~${\OLId{greek-variable}{Gamma}} \Proves !A \lif !B$، وهو المطلوب.
+\end{proof}
+
+ومن هذا يظهر وجه اختيار \olref[prp]{ax:lif1}
+و\olref[prp]{ax:lif2}؛ فقد صيغتا بحيث تصح مبرهنة الاستنباط.
+
+ونختم بنتائج نافعة في !!{derivability}، ونجعل إثباتها تمارين.
+
+\begin{prop}
+  \ollabel{prop:derivfacts}
+\begin{enumerate}
+\item $\Proves (!A \lif !B) \lif ((!B \lif !C)
+  \lif (!A \lif !C))$؛ \ollabel{derivfacts:a}
+\item إذا كان ${\OLId{greek-variable}{Gamma}} \cup \{ \lnot !A\}
+  \Proves \lnot !B$، فإن ${\OLId{greek-variable}{Gamma}} \cup \{ !B\} \Proves
+  !A$ (المقابلة)؛ \ollabel{derivfacts:b}
+\item  $\{ !A, \lnot!A\} \Proves
+    !B$ (من الباطل يلزم أي شيء، الانفجار)؛ \ollabel{derivfacts:c}
+\item  $\{ \lnot\lnot!A\} \Proves
+  !A$ (حذف النفي المزدوج)؛\ollabel{derivfacts:d}
+\item إذا كان ${\OLId{greek-variable}{Gamma}} \Proves \lnot\lnot!A$، فإن ${\OLId{greek-variable}{Gamma}} \Proves
+  !A$؛\ollabel{derivfacts:e}
+\end{enumerate}
+\end{prop}
+
+\tagprob{FOL}
+\begin{prob}
+  أثبت \olref[fol][axd][ded]{prop:derivfacts}.
+\end{prob}
+\tagendprob
+
+\tagprob{notFOL}
+\begin{prob}
+  أثبت \olref[pl][axd][ded]{prop:derivfacts}.
+\end{prob}
+\tagendprob
+
+\end{document}

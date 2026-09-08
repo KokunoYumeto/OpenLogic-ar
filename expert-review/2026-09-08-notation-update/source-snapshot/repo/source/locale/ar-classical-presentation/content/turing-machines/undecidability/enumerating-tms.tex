@@ -1,0 +1,138 @@
+% Part: turing-machines
+% Chapter: undecidability
+% Section: enumerating-tms
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{tur}{und}{enu}
+\olsection{تعداد آلات تورنغ}
+
+\begin{explain}
+نبين أن مجموعة آلات تورنغ !!{enumerable}، على معنى ستأتي دقته.
+ووجه ذلك أن لكل آلة وصفًا منتهيًا: فحالاتها منتهية، وكذلك أبجدية
+شريطها، ودالة انتقالها دالة جزئية من ${\OLId{latin-looped}{Q}} \times \Sigma$ إلى
+${\OLId{latin-looped}{Q}} \times \Sigma \times \{\TMleft,\TMright,\TMstay\}$. فيكفي في تعيينها
+سرد قيمها عند أزواج الوسيطات التي تُعرّف عليها، وهي منتهية العدد.
+
+إلا أن في هذا القول تفصيلًا ينبغي التنبه له. فإن تعريف آلة تورنغ
+لم يقيّد ال!!{element}s التي تُتخذ حالات أو رموزًا للشريط؛ فيجوز،
+بحسب ظاهر التعريف، أن نجعل أي عدد حقيقي بعينه حالة لآلة ما. وإنما
+العبرة ب\emph{سلوك} الآلة، لا بذوات الأشياء المسماة حالات ورموزًا.
+ولننظر في الآلتين المرسومتين في \olref{fig:variants}.
+\begin{figure}
+\begin{center}
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+                    semithick]
+  \tikzstyle{every state}=[fill=none,draw=black,text=black]
+
+  \node[initial,state]         (A)              {${\OLId{latin-ordinary}{q}}_{\OLMathNumeral{0}}$};
+  \node[state]         (B) [right of=A] {${\OLId{latin-ordinary}{q}}_{\OLMathNumeral{1}}$};
+
+  \path (A) edge [bend left] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (B)
+        (B) edge [loop above] node {\TMtrans{\TMblank}{\TMblank}{\TMright}} (B)
+            edge [bend left] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (A);
+\end{tikzpicture}\\
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+  semithick]
+\tikzstyle{every state}=[fill=none,draw=black,text=black]
+
+\node[initial,state]         (A)              {${\OLId{latin-ordinary}{s}}$};
+\node[state]         (B) [right of=A] {${\OLId{latin-ordinary}{h}}$};
+
+\path (A) edge [bend left] node {\TMtrans{A}{A}{\TMright}} (B)
+(B) edge [loop above] node {\TMtrans{\TMblank}{\TMblank}{\TMright}} (B)
+edge [bend left] node {\TMtrans{A}{A}{\TMright}} (A);
+\end{tikzpicture}
+\end{center}
+\caption{اختلاف التسميات في آلة \emph{الزوجية}}
+\ollabel{fig:variants}
+\end{figure}
+فالمخطط الأول لآلة ${\OLId{latin-looped}{M}}$ أبجدية شريطها
+$\Sigma=\{\TMendtape,\TMblank,\TMstroke\}$ وحالاتها
+$\{{\OLId{latin-ordinary}{q}}_{\OLMathNumeral{0}},{\OLId{latin-ordinary}{q}}_{\OLMathNumeral{1}}\}$، والثاني لآلة ${\OLId{latin-looped}{M}}'$ أبجديتها
+$\Sigma'=\{\TMendtape,\TMblank,{\OLId{latin-looped}{A}}\}$ وحالتاها $\{{\OLId{latin-ordinary}{s}},{\OLId{latin-ordinary}{h}}\}$. ولا فرق بين
+تعليماتهما سوى هذه التسميات: فالآلة ${\OLId{latin-looped}{M}}$ تتوقف عند متتالية من ${\OLId{latin-ordinary}{n}}$
+علامات~$\TMstroke$ إذا وفقط إذا كان ${\OLId{latin-ordinary}{n}}$ زوجيًا؛ وكذلك تتوقف ${\OLId{latin-looped}{M}}'$
+عند متتالية من ${\OLId{latin-ordinary}{n}}$ رموز~${\OLId{latin-looped}{A}}$ إذا وفقط إذا كان ${\OLId{latin-ordinary}{n}}$ زوجيًا. فليس
+التغيير إلا تسمية $\TMstroke$ باسم~${\OLId{latin-looped}{A}}$، و${\OLId{latin-ordinary}{q}}_{\OLMathNumeral{0}}$ باسم~${\OLId{latin-ordinary}{s}}$، و${\OLId{latin-ordinary}{q}}_{\OLMathNumeral{1}}$
+باسم~${\OLId{latin-ordinary}{h}}$. ويجري هذا الحكم على سائر الآلات: نعد الآلتين متماثلتين
+متى أمكن الانتقال من إحداهما إلى الأخرى بإعادة تسمية الحالات والرموز.
+بل يجوز أن تكون أسماؤها كلها أعدادًا صحيحة موجبة؛ فنضع~${\OLMathNumeral{1}}$
+موضع~$\sigma_{\OLMathNumeral{0}}$، و~${\OLMathNumeral{2}}$ موضع~$\sigma_{\OLMathNumeral{1}}$، وهكذا. وتكون تسمية
+$\TMendtape$ هي~${\OLMathNumeral{1}}$، وتسمية $\TMblank$ هي~${\OLMathNumeral{2}}$، وعلى هذا القياس.
+فتصير آلة \emph{الزوجية} إلى الصورة التي في
+\olref{fig:standard-even}.
+\begin{figure}
+\[\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+  semithick]
+\tikzstyle{every state}=[fill=none,draw=black,text=black]
+
+\node[initial,state]         (A)              {${\OLMathNumeral{1}}$};
+\node[state]         (B) [right of=A] {${\OLMathNumeral{2}}$};
+
+\path (A) edge [bend left] node {\TMtrans{3}{3}{\TMright}} (B)
+(B) edge [loop above] node {\TMtrans{2}{2}{\TMright}} (B)
+edge [bend left] node {\TMtrans{3}{3}{\TMright}} (A);
+\end{tikzpicture}
+\]
+\caption{آلة \emph{زوجية} قياسية}
+\ollabel{fig:standard-even}
+\end{figure}
+ولنسمّ آلة تورنغ \emph{قياسية} إذا كانت حالاتُها ورموزُها أعدادًا
+صحيحة موجبة، ولنقصر النظر فيما يأتي على هذه الآلات.
+\footnote{«الآلة القياسية» اصطلاح نستعمله هنا، وليس اصطلاحًا متعارفًا عليه.}
+
+كان المطلوب أن مجموعة آلات تورنغ !!{enumerable}؛ وقد تبين أن
+حسبنا لهذا الغرض إثبات أن مجموعة الآلات القياسية !!{enumerable}.
+ولتكن ${\OLId{latin-looped}{M}}=\tuple{{\OLId{latin-looped}{Q}},\Sigma,{\OLId{latin-ordinary}{q}}_{\OLMathNumeral{0}},\delta}$ آلة قياسية. وصفها بسلسلة
+منتهية من الأعداد الصحيحة الموجبة يكون على الوجه الآتي: نسرد عدد
+الحالات، فالحالات، ثم عدد الرموز، فالرموز، ثم الحالة الابتدائية.
+وكل ذلك أعداد صحيحة موجبة، لأن ${\OLId{latin-looped}{M}}$ قياسية. ويبقى تعيين~$\delta$.
+وأزواج الوسيطات $\tuple{{\OLId{latin-ordinary}{q}},\sigma}$ منتهية العدد، لانتهاء ${\OLId{latin-looped}{Q}}$
+و~$\Sigma$؛ فلا تحمل~$\delta$ إلا قائمة منتهية من الخماسيات
+$\tuple{{\OLId{latin-ordinary}{q}},\sigma,{\OLId{latin-ordinary}{q}}',\sigma',{\OLId{latin-ordinary}{d}}}$ التي يتحقق فيها
+$\delta({\OLId{latin-ordinary}{q}},\sigma)=\tuple{{\OLId{latin-ordinary}{q}}',\sigma',{\OLId{latin-looped}{D}}}$، ويكون ${\OLId{latin-ordinary}{d}}$ رمزًا عدديًا
+للاتجاه~${\OLId{latin-looped}{D}}$: نجعل ${\OLMathNumeral{1}}$ رمز~$\TMleft$، و${\OLMathNumeral{2}}$ رمز~$\TMright$،
+و${\OLMathNumeral{3}}$ رمز~$\TMstay$.
+
+فقد صار وصف كل آلة قياسية قائمة منتهية من الأعداد الصحيحة الموجبة،
+أي متتالية ${\OLId{latin-ordinary}{s}}_{\OLId{latin-looped}{M}}\in(\PosInt)^*$. ووصف آلة \emph{الزوجية} القياسية،
+مثلًا، هو
+\[
+{\OLMathNumeral{2}}, \underbrace{{\OLMathNumeral{1}}, {\OLMathNumeral{2}}}_{\OLId{latin-looped}{Q}}, {\OLMathNumeral{3}}, \overbrace{{\OLMathNumeral{1}}, {\OLMathNumeral{2}}, {\OLMathNumeral{3}}}^\Sigma, {\OLMathNumeral{1}}, \underbrace{{\OLMathNumeral{1}}, {\OLMathNumeral{3}}, {\OLMathNumeral{2}}, {\OLMathNumeral{3}}, {\OLMathNumeral{2}}}_{\delta({\OLMathNumeral{1}},{\OLMathNumeral{3}}) = \tuple{{\OLMathNumeral{2}},{\OLMathNumeral{3}},{\OLId{latin-looped}{R}}}},
+\overbrace{{\OLMathNumeral{2}}, {\OLMathNumeral{2}}, {\OLMathNumeral{2}}, {\OLMathNumeral{2}}, {\OLMathNumeral{2}}}^{\delta({\OLMathNumeral{2}},{\OLMathNumeral{2}}) = \tuple{{\OLMathNumeral{2}},{\OLMathNumeral{2}},{\OLId{latin-looped}{R}}}},
+\underbrace{{\OLMathNumeral{2}}, {\OLMathNumeral{3}}, {\OLMathNumeral{1}}, {\OLMathNumeral{3}}, {\OLMathNumeral{2}}}_{\delta({\OLMathNumeral{2}},{\OLMathNumeral{3}}) = \tuple{{\OLMathNumeral{1}},{\OLMathNumeral{3}},{\OLId{latin-looped}{R}}}}.
+\]
+\end{explain}
+
+\begin{thm}
+ليست كل دالة من $\Nat$ إلى~$\Nat$ قابلة للحساب بآلة تورنغ.
+\end{thm}
+
+\begin{proof}
+مجموعة المتتاليات المنتهية من الأعداد الصحيحة الموجبة
+$(\PosInt)^*$ !!{enumerable}
+(\cref{sfr:siz:zigzag:prob:posint-star}). وأوصاف الآلات القياسية
+مجموعة جزئية من~$(\PosInt)^*$، فتقبل التعداد أيضًا. وكل دالة من
+$\Nat$ إلى~$\Nat$ قابلة للحساب بآلة تورنغ تحسبها آلة، بل آلات كثيرة.
+فإذا سمينا حالات إحدى هذه الآلات ورموزها بأعداد صحيحة موجبة، وجعلنا
+خاصةً $\TMendtape$ هو~${\OLMathNumeral{1}}$، و$\TMblank$ هو~${\OLMathNumeral{2}}$،
+و$\TMstroke$ هو~${\OLMathNumeral{3}}$، حصلنا على آلة قياسية تحسب الدالة نفسها.
+إذن كل دالة قابلة للحساب تحسبها آلة قياسية، ومن ثم تقبل مجموعة
+الدوال القابلة للحساب من $\Nat$ إلى~$\Nat$ التعداد.
+
+لكن مجموعة الدوال كلها من $\Nat$ إلى~$\Nat$ ليست !!{enumerable}
+(\cref{sfr:siz:red:prob:nat-nat}). فلو كانت كل دالة تحسبها آلة
+تورنغ، لكان سرد أوصاف الآلات التي تحسبها تعدادًا للدوال جميعًا، وهو
+خلاف ما ثبت. فلا بد من دوال لا تقبل الحساب بآلة تورنغ.
+\end{proof}
+
+\begin{prob}
+  التمس وصفًا لآلات تورنغ يستغني عن سرد الحالات ورموز الأبجدية واحدًا
+  واحدًا. ولك أن تختار تعريفًا آخر للآلة «القياسية»؛ على أن تبين
+  كيف تستطيع آلة قياسية، بهذا المعنى الذي اخترته، محاكاة كل آلة تورنغ.
+\end{prob}
+
+\end{document}

@@ -1,0 +1,90 @@
+% Part: first-order-logic
+% Chapter: tableaux
+% Section: provability-quantifiers
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{tab}{qpr}
+\olsection{\usetoken{S}{derivability} والمكمّمات}
+
+\begin{explain}
+  ومن مقدمات برهان الاكتمال أن تثبت بقواعد الجداول الدلالية هذه
+  النتائج في علاقة~$\Proves$؛ فلذلك نبيّنها هنا.
+\end{explain}
+
+\begin{thm}
+\ollabel{thm:strong-generalization} إذا كان ${\OLId{latin-ordinary}{c}}$ ثابتًا لا يظهر في
+${\OLId{greek-variable}{Gamma}}$ ولا في~$!A({\OLId{latin-ordinary}{x}})$، وكان ${\OLId{greek-variable}{Gamma}} \Proves !A({\OLId{latin-ordinary}{c}})$، فإن ${\OLId{greek-variable}{Gamma}}
+\Proves \lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$.
+\end{thm}
+
+\begin{proof}
+من~${\OLId{greek-variable}{Gamma}} \Proves !A({\OLId{latin-ordinary}{c}})$ نأخذ~$!B_{\OLMathNumeral{1}}$، \dots، $!B_{\OLId{latin-ordinary}{n}}
+\in {\OLId{greek-variable}{Gamma}}$ ومعها !!{tableau} مغلق للمجموعة
+\begin{align*}
+\{ \sFmla{\False}{!A({\OLId{latin-ordinary}{c}})}, &
+\sFmla{\True}{!B_{\OLMathNumeral{1}}}, \dots, \sFmla{\True}{!B_{\OLId{latin-ordinary}{n}}} \}.
+\intertext{وعلينا أن نثبت أن هناك أيضًا !!{tableau} مغلقًا لــ}
+\{ \sFmla{\False}{\lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]}, &
+\sFmla{\True}{!B_{\OLMathNumeral{1}}}, \dots, \sFmla{\True}{!B_{\OLId{latin-ordinary}{n}}} \}.
+\end{align*}
+نأخذ ال!!{tableau} المغلق، ونجعل افتراضه الأول
+$\sFmla{\False}{\lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]}$، ثم نلحق
+$\sFmla{\False}{!A({\OLId{latin-ordinary}{c}})}$ بالافتراضات، كما في الرسم:
+\begin{center}
+\begin{tableau}{not line numbering}
+  [\sFmla{\False}{\formula{A}(c)}
+    [\sFmla{\True}{\formula{B}_1}
+      [\vdots
+      [\sFmla{\True}{\formula{B}_n}, 
+        [][][]]]]]
+\end{tableau}\qquad
+\begin{tableau}{not line numbering}
+  [\sFmla{\False}{\lforall[x][\formula{A}(x)]}
+    [\sFmla{\True}{\formula{B}_1}
+      [\vdots
+        [\sFmla{\True}{\formula{B}_n},
+          [\sFmla{\False}{\formula{A}(c)}
+        [][][]]]]]]
+\end{tableau}
+\end{center}
+ولا يزول الإغلاق بهذا التغيير؛ فإن ال!!{sentence}s التي كانت
+افتراضات ما زالت جميعًا حاضرة في أعلى ال!!{tableau}.
+وأما السطر المضاف فمأخوذ بوجه صحيح من~$\TRule{\False}{\lforall}$:
+إذ ال!!{constant}~${\OLId{latin-ordinary}{c}}$ لا يرد في~$!B_{\OLMathNumeral{1}}$، \dots، $!B_{\OLId{latin-ordinary}{n}}$
+ولا في~$\lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$، فلا يرد فوق السطر المضاف في
+ال!!{tableau} الجديد.
+\end{proof}
+
+\begin{prop}
+\ollabel{prop:provability-quantifiers}
+\begin{tagenumerate}{prvEx,prvAll}
+\tagitem{prvEx}{$!A({\OLId{latin-ordinary}{t}}) \Proves \lexists[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$.}{}
+\tagitem{prvAll}{$\lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})] \Proves !A({\OLId{latin-ordinary}{t}})$.}{}
+\end{tagenumerate}
+\end{prop}
+
+\begin{proof}
+\begin{tagenumerate}{prvEx,prvAll}
+\tagitem{prvEx}{نأخذ !!{tableau} للمجموعة
+  $\sFmla{\False}{\lexists[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]}, \sFmla{\True}{!A({\OLId{latin-ordinary}{t}})}$،
+  ويكفي لإغلاقه إجراء قاعدة كذب الوجود مرة واحدة:
+  \begin{oltableau}
+    [\sFmla{\False}{\lexists[x][\formula{A}(x)]}, just = \TAss
+      [\sFmla{\True}{\formula{A}(t)}, just = \TAss
+        [\sFmla{\False}{\formula{A}(t)}, just = {\TRule{\False}{\lexists}[1]}, close]]]
+    \end{oltableau}}{}
+\tagitem{prvAll}{ونأخذ !!{tableau} للمجموعة
+  $\sFmla{\False}{\formula{A}({\OLId{latin-ordinary}{t}})}, \sFmla{\True}{\lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]}$،
+  ويغلق بإجراء قاعدة صدق الكل مرة واحدة:
+  \begin{oltableau}
+    [\sFmla{\False}{\formula{A}(t)}, just = \TAss
+      [\sFmla{\True}{\lforall[x][\formula{A}(x)]}, just = \TAss
+        [\sFmla{\True}{\formula{A}(t)}, just = {\TRule{\True}{\lforall}[2]}, close]]]
+    \end{oltableau}}{}
+\end{tagenumerate}
+\end{proof}
+
+\end{document}

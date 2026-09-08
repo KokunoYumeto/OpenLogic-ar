@@ -1,0 +1,102 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{spine}{Valphabasic}
+\olsection{الخصائص الأساسية للمراحل}
+
+لنبين منزلة تعريف مجموعات~${\OLId{latin-looped}{V}}_{\OLId{greek-variable}{alpha}}$ في أسس النظرية، نثبت جملة
+من خواصها الأولية. ونقدم لها هذا التعريف.
+\footnote{لا اصطلاح معياري لهذه الخاصية؛ ولفظ «potent» الذي نقلناه
+هنا بـ«مقتدرة» هو المستعمل عند~\citet{ButtonLT1}.}
+\begin{defn}
+تسمى المجموعة~${\OLId{latin-looped}{A}}$ \emph{مقتدرة} إذا وفقط إذا كان
+$\forall {\OLId{latin-ordinary}{x}}((\exists {\OLId{latin-ordinary}{y}} \in {\OLId{latin-looped}{A}}){\OLId{latin-ordinary}{x}} \subseteq {\OLId{latin-ordinary}{y}} \lif {\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}})$.
+\end{defn}
+\begin{lem}\ollabel{Valphabasicprops}
+لكل عدد ترتيبي~${\OLId{greek-variable}{alpha}}$:
+\begin{enumerate}
+\item\ollabel{Valphatrans} المجموعة~${\OLId{latin-looped}{V}}_{\OLId{greek-variable}{alpha}}$ متعدية.
+\item\ollabel{Valphapotent} المجموعة~${\OLId{latin-looped}{V}}_{\OLId{greek-variable}{alpha}}$ مقتدرة.
+\item\ollabel{Valphacum} إذا كان~$\gamma \in {\OLId{greek-variable}{alpha}}$، لزم
+${\OLId{latin-looped}{V}}_\gamma \in {\OLId{latin-looped}{V}}_{\OLId{greek-variable}{alpha}}$، ولزم أيضًا~${\OLId{latin-looped}{V}}_\gamma \subseteq {\OLId{latin-looped}{V}}_{\OLId{greek-variable}{alpha}}$
+بمقتضى~\olref{Valphatrans}.
+\end{enumerate}
+\end{lem}
+
+\begin{proof}
+نثبت هذه الخواص معًا بالاستقراء المتناهي التجاوز. فنفرض أن
+\olref{Valphatrans}--\olref{Valphacum} قد ثبتت لكل عدد ترتيبي
+$\beta < {\OLId{greek-variable}{alpha}}$.
+
+أما حالة~${\OLId{greek-variable}{alpha}} = \emptyset$ فظاهرة.
+
+لنفرض~${\OLId{greek-variable}{alpha}} = \ordsucc{\beta}$. نبدأ بـ\olref{Valphacum}:
+إن كان~$\gamma \in {\OLId{greek-variable}{alpha}}$، فإما~$\gamma \in \beta$، وحينئذ
+${\OLId{latin-looped}{V}}_\gamma \subseteq {\OLId{latin-looped}{V}}_\beta$ بفرض الاستقراء؛ وإما~$\gamma = \beta$،
+وحينئذ~${\OLId{latin-looped}{V}}_\gamma \subseteq {\OLId{latin-looped}{V}}_\beta$ بانعكاس الاحتواء. وفي الحالين
+${\OLId{latin-looped}{V}}_\gamma \in \Pow{{\OLId{latin-looped}{V}}_\beta} = {\OLId{latin-looped}{V}}_{\OLId{greek-variable}{alpha}}$. ولإثبات~\olref{Valphapotent}
+نفرض~${\OLId{latin-looped}{A}} \subseteq {\OLId{latin-looped}{B}} \in {\OLId{latin-looped}{V}}_{\OLId{greek-variable}{alpha}}$، أي~${\OLId{latin-looped}{A}} \subseteq {\OLId{latin-looped}{B}} \subseteq {\OLId{latin-looped}{V}}_\beta$؛
+فيلزم~${\OLId{latin-looped}{A}} \subseteq {\OLId{latin-looped}{V}}_\beta$، ثم~${\OLId{latin-looped}{A}} \in {\OLId{latin-looped}{V}}_{\OLId{greek-variable}{alpha}}$. وأما
+\olref{Valphatrans}، فإذا كان~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}} \in {\OLId{latin-looped}{V}}_{\OLId{greek-variable}{alpha}}$، كان
+${\OLId{latin-looped}{A}} \subseteq {\OLId{latin-looped}{V}}_\beta$، ومنه~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{V}}_\beta$، ثم~${\OLId{latin-ordinary}{x}} \subseteq {\OLId{latin-looped}{V}}_\beta$
+لتعدي~${\OLId{latin-looped}{V}}_\beta$ بفرض الاستقراء؛ فيلزم~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{V}}_{\OLId{greek-variable}{alpha}}$.
+
+ولنفرض الآن أن~${\OLId{greek-variable}{alpha}}$ حدي. لإثبات~\olref{Valphacum}، إن كان
+$\gamma \in {\OLId{greek-variable}{alpha}}$ كان~$\gamma \in \ordsucc{\gamma} \in {\OLId{greek-variable}{alpha}}$؛
+ومن فرض الاستقراء~${\OLId{latin-looped}{V}}_\gamma \in {\OLId{latin-looped}{V}}_{\ordsucc{\gamma}}$، فيلزم
+${\OLId{latin-looped}{V}}_\gamma \in \bigcup_{\beta \in {\OLId{greek-variable}{alpha}}} {\OLId{latin-looped}{V}}_\beta = {\OLId{latin-looped}{V}}_{\OLId{greek-variable}{alpha}}$.
+وأما~\olref{Valphatrans} و\olref{Valphapotent}، فحسبنا أن اتحاد
+المجموعات المتعدية متعد، واتحاد المجموعات المقتدرة مقتدر.
+\end{proof}
+
+\begin{lem}\ollabel{Valphanotref}
+إذا كان~${\OLId{greek-variable}{alpha}}$ عددًا ترتيبيًا، فإن~${\OLId{latin-looped}{V}}_{\OLId{greek-variable}{alpha}} \notin {\OLId{latin-looped}{V}}_{\OLId{greek-variable}{alpha}}$.
+\end{lem}
+
+\begin{proof}
+نستعمل الاستقراء المتناهي التجاوز. وأولًا~${\OLId{latin-looped}{V}}_\emptyset \notin {\OLId{latin-looped}{V}}_\emptyset$
+بلا ريب.
+
+لو فرضنا~${\OLId{latin-looped}{V}}_{\ordsucc{{\OLId{greek-variable}{alpha}}}} \in {\OLId{latin-looped}{V}}_{\ordsucc{{\OLId{greek-variable}{alpha}}}} = \Pow{{\OLId{latin-looped}{V}}_{\OLId{greek-variable}{alpha}}}$،
+لنتج~${\OLId{latin-looped}{V}}_{\ordsucc{{\OLId{greek-variable}{alpha}}}} \subseteq {\OLId{latin-looped}{V}}_{\OLId{greek-variable}{alpha}}$. ولما كان
+${\OLId{latin-looped}{V}}_{\OLId{greek-variable}{alpha}} \in {\OLId{latin-looped}{V}}_{\ordsucc{{\OLId{greek-variable}{alpha}}}}$ بمقتضى~\olref{Valphabasicprops}،
+للزم~${\OLId{latin-looped}{V}}_{\OLId{greek-variable}{alpha}} \in {\OLId{latin-looped}{V}}_{\OLId{greek-variable}{alpha}}$. فبالمقابل بالنقيض، إذا كان
+${\OLId{latin-looped}{V}}_{\OLId{greek-variable}{alpha}} \notin {\OLId{latin-looped}{V}}_{\OLId{greek-variable}{alpha}}$، كان~${\OLId{latin-looped}{V}}_{\ordsucc{{\OLId{greek-variable}{alpha}}}} \notin {\OLId{latin-looped}{V}}_{\ordsucc{{\OLId{greek-variable}{alpha}}}}$.
+
+وإذا كان~${\OLId{greek-variable}{alpha}}$ حديًا، فلو فرضنا
+${\OLId{latin-looped}{V}}_{\OLId{greek-variable}{alpha}} \in {\OLId{latin-looped}{V}}_{\OLId{greek-variable}{alpha}} = \bigcup_{\beta \in {\OLId{greek-variable}{alpha}}}{\OLId{latin-looped}{V}}_\beta$، لكان
+${\OLId{latin-looped}{V}}_{\OLId{greek-variable}{alpha}} \in {\OLId{latin-looped}{V}}_\beta$ لبعض~$\beta \in {\OLId{greek-variable}{alpha}}$. لكن~${\OLId{latin-looped}{V}}_\beta \in {\OLId{latin-looped}{V}}_{\OLId{greek-variable}{alpha}}$
+أيضًا، فيلزم~${\OLId{latin-looped}{V}}_\beta \in {\OLId{latin-looped}{V}}_\beta$ بتطبيق~\olref{Valphabasicprops}
+مرتين. فبالمقابل بالنقيض، إن كان~${\OLId{latin-looped}{V}}_\beta \notin {\OLId{latin-looped}{V}}_\beta$ لكل
+$\beta \in {\OLId{greek-variable}{alpha}}$، كان~${\OLId{latin-looped}{V}}_{\OLId{greek-variable}{alpha}} \notin {\OLId{latin-looped}{V}}_{\OLId{greek-variable}{alpha}}$.
+\end{proof}
+
+\begin{cor}
+لكل عددين ترتيبيين~${\OLId{greek-variable}{alpha}}, \beta$، يصح~${\OLId{greek-variable}{alpha}} \in \beta$ إذا
+وفقط إذا كان~${\OLId{latin-looped}{V}}_{\OLId{greek-variable}{alpha}} \in {\OLId{latin-looped}{V}}_\beta$.
+\end{cor}
+
+\begin{proof}
+أحد الاتجاهين ثابت بـ\Olref{Valphabasicprops}. وللآخر نفرض
+${\OLId{latin-looped}{V}}_{\OLId{greek-variable}{alpha}} \in {\OLId{latin-looped}{V}}_\beta$؛ فيلزم~${\OLId{greek-variable}{alpha}} \neq \beta$ من~\olref{Valphanotref}.
+وكذلك~$\beta \notin {\OLId{greek-variable}{alpha}}$، إذ لو انتمى لكان~${\OLId{latin-looped}{V}}_\beta \in {\OLId{latin-looped}{V}}_{\OLId{greek-variable}{alpha}}$،
+ثم~${\OLId{latin-looped}{V}}_\beta \in {\OLId{latin-looped}{V}}_\beta$ بتطبيق~\olref{Valphabasicprops} مرتين،
+خلافًا لـ\olref{Valphanotref}. فلا يبقى بالتثليث إلا~${\OLId{greek-variable}{alpha}} \in \beta$.
+\end{proof}
+\noindent
+بهذه النتائج يصح أن نعد~${\OLId{latin-looped}{V}}_{\OLId{greek-variable}{alpha}}$ المرحلة ذات الرتبة~${\OLId{greek-variable}{alpha}}$
+في الهرم، وبيان ذلك فيما يلي.
+
+إن مجموعات~${\OLId{latin-looped}{V}}_{\OLId{greek-variable}{alpha}}$ تتكون بعملية \emph{تكرارية}، والأعداد
+الترتيبية التي نستعملها تضبط هذا التكرار. وإذا سبقت مرحلة أخرى،
+أي كان~${\OLId{latin-looped}{V}}_\beta \in {\OLId{latin-looped}{V}}_{\OLId{greek-variable}{alpha}}$، أي~$\beta \in {\OLId{greek-variable}{alpha}}$، فإن التكوين
+\emph{تراكمي} لأن~${\OLId{latin-looped}{V}}_\beta \subseteq {\OLId{latin-looped}{V}}_{\OLId{greek-variable}{alpha}}$. ثم إننا نكوّن
+\emph{كل} تجمع ممكن للمجموعات المتاحة في أي مرحلة سابقة؛ فكل مرحلة
+خلفية~${\OLId{latin-looped}{V}}_{\ordsucc{{\OLId{greek-variable}{alpha}}}}$ ليست إلا مجموعة قوى سابقتها~${\OLId{latin-looped}{V}}_{\OLId{greek-variable}{alpha}}$.
+
+وحاصل ذلك أننا، باستعمال~$\ZFminus$، قد \emph{قاربنا إتمام} صياغة
+تصور الهرم التراكمي-التكراري للمجموعات. ولا يزال تسويغ الاستبدال
+مطلوبًا بالطبع.
+
+\end{document}

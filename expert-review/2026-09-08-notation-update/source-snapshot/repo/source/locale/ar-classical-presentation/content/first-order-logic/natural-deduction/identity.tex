@@ -1,0 +1,123 @@
+% Part: first-order-logic
+% Chapter: natural-deduction
+% Section: identity
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{ntd}{ide}
+
+\olsection{\usetoken{P}{derivation} مع \usetoken{S}{identity}}
+
+إذا دخلت !!{identity} في !!^{derivation}s، لزم أن نضم إلى القواعد
+المتقدمة القواعد الآتية.
+
+\begin{defish}
+\AxiomC{}
+\RightLabel{\Intro{\eq}}
+\UnaryInfC{$\eq[{\OLId{latin-ordinary}{t}}][{\OLId{latin-ordinary}{t}}]$}
+\DisplayProof
+\hfill
+\begin{tabular}{r}
+\AxiomC{$\eq[{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}][{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}}]$}
+\AxiomC{$!A({\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}})$}
+\RightLabel{\Elim{\eq}}
+\BinaryInfC{$!A({\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}})$}
+\DisplayProof
+\\[3ex]
+\AxiomC{$\eq[{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}][{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}}]$}
+\AxiomC{$!A({\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}})$}
+\RightLabel{\Elim{\eq}}
+\BinaryInfC{$!A({\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}})$}
+\DisplayProof
+\end{tabular}
+\end{defish}
+
+والحدود~${\OLId{latin-ordinary}{t}}$ و${\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}$ و${\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}}$ في هذه القواعد مغلقة. أما
+قاعدة~\Intro{\eq} فتجيز !!{derive} كل عبارة هوية صورتها
+$\eq[{\OLId{latin-ordinary}{t}}][{\OLId{latin-ordinary}{t}}]$ ابتداءً، من غير أن نفتقر إلى افتراض.
+
+\begin{ex}
+إذا كان~${\OLId{latin-ordinary}{s}}$ و${\OLId{latin-ordinary}{t}}$ حدين مغلقين، فإن~$!A({\OLId{latin-ordinary}{s}}), \eq[{\OLId{latin-ordinary}{s}}][{\OLId{latin-ordinary}{t}}] \Proves !A({\OLId{latin-ordinary}{t}})$:
+\begin{prooftree}
+\AxiomC{$\eq[{\OLId{latin-ordinary}{s}}][{\OLId{latin-ordinary}{t}}]$}
+\AxiomC{$!A({\OLId{latin-ordinary}{s}})$}
+\RightLabel{$\Elim{\eq}$}
+\BinaryInfC{$!A({\OLId{latin-ordinary}{t}})$}
+\end{prooftree}
+وهذا هو المعروف بـ``مبدأ استبدال المتطابقات''، ويسمّى أيضًا
+قانون لايبنتس.
+\end{ex}
+
+\begin{prob}
+أثبت أن~$=$ تناظرية ومتعدية معًا، أي أعط !!{derivation}s لـ
+$\lforall[{\OLId{latin-ordinary}{x}}][\lforall[{\OLId{latin-ordinary}{y}}][(\eq[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{y}}] \lif \eq[{\OLId{latin-ordinary}{y}}][{\OLId{latin-ordinary}{x}}])]]$ و
+$\lforall[{\OLId{latin-ordinary}{x}}][\lforall[{\OLId{latin-ordinary}{y}}][\lforall[{\OLId{latin-ordinary}{z}}]((\eq[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{y}}]
+    \land \eq[{\OLId{latin-ordinary}{y}}][{\OLId{latin-ordinary}{z}}]) \lif \eq[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{z}}])]]$.
+\end{prob}
+
+\begin{ex}
+لنبيّن كيف يمكن !!{derive} ال!!{sentence}
+\begin{align*}
+& \lforall[{\OLId{latin-ordinary}{x}}][\lforall[{\OLId{latin-ordinary}{y}}][((!A({\OLId{latin-ordinary}{x}}) \land !A({\OLId{latin-ordinary}{y}})) \lif \eq[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{y}}])]]
+\intertext{من ال!!{sentence}}
+& \lexists[{\OLId{latin-ordinary}{x}}][\lforall[{\OLId{latin-ordinary}{y}}][(!A({\OLId{latin-ordinary}{y}}) \lif \eq[{\OLId{latin-ordinary}{y}}][{\OLId{latin-ordinary}{x}}])]]
+\end{align*}
+نبدأ من المطلوب ونرجع إلى ما يكفي له، فتكون خاتمة ال!!{derivation}:
+\begin{prooftree}
+\AxiomC{$\lexists[{\OLId{latin-ordinary}{x}}][\lforall[{\OLId{latin-ordinary}{y}}][(!A({\OLId{latin-ordinary}{y}}) \lif \eq[{\OLId{latin-ordinary}{y}}][{\OLId{latin-ordinary}{x}}])]]
+\quad \Discharge{!A({\OLId{latin-ordinary}{a}}) \land !A({\OLId{latin-ordinary}{b}})}{{\OLMathNumeral{1}}}$}
+\DeduceC{$\eq[{\OLId{latin-ordinary}{a}}][{\OLId{latin-ordinary}{b}}]$}
+\DischargeRule{\Intro{\lif}}{1}
+\UnaryInfC{$((!A({\OLId{latin-ordinary}{a}}) \land !A({\OLId{latin-ordinary}{b}})) \lif \eq[{\OLId{latin-ordinary}{a}}][{\OLId{latin-ordinary}{b}}])$}
+\RightLabel{\Intro{\lforall}}
+\UnaryInfC{$\lforall[{\OLId{latin-ordinary}{y}}][((!A({\OLId{latin-ordinary}{a}}) \land !A({\OLId{latin-ordinary}{y}})) \lif \eq[{\OLId{latin-ordinary}{a}}][{\OLId{latin-ordinary}{y}}])]$}
+\RightLabel{\Intro{\lforall}}
+\UnaryInfC{$\lforall[{\OLId{latin-ordinary}{x}}][\lforall[{\OLId{latin-ordinary}{y}}][((!A({\OLId{latin-ordinary}{x}}) \land !A({\OLId{latin-ordinary}{y}})) \lif \eq[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{y}}])]]$}
+\end{prooftree}
+وبقي الانتفاع بالافتراض الرئيس. وهو !!{formula} وجودية، فالقاعدة
+المناسبة له~\Elim{\lexists}؛ وبها يمكن !!{derive} النتيجة المتوسطة~$\eq[{\OLId{latin-ordinary}{a}}][{\OLId{latin-ordinary}{b}}]$.
+\begin{prooftree}
+\AxiomC{$\lexists[{\OLId{latin-ordinary}{x}}][\lforall[{\OLId{latin-ordinary}{y}}][(!A({\OLId{latin-ordinary}{y}}) \lif \eq[{\OLId{latin-ordinary}{y}}][{\OLId{latin-ordinary}{x}}])]]$}
+\AxiomC{$\Discharge{\lforall[{\OLId{latin-ordinary}{y}}][(!A({\OLId{latin-ordinary}{y}}) \lif \eq[{\OLId{latin-ordinary}{y}}][{\OLId{latin-ordinary}{c}}]])}{{\OLMathNumeral{2}}}$}
+\noLine
+\UnaryInfC{$\Discharge{!A({\OLId{latin-ordinary}{a}}) \land !A({\OLId{latin-ordinary}{b}})}{{\OLMathNumeral{1}}}$}
+\DeduceC{$\eq[{\OLId{latin-ordinary}{a}}][{\OLId{latin-ordinary}{b}}]$}
+\DischargeRule{\Elim{\lexists}}{2}
+\BinaryInfC{$\eq[{\OLId{latin-ordinary}{a}}][{\OLId{latin-ordinary}{b}}]$}
+\DischargeRule{\Intro{\lif}}{1}
+\UnaryInfC{$((!A({\OLId{latin-ordinary}{a}}) \land !A({\OLId{latin-ordinary}{b}})) \lif \eq[{\OLId{latin-ordinary}{a}}][{\OLId{latin-ordinary}{b}}])$}
+\RightLabel{\Intro{\lforall}}
+\UnaryInfC{$\lforall[{\OLId{latin-ordinary}{y}}][((!A({\OLId{latin-ordinary}{a}}) \land !A({\OLId{latin-ordinary}{y}})) \lif \eq[{\OLId{latin-ordinary}{a}}][{\OLId{latin-ordinary}{y}}])]$}
+\RightLabel{\Intro{\lforall}}
+\UnaryInfC{$\lforall[{\OLId{latin-ordinary}{x}}][\lforall[{\OLId{latin-ordinary}{y}}][((!A({\OLId{latin-ordinary}{x}}) \land !A({\OLId{latin-ordinary}{y}})) \lif \eq[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{y}}])]]$}
+\end{prooftree}
+أما ال!!{derivation} الجزئي في أعلى اليمين، فيتم إذا استخرجنا من
+افتراضاته~$\eq[{\OLId{latin-ordinary}{a}}][{\OLId{latin-ordinary}{c}}]$ و$\eq[{\OLId{latin-ordinary}{b}}][{\OLId{latin-ordinary}{c}}]$. ولكل منهما طريق، فنحتاج إلى
+!!{derivation}s منفصلة. وهذا ال!!{derivation} لـ~$\eq[{\OLId{latin-ordinary}{a}}][{\OLId{latin-ordinary}{c}}]$:
+\begin{prooftree}
+\AxiomC{$\Discharge{\lforall[{\OLId{latin-ordinary}{y}}][(!A({\OLId{latin-ordinary}{y}}) \lif \eq[{\OLId{latin-ordinary}{y}}][{\OLId{latin-ordinary}{c}}]])}{{\OLMathNumeral{2}}}$}
+\RightLabel{\Elim{\lforall}}
+\UnaryInfC{$!A({\OLId{latin-ordinary}{a}}) \lif \eq[{\OLId{latin-ordinary}{a}}][{\OLId{latin-ordinary}{c}}]$}
+\AxiomC{$\Discharge{!A({\OLId{latin-ordinary}{a}}) \land !A({\OLId{latin-ordinary}{b}})}{{\OLMathNumeral{1}}}$}
+\RightLabel{\Elim{\land}}
+\UnaryInfC{$!A({\OLId{latin-ordinary}{a}})$}
+\RightLabel{\Elim{\lif}}
+\BinaryInfC{$\eq[{\OLId{latin-ordinary}{a}}][{\OLId{latin-ordinary}{c}}]$}
+\end{prooftree}
+فإذا حصل~$\eq[{\OLId{latin-ordinary}{a}}][{\OLId{latin-ordinary}{c}}]$ و$\eq[{\OLId{latin-ordinary}{b}}][{\OLId{latin-ordinary}{c}}]$ أمكن !!{derive}~$\eq[{\OLId{latin-ordinary}{a}}][{\OLId{latin-ordinary}{b}}]$
+بقاعدة~\Elim{\eq}، وتم المطلوب.
+\end{ex}
+
+\begin{prob}
+أعط !!{derivation}s لل!!{formula}s الآتية:
+\begin{enumerate}
+\item $\lforall[{\OLId{latin-ordinary}{x}}][\lforall[{\OLId{latin-ordinary}{y}}][((\eq[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{y}}] \land !A({\OLId{latin-ordinary}{x}})) \lif !A({\OLId{latin-ordinary}{y}}))]]$
+\item $\lexists[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})] \land \lforall[{\OLId{latin-ordinary}{y}}][\lforall[{\OLId{latin-ordinary}{z}}][((!A({\OLId{latin-ordinary}{y}}) \land
+    !A({\OLId{latin-ordinary}{z}})) \lif \eq[{\OLId{latin-ordinary}{y}}][{\OLId{latin-ordinary}{z}}])]] \lif \lexists[{\OLId{latin-ordinary}{x}}][(!A({\OLId{latin-ordinary}{x}}) \land
+  \lforall[{\OLId{latin-ordinary}{y}}][(!A({\OLId{latin-ordinary}{y}}) \lif \eq[{\OLId{latin-ordinary}{y}}][{\OLId{latin-ordinary}{x}}])])]$
+\end{enumerate}
+\end{prob}
+
+\end{document}

@@ -1,0 +1,205 @@
+% Part: model-theory
+% Chapter: models-of-arithmetic
+% Section: models-of-q
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{mar}{mdq}
+\section{نماذج $\Th{Q}$}
+
+\begin{explain}
+قد ثبت وجود !!{structure}s غير قياسية تتفق في
+الـ!!{sentence}s الصادقة مع~$\Struct{N}$، فهي نماذج لـ$\Th{TA}$.
+ولأن $\Sat{{\OLId{latin-looped}{N}}}{\Th{Q}}$، فكل نموذج لـ$\Th{TA}$ نموذج
+لـ$\Th{Q}$. لكن $\Th{Q}$ أضعف كثيرًا من~$\Th{TA}$؛ فمن ذلك
+$\Th{Q} \Proves/ \lforall[{\OLId{latin-ordinary}{x}}][\lforall[{\OLId{latin-ordinary}{y}}][\eq[({\OLId{latin-ordinary}{x}} + {\OLId{latin-ordinary}{y}})][({\OLId{latin-ordinary}{y}}+{\OLId{latin-ordinary}{x}})]]]$.
+وكلما ضعفت النظرية اتسع مجال نماذجها وسهل إرضاؤها.
+فلـ$\Th{Q}$ نماذج تكذب فيها
+$\lforall[{\OLId{latin-ordinary}{x}}][\lforall[{\OLId{latin-ordinary}{y}}][\eq[({\OLId{latin-ordinary}{x}} + {\OLId{latin-ordinary}{y}})][({\OLId{latin-ordinary}{y}}+{\OLId{latin-ordinary}{x}})]]]$؛ ولا تكون
+هذه نماذج لـ$\Th{TA}$ ولا لـ$\Th{PA}$. ثم إن نماذج
+$\Th{Q}$ بسيطة نسبيًا، بحيث نستطيع وصف بعضها وصفًا صريحًا.
+\end{explain}
+
+\begin{ex}
+\ollabel{ex:model-K-of-Q}
+تأمل الـ!!{structure}~$\Struct{K}$ ذات المجال
+$\Domain{{\OLId{latin-looped}{K}}}=\Nat \cup \{{\OLId{latin-ordinary}{a}}\}$ والتفسيرات
+\begin{align*}
+  \Assign{\Obj{0}}{{\OLId{latin-looped}{K}}} & = {\OLMathNumeral{0}}\\
+  \Assign{\prime}{{\OLId{latin-looped}{K}}}({\OLId{latin-ordinary}{x}}) & =
+  \begin{cases}
+    {\OLId{latin-ordinary}{x}}+{\OLMathNumeral{1}} & \text{إذا كان ${\OLId{latin-ordinary}{x}}\in \Nat$}\\
+    {\OLId{latin-ordinary}{a}} & \text{إذا كان ${\OLId{latin-ordinary}{x}} = {\OLId{latin-ordinary}{a}}$}
+  \end{cases}\\
+  \Assign{+}{{\OLId{latin-looped}{K}}}({\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}) & =
+  \begin{cases}
+    {\OLId{latin-ordinary}{x}}+{\OLId{latin-ordinary}{y}} & \text{إذا كان ${\OLId{latin-ordinary}{x}}$ و${\OLId{latin-ordinary}{y}} \in\Nat$}\\
+    {\OLId{latin-ordinary}{a}} & \text{فيما عدا ذلك}
+  \end{cases}\\
+  \Assign{\times}{{\OLId{latin-looped}{K}}}({\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}) & =
+  \begin{cases}
+    xy & \text{إذا كان ${\OLId{latin-ordinary}{x}}$ و${\OLId{latin-ordinary}{y}} \in\Nat$}\\
+    {\OLMathNumeral{0}} & \text{إذا كان ${\OLId{latin-ordinary}{x}} = {\OLMathNumeral{0}}$ أو ${\OLId{latin-ordinary}{y}} = {\OLMathNumeral{0}}$}\\
+    {\OLId{latin-ordinary}{a}} & \text{فيما عدا ذلك}\\
+  \end{cases}\\
+  \Assign{<}{{\OLId{latin-looped}{K}}} & =
+  \Setabs{\tuple{{\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}}}}{{\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}} \in \Nat \text{ و } {\OLId{latin-ordinary}{x}}<{\OLId{latin-ordinary}{y}}} \cup
+  \Setabs{\tuple{{\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{a}}}}{{\OLId{latin-ordinary}{x}} \in \Domain{{\OLId{latin-looped}{K}}}}
+\end{align*}
+إثبات $\Sat{{\OLId{latin-looped}{K}}}{\Th{Q}}$ يقتضي التحقق من بديهيات
+$\Th{Q}$ كلها في~$\Struct{K}$. ولنختصر الكتابة، فنجعل
+${\OLId{latin-ordinary}{x}}^\nssucc$ بدل $\Assign{\prime}{{\OLId{latin-looped}{K}}}({\OLId{latin-ordinary}{x}})$، أي «خلف» ${\OLId{latin-ordinary}{x}}$
+في~$\Struct{K}$؛ و${\OLId{latin-ordinary}{x}} \nsplus {\OLId{latin-ordinary}{y}}$ بدل $\Assign{+}{{\OLId{latin-looped}{K}}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})$،
+أي «مجموع» ${\OLId{latin-ordinary}{x}}$ و${\OLId{latin-ordinary}{y}}$ في~$\Struct{K}$؛ و
+${\OLId{latin-ordinary}{x}} \nstimes {\OLId{latin-ordinary}{y}}$ بدل $\Assign{\times}{{\OLId{latin-looped}{K}}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})$، أي «حاصل ضرب»
+${\OLId{latin-ordinary}{x}}$ و${\OLId{latin-ordinary}{y}}$ في~$\Struct{K}$؛ و${\OLId{latin-ordinary}{x}} \nsless {\OLId{latin-ordinary}{y}}$ بدل
+$\tuple{{\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}}} \in \Assign{<}{{\OLId{latin-looped}{K}}}$. وبهذا تظهر العمليات
+في~$\Struct{K}$ أوضح في الجداول الآتية:
+\[
+\begin{array}{c|c}
+  {\OLId{latin-ordinary}{x}} & {\OLId{latin-ordinary}{x}}^\nssucc \\
+  \hline
+  {\OLId{latin-ordinary}{n}} & {\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}} \\
+  {\OLId{latin-ordinary}{a}} & {\OLId{latin-ordinary}{a}}
+\end{array}
+\qquad
+\begin{array}{c|ccc}
+  {\OLId{latin-ordinary}{x}} \nsplus {\OLId{latin-ordinary}{y}} & {\OLMathNumeral{0}} & {\OLId{latin-ordinary}{m}} & {\OLId{latin-ordinary}{a}} \\
+  \hline
+  {\OLMathNumeral{0}} & {\OLMathNumeral{0}} & {\OLId{latin-ordinary}{m}} & {\OLId{latin-ordinary}{a}} \\
+  {\OLId{latin-ordinary}{n}} & {\OLId{latin-ordinary}{n}} & {\OLId{latin-ordinary}{n}}+{\OLId{latin-ordinary}{m}} & {\OLId{latin-ordinary}{a}} \\
+  {\OLId{latin-ordinary}{a}} & {\OLId{latin-ordinary}{a}} & {\OLId{latin-ordinary}{a}} & {\OLId{latin-ordinary}{a}} \\
+\end{array}
+\qquad
+\begin{array}{c|ccc}
+  {\OLId{latin-ordinary}{x}} \nstimes {\OLId{latin-ordinary}{y}} & {\OLMathNumeral{0}} & {\OLId{latin-ordinary}{m}} & {\OLId{latin-ordinary}{a}} \\
+  \hline
+  {\OLMathNumeral{0}} & {\OLMathNumeral{0}} & {\OLMathNumeral{0}} & {\OLMathNumeral{0}} \\
+  {\OLId{latin-ordinary}{n}} & {\OLMathNumeral{0}} & nm & {\OLId{latin-ordinary}{a}} \\
+  {\OLId{latin-ordinary}{a}} & {\OLMathNumeral{0}} & {\OLId{latin-ordinary}{a}} & {\OLId{latin-ordinary}{a}} \\
+\end{array}
+\]
+لدينا ${\OLId{latin-ordinary}{n}} \nsless {\OLId{latin-ordinary}{m}}$ إذا وفقط إذا كان ${\OLId{latin-ordinary}{n}}<{\OLId{latin-ordinary}{m}}$، حيث
+${\OLId{latin-ordinary}{n}},{\OLId{latin-ordinary}{m}} \in \Nat$، ولدينا ${\OLId{latin-ordinary}{x}} \nsless {\OLId{latin-ordinary}{a}}$ لكل~${\OLId{latin-ordinary}{x}} \in \Domain{{\OLId{latin-looped}{K}}}$.
+
+لدينا $\Sat{{\OLId{latin-looped}{K}}}{\lforall[{\OLId{latin-ordinary}{x}}][\lforall[{\OLId{latin-ordinary}{y}}][(\eq[{\OLId{latin-ordinary}{x}}'][{\OLId{latin-ordinary}{y}}'] \lif \eq[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{y}}])]]}$
+لأن $\nssucc$~!!{injective}. ولدينا
+$\Sat{{\OLId{latin-looped}{K}}}{\lforall[{\OLId{latin-ordinary}{x}}][\eq/[\Obj 0][{\OLId{latin-ordinary}{x}}']]}$ لأن ${\OLMathNumeral{0}}$ ليس خلفًا وفق
+$\nssucc$ في~$\Struct{K}$. وكذلك لدينا
+$\Sat{{\OLId{latin-looped}{K}}}{\lforall[{\OLId{latin-ordinary}{x}}][(\eq[{\OLId{latin-ordinary}{x}}][\Obj 0] \lor \lexists[{\OLId{latin-ordinary}{y}}][\eq[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{y}}']])]}$
+لأنه لكل ${\OLId{latin-ordinary}{n}}>{\OLMathNumeral{0}}$ يكون ${\OLId{latin-ordinary}{n}}=({\OLId{latin-ordinary}{n}}-{\OLMathNumeral{1}})^\nssucc$، ويكون ${\OLId{latin-ordinary}{a}}={\OLId{latin-ordinary}{a}}^\nssucc$.
+
+ولدينا $\Sat{{\OLId{latin-looped}{K}}}{\lforall[{\OLId{latin-ordinary}{x}}][\eq[({\OLId{latin-ordinary}{x}} + \Obj 0)][{\OLId{latin-ordinary}{x}}]]}$ لأن
+${\OLId{latin-ordinary}{n}} \nsplus {\OLMathNumeral{0}}={\OLId{latin-ordinary}{n}}+{\OLMathNumeral{0}}={\OLId{latin-ordinary}{n}}$، ولأن ${\OLId{latin-ordinary}{a}}\nsplus {\OLMathNumeral{0}}={\OLId{latin-ordinary}{a}}$ بتعريف~$\nsplus$.
+وأما $\Sat{{\OLId{latin-looped}{K}}}{\lforall[{\OLId{latin-ordinary}{x}}][\lforall[{\OLId{latin-ordinary}{y}}][\eq[({\OLId{latin-ordinary}{x}} + {\OLId{latin-ordinary}{y}}')][({\OLId{latin-ordinary}{x}} + {\OLId{latin-ordinary}{y}})']]]}$
+فتحتاج إلى تفصيل الحالات. متى كان ${\OLId{latin-ordinary}{n}}$ و${\OLId{latin-ordinary}{m}}$ قياسيين، وجدنا:
+\begin{align*}
+({\OLId{latin-ordinary}{n}} \nsplus {\OLId{latin-ordinary}{m}}^\nssucc) & = ({\OLId{latin-ordinary}{n}}+({\OLId{latin-ordinary}{m}}+{\OLMathNumeral{1}})) = ({\OLId{latin-ordinary}{n}}+{\OLId{latin-ordinary}{m}})+{\OLMathNumeral{1}} = ({\OLId{latin-ordinary}{n}} \nsplus {\OLId{latin-ordinary}{m}})^\nssucc
+\intertext{لأن $\nsplus$ و$^\nssucc$ يوافقان $+$ و$\prime$ على الأعداد
+  القياسية. افترض الآن أن ${\OLId{latin-ordinary}{x}} \in \Domain{{\OLId{latin-looped}{K}}}$. عندئذ}
+({\OLId{latin-ordinary}{x}} \nsplus {\OLId{latin-ordinary}{a}}^\nssucc) & = ({\OLId{latin-ordinary}{x}} \nsplus {\OLId{latin-ordinary}{a}}) = {\OLId{latin-ordinary}{a}} = {\OLId{latin-ordinary}{a}}^\nssucc = ({\OLId{latin-ordinary}{x}} \nsplus {\OLId{latin-ordinary}{a}})^\nssucc
+\intertext{وتبقى الحالة التي يكون فيها ${\OLId{latin-ordinary}{y}} \in \Domain{{\OLId{latin-looped}{K}}}$ و${\OLId{latin-ordinary}{x}}={\OLId{latin-ordinary}{a}}$.
+  وهنا أيضًا نميز بين أن يكون ${\OLId{latin-ordinary}{y}}={\OLId{latin-ordinary}{n}}$ قياسيًا أو أن يكون ${\OLId{latin-ordinary}{y}}={\OLId{latin-ordinary}{a}}$:}
+({\OLId{latin-ordinary}{a}} \nsplus {\OLId{latin-ordinary}{n}}^\nssucc) & = ({\OLId{latin-ordinary}{a}} \nsplus ({\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}})) = {\OLId{latin-ordinary}{a}} = {\OLId{latin-ordinary}{a}}^\nssucc = ({\OLId{latin-ordinary}{a}} \nsplus {\OLId{latin-ordinary}{n}})^\nssucc\\
+({\OLId{latin-ordinary}{a}} \nsplus {\OLId{latin-ordinary}{a}}^\nssucc) & = ({\OLId{latin-ordinary}{a}} \nsplus {\OLId{latin-ordinary}{a}}) = {\OLId{latin-ordinary}{a}} = {\OLId{latin-ordinary}{a}}^\nssucc = ({\OLId{latin-ordinary}{a}} \nsplus {\OLId{latin-ordinary}{a}})^\nssucc
+\end{align*}
+وقد استوفينا هنا من التفصيل أكثر مما يحتاج إليه المقام.
+فمن ${\OLId{latin-ordinary}{a}} \nsplus {\OLId{latin-ordinary}{z}}={\OLId{latin-ordinary}{a}}$، مهما كان ${\OLId{latin-ordinary}{z}}$، نعلم فورًا أن
+${\OLId{latin-ordinary}{a}} \nsplus {\OLId{latin-ordinary}{a}}^\nssucc={\OLId{latin-ordinary}{a}}$. وتفحص بقية البديهيات بالطريقة نفسها.
+
+إذن $\Struct{K}$ نموذج لـ$\Th{Q}$، و«جمعه»~$\nsplus$
+تبادلي أيضًا. غير أن من الجمل ما يصدق في~$\Struct{N}$
+ويكذب في~$\Struct{K}$، وبالعكس. ففيه، مثلًا، ${\OLId{latin-ordinary}{a}} \nsless {\OLId{latin-ordinary}{a}}$؛
+ومن ثم $\Sat{{\OLId{latin-looped}{K}}}{\lexists[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{x}} < {\OLId{latin-ordinary}{x}}]}$ و
+$\Sat/{{\OLId{latin-looped}{K}}}{\lforall[{\OLId{latin-ordinary}{x}}][\lnot {\OLId{latin-ordinary}{x}}<{\OLId{latin-ordinary}{x}}]}$. فثبت
+$\Th{Q} \Proves/ \lforall[{\OLId{latin-ordinary}{x}}][\lnot {\OLId{latin-ordinary}{x}} < {\OLId{latin-ordinary}{x}}]$.
+\end{ex}
+
+\begin{prob}
+أثبت أن $\Struct{K}$ من \olref[mod][mar][mdq]{ex:model-K-of-Q} تحقق
+بديهيات $\Th{Q}$ الباقية:
+\begin{align*}
+  & \lforall[{\OLId{latin-ordinary}{x}}][\eq[({\OLId{latin-ordinary}{x}} \times \Obj 0)][\Obj 0]] \tag{$!Q_{\OLMathNumeral{6}}$}\\
+  & \lforall[{\OLId{latin-ordinary}{x}}][\lforall[{\OLId{latin-ordinary}{y}}][\eq[({\OLId{latin-ordinary}{x}} \times {\OLId{latin-ordinary}{y}}')][(({\OLId{latin-ordinary}{x}} \times {\OLId{latin-ordinary}{y}}) + {\OLId{latin-ordinary}{x}})]]] \tag{$!Q_{\OLMathNumeral{7}}$}\\
+  & \lforall[{\OLId{latin-ordinary}{x}}][\lforall[{\OLId{latin-ordinary}{y}}][({\OLId{latin-ordinary}{x}} < {\OLId{latin-ordinary}{y}} \liff \lexists[{\OLId{latin-ordinary}{z}}][\eq[({\OLId{latin-ordinary}{z}}' + {\OLId{latin-ordinary}{x}})][{\OLId{latin-ordinary}{y}}]])]] \tag{$!Q_{\OLMathNumeral{8}}$}
+\end{align*}
+وأوجد !!a{sentence} لا تتضمن إلا~$\prime$ وتكون صادقة في~$\Struct{N}$
+وكاذبة في~$\Struct{K}$.
+\end{prob}
+
+\begin{ex}
+\ollabel{ex:model-L-of-Q} تأمل الـ!!{structure}~$\Struct{L}$ ذات المجال
+$\Domain{{\OLId{latin-looped}{L}}}=\Nat \cup \{{\OLId{latin-ordinary}{a}},{\OLId{latin-ordinary}{b}}\}$ والتفسيرين
+$\Assign{\prime}{{\OLId{latin-looped}{L}}}=\nssucc$ و$\Assign{+}{{\OLId{latin-looped}{L}}}=\nsplus$ المعطيين بـ
+\[
+\begin{array}{c|c}
+  {\OLId{latin-ordinary}{x}} & {\OLId{latin-ordinary}{x}}^\nssucc \\
+  \hline
+  {\OLId{latin-ordinary}{n}} & {\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}} \\
+  {\OLId{latin-ordinary}{a}} & {\OLId{latin-ordinary}{a}}\\
+  {\OLId{latin-ordinary}{b}} & {\OLId{latin-ordinary}{b}}
+\end{array}
+\qquad
+\begin{array}{c|ccc}
+  {\OLId{latin-ordinary}{x}} \nsplus {\OLId{latin-ordinary}{y}} & {\OLId{latin-ordinary}{m}} & {\OLId{latin-ordinary}{a}} & {\OLId{latin-ordinary}{b}}\\
+  \hline
+  {\OLId{latin-ordinary}{n}} & {\OLId{latin-ordinary}{n}}+{\OLId{latin-ordinary}{m}} & {\OLId{latin-ordinary}{b}} & {\OLId{latin-ordinary}{a}}\\
+  {\OLId{latin-ordinary}{a}} & {\OLId{latin-ordinary}{a}} & {\OLId{latin-ordinary}{b}} & {\OLId{latin-ordinary}{a}}\\
+  {\OLId{latin-ordinary}{b}} & {\OLId{latin-ordinary}{b}} & {\OLId{latin-ordinary}{b}} & {\OLId{latin-ordinary}{a}}
+\end{array}
+\]
+الدالة $\nssucc$~!!{injective}، وليس ${\OLMathNumeral{0}}$ في مداها،
+وكل ${\OLId{latin-ordinary}{x}} \in \Domain{{\OLId{latin-looped}{L}}}$ سوى~${\OLMathNumeral{0}}$ داخل فيه؛ لذلك تصدق
+$!Q_{\OLMathNumeral{1}}$--$!Q_{\OLMathNumeral{3}}$ في~$\Struct{L}$. ولكل ${\OLId{latin-ordinary}{x}}$ نجد
+${\OLId{latin-ordinary}{x}} \nsplus {\OLMathNumeral{0}}={\OLId{latin-ordinary}{x}}$، فتصدق $!Q_{\OLMathNumeral{4}}$. وأما $!Q_{\OLMathNumeral{5}}$، فنقابل
+${\OLId{latin-ordinary}{x}} \nsplus {\OLId{latin-ordinary}{y}}^\nssucc$ بـ$({\OLId{latin-ordinary}{x}} \nsplus {\OLId{latin-ordinary}{y}})^\nssucc$.
+إن كان ${\OLId{latin-ordinary}{x}}$ و${\OLId{latin-ordinary}{y}}$ قياسيين تساويا، إذ توافق $\nssucc$
+و$\nsplus$ العمليتين $\prime$ و$+$ عليهما. وإن كان ${\OLId{latin-ordinary}{x}}$
+غير قياسي و${\OLId{latin-ordinary}{y}}$ قياسيًا، فـ
+${\OLId{latin-ordinary}{x}} \nsplus {\OLId{latin-ordinary}{y}}^\nssucc={\OLId{latin-ordinary}{x}}={\OLId{latin-ordinary}{x}}^\nssucc=({\OLId{latin-ordinary}{x}} \nsplus {\OLId{latin-ordinary}{y}})^\nssucc$.
+وإن كان ${\OLId{latin-ordinary}{x}}$ و${\OLId{latin-ordinary}{y}}$ غير قياسيين، فهذه الحالات الأربع:
+\begin{align*}
+&  {\OLId{latin-ordinary}{a}} \nsplus {\OLId{latin-ordinary}{a}}^\nssucc  = {\OLId{latin-ordinary}{b}} = {\OLId{latin-ordinary}{b}}^\nssucc = ({\OLId{latin-ordinary}{a}} \nsplus {\OLId{latin-ordinary}{a}})^\nssucc\\
+&  {\OLId{latin-ordinary}{b}} \nsplus {\OLId{latin-ordinary}{b}}^\nssucc  = {\OLId{latin-ordinary}{a}} = {\OLId{latin-ordinary}{a}}^\nssucc = ({\OLId{latin-ordinary}{b}} \nsplus {\OLId{latin-ordinary}{b}})^\nssucc\\
+&  {\OLId{latin-ordinary}{b}} \nsplus {\OLId{latin-ordinary}{a}}^\nssucc  = {\OLId{latin-ordinary}{b}} = {\OLId{latin-ordinary}{b}}^\nssucc = ({\OLId{latin-ordinary}{b}} \nsplus {\OLId{latin-ordinary}{a}})^\nssucc\\
+&  {\OLId{latin-ordinary}{a}} \nsplus {\OLId{latin-ordinary}{b}}^\nssucc  = {\OLId{latin-ordinary}{a}} = {\OLId{latin-ordinary}{a}}^\nssucc = ({\OLId{latin-ordinary}{a}} \nsplus {\OLId{latin-ordinary}{b}})^\nssucc\\
+\intertext{وإذا كان ${\OLId{latin-ordinary}{x}}$ قياسيًا و${\OLId{latin-ordinary}{y}}$ غير قياسي، كان}
+&  {\OLId{latin-ordinary}{n}} \nsplus {\OLId{latin-ordinary}{a}}^\nssucc  = {\OLId{latin-ordinary}{n}} \nsplus {\OLId{latin-ordinary}{a}} = {\OLId{latin-ordinary}{b}} = {\OLId{latin-ordinary}{b}}^\nssucc = ({\OLId{latin-ordinary}{n}} \nsplus {\OLId{latin-ordinary}{a}})^\nssucc\\
+&  {\OLId{latin-ordinary}{n}} \nsplus {\OLId{latin-ordinary}{b}}^\nssucc  = {\OLId{latin-ordinary}{n}} \nsplus {\OLId{latin-ordinary}{b}} = {\OLId{latin-ordinary}{a}} = {\OLId{latin-ordinary}{a}}^\nssucc = ({\OLId{latin-ordinary}{n}} \nsplus {\OLId{latin-ordinary}{b}})^\nssucc
+\end{align*}
+إذن $\Sat{{\OLId{latin-looped}{L}}}{!Q_{\OLMathNumeral{5}}}$. لكن ${\OLId{latin-ordinary}{a}} \nsplus {\OLMathNumeral{0}} \neq {\OLMathNumeral{0}} \nsplus {\OLId{latin-ordinary}{a}}$، ومن ثم
+$\Sat/{{\OLId{latin-looped}{L}}}{\lforall[{\OLId{latin-ordinary}{x}}][\lforall[{\OLId{latin-ordinary}{y}}][\eq[({\OLId{latin-ordinary}{x}}+{\OLId{latin-ordinary}{y}})][({\OLId{latin-ordinary}{y}}+{\OLId{latin-ordinary}{x}})]]]}$.
+\end{ex}
+
+\begin{prob}
+أتمّ توسيع $\Struct{L}$ من \olref[mod][mar][mdq]{ex:model-L-of-Q} لتشمل
+$\nstimes$ و$\nsless$ اللتين تفسران~$\times$ و$<$. وبيّن أن بنيتك تحقق
+بديهيات $\Th{Q}$ الباقية:
+\begin{align*}
+& \lforall[{\OLId{latin-ordinary}{x}}][\eq[({\OLId{latin-ordinary}{x}} \times \Obj 0)][\Obj 0]] \tag{$!Q_{\OLMathNumeral{6}}$}\\ &
+  \lforall[{\OLId{latin-ordinary}{x}}][\lforall[{\OLId{latin-ordinary}{y}}][\eq[({\OLId{latin-ordinary}{x}} \times {\OLId{latin-ordinary}{y}}')][(({\OLId{latin-ordinary}{x}} \times {\OLId{latin-ordinary}{y}}) + {\OLId{latin-ordinary}{x}})]]]
+  \tag{$!Q_{\OLMathNumeral{7}}$}\\ & \lforall[{\OLId{latin-ordinary}{x}}][\lforall[{\OLId{latin-ordinary}{y}}][({\OLId{latin-ordinary}{x}} < {\OLId{latin-ordinary}{y}} \liff \lexists[{\OLId{latin-ordinary}{z}}][\eq[({\OLId{latin-ordinary}{z}}'+{\OLId{latin-ordinary}{x}})][{\OLId{latin-ordinary}{y}}]])]] \tag{$!Q_{\OLMathNumeral{8}}$}
+\end{align*}
+\end{prob}
+
+\begin{prob}
+في $\Struct{L}$ من \olref[mod][mar][mdq]{ex:model-L-of-Q}، لدينا
+${\OLId{latin-ordinary}{a}}^\nssucc={\OLId{latin-ordinary}{a}}$ و${\OLId{latin-ordinary}{b}}^\nssucc={\OLId{latin-ordinary}{b}}$. فهل يمكن بناء نموذج لـ$\Th{Q}$ يحقق
+${\OLId{latin-ordinary}{a}}^\nssucc={\OLId{latin-ordinary}{b}}$ و${\OLId{latin-ordinary}{b}}^\nssucc={\OLId{latin-ordinary}{a}}$؟
+\end{prob}
+
+\begin{explain}
+فهذه نماذج صريحة لـ$\Th{Q}$ تقع فيها الـ!!{element}s
+غير القياسية «وراء» القياسية. وهذا القدر مما توجبه
+البديهيات: لا يكون !!{element} غير قياسي~${\OLId{latin-ordinary}{x}}$~${} \nsless {\OLMathNumeral{0}}$،
+لأن $\Th{Q} \Proves \lforall[{\OLId{latin-ordinary}{x}}][\lnot {\OLId{latin-ordinary}{x}}<{\OLMathNumeral{0}}]$، كما في
+\olref[inc][req][min]{lem:less-zero}. ولكل ${\OLId{latin-ordinary}{n}}$ نجد
+$\Th{Q} \Proves \lforall[{\OLId{latin-ordinary}{x}}][({\OLId{latin-ordinary}{x}} < \num{{\OLId{latin-ordinary}{n}}}' \lif
+(\eq[{\OLId{latin-ordinary}{x}}][\num{{\OLMathNumeral{0}}}] \lor \eq[{\OLId{latin-ordinary}{x}}][\num{{\OLMathNumeral{1}}}] \lor \dots \lor
+\eq[{\OLId{latin-ordinary}{x}}][\num{{\OLId{latin-ordinary}{n}}}]))]$، بحسب \olref[inc][req][min]{lem:less-nsucc}.
+فيمتنع ${\OLId{latin-ordinary}{a}} \nsless {\OLId{latin-ordinary}{n}}$ لأي~${\OLId{latin-ordinary}{n}}>{\OLMathNumeral{0}}$.
+\end{explain}
+
+\end{document}

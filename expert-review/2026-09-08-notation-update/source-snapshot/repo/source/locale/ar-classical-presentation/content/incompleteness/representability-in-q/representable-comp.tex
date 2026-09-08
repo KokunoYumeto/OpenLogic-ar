@@ -1,0 +1,111 @@
+% Part: incompleteness
+% Chapter: representability-in-q
+% Section: representable-comp
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{req}{rpc}
+\olsection{الدوال القابلة للتمثيل في $\Th{Q}$ قابلة للحساب}
+
+نبدأ بإثبات أن قابلية الدالة للتمثيل في~$\Th{Q}$ تستلزم قابليتها للحساب.
+ونقدّم لذلك لمة في الدوال القابلة للتمثيل في~$\Th{Q}$.
+
+\begin{lem}\ollabel{lem:rep-q}
+  لتكن ${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}},\dots,{\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{k}})$ قابلة للتمثيل في~$\Th{Q}$. حينئذ توجد
+  !!a{formula}~$!A_{\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}},\dots,{\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{k}},{\OLId{latin-ordinary}{y}})$ تحقق:
+  \[
+  \Th{Q} \Proves !A_{\OLId{latin-ordinary}{f}}(\num{{\OLId{latin-ordinary}{n}}_{\OLMathNumeral{0}}}, \dots, \num{{\OLId{latin-ordinary}{n}}_{\OLId{latin-ordinary}{k}}}, \num{{\OLId{latin-ordinary}{m}}})
+  \quad\text{إذا وفقط إذا}\quad {\OLId{latin-ordinary}{m}} = {\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{n}}_{\OLMathNumeral{0}}, \dots, {\OLId{latin-ordinary}{n}}_{\OLId{latin-ordinary}{k}}).
+  \]
+\end{lem}
+
+\begin{proof}
+أما اتجاه «إذا» فمقتضى
+\olref[int]{defn:representable-fn}\olref[int]{defn:rep:a}.
+وأما اتجاه «فقط إذا»، فنبرهنه بالخلف. لنفرض
+$\Th{Q}\Proves !A_{\OLId{latin-ordinary}{f}}(\num{{\OLId{latin-ordinary}{n}}_{\OLMathNumeral{0}}},\dots,\num{{\OLId{latin-ordinary}{n}}_{\OLId{latin-ordinary}{k}}},\num{{\OLId{latin-ordinary}{m}}})$ مع
+${\OLId{latin-ordinary}{m}}\neq {\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{n}}_{\OLMathNumeral{0}},\dots,{\OLId{latin-ordinary}{n}}_{\OLId{latin-ordinary}{k}})$، ولنضع ${\OLId{latin-ordinary}{l}}={\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{n}}_{\OLMathNumeral{0}},\dots,{\OLId{latin-ordinary}{n}}_{\OLId{latin-ordinary}{k}})$.
+فمن \olref[int]{defn:representable-fn}\olref[int]{defn:rep:a} نحصل على
+$\Th{Q}\Proves !A_{\OLId{latin-ordinary}{f}}(\num{{\OLId{latin-ordinary}{n}}_{\OLMathNumeral{0}}},\dots,\num{{\OLId{latin-ordinary}{n}}_{\OLId{latin-ordinary}{k}}},\num{{\OLId{latin-ordinary}{l}}})$.
+ومن \olref[int]{defn:representable-fn}\olref[int]{defn:rep:b} نحصل على
+$\Th{Q}\Proves
+\lforall[{\OLId{latin-ordinary}{y}}][(!A_{\OLId{latin-ordinary}{f}}(\num{{\OLId{latin-ordinary}{n}}_{\OLMathNumeral{0}}},\dots,\num{{\OLId{latin-ordinary}{n}}_{\OLId{latin-ordinary}{k}}},{\OLId{latin-ordinary}{y}})\lif\num{{\OLId{latin-ordinary}{l}}}={\OLId{latin-ordinary}{y}})]$.
+فإذا استعملنا قواعد المنطق وفرضنا
+$\Th{Q}\Proves !A_{\OLId{latin-ordinary}{f}}(\num{{\OLId{latin-ordinary}{n}}_{\OLMathNumeral{0}}},\dots,\num{{\OLId{latin-ordinary}{n}}_{\OLId{latin-ordinary}{k}}},\num{{\OLId{latin-ordinary}{m}}})$، لزم
+$\Th{Q}\Proves\eq[\num{{\OLId{latin-ordinary}{l}}}][\num{{\OLId{latin-ordinary}{m}}}]$.
+لكن \olref[bre]{lem:q-proves-neq} يعطينا أيضًا
+$\Th{Q}\Proves\eq/[\num{{\OLId{latin-ordinary}{l}}}][\num{{\OLId{latin-ordinary}{m}}}]$؛ فتكون $\Th{Q}$ غير متسقة.
+وهذا ممتنع: فإن النموذج القياسي يحقق $\Th{Q}$
+(انظر \olref[int][def]{def:standard-model})، أي إن $\Sat{{\OLId{latin-looped}{N}}}{\Th{Q}}$،
+وكل نظرية قابلة للتحقيق متسقة بمبرهنة السلامة
+(\tagrefs{prfAX/{fol:axd:sou:cor:consistency-soundness},
+prfSC/{fol:seq:sou:cor:consistency-soundness},
+prfND/{fol:ntd:sou:cor:consistency-soundness},
+prfTab/{fol:tab:sou:cor:consistency-soundness}}).
+\end{proof}
+
+\begin{lem}
+إذا كانت الدالة قابلة للتمثيل في $\Th{Q}$ فهي قابلة للحساب.
+\end{lem}
+
+\begin{proof}
+نبيّن أولًا وجه القول على سبيل التقريب. فحساب~${\OLId{latin-ordinary}{f}}$ يجري بالبحث الآتي:
+نسرد كل ما يمكن أن يكون من !!{derivation}s~$\delta$ في لغة الحساب،
+وسردها ممكن آليًا. ثم ننظر في كل واحدة: أهي !!a{derivation}
+لـ!!a{formula} على الصورة
+$!A_{\OLId{latin-ordinary}{f}}(\num{{\OLId{latin-ordinary}{n}}_{\OLMathNumeral{0}}},\dots,\num{{\OLId{latin-ordinary}{n}}_{\OLId{latin-ordinary}{k}}},\num{{\OLId{latin-ordinary}{m}}})$، أعني الـ!!{formula} الممثلة
+لـ${\OLId{latin-ordinary}{f}}$ في~$\Th{Q}$ بحسب \olref{lem:rep-q}؟ فإن كانت كذلك ثبت
+${\OLId{latin-ordinary}{m}}={\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{n}}_{\OLMathNumeral{0}},\dots,{\OLId{latin-ordinary}{n}}_{\OLId{latin-ordinary}{k}})$ باللمة \olref{lem:rep-q}، فحصلت قيمة~${\OLId{latin-ordinary}{f}}$.
+ولا يستمر البحث بلا نهاية؛ إذ
+$\Th{Q}\Proves !A_{\OLId{latin-ordinary}{f}}(\num{{\OLId{latin-ordinary}{n}}_{\OLMathNumeral{0}}},\dots,\num{{\OLId{latin-ordinary}{n}}_{\OLId{latin-ordinary}{k}}},
+\num{{\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{n}}_{\OLMathNumeral{0}},\dots,{\OLId{latin-ordinary}{n}}_{\OLId{latin-ordinary}{k}})})$، فلا بد أن يظهر في السرد $\delta$ المطلوبة.
+
+ولم تبلغ هذه الحجة بعدُ غاية الدقة؛ فالإجراء الموصوف يتناول
+!!{derivation}s و!!{formula}s، لا الأعداد وحدها، ولم نفصّل وجه إمكان
+«سرد جميع الـ!!{derivation}s الممكنة» آليًا. غير أن الطريق إلى ضبطها
+قد تقدم: فالحدود و!!{formula}s و!!{derivation}s ترمّز بأعداد غودل،
+والدوال العودية العامة تعطينا نموذجًا مضبوطًا للحساب. وقد ثبت أن العلاقة
+$\Prf[\Th{Q}]({\OLId{latin-ordinary}{d}},{\OLId{latin-ordinary}{y}})$ عودية، بل عودية بدائية؛ ومعناها أن ${\OLId{latin-ordinary}{d}}$ عدد غودل
+لـ!!a{derivation} من بديهيات~$\Th{Q}$ للـ!!{formula} التي عدد غودل لها~${\OLId{latin-ordinary}{y}}$.
+ونحتاج معها إلى الدالتين العوديتين البدائيتين
+$\fn{num}$ (\olref[art][trm]{prop:num-primrec}) و$\fn{Subst}$
+(\olref[art][sub]{prop:subst-primrec}).
+ومن هذه المعطيات نعرّف~${\OLId{latin-ordinary}{f}}$ بالتصغير، فتثبت عودية ${\OLId{latin-ordinary}{f}}$.
+
+نضع أولًا
+\begin{multline*}
+  {\OLId{latin-looped}{A}}({\OLId{latin-ordinary}{n}}_{\OLMathNumeral{0}}, \dots, {\OLId{latin-ordinary}{n}}_{\OLId{latin-ordinary}{k}}, {\OLId{latin-ordinary}{m}}) = \\
+  \fn{Subst}(\fn{Subst}(\dots\fn{Subst}(\Gn{!A_{\OLId{latin-ordinary}{f}}}, \fn{num}({\OLId{latin-ordinary}{n}}_{\OLMathNumeral{0}}), \Gn{{\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}}}),\\ \dots),
+  \fn{num}({\OLId{latin-ordinary}{n}}_{\OLId{latin-ordinary}{k}}),  \Gn{{\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{k}}}), \fn{num}({\OLId{latin-ordinary}{m}}), \Gn{{\OLId{latin-ordinary}{y}}})
+\end{multline*}
+وليس وراء تعقيد هذه الكتابة إلا الدالة
+${\OLId{latin-looped}{A}}({\OLId{latin-ordinary}{n}}_{\OLMathNumeral{0}},\dots,{\OLId{latin-ordinary}{n}}_{\OLId{latin-ordinary}{k}},{\OLId{latin-ordinary}{m}})=
+\Gn{!A_{\OLId{latin-ordinary}{f}}(\num{{\OLId{latin-ordinary}{n}}_{\OLMathNumeral{0}}},\dots,\num{{\OLId{latin-ordinary}{n}}_{\OLId{latin-ordinary}{k}}},\num{{\OLId{latin-ordinary}{m}}})}$.
+
+ثم نأخذ العلاقة~${\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{n}}_{\OLMathNumeral{0}},\dots,{\OLId{latin-ordinary}{n}}_{\OLId{latin-ordinary}{k}},{\OLId{latin-ordinary}{s}})$، ومعناها أن $({\OLId{latin-ordinary}{s}})_{\OLMathNumeral{0}}$
+عدد غودل لـ!!a{derivation} من~$\Th{Q}$ للصيغة
+$!A_{\OLId{latin-ordinary}{f}}(\num{{\OLId{latin-ordinary}{n}}_{\OLMathNumeral{0}}},\dots,\num{{\OLId{latin-ordinary}{n}}_{\OLId{latin-ordinary}{k}}},\num{({\OLId{latin-ordinary}{s}})_{\OLMathNumeral{1}}})$:
+\[
+{\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{n}}_{\OLMathNumeral{0}}, \dots, {\OLId{latin-ordinary}{n}}_{\OLId{latin-ordinary}{k}}, {\OLId{latin-ordinary}{s}}) \quad\text{إذا وفقط إذا}\quad \Prf[\Th{Q}](({\OLId{latin-ordinary}{s}})_{\OLMathNumeral{0}}, {\OLId{latin-looped}{A}}({\OLId{latin-ordinary}{n}}_{\OLMathNumeral{0}},
+\dots, {\OLId{latin-ordinary}{n}}_{\OLId{latin-ordinary}{k}}, ({\OLId{latin-ordinary}{s}})_{\OLMathNumeral{1}}))
+\]
+فمتى وجدنا~${\OLId{latin-ordinary}{s}}$ تحقق ${\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{n}}_{\OLMathNumeral{0}},\dots,{\OLId{latin-ordinary}{n}}_{\OLId{latin-ordinary}{k}},{\OLId{latin-ordinary}{s}})$، وجدنا زوج العددين
+$({\OLId{latin-ordinary}{s}})_{\OLMathNumeral{0}}$ و$({\OLId{latin-ordinary}{s}})_{\OLMathNumeral{1}}$؛ أولهما، $({\OLId{latin-ordinary}{s}})_{\OLMathNumeral{0}}$، عدد غودل
+  لـ!!a{derivation} للصيغة المعبّر عنها اختصارًا بـ$!A_{\OLId{latin-ordinary}{f}}(\num{{\OLId{latin-ordinary}{n}}_{\OLMathNumeral{0}}},\dots,\num{{\OLId{latin-ordinary}{n}}_{\OLId{latin-ordinary}{k}}},\num{({\OLId{latin-ordinary}{s}})_{\OLMathNumeral{1}}})$.
+فالبحث عن~${\OLId{latin-ordinary}{s}}$ هو نظير البحث عن ${\OLId{latin-ordinary}{d}}$ و${\OLId{latin-ordinary}{m}}$ معًا في الحجة غير الصورية.
+وهذا البحث عن ${\OLId{latin-ordinary}{s}}$ تحدده دالة قابلة للحساب بالتّصغير المنتظم.
+وانتظام ${\OLId{latin-looped}{R}}$ بيّن: لكل ${\OLId{latin-ordinary}{n}}_{\OLMathNumeral{0}}$، \dots، ${\OLId{latin-ordinary}{n}}_{\OLId{latin-ordinary}{k}}$، توجد
+!!a{derivation}~$\delta$ تثبت ما تقوله
+$\Th{Q}\Proves !A_{\OLId{latin-ordinary}{f}}(\num{{\OLId{latin-ordinary}{n}}_{\OLMathNumeral{0}}},\dots,\num{{\OLId{latin-ordinary}{n}}_{\OLId{latin-ordinary}{k}}},
+\num{{\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{n}}_{\OLMathNumeral{0}},\dots,{\OLId{latin-ordinary}{n}}_{\OLId{latin-ordinary}{k}})})$.
+فتصدق ${\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{n}}_{\OLMathNumeral{0}},\dots,{\OLId{latin-ordinary}{n}}_{\OLId{latin-ordinary}{k}},{\OLId{latin-ordinary}{s}})$ عند
+${\OLId{latin-ordinary}{s}}=\tuple{\Gn{\delta},{\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{n}}_{\OLMathNumeral{0}},\dots,{\OLId{latin-ordinary}{n}}_{\OLId{latin-ordinary}{k}})}$، ونحصل على ${\OLId{latin-ordinary}{f}}$ بالتعريف:
+\[
+  {\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{n}}_{\OLMathNumeral{0}},\dots,{\OLId{latin-ordinary}{n}}_{{\OLId{latin-ordinary}{k}}}) = (\umin{{\OLId{latin-ordinary}{s}}}{{\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{n}}_{\OLMathNumeral{0}}, \dots, {\OLId{latin-ordinary}{n}}_{\OLId{latin-ordinary}{k}}, {\OLId{latin-ordinary}{s}})})_{\OLMathNumeral{1}}.
+  \]
+  % تصحيح مصدر (C291-01): وُحّد اسم الصيغة الممثلة وأُثبت واسم الصيغة وغلاف العدد في المثال المختصر.
+\end{proof}
+
+\end{document}

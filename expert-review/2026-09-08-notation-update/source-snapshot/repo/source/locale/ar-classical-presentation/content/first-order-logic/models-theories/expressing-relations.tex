@@ -1,0 +1,118 @@
+% Part: first-order-logic
+% Chapter: models-theories
+% Section: expressing-relations
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{mat}{exr}
+
+\olsection{التعبير عن العلاقات في \article{structure}
+  \printtoken{S}{structure}}
+
+\begin{explain}
+من أعمال ال!!{formula}s أن تؤدي خواص وعلاقات في
+!!a{structure}~$\Struct M$ بأوليات لغة~$\Lang L$
+التي لها~$\Struct M$. وبيان ذلك أن !!{domain}~$\Struct M$
+مجموعة من الكائنات، وأن مدلولات ال!!{constant}s وال!!{function}s
+وال!!{predicate}s في~$\Struct M$، على الترتيب، كائنات من
+$\Domain {\OLId{latin-looped}{M}}$، ودوال على~$\Domain {\OLId{latin-looped}{M}}$، وعلاقات على~$\Domain {\OLId{latin-looped}{M}}$.
+فإذا كان $\Obj A^{\OLMathNumeral{2}}_{\OLMathNumeral{0}}$ من $\Lang L$، عيّنت له
+$\Struct M$ العلاقة~${\OLId{latin-looped}{R}} = \Assign{{\Obj
+  A^{\OLMathNumeral{2}}_{\OLMathNumeral{0}}}}{{\OLId{latin-looped}{M}}}$. وحينئذ تعبر الصيغة $\Atom{\Obj A^2_0}{\Obj v_1, \Obj v_2}$
+\emph{عن} تلك العلاقة بعينها. ومعنى ذلك أنه متى كان إسناد
+المتغيرات~${\OLId{latin-ordinary}{s}}$ يرسل $\Obj v_{\OLMathNumeral{1}}$ إلى ${\OLId{latin-ordinary}{a}} \in \Domain{{\OLId{latin-looped}{M}}}$ و$\Obj v_{\OLMathNumeral{2}}$
+إلى ${\OLId{latin-ordinary}{b}} \in \Domain {\OLId{latin-looped}{M}}$، كان
+\[
+Rab \text{\quad iff\quad} \Sat{{\OLId{latin-looped}{M}}}{\Atom{\Obj A^2_0}{\Obj v_1, \Obj v_2}}[{\OLId{latin-ordinary}{s}}].
+\]
+ولا يستغنى هنا عن إسنادات المتغيرات؛ فلا يكفي قولنا
+«$Rab$ إذا وفقط إذا كان $\Sat{{\OLId{latin-looped}{M}}}{\Atom{\Obj A^2_0}{a, b}}$»،
+لأن ${\OLId{latin-ordinary}{a}}$ و${\OLId{latin-ordinary}{b}}$ ليسا من رموز اللغة، بل !!{element}s
+من~$\Domain{{\OLId{latin-looped}{M}}}$.
+
+ولسنا محصورين في ال!!{formula}s الذرية؛ إذ تؤلّف الروابط
+والمكممات منها !!{formula}s مركبة. وبها تُعرّف علاقات لا تكون
+مكوّنات معيّنة مباشرة في~$\Struct M$. فالمطلوب بيان سبيل
+هذا التعريف، وتمييز العلاقات التي يمكن تعريفها في !!a{structure}.
+\end{explain}
+
+\begin{defn}
+لتكن $!A(\Obj v_{\OLMathNumeral{1}},\dots, \Obj v_{\OLId{latin-ordinary}{n}})$ !!a{formula} من $\Lang L$ لا
+تقع فيها حرة إلا $\Obj v_{\OLMathNumeral{1}}$،\dots، $\Obj v_{\OLId{latin-ordinary}{n}}$، ولتكن $\Struct M$
+!!a{structure} لـ~$\Lang L$. تعبر $!A(\Obj v_{\OLMathNumeral{1}},\dots, \Obj v_{\OLId{latin-ordinary}{n}})$
+\emph{عن العلاقة}~${\OLId{latin-looped}{R}} \subseteq \Domain {\OLId{latin-looped}{M}}^{\OLId{latin-ordinary}{n}}$ إذا وفقط إذا كان
+\[
+Ra_{\OLMathNumeral{1}}\dots {\OLId{latin-ordinary}{a}}_{\OLId{latin-ordinary}{n}} \text{\quad iff\quad} \Sat{{\OLId{latin-looped}{M}}}{\Atom{!A}{\Obj
+    v_1,\dots, \Obj v_n}}[{\OLId{latin-ordinary}{s}}]
+\]
+لكل إسناد متغيرات~${\OLId{latin-ordinary}{s}}$ يكون فيه ${\OLId{latin-ordinary}{s}}(\Obj v_{\OLId{latin-ordinary}{i}}) = {\OLId{latin-ordinary}{a}}_{\OLId{latin-ordinary}{i}}$ (${\OLId{latin-ordinary}{i}} = {\OLMathNumeral{1}},
+\dots, {\OLId{latin-ordinary}{n}}$).
+\end{defn}
+
+\begin{ex}
+في النموذج القياسي للحساب~$\Struct N$، تعبر ال!!{formula} $\Obj
+v_{\OLMathNumeral{1}} < \Obj v_{\OLMathNumeral{2}} \lor \eq[\Obj v_{\OLMathNumeral{1}}][\Obj v_{\OLMathNumeral{2}}]$ عن العلاقة $\le$ على
+~$\Nat$. وتعبر ال!!{formula} $\eq[\Obj v_{\OLMathNumeral{2}}][\Obj v_{\OLMathNumeral{1}}']$ عن علاقة
+الخلف، أي العلاقة ${\OLId{latin-looped}{R}} \subseteq \Nat^{\OLMathNumeral{2}}$ التي يصدق فيها $Rnm$ إذا كان
+${\OLId{latin-ordinary}{m}}$ خلف~${\OLId{latin-ordinary}{n}}$. وتعبر الصيغة $\eq[\Obj v_{\OLMathNumeral{1}}][\Obj v_{\OLMathNumeral{2}}']$ عن علاقة السلف.
+وتعبر ال!!{formula}s $\lexists[\Obj v_{\OLMathNumeral{3}}][(\eq/[\Obj v_{\OLMathNumeral{3}}][\Obj 0] \land
+  \eq[\Obj v_{\OLMathNumeral{2}}][(\Obj v_{\OLMathNumeral{1}} + \Obj v_{\OLMathNumeral{3}})])]$ و$\lexists[\Obj
+  v_{\OLMathNumeral{3}}][\eq[(\Obj v_{\OLMathNumeral{1}} + {\Obj v_{\OLMathNumeral{3}}}')][\Obj v_{\OLMathNumeral{2}}]]$ كلتاهما عن العلاقة
+$\Obj <$. ومن ثم يُستغنى في أصل لغة الحساب عن رمز المحمول~$<$؛
+إذ يردّ إلى الرموز الأخرى بالتعريف.
+\end{ex}
+
+\begin{explain}
+ولا يختص هذا النظر ب!!{structure}s معيّنة؛ بل يعمّ كل استعمال
+للغة في وصف نموذج مقصود أو نماذج مقصودة، أي في البحث عن النظريات.
+فكثير من النظريات لا يجعل من ال!!{predicate}s الأولية إلا قليلًا،
+مع أن مجال النظرية يشتمل على علاقات أخرى كثيرة لها شأن فيه.
+فإذا أمكن أداء هذه العلاقات أداءً منتظمًا بالعلاقات التي تؤول
+ال!!{predicate}s الأولية، قلنا إن تلك العلاقات تقبل
+\emph{التعريف} في اللغة.
+\end{explain}
+
+\begin{prob}
+ضع من !!{formula}s اللغة $\Lang L_{\OLId{latin-looped}{A}}$ ما يعرّف العلاقات الآتية:
+\begin{enumerate}
+\item ${\OLId{latin-ordinary}{n}}$ بين ${\OLId{latin-ordinary}{i}}$ و${\OLId{latin-ordinary}{j}}$؛
+\item ${\OLId{latin-ordinary}{n}}$ يقسم ${\OLId{latin-ordinary}{m}}$ دون باق (أي إن ${\OLId{latin-ordinary}{m}}$ مضاعف لـ~${\OLId{latin-ordinary}{n}}$)؛
+\item ${\OLId{latin-ordinary}{n}}$ عدد أولي (أي لا يقسم~${\OLId{latin-ordinary}{n}}$ دون باق عدد غير ${\OLMathNumeral{1}}$ و${\OLId{latin-ordinary}{n}}$).
+\end{enumerate}
+\end{prob}
+
+\begin{prob}
+لتكن الصيغة $!A(\Obj v_{\OLMathNumeral{1}}, \Obj v_{\OLMathNumeral{2}})$ تعبر عن العلاقة ${\OLId{latin-looped}{R}}
+\subseteq \Domain {\OLId{latin-looped}{M}}^{\OLMathNumeral{2}}$ في !!a{structure}~$\Struct M$. أوجد صيغًا
+تعبر عن العلاقات الآتية:
+\begin{enumerate}
+\item معكوس العلاقة ${\OLId{latin-looped}{R}}^{-{\OLMathNumeral{1}}}$؛
+\item الضرب النسبي ${\OLId{latin-looped}{R}} \mid {\OLId{latin-looped}{R}}$؛
+\end{enumerate}
+أيمكن إيجاد عبارة تؤدي ${\OLId{latin-looped}{R}}^+$، وهو الإغلاق المتعدي لـ~${\OLId{latin-looped}{R}}$؟
+\end{prob}
+
+\begin{prob}
+لتكن $\Lang{L}$ لغةً رموزها غير المنطقية محصورة في محمول ثنائي المحل
+$<$ (فلا !!{constant}s ولا !!{function}s ولا !!{predicate}s أخرى
+فيها---باستثناء~$\eq$ بالطبع). ولتكن $\Struct{N}$ البنية التي فيها
+$\Domain{{\OLId{latin-looped}{N}}} = \Nat$ و$\Assign{<}{{\OLId{latin-looped}{N}}} = \Setabs{\tuple{{\OLId{latin-ordinary}{n}},{\OLId{latin-ordinary}{m}}}}{{\OLId{latin-ordinary}{n}} <
+  {\OLId{latin-ordinary}{m}}}$. أثبت ما يأتي:
+\begin{enumerate}
+\item $\{ {\OLMathNumeral{0}} \}$ قابلة للتعريف في $\Struct{N}$؛
+\item $\{ {\OLMathNumeral{1}} \}$ قابلة للتعريف في $\Struct{N}$؛
+\item $\{ {\OLMathNumeral{2}} \}$ قابلة للتعريف في $\Struct{N}$؛
+\item لكل ${\OLId{latin-ordinary}{n}} \in \Nat$، المجموعة $\{ {\OLId{latin-ordinary}{n}} \}$ قابلة للتعريف في
+  $\Struct{N}$؛
+\item كل مجموعة جزئية منتهية من $\Domain{{\OLId{latin-looped}{N}}}$ قابلة للتعريف في
+  $\Struct{N}$؛
+\item كل مجموعة جزئية من $\Domain{{\OLId{latin-looped}{N}}}$ متممتها منتهية قابلة للتعريف
+  في $\Struct{N}$ (حيث تكون متممة ${\OLId{latin-looped}{X}} \subseteq \Nat$ منتهية إذا
+  وفقط إذا كانت $\Nat \setminus {\OLId{latin-looped}{X}}$ منتهية).
+\end{enumerate}
+\end{prob}
+
+
+\end{document}

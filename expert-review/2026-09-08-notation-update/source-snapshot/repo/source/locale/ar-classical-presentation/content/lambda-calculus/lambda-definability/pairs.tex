@@ -1,0 +1,55 @@
+% Part: lambda-calculus
+% Chapter: lambda-definability
+% Section: pairs
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{ldf}{pai}
+\olsection{الأزواج ودالة السابق}
+
+\begin{defn}
+زوج الحدين~${\OLId{latin-looped}{M}}$ و${\OLId{latin-looped}{N}}$، ورمزه~$\tuple{{\OLId{latin-looped}{M}},{\OLId{latin-looped}{N}}}$، هو بالتعريف
+\[
+\tuple{{\OLId{latin-looped}{M}},{\OLId{latin-looped}{N}}} \ident \lambd[{\OLId{latin-ordinary}{f}}][fMN].
+\]
+\end{defn}
+  
+معناه الحدسي دالة تأخذ دالة أخرى فتطبقها في عنصري الزوج.
+وعلى هذا نبني حدًا يأخذ حدين ويعطي الزوج المؤلف منهما:
+\[
+  \fn{Pair} \ident \lambd[mn][\lambd[{\OLId{latin-ordinary}{f}}][fmn]]
+\]
+وكما نحتاج إلى تكوين الزوج، نحتاج إلى استخراج عنصريه.
+فلذلك نعرّف دالتي وصول، تأخذ كل منهما زوجًا،
+فتردّ إحداهما عنصره الأول وتردّ الأخرى عنصره الثاني:
+\begin{align*}
+  \fn{Fst} & \ident \lambd[{\OLId{latin-ordinary}{p}}][{\OLId{latin-ordinary}{p}}(\lambd[mn][{\OLId{latin-ordinary}{m}}])]\\
+  \fn{Snd} & \ident \lambd[{\OLId{latin-ordinary}{p}}][{\OLId{latin-ordinary}{p}}(\lambd[mn][{\OLId{latin-ordinary}{n}}])]
+\end{align*}
+
+\begin{prob}
+  بيّن وجه أداء دالتي الوصول~$\fn{Fst}$ و$\fn{Snd}$ لما قصد بهما.
+\end{prob}
+
+وبعد أن صار تمثيل الأزواج في أيدينا، أمكن أن !!{lambda define} دالة السابق:
+\[
+  \fn{Pred} \ident \lambd[{\OLId{latin-ordinary}{n}}][\fn{Fst}({\OLId{latin-ordinary}{n}} (\lambd[{\OLId{latin-ordinary}{p}}][\tuple{\fn{Snd}\, {{\OLId{latin-ordinary}{p}}}, \fn{Succ}(\fn{Snd}\, {{\OLId{latin-ordinary}{p}}})}]) \tuple{\num {\OLMathNumeral{0}}, \num {\OLMathNumeral{0}}})]
+\]
+فقد علمنا أن~$\num {\OLId{latin-ordinary}{n}}\, {\OLId{latin-ordinary}{f}} {\OLId{latin-ordinary}{x}}$ يختزل إلى~${\OLId{latin-ordinary}{f}}^{{\OLId{latin-ordinary}{n}}}({\OLId{latin-ordinary}{x}})$.
+أما~${\OLId{latin-ordinary}{f}}$ هنا فتأخذ زوجًا~${\OLId{latin-ordinary}{p}}$، وتردّ زوجًا مركبته الأولى هي الثانية من~${\OLId{latin-ordinary}{p}}$،
+ومركبته الثانية خلف تلك المركبة؛ وأما~${\OLId{latin-ordinary}{x}}$ فهو~$\tuple{\num {\OLMathNumeral{0}},\num {\OLMathNumeral{0}}}$.
+فتبقى النتيجة~$\tuple{\num {\OLMathNumeral{0}},\num {\OLMathNumeral{0}}}$ إذا كان~${\OLId{latin-ordinary}{n}}={\OLMathNumeral{0}}$،
+وتكون~$\tuple{\num{{\OLId{latin-ordinary}{n}}-{\OLMathNumeral{1}}}, \num {\OLId{latin-ordinary}{n}}}$ فيما عدا ذلك.
+ثم تأخذ~$\fn{Pred}$ المركبة الأولى من هذا الناتج.
+
+ومن هنا نعرّف الطرح على الأعداد الطبيعية مع الوقوف عند الصفر؛
+فإن جاوز المطروحُ المطروحَ منه فالنتيجة صفر، وإلا فالفرق المعتاد.
+وبهذا يتبين قيد العملية التي أطلق الأصل عليها اسم الطرح.
+وسبيل تعريفه تكرار تطبيق~$\fn{Pred}$ في~${\OLId{latin-ordinary}{a}}$ بمقدار~${\OLId{latin-ordinary}{b}}$ من المرات:
+\[
+\fn{Sub} \ident \lambd[ab][{\OLId{latin-ordinary}{b}} \fn{Pred}\, {\OLId{latin-ordinary}{a}}].
+\]
+    
+\end{document}

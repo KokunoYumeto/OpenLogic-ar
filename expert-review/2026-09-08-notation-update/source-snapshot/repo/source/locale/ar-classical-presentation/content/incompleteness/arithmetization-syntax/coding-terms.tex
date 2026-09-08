@@ -1,0 +1,117 @@
+% Part: incompleteness
+% Chapter: arithmetization-syntax
+% Section: coding-terms
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{art}{trm}
+\olsection{ترميز الحدود}
+
+\begin{explain}
+الحد متتالية رموز ذات بناء مخصوص، تنشأ استقرائيًا
+من الثوابت والمتغيرات بقواعد تكوين الحدود.
+ولما أمكن ترميز الرموز، ثم متتاليات أعدادها،
+لم يشق تعيين عدد غودل لكل حد. وإنما المطلوب
+الأدق أن نثبت أن تمييز عدد غودل لحد حسن
+التكوين قابل للحساب، بل عودي بدائي.
+\end{explain}
+
+!!^{variable}s وال!!{constant}s أول الحدود وأبسطها.
+واختبار كون ${\OLId{latin-ordinary}{x}}$ عدد غودل لأحدها يسير:
+فـ$\fn{Var}({\OLId{latin-ordinary}{x}})$ تصدق إذا كان ${\OLId{latin-ordinary}{x}}$ هو
+$\Gn{\Obj v_{\OLId{latin-ordinary}{i}}}$ لبعض~${\OLId{latin-ordinary}{i}}$. أي إن ${\OLId{latin-ordinary}{x}}$
+يرمز متتالية طولها~${\OLMathNumeral{1}}$، وعنصرها الوحيد
+$({\OLId{latin-ordinary}{x}})_{\OLMathNumeral{0}}$ رمز !!{variable}~$\Obj v_{\OLId{latin-ordinary}{i}}$.
+فتكون قيمة ${\OLId{latin-ordinary}{x}}$ هي $\tuple{\tuple{{\OLMathNumeral{1}}, {\OLId{latin-ordinary}{i}}}}$
+لبعض~${\OLId{latin-ordinary}{i}}$. ونظير ذلك $\fn{Const}({\OLId{latin-ordinary}{x}})$:
+تصدق إذا كان ${\OLId{latin-ordinary}{x}}$ هو $\Gn{\Obj c_{\OLId{latin-ordinary}{i}}}$
+لبعض~${\OLId{latin-ordinary}{i}}$. والعلاقتان عوديتان بدائيتان،
+إذ الشاهد ${\OLId{latin-ordinary}{i}}$ إن وجد كان $< {\OLId{latin-ordinary}{x}}$:
+\begin{align*}
+  \fn{Var}({\OLId{latin-ordinary}{x}}) & \defiff \bexists{{\OLId{latin-ordinary}{i}}<{\OLId{latin-ordinary}{x}}}{{\OLId{latin-ordinary}{x}} = \tuple{\tuple{{\OLMathNumeral{1}}, {\OLId{latin-ordinary}{i}}}}}\\
+  \fn{Const}({\OLId{latin-ordinary}{x}}) & \defiff \bexists{{\OLId{latin-ordinary}{i}}<{\OLId{latin-ordinary}{x}}}{{\OLId{latin-ordinary}{x}} = \tuple{\tuple{{\OLMathNumeral{2}}, {\OLId{latin-ordinary}{i}}}}}
+\end{align*}
+
+\begin{prop}
+\ollabel{prop:term-primrec}
+كل من $\fn{Term}({\OLId{latin-ordinary}{x}})$ و$\fn{ClTerm}({\OLId{latin-ordinary}{x}})$ عودية بدائية،
+ومعناهما أن ${\OLId{latin-ordinary}{x}}$ عدد غودل لحد، ولحد مغلق، على الترتيب.
+\end{prop}
+
+\begin{proof}
+متتالية الرموز~${\OLId{latin-ordinary}{s}}$ حد إذا وفقط إذا وجدت
+متتالية حدود ${\OLId{latin-ordinary}{s}}_{\OLMathNumeral{0}}$، \dots، ${\OLId{latin-ordinary}{s}}_{{\OLId{latin-ordinary}{k}}-{\OLMathNumeral{1}}}={\OLId{latin-ordinary}{s}}$
+تسجل بناء~${\OLId{latin-ordinary}{s}}$ من ال!!{constant}s
+وال!!{variable}s بقواعد التكوين.
+ولصحة متتالية البناء لا بد، لكل ${\OLId{latin-ordinary}{i}}<{\OLId{latin-ordinary}{k}}$،
+من أحد الأمور الآتية:
+\begin{enumerate}
+\item ${\OLId{latin-ordinary}{s}}_{\OLId{latin-ordinary}{i}}$ !!a{variable}~$\Obj v_{\OLId{latin-ordinary}{j}}$؛
+\item أو ${\OLId{latin-ordinary}{s}}_{\OLId{latin-ordinary}{i}}$ !!a{constant}~$\Obj c_{\OLId{latin-ordinary}{j}}$؛
+\item أو ${\OLId{latin-ordinary}{s}}_{\OLId{latin-ordinary}{i}}$ مؤلف من ${\OLId{latin-ordinary}{n}}$ حدود
+  ${\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}$، \dots، ${\OLId{latin-ordinary}{t}}_{\OLId{latin-ordinary}{n}}$ سبقت الموضع~${\OLId{latin-ordinary}{i}}$،
+  باستعمال !!{function}~$\Obj f^{\OLId{latin-ordinary}{n}}_{\OLId{latin-ordinary}{j}}$ ذات ${\OLId{latin-ordinary}{n}}$ مواضع.
+\end{enumerate}
+فنحتاج إلى التعبير عن هذا الشرط على أعداد غودل
+بدوال وعلاقات عودية بدائية وكمّات محدودة؛
+ليثبت أن العلاقة المناظرة عودية بدائية.
+
+ليكن ${\OLId{latin-ordinary}{y}}$ رمز المتتالية ${\OLId{latin-ordinary}{s}}_{\OLMathNumeral{0}}$، \dots، ${\OLId{latin-ordinary}{s}}_{{\OLId{latin-ordinary}{k}}-{\OLMathNumeral{1}}}$،
+أي ${\OLId{latin-ordinary}{y}}=\tuple{\Gn{{\OLId{latin-ordinary}{s}}_{\OLMathNumeral{0}}}, \dots, \Gn{{\OLId{latin-ordinary}{s}}_{{\OLId{latin-ordinary}{k}}-{\OLMathNumeral{1}}}}}$.
+وكونه رمز متتالية تكوين للحد ذي عدد غودل~${\OLId{latin-ordinary}{x}}$
+يتوقف على تحقق أحد الشروط الآتية لكل ${\OLId{latin-ordinary}{i}}<{\OLId{latin-ordinary}{k}}$:
+\begin{enumerate}
+\item $\fn{Var}(({\OLId{latin-ordinary}{y}})_{\OLId{latin-ordinary}{i}})$؛ أو
+\item $\fn{Const}(({\OLId{latin-ordinary}{y}})_{\OLId{latin-ordinary}{i}})$؛ أو
+\item ثمة ${\OLId{latin-ordinary}{n}}$ وعدد~${\OLId{latin-ordinary}{z}}=\tuple{{\OLId{latin-ordinary}{z}}_{\OLMathNumeral{1}}, \dots, {\OLId{latin-ordinary}{z}}_{\OLId{latin-ordinary}{n}}}$ على أن يكون كل ${\OLId{latin-ordinary}{z}}_{\OLId{latin-ordinary}{l}}$
+  مساويًا لقيمة $({\OLId{latin-ordinary}{y}})_{{\OLId{latin-ordinary}{i}}'}$ من أجل ${\OLId{latin-ordinary}{i}}'<{\OLId{latin-ordinary}{i}}$، و
+\[
+({\OLId{latin-ordinary}{y}})_{\OLId{latin-ordinary}{i}} = \Gn{\Obj f^{\OLId{latin-ordinary}{n}}_{\OLId{latin-ordinary}{j}}(} \concat \fn{flatten}({\OLId{latin-ordinary}{z}}) \concat \Gn{)},
+\]
+\end{enumerate}
+مع اشتراط $({\OLId{latin-ordinary}{y}})_{{\OLId{latin-ordinary}{k}}-{\OLMathNumeral{1}}}={\OLId{latin-ordinary}{x}}$. (والدالة $\fn{flatten}({\OLId{latin-ordinary}{z}})$ تأخذ المتتالية
+$\tuple{\Gn{{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}}, \dots, \Gn{{\OLId{latin-ordinary}{t}}_{\OLId{latin-ordinary}{n}}}}$ إلى $\Gn{{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}, \dots, {\OLId{latin-ordinary}{t}}_{\OLId{latin-ordinary}{n}}}$، وتكون
+عودية بدائية.)
+
+وفي الشرط الثالث، كل من ${\OLId{latin-ordinary}{j}}$ و${\OLId{latin-ordinary}{n}}$، وأعداد
+غودل ${\OLId{latin-ordinary}{z}}_{\OLId{latin-ordinary}{l}}$ للحدود ${\OLId{latin-ordinary}{t}}_{\OLId{latin-ordinary}{l}}$، ورمز المتتالية
+${\OLId{latin-ordinary}{z}}$، أي $\tuple{{\OLId{latin-ordinary}{z}}_{\OLMathNumeral{1}}, \dots, {\OLId{latin-ordinary}{z}}_{\OLId{latin-ordinary}{n}}}$،
+دون~${\OLId{latin-ordinary}{y}}$. ونستبدل ${\OLId{latin-ordinary}{k}}$ بـ$\len{{\OLId{latin-ordinary}{y}}}$.
+فبذلك تصاغ عبارة «${\OLId{latin-ordinary}{y}}$ رمز متتالية تكوين
+لحد عدد غودل له~${\OLId{latin-ordinary}{x}}$» بدوال وعلاقات
+عودية بدائية وكمّات محدودة.
+
+ويبقى حصر ${\OLId{latin-ordinary}{y}}$ بحد عودي بدائي. فإذا كان
+${\OLId{latin-ordinary}{x}}$ عدد غودل لحد، أمكن بناؤه بمتتالية
+لا يزيد عدد حدودها على $\len{{\OLId{latin-ordinary}{x}}}$؛
+إذ كل حد في متتالية تكوين~${\OLId{latin-ordinary}{s}}$ يبدأ
+في موضع من~${\OLId{latin-ordinary}{s}}$، ولا يبدأ حدان جزئيان
+في موضع واحد. وعدد غودل لكل حد جزئي
+من~${\OLId{latin-ordinary}{s}}$ هو $ \le {\OLId{latin-ordinary}{x}}$. فتوجد متتالية
+تكوين رمزها $\le {\OLId{latin-ordinary}{p}}_{{\OLId{latin-ordinary}{k}}-{\OLMathNumeral{1}}}^{{\OLId{latin-ordinary}{k}}({\OLId{latin-ordinary}{x}}+{\OLMathNumeral{1}})}$،
+حيث ${\OLId{latin-ordinary}{k}}=\len{{\OLId{latin-ordinary}{x}}}$.
+
+وأما $\fn{ClTerm}$، فنحصل على حجة عوديتها
+البدائية بحذف حالة ال!!{variable}s من البناء.
+\end{proof}
+
+\begin{prob}
+برهن عودية الدالة $\fn{flatten}({\OLId{latin-ordinary}{z}})$ البدائية، وهي التي ترسل المتتالية
+$\tuple{\Gn{{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}}, \dots, \Gn{{\OLId{latin-ordinary}{t}}_{\OLId{latin-ordinary}{n}}}}$ إلى $\Gn{{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}, \dots, {\OLId{latin-ordinary}{t}}_{\OLId{latin-ordinary}{n}}}$.
+\end{prob}
+
+\begin{prop}\ollabel{prop:num-primrec}
+  تحسب الدالة $\fn{num}({\OLId{latin-ordinary}{n}})=\Gn{\num{{\OLId{latin-ordinary}{n}}}}$ بالعودية البدائية.
+\end{prop}
+
+\begin{proof}
+  يكفي التعريف الآتي لـ$\fn{num}({\OLId{latin-ordinary}{n}})$ بالعودية البدائية:
+  \begin{align*}
+    \fn{num}({\OLMathNumeral{0}}) & = \Gn{\Obj 0}\\
+    \fn{num}({\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}}) & = \Gn{\prime(} \concat \fn{num}({\OLId{latin-ordinary}{n}}) \concat \Gn{)}.
+  \end{align*}
+\end{proof}
+
+\end{document}

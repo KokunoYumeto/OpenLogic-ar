@@ -1,0 +1,120 @@
+% Part: normal-modal-logic
+% Chapter: axioms-systems
+% Section: normal-logics
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{prf}{nor}
+
+\olsection{المنطقات الجهية النظامية}
+
+لا يسهل أن نجعل كل مجموعة من !!{formula}s الجهية مجموعة
+!!{formula}s مشتقة من بديهيات؛ بل نطلب شروطًا تضبط المنطق.
+فما يصح أن !!{derive} في منطق القضايا الكلاسيكي ينبغي أن يبقى
+!!{derivable}، وإن اتسعت !!{formula}s فدخل فيها
+\iftag{prvBox}{$\Box$\iftag{prvDiamond}{
+    و~}{}}{}\iftag{prvDiamond}{$\Diamond$}{}.
+ولهذا نشترط جميع أمثلة القضايا الصادقة صدقًا تحليليًا، ونشترط
+الانغلاق تحت القياس الاستثنائي.
+
+\begin{defn}
+  \emph{المنطق الجهوي} هو مجموعة~$\Sigma$ من !!{formula}s الجهية بحيث
+  \begin{enumerate}
+  \item تشتمل على جميع القضايا الصادقة صدقا تحليليا، و
+  \item تكون مغلقة تحت الإحلال، أي إذا كان $!A \in \Sigma$ وكانت
+    $!D_{\OLMathNumeral{1}}$، \dots، $!D_{\OLId{latin-ordinary}{n}}$ هي !!{formula}s، فعندئذ
+    \[
+    \SSubst{!A}{\subst{!D_{\OLMathNumeral{1}}}{{\OLId{latin-ordinary}{p}}_{\OLMathNumeral{1}}}, \dots, \subst{!D_{\OLId{latin-ordinary}{n}}}{{\OLId{latin-ordinary}{p}}_{\OLId{latin-ordinary}{n}}}} \in \Sigma,
+    \]
+  \item تكون مغلقة تحت \emph{القياس الاستثنائي}، أي إذا كان $!A$
+    و$!A \lif !B \in \Sigma$، فعندئذ $!B \in \Sigma$.
+  \end{enumerate}
+\end{defn}
+
+ثم إن ملاءمة الدلالة العلاقية تقتضي اشتمال المنطق على جميع
+!!{formula}s الصالحة في النماذج الجهية. ويكفي لذلك أن تكون
+كل أمثلة~\Ax{K} \iftag{prvDiamond}{و~\Dual{}}{} !!{derivable}،
+وأن يكون، كلما كانت !!a{formula}~$!A$ !!{derivable}،
+كذلك~$\Box !A$. فهذا هو المنطق الجهوي \emph{النظامي}.
+ولا ننفي وجود منطقات غير نظامية، وإنما نقول إن النماذج العلاقية
+المعتادة لا تكفي لدلالتها.
+
+\begin{defn}
+  يكون المنطق الجهوي $\Sigma$ \emph{نظاميا} إذا اشتمل على
+  \begin{align*}
+    \tag{\Ax{K}} & \Box({\OLId{latin-ordinary}{p}} \lif {\OLId{latin-ordinary}{q}}) \lif (\Box {\OLId{latin-ordinary}{p}} \lif \Box {\OLId{latin-ordinary}{q}}),
+    \iftag{prvDiamond}{\\
+      \tag{\Dual} & \Diamond {\OLId{latin-ordinary}{p}} \liff \lnot\Box\lnot {\OLId{latin-ordinary}{p}}}{}
+  \end{align*}
+  وكان مغلقا تحت \emph{الإلزام}، أي إذا كان $!A \in
+  \Sigma$، فعندئذ $\Box !A \in \Sigma$.
+\end{defn}
+
+وهنا فرق في مرتبة حفظ الصدق: اللزوم التحليلي يحفظ
+\emph{الصدق في عالم} بعينه؛ وأما~\Nec{} فلا تحفظ إلا
+\emph{الصدق في نموذج} كله. ومن ذلك يلزم حفظها للصلاحية
+في إطار أو في فئة أطر.
+
+\begin{prop}\ollabel{prop:rk}
+  كل منطق جهوي نظامي مغلق تحت القاعدة \RK،
+  \begin{prooftree}
+    \AxiomC{$!A_{\OLMathNumeral{1}} \lif (!A_{\OLMathNumeral{2}} \lif \cdots (!A_{{\OLId{latin-ordinary}{n}}-{\OLMathNumeral{1}}} \lif !A_{\OLId{latin-ordinary}{n}})\cdots)$}
+    \RightLabel{\RK}
+    \UnaryInfC{$\Box!A_{\OLMathNumeral{1}} \lif (\Box!A_{\OLMathNumeral{2}} \lif \cdots (\Box!A_{{\OLId{latin-ordinary}{n}}-{\OLMathNumeral{1}}}
+      \lif \Box!A_{\OLId{latin-ordinary}{n}})\cdots).$}
+  \end{prooftree}
+\end{prop}
+
+\begin{proof}
+  بالاستقراء على~${\OLId{latin-ordinary}{n}}$: إذا كان ${\OLId{latin-ordinary}{n}} = {\OLMathNumeral{1}}$، فالقاعدة ليست سوى \Nec، وكل
+  منطق جهوي نظامي مغلق تحت \Nec.
+
+  ولنفترض الآن أن النتيجة صحيحة لـ${\OLId{latin-ordinary}{n}}-{\OLMathNumeral{1}}$؛ ونبين صحتها لـ${\OLId{latin-ordinary}{n}}$.
+
+  افترض أن
+  \begin{align*}
+  & !A_{\OLMathNumeral{1}} \lif (!A_{\OLMathNumeral{2}} \lif \cdots (!A_{{\OLId{latin-ordinary}{n}}-{\OLMathNumeral{1}}} \lif !A_{\OLId{latin-ordinary}{n}})\cdots) \in \Sigma
+  \intertext{وبفرض الاستقراء، لدينا}
+  & \Box!A_{\OLMathNumeral{1}} \lif (\Box!A_{\OLMathNumeral{2}} \lif \cdots \Box(!A_{{\OLId{latin-ordinary}{n}}-{\OLMathNumeral{1}}} \lif !A_{\OLId{latin-ordinary}{n}})\cdots)
+  \in \Sigma
+  \intertext{ولأن $\Sigma$ منطق جهوي نظامي، فإنه يشتمل على جميع أمثلة
+    $\Ax{K}$، ومنها بوجه خاص}
+  & \Box(!A_{{\OLId{latin-ordinary}{n}}-{\OLMathNumeral{1}}} \lif !A_{\OLId{latin-ordinary}{n}}) \lif (\Box!A_{{\OLId{latin-ordinary}{n}}-{\OLMathNumeral{1}}} \lif \Box!A_{\OLId{latin-ordinary}{n}}) \in \Sigma
+  \intertext{وباستخدام القياس الاستثنائي وأمثلة مناسبة لقضايا صادقة صدقا تحليليا نحصل على}
+  & \Box!A_{\OLMathNumeral{1}} \lif (\Box!A_{\OLMathNumeral{2}} \lif \cdots (\Box!A_{{\OLId{latin-ordinary}{n}}-{\OLMathNumeral{1}}}
+  \lif \Box!A_{\OLId{latin-ordinary}{n}})\cdots) \in \Sigma.
+  \end{align*}
+\end{proof}
+
+\begin{prop}\ollabel{prop:notDiamondBot}
+  يشتمل كل منطق جهوي نظامي $\Sigma$ على~$\lnot\Diamond\lfalse$.
+\end{prop}
+
+\begin{prob}
+  أثبت \olref[nml][prf][nor]{prop:notDiamondBot}.
+\end{prob}
+
+\begin{prop}
+  لتكن $!A_{\OLMathNumeral{1}}$، \dots، $!A_{\OLId{latin-ordinary}{n}}$ هي !!{formula}s. عندئذ يوجد أصغر
+  منطق جهوي نظامي $\Sigma$ يشتمل على جميع أمثلة $!A_{\OLMathNumeral{1}}$، \dots، $!A_{\OLId{latin-ordinary}{n}}$.
+\end{prop}
+
+\begin{proof}
+  % تصحيح مصدر (0429-I1): وجود مجموعة الصيغ يثبت عدم خلو أسرة التقاطع لا التقاطع نفسه.
+  خذ~$!A_{\OLMathNumeral{1}}$، \dots، $!A_{\OLId{latin-ordinary}{n}}$، واجعل~$\Sigma$ تقاطع المنطقات
+  الجهية النظامية التي تشتمل على كل أمثلة~$!A_{\OLMathNumeral{1}}$، \dots، $!A_{\OLId{latin-ordinary}{n}}$.
+  وهذه الأسرة التي نأخذ تقاطعها غير خالية؛ إذ إن~$\Frm[{\OLId{latin-looped}{L}}]$،
+  مجموعة جميع !!{formula}s، واحد من تلك المنطقات.
+  وكل شرط من شروط المنطق النظامي يبقى عند التقاطع؛ فيكون التقاطع
+  منطقًا نظاميًا، ويكون أصغرها بالاحتواء.
+\end{proof}
+
+\begin{defn}
+يسمى أصغر منطق جهوي نظامي يشتمل على $!A_{\OLMathNumeral{1}}$، \dots، $!A_{\OLId{latin-ordinary}{n}}$
+\emph{نسقا جهيا}، ويرمز إليه بـ$\Log{K} !A_{\OLMathNumeral{1}} \dots
+!A_{\OLId{latin-ordinary}{n}}$. ويرمز إلى أصغر منطق جهوي نظامي بـ~\Log{K}.
+\end{defn}
+
+\end{document}

@@ -1,0 +1,102 @@
+% Part: incompleteness
+% Chapter: arithmetization-syntax
+% Section: coding-formulas
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{art}{frm}
+\olsection{ترميز \printtoken{P}{formula}}
+
+قد ثبت التعريف العودي البدائي لـ$\fn{Term}({\OLId{latin-ordinary}{x}})$.
+ونتخذه الآن أساسًا لتعريف نظيرته في
+ال!!{formula}s، وهي $\fn{Frm}({\OLId{latin-ordinary}{x}})$،
+تعريفًا عوديًا بدائيًا.
+
+\begin{prop}
+العلاقة $\fn{Atom}({\OLId{latin-ordinary}{x}})$ عودية بدائية؛ ومعناها أن ${\OLId{latin-ordinary}{x}}$
+عدد غودل ل!!{formula} ذرية.
+\end{prop}
+
+\begin{proof}
+لتمييز ${\OLId{latin-ordinary}{x}}$ بوصفه عدد غودل ل!!{formula} ذرية،
+يكفي ويلزم تحقق إحدى الحالات الآتية:
+% تصحيح صياغة كلاسيكية (C284-01/أ): حُذف تكرار الفعل في صدر التفصيل.
+\begin{enumerate}
+\item ثمة ${\OLId{latin-ordinary}{n}}$ و${\OLId{latin-ordinary}{j}}<{\OLId{latin-ordinary}{x}}$ و${\OLId{latin-ordinary}{z}}<{\OLId{latin-ordinary}{x}}$ تحقق $\len{{\OLId{latin-ordinary}{z}}}={\OLId{latin-ordinary}{n}}$، ولكل ${\OLId{latin-ordinary}{i}}<{\OLId{latin-ordinary}{n}}$ تكون
+  $\fn{Term}(({\OLId{latin-ordinary}{z}})_{\OLId{latin-ordinary}{i}})$ صادقة، و${\OLId{latin-ordinary}{x}}=$
+\[
+\Gn{\Obj P^{\OLId{latin-ordinary}{n}}_{\OLId{latin-ordinary}{j}}(} \concat \fn{flatten}({\OLId{latin-ordinary}{z}}) \concat \Gn{)}.
+\]
+\item ثمة ${\OLId{latin-ordinary}{z}}_{\OLMathNumeral{1}},{\OLId{latin-ordinary}{z}}_{\OLMathNumeral{2}}<{\OLId{latin-ordinary}{x}}$ تصدق فيهما $\fn{Term}({\OLId{latin-ordinary}{z}}_{\OLMathNumeral{1}})$ و$\fn{Term}({\OLId{latin-ordinary}{z}}_{\OLMathNumeral{2}})$،
+  و${\OLId{latin-ordinary}{x}}=$
+\[
+\Gn{{\eq}(} \concat {\OLId{latin-ordinary}{z}}_{\OLMathNumeral{1}} \concat \Gn{,} \concat {\OLId{latin-ordinary}{z}}_{\OLMathNumeral{2}} \concat{\Gn{)}}.
+\]
+  \tagitem{prvFalse}{${\OLId{latin-ordinary}{x}} = \Gn{\lfalse}$.}{}
+  \tagitem{prvTrue}{${\OLId{latin-ordinary}{x}} = \Gn{\ltrue}$.}{}
+\end{enumerate}
+\end{proof}
+
+\begin{prop}
+\ollabel{prop:frm-primrec}
+العلاقة $\fn{Frm}({\OLId{latin-ordinary}{x}})$ عودية بدائية، ومفادها أن ${\OLId{latin-ordinary}{x}}$
+عدد غودل ل!!a{formula}.
+\end{prop}
+
+\begin{proof}
+متتالية الرموز~${\OLId{latin-ordinary}{s}}$ !!a{formula} إذا وفقط إذا
+أمكنت متتالية تكوين ${\OLId{latin-ordinary}{s}}_{\OLMathNumeral{0}}$، \dots،
+${\OLId{latin-ordinary}{s}}_{{\OLId{latin-ordinary}{k}}-{\OLMathNumeral{1}}}={\OLId{latin-ordinary}{s}}$ من !!{formula}، تسجل
+بناء~${\OLId{latin-ordinary}{s}}$ من !!{formula}s ذرية بقواعد
+التكوين. ونختار المتتالية بلا تكرار،
+فيكون كل ${\OLId{latin-ordinary}{s}}_{\OLId{latin-ordinary}{i}}$ صيغة جزئية من~${\OLId{latin-ordinary}{s}}$،
+وطولها لا يتجاوز ${\OLId{latin-ordinary}{k}}=\len{{\OLId{latin-ordinary}{x}}}$،
+وعدد غودل لأي عنصر فيها لا يتجاوز~${\OLId{latin-ordinary}{x}}$،
+ويساويه في العنصر الأخير. فيحصر رمز
+المتتالية، مثلًا، بالحد العودي البدائي
+${\OLId{latin-ordinary}{p}}_{{\OLId{latin-ordinary}{k}}-{\OLMathNumeral{1}}}^{{\OLId{latin-ordinary}{k}}({\OLId{latin-ordinary}{x}}+{\OLMathNumeral{1}})}$. ومن ثم تكون
+الكمّات التي نحتاج إليها على متتاليات
+التكوين محدودة بحدود عودية بدائية.
+% تصحيح صياغة كلاسيكية (C284-01/ب): أُزيل الرسم المعيب «المرّمزة» بإعادة العبارة.
+\end{proof}
+
+\begin{prob}
+فصّل برهان \olref[inc][art][frm]{prop:frm-primrec} على مثال
+البرهان الأول لـ\olref[inc][art][trm]{prop:term-primrec}.
+\end{prob}
+
+\begin{prop}
+\ollabel{prop:freeocc-primrec}
+العلاقة $\fn{FreeOcc}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{z}},{\OLId{latin-ordinary}{i}})$ عودية بدائية. وهي تعني
+أن الرمز رقم ${\OLId{latin-ordinary}{i}}$ في الصيغة ذات عدد غودل~${\OLId{latin-ordinary}{x}}$
+ورود حر للمتغير ذي عدد غودل~${\OLId{latin-ordinary}{z}}$.
+\end{prop}
+
+\begin{proof}
+برهانه متروك للتمرين.
+\end{proof}
+
+\begin{prob}
+برهن \olref[inc][art][frm]{prop:freeocc-primrec}. ولك الاستناد إلى أن كل مقطع من !!a{formula} يكون !!a{formula} لا بد أن يكون
+!!{formula} جزئية منها.
+\end{prob}
+
+\begin{prop}
+الخاصية $\fn{Sent}({\OLId{latin-ordinary}{x}})$ عودية بدائية؛ ومعناها أن ${\OLId{latin-ordinary}{x}}$
+عدد غودل ل!!a{sentence}.
+\end{prop}
+
+\begin{proof}
+إنما ال!!{sentence} !!a{formula} خالية من الورودات الحرة
+  لل!!{variable}s. ومن ثم يصدق $\fn{Sent}({\OLId{latin-ordinary}{x}})$ إذا وفقط إذا
+\begin{multline*}
+\fn{Frm}({\OLId{latin-ordinary}{x}}) \land {}\\
+\bforall{{\OLId{latin-ordinary}{i}}<\len{{\OLId{latin-ordinary}{x}}}}{\bforall{{\OLId{latin-ordinary}{z}}<{\OLId{latin-ordinary}{x}}}{}}\\
+(\bexists{{\OLId{latin-ordinary}{j}}<{\OLId{latin-ordinary}{z}}}{{\OLId{latin-ordinary}{z}}=\Gn{\Obj v_{\OLId{latin-ordinary}{j}}}} \lif \lnot\fn{FreeOcc}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{z}},{\OLId{latin-ordinary}{i}})).
+\end{multline*}
+% تصحيح مصدر (C284-02): أُضيف شرط كون x رمز صيغة قبل شرط انعدام المتغيرات الحرة.
+\end{proof}
+
+\end{document}

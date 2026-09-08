@@ -1,0 +1,149 @@
+% Part: normal-modal-logic
+% Chapter: axioms-systems
+% Section: systems-distinct
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{prf}{dis}
+
+\olsection{بيان تمايز النظم}
+
+بيّنا في~\olref[prs]{sec} كيف يثبت اتحاد نسقين جهويين.
+أما تمايزهما فطريقه مبرهنة~\olref[snd]{thm:soundness}:
+إذا أردنا الفصل بين~$\Sigma$ و$\Sigma'$، التمسنا !!a{formula}~$!A$
+بحيث~$\Sigma' \Proves !A$، ثم أظهرنا كذبها في نموذج لـ~$\Sigma$.
+
+\begin{prop}
+  $\Log{KD} \subsetneq \Log{KT}$
+\end{prop}
+
+\begin{proof} هذه هي النظيرة التركيبية للحقيقة الدلالية القائلة إن كل
+  علاقة انعكاسية تسلسلية. ولكي نبين $\Log{KD} \subseteq \Log{KT}$،
+  علينا أن نرى أن $\Log{KD} \Proves !B$ يستلزم $\Log{KT} \Proves
+  !B$، وهذا ينتج من $\Log{KT} \Proves \Ax{D}$، كما بينا في
+  \olref[prs]{prop:S5facts}\olref[prs]{prop:S5facts-KT-D}. ولكي نبين
+  أن الاحتواء صارم، يكفي، بمقتضى السلامة
+  (\olref[snd]{thm:soundness})، أن نبرز نموذجا لـ\Log{KD} تخفق فيه
+  \Ax{T}، أي $\Box {\OLId{latin-ordinary}{p}} \lif {\OLId{latin-ordinary}{p}}$ (وهي مهمة سهلة تترك تمرينا)، إذ عندئذ
+  يترتب بالسلامة أن $\Log{KD} \Proves/ \Box {\OLId{latin-ordinary}{p}} \lif {\OLId{latin-ordinary}{p}}$.
+\end{proof}
+
+\begin{prop}
+  $\Log{KB} \neq \Log{K4}$.
+\end{prop}
+
+\begin{proof}
+  نختار نموذجًا متناظرًا تكذب فيه حالة من~\Ax{4}. فهي
+  !!{derivable} في~\Log{K4}، ولكن السلامة تمنع اشتقاقها
+  في~\Log{KB}، فيثبت~$\Log{K4} \nsubseteq \Log{KB}$.
+  وهذا النموذج المتناظر~$\mModel{M}$ مرسوم في~\olref{fig:Bnot4}.
+  فـ\Ax{K} و~\Ax{B} صادقتان في~$\mModel{M}$، الأولى من
+  \olref[syn][sch]{prop:Kvalid} والثانية من التناظر
+  و\olref[frd][acc]{thm:soundschemas}.
+  لكن~$\mSat/{{\OLId{latin-looped}{M}}}{\Box {\OLId{latin-ordinary}{p}} \lif \Box\Box {\OLId{latin-ordinary}{p}}}[{\OLId{latin-ordinary}{w}}_{\OLMathNumeral{1}}]$.
+\end{proof}
+
+\begin{figure}[htpb]
+  \centering
+  \begin{tikzpicture}[modal]
+    \node[world] (w1) [label=above:\mFalse{p},
+    label={below:$\mSat{{}}{\Box {\OLId{latin-ordinary}{p}}}$\\ $\mSat/{{}}{\Box\Box {\OLId{latin-ordinary}{p}}}$}] {${\OLId{latin-ordinary}{w}}_{\OLMathNumeral{1}}$}; 
+    \node[world] (w2) [label=above:\mTrue{p},
+      label=below:$\mSat/{{}}{\Box {\OLId{latin-ordinary}{p}}}$, right=of w1]{${\OLId{latin-ordinary}{w}}_{\OLMathNumeral{2}}$}; 
+    \draw[->, bend left] (w1) to (w2); 
+    \draw[->, bend left] (w2) to (w1); 
+  \end{tikzpicture}
+  \caption{نموذج تناظري يكذّب مثالا لـ\Ax{4}.}
+  \ollabel{fig:Bnot4}
+\end{figure}
+ 
+% تصحيح مصدر (0437-I1): المقصود بديهتا 4 و5 لا الرمزان الدالان على نسقين.
+\begin{thm}\ollabel{thm:KTBnot45}
+  $\Log{KTB} \Proves/ \Ax{4}$ و$\Log{KTB} \Proves/ \Ax{5}$.
+\end{thm}
+
+\begin{proof}
+  تعطي~\olref[frd][acc]{thm:soundschemas} صدق كل أمثلة~\Ax{T}
+  و\Ax{B} في النماذج الانعكاسية المتناظرة، كل بديهة بحسب خاصيتها.
+  فبالسلامة يكفينا نموذج انعكاسي متناظر يفشل في بعض عوالمه مثال
+  من~\Ax{4}، وآخر كذلك لـ~\Ax{5}. بل يغني نموذج واحد عن الاثنين:
+  هو المرسم في~\olref{fig:KTBnot45}.
+  ففيه~$\mSat/{{\OLId{latin-looped}{M}}}{\Box {\OLId{latin-ordinary}{p}} \lif \Box \Box {\OLId{latin-ordinary}{p}}}[{\OLId{latin-ordinary}{w}}_{\OLMathNumeral{1}}]$، فتفشل~\Ax{4}
+  في~${\OLId{latin-ordinary}{w}}_{\OLMathNumeral{1}}$. وفيه أيضًا
+  $\mSat/{{\OLId{latin-looped}{M}}}{\Diamond \lnot {\OLId{latin-ordinary}{p}} \lif \Box \Diamond \lnot
+    {\OLId{latin-ordinary}{p}}}[{\OLId{latin-ordinary}{w}}_{\OLMathNumeral{2}}]$؛ فتفشل حالة~\Ax{5} التي فيها~$!A = \lnot {\OLId{latin-ordinary}{p}}$ عند~${\OLId{latin-ordinary}{w}}_{\OLMathNumeral{2}}$.
+\end{proof}
+
+\begin{figure}[htpb]
+  \centering
+  \begin{tikzpicture}[modal]
+    \node[world] (w1) [label={right:\mTrue{p}},
+      label={below: $\mSat{{}}{\Box {\OLId{latin-ordinary}{p}}}$\\
+        $\mSat/{{}}{\Box\Box {\OLId{latin-ordinary}{p}}}$\\
+        $\mSat/{{}}{\Diamond\lnot {\OLId{latin-ordinary}{p}}}$}] {${\OLId{latin-ordinary}{w}}_{\OLMathNumeral{1}}$};
+    \draw[reflexive above] (w1) to (w1);
+    \node[world] (w2) [label={right:\mTrue{p}}, label={below:
+        $\mSat{{}}{\Diamond\lnot {\OLId{latin-ordinary}{p}}}$\\
+        $\mSat/{{}}{\Box\Diamond\lnot {\OLId{latin-ordinary}{p}}}$}, right=of w1] {${\OLId{latin-ordinary}{w}}_{\OLMathNumeral{2}}$} ;
+    \draw[reflexive above] (w2) to (w2);
+    \node[world] (w3) [label={right:\mFalse{p}},right=of w2] {${\OLId{latin-ordinary}{w}}_{\OLMathNumeral{3}}$};
+    \draw[reflexive above] (w3) to (w3);
+    \draw[->, bend left] (w1) to (w2);  
+    \draw[->, bend left] (w2) to (w3);  
+    \draw[->, bend left] (w3) to (w2);  
+    \draw[->, bend left] (w2) to (w1);  
+  \end{tikzpicture}
+  \caption{نموذج \olref{thm:KTBnot45}.}
+  \ollabel{fig:KTBnot45}
+\end{figure}
+
+\begin{thm}\ollabel{thm:KD5not4}
+  $\Log{KD5} \neq \Log{KT4} = \Log{S4}$.
+\end{thm}
+
+\begin{proof}
+  نعلم من \olref[frd][acc]{thm:soundschemas} أن جميع أمثلة \Ax{D}
+  و~\Ax{5} صادقة في جميع النماذج التسلسلية الإقليدية. ولذلك يكفي أن
+  نجد نموذجا تسلسليا إقليديا يشتمل على عالم يخفق فيه بعض أمثلة
+  \Ax{4}. انظر نموذج \olref{fig:KD5not4}، ولاحظ أن
+  $\mSat/{{\OLId{latin-looped}{M}}}{\Box {\OLId{latin-ordinary}{p}} \lif \Box\Box {\OLId{latin-ordinary}{p}}}[{\OLId{latin-ordinary}{w}}_{\OLMathNumeral{1}}]$.
+\end{proof}
+
+\begin{figure}[t]
+  \centering
+  \begin{tikzpicture}[modal]
+    \node[world] (w2) [label=north west:\mTrue{p}]{${\OLId{latin-ordinary}{w}}_{\OLMathNumeral{2}}$} ;
+    \draw[reflexive left] (w2) to (w2);
+    \node[world] (w1) [label=right:\mFalse{p},
+      label=below:{$\mSat{{}}{\Box {\OLId{latin-ordinary}{p}}}, \mSat/{{}}{\Box\Box {\OLId{latin-ordinary}{p}}}$},
+      below right=of w2]{${\OLId{latin-ordinary}{w}}_{\OLMathNumeral{1}}$};
+    \node[world] (w3) [label=north east:\mTrue{p}, above right=of w1]{${\OLId{latin-ordinary}{w}}_{\OLMathNumeral{3}}$} ;
+    \draw[reflexive right] (w3) to (w3);
+    \node[world] (w4) [label=right:\mFalse{p},above right=of w2]{${\OLId{latin-ordinary}{w}}_{\OLMathNumeral{4}}$};
+    \draw[reflexive above] (w4) to (w4);
+    \draw[->] (w1) to (w2);  
+    \draw[->] (w1) to (w3);  
+    \draw[->, bend left=15] (w2) to (w3);
+    \draw[->, bend left=15] (w3) to (w2);  
+    \draw[->, bend left=15] (w2) to (w4);
+    \draw[->, bend left=15] (w4) to (w2);  
+    \draw[->, bend left=15] (w3) to (w4);
+    \draw[->, bend left=15] (w4) to (w3);  
+  \end{tikzpicture}
+  \caption{نموذج \olref{thm:KD5not4}.}
+  \ollabel{fig:KD5not4}
+\end{figure}
+
+\begin{prob}
+  أعط برهانا بديلا لـ\olref[nml][prf][dis]{thm:KD5not4} باستعمال
+  نموذج ذي ${\OLMathNumeral{3}}$ عوالم.
+\end{prob}
+
+\begin{prob}
+  قدّم نموذجا واحدا انعكاسيا ومتعديا يبين كلا من
+  $\Log{KT4} \Proves/ \Ax{B}$ و$\Log{KT4} \Proves/ \Ax{5}$.
+\end{prob}
+
+\end{document}

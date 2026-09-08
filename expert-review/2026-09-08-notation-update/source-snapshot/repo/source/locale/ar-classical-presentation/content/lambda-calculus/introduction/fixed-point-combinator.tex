@@ -1,0 +1,41 @@
+% Part: lambda-calculus
+% Chapter: introduction
+% Section: fixed-point-combinator
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{int}{fix}
+\olsection{مؤلفات النقطة الثابتة}
+
+لتكن لدينا عبارة لامبدا~${\OLId{latin-ordinary}{g}}$، ولنطلب حدًا آخر~${\OLId{latin-ordinary}{k}}$ يكون فيه~${\OLId{latin-ordinary}{k}}$
+مكافئًا بحسب~$\beta$ للحد~$gk$. نعرّف الحدين
+\[
+\fn{diag}({\OLId{latin-ordinary}{x}}) = xx
+\]
+و
+\[
+{\OLId{latin-ordinary}{l}}({\OLId{latin-ordinary}{x}}) = {\OLId{latin-ordinary}{g}}(\fn{diag}({\OLId{latin-ordinary}{x}}))
+\]
+على مقتضى اصطلاحاتنا؛ فـ${\OLId{latin-ordinary}{l}}$ هو الحد~$\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{g}}(xx)]$.
+ثم نأخذ~${\OLId{latin-ordinary}{k}}$ مساويًا للحد~$ll$، فنجد
+\begin{align*}
+{\OLId{latin-ordinary}{k}} & = (\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{g}}(xx)])(\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{g}}(xx)]) \\
+& \red  {\OLId{latin-ordinary}{g}}((\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{g}}(xx)])(\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{g}}(xx)])) \\
+& = gk.
+\end{align*}
+وعليه، إذا وضعنا
+\[
+{\OLId{latin-looped}{Y}} = \lambd[{\OLId{latin-ordinary}{g}}][((\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{g}}(xx)])(\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{g}}(xx)]))]
+\]
+كان~$Yg$ و${\OLId{latin-ordinary}{g}}(Yg)$ قابلين للاختزال إلى حد واحد، فينتج
+$Yg \equiv_\beta {\OLId{latin-ordinary}{g}}(Yg)$. وهذا هو «مؤلف كاري». وأما إذا وضعنا
+\[
+{\OLId{latin-looped}{Y}} = (\lambd[xg][{\OLId{latin-ordinary}{g}}(xxg)])(\lambd[xg][{\OLId{latin-ordinary}{g}}(xxg)])
+\]
+فإن~$Yg$ يختزل إلى~${\OLId{latin-ordinary}{g}}(Yg)$ نفسه؛ وهذه نتيجة أقوى من مجرد التكافؤ.
+وتسمى هذه الصيغة الأخيرة من~${\OLId{latin-looped}{Y}}$ «مؤلف تورنغ».
+
+\end{document}
+

@@ -1,0 +1,71 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{choice}{tarskiscott}
+\olsection{حيلة تارسكي--سكوت}
+
+عرّفنا الكاردينالات في
+\olref[cardinals][cardsasords]{defcardinalasordinal} بأنها أعداد
+ترتيبية، واستندنا في ذلك إلى بديهية الترتيب الجيد. وما حملنا عليه إلا
+أنه النهج المصطلح عليه.
+
+وقبل الخوض في المسائل الفلسفية المتعلقة بالترتيب الجيد، ينبغي أن نعلم
+أن العدول عن ذلك النهج ممكن، وأن نظرية الكاردينالات يمكن بناؤها من غير
+افتراض الترتيب الجيد. فتعريفات~$\cardeq{{\OLId{latin-looped}{A}}}{{\OLId{latin-looped}{B}}}$ و$\cardle{{\OLId{latin-looped}{A}}}{{\OLId{latin-looped}{B}}}$
+و$\cardless{{\OLId{latin-looped}{A}}}{{\OLId{latin-looped}{B}}}$ الواردة في~\olref[sfr][siz][]{chap} باقية صالحة،
+ولا ينقصنا إلا معنى جديد للكاردينال.
+
+وقد يبدو لأول وهلة أن تعرف كاردينالية~${\OLId{latin-looped}{A}}$ بالمجموعة:
+\[
+	\Setabs{{\OLId{latin-ordinary}{x}}}{\cardeq{{\OLId{latin-looped}{A}}}{{\OLId{latin-ordinary}{x}}}}.
+\]
+وقارن هذا بتعريف فرغه لـ~$\# {\OLId{latin-ordinary}{x}} Fx$ الذي أجملناه في آخر
+\olref[cardinals][hp]{sec}. إلا أن هذا التعريف ممتنع للأسباب المذكورة
+هناك. فخذ~${\OLId{latin-looped}{A}}=\{\emptyset\}$. كل مجموعة أحادية العنصر متساوية القدرة
+مع~${\OLId{latin-looped}{A}}$، وتظهر في كل مرحلة خلفية من التراتبية مجموعة أحادية جديدة؛
+يكفي أن تأخذ المجموعة الأحادية للمرحلة السابقة. فلا توجد إذن
+$\Setabs{{\OLId{latin-ordinary}{x}}}{\cardeq{{\OLId{latin-looped}{A}}}{{\OLId{latin-ordinary}{x}}}}$، لأنها لو وجدت لم تكن لها رتبة.
+
+وندفع هذه العلة بحيلة تنسب إلى تارسكي وسكوت.\footnote{تذكير: يجوز أن
+تتضمن جميع الصيغ وسائط، ما لم ينص صراحة على خلاف ذلك.}
+
+\begin{defn}[Tarski--Scott]
+لكل صيغة~$\phi({\OLId{latin-ordinary}{x}})$، اجعل~$[ {\OLId{latin-ordinary}{x}} : \phi({\OLId{latin-ordinary}{x}})] $ مجموعة جميع قيم~${\OLId{latin-ordinary}{x}}$ التي
+تحقق~$\phi({\OLId{latin-ordinary}{x}})$ ويكون لها أصغر رتبة ممكنة (أو~$\emptyset$ إن لم توجد
+قيمة تحقق~$\phi$).
+% تصحيح أسلوبي (0594-N1): ذُكرت حالة الخلو مرة واحدة.
+\end{defn}
+
+ويبقى إثبات أن التعريف مشروع. نعمل في~$\ZF$. يضمن
+\olref[spine][foundation]{zfentailsregularity} وجود~$\setrank{{\OLId{latin-ordinary}{x}}}$ لكل
+${\OLId{latin-ordinary}{x}}$. فإن وجدت أشياء تحقق~$\phi$، اخترنا أصغر~${\OLId{greek-variable}{alpha}}$ يحقق
+$(\exists {\OLId{latin-ordinary}{x}}\subseteq {\OLId{latin-looped}{V}}_{\OLId{greek-variable}{alpha}})\phi({\OLId{latin-ordinary}{x}})$. ومن أصغرية~${\OLId{greek-variable}{alpha}}$ يمتنع أن
+توجد في رتبة أدنى قيمة تحقق~$\phi$؛ أي
+$(\forall \beta \in {\OLId{greek-variable}{alpha}})(\forall {\OLId{latin-ordinary}{x}} \subseteq {\OLId{latin-looped}{V}}_\beta)
+\lnot \phi({\OLId{latin-ordinary}{x}})$. وحينئذ يجيز لنا الفصل أن نعرّف
+$[{\OLId{latin-ordinary}{x}} : \phi({\OLId{latin-ordinary}{x}})]$ بأنه~$\Setabs{{\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{V}}_{{\OLId{greek-variable}{alpha}}+{\OLMathNumeral{1}}}}{\phi({\OLId{latin-ordinary}{x}})}$.
+
+وبعد تسويغ الحيلة نضع بها مفهومًا للكاردينالية.
+
+\begin{defn}
+كاردينالية \textsc{ts} لـ${\OLId{latin-looped}{A}}$ هي
+$\text{tsc}({\OLId{latin-looped}{A}}) = [{\OLId{latin-ordinary}{x}} : \cardeq{{\OLId{latin-looped}{A}}}{{\OLId{latin-ordinary}{x}}}]$.
+\end{defn}
+
+ولا تدخل بديهية الترتيب الجيد في تعريف كاردينال~\textsc{ts}. ومع ذلك
+نستطيع، وإن لم نفترضها، أن نبين أن \emph{كاردينالات \textsc{ts}}
+تجري في جل أحكامها مجرى \emph{الكاردينالات} المعرفة في
+\olref[cardinals][cardsasords]{defcardinalasordinal}. فلو أعدنا مثلًا
+صياغة~\olref[cardinals][cardsasords]{lem:CardinalsBehaveRight}
+و\olref[card-arithmetic][opps]{lem:SizePowerset2Exp} بلسان كاردينالات
+\textsc{ts}، لبقي البرهانان صحيحين في~$\ZF$، من غير الترتيب الجيد.
+
+ومما يتصل بهذا أننا نستطيع كذلك إقامة نظرية للأعداد الترتيبية بحيلة
+تارسكي--سكوت. فإذا كان~$\tuple{{\OLId{latin-looped}{A}}, <}$ ترتيبًا جيدًا، فضع
+$\text{tso}({\OLId{latin-looped}{A}}, <) = [\tuple{{\OLId{latin-looped}{X}}, {\OLId{latin-looped}{R}}} :
+\ordeq{\tuple{{\OLId{latin-looped}{A}}, <}}{\tuple{{\OLId{latin-looped}{X}}, {\OLId{latin-looped}{R}}}}]$. وللتوسع في هذه المعالجة
+للكاردينالات والأعداد الترتيبية، انظر
+\citet[chs.~9--12]{Potter2004}.
+
+\end{document}

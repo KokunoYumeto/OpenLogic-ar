@@ -1,0 +1,33 @@
+% Part: lambda-calculus
+% Chapter: introduction
+% Section: basic-pr-lambda
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{int}{bas}
+\olsection{الدوال العودية البدائية الأساسية \usetoken{S}{lambda definable}}
+
+\begin{lem}
+كل واحدة من الدوال~$\Zero$ و$\Succ$ و$\Proj{{\OLId{latin-ordinary}{n}}}{{\OLId{latin-ordinary}{i}}}$ هي !!{lambda definable}.
+\end{lem}
+
+\begin{proof}
+أما~$\Zero$ فيمثلها الحد
+$\lambd[{\OLId{latin-ordinary}{x}}][\lambd[{\OLId{latin-ordinary}{y}}][{\OLId{latin-ordinary}{y}}]]$.
+
+وأما دالة الخلف~$\Succ$ فتعريفها
+$\fn{Succ}({\OLId{latin-ordinary}{u}}) = \lambd[{\OLId{latin-ordinary}{x}}][\lambd[{\OLId{latin-ordinary}{y}}][{\OLId{latin-ordinary}{x}}(uxy)]]$. ولتتأمل وجه هذا التعريف:
+لكل عدد~$\num{{\OLId{latin-ordinary}{n}}}$ نعدّه مكرّرًا، ولكل دالة~${\OLId{latin-ordinary}{f}}$، تكون
+$\fn{Succ}(\num{{\OLId{latin-ordinary}{n}}},{\OLId{latin-ordinary}{f}})$ دالة تأخذ~${\OLId{latin-ordinary}{y}}$، فتطبق~${\OLId{latin-ordinary}{f}}$
+${\OLId{latin-ordinary}{n}}$ مرة، بادئةً من~${\OLId{latin-ordinary}{y}}$، ثم تزيد تطبيقًا واحدًا.
+
+وأما الإسقاطات فأمرها بيّن:
+$\fn{Proj}^{\OLId{latin-ordinary}{n}}_{\OLId{latin-ordinary}{i}}({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}}, \dots, {\OLId{latin-ordinary}{x}}_{{\OLId{latin-ordinary}{n}}-{\OLMathNumeral{1}}}) = {\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{i}}$. فمقتضى اصطلاحنا أن
+$\fn{Proj}^{\OLId{latin-ordinary}{n}}_{\OLId{latin-ordinary}{i}}$ هي حد لامبدا
+$\lambd[{\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}}][\dots \lambd[{\OLId{latin-ordinary}{x}}_{{\OLId{latin-ordinary}{n}}-{\OLMathNumeral{1}}}][{\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{i}}]]$.
+\end{proof}
+
+\end{document}
+

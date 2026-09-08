@@ -1,0 +1,84 @@
+% Part: proof-theory
+% Chapter: sequent-calculus
+% Section: rules-G3c
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\begin{table}
+\begin{tabular}{@{}c@{}c@{}}
+\multicolumn{\OLClassicalDigits{2}}{@{}c@{}}{المسلّمات}\\[2ex]
+$!C, {\OLId{greek-variable}{Gamma}} \Sequent {\OLId{greek-variable}{Delta}}, !C$ & $\lfalse, {\OLId{greek-variable}{Gamma}} \Sequent {\OLId{greek-variable}{Delta}}$
+\\[2ex]
+\multicolumn{\OLClassicalDigits{2}}{@{}c@{}}{القواعد المنطقية}\\[2ex]
+\Axiom$ {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, !A $
+\RightLabel{\LeftR{\lnot}}
+\UnaryInf$ \lnot !A, {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}$
+\DisplayProof
+&
+\Axiom$!A, {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}$
+\RightLabel{\RightR{\lnot}}
+\UnaryInf$ {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, \lnot !A $
+\DisplayProof
+\\[4ex]
+\Axiom$ !A, !B, {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}$
+\RightLabel{\LeftR{\land}}
+\UnaryInf$ !A \land !B, {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}$
+\DisplayProof
+&
+\Axiom${\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, !A$
+\Axiom$ {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, !B$
+\RightLabel{\RightR{\land}}
+\BinaryInf$ {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, !A \land !B $
+\DisplayProof
+\\[4ex]\Axiom$!A, {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}$
+\Axiom$!B, {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}$
+\RightLabel{\LeftR{\lor}}
+\BinaryInf$!A \lor !B, {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}$
+\DisplayProof
+&
+\Axiom${\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, !A, !B$
+\RightLabel{\RightR{\lor}}
+\UnaryInf$ {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, !A \lor !B$
+\DisplayProof
+\\[4ex]
+\Axiom$ {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, !A$
+\Axiom$ !B, {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}$
+\RightLabel{\LeftR{\lif}}
+\BinaryInf$ !A \lif !B, {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}$
+\DisplayProof
+&
+\Axiom$ !A, {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, !B$
+\RightLabel{\RightR{\lif}}
+\UnaryInf$ {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, !A \lif !B $
+\DisplayProof
+\\[4ex]
+\Axiom$ !A({\OLId{latin-ordinary}{t}}), \lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})], {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}$
+\RightLabel{\LeftR{\lforall}}
+\UnaryInf$ \lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})],{\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}$
+\DisplayProof
+&
+\Axiom$ {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, !A({\OLId{latin-ordinary}{a}}) $
+\RightLabel{\RightR{\lforall}}
+\UnaryInf$ {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, \lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$
+\DisplayProof
+\\[4ex]
+\Axiom$ !A({\OLId{latin-ordinary}{a}}), {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}} $
+\RightLabel{\LeftR{\lexists}}
+\UnaryInf$ \lexists[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})], {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}$
+\DisplayProof
+&
+\Axiom$ {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, \lexists[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})], !A({\OLId{latin-ordinary}{t}}) $
+\RightLabel{\RightR{\lexists}}
+\UnaryInf$ {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, \lexists[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$
+\DisplayProof
+\end{tabular}
+\caption{هذه قواعد \Log{G3c}. ويشترط في قاعدتي $\RightR{\lforall}$ و
+$\LeftR{\lexists}$ ألا يظهر~!!{constant}~${\OLId{latin-ordinary}{a}}$ في المتتالية
+الناتجة؛ وأما ${\OLId{greek-variable}{Gamma}}$ و${\OLId{greek-variable}{Delta}}$ فكل منهما مجموعة متعددة من~!!{formula}s.
+ويشترط كذلك في المسلّمات أن تكون~!!{formula}~$!C$ ذرية.}
+\ollabel{tab:G3c}
+\end{table}
+
+\end{document}

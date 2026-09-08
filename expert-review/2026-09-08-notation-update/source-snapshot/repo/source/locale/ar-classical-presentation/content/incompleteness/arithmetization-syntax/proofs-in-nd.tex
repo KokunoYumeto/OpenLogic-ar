@@ -1,0 +1,372 @@
+% Part: incompleteness
+% Chapter: arithmetization-syntax
+% Section: proofs-in-nd
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{art}{pnd}
+\olsection{\usetoken{P}{derivation} في الاستنباط الطبيعي}
+
+\begin{explain}
+حوسبة ال!!{derivation}s تبدأ بتمثيل
+ال!!{derivation}s بالأعداد. ولما كانت
+ال!!{derivation}s أشجارًا من !!{formula}s،
+ولكل استدلال وسم أو وسمان، ناسب أن
+يكون التمثيل عوديًا. فنمثل
+ال!!{derivation} بصف يتضمن عدد
+ال!!{derivation}s الجزئية المباشرة
+التي تنتهي بمقدمات آخر استدلال،
+ورموز هذه ال!!{derivation}s الجزئية،
+وال!!{formula} الختامية، ووسم التفريغ،
+ثم عددًا يعين نوع آخر استدلال.
+\end{explain}
+
+\begin{defn}
+  لكل $\delta$ وهو !!a{derivation} في الاستنباط الطبيعي،
+  نحدّ $\Gn{\delta}$ استقرائيًا بحسب الحالات الآتية:
+  \begin{enumerate}
+  \item 
+    إن اقتصر $\delta$ على فرض~$!A$، كان $\Gn{\delta}$
+    هو $\tuple{{\OLMathNumeral{0}},\Gn{!A},{\OLId{latin-ordinary}{n}}}$. ونجعل~${\OLId{latin-ordinary}{n}}$ هو ${\OLMathNumeral{0}}$
+    إن كان الفرض !!{undischarged}، ورقم وسمه فيما عدا ذلك.
+  \item 
+    وإن انتهى $\delta$ باستدلال بلا مقدمات، أو من مقدمة،
+    أو مقدمتين، أو ثلاث، كانت قيمة $\Gn{\delta}$
+    \begin{align*}
+      & \tuple{{\OLMathNumeral{0}}, \Gn{!A}, {\OLId{latin-ordinary}{n}}, {\OLId{latin-ordinary}{k}}}, \\
+      & \tuple{{\OLMathNumeral{1}}, \Gn{\delta_{\OLMathNumeral{1}}}, \Gn{!A}, {\OLId{latin-ordinary}{n}}, {\OLId{latin-ordinary}{k}}}, \\
+      & \tuple{{\OLMathNumeral{2}}, \Gn{\delta_{\OLMathNumeral{1}}}, \Gn{\delta_{\OLMathNumeral{2}}}, \Gn{!A}, {\OLId{latin-ordinary}{n}}, {\OLId{latin-ordinary}{k}}}, \text{ أو}\\
+      & \tuple{{\OLMathNumeral{3}}, \Gn{\delta_{\OLMathNumeral{1}}}, \Gn{\delta_{\OLMathNumeral{2}}}, \Gn{\delta_{\OLMathNumeral{3}}}, \Gn{!A}, {\OLId{latin-ordinary}{n}},
+        {\OLId{latin-ordinary}{k}}},
+    \end{align*}
+    على الترتيب. وفي هذه الصفوف $\delta_{\OLMathNumeral{1}}$ و$\delta_{\OLMathNumeral{2}}$
+    و$\delta_{\OLMathNumeral{3}}$ هي ال!!{derivation}s الجزئية التي تنتهي
+    بمقدمات آخر استدلال في $\delta$؛ و$!A$ نتيجة
+    آخر استدلال في~$\delta$؛ و${\OLId{latin-ordinary}{n}}$ وسم تفريغه،
+    ونجعله ${\OLMathNumeral{0}}$ إن لم يفرّغ فرضًا. وأما~${\OLId{latin-ordinary}{k}}$
+    فتعينه القاعدة الأخيرة وفق هذا الجدول.
+
+    \begin{tabular}{lccccccc}
+      \text{القاعدة:} & \Intro{\land} & \Elim{\land} & \Intro{\lor} & \Elim{\lor} \\
+      ${\OLId{latin-ordinary}{k}}$: & \OLClassicalDigits{1} & \OLClassicalDigits{2} & \OLClassicalDigits{3} & \OLClassicalDigits{4}  \\[1.5ex]
+      \text{القاعدة:} &  \Intro{\lif} & \Elim{\lif} & \Intro{\lnot} & \Elim{\lnot} \\
+      ${\OLId{latin-ordinary}{k}}$: & \OLClassicalDigits{5} & \OLClassicalDigits{6} & \OLClassicalDigits{7} & \OLClassicalDigits{8} \\[1.5ex]
+      \text{القاعدة:}  &  \FalseInt & \FalseCl & \Intro{\lforall} & \Elim{\lforall} \\
+      ${\OLId{latin-ordinary}{k}}$: & \OLClassicalDigits{9} & \OLClassicalDigits{10} & \OLClassicalDigits{11} & \OLClassicalDigits{12} \\[1.5ex]
+      \text{القاعدة:} & \Intro{\lexists} & \Elim{\lexists} & \Intro{\eq} & \Elim{\eq} \\
+      ${\OLId{latin-ordinary}{k}}$: & \OLClassicalDigits{13} & \OLClassicalDigits{14} & \OLClassicalDigits{15} & \OLClassicalDigits{16} 
+    \end{tabular}
+  \end{enumerate}
+\end{defn}
+
+\begin{ex}
+  خذ هذا ال!!{derivation} اليسير:
+  \begin{prooftree}
+    \AxiomC{$\Discharge{!A \land !B}{{\OLMathNumeral{1}}}$}
+    \RightLabel{\Elim{\land}}
+    \UnaryInfC{$!A$}
+    \DischargeRule{\Intro{\lif}}{1}
+    \UnaryInfC{$(!A \land !B) \lif !A$}
+  \end{prooftree}
+  فرمز الفرض هو ${\OLId{latin-ordinary}{d}}_{\OLMathNumeral{0}}=\tuple{{\OLMathNumeral{0}},\Gn{!A \land !B},{\OLMathNumeral{1}}}$.
+  ورمز ال!!{derivation} المنتهي بنتيجة~$\Elim{\land}$
+  هو ${\OLId{latin-ordinary}{d}}_{\OLMathNumeral{1}}=\tuple{{\OLMathNumeral{1}},{\OLId{latin-ordinary}{d}}_{\OLMathNumeral{0}},\Gn{!A},{\OLMathNumeral{0}},{\OLMathNumeral{2}}}$.
+  وفيه ${\OLMathNumeral{1}}$ لأن $\Elim{\land}$ أحادية المقدمة،
+  ثم عدد غودل للنتيجة~$!A$، ثم ${\OLMathNumeral{0}}$ لعدم
+  تفريغ أي فرض، ثم ${\OLMathNumeral{2}}$ رمز القاعدة $\Elim{\land}$.
+  فيكون رمز ال!!{derivation} كله
+  $\tuple{{\OLMathNumeral{1}},{\OLId{latin-ordinary}{d}}_{\OLMathNumeral{1}},\Gn{((!A \land !B) \lif !A)},{\OLMathNumeral{1}},{\OLMathNumeral{5}}}$،
+  أي
+  \[
+  \tuple{{\OLMathNumeral{1}}, \tuple{{\OLMathNumeral{1}}, \tuple{{\OLMathNumeral{0}}, \Gn{(!A \land !B)}, {\OLMathNumeral{1}}}, \Gn{!A}, {\OLMathNumeral{0}}, {\OLMathNumeral{2}}},
+    \Gn{((!A \land !B) \lif !A)}, {\OLMathNumeral{1}}, {\OLMathNumeral{5}}}.
+  \]
+\end{ex}
+
+\begin{explain}
+وبعد تعيين تمثيل ال!!{derivation}s،
+نحتاج إلى إثبات أن معالجة أعداد غودل
+لهذه ال!!{derivation}s وخواصها وعلاقاتها
+الأساسية عودية بدائية. فمن ذلك عمليات
+يسيرة: إذا أعطي عدد غودل~${\OLId{latin-ordinary}{d}}$
+ل!!a{derivation}، فإن
+$\fn{EndFmla}({\OLId{latin-ordinary}{d}})=({\OLId{latin-ordinary}{d}})_{({\OLId{latin-ordinary}{d}})_{\OLMathNumeral{0}}+{\OLMathNumeral{1}}}$
+تعطي عدد غودل لل!!{formula} الختامية،
+و$\fn{DischargeLabel}({\OLId{latin-ordinary}{d}})=({\OLId{latin-ordinary}{d}})_{({\OLId{latin-ordinary}{d}})_{\OLMathNumeral{0}}+{\OLMathNumeral{2}}}$
+تعطي وسم التفريغ،
+و$\fn{LastRule}({\OLId{latin-ordinary}{d}})=({\OLId{latin-ordinary}{d}})_{({\OLId{latin-ordinary}{d}})_{\OLMathNumeral{0}}+{\OLMathNumeral{3}}}$
+تعطي رمز نوع الاستدلال الأخير.
+وثمة عمليات أشق نبيّن طريقها، ولو
+إجمالًا. والمراد إثبات أن «$\delta$
+!!a{derivation} لـ$!A$ من ${\OLId{greek-variable}{Gamma}}$»
+علاقة عودية بدائية في عددي غودل
+لـ$\delta$ و$!A$.
+\end{explain}
+
+\begin{prop}
+  كل من العلاقتين الآتيتين عودية بدائية:
+  \begin{enumerate}
+  \item وجود $!A$ فرضًا في~$\delta$ موسومًا بـ~${\OLId{latin-ordinary}{n}}$.
+  \item كون فروض $\delta$ ذات الوسم~${\OLId{latin-ordinary}{n}}$ كلها من الصورة~$!A$
+    (أي إمكان !!{discharge} الفرض~$!A$ باستعمال الوسم~${\OLId{latin-ordinary}{n}}$ في~$\delta$).
+  \end{enumerate}
+\end{prop}
+
+\begin{proof}
+  نثبت عودية العلاقتين المناظرتين بدائيًا، على أعداد
+  غودل لل!!{formula}s وأعداد غودل لل!!{derivation}s.
+  \begin{enumerate}
+  \item أما $\fn{Assum}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{d}},{\OLId{latin-ordinary}{n}})$ فمعناها أن ${\OLId{latin-ordinary}{x}}$
+    عدد غودل لفرض في !!{derivation} رمزه~${\OLId{latin-ordinary}{d}}$،
+    ووسم الفرض ${\OLId{latin-ordinary}{n}}$. فيكفي أن يكون ال!!{derivation}
+    ذو الرمز $\tuple{{\OLMathNumeral{0}},{\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{n}}}$ !!{derivation}ًا جزئيًا
+    من~${\OLId{latin-ordinary}{d}}$. وترميز ال!!{derivation}s هنا من جملة
+    ترميز الأشجار في \olref[cmp][rec][tre]{sec}.
+    فالدالة العودية البدائية $\fn{SubtreeSeq}({\OLId{latin-ordinary}{d}})$
+    تسرد رموز ال!!{derivation}s الجزئية كلها
+    من~${\OLId{latin-ordinary}{d}}$ في متتالية طولها لا يتجاوز ${\OLId{latin-ordinary}{d}}$.
+    ولهذا يصح التعريف
+    \[
+    \fn{Assum}({\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{d}}, {\OLId{latin-ordinary}{n}}) \defiff \bexists{{\OLId{latin-ordinary}{i}}<{\OLId{latin-ordinary}{d}}}{(\fn{SubtreeSeq}({\OLId{latin-ordinary}{d}}))_{\OLId{latin-ordinary}{i}} =
+      \tuple{{\OLMathNumeral{0}}, {\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{n}}}}.
+    \]
+  \item وأما $\fn{Discharge}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{d}},{\OLId{latin-ordinary}{n}})$، أي كون
+    الفروض ذات الوسم~${\OLId{latin-ordinary}{n}}$ في !!{derivation} رمزه~${\OLId{latin-ordinary}{d}}$
+    كلها ال!!{formula} ذات الرمز~${\OLId{latin-ordinary}{x}}$، فعوديتها
+    البدائية ظاهرة من تكافئها مع
+    $\bforall{{\OLId{latin-ordinary}{y}}<{\OLId{latin-ordinary}{d}}}{(\fn{Assum}({\OLId{latin-ordinary}{y}},{\OLId{latin-ordinary}{d}},{\OLId{latin-ordinary}{n}}) \lif {\OLId{latin-ordinary}{y}}={\OLId{latin-ordinary}{x}})}$.
+  \end{enumerate}
+\end{proof}
+
+\begin{prop}
+  \ollabel{prop:followsby}
+  الخاصية $\fn{Correct}({\OLId{latin-ordinary}{d}})$ عودية بدائية؛ ومفادها صحة
+  الاستدلال الأخير في !!{derivation}~$\delta$ الذي رمزه~${\OLId{latin-ordinary}{d}}$.
+\end{prop}
+
+\begin{proof}
+  لكل قاعدة استدلال~${\OLId{latin-looped}{R}}$ نثبت عودية
+  $\fn{FollowsBy}_{\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{d}})$ البدائية.
+  ومعنى $\fn{FollowsBy}_{\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{d}})$ أن ${\OLId{latin-ordinary}{d}}$
+  رمز !!{derivation}~$\delta$، وأن
+  ال!!{formula} الختامية لـ$\delta$
+  تلزم من ال!!{derivation}s الجزئية
+  المباشرة لـ$\delta$ بتطبيق صحيح لـ~${\OLId{latin-looped}{R}}$.
+
+  ومن أيسر الحالات $\Intro{\land}$.
+  فإن ختم $\delta$ باستدلال صحيح بحسب $\Intro{\land}$،
+  كانت صورته:
+  \begin{prooftree}
+    \AxiomC{}
+    \RightLabel{$\delta_{\OLMathNumeral{1}}$}
+    \DeduceC{$!A$}
+    
+    \AxiomC{}
+    \RightLabel{$\delta_{\OLMathNumeral{2}}$}
+    \DeduceC{$!B$}
+
+    \RightLabel{\Intro\land}
+    \BinaryInfC{$!A \land !B$}
+  \end{prooftree}
+  فيكون عدد غودل~${\OLId{latin-ordinary}{d}}$ لـ$\delta$
+  $\tuple{{\OLMathNumeral{2}},{\OLId{latin-ordinary}{d}}_{\OLMathNumeral{1}},{\OLId{latin-ordinary}{d}}_{\OLMathNumeral{2}},\Gn{(!A \land !B)},{\OLMathNumeral{0}},{\OLId{latin-ordinary}{k}}}$، وفيه
+  $\fn{EndFmla}({\OLId{latin-ordinary}{d}}_{\OLMathNumeral{1}})=\Gn{!A}$ و$\fn{EndFmla}({\OLId{latin-ordinary}{d}}_{\OLMathNumeral{2}})=\Gn{!B}$،
+  و${\OLId{latin-ordinary}{n}}={\OLMathNumeral{0}}$ و${\OLId{latin-ordinary}{k}}={\OLMathNumeral{1}}$. فتعرّف $\fn{FollowsBy}_{\Intro\land}({\OLId{latin-ordinary}{d}})$ بـ
+  \begin{multline*}
+    ({\OLId{latin-ordinary}{d}})_{\OLMathNumeral{0}} = {\OLMathNumeral{2}} \land \fn{DischargeLabel}({\OLId{latin-ordinary}{d}}) = {\OLMathNumeral{0}} \land \fn{LastRule}({\OLId{latin-ordinary}{d}}) = {\OLMathNumeral{1}} \land {}\\
+    \fn{EndFmla}({\OLId{latin-ordinary}{d}}) = {}\\
+    \Gn{(} \concat \fn{EndFmla}(({\OLId{latin-ordinary}{d}})_{\OLMathNumeral{1}}) \concat \Gn{\land}
+    \concat \fn{EndFmla}(({\OLId{latin-ordinary}{d}})_{\OLMathNumeral{2}}) \concat \Gn{)}.
+  \end{multline*}
+
+  ومن الأمثلة اليسيرة أيضًا $\Intro\eq$.
+  فلا مقدمات لها، ولذلك $({\OLId{latin-ordinary}{d}})_{\OLMathNumeral{0}}={\OLMathNumeral{0}}$،
+  كما في الفروض، ولا تفريغ فيها، أي
+  ${\OLId{latin-ordinary}{n}}={\OLMathNumeral{0}}$. غير أن $!A$ لا بد أن تكون
+  $\eq[{\OLId{latin-ordinary}{t}}][{\OLId{latin-ordinary}{t}}]$ لحد مغلق~${\OLId{latin-ordinary}{t}}$.
+  فنحصل على التعريف العودي البدائي
+  \begin{multline*}
+    ({\OLId{latin-ordinary}{d}})_{\OLMathNumeral{0}} = {\OLMathNumeral{0}} \land \fn{DischargeLabel}({\OLId{latin-ordinary}{d}}) = {\OLMathNumeral{0}} \land {}\\
+    \bexists{{\OLId{latin-ordinary}{t}}<{\OLId{latin-ordinary}{d}}}{(\fn{ClTerm}({\OLId{latin-ordinary}{t}}) \land 
+      \fn{EndFmla}({\OLId{latin-ordinary}{d}}) = {}\\
+      \Gn{{\eq}(} \concat {\OLId{latin-ordinary}{t}} \concat \Gn{,} \concat {\OLId{latin-ordinary}{t}} \concat \Gn{)})}.
+  \end{multline*}
+
+  وأما $\fn{FollowsBy}_{\Intro{\lif}}({\OLId{latin-ordinary}{d}})$
+  فمثال أدق. تصدق إذا وفقط إذا كانت
+  ال!!{formula} الختامية لـ$\delta$
+  هي $(!A\lif !B)$، وال!!{formula}
+  الختامية لـ$\delta_{\OLMathNumeral{1}}$ هي~$!B$،
+  وكانت فروض~$\delta$ الموسومة بـ${\OLId{latin-ordinary}{n}}$
+  كلها من الصورة~$!A$. وهذا يعبر عنه
+  عوديًا بدائيًا بالشرط
+  \begin{multline*}
+    ({\OLId{latin-ordinary}{d}})_{\OLMathNumeral{0}} = {\OLMathNumeral{1}} \land {}\\
+    \bexists{{\OLId{latin-ordinary}{a}}<{\OLId{latin-ordinary}{d}}}{(\fn{Discharge}({\OLId{latin-ordinary}{a}}, ({\OLId{latin-ordinary}{d}})_{\OLMathNumeral{1}}, \fn{DischargeLabel}({\OLId{latin-ordinary}{d}})) \land {}}\\
+      \fn{EndFmla}({\OLId{latin-ordinary}{d}}) = (\Gn{(} \concat {\OLId{latin-ordinary}{a}} \concat \Gn{\lif}
+      \concat \fn{EndFmla}(({\OLId{latin-ordinary}{d}})_{\OLMathNumeral{1}}) \concat \Gn{)}))
+  \end{multline*}
+  (وفيه ${\OLId{latin-ordinary}{a}}$ عدد غودل لـ$!A$.)
+
+  ولننظر أيضًا في $\Intro{\lexists}$.
+  فصحة آخر استدلال في $\delta$ تكافئ
+  وجود !!a{formula}~$!A$ وحد مغلق~${\OLId{latin-ordinary}{t}}$
+  و!!a{variable}~${\OLId{latin-ordinary}{x}}$، بحيث تكون
+  $\Subst{!A}{{\OLId{latin-ordinary}{t}}}{{\OLId{latin-ordinary}{x}}}$ ال!!{formula}
+  الختامية ل!!{derivation}~$\delta_{\OLMathNumeral{1}}$،
+  وتكون $\lexists[{\OLId{latin-ordinary}{x}}][!A]$ النتيجة الأخيرة.
+  فشرط $\fn{FollowsBy}_{\Intro{\lexists}}({\OLId{latin-ordinary}{d}})$ هو
+  \begin{multline*}
+    ({\OLId{latin-ordinary}{d}})_{\OLMathNumeral{0}} = {\OLMathNumeral{1}} \land \fn{DischargeLabel}({\OLId{latin-ordinary}{d}}) = {\OLMathNumeral{0}} \land {} \\
+    \bexists{{\OLId{latin-ordinary}{a}} < {\OLId{latin-ordinary}{d}}}{\bexists{{\OLId{latin-ordinary}{x}}<{\OLId{latin-ordinary}{d}}}{\bexists{{\OLId{latin-ordinary}{t}}<{\OLId{latin-ordinary}{d}}}{
+          (\fn{ClTerm}({\OLId{latin-ordinary}{t}}) \land \fn{Var}({\OLId{latin-ordinary}{x}})  \land {}}}}\\
+    \fn{Subst}({\OLId{latin-ordinary}{a}},{\OLId{latin-ordinary}{t}},{\OLId{latin-ordinary}{x}}) = \fn{EndFmla}(({\OLId{latin-ordinary}{d}})_{\OLMathNumeral{1}}) \land
+    \fn{EndFmla}({\OLId{latin-ordinary}{d}}) = (\Gn{\lexists} \concat {\OLId{latin-ordinary}{x}} \concat {\OLId{latin-ordinary}{a}})).
+  \end{multline*}
+
+  ونجمع الحالات في تعريف $\fn{Correct}({\OLId{latin-ordinary}{d}})$:
+  \begin{multline*}
+    \fn{Sent}(\fn{EndFmla}({\OLId{latin-ordinary}{d}})) \land [ {}\\
+    (\fn{LastRule}({\OLId{latin-ordinary}{d}}) = {\OLMathNumeral{1}} \land
+    \fn{FollowsBy}_{\Intro\land}({\OLId{latin-ordinary}{d}})) \lor \dots \lor {}\\
+    (\fn{LastRule}({\OLId{latin-ordinary}{d}}) = {\OLMathNumeral{16}} \land \fn{FollowsBy}_{\Elim\eq}({\OLId{latin-ordinary}{d}})) \lor {}\\
+    \bexists{{\OLId{latin-ordinary}{n}}<{\OLId{latin-ordinary}{d}}}{\bexists{{\OLId{latin-ordinary}{x}}<{\OLId{latin-ordinary}{d}}}{({\OLId{latin-ordinary}{d}} = \tuple{{\OLMathNumeral{0}}, {\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{n}}})}}].
+  \end{multline*}
+  فيشترط السطر الأول أن تكون ال!!{formula} الختامية
+  لـ${\OLId{latin-ordinary}{d}}$ جملة، ويخص السطر الأخير حالة اقتصار ${\OLId{latin-ordinary}{d}}$ على فرض.
+\end{proof}
+
+\begin{prob}
+  ضع تعريفًا للخواص الآتية على مثال
+  \olref[inc][art][pnd]{prop:followsby}:
+  \begin{enumerate}
+  \item $\fn{FollowsBy}_{\Elim{\lif}}({\OLId{latin-ordinary}{d}})$,
+  \item $\fn{FollowsBy}_{\Elim{\eq}}({\OLId{latin-ordinary}{d}})$,
+  \item $\fn{FollowsBy}_{\Elim{\lor}}({\OLId{latin-ordinary}{d}})$,
+  \item $\fn{FollowsBy}_{\Intro{\lforall}}({\OLId{latin-ordinary}{d}})$.
+  \end{enumerate}
+  وعليك في الأخيرة أن تثبت عودية اختبار شرط
+  المتغير المميز بدائيًا، في آخر استدلال من
+  !!{derivation} رمزه~${\OLId{latin-ordinary}{d}}$. أي إن المتغير
+  المميز~${\OLId{latin-ordinary}{a}}$ في قاعدة $\Intro{\lforall}$
+  لا يرد في ال!!{formula} الختامية لـ${\OLId{latin-ordinary}{d}}$
+  ولا في أي فرض مفتوح فيها. ولك أن تستعمل
+  المحمول العودي البدائي $\fn{OpenAssum}$
+  من \olref[inc][art][pnd]{prop:openassum}.
+\end{prob}
+
+\begin{prop}
+  \ollabel{prop:deriv}
+  العلاقة $\fn{Deriv}({\OLId{latin-ordinary}{d}})$ عودية بدائية؛ وهي تميّز
+  كون ${\OLId{latin-ordinary}{d}}$ عدد غودل ل!!{derivation} صحيح~$\delta$.
+\end{prop}
+
+\begin{proof}
+  إن !!^a{derivation}~$\delta$ صحيح متى صحت
+  تطبيقات القواعد فيه كلها؛ أي متى انتهت
+  ال!!{derivation}s الجزئية جميعًا باستدلال
+  صحيح. ولتكن $\fn{TreeCode}({\OLId{latin-ordinary}{d}})$ الخاصية العودية البدائية الدالة
+  على أن~${\OLId{latin-ordinary}{d}}$ رمز شجرة منتهية ذات جذر بحسب ترميز الأشجار المعتمد.
+  فـ$\fn{Deriv}({\OLId{latin-ordinary}{d}})$ تكافئ
+  \[
+  \fn{TreeCode}({\OLId{latin-ordinary}{d}}) \land
+  \bforall{{\OLId{latin-ordinary}{i}}<\len{\fn{SubtreeSeq}({\OLId{latin-ordinary}{d}})}}{\fn{Correct}((\fn{SubtreeSeq}({\OLId{latin-ordinary}{d}}))_{\OLId{latin-ordinary}{i}})}
+  \]
+  % تصحيح مصدر (R287-03): أُضيف حارس رمز الشجرة لئلا تحقق الشفرات الرديئة شرط الصحة صدقًا خاليًا.
+\end{proof}
+
+\begin{prop}
+  \ollabel{prop:openassum} العلاقة $\fn{OpenAssum}({\OLId{latin-ordinary}{z}},{\OLId{latin-ordinary}{d}})$ عودية بدائية؛
+  وهي تعني أن ${\OLId{latin-ordinary}{z}}$ عدد غودل لفرض~$!A$
+  !!a{undischarged} في ال!!{derivation}~$\delta$
+  ذي عدد غودل~${\OLId{latin-ordinary}{d}}$.
+\end{prop}
+
+\begin{proof}
+  يكون ورود الفرض !!{discharged} إذا
+  حمل الوسم~${\OLId{latin-ordinary}{n}}$ في !!{derivation}
+  جزئي من~$\delta$، وكانت قاعدته
+  الأخيرة ذات وسم تفريغ~${\OLId{latin-ordinary}{n}}$.
+  فلكي تكون $!A$ فرضًا !!a{undischarged}
+  في~$\delta$ يكفي أن يبقى ورود لها
+  واحد على الأقل غير !!{discharged}
+  في~$\delta$. وينبغي التمييز بين
+  الورودات؛ فقد تكون في $\delta$
+  ورودات لـ$!A$ منها ما هو
+  !!{discharged} ومنها ما هو !!{undischarged}.
+
+  لنأخذ متتالية $\delta_{\OLMathNumeral{0}}$، \dots،
+  $\delta_{\OLId{latin-ordinary}{k}}$، أولها $\delta_{\OLMathNumeral{0}}=\delta$،
+  وآخرها $\delta_{\OLId{latin-ordinary}{k}}$ هو الفرض
+  $\Discharge{!A}{{\OLId{latin-ordinary}{n}}}$ لبعض~${\OLId{latin-ordinary}{n}}$؛
+  ويكون $\delta_{{\OLId{latin-ordinary}{i}}+{\OLMathNumeral{1}}}$ !!{derivation}
+  جزئيًا مباشرًا من~$\delta_{\OLId{latin-ordinary}{i}}$.
+  فإن كان ${\OLId{latin-ordinary}{n}}={\OLMathNumeral{0}}$ فالورود غير !!{discharged}
+  بحكم التعريف؛ وإن كان ${\OLId{latin-ordinary}{n}}>{\OLMathNumeral{0}}$ لم يُفرَّغ
+  ما لم تختم عقدة سابقة للفرض في هذا
+  المسار باستدلال وسم تفريغه~${\OLId{latin-ordinary}{n}}$.
+
+  وعلاقة كون !!{derivation} جزئيًا مباشرًا
+  عودية بدائية؛ إذ
+  $\fn{Subderiv}({\OLId{latin-ordinary}{d}},{\OLId{latin-ordinary}{d}}')$ تكافئ
+  $\bexists{{\OLId{latin-ordinary}{j}}<({\OLId{latin-ordinary}{d}}')_{\OLMathNumeral{0}}}{{\OLId{latin-ordinary}{d}}=({\OLId{latin-ordinary}{d}}')_{{\OLId{latin-ordinary}{j}}+{\OLMathNumeral{1}}}}$.
+  ولتكن $\fn{Path}({\OLId{latin-ordinary}{s}},{\OLId{latin-ordinary}{d}})$ العلاقة التي
+  تقول إن ${\OLId{latin-ordinary}{s}}$ رمز متتالية غير خالية،
+  أولها~${\OLId{latin-ordinary}{d}}$، وكل تالٍ فيها !!{derivation}
+  جزئي مباشر من سابقه؛ أي
+  \[
+    \fn{SeqCode}({\OLId{latin-ordinary}{s}}) \land \len{{\OLId{latin-ordinary}{s}}}>{\OLMathNumeral{0}} \land ({\OLId{latin-ordinary}{s}})_{\OLMathNumeral{0}}={\OLId{latin-ordinary}{d}} \land
+    \bforall{{\OLId{latin-ordinary}{i}}<(\len{{\OLId{latin-ordinary}{s}}}\tsub {\OLMathNumeral{1}})}{\fn{Subderiv}(({\OLId{latin-ordinary}{s}})_{{\OLId{latin-ordinary}{i}}+{\OLMathNumeral{1}}},({\OLId{latin-ordinary}{s}})_{\OLId{latin-ordinary}{i}})}.
+  \]
+  فهي عودية بدائية. ورمز كل شجرة جزئية
+  مباشرة دون رمز الشجرة الحاوية لها في
+  ترميز المتتاليات المستعمل؛ فلا يجاوز
+  طول مسار بادئ عند~${\OLId{latin-ordinary}{d}}$ العدد ${\OLId{latin-ordinary}{d}}+{\OLMathNumeral{1}}$،
+  ولا يجاوز عنصر منه~${\OLId{latin-ordinary}{d}}$. ولذلك يحد
+  $\fn{sequenceBound}({\OLId{latin-ordinary}{d}},{\OLId{latin-ordinary}{d}}+{\OLMathNumeral{1}})$ رمز كل
+  مسار كهذا. ومن ثم نعرّف
+  $\fn{OpenAssum}({\OLId{latin-ordinary}{z}},{\OLId{latin-ordinary}{d}})$ بـ
+  \begin{multline*}
+    \fn{TreeCode}({\OLId{latin-ordinary}{d}}) \land {}\\
+    \bexists{{\OLId{latin-ordinary}{s}}\leq\fn{sequenceBound}({\OLId{latin-ordinary}{d}},{\OLId{latin-ordinary}{d}}+{\OLMathNumeral{1}})}{(\fn{Path}({\OLId{latin-ordinary}{s}},{\OLId{latin-ordinary}{d}}) \land {}} \\
+    \bexists{{\OLId{latin-ordinary}{n}}<{\OLId{latin-ordinary}{d}}}{(({\OLId{latin-ordinary}{s}})_{\len{{\OLId{latin-ordinary}{s}}} \tsub {\OLMathNumeral{1}}} = \tuple{{\OLMathNumeral{0}}, {\OLId{latin-ordinary}{z}}, {\OLId{latin-ordinary}{n}}} \land {}}\\
+      \bforall{{\OLId{latin-ordinary}{i}}<(\len{{\OLId{latin-ordinary}{s}}} \tsub {\OLMathNumeral{1}})}{({\OLId{latin-ordinary}{n}}={\OLMathNumeral{0}} \lor
+      \fn{DischargeLabel}(({\OLId{latin-ordinary}{s}})_{\OLId{latin-ordinary}{i}}) \neq {\OLId{latin-ordinary}{n}}))}).
+  \end{multline*}
+  % تصحيح مصدر (R287-03): قُيّد محمول الفرض المفتوح أيضًا برمز شجرة قانوني.
+  % تصحيح مصدر (C287-01، C287-02): فُصل الوسم الصفري عن أوسمة التفريغ، واستُبدل اختبار العضوية بمسار مرتب ذي حد مبرهن.
+\end{proof}
+
+\begin{prop}
+  \ollabel{prop:prf-prim-rec}
+  لتكن ${\OLId{greek-variable}{Gamma}}$ مجموعة !!{sentence}s عودية بدائية. فتكون
+  العلاقة $\Prf[{\OLId{greek-variable}{Gamma}}]({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})$، ومعناها «${\OLId{latin-ordinary}{x}}$ رمز
+  !!a{derivation}~$\delta$ لـ$!A$ من فروض !!{undischarged} تنتمي إلى
+  ${\OLId{greek-variable}{Gamma}}$، وأن ${\OLId{latin-ordinary}{y}}$ عدد غودل لـ$!A$»، عودية بدائية.
+\end{prop}
+
+\begin{proof}
+  ليكن المحمول العودي البدائي~${\OLId{latin-looped}{R}}_{\OLId{greek-variable}{Gamma}}({\OLId{latin-ordinary}{y}})$
+  تعبيرًا عن «${\OLId{latin-ordinary}{y}}\in{\OLId{greek-variable}{Gamma}}$».
+  فنثبت عودية $\Prf[{\OLId{greek-variable}{Gamma}}]({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})$
+  البدائية: أي اختبار كون ${\OLId{latin-ordinary}{y}}$ عدد غودل
+  لجملة~$!A$، وكون ${\OLId{latin-ordinary}{x}}$ رمز
+  !!{derivation} بالاستنباط الطبيعي،
+  ال!!{formula} الختامية فيه~$!A$،
+  وفروضه التي هي !!{undischarged}
+  منتمية كلها إلى~${\OLId{greek-variable}{Gamma}}$.
+
+  تعطي \olref{prop:deriv} أن $\fn{Deriv}({\OLId{latin-ordinary}{x}})$
+  عودية بدائية، ومفادها أن ${\OLId{latin-ordinary}{x}}$ عدد غودل
+  ل!!{derivation} صحيح~$\delta$ في الاستنباط الطبيعي.
+  ولذلك نعرّف $\Prf[{\OLId{greek-variable}{Gamma}}]({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})$ هكذا:
+  \begin{align*}
+    \Prf[{\OLId{greek-variable}{Gamma}}]({\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}) \defiff {}
+    & \fn{Deriv}({\OLId{latin-ordinary}{x}}) \land \fn{EndFmla}({\OLId{latin-ordinary}{x}}) = {\OLId{latin-ordinary}{y}} \land {} \\
+    & \bforall{{\OLId{latin-ordinary}{z}} < {\OLId{latin-ordinary}{x}}}{(\fn{OpenAssum}({\OLId{latin-ordinary}{z}}, {\OLId{latin-ordinary}{x}}) \lif {\OLId{latin-looped}{R}}_{\OLId{greek-variable}{Gamma}}({\OLId{latin-ordinary}{z}}))}.
+  \end{align*}
+\end{proof}
+
+\end{document}

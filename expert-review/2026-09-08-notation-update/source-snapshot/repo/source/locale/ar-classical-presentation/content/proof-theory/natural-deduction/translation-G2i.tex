@@ -1,0 +1,206 @@
+% Part: proof-theory
+% Chapter: natural-deduction
+% Section: translation-G2i
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{nat}{tgi}
+
+\olsection{في النقل من \Log{G2i} إلى \Log{N2i}}
+
+مقدّم المتتالية في~\Log{G2i} مجموعة متعددة~${\OLId{greek-variable}{Gamma}}$ من~!!{formula}s،
+وأما في~\Log{N2i} فهو مجموعة~${\OLId{greek-variable}{Gamma}}'$ من الصيغ الموسومة، لا يتكرر فيها
+الوسم. ونقول إن~${\OLId{greek-variable}{Gamma}}'$ من~!!{formula}s الموسومة \emph{تقابل}
+المجموعة المتعددة~${\OLId{greek-variable}{Gamma}}$ إذا كان، لكل~!!{formula}~$!A$، عدد
+!!{element}s~${\OLId{greek-variable}{Gamma}}'$ التي على الصورة~${\OLId{latin-ordinary}{x}} : !A$ غير زائد على تعددية~$!A$،
+أي عدد نسخ~$!A$، في~${\OLId{greek-variable}{Gamma}}$.
+
+\begin{prop}\ollabel{prop:G2i-to-N2i}
+إذا كان $\Log{G2i} + \Cut \Proves {\OLId{greek-variable}{Gamma}} \Sequent {\OLId{greek-variable}{Delta}}$، فإن $\Log{N2i}
+\Proves {\OLId{greek-variable}{Gamma}}' \Sequent !C$، حيث $!C \ident \lfalse$ إذا كانت ${\OLId{greek-variable}{Delta}}$
+خالية، و$!C \ident !A$ إذا كانت ${\OLId{greek-variable}{Delta}} = \{!A\}$، وحيث تقابل ${\OLId{greek-variable}{Gamma}}'$
+المجموعة~${\OLId{greek-variable}{Gamma}}$.
+\end{prop}
+
+\begin{proof}
+  نثبت ما هو أدق: إذا كان~$\pi$~!!a{proof} للمتتالية
+  ${\OLId{greek-variable}{Gamma}} \Sequent {\OLId{greek-variable}{Delta}}$ في~$\Log{G2i}+\Cut$، وجدت~${\OLId{greek-variable}{Gamma}}'$ تقابل
+  ${\OLId{greek-variable}{Gamma}}$ ووجد~!!a{proof}~$\delta$ للمتتالية~${\OLId{greek-variable}{Gamma}}' \Sequent !C$ في
+  \Log{N2i}. ونسلك في ذلك الاستقراء على~${\OLId{latin-ordinary}{n}} = \pheight{\pi}$.
+
+  فإن كان~${\OLId{latin-ordinary}{n}} = {\OLMathNumeral{0}}$ كان~$\pi$ مسلّمة. فإذا كانت المسلّمة~$\lfalse \Sequent
+  \quad$، أخذنا~$\delta$ المسلّمة~${\OLId{latin-ordinary}{x}}:\lfalse \Sequent \lfalse$؛ أي إن
+  ${\OLId{greek-variable}{Gamma}}' = \{{\OLId{latin-ordinary}{x}}:\lfalse\}$ و$!C \ident \lfalse$. وإذا كانت~$\pi$ مسلّمة
+  من الصورة $!A \Sequent !A$، كانت~$\delta$ هي ${\OLId{latin-ordinary}{x}}: !A \Sequent !A$.
+  
+  وإن كان~${\OLId{latin-ordinary}{n}}>{\OLMathNumeral{0}}$ كانت آخر~$\pi$ قاعدة~${\OLId{latin-looped}{R}}$. ويعطينا فرض الاستقراء
+  !!{proof}s في~\Log{N2i} لمتتاليات تقابل مقدمات القاعدة. ونستطيع، بعد
+  إعادة الوسم حيث يلزم، أن نفرض تميز وسوم التفريغ والوسوم المقيّدة في هذه
+  البراهين، وتباينها بين براهين المقدمات المختلفة أو المنسوخة، وألا يظهر
+  الوسم~${\OLId{latin-ordinary}{x}}$ فوق استدلال يفرغه إلا إذا كان الاستدلال مفرغًا له بالفعل.
+  ثم نبين كيف تجمع هذه~!!{proof}s في براهين لمتتالية مناسبة
+  ${\OLId{greek-variable}{Gamma}}' \Sequent !C$، بحسب القاعدة~${\OLId{latin-looped}{R}}$.
+
+  \begin{enumerate}
+    \item إذا كانت~${\OLId{latin-looped}{R}}$ هي~\RightR{\Weakening}، انتهى~$\pi$ بما يأتي:
+    \[
+    \AxiomC{}
+    \RightLabel{$\pi_{\OLMathNumeral{1}}$}
+    \Deduce${\OLId{greek-variable}{Gamma}} \fCenter$
+    \RightLabel{\RightR{\Weakening}}
+    \UnaryInf${\OLId{greek-variable}{Gamma}} \fCenter !A$
+    \DisplayProof
+    \]
+    يعطي تطبيق فرض الاستقراء على~$\pi_{\OLMathNumeral{1}}$ !!a{proof}
+    للمتتالية~${\OLId{greek-variable}{Gamma}}' \Sequent \lfalse$. ونطبّق~$\FalseInt$ لنحصل على
+    !!a{proof} للمتتالية ${\OLId{greek-variable}{Gamma}}' \Sequent !A$.
+    \item إذا كانت~${\OLId{latin-looped}{R}}$ هي~\LeftR{\Weakening}، انتهى~$\pi$ بما يأتي:
+    \[
+    \AxiomC{}
+    \RightLabel{$\pi_{\OLMathNumeral{1}}$}
+    \Deduce${\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}$
+    \RightLabel{\LeftR{\Weakening}}
+    \UnaryInf$!A, {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}$
+    \DisplayProof
+    \]
+    يعطي تطبيق فرض الاستقراء على~$\pi_{\OLMathNumeral{1}}$ !!a{proof}
+    للمتتالية~${\OLId{greek-variable}{Gamma}}' \Sequent !C$، ونتخذه~$\delta$. لاحظ أنه إذا كانت
+    ${\OLId{greek-variable}{Gamma}}'$ تقابل~${\OLId{greek-variable}{Gamma}}$ فهي تقابل كذلك~$!A,{\OLId{greek-variable}{Gamma}}$، لأن عدد الصيغ
+    ${\OLId{latin-ordinary}{x}}:!A$ في~${\OLId{greek-variable}{Gamma}}'$ لا يزيد على عدد نسخ~$!A$ في~${\OLId{greek-variable}{Gamma}}$، ومن ثم لا
+    يزيد كذلك على عدد نسخها في السياق~$!A,{\OLId{greek-variable}{Gamma}}$.
+    \item إذا كانت~${\OLId{latin-looped}{R}}$ هي~\LeftR{\Contraction}، انتهى~$\pi$ بما يأتي:
+    \[
+    \AxiomC{}
+    \RightLabel{$\pi_{\OLMathNumeral{1}}$}
+    \Deduce$!A, !A, {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}$
+    \RightLabel{\LeftR{\Contraction}}
+    \UnaryInf$!A, {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}$
+    \DisplayProof
+    \]
+    يعطي تطبيق فرض الاستقراء على~$\pi_{\OLMathNumeral{1}}$ !!a{proof}
+    هو~$\delta_{\OLMathNumeral{1}}$ للمتتالية~$\Pi, {\OLId{greek-variable}{Gamma}}' \Sequent !C$، حيث
+    $\Pi \subseteq \{{\OLId{latin-ordinary}{x}} : !A,{\OLId{latin-ordinary}{y}}:!A\}$. إذا كانت
+    $\Pi = \{{\OLId{latin-ordinary}{x}} : !A,{\OLId{latin-ordinary}{y}}:!A\}$، فاستبدل بكل~!!{formula}s الموسومة~${\OLId{latin-ordinary}{y}}:!A$ في
+    $\delta_{\OLMathNumeral{1}}$ الصيغة~${\OLId{latin-ordinary}{x}}:!A$. وبما أن~${\OLId{latin-ordinary}{x}}$ يظهر في سياق المتتالية النهائية
+    لـ~$\delta_{\OLMathNumeral{1}}$، يمكننا افتراض أن لا استدلال في~$\delta_{\OLMathNumeral{1}}$ يفرّغ
+    !!a{formula} من الصورة~${\OLId{latin-ordinary}{x}}:!B$؛ أي إن أي~${\OLId{latin-ordinary}{x}}:!B$ في يسار متتالية ضمن
+    $\delta_{\OLMathNumeral{1}}$ ليس فعالًا. ولذلك تظل النتيجة~!!a{proof} في~\Log{N2i}.
+    \item إذا كانت~${\OLId{latin-looped}{R}}$ هي~$\RightR{\lif}$، انتهى~$\pi$ بما يأتي:
+    \[
+    \AxiomC{}
+    \RightLabel{$\pi_{\OLMathNumeral{1}}$}
+    \Deduce$!A, {\OLId{greek-variable}{Gamma}} \fCenter !B$
+    \RightLabel{\RightR{\lif}}
+    \UnaryInf${\OLId{greek-variable}{Gamma}} \fCenter !A \lif !B$
+    \DisplayProof
+    \]
+    يوجد، بفرض الاستقراء، !!a{proof}~$\delta_{\OLMathNumeral{1}}$ للمتتالية
+    ${\OLId{latin-ordinary}{x}}:!A,{\OLId{greek-variable}{Gamma}}' \Sequent !B$ أو للمتتالية~${\OLId{greek-variable}{Gamma}}' \Sequent !B$، حيث
+    تقابل~${\OLId{greek-variable}{Gamma}}'$ المجموعة~${\OLId{greek-variable}{Gamma}}$. ينتج لنا~$\delta$ بإتباع
+    $\delta_{\OLMathNumeral{1}}$ بتطبيق~\Intro{\lif} (ويجوز أن يكون الفرض الموسوم غير
+    مستعمل).
+    \item إذا كانت~${\OLId{latin-looped}{R}}$ هي~\LeftR{\lif}، انتهى~$\pi$ بما يأتي:
+    \[
+    \AxiomC{}
+    \RightLabel{$\pi_{\OLMathNumeral{1}}$}
+    \Deduce${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}} \fCenter !A$
+    \AxiomC{}
+    \RightLabel{$\pi_{\OLMathNumeral{2}}$}
+    \Deduce$!B, {\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{2}} \fCenter {\OLId{greek-variable}{Delta}}$
+    \RightLabel{\LeftR{\lif}}
+    \BinaryInf$!A \lif !B, {\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}}, {\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{2}} \fCenter {\OLId{greek-variable}{Delta}}$
+    \DisplayProof
+    \]
+    يعطي فرض الاستقراء !!{proof}s: برهانًا~$\delta_{\OLMathNumeral{1}}$ للمتتالية
+    ${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}}' \Sequent !A$، وبرهانًا~$\delta_{\OLMathNumeral{2}}$ للمتتالية
+    ${\OLId{latin-ordinary}{x}}:!B,{\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{2}}' \Sequent !C$ أو للمتتالية~${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{2}}' \Sequent !C$.
+    في الحالة الثانية يصلح~$\delta_{\OLMathNumeral{2}}$ أن يكون~$\delta$. وفي الحالة الأولى
+    نعيد تسمية جميع الصيغ ووسوم التفريغ والوسوم المقيّدة، تجنبًا للأسر، بحيث
+    لا يظهر أي وسم في كل من~$\delta_{\OLMathNumeral{1}}$ و$\delta_{\OLMathNumeral{2}}$. عندئذ يقابل السياق
+    ${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}}',{\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{2}}'$ السياق~${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}},{\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{2}}$. ولأن~${\OLId{latin-ordinary}{x}}:!B$ يظهر في
+    المتتالية النهائية لـ~$\delta_{\OLMathNumeral{2}}$، فلا يجوز أن يكون~${\OLId{latin-ordinary}{x}}:!B$ فعالًا في أي
+    استدلال وسم تفريغه~${\OLId{latin-ordinary}{x}}$ داخل~$\delta_{\OLMathNumeral{2}}$. استبدل بكل مسلّمة
+    ${\OLId{latin-ordinary}{x}}:!B \Sequent !B$ في~$\delta_{\OLMathNumeral{2}}$ الـ~!!{proof}~$\delta_{\OLMathNumeral{3}}$ الآتي:
+    \[
+    \Axiom${\OLId{latin-ordinary}{x}}: !A \lif !B \fCenter !A \lif !B$
+    \AxiomC{}
+    \RightLabel{$\delta_{\OLMathNumeral{1}}$}
+    \Deduce${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}}' \fCenter !A$
+    \RightLabel{\Elim{\lif}}
+    \BinaryInf${\OLId{latin-ordinary}{x}}: !A \lif !B, {\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}}' \fCenter !B$
+    \DisplayProof
+    \]
+    واستبدل بكل ظهور لـ~${\OLId{latin-ordinary}{x}}:!B$ في~$\delta_{\OLMathNumeral{2}}$ الصيغة~${\OLId{latin-ordinary}{x}}:!A \lif !B$.
+    والنتيجة~$\Subst{\delta_{\OLMathNumeral{2}}}{\delta_{\OLMathNumeral{3}}}{{\OLId{latin-ordinary}{x}}:!B}$ هي~!!a{proof} للمتتالية
+    ${\OLId{latin-ordinary}{x}}:!A \lif !B,{\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}}',{\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{2}}' \Sequent !C$.
+    \item إذا كانت~${\OLId{latin-looped}{R}}$ هي~\RightR{\land}، انتهى~$\pi$ بما يأتي:
+    \[
+    \AxiomC{}
+    \RightLabel{$\pi_{\OLMathNumeral{1}}$}
+    \Deduce${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}} \fCenter !A$
+    \AxiomC{}
+    \RightLabel{$\pi_{\OLMathNumeral{2}}$}
+    \Deduce${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{2}} \fCenter !B$
+    \RightLabel{\RightR{\land}}
+    \BinaryInf${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}}, {\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{2}} \fCenter !A \land !B$
+    \DisplayProof
+    \]
+    يعطي فرض الاستقراء برهانًا~$\delta_{\OLMathNumeral{1}}$ للمتتالية
+    ${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}}' \Sequent !A$ وبرهانًا~$\delta_{\OLMathNumeral{2}}$ للمتتالية
+    ${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{2}}' \Sequent !B$. وبإعادة تسمية جميع الصيغ ووسوم التفريغ والوسوم
+    المقيّدة في~$\delta_{\OLMathNumeral{2}}$ تجنبًا للأسر، يمكننا ضمان ألا يظهر أي وسم في كل من
+    $\delta_{\OLMathNumeral{1}}$ و$\delta_{\OLMathNumeral{2}}$. وعندئذ يقابل السياق~${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}}',{\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{2}}'$
+    السياق~${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}},{\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{2}}$. ونحصل على~!!a{proof}~$\delta$ بتطبيق
+    $\Intro{\land}$ على المتتاليتين النهائيتين لـ~$\delta_{\OLMathNumeral{1}}$ و$\delta_{\OLMathNumeral{2}}$.
+    \item إذا كانت~${\OLId{latin-looped}{R}}$ هي~$\LeftR{\land}$، وانتهى~$\pi$، مثلًا، بما يأتي:
+    \[
+    \AxiomC{}
+    \RightLabel{$\pi_{\OLMathNumeral{1}}$}
+    \Deduce$!A, {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}$
+    \RightLabel{\LeftR{\land}}
+    \UnaryInf$!A \land !B, {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}$
+    \DisplayProof
+    \]
+    فبفرض الاستقراء يوجد~!!a{proof}~$\delta_{\OLMathNumeral{1}}$ للمتتالية
+    ${\OLId{latin-ordinary}{x}}:!A,{\OLId{greek-variable}{Gamma}}' \Sequent !C$ أو للمتتالية~${\OLId{greek-variable}{Gamma}}' \Sequent !C$، حيث
+    تقابل~${\OLId{greek-variable}{Gamma}}'$ المجموعة~${\OLId{greek-variable}{Gamma}}$. في الحالة الثانية نتخذ~$\delta_{\OLMathNumeral{1}}$
+    ليكون~$\delta$. وفي الحالة الأولى، وتنبّه إلى أن ظهور~${\OLId{latin-ordinary}{x}}:!A$ في المتتالية
+    النهائية يعني أنه ليس فعالًا في أي استدلال وسم تفريغه~${\OLId{latin-ordinary}{x}}$ داخل
+    $\delta_{\OLMathNumeral{1}}$. استبدل بكل مسلّمة ${\OLId{latin-ordinary}{x}}:!A \Sequent !A$ الـ~!!{proof}~$\delta_{\OLMathNumeral{2}}$
+    الآتي:
+    \[
+    \Axiom${\OLId{latin-ordinary}{x}}: !A \land !B \fCenter !A \land !B$
+    \RightLabel{\Elim{\land}[{\OLMathNumeral{1}}]}
+    \UnaryInf${\OLId{latin-ordinary}{x}}: !A \land !B \fCenter !A$
+    \DisplayProof
+    \]
+    واستبدل بكل ظهور لـ~${\OLId{latin-ordinary}{x}}:!A$ الصيغة~${\OLId{latin-ordinary}{x}}:!A \land !B$؛ أي انظر في
+    $\Subst{\delta_{\OLMathNumeral{1}}}{\delta_{\OLMathNumeral{2}}}{{\OLId{latin-ordinary}{x}}:!A}$. وهذا~!!a{proof} للمتتالية
+    ${\OLId{latin-ordinary}{x}}:!A \land !B,{\OLId{greek-variable}{Gamma}}' \Sequent !C$.
+    \item إذا كانت~${\OLId{latin-looped}{R}}$ هي~\Cut، انتهى~$\pi$ بما يأتي:
+    \[
+    \AxiomC{}
+    \RightLabel{$\pi_{\OLMathNumeral{1}}$}
+    \Deduce${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}} \fCenter !A$
+    \AxiomC{}
+    \RightLabel{$\pi_{\OLMathNumeral{2}}$}
+    \Deduce$!A, {\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{2}} \fCenter {\OLId{greek-variable}{Delta}}$
+    \RightLabel{\Cut}
+    \BinaryInf${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}}, {\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{2}} \fCenter {\OLId{greek-variable}{Delta}}$
+    \DisplayProof
+    \]
+    يعطي فرض الاستقراء برهانًا~$\delta_{\OLMathNumeral{1}}$ للمتتالية
+    ${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}}' \Sequent !A$ وبرهانًا~$\delta_{\OLMathNumeral{2}}$ للمتتالية
+    ${\OLId{latin-ordinary}{x}}:!A,{\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{2}}' \Sequent !C$ أو للمتتالية~${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{2}}' \Sequent !C$.
+    نعيد وسم نسختي البرهان تجنبًا للأسر بحيث تكون وسومهما متباينة. وفي
+    الحالة الثانية نتخذ~$\delta=\delta_{\OLMathNumeral{2}}$. وإلا استبدل بكل مسلّمة
+    ${\OLId{latin-ordinary}{x}}:!A \Sequent !A$ في~$\delta_{\OLMathNumeral{2}}$ البرهان~$\delta_{\OLMathNumeral{1}}$ لنحصل على~$\delta$
+    بوصفه~!!{proof}~$\Subst{\delta_{\OLMathNumeral{2}}}{\delta_{\OLMathNumeral{1}}}{{\OLId{latin-ordinary}{x}}:!A}$ للمتتالية
+    ${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}}',{\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{2}}' \Sequent !C$.
+    \item وعلى هذا القياس تعالج سائر الحالات المنطقية.
+  \end{enumerate}
+\end{proof}
+
+\end{document}

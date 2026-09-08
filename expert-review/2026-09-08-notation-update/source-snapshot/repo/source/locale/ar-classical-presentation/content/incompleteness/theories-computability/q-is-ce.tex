@@ -1,0 +1,53 @@
+% Part: incompleteness
+% Chapter: theories-computability
+% Section: q-is-ce
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{tcp}{qce}
+
+\olsection{$\Th{Q}$ تامة بين المجموعات \printtoken{S}{c.e.}}
+
+
+\begin{thm}
+$\Th{Q}$ !!{c.e.} وغير قابلة للقرار؛ وهي، فوق ذلك، تامة بين المجموعات
+!!{c.e.}.
+\end{thm}
+
+\begin{proof}
+أما كون $\Th{Q}$ !!{c.e.} فبيانه أنها مجموعة شفرات الجمل
+${\OLId{latin-ordinary}{y}}$ التي يوجد برهان ${\OLId{latin-ordinary}{x}}$ عليها في $\Th{Q}$:
+\[
+{\OLId{latin-looped}{Q}} = \Setabs{{\OLId{latin-ordinary}{y}}}{\lexists[{\OLId{latin-ordinary}{x}}][\Prf[\Th{Q}]({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})]}.
+\]
+والعلاقة $\Prf[\Th{Q}]({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})$ قابلة للحساب، بل عودية بدائية؛ وقد
+علمنا أن كل مجموعة ترد على هذه الصورة قابلة للتعداد حسابيًا.
+
+وأما تمامها بين المجموعات القابلة للتعداد حسابيًا فمكافئ لكون
+${\OLId{latin-looped}{K}}\leq_{\OLId{latin-ordinary}{m}} {\OLId{latin-looped}{Q}}$، حيث ${\OLId{latin-looped}{K}}=\Setabs{{\OLId{latin-ordinary}{x}}}{!A_{\OLId{latin-ordinary}{x}}({\OLId{latin-ordinary}{x}})\downarrow}$. فالمطلوب إذن
+اختزال ${\OLId{latin-looped}{K}}$ إلى $\Th{Q}$. ومحمول كليني ${\OLId{latin-looped}{T}}({\OLId{latin-ordinary}{e}},{\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{s}})$ عودي بدائي، ومن ثم
+يقبل التمثيل في $\Th{Q}$؛ ولنسمّ الصيغة التي تمثله $!A_{\OLId{latin-looped}{T}}$. فلكل ${\OLId{latin-ordinary}{x}}$:
+\begin{align*}
+{\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{K}} & \lif \lexists[{\OLId{latin-ordinary}{s}}][{\OLId{latin-looped}{T}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{s}})] \\
+& \lif \lexists[{\OLId{latin-ordinary}{s}}][(\Th{Q} \Proves !A_{\OLId{latin-looped}{T}}(\num {\OLId{latin-ordinary}{x}},\num {\OLId{latin-ordinary}{x}}, \num {\OLId{latin-ordinary}{s}}))]
+  \\
+& \lif \Th{Q} \Proves \lexists[{\OLId{latin-ordinary}{s}}][!A_{\OLId{latin-looped}{T}}(\num {\OLId{latin-ordinary}{x}}, \num {\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{s}})].
+\end{align*}
+وأما العكس، فإذا كان
+$\Th{Q}\Proves\lexists[{\OLId{latin-ordinary}{s}}][!A_{\OLId{latin-looped}{T}}(\num {\OLId{latin-ordinary}{x}},\num {\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{s}})]$، لزم أن تصدق
+الصيغة $!A_{\OLId{latin-looped}{T}}(\num {\OLId{latin-ordinary}{x}},\num {\OLId{latin-ordinary}{x}},\num {\OLId{latin-ordinary}{n}})$ عند عدد طبيعي ما ${\OLId{latin-ordinary}{n}}$.
+فلو كانت ${\OLId{latin-looped}{T}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{n}})$ كاذبة، لأثبتت $\Th{Q}$ نفي تلك الصيغة،
+$\lnot !A_{\OLId{latin-looped}{T}}(\num {\OLId{latin-ordinary}{x}},\num {\OLId{latin-ordinary}{x}},\num {\OLId{latin-ordinary}{n}})$، إذ $!A_{\OLId{latin-looped}{T}}$ ممثلة للعلاقة ${\OLId{latin-looped}{T}}$.
+وحينئذ تكون $\Th{Q}$ قد أثبتت صيغة كاذبة، وهو محال. فثبت صدق
+${\OLId{latin-looped}{T}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{n}})$، ولزم منه $!A_{\OLId{latin-ordinary}{x}}({\OLId{latin-ordinary}{x}})\downarrow$.
+
+فالحاصل أن انتماء ${\OLId{latin-ordinary}{x}}$ إلى ${\OLId{latin-looped}{K}}$، لأي ${\OLId{latin-ordinary}{x}}$، يكافئ إثبات
+$\Th{Q}$ للصيغة $\lexists[{\OLId{latin-ordinary}{s}}][!A_{\OLId{latin-looped}{T}}(\num {\OLId{latin-ordinary}{x}},\num {\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{s}})]$.
+وعليه فالدالة ${\OLId{latin-ordinary}{f}}$ التي تأخذ ${\OLId{latin-ordinary}{x}}$ وتعطي شفرة الجملة
+$\lexists[{\OLId{latin-ordinary}{s}}][!A_{\OLId{latin-looped}{T}}(\num {\OLId{latin-ordinary}{x}},\num {\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{s}})]$ هي اختزال ${\OLId{latin-looped}{K}}$ إلى
+$\Th{Q}$ المطلوب.
+\end{proof}
+
+\end{document}

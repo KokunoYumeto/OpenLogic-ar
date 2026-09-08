@@ -1,0 +1,137 @@
+% Part: normal-modal-logic
+% Chapter: filtrations
+% Section: euclidean-filtrations
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{fil}{euc}
+
+\olsection{ترشيحات النماذج الإقليدية}
+
+أما النماذج الإقليدية، وحدها أو مع التسلسل، فلا تكفي فيها طريقة
+\olref[acc]{sec}. وبيان ذلك النموذج المرسوم في~\olref{fig:ser-eucl}،
+فهو متسلسل وإقليدي. خذ~${\OLId{greek-variable}{Gamma}}=\{{\OLId{latin-ordinary}{p}},\Box {\OLId{latin-ordinary}{p}}\}$؛ فإذا رُشّح النموذج
+عبر~${\OLId{greek-variable}{Gamma}}$ اتحدت الفئتان~$[{\OLId{latin-ordinary}{w}}_{\OLMathNumeral{1}}]=[{\OLId{latin-ordinary}{w}}_{\OLMathNumeral{3}}]$؛ فإن~${\OLId{latin-ordinary}{w}}_{\OLMathNumeral{1}}$ و${\OLId{latin-ordinary}{w}}_{\OLMathNumeral{3}}$
+هما وحدهما، من بين أزواج العوالم المختلفة، يتفقان على~${\OLId{greek-variable}{Gamma}}$.
+ويجب كذلك أن تنتقل أسهم~$\mModel{M}$ إلى كل ترشيح، على نحو ما في
+\olref{fig:ser-eucl2}. لكن النموذج الناتج ليس إقليديًا، ولا يمكن جعله
+كذلك بزيادة أسهم مع إبقائه ترشيحًا. فإن الإقليدية توجب سهمين متعاكسين
+بين~$[{\OLId{latin-ordinary}{w}}_{\OLMathNumeral{2}}]$ و$[{\OLId{latin-ordinary}{w}}_{\OLMathNumeral{4}}]$، ثم بين~$[{\OLId{latin-ordinary}{w}}_{\OLMathNumeral{2}}]$ و$[{\OLId{latin-ordinary}{w}}_{\OLMathNumeral{5}}]$.
+وهذا ممتنع، لأن~$\Box {\OLId{latin-ordinary}{p}}$ صادقة عند~${\OLId{latin-ordinary}{w}}_{\OLMathNumeral{2}}$، و${\OLId{latin-ordinary}{p}}$ كاذبة عند~${\OLId{latin-ordinary}{w}}_{\OLMathNumeral{5}}$.
+
+\begin{figure}[htpb]
+  \centering
+  \begin{tikzpicture}[modal]
+    \node[world] (w1)
+          [label={left: \mFalse{p}},
+            label={below: $\mSat{{}}{\Box {\OLId{latin-ordinary}{p}}}$}] {${\OLId{latin-ordinary}{w}}_{\OLMathNumeral{1}}$};
+    \node[world] (w2)
+          [label={right: \mTrue{p}},
+            label = {below: $\mSat{{}}{\Box {\OLId{latin-ordinary}{p}}}$},
+            right=of w1] {${\OLId{latin-ordinary}{w}}_{\OLMathNumeral{2}}$};
+    \draw[->] (w1) to (w2);
+    \draw[reflexive above] (w2) to (w2);
+    \node[world] (w3)
+          [label={left: \mFalse{p}},
+            label={below: $\mSat{{}}{\Box {\OLId{latin-ordinary}{p}}}$},
+            below=of w1] {${\OLId{latin-ordinary}{w}}_{\OLMathNumeral{3}}$};
+    \node[world] (w4)
+          [label={right:\mTrue{p}},
+            label={below: $\mSat/{{}}{\Box {\OLId{latin-ordinary}{p}}}$},
+            right=of w3] {${\OLId{latin-ordinary}{w}}_{\OLMathNumeral{4}}$};
+    \draw[->] (w3) to (w4);
+    \draw[reflexive above] (w4) to (w4);
+    \node[world] (w5)
+          [label={right: \mFalse{p}},
+            label=below:$\mSat/{{}}{\Box {\OLId{latin-ordinary}{p}}}$,
+            right=of w4] {${\OLId{latin-ordinary}{w}}_{\OLMathNumeral{5}}$};
+    \draw[->, bend left] (w4) to (w5);
+    \draw[->, bend left] (w5) to (w4);
+    \draw[reflexive above] (w5) to (w5);
+  \end{tikzpicture}
+  \caption{نموذج متسلسل وإقليدي.}
+  \ollabel{fig:ser-eucl}
+\end{figure}
+
+\begin{figure}[ht]
+  \centering
+  \begin{tikzpicture}[modal,every text node part/.style={align=center}]
+    \node[world] (w1)
+          [label={left: \mFalse{p}},
+            label={right:$[{\OLId{latin-ordinary}{w}}_{\OLMathNumeral{1}}]=[{\OLId{latin-ordinary}{w}}_{\OLMathNumeral{3}}]$},
+            label={below: $\mSat{{}}{\Box {\OLId{latin-ordinary}{p}}}$}] {$[{\OLId{latin-ordinary}{w}}_{\OLMathNumeral{1}}]$};
+    \node[world] (w2)
+         [label={right: \mTrue{p}},
+           label = {below: $\mSat{{}}{\Box {\OLId{latin-ordinary}{p}}}$},
+           right=of w1, yshift=1.5cm] {$[{\OLId{latin-ordinary}{w}}_{\OLMathNumeral{2}}]$};
+    \draw[->] (w1) to (w2);
+    \draw[reflexive above] (w2) to (w2);
+    \node[world] (w4)
+         [label={right:\mTrue{p}},
+           label={below: $\mSat/{{}}{\Box {\OLId{latin-ordinary}{p}}}$},
+           right=of w1,yshift=-1.5cm] {$[{\OLId{latin-ordinary}{w}}_{\OLMathNumeral{4}}]$};
+    \draw[->] (w1) to (w4);
+    \draw[reflexive above] (w4) to (w4);
+    \node[world] (w5)
+         [label={right: \mFalse{p}},
+             label=below:$\mSat/{{}}{\Box {\OLId{latin-ordinary}{p}}}$,
+             right=of w4] {$[{\OLId{latin-ordinary}{w}}_{\OLMathNumeral{5}}]$};
+    \draw[->, bend left] (w4) to (w5);
+    \draw[->, bend left] (w5) to (w4);
+    \draw[reflexive above] (w5) to (w5);
+  \end{tikzpicture}
+  \caption{ترشيح النموذج في~\olref{fig:ser-eucl}.}
+  \ollabel{fig:ser-eucl2}
+\end{figure}
+
+فلا يكفي، للحصول على ترشيح إقليدي بهذه الطريقة، إغلاق مجموعة اعتباطية
+${\OLId{greek-variable}{Gamma}}$ تحت أخذ ال!!{formula}s الجزئية. وإنما ننظر في مجموعات
+${\OLId{greek-variable}{Gamma}}$ \emph{مغلقة جهويًا}، بالمعنى المبين في
+\olref[pre]{defn:modallyclosed}. غير أن هذه المجموعات، متى كانت غير
+خالية، لا نهائية؛ فلا يُستفاد منها مباشرةً إثبات خاصية النموذج المنتهي،
+ولا قابلية النظام المقابل للقرار.
+
+\begin{thm}\ollabel{thm:modal-closed-filt}
+  لتكن~${\OLId{greek-variable}{Gamma}}$ مغلقة جهويًا، وليكن~$\mModel{M}=\tuple{{\OLId{latin-looped}{W}},{\OLId{latin-looped}{R}},{\OLId{latin-looped}{V}}}$، وليكن
+  $\mModel{M^*}=\tuple{{\OLId{latin-looped}{W}}^*,{\OLId{latin-looped}{R}}^*,{\OLId{latin-looped}{V}}^*}$ الترشيح الأخشن لـ~$\mModel{M}$
+  عبر~${\OLId{greek-variable}{Gamma}}$.
+  \begin{enumerate}
+  \item إذا كان~$\mModel{M}$ متعديًا، كان~$\mModel{M^*}$ متعديًا.
+  \item إذا كان~$\mModel{M}$ إقليديًا، كان~$\mModel{M^*}$ إقليديًا.
+  \item إذا كان~$\mModel{M}$ متناظرًا، كان~$\mModel{M^*}$ متناظرًا.
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+\begin{enumerate}
+  \item لما كان~$\mModel{M^*}$ الترشيح الأخشن، كانت~${\OLId{latin-looped}{R}}^*[{\OLId{latin-ordinary}{u}}][{\OLId{latin-ordinary}{v}}]$
+    مكافئة لـ~${\OLId{latin-looped}{C}}_{\OLMathNumeral{1}}({\OLId{latin-ordinary}{u}},{\OLId{latin-ordinary}{v}})$ بالتعريف. فالتعدي يثبت بأن نفرض~${\OLId{latin-looped}{C}}_{\OLMathNumeral{1}}({\OLId{latin-ordinary}{u}},{\OLId{latin-ordinary}{v}})$
+    و${\OLId{latin-looped}{C}}_{\OLMathNumeral{1}}({\OLId{latin-ordinary}{v}},{\OLId{latin-ordinary}{w}})$، ثم نستنتج~${\OLId{latin-looped}{C}}_{\OLMathNumeral{1}}({\OLId{latin-ordinary}{u}},{\OLId{latin-ordinary}{w}})$.
+    \iftag{prvBox}{لتكن~$\Box !A \in {\OLId{greek-variable}{Gamma}}$، وافترض
+      $\mSat{{\OLId{latin-looped}{M}}}{\Box !A}[{\OLId{latin-ordinary}{u}}]$؛ عندئذ
+      $\mSat{{\OLId{latin-looped}{M}}}{\Box\Box!A}[{\OLId{latin-ordinary}{u}}]$، لأن~\Ax{4} صالحة في جميع النماذج
+      المتعدية؛ ولأن~$\Box\Box!A \in {\OLId{greek-variable}{Gamma}}$ بالإغلاق، ينتج من
+      ${\OLId{latin-looped}{C}}_{\OLMathNumeral{1}}({\OLId{latin-ordinary}{u}},{\OLId{latin-ordinary}{v}})$ أن~$\mSat{{\OLId{latin-looped}{M}}}{\Box!A}[{\OLId{latin-ordinary}{v}}]$، ثم ينتج من~${\OLId{latin-looped}{C}}_{\OLMathNumeral{1}}({\OLId{latin-ordinary}{v}},{\OLId{latin-ordinary}{w}})$ أن
+      $\mSat{{\OLId{latin-looped}{M}}}{!A}[{\OLId{latin-ordinary}{w}}]$. }{}\iftag{prvDiamond}{لتكن
+      $\Diamond !A \in {\OLId{greek-variable}{Gamma}}$، وافترض $\mSat{{\OLId{latin-looped}{M}}}{!A}[{\OLId{latin-ordinary}{w}}]$؛
+      عندئذ~$\mSat{{\OLId{latin-looped}{M}}}{\Diamond !A}[{\OLId{latin-ordinary}{v}}]$ بحسب
+      ${\OLId{latin-looped}{C}}_{\OLMathNumeral{1}}({\OLId{latin-ordinary}{v}},{\OLId{latin-ordinary}{w}})$، لأن~$\Diamond !A \in {\OLId{greek-variable}{Gamma}}$ بالإغلاق الجهوي. ومن
+      ${\OLId{latin-looped}{C}}_{\OLMathNumeral{1}}({\OLId{latin-ordinary}{u}},{\OLId{latin-ordinary}{v}})$ نحصل على~$\mSat{{\OLId{latin-looped}{M}}}{\Diamond\Diamond !A}[{\OLId{latin-ordinary}{u}}]$، لأن
+      $\Diamond\Diamond!A \in {\OLId{greek-variable}{Gamma}}$ بالإغلاق الجهوي. ولأن
+      \Ax{4_\Diamond} صالحة في جميع النماذج المتعدية، يكون
+      $\mSat{{\OLId{latin-looped}{M}}}{\Diamond!A}[{\OLId{latin-ordinary}{u}}]$.}{}
+    % تصحيح برهاني (0459-I1): صُرّح بفرضي العضوية اللازمين لإثبات الشرط C_1.
+  \item تمرين. استعمل كون كل من~\Ax{5} و$\Ax{5_\Diamond}$ صالحة في
+    جميع النماذج الإقليدية.
+  \item تمرين. استعمل كون~\Ax{B} و$\Ax{B_\Diamond}$ صالحة في جميع
+    النماذج المتناظرة.
+\end{enumerate}
+\end{proof}
+
+\begin{prob}
+  أكمل برهان~\olref[nml][fil][euc]{thm:modal-closed-filt}.
+\end{prob}
+
+\end{document}

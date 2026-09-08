@@ -1,0 +1,68 @@
+% Part: first-order-logic
+% Chapter: sequent-calculus
+% Section: rules-and-proofs
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{seq}{rul}}
+      {\olfileid{pl}{seq}{rul}}
+
+\olsection{القواعد وال\usetoken{P}{derivation}}
+
+فيما يأتي، لتدل~${\OLId{greek-variable}{Gamma}}, {\OLId{greek-variable}{Delta}}, \Pi, \Lambda$ على متتاليات منتهية
+من ال!!{sentence}s.
+
+\begin{defn}[التتابعية]
+\emph{التتابعية} تعبير من الصورة
+\[
+{\OLId{greek-variable}{Gamma}} \Sequent {\OLId{greek-variable}{Delta}}
+\]
+حيث~${\OLId{greek-variable}{Gamma}}$ و${\OLId{greek-variable}{Delta}}$ متتاليتان منتهيتان (وربما خاليتان) من
+!!{sentence}s اللغة~$\Lang L$. وتسمى~${\OLId{greek-variable}{Gamma}}$ \emph{المقدَّم}، بينما
+تسمى~${\OLId{greek-variable}{Delta}}$ \emph{التالي}.
+\end{defn}
+
+\begin{explain}
+المقصود بالتتابعية، في التصور الأول، أن صدق جميع ال!!{sentence}s في مقدَّمها يقتضي صدق واحدة على الأقل من ال!!{sentence}s في تاليها.
+فإذا كان ${\OLId{greek-variable}{Gamma}} = \tuple{!A_{\OLMathNumeral{1}}, \dots, !A_{\OLId{latin-ordinary}{m}}}$ و
+${\OLId{greek-variable}{Delta}} = \tuple{!B_{\OLMathNumeral{1}}, \dots, !B_{\OLId{latin-ordinary}{n}}}$، كان تحقق ${\OLId{greek-variable}{Gamma}} \Sequent {\OLId{greek-variable}{Delta}}$
+مكافئًا لتحقق
+\[
+(!A_{\OLMathNumeral{1}} \land \cdots \land !A_{\OLId{latin-ordinary}{m}}) \lif (!B_{\OLMathNumeral{1}} \lor \cdots \lor
+!B_{\OLId{latin-ordinary}{n}})
+\]
+ويُفرد بالنظر خلو~${\OLId{greek-variable}{Gamma}}$ وخلو~${\OLId{greek-variable}{Delta}}$.
+فإن خلت~${\OLId{greek-variable}{Gamma}}$، أي كان ${\OLId{latin-ordinary}{m}} = {\OLMathNumeral{0}}$، تحققت $\quad
+\Sequent {\OLId{greek-variable}{Delta}}$ متى وفقط متى تحقق
+$!B_{\OLMathNumeral{1}} \lor \dots \lor !B_{\OLId{latin-ordinary}{n}}$.
+وإن خلت~${\OLId{greek-variable}{Delta}}$، أي كان ${\OLId{latin-ordinary}{n}} = {\OLMathNumeral{0}}$، تحققت ${\OLId{greek-variable}{Gamma}} \Sequent \quad$
+متى وفقط متى تحقق
+$\lnot(!A_{\OLMathNumeral{1}} \land \dots \land !A_{\OLId{latin-ordinary}{m}})$.
+فصلاحية التتابعية هي صلاحية ال!!{sentence} التي تقابلها، والشرط لازم وكاف.
+\end{explain}
+
+للمتتالية~${\OLId{greek-variable}{Gamma}}$ من ال!!{sentence}s نكتب ${\OLId{greek-variable}{Gamma}}, !A$
+إذا أُلحق~$!A$ بآخر~${\OLId{greek-variable}{Gamma}}$ من اليمين، ونكتب $!A, {\OLId{greek-variable}{Gamma}}$
+إذا أُلحق~$!A$ بطرف~${\OLId{greek-variable}{Gamma}}$ الأيسر. فإن كانت~${\OLId{greek-variable}{Delta}}$
+متتالية من ال!!{sentence}s كذلك، دلّ~${\OLId{greek-variable}{Gamma}}, {\OLId{greek-variable}{Delta}}$ على وصلهما.
+
+\begin{defn}[تتابعية ابتدائية]
+\emph{التتابعية الابتدائية} تتابعية
+\iftag{prvFalse,prvTrue}{من إحدى الصور الآتية:
+  \begin{enumerate}
+    \item $!A \Sequent !A$
+    \tagitem{prvTrue}{$\quad \Sequent \ltrue$}{}
+    \tagitem{prvFalse}{$\lfalse \Sequent \quad$}{}
+  \end{enumerate}}
+{من الصورة $!A \Sequent !A$} لأي !!{sentence}~$!A$ في اللغة.
+\end{defn}
+
+ال!!^{derivation}s في حساب التتابعيات أشجارٌ مخصوصة: في أعلاها تتابعيات ابتدائية، وكل تتابعية تلي تتابعية أو تتابعيتين لا بد أن تنتج عنها أو عنهما بتطبيق صحيح لقاعدة.
+وقواعد~$\Log{LK}$ ضربان: \emph{منطقية} و\emph{بنيوية}.
+وتُنسب القاعدة المنطقية إلى !!{main operator} لل!!{sentence} التي تضم~$!A$ و/أو~$!B$ في التتابعية السفلى.
+ولكل قاعدة وجهان: وجه تكون فيه ال!!{sentence} المشتملة على ال!!{operator} في يسار النتيجة، ووجه تكون فيه ال!!{sentence} في يمينها.
+
+\end{document}

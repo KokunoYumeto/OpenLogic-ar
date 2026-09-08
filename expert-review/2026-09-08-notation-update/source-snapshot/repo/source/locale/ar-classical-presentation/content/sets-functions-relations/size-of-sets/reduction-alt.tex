@@ -1,0 +1,108 @@
+% Part:sets-functions-relations
+% Chapter: size-of-sets
+% Section: reduction-alt
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid[ar]{sfr}{siz}{red-alt}
+
+\olsection{الاختزال}
+
+\begin{editorial}
+نثبت في هذا القسم عدم القابلية للتعداد بالاختزال، ونحصل على نتائج \olref[nen-alt]{sec}. وأما العرض البديل الذي يزيد شيئًا من التفصيل ويوافق نتائج \olref[nen]{sec}، ففي \olref[red]{sec}.
+\end{editorial}
+
+ثبت بالحجة القطرية أن $\Bin^\omega$ !!{nonenumerable}، وثبت بحجة من جنسها أن $\Pow{\Nat}$ !!{nonenumerable}. غير أن لنا إلى إثبات كون $\Pow{\Nat}$ !!{nonenumerable} سبيلًا آخر: نبين أنه \emph{لو كانت $\Pow{\Nat}$ !!{enumerable} لكانت $\Bin^\omega$ !!{enumerable} أيضًا}. وقد علمنا أن $\Bin^\omega$ !!{nonenumerable}، فيلزم مثل ذلك في $\Pow{\Nat}$.
+
+وهذا \emph{اختزال} مسألة إلى أخرى؛ فقد رددنا تعداد $\Bin^\omega$ إلى تعداد $\Pow{\Nat}$. فحل المسألة الأخيرة، أعني تعداد $\Pow{\Nat}$، لو وجد لأمكن أن نستخرج منه حل الأولى، أعني تعداد $\Bin^\omega$.
+
+ومتى أردنا رد تعداد مجموعة~${\OLId{latin-looped}{B}}$ إلى تعداد مجموعة~${\OLId{latin-looped}{A}}$، وجب أن نعين طريقًا يحول تعداد~${\OLId{latin-looped}{A}}$ إلى تعداد~${\OLId{latin-looped}{B}}$. وأيسر ذلك أن نضع !!a{surjection} ${\OLId{latin-ordinary}{f}}\colon {\OLId{latin-looped}{A}} \to {\OLId{latin-looped}{B}}$. فلو كانت ${\OLId{latin-ordinary}{x}}_{\OLMathNumeral{1}}$، ${\OLId{latin-ordinary}{x}}_{\OLMathNumeral{2}}$، \dots{} تعدد~${\OLId{latin-looped}{A}}$، لكانت ${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{1}})$، ${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{2}})$، \dots{} بعد حذف التكرار وإعادة ترقيم الباقي تعداد~${\OLId{latin-looped}{B}}$. فمطلبنا هنا !!a{surjection} ${\OLId{latin-ordinary}{f}}\colon \Pow{\Nat}
+\to \Bin^\omega$.
+
+\textbf{تنبيه تصحيحي على الأصل (C040-01).} قد تتكرر قيم الدالة الشاملة؛ فلا تكون
+قائمة الصور تعدادًا تقابليًا على التعريف البديل إلا بعد حذف المكرر وإعادة
+فهرسة ما بقي.
+
+\begin{prob}
+إذا وجدت دالة~!!{injective} ${\OLId{latin-ordinary}{g}}\colon {\OLId{latin-looped}{B}} \to {\OLId{latin-looped}{A}}$، وكانت ${\OLId{latin-looped}{B}}$~!!{nonenumerable}، فبين أن ${\OLId{latin-looped}{A}}$ كذلك. وذلك بأن تستعمل~${\OLId{latin-ordinary}{g}}$ لتحويل تعداد~${\OLId{latin-looped}{A}}$ المفروض إلى تعداد~${\OLId{latin-looped}{B}}$.
+\end{prob}
+
+\begin{proof}[برهان {\olref[nen-alt]{thm:nonenum-pownat}} بالاختزال]
+لنفرض أن $\Pow{\Nat}$ !!{enumerable}، ونأخذ لها تعدادًا ${\OLId{latin-looped}{N}}_{{\OLMathNumeral{1}}}$، ${\OLId{latin-looped}{N}}_{{\OLMathNumeral{2}}}$، ${\OLId{latin-looped}{N}}_{{\OLMathNumeral{3}}}$، \dots
+
+ونضع الدالة ${\OLId{latin-ordinary}{f}} \colon \Pow{\Nat} \to \Bin^\omega$ بحيث تكون ${\OLId{latin-ordinary}{f}}({\OLId{latin-looped}{N}})$ السلسلة ${\OLId{latin-ordinary}{s}}$ المعينة بالشرط ${\OLId{latin-ordinary}{s}}({\OLId{latin-ordinary}{n}}) = {\OLMathNumeral{1}}$ إذا وفقط إذا كان ${\OLId{latin-ordinary}{n}} \in {\OLId{latin-looped}{N}}$، وبالشرط ${\OLId{latin-ordinary}{s}}({\OLId{latin-ordinary}{n}}) = {\OLMathNumeral{0}}$ فيما عدا ذلك.
+
+وهذا تعيين صحيح لدالة؛ إذ متى كان ${\OLId{latin-looped}{N}} \subseteq \Nat$، فكل ${\OLId{latin-ordinary}{n}} \in \Nat$ إما !!a{element} من~${\OLId{latin-looped}{N}}$ وإما خارج عنها. فمثلًا مجموعة الأعداد الطبيعية الزوجية ${\OLMathNumeral{2}}\Nat = \Setabs{{\OLMathNumeral{2}}{\OLId{latin-ordinary}{n}}}{{\OLId{latin-ordinary}{n}} \in \Nat} = \{{\OLMathNumeral{0}},{\OLMathNumeral{2}}, {\OLMathNumeral{4}}, {\OLMathNumeral{6}},
+\dots\}$ ترسل إلى ${\OLMathNumeral{1010101}}\dots$؛ والمجموعة $\emptyset$ ترسل إلى ${\OLMathNumeral{0000}}\dots$؛ والمجموعة $\Nat$ ترسل إلى ${\OLMathNumeral{1111}}\dots$.
+
+والدالة !!{surjective} أيضًا، لأن كل سلسلة من~${\OLMathNumeral{0}}$ و~${\OLMathNumeral{1}}$ تعين مجموعة الأعداد الطبيعية التي يشغل~${\OLMathNumeral{1}}$ مواضعها، فتكون السلسلة صورة تلك المجموعة. وللتفصيل، إذا كان ${\OLId{latin-ordinary}{s}} \in \Bin^\omega$ نعين ${\OLId{latin-looped}{N}}
+\subseteq \Nat$ بوضع
+\[
+{\OLId{latin-looped}{N}} = \Setabs{{\OLId{latin-ordinary}{n}} \in \Nat}{{\OLId{latin-ordinary}{s}}({\OLId{latin-ordinary}{n}}) = {\OLMathNumeral{1}}}
+\]
+فيكون ${\OLId{latin-ordinary}{f}}({\OLId{latin-looped}{N}}) = {\OLId{latin-ordinary}{s}}$، كما يبينه تعريف~${\OLId{latin-ordinary}{f}}$.
+
+ولننظر في القائمة
+\[
+{\OLId{latin-ordinary}{f}}({\OLId{latin-looped}{N}}_{\OLMathNumeral{1}}), {\OLId{latin-ordinary}{f}}({\OLId{latin-looped}{N}}_{\OLMathNumeral{2}}), {\OLId{latin-ordinary}{f}}({\OLId{latin-looped}{N}}_{\OLMathNumeral{3}}), \dots
+\]
+إن ${\OLId{latin-ordinary}{f}}$ !!{surjective}، فكل عنصر من $\Bin^\omega$ قيمة لـ~${\OLId{latin-ordinary}{f}}$ عند وسيط ما؛ وهذا الوسيط وارد في التعداد، فترد قيمته في القائمة الجديدة. فهي إذن تستوفي~$\Bin^\omega$ كلها.
+
+فقد تبين أن كون $\Pow{\Nat}$ !!{enumerable} يستلزم كون $\Bin^\omega$ !!{enumerable}. لكن $\Bin^\omega$ !!{nonenumerable} (\olref[nen-alt]{thm:nonenum-bin-omega})، فلزم أن $\Pow{\Nat}$ !!{nonenumerable}.
+\end{proof}
+
+\begin{editorial}
+\textbf{تنبيه تصحيحي على الأصل (OLSIZ-010).}
+سمّى الأصل المتتالية ${\OLId{latin-ordinary}{s}}_{\OLId{latin-ordinary}{k}}$ من غير أن يربط ${\OLId{latin-ordinary}{k}}$؛ فاستُعمل الاسم
+${\OLId{latin-ordinary}{s}}$ في التعريف كله، إذ تحدد المجموعة ${\OLId{latin-looped}{N}}$ متتاليتها المميزة وحدها.
+\end{editorial}
+
+%\begin{explain}
+%It is easy to be confused about the direction the reduction goes in.
+%For instance, !!a{surjective} function $g \colon \Bin^\omega \to X$
+%does \emph{not} establish that $X$ is !!{nonenumerable}.  (Consider $g
+%\colon \Bin^\omega \to \Bin$ defined by $g(s) = s(1)$, the function
+%that maps a sequence of $0$'s and $1$'s to its first !!{element}.  It
+%is surjective, because some sequences start with $0$ and some start
+%with $1$. But $\Bin$ is finite.)  Note also that the function $f$ must
+%be surjective, or otherwise the argument does not go through:
+%$f(x_1)$, $f(x_2)$, \dots{} would then not be guaranteed to include
+%all the !!{element}s of~$Y$. For instance, $h\colon \Nat \to
+%\Bin^\omega$ defined by
+%\[
+%h(n) = \underbrace{000\dots0}_{\text{$n$ $0$'s}}
+%\]
+%is a function, but $\Nat$ is !!{enumerable}.
+%\end{explain}
+
+\begin{prob}\label{sfr:siz:red-alt:prob:nat-nat}
+أقم برهانًا بالاختزال على أن المجموعة~${\OLId{latin-looped}{X}}$ لجميع الدوال ${\OLId{latin-ordinary}{f}}\colon \Nat \to \Nat$ !!{nonenumerable}. وتلميحه إيجاد دالة شاملة من ${\OLId{latin-looped}{X}}$ إلى~$\Bin^\omega$.
+\end{prob}
+
+\begin{prob}
+بين بالاختزال أن مجموعة جميع \emph{المجموعات المؤلفة من} أزواج الأعداد الطبيعية، أي $\Pow{\Nat \times \Nat}$، !!{nonenumerable}.
+\end{prob}
+
+\begin{prob}
+أقم حجة اختزال على أن $\Nat^\omega$ !!{nonenumerable}؛ والمراد بها مجموعة جميع المتتاليات اللانهائية من الأعداد الطبيعية.
+\end{prob}
+
+%\begin{prob}
+%Let $P$ be the set of functions from $\Nat$ to the set $\{0\}$, and let $Q$ be the set of \emph{partial}
+%functions from the set of positive integers to the set $\{0\}$. Show
+%that $P$~is !!{enumerable} and $Q$~is not. (Hint: reduce the problem
+%of enumerating $\Bin^\omega$ to enumerating~$Q$).
+%\end{prob}
+
+\begin{prob}
+إذا كانت ${\OLId{latin-looped}{S}}$ مجموعة جميع !!{surjection}s من~$\Nat$ إلى $\{{\OLMathNumeral{0}},{\OLMathNumeral{1}}\}$، أي كانت ${\OLId{latin-looped}{S}}$ تضم جميع !!{surjection}s~${\OLId{latin-ordinary}{f}} \colon \Nat
+\to \Bin$، فبرهن أن ${\OLId{latin-looped}{S}}$ !!{nonenumerable}.
+\end{prob}
+
+\begin{prob}
+بين أن $\Real$، وهي مجموعة الأعداد الحقيقية، !!{nonenumerable}.
+\end{prob}
+
+\end{document}

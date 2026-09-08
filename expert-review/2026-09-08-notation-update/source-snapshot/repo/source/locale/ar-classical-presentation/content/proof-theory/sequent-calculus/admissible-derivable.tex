@@ -1,0 +1,250 @@
+% Part: proof-theory
+% Chapter: sequent-calculus
+% Section: admissible-derivable
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{seq}{adm}
+
+\olsection{في القواعد المقبولة والقابلة للاشتقاق}
+
+تتعلق نتائج كثيرة في نظرية البرهان، أو تستعمل نتائج تتعلق، بما إذا كان كل ما
+!!{prove} باستعمال قاعدة معينة يجوز أن~!!{prove} من دونها. ومبرهنة حذف
+القطع أشهر مثال: فهي تبيّن أن كل متتالية يسعنا أن~!!{prove} باستعمال قواعد
+حساب متتاليات مع~\Cut{} يمكننا كذلك أن~!!{prove} بغير~\Cut. ولهذه
+الخاصية اسم لما لها من أهمية.
+
+\begin{defn}
+تكون القاعدة~${\OLId{latin-looped}{R}}$ \emph{مقبولة} في حساب متتاليات إذا أمكن برهنة كل متتالية
+يمكن برهنتها في الحساب مع القاعدة~${\OLId{latin-looped}{R}}$ بغير استعمال~${\OLId{latin-looped}{R}}$ كذلك.
+\end{defn}
+
+\begin{ex}\ollabel{ex:land-deriv}
+تأخذ القاعدة~$\LeftR{\land}$ صورتين مختلفتين في~\Log{G1c} و\Log{G3c}.
+ففي~\Log{G1c} نسختان منها: تضم مقدمة إحداهما الحد الأيسر~$!A$ من
+!!{formula} الرئيسة~$!A\land !B$، وتضم مقدمة الأخرى الحد الأيمن~$!B$:
+\[
+\Axiom$ !A, {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}$
+\RightLabel{$\LeftR{\land}_{\OLMathNumeral{1}}$}
+\UnaryInf$ !A \land !B, {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}$
+\DisplayProof
+\qquad
+\Axiom$!B, {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}$
+\RightLabel{$\LeftR{\land}_{\OLMathNumeral{2}}$}
+\UnaryInf$!A \land !B, {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}$
+\DisplayProof
+\]
+أما~\Log{G3c} فله قاعدة واحدة فقط:
+\[
+\Axiom$ !A, !B, {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}$
+\RightLabel{$\LeftR{\land}_{\OLMathNumeral{3}}$}
+\UnaryInf$ !A \land !B, {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}$
+\DisplayProof
+\]
+ويعني الوسم~$\LeftR{\star}$ أن الصيغة الرئيسة تقع على اليسار، أي في
+المقدّم، ويعني~$\RightR{\star}$ أنها تقع على اليمين، أي في التالي.
+
+يمكننا الآن أن نسأل: ``هل قاعدة~$\LeftR{\land}_{\OLMathNumeral{3}}$ في~\Log{G3c} مقبولة في
+\Log{G1c}؟'' نعم؛ إذ يمكن محاكاة كل استدلال يستعمل~$\LeftR{\land}_{\OLMathNumeral{3}}$
+مباشرةً بقواعد~\Log{G1c} وحدها. وإلى جانب~$\LeftR{\land}_{\OLMathNumeral{1}}$ و
+$\LeftR{\land}_{\OLMathNumeral{2}}$ سنحتاج كذلك إلى القاعدة البنيوية
+$\LeftR{\Contraction}$:
+\[
+\Axiom$!A, !B, {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}$
+\RightLabel{$\LeftR{\land}_{\OLMathNumeral{1}}$}
+\UnaryInf$!A \land !B, !B, {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}$
+\RightLabel{$\LeftR{\land}_{\OLMathNumeral{2}}$}
+\UnaryInf$!A \land !B, !A \land !B, {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}$
+\RightLabel{\LeftR{\Contraction}}
+\UnaryInf$!A \land !B, {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}$
+\DisplayProof
+\]
+\end{ex}
+
+محاكاة استدلال يستعمل قاعدةً باستدلالات تستعمل قواعد أخرى إحدى طرق إثبات
+قبول القاعدة. لكنها ليست الطريقة الوحيدة؛ فبعض القواعد مقبولة ولا يمكن
+محاكاتها هكذا. وتسمى القواعد التي يمكن محاكاتها \emph{قابلة للاشتقاق}.
+
+\begin{defn}
+تسمى القاعدة~${\OLId{latin-looped}{R}}$،
+\[
+\AxiomC{${\OLId{latin-looped}{S}}_{\OLMathNumeral{1}}$}
+\AxiomC{$\dots$}
+\AxiomC{${\OLId{latin-looped}{S}}_{\OLId{latin-ordinary}{n}}$}
+\RightLabel{${\OLId{latin-looped}{R}}$}
+\TrinaryInfC{${\OLId{latin-looped}{S}}$}
+\DisplayProof
+\]
+\emph{قابلة للاشتقاق} في حساب إذا وُجد~!!{proof} تخطيطي للمتتالية~${\OLId{latin-looped}{S}}$
+يستعمل قواعد الحساب وبديهياته، إلى جانب متتاليات ابتدائية إضافية من صور
+${\OLId{latin-looped}{S}}_{\OLMathNumeral{1}}$، \dots،~${\OLId{latin-looped}{S}}_{\OLId{latin-ordinary}{n}}$.
+\end{defn}
+
+يبيّن~!!{proof} الوارد في~\olref{ex:land-deriv} أن
+$\LeftR{\land}_{\OLMathNumeral{3}}$ قاعدة قابلة للاشتقاق في~\Log{G1c}؛ فهو~!!{proof}
+تخطيطي لنتيجة~$\LeftR{\land}_{\OLMathNumeral{3}}$ من مقدمات~$\LeftR{\land}_{\OLMathNumeral{3}}$ بوصفها متتاليات ابتدائية،
+وهو~!!{proof} لا يستعمل إلا قواعد~\Log{G1c}. (ولم يستعمل أي بديهية من
+بديهيات~\Log{G1c}.)
+
+\begin{prop}\ollabel{prop:lor-G3-adm}
+قاعدتا~$\LeftR{\land}$ و$\RightR{\lor}$ في~\Log{G3c} قابلتان للاشتقاق
+في~\Log{G1c}.
+\end{prop}
+
+\begin{proof}
+  يرد البرهان الخاص بـ~$\LeftR{\land}$ في~\olref{ex:land-deriv}، ويُترك
+  البرهان الخاص بـ~$\RightR{\lor}$ تمرينًا.
+\end{proof}
+
+\begin{prob}
+بيّن أن قاعدة~$\RightR{\lor}$ في~\Log{G3c} قابلة للاشتقاق في~\Log{G1c}.
+\end{prob}
+
+\begin{prob}
+لنفرض أن~$\liff$~!!{operator} معرّف، وأن~$!A\liff !B$ اختصار لـ
+$(!A\lif !B)\land(!B\lif !A)$. بيّن أن القاعدتين
+\begin{enumerate}
+\item \Axiom${\OLId{greek-variable}{Gamma}}, !A, !B \fCenter {\OLId{greek-variable}{Delta}}$
+\Axiom${\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, !A, !B$
+\RightLabel{\LeftR{\liff}}
+\BinaryInf$!A \liff !B, {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}$
+\DisplayProof
+\item
+\Axiom$!A, {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, !B$
+\Axiom$!B, {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, !A$
+\RightLabel{\RightR{\liff}}
+\BinaryInf${\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, !A \liff !B$
+\DisplayProof
+\end{enumerate}
+قابلتان للاشتقاق في: (أ)~\Log{G1c}، و(ب)~\Log{G3c}.
+\end{prob}
+
+\begin{ex}\ollabel{ex:weak-adm}
+قاعدة~$\RightR{\Weakening}$ في~\Log{G1c}،
+\[
+\Axiom$ {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}$
+\RightLabel{\RightR{\Weakening}}
+\UnaryInf$ {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, !A$
+\DisplayProof
+\]
+مقبولة في~\Log{G3c}. وفكرة البرهان بسيطة: افترض وجود~!!a{proof}~$\pi$
+للمقدمة~${\OLId{greek-variable}{Gamma}}\Sequent{\OLId{greek-variable}{Delta}}$ في~\Log{G3c}. أضف~!!{formula}~$!A$ إلى
+تالي كل متتالية في~$\pi$. تبقى البديهيات بديهيات، وتبقى الاستدلالات الصحيحة
+صحيحة. وبعد إضافة~!!{formula}~$!A$ تكون المتتالية النهائية لـ~!!{proof} الجديد هي
+${\OLId{greek-variable}{Gamma}}\Sequent{\OLId{greek-variable}{Delta}},!A$.
+
+غير أن قاعدة~$\RightR{\Weakening}$ ليست قابلة للاشتقاق في~\Log{G3c}.
+فلو كانت كذلك، لوجد~!!a{proof} لـ~${\OLId{greek-variable}{Gamma}}\Sequent{\OLId{greek-variable}{Delta}},!A$ لا يستعمل إلا
+بديهيات~\Log{G3c} وقواعده، وربما المتتالية الابتدائية الإضافية
+${\OLId{greek-variable}{Gamma}}\Sequent{\OLId{greek-variable}{Delta}}$. وإذا كان هذا~!!{proof} تخطيطيًا محضًا، كما يقتضي
+اشتقاق~$\RightR{\Weakening}$، أمكن تحويله إلى~!!a{proof} لـ~$\Sequent !A$
+بحذف~${\OLId{greek-variable}{Gamma}}$ و${\OLId{greek-variable}{Delta}}$. وهذا يحول المتتاليات الابتدائية الإضافية
+${\OLId{greek-variable}{Gamma}}\Sequent{\OLId{greek-variable}{Delta}}$ إلى المتتالية الخالية~$\quad\Sequent\quad$.
+ولأن المتتالية الخالية لا تحتوي أي~!!{formula}s، فيما تتطلب كل قواعد
+\Log{G3c}~!!{formula} فاعلة واحدة على الأقل في مقدماتها، فلا يجوز أن تكون
+المتتالية الخالية مقدمة لأي استدلال في هذا~!!{proof} التخطيطي. ومن ثم لا
+يجوز أن يكون~!!{proof} تخطيطيًا إلا إذا لم يستعمل بالفعل المتتالية الإضافية
+${\OLId{greek-variable}{Gamma}}\Sequent{\OLId{greek-variable}{Delta}}$ متتاليةً ابتدائية. أي إنه سيكون اشتقاقًا تخطيطيًا
+لـ~${\OLId{greek-variable}{Gamma}}\Sequent{\OLId{greek-variable}{Delta}},!A$ باستعمال بديهيات~\Log{G3c} وقواعده وحدها،
+وسنكون قد بينا أن لكل متتالية من هذه الصورة~!!a{proof} في~\Log{G3c}. غير أن
+هذا محال، لأن~\Log{G3c} سليم، فلا يستطيع أن~!!{prove} إلا متتاليات صادقة
+في كل~!!{structure}. وإذا أخذنا~${\OLId{greek-variable}{Gamma}}={\OLId{greek-variable}{Delta}}=\emptyset$ و
+$!A\ident\lfalse$، للزم أن~!!{prove}~\Log{G3c}، مثلًا، المتتالية
+$\quad\Sequent\lfalse$، وهو لا يفعل.
+\end{ex}
+
+لنقدم برهانًا استقرائيًا أنيقًا لكون الإضعاف قاعدة مقبولة في~\Log{G3c}.
+بل تصح نتيجة أقوى قليلًا، كما توضح الحجة الحدسية: فإضافة~$!A$ إلى يمين كل
+متتالية في~$\pi$ لا تغيّر بنية~!!{proof}، ولا تزيد ارتفاعه على وجه الخصوص.
+ولأهمية ذلك نضع له تعريفًا مستقلًا.
+
+\begin{defn}
+تكون القاعدة~${\OLId{latin-looped}{R}}$،
+\[
+\AxiomC{${\OLId{latin-looped}{S}}_{\OLMathNumeral{1}}$}
+\AxiomC{$\dots$}
+\AxiomC{${\OLId{latin-looped}{S}}_{\OLId{latin-ordinary}{n}}$}
+\RightLabel{${\OLId{latin-looped}{R}}$}
+\TrinaryInfC{${\OLId{latin-looped}{S}}$}
+\DisplayProof
+\]
+\emph{مقبولة مع حفظ~!!{height}}، أو \emph{مقبولة مع~!!{hp}}، في حساب إذا
+كان لكل براهين~$\pi_{\OLId{latin-ordinary}{i}}$ لمقدماتها~${\OLId{latin-looped}{S}}_{\OLId{latin-ordinary}{i}}$، حيث
+${\OLId{latin-ordinary}{h}}_{\OLId{latin-ordinary}{i}}=\pheight{\pi_{\OLId{latin-ordinary}{i}}}$، برهان~$\pi$ للنتيجة~${\OLId{latin-looped}{S}}$ يحقق
+$\pheight{\pi}\le\max({\OLId{latin-ordinary}{h}}_{\OLMathNumeral{1}},\dots,{\OLId{latin-ordinary}{h}}_{\OLId{latin-ordinary}{n}})$.
+\end{defn}
+
+ويكفي لكي تكون قاعدة مقبولة مع حفظ~!!{height} أنه كلما كان للمقدمات~${\OLId{latin-looped}{S}}_{\OLId{latin-ordinary}{i}}$
+!!{proof}s~$\pi_{\OLId{latin-ordinary}{i}}$ ذات~!!{height}~${\OLId{latin-ordinary}{h}}_{\OLId{latin-ordinary}{i}}=\pheight{\pi_{\OLId{latin-ordinary}{i}}}$، وُجد
+!!a{proof}~$\pi$ للنتيجة لا يزيد~!!{height}ه~$\pheight{\pi}$ على أكبر
+${\OLId{latin-ordinary}{h}}_{\OLId{latin-ordinary}{i}}$. وعلى وجه الخصوص، إذا كانت لها مقدمة واحدة~${\OLId{latin-looped}{S}}_{\OLMathNumeral{1}}$، كفى أن يكون
+$\pheight{\pi}\le\pheight{\pi_{\OLMathNumeral{1}}}$. وفي حالتي~$\RightR{\Weakening}$ و
+$\LeftR{\Weakening}$ يكون بالفعل
+$\pheight{\pi}=\pheight{\pi_{\OLMathNumeral{1}}}$، غير أن المساواة ليست لازمة.
+
+\begin{prop}\ollabel{prop:weak-G3c-adm}
+قاعدتا~$\RightR{\Weakening}$ و$\LeftR{\Weakening}$ في~\Log{G1c} مقبولتان
+مع حفظ~!!{height} في~\Log{G3c}.
+\end{prop}
+
+\begin{proof}
+  علينا أن نبيّن أنه إذا كان
+  $\Log{G3c}\Proves{\OLId{greek-variable}{Gamma}}\Sequent{\OLId{greek-variable}{Delta}}$ بـ~!!{proof}~$\pi$ ذي
+  !!{height}~$\pheight{\pi}={\OLId{latin-ordinary}{n}}$، وُجد~!!{proof}~$\pi'$ في~\Log{G3c}
+  لـ~${\OLId{greek-variable}{Gamma}}\Sequent{\OLId{greek-variable}{Delta}},!A$ وارتفاعه~$\pheight{\pi'}={\OLId{latin-ordinary}{n}}$. نبرهن ذلك
+  بالاستقراء في~${\OLId{latin-ordinary}{n}}$. إذا كان~${\OLId{latin-ordinary}{n}}={\OLMathNumeral{0}}$، كانت~$\pi$ بديهية: فإما أن تقع صيغة
+  ذرية~$!C$ في~${\OLId{greek-variable}{Gamma}}$ و${\OLId{greek-variable}{Delta}}$ معًا، وإما أن تقع~$\lfalse$ في~${\OLId{greek-variable}{Gamma}}$.
+  وفي الحالتين تبقى~${\OLId{greek-variable}{Gamma}}\Sequent{\OLId{greek-variable}{Delta}},!A$ بديهية.
+
+  وإذا كان~${\OLId{latin-ordinary}{n}}=\pheight{\pi}>{\OLMathNumeral{0}}$، كان لـ~!!{proof}~$\pi$ استدلال أخير.
+  نميّز الحالات بحسب القاعدة المستعملة. ولنورد مثالًا واحدًا: لنفرض أن
+  آخر الاستدلال هو~$\RightR{\land}$. عندئذ
+  ${\OLId{greek-variable}{Delta}}={\OLId{greek-variable}{Delta}}',!B\land !C$، وتكون~!!{proof}s الجزئية المباشرة
+  $\pi_{\OLMathNumeral{1}}$ و$\pi_{\OLMathNumeral{2}}$ للاستدلال الأخير ذات المتتاليتين النهائيتين
+  ${\OLId{greek-variable}{Gamma}}\Sequent{\OLId{greek-variable}{Delta}}',!B$ و${\OLId{greek-variable}{Gamma}}\Sequent{\OLId{greek-variable}{Delta}}',!C$ على الترتيب.
+  أي إن~$\pi$ من الصورة:
+  \[
+  \AxiomC{}
+  \RightLabel{$\pi_{\OLMathNumeral{1}}$}
+  \Deduce${\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}', !B$
+  \AxiomC{}
+  \RightLabel{$\pi_{\OLMathNumeral{2}}$}
+  \Deduce${\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}', !C$
+  \RightLabel{\RightR{\land}}
+  \BinaryInf${\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}', !B \land !C$
+  \DisplayProof
+  \]
+  ولدينا كذلك
+  ${\OLId{latin-ordinary}{n}}=\max(\pheight{\pi_{\OLMathNumeral{1}}},\pheight{\pi_{\OLMathNumeral{2}}})+{\OLMathNumeral{1}}$. ولذلك يكون
+  $\pheight{\pi_{\OLMathNumeral{1}}}<{\OLId{latin-ordinary}{n}}$ و$\pheight{\pi_{\OLMathNumeral{2}}}<{\OLId{latin-ordinary}{n}}$، فينطبق فرض الاستقراء: توجد
+  !!{proof}s~$\pi_{\OLMathNumeral{1}}'$ و$\pi_{\OLMathNumeral{2}}'$ لـ~${\OLId{greek-variable}{Gamma}}\Sequent{\OLId{greek-variable}{Delta}}',!B,!A$ و
+  ${\OLId{greek-variable}{Gamma}}\Sequent{\OLId{greek-variable}{Delta}}',!C,!A$. وبقاعدة~$\RightR{\land}$ ينتج لنا
+  !!a{proof}~$\pi'$ لـ~${\OLId{greek-variable}{Gamma}}\Sequent{\OLId{greek-variable}{Delta}}',!B\land !C,!A$:
+  \[
+  \AxiomC{}
+  \RightLabel{$\pi_{\OLMathNumeral{1}}'$}
+  \Deduce${\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}', !B, !A$
+  \AxiomC{}
+  \RightLabel{$\pi_{\OLMathNumeral{2}}'$}
+  \Deduce${\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}', !C, !A$
+  \RightLabel{\RightR{\land}}
+  \BinaryInf${\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}', !B \land !C, !A$
+  \DisplayProof
+  \]
+  ويكون
+  $\pheight{\pi'}=\max(\pheight{\pi_{\OLMathNumeral{1}}'},\pheight{\pi_{\OLMathNumeral{2}}'})+{\OLMathNumeral{1}}
+  \le\max(\pheight{\pi_{\OLMathNumeral{1}}},\pheight{\pi_{\OLMathNumeral{2}}})+{\OLMathNumeral{1}}=\pheight{\pi}$.
+  وتعالج قواعد~\Log{G3c} الأخرى على هذا القياس: نطبق فرض الاستقراء على كل
+  برهان جزئي مباشر ثم نعيد تطبيق القاعدة الأخيرة. وينطبق البرهان المتماثل
+  على الإضعاف الأيسر بإضافة الصيغة إلى مقدم كل متتالية.
+\end{proof}
+
+النتيجة~\olref{prop:weak-G3c-adm} مفيدة جدًا. وسنضع ترميزًا لتطبيقها
+المتكرر: إذا كان~$\pi$~!!a{proof} لـ~${\OLId{greek-variable}{Gamma}}\Sequent{\OLId{greek-variable}{Delta}}$، فإن
+$\pi[\Pi\Sequent\Lambda]$ نتيجة تطبيق مقبولية الإضعاف الأيسر بكل
+!!{formula}s في~$\Pi$، ومقبولية الإضعاف الأيمن بكل~!!{formula}s في
+$\Lambda$. وهو~!!a{proof} لـ~${\OLId{greek-variable}{Gamma}},\Pi\Sequent{\OLId{greek-variable}{Delta}},\Lambda$.
+
+\end{document}

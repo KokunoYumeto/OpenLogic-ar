@@ -1,0 +1,117 @@
+% Part: first-order-logic
+% Chapter: introduction
+% Section: satisfaction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{int}{sat}
+
+\olsection{الإرضاء}
+
+إذا عرفنا ال!!{formula}s، أمكننا أن نستبق البحث إلى الدلالة؛ وأول
+تعريف فيها هو ال!!{structure}. ففي لغتنا البسيطة لل!!{structure}~$\Struct M$
+ثلاثة أركان: مجموعة غير خالية $\Domain{{\OLId{latin-looped}{M}}}$ هي
+\emph{ال!!{domain}}، وما يعيّنه $\Obj a$ في~$\Struct M$، وما
+يصدق عليه $\Obj P$ في~$\Struct M$. نرمز إلى معين~$\Obj a$
+بـ~$\Assign{\Obj a}{{\OLId{latin-looped}{M}}}$، وإلى مجموعة ما يصدق عليه $\Obj P$
+بـ~$\Assign{\Obj P}{{\OLId{latin-looped}{M}}}$. فهذه وحدها مكونات
+ال!!^a{structure}~$\Struct{M}$: $\Domain{{\OLId{latin-looped}{M}}}$،
+و$\Assign{\Obj a}{{\OLId{latin-looped}{M}}} \in \Domain{{\OLId{latin-looped}{M}}}$،
+و$\Assign{\Obj P}{{\OLId{latin-looped}{M}}} \subseteq \Domain{{\OLId{latin-looped}{M}}}$. أما في الحالة العامة،
+فتكثر ال!!{predicate}s وال!!{constant}s، وقد تتعدد مواضع
+ال!!{predicate}s، وتدخل ال!!{function}s أيضًا، فيزداد التعريف
+تفصيلًا.
+
+وبهذه الأركان نستطيع تعريف إرضاء ال!!{formula}s الخالية من
+ال!!{variable}s. نضع تعريفًا استقرائيًا يساير بناء ال!!{formula}s:
+نبدأ بإرضاء الذرية في~$\Struct{M}$، ثم نبين، مثلًا، أن إرضاء
+$\lnot !A$ في~$\Struct{M}$ تابع لإرضاء $!A$ أو عدمه. فنقول:
+
+\begin{enumerate}
+  \item تُرضى $\Atom{\Obj P}{\Obj a}$ في~$\Struct{M}$ إذا وفقط إذا
+  كان $\Assign{\Obj a}{{\OLId{latin-looped}{M}}} \in \Assign{\Obj P}{{\OLId{latin-looped}{M}}}$.
+  \item تُرضى $\lnot !A$ في~$\Struct{M}$ إذا وفقط إذا لم تُرض
+  $!A$ في~$\Struct{M}$.
+  \item تُرضى $(!A \land !B)$ في~$\Struct{M}$ إذا وفقط إذا أُرضيت
+  $!A$ في~$\Struct{M}$ وأُرضيت $!B$ في~$\Struct{M}$ أيضًا.
+\end{enumerate}
+خذ مثالًا $\Domain{{\OLId{latin-looped}{M}}} = \{{\OLMathNumeral{0}}, {\OLMathNumeral{1}}, {\OLMathNumeral{2}}\}$،
+و$\Assign{\Obj a}{{\OLId{latin-looped}{M}}} = {\OLMathNumeral{1}}$،
+و$\Assign{\Obj P}{{\OLId{latin-looped}{M}}} = \{{\OLMathNumeral{1}}, {\OLMathNumeral{2}}\}$. بمقتضى التعريف تُرضى
+$\Atom{\Obj P}{\Obj a}$ في~$\Struct{M}$، إذ
+$\Assign{\Obj a}{{\OLId{latin-looped}{M}}} =  {\OLMathNumeral{1}} \in \{{\OLMathNumeral{1}},{\OLMathNumeral{2}}\} = \Assign{\Obj P}{{\OLId{latin-looped}{M}}}$.
+وعليه لا تُرضى $\lnot \Atom{\Obj P}{\Obj a}$ في~$\Struct{M}$،
+ثم تُرضى $\lnot\lnot \Atom{\Obj P}{\Obj a}$ في~$\Struct{M}$،
+ولا تُرضى
+$(\lnot \Atom{\Obj P}{\Obj a} \land \Atom{\Obj P}{\Obj a})$،
+وعلى هذا نقيس.
+
+وأما المكممات فتعترضنا عندها مسألة. قد نقول:
+«تُرضى $\lexists[\Obj v_{\OLMathNumeral{0}}][\Atom{\Obj P}{\Obj v_0}]$ إذا وفقط
+إذا تُرضى $\Atom{\Obj P}{\Obj v_0}$». لكن
+ال!!{structure}~$\Struct{M}$ لا تعين شيئًا لل!!{variable}s.
+وإنما مرادنا أن $\Atom{\Obj P}{\Obj v_0}$ تُرضى
+\emph{لقيمة ما لـ~$\Obj v_{\OLMathNumeral{0}}$}. فلا بد من تعيين
+!!{element}s من $\Domain{{\OLId{latin-looped}{M}}}$، ليس لـ$\Obj a$ فحسب، بل
+لـ~$\Obj v_{\OLMathNumeral{0}}$ أيضًا. لهذا ندخل \emph{إسنادات} ال!!{variable}s.
+وإسناد ال!!^a{variable} دالة~${\OLId{latin-ordinary}{s}}$ ترسل ال!!{variable}s إلى
+!!{element}s من $\Domain{{\OLId{latin-looped}{M}}}$، أي إلى ${\OLMathNumeral{0}}$ أو ${\OLMathNumeral{1}}$ أو~${\OLMathNumeral{2}}$ في
+مثالنا. ولا نعلم سلفًا أي ال!!{variable}s ستقع في
+!!a{formula}، فلا نحصر ال!!{variable}s التي تعطيها ${\OLId{latin-ordinary}{s}}$ قيمًا.
+بل نطلب أن تعطي ${\OLId{latin-ordinary}{s}}$ قيمة لكل ال!!{variable}s
+$\Obj v_{\OLMathNumeral{0}}$ و$\Obj v_{\OLMathNumeral{1}}$ و\dots\@ \emph{جميعًا}، ثم نستعمل
+منها ما تدعو إليه الحاجة.
+
+وعليه لا نعرّف إرضاء ال!!{formula}s بالقياس إلى !!a{structure}
+وحدها، بل إلى !!a{structure}~$\Struct{M}$ \emph{و}إسناد
+!!a{variable}~${\OLId{latin-ordinary}{s}}$ معًا. نكتب $\Sat{{\OLId{latin-looped}{M}}}{!A}[{\OLId{latin-ordinary}{s}}]$، ونضيف إلى
+التعريف بندًا لل!!{formula}s الذرية التي فيها !!{variable}s:
+
+\begin{enumerate}
+  \item $\Sat{{\OLId{latin-looped}{M}}}{\Atom{\Obj P}{\Obj a}}[{\OLId{latin-ordinary}{s}}]$ إذا وفقط إذا كان
+  $\Assign{\Obj a}{{\OLId{latin-looped}{M}}} \in \Assign{\Obj P}{{\OLId{latin-looped}{M}}}$.
+  \item $\Sat{{\OLId{latin-looped}{M}}}{\Atom{\Obj P}{\Obj v_i}}[{\OLId{latin-ordinary}{s}}]$ إذا وفقط إذا كان
+  ${\OLId{latin-ordinary}{s}}(\Obj v_{\OLId{latin-ordinary}{i}}) \in \Assign{\Obj P}{{\OLId{latin-looped}{M}}}$.
+  \item $\Sat{{\OLId{latin-looped}{M}}}{\lnot !A}[{\OLId{latin-ordinary}{s}}]$ إذا وفقط إذا لم يكن
+  $\Sat{{\OLId{latin-looped}{M}}}{!A}[{\OLId{latin-ordinary}{s}}]$.
+  \item $\Sat{{\OLId{latin-looped}{M}}}{(!A \land !B)}[{\OLId{latin-ordinary}{s}}]$ إذا وفقط إذا كان
+  $\Sat{{\OLId{latin-looped}{M}}}{!A}[{\OLId{latin-ordinary}{s}}]$ و$\Sat{{\OLId{latin-looped}{M}}}{!B}[{\OLId{latin-ordinary}{s}}]$.
+\end{enumerate}
+بهذا زال إشكال واحد: عرفنا متى ترضي $\Struct{M}$
+الصيغة $\Atom{\Obj P}{\Obj v_0}$ على القيمة ${\OLId{latin-ordinary}{s}}(\Obj v_{\OLMathNumeral{0}})$.
+وأما $\lexists[\Obj v_{\OLMathNumeral{0}}][\Atom{\Obj P}{\Obj v_0}]$، فيبقى
+لضبطها أمر آخر. نريد أن
+$\Sat{{\OLId{latin-looped}{M}}}{\lexists[\Obj v_{\OLMathNumeral{0}}][\Atom{\Obj P}{\Obj v_0}]}[{\OLId{latin-ordinary}{s}}]$
+يكافئ $\Sat{{\OLId{latin-looped}{M}}}{\Atom{\Obj P}{\Obj v_0}}[{\OLId{latin-ordinary}{s}}']$ لبعض~${\OLId{latin-ordinary}{s}}'$
+مما يعطي قيمة لـ~$\Obj v_{\OLMathNumeral{0}}$. وليس لازمًا أن تكون القيمة التي
+يعطيها لـ$\Obj v_{\OLMathNumeral{0}}$ هي ${\OLId{latin-ordinary}{s}}(\Obj v_{\OLMathNumeral{0}})$. فلنضع الترميز الآتي:
+إذا كان ${\OLId{latin-ordinary}{m}} \in \Domain{{\OLId{latin-looped}{M}}}$، رمزنا بـ
+$\Subst{{\OLId{latin-ordinary}{s}}}{{\OLId{latin-ordinary}{m}}}{\Obj v_{\OLMathNumeral{0}}}$ إلى الإسناد الموافق لـ~${\OLId{latin-ordinary}{s}}$ في جميع
+ال!!{variable}s سوى~$\Obj v_{\OLMathNumeral{0}}$، فإنه يعطي ${\OLId{latin-ordinary}{m}}$ لـ~$\Obj v_{\OLMathNumeral{0}}$.
+حينئذ يتم التعريف هكذا:
+
+\begin{enumerate}\setcounter{enumi}{\OLClassicalDigits{4}}
+  \item $\Sat{{\OLId{latin-looped}{M}}}{\lexists[\Obj v_{\OLId{latin-ordinary}{i}}][!A]}[{\OLId{latin-ordinary}{s}}]$ إذا وفقط إذا كان
+  $\Sat{{\OLId{latin-looped}{M}}}{!A}[\Subst{{\OLId{latin-ordinary}{s}}}{{\OLId{latin-ordinary}{m}}}{\Obj v_{\OLId{latin-ordinary}{i}}}]$ لبعض
+  ${\OLId{latin-ordinary}{m}} \in \Domain{{\OLId{latin-looped}{M}}}$.
+\end{enumerate}
+نختبر ذلك في المثال. ليكن ${\OLId{latin-ordinary}{s}}(\Obj v_{\OLId{latin-ordinary}{i}}) = {\OLMathNumeral{0}}$ لكل
+${\OLId{latin-ordinary}{i}} \in \Nat$. عندئذ
+$\Sat{{\OLId{latin-looped}{M}}}{\lexists[\Obj v_{\OLMathNumeral{0}}][\Atom{\Obj P}{\Obj v_0}]}[{\OLId{latin-ordinary}{s}}]$
+إذا وفقط إذا وجد ${\OLId{latin-ordinary}{m}} \in \Domain{{\OLId{latin-looped}{M}}}$ يحقق
+$\Sat{{\OLId{latin-looped}{M}}}{\Atom{\Obj P}{\Obj v_0}}[\Subst{{\OLId{latin-ordinary}{s}}}{{\OLId{latin-ordinary}{m}}}{\Obj v_{\OLMathNumeral{0}}}]$.
+ومثل هذا العنصر موجود؛ نأخذ ${\OLId{latin-ordinary}{m}} = {\OLMathNumeral{1}}$ أو ${\OLId{latin-ordinary}{m}} = {\OLMathNumeral{2}}$.
+فيصدق ذلك وإن لم تصلح القيمة~${\OLId{latin-ordinary}{s}}(\Obj v_{\OLMathNumeral{0}})$ التي أعطاها ${\OLId{latin-ordinary}{s}}$
+لـ$\Obj v_{\OLMathNumeral{0}}$ أصلًا، وهي هنا ${\OLMathNumeral{0}}$. فقد تحقق
+$\Sat{{\OLId{latin-looped}{M}}}{\Atom{\Obj P}{\Obj v_0}}[\Subst{{\OLId{latin-ordinary}{s}}}{{\OLMathNumeral{1}}}{\Obj v_{\OLMathNumeral{0}}}]$،
+ولم يتحقق $\Sat{{\OLId{latin-looped}{M}}}{\Atom{\Obj P}{\Obj v_0}}[{\OLId{latin-ordinary}{s}}]$.
+
+ولا ننكر ما في هذه الطريقة من ثقل؛ لكنه ثمن التعريف الاستقرائي
+الدقيق لإرضاء ال!!{formula}s كلها. ولا بد من مثل هذا الضبط
+لتحديد المفاهيم الدلالية. وللتعريف طرائق أخرى، غير أن قدر ما فيها
+من اليسر أو التكلف يقارب ما في هذه الطريقة.
+
+
+\end{document}

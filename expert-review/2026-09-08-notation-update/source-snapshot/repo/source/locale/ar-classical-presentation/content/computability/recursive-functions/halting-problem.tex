@@ -1,0 +1,87 @@
+% Part: computability
+% Chapter: recursive-functions
+% Section: halting-problem
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{rec}{hlt}
+\olsection{مشكلة التوقف}
+
+\emph{مشكلة التوقف} هي، على العموم، أن نبت هل ينتهي حساب دالة عند
+الدخل~${\OLId{latin-ordinary}{n}}$ إلى نتيجة أم لا، متى أعطينا مواصفتها~${\OLId{latin-ordinary}{e}}$،
+كبرنامجها مثلًا، وأعطينا العدد~${\OLId{latin-ordinary}{n}}$. ومن نتائج آلان تورنغ
+الشهيرة أن هذا السؤال العام لا تجيب عنه دالة قابلة للحساب؛
+فالدالة
+\[
+{\OLId{latin-ordinary}{h}}({\OLId{latin-ordinary}{e}}, {\OLId{latin-ordinary}{n}}) =
+\begin{cases}
+{\OLMathNumeral{1}} & \text{إذا توقف الحساب ${\OLId{latin-ordinary}{e}}$ عند الدخل ${\OLId{latin-ordinary}{n}}$}\\
+{\OLMathNumeral{0}} & \text{في غير ذلك،}
+\end{cases}
+\]
+ليست قابلة للحساب.
+
+وأما في الدوال العودية الجزئية، فالفهرس~${\OLId{latin-ordinary}{e}}$ الوارد في
+مبرهنة كليني للصورة السوية يقوم مقام مواصفة البرنامج. فمتى كانت ${\OLId{latin-ordinary}{f}}$ دالة
+عودية جزئية، عُدّ كل~${\OLId{latin-ordinary}{e}}$ يحقق معادلة تلك المبرهنة فهرسًا
+لـ~${\OLId{latin-ordinary}{f}}$. ولكل عدد~${\OLId{latin-ordinary}{e}}$ تقضي مبرهنة الصورة السوية بأن
+\[
+\cfind{{\OLId{latin-ordinary}{e}}}({\OLId{latin-ordinary}{x}}) \simeq {\OLId{latin-looped}{U}}(\mu {\OLId{latin-ordinary}{s}} \; {\OLId{latin-looped}{T}}({\OLId{latin-ordinary}{e}}, {\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{s}}))
+\]
+دالة عودية جزئية، وأنه لكل دالة عودية جزئية
+${\OLId{latin-ordinary}{f}}\colon\Nat\to\Nat$ يوجد ${\OLId{latin-ordinary}{e}}\in\Nat$ بحيث
+$\cfind{{\OLId{latin-ordinary}{e}}}({\OLId{latin-ordinary}{x}})\simeq {\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}})$ لكل~${\OLId{latin-ordinary}{x}}\in\Nat$. بل لكل
+${\OLId{latin-ordinary}{f}}$ من هذا القبيل ما لا يتناهى من الفهارس~${\OLId{latin-ordinary}{e}}$. وتعريف
+\emph{دالة التوقف}~${\OLId{latin-ordinary}{h}}$ هو
+\[
+{\OLId{latin-ordinary}{h}}({\OLId{latin-ordinary}{e}}, {\OLId{latin-ordinary}{x}}) =
+\begin{cases}
+{\OLMathNumeral{1}} & \text{إذا كانت $\cfind{{\OLId{latin-ordinary}{e}}}({\OLId{latin-ordinary}{x}}) \fdefined$}\\
+{\OLMathNumeral{0}} & \text{في غير ذلك.}
+\end{cases}
+\]
+وتكون ${\OLId{latin-ordinary}{h}}({\OLId{latin-ordinary}{e}},{\OLId{latin-ordinary}{x}})={\OLMathNumeral{0}}$ إذا وفقط إذا كانت
+$\cfind{{\OLId{latin-ordinary}{e}}}({\OLId{latin-ordinary}{x}})\fundefined$.
+
+% تصحيح مصدر (C226-01): كل عدد طبيعي فهرس في التعداد المعتمد، فحُذف الفرع المستحيل.
+\textbf{تنبيه تصحيحي على الأصل.} يحصي الترميز المعتمد هنا دالة
+عودية جزئية~$\cfind{{\OLId{latin-ordinary}{e}}}$ لكل عدد طبيعي~${\OLId{latin-ordinary}{e}}$؛ فحُذف الفرع الذي يفترض
+وجود عدد طبيعي لا يكون فهرسًا أصلًا.
+
+\begin{thm}
+\ollabel{thm:halting-problem}
+دالة التوقف~${\OLId{latin-ordinary}{h}}$ ليست عودية جزئية.
+\end{thm}
+
+\begin{proof}
+لنفرض عودية ${\OLId{latin-ordinary}{h}}$ الجزئية؛ فيجوز حينئذ أن نعرّف
+\[
+{\OLId{latin-ordinary}{d}}({\OLId{latin-ordinary}{y}}) =
+\begin{cases}
+{\OLMathNumeral{1}} & \text{إذا كان ${\OLId{latin-ordinary}{h}}({\OLId{latin-ordinary}{y}}, {\OLId{latin-ordinary}{y}}) = {\OLMathNumeral{0}}$}\\
+\umin{{\OLId{latin-ordinary}{x}}}{{\OLId{latin-ordinary}{x}} \neq {\OLId{latin-ordinary}{x}}} & \text{في غير ذلك.}
+\end{cases}
+\]
+ولا عدد ${\OLId{latin-ordinary}{x}}$ يحقق ${\OLId{latin-ordinary}{x}}\neq {\OLId{latin-ordinary}{x}}$؛ ولذلك لا تتعين
+$\umin{{\OLId{latin-ordinary}{x}}}{{\OLId{latin-ordinary}{x}}\neq {\OLId{latin-ordinary}{x}}}$، ومن ثم تكون ${\OLId{latin-ordinary}{d}}({\OLId{latin-ordinary}{y}})\fundefined$ إذا وفقط إذا كان
+${\OLId{latin-ordinary}{h}}({\OLId{latin-ordinary}{y}},{\OLId{latin-ordinary}{y}})\neq{\OLMathNumeral{0}}$. فنحصل من التعريف على الأمرين الآتيين:
+\begin{enumerate}
+\item ${\OLId{latin-ordinary}{d}}({\OLId{latin-ordinary}{y}})\fdefined$ إذا وفقط إذا كان ${\OLId{latin-ordinary}{h}}({\OLId{latin-ordinary}{y}},{\OLId{latin-ordinary}{y}})={\OLMathNumeral{0}}$، أي إذا وفقط إذا
+  كانت $\cfind{{\OLId{latin-ordinary}{y}}}({\OLId{latin-ordinary}{y}})\fundefined$.
+\item ${\OLId{latin-ordinary}{d}}({\OLId{latin-ordinary}{y}})\fundefined$ إذا وفقط إذا كان ${\OLId{latin-ordinary}{h}}({\OLId{latin-ordinary}{y}},{\OLId{latin-ordinary}{y}})={\OLMathNumeral{1}}$، أي إذا وفقط إذا
+  كانت $\cfind{{\OLId{latin-ordinary}{y}}}({\OLId{latin-ordinary}{y}})\fdefined$.
+\end{enumerate}
+ومن عودية ${\OLId{latin-ordinary}{h}}$ الجزئية تلزم عودية ${\OLId{latin-ordinary}{d}}$ الجزئية؛ فتجعل لها
+مبرهنة كليني للصورة السوية فهرسًا~${\OLId{latin-ordinary}{e}}_{\OLId{latin-ordinary}{d}}$، أي
+$\cfind{{\OLId{latin-ordinary}{e}}_{\OLId{latin-ordinary}{d}}}\simeq {\OLId{latin-ordinary}{d}}$. ولكن التعادلين السابقين يعطيان
+\[
+{\OLId{latin-ordinary}{d}}({\OLId{latin-ordinary}{e}}_{\OLId{latin-ordinary}{d}})\fdefined \quad\text{إذا وفقط إذا}\quad
+\cfind{{\OLId{latin-ordinary}{e}}_{\OLId{latin-ordinary}{d}}}({\OLId{latin-ordinary}{e}}_{\OLId{latin-ordinary}{d}})\fundefined
+\quad\text{إذا وفقط إذا}\quad {\OLId{latin-ordinary}{d}}({\OLId{latin-ordinary}{e}}_{\OLId{latin-ordinary}{d}})\fundefined\text{،}
+\]
+وهو محال. فبطل فرض عودية~${\OLId{latin-ordinary}{h}}$ الجزئية.
+\end{proof}
+
+\end{document}

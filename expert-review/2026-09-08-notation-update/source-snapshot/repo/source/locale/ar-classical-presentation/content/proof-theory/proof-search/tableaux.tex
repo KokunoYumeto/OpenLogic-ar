@@ -1,0 +1,193 @@
+% Part: proof-theory
+% Chapter: proof-search
+% Section: tableaux
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{ps}{tab}
+
+\olsection{في الجداول الدلالية}
+
+أنظمة الجداول الدلالية من أنظمة~!!{proof} القريبة من حسابات المتتاليات، وهي
+صالحة بخاصة للبحث عن البرهان يدويًا أو بالبرمجيات. غير أن~!!a{proof} فيها
+ليس شجرة متتاليات، بل شجرة من~!!{formula}s؛ وقواعدها، خلافًا للاستنباط
+الطبيعي، صورة معكوسة لقواعد حساب المتتاليات. و!!{proof} الجدول الدلالي في
+حقيقته بحث صريح عن نموذج، ومن ثم تسمى هذه الجداول أيضًا \emph{أشجار صدق}.
+
+\emph{الجدول الدلالي الموقع} شجرة من~!!{formula}s ذات علامات، كل منها على
+الصورة~$\sFmla{\True}{!A}$ أو~$\sFmla{\False}{!A}$. وتنمو الشجرة إلى
+أسفل، ومبدؤها~!!{formula}s تعين المطلوب أن~!!{prove}. فإذا أردنا، مثلًا،
+أن~!!{prove} المتتالية~$!A,!B\Sequent !C,!D$، بدأنا بـ
+$\sFmla{\True}{!A},\sFmla{\True}{!B},
+\sFmla{\False}{!C},\sFmla{\False}{!D}$. وكل~!!^a{structure} يجعل~$!A$
+و$!B$ صادقتين، و$!C$ و$!D$ كاذبتين، فهو~!!a{structure} يشهد بأن
+$!A,!B\Sequent !C,!D$ غير صالحة.
+
+وتوسع العقدة الورقية، أي السفلى، في جدول دلالي بقواعد تمديد الفروع. فتزيد
+هذه القواعد عقدًا في الفرع نفسه، أو تزيد تحته عقدتين شقيقتين فتشعبه فرعين.
+ويجوز إعمالها في كل~!!{formula} موقعة فوق العقدة في الفرع نفسه. وقواعد
+تمديد الفروع لنظام الجداول الدلالية الكلاسيكي~\Log{Tc} مثبتة في
+\olref{tab:Tc}.
+
+\subfile{rules-Tc}
+
+وما هذه القواعد، كما ترى، إلا قواعد~\Log{G3c} مقلوبة؛ فالعلامتان~$\True$
+و$\False$ تدلان، على الترتيب، على أن~!!a{formula} رئيسة عن يسار المتتالية
+أو عن يمينها.
+
+ونسمي فرع جدول دلالي \emph{مغلقًا} إذا اشتمل معًا على
+$\sFmla{\True}{!A}$ و$\sFmla{\False}{!A}$، أو احتوى
+$\sFmla{\True}{\lfalse}$. فإن أغلقت الفروع كلها كان الجدول الدلالي نفسه
+مغلقًا. ومن أمثلته جدول دلالي مغلق للمتتالية
+$!A\lor(!B\land !C)\Sequent(!A\lor !B)\land(!A\lor !C)$؛ أي إنه يبدأ بـ
+$\sFmla{\True}{!A\lor(!B\land !C)}$ و
+$\sFmla{\False}{(!A\lor !B)\land(!A\lor !C)}$:
+\begin{maxwidth}
+\begin{tableau}{}
+  [\sFmla{\True}{\formula{A} \lor (\formula{B} \land \formula{C})},
+    just=\TAss, checked
+    [\sFmla{\False}{(\formula{A} \lor \formula{B}) \land
+        (\formula{A} \lor \formula{C})}, just=\TAss, checked
+      [\sFmla{\True}{\formula{A}}, just={\TRule{\True}{\lor}[1]}
+        [\sFmla{\False}{\formula{A} \lor \formula{B}},
+          just={\TRule{\False}{\land}[2]}, checked
+          [\sFmla{\False}{\formula{A}},
+            just={\TRule{\False}{\lor}[4]}
+            [\sFmla{\False}{\formula{B}},
+              just={\TRule{\False}{\lor}[4]}, close]
+          ]
+        ]
+        [\sFmla{\False}{\formula{A} \lor \formula{C}},
+          just={\TRule{\False}{\land}[2]}, checked
+          [\sFmla{\False}{\formula{A}},
+            just={\TRule{\False}{\lor}[4]}
+            [\sFmla{\False}{\formula{C}},
+              just={\TRule{\False}{\lor}[4]}, close]
+          ]
+        ]
+      ]
+      [\sFmla{\True}{\formula{B} \land \formula{C}},
+        just={\TRule{\True}{\lor}[1]}, checked
+        [\sFmla{\False}{\formula{A} \lor \formula{B}},
+          just={\TRule{\False}{\land}[2]}, checked
+          [\sFmla{\True}{\formula{B}},
+            just={\TRule{\True}{\land}[3]}, move by=2
+            [\sFmla{\True}{\formula{C}},
+              just={\TRule{\True}{\land}[3]}
+              [\sFmla{\False}{\formula{A}},
+                just={\TRule{\False}{\lor}[4]}
+                [\sFmla{\False}{\formula{B}},
+                  just={\TRule{\False}{\lor}[4]},close
+                ]
+              ]
+            ]
+          ]
+        ]
+        [\sFmla{\False}{\formula{A} \lor \formula{C}},
+          just={\TRule{\False}{\land}[2]}, checked
+          [\sFmla{\True}{\formula{B}},
+            just={\TRule{\True}{\land}[3]}, move by=2
+              [\sFmla{\True}{\formula{C}},
+                just={\TRule{\True}{\land}[3]}
+                [\sFmla{\False}{\formula{A}},
+                  just={\TRule{\False}{\lor}[4]}
+                  [\sFmla{\False}{\formula{C}},
+                  just={\TRule{\False}{\lor}[4]},close
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    ]
+  ]
+\end{tableau}
+\end{maxwidth}
+
+وعلامة الصح تدل على إعمال القاعدة المقابلة في~!!a{formula} بجميع الفروع
+التي تحتها، وأما~$\otimes$ فتدل على إغلاق الفرع. وأرقام الأسطر بعد
+القواعد تعين~!!{formula}s الموقعة التي عملت فيها القاعدة، أي~!!{formula}
+الواقعة في الفرع نفسه في السطر المشار إليه.
+
+والبحث عن البرهان في الجداول الدلالية يسير. فننشئ الجدول الدلالي على مراحل: في المرحلة
+${\OLMathNumeral{0}}$ نضع~!!{formula}s الابتدائية في أعلاه، وفي المرحلة~${\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}}$ نأخذ كل عقدة
+ورقية في فرع مفتوح، فنجد أول صيغة موقعة غير ذرية، من جهة الأعلى، لم تؤشر،
+ونعمل فيها قاعدة تمديد الفرع. فإذا عملت القاعدة في كل فرع مفتوح مشتمل على
+تلك الصيغة أشرناها. وهذا المنع من التكرار مقصور على الصيغ غير الذرية في
+الفروع المفتوحة. (وبهذه الخوارزمية ولد المثال السابق.)
+
+وأما~!!{formula}s الموقعة من الصورتين
+$\sFmla{\True}{\lforall}$ و$\sFmla{\False}{\lexists}$ فلا تؤشر قط،
+ولذلك تفرد بمعالجة خاصة. فإذا وجدت وجب أن نضمن تطبيق
+$\TRule{\True}{\lforall}$ و$\TRule{\False}{\lexists}$ في النهاية على جميع
+الحدود المنطبقة. ويمكن ضمان ذلك، مثلًا، بتطبيقهما في كل مرحلة على جميع هذه
+الصيغ في كل فرع مفتوح، بعد معالجة أعلى~!!{formula} موقعة لا تكون من هاتين
+الصورتين. والحد~${\OLId{latin-ordinary}{t}}$ المستعمل هو أول حد يمكن بناؤه من~!!{constant}s الواقعة
+بالفعل في الفرع (أو~$\Obj c_{\OLMathNumeral{0}}$ إذا لم يقع أي~!!{constant}) ومن
+!!{function}s الواقعة في~!!{formula}s الابتدائية، ولا تقع الصيغة الموقعة
+المقابلة~!!{formula}~$\sFmla{\True}{!B({\OLId{latin-ordinary}{t}})}$ أو~$\sFmla{\False}{!B({\OLId{latin-ordinary}{t}})}$ في الفرع من
+قبل. وإذا لم يوجد حد منطبق غير مستعمل، كانت الصيغة المسوّرة مستنفدة في تلك
+المرحلة، فلا نضيف لها عقدة؛ ونعود إليها في مرحلة لاحقة إذا أدخل الفرع
+ثوابت جديدة فظهرت حدود منطبقة جديدة.
+
+فإن لم ينتج البحث جدولًا دلاليًا مغلقًا، فإما أن يكون فيه فرع مفتوح منتهٍ
+قد أُشّرت فيه جميع~!!{formula}s غير الذرية سوى الصيغ من الصورتين اللتين
+لا تؤشّران، واستُنفدت لكل واحدة من هذه الصيغ المسوّرة جميع الحدود القابلة
+للتكوين من~!!{constant}s الفرع و!!{function}s الواقعة في~!!{formula}s
+الابتدائية؛ وإما أن ينشئ شجرة لامتناهية متناهية التشعب، فيلزم أن يكون
+لها فرع لامتناهٍ. وكما في
+\olref[cpl]{sec}، نعرف~!!a{structure}~$\Struct{M}$ بحيث متى وقعت
+$\sFmla{\True}{!A}$ في الفرع كان~$\Sat{{\OLId{latin-looped}{M}}}{!A}$، وإذا وقعت
+$\sFmla{\False}{!A}$ كان~$\Sat/{{\OLId{latin-looped}{M}}}{!A}$. (خذ
+$\Theta=\Setabs{!A}{\sFmla{\True}{!A}\text{ في الفرع}}$ و
+$\Xi=\Setabs{!A}{\sFmla{\False}{!A}\text{ في الفرع}}$.)
+
+وتنقل الجداول الدلالية المنشأة بهذا الوجه بغير عسر إلى براهين في~\Log{G3c}،
+بأن تسند إلى كل عقدة متتالية. فإذا قابلت الصيغ الابتدائية المتتالية
+${\OLId{greek-variable}{Gamma}}\Sequent{\OLId{greek-variable}{Delta}}$، فوسم كل صيغة ابتدائية بـ
+${\OLId{greek-variable}{Gamma}}\Sequent{\OLId{greek-variable}{Delta}}$. وإذا مُدِّد فرع بتطبيق قاعدة تمديد على~!!{formula}
+موقعة~$\sFmla{\True}{!A}$، فوسم الورقة بـ
+$!A,\Pi\Sequent\Lambda$؛ وإذا طُبقت على~!!{formula} موقعة
+$\sFmla{\False}{!A}$، فوسم الورقة بـ~$\Pi\Sequent\Lambda,!A$. وحيث يعمل
+الجدول قاعدة~$\TRule{\True}{\star}$، تعمل قاعدة~$\LeftR{\star}$ في
+المتتالية، مع~$!A$ صيغة رئيسة؛ وحيث يعمل~$\TRule{\False}{\star}$، تعمل
+قاعدة~$\RightR{\star}$. ومقدمات القاعدة هي المتتاليات الموسومة بها العقد
+المقابلة المضافة إلى الجدول. ومتى أغلق جدول بـ
+$\sFmla{\True}{!A}$ و$\sFmla{\False}{!A}$، كان وسم العقدة الورقية الأخيرة
+متتاليةً من الصورة~$!A,\Pi\Sequent\Lambda,!A$. وإذا أُغلق بـ
+$\sFmla{\True}{\lfalse}$، كان وسم الورقة من الصورة
+$\lfalse,\Pi\Sequent\Lambda$، وهي مسلّمة~\Log{G3c} كذلك. وقد تُسند
+المتتالية نفسها إلى عقد متعاقبة في الجدول؛ فاحذف المكررات. فمثلًا يترجم
+الجدول السابق إلى~!!{proof} الآتي:
+\begin{maxwidth}
+$
+\Axiom$!A \fCenter !A, !B$
+\RightLabel{\RightR{\lor}}
+\UnaryInf$!A \fCenter !A \lor !B$
+\Axiom$!A \fCenter !A, !C$
+\RightLabel{\RightR{\lor}}
+\UnaryInf$!A \fCenter !A \lor !C$
+\RightLabel{\RightR{\land}}
+\BinaryInf$!A \fCenter (!A \lor !B) \land (!A \lor !C)$
+\Axiom$!B, !C \fCenter !A, !B$
+\RightLabel{\RightR{\lor}}
+\UnaryInf$!B, !C \fCenter !A \lor !B$
+\RightLabel{\LeftR{\land}}
+\UnaryInf$!B \land !C \fCenter !A \lor !B$
+\Axiom$!B, !C \fCenter !A, !C$
+\RightLabel{\RightR{\lor}}
+\UnaryInf$!B, !C \fCenter !A \lor !C$
+\RightLabel{\LeftR{\land}}
+\UnaryInf$!B \land !C \fCenter !A \lor !C$
+\RightLabel{\RightR{\land}}
+\BinaryInf$!B \land !C \fCenter (!A \lor !B) \land
+(!A \lor !C)$
+\RightLabel{\LeftR{\lor}}
+\BinaryInf$!A \lor (!B \land !C) \fCenter (!A \lor !B) \land
+(!A \lor !C)$
+\DisplayProof$
+\end{maxwidth}
+
+\end{document}

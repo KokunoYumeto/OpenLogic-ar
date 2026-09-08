@@ -1,0 +1,156 @@
+% Part: incompleteness
+% Chapter: introduction
+% Section: decidability
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{int}{dec}
+
+\olsection{عدم قابلية القرار وعدم الاكتمال}
+
+تقوم حجة غودل لمبرهنتي عدم الاكتمال على حوسبة
+التركيب. غير أن مجرد فرض أن النظرية !!{represents}
+العلاقات !!{decidable} كلها يكفي لنتائج مهمة
+من غير تلك الحوسبة. وطريقها حجة قطرية تشبه
+حجة امتناع تقرير مسألة التوقف.
+
+\begin{thm}
+إذا كانت ${\OLId{greek-variable}{Gamma}}$ نظرية متسقة !!{represents}
+كل علاقة !!{decidable}، امتنع أن تكون ${\OLId{greek-variable}{Gamma}}$
+!!{decidable}.
+\end{thm}
+
+\begin{proof}
+لنفرض ${\OLId{greek-variable}{Gamma}}$ !!{decidable}؛ ونثبت أن
+تمثيلها، أي كونها !!{represents} كل علاقة
+!!{decidable}، يلزم منه عدم اتساقها.
+
+الخواص !!^{decidable}، وهي العلاقات الأحادية،
+تمثل ب!!{formula}s ذات متغير حر واحد.
+ولنعدد هذه ال!!{formula}s تعدادًا قابلًا
+للحساب: $!A_{\OLMathNumeral{0}}({\OLId{latin-ordinary}{x}})$، و$!A_{\OLMathNumeral{1}}({\OLId{latin-ordinary}{x}})$، و\dots.
+ثم نضع المجموعة ${\OLId{latin-looped}{D}}\subseteq\Nat$ الآتية:
+\[
+{\OLId{latin-looped}{D}} = \Setabs{{\OLId{latin-ordinary}{n}}}{{\OLId{greek-variable}{Gamma}} \Proves \lnot !A_{\OLId{latin-ordinary}{n}}(\num{{\OLId{latin-ordinary}{n}}})}.
+\]
+فـ${\OLId{latin-looped}{D}}$ !!{decidable}؛ إذ نختبر ${\OLId{latin-ordinary}{n}}\in {\OLId{latin-looped}{D}}$
+بحساب $!A_{\OLId{latin-ordinary}{n}}({\OLId{latin-ordinary}{x}})$، ثم تكوين $\lnot !A_{\OLId{latin-ordinary}{n}}(\num{{\OLId{latin-ordinary}{n}}})$.
+وذلك عمل آلي: نحل الحد $\num{{\OLId{latin-ordinary}{n}}}$ محل كل
+ورود حر لـ${\OLId{latin-ordinary}{x}}$ في $!A_{\OLId{latin-ordinary}{n}}({\OLId{latin-ordinary}{x}})$، ونصدّر بـ$\lnot$
+الجملة $!A_{\OLId{latin-ordinary}{n}}(\num{{\OLId{latin-ordinary}{n}}})$. ومن فرض أن ${\OLId{greek-variable}{Gamma}}$
+!!{decidable} يمكن اختبار
+$\lnot !A_{\OLId{latin-ordinary}{n}}(\num{{\OLId{latin-ordinary}{n}}})\in{\OLId{greek-variable}{Gamma}}$. فإن صح،
+كان ${\OLId{latin-ordinary}{n}}\in {\OLId{latin-looped}{D}}$؛ وإن لم يصح كان ${\OLId{latin-ordinary}{n}}\notin {\OLId{latin-looped}{D}}$.
+فقد تبين أن ${\OLId{latin-looped}{D}}$ !!{decidable}.
+
+ولأن ${\OLId{greek-variable}{Gamma}}$ !!{represents} كل خاصية
+!!{decidable}، فإنها !!{represents}~${\OLId{latin-looped}{D}}$.
+وال!!{formula}s التي !!{represents}~${\OLId{latin-looped}{D}}$
+في ${\OLId{greek-variable}{Gamma}}$ لا تخرج عن $!A_{\OLMathNumeral{0}}({\OLId{latin-ordinary}{x}})$ و$!A_{\OLMathNumeral{1}}({\OLId{latin-ordinary}{x}})$
+و\dots. فثمة ${\OLId{latin-ordinary}{d}}$ بحيث !!{represents}
+$!A_{\OLId{latin-ordinary}{d}}({\OLId{latin-ordinary}{x}})$ المجموعة ${\OLId{latin-looped}{D}}$ في~${\OLId{greek-variable}{Gamma}}$.
+ولو كان ${\OLId{latin-ordinary}{d}}\notin {\OLId{latin-looped}{D}}$، لأعطى كون $!A_{\OLId{latin-ordinary}{d}}({\OLId{latin-ordinary}{x}})$
+!!{represents}~${\OLId{latin-looped}{D}}$ أن
+${\OLId{greek-variable}{Gamma}}\Proves\lnot !A_{\OLId{latin-ordinary}{d}}(\num{{\OLId{latin-ordinary}{d}}})$.
+فيستوفي ${\OLId{latin-ordinary}{d}}$ شرط تعريف~${\OLId{latin-looped}{D}}$، ويكون ${\OLId{latin-ordinary}{d}}\in {\OLId{latin-looped}{D}}$،
+خلاف ${\OLId{latin-ordinary}{d}}\notin {\OLId{latin-looped}{D}}$. فبالخلف يثبت ${\OLId{latin-ordinary}{d}}\in {\OLId{latin-looped}{D}}$.
+
+ومن ${\OLId{latin-ordinary}{d}}\in {\OLId{latin-looped}{D}}$ وتعريف~${\OLId{latin-looped}{D}}$ نحصل على
+${\OLId{greek-variable}{Gamma}}\Proves\lnot !A_{\OLId{latin-ordinary}{d}}(\num{{\OLId{latin-ordinary}{d}}})$.
+لكن $!A_{\OLId{latin-ordinary}{d}}({\OLId{latin-ordinary}{x}})$ !!{represents}~${\OLId{latin-looped}{D}}$ في ${\OLId{greek-variable}{Gamma}}$،
+فيلزم ${\OLId{greek-variable}{Gamma}}\Proves !A_{\OLId{latin-ordinary}{d}}(\num{{\OLId{latin-ordinary}{d}}})$ أيضًا.
+فتكون ${\OLId{greek-variable}{Gamma}}$ غير متسقة.
+\end{proof}
+
+\begin{explain}
+إذن لا تجتمع لنظرية متسقة خاصيتا أنها
+!!{represents} جميع العلاقات !!{decidable}
+وأنها !!{decidable}. وسنثبت أن $\Th{Q}$
+!!{represents} تلك العلاقات !!{decidable} كلها.
+فتشاركها في التمثيل كل نظرية تتضمن $\Th{Q}$،
+ومنها $\Th{PA}$ و$\Th{TA}$؛ وهذه النظريات
+المذكورة ليست !!{decidable}. واتساق النظريات
+الثلاث المذكورة معلوم لصدقها في النموذج القياسي.
+
+ومن هذه النتيجة تؤخذ أيضًا صيغة ضعيفة للمبرهنة
+الأولى: كل نظرية !!{axiomatizable} و!!{complete}
+تكون !!{decidable}. فلا يمكن لنظرية متسقة
+!!{axiomatizable}، تكون !!{represents}
+الخواص !!{decidable} جميعًا، أن تكون
+!!{complete}.
+\end{explain}
+
+\begin{thm}
+كل نظرية ${\OLId{greek-variable}{Gamma}}$ !!{axiomatizable}
+و!!{complete} تكون !!{decidable}.
+\end{thm}
+
+\begin{proof}
+النظرية غير المتسقة !!{decidable}؛ لأنها
+تحتوي ال!!{sentence}s كلها، فيجاب عن
+«هل $!A\in{\OLId{greek-variable}{Gamma}}$؟» بنعم دائمًا. وهذا
+إجراء قرار لها.
+
+فلتكن ${\OLId{greek-variable}{Gamma}}$ متسقة، ولتكن !!{axiomatizable}
+و!!{complete}. ومن كون ${\OLId{greek-variable}{Gamma}}$
+!!{axiomatizable} يلزم أنها !!{computably enumerable}:
+نسرد ال!!{derivation}s الصحيحة من بديهيات~${\OLId{greek-variable}{Gamma}}$
+بدالة قابلة للحساب، ثم نحسب من كل
+!!{derivation} صحيح ال!!{sentence} التي
+!!{derive}ها. فينتج من تركيب العملين
+تعداد قابل للحساب لمبرهنات~${\OLId{greek-variable}{Gamma}}$.
+وال!!{sentence} المعنية تكون مبرهنة
+في~${\OLId{greek-variable}{Gamma}}$ إذا وفقط إذا لم تكن $\lnot !A$
+مبرهنة، لاتساق ${\OLId{greek-variable}{Gamma}}$ وكونها !!{complete}.
+فلنقرر $!A\in{\OLId{greek-variable}{Gamma}}$ بتعداد مبرهنات ${\OLId{greek-variable}{Gamma}}$.
+إن ظهر $!A$، علمنا ${\OLId{greek-variable}{Gamma}}\Proves !A$؛
+وإن ظهر $\lnot !A$، علمنا
+${\OLId{greek-variable}{Gamma}}\Proves/ !A$. ولا بد أن تقع
+إحدى الحالتين، لأن ${\OLId{greek-variable}{Gamma}}$ !!{complete}،
+فينتهي الإجراء إلى جواب.
+\end{proof}
+
+\begin{cor}
+\ollabel{cor:incompleteness}
+النظرية ${\OLId{greek-variable}{Gamma}}$ المتسقة !!{axiomatizable}، التي
+!!{represents} كل خاصية !!{decidable}، لا تكون !!{complete}.
+\end{cor}
+
+\begin{proof}
+لو كانت ${\OLId{greek-variable}{Gamma}}$ !!{complete} للزم أنها
+!!{decidable} بالمبرهنة الأخيرة، لأنها
+!!{axiomatizable} ومتسقة. إلا أن كونها
+!!{represents} كل خاصية !!{decidable}
+يمنع كونها !!{decidable} بالمبرهنة الأولى.
+\end{proof}
+
+\begin{prob}
+برهن أن $\Th{TA}=\Setabs{!A}{\Sat{{\OLId{latin-looped}{N}}}{!A}}$ ليست
+!!{axiomatizable}. ولك أن تفترض أن $\Th{TA}$ تمثل جميع الخواص
+القابلة للقرار.
+\end{prob}
+
+فمتى ثبت أن $\Th{Q}$، مثلًا، !!{represents}
+كل خاصية !!{decidable}، حكمت النتيجة
+بعدم تمام $\Th{Q}$. لكن البرهان لا
+يعيّن !!{sentence} مستقلة، وإنما يثبت
+وجود !!a{sentence} كذلك. ولتعيين مثال
+نحتاج إلى حوسبة التركيب وطريقة غودل الأصلية.
+ويبقى علينا بالطبع أصل الفرض: أن
+$\Th{Q}$ !!{represents} جميع الخواص
+!!{decidable} بالفعل.
+
+ولا يفهم من ذلك أن كل نظرية \emph{مهمة}
+ناقصة أو ممتنعة القرار. فثمة نظريات
+تصف حقائق رياضية مهمة، ولا تستوفي
+شروط غودل. ومنها
+$\Th{Pres}=\Setabs{!A\in\Lang{L_{A^+}}}{\Sat{{\OLId{latin-looped}{N}}}{!A}}$،
+أي نظرية ال!!{sentence}s الصادقة في
+النموذج القياسي من لغة الحساب بعد حذف~$\times$.
+فهي تامة وقابلة للقرار، وتسمى حساب بريسبرغر.
+وتثبت كل حقيقة عن الأعداد الطبيعية يمكن
+صوغها بـ$\Obj{0}$ و$\prime$ و~$+$ وحدها.
+
+\end{document}

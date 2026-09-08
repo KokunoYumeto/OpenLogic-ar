@@ -1,0 +1,191 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{cardinals}{classing}
+\olsection{المتناهي، و\usetoken{S}{enumerable}، و\usetoken{S}{nonenumerable}}
+
+لما عرفنا الكاردينالات، بقي أن نميز أصنافها: المتناهية،
+و!!{enumerable}، و!!{nonenumerable}.
+
+وتقضي النتيجتان الآتيتان بأن الكاردينالات المتناهية ليست إلا الأعداد
+الترتيبية المتناهية، وهي \emph{أعدادنا الطبيعية} على تعريف
+\olref[z][infinity-again]{defnomega}.
+
+\begin{prop}\ollabel{finitecardisoequal}
+لتكن~${\OLId{latin-ordinary}{n}}, {\OLId{latin-ordinary}{m}} \in \omega$. عندئذ~${\OLId{latin-ordinary}{n}} = {\OLId{latin-ordinary}{m}}$ إذا وفقط إذا
+$\cardeq{{\OLId{latin-ordinary}{n}}}{{\OLId{latin-ordinary}{m}}}$.
+\end{prop}
+
+\begin{proof}
+أما جهة \emph{اليسار إلى اليمين} فظاهرة. وللجهة
+\emph{من اليمين إلى اليسار}، افترض~$\cardeq{{\OLId{latin-ordinary}{n}}}{{\OLId{latin-ordinary}{m}}}$ مع
+${\OLId{latin-ordinary}{n}} \neq {\OLId{latin-ordinary}{m}}$. يوجب التثليث أن إما~${\OLId{latin-ordinary}{n}} \in {\OLId{latin-ordinary}{m}}$ وإما~${\OLId{latin-ordinary}{m}} \in {\OLId{latin-ordinary}{n}}$؛ ولنفرض،
+بلا إخلال بالعموم،~${\OLId{latin-ordinary}{n}} \in {\OLId{latin-ordinary}{m}}$. فيكون~${\OLId{latin-ordinary}{n}} \subsetneq {\OLId{latin-ordinary}{m}}$، وتوجد
+!!a{bijection}~${\OLId{latin-ordinary}{f}} \colon {\OLId{latin-ordinary}{m}} \to {\OLId{latin-ordinary}{n}}$؛ فيلزم أن~${\OLId{latin-ordinary}{m}}$ غير متناه بحسب
+ديدكند، خلافًا لـ\olref[z][infinity-again]{naturalnumbersarentinfinite}.
+\end{proof}
+
+\begin{cor}\ollabel{naturalsarecardinals}
+إذا كان~${\OLId{latin-ordinary}{n}} \in \omega$، فإن~${\OLId{latin-ordinary}{n}}$ كاردينال.
+\end{cor}
+
+\begin{proof}
+يتبع ذلك مباشرة.
+\end{proof}
+\noindent
+ومن ثم تتفق أيضًا تصورات شتى معقولة لكون الكاردينال «متناهيًا» أو
+«غير متناه»:
+\begin{thm}\ollabel{generalinfinitycharacter}لكل مجموعة~${\OLId{latin-looped}{A}}$، الشروط الآتية متكافئة:
+\begin{enumerate}
+	\item\ollabel{card:notinomega} $\card{{\OLId{latin-looped}{A}}} \notin \omega$، أي إن
+	$\card{{\OLId{latin-looped}{A}}}$ ليس عددًا طبيعيًا؛
+	\item\ollabel{card:omegaplus} $\omega \leq \card{{\OLId{latin-looped}{A}}}$؛
+	\item\ollabel{card:infinite} ${\OLId{latin-looped}{A}}$ غير متناهية بحسب ديدكند.
+\end{enumerate}
+\end{thm}
+
+\begin{proof}
+هذا لازم من~\olref[ord-arithmetic][using-addition]{ordinfinitycharacter}
+و\olref[cardinals][cardsasords]{lem:CardinalsBehaveRight}
+و\olref{naturalsarecardinals}.
+\end{proof}
+
+وبذلك يجوز أن نضع تعريفًا دقيقًا لألفاظ استعملناها بشيء من التسامح
+في~\olref[sfr][][]{part}.
+
+\begin{defn}\ollabel{defnfinite}
+نسمي~${\OLId{latin-looped}{A}}$ \emph{متناهية} إذا وفقط إذا كان~$\card{{\OLId{latin-looped}{A}}}$ عددًا طبيعيًا،
+أي إذا كان~$\card{{\OLId{latin-looped}{A}}} \in \omega$. وما لم يكن كذلك سمينا~${\OLId{latin-looped}{A}}$
+\emph{غير متناهية}.
+\end{defn}
+\noindent
+غير أن هذا التعريف قائم على~$\ZFC$؛ إذ احتجنا إلى الترتيب الجيد
+لضمان كاردينالية لكل مجموعة. وقد توجد، في غيابه، مجموعة لا هي متناهية
+ولا غير متناهية بحسب ديدكند. وسنعود إلى هذه المسائل في
+\olref[choice][]{chap}؛ أما هنا فنظل مستعملين الترتيب الجيد.
+
+ننتقل من الكاردينالات المتناهية إلى غير المتناهية، ونبدأ بنتيجتين.
+
+\begin{cor}\ollabel{omegaisacardinal}
+$\omega$ هو أصغر كاردينال غير متناهٍ.
+\end{cor}
+
+\begin{proof}
+$\omega$ كاردينال لأنه غير متناه بحسب ديدكند. ولو كان
+$\cardeq{\omega}{{\OLId{latin-ordinary}{n}}}$ لبعض~${\OLId{latin-ordinary}{n}} \in \omega$، لكان~${\OLId{latin-ordinary}{n}}$ غير متناه بحسب
+ديدكند، وهذا يناقض
+\olref[z][infinity-again]{naturalnumbersarentinfinite}. وأما أن
+$\omega$ أصغر كاردينال غير متناه فمن نفس التعريف.
+\end{proof}
+
+\begin{cor}
+كل كاردينال غير متناهٍ عدد ترتيبي حدي.
+\end{cor}
+
+\begin{proof}
+ليكن~${\OLId{greek-variable}{alpha}}$ عددًا ترتيبيًا خلفيًا غير متناه، ولتكن
+${\OLId{greek-variable}{alpha}} = \beta \ordplus {\OLMathNumeral{1}}$ لبعض~$\beta$. ولو كان~$\beta\in\omega$،
+لكان~$\beta\ordplus {\OLMathNumeral{1}}\in\omega$، لأن~$\omega$ مغلقة تحت عملية الخلف؛
+وهذا يخالف كون~${\OLId{greek-variable}{alpha}}$ غير متناه. فـ$\beta$ غير متناه أيضًا، ومن
+\olref[ord-arithmetic][using-addition]{ordinfinitycharacter} ينتج
+$\cardeq{\beta}{\beta \ordplus {\OLMathNumeral{1}}}$. وعندئذ
+$\card{\beta} = \card{\beta\ordplus {\OLMathNumeral{1}}} = \card{{\OLId{greek-variable}{alpha}}}$ بمقتضى
+\olref[cardinals][cardsasords]{lem:CardinalsBehaveRight}، فيلزم
+${\OLId{greek-variable}{alpha}} \neq \card{{\OLId{greek-variable}{alpha}}}$.
+% تصحيح مصدر (0584-I1): ثبت لا تناهي beta بإغلاق omega تحت الخلف بدل الإحالة غير الكافية.
+\end{proof}
+
+وقد سبق في~\olref[sfr][siz][enm-alt]{defn:enumerable} التمييز بين
+المجموعات غير المتناهية !!{enumerable} و!!{nonenumerable}. ويؤدي ذلك
+التعريف إلى القضية الآتية.
+
+\begin{prop}
+${\OLId{latin-looped}{A}}$ هي !!{enumerable} إذا وفقط إذا كان~$\card{{\OLId{latin-looped}{A}}} \leq \omega$، و${\OLId{latin-looped}{A}}$
+هي !!{nonenumerable} إذا وفقط إذا كان~$\omega < \card{{\OLId{latin-looped}{A}}}$.
+\end{prop}
+
+\begin{proof}
+الادعاءان متكافئان بالتثليث؛ فيكفي إثبات أن~${\OLId{latin-looped}{A}}$ هي !!{enumerable}
+إذا وفقط إذا كان~$\card{{\OLId{latin-looped}{A}}} \leq \omega$. فأما جهة
+\emph{اليمين إلى اليسار}، فإذا كان~$\card{{\OLId{latin-looped}{A}}} \leq \omega$، كان
+$\cardle{{\OLId{latin-looped}{A}}}{\omega}$ بمقتضى
+\olref[cardinals][cardsasords]{lem:CardinalsBehaveRight}
+و\olref{omegaisacardinal}. وأما جهة \emph{اليسار إلى اليمين}،
+فافترض أن~${\OLId{latin-looped}{A}}$ هي !!{enumerable}. وعندئذ يحصر
+\olref[sfr][siz][enm-alt]{defn:enumerable} الأمر في ثلاث حالات:
+\begin{enumerate}
+	\item إذا كان~${\OLId{latin-looped}{A}} = \emptyset$، فإن~$\card{{\OLId{latin-looped}{A}}} = {\OLMathNumeral{0}} \in \omega$، بحسب
+	\olref{naturalsarecardinals} و
+	\olref[cardinals][cardsasords]{lem:CardinalsBehaveRight}.
+	\item إذا كان~$\cardeq{{\OLId{latin-ordinary}{n}}}{{\OLId{latin-looped}{A}}}$، فإن~$\card{{\OLId{latin-looped}{A}}} = {\OLId{latin-ordinary}{n}} \in \omega$، بحسب
+	\olref{naturalsarecardinals} و
+	\olref[cardinals][cardsasords]{lem:CardinalsBehaveRight}.
+	\item إذا كان~$\cardeq{\omega}{{\OLId{latin-looped}{A}}}$، فإن~$\card{{\OLId{latin-looped}{A}}} = \omega$، بحسب
+	\olref{omegaisacardinal}.
+\end{enumerate}
+وفي كل حالة إذن~$\card{{\OLId{latin-looped}{A}}} \leq \omega$.
+\end{proof}
+\noindent
+فللعدد~$\omega$ منزلة خاصة؛ فإن الأعداد الترتيبية القابلة للعد كثيرة،
+ولكن:
+
+\begin{cor}
+$\omega$ هو الكاردينال غير المتناهي الوحيد الذي هو !!{enumerable}.
+\end{cor}
+
+\begin{proof}
+ليكن~$\cardfont{{\OLId{latin-ordinary}{a}}}$ كاردينالًا غير متناه هو !!a{enumerable}. فمن عدم
+تناهي~$\cardfont{{\OLId{latin-ordinary}{a}}}$ يلزم~$\omega \leq \cardfont{{\OLId{latin-ordinary}{a}}}$، ولما كان
+$\cardfont{{\OLId{latin-ordinary}{a}}}$ كاردينالًا !!a{enumerable} لزم
+$\cardfont{{\OLId{latin-ordinary}{a}}} = \card{\cardfont{{\OLId{latin-ordinary}{a}}}} \leq \omega$. فبالتثليث
+$\cardfont{{\OLId{latin-ordinary}{a}}} = \omega$.
+\end{proof}
+
+ولا ريب في أن الكاردينالات غير متناهية العدد. وقد يسأل سائل:
+\emph{كم كاردينالًا يوجد؟} والنتائج التالية تدعونا إلى إعادة النظر
+في صورة السؤال.
+
+\begin{prop}\ollabel{unioncardinalscardinal}
+إذا كان كل عنصر من~${\OLId{latin-looped}{X}}$ كاردينالًا، فإن~$\bigcup {\OLId{latin-looped}{X}}$ كاردينال.
+\end{prop}
+
+\begin{proof}
+من اليسير أن~$\bigcup {\OLId{latin-looped}{X}}$ عدد ترتيبي. خذ عددًا ترتيبيًا
+${\OLId{greek-variable}{alpha}} \in \bigcup {\OLId{latin-looped}{X}}$؛ فيلزم~${\OLId{greek-variable}{alpha}} \in \cardfont{{\OLId{latin-ordinary}{b}}} \in {\OLId{latin-looped}{X}}$
+لبعض الكاردينال~$\cardfont{{\OLId{latin-ordinary}{b}}}$. ولأن~$\cardfont{{\OLId{latin-ordinary}{b}}}$ كاردينال،
+كان~$\cardless{{\OLId{greek-variable}{alpha}}}{\cardfont{{\OLId{latin-ordinary}{b}}}}$. ولأن
+$\cardfont{{\OLId{latin-ordinary}{b}}} \subseteq \bigcup {\OLId{latin-looped}{X}}$، كان
+$\cardle{\cardfont{{\OLId{latin-ordinary}{b}}}}{\bigcup {\OLId{latin-looped}{X}}}$؛ ومن ثم
+$\cardneq{{\OLId{greek-variable}{alpha}}}{\bigcup {\OLId{latin-looped}{X}}}$. وإذا عممنا ذلك ثبت أن~$\bigcup {\OLId{latin-looped}{X}}$
+كاردينال.
+\end{proof}
+
+\begin{thm}\ollabel{lem:NoLargestCardinal}
+لا يوجد كاردينال أكبر.
+\end{thm}
+
+\begin{proof}
+لكل كاردينال~$\cardfont{{\OLId{latin-ordinary}{a}}}$، توجب مبرهنة كانتور
+(\olref[sfr][siz][car]{thm:cantor}) مع
+\olref[cardinals][cardsasords]{lem:CardinalsExist} أن
+$\cardfont{{\OLId{latin-ordinary}{a}}} < \card{\Pow{\cardfont{{\OLId{latin-ordinary}{a}}}}}$.
+\end{proof}
+
+\begin{thm}
+لا توجد مجموعة جميع الكاردينالات.
+\end{thm}
+
+\begin{proof}
+افترض، طلبًا للمحال، أن
+${\OLId{latin-looped}{C}} = \Setabs{\cardfont{{\OLId{latin-ordinary}{a}}}}{\cardfont{{\OLId{latin-ordinary}{a}}} \text{ كاردينال}}$. يكون
+$\bigcup {\OLId{latin-looped}{C}}$ كاردينالًا بـ\olref{unioncardinalscardinal}. ومن
+\olref{lem:NoLargestCardinal} يوجد كاردينال
+$\cardfont{{\OLId{latin-ordinary}{b}}} > \bigcup {\OLId{latin-looped}{C}}$. غير أن التعريف يعطي
+$\cardfont{{\OLId{latin-ordinary}{b}}} \in {\OLId{latin-looped}{C}}$، ومنه~$\cardfont{{\OLId{latin-ordinary}{b}}} \subseteq \bigcup{{\OLId{latin-looped}{C}}}$،
+ثم~$\cardfont{{\OLId{latin-ordinary}{b}}} \leq \bigcup {\OLId{latin-looped}{C}}$؛ وهذا تناقض.
+\end{proof}
+
+وقارن هذه الحجة بمفارقة راسل ومفارقة بورالي--فورتي كلتيهما.
+
+\end{document}

@@ -1,0 +1,86 @@
+% Part: normal-modal-logic
+% Chapter: syntax-and-semantics
+% Section: truth-in-model
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{syn}{tru}
+
+\olsection{الصدق في نموذج}
+
+وقد يكون المطلوب معرفة ال!!{formula}s التي يعمّ صدقها عوالم نموذج
+بعينه كلها. فنخصّ هذا المعنى بالرمز الآتي.
+
+\begin{defn}
+  تكون !!^a{formula}~$!A$ \emph{صادقة في نموذج}~${\OLId{latin-looped}{M}} = \tuple{{\OLId{latin-looped}{W}}, {\OLId{latin-looped}{R}},
+    {\OLId{latin-looped}{V}}}$، ونكتب~$\mSat{{\OLId{latin-looped}{M}}}{!A}$، إذا وفقط إذا كان
+  $\mSat{{\OLId{latin-looped}{M}}}{!A}[{\OLId{latin-ordinary}{w}}]$ لكل~${\OLId{latin-ordinary}{w}} \in {\OLId{latin-looped}{W}}$.
+\end{defn}
+
+\begin{prop}\ollabel{prop:truthfacts}
+  \begin{enumerate}
+  \item إذا كان~$\mSat{{\OLId{latin-looped}{M}}}{!A}$، فإن~$\mSat/{{\OLId{latin-looped}{M}}}{\lnot !A}$، لكن
+    \emph{ليس} العكس.
+  \item إذا كان~$\mSat{{\OLId{latin-looped}{M}}}{!A \lif !B}$، فإن~$\mSat{{\OLId{latin-looped}{M}}}{!A}$ فقط إذا
+    كان~$\mSat{{\OLId{latin-looped}{M}}}{!B}$، لكن \emph{ليس} العكس.
+  \end{enumerate}
+\end{prop}
+
+\begin{proof}
+  \begin{enumerate}
+  \item إذا كان~$\mSat{{\OLId{latin-looped}{M}}}{!A}$، كانت~$!A$ صادقة في جميع عوالم~${\OLId{latin-looped}{W}}$،
+    ولما كانت~${\OLId{latin-looped}{W}} \neq \emptyset$، فلا يمكن أن يكون
+    $\mSat{{\OLId{latin-looped}{M}}}{\lnot!A}$؛ وإلا للزم أن تكون~$!A$ صادقة وكاذبة معًا في
+    عالم ما.
+
+    وأما إذا كان~$\mSat/{{\OLId{latin-looped}{M}}}{\lnot !A}$، فغاية ما يُستفاد أن~$!A$
+    تصدق في عالم ما~${\OLId{latin-ordinary}{w}} \in {\OLId{latin-looped}{W}}$؛ ولا يُستفاد منه~$\mSat{{\OLId{latin-looped}{M}}}{!A}[{\OLId{latin-ordinary}{w}}]$
+    في \emph{كل}~${\OLId{latin-ordinary}{w}} \in {\OLId{latin-looped}{W}}$. وشاهده نموذج~\olref[rel]{fig:simple}،
+    فإن فيه~$\mSat/{{\OLId{latin-looped}{M}}}{\lnot {\OLId{latin-ordinary}{p}}}$ وفيه كذلك~$\mSat/{{\OLId{latin-looped}{M}}}{{\OLId{latin-ordinary}{p}}}$.
+  \item لنفرض~$\mSat{{\OLId{latin-looped}{M}}}{!A \lif !B}$ و$\mSat{{\OLId{latin-looped}{M}}}{!A}$. والمطلوب
+    $\mSat{{\OLId{latin-looped}{M}}}{!B}$. فخذ~${\OLId{latin-ordinary}{w}} \in {\OLId{latin-looped}{W}}$ كيف اتفق؛ يحصل فيه
+    $\mSat{{\OLId{latin-looped}{M}}}{!A \lif !B}[{\OLId{latin-ordinary}{w}}]$ و$\mSat{{\OLId{latin-looped}{M}}}{!A}[{\OLId{latin-ordinary}{w}}]$، فيلزم
+    $\mSat{{\OLId{latin-looped}{M}}}{!B}[{\OLId{latin-ordinary}{w}}]$. وليس لاختيار~${\OLId{latin-ordinary}{w}}$ خصوصية، فثبت
+    $\mSat{{\OLId{latin-looped}{M}}}{!B}$.
+
+    وأما نفي العكس فيكفي له نموذج~$\mModel{M}$ يصدق فيه أن
+    $\mSat{{\OLId{latin-looped}{M}}}{!A}$ لا تكون إلا إذا كانت~$\mSat{{\OLId{latin-looped}{M}}}{!B}$، مع
+    $\mSat/{{\OLId{latin-looped}{M}}}{!A \lif !B}$. ونعود إلى~\olref[rel]{fig:simple}:
+    لما كان~$\mSat/{{\OLId{latin-looped}{M}}}{{\OLId{latin-ordinary}{p}}}$، صدق خلوًا أن~$\mSat{{\OLId{latin-looped}{M}}}{{\OLId{latin-ordinary}{p}}}$ لا تكون
+    إلا إذا كانت~$\mSat{{\OLId{latin-looped}{M}}}{{\OLId{latin-ordinary}{q}}}$. ومع ذلك~$\mSat/{{\OLId{latin-looped}{M}}}{{\OLId{latin-ordinary}{p}} \lif {\OLId{latin-ordinary}{q}}}$؛
+    لأن~${\OLId{latin-ordinary}{p}}$ صادقة و${\OLId{latin-ordinary}{q}}$ كاذبة في~${\OLId{latin-ordinary}{w}}_{\OLMathNumeral{1}}$.
+  \end{enumerate}
+\end{proof}
+
+\begin{prob}
+  تأمل النموذج الآتي~$\mModel{M}$ للغة التي لا تضم من
+  !!{propositional variable}s إلا~${\OLId{latin-ordinary}{p}}_{\OLMathNumeral{1}}$، و${\OLId{latin-ordinary}{p}}_{\OLMathNumeral{2}}$، و${\OLId{latin-ordinary}{p}}_{\OLMathNumeral{3}}$:
+  \begin{center}
+    \begin{tikzpicture}[modal]
+      \node[world] (w1) [label={[align=right]left:\mTrue{p_1}\\\mFalse{p_2}\\\mFalse{p_3}}]
+            {${\OLId{latin-ordinary}{w}}_{\OLMathNumeral{1}}$} ;
+      \node[world] (w2) [label={[align=right]right:\mTrue{p_1}\\\mTrue{p_2}\\\mFalse{p_3}},
+        below right=of w1]  {${\OLId{latin-ordinary}{w}}_{\OLMathNumeral{2}}$};
+      \node[world] (w3) [label={[align=right]right:\mTrue{p_1}\\\mTrue{p_2}\\\mTrue{p_3}},
+        above right=of w2] {${\OLId{latin-ordinary}{w}}_{\OLMathNumeral{3}}$};
+      \draw[reflexive above] (w3) to (w3);
+      \draw[->] (w1) to (w2);
+      \draw[->] (w2) to (w3);
+      \draw[->] (w1) to (w3);
+    \end{tikzpicture}
+  \end{center}
+  هل ال!!{formula}s والمخططات الآتية صادقة في النموذج~$\mModel{M}$،
+  أي صادقة في كل عالم من~$\mModel{M}$؟ اشرح.
+  \begin{enumerate}
+  \item ${\OLId{latin-ordinary}{p}}\lif \Diamond {\OLId{latin-ordinary}{p}}$ (لـ${\OLId{latin-ordinary}{p}}$ ذرية)؛
+  \item $!A\lif \Diamond !A$ (لـ$!A$ اعتباطية)؛
+  \item $\Box {\OLId{latin-ordinary}{p}} \lif {\OLId{latin-ordinary}{p}}$ (لـ${\OLId{latin-ordinary}{p}}$ ذرية)؛
+  \item $\lnot {\OLId{latin-ordinary}{p}} \lif \Diamond \Box {\OLId{latin-ordinary}{p}}$ (لـ${\OLId{latin-ordinary}{p}}$ ذرية)؛
+  \item $\Diamond \Box !A$ (لـ$!A$ اعتباطية)؛
+  \item $\Box \Diamond {\OLId{latin-ordinary}{p}}$ (لـ${\OLId{latin-ordinary}{p}}$ ذرية).
+  \end{enumerate}
+\end{prob}
+
+\end{document}

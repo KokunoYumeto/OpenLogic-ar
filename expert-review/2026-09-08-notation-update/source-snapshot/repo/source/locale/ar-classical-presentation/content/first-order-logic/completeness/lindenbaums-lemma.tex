@@ -1,0 +1,92 @@
+% Part: first-order-logic
+% Chapter: completeness
+% Section: lindenbaums-lemma
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{com}{lin}}
+      {\olfileid{pl}{com}{lin}}
+
+\olsection{لمّة ليندنبوم}
+
+\begin{explain}
+المقصود بهذه اللمّة أن كل مجموعة متسقة من ال!!{sentence}s لها امتداد
+من الجمل يجمع إلى الاتساق كونه !!{complete}. وطريق البرهان أن نزيد
+!!{sentence} واحدة في كل مرحلة، على شرط ألا يزول الاتساق. نرتب
+الزيادات بحيث كل $!A$ يلحق إما $!A$ وإما $\lnot !A$ عند مرحلة ما.
+فإذا أخذنا اتحاد المراحل كلها، وجدنا فيه $!A$ أو نفيها~$\lnot !A$،
+فكان كاملًا. ويبقى متسقًا لأن كل مرحلة منه مصونة من التناقض.
+\end{explain}
+
+\begin{lem}[لمّة ليندنبوم]
+\ollabel{lem:lindenbaum} يمكن توسيع كل مجموعة متسقة~${\OLId{greek-variable}{Gamma}}$ في
+لغة~$\Lang{L}$ إلى مجموعة !!a{complete} ومتسقة~${\OLId{greek-variable}{Gamma}}^*$.
+\end{lem}
+
+\begin{proof}
+ليكن الفرض اتساق ${\OLId{greek-variable}{Gamma}}$. نرتب $!A_{\OLMathNumeral{0}}$ و$!A_{\OLMathNumeral{1}}$ و\dots{} في قائمة
+تستوعب ال!!{sentence}s في~$\Lang L$، ثم نضع ${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} = {\OLId{greek-variable}{Gamma}}$، و
+\[
+{\OLId{greek-variable}{Gamma}}_{{\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}}} =
+\begin{cases}
+{\OLId{greek-variable}{Gamma}}_{\OLId{latin-ordinary}{n}} \cup \{ !A_{\OLId{latin-ordinary}{n}} \} & \textrm{متى كانت ${\OLId{greek-variable}{Gamma}}_{\OLId{latin-ordinary}{n}} \cup \{!A_{\OLId{latin-ordinary}{n}}\}$
+  متسقة؛} \\
+{\OLId{greek-variable}{Gamma}}_{\OLId{latin-ordinary}{n}} \cup \{ \lnot !A_{\OLId{latin-ordinary}{n}} \} & \textrm{وإلا.}
+\end{cases}
+\]
+ولتكن ${\OLId{greek-variable}{Gamma}}^* = \bigcup_{{\OLId{latin-ordinary}{n}} \geq {\OLMathNumeral{0}}} {\OLId{greek-variable}{Gamma}}_{\OLId{latin-ordinary}{n}}$.
+
+نثبت استقراءً اتساق كل ${\OLId{greek-variable}{Gamma}}_{\OLId{latin-ordinary}{n}}$. فأما ${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}}$ فمتسقة بحكم
+تعريفها. وإذا اخترنا ${\OLId{greek-variable}{Gamma}}_{{\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}}} = {\OLId{greek-variable}{Gamma}}_{\OLId{latin-ordinary}{n}} \cup \{!A_{\OLId{latin-ordinary}{n}}\}$، فإنما
+اخترناها لاتساقها. وإلا كان ${\OLId{greek-variable}{Gamma}}_{{\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}}} = {\OLId{greek-variable}{Gamma}}_{\OLId{latin-ordinary}{n}} \cup \{\lnot !A_{\OLId{latin-ordinary}{n}}\}$،
+فلنثبت اتساق ${\OLId{greek-variable}{Gamma}}_{\OLId{latin-ordinary}{n}} \cup \{\lnot !A_{\OLId{latin-ordinary}{n}}\}$. لو لم تكن متسقة، لكانت
+\emph{كل من} ${\OLId{greek-variable}{Gamma}}_{\OLId{latin-ordinary}{n}} \cup \{!A_{\OLId{latin-ordinary}{n}}\}$ و${\OLId{greek-variable}{Gamma}}_{\OLId{latin-ordinary}{n}} \cup \{\lnot !A_{\OLId{latin-ordinary}{n}}\}$
+غير متسقة؛ فيلزم عدم اتساق ${\OLId{greek-variable}{Gamma}}_{\OLId{latin-ordinary}{n}}$ بمقتضى
+\iftag{FOL}{%
+  \tagrefs{prfAX/{fol:axd:prv:prop:provability-exhaustive},
+    prfSC/{fol:seq:prv:prop:provability-exhaustive},
+    prfND/{fol:ntd:prv:prop:provability-exhaustive},
+    prfTab/{fol:tab:prv:prop:provability-exhaustive}}}{%
+  \tagrefs{prfAX/{pl:axd:prv:prop:provability-exhaustive},
+    prfSC/{pl:seq:prv:prop:provability-exhaustive},
+    prfND/{pl:ntd:prv:prop:provability-exhaustive},
+    prfTab/{pl:tab:prv:prop:provability-exhaustive}}},
+خلافًا لفرض الاستقراء.
+
+ونثبت أيضًا أنه لكل~${\OLId{latin-ordinary}{n}}$ ولكل ${\OLId{latin-ordinary}{i}} < {\OLId{latin-ordinary}{n}}$، يكون ${\OLId{greek-variable}{Gamma}}_{\OLId{latin-ordinary}{i}} \subseteq {\OLId{greek-variable}{Gamma}}_{\OLId{latin-ordinary}{n}}$،
+باستقراء على~${\OLId{latin-ordinary}{n}}$. ففي حالة ${\OLId{latin-ordinary}{n}}={\OLMathNumeral{0}}$ ليس ثمة ${\OLId{latin-ordinary}{i}} < {\OLMathNumeral{0}}$، فتصدق الدعوى
+خلوًا. وافترض الآن صحتها عند~${\OLId{latin-ordinary}{n}}$؛ نريد أن ${\OLId{latin-ordinary}{i}} < {\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}}$ يقتضي
+${\OLId{greek-variable}{Gamma}}_{\OLId{latin-ordinary}{i}} \subseteq {\OLId{greek-variable}{Gamma}}_{{\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}}}$. وبحسب البناء إما
+${\OLId{greek-variable}{Gamma}}_{{\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}}} = {\OLId{greek-variable}{Gamma}}_{\OLId{latin-ordinary}{n}} \cup \{!A_{\OLId{latin-ordinary}{n}}\}$ وإما $= {\OLId{greek-variable}{Gamma}}_{\OLId{latin-ordinary}{n}} \cup \{\lnot
+!A_{\OLId{latin-ordinary}{n}}\}$؛ فيكون ${\OLId{greek-variable}{Gamma}}_{\OLId{latin-ordinary}{n}} \subseteq {\OLId{greek-variable}{Gamma}}_{{\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}}}$. ومتى كان ${\OLId{latin-ordinary}{i}} < {\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}}$،
+كان ${\OLId{greek-variable}{Gamma}}_{\OLId{latin-ordinary}{i}} \subseteq {\OLId{greek-variable}{Gamma}}_{\OLId{latin-ordinary}{n}}$: بفرض الاستقراء إن كان ${\OLId{latin-ordinary}{i}} < {\OLId{latin-ordinary}{n}}$،
+وبالانعكاسية ${\OLId{greek-variable}{Gamma}}_{\OLId{latin-ordinary}{n}} \subseteq {\OLId{greek-variable}{Gamma}}_{\OLId{latin-ordinary}{n}}$ إن كان ${\OLId{latin-ordinary}{i}} = {\OLId{latin-ordinary}{n}}$. ثم تفيد
+تعدية~$\subseteq$ أن ${\OLId{greek-variable}{Gamma}}_{\OLId{latin-ordinary}{i}} \subseteq {\OLId{greek-variable}{Gamma}}_{{\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}}}$.
+
+بهذا يتبين اتساق ${\OLId{greek-variable}{Gamma}}^*$. خذ مجموعة منتهية
+${\OLId{greek-variable}{Gamma}}' \subseteq {\OLId{greek-variable}{Gamma}}^*$. فإن كان ${\OLId{greek-variable}{Gamma}}'=\emptyset$، فالاتساق
+ظاهر. وإلا فكل $!B \in {\OLId{greek-variable}{Gamma}}'$ واقع في~${\OLId{greek-variable}{Gamma}}_{\OLId{latin-ordinary}{i}}$ عند فهرس~${\OLId{latin-ordinary}{i}}$.
+اختر ${\OLId{latin-ordinary}{n}}$ أكبر هذه الفهارس. وحيث إن
+${\OLId{greek-variable}{Gamma}}_{\OLId{latin-ordinary}{i}} \subseteq {\OLId{greek-variable}{Gamma}}_{\OLId{latin-ordinary}{n}}$ متى كان ${\OLId{latin-ordinary}{i}} \le {\OLId{latin-ordinary}{n}}$، فكل
+$!B \in {\OLId{greek-variable}{Gamma}}'$ يحقق $!B \in {\OLId{greek-variable}{Gamma}}_{\OLId{latin-ordinary}{n}}$، فيكون
+${\OLId{greek-variable}{Gamma}}' \subseteq {\OLId{greek-variable}{Gamma}}_{\OLId{latin-ordinary}{n}}$ مع اتساق~${\OLId{greek-variable}{Gamma}}_{\OLId{latin-ordinary}{n}}$. فثبت اتساق كل
+مجموعة منتهية ${\OLId{greek-variable}{Gamma}}' \subseteq {\OLId{greek-variable}{Gamma}}^*$. وتفيد \iftag{FOL}{%
+  \tagrefs{prfAX/{fol:axd:ptn:prop:proves-compact},
+    prfSC/{fol:seq:ptn:prop:proves-compact},
+    prfND/{fol:ntd:ptn:prop:proves-compact},
+    prfTab/{fol:tab:ptn:prop:proves-compact}}}{%
+  \tagrefs{prfAX/{pl:axd:ptn:prop:proves-compact},
+    prfSC/{pl:seq:ptn:prop:proves-compact},
+    prfND/{pl:ntd:ptn:prop:proves-compact},
+    prfTab/{pl:tab:ptn:prop:proves-compact}}}، تكون ${\OLId{greek-variable}{Gamma}}^*$ متسقة.
+
+وأما الاكتمال، فكل !!{sentence} من $\Frm[{\OLId{latin-looped}{L}}]$ لها موضع في قائمة بناء
+~${\OLId{greek-variable}{Gamma}}^*$. فإن كان $!A_{\OLId{latin-ordinary}{n}} \notin {\OLId{greek-variable}{Gamma}}^*$، لم يمنع إلحاقها إلا
+عدم اتساق ${\OLId{greek-variable}{Gamma}}_{\OLId{latin-ordinary}{n}} \cup \{!A_{\OLId{latin-ordinary}{n}}\}$؛ وحينئذ قد ألحقنا
+$\lnot !A_{\OLId{latin-ordinary}{n}} \in {\OLId{greek-variable}{Gamma}}^*$. فالمجموعة ${\OLId{greek-variable}{Gamma}}^*$ !!{complete}.
+\end{proof}
+
+\end{document}

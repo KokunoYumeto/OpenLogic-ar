@@ -1,0 +1,51 @@
+% Part: incompleteness
+% Chapter: theories-computability
+% Section: oconsis-ext-of-q-undec
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{tcp}{oqn}
+
+\olsection{امتدادات $\Th{Q}$ المتسقة-$\omega$ غير قابلة للقرار}
+
+\begin{explain}
+كان مدار برهان تمام $\Th{Q}$ بين المجموعات القابلة للتعداد حسابيًا
+على أن كل ما يثبت في $\Th{Q}$ من الجمل «صادق» في الأعداد الطبيعية.
+ونعيّن الآن، بتعريف ومبرهنة، القدر الذي احتجنا إليه من هذا الصدق،
+فنحصل على نتيجة أقوى. ولا حاجة إلى الإطالة في الوقوف عندها، فإننا
+سنقويها مرة أخرى بعد قليل. وإنما أوردناها بالدرجة الأولى لبيان
+التطور التاريخي: فقد بنى غودل بحثه الأول على الاتساق-$\omega$،
+ثم أُثبت بعده بقليل أن الاتساق-$\omega$ يمكن الاستعاضة عنه بالاتساق
+المعتاد، فكانت النتيجة أقوى.
+\end{explain}
+
+\begin{defn}
+نقول إن النظرية $\Th{T}$ متسقة-$\omega$ متى استوفت الشرط الآتي:
+لكل جملة $\lexists[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$، إذا أثبتت $\Th{T}$ جميع الجمل
+$\lnot !A(\num {\OLMathNumeral{0}})$ و$\lnot !A(\num {\OLMathNumeral{1}})$ و$\lnot !A(\num {\OLMathNumeral{2}})$،
+\dots، امتنع أن تثبت $\Th{T}$ الجملة $\lexists[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$.
+\end{defn}
+
+\begin{thm}
+  \ollabel{thm:oconsis-q}
+  إذا كانت $\Th{T}$ نظرية متسقة-$\omega$ تشمل $\Th{Q}$،
+  فإن $\Th{T}$ غير قابلة للقرار.
+\end{thm}
+
+\begin{proof}
+احتواء $\Th{T}$ على $\Th{Q}$ يجعل $\Th{T}$ قادرة على تمثيل الدوال
+والعلاقات القابلة للحساب. فنكتفي بتعديل البرهان المتقدم:
+إذا كان ${\OLId{latin-ordinary}{x}}\in {\OLId{latin-looped}{K}}$، أثبتت $\Th{T}$، كما سبق،
+$\lexists[{\OLId{latin-ordinary}{s}}][!A_{\OLId{latin-looped}{T}}(\num {\OLId{latin-ordinary}{x}},\num {\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{s}})]$. ولإثبات العكس نفرض أن
+$\Th{T}$ تثبت $\lexists[{\OLId{latin-ordinary}{s}}][!A_{\OLId{latin-looped}{T}}(\num {\OLId{latin-ordinary}{x}},\num {\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{s}})]$.
+يلزم عندئذ انتماء ${\OLId{latin-ordinary}{x}}$ إلى ${\OLId{latin-looped}{K}}$؛ إذ لو لم ينتم إليها لما كان للآلة
+${\OLId{latin-ordinary}{x}}$ حساب يتوقف على الدخل ${\OLId{latin-ordinary}{x}}$. وبما أن $!A_{\OLId{latin-looped}{T}}$ تمثل علاقة كليني ${\OLId{latin-looped}{T}}$،
+لأثبتت $\Th{T}$ كلًا من
+$\lnot !A_{\OLId{latin-looped}{T}}(\num {\OLId{latin-ordinary}{x}},\num {\OLId{latin-ordinary}{x}},\num {\OLMathNumeral{0}})$ و
+$\lnot !A_{\OLId{latin-looped}{T}}(\num {\OLId{latin-ordinary}{x}},\num {\OLId{latin-ordinary}{x}},\num {\OLMathNumeral{1}})$، \dots. وهذا ينافي كون
+$\Th{T}$ متسقة-$\omega$.
+\end{proof}
+
+\end{document}

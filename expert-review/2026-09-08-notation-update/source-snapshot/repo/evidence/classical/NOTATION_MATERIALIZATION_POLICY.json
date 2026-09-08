@@ -1,0 +1,212 @@
+{
+  "schema": "openlogic-classical-notation-materialization-policy-v2",
+  "status": "implemented-reversible-overlay-policy-awaiting-final-source-closure",
+  "baseline": {
+    "path": "evidence/classical/BASELINE.json",
+    "sha256": "C10A6321B79A210FEBBA49B3FC216A7FB22B729A738AF71D57DC1AEA9E105BEB",
+    "path_field": "target_path",
+    "canonical_prefix": "source/locale/ar-classical/content/"
+  },
+  "registries": {
+    "letters": "evidence/classical/LETTER_PRESENTATION_REGISTRY.json",
+    "sets": "evidence/classical/SET_SYMBOL_MAPPING.json",
+    "decisions": "evidence/classical/NOTATION_MATERIALIZATION_DECISIONS.json"
+  },
+  "presentation_tree": {
+    "locale": "ar-classical-presentation",
+    "content_root": "source/locale/ar-classical-presentation/content",
+    "contract": "source/locale/ar-classical-presentation/open-logic-materialization-contract.tex",
+    "authoritative_source_remains": "source/locale/ar-classical/content",
+    "inverse_requirement": "Every generated file must reconstruct byte-for-byte to its authoritative source through the bound occurrence registry."
+  },
+  "wrappers": {
+    "formula": "\\OLId{formula}{KEY}",
+    "latin_lower": "\\OLId{latin-ordinary}{KEY}",
+    "latin_upper": "\\OLId{latin-looped}{KEY}",
+    "mathematical_numeral": "\\OLMathNumeral{DIGITS}",
+    "arabic_text_numeral": "\\OLClassicalDigits{DIGITS}"
+  },
+  "automatic_classification": {
+    "formula_keys": "An adjacent !A..!Z or a braced !{A}..!{Z} is one typed formula occurrence unless a higher-priority protected context contains it.",
+    "bare_letters": "Only a one-character ASCII letter run outside protected/review contexts is automatic: lowercase uses latin-ordinary and uppercase uses latin-looped.",
+    "numerals": "Each nonempty contiguous ASCII digit run outside protected/review contexts is one typed mathematical numeral.",
+    "non_formula_numerals": "Each ASCII digit run outside formulas is classified too: visible Arabic-content numerals use the expandable Eastern-Arabic text wrapper; protected TeX data and alphanumeric international identifiers remain exact, source-addressed exemptions.",
+    "multi_letter_runs": "Retain the contiguous run as one explicit international semantic-name exemption; never infer that an ASCII word is a product of variables.",
+    "registered_greek": "Gamma, Delta and alpha use their exact greek-variable registry entries outside protected contexts.",
+    "unregistered_greek": "Retain the exact semantic command as an explicit international exemption; never invent an Arabic substitution not present in the authority-bound registry."
+  },
+  "protected_unit_formulas": [
+    {
+      "id": "OLP-0641",
+      "reason": "international Greek-alphabet reference specimens and Latin comparison cells"
+    },
+    {
+      "id": "OLP-0642",
+      "reason": "international Fraktur-alphabet reference specimens and Latin comparison cells"
+    }
+  ],
+  "command_contracts": [
+    {
+      "commands": ["text", "textrm", "textsf", "textnormal", "textbf", "textit", "textsl", "textup", "texttt", "mbox", "hbox", "intertext", "shortintertext"],
+      "optional": 0,
+      "required": 1,
+      "protect_required": [0],
+      "reason": "text-inside-math"
+    },
+    {
+      "commands": ["Struct", "Lang", "Log", "Obj", "Ax", "PIso", "fn", "Th", "mModel", "mClass", "Top"],
+      "optional": 0,
+      "required": 1,
+      "protect_required": [0],
+      "reason": "whole-typed-identifier-or-operator"
+    },
+    {
+      "commands": ["Atom"],
+      "optional": 0,
+      "required": 2,
+      "protect_required": [0, 1],
+      "reason": "whole-typed-identifier-or-operator"
+    },
+    {
+      "commands": ["operatorname"],
+      "optional": 0,
+      "required": 1,
+      "protect_required": [0],
+      "allow_star": true,
+      "reason": "named-semantic-operator"
+    },
+    {
+      "commands": ["OLInternationalMath"],
+      "optional": 0,
+      "required": 1,
+      "protect_required": [0],
+      "reason": "explicit-international-specimen-escape"
+    },
+    {
+      "commands": ["label", "ollabel", "ref", "Ref", "pageref", "Pageref", "eqref", "autoref", "Autoref", "cref", "Cref", "cpageref", "Cpageref", "nameref", "vref", "Vref", "tagref", "path", "bibliography", "bibliographystyle", "externaldocument", "includeonly", "tagtrue", "tagfalse", "tagitem", "tagsection", "includeenv", "excludeenv", "nocite"],
+      "optional": 2,
+      "required": 1,
+      "protect_required": [0],
+      "reason": "machine-key-or-literal"
+    },
+    {
+      "commands": ["olref", "Olref"],
+      "optional": 3,
+      "required": 1,
+      "protect_optional": [0, 1, 2],
+      "protect_required": [0],
+      "reason": "machine-key-or-reference-format"
+    },
+    {
+      "commands": ["href", "hyperlink", "hypertarget"],
+      "optional": 2,
+      "required": 2,
+      "protect_required": [0],
+      "reason": "url-or-hyperlink-key"
+    },
+    {
+      "commands": ["input", "include", "subfile", "subfileinclude", "olimport"],
+      "optional": 1,
+      "required": 1,
+      "protect_optional": [0],
+      "protect_required": [0],
+      "reason": "file-or-import-identity"
+    },
+    {
+      "commands": ["import", "subimport", "includefrom", "subincludefrom", "inputfrom", "subinputfrom"],
+      "optional": 1,
+      "required": 2,
+      "protect_optional": [0],
+      "protect_required": [0, 1],
+      "reason": "file-or-import-identity"
+    },
+    {
+      "commands": ["includegraphics", "documentclass", "usepackage", "RequirePackage"],
+      "optional": 2,
+      "required": 1,
+      "protect_optional": [0, 1],
+      "protect_required": [0],
+      "reason": "file-package-or-option-identity"
+    },
+    {
+      "commands": ["color"],
+      "optional": 1,
+      "required": 1,
+      "protect_optional": [0],
+      "protect_required": [0],
+      "reason": "style-key"
+    },
+    {
+      "commands": ["textcolor"],
+      "optional": 1,
+      "required": 2,
+      "protect_optional": [0],
+      "protect_required": [0],
+      "reason": "style-key"
+    },
+    {
+      "commands": ["foreignlanguage"],
+      "optional": 1,
+      "required": 2,
+      "protect_optional": [0],
+      "protect_required": [0, 1],
+      "reason": "explicit-language-and-text-specimen"
+    },
+    {
+      "commands": ["raisebox"],
+      "optional": 0,
+      "required": 2,
+      "protect_required": [0],
+      "reason": "layout dimension is not a mathematical numeral or identifier"
+    },
+    {
+      "commands": ["rule"],
+      "optional": 1,
+      "required": 2,
+      "protect_optional": [0],
+      "protect_required": [0, 1],
+      "reason": "layout dimension is not a mathematical numeral or identifier"
+    },
+    {
+      "commands": ["begin", "end"],
+      "optional": 0,
+      "required": 1,
+      "protect_required": [0],
+      "reason": "environment-identity"
+    }
+  ],
+  "cite_command_prefix": "cite",
+  "review_argument_commands": [
+    "mathrm", "mathbf", "mathfrak", "mathcal", "mathsf", "mathbb",
+    "mathit", "mathnormal", "mathscr", "mathsfit", "mathtt", "boldsymbol"
+  ],
+  "transparent_math_argument_commands": [
+    "ensuremath", "frac", "dfrac", "tfrac", "cfrac", "binom", "dbinom", "tbinom",
+    "sqrt", "root", "overline", "underline", "overbrace", "underbrace", "widehat",
+    "widetilde", "hat", "check", "breve", "acute", "grave", "dot", "ddot", "dddot",
+    "ddddot", "vec", "bar", "tilde", "mathord", "mathop", "mathbin", "mathrel",
+    "mathopen", "mathclose", "mathpunct", "mathinner", "substack", "overset",
+    "underset", "stackrel", "sideset", "smash", "phantom", "vphantom", "hphantom",
+    "boxed", "cancel", "bcancel", "xcancel", "not"
+  ],
+  "no_argument_semantic_commands": [
+    "Nat", "Int", "PosInt", "Rat", "Real", "Bin", "True", "False", "Indet", "Undef",
+    "Knows", "EKnows", "CKnows", "Ptemp", "Htemp", "Ftemp", "Gtemp", "Since", "Until",
+    "lambd", "LeftR", "RightR", "Weakening", "Contraction", "Exchange", "Cut", "Intro",
+    "Elim", "Zero", "Succ", "Add", "Mult", "Exp", "Pred", "Var", "PVar", "Trm", "Frm",
+    "SFrm", "FV", "Sent", "Prf", "OPrf", "Prov", "OProv", "Con", "OCon", "LogCL",
+    "LogIL", "LogLuk", "LogGod", "LogKs", "LogKw", "LogLP", "LogRM", "LogHal", "CL",
+    "IL", "Q", "PA", "ZF", "ZFC", "bmin", "num", "gn", "betared", "alphared", "etared"
+  ],
+  "array_like_environment_structural_argument": [
+    "array", "alignedat", "alignat", "alignat*", "flalignat", "flalignat*", "xalignat", "xalignat*", "xxalignat"
+  ],
+  "primitive_dimension_commands": [
+    "hspace", "vspace", "kern", "mkern", "hskip", "vskip"
+  ],
+  "definition_commands": ["def", "gdef", "edef", "xdef"],
+  "forbidden_preexisting_materialization_commands": ["OLId", "OLMathNumeral"],
+  "normalization": "No Unicode normalization is permitted. Decode UTF-8 strictly, preserve an existing UTF-8 BOM and original newline bytes, and reconstruct exact source bytes from the occurrence registry.",
+  "global_mathcode_or_catcode_mutation": false,
+  "completion_gate": "A release-eligible presentation tree may be committed only when it is bound to the finalized 722-unit source-closure receipt, source bytes remain stable throughout the run, every baseline target parses without anomaly, every potentially visible ASCII math letter/digit and Greek command and every ASCII digit outside formulas is transformed or explicitly exempted with a reason, every decision is hash-bound and consumed, inverse reconstruction equals every source byte and SHA-256, and the mutex-guarded runtime/PDF/visual gates pass."
+}

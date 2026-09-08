@@ -1,0 +1,148 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{card-arithmetic}{opps}
+\olsection{تعريف العمليات الأساسية}
+
+لما كنا غير محتاجين إلى حفظ الترتيب، كان تعريف حساب الكاردينالات
+أيسر من تعريف حساب الأعداد الترتيبية بعض اليسر. ونعرف الجمع والضرب
+والأس جميعًا.
+
+\begin{defn}
+إذا كان~$\cardfont{{\OLId{latin-ordinary}{a}}}$ و$\cardfont{{\OLId{latin-ordinary}{b}}}$ كاردينالين، فنعرف:
+\begin{align*}
+	\cardfont{{\OLId{latin-ordinary}{a}}} \cardplus \cardfont{{\OLId{latin-ordinary}{b}}} &\defis
+	\card{\cardfont{{\OLId{latin-ordinary}{a}}} \disjointsum \cardfont{{\OLId{latin-ordinary}{b}}}}\\
+	\cardfont{{\OLId{latin-ordinary}{a}}} \cardtimes \cardfont{{\OLId{latin-ordinary}{b}}} &\defis
+	\card{\cardfont{{\OLId{latin-ordinary}{a}}} \times \cardfont{{\OLId{latin-ordinary}{b}}}}\\
+	\cardexpo{\cardfont{{\OLId{latin-ordinary}{a}}}}{\cardfont{{\OLId{latin-ordinary}{b}}}} &\defis
+	\card{\funfromto{\cardfont{{\OLId{latin-ordinary}{b}}}}{\cardfont{{\OLId{latin-ordinary}{a}}}}}
+\end{align*}
+حيث
+$\funfromto{{\OLId{latin-looped}{X}}}{{\OLId{latin-looped}{Y}}} = \Setabs{{\OLId{latin-ordinary}{f}}}{{\OLId{latin-ordinary}{f}} \text{ دالة } {\OLId{latin-looped}{X}} \to {\OLId{latin-looped}{Y}}}$.
+(ووجود~$\funfromto{{\OLId{latin-looped}{X}}}{{\OLId{latin-looped}{Y}}}$ لأي مجموعتين~${\OLId{latin-looped}{X}}$ و${\OLId{latin-looped}{Y}}$ سهل الإثبات، وهو
+متروك تمرينًا.)
+\end{defn}
+
+\begin{prob}
+أثبت في~$\Zminus$ أن~$\funfromto{{\OLId{latin-looped}{X}}}{{\OLId{latin-looped}{Y}}}$ موجودة لأي مجموعتين~${\OLId{latin-looped}{X}}$
+و~${\OLId{latin-looped}{Y}}$. وبالعمل في~$\ZF$، احسب~$\setrank{\funfromto{{\OLId{latin-looped}{X}}}{{\OLId{latin-looped}{Y}}}}$ من
+$\setrank{{\OLId{latin-looped}{X}}}$ و$\setrank{{\OLId{latin-looped}{Y}}}$، على مثال
+\olref[sth][ord-arithmetic][using-addition]{rankcomputation}.
+\end{prob}
+
+ولنشرح وجه التعريف. فأما الجمع فيستعمل الجمع المنفصل،~$\disjointsum$،
+على تعريف~\olref[ord-arithmetic][add]{defdissum}؛ ومن اليسير رؤية
+موافقته للحساب في الحالات المتناهية. وأما الضرب، فقد أثبت
+\olref[sfr][set][pai]{cardnmprod} أن المجموعة~${\OLId{latin-looped}{A}}$ إذا كان لها~${\OLId{latin-ordinary}{n}}$
+عناصر، والمجموعة~${\OLId{latin-looped}{B}}$ إذا كان لها~${\OLId{latin-ordinary}{m}}$ عناصر، كان لـ${\OLId{latin-looped}{A}} \times {\OLId{latin-looped}{B}}$
+عدد~${\OLId{latin-ordinary}{n}} \cdot {\OLId{latin-ordinary}{m}}$ من العناصر. فتعريفنا يعمم هذا المعنى على ما فوق
+المتناهي. والأس على القياس نفسه، ينقل الفكرة من المتناهي إلى ما فوقه.
+بل إن حساب الكاردينالات ما فوق المتناهي أشبه بالحساب المعتاد من بعض
+الوجوه من حساب الأعداد الترتيبية ما فوق المتناهي.
+
+\begin{prop}\ollabel{cardplustimescommute}
+العمليتان~$\cardplus$ و$\cardtimes$ إبداليتان وتجميعيتان.
+\end{prop}
+
+\begin{proof}
+يكفي في الإبدالية، بموجب
+\olref[cardinals][cardsasords]{lem:CardinalsBehaveRight}، أن نلاحظ
+$\cardeq{(\cardfont{{\OLId{latin-ordinary}{a}}} \disjointsum
+\cardfont{{\OLId{latin-ordinary}{b}}})}{(\cardfont{{\OLId{latin-ordinary}{b}}} \disjointsum \cardfont{{\OLId{latin-ordinary}{a}}})}$ وأن
+$\cardeq{(\cardfont{{\OLId{latin-ordinary}{a}}} \times \cardfont{{\OLId{latin-ordinary}{b}}})}{(\cardfont{{\OLId{latin-ordinary}{b}}} \times
+\cardfont{{\OLId{latin-ordinary}{a}}})}$. وأما التجميعية فنتركها تمرينًا.
+\end{proof}
+
+\begin{prob}
+أثبت أن~$\cardplus$ و$\cardtimes$ تجميعيتان.
+\end{prob}
+
+\begin{prop}
+${\OLId{latin-looped}{A}}$ غير متناهية إذا وفقط إذا كان
+$\card{{\OLId{latin-looped}{A}}} \cardplus {\OLMathNumeral{1}} = {\OLMathNumeral{1}} \cardplus \card{{\OLId{latin-looped}{A}}} = \card{{\OLId{latin-looped}{A}}}$.
+\end{prop}
+
+\begin{proof}
+كما في~\olref[cardinals][classing]{generalinfinitycharacter}، تتبع
+النتيجة من~\olref[ord-arithmetic][using-addition]{ordinfinitycharacter}
+و\olref[cardinals][cardsasords]{lem:CardinalsBehaveRight}.
+\end{proof}
+
+ومن هنا احتيج إلى رموز تفصل جمع الأعداد الترتيبية وضربها عن جمع
+الكاردينالات وضربها؛ فهما عمليتان \emph{مختلفتان} حقًا. والنتيجتان
+الآتيتان تبينان اختلاف الأسين كذلك. وتذكر أن
+\olref[z][infinity-again]{defnomega} يقتضي~${\OLMathNumeral{2}} = \{{\OLMathNumeral{0}}, {\OLMathNumeral{1}}\}$.
+
+\begin{lem}\ollabel{lem:SizePowerset2Exp}
+لكل~${\OLId{latin-looped}{A}}$، $\card{\Pow{{\OLId{latin-looped}{A}}}} = \cardexpo{{\OLMathNumeral{2}}}{\card{{\OLId{latin-looped}{A}}}}$.
+\end{lem}
+
+\begin{proof}
+لكل مجموعة جزئية~${\OLId{latin-looped}{B}} \subseteq {\OLId{latin-looped}{A}}$، لتكن
+$\chi_{\OLId{latin-looped}{B}} \in \funfromto{{\OLId{latin-looped}{A}}}{{\OLMathNumeral{2}}}$ معطاة هكذا:
+\begin{align*}
+	\chi_{{\OLId{latin-looped}{B}}}({\OLId{latin-ordinary}{x}}) &\defis
+	\begin{cases}
+		{\OLMathNumeral{1}} & \text{إذا كان }{\OLId{latin-ordinary}{x}}\in {\OLId{latin-looped}{B}}\\
+		{\OLMathNumeral{0}} & \text{فيما عدا ذلك.}
+	\end{cases}
+\end{align*}
+ثم ضع~${\OLId{latin-ordinary}{f}}({\OLId{latin-looped}{B}}) = \chi_{\OLId{latin-looped}{B}}$؛ فيعرف ذلك !!a{bijection}
+${\OLId{latin-ordinary}{f}} \colon \Pow{{\OLId{latin-looped}{A}}} \to \funfromto{{\OLId{latin-looped}{A}}}{{\OLMathNumeral{2}}}$. ومن ثم
+$\cardeq{\Pow{{\OLId{latin-looped}{A}}}}{\funfromto{{\OLId{latin-looped}{A}}}{{\OLMathNumeral{2}}}}$، ويتبعه
+$\cardeq{\Pow{{\OLId{latin-looped}{A}}}}{\funfromto{\card{{\OLId{latin-looped}{A}}}}{{\OLMathNumeral{2}}}}$. ولذلك
+$\card{\Pow{{\OLId{latin-looped}{A}}}} = \card{\funfromto{\card{{\OLId{latin-looped}{A}}}}{{\OLMathNumeral{2}}}} =
+\cardexpo{{\OLMathNumeral{2}}}{\card{{\OLId{latin-looped}{A}}}}$.
+\end{proof}
+
+وهذا البرهان الوجيز يجمع في باطنه بحث
+\olref[sfr][siz][red-alt]{sec}. فقد رددنا هنالك عدم قابلية
+$\Pow{\omega}$ للعد إلى عدم قابلية مجموعة السلاسل الثنائية غير
+المتناهية~$\Bin^\omega$. وليست~$\Bin^{\omega}$ إلا
+$\funfromto{\omega}{{\OLMathNumeral{2}}}$. وقد ظهر الآن أن مسلك الاستدلال في
+\olref[sfr][siz][red-alt]{sec} نفسه يصح إذا عوضنا أي مجموعة~${\OLId{latin-looped}{A}}$
+عن~$\omega$. وتفيد النتيجة أيضًا حقيقة قريبة عن أس
+الكاردينالات.
+
+\begin{cor}\ollabel{cantorcor}
+لكل كاردينال~$\cardfont{{\OLId{latin-ordinary}{a}}}$،
+$\cardfont{{\OLId{latin-ordinary}{a}}} < \cardexpo{{\OLMathNumeral{2}}}{\cardfont{{\OLId{latin-ordinary}{a}}}}$.
+\end{cor}
+
+\begin{proof}
+ذلك من مبرهنة كانتور~(\olref[sfr][siz][car]{thm:cantor}) ومن
+\olref{lem:SizePowerset2Exp}.
+\end{proof}
+\noindent
+إذن~$\omega < \cardexpo{{\OLMathNumeral{2}}}{\omega}$. وهذا حكم في أس
+\emph{الكاردينالات}؛ فقابله بأس \emph{الأعداد الترتيبية}، حيث
+$\omega = \ordexpo{{\OLMathNumeral{2}}}{\omega}$؛ انظر
+\olref[ord-arithmetic][expo]{sec}.
+
+وبمناسبة أس الكاردينالات يمكن أن نضبط أكثر الوجه الذي تكون به
+$\Real$ !!{nonenumerable}.
+
+\begin{thm}\ollabel{continuumis2aleph0}
+$\card{\Real} = \cardexpo{{\OLMathNumeral{2}}}{\omega}$.
+\end{thm}
+
+\begin{proof}[مخطط البرهان]
+لهذا براهين كثيرة. وأقربها أن نثبت
+$\cardle{\Pow{\omega}}{\Real}$ و$\cardle{\Real}{\Pow{\omega}}$، ثم
+نستعمل شرودر--برنشتاين فنحصل على
+$\cardeq{\Real}{\Pow{\omega}}$، ثم
+\olref[card-arithmetic][opps]{lem:SizePowerset2Exp} فنستنتج
+$\card{\Real} = \cardexpo{{\OLMathNumeral{2}}}{\omega}$. ويبقى تمرين نافع: عرّف
+دالتين حقنيتين~${\OLId{latin-ordinary}{f}} \colon \Pow{\omega} \to \Real$ و
+${\OLId{latin-ordinary}{g}} \colon \Real \to \Pow{\omega}$.
+\end{proof}
+
+\begin{prob}
+أكمل برهان~\olref[sth][card-arithmetic][opps]{continuumis2aleph0} بإظهار
+أن~$\cardle{\Pow{\omega}}{\Real}$ و
+$\cardle{\Real}{\Pow{\omega}}$.
+\end{prob}
+
+\end{document}

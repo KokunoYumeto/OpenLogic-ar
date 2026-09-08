@@ -1,0 +1,70 @@
+% Part: sets-functions-relations
+% Chapter: functions
+% Section: partial-functions
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+
+\begin{document}
+
+\olfileid[ar]{sfr}{fun}{par}
+
+\olsection{الدوال الجزئية}
+
+\begin{explain}
+قد ينفع إسقاط شرط من تعريف الدالة، فلا نوجب وجود مخرج لكل مدخل
+ممكن. والتعيينات التي تجوز عند هذا التخفيف تسمى \emph{دوالًا جزئية}.
+\end{explain}
+
+\begin{defn}
+\emph{الدالة الجزئية} ${\OLId{latin-ordinary}{f}} \colon {\OLId{latin-looped}{A}} \pto {\OLId{latin-looped}{B}}$ تعيين يجعل لكل
+!!{element} من~${\OLId{latin-looped}{A}}$ ما لا يزيد على !!{element} واحد من~${\OLId{latin-looped}{B}}$.
+فإن عيّنت ${\OLId{latin-ordinary}{f}}$ عنصرًا من~${\OLId{latin-looped}{B}}$ للمدخل ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}$، كانت ${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}})$
+\emph{معرّفة}، وإلا كانت \emph{غير معرّفة}. ونكتب في الحال الأولى،
+إذا تعينت ${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}})$، الرمز ${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}}) \fdefined$، وفي الأخرى ${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}}) \fundefined$.
+و\emph{مجال} الجزئية~${\OLId{latin-ordinary}{f}}$ ما عُرّفت عليه من~${\OLId{latin-looped}{A}}$، أي
+$\dom{{\OLId{latin-ordinary}{f}}} = \Setabs{{\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}}{{\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}}) \fdefined}$.
+\end{defn}
+
+\begin{ex}
+كل دالة ${\OLId{latin-ordinary}{f}}\colon {\OLId{latin-looped}{A}} \to {\OLId{latin-looped}{B}}$ جزئية أيضًا. والجزئية التي تعرّف على~${\OLId{latin-looped}{A}}$
+كلها، وهي ما سميناه إلى الآن دالة فحسب، تسمى دالة \emph{كلية}.
+\end{ex}
+
+\begin{ex}
+خذ الجزئية ${\OLId{latin-ordinary}{f}} \colon \Real \pto \Real$ المحددة بـ${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}}) = {\OLMathNumeral{1}}/{\OLId{latin-ordinary}{x}}$؛
+فهي لا تعرّف عند ${\OLId{latin-ordinary}{x}} = {\OLMathNumeral{0}}$، وتعرّف في كل ما سواه.
+\end{ex}
+
+\begin{prob}
+خذ ${\OLId{latin-ordinary}{f}}\colon {\OLId{latin-looped}{A}} \pto {\OLId{latin-looped}{B}}$، واجعل ${\OLId{latin-ordinary}{g}}\colon {\OLId{latin-looped}{B}} \pto {\OLId{latin-looped}{A}}$ جزئية على الوجه
+الآتي: لكل ${\OLId{latin-ordinary}{y}} \in {\OLId{latin-looped}{B}}$، إن وجد ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}$ وحيد يحقق ${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}}) = {\OLId{latin-ordinary}{y}}$
+ضع ${\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{y}}) = {\OLId{latin-ordinary}{x}}$، وإلا فـ${\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{y}}) \fundefined$. أثبت أنه إذا كانت
+${\OLId{latin-ordinary}{f}}$ متباينة، كان ${\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}})) = {\OLId{latin-ordinary}{x}}$ لكل ${\OLId{latin-ordinary}{x}} \in \dom{{\OLId{latin-ordinary}{f}}}$،
+و${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{y}})) = {\OLId{latin-ordinary}{y}}$ لكل ${\OLId{latin-ordinary}{y}} \in \ran{{\OLId{latin-ordinary}{f}}}$.
+\end{prob}
+
+\begin{defn}[الرسم البياني لدالة جزئية]
+للدالة الجزئية ${\OLId{latin-ordinary}{f}}\colon {\OLId{latin-looped}{A}} \pto {\OLId{latin-looped}{B}}$ \emph{رسم بياني} للدالة~${\OLId{latin-ordinary}{f}}$، وهو العلاقة
+${\OLId{latin-looped}{R}}_{\OLId{latin-ordinary}{f}} \subseteq {\OLId{latin-looped}{A}} \times {\OLId{latin-looped}{B}}$ ذات التعريف
+\[
+{\OLId{latin-looped}{R}}_{\OLId{latin-ordinary}{f}} = \Setabs{\tuple{{\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}}}}{{\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}}) = {\OLId{latin-ordinary}{y}}}.
+\]
+\end{defn}
+
+\begin{prop}
+لتكن ${\OLId{latin-looped}{R}} \subseteq {\OLId{latin-looped}{A}} \times {\OLId{latin-looped}{B}}$ بحيث لا يجتمع $Rxy$ و$Rxy'$ إلا مع
+${\OLId{latin-ordinary}{y}} = {\OLId{latin-ordinary}{y}}'$. فتكون ${\OLId{latin-looped}{R}}$ رسم الجزئية ${\OLId{latin-ordinary}{f}}\colon {\OLId{latin-looped}{A}} \pto {\OLId{latin-looped}{B}}$ التي نعرّفها:
+إن وجد ${\OLId{latin-ordinary}{y}}$ مع $Rxy$ وضعنا ${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}}) = {\OLId{latin-ordinary}{y}}$، وإلا فـ${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}}) \fundefined$.
+فإن كانت ${\OLId{latin-looped}{R}}$ \emph{تسلسلية} أيضًا، أي لكل ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}$ يوجد
+${\OLId{latin-ordinary}{y}} \in {\OLId{latin-looped}{B}}$ يحقق $Rxy$، كانت ${\OLId{latin-ordinary}{f}}$ كلية.
+\end{prop}
+
+\begin{proof}
+افرض وجود ${\OLId{latin-ordinary}{y}}$ بحيث $Rxy$. فلا يجوز وجود ${\OLId{latin-ordinary}{y}}' \neq {\OLId{latin-ordinary}{y}}$ مع $Rxy'$،
+وإلا خولف شرط~${\OLId{latin-looped}{R}}$. فمتى وجد ${\OLId{latin-ordinary}{y}}$ يحقق $Rxy$ كان هذا ${\OLId{latin-ordinary}{y}}$ وحيدًا،
+فيصح تعريف ${\OLId{latin-ordinary}{f}}$. ومنه يظهر ${\OLId{latin-looped}{R}}_{\OLId{latin-ordinary}{f}} = {\OLId{latin-looped}{R}}$، وتكون ${\OLId{latin-ordinary}{f}}$ كلية متى
+كانت~${\OLId{latin-looped}{R}}$ تسلسلية.
+\end{proof}
+
+\end{document}

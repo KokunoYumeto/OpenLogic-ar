@@ -1,0 +1,69 @@
+% Part: many-valued-logic
+% Chapter: syntax-and-semantics
+% Section: semantic-notions
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mvl}{syn}{sem}
+
+\olsection{مفاهيم دلالية}
+
+إذا أعطينا منطقًا متعدد القيم~$\Log L$ بمصفوفته، أمكن أن ننقل إليه
+المفاهيم الدلالية المألوفة لـ~$\Log L$ على الوجه الآتي.
+
+\begin{defn}
+\begin{enumerate}
+\item تكون~!!^a{formula}~$!A$ \emph{قابلة للإشباع} إذا وجد
+  $\pAssign{{\OLId{latin-ordinary}{v}}}$ يحقق~$\pSat{{\OLId{latin-ordinary}{v}}}{!A}$؛ وتكون \emph{غير قابلة
+  للإشباع} إذا لم يوجد~$\pAssign{{\OLId{latin-ordinary}{v}}}$ يحقق~$\pSat{{\OLId{latin-ordinary}{v}}}{!A}$؛
+\item وتكون~!!^a{formula}~$!A$ \emph{تحصيلًا منطقيًا} إذا تحقق
+  $\pSat{{\OLId{latin-ordinary}{v}}}{!A}$ لجميع~!!{valuation}s~${\OLId{latin-ordinary}{v}}$؛
+\item وإذا كانت~${\OLId{greek-variable}{Gamma}}$ مجموعة~!!{formula}s، كان
+  ${\OLId{greek-variable}{Gamma}} \Entails !A$، أي «${\OLId{greek-variable}{Gamma}}$ تستلزم~$!A$»، إذا وفقط إذا
+  تحقق~$\pSat{{\OLId{latin-ordinary}{v}}}{!A}$ لكل~!!{valuation}~$\pAssign{{\OLId{latin-ordinary}{v}}}$ يحقق
+  $\pSat{{\OLId{latin-ordinary}{v}}}{{\OLId{greek-variable}{Gamma}}}$.
+\item وإذا كانت~${\OLId{greek-variable}{Gamma}}$ مجموعة~!!{formula}s، كانت~${\OLId{greek-variable}{Gamma}}$
+  \emph{قابلة للإشباع} إذا وجد~!!a{valuation}~$\pAssign{{\OLId{latin-ordinary}{v}}}$ يحقق
+  $\pSat{{\OLId{latin-ordinary}{v}}}{{\OLId{greek-variable}{Gamma}}}$؛ وإلا
+  كانت~${\OLId{greek-variable}{Gamma}}$ \emph{غير قابلة للإشباع}.
+\end{enumerate}
+\end{defn}
+
+ولهذه المفاهيم جملة من الخواص التي عرفناها في المنطق الكلاسيكي:
+
+\begin{prop}
+\ollabel{prop:semanticalfacts}
+\begin{enumerate}
+\item تكون~$!A$ تحصيلًا منطقيًا إذا وفقط إذا كان
+  $\emptyset \Entails !A$؛
+\item إذا كانت~${\OLId{greek-variable}{Gamma}}$ قابلة للإشباع، كانت كل مجموعة جزئية منتهية
+  من~${\OLId{greek-variable}{Gamma}}$ قابلة للإشباع أيضًا؛
+\item\ollabel{def:monotonicity}%
+الرتابة: إذا كان~${\OLId{greek-variable}{Gamma}} \subseteq {\OLId{greek-variable}{Delta}}$ و${\OLId{greek-variable}{Gamma}} \Entails !A$،
+  كان~${\OLId{greek-variable}{Delta}} \Entails !A$ أيضًا؛
+\item\ollabel{def:Cut}%
+التعدي: إذا كان~${\OLId{greek-variable}{Gamma}} \Entails !A$ و
+  ${\OLId{greek-variable}{Delta}} \cup \{ !A\} \Entails !B$، كان
+  ${\OLId{greek-variable}{Gamma}} \cup {\OLId{greek-variable}{Delta}} \Entails !B$؛
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+يترك إثباتها تمرينًا.
+\end{proof}
+
+\begin{prob}
+أثبت \olref[mvl][syn][sem]{prop:semanticalfacts}.
+\end{prob}
+
+في المنطق الكلاسيكي صلات وثيقة بين الاستلزام والشرط. فمنها صحة
+\emph{قاعدة الفصل}: إذا كان~${\OLId{greek-variable}{Gamma}} \Entails !A$ و
+${\OLId{greek-variable}{Gamma}} \Entails !A \lif !B$، لزم~${\OLId{greek-variable}{Gamma}} \Entails !B$.
+ومنها مبرهنة الاستنباط الدلالية التي تصل~$\Entails$ بـ~$\lif$:
+${\OLId{greek-variable}{Gamma}} \Entails !A \lif !B$ إذا وفقط إذا كان
+${\OLId{greek-variable}{Gamma}} \cup \{!A\} \Entails !B$. لكن هذه النتائج \emph{لا} تلزم
+في كل منطق متعدد القيم؛ إذ يتوقف صدقها على دالة الصدق~$\tf{\lif}$.
+
+\end{document}
