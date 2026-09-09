@@ -1,0 +1,92 @@
+% part: intuitionistic-logic
+% chapter: propositions-as-types
+% section: proofs-to-terms
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{pty}{pt}
+
+\olsection{في تحويل \usetoken{P}{derivation} إلى حدود برهان}
+
+عملية تحويل~!!{proof}s الاستنباط الطبيعي إلى حدود برهان، أي ترجمة
+!!{proof}s في~\Log{N2i} إلى~!!{proof}s في~\Log{tN2i}، مباشرة للغاية. فهي
+لا تعدو كتابة حد برهان إلى يسار كل~!!{formula} في يمين متتالية ضمن
+!!{derivation}، فتنتج متتاليات من الصورة~${\OLId{greek-variable}{Gamma}}\Sequent {\OLId{latin-looped}{M}}:!A$. ونقول عندئذ
+إن~${\OLId{latin-looped}{M}}$ \emph{يشهد} لـ~$!A$ في السياق~${\OLId{greek-variable}{Gamma}}$. وتحدد قواعد~\Log{tN2i}
+تمامًا أي حد برهان نكتب.
+
+\begin{prop}
+كل~!!{proof}~$\delta$ للمتتالية~${\OLId{greek-variable}{Gamma}}\Sequent !A$ في~\Log{N2i} يقابل
+!!a{proof}~$\delta'$ للمتتالية~${\OLId{greek-variable}{Gamma}}\Sequent {\OLId{latin-looped}{N}}:!A$ في~\Log{tN2i}.
+ويتحدد حد البرهان~${\OLId{latin-looped}{N}}$ تحديدًا وحيدًا بـ~$\delta$.
+\end{prop}
+
+\begin{proof}
+نستعمل الاستقراء في ارتفاع~$\delta$. فإذا كان~$\delta$ المسلّمة
+${\OLId{latin-ordinary}{x}}:!A\Sequent !A$، كان~$\delta'$ المسلّمة~${\OLId{latin-ordinary}{x}}:!A\Sequent {\OLId{latin-ordinary}{x}}:!A$. وإذا انتهى
+$\delta$ بقاعدة استدلال، وفر فرض الاستقراء حدود برهان لكل مقدمة، و!!{proof}s
+في~\Log{tN2i} لمتتاليات تحتوي حدود البرهان هذه وتقابل كل مقدمة. ونطبق
+القاعدة المقابلة في~\Log{tN2i}؛ فتحدد قاعدة استدلال~\Log{tN2i} حد البرهان
+المقابل.
+\end{proof}
+
+\begin{ex}
+  انظر في هذا~!!{proof} البسيط جدًا في~\Log{N1i} لـ
+  $(!A\land !B)\lif(!B\land !A)$:
+  \[
+  \AxiomC{$\Discharge{!A\land !B}{{\OLId{latin-ordinary}{x}}}$}
+  \RightLabel{\Elim\land[{\OLMathNumeral{2}}]}
+  \UnaryInfC{$!B$}
+  \AxiomC{$\Discharge{!A\land !B}{{\OLId{latin-ordinary}{x}}}$}
+  \RightLabel{\Elim\land[{\OLMathNumeral{1}}]}
+  \UnaryInfC{$!A$}
+  \RightLabel{\Intro\land}
+  \BinaryInfC{$!B \land !A$}
+  \DischargeRule{\Intro\lif}{{\OLId{latin-ordinary}{x}}}
+  \UnaryInfC{$(!A \land !B) \lif (!B \land !A)$}
+  \DisplayProof
+  \]
+  ويبدو في~\Log{N2i} هكذا:
+  \[
+  \Axiom${\OLId{latin-ordinary}{x}} : !A\land !B \fCenter !A\land !B$
+  \RightLabel{\Elim\land[{\OLMathNumeral{2}}]}
+  \UnaryInf${\OLId{latin-ordinary}{x}} : !A\land !B \fCenter !B$
+  \Axiom${\OLId{latin-ordinary}{x}} : !A\land !B \fCenter !A\land !B$
+  \RightLabel{\Elim\land[{\OLMathNumeral{1}}]}
+  \UnaryInf${\OLId{latin-ordinary}{x}} : !A\land !B \fCenter !A$
+  \RightLabel{\Intro\land}
+  \BinaryInf${\OLId{latin-ordinary}{x}} : !A\land !B \fCenter !B \land !A$
+  \RightLabel{\Intro\lif}
+  \UnaryInf$\fCenter (!A \land !B) \lif (!B \land !A)$
+  \DisplayProof
+  \]
+  نسند حدود البرهان من الأعلى إلى الأسفل. فحدا برهان المسلّمتين هما نفس
+  المتغير في السياق، أي~${\OLId{latin-ordinary}{x}}$. ثم يتحدد حدا البرهان المرتبطان بـ
+  $\Elim\land[{\OLId{latin-ordinary}{i}}]$ على أنهما~$\proj{{\OLMathNumeral{2}}}{{\OLId{latin-ordinary}{x}}}$ و$\proj{{\OLMathNumeral{1}}}{{\OLId{latin-ordinary}{x}}}$. وعند تطبيق
+  \Intro{\land} نجمع هذين الحدين:
+  $\pair{\proj{{\OLMathNumeral{2}}}{{\OLId{latin-ordinary}{x}}}}{\proj{{\OLMathNumeral{1}}}{{\OLId{latin-ordinary}{x}}}}$. وأخيرًا تطبق قاعدة~\Intro{\lif}
+  تجريد~$\lambd$، فتقيّد~${\OLId{latin-ordinary}{x}}$ وتسجل أن~${\OLId{latin-ordinary}{x}}$ وسم الفرض~$!A\land !B$:
+  $\lambd[\typeof{{\OLId{latin-ordinary}{x}}}{!A \land
+  !B}][\pair{\proj{{\OLMathNumeral{2}}}{{\OLId{latin-ordinary}{x}}}}{\proj{{\OLMathNumeral{1}}}{{\OLId{latin-ordinary}{x}}}}]$.
+  وعندئذ يكون~!!{proof} في~\Log{tN2i} هو:
+  \[
+  \Axiom${\OLId{latin-ordinary}{x}} : !A\land !B \fCenter {\OLId{latin-ordinary}{x}}: !A\land !B$
+  \RightLabel{\Elim\land[{\OLMathNumeral{2}}]}
+  \UnaryInf${\OLId{latin-ordinary}{x}} : !A\land !B \fCenter \proj{{\OLMathNumeral{2}}}{{\OLId{latin-ordinary}{x}}} : !B$
+  \Axiom${\OLId{latin-ordinary}{x}} : !A\land !B \fCenter {\OLId{latin-ordinary}{x}}: !A\land !B$
+  \RightLabel{\Elim\land[{\OLMathNumeral{1}}]}
+  \UnaryInf${\OLId{latin-ordinary}{x}} : !A\land !B \fCenter \proj{{\OLMathNumeral{1}}}{{\OLId{latin-ordinary}{x}}} : !A$
+  \RightLabel{\Intro\land}
+  \BinaryInf${\OLId{latin-ordinary}{x}} : !A\land !B \fCenter \pair{\proj{{\OLMathNumeral{2}}}{{\OLId{latin-ordinary}{x}}}}{\proj{{\OLMathNumeral{1}}}{{\OLId{latin-ordinary}{x}}}} : 
+    !B \land !A$
+  \RightLabel{\Intro\lif}
+  \UnaryInf$\fCenter \lambd[\typeof{{\OLId{latin-ordinary}{x}}}{!A \land
+  !B}][\pair{\proj{{\OLMathNumeral{2}}}{{\OLId{latin-ordinary}{x}}}}{\proj{{\OLMathNumeral{1}}}{{\OLId{latin-ordinary}{x}}}}] : (!A \land !B) \lif (!B \land !A)$
+  \DisplayProof
+  \]
+\end{ex}
+
+
+\end{document}

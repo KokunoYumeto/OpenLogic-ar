@@ -1,0 +1,69 @@
+% Part: turing-machines
+% Chapter: machines-computations
+% Section: configuration
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{tur}{mac}{con}
+\olsection{التهيئات والحسابات}
+
+\begin{explain}
+قد تتبعنا من قبل تهيئات آلة الزوجية. وما الشريط المتخيل والرأس والبرنامج إلا تصوير حدسي لحساب آلة تورنغ؛ أما حد الحساب الصوري فهو متتالية من \emph{التهيئات}. والتهيئة ثلاثية: سلسلة رموز تمثل محتوى الشريط في وقت من الحساب، وعدد يبين موضع الرأس، وحالة. فبهذه العناصر نضبط ما تحسبه الآلة~${\OLId{latin-looped}{M}}$ على دخل معين.
+\end{explain}
+
+\begin{defn}[التهيئة]
+\emph{تهيئة} آلة تورنغ ${\OLId{latin-looped}{M}}=\tuple{{\OLId{latin-looped}{Q}},\Sigma,{\OLId{latin-ordinary}{q}}_{\OLMathNumeral{0}},\delta}$ ثلاثية $\tuple{{\OLId{latin-looped}{C}},{\OLId{latin-ordinary}{m}},{\OLId{latin-ordinary}{q}}}$ تستوفي:
+\begin{enumerate}
+\item ${\OLId{latin-looped}{C}} \in \Sigma^*$ سلسلة منتهية من رموز $\Sigma$؛
+\item ${\OLId{latin-ordinary}{m}} \in \Nat$ وأصغر من $\len{{\OLId{latin-looped}{C}}}$؛
+\item ${\OLId{latin-ordinary}{q}} \in {\OLId{latin-looped}{Q}}$.
+\end{enumerate}
+ومعنى~${\OLId{latin-looped}{C}}$ في التصوير محتوى الشريط، من أقصى خانة يسارًا إلى آخر خانة غير خالية أو بلغها الرأس من قبل. وأما ${\OLId{latin-ordinary}{m}}$ فرقم الخانة الممسوحة، إذ يبدأ الترقيم بـ${\OLMathNumeral{0}}$ لأقصى اليسار؛ وأما ${\OLId{latin-ordinary}{q}}$ فالحالة الراهنة.
+\end{defn}
+
+\begin{explain}
+دخل الآلة سلسلة رموز، ترمز عادة عددًا على وجه ما. والتهيئة الابتدائية هي وضع الآلة عند الشروع في حساب ذلك الدخل: في أول الشريط علامة طرفه، ويليها الدخل مباشرة إلى اليمين؛ والرأس يمسح أول خانة من الدخل، وهي التي تلي علامة الطرف الأيسر؛ والحالة هي الحالة الابتدائية المعينة~${\OLId{latin-ordinary}{q}}_{\OLMathNumeral{0}}$.
+\end{explain}
+
+\begin{defn}[التهيئة الابتدائية]
+إذا شغلت ${\OLId{latin-looped}{M}}$ على الدخل ${\OLId{latin-looped}{I}} \in \Sigma^*$، فـ\emph{تهيئتها الابتدائية}
+\[
+\tuple{\TMendtape \frown {\OLId{latin-looped}{I}} \frown \TMblank, {\OLMathNumeral{1}}, {\OLId{latin-ordinary}{q}}_{\OLMathNumeral{0}}}.
+\]
+\end{defn}
+
+\begin{explain}
+نستعمل~$\frown$ رمزًا لـ\emph{الوصل}. فسلسلة الدخل تتلو علامة الطرف من جهة اليمين بلا خانة فاصلة.
+\end{explain}
+
+\begin{defn}
+التهيئة $\tuple{{\OLId{latin-looped}{C}},{\OLId{latin-ordinary}{m}},{\OLId{latin-ordinary}{q}}}$ \emph{تنتج $\tuple{{\OLId{latin-looped}{C}}',{\OLId{latin-ordinary}{m}}',{\OLId{latin-ordinary}{q}}'}$ في خطوة واحدة} بحسب~${\OLId{latin-looped}{M}}$ إذا وفقط إذا اجتمعت الشروط:
+\begin{enumerate}
+\item رمز الموضع ${\OLId{latin-ordinary}{m}}$ من ${\OLId{latin-looped}{C}}$ هو $\sigma$؛
+\item تعليمات ${\OLId{latin-looped}{M}}$ تعطي $\delta({\OLId{latin-ordinary}{q}},\sigma)=
+  \tuple{{\OLId{latin-ordinary}{q}}',\sigma',{\OLId{latin-looped}{D}}}$؛
+\item رمز الموضع ${\OLId{latin-ordinary}{m}}$ من ${\OLId{latin-looped}{C}}'$ هو $\sigma'$؛
+\item وتتحقق إحدى الحالات:
+\begin{enumerate}
+\item ${\OLId{latin-looped}{D}}={\OLId{latin-looped}{L}}$، وعندئذ ${\OLId{latin-ordinary}{m}}'={\OLId{latin-ordinary}{m}}-{\OLMathNumeral{1}}$ إن كان ${\OLId{latin-ordinary}{m}}>{\OLMathNumeral{0}}$، وإلا ${\OLId{latin-ordinary}{m}}'={\OLMathNumeral{0}}$؛ أو
+\item ${\OLId{latin-looped}{D}}={\OLId{latin-looped}{R}}$ و${\OLId{latin-ordinary}{m}}'={\OLId{latin-ordinary}{m}}+{\OLMathNumeral{1}}$؛ أو
+\item ${\OLId{latin-looped}{D}}={\OLId{latin-looped}{N}}$ و${\OLId{latin-ordinary}{m}}'={\OLId{latin-ordinary}{m}}$؛
+\end{enumerate}
+\item إن كان ${\OLId{latin-ordinary}{m}}'=\len{{\OLId{latin-looped}{C}}}$، كان $\len{{\OLId{latin-looped}{C}}'}=\len{{\OLId{latin-looped}{C}}}+{\OLMathNumeral{1}}$ ورمز الموضع ${\OLId{latin-ordinary}{m}}'$ من ${\OLId{latin-looped}{C}}'$ هو~$\TMblank$؛ وإلا $\len{{\OLId{latin-looped}{C}}'}=\len{{\OLId{latin-looped}{C}}}$؛
+\item لكل ${\OLId{latin-ordinary}{i}}$ يحقق ${\OLId{latin-ordinary}{i}}<\len{{\OLId{latin-looped}{C}}}$ و${\OLId{latin-ordinary}{i}}\neq {\OLId{latin-ordinary}{m}}$ تبقى ${\OLId{latin-looped}{C}}'({\OLId{latin-ordinary}{i}})={\OLId{latin-looped}{C}}({\OLId{latin-ordinary}{i}})$.
+\end{enumerate}
+\end{defn}
+
+\begin{defn}\ollabel{defn:run-output}
+\emph{تشغيل ${\OLId{latin-looped}{M}}$ على الدخل~${\OLId{latin-looped}{I}}$} متتالية منتهية أو لا نهائية ${\OLId{latin-looped}{C}}_{\OLId{latin-ordinary}{i}}$ من تهيئات ${\OLId{latin-looped}{M}}$؛ أولها ${\OLId{latin-looped}{C}}_{\OLMathNumeral{0}}$ التهيئة الابتدائية لـ${\OLId{latin-looped}{M}}$ على~${\OLId{latin-looped}{I}}$، وكل ${\OLId{latin-looped}{C}}_{\OLId{latin-ordinary}{i}}$ تنتج ${\OLId{latin-looped}{C}}_{{\OLId{latin-ordinary}{i}}+{\OLMathNumeral{1}}}$ في خطوة واحدة متى وجدت ${\OLId{latin-looped}{C}}_{{\OLId{latin-ordinary}{i}}+{\OLMathNumeral{1}}}$. وإذا انتهت المتتالية، لم تنتج تهيئتها الأخيرة تهيئة أخرى في خطوة واحدة.
+
+وتكون ${\OLId{latin-looped}{M}}$ \emph{متوقفة على الدخل ${\OLId{latin-looped}{I}}$ بعد ${\OLId{latin-ordinary}{k}}$ خطوات} إذا انتهى تشغيلها إلى ${\OLId{latin-looped}{C}}_{\OLId{latin-ordinary}{k}}=\tuple{{\OLId{latin-looped}{C}},{\OLId{latin-ordinary}{m}},{\OLId{latin-ordinary}{q}}}$، وكان رمز الموضع ${\OLId{latin-ordinary}{m}}$ من~${\OLId{latin-looped}{C}}$ هو $\sigma$، ولم تكن $\delta({\OLId{latin-ordinary}{q}},\sigma)$ معرفة. وحينئذ \emph{خرج}~${\OLId{latin-looped}{M}}$ على~${\OLId{latin-looped}{I}}$ هو~${\OLId{latin-looped}{O}}$، حيث ${\OLId{latin-looped}{O}}$ سلسلة لا تنتهي بـ~$\TMblank$ وتحقق ${\OLId{latin-looped}{C}}=\TMendtape\concat {\OLId{latin-looped}{O}}\concat\TMblank^{\OLId{latin-ordinary}{j}}$ لبعض ${\OLId{latin-ordinary}{j}} \in \Nat$. ومعنى $\TMblank^{\OLId{latin-ordinary}{j}}$ سلسلة من ${\OLId{latin-ordinary}{j}}$ رموز كلها $\TMblank$.
+\end{defn}
+
+\begin{explain}
+فخرج~${\OLId{latin-looped}{O}}$ للآلة~${\OLId{latin-looped}{M}}$ إما منته برمز غير~$\TMblank$، وإما أن يكون ${\OLId{latin-looped}{O}}$ خاليًا؛ وهذه الحالة الثانية إذا كان الشريط عند الزمن~${\OLId{latin-ordinary}{k}}$ كله~$\TMblank$، سوى $\TMendtape$ في أقصى اليسار.
+\end{explain}
+
+\end{document}

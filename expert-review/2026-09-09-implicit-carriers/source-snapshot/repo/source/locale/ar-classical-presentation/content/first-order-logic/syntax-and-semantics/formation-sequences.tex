@@ -1,0 +1,263 @@
+% Part: first-order-logic
+% Chapter: syntax-and-semantics
+% Section: formation-sequences
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{syn}{fseq}
+
+\olsection{متواليات التكوين}
+
+تعريف ال!!{formula}s بالاستقراء، وإثبات خواص ال!!{formula}s
+بطريق الاستقراء المقابل له، مسلك محكم موجز. وقد ينفع، مع ذلك،
+أن نتتبّع بناء ال!!{formula}s من أصولها خطوةً بعد خطوة.
+ولهذا نضع هنا معنى \emph{متوالية التكوين}.
+%
+ولبيان أن الحدود وال!!{formula}s يمكن إدخالها بهذا المسلك من غير
+رجوع إلى التعريفين الاستقرائيين، نبدأ بسلسلة اعتباطية من رموز
+لغة~$\Lang L$.
+
+\begin{defn}[السلاسل]
+\ollabel{defn:string}
+لتكن $\Lang L$ لغة من الرتبة الأولى. \emph{سلسلة~$\Lang L$} هي
+متوالية منتهية من رموز~$\Lang L$. فإذا دل السياق على اللغة~$\Lang L$ دلالة واضحة، اكتفينا في الغالب
+بتسمية سلسلة~$\Lang L$ \emph{سلسلة}.
+\end{defn}
+
+\begin{ex}
+لكل لغة رتبة أولى~$\Lang L$، جميع
+!!{formula}s-$\Lang L$ هي سلاسل~$\Lang L$، لكن العكس غير صحيح.
+فمثلًا، \[)(\Obj v_{\OLMathNumeral{0}}\lif\lexists\] سلسلة~$\Lang L$، لكنها ليست
+!!{formula}-$\Lang L$.
+\end{ex}
+
+\begin{defn}[متواليات تكوين الحدود]
+\ollabel{defn:fseq-trm}
+تكون المتوالية المنتهية من سلاسل~$\Lang L$
+$\tuple{{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{0}},\dotsc,{\OLId{latin-ordinary}{t}}_{\OLId{latin-ordinary}{n}}}$ \emph{متوالية تكوين} لحد~${\OLId{latin-ordinary}{t}}$ إذا كان
+${\OLId{latin-ordinary}{t}} \ident {\OLId{latin-ordinary}{t}}_{\OLId{latin-ordinary}{n}}$، وكان، لكل ${\OLId{latin-ordinary}{i}} \leq {\OLId{latin-ordinary}{n}}$، إما أن ${\OLId{latin-ordinary}{t}}_{\OLId{latin-ordinary}{i}}$ !!a{variable}
+أو !!a{constant}، وإما أن تحتوي $\Lang L$ !!{function} ذات
+${\OLId{latin-ordinary}{k}}$ مواضع~${\OLId{latin-ordinary}{f}}$ وتوجد ${\OLId{latin-ordinary}{m}}_{\OLMathNumeral{1}},\dotsc,{\OLId{latin-ordinary}{m}}_{\OLId{latin-ordinary}{k}} < {\OLId{latin-ordinary}{i}}$ بحيث
+${\OLId{latin-ordinary}{t}}_{\OLId{latin-ordinary}{i}} \ident {\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{t}}_{{\OLId{latin-ordinary}{m}}_{\OLMathNumeral{1}}},\dotsc,{\OLId{latin-ordinary}{t}}_{{\OLId{latin-ordinary}{m}}_{\OLId{latin-ordinary}{k}}})$. وحين يلزم التمييز، سنسمي
+متواليات التكوين للحدود \emph{متواليات تكوين الحدود}.
+\end{defn}
+
+\begin{ex}
+المتوالية
+\[
+    \tuple{\Obj c_{\OLMathNumeral{0}}, \Obj v_{\OLMathNumeral{0}}, \Atom{\Obj f^2_0}{\Obj c_0, \Obj v_0}, \Atom{\Obj f^1_0}{\Atom{\Obj f^2_0}{\Obj c_0, \Obj v_0}}}
+\]
+متوالية تكوين للحد~$\Atom{\Obj f^1_0}{\Atom{\Obj
+f^2_0}{\Obj c_0, \Obj v_0}}$، وكذلك المتوالية
+\[
+    \tuple{\Obj v_{\OLMathNumeral{0}}, \Obj c_{\OLMathNumeral{0}}, \Atom{\Obj f^2_0}{\Obj c_0, \Obj v_0}, \Atom{\Obj f^1_0}{\Atom{\Obj f^2_0}{\Obj c_0, \Obj v_0}}}.
+\]
+\end{ex}
+
+\begin{defn}[متواليات تكوين الصيغ]
+\ollabel{defn:fseq-frm}
+تكون المتوالية المنتهية من سلاسل~$\Lang L$
+$\tuple{!A_{\OLMathNumeral{0}},\dotsc,!A_{\OLId{latin-ordinary}{n}}}$ \emph{متوالية تكوين} لـ~$!A$ إذا كان
+$!A \ident !A_{\OLId{latin-ordinary}{n}}$، وكان، لكل ${\OLId{latin-ordinary}{i}} \leq {\OLId{latin-ordinary}{n}}$، إما أن $!A_{\OLId{latin-ordinary}{i}}$
+!!{formula} ذرية، وإما أن يوجد ${\OLId{latin-ordinary}{j}},{\OLId{latin-ordinary}{k}} < {\OLId{latin-ordinary}{i}}$ و!!a{variable}~${\OLId{latin-ordinary}{x}}$ بحيث
+يتحقق أحد ما يأتي:
+\begin{enumerate}
+    \tagitem{prvNot}{$!A_{\OLId{latin-ordinary}{i}} \ident \lnot !A_{\OLId{latin-ordinary}{j}}$.}{}%
+    \tagitem{prvAnd}{$!A_{\OLId{latin-ordinary}{i}} \ident (!A_{\OLId{latin-ordinary}{j}} \land !A_{\OLId{latin-ordinary}{k}})$.}{}%
+    \tagitem{prvOr}{$!A_{\OLId{latin-ordinary}{i}} \ident (!A_{\OLId{latin-ordinary}{j}} \lor !A_{\OLId{latin-ordinary}{k}})$.}{}%
+    \tagitem{prvIf}{$!A_{\OLId{latin-ordinary}{i}} \ident (!A_{\OLId{latin-ordinary}{j}} \lif !A_{\OLId{latin-ordinary}{k}})$.}{}%
+    \tagitem{prvIff}{$!A_{\OLId{latin-ordinary}{i}} \ident (!A_{\OLId{latin-ordinary}{j}} \liff !A_{\OLId{latin-ordinary}{k}})$.}{}%
+    \tagitem{prvAll}{$!A_{\OLId{latin-ordinary}{i}} \ident \lforall[{\OLId{latin-ordinary}{x}}][!A_{\OLId{latin-ordinary}{j}}]$.}{}%
+    \tagitem{prvEx}{$!A_{\OLId{latin-ordinary}{i}} \ident \lexists[{\OLId{latin-ordinary}{x}}][!A_{\OLId{latin-ordinary}{j}}]$.}{}%
+\end{enumerate}
+وحين يلزم التمييز، سنسمي متواليات التكوين للصيغ
+\emph{متواليات تكوين الصيغ}.
+\end{defn}
+
+\begin{ex}
+\[
+\tuple{
+    \Atom{\Obj A^1_0}{\Obj v_0},
+    \Atom{\Obj A^1_1}{\Obj c_1},
+    (\Atom{\Obj A^1_1}{\Obj c_1} \land \Atom{\Obj A^1_0}{\Obj v_0}),
+    \lexists[\Obj v_{\OLMathNumeral{0}}][(\Atom{\Obj A^1_1}{\Obj c_1} \land \Atom{\Obj A^1_0}{\Obj v_0})]
+}
+\]
+متوالية تكوين لـ~$\lexists[\Obj v_{\OLMathNumeral{0}}][(\Atom{\Obj A^1_1}{\Obj
+c_1} \land \Atom{\Obj A^1_0}{\Obj v_0})]$، وكذلك
+\begin{multline*}
+\tuple{
+    \Atom{\Obj A^1_0}{\Obj v_0},
+    \Atom{\Obj A^1_1}{\Obj c_1},
+    (\Atom{\Obj A^1_1}{\Obj c_1} \land \Atom{\Obj A^1_0}{\Obj v_0}),
+    \Atom{\Obj A^1_1}{\Obj c_1},\\
+    \lforall[\Obj v_{\OLMathNumeral{1}}][\Atom{\Obj A^1_0}{\Obj v_0}],
+    \lexists[\Obj v_{\OLMathNumeral{0}}][(\Atom{\Obj A^1_1}{\Obj c_1} \land \Atom{\Obj A^1_0}{\Obj v_0})]
+}.
+\end{multline*}
+%
+وفي المثال الثاني بيان جواز «الحشو» في متوالية التكوين؛ أعني
+!!{formula}s تتكرر بلا حاجة، أو لا مدخل لها في البناء.
+\end{ex}
+
+\begin{prop}\ollabel{prop:formed}
+لكل !!{formula}~$!A$ في~$\Frm[{\OLId{latin-looped}{L}}]$ متوالية تكوين.
+\end{prop}
+
+\begin{proof}
+إن كانت $!A$ ذرية، كفت المتوالية $\tuple{!A}$ لتكون متوالية
+تكوين لـ~$!A$.
+%
+ولنفرض بعد ذلك أن لـ~$!B$ و$!C$ متواليتي التكوين
+$\tuple{!B_{\OLMathNumeral{0}},\dotsc,!B_{\OLId{latin-ordinary}{n}}}$ و$\tuple{!C_{\OLMathNumeral{0}},\dotsc,!C_{\OLId{latin-ordinary}{m}}}$ على
+التوالي.
+%
+\begin{enumerate}
+  \tagitem{prvNot}{إذا كان $!A \ident \lnot !B$،
+      فإن $\tuple{!B_{\OLMathNumeral{0}},\dotsc,!B_{\OLId{latin-ordinary}{n}},\lnot !B_{\OLId{latin-ordinary}{n}}}$
+      متوالية تكوين لـ~$!A$.}{}
+  \tagitem{prvAnd}{إذا كان $!A \ident (!B \land !C)$،
+      فإن $\tuple{!B_{\OLMathNumeral{0}},\dotsc,!B_{\OLId{latin-ordinary}{n}},!C_{\OLMathNumeral{0}},\dotsc,!C_{\OLId{latin-ordinary}{m}},(!B_{\OLId{latin-ordinary}{n}} \land !C_{\OLId{latin-ordinary}{m}})}$
+      متوالية تكوين لـ~$!A$.}{}
+  \tagitem{prvOr}{إذا كان $!A \ident (!B \lor !C)$،
+      فإن $\tuple{!B_{\OLMathNumeral{0}},\dotsc,!B_{\OLId{latin-ordinary}{n}},!C_{\OLMathNumeral{0}},\dotsc,!C_{\OLId{latin-ordinary}{m}},(!B_{\OLId{latin-ordinary}{n}} \lor !C_{\OLId{latin-ordinary}{m}})}$
+      متوالية تكوين لـ~$!A$.}{}
+  \tagitem{prvIf}{إذا كان $!A \ident (!B \lif !C)$،
+      فإن $\tuple{!B_{\OLMathNumeral{0}},\dotsc,!B_{\OLId{latin-ordinary}{n}},!C_{\OLMathNumeral{0}},\dotsc,!C_{\OLId{latin-ordinary}{m}},(!B_{\OLId{latin-ordinary}{n}} \lif !C_{\OLId{latin-ordinary}{m}})}$
+      متوالية تكوين لـ~$!A$.}{}
+  \tagitem{prvIff}{إذا كان $!A \ident (!B \liff !C)$،
+      فإن $\tuple{!B_{\OLMathNumeral{0}},\dotsc,!B_{\OLId{latin-ordinary}{n}},!C_{\OLMathNumeral{0}},\dotsc,!C_{\OLId{latin-ordinary}{m}},(!B_{\OLId{latin-ordinary}{n}} \liff !C_{\OLId{latin-ordinary}{m}})}$
+      متوالية تكوين لـ~$!A$.}{}
+  \tagitem{prvAll}{إذا كان $!A \ident \lforall[{\OLId{latin-ordinary}{x}}][!B]$،
+      فإن $\tuple{!B_{\OLMathNumeral{0}},\dotsc,!B_{\OLId{latin-ordinary}{n}},\lforall[{\OLId{latin-ordinary}{x}}][!B_{\OLId{latin-ordinary}{n}}]}$
+      متوالية تكوين لـ~$!A$.}{}
+  \tagitem{prvEx}{إذا كان $!A \ident \lexists[{\OLId{latin-ordinary}{x}}][!B]$،
+      فإن $\tuple{!B_{\OLMathNumeral{0}},\dotsc,!B_{\OLId{latin-ordinary}{n}},\lexists[{\OLId{latin-ordinary}{x}}][!B_{\OLId{latin-ordinary}{n}}]}$
+      متوالية تكوين لـ~$!A$.}{}
+\end{enumerate}
+فثبت، بمبدأ الاستقراء على ال!!{formula}s، أن لكل !!{formula}
+متوالية تكوين.
+\end{proof}
+
+ويثبت العكس أيضًا؛ وبه يتبيّن أن الطريقين إلى تعريف الصيغ
+متكافئان، فما يثبت كونه صيغة بأحدهما يثبت بالآخر. ومن ثمرات ذلك
+أن البرهان على خواص الصيغ يمكن أن يجري بالاستقراء المعتاد على
+أطوال متواليات التكوين.
+
+\begin{lem}
+\ollabel{lem:fseq-init}
+افترض أن $\tuple{!A_{\OLMathNumeral{0}},\dotsc,!A_{\OLId{latin-ordinary}{n}}}$ متوالية تكوين لـ~$!A_{\OLId{latin-ordinary}{n}}$، وأن
+${\OLId{latin-ordinary}{k}} \leq {\OLId{latin-ordinary}{n}}$. عندئذ تكون $\tuple{!A_{\OLMathNumeral{0}},\dotsc,!A_{\OLId{latin-ordinary}{k}}}$ متوالية تكوين
+لـ~$!A_{\OLId{latin-ordinary}{k}}$.
+\end{lem}
+
+\begin{proof}
+تمرين.
+\end{proof}
+
+\begin{prob}
+أثبت \olref[fol][syn][fseq]{lem:fseq-init}.
+\end{prob}
+
+\begin{thm}
+\ollabel{thm:fseq-frm-equiv}
+$\Frm[{\OLId{latin-looped}{L}}]$ هي مجموعة جميع سلاسل~$\Lang L$، $!A$، التي توجد لها
+متوالية تكوين صيغ لـ~$!A$.
+\end{thm}
+
+\begin{proof}
+لتكن ${\OLId{latin-looped}{F}}$ مجموعة سلاسل الرموز في اللغة~$\Lang L$ التي لها
+متواليات تكوين. وقد ثبت في
+\olref[fol][syn][fseq]{prop:formed} أن $\Frm[{\OLId{latin-looped}{L}}] \subseteq {\OLId{latin-looped}{F}}$؛
+فالمطلوب الآن إثبات الاحتواء الآخر.
+
+لنفرض أن لـ~$!A$ متوالية التكوين
+$\tuple{!A_{\OLMathNumeral{0}},\dotsc,!A_{\OLId{latin-ordinary}{n}}}$. نثبت أن $!A \in \Frm[{\OLId{latin-looped}{L}}]$ بالاستقراء
+القوي على~${\OLId{latin-ordinary}{n}}$. ونفرض في الاستقراء أن كل سلسلة رموز لها متوالية
+تكوين يكون فهرسها الأخير ${\OLId{latin-ordinary}{m}} < {\OLId{latin-ordinary}{n}}$ تنتمي إلى~$\Frm[{\OLId{latin-looped}{L}}]$. وبحسب تعريف
+متوالية التكوين، إما أن تكون $!A_{\OLId{latin-ordinary}{n}}$ ذرية، وإما أن يوجد ${\OLId{latin-ordinary}{j}},{\OLId{latin-ordinary}{k}} < {\OLId{latin-ordinary}{n}}$
+و!!a{variable}~${\OLId{latin-ordinary}{x}}$ بحيث تصدق إحدى الحالات الآتية:
+\begin{enumerate}
+    \tagitem{prvNot}{$!A \ident \lnot !A_{\OLId{latin-ordinary}{j}}$.}{}%
+    \tagitem{prvAnd}{$!A \ident (!A_{\OLId{latin-ordinary}{j}} \land !A_{\OLId{latin-ordinary}{k}})$.}{}%
+    \tagitem{prvOr}{$!A \ident (!A_{\OLId{latin-ordinary}{j}} \lor !A_{\OLId{latin-ordinary}{k}})$.}{}%
+    \tagitem{prvIf}{$!A \ident (!A_{\OLId{latin-ordinary}{j}} \lif !A_{\OLId{latin-ordinary}{k}})$.}{}%
+    \tagitem{prvIff}{$!A \ident (!A_{\OLId{latin-ordinary}{j}} \liff !A_{\OLId{latin-ordinary}{k}})$.}{}%
+    \tagitem{prvAll}{$!A \ident \lforall[{\OLId{latin-ordinary}{x}}][!A_{\OLId{latin-ordinary}{j}}]$.}{}%
+    \tagitem{prvEx}{$!A \ident \lexists[{\OLId{latin-ordinary}{x}}][!A_{\OLId{latin-ordinary}{j}}]$.}{}%
+\end{enumerate}
+ثم نفصّل الحالات. فإذا كانت $!A$ ذرية، كان
+$!A_{\OLId{latin-ordinary}{n}} \in \Frm[{\OLId{latin-looped}{L}}]$. وإن فرضنا أن
+$!A \ident (!A_{\OLId{latin-ordinary}{j}} \land !A_{\OLId{latin-ordinary}{k}})$. بحسب
+\olref[fol][syn][fseq]{lem:fseq-init}،
+تكون $\tuple{!A_{\OLMathNumeral{0}},\dotsc,!A_{\OLId{latin-ordinary}{j}}}$ و$\tuple{!A_{\OLMathNumeral{0}},\dotsc,!A_{\OLId{latin-ordinary}{k}}}$
+متواليتي تكوين لـ~$!A_{\OLId{latin-ordinary}{j}}$ و$!A_{\OLId{latin-ordinary}{k}}$، على التوالي. ولما كانت كل منهما جزءًا ابتدائيًا حقيقيًا من متوالية تكوين~$!A$،
+كان آخر فهرس فيها أصغر من~${\OLId{latin-ordinary}{n}}$. فتنتمي $!A_{\OLId{latin-ordinary}{j}}$ و$!A_{\OLId{latin-ordinary}{k}}$، بفرضية
+الاستقراء، إلى~$\Frm[{\OLId{latin-looped}{L}}]$، وينتمي كذلك، بحسب تعريف !!a{formula}،
+$(!A_{\OLId{latin-ordinary}{j}} \land !A_{\OLId{latin-ordinary}{k}})$. وعلى هذا الوجه يثبت سائر الحالات.
+\end{proof}
+
+ولمتواليات تكوين الحدود نظائر ما ثبت لمتواليات تكوين
+ال!!{formula}s من الخواص.
+
+\begin{prop}
+\ollabel{prop:fseq-trm-equiv}
+$\Trm[{\OLId{latin-looped}{L}}]$ هي مجموعة جميع سلاسل~$\Lang L$، ${\OLId{latin-ordinary}{t}}$، التي توجد لها
+متوالية تكوين حدود لـ~${\OLId{latin-ordinary}{t}}$.
+\end{prop}
+
+\begin{proof}
+تمرين.
+\end{proof}
+
+\begin{prob}
+أثبت \olref[fol][syn][fseq]{prop:fseq-trm-equiv}.
+وللاستعانة: اسلك نظير المسلك المتقدّم في برهان
+\olref[fol][syn][fseq]{thm:fseq-frm-equiv}.
+\end{prob}
+
+والحشو في متواليات التكوين على ضربين: تكرار عنصر، وإيراد عنصر
+لا مدخل له في بناء الصيغة أو الحد. ونزيل الضربين جميعًا باختيار
+متواليات التكوين الصغرى.
+
+\begin{defn}[متواليات التكوين الصغرى]
+\ollabel{defn:minimal-fseq}
+تكون متوالية التكوين $\tuple{!A_{\OLMathNumeral{0}}, \ldots, !A_{\OLId{latin-ordinary}{n}}}$ لصيغة~$!A$
+\emph{متوالية تكوين صغرى} لـ~$!A$ إذا كان، لكل متوالية تكوين
+أخرى~${\OLId{latin-ordinary}{s}}$ لـ~$!A$، طول~${\OLId{latin-ordinary}{s}}$ أكبر من أو يساوي~${\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}}$.
+
+وبالمثل، تكون متوالية التكوين $\tuple{{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{0}}, \ldots, {\OLId{latin-ordinary}{t}}_{\OLId{latin-ordinary}{n}}}$
+لحد~${\OLId{latin-ordinary}{t}}$ \emph{متوالية تكوين صغرى} لـ~${\OLId{latin-ordinary}{t}}$ إذا كان، لكل متوالية
+تكوين أخرى~${\OLId{latin-ordinary}{s}}$ لـ~${\OLId{latin-ordinary}{t}}$، طول~${\OLId{latin-ordinary}{s}}$ أكبر من أو يساوي~${\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}}$.
+\end{defn}
+
+وقد تتعدد متواليات التكوين الصغرى لصيغة واحدة أو حد واحد،
+غير أن السلاسل التي تشتمل عليها واحدة بعينها.
+
+\begin{prop}
+\ollabel{prop:subformula-equivs}
+الشروط الآتية متكافئة:
+\begin{enumerate}
+    \item $!B$ !!{subformula} من~$!A$.
+    \item ترد $!B$ في كل متوالية تكوين لـ~$!A$.
+    \item ترد $!B$ في متوالية تكوين صغرى لـ~$!A$.
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+تمرين.
+\end{proof}
+
+\begin{prob}
+أثبت \olref[fol][syn][fseq]{prop:subformula-equivs}.
+\end{prob}
+
+\begin{history}
+وأصل متواليات التكوين عند ريموند سموليان في كتابه
+\emph{First-Order Logic} \citep{Smullyan1968}.
+وأثبت \citet{Zuckerman1973} خصائص إضافية لمتواليات التكوين.
+\end{history}
+
+\end{document}

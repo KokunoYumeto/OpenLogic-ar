@@ -1,0 +1,174 @@
+% Part: model-theory
+% Chapter: models-of-arithmetic
+% Section: standard-models
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{mar}{stm}
+\olsection{نماذج الحساب القياسية}
+
+إنما وُضعت لغة الحساب~$\Lang{L_A}$ للكلام في الأعداد الطبيعية.
+ولهذا اختص «النموذج» القياسي $\Struct{N}$ بمنزلة، إذ هو المقصود
+أولًا بالحديث. غير أن نظرنا في المنطق كثيرًا ما يتعلق بالخواص
+البنيوية وحدها؛ فإذا تشاكلت اثنتان من ال!!{structure}s
+اتفقتا في تلك الخواص. فلنا إذن أن نوسّع الاصطلاح، ونسمي كل !!{structure} تتشاكل
+مع~$\Struct{N}$ «قياسية».
+
+\begin{defn}
+تكون !!{structure} للغة $\Lang{L_A}$ \emph{قياسية} إذا كانت متشاكلة
+مع~$\Struct{N}$.
+\end{defn}
+
+\begin{prop}
+\ollabel{prop:standard-domain} إذا كانت !!a{structure}~$\Struct{M}$
+قياسية، فإن مجالها مجموعة قيم الأعداد القياسية، أي:
+\[
+\Domain{{\OLId{latin-looped}{M}}} = \Setabs{\Value{\num{{\OLId{latin-ordinary}{n}}}}{{\OLId{latin-looped}{M}}}}{{\OLId{latin-ordinary}{n}} \in \Nat}
+\]
+\end{prop}
+
+\begin{proof}
+لدينا أولًا $\Value{\num{{\OLId{latin-ordinary}{n}}}}{{\OLId{latin-looped}{M}}} \in \Domain{{\OLId{latin-looped}{M}}}$ لكل عدد قياسي.
+ويبقى إثبات أن كل ${\OLId{latin-ordinary}{x}} \in \Domain{{\OLId{latin-looped}{M}}}$ يساوي $\Value{\num{{\OLId{latin-ordinary}{n}}}}{{\OLId{latin-looped}{M}}}$
+لبعض~${\OLId{latin-ordinary}{n}}$. وبما أن $\Struct{M}$ قياسية، فهي متشاكلة مع~$\Struct{N}$؛
+فلنأخذ تشاكلًا ${\OLId{latin-ordinary}{g}}\colon \Nat \to \Domain{{\OLId{latin-looped}{M}}}$. عندئذ
+${\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{n}}) = {\OLId{latin-ordinary}{g}}(\Value{\num{{\OLId{latin-ordinary}{n}}}}{{\OLId{latin-looped}{N}}}) = \Value{\num{{\OLId{latin-ordinary}{n}}}}{{\OLId{latin-looped}{M}}}$.
+ولكل ${\OLId{latin-ordinary}{x}} \in \Domain{{\OLId{latin-looped}{M}}}$ يوجد ${\OLId{latin-ordinary}{n}} \in \Nat$ يحقق ${\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{n}})={\OLId{latin-ordinary}{x}}$،
+لأن ${\OLId{latin-ordinary}{g}}$~!!{surjective}. فتم الاحتواء الآخر.
+\end{proof}
+
+\begin{explain}
+فالبنية~$\Struct{M}$ للغة $\Lang{L_A}$، متى كانت قياسية،
+أمكن تسمية كل عنصر في !!{domain}ها بالحدود العددية القياسية
+$\num{{\OLMathNumeral{0}}}$، $\num{{\OLMathNumeral{1}}}$، $\num{{\OLMathNumeral{2}}}$، \dots؛ أي بالحدود
+$\Obj{0}$، $\Obj{0}'$، $\Obj{0}''$، وهكذا. وليس معناه أن
+!!{element}s~$\Domain{{\OLId{latin-looped}{M}}}$ \emph{هي} الأعداد أنفسها؛ وإنما نعيّن
+تلك العناصر بالطريقة التي نعيّن بها الأعداد في~$\Domain{{\OLId{latin-looped}{N}}}$.
+\end{explain}
+
+\begin{prob}
+بيّن أن عكس \olref[mod][mar][stm]{prop:standard-domain} كاذب؛ أي أعط
+مثالًا لـ!!a{structure}~$\Struct{M}$ تحقق
+$\Domain{{\OLId{latin-looped}{M}}} = \Setabs{\Value{\num{{\OLId{latin-ordinary}{n}}}}{{\OLId{latin-looped}{M}}}}{{\OLId{latin-ordinary}{n}} \in \Nat}$ ولا تكون
+متشاكلة مع~$\Struct{N}$.
+\end{prob}
+
+\begin{prop}
+\ollabel{prop:thq-standard}
+إذا كان $\Sat{{\OLId{latin-looped}{M}}}{\Th{Q}}$ و
+$\Domain{{\OLId{latin-looped}{M}}} = \Setabs{\Value{\num{{\OLId{latin-ordinary}{n}}}}{{\OLId{latin-looped}{M}}}}{{\OLId{latin-ordinary}{n}} \in \Nat}$، فإن
+$\Struct{M}$ قياسية.
+\end{prop}
+
+\begin{proof}
+المطلوب تشاكل $\Struct{M}$ مع~$\Struct{N}$. فلنعرّف
+${\OLId{latin-ordinary}{g}}\colon \Nat \to \Domain{{\OLId{latin-looped}{M}}}$ بوضع
+${\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{n}})=\Value{\num{{\OLId{latin-ordinary}{n}}}}{{\OLId{latin-looped}{M}}}$. الفرض يقضي بأن ${\OLId{latin-ordinary}{g}}$~!!{surjective}.
+وهي كذلك !!{injective}: فإن ${\OLId{latin-ordinary}{n}} \neq {\OLId{latin-ordinary}{m}}$ يستلزم
+$\Th{Q} \Proves \eq/[\num{{\OLId{latin-ordinary}{n}}}][\num{{\OLId{latin-ordinary}{m}}}]$. ولما كان
+$\Sat{{\OLId{latin-looped}{M}}}{\Th{Q}}$، لزم $\Sat{{\OLId{latin-looped}{M}}}{\eq/[\num{{\OLId{latin-ordinary}{n}}}][\num{{\OLId{latin-ordinary}{m}}}]}$
+كلما كان ${\OLId{latin-ordinary}{n}} \neq {\OLId{latin-ordinary}{m}}$. فإذا كان ${\OLId{latin-ordinary}{n}} \neq {\OLId{latin-ordinary}{m}}$، كان
+$\Value{\num{{\OLId{latin-ordinary}{n}}}}{{\OLId{latin-looped}{M}}} \neq \Value{\num{{\OLId{latin-ordinary}{m}}}}{{\OLId{latin-looped}{M}}}$، أي ${\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{n}}) \neq {\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{m}})$.
+
+وبقي التحقق من حفظ ${\OLId{latin-ordinary}{g}}$ لتأويلات الرموز، فنفصلها واحدًا واحدًا:
+\begin{enumerate}
+\item لدينا ${\OLId{latin-ordinary}{g}}(\Assign{\Obj{0}}{{\OLId{latin-looped}{N}}})={\OLId{latin-ordinary}{g}}({\OLMathNumeral{0}})$، لأن
+  $\Assign{\Obj{0}}{{\OLId{latin-looped}{N}}}={\OLMathNumeral{0}}$. وبتعريف~${\OLId{latin-ordinary}{g}}$، يكون
+  ${\OLId{latin-ordinary}{g}}({\OLMathNumeral{0}})=\Value{\num{{\OLMathNumeral{0}}}}{{\OLId{latin-looped}{M}}}$. لكن $\num{{\OLMathNumeral{0}}}$ هو $\Obj{0}$ نفسه، وقيمة
+  الحد الذي يكون !!a{constant} هي ما تسنده الـ!!{structure} إلى ذلك
+  الـ!!{constant}، أي
+  $\Value{\Obj{0}}{{\OLId{latin-looped}{M}}}=\Assign{\Obj{0}}{{\OLId{latin-looped}{M}}}$. وهكذا نحصل، كما يلزم، على
+  ${\OLId{latin-ordinary}{g}}(\Assign{\Obj{0}}{{\OLId{latin-looped}{N}}})=\Assign{\Obj{0}}{{\OLId{latin-looped}{M}}}$.
+\item ${\OLId{latin-ordinary}{g}}(\Assign{\prime}{{\OLId{latin-looped}{N}}}({\OLId{latin-ordinary}{n}}))={\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}})$، لأن $\prime$ في
+  $\Struct{N}$ دالة الخلف على~$\Nat$. ثم
+  ${\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}})=\Value{\num{{\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}}}}{{\OLId{latin-looped}{M}}}$ بتعريف~${\OLId{latin-ordinary}{g}}$. لكن $\num{{\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}}}$ هو الحد
+  نفسه $\num{{\OLId{latin-ordinary}{n}}}'$، ومن ثم
+  $\Value{\num{{\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}}}}{{\OLId{latin-looped}{M}}}=\Value{\num{{\OLId{latin-ordinary}{n}}}'}{{\OLId{latin-looped}{M}}}$. وبتعريف دالة القيمة،
+  يساوي هذا $\Assign{\prime}{{\OLId{latin-looped}{M}}}(\Value{\num{{\OLId{latin-ordinary}{n}}}}{{\OLId{latin-looped}{M}}})$. وبما أن
+  $\Value{\num{{\OLId{latin-ordinary}{n}}}}{{\OLId{latin-looped}{M}}}={\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{n}})$، نحصل على
+  ${\OLId{latin-ordinary}{g}}(\Assign{\prime}{{\OLId{latin-looped}{N}}}({\OLId{latin-ordinary}{n}}))=\Assign{\prime}{{\OLId{latin-looped}{M}}}({\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{n}}))$.
+\item ${\OLId{latin-ordinary}{g}}(\Assign{+}{{\OLId{latin-looped}{N}}}({\OLId{latin-ordinary}{n}},{\OLId{latin-ordinary}{m}}))={\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{n}}+{\OLId{latin-ordinary}{m}})$، لأن $+$ في $\Struct{N}$ دالة
+  الجمع على~$\Nat$. ثم ${\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{n}}+{\OLId{latin-ordinary}{m}})=\Value{\num{{\OLId{latin-ordinary}{n}}+{\OLId{latin-ordinary}{m}}}}{{\OLId{latin-looped}{M}}}$ بتعريف~${\OLId{latin-ordinary}{g}}$.
+  لكن $\Th{Q} \Proves \num{{\OLId{latin-ordinary}{n}}+{\OLId{latin-ordinary}{m}}} = (\num{{\OLId{latin-ordinary}{n}}} + \num{{\OLId{latin-ordinary}{m}}})$، ومن ثم
+  $\Value{\num{{\OLId{latin-ordinary}{n}}+{\OLId{latin-ordinary}{m}}}}{{\OLId{latin-looped}{M}}}=\Value{\num{{\OLId{latin-ordinary}{n}}}+\num{{\OLId{latin-ordinary}{m}}}}{{\OLId{latin-looped}{M}}}$. وبتعريف دالة
+  القيمة يساوي هذا
+  $\Assign{+}{{\OLId{latin-looped}{M}}}(\Value{\num{{\OLId{latin-ordinary}{n}}}}{{\OLId{latin-looped}{M}}},\Value{\num{{\OLId{latin-ordinary}{m}}}}{{\OLId{latin-looped}{M}}})$. وبما أن
+  $\Value{\num{{\OLId{latin-ordinary}{n}}}}{{\OLId{latin-looped}{M}}}={\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{n}})$ و$\Value{\num{{\OLId{latin-ordinary}{m}}}}{{\OLId{latin-looped}{M}}}={\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{m}})$، نحصل على
+  ${\OLId{latin-ordinary}{g}}(\Assign{+}{{\OLId{latin-looped}{N}}}({\OLId{latin-ordinary}{n}},{\OLId{latin-ordinary}{m}}))=\Assign{+}{{\OLId{latin-looped}{M}}}({\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{n}}),{\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{m}}))$.
+\item ${\OLId{latin-ordinary}{g}}(\Assign{\times}{{\OLId{latin-looped}{N}}}({\OLId{latin-ordinary}{n}}, {\OLId{latin-ordinary}{m}})) = \Assign{\times}{{\OLId{latin-looped}{M}}}({\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{n}}), {\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{m}}))$:
+  تمرين.
+\item $\tuple{{\OLId{latin-ordinary}{n}},{\OLId{latin-ordinary}{m}}} \in \Assign{<}{{\OLId{latin-looped}{N}}}$ إذا وفقط إذا كان ${\OLId{latin-ordinary}{n}}<{\OLId{latin-ordinary}{m}}$. فإذا
+  كان ${\OLId{latin-ordinary}{n}}<{\OLId{latin-ordinary}{m}}$، كان $\Th{Q} \Proves \num{{\OLId{latin-ordinary}{n}}} < \num{{\OLId{latin-ordinary}{m}}}$، وكذلك
+  $\Sat{{\OLId{latin-looped}{M}}}{\num{{\OLId{latin-ordinary}{n}}} < \num{{\OLId{latin-ordinary}{m}}}}$. ومن ثم
+  $\tuple{\Value{\num{{\OLId{latin-ordinary}{n}}}}{{\OLId{latin-looped}{M}}},\Value{\num{{\OLId{latin-ordinary}{m}}}}{{\OLId{latin-looped}{M}}}} \in \Assign{<}{{\OLId{latin-looped}{M}}}$،
+  أي $\tuple{{\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{n}}),{\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{m}})} \in \Assign{<}{{\OLId{latin-looped}{M}}}$. وإذا كان ${\OLId{latin-ordinary}{n}} \not< {\OLId{latin-ordinary}{m}}$، كان
+  $\Th{Q} \Proves \lnot \num{{\OLId{latin-ordinary}{n}}} < \num{{\OLId{latin-ordinary}{m}}}$، وبالتالي
+  $\Sat/{{\OLId{latin-looped}{M}}}{\num{{\OLId{latin-ordinary}{n}}} < \num{{\OLId{latin-ordinary}{m}}}}$. وهكذا، كما سبق،
+  $\tuple{{\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{n}}),{\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{m}})} \notin \Assign{<}{{\OLId{latin-looped}{M}}}$. وبضم الحالتين نحصل على:
+  $\tuple{{\OLId{latin-ordinary}{n}},{\OLId{latin-ordinary}{m}}} \in \Assign{<}{{\OLId{latin-looped}{N}}}$ إذا وفقط إذا كان
+  $\tuple{{\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{n}}),{\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{m}})} \in \Assign{<}{{\OLId{latin-looped}{M}}}$.
+\end{enumerate}
+\end{proof}
+
+\begin{explain}
+الدالة~${\OLId{latin-ordinary}{g}}$ أقرب ما نعرّف به تطبيقًا من $\Nat$ إلى مجال
+!!{structure}~$\Struct{M}$ للغة $\Lang{L_A}$. فإن كل
+$\Struct{M}$ تشتمل على !!{element}s تسميها الحدود
+$\num{{\OLMathNumeral{0}}}$ و$\num{{\OLMathNumeral{1}}}$ و$\num{{\OLMathNumeral{2}}}$ وهكذا. فإذا وافقت $\Struct{M}$
+ما يصدق عن الـ$\num{{\OLId{latin-ordinary}{n}}}$ في~$\Struct{N}$ من العبارات الأساسية
+المذكورة، وكانت ${\OLId{latin-ordinary}{g}}$ تقابلًا، لم يبعد أن تكون ${\OLId{latin-ordinary}{g}}$ تشاكلًا.
+بل هي التشاكل الوحيد إذا لم يكن في $\Domain{{\OLId{latin-looped}{M}}}$ من
+!!{element}s إلا ما تسميه الـ$\num{{\OLId{latin-ordinary}{n}}}$.
+\end{explain}
+
+\begin{prop}
+\ollabel{prop:thq-unique-iso} إذا كانت $\Struct{M}$ قياسية، كانت ${\OLId{latin-ordinary}{g}}$ من
+برهان \olref{prop:thq-standard} التشاكل الوحيد من $\Struct{N}$ إلى~$\Struct{M}$.
+\end{prop}
+
+\begin{proof}
+ليكن ${\OLId{latin-ordinary}{h}}\colon \Nat \to \Domain{{\OLId{latin-looped}{M}}}$ تشاكلًا بين $\Struct{N}$
+و$\Struct{M}$. نستقرئ على~${\OLId{latin-ordinary}{n}}$ لإثبات المساواة ${\OLId{latin-ordinary}{g}}={\OLId{latin-ordinary}{h}}$.
+عند ${\OLId{latin-ordinary}{n}}={\OLMathNumeral{0}}$ لدينا ${\OLId{latin-ordinary}{g}}({\OLMathNumeral{0}})=\Assign{\Obj{0}}{{\OLId{latin-looped}{M}}}$ بتعريف~${\OLId{latin-ordinary}{g}}$.
+ولأن ${\OLId{latin-ordinary}{h}}$ تشاكل، فـ
+${\OLId{latin-ordinary}{h}}({\OLMathNumeral{0}})={\OLId{latin-ordinary}{h}}(\Assign{\Obj{0}}{{\OLId{latin-looped}{N}}})=\Assign{\Obj{0}}{{\OLId{latin-looped}{M}}}$؛
+ومن ثم ${\OLId{latin-ordinary}{g}}({\OLMathNumeral{0}})={\OLId{latin-ordinary}{h}}({\OLMathNumeral{0}})$.
+
+وأما في خطوة ${\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}}$، فالحساب الآتي يتم الاستقراء:
+\begin{align*}
+  {\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}}) & = \Value{\num{{\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}}}}{{\OLId{latin-looped}{M}}} \text{ بتعريف~${\OLId{latin-ordinary}{g}}$}\\
+  & = \Value{\num{{\OLId{latin-ordinary}{n}}}'}{{\OLId{latin-looped}{M}}} \text{ لأن $\num{{\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}}}\ident \num{{\OLId{latin-ordinary}{n}}}'$}\\
+  & = \Assign{\prime}{{\OLId{latin-looped}{M}}}(\Value{\num{{\OLId{latin-ordinary}{n}}}}{{\OLId{latin-looped}{M}}})
+    \text{ بتعريف $\Value{{\OLId{latin-ordinary}{t}}'}{{\OLId{latin-looped}{M}}}$}\\
+  & = \Assign{\prime}{{\OLId{latin-looped}{M}}}({\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{n}})) \text{ بتعريف~${\OLId{latin-ordinary}{g}}$}\\
+  & = \Assign{\prime}{{\OLId{latin-looped}{M}}}({\OLId{latin-ordinary}{h}}({\OLId{latin-ordinary}{n}})) \text{ بفرض الاستقراء}\\
+  & = {\OLId{latin-ordinary}{h}}(\Assign{\prime}{{\OLId{latin-looped}{N}}}({\OLId{latin-ordinary}{n}})) \text{ لأن ${\OLId{latin-ordinary}{h}}$ تشاكل}\\
+  & = {\OLId{latin-ordinary}{h}}({\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}})
+\end{align*}
+\end{proof}
+
+\begin{explain}
+كل مجموعة~${\OLId{latin-looped}{M}}$~!!{denumerable} تقبل !!a{bijection} بين
+$\Nat$ و${\OLId{latin-looped}{M}}$؛ فكل مجموعة~${\OLId{latin-looped}{M}}$ كهذه تصلح !!{domain} لنموذج
+قياسي $\Struct{M}$. فإذا اخترنا العنصر ${\OLId{latin-ordinary}{z}} \in {\OLId{latin-looped}{M}}$ ودالة
+مناسبة~${\OLId{latin-ordinary}{s}}$ لتأويل $\Assign{\Obj{0}}{{\OLId{latin-looped}{M}}}$ و$\Assign{\prime}{{\OLId{latin-looped}{M}}}$،
+تعيّن تأويل $+$ و$\times$ و$<$ بذلك الاختيار.
+ومن الشروط اللازمة لتأويل $\Assign{\prime}{{\OLId{latin-looped}{M}}}$ أن تكون الدالة
+${\OLId{latin-ordinary}{s}}\colon {\OLId{latin-looped}{M}} \to {\OLId{latin-looped}{M}} \setminus \{{\OLId{latin-ordinary}{z}}\}$~!!{injective} و!!{surjective}.
+أما مدى~${\OLId{latin-ordinary}{s}}$ فلا يدخل فيه~${\OLId{latin-ordinary}{z}}$، وإلا كذبت
+$\lforall[{\OLId{latin-ordinary}{x}}][\eq/[\Obj 0][{\OLId{latin-ordinary}{x}}']]$. وهذه !!{sentence} تصدق
+في~$\Struct{N}$، فلا بد أن تصدق في $\Struct{M}$.
+وأما ${\OLId{latin-ordinary}{s}}$ فلا بد أن تكون !!{injective}، لأن دالة الخلف
+$\Assign{\prime}{{\OLId{latin-looped}{N}}}$ في $\Struct{N}$ كذلك؛ وكون
+$\Assign{\prime}{{\OLId{latin-looped}{N}}}$~!!{injective} تعبّر عنه !!a{sentence}
+تصدق في $\Struct{N}$. ولا بد أيضًا أن تكون !!{surjective}؛
+وإلا وجد ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{M}} \setminus \{{\OLId{latin-ordinary}{z}}\}$ خارج مدى~${\OLId{latin-ordinary}{s}}$، فتكذب
+الـ!!{sentence}
+$\lforall[{\OLId{latin-ordinary}{x}}][(\eq[{\OLId{latin-ordinary}{x}}][\Obj 0] \lor \lexists[{\OLId{latin-ordinary}{y}}][\eq[{\OLId{latin-ordinary}{y}}'][{\OLId{latin-ordinary}{x}}]])]$
+في~$\Struct{M}$، مع صدقها في~$\Struct{N}$.
+\end{explain}
+
+
+\end{document}

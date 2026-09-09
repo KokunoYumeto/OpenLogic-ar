@@ -1,0 +1,150 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{card-arithmetic}{fix}
+\olsection{نقاط $\aleph$ الثابتة}
+
+قدمنا في~\olref[spine][]{chap} أن بديهية الاستبدال مفتقرة إلى مسوغ،
+إذ تلزم عنها تراتبية شاهقة غاية الشموخ. وقد صار في وسعنا، بعد هذا القدر
+من حساب الكاردينالات، أن نضرب لذلك الارتفاع مثلًا موجزًا.
+
+فبيّن أن~${\OLMathNumeral{0}} < \aleph_{\OLMathNumeral{0}}$ و${\OLMathNumeral{1}} < \aleph_{\OLMathNumeral{1}}$ و${\OLMathNumeral{2}} < \aleph_{\OLMathNumeral{2}}$، وهلم
+جرًا؛ بل إن تفاوت الحجم لا يزال يتعاظم في كل خطوة. وقد يدعو ذلك إلى
+الظن بأن~$\kappa< \aleph_\kappa$ لكل عدد ترتيبي~$\kappa$.
+
+غير أن هذا الظن باطل في~$\ZFC$. بل يمكننا إثبات وجود
+\emph{نقاط ثابتة لـ$\aleph$}، أي كاردينالات~$\kappa$ تحقق
+$\kappa=\aleph_\kappa$.
+
+\begin{prop}\ollabel{alephfixed}
+توجد نقطة ثابتة لـ$\aleph$.
+\end{prop}
+
+\begin{proof}
+عرّف بالعود:
+\begin{align*}
+	\kappa_{\OLMathNumeral{0}} &= {\OLMathNumeral{0}}\\
+	\kappa_{{\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}}} &= \aleph_{\kappa_{\OLId{latin-ordinary}{n}}}\\
+	\kappa&= \bigcup_{{\OLId{latin-ordinary}{n}} < \omega}\kappa_{\OLId{latin-ordinary}{n}}
+\end{align*}
+فيكون~$\kappa$ كاردينالًا بحسب
+\olref[cardinals][classing]{unioncardinalscardinal}. ثم:
+\[
+	\kappa= \bigcup_{{\OLId{latin-ordinary}{n}} < \omega} \kappa_{{\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}}} =
+	\bigcup_{{\OLId{latin-ordinary}{n}} < \omega}\aleph_{\kappa_{\OLId{latin-ordinary}{n}}} =
+	\bigcup_{{\OLId{greek-variable}{alpha}} < \kappa}\aleph_{\OLId{greek-variable}{alpha}} = \aleph_\kappa
+\]
+\end{proof}
+
+وقد أفرد بولوس النقطة الثابتة لـ~$\aleph$ التي أنشأناها بمقالة. ولما
+أثبت في صدرها وجود~$\kappa$ قال:
+\begin{quote}
+	[$\kappa$] عدد \emph{كبير جداً} بحسب معايير من لم يسبق لهم التعرض
+	لنظرية المجموعات؛ وهو، فيما يبدو لي، كبير إلى حد يجعل صدق أي نظرية
+	تتضمن بين أقوالها زعم وجود $\kappa$ من الأشياء على الأقل موضع شك.
+	\citep[p.~257]{Boolos2000}
+\end{quote}
+ثم ختم مقالته أخيرًا بهذا السؤال:
+\begin{quote}
+	[هل] نشك في أنه، أياً يكن الحال في بداية القصة، حين نكون قد بلغنا هذا
+	الموضع تكون العجلات قد أخذت تدور في فراغ، ولم نعد نصغي إلى وصف شيء
+	واقع؟
+	\citep[p.~268]{Boolos2000}
+\end{quote}
+فإن كنا قد جاوزنا حقًا «أي شيء واقع»، كان الاستبدال أولى ما يلام؛ فهو
+البديهية التي بها تم البرهان. ويلزم بولوس حينئذ، فيما نظن، أن يعيد النظر
+في قوله قبل ذلك بعقود إن الاستبدال لا يلزم عنه أثر «غير مرغوب فيه»؛
+وانظر~\olref[replacement][extrinsic]{sec}.
+
+ولكن أوجود~$\kappa$ من السوء بهذه المنزلة؟ يعين على وزن الأمر أن ننظر
+في \emph{مفارقة تريسترام شاندي} عند راسل. كان تريسترام شاندي يدون أيام
+حياته، ويستغرق تدوين يوم منها سنة كاملة. فهو كلما انقضت سنة ازداد
+تأخرًا: بعد سنة لا يكون قد كتب إلا يومًا، وقد عاش \OLClassicalDigits{364} يومًا لم يكتبها؛
+وبعد سنتين لا يكون قد كتب إلا يومين، وقد عاش \OLClassicalDigits{728} يومًا لم يكتبها؛ وبعد
+ثلاث لا يكون قد كتب إلا ثلاثة أيام، وقد عاش \OLClassicalDigits{1092} يومًا لم يكتبها
+\dots\footnote{نتجاهل السنوات الكبيسة.} ومع هذا، فإن كان تريسترام
+خالدًا استطاع أن يكتب كل يوم، إذ يكتب اليوم~${\OLId{latin-ordinary}{n}}$ في السنة~${\OLId{latin-ordinary}{n}}$ من حياته؛
+فتكتمل يومياته «عند نهاية الزمان».
+
+فأي فرق بعيد بين هذا وبين أن يكون~${\OLId{greek-variable}{alpha}}$ أصغر من
+$\aleph_{\OLId{greek-variable}{alpha}}$---وأن يتفاقم الفارق بينهما---ثم نبلغ~$\kappa$ فيدرك
+أحدهما الآخر ويصير~$\kappa = \aleph_\kappa$؟
+
+ولندع هذا النظر، ولنسلم~$\ZFC$، ثم نختم بمزيد من خواص إنشاء النقاط
+الثابتة. فالأحكام الثلاثة الآتية تبين، على جهة الحدس، وجود نقطة غير
+تافهة تكون التراتبية عندها من العرض بمقدار ارتفاعها.
+
+\begin{prop}\ollabel{bethfixed}
+توجد نقطة ثابتة لـ$\beth$، أي يوجد $\kappa$ بحيث
+$\kappa= \beth_\kappa$.
+\end{prop}
+
+\begin{proof}
+كما في \olref{alephfixed}، باستعمال «$\beth$» بدلاً من «$\aleph$».
+\end{proof}
+
+\begin{prop}\ollabel{stagesize}
+$\card{{\OLId{latin-looped}{V}}_{\omega+{\OLId{greek-variable}{alpha}}}} = \beth_{{\OLId{greek-variable}{alpha}}}$. وإذا كان
+$\omega \ordtimes \omega \leq {\OLId{greek-variable}{alpha}}$، فإن
+$\card{{\OLId{latin-looped}{V}}_{\OLId{greek-variable}{alpha}}} = \beth_{\OLId{greek-variable}{alpha}}$.
+\end{prop}
+
+\begin{proof}
+أما الدعوى الأولى فباستقراء يسير ما فوق المتناهي. وتلزم الثانية من أن
+$\omega \ordtimes \omega \leq {\OLId{greek-variable}{alpha}}$ يقتضي
+$\omega + {\OLId{greek-variable}{alpha}} = {\OLId{greek-variable}{alpha}}$. ونستعين في إثباته بأحكام حساب الأعداد
+الترتيبية من~\olref[ord-arithmetic][]{chap}. فأولًا
+$\omega \ordtimes \omega = \omega \ordtimes ({\OLMathNumeral{1}} \ordplus \omega) =
+(\omega \ordtimes {\OLMathNumeral{1}}) \ordplus (\omega\ordtimes\omega) = \omega
+\ordplus (\omega \ordtimes \omega)$. فإذا كان
+$\omega \ordtimes \omega \leq {\OLId{greek-variable}{alpha}}$، أي كان
+${\OLId{greek-variable}{alpha}} = (\omega\ordtimes\omega) \ordplus \beta$ لبعض $\beta$، فإن
+$\omega \ordplus {\OLId{greek-variable}{alpha}} = \omega \ordplus
+((\omega \ordtimes \omega) \ordplus \beta) =
+(\omega \ordplus (\omega \ordtimes \omega)) \ordplus \beta =
+(\omega \ordtimes \omega) \ordplus \beta = {\OLId{greek-variable}{alpha}}$.
+\end{proof}
+
+\begin{cor}
+يوجد $\kappa$ بحيث $\card{{\OLId{latin-looped}{V}}_\kappa} = \kappa$.
+\end{cor}
+
+\begin{proof}
+خذ~$\kappa$ نقطة ثابتة لـ~$\beth$، وقد ضمن وجودها
+\olref{bethfixed}. وواضح أن
+$\omega \ordtimes \omega < \kappa$. فينتج من
+\olref{stagesize} أن~$\card{{\OLId{latin-looped}{V}}_\kappa} = \beth_\kappa= \kappa$.
+\end{proof}
+
+فالمراحل الواقعة دون~${\OLId{latin-looped}{V}}_\kappa$ بعدد ما في~${\OLId{latin-looped}{V}}_\kappa$ من
+!!{element}. وعلى هذا يكون~${\OLId{latin-looped}{V}}_\kappa$، في التصور، عريضًا بقدر ارتفاعه.
+ووجه الشبه بتريسترام شاندي قريب: ننتقل من مرحلة إلى التي تليها بأخذ
+مجموعات القوى، فنعظم التراتبية في كل خطوة تعظيمًا بعيدًا؛ ثم يدرك عرضها
+ارتفاعها «في النهاية»، أي عند المرحلة~$\kappa$.
+
+وقد يقال: كم مرة يتساوى عرض التراتبية وارتفاعها؟ والجواب: بعدد الأعداد
+الترتيبية. وبيان ذلك يحتاج إلى تفصيل.
+
+عرّف حدًا~$\tau$ على الوجه الآتي. لأي~${\OLId{latin-looped}{A}}$، ضع:
+\begin{align*}
+	\tau_{\OLMathNumeral{0}}({\OLId{latin-looped}{A}}) & \defis \cardsucc{\card{{\OLId{latin-looped}{A}}}}\\
+	\tau_{{\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}}}({\OLId{latin-looped}{A}}) & \defis \beth_{\tau_{\OLId{latin-ordinary}{n}}({\OLId{latin-looped}{A}})}\\
+	\tau({\OLId{latin-looped}{A}}) & \defis \bigcup_{{\OLId{latin-ordinary}{n}} < \omega}\tau_{\OLId{latin-ordinary}{n}}({\OLId{latin-looped}{A}})
+\intertext{كما في \olref{bethfixed}، تكون $\tau({\OLId{latin-looped}{A}})$ نقطة ثابتة لـ$\beth$
+لكل ${\OLId{latin-looped}{A}}$، ومن تعريف $\tau_{\OLMathNumeral{0}}({\OLId{latin-looped}{A}})$ يكون
+$\card{{\OLId{latin-looped}{A}}} < \tau({\OLId{latin-looped}{A}})$ بوضوح. فانظر الآن إلى التعريف العودي الآتي:}
+	{\OLId{latin-looped}{W}}_{\OLMathNumeral{0}} &\defis {\OLMathNumeral{0}}\\
+	{\OLId{latin-looped}{W}}_{{\OLId{greek-variable}{alpha}} + {\OLMathNumeral{1}}} & \defis \tau({\OLId{latin-looped}{W}}_{\OLId{greek-variable}{alpha}})\\
+	{\OLId{latin-looped}{W}}_{\OLId{greek-variable}{alpha}} & \defis \bigcup_{\beta < {\OLId{greek-variable}{alpha}}} {\OLId{latin-looped}{W}}_\beta
+	\text{، إذا كان ${\OLId{greek-variable}{alpha}}$ حدياً.}
+\end{align*}
+وهذا البناء متعين لجميع الأعداد الترتيبية. وكل~${\OLId{latin-looped}{W}}_{\OLId{greek-variable}{alpha}}$ كاردينال؛
+وفي كل خطوة خلفية يكون
+${\OLId{latin-looped}{W}}_{\OLId{greek-variable}{alpha}}=\card{{\OLId{latin-looped}{W}}_{\OLId{greek-variable}{alpha}}}<\tau({\OLId{latin-looped}{W}}_{\OLId{greek-variable}{alpha}})={\OLId{latin-looped}{W}}_{{\OLId{greek-variable}{alpha}}+{\OLMathNumeral{1}}}$، وأما عند
+المراحل الحدية فنأخذ الاتحاد. فتصير الخريطة
+${\OLId{greek-variable}{alpha}}\mapsto {\OLId{latin-looped}{W}}_{{\OLId{greek-variable}{alpha}}+{\OLMathNumeral{1}}}$ متزايدة قطعًا، فهي، بحسب التصور،
+«!!a{injection}» من الأعداد الترتيبية إلى نقاط~$\beth$ الثابتة. وكما
+تقدم، يكون~${\OLId{latin-looped}{V}}_{{\OLId{latin-looped}{W}}_{\OLId{greek-variable}{alpha}}}$ عريضًا بقدر ارتفاعه، لكل~${\OLId{greek-variable}{alpha}}$.
+
+\end{document}

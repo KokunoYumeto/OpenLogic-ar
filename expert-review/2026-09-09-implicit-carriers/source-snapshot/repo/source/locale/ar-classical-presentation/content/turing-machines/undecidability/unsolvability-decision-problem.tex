@@ -1,0 +1,92 @@
+% Part: turing-machines
+% Chapter: undecidability
+% Section: unsolvability-decision-problem
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{tur}{und}{uns}
+\olsection{استحالة حل مسألة القرار}
+
+\begin{thm}
+\ollabel{thm:decision-prob}
+مسألة القرار ممتنعة الحل: فلا توجد آلة تورنغ~${\OLId{latin-looped}{D}}$ تأخذ
+!!a{sentence}~$!B$ من الرتبة الأولى دخلًا على شريطها، وتضمن
+التوقف بخرج~${\OLMathNumeral{1}}$ إذا وفقط إذا كانت $!B$ صادقة منطقيًا، وبخرج
+${\OLMathNumeral{0}}$ فيما عدا ذلك.
+\end{thm}
+
+\begin{proof}
+لو قبلت مسألة القرار الحل، لوجدت آلة تورنغ~${\OLId{latin-looped}{D}}$ تقررها؛ وعندئذ
+لأمكن حل مسألة التوقف على الوجه الآتي. ننشئ آلة~${\OLId{latin-looped}{E}}$ تأخذ
+  العدد~${\OLId{latin-ordinary}{e}}$ المعين للآلة~${\OLId{latin-looped}{M}}_{\OLId{latin-ordinary}{e}}$، والدخل~${\OLId{latin-ordinary}{w}}$، فتخرج
+  ال!!{sentence} $!T({\OLId{latin-looped}{M}}_{\OLId{latin-ordinary}{e}},{\OLId{latin-ordinary}{w}})\lif !E({\OLId{latin-looped}{M}}_{\OLId{latin-ordinary}{e}},{\OLId{latin-ordinary}{w}})$ وتتوقف ورأسها على
+  الخانة~${\OLMathNumeral{1}}$، أول خانة بعد علامة طرف الشريط. فالآلة ${\OLId{latin-looped}{E}}\concat {\OLId{latin-looped}{D}}$، عند إعطائها
+${\OLId{latin-ordinary}{e}}$ و${\OLId{latin-ordinary}{w}}$، تحسب أولًا~$!T({\OLId{latin-looped}{M}}_{\OLId{latin-ordinary}{e}},{\OLId{latin-ordinary}{w}})\lif !E({\OLId{latin-looped}{M}}_{\OLId{latin-ordinary}{e}},{\OLId{latin-ordinary}{w}})$، ثم تشغّل
+آلة القرار~${\OLId{latin-looped}{D}}$ على الحاصل. وتكون قيمة خرج ${\OLId{latin-looped}{D}}$ عند توقفها~${\OLMathNumeral{1}}$
+إذا وفقط إذا صدقت $!T({\OLId{latin-looped}{M}}_{\OLId{latin-ordinary}{e}},{\OLId{latin-ordinary}{w}})\lif !E({\OLId{latin-looped}{M}}_{\OLId{latin-ordinary}{e}},{\OLId{latin-ordinary}{w}})$ منطقيًا،
+وتكون~${\OLMathNumeral{0}}$ في غير ذلك. وقد ثبت في \olref[ver]{lem:halt-if-valid}
+و\olref[ver]{lem:valid-if-halt} أن
+$!T({\OLId{latin-looped}{M}}_{\OLId{latin-ordinary}{e}},{\OLId{latin-ordinary}{w}})\lif !E({\OLId{latin-looped}{M}}_{\OLId{latin-ordinary}{e}},{\OLId{latin-ordinary}{w}})$ صادقة منطقيًا إذا وفقط إذا توقفت
+${\OLId{latin-looped}{M}}_{\OLId{latin-ordinary}{e}}$ عند الدخل~${\OLId{latin-ordinary}{w}}$. إذن تتوقف ${\OLId{latin-looped}{E}}\concat {\OLId{latin-looped}{D}}$ عند
+${\OLId{latin-ordinary}{e}}$ و${\OLId{latin-ordinary}{w}}$ بخرج~${\OLMathNumeral{1}}$ بالضبط حين تتوقف ${\OLId{latin-looped}{M}}_{\OLId{latin-ordinary}{e}}$ عند الدخل~${\OLId{latin-ordinary}{w}}$،
+وبخرج~${\OLMathNumeral{0}}$ خلاف ذلك. فتكون ${\OLId{latin-looped}{E}}\concat {\OLId{latin-looped}{D}}$ حلًا لمسألة التوقف،
+  مع أن \olref[hal]{thm:halting-problem} تمنع وجود آلة كهذه.
+  % تصحيح مصدر (C272-01): وُحّد موضع رأس E عند التسليم مع اصطلاح دخل D في الخانة 1.
+\end{proof}
+
+\begin{cor}\ollabel{cor:undecidable-sat}%
+لا يمكن تقرير قابلية !!{sentence} اعتباطية من الرتبة الأولى
+للإرضاء.
+\end{cor}
+
+\begin{proof}
+  لتكن، خلافًا للمطلوب، آلة تورنغ~${\OLId{latin-looped}{S}}$ تقرر قابلية الإرضاء.
+  فنحل بها مسألة القرار هكذا: نعطيها !!a{sentence}~${\OLId{latin-looped}{B}}$،
+  ونزيح $!B$ خانة إلى اليمين، ثم نرجع إلى الخانة~${\OLMathNumeral{1}}$
+  ونكتب فيها $\lnot$.
+
+  ثم نشغّل~${\OLId{latin-looped}{S}}$؛ فلا بد أن تنتهي إلى خرج ${\OLMathNumeral{1}}$ إذا كانت
+  $\lnot !B$ قابلة للإرضاء، أو~${\OLMathNumeral{0}}$ إذا كانت $\lnot !B$
+  غير قابلة له. فإن وجدنا~$\TMstroke$ في الخانة~${\OLMathNumeral{1}}$
+  محوناه، وإن كانت الخانة~${\OLMathNumeral{1}}$ خالية وضعنا~$\TMstroke$،
+  ثم توقفنا.
+
+  وهذه آلة تتوقف لكل دخل، وتخرج~${\OLMathNumeral{1}}$ إذا وفقط إذا كانت
+  $\lnot !B$ غير قابلة للإرضاء، و${\OLMathNumeral{0}}$ فيما عدا ذلك.
+  ولما كان الصدق المنطقي لـ$!B$ مكافئًا لعدم قابلية
+  $\lnot !B$ للإرضاء، كان الخرج~${\OLMathNumeral{1}}$ إذا وفقط إذا كانت
+  $!B$ صادقة منطقيًا، والخرج~${\OLMathNumeral{0}}$ خلاف ذلك. وهذا حل لمسألة
+  القرار، وقد ثبت امتناعه.
+\end{proof}
+
+\begin{explain}
+فلا آلة تورنغ تجيب جوابًا صحيحًا في كل حال عن السؤال:
+«أ$!B$ !!{sentence} صادقة منطقيًا في منطق الرتبة الأولى؟»
+سواء كان الجواب نعم أم لا. لكن \emph{توجد} آلة تجيب بنعم حين
+يصح ذلك، وأما حين يكون الجواب لا فلا تتوقف. وهذا لازم من
+مبرهنتي السلامة والتمام، ومن إمكان تعداد ال!!{derivation}s
+تعدادًا فعليًا.
+\end{explain}
+
+\begin{thm}
+  \ollabel{thm:valid-ce}%
+  الصدق المنطقي ل!!{sentence}s من الرتبة الأولى شبه قابل
+  للقرار؛ أي توجد آلة تورنغ~${\OLId{latin-looped}{E}}$ تتوقف بخرج~${\OLMathNumeral{1}}$ إذا وفقط إذا
+  صدقت $!B$ منطقيًا، متى ابتدأت ب!!a{sentence}~$!B$
+  من الرتبة الأولى على شريطها؛ ولا تتوقف في غير هذه الحال.
+\end{thm}
+
+\begin{proof}
+  ال!!{derivation}s الممكنة في منطق الرتبة الأولى يمكن توليدها
+  واحدًا بعد واحد بخوارزمية فعلية. فلتقم الآلة~${\OLId{latin-looped}{E}}$ بهذا
+  التوليد، ولتتوقف حين تجد !!a{derivation} لـ$\Proves !B$،
+  جاعلةً خرجها~${\OLMathNumeral{1}}$. وبالسلامة، لا تتوقف ${\OLId{latin-looped}{E}}$ بخرج~${\OLMathNumeral{1}}$
+  إلا إذا كان~$\Entails !B$. وبالتمام، إذا كان
+  $\Entails !B$ وجد !!a{derivation} لـ$\Proves !B$.
+  ولأن ${\OLId{latin-looped}{E}}$ تسرد ال!!{derivation}s جميعًا على نظام،
+  فلا بد أن تبلغ ما يثبت~$\Proves !B$، فتتوقف بخرج~${\OLMathNumeral{1}}$.
+\end{proof}
+
+\end{document}

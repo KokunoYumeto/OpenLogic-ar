@@ -1,0 +1,419 @@
+% Part: first-order-logic
+% Chapter: syntax-and-semantics
+% Section: satisfaction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{syn}{sat}
+
+\olsection{إرضاء \article{formula} \printtoken{S}{formula}
+  في \article{structure} \printtoken{S}{structure}}
+
+\begin{explain}
+يرتبط باب التعبيرات، من حدود وال!!{formula}s، بباب
+ال!!{structure}s من جهتين: \emph{!!{value}} الحد، و\emph{إرضاء}
+!!a{formula}. وتقريب الأولى أن !!{value} الحد !!a{element} من
+!!a{structure}؛ فإن كان الحد رمزًا ثابتًا فحسب، فـ!!{value} هي الشيء
+الذي عيّنته ال!!{structure} لذلك الثابت. وإن تألّف من
+ال!!{function}s، حُسبت !!{value} له من !!{value}s الثوابت ومن
+الدوال المعيّنة لرموز الدوال الواردة فيه. وأما !!^a{formula} فتكون
+\emph{مُرضاة} في !!a{structure} متى جعل تأويل المحمولات
+ال!!{formula} صادقة في مجال ال!!{structure}. وهذا أيضًا يُضبط
+بالاستقراء: فتعيينات ال!!{structure} تبيّن مباشرة متى تُرضى
+ال!!{formula}s الذرية؛ وأما !!{formula} المركبة، فيتعلّق إرضاؤها
+بالرابط الرئيس أو المكمم، وبإرضاء ال!!{subformula}s المباشرة أو
+عدم إرضائها.
+
+غير أن في المكممات مزيد نظر؛ إذ قد يكون في ال!!{subformula}
+المباشرة ل!!{formula} مكممة !!{variable} حر، وال!!{structure}s
+لا تعيّن !!{value}s ال!!{variable}s. فلا بد لمعالجة ذلك من
+\emph{إسنادات المتغيرات}. وحينئذ لا نعتبر الإرضاء بالنسبة إلى
+!!a{structure} مجردة، بل إلى !!a{structure} ومعها إسناد
+ل!!a{variable}.
+\end{explain}
+
+\begin{defn}[إسناد المتغيرات]
+\emph{إسناد المتغيرات}~${\OLId{latin-ordinary}{s}}$ ل!!a{structure}~$\Struct{M}$ دالة ترسل
+كل !!{variable} إلى !!a{element} من~$\Domain {\OLId{latin-looped}{M}}$؛ أي
+${\OLId{latin-ordinary}{s}}\colon \Var \to \Domain {\OLId{latin-looped}{M}}$.
+\end{defn}
+
+\begin{explain}
+في !!^a{structure} تتعيّن !!a{value} كل !!{constant}، وبإسناد
+المتغيرات تتعيّن قيمة كل متغير. ونريد، فوق ذلك، أن تدل الحدود
+المركبة منهما على !!{element}s من ال!!{domain}. فلذلك نعرّف
+!!{value} الحدود بالاستقراء: قيمة ال!!{constant}s والمتغيرات
+مأخوذة مما عيّنته ال!!{structure} أو الإسناد، وقيمة الحدود
+المركبة تُحسب عوديًا بالدوال التي عيّنتها ال!!{structure}
+لل!!{function}s.
+\end{explain}
+
+\begin{defn}[!!^{value} الحدود]
+إذا كان ${\OLId{latin-ordinary}{t}}$ حدًا من اللغة~$\Lang L$، وكانت $\Struct M$
+!!{structure} لـ~$\Lang L$، وكان ${\OLId{latin-ordinary}{s}}$ إسنادًا ل!!a{variable}
+في~$\Struct M$، عُرّفت \emph{!!{value}}~$\Value{{\OLId{latin-ordinary}{t}}}{{\OLId{latin-looped}{M}}}[{\OLId{latin-ordinary}{s}}]$ كما يأتي:
+\begin{enumerate}
+\item \indcase{t}{c}{$\Value{\indfrm}{{\OLId{latin-looped}{M}}}[{\OLId{latin-ordinary}{s}}] = \Assign{\indcomplex}{{\OLId{latin-looped}{M}}}$.}
+\item \indcase{t}{x}{$\Value{\indfrm}{{\OLId{latin-looped}{M}}}[{\OLId{latin-ordinary}{s}}] = {\OLId{latin-ordinary}{s}}(\indcomplex)$.}
+\item \indcase{t}{\Atom{f}{t_1, \ldots, t_n}}{
+\[
+\Value{\indfrm}{{\OLId{latin-looped}{M}}}[{\OLId{latin-ordinary}{s}}] = \Assign{{\OLId{latin-ordinary}{f}}}{{\OLId{latin-looped}{M}}}(\Value{{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}}{{\OLId{latin-looped}{M}}}[{\OLId{latin-ordinary}{s}}], \ldots,
+\Value{{\OLId{latin-ordinary}{t}}_{\OLId{latin-ordinary}{n}}}{{\OLId{latin-looped}{M}}}[{\OLId{latin-ordinary}{s}}]).
+\]}
+\end{enumerate}
+\end{defn}
+
+\begin{defn}[مغاير بالنسبة إلى~${\OLId{latin-ordinary}{x}}$]
+إذا كان ${\OLId{latin-ordinary}{s}}$ إسنادًا ل!!a{variable} في !!a{structure}~$\Struct M$،
+فكل إسناد ل!!{variable}~${\OLId{latin-ordinary}{s}}'$ في~$\Struct M$ لا يختلف عن~${\OLId{latin-ordinary}{s}}$ إلا،
+على الأكثر، فيما يسنده إلى~${\OLId{latin-ordinary}{x}}$ يسمى \emph{مغايرًا بالنسبة إلى~${\OLId{latin-ordinary}{x}}$}
+لـ~${\OLId{latin-ordinary}{s}}$. وإذا كان ${\OLId{latin-ordinary}{s}}'$ مغايرًا بالنسبة إلى~${\OLId{latin-ordinary}{x}}$ لـ~${\OLId{latin-ordinary}{s}}$ كتبنا
+$\varAssign{{\OLId{latin-ordinary}{s}}'}{{\OLId{latin-ordinary}{s}}}{{\OLId{latin-ordinary}{x}}}$.
+\end{defn}
+
+\begin{explain}
+وليس المغاير بالنسبة إلى~${\OLId{latin-ordinary}{x}}$ لإسناد~${\OLId{latin-ordinary}{s}}$ \emph{ملزمًا} بأن يجعل
+قيمة~${\OLId{latin-ordinary}{x}}$ غير قيمتها الأولى؛ فكل إسناد مغاير بالنسبة
+إلى~${\OLId{latin-ordinary}{x}}$ لنفسه أيضًا.
+\end{explain}
+
+\begin{defn}
+  إذا كان ${\OLId{latin-ordinary}{s}}$ إسنادًا ل!!a{variable} في !!a{structure}~$\Struct M$
+  وكان ${\OLId{latin-ordinary}{m}} \in \Domain{{\OLId{latin-looped}{M}}}$، فإن الإسناد~$\Subst{{\OLId{latin-ordinary}{s}}}{{\OLId{latin-ordinary}{m}}}{{\OLId{latin-ordinary}{x}}}$ هو إسناد
+  المتغيرات المعرّف بـ
+  \[\Subst{{\OLId{latin-ordinary}{s}}}{{\OLId{latin-ordinary}{m}}}{{\OLId{latin-ordinary}{x}}}({\OLId{latin-ordinary}{y}}) = \begin{cases}
+    {\OLId{latin-ordinary}{m}} & \text{إذا كان } {\OLId{latin-ordinary}{y}} \ident {\OLId{latin-ordinary}{x}}\\
+    {\OLId{latin-ordinary}{s}}({\OLId{latin-ordinary}{y}}) & \text{فيما عدا ذلك}.
+  \end{cases}\]
+\end{defn}
+
+فـ$\Subst{{\OLId{latin-ordinary}{s}}}{{\OLId{latin-ordinary}{m}}}{{\OLId{latin-ordinary}{x}}}$ مغاير معيّن بالنسبة إلى~${\OLId{latin-ordinary}{x}}$
+لـ~${\OLId{latin-ordinary}{s}}$: يضع !!{element} المجال~${\OLId{latin-ordinary}{m}}$ قيمةً لـ~${\OLId{latin-ordinary}{x}}$، ويبقي قيم
+ال!!{variable}s غير~${\OLId{latin-ordinary}{x}}$ على ما عيّنه لها~${\OLId{latin-ordinary}{s}}$.
+
+\begin{defn}[الإرضاء]
+\ollabel{defn:satisfaction}
+يُعرّف إرضاء !!a{formula}~$!A$ في !!a{structure}~$\Struct M$ نسبة
+إلى إسناد ل!!a{variable}~${\OLId{latin-ordinary}{s}}$، ويرمز إليه
+$\Sat{{\OLId{latin-looped}{M}}}{!A}[{\OLId{latin-ordinary}{s}}]$، عوديًا كما يأتي. (ونكتب
+$\Sat/{{\OLId{latin-looped}{M}}}{!A}[{\OLId{latin-ordinary}{s}}]$ بمعنى «ليس $\Sat{{\OLId{latin-looped}{M}}}{!A}[{\OLId{latin-ordinary}{s}}]$».)
+\begin{enumerate}
+\tagitem{prvFalse}{%
+  \indcase{!A}{\lfalse}{$\Sat/{{\OLId{latin-looped}{M}}}{\indfrm}[{\OLId{latin-ordinary}{s}}]$.}}{}
+
+\tagitem{prvTrue}{%
+  \indcase{!A}{\ltrue}{$\Sat{{\OLId{latin-looped}{M}}}{\indfrm}[{\OLId{latin-ordinary}{s}}]$.}}{}
+
+\item \indcase{!A}{\Atom{R}{t_1, \dots, t_n}}{$\Sat{{\OLId{latin-looped}{M}}}{\indfrm}[{\OLId{latin-ordinary}{s}}]$
+  إذا وفقط إذا كان $\langle \Value{{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}}{{\OLId{latin-looped}{M}}}[{\OLId{latin-ordinary}{s}}], \dots,
+  \Value{{\OLId{latin-ordinary}{t}}_{\OLId{latin-ordinary}{n}}}{{\OLId{latin-looped}{M}}}[{\OLId{latin-ordinary}{s}}] \rangle \in \Assign{{\OLId{latin-looped}{R}}}{{\OLId{latin-looped}{M}}}$.}
+
+\item \indcase{!A}{\eq[t_1][t_2]}{$\Sat{{\OLId{latin-looped}{M}}}{\indfrm}[{\OLId{latin-ordinary}{s}}]$ إذا وفقط
+  إذا كان $\Value{{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}}{{\OLId{latin-looped}{M}}}[{\OLId{latin-ordinary}{s}}] = \Value{{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}}}{{\OLId{latin-looped}{M}}}[{\OLId{latin-ordinary}{s}}]$.}
+
+\tagitem{prvNot}{%
+  \indcase{!A}{\lnot !B}{$\Sat{{\OLId{latin-looped}{M}}}{\indfrm}[{\OLId{latin-ordinary}{s}}]$ إذا وفقط إذا كان
+    $\Sat/{{\OLId{latin-looped}{M}}}{!B}[{\OLId{latin-ordinary}{s}}]$.}}{}
+
+\tagitem{prvAnd}{%
+  \indcase{!A}{(!B \land !C)}{$\Sat{{\OLId{latin-looped}{M}}}{\indfrm}[{\OLId{latin-ordinary}{s}}]$ إذا وفقط إذا
+    كان $\Sat{{\OLId{latin-looped}{M}}}{!B}[{\OLId{latin-ordinary}{s}}]$ و$\Sat{{\OLId{latin-looped}{M}}}{!C}[{\OLId{latin-ordinary}{s}}]$.}}{}
+
+\tagitem{prvOr}{%
+  \indcase{!A}{(!B \lor !C)}{$\Sat{{\OLId{latin-looped}{M}}}{\indfrm}[{\OLId{latin-ordinary}{s}}]$ إذا وفقط إذا
+    كان $\Sat{{\OLId{latin-looped}{M}}}{!B}[{\OLId{latin-ordinary}{s}}]$ أو $\Sat{{\OLId{latin-looped}{M}}}{!C}[{\OLId{latin-ordinary}{s}}]$ (أو كلاهما).}}{}
+
+\tagitem{prvIf}{%
+  \indcase{!A}{(!B \lif !C)}{$\Sat{{\OLId{latin-looped}{M}}}{\indfrm}[{\OLId{latin-ordinary}{s}}]$ إذا وفقط إذا
+    كان $\Sat/{{\OLId{latin-looped}{M}}}{!B}[{\OLId{latin-ordinary}{s}}]$ أو $\Sat{{\OLId{latin-looped}{M}}}{!C}[{\OLId{latin-ordinary}{s}}]$ (أو كلاهما).}}{}
+
+\tagitem{prvIff}{%
+  \indcase{!A}{(!B \liff !C)}{$\Sat{{\OLId{latin-looped}{M}}}{\indfrm}[{\OLId{latin-ordinary}{s}}]$ إذا وفقط إذا
+    كان إما كل من $\Sat{{\OLId{latin-looped}{M}}}{!B}[{\OLId{latin-ordinary}{s}}]$ و$\Sat{{\OLId{latin-looped}{M}}}{!C}[{\OLId{latin-ordinary}{s}}]$، وإما لا
+    $\Sat{{\OLId{latin-looped}{M}}}{!B}[{\OLId{latin-ordinary}{s}}]$ ولا $\Sat{{\OLId{latin-looped}{M}}}{!C}[{\OLId{latin-ordinary}{s}}]$.}}{}
+
+\tagitem{prvAll}{%
+  \indcase{!A}{\lforall[x][!B]}{$\Sat{{\OLId{latin-looped}{M}}}{\indfrm}[{\OLId{latin-ordinary}{s}}]$ إذا وفقط إذا
+    كان، لكل !!{element}~${\OLId{latin-ordinary}{m}} \in \Domain {\OLId{latin-looped}{M}}$،
+    $\Sat{{\OLId{latin-looped}{M}}}{!B}[\Subst{{\OLId{latin-ordinary}{s}}}{{\OLId{latin-ordinary}{m}}}{{\OLId{latin-ordinary}{x}}}]$.}}{}
+
+\tagitem{prvEx}{%
+  \indcase{!A}{\lexists[x][!B]}{$\Sat{{\OLId{latin-looped}{M}}}{\indfrm}[{\OLId{latin-ordinary}{s}}]$ إذا وفقط إذا
+  كان، ل!!{element} واحد على الأقل~${\OLId{latin-ordinary}{m}} \in \Domain {\OLId{latin-looped}{M}}$،
+  $\Sat{{\OLId{latin-looped}{M}}}{!B}[\Subst{{\OLId{latin-ordinary}{s}}}{{\OLId{latin-ordinary}{m}}}{{\OLId{latin-ordinary}{x}}}]$.}}{}
+\end{enumerate}
+\end{defn}
+
+\begin{explain}
+ويتبيّن موضع الحاجة إلى إسنادات المتغيرات في
+\iftag{notprvEx,notprvAll}{البند الأخير}{البندين الأخيرين}.\iftag{prvAll}{
+فلا يصح أن نحدّ إرضاء $\lforall[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$ بقولنا: «لكل ${\OLId{latin-ordinary}{m}} \in
+\Domain{{\OLId{latin-looped}{M}}}$، $\Sat{{\OLId{latin-looped}{M}}}{!B({\OLId{latin-ordinary}{m}})}$».}{}\iftag{prvEx}{ ولا أن نحدّ إرضاء
+$\lexists[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$ بقولنا: «لـ~${\OLId{latin-ordinary}{m}} \in \Domain{{\OLId{latin-looped}{M}}}$ واحد على
+الأقل، $\Sat{{\OLId{latin-looped}{M}}}{!B({\OLId{latin-ordinary}{m}})}$».}{} وذلك أن ${\OLId{latin-ordinary}{m}} \in \Domain {\OLId{latin-looped}{M}}$
+شيء من المجال، لا رمز من اللغة؛ فلا تكون $!B({\OLId{latin-ordinary}{m}})$~!!a{formula}،
+أي إن $\Subst{!B}{{\OLId{latin-ordinary}{m}}}{{\OLId{latin-ordinary}{x}}}$ غير معرّفة. وليس لنا أن نفترض وجود
+!!{constant}s أو حدود تسمّي كل !!{element} من~$\Struct{M}$؛
+فتعريف ال!!{structure}s لا يوجب ذلك. بل إن مجموعة
+ال!!{constant}s في اللغة القياسية !!{denumerable}؛ فإن كان
+$\Domain{{\OLId{latin-looped}{M}}}$ غير !!{enumerable} لم تكفِ ال!!{constant}s
+لتسمية جميع الأشياء.
+
+والخلاص من ذلك بإسنادات ال!!{variable}s، إذ نربط بها المتغيرات
+مباشرة ب!!{element}s المجال. فبدلًا من أن نقول مثلًا إن
+\iftag{prvEx}{$\lexists[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$}{$\lforall[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$} مُرضاة
+في~$\Struct M$ إذا وفقط إذا
+\iftag{prvEx}{كان $\Sat{{\OLId{latin-looped}{M}}}{!B({\OLId{latin-ordinary}{m}})}$ لواحد على الأقل من ${\OLId{latin-ordinary}{m}} \in
+\Domain{{\OLId{latin-looped}{M}}}$}{كان ذلك لكل ${\OLId{latin-ordinary}{m}} \in \Domain{{\OLId{latin-looped}{M}}}$، $\Sat{{\OLId{latin-looped}{M}}}{!B({\OLId{latin-ordinary}{m}})}$}،
+نقول: هي مُرضاة في~$\Struct M$ \emph{بالنسبة إلى}~${\OLId{latin-ordinary}{s}}$ إذا وفقط
+إذا أُرضيت $!B({\OLId{latin-ordinary}{x}})$ بالنسبة إلى~$\Subst{{\OLId{latin-ordinary}{s}}}{{\OLId{latin-ordinary}{m}}}{{\OLId{latin-ordinary}{x}}}$
+\iftag{prvEx}{لواحد على الأقل}{لكل} ${\OLId{latin-ordinary}{m}} \in \Domain {\OLId{latin-looped}{M}}$.
+\end{explain}
+
+\begin{ex}
+لتكن $\Lang{L} = \{{\OLId{latin-ordinary}{a}}, {\OLId{latin-ordinary}{b}}, {\OLId{latin-ordinary}{f}}, {\OLId{latin-looped}{R}}\}$، حيث ${\OLId{latin-ordinary}{a}}$ و${\OLId{latin-ordinary}{b}}$ !!{constant}s،
+و${\OLId{latin-ordinary}{f}}$~!!{function} ثنائية المحل، و${\OLId{latin-looped}{R}}$~!!{predicate} ثنائي المحل. وانظر
+في ال!!{structure}~$\Struct{M}$ المعرّفة بما يأتي:
+\begin{enumerate}
+\item $\Domain {\OLId{latin-looped}{M}} = \{{\OLMathNumeral{1}}, {\OLMathNumeral{2}}, {\OLMathNumeral{3}}, {\OLMathNumeral{4}}\}$
+\item $\Assign{{\OLId{latin-ordinary}{a}}}{{\OLId{latin-looped}{M}}} = {\OLMathNumeral{1}}$
+\item $\Assign{{\OLId{latin-ordinary}{b}}}{{\OLId{latin-looped}{M}}} = {\OLMathNumeral{2}}$
+\item $\Assign{{\OLId{latin-ordinary}{f}}}{{\OLId{latin-looped}{M}}}({\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}) = {\OLId{latin-ordinary}{x}}+{\OLId{latin-ordinary}{y}}$ إذا كان ${\OLId{latin-ordinary}{x}}+{\OLId{latin-ordinary}{y}} \le {\OLMathNumeral{3}}$، و$= {\OLMathNumeral{3}}$ فيما عدا ذلك.
+\item $\Assign{{\OLId{latin-looped}{R}}}{{\OLId{latin-looped}{M}}} = \{\tuple{{\OLMathNumeral{1}}, {\OLMathNumeral{1}}}, \tuple{{\OLMathNumeral{1}}, {\OLMathNumeral{2}}}, \tuple{{\OLMathNumeral{2}}, {\OLMathNumeral{3}}}, \tuple{{\OLMathNumeral{2}}, {\OLMathNumeral{4}}}\}$
+\end{enumerate}
+الدالة ${\OLId{latin-ordinary}{s}}({\OLId{latin-ordinary}{x}}) = {\OLMathNumeral{1}}$ التي تسند ${\OLMathNumeral{1}} \in \Domain{{\OLId{latin-looped}{M}}}$ إلى كل
+!!{variable} إسناد متغيرات لـ~$\Struct{M}$.
+
+عندئذ
+\begin{align*}
+\Value{{\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{a}},{\OLId{latin-ordinary}{b}})}{{\OLId{latin-looped}{M}}}[{\OLId{latin-ordinary}{s}}] & = \Assign{{\OLId{latin-ordinary}{f}}}{{\OLId{latin-looped}{M}}}(\Value{{\OLId{latin-ordinary}{a}}}{{\OLId{latin-looped}{M}}}[{\OLId{latin-ordinary}{s}}], \Value{{\OLId{latin-ordinary}{b}}}{{\OLId{latin-looped}{M}}}[{\OLId{latin-ordinary}{s}}]).
+\intertext{ولما كان ${\OLId{latin-ordinary}{a}}$ و${\OLId{latin-ordinary}{b}}$ !!{constant}s، فإن $\Value{{\OLId{latin-ordinary}{a}}}{{\OLId{latin-looped}{M}}}[{\OLId{latin-ordinary}{s}}]
+  = \Assign{{\OLId{latin-ordinary}{a}}}{{\OLId{latin-looped}{M}}} = {\OLMathNumeral{1}}$ و$\Value{{\OLId{latin-ordinary}{b}}}{{\OLId{latin-looped}{M}}}[{\OLId{latin-ordinary}{s}}] = \Assign{{\OLId{latin-ordinary}{b}}}{{\OLId{latin-looped}{M}}} = {\OLMathNumeral{2}}$. ومن ثم}
+\Value{{\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{a}},{\OLId{latin-ordinary}{b}})}{{\OLId{latin-looped}{M}}}[{\OLId{latin-ordinary}{s}}] & = \Assign{{\OLId{latin-ordinary}{f}}}{{\OLId{latin-looped}{M}}}({\OLMathNumeral{1}}, {\OLMathNumeral{2}}) = {\OLMathNumeral{1}}+{\OLMathNumeral{2}} = {\OLMathNumeral{3}}.
+\intertext{ولحساب قيمة ${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{a}},{\OLId{latin-ordinary}{b}}),{\OLId{latin-ordinary}{a}})$ يلزمنا النظر في}
+\Value{{\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{a}},{\OLId{latin-ordinary}{b}}),{\OLId{latin-ordinary}{a}})}{{\OLId{latin-looped}{M}}}[{\OLId{latin-ordinary}{s}}] & = \Assign{{\OLId{latin-ordinary}{f}}}{{\OLId{latin-looped}{M}}}(\Value{{\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{a}}, {\OLId{latin-ordinary}{b}})}{{\OLId{latin-looped}{M}}}[{\OLId{latin-ordinary}{s}}],
+\Value{{\OLId{latin-ordinary}{a}}}{{\OLId{latin-looped}{M}}}[{\OLId{latin-ordinary}{s}}]) = \Assign{{\OLId{latin-ordinary}{f}}}{{\OLId{latin-looped}{M}}}({\OLMathNumeral{3}}, {\OLMathNumeral{1}}) = {\OLMathNumeral{3}},
+\intertext{لأن ${\OLMathNumeral{3}}+{\OLMathNumeral{1}} > {\OLMathNumeral{3}}$. ولما كان ${\OLId{latin-ordinary}{s}}({\OLId{latin-ordinary}{x}}) = {\OLMathNumeral{1}}$ و$\Value{{\OLId{latin-ordinary}{x}}}{{\OLId{latin-looped}{M}}}[{\OLId{latin-ordinary}{s}}] =
+  {\OLId{latin-ordinary}{s}}({\OLId{latin-ordinary}{x}})$، كان لدينا أيضًا}
+\Value{{\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{a}},{\OLId{latin-ordinary}{b}}),{\OLId{latin-ordinary}{x}})}{{\OLId{latin-looped}{M}}}[{\OLId{latin-ordinary}{s}}] & = \Assign{{\OLId{latin-ordinary}{f}}}{{\OLId{latin-looped}{M}}}(\Value{{\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{a}}, {\OLId{latin-ordinary}{b}})}{{\OLId{latin-looped}{M}}}[{\OLId{latin-ordinary}{s}}],
+\Value{{\OLId{latin-ordinary}{x}}}{{\OLId{latin-looped}{M}}}[{\OLId{latin-ordinary}{s}}]) = \Assign{{\OLId{latin-ordinary}{f}}}{{\OLId{latin-looped}{M}}}({\OLMathNumeral{3}}, {\OLMathNumeral{1}}) = {\OLMathNumeral{3}},
+\end{align*}
+
+أما ال!!{formula} الذرية~${\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}, {\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}})$، فتُرضى متى كانت
+ثنائية قيمتي حجتيها، أي $\tuple{\Value{{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}}{{\OLId{latin-looped}{M}}}[{\OLId{latin-ordinary}{s}}], \Value{{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}}}{{\OLId{latin-looped}{M}}}[{\OLId{latin-ordinary}{s}}]}$،
+!!a{element} من~$\Assign{{\OLId{latin-looped}{R}}}{{\OLId{latin-looped}{M}}}$. فمن ذلك
+$\Sat{{\OLId{latin-looped}{M}}}{{\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{b}},{\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{a}},{\OLId{latin-ordinary}{b}}))}[{\OLId{latin-ordinary}{s}}]$؛ إذ $\tuple{\Value{{\OLId{latin-ordinary}{b}}}{{\OLId{latin-looped}{M}}},
+  \Value{{\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{a}},{\OLId{latin-ordinary}{b}})}{{\OLId{latin-looped}{M}}}} = \tuple{{\OLMathNumeral{2}}, {\OLMathNumeral{3}}} \in \Assign{{\OLId{latin-looped}{R}}}{{\OLId{latin-looped}{M}}}$.
+وأما $\Sat/{{\OLId{latin-looped}{M}}}{{\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{a}},{\OLId{latin-ordinary}{b}}))}[{\OLId{latin-ordinary}{s}}]$، فلأن
+$\tuple{{\OLMathNumeral{1}}, {\OLMathNumeral{3}}} \notin \Assign{{\OLId{latin-looped}{R}}}{{\OLId{latin-looped}{M}}}$.
+
+وأما الصيغة غير الذرية~$!A$، فسبيل الحكم عليها أن نأخذ من
+التعريف الاستقرائي البند الموافق لرابطها الرئيس. فالرابط الرئيس
+في~${\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{a}}, {\OLId{latin-ordinary}{a}}) \lif ({\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{b}}, {\OLId{latin-ordinary}{x}}) \lor {\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{b}}))$ هو~$\lif$؛ ولذلك
+\begin{align*}
+  & \Sat{{\OLId{latin-looped}{M}}}{{\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{a}}, {\OLId{latin-ordinary}{a}}) \lif ({\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{b}}, {\OLId{latin-ordinary}{x}}) \lor {\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{b}}))}[{\OLId{latin-ordinary}{s}}] \text{ إذا وفقط إذا }\\
+  & \qquad
+  \Sat/{{\OLId{latin-looped}{M}}}{{\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{a}},{\OLId{latin-ordinary}{a}})}[{\OLId{latin-ordinary}{s}}] \text{ أو } \Sat{{\OLId{latin-looped}{M}}}{{\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{b}}, {\OLId{latin-ordinary}{x}}) \lor {\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{b}})}[{\OLId{latin-ordinary}{s}}]
+  \intertext{ولما كان $\Sat{{\OLId{latin-looped}{M}}}{{\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{a}},{\OLId{latin-ordinary}{a}})}[{\OLId{latin-ordinary}{s}}]$ (لأن $\tuple{{\OLMathNumeral{1}},{\OLMathNumeral{1}}} \in
+    \Assign{{\OLId{latin-looped}{R}}}{{\OLId{latin-looped}{M}}}$)، فلا يمكننا بعد تعيين الجواب، ويلزم أولًا أن
+    نعرف هل $\Sat{{\OLId{latin-looped}{M}}}{{\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{b}}, {\OLId{latin-ordinary}{x}}) \lor {\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{b}})}[{\OLId{latin-ordinary}{s}}]$:}
+  & \Sat{{\OLId{latin-looped}{M}}}{{\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{b}}, {\OLId{latin-ordinary}{x}}) \lor {\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{b}})}[{\OLId{latin-ordinary}{s}}] \text{ إذا وفقط إذا }\\
+  & \qquad \Sat{{\OLId{latin-looped}{M}}}{{\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{b}},{\OLId{latin-ordinary}{x}})}[{\OLId{latin-ordinary}{s}}] \text{ أو } \Sat{{\OLId{latin-looped}{M}}}{{\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{b}})}[{\OLId{latin-ordinary}{s}}]
+  \intertext{وهذا هو الواقع، لأن $\Sat{{\OLId{latin-looped}{M}}}{{\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{b}})}[{\OLId{latin-ordinary}{s}}]$
+    (إذ $\tuple{{\OLMathNumeral{1}},{\OLMathNumeral{2}}} \in \Assign{{\OLId{latin-looped}{R}}}{{\OLId{latin-looped}{M}}}$).}
+\end{align*}
+
+قد تقدم أن المغاير بالنسبة إلى~${\OLId{latin-ordinary}{x}}$ لـ~${\OLId{latin-ordinary}{s}}$ لا يجوز أن يخالف
+الإسناد~${\OLId{latin-ordinary}{s}}$ إلا في قيمة~${\OLId{latin-ordinary}{x}}$، وقد يوافقه فيها أيضًا.
+فلكل !!{element} من~$\Domain{{\OLId{latin-looped}{M}}}$ مغاير بالنسبة إلى~${\OLId{latin-ordinary}{x}}$ لـ~${\OLId{latin-ordinary}{s}}$:
+\begin{align*}
+  {\OLId{latin-ordinary}{s}}_{\OLMathNumeral{1}} & = \Subst{{\OLId{latin-ordinary}{s}}}{{\OLMathNumeral{1}}}{{\OLId{latin-ordinary}{x}}}, &
+  {\OLId{latin-ordinary}{s}}_{\OLMathNumeral{2}} & = \Subst{{\OLId{latin-ordinary}{s}}}{{\OLMathNumeral{2}}}{{\OLId{latin-ordinary}{x}}},\\
+  {\OLId{latin-ordinary}{s}}_{\OLMathNumeral{3}} & = \Subst{{\OLId{latin-ordinary}{s}}}{{\OLMathNumeral{3}}}{{\OLId{latin-ordinary}{x}}}, &
+  {\OLId{latin-ordinary}{s}}_{\OLMathNumeral{4}} & = \Subst{{\OLId{latin-ordinary}{s}}}{{\OLMathNumeral{4}}}{{\OLId{latin-ordinary}{x}}}.
+\end{align*}
+فمثلًا، ${\OLId{latin-ordinary}{s}}_{\OLMathNumeral{2}}({\OLId{latin-ordinary}{x}}) = {\OLMathNumeral{2}}$ و${\OLId{latin-ordinary}{s}}_{\OLMathNumeral{2}}({\OLId{latin-ordinary}{y}}) = {\OLId{latin-ordinary}{s}}({\OLId{latin-ordinary}{y}}) = {\OLMathNumeral{1}}$ لجميع المتغيرات~${\OLId{latin-ordinary}{y}}$
+غير~${\OLId{latin-ordinary}{x}}$. وهذه هي جميع المغايرات بالنسبة إلى~${\OLId{latin-ordinary}{x}}$ لـ~${\OLId{latin-ordinary}{s}}$ في
+البنية~$\Struct{M}$، لأن $\Domain{{\OLId{latin-looped}{M}}} = \{{\OLMathNumeral{1}}, {\OLMathNumeral{2}}, {\OLMathNumeral{3}}, {\OLMathNumeral{4}}\}$. ولاحظ،
+على وجه الخصوص، أن ${\OLId{latin-ordinary}{s}}_{\OLMathNumeral{1}} = {\OLId{latin-ordinary}{s}}$ (إذ يكون~${\OLId{latin-ordinary}{s}}$ دائمًا مغايرًا بالنسبة
+إلى~${\OLId{latin-ordinary}{x}}$ لنفسه).
+
+\iftag{prvEx}{لتعيين ما إذا كانت !!{formula} مكممة وجوديًا
+~$\lexists[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$ مُرضاة، يلزم أن نعيّن ما إذا كان
+$\Sat{{\OLId{latin-looped}{M}}}{!A({\OLId{latin-ordinary}{x}})}[\Subst{{\OLId{latin-ordinary}{s}}}{{\OLId{latin-ordinary}{m}}}{{\OLId{latin-ordinary}{x}}}]$ لواحد على الأقل من
+${\OLId{latin-ordinary}{m}} \in \Domain {\OLId{latin-looped}{M}}$. ومن ثم
+  \[
+  \Sat{{\OLId{latin-looped}{M}}}{\lexists[{\OLId{latin-ordinary}{x}}][({\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{b}},{\OLId{latin-ordinary}{x}}) \lor {\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{b}}))]}[{\OLId{latin-ordinary}{s}}],
+  \]
+لأن $\Sat{{\OLId{latin-looped}{M}}}{{\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{b}},{\OLId{latin-ordinary}{x}}) \lor {\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{b}})}[\Subst{{\OLId{latin-ordinary}{s}}}{{\OLMathNumeral{1}}}{{\OLId{latin-ordinary}{x}}}]$
+($\Subst{{\OLId{latin-ordinary}{s}}}{{\OLMathNumeral{3}}}{{\OLId{latin-ordinary}{x}}}$ يصلح أيضًا). لكن
+  \[
+  \Sat/{{\OLId{latin-looped}{M}}}{\lexists[{\OLId{latin-ordinary}{x}}][({\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{b}},{\OLId{latin-ordinary}{x}}) \land {\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{b}}))]}[{\OLId{latin-ordinary}{s}}]
+  \]
+لأنه أيًا كان ${\OLId{latin-ordinary}{m}} \in \Domain{{\OLId{latin-looped}{M}}}$ الذي نختاره، يكون
+$\Sat/{{\OLId{latin-looped}{M}}}{{\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{b}},{\OLId{latin-ordinary}{x}}) \land {\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{b}})}[\Subst{{\OLId{latin-ordinary}{s}}}{{\OLId{latin-ordinary}{m}}}{{\OLId{latin-ordinary}{x}}}]$.}{}
+
+\iftag{prvAll}{لتعيين ما إذا كانت !!{formula} مكممة كليًا
+~$\lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$ مُرضاة، يلزم أن نعيّن ما إذا كان
+$\Sat{{\OLId{latin-looped}{M}}}{!A({\OLId{latin-ordinary}{x}})}[\Subst{{\OLId{latin-ordinary}{s}}}{{\OLId{latin-ordinary}{m}}}{{\OLId{latin-ordinary}{x}}}]$ لكل ${\OLId{latin-ordinary}{m}} \in \Domain {\OLId{latin-looped}{M}}$. ومن ثم
+  \[
+  \Sat{{\OLId{latin-looped}{M}}}{\lforall[{\OLId{latin-ordinary}{x}}][({\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{a}}) \lif {\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{a}},{\OLId{latin-ordinary}{x}}))]}[{\OLId{latin-ordinary}{s}}],
+  \]
+لأن $\Sat{{\OLId{latin-looped}{M}}}{{\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{a}}) \lif {\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{a}},{\OLId{latin-ordinary}{x}})}[\Subst{{\OLId{latin-ordinary}{s}}}{{\OLId{latin-ordinary}{m}}}{{\OLId{latin-ordinary}{x}}}]$ لكل ${\OLId{latin-ordinary}{m}} \in
+\Domain {\OLId{latin-looped}{M}}$. فعندما ${\OLId{latin-ordinary}{m}} = {\OLMathNumeral{1}}$ يكون
+$\Sat{{\OLId{latin-looped}{M}}}{{\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{a}},{\OLId{latin-ordinary}{x}})}[\Subst{{\OLId{latin-ordinary}{s}}}{{\OLMathNumeral{1}}}{{\OLId{latin-ordinary}{x}}}]$، فتكون التالية صادقة؛ وعندما
+${\OLId{latin-ordinary}{m}} = {\OLMathNumeral{2}}$، أو ${\OLMathNumeral{3}}$، أو~${\OLMathNumeral{4}}$ يكون
+$\Sat/{{\OLId{latin-looped}{M}}}{{\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{a}})}[\Subst{{\OLId{latin-ordinary}{s}}}{{\OLId{latin-ordinary}{m}}}{{\OLId{latin-ordinary}{x}}}]$، فتكون المقدمة كاذبة. لكن
+  \[
+  \Sat/{{\OLId{latin-looped}{M}}}{\lforall[{\OLId{latin-ordinary}{x}}][({\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{a}},{\OLId{latin-ordinary}{x}}) \lif {\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{a}}))]}[{\OLId{latin-ordinary}{s}}]
+  \]
+لأن $\Sat/{{\OLId{latin-looped}{M}}}{{\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{a}},{\OLId{latin-ordinary}{x}}) \lif {\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{a}})}[\Subst{{\OLId{latin-ordinary}{s}}}{{\OLMathNumeral{2}}}{{\OLId{latin-ordinary}{x}}}]$ (إذ
+$\Sat{{\OLId{latin-looped}{M}}}{{\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{a}}, {\OLId{latin-ordinary}{x}})}[\Subst{{\OLId{latin-ordinary}{s}}}{{\OLMathNumeral{2}}}{{\OLId{latin-ordinary}{x}}}]$ و$\Sat/{{\OLId{latin-looped}{M}}}{{\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{x}},
+  {\OLId{latin-ordinary}{a}})}[\Subst{{\OLId{latin-ordinary}{s}}}{{\OLMathNumeral{2}}}{{\OLId{latin-ordinary}{x}}}]$).}{}
+
+\iftag{defEx}{لتعيين ما إذا كانت !!{formula} مكممة وجوديًا
+~$\lexists[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$ مُرضاة، يلزم أن نعيّن ما إذا كان
+$\Sat{{\OLId{latin-looped}{M}}}{\lnot \lforall[{\OLId{latin-ordinary}{x}}][\lnot !A({\OLId{latin-ordinary}{x}})]}[{\OLId{latin-ordinary}{s}}]$. فمثلًا، لدينا
+  \[
+  \Sat{{\OLId{latin-looped}{M}}}{\lexists[{\OLId{latin-ordinary}{x}}][({\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{b}},{\OLId{latin-ordinary}{x}}) \lor {\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{b}}))]}[{\OLId{latin-ordinary}{s}}].
+  \]
+أولًا، $\Sat{{\OLId{latin-looped}{M}}}{{\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{b}},{\OLId{latin-ordinary}{x}}) \lor {\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{b}})}[\Subst{{\OLId{latin-ordinary}{s}}}{{\OLMathNumeral{1}}}{{\OLId{latin-ordinary}{x}}}]$
+($\Subst{{\OLId{latin-ordinary}{s}}}{{\OLMathNumeral{3}}}{{\OLId{latin-ordinary}{x}}}$ يصلح أيضًا). ومن ثم
+$\Sat/{{\OLId{latin-looped}{M}}}{\lnot({\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{b}},{\OLId{latin-ordinary}{x}}) \lor {\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{b}}))}[\Subst{{\OLId{latin-ordinary}{s}}}{{\OLMathNumeral{1}}}{{\OLId{latin-ordinary}{x}}}]$، وبالتالي
+$\Sat/{{\OLId{latin-looped}{M}}}{\lforall[{\OLId{latin-ordinary}{x}}][\lnot(({\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{b}},{\OLId{latin-ordinary}{x}}) \lor {\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{b}})))]}[{\OLId{latin-ordinary}{s}}]$، ومنه
+$\Sat{{\OLId{latin-looped}{M}}}{\lnot\lforall[{\OLId{latin-ordinary}{x}}][\lnot(({\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{b}},{\OLId{latin-ordinary}{x}}) \lor
+{\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{b}})))]}[{\OLId{latin-ordinary}{s}}]$. وأما من الجهة الأخرى
+  \[
+  \Sat/{{\OLId{latin-looped}{M}}}{\lexists[{\OLId{latin-ordinary}{x}}][({\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{b}},{\OLId{latin-ordinary}{x}}) \land {\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{b}}))]}[{\OLId{latin-ordinary}{s}}].
+  \]
+وذلك لأن $\Sat{{\OLId{latin-looped}{M}}}{\lforall[{\OLId{latin-ordinary}{x}}][\lnot({\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{b}},{\OLId{latin-ordinary}{x}}) \land
+{\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{b}}))]}[{\OLId{latin-ordinary}{s}}]$، إذ لا يوجد ${\OLId{latin-ordinary}{m}} \in \Domain {\OLId{latin-looped}{M}}$ بحيث
+$\Sat{{\OLId{latin-looped}{M}}}{{\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{b}},{\OLId{latin-ordinary}{x}}) \land {\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{b}})}[\Subst{{\OLId{latin-ordinary}{s}}}{{\OLId{latin-ordinary}{m}}}{{\OLId{latin-ordinary}{x}}}]$. ويُستدل من هذه الأمثلة على القاعدة الآتية: يكون $\Sat{{\OLId{latin-looped}{M}}}{\lexists[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]}[{\OLId{latin-ordinary}{s}}]$ إذا
+وفقط إذا كان $\Sat{{\OLId{latin-looped}{M}}}{!A({\OLId{latin-ordinary}{x}})}[\Subst{{\OLId{latin-ordinary}{s}}}{{\OLId{latin-ordinary}{m}}}{{\OLId{latin-ordinary}{x}}}]$ لواحد على الأقل
+من~${\OLId{latin-ordinary}{m}} \in \Domain {\OLId{latin-looped}{M}}$.}{}
+
+\iftag{defAll}{لتعيين ما إذا كانت !!{formula} مكممة كليًا
+~$\lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$ مُرضاة، يلزم أن نعيّن ما إذا كان
+$\Sat{{\OLId{latin-looped}{M}}}{\lnot\lexists[{\OLId{latin-ordinary}{x}}][\lnot !A({\OLId{latin-ordinary}{x}})]}[{\OLId{latin-ordinary}{s}}]$. فمثلًا
+  \[
+  \Sat{{\OLId{latin-looped}{M}}}{\lforall[{\OLId{latin-ordinary}{x}}][({\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{a}}) \lif {\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{a}},{\OLId{latin-ordinary}{x}}))]}[{\OLId{latin-ordinary}{s}}],
+  \]
+أولًا، $\Sat{{\OLId{latin-looped}{M}}}{{\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{a}}) \lif {\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{a}},{\OLId{latin-ordinary}{x}})}[\Subst{{\OLId{latin-ordinary}{s}}}{{\OLId{latin-ordinary}{m}}}{{\OLId{latin-ordinary}{x}}}]$ لكل
+${\OLId{latin-ordinary}{m}} \in \Domain {\OLId{latin-looped}{M}}$ ($\Sat{{\OLId{latin-looped}{M}}}{{\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{a}},{\OLId{latin-ordinary}{x}})}[\Subst{{\OLId{latin-ordinary}{s}}}{{\OLMathNumeral{1}}}{{\OLId{latin-ordinary}{x}}}]$
+و$\Sat/{{\OLId{latin-looped}{M}}}{{\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{a}},{\OLId{latin-ordinary}{x}})}[\Subst{{\OLId{latin-ordinary}{s}}}{{\OLId{latin-ordinary}{m}}}{{\OLId{latin-ordinary}{x}}}]$ عندما ${\OLId{latin-ordinary}{m}} = {\OLMathNumeral{2}}$، أو ${\OLMathNumeral{3}}$،
+أو~${\OLMathNumeral{4}}$). ومن ثم لا يوجد ${\OLId{latin-ordinary}{m}} \in \Domain {\OLId{latin-looped}{M}}$ بحيث
+$\Sat{{\OLId{latin-looped}{M}}}{\lnot({\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{a}}) \lif {\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{a}},{\OLId{latin-ordinary}{x}}))}[\Subst{{\OLId{latin-ordinary}{s}}}{{\OLId{latin-ordinary}{m}}}{{\OLId{latin-ordinary}{x}}}]$، ولذلك
+$\Sat/{{\OLId{latin-looped}{M}}}{\lexists[{\OLId{latin-ordinary}{x}}][\lnot({\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{a}}) \lif {\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{a}},{\OLId{latin-ordinary}{x}}))]}[{\OLId{latin-ordinary}{s}}]$. وبالتالي
+$\Sat{{\OLId{latin-looped}{M}}}{\lnot\lexists[{\OLId{latin-ordinary}{x}}][\lnot({\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{a}}) \lif {\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{a}},{\OLId{latin-ordinary}{x}}))]}[{\OLId{latin-ordinary}{s}}]$. ومن
+جهة أخرى
+  \[
+  \Sat/{{\OLId{latin-looped}{M}}}{\lforall[{\OLId{latin-ordinary}{x}}][({\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{a}},{\OLId{latin-ordinary}{x}}) \lif {\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{a}}))]}[{\OLId{latin-ordinary}{s}}],
+  \]
+لأن $\Sat/{{\OLId{latin-looped}{M}}}{{\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{a}},{\OLId{latin-ordinary}{x}}) \lif {\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{a}})}[\Subst{{\OLId{latin-ordinary}{s}}}{{\OLMathNumeral{2}}}{{\OLId{latin-ordinary}{x}}}]$، ومن ثم
+$\Sat{{\OLId{latin-looped}{M}}}{\lexists[{\OLId{latin-ordinary}{x}}][\lnot({\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{a}},{\OLId{latin-ordinary}{x}}) \lif {\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{a}}))]}[{\OLId{latin-ordinary}{s}}]$. وهذه الأمثلة تدل على القاعدة الآتية: يكون
+$\Sat{{\OLId{latin-looped}{M}}}{\lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]}[{\OLId{latin-ordinary}{s}}]$ إذا وفقط إذا كان
+$\Sat{{\OLId{latin-looped}{M}}}{!A({\OLId{latin-ordinary}{x}})}[\Subst{{\OLId{latin-ordinary}{s}}}{{\OLId{latin-ordinary}{m}}}{{\OLId{latin-ordinary}{x}}}]$ لكل ${\OLId{latin-ordinary}{m}} \in \Domain {\OLId{latin-looped}{M}}$.}{}
+
+ولننظر الآن في الحالة الأكثر تركيبًا:
+\[
+\lforall[{\OLId{latin-ordinary}{x}}][({\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{a}},{\OLId{latin-ordinary}{x}}) \lif \lexists[{\OLId{latin-ordinary}{y}}][{\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})])].
+\]
+لما كان $\Sat/{{\OLId{latin-looped}{M}}}{{\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{a}},{\OLId{latin-ordinary}{x}})}[\Subst{{\OLId{latin-ordinary}{s}}}{{\OLMathNumeral{3}}}{{\OLId{latin-ordinary}{x}}}]$ و
+$\Sat/{{\OLId{latin-looped}{M}}}{{\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{a}},{\OLId{latin-ordinary}{x}})}[\Subst{{\OLId{latin-ordinary}{s}}}{{\OLMathNumeral{4}}}{{\OLId{latin-ordinary}{x}}}]$، فلم يبق للنظر في تالية الشرطية إلا الحالتان ${\OLId{latin-ordinary}{m}} = {\OLMathNumeral{1}}$
+و${\OLId{latin-ordinary}{m}} = {\OLMathNumeral{2}}$. هل $\Sat{{\OLId{latin-looped}{M}}}{\lexists[{\OLId{latin-ordinary}{y}}][{\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})]}[\Subst{{\OLId{latin-ordinary}{s}}}{{\OLMathNumeral{1}}}{{\OLId{latin-ordinary}{x}}}]$؟
+يكون الجواب بالإيجاب إذا وُجد ${\OLId{latin-ordinary}{n}} \in \Domain {\OLId{latin-looped}{M}}$ واحد على الأقل بحيث
+$\Sat{{\OLId{latin-looped}{M}}}{{\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})}[\Subst{\Subst{{\OLId{latin-ordinary}{s}}}{{\OLMathNumeral{1}}}{{\OLId{latin-ordinary}{x}}}}{{\OLId{latin-ordinary}{n}}}{{\OLId{latin-ordinary}{y}}}]$. ولنا أن
+نأخذ ${\OLId{latin-ordinary}{n}} = {\OLMathNumeral{1}}$، فيكون
+$\Subst{\Subst{{\OLId{latin-ordinary}{s}}}{{\OLMathNumeral{1}}}{{\OLId{latin-ordinary}{x}}}}{{\OLId{latin-ordinary}{n}}}{{\OLId{latin-ordinary}{y}}} = \Subst{{\OLId{latin-ordinary}{s}}}{{\OLMathNumeral{1}}}{{\OLId{latin-ordinary}{y}}} = {\OLId{latin-ordinary}{s}}$. ولما كان
+${\OLId{latin-ordinary}{s}}({\OLId{latin-ordinary}{x}}) = {\OLMathNumeral{1}}$، و${\OLId{latin-ordinary}{s}}({\OLId{latin-ordinary}{y}}) = {\OLMathNumeral{1}}$، و$\tuple{{\OLMathNumeral{1}},{\OLMathNumeral{1}}} \in \Assign{{\OLId{latin-looped}{R}}}{{\OLId{latin-looped}{M}}}$، فالجواب
+نعم.
+
+وأما السؤال هل
+$\Sat{{\OLId{latin-looped}{M}}}{\lexists[{\OLId{latin-ordinary}{y}}][{\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})]}[\Subst{{\OLId{latin-ordinary}{s}}}{{\OLMathNumeral{2}}}{{\OLId{latin-ordinary}{x}}}]$، فجوابه بالنظر في
+إسنادات ال!!{variable}s~$\Subst{\Subst{{\OLId{latin-ordinary}{s}}}{{\OLMathNumeral{2}}}{{\OLId{latin-ordinary}{x}}}}{{\OLId{latin-ordinary}{n}}}{{\OLId{latin-ordinary}{y}}}$. وهنا،
+عندما ${\OLId{latin-ordinary}{n}} = {\OLMathNumeral{1}}$، يكون هذا الإسناد~${\OLId{latin-ordinary}{s}}_{\OLMathNumeral{2}} = \Subst{{\OLId{latin-ordinary}{s}}}{{\OLMathNumeral{2}}}{{\OLId{latin-ordinary}{x}}}$، وهذا الإسناد لا
+يرضي ${\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})$ (${\OLId{latin-ordinary}{s}}_{\OLMathNumeral{2}}({\OLId{latin-ordinary}{x}}) = {\OLMathNumeral{2}}$، و${\OLId{latin-ordinary}{s}}_{\OLMathNumeral{2}}({\OLId{latin-ordinary}{y}}) = {\OLMathNumeral{1}}$،
+و$\tuple{{\OLMathNumeral{2}},{\OLMathNumeral{1}}}\notin \Assign{{\OLId{latin-looped}{R}}}{{\OLId{latin-looped}{M}}}$). وأما إذا أخذنا
+$\Subst{\Subst{{\OLId{latin-ordinary}{s}}}{{\OLMathNumeral{2}}}{{\OLId{latin-ordinary}{x}}}}{{\OLMathNumeral{3}}}{{\OLId{latin-ordinary}{y}}} = \Subst{{\OLId{latin-ordinary}{s}}_{\OLMathNumeral{2}}}{{\OLMathNumeral{3}}}{{\OLId{latin-ordinary}{y}}}$،
+فلدينا $\Sat{{\OLId{latin-looped}{M}}}{{\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})}[\Subst{{\OLId{latin-ordinary}{s}}_{\OLMathNumeral{2}}}{{\OLMathNumeral{3}}}{{\OLId{latin-ordinary}{y}}}]$ لأن
+$\tuple{{\OLMathNumeral{2}},{\OLMathNumeral{3}}} \in \Assign{{\OLId{latin-looped}{R}}}{{\OLId{latin-looped}{M}}}$، ومن ثم
+$\Sat{{\OLId{latin-looped}{M}}}{\lexists[{\OLId{latin-ordinary}{y}}][{\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})]}[{\OLId{latin-ordinary}{s}}_{\OLMathNumeral{2}}]$.
+
+وهكذا، لكل ${\OLId{latin-ordinary}{m}} \in \Domain {\OLId{latin-looped}{M}}$، إما
+$\Sat/{{\OLId{latin-looped}{M}}}{{\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{a}},{\OLId{latin-ordinary}{x}})}[\Subst{{\OLId{latin-ordinary}{s}}}{{\OLId{latin-ordinary}{m}}}{{\OLId{latin-ordinary}{x}}}]$ (إذا كان ${\OLId{latin-ordinary}{m}} = {\OLMathNumeral{3}}$، أو~${\OLMathNumeral{4}}$)،
+وإما $\Sat{{\OLId{latin-looped}{M}}}{\lexists[{\OLId{latin-ordinary}{y}}][{\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})]}[\Subst{{\OLId{latin-ordinary}{s}}}{{\OLId{latin-ordinary}{m}}}{{\OLId{latin-ordinary}{x}}}]$ (إذا كان
+${\OLId{latin-ordinary}{m}} = {\OLMathNumeral{1}}$، أو~${\OLMathNumeral{2}}$)، ومن ثم
+\[
+\Sat{{\OLId{latin-looped}{M}}}{\lforall[{\OLId{latin-ordinary}{x}}][({\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{a}},{\OLId{latin-ordinary}{x}}) \lif \lexists[{\OLId{latin-ordinary}{y}}][{\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})])]}[{\OLId{latin-ordinary}{s}}].
+\]
+ومن جهة أخرى
+\[
+\Sat/{{\OLId{latin-looped}{M}}}{\lexists[{\OLId{latin-ordinary}{x}}][({\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{a}},{\OLId{latin-ordinary}{x}}) \land \lforall[{\OLId{latin-ordinary}{y}}][{\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})])]}[{\OLId{latin-ordinary}{s}}].
+\]
+لدينا $\Sat{{\OLId{latin-looped}{M}}}{{\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{a}},{\OLId{latin-ordinary}{x}})}[\Subst{{\OLId{latin-ordinary}{s}}}{{\OLId{latin-ordinary}{m}}}{{\OLId{latin-ordinary}{x}}}]$ فقط عندما ${\OLId{latin-ordinary}{m}} = {\OLMathNumeral{1}}$ وعندما
+${\OLId{latin-ordinary}{m}} = {\OLMathNumeral{2}}$. لكن لكل من هاتين القيمتين لـ~${\OLId{latin-ordinary}{m}}$ يوجد بدوره
+${\OLId{latin-ordinary}{n}} \in \Domain {\OLId{latin-looped}{M}}$، هو ${\OLId{latin-ordinary}{n}} = {\OLMathNumeral{4}}$، بحيث
+$\Sat/{{\OLId{latin-looped}{M}}}{{\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})}[\Subst{\Subst{{\OLId{latin-ordinary}{s}}}{{\OLId{latin-ordinary}{m}}}{{\OLId{latin-ordinary}{x}}}}{{\OLId{latin-ordinary}{n}}}{{\OLId{latin-ordinary}{y}}}]$، ومن ثم
+$\Sat/{{\OLId{latin-looped}{M}}}{\lforall[{\OLId{latin-ordinary}{y}}][{\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})]}[\Subst{{\OLId{latin-ordinary}{s}}}{{\OLId{latin-ordinary}{m}}}{{\OLId{latin-ordinary}{x}}}]$ عندما ${\OLId{latin-ordinary}{m}} = {\OLMathNumeral{1}}$
+وعندما ${\OLId{latin-ordinary}{m}} = {\OLMathNumeral{2}}$. فالحاصل أنه لا يوجد ${\OLId{latin-ordinary}{m}} \in \Domain {\OLId{latin-looped}{M}}$ بحيث
+$\Sat{{\OLId{latin-looped}{M}}}{{\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{a}},{\OLId{latin-ordinary}{x}}) \land \lforall[{\OLId{latin-ordinary}{y}}][{\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})]}[\Subst{{\OLId{latin-ordinary}{s}}}{{\OLId{latin-ordinary}{m}}}{{\OLId{latin-ordinary}{x}}}]$.
+\end{ex}
+
+\iftag{defEx}{%
+\begin{prop}\ollabel{prop:sat-ex}
+$\Sat{{\OLId{latin-looped}{M}}}{\lexists[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]}[{\OLId{latin-ordinary}{s}}]$ إذا وفقط إذا وُجد مغاير بالنسبة
+إلى~${\OLId{latin-ordinary}{x}}$، ${\OLId{latin-ordinary}{s}}'$، لـ~${\OLId{latin-ordinary}{s}}$ بحيث $\Sat{{\OLId{latin-looped}{M}}}{!B({\OLId{latin-ordinary}{x}})}[{\OLId{latin-ordinary}{s}}']$.
+\end{prop}
+
+\begin{proof}
+  تمرين.
+\end{proof}
+}{}
+
+\tagprob{defEx}
+\begin{prob}
+  أثبت \olref[fol][syn][sat]{prop:sat-ex}.
+\end{prob}
+\tagendprob
+
+\iftag{defAll}{%
+\begin{prop}\ollabel{prop:sat-all}
+$\Sat{{\OLId{latin-looped}{M}}}{\lforall[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]}[{\OLId{latin-ordinary}{s}}]$ إذا وفقط إذا كان، لكل مغاير
+بالنسبة إلى~${\OLId{latin-ordinary}{x}}$، ${\OLId{latin-ordinary}{s}}'$، لـ~${\OLId{latin-ordinary}{s}}$، $\Sat{{\OLId{latin-looped}{M}}}{!B({\OLId{latin-ordinary}{x}})}[{\OLId{latin-ordinary}{s}}']$.
+\end{prop}
+
+\begin{proof}
+  تمرين.
+\end{proof}
+}{}
+
+\tagprob{defAll}
+\begin{prob}
+  أثبت \olref[fol][syn][sat]{prop:sat-all}.
+\end{prob}
+\tagendprob
+
+\begin{prob}
+لتكن $\Lang L = \{{\OLId{latin-ordinary}{c}}, {\OLId{latin-ordinary}{f}}, {\OLId{latin-looped}{A}}\}$ ذات !!{constant} واحد، و!!{function}
+واحدة أحادية المحل، و!!{predicate} واحد ثنائي المحل، ولتكن
+ال!!{structure}~$\Struct{M}$ معطاة بما يأتي:
+\begin{enumerate}
+\item $\Domain {\OLId{latin-looped}{M}} = \{{\OLMathNumeral{1}}, {\OLMathNumeral{2}}, {\OLMathNumeral{3}}\}$
+\item $\Assign{{\OLId{latin-ordinary}{c}}}{{\OLId{latin-looped}{M}}} = {\OLMathNumeral{3}}$
+\item $\Assign{{\OLId{latin-ordinary}{f}}}{{\OLId{latin-looped}{M}}}({\OLMathNumeral{1}}) = {\OLMathNumeral{2}}, \Assign{{\OLId{latin-ordinary}{f}}}{{\OLId{latin-looped}{M}}}({\OLMathNumeral{2}}) = {\OLMathNumeral{3}}, \Assign{{\OLId{latin-ordinary}{f}}}{{\OLId{latin-looped}{M}}}({\OLMathNumeral{3}}) = {\OLMathNumeral{2}}$
+\item $\Assign{{\OLId{latin-looped}{A}}}{{\OLId{latin-looped}{M}}} = \{\tuple{{\OLMathNumeral{1}}, {\OLMathNumeral{2}}}, \tuple{{\OLMathNumeral{2}}, {\OLMathNumeral{3}}}, \tuple{{\OLMathNumeral{3}}, {\OLMathNumeral{3}}}\}$
+\end{enumerate}
+(أ) ليكن ${\OLId{latin-ordinary}{s}}({\OLId{latin-ordinary}{v}}) = {\OLMathNumeral{1}}$ لكل ال!!{variable}s~${\OLId{latin-ordinary}{v}}$. عيّن ما إذا كان
+\[
+\Sat{{\OLId{latin-looped}{M}}}{\lexists[{\OLId{latin-ordinary}{x}}][({\OLId{latin-looped}{A}}({\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{z}}), {\OLId{latin-ordinary}{c}}) \lif \lforall[{\OLId{latin-ordinary}{y}}][({\OLId{latin-looped}{A}}({\OLId{latin-ordinary}{y}}, {\OLId{latin-ordinary}{x}}) \lor {\OLId{latin-looped}{A}}({\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{y}}),
+      {\OLId{latin-ordinary}{x}}))])]}[{\OLId{latin-ordinary}{s}}]
+\]
+وبيّن وجه الحكم.
+
+(ب) ضع بنية أخرى وإسنادًا آخر لل!!{variable}s بحيث لا تكون
+ال!!{formula} مُرضاة بهما.
+\end{prob}
+
+\end{document}

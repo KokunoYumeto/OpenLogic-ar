@@ -1,0 +1,80 @@
+% Part: sets-functions-relations
+% Chapter: arithmetization
+% Section: From N to Z
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid[ar]{sfr}{arith}{int}
+\olsection{من $\Nat$ إلى $\Int$}
+
+نبني النظر هنا على أمرين:
+\begin{enumerate}
+\item كل عدد صحيح يقبل الصورة ${\OLId{latin-ordinary}{n}} - {\OLId{latin-ordinary}{m}}$، حيث ${\OLId{latin-ordinary}{n}}, {\OLId{latin-ordinary}{m}} \in\Nat$.
+\item وما يتضمنه التعبير ${\OLId{latin-ordinary}{n}} - {\OLId{latin-ordinary}{m}}$ من معلومات يمكن أن يحمله الزوج المرتب $\tuple{{\OLId{latin-ordinary}{n}}, {\OLId{latin-ordinary}{m}}}$ أيضًا.
+\end{enumerate}
+وقد علمنا أن الأزواج المرتبة من الأعداد الطبيعية هي !!{element}s المجموعة $\Nat^{\OLMathNumeral{2}}$. ونحن نفرض فهمنا لـ$\Nat$؛ فيقترح هذان الأمران أول وهلة أن \emph{نجعل الأعداد الصحيحة أزواجًا مرتبة من الأعداد الطبيعية}.
+
+لكن هذا الاقتراح، على بساطته، لا يفي بالمقصود. فإننا نريد ${\OLMathNumeral{0}}- {\OLMathNumeral{2}} = {\OLMathNumeral{4}} - {\OLMathNumeral{6}}$، مع أن $\tuple{{\OLMathNumeral{0}}, {\OLMathNumeral{2}} }\neq \tuple{{\OLMathNumeral{4}}, {\OLMathNumeral{6}}}$ ظاهر. فلا يصح أن نجعل $\Nat^{\OLMathNumeral{2}}$ نفسها مجموعة الأعداد الصحيحة.
+
+وحاصل المطلب العام الذي دل عليه المثال هو
+$${\OLId{latin-ordinary}{a}} - {\OLId{latin-ordinary}{b}} = {\OLId{latin-ordinary}{c}} - {\OLId{latin-ordinary}{d}} \text{ إذا وفقط إذا }{\OLId{latin-ordinary}{a}} + {\OLId{latin-ordinary}{d}} = {\OLId{latin-ordinary}{c}} + {\OLId{latin-ordinary}{b}}$$
+وهذا هو السلوك \emph{المقصود} للأعداد الصحيحة؛ إذ نحصل عليه بإضافة ${\OLId{latin-ordinary}{b}}$ و${\OLId{latin-ordinary}{d}}$ إلى الطرفين. ولضمانه نضع بين الأزواج المرتبة علاقة تكافؤ $\Intequiv$ بهذا الحد:
+$$\tuple{ {\OLId{latin-ordinary}{a}}, {\OLId{latin-ordinary}{b}} } \Intequiv \tuple{{\OLId{latin-ordinary}{c}}, {\OLId{latin-ordinary}{d}}}\text{ إذا وفقط إذا }{\OLId{latin-ordinary}{a}} + {\OLId{latin-ordinary}{d}} = {\OLId{latin-ordinary}{c}} + {\OLId{latin-ordinary}{b}}$$
+وبقي تحقيق كونها علاقة تكافؤ.
+\begin{prop}
+$\Intequiv$ من علاقات التكافؤ.
+\end{prop}
+\begin{proof}
+المطلوب إثبات أن $\Intequiv$ انعكاسية ومتناظرة ومتعدية.
+
+\emph{الانعكاسية:} يتحقق $\tuple{{\OLId{latin-ordinary}{a}}, {\OLId{latin-ordinary}{b}}} \Intequiv \tuple{{\OLId{latin-ordinary}{a}}, {\OLId{latin-ordinary}{b}}}$، لأن ${\OLId{latin-ordinary}{a}} + {\OLId{latin-ordinary}{b}} = {\OLId{latin-ordinary}{b}} + {\OLId{latin-ordinary}{a}}$.
+
+\emph{التناظر:} إذا فرضنا $\tuple{{\OLId{latin-ordinary}{a}}, {\OLId{latin-ordinary}{b}}} \Intequiv \tuple{{\OLId{latin-ordinary}{c}}, {\OLId{latin-ordinary}{d}}}$ حصل ${\OLId{latin-ordinary}{a}} + {\OLId{latin-ordinary}{d}} = {\OLId{latin-ordinary}{c}} + {\OLId{latin-ordinary}{b}}$. وبقلب المساواة نحصل على ${\OLId{latin-ordinary}{c}} + {\OLId{latin-ordinary}{b}} = {\OLId{latin-ordinary}{a}} + {\OLId{latin-ordinary}{d}}$، فيثبت $\tuple{{\OLId{latin-ordinary}{c}}, {\OLId{latin-ordinary}{d}}} \Intequiv \tuple{{\OLId{latin-ordinary}{a}}, {\OLId{latin-ordinary}{b}}}$.
+
+\emph{التعدي:} ليكن $\tuple{{\OLId{latin-ordinary}{a}}, {\OLId{latin-ordinary}{b}}} \Intequiv \tuple{{\OLId{latin-ordinary}{c}}, {\OLId{latin-ordinary}{d}}}\Intequiv \tuple{{\OLId{latin-ordinary}{m}}, {\OLId{latin-ordinary}{n}}}$. فيكون ${\OLId{latin-ordinary}{a}} + {\OLId{latin-ordinary}{d}} = {\OLId{latin-ordinary}{c}} + {\OLId{latin-ordinary}{b}}$ و${\OLId{latin-ordinary}{c}} + {\OLId{latin-ordinary}{n}} = {\OLId{latin-ordinary}{m}} + {\OLId{latin-ordinary}{d}}$. وبجمعهما نجد ${\OLId{latin-ordinary}{a}} + {\OLId{latin-ordinary}{d}} + {\OLId{latin-ordinary}{c}} + {\OLId{latin-ordinary}{n}} = {\OLId{latin-ordinary}{c}} + {\OLId{latin-ordinary}{b}} + {\OLId{latin-ordinary}{m}} + {\OLId{latin-ordinary}{d}}$؛ ومنه، بالحذف، ${\OLId{latin-ordinary}{a}} + {\OLId{latin-ordinary}{n}} = {\OLId{latin-ordinary}{m}} + {\OLId{latin-ordinary}{b}}$. فهذا يثبت $\tuple{{\OLId{latin-ordinary}{a}}, {\OLId{latin-ordinary}{b}} } \Intequiv \tuple{{\OLId{latin-ordinary}{m}}, {\OLId{latin-ordinary}{n}}}$.
+\end{proof}
+
+وقد ثبت التكافؤ، فيصح أن نأخذ فئاته ونضع التعريف الآتي.
+
+\begin{defn}
+الأعداد الصحيحة فئات تكافؤ الأزواج المرتبة من الأعداد الطبيعية تحت العلاقة $\Intequiv$؛ وبالرمز $\Int = \equivclass{\Nat^{\OLMathNumeral{2}}}{\Intequiv}$.
+\end{defn}
+
+وقد يثير هذا التعريف الاشتراطي وجوهًا شتى من النظر \emph{الفلسفي}. فنؤخر الكلام عليها قليلًا، ونتابع أولًا ما يقتضيه البناء من مسائل تقنية.
+
+بعد تعيين الأعداد الصحيحة يلزم تعيين الدوال والعلاقات الأساسية عليها. فنكتب $\equivrep{{\OLId{latin-ordinary}{m}}, {\OLId{latin-ordinary}{n}}}{\Intequiv}$ لفئة التكافؤ تحت $\Intequiv$ التي تضم $\tuple{{\OLId{latin-ordinary}{m}}, {\OLId{latin-ordinary}{n}}}$ بوصفه !!a{element} منها.\footnote{لو جرينا على ترميز \olref[sfr][rel][eqv]{def:equivalenceclass} لكتبنا $\equivrep{\tuple{{\OLId{latin-ordinary}{m}},{\OLId{latin-ordinary}{n}}}}{\Intequiv}$ للشيء نفسه؛ وإنما اخترنا الاختصار ليسهل النظر فيه.} فحدها:
+	$$\equivrep{{\OLId{latin-ordinary}{m}}, {\OLId{latin-ordinary}{n}}}{\Intequiv} = \Setabs{\tuple{{\OLId{latin-ordinary}{a}}, {\OLId{latin-ordinary}{b}}} \in \Nat^{\OLMathNumeral{2}}}{\tuple{{\OLId{latin-ordinary}{a}}, {\OLId{latin-ordinary}{b}}}\Intequiv \tuple{{\OLId{latin-ordinary}{m}}, {\OLId{latin-ordinary}{n}}}}$$
+ونعرف العمليات والترتيب بالحدود الآتية:
+	\begin{align*}
+		\equivrep{{\OLId{latin-ordinary}{a}}, {\OLId{latin-ordinary}{b}}}{\Intequiv} + \equivrep{{\OLId{latin-ordinary}{c}}, {\OLId{latin-ordinary}{d}}}{\Intequiv} &= \equivrep{{\OLId{latin-ordinary}{a}} + {\OLId{latin-ordinary}{c}}, {\OLId{latin-ordinary}{b}} + {\OLId{latin-ordinary}{d}}}{\Intequiv}\\
+		\equivrep{{\OLId{latin-ordinary}{a}}, {\OLId{latin-ordinary}{b}}}{\Intequiv} \times \equivrep{{\OLId{latin-ordinary}{c}}, {\OLId{latin-ordinary}{d}}}{\Intequiv} &= \equivrep{{\OLId{latin-ordinary}{a}} {\OLId{latin-ordinary}{c}} + {\OLId{latin-ordinary}{b}}  {\OLId{latin-ordinary}{d}}, {\OLId{latin-ordinary}{a}}  {\OLId{latin-ordinary}{d}} + {\OLId{latin-ordinary}{b}} {\OLId{latin-ordinary}{c}}}{\Intequiv}\\
+		\equivrep{{\OLId{latin-ordinary}{a}}, {\OLId{latin-ordinary}{b}}}{\Intequiv} \leq \equivrep{{\OLId{latin-ordinary}{c}}, {\OLId{latin-ordinary}{d}}}{\Intequiv} &\text{ إذا وفقط إذا }{\OLId{latin-ordinary}{a}} + {\OLId{latin-ordinary}{d}} \leq {\OLId{latin-ordinary}{b}} + {\OLId{latin-ordinary}{c}}
+	\end{align*}
+وكما جرت العادة، نجعل «$ab$» مكان «$({\OLId{latin-ordinary}{a}} \times {\OLId{latin-ordinary}{b}})$» تخفيفًا لقراءة البديهيات. ثم لا بد من التحقق أن هذه التعريفات تجري \emph{على الوجه المطلوب}. وتفصيل المطلوب وإثباته فيه طول ومشقة، فنرجئه إلى \olref[check]{sec}؛ وحاصل ما سيثبت هناك أن التعريفات تفي بالغرض.
+
+وبقيت مسألة: قد بنينا الأعداد الصحيحة من الأعداد الطبيعية، فيقتضي هذا البناء أن الطبيعية \emph{ليست هي بأعيانها أعدادًا صحيحة}. وسيأتي النظر في دلالة ذلك الفلسفية في \olref[ref]{sec}. أما ما نحتاج إليه في الحساب فهو سبيل لمعاملة الأعداد الطبيعية \emph{معاملة} الأعداد الصحيحة. وهو يسير: نضع لكل ${\OLId{latin-ordinary}{n}} \in \Nat$ العدد ${\OLId{latin-ordinary}{n}}_\Int = \equivrep{{\OLId{latin-ordinary}{n}}, {\OLMathNumeral{0}}}{\Intequiv}$. ولا يتم المقصود حتى نتحقق أن هذا الوضع يحفظ العمليات والترتيب؛ أي إنه لكل ${\OLId{latin-ordinary}{m}}, {\OLId{latin-ordinary}{n}}
+\in \Nat$
+\begin{align*}
+	({\OLId{latin-ordinary}{m}} + {\OLId{latin-ordinary}{n}})_\Int &= {\OLId{latin-ordinary}{m}}_\Int + {\OLId{latin-ordinary}{n}}_\Int\\
+	({\OLId{latin-ordinary}{m}} \times {\OLId{latin-ordinary}{n}})_\Int &= {\OLId{latin-ordinary}{m}}_\Int \times {\OLId{latin-ordinary}{n}}_\Int\\
+	{\OLId{latin-ordinary}{m}} \leq {\OLId{latin-ordinary}{n}} &\liff {\OLId{latin-ordinary}{m}}_\Int \leq {\OLId{latin-ordinary}{n}}_\Int
+\end{align*}
+وهذه الشروط يسيرة التحقق. فالشرط الثاني، مثلًا، ينتج من قوانين الأعداد الطبيعية بالحساب الآتي:
+%\begin{proof}
+%	Helping myself to the behaviour of the natural numbers, evidently:
+	\begin{align*}
+%		(m + n)_\Int  = \equivrep{m + n, 0}{\Intequiv} = \equivrep{m + n, 0 + 0}{\Intequiv} = \equivrep{m, 0}{\Intequiv} + \equivrep{n, 0}{\Intequiv} = m_\Int + n_\Int\\
+		({\OLId{latin-ordinary}{m}} \times {\OLId{latin-ordinary}{n}})_\Int  &= \equivrep{{\OLId{latin-ordinary}{m}} \times {\OLId{latin-ordinary}{n}}, {\OLMathNumeral{0}}}{\Intequiv} \\
+		&= \equivrep{{\OLId{latin-ordinary}{m}} \times {\OLId{latin-ordinary}{n}} + {\OLMathNumeral{0}} \times {\OLMathNumeral{0}}, {\OLId{latin-ordinary}{m}} \times {\OLMathNumeral{0}} + {\OLMathNumeral{0}} \times {\OLId{latin-ordinary}{n}}}{\Intequiv} \\
+		&= \equivrep{{\OLId{latin-ordinary}{m}}, {\OLMathNumeral{0}}}{\Intequiv} \times \equivrep{{\OLId{latin-ordinary}{n}}, {\OLMathNumeral{0}}}{\Intequiv} \\
+		&= {\OLId{latin-ordinary}{m}}_\Int \times {\OLId{latin-ordinary}{n}}_\Int
+	\end{align*}
+%\end{proof}
+وأما الشرطان الآخران فإثباتهما تمرين للقارئ.
+\begin{prob}
+	حقق $({\OLId{latin-ordinary}{m}} + {\OLId{latin-ordinary}{n}})_\Int = {\OLId{latin-ordinary}{m}}_\Int + {\OLId{latin-ordinary}{n}}_\Int$، وحقق
+	${\OLId{latin-ordinary}{m}} \leq {\OLId{latin-ordinary}{n}} \liff {\OLId{latin-ordinary}{m}}_\Int \leq {\OLId{latin-ordinary}{n}}_\Int$، مهما يكن ${\OLId{latin-ordinary}{m}}, {\OLId{latin-ordinary}{n}} \in \Nat$.
+\end{prob}
+\end{document}

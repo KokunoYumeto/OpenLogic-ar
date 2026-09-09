@@ -1,0 +1,326 @@
+% Part: lambda-calculus
+% Chapter: syntax
+% Section: alpha
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{syn}{alp}
+\olsection{تحويل~${\OLId{greek-variable}{alpha}}$}
+
+لننظر في العلاقة بين~$\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{x}}]$ و$\lambd[{\OLId{latin-ordinary}{y}}][{\OLId{latin-ordinary}{y}}]$: كلاهما يمثل دالة الهوية،
+ولكنهما حدان متغايران من حيث التركيب. وليس بينهما اختلاف إلا اسم المتغير المقيد؛
+فأحدهما يحصل من الآخر بتغيير هذا الاسم. وهذا هو \emph{تحويل~${\OLId{greek-variable}{alpha}}$}.
+
+\begin{defn}[تغيير المتغير المقيد، $\aconvone$]
+  إذا احتوى الحد~${\OLId{latin-looped}{M}}$ على واقعة لـ$\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-looped}{N}}]$، وتحقق~${\OLId{latin-ordinary}{y}} \notin
+  \FV{{\OLId{latin-looped}{N}}}$، وكان~$\Subst{{\OLId{latin-looped}{N}}}{{\OLId{latin-ordinary}{y}}}{{\OLId{latin-ordinary}{x}}}$ معرّفًا، ووضعنا موضع تلك الواقعة
+  \begin{equation*}
+    \lambd[{\OLId{latin-ordinary}{y}}][\Subst{{\OLId{latin-looped}{N}}}{{\OLId{latin-ordinary}{y}}}{{\OLId{latin-ordinary}{x}}}]
+  \end{equation*}
+  فحصل الحد~${\OLId{latin-looped}{M}}'$، سمينا العملية \emph{تغييرًا للمتغير المقيد}، ورمزنا إليها بـ
+  ${\OLId{latin-looped}{M}} \redone[{\OLId{greek-variable}{alpha}}] {\OLId{latin-looped}{M}}'$.
+\end{defn}
+
+\begin{defn}[توافق العلاقة]
+  العلاقة~${\OLId{latin-looped}{R}}$ على الحدود \emph{متوافقة} متى تحققت فيها الشروط الثلاثة:
+  \begin{enumerate}
+  \item من~${\OLId{latin-looped}{R}} {\OLId{latin-looped}{N}} {\OLId{latin-looped}{N}}'$ يلزم~${\OLId{latin-looped}{R}} \lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-looped}{N}}] \lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-looped}{N}}']$
+  \item من~${\OLId{latin-looped}{R}} {\OLId{latin-looped}{P}} {\OLId{latin-looped}{P}}'$ يلزم~${\OLId{latin-looped}{R}} (PQ) ({\OLId{latin-looped}{P}}'{\OLId{latin-looped}{Q}})$
+  \item من~${\OLId{latin-looped}{R}} {\OLId{latin-looped}{Q}} {\OLId{latin-looped}{Q}}'$ يلزم~${\OLId{latin-looped}{R}} (PQ) (PQ')$
+  \end{enumerate}
+\end{defn}
+
+وبهذا نصوغ التعريف على وجه آخر:
+\begin{defn}[تغيير المتغير المقيد، $\aconvone$]
+  علاقة \emph{تغيير المتغير المقيد} ($\redone[{\OLId{greek-variable}{alpha}}]$) أصغر العلاقات المتوافقة
+  على الحدود التي تستوفي الشرط التالي:
+  \begin{align*}
+    &\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-looped}{N}}] \redone[{\OLId{greek-variable}{alpha}}] \lambd[{\OLId{latin-ordinary}{y}}][\Subst{{\OLId{latin-looped}{N}}}{{\OLId{latin-ordinary}{y}}}{{\OLId{latin-ordinary}{x}}}] && \text{إذا
+      كان~${\OLId{latin-ordinary}{x}} \neq {\OLId{latin-ordinary}{y}}$ و${\OLId{latin-ordinary}{y}} \notin \FV{{\OLId{latin-looped}{N}}}$} \\
+    & &&\text{وكان~$\Subst{{\OLId{latin-looped}{N}}}{{\OLId{latin-ordinary}{y}}}{{\OLId{latin-ordinary}{x}}}$ معرّفًا}
+  \end{align*}
+\end{defn}
+
+ومعنى «أصغر» أنها تضم ما يوجبه التوافق والشرط المذكور من الأزواج، ولا تضم ما زاد عليه.
+ومن هنا نحصل على التعريف الآتي أيضًا:
+
+\begin{defn}[تغيير المتغير المقيد، $\aconvone$] \ollabel{defn:aconvone}
+  لعلاقة \emph{تغيير المتغير المقيد} ($\aconvone$) القواعد الاستقرائية التالية:
+  \begin{enumerate}
+  \item من~${\OLId{latin-looped}{N}} \aconvone {\OLId{latin-looped}{N}}'$ يلزم~$\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-looped}{N}}] \aconvone
+    \lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-looped}{N}}']$ \ollabel{defn:aconvone1}
+  \item من~${\OLId{latin-looped}{P}} \aconvone {\OLId{latin-looped}{P}}'$ يلزم~$(PQ) \aconvone ({\OLId{latin-looped}{P}}'{\OLId{latin-looped}{Q}})$ \ollabel{defn:aconvone2}
+  \item من~${\OLId{latin-looped}{Q}} \aconvone {\OLId{latin-looped}{Q}}'$ يلزم~$(PQ) \aconvone (PQ')$ \ollabel{defn:aconvone3}
+  \item إذا تحقق~${\OLId{latin-ordinary}{x}} \neq {\OLId{latin-ordinary}{y}}$ و${\OLId{latin-ordinary}{y}} \notin \FV{{\OLId{latin-looped}{N}}}$ وكان~$\Subst{{\OLId{latin-looped}{N}}}{{\OLId{latin-ordinary}{y}}}{{\OLId{latin-ordinary}{x}}}$
+    معرّفًا، لزم~$\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-looped}{N}}] \redone[{\OLId{greek-variable}{alpha}}]
+    \lambd[{\OLId{latin-ordinary}{y}}][\Subst{{\OLId{latin-looped}{N}}}{{\OLId{latin-ordinary}{y}}}{{\OLId{latin-ordinary}{x}}}]$.
+    \ollabel{defn:aconvone4}
+  \end{enumerate}
+\end{defn}
+
+هذه التعريفات متكافئة، وإثبات تكافؤها متروك تمرينًا. والذي نعتمده فيما يأتي هو التعريف الاستقرائي.
+
+\begin{defn}[تحويل~${\OLId{greek-variable}{alpha}}$، $\aconv$]
+  علاقة \emph{تحويل~${\OLId{greek-variable}{alpha}}$} ($\aconv$) أصغر علاقة انعكاسية متعدية على الحدود
+  تشتمل على~$\aconvone$.
+\end{defn}
+
+والمراد بـ«أصغر»، على ما تقدم، ألا تضم العلاقة إلا ما يوجبه الانعكاس والتعدي
+واحتواء~$\aconvone$. وهذا يعطي التعريف المكافئ التالي:
+
+\begin{defn}[تحويل~${\OLId{greek-variable}{alpha}}$، $\aconv$] \ollabel{defn:aconv}
+  لعلاقة \emph{تحويل~${\OLId{greek-variable}{alpha}}$} ($\aconv$) التعريف الاستقرائي الآتي:
+  \begin{enumerate}
+  \item من~${\OLId{latin-looped}{P}} \aconv {\OLId{latin-looped}{Q}}$ و${\OLId{latin-looped}{Q}} \aconv {\OLId{latin-looped}{R}}$ يلزم~${\OLId{latin-looped}{P}} \aconv {\OLId{latin-looped}{R}}$.
+    \ollabel{defn:aconv1}
+  \item من~${\OLId{latin-looped}{P}} \aconvone {\OLId{latin-looped}{Q}}$ يلزم~${\OLId{latin-looped}{P}} \aconv {\OLId{latin-looped}{Q}}$. \ollabel{defn:aconv2}
+  \item ${\OLId{latin-looped}{P}} \aconv {\OLId{latin-looped}{P}}$. \ollabel{defn:aconv3}
+  \end{enumerate}
+\end{defn}
+
+\begin{ex}
+  الحد~$\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{f}} {\OLId{latin-ordinary}{x}}]$ يقبل تحويل~${\OLId{greek-variable}{alpha}}$ إلى~$\lambd[{\OLId{latin-ordinary}{y}}][{\OLId{latin-ordinary}{f}}
+  {\OLId{latin-ordinary}{y}}]$، وكذلك العكس.
+  والمعنى غير الصوري أن كليهما دالة تأخذ وسيطًا وتردّ حاصل تطبيق~${\OLId{latin-ordinary}{f}}$ عليه،
+  مع الإحالة إلى متغير البيئة~${\OLId{latin-ordinary}{f}}$.
+
+  وأما~$\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{f}} {\OLId{latin-ordinary}{x}}]$ فلا يقبل تحويل~${\OLId{greek-variable}{alpha}}$ إلى~$\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{g}}
+    {\OLId{latin-ordinary}{x}}]$؛
+  لأنهما، بالمعنى غير الصوري، يحيلان إلى متغيري البيئة~${\OLId{latin-ordinary}{f}}$ و${\OLId{latin-ordinary}{g}}$ بالترتيب.
+  فهما دالتان مختلفتان: إذا اختلف~${\OLId{latin-ordinary}{f}}$ و${\OLId{latin-ordinary}{g}}$ في البيئة اختلف سلوكهما فيها.
+\end{ex}
+
+\begin{prob}
+  بيّن في كل زوج مما يلي هل يقبل حداه التحويل بحسب~${\OLId{greek-variable}{alpha}}$:
+  \begin{enumerate}
+  \item $\lambd[{\OLId{latin-ordinary}{x}}][\lambd[{\OLId{latin-ordinary}{y}}][{\OLId{latin-ordinary}{x}}]]$ و$\lambd[{\OLId{latin-ordinary}{y}}][\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{y}}]]$
+  \item $\lambd[{\OLId{latin-ordinary}{x}}][\lambd[{\OLId{latin-ordinary}{y}}][{\OLId{latin-ordinary}{x}}]]$ و$\lambd[{\OLId{latin-ordinary}{c}}][\lambd[{\OLId{latin-ordinary}{b}}][{\OLId{latin-ordinary}{a}}]]$
+  \item $\lambd[{\OLId{latin-ordinary}{x}}][\lambd[{\OLId{latin-ordinary}{y}}][{\OLId{latin-ordinary}{x}}]]$ و$\lambd[{\OLId{latin-ordinary}{c}}][\lambd[{\OLId{latin-ordinary}{b}}][{\OLId{latin-ordinary}{a}}]]$
+  \end{enumerate}
+\end{prob}
+
+\begin{lem}\ollabel{lem:fv-one}
+  من~${\OLId{latin-looped}{P}} \aconvone {\OLId{latin-looped}{Q}}$ يلزم~$\FV{{\OLId{latin-looped}{P}}} = \FV{{\OLId{latin-looped}{Q}}}$.
+\end{lem}
+
+\begin{proof}
+  نستقرئ~!!{derivation} العبارة~${\OLId{latin-looped}{P}} \aconvone {\OLId{latin-looped}{Q}}$.
+  \begin{enumerate}
+  \item إذا ختم الاشتقاق بالقاعدة~\olref{defn:aconvone4}، كان~${\OLId{latin-looped}{P}}$ على
+    صورة~$\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-looped}{N}}]$ و${\OLId{latin-looped}{Q}}$ على صورة
+    $\lambd[{\OLId{latin-ordinary}{y}}][\Subst{{\OLId{latin-looped}{N}}}{{\OLId{latin-ordinary}{y}}}{{\OLId{latin-ordinary}{x}}}]$، حيث~${\OLId{latin-ordinary}{x}} \neq {\OLId{latin-ordinary}{y}}$ و${\OLId{latin-ordinary}{y}} \notin \FV{{\OLId{latin-looped}{N}}}$
+    وكان~$\Subst{{\OLId{latin-looped}{N}}}{{\OLId{latin-ordinary}{y}}}{{\OLId{latin-ordinary}{x}}}$ معرّفًا. ثم نفصل بحسب~${\OLId{latin-ordinary}{x}} \in \FV{{\OLId{latin-looped}{N}}}$:
+    \begin{enumerate}
+    \item إن كان~${\OLId{latin-ordinary}{x}} \in \FV{{\OLId{latin-looped}{N}}}$، حسبنا
+      \begin{align*}
+        \FV{\lambd[{\OLId{latin-ordinary}{y}}][\Subst{{\OLId{latin-looped}{N}}}{{\OLId{latin-ordinary}{y}}}{{\OLId{latin-ordinary}{x}}}]} &=
+        \FV{\Subst{{\OLId{latin-looped}{N}}}{{\OLId{latin-ordinary}{y}}}{{\OLId{latin-ordinary}{x}}}} \setminus \{{\OLId{latin-ordinary}{y}}\} \\
+        & = ((\FV{{\OLId{latin-looped}{N}}} \setminus \{{\OLId{latin-ordinary}{x}}\}) \cup \{{\OLId{latin-ordinary}{y}}\}) \setminus \{{\OLId{latin-ordinary}{y}}\}
+         && \text{ بموجب \olref[sub]{thm:infv}} \\
+        & = \FV{{\OLId{latin-looped}{N}}} \setminus \{{\OLId{latin-ordinary}{x}}\} \\
+        & = \FV{\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-looped}{N}}]}
+      \end{align*}
+    \item وإن كان~${\OLId{latin-ordinary}{x}} \notin \FV{{\OLId{latin-looped}{N}}}$، حسبنا
+      \begin{align*}
+        \FV{\lambd[{\OLId{latin-ordinary}{y}}][\Subst{{\OLId{latin-looped}{N}}}{{\OLId{latin-ordinary}{y}}}{{\OLId{latin-ordinary}{x}}}]}
+        & = \FV{\Subst{{\OLId{latin-looped}{N}}}{{\OLId{latin-ordinary}{y}}}{{\OLId{latin-ordinary}{x}}}} \setminus \{{\OLId{latin-ordinary}{y}}\} \\
+        & = \FV{{\OLId{latin-looped}{N}}} \setminus \{{\OLId{latin-ordinary}{x}}\}
+         && \text{بموجب \olref[sub]{thm:notinfv}} \\
+        & = \FV{\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-looped}{N}}]}.
+      \end{align*}
+    \end{enumerate}
+  \item وأما الحالات الثلاث الباقية فإثباتها تمرين.
+  \end{enumerate}
+\end{proof}
+
+\begin{prob}
+  أتمّ الحالات المتروكة من برهان~\olref[lam][syn][alp]{lem:fv-one}.
+\end{prob}
+
+\begin{lem}\ollabel{lem:inv}
+  من~${\OLId{latin-looped}{P}} \aconvone {\OLId{latin-looped}{Q}}$ يلزم~${\OLId{latin-looped}{Q}} \aconvone {\OLId{latin-looped}{P}}$.
+\end{lem}
+
+\begin{proof}
+  نستقرئ~!!{derivation} العبارة~${\OLId{latin-looped}{P}} \aconvone {\OLId{latin-looped}{Q}}$.
+  \begin{enumerate}
+  \item إذا ختم الاشتقاق بالقاعدة~\olref{defn:aconvone4}، كان~${\OLId{latin-looped}{P}}$ على
+    صورة~$\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-looped}{N}}]$ و${\OLId{latin-looped}{Q}}$ على صورة
+    $\lambd[{\OLId{latin-ordinary}{y}}][\Subst{{\OLId{latin-looped}{N}}}{{\OLId{latin-ordinary}{y}}}{{\OLId{latin-ordinary}{x}}}]$، حيث~${\OLId{latin-ordinary}{x}} \neq {\OLId{latin-ordinary}{y}}$ و${\OLId{latin-ordinary}{y}} \notin \FV{{\OLId{latin-looped}{N}}}$
+    وكان~$\Subst{{\OLId{latin-looped}{N}}}{{\OLId{latin-ordinary}{y}}}{{\OLId{latin-ordinary}{x}}}$ معرّفًا. فنجد أولًا~${\OLId{latin-ordinary}{x}} \notin
+    \FV{\Subst{{\OLId{latin-looped}{N}}}{{\OLId{latin-ordinary}{y}}}{{\OLId{latin-ordinary}{x}}}}$ بموجب~\olref[sub]{thm:clr}.
+    ثم تقتضي \olref[sub]{thm:inv} أن~$\Subst{\Subst{{\OLId{latin-looped}{N}}}{{\OLId{latin-ordinary}{y}}}{{\OLId{latin-ordinary}{x}}}}{{\OLId{latin-ordinary}{x}}}{{\OLId{latin-ordinary}{y}}}$
+    ليس معرّفًا فحسب، بل يساوي~${\OLId{latin-looped}{N}}$ أيضًا. وبالقاعدة
+    \olref{defn:aconvone4} ينتج~$\lambd[{\OLId{latin-ordinary}{y}}][\Subst{{\OLId{latin-looped}{N}}}{{\OLId{latin-ordinary}{y}}}{{\OLId{latin-ordinary}{x}}}]
+    \aconvone \lambd[{\OLId{latin-ordinary}{x}}][\Subst{\Subst{{\OLId{latin-looped}{N}}}{{\OLId{latin-ordinary}{y}}}{{\OLId{latin-ordinary}{x}}}}{{\OLId{latin-ordinary}{x}}}{{\OLId{latin-ordinary}{y}}}] =
+    \lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-looped}{N}}]$.
+    % تصحيح مصدر (0362-I1): المتغير الذي تزيله لمة الخلو من الإحلال الناتج هو x، وهو المطلوب لخطوة ألفا العكسية.
+  \item وإذا كانت القاعدة الأخيرة إحدى قواعد التوافق الثلاث، طبقنا فرض
+    الاستقراء على التحويل الواقع في متن التجريد أو في الطرف الموافق من
+    التطبيق، ثم طبقنا قاعدة التوافق نفسها في الاتجاه المعاكس.
+  \end{enumerate}
+\end{proof}
+
+\begin{prob}
+  أتمّ برهان~\olref[lam][syn][alp]{lem:inv}.
+\end{prob}
+
+\begin{thm}
+  علاقة تحويل~${\OLId{greek-variable}{alpha}}$ تكافؤ على الحدود: فهي انعكاسية، متناظرة، متعدية.
+\end{thm}
+
+\begin{proof}
+  \begin{enumerate}
+  \item كل حد~${\OLId{latin-looped}{M}}$ يرجع إلى~${\OLId{latin-looped}{M}}$ من غير تغيير للمتغيرات المقيدة،
+    أي بإجراء \emph{صفر} من التغييرات.
+  \item إذا انتقل~${\OLId{latin-looped}{P}}$ بتحويل~${\OLId{greek-variable}{alpha}}$ إلى~${\OLId{latin-looped}{Q}}$ بسلسلة من تغييرات المتغير المقيد،
+    بدأنا من~${\OLId{latin-looped}{Q}}$ وعكسنا كل تغيير بموجب~\olref{lem:inv}،
+    وأجرينا المعكوسات بترتيب معاكس، فعُدنا إلى~${\OLId{latin-looped}{P}}$.
+  \item إذا انتقل~${\OLId{latin-looped}{P}}$ بتحويل~${\OLId{greek-variable}{alpha}}$ إلى~${\OLId{latin-looped}{Q}}$ بسلسلة،
+    ثم انتقل~${\OLId{latin-looped}{Q}}$ إلى~${\OLId{latin-looped}{R}}$ بسلسلة أخرى،
+    انتقل~${\OLId{latin-looped}{P}}$ إلى~${\OLId{latin-looped}{R}}$ بإجراء السلسلة الأولى ثم الثانية.
+  \end{enumerate}
+\end{proof}
+
+ومن الآن نسمي~${\OLId{latin-looped}{M}}$ و${\OLId{latin-looped}{N}}$ \emph{متكافئين بحسب~${\OLId{greek-variable}{alpha}}$}، ونكتب
+${\OLId{latin-looped}{M}} \aeq {\OLId{latin-looped}{N}}$، متى أمكن تحويل~${\OLId{latin-looped}{M}}$ بحسب~${\OLId{greek-variable}{alpha}}$ إلى~${\OLId{latin-looped}{N}}$.
+وقد أثبتنا أن ذلك يكافئ إمكان تحويل~${\OLId{latin-looped}{N}}$ بحسب~${\OLId{greek-variable}{alpha}}$ إلى~${\OLId{latin-looped}{M}}$.
+
+\begin{thm}\ollabel{thm:fv}
+  من~${\OLId{latin-looped}{M}} \aeq {\OLId{latin-looped}{N}}$ يلزم~$\FV{{\OLId{latin-looped}{M}}} = \FV{{\OLId{latin-looped}{N}}}$.
+\end{thm}
+
+\begin{proof}
+  هذه نتيجة مباشرة لـ\olref{lem:fv-one}.
+\end{proof}
+
+\begin{lem}\ollabel{lem:sub:R}
+  إذا تحقق~${\OLId{latin-looped}{R}} \aeq {\OLId{latin-looped}{R}}'$ وكان~$\Subst{{\OLId{latin-looped}{M}}}{{\OLId{latin-looped}{R}}}{{\OLId{latin-ordinary}{y}}}$ معرّفًا، كان
+  $\Subst{{\OLId{latin-looped}{M}}}{{\OLId{latin-looped}{R}}'}{{\OLId{latin-ordinary}{y}}}$ معرّفًا كذلك، وكان مكافئًا بحسب~${\OLId{greek-variable}{alpha}}$ للحد~$\Subst{{\OLId{latin-looped}{M}}}{{\OLId{latin-looped}{R}}}{{\OLId{latin-ordinary}{y}}}$.
+\end{lem}
+
+\begin{proof}
+  يترك إثباتها تمرينًا.
+\end{proof}
+
+\begin{prob}
+  أقم برهان~\olref[lam][syn][alp]{lem:sub:R}.
+\end{prob}
+
+\begin{lem}\ollabel{lem:sub:left-alpha}
+  إذا تحقق~${\OLId{latin-looped}{P}}\aeq {\OLId{latin-looped}{Q}}$ وكان كل من~$\Subst{{\OLId{latin-looped}{P}}}{{\OLId{latin-looped}{R}}}{{\OLId{latin-ordinary}{y}}}$ و
+  $\Subst{{\OLId{latin-looped}{Q}}}{{\OLId{latin-looped}{R}}}{{\OLId{latin-ordinary}{y}}}$ معرّفًا، لزم
+  $\Subst{{\OLId{latin-looped}{P}}}{{\OLId{latin-looped}{R}}}{{\OLId{latin-ordinary}{y}}}\aeq\Subst{{\OLId{latin-looped}{Q}}}{{\OLId{latin-looped}{R}}}{{\OLId{latin-ordinary}{y}}}$.
+\end{lem}
+
+\begin{proof}
+  نقدم حقيقة مساعدة يثبتها الاستقراء القوي في عدد البانيات: لكل حد~${\OLId{latin-looped}{T}}$
+  ومجموعة منتهية~${\OLId{latin-looped}{F}}$ من أسماء المتغيرات يوجد حد~${\OLId{latin-looped}{T}}_{\OLId{latin-looped}{F}}\aeq {\OLId{latin-looped}{T}}$ لا يسمى أي
+  تجريد فيه باسم من~${\OLId{latin-looped}{F}}$. فأمر المتغير والتطبيق بيّن. وفي حالة
+  $\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-looped}{U}}]$ نختار~${\OLId{latin-ordinary}{w}}\notin {\OLId{latin-looped}{F}}\cup\FV{{\OLId{latin-looped}{U}}}$ مع~${\OLId{latin-ordinary}{w}}\ne {\OLId{latin-ordinary}{x}}$، ثم نستعمل
+  فرض الاستقراء في~${\OLId{latin-looped}{U}}$ بعد أن نزيد~$\{{\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{w}}\}$ في مجموعة المنع؛ فيغدو
+  إحلال~${\OLId{latin-ordinary}{w}}$ مكان~${\OLId{latin-ordinary}{x}}$ في المتن الناتج معرّفًا، وتصح إعادة تسمية الرابط
+  بالقاعدة~\olref{defn:aconvone4}. ولا دور للّمة الحاضرة في هذا
+  الاستقراء.
+
+  ثم يكفي أن نعالج خطوة~${\OLId{latin-looped}{P}}\aconvone {\OLId{latin-looped}{Q}}$ واحدة، ونتعدى منها إلى السلسلة.
+  أما حالات التوافق الثلاث فتتبع من فرض الاستقراء ومن تعريف الإحلال.
+  وفي تغيير الرابط عند الجذر نكتب
+  ${\OLId{latin-looped}{P}}=\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-looped}{N}}]$ و${\OLId{latin-looped}{Q}}=\lambd[{\OLId{latin-ordinary}{z}}][\Subst{{\OLId{latin-looped}{N}}}{{\OLId{latin-ordinary}{z}}}{{\OLId{latin-ordinary}{x}}}]$.
+  نطبق الحقيقة المساعدة على~${\OLId{latin-looped}{R}}$ ومجموعة المنع~$\{{\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{z}}\}$، فنأخذ
+  ${\OLId{latin-looped}{R}}^\ast\aeq {\OLId{latin-looped}{R}}$ ليس في روابطه اسم~${\OLId{latin-ordinary}{x}}$ ولا~${\OLId{latin-ordinary}{z}}$.
+  وتفيد~\olref{lem:sub:R} أن الإحلالين يظلان معرّفين إذا جعلنا
+  ${\OLId{latin-looped}{R}}^\ast$ مكان~${\OLId{latin-looped}{R}}$، وأن نتيجتيهما تكافئان بحسب~${\OLId{greek-variable}{alpha}}$ نتيجتيهما
+  الأوليين.
+
+  ومن شروط خطوة تغيير الرابط وكون الإحلالين معرّفين أن~${\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}},{\OLId{latin-ordinary}{z}}$ مختلفة
+  اثنين اثنين، وأن~${\OLId{latin-ordinary}{z}}\notin\FV{{\OLId{latin-looped}{N}}}$ و${\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{z}}\notin\FV{{\OLId{latin-looped}{R}}^\ast}$.
+  ويعطي الاستقراء البنيوي على~${\OLId{latin-looped}{N}}$، مع استعمال شروط تعريف الإحلال في
+  حالة التجريد، أن الطرف الأيسر التالي معرّف، وأن
+  \[
+    \Subst{\Subst{{\OLId{latin-looped}{N}}}{{\OLId{latin-looped}{R}}^\ast}{{\OLId{latin-ordinary}{y}}}}{{\OLId{latin-ordinary}{z}}}{{\OLId{latin-ordinary}{x}}}
+    =\Subst{\Subst{{\OLId{latin-looped}{N}}}{{\OLId{latin-ordinary}{z}}}{{\OLId{latin-ordinary}{x}}}}{{\OLId{latin-looped}{R}}^\ast}{{\OLId{latin-ordinary}{y}}}.
+  \]
+  ففي حالة~${\OLId{latin-looped}{N}}={\OLId{latin-ordinary}{y}}$ نعبر روابط~${\OLId{latin-looped}{R}}^\ast$؛ ولا يسمى شيء منها~${\OLId{latin-ordinary}{x}}$ أو~${\OLId{latin-ordinary}{z}}$.
+  وسائر حالات المتغيرات ظاهرة، وأما التطبيق والتجريد فبفرض الاستقراء.
+  ولا يقع~${\OLId{latin-ordinary}{z}}$ حرًا في~$\Subst{{\OLId{latin-looped}{N}}}{{\OLId{latin-looped}{R}}^\ast}{{\OLId{latin-ordinary}{y}}}$ كذلك. فتجيز
+  \olref{defn:aconvone4} أن نكتب
+  \[
+    \Subst{{\OLId{latin-looped}{P}}}{{\OLId{latin-looped}{R}}^\ast}{{\OLId{latin-ordinary}{y}}}
+    =\lambd[{\OLId{latin-ordinary}{x}}][\Subst{{\OLId{latin-looped}{N}}}{{\OLId{latin-looped}{R}}^\ast}{{\OLId{latin-ordinary}{y}}}]
+    \aconvone
+    \lambd[{\OLId{latin-ordinary}{z}}][\Subst{\Subst{{\OLId{latin-looped}{N}}}{{\OLId{latin-ordinary}{z}}}{{\OLId{latin-ordinary}{x}}}}{{\OLId{latin-looped}{R}}^\ast}{{\OLId{latin-ordinary}{y}}}]
+    =\Subst{{\OLId{latin-looped}{Q}}}{{\OLId{latin-looped}{R}}^\ast}{{\OLId{latin-ordinary}{y}}}.
+  \]
+  ثم نرجع من~${\OLId{latin-looped}{R}}^\ast$ إلى~${\OLId{latin-looped}{R}}$ بــ\olref{lem:sub:R}، ونستعمل تعدي
+  $\aeq$. وتتم سلسلة التحويل بتكرار حجة الخطوة الواحدة.
+\end{proof}
+
+سبق في~\olref[sub]{sec} أن الإحلال قد لا يكون معرّفًا.
+غير أن تحويل~${\OLId{greek-variable}{alpha}}$ يتيح تغيير أسماء المتغيرات المقيدة حتى يصير الإحلال معرّفًا في كل حالة.
+ويظل التكافؤ بحسب~${\OLId{greek-variable}{alpha}}$ محفوظًا في النتيجة، كما تقرره المبرهنة التالية:
+
+\begin{thm}\ollabel{thm:sub}
+  أيًا تكن~${\OLId{latin-looped}{M}}$ و${\OLId{latin-looped}{R}}$ و${\OLId{latin-ordinary}{y}}$، يوجد~${\OLId{latin-looped}{M}}'$ يحقق~${\OLId{latin-looped}{M}} \aeq {\OLId{latin-looped}{M}}'$ ويكون
+  $\Subst{{\OLId{latin-looped}{M}}'}{{\OLId{latin-looped}{R}}}{{\OLId{latin-ordinary}{y}}}$ معرّفًا. وإذا كان~${\OLId{latin-looped}{M}}'',{\OLId{latin-looped}{R}}''$ زوجًا آخر يحقق
+  ${\OLId{latin-looped}{M}}'' \aeq {\OLId{latin-looped}{M}}$ و${\OLId{latin-looped}{R}}'' \aeq {\OLId{latin-looped}{R}}$، وكان~$\Subst{{\OLId{latin-looped}{M}}''}{{\OLId{latin-looped}{R}}''}{{\OLId{latin-ordinary}{y}}}$ معرّفًا،
+  لزم~$\Subst{{\OLId{latin-looped}{M}}'}{{\OLId{latin-looped}{R}}}{{\OLId{latin-ordinary}{y}}} \aeq \Subst{{\OLId{latin-looped}{M}}''}{{\OLId{latin-looped}{R}}''}{{\OLId{latin-ordinary}{y}}}$ أيضًا.
+\end{thm}
+
+\begin{proof}
+  نستقرئ استقراءً قويًا في عدد بانيات الحد~${\OLId{latin-looped}{M}}$:
+  \begin{enumerate}
+  \item إن كان~${\OLId{latin-looped}{M}}$ متغيرًا~${\OLId{latin-ordinary}{z}}$، فالإثبات تمرين.
+  \item ليكن~${\OLId{latin-looped}{M}}$ على صورة~$\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-looped}{N}}]$. نختار متغيرًا~${\OLId{latin-ordinary}{z}}$
+    غير~${\OLId{latin-ordinary}{x}}$ و${\OLId{latin-ordinary}{y}}$ بحيث~${\OLId{latin-ordinary}{z}} \notin \FV{{\OLId{latin-looped}{N}}}$ و${\OLId{latin-ordinary}{z}} \notin \FV{{\OLId{latin-looped}{R}}}$.
+    ونستعمل فرض الاستقراء أولًا في~${\OLId{latin-looped}{N}}$ مع الإحلال
+    $\Subst{{\OLId{latin-looped}{N}}}{{\OLId{latin-ordinary}{z}}}{{\OLId{latin-ordinary}{x}}}$، فنأخذ~${\OLId{latin-looped}{N}}_{\OLMathNumeral{0}} \aeq {\OLId{latin-looped}{N}}$ يكون
+    $\Subst{{\OLId{latin-looped}{N}}_{\OLMathNumeral{0}}}{{\OLId{latin-ordinary}{z}}}{{\OLId{latin-ordinary}{x}}}$ معرّفًا. ولنضع~${\OLId{latin-looped}{P}}=\Subst{{\OLId{latin-looped}{N}}_{\OLMathNumeral{0}}}{{\OLId{latin-ordinary}{z}}}{{\OLId{latin-ordinary}{x}}}$.
+    حينئذ
+    $\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-looped}{N}}] \aeq \lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-looped}{N}}_{\OLMathNumeral{0}}] \aeq \lambd[{\OLId{latin-ordinary}{z}}][{\OLId{latin-looped}{P}}]$؛
+    لأن~${\OLId{latin-ordinary}{z}}\ne {\OLId{latin-ordinary}{x}}$، ولأن~${\OLId{latin-ordinary}{z}}\notin\FV{{\OLId{latin-looped}{N}}_{\OLMathNumeral{0}}}=\FV{{\OLId{latin-looped}{N}}}$، ولأن~${\OLId{latin-looped}{P}}$ معرّف.
+    وإذ كان تحويل~${\OLId{greek-variable}{alpha}}$ وإحلال متغير مكان متغير لا يبدلان عدد
+    البانيات، كان~${\OLId{latin-looped}{P}}$ دون~${\OLId{latin-looped}{M}}$؛ لذلك نستعمل فرض الاستقراء القوي مرة
+    أخرى في~${\OLId{latin-looped}{P}},{\OLId{latin-looped}{R}},{\OLId{latin-ordinary}{y}}$، فنأخذ
+    ${\OLId{latin-looped}{P}}'\aeq {\OLId{latin-looped}{P}}$ يكون~$\Subst{{\OLId{latin-looped}{P}}'}{{\OLId{latin-looped}{R}}}{{\OLId{latin-ordinary}{y}}}$ معرّفًا.
+    ويرفع توافق~$\aeq$ هذا إلى
+    $\lambd[{\OLId{latin-ordinary}{z}}][{\OLId{latin-looped}{P}}]\aeq\lambd[{\OLId{latin-ordinary}{z}}][{\OLId{latin-looped}{P}}']$.
+    فإذا جعلنا~${\OLId{latin-looped}{M}}'=\lambd[{\OLId{latin-ordinary}{z}}][{\OLId{latin-looped}{P}}']$ تحقق~${\OLId{latin-looped}{M}}\aeq {\OLId{latin-looped}{M}}'$، وصار
+    $\Subst{{\OLId{latin-looped}{M}}'}{{\OLId{latin-looped}{R}}}{{\OLId{latin-ordinary}{y}}}$ معرّفًا؛ إذ إحلال المتن معرّف، و${\OLId{latin-ordinary}{z}}\ne {\OLId{latin-ordinary}{y}}$،
+    و${\OLId{latin-ordinary}{z}}\notin\FV{{\OLId{latin-looped}{R}}}$.
+
+    \item وإن كان~${\OLId{latin-looped}{M}}$ على صورة~$(PQ)$، فالإثبات تمرين.
+  \end{enumerate}
+
+  ويبقى الانفراد. ليكن~${\OLId{latin-looped}{M}}''\aeq {\OLId{latin-looped}{M}}$ و${\OLId{latin-looped}{R}}''\aeq {\OLId{latin-looped}{R}}$، وليكن
+  $\Subst{{\OLId{latin-looped}{M}}''}{{\OLId{latin-looped}{R}}''}{{\OLId{latin-ordinary}{y}}}$ معرّفًا. لما كان~${\OLId{latin-looped}{M}}'\aeq {\OLId{latin-looped}{M}}$، أفاد تناظر
+  $\aeq$ وتعديه~${\OLId{latin-looped}{M}}'\aeq {\OLId{latin-looped}{M}}''$. ومن \olref{lem:sub:R}، مطبقةً على
+  ${\OLId{latin-looped}{R}}''\aeq {\OLId{latin-looped}{R}}$، يكون~$\Subst{{\OLId{latin-looped}{M}}''}{{\OLId{latin-looped}{R}}}{{\OLId{latin-ordinary}{y}}}$ معرّفًا، ويتحقق
+  \[
+    \Subst{{\OLId{latin-looped}{M}}''}{{\OLId{latin-looped}{R}}''}{{\OLId{latin-ordinary}{y}}}\aeq\Subst{{\OLId{latin-looped}{M}}''}{{\OLId{latin-looped}{R}}}{{\OLId{latin-ordinary}{y}}}.
+  \]
+  ثم تفيد \olref{lem:sub:left-alpha}
+  $\Subst{{\OLId{latin-looped}{M}}'}{{\OLId{latin-looped}{R}}}{{\OLId{latin-ordinary}{y}}}\aeq\Subst{{\OLId{latin-looped}{M}}''}{{\OLId{latin-looped}{R}}}{{\OLId{latin-ordinary}{y}}}$؛ وبالتعدي يلزم
+  $\Subst{{\OLId{latin-looped}{M}}'}{{\OLId{latin-looped}{R}}}{{\OLId{latin-ordinary}{y}}}\aeq\Subst{{\OLId{latin-looped}{M}}''}{{\OLId{latin-looped}{R}}''}{{\OLId{latin-ordinary}{y}}}$.
+  % تصحيح مصدر (0362-I2): استُعمل الاستقراء القوي مرتين لضمان تعريف الإحلال، وأثبت توافق الإحلال مع ألفا بعد تنضير أسماء الروابط، واستُبدلت مساواة الممثلين بتكافؤ ألفا.
+\end{proof}
+
+\begin{prob}
+  أتمّ برهان~\olref[lam][syn][alp]{thm:sub}.
+\end{prob}
+
+\begin{cor}\ollabel{cor:sub}
+  أيًا تكن~${\OLId{latin-looped}{M}}$ و${\OLId{latin-looped}{R}}$ و${\OLId{latin-ordinary}{y}}$، يوجد زوج~${\OLId{latin-looped}{M}}'$ و${\OLId{latin-looped}{R}}'$ يحقق~${\OLId{latin-looped}{M}}' \aeq {\OLId{latin-looped}{M}}$ و${\OLId{latin-looped}{R}} \aeq
+  {\OLId{latin-looped}{R}}'$،
+  ويكون~$\Subst{{\OLId{latin-looped}{M}}'}{{\OLId{latin-looped}{R}}'}{{\OLId{latin-ordinary}{y}}}$ معرّفًا. ومتى وجد زوج آخر يحقق~${\OLId{latin-looped}{M}}'' \aeq {\OLId{latin-looped}{M}}$ و${\OLId{latin-looped}{R}}'' \aeq {\OLId{latin-looped}{R}}$
+  وكان~$\Subst{{\OLId{latin-looped}{M}}''}{{\OLId{latin-looped}{R}}''}{{\OLId{latin-ordinary}{y}}}$ معرّفًا، لزم~$\Subst{{\OLId{latin-looped}{M}}'}{{\OLId{latin-looped}{R}}'}{{\OLId{latin-ordinary}{y}}} \aeq \Subst{{\OLId{latin-looped}{M}}''}{{\OLId{latin-looped}{R}}''}{{\OLId{latin-ordinary}{y}}}$.
+\end{cor}
+% تصحيح مصدر (0362-I3): أُثبت شرط تكافؤ حدي الإحلال في الزوجين.
+
+\begin{proof}
+  يلزم هذا مباشرة من~\olref{thm:sub}.
+\end{proof}
+
+\end{document}

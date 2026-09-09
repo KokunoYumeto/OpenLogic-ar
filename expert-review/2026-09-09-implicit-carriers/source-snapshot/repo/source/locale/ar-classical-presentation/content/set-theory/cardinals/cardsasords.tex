@@ -1,0 +1,119 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{cardinals}{cardsasords}
+\olsection{الأعداد الكاردينالية بوصفها أعدادًا ترتيبية}
+
+سنستعين في نظرية الأعداد الكاردينالية بنظرية الأعداد الترتيبية من غير
+تحرج؛ فنجعل الكاردينالات أعدادًا ترتيبية مخصوصة. ونبدأ بالتعريف الآتي.
+
+\begin{defn}\ollabel{defcardinalasordinal}
+إذا أمكن ترتيب~${\OLId{latin-looped}{A}}$ ترتيبًا جيدًا، فإن~$\card{{\OLId{latin-looped}{A}}}$ هو أصغر عدد ترتيبي
+$\gamma$ بحيث~$\cardeq{{\OLId{latin-looped}{A}}}{\gamma}$. ولأي عدد ترتيبي~$\gamma$، نقول
+إن~$\gamma$ \emph{عدد كاردينالي} إذا وفقط إذا كان
+$\gamma = \card{\gamma}$.
+\end{defn}
+
+وقولنا «يمكن ترتيب~${\OLId{latin-looped}{A}}$ ترتيبًا جيدًا» من عبارات الإمكان الجهوية التي
+تستعملها الرياضيات على غير معناها الدقيق؛ فالقول «يمكن ترتيب~${\OLId{latin-looped}{A}}$
+ترتيبًا جيدًا» ادعاء وجودي معناه أن علاقة ما توجد ترتب~${\OLId{latin-looped}{A}}$ ترتيبًا
+جيدًا.
+
+غير أن~\olref{defcardinalasordinal} يواجه إشكالًا. فنحن نريد حجمًا
+لـ\emph{كل} مجموعة، أي نريد وجود~$\card{{\OLId{latin-looped}{A}}}$ لكل~${\OLId{latin-looped}{A}}$؛ والتعريف معلق
+على الشرط «\emph{إذا} أمكن ترتيب~${\OLId{latin-looped}{A}}$ ترتيبًا جيدًا». فإن وجدت مجموعة
+${\OLId{latin-looped}{A}}$ لا تقبل ذلك، لم يعرّف لها شيء اسمه~$\card{{\OLId{latin-looped}{A}}}$.
+
+فلا بد، لاستعمال~\olref{defcardinalasordinal}، من ضمان إمكان ترتيب كل
+مجموعة ترتيبًا جيدًا. وهذا الضمان لا نحصل عليه في~$\ZF$. فإذا أردنا
+استعمال~\olref{defcardinalasordinal} وجب أن نزيد مسلّمة، نحو:
+\begin{axiom}[الترتيب الجيد]
+يمكن ترتيب كل مجموعة ترتيبًا جيدًا.
+\end{axiom}
+وسنبحث قبول هذه المسلّمة في~\olref[choice][]{chap}، لكننا نستعملها
+إلى ذلك الحين بلا قيد. وبها يكون إثبات وجود الأعداد الكاردينالية، على
+تعريف~\olref{defcardinalasordinal}، وحسن سلوكها يسيرًا:
+
+\begin{lem}\ollabel{lem:CardinalsExist}
+لكل مجموعة~${\OLId{latin-looped}{A}}$:
+\begin{enumerate}
+	\item\ollabel{cardaexists} توجد~$\card{{\OLId{latin-looped}{A}}}$ وهي فريدة؛
+	\item\ollabel{cardaapprox} $\cardeq{\card{{\OLId{latin-looped}{A}}}}{{\OLId{latin-looped}{A}}}$؛
+	\item\ollabel{cardaidem} $\card{{\OLId{latin-looped}{A}}}$ عدد كاردينالي، أي
+	$\card{{\OLId{latin-looped}{A}}} = \card{\card{{\OLId{latin-looped}{A}}}}$؛
+\end{enumerate}
+\end{lem}
+
+\begin{proof}
+ثبت~${\OLId{latin-looped}{A}}$. بمسلّمة الترتيب الجيد يوجد ترتيب جيد~$\tuple{{\OLId{latin-looped}{A}}, {\OLId{latin-looped}{R}}}$. وبمقتضى
+\olref[ordinals][ordtype]{thmOrdinalRepresentation} يتماثل
+$\tuple{{\OLId{latin-looped}{A}}, {\OLId{latin-looped}{R}}}$
+مع عدد ترتيبي فريد~$\beta$. فينتج~$\cardeq{{\OLId{latin-looped}{A}}}{\beta}$. ثم يضمن
+الاستقراء المتناهي التجاوز عددًا ترتيبيًا فريدًا~$\gamma$، هو أصغر
+ما يحقق~$\cardeq{{\OLId{latin-looped}{A}}}{\gamma}$. وهكذا~$\card{{\OLId{latin-looped}{A}}} = \gamma$؛ فتثبت
+\olref{cardaexists} و\olref{cardaapprox}. وأما~\olref{cardaidem}،
+فإذا كان~$\delta \in \gamma$، كان~$\cardless{\delta}{{\OLId{latin-looped}{A}}}$ باختيار
+$\gamma$؛ فيكون~$\cardless{\delta}{\gamma}$ أيضًا، لأن التساوي
+العددي علاقة تكافؤ
+(\olref[sfr][siz][equ]{equinumerosityisequi}). ومن ثم
+$\gamma = \card{\gamma}$.
+%So, for reductio, suppose that there is some ordinal $\delta \in \gamma$ such that $\cardeq{\gamma}{\delta}$. Then, $\cardeq{\cardeq{A}{\gamma}}{\delta}$ so that $\cardeq{A}{\delta}$ by \olref[sfr][set][equ]{equinumerosityisequi}, which contradicts the choice of $\gamma$ as the least ordinal such that $\cardeq{A}{\gamma}$.
+\end{proof}
+
+وتكفل اللمّة الآتية مبدأ كانتور، وتزيد عليه. والأعداد الكاردينالية ترث
+ترتيبها من الأعداد الترتيبية: يكون~$\cardfont{{\OLId{latin-ordinary}{a}}} < \cardfont{{\OLId{latin-ordinary}{b}}}$ إذا
+وفقط إذا كان~$\cardfont{{\OLId{latin-ordinary}{a}}} \in \cardfont{{\OLId{latin-ordinary}{b}}}$. وسنخص الأشياء المعلومة
+الكاردينالية بحروف قوطية، وهو اصطلاح شائع. ومن المألوف أيضًا استعمال
+الحروف اليونانية، لكون الكاردينالات أعدادًا ترتيبية، على أن تؤخذ من
+وسط الأبجدية، مثل~$\kappa, \lambda$.
+\begin{lem}\ollabel{lem:CardinalsBehaveRight}
+لأي مجموعتين~${\OLId{latin-looped}{A}}$ و${\OLId{latin-looped}{B}}$:
+\begin{align*}
+	\cardeq{{\OLId{latin-looped}{A}}}{{\OLId{latin-looped}{B}}} &\text{ إذا وفقط إذا كان } \card{{\OLId{latin-looped}{A}}} = \card{{\OLId{latin-looped}{B}}}\\
+	\cardle{{\OLId{latin-looped}{A}}}{{\OLId{latin-looped}{B}}} &\text{ إذا وفقط إذا كان } \card{{\OLId{latin-looped}{A}}} \leq \card{{\OLId{latin-looped}{B}}}\\
+	\cardless{{\OLId{latin-looped}{A}}}{{\OLId{latin-looped}{B}}}&\text{ إذا وفقط إذا كان } \card{{\OLId{latin-looped}{A}}} < \card{{\OLId{latin-looped}{B}}}
+\end{align*}
+\end{lem}
+
+\begin{proof}
+نثبت من الادعاء الثاني جهة اليسار إلى اليمين، وسائر الحالات على
+قياسها ومتروكة تمرينًا. انظر في الرسم:
+\begin{center}
+	\begin{tikzpicture}
+	\node (nodea) {${\OLId{latin-looped}{A}}$};
+	\node[right = 6em of nodea] (nodeb) {${\OLId{latin-looped}{B}}$};
+	\node[below = 2em of nodea] (nodecarda) {$\card{{\OLId{latin-looped}{A}}}$};
+	\node[below = 2em of nodeb] (nodecardb) {$\card{{\OLId{latin-looped}{B}}}$};
+	\draw[->] (nodea)--(nodeb);
+	\draw[<->] (nodea)--(nodecarda);
+	\draw[<->] (nodeb)--(nodecardb);
+	\draw[->, dashed] (nodecarda)--(nodecardb);
+\end{tikzpicture}
+\end{center}
+السهمان ذوا الرأسين !!{bijection}s يضمنهما
+\olref{lem:CardinalsExist}. وإذا افترضنا~$\cardle{{\OLId{latin-looped}{A}}}{{\OLId{latin-looped}{B}}}$، وجدت
+!!a{injection}~${\OLId{latin-looped}{A}}\to {\OLId{latin-looped}{B}}$. فتتبع الأسهم من~$\card{{\OLId{latin-looped}{A}}}$ إلى~${\OLId{latin-looped}{A}}$، ثم إلى
+${\OLId{latin-looped}{B}}$، ثم إلى~$\card{{\OLId{latin-looped}{B}}}$؛ تحصل على !!a{injection}
+$\card{{\OLId{latin-looped}{A}}} \to \card{{\OLId{latin-looped}{B}}}$، وهي السهم المتقطع.
+\end{proof}\noindent
+وبـ\olref{lem:CardinalsBehaveRight} نستطيع أن نعيد إثبات
+شرودر--برنشتاين: إذا كان~$\cardle{{\OLId{latin-looped}{A}}}{{\OLId{latin-looped}{B}}}$ و$\cardle{{\OLId{latin-looped}{B}}}{{\OLId{latin-looped}{A}}}$، فإن
+$\cardeq{{\OLId{latin-looped}{A}}}{{\OLId{latin-looped}{B}}}$. وقد صيغ ذلك في
+\olref[sfr][siz][sb]{thm:schroder-bernstein}، وأثبت أول مرة، بعد شيء
+من العمل، في~\olref[sfr][infinite][card-sb]{sec}. والآن انظر:
+
+\begin{proof}[إعادة إثبات شرودر--برنشتاين]
+إذا كان~$\cardle{{\OLId{latin-looped}{A}}}{{\OLId{latin-looped}{B}}}$ و$\cardle{{\OLId{latin-looped}{B}}}{{\OLId{latin-looped}{A}}}$، كان
+$\card{{\OLId{latin-looped}{A}}} \leq \card{{\OLId{latin-looped}{B}}}$ و$\card{{\OLId{latin-looped}{B}}} \leq \card{{\OLId{latin-looped}{A}}}$ بموجب
+\olref{lem:CardinalsBehaveRight}. فيلزم~$\card{{\OLId{latin-looped}{A}}} = \card{{\OLId{latin-looped}{B}}}$، ثم
+$\cardeq{{\OLId{latin-looped}{A}}}{{\OLId{latin-looped}{B}}}$، بالتثليث و\olref{lem:CardinalsBehaveRight}.
+\end{proof}
+\noindent
+والبرهان، على قصره، يعتمد خفية على الاستبدال لضمان
+\olref[ordinals][ordtype]{thmOrdinalRepresentation}، وعلى الترتيب
+الجيد لضمان~\olref{lem:CardinalsBehaveRight}. أما البرهان في
+\olref[sfr][infinite][card-sb]{sec} فأشد استقلالًا، بل يصح إجراؤه
+في~$\Zminus$.
+
+\end{document}

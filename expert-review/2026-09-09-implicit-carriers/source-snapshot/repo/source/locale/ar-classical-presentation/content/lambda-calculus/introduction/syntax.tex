@@ -1,0 +1,67 @@
+% Part: lambda-calculus
+% Chapter: introduction
+% Section: syntax
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{int}{syn}
+\olsection{نحو حساب لامبدا}
+
+نأخذ متتالية متغيرات~${\OLId{latin-ordinary}{x}}$ و${\OLId{latin-ordinary}{y}}$ و${\OLId{latin-ordinary}{z}}$،~\dots، ورموز ثوابت
+${\OLId{latin-ordinary}{a}}$ و${\OLId{latin-ordinary}{b}}$ و${\OLId{latin-ordinary}{c}}$،~\dots، ثم نعرّف الحدود بالاستقراء وفق البنود:
+\begin{enumerate}
+\item المتغير، أيًا كان، حد.
+\item والثابت، أيًا كان، حد.
+\item متى كان~${\OLId{latin-looped}{M}}$ و${\OLId{latin-looped}{N}}$ حدين كان~$(MN)$ حدًا.
+\item ومتى كان~${\OLId{latin-looped}{M}}$ حدًا و${\OLId{latin-ordinary}{x}}$ متغيرًا كان~$(\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-looped}{M}}])$ حدًا.
+\end{enumerate}
+ما جاء على الصورة~$(MN)$ نسميه \emph{تطبيقًا}، وما جاء على الصورة
+$(\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-looped}{M}}])$ نسميه \emph{تجريدًا}.
+
+وإذا خلا النسق من الثوابت كلها كان حساب لامبدا \emph{الخالص}.
+ومعظم نظرنا إنما هو في حساب~$\lambd$ الخالص؛ فالحروف الصغيرة
+كلها رموز للمتغيرات. وأما الحروف الكبيرة، مثل~${\OLId{latin-looped}{M}}$ و${\OLId{latin-looped}{N}}$،
+فنرمز بها إلى حدود حساب~$\lambd$.
+
+ونصطلح في الترميز على الأمور الآتية:
+
+\begin{conv}
+\begin{enumerate}
+\item إذا أغفلنا الأقواس، رتبنا التطبيق من اليسار إلى اليمين.
+  فإذا كانت~${\OLId{latin-looped}{M}}$ و${\OLId{latin-looped}{N}}$ و${\OLId{latin-looped}{P}}$ و${\OLId{latin-looped}{Q}}$ حدودًا، دل~$MNPQ$ اختصارًا
+  على~$(((MN){\OLId{latin-looped}{P}}){\OLId{latin-looped}{Q}})$.
+\item ومع إغفال الأقواس نجعل لتجريد لامبدا أوسع مجال ممكن.
+  فـ$\lambd[{\OLId{latin-ordinary}{x}}][MNP]$ تُقرأ~$(\lambd[{\OLId{latin-ordinary}{x}}][((MN){\OLId{latin-looped}{P}})])$.
+\item ويجوز جمع متغيرات عدة بعد لامبدا للدلالة على تتابع تجريدها؛
+  فـ$\lambd[xyz][{\OLId{latin-looped}{M}}]$ اختصار
+  لـ$\lambd[{\OLId{latin-ordinary}{x}}][\lambd[{\OLId{latin-ordinary}{y}}][\lambd[{\OLId{latin-ordinary}{z}}][{\OLId{latin-looped}{M}}]]]$.
+\end{enumerate}
+\end{conv}
+
+ومن أمثلة ذلك أن
+\[
+\lambd[xy][xxyx \lambd[{\OLId{latin-ordinary}{z}}][xz]]
+\]
+اختصار للتعبير
+\[
+\lambd[{\OLId{latin-ordinary}{x}}][\lambd[{\OLId{latin-ordinary}{y}}][((((xx){\OLId{latin-ordinary}{y}}){\OLId{latin-ordinary}{x}})(\lambd[{\OLId{latin-ordinary}{z}}][(xz)]))]].
+\]
+فلتضبط هذه الاصطلاحات وتُحفظ. قد تشق على القارئ أول الأمر،
+ثم يألفها؛ وبعد الإلف يجدها أهون من تتبع كثرة الأقواس وتشابكها.
+
+إذا لم يختلف حدان إلا في أسماء المتغيرات المربوطة، قلنا إنهما
+متكافئان بحسب~${\OLId{greek-variable}{alpha}}$؛ كـ$\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{x}}]$ و$\lambd[{\OLId{latin-ordinary}{y}}][{\OLId{latin-ordinary}{y}}]$.
+ويحسن أن نعدهما حدًا واحدًا؛ فقولنا إن~${\OLId{latin-looped}{M}}$ و${\OLId{latin-looped}{N}}$ واحد
+لا يمنع اختلافهما بإعادة تسمية المتغيرات المربوطة.
+وواقعة المتغير~${\OLId{latin-ordinary}{x}}$ مربوطة متى وقعت في مجال رابط~$\lambd[{\OLId{latin-ordinary}{x}}]$،
+ويربطها أقرب رابط~$\lambd[{\OLId{latin-ordinary}{x}}]$ إليها؛ فإن لم تدخل في مجال أي رابط
+$\lambd[{\OLId{latin-ordinary}{x}}]$ فهي حرة. المثال السابق خال من المتغيرات الحرة،
+وأما في
+\[
+(\lambd[{\OLId{latin-ordinary}{z}}][yz]){\OLId{latin-ordinary}{x}}
+\]
+فـ${\OLId{latin-ordinary}{y}}$ و${\OLId{latin-ordinary}{x}}$ حران، و${\OLId{latin-ordinary}{z}}$ مربوط.
+% تصحيح مصدر (0344-I1): قُيد الربط بتطابق اسم المتغير وبالرابط الأقرب.
+\end{document}

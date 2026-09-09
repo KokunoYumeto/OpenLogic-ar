@@ -1,0 +1,109 @@
+% Part: first-order-logic
+% Chapter: natural-deduction
+% Section: quantifier-rules
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{ntd}{qrl}
+
+\olsection{قواعد المكممات}
+
+\subsection{قواعد~$\lforall$}
+
+\begin{defish}
+\AxiomC{$!A({\OLId{latin-ordinary}{a}})$}
+\RightLabel{\Intro{\lforall}}
+\UnaryInfC{$\lforall[{\OLId{latin-ordinary}{x}}][\Atom{!A}{x}]$}
+\DisplayProof
+\hfill
+\AxiomC{$\lforall[{\OLId{latin-ordinary}{x}}][\Atom{!A}{x}]$}
+\RightLabel{\Elim{\lforall}}
+\UnaryInfC{$!A({\OLId{latin-ordinary}{t}})$}
+\DisplayProof
+\end{defish}
+
+في قاعدتي~$\lforall$، الحد~${\OLId{latin-ordinary}{t}}$ مغلق، أي لا متغير فيه؛ و~${\OLId{latin-ordinary}{a}}$ هو
+!!a{constant} لا يقع في النتيجة
+$\lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$، ولا في فرض حاله !!{undischarged} ضمن
+ال!!{derivation} المنتهي بـ~$!A({\OLId{latin-ordinary}{a}})$.
+ويسمى~${\OLId{latin-ordinary}{a}}$ \emph{المتغير المميَّز} لاستدلال~\Intro{\lforall}.
+\footnote{بقيت تسمية «المتغير المميَّز» لأسباب تاريخية، وإن كان~${\OLId{latin-ordinary}{a}}$ في هذه القاعدة رمزًا ثابتًا.}
+
+\subsection{قواعد~$\lexists$}
+
+\begin{defish}
+\AxiomC{$\Atom{!A}{t}$}
+\RightLabel{\Intro{\lexists}}
+\UnaryInfC{$\lexists[{\OLId{latin-ordinary}{x}}][\Atom{!A}{x}]$}
+\DisplayProof
+\hfill
+\AxiomC{$\lexists[{\OLId{latin-ordinary}{x}}][\Atom{!A}{x}]$}
+\AxiomC{[$\Atom{!A}{a}$]$^{\OLId{latin-ordinary}{n}}$}
+\DeduceC{$!C$}
+\DischargeRule{\Elim{\lexists}}{n}
+\BinaryInfC{$!C$}
+\DisplayProof
+\end{defish}
+
+وكذلك~${\OLId{latin-ordinary}{t}}$ هنا حد مغلق. وأما~${\OLId{latin-ordinary}{a}}$ فهو !!a{constant} شرطه ألا يقع في
+$\lexists[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$، وهي المقدمة، ولا في النتيجة~$!C$، ولا في فرض
+!!{undischarged} من ال!!{derivation}s المؤدية إلى المقدمتين، سوى فروض~$!A({\OLId{latin-ordinary}{a}})$.
+ويسمى~${\OLId{latin-ordinary}{a}}$ \emph{المتغير المميَّز} لاستدلال
+\Elim{\lexists}.
+
+هذا المنع لورود المتغير المميَّز في النتائج، أو في فرض
+!!{undischarged} من ال!!{derivation}s المؤدية إلى مقدمات
+\Intro{\lforall} أو~\Elim{\lexists}، مع استثناء الفروض التي يسقطها
+حذف المكمّم الوجودي، يسمى \emph{شرط المتغير المميَّز}.
+
+\textbf{تنبيه تصحيحي على الأصل.} أُظهر في هذا الملخص استثناء الفروض
+المؤقتة التي تسقطها قاعدة حذف المكمّم الوجودي؛ فقد نصت عليه القاعدة المفصلة
+قبله، وإسقاطه من الملخص يوسّع شرط المتغير المميز خطأً.
+
+\begin{explain}
+تذكّر الاصطلاح القائل إننا عندما تكون~$!A$ !!a{formula} يكون فيها
+ال!!{variable}~${\OLId{latin-ordinary}{x}}$ حرًا، نشير إلى ذلك بكتابة~$!A({\OLId{latin-ordinary}{x}})$. وفي السياق نفسه،
+تكون~$!A({\OLId{latin-ordinary}{t}})$ اختصارًا لـ~$\Subst{!A}{{\OLId{latin-ordinary}{t}}}{{\OLId{latin-ordinary}{x}}}$. ولذلك يمكننا أيضًا كتابة
+قاعدة~$\Intro\lexists$ هكذا:
+\begin{prooftree}
+\AxiomC{$\Subst{!A}{{\OLId{latin-ordinary}{t}}}{{\OLId{latin-ordinary}{x}}}$}
+\RightLabel{\Intro{\lexists}}
+\UnaryInfC{$\lexists[{\OLId{latin-ordinary}{x}}][!A]$}
+\end{prooftree}
+لاحظ أن~${\OLId{latin-ordinary}{t}}$ قد يرد أصلًا في~$!A$؛ فمثلًا قد تكون~$!A$ هي
+$\Atom{\Obj P}{t,x}$. ومن ثم فإن استنتاج
+$\lexists[{\OLId{latin-ordinary}{x}}][\Atom{\Obj P}{t,x}]$ من~$\Atom{\Obj P}{t,t}$ تطبيق
+صحيح لـ~$\Intro\lexists$---إذ يجوز لك أن ``تستبدل'' بموضع واحد أو
+أكثر، وليس بالضرورة كل المواضع، للحد~${\OLId{latin-ordinary}{t}}$ في المقدمة ال!!{variable}
+المقيد~${\OLId{latin-ordinary}{x}}$. غير أن شرطي المتغير المميَّز في~$\Intro\lforall$
+و$\Elim\lexists$ يقتضيان ألا يرد ال!!{constant}~${\OLId{latin-ordinary}{a}}$ في~$!A$.
+ولذلك لا يمكنك أن تستنتج على نحو صحيح
+$\lforall[{\OLId{latin-ordinary}{x}}][\Atom{\Obj P}{a,x}]$ من~$\Atom{\Obj P}{a,a}$ باستعمال
+$\Intro\lforall$.
+\end{explain}
+
+\begin{explain}
+أما~\Intro{\lexists} و\Elim{\lforall} فلا يلزمهما شرط المتغير المميَّز؛ ويجوز اختيار الحد المغلق~${\OLId{latin-ordinary}{t}}$ كيف اتفق.
+وأما~\Elim{\lexists} و\Intro{\lforall} فشرطهما ألا يقع ال!!{constant}~${\OLId{latin-ordinary}{a}}$ في النتيجة أو في فرض
+!!{undischarged}. وهذا شرط السلامة: فلا
+!!{derive}s النظام إلا !!{sentence}s تلزم عن فروضه ال!!{undischarged}.
+ولو سقط هذا الشرط لجاز الآتي:
+\begin{prooftree}
+  \AxiomC{$\lexists[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$}
+  \AxiomC{$\Discharge{!A({\OLId{latin-ordinary}{a}})}{{\OLMathNumeral{1}}}$}
+  \RightLabel{*\Intro{\lforall}}
+  \UnaryInfC{$\lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$}
+  \RightLabel{\Elim{\lexists}}
+  \BinaryInfC{$\lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$}
+\end{prooftree}
+لكن~$\lexists[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})] \Entails/ \lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$.
+
+بما أن قواعد الحذف للمكممات لا تسمح إلا بإحلال حدود مغلقة محل
+ال!!{variable}s، فإنه يلزم أن تكون أي !!{formula} يمكن اشتقاقها من
+مجموعة من ال!!{sentence}s هي نفسها !!a{sentence}.
+\end{explain}
+
+
+\end{document}

@@ -1,0 +1,74 @@
+% One isolated V2 experiment. Input in a NEW fixture preamble instead of V1.
+% No production file or earlier candidate/fixture is replaced.
+%
+% Why V1 was insufficient: it changed ambient body/text direction only.
+% PGF opens a picture hbox in the enclosing align math mode (pgfcorescopes
+% 227-248). LuaTeX distinguishes math and text direction for such boxes.
+% Babel can also restore direction from metadata (luababel.def 1870-1880)
+% or frozen everyhbox/everyvbox tokens (1939-1957). V1 logged no box directions,
+% so the exact active override is not claimed as measured evidence.
+%
+% V2 pins only the coordinate-placement hboxes explicitly to bdir 0 (= TLT).
+% Installed pgfsys-luatex.def 32-49 and pgfsys.code.tex 1524-1533 supply the
+% three exact patch sites. Installed luababel.def 1589/1591 demonstrates bdir.
+% The original node content, mathdirection, desired direction, language, fonts
+% and everymath/everyhbox hooks are retained. All patches are environment-local.
+% No claim of general diagram, nested-diagram, or full-reader acceptance.
+\RequirePackage{etoolbox}
+\makeatletter
+\ifdefined\OLCTikzCandidateBegin
+  \PackageError{olc-tikz-direction-v2}{Do not load V1 together with V2}{}
+\fi
+\ifdefined\OLCTikzVTwoBegin
+  \PackageError{olc-tikz-direction-v2}{V2 already loaded}{}
+\else
+  \newcommand*{\OLCTikzVTwoTrace}[1]{%
+    \typeout{OLC-TIKZ-V2=#1;body=\the\bodydirection;par=\the\pardirection;text=\the\textdirection;math=\the\mathdirection;desired=\the\OLClassicalDesiredMathDirection}%
+  }
+  \newcommand*{\OLCTikzVTwoTraceBox}[1]{%
+    \directlua{%
+      local b = tex.box[\number#1]
+      texio.write_nl("term and log", "OLC-TIKZ-V2-BOX=placement;dir="
+        .. tostring(b and b.dir) .. ";width=" .. tostring(b and b.width))
+    }%
+  }
+  \newcommand*{\OLCTikzVTwoPatchFailure}[1]{%
+    \PackageError{olc-tikz-direction-v2}{Pinned PGF patch site changed: #1}%
+      {Stop this isolated experiment and inspect the actual loaded definition.}%
+  }
+  \newcommand*{\OLCTikzVTwoBegin}{%
+    \OLCTikzVTwoTrace{environment-begin}%
+    \patchcmd{\pgfsys@hboxsynced}%
+      {\setbox\pgf@hbox=\hbox}%
+      {\setbox\pgf@hbox=\hbox bdir0}%
+      {}{\OLCTikzVTwoPatchFailure{outer placement box}}%
+    \patchcmd{\pgfsys@hboxsynced}%
+      {\raise\pgf@pt@y\hbox}%
+      {\raise\pgf@pt@y\hbox bdir0}%
+      {}{\OLCTikzVTwoPatchFailure{raised placement box}}%
+    \patchcmd{\pgfsys@hbox}%
+      {\setbox##1=\hbox}%
+      {\setbox##1=\hbox bdir0}%
+      {}{\OLCTikzVTwoPatchFailure{zero-width placement wrapper}}%
+    % Apply text direction only inside the explicit coordinate box, after its
+    % inherited everyhbox tokens have run and before its horizontal skip.
+    \patchcmd{\pgfsys@hboxsynced}%
+      {\hskip\pgf@pt@x}%
+      {\textdirection=0\relax\OLCTikzVTwoTrace{placement-inside}\hskip\pgf@pt@x}%
+      {}{\OLCTikzVTwoPatchFailure{placement skip marker}}%
+    \patchcmd{\pgfsys@hboxsynced}%
+      {\box\pgf@hbox}%
+      {\OLCTikzVTwoTraceBox\pgf@hbox\box\pgf@hbox}%
+      {}{\OLCTikzVTwoPatchFailure{completed placement box marker}}%
+    \pretocmd{\pgfsys@hboxsynced}{\OLCTikzVTwoTrace{placement-before}}%
+      {}{\OLCTikzVTwoPatchFailure{placement entry marker}}%
+    \tikzset{every text node part/.append code={\OLCTikzVTwoTrace{inside-node}}}%
+  }
+  \AddToHook{env/tikzpicture/before}[olc-tikz-direction-v2]{%
+    \OLCTikzVTwoTrace{before}}%
+  \AddToHook{env/tikzpicture/begin}[olc-tikz-direction-v2]{%
+    \OLCTikzVTwoBegin}%
+  \AddToHook{env/tikzpicture/after}[olc-tikz-direction-v2]{%
+    \OLCTikzVTwoTrace{after}}%
+\fi
+\makeatother

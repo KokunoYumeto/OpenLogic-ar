@@ -1,0 +1,126 @@
+% الجزء: sets-functions-relations
+% الفصل: sets
+% القسم: pairs-and-products
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid[ar]{sfr}{set}{pai}
+\olsection{الأزواج والصفوف المرتبة والضروب الديكارتية}
+
+\begin{explain}
+الامتدادية لا تجعل لعناصر المجموعة ترتيبًا. فإن أريد تمثيل الترتيب
+احتيج إلى \emph{الأزواج المرتبة} $\tuple{{\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}}$. فالزوج غير المرتب
+$\{{\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}\}$ لا يتغير بقلب الترتيب: $\{{\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}\} = \{{\OLId{latin-ordinary}{y}}, {\OLId{latin-ordinary}{x}}\}$.
+وأما المرتب فيتغير؛ إذ متى كان ${\OLId{latin-ordinary}{x}}
+\neq {\OLId{latin-ordinary}{y}}$ كان $\tuple{{\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}} \neq \tuple{{\OLId{latin-ordinary}{y}}, {\OLId{latin-ordinary}{x}}}$.
+
+والمطلوب في تعريف الزوج المرتب داخل نظرية المجموعات أن يكون تساوي
+زوجين مكافئًا لتساوي الأول بالأول والثاني بالثاني، أعني:
+\[
+  \tuple{{\OLId{latin-ordinary}{a}}, {\OLId{latin-ordinary}{b}}}= \tuple{{\OLId{latin-ordinary}{c}}, {\OLId{latin-ordinary}{d}}}\text{ إذا وفقط إذا كان }{\OLId{latin-ordinary}{a}} = {\OLId{latin-ordinary}{c}} \text{ وكان }{\OLId{latin-ordinary}{b}}={\OLId{latin-ordinary}{d}}.
+\]
+ويحقق هذا المقصود تعريف وينر--كوراتوفيسكي الآتي.
+\end{explain}
+
+\begin{defn}[الزوج المرتب]\ollabel{wienerkuratowski}
+	$\tuple{{\OLId{latin-ordinary}{a}}, {\OLId{latin-ordinary}{b}}} = \{\{{\OLId{latin-ordinary}{a}}\}, \{{\OLId{latin-ordinary}{a}}, {\OLId{latin-ordinary}{b}}\}\}$.
+\end{defn}
+
+\begin{prob}
+استخرج من \olref[sfr][set][pai]{wienerkuratowski} أن $\tuple{{\OLId{latin-ordinary}{a}},
+	{\OLId{latin-ordinary}{b}}}= \tuple{{\OLId{latin-ordinary}{c}}, {\OLId{latin-ordinary}{d}}}$ إذا وفقط إذا اجتمع ${\OLId{latin-ordinary}{a}} = {\OLId{latin-ordinary}{c}}$ و${\OLId{latin-ordinary}{b}}={\OLId{latin-ordinary}{d}}$.
+\end{prob}
+
+\begin{explain}
+وإذا تقرر تعريف الزوج المرتب أمكن بناء غيره عليه. فقد نحتاج إلى
+ترتيب أكثر من شيئين، كـ\emph{الثلاثيات} $\tuple{{\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}, {\OLId{latin-ordinary}{z}}}$
+و\emph{الرباعيات} $\tuple{{\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}, {\OLId{latin-ordinary}{z}}, {\OLId{latin-ordinary}{u}}}$، ثم ما بعدها.
+فالثلاثية زوج مرتب أوله زوج مرتب: $\tuple{{\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}, {\OLId{latin-ordinary}{z}}}$ هي
+$\tuple{\tuple{{\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}},{\OLId{latin-ordinary}{z}}}$. والرباعية كذلك: $\tuple{{\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}},{\OLId{latin-ordinary}{z}},{\OLId{latin-ordinary}{u}}}$ هي
+$\tuple{\tuple{\tuple{{\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}}},{\OLId{latin-ordinary}{z}}},{\OLId{latin-ordinary}{u}}}$. وعلى هذا القياس نعرّف عمومًا
+\emph{الصفوف المرتبة من ${\OLId{latin-ordinary}{n}}$ عناصر} $\tuple{{\OLId{latin-ordinary}{x}}_{\OLMathNumeral{1}}, \dots, {\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{n}}}$.
+
+ومن مجموعات الأزواج المرتبة، ومن سائر الصفوف المرتبة ذات ${\OLId{latin-ordinary}{n}}$
+عناصر، مجموعات سيكثر نفعها فيما يأتي.
+\end{explain}
+
+\begin{defn}[الضرب الديكارتي]
+\emph{الضرب الديكارتي} للمجموعتين ${\OLId{latin-looped}{A}}$ و${\OLId{latin-looped}{B}}$، ورمزه ${\OLId{latin-looped}{A}} \times {\OLId{latin-looped}{B}}$،
+تعريفه
+\[
+  {\OLId{latin-looped}{A}} \times {\OLId{latin-looped}{B}} = \Setabs{\tuple{{\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}}}{{\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}} \text{ و } {\OLId{latin-ordinary}{y}} \in {\OLId{latin-looped}{B}}}.
+\]
+\end{defn}
+
+\begin{ex}
+لتكن ${\OLId{latin-looped}{A}} = \{{\OLMathNumeral{0}}, {\OLMathNumeral{1}}\}$ و${\OLId{latin-looped}{B}} = \{{\OLMathNumeral{1}}, {\OLId{latin-ordinary}{a}}, {\OLId{latin-ordinary}{b}}\}$. فضربهما
+\[
+{\OLId{latin-looped}{A}} \times {\OLId{latin-looped}{B}} = \{ \tuple{{\OLMathNumeral{0}}, {\OLMathNumeral{1}}}, \tuple{{\OLMathNumeral{0}}, {\OLId{latin-ordinary}{a}}}, \tuple{{\OLMathNumeral{0}}, {\OLId{latin-ordinary}{b}}},
+    \tuple{{\OLMathNumeral{1}}, {\OLMathNumeral{1}}}, \tuple{{\OLMathNumeral{1}}, {\OLId{latin-ordinary}{a}}}, \tuple{{\OLMathNumeral{1}}, {\OLId{latin-ordinary}{b}}} \}.
+\]
+\end{ex}
+
+\begin{ex}
+خذ المجموعة ${\OLId{latin-looped}{A}}$؛ فضرب ${\OLId{latin-looped}{A}}$ في نفسها ${\OLId{latin-looped}{A}} \times {\OLId{latin-looped}{A}}$ له رمز آخر هو~${\OLId{latin-looped}{A}}^{\OLMathNumeral{2}}$؛
+فهو مجموعة \emph{كل} الأزواج $\tuple{{\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}}$ حيث ${\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}} \in {\OLId{latin-looped}{A}}$.
+وكذلك جميع الثلاثيات $\tuple{{\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}, {\OLId{latin-ordinary}{z}}}$ مجموعتها ${\OLId{latin-looped}{A}}^{\OLMathNumeral{3}}$، ثم على هذا
+القياس. ويجمع ذلك التعريف العودي:
+\begin{align*}
+  {\OLId{latin-looped}{A}}^{\OLMathNumeral{1}} & = {\OLId{latin-looped}{A}}\\
+  {\OLId{latin-looped}{A}}^{{\OLId{latin-ordinary}{k}}+{\OLMathNumeral{1}}} & = {\OLId{latin-looped}{A}}^{\OLId{latin-ordinary}{k}} \times {\OLId{latin-looped}{A}}
+\end{align*}
+\end{ex}
+
+\begin{prob}
+عيّن جميع !!{element}s المجموعة $\{{\OLMathNumeral{1}}, {\OLMathNumeral{2}}, {\OLMathNumeral{3}}\}^{\OLMathNumeral{3}}$.
+\end{prob}
+
+\begin{prop}\ollabel{cardnmprod}
+ليكن عدد !!{element}s ${\OLId{latin-looped}{A}}$ هو ${\OLId{latin-ordinary}{n}}$، وعدد !!{element}s ${\OLId{latin-looped}{B}}$ هو ${\OLId{latin-ordinary}{m}}$.
+فعدد عناصر ${\OLId{latin-looped}{A}} \times {\OLId{latin-looped}{B}}$ حينئذ ${\OLId{latin-ordinary}{n}}\cdot {\OLId{latin-ordinary}{m}}$.
+\end{prop}
+
+\begin{proof}
+ثبت كل !!{element}~${\OLId{latin-ordinary}{x}}$ في~${\OLId{latin-looped}{A}}$؛ فتحصل على ${\OLId{latin-ordinary}{m}}$ من !!{element}s بالصورة
+$\tuple{{\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}} \in {\OLId{latin-looped}{A}} \times {\OLId{latin-looped}{B}}$. ولنجمعها في
+${\OLId{latin-looped}{B}}_{\OLId{latin-ordinary}{x}} = \Setabs{\tuple{{\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}}}{{\OLId{latin-ordinary}{y}} \in {\OLId{latin-looped}{B}}}$. فإذا كان
+${\OLId{latin-ordinary}{x}}_{\OLMathNumeral{1}} \neq {\OLId{latin-ordinary}{x}}_{\OLMathNumeral{2}}$ امتنع تساوي الزوجين، أي $\tuple{{\OLId{latin-ordinary}{x}}_{\OLMathNumeral{1}}, {\OLId{latin-ordinary}{y}}} \neq \tuple{{\OLId{latin-ordinary}{x}}_{\OLMathNumeral{2}}, {\OLId{latin-ordinary}{y}}}$،
+ومن ثم ${\OLId{latin-looped}{B}}_{{\OLId{latin-ordinary}{x}}_{\OLMathNumeral{1}}} \cap {\OLId{latin-looped}{B}}_{{\OLId{latin-ordinary}{x}}_{\OLMathNumeral{2}}} = \emptyset$. فإذا كتبنا
+${\OLId{latin-looped}{A}} = \{{\OLId{latin-ordinary}{x}}_{\OLMathNumeral{1}}, \dots, {\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{n}}\}$ كان
+${\OLId{latin-looped}{A}} \times {\OLId{latin-looped}{B}} = {\OLId{latin-looped}{B}}_{{\OLId{latin-ordinary}{x}}_{\OLMathNumeral{1}}} \cup \dots \cup {\OLId{latin-looped}{B}}_{{\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{n}}}$؛ فهو اتحاد هذه
+المجموعات المتباينة، وعدد !!{element}sه ${\OLId{latin-ordinary}{n}}\cdot {\OLId{latin-ordinary}{m}}$.
+
+ويتبين ذلك للعين بجعل !!{element}s~${\OLId{latin-looped}{A}} \times {\OLId{latin-looped}{B}}$ في هذه الشبكة:
+\[
+\begin{array}{rcccc}
+  {\OLId{latin-looped}{B}}_{{\OLId{latin-ordinary}{x}}_{\OLMathNumeral{1}}} = & \{\tuple{{\OLId{latin-ordinary}{x}}_{\OLMathNumeral{1}}, {\OLId{latin-ordinary}{y}}_{\OLMathNumeral{1}}} & \tuple{{\OLId{latin-ordinary}{x}}_{\OLMathNumeral{1}}, {\OLId{latin-ordinary}{y}}_{\OLMathNumeral{2}}} & \dots & \tuple{{\OLId{latin-ordinary}{x}}_{\OLMathNumeral{1}}, {\OLId{latin-ordinary}{y}}_{\OLId{latin-ordinary}{m}}}\}\\
+  {\OLId{latin-looped}{B}}_{{\OLId{latin-ordinary}{x}}_{\OLMathNumeral{2}}} = & \{\tuple{{\OLId{latin-ordinary}{x}}_{\OLMathNumeral{2}}, {\OLId{latin-ordinary}{y}}_{\OLMathNumeral{1}}} & \tuple{{\OLId{latin-ordinary}{x}}_{\OLMathNumeral{2}}, {\OLId{latin-ordinary}{y}}_{\OLMathNumeral{2}}} & \dots & \tuple{{\OLId{latin-ordinary}{x}}_{\OLMathNumeral{2}}, {\OLId{latin-ordinary}{y}}_{\OLId{latin-ordinary}{m}}}\}\\
+  \vdots & & \vdots\\
+  {\OLId{latin-looped}{B}}_{{\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{n}}} = & \{\tuple{{\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{n}}, {\OLId{latin-ordinary}{y}}_{\OLMathNumeral{1}}} & \tuple{{\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{n}}, {\OLId{latin-ordinary}{y}}_{\OLMathNumeral{2}}} & \dots & \tuple{{\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{n}}, {\OLId{latin-ordinary}{y}}_{\OLId{latin-ordinary}{m}}}\}
+\end{array}
+\]
+فلا يتكرر في الشبكة زوج؛ لأن قيم ${\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{i}}$ متمايزة، وكذلك قيم ${\OLId{latin-ordinary}{y}}_{\OLId{latin-ordinary}{j}}$.
+وعدّ الأزواج فيها يعطي ${\OLId{latin-ordinary}{n}}\cdot {\OLId{latin-ordinary}{m}}$.
+\end{proof}
+
+\begin{prob}
+برهن بالاستقراء على~${\OLId{latin-ordinary}{k}}$ أن كل ${\OLId{latin-ordinary}{k}} \ge {\OLMathNumeral{1}}$ يحقق الآتي: إذا كان عدد
+!!{element}s ${\OLId{latin-looped}{A}}$ هو ${\OLId{latin-ordinary}{n}}$، كان عدد !!{element}s ${\OLId{latin-looped}{A}}^{\OLId{latin-ordinary}{k}}$ هو ${\OLId{latin-ordinary}{n}}^{\OLId{latin-ordinary}{k}}$.
+\end{prob}
+
+\begin{ex}
+لتكن ${\OLId{latin-looped}{A}}$ مجموعة. \emph{الكلمة} على~${\OLId{latin-looped}{A}}$ متتالية من !!{element}s~${\OLId{latin-looped}{A}}$، وتؤخذ
+المتتالية صفًا مرتبًا من ${\OLId{latin-ordinary}{n}}$ من !!{element}s~${\OLId{latin-looped}{A}}$. فإن كانت
+${\OLId{latin-looped}{A}} = \{{\OLId{latin-ordinary}{a}}, {\OLId{latin-ordinary}{b}}, {\OLId{latin-ordinary}{c}}\}$، كانت «$bac$» هي الثلاثية~$\tuple{{\OLId{latin-ordinary}{b}}, {\OLId{latin-ordinary}{a}}, {\OLId{latin-ordinary}{c}}}$.
+ولهذه الكلمات، أي متتاليات الرموز، منزلة أساسية في علوم الحاسوب.
+واصطلاحنا أن !!{element}s~${\OLId{latin-looped}{A}}$ نفسها متتاليات طولها~${\OLMathNumeral{1}}$، وأن
+$\emptyset$ هي المتتالية ذات الطول~${\OLMathNumeral{0}}$. فمجموعة \emph{جميع} الكلمات
+على~${\OLId{latin-looped}{A}}$ تكون
+\[
+{\OLId{latin-looped}{A}}^* = \{\emptyset\} \cup {\OLId{latin-looped}{A}} \cup {\OLId{latin-looped}{A}}^{\OLMathNumeral{2}} \cup {\OLId{latin-looped}{A}}^{\OLMathNumeral{3}} \cup \dots
+\]
+\end{ex}
+
+\end{document}

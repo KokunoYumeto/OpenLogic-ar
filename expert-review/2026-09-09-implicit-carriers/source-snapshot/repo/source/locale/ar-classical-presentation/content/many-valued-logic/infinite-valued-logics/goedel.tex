@@ -1,0 +1,128 @@
+% Part: many-valued-logic
+% Chapter: infinite-valued-logics
+% Section: goedel
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mvl}{inf}{god}
+
+\olsection{منطقات غودل}
+
+\begin{editorial}
+  ما يأتي نواة موجزة لقسم يُبسط فيه القول في منطق غودل اللانهائي القيم.
+\end{editorial}
+
+\begin{defn}\ollabel{def:goedel} يعرّف منطق غودل اللانهائي القيم
+$\LogGod[\infty]$ بالمصفوفة الآتية:
+\begin{enumerate}
+  \item لغة القضايا القياسية~$\Lang L_{\OLMathNumeral{0}}$ بروابطها
+  $\lfalse$ و$\lnot$ و$\land$ و$\lor$ و$\lif$.
+  \item مجموعة قيم الصدق~${\OLId{latin-looped}{V}}_\infty$.
+  \item ${\OLMathNumeral{1}}$ هي القيمة المميزة الوحيدة؛ أي~${\OLId{latin-looped}{V}}^+ = \{{\OLMathNumeral{1}}\}$.
+  \item تعطي الدوال الآتية دوال الصدق:
+  \begin{align*}
+    \tf{\lfalse} & = {\OLMathNumeral{0}}\\
+    \tf{\lnot}[\LogGod]({\OLId{latin-ordinary}{x}}) & = \begin{cases}
+      {\OLMathNumeral{1}} & \text{إذا كان } {\OLId{latin-ordinary}{x}} ={\OLMathNumeral{0}}\\
+      {\OLMathNumeral{0}} & \text{في غير ذلك}
+    \end{cases}\\
+    \tf{\land}[\LogGod]({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}}) & = \min({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})\\
+    \tf{\lor}[\LogGod]({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}}) & = \max({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})\\
+    \tf{\lif}[\LogGod]({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}}) & = \begin{cases}
+      {\OLMathNumeral{1}} & \text{إذا كان } {\OLId{latin-ordinary}{x}} \le {\OLId{latin-ordinary}{y}}\\
+      {\OLId{latin-ordinary}{y}} & \text{في غير ذلك.}
+    \end{cases}
+    \end{align*}
+\end{enumerate}
+ويعرّف منطق غودل ذو~${\OLId{latin-ordinary}{m}}$ من القيم بالطريقة نفسها، عدا أن~${\OLId{latin-looped}{V}} = {\OLId{latin-looped}{V}}_{\OLId{latin-ordinary}{m}}$.
+\end{defn}
+
+\begin{prop}
+  المنطق~$\LogGod[{\OLMathNumeral{3}}]$ المعرّف في \olref[thr][god]{defn:goedel} هو
+  نفسه~$\LogGod[{\OLMathNumeral{3}}]$ المعرّف في \olref{def:goedel}.
+\end{prop}
+
+\begin{proof}
+  يتضح ذلك بمقارنة جداول صدق الروابط المعطاة في
+  \olref[thr][god]{defn:goedel} بجداول الصدق التي تحددها المعادلات في
+  \olref{def:goedel}:
+  \begin{center}
+    \begin{tabular}{c|c}
+      $\tf{\lnot}[\LogGod[{\OLMathNumeral{3}}]]$ & \\
+      \hline
+      ${\OLMathNumeral{1}}$ & ${\OLMathNumeral{0}}$ \\
+      ${\OLMathNumeral{1}}/{\OLMathNumeral{2}}$ & ${\OLMathNumeral{0}}$ \\
+      ${\OLMathNumeral{0}}$ & ${\OLMathNumeral{1}}$
+    \end{tabular}
+    \quad
+    \begin{tabular}{c|ccc}
+      $\tf{\land}[\LogGod]$ & ${\OLMathNumeral{1}}$ & ${\OLMathNumeral{1}}/{\OLMathNumeral{2}}$ & ${\OLMathNumeral{0}}$ \\
+      \hline
+      ${\OLMathNumeral{1}}$ & ${\OLMathNumeral{1}}$ & ${\OLMathNumeral{1}}/{\OLMathNumeral{2}}$ & ${\OLMathNumeral{0}}$ \\
+      ${\OLMathNumeral{1}}/{\OLMathNumeral{2}}$ & ${\OLMathNumeral{1}}/{\OLMathNumeral{2}}$ & ${\OLMathNumeral{1}}/{\OLMathNumeral{2}}$ & ${\OLMathNumeral{0}}$\\
+      ${\OLMathNumeral{0}}$ & ${\OLMathNumeral{0}}$ & ${\OLMathNumeral{0}}$ & ${\OLMathNumeral{0}}$
+    \end{tabular}
+    \\[2ex]
+    \begin{tabular}{c|ccc}
+      $\tf{\lor}[\LogGod]$ & ${\OLMathNumeral{1}}$ & ${\OLMathNumeral{1}}/{\OLMathNumeral{2}}$ & ${\OLMathNumeral{0}}$ \\
+      \hline
+      ${\OLMathNumeral{1}}$ & ${\OLMathNumeral{1}}$ & ${\OLMathNumeral{1}}$ & ${\OLMathNumeral{1}}$ \\
+      ${\OLMathNumeral{1}}/{\OLMathNumeral{2}}$ & ${\OLMathNumeral{1}}$ & ${\OLMathNumeral{1}}/{\OLMathNumeral{2}}$ & ${\OLMathNumeral{1}}/{\OLMathNumeral{2}}$ \\
+      ${\OLMathNumeral{0}}$ & ${\OLMathNumeral{1}}$ & ${\OLMathNumeral{1}}/{\OLMathNumeral{2}}$ & ${\OLMathNumeral{0}}$
+    \end{tabular}
+    \quad
+    \begin{tabular}{c|ccc}
+      $\tf{\lif}[\LogGod]$ & ${\OLMathNumeral{1}}$ & ${\OLMathNumeral{1}}/{\OLMathNumeral{2}}$ & ${\OLMathNumeral{0}}$ \\
+      \hline
+      ${\OLMathNumeral{1}}$ & ${\OLMathNumeral{1}}$ & ${\OLMathNumeral{1}}/{\OLMathNumeral{2}}$ & ${\OLMathNumeral{0}}$ \\
+      ${\OLMathNumeral{1}}/{\OLMathNumeral{2}}$ & ${\OLMathNumeral{1}}$ & ${\OLMathNumeral{1}}$ & ${\OLMathNumeral{0}}$  \\
+      ${\OLMathNumeral{0}}$ & ${\OLMathNumeral{1}}$ & ${\OLMathNumeral{1}}$ & ${\OLMathNumeral{1}}$
+    \end{tabular}
+  \end{center}
+\end{proof}
+
+\begin{prop}\ollabel{prop:god-infty-m}
+  إذا كان~${\OLId{greek-variable}{Gamma}} \Entails[\LogGod[\infty]] !B$، فإن
+  ${\OLId{greek-variable}{Gamma}} \Entails[\LogGod[{\OLId{latin-ordinary}{m}}]] !B$ لكل~${\OLId{latin-ordinary}{m}} \ge {\OLMathNumeral{2}}$.
+\end{prop}
+
+\begin{proof}
+  تمرين.
+\end{proof}
+
+\begin{prob}
+  أثبت \olref[mvl][inf][god]{prop:god-infty-m}.
+\end{prob}
+
+% تصحيح مصدر (0401-I1): لا يصح العكس المعلن هنا إلا مع مقدمات متناهية.
+وإذا كانت مجموعة المقدمات متناهية، فليس اللزوم مقصورًا على هذا الاتجاه؛
+بل يصح عكسه أيضًا.
+
+وكما كان الأمر في~$\LogGod[{\OLMathNumeral{3}}]$، فإن~$\LogGod[\infty]$ يجعل كل~!!{formula}s الصحيحة
+حدسيًا تحصيلات منطقية. وأما الأمثلة التي سبق بيان أنها ليست تحصيلات،
+فتبقى كذلك في~$\LogGod[\infty]$:
+\begin{align*}
+  & {\OLId{latin-ordinary}{p}} \lor \lnot {\OLId{latin-ordinary}{p}} && ({\OLId{latin-ordinary}{p}} \lif {\OLId{latin-ordinary}{q}}) \lif (\lnot {\OLId{latin-ordinary}{p}} \lor {\OLId{latin-ordinary}{q}}) \\
+  & \lnot\lnot {\OLId{latin-ordinary}{p}} \lif {\OLId{latin-ordinary}{p}} && \lnot(\lnot {\OLId{latin-ordinary}{p}} \land \lnot {\OLId{latin-ordinary}{q}}) \lif ({\OLId{latin-ordinary}{p}} \lor {\OLId{latin-ordinary}{q}}) \\
+  & (({\OLId{latin-ordinary}{p}} \lif {\OLId{latin-ordinary}{q}}) \lif {\OLId{latin-ordinary}{p}}) \lif {\OLId{latin-ordinary}{p}} && \lnot({\OLId{latin-ordinary}{p}} \lif {\OLId{latin-ordinary}{q}}) \lif ({\OLId{latin-ordinary}{p}} \land \lnot {\OLId{latin-ordinary}{q}})
+\end{align*}
+وأما مثال~!!{formula} التي لا تصح حدسيًا مع كونها تحصيلًا منطقيًا
+في~$\LogGod[{\OLMathNumeral{3}}]$، أعني~$({\OLId{latin-ordinary}{p}} \lif {\OLId{latin-ordinary}{q}}) \lor ({\OLId{latin-ordinary}{q}} \lif {\OLId{latin-ordinary}{p}})$، فهو تحصيل منطقي
+في~$\LogGod[\infty]$ أيضًا. ولنا في~$\LogGod[\infty]$ وصف آخر:
+نأخذ المنطق الحدسي ونضيف إليه المخطط~$(!A \lif !B) \lor (!B \lif !A)$.
+وهذا الوصف أثبته مايكل دَمِت؛ ومن هنا شاع أن يسمى~$\LogGod[\infty]$
+منطق غودل--دَمِت، ورمزه~$\Log{LC}$.
+
+\begin{prob}
+  بين أن~$({\OLId{latin-ordinary}{p}} \lif {\OLId{latin-ordinary}{q}}) \lor ({\OLId{latin-ordinary}{q}} \lif {\OLId{latin-ordinary}{p}})$ تحصيل منطقي في
+  $\LogGod[\infty]$.
+\end{prob}
+
+\begin{prob}
+  بين أن~$({\OLId{latin-ordinary}{p}} \lif {\OLId{latin-ordinary}{q}}) \lor ({\OLId{latin-ordinary}{q}} \lif {\OLId{latin-ordinary}{r}}) \lor ({\OLId{latin-ordinary}{r}} \lif {\OLId{latin-ordinary}{s}})$، وهو تحصيل
+  منطقي في~$\LogGod[{\OLMathNumeral{3}}]$، ليس تحصيلًا منطقيًا في~$\LogGod[\infty]$.
+\end{prob}
+
+\end{document}

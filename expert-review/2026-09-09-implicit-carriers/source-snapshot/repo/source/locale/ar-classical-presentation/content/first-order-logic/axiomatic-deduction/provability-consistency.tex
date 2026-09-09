@@ -1,0 +1,95 @@
+% Part: first-order-logic
+% Chapter: axiomatic-deduction
+% Section: provability-consistency
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{axd}{prv}}
+      {\olfileid{pl}{axd}{prv}}
+
+\olsection{\usetoken{S}{derivability} والاتساق}
+
+نثبت في هذا الموضع خصائص لعلاقة !!{derivability}، لها شأنها في نفسها،
+كما نحتاج إلى كل واحدة منها في برهان مبرهنة الاكتمال.
+
+\begin{prop}\ollabel{prop:provability-contr}
+  إذا كان ${\OLId{greek-variable}{Gamma}} \Proves !A$ وكانت ${\OLId{greek-variable}{Gamma}} \cup \{!A\}$ غير متسقة،
+  فإن ${\OLId{greek-variable}{Gamma}}$ غير متسقة.
+\end{prop}
+
+\begin{proof}
+  من عدم اتساق~${\OLId{greek-variable}{Gamma}} \cup \{!A\}$ يلزم~${\OLId{greek-variable}{Gamma}} \cup \{!A\}
+  \Proves \lfalse$. وبالانعكاسية \olref[ptn]{prop:reflexivity}
+  لدينا~${\OLId{greek-variable}{Gamma}}
+  \Proves !B$ لكل~$!B \in {\OLId{greek-variable}{Gamma}}$. ومع~${\OLId{greek-variable}{Gamma}} \Proves !A$
+  المفروض نحصل على~${\OLId{greek-variable}{Gamma}} \Proves !B$ لكل~$!B \in {\OLId{greek-variable}{Gamma}} \cup
+  \{!A\}$. فتعطينا \olref[ptn]{prop:transitivity}~${\OLId{greek-variable}{Gamma}} \Proves
+  \lfalse$، وهو عدم اتساق~${\OLId{greek-variable}{Gamma}}$.
+\end{proof}
+
+\begin{prop}
+\ollabel{prop:prov-incons}
+${\OLId{greek-variable}{Gamma}} \Proves !A$ إذا وفقط إذا كانت ${\OLId{greek-variable}{Gamma}} \cup \{\lnot !A\}$ غير متسقة.
+\end{prop}
+
+\begin{proof}
+أما إذا كان~${\OLId{greek-variable}{Gamma}} \Proves !A$، فإن~${\OLId{greek-variable}{Gamma}} \cup \{\lnot !A\}
+\Proves !A$ بالرتابة \olref[ptn]{prop:monotonicity}.
+وكذلك~${\OLId{greek-variable}{Gamma}} \cup
+\{\lnot !A\} \Proves \lnot !A$ بالانعكاسية \olref[ptn]{prop:reflexivity}.
+ثم نأخذ~$\Proves \lnot !A \lif (!A \lif \lfalse)$ من
+\olref[prp]{ax:lnot2}، ونجري \olref[ded]{prop:mp} مرتين،
+فيحصل~${\OLId{greek-variable}{Gamma}} \cup \{\lnot !A\} \Proves \lfalse$.
+
+وأما إذا كانت~${\OLId{greek-variable}{Gamma}} \cup \{\lnot !A\}$ غير متسقة، فلدينا~${\OLId{greek-variable}{Gamma}}
+\cup \{\lnot !A\} \Proves \lfalse$، وبمبرهنة الاستنباط~${\OLId{greek-variable}{Gamma}}
+\Proves \lnot !A \lif \lfalse$. ونأخذ~${\OLId{greek-variable}{Gamma}} \Proves (\lnot !A
+\lif \lfalse) \lif \lnot\lnot !A$ من \olref[prp]{ax:lfalse2}،
+فتنتج~${\OLId{greek-variable}{Gamma}} \Proves \lnot\lnot !A$ بـ\olref[ded]{prop:mp}.
+ومع~${\OLId{greek-variable}{Gamma}} \Proves \lnot\lnot !A \lif !A$ (\olref[prp]{ax:dne})
+نحصل على~${\OLId{greek-variable}{Gamma}} \Proves !A$ بإعادة \olref[ded]{prop:mp}.
+\end{proof}
+
+\begin{prob}
+أثبت أن ${\OLId{greek-variable}{Gamma}} \Proves \lnot !A$ إذا وفقط إذا كانت
+${\OLId{greek-variable}{Gamma}} \cup \{!A\}$ غير متسقة.
+\end{prob}
+
+\begin{prop}\ollabel{prop:explicit-inc}
+  إذا كان ${\OLId{greek-variable}{Gamma}} \Proves !A$ و$\lnot !A \in {\OLId{greek-variable}{Gamma}}$، فإن ${\OLId{greek-variable}{Gamma}}$
+  غير متسقة.
+\end{prop}
+
+\begin{proof}
+  نأخذ~${\OLId{greek-variable}{Gamma}} \Proves \lnot !A \lif (!A \lif \lfalse)$ من
+  \olref[prp]{ax:lnot2}، فنصل إلى~${\OLId{greek-variable}{Gamma}} \Proves \lfalse$
+  بإجراء \olref[ded]{prop:mp} مرتين.
+\end{proof}
+
+
+\begin{prop}\ollabel{prop:provability-exhaustive}
+  إذا كانت كل من ${\OLId{greek-variable}{Gamma}} \cup \{!A\}$ و${\OLId{greek-variable}{Gamma}} \cup \{\lnot !A\}$
+  غير متسقة، فإن ${\OLId{greek-variable}{Gamma}}$ غير متسقة.
+\end{prop}
+
+\begin{proof}
+تمرين.
+\end{proof}
+
+\tagprob{FOL}
+\begin{prob}
+  أثبت \olref[fol][axd][prv]{prop:provability-exhaustive}.
+\end{prob}
+\tagendprob
+
+\tagprob{notFOL}
+\begin{prob}
+  أثبت \olref[pl][axd][prv]{prop:provability-exhaustive}.
+\end{prob}
+\tagendprob
+
+
+\end{document}

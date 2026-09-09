@@ -1,0 +1,109 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{ord-arithmetic}{mult}
+
+\olsection{الضرب الترتيبي}
+
+نأتي الآن إلى الضرب الترتيبي، ونسلك فيه قريبًا من مسلك الجمع. فلو
+أردنا ضرب~${\OLId{greek-variable}{alpha}}$ في~$\beta$، تصورنا شبكة مستطيلة عرضها~${\OLId{greek-variable}{alpha}}$
+وارتفاعها~$\beta$. وحاصل ضرب~${\OLId{greek-variable}{alpha}}$ و$\beta$ هو ما ينتج من اجتياز صف كامل، ثم الصف
+الذي يليه، وهلم جرًا حتى تستوفى الشبكة. وبعبارة جامعة، ينتج حاصل ضرب
+${\OLId{greek-variable}{alpha}}$ و$\beta$ بإحلال نسخة من~${\OLId{greek-variable}{alpha}}$ محل \emph{كل} عنصر في
+$\beta$.
+
+ولصياغة المعنى صوريًا نستعمل الترتيب المعجمي المعكوس على حاصل الضرب
+الديكارتي لـ${\OLId{greek-variable}{alpha}}$ و$\beta$.
+
+\begin{defn}
+لأي عددين ترتيبيين~${\OLId{greek-variable}{alpha}}, \beta$، يكون حاصل ضربهما
+${\OLId{greek-variable}{alpha}} \ordtimes \beta = \ordtype{{\OLId{greek-variable}{alpha}} \times \beta, \rlexless}$.
+\end{defn}
+\noindent
+ولا بد، مرة أخرى، من إثبات سلامة التعريف.
+
+\begin{lem}\ollabel{ordtimeslessiswo}
+$\tuple{{\OLId{greek-variable}{alpha}} \times \beta, \rlexless}$ ترتيب جيد، لأي عددين
+ترتيبيين~${\OLId{greek-variable}{alpha}}$ و$\beta$.
+\end{lem}
+
+\begin{proof}
+الحجة عين ما في~\olref[add]{ordsumlessiswo}.
+\end{proof}
+\noindent
+ثم توصف حركة الضرب بالمعادلات الآتية.
+
+\begin{lem}\ollabel{ordtimesrecursion}
+لأي عددين ترتيبيين~${\OLId{greek-variable}{alpha}}, \beta$:
+\begin{align*}
+	{\OLId{greek-variable}{alpha}} \ordtimes {\OLMathNumeral{0}} &= {\OLMathNumeral{0}}\\
+	{\OLId{greek-variable}{alpha}} \ordtimes (\beta \ordplus {\OLMathNumeral{1}}) &=
+		({\OLId{greek-variable}{alpha}} \ordtimes \beta) \ordplus {\OLId{greek-variable}{alpha}}\\
+	{\OLId{greek-variable}{alpha}}  \ordtimes \beta &=
+		\supstrict_{\delta < \beta}({\OLId{greek-variable}{alpha}} \ordtimes \delta) &&
+		\text{عندما يكون $\beta$ عددًا ترتيبيًا حديًا}.
+\end{align*}
+\end{lem}
+
+\begin{proof}
+متروك تمرينًا.
+\end{proof}
+
+وكما جاز في الجمع، كان يجوز أن نتخذ هذه المعادلات العودية نفسها
+تعريفًا للضرب الترتيبي بدل التعريف المباشر. وكذلك يشترك الضرب مع
+المألوف في الخواص الآتية.
+
+\begin{lem}\ollabel{ordinalmultiplicationisnice}
+إذا كانت~${\OLId{greek-variable}{alpha}}, \beta, \gamma$ أعدادًا ترتيبية، فإن:
+\begin{enumerate}
+	\item\ollabel{ordtimes1} إذا كان~${\OLId{greek-variable}{alpha}} \neq {\OLMathNumeral{0}}$ و$\beta < \gamma$،
+	فإن~${\OLId{greek-variable}{alpha}} \ordtimes \beta < {\OLId{greek-variable}{alpha}} \ordtimes \gamma$؛
+	\item\ollabel{ordtimes2} إذا كان~${\OLId{greek-variable}{alpha}} \neq {\OLMathNumeral{0}}$ و
+	${\OLId{greek-variable}{alpha}} \ordtimes \beta = {\OLId{greek-variable}{alpha}}\ordtimes\gamma$، فإن
+	$\beta = \gamma$؛
+	\item\ollabel{ordtimes3} ${\OLId{greek-variable}{alpha}} \ordtimes (\beta \ordtimes
+	\gamma) = ({\OLId{greek-variable}{alpha}} \ordtimes \beta) \ordtimes \gamma$؛
+	\item\ollabel{ordtimes4} إذا كان~${\OLId{greek-variable}{alpha}} \leq \beta$، فإن
+	${\OLId{greek-variable}{alpha}} \ordtimes \gamma \leq \beta \ordtimes \gamma$؛
+	\item\ollabel{ordtimes5} ${\OLId{greek-variable}{alpha}} \ordtimes (\beta \ordplus
+	\gamma) = ({\OLId{greek-variable}{alpha}} \ordtimes \beta )\ordplus ({\OLId{greek-variable}{alpha}}\ordtimes
+	\gamma)$.
+\end{enumerate}
+\end{lem}
+
+\begin{proof}
+متروك تمرينًا.
+\end{proof}
+
+ولك أن تستخرج غيرها من النتائج ما شئت. على أن
+\olref[ord-arithmetic][add]{ordsumnotcommute} يجعل القضية الآتية
+متوقعة.
+
+\begin{prop}
+الضرب الترتيبي ليس تبادليًا:
+${\OLMathNumeral{2}} \ordtimes \omega = \omega < \omega \ordtimes {\OLMathNumeral{2}}$
+\end{prop}
+
+\begin{proof}
+${\OLMathNumeral{2}} \ordtimes \omega = \supstrict_{{\OLId{latin-ordinary}{n}} < \omega}({\OLMathNumeral{2}}\ordtimes {\OLId{latin-ordinary}{n}}) = \omega
+\in \supstrict_{{\OLId{latin-ordinary}{n}} < \omega}(\omega \ordplus {\OLId{latin-ordinary}{n}}) = \omega \ordplus
+\omega = \omega \ordtimes {\OLMathNumeral{2}}$.
+\end{proof}
+\noindent
+ووجه ذلك في الحدس بيّن. فحساب~${\OLMathNumeral{2}} \ordtimes \omega$ يستبدل بكل عدد
+طبيعي شيئين؛ وهذا لا يغير نمط الترتيب لو أدخلنا بين كل عددين طبيعيين
+عددًا «نصفيًا»، أي نظرنا في الترتيب الطبيعي على
+$\Setabs{\nicefrac{{\OLId{latin-ordinary}{n}}}{{\OLMathNumeral{2}}}}{{\OLId{latin-ordinary}{n}} \in \omega}$. فيظهر حينئذ أن نمط الترتيب
+هو نمط~$\omega$ نفسه. أما في~$\omega \ordtimes {\OLMathNumeral{2}}$ فنضع نسختين من
+$\omega$ متعاقبتين.
+
+\begin{prob}
+أثبت
+\olref[sth][ord-arithmetic][mult]{ordtimeslessiswo}،
+و\olref[sth][ord-arithmetic][mult]{ordtimesrecursion}،
+و
+\olref[sth][ord-arithmetic][mult]{ordinalmultiplicationisnice}
+\end{prob}
+
+\end{document}

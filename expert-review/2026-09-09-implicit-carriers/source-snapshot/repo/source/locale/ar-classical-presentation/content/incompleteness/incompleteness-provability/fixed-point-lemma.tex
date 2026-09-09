@@ -1,0 +1,131 @@
+% Part: incompleteness
+% Chapter: incompleteness-provability
+% Section: fixed-point-lemma
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{inp}{fix}
+
+\olsection{لمّة النقطة الثابتة}
+
+\begin{explain}
+مقتضى لمّة النقطة الثابتة أن كل !!{formula} $!B({\OLId{latin-ordinary}{x}})$ تقابلها
+!!a{sentence} $!A$ تحقق $\Th{T}\Proves !A\liff !B(\gn{!A})$،
+متى كانت $\Th{T}$ امتدادًا لـ$\Th{Q}$. ففي مثال الكاذب نطلب
+أن تكافئ $!A$، بإثبات في $\Th{T}$، قولنا «$\gn{!A}$ كاذبة»؛
+أي إن $\Gn{!A}$ عدد غودل لـ!!{sentence} كاذبة. ولنقرب البرهان
+نقارن ذلك بعبارة كواين غير الصورية عن $!A$: «'تنتج كذبًا إذا
+سبقتها صورتها المقتبسة' تنتج كذبًا إذا سبقتها صورتها المقتبسة».
+أخذ التعبير وتقديم صورته المقتبسة عليه لتكوين جملة نسميه
+\emph{الإنشاء القطري} للتعبير، ونسمي الناتج قطره.
+فقطر 'تنتج كذبًا إذا سبقتها صورتها المقتبسة' هو «'تنتج كذبًا إذا
+سبقتها صورتها المقتبسة' تنتج كذبًا إذا سبقتها صورتها المقتبسة».
+وهنا موضع الدقة: ليست جملة الكاذب عند كواين قطر 'تنتج كذبًا'،
+بل قطر 'تنتج كذبًا إذا سبقتها صورتها المقتبسة'. فالخاصية التي
+نُجري عليها الإنشاء القطري تتضمن هي نفسها ذلك الإنشاء!{}
+
+وأما في لغة الحساب، فاقتباس !!a{formula} ذات متغير حر واحد
+يتحقق بحساب عدد غودل لها، ثم إحلال عدده الاسمي القياسي محل
+المتغير الحر. فقطر $!E({\OLId{latin-ordinary}{x}})$ هو $!E(\num{{\OLId{latin-ordinary}{n}}})$، حيث
+${\OLId{latin-ordinary}{n}}=\Gn{!E({\OLId{latin-ordinary}{x}})}$. وسنكتب منذ الآن $\num{\Gn{!E({\OLId{latin-ordinary}{x}})}}$
+مختصرًا هكذا: $\gn{!E({\OLId{latin-ordinary}{x}})}$. فإذا كانت $!B({\OLId{latin-ordinary}{x}})$ تعني «كاذبة»،
+صار معنى «تنتج كذبًا إذا سبقتها صورتها المقتبسة»: «تنتج كذبًا
+إذا طُبّقت على عدد غودل لقطرها». ولو وجد رمز $\Obj{diag}$
+للدالة $\fn{diag}({\OLId{latin-ordinary}{n}})$ التي تحسب عدد غودل لقطر الـ!!{formula}
+ذات عدد غودل ${\OLId{latin-ordinary}{n}}$، لكتبنا $!E({\OLId{latin-ordinary}{x}})$ على صورة $!B(\Obj{diag}({\OLId{latin-ordinary}{x}}))$.
+وعندئذ تكون جملة كواين قطر هذه الصيغة، أي $!E(\gn{!E({\OLId{latin-ordinary}{x}})})$،
+أو $!B(\Obj{diag}(\gn{!B(\Obj{diag}({\OLId{latin-ordinary}{x}}))}))$. ولا يختص البناء
+بالكذب؛ فلنا أن نأخذ $!B({\OLId{latin-ordinary}{x}})$ أي خاصية أخرى. ولتطبيقه على عدم
+الاكتمال نجعل $!B({\OLId{latin-ordinary}{x}})$ قولنا «${\OLId{latin-ordinary}{x}}$ غير !!{derivable} في
+$\Th{T}$». فتصير $!E({\OLId{latin-ordinary}{x}})$ بمعنى «تنتج !!a{sentence} غير
+!!{derivable} في $\Th{T}$ إذا طُبّقت على عدد غودل لقطرها».
+
+ولتحقيق هذا البناء صوريًا في $\Th{T}$ يلزمنا تمثيل
+$\fn{diag}$. والدالة $\fn{diag}({\OLId{latin-ordinary}{n}})$ قابلة للحساب، بل عودية
+بدائية: تأخذ ${\OLId{latin-ordinary}{n}}$، عدد غودل للصيغة $!E({\OLId{latin-ordinary}{x}})$، وتعيد
+$\fn{diag}({\OLId{latin-ordinary}{n}})$ عدد غودل للصيغة $!E(\gn{!E({\OLId{latin-ordinary}{x}})})$.
+و$\gn{!E({\OLId{latin-ordinary}{x}})}$، كما تقدم، هو العدد الاسمي القياسي لعدد غودل
+$!E({\OLId{latin-ordinary}{x}})$، أي $\num{\Gn{!E({\OLId{latin-ordinary}{x}})}}$. فلو كان $\Obj{diag}$ رمز
+دالة في $\Th{T}$ يمثل $\fn{diag}$، لجعلنا $!A$ الصيغة
+$!B(\Obj{diag}(\gn{!B(\Obj{diag}({\OLId{latin-ordinary}{x}}))}))$. وعندئذ
+\begin{align*}
+\fn{diag}(\Gn{!B(\Obj{diag}({\OLId{latin-ordinary}{x}}))}) & =
+\Gn{!B(\Obj{diag}(\gn{!B(\Obj{diag}({\OLId{latin-ordinary}{x}}))}))} \\
+& = \Gn{!A}.
+\end{align*}
+فإذا أمكن لـ$\Th{T}$ !!{derive} المساواة
+\[
+\Obj{diag}(\gn{!B(\Obj{diag}({\OLId{latin-ordinary}{x}}))}) = \gn{!A},
+\]
+أمكن لها !!{derive} التكافؤ
+$!B(\Obj{diag}(\gn{!B(\Obj{diag}({\OLId{latin-ordinary}{x}}))}))\liff !B(\gn{!A})$،
+وطرفه الأيسر هو $!A$ بعينها، بحسب التعريف.
+
+لكن $\Obj{diag}$ ليس بالضرورة رمز دالة في $\Th{T}$،
+وهو قطعًا ليس من رموز $\Th{Q}$. ويغنينا عن ذلك أن $\fn{diag}$
+قابلة للحساب، فهي \emph{قابلة للتمثيل} في $\Th{Q}$ بصيغة
+$!D_{\fn{diag}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})$. فنستعيض عن $!B(\Obj{diag}({\OLId{latin-ordinary}{x}}))$
+بـ$\lexists[{\OLId{latin-ordinary}{y}}][(!D_{\fn{diag}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})\land !B({\OLId{latin-ordinary}{y}}))]$.
+ومع هذا الاستبدال يبقى البرهان السابق جاريًا، بل تكفي
+$\Th{Q}$ نفسها لإجرائه.
+\end{explain}
+
+\begin{lem}
+\ollabel{lem:fixed-point} لكل صيغة $!B({\OLId{latin-ordinary}{x}})$ ذات متغير حر واحد
+${\OLId{latin-ordinary}{x}}$ جملة $!A$ تحقق
+$\Th{Q}\Proves !A\liff !B(\gn{!A})$.
+\end{lem}
+
+
+\begin{proof}
+نبدأ بالصيغة $!B({\OLId{latin-ordinary}{x}})$، ونعرّف $!E({\OLId{latin-ordinary}{x}})$ بأنها
+$\lexists[{\OLId{latin-ordinary}{y}}][(!D_{\fn{diag}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})\land !B({\OLId{latin-ordinary}{y}}))]$.
+ثم نأخذ $!A$ قطرها، أي $!E(\gn{!E({\OLId{latin-ordinary}{x}})})$.
+
+تمثيل $!D_{\fn{diag}}$ للدالة $\fn{diag}$، مع المساواة
+$\fn{diag}(\Gn{!E({\OLId{latin-ordinary}{x}})})=\Gn{!A}$، يتيح لـ$\Th{Q}$ !!{derive}
+الأمرين الآتيين:
+\begin{align}
+  & !D_{\fn{diag}}(\gn{!E({\OLId{latin-ordinary}{x}})}, \gn{!A}) \ollabel{repdiag1} \\
+  & \lforall[{\OLId{latin-ordinary}{y}}][(!D_{\fn{diag}}(\gn{!E({\OLId{latin-ordinary}{x}})},{\OLId{latin-ordinary}{y}}) \lif
+  \eq[{\OLId{latin-ordinary}{y}}][\gn{!A}])]. \ollabel{repdiag2}
+\end{align}
+والمطلوب الآن $\Th{Q}\Proves !A\liff !B(\gn{!A})$.
+نبينه باستدلال غير صوري، لا يستعمل إلا المنطق وحقائق
+!!{derivable} في $\Th{Q}$.
+
+أما أولًا فنفرض $!A$، أي $!E(\gn{!E({\OLId{latin-ordinary}{x}})})$.
+وبتعريف $!E({\OLId{latin-ordinary}{x}})$ نجد أن $!E(\gn{!E({\OLId{latin-ordinary}{x}})})$ هي
+\[
+\lexists[{\OLId{latin-ordinary}{y}}][(!D_{\fn{diag}}(\gn{!E({\OLId{latin-ordinary}{x}})},{\OLId{latin-ordinary}{y}}) \land !B({\OLId{latin-ordinary}{y}}))].
+\]
+نأخذ شاهدًا ${\OLId{latin-ordinary}{y}}$ لذلك. فمن $!D_{\fn{diag}}(\gn{!E({\OLId{latin-ordinary}{x}})},{\OLId{latin-ordinary}{y}})$
+يلزم ${\OLId{latin-ordinary}{y}}=\gn{!A}$ بمقتضى \olref{repdiag2}.
+ولدينا كذلك~$!B({\OLId{latin-ordinary}{y}})$ من اقتران الشاهد؛ فبالتعويض يلزم~$!B(\gn{!A})$.
+
+وأما العكس فنفرض $!B(\gn{!A})$، ونضم إليها \olref{repdiag1}:
+\begin{align*}
+& !D_{\fn{diag}}(\gn{!E({\OLId{latin-ordinary}{x}})}, \gn{!A}) \land !B(\gn{!A}).
+\intertext{وينتج من ذلك}
+& \lexists[{\OLId{latin-ordinary}{y}}][(!D_{\fn{diag}}(\gn{!E({\OLId{latin-ordinary}{x}})},{\OLId{latin-ordinary}{y}}) \land !B({\OLId{latin-ordinary}{y}}))].
+\end{align*}
+والصيغة الأخيرة هي $!E(\gn{!E({\OLId{latin-ordinary}{x}})})$، ومن ثم هي $!A$.
+\end{proof}
+
+\begin{digress}
+قارن هذا البرهان ببرهان لمّة النقطة الثابتة في نظرية قابلية الحساب.
+كان المقصود هناك تعريف \emph{دالة} بدلالة نفسها، والمقصود هنا
+تعريف \emph{عبارة} بدلالة نفسها. ولا فرق في أصل الفكرة وراء
+هذا الاختلاف.
+\end{digress}
+
+\begin{prob}
+  نسمي !!^a{formula} $!A({\OLId{latin-ordinary}{x}})$ \emph{تعريفًا للصدق} متى كان
+  $\Th{Q}\Proves !B\liff !A(\gn{!B})$ لكل !!{sentence}s $!B$.
+  استعمل لمّة النقطة الثابتة لإثبات امتناع أن تكون أي !!{formula}
+  تعريفًا للصدق.
+\end{prob}
+
+\end{document}

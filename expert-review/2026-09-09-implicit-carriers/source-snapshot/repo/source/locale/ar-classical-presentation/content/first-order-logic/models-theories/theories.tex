@@ -1,0 +1,134 @@
+% Part: first-order-logic
+% Chapter: models-theories
+% Section: theories
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{mat}{the}
+
+\olsection{أمثلة لنظريات الرتبة الأولى}
+
+\begin{ex}
+لنظرية الترتيبات الخطية الصارمة في اللغة~$\Lang L_<$
+نسق البديهيات
+\begin{align*}
+\{\quad & \lforall[{\OLId{latin-ordinary}{x}}][\lnot {\OLId{latin-ordinary}{x}} < {\OLId{latin-ordinary}{x}}], \\
+& \lforall[{\OLId{latin-ordinary}{x}}][\lforall[{\OLId{latin-ordinary}{y}}][(({\OLId{latin-ordinary}{x}} < {\OLId{latin-ordinary}{y}} \lor {\OLId{latin-ordinary}{y}} <
+    {\OLId{latin-ordinary}{x}}) \lor {\OLId{latin-ordinary}{x}} = {\OLId{latin-ordinary}{y}})]], \\
+& \lforall[{\OLId{latin-ordinary}{x}}][\lforall[{\OLId{latin-ordinary}{y}}][\lforall[{\OLId{latin-ordinary}{z}}][(({\OLId{latin-ordinary}{x}} < {\OLId{latin-ordinary}{y}}
+      \land {\OLId{latin-ordinary}{y}} < {\OLId{latin-ordinary}{z}}) \lif {\OLId{latin-ordinary}{x}} < {\OLId{latin-ordinary}{z}})]]] \quad \}
+\end{align*}
+وهذه البديهيات تحدّد ال!!{structure}s المقصودة تحديدًا تامًا:
+فكل نموذج لها ترتيب خطي صارم؛ وبالعكس، إذا كانت ${\OLId{latin-looped}{R}}$ ترتيبًا
+خطيًا صارمًا على مجموعة ${\OLId{latin-looped}{X}}$، كانت البنية $\Struct M$ ذات
+$\Domain {\OLId{latin-looped}{M}} = {\OLId{latin-looped}{X}}$ و$\Assign{<}{{\OLId{latin-looped}{M}}} = {\OLId{latin-looped}{R}}$ نموذجًا للنظرية.
+\end{ex}
+
+\begin{ex}
+وأما نظرية الزمر، ففي لغة تحتوي $\Obj 1$ (!!{constant}) و$\cdot$
+(!!{function} ثنائية المحل)، بديهياتها:
+\begin{align*}
+& \lforall[{\OLId{latin-ordinary}{x}}][\eq[({\OLId{latin-ordinary}{x}} \cdot \Obj 1)][{\OLId{latin-ordinary}{x}}]]\\
+& \lforall[{\OLId{latin-ordinary}{x}}][\lforall[{\OLId{latin-ordinary}{y}}][\lforall[{\OLId{latin-ordinary}{z}}][\eq[({\OLId{latin-ordinary}{x}} \cdot ({\OLId{latin-ordinary}{y}} \cdot {\OLId{latin-ordinary}{z}}))][(({\OLId{latin-ordinary}{x}}
+          \cdot {\OLId{latin-ordinary}{y}}) \cdot {\OLId{latin-ordinary}{z}})]]]]\\
+& \lforall[{\OLId{latin-ordinary}{x}}][\lexists[{\OLId{latin-ordinary}{y}}][\eq[({\OLId{latin-ordinary}{x}} \cdot {\OLId{latin-ordinary}{y}})][\Obj 1]]]
+\end{align*}
+\end{ex}
+
+\begin{ex}
+وأما حساب بيانو، فتبنيه الجمل الآتية في لغة
+الحساب~$\Lang L_{\OLId{latin-looped}{A}}$:
+\begin{align*}
+& \lforall[{\OLId{latin-ordinary}{x}}][\lforall[{\OLId{latin-ordinary}{y}}][(\eq[{\OLId{latin-ordinary}{x}}'][{\OLId{latin-ordinary}{y}}'] \lif \eq[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{y}}])]]\\
+& \lforall[{\OLId{latin-ordinary}{x}}][\eq/[\Obj 0][{\OLId{latin-ordinary}{x}}']]\\
+& \lforall[{\OLId{latin-ordinary}{x}}][\eq[({\OLId{latin-ordinary}{x}} + \Obj 0)][{\OLId{latin-ordinary}{x}}]]\\
+& \lforall[{\OLId{latin-ordinary}{x}}][\lforall[{\OLId{latin-ordinary}{y}}][\eq[({\OLId{latin-ordinary}{x}} + {\OLId{latin-ordinary}{y}}')][({\OLId{latin-ordinary}{x}} + {\OLId{latin-ordinary}{y}})']]]\\
+& \lforall[{\OLId{latin-ordinary}{x}}][\eq[({\OLId{latin-ordinary}{x}} \times \Obj 0)][\Obj 0]]\\
+& \lforall[{\OLId{latin-ordinary}{x}}][\lforall[{\OLId{latin-ordinary}{y}}][\eq[({\OLId{latin-ordinary}{x}} \times {\OLId{latin-ordinary}{y}}')][(({\OLId{latin-ordinary}{x}} \times {\OLId{latin-ordinary}{y}}) + {\OLId{latin-ordinary}{x}})]]]\\
+& \lforall[{\OLId{latin-ordinary}{x}}][\lforall[{\OLId{latin-ordinary}{y}}][({\OLId{latin-ordinary}{x}} < {\OLId{latin-ordinary}{y}} \liff \lexists[{\OLId{latin-ordinary}{z}}][\eq[({\OLId{latin-ordinary}{z}}' + {\OLId{latin-ordinary}{x}})][{\OLId{latin-ordinary}{y}}])]]]\\
+\intertext{ويضاف إليها جميع الجمل التي صورتها}
+& (!A(\Obj 0) \land \lforall[{\OLId{latin-ordinary}{x}}][(!A({\OLId{latin-ordinary}{x}}) \lif !A({\OLId{latin-ordinary}{x}}'))]) \lif \lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]
+\end{align*}
+والجمل ذات الصورة الأخيرة لا تتناهى، ولذلك لا يتناهى نسق
+البديهيات هذا. وتلك الصورة هي \emph{مخطط الاستقراء}.
+(وللمخطط، على التحقيق، تفصيل أزيد مما أظهرناه هنا.)
+
+والبديهية الأخيرة قبل مخطط الاستقراء \emph{تعريف صريح} لـ~$<$.
+\end{ex}
+
+\begin{ex}
+لنظرية المجموعات الصرفة شأن في أسس الرياضيات وفي فلسفتها.
+والمجموعة الصرفة ما كانت !!{element}sها مجموعات صرفة أيضًا.
+فتدخل المجموعة الخالية في هذا الوصف، ولا تدخل فيه مجموعة فيها
+!!a{element} ليس مجموعة. فليس في بناء المجموعات الصرفة إلا
+المجموعة الخالية وما يتألف منها، دون «العناصر الأولية»، أعني
+الكائنات التي ليست هي نفسها مجموعات.
+
+وقد يُقترح لنظرية المجموعات الصرفة نسق البديهيات الآتي:
+\begin{align*}
+& \lexists[{\OLId{latin-ordinary}{x}}][\lnot \lexists[{\OLId{latin-ordinary}{y}}][{\OLId{latin-ordinary}{y}} \in {\OLId{latin-ordinary}{x}}]]\\
+& \lforall[{\OLId{latin-ordinary}{x}}][\lforall[{\OLId{latin-ordinary}{y}}][(\lforall[{\OLId{latin-ordinary}{z}}][({\OLId{latin-ordinary}{z}} \in {\OLId{latin-ordinary}{x}} \liff {\OLId{latin-ordinary}{z}} \in {\OLId{latin-ordinary}{y}})] \lif
+\eq[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{y}}])]]\\
+& \lforall[{\OLId{latin-ordinary}{x}}][\lforall[{\OLId{latin-ordinary}{y}}][\lexists[{\OLId{latin-ordinary}{z}}][\lforall[{\OLId{latin-ordinary}{u}}][({\OLId{latin-ordinary}{u}} \in {\OLId{latin-ordinary}{z}} \liff
+(\eq[{\OLId{latin-ordinary}{u}}][{\OLId{latin-ordinary}{x}}] \lor \eq[{\OLId{latin-ordinary}{u}}][{\OLId{latin-ordinary}{y}}]))]]]]\\
+& \lforall[{\OLId{latin-ordinary}{x}}][\lexists[{\OLId{latin-ordinary}{y}}][\lforall[{\OLId{latin-ordinary}{z}}][({\OLId{latin-ordinary}{z}} \in {\OLId{latin-ordinary}{y}} \liff \lexists[{\OLId{latin-ordinary}{u}}][({\OLId{latin-ordinary}{z}} \in
+        {\OLId{latin-ordinary}{u}} \land {\OLId{latin-ordinary}{u}} \in {\OLId{latin-ordinary}{x}})])]]]\\
+\intertext{ويضاف إليها جميع الجمل التي صورتها} &
+\lexists[{\OLId{latin-ordinary}{x}}][\lforall[{\OLId{latin-ordinary}{y}}][({\OLId{latin-ordinary}{y}} \in {\OLId{latin-ordinary}{x}} \liff !A({\OLId{latin-ordinary}{y}}))]]
+\end{align*}
+ومؤدى البديهية الأولى وجود مجموعة لا !!{element}s لها (أي إن
+$\emptyset$ موجودة)؛ وتقول الثانية إن المجموعات امتدادية؛ وتقول
+الثالثة إن المجموعة $\{{\OLId{latin-looped}{X}}, {\OLId{latin-looped}{Y}}\}$ موجودة لأي مجموعتين ${\OLId{latin-looped}{X}}$ و${\OLId{latin-looped}{Y}}$؛ وتقول
+الرابعة إن المجموعة $\cup {\OLId{latin-looped}{X}}$ موجودة لأي مجموعة ${\OLId{latin-looped}{X}}$، حيث $\cup {\OLId{latin-looped}{X}}$ هي
+اتحاد جميع عناصر ${\OLId{latin-looped}{X}}$.
+
+وأما ال!!{sentence}s الأخيرة، فاسمها مجتمعة \emph{مخطط الاستيعاب
+الساذج}. ومؤداها وجود المجموعة $\Setabs{{\OLId{latin-ordinary}{x}}}{!A({\OLId{latin-ordinary}{x}})}$
+لكل $!A({\OLId{latin-ordinary}{x}})$؛ فيبدو هذا أول النظر بديهيًا صادقًا نافعًا، وربما
+بدا مما لا غنى عنه. وإنما وُصف بالسذاجة لأنه يجعل النظرية غير
+قابلة للإرضاء. فلو أخذنا $!A({\OLId{latin-ordinary}{y}})$ على أنها $\lnot {\OLId{latin-ordinary}{y}} \in {\OLId{latin-ordinary}{y}}$،
+لزم قبول ال!!{sentence}
+\[
+\lexists[{\OLId{latin-ordinary}{x}}][\lforall[{\OLId{latin-ordinary}{y}}][({\OLId{latin-ordinary}{y}} \in {\OLId{latin-ordinary}{x}} \liff \lnot {\OLId{latin-ordinary}{y}} \in {\OLId{latin-ordinary}{y}})]]
+\]
+ولا توجد !!{structure} تُرضى فيها هذه ال!!{sentence}.
+\end{ex}
+
+\begin{ex}
+أصل النظر في مبحث \emph{الجزء والكل} علاقة \emph{الجزء}.
+ولهذه العلاقة نظريات بديهية، كما للمجموعات نظريات؛ وتختلف هذه
+النظريات في تصورها للعلاقة، بل قد تتعارض.
+
+وفي لغة مبحث الجزء والكل رمز محمول ثنائي المحل واحد~$\Obj P$،
+يُراد بـ$\Atom{\Obj P}{x, y}$ أن ${\OLId{latin-ordinary}{x}}$ جزء من~${\OLId{latin-ordinary}{y}}$.
+وعلى هذا القصد نسمي !!a{structure} لهذه اللغة \emph{بنية للجزء}.
+وليس كل تأويل لمحمول ثنائي المحل جديرًا بهذه التسمية؛ فلا بد
+أن تستوفي $\Assign{\Obj P}{{\OLId{latin-looped}{M}}}$ شروطًا توافق معنى «الجزء»،
+فنضع هذه الشروط بديهيات لنظرية الجزء. ومن ذلك أن علاقة الجزء
+ترتيب جزئي: كل كائن جزء من نفسه، وإن كان جزءًا \emph{غير فعلي}؛
+ولا يكون كل واحد من كائنين مختلفين جزءًا من الآخر؛ وما كان جزءًا
+من جزء كائن فهو جزء من ذلك الكائن. فهي من هذه الجهة تشبه علاقة
+«هو مجموعة جزئية من»، ولا تشبه «هو عنصر من»، إذ ليست علاقة
+العنصر انعكاسية ولا متعدية.
+\begin{align*}
+& \lforall[{\OLId{latin-ordinary}{x}}][\Atom{\Obj P}{x,x}] \\
+& \lforall[{\OLId{latin-ordinary}{x}}][\lforall[{\OLId{latin-ordinary}{y}}][((\Part{{\OLId{latin-ordinary}{x}}}{{\OLId{latin-ordinary}{y}}} \land \Part{{\OLId{latin-ordinary}{y}}}{{\OLId{latin-ordinary}{x}}})
+      \lif \eq[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{y}}])]] \\
+& \lforall[{\OLId{latin-ordinary}{x}}][\lforall[{\OLId{latin-ordinary}{y}}][\lforall[{\OLId{latin-ordinary}{z}}][((\Part{{\OLId{latin-ordinary}{x}}}{{\OLId{latin-ordinary}{y}}} \land
+        \Part{{\OLId{latin-ordinary}{y}}}{{\OLId{latin-ordinary}{z}}}) \lif \Part{{\OLId{latin-ordinary}{x}}}{{\OLId{latin-ordinary}{z}}})]]]\\
+\intertext{وفوق ذلك، لكل كائنين مجموع في مبحث الجزء والكل (أي كائن
+  يكون هذان الكائنان جزأين منه، ويكون أصغريًا من هذه الجهة).}  &
+\lforall[{\OLId{latin-ordinary}{x}}][\lforall[{\OLId{latin-ordinary}{y}}][\lexists[{\OLId{latin-ordinary}{z}}][\lforall[{\OLId{latin-ordinary}{u}}][(\Part{{\OLId{latin-ordinary}{z}}}{{\OLId{latin-ordinary}{u}}} \liff
+        (\Part{{\OLId{latin-ordinary}{x}}}{{\OLId{latin-ordinary}{u}}} \land \Part{{\OLId{latin-ordinary}{y}}}{{\OLId{latin-ordinary}{u}}}))]]]]
+\end{align*}
+فهذه طائفة من أصول علاقة الجزء التي يبحثها الميتافيزيقيون.
+وأما ما وراءها من المبادئ، فيعسر ضبطه وصياغته من غير تقديم
+علاقات معرّفة. ومن ذلك مبدأ يعدّه أكثر المشتغلين بمبحث الجزء
+والكل صحيحًا: متى كان للكائن~${\OLId{latin-ordinary}{x}}$ جزء فعلي~${\OLId{latin-ordinary}{y}}$، كان له
+جزء~${\OLId{latin-ordinary}{z}}$ لا يشترك مع~${\OLId{latin-ordinary}{y}}$ في شيء من الأجزاء، ويكون اندماج
+${\OLId{latin-ordinary}{y}}$ و${\OLId{latin-ordinary}{z}}$ هو~${\OLId{latin-ordinary}{x}}$.
+\end{ex}
+
+\end{document}

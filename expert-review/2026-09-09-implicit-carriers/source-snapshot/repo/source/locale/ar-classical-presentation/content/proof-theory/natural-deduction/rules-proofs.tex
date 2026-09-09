@@ -1,0 +1,272 @@
+% Part: proof-theory
+% Chapter: natural-deduction
+% Section: rules-proofs
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{nat}{rp}
+
+\olsection{في القواعد و\usetoken{P}{proof}}
+
+نقدم أولًا تعريفات نثبت بها الاصطلاح.
+
+ولننظر في قاعدتي~\Log{N1c} و\Log{N1i} اللتين يرد فيهما
+$!A \lif !B$:
+\[
+\bottomAlignProof
+\AxiomC{$\Discharge{!A}{{\OLId{latin-ordinary}{x}}}$}
+\shortDeduce
+\DeduceC{$!B$}
+\DischargeRule{\Intro{\lif}}{{\OLId{latin-ordinary}{x}}}
+\UnaryInfC{$!A \lif !B$}
+\DisplayProof
+\qquad
+\bottomAlignProof
+\AxiomC{$!A \lif !B$}
+\AxiomC{$!A$}
+\RightLabel{\Elim{\lif}}
+\BinaryInfC{$!B$}
+\DisplayProof
+\]
+أما قاعدة~$\Elim{\lif}$ فأمرها بيّن. فالـ!!{formula}s التي فوق الخط
+تسمى \emph{المقدمات}، والـ!!{formula} الواقعة عن اليسار، وهي
+!!{formula}~$!A \lif !B$، تسمى \emph{الرئيسة}. ولكل قاعدة
+!!{elimination} مقدمة من هذا القبيل، موضعها دائمًا أقصى اليسار، وهي
+\emph{المقدمة الكبرى} للاستدلال. وما زاد عليها، كما في مثالنا، فهو
+\emph{مقدمات صغرى}. ومقدمات قواعد~!!{introduction} تسمى أيضًا مقدمات
+كبرى. وأما~!!{formula} الواقعة تحت الخط فهي \emph{النتيجة}.
+
+ولقاعدة~$\Intro{\lif}$ مقدمة واحدة، ونتيجتها هنا هي الصيغة الرئيسة
+$!A \lif !B$. وعلى هذا تجري قواعد~!!{introduction} كلها: فالنتيجة
+هي الصيغة الرئيسة، وعاملها الرئيس هو العامل «المدخل».
+
+وبيان الرمز~$\Discharge{!A}{{\OLId{latin-ordinary}{x}}}$ كما يأتي. يطبق، في~!!a{proof}، استدلال
+$\Intro{\lif}$ على~!!a{formula}~$!B$ مقدمةً له. وللـ!!{proof} الجزئي
+المنتهي بـ$!B$~!!{formula}s أول، نسميها \emph{فروضًا}. فإذا كان
+!!^a{proof} لـ$!B$ قائمًا على فرض أو أكثر من الصورة~$!A$، كان~!!a{proof}
+على أن~$!A$ تستلزم~$!B$. ثم إذا أعملنا قاعدة~$\Intro{\lif}$ استنتجنا
+$!A \lif !B$، وانقطع اعتماد النتيجة على الفرض~$!A$. فنقول، دلالة على
+ذلك، إن الفروض من الصورة~$!A$ قد \emph{برئت} أو \emph{أغلقت} في
+!!{proof} المشتمل على استدلال~$\Intro{\lif}$. والقاعدة هي التي تعين ما
+يجوز تبرئته؛ ففي~$\Intro{\lif}$ التي نتيجتها~$!A \lif !B$ تكون الفروض
+على الصورة~$!A$، أي توافق مقدم الشرط. وقد نحتاج إلى تعيين الفروض التي
+تبرئها كل قاعدة، ولذلك وضعت علامة التبرئة~${\OLId{latin-ordinary}{x}}$. غير أن القاعدة المبرئة
+لا \emph{يلزمها} أن تبرئ \emph{كل} فرض من الصورة المطلوبة، بل يجوز ألا
+تبرئ فرضًا. فالمثال الآتي صحيح، مع أن~$\Intro{\lif}$ الأولى لا تبرئ
+شيئًا:
+\[
+\AxiomC{$\Discharge{!A}{{\OLId{latin-ordinary}{y}}}$}
+\DischargeRule{\Intro{\lif}}{{\OLId{latin-ordinary}{x}}}
+\UnaryInfC{$!B \lif !A$}
+\DischargeRule{\Intro{\lif}}{{\OLId{latin-ordinary}{y}}}
+\UnaryInfC{$!A \lif (!B \lif !A)$}
+\DisplayProof
+\]
+وإذا لم تبرئ القاعدة فرضًا أسقطنا علامة التبرئة، كما في هذا الموضع.
+
+في~!!{proof}
+\[
+\AxiomC{$\Discharge{!A}{{\OLId{latin-ordinary}{x}}}$}
+\AxiomC{$\Discharge{!A}{{\OLId{latin-ordinary}{y}}}$}
+\RightLabel{\Intro{\land}}
+\BinaryInfC{$!A \land !A$}
+\RightLabel{\Elim{\land}}
+\UnaryInfC{$!A$}
+\DischargeRule{\Intro{\lif}}{{\OLId{latin-ordinary}{x}}}
+\UnaryInfC{$!A \lif !A$}
+\DischargeRule{\Intro{\lif}}{{\OLId{latin-ordinary}{y}}}
+\UnaryInfC{$!A \lif (!A \lif !A)$}
+\DisplayProof
+\]
+يبرئ استدلال~$\Intro{\lif}$ الأول الفرض الأيسر~$!A^{\OLId{latin-ordinary}{x}}$، ويبرئ الثاني
+الفرض الأيمن~$!A^{\OLId{latin-ordinary}{y}}$. أي إن كل الفروض الموسومة~${\OLId{latin-ordinary}{x}}$ يبرئها
+$\Intro{\lif}$ ذو العلامة~${\OLId{latin-ordinary}{x}}$، وكل الفروض الموسومة~${\OLId{latin-ordinary}{y}}$ يبرئها
+الاستدلال الموسوم~${\OLId{latin-ordinary}{y}}$. ولكي ينجح ذلك، من المهم أن تكون كل الفروض ذات
+العلامة الواحدة~!!{formula} نفسها كذلك.
+
+وأما قواعد الأسوار ففيها زيادة تعقيد. ومن ذلك قواعد~$\lexists$ في
+\Log{N1i}:
+\[
+\bottomAlignProof
+\AxiomC{$!A({\OLId{latin-ordinary}{t}})$}
+\RightLabel{\Intro{\lexists}}
+\UnaryInfC{$\lexists[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$}
+\DisplayProof
+\qquad
+\bottomAlignProof
+\AxiomC{$\lexists[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$}
+\AxiomC{$\Discharge{!A({\OLId{latin-ordinary}{c}})}{{\OLId{latin-ordinary}{x}}}$}
+\shortDeduce
+\DeduceC{$!B$}
+\DischargeRule{\Elim{\lexists}}{{\OLId{latin-ordinary}{x}}}
+\BinaryInfC{$!B$} \DisplayProof
+\bottomAlignProof
+\]
+مقدمة~$\Intro{\lexists}$ هي~$!A({\OLId{latin-ordinary}{t}})$، على أن يكون~${\OLId{latin-ordinary}{t}}$ حدًا مغلقًا، أي
+لا متغير فيه. ويصح الاستدلال، أي يطابق مخطط~$\Intro{\lexists}$، إذا
+وجدت~!!{formula}~$!A$ ومتغير~${\OLId{latin-ordinary}{x}}$ وحد مغلق~${\OLId{latin-ordinary}{t}}$، وكانت النتيجة
+$\lexists[{\OLId{latin-ordinary}{x}}][!A]$ والمقدمة~$\Subst{!A}{{\OLId{latin-ordinary}{t}}}{{\OLId{latin-ordinary}{x}}}$. وأما
+$\Elim{\lexists}$ فتبرئ فروضًا من الصورة~$!A({\OLId{latin-ordinary}{c}})$؛ فلكل استدلال منها
+!!{constant}~${\OLId{latin-ordinary}{c}}$، والفروض الجائز تبرئتها من الصورة
+$\Subst{!A}{{\OLId{latin-ordinary}{c}}}{{\OLId{latin-ordinary}{x}}}$. ويجب أن تتفق هذه الفروض كلها في الثابت~${\OLId{latin-ordinary}{c}}$. وهذا
+الثابت هو \emph{المتغير المميز} لاستدلال~$\Elim{\lexists}$. وإنما يصح
+الاستدلال إذا لم يظهر~${\OLId{latin-ordinary}{c}}$ في فرض مفتوح غير~$!A({\OLId{latin-ordinary}{c}})$ المبرأ، ولا في~$!B$،
+ولا في~$!A$؛ وهذا هو \emph{شرط المتغير المميز}.
+
+!!^{proof}s في~\Log{N1c} و\Log{N1i} أشجار منتهية من وقائع الصيغ، تُولّد
+استقرائيًا من الفروض بتطبيق قواعد الاستدلال. وكل ورقة فرض، قد تكون
+موسومة بعلامة تبرئة، وكل واقعة~!!{formula} أخرى تلزم من~!!{formula}s
+الواقعة فوقها مباشرة بإحدى قواعد استدلال النظام. وإذا كانت واقعةُ صيغةٍ
+فرضًا في الجزء من الشجرة الواقع فوق استدلال، ولم تكن قد بُرئت باستدلال
+يقع فوق ذلك الاستدلال، سميت فرضًا مفتوحًا عند ذلك الاستدلال.
+
+\begin{defn}\ollabel{defn:proof}
+تُعرّف \emph{!!^{proof}s} في~\Log{N1c} و\Log{N1i} استقرائيًا بوصفها
+أشجارًا منتهية من~!!{formula}s كما يأتي:
+\begin{enumerate}
+  \item\ollabel{defn:prf:assumption} كل~!!{formula} موسومة، بمفردها،
+  بعلامة تبرئة مثل~${\OLId{latin-ordinary}{x}}$ أو~${\OLId{latin-ordinary}{y}}$ هي~!!a{proof}. وفي~!!a{proof} يتألف من
+  !!{formula} واحدة، تُعد~!!{formula} فرضًا مفتوحًا.
+  \item\ollabel{defn:prf:one-prem} إذا كانت~${\OLId{latin-looped}{R}}$ قاعدة ذات مقدمة أو
+  مقدمتين أو ثلاث مقدمات~$!A_{\OLMathNumeral{1}}$ و$!A_{\OLMathNumeral{2}}$ و$!A_{\OLMathNumeral{3}}$، ونتيجتها~$!A$، وكانت
+  $\delta_{\OLMathNumeral{1}}$ و$\delta_{\OLMathNumeral{2}}$ و$\delta_{\OLMathNumeral{3}}$~!!{proof}s تنتهي بـ$!A_{\OLMathNumeral{1}}$ و
+  $!A_{\OLMathNumeral{2}}$ و$!A_{\OLMathNumeral{3}}$ على الترتيب، فإن كلًا مما يأتي
+  \[
+  \AxiomC{}
+  \RightLabel{$\delta_{\OLMathNumeral{1}}$}
+  \DeduceC{$!A_{\OLMathNumeral{1}}$}
+  \RightLabel{${\OLId{latin-looped}{R}}$}
+  \UnaryInfC{$!A$}
+  \DisplayProof
+\qquad
+  \AxiomC{}
+  \RightLabel{$\delta_{\OLMathNumeral{1}}$}
+  \DeduceC{$!A_{\OLMathNumeral{1}}$}
+  \AxiomC{}
+  \RightLabel{$\delta_{\OLMathNumeral{2}}$}
+  \DeduceC{$!A_{\OLMathNumeral{2}}$}
+  \RightLabel{${\OLId{latin-looped}{R}}$}
+  \BinaryInfC{$!A$}
+  \DisplayProof
+\qquad
+  \AxiomC{}
+  \RightLabel{$\delta_{\OLMathNumeral{1}}$}
+  \DeduceC{$!A_{\OLMathNumeral{1}}$}
+  \AxiomC{}
+  \RightLabel{$\delta_{\OLMathNumeral{2}}$}
+  \DeduceC{$!A_{\OLMathNumeral{2}}$}
+  \AxiomC{}
+  \RightLabel{$\delta_{\OLMathNumeral{3}}$}
+  \DeduceC{$!A_{\OLMathNumeral{3}}$}
+  \RightLabel{${\OLId{latin-looped}{R}}$}
+  \TrinaryInfC{$!A$}
+  \DisplayProof
+  \]
+  هو~!!a{proof}، على الترتيب، بشرط توافق علامات الفروض في~!!{proof}s،
+  أي ألا تحمل~!!{formula}s مختلفة علامة التبرئة نفسها، وأن تكون
+  الاستدلالات تطبيقات صحيحة لـ${\OLId{latin-looped}{R}}$.
+  \item تُعد أعلى وقائع~!!{formula} في~!!{proof} الجديد
+  \emph{فروضًا مفتوحة} لـ!!{proof} إذا كانت فروضًا مفتوحة في
+  $\delta_{\OLMathNumeral{1}}$ أو$\delta_{\OLMathNumeral{2}}$ أو$\delta_{\OLMathNumeral{3}}$، باستثناء الوقائع التي تبرئها
+  القاعدة. فإذا وُسمت القاعدة بـ${\OLId{latin-ordinary}{x}}$، أو بـ${\OLId{latin-ordinary}{x}}\,{\OLId{latin-ordinary}{y}}$، كانت الوقائع المبرأة:
+  في~$\Intro{\lif}$ و$\Intro{\lnot}$ كل الفروض المفتوحة في~$\delta_{\OLMathNumeral{1}}$
+  الموسومة~${\OLId{latin-ordinary}{x}}$؛ وفي~$\Elim{\lexists}$ كل الفروض المفتوحة الموسومة~${\OLId{latin-ordinary}{x}}$
+  في~$\delta_{\OLMathNumeral{2}}$؛ وفي~$\Elim{\lor}$ كل الفروض المفتوحة الموسومة~${\OLId{latin-ordinary}{x}}$ في
+  $\delta_{\OLMathNumeral{2}}$ وكل الفروض المفتوحة الموسومة~${\OLId{latin-ordinary}{y}}$ في~$\delta_{\OLMathNumeral{3}}$.
+\end{enumerate}
+\end{defn}
+
+تسمى~!!{proof}s المستخدمة في البناء الاستقرائي لـ!!a{proof}
+\emph{!!{proof}s الجزئية} له. وتسمى~!!{proof}s الجزئية المنتهية بمقدمات
+استدلال~\emph{!!{proof}s الجزئية المباشرة} للاستدلال. وترد قواعد
+\Log{N1c} و\Log{N1i} في~\olref{tab:N1}.
+
+\subfile{rules-N1}
+
+\begin{defn}
+يُعرّف \emph{!!{height}}~$\pheight{\delta}$ لـ!!a{proof}~$\delta$
+استقرائيًا كما يأتي.
+\begin{enumerate}
+  \item إذا تألف~$\delta$ من فرض، كان~$\pheight{\delta}={\OLMathNumeral{0}}$.
+  \item إذا انتهى~$\delta$ باستدلال ذي مقدمة واحدة و!!{proof} جزئي
+  مباشر~$\delta_{\OLMathNumeral{1}}$، كان~$\pheight{\delta}=\pheight{\delta_{\OLMathNumeral{1}}}+{\OLMathNumeral{1}}$.
+  \item إذا انتهى~$\delta$ باستدلال ذي مقدمتين و!!{proof}s جزئية
+  مباشرة~$\delta_{\OLMathNumeral{1}}$ و$\delta_{\OLMathNumeral{2}}$، كان~$\pheight{\delta}=
+  \max(\pheight{\delta_{\OLMathNumeral{1}}},\pheight{\delta_{\OLMathNumeral{2}}})+{\OLMathNumeral{1}}$.
+  \item إذا انتهى~$\delta$ بـ$\Elim{\lor}$ و!!{proof}s جزئية مباشرة
+  $\delta_{\OLMathNumeral{1}}$ و$\delta_{\OLMathNumeral{2}}$ و$\delta_{\OLMathNumeral{3}}$، كان~$\pheight{\delta}=
+  \max(\pheight{\delta_{\OLMathNumeral{1}}},\pheight{\delta_{\OLMathNumeral{2}}},\pheight{\delta_{\OLMathNumeral{3}}})+{\OLMathNumeral{1}}$.
+\end{enumerate}
+إذا كان للمتتالية~${\OLId{latin-looped}{S}}$~!!a{proof} ارتفاعه~$\le {\OLId{latin-ordinary}{n}}$، كتبنا~$\Proves[{\OLId{latin-ordinary}{n}}] {\OLId{latin-looped}{S}}$.
+\end{defn}
+
+\begin{ex}
+في~\Log{N1i}، تُعد أي~!!{formula}~!!a{proof} من نفسها بوصفها فرضًا
+مفتوحًا. ومن ثم
+\[
+!A \land !B^{\OLId{latin-ordinary}{x}}
+\]
+هو~!!a{proof}~$\delta_{\OLMathNumeral{1}}$، وارتفاعه~${\OLMathNumeral{0}}$.
+ومن~$\delta_{\OLMathNumeral{1}}$ نستطيع الحصول على~!!{proof}s اثنين~$\delta_{\OLMathNumeral{2}}$ و
+$\delta_{\OLMathNumeral{3}}$ بتطبيق إحدى نسختي~$\Elim{\land}$:
+\[
+\AxiomC{$!A \land !B^{\OLId{latin-ordinary}{x}}$}
+\RightLabel{\Elim{\land}[{\OLMathNumeral{2}}]}
+\UnaryInfC{$!B$}
+\DisplayProof
+\qquad
+\AxiomC{$!A \land !B^{\OLId{latin-ordinary}{x}}$}
+\RightLabel{\Elim{\land}[{\OLMathNumeral{1}}]}
+\UnaryInfC{$!A$}
+\DisplayProof
+\]
+والـ!!{proof} الجزئي المباشر للاستدلال الأخير في كل من~$\delta_{\OLMathNumeral{2}}$ و
+$\delta_{\OLMathNumeral{3}}$ هو~$\delta_{\OLMathNumeral{1}}$. وفي كل~!!{proof} منهما تكون واقعة
+$!A\land !B$ فرضًا مفتوحًا. ولدينا
+$\pheight{\delta_{\OLMathNumeral{2}}}=\pheight{\delta_{\OLMathNumeral{3}}}={\OLMathNumeral{1}}$.
+
+تتطلب قاعدة~$\Intro{\land}$ مقدمتين من الصورتين~$!B$ و$!A$ لتسويغ
+نتيجة من الصورة~$!B \land !A$. ولذلك يكون الآتي~!!a{proof}~$\delta_{\OLMathNumeral{4}}$:
+\[
+\AxiomC{$!A \land !B^{\OLId{latin-ordinary}{x}}$}
+\RightLabel{\Elim{\land}[{\OLMathNumeral{2}}]}
+\UnaryInfC{$!B$}
+\LeftSubproofLabel{$\delta_{\OLMathNumeral{2}}$}
+\AxiomC{$!A \land !B^{\OLId{latin-ordinary}{x}}$}
+\RightLabel{\Elim{\land}[{\OLMathNumeral{1}}]}
+\UnaryInfC{$!A$}
+\RightSubproofLabel{$\delta_{\OLMathNumeral{3}}$}
+\RightLabel{\Intro{\land}}
+\BinaryInfC{$!B \land !A$}
+\DisplayProof
+\]
+وارتفاعه~$\pheight{\delta_{\OLMathNumeral{4}}}=\max(\pheight{\delta_{\OLMathNumeral{2}}},
+\pheight{\delta_{\OLMathNumeral{3}}})+{\OLMathNumeral{1}}=\max({\OLMathNumeral{1}},{\OLMathNumeral{1}})+{\OLMathNumeral{1}}={\OLMathNumeral{2}}$. وله واقعتان من
+$!A \land !B$ بوصفهما فرضين، وكلتاهما مفتوحة.
+
+وأخيرًا نستطيع تطبيق~$\Intro{\lif}$ للحصول على~$\delta_{\OLMathNumeral{5}}$:
+\[
+\AxiomC{$\Discharge{!A \land !B}{{\OLId{latin-ordinary}{x}}}$}
+\RightLabel{\Elim{\land}[{\OLMathNumeral{2}}]}
+\UnaryInfC{$!B$}
+\LeftSubproofLabel{$\delta_{\OLMathNumeral{2}}$}
+\AxiomC{$\Discharge{!A \land !B}{{\OLId{latin-ordinary}{x}}}$}
+\RightLabel{\Elim{\land}[{\OLMathNumeral{1}}]}
+\UnaryInfC{$!A$}
+\RightSubproofLabel{$\delta_{\OLMathNumeral{3}}$}
+\RightLabel{\Intro{\land}}
+\BinaryInfC{$!B \land !A$}
+\DischargeRule{\Intro{\lif}}{{\OLId{latin-ordinary}{x}}}
+\UnaryInfC{$(!A \land !B) \lif (!B \land !A)$}
+\DisplayProof
+\]
+وارتفاعه~$\pheight{\delta_{\OLMathNumeral{4}}}+{\OLMathNumeral{1}}={\OLMathNumeral{3}}$. ويبرئ استدلال~$\Intro{\lif}$ كل
+وقائع الفروض من الصورة~$!A \land !B$ الموسومة~${\OLId{latin-ordinary}{x}}$، أي الفرضين اللذين
+كانا مفتوحين من قبل في البرهان الجزئي المباشر. ولأنهما الفرضان
+الوحيدان لـ$\delta_{\OLMathNumeral{5}}$، فلا تكون له فروض مفتوحة، ومن ثم يكون~!!a{proof}
+\emph{لـ}!!{formula} نهايته~$(!A \land !B) \lif (!B \land !A)$.
+\end{ex}
+
+\end{document}

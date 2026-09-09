@@ -1,0 +1,73 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{ordinals}{wo}
+\olsection{في الترتيبات الجيدة}
+
+والحد الأساس هو:
+
+\begin{defn}
+تُسمّى العلاقة~$<$ \emph{ترتيبًا جيدًا} على~${\OLId{latin-looped}{A}}$ إذا وفقط إذا حققت
+الشرطين الآتيين:
+\begin{enumerate}
+\item أن تكون~$<$ متصلة: فلكل~${\OLId{latin-ordinary}{a}}, {\OLId{latin-ordinary}{b}} \in {\OLId{latin-looped}{A}}$ إما~${\OLId{latin-ordinary}{a}} < {\OLId{latin-ordinary}{b}}$،
+	أو~${\OLId{latin-ordinary}{a}} = {\OLId{latin-ordinary}{b}}$، أو~${\OLId{latin-ordinary}{b}} < {\OLId{latin-ordinary}{a}}$؛
+\item وأن يكون لكل مجموعة جزئية غير خالية من~${\OLId{latin-looped}{A}}$ !!{element} أصغري بحسب~$<$،
+	أي إذا كان~$\emptyset \neq {\OLId{latin-looped}{X}} \subseteq {\OLId{latin-looped}{A}}$، فإن
+	$(\exists {\OLId{latin-ordinary}{m}} \in {\OLId{latin-looped}{X}})(\forall {\OLId{latin-ordinary}{z}} \in {\OLId{latin-looped}{X}}){\OLId{latin-ordinary}{z}} \nless {\OLId{latin-ordinary}{m}}$.
+\end{enumerate}
+\end{defn}
+
+ومن اليسير التحقق من أن علاقات الأمثلة الثلاثة السابقة ترتيبات جيدة.
+
+\begin{prob}
+في~\Olref[sth][ordinals][idea]{sec} ثلاثة ترتيبات نموذجية على الأعداد
+الطبيعية؛ أثبت أن كل واحد منها ترتيب جيد.
+\end{prob}
+
+وفي الترتيب الجيد ملاحظات أولية عظيمة الأثر:
+
+\begin{prop}\ollabel{wo:strictorder}
+إذا كانت~$<$ ترتيبًا جيدًا على~${\OLId{latin-looped}{A}}$، كان لكل مجموعة جزئية غير خالية من~${\OLId{latin-looped}{A}}$
+عنصر أصغر وحيد بحسب~$<$، وكانت~$<$ غير انعكاسية ولا تناظرية ومتعدية.
+\end{prop}
+
+\begin{proof}
+لتكن~${\OLId{latin-looped}{X}}$ مجموعة جزئية غير خالية من~${\OLId{latin-looped}{A}}$. فلها !!{element} أصغري بحسب
+$<$، سمّه~${\OLId{latin-ordinary}{m}}$؛ أي $(\forall {\OLId{latin-ordinary}{z}} \in {\OLId{latin-looped}{X}}){\OLId{latin-ordinary}{z}} \nless {\OLId{latin-ordinary}{m}}$. ومن اتصال~$<$ يلزم
+$(\forall {\OLId{latin-ordinary}{z}} \in {\OLId{latin-looped}{X}}){\OLId{latin-ordinary}{m}} \leq {\OLId{latin-ordinary}{z}}$؛ فيكون~${\OLId{latin-ordinary}{m}}$ أصغر !!{element} بحسب~$<$
+في~${\OLId{latin-looped}{X}}$.
+
+  ولعدم الانعكاس ثبّت~${\OLId{latin-ordinary}{a}} \in {\OLId{latin-looped}{A}}$؛ فإن أصغر !!{element} بحسب~$<$ في
+  $\{{\OLId{latin-ordinary}{a}}\}$ هو~${\OLId{latin-ordinary}{a}}$، ومن ثم~${\OLId{latin-ordinary}{a}} \nless {\OLId{latin-ordinary}{a}}$. ولعدم التناظر، لو كان
+  ${\OLId{latin-ordinary}{a}}<{\OLId{latin-ordinary}{b}}$ و${\OLId{latin-ordinary}{b}}<{\OLId{latin-ordinary}{a}}$ لما كان واحد من~${\OLId{latin-ordinary}{a}}$ و${\OLId{latin-ordinary}{b}}$ أصغريًا في~$\{{\OLId{latin-ordinary}{a}},{\OLId{latin-ordinary}{b}}\}$، وذلك
+  محال. وللتعدي افرض~${\OLId{latin-ordinary}{a}}<{\OLId{latin-ordinary}{b}}<{\OLId{latin-ordinary}{c}}$، وليكن~${\OLId{latin-ordinary}{m}}$ أصغر !!{element} في
+  $\{{\OLId{latin-ordinary}{a}},{\OLId{latin-ordinary}{b}},{\OLId{latin-ordinary}{c}}\}$. لا يكون~${\OLId{latin-ordinary}{m}}={\OLId{latin-ordinary}{b}}$ لأن~${\OLId{latin-ordinary}{a}}<{\OLId{latin-ordinary}{b}}$، ولا يكون~${\OLId{latin-ordinary}{m}}={\OLId{latin-ordinary}{c}}$ لأن~${\OLId{latin-ordinary}{b}}<{\OLId{latin-ordinary}{c}}$؛
+  فلا بد أن يكون~${\OLId{latin-ordinary}{m}}={\OLId{latin-ordinary}{a}}$، ومن ثم~${\OLId{latin-ordinary}{a}}\leq {\OLId{latin-ordinary}{c}}$. ولما كان~${\OLId{latin-ordinary}{a}}\neq {\OLId{latin-ordinary}{c}}$ بحكم
+  عدم التناظر، لزم~${\OLId{latin-ordinary}{a}}<{\OLId{latin-ordinary}{c}}$، فثبت أن~$<$ متعدية.
+\end{proof}
+
+\begin{prop}\ollabel{propwoinduction}
+إذا كانت~$<$ ترتيبًا جيدًا على~${\OLId{latin-looped}{A}}$، كان، لكل صيغة~$\phi({\OLId{latin-ordinary}{x}})$:
+\[
+	\text{إذا كان }(\forall {\OLId{latin-ordinary}{a}} \in {\OLId{latin-looped}{A}})((\forall {\OLId{latin-ordinary}{b}} < {\OLId{latin-ordinary}{a}})\phi({\OLId{latin-ordinary}{b}}) \lif 
+		\phi({\OLId{latin-ordinary}{a}}))\text{، فإن }(\forall {\OLId{latin-ordinary}{a}} \in {\OLId{latin-looped}{A}})\phi({\OLId{latin-ordinary}{a}}).
+\]
+\end{prop}
+
+\begin{proof}
+نبرهن نقيض المقابل. افترض~$\lnot(\forall {\OLId{latin-ordinary}{a}} \in {\OLId{latin-looped}{A}})\phi({\OLId{latin-ordinary}{a}})$؛ أي إن
+${\OLId{latin-looped}{X}} = \Setabs{{\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}}{\lnot\phi({\OLId{latin-ordinary}{x}})} \neq \emptyset$. عندئذ يكون
+لـ${\OLId{latin-looped}{X}}$ !!{element} أصغري بحسب~$<$، سمّه~${\OLId{latin-ordinary}{a}}$. ومن ثم
+$(\forall {\OLId{latin-ordinary}{b}} < {\OLId{latin-ordinary}{a}})\phi({\OLId{latin-ordinary}{b}})$، مع أن~$\lnot \phi({\OLId{latin-ordinary}{a}})$.
+\end{proof}\noindent
+وهذه الخاصية الأخيرة نظيرة مبدأ الاستقراء القوي على الأعداد الطبيعية،
+وهو: إذا كان
+$(\forall {\OLId{latin-ordinary}{n}} \in \omega)((\forall {\OLId{latin-ordinary}{m}} < {\OLId{latin-ordinary}{n}})\phi({\OLId{latin-ordinary}{m}}) \lif \phi({\OLId{latin-ordinary}{n}}))$، فإن
+$(\forall {\OLId{latin-ordinary}{n}} \in \omega)\phi({\OLId{latin-ordinary}{n}})$. وبها يغدو الترتيب الجيد مفهومًا بالغ
+\emph{القوة}.
+\footnote{تذكير: يجوز أن تكون لجميع الصيغ معاملات (ما لم يُصرح بخلاف ذلك).}
+
+\end{document}
+

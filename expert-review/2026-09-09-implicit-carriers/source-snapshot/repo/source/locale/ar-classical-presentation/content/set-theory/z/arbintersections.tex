@@ -1,0 +1,59 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{z}{arbintersections}
+\olsection{ملحق في الإغلاق والاستيعاب والتقاطع}
+
+دعونا في~\olref[sth][z][milestone]{sec} إلى الرجوع للعمل الساذج في
+\olref[sfr][][]{part} والتحقق من إمكان إقامته داخل~$\Zminus$. ومن
+سلك هذا الطريق قد يعترضه موضع واحد: استعمال \emph{التقاطع} في معالجة
+ددكند لـ\emph{الإغلاقات}.
+
+فقد تقرر في~\olref[sfr][infinite][dedekind]{Closure} أن
+\begin{align*}
+  \closureofunder{{\OLId{latin-ordinary}{f}}}{{\OLId{latin-ordinary}{o}}} & = \bigcap\Setabs{{\OLId{latin-looped}{X}}}{{\OLId{latin-ordinary}{o}} \in {\OLId{latin-looped}{X}} \text{ و${\OLId{latin-looped}{X}}$
+مغلقة تحت~${\OLId{latin-ordinary}{f}}$}}.
+\intertext{والصورة العامة لذلك تعريف من الشكل:}
+  {\OLId{latin-looped}{C}} & = \bigcap\Setabs{{\OLId{latin-looped}{X}}}{\phi({\OLId{latin-looped}{X}})}.
+\end{align*}
+وهنا موضع الحذر: لما كان الاستيعاب الساذج باطلًا، لم نضمن وجود
+$\Setabs{{\OLId{latin-looped}{X}}}{\phi({\OLId{latin-looped}{X}})}$؛ فيوشك أن تكون هذه الحدود مشتملة على
+\emph{تحايل}.
+
+وليس الأمر كذلك. أو قل: إن كان في \emph{صورتها الراهنة} تحايل، أمكن
+إصلاحه بعمل صريح. وقد مهدت~\olref[sth][z][sep]{prop:intersectionsexist}
+لهذا، إذ أثبتت وجود~$\bigcap {\OLId{latin-looped}{A}}$ لكل~${\OLId{latin-looped}{A}} \neq \emptyset$؛ ونبسط الآن
+وجه الإصلاح.
+
+مع افتراض الامتدادية، إذا أردنا أن نحد~${\OLId{latin-looped}{C}}$ بـ
+$\bigcap\Setabs{{\OLId{latin-looped}{X}}}{\phi({\OLId{latin-looped}{X}})}$، فمرادنا في الحقيقة شيء~${\OLId{latin-looped}{C}}$ يحقق:
+\begin{equation}\ollabel{bicondelimarbintersection}
+	\forall {\OLId{latin-ordinary}{x}}({\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{C}} \liff \forall {\OLId{latin-looped}{X}}(\phi({\OLId{latin-looped}{X}}) \lif {\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{X}}))\tag{*}
+\end{equation}
+افرض الآن وجود \emph{مجموعة}~${\OLId{latin-looped}{S}}$ تحقق~$\phi({\OLId{latin-looped}{S}})$. فنحقق
+\olref{bicondelimarbintersection} بأن نحد~${\OLId{latin-looped}{C}}$ باستعمال \emph{الفصل}:
+\[
+	{\OLId{latin-looped}{C}} = \Setabs{{\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{S}}}{\forall {\OLId{latin-looped}{X}}(\phi({\OLId{latin-looped}{X}}) \lif {\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{X}})}.
+\]
+ونكل إلى القارئ التحقق من أن هذا الحد يعطي
+\olref{bicondelimarbintersection} على الوجه المطلوب.
+%  ثبّت $x$. افترض أولًا أن $x \in C$ بحسب التعريف الجديد؛ فعندئذ يكون كل من $x
+%  \in S$ و$\forall X(\phi(X) \lif x \in X)$؛ لكن لما كان
+%  $\phi(S)$، اختُزل هذا إلى الشرط $\forall X(\phi(X)
+%  \lif x \in X)$. وعلى العكس، افترض $\forall X(\phi(X) \lif
+%  x \in X)$؛ فعندئذ، لما كان $\phi(S)$، يكون أيضًا $x \in S$؛ ومن ثم
+%  $x \in C$ بحسب التعريف الجديد.
+وبهذه الحيلة العامة نتجاوز كل ظهور للاستيعاب الساذج في حدود التقاطعات.
+وفي الحالة التي أثارت المسألة، أعني~$\closureofunder{{\OLId{latin-ordinary}{f}}}{{\OLId{latin-ordinary}{o}}}$، نجريها
+كما يأتي. فقد بدأ برهان~\olref[sfr][infinite][dedekind]{closureproperties}
+بأن~${\OLId{latin-ordinary}{o}} \in \ran{{\OLId{latin-ordinary}{f}}}\cup\{{\OLId{latin-ordinary}{o}}\}$، وأن~$\ran{{\OLId{latin-ordinary}{f}}} \cup \{{\OLId{latin-ordinary}{o}}\}$ مغلقة تحت
+${\OLId{latin-ordinary}{f}}$. ومن ثم نحد المطلوب هكذا:
+\[
+	\closureofunder{{\OLId{latin-ordinary}{f}}}{{\OLId{latin-ordinary}{o}}} = \Setabs{{\OLId{latin-ordinary}{x}} \in \ran{{\OLId{latin-ordinary}{f}}} \cup \{{\OLId{latin-ordinary}{o}}\}}{(\forall {\OLId{latin-looped}{X}} \ni {\OLId{latin-ordinary}{o}})({\OLId{latin-looped}{X}} \text{ مغلقة تحت~${\OLId{latin-ordinary}{f}}$} \lif {\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{X}})}.
+\]
+
+\end{document}
+
+
+

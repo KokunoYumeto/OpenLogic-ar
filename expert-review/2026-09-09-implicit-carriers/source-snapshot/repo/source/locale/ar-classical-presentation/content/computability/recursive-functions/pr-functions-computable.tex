@@ -1,0 +1,40 @@
+% Part: computability
+% Chapter: recursive-functions
+% Section: pr-functions-computable
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{rec}{cmp}
+\olsection{الدوال العودية البدائية قابلة للحساب}
+
+لتكن الدالة ${\OLId{latin-ordinary}{h}}$ معرّفة بالعودية البدائية كما يأتي:
+\begin{eqnarray*}
+{\OLId{latin-ordinary}{h}}(\vec {\OLId{latin-ordinary}{x}}, {\OLMathNumeral{0}})     & = & {\OLId{latin-ordinary}{f}}(\vec {\OLId{latin-ordinary}{x}}) \\
+{\OLId{latin-ordinary}{h}}(\vec {\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}} + {\OLMathNumeral{1}}) & = & {\OLId{latin-ordinary}{g}}(\vec {\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}, {\OLId{latin-ordinary}{h}}(\vec {\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}))
+\end{eqnarray*}
+ولنفرض قابلية ${\OLId{latin-ordinary}{f}}$ و${\OLId{latin-ordinary}{g}}$ للحساب. والرمز $\vec {\OLId{latin-ordinary}{x}}$ عندنا اختصار
+لـ${\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}}$، …،~${\OLId{latin-ordinary}{x}}_{{\OLId{latin-ordinary}{k}}-{\OLMathNumeral{1}}}$. أما ${\OLId{latin-ordinary}{h}}(\vec {\OLId{latin-ordinary}{x}},{\OLMathNumeral{0}})$ فيتأتى حسابها
+لأنها عين ${\OLId{latin-ordinary}{f}}(\vec {\OLId{latin-ordinary}{x}})$، وهي قابلة للحساب بالفرض. ثم يتأتى
+حساب ${\OLId{latin-ordinary}{h}}(\vec {\OLId{latin-ordinary}{x}},{\OLMathNumeral{1}})$؛ إذ ${\OLMathNumeral{1}}={\OLMathNumeral{0}}+{\OLMathNumeral{1}}$، فتكون ${\OLId{latin-ordinary}{h}}(\vec {\OLId{latin-ordinary}{x}},{\OLMathNumeral{1}})$
+\begin{align*}
+ {\OLId{latin-ordinary}{h}}(\vec {\OLId{latin-ordinary}{x}}, {\OLMathNumeral{1}}) & = {\OLId{latin-ordinary}{g}}(\vec {\OLId{latin-ordinary}{x}}, {\OLMathNumeral{0}}, {\OLId{latin-ordinary}{h}}(\vec {\OLId{latin-ordinary}{x}}, {\OLMathNumeral{0}})) =  {\OLId{latin-ordinary}{g}}(\vec {\OLId{latin-ordinary}{x}}, {\OLMathNumeral{0}}, {\OLId{latin-ordinary}{f}}(\vec {\OLId{latin-ordinary}{x}})).
+\intertext{ويمكننا المواصلة على هذا النحو وحساب}
+{\OLId{latin-ordinary}{h}}(\vec {\OLId{latin-ordinary}{x}}, {\OLMathNumeral{2}}) & = {\OLId{latin-ordinary}{g}}(\vec {\OLId{latin-ordinary}{x}}, {\OLMathNumeral{1}}, {\OLId{latin-ordinary}{h}}(\vec {\OLId{latin-ordinary}{x}}, {\OLMathNumeral{1}})) = {\OLId{latin-ordinary}{g}}(\vec {\OLId{latin-ordinary}{x}}, {\OLMathNumeral{1}}, {\OLId{latin-ordinary}{g}}(\vec {\OLId{latin-ordinary}{x}}, {\OLMathNumeral{0}}, {\OLId{latin-ordinary}{f}}(\vec {\OLId{latin-ordinary}{x}})))\\
+{\OLId{latin-ordinary}{h}}(\vec {\OLId{latin-ordinary}{x}}, {\OLMathNumeral{3}}) & = {\OLId{latin-ordinary}{g}}(\vec {\OLId{latin-ordinary}{x}}, {\OLMathNumeral{2}}, {\OLId{latin-ordinary}{h}}(\vec {\OLId{latin-ordinary}{x}}, {\OLMathNumeral{2}})) = {\OLId{latin-ordinary}{g}}(\vec {\OLId{latin-ordinary}{x}}, {\OLMathNumeral{2}}, {\OLId{latin-ordinary}{g}}(\vec {\OLId{latin-ordinary}{x}}, {\OLMathNumeral{1}}, {\OLId{latin-ordinary}{g}}(\vec {\OLId{latin-ordinary}{x}}, {\OLMathNumeral{0}}, {\OLId{latin-ordinary}{f}}(\vec {\OLId{latin-ordinary}{x}}))))\\
+{\OLId{latin-ordinary}{h}}(\vec {\OLId{latin-ordinary}{x}}, {\OLMathNumeral{4}}) & = {\OLId{latin-ordinary}{g}}(\vec {\OLId{latin-ordinary}{x}}, {\OLMathNumeral{3}}, {\OLId{latin-ordinary}{h}}(\vec {\OLId{latin-ordinary}{x}}, {\OLMathNumeral{3}})) = {\OLId{latin-ordinary}{g}}(\vec {\OLId{latin-ordinary}{x}}, {\OLMathNumeral{3}}, {\OLId{latin-ordinary}{g}}(\vec {\OLId{latin-ordinary}{x}}, {\OLMathNumeral{2}}, {\OLId{latin-ordinary}{g}}(\vec {\OLId{latin-ordinary}{x}}, {\OLMathNumeral{1}}, {\OLId{latin-ordinary}{g}}(\vec {\OLId{latin-ordinary}{x}}, {\OLMathNumeral{0}}, {\OLId{latin-ordinary}{f}}(\vec {\OLId{latin-ordinary}{x}})))))\\
+& \vdots
+\end{align*}
+فإذا طلبنا ${\OLId{latin-ordinary}{h}}(\vec {\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})$ لأي حجة، حسبنا على التعاقب ${\OLId{latin-ordinary}{h}}(\vec {\OLId{latin-ordinary}{x}},{\OLMathNumeral{0}})$ و
+${\OLId{latin-ordinary}{h}}(\vec {\OLId{latin-ordinary}{x}},{\OLMathNumeral{1}})$ و…، حتى نبلغ ${\OLId{latin-ordinary}{h}}(\vec {\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})$.
+
+فقد بان أن التعريف بالعودية البدائية يحفظ قابلية الحساب متى كانت
+الدالتان ${\OLId{latin-ordinary}{f}}$ و${\OLId{latin-ordinary}{g}}$ قابلتين للحساب. وكذلك التركيب يحفظ هذه
+القابلية إذا تحققت في ${\OLId{latin-ordinary}{f}}$ وفي الدوال ${\OLId{latin-ordinary}{g}}_{\OLId{latin-ordinary}{i}}$.
+
+وحيث إن الدوال الأساسية $\Zero$ و$\Succ$ و$\Proj{{\OLId{latin-ordinary}{n}}}{{\OLId{latin-ordinary}{i}}}$ قابلة
+للحساب، وإن التركيب والعودية البدائية لا يخرجان بنا من
+الدوال القابلة للحساب، لزم أن تكون كل دالة عودية بدائية قابلة للحساب.
+
+\end{document}

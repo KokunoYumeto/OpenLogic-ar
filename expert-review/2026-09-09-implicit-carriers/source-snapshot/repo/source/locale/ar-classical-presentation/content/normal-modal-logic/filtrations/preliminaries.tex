@@ -1,0 +1,82 @@
+% Part: normal-modal-logic
+% Chapter: filtrations
+% Section: preliminaries
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{fil}{pre}
+
+\olsection{تمهيدات}
+
+نستعين بالترشيحات على إثبات \emph{خاصية النموذج المنتهي}: فكل
+!!{formula} تصدق في نموذج تجد نموذجًا \emph{منتهيًا} تصدق فيه؛ وإن كانت
+تكذب في نموذج وجدنا نموذجًا \emph{منتهيًا} تكذب فيه. فإذا أمكن
+مع ذلك حساب حد لهذه النماذج وسردها وامتحانها بطريقة
+فعالة، أفادت الخاصية في إثبات قابلية نظم المنطق الجهوي
+للقرار. ويكون تعريف الترشيح بالنسبة إلى مجموعة من
+الـ!!{formula}s مغلقة تحت أخذ الصيغ الجزئية.
+% تصحيح دلالي (0452-I1): خاصية النموذج المنتهي وحدها لا تستلزم قابلية القرار بلا شروط فعالية إضافية.
+
+\begin{defn}\ollabel{defn:modallyclosed}
+  تكون مجموعة~${\OLId{greek-variable}{Gamma}}$ من ال!!{formula}s \emph{مغلقة تحت أخذ الصيغ
+    الجزئية} إذا احتوت كل صيغة جزئية من !!a{formula} تنتمي إلى~${\OLId{greek-variable}{Gamma}}$.
+  وتكون~${\OLId{greek-variable}{Gamma}}$، فضلًا عن ذلك، \emph{مغلقة جهويًا} إذا كانت مغلقة تحت
+  أخذ الصيغ الجزئية وكان~$!A \in {\OLId{greek-variable}{Gamma}}$ يستلزم
+  $\Box!A, \Diamond!A \in {\OLId{greek-variable}{Gamma}}$.
+\end{defn}
+
+فإذا أخذنا !!a{formula}~$!A$ وجمعنا جميع
+ال!!{formula}s الجزئية لها، كانت المجموعة مغلقة
+تحت أخذ ال!!{formula}s الجزئية. وترشيح النموذج
+عبر هذه المجموعة من ال!!{formula}s الجزئية
+لـ~$!A$ يحفظ ما نطلبه: يصدّق~$!A$ إذا وفقط إذا صدّقها النموذج
+الأصلي، ويكذّبها إذا وفقط إذا كذّبها.
+% تصحيح دلالي (0452-I2): فُصل تكافؤ الصدق عن تكافؤ الكذب كيلا توهم عبارتا الفصل المتقابلتان مزج الاتجاهين.
+
+عوالم ترشيح~$\mModel{M}$ عبر~${\OLId{greek-variable}{Gamma}}$ هي فئات
+التكافؤ للعلاقة التي نضعها الآن.
+
+\begin{defn}
+لتكن~$\mModel{M}=\tuple{{\OLId{latin-looped}{W}},{\OLId{latin-looped}{R}},{\OLId{latin-looped}{V}}}$، ولنفترض أن~${\OLId{greek-variable}{Gamma}}$ مغلقة تحت أخذ
+ال!!{formula}s الجزئية. عرّف علاقة~$\equiv$ على~${\OLId{latin-looped}{W}}$ بحيث تقوم بين أي
+عالمين يصدّقان ال!!{formula}s نفسها من~${\OLId{greek-variable}{Gamma}}$، أي:
+\[
+{\OLId{latin-ordinary}{u}} \equiv {\OLId{latin-ordinary}{v}} \quad \text{إذا وفقط إذا} \quad
+\forall !A \in {\OLId{greek-variable}{Gamma}} : \mSat{{\OLId{latin-looped}{M}}}{!A}[{\OLId{latin-ordinary}{u}}] \Leftrightarrow \mSat{{\OLId{latin-looped}{M}}}{!A}[{\OLId{latin-ordinary}{v}}].
+\]
+وفئة التكافؤ~$[{\OLId{latin-ordinary}{w}}]_\equiv$ للعالم~${\OLId{latin-ordinary}{w}}$، أو~$[{\OLId{latin-ordinary}{w}}]$ اختصارًا، هي مجموعة
+جميع العوالم المكافئة لـ~${\OLId{latin-ordinary}{w}}$ بحسب~$\equiv$:
+\[
+[{\OLId{latin-ordinary}{w}}]=\Setabs{{\OLId{latin-ordinary}{v}}}{{\OLId{latin-ordinary}{v}} \equiv {\OLId{latin-ordinary}{w}}}.
+\]
+\end{defn}
+
+\begin{prop}
+  بالنظر إلى~$\mModel{M}$ و${\OLId{greek-variable}{Gamma}}$، تكون~$\equiv$ كما عُرّفت أعلاه
+  علاقة تكافؤ؛ أي إنها انعكاسية ومتناظرة ومتعدية.
+\end{prop}
+
+\begin{proof}
+  أما انعكاسية~$\equiv$، فلأن~${\OLId{latin-ordinary}{w}}$ يتفق مع نفسه
+  في ال!!{formula}s الصادقة من~${\OLId{greek-variable}{Gamma}}$.
+  وأما التناظر، فإذا صدّق~${\OLId{latin-ordinary}{u}}$ من ال!!{formula}s
+  في~${\OLId{greek-variable}{Gamma}}$ ما يصدّقه~${\OLId{latin-ordinary}{v}}$، صدق القول نفسه على
+  ${\OLId{latin-ordinary}{v}}$ و${\OLId{latin-ordinary}{u}}$. وأما التعدي، فإذا اتفق~${\OLId{latin-ordinary}{u}}$ و${\OLId{latin-ordinary}{v}}$
+  في ال!!{formula}s من~${\OLId{greek-variable}{Gamma}}$، واتفق~${\OLId{latin-ordinary}{v}}$ و${\OLId{latin-ordinary}{w}}$،
+  اتفق ${\OLId{latin-ordinary}{u}}$ و${\OLId{latin-ordinary}{w}}$ في ال!!{formula}s الصادقة
+  من~${\OLId{greek-variable}{Gamma}}$.
+\end{proof}
+
+وهذه العلاقة~$\equiv$ تقسّم~${\OLId{latin-looped}{W}}$، شأن كل علاقة
+تكافؤ، إلى \emph{أقسام}: أجزاء من~${\OLId{latin-looped}{W}}$ لا يتلاقى
+قسمان مختلفان منها، ويغطي اجتماعها~${\OLId{latin-looped}{W}}$.
+فكل~${\OLId{latin-ordinary}{w}} \in {\OLId{latin-looped}{W}}$ هو !!a{element} في قسمه،
+أي~$[{\OLId{latin-ordinary}{w}}]$، لأن~${\OLId{latin-ordinary}{w}} \equiv {\OLId{latin-ordinary}{w}}$؛ فتغطي الفئات~$[{\OLId{latin-ordinary}{w}}]$
+كل~${\OLId{latin-looped}{W}}$. ولإثبات أن المختلف منها متباين،
+لو كان~${\OLId{latin-ordinary}{u}} \in [{\OLId{latin-ordinary}{w}}]$ و${\OLId{latin-ordinary}{u}} \in [{\OLId{latin-ordinary}{v}}]$، للزم
+${\OLId{latin-ordinary}{u}} \equiv {\OLId{latin-ordinary}{w}}$ و${\OLId{latin-ordinary}{u}} \equiv {\OLId{latin-ordinary}{v}}$، ثم~${\OLId{latin-ordinary}{w}} \equiv {\OLId{latin-ordinary}{v}}$
+بالتناظر والتعدي؛ وعليه~$[{\OLId{latin-ordinary}{w}}]=[{\OLId{latin-ordinary}{v}}]$.
+
+\end{document}

@@ -1,0 +1,104 @@
+% Part: sets-functions-relations
+% Chapter: functions
+% Section: kinds
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid[ar]{sfr}{fun}{kin}
+\olsection{أنواع الدوال}
+
+\begin{explain}
+ولكثرة ورود بعض أصناف الدوال ننتفع بتصنيف يميزها.
+
+فلنبدأ بما تبلغ قيمه كل عنصر من المجال المقابل. وتسمى هذه الدوال !!{surjective}، وصورتها في \olref{fig:surjective}.
+
+\begin{figure}
+  \olasset{assets/diagrams/surjective.tikz}
+  \caption{الدالة !!^a{surjective} تبلغ بقيمها كل !!{element} من المجال المقابل.}
+  \ollabel{fig:surjective}
+\end{figure}
+\end{explain}
+
+\begin{defn}[دالة !!^{surjective}]
+الدالة ${\OLId{latin-ordinary}{f}} \colon {\OLId{latin-looped}{A}} \rightarrow {\OLId{latin-looped}{B}}$ \emph{!!{surjective}} إذا وفقط إذا
+اتحد ${\OLId{latin-looped}{B}}$ ومدى~${\OLId{latin-ordinary}{f}}$؛ أي لكل ${\OLId{latin-ordinary}{y}} \in {\OLId{latin-looped}{B}}$ يوجد ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}$ واحد على الأقل
+يحقق~${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}}) = {\OLId{latin-ordinary}{y}}$. وصورته الرمزية:
+\[
+  (\forall {\OLId{latin-ordinary}{y}} \in {\OLId{latin-looped}{B}})(\exists {\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}){\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}}) = {\OLId{latin-ordinary}{y}}.
+\]
+وتسمى مثل هذه الدالة !!a{surjection} من ${\OLId{latin-looped}{A}}$ إلى ${\OLId{latin-looped}{B}}$.
+\end{defn}
+
+\begin{explain}
+فإثبات أن ${\OLId{latin-ordinary}{f}}$ هي !!a{surjection} يكون بإظهار أن كل شيء في المجال
+المقابل لـ${\OLId{latin-ordinary}{f}}$ يحصل قيمةً ${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}})$ لمدخل ${\OLId{latin-ordinary}{x}}$ ما.
+
+وكل دالة \emph{تستحث} !!a{surjection}. خذ ${\OLId{latin-ordinary}{f}} \colon {\OLId{latin-looped}{A}} \to {\OLId{latin-looped}{B}}$،
+واجعل ${\OLId{latin-ordinary}{f}}' \colon {\OLId{latin-looped}{A}} \to \ran{{\OLId{latin-ordinary}{f}}}$ معرفة بـ${\OLId{latin-ordinary}{f}}'({\OLId{latin-ordinary}{x}}) = {\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}})$.
+فـ$\ran{{\OLId{latin-ordinary}{f}}}$ \emph{بتعريفه} $\Setabs{{\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}}) \in {\OLId{latin-looped}{B}}}{{\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}}$،
+ومن ثم ${\OLId{latin-ordinary}{f}}'$ هي !!a{surjection}.
+\end{explain}
+
+\begin{explain}
+ولكل مدخل مخرج واحد في أي دالة. وقد تزيد الدالة على ذلك بأن
+لا تجمع مدخلين مختلفين على مخرج واحد؛ فتسمى !!{injective}،
+وتمثيلها في \olref{fig:injective}.
+\begin{figure}
+  \olasset{assets/diagrams/injective.tikz}
+  \caption{الدالة !!^a{injective} تمنع اتفاق القيمة لوسيطتين مختلفتين.}
+  \ollabel{fig:injective}
+\end{figure}
+\end{explain}
+
+\begin{defn}[دالة !!^{injective}]
+الدالة ${\OLId{latin-ordinary}{f}} \colon {\OLId{latin-looped}{A}} \rightarrow {\OLId{latin-looped}{B}}$ \emph{!!{injective}} إذا وفقط إذا
+كان لكل ${\OLId{latin-ordinary}{y}} \in {\OLId{latin-looped}{B}}$ عنصر ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}$ واحد على الأكثر يحقق~${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}}) = {\OLId{latin-ordinary}{y}}$.
+وتسمى حينئذ !!a{injection} من ${\OLId{latin-looped}{A}}$ إلى~${\OLId{latin-looped}{B}}$.
+\end{defn}
+
+\begin{explain}
+ولإثبات أن ${\OLId{latin-ordinary}{f}}$ هي !!a{injection} خذ !!{element}s ${\OLId{latin-ordinary}{x}}$ و${\OLId{latin-ordinary}{y}}$ من مجال
+${\OLId{latin-ordinary}{f}}$، وبيّن أن ${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}})={\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{y}})$ لا يكون إلا مع ${\OLId{latin-ordinary}{x}}={\OLId{latin-ordinary}{y}}$.
+\end{explain}
+
+\begin{ex}
+خذ الثابتة ${\OLId{latin-ordinary}{f}}\colon \Nat \to \Nat$ المحددة بـ${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}}) = {\OLMathNumeral{1}}$؛ فهذه
+لا هي !!{injective} ولا هي !!{surjective}.
+
+وأما الهوية ${\OLId{latin-ordinary}{f}}\colon \Nat \to \Nat$، حيث ${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}}) = {\OLId{latin-ordinary}{x}}$،
+فهي !!{injective} و!!{surjective} معًا.
+
+وأما اللاحق ${\OLId{latin-ordinary}{f}} \colon \Nat \to \Nat$، حيث ${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}}) = {\OLId{latin-ordinary}{x}}+{\OLMathNumeral{1}}$،
+فهي !!{injective} دون !!{surjective}.
+
+وأما الدالة ${\OLId{latin-ordinary}{f}} \colon \Nat \to \Nat$ ذات التعريف:
+\[
+  {\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}}) =
+  \begin{cases}
+    \frac{{\OLId{latin-ordinary}{x}}}{{\OLMathNumeral{2}}} & \text{إذا كان ${\OLId{latin-ordinary}{x}}$ زوجيًا} \\
+    \frac{{\OLId{latin-ordinary}{x}}+{\OLMathNumeral{1}}}{{\OLMathNumeral{2}}} & \text{إذا كان ${\OLId{latin-ordinary}{x}}$ فرديًا.}
+  \end{cases}
+\]
+فهي !!{surjective} غير !!{injective}.
+\end{ex}
+
+\begin{explain}
+ويكثر احتياجنا إلى الدوال التي تكون !!{injective} و!!{surjective} معًا؛
+واسمها !!{bijective}، وصورتها في \olref{fig:bijective}.
+وتسمى !!^{bijection}s أيضًا \emph{مراسلات واحد إلى واحد}، إذ يقابل
+كل عنصر من المجال المقابل فيها عنصر واحد من المجال لا غير.
+\begin{figure}
+  \olasset{assets/diagrams/bijective.tikz}
+  \caption{الدالة !!^a{bijective} تجعل لكل عنصر من المجال المقابل مقابِلًا واحدًا في المجال.}
+  \ollabel{fig:bijective}
+\end{figure}
+\end{explain}
+
+\begin{defn}[!!^{bijection}]
+الدالة ${\OLId{latin-ordinary}{f}} \colon {\OLId{latin-looped}{A}} \to {\OLId{latin-looped}{B}}$ \emph{!!{bijective}} إذا وفقط إذا كانت !!{surjective} و!!{injective} معًا. وحينئذ تسمى !!a{bijection}
+من ${\OLId{latin-looped}{A}}$ إلى~${\OLId{latin-looped}{B}}$، أو بين ${\OLId{latin-looped}{A}}$ و~${\OLId{latin-looped}{B}}$.
+\end{defn}
+
+\end{document}

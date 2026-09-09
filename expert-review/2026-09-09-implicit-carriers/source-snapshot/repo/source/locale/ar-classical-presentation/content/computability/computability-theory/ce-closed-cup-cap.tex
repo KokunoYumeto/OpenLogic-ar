@@ -1,0 +1,85 @@
+% Part: computability
+% Chapter: computability-theory
+% Section: ce-closed-cup-cap
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{thy}{clo}
+
+\olsection[اتحاد المجموعات القابلة للتعداد حسابيًا وتقاطعها]{المجموعات
+  القابلة للتعداد حسابيًا منغلقة تحت الاتحاد والتقاطع}
+
+للمجموعات القابلة للتعداد حسابيًا خواص انغلاق،
+منها ما تقرره المبرهنة الآتية.
+
+\begin{thm}
+متى كانت ${\OLId{latin-looped}{A}}$ و${\OLId{latin-looped}{B}}$ قابلتين للتعداد حسابيًا، كان كل من
+${\OLId{latin-looped}{A}}\cap {\OLId{latin-looped}{B}}$ و${\OLId{latin-looped}{A}}\cup {\OLId{latin-looped}{B}}$ كذلك.
+\end{thm}
+
+\begin{proof}
+نستعمل \olref[eqc]{thm:ce-equiv} لننتقل بين توصيفات المجموعات
+القابلة للتعداد حسابيًا، ونورد لذلك براهين مختلفة. وإذا خلت إحدى المجموعتين فالنتيجة ظاهرة؛ فلنفرضهما غير خاليتين في البرهانين الأولين.
+
+أما البرهان الأول، فلنأخذ دالة قابلة للحساب~${\OLId{latin-ordinary}{f}}$ تعدد ${\OLId{latin-looped}{A}}$، ودالة
+قابلة للحساب~${\OLId{latin-ordinary}{g}}$ تعدد ${\OLId{latin-looped}{B}}$، ونضع
+\begin{align*}
+{\OLId{latin-ordinary}{h}}({\OLId{latin-ordinary}{x}}) & = \umin{{\OLId{latin-ordinary}{y}}}{({\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{y}}) = {\OLId{latin-ordinary}{x}} \lor {\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{y}}) = {\OLId{latin-ordinary}{x}})} \text{، و}\\
+{\OLId{latin-ordinary}{j}}({\OLId{latin-ordinary}{x}}) & = \umin{{\OLId{latin-ordinary}{y}}}{({\OLId{latin-ordinary}{f}}(({\OLId{latin-ordinary}{y}})_{\OLMathNumeral{0}}) = {\OLId{latin-ordinary}{x}} \land {\OLId{latin-ordinary}{g}}(({\OLId{latin-ordinary}{y}})_{\OLMathNumeral{1}}) = {\OLId{latin-ordinary}{x}})}.
+\end{align*}
+عندئذ يكون ${\OLId{latin-looped}{A}}\cup {\OLId{latin-looped}{B}}$ مجال ${\OLId{latin-ordinary}{h}}$، ويكون ${\OLId{latin-looped}{A}}\cap {\OLId{latin-looped}{B}}$ مجال~${\OLId{latin-ordinary}{j}}$.
+
+\begin{explain}
+وتفسير ذلك بالحساب: إذا كان لنا إجراءان لتعداد ${\OLId{latin-looped}{A}}$ و
+${\OLId{latin-looped}{B}}$، شبه قررنا انتماء ${\OLId{latin-ordinary}{x}}$ إلى ${\OLId{latin-looped}{A}}\cup {\OLId{latin-looped}{B}}$ بطلب
+${\OLId{latin-ordinary}{x}}$ في أي من التعدادين؛ وشبه قررنا انتماء ${\OLId{latin-ordinary}{x}}$ إلى
+${\OLId{latin-looped}{A}}\cap {\OLId{latin-looped}{B}}$ بطلب ${\OLId{latin-ordinary}{x}}$ في كليهما معًا.
+\end{explain}
+
+وأما البرهان الثاني، فنبقي~${\OLId{latin-ordinary}{f}}$ معددة لـ${\OLId{latin-looped}{A}}$ و~${\OLId{latin-ordinary}{g}}$ معددة لـ${\OLId{latin-looped}{B}}$،
+ونضع
+\[
+{\OLId{latin-ordinary}{k}}({\OLId{latin-ordinary}{x}}) = \begin{cases}
+{\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}}/{\OLMathNumeral{2}}) & \text{إذا كان ${\OLId{latin-ordinary}{x}}$ زوجيًا} \\
+{\OLId{latin-ordinary}{g}}(({\OLId{latin-ordinary}{x}}-{\OLMathNumeral{1}})/{\OLMathNumeral{2}}) & \text{إذا كان ${\OLId{latin-ordinary}{x}}$ فرديًا.}
+\end{cases}
+\]
+فتعدد ${\OLId{latin-ordinary}{k}}$ المجموعة ${\OLId{latin-looped}{A}}\cup {\OLId{latin-looped}{B}}$، لأن ${\OLId{latin-ordinary}{k}}$ تتعاقب فيها قيمتا
+التعدادين ${\OLId{latin-ordinary}{f}}$ و~${\OLId{latin-ordinary}{g}}$. وأما ${\OLId{latin-looped}{A}}\cap {\OLId{latin-looped}{B}}$ فتحتاج إلى مزيد نظر: إن
+كانت ${\OLId{latin-looped}{A}}\cap {\OLId{latin-looped}{B}}$ خالية، كانت قابلة للتعداد حسابيًا على نحو بديهي. وإلا
+فليكن ${\OLId{latin-ordinary}{c}}$ أي عنصر من ${\OLId{latin-looped}{A}}\cap {\OLId{latin-looped}{B}}$، وعرف ${\OLId{latin-ordinary}{l}}$ بـ
+\[
+{\OLId{latin-ordinary}{l}}({\OLId{latin-ordinary}{x}}) = \begin{cases}
+{\OLId{latin-ordinary}{f}}(({\OLId{latin-ordinary}{x}})_{\OLMathNumeral{0}}) & \text{إذا كان ${\OLId{latin-ordinary}{f}}(({\OLId{latin-ordinary}{x}})_{\OLMathNumeral{0}}) = {\OLId{latin-ordinary}{g}}(({\OLId{latin-ordinary}{x}})_{\OLMathNumeral{1}})$} \\
+{\OLId{latin-ordinary}{c}} & \text{في غير ذلك.}
+\end{cases}
+\]
+فالدالة ${\OLId{latin-ordinary}{l}}$ تستعرض أزواج عناصر تعدادي ${\OLId{latin-ordinary}{f}}$ و${\OLId{latin-ordinary}{g}}$، وتخرج
+القيمة المشتركة كلما اتفقتا؛ وإن لم تتفقا أخرجت ${\OLId{latin-ordinary}{c}}$ حتى لا تقف.
+
+وأما البرهان الأخير، فلنأخذ ${\OLId{latin-looped}{A}}$ \emph{مجالًا} للدالة الجزئية القابلة للحساب ${\OLId{latin-ordinary}{m}}({\OLId{latin-ordinary}{x}})$،
+و${\OLId{latin-looped}{B}}$ مجالًا للدالة الجزئية القابلة للحساب ${\OLId{latin-ordinary}{n}}({\OLId{latin-ordinary}{x}})$. فتكون ${\OLId{latin-looped}{A}}\cap {\OLId{latin-looped}{B}}$ مجال الدالة
+الجزئية ${\OLId{latin-ordinary}{m}}({\OLId{latin-ordinary}{x}})+{\OLId{latin-ordinary}{n}}({\OLId{latin-ordinary}{x}})$.
+
+\begin{explain}
+ووجهه أن ${\OLId{latin-looped}{A}}$ تجمع القيم التي تتوقف عندها ${\OLId{latin-ordinary}{m}}$،
+و${\OLId{latin-looped}{B}}$ تجمع القيم التي تتوقف عندها ${\OLId{latin-ordinary}{n}}$؛ فلا يكون ${\OLId{latin-looped}{A}}\cap {\OLId{latin-looped}{B}}$ إلا مجموعة القيم
+التي يتوقف عليها الإجراءان جميعًا.
+\end{explain}
+
+وأما رد ${\OLId{latin-looped}{A}}\cup {\OLId{latin-looped}{B}}$ إلى مجموعة قيم توقف فيحتاج إلى
+محاكاة ${\OLId{latin-ordinary}{m}}$ و${\OLId{latin-ordinary}{n}}$ على التوازي. فنأخذ ${\OLId{latin-ordinary}{d}}$ فهرسًا لـ${\OLId{latin-ordinary}{m}}$ و${\OLId{latin-ordinary}{e}}$ فهرسًا
+لـ${\OLId{latin-ordinary}{n}}$، فيكون ${\OLId{latin-ordinary}{m}}=\cfind{{\OLId{latin-ordinary}{d}}}$ و${\OLId{latin-ordinary}{n}}=\cfind{{\OLId{latin-ordinary}{e}}}$. عندئذ يكون ${\OLId{latin-looped}{A}}\cup {\OLId{latin-looped}{B}}$ مجال
+الدالة
+\[
+{\OLId{latin-ordinary}{p}}({\OLId{latin-ordinary}{x}}) = \umin{{\OLId{latin-ordinary}{y}}}{({\OLId{latin-looped}{T}}({\OLId{latin-ordinary}{d}},{\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}}) \lor {\OLId{latin-looped}{T}}({\OLId{latin-ordinary}{e}},{\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}}))}.
+\]
+\begin{explain}
+فالدالة ${\OLId{latin-ordinary}{p}}$ تطلب، عند الدخل ${\OLId{latin-ordinary}{x}}$، سجل حساب متوقف لـ${\OLId{latin-ordinary}{m}}$ أو
+لـ${\OLId{latin-ordinary}{n}}$؛ ومتى عثرت على أحدهما توقفت.
+\end{explain}
+\end{proof}
+
+\end{document}

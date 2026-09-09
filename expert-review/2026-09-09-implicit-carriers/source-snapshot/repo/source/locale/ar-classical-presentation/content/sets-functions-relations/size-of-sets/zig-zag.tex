@@ -1,0 +1,121 @@
+% Part:sets-functions-relations
+% Chapter: size-of-sets
+% Section: zig-zag
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid[ar]{sfr}{siz}{zigzag}
+
+\olsection{طريقة كانتور المتعرجة}
+
+\begin{explain}
+تقدمت تعدادات يسيرة، فلننتقل إلى ما هو أدق قليلًا: مجموعة أزواج
+الطبيعيّات\oliflabeldef{sfr:set:pai:sec}{، التي سبق تعريفها في
+\olref[set][pai]{sec} بهذه الصورة:}{ التي تعريفها:}
+\[
+\Nat \times \Nat = \Setabs{\tuple{{\OLId{latin-ordinary}{n}},{\OLId{latin-ordinary}{m}}}}{{\OLId{latin-ordinary}{n}},{\OLId{latin-ordinary}{m}} \in \Nat}
+\]
+ولنجعل هذه الأزواج في \emph{مصفوفة}:
+\[
+\begin{array}{ c | c | c | c | c | c}
+& \mathbf 0 & \mathbf 1 & \mathbf 2 & \mathbf 3 & \dots \\
+\hline
+\mathbf 0 & \tuple{{\OLMathNumeral{0}},{\OLMathNumeral{0}}} & \tuple{{\OLMathNumeral{0}},{\OLMathNumeral{1}}} & \tuple{{\OLMathNumeral{0}},{\OLMathNumeral{2}}} & \tuple{{\OLMathNumeral{0}},{\OLMathNumeral{3}}} & \dots \\
+\hline
+\mathbf 1 & \tuple{{\OLMathNumeral{1}},{\OLMathNumeral{0}}} & \tuple{{\OLMathNumeral{1}},{\OLMathNumeral{1}}} & \tuple{{\OLMathNumeral{1}},{\OLMathNumeral{2}}} & \tuple{{\OLMathNumeral{1}},{\OLMathNumeral{3}}} & \dots \\
+\hline
+\mathbf 2 & \tuple{{\OLMathNumeral{2}},{\OLMathNumeral{0}}} & \tuple{{\OLMathNumeral{2}},{\OLMathNumeral{1}}} & \tuple{{\OLMathNumeral{2}},{\OLMathNumeral{2}}} & \tuple{{\OLMathNumeral{2}},{\OLMathNumeral{3}}} & \dots \\
+\hline
+\mathbf 3 & \tuple{{\OLMathNumeral{3}},{\OLMathNumeral{0}}} & \tuple{{\OLMathNumeral{3}},{\OLMathNumeral{1}}} & \tuple{{\OLMathNumeral{3}},{\OLMathNumeral{2}}} & \tuple{{\OLMathNumeral{3}},{\OLMathNumeral{3}}} & \dots \\
+\hline
+\vdots & \vdots & \vdots & \vdots & \vdots & \ddots\\
+\end{array}
+\]
+فكل زوج في $\Nat \times \Nat$ له في المصفوفة موضع واحد لا غير؛
+فالزوج $\tuple{{\OLId{latin-ordinary}{n}},{\OLId{latin-ordinary}{m}}}$ في الصف ${\OLId{latin-ordinary}{n}}$ والعمود ${\OLId{latin-ordinary}{m}}$. فكيف نحول صفوفها
+وأعمدتها إلى قائمة ذات بعد واحد؟ لهذا وجوه كثيرة، ومنها نمط المصفوفة الآتية:
+\[
+\begin{array}{ c | c | c | c | c | c | c}
+& \mathbf 0 & \mathbf 1 & \mathbf 2 & \mathbf 3 & \mathbf 4 &\dots \\
+\hline
+\mathbf 0 & {\OLMathNumeral{0}}  & {\OLMathNumeral{1}}& {\OLMathNumeral{3}} & {\OLMathNumeral{6}}& {\OLMathNumeral{10}} &\ldots \\
+\hline
+\mathbf 1 &{\OLMathNumeral{2}} & {\OLMathNumeral{4}}& {\OLMathNumeral{7}} & {\OLMathNumeral{11}} & \dots &\ldots \\
+\hline
+\mathbf 2 & {\OLMathNumeral{5}} & {\OLMathNumeral{8}} & {\OLMathNumeral{12}} & \ldots & \dots&\ldots \\
+\hline
+\mathbf 3 & {\OLMathNumeral{9}} & {\OLMathNumeral{13}} & \ldots & \ldots & \dots & \ldots \\
+\hline
+\mathbf 4 & {\OLMathNumeral{14}} & \ldots & \ldots & \ldots & \dots & \ldots \\
+\hline
+\vdots & \vdots & \vdots & \vdots & \vdots&\ldots & \ddots\\
+\end{array}
+\]\noindent
+واسم هذا النمط \emph{طريقة كانتور المتعرجة}، وبه يكون تعداد
+$\Nat \times \Nat$:
+\[
+\tuple{{\OLMathNumeral{0}},{\OLMathNumeral{0}}}, \tuple{{\OLMathNumeral{0}},{\OLMathNumeral{1}}}, \tuple{{\OLMathNumeral{1}},{\OLMathNumeral{0}}}, \tuple{{\OLMathNumeral{0}},{\OLMathNumeral{2}}}, \tuple{{\OLMathNumeral{1}},{\OLMathNumeral{1}}},
+\tuple{{\OLMathNumeral{2}},{\OLMathNumeral{0}}}, \tuple{{\OLMathNumeral{0}},{\OLMathNumeral{3}}}, \tuple{{\OLMathNumeral{1}},{\OLMathNumeral{2}}}, \tuple{{\OLMathNumeral{2}},{\OLMathNumeral{1}}}, \tuple{{\OLMathNumeral{3}},{\OLMathNumeral{0}}}, \dots
+\]
+فقد ثبت الآتي:
+\end{explain}
+
+\begin{prop}\ollabel{natsquaredenumerable}
+المجموعة $\Nat \times \Nat$ هي !!{enumerable}.
+\end{prop}
+
+\begin{proof}
+عرّف ${\OLId{latin-ordinary}{f}} \colon \Nat \to \Nat\times\Nat$ بجعل صورة ${\OLId{latin-ordinary}{k}} \in \Nat$
+الزوج $\tuple{{\OLId{latin-ordinary}{n}},{\OLId{latin-ordinary}{m}}} \in \Nat \times \Nat$ الذي يقع فيه ${\OLId{latin-ordinary}{k}}$
+في الصف ${\OLId{latin-ordinary}{n}}$ والعمود ${\OLId{latin-ordinary}{m}}$ من مصفوفة كانتور المتعرجة.
+\end{proof}
+
+\begin{explain}
+ولهذه الطريقة تعميم يسير. فمنه تعداد الثلاثيات المرتبة من
+الطبيعيّات، أي:
+\[
+\Nat \times \Nat \times \Nat = \Setabs{\tuple{{\OLId{latin-ordinary}{n}},{\OLId{latin-ordinary}{m}},{\OLId{latin-ordinary}{k}}}}{{\OLId{latin-ordinary}{n}},{\OLId{latin-ordinary}{m}},{\OLId{latin-ordinary}{k}} \in \Nat}
+\]
+نأخذ $\Nat \times \Nat \times \Nat$ ضربًا ديكارتيًا
+لـ$\Nat \times \Nat$ في $\Nat$، أي
+\[
+\Nat^{\OLMathNumeral{3}} = (\Nat \times \Nat) \times \Nat =
+\Setabs{\tuple{\tuple{{\OLId{latin-ordinary}{n}},{\OLId{latin-ordinary}{m}}},{\OLId{latin-ordinary}{k}}}}{{\OLId{latin-ordinary}{n}}, {\OLId{latin-ordinary}{m}}, {\OLId{latin-ordinary}{k}}
+  \in \Nat }
+\]
+فنعدّد $\Nat^{\OLMathNumeral{3}}$ بمصفوفة أحد محوريها تعداد $\Nat$،
+والآخر تعداد $\Nat^{\OLMathNumeral{2}}$:
+\[
+\begin{array}{ c | c | c | c | c | c}
+& \mathbf 0 & \mathbf 1 & \mathbf 2 & \mathbf 3 & \dots \\
+\hline
+\mathbf{\tuple{0,0}} & \tuple{{\OLMathNumeral{0}},{\OLMathNumeral{0}},{\OLMathNumeral{0}}} & \tuple{{\OLMathNumeral{0}},{\OLMathNumeral{0}},{\OLMathNumeral{1}}} & \tuple{{\OLMathNumeral{0}},{\OLMathNumeral{0}},{\OLMathNumeral{2}}} & \tuple{{\OLMathNumeral{0}},{\OLMathNumeral{0}},{\OLMathNumeral{3}}} & \dots \\
+\hline
+\mathbf{\tuple{0,1}} & \tuple{{\OLMathNumeral{0}},{\OLMathNumeral{1}},{\OLMathNumeral{0}}} & \tuple{{\OLMathNumeral{0}},{\OLMathNumeral{1}},{\OLMathNumeral{1}}} & \tuple{{\OLMathNumeral{0}},{\OLMathNumeral{1}},{\OLMathNumeral{2}}} & \tuple{{\OLMathNumeral{0}},{\OLMathNumeral{1}},{\OLMathNumeral{3}}} & \dots \\
+\hline
+\mathbf{\tuple{1,0}} & \tuple{{\OLMathNumeral{1}},{\OLMathNumeral{0}},{\OLMathNumeral{0}}} & \tuple{{\OLMathNumeral{1}},{\OLMathNumeral{0}},{\OLMathNumeral{1}}} & \tuple{{\OLMathNumeral{1}},{\OLMathNumeral{0}},{\OLMathNumeral{2}}} & \tuple{{\OLMathNumeral{1}},{\OLMathNumeral{0}},{\OLMathNumeral{3}}} & \dots \\
+\hline
+\mathbf{\tuple{0,2}} & \tuple{{\OLMathNumeral{0}},{\OLMathNumeral{2}},{\OLMathNumeral{0}}} & \tuple{{\OLMathNumeral{0}},{\OLMathNumeral{2}},{\OLMathNumeral{1}}} & \tuple{{\OLMathNumeral{0}},{\OLMathNumeral{2}},{\OLMathNumeral{2}}} & \tuple{{\OLMathNumeral{0}},{\OLMathNumeral{2}},{\OLMathNumeral{3}}} & \dots\\
+\hline
+\vdots & \vdots & \vdots & \vdots & \vdots & \ddots \\
+\end{array}
+\]
+ثم نسلك نظير طريق كانتور المتعرج فنحصل على تعداد~$\Nat^{\OLMathNumeral{3}}$.
+وبتكرار الصنعة نحصل على تعداد $\Nat^{\OLId{latin-ordinary}{n}}$ لأي طبيعي ${\OLId{latin-ordinary}{n}}$، فيثبت:
+\end{explain}
+
+\begin{prop}
+المجموعة $\Nat^{\OLId{latin-ordinary}{n}}$ هي !!{enumerable} لكل ${\OLId{latin-ordinary}{n}} \in \Nat$.
+\end{prop}
+
+\begin{prob}\label{sfr:siz:zigzag:prob:posint-n}
+برهن على أن $(\PosInt)^{\OLId{latin-ordinary}{n}}$ هي !!{enumerable} لكل ${\OLId{latin-ordinary}{n}} \in \Nat$.
+\end{prob}
+
+\begin{prob}\label{sfr:siz:zigzag:prob:posint-star}
+  برهن على أن $(\PosInt)^*$ هي !!{enumerable}، ولك استعمال \cref{sfr:siz:zigzag:prob:posint-n}.
+\end{prob}
+
+\end{document}

@@ -1,0 +1,224 @@
+% Part: normal-modal-logic
+% Chapter: filtrations
+% Section: examples-of-filtrations
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{fil}{exf}
+
+\olsection{أمثلة على الترشيحات}
+
+بقي أن نبين وجود الترشيحات. فللنموذج~$\mModel{M}$، على ما سيظهر، ترشيحات
+كثيرة لـ~$\mModel{M}$ عبر~${\OLId{greek-variable}{Gamma}}$. وأخصها بالنظر ترشيحان: الأدق والأخشن.
+وإنما يقع اختلاف ترشيحات النموذج الواحد في علاقة النفاذ؛ إذ تعيّن
+\olref[fil]{defn:filtration} كلاًّ من~${\OLId{latin-looped}{W}}^*$ و${\OLId{latin-looped}{V}}^*$ تعيينًا مباشرًا.
+فالأدق يقتصر على أقل ما يمكن من أزواج العوالم المرتبطة، والأخشن يضم
+أكثر ما يمكن منها.
+
+\begin{defn}
+  إذا كانت~${\OLId{greek-variable}{Gamma}}$ مغلقة تحت أخذ الصيغ الجزئية، عُرّف الترشيح
+  \emph{الأدق}~$\mModel{M^*}$ لنموذج~$\mModel{M}$ بوضع:
+  \[
+  {\OLId{latin-looped}{R}}^*[{\OLId{latin-ordinary}{u}}][{\OLId{latin-ordinary}{v}}] \quad \text{إذا وفقط إذا} \quad \exists {\OLId{latin-ordinary}{u}}'\in [{\OLId{latin-ordinary}{u}}] \;
+  \exists {\OLId{latin-ordinary}{v}}' \in [{\OLId{latin-ordinary}{v}}] : Ru'{\OLId{latin-ordinary}{v}}'.
+  \]
+\end{defn}
+
+\begin{prop}\ollabel{prop:finest}
+  الترشيح الأدق~$\mModel{M^*}$ ترشيح بالفعل.
+\end{prop}
+
+\begin{proof}
+  موضع البرهان أن~${\OLId{latin-looped}{R}}^*$ المحددة آنفًا تحقق
+  \olref[fil]{defn:filtration}\olref[fil]{defn:filtration-R}.
+  فلننظر في الشروط الثلاثة واحدًا بعد واحد.
+
+  متى كان~$Ruv$، كان~${\OLId{latin-ordinary}{u}} \in [{\OLId{latin-ordinary}{u}}]$ و${\OLId{latin-ordinary}{v}} \in [{\OLId{latin-ordinary}{v}}]$ شاهدين على
+  ${\OLId{latin-looped}{R}}^*[{\OLId{latin-ordinary}{u}}][{\OLId{latin-ordinary}{v}}]$؛ فثبت~\olref[fil]{defn:filtration-R1}.
+
+  \iftag{prvBox}{\iftag{probBox}{نترك التحقق من
+      \olref[fil]{defn:filtration-R2} تمرينًا.}{للتحقق من
+        \olref[fil]{defn:filtration-R2}، افترض~$\Box!A \in {\OLId{greek-variable}{Gamma}}$
+        و${\OLId{latin-looped}{R}}^*[{\OLId{latin-ordinary}{u}}][{\OLId{latin-ordinary}{v}}]$ و$\mSat{{\OLId{latin-looped}{M}}}{\Box!A}[{\OLId{latin-ordinary}{u}}]$. بحسب تعريف~${\OLId{latin-looped}{R}}^*$، يوجد
+        ${\OLId{latin-ordinary}{u}}' \equiv {\OLId{latin-ordinary}{u}}$ و${\OLId{latin-ordinary}{v}}' \equiv {\OLId{latin-ordinary}{v}}$ بحيث~$Ru'{\OLId{latin-ordinary}{v}}'$. ولأن~${\OLId{latin-ordinary}{u}}$ و${\OLId{latin-ordinary}{u}}'$
+        يتفقان على~${\OLId{greek-variable}{Gamma}}$، يكون أيضًا~$\mSat{{\OLId{latin-looped}{M}}}{\Box!A}[{\OLId{latin-ordinary}{u}}']$، ومن
+        ثم~$\mSat{{\OLId{latin-looped}{M}}}{!A}[{\OLId{latin-ordinary}{v}}']$. وبإغلاق~${\OLId{greek-variable}{Gamma}}$ تحت أخذ
+        ال!!{formula}s الجزئية، يتفق~${\OLId{latin-ordinary}{v}}$ و${\OLId{latin-ordinary}{v}}'$ على~$!A$، ولذلك
+        $\mSat{{\OLId{latin-looped}{M}}}{!A}[{\OLId{latin-ordinary}{v}}]$، كما هو مطلوب.}}{}
+
+  \iftag{prvDiamond}{\iftag{probDiamond}{نترك التحقق من
+      \olref[fil]{defn:filtration-R3} تمرينًا.}{للتحقق من
+        \olref[fil]{defn:filtration-R3}، افترض~$\Diamond!A \in
+        {\OLId{greek-variable}{Gamma}}$ و${\OLId{latin-looped}{R}}^*[{\OLId{latin-ordinary}{u}}][{\OLId{latin-ordinary}{v}}]$ و$\mSat{{\OLId{latin-looped}{M}}}{!A}[{\OLId{latin-ordinary}{v}}]$. بحسب تعريف~${\OLId{latin-looped}{R}}^*$،
+        يوجد~${\OLId{latin-ordinary}{u}}' \equiv {\OLId{latin-ordinary}{u}}$ و${\OLId{latin-ordinary}{v}}' \equiv {\OLId{latin-ordinary}{v}}$ بحيث~$Ru'{\OLId{latin-ordinary}{v}}'$. ولأن~${\OLId{latin-ordinary}{v}}$
+        و${\OLId{latin-ordinary}{v}}'$ يتفقان على~${\OLId{greek-variable}{Gamma}}$، ولأن~${\OLId{greek-variable}{Gamma}}$ مغلقة تحت أخذ
+        ال!!{formula}s الجزئية، يكون أيضًا~$\mSat{{\OLId{latin-looped}{M}}}{!A}[{\OLId{latin-ordinary}{v}}']$، ومن
+        ثم~$\mSat{{\OLId{latin-looped}{M}}}{\Diamond !A}[{\OLId{latin-ordinary}{u}}']$. ولأن~${\OLId{latin-ordinary}{u}}$ و${\OLId{latin-ordinary}{u}}'$ يتفقان أيضًا
+        على~${\OLId{greek-variable}{Gamma}}$، يكون~$\mSat{{\OLId{latin-looped}{M}}}{\Diamond !A}[{\OLId{latin-ordinary}{u}}]$.}}{}
+\end{proof}
+
+\begin{probtag}{probBox,probDiamond}
+  أكمل برهان~\olref[nml][fil][exf]{prop:finest}.
+\end{probtag}
+
+\begin{defn}
+  إذا كانت~${\OLId{greek-variable}{Gamma}}$ مغلقة تحت أخذ الصيغ الجزئية، عُرّف الترشيح
+  \emph{الأخشن}~$\mModel{M^*}$ لنموذج~$\mModel{M}$ بوضع
+  ${\OLId{latin-looped}{R}}^*[{\OLId{latin-ordinary}{u}}][{\OLId{latin-ordinary}{v}}]$ إذا وفقط إذا
+  \iftag{notprvBox,notprvDiamond}{تحقق الشرط الآتي:}{تحقق
+    \emph{كلا} الشرطين الآتيين:}
+  \begin{tagenumerate}{prvBox,prvDiamond}
+  \tagitem{prvBox}{\ollabel{defn:coarsest-Box}إذا كان~$\Box!A \in
+    {\OLId{greek-variable}{Gamma}}$ و$\mSat{{\OLId{latin-looped}{M}}}{\Box!A}[{\OLId{latin-ordinary}{u}}]$، كان
+    $\mSat{{\OLId{latin-looped}{M}}}{!A}[{\OLId{latin-ordinary}{v}}]$\iftag{prvDiamond}{؛}{.}}{}
+  \tagitem{prvDiamond}{\ollabel{defn:coarsest-Diamond}إذا كان
+    $\Diamond!A \in {\OLId{greek-variable}{Gamma}}$ و$\mSat{{\OLId{latin-looped}{M}}}{!A}[{\OLId{latin-ordinary}{v}}]$، كان
+    $\mSat{{\OLId{latin-looped}{M}}}{\Diamond!A}[{\OLId{latin-ordinary}{u}}]$.}{}
+  \end{tagenumerate}
+\end{defn}
+
+\begin{prop}
+  الترشيح الأخشن~$\mModel{M^*}$ ترشيح بالفعل.
+\end{prop}
+
+\begin{proof}
+  أما~${\OLId{latin-looped}{R}}^*$ فقد ضُمِّن تعريفها سائر الشروط، فلا يبقى إلا أن يستلزم~$Ruv$
+  العلاقة~${\OLId{latin-looped}{R}}^*[{\OLId{latin-ordinary}{u}}][{\OLId{latin-ordinary}{v}}]$. ولنفرض لذلك~$Ruv$. \iftag{prvBox}{افترض~$\Box!A \in
+    {\OLId{greek-variable}{Gamma}}$ و$\mSat{{\OLId{latin-looped}{M}}}{\Box!A}[{\OLId{latin-ordinary}{u}}]$؛ عندئذ من الواضح أن
+    $\mSat{{\OLId{latin-looped}{M}}}{!A}[{\OLId{latin-ordinary}{v}}]$\iftag{prvDiamond}{، ومن ثم يستوفى
+      \olref{defn:coarsest-Box}.}{.}}{}\iftag{prvDiamond}{افترض
+    $\Diamond!A \in {\OLId{greek-variable}{Gamma}}$ و$\mSat{{\OLId{latin-looped}{M}}}{!A}[{\OLId{latin-ordinary}{v}}]$. عندئذ
+    $\mSat{{\OLId{latin-looped}{M}}}{\Diamond!A}[{\OLId{latin-ordinary}{u}}]$ لأن~$Ruv$\iftag{prvBox}{، ومن ثم
+      يستوفى~\olref{defn:coarsest-Diamond}}{}.}{}
+\end{proof}
+
+\begin{ex}
+  نأخذ~${\OLId{latin-looped}{W}}=\PosInt$، ونضع~$Rnm$ إذا وفقط إذا كان~${\OLId{latin-ordinary}{m}}={\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}}$، ونعيّن
+  ${\OLId{latin-looped}{V}}({\OLId{latin-ordinary}{p}})=\Setabs{{\OLMathNumeral{2}}{\OLId{latin-ordinary}{n}}}{{\OLId{latin-ordinary}{n}} \in \PosInt}$. فهذا النموذج
+  $\mModel{M}=\tuple{{\OLId{latin-looped}{W}},{\OLId{latin-looped}{R}},{\OLId{latin-looped}{V}}}$ هو المرسوم في~\olref{fig:ex-filtration}.
+  عوالمه~${\OLMathNumeral{1}}$ و${\OLMathNumeral{2}}$ وما يليهما، وليس لكل عالم إلا عالم واحد ينفذ إليه،
+  هو لاحقه؛ وأما~${\OLId{latin-ordinary}{p}}$ فيصدق عند الأعداد الزوجية الموجبة وحدها.
+
+  \begin{figure}
+    \centering
+    \begin{tikzpicture}[modal]
+      \node[world] (1) [label=below:\mFalse{{\OLId{latin-ordinary}{p}}}] {${\OLMathNumeral{1}}$};
+      \node[world] (2) [label=below:\mTrue{{\OLId{latin-ordinary}{p}}}, right=of 1] {${\OLMathNumeral{2}}$};
+      \node[world] (3) [label=below:\mFalse{{\OLId{latin-ordinary}{p}}}, right=of 2] {${\OLMathNumeral{3}}$};
+      \node[world] (4) [label=below:\mTrue{{\OLId{latin-ordinary}{p}}}, right=of 3] {${\OLMathNumeral{4}}$};
+      \node[phantom] (5) [right=of 4] {};
+      \draw[->] (1) to (2);
+      \draw[->] (2) to (3);
+      \draw[->] (3) to (4);
+      \draw[dotted] (4) to (5);
+    \end{tikzpicture}
+
+    \begin{tikzpicture}[modal]
+      \node[world] (1) [label=below:\mFalse{{\OLId{latin-ordinary}{p}}}] {$[{\OLMathNumeral{1}}]$};
+      \node[world] (2) [label=below:\mTrue{{\OLId{latin-ordinary}{p}}}, right=of 1] {$[{\OLMathNumeral{2}}]$};
+      \draw[->,bend left] (1) to (2);
+      \draw[->,bend left] (2) to (1);
+
+      \node[world] (3) [label=below:\mFalse{{\OLId{latin-ordinary}{p}}},right=of 2] {$[{\OLMathNumeral{1}}]$};
+      \node[world] (4) [label=below:\mTrue{{\OLId{latin-ordinary}{p}}}, right=of 3] {$[{\OLMathNumeral{2}}]$};
+      \draw[->,bend left] (3) to (4);
+      \draw[->,bend left] (4) to (3);
+      \draw[->,reflexive above] (4) to (4);
+    \end{tikzpicture}
+    \caption{نموذج لا نهائي وترشيحاه.}
+    \ollabel{fig:ex-filtration}
+  \end{figure}
+
+  ولنأخذ~${\OLId{greek-variable}{Gamma}}$ مجموعة ال!!{formula}s الجزئية لـ~$\Box {\OLId{latin-ordinary}{p}} \lif {\OLId{latin-ordinary}{p}}$،
+  وهي~$\{{\OLId{latin-ordinary}{p}},\Box {\OLId{latin-ordinary}{p}},\Box {\OLId{latin-ordinary}{p}} \lif {\OLId{latin-ordinary}{p}}\}$. أما~${\OLId{latin-ordinary}{p}}$ فيصدق عند الأعداد الزوجية
+  وحدها، وأما~$\Box {\OLId{latin-ordinary}{p}}$ فعند الأعداد الفردية وحدها؛ ولذلك تصدق
+  $\Box {\OLId{latin-ordinary}{p}} \lif {\OLId{latin-ordinary}{p}}$ عند الزوجية دون الفردية. وتفصيل ذلك أن العالم الفردي
+  يصدّق~$\Box {\OLId{latin-ordinary}{p}}$ ويكذّب~${\OLId{latin-ordinary}{p}}$ و$\Box {\OLId{latin-ordinary}{p}} \lif {\OLId{latin-ordinary}{p}}$؛ والعالم الزوجي
+  يصدّق~${\OLId{latin-ordinary}{p}}$ و$\Box {\OLId{latin-ordinary}{p}} \lif {\OLId{latin-ordinary}{p}}$ ويكذّب~$\Box {\OLId{latin-ordinary}{p}}$. فليس إذن إلا الفئتان
+  ${\OLId{latin-looped}{W}}^*=\{[{\OLMathNumeral{1}}],[{\OLMathNumeral{2}}]\}$، وهما~$[{\OLMathNumeral{1}}]=\{{\OLMathNumeral{1}},{\OLMathNumeral{3}},{\OLMathNumeral{5}},\dots\}$
+  و$[{\OLMathNumeral{2}}]=\{{\OLMathNumeral{2}},{\OLMathNumeral{4}},{\OLMathNumeral{6}},\dots\}$. ومن~${\OLMathNumeral{2}} \in {\OLId{latin-looped}{V}}({\OLId{latin-ordinary}{p}})$ يلزم
+  $[{\OLMathNumeral{2}}] \in {\OLId{latin-looped}{V}}^*({\OLId{latin-ordinary}{p}})$، ومن~${\OLMathNumeral{1}} \notin {\OLId{latin-looped}{V}}({\OLId{latin-ordinary}{p}})$ يلزم~$[{\OLMathNumeral{1}}] \notin {\OLId{latin-looped}{V}}^*({\OLId{latin-ordinary}{p}})$؛
+  فحصل~${\OLId{latin-looped}{V}}^*({\OLId{latin-ordinary}{p}})=\{[{\OLMathNumeral{2}}]\}$.
+
+  وأما علاقة النفاذ لترشيح على~${\OLId{latin-looped}{W}}^*$ فلا بد أن تشتمل على
+  $\tuple{[{\OLMathNumeral{1}}],[{\OLMathNumeral{2}}]}$ و$\tuple{[{\OLMathNumeral{2}}],[{\OLMathNumeral{1}}]}$. فإن~${\OLId{latin-looped}{R}}{\OLMathNumeral{12}}$ يقتضي
+  ${\OLId{latin-looped}{R}}^*[{\OLMathNumeral{1}}][{\OLMathNumeral{2}}]$ بحكم
+  \olref[fil]{defn:filtration}\olref[fil]{defn:filtration-R1}؛ ثم إن
+  ${\OLId{latin-looped}{R}}{\OLMathNumeral{23}}$ يقتضي~${\OLId{latin-looped}{R}}^*[{\OLMathNumeral{2}}][{\OLMathNumeral{3}}]$، وقد علمنا أن~$[{\OLMathNumeral{3}}]=[{\OLMathNumeral{1}}]$.
+  وأما~$\tuple{[{\OLMathNumeral{1}}],[{\OLMathNumeral{1}}]}$ فممتنع: لو اشتملت عليه لكان~${\OLId{latin-looped}{R}}^*[{\OLMathNumeral{1}}][{\OLMathNumeral{1}}]$،
+  مع أن~$\mSat{{\OLId{latin-looped}{M}}}{\Box {\OLId{latin-ordinary}{p}}}[{\OLMathNumeral{1}}]$ و$\mSat/{{\OLId{latin-looped}{M}}}{{\OLId{latin-ordinary}{p}}}[{\OLMathNumeral{1}}]$،
+  وهو خلاف~\olref[fil]{defn:filtration-R2}. ويبقى~${\OLId{latin-looped}{R}}^*[{\OLMathNumeral{2}}][{\OLMathNumeral{2}}]$ جائز
+  الإثبات والنفي، فلا موجب له ولا مانع منه. فترشيحا~$\mModel{M}$
+  الممكنان اثنان، وعلاقتا نفاذهما:
+  \[
+  \{\tuple{[{\OLMathNumeral{1}}],[{\OLMathNumeral{2}}]},\tuple{[{\OLMathNumeral{2}}],[{\OLMathNumeral{1}}]}\} \text{ و }
+  \{\tuple{[{\OLMathNumeral{1}}],[{\OLMathNumeral{2}}]},\tuple{[{\OLMathNumeral{2}}],[{\OLMathNumeral{1}}]},\tuple{[{\OLMathNumeral{2}}],[{\OLMathNumeral{2}}]}\}.
+  \]
+  وفي كلتا الحالين يكذب~${\OLId{latin-ordinary}{p}}$ و$\Box {\OLId{latin-ordinary}{p}} \lif {\OLId{latin-ordinary}{p}}$ عند~$[{\OLMathNumeral{1}}]$،
+  ويصدق~$\Box {\OLId{latin-ordinary}{p}}$؛ ويصدق~${\OLId{latin-ordinary}{p}}$ و$\Box {\OLId{latin-ordinary}{p}} \lif {\OLId{latin-ordinary}{p}}$ عند~$[{\OLMathNumeral{2}}]$،
+  ويكذب~$\Box {\OLId{latin-ordinary}{p}}$.
+\end{ex}
+
+
+\begin{prob}
+  ليكن النموذج~$\mModel{M}=\tuple{{\OLId{latin-looped}{W}},{\OLId{latin-looped}{R}},{\OLId{latin-looped}{V}}}$ على الوجه الآتي:
+  ${\OLId{latin-looped}{W}}=\Setabs{{\OLMathNumeral{0}}\sigma}{\sigma \in \Bin^*}$، أي متتاليات الأصفار والآحاد
+  المبدوءة بـ~${\OLMathNumeral{0}}$؛ وتكون~${\OLId{latin-looped}{R}}\sigma\sigma'$ إذا وفقط إذا كان
+  $\sigma'=\sigma {\OLMathNumeral{0}}$ أو~$\sigma'=\sigma {\OLMathNumeral{1}}$؛ ونضع
+  ${\OLId{latin-looped}{V}}({\OLId{latin-ordinary}{p}})=\Setabs{\sigma {\OLMathNumeral{0}}}{\sigma \in \Bin^*}\cap {\OLId{latin-looped}{W}}$،
+  و${\OLId{latin-looped}{V}}({\OLId{latin-ordinary}{q}})=\Setabs{\sigma {\OLMathNumeral{1}}}{\sigma \in
+    \Bin^* \setminus \{{\OLMathNumeral{1}}\}}\cap {\OLId{latin-looped}{W}}$. وصورته:
+  \begin{center}
+    \begin{tikzpicture}[modal,
+        node distance=2cm
+      ]
+
+      \node[world] (0) [label={below:\mTrue{{\OLId{latin-ordinary}{p}}}\\\mFalse{{\OLId{latin-ordinary}{q}}}},font=\tiny] {${\OLMathNumeral{0}}$};
+      \node[world] (00) [label={below:\mTrue{{\OLId{latin-ordinary}{p}}}\\\mFalse{{\OLId{latin-ordinary}{q}}}},
+        above right=of 0,font=\tiny] {${\OLMathNumeral{00}}$};
+      \node[world] (000) [label={below:\mTrue{{\OLId{latin-ordinary}{p}}}\\\mFalse{{\OLId{latin-ordinary}{q}}}},
+        right=of 00, yshift=.8cm, font=\tiny] {${\OLMathNumeral{000}}$};
+      \node[phantom] (0000) [right=of 000, yshift=.5cm] {};
+      \node[phantom] (0001) [right=of 000, yshift=-.5cm] {};
+      \node[world] (001) [label={below:\mFalse{{\OLId{latin-ordinary}{p}}}\\\mTrue{{\OLId{latin-ordinary}{q}}}},
+        right=of 00, yshift=-.8cm, font=\tiny] {${\OLMathNumeral{001}}$};
+      \node[phantom](0010) [right=of 001, yshift=.5cm] {};
+      \node[phantom](0011) [right=of 001, yshift=-.5cm] {};
+      \node[world] (01) [label={below:\mFalse{{\OLId{latin-ordinary}{p}}}\\\mTrue{{\OLId{latin-ordinary}{q}}}},
+        below right=of 0,font=\tiny] {${\OLMathNumeral{01}}$};
+      \node[world] (010) [label={below:\mTrue{{\OLId{latin-ordinary}{p}}}\\\mFalse{{\OLId{latin-ordinary}{q}}}},
+        right=of 01, yshift=.8cm,font=\tiny] {${\OLMathNumeral{010}}$};
+      \node[phantom] (0100) [right=of 010, yshift=.5cm] {};
+      \node[phantom] (0101) [right=of 010, yshift=-.5cm] {};
+      \node[world] (011) [label={below:\mFalse{{\OLId{latin-ordinary}{p}}}\\\mTrue{{\OLId{latin-ordinary}{q}}}},
+        right=of 01, yshift=-.8cm,font=\tiny] {${\OLMathNumeral{011}}$};
+      \node[phantom] (0110) [right=of 011, yshift=.5cm] {};
+      \node[phantom] (0111) [right=of 011, yshift=-.5cm] {};
+
+      \draw[->] (0) to (00);
+      \draw[->] (0) to (01);
+      \draw[->] (00) to (000);
+      \draw[dotted] (000) to (0000);
+      \draw[dotted] (000) to (0001);
+      \draw[->] (00) to (001);
+      \draw[dotted] (001) to (0010);
+      \draw[dotted] (001) to (0011);
+      \draw[->] (01) to (010);
+      \draw[dotted] (010) to (0100);
+      \draw[dotted] (010) to (0101);
+      \draw[->] (01) to (011);
+      \draw[dotted] (011) to (0110);
+      \draw[dotted] (011) to (0111);
+    \end{tikzpicture}
+  \end{center}
+  وفي هذا النموذج~$\mSat/{{\OLId{latin-looped}{M}}}{\Box({\OLId{latin-ordinary}{p}} \lor {\OLId{latin-ordinary}{q}}) \lif (\Box {\OLId{latin-ordinary}{p}} \lor \Box {\OLId{latin-ordinary}{q}})}[{\OLId{latin-ordinary}{w}}]$
+  لكل~${\OLId{latin-ordinary}{w}}$.
+
+  خذ~${\OLId{greek-variable}{Gamma}}$ مجموعة ال!!{formula}s الجزئية لـ~$\Box({\OLId{latin-ordinary}{p}} \lor {\OLId{latin-ordinary}{q}}) \lif
+  (\Box {\OLId{latin-ordinary}{p}} \lor \Box {\OLId{latin-ordinary}{q}})$. عيّن~${\OLId{latin-looped}{W}}^*$ و${\OLId{latin-looped}{V}}^*$، ثم عيّن علاقة النفاذ
+  في أدق ترشيحات~$\mModel{M}$ وفي أخشنها.
+\end{prob}
+
+\end{document}

@@ -1,0 +1,110 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+\olfileid{sth}{card-arithmetic}{expotough}
+
+\olsection[بعض التبسيطات]{بعض التبسيطات في أس الكاردينالات}
+
+قد كان تعريف~$\canonord$ مشتملًا على شيء من التفصيل، غير أن ثمرته
+كانت الحكم النافع في جمع الكاردينالات وضربها، أعني
+\olref[simp]{cardplustimesmax}. وأما أس الكاردينالات فيما فوق المتناهي
+فلا ينقاد لتبسيط يقاربه في المباشرة. ولنبدأ، بيانًا لذلك، بحكم يمد
+نمطًا معروفًا في المقادير المتناهية، وإن جاء برهانه مجردًا غاية التجريد.
+
+\begin{prop}\ollabel{simplecardexpo}
+$\cardexpo{\cardfont{{\OLId{latin-ordinary}{a}}}}{\cardfont{{\OLId{latin-ordinary}{b}}} \cardplus \cardfont{{\OLId{latin-ordinary}{c}}}} =
+\cardexpo{\cardfont{{\OLId{latin-ordinary}{a}}}}{\cardfont{{\OLId{latin-ordinary}{b}}}} \cardtimes
+\cardexpo{\cardfont{{\OLId{latin-ordinary}{a}}}}{\cardfont{{\OLId{latin-ordinary}{c}}}}$، و
+$\cardexpo{(\cardexpo{\cardfont{{\OLId{latin-ordinary}{a}}}}{\cardfont{{\OLId{latin-ordinary}{b}}}})}{\cardfont{{\OLId{latin-ordinary}{c}}}} =
+\cardexpo{\cardfont{{\OLId{latin-ordinary}{a}}}}{\cardfont{{\OLId{latin-ordinary}{b}}} \cardtimes \cardfont{{\OLId{latin-ordinary}{c}}}}$، لأي
+كاردينالات $\cardfont{{\OLId{latin-ordinary}{a}}}, \cardfont{{\OLId{latin-ordinary}{b}}}, \cardfont{{\OLId{latin-ordinary}{c}}}$.
+\end{prop}
+
+\begin{proof}
+أما الدعوى الأولى، فانظر إلى دالة
+${\OLId{latin-ordinary}{f}} \colon (\cardfont{{\OLId{latin-ordinary}{b}}}\disjointsum\cardfont{{\OLId{latin-ordinary}{c}}}) \to \cardfont{{\OLId{latin-ordinary}{a}}}$.
+واجعل لها شطرين، بأن تعرف~${\OLId{latin-ordinary}{f}}_\cardfont{{\OLId{latin-ordinary}{b}}}(\beta) = {\OLId{latin-ordinary}{f}}(\beta, {\OLMathNumeral{0}})$ لكل
+$\beta \in \cardfont{{\OLId{latin-ordinary}{b}}}$، و${\OLId{latin-ordinary}{f}}_\cardfont{{\OLId{latin-ordinary}{c}}}(\gamma) = {\OLId{latin-ordinary}{f}}(\gamma, {\OLMathNumeral{1}})$
+لكل $\gamma \in \cardfont{{\OLId{latin-ordinary}{c}}}$. فتكون الخريطة
+${\OLId{latin-ordinary}{f}} \mapsto \tuple{{\OLId{latin-ordinary}{f}}_{\cardfont{{\OLId{latin-ordinary}{b}}}}, {\OLId{latin-ordinary}{f}}_{\cardfont{{\OLId{latin-ordinary}{c}}}}}$
+!!a{bijection} من
+$\funfromto{\cardfont{{\OLId{latin-ordinary}{b}}} \disjointsum \cardfont{{\OLId{latin-ordinary}{c}}}}{\cardfont{{\OLId{latin-ordinary}{a}}}}$ إلى
+$(\funfromto{\cardfont{{\OLId{latin-ordinary}{b}}}}{\cardfont{{\OLId{latin-ordinary}{a}}}} \times
+\funfromto{\cardfont{{\OLId{latin-ordinary}{c}}}}{\cardfont{{\OLId{latin-ordinary}{a}}}})$.
+
+وأما الدعوى الثانية، فخذ دالة
+${\OLId{latin-ordinary}{f}} \colon \cardfont{{\OLId{latin-ordinary}{c}}} \to
+(\funfromto{\cardfont{{\OLId{latin-ordinary}{b}}}}{\cardfont{{\OLId{latin-ordinary}{a}}}})$؛ فلكل
+$\gamma \in \cardfont{{\OLId{latin-ordinary}{c}}}$ دالة
+${\OLId{latin-ordinary}{f}}(\gamma) \colon \cardfont{{\OLId{latin-ordinary}{b}}} \to \cardfont{{\OLId{latin-ordinary}{a}}}$. ثم عرّف
+${\OLId{latin-ordinary}{f}}^*(\beta, \gamma) = ({\OLId{latin-ordinary}{f}}(\gamma))(\beta)$ لكل
+$\tuple{\beta, \gamma} \in \cardfont{{\OLId{latin-ordinary}{b}}} \times \cardfont{{\OLId{latin-ordinary}{c}}}$.
+وعندئذ تكون الخريطة~${\OLId{latin-ordinary}{f}} \mapsto {\OLId{latin-ordinary}{f}}^*$ هي !!a{bijection} من
+$\funfromto{\cardfont{{\OLId{latin-ordinary}{c}}}}{(\funfromto{\cardfont{{\OLId{latin-ordinary}{b}}}}{\cardfont{{\OLId{latin-ordinary}{a}}}})}$
+إلى $\funfromto{\cardfont{{\OLId{latin-ordinary}{b}}} \times \cardfont{{\OLId{latin-ordinary}{c}}}}{\cardfont{{\OLId{latin-ordinary}{a}}}}$.
+\end{proof}
+
+ومقصودنا أن نهتدي إلى سبيل ميسرة لحساب
+$\cardexpo{\cardfont{{\OLId{latin-ordinary}{a}}}}{\cardfont{{\OLId{latin-ordinary}{b}}}}$ إذا كانت الكاردينالات غير
+متناهية. والحكم الآتي يخطو بنا إلى ذلك خطوة نافعة.
+
+\begin{prop}\ollabel{cardexpo2reduct}
+إذا كان ${\OLMathNumeral{2}} \leq \cardfont{{\OLId{latin-ordinary}{a}}} \leq \cardfont{{\OLId{latin-ordinary}{b}}}$ وكان
+$\cardfont{{\OLId{latin-ordinary}{b}}}$ غير متناهٍ، فإن
+$\cardexpo{\cardfont{{\OLId{latin-ordinary}{a}}}}{\cardfont{{\OLId{latin-ordinary}{b}}}} =
+\cardexpo{{\OLMathNumeral{2}}}{\cardfont{{\OLId{latin-ordinary}{b}}}}$.
+\end{prop}
+
+\begin{proof}
+\begin{align*}
+	\cardexpo{{\OLMathNumeral{2}}}{\cardfont{{\OLId{latin-ordinary}{b}}}} &\leq
+	\cardexpo{\cardfont{{\OLId{latin-ordinary}{a}}}}{\cardfont{{\OLId{latin-ordinary}{b}}}}\text{، لأن ${\OLMathNumeral{2}} \leq \cardfont{{\OLId{latin-ordinary}{a}}}$}\\
+	&\leq \cardexpo{(\cardexpo{{\OLMathNumeral{2}}}{\cardfont{{\OLId{latin-ordinary}{a}}}})}{\cardfont{{\OLId{latin-ordinary}{b}}}}
+	\text{، بحسب \olref[opps]{cantorcor}}\\
+	&= \cardexpo{{\OLMathNumeral{2}}}{\cardfont{{\OLId{latin-ordinary}{a}}} \cardtimes \cardfont{{\OLId{latin-ordinary}{b}}}}
+	\text{، بحسب \olref{simplecardexpo}} \\
+	&= \cardexpo{{\OLMathNumeral{2}}}{\cardfont{{\OLId{latin-ordinary}{b}}}}
+	\text{، بحسب \olref[simp]{cardplustimesmax}}.
+\end{align*}
+\end{proof}
+
+ولا مطمع في الغالب أن نمضي في التبسيط أبعد من هذا، إذ
+$\cardfont{{\OLId{latin-ordinary}{b}}} < \cardexpo{{\OLMathNumeral{2}}}{\cardfont{{\OLId{latin-ordinary}{b}}}}$ بحسب
+\olref[card-arithmetic][opps]{cantorcor}. بيد أن هذا لا يفصل لنا القول
+في~$\cardexpo{\cardfont{{\OLId{latin-ordinary}{a}}}}{\cardfont{{\OLId{latin-ordinary}{b}}}}$ حين
+$\cardfont{{\OLId{latin-ordinary}{b}}} < \cardfont{{\OLId{latin-ordinary}{a}}}$. فإن كان~$\cardfont{{\OLId{latin-ordinary}{b}}}$
+متناهيًا، فالأمر معلوم.
+
+\begin{prop}
+إذا كان $\cardfont{{\OLId{latin-ordinary}{a}}}$ غير متناهٍ وكان ${\OLMathNumeral{0}}<{\OLId{latin-ordinary}{n}}<\omega$، فإن
+$\cardexpo{\cardfont{{\OLId{latin-ordinary}{a}}}}{{\OLId{latin-ordinary}{n}}} = \cardfont{{\OLId{latin-ordinary}{a}}}$.
+\end{prop}
+
+\begin{proof}
+$\cardexpo{\cardfont{{\OLId{latin-ordinary}{a}}}}{{\OLId{latin-ordinary}{n}}} = \cardfont{{\OLId{latin-ordinary}{a}}} \cardtimes \cardfont{{\OLId{latin-ordinary}{a}}}
+\cardtimes \ldots \cardtimes \cardfont{{\OLId{latin-ordinary}{a}}} = \cardfont{{\OLId{latin-ordinary}{a}}}$، بحسب
+\olref[simp]{cardplustimesmax}.
+\end{proof}
+\noindent
+بل يمكننا في أحوال أخرى أيضًا أن نحصر مقدار
+$\cardexpo{\cardfont{{\OLId{latin-ordinary}{a}}}}{\cardfont{{\OLId{latin-ordinary}{b}}}}$ حصرًا تامًا.
+
+\begin{prop}
+إذا كان ${\OLMathNumeral{2}} \leq \cardfont{{\OLId{latin-ordinary}{b}}} < \cardfont{{\OLId{latin-ordinary}{a}}} \leq
+\cardexpo{{\OLMathNumeral{2}}}{\cardfont{{\OLId{latin-ordinary}{b}}}}$ وكان $\cardfont{{\OLId{latin-ordinary}{b}}}$ غير متناهٍ، فإن
+$\cardexpo{\cardfont{{\OLId{latin-ordinary}{a}}}}{\cardfont{{\OLId{latin-ordinary}{b}}}} =
+\cardexpo{{\OLMathNumeral{2}}}{\cardfont{{\OLId{latin-ordinary}{b}}}}$.
+\end{prop}
+
+\begin{proof}
+$\cardexpo{{\OLMathNumeral{2}}}{\cardfont{{\OLId{latin-ordinary}{b}}}}\leq
+\cardexpo{\cardfont{{\OLId{latin-ordinary}{a}}}}{\cardfont{{\OLId{latin-ordinary}{b}}}} \leq
+\cardexpo{(\cardexpo{{\OLMathNumeral{2}}}{\cardfont{{\OLId{latin-ordinary}{b}}}})}{\cardfont{{\OLId{latin-ordinary}{b}}}} =
+\cardexpo{{\OLMathNumeral{2}}}{\cardfont{{\OLId{latin-ordinary}{b}}}\cardtimes\cardfont{{\OLId{latin-ordinary}{b}}}} =
+\cardexpo{{\OLMathNumeral{2}}}{\cardfont{{\OLId{latin-ordinary}{b}}}}$، وذلك بحجة من جنس ما مضى في
+\olref{cardexpo2reduct}.
+\end{proof}
+\noindent
+فإذا جاوزنا هذا الحد اشتد لطف المسألة ودقتها.
+
+\end{document}

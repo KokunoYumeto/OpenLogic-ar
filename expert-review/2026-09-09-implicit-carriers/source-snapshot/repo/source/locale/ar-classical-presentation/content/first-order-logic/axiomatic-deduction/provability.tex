@@ -1,0 +1,380 @@
+% Part: first-order-logic 
+% Chapter: axiomatic-deduction 
+% Section: provability
+
+% verification of properties of provability needed for maximally 
+% consistent sets in the completeness chapter.
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{axd}{prv}}
+      {\olfileid{pl}{axd}{prv}}
+
+\olsection{أحكام \usetoken{S}{derivability}}
+
+\begin{editorial}
+نحمل في هذا القسم شرط الجدة في~\QR{} على الفروض المستعملة فعلًا في البرهان،
+لا على ما لم يستعمل من أعضاء مجموعة محيطة. وهذا اصطلاح الدعم المنتهي الذي
+تقوم عليه الرتابة والتراص.
+\end{editorial}
+
+\begin{prop}[الرتابة] متى كان~${\OLId{greek-variable}{Gamma}} \subseteq {\OLId{greek-variable}{Delta}}$ و
+${\OLId{greek-variable}{Gamma}} \Proves !A$، كان كذلك~${\OLId{greek-variable}{Delta}} \Proves !A$.
+\end{prop}
+
+\begin{proof}
+كل~${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \subseteq {\OLId{greek-variable}{Gamma}}$ منتهية داخلة أيضاً في~${\OLId{greek-variable}{Delta}}$ دخول
+مجموعة جزئية منتهية؛ فـ!!a{derivation} لـ${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \Proves !A$ تشهد
+كذلك بـ${\OLId{greek-variable}{Delta}} \Proves !A$.
+\end{proof}
+
+\begin{prop}\ollabel{prop:provability}
+يكون~${\OLId{greek-variable}{Gamma}} \Proves !A$ إذا وفقط إذا كانت~${\OLId{greek-variable}{Gamma}}\cup \{\lnot!A \}$
+غير متسقة.
+\end{prop}
+
+\begin{proof}
+أما أولاً فافرض~${\OLId{greek-variable}{Gamma}} \Proves !A$. توجد إذن مجموعة منتهية
+${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \subseteq {\OLId{greek-variable}{Gamma}}$ تحقق~${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \Proves !A$، فيلزم
+${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \cup \{\lnot !A\} \Proves \lfalse$، فتكون
+${\OLId{greek-variable}{Gamma}} \cup \{\lnot !A\}$ غير متسقة. وأما العكس، فلتكن
+${\OLId{greek-variable}{Gamma}} \cup \{\lnot !A\}$ غير متسقة؛ فعندئذ توجد مجموعة منتهية
+${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \subseteq {\OLId{greek-variable}{Gamma}}$ تحقق
+${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \cup \{\lnot !A\} \Proves \lfalse$. وتنتج مبرهنة الاستنباط
+${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \Proves \lnot !A \lif \lfalse$، وتعطينا \textbf{Ax0}
+${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \Proves (\lnot !A \lif \lfalse) \lif !A$. فنستخرج بـMP
+${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \Proves !A$، ثم بالرتابة~${\OLId{greek-variable}{Gamma}} \Proves !A$.
+\end{proof}
+
+\begin{prop}\ollabel{prop:provability-properties}
+\begin{enumerate}
+\item \ollabel{prop:provability-contr} متى كان~${\OLId{greek-variable}{Gamma}} \Proves !A$ و
+${\OLId{greek-variable}{Gamma}} \cup \{ !A\} \Proves \lfalse$، كانت~${\OLId{greek-variable}{Gamma}}$ غير متسقة.
+
+\item \ollabel{prop:provability-lnot} متى كان
+${\OLId{greek-variable}{Gamma}} \cup \{!A\} \Proves \lfalse$، كان
+${\OLId{greek-variable}{Gamma}} \Proves \lnot !A$.
+
+\item \ollabel{prop:provability-exhaustive} متى كان
+${\OLId{greek-variable}{Gamma}} \cup \{!A\} \Proves \lfalse$ و
+${\OLId{greek-variable}{Gamma}} \cup \{\lnot !A\} \Proves \lfalse$، كان
+${\OLId{greek-variable}{Gamma}} \Proves \lfalse$.
+
+\tagitem{prvOr}{\ollabel{prop:provability-lor-left} متى كان
+${\OLId{greek-variable}{Gamma}} \cup \{!A\} \Proves \lfalse$ و
+${\OLId{greek-variable}{Gamma}} \cup \{!B\} \Proves \lfalse$، كان
+${\OLId{greek-variable}{Gamma}} \cup \{!A \lor !B\} \Proves \lfalse$.}{}
+
+\tagitem{prvOr}{\ollabel{prop:provability-lor-right} متى كان
+${\OLId{greek-variable}{Gamma}} \Proves !A$ أو~${\OLId{greek-variable}{Gamma}} \Proves !B$، كان
+${\OLId{greek-variable}{Gamma}} \Proves !A \lor !B$.}{}
+
+\tagitem{prvAnd}{\ollabel{prop:provability-land-left} متى كان
+${\OLId{greek-variable}{Gamma}} \Proves !A \land !B$، كان~${\OLId{greek-variable}{Gamma}} \Proves !A$ و
+${\OLId{greek-variable}{Gamma}} \Proves !B$.}{}
+
+\tagitem{prvAnd}{\ollabel{prop:provability-land-right} متى كان
+${\OLId{greek-variable}{Gamma}} \Proves !A$ و${\OLId{greek-variable}{Gamma}} \Proves !B$، كان
+${\OLId{greek-variable}{Gamma}} \Proves !A \land !B$.}{}
+
+\tagitem{prvIf}{\ollabel{prop:provability-mp} متى كان
+${\OLId{greek-variable}{Gamma}} \Proves !A$ و${\OLId{greek-variable}{Gamma}} \Proves !A \lif !B$، كان
+${\OLId{greek-variable}{Gamma}} \Proves !B$.}{}
+
+\tagitem{prvIf}{\ollabel{prop:provability-lif} متى كان
+${\OLId{greek-variable}{Gamma}} \Proves \lnot !A$ أو~${\OLId{greek-variable}{Gamma}} \Proves !B$، كان
+${\OLId{greek-variable}{Gamma}} \Proves !A \lif !B$.}{}
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+\begin{enumerate}
+\item عيّن مجموعتين منتهيتين~${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}},{\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}} \subseteq {\OLId{greek-variable}{Gamma}}$
+تحققان~${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \cup \{!A\} \Proves \lfalse$ و
+${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}} \Proves !A$.
+
+\begin{derivation}
+1. & ${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \cup \{!A\} \Proves \lfalse$ & فرض \\
+2. & ${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}} \Proves !A$ & فرض \\
+3. & ${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \cup {\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}} \Proves \lfalse$ & القطع \\
+\end{derivation}
+
+وبما أن~${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \subseteq {\OLId{greek-variable}{Gamma}}$ و${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}} \subseteq {\OLId{greek-variable}{Gamma}}$، فإن
+${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \cup {\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}} \subseteq {\OLId{greek-variable}{Gamma}}$، فينتج
+${\OLId{greek-variable}{Gamma}} \Proves \lfalse$.
+
+\item عيّن مجموعة منتهية~${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \subseteq {\OLId{greek-variable}{Gamma}}$ تحقق
+${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \cup\{!A\} \Proves \lfalse$.
+
+\begin{derivation}
+1. & ${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \cup\{!A\} \Proves \lfalse$ & فرض \\
+2. & ${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \Proves !A \lif \lfalse$ & مبرهنة الاستنباط \\
+3. & ${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \Proves (!A \lif \lfalse) \lif \lnot !A$ & Ax0 \\
+4. & ${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \Proves \lnot !A$ & MP 2, 3 \\
+\end{derivation}
+
+\item عيّن مجموعتين منتهيتين~${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}},{\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}} \subseteq {\OLId{greek-variable}{Gamma}}$
+تحققان~${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \cup \{ !A \} \Proves \lfalse$ و
+${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}} \cup \{\lnot !A \} \Proves \lfalse$.
+
+\begin{derivation}
+1. & ${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \cup\{!A\} \Proves \lfalse$ & فرض \\
+2. & ${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \Proves !A \lif \lfalse$ & مبرهنة الاستنباط \\
+3. & ${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}} \cup \{\lnot !A \} \Proves \lfalse$ & فرض \\
+4. & ${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \Proves (!A \lif \lfalse) \lif \lnot !A$ & Ax0 \\
+5. & ${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \Proves \lnot !A$ & MP 2, 4 \\
+6. & ${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \cup {\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}} \Proves \lfalse$ & القطع 3، 5 \\
+\end{derivation}
+
+ولما كان~${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \subseteq {\OLId{greek-variable}{Gamma}}$ و${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}} \subseteq {\OLId{greek-variable}{Gamma}}$، كان
+${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \cup {\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}} \subseteq {\OLId{greek-variable}{Gamma}}$؛ ولذلك
+${\OLId{greek-variable}{Gamma}} \Proves \lfalse$.
+
+% prop:provability-lor-left 
+\tagitem{defOr}{}{
+\iftag{probOr}{تمرين.}{تمرين.}}
+
+% prop:provability-lor-right 
+\tagitem{defOr}{}{\iftag{probOr}{تمرين.}{
+لنفرض~${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \Proves !A$.
+
+\begin{derivation}
+1. & ${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \Proves !A$ & فرض \\
+2. & ${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \Proves !A \lif (!A \lor !B)$ & Ax0 \\
+3. & ${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \Proves !A \lor !B$ & MP 1, 2 \\
+\end{derivation}
+
+فينتج~${\OLId{greek-variable}{Gamma}} \Proves !A \lor !B$. ونظير ذلك يبرهن حالة
+${\OLId{greek-variable}{Gamma}} \Proves !B$.}}
+
+% prop:provability-land-left 
+\tagitem{defAnd}{}{\iftag{probAnd}{تمرين}{
+لنفرض~${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \Proves !A \land !B$.
+
+\begin{derivation}
+1. & ${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \Proves !A \land !B$ & فرض \\
+2. & ${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \Proves (!A\land !B) \lif !A $ & Ax0 \\
+3. & ${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \Proves !A$ & MP 1, 2 \\
+\end{derivation}
+
+فيلزم~${\OLId{greek-variable}{Gamma}} \Proves !A$. وعلى مثاله يبيّن~!!{derivation} آخر أن
+${\OLId{greek-variable}{Gamma}} \Proves !B$.}}
+
+% prop:provability-land-right
+\tagitem{defAnd}{}{\iftag{probAnd}{تمرين.}{تمرين.}}
+
+% prop:provability-mp 
+\tagitem{defIf}{}{\iftag{probIf}{تمرين.}{لنفرض
+${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \Proves !A$ و${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \Proves !A \lif !B$ معًا.
+
+\begin{derivation}
+1. & ${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \Proves !A$ & فرض \\
+2. & ${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \Proves !A \lif !B $ & فرض \\
+3. & ${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \Proves !B$ & MP 1, 2 \\
+\end{derivation}
+
+ولأن~${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \subseteq {\OLId{greek-variable}{Gamma}}$، لزم~${\OLId{greek-variable}{Gamma}} \Proves !B$.}}
+
+% prop:provability-lif 
+\tagitem{defIf}{}{\iftag{probIf}{تمرين.}{افرض أولاً
+${\OLId{greek-variable}{Gamma}} \Proves \lnot !A$.
+
+\begin{derivation}
+1. & ${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \Proves \lnot !A$ & فرض \\
+2. & ${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \Proves \lnot !A \lif (!A \lif !B) $ & Ax0 \\
+3. & ${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \Proves !A \lif !B$ & MP 1, 2 \\
+\end{derivation}
+
+وأما حالة~${\OLId{greek-variable}{Gamma}} \Proves !B$ فبرهانها نظير ذلك:
+
+\begin{derivation}
+1. & ${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \Proves !B$ & فرض \\
+2. & ${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \Proves !B \lif (!A \lif !B) $ & Ax0 \\
+3. & ${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \Proves !A \lif !B$ & MP 1, 2 \\
+\end{derivation}}}
+
+\end{enumerate}
+\end{proof}
+
+\begin{probtag}{probOr,probAnd,probIf}
+أتمم برهان~\olref[fol][axd][prv]{prop:provability-properties}.
+\end{probtag}
+
+\begin{thm}[التعميم]\ollabel{thm:Generalization}
+متى كان~${\OLId{greek-variable}{Gamma}} \Proves !A$، ولم يكن~${\OLId{latin-ordinary}{x}}$ حراً في شيء من~!!{formula}
+${\OLId{greek-variable}{Gamma}}$، كان~${\OLId{greek-variable}{Gamma}} \Proves \lforall[{\OLId{latin-ordinary}{x}}][!A]$.
+\end{thm}
+
+\begin{proof}
+خذ برهانًا منتهيًا لـ~$!A$ من~${\OLId{greek-variable}{Gamma}}$، ولتكن~${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}}$ مجموعة
+!!{formula}s~${\OLId{greek-variable}{Gamma}}$ التي عمل بها. وعيّن~!!a{constant}~${\OLId{latin-ordinary}{c}}\in\mathcal E$ لا يقع في
+شيء من صيغ البرهان، ولا يساوي أي ثابت مميز عمل لتسويغ تطبيق لـ~\QR{} فيه،
+ثم أحل~${\OLId{latin-ordinary}{c}}$ محل كل وقوع حر لـ~${\OLId{latin-ordinary}{x}}$ في كل خطوة. ولما كان
+${\OLId{latin-ordinary}{x}}$ غير حر في~${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}}$ بقيت خطوات الفرض على حالها. ويظهر بالاستقراء في
+خطوات البرهان أن المتتالية المستحدثة برهان لـ
+$\Subst{!A}{{\OLId{latin-ordinary}{c}}}{{\OLId{latin-ordinary}{x}}}$ من~${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}}$: فالتعويض يحفظ أمثلة مسلمات الروابط
+والمكمّمات ومسلّمات الهوية ذات الحدود المغلقة، ويحفظ MP وصورتي~\QR{}،
+ويحفظ كذلك شرط الجدة فيهما لأن~${\OLId{latin-ordinary}{c}}$ اختير جديدًا. فيكون
+${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \Proves \Subst{!A}{{\OLId{latin-ordinary}{c}}}{{\OLId{latin-ordinary}{x}}}$.
+
+ثم نشتق:
+\begin{derivation}
+1. & ${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \Proves \Subst{!A}{{\OLId{latin-ordinary}{c}}}{{\OLId{latin-ordinary}{x}}}$ & كما تقدم \\
+2. & ${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \Proves \Subst{!A}{{\OLId{latin-ordinary}{c}}}{{\OLId{latin-ordinary}{x}}} \lif
+  (\ltrue \lif \Subst{!A}{{\OLId{latin-ordinary}{c}}}{{\OLId{latin-ordinary}{x}}})$ & \olref[prp]{ax:lif1} \\
+3. & ${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \Proves \ltrue \lif \Subst{!A}{{\OLId{latin-ordinary}{c}}}{{\OLId{latin-ordinary}{x}}}$ & MP 1، 2 \\
+4. & ${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \Proves \ltrue \lif \lforall[{\OLId{latin-ordinary}{x}}][!A]$ & \QR{} 3 \\
+5. & ${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \Proves \ltrue$ & \olref[prp]{ax:ltrue} \\
+6. & ${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \Proves \lforall[{\OLId{latin-ordinary}{x}}][!A]$ & MP 4، 5
+\end{derivation}
+وإنما جاز~\QR{} في الخطوة~\OLClassicalDigits{4} لأن~${\OLId{latin-ordinary}{c}}$ لا يقع في~${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}}$ ولا في~$\ltrue$
+ولا في~$!A$.
+ثم تعطينا الرتابة~${\OLId{greek-variable}{Gamma}} \Proves \lforall[{\OLId{latin-ordinary}{x}}][!A]$، وهو المطلوب.
+\end{proof}
+
+\begin{thm}\ollabel{thm:WeakGen}
+(\emph{التعميم الضعيف على الثوابت}) إذا كان~${\OLId{greek-variable}{Gamma}} \Proves !A$، وكان
+${\OLId{latin-ordinary}{c}}$ !!a{constant} لا يقع في~${\OLId{greek-variable}{Gamma}}$، وُجد متغير~${\OLId{latin-ordinary}{x}}$ لا يقع في~$!A$
+يحقق~${\OLId{greek-variable}{Gamma}} \Proves \lforall[{\OLId{latin-ordinary}{x}}][\Subst{!A}{{\OLId{latin-ordinary}{x}}}{{\OLId{latin-ordinary}{c}}}]$، ويخلو البرهان
+من~${\OLId{latin-ordinary}{c}}$.
+\end{thm}
+
+\begin{proof}
+% تصحيح برهاني (0643-I2): عولجت مسلّمتا المكمّمات وصورتا QR بتجديد الثوابت ثم تبديل ثابتين تقابليًا.
+خذ برهانًا منتهيًا~$\Pi$ لـ~$!A$ من~${\OLId{greek-variable}{Gamma}}$، وليكن~${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}}$
+دعمه المتناهي. طبّق \olref[qua]{lem:qr-freshening} على~$\Pi$ مع طائفة
+المنع~$\{{\OLId{latin-ordinary}{c}}\}$؛ فينتج برهان~$\Pi^*$ خاتمته~$!A$ ودعمه داخل
+في~${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}}$، ولا يساوي~${\OLId{latin-ordinary}{c}}$ شيء من ثوابته المميزة. ولما كان~$\Pi^*$
+متناهيًا، اختر~${\OLId{latin-ordinary}{d}}\in\mathcal E$ لا يقع في شيء من صيغه ولا يساوي ثابتًا
+مميزًا على عقدة~\QR{} فيه. وعيّن متغيرًا~${\OLId{latin-ordinary}{x}}$ لا يقع في~$!A$.
+
+ولتكن~$\rho$ إعادة التسمية المنتظمة التقابلية للثوابت التي تبدّل~${\OLId{latin-ordinary}{c}}$ و~${\OLId{latin-ordinary}{d}}$
+وتثبت ما سواهما؛ وضع~$!A_{\OLId{latin-ordinary}{d}}=\rho(!A)$، واكتب هذا اختصارًا~$!A[{\OLId{latin-ordinary}{d}}/{\OLId{latin-ordinary}{c}}]$
+لأن~${\OLId{latin-ordinary}{d}}$ لم يقع في~$!A$. فإذا أجرينا~$\rho$ في كل سطر
+من~$\Pi^*$ حصلنا على برهان لـ~$\rho(!A)$ من~${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}}$. فدعم هذا البرهان باق لأن~${\OLId{latin-ordinary}{c}}$
+لا يقع في~${\OLId{greek-variable}{Gamma}}$، ومسلمات الروابط محفوظة. وتبقى مسلّمتا المكمّمات حالتين
+منهما، إذ تبعث~$\rho$ كل حد مغلق~${\OLId{latin-ordinary}{t}}$ إلى الحد المغلق~$\rho({\OLId{latin-ordinary}{t}})$؛ وتحفظ
+كذلك مسلمات الهوية ذات الحدود المغلقة، وتحفظ~MP. وأما تطبيق~\QR{} ذو
+الثابت المميز~${\OLId{latin-ordinary}{a}}$، فإن~${\OLId{latin-ordinary}{a}}\ne {\OLId{latin-ordinary}{c}},{\OLId{latin-ordinary}{d}}$ بالتجديد؛ فتحفظ~$\rho$ مقدمته
+وخاتمته وشرط الجدة في كلتا صورتي~\QR{}.
+ويخلو البرهان الناتج من~${\OLId{latin-ordinary}{c}}$.
+
+ضع~$!A_{\OLId{latin-ordinary}{x}}=\Subst{!A}{{\OLId{latin-ordinary}{x}}}{{\OLId{latin-ordinary}{c}}}$. ولأن~${\OLId{latin-ordinary}{x}}$ و~${\OLId{latin-ordinary}{d}}$ لا يقعان في~$!A$، فإحلال~${\OLId{latin-ordinary}{d}}$
+محل~${\OLId{latin-ordinary}{x}}$ في~$!A_{\OLId{latin-ordinary}{x}}$ هو~$!A_{\OLId{latin-ordinary}{d}}=\rho(!A)=!A[{\OLId{latin-ordinary}{d}}/{\OLId{latin-ordinary}{c}}]$ نفسه. ومن البرهان المتقدم نشتق:
+\begin{derivation}
+1. & ${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \Proves !A_{\OLId{latin-ordinary}{d}}$ & كما تقدم \\
+2. & ${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \Proves !A_{\OLId{latin-ordinary}{d}} \lif (\ltrue \lif !A_{\OLId{latin-ordinary}{d}})$
+   & \olref[prp]{ax:lif1} \\
+3. & ${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \Proves \ltrue \lif !A_{\OLId{latin-ordinary}{d}}$ & MP 1، 2 \\
+4. & ${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \Proves \ltrue \lif \lforall[{\OLId{latin-ordinary}{x}}][!A_{\OLId{latin-ordinary}{x}}]$
+   & \QR{} 3، بالثابت المميز~${\OLId{latin-ordinary}{d}}$ \\
+5. & ${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \Proves \ltrue$ & \olref[prp]{ax:ltrue} \\
+6. & ${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \Proves \lforall[{\OLId{latin-ordinary}{x}}][!A_{\OLId{latin-ordinary}{x}}]$ & MP 4، 5
+\end{derivation}
+ويجوز~\QR{} لأن~${\OLId{latin-ordinary}{d}}$ لا يقع في~${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}}$ ولا في~$\ltrue$ ولا في~$!A_{\OLId{latin-ordinary}{x}}$.
+ثم تعطينا الرتابة
+${\OLId{greek-variable}{Gamma}} \Proves \lforall[{\OLId{latin-ordinary}{x}}][\Subst{!A}{{\OLId{latin-ordinary}{x}}}{{\OLId{latin-ordinary}{c}}}]$ ببرهان يخلو من~${\OLId{latin-ordinary}{c}}$.
+\end{proof}
+
+\begin{explain}
+نريد أن نستبدل بشرط~\olref{thm:WeakGen}، وهو ألا يقع~${\OLId{latin-ordinary}{x}}$ في~$!A$
+البتة، شرطين أضعف منه: ألا يكون~${\OLId{latin-ordinary}{x}}$ حراً في~$!A$، وأن يكون~!!{free for}
+${\OLId{latin-ordinary}{c}}$ فيها. ويتأتى ذلك بتبديل~!!{variable} مقيد، فنثبت هذا أولاً.
+\end{explain}
+
+\begin{lem}
+\ollabel{lem:free-for}
+متى كان~${\OLId{latin-ordinary}{x}}$ حراً لـ${\OLId{latin-ordinary}{c}}$ في~$!A$، ولم يكن~${\OLId{latin-ordinary}{y}}$ حراً في~$!A$، كان~${\OLId{latin-ordinary}{x}}$
+!!{free for}~${\OLId{latin-ordinary}{y}}$ في~$\Subst{!A}{{\OLId{latin-ordinary}{y}}}{{\OLId{latin-ordinary}{c}}}$.
+\end{lem}
+
+\begin{proof}
+لو لم يكن~${\OLId{latin-ordinary}{x}}$ !!{free for}~${\OLId{latin-ordinary}{y}}$ في~$\Subst{!A}{{\OLId{latin-ordinary}{y}}}{{\OLId{latin-ordinary}{c}}}$، لوقع ظهور حر
+لـ${\OLId{latin-ordinary}{y}}$ في~$\Subst{!A}{{\OLId{latin-ordinary}{y}}}{{\OLId{latin-ordinary}{c}}}$ داخل مجال السور~$\lforall[{\OLId{latin-ordinary}{x}}]$. ولكن~${\OLId{latin-ordinary}{y}}$
+ليس حراً في~$!A$ بحكم الفرض، فكل ظهور من هذه الظهورات آت من التعويض
+$\Subst{}{{\OLId{latin-ordinary}{y}}}{{\OLId{latin-ordinary}{c}}}$. فيقع إذن ظهور لـ${\OLId{latin-ordinary}{c}}$ داخل مجال~$\lforall[{\OLId{latin-ordinary}{x}}]$، ولا
+يكون~${\OLId{latin-ordinary}{x}}$ !!{free for}~${\OLId{latin-ordinary}{c}}$ في~$!A$.
+\end{proof}
+
+\begin{lem}[تغيير المتغير المقيد]
+\ollabel{lem:ChangeBdVar}
+متى لم يكن~${\OLId{latin-ordinary}{x}}$ ولا~${\OLId{latin-ordinary}{y}}$ حراً في~$!A$، وكان كل منهما~!!{free for}~${\OLId{latin-ordinary}{c}}$ في
+$!A$، كان
+$\Proves \lforall[{\OLId{latin-ordinary}{x}}][\Subst{!A}{{\OLId{latin-ordinary}{x}}}{{\OLId{latin-ordinary}{c}}}] \equiv
+\lforall[{\OLId{latin-ordinary}{y}}][\Subst{!A}{{\OLId{latin-ordinary}{y}}}{{\OLId{latin-ordinary}{c}}}]$، ولا يتضمن البرهان~${\OLId{latin-ordinary}{c}}$.
+\end{lem}
+
+\begin{proof}
+بحسب الفروض، يكون~${\OLId{latin-ordinary}{y}}$ !!{free for}~${\OLId{latin-ordinary}{c}}$ في~$!A$، ولا يكون~${\OLId{latin-ordinary}{x}}$ حراً
+في~$!A$؛ فباللمّة المتقدمة~\olref{lem:free-for} يكون~${\OLId{latin-ordinary}{y}}$
+!!{free for}~${\OLId{latin-ordinary}{x}}$ في~$\Subst{!A}{{\OLId{latin-ordinary}{x}}}{{\OLId{latin-ordinary}{c}}}$. فتكون
+$\lforall[{\OLId{latin-ordinary}{x}}][\Subst{!A}{{\OLId{latin-ordinary}{x}}}{{\OLId{latin-ordinary}{c}}} \lif
+\Subst{!A}{{\OLId{latin-ordinary}{x}}}{{\OLId{latin-ordinary}{c}}} \Subst{}{{\OLId{latin-ordinary}{y}}}{{\OLId{latin-ordinary}{x}}}]$ مسلّمة (\textbf{Ax1}). ولما كان~${\OLId{latin-ordinary}{x}}$
+غير حر في~$!A$، كان
+$\Subst{!A}{{\OLId{latin-ordinary}{x}}}{{\OLId{latin-ordinary}{c}}} \Subst{}{{\OLId{latin-ordinary}{y}}}{{\OLId{latin-ordinary}{x}}} = \Subst{!A}{{\OLId{latin-ordinary}{y}}}{{\OLId{latin-ordinary}{c}}}$؛ ومن ثم
+\[
+\Proves \lforall[{\OLId{latin-ordinary}{x}}][\Subst{!A}{{\OLId{latin-ordinary}{x}}}{{\OLId{latin-ordinary}{c}}}] \lif \Subst{!A}{{\OLId{latin-ordinary}{y}}}{{\OLId{latin-ordinary}{c}}}.
+\]
+ثم تعطينا مبرهنة الاستنباط
+$\lforall[{\OLId{latin-ordinary}{x}}][\Subst{!A}{{\OLId{latin-ordinary}{x}}}{{\OLId{latin-ordinary}{c}}}] \Proves \Subst{!A}{{\OLId{latin-ordinary}{y}}}{{\OLId{latin-ordinary}{c}}}$. ولما كان~${\OLId{latin-ordinary}{y}}$
+غير حر في~$!A$، لم يكن حراً كذلك في
+$\lforall[{\OLId{latin-ordinary}{x}}][\Subst{!A}{{\OLId{latin-ordinary}{x}}}{{\OLId{latin-ordinary}{c}}}]$؛ فيعطينا التعميم، مع اختيار ثابته
+المميز المستجد من~$\mathcal E\setminus\{{\OLId{latin-ordinary}{c}}\}$،
+$\lforall[{\OLId{latin-ordinary}{x}}][\Subst{!A}{{\OLId{latin-ordinary}{x}}}{{\OLId{latin-ordinary}{c}}}] \Proves
+\lforall[{\OLId{latin-ordinary}{y}}][\Subst{!A}{{\OLId{latin-ordinary}{y}}}{{\OLId{latin-ordinary}{c}}}]$، ثم تعود مبرهنة الاستنباط فتعطي
+$\Proves \lforall[{\OLId{latin-ordinary}{x}}][\Subst{!A}{{\OLId{latin-ordinary}{x}}}{{\OLId{latin-ordinary}{c}}}] \lif
+\lforall[{\OLId{latin-ordinary}{y}}][\Subst{!A}{{\OLId{latin-ordinary}{y}}}{{\OLId{latin-ordinary}{c}}}]$. وأما الجهة الأخرى
+$\Proves \lforall[{\OLId{latin-ordinary}{y}}][\Subst{!A}{{\OLId{latin-ordinary}{y}}}{{\OLId{latin-ordinary}{c}}}] \lif
+\lforall[{\OLId{latin-ordinary}{x}}][\Subst{!A}{{\OLId{latin-ordinary}{x}}}{{\OLId{latin-ordinary}{c}}}]$ فبرهانها متناظر تماماً، مع اختيار الثابت
+المميز على الوجه نفسه. وجميع الصيغ والخطوات المتقدمة خالية من~${\OLId{latin-ordinary}{c}}$، كما أن
+بناء مبرهنة الاستنباط لا يستحدثه؛ فتنتج القضية بـTaut ببرهان يخلو من~${\OLId{latin-ordinary}{c}}$.
+\end{proof}
+
+\begin{thm}[التعميم القوي على الثوابت]
+\ollabel{thm:StrongGen}
+متى كان~${\OLId{greek-variable}{Gamma}} \Proves !A$، ولم يقع~!!{constant}~${\OLId{latin-ordinary}{c}}$ في~${\OLId{greek-variable}{Gamma}}$،
+وكان~${\OLId{latin-ordinary}{x}}$ غير حر في~$!A$ ولكنه~!!{free for}~${\OLId{latin-ordinary}{c}}$ فيها، كان
+${\OLId{greek-variable}{Gamma}} \Proves \lforall[{\OLId{latin-ordinary}{x}}][\Subst{!A}{{\OLId{latin-ordinary}{x}}}{{\OLId{latin-ordinary}{c}}}]$.
+\end{thm}
+
+\begin{proof}
+لما كان~${\OLId{greek-variable}{Gamma}} \Proves !A$، وكان~${\OLId{latin-ordinary}{c}}$ غير واقع في~${\OLId{greek-variable}{Gamma}}$، أوجد لنا
+التعميم الضعيف~!!a{variable}~${\OLId{latin-ordinary}{y}}$ لا يقع في~$!A$، بحيث
+${\OLId{greek-variable}{Gamma}} \Proves \lforall[{\OLId{latin-ordinary}{y}}][\Subst{!A}{{\OLId{latin-ordinary}{y}}}{{\OLId{latin-ordinary}{c}}}]$. ولأن~${\OLId{latin-ordinary}{y}}$ لا يقع في
+$!A$ البتة، فهو غير حر فيها، وهو~!!{free for}~${\OLId{latin-ordinary}{c}}$ فيها أيضاً. وإذا كان
+${\OLId{latin-ordinary}{x}}$، على ما في فرض المبرهنة، غير حر في~$!A$ و!!{free for}~${\OLId{latin-ordinary}{c}}$ فيها،
+تمت شروط تبديل~!!{variable} مقيد، فيكون
+$\Proves \lforall[{\OLId{latin-ordinary}{x}}][\Subst{!A}{{\OLId{latin-ordinary}{x}}}{{\OLId{latin-ordinary}{c}}}] \equiv
+\lforall[{\OLId{latin-ordinary}{y}}][\Subst{!A}{{\OLId{latin-ordinary}{y}}}{{\OLId{latin-ordinary}{c}}}]$، ويلزم منه
+${\OLId{greek-variable}{Gamma}} \Proves \lforall[{\OLId{latin-ordinary}{x}}][\Subst{!A}{{\OLId{latin-ordinary}{x}}}{{\OLId{latin-ordinary}{c}}}]$.
+\end{proof}
+
+\begin{thm}
+\ollabel{thm:provability-quantifiers}
+\begin{tagenumerate}{prvEx,prvAll}
+\tagitem{prvEx}{متى كان~${\OLId{greek-variable}{Gamma}} \Proves !A({\OLId{latin-ordinary}{t}})$، كان
+${\OLId{greek-variable}{Gamma}} \Proves \lexists[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$.}{}
+\tagitem{prvAll}{متى كان~${\OLId{greek-variable}{Gamma}} \Proves \lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$، كان
+${\OLId{greek-variable}{Gamma}} \Proves !A({\OLId{latin-ordinary}{t}})$.}{}
+\end{tagenumerate}
+\end{thm}
+
+\begin{proof}
+\begin{tagenumerate}{prvEx,prvAll}
+%%Need axioms for exists
+\tagitem{prvEx}{تمرين.}{}
+\tagitem{prvAll}{لنفرض~${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \Proves \lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$.
+
+\begin{derivation}
+1. & ${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \Proves \lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$ & فرض \\
+2. & ${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \Proves \lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})] \lif \Subst{!A}{{\OLId{latin-ordinary}{t}}}{{\OLId{latin-ordinary}{x}}}$ & Ax1 \\
+3. & ${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \Proves \Subst{!A}{{\OLId{latin-ordinary}{t}}}{{\OLId{latin-ordinary}{x}}}$ & MP 1, 2 \\
+\end{derivation}}{}
+
+\end{tagenumerate}
+\end{proof}
+
+\end{document}

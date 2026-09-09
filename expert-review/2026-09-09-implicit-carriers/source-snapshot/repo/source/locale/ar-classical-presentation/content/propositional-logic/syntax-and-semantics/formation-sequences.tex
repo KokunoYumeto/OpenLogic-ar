@@ -1,0 +1,136 @@
+% Part: first-order-logic
+% Chapter: syntax-and-semantics
+% Section: formation-sequences
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pl}{syn}{fseq}
+
+\olsection{متتاليات التكوين}
+
+من أحسن طرق البحث أن تُعرّف !!{formula}s استقرائيًا، ثم تُثبت خواص
+!!{formula}s بالاستقراء. ومع حسن هذه الطريقة وقلة مؤونتها، قد ينفع أن نتابع بناء
+!!{formula}s من مبادئه خطوة خطوة. ولأجل هذا نأخذ الآن بمفهوم
+\emph{متتالية التكوين}.
+
+\begin{defn}[متتاليات التكوين للصيغ]
+\ollabel{defn:fseq-frm}
+تكون المتتالية المنتهية $\tuple{!A_{\OLMathNumeral{0}},\dotsc,!A_{\OLId{latin-ordinary}{n}}}$ المكوّنة من سلاسل
+رموز من اللغة~$\Lang L_{\OLMathNumeral{0}}$ \emph{متتالية تكوين} لـ~$!A$ إذا كان
+$!A \ident !A_{\OLId{latin-ordinary}{n}}$، وكان، لكل ${\OLId{latin-ordinary}{i}} \leq {\OLId{latin-ordinary}{n}}$، إما أن تكون $!A_{\OLId{latin-ordinary}{i}}$ صيغة ذرية،
+وإما أن يوجد ${\OLId{latin-ordinary}{j}},{\OLId{latin-ordinary}{k}} < {\OLId{latin-ordinary}{i}}$ بحيث تتحقق إحدى الحالات الآتية:
+\begin{enumerate}
+    \tagitem{prvNot}{$!A_{\OLId{latin-ordinary}{i}} \ident \lnot !A_{\OLId{latin-ordinary}{j}}$.}{}%
+    \tagitem{prvAnd}{$!A_{\OLId{latin-ordinary}{i}} \ident (!A_{\OLId{latin-ordinary}{j}} \land !A_{\OLId{latin-ordinary}{k}})$.}{}%
+    \tagitem{prvOr}{$!A_{\OLId{latin-ordinary}{i}} \ident (!A_{\OLId{latin-ordinary}{j}} \lor !A_{\OLId{latin-ordinary}{k}})$.}{}%
+    \tagitem{prvIf}{$!A_{\OLId{latin-ordinary}{i}} \ident (!A_{\OLId{latin-ordinary}{j}} \lif !A_{\OLId{latin-ordinary}{k}})$.}{}%
+    \tagitem{prvIff}{$!A_{\OLId{latin-ordinary}{i}} \ident (!A_{\OLId{latin-ordinary}{j}} \liff !A_{\OLId{latin-ordinary}{k}})$.}{}%
+\end{enumerate}
+\end{defn}
+
+\begin{ex}
+\[
+\tuple{
+    \Obj p_{\OLMathNumeral{0}},
+    \Obj p_{\OLMathNumeral{1}},
+    (\Obj p_{\OLMathNumeral{1}} \land \Obj p_{\OLMathNumeral{0}}),
+    \lnot (\Obj p_{\OLMathNumeral{1}} \land \Obj p_{\OLMathNumeral{0}})
+}
+\]
+هي متتالية تكوين لـ
+$\lnot (\Obj p_{\OLMathNumeral{1}} \land \Obj p_{\OLMathNumeral{0}})$، وكذلك
+\[
+\tuple{
+    \Obj p_{\OLMathNumeral{0}},
+    \Obj p_{\OLMathNumeral{1}},
+    \Obj p_{\OLMathNumeral{0}},
+    (\Obj p_{\OLMathNumeral{1}} \land \Obj p_{\OLMathNumeral{0}}),
+    (\Obj p_{\OLMathNumeral{0}} \lif \Obj p_{\OLMathNumeral{1}}),
+    \lnot (\Obj p_{\OLMathNumeral{1}} \land \Obj p_{\OLMathNumeral{0}})
+}.
+\]
+%
+وكما يتبين من المثال الثاني، قد تحتوي متتاليات التكوين على «حشو»:
+أي صيغ زائدة أو لا تسهم في البناء.
+\end{ex}
+
+\begin{prop}
+\ollabel{prop:formed}
+لكل !!{formula}~$!A$ في~$\Frm[{\OLId{latin-looped}{L}}_{\OLMathNumeral{0}}]$ متتالية تكوين.
+\end{prop}
+
+\begin{proof}
+افترض أن $!A$ ذرية. عندئذ تكون المتتالية~$\tuple{!A}$ متتالية
+تكوين لـ~$!A$.
+%
+وافترض الآن أن لـ~$!B$ و~$!C$ متتاليتا تكوين
+$\tuple{!B_{\OLMathNumeral{0}},\dotsc,!B_{\OLId{latin-ordinary}{n}}}$ و~$\tuple{!C_{\OLMathNumeral{0}},\dotsc,!C_{\OLId{latin-ordinary}{m}}}$،
+على الترتيب.
+%
+\begin{enumerate}
+  \tagitem{prvNot}{إذا كان $!A \ident \lnot !B$،
+      فتكون $\tuple{!B_{\OLMathNumeral{0}},\dotsc,!B_{\OLId{latin-ordinary}{n}},\lnot !B_{\OLId{latin-ordinary}{n}}}$
+      متتالية تكوين لـ~$!A$.}{}
+  \tagitem{prvAnd}{إذا كان $!A \ident (!B \land !C)$،
+      فتكون $\tuple{!B_{\OLMathNumeral{0}},\dotsc,!B_{\OLId{latin-ordinary}{n}},!C_{\OLMathNumeral{0}},\dotsc,!C_{\OLId{latin-ordinary}{m}},(!B_{\OLId{latin-ordinary}{n}} \land !C_{\OLId{latin-ordinary}{m}})}$
+      متتالية تكوين لـ~$!A$.}{}
+  \tagitem{prvOr}{إذا كان $!A \ident (!B \lor !C)$،
+      فتكون $\tuple{!B_{\OLMathNumeral{0}},\dotsc,!B_{\OLId{latin-ordinary}{n}},!C_{\OLMathNumeral{0}},\dotsc,!C_{\OLId{latin-ordinary}{m}},(!B_{\OLId{latin-ordinary}{n}} \lor !C_{\OLId{latin-ordinary}{m}})}$
+      متتالية تكوين لـ~$!A$.}{}
+  \tagitem{prvIf}{إذا كان $!A \ident (!B \lif !C)$،
+      فتكون $\tuple{!B_{\OLMathNumeral{0}},\dotsc,!B_{\OLId{latin-ordinary}{n}},!C_{\OLMathNumeral{0}},\dotsc,!C_{\OLId{latin-ordinary}{m}},(!B_{\OLId{latin-ordinary}{n}} \lif !C_{\OLId{latin-ordinary}{m}})}$
+      متتالية تكوين لـ~$!A$.}{}
+  \tagitem{prvIff}{إذا كان $!A \ident (!B \liff !C)$،
+      فتكون $\tuple{!B_{\OLMathNumeral{0}},\dotsc,!B_{\OLId{latin-ordinary}{n}},!C_{\OLMathNumeral{0}},\dotsc,!C_{\OLId{latin-ordinary}{m}},(!B_{\OLId{latin-ordinary}{n}} \liff !C_{\OLId{latin-ordinary}{m}})}$
+      متتالية تكوين لـ~$!A$.}{}
+\end{enumerate}
+وبحسب مبدأ الاستقراء على !!{formula}s، لكل
+!!{formula} متتالية تكوين.
+\end{proof}
+
+وأما العكس فيصح أيضًا، وإثباته يبيّن أن طريقتي تعريف الصيغ متكافئتان، لا تختلف نتائجهما. ومن ثمرته أن نثبت مبرهنات الصيغ بالاستقراء العادي على أطوال متتاليات تكوينها.
+
+\begin{lem}
+\ollabel{lem:fseq-init}
+افترض أن $\tuple{!A_{\OLMathNumeral{0}},\dotsc,!A_{\OLId{latin-ordinary}{n}}}$ متتالية تكوين لـ~$!A_{\OLId{latin-ordinary}{n}}$، وأن
+${\OLId{latin-ordinary}{k}} \leq {\OLId{latin-ordinary}{n}}$. عندئذ تكون $\tuple{!A_{\OLMathNumeral{0}},\dotsc,!A_{\OLId{latin-ordinary}{k}}}$ متتالية تكوين
+لـ~$!A_{\OLId{latin-ordinary}{k}}$.
+\end{lem}
+
+\begin{proof}
+تمرين.
+\end{proof}
+
+\begin{thm}
+\ollabel{thm:fseq-frm-equiv}
+$\Frm[{\OLId{latin-looped}{L}}_{\OLMathNumeral{0}}]$ هي مجموعة جميع سلاسل الرموز في اللغة~$\Lang L_{\OLMathNumeral{0}}$ التي
+لها متتالية تكوين.
+\end{thm}
+
+\begin{proof}
+اجعل ${\OLId{latin-looped}{F}}$ مجموعة سلاسل رموز اللغة~$\Lang L_{\OLMathNumeral{0}}$ التي لها متتالية تكوين.
+قد ثبت في \olref[pl][syn][fseq]{prop:formed} أن
+$\Frm[{\OLId{latin-looped}{L}}_{\OLMathNumeral{0}}] \subseteq {\OLId{latin-looped}{F}}$؛ فليس علينا إلا إثبات الاحتواء الآخر.
+
+لتكن لـ~$!A$ متتالية تكوين $\tuple{!A_{\OLMathNumeral{0}},\dotsc,!A_{\OLId{latin-ordinary}{n}}}$.
+والمطلوب $!A \in \Frm[{\OLId{latin-looped}{L}}_{\OLMathNumeral{0}}]$؛ فنستقرئ استقراء قويًا على~${\OLId{latin-ordinary}{n}}$.
+نفرض أن كل سلسلة ذات متتالية تكوين رقم حدّها الأخير
+${\OLId{latin-ordinary}{m}} < {\OLId{latin-ordinary}{n}}$ تقع في~$\Frm[{\OLId{latin-looped}{L}}_{\OLMathNumeral{0}}]$. وتعريف متتالية التكوين يقسم الأمر: إما أن $!A_{\OLId{latin-ordinary}{n}}$ ذرية، وإما أن يوجد ${\OLId{latin-ordinary}{j}},{\OLId{latin-ordinary}{k}} < {\OLId{latin-ordinary}{n}}$ وتتحقق إحدى الصور الآتية:
+\begin{enumerate}
+    \tagitem{prvNot}{$!A_{\OLId{latin-ordinary}{n}} \ident \lnot !A_{\OLId{latin-ordinary}{j}}$.}{}%
+    \tagitem{prvAnd}{$!A_{\OLId{latin-ordinary}{n}} \ident (!A_{\OLId{latin-ordinary}{j}} \land !A_{\OLId{latin-ordinary}{k}})$.}{}%
+    \tagitem{prvOr}{$!A_{\OLId{latin-ordinary}{n}} \ident (!A_{\OLId{latin-ordinary}{j}} \lor !A_{\OLId{latin-ordinary}{k}})$.}{}%
+    \tagitem{prvIf}{$!A_{\OLId{latin-ordinary}{n}} \ident (!A_{\OLId{latin-ordinary}{j}} \lif !A_{\OLId{latin-ordinary}{k}})$.}{}%
+    \tagitem{prvIff}{$!A_{\OLId{latin-ordinary}{n}} \ident (!A_{\OLId{latin-ordinary}{j}} \liff !A_{\OLId{latin-ordinary}{k}})$.}{}%
+\end{enumerate}
+فإن كانت $!A_{\OLId{latin-ordinary}{n}}$ ذرية، فقد حصل
+$!A_{\OLId{latin-ordinary}{n}} \in \Frm[{\OLId{latin-looped}{L}}_{\OLMathNumeral{0}}]$. وإلا فلنأخذ حالة $!A \ident
+(!A_{\OLId{latin-ordinary}{j}} \land !A_{\OLId{latin-ordinary}{k}})$. تقضي \olref[pl][syn][fseq]{lem:fseq-init} بأن
+$\tuple{!A_{\OLMathNumeral{0}},\dotsc,!A_{\OLId{latin-ordinary}{j}}}$ و~$\tuple{!A_{\OLMathNumeral{0}},\dotsc,!A_{\OLId{latin-ordinary}{k}}}$ متتاليتا تكوين لـ~$!A_{\OLId{latin-ordinary}{j}}$ و~$!A_{\OLId{latin-ordinary}{k}}$ على الترتيب. وهما مقطعان ابتدائيان حقيقيان من متتالية~$!A$؛ فرقم الحد الأخير في كل منهما أقل من~${\OLId{latin-ordinary}{n}}$. وبفرض الاستقراء يقع~$!A_{\OLId{latin-ordinary}{j}}$ و~$!A_{\OLId{latin-ordinary}{k}}$ في
+$\Frm[{\OLId{latin-looped}{L}}_{\OLMathNumeral{0}}]$. ومن تعريف !!a{formula} يلزم أن
+$(!A_{\OLId{latin-ordinary}{j}} \land !A_{\OLId{latin-ordinary}{k}})$ كذلك. وسائر الحالات تُحمل على هذا المسلك.
+\end{proof}
+
+\end{document}

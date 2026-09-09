@@ -1,0 +1,179 @@
+% Part: lambda-calculus
+% Chapter: syntax
+% Section: substitution
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{syn}{sub}
+\olsection{الإحلال}
+
+\begin{explain}
+لما كانت المتغيرات الحرة تحيل إلى متغيرات البيئة، جاز أن نضع قيمة بعينها موضع المتغير الحر.
+فقد نريد، مثلًا، أن نستبدل~${\OLId{latin-ordinary}{f}}$ في
+$\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{f}} {\OLId{latin-ordinary}{x}}]$ بحد معين، هو دالة الهوية~$\lambd[{\OLId{latin-ordinary}{y}}][{\OLId{latin-ordinary}{y}}]$، فنحصل على
+$\lambd[{\OLId{latin-ordinary}{x}}][(\lambd[{\OLId{latin-ordinary}{y}}][{\OLId{latin-ordinary}{y}}]) {\OLId{latin-ordinary}{x}}]$. وهذا الاستبدال، أعني وضع حدود لامبدا موضع المتغيرات الحرة، هو الإحلال.
+\end{explain}
+
+\begin{defn}[الإحلال] \ollabel{defn:substitution}
+  \emph{إحلال} الحد~${\OLId{latin-looped}{N}}$ محل المتغير~${\OLId{latin-ordinary}{x}}$ في الحد~${\OLId{latin-looped}{M}}$، ورمزه
+  $\Subst{{\OLId{latin-looped}{M}}}{{\OLId{latin-looped}{N}}}{{\OLId{latin-ordinary}{x}}}$، يحدّد بالقواعد الاستقرائية التالية:
+  \begin{enumerate}
+    \item $\Subst{{\OLId{latin-ordinary}{x}}}{{\OLId{latin-looped}{N}}}{{\OLId{latin-ordinary}{x}}} = {\OLId{latin-looped}{N}}$. \ollabel{defn:substitution-1} 
+    \item $\Subst{{\OLId{latin-ordinary}{y}}}{{\OLId{latin-looped}{N}}}{{\OLId{latin-ordinary}{x}}}  = {\OLId{latin-ordinary}{y}}$ متى كان~${\OLId{latin-ordinary}{x}} \neq {\OLId{latin-ordinary}{y}}$. \ollabel{defn:substitution-2} 
+    \item $\Subst{PQ}{{\OLId{latin-looped}{N}}}{{\OLId{latin-ordinary}{x}}}  = (\Subst{{\OLId{latin-looped}{P}}}{{\OLId{latin-looped}{N}}}{{\OLId{latin-ordinary}{x}}}) (\Subst{{\OLId{latin-looped}{Q}}}{{\OLId{latin-looped}{N}}}{{\OLId{latin-ordinary}{x}}})$.
+      \ollabel{def:substitution-3}
+    \item $\Subst{(\lambd[{\OLId{latin-ordinary}{y}}][{\OLId{latin-looped}{P}}])}{{\OLId{latin-looped}{N}}}{{\OLId{latin-ordinary}{x}}} = \lambd[{\OLId{latin-ordinary}{y}}][\Subst{{\OLId{latin-looped}{P}}}{{\OLId{latin-looped}{N}}}{{\OLId{latin-ordinary}{x}}}]$،
+      بشرط~${\OLId{latin-ordinary}{x}} \neq {\OLId{latin-ordinary}{y}}$ و${\OLId{latin-ordinary}{y}} \notin \FV{{\OLId{latin-looped}{N}}}$؛ وإذا تخلف الشرط فالإحلال غير معرّف.
+      \ollabel{defn:substitution-4}
+  \end{enumerate}
+\end{defn}
+
+\begin{explain}
+وجه اشتراط~${\OLId{latin-ordinary}{x}}
+\neq {\OLId{latin-ordinary}{y}}$ في~\olref{defn:substitution}\olref{defn:substitution-4}
+أننا لا نريد وضع~${\OLId{latin-looped}{N}}$ محل الوقائع \emph{المقيدة} للمتغير~${\OLId{latin-ordinary}{x}}$
+في~${\OLId{latin-looped}{M}}$. فإذا طلبنا، مثلًا، حساب~$\Subst{\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{x}}]}{{\OLId{latin-ordinary}{y}}}{{\OLId{latin-ordinary}{x}}}$، امتنع أن نجعل نتيجته~$\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{y}}]$.
+بل هذا الإحلال غير معرّف في التعريف الذي تعمدنا جعله جزئيًا.
+وسيأتي علاج ذلك بتحويل~${\OLId{greek-variable}{alpha}}$، أي بتغيير أسماء المتغيرات المقيدة.
+
+ولإحلال~${\OLId{latin-looped}{N}}$ محل~${\OLId{latin-ordinary}{x}}$ في~$\lambd[{\OLId{latin-ordinary}{y}}][{\OLId{latin-looped}{P}}]$ شرط آخر، هو~${\OLId{latin-ordinary}{y}}
+\notin \FV{{\OLId{latin-looped}{N}}}$.
+فلا يجوز في هذا التعريف الجزئي أن نحل~${\OLId{latin-ordinary}{y}}$ محل~${\OLId{latin-ordinary}{x}}$ في~$\lambd[{\OLId{latin-ordinary}{y}}][{\OLId{latin-ordinary}{x}}]$؛
+إذ يكون~$\Subst{\lambd[{\OLId{latin-ordinary}{y}}][{\OLId{latin-ordinary}{x}}]}{{\OLId{latin-ordinary}{y}}}{{\OLId{latin-ordinary}{x}}}$ غير معرّف. ولو أجرينا الاستبدال بلا احتراز لحصلنا على
+$\lambd[{\OLId{latin-ordinary}{y}}][{\OLId{latin-ordinary}{y}}]$، وهو يمثل دالة تأخذ وسيطًا ثم تردّه كما هو.
+لكن~$\lambd[{\OLId{latin-ordinary}{y}}][{\OLId{latin-ordinary}{x}}]$ يمثل دالة تردّ دائمًا الحد~${\OLId{latin-ordinary}{x}}$، أو ما يدل عليه~${\OLId{latin-ordinary}{x}}$.
+فالمطلوب في الحقيقة دالة تأخذ وسيطًا وتهمله، ثم تردّ متغير البيئة~${\OLId{latin-ordinary}{y}}$.
+ولا يستقيم هذا إلا بتغيير اسم المتغير المقيد~${\OLId{latin-ordinary}{y}}$ أولًا؛ وسيأتي في تحويل ألفا حل هذه المسألة.
+\end{explain}
+
+\begin{prob}
+  احسب الإحلالات الآتية، وبيّن ما ليس معرّفًا منها:
+  \begin{enumerate}
+  \item $\Subst{\lambd[{\OLId{latin-ordinary}{y}}][{\OLId{latin-ordinary}{x}}(\lambd[{\OLId{latin-ordinary}{w}}][vwx])]}{(uv)}{{\OLId{latin-ordinary}{x}}}$
+  \item $\Subst{\lambd[{\OLId{latin-ordinary}{y}}][{\OLId{latin-ordinary}{x}}(\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{x}}])]}{(\lambd[{\OLId{latin-ordinary}{y}}][xy])}{{\OLId{latin-ordinary}{x}}}$
+  \item $\Subst{{\OLId{latin-ordinary}{y}}(\lambd[{\OLId{latin-ordinary}{v}}][xv])}{(\lambd[{\OLId{latin-ordinary}{y}}][vy])}{{\OLId{latin-ordinary}{x}}}$
+  \end{enumerate}
+\end{prob}
+
+\begin{thm} \ollabel{thm:notinfv}
+  من~${\OLId{latin-ordinary}{x}} \notin \FV{{\OLId{latin-looped}{M}}}$ يلزم~$\FV{\Subst{{\OLId{latin-looped}{M}}}{{\OLId{latin-looped}{N}}}{{\OLId{latin-ordinary}{x}}}} = \FV{{\OLId{latin-looped}{M}}}$،
+  على شرط أن يكون الطرف الأيسر معرّفًا.
+\end{thm}
+
+\begin{proof}
+  نستقرئ تكوين~${\OLId{latin-looped}{M}}$، فنميز:
+  \begin{enumerate}
+  \item حالة كون~${\OLId{latin-looped}{M}}$ متغيرًا؛ وإثباتها تمرين.
+  \item حالة كون~${\OLId{latin-looped}{M}}$ على صورة~$(PQ)$؛ وإثباتها تمرين.
+  \item حالة كون~${\OLId{latin-looped}{M}}$ على صورة~$\lambd[{\OLId{latin-ordinary}{y}}][{\OLId{latin-looped}{P}}]$. لما كان
+    $\Subst{\lambd[{\OLId{latin-ordinary}{y}}][{\OLId{latin-looped}{P}}]}{{\OLId{latin-looped}{N}}}{{\OLId{latin-ordinary}{x}}}$ معرّفًا، وجب أن يساوي
+    $\lambd[{\OLId{latin-ordinary}{y}}][\Subst{{\OLId{latin-looped}{P}}}{{\OLId{latin-looped}{N}}}{{\OLId{latin-ordinary}{x}}}]$. فيلزم أن يكون
+    $\Subst{{\OLId{latin-looped}{P}}}{{\OLId{latin-looped}{N}}}{{\OLId{latin-ordinary}{x}}}$ معرّفًا، وأن تتحقق أيضًا~${\OLId{latin-ordinary}{x}} \neq {\OLId{latin-ordinary}{y}}$ و${\OLId{latin-ordinary}{y}} \notin \FV{{\OLId{latin-looped}{N}}}$
+    و${\OLId{latin-ordinary}{x}} \notin \FV{{\OLId{latin-looped}{P}}}$. ومن ثم نحصل على
+    \begin{multline*}
+      \FV{\Subst{\lambd[{\OLId{latin-ordinary}{y}}][{\OLId{latin-looped}{P}}]}{{\OLId{latin-looped}{N}}}{{\OLId{latin-ordinary}{x}}}} = \\
+    \begin{aligned}
+      & = \FV{\lambd[{\OLId{latin-ordinary}{y}}][\Subst{{\OLId{latin-looped}{P}}}{{\OLId{latin-looped}{N}}}{{\OLId{latin-ordinary}{x}}}]} &&
+      \text{بموجب \olref{defn:substitution-4}}\\
+      & = \FV{\Subst{{\OLId{latin-looped}{P}}}{{\OLId{latin-looped}{N}}}{{\OLId{latin-ordinary}{x}}}} \setminus \{{\OLId{latin-ordinary}{y}}\} &&
+      \text{بموجب \olref[fv]{def:fv}\olref[fv]{def:fv2}}\\
+      & = \FV{{\OLId{latin-looped}{P}}} \setminus \{{\OLId{latin-ordinary}{y}}\} && \text{بفرض الاستقراء} \\
+      & = \FV{\lambd[{\OLId{latin-ordinary}{y}}][{\OLId{latin-looped}{P}}]} && \text{بموجب \olref[fv]{def:fv}\olref[fv]{def:fv2}}
+    \end{aligned}
+    \end{multline*}
+  \end{enumerate}
+\end{proof}
+
+\begin{prob}
+  أتمّ الحالات المتروكة من برهان~\olref[lam][syn][sub]{thm:notinfv}.
+\end{prob}
+
+\begin{thm} \ollabel{thm:infv}
+  من~${\OLId{latin-ordinary}{x}} \in \FV{{\OLId{latin-looped}{M}}}$ يلزم~$\FV{\Subst{{\OLId{latin-looped}{M}}}{{\OLId{latin-looped}{N}}}{{\OLId{latin-ordinary}{x}}}} = (\FV{{\OLId{latin-looped}{M}}} \setminus
+  \{{\OLId{latin-ordinary}{x}}\}) \cup \FV{{\OLId{latin-looped}{N}}}$، متى كان الطرف الأيسر معرّفًا.
+\end{thm}
+
+\begin{proof}
+  نستقرئ تكوين~${\OLId{latin-looped}{M}}$:
+  \begin{enumerate}
+  \item إن كان~${\OLId{latin-looped}{M}}$ متغيرًا، ترك الإثبات تمرينًا.
+  \item إن كان~${\OLId{latin-looped}{M}}$ على صورة~$PQ$، فإن تعريف
+    $\Subst{(PQ)}{{\OLId{latin-looped}{N}}}{{\OLId{latin-ordinary}{x}}}$ يقتضي أن يساوي
+    $(\Subst{{\OLId{latin-looped}{P}}}{{\OLId{latin-looped}{N}}}{{\OLId{latin-ordinary}{x}}})(\Subst{{\OLId{latin-looped}{Q}}}{{\OLId{latin-looped}{N}}}{{\OLId{latin-ordinary}{x}}})$، وأن يكون الإحلالان معرّفين.
+    ثم إن~${\OLId{latin-ordinary}{x}} \in \FV{PQ}$ يقتضي~${\OLId{latin-ordinary}{x}} \in
+    \FV{{\OLId{latin-looped}{P}}}$ أو~${\OLId{latin-ordinary}{x}} \in \FV{{\OLId{latin-looped}{Q}}}$، وقد يجتمعان. والباقي تمرين.
+  \item إن كان~${\OLId{latin-looped}{M}}$ على صورة~$\lambd[{\OLId{latin-ordinary}{y}}][{\OLId{latin-looped}{P}}]$، فإن تعريف
+    $\Subst{\lambd[{\OLId{latin-ordinary}{y}}][{\OLId{latin-looped}{P}}]}{{\OLId{latin-looped}{N}}}{{\OLId{latin-ordinary}{x}}}$ يقتضي أن يساوي
+    $\lambd[{\OLId{latin-ordinary}{y}}][\Subst{{\OLId{latin-looped}{P}}}{{\OLId{latin-looped}{N}}}{{\OLId{latin-ordinary}{x}}}]$، مع تعريف~$\Subst{{\OLId{latin-looped}{P}}}{{\OLId{latin-looped}{N}}}{{\OLId{latin-ordinary}{x}}}$
+    وتحقق~${\OLId{latin-ordinary}{x}} \neq {\OLId{latin-ordinary}{y}}$ و${\OLId{latin-ordinary}{y}} \notin \FV{{\OLId{latin-looped}{N}}}$. ومن~${\OLId{latin-ordinary}{x}} \in
+    \FV{\lambd[{\OLId{latin-ordinary}{y}}][{\OLId{latin-looped}{P}}]}$ يلزم~${\OLId{latin-ordinary}{x}} \in \FV{{\OLId{latin-looped}{P}}}$ كذلك. فنحسب
+    \begin{multline*}
+      \FV{\Subst{(\lambd[{\OLId{latin-ordinary}{y}}][{\OLId{latin-looped}{P}}])}{{\OLId{latin-looped}{N}}}{{\OLId{latin-ordinary}{x}}}} = \\
+      \begin{aligned}
+      & = \FV{\lambd[{\OLId{latin-ordinary}{y}}][\Subst{{\OLId{latin-looped}{P}}}{{\OLId{latin-looped}{N}}}{{\OLId{latin-ordinary}{x}}}]} \\
+      & = \FV{\Subst{{\OLId{latin-looped}{P}}}{{\OLId{latin-looped}{N}}}{{\OLId{latin-ordinary}{x}}}} \setminus \{{\OLId{latin-ordinary}{y}}\} \\
+      & = ((\FV{{\OLId{latin-looped}{P}}}\setminus\{{\OLId{latin-ordinary}{x}}\})\cup\FV{{\OLId{latin-looped}{N}}})\setminus\{{\OLId{latin-ordinary}{y}}\}
+       && \text{بفرض الاستقراء} \\
+      & = (\FV{{\OLId{latin-looped}{P}}}\setminus\{{\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}}\})\cup\FV{{\OLId{latin-looped}{N}}}
+       && \text{لأن~${\OLId{latin-ordinary}{y}}\notin\FV{{\OLId{latin-looped}{N}}}$} \\
+      & = (\FV{\lambd[{\OLId{latin-ordinary}{y}}][{\OLId{latin-looped}{P}}]} \setminus \{{\OLId{latin-ordinary}{x}}\}) \cup \FV{{\OLId{latin-looped}{N}}}
+      \end{aligned}
+      \end{multline*}
+  \end{enumerate}
+\end{proof}
+
+\begin{prob}
+  أتمّ ما ترك من برهان~\olref[lam][syn][sub]{thm:infv}.
+\end{prob}
+
+\begin{thm}\ollabel{thm:clr}
+  تتحقق~${\OLId{latin-ordinary}{x}} \notin \FV{\Subst{{\OLId{latin-looped}{M}}}{{\OLId{latin-looped}{N}}}{{\OLId{latin-ordinary}{x}}}}$ متى كان الطرف الأيمن معرّفًا
+  وتحقق~${\OLId{latin-ordinary}{x}} \notin \FV{{\OLId{latin-looped}{N}}}$.
+\end{thm}
+
+\begin{proof}
+  إثبات ذلك تمرين.
+\end{proof}
+
+\begin{prob}
+  أقم برهان~\olref[lam][syn][sub]{thm:clr}.
+\end{prob}
+
+\begin{thm}\ollabel{thm:inv}
+  إذا كان~$\Subst{{\OLId{latin-looped}{M}}}{{\OLId{latin-ordinary}{y}}}{{\OLId{latin-ordinary}{x}}}$ معرّفًا، وتحقق~${\OLId{latin-ordinary}{y}} \notin \FV{{\OLId{latin-looped}{M}}}$، لزم
+  $\Subst{\Subst{{\OLId{latin-looped}{M}}}{{\OLId{latin-ordinary}{y}}}{{\OLId{latin-ordinary}{x}}}}{{\OLId{latin-ordinary}{x}}}{{\OLId{latin-ordinary}{y}}} = {\OLId{latin-looped}{M}}$.
+\end{thm}
+
+\begin{proof}
+  نستقرئ تكوين~${\OLId{latin-looped}{M}}$:
+  \begin{enumerate}
+  \item إن كان~${\OLId{latin-looped}{M}}$ متغيرًا~${\OLId{latin-ordinary}{z}}$، فالإثبات تمرين.
+  \item إن كان~${\OLId{latin-looped}{M}}$ على صورة~$(PQ)$، حسبنا
+    \begin{align*}
+      \Subst{\Subst{(PQ)}{{\OLId{latin-ordinary}{y}}}{{\OLId{latin-ordinary}{x}}}}{{\OLId{latin-ordinary}{x}}}{{\OLId{latin-ordinary}{y}}}
+      &=\Subst{((\Subst{{\OLId{latin-looped}{P}}}{{\OLId{latin-ordinary}{y}}}{{\OLId{latin-ordinary}{x}}})(\Subst{{\OLId{latin-looped}{Q}}}{{\OLId{latin-ordinary}{y}}}{{\OLId{latin-ordinary}{x}}}))}{{\OLId{latin-ordinary}{x}}}{{\OLId{latin-ordinary}{y}}} \\
+      &= (\Subst{\Subst{{\OLId{latin-looped}{P}}}{{\OLId{latin-ordinary}{y}}}{{\OLId{latin-ordinary}{x}}}}{{\OLId{latin-ordinary}{x}}}{{\OLId{latin-ordinary}{y}}})(\Subst{\Subst{{\OLId{latin-looped}{Q}}}{{\OLId{latin-ordinary}{y}}}{{\OLId{latin-ordinary}{x}}}}{{\OLId{latin-ordinary}{x}}}{{\OLId{latin-ordinary}{y}}}) \\
+      &= (PQ) \text{ بفرض الاستقراء}
+    \end{align*}
+  \item وإن كان~${\OLId{latin-looped}{M}}$ على صورة~$\lambd[{\OLId{latin-ordinary}{z}}][{\OLId{latin-looped}{N}}]$، اقتضى تعريف
+    $\Subst{\lambd[{\OLId{latin-ordinary}{z}}][{\OLId{latin-looped}{N}}]}{{\OLId{latin-ordinary}{y}}}{{\OLId{latin-ordinary}{x}}}$ أن يكون~${\OLId{latin-ordinary}{z}}\neq {\OLId{latin-ordinary}{x}}$ و${\OLId{latin-ordinary}{z}}\neq {\OLId{latin-ordinary}{y}}$، وأن
+    يكون~$\Subst{{\OLId{latin-looped}{N}}}{{\OLId{latin-ordinary}{y}}}{{\OLId{latin-ordinary}{x}}}$ معرّفًا. ومن~${\OLId{latin-ordinary}{y}}\notin\FV{\lambd[{\OLId{latin-ordinary}{z}}][{\OLId{latin-looped}{N}}]}$
+    و${\OLId{latin-ordinary}{z}}\neq {\OLId{latin-ordinary}{y}}$ يلزم~${\OLId{latin-ordinary}{y}}\notin\FV{{\OLId{latin-looped}{N}}}$. فيصح فرض الاستقراء في الإحلال
+    الداخلي، وتتم كذلك شروط تعريف الإحلال العكسي تحت~$\lambd[{\OLId{latin-ordinary}{z}}]$؛ وعليه
+    \begin{align*}
+      \Subst{\Subst{(\lambd[{\OLId{latin-ordinary}{z}}][{\OLId{latin-looped}{N}}])}{{\OLId{latin-ordinary}{y}}}{{\OLId{latin-ordinary}{x}}}}{{\OLId{latin-ordinary}{x}}}{{\OLId{latin-ordinary}{y}}}\\
+      & = \Subst{(\lambd[{\OLId{latin-ordinary}{z}}][\Subst{{\OLId{latin-looped}{N}}}{{\OLId{latin-ordinary}{y}}}{{\OLId{latin-ordinary}{x}}}])}{{\OLId{latin-ordinary}{x}}}{{\OLId{latin-ordinary}{y}}} \\
+      & = \lambd[{\OLId{latin-ordinary}{z}}][\Subst{\Subst{{\OLId{latin-looped}{N}}}{{\OLId{latin-ordinary}{y}}}{{\OLId{latin-ordinary}{x}}}}{{\OLId{latin-ordinary}{x}}}{{\OLId{latin-ordinary}{y}}}] \\
+      &= \lambd[{\OLId{latin-ordinary}{z}}][{\OLId{latin-looped}{N}}] \text{ بفرض الاستقراء} 
+    \end{align*}
+    % تصحيح مصدر (0361-I1): صُرّح بشروط التعريف والنضارة اللازمة للإحلالين ولفرض الاستقراء.
+  \end{enumerate}
+\end{proof}
+
+\begin{prob}
+  أتمّ برهان~\olref[lam][syn][sub]{thm:inv}.
+\end{prob}
+
+\end{document}

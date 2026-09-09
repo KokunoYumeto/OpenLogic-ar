@@ -1,0 +1,238 @@
+% Part: normal-modal-logic
+% Chapter: completeness
+% Section: frame-completeness
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{com}{fra}
+
+\olsection{تمام الأطر}
+
+ليس تمام~\Log{K} نهاية الانتفاع بالنموذج القانوني.
+فمتى ثبت أن النموذج القانوني لنسق جهوي آخر يستوفي خاصية الإطار
+المقابلة لبديهياته، امتد إليه برهان التمام. ونبدأ بالخصائص الآتية.
+
+\begin{thm}\ollabel{thm:completeframeprops}
+  % تصحيح اتساق (0449-I1): النموذج القانوني نموذج غير خالٍ عند اتساق النسق.
+  إذا كان منطق جهوي نظامي متسق~$\Sigma$ يحوي إحدى ال!!{formula}s الواردة
+  في الجانب الأيسر من~\olref{tab:correspondencetable}، فإن النموذج
+  القانوني لـ~$\Sigma$ يملك الخاصية المقابلة في الجانب الأيمن.
+\end{thm}
+
+\begin{table}[htp]
+  \centering
+    \begin{tabular}{| l || l |}
+      \hline
+      \emph{إذا كانت $\Sigma$ تحوي \dots} & \emph{\dots فإن النموذج
+        القانوني لـ$\Sigma$ يكون:} \\
+      \hline \hline
+      \Ax{D}:\;\; $\Box!A \lif \Diamond !A$ & \quad متسلسلًا؛ \\
+      \hline
+      \Ax{T}:\;\; $\Box!A \lif !A$ &\quad انعكاسيًا؛\\
+      \hline
+      \Ax{B}: \;\;$!A \lif \Box\Diamond!A$ &\quad متناظرًا؛ \\
+      \hline
+      \Ax{4}: \;\; $\Box!A \lif \Box\Box!A$ & \quad متعديًا؛ \\
+      \hline
+      \Ax{5}: \;\; $\Diamond !A \lif \Box\Diamond!A$& \quad إقليديًا.\\
+      \hline
+    \end{tabular}
+    \caption{وقائع المقابلة الأساسية.}
+    \ollabel{tab:correspondencetable}
+\end{table}
+
+\begin{proof}
+  نفصل البرهان بحسب كل بديهية وما يقابلها من خصائص العلاقة.
+
+  لنفرض أن~$\Sigma$ تحوي~\Ax{D}، ولنأخذ~${\OLId{greek-variable}{Delta}} \in {\OLId{latin-looped}{W}}^\Sigma$.
+  المطلوب عالم~${\OLId{greek-variable}{Delta}}'$ يحقق~${\OLId{latin-looped}{R}}^\Sigma {\OLId{greek-variable}{Delta}}{\OLId{greek-variable}{Delta}}'$.
+  ويكفي لهذا اتساق~$\Box^{-{\OLMathNumeral{1}}}{\OLId{greek-variable}{Delta}}$ بالنسبة إلى~$\Sigma$:
+  إذ تتيح مبرهنة ليندنباوم عندئذ مجموعة $\Sigma$-متسقة تامة
+  ${\OLId{greek-variable}{Delta}}' \supseteq \Box^{-{\OLMathNumeral{1}}}{\OLId{greek-variable}{Delta}}$، فيلزم بتعريف~${\OLId{latin-looped}{R}}^\Sigma$
+  \iftag{prvBox}{}{و\olref[mod]{lem:box-iff-diamond} }أن
+  ${\OLId{latin-looped}{R}}^\Sigma {\OLId{greek-variable}{Delta}}{\OLId{greek-variable}{Delta}}'$.
+  فلنفرض نقيض ما نحتاج إليه، وهو أن~$\Box^{-{\OLMathNumeral{1}}}{\OLId{greek-variable}{Delta}}$
+  \emph{ليست} $\Sigma$-متسقة، أي $\Box^{-{\OLMathNumeral{1}}}{\OLId{greek-variable}{Delta}} \Proves[\Sigma] \lfalse$.
+  تقتضي~\olref[mod]{lem:box2} أن
+  ${\OLId{greek-variable}{Delta}} \Proves[\Sigma] \Box\lfalse$.
+  وبما أن~$\Sigma$ تحوي~\Ax{D} يلزم~${\OLId{greek-variable}{Delta}} \Proves[\Sigma] \Diamond\lfalse$.
+  لكن نظامية~$\Sigma$ تقتضي~$\Sigma \Proves \lnot\Diamond \lfalse$
+  (\olref[prf][nor]{prop:notDiamondBot})، ومن ثم
+  ${\OLId{greek-variable}{Delta}} \Proves[\Sigma] \lnot\Diamond \lfalse$.
+  فاجتمع اشتقاق الصيغة ونفيها، وخولف اتساق~${\OLId{greek-variable}{Delta}}$.
+
+  وأما إذا حوت~$\Sigma$ البديهية~\Ax{T}، فأخذنا~${\OLId{greek-variable}{Delta}} \in {\OLId{latin-looped}{W}}^\Sigma$،
+  كان المطلوب~${\OLId{latin-looped}{R}}^\Sigma {\OLId{greek-variable}{Delta}}{\OLId{greek-variable}{Delta}}$؛ أي\iftag{prvBox}{}{ بحسب
+  \olref[mod]{lem:box-iff-diamond}،} احتواء
+  $\Box^{-{\OLMathNumeral{1}}}{\OLId{greek-variable}{Delta}} \subseteq {\OLId{greek-variable}{Delta}}$.
+  وكلما كان~$\Box!A \in {\OLId{greek-variable}{Delta}}$ اقتضت~\Ax{T} والإغلاق الاستنتاجي
+  أن~$!A \in {\OLId{greek-variable}{Delta}}$، فتم هذا الاحتواء.
+
+  والآن افترض أن~$\Sigma$ تحوي~\Ax{B}، وافترض
+  ${\OLId{latin-looped}{R}}^\Sigma {\OLId{greek-variable}{Delta}}{\OLId{greek-variable}{Delta}}'$ من أجل~${\OLId{greek-variable}{Delta}}$، ${\OLId{greek-variable}{Delta}}' \in {\OLId{latin-looped}{W}}^\Sigma$.
+  علينا إثبات~${\OLId{latin-looped}{R}}^\Sigma {\OLId{greek-variable}{Delta}}'{\OLId{greek-variable}{Delta}}$؛ أي،\iftag{prvBox}{ أن
+    $\Box^{-{\OLMathNumeral{1}}}{\OLId{greek-variable}{Delta}}' \subseteq {\OLId{greek-variable}{Delta}}$. وبحسب
+    \olref[mod]{lem:box-iff-diamond}، يكافئ ذلك أن}{}
+  $\Diamond{\OLId{greek-variable}{Delta}} \subseteq {\OLId{greek-variable}{Delta}}'$. فافترض~$!A \in {\OLId{greek-variable}{Delta}}$.
+  تقتضي~\Ax{B} أن~$\Box\Diamond!A \in {\OLId{greek-variable}{Delta}}$ أيضًا. ومن الفرض
+  ${\OLId{latin-looped}{R}}^\Sigma {\OLId{greek-variable}{Delta}}{\OLId{greek-variable}{Delta}}'$\iftag{prvBox}{}{ ومع
+    \olref[mod]{lem:box-iff-diamond}} نحصل على
+  $\Box^{-{\OLMathNumeral{1}}}{\OLId{greek-variable}{Delta}} \subseteq {\OLId{greek-variable}{Delta}}'$، ومن ثم
+  $\Diamond!A \in {\OLId{greek-variable}{Delta}}'$، كما هو مطلوب.
+
+  والآن افترض أن~$\Sigma$ تحوي~\Ax{4}، وافترض
+  ${\OLId{latin-looped}{R}}^\Sigma {\OLId{greek-variable}{Delta}}_{\OLMathNumeral{1}}{\OLId{greek-variable}{Delta}}_{\OLMathNumeral{2}}$ و${\OLId{latin-looped}{R}}^\Sigma {\OLId{greek-variable}{Delta}}_{\OLMathNumeral{2}}{\OLId{greek-variable}{Delta}}_{\OLMathNumeral{3}}$.
+  علينا إثبات~${\OLId{latin-looped}{R}}^\Sigma {\OLId{greek-variable}{Delta}}_{\OLMathNumeral{1}}{\OLId{greek-variable}{Delta}}_{\OLMathNumeral{3}}$. وينتج من الفرضين
+  \iftag{prvBox}{}{ومن~\olref[mod]{lem:box-iff-diamond}} أن
+  $\Box^{-{\OLMathNumeral{1}}}{\OLId{greek-variable}{Delta}}_{\OLMathNumeral{1}} \subseteq {\OLId{greek-variable}{Delta}}_{\OLMathNumeral{2}}$ و
+  $\Box^{-{\OLMathNumeral{1}}}{\OLId{greek-variable}{Delta}}_{\OLMathNumeral{2}} \subseteq {\OLId{greek-variable}{Delta}}_{\OLMathNumeral{3}}$. ولإثبات
+  ${\OLId{latin-looped}{R}}^\Sigma {\OLId{greek-variable}{Delta}}_{\OLMathNumeral{1}}{\OLId{greek-variable}{Delta}}_{\OLMathNumeral{3}}$، يكفي أن نبين
+  $\Box^{-{\OLMathNumeral{1}}}{\OLId{greek-variable}{Delta}}_{\OLMathNumeral{1}} \subseteq {\OLId{greek-variable}{Delta}}_{\OLMathNumeral{3}}$. فلتكن
+  $!B \in \Box^{-{\OLMathNumeral{1}}}{\OLId{greek-variable}{Delta}}_{\OLMathNumeral{1}}$؛ أي~$\Box!B \in {\OLId{greek-variable}{Delta}}_{\OLMathNumeral{1}}$. وتقتضي
+  \Ax{4} أن~$\Box\Box!B \in {\OLId{greek-variable}{Delta}}_{\OLMathNumeral{1}}$ أيضًا؛ وبالفرض نحصل، أولًا،
+  على~$\Box!B \in {\OLId{greek-variable}{Delta}}_{\OLMathNumeral{2}}$، وثانيًا، على~$!B \in {\OLId{greek-variable}{Delta}}_{\OLMathNumeral{3}}$، كما هو
+  مطلوب.
+
+  والآن افترض أن~$\Sigma$ تحوي~\Ax{5}، وافترض
+  ${\OLId{latin-looped}{R}}^\Sigma {\OLId{greek-variable}{Delta}}_{\OLMathNumeral{1}}{\OLId{greek-variable}{Delta}}_{\OLMathNumeral{2}}$ و${\OLId{latin-looped}{R}}^\Sigma {\OLId{greek-variable}{Delta}}_{\OLMathNumeral{1}}{\OLId{greek-variable}{Delta}}_{\OLMathNumeral{3}}$.
+  علينا إثبات~${\OLId{latin-looped}{R}}^\Sigma {\OLId{greek-variable}{Delta}}_{\OLMathNumeral{2}}{\OLId{greek-variable}{Delta}}_{\OLMathNumeral{3}}$. يعطينا الفرض الأول
+  $\Box^{-{\OLMathNumeral{1}}}{\OLId{greek-variable}{Delta}}_{\OLMathNumeral{1}} \subseteq {\OLId{greek-variable}{Delta}}_{\OLMathNumeral{2}}$\iftag{prvBox}{}{ بحسب
+    \olref[mod]{lem:box-iff-diamond}}، ويكافئ الفرض الثاني
+  $\Diamond{\OLId{greek-variable}{Delta}}_{\OLMathNumeral{3}} \subseteq {\OLId{greek-variable}{Delta}}_{\OLMathNumeral{1}}$\iftag{prvBox}{، بحسب
+    \olref[mod]{lem:box-iff-diamond}}{}. ولإثبات
+  ${\OLId{latin-looped}{R}}^\Sigma {\OLId{greek-variable}{Delta}}_{\OLMathNumeral{2}}{\OLId{greek-variable}{Delta}}_{\OLMathNumeral{3}}$\iftag{prvBox}{، يكفي، بحسب
+    \olref[mod]{lem:box-iff-diamond}، أن}{، علينا أن}
+  نبين~$\Diamond{\OLId{greek-variable}{Delta}}_{\OLMathNumeral{3}} \subseteq {\OLId{greek-variable}{Delta}}_{\OLMathNumeral{2}}$. فلتكن
+  $\Diamond!A \in \Diamond{\OLId{greek-variable}{Delta}}_{\OLMathNumeral{3}}$؛ أي~$!A \in {\OLId{greek-variable}{Delta}}_{\OLMathNumeral{3}}$. يعطينا
+  الفرض الثاني~$\Diamond!A \in {\OLId{greek-variable}{Delta}}_{\OLMathNumeral{1}}$، وتقتضي~\Ax{5} أن
+  $\Box\Diamond!A \in {\OLId{greek-variable}{Delta}}_{\OLMathNumeral{1}}$ أيضًا. لكن الفرض الأول يعطينا الآن
+  $\Diamond!A \in {\OLId{greek-variable}{Delta}}_{\OLMathNumeral{2}}$، كما هو مطلوب.
+\end{proof}
+
+ومن جمع هذه الخصائص نحصل على تمام جملة من النظم.
+فمثلًا، $ \Log{S5} = \Log{KT5} = \Log{KTB4}$
+تام بالنسبة إلى جميع النماذج الانعكاسية الإقليدية.
+وهذه الفئة هي بعينها فئة النماذج الانعكاسية المتناظرة المتعدية،
+فيتفق التوصيفان.
+
+\begin{thm}\ollabel{thm:generaldet}
+  لتكن~$\mClass{C}_\Ax{D}$، $\mClass{C}_\Ax{T}$،
+  $\mClass{C}_\Ax{B}$، $\mClass{C}_\Ax{4}$، و
+  $\mClass{C}_\Ax{5}$ فئات جميع النماذج المتسلسلة والانعكاسية
+  والمتناظرة والمتعدية والإقليدية، على الترتيب. عندئذ، لأي مخططات
+  $!A_{\OLMathNumeral{1}}$، \dots،~$!A_{\OLId{latin-ordinary}{n}}$ من~\Ax{D} و\Ax{T} و\Ax{B} و\Ax{4} و\Ax{5}،
+  تحدد فئة النماذج
+  $\mClass{C} = \mClass{C}_{!A_{\OLMathNumeral{1}}} \cap \dots
+  \cap \mClass{C}_{!A_{\OLId{latin-ordinary}{n}}}$ النسق~$\Log{K}!A_{\OLMathNumeral{1}} \dots !A_{\OLId{latin-ordinary}{n}}$.
+\end{thm}
+
+\begin{prop}
+  ليكن~$\Sigma$ منطقًا جهويًا نظاميًا متسقًا؛ عندئذ:
+  \begin{enumerate}
+  \item\ollabel{prop:anotherfive-a}%
+    إذا كانت~$\Sigma$ تحوي المخطط~$\Diamond!A \lif \Box !A$، كان
+    النموذج القانوني لـ~$\Sigma$ داليًا جزئيًا.
+  \item إذا كانت~$\Sigma$ تحوي المخطط~$\Diamond!A \liff \Box !A$،
+    كان النموذج القانوني لـ~$\Sigma$ داليًا.
+  \item إذا كانت~$\Sigma$ تحوي المخطط~$\Box\Box!A \lif \Box !A$،
+    كان النموذج القانوني لـ~$\Sigma$ كثيفًا بضعف.
+  \end{enumerate}
+(انظر~\olref[frd][acc]{tab:anotherfive} لتعريفات خصائص الأطر هذه).
+\end{prop}
+
+\begin{proof}
+  \begin{enumerate}
+  \item لنفرض أن~$\Sigma$ تحوي المخطط~$\Diamond !A \lif \Box !A$.
+    معنى كون~${\OLId{latin-looped}{R}}^\Sigma$ دالية جزئيًا أن يكون لكل عالم خلف واحد على الأكثر.
+    فلنأخذ $ {\OLId{greek-variable}{Delta}}_{\OLMathNumeral{1}}$، ${\OLId{greek-variable}{Delta}}_{\OLMathNumeral{2}}$، ${\OLId{greek-variable}{Delta}}_{\OLMathNumeral{3}} \in {\OLId{latin-looped}{W}}^\Sigma$،
+    ونفرض ${\OLId{latin-looped}{R}}^\Sigma {\OLId{greek-variable}{Delta}}_{\OLMathNumeral{1}}{\OLId{greek-variable}{Delta}}_{\OLMathNumeral{2}}$ و${\OLId{latin-looped}{R}}^\Sigma {\OLId{greek-variable}{Delta}}_{\OLMathNumeral{1}}{\OLId{greek-variable}{Delta}}_{\OLMathNumeral{3}}$،
+    ونثبت $ {\OLId{greek-variable}{Delta}}_{\OLMathNumeral{2}} = {\OLId{greek-variable}{Delta}}_{\OLMathNumeral{3}}$.
+    من~${\OLId{latin-looped}{R}}^\Sigma {\OLId{greek-variable}{Delta}}_{\OLMathNumeral{1}}{\OLId{greek-variable}{Delta}}_{\OLMathNumeral{2}}$ يلزم~$\Box^{-{\OLMathNumeral{1}}}{\OLId{greek-variable}{Delta}}_{\OLMathNumeral{1}} \subseteq {\OLId{greek-variable}{Delta}}_{\OLMathNumeral{2}}$،
+    ومن~${\OLId{latin-looped}{R}}^\Sigma {\OLId{greek-variable}{Delta}}_{\OLMathNumeral{1}}{\OLId{greek-variable}{Delta}}_{\OLMathNumeral{3}}$ يلزم
+    $\Box^{-{\OLMathNumeral{1}}}{\OLId{greek-variable}{Delta}}_{\OLMathNumeral{1}} \subseteq {\OLId{greek-variable}{Delta}}_{\OLMathNumeral{3}}$\iftag{prvBox}{}{، وكلاهما
+      بحسب~\olref[mod]{lem:box-iff-diamond}}.
+    ولإثبات $ {\OLId{greek-variable}{Delta}}_{\OLMathNumeral{2}} = {\OLId{greek-variable}{Delta}}_{\OLMathNumeral{3}}$ نثبت الاحتواءين
+    ${\OLId{greek-variable}{Delta}}_{\OLMathNumeral{2}} \subseteq {\OLId{greek-variable}{Delta}}_{\OLMathNumeral{3}}$ و${\OLId{greek-variable}{Delta}}_{\OLMathNumeral{3}} \subseteq {\OLId{greek-variable}{Delta}}_{\OLMathNumeral{2}}$.
+    نأخذ أولًا~$!A \in {\OLId{greek-variable}{Delta}}_{\OLMathNumeral{2}}$؛ فيلزم $\Diamond!A \in {\OLId{greek-variable}{Delta}}_{\OLMathNumeral{1}}$.
+    وبالمخطط المفروض والإغلاق الاستنتاجي لـ~${\OLId{greek-variable}{Delta}}_{\OLMathNumeral{1}}$
+    يلزم~$\Box!A \in {\OLId{greek-variable}{Delta}}_{\OLMathNumeral{1}}$.
+    ثم نستعمل~${\OLId{latin-looped}{R}}^\Sigma {\OLId{greek-variable}{Delta}}_{\OLMathNumeral{1}}{\OLId{greek-variable}{Delta}}_{\OLMathNumeral{3}}$ فنحصل على~$!A \in {\OLId{greek-variable}{Delta}}_{\OLMathNumeral{3}}$.
+    وبعكس دور المجموعتين يثبت الاحتواء الآخر.
+
+  \item ينتج ذلك فورًا من الجزء~\olref{prop:anotherfive-a} وبرهان
+    التسلسل في~\olref{thm:completeframeprops}.
+
+  \item افترض أن~$\Sigma$ تحوي المخطط~$\Box\Box!A \lif \Box!A$،
+    ولإثبات أن~${\OLId{latin-looped}{R}}^\Sigma$ كثيفة بضعف، لتكن
+    ${\OLId{latin-looped}{R}}^\Sigma {\OLId{greek-variable}{Delta}}_{\OLMathNumeral{1}}{\OLId{greek-variable}{Delta}}_{\OLMathNumeral{2}}$. علينا أن نبين وجود مجموعة
+    $\Sigma$-متسقة تامة~${\OLId{greek-variable}{Delta}}_{\OLMathNumeral{3}}$ بحيث
+    ${\OLId{latin-looped}{R}}^\Sigma {\OLId{greek-variable}{Delta}}_{\OLMathNumeral{1}}{\OLId{greek-variable}{Delta}}_{\OLMathNumeral{3}}$ و${\OLId{latin-looped}{R}}^\Sigma {\OLId{greek-variable}{Delta}}_{\OLMathNumeral{3}}{\OLId{greek-variable}{Delta}}_{\OLMathNumeral{2}}$. ولتكن:
+    \[
+    {\OLId{greek-variable}{Gamma}} = \Box^{-{\OLMathNumeral{1}}}{\OLId{greek-variable}{Delta}}_{\OLMathNumeral{1}} \cup \Diamond{\OLId{greek-variable}{Delta}}_{\OLMathNumeral{2}}.
+    \]
+    يكفي أن نبين أن~${\OLId{greek-variable}{Gamma}}$ $\Sigma$-متسقة، إذ يمكن عندئذ، بمبرهنة
+    ليندنباوم، توسيعها إلى مجموعة $\Sigma$-متسقة تامة~${\OLId{greek-variable}{Delta}}_{\OLMathNumeral{3}}$ بحيث
+    $\Box^{-{\OLMathNumeral{1}}}{\OLId{greek-variable}{Delta}}_{\OLMathNumeral{1}} \subseteq {\OLId{greek-variable}{Delta}}_{\OLMathNumeral{3}}$ و
+    $\Diamond{\OLId{greek-variable}{Delta}}_{\OLMathNumeral{2}} \subseteq {\OLId{greek-variable}{Delta}}_{\OLMathNumeral{3}}$؛ أي
+    ${\OLId{latin-looped}{R}}^\Sigma {\OLId{greek-variable}{Delta}}_{\OLMathNumeral{1}}{\OLId{greek-variable}{Delta}}_{\OLMathNumeral{3}}$\iftag{prvBox}{}{ (بحسب
+      \olref[mod]{lem:box-iff-diamond})} و
+    ${\OLId{latin-looped}{R}}^\Sigma {\OLId{greek-variable}{Delta}}_{\OLMathNumeral{3}}{\OLId{greek-variable}{Delta}}_{\OLMathNumeral{2}}$\iftag{prvBox}{ (بحسب
+      \olref[mod]{lem:box-iff-diamond})}{}.
+
+    افترض، طلبًا للتناقض، أن~${\OLId{greek-variable}{Gamma}}$ غير متسقة. ويجوز أن نفرض
+    ${\OLId{latin-ordinary}{n}},{\OLId{latin-ordinary}{m}}\geq {\OLMathNumeral{1}}$: فإن خلت إحدى القائمتين أضفنا إليها تحصيلًا منطقيًا
+    ثابتًا، إذ ينتمي ذلك التحصيل إلى~${\OLId{greek-variable}{Delta}}_{\OLMathNumeral{2}}$ وينتمي إلزامه إلى
+    ${\OLId{greek-variable}{Delta}}_{\OLMathNumeral{1}}$. % استكمال مصدر (0449-I2): ضُبطت حالة القوائم المتناهية الخالية.
+    وعندئذ توجد
+    !!{formula}s~$\Box!A_{\OLMathNumeral{1}}$، \dots،~$\Box!A_{\OLId{latin-ordinary}{n}} \in {\OLId{greek-variable}{Delta}}_{\OLMathNumeral{1}}$ و
+    $!B_{\OLMathNumeral{1}}$، \dots،~$!B_{\OLId{latin-ordinary}{m}} \in {\OLId{greek-variable}{Delta}}_{\OLMathNumeral{2}}$ بحيث
+    \[!A_{\OLMathNumeral{1}}, \dots, !A_{\OLId{latin-ordinary}{n}}, \Diamond!B_{\OLMathNumeral{1}}, \dots, \Diamond!B_{\OLId{latin-ordinary}{m}}
+    \Proves[\Sigma] \lfalse.\]
+    ولما كانت
+    $\Diamond (!B_{\OLMathNumeral{1}} \land \dots \land !B_{\OLId{latin-ordinary}{m}}) \lif
+    (\Diamond!B_{\OLMathNumeral{1}} \land \dots \land \Diamond!B_{\OLId{latin-ordinary}{m}})$ !!{derivable} في
+    كل منطق جهوي نظامي، نستدل كما يأتي، فنناقض اتساق~${\OLId{greek-variable}{Delta}}_{\OLMathNumeral{2}}$:
+    \begin{align*}
+      !A_{\OLMathNumeral{1}}, \dots, !A_{\OLId{latin-ordinary}{n}}, & \Diamond!B_{\OLMathNumeral{1}}, \dots,
+      \Diamond!B_{\OLId{latin-ordinary}{m}} \Proves[\Sigma] \lfalse \\
+      !A_{\OLMathNumeral{1}}, \dots,!A_{\OLId{latin-ordinary}{n}} & \Proves[\Sigma] (\Diamond!B_{\OLMathNumeral{1}} \land
+      \dots \land \Diamond!B_{\OLId{latin-ordinary}{m}}) \lif \lfalse\\
+      & \qquad\text{بمبرهنة الاستنتاج}\\
+      & \qquad\text{\olref[prf][prp]{prop:derivabilityfacts}\olref[prf][prp]{prop:derivabilityfacts-deduction}، و\Taut} \\
+      !A_{\OLMathNumeral{1}}, \dots,!A_{\OLId{latin-ordinary}{n}} & \Proves[\Sigma]
+      \Diamond(!B_{\OLMathNumeral{1}} \land
+      \dots \land !B_{\OLId{latin-ordinary}{m}}) \lif \lfalse\\
+      & \qquad \text{لأن $\Sigma$ نظامية} \\
+      !A_{\OLMathNumeral{1}}, \dots,!A_{\OLId{latin-ordinary}{n}} & \Proves[\Sigma]
+      \lnot\Diamond (!B_{\OLMathNumeral{1}} \land \dots \land !B_{\OLId{latin-ordinary}{m}})\\
+      & \qquad\text{بحسب \PL} \\
+      !A_{\OLMathNumeral{1}}, \dots,!A_{\OLId{latin-ordinary}{n}} & \Proves[\Sigma]
+      \Box\lnot (!B_{\OLMathNumeral{1}} \land \dots \land !B_{\OLId{latin-ordinary}{m}})\\
+      & \qquad\text{$\Box\lnot$ بدل $\lnot\Diamond$} \\
+      \Box!A_{\OLMathNumeral{1}}, \dots,\Box!A_{\OLId{latin-ordinary}{n}}
+      & \Proves[\Sigma] \Box\Box \lnot (!B_{\OLMathNumeral{1}} \land \dots \land !B_{\OLId{latin-ordinary}{m}})\\
+      & \qquad\text{بحسب \olref[mod]{lem:box1}} \\
+      \Box!A_{\OLMathNumeral{1}}, \dots,\Box!A_{\OLId{latin-ordinary}{n}}
+      & \Proves[\Sigma]
+      \Box\lnot (!B_{\OLMathNumeral{1}} \land \dots \land !B_{\OLId{latin-ordinary}{m}})\\
+      &\qquad\text{بالمخطط $\Box\Box!A \lif \Box!A$} \\
+      {\OLId{greek-variable}{Delta}}_{\OLMathNumeral{1}} & \Proves[\Sigma]
+      \Box\lnot (!B_{\OLMathNumeral{1}} \land \dots \land !B_{\OLId{latin-ordinary}{m}})\\
+      &\qquad\text{بالرتابة، \olref[prf][prp]{prop:derivabilityfacts}\olref[prf][prp]{prop:derivabilityfacts-monotonicity}} \\
+      & \Box\lnot (!B_{\OLMathNumeral{1}} \land \dots \land !B_{\OLId{latin-ordinary}{m}}) \in {\OLId{greek-variable}{Delta}}_{\OLMathNumeral{1}}\\
+      &\qquad\text{بالإغلاق الاستنتاجي؛} \\
+      & \lnot (!B_{\OLMathNumeral{1}} \land \dots \land !B_{\OLId{latin-ordinary}{m}}) \in {\OLId{greek-variable}{Delta}}_{\OLMathNumeral{2}}\\
+      &\qquad \text{لأن }
+      {\OLId{latin-looped}{R}}^\Sigma {\OLId{greek-variable}{Delta}}_{\OLMathNumeral{1}}{\OLId{greek-variable}{Delta}}_{\OLMathNumeral{2}}.
+    \end{align*}
+  \end{enumerate}
+\end{proof}
+
+وقد توهم هذه الأمثلة أن كل نسق~$\Sigma$ في المنطق الجهوي \emph{تام}
+بالنسبة إلى أطره: أي إنه يبرهن كل صيغة تصح في جميع الأطر التي تصح
+فيها مبرهنات~$\Sigma$. وليس الأمر كذلك؛ فثمة نظم كثيرة
+لا تتم بهذا المعنى، وإن نجح البناء في الأمثلة المتقدمة.
+
+\end{document}

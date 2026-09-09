@@ -1,0 +1,103 @@
+% Part: normal-modal-logic
+% Chapter: syntax-and-semantics
+% Section: substitution
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{syn}{sub}
+
+\olsection{الإحلال المتزامن}
+
+إذا أُخذت !!a{formula}~$!A$، وأُبدل كل ورود لـ!!a{propositional variable}
+في~$!A$ بـ!!{formula} أخرى، كان الحاصل \emph{حالة} لها. وسيكثر
+استعمال حالات ال!!{formula}s في بحث الصلاحية وفي بحث
+!!{derivability}؛ فلا بد من ضبط معنى الإحلال الذي تتولد به.
+
+\begin{defn}\ollabel{def:subst-inst}
+  إذا كانت~$!A$ !!{formula} موجهية لا تخرج !!{propositional
+    variable}s فيها عن~${\OLId{latin-ordinary}{p}}_{\OLMathNumeral{1}}$، و\dots، و${\OLId{latin-ordinary}{p}}_{\OLId{latin-ordinary}{n}}$، وكانت~$!D_{\OLMathNumeral{1}}$، و\dots،
+  و$!D_{\OLId{latin-ordinary}{n}}$ !!{formula}s موجهية أيضًا، عرّفنا
+  $\SSubst{!A}{\subst{!D_{\OLMathNumeral{1}}}{{\OLId{latin-ordinary}{p}}_{\OLMathNumeral{1}}}, \dots, \subst{!D_{\OLId{latin-ordinary}{n}}}{{\OLId{latin-ordinary}{p}}_{\OLId{latin-ordinary}{n}}}}$ بأنه
+  الحاصل من وضع كل~$!D_{\OLId{latin-ordinary}{i}}$ موضع~${\OLId{latin-ordinary}{p}}_{\OLId{latin-ordinary}{i}}$ في~$!A$ دفعة واحدة،
+  لا بإعادة الإحلال في الصيغ التي أُدخلت. ويضبط ذلك الاستقراء على~$!A$:
+  \begin{enumerate}
+    \tagitem{prvFalse}{\indcase{!A}{\lfalse}{%
+        $\SSubst{\indfrm}{\subst{!D_{\OLMathNumeral{1}}}{{\OLId{latin-ordinary}{p}}_{\OLMathNumeral{1}}}, \dots,
+          \subst{!D_{\OLId{latin-ordinary}{n}}}{{\OLId{latin-ordinary}{p}}_{\OLId{latin-ordinary}{n}}}}$ هي~$\lfalse$.}}{}
+    \tagitem{prvTrue}{\indcase{!A}{\ltrue}{%
+        $\SSubst{\indfrm}{\subst{!D_{\OLMathNumeral{1}}}{{\OLId{latin-ordinary}{p}}_{\OLMathNumeral{1}}}, \dots,
+          \subst{!D_{\OLId{latin-ordinary}{n}}}{{\OLId{latin-ordinary}{p}}_{\OLId{latin-ordinary}{n}}}}$ هي~$\ltrue$.}}{}
+    \item \indcase{!A}{q}{$\SSubst{\indfrm}{\subst{!D_{\OLMathNumeral{1}}}{{\OLId{latin-ordinary}{p}}_{\OLMathNumeral{1}}}, \dots,
+        \subst{!D_{\OLId{latin-ordinary}{n}}}{{\OLId{latin-ordinary}{p}}_{\OLId{latin-ordinary}{n}}}}$ هي~${\OLId{latin-ordinary}{q}}$، بشرط~${\OLId{latin-ordinary}{q}} \not\ident {\OLId{latin-ordinary}{p}}_{\OLId{latin-ordinary}{i}}$ لكل~${\OLId{latin-ordinary}{i}}
+      = {\OLMathNumeral{1}}$، و\dots، و${\OLId{latin-ordinary}{n}}$.}
+    \item \indcase{!A}{p_i}{$\SSubst{\indfrm}{\subst{!D_{\OLMathNumeral{1}}}{{\OLId{latin-ordinary}{p}}_{\OLMathNumeral{1}}},
+        \dots, \subst{!D_{\OLId{latin-ordinary}{n}}}{{\OLId{latin-ordinary}{p}}_{\OLId{latin-ordinary}{n}}}}$ هي~$!D_{\OLId{latin-ordinary}{i}}$.}
+    \tagitem{prvNot}{\indcase{!A}{\lnot !B}{%
+        $\SSubst{\indfrm}{\subst{!D_{\OLMathNumeral{1}}}{{\OLId{latin-ordinary}{p}}_{\OLMathNumeral{1}}}, \dots, \subst{!D_{\OLId{latin-ordinary}{n}}}{{\OLId{latin-ordinary}{p}}_{\OLId{latin-ordinary}{n}}}}$ هي
+        $\lnot \SSubst{!B}{\subst{!D_{\OLMathNumeral{1}}}{{\OLId{latin-ordinary}{p}}_{\OLMathNumeral{1}}}, \dots, \subst{!D_{\OLId{latin-ordinary}{n}}}{{\OLId{latin-ordinary}{p}}_{\OLId{latin-ordinary}{n}}}}$.}}{}
+    \tagitem{prvAnd}{\indcase{!A}{(!B \land
+        !C)}{$\SSubst{\indfrm}{\subst{!D_{\OLMathNumeral{1}}}{{\OLId{latin-ordinary}{p}}_{\OLMathNumeral{1}}}, \dots,
+          \subst{!D_{\OLId{latin-ordinary}{n}}}{{\OLId{latin-ordinary}{p}}_{\OLId{latin-ordinary}{n}}}}$ هي
+        \[(\SSubst{!B}{\subst{!D_{\OLMathNumeral{1}}}{{\OLId{latin-ordinary}{p}}_{\OLMathNumeral{1}}}, \dots, \subst{!D_{\OLId{latin-ordinary}{n}}}{{\OLId{latin-ordinary}{p}}_{\OLId{latin-ordinary}{n}}}} \land
+          \SSubst{!C}{\subst{!D_{\OLMathNumeral{1}}}{{\OLId{latin-ordinary}{p}}_{\OLMathNumeral{1}}}, \dots, \subst{!D_{\OLId{latin-ordinary}{n}}}{{\OLId{latin-ordinary}{p}}_{\OLId{latin-ordinary}{n}}}}).\]}}{}
+    \tagitem{prvOr}{\indcase{!A}{(!B \lor
+          !C)}{$\SSubst{\indfrm}{\subst{!D_{\OLMathNumeral{1}}}{{\OLId{latin-ordinary}{p}}_{\OLMathNumeral{1}}}, \dots,
+          \subst{!D_{\OLId{latin-ordinary}{n}}}{{\OLId{latin-ordinary}{p}}_{\OLId{latin-ordinary}{n}}}}$ هي
+        \[(\SSubst{!B}{\subst{!D_{\OLMathNumeral{1}}}{{\OLId{latin-ordinary}{p}}_{\OLMathNumeral{1}}}, \dots, \subst{!D_{\OLId{latin-ordinary}{n}}}{{\OLId{latin-ordinary}{p}}_{\OLId{latin-ordinary}{n}}}} \lor
+          \SSubst{!C}{\subst{!D_{\OLMathNumeral{1}}}{{\OLId{latin-ordinary}{p}}_{\OLMathNumeral{1}}}, \dots, \subst{!D_{\OLId{latin-ordinary}{n}}}{{\OLId{latin-ordinary}{p}}_{\OLId{latin-ordinary}{n}}}}).\]}}{}
+    \tagitem{prvIf}{\indcase{!A}{(!B \lif
+          !C)}{$\SSubst{\indfrm}{\subst{!D_{\OLMathNumeral{1}}}{{\OLId{latin-ordinary}{p}}_{\OLMathNumeral{1}}}, \dots,
+          \subst{!D_{\OLId{latin-ordinary}{n}}}{{\OLId{latin-ordinary}{p}}_{\OLId{latin-ordinary}{n}}}}$ هي
+        \[(\SSubst{!B}{\subst{!D_{\OLMathNumeral{1}}}{{\OLId{latin-ordinary}{p}}_{\OLMathNumeral{1}}}, \dots, \subst{!D_{\OLId{latin-ordinary}{n}}}{{\OLId{latin-ordinary}{p}}_{\OLId{latin-ordinary}{n}}}} \lif
+          \SSubst{!C}{\subst{!D_{\OLMathNumeral{1}}}{{\OLId{latin-ordinary}{p}}_{\OLMathNumeral{1}}}, \dots, \subst{!D_{\OLId{latin-ordinary}{n}}}{{\OLId{latin-ordinary}{p}}_{\OLId{latin-ordinary}{n}}}}).\]}}{}
+    \tagitem{prvIff}{\indcase{!A}{(!B \liff
+          !C)}{$\SSubst{\indfrm}{\subst{!D_{\OLMathNumeral{1}}}{{\OLId{latin-ordinary}{p}}_{\OLMathNumeral{1}}}, \dots,
+          \subst{!D_{\OLId{latin-ordinary}{n}}}{{\OLId{latin-ordinary}{p}}_{\OLId{latin-ordinary}{n}}}}$ هي
+        \[(\SSubst{!B}{\subst{!D_{\OLMathNumeral{1}}}{{\OLId{latin-ordinary}{p}}_{\OLMathNumeral{1}}}, \dots, \subst{!D_{\OLId{latin-ordinary}{n}}}{{\OLId{latin-ordinary}{p}}_{\OLId{latin-ordinary}{n}}}} \liff
+          \SSubst{!C}{\subst{!D_{\OLMathNumeral{1}}}{{\OLId{latin-ordinary}{p}}_{\OLMathNumeral{1}}}, \dots, \subst{!D_{\OLId{latin-ordinary}{n}}}{{\OLId{latin-ordinary}{p}}_{\OLId{latin-ordinary}{n}}}}).\]}}{}
+    \item \indcase{!A}{\Box !B}{%
+        $\SSubst{\indfrm}{\subst{!D_{\OLMathNumeral{1}}}{{\OLId{latin-ordinary}{p}}_{\OLMathNumeral{1}}}, \dots, \subst{!D_{\OLId{latin-ordinary}{n}}}{{\OLId{latin-ordinary}{p}}_{\OLId{latin-ordinary}{n}}}}$ هي
+        $\Box
+        \SSubst{!B}{\subst{!D_{\OLMathNumeral{1}}}{{\OLId{latin-ordinary}{p}}_{\OLMathNumeral{1}}}, \dots, \subst{!D_{\OLId{latin-ordinary}{n}}}{{\OLId{latin-ordinary}{p}}_{\OLId{latin-ordinary}{n}}}}.$}
+    \tagitem{prvDiamond}{\indcase{!A}{\Diamond !B}{%
+        $\SSubst{\indfrm}{\subst{!D_{\OLMathNumeral{1}}}{{\OLId{latin-ordinary}{p}}_{\OLMathNumeral{1}}}, \dots, \subst{!D_{\OLId{latin-ordinary}{n}}}{{\OLId{latin-ordinary}{p}}_{\OLId{latin-ordinary}{n}}}}$ هي
+        $\Diamond
+        \SSubst{!B}{\subst{!D_{\OLMathNumeral{1}}}{{\OLId{latin-ordinary}{p}}_{\OLMathNumeral{1}}}, \dots, \subst{!D_{\OLId{latin-ordinary}{n}}}{{\OLId{latin-ordinary}{p}}_{\OLId{latin-ordinary}{n}}}}.$}}{}
+  \end{enumerate}
+  وتسمى ال!!{formula}~$\SSubst{!A}{\subst{!D_{\OLMathNumeral{1}}}{{\OLId{latin-ordinary}{p}}_{\OLMathNumeral{1}}}, \dots,
+    \subst{!D_{\OLId{latin-ordinary}{n}}}{{\OLId{latin-ordinary}{p}}_{\OLId{latin-ordinary}{n}}}}$ \emph{حالة إحلال} لـ$!A$.
+\end{defn}
+
+\begin{ex}
+  افترض أن~$!A$ هي~${\OLId{latin-ordinary}{p}}_{\OLMathNumeral{1}} \lif \Box({\OLId{latin-ordinary}{p}}_{\OLMathNumeral{1}} \land {\OLId{latin-ordinary}{p}}_{\OLMathNumeral{2}})$، وأن~$!D_{\OLMathNumeral{1}}$ هي
+  $\Diamond({\OLId{latin-ordinary}{p}}_{\OLMathNumeral{2}} \lif {\OLId{latin-ordinary}{p}}_{\OLMathNumeral{3}})$، وأن~$!D_{\OLMathNumeral{2}}$ هي~$\lnot\Box {\OLId{latin-ordinary}{p}}_{\OLMathNumeral{1}}$. عندئذ
+  تكون~$\SSubst{!A}{\subst{!D_{\OLMathNumeral{1}}}{{\OLId{latin-ordinary}{p}}_{\OLMathNumeral{1}}}, \subst{!D_{\OLMathNumeral{2}}}{{\OLId{latin-ordinary}{p}}_{\OLMathNumeral{2}}}}$ هي
+  % تصحيح تنسيق (0411-S1): يفصل سطران من المثال بعلامة نهاية صف كاملة.
+  \begin{align*}
+    \Diamond({\OLId{latin-ordinary}{p}}_{\OLMathNumeral{2}} \lif {\OLId{latin-ordinary}{p}}_{\OLMathNumeral{3}}) &
+    \lif \Box(\Diamond({\OLId{latin-ordinary}{p}}_{\OLMathNumeral{2}} \lif {\OLId{latin-ordinary}{p}}_{\OLMathNumeral{3}}) \land \lnot\Box {\OLId{latin-ordinary}{p}}_{\OLMathNumeral{1}})
+    \intertext{بينما تكون~$\SSubst{!A}{\subst{!D_{\OLMathNumeral{2}}}{{\OLId{latin-ordinary}{p}}_{\OLMathNumeral{1}}}, \subst{!D_{\OLMathNumeral{1}}}{{\OLId{latin-ordinary}{p}}_{\OLMathNumeral{2}}}}$ هي}
+    \lnot\Box {\OLId{latin-ordinary}{p}}_{\OLMathNumeral{1}} &
+    \lif \Box(\lnot\Box {\OLId{latin-ordinary}{p}}_{\OLMathNumeral{1}} \land \Diamond({\OLId{latin-ordinary}{p}}_{\OLMathNumeral{2}} \lif {\OLId{latin-ordinary}{p}}_{\OLMathNumeral{3}}))
+    \intertext{لاحظ أن الإحلال المتزامن لا يساوي، بوجه عام، الإحلال
+      المتكرر. فقارن مثلًا
+      $\SSubst{!A}{\subst{!D_{\OLMathNumeral{1}}}{{\OLId{latin-ordinary}{p}}_{\OLMathNumeral{1}}}, \subst{!D_{\OLMathNumeral{2}}}{{\OLId{latin-ordinary}{p}}_{\OLMathNumeral{2}}}}$ أعلاه بـ
+      $\Subst{(\Subst{!A}{!D_{\OLMathNumeral{1}}}{{\OLId{latin-ordinary}{p}}_{\OLMathNumeral{1}}})}{!D_{\OLMathNumeral{2}}}{{\OLId{latin-ordinary}{p}}_{\OLMathNumeral{2}}}$، وهو:}
+    & \Subst{\Diamond({\OLId{latin-ordinary}{p}}_{\OLMathNumeral{2}} \lif {\OLId{latin-ordinary}{p}}_{\OLMathNumeral{3}}) \lif
+      \Box(\Diamond({\OLId{latin-ordinary}{p}}_{\OLMathNumeral{2}} \lif {\OLId{latin-ordinary}{p}}_{\OLMathNumeral{3}}) \land {\OLId{latin-ordinary}{p}}_{\OLMathNumeral{2}})}{\lnot\Box {\OLId{latin-ordinary}{p}}_{\OLMathNumeral{1}}}{{\OLId{latin-ordinary}{p}}_{\OLMathNumeral{2}}},
+      \text{ أي}\\
+    \Diamond(\lnot\Box {\OLId{latin-ordinary}{p}}_{\OLMathNumeral{1}} \lif {\OLId{latin-ordinary}{p}}_{\OLMathNumeral{3}}) &
+    \lif \Box(\Diamond(\lnot\Box {\OLId{latin-ordinary}{p}}_{\OLMathNumeral{1}}
+    \lif {\OLId{latin-ordinary}{p}}_{\OLMathNumeral{3}}) \land \lnot\Box {\OLId{latin-ordinary}{p}}_{\OLMathNumeral{1}})\\
+    \intertext{وقارنه أيضًا بـ$\Subst{(\Subst{!A}{!D_{\OLMathNumeral{2}}}{{\OLId{latin-ordinary}{p}}_{\OLMathNumeral{2}}})}{!D_{\OLMathNumeral{1}}}{{\OLId{latin-ordinary}{p}}_{\OLMathNumeral{1}}}$:}
+    & \Subst{{\OLId{latin-ordinary}{p}}_{\OLMathNumeral{1}} \lif \Box({\OLId{latin-ordinary}{p}}_{\OLMathNumeral{1}} \land \lnot\Box {\OLId{latin-ordinary}{p}}_{\OLMathNumeral{1}})}
+      {\Diamond({\OLId{latin-ordinary}{p}}_{\OLMathNumeral{2}} \lif {\OLId{latin-ordinary}{p}}_{\OLMathNumeral{3}})}{{\OLId{latin-ordinary}{p}}_{\OLMathNumeral{1}}}, \text{ أي}\\
+    \Diamond({\OLId{latin-ordinary}{p}}_{\OLMathNumeral{2}} \lif {\OLId{latin-ordinary}{p}}_{\OLMathNumeral{3}}) &
+    \lif \Box(\Diamond({\OLId{latin-ordinary}{p}}_{\OLMathNumeral{2}}
+    \lif {\OLId{latin-ordinary}{p}}_{\OLMathNumeral{3}}) \land \lnot\Box\Diamond({\OLId{latin-ordinary}{p}}_{\OLMathNumeral{2}} \lif {\OLId{latin-ordinary}{p}}_{\OLMathNumeral{3}})).
+  \end{align*}
+\end{ex}
+
+\end{document}

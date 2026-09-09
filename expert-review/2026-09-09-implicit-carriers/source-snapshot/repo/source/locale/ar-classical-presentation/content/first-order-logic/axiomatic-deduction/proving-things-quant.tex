@@ -1,0 +1,40 @@
+% Part: first-order-logic
+% Chapter: axiomatic-deduction
+% Section: proving-things-quant
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{axd}{prq}
+
+\olsection{\usetoken{P}{derivation} مع المكمّمات}
+
+\begin{ex}
+نطلب !!a{derivation} لـ$(\lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})] \land
+\lforall[{\OLId{latin-ordinary}{y}}][!B({\OLId{latin-ordinary}{y}})]) \lif \lforall[{\OLId{latin-ordinary}{x}}][(!A({\OLId{latin-ordinary}{x}}) \land !B({\OLId{latin-ordinary}{x}}))]$.
+% تصحيح مصدر (0117-I2): لم يصرّح الأصل الإنجليزي ولا خط الأساس العربي بجِدّة الثابت اللازمة لتطبيق قاعدة المكمّمات.
+ونختار في البرهان ثابتًا مميَّزًا جديدًا~${\OLId{latin-ordinary}{a}}\in\mathcal E$ لا يرد
+في~$!A({\OLId{latin-ordinary}{x}})$ ولا في~$!B({\OLId{latin-ordinary}{y}})$.
+
+نبدأ بتفكيك الوصل، فنجد أن
+\begin{align*}
+  (\lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})] \land \lforall[{\OLId{latin-ordinary}{y}}][!B({\OLId{latin-ordinary}{y}})]) & \lif \lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]\\
+  \intertext{هي حالة من \olref[prp]{ax:land1}، وأما}
+  \lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})] & \lif !A({\OLId{latin-ordinary}{a}}) \\
+  \intertext{فهي حالة من \olref[qua]{ax:q1}. ومن \olref[pro]{prop:chain} يلزم أن}
+  (\lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})] \land \lforall[{\OLId{latin-ordinary}{y}}][!B({\OLId{latin-ordinary}{y}})]) & \lif !A({\OLId{latin-ordinary}{a}}) \\
+  \intertext{!!{derivable}. وأما الطرف الآخر، فبما أن}
+  (\lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})] \land \lforall[{\OLId{latin-ordinary}{y}}][!B({\OLId{latin-ordinary}{y}})]) & \lif \lforall[{\OLId{latin-ordinary}{y}}][!B({\OLId{latin-ordinary}{y}})] \qquad\text{و}\\
+    \lforall[{\OLId{latin-ordinary}{y}}][!B({\OLId{latin-ordinary}{y}})] & \lif !B({\OLId{latin-ordinary}{a}})\\
+    \intertext{فهما حالتان من \olref[prp]{ax:land2} و\olref[qua]{ax:q1}، على الترتيب، ومن ثم}
+    (\lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})] \land \lforall[{\OLId{latin-ordinary}{y}}][!B({\OLId{latin-ordinary}{y}})]) & \lif !B({\OLId{latin-ordinary}{a}})\\
+    % تصحيح مصدر (0117-I1): لا تكفي بديهية الوصل وتطبيقا MP مباشرةً؛ لا بد من تركيب المقدّم ثم استعمال بديهية توزيع اللزوم.
+    \intertext{تلزم بحسب \olref[pro]{prop:chain}. ولنسمِّ المقدّم المشترك $!P$. نصل $!P \lif !A({\OLId{latin-ordinary}{a}})$ بالحالة المناسبة من \olref[prp]{ax:land3} بواسطة \olref[pro]{prop:chain}، فنحصل على $!P \lif (!B({\OLId{latin-ordinary}{a}}) \lif (!A({\OLId{latin-ordinary}{a}}) \land !B({\OLId{latin-ordinary}{a}})))$. ثم نأخذ الحالة المناسبة من \olref[prp]{ax:lif2} ونجري~\MP{} مرتين، إحداهما مع $!P \lif !B({\OLId{latin-ordinary}{a}})$، فنحصل على أن}
+    (\lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})] \land \lforall[{\OLId{latin-ordinary}{y}}][!B({\OLId{latin-ordinary}{y}})]) & \lif (!A({\OLId{latin-ordinary}{a}}) \land !B({\OLId{latin-ordinary}{a}}))\\
+    \intertext{قابلة للاشتقاق. وبإجراء \QR{} ننتهي إلى}
+(\lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})] \land \lforall[{\OLId{latin-ordinary}{y}}][!B({\OLId{latin-ordinary}{y}})]) & \lif \lforall[{\OLId{latin-ordinary}{x}}][(!A({\OLId{latin-ordinary}{x}}) \land !B({\OLId{latin-ordinary}{x}}))].
+\end{align*}
+\end{ex}
+
+\end{document}

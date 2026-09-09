@@ -1,0 +1,109 @@
+% Part: many-valued-logic
+% Chapter: infinite-valued-logics
+% Section: lukasiewicz
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mvl}{inf}{luk}
+
+\olsection{منطق~\L ukasiewicz}
+
+\begin{editorial}
+  ليس هذا إلا «بذرة» وجيزة لقسم في منطق~\L ukasiewicz اللانهائي القيم.
+\end{editorial}
+
+\begin{defn}\ollabel{def:lukasiewicz} مصفوفة منطق~\L ukasiewicz
+اللانهائي القيم~$\LogLuk[\infty]$ هي:
+\begin{enumerate}
+  \item الجزء الخالي من الثوابت~$\Lang L_{\OLMathNumeral{0}}^{-}$ من لغة القضايا القياسية، ذو الروابط
+  $\lnot$ و$\land$ و$\lor$ و$\lif$.
+  % تصحيح مصدر مشترك (MVL-L0-I1): حُددت اللغة الخالية من lfalse التي تفسر المصفوفة جميع روابطها.
+  \item مجموعة قيم الصدق~${\OLId{latin-looped}{V}}_\infty$.
+  \item القيمة المميزة وحدها هي~${\OLMathNumeral{1}}$؛ أي~${\OLId{latin-looped}{V}}^+ = \{{\OLMathNumeral{1}}\}$.
+  \item دوال الصدق هي الدوال الآتية:
+  \begin{align*}
+    \tf{\lnot}[\LogLuk]({\OLId{latin-ordinary}{x}}) & = {\OLMathNumeral{1}} - {\OLId{latin-ordinary}{x}}\\
+    \tf{\land}[\LogLuk]({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}}) & = \min({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})\\
+    \tf{\lor}[\LogLuk]({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}}) & = \max({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})\\
+    \tf{\lif}[\LogLuk]({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}}) & = \min({\OLMathNumeral{1}},{\OLMathNumeral{1}}-({\OLId{latin-ordinary}{x}}-{\OLId{latin-ordinary}{y}})) = \begin{cases}
+      {\OLMathNumeral{1}} & \text{إذا كان } {\OLId{latin-ordinary}{x}} \le {\OLId{latin-ordinary}{y}}\\
+      {\OLMathNumeral{1}}-({\OLId{latin-ordinary}{x}}-{\OLId{latin-ordinary}{y}}) & \text{في غير ذلك.}
+    \end{cases}
+    \end{align*}
+\end{enumerate}
+وأما منطق~\L ukasiewicz ذو~${\OLId{latin-ordinary}{m}}$ من القيم فيعرف على الوجه نفسه، إلا
+أن~${\OLId{latin-looped}{V}} = {\OLId{latin-looped}{V}}_{\OLId{latin-ordinary}{m}}$.
+\end{defn}
+
+\begin{prop}
+  المنطق~$\LogLuk[{\OLMathNumeral{3}}]$ المعرف في \olref[thr][luk]{def:lukasiewicz}
+  هو بعينه~$\LogLuk[{\OLMathNumeral{3}}]$ المعرف في \olref{def:lukasiewicz}.
+\end{prop}
+
+\begin{proof}
+  يتبين ذلك إذا قابلنا جداول الروابط في
+  \olref[thr][luk]{def:lukasiewicz} بجداول الصدق المستخرجة من
+  معادلات \olref{def:lukasiewicz}:
+  \begin{center}
+    \begin{tabular}{c|c}
+      $\tf{\lnot}$ & \\
+      \hline
+      ${\OLMathNumeral{1}}$ & ${\OLMathNumeral{0}}$ \\
+      ${\OLMathNumeral{1}}/{\OLMathNumeral{2}}$ & ${\OLMathNumeral{1}}/{\OLMathNumeral{2}}$ \\
+      ${\OLMathNumeral{0}}$ & ${\OLMathNumeral{1}}$
+    \end{tabular}
+    \quad
+    \begin{tabular}{c|ccc}
+      $\tf{\land}[\LogLuk[{\OLMathNumeral{3}}]]$ & ${\OLMathNumeral{1}}$ & ${\OLMathNumeral{1}}/{\OLMathNumeral{2}}$ & ${\OLMathNumeral{0}}$ \\
+      \hline
+      ${\OLMathNumeral{1}}$ & ${\OLMathNumeral{1}}$ & ${\OLMathNumeral{1}}/{\OLMathNumeral{2}}$ & ${\OLMathNumeral{0}}$ \\
+      ${\OLMathNumeral{1}}/{\OLMathNumeral{2}}$ & ${\OLMathNumeral{1}}/{\OLMathNumeral{2}}$ & ${\OLMathNumeral{1}}/{\OLMathNumeral{2}}$ & ${\OLMathNumeral{0}}$\\
+      ${\OLMathNumeral{0}}$ & ${\OLMathNumeral{0}}$ & ${\OLMathNumeral{0}}$ & ${\OLMathNumeral{0}}$
+    \end{tabular}
+    \\[2ex]
+    \begin{tabular}{c|ccc}
+      $\tf{\lor}[\LogLuk[{\OLMathNumeral{3}}]]$ & ${\OLMathNumeral{1}}$ & ${\OLMathNumeral{1}}/{\OLMathNumeral{2}}$ & ${\OLMathNumeral{0}}$ \\
+      \hline
+      ${\OLMathNumeral{1}}$ & ${\OLMathNumeral{1}}$ & ${\OLMathNumeral{1}}$ & ${\OLMathNumeral{1}}$ \\
+      ${\OLMathNumeral{1}}/{\OLMathNumeral{2}}$ & ${\OLMathNumeral{1}}$ & ${\OLMathNumeral{1}}/{\OLMathNumeral{2}}$ & ${\OLMathNumeral{1}}/{\OLMathNumeral{2}}$ \\
+      ${\OLMathNumeral{0}}$ & ${\OLMathNumeral{1}}$ & ${\OLMathNumeral{1}}/{\OLMathNumeral{2}}$ & ${\OLMathNumeral{0}}$
+    \end{tabular}
+    \quad
+    \begin{tabular}{c|ccc}
+      $\tf{\lif}[\LogLuk[{\OLMathNumeral{3}}]]$ & ${\OLMathNumeral{1}}$ & ${\OLMathNumeral{1}}/{\OLMathNumeral{2}}$ & ${\OLMathNumeral{0}}$ \\
+      \hline
+      ${\OLMathNumeral{1}}$ & ${\OLMathNumeral{1}}$ & ${\OLMathNumeral{1}}/{\OLMathNumeral{2}}$ & ${\OLMathNumeral{0}}$ \\
+      ${\OLMathNumeral{1}}/{\OLMathNumeral{2}}$ & ${\OLMathNumeral{1}}$ & ${\OLMathNumeral{1}}$ & ${\OLMathNumeral{1}}/{\OLMathNumeral{2}}$  \\
+      ${\OLMathNumeral{0}}$ & ${\OLMathNumeral{1}}$ & ${\OLMathNumeral{1}}$ & ${\OLMathNumeral{1}}$
+    \end{tabular}
+  \end{center}
+\end{proof}
+
+\begin{prop}\ollabel{prop:luk-infty-m}
+  إذا كان~${\OLId{greek-variable}{Gamma}} \Entails[\LogLuk[\infty]] !B$، كان
+  ${\OLId{greek-variable}{Gamma}} \Entails[\LogLuk[{\OLId{latin-ordinary}{m}}]] !B$ لكل~${\OLId{latin-ordinary}{m}} \ge {\OLMathNumeral{2}}$.
+\end{prop}
+
+\begin{proof}
+  إثبات ذلك تمرين.
+\end{proof}
+
+\begin{prob}
+  أثبت \olref[mvl][inf][luk]{prop:luk-infty-m}.
+\end{prob}
+
+% تصحيح مصدر (0400-I1): لا يصح إطلاق العكس لمجموعة مقدمات غير منتهية.
+وأما عكس هذا الحكم فيصح إذا كانت مجموعة المقدمات متناهية.
+
+ومنطق~\L ukasiewicz اللانهائي القيم أشهر المنطقات الضبابية. وأما
+الشرط في أدبيات المنطق الضبابي فكثيرًا ما يعرف بـ~$\lnot !A \lor !B$؛
+والحاصل حينئذ منطق كليني قوي لانهائي القيم.
+
+\begin{prob}
+  بيّن أن~$({\OLId{latin-ordinary}{p}} \lif {\OLId{latin-ordinary}{q}}) \lor ({\OLId{latin-ordinary}{q}} \lif {\OLId{latin-ordinary}{p}})$ تحصيل منطقي في
+  $\LogLuk[\infty]$.
+\end{prob}
+
+\end{document}

@@ -1,0 +1,67 @@
+% Part: computability
+% Chapter: computability-theory
+% Section: applications-fixed-point
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{thy}{apf}
+\olsection{تطبيق مبرهنة النقطة الثابتة}
+
+فحاصل مبرهنة النقطة الثابتة أنها تتيح تعريف الدوال الجزئية القابلة
+للحساب بالرجوع إلى فهارسها. ومن ذلك أن نجد فهرسًا ${\OLId{latin-ordinary}{e}}$ يحقق، لكل ${\OLId{latin-ordinary}{y}}$،
+\[
+\cfind{{\OLId{latin-ordinary}{e}}}({\OLId{latin-ordinary}{y}}) = {\OLId{latin-ordinary}{e}} + {\OLId{latin-ordinary}{y}}.
+\]
+ومن أمثلتها أيضًا أن نستعمل برهانها في إنشاء برنامج
+بلغة Java أو C++ يطبع نفسه.
+
+وقد جعلنا، لكل ${\OLId{latin-ordinary}{e}}$، المجموعة ${\OLId{latin-looped}{W}}_{\OLId{latin-ordinary}{e}}$ مجال $\cfind{{\OLId{latin-ordinary}{e}}}$؛
+فكانت ${\OLId{latin-looped}{W}}_{\OLMathNumeral{0}}$، و${\OLId{latin-looped}{W}}_{\OLMathNumeral{1}}$، و${\OLId{latin-looped}{W}}_{\OLMathNumeral{2}}$،~\dots تعدادًا للمجموعات القابلة للتعداد
+حسابيًا. ومنها مجموعات قابلة للحساب. فهل من خوارزمية
+تتلقى ${\OLId{latin-ordinary}{x}}$، ومتى كانت ${\OLId{latin-looped}{W}}_{\OLId{latin-ordinary}{x}}$ قابلة للحساب أعطت فهرسًا
+لدالتها المميزة؟ يمتنع ذلك، كما يأتي.
+
+\begin{thm}
+لا توجد دالة جزئية قابلة للحساب ${\OLId{latin-ordinary}{f}}$ لها الخاصية الآتية: متى كانت
+${\OLId{latin-looped}{W}}_{\OLId{latin-ordinary}{e}}$ قابلة للحساب كانت ${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{e}})$ معرّفة وكانت $\cfind{{\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{e}})}$ دالتها
+المميزة.
+\end{thm}
+
+\begin{proof}
+نأخذ ${\OLId{latin-ordinary}{f}}$ جزئية قابلة للحساب كيفما اتفق، ونبني فهرسًا ${\OLId{latin-ordinary}{e}}$ تكون معه
+${\OLId{latin-looped}{W}}_{\OLId{latin-ordinary}{e}}$ قابلة للحساب، ولا تكون $\cfind{{\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{e}})}$ دالتها المميزة. وتتيح
+مبرهنة النقطة الثابتة اختيار ${\OLId{latin-ordinary}{e}}$ بحيث
+\[
+\cfind{{\OLId{latin-ordinary}{e}}}({\OLId{latin-ordinary}{y}}) \simeq
+\begin{cases}
+{\OLMathNumeral{0}} & \text{إذا كان ${\OLId{latin-ordinary}{y}}={\OLMathNumeral{0}}$ وكانت $\cfind{{\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{e}})}({\OLMathNumeral{0}}) \fdefined = {\OLMathNumeral{0}}$} \\
+\text{غير معرّفة} & \text{خلاف ذلك.}
+\end{cases}
+\]
+فالفهرس ${\OLId{latin-ordinary}{e}}$ حاصل من تطبيق مبرهنة النقطة الثابتة على الدالة ذات
+التعريف
+\[
+{\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}}) \simeq
+\begin{cases}
+{\OLMathNumeral{0}} & \text{إذا كان ${\OLId{latin-ordinary}{y}}={\OLMathNumeral{0}}$ وكانت $\cfind{{\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}})}({\OLMathNumeral{0}}) \fdefined = {\OLMathNumeral{0}}$} \\
+\text{غير معرّفة} & \text{خلاف ذلك.}
+\end{cases}
+\]
+أما قابلية ${\OLId{latin-ordinary}{g}}$ للحساب الجزئي فتظهر من وصف الإجراء الآتي:
+إذا أُدخل ${\OLId{latin-ordinary}{x}}$ و${\OLId{latin-ordinary}{y}}$ فحصت الخوارزمية أولًا مساواة ${\OLId{latin-ordinary}{y}}$ لـ
+${\OLMathNumeral{0}}$؛ فإن تساويا حسبت ${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}})$، ثم أجرت الآلة الشاملة
+لحساب $\cfind{{\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}})}({\OLMathNumeral{0}})$. فإن توقف الحساب وأعطى~${\OLMathNumeral{0}}$،
+أعطت الخوارزمية~${\OLMathNumeral{0}}$؛ وإلا لم تتوقف.
+
+فنقسم النظر: إن كانت ${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{e}})$ غير معرّفة، كان ${\OLId{latin-looped}{W}}_{\OLId{latin-ordinary}{e}}=\emptyset$،
+وفات الشرط الذي يوجب تعريف ${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{e}})$. وإن كانت ${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{e}})$ معرّفة، وكانت
+$\cfind{{\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{e}})}({\OLMathNumeral{0}})$ معرّفة وقيمتها ${\OLMathNumeral{0}}$، تعينت $\cfind{{\OLId{latin-ordinary}{e}}}({\OLId{latin-ordinary}{y}})$
+إذا وفقط إذا ساوى ${\OLId{latin-ordinary}{y}}$ العدد ${\OLMathNumeral{0}}$؛ فكان ${\OLId{latin-looped}{W}}_{\OLId{latin-ordinary}{e}}=\{{\OLMathNumeral{0}}\}$. وإن كانت
+${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{e}})$ معرّفة، ولم تُعرّف $\cfind{{\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{e}})}({\OLMathNumeral{0}})$ أو لم تساوِ ${\OLMathNumeral{0}}$، كان
+${\OLId{latin-looped}{W}}_{\OLId{latin-ordinary}{e}}=\emptyset$. فلا تكون $\cfind{{\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{e}})}$ في أي من الحالتين الأخيرتين دالة
+مميزة لـ~${\OLId{latin-looped}{W}}_{\OLId{latin-ordinary}{e}}$، إذ تخفق في إعطاء الجواب الصحيح عند الدخل ${\OLMathNumeral{0}}$.
+\end{proof}
+
+\end{document}

@@ -1,0 +1,228 @@
+% Opt-in typed presentation nucleus; not a 722-occurrence localization claim.
+% Registry: evidence/classical/LETTER_PRESENTATION_REGISTRY.json
+% Preserve original source tokens, set/counter layers, and semantic operators.
+\RequirePackage{fontspec}
+\RequirePackage{xparse}
+\providecommand*{\OLClassicalLetterMathFontPath}{../ar/fonts/vendor/xits-1.302/XITSMath-Regular.otf}
+\providecommand*{\OLClassicalLetterTextFontPath}{../../../00_control/fonts/scheherazade-2.100/}
+\newfontfamily\OLClassicalLetterArabicFont[
+  Path=\OLClassicalLetterTextFontPath,
+  Renderer=HarfBuzz,Script=Arabic,Language=Arabic,Scale=1.08
+]{Scheherazade-Regular.ttf}
+
+\makeatletter
+\ExplSyntaxOn
+\msg_new:nnn {ol-classical-letters}{unknown}
+  {Unregistered~running~identifier~'#1'.~Use~an~explicit~registry~entry;~no~fallback~is~permitted.}
+\msg_new:nnn {ol-classical-letters}{duplicate}
+  {Duplicate~typed~letter~entry~'#1'.}
+\msg_new:nnn {ol-classical-letters}{kind}
+  {Unknown~letter~rendering~kind~'#1'.}
+\msg_new:nnn {ol-classical-letters}{engine}
+  {This~typed~presentation~layer~requires~LuaLaTeX.}
+\msg_new:nnn {ol-classical-letters}{glyph}
+  {Pinned~mathematical~font~does~not~contain~U+#1.}
+\msg_new:nnn {ol-classical-letters}{installation}
+  {Classical~formula~lookup~is~missing~or~was~overwritten~after~installation.}
+\sys_if_engine_luatex:F {\msg_fatal:nn {ol-classical-letters}{engine}}
+\prop_new:N \g_ol_classical_letter_render_prop
+\prop_new:N \g_ol_classical_letter_source_prop
+\bool_new:N \g_ol_classical_letters_installed_bool
+
+% Cache one immutable pinned glyph font per point size. No mathcode/family
+% changes; the glyph is a single nonjoining TLT box inside an ordinary atom.
+\cs_new_protected:Npn \ol_classical_glyph_box:nn #1#2
+  {
+    \hbox
+      {
+        \textdir TLT
+        \cs_if_exist:cF {g_ol_classical_letter_font_#1}
+          {
+            \tex_global:D \exp_after:wN \tex_font:D
+              \cs:w g_ol_classical_letter_font_#1\cs_end:
+              = "[\OLClassicalLetterMathFontPath]:mode=base"~at~#1pt\scan_stop:
+          }
+        \cs_set_eq:Nc \OLClassicalSelectedGlyphFont {g_ol_classical_letter_font_#1}
+        \OLClassicalSelectedGlyphFont
+        \iffontchar\OLClassicalSelectedGlyphFont "#2\scan_stop:
+          \char"#2\scan_stop:
+        \else
+          \msg_fatal:nnn {ol-classical-letters}{glyph}{#2}
+        \fi
+      }
+  }
+\cs_new_protected:Npn \ol_classical_glyph:n #1
+  {
+    \check@mathfonts
+    \mathord{\mathchoice
+      {\ol_classical_glyph_box:nn{\tf@size}{#1}}
+      {\ol_classical_glyph_box:nn{\tf@size}{#1}}
+      {\ol_classical_glyph_box:nn{\sf@size}{#1}}
+      {\ol_classical_glyph_box:nn{\ssf@size}{#1}}}
+  }
+% An Arabic name is one shaped RTL label, not a product, operator, index,
+% or exponent. Source scripts attach to the resulting outer mathord.
+\cs_new_protected:Npn \ol_classical_label_box:nn #1#2
+  {
+    \hbox{\textdir TRT
+      \OLClassicalLetterArabicFont
+      \fontsize{#1}{#1}\selectfont
+      #2}
+  }
+\cs_new_protected:Npn \ol_classical_label:n #1
+  {
+    \check@mathfonts
+    \mathord{\mathchoice
+      {\ol_classical_label_box:nn{\tf@size}{#1}}
+      {\ol_classical_label_box:nn{\tf@size}{#1}}
+      {\ol_classical_label_box:nn{\sf@size}{#1}}
+      {\ol_classical_label_box:nn{\ssf@size}{#1}}}
+  }
+
+% Keys are literal property-list keys, not expanded control-sequence guesses.
+\NewDocumentCommand \OLDeclareClassicalLetter {m m m m m}
+  {
+    \prop_if_in:NnT \g_ol_classical_letter_render_prop {#1/#2}
+      {\msg_fatal:nnn {ol-classical-letters}{duplicate}{#1/#2}}
+    \str_case:nnF {#3}
+      {
+        {glyph}{\prop_gput:Nnn \g_ol_classical_letter_render_prop
+          {#1/#2}{\ol_classical_glyph:n{#4}}}
+        {label}{\prop_gput:Nnn \g_ol_classical_letter_render_prop
+          {#1/#2}{\ol_classical_label:n{#4}}}
+      }
+      {\msg_fatal:nnn {ol-classical-letters}{kind}{#3}}
+    \prop_gput:Nnn \g_ol_classical_letter_source_prop {#1/#2}{#5}
+  }
+\NewDocumentCommand \OLId {m m}
+  {
+    \prop_get:NnNTF \g_ol_classical_letter_render_prop {#1/#2} \l_tmpa_tl
+      {\ensuremath{\tl_use:N \l_tmpa_tl}}
+      {\msg_fatal:nnn {ol-classical-letters}{unknown}{#1/#2}}
+  }
+
+% Preserve exact original international specimen behavior locally, including
+% the source phi/varphi and epsilon/varepsilon aliases. No Greek is rebound.
+\NewDocumentCommand \OLInternationalMath {m}
+  {
+    \ensuremath{\group_begin:
+      \bool_if:NT \g_ol_classical_letters_installed_bool
+        {\cs_set_eq:NN \formula \OLClassicalSavedFormula}
+      #1
+    \group_end:}
+  }
+\NewDocumentCommand \OLIdSource {m m}
+  {
+    \prop_get:NnNTF \g_ol_classical_letter_source_prop {#1/#2} \l_tmpa_tl
+      {\OLInternationalMath{\tl_use:N \l_tmpa_tl}}
+      {\msg_fatal:nnn {ol-classical-letters}{unknown}{#1/#2}}
+  }
+% Same one-argument contract as the original lookup-driven formula macro:
+% !A and !{A} consume A only; following scripts/primes/groups are untouched.
+\cs_new_protected:Npn \OLClassicalFormula #1 {\OLId{formula}{#1}}
+\NewDocumentCommand \OLInstallClassicalLetters {}
+  {
+    \bool_if:NF \g_ol_classical_letters_installed_bool
+      {
+        \cs_if_exist:NF \formula
+          {\msg_fatal:nn {ol-classical-letters}{installation}}
+        \cs_gset_eq:NN \OLClassicalSavedFormula \formula
+        \cs_gset_eq:NN \formula \OLClassicalFormula
+        \bool_gset_true:N \g_ol_classical_letters_installed_bool
+        \iow_term:n {OL-CLASSICAL-LETTERS=typed-opt-in-nucleus-v1}
+        \iow_term:n {OL-CLASSICAL-LETTER-UNKNOWN=fatal}
+      }
+  }
+\NewDocumentCommand \OLCheckClassicalLetters {}
+  {
+    \bool_if:NF \g_ol_classical_letters_installed_bool
+      {\msg_fatal:nn {ol-classical-letters}{installation}}
+    \cs_if_eq:NNF \formula \OLClassicalFormula
+      {\msg_fatal:nn {ol-classical-letters}{installation}}
+  }
+\ExplSyntaxOff
+\makeatother
+
+% Explicit registry rows are outside ExplSyntaxOn so Arabic label spaces
+% remain real spaces. Tests require exact equality with the JSON registry.
+\OLDeclareClassicalLetter{formula}{A}{label}{صيغة ألف}{!A}
+\OLDeclareClassicalLetter{latin-ordinary}{a}{glyph}{1EE00}{a}
+\OLDeclareClassicalLetter{latin-looped}{A}{glyph}{1EE80}{A}
+\OLDeclareClassicalLetter{formula}{B}{label}{صيغة باء}{!B}
+\OLDeclareClassicalLetter{latin-ordinary}{b}{glyph}{1EE01}{b}
+\OLDeclareClassicalLetter{latin-looped}{B}{glyph}{1EE81}{B}
+\OLDeclareClassicalLetter{formula}{C}{label}{صيغة جيم}{!C}
+\OLDeclareClassicalLetter{latin-ordinary}{c}{glyph}{1EE02}{c}
+\OLDeclareClassicalLetter{latin-looped}{C}{glyph}{1EE82}{C}
+\OLDeclareClassicalLetter{formula}{D}{label}{صيغة دال}{!D}
+\OLDeclareClassicalLetter{latin-ordinary}{d}{glyph}{1EE03}{d}
+\OLDeclareClassicalLetter{latin-looped}{D}{glyph}{1EE83}{D}
+\OLDeclareClassicalLetter{formula}{E}{label}{صيغة هاء}{!E}
+\OLDeclareClassicalLetter{latin-ordinary}{e}{glyph}{1EE24}{e}
+\OLDeclareClassicalLetter{latin-looped}{E}{glyph}{1EE84}{E}
+\OLDeclareClassicalLetter{formula}{F}{label}{صيغة واو}{!F}
+\OLDeclareClassicalLetter{latin-ordinary}{f}{glyph}{1EE05}{f}
+\OLDeclareClassicalLetter{latin-looped}{F}{glyph}{1EE85}{F}
+\OLDeclareClassicalLetter{formula}{G}{label}{صيغة زاي}{!G}
+\OLDeclareClassicalLetter{latin-ordinary}{g}{glyph}{1EE06}{g}
+\OLDeclareClassicalLetter{latin-looped}{G}{glyph}{1EE86}{G}
+\OLDeclareClassicalLetter{formula}{H}{label}{صيغة حاء}{!H}
+\OLDeclareClassicalLetter{latin-ordinary}{h}{glyph}{1EE07}{h}
+\OLDeclareClassicalLetter{latin-looped}{H}{glyph}{1EE87}{H}
+\OLDeclareClassicalLetter{formula}{I}{label}{صيغة طاء}{!I}
+\OLDeclareClassicalLetter{latin-ordinary}{i}{glyph}{1EE08}{i}
+\OLDeclareClassicalLetter{latin-looped}{I}{glyph}{1EE88}{I}
+\OLDeclareClassicalLetter{formula}{J}{label}{صيغة ياء}{!J}
+\OLDeclareClassicalLetter{latin-ordinary}{j}{glyph}{1EE09}{j}
+\OLDeclareClassicalLetter{latin-looped}{J}{glyph}{1EE89}{J}
+\OLDeclareClassicalLetter{formula}{K}{label}{صيغة كاف}{!K}
+\OLDeclareClassicalLetter{latin-ordinary}{k}{glyph}{1EE0A}{k}
+\OLDeclareClassicalLetter{latin-looped}{K}{label}{كاف كبرى}{K}
+\OLDeclareClassicalLetter{formula}{L}{label}{صيغة لام}{!L}
+\OLDeclareClassicalLetter{latin-ordinary}{l}{glyph}{1EE0B}{l}
+\OLDeclareClassicalLetter{latin-looped}{L}{glyph}{1EE8B}{L}
+\OLDeclareClassicalLetter{formula}{M}{label}{صيغة ميم}{!M}
+\OLDeclareClassicalLetter{latin-ordinary}{m}{glyph}{1EE0C}{m}
+\OLDeclareClassicalLetter{latin-looped}{M}{glyph}{1EE8C}{M}
+\OLDeclareClassicalLetter{formula}{N}{label}{صيغة نون}{!N}
+\OLDeclareClassicalLetter{latin-ordinary}{n}{glyph}{1EE0D}{n}
+\OLDeclareClassicalLetter{latin-looped}{N}{glyph}{1EE8D}{N}
+\OLDeclareClassicalLetter{formula}{O}{label}{صيغة سين}{!O}
+\OLDeclareClassicalLetter{latin-ordinary}{o}{glyph}{1EE0E}{o}
+\OLDeclareClassicalLetter{latin-looped}{O}{glyph}{1EE8E}{O}
+\OLDeclareClassicalLetter{formula}{P}{label}{صيغة عين}{!P}
+\OLDeclareClassicalLetter{latin-ordinary}{p}{glyph}{1EE0F}{p}
+\OLDeclareClassicalLetter{latin-looped}{P}{glyph}{1EE8F}{P}
+\OLDeclareClassicalLetter{formula}{Q}{label}{صيغة فاء}{!Q}
+\OLDeclareClassicalLetter{latin-ordinary}{q}{glyph}{1EE10}{q}
+\OLDeclareClassicalLetter{latin-looped}{Q}{glyph}{1EE90}{Q}
+\OLDeclareClassicalLetter{formula}{R}{label}{صيغة صاد}{!R}
+\OLDeclareClassicalLetter{latin-ordinary}{r}{glyph}{1EE11}{r}
+\OLDeclareClassicalLetter{latin-looped}{R}{glyph}{1EE91}{R}
+\OLDeclareClassicalLetter{formula}{S}{label}{صيغة قاف}{!S}
+\OLDeclareClassicalLetter{latin-ordinary}{s}{glyph}{1EE12}{s}
+\OLDeclareClassicalLetter{latin-looped}{S}{glyph}{1EE92}{S}
+\OLDeclareClassicalLetter{formula}{T}{label}{صيغة راء}{!T}
+\OLDeclareClassicalLetter{latin-ordinary}{t}{glyph}{1EE13}{t}
+\OLDeclareClassicalLetter{latin-looped}{T}{glyph}{1EE93}{T}
+\OLDeclareClassicalLetter{formula}{U}{label}{صيغة شين}{!U}
+\OLDeclareClassicalLetter{latin-ordinary}{u}{glyph}{1EE14}{u}
+\OLDeclareClassicalLetter{latin-looped}{U}{glyph}{1EE94}{U}
+\OLDeclareClassicalLetter{formula}{V}{label}{صيغة تاء}{!V}
+\OLDeclareClassicalLetter{latin-ordinary}{v}{glyph}{1EE15}{v}
+\OLDeclareClassicalLetter{latin-looped}{V}{glyph}{1EE95}{V}
+\OLDeclareClassicalLetter{formula}{W}{label}{صيغة ثاء}{!W}
+\OLDeclareClassicalLetter{latin-ordinary}{w}{glyph}{1EE16}{w}
+\OLDeclareClassicalLetter{latin-looped}{W}{glyph}{1EE96}{W}
+\OLDeclareClassicalLetter{formula}{X}{label}{صيغة خاء}{!X}
+\OLDeclareClassicalLetter{latin-ordinary}{x}{glyph}{1EE17}{x}
+\OLDeclareClassicalLetter{latin-looped}{X}{glyph}{1EE97}{X}
+\OLDeclareClassicalLetter{formula}{Y}{label}{صيغة ذال}{!Y}
+\OLDeclareClassicalLetter{latin-ordinary}{y}{glyph}{1EE18}{y}
+\OLDeclareClassicalLetter{latin-looped}{Y}{glyph}{1EE98}{Y}
+\OLDeclareClassicalLetter{formula}{Z}{label}{صيغة ضاد}{!Z}
+\OLDeclareClassicalLetter{latin-ordinary}{z}{glyph}{1EE19}{z}
+\OLDeclareClassicalLetter{latin-looped}{Z}{glyph}{1EE99}{Z}
+\OLDeclareClassicalLetter{greek-variable}{Gamma}{label}{متغيّر غاما كبرى}{\Gamma}
+\OLDeclareClassicalLetter{greek-variable}{Delta}{label}{متغيّر دلتا كبرى}{\Delta}
+\OLDeclareClassicalLetter{greek-variable}{alpha}{label}{متغيّر ألفا صغرى}{\alpha}

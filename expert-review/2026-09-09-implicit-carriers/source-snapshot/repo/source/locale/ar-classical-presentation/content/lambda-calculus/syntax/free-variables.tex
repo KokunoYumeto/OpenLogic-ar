@@ -1,0 +1,103 @@
+% Part: lambda-calculus
+% Chapter: syntax
+% Section: free-variables
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{syn}{fv}
+\olsection{المتغيرات الحرة}
+
+موضوع حساب لامبدا هو الدوال، وبالتجريد تنشأ فيه الدالة.
+فالمعنى الحدسي لـ$\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-looped}{M}}]$ أنه دالة يعيّن~${\OLId{latin-looped}{M}}$ قيمتها حين يسند وسيطها إلى~${\OLId{latin-ordinary}{x}}$.
+غير أن وقائع~${\OLId{latin-ordinary}{x}}$ في~${\OLId{latin-looped}{M}}$ ليست سواءً: فإذا اشتمل~${\OLId{latin-looped}{M}}$ على تجريد آخر~$\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-looped}{N}}]$،
+تعلقت وقائع~${\OLId{latin-ordinary}{x}}$ في~${\OLId{latin-looped}{N}}$ بالتجريد~$\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-looped}{N}}]$ دون~$\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-looped}{M}}]$.
+وعليه فإن تجريد لامبدا~$\lambd[{\OLId{latin-ordinary}{x}}]$ في~$\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-looped}{M}}]$ \emph{يربط}
+من وقائع~${\OLId{latin-ordinary}{x}}$ في~${\OLId{latin-looped}{M}}$ ما لم يربطه تجريد آخر؛ وتلك هي الوقائع \emph{الحرة} لـ${\OLId{latin-ordinary}{x}}$ في~${\OLId{latin-looped}{M}}$.
+
+\begin{defn}[المجال]
+متى وقع~$\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-looped}{M}}]$ في حد~${\OLId{latin-looped}{N}}$، سميت الواقعة المناظرة لـ${\OLId{latin-looped}{M}}$
+\emph{مجال}~$\lambd[{\OLId{latin-ordinary}{x}}]$.
+\end{defn}
+
+\begin{defn}[الواقعة الحرة والمقيدة]
+  واقعة المتغير~${\OLId{latin-ordinary}{x}}$ في الحد~${\OLId{latin-looped}{M}}$ \emph{حرة} إن لم تدخل في مجال
+  $\lambd[{\OLId{latin-ordinary}{x}}]$، و\emph{مقيدة} إن دخلت فيه. وتكون واقعة المتغير~${\OLId{latin-ordinary}{x}}$
+  في~$\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-looped}{M}}]$ مقيدة بـ$\lambd[{\OLId{latin-ordinary}{x}}]$ الابتدائية إذا وفقط إذا كانت
+  واقعة~${\OLId{latin-ordinary}{x}}$ في~${\OLId{latin-looped}{M}}$ حرة.
+\end{defn}
+% إصلاح صياغة (0360-N1): صيغ شرط الربط تكافؤًا صريحًا.
+
+\begin{ex}
+  انظر إلى~$\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{x}} {\OLId{latin-ordinary}{y}}]$: فإن~${\OLId{latin-ordinary}{x}}$ و${\OLId{latin-ordinary}{y}}$ كلاهما داخل مجال~$\lambd[{\OLId{latin-ordinary}{x}}]$،
+  ومن ثم يربط~${\OLId{latin-ordinary}{x}}$ التجريد~$\lambd[{\OLId{latin-ordinary}{x}}]$. وأما~${\OLId{latin-ordinary}{y}}$ فحر، إذ لا يدخل في مجال
+  $\lambd[{\OLId{latin-ordinary}{y}}]$. وفي~$\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{x}} {\OLId{latin-ordinary}{x}}]$ يربط واقعتي~${\OLId{latin-ordinary}{x}}$ التجريد~$\lambd[{\OLId{latin-ordinary}{x}}]$،
+  لأنهما حرتان في~$xx$. وأما في~$((\lambd[{\OLId{latin-ordinary}{x}}][xx]){\OLId{latin-ordinary}{x}})$ فآخر وقائع~${\OLId{latin-ordinary}{x}}$ حر،
+  لخروجه من مجال~$\lambd[{\OLId{latin-ordinary}{x}}]$. وفي
+  $\lambd[{\OLId{latin-ordinary}{x}}][(\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{x}}]){\OLId{latin-ordinary}{x}}]$ مجال~$\lambd[{\OLId{latin-ordinary}{x}}]$ الأولى هو
+  $(\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{x}}]){\OLId{latin-ordinary}{x}}$، ومجال~$\lambd[{\OLId{latin-ordinary}{x}}]$ الثانية هو الواقعة التي قبل الأخيرة
+  من~${\OLId{latin-ordinary}{x}}$. فإذا نظرنا إلى~$(\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{x}}]){\OLId{latin-ordinary}{x}}$ وجدنا آخر وقائع~${\OLId{latin-ordinary}{x}}$ حرًا،
+  والذي قبله مقيدًا. ولهذا فإن الواقعة قبل الأخيرة من~${\OLId{latin-ordinary}{x}}$ في
+  $\lambd[{\OLId{latin-ordinary}{x}}][(\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{x}}]){\OLId{latin-ordinary}{x}}]$ مقيدة بـ$\lambd[{\OLId{latin-ordinary}{x}}]$ الثانية، وأما الأخيرة فمقيدة بـ$\lambd[{\OLId{latin-ordinary}{x}}]$ الأولى.
+\end{ex}
+
+إذا تتبعنا وقائع المتغيرات في الحد~${\OLId{latin-looped}{P}}$، أمكن جمع متغيراته الحرة في مجموعة نرمز إليها بـ$\FV{{\OLId{latin-looped}{P}}}$.
+والتعريف التالي يصف هذه المجموعة وصفًا استقرائيًا مباشرًا:
+
+\begin{defn}[المتغيرات الحرة لحد] \ollabel{def:fv}
+  لمجموعة \emph{المتغيرات الحرة} في الحد التعريف الاستقرائي الآتي:
+  \begin{enumerate}
+    \item $\FV{{\OLId{latin-ordinary}{x}}} = \{{\OLId{latin-ordinary}{x}}\}$ \ollabel{def:fv1}
+    \item $\FV{\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-looped}{N}}]} = \FV{{\OLId{latin-looped}{N}}} \setminus \{{\OLId{latin-ordinary}{x}}\}$    \ollabel{def:fv2}
+    \item $\FV{PQ} = \FV{{\OLId{latin-looped}{P}}} \cup \FV{{\OLId{latin-looped}{Q}}}$ \ollabel{def:fv3}
+  \end{enumerate}
+\end{defn}
+
+\begin{prob}
+  \begin{enumerate}
+  \item بيّن مجال~$\lambd[{\OLId{latin-ordinary}{g}}]$ ومجال كل واحدة من واقعتي~$\lambd[{\OLId{latin-ordinary}{x}}]$ في الحد
+    $\lambd[{\OLId{latin-ordinary}{g}}][(\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{g}} ({\OLId{latin-ordinary}{x}} {\OLId{latin-ordinary}{x}})]) \lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{g}} ({\OLId{latin-ordinary}{x}} {\OLId{latin-ordinary}{x}})]]$.
+  \item انظر في وقائع المتغيرات في
+    $\lambd[{\OLId{latin-ordinary}{g}}][(\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{g}} ({\OLId{latin-ordinary}{x}} {\OLId{latin-ordinary}{x}})]) \lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{g}} ({\OLId{latin-ordinary}{x}} {\OLId{latin-ordinary}{x}})]]$: هل هي جميعًا مقيدة؟ وعيّن التجريد الذي يربط كل واقعة منها.
+    \item احسب~$\FV{\lambd[{\OLId{latin-ordinary}{x}}][(\lambd[{\OLId{latin-ordinary}{y}}][(\lambd[{\OLId{latin-ordinary}{z}}][{\OLId{latin-ordinary}{x}} {\OLId{latin-ordinary}{y}}]) {\OLId{latin-ordinary}{z}}]) {\OLId{latin-ordinary}{y}}]}$.
+  \end{enumerate}
+\end{prob}
+
+\begin{explain}
+المتغير الحر كالإحالة إلى خارج الحد، أي إلى \emph{البيئة}.
+فالحد المشتمل على متغيرات حرة لم يكتمل تحديده؛ إذ يتوقف سلوكه على ما تعيّنه البيئة.
+فالحد~$\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{f}} {\OLId{latin-ordinary}{x}}]$، مثلًا، يأخذ وسيطًا~${\OLId{latin-ordinary}{x}}$ ويعيد حاصل تطبيق~${\OLId{latin-ordinary}{f}}$ عليه،
+وفيه المتغير~${\OLId{latin-ordinary}{f}}$ حر. ولذلك تتوقف قيمة هذا الحد على بيئته،
+ولا سيما على قيمة~${\OLId{latin-ordinary}{f}}$ فيها.
+
+فإذا جرّدنا هذا الحد حصلنا على~$\lambd[{\OLId{latin-ordinary}{f}}][\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{f}}
+    {\OLId{latin-ordinary}{x}}]]$. وعندئذ ينقطع اعتماده على متغير البيئة~${\OLId{latin-ordinary}{f}}$؛
+إذ يصير دالًا على دالة ذات وسيطين تطبق أولهما على ثانيهما.
+فلو تغيرت قيمة~${\OLId{latin-ordinary}{f}}$ في البيئة، لم يتغير سلوك الحد؛
+لأنه يستعمل ما يدفع إليه وسيطًا، ولا يستعمل قيمة~${\OLId{latin-ordinary}{f}}$ في البيئة.
+\end{explain}
+
+\begin{defn}[الحد المغلق، المؤلف]
+  الحد الخالي من المتغيرات الحرة يسمى \emph{حدًا مغلقًا}،
+  ويسمى أيضًا \emph{مؤلفًا}.
+\end{defn}
+
+\begin{lem}\ollabel{lem:fv}
+  \begin{enumerate}
+    \item \ollabel{lem:fv-abs} بشرط~${\OLId{latin-ordinary}{y}} \neq {\OLId{latin-ordinary}{x}}$، تتكافأ العبارتان~${\OLId{latin-ordinary}{y}} \in
+      \FV{\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-looped}{N}}]}$ و${\OLId{latin-ordinary}{y}} \in \FV{{\OLId{latin-looped}{N}}}$.
+    \item \ollabel{lem:fv-app} شرط~${\OLId{latin-ordinary}{y}} \in \FV{PQ}$، وهو كاف أيضًا، أن يكون
+      ${\OLId{latin-ordinary}{y}} \in \FV{{\OLId{latin-looped}{P}}}$ أو~${\OLId{latin-ordinary}{y}} \in \FV{{\OLId{latin-looped}{Q}}}$.
+    \end{enumerate}
+\end{lem}
+
+\begin{proof}
+  يترك إثباتها تمرينًا.
+\end{proof}
+
+\begin{prob}
+  أقم برهان~\olref[lam][syn][fv]{lem:fv}.
+\end{prob}
+
+\end{document}

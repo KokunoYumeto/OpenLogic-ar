@@ -1,0 +1,52 @@
+% Part: second-order-logic
+% Chapter: metatheory
+% Section: undecidability-and-axiomatizability
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sol}{met}{nax}
+
+\olsection{منطق الرتبة الثانية غير قابل للمحورة}
+
+\begin{thm}
+\ollabel{thm:sol-undecidable}
+لا يقبل منطق الرتبة الثانية القرار.
+\end{thm}
+
+\begin{proof}
+إن !!{sentence} الرتبة الأولى تكون صحيحة منطقيًا في الرتبة الأولى
+إذا وفقط إذا كانت صحيحة منطقيًا في الرتبة الثانية. فلو أمكن القرار
+في الثانية لأمكن في الأولى، وقد ثبت امتناعه فيها.
+\end{proof}
+
+\begin{thm}
+\ollabel{cor:sol-not-axiomatizable}
+يمتنع أن يكون لمنطق الرتبة الثانية نسق !!{derivation} سليم وكامل.
+\end{thm}
+
+\begin{proof}
+خذ~$!A$ !!a{sentence} من لغة الحساب.
+يكون~$\Sat{{\OLId{latin-looped}{N}}}{!A}$ إذا وفقط إذا~$\Th{PA^2} \Entails !A$.
+ولنجعل~$!P$ اقتران بديهيات~$\Th{PA^2}$ التسع.
+عندئذ~$\Th{PA^2} \Entails !A$ إذا وفقط إذا~$\Entails !P \lif !A$،
+أي~$\Sat{{\OLId{latin-looped}{M}}}{!P \lif !A}$. ولننظر في !!{sentence}
+$\lforall[{\OLId{latin-ordinary}{z}}][\lforall[{\OLId{latin-ordinary}{u}}][\lforall[{\OLId{latin-ordinary}{u}}'][\lforall[{\OLId{latin-ordinary}{u}}''][\lforall[{\OLId{latin-looped}{L}}][(!P' \lif !A')]]]]]$
+التي نحصل عليها بوضع~${\OLId{latin-ordinary}{z}}$ محل~$\Obj{0}$، ومتغير الدالة الأحادي
+الموضع~${\OLId{latin-ordinary}{u}}$ محل~$\prime$، ومتغيري الدالة الثنائيي الموضع~${\OLId{latin-ordinary}{u}}'$ و${\OLId{latin-ordinary}{u}}''$
+محل~$+$ و$\times$ على الترتيب، ومتغير العلاقة الثنائي الموضع~${\OLId{latin-looped}{L}}$
+محل~$<$، ثم تكميم هذه المتغيرات كليًا.
+هذه جملة من الرتبة الثانية الخالصة؛ وصحتها المنطقية تكافئ
+الصحة المنطقية للجملة الأصلية، التي تكافئ~$\Th{PA^2} \Entails !A$،
+وهذا يكافئ~$\Sat{{\OLId{latin-looped}{N}}}{!A}$.
+فلو كان للرتبة الثانية نسق برهان سليم وكامل، لأمكن به تعريف تعداد
+قابل للحساب~${\OLId{latin-ordinary}{f}}\colon \Nat \to \Sent[{\OLId{latin-looped}{L}}_{\OLId{latin-looped}{A}}]$ يستوعب
+!!{sentence}s الصادقة في~$\Struct{N}$.
+ولمثّلنا هذه الدالة في~$\Th{Q}$ بصيغة من الرتبة
+الأولى~$!B_{\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}})$؛ فتغدو !!{formula}~$\lexists[{\OLId{latin-ordinary}{x}}][!B_{\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}})]$
+تعريفًا لمجموعة !!{sentence}s الرتبة الأولى الصادقة
+في~$\Struct{N}$. وذلك يناقض مبرهنة تارسكي.
+\end{proof}
+
+\end{document}

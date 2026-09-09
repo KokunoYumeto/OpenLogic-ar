@@ -1,0 +1,69 @@
+% Part: lambda-calculus
+% Chapter: lambda-definability
+% Section: minimization
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{ldf}{min}
+\olsection{التصغير}
+
+الدوال العودية العامة هي الحاصلة من الدوال الأساس~$\Zero$ و$\Succ$
+و$\Proj{{\OLId{latin-ordinary}{n}}}{{\OLId{latin-ordinary}{i}}}$، بإعمال التركيب والعودية البدائية والتصغير النظامي.
+وقد ثبت أمر الدوال الأساس والإغلاق تحت العمليتين الأوليين؛ فلكي نثبت
+أن كل دالة عودية عامة !!{lambda definable}، بقي أن نثبت أن التصغير
+النظامي لدالة~!!a{lambda definable} ينتج دالة !!{lambda definable}.
+
+\begin{lem}
+  \ollabel{lem:min} إذا كانت~${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{1}}, \dots, {\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{k}}, {\OLId{latin-ordinary}{y}})$ نظامية
+  و!!{lambda definable}، فإن الدالة~${\OLId{latin-ordinary}{h}}$ المعرفة بـ
+  \[
+  {\OLId{latin-ordinary}{h}}({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{1}}, \dots, {\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{k}}) = \umin{{\OLId{latin-ordinary}{y}}}{{\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{1}},\dots,{\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{k}}, {\OLId{latin-ordinary}{y}}) = {\OLMathNumeral{0}}}
+  \]
+  تكون هي أيضًا !!{lambda definable}.
+\end{lem}
+
+\begin{proof}
+  افترض أن حد~$\lambda$~${\OLId{latin-looped}{F}}$ يعرّف بلامبدا الدالة النظامية
+  ${\OLId{latin-ordinary}{f}}(\vec {\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}})$. ونبني، لكي !!{lambda define}~${\OLId{latin-ordinary}{h}}$، حد بحث نستعمل
+  معه مركّب نقطة ثابتة:
+  \begin{align*}
+    \fn{Search} & \ident \lambd[{\OLId{latin-ordinary}{g}}][\lambd[{\OLId{latin-ordinary}{f}}\,\vec{{\OLId{latin-ordinary}{x}}}\,{\OLId{latin-ordinary}{y}}][
+        \fn{IsZero} ({\OLId{latin-ordinary}{f}}\, \vec{{\OLId{latin-ordinary}{x}}}\, {\OLId{latin-ordinary}{y}})\, {\OLId{latin-ordinary}{y}}\, ({\OLId{latin-ordinary}{g}}\, {\OLId{latin-ordinary}{f}}\, \vec{{\OLId{latin-ordinary}{x}}}\, (\fn{Succ}\, {\OLId{latin-ordinary}{y}}))]]\\
+    {\OLId{latin-looped}{H}} & \ident \lambd[\vec {\OLId{latin-ordinary}{x}}][({\OLId{latin-looped}{Y}} \, \fn{Search}) {\OLId{latin-looped}{F}}\, \vec{{\OLId{latin-ordinary}{x}}}\, \num{{\OLMathNumeral{0}}}],
+  \end{align*}
+  حيث يجوز أن يكون~${\OLId{latin-looped}{Y}}$ أي مركّب للنقطة الثابتة. ومعنى~$\fn{Search}$
+  أنها عملية بحث عودية تبدأ من~${\OLId{latin-ordinary}{y}}$: تختبر~${\OLId{latin-ordinary}{f}}\,\vec {\OLId{latin-ordinary}{x}}\,{\OLId{latin-ordinary}{y}}$؛ فإن كان
+  صفرًا ردّت~${\OLId{latin-ordinary}{y}}$، وإن لم يكن نادت نفسها عند~$\fn{Succ}\,{\OLId{latin-ordinary}{y}}$.
+  فإذا بدأنا بالصفر، أعاد
+  $({\OLId{latin-looped}{Y}} \, \fn{Search}) {\OLId{latin-looped}{F}} \num{{\OLId{latin-ordinary}{n}}_{\OLMathNumeral{1}}}\dots\num{{\OLId{latin-ordinary}{n}}_{\OLId{latin-ordinary}{k}}}\,\num{{\OLMathNumeral{0}}}$
+  أصغر~${\OLId{latin-ordinary}{m}}$ يحقق~${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{n}}_{\OLMathNumeral{1}}, \dots, {\OLId{latin-ordinary}{n}}_{\OLId{latin-ordinary}{k}}, {\OLId{latin-ordinary}{m}}) = {\OLMathNumeral{0}}$.
+  
+  وتفصيل ذلك أن
+  \begin{align*}
+    ({\OLId{latin-looped}{Y}} \, \fn{Search}) {\OLId{latin-looped}{F}} \num{{\OLId{latin-ordinary}{n}}_{\OLMathNumeral{1}}}
+    \dots\num{{\OLId{latin-ordinary}{n}}_{\OLId{latin-ordinary}{k}}}\, \num{{\OLId{latin-ordinary}{m}}} & \red \num{{\OLId{latin-ordinary}{m}}}
+    \intertext{إذا كان~${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{n}}_{\OLMathNumeral{1}}, \dots, {\OLId{latin-ordinary}{n}}_{\OLId{latin-ordinary}{k}}, {\OLId{latin-ordinary}{m}}) = {\OLMathNumeral{0}}$، أو}
+    & \red ({\OLId{latin-looped}{Y}} \, \fn{Search}) {\OLId{latin-looped}{F}}\, \num{{\OLId{latin-ordinary}{n}}_{\OLMathNumeral{1}}} \dots\num{{\OLId{latin-ordinary}{n}}_{\OLId{latin-ordinary}{k}}}\, \num{{\OLId{latin-ordinary}{m}}+{\OLMathNumeral{1}}}
+    \intertext{في غير ذلك. وبما أن~${\OLId{latin-ordinary}{f}}$ نظامية، يوجد~${\OLId{latin-ordinary}{y}}$ يحقق
+      ${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{n}}_{\OLMathNumeral{1}}, \dots, {\OLId{latin-ordinary}{n}}_{\OLId{latin-ordinary}{k}}, {\OLId{latin-ordinary}{y}}) = {\OLMathNumeral{0}}$، ومن ثم}
+    ({\OLId{latin-looped}{Y}} \, \fn{Search}) {\OLId{latin-looped}{F}} \num{{\OLId{latin-ordinary}{n}}_{\OLMathNumeral{1}}} \dots\num{{\OLId{latin-ordinary}{n}}_{\OLId{latin-ordinary}{k}}}\,\num{{\OLMathNumeral{0}}}
+    & \red \num{{\OLId{latin-ordinary}{h}}({\OLId{latin-ordinary}{n}}_{\OLMathNumeral{1}}, \dots, {\OLId{latin-ordinary}{n}}_{\OLId{latin-ordinary}{k}})}.
+    \end{align*}
+  فالنظامية تضمن انتهاء هذا البحث، والحد الأخير يمثل الدالة المطلوبة.
+\end{proof}
+
+
+\begin{prop}
+  كل دالة عودية عامة !!{lambda definable}.
+\end{prop}
+
+\begin{proof}
+ فالدوال الأساس !!{lambda definable} بـ\olref[prf]{lem:basic}،
+ وصنف الدوال !!{lambda definable} مغلق تحت التركيب والعودية البدائية والتصغير النظامي
+ بـ\olref[prf]{lem:comp} و\olref[prf]{lem:prim} و\olref{lem:min}.
+ وهذه هي عمليات بناء الدوال العودية العامة، فيثبت المطلوب.
+\end{proof}
+
+\end{document}

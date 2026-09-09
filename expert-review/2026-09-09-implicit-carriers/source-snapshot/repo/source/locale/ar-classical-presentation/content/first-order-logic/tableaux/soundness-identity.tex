@@ -1,0 +1,45 @@
+% Part: first-order-logic
+% Chapter: tableaux
+% Section: soundness-identity
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{tab}{sid}
+
+\olsection{السلامة مع \usetoken{S}{identity}}
+
+\begin{prop}
+!!^{tableau}s ذات قواعد الهوية سليمة: فلا !!{tableau} مغلق قابل للإرضاء.
+\end{prop}
+
+\begin{proof}
+يكفي، على ما تقدّم، أن نأخذ فرعًا قابلًا للإرضاء من !!a{tableau}
+ونثبت أن إجراء إحدى قواعد~$\eq$ عليه يبقيه قابلًا للإرضاء.
+نسمّي~${\OLId{greek-variable}{Gamma}}$ مجموعة ال!!{formula}s الموقّعة على الفرع،
+ونأخذ~$\Struct{M}$، وهي !!a{structure} ترضي~${\OLId{greek-variable}{Gamma}}$.
+
+أما إن مدّدنا الفرع بقاعدة~$\eq$، فقد أضفنا ال!!{formula}
+الموقّعة~$\sFmla{\True}{\eq[{\OLId{latin-ordinary}{t}}][{\OLId{latin-ordinary}{t}}]}$. وصدق
+$\Sat{{\OLId{latin-looped}{M}}}{\eq[{\OLId{latin-ordinary}{t}}][{\OLId{latin-ordinary}{t}}]}$ بيّن؛ فتبقى~$\Struct{M}$ مرضيةً
+لـ~${\OLId{greek-variable}{Gamma}} \cup
+\{\sFmla{\True}{\eq[{\OLId{latin-ordinary}{t}}][{\OLId{latin-ordinary}{t}}]}\}$.
+
+وأما إن مدّدناه بـ~$\TRule{\True}{\eq}$، فنضيف !!{formula}
+موقّعة هي~$\sFmla{\True}{!A({\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}})}$، وقد اشتملت~${\OLId{greek-variable}{Gamma}}$ على
+$\sFmla{\True}{\eq[{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}][{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}}]}$ و$\sFmla{\True}{!A({\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}})}$.
+فيلزم~$\Sat{{\OLId{latin-looped}{M}}}{\eq[{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}][{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}}]}$ و$\Sat{{\OLId{latin-looped}{M}}}{!A({\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}})}$.
+نأخذ~${\OLId{latin-ordinary}{s}}$ إسنادًا يحقق~${\OLId{latin-ordinary}{s}}({\OLId{latin-ordinary}{x}}) = \Value{{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}}{{\OLId{latin-looped}{M}}}$.
+وبمقتضى \olref[syn][ass]{prop:sentence-sat-true}
+نحصل على~$\Sat{{\OLId{latin-looped}{M}}}{!A({\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}})}[{\OLId{latin-ordinary}{s}}]$. ولأن~$\varAssign{{\OLId{latin-ordinary}{s}}}{{\OLId{latin-ordinary}{s}}}{{\OLId{latin-ordinary}{x}}}$،
+تفيد \olref[syn][ext]{prop:ext-formulas} أن~$\Sat{{\OLId{latin-looped}{M}}}{!A({\OLId{latin-ordinary}{x}})}[{\OLId{latin-ordinary}{s}}]$.
+ومن~$\Sat{{\OLId{latin-looped}{M}}}{\eq[{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}][{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}}]}$ يلزم~$\Value{{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}}{{\OLId{latin-looped}{M}}} = \Value{{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}}}{{\OLId{latin-looped}{M}}}$،
+فيكون~${\OLId{latin-ordinary}{s}}({\OLId{latin-ordinary}{x}}) = \Value{{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}}}{{\OLId{latin-looped}{M}}}$. نعيد استعمال
+\olref[syn][ext]{prop:ext-formulas}، فيحصل
+$\Sat{{\OLId{latin-looped}{M}}}{!A({\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}})}[{\OLId{latin-ordinary}{s}}]$. ثم ننتهي، بمقتضى
+\olref[syn][ass]{prop:sentence-sat-true}، إلى~$\Sat{{\OLId{latin-looped}{M}}}{!A({\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}})}$.
+وحالة~$\TRule{\False}{\eq}$ تجري على هذا المسلك نفسه.
+\end{proof}
+
+\end{document}

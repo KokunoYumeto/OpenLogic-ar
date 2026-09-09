@@ -1,0 +1,93 @@
+% part: intuitionistic-logic
+% chapter: propositions-as-types
+% section: terms-to-proofs
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{pty}{tp}
+
+\olsection{في استعادة \usetoken{P}{derivation} من حدود البرهان}
+
+لننظر الآن في الاتجاه الآخر: ترجمة حد برهان~${\OLId{latin-looped}{N}}$ صحيح وقابل للتنميط إلى
+!!a{proof} في~\Log{N2i}. ولا يمكن ذلك عمومًا إلا بالنسبة إلى سياق يحتوي
+زوجًا~${\OLId{latin-ordinary}{x}}:!A$ لكل متغير~${\OLId{latin-ordinary}{x}}$ يقع حرًا في حد البرهان المعطى؛ أما الحد الخام
+غير القابل للتنميط فلا يرمّز برهانًا صحيحًا. ولنبدأ بمثال لا متغيرات حرة
+فيه، هو الحد
+\[
+\lambd[\typeof{{\OLId{latin-ordinary}{x}}}{!A \land
+  !B}][\pair{\proj{{\OLMathNumeral{2}}}{{\OLId{latin-ordinary}{x}}}}{\proj{{\OLMathNumeral{1}}}{{\OLId{latin-ordinary}{x}}}}].
+\]
+إنه من الصورة~$\lambd[\typeof{{\OLId{latin-ordinary}{x}}}{!A\land !B}][{\OLId{latin-looped}{N}}_{\OLMathNumeral{1}}]$. ولأن القاعدة الوحيدة
+في~\Log{tN2i} التي تنتج حدًا من هذه الصورة هي~\Intro{\lif}، نعرف أن
+!!{proof} الذي يرمّزه~${\OLId{latin-looped}{N}}$ لا بد أن ينتهي بـ~\Intro{\lif}؛ أي إنه ينتهي
+هكذا:
+  \[
+  \Axiom${\OLId{latin-ordinary}{x}} : !A\land !B \fCenter \pair{\proj{{\OLMathNumeral{2}}}{{\OLId{latin-ordinary}{x}}}}{\proj{{\OLMathNumeral{1}}}{{\OLId{latin-ordinary}{x}}}} :
+    !C$
+  \RightLabel{\Intro\lif}
+  \UnaryInf$\fCenter \lambd[\typeof{{\OLId{latin-ordinary}{x}}}{!A \land
+  !B}][\pair{\proj{{\OLMathNumeral{2}}}{{\OLId{latin-ordinary}{x}}}}{\proj{{\OLMathNumeral{1}}}{{\OLId{latin-ordinary}{x}}}}] : (!A \land !B) \lif !C$
+  \DisplayProof
+  \]
+لا نعرف بعد ما~$!C$، لكننا نعرف أن مقدم الشرط هو~$!A\land !B$، وأن سياق
+المقدمة لا بد أن يحتوي~${\OLId{latin-ordinary}{x}}:!A\land !B$.
+
+وقد تحدد الآن حد البرهان المرتبط بالمقدمة، وهو
+$\pair{\proj{{\OLMathNumeral{2}}}{{\OLId{latin-ordinary}{x}}}}{\proj{{\OLMathNumeral{1}}}{{\OLId{latin-ordinary}{x}}}}$. ولا بد أن ينتهي~!!{proof} الذي يرمّزه
+\emph{هو} بـ~\Intro{\land}. وما زلنا لا نعرف ما~$!C$، لكننا نعرف، لكونه
+نتيجة~\Intro{\land}، أنه لا بد أن يكون اقترانًا؛ أي
+$!C\ident(!C_{\OLMathNumeral{1}}\land !C_{\OLMathNumeral{2}})$. فنواصل إعادة البناء:
+  \[
+  \Axiom${\OLId{latin-ordinary}{x}} : !A\land !B \fCenter \proj{{\OLMathNumeral{2}}}{{\OLId{latin-ordinary}{x}}} : !C_{\OLMathNumeral{1}}$
+  \Axiom${\OLId{latin-ordinary}{x}} : !A\land !B \fCenter \proj{{\OLMathNumeral{1}}}{{\OLId{latin-ordinary}{x}}} : !C_{\OLMathNumeral{2}}$
+  \RightLabel{\Intro\land}
+  \BinaryInf${\OLId{latin-ordinary}{x}} : !A\land !B \fCenter \pair{\proj{{\OLMathNumeral{2}}}{{\OLId{latin-ordinary}{x}}}}{\proj{{\OLMathNumeral{1}}}{{\OLId{latin-ordinary}{x}}}} :
+    !C_{\OLMathNumeral{1}} \land !C_{\OLMathNumeral{2}}$
+  \RightLabel{\Intro\lif}
+  \UnaryInf$\fCenter \lambd[\typeof{{\OLId{latin-ordinary}{x}}}{!A \land
+  !B}][\pair{\proj{{\OLMathNumeral{2}}}{{\OLId{latin-ordinary}{x}}}}{\proj{{\OLMathNumeral{1}}}{{\OLId{latin-ordinary}{x}}}}] : (!A \land !B) \lif (!C_{\OLMathNumeral{1}} \land !C_{\OLMathNumeral{2}})$
+  \DisplayProof
+  \]
+يدل حد البرهان~$\pi_{\OLMathNumeral{2}}({\OLId{latin-ordinary}{x}})$ على أن المتتالية العليا اليسرى حُصل عليها
+بـ~\Elim{\land}[\OLClassicalDigits{2}]، أي إن المقدمة من الصورة~$!D\land !C_{\OLMathNumeral{1}}$. وعلى اليمين
+نستطيع تعيين أن الاستدلال المؤدي إلى~$!C_{\OLMathNumeral{2}}$ لا بد أن يكون~\Elim{\land}[\OLClassicalDigits{1}]،
+وأن المقدمة من الصورة~$!C_{\OLMathNumeral{2}}\land !E$.
+  \[
+  \Axiom${\OLId{latin-ordinary}{x}} : !A\land !B \fCenter {\OLId{latin-ordinary}{x}}: !D\land !C_{\OLMathNumeral{1}}$
+  \RightLabel{\Elim\land[{\OLMathNumeral{2}}]}
+  \UnaryInf${\OLId{latin-ordinary}{x}} : !A\land !B \fCenter \proj{{\OLMathNumeral{2}}}{{\OLId{latin-ordinary}{x}}} : !C_{\OLMathNumeral{1}}$
+  \Axiom${\OLId{latin-ordinary}{x}} : !A\land !B \fCenter {\OLId{latin-ordinary}{x}}: !C_{\OLMathNumeral{2}}\land !E$
+  \RightLabel{\Elim\land[{\OLMathNumeral{1}}]}
+  \UnaryInf${\OLId{latin-ordinary}{x}} : !A\land !B \fCenter \proj{{\OLMathNumeral{1}}}{{\OLId{latin-ordinary}{x}}} : !C_{\OLMathNumeral{2}}$
+  \RightLabel{\Intro\land}
+  \BinaryInf${\OLId{latin-ordinary}{x}} : !A\land !B \fCenter \pair{\proj{{\OLMathNumeral{2}}}{{\OLId{latin-ordinary}{x}}}}{\proj{{\OLMathNumeral{1}}}{{\OLId{latin-ordinary}{x}}}} :
+    !C_{\OLMathNumeral{1}} \land !C_{\OLMathNumeral{2}}$
+  \RightLabel{\Intro\lif}
+  \UnaryInf$\fCenter \lambd[\typeof{{\OLId{latin-ordinary}{x}}}{!A \land
+  !B}][\pair{\proj{{\OLMathNumeral{2}}}{{\OLId{latin-ordinary}{x}}}}{\proj{{\OLMathNumeral{1}}}{{\OLId{latin-ordinary}{x}}}}] : (!A \land !B) \lif (!C_{\OLMathNumeral{1}} \land !C_{\OLMathNumeral{2}})$
+  \DisplayProof
+  \]
+ولأن حدود البرهان في المتتاليتين العليين صارت متغيرات، نعرف أنهما لا بد أن
+تكونا بديهيتين. وهذا يعيّن~$!C_{\OLMathNumeral{1}}$ و$!C_{\OLMathNumeral{2}}$ و$!D$ و$!E$: فلا بد أن يكون
+$!D\ident !A$ و$!C_{\OLMathNumeral{1}}\ident !B$، وإلا لم تكن المتتالية اليسرى بديهية؛ ولا
+بد أن يكون~$!C_{\OLMathNumeral{2}}\ident !A$ و$!E\ident !B$، وإلا لم تكن المتتالية اليمنى
+بديهية. وعلى هذا استعدنا البرهان كاملًا:
+  \[
+  \Axiom${\OLId{latin-ordinary}{x}} : !A\land !B \fCenter {\OLId{latin-ordinary}{x}}: !A\land !B$
+  \RightLabel{\Elim\land[{\OLMathNumeral{2}}]}
+  \UnaryInf${\OLId{latin-ordinary}{x}} : !A\land !B \fCenter \proj{{\OLMathNumeral{2}}}{{\OLId{latin-ordinary}{x}}} : !B$
+  \Axiom${\OLId{latin-ordinary}{x}} : !A\land !B \fCenter {\OLId{latin-ordinary}{x}}: !A\land !B$
+  \RightLabel{\Elim\land[{\OLMathNumeral{1}}]}
+  \UnaryInf${\OLId{latin-ordinary}{x}} : !A\land !B \fCenter \proj{{\OLMathNumeral{1}}}{{\OLId{latin-ordinary}{x}}} : !A$
+  \RightLabel{\Intro\land}
+  \BinaryInf${\OLId{latin-ordinary}{x}} : !A\land !B \fCenter \pair{\proj{{\OLMathNumeral{2}}}{{\OLId{latin-ordinary}{x}}}}{\proj{{\OLMathNumeral{1}}}{{\OLId{latin-ordinary}{x}}}} :
+    !B \land !A$
+  \RightLabel{\Intro\lif}
+  \UnaryInf$\fCenter \lambd[\typeof{{\OLId{latin-ordinary}{x}}}{!A \land
+  !B}][\pair{\proj{{\OLMathNumeral{2}}}{{\OLId{latin-ordinary}{x}}}}{\proj{{\OLMathNumeral{1}}}{{\OLId{latin-ordinary}{x}}}}] : (!A \land !B) \lif (!B \land !A)$
+  \DisplayProof
+  \]
+
+\end{document}

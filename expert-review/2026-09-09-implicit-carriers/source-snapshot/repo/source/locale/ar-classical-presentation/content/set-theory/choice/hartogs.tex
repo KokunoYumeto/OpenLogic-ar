@@ -1,0 +1,93 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{choice}{hartogs}
+\olsection{القابلية للمقارنة ولمّة هارتوغس}
+
+هذا وجه الأمر النافع؛ وأما وجهه الآخر، فإن الحال من غير الاختيار يختل
+اختلالًا شديدًا. وتظهر العلة في النتيجة الحسنة الآتية
+لـ~\cite{Hartogs1915}.
+
+\begin{lem}[\emph{في $\ZF$}]\ollabel{HartogsLemma}
+لكل مجموعة~${\OLId{latin-looped}{A}}$، يوجد عدد ترتيبي~${\OLId{greek-variable}{alpha}}$ بحيث
+$\cardnless{{\OLId{greek-variable}{alpha}}}{{\OLId{latin-looped}{A}}}$.
+\end{lem}
+
+\begin{proof}
+إذا كان~${\OLId{latin-looped}{B}} \subseteq {\OLId{latin-looped}{A}}$ و${\OLId{latin-looped}{R}} \subseteq {\OLId{latin-looped}{B}}^{\OLMathNumeral{2}}$، فإن
+$\tuple{{\OLId{latin-looped}{B}}, {\OLId{latin-looped}{R}}} \subseteq {\OLId{latin-looped}{V}}_{\setrank{{\OLId{latin-looped}{A}}}+{\OLMathNumeral{4}}}$، وذلك بمقتضى
+\olref[ord-arithmetic][using-addition]{rankcomputation}. فانظر،
+باستعمال الفصل، إلى المجموعة:
+\[
+	{\OLId{latin-looped}{C}} = \Setabs{\tuple{{\OLId{latin-looped}{B}}, {\OLId{latin-looped}{R}}} \in {\OLId{latin-looped}{V}}_{\setrank{{\OLId{latin-looped}{A}}}+{\OLMathNumeral{5}}}}{{\OLId{latin-looped}{B}}\subseteq {\OLId{latin-looped}{A}}
+	\text{ و$\tuple{{\OLId{latin-looped}{B}}, {\OLId{latin-looped}{R}}}$ ترتيب جيد}}
+\]
+ثم كوّن، بالاستبدال وبالاستعانة بـ
+\olref[ordinals][ordtype]{thmOrdinalRepresentation}، المجموعة:
+\[
+	{\OLId{greek-variable}{alpha}} = \Setabs{\ordtype{{\OLId{latin-looped}{B}}, {\OLId{latin-looped}{R}}}}{\tuple{{\OLId{latin-looped}{B}}, {\OLId{latin-looped}{R}}} \in {\OLId{latin-looped}{C}}}.
+\]
+وهذه~${\OLId{greek-variable}{alpha}}$ عدد ترتيبي بموجب
+\olref[ordinals][basic]{corordtransitiveord}، لأنها مجموعة متعدية من
+الأعداد الترتيبية. ووجه ذلك أنه إذا كان~$\gamma \in \beta \in {\OLId{greek-variable}{alpha}}$،
+فإن~$\beta = \ordtype{{\OLId{latin-looped}{B}}, {\OLId{latin-looped}{R}}}$ لبعض~${\OLId{latin-looped}{B}} \subseteq {\OLId{latin-looped}{A}}$، وحينئذ
+$\gamma = \ordtype{{\OLId{latin-looped}{B}}_{\OLId{latin-ordinary}{b}}, {\OLId{latin-looped}{R}}_{\OLId{latin-ordinary}{b}}}$ لبعض~${\OLId{latin-ordinary}{b}} \in {\OLId{latin-looped}{B}}$، على ما في
+\olref[ordinals][iso]{wellordinitialsegment}؛ ومن ثم
+$\gamma \in {\OLId{greek-variable}{alpha}}$.
+
+ونطلب التناقض، فنفرض وجود !!a{injection}
+${\OLId{latin-ordinary}{f}} \colon {\OLId{greek-variable}{alpha}} \to {\OLId{latin-looped}{A}}$. وعندئذ ضع:
+\begin{align*}
+	{\OLId{latin-looped}{B}} &= \ran{{\OLId{latin-ordinary}{f}}}\\
+	{\OLId{latin-looped}{R}} &= \Setabs{\tuple{{\OLId{latin-ordinary}{f}}(\gamma), {\OLId{latin-ordinary}{f}}(\delta)} \in {\OLId{latin-looped}{A}} \times {\OLId{latin-looped}{A}}}
+	  {\gamma,\delta \in {\OLId{greek-variable}{alpha}} \land \gamma \in \delta}.
+\end{align*}
+فواضح أن~${\OLId{greek-variable}{alpha}} = \ordtype{{\OLId{latin-looped}{B}}, {\OLId{latin-looped}{R}}}$ وأن
+$\tuple{{\OLId{latin-looped}{B}}, {\OLId{latin-looped}{R}}} \in {\OLId{latin-looped}{C}}$. فيلزم~${\OLId{greek-variable}{alpha}} \in {\OLId{greek-variable}{alpha}}$، وهذا محال.
+% تصحيح مصدر (0595-I1): فُصل متغيرا الربط gamma وdelta عن العدد الترتيبي alpha وقُيدا بمجال f.
+\end{proof}
+
+وينشأ عن ذلك حكم عميق.
+
+\begin{thm}[\emph{في $\ZF$}]
+الادعاءان الآتيان متكافئان:
+\begin{enumerate}
+	\item\ollabel{equivwo} مسلّمة الترتيب الجيد؛
+	\item\ollabel{equivcompare} إما~$\cardle{{\OLId{latin-looped}{A}}}{{\OLId{latin-looped}{B}}}$ أو
+	$\cardle{{\OLId{latin-looped}{B}}}{{\OLId{latin-looped}{A}}}$، لأي مجموعتين~${\OLId{latin-looped}{A}}$ و${\OLId{latin-looped}{B}}$.
+\end{enumerate}
+\end{thm}
+
+\begin{proof}
+\emph{\olref{equivwo} $\Rightarrow$ \olref{equivcompare}.} خذ~${\OLId{latin-looped}{A}}$
+و${\OLId{latin-looped}{B}}$. من~\olref{equivwo} يوجد ترتيبان جيدان
+$\tuple{{\OLId{latin-looped}{A}}, {\OLId{latin-looped}{R}}}$ و$\tuple{{\OLId{latin-looped}{B}}, {\OLId{latin-looped}{S}}}$. ومن
+\olref[ordinals][ordtype]{thmOrdinalRepresentation} يوجد تماثلان
+${\OLId{latin-ordinary}{f}} \colon {\OLId{greek-variable}{alpha}} \to \tuple{{\OLId{latin-looped}{A}}, {\OLId{latin-looped}{R}}}$ و
+${\OLId{latin-ordinary}{g}} \colon \beta \to \tuple{{\OLId{latin-looped}{B}}, {\OLId{latin-looped}{S}}}$. وبحسب
+\olref[sth][ordinals][basic]{ordinalsaresubsets}، إما
+${\OLId{greek-variable}{alpha}} \subseteq \beta$ أو~$\beta \subseteq {\OLId{greek-variable}{alpha}}$. فإن كان
+${\OLId{greek-variable}{alpha}} \subseteq \beta$، كانت
+$\comp{{\OLId{latin-ordinary}{f}}^{-{\OLMathNumeral{1}}}}{{\OLId{latin-ordinary}{g}}} \colon {\OLId{latin-looped}{A}} \to {\OLId{latin-looped}{B}}$ !!a{injection}، فينتج
+$\cardle{{\OLId{latin-looped}{A}}}{{\OLId{latin-looped}{B}}}$؛ وإن كان~$\beta \subseteq {\OLId{greek-variable}{alpha}}$، كان بالمثل
+$\cardle{{\OLId{latin-looped}{B}}}{{\OLId{latin-looped}{A}}}$.
+
+\emph{\olref{equivcompare} $\Rightarrow$ \olref{equivwo}.} خذ~${\OLId{latin-looped}{A}}$؛
+فبموجب~\olref{HartogsLemma} يوجد عدد ترتيبي~$\beta$ بحيث
+$\cardnless{\beta}{{\OLId{latin-looped}{A}}}$. ثم يعطي~\olref{equivcompare} أن
+$\cardle{{\OLId{latin-looped}{A}}}{\beta}$. فتوجد !!{injection}
+${\OLId{latin-ordinary}{f}} \colon {\OLId{latin-looped}{A}} \to \beta$، وبهذا الحقن نرتب عناصر~${\OLId{latin-looped}{A}}$ ترتيبًا جيدًا،
+بأن نعرف الترتيب
+$\Setabs{\tuple{{\OLId{latin-ordinary}{a}}, {\OLId{latin-ordinary}{b}}} \in {\OLId{latin-looped}{A}} \times {\OLId{latin-looped}{A}}}{{\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{a}}) \in {\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{b}})}$.
+\end{proof}
+\noindent
+ومن هذا تتبع نتيجة قريبة: إذا بطل الترتيب الجيد، كانت بعض المجموعات غير
+قابلة للمقارنة أصلًا من جهة الحجم، واضطرب الحساب الكاردينالي فيما وراء
+المتناهي. فلا يبقى لنا مثلًا أن نقول، إذا كانت~${\OLId{latin-looped}{A}}$ و${\OLId{latin-looped}{B}}$ غير منتهيتين،
+إن~$\cardeq{{\OLId{latin-looped}{A}} \disjointsum {\OLId{latin-looped}{B}}}{{\OLId{latin-looped}{M}}}$ و$\cardeq{{\OLId{latin-looped}{A}} \times {\OLId{latin-looped}{B}}}{{\OLId{latin-looped}{M}}}$، حيث~${\OLId{latin-looped}{M}}$
+كبرى~${\OLId{latin-looped}{A}}$ و${\OLId{latin-looped}{B}}$؛ وانظر
+\olref[card-arithmetic][simp]{cardplustimesmax}. والعلة ظاهرة: متى لم
+يمكننا مقارنة حجم~${\OLId{latin-looped}{A}}$ بحجم~${\OLId{latin-looped}{B}}$، لم يستقم السؤال عن الأكبر منهما.
+
+\end{document}

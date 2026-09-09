@@ -1,0 +1,38 @@
+% Isolated candidate: input in the PREAMBLE of a NEW copy of the graph fixture.
+% No production runtime, accepted gate, or failed fixture is modified by this file.
+%
+% Installed primary evidence consulted, 2026-09-08:
+% latex.ltx 15346-15362: env/.../begin runs inside the LaTeX environment group,
+% before the environment command creates its own boxes.
+% tikz.code.tex 1723-1735: pgfpicture starts before execute at begin picture.
+% pgfcorescopes.code.tex 227-248: picture and main-layer hboxes inherit direction.
+% pgfsys-luatex.def 32-47: positioned labels use hskip inside inherited hboxes.
+% luababel.def 2014-2026,2080-2089: Babel's graphics layout uses LTR body/text
+% directions for pictures and restores RTL directions inside node content.
+% tikz.code.tex 3871-3891: every text node part runs inside the label hbox and
+% pgfinterruptpicture group, before paragraph/text-width setup and label text.
+%
+% Scope: tikzpicture environments and their ordinary text node parts only.
+% No language/font selection, mathdirection assignment, or math-hook mutation.
+% Environment and label groups restore these local assignments automatically.
+% Runtime still must check label centers, Arabic text and multi-token RTL math,
+% nested diagrams, plus surrounding direction before/after the environment.
+\ifdefined\OLCTikzCandidateBegin
+  \PackageError{olc-tikz-direction-candidate}{Candidate already loaded}{}
+\else
+  \newcommand*{\OLCTikzCandidateBegin}{%
+    \edef\OLCTikzCandidateRestoreLabelDirections{%
+      \noexpand\bodydirection=\the\bodydirection\noexpand\relax
+      \noexpand\pardirection=\the\pardirection\noexpand\relax
+      \noexpand\textdirection=\the\textdirection\noexpand\relax}%
+    % This key executes in label-content scope, never in coordinate placement.
+    \tikzset{every text node part/.append code={%
+      \OLCTikzCandidateRestoreLabelDirections}}%
+    % Body direction controls subsequently opened positioning boxes; text
+    % direction controls their horizontal skips. Mathematical direction stays.
+    \bodydirection=0\relax
+    \textdirection=0\relax
+  }
+  \AddToHook{env/tikzpicture/begin}[olc-tikz-direction-candidate]{%
+    \OLCTikzCandidateBegin}
+\fi

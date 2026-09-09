@@ -1,0 +1,65 @@
+% Part: normal-modal-logic
+% Chapter: axioms-systems
+% Section: consistency
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{prf}{con}
+
+\olsection{الاتساق}
+
+% تصحيح مصدر (0440-I1): قُيّد الحكم الدلالي بالنماذج التي يصح فيها النسق.
+ومن أهم ما ينظر فيه من أحوال مجموعات ال!!{formula}s اتساقها.
+فمجموعة ال!!{formula}s غير متسقة متى كانت صيغة تناقض،
+مثل~$\lfalse$، !!{derivable} منها؛ فإن امتنع ذلك كانت متسقة.
+ولا تجتمع !!{formula}s المجموعة غير المتسقة على الصدق عند عالم واحد
+في نموذج يصح فيه النسق. وأما العكس فهو مقصد مبرهنة التمام:
+لكل مجموعة متسقة عالم تصدق عنده في نموذج نبنيه لهذا الغرض،
+وهو «النموذج القانوني».
+
+\begin{defn}
+  تكون المجموعة~${\OLId{greek-variable}{Gamma}}$ \emph{متسقة} بالنسبة إلى النسق~$\Sigma$، أو
+  كما سنقول، \emph{$\Sigma$-متسقة}، إذا وفقط إذا كان
+  ${\OLId{greek-variable}{Gamma}} \Proves/[\Sigma] \lfalse$.
+\end{defn}
+
+فالاعتبار في الاتساق بالنسق الذي يقع الاشتقاق فيه. ومن ذلك أن المجموعة
+$\{\Box({\OLId{latin-ordinary}{p}} \lif {\OLId{latin-ordinary}{q}}), \Box {\OLId{latin-ordinary}{p}}, \lnot\Box {\OLId{latin-ordinary}{q}}\}$ متسقة بالنسبة إلى منطق القضايا،
+وليست~\Log{K}-متسقة. ومن ذلك أيضًا أن المجموعة
+$\{\Diamond {\OLId{latin-ordinary}{p}}, \Box\Diamond {\OLId{latin-ordinary}{p}} \lif {\OLId{latin-ordinary}{q}}, \lnot {\OLId{latin-ordinary}{q}}\}$
+ليست~\Log{K5}-متسقة.
+
+\begin{prop}\ollabel{prop:consistencyfacts}
+  لتكن~${\OLId{greek-variable}{Gamma}}$ مجموعة من ال!!{formula}s. عندئذ:
+  \begin{enumerate}
+  \item تكون~${\OLId{greek-variable}{Gamma}}$ $\Sigma$-متسقة إذا وفقط إذا وجدت
+    !!{formula}~$!A$ بحيث~${\OLId{greek-variable}{Gamma}} \Proves/[\Sigma] !A$.
+  \item \ollabel{prop:consistencyfacts-b}%
+    ${\OLId{greek-variable}{Gamma}} \Proves[\Sigma] !A$ إذا وفقط إذا لم تكن
+    ${\OLId{greek-variable}{Gamma}} \cup \{\lnot!A\}$ $\Sigma$-متسقة.
+  \item \ollabel{prop:consistencyfacts-c}%
+    إذا كانت~${\OLId{greek-variable}{Gamma}}$ $\Sigma$-متسقة، فلكل !!{formula}~$!A$ تكون إما
+    ${\OLId{greek-variable}{Gamma}} \cup \{!A\}$ $\Sigma$-متسقة أو
+    ${\OLId{greek-variable}{Gamma}} \cup \{\lnot!A\}$ $\Sigma$-متسقة.
+  \end{enumerate}
+\end{prop}
+
+\begin{proof}
+  يكفي في إثبات هذه الخصائص استعمال منطق القضايا الكلاسيكي.
+  ولنبيّن حجة \olref{prop:consistencyfacts-c} بطريق المقابل.
+  افرض أن كلا المجموعتين ${\OLId{greek-variable}{Gamma}} \cup \{!A\}$ و${\OLId{greek-variable}{Gamma}} \cup \{\lnot!A\}$
+  ليست $ \Sigma$-متسقة. فبحسب~\olref{prop:consistencyfacts-b} نحصل على
+  ${\OLId{greek-variable}{Gamma}}, !A \Proves[\Sigma] \lfalse$ وعلى
+  ${\OLId{greek-variable}{Gamma}}, \lnot !A \Proves[\Sigma] \lfalse$. فإذا رفعنا الفرض الإضافي
+  بمبرهنة الاستنتاج كان
+  ${\OLId{greek-variable}{Gamma}} \Proves[\Sigma] !A \lif \lfalse$ وكان
+  ${\OLId{greek-variable}{Gamma}} \Proves[\Sigma] \lnot!A \lif \lfalse$. ولما كانت
+  $(!A \lif \lfalse) \lif ((\lnot!A \lif \lfalse) \lif \lfalse)$
+  مثال إحلال لقضية صادقة صدقًا تحليليًا، جاز تطبيق
+  \olref[prp]{prop:derivabilityfacts}\olref[prp]{prop:derivabilityfacts-ruleT}
+  فنستنتج ${\OLId{greek-variable}{Gamma}} \Proves[\Sigma] \lfalse$، وهو عدم اتساق المجموعة الأصلية.
+\end{proof}
+
+\end{document}

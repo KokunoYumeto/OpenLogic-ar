@@ -1,0 +1,72 @@
+% Part: proof-theory
+% Chapter: natural-deduction
+% Section: rules-N3
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\begin{table}
+\begin{tabular}{@{}c@{}c@{}}
+\multicolumn{\OLClassicalDigits{2}}{l}{\textbf{أما البديهيات:}}\\
+\multicolumn{\OLClassicalDigits{2}}{c}{${\OLId{greek-variable}{Gamma}} \Sequent {\OLId{latin-ordinary}{x}}:!A$ متى كان~${\OLId{latin-ordinary}{x}}:!A \in {\OLId{greek-variable}{Gamma}}$}\\[3ex]
+\multicolumn{\OLClassicalDigits{2}}{l}{\textbf{وأما قواعد الاستدلال:}}\\[3ex]
+\multicolumn{\OLClassicalDigits{2}}{c}{\Axiom${\OLId{latin-ordinary}{x}}: !A, {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{latin-looped}{N}}:!B$
+\RightLabel{\Intro{\lif}}
+\UnaryInf${\OLId{greek-variable}{Gamma}} \fCenter \lambd[\typeof{{\OLId{latin-ordinary}{x}}}{!A}][{\OLId{latin-looped}{N}}] : !A \lif !B $
+\DisplayProof}
+\\[4ex]
+\multicolumn{\OLClassicalDigits{2}}{c}{\Axiom${\OLId{greek-variable}{Gamma}} \fCenter {\OLId{latin-looped}{N}}:!A \lif !B$
+\Axiom${\OLId{greek-variable}{Gamma}} \fCenter {\OLId{latin-looped}{M}}:!A$
+\RightLabel{\Elim{\lif}}
+\BinaryInf${\OLId{greek-variable}{Gamma}} \fCenter (NM) : !B$
+\DisplayProof}
+\\[4ex]
+\multicolumn{\OLClassicalDigits{2}}{c}{\Axiom${\OLId{greek-variable}{Gamma}} \fCenter {\OLId{latin-looped}{N}}_{\OLMathNumeral{1}} : !A$
+\Axiom${\OLId{greek-variable}{Gamma}} \fCenter {\OLId{latin-looped}{N}}_{\OLMathNumeral{2}} : !B$
+\RightLabel{\Intro{\land}}
+\BinaryInf${\OLId{greek-variable}{Gamma}} \fCenter \pair{{\OLId{latin-looped}{N}}_{\OLMathNumeral{1}}}{{\OLId{latin-looped}{N}}_{\OLMathNumeral{2}}} : !A \land !B $
+\DisplayProof}
+\\[4ex]
+\Axiom${\OLId{greek-variable}{Gamma}} \fCenter {\OLId{latin-looped}{N}}: !A \land !B$
+\RightLabel{\Elim{\land}[1]}
+\UnaryInf${\OLId{greek-variable}{Gamma}} \fCenter \proj{{\OLMathNumeral{1}}}{{\OLId{latin-looped}{N}}} : !A$
+\DisplayProof
+&
+\Axiom${\OLId{greek-variable}{Gamma}} \fCenter {\OLId{latin-looped}{N}}:!A \land !B$
+\RightLabel{\Elim{\land}[2]}
+\UnaryInf${\OLId{greek-variable}{Gamma}} \fCenter \proj{{\OLMathNumeral{2}}}{{\OLId{latin-looped}{N}}} : !B$
+\DisplayProof\\[3ex]
+\\[4ex]
+\Axiom${\OLId{greek-variable}{Gamma}} \fCenter {\OLId{latin-looped}{N}}: !A$
+\RightLabel{\Intro{\lor}[1]}
+\UnaryInf${\OLId{greek-variable}{Gamma}} \fCenter \inj[!B]{{\OLMathNumeral{1}}}{{\OLId{latin-looped}{N}}} : !A \lor !B$
+\DisplayProof
+&
+\Axiom$ {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{latin-looped}{N}} : !A$
+\RightLabel{\Intro{\lor}[2]}
+\UnaryInf${\OLId{greek-variable}{Gamma}} \fCenter \inj[!B]{{\OLMathNumeral{2}}}{{\OLId{latin-looped}{N}}} : !B \lor !A$
+\DisplayProof\\[3ex]
+\multicolumn{\OLClassicalDigits{2}}{c}{
+\begin{tabular}[b]{@{}l@{}}
+\Axiom${\OLId{greek-variable}{Gamma}} \fCenter {\OLId{latin-looped}{M}} : !A \lor !B$
+\Axiom${\OLId{latin-ordinary}{x}}:!A, {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{latin-looped}{N}}_{\OLMathNumeral{1}} : !C$
+\Axiom${\OLId{latin-ordinary}{y}}:!B, {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{latin-looped}{N}}_{\OLMathNumeral{2}}: !C$
+\RightLabel{\Elim{\lor}}
+\TrinaryInf${\OLId{greek-variable}{Gamma}} \fCenter
+\dcase{{\OLId{latin-looped}{M}}}{{\OLId{latin-ordinary}{x}}}{{\OLId{latin-looped}{N}}_{\OLMathNumeral{1}}}{{\OLId{latin-ordinary}{y}}}{{\OLId{latin-looped}{N}}_{\OLMathNumeral{2}}} : !C$
+\DisplayProof
+\end{tabular}
+}
+\\[4ex]
+\multicolumn{\OLClassicalDigits{2}}{c}{\Axiom${\OLId{greek-variable}{Gamma}} \fCenter {\OLId{latin-looped}{N}}: \lfalse$
+\RightLabel{\FalseInt}
+\UnaryInf${\OLId{greek-variable}{Gamma}} \fCenter \abort{!A}{{\OLId{latin-looped}{N}}} : !A$
+\DisplayProof}
+\end{tabular}
+\caption{قواعد~\Log{tN3ip}، وهو نظام الاستنباط الطبيعي الحدسي القضاياوي
+الموسوم بالحدود، ويستعمل نظامًا لإسناد الأنماط.}
+\ollabel{tab:tN3ip}
+\end{table}
+
+\end{document}
