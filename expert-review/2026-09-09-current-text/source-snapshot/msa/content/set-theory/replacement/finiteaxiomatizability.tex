@@ -1,0 +1,111 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+	
+\olfileid{sth}{replacement}{finiteaxiomatizability}
+\olsection{ملحق: قابلية الوضع في مسلّمات منتهية}
+نختتم هذا الفصل باستخلاص بعض النتائج من الاستبدال. والنتيجة الأولى
+لـ\citet{Montague1961}؛ لاحظ أنها ليست برهانًا \emph{داخل}~$\ZF$،
+بل برهان \emph{عن}~$\ZF$:
+\begin{thm}\ollabel{zfnotfinitely}
+	لا يمكن وضع~$\ZF$ في مسلّمات منتهية. وبصورة أعم: إذا كانت~$\Th{T}$
+	منتهية وكان~$\Th{T} \Proves \ZF$، فإن~$\Th{T}$ غير متسقة.
+	
+	(نقصر أنفسنا هنا ضمنًا على جمل الرتبة الأولى التي رمزها الأولي غير
+	المنطقي الوحيد هو~$\in$، ونكتب~$\Th{T} \Proves \ZF$ للدلالة على
+	أن~$\Th{T} \Proves \phi$ لكل~$\phi \in \ZF$.)
+\end{thm}
+\begin{proof}
+	ثبّت نظرية منتهية~$\Th{T}$ بحيث~$\Th{T} \Proves \ZF$. ومن ثم تثبت
+	$\Th{T}$ الانعكاس، أي~\olref[sth][replacement][ref]{reflectionschema}.
+	ولأن~$\Th{T}$ منتهية، يمكننا إعادة كتابتها اقترانًا واحدًا~$\theta$.
+	وبعكس هذه الصيغة نحصل على
+	$\Th{T} \Proves \exists \beta(\theta \liff \theta^{V_\beta})$.
+	ولما كان من البديهي أن~$\Th{T} \Proves \theta$، نجد أن
+	$\Th{T} \Proves \exists \beta\ \theta^{V_\beta}$.
+	
+	والآن، لتختصر~$\psi(X)$:
+	\[
+		\theta^X \land X\text{ مرحلة} \land (\forall Y \in X)(Y\text{ مرحلة}\lif \lnot \theta^{Y})
+	\]
+	أي، على وجه التقريب: إن~$X$ نموذج مرحلي لـ$\theta$ وأدنى بالنسبة إلى
+	$\in$ من هذه الجهة. وباستحضار
+	$\Th{T} \Proves \exists \beta\ \theta^{V_\beta}$، ومن الحقائق
+	الأساسية عن الرتب داخل~$\ZF$، ومن ثم داخل~$\Th{T}$، نحصل على:
+	\begin{equation}
+		\Th{T} \Proves \exists M \psi(M). \tag{*}\label{Mpsi}
+	\end{equation}
+	وباستخدام المقترن الأول من~$\psi(X)$، متى كان~$\Th{T} \Proves \sigma$،
+	كان~$\Th{T} \Proves \forall X(\psi(X) \lif \sigma^X)$. ولذلك، بموجب
+	\eqref{Mpsi}:
+	\begin{align*}
+		\Th{T} &\Proves \forall X(\psi(X) \lif (\exists N \psi(N))^X)\\
+	\intertext{وباستخدام هذا، ثم \eqref{Mpsi} مرة أخرى:}
+		\Th{T} &\Proves \exists M(\psi(M) \land (\exists N \psi(N))^M)
+	\intertext{ومن ثم، بوجه خاص:}
+		\Th{T} &\Proves \exists M(\psi(M) \land (\exists N \in M)((N\text{ مرحلة})^M \land (\theta^N)^M))
+	\intertext{وباستدلال أولي عن إطلاق المراحل والرتب:}
+		\Th{T} &\Proves \exists M(\psi(M) \land (\exists N \in M)(N\text{ مرحلة} \land \theta^N))
+	\end{align*}
+	وهكذا تكون~$\Th{T}$ غير متسقة.\footnote{يتطلب هذا «الاستدلال الأولي»
+	إثبات بعض حقائق الإطلاق المتعلقة بمراحل الهرم ورتبه.}
+\end{proof}
+
+وفيما يأتي نتيجة مشابهة لاحظها~\citet[223]{Potter2004}:
+
+\begin{prop}\ollabel{finiteextensionofZ}
+	لتكن~$\Th{T}$ امتدادًا لـ$\Z$ بعدد منته من المسلّمات الجديدة. إذا
+	كان~$\Th{T} \Proves \ZF$، فإن~$\Th{T}$ غير متسقة. (نستخدم هنا
+	القيود الضمنية نفسها المستخدمة في~\olref{zfnotfinitely}.)
+\end{prop}
+\begin{proof}
+	استخدم~$\theta$ لاقتران جميع مسلّمات~$\Th{T}$ \emph{عدا} مثيلات
+	الفصل (اللامتناهية). وبأن نعرّف~$\psi$ من~$\theta$ كما في
+	\olref{zfnotfinitely}، وعلى أساس المراحل، يمكننا أن نبيّن أن
+	$\Th{T} \Proves \exists M \psi(M)$.
+	
+	وكما في~\olref{zfnotfinitely}، يمكننا إثبات المخطط القائل إنه متى
+	كان~$\Th{T} \Proves \sigma$، كان
+	$\Th{T} \Proves \forall X(\psi(X) \lif \sigma^X)$. ثم نتم البرهان
+	تمامًا كما في~\olref{zfnotfinitely}.
+	
+	لكن إثبات هذا المخطط يتطلب عملًا أكثر قليلًا مما تطلبه في
+	\olref{zfnotfinitely}. فمثيلات الفصل تنتمي إلى~$\Th{T}$، لكنها ليست
+	من مقترنات~$\theta$. غير أننا نستطيع تجاوز هذه العقبة بإثبات أن
+	$\Th{T} \Proves \forall X(X\text{ مرحلة} \lif \sigma^X)$ لكل مثيل
+	فصل~$\sigma$. ونترك ذلك للقارئ.
+\end{proof}
+\begin{prob}
+	بيّن أنه لكل مثيل فصل~$\sigma$ يكون:
+	$\Z \Proves \forall X(X\text{ مرحلة} \lif \sigma^X)$.
+	(استخدمنا هذا المخطط في
+	\olref[sth][replacement][finiteaxiomatizability]{finiteextensionofZ}.)
+\end{prob}
+\begin{prob}
+	بيّن أنه لكل~$\phi \in \Z$ يكون
+	$\ZF \Proves \phi^{V_{\omega+\omega}}$.
+\end{prob}
+\begin{prob}
+	تحقق من النتائج المخططية الباقية المستعملة في براهين
+	\olref[sth][replacement][finiteaxiomatizability]{zfnotfinitely} و
+	\olref[sth][replacement][finiteaxiomatizability]{finiteextensionofZ}.
+\end{prob}
+
+كما أشرنا في~\olref[sth][replacement][absinf]{sec}، يبيّن هذا أن
+الاستبدال أقوى تمامًا من
+\olref[ordinals][ordtype]{thmOrdinalRepresentation}. أو، بدقة أكبر
+قليلًا: إذا كانت~$\Z$ + «كل ترتيب جيد متماثل مع عدد ترتيبي فريد»
+متسقة، فإنها تعجز عن إثبات مثيل ما من مثيلات الاستبدال.
+
+
+	%	By assumption, $\psi^{V_\alpha}$ has the form:
+	%	\[
+	%		(\forall A \in V_\alpha)(\exists S \in V_\alpha)(\forall x \in V_\alpha)(x \in S \liff (\phi^{V_\alpha}(x) \land x \in A))
+	%	\]
+	%	To establish this holds, fix $A \in V_\alpha$. Using Separation, obtain:
+	%	\[
+	%		S = \Setabs{x \in A}{\phi^{V_\alpha}(x)}
+	%	\]
+	%	Now $S \in V_\alpha$, since $S \subseteq A \in V_\alpha$, and clearly $(\forall x \in V_\alpha)(x \in S \liff (\phi^{V_\alpha}(x) \land x \in A)$.
+
+\end{document}

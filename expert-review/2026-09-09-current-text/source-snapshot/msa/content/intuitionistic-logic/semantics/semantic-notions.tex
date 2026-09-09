@@ -1,0 +1,75 @@
+% part: intuitionistic-logic
+% chapter: semantics
+% section: semantic-notions
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{sem}{sem}
+
+\olsection{مفاهيم دلالية}
+
+\begin{defn}
+  نقول إن~$!A$ \emph{صادقة في النموذج
+    $\mModel{M}=\tuple{W,R,V}$}، ورمزه~$\mSat{M}{!A}$، إذا وفقط إذا
+  كان~$\mSat{M}{!A}[w]$ لكل~$w \in W$. وتكون~$!A$ \emph{صالحة}،
+  $\Entails !A$، إذا وفقط إذا كانت صادقة في جميع النماذج. ونقول إن مجموعة
+  من ال!!{formula}s~$\Gamma$ \emph{تستلزم}~$!A$، ورمزه
+  $\Gamma \Entails !A$، إذا وفقط إذا كان، لكل نموذج~$\mModel{M}$ ولكل
+  $w$ بحيث~$\mSat{M}{\Gamma}[w]$، $\mSat{M}{!A}[w]$.
+\end{defn}
+
+\begin{prop}\ollabel{prop:sat-entails}
+  \begin{enumerate}
+  \item\ollabel{prop:sat-entails1} إذا كان~$\mSat{M}{\Gamma}[w]$ و
+    $\Gamma \Entails !A$، كان~$\mSat{M}{!A}[w]$.
+  \item\ollabel{prop:sat-entails2} إذا كان~$\mSat{M}{\Gamma}$ و
+    $\Gamma \Entails !A$، كان~$\mSat{M}{!A}$.
+  \end{enumerate}
+\end{prop}
+
+\begin{proof}
+  \begin{enumerate}
+  \item افترض~$\mSat{M}{\Gamma}[w]$ و$\Gamma \Entails !A$. ينتج من
+    تعريف الاستلزام مباشرةً أن~$\mSat{M}{!A}[w]$.
+  \item افترض~$\mSat{M}{\Gamma}$ و$\Gamma \Entails !A$. ليكن
+    $w \in W$ اعتباطيًا. عندئذ~$\mSat{M}{\Gamma}[w]$، وبحسب
+    \olref{prop:sat-entails1} يكون~$\mSat{M}{!A}[w]$. ولما كان~$w$
+    اعتباطيًا، يكون~$\mSat{M}{!A}$.
+  \end{enumerate}
+\end{proof}
+
+
+\begin{defn}\ollabel{defn:restrict}
+  افترض أن~$\mModel{M}$ نموذج علائقي وأن~$w \in W$. يُعطى
+  \emph{تقييد}~$\mModel{M}$ إلى~$w$، وهو
+  $\mModel{M}_w=\tuple{W_w,R_w,V_w}$، بما يأتي:
+  \begin{align*}
+    W_w & = \Setabs{u \in W}{Rwu},\\
+    R_w & = R \cap (W_w)^2, \text{ و}\\
+    V_w(p) & = V(p) \cap W_w.
+  \end{align*}
+\end{defn}
+
+\begin{prop}\ollabel{prop:restrict}
+  $\mSat{M}{!A}[w]$ إذا وفقط إذا كان~$\mSat{M_w}{!A}$.
+\end{prop}
+
+\begin{prob}
+  أثبت~\olref[int][sem][sem]{prop:restrict}.
+\end{prob}
+
+\begin{prop}
+  افترض أنه لكل نموذج~$\mModel{M}$ بحيث~$\mSat{M}{\Gamma}$، يكون
+  $\mSat{M}{!A}$. عندئذ~$\Gamma \Entails !A$.
+\end{prop}
+
+\begin{proof}
+  افترض~$\mSat{M}{\Gamma}[w]$. وبتطبيق~\olref{prop:restrict} على كل
+  $!B \in \Gamma$، نحصل على~$\mSat{M_w}{\Gamma}$. وبحسب الفرض نحصل على
+  $\mSat{M_w}{!A}$. وبتطبيق~\olref{prop:restrict} مرة أخرى، نحصل على
+  $\mSat{M}{!A}[w]$.
+\end{proof}
+
+\end{document}

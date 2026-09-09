@@ -1,0 +1,68 @@
+% Part: lambda-calculus
+% Chapter: lambda-definability
+% Section: minimization
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{ldf}{min}
+\olsection{التصغير}
+
+الدوال العودية العامة هي الدوال التي يمكن الحصول عليها من الدوال
+الأساسية~$\Zero$ و$\Succ$ و$\Proj{n}{i}$ باستعمال التركيب والعودية
+البدائية والتصغير النظامي. ولكي نبين أن جميع الدوال العودية العامة
+!!{lambda definable}، علينا أن نبين أن كل دالة تعرّف بالتصغير النظامي
+من دالة~!!a{lambda definable} تكون هي نفسها !!{lambda definable}.
+
+\begin{lem}
+  \ollabel{lem:min} إذا كانت~$f(x_1, \dots, x_k, y)$ نظامية
+  و!!{lambda definable}، فإن الدالة~$h$ المعرّفة بـ
+  \[
+  h(x_1, \dots, x_k) = \umin{y}{f(x_1,\dots,x_k, y) = 0}
+  \]
+  تكون أيضًا !!{lambda definable}.
+\end{lem}
+
+\begin{proof}
+  افترض أن حد~$\lambda$~$F$ يعرّف بلامبدا الدالة النظامية
+  $f(\vec x, y)$. ولكي !!{lambda define}~$h$ نستعمل دالة بحث ومركّب
+  نقطة ثابتة:
+  \begin{align*}
+    \fn{Search} & \ident \lambd[g][\lambd[f\,\vec{x}\,y][
+        \fn{IsZero} (f\, \vec{x}\, y)\, y\, (g\, f\, \vec{x}\, (\fn{Succ}\, y))]]\\
+    H & \ident \lambd[\vec x][(Y \, \fn{Search}) F\, \vec{x}\, \num{0}],
+  \end{align*}
+  حيث~$Y$ أي مركّب للنقطة الثابتة. وبعبارة غير صورية، تكون
+  $\fn{Search}$ دالة تحيل إلى ذاتها: تبدأ بـ$y$ وتختبر هل
+  $f\, \vec x\, y$ يساوي صفرًا؛ فإن كان كذلك أعادت~$y$، وإلا نادت
+  ذاتها مع~$\fn{Succ}\, y$. ومن ثم يعيد
+  $(Y \, \fn{Search}) F \num{n_1}\dots\num{n_k}\,\num{0}$ أصغر~$m$
+  يحقق~$f(n_1, \dots, n_k, m) = 0$.
+  
+  وعلى وجه التحديد، لاحظ أن
+  \begin{align*}
+    (Y \, \fn{Search}) F \num{n_1}
+    \dots\num{n_k}\, \num{m} & \red \num{m}
+    \intertext{إذا كان~$f(n_1, \dots, n_k, m) = 0$، أو}
+    & \red (Y \, \fn{Search}) F\, \num{n_1} \dots\num{n_k}\, \num{m+1}
+    \intertext{في غير ذلك. وبما أن~$f$ نظامية، يوجد~$y$ يحقق
+      $f(n_1, \dots, n_k, y) = 0$، ومن ثم}
+    (Y \, \fn{Search}) F \num{n_1} \dots\num{n_k}\,\num{0}
+    & \red \num{h(n_1, \dots, n_k)}.
+    \end{align*}
+\end{proof}
+
+
+\begin{prop}
+  كل دالة عودية عامة !!{lambda definable}.
+\end{prop}
+
+\begin{proof}
+ بحسب \olref[prf]{lem:basic}، جميع الدوال الأساسية
+ !!{lambda definable}، وبحسب \olref[prf]{lem:comp} و
+ \olref[prf]{lem:prim} و\olref{lem:min}، تنغلق الدوال
+ !!{lambda definable} تحت التركيب والعودية البدائية والتصغير النظامي.
+\end{proof}
+
+\end{document}

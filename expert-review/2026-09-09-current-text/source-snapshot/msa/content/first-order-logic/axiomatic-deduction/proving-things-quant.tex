@@ -1,0 +1,40 @@
+% Part: first-order-logic
+% Chapter: axiomatic-deduction
+% Section: proving-things-quant
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{axd}{prq}
+
+\olsection{\usetoken{P}{derivation} مع المكمّمات}
+
+\begin{ex}
+لننشئ !!a{derivation} لــ$(\lforall[x][!A(x)] \land
+\lforall[y][!B(y)]) \lif \lforall[x][(!A(x) \land !B(x))]$.
+% تصحيح مصدر (0117-I2): لم يصرّح الأصل بجِدّة الثابت اللازمة لتطبيق قاعدة المكمّمات.
+ونختار في البرهان ثابتًا مميَّزًا جديدًا~$a\in\mathcal E$ لا يرد
+في~$!A(x)$ ولا في~$!B(y)$.
+
+لاحظ أولًا أن
+\begin{align*}
+  (\lforall[x][!A(x)] \land \lforall[y][!B(y)]) & \lif \lforall[x][!A(x)]\\
+  \intertext{حالة من \olref[prp]{ax:land1}، وأن}
+  \lforall[x][!A(x)] & \lif !A(a) \\
+  \intertext{حالة من \olref[qua]{ax:q1}. ولذلك نعرف، بحسب \olref[pro]{prop:chain}، أن}
+  (\lforall[x][!A(x)] \land \lforall[y][!B(y)]) & \lif !A(a) \\
+  \intertext{!!{derivable}. وبالمثل، بما أن}
+  (\lforall[x][!A(x)] \land \lforall[y][!B(y)]) & \lif \lforall[y][!B(y)] \qquad\text{و}\\
+    \lforall[y][!B(y)] & \lif !B(a)\\
+    \intertext{حالتان من \olref[prp]{ax:land2} و\olref[qua]{ax:q1}، على الترتيب، فإن}
+    (\lforall[x][!A(x)] \land \lforall[y][!B(y)]) & \lif !B(a)\\
+    % تصحيح مصدر (0117-I1): لا تكفي بديهية الوصل وتطبيقا MP مباشرةً؛ لا بد من تركيب المقدّم ثم استعمال بديهية توزيع اللزوم.
+    \intertext{قابلة للاشتقاق بحسب \olref[pro]{prop:chain}. ولنسمِّ المقدّم المشترك $!P$. نصل $!P \lif !A(a)$ بالحالة المناسبة من \olref[prp]{ax:land3} بواسطة \olref[pro]{prop:chain}، فنحصل على $!P \lif (!B(a) \lif (!A(a) \land !B(a)))$. ثم نأخذ الحالة المناسبة من \olref[prp]{ax:lif2} ونجري~\MP{} مرتين، إحداهما مع $!P \lif !B(a)$، فنحصل على أن}
+    (\lforall[x][!A(x)] \land \lforall[y][!B(y)]) & \lif (!A(a) \land !B(a))\\
+    \intertext{قابلة للاشتقاق. ويمكننا الآن تطبيق \QR{} لنحصل على}
+(\lforall[x][!A(x)] \land \lforall[y][!B(y)]) & \lif \lforall[x][(!A(x) \land !B(x))].
+\end{align*}
+\end{ex}
+
+\end{document}

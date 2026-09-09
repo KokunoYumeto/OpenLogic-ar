@@ -1,0 +1,132 @@
+% Part: first-order-logic
+% Chapter: natural-deduction
+% Section: provability-propositional
+
+% verification of properties of provability needed for maximally
+% consistent sets in the completeness chapter.
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{ntd}{ppr}}
+      {\olfileid{pl}{ntd}{ppr}}
+
+\olsection{\usetoken{S}{derivability} والروابط القضوية}
+
+\begin{explain}
+  نبيّن هنا أن علاقة ال!!{derivability}~$\Proves$ في الاستنتاج الطبيعي
+  تفي بإثبات جملة من الأصول المتعلقة بالروابط القضوية؛ ومنها
+  $!A \land !B \Proves !A$ و$!A, !A \lif !B \Proves !B$
+  (قاعدة إثبات المقدَّم). وهذه نتائج نحتاج إليها في برهان مبرهنة الاكتمال.
+\end{explain}
+
+\begin{prop}\ollabel{prop:provability-land}
+  \begin{enumerate}
+  \item \ollabel{prop:provability-land-left} كل من $!A \land !B \Proves
+    !A$ و$!A \land !B \Proves !B$.
+  \item \ollabel{prop:provability-land-right} $!A, !B \Proves !A \land !B$.
+  \end{enumerate}
+\end{prop}
+
+\begin{proof}
+  \begin{enumerate}
+  \item بحذف الوصل يمكن !!{derive} كلا الطرفين:
+    \begin{prooftree}
+      \AxiomC{$!A \land !B$}
+      \RightLabel{\Elim{\land}}
+      \UnaryInfC{$!A$}
+      \DisplayProof\qquad\bottomAlignProof
+      \AxiomC{$!A \land !B$}
+      \RightLabel{\Elim{\land}}
+      \UnaryInfC{$!B$}
+    \end{prooftree}
+  \item وبإدخال الوصل يمكن !!{derive}:
+    \begin{prooftree}
+      \AxiomC{$!A$}
+      \AxiomC{$!B$}
+      \RightLabel{\Intro{\land}}
+      \BinaryInfC{$!A \land !B$}
+    \end{prooftree}
+  \end{enumerate}
+\end{proof}
+
+
+\begin{prop}\ollabel{prop:provability-lor}
+  \begin{enumerate}
+  \item المجموعة $!A \lor !B, \lnot !A, \lnot !B$ غير متسقة.
+  \item كل من $!A \Proves !A \lor !B$ و$!B \Proves !A \lor !B$.
+  \end{enumerate}
+\end{prop}
+
+\begin{proof}
+  \begin{enumerate}
+  \item نجري حذف الفصل، فنحصل على ال!!{derivation} الآتي:
+    \begin{prooftree}
+      \AxiomC{$!A \lor !B$}
+      \AxiomC{$\lnot !A$}
+      \AxiomC{$\Discharge{!A}{1}$}
+      \RightLabel{\Elim{\lnot}}
+      \BinaryInfC{$\lfalse$}
+      \AxiomC{$\lnot !B$}
+      \AxiomC{$\Discharge{!B}{1}$}
+      \RightLabel{\Elim{\lnot}}
+      \BinaryInfC{$\lfalse$}
+      \DischargeRule{\Elim{\lor}}{1}
+      \TrinaryInfC{$\lfalse$}
+    \end{prooftree}
+    فالحاصل !!a{derivation} لـ~$\lfalse$، وليس فيه من الافتراضات
+    ال!!{undischarged} إلا~$!A \lor !B$ و$\lnot !A$ و$\lnot !B$.
+  \item وبإدخال الفصل يمكن !!{derive} على كلا الوجهين:
+    \begin{prooftree}
+      \AxiomC{$!A$}
+      \RightLabel{\Intro{\lor}}
+      \UnaryInfC{$!A \lor !B$}
+      \DisplayProof\qquad\bottomAlignProof
+      \AxiomC{$!B$}
+      \RightLabel{\Intro{\lor}}
+      \UnaryInfC{$!A \lor !B$}
+    \end{prooftree}
+  \end{enumerate}
+\end{proof}
+
+\begin{prop}\ollabel{prop:provability-lif}
+  \begin{enumerate}
+  \item \ollabel{prop:provability-lif-left}  $!A, !A \lif !B \Proves !B$.
+  \item \ollabel{prop:provability-lif-right}
+    كل من $\lnot !A \Proves !A \lif !B$ و$!B \Proves !A \lif !B$.
+  \end{enumerate}
+\end{prop}
+
+\begin{proof}
+  \begin{enumerate}
+  \item حذف الشرط كافٍ هنا، إذ يمكن !!{derive}:
+    \begin{prooftree}
+      \AxiomC{$!A \lif !B$}
+      \AxiomC{$!A$}
+      \RightLabel{\Elim{\lif}}
+      \BinaryInfC{$!B$}
+    \end{prooftree}
+    
+  \item وأما الوجهان الآخران فشاهدهما هذه ال!!{derivation}s:
+    \begin{prooftree}
+      \AxiomC{$\lnot !A$}
+      \AxiomC{$\Discharge{!A}{1}$}
+      \RightLabel{\Elim{\lnot}}
+      \BinaryInfC{$\lfalse$}
+      \RightLabel{\FalseInt}
+      \UnaryInfC{$!B$}
+      \DischargeRule{\Intro{\lif}}{1}
+      \UnaryInfC{$!A \lif !B$}
+      \DisplayProof\qquad\bottomAlignProof
+      \AxiomC{$!B$}
+      \RightLabel{\Intro{\lif}}
+      \UnaryInfC{$!A \lif !B$}
+    \end{prooftree}
+    ففي~$\Intro{\lif}$ يجوز !!{discharge} الافتراض~$!A$، ولا يجب؛
+    وعلى عدم الوجوب جرى الاشتقاق الثاني.
+  \end{enumerate}
+\end{proof}
+
+\end{document}

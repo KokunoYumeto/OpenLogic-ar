@@ -1,0 +1,124 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{ord-arithmetic}{using-addition}
+\olsection{استخدام الجمع الترتيبي}
+
+باستخدام الجمع على الأعداد الترتيبية، يمكننا أن نحسب صراحة رتب
+مجموعات مختلفة، بمعنى~\olref[spine][rank]{defnsetrank}:
+
+\begin{lem}\ollabel{rankcomputation}
+إذا كان~$\setrank{A} = \alpha$ و$\setrank{B} = \beta$، فإن:
+\begin{enumerate}
+	\item\ollabel{exrankpow} $\setrank{\Pow{A}} = \alpha\ordplus 1$
+	\item\ollabel{exrankpair} $\setrank{\{A, B\}} = \max(\alpha,
+	\beta) \ordplus 1$
+	\item\ollabel{exrankcup} $\setrank{A \cup B} = \max(\alpha,
+	\beta)$
+	\item\ollabel{exranktuple} $\setrank{\tuple{A,B}} = \max(\alpha,
+	\beta) \ordplus 2$
+	\item\ollabel{exranktimes} $\setrank{A \times B} \leq \max(\alpha,
+	\beta) \ordplus 2$
+	\item\ollabel{exrankunion} $\setrank{\bigcup A} = \alpha$ عندما
+	تكون~$\alpha$ خالية أو حدية؛ و$\setrank{\bigcup A} = \gamma$ عندما
+	$\alpha = \gamma\ordplus 1$
+\end{enumerate}
+\end{lem}
+
+\begin{proof}
+نستدعي مرارًا طوال البرهان
+\olref[spine][rank]{ranksupstrict}.
+
+\emph{\olref{exrankpow}.} إذا كان~$x \subseteq A$، فإن
+$\setrank{x} \leq \setrank{A}$. ومن ثم
+$\setrank{\Pow{A}} \leq \alpha \ordplus 1$. ولأن
+$A \in \Pow{A}$ بوجه خاص، يكون
+$\setrank{\Pow{A}} = \alpha \ordplus 1$.
+
+\emph{\olref{exrankpair}.} بموجب
+\olref[spine][rank]{ranksupstrict}.
+
+\emph{\olref{exrankcup}.} بموجب
+\olref[spine][rank]{ranksupstrict}.
+
+\emph{\olref{exranktuple}.} بموجب~\olref{exrankpair} مرتين.
+
+\emph{\olref{exranktimes}.} لاحظ أن
+$A \times B \subseteq \Pow{\Pow{A \cup B}}$، واستدع
+\olref{exrankpow} مرتين ثم~\olref{exrankcup}.
+
+\emph{\olref{exrankunion}.} إذا كان~$\alpha = \gamma\ordplus 1$،
+فيوجد~$c \in A$ بحيث~$\setrank{c} = \gamma$، ولا يملك أي
+!!{element} من~$A$ رتبة أعلى؛ ولذلك~$\setrank{\bigcup A} = \gamma$.
+وإذا كانت~$\alpha$ عددًا ترتيبيًا حديًا، فإن لـ$A$ !!{element}s ذوات
+رتب تقترب اعتباطيًا من~$\alpha$ (لكنها أصغر منها تمامًا)، ولذلك يكون
+لـ$\bigcup A$ أيضًا !!{element}s ذوات رتب تقترب اعتباطيًا من
+$\alpha$ (لكنها أصغر منها تمامًا)، ومن ثم
+$\setrank{\bigcup A} = \alpha$.
+\end{proof}
+\noindent
+نترك تمرينًا بيان سبب احتواء~\olref{exranktimes} على \emph{متباينة}.
+
+\begin{prob}
+أعط مجموعتين~$A$ و$B$ بحيث
+$\setrank{A \times B} =
+\max(\setrank{A}, \setrank{B})$. وأعط مجموعتين~$A$ و$B$ بحيث
+$\setrank{A \times B} =
+\max(\setrank{A}, \setrank{B}) \ordplus 2$. هل توجد رتب أخرى ممكنة؟
+\end{prob}
+
+أصبحنا الآن أيضًا في موضع يتيح لنا أن نبيّن تكافؤ عدة تصورات معقولة
+لما قد يعنيه وصف عدد ترتيبي بأنه «منته» أو «غير منته»:
+
+\begin{lem}\ollabel{ordinfinitycharacter}
+لأي عدد ترتيبي~$\alpha$، تتكافأ العبارات الآتية:
+\begin{enumerate}
+	\item\ollabel{ord:notinomega} $\alpha\notin \omega$، أي إن
+	$\alpha$ ليس عددًا طبيعيًا؛
+	\item\ollabel{ord:omegaplus} $\omega \leq \alpha$؛
+	\item\ollabel{ord:oneplus} $1 \ordplus \alpha = \alpha$؛
+	%\alpha \approx \alpha \ordplus 1$
+	\item\ollabel{ord:plusone} $\alpha \approx \alpha\ordplus 1$، أي
+	إن~$\alpha$ و$\alpha\ordplus 1$ متساويا العدد؛
+	\item\ollabel{ord:infinite} $\alpha$ غير منتهة بحسب ديديكند.
+	\end{enumerate}
+\end{lem}
+\noindent
+وهكذا لدينا خمس طرائق متكافئة برهانيًا لفهم ما يلزم كي يكون عدد
+ترتيبي (غير) منته.
+
+\begin{proof}
+\emph{\olref{ord:notinomega} $\Rightarrow$ \olref{ord:omegaplus}.}
+بموجب التثليث.
+
+\emph{\olref{ord:omegaplus} $\Rightarrow$ \olref{ord:oneplus}.}
+ثبّت~$\alpha \geq \omega$. بموجب الاستقراء المتناهي التجاوز، يوجد
+أصغر عدد ترتيبي~$\gamma$ (قد يكون~$0$) بحيث يوجد عدد ترتيبي حدي
+$\beta$ يحقق~$\alpha = \beta \ordplus \gamma$. والآن:
+\[
+	1 \ordplus \alpha =
+	1 \ordplus (\beta \ordplus \gamma) =
+	(1 \ordplus \beta) \ordplus \gamma =
+	\supstrict_{\delta < \beta} (1 \ordplus \delta) \ordplus \gamma =
+	\beta \ordplus \gamma =
+	\alpha.
+\]
+\emph{\olref{ord:oneplus} $\Rightarrow$ \olref{ord:plusone}.} توجد
+بوضوح !!a{bijection}~$f \colon (\alpha \disjointsum 1) \to (1
+\disjointsum \alpha)$. وإذا كان~$1 \ordplus \alpha = \alpha$، فيوجد
+تماثل~$g \colon (1 \disjointsum \alpha) \to \alpha$. انظر الآن في
+$\comp{f}{g}$.
+
+\emph{\olref{ord:plusone} $\Rightarrow$ \olref{ord:infinite}.} إذا
+كان~$\alpha \approx \alpha \ordplus 1$، فتوجد !!a{bijection}
+$f \colon (\alpha \disjointsum 1) \to \alpha$. عرّف
+$g(\gamma) = f(\gamma, 0)$ لكل~$\gamma < \alpha$؛ وهذه
+!!{injection} تشهد بأن~$\alpha$ غير منتهية بحسب ديديكند، لأن
+$f(0,1) \in \alpha \setminus \ran{g}$.
+
+\emph{\olref{ord:infinite} $\Rightarrow$ \olref{ord:notinomega}.}
+هذه هي~\olref[z][infinity-again]{naturalnumbersarentinfinite}.
+\end{proof}
+
+\end{document}

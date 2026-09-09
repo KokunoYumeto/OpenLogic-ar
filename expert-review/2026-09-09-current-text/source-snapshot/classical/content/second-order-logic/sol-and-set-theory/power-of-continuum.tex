@@ -1,0 +1,170 @@
+% Part: second-order-logic
+% Chapter: sol-and-set-theory
+% Section: power-of-continuum
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sol}{set}{pow}
+
+\olsection{قوة المتصل}
+
+\begin{explain}
+التكميم في الرتبة الثانية يتناول مجموعات !!{domain} الجزئية،
+ولا يتناول مجموعات تلك المجموعات الجزئية من !!{domain}.
+ولو أردنا هذا التكميم مباشرة لاحتجنا إلى منطق \emph{الرتبة الثالثة}.
+فمثلًا، مبرهنة كانتور تنفي وجود دالة !!{injective} من مجموعة
+قوى مجموعة إلى المجموعة نفسها. وقد نحاول أن نقول:
+«لكل مجموعة~$X$ ولكل مجموعة~$P$، إذا كانت~$P$ مجموعة
+قوى~$X$، فليس~$\cardle{P}{X}$».
+لكن كون~$P$ مجموعة قوى~$X$ معناه أن !!{element}s~$P$
+هي مجموعات~$X$ الجزئية كلها ولا غيرها، فنحتاج إلى عبارة
+من نحو~$\lforall[Y][(P(Y) \liff Y \subseteq X)]$.
+وموضع الإشكال هو~$P(Y)$؛ إذ ليست هذه !!a{formula} من الرتبة
+الثانية: متغير العلاقة الأحادي الموضع، كـ$P$، لا يأخذ في موضع
+وسيطه إلا حدًا.
+
+ومع ذلك يمكن \emph{محاكاة} التكميم على مجموعات المجموعات
+إذا اتسع المجال لذلك. نستخدم علاقة ثنائية الموضع~$R$،
+تربط !!{element}s من !!{domain} بـ!!{element}s من !!{domain}.
+فمتى أعطينا~$R$ جمعنا !!{element}s التي يرتبط بها عنصر~$x$
+بالعلاقة~$R$. وتكون~$\Setabs{y \in \Domain{M}}{R(x,y)}$
+المجموعة التي نرمز إليها بـ$x$.
+وعكسًا، لتكن~$Z \subseteq \Pow{\Domain{M}}$ مجموعة من
+مجموعات~$\Domain{M}$ الجزئية. فإن كان في~$\Domain{M}$ من
+!!{element}s ما لا يقل عددًا عن مجموعات~$Z$، وجدت
+علاقة~$R \subseteq \Domain{M}^2$ يكون بها لكل مجموعة رمز:
+بوساطة~$R$ يرمز بعض~$x$ إلى كل~$Y \in Z$.
+\end{explain}
+
+\begin{defn}
+متى كان~$R \subseteq \Domain{M}^2$ قلنا إن
+\emph{$x$ يرمز بالعلاقة~$R$} إلى
+$\Setabs{y \in \Domain{M}}{R(x, y)}$.
+\end{defn}
+
+إذا كان !!a{element}~$x \in \Domain{M}$ يرمز
+بالعلاقة~$R$ إلى مجموعة~$Z \subseteq \Domain{M}$،
+كانت المجموعة~$Y \subseteq \Domain{M}$ ترمز إلى جملة من المجموعات:
+ما ترمز إليه !!{element}s~$Y$.
+وبهذا قد تكون~$Y$ رمزًا، بالعلاقة~$R$، لـ$\Pow{X}$.
+وشرط ذلك أن يكون لكل~$Z \subseteq X$ عنصر~$x \in Y$
+يرمز بالعلاقة~$R$ إلى~$Z$، وأن يكون كل~$x \in Y$
+رمزًا بالعلاقة~$R$ لمجموعة~$Z \subseteq X$.
+
+\begin{prop}
+!!{formula}
+  \[
+  \fn{Codes}(x, R, Z) \ident \lforall[y][(Z(y) \liff
+    R(x, y))]
+  \]
+تقرر أن~$s(x)$ يرمز بالعلاقة~$s(R)$ إلى~$s(Z)$.
+وأما !!{formula}
+\begin{multline*}
+  \fn{Pow}(Y, R, X) \ident \\
+  \lforall[Z][(Z \subseteq X \lif \lexists[x][(Y(x) \land
+    \fn{Codes}(x, R, Z))])] \land {} \\ \lforall[x][(Y(x) \lif
+  \lforall[Z][(\fn{Codes}(x, R, Z) \lif Z \subseteq X)])]
+\end{multline*}
+فتقرر أن~$s(Y)$ ترمز بالعلاقة~$s(R)$ إلى مجموعة قوى~$s(X)$؛
+أي إن عناصر~$s(Y)$ ترمز بالعلاقة~$s(R)$ إلى مجموعات~$s(X)$
+الجزئية كلها دون غيرها.
+\end{prop}
+
+\begin{explain}
+بهذا الترميز نعبّر عن قضايا مجموعة القوى، فنجعل التكميم على
+رموز المجموعات الجزئية عوضًا عن المجموعات نفسها.
+ومن ذلك أن نصوغ مبرهنة كانتور بنفي وجود دالة !!{injective}
+من أي مجموعة~$Y$ ترمز بالعلاقة~$R$ إلى مجموعة قوى~$X$، إلى~$X$ نفسها.
+\end{explain}
+
+\begin{prop}
+الجملة التالية صحيحة منطقيًا:
+\begin{multline*}
+  \lforall[X][\lforall[Y][\lforall[R][(\fn{Pow}(Y, R, X) \lif \\
+      \lnot \lexists[u][(\lforall[x][\lforall[y][((Y(x) \land Y(y) \land
+            \eq[u(x)][u(y)]) \lif
+            \eq[x][y])]] \land {}\\
+        \lforall[x][(Y(x) \lif X(u(x)))])])]]]
+\end{multline*}
+\end{prop}
+
+\begin{explain}
+مجموعة قوى مجموعة !!a{denumerable} هي !!{nonenumerable}؛
+فأصليتها تزيد على أصلية أي مجموعة !!{denumerable}، أي
+$\aleph_0$. وحجم~$\Pow{\Nat}$ هو «قوة المتصل»، إذ يساوي
+حجم مجموعة نقاط المستقيم الحقيقي~$\Real$.
+فإن اتسع !!{domain} لترميز مجموعة قوى مجموعة !!a{denumerable}،
+  أمكن أن نصف مجموعة بأنها من حجم المتصل بقولنا إنها تكافئ
+  عدديًا مجموعة~$Y$ ترمز مجموعة قوى مجموعة~$X$
+  من الحجم~$\aleph_0$، بشرط أن يكون لكل مجموعة جزئية من~$X$
+  رمز واحد لا غير في~$Y$؛ وهو شرط التفرّد المثبت في
+  \(\fn{Cont}\) أدناه. فأما الترميز غير المتفرّد فلا يفيد إلا
+  حدًا أدنى لحجم~$Y$. وإن ضاق المجال عن ذلك، فلم توجد
+فيه مجموعة جزئية مكافئة عدديًا لـ$\Real$، امتنع وجود علاقة
+  ترمز~$\Pow{X}$ أيضًا.
+% تصحيح مصدر (0340-I1، 0340-I2): قُيد الحقن بالمجموعة Y وصُرّح بشرط تفرد رموز مجموعة القوى.
+\end{explain}
+
+\begin{prop}
+إذا كان~$\cardle{\Real}{\Domain{M}}$ كانت !!{formula}
+\begin{multline*}
+\fn{Cont}(Y) \ident 
+\lexists[X][\lexists[R][((\fn{Aleph}_0(X) \land
+      \fn{Pow}(Y, R, X)) \land \\ 
+      \lforall[x][\lforall[y][((Y(x) \land {} 
+      Y(y) \land \lforall[z][R(x,z) \liff R(y,z)]) \lif \eq[x][y])]])]]
+\end{multline*}
+تعبيرًا عن~$\cardeq{s(Y)}{\Real}$.
+\end{prop}
+
+\begin{proof}
+تقرر~$\fn{Pow}(Y, R, X)$ أن~$s(Y)$ ترمز
+بالعلاقة~$s(R)$ إلى مجموعة قوى~$s(X)$؛
+وتقرر~$\fn{Aleph}_0(X)$ أن المجموعة الأصلية قابلة للتعداد.
+فـ$s(Y)$ لا يقل حجمها عن قوة المتصل، وقد يزيد عليها إذا
+اجتمعت عناصر عدة من~$s(Y)$ ترمز إلى الجزء نفسه من~$X$.
+وإنما يمنع المقترن الأخير هذا الاحتمال؛ إذ يشترط أن يكون الربط
+بالعلاقة~$s(R)$ بين عناصر~$s(Y)$ ومجموعات~$s(X)$ الجزئية
+!!{injective}.
+\end{proof}
+
+\begin{prop}
+يتحقق~$\cardeq{\Domain{M}}{\Real}$ إذا وفقط إذا
+\begin{multline*}
+  \Sat{M}{\lexists[X][\lexists[Y][\lexists[R][(\fn{Aleph}_0(X) \land \fn{Pow}(Y, R, X) \land {}\\
+      \lforall[x][\lforall[y][((Y(x) \land Y(y) \land
+        \lforall[z][R(x,z) \liff R(y,z)]) \lif \eq[x][y])]] \land {}\\
+      \lexists[u][(\lforall[x][\lforall[y][(\eq[u(x)][u(y)] \lif \eq[x][y])]] \land {}
+        \\\lforall[x][Y(u(x))] \land {}
+        \\\lforall[y][(Y(y) \lif \lexists[x][\eq[y][u(x)]])])])]]]}. 
+\end{multline*}
+\end{prop}
+
+\begin{explain}
+مؤدى فرضية المتصل أن حجم المتصل هو أول أصلية
+!!{nonenumerable}؛ أي إن حجم~$\Pow{\Nat}$ هو~$\aleph_1$.
+\end{explain}
+
+\begin{prop}
+صدق فرضية المتصل يكافئ الصحة المنطقية للجملة
+\[\fn{CH} \ident
+\lforall[X][(\fn{Aleph}_1(X) \liff \fn{Cont}(X))]\]
+\end{prop}
+
+ولا يلزم من هذا أن تكون~$\lnot \fn{CH}$ صحيحة منطقيًا إذا
+وفقط إذا كذبت فرضية المتصل. فالمجال !!a{enumerable} لا يشتمل
+على مجموعة جزئية حجمها~$\aleph_1$، ولا على مجموعة جزئية
+من حجم المتصل. لذلك تصدق~$\fn{CH}$ دائمًا في مجال
+!!a{enumerable}. غير أن لنفي الفرضية جملة أخرى تكون
+صحيحة منطقيًا إذا وفقط إذا كذبت الفرضية:
+
+\begin{prop}
+كذب فرضية المتصل يكافئ الصحة المنطقية للجملة
+\[\fn{NCH} \ident
+\lforall[X][(\fn{Cont}(X) \lif \lexists[Y][(Y \subseteq X \land \lnot
+    \fn{Count}(Y) \land \lnot \cardeq{X}{Y})])]\]
+\end{prop}
+
+\end{document}

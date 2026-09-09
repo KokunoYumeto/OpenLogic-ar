@@ -1,0 +1,71 @@
+% Part: sets-functions-relations
+% Chapter: relations
+% Section: operations
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid[ar]{sfr}{rel}{ops}
+\olsection{عمليات على العلاقات}
+
+غالبًا ما يكون من المفيد تعديل العلاقات أو الجمع بينها. ففي
+\olref[sfr][rel][ord]{prop:stricttopartial}، نظرنا في \emph{اتحاد}
+العلاقات، وهو ببساطة اتحاد علاقتين حين ينظر إليهما بوصفهما
+مجموعتين من الأزواج. وبالمثل، نظرنا في \olref[sfr][rel][ord]{prop:partialtostrict}
+في الفرق النسبي بين العلاقات. وفيما يأتي بعض
+العمليات الأخرى التي يمكننا إجراؤها على العلاقات.
+
+\begin{defn}\ollabel{relationoperations}
+لتكن $R$ و$S$ علاقتين، ولتكن $A$ أي مجموعة.
+
+\emph{معكوس العلاقة} $R$ هو $R^{-1} = \Setabs{\tuple{y, x}}{\tuple{x,
+    y} \in R}$.
+
+\emph{الضرب النسبي} للعلاقتين $R$ و$S$ هو $(R \mid S) =
+\{\tuple{x, z} : \exists y(Rxy \land Syz)\}$.
+
+\emph{تقييد} $R$ على $A$ هو $\funrestrictionto{R}{A}= R
+\cap A^2$.
+
+\emph{تطبيق} $R$ على $A$ هو $\funimage{R}{A} = \{y :
+(\exists x \in A)Rxy\}$
+\end{defn}
+
+\begin{ex}
+لتكن $S \subseteq \Int^2$ علاقة اللاحق على~$\Int$، أي
+$S = \Setabs{\tuple{x, y} \in \Int^2}{x + 1 = y}$، بحيث يصدق $Sxy$ إذا وفقط إذا كان $x + 1 = y$.
+
+$S^{-1}$ هي علاقة السابق على $\Int$، أي
+$\Setabs{\tuple{x,y}\in\Int^2}{x -1 =y}$.
+
+$S\mid S$ هي
+$ \Setabs{\tuple{x,y}\in\Int^2}{x + 2 =y}$
+
+$\funrestrictionto{S}{\Nat}$ هي علاقة اللاحق على~$\Nat$.
+
+$\funimage{S}{\{1,2,3\}}$ هي $\{2, 3, 4\}$.
+\end{ex}
+
+\begin{defn}[الإغلاق المتعدي]لتكن $R \subseteq A^2$ علاقة ثنائية.
+
+\emph{الإغلاق المتعدي} لـ~$R$ هو $R^+ = \bigcup_{0 < n \in
+\Nat} R^n$، حيث نعرّف عوديًا $R^1 = R$ و$R^{n+1} = R^n
+\mid R$.
+
+\emph{الإغلاق الانعكاسي المتعدي} لـ $R$ هو $R^* = R^+ \cup
+\Id{A}$.
+\end{defn}
+
+\begin{ex}
+لنأخذ علاقة اللاحق $S \subseteq \Int^2$. يصدق $S^2xy$ إذا وفقط إذا كان $x + 2 =
+y$، ويصدق $S^3xy$ إذا وفقط إذا كان $x + 3 = y$، وهكذا. ومن ثم يصدق $S^+xy$ إذا وفقط إذا كان $x + n = y$ لبعض
+$n \geq 1$. وبعبارة أخرى، يصدق $S^+xy$ إذا وفقط إذا كان $x < y$، ويصدق $S^*xy$ إذا وفقط إذا كان $x \le
+y$.
+\end{ex}
+
+\begin{prob}
+أثبت أن الإغلاق المتعدي لـ $R$ علاقة متعدية بالفعل.
+\end{prob}
+
+\end{document}

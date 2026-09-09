@@ -1,0 +1,365 @@
+% Part: first-order-logic
+% Chapter: syntax-and-semantics
+% Section: assignments
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{syn}{ass}
+
+\olsection{إسنادات المتغيرات}
+
+\begin{explain}
+يوفر إسناد ال!!{variable}s~$s$ قيمة لكل متغير \emph{دون استثناء}---
+وهي متغيرات لا نهائية العدد. ولا حاجة بالطبع إلى ذلك. وإنما نشترط أن
+تسند إسنادات ال!!{variable}s قيمًا إلى جميع ال!!{variable}s لأنه
+يبسط الأمور كثيرًا. فقيمة الحد~$t$، وإرضاء !!a{formula}~$!A$ أو عدم
+إرضائها في !!a{structure} بالنسبة إلى~$s$، لا يعتمدان إلا على ما
+يسنده~$s$ إلى ال!!{variable}s في~$t$ وإلى ال!!{variable}s الحرة
+في~$!A$. وهذا مضمون القضيتين الآتيتين. ولضبط معنى «يعتمد على»، نبيّن
+أن أي إسنادين للمتغيرات يتفقان على جميع المتغيرات في~$t$ يعطيان
+القيمة نفسها، وأنه إذا اتفق إسنادان للمتغيرات على جميع المتغيرات
+الحرة في~$!A$، كانت $!A$ مُرضاة بالنسبة إلى أحدهما إذا وفقط إذا كانت
+مُرضاة بالنسبة إلى الآخر.
+\end{explain}
+
+\begin{prop}\ollabel{prop:valindep}
+إذا كانت ال!!{variable}s في حد~$t$ من بين $x_1$، و\dots،~$x_n$،
+وكان $s_1(x_i) = s_2(x_i)$ عندما $i = 1$، و\dots،~$n$، فإن
+$\Value{t}{M}[s_1] = \Value{t}{M}[s_2]$.
+\end{prop}
+
+\begin{proof}
+بالاستقراء على تعقيد~$t$. في حالة الأساس، قد يكون $t$ !!a{constant}
+أو أحد المتغيرات~$x_1$، و\dots،~$x_n$. فإذا كان $t = c$، فإن
+$\Value{t}{M}[s_1] = \Assign{c}{M} = \Value{t}{M}[s_2]$. وإذا كان
+$t = x_i$، فإن $s_1(x_i) = s_2(x_i)$ بفرض القضية، ومن ثم
+$\Value{t}{M}[s_1] = s_1(x_i) = s_2(x_i) = \Value{t}{M}[s_2]$.
+
+ولخطوة الاستقراء، افترض أن
+$t = \Atom{f}{t_1, \dots, t_k}$ وأن الدعوى تصدق على $t_1$،
+و\dots،~$t_k$. عندئذ
+\begin{align*}
+  \Value{t}{M}[s_1] & = \Value{\Atom{f}{t_1, \dots, t_k}}{M}[s_1] \\
+  & = \Assign{f}{M}(\Value{t_1}{M}[s_1], \dots, \Value{t_k}{M}[s_1]).
+\intertext{عندما $j = 1$، و\dots،~$k$، تكون ال!!{variable}s
+    في~$t_j$ من بين $x_1$، و\dots،~$x_n$. وبفرضية الاستقراء،
+    $\Value{t_j}{M}[s_1] = \Value{t_j}{M}[s_2]$. ومن ثم}
+\Value{t}{M}[s_1] & = \Value{\Atom{f}{t_1, \dots, t_k}}{M}[s_1] \\
+  & = \Assign{f}{M}(\Value{t_1}{M}[s_1], \dots, \Value{t_k}{M}[s_1]) \\
+  & = \Assign{f}{M}(\Value{t_1}{M}[s_2], \dots, \Value{t_k}{M}[s_2]) \\
+  & = \Value{\Atom{f}{t_1, \dots, t_k}}{M}[s_2] = \Value{t}{M}[s_2].
+\end{align*}
+\end{proof}
+
+\begin{prop}\ollabel{prop:satindep}
+إذا كانت ال!!{variable}s الحرة في~$!A$ من بين $x_1$، و\dots،~$x_n$،
+وكان $s_1(x_i) = s_2(x_i)$ عندما $i = 1$، و\dots،~$n$، فإن
+$\Sat{M}{!A}[s_1]$ إذا وفقط إذا كان $\Sat{M}{!A}[s_2]$.
+\end{prop}
+
+\begin{proof}
+نستخدم الاستقراء على تعقيد~$!A$. في حالة الأساس، حيث $!A$ ذرية، قد
+تكون $!A$:
+\iftag{prvTrue}{$\ltrue$،}{}
+\iftag{prvFalse}{$\lfalse$،}{}
+$\Atom{R}{t_1, \dots, t_k}$ لمحمول ذي $k$ مواضع~$R$
+ولحدود $t_1$، و\dots،~$t_k$، أو $\eq[t_1][t_2]$ لحدين $t_1$
+و$t_2$. وفي الحالتين الأخيرتين لا نبيّن إلا الاتجاه الأمامي من
+ال!!{biconditional}، لأن برهان العكس متناظر.
+
+\begin{enumerate}
+\tagitem{prvTrue}{%
+  \indcase{!A}{\ltrue}{كل من $\Sat{M}{\indfrm}[s_1]$
+    و$\Sat{M}{\indfrm}[s_2]$.}}{}
+
+\tagitem{prvFalse}{%
+  \indcase{!A}{\lfalse}{كل من $\Sat/{M}{!A}[s_1]$
+    و$\Sat/{M}{!A}[s_2]$.}}{}
+
+\item
+  \indcase{!A}{\Atom{R}{t_1, \ldots, t_k}}{افترض
+    $\Sat{M}{\indfrm}[s_1]$. عندئذ
+    \[
+    \langle \Value{t_1}{M}[s_1], \ldots, \Value{t_k}{M}[s_1] \rangle
+    \in \Assign{R}{M}.
+    \]
+    عندما $i = 1$، و\dots،~$k$، يكون $\Value{t_i}{M}[s_1] =
+    \Value{t_i}{M}[s_2]$ بحسب \olref{prop:valindep}. ومن ثم لدينا أيضًا
+    $\langle \Value{t_1}{M}[s_2], \ldots, \Value{t_k}{M}[s_2] \rangle
+    \in \Assign{R}{M}$، وبالتالي $\Sat{M}{\indfrm}[s_2]$.}
+\item
+  \indcase{!A}{\eq[t_1][t_2]}{افترض $\Sat{M}{\indfrm}[s_1]$.
+    عندئذ $\Value{t_1}{M}[s_1] = \Value{t_2}{M}[s_1]$. ومن ثم
+    \begin{align*}
+      \Value{t_1}{M}[s_2] & = \Value{t_1}{M}[s_1]
+      & \text{(بحسب \olref{prop:valindep})} \\
+      & = \Value{t_2}{M}[s_1]
+      & \text{(لأن $\Sat{M}{\eq[t_1][t_2]}[s_1]$)}\\
+      &= \Value{t_2}{M}[s_2]
+      & \text{(بحسب \olref{prop:valindep})،}
+    \end{align*}
+    ولذلك $\Sat{M}{\eq[t_1][t_2]}[s_2]$.}
+\end{enumerate}
+
+افترض الآن أن $\Sat{M}{!B}[s_1]$ إذا وفقط إذا كان
+$\Sat{M}{!B}[s_2]$ لكل ال!!{formula}s~$!B$ الأقل تعقيدًا من~$!A$.
+وتجري خطوة الاستقراء بحسب الحالات التي يعيّنها المؤثر الرئيس
+لـ~$!A$. وفي كل حالة لا نبيّن إلا الاتجاه الأمامي من
+ال!!{biconditional}؛ فبرهان الاتجاه العكسي متناظر. وفي جميع الحالات
+عدا حالتي المكممين، نطبق فرضية الاستقراء على ال!!{subformula}s
+~$!B$ من~$!A$. وتكون المتغيرات الحرة في~$!B$ من بين تلك التي
+في~$!A$. ولذلك إذا اتفق $s_1$ و$s_2$ على المتغيرات الحرة في~$!A$،
+اتفقا أيضًا على تلك التي في~$!B$، وانطبقت فرضية الاستقراء على~$!B$.
+
+\begin{enumerate}
+\tagitem{defNot}{}{%
+  \iftag{probNot}{%
+    \indcase!{!A}{\lnot !B}{}}{%
+    \indcase{!A}{\lnot !B}{إذا كان $\Sat{M}{\indfrm}[s_1]$، فإن
+      $\Sat/{M}{!B}[s_1]$، ومن ثم بفرضية الاستقراء
+      $\Sat/{M}{!B}[s_2]$، وبالتالي $\Sat{M}{\indfrm}[s_2]$.}}}
+
+\tagitem{defAnd}{}{%
+  \iftag{probAnd}{%
+    \indcase!{!A}{!B \land !C}{}}{%
+    \indcase{!A}{!B \land !C}{إذا كان $\Sat{M}{\indfrm}[s_1]$،
+      فإن $\Sat{M}{!B}[s_1]$ و$\Sat{M}{!C}[s_1]$، ومن ثم بفرضية
+      الاستقراء $\Sat{M}{!B}[s_2]$ و$\Sat{M}{!C}[s_2]$. وبالتالي
+      $\Sat{M}{\indfrm}[s_2]$.}}}
+
+\tagitem{defOr}{}{%
+  \iftag{probOr}{%
+    \indcase!{!A}{!B \lor !C}{}}{%
+    \indcase{!A}{!B \lor !C}{إذا كان $\Sat{M}{\indfrm}[s_1]$،
+      فإن $\Sat{M}{!B}[s_1]$ أو $\Sat{M}{!C}[s_1]$. وبفرضية
+      الاستقراء $\Sat{M}{!B}[s_2]$ أو $\Sat{M}{!C}[s_2]$، ومن ثم
+      $\Sat{M}{\indfrm}[s_2]$.}}}
+
+\tagitem{defIf}{}{%
+  \iftag{probIf}{%
+    \indcase!{!A}{!B \lif !C}{}}{%
+    \indcase{!A}{!B \lif !C}{إذا كان $\Sat{M}{\indfrm}[s_1]$،
+    فإن $\Sat/{M}{!B}[s_1]$ أو $\Sat{M}{!C}[s_1]$. وبفرضية
+    الاستقراء $\Sat/{M}{!B}[s_2]$ أو $\Sat{M}{!C}[s_2]$، ومن ثم
+    $\Sat{M}{\indfrm}[s_2]$.}}}
+
+\tagitem{defIff}{}{%
+  \iftag{probIff}{%
+    \indcase!{!A}{!B \liff !C}{}}{%
+    \indcase{!A}{!B \liff !C}{إذا كان $\Sat{M}{\indfrm}[s_1]$،
+      فإما أن $\Sat{M}{!B}[s_1]$ و$\Sat{M}{!C}[s_1]$، وإما أن
+      $\Sat/{M}{!B}[s_1]$ و$\Sat/{M}{!C}[s_1]$. وبفرضية الاستقراء،
+      إما أن $\Sat{M}{!B}[s_2]$ و$\Sat{M}{!C}[s_2]$، وإما أن
+      $\Sat/{M}{!B}[s_2]$ و$\Sat/{M}{!C}[s_2]$. وفي الحالتين،
+      $\Sat{M}{\indfrm}[s_2]$.}}}
+
+\tagitem{defEx}{}{%
+  \iftag{probEx}{%
+    \indcase!{!A}{\lexists[x][!B]}{}}{%
+    \indcase{!A}{\lexists[x][!B]}{إذا كان
+      $\Sat{M}{\indfrm}[s_1]$، وُجد $m \in \Domain{M}$ بحيث
+      $\Sat{M}{!B}[\Subst{s_1}{m}{x}]$. ليكن
+      $s_1' = \Subst{s_1}{m}{x}$ و$s_2' =
+      \Subst{s_2}{m}{x}$. تكون المتغيرات الحرة في~$!B$ من بين
+      $x_1$، و\dots، $x_n$، و$x$. ولدينا
+      $s_1'(x_i) = s_2'(x_i)$، لأن $s_1'$ و$s_2'$ مغايران بالنسبة
+      إلى~$x$ لـ~$s_1$ و$s_2$، على التوالي، ولأن
+      $s_1(x_i) = s_2(x_i)$ بالفرض. ولدينا
+      $s_1'(x) = s_2'(x) = m$ بحسب تعريفنا لـ~$s_1'$ و$s_2'$.
+      وعندئذ تنطبق فرضية الاستقراء على~$!B$ وعلى $s_1'$ و$s_2'$،
+      فيكون $\Sat{M}{!B}[s_2']$. ومن ثم، لما كان
+      $s_2' = \Subst{s_2}{m}{x}$، يوجد $m \in \Domain{M}$ بحيث
+      $\Sat{M}{!B}[\Subst{s_2}{m}{x}]$، ولذلك
+      $\Sat{M}{\indfrm}[s_2]$.}}}
+
+\tagitem{defAll}{}{%
+  \iftag{probAll}{%
+    \indcase!{!A}{\lforall[x][!B]}{}}{%
+    \indcase{!A}{\lforall[x][!B]}{إذا كان
+      $\Sat{M}{\indfrm}[s_1]$، فإن لكل $m \in \Domain{M}$،
+      $\Sat{M}{!B}[\Subst{s_1}{m}{x}]$. ونريد أن نبيّن أنه أيضًا،
+      لكل $m \in \Domain{M}$، $\Sat{M}{!B}[\Subst{s_2}{m}{x}]$.
+      فليكن $m \in \Domain{M}$ اعتباطيًا،
+      وانظر في $s_1' = \Subst{s_1}{m}{x}$ و$s_2' =
+      \Subst{s_2}{m}{x}$. لدينا $\Sat{M}{!B}[s_1']$. وتكون
+      المتغيرات الحرة في~$!B$ من بين $x_1$، و\dots، $x_n$، و$x$.
+      ولدينا $s_1'(x_i) = s_2'(x_i)$، لأن $s_1'$ و$s_2'$ مغايران
+      بالنسبة إلى~$x$ لـ~$s_1$ و$s_2$، على التوالي، ولأن
+      $s_1(x_i) = s_2(x_i)$ بالفرض. كما أن
+      $s_1'(x) = s_2'(x) = m$ بحسب تعريفنا لـ~$s_1'$ و$s_2'$.
+      وعندئذ تنطبق فرضية الاستقراء على~$!B$ وعلى $s_1'$ و$s_2'$،
+      فيكون $\Sat{M}{!B}[s_2']$. وينطبق هذا على كل
+      $m \in \Domain{M}$، أي إن
+      $\Sat{M}{!B}[\Subst{s_2}{m}{x}]$ لكل~$m \in
+      \Domain{M}$، ومن ثم $\Sat{M}{\indfrm}[s_2]$.}}}
+\end{enumerate}
+وبالاستقراء، نحصل على أن $\Sat{M}{!A}[s_1]$ إذا وفقط إذا كان
+$\Sat{M}{!A}[s_2]$ متى كانت ال!!{variable}s الحرة في~$!A$ من بين
+$x_1$، و\dots، $x_n$، وكان $s_1(x_i)=s_2(x_i)$ عندما $i = 1$،
+و\dots،~$n$.
+\end{proof}
+
+\begin{probtag}{probNot,probOr,probAnd,probIf,probIff,probEx,probAll}
+أكمل برهان \olref[fol][syn][ass]{prop:satindep}.
+\end{probtag}
+
+\begin{explain}
+ليس في ال!!^{sentence}s متغيرات حرة، ولذلك يسند أي إسنادين
+للمتغيرات الأشياء نفسها إلى جميع متغيرات أية جملة الحرة (وعددها
+صفر). وتعني القضية المثبتة للتو أن إرضاء !!a{sentence} أو عدم
+إرضائها في بنية بالنسبة إلى إسناد للمتغيرات مستقل تمامًا عن
+الإسناد. وسنسجل هذه الحقيقة. فهي تسوغ تعريف إرضاء !!a{sentence} في
+!!a{structure} الآتي (من غير ذكر إسناد للمتغيرات).
+\end{explain}
+
+\begin{cor}
+\ollabel{cor:sat-sentence}
+إذا كانت $!A$ !!a{sentence} وكان $s$ إسنادًا للمتغيرات، فإن
+$\Sat{M}{!A}[s]$ إذا وفقط إذا كان $\Sat{M}{!A}[s']$ لكل إسناد
+للمتغيرات~$s'$.
+\end{cor}
+
+\begin{proof}
+  ليكن $s'$ أي إسناد للمتغيرات. لما كانت $!A$ !!a{sentence}، لم يكن
+  فيها متغيرات حرة، ومن ثم يسند كل إسناد للمتغيرات~$s'$، على نحو
+  تحصيلي، الأشياء نفسها التي يسندها~$s$ إلى جميع المتغيرات الحرة
+  في~$!A$. وهكذا يتحقق شرط \olref{prop:satindep}، ولدينا
+  $\Sat{M}{!A}[s]$ إذا وفقط إذا كان $\Sat{M}{!A}[s']$.
+\end{proof}
+
+\begin{defn}
+\ollabel{defn:satisfaction}
+إذا كانت $!A$ !!a{sentence}، قلنا إن !!a{structure}~$\Struct M$
+\emph{ترضي}~$!A$، $\Sat{M}{!A}$، إذا وفقط إذا كان
+$\Sat{M}{!A}[s]$ لجميع إسنادات المتغيرات~$s$.
+\end{defn}
+
+إذا كان $\Sat{M}{!A}$، قلنا أيضًا ببساطة إن
+\emph{$!A$ صادقة في~$\Struct{M}$.} ويمتد مفهوم الإرضاء بطبيعة الحال
+من ال!!{sentence}s المفردة إلى مجموعات ال!!{sentence}s.
+
+\begin{defn}
+\ollabel{defn:sat}
+إذا كانت $\Gamma$ مجموعة من ال!!{sentence}s، قلنا إن
+!!a{structure}~$\Struct M$ \emph{ترضي}~$\Gamma$،
+$\Sat{M}{\Gamma}$، إذا وفقط إذا كان $\Sat{M}{!A}$ لكل
+$!A \in \Gamma$.
+\end{defn}
+
+\begin{prop}\ollabel{prop:sentence-sat-true}
+  لتكن $\Struct{M}$ !!a{structure}، ولتكن $!A$ !!a{sentence}، وليكن
+  $s$ إسنادًا للمتغيرات. يكون $\Sat{M}{!A}$ إذا وفقط إذا كان
+  $\Sat{M}{!A}[s]$.
+\end{prop}
+
+\begin{proof}
+تمرين.
+\end{proof}
+
+\begin{prob}
+أثبت \olref[fol][syn][ass]{prop:sentence-sat-true}.
+\end{prob}
+
+\begin{prop}\ollabel{prop:sat-quant}
+  افترض أن $!A(x)$ لا تحتوي حرًا إلا على~$x$، وأن $\Struct M$
+  !!a{structure}. عندئذ:
+  \begin{tagenumerate}{prvEx,prvAll}
+    \tagitem{prvEx}{$\Sat{M}{\lexists[x][!A(x)]}$ إذا وفقط إذا كان
+      $\Sat{M}{!A(x)}[s]$ لإسناد متغيرات واحد على الأقل~$s$.}{}
+    \tagitem{prvAll}{$\Sat{M}{\lforall[x][!A(x)]}$ إذا وفقط إذا كان
+      $\Sat{M}{!A(x)}[s]$ لجميع إسنادات المتغيرات~$s$.}{}
+\end{tagenumerate}
+\end{prop}
+
+\begin{proof}
+تمرين.
+\end{proof}
+
+\begin{prob}
+أثبت \olref[fol][syn][ass]{prop:sat-quant}.
+\end{prob}
+
+\begin{prob}
+\DeclareRobustCommand{\VDash}{\mathrel{||}\joinrel\Relbar}
+افترض أن $\Lang L$ لغة بلا !!{function}s. إذا أعطيت
+!!a{structure}~$\Struct M$، و!!a{constant}~$c$، و
+$a \in \Domain M$، فعرّف $\Struct M[a/c]$ بأنها ال!!{structure}
+المطابقة لـ~$\Struct M$ عدا أن $\Assign{c}{M[a/c]} = a$. وعرّف
+$\Struct M \VDash !A$ لل!!{sentence}s~$!A$ بما يأتي:
+\begin{enumerate}
+\tagitem{prvFalse}{%
+  \indcase{!A}{\lfalse}{ليس $\Struct{M} \VDash \indfrm$.}}{}
+
+\tagitem{prvTrue}{%
+  \indcase{!A}{\ltrue}{$\Struct{M} \VDash \indfrm$.}}{}
+
+\item \indcase{!A}{\Atom{R}{d_1, \dots, d_n}}{$\Struct M \VDash \indfrm$
+  إذا وفقط إذا كان $\langle \Assign{d_1}{M}, \dots,
+  \Assign{d_n}{M} \rangle \in \Assign{R}{M}$.}
+
+\item \indcase{!A}{\eq[d_1][d_2]}{$\Struct M \VDash \indfrm$ إذا
+  وفقط إذا كان $\Assign{d_1}{M} = \Assign{d_2}{M}$.}
+
+\tagitem{prvNot}{%
+  \indcase{!A}{\lnot !B}{$\Struct{M} \VDash \indfrm$ إذا وفقط إذا
+    لم يكن $\Struct{M} \VDash {!B}$.}}{}
+
+\tagitem{prvAnd}{%
+  \indcase{!A}{(!B \land !C)}{$\Struct{M} \VDash
+    \indfrm$ إذا وفقط إذا كان $\Struct{M} \VDash!B$ و
+    $\Struct{M} \VDash !C$.}}{}
+
+\tagitem{prvOr}{%
+  \indcase{!A}{(!B \lor !C)}{$\Struct{M} \VDash \indfrm$ إذا وفقط
+    إذا كان $\Struct{M} \VDash !B$ أو $\Struct{M} \VDash !C$
+    (أو كلاهما).}}{}
+
+\tagitem{prvIf}{%
+  \indcase{!A}{(!B \lif !C)}{$\Struct{M} \VDash \indfrm$ إذا
+    وفقط إذا لم يكن $\Struct {M} \VDash !B$، أو كان
+    $\Struct M \VDash !C$ (أو كلاهما).}}{}
+
+\tagitem{prvIff}{%
+  \indcase{!A}{(!B \liff !C)}{$\Struct{M} \VDash {\indfrm}$ إذا
+    وفقط إذا كان إما كل من $\Struct{M} \VDash {!B}$ و
+    $\Struct{M} \VDash {!C}$، وإما لا $\Struct{M} \VDash {!B}$
+    ولا $\Struct{M} \VDash {!C}$.}}{}
+
+\tagitem{prvAll}{%
+  \indcase{!A}{\lforall[x][!B]}{$\Struct{M} \VDash {\indfrm}$ إذا
+    وفقط إذا كان، لكل $a \in \Domain{M}$،
+    $\Struct{M[a/c]} \VDash \Subst{!B}{c}{x}$، إذا لم يرد~$c$
+    في~$!B$.}}{}
+
+\tagitem{prvEx}{%
+  \indcase{!A}{\lexists[x][!B]}{$\Struct{M} \VDash
+  {\indfrm}$ إذا وفقط إذا وُجد $a \in \Domain M$ بحيث
+  $\Struct{M[a/c]} \VDash \Subst{!B}{c}{x}$، إذا لم يرد~$c$
+  في~$!B$.}}{}
+\end{enumerate}
+لتكن $x_1$، و\dots، $x_n$ جميع ال!!{variable}s الحرة في~$!A$،
+ولتكن $c_1$، و\dots، $c_n$ رموزًا ثابتة لا ترد في~$!A$، ولتكن
+$a_1$، و\dots، $a_n \in \Domain M$، وليكن $s(x_i) = a_i$.
+
+بيّن أن $\Sat{M}{!A}[s]$ إذا وفقط إذا كان
+$\Struct M[a_1/c_1,\dots,a_n/c_n]
+\VDash \Subst{\Subst{!A}{c_1}{x_1}\dots}{c_n}{x_n}$.
+
+(تبيّن هذه المسألة إمكان إعطاء دلالة لمنطق الرتبة الأولى تستغني عن
+إسنادات المتغيرات.)
+\end{prob}
+
+\begin{prob}
+افترض أن $f$ رمز دالة لا يرد في~$!A(x,y)$. بيّن أنه توجد
+!!a{structure}~$\Struct{M}$ بحيث
+$\Sat{M}{\lforall[x][\lexists[y][!A(x,y)]]}$ إذا وفقط إذا وُجدت
+~$\Struct M'$ بحيث $\Sat{M'}{\lforall[x][!A(x,f(x))]}$.
+
+(هذه المسألة حالة خاصة مما يعرف بمبرهنة سكولم؛ وتسمى
+$\lforall[x][!A(x,f(x))]$ \emph{صيغة سكولم السوية}
+لـ~$\lforall[x][\lexists[y][!A(x,y)]]$.)
+\end{prob}
+
+\end{document}

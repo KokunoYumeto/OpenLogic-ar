@@ -1,0 +1,122 @@
+% Part: model-theory
+% Chapter: models-of-arithmetic
+% Section: computable-models
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{mar}{cmp}
+\section{نماذج الحساب القابلة للحساب}
+
+\begin{explain}
+للنموذج القياسي~$\Struct{N}$ مزيتان: مجاله الأعداد الطبيعية
+$\Nat$، وهي الأشياء المقصودة بالكلام في لغة الحساب، والحد
+العددي القياسي~$\num{n}$ يدل فيه على~$n$ نفسه. ثم إن تأويل
+كل رمز غير منطقي من~$\Lang{L_A}$ \emph{قابل للحساب}.
+فالدوال التي تؤول الخلف والجمع والضرب، أعني
+$\Assign{\prime}{N}$ و$\Assign{+}{N}$ و$\Assign{\times}{N}$،
+دوال عددية قابلة للحساب بآلة تورنغ، بل تقبل التعريف
+بالاستدعاء البدائي. وكذلك علاقة الأصغر من في~$\Struct{N}$،
+أي $\Assign{<}{N}$، قابلة للقرار.
+
+أما النماذج غير القياسية للنظريات الحسابية، كـ$\Th{Q}$
+و$\Th{PA}$، فلا تخلو من عناصر غير قياسية؛ ولهذا تُعرض
+مجالاتها عادةً مشتملة على !!{element}s زائدة على~$\Nat$.
+غير أن كل !!{structure} قابلة للعد وغير منتهية يمكن نقلها
+إلى أي مجموعة !!{denumerable}، ومنها~$\Nat$.
+فتوجد إذن نماذج غير قياسية مجالها~$\Nat$ نفسه.
+وفي نموذج كهذا~$\Struct{M}$ لا تؤدي الأعداد كلها أدوارها
+المعتادة؛ فلا بد من $k$ يختلف عن $\Value{\num{n}}{M}$
+لكل~$n \in \Nat$.
+\end{explain}
+
+\begin{defn}
+تكون !!^a{structure}~$\Struct{M}$ للغة $\Lang{L_A}$ \emph{قابلة
+للحساب} إذا وفقط إذا كان $\Domain{M}=\Nat$، وكانت
+$\Assign{\prime}{M}$ و$\Assign{+}{M}$ و$\Assign{\times}{M}$ دوال قابلة
+للحساب، وكانت $\Assign{<}{M}$ علاقة قابلة للقرار.
+\end{defn}
+
+\begin{ex}\ollabel{ex:comp-model-q}
+تذكر البنية $\Struct{K}$ من \olref[mdq]{ex:model-K-of-Q}. كان مجالها
+$\Domain{K}=\Nat \cup \{a\}$ وتفسيراتها
+\begin{align*}
+  \Assign{\Obj{0}}{K} & = 0\\
+  \Assign{\prime}{K}(x) & =
+  \begin{cases}
+    x+1 & \text{إذا كان $x\in \Nat$}\\
+    a & \text{إذا كان $x = a$}
+  \end{cases}\\
+  \Assign{+}{K}(x, y) & =
+  \begin{cases}
+    x+y & \text{إذا كان $x$ و$y \in\Nat$}\\
+    a & \text{فيما عدا ذلك}
+  \end{cases}\\
+  \Assign{\times}{K}(x, y) & =
+  \begin{cases}
+    xy & \text{إذا كان $x$ و$y \in\Nat$}\\
+    0 & \text{إذا كان $x=0$ أو $y=0$}\\
+    a & \text{فيما عدا ذلك}\\
+  \end{cases}\\
+  \Assign{<}{K} & =
+  \Setabs{\tuple{x,y}}{x, y \in \Nat \text{ و } x<y} \cup
+  \Setabs{\tuple{x,a}}{x \in \Domain{K}}
+\end{align*}
+ومع ذلك فإن $\Domain{K}$~!!{denumerable}، فتساوي~$\Nat$
+عددًا. ومن أمثلة ذلك الدالة $g\colon \Nat \to \Domain{K}$
+ذات $g(0)=a$ و$g(n)=n-1$ لـ$n>0$؛ فهي !!a{bijection}.
+نجعلها تشاكلًا بين نموذج جديد~$\Struct{K'}$ لـ$\Th{Q}$
+والبنية $\Struct{K}$. ولا بد عند بناء $\Struct{K'}$
+من تغيير الدوال والعلاقات المسندة إلى رموز $\Lang{L_A}$،
+لأن !!{element}s أخرى من~$\Nat$ ستقوم مقام الأعداد
+القياسية وغير القياسية.
+
+فالعدد $0$ يقوم الآن مقام~$a$، لا مقام أصغر عدد قياسي؛
+والقائم مقام أصغر عدد قياسي هو~$1$. لذلك نضع
+$\Assign{\Obj{0}}{K'}=1$. ويتغير تأويل الخلف كذلك:
+فالعدد القياسي في هذا النموذج، أي $n>0$، يرسل إلى
+$n+1$. وأما $0$ فيقوم مقام~$a$، وهو خلف نفسه،
+فنضع $\Assign{\prime}{K'}(0)=0$. وعلى هذا النحو
+يكون تأويل الجمع والضرب:
+\begin{align*}
+\Assign{+}{K'}(x, y) & =
+  \begin{cases}
+    x+y-1 & \text{إذا كان $x$ و$y >0$}\\
+    0 & \text{فيما عدا ذلك}
+  \end{cases}\\
+  \Assign{\times}{K'}(x, y) & =
+  \begin{cases}
+    1 & \text{إذا كان $x = 1$ أو $y = 1$}\\
+    xy - x - y + 2 & \text{إذا كان $x$ و$y > 1$}\\
+    0 & \text{فيما عدا ذلك}\\
+  \end{cases}
+\end{align*}
+ولدينا $\tuple{x,y} \in \Assign{<}{K'}$ إذا وفقط إذا كان $x<y$ و
+$x>0$ و$y>0$، أو إذا كان $y=0$.
+
+هذه كلها دوال قابلة للحساب على الأعداد الطبيعية،
+و$\Assign{<}{K'}$ علاقة قابلة للقرار على~$\Nat$.
+لكن قابلية الحساب لا تجعلها الخلف والجمع والضرب
+المعتادة على~$\Nat$، ولا تجعل $\Assign{<}{K'}$
+هي العلاقة~$<$ المعتادة على~$\Nat$.
+\end{ex}
+
+\begin{prob}
+أعط !!a{structure}~$\Struct{L'}$ ذات $\Domain{L'}=\Nat$ ومتشاكلة مع
+$\Struct{L}$ من \olref[mod][mar][mdq]{ex:model-L-of-Q}.
+\end{prob}
+
+\begin{explain}
+تدل \Olref{ex:comp-model-q} على وجود نماذج غير قياسية
+قابلة للحساب لـ$\Th{Q}$ على المجال~$\Nat$.
+وأما $\Th{PA}$، ومن ثم $\Th{TA}$، فلا تقبل مثل ذلك،
+كما تقضي المبرهنة الآتية.
+\end{explain}
+
+\begin{thm}[مبرهنة تننباوم]
+كل نموذج قابل للحساب لـ$\Th{PA}$ قياسي؛ أي إن $\Struct{N}$ هو النموذج
+الوحيد حتى التشاكل.
+\end{thm}
+
+\end{document}

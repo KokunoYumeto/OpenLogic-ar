@@ -1,0 +1,95 @@
+% Part: applied-modal-logics
+% Chapter: epistemic-logic
+% Section: bisimulations
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{aml}{el}{bsd}
+
+\olsection{في المحاكاة الثنائية}
+
+ويبقى في قوة اللغة المعرفية سؤال عن صلة النموذج بالصيغ الصادقة فيه. فقد
+دلت نتائج مطابقة الأطر على أن صدق بعض الصيغ صدقًا عامًا في إطار يستلزم
+اتصافه بخواص معينة. ولكن هل تميز لغتنا الجهوية بين عالم ذي سهم انعكاسي
+وبين سلسلة لا تنتهي من العوالم، ينفذ كل واحد منها إلى الذي يليه؟ وبعبارة
+أخرى: هل توجد صيغة~$A$ تصدق في أحد الموضعين دون الآخر؟
+
+وللجواب نعرّف بين النماذج العلائقية علاقة تسمى المحاكاة الثنائية؛ وهي
+تضبط اشتراكها في البنية التي تستطيع اللغة المعرفية التعبير عنها، ومن ثم
+تعطي معنى للتكافؤ بينها.
+
+\begin{defn}[المحاكاة الثنائية]
+ليكن $M_1 = \tuple{W_1,(R_{1,a})_{a \in G},V_1}$ و
+$M_2 = \tuple{W_2,(R_{2,a})_{a \in G},V_2}$ نموذجين علاقيين، ولتكن
+$\mathcal{R} \subseteq W_1 \times W_2$ علاقة ثنائية. نقول إن
+$\mathcal{R}$ \emph{محاكاة ثنائية} إذا تحققت الشروط الآتية لكل
+$\tuple{w_1, w_2} \in \mathcal{R}$:
+
+\begin{enumerate}
+  \item $w_1 \in V_1(p)$ إذا وفقط إذا كان $w_2 \in V_2(p)$ لكل
+  !!{propositional variable}s~$p$.
+  \item لكل فاعل $a \in G$ ولكل عالم $v_1 \in W_1$، إذا كان
+  $R_{1,a} w_1 v_1$، وُجد $v_2 \in W_2$ بحيث
+  $R_{2,a} w_2 v_2$ و$\tuple{v_1, v_2} \in
+  \mathcal{R}$.
+  \item لكل فاعل $a \in G$ ولكل عالم $v_2 \in W_2$، إذا كان
+   $R_{2,a} w_2 v_2$، وُجد $v_1 \in W_1$ بحيث
+   $R_{1,a} w_1 v_1$ و$\tuple{v_1, v_2} \in
+   \mathcal{R}$.
+\end{enumerate}
+
+إذا وُجدت محاكاة ثنائية بين $M_1$ و$M_2$ تربط العالمين $w_1$
+و$w_2$، جاز لنا أيضًا أن نكتب
+$\tuple{M_1, w_1} \leftrightarroweq \tuple{M_2, w_2}$، وأن نسمي
+$\tuple{M_1, w_1}$ و$\tuple{M_2, w_2}$ \emph{متكافئين بالمحاكاة
+الثنائية}.
+\end{defn}
+% تصحيح دلالي (0488-I1): صُرّح بعائلة علاقات النفاذ المفهرسة لكل فاعل في كلا النموذجين.
+
+ولكل بند من بنود المحاكاة الثنائية عمله: فالبند~1 يجعل العالمين المتكافئين
+يرضيان الصيغ نفسها الخالية من المؤثرات الجهوية، لأنه يوجب اتفاقهما في جميع
+ال!!{propositional variable}s. وأما البندان الآخران، ويسميان على الترتيب
+«الذهاب» و«الإياب»، فيحفظان بنية علاقات الإتاحة.
+
+\begin{thm}
+إذا كان $\tuple{M_1, w_1} \leftrightarroweq \tuple{M_2, w_2}$، فلكل
+!!{formula}~$!A$ يكون $\mSat{M_1}{!A}[w_1]$ إذا وفقط إذا كان
+$\mSat{M_2}{!A}[w_2]$.
+\end{thm}
+
+\begin{figure}
+  \begin{center}
+    \begin{tikzpicture}[modal]
+      \node[world] (w1) {$w_1$}; 
+      \node[world] (w2) [above left=of w1]{$w_2$}; 
+      \node[world] (w3) [above right=of w1] {$w_3$};
+      \draw[<->] (w1) to node {$a$} (w2);
+      \draw[->,loop below] (w1) to node {$a$} (w1);
+      \draw[<->] (w1) to [swap] node {$a$} (w3);
+      \draw[->,loop above] (w2) to node {$a$} (w2) ;
+      \draw[->,loop above] (w3) to node {$a$} (w3) ;
+      
+      \node[world](v1)[right of=w1, xshift=1.5in]{$v_1$};
+      \node[world](v2)[above of=v1]{$v_2$};
+      \draw[<->] (v1) to node {$a$} (v2);
+      \draw[->,loop below] (v1) to node {$a$} (v1);
+      \draw[->,loop above] (v2) to node {$a$} (v2) ;
+
+      \draw[-,dotted] (w1) to (v1) ;
+      \draw[-,dotted,bend left=45] (w2) to (v2) ;
+      \draw[-,dotted,bend left=30] (w3) to (v2) ;
+    \end{tikzpicture}
+  \end{center}
+  \caption{نموذجان متكافئان بالمحاكاة الثنائية.}
+  \ollabel{fig:bisimilar}
+\end{figure}
+
+ليس النموذجان المرسومان في \olref{fig:bisimilar} متماثلين، ومع ذلك تصل
+محاكاة ثنائية العالم~$w_1$ بالعالم~$v_1$. وهي تصل كذلك كلًا من~$w_2$
+و$w_3$ بــ$v_2$؛ إذ لا تستطيع لغتنا الجهوية أن تعبّر عن فرق يميز أحدهما
+من الآخر. ولو أرضى~$w_2$ و$w_3$ !!{propositional variable}s مختلفة
+لتغير الحكم.
+
+\end{document}

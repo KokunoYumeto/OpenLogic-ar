@@ -1,0 +1,238 @@
+% Part: normal-modal-logic
+% Chapter: completeness
+% Section: frame-completeness
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{com}{fra}
+
+\olsection{تمام الأطر}
+
+ليس تمام~\Log{K} نهاية الانتفاع بالنموذج القانوني.
+فمتى ثبت أن النموذج القانوني لنسق جهوي آخر يستوفي خاصية الإطار
+المقابلة لبديهياته، امتد إليه برهان التمام. ونبدأ بالخصائص الآتية.
+
+\begin{thm}\ollabel{thm:completeframeprops}
+  % تصحيح اتساق (0449-I1): النموذج القانوني نموذج غير خالٍ عند اتساق النسق.
+  إذا كان منطق جهوي نظامي متسق~$\Sigma$ يحوي إحدى ال!!{formula}s الواردة
+  في الجانب الأيسر من~\olref{tab:correspondencetable}، فإن النموذج
+  القانوني لـ~$\Sigma$ يملك الخاصية المقابلة في الجانب الأيمن.
+\end{thm}
+
+\begin{table}[htp]
+  \centering
+    \begin{tabular}{| l || l |}
+      \hline
+      \emph{إذا كانت $\Sigma$ تحوي \dots} & \emph{\dots فإن النموذج
+        القانوني لـ$\Sigma$ يكون:} \\
+      \hline \hline
+      \Ax{D}:\;\; $\Box!A \lif \Diamond !A$ & \quad متسلسلًا؛ \\
+      \hline
+      \Ax{T}:\;\; $\Box!A \lif !A$ &\quad انعكاسيًا؛\\
+      \hline
+      \Ax{B}: \;\;$!A \lif \Box\Diamond!A$ &\quad متناظرًا؛ \\
+      \hline
+      \Ax{4}: \;\; $\Box!A \lif \Box\Box!A$ & \quad متعديًا؛ \\
+      \hline
+      \Ax{5}: \;\; $\Diamond !A \lif \Box\Diamond!A$& \quad إقليديًا.\\
+      \hline
+    \end{tabular}
+    \caption{وقائع المقابلة الأساسية.}
+    \ollabel{tab:correspondencetable}
+\end{table}
+
+\begin{proof}
+  نفصل البرهان بحسب كل بديهية وما يقابلها من خصائص العلاقة.
+
+  لنفرض أن~$\Sigma$ تحوي~\Ax{D}، ولنأخذ~$\Delta \in W^\Sigma$.
+  المطلوب عالم~$\Delta'$ يحقق~$R^\Sigma \Delta\Delta'$.
+  ويكفي لهذا اتساق~$\Box^{-1}\Delta$ بالنسبة إلى~$\Sigma$:
+  إذ تتيح مبرهنة ليندنباوم عندئذ مجموعة $\Sigma$-متسقة تامة
+  $\Delta' \supseteq \Box^{-1}\Delta$، فيلزم بتعريف~$R^\Sigma$
+  \iftag{prvBox}{}{و\olref[mod]{lem:box-iff-diamond} }أن
+  $R^\Sigma \Delta\Delta'$.
+  فلنفرض نقيض ما نحتاج إليه، وهو أن~$\Box^{-1}\Delta$
+  \emph{ليست} $\Sigma$-متسقة، أي $\Box^{-1}\Delta \Proves[\Sigma] \lfalse$.
+  تقتضي~\olref[mod]{lem:box2} أن
+  $\Delta \Proves[\Sigma] \Box\lfalse$.
+  وبما أن~$\Sigma$ تحوي~\Ax{D} يلزم~$\Delta \Proves[\Sigma] \Diamond\lfalse$.
+  لكن نظامية~$\Sigma$ تقتضي~$\Sigma \Proves \lnot\Diamond \lfalse$
+  (\olref[prf][nor]{prop:notDiamondBot})، ومن ثم
+  $\Delta \Proves[\Sigma] \lnot\Diamond \lfalse$.
+  فاجتمع اشتقاق الصيغة ونفيها، وخولف اتساق~$\Delta$.
+
+  وأما إذا حوت~$\Sigma$ البديهية~\Ax{T}، فأخذنا~$\Delta \in W^\Sigma$،
+  كان المطلوب~$R^\Sigma \Delta\Delta$؛ أي\iftag{prvBox}{}{ بحسب
+  \olref[mod]{lem:box-iff-diamond}،} احتواء
+  $\Box^{-1}\Delta \subseteq \Delta$.
+  وكلما كان~$\Box!A \in \Delta$ اقتضت~\Ax{T} والإغلاق الاستنتاجي
+  أن~$!A \in \Delta$، فتم هذا الاحتواء.
+
+  والآن افترض أن~$\Sigma$ تحوي~\Ax{B}، وافترض
+  $R^\Sigma \Delta\Delta'$ من أجل~$\Delta$، $\Delta' \in W^\Sigma$.
+  علينا إثبات~$R^\Sigma \Delta'\Delta$؛ أي،\iftag{prvBox}{ أن
+    $\Box^{-1}\Delta' \subseteq \Delta$. وبحسب
+    \olref[mod]{lem:box-iff-diamond}، يكافئ ذلك أن}{}
+  $\Diamond\Delta \subseteq \Delta'$. فافترض~$!A \in \Delta$.
+  تقتضي~\Ax{B} أن~$\Box\Diamond!A \in \Delta$ أيضًا. ومن الفرض
+  $R^\Sigma \Delta\Delta'$\iftag{prvBox}{}{ ومع
+    \olref[mod]{lem:box-iff-diamond}} نحصل على
+  $\Box^{-1}\Delta \subseteq \Delta'$، ومن ثم
+  $\Diamond!A \in \Delta'$، كما هو مطلوب.
+
+  والآن افترض أن~$\Sigma$ تحوي~\Ax{4}، وافترض
+  $R^\Sigma \Delta_1\Delta_2$ و$R^\Sigma \Delta_2\Delta_3$.
+  علينا إثبات~$R^\Sigma \Delta_1\Delta_3$. وينتج من الفرضين
+  \iftag{prvBox}{}{ومن~\olref[mod]{lem:box-iff-diamond}} أن
+  $\Box^{-1}\Delta_1 \subseteq \Delta_2$ و
+  $\Box^{-1}\Delta_2 \subseteq \Delta_3$. ولإثبات
+  $R^\Sigma \Delta_1\Delta_3$، يكفي أن نبين
+  $\Box^{-1}\Delta_1 \subseteq \Delta_3$. فلتكن
+  $!B \in \Box^{-1}\Delta_1$؛ أي~$\Box!B \in \Delta_1$. وتقتضي
+  \Ax{4} أن~$\Box\Box!B \in \Delta_1$ أيضًا؛ وبالفرض نحصل، أولًا،
+  على~$\Box!B \in \Delta_2$، وثانيًا، على~$!B \in \Delta_3$، كما هو
+  مطلوب.
+
+  والآن افترض أن~$\Sigma$ تحوي~\Ax{5}، وافترض
+  $R^\Sigma \Delta_1\Delta_2$ و$R^\Sigma \Delta_1\Delta_3$.
+  علينا إثبات~$R^\Sigma \Delta_2\Delta_3$. يعطينا الفرض الأول
+  $\Box^{-1}\Delta_1 \subseteq \Delta_2$\iftag{prvBox}{}{ بحسب
+    \olref[mod]{lem:box-iff-diamond}}، ويكافئ الفرض الثاني
+  $\Diamond\Delta_3 \subseteq \Delta_1$\iftag{prvBox}{، بحسب
+    \olref[mod]{lem:box-iff-diamond}}{}. ولإثبات
+  $R^\Sigma \Delta_2\Delta_3$\iftag{prvBox}{، يكفي، بحسب
+    \olref[mod]{lem:box-iff-diamond}، أن}{، علينا أن}
+  نبين~$\Diamond\Delta_3 \subseteq \Delta_2$. فلتكن
+  $\Diamond!A \in \Diamond\Delta_3$؛ أي~$!A \in \Delta_3$. يعطينا
+  الفرض الثاني~$\Diamond!A \in \Delta_1$، وتقتضي~\Ax{5} أن
+  $\Box\Diamond!A \in \Delta_1$ أيضًا. لكن الفرض الأول يعطينا الآن
+  $\Diamond!A \in \Delta_2$، كما هو مطلوب.
+\end{proof}
+
+ومن جمع هذه الخصائص نحصل على تمام جملة من النظم.
+فمثلًا، $ \Log{S5} = \Log{KT5} = \Log{KTB4}$
+تام بالنسبة إلى جميع النماذج الانعكاسية الإقليدية.
+وهذه الفئة هي بعينها فئة النماذج الانعكاسية المتناظرة المتعدية،
+فيتفق التوصيفان.
+
+\begin{thm}\ollabel{thm:generaldet}
+  لتكن~$\mClass{C}_\Ax{D}$، $\mClass{C}_\Ax{T}$،
+  $\mClass{C}_\Ax{B}$، $\mClass{C}_\Ax{4}$، و
+  $\mClass{C}_\Ax{5}$ فئات جميع النماذج المتسلسلة والانعكاسية
+  والمتناظرة والمتعدية والإقليدية، على الترتيب. عندئذ، لأي مخططات
+  $!A_1$، \dots،~$!A_n$ من~\Ax{D} و\Ax{T} و\Ax{B} و\Ax{4} و\Ax{5}،
+  تحدد فئة النماذج
+  $\mClass{C} = \mClass{C}_{!A_1} \cap \dots
+  \cap \mClass{C}_{!A_n}$ النسق~$\Log{K}!A_1 \dots !A_n$.
+\end{thm}
+
+\begin{prop}
+  ليكن~$\Sigma$ منطقًا جهويًا نظاميًا متسقًا؛ عندئذ:
+  \begin{enumerate}
+  \item\ollabel{prop:anotherfive-a}%
+    إذا كانت~$\Sigma$ تحوي المخطط~$\Diamond!A \lif \Box !A$، كان
+    النموذج القانوني لـ~$\Sigma$ داليًا جزئيًا.
+  \item إذا كانت~$\Sigma$ تحوي المخطط~$\Diamond!A \liff \Box !A$،
+    كان النموذج القانوني لـ~$\Sigma$ داليًا.
+  \item إذا كانت~$\Sigma$ تحوي المخطط~$\Box\Box!A \lif \Box !A$،
+    كان النموذج القانوني لـ~$\Sigma$ كثيفًا بضعف.
+  \end{enumerate}
+(انظر~\olref[frd][acc]{tab:anotherfive} لتعريفات خصائص الأطر هذه).
+\end{prop}
+
+\begin{proof}
+  \begin{enumerate}
+  \item لنفرض أن~$\Sigma$ تحوي المخطط~$\Diamond !A \lif \Box !A$.
+    معنى كون~$R^\Sigma$ دالية جزئيًا أن يكون لكل عالم خلف واحد على الأكثر.
+    فلنأخذ $ \Delta_1$، $\Delta_2$، $\Delta_3 \in W^\Sigma$،
+    ونفرض $R^\Sigma \Delta_1\Delta_2$ و$R^\Sigma \Delta_1\Delta_3$،
+    ونثبت $ \Delta_2 = \Delta_3$.
+    من~$R^\Sigma \Delta_1\Delta_2$ يلزم~$\Box^{-1}\Delta_1 \subseteq \Delta_2$،
+    ومن~$R^\Sigma \Delta_1\Delta_3$ يلزم
+    $\Box^{-1}\Delta_1 \subseteq \Delta_3$\iftag{prvBox}{}{، وكلاهما
+      بحسب~\olref[mod]{lem:box-iff-diamond}}.
+    ولإثبات $ \Delta_2 = \Delta_3$ نثبت الاحتواءين
+    $\Delta_2 \subseteq \Delta_3$ و$\Delta_3 \subseteq \Delta_2$.
+    نأخذ أولًا~$!A \in \Delta_2$؛ فيلزم $\Diamond!A \in \Delta_1$.
+    وبالمخطط المفروض والإغلاق الاستنتاجي لـ~$\Delta_1$
+    يلزم~$\Box!A \in \Delta_1$.
+    ثم نستعمل~$R^\Sigma \Delta_1\Delta_3$ فنحصل على~$!A \in \Delta_3$.
+    وبعكس دور المجموعتين يثبت الاحتواء الآخر.
+
+  \item ينتج ذلك فورًا من الجزء~\olref{prop:anotherfive-a} وبرهان
+    التسلسل في~\olref{thm:completeframeprops}.
+
+  \item افترض أن~$\Sigma$ تحوي المخطط~$\Box\Box!A \lif \Box!A$،
+    ولإثبات أن~$R^\Sigma$ كثيفة بضعف، لتكن
+    $R^\Sigma \Delta_1\Delta_2$. علينا أن نبين وجود مجموعة
+    $\Sigma$-متسقة تامة~$\Delta_3$ بحيث
+    $R^\Sigma \Delta_1\Delta_3$ و$R^\Sigma \Delta_3\Delta_2$. ولتكن:
+    \[
+    \Gamma = \Box^{-1}\Delta_1 \cup \Diamond\Delta_2.
+    \]
+    يكفي أن نبين أن~$\Gamma$ $\Sigma$-متسقة، إذ يمكن عندئذ، بمبرهنة
+    ليندنباوم، توسيعها إلى مجموعة $\Sigma$-متسقة تامة~$\Delta_3$ بحيث
+    $\Box^{-1}\Delta_1 \subseteq \Delta_3$ و
+    $\Diamond\Delta_2 \subseteq \Delta_3$؛ أي
+    $R^\Sigma \Delta_1\Delta_3$\iftag{prvBox}{}{ (بحسب
+      \olref[mod]{lem:box-iff-diamond})} و
+    $R^\Sigma \Delta_3\Delta_2$\iftag{prvBox}{ (بحسب
+      \olref[mod]{lem:box-iff-diamond})}{}.
+
+    افترض، طلبًا للتناقض، أن~$\Gamma$ غير متسقة. ويجوز أن نفرض
+    $n,m\geq 1$: فإن خلت إحدى القائمتين أضفنا إليها تحصيلًا منطقيًا
+    ثابتًا، إذ ينتمي ذلك التحصيل إلى~$\Delta_2$ وينتمي إلزامه إلى
+    $\Delta_1$. % استكمال مصدر (0449-I2): ضُبطت حالة القوائم المتناهية الخالية.
+    وعندئذ توجد
+    !!{formula}s~$\Box!A_1$، \dots،~$\Box!A_n \in \Delta_1$ و
+    $!B_1$، \dots،~$!B_m \in \Delta_2$ بحيث
+    \[!A_1, \dots, !A_n, \Diamond!B_1, \dots, \Diamond!B_m
+    \Proves[\Sigma] \lfalse.\]
+    ولما كانت
+    $\Diamond (!B_1 \land \dots \land !B_m) \lif
+    (\Diamond!B_1 \land \dots \land \Diamond!B_m)$ !!{derivable} في
+    كل منطق جهوي نظامي، نستدل كما يأتي، فنناقض اتساق~$\Delta_2$:
+    \begin{align*}
+      !A_1, \dots, !A_n, & \Diamond!B_1, \dots,
+      \Diamond!B_m \Proves[\Sigma] \lfalse \\
+      !A_1, \dots,!A_n & \Proves[\Sigma] (\Diamond!B_1 \land
+      \dots \land \Diamond!B_m) \lif \lfalse\\
+      & \qquad\text{بمبرهنة الاستنتاج}\\
+      & \qquad\text{\olref[prf][prp]{prop:derivabilityfacts}\olref[prf][prp]{prop:derivabilityfacts-deduction}، و\Taut} \\
+      !A_1, \dots,!A_n & \Proves[\Sigma]
+      \Diamond(!B_1 \land
+      \dots \land !B_m) \lif \lfalse\\
+      & \qquad \text{لأن $\Sigma$ نظامية} \\
+      !A_1, \dots,!A_n & \Proves[\Sigma]
+      \lnot\Diamond (!B_1 \land \dots \land !B_m)\\
+      & \qquad\text{بحسب \PL} \\
+      !A_1, \dots,!A_n & \Proves[\Sigma]
+      \Box\lnot (!B_1 \land \dots \land !B_m)\\
+      & \qquad\text{$\Box\lnot$ بدل $\lnot\Diamond$} \\
+      \Box!A_1, \dots,\Box!A_n
+      & \Proves[\Sigma] \Box\Box \lnot (!B_1 \land \dots \land !B_m)\\
+      & \qquad\text{بحسب \olref[mod]{lem:box1}} \\
+      \Box!A_1, \dots,\Box!A_n
+      & \Proves[\Sigma]
+      \Box\lnot (!B_1 \land \dots \land !B_m)\\
+      &\qquad\text{بالمخطط $\Box\Box!A \lif \Box!A$} \\
+      \Delta_1 & \Proves[\Sigma]
+      \Box\lnot (!B_1 \land \dots \land !B_m)\\
+      &\qquad\text{بالرتابة، \olref[prf][prp]{prop:derivabilityfacts}\olref[prf][prp]{prop:derivabilityfacts-monotonicity}} \\
+      & \Box\lnot (!B_1 \land \dots \land !B_m) \in \Delta_1\\
+      &\qquad\text{بالإغلاق الاستنتاجي؛} \\
+      & \lnot (!B_1 \land \dots \land !B_m) \in \Delta_2\\
+      &\qquad \text{لأن }
+      R^\Sigma \Delta_1\Delta_2.
+    \end{align*}
+  \end{enumerate}
+\end{proof}
+
+وقد توهم هذه الأمثلة أن كل نسق~$\Sigma$ في المنطق الجهوي \emph{تام}
+بالنسبة إلى أطره: أي إنه يبرهن كل صيغة تصح في جميع الأطر التي تصح
+فيها مبرهنات~$\Sigma$. وليس الأمر كذلك؛ فثمة نظم كثيرة
+لا تتم بهذا المعنى، وإن نجح البناء في الأمثلة المتقدمة.
+
+\end{document}

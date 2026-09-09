@@ -1,0 +1,63 @@
+% Part: first-order-logic
+% Chapter: natural-deduction
+% Section: provability-quantifiers
+
+% verification of properties of provability needed for maximally
+% consistent sets in the completeness chapter.
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{ntd}{qpr}
+
+\olsection{\usetoken{S}{derivability} والمكممات}
+
+\begin{explain}
+  ومن مقدمات برهان الاكتمال أن تثبت بقواعد الاستنتاج الطبيعي
+  النتائج الآتية في علاقة~$\Proves$؛ فلذلك نفردها بالبيان هنا.
+\end{explain}
+
+\begin{thm}
+\ollabel{thm:strong-generalization} إذا كان~$c$ رمزًا ثابتًا لا يرد
+في~$\Gamma$ ولا في~$!A(x)$، وكان~$\Gamma \Proves !A(c)$، فإن
+$\Gamma \Proves \lforall[x][!A(x)]$.
+\end{thm}
+
+\begin{proof}
+نأخذ~$\delta$، وهو !!a{derivation} لـ~$!A(c)$ من~$\Gamma$، ونختمه
+باستدلال \Intro{\lforall}؛ فيتم بذلك !!a{derivation} لـ
+$\lforall[x][!A(x)]$. وهذا جائز، إذ~$c$ لا يرد في~$\Gamma$ ولا
+في~$!A(x)$؛ فلا يختل شرط المتغير المميَّز.
+\end{proof}
+
+\begin{prop}
+\ollabel{prop:provability-quantifiers}
+\begin{tagenumerate}{prvEx,prvAll}
+\tagitem{prvEx}{$!A(t) \Proves \lexists[x][!A(x)]$.}{}
+
+\tagitem{prvAll}{$\lforall[x][!A(x)] \Proves !A(t)$.}{}
+\end{tagenumerate}
+\end{prop}
+
+\begin{proof}
+\begin{tagenumerate}{prvEx,prvAll}
+\tagitem{prvEx}{يكفي !!a{derivation} لـ~$\lexists[x][!A(x)]$ من~$!A(t)$
+  بإدخال المكمّم الوجودي مرة واحدة:
+\begin{prooftree}
+\AxiomC{$!A(t)$}
+\RightLabel{\Intro{\lexists}}
+\UnaryInfC{$\lexists[x][!A(x)]$}
+\end{prooftree}}{}
+
+\tagitem{prvAll}{وأما !!a{derivation} لـ~$!A(t)$ من
+  $\lforall[x][!A(x)]$ فيكفي فيه حذف المكمّم الكلي مرة واحدة:
+\begin{prooftree}
+\AxiomC{$\lforall[x][!A(x)]$}
+\RightLabel{\Elim{\lforall}}
+\UnaryInfC{$!A(t)$}
+\end{prooftree}}{}
+\end{tagenumerate}
+\end{proof}
+
+\end{document}

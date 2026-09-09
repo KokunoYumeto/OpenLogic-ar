@@ -1,0 +1,68 @@
+% Part: sets-functions-relations
+% Chapter: infinite
+% Section: dedekind-induction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid[ar]{sfr}{infinite}{induction}
+\olsection[الاستقراء الحسابي]{جبرات ديديكند والاستقراء الحسابي}
+
+والثمرة المقصودة أن جبر ديديكند---بل \emph{كل} جبر ديديكند---يقوم مقام الأعداد الطبيعية. ووجه ذلك هذه النتيجة القريبة:
+
+\begin{thm}[الاستقراء الحسابي]\ollabel{thm:dedinfiniteinduction}
+لتكن $N, s, o$ مكوّنات جبر ديديكند. عندئذ، لكل مجموعة $X$:  
+	\begin{center}
+		إذا كان $o \in X$ وكان $(\forall {n} \in N \cap X){s}({n}) \in X$، {فإن} $N \subseteq X$.
+	\end{center}
+\end{thm}
+
+\begin{proof}
+تعريف جبر ديديكند يقتضي $N = \closureofunder{s}{o}$.
+فإذا تحقق ${o} \in X$ وتحقق $(\forall {n} \in N)(n \in X \lif
+{s}({n}) \in X)$، كان $N = \closureofunder{s}{o} \subseteq X$، وهو المطلوب.
+\end{proof}
+
+الاستقراء من خواص الأعداد الطبيعية المميِّزة لها. فإذا وُجدت مجموعة لانهائية بحسب ديديكند، أنشأنا منها جبر ديديكند، واتخذناه قائمًا مقام الأعداد الطبيعية؛ وهذا هو المقصود.
+
+ورد الاستقراء في \olref{thm:dedinfiniteinduction} بلغة
+\emph{نظرية المجموعات}. وله صيغة أقرب إلى المألوف، يسهل استخراجها منها:
+
+\begin{cor}\ollabel{natinductionschema}
+لتكن $N, s, o$ مكوّنات جبر ديديكند. عندئذ، لكل صيغة
+$\phi(x)$ قد تكون لها معلمات:
+\begin{center}
+	إذا كانت $\phi(o)$ وكان $(\forall {n} \in N)(\phi(n)\lif
+	\phi({s}({n})))$، {فإن} $(\forall n \in N)\phi(n)$
+\end{center}
+\end{cor}
+
+\begin{proof}
+خذ $X = \Setabs{n \in N}{\phi(n)}$، ثم طبِّق
+\olref{thm:dedinfiniteinduction}، فتحصل النتيجة.
+\end{proof}
+
+وقولنا إن للصيغة «معلمات» معناه على التقريب أن لنا أن نأخذ أشياء
+$c_1, \ldots, c_k$ ونستعمل $\phi(x, c_1, \ldots, c_k)$. وأما العبارة الدقيقة التي لا تذكر «المعلمات» فهذه: لكل صيغة
+$\phi(x, v_1, \ldots, v_k)$ أُظهرت جميع متغيراتها الحرة، يكون:
+	\begin{align*}
+			\forall v_1 \ldots \forall v_k((&\phi(o, v_1,\ldots, v_k) \land {}\\
+			&	(\forall x \in N)(\phi(x,v_1, \ldots, v_k) \lif \phi(s(x), v_1,\ldots, v_k))) \lif {}\\
+			&\hspace{3em} (\forall x \in N)\phi(x, v_1,\ldots, v_k))
+	\end{align*}
+
+ففي ذكر «المعلمات» اختصار ييسّر القراءة؛ وسنكثر من استعماله في
+\olref[sth][][]{part}.
+
+وأما جبرات ديديكند فيمكن تعريف الدوال الحسابية المعتادة في كل واحد منها: الجمع والضرب والأس. غير أن هذا يحتاج إلى عمل، وأداته
+\emph{التعريف العودي}. وسنشرح هذه الأداة ونثبت مشروعيتها في موضع متأخر، ضمن بحث أعم كثيرًا. ولمن أراد الاستزادة أن يعود إلى هذا الموضع بعد
+\olref[sth][ord-arithmetic][]{chap}، أو ينظر في عرض آخر، مثل
+\citealt[صص.~95--8]{Potter2004}. وحين تكون $N, s, o$ مكوّنات جبر ديديكند، سنتمكن أخيرًا من وضع الأحكام الآتية:
+\begin{align*}
+	{a} + {o} &= {a} & & & {a} \times {o} &= {o} & & & {a}^{o} &= s(o)\\
+{a} + {s}({b}) &= {s}({a}+{b}) &&& {a} \times {s}({b}) &= ({a}\times {b}) + {a}  & & & {a}^{{s}({b})} &= {a}^{b} \times {a}
+\end{align*}
+ثم نبرهن أن هذه الدوال تحقق الخواص المنتظرة منها.
+
+\end{document}

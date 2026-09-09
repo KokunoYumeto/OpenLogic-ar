@@ -1,0 +1,64 @@
+% Part: model-theory
+% Chapter: basics
+% Section: theory-of-m
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{bas}{thm}
+
+\section{نظرية \printtoken{S}{structure}}
+
+لكل !!{structure}~$\Struct{M}$ !!{sentence}s تصدق فيها
+وأخرى تكذب. فنجمع جميع الـ!!{sentence}s الصادقة ونسمي مجموعها
+\emph{نظريتها}. ويصدق عليها اسم النظرية على الحقيقة، لأن كل
+ما يلزم عنها يصدق في جميع نماذجها، ولا سيما~$\Struct{M}$.
+
+\begin{defn}
+  لتكن !!a{structure}~$\Struct M$. \emph{نظرية} $\Struct{M}$ هي مجموعة
+  الـ!!{sentence}s~$\Theory{M}$ الصادقة في $\Struct{M}$، أي
+  $\Theory{M} = \Setabs{!A}{\Sat{M}{!A}}$.
+\end{defn}
+
+وقد نتوسع في لفظ «نظرية» فنطلقه، على غير الاصطلاح الدقيق، على مجموعات
+من الـ!!{sentence}s ذات تأويل مقصود، من غير اشتراط انغلاقها استنباطيًا.
+
+\begin{prop}
+لكل $\Struct{M}$، تكون $\Theory{M}$ تامة.
+\end{prop}
+
+\begin{proof}
+لنأخذ أي !!{sentence}~$!A$. فلا بد من $\Sat{M}{!A}$ أو
+$\Sat{M}{\lnot !A}$؛ فتكون $!A \in \Theory{M}$ أو
+$\lnot !A \in \Theory{M}$، وهو المطلوب.
+\end{proof}
+
+\begin{prop}\ollabel{prop:equiv}
+  إذا كان $\Struct{N} \models !A$ لكل $!A \in \Theory{M}$، فإن
+  $\Struct{M} \elemequiv \Struct{N}$.
+\end{prop}
+
+\begin{proof}
+من الفرض $\Sat{N}{!A}$ لكل $!A \in \Theory{M}$، ولذلك
+$\Theory{M} \subseteq \Theory{N}$. ولإثبات الاحتواء الآخر،
+إذا كان $\Sat{N}{!A}$، امتنع $\Sat{N}{\lnot !A}$، فلزم
+$\lnot !A \notin \Theory{M}$. وبما أن $\Theory{M}$ تامة،
+وجب $!A \in \Theory{M}$. فثبت
+$\Theory{N} \subseteq \Theory{M}$، ومن ثم
+$\Struct{M} \elemequiv \Struct{N}$.
+\end{proof}
+
+\begin{rem}\ollabel{remark:R}
+  لنأخذ $\Struct{R} = \langle\Real, <\rangle$، وهي الـ!!{structure}
+  التي مجالها الأعداد الحقيقية~$\Real$، ولغتها الـ!!{language}
+  ذات !!{predicate} واحد ثنائي يؤول بالعلاقة~$<$ على الحقيقية.
+  لا ريب أن $\Struct{R}$~!!{nonenumerable}. لكن $\Theory{R}$
+  متسقة، فلها بمبرهنة لوفنهايم--سكولم نموذج !!{enumerable}،
+  نسمّيه $\Struct{S}$. ويلزم من \olref{prop:equiv} أن
+  $\Struct{R} \equiv \Struct{S}$. ولما كانت $\Struct{R}$
+  و$\Struct{S}$ غير متشاكلتين، بطل عكس \olref[iso]{thm:isom}
+  على العموم.
+\end{rem}
+
+\end{document}

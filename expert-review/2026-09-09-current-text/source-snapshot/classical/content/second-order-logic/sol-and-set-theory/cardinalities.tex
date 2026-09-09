@@ -1,0 +1,67 @@
+% Part: second-order-logic
+% Chapter: sol-and-set-theory
+% Section: cardinalities
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sol}{set}{crd}
+
+\olsection{أعداد المجموعات الأصلية}
+
+\begin{explain}
+كما عبّرنا عن تناهي المجال ولا نهائيته، وعن كونه !!{enumerable}
+أو~!!{nonenumerable}، فلنا أن نعرّف للمجموعة الجزئية
+من~$\Domain{M}$ هذه الخصائص نفسها: التناهي واللا نهائية،
+وكونها !!{enumerable} أو~!!{nonenumerable}.
+\end{explain}
+
+\begin{prop}
+تكون الصيغة~$\fn{Inf}(X) \ident$
+\begin{multline*}
+\lexists[u][(\lforall[x][(X(x) \lif X(u(x)))] \land {}\\
+  \lforall[x][\lforall[y][(\eq[u(x)][u(y)] \lif 
+      \eq[x][y])]] \land {} \\\lexists[y][(X(y) \land \lforall[x][(X(x)
+      \lif \eq/[y][u(x)])])])]
+\end{multline*}
+مرضاة مع تعيين المتغيرات~$s$ إذا وفقط إذا كانت~$s(X)$ لانهائية.
+\end{prop}
+
+\begin{prop}
+تكون الصيغة~$\fn{Count}(X) \ident $
+\begin{multline*}
+(\lnot\lexists[x][X(x)] \lor {}\\
+\lexists[z][\lexists[u][(X(z) \land 
+    \lforall[x][(X(x) \lif X(u(x)))] \land {} \\ \lforall[Y][((Y(z) \land
+      \lforall[x][(Y(x) \lif Y(u(x)))]) \lif X \subseteq Y)])]])
+\end{multline*}
+مرضاة مع تعيين المتغيرات~$s$ إذا وفقط إذا كانت~$s(X)$ !!{enumerable}.
+\end{prop}
+
+أثبتت مبرهنة كانتور وجود مجموعات !!{nonenumerable}، بل دلّت
+على أن للأحجام اللانهائية مراتب مختلفة لا نهاية لعددها.
+وتقيم نظرية المجموعات لهذه الأحجام حسابًا تامًا، فتجعل للمجموعات
+أعدادًا أصلية لانهائية. أما المجموعات المنتهية فتقاس أحجامها
+بالأعداد الطبيعية. وأول الأصليات اللانهائية أصلية المجموعات
+!!{denumerable}، واسمها~$\aleph_0$، أي «ألف-صفر».
+وتليها~$\aleph_1$، وهي أصغر حجم لا تكون المجموعة عنده قابلة
+للتعداد، أي لا يكون حجمها~$\aleph_0$.
+ولتعريف كون~$X$ ذات حجم~$\aleph_0$ نضع
+$\fn{Aleph}_0(X) \liff \fn{Inf}(X) \land \fn{Count}(X)$.
+وتكون~$X$ ذات حجم~$\aleph_1$ متى كانت لانهائية، وكان كل جزء
+منها إما منتهيًا، وإما من الحجم~$\aleph_0$، وإما مكافئًا لها
+عدديًا، ولم تكن هي من الحجم~$\aleph_0$.
+فعبارة ذلك الصورية هي
+$\fn{Aleph_1}(X) \ident \fn{Inf}(X) \land
+\lforall[Y][(Y \subseteq X \lif
+  (\lnot\fn{Inf}(Y) \lor \fn{Aleph}_0(Y) \lor \cardeq{X}{Y}))] \land \lnot
+\fn{Aleph}_0(X)$. وعلى هذا النحو يعرّف الحجم~$\aleph_2$،
+ثم ما يليه.
+
+ومن الأحجام ما يخصه النظر، وهو أصلية المتصل:
+حجم~$\Pow{\Nat}$، أو حجم~$\Real$، فهما سواء.
+ووصف مجموعة بأنها من حجم المتصل ممكن في منطق الرتبة الثانية
+أيضًا، غير أنه يحتاج إلى مزيد بيان.
+
+\end{document}

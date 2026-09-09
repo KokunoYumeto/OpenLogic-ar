@@ -1,0 +1,132 @@
+% Part: normal-modal-logic
+% Chapter: filtrations
+% Section: more-filtrations
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{fil}{acc}
+
+\olsection{الترشيحات وخواص النفاذ}
+
+كما أشرنا، تكون ترشيحات النماذج الكلية والمتسلسلة والانعكاسية كلية أو
+متسلسلة أو انعكاسية دائمًا. لكن ليس كل ترشيح لنموذج متناظر أو متعدٍ متناظرًا
+أو متعديًا، على الترتيب. ومع ذلك، يمكن في بعض الحالات تعريف الترشيحات بحيث
+يصح ذلك. ولتحقيقه، نسير كما في تعريف الترشيح الأخشن، لكننا نضيف شروطًا أخرى
+إلى تعريف~$R^*$. لتكن~$\Gamma$ مغلقة تحت أخذ ال!!{formula}s الجزئية.
+انظر إلى العلاقات~$C_i(u,v)$ في~\olref{tab:Cn-filtrations} بين
+العالمين~$u$ و$v$ في نموذج~$\mModel{M}=\tuple{W,R,V}$. ويمكننا تعريف
+$R^*[u][v]$ على أساس توليفات من هذه الشروط. فمثلًا، إذا اشترطنا أن
+$R^*[u][v]$ إذا وفقط إذا تحقق الشرط~$C_1(u,v)$، حصلنا بالضبط على
+الترشيح الأخشن. وإذا اشترطنا أن~$R^*[u][v]$ إذا وفقط إذا تحقق الشرطان
+$C_1(u,v)$ و$C_2(u,v)$ معًا، حصلنا على ترشيح مختلف. وهو «أدق» من
+الترشيح الأخشن، لأن عدد أزواج العوالم التي تستوفي~$C_1(u,v)$ و$C_2(u,v)$
+أقل من عدد الأزواج التي تستوفي~$C_1(u,v)$ وحده.
+
+\begin{table}[ht]
+  \centering
+  \begin{tabular}{|ll|}
+    \hline
+    \multirow{2}{*}{$C_1(u,v)$:}
+    \iftag{prvBox}{&
+      إذا كان~$\Box!A \in \Gamma$ و$\mSat{M}{\Box!A}[u]$،
+      كان~$\mSat{M}{!A}[v]$؛\iftag{prvDiamond}{ و}{}\\}{}
+    \iftag{prvDiamond}{&
+      إذا كان~$\Diamond!A \in \Gamma$ و$\mSat{M}{!A}[v]$،
+      كان~$\mSat{M}{\Diamond!A}[u]$؛ \\}{}
+    \hline
+    \multirow{2}{*}{$C_2(u,v)$:}
+    \iftag{prvBox}{&
+      إذا كان~$\Box!A \in \Gamma$ و$\mSat{M}{\Box!A}[v]$،
+      كان~$\mSat{M}{!A}[u]$؛\iftag{prvDiamond}{ و}{}\\}{}
+    \iftag{prvDiamond}{&
+      إذا كان~$\Diamond!A \in \Gamma$ و$\mSat{M}{!A}[u]$،
+      كان~$\mSat{M}{\Diamond!A}[v]$؛ \\}{}
+    \hline
+    \multirow{2}{*}{$C_3(u,v)$:}
+    \iftag{prvBox}{&
+      إذا كان~$\Box!A \in \Gamma$ و$\mSat{M}{\Box!A}[u]$،
+      كان~$\mSat{M}{\Box!A}[v]$؛\iftag{prvDiamond}{ و}{}\\}{}
+    \iftag{prvDiamond}{&
+      إذا كان~$\Diamond!A \in \Gamma$ و$\mSat{M}{\Diamond!A}[v]$،
+      كان~$\mSat{M}{\Diamond!A}[u]$؛ \\}{}
+    \hline
+    \multirow{2}{*}{$C_4(u,v)$:}
+    \iftag{prvBox}{&
+      إذا كان~$\Box!A \in \Gamma$ و$\mSat{M}{\Box!A}[v]$،
+      كان~$\mSat{M}{\Box!A}[u]$؛\iftag{prvDiamond}{ و}{}\\}{}
+    \iftag{prvDiamond}{&
+      إذا كان~$\Diamond!A \in \Gamma$ و$\mSat{M}{\Diamond!A}[u]$،
+      كان~$\mSat{M}{\Diamond!A}[v]$؛ \\}{}
+    \hline
+    \end{tabular}
+  \caption{شروط على العوالم الممكنة لتعريف الترشيحات.}
+  \ollabel{tab:Cn-filtrations}
+\end{table}
+
+\begin{thm}\ollabel{thm:more-filtrations}
+  ليكن~$\mModel{M}=\tuple{W,R,V}$ نموذجًا، ولتكن~$\Gamma$ مغلقة تحت
+  أخذ ال!!{formula}s الجزئية. ولتُعرّف~$W^*$ و$V^*$ كما في
+  \olref[fil]{defn:filtration}. عندئذ:
+  \begin{enumerate}
+  \item افترض أن~$R^*[u][v]$ إذا وفقط إذا كان
+    $C_1(u,v)\land C_2(u,v)$. عندئذ تكون~$R^*$ متناظرة، ويكون
+    $\mModel{M^*}=\tuple{W^*,R^*,V^*}$ ترشيحًا إذا كان~$\mModel{M}$
+    متناظرًا.
+  \item افترض أن~$R^*[u][v]$ إذا وفقط إذا كان
+    $C_1(u,v)\land C_3(u,v)$. عندئذ تكون~$R^*$ متعدية، ويكون
+    $\mModel{M^*}=\tuple{W^*,R^*,V^*}$ ترشيحًا إذا كان~$\mModel{M}$
+    متعديًا.
+  \item افترض أن~$R^*[u][v]$ إذا وفقط إذا كان
+    $C_1(u,v)\land C_2(u,v)\land C_3(u,v)\land C_4(u,v)$. عندئذ تكون
+    $R^*$ متناظرة ومتعدية، ويكون~$\mModel{M^*}=\tuple{W^*,R^*,V^*}$
+    ترشيحًا إذا كان~$\mModel{M}$ متناظرًا ومتعديًا.
+  \item افترض أن~$R^*$ معرّفة بحيث يكون~$R^*[u][v]$ إذا وفقط إذا كان
+    $C_1(u,v)\land C_3(u,v)\land C_4(u,v)$. عندئذ تكون~$R^*$ متعدية
+    وإقليدية، ويكون~$\mModel{M^*}=\tuple{W^*,R^*,V^*}$ ترشيحًا إذا
+    كان~$\mModel{M}$ متعديًا وإقليديًا.
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+  \begin{enumerate}
+    \item يتضح فورًا أن~$R^*$ متناظرة، لأن
+      $C_1(u,v)\Leftrightarrow C_2(v,u)$ و
+      $C_2(u,v)\Leftrightarrow C_1(v,u)$. فيبقى أن نبين أنه إذا كان
+      $\mModel{M}$ متناظرًا، كان~$\mModel{M^*}$ ترشيحًا عبر~$\Gamma$.
+      ويضمن الشرط~$C_1(u,v)$ استيفاء
+      \iftag{prvBox}{%
+        \iftag{prvDiamond}{%
+          \olref[fil]{defn:filtration-R2} و
+          \olref[fil]{defn:filtration-R3} من
+          \olref[fil]{defn:filtration}}{%
+          \olref[fil]{defn:filtration}\olref[fil]{defn:filtration-R2}}}{%
+        \olref[fil]{defn:filtration}\olref[fil]{defn:filtration-R3}}.
+      فلا يبقى إلا التحقق من
+      \olref[fil]{defn:filtration}\olref[fil]{defn:filtration-R1}، أي
+      إن~$Ruv$ يستلزم~$R^*[u][v]$.
+
+      افترض إذن~$Ruv$. ولإثبات~$R^*[u][v]$، علينا إثبات~$C_1(u,v)$
+      و$C_2(u,v)$. أما~$C_1$: \iftag{prvBox}{فإذا كان~$\Box!A
+        \in\Gamma$ و$\mSat{M}{\Box!A}[u]$، كان أيضًا
+        $\mSat{M}{!A}[v]$ (لأن~$Ruv$).\iftag{prvDiamond}{ وبالمثل،
+        }{}}{}\iftag{prvDiamond}{إذا كان~$\Diamond!A \in \Gamma$
+        و$\mSat{M}{!A}[v]$، كان~$\mSat{M}{\Diamond!A}[u]$ لأن
+        $Ruv$.}{} وأما~$C_2$: \iftag{prvBox}{فإذا كان~$\Box!A \in
+        \Gamma$ و$\mSat{M}{\Box!A}[v]$، استلزم~$Ruv$ أن~$Rvu$
+        بالتناظر، ومن ثم~$\mSat{M}{!A}[u]$.\iftag{prvDiamond}{
+        وبالمثل، }{}}{}\iftag{prvDiamond}{إذا كان~$\Diamond!A
+        \in\Gamma$ و$\mSat{M}{!A}[u]$، كان
+        $\mSat{M}{\Diamond!A}[v]$ (لأن~$Rvu$ بالتناظر).}{}
+    \item تمرين.
+    \item تمرين.
+    \item تمرين.
+  \end{enumerate}
+\end{proof}
+
+\begin{prob}
+  أكمل برهان~\olref[nml][fil][acc]{thm:more-filtrations}.
+\end{prob}
+
+\end{document}

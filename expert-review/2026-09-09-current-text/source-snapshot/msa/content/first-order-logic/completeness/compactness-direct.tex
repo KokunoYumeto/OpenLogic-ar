@@ -1,0 +1,172 @@
+% Part: first-order-logic
+% Chapter: completeness
+% Section: compactness-direct
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{com}{cpd}}
+      {\olfileid{pl}{com}{cpd}}
+
+\olsection{برهان مباشر لمبرهنة التراص}
+
+يمكننا أن نبرهن مبرهنة التراص مباشرة من غير الاحتكام إلى مبرهنة
+الاكتمال، مستعملين الأفكار نفسها
+الواردة في برهان مبرهنة الاكتمال. ففي برهان مبرهنة الاكتمال بدأنا
+بمجموعة متسقة~$\Gamma$ من ال!!{sentence}s، ووسّعناها إلى مجموعة
+متسقة\iftag{FOL}{، مشبعة،}{} و!!{complete}~$\Gamma^*$ من
+ال!!{sentence}s، ثم بيّنا أن جميع !!{sentence}s~$\Gamma$ تصدق في
+\iftag{FOL}{نموذج الحدود~$\Struct{M(\Gamma^*)}$}{!!{valuation}~$\pAssign{v(\Gamma^*)}$}
+المبني من~$\Gamma^*$، فتكون $\Gamma$ قابلة للإرضاء.
+
+ويمكننا استعمال الطريقة نفسها لإظهار أن كل مجموعة من ال!!{sentence}s
+قابلة للإرضاء منتهيًا هي قابلة للإرضاء. فما علينا إلا أن نبرهن الصيغ
+المقابلة للنتائج المؤدية إلى لمّة الصدق، مستبدلين «متسقة» بعبارة
+«قابلة للإرضاء منتهيًا».
+
+\begin{prop}
+\ollabel{prop:fsat-ccs}
+افترض أن $\Gamma$ مجموعة من ال!!{sentence}s، !!{complete} وقابلة للإرضاء
+منتهيًا. عندئذ:
+\begin{enumerate}
+\tagitem{prvAnd}{$(!A \land !B) \in \Gamma$
+  إذا وفقط إذا كان كل من $!A \in \Gamma$ و $!B \in \Gamma$.}{}
+
+\tagitem{prvOr}{$(!A \lor !B) \in \Gamma$ إذا وفقط إذا كان إما
+  $!A \in \Gamma$ وإما $!B \in \Gamma$.}{}
+
+\tagitem{prvIf}{$(!A \lif !B) \in \Gamma$ إذا وفقط إذا كان إما
+  $!A \notin \Gamma$ وإما $!B \in \Gamma$.}{}
+\end{enumerate}
+\end{prop}
+
+\tagprob{FOL}
+\begin{prob}
+أثبت \olref[fol][com][cpd]{prop:fsat-ccs}. وتجنب استعمال $\Proves$.
+\end{prob}
+\tagendprob
+
+\tagprob{notFOL}
+\begin{prob}
+أثبت \olref[pl][com][cpd]{prop:fsat-ccs}. وتجنب استعمال $\Proves$.
+\end{prob}
+\tagendprob
+
+\iftag{FOL}{%
+\begin{lem}
+\ollabel{lem:fsat-henkin} يمكن توسيع كل مجموعة من ال!!{sentence}s
+قابلة للإرضاء منتهيًا~$\Gamma$ إلى مجموعة مشبعة قابلة للإرضاء
+منتهيًا~$\Gamma'$.
+\end{lem}
+}{}
+
+\tagprob{FOL}
+\begin{prob}
+أثبت \olref[fol][com][cpd]{lem:fsat-henkin}. (تلميح: الخطوة الحاسمة هي
+إظهار أنه إذا كانت $\Gamma_n$ قابلة للإرضاء منتهيًا، كانت
+$\Gamma_n \cup \{!D_n\}$ كذلك، من غير أي احتكام إلى ال!!{derivation}s
+أو الاتساق.)
+\end{prob}
+\tagendprob
+
+\iftag{FOL}{
+\begin{prop}\ollabel{prop:fsat-instances}
+افترض أن $\Gamma$ مجموعة من ال!!{sentence}s كاملة، وقابلة للإرضاء
+منتهيًا، ومشبعة.
+\begin{tagenumerate}{prvEx,prvAll}
+\tagitem{prvEx}{$\lexists[x][!A(x)] \in \Gamma$ إذا وفقط إذا كان
+  $!A(t) \in \Gamma$ لبعض حد مغلق~$t$ على الأقل.}{}
+\tagitem{prvAll}{$\lforall[x][!A(x)] \in \Gamma$ إذا وفقط إذا كان
+  $!A(t) \in \Gamma$ لكل حد مغلق~$t$.}{}
+\end{tagenumerate}
+\end{prop}
+}{}
+
+\tagprob{FOL}
+\begin{prob}
+أثبت \olref[fol][com][cpd]{prop:fsat-instances}.
+\end{prob}
+\tagendprob
+
+\begin{lem}
+\ollabel{lem:fsat-lindenbaum} يمكن توسيع كل مجموعة من ال!!{sentence}s
+قابلة للإرضاء منتهيًا~$\Gamma$ إلى مجموعة~$\Gamma^*$ !!a{complete}
+وقابلة للإرضاء منتهيًا.
+\end{lem}
+
+\tagprob{FOL}
+\begin{prob}
+أثبت \olref[fol][com][cpd]{lem:fsat-lindenbaum}. (تلميح: الخطوة الحاسمة
+هي إظهار أنه إذا كانت $\Gamma_n$ قابلة للإرضاء منتهيًا، فإما أن تكون
+$\Gamma_n \cup \{!A_n\}$ قابلة للإرضاء منتهيًا، وإما أن تكون
+$\Gamma_n \cup \{\lnot !A_n\}$ كذلك.)
+\end{prob}
+\tagendprob
+
+\tagprob{notFOL}
+\begin{prob}
+أثبت \olref[pl][com][cpd]{lem:fsat-lindenbaum}. (تلميح: الخطوة الحاسمة
+هي إظهار أنه إذا كانت $\Gamma_n$ قابلة للإرضاء منتهيًا، فإما أن تكون
+$\Gamma_n \cup \{!A_n\}$ قابلة للإرضاء منتهيًا، وإما أن تكون
+$\Gamma_n \cup \{\lnot !A_n\}$ كذلك.)
+\end{prob}
+\tagendprob
+
+\begin{thm}[التراص]
+\ollabel{thm:compactness-direct} لتكن $\Gamma$ مجموعة من ال!!{sentence}s.
+تكون $\Gamma$ قابلة للإرضاء إذا وفقط إذا كانت قابلة للإرضاء منتهيًا.
+\end{thm}
+
+\begin{proof}
+إذا كانت $\Gamma$ قابلة للإرضاء، وُجدت
+\iftag{FOL}{!!a{structure}~$\Struct{M}$}{!!a{valuation}~$\pAssign{v}$}
+بحيث يتحقق $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!A}$ لكل $!A \in \Gamma$.
+ومن البدهي أن $\iftag{FOL}{\Struct{M}}{\pAssign{v}}$ هذه ترضي أيضًا
+كل مجموعة جزئية منتهية من~$\Gamma$، فتكون $\Gamma$ قابلة للإرضاء منتهيًا.
+
+والآن افترض أن $\Gamma$ قابلة للإرضاء منتهيًا.\iftag{FOL}{ بحسب
+  \olref{lem:fsat-henkin}، توجد مجموعة مشبعة قابلة للإرضاء منتهيًا
+  $\Gamma' \supseteq \Gamma$.}{} وبحسب \olref{lem:fsat-lindenbaum}،
+يمكن توسيع $\iftag{FOL}{\Gamma'}{\Gamma}$ إلى مجموعة~$\Gamma^*$
+!!a{complete} وقابلة للإرضاء منتهيًا\iftag{FOL}{، وتظل $\Gamma^*$
+  مشبعة}{}. ابنِ \iftag{FOL}{نموذج
+  الحدود~$\Struct{M(\Gamma^*)}$}{!!{valuation}~$\pAssign{v(\Gamma^*)}$}
+كما في \olref[mod]{defn:termmodel}.\iftag{FOL}{ لاحظ أن
+\olref[mod]{prop:quant-termmodel} لم تعتمد على اتساق $\Gamma^*$ (ولا
+على كونها !!{complete} أو مشبعة)، بل اعتمدت فقط على أن
+$\Struct{M(\Gamma^*)}$ مغطاة.}{} ويمضي برهان لمّة الصدق
+(\olref[mod]{lem:truth}) إذا استبدلنا الإحالات إلى
+\olref[ccs]{prop:ccs} بإحالات إلى
+\olref{prop:fsat-ccs}\iftag{FOL}{، والإحالات إلى
+\olref[hen]{prop:saturated-instances} بإحالات إلى
+\olref{prop:fsat-instances}}{}.
+\iftag{FOL}{وإذا احتوت $\Gamma$ الرمز~$\eq$، فعرّف العلاقة~$\approx$
+على الحدود المغلقة وخذ خارج نموذج الحدود كما في
+\olref[ide]{defn:term-model-factor}. وتنتقل خصائص
+\olref[ide]{prop:approx-equiv} إلى السياق الحالي باستبدال الاتساق
+بقابلية الإرضاء منتهيًا: فأي إخفاق للانعكاسية أو التماثل أو التعدية أو
+التوافق مع الدوال والمحمولات تشهد عليه مجموعة جزئية منتهية غير قابلة
+للإرضاء. ثم تمضي حالة الهوية من لمّة الصدق كما في
+\olref[ide]{lem:truth}. وفي الحالتين يرضي النموذج الناتج كل ما
+في~$\Gamma$.}{}
+\end{proof}
+
+\tagprob{FOL}
+\begin{prob}
+اكتب البرهان الكامل للمّة الصدق
+(\olref[fol][com][mod]{lem:truth}) بالصيغة اللازمة لبرهان
+\olref[fol][com][cpd]{thm:compactness-direct}.
+\end{prob}
+\tagendprob
+
+\tagprob{notFOL}
+\begin{prob}
+اكتب البرهان الكامل للمّة الصدق
+(\olref[pl][com][mod]{lem:truth}) بالصيغة اللازمة لبرهان
+\olref[pl][com][cpd]{thm:compactness-direct}.
+\end{prob}
+\tagendprob
+
+\end{document}

@@ -1,0 +1,224 @@
+% Part: intuitionistic-logic
+% Chapter: tableaux
+% Section: soundness
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{tab}{sou}
+
+\olsection{سلامة \usetoken{P}{tableau} الحدسية}
+
+\begin{explain}
+  معنى سلامة !!{tableau} الحدسية أن نثبت: إذا كان
+  \[
+  \sFmla{\True}{!B_1}[1], \dots, \sFmla{\True}{!B_n}[1], \sFmla{\False}{!A}[1]
+  \]
+  ذا !!{tableau} مغلق، لزم~$!B_1, \dots, !B_n \Entails !A$.
+  والأيسر أن نبرهن نقيض المقابل؛ فنفرض وجود نموذج~$\mModel{M}$ وعالم~$w$
+  بحيث~$\mSat{M}{!B_i}[w]$ لكل~$i=1$، \dots،~$n$، ولكن
+  $\mSat/{M}{!A}[w]$؛ وعندئذ لا سبيل إلى إغلاق أي !!{tableau}. فهذا
+  النموذج المضاد يرضي الافتراضات التي افتُتح بها !!{tableau}. وحجة
+  البرهان هي أن الشعبة من !!a{tableau} التي تقبل الإرضاء بما عليها من !!{formula} ذوات
+  السوابق، إذا جرت عليها قاعدة، خلّفت في الامتداد شعبة واحدة على الأقل
+  تقبل الإرضاء أيضًا. ولما كانت الشعبة المغلقة لا تقبله، وجب أن يبقى في
+  كل !!{tableau} ناشئ من مجموعة قابلة للإرضاء من !!{formula} ذوات
+  السوابق شعبة مفتوحة على الأقل.
+
+  ولا تتم هذه الحجة في الحال الحدسية حتى نعمم معنى «قابل للإرضاء» على
+  النماذج العلاقية والسوابق؛ فإذا فُعل ذلك استقام البرهان من غير عسر.
+\end{explain}
+
+\begin{defn}
+  افرض~$P$ مجموعة سوابق، أي
+  $P \subseteq (\PosInt)^* \setminus \{\emptyseq\}$، وليكن
+  $\mModel{M}$ نموذجًا. تكون الدالة~$f\colon P \to W$
+  \emph{تفسيرًا لـ}~$P$ في~$\mModel{M}$ متى تحقق
+  $Rf(\sigma)f(\tau)$ لكل~$\sigma,\tau\in P$ بحيث تكون~$\tau=\sigma$
+  أو~$\tau=\sigma.n_1.\cdots.n_k$ لبعض~$k\geq 1$.
+
+  فإذا عُيّن تفسير للسوابق~$P$، حدّدنا الإرضاء هكذا:
+  \begin{enumerate}
+  \item يرضي~$\mModel{M}$ الصيغة~$\sFmla{\True}{!A}[\sigma]$ إذا وفقط
+    إذا تحقق~$\mSat{M}{!A}[f(\sigma)]$.
+  \item يرضي~$\mModel{M}$ الصيغة~$\sFmla{\False}{!A}[\sigma]$ إذا وفقط
+    إذا تحقق~$\mSat/{M}{!A}[f(\sigma)]$.
+  \end{enumerate}
+\end{defn}
+
+ومن ثم، كلما كانت~$\sigma,\tau\in P$ وكانت~$\tau$ إحدى السوابق التي
+يدل عليها~$\sigma.{*}$، ثبت~$Rf(\sigma)f(\tau)$.
+% تصحيح مصدر (0515-I1): شمل شرط التفسير كل امتداد سابق داخل P، لا الحافة المباشرة وحدها.
+
+\begin{defn}
+  لتكن~$\Gamma$ مجموعة من !!{formula} ذوات السوابق، ولتدل~$P(\Gamma)$
+  على مجموعة السوابق الواردة فيها. فإذا كانت~$f$ تفسيرًا لـ$P(\Gamma)$
+  في~$\mModel{M}$، قلنا إن~$\mModel{M}$ يرضي~$\Gamma$ بالنسبة إلى~$f$،
+  ورمزنا إلى ذلك بـ~$\mSat{M}{\Gamma}[f]$، متى أرضى~$\mModel{M}$ كل
+  !!{formula} ذات سابقة في~$\Gamma$ بالنسبة إلى~$f$. ونسمي~$\Gamma$
+  \emph{قابلة للإرضاء} إذا وفقط إذا وُجد نموذج~$\mModel{M}$ وتفسير~$f$
+  لـ$P(\Gamma)$ يحققان~$\mSat{M}{\Gamma}[f]$.
+\end{defn}
+
+\begin{prop}
+  إذا جمعت~$\Gamma$ بين~$\sFmla{\True}{!A}[\sigma]$
+  و$\sFmla{\False}{!A}[\sigma.{*}]$ لبعض !!{formula}~$!A$
+  وسابقة~$\sigma$، أو احتوت~$\sFmla{\True}{\lfalse}[\sigma]$،
+  امتنعت قابلية~$\Gamma$ للإرضاء.
+\end{prop}
+
+\begin{proof}
+  لما كان~$\mSat/{M}{\lfalse}[f(\sigma)]$ حاصلًا أبدًا، لم تقبل
+  الإرضاء أي~$\Gamma$ تشتمل على~$\sFmla{\True}{\lfalse}[\sigma]$.
+
+  وكذلك يمتنع وجود نموذج~$\mModel{M}$ وتفسير~$f$ لـ$P(\Gamma)$
+  يرضيان معًا~$\sFmla{\True}{!A}[\sigma]$
+  و$\sFmla{\False}{!A}[\sigma.{*}]$. إذ يلزم حينئذ
+  $\mSat{M}{!A}[f(\sigma)]$ و$\mSat/{M}{!A}[f(\sigma.{*})]$؛
+  لكن من~$Rf(\sigma)f(\sigma.{*})$ ومن
+  \olref[sem][rel]{prop:true-monotonic} ينتج
+  $\mSat{M}{!A}[f(\sigma.{*})]$، فيقع التناقض.
+\end{proof}
+
+\begin{thm}[السلامة]
+  \ollabel{thm:tableau-soundness}
+  متى كانت~$P(\Gamma)$ مغلقة تحت أخذ السوابق، وكان لـ$\Gamma$
+  !!{tableau} مغلق، لم تكن~$\Gamma$ قابلة للإرضاء.
+\end{thm}
+% تصحيح مصدر (0515-I2): أضيف ثبات الانغلاق تحت السوابق لاستبعاد امتدادات قديمة للسابق الجديد.
+
+\begin{proof}
+نصف شعبة من !!a{tableau} بأنها قابلة للإرضاء إذا وفقط إذا قبلت الإرضاء
+مجموعة !!{signed formula} الواقعة عليها؛ ونصف !!a{tableau} بذلك إذا
+كان فيه شعبة واحدة على الأقل تقبل الإرضاء.
+
+ونحفظ مع ذلك أصلًا ثابتًا: مجموعة السوابق على كل شعبة مغلقة تحت أخذ
+السوابق. وهو قائم في الشعبة الأولى بفرض المبرهنة، وتحفظه القواعد التي لا
+تستحدث سابقة. وأما القاعدة التي تلحق السابقة الجديدة~$\sigma.n$، فجميع
+سوابقها السابقة إما~$\sigma$ وإما سابقة لـ~$\sigma$، فهي واقعة على
+الشعبة من قبل. ولا يكون في المجموعة القديمة، لذلك، امتداد لـ~$\sigma.n$؛
+إذ لو كان لأوجب الانغلاق وقوع~$\sigma.n$ فيها، وهذا يناقض جدتها.
+
+والأصل الذي نثبته هو أن تمديد !!{tableau} قابل للإرضاء بقاعدة استدلال
+يبقي !!{tableau} الناتج قابلًا للإرضاء. ومنه تتم المبرهنة؛ لأن كل
+!!{tableau} مغلق إنما يُبنى بتطبيق القواعد على !!{tableau} لا يحوي
+أولًا إلا افتراضات من~$\Gamma$. فلو قبلت~$\Gamma$ الإرضاء لقبله كل
+!!{tableau} لها، مع أن !!{tableau} المغلق لا يقبله: شعبه كلها مغلقة،
+ولا تقبل شعبة مغلقة الإرضاء.
+
+خذ !!{tableau} قابلًا للإرضاء، أي !!a{tableau} تشتمل على شعبة قابلة
+للإرضاء على الأقل. وتطبيق القاعدة إما أن يلحق !!{signed formula}
+بشعبة، وإما أن يشطر الشعبة شعبتين. فإن بقيت للـ!!{tableau} شعبة قابلة للإرضاء لم تمسها
+القاعدة، بقيت كذلك في !!{tableau} الممتد، فكان هو أيضًا قابلًا للإرضاء.
+فلا يبقى للنظر إلا أن تقع القاعدة على شعبة قابلة للإرضاء.
+
+ولتكن~$\Gamma$ مجموعة !!{signed formula} في تلك الشعبة، ولتكن
+$\sFmla{S}{!A}[\sigma] \in \Gamma$ هي !!{signed formula} التي تُطبّق
+عليها القاعدة. فإن لم تشطر القاعدة الشعبة، وجب أن يبقى امتدادها، أعني
+$\Gamma$ مضمومًا إليها ناتج القاعدة، قابلًا للإرضاء. وإن شطرتها وجب أن
+تقبل الإرضاء إحدى الشعبتين الناتجتين على الأقل.
+\begin{enumerate}
+\item إذا طُبقت~$\TRule{\True}{\lnot}$ على
+  $\sFmla{\True}{\lnot !B}[\sigma] \in \Gamma$، كان في الشعبة
+  الممتدة !!{signed formula} من المجموعة
+  $\Gamma \cup \{\sFmla{\False}{!B}[\sigma.{*}]\}$. ولنفترض
+  $\mSat{M}{\Gamma}[f]$؛ فيلزم خاصةً
+  $\mSat{M}{\lnot !B}[f(\sigma)]$. ومن ثم يتحقق~$\mSat/{M}{!B}[w]$
+  لكل~$w$ يحقق~$Rf(\sigma)w$، ومن جملة ذلك~$f(\sigma.{*})$. فـ
+  $\mModel{M}$ يرضي~$\sFmla{\False}{!B}[\sigma.{*}]$ بالنسبة إلى~$f$.
+\item وإذا طُبقت~$\TRule{\False}{\lnot}$ على
+  $\sFmla{\False}{\lnot !B}[\sigma] \in \Gamma$: تمرين.
+\item وإذا طُبقت~$\TRule{\True}{\land}$ على
+  $\sFmla{\True}{!B \land !C}[\sigma] \in \Gamma$، لحقت بالشعبة
+  !!{signed formula} جديدتان، وهما:
+  $\sFmla{\True}{!B}[\sigma]$ و$\sFmla{\True}{!C}[\sigma]$. افترض أن
+  $\mSat{M}{\Gamma}[f]$، وبوجه خاص
+  $\mSat{M}{!B \land !C}[f(\sigma)]$؛ فينتج
+  $\mSat{M}{!B}[f(\sigma)]$ و$\mSat{M}{!C}[f(\sigma)]$. وهذا يعني أن
+  $\mModel{M}$ يرضي كلًا من~$\sFmla{\True}{!B}[\sigma]$
+  و$\sFmla{\True}{!C}[\sigma]$ بالنسبة إلى~$f$.
+\item وإذا طُبقت~$\TRule{\False}{\lor}$ على
+  $\sFmla{\False}{!B \lor !C}[\sigma] \in \Gamma$: تمرين.
+\item وإذا طُبقت~$\TRule{\False}{\lif}$ على
+  $\sFmla{\False}{!B \lif !C}[\sigma] \in \Gamma$، لحقت بالشعبة
+  !!{signed formula} جديدتان:
+  $\sFmla{\True}{!B}[\sigma.n]$ و$\sFmla{\False}{!C}[\sigma.n]$،
+  على أن~$\sigma.n$ سابقة جديدة في الشعبة، أي
+  $\sigma.n \notin P(\Gamma)$.
+
+  وبما أن~$\Gamma$ قابلة للإرضاء، فثمة نموذج~$\mModel{M}$ وتفسير~$f$
+  لـ$P(\Gamma)$ بحيث~$\mSat{M}{\Gamma}[f]$، وبوجه خاص
+  $\mSat/{M}{!B \lif !C}[f(\sigma)]$. والمطلوب إثبات أن
+  $\Gamma \cup \{\sFmla{\True}{!B}[\sigma.n],
+  \sFmla{\False}{!C}[\sigma.n]\}$ قابلة للإرضاء. فنعرّف
+  تفسيرًا لـ$P(\Gamma) \cup \{\sigma.n\}$ كما يأتي:
+
+  إذ يقتضي~$\mSat/{M}{!B \lif !C}[f(\sigma)]$ وجود عالم~$w \in W$
+  بحيث~$Rf(\sigma)w$ و$\mSat{M}{!B}[w]$ و$\mSat/{M}{!C}[w]$.
+  ولتكن~$f'$ مثل~$f$، إلا أن~$f'(\sigma.n) = w$. وبما أن
+  $f'(\sigma) = f(\sigma)$ و$Rf(\sigma)w$، فإن
+  $Rf'(\sigma)f'(\sigma.n)$. وإذا كانت~$\tau\in P(\Gamma)$ سابقة
+  لـ$\sigma.n$، كانت سابقة لـ$\sigma$ أو مساوية لها؛ فيعطي تفسير~$f$
+  أن~$Rf(\tau)f(\sigma)$، ومن تعدي~$R$ يثبت
+  $Rf'(\tau)f'(\sigma.n)$. وليس في~$P(\Gamma)$ امتداد لـ~$\sigma.n$
+  بثابت الانغلاق والجدة المتقدمين، وبانعكاس~$R$ يكون~$Rww$ للحالة
+  الجديدة مع نفسها. فتكون~$f'$ تفسيرًا لـ
+  $P(\Gamma) \cup \{\sigma.n\}$. ومن الواضح أن
+  $\mSat{M}{!B}[f'(\sigma.n)]$ و$\mSat/{M}{!C}[f'(\sigma.n)]$.
+  وإذ كان~$f(\sigma') = f'(\sigma')$ لكل السوابق
+  $\sigma' \in P(\Gamma)$، كان~$\mSat{M}{\Gamma}[f']$. ولذلك يرضي
+  $\mModel{M}, f'$ المجموعة
+  $\Gamma \cup \{\sFmla{\True}{!B}[\sigma.n],
+  \sFmla{\False}{!C}[\sigma.n]\}$.
+\end{enumerate}
+وأما الاستدلالات التي تُخرج شعبتين فبيانها هكذا.
+\begin{enumerate}
+\item إذا طُبقت~$\TRule{\False}{\land}$ على
+  $\sFmla{\False}{!B \land !C}[\sigma] \in \Gamma$، نشأت شعبتان:
+  تمتد اليسرى بـ~$\sFmla{\False}{!B}[\sigma]$، واليمنى بـ
+  $\sFmla{\False}{!C}[\sigma]$. افترض أن~$\mSat{M}{\Gamma}[f]$،
+  وبوجه خاص~$\mSat/{M}{!B \land !C}[f(\sigma)]$؛ ومنه
+  $\mSat/{M}{!B}[f(\sigma)]$ أو~$\mSat/{M}{!C}[f(\sigma)]$.
+  ففي الحال الأولى يرضي~$\mModel{M}, f$ الصيغة
+  $\sFmla{\False}{!B}[\sigma]$ فتقبل الشعبة اليسرى الإرضاء؛ وفي
+  الثانية يرضي~$\mModel{M}, f$ الصيغة
+  $\sFmla{\False}{!C}[\sigma]$ فتقبله الشعبة اليمنى.
+\item وإذا طُبقت~$\TRule{\True}{\lor}$ على
+    $\sFmla{\True}{!B \lor !C}[\sigma] \in \Gamma$: تمرين.
+\item وإذا طُبقت~$\TRule{\True}{\lif}$ على
+    $\sFmla{\True}{!B \lif !C}[\sigma] \in \Gamma$: تمرين.
+\end{enumerate}
+\end{proof}
+
+\begin{prob}
+أتمّ ما تُرك من برهان~\olref[int][tab][sou]{thm:tableau-soundness}.
+\end{prob}
+
+\begin{cor}
+\ollabel{cor:entailment-soundness}
+متى كان~$\Gamma \Proves !A$، كان~$\Gamma \Entails !A$.
+\end{cor}
+
+\begin{proof}
+  لنفرض~$\Gamma \Proves !A$. فعندئذ المجموعة
+  $\Delta = \{\sFmla{\False}{!A}[1], \sFmla{\True}{!B_1}[1],
+  \dots, \sFmla{\True}{!B_n}[1]\}$ تملك !!{tableau} مغلقًا لبعض
+  $!B_1$، \dots،~$!B_n \in \Gamma$. ولإثبات
+  % تصحيح أسلوبي (0515-N1): أزيل تكرار «تملك» حول تعريف Delta.
+  $\Gamma \Entails !A$ نفرض خلافه؛ فيوجد نموذج~$\mModel{M}$
+  وعالم~$w$ بحيث~$\mSat{M}{!B_i}[w]$ لكل~$i=1$، \dots،~$n$،
+  ولكن~$\mSat/{M}{!A}[w]$. ولتكن~$f(1) = w$؛ عندئذ تكون~$f$ تفسيرًا
+  لـ$P(\Delta)$ في~$\mModel{M}$، ويرضي~$\mModel{M}$ المجموعة~$\Delta$
+  بالنسبة إلى~$f$. ولأن~$P(\Delta)=\{1\}$ فهي مغلقة تحت أخذ السوابق.
+  لكن وفقًا لـ\olref{thm:tableau-soundness} تكون
+  $\Delta$ غير قابلة للإرضاء، إذ لها !!{tableau} مغلق؛ وهذا تناقض.
+  فلابد إذن من~$\Gamma \Entails !A$.
+\end{proof}
+
+\begin{cor}
+\ollabel{cor:weak-soundness}
+متى كان~$\Proves !A$، صدقت~$!A$ في النماذج كلها.
+\end{cor}
+
+\end{document}

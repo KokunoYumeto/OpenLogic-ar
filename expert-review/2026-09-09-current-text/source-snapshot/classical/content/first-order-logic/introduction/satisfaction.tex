@@ -1,0 +1,117 @@
+% Part: first-order-logic
+% Chapter: introduction
+% Section: satisfaction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{int}{sat}
+
+\olsection{الإرضاء}
+
+إذا عرفنا ال!!{formula}s، أمكننا أن نستبق البحث إلى الدلالة؛ وأول
+تعريف فيها هو ال!!{structure}. ففي لغتنا البسيطة لل!!{structure}~$\Struct M$
+ثلاثة أركان: مجموعة غير خالية $\Domain{M}$ هي
+\emph{ال!!{domain}}، وما يعيّنه $\Obj a$ في~$\Struct M$، وما
+يصدق عليه $\Obj P$ في~$\Struct M$. نرمز إلى معين~$\Obj a$
+بـ~$\Assign{\Obj a}{M}$، وإلى مجموعة ما يصدق عليه $\Obj P$
+بـ~$\Assign{\Obj P}{M}$. فهذه وحدها مكونات
+ال!!^a{structure}~$\Struct{M}$: $\Domain{M}$،
+و$\Assign{\Obj a}{M} \in \Domain{M}$،
+و$\Assign{\Obj P}{M} \subseteq \Domain{M}$. أما في الحالة العامة،
+فتكثر ال!!{predicate}s وال!!{constant}s، وقد تتعدد مواضع
+ال!!{predicate}s، وتدخل ال!!{function}s أيضًا، فيزداد التعريف
+تفصيلًا.
+
+وبهذه الأركان نستطيع تعريف إرضاء ال!!{formula}s الخالية من
+ال!!{variable}s. نضع تعريفًا استقرائيًا يساير بناء ال!!{formula}s:
+نبدأ بإرضاء الذرية في~$\Struct{M}$، ثم نبين، مثلًا، أن إرضاء
+$\lnot !A$ في~$\Struct{M}$ تابع لإرضاء $!A$ أو عدمه. فنقول:
+
+\begin{enumerate}
+  \item تُرضى $\Atom{\Obj P}{\Obj a}$ في~$\Struct{M}$ إذا وفقط إذا
+  كان $\Assign{\Obj a}{M} \in \Assign{\Obj P}{M}$.
+  \item تُرضى $\lnot !A$ في~$\Struct{M}$ إذا وفقط إذا لم تُرض
+  $!A$ في~$\Struct{M}$.
+  \item تُرضى $(!A \land !B)$ في~$\Struct{M}$ إذا وفقط إذا أُرضيت
+  $!A$ في~$\Struct{M}$ وأُرضيت $!B$ في~$\Struct{M}$ أيضًا.
+\end{enumerate}
+خذ مثالًا $\Domain{M} = \{0, 1, 2\}$،
+و$\Assign{\Obj a}{M} = 1$،
+و$\Assign{\Obj P}{M} = \{1, 2\}$. بمقتضى التعريف تُرضى
+$\Atom{\Obj P}{\Obj a}$ في~$\Struct{M}$، إذ
+$\Assign{\Obj a}{M} =  1 \in \{1,2\} = \Assign{\Obj P}{M}$.
+وعليه لا تُرضى $\lnot \Atom{\Obj P}{\Obj a}$ في~$\Struct{M}$،
+ثم تُرضى $\lnot\lnot \Atom{\Obj P}{\Obj a}$ في~$\Struct{M}$،
+ولا تُرضى
+$(\lnot \Atom{\Obj P}{\Obj a} \land \Atom{\Obj P}{\Obj a})$،
+وعلى هذا نقيس.
+
+وأما المكممات فتعترضنا عندها مسألة. قد نقول:
+«تُرضى $\lexists[\Obj v_0][\Atom{\Obj P}{\Obj v_0}]$ إذا وفقط
+إذا تُرضى $\Atom{\Obj P}{\Obj v_0}$». لكن
+ال!!{structure}~$\Struct{M}$ لا تعين شيئًا لل!!{variable}s.
+وإنما مرادنا أن $\Atom{\Obj P}{\Obj v_0}$ تُرضى
+\emph{لقيمة ما لـ~$\Obj v_0$}. فلا بد من تعيين
+!!{element}s من $\Domain{M}$، ليس لـ$\Obj a$ فحسب، بل
+لـ~$\Obj v_0$ أيضًا. لهذا ندخل \emph{إسنادات} ال!!{variable}s.
+وإسناد ال!!^a{variable} دالة~$s$ ترسل ال!!{variable}s إلى
+!!{element}s من $\Domain{M}$، أي إلى $0$ أو $1$ أو~$2$ في
+مثالنا. ولا نعلم سلفًا أي ال!!{variable}s ستقع في
+!!a{formula}، فلا نحصر ال!!{variable}s التي تعطيها $s$ قيمًا.
+بل نطلب أن تعطي $s$ قيمة لكل ال!!{variable}s
+$\Obj v_0$ و$\Obj v_1$ و\dots\@ \emph{جميعًا}، ثم نستعمل
+منها ما تدعو إليه الحاجة.
+
+وعليه لا نعرّف إرضاء ال!!{formula}s بالقياس إلى !!a{structure}
+وحدها، بل إلى !!a{structure}~$\Struct{M}$ \emph{و}إسناد
+!!a{variable}~$s$ معًا. نكتب $\Sat{M}{!A}[s]$، ونضيف إلى
+التعريف بندًا لل!!{formula}s الذرية التي فيها !!{variable}s:
+
+\begin{enumerate}
+  \item $\Sat{M}{\Atom{\Obj P}{\Obj a}}[s]$ إذا وفقط إذا كان
+  $\Assign{\Obj a}{M} \in \Assign{\Obj P}{M}$.
+  \item $\Sat{M}{\Atom{\Obj P}{\Obj v_i}}[s]$ إذا وفقط إذا كان
+  $s(\Obj v_i) \in \Assign{\Obj P}{M}$.
+  \item $\Sat{M}{\lnot !A}[s]$ إذا وفقط إذا لم يكن
+  $\Sat{M}{!A}[s]$.
+  \item $\Sat{M}{(!A \land !B)}[s]$ إذا وفقط إذا كان
+  $\Sat{M}{!A}[s]$ و$\Sat{M}{!B}[s]$.
+\end{enumerate}
+بهذا زال إشكال واحد: عرفنا متى ترضي $\Struct{M}$
+الصيغة $\Atom{\Obj P}{\Obj v_0}$ على القيمة $s(\Obj v_0)$.
+وأما $\lexists[\Obj v_0][\Atom{\Obj P}{\Obj v_0}]$، فيبقى
+لضبطها أمر آخر. نريد أن
+$\Sat{M}{\lexists[\Obj v_0][\Atom{\Obj P}{\Obj v_0}]}[s]$
+يكافئ $\Sat{M}{\Atom{\Obj P}{\Obj v_0}}[s']$ لبعض~$s'$
+مما يعطي قيمة لـ~$\Obj v_0$. وليس لازمًا أن تكون القيمة التي
+يعطيها لـ$\Obj v_0$ هي $s(\Obj v_0)$. فلنضع الترميز الآتي:
+إذا كان $m \in \Domain{M}$، رمزنا بـ
+$\Subst{s}{m}{\Obj v_0}$ إلى الإسناد الموافق لـ~$s$ في جميع
+ال!!{variable}s سوى~$\Obj v_0$، فإنه يعطي $m$ لـ~$\Obj v_0$.
+حينئذ يتم التعريف هكذا:
+
+\begin{enumerate}\setcounter{enumi}{4}
+  \item $\Sat{M}{\lexists[\Obj v_i][!A]}[s]$ إذا وفقط إذا كان
+  $\Sat{M}{!A}[\Subst{s}{m}{\Obj v_i}]$ لبعض
+  $m \in \Domain{M}$.
+\end{enumerate}
+نختبر ذلك في المثال. ليكن $s(\Obj v_i) = 0$ لكل
+$i \in \Nat$. عندئذ
+$\Sat{M}{\lexists[\Obj v_0][\Atom{\Obj P}{\Obj v_0}]}[s]$
+إذا وفقط إذا وجد $m \in \Domain{M}$ يحقق
+$\Sat{M}{\Atom{\Obj P}{\Obj v_0}}[\Subst{s}{m}{\Obj v_0}]$.
+ومثل هذا العنصر موجود؛ نأخذ $m = 1$ أو $m = 2$.
+فيصدق ذلك وإن لم تصلح القيمة~$s(\Obj v_0)$ التي أعطاها $s$
+لـ$\Obj v_0$ أصلًا، وهي هنا $0$. فقد تحقق
+$\Sat{M}{\Atom{\Obj P}{\Obj v_0}}[\Subst{s}{1}{\Obj v_0}]$،
+ولم يتحقق $\Sat{M}{\Atom{\Obj P}{\Obj v_0}}[s]$.
+
+ولا ننكر ما في هذه الطريقة من ثقل؛ لكنه ثمن التعريف الاستقرائي
+الدقيق لإرضاء ال!!{formula}s كلها. ولا بد من مثل هذا الضبط
+لتحديد المفاهيم الدلالية. وللتعريف طرائق أخرى، غير أن قدر ما فيها
+من اليسر أو التكلف يقارب ما في هذه الطريقة.
+
+
+\end{document}

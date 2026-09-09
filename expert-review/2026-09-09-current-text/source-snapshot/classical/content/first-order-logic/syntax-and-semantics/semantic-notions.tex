@@ -1,0 +1,170 @@
+% Part: first-order-logic
+% Chapter: syntax-and-semantics
+% Section: Semantic Notions
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{syn}{sem}
+\olsection{المفاهيم الدلالية}
+
+\begin{explain}
+لما عُرفت ال!!{structure}s للغات الرتبة الأولى، أمكن تحديد
+الخواص الدلالية للجمل والعلاقات بينها. وأول ذلك \emph{صلاحية}
+الجملة: أن تُرضى في كل !!{structure}. فالجملة الصالحة لا يختلف
+إرضاؤها باختلاف تأويل رموزها غير المنطقية؛ ولهذا تسمى الجمل
+الصالحة \emph{حقائق منطقية}. فهي صادقة، أي مُرضاة، في أي
+!!{structure}؛ وصدقها تابع للرموز المنطقية وال!!{structure}
+التركيبية لها، لا لاختيار الرموز غير المنطقية ولا لتأويلاتها.
+\end{explain}
+
+\begin{defn}[الصلاحية]
+تكون الجملة~$!A$ \emph{صالحة}، $\Entails !A$، إذا وفقط إذا كان
+$\Sat{M}{!A}$ لكل !!{structure}~$\Struct M$.
+\end{defn}
+
+\begin{defn}[الاستلزام]
+\emph{تستلزم} مجموعة من الجمل~$\Gamma$ جملة~$!A$،
+$\Gamma \Entails !A$، إذا وفقط إذا كان، لكل
+!!{structure}~$\Struct M$ تحقق $\Sat{M}{\Gamma}$،
+$\Sat{M}{!A}$.
+\end{defn}
+
+
+\begin{defn}[قابلية الإرضاء]
+تكون مجموعة من الجمل~$\Gamma$ \emph{قابلة للإرضاء} إذا كان
+$\Sat{M}{\Gamma}$ ل!!{structure} ما~$\Struct M$. وإذا لم تكن
+$\Gamma$ قابلة للإرضاء سميت \emph{غير قابلة للإرضاء}.
+\end{defn}
+
+\begin{prop}
+تكون الجملة~$!A$ صالحة إذا وفقط إذا كان
+$\Gamma \Entails !A$ لكل مجموعة من الجمل~$\Gamma$.
+\end{prop}
+
+\begin{proof}
+أما جهة الذهاب، فلنفرض $!A$ صالحة، ولنأخذ $\Gamma$ مجموعة من
+الجمل، و$\Struct M$ !!a{structure} تحقق
+$\Sat{M}{\Gamma}$. فصلاحية $!A$ تقتضي $\Sat{M}{!A}$،
+ومن ثم $\Gamma \Entails !A$.
+
+وأما جهة الإياب فنثبت مقابل عكسها. إذا لم تكن $!A$ صالحة، وُجدت
+!!a{structure}~$\Struct M$ فيها $\Sat/{M}{!A}$. ولنضع
+$\Gamma = \{ \ltrue \}$؛ عندئذ $\Sat{M}{\Gamma}$، لأن
+$\ltrue$ صالحة. فقد حصلت !!a{structure}~$\Struct M$ تحقق
+$\Sat{M}{\Gamma}$ وتحقق $\Sat/{M}{!A}$؛ فلا تستلزم~$\Gamma$
+الجملة~$!A$.
+\end{proof}
+
+\begin{prop}
+\ollabel{prop:entails-unsat}
+$\Gamma \Entails !A$ إذا وفقط إذا كانت
+$\Gamma \cup \{\lnot !A\}$ غير قابلة للإرضاء.
+\end{prop}
+
+\begin{proof}
+للذهاب نفرض $\Gamma \Entails !A$، ثم نفرض خلاف المطلوب وجود
+!!a{structure}~$\Struct M$ تحقق
+$\Sat{M}{\Gamma \cup \{ \lnot !A \}}$. فمن
+$\Sat{M}{\Gamma}$ و$\Gamma \Entails !A$ يلزم $\Sat{M}{!A}$.
+ومن $\Sat{M}{\Gamma\cup \{ \lnot !A \}}$ يلزم
+$\Sat{M}{\lnot !A}$. فقد اجتمع $\Sat{M}{!A}$ و
+$\Sat/{M}{!A}$، وهذا محال. فلا توجد
+!!{structure}~$\Struct M$ بهذه الصفة، وتكون
+$\Gamma \cup \{ \lnot !A \}$ غير قابلة للإرضاء.
+
+وللإياب نفرض أن $\Gamma \cup \{ \lnot !A \}$ غير قابلة للإرضاء.
+فكل !!{structure}~$\Struct M$ لا تخلو من أحد الأمرين:
+$\Sat/{M}{\Gamma}$ أو $\Sat{M}{!A}$. فكل !!{structure}
+~$\Struct M$ تحقق $\Sat{M}{\Gamma}$ لا بد أن تحقق $\Sat{M}{!A}$،
+وذلك هو $\Gamma \Entails !A$.
+\end{proof}
+
+\begin{prob}
+\begin{enumerate}
+\item بيّن أن $\Gamma \Entails \lfalse$ إذا وفقط إذا كانت $\Gamma$
+  غير قابلة للإرضاء.
+\item بيّن أن $\Gamma \cup \{!A\} \Entails \lfalse$ إذا وفقط إذا
+  كان $\Gamma \Entails \lnot !A$.
+\item افترض أن $c$ لا يرد في~$!A$ ولا في~$\Gamma$. بيّن أن
+  $\Gamma \Entails \lforall[x][!A]$ إذا وفقط إذا كان
+  $\Gamma \Entails \Subst{!A}{c}{x}$.
+\end{enumerate}
+\end{prob}
+
+\begin{prop}
+إذا كان $\Gamma \subseteq \Gamma'$ و$\Gamma \Entails !A$، فإن
+$\Gamma' \Entails !A$.
+\end{prop}
+
+\begin{proof}
+لنفرض $\Gamma \subseteq \Gamma'$ و$\Gamma \Entails !A$،
+ولنأخذ $\Struct M$ بنية تحقق $\Sat{M}{\Gamma'}$.
+فيتبع $\Sat{M}{\Gamma}$، ومن $\Gamma \Entails !A$ يلزم
+$\Sat{M}{!A}$. إذن كلما كان $\Sat{M}{\Gamma'}$ كان
+$\Sat{M}{!A}$؛ فثبت $\Gamma' \Entails !A$.
+\end{proof}
+
+
+\begin{thm}[مبرهنة الاستنباط الدلالية]
+\ollabel{thm:sem-deduction}
+$\Gamma \cup \{!A\} \Entails !B$ إذا وفقط إذا كان
+$\Gamma \Entails !A \lif !B$.
+\end{thm}
+
+\begin{proof}
+للذهاب نفرض
+$\Gamma \cup \{ !A \} \Entails !B$، ونأخذ $\Struct M$
+!!a{structure} تحقق $\Sat{M}{\Gamma}$. فإن كان $\Sat{M}{!A}$،
+حصل $\Sat{M}{\Gamma \cup \{ !A \} }$؛ ولما كانت
+$\Gamma \cup \{ !A \}$ تستلزم~$!B$، لزم $\Sat{M}{!B}$.
+فيكون $\Sat{M}{!A \lif !B}$، وبه يثبت
+$\Gamma \Entails !A \lif !B$.
+
+وللإياب نفرض $\Gamma \Entails !A \lif !B$، ولتكن
+$\Struct M$ !!a{structure} تحقق
+$\Sat{M}{\Gamma \cup \{ !A \}}$. فمنه $\Sat{M}{\Gamma}$،
+ومنه $\Sat{M}{!A \lif !B}$. ومع $\Sat{M}{!A}$ يلزم
+$\Sat{M}{!B}$. فمتى تحقق
+$\Sat{M}{\Gamma \cup \{ !A \} }$ تحقق $\Sat{M}{!B}$،
+وهذا معنى $\Gamma \cup \{ !A \} \Entails !B$.
+\end{proof}
+
+\begin{prop}\ollabel{prop:quant-terms}
+  لتكن $\Struct{M}$ !!a{structure}، ولتكن $!A(x)$ !!a{formula} ذات
+  متغير حر واحد~$x$، وليكن $t$~حدًا مغلقًا. عندئذ:
+  \begin{tagenumerate}{prvEx,prvAll}
+    \tagitem{prvEx}{$!A(t) \Entails \lexists[x][!A(x)]$}{}
+    \tagitem{prvAll}{$\lforall[x][!A(x)] \Entails !A(t)$}{}
+  \end{tagenumerate}
+\end{prop}
+
+\begin{proof}
+  \begin{tagenumerate}{prvEx,prvAll}
+    \tagitem{prvEx}{%
+      \iftag{probEx}{تمرين.}{افترض $\Sat{M}{!A(t)}$. وليكن $s$
+        إسناد متغيرات يحقق $s(x) = \Value{t}{M}$. عندئذ
+        $\Sat{M}{!A(t)}[s]$ لأن $!A(t)$ !!a{sentence}. وبحسب
+        \olref[ext]{prop:ext-formulas}، يكون
+        $\Sat{M}{!A(x)}[s]$. وبحسب
+        \olref[ass]{prop:sat-quant}،
+        $\Sat{M}{\lexists[x][!A(x)]}$.}}{}
+    \tagitem{prvAll}{%
+      \iftag{probAll}{تمرين.}{افترض
+        $\Sat{M}{\lforall[x][!A(x)]}$. وليكن $s$ إسناد متغيرات
+        يحقق $s(x) = \Value{t}{M}$. بحسب
+        \olref[ass]{prop:sat-quant}، يكون
+        $\Sat{M}{!A(x)}[s]$. وبحسب
+        \olref[ext]{prop:ext-formulas}، يكون
+        $\Sat{M}{!A(t)}[s]$. وبحسب
+        \olref[ass]{prop:sentence-sat-true}، يكون
+        $\Sat{M}{!A(t)}$ لأن $!A(t)$ !!a{sentence}.}}{}
+  \end{tagenumerate}
+\end{proof}
+
+\begin{probtag}{probEx,probAll}
+  أكمل برهان \olref[fol][syn][sem]{prop:quant-terms}.
+\end{probtag}
+
+\end{document}

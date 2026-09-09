@@ -1,0 +1,86 @@
+% Part: normal-modal-logic
+% Chapter: syntax-and-semantics
+% Section: truth-in-model
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{syn}{tru}
+
+\olsection{الصدق في نموذج}
+
+وقد يكون المطلوب معرفة ال!!{formula}s التي يعمّ صدقها عوالم نموذج
+بعينه كلها. فنخصّ هذا المعنى بالرمز الآتي.
+
+\begin{defn}
+  تكون !!^a{formula}~$!A$ \emph{صادقة في نموذج}~$M = \tuple{W, R,
+    V}$، ونكتب~$\mSat{M}{!A}$، إذا وفقط إذا كان
+  $\mSat{M}{!A}[w]$ لكل~$w \in W$.
+\end{defn}
+
+\begin{prop}\ollabel{prop:truthfacts}
+  \begin{enumerate}
+  \item إذا كان~$\mSat{M}{!A}$، فإن~$\mSat/{M}{\lnot !A}$، لكن
+    \emph{ليس} العكس.
+  \item إذا كان~$\mSat{M}{!A \lif !B}$، فإن~$\mSat{M}{!A}$ فقط إذا
+    كان~$\mSat{M}{!B}$، لكن \emph{ليس} العكس.
+  \end{enumerate}
+\end{prop}
+
+\begin{proof}
+  \begin{enumerate}
+  \item إذا كان~$\mSat{M}{!A}$، كانت~$!A$ صادقة في جميع عوالم~$W$،
+    ولما كانت~$W \neq \emptyset$، فلا يمكن أن يكون
+    $\mSat{M}{\lnot!A}$؛ وإلا للزم أن تكون~$!A$ صادقة وكاذبة معًا في
+    عالم ما.
+
+    وأما إذا كان~$\mSat/{M}{\lnot !A}$، فغاية ما يُستفاد أن~$!A$
+    تصدق في عالم ما~$w \in W$؛ ولا يُستفاد منه~$\mSat{M}{!A}[w]$
+    في \emph{كل}~$w \in W$. وشاهده نموذج~\olref[rel]{fig:simple}،
+    فإن فيه~$\mSat/{M}{\lnot p}$ وفيه كذلك~$\mSat/{M}{p}$.
+  \item لنفرض~$\mSat{M}{!A \lif !B}$ و$\mSat{M}{!A}$. والمطلوب
+    $\mSat{M}{!B}$. فخذ~$w \in W$ كيف اتفق؛ يحصل فيه
+    $\mSat{M}{!A \lif !B}[w]$ و$\mSat{M}{!A}[w]$، فيلزم
+    $\mSat{M}{!B}[w]$. وليس لاختيار~$w$ خصوصية، فثبت
+    $\mSat{M}{!B}$.
+
+    وأما نفي العكس فيكفي له نموذج~$\mModel{M}$ يصدق فيه أن
+    $\mSat{M}{!A}$ لا تكون إلا إذا كانت~$\mSat{M}{!B}$، مع
+    $\mSat/{M}{!A \lif !B}$. ونعود إلى~\olref[rel]{fig:simple}:
+    لما كان~$\mSat/{M}{p}$، صدق خلوًا أن~$\mSat{M}{p}$ لا تكون
+    إلا إذا كانت~$\mSat{M}{q}$. ومع ذلك~$\mSat/{M}{p \lif q}$؛
+    لأن~$p$ صادقة و$q$ كاذبة في~$w_1$.
+  \end{enumerate}
+\end{proof}
+
+\begin{prob}
+  تأمل النموذج الآتي~$\mModel{M}$ للغة التي لا تضم من
+  !!{propositional variable}s إلا~$p_1$، و$p_2$، و$p_3$:
+  \begin{center}
+    \begin{tikzpicture}[modal]
+      \node[world] (w1) [label={[align=right]left:\mTrue{p_1}\\\mFalse{p_2}\\\mFalse{p_3}}]
+            {$w_1$} ;
+      \node[world] (w2) [label={[align=right]right:\mTrue{p_1}\\\mTrue{p_2}\\\mFalse{p_3}},
+        below right=of w1]  {$w_2$};
+      \node[world] (w3) [label={[align=right]right:\mTrue{p_1}\\\mTrue{p_2}\\\mTrue{p_3}},
+        above right=of w2] {$w_3$};
+      \draw[reflexive above] (w3) to (w3);
+      \draw[->] (w1) to (w2);
+      \draw[->] (w2) to (w3);
+      \draw[->] (w1) to (w3);
+    \end{tikzpicture}
+  \end{center}
+  هل ال!!{formula}s والمخططات الآتية صادقة في النموذج~$\mModel{M}$،
+  أي صادقة في كل عالم من~$\mModel{M}$؟ اشرح.
+  \begin{enumerate}
+  \item $p\lif \Diamond p$ (لـ$p$ ذرية)؛
+  \item $!A\lif \Diamond !A$ (لـ$!A$ اعتباطية)؛
+  \item $\Box p \lif p$ (لـ$p$ ذرية)؛
+  \item $\lnot p \lif \Diamond \Box p$ (لـ$p$ ذرية)؛
+  \item $\Diamond \Box !A$ (لـ$!A$ اعتباطية)؛
+  \item $\Box \Diamond p$ (لـ$p$ ذرية).
+  \end{enumerate}
+\end{prob}
+
+\end{document}

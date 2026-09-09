@@ -1,0 +1,273 @@
+% Part: turing-machines
+% Chapter: machines-computations
+% Section: representing-tms
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{tur}{mac}{rep}
+\olsection{تمثيل آلات تورنغ}
+
+\begin{explain}
+يمكن تمثيل آلات تورنغ بصريًا بواسطة \emph{مخططات الحالات}. تتألف هذه
+المخططات من عقد حالات تصل بينها أسهم. وتمثل كل عقدة، كما هو متوقع،
+حالة من حالات الآلة. ويمثل كل سهم تعليمة يمكن تنفيذها انطلاقًا من تلك
+الحالة، وتكتب تفاصيل التعليمة فوق السهم المناسب أو تحته. انظر إلى
+الآلة الآتية، التي ليس لها إلا حالتان داخليتان، $q_0$ و$q_1$، وتعليمة
+واحدة:
+\[
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+                    semithick]
+  \tikzstyle{every state}=[fill=none,draw=black,text=black]
+
+  \node[initial,state]   (A)              {$q_0$};
+  \node[state]   (B) [right of=A] {$q_1$};
+
+  \path (A) edge  node {\TMtrans{\TMblank}{\TMstroke}{\TMright}} (B);
+\end{tikzpicture}
+\]
+تذكر أن لآلة تورنغ رأسًا للقراءة والكتابة وشريطًا كتب عليه الدخل.
+وتقرأ التعليمة هكذا: \emph{إذا كنت تقرأ $\TMblank$ في الحالة $q_0$،
+فاكتب $\TMstroke$ وتحرك يمينًا وانتقل إلى الحالة $q_1$}. وهذا يكافئ
+أن ترسل دالة الانتقال $\tuple{q_0,\TMblank}$ إلى
+$\tuple{q_1,\TMstroke,\TMright}$.
+\end{explain}
+
+\begin{ex}
+\emph{آلة الزوجية}: تتوقف آلة تورنغ الآتية إذا وفقط إذا كان على
+الشريط عدد زوجي من رموز $\TMstroke$ (بافتراض أن كل رموز $\TMstroke$
+تسبق أول $\TMblank$ على الشريط).
+\[
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+                    semithick]
+  \tikzstyle{every state}=[fill=none,draw=black,text=black]
+
+  \node[initial,state]         (A)              {$q_0$};
+  \node[state]         (B) [right of=A] {$q_1$};
+
+  \path (A) edge [bend left] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (B)
+        (B) edge [loop above] node {\TMtrans{\TMblank}{\TMblank}{\TMright}} (B)
+            edge [bend left] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (A);
+\end{tikzpicture}
+\]
+
+يقابل مخطط الحالات دالة الانتقال الآتية:
+\begin{align*}
+\delta(q_0, \TMstroke) & = \tuple{q_1, \TMstroke, \TMright},\\
+\delta(q_1, \TMstroke) & = \tuple{q_0, \TMstroke, \TMright},\\
+\delta(q_1, \TMblank)  & = \tuple{q_1, \TMblank, \TMright}
+\end{align*}
+\end{ex}
+
+\begin{explain}
+لا تتوقف الآلة السابقة إلا عندما يكون الدخل عددًا زوجيًا من العلامات.
+وإلا واصلت الآلة، من الناحية النظرية، عملها إلى غير نهاية. ويمكن، لأي
+آلة ودخل، تتبع \emph{تهيئات} الآلة لتحديد الخرج. وسنقدم تعريفًا صوريًا
+للتهيئات لاحقًا. أما الآن فيمكن أن ننظر إليها حدسيًا بوصفها سلسلة من
+الرسوم تبين حالة الآلة في أي لحظة أثناء التشغيل. وتبين التهيئات محتوى
+الشريط، وحالة الآلة، وموضع رأس القراءة والكتابة.
+
+لنتتبع تهيئات آلة الزوجية حين تبدأ بدخل مؤلف من أربع علامات
+$\TMstroke$. نتوقع في هذه الحال أن تتوقف الآلة. ثم سنشغلها على دخل
+مؤلف من ثلاث علامات $\TMstroke$، فستعمل إلى الأبد.
+
+تبدأ الآلة في الحالة~$q_0$، وهي تمسح علامة~$\TMstroke$ الواقعة في
+أقصى اليسار. ويمكننا تمثيل التهيئة الابتدائية للآلة كما يأتي:
+\[
+\TMendtape \TMstroke_0 \TMstroke \TMstroke \TMstroke \TMblank \ldots
+\]
+هذه التهيئة واضحة. فالآلة تبدأ في الحالة~$q_0$، وتمسح
+علامة~$\TMstroke$ الواقعة في أقصى اليسار. ويمثل ذلك بوضع اسم الحالة
+دليلًا سفليًا على أول علامة~$\TMstroke$. والتعليمة المنطبقة عند هذه
+النقطة هي
+$\delta(q_0,\TMstroke)=\tuple{q_1,\TMstroke,\TMright}$، ولذلك تتحرك
+الآلة يمينًا على الشريط وتنتقل إلى الحالة~$q_1$.
+\[
+\TMendtape \TMstroke \TMstroke_1 \TMstroke \TMstroke \TMblank \ldots
+\]
+ولما كانت الآلة الآن في الحالة~$q_1$ وتمسح~$\TMstroke$، فعلينا
+«اتباع» التعليمة $\delta(q_1,\TMstroke)=\tuple{q_0,
+  \TMstroke,\TMright}$. وينتج من ذلك التهيئة
+\[
+\TMendtape \TMstroke \TMstroke \TMstroke_0 \TMstroke \TMblank \ldots
+\]
+ومع استمرار الآلة تطبق القواعد بالترتيب نفسه مرة أخرى، فتنتج
+التهيئتان الآتيتان:
+\[
+\TMendtape \TMstroke \TMstroke \TMstroke \TMstroke_1 \TMblank \ldots
+\]
+\[
+\TMendtape \TMstroke \TMstroke \TMstroke \TMstroke \TMblank_0 \ldots
+\]
+الآلة الآن في الحالة~$q_0$ وتمسح~$\TMblank$. ومن مخطط الانتقال نرى
+بسهولة أنه لا توجد تعليمة تنفذ، ولذلك توقفت الآلة. وهذا يعني أن الدخل
+قد قُبل.
+
+ولنفترض بعد ذلك أننا بدأنا الآلة بدخل مؤلف من ثلاث علامات
+$\TMstroke$. تتشابه التهيئات الأولى لأن التعليمات نفسها تنفذ، مع فرق
+صغير في دخل الشريط:
+\[
+\TMendtape \TMstroke_0 \TMstroke \TMstroke \TMblank \ldots
+\]
+\[
+\TMendtape \TMstroke \TMstroke_1 \TMstroke \TMblank \ldots
+\]
+\[
+\TMendtape \TMstroke \TMstroke \TMstroke_0 \TMblank \ldots
+\]
+\[
+\TMendtape \TMstroke \TMstroke \TMstroke \TMblank_1 \ldots
+\]
+لقد اجتازت الآلة الآن جميع علامات $\TMstroke$، وهي تقرأ~$\TMblank$
+في الحالة~$q_1$. وكما يبين المخطط، توجد تعليمة من الصورة
+$\delta(q_1,\TMblank)=\tuple{q_1,\TMblank,\TMright}$. ولما كان الشريط
+مملوءًا إلى غير نهاية برموز $\TMblank$ نحو اليمين، فستواصل الآلة
+تنفيذ هذه التعليمة \emph{إلى الأبد}، باقية في الحالة~$q_1$ ومتحركة
+مسافة متزايدة نحو اليمين. ولن تتوقف الآلة قط، فلا تقبل الدخل.
+\end{explain}
+
+\begin{explain}
+من المهم ملاحظة أن الآلات لا تتوقف كلها. فإذا كان التوقف يعني نفاد
+التعليمات التي تنفذها الآلة، أمكننا إنشاء آلة لا تتوقف قط بمجرد ضمان
+وجود سهم خارج لكل رمز في كل حالة. ويمكن تعديل آلة الزوجية كي تعمل
+إلى غير نهاية بإضافة تعليمة لمسح $\TMblank$ في~$q_0$.
+\end{explain}
+
+\begin{ex}
+\[
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+                    semithick]
+  \tikzstyle{every state}=[fill=none,draw=black,text=black]
+
+  \node[initial,state] (A)              {$q_0$};
+  \node[state]         (B) [right of=A] {$q_1$};
+
+  \path
+  (A) edge [bend left] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (B)
+      edge [loop above] node {\TMtrans{\TMblank}{\TMblank}{\TMright}} (A)
+  (B) edge [loop above] node {\TMtrans{\TMblank}{\TMblank}{\TMright}} (B)
+      edge [bend left] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (A);
+\end{tikzpicture}
+\]
+\end{ex}
+
+\begin{explain}
+جداول الآلة طريقة أخرى لتمثيل آلات تورنغ. تعرض هذه الجداول أبجدية
+الشريط على المحور $x$، ومجموعة حالات الآلة على المحور $y$. ويكتب داخل
+الجدول، عند تقاطع كل حالة ورمز، باقي التعليمة: الحالة الجديدة والرمز
+الجديد واتجاه الحركة. وتسهل جداول الآلة تحديد الحالة والرمز اللذين
+تتوقف عندهما الآلة. فكل خانة فارغة في الجدول موضع محتمل لتوقف الآلة.
+وفي حين لا تتضح مواضع توقف الآلة دائمًا من مخططات الحالات ومجموعات
+التعليمات مباشرة، يسهل التعرف على جميع مواضع التوقف بالعثور على
+الخانات الفارغة في جدول الآلة.
+\end{explain}
+
+\begin{ex}
+جدول آلة الزوجية هو:
+\[
+\centering
+\begin{tabular}{lllll}
+\cline{2-4}
+\multicolumn{1}{l|}{}      & \multicolumn{1}{c|}{$\TMblank$}
+& \multicolumn{1}{c|}{$\TMstroke$}     & \multicolumn{1}{c|}{$\TMendtape$}   &  \\ \cline{1-4}
+\multicolumn{1}{|l|}{$q_0$} & \multicolumn{1}{l|}{}
+& \multicolumn{1}{l|}{\TMtrans{\TMstroke}{q_1}{\TMright}} &
+\multicolumn{1}{l|}{\phantom{\TMtrans{\TMstroke}{q_1}{\TMright}}} &  \\ \cline{1-4}
+\multicolumn{1}{|l|}{$q_1$} & \multicolumn{1}{l|}{\TMtrans{\TMblank}{q_1}{\TMright}}
+& \multicolumn{1}{l|}{\TMtrans{\TMstroke}{q_0}{\TMright}} &
+\multicolumn{1}{l|}{\phantom{\TMtrans{\TMstroke}{q_1}{\TMright}}} &  \\ \cline{1-4}
+\end{tabular}
+\]
+وكما نرى، تتوقف الآلة حين تمسح~$\TMblank$ في الحالة~$q_0$.
+\end{ex}
+
+\begin{explain}
+لم ننظر حتى الآن إلا في آلات تقرأ الدخل وتقبله. لكن آلات تورنغ قادرة
+على القراءة والكتابة معًا. ومن أمثلة هذه الآلات (وهي كثيرة جدًا)
+\emph{آلة المضاعفة}. فإذا بدأت آلة المضاعفة بكتلة من $n$ من علامات
+$\TMstroke$ على الشريط، أخرجت كتلة من $2n$ من علامات $\TMstroke$.
+\end{explain}
+
+\begin{ex}
+  \ollabel{ex:doubler} قبل بناء آلة مضاعفة، من المهم وضع
+  \emph{استراتيجية} لحل المسألة. ولما كانت الآلة (بالصيغة التي
+  قدمناها) لا تستطيع تذكر عدد علامات $\TMstroke$ التي قرأتها، فعلينا
+  ابتكار طريقة لتتبع كل علامات $\TMstroke$ على الشريط. ومن هذه الطرائق
+  فصل الخرج عن الدخل بعلامة~$\TMblank$. وعندئذ تستطيع الآلة محو أول
+  $\TMstroke$ من الدخل، واجتياز بقية الدخل، وترك $\TMblank$، وكتابة
+  علامتي $\TMstroke$ جديدتين. ثم تعود الآلة وتجد ثاني $\TMstroke$ في
+  الدخل وتضاعفها أيضًا. فهي تكتب، لكل $\TMstroke$ واحدة من الدخل،
+  علامتي $\TMstroke$ من الخرج. وبمحو الدخل أثناء سير الآلة نضمن ألا
+  تفوت أي علامة $\TMstroke$ وألا تضاعف أي منها مرتين. وحين يمحى الدخل
+  كله تبقى على الشريط $2n$ من علامات $\TMstroke$. ويصور
+  \olref{fig:doubler} مخطط حالات آلة تورنغ الناتجة.
+  \begin{figure}
+\[
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+                    semithick]
+  \tikzstyle{every state}=[fill=none,draw=black,text=black]
+
+  \node[initial,state] (1)              {$q_0$};
+  \node[state]         (2) [right of=1] {$q_1$};
+  \node[state]         (3) [right of=2] {$q_2$};
+  \node[state]         (4) [below of=3] {$q_3$};
+  \node[state]         (5) [left of=4]  {$q_4$};
+  \node[state]         (6) [left of=5]  {$q_5$};
+
+  \path (1) edge node {\TMtrans{\TMstroke}{\TMblank}{\TMright}} (2)
+    (2) edge [loop above] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (2)
+      edge node {\TMtrans{\TMblank}{\TMblank}{\TMright}} (3)
+    (3) edge [loop above] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (3)
+        edge node {\TMtrans{\TMblank}{\TMstroke}{\TMright}} (4)
+    (4) edge [loop below] node {\TMtrans{\TMblank}{\TMstroke}{\TMleft}} (4)
+        edge node {\TMtrans{\TMstroke}{\TMstroke}{\TMleft}} (5)
+    (5) edge [loop below]  node {\TMtrans{\TMstroke}{\TMstroke}{\TMleft}} (5)
+        edge              node {\TMtrans{\TMblank}{\TMblank}{\TMleft}} (6)
+    (6) edge [loop below] node {\TMtrans{\TMstroke}{\TMstroke}{\TMleft}} (6)
+        edge              node {\TMtrans{\TMblank}{\TMblank}{\TMright}} (1);
+\end{tikzpicture}
+\]
+\caption{آلة مضاعفة}
+\ollabel{fig:doubler}
+\end{figure}
+\end{ex}
+
+\begin{prob}
+اختر دخلًا اعتباطيًا وتتبع تهيئات آلة المضاعفة في
+\olref[tur][mac][rep]{ex:doubler}.
+\end{prob}
+
+\begin{prob}
+صمم آلة تورنغ أبجديتها $\{\TMendtape,\TMblank,A,B\}$ تقبل، أي تتوقف
+عند، كل سلسلة من الرمزين $A$ و$B$ يتساوى فيها عدد رموز $A$ وعدد رموز
+$B$ \emph{وتسبق} فيها كل رموز $A$ جميع رموز $B$، وترفض، أي لا تتوقف
+عند، كل سلسلة لا يتساوى فيها العددان أو لا تسبق فيها كل رموز $A$
+جميع رموز~$B$. (ينبغي مثلًا أن تقبل الآلة $AABB$ و$AAABBB$، وأن ترفض
+$AAB$ و$AABBAABB$.)
+\end{prob}
+
+\begin{prob}
+صمم آلة تورنغ أبجديتها $\{\TMendtape,\TMblank,A,B\}$ تأخذ دخلًا أي
+سلسلة $\alpha$ من الرمزين $A$ و$B$، وتنسخها لتنتج خرجًا على الصورة
+$\alpha\alpha$. (ينبغي مثلًا أن ينتج عن الدخل $ABBA$ الخرج
+$ABBAABBA$.)
+\end{prob}
+
+\begin{prob}
+\emph{مرتبة أبجديًا؟} صمم آلة تورنغ أبجديتها
+$\{\TMendtape,\TMblank,A,B\}$ تأخذ دخلًا متتالية منتهية من الرمزين
+$A$ و$B$ وتتحقق مما إذا كانت كل رموز $A$ واقعة إلى يسار كل رموز $B$.
+وينبغي أن تترك الآلة سلسلة الدخل على الشريط، وأن تتوقف إذا كانت
+السلسلة «مرتبة أبجديًا»، أو تدور إلى الأبد إذا لم تكن كذلك.
+\end{prob}
+
+\begin{prob}
+\emph{آلة ترتيب أبجدي:} صمم آلة تورنغ أبجديتها
+$\{\TMendtape,\TMblank,A,B\}$ تأخذ دخلًا متتالية منتهية من الرمزين
+$A$ و$B$ وتعيد ترتيبها بحيث تقع كل رموز $A$ إلى يسار كل رموز~$B$.
+(مثلًا ينبغي أن تصير المتتالية $BABAA$ المتتالية $AAABB$، وأن تصير
+المتتالية $ABBABB$ المتتالية $AABBBB$.)
+\end{prob}
+
+\end{document}

@@ -1,0 +1,101 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{z}{sep}
+\olsection{في الفصل}
+
+نستفتح بمبدأ يقوم مقام الاستيعاب الساذج:
+
+\begin{axiom}[مخطط الفصل] لكل صيغة~$\phi(x)$ يكون الحكم الآتي مسلّمة:
+لكل~$A$ توجد المجموعة~$\Setabs{x \in A}{\phi(x)}$.
+\end{axiom}
+
+وليس هذا مسلّمة مفردة، بل \emph{مخطط} مسلّمات؛ فمسلّمات الفصل
+\emph{غير متناهية العدد}، لكل صيغة~$\phi(x)$ واحدة. وصيغته المكافئة
+المعهودة هي:
+
+\begin{defish}
+لكل صيغة~$\phi(x)$ لا يرد فيها «$S$»، يكون الآتي مسلّمة:
+\[
+	\forall A \exists S \forall x(x \in S \liff (\phi(x) \land x \in A)).
+\]
+\end{defish}
+
+وبحسب الاصطلاح المقرر في صدر~\olref[sth][][]{part}، يجوز أن تشتمل
+الصيغ~$\phi$ في مسلّمات الفصل على معاملات.\footnote{لشرح معنى ذلك،
+  انظر المناقشة التي تلي مباشرة
+  \olref[sfr][infinite][induction]{natinductionschema}.}
+
+والتصور التراكمي-التكراري يسوغ الفصل من فوره. خذ مجموعة~$A$؛ فإن~$A$
+قد تكونت عند مرحلة~$S$ ما بموجب~\stageshier. ولأن~$A$ تكونت في
+المرحلة~$S$، تكونت عناصر~$A$ كلها قبل المرحلة~$S$ بموجب~\stagesacc.
+فالمجموعات التي تنتمي إلى~$A$ وتحقق~$\phi$ تكونت أيضًا قبل
+المرحلة~$S$، ومن ثم تُجمع في~$\Setabs{x \in A}{\phi(x)}$ عند
+المرحلة~$S$ بموجب~\stagesacc.
+
+وهذا، على خلاف الاستيعاب الساذج، سالم من مفارقة راسل؛ فلا يثبت به
+وجود~$\Setabs{x}{x \notin x}$ مطلقًا. وإنما إذا \emph{أُعطينا}
+مجموعة~$A$ أثبتنا~$R_A = \Setabs{x \in A}{x \notin x}$. ولا يلزم
+من ذلك إلا~$R_A \notin R_A$ و$R_A \notin A$، وليس فيهما محذور.
+
+لكن للفصل نتيجة قريبة جديرة بالتنبيه:
+
+\begin{thm}\ollabel{thm:NoUniversalSet}
+يمتنع وجود مجموعة \emph{شاملة}؛ أي لا توجد~$\Setabs{x}{x = x}$.
+\end{thm}
+
+\begin{proof}
+افرض بالخلف أن~$V$ مجموعة شاملة. فعندئذ توجد، بموجب الفصل،
+$R = \Setabs{x \in V}{x \notin x} = \Setabs{x}{x \notin x}$،
+وهذا يناقض مفارقة راسل.
+\end{proof}
+
+وعدم المجموعة الشاملة، أو انفتاح هرم المجموعات، من أصول التصور
+التراكمي-التكراري. ويمكن إدراك النتيجة من وجه آخر: فلو كانت مجموعة
+شاملة لكانت !!a{element} في نفسها. لكن كل مجموعة، بحسب التصور، لا تظهر
+أول مرة في الهرم إلا في أول مرحلة تلي جميع ما ينتمي إليها من
+!!{element}. فيلزم أن \emph{لا} تنتمي مجموعة إلى نفسها؛ وإلا لوجب أن
+يكون أول ظهورها بعد المرحلة التي وقع فيها أول ظهورها، وهو محال. (وسنرى
+في
+\olref[sth][spine][rank]{defnsetrank} كيف نجعل هذا الشرح أدق باستعمال
+مفهوم «رتبة» المجموعة. لكننا سنحتاج إلى وضع بضع مسلّمات أخرى قبل ذلك.)
+% تصحيح ترقيمي (0539-N1): أعيد قوس البدء للملاحظة الاعتراضية.
+
+ومن الفصل والامتدادية تلزم أيضًا النتائج الآتية.
+
+\begin{prop}\ollabel{prop:emptyexists}
+متى وُجدت مجموعة ما وُجدت~$\emptyset$.
+\end{prop}
+
+\begin{proof}
+  إذا كانت~$A$ مجموعة، وُجدت
+  $\emptyset = \Setabs{x \in A}{x \neq x}$ بموجب الفصل.
+\end{proof}
+
+\begin{prop}
+توجد~$A \setminus B$ متى أُعطيت مجموعتان~$A$ و$B$.
+\end{prop}
+
+\begin{proof}
+توجد~$A \setminus B = \Setabs{x \in A}{x \notin B}$ بموجب الفصل.
+\end{proof}
+
+ويكاد الفصل يثبت وجود التقاطعات الاعتباطية أيضًا:
+
+\begin{prop}\ollabel{prop:intersectionsexist}
+  متى كان~$A \neq \emptyset$، وُجدت
+  $\bigcap A = \Setabs{x}{(\forall y \in A)x \in y}$.
+\end{prop}
+
+\begin{proof}
+افرض~$A \neq \emptyset$؛ فيوجد~$c \in A$. وعندئذ
+$\bigcap A = \Setabs{x}{(\forall y \in A)x \in y} =
+\Setabs{x \in c}{(\forall y \in A)x \in y}$، وهي موجودة بموجب الفصل.
+\end{proof}
+
+ولا بد من الشرط~$A \neq \emptyset$؛ لأن~$\bigcap \emptyset$، لو وُجد،
+لكان المجموعة الشاملة بصدق فارغ، وهذا مخالف لـ
+\olref{thm:NoUniversalSet}.
+
+\end{document}

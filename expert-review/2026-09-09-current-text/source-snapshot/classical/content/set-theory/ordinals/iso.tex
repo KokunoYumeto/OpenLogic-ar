@@ -1,0 +1,166 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{ordinals}{iso}
+\olsection{تماثلات الترتيب}
+
+نبدأ بطريقة نقارن بها بين الترتيبات الجيدة؛ فبها يتبين \emph{مدى}
+ثبات بنيتها.
+
+\begin{defn}
+\emph{الترتيب الجيد} هو الزوج~$\tuple{A, <}$ إذا كانت~$<$ ترتب
+$A$ ترتيبًا جيدًا. ونقول إن الترتيبين الجيدين~$\tuple{A, <}$
+و$\tuple{B, \lessdot}$ \emph{متماثلان ترتيبيًا} إذا وفقط إذا وجد
+!!a{bijection}~$f \colon A \to B$ يحقق الشرط الآتي: $x < y$ إذا
+وفقط إذا كان~$f(x) \lessdot f(y)$. وحينئذ نكتب
+$\ordeq{\tuple{A, <}}{\tuple{B, \lessdot}}$، ونسمي~$f$
+\emph{تماثلًا ترتيبيًا}.
+\end{defn}
+\noindent
+ونقتصر فيما يلي على لفظ «التماثل» اختصارًا لـ«تماثل الترتيب». والمعنى
+الحدسي أن التماثلات !!{bijection}s تحفظ البنية. ولنذكر أولًا بعض
+خواصها اليسيرة.
+
+\begin{lem}\ollabel{isoscompose}
+إذا رُكّبت التماثلات كان تركيبها تماثلًا؛ فإذا كان~$f \colon A \to B$
+و$g \colon B \to C$ تماثلين، كان~$(g \circ f) \colon A \to C$
+تماثلًا كذلك.
+\end{lem}
+\begin{prob}
+أقم البرهان على~\olref[sth][ordinals][iso]{isoscompose}.
+\end{prob}
+\begin{proof}
+يُترك إثباتها للقارئ تمرينًا.
+\end{proof}
+\begin{cor}\ollabel{ordisoisequiv}
+العلاقة~$\ordeq{X}{Y}$ علاقة تكافؤ.
+\end{cor}
+\begin{prop}\ollabel{ordisounique}
+إذا تماثل الترتيبان الجيدان~$\tuple{A, <}$ و$\tuple{B, \lessdot}$،
+لم يكن بينهما إلا تماثل واحد.
+\end{prop}
+
+\begin{proof}
+لنفرض أن~$f$ و$g$ تماثلان~$A \to B$. وسبيلنا إلى إثبات تساويهما
+الاستقراء الوارد في~\olref[wo]{propwoinduction}.
+  نثبّت~$a\in A$، ونأخذ فرض الاستقراء
+  $(\forall b < a)f(b) = g(b)$، ثم نثبّت~$x \in B$.
+
+إن كان~$x \lessdot f(a)$، لزم~$f^{-1}(x) < a$، ثم
+$g(f^{-1}(x)) \lessdot g(a)$، إذ إن~$f$ و$g$ تماثلان. ولما كان
+$f^{-1}(x) < a$ أعطى فرض الاستقراء
+$x =f(f^{-1}(x)) = g(f^{-1}(x))$؛ فيكون~$x \lessdot g(a)$.
+وبالحجة نفسها، إن كان~$x \lessdot g(a)$ كان~$x \lessdot f(a)$.
+
+إذن~$(\forall x \in B)(x \lessdot f(a) \liff x \lessdot g(a))$.
+ومن~\olref[sfr][rel][ord]{prop:extensionality-strictlinearorders}
+يلزم~$f(a) = g(a)$. وعليه
+$(\forall a \in A)f(a) = g(a)$، بحسب~\olref[wo]{propwoinduction}.
+\end{proof}\noindent
+هذا أول ما يكشف عن ثبات بنية الترتيبات الجيدة. ولكي نستوفي البيان
+نحتاج إلى ترميز آخر.
+
+\begin{defn}
+متى كان~$\tuple{A, <}$ ترتيبًا جيدًا و$a \in A$، وضعنا
+$A_a = \Setabs{x \in A}{x < a}$. وتسمى~$A_a$ \emph{قطعة ابتدائية
+حقيقية} من~$A$؛ أما~$A$ نفسها فنعدها قطعة ابتدائية غير حقيقية من~$A$.
+ونرمز بـ$<_a$ إلى تقييد~$<$ بهذه القطعة، أي إلى
+$\funrestrictionto{\mathord{<}}{A_a^2}$.
+\end{defn}
+\noindent
+وبهذا الترميز نصوغ امتناع تماثل أي ترتيب جيد مع قطعة ابتدائية حقيقية
+منه، ثم نبرهنه.
+
+\begin{lem}\ollabel{wellordnotinitial}
+إذا كان~$\tuple{A, <}$ ترتيبًا جيدًا و$a \in A$، لزم
+$\ordneq{\tuple{A, <}}{\tuple{A_a, <_a}}$.
+\end{lem}
+
+\begin{proof}
+لنفرض، طلبًا للخلف، أن~$f \colon A \to A_a$ تماثل. ولأن~$f$ تقابل
+و$A_a \subsetneq A$، نأخذ~$b \in A$، بمقتضى
+\olref[wo]{wo:strictorder}، أصغر !!{element} في~$A$ بحسب~$<$
+مما يحقق~$b \neq f(b)$. وسنثبت
+$(\forall x \in A)(x<b \liff x < f(b))$؛ إذ ينتج من ذلك، بمقتضى
+\olref[sfr][rel][ord]{prop:extensionality-strictlinearorders}،
+أن~$b = f(b)$، وهو الخلف المطلوب.
+
+أما إذا كان~$x < b$، فإن~$x = f(x)$ بحكم اختيار~$b$. ثم
+$f(x) < f(b)$ لحفظ~$f$ الترتيب، فيلزم~$x < f(b)$.
+
+وأما إذا كان~$x < f(b)$، فإن~$f^{-1}(x) < b$ لأن~$f$ تماثل؛ فيكون
+$f^{-1}(x) = x$ بحكم اختيار~$b$، ويلزم~$x < b$.
+\end{proof}
+
+وفي النتيجة التالية معنى يمكن تقريبه بالقول: إن «القطعة الابتدائية»
+من التماثل تبقى تماثلًا.
+
+\begin{lem}\ollabel{wellordinitialsegment}
+ليكن~$\tuple{A, <}$ و$\tuple{B, \lessdot}$ ترتيبين جيدين. متى كان
+$f \colon A \to B$ تماثلًا و$a \in A$، كان
+$\funrestrictionto{f}{A_{a}} : A_a \to B_{f(a)}$ تماثلًا.
+\end{lem}
+
+\begin{proof}
+من كون~$f$ تماثلًا نحصل على:
+%Since $f$ is an isomorphism, $b < a$ iff $f(b) \lessdot f(a)$, so that
+\begin{align*}
+\funimage{f}{A_a} &= \funimage{f}{\Setabs{x \in A}{x < a}}\\
+&= \Setabs{y \in B}{f^{-1}(y)<a} \\
+&= \Setabs{y \in B}{y \lessdot f(a)} \\
+&=B_{f(a)}
+\end{align*}
+وأما حفظ~$\funrestrictionto{f}{A_a}$ للترتيب فموروث من حفظ~$f$ له.
+\end{proof}
+
+ونثبت الآن، في نتيجتين، أن المقارنة بين الترتيبات الجيدة ممكنة دائمًا.
+
+\begin{lem}\ollabel{lemordsegments}
+ليكن~$\tuple{A, <}$ و$\tuple{B, \lessdot}$ ترتيبين جيدين. إذا كان
+$\ordeq{\tuple{A_{a_1}, <_{a_1}}}{\tuple{B_{b_1}, \lessdot_{b_1}}}$
+و$\ordeq{\tuple{A_{{a_2}}, <_{a_2}}}{\tuple{B_{{b_2}}, \lessdot_{b_2}}}$،
+فإن~${a_1} < {a_2} \text{ إذا وفقط إذا كان } {b_1} \lessdot {b_2}$.
+\end{lem}
+
+\begin{proof}
+نبرهن الاتجاه \emph{من اليسار إلى اليمين}؛ ويجري الآخر على مثاله.
+لنفرض
+$\ordeq{\tuple{A_{a_1}, <_{a_1}}}{\tuple{B_{b_1}, \lessdot_{b_1}}}$
+و$\ordeq{\tuple{A_{{a_2}}, <_{a_2}}}{\tuple{B_{{b_2}}, \lessdot_{b_2}}}$،
+وليكن~$f \colon A_{{a_2}} \to B_{{b_2}}$ التماثل الثاني. فإذا كان
+${a_1} < {a_2}$، كان
+$\ordeq{\tuple{A_{a_1}, <_{a_1}}}{\tuple{B_{f({a_1})}, \lessdot_{f({a_1})}}}$
+بمقتضى~\olref{wellordinitialsegment}. ومن ثم
+$\ordeq{\tuple{B_{b_1}, \lessdot_{b_1}}}{\tuple{B_{f({a_1})}, \lessdot_{f({a_1})}}}$،
+فينتج~${b_1} = f({a_1})$ من~\olref{wellordnotinitial}. وأخيرًا
+${b_1} \lessdot {b_2}$، إذ مدى~$f$ هو~$B_{{b_2}}$.
+\end{proof}
+
+\begin{thm}\ollabel{thm:woalwayscomparable}
+كل ترتيبين جيدين يتماثل أحدهما مع قطعة ابتدائية من الآخر، ولا يلزم
+أن تكون تلك القطعة حقيقية.
+\end{thm}
+
+\begin{proof}
+نأخذ ترتيبين جيدين~$\tuple{A, <}$ و$\tuple{B, \lessdot}$، ونضع
+بمسلّمة الفصل:
+\[
+f = \Setabs{\tuple{a, b} \in A \times B}{
+\ordeq{\tuple{A_a, <_a}}{\tuple{B_b, \lessdot_b}}}.
+\]
+تقتضي~\olref{lemordsegments} أن~$a_1 < a_2$ إذا وفقط إذا كان
+$b_1 \lessdot b_2$، لكل~$\tuple{a_1, b_1}, \tuple{a_2, b_2} \in f$.
+فيكون~$f \colon \dom{f} \to \ran{f}$ تماثلًا.
+
+وإذا كان~$a_2 \in \dom{f}$ و$a_1 < a_2$، لزم~$a_1 \in \dom{f}$
+بمقتضى~\olref{wellordinitialsegment}؛ ومن ثم فإن~$\dom{f}$ قطعة
+ابتدائية من~$A$. وكذلك~$\ran{f}$ قطعة ابتدائية من~$B$. ولنفرض
+خلاف المطلوب، أي أن القطعتين \emph{حقيقيتان}. نأخذ~$a$ أصغر
+!!{element} بحسب~$<$ في~$A \setminus \dom{f}$، فيكون~$\dom{f} = A_a$؛
+ونأخذ~$b$ أصغر !!{element} بحسب~$\lessdot$ في~$B \setminus \ran{f}$،
+فيكون~$\ran{f} = B_b$. إذن~$f \colon A_a \to B_b$ تماثل، فيلزم
+$\tuple{a, b} \in f$، وهذا تناقض.
+\end{proof}
+
+\end{document}

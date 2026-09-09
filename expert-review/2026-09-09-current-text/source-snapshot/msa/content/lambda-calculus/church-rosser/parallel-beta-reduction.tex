@@ -1,0 +1,159 @@
+% Part: lambda-calculus
+% Chapter: church-rosser
+% Section: parallel-beta-reduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{cr}{pb}
+
+\olsection{اختزال~$\beta$ المتوازي}
+
+نقدم مفهوم \emph{اختزال~$\beta$ المتوازي}، ونثبت أنه يحقق خاصية
+تشيرش--روسر.
+
+\begin{defn}[اختزال~$\beta$ المتوازي، $\bredpar$] \ollabel{defn:bredpar}
+  يعرّف الاختزال المتوازي ($\bredpar$) للحدود استقرائيًا كما يأتي:
+  \begin{enumerate}
+    \item \ollabel{defn:bredpar1} $x \bredpar x$.
+    \item \ollabel{defn:bredpar2} إذا كان~$N \bredpar N'$، فإن
+      $\lambd[x][N] \bredpar \lambd[x][N']$.
+    \item \ollabel{defn:bredpar3} إذا كان~$P \bredpar P'$ و
+      $Q \bredpar Q'$، فإن~$PQ \bredpar P'Q'$.
+    \item \ollabel{defn:bredpar4} إذا كان~$N \bredpar N'$ و
+      $Q \bredpar Q'$، فإن
+      $(\lambd[x][N])Q \bredpar \Subst{N'}{Q'}{x}$.
+  \end{enumerate}
+\end{defn}
+
+يتيح لنا اختزال~$\beta$ المتوازي اختزال أي عدد من مواضع الاختزال في
+حد ما بخطوة واحدة. وهو يختلف عن اختزال~$\beta$ من حيث إننا لا نستطيع
+تقليص إلا مواضع الاختزال الواقعة في الحد الأصلي، لا المواضع الناشئة
+عن اختزال~$\beta$ المتوازي. فمثلًا، لا يمكن اختزال الحد
+$(\lambd[f][fx])(\lambd[y][y])$ اختزالًا متوازيًا إلا إلى نفسه أو إلى
+$(\lambd[y][y])x$، ولا يمكن مواصلة اختزاله إلى~$x$، مع أنه يختزل
+بحسب~$\beta$ إلى~$x$، لأن موضع الاختزال هذا لا ينشأ إلا بعد خطوة واحدة
+من اختزال~$\beta$ المتوازي. غير أن خطوة ثانية من اختزال~$\beta$
+المتوازي تعطي~$x$.
+
+\begin{thm}\ollabel{thm:refl}
+  $M \bredpar M$.
+\end{thm}
+
+\begin{proof}
+  تمرين.
+\end{proof}
+
+\begin{prob}
+  أثبت \olref[lam][cr][pb]{thm:refl}.
+\end{prob}
+
+\begin{defn}[التطوير الكامل بحسب~$\beta$]\ollabel{defn:bcd}
+  يعرّف \emph{التطوير الكامل بحسب~$\beta$}، $\bcd{M}$، للحد~$M$
+  استقرائيًا كما يأتي:
+  \begin{align}
+    \bcd{x} &= x \ollabel{defn:bcd1} \\
+    \bcd{(\lambd[x][N])} &= \lambd[x][\bcd{N}] \ollabel{defn:bcd2}\\
+    \bcd{(PQ)} &= \bcd{P}\bcd{Q} && \text{إذا لم يكن~$P$ تجريد~$\lambd$}
+    \ollabel{defn:bcd3} \\
+    \bcd{((\lambd[x][N])Q)} &= \Subst{\bcd{N}}{\bcd{Q}}{x} \ollabel{defn:bcd4}
+  \end{align}
+\end{defn}
+
+إن التطوير الكامل بحسب~$\beta$ لحد ما، كما يوحي اسمه، هو ``اختزال
+متواز كامل''. ففي اختزال~$\beta$ المتوازي لا يزال بوسعنا اختيار عدم
+تقليص موضع اختزال، أما في التطوير الكامل فلا خيار لنا إلا تقليصها
+جميعًا. ومن ثم فإن التطوير الكامل للحد
+$(\lambd[f][fx])(\lambd[y][y])$ هو~$(\lambd[y][y])x$، لا الحد نفسه.
+
+\begin{editorial}
+  يواجه هذا التعريف مشكلة أننا لم نقدم بعد كيفية تعريف الدوال على
+  حدود~$\lambd$ تعريفًا عوديًا. وسيصلح ذلك مستقبلًا.
+\end{editorial}
+
+\begin{lem}\ollabel{lem:comp}
+  إذا كان~$M \bredpar M'$ و$R \bredpar R'$، فإن~$\Subst{M}{R}{y}
+  \bredpar \Subst{M'}{R'}{y}$.
+\end{lem}
+
+\begin{proof}
+  بالاستقراء على~!!{derivation} لـ$M \bredpar M'$. وحيث يلزم، نعيد
+  تسمية الممثلين بتحويل~$\alpha$ قبل تطبيق حالات الاستبدال بحيث يكون
+  متغير التجريد~$x \ne y$ ولا يقع~$x$ حرًا في~$R$ أو~$R'$.
+  \begin{enumerate}
+    \item الخطوة الأخيرة هي \olref{defn:bredpar1}: تمرين.
+    \item الخطوة الأخيرة هي \olref{defn:bredpar2}: عندئذ يكون~$M$
+      هو~$\lambd[x][N]$ و$M'$ هو~$\lambd[x][N']$، حيث
+      $N \bredpar N'$. نريد إثبات
+      $\Subst{(\lambd[x][N])}{R}{y} \bredpar
+      \Subst{(\lambd[x][N'])}{R'}{y}$، أي
+      $\lambd[x][\Subst{N}{R}{y}] \bredpar
+      \lambd[x][\Subst{N'}{R'}{y}]$. وهذا يتبع مباشرة من
+      \olref{defn:bredpar2} وفرض الاستقراء.
+    \item الخطوة الأخيرة هي \olref{defn:bredpar3}: تمرين.
+    \item الخطوة الأخيرة هي \olref{defn:bredpar4}: يكون~$M$ هو
+      $(\lambd[x][N])Q$ و$M'$ هو~$\Subst{N'}{Q'}{x}$. نريد إثبات
+      $\Subst{((\lambd[x][N])Q)}{R}{y} \bredpar
+      \Subst{\Subst{N'}{Q'}{x}}{R'}{y}$، أي
+      $(\lambd[x][\Subst{N}{R}{y}])\Subst{Q}{R}{y} \bredpar
+      \Subst{\Subst{N'}{R'}{y}}{\Subst{Q'}{R'}{y}}{x}$. ويتبع هذا
+      من \olref{defn:bredpar4} وفرض الاستقراء.
+  \end{enumerate}
+\end{proof}
+
+\begin{prob}
+  أكمل إثبات \olref[lam][cr][pb]{lem:comp}.
+\end{prob}
+
+\begin{lem}\ollabel{lem:cont}
+  إذا كان~$M \bredpar M'$، فإن~$M' \bredpar \bcd{M}$.
+\end{lem}
+\begin{proof}
+  بالاستقراء على~!!{derivation} لـ$M \bredpar M'$.
+  \begin{enumerate}
+    \item القاعدة الأخيرة هي \olref{defn:bredpar1}: تمرين.
+    \item القاعدة الأخيرة هي \olref{defn:bredpar2}: يكون~$M$
+      هو~$\lambd[x][N]$ و$M'$ هو~$\lambd[x][N']$، مع
+      $N \bredpar N'$. نريد بيان أن~$\lambd[x][N'] \bredpar
+      \bcd{(\lambd[x][N])}$، أي إن~$\lambd[x][N'] \bredpar
+      \lambd[x][\bcd{N}]$ بحسب \olref{defn:bcd2}. ويتبع ذلك من
+      \olref{defn:bredpar2} وفرض الاستقراء.
+    \item القاعدة الأخيرة هي \olref{defn:bredpar3}: يكون~$M$ هو~$PQ$
+      و$M'$ هو~$P'Q'$ لبعض~$P$ و$Q$ و$P'$ و$Q'$، مع
+      $P \bredpar P'$ و$Q \bredpar Q'$. وبفرض الاستقراء لدينا
+      $P' \bredpar \bcd{P}$ و$Q' \bredpar \bcd{Q}$.
+      \begin{enumerate}
+        \item إذا كان~$P$ هو~$\lambd[x][N]$ لبعض~$x$ و$N$، فلا بد
+          أن يكون~$P'$ هو~$\lambd[x][N']$ لبعض~$N'$ مع
+          $N \bredpar N'$. وبفرض الاستقراء لدينا~$N' \bredpar \bcd{N}$
+          و$Q' \bredpar \bcd{Q}$. وعندئذ
+          $(\lambd[x][N'])Q' \bredpar
+          \Subst{\bcd{N}}{\bcd{Q}}{x}$ بحسب \olref{defn:bredpar4}.
+        \item إذا لم يكن~$P$ تجريد~$\lambd$، فإن
+          $P'Q' \bredpar \bcd{P}\bcd{Q}$ بحسب \olref{defn:bredpar3}،
+          والطرف الأيمن هو~$\bcd{PQ}$ بحسب \olref{defn:bcd3}.
+      \end{enumerate}
+    \item القاعدة الأخيرة هي \olref{defn:bredpar4}: يكون~$M$ هو
+      $(\lambd[x][N])Q$ و$M'$ هو~$\Subst{N'}{Q'}{x}$ لبعض~$x$ و$N$
+      و$Q$ و$N'$ و$Q'$، مع~$N \bredpar N'$ و$Q \bredpar Q'$.
+      وبفرض الاستقراء نعلم أن~$N' \bredpar \bcd{N}$ و
+      $Q' \bredpar \bcd{Q}$. ومن \olref{lem:comp} نحصل على
+      $\Subst{N'}{Q'}{x} \bredpar \Subst{\bcd{N}}{\bcd{Q}}{x}$،
+      وطرفها الأيمن هو بالضبط~$\bcd{((\lambd[x][N])Q)}$.
+  \end{enumerate}
+\end{proof}
+
+\begin{prob}
+  أكمل إثبات \olref[lam][cr][pb]{lem:cont}.
+\end{prob}
+
+\begin{thm}\ollabel{thm:cr}
+  تحقق~$\bredpar$ خاصية تشيرش--روسر.
+\end{thm}
+
+\begin{proof}
+  يتبع ذلك مباشرة من \olref{lem:cont}.
+\end{proof}
+
+\end{document}

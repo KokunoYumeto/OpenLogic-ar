@@ -1,0 +1,127 @@
+% Part: incompleteness
+% Chapter: incompleteness-provability
+% Section: first-incompleteness-thm
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{inp}{1in}
+
+\olsection{مبرهنة عدم الاكتمال الأولى}
+
+يمكننا الآن وصف برهان غودل الأصلي لمبرهنة عدم الاكتمال الأولى. لتكن
+$\Th{T}$ أي نظرية مؤكسمة حسابيًا في لغة تمتد لغة الحساب، ولتشتمل
+$\Th{T}$ على بديهيات~$\Th{Q}$. وهذا يعني، على وجه الخصوص، أن
+$\Th{T}$ تمثل الدوال والعلاقات القابلة للحساب.
+
+سبق أن حاججنا بأن العلاقة $\Prf[\Th{T}](x,y)$ قابلة للحساب، متى
+اخترنا ترميزًا معقولًا للصيغ والبراهين بأعداد، وأن
+$\Prf[\Th{T}](x,y)$ تصدق إذا وفقط إذا كان $x$ عدد غودل
+لـ!!a{derivation} للـ!!{formula} ذات عدد غودل~$y$ في~$\Th{T}$. بل
+استطاع غودل أن يبيّن، للنظرية المعينة التي كانت في ذهنه، أن هذه
+العلاقة عودية بدائية، مستعملًا قائمة الدوال والعلاقات الخمس والأربعين
+في بحثه. والعلاقة الخامسة والأربعون، $x B y$، ليست إلا
+$\Prf[\Th{T}](x,y)$ بالنسبة إلى اختياره المعين لـ$\Th{T}$. وتذكّر
+أننا نستعمل اليوم عبارة «عودية بدائية» حيث يستعمل غودل كلمة «عودية»
+في بحثه.
+
+لما كانت $\Prf[\Th{T}](x,y)$ قابلة للحساب، فهي قابلة للتمثيل في
+$\Th{T}$. وسنستعمل $\OPrf[\Th{T}](x,y)$ للإشارة إلى الصيغة التي
+تمثلها. ولتكن $\OProv[\Th{T}](y)$ الصيغة
+$\lexists[x][\OPrf[\Th{T}](x,y)]$. وهذه تصف العلاقة السادسة
+والأربعين، $\fn{Bew}(y)$، في قائمة غودل. وكما يلاحظ غودل، فهذه هي
+العلاقة الوحيدة التي «لا يمكن الجزم بأنها عودية». ولعله كان يعني ما
+يأتي: لا يتضح من التعريف أنها قابلة للحساب، وقد بيّنت التطورات اللاحقة
+أنها ليست كذلك بالفعل.
+
+لتكن $\Th{T}$ نظرية !!{axiomatizable} تحتوي~$\Th{Q}$. عندئذ تكون
+$\Prf[\Th{T}](x,y)$ قابلة للقرار، ومن ثم تمثلها في~$\Th{Q}$
+!!a{formula}~$\OPrf[\Th{T}](x,y)$. ولتكن $\OProv[\Th{T}](y)$ الصيغة
+التي وصفناها أعلاه. وبحسب لمّة النقطة الثابتة، توجد صيغة
+$!G_\Th{T}$ بحيث !!{derive}s $\Th{Q}$ (ومن ثم $\Th{T}$)
+\begin{equation}
+\ollabel{eqn:qpf}
+!G_\Th{T} \liff \lnot \OProv[\Th{T}](\gn{!G_\Th{T}}).
+\end{equation}
+لاحظ أن $!G_\Th{T}$ تقول، في جوهرها، «إن $!G_\Th{T}$ غير
+!!{derivable} في~$\Th{T}$».
+
+\begin{lem}\ollabel{lem:cons-G-unprov}
+إذا كانت $\Th{T}$ نظرية متسقة و!!{axiomatizable} تمتدّ~$\Th{Q}$،
+فإن $\Th{T}\Proves/ !G_\Th{T}$.
+\end{lem}
+
+\begin{proof}
+افترض أن النظام~$\Th{T}$ !!{derive}s $!G_\Th{T}$. عندئذ يوجد
+\emph{بالفعل} !!a{derivation}، ولذلك تصدق، لعدد ما~$m$، العلاقة
+$\Prf[\Th{T}](m,\Gn{!G_\Th{T}})$. لكن $\Th{Q}$ !!{derive}s عندئذ
+الجملة $\OPrf[\Th{T}](\num m,\gn{!G_\Th{T}})$. ومن ثم !!{derive}s
+$\Th{Q}$ الصيغة
+$\lexists[x][\OPrf[\Th{T}](x,\gn{!G_\Th{T}})]$، وهي، بالتعريف،
+$\OProv[\Th{T}](\gn{!G_\Th{T}})$. وبحسب \olref{eqn:qpf}،
+!!{derive}s $\Th{Q}$ الصيغة $\lnot !G_\Th{T}$، ولما كانت $\Th{T}$
+تمتدّ $\Th{Q}$ فإن $\Th{T}$ !!{derive}s إياها أيضًا. لقد بيّنا أنه
+إذا كان النظام~$\Th{T}$ !!{derive}s $!G_\Th{T}$، فإنه !!{derive}s
+أيضًا $\lnot !G_\Th{T}$، فيكون غير متسق.
+\end{proof}
+
+\begin{defn}
+\ollabel{thm:oconsis-q}
+تكون النظرية $\Th{T}$ \emph{متسقة-$\omega$} إذا تحقق الآتي: إذا
+كانت $\lexists[x][!A(x)]$ أي جملة، وكان النظام~$\Th{T}$ !!{derive}s
+$\lnot !A(\num 0)$، و$\lnot !A(\num 1)$، و$\lnot !A(\num 2)$،
+و\dots، فإن $\Th{T}$ لا تثبت $\lexists[x][!A(x)]$.
+\end{defn}
+
+لاحظ أن كل نظرية متسقة-$\omega$ متسقة أيضًا. وينتج هذا مباشرة من أنه
+إذا كانت $\Th{T}$ غير متسقة، فإن $\Th{T}\Proves !A$ لكل~$!A$. وعلى وجه
+الخصوص، إذا كانت $\Th{T}$ غير متسقة، فإنها !!{derive}s
+كلًا من $\lnot !A(\num n)$ لكل~$n$ و
+$\lexists[x][!A(x)]$. ولذلك، إذا كانت $\Th{T}$ غير متسقة، فهي غير
+متسقة-$\omega$. وبعكس النقيض، إذا كانت $\Th{T}$ متسقة-$\omega$، فلا
+بد أن تكون متسقة.
+
+\begin{lem}\ollabel{lem:omega-cons-G-unref}
+إذا كانت $\Th{T}$ نظرية متسقة-$\omega$ و!!{axiomatizable}
+تمتدّ~$\Th{Q}$، فإن $\Th{T}\Proves/\lnot !G_\Th{T}$.
+\end{lem}
+
+\begin{proof}
+سنبيّن أنه إذا كان النظام~$\Th{T}$ !!{derive}s $\lnot !G_\Th{T}$،
+فهو غير متسق-$\omega$. افترض أن النظام~$\Th{T}$ !!{derive}s
+$\lnot !G_\Th{T}$. فإذا كانت $\Th{T}$ غير متسقة، كانت غير
+متسقة-$\omega$ وانتهينا. وإلا كانت $\Th{T}$ متسقة، فلا يكون في وسعها !!{derive}
+$!G_\Th{T}$ بحسب \olref{lem:cons-G-unprov}. ولما لم يوجد
+!!{derivation} لـ$!G_\Th{T}$ في~$\Th{T}$، فإن $\Th{Q}$ !!{derive}s
+\[
+\lnot \OPrf[\Th{T}](\num 0, \gn{!G_\Th{T}}), \lnot \OPrf[\Th{T}](\num 1,
+\gn{!G_\Th{T}}), \lnot \OPrf[\Th{T}](\num 2, \gn{!G_\Th{T}}), \dots
+\]
+وكذلك تفعل~$\Th{T}$. ومن جهة أخرى، تكافئ $\lnot !G_\Th{T}$، بحسب
+\olref{eqn:qpf}، الصيغة
+$\lexists[x][\OPrf[\Th{T}](x,\gn{!G_\Th{T}})]$. ومن ثم تكون
+$\Th{T}$ غير متسقة-$\omega$.
+\end{proof}
+
+\begin{prob}
+  كل نظرية متسقة-$\omega$ متسقة. بيّن أن العكس لا يصح؛ أي إن ثمة
+  نظريات متسقة وغير متسقة-$\omega$. وافعل ذلك ببيان أن
+  $\Th{Q}\cup\{\lnot !G_\Th{Q}\}$ متسقة وغير متسقة-$\omega$.
+\end{prob}
+
+\begin{thm}
+\ollabel{thm:first-incompleteness} لتكن $\Th{T}$ أي نظرية
+متسقة-$\omega$ و!!{axiomatizable} تمتدّ~$\Th{Q}$. عندئذ لا تكون
+$\Th{T}$ تامة.
+\end{thm}
+
+\begin{proof}
+  إذا كانت $\Th{T}$ متسقة-$\omega$، فهي متسقة، ومن ثم
+  $\Th{T}\Proves/ !G_\Th{T}$ بحسب \olref{lem:cons-G-unprov}.
+  وبحسب \olref{lem:omega-cons-G-unref}،
+  $\Th{T}\Proves/\lnot !G_\Th{T}$. وهذا يعني أن $\Th{T}$ غير تامة،
+  لأنها لا !!{derive}s $!G_\Th{T}$ ولا $\lnot !G_\Th{T}$.
+\end{proof}
+
+\end{document}
