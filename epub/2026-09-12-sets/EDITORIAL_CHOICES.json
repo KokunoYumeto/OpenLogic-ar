@@ -1,0 +1,63 @@
+{
+  "schema": "openlogic-arabic-epub-editorial-choices-v1",
+  "date": "2026-09-10",
+  "scope": "New EPUB presentation and navigation only; no translation source wording changed.",
+  "review_policy": "All choices remain open to correction; expert response is not a release gate.",
+  "choices": [
+    {
+      "id": "EPUB-META-001",
+      "where": "nav.xhtml/title, h1; package.opf/dc:title",
+      "choice": "نص المنطق المفتوح — فصل المجموعات — الترميز الدولي / الترميز المشرقي",
+      "evidence": "source/locale/ar/open-logic-locale.sty defines OLT as نص المنطق المفتوح; source/locale/ar/content/sets-functions-relations/sets/sets.tex defines the chapter as المجموعات; the existing repository README distinguishes international and Machrek notation.",
+      "rationale": "Identify the actual bounded chapter and notation profile; do not reuse the complete-book title or imply full722 coverage.",
+      "confidence": "High editorial confidence from direct existing edition labels, not a calibrated probability.",
+      "open_to_correction": true
+    },
+    {
+      "id": "EPUB-META-002",
+      "where": "nav.xhtml and sources.xhtml scope notice",
+      "choice": "يشمل هذا الملف فصل المجموعات بأقسامه الستة ومقدمة المشروع. وليس نسخة كاملة من الكتاب ذي الوحدات الـ722.",
+      "evidence": "SOURCE_FREEZE.json selects introduction OLP-0001, routing-only OLP-0004, and six sections OLP-0005–OLP-0010; excludes714 other units.",
+      "rationale": "New factual editorial notice, not translated mathematical prose. It makes the partial overall scope prominent in Arabic and English.",
+      "canon_limit": "No historical Arabic attestation is claimed for this newly composed administrative notice.",
+      "confidence": "High factual scope confidence; prose remains editorial and open to expert stylistic improvement.",
+      "open_to_correction": true
+    },
+    {
+      "id": "EPUB-NAV-001",
+      "where": "Navigation heading and source-page heading",
+      "choice": "المحتويات; المصادر ونطاق النسخة",
+      "rationale": "Literal navigational labels describing the contents list and provenance/scope page. These are administrative additions, not new mathematical terminology.",
+      "canon_limit": "No dictionary attestation claimed; an expert may prefer alternative navigation phrasing.",
+      "confidence": "Provisional editorial wording.",
+      "open_to_correction": true
+    },
+    {
+      "id": "EPUB-NUM-001",
+      "where": "Formal-object headings, figures, and internal reference links",
+      "choice": "Preserve existing Arabic locale names; use consistent chapter-local sequential numbering by object type.",
+      "evidence": "source/locale/ar/open-logic-locale.sty: theorem=مبرهنة, example=مثال, definition=تعريف, proposition=قضية, problem=مسألة; source config text token proof=برهان; locale figure cref=شكل.",
+      "rationale": "Reflow has no stable PDF page numbers. Numbering gives each link a faithful named referent rather than labelling every figure/definition by the section title.",
+      "limits": "EPUB local numbering is not asserted to equal the complete printed reader's numbering; stable source-unit and label IDs preserve correspondence.",
+      "open_to_correction": true
+    },
+    {
+      "id": "EPUB-DIAGRAM-001",
+      "where": "OLP-0008.xhtml, all three diagrams",
+      "choice": "Convert each original TikZ path to the exact SVG path geometry; use the existing Arabic caption as the SVG accessible title.",
+      "evidence": "Frozen source/assets/diagrams/union.tikz, intersection.tikz, difference.tikz and the actual Arabic figure captions in unions-and-intersections.tex.",
+      "rationale": "No bitmap pages, guessed redrawing, or new translation. Cubic coordinates and closure are retained. Coordinate scale0.8pt is accounted for in stroke widths. Colors are presentation-only distinct dark blue/red/gray; source semantic color-role identities A/B/C are retained.",
+      "limits": "Caption-derived descriptions are not a complete spoken-mathematics accessibility edition. They add no claim of human-tested accessibility.",
+      "open_to_correction": true
+    },
+    {
+      "id": "EPUB-COND-001",
+      "where": "OLP-0007.xhtml and OLP-0010.xhtml",
+      "choice": "Select the source false branch for two forward references whose chapters are outside the standalone Sets package.",
+      "evidence": "Source oliflabeldef tests sfr:arith:real:realline and cumul:::part; the six-section chapter routing includes neither target chapter.",
+      "rationale": "Use the source's own standalone conditional behavior, not an invented dangling link. Both original true branches are preserved verbatim in the build crosswalk. Every unconditional sentence and all327 formulas remain.",
+      "limits": "This is explicitly a bounded chapter profile, not a byte-identical excerpt of the full722 PDF. Full-work EPUB conversion must re-evaluate conditional targets against its expanded scope.",
+      "open_to_correction": true
+    }
+  ]
+}
