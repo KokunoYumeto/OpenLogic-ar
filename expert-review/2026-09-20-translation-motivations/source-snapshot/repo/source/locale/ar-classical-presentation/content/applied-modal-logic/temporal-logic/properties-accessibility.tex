@@ -1,0 +1,59 @@
+% Part: applied-modal-logics
+% Chapter: temporal-logic
+% Section: properties-accessibility
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{aml}{tl}{acc}
+
+\olsection{خواص الإطار الزمني}
+
+لما لم نفرض في نماذجنا الزمنية شرطًا على العلاقة~$\prec$، لم يصح في جميعها
+من البديهيات المألوفة إلا~${\OLId{latin-looped}{K}}$، أو نظيراها ${\OLId{latin-looped}{K}}_{\Gtemp}$ و${\OLId{latin-looped}{K}}_{\Htemp}$:
+\begin{align*}
+\tag{${\OLId{latin-looped}{K}}_{\Gtemp}$}  \Gtemp ({\OLId{latin-ordinary}{p}} \to {\OLId{latin-ordinary}{q}}) & \to (\Gtemp {\OLId{latin-ordinary}{p}} \to \Gtemp {\OLId{latin-ordinary}{q}})\\
+\tag{${\OLId{latin-looped}{K}}_{\Htemp}$}  \Htemp ({\OLId{latin-ordinary}{p}} \to {\OLId{latin-ordinary}{q}}) & \to (\Htemp {\OLId{latin-ordinary}{p}} \to \Htemp {\OLId{latin-ordinary}{q}})
+\end{align*}
+
+فإن أردنا تمثيل الزمن على وجه أخص، ففرضنا مثلًا أن~$\prec$ ترتيب خطي، لزمت
+في النماذج صلاحيات أخرى.
+
+\begin{table}[t]
+  \begin{tabular}{| p{.\OLClassicalDigits{48}\textwidth} || p{.\OLClassicalDigits{48}\textwidth} |}
+    \hline
+    {\emph{إذا كانت~$\prec$ \dots}} & {\emph{فإن~\dots تصدق في~$\mModel{M}$:}} \\
+    \hline \hline
+    \emph{متعدية}: \newline
+    $\forall {\OLId{latin-ordinary}{u}} \forall {\OLId{latin-ordinary}{v}} \forall {\OLId{latin-ordinary}{w}} (({\OLId{latin-ordinary}{u}} \prec {\OLId{latin-ordinary}{v}} \land {\OLId{latin-ordinary}{v}} \prec {\OLId{latin-ordinary}{w}}) \lif {\OLId{latin-ordinary}{u}} \prec {\OLId{latin-ordinary}{w}})$ &
+    $\Ftemp \Ftemp {\OLId{latin-ordinary}{p}} \lif \Ftemp {\OLId{latin-ordinary}{p}}$  \\
+    \hline
+    \emph{خطية}: \newline
+    $\forall {\OLId{latin-ordinary}{w}} \forall {\OLId{latin-ordinary}{v}} ({\OLId{latin-ordinary}{w}} \prec {\OLId{latin-ordinary}{v}} \lor {\OLId{latin-ordinary}{w}} = {\OLId{latin-ordinary}{v}} \lor {\OLId{latin-ordinary}{v}} \prec {\OLId{latin-ordinary}{w}})$ &
+    $(\Ftemp \Ptemp {\OLId{latin-ordinary}{p}} \lor \Ptemp \Ftemp {\OLId{latin-ordinary}{p}}) \lif (\Ptemp {\OLId{latin-ordinary}{p}} \lor {\OLId{latin-ordinary}{p}} \lor \Ftemp {\OLId{latin-ordinary}{p}})$\\
+    \hline
+    \emph{كثيفة}: \newline
+    $\forall {\OLId{latin-ordinary}{w}} \forall {\OLId{latin-ordinary}{v}} ({\OLId{latin-ordinary}{w}} \prec {\OLId{latin-ordinary}{v}} \to \exists {\OLId{latin-ordinary}{u}}({\OLId{latin-ordinary}{w}} \prec {\OLId{latin-ordinary}{u}} \land {\OLId{latin-ordinary}{u}} \prec {\OLId{latin-ordinary}{v}}))$ &
+    $\Ftemp {\OLId{latin-ordinary}{p}} \lif \Ftemp \Ftemp {\OLId{latin-ordinary}{p}}$ \\
+    \hline
+    \emph{غير محدودة (في الماضي)}: \newline
+    $\forall {\OLId{latin-ordinary}{w}} \exists {\OLId{latin-ordinary}{v}}( {\OLId{latin-ordinary}{v}} \prec {\OLId{latin-ordinary}{w}})$ &
+    $\Htemp {\OLId{latin-ordinary}{p}} \to \Ptemp {\OLId{latin-ordinary}{p}}$ \\
+    \hline
+    \emph{غير محدودة (في المستقبل)}: \newline
+    $\forall {\OLId{latin-ordinary}{w}} \exists {\OLId{latin-ordinary}{v}}( {\OLId{latin-ordinary}{w}} \prec {\OLId{latin-ordinary}{v}})$ &
+    $\Gtemp {\OLId{latin-ordinary}{p}} \to \Ftemp {\OLId{latin-ordinary}{p}}$ \\
+    \hline
+  \end{tabular}
+  \caption{بعض الخواص المتقابلة بين الأطر والصيغ الزمنية.}
+  \ollabel{tab:correspondence}
+\end{table}
+
+وكثير من خواص~\olref{tab:correspondence} مما يلائم نموذجًا يراد به تمثيل
+الزمن. غير أن الشروط التي نستطيع فرضها على~$\prec$ أوسع من الشروط التي
+تقابلها !!{formula}s في لغة المنطق الزمني. فاللاانعكاسية، مثلًا، ومعناها
+$\forall {\OLId{latin-ordinary}{w}} \lnot ({\OLId{latin-ordinary}{w}} \prec {\OLId{latin-ordinary}{w}})$، لا تقابلها صيغة في هذه اللغة.
+
+\end{document}
+

@@ -1,0 +1,224 @@
+% Part: normal-modal-logic
+% Chapter: filtrations
+% Section: examples-of-filtrations
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{fil}{exf}
+
+\olsection{أمثلة على الترشيحات}
+
+لم نثبت بعد وجود أي ترشيح. لكن لكل نموذج~$\mModel{M}$ في الواقع ترشيحات
+كثيرة لـ~$\mModel{M}$ عبر~$\Gamma$. ونميز منها اثنين على وجه الخصوص: الترشيح الأدق
+والترشيح الأخشن. ولا تختلف ترشيحات النموذج نفسه إلا في علاقة نفاذها (إذ
+تنص~\olref[fil]{defn:filtration} مباشرة على ماهية~$W^*$ و$V^*$).
+ويضم الترشيح الأدق أقل عدد ممكن من أزواج العوالم المرتبطة، في حين يضم
+الترشيح الأخشن أكبر عدد ممكن منها.
+
+\begin{defn}
+  إذا كانت~$\Gamma$ مغلقة تحت أخذ الصيغ الجزئية، عُرّف الترشيح
+  \emph{الأدق}~$\mModel{M^*}$ لنموذج~$\mModel{M}$ بوضع:
+  \[
+  R^*[u][v] \quad \text{إذا وفقط إذا} \quad \exists u'\in [u] \;
+  \exists v' \in [v] : Ru'v'.
+  \]
+\end{defn}
+
+\begin{prop}\ollabel{prop:finest}
+  الترشيح الأدق~$\mModel{M^*}$ ترشيح بالفعل.
+\end{prop}
+
+\begin{proof}
+  علينا التحقق من أن~$R^*$، كما عُرّفت، تستوفي
+  \olref[fil]{defn:filtration}\olref[fil]{defn:filtration-R}. ونتحقق
+  من الشروط الثلاثة تباعًا.
+
+  إذا كان~$Ruv$، فلأن~$u \in [u]$ و$v \in [v]$، يكون أيضًا
+  $R^*[u][v]$، ومن ثم يستوفى~\olref[fil]{defn:filtration-R1}.
+
+  \iftag{prvBox}{\iftag{probBox}{نترك التحقق من
+      \olref[fil]{defn:filtration-R2} تمرينًا.}{للتحقق من
+        \olref[fil]{defn:filtration-R2}، افترض~$\Box!A \in \Gamma$
+        و$R^*[u][v]$ و$\mSat{M}{\Box!A}[u]$. بحسب تعريف~$R^*$، يوجد
+        $u' \equiv u$ و$v' \equiv v$ بحيث~$Ru'v'$. ولأن~$u$ و$u'$
+        يتفقان على~$\Gamma$، يكون أيضًا~$\mSat{M}{\Box!A}[u']$، ومن
+        ثم~$\mSat{M}{!A}[v']$. وبإغلاق~$\Gamma$ تحت أخذ
+        ال!!{formula}s الجزئية، يتفق~$v$ و$v'$ على~$!A$، ولذلك
+        $\mSat{M}{!A}[v]$، كما هو مطلوب.}}{}
+
+  \iftag{prvDiamond}{\iftag{probDiamond}{نترك التحقق من
+      \olref[fil]{defn:filtration-R3} تمرينًا.}{للتحقق من
+        \olref[fil]{defn:filtration-R3}، افترض~$\Diamond!A \in
+        \Gamma$ و$R^*[u][v]$ و$\mSat{M}{!A}[v]$. بحسب تعريف~$R^*$،
+        يوجد~$u' \equiv u$ و$v' \equiv v$ بحيث~$Ru'v'$. ولأن~$v$
+        و$v'$ يتفقان على~$\Gamma$، ولأن~$\Gamma$ مغلقة تحت أخذ
+        ال!!{formula}s الجزئية، يكون أيضًا~$\mSat{M}{!A}[v']$، ومن
+        ثم~$\mSat{M}{\Diamond !A}[u']$. ولأن~$u$ و$u'$ يتفقان أيضًا
+        على~$\Gamma$، يكون~$\mSat{M}{\Diamond !A}[u]$.}}{}
+\end{proof}
+
+\begin{probtag}{probBox,probDiamond}
+  أكمل برهان~\olref[nml][fil][exf]{prop:finest}.
+\end{probtag}
+
+\begin{defn}
+  إذا كانت~$\Gamma$ مغلقة تحت أخذ الصيغ الجزئية، عُرّف الترشيح
+  \emph{الأخشن}~$\mModel{M^*}$ لنموذج~$\mModel{M}$ بوضع
+  $R^*[u][v]$ إذا وفقط إذا
+  \iftag{notprvBox,notprvDiamond}{تحقق الشرط الآتي:}{تحقق
+    \emph{كلا} الشرطين الآتيين:}
+  \begin{tagenumerate}{prvBox,prvDiamond}
+  \tagitem{prvBox}{\ollabel{defn:coarsest-Box}إذا كان~$\Box!A \in
+    \Gamma$ و$\mSat{M}{\Box!A}[u]$، كان
+    $\mSat{M}{!A}[v]$\iftag{prvDiamond}{؛}{.}}{}
+  \tagitem{prvDiamond}{\ollabel{defn:coarsest-Diamond}إذا كان
+    $\Diamond!A \in \Gamma$ و$\mSat{M}{!A}[v]$، كان
+    $\mSat{M}{\Diamond!A}[u]$.}{}
+  \end{tagenumerate}
+\end{defn}
+
+\begin{prop}
+  الترشيح الأخشن~$\mModel{M^*}$ ترشيح بالفعل.
+\end{prop}
+
+\begin{proof}
+  بالنظر إلى تعريف~$R^*$، لا يبقى إلا التحقق من الاستلزام من~$Ruv$ إلى
+  $R^*[u][v]$. فافترض~$Ruv$. \iftag{prvBox}{افترض~$\Box!A \in
+    \Gamma$ و$\mSat{M}{\Box!A}[u]$؛ عندئذ من الواضح أن
+    $\mSat{M}{!A}[v]$\iftag{prvDiamond}{، ومن ثم يستوفى
+      \olref{defn:coarsest-Box}.}{.}}{}\iftag{prvDiamond}{افترض
+    $\Diamond!A \in \Gamma$ و$\mSat{M}{!A}[v]$. عندئذ
+    $\mSat{M}{\Diamond!A}[u]$ لأن~$Ruv$\iftag{prvBox}{، ومن ثم
+      يستوفى~\olref{defn:coarsest-Diamond}}{}.}{}
+\end{proof}
+
+\begin{ex}
+  لتكن~$W=\PosInt$، وليكن~$Rnm$ إذا وفقط إذا كان~$m=n+1$، وليكن
+  $V(p)=\Setabs{2n}{n \in \PosInt}$. يُصوّر النموذج
+  $\mModel{M}=\tuple{W,R,V}$ في~\olref{fig:ex-filtration}. والعوالم هي
+  $1$ و$2$ وهكذا؛ ويمكن لكل عالم أن ينفذ إلى عالم واحد فقط، هو لاحقه؛
+  ويصدق~$p$ عند جميع الأعداد الزوجية الموجبة ولا يصدق إلا عندها.
+
+  \begin{figure}
+    \centering
+    \begin{tikzpicture}[modal]
+      \node[world] (1) [label=below:\mFalse{p}] {$1$};
+      \node[world] (2) [label=below:\mTrue{p}, right=of 1] {$2$};
+      \node[world] (3) [label=below:\mFalse{p}, right=of 2] {$3$};
+      \node[world] (4) [label=below:\mTrue{p}, right=of 3] {$4$};
+      \node[phantom] (5) [right=of 4] {};
+      \draw[->] (1) to (2);
+      \draw[->] (2) to (3);
+      \draw[->] (3) to (4);
+      \draw[dotted] (4) to (5);
+    \end{tikzpicture}
+
+    \begin{tikzpicture}[modal]
+      \node[world] (1) [label=below:\mFalse{p}] {$[1]$};
+      \node[world] (2) [label=below:\mTrue{p}, right=of 1] {$[2]$};
+      \draw[->,bend left] (1) to (2);
+      \draw[->,bend left] (2) to (1);
+
+      \node[world] (3) [label=below:\mFalse{p},right=of 2] {$[1]$};
+      \node[world] (4) [label=below:\mTrue{p}, right=of 3] {$[2]$};
+      \draw[->,bend left] (3) to (4);
+      \draw[->,bend left] (4) to (3);
+      \draw[->,reflexive above] (4) to (4);
+    \end{tikzpicture}
+    \caption{نموذج لا نهائي وترشيحاه.}
+    \ollabel{fig:ex-filtration}
+  \end{figure}
+
+  ولتكن~$\Gamma$ الآن مجموعة ال!!{formula}s الجزئية لـ~$\Box p \lif p$،
+  أي~$\{p,\Box p,\Box p \lif p\}$. يصدق~$p$ عند جميع الأعداد الزوجية
+  ولا يصدق إلا عندها، ويصدق~$\Box p$ عند جميع الأعداد الفردية ولا يصدق
+  إلا عندها، ومن ثم تصدق~$\Box p \lif p$ عند جميع الأعداد الزوجية ولا
+  تصدق إلا عندها. وبعبارة أخرى، كل عدد فردي يصدق~$\Box p$ ويكذب~$p$
+  و$\Box p \lif p$؛ وكل عدد زوجي يصدق~$p$ و$\Box p \lif p$ ويكذب
+  $\Box p$. ومن ثم~$W^*=\{[1],[2]\}$، حيث
+  $[1]=\{1,3,5,\dots\}$ و$[2]=\{2,4,6,\dots\}$. ولأن
+  $2 \in V(p)$، يكون~$[2] \in V^*(p)$؛ ولأن~$1 \notin V(p)$، يكون
+  $[1] \notin V^*(p)$. إذن~$V^*(p)=\{[2]\}$.
+
+  يجب أن تحوي علاقة نفاذ أي ترشيح مبني على~$W^*$ الزوجين
+  $\tuple{[1],[2]}$ و$\tuple{[2],[1]}$: فلأن~$R12$، يجب أن يكون
+  $R^*[1][2]$ بحسب
+  \olref[fil]{defn:filtration}\olref[fil]{defn:filtration-R1}؛ ولأن
+  $R23$، يجب أن يكون~$R^*[2][3]$، و$[3]=[1]$. ولا يجوز أن تحوي
+  $\tuple{[1],[1]}$: إذ لو حوته لكان~$R^*[1][1]$، مع
+  $\mSat{M}{\Box p}[1]$ و$\mSat/{M}{p}[1]$، وهذا يناقض
+  \olref[fil]{defn:filtration-R2}. ولا يوجب شيء~$R^*[2][2]$ ولا
+  يمنعه. ومن ثم يوجد ترشيحان ممكنان لـ~$\mModel{M}$، يقابلان علاقتي
+  النفاذ:
+  \[
+  \{\tuple{[1],[2]},\tuple{[2],[1]}\} \text{ و }
+  \{\tuple{[1],[2]},\tuple{[2],[1]},\tuple{[2],[2]}\}.
+  \]
+  وفي الحالتين يكذب~$p$ و$\Box p \lif p$ عند~$[1]$ ويصدق عنده
+  $\Box p$؛ ويصدق~$p$ و$\Box p \lif p$ عند~$[2]$ ويكذب عنده
+  $\Box p$.
+\end{ex}
+
+
+\begin{prob}
+  انظر في النموذج الآتي~$\mModel{M}=\tuple{W,R,V}$، حيث
+  $W=\Setabs{0\sigma}{\sigma \in \Bin^*}$، أي مجموعة متتاليات
+  الأصفار والآحاد التي تبدأ بـ~$0$، و$R\sigma\sigma'$ إذا وفقط إذا كان
+  $\sigma'=\sigma 0$ أو~$\sigma'=\sigma 1$، و
+  $V(p)=\Setabs{\sigma 0}{\sigma \in \Bin^*}\cap W$، و
+  $V(q)=\Setabs{\sigma 1}{\sigma \in
+    \Bin^* \setminus \{1\}}\cap W$. وهذه صورة له:
+  \begin{center}
+    \begin{tikzpicture}[modal,
+        node distance=2cm
+      ]
+
+      \node[world] (0) [label={below:\mTrue{p}\\\mFalse{q}},font=\tiny] {$0$};
+      \node[world] (00) [label={below:\mTrue{p}\\\mFalse{q}},
+        above right=of 0,font=\tiny] {$00$};
+      \node[world] (000) [label={below:\mTrue{p}\\\mFalse{q}},
+        right=of 00, yshift=.8cm, font=\tiny] {$000$};
+      \node[phantom] (0000) [right=of 000, yshift=.5cm] {};
+      \node[phantom] (0001) [right=of 000, yshift=-.5cm] {};
+      \node[world] (001) [label={below:\mFalse{p}\\\mTrue{q}},
+        right=of 00, yshift=-.8cm, font=\tiny] {$001$};
+      \node[phantom](0010) [right=of 001, yshift=.5cm] {};
+      \node[phantom](0011) [right=of 001, yshift=-.5cm] {};
+      \node[world] (01) [label={below:\mFalse{p}\\\mTrue{q}},
+        below right=of 0,font=\tiny] {$01$};
+      \node[world] (010) [label={below:\mTrue{p}\\\mFalse{q}},
+        right=of 01, yshift=.8cm,font=\tiny] {$010$};
+      \node[phantom] (0100) [right=of 010, yshift=.5cm] {};
+      \node[phantom] (0101) [right=of 010, yshift=-.5cm] {};
+      \node[world] (011) [label={below:\mFalse{p}\\\mTrue{q}},
+        right=of 01, yshift=-.8cm,font=\tiny] {$011$};
+      \node[phantom] (0110) [right=of 011, yshift=.5cm] {};
+      \node[phantom] (0111) [right=of 011, yshift=-.5cm] {};
+
+      \draw[->] (0) to (00);
+      \draw[->] (0) to (01);
+      \draw[->] (00) to (000);
+      \draw[dotted] (000) to (0000);
+      \draw[dotted] (000) to (0001);
+      \draw[->] (00) to (001);
+      \draw[dotted] (001) to (0010);
+      \draw[dotted] (001) to (0011);
+      \draw[->] (01) to (010);
+      \draw[dotted] (010) to (0100);
+      \draw[dotted] (010) to (0101);
+      \draw[->] (01) to (011);
+      \draw[dotted] (011) to (0110);
+      \draw[dotted] (011) to (0111);
+    \end{tikzpicture}
+  \end{center}
+  ولدينا~$\mSat/{M}{\Box(p \lor q) \lif (\Box p \lor \Box q)}[w]$
+  لكل~$w$.
+
+  لتكن~$\Gamma$ مجموعة ال!!{formula}s الجزئية لـ~$\Box(p \lor q) \lif
+  (\Box p \lor \Box q)$. ما~$W^*$ و$V^*$؟ وما علاقة نفاذ الترشيح
+  الأدق لـ~$\mModel{M}$؟ وعلاقة نفاذ الترشيح الأخشن؟
+\end{prob}
+
+\end{document}

@@ -1,0 +1,133 @@
+% part: intuitionistic-logic
+% chapter: soundness-completeness
+% section: decidability
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{sc}{dec}
+
+\olsection{القابلية للقرار}
+
+كلما كان~$\Gamma \Proves/ !A$ أعطانا برهان التمام نموذجًا عوالمه غير
+متناهية، يشهد بـ~$\Gamma \Entails/ !A$. أما النتيجة الآتية فتبيّن أن
+إقامة~$\Entails !A$ لا تحتاج إلا إلى إقامة
+$\mSat{M}{!A}$ في النماذج المنتهية جميعًا؛ ونعني بالمنتهي ما كانت
+مجموعة عوالمه منتهية.
+
+\begin{thm}\ollabel{thm:decidability}
+  متى كان~$\Entails/ !A$ وُجد نموذج منته~$\mModel{M'}$ يحقق
+  $\mSat/{M'}{!A}$.
+\end{thm}
+
+\begin{proof}
+  ليكن~$\mModel{M}=\tuple{W,R,V}$ نموذجًا، ولنأخذ~$w_0\in W$ بحيث
+  $\mSat/{M}{!A}[w_0]$. نسمّي~$P$ مجموعة ال!!{propositional variable}s
+  الواقعة في~$!A$، ونسمي~$\Sigma$ إغلاق~$\{!A\}$ بأخذ
+  الصيغ الجزئية: فـ~$\Sigma$ تضم الصيغ الجزئية
+  لـ~$!A$ كلها، وهي لذلك منتهية.
+
+  ونحدّ علاقة التكافؤ~$\sim_\Sigma$ على~$W$ كما يأتي:
+  \[
+    u\sim_\Sigma v
+    \quad\text{إذا وفقط إذا}\quad
+    \bigl(\mSat{M}{!B}[u]\ \text{إذا وفقط إذا}\
+    \mSat{M}{!B}[v]\bigr)
+    \quad\text{لكل }!B\in\Sigma.
+  \]
+  ولتكن~$[u]_\Sigma$ فئة تكافؤ~$u$. ثم نعرّف
+  $\mModel{M'}=\tuple{W',R',V'}$ بهذه الحدود:
+  \[
+    W'=\Setabs{[u]_\Sigma}{u\in W},
+  \]
+  \[
+    R'{[u]_\Sigma}{[v]_\Sigma}
+    \quad\text{إذا وفقط إذا}\quad
+    \bigl(\mSat{M}{!B}[u]\ \text{يستلزم}\
+    \mSat{M}{!B}[v]\bigr)
+    \quad\text{لكل }!B\in\Sigma,
+  \]
+  و
+  \[
+    V'(p)=
+    \begin{cases}
+      \Setabs{[u]_\Sigma}{u\in W\text{ و }\mSat{M}{p}[u]}
+        & \text{إذا كان }p\in\Sigma,\\
+      \varnothing & \text{خلاف ذلك.}
+    \end{cases}
+  \]
+  وليس لاختيار ممثل الفئة أثر في هذه التعريفات. وأما~$R'$
+  فانعكاسيتها وتعدّيها ظاهران. فإذا اجتمع
+  $R'{[u]_\Sigma}{[v]_\Sigma}$ و
+  $R'{[v]_\Sigma}{[u]_\Sigma}$، اتفق~$u$ و$v$ في صدق الصيغ كلها
+  من~$\Sigma$، فيكون~$[u]_\Sigma=[v]_\Sigma$. فثبت أن~$R'$ ترتيب
+  جزئي. و~$V'$ رتيبة أيضًا بالنسبة إلى~$R'$؛ فإذن
+  $\mModel{M'}$ هو !!a{relational model}.
+
+  وكل فئة في~$W'$ يعيّنها ما يصدق من صيغ~$\Sigma$ عند ممثليها؛
+  ومن ذلك نحصل على الحد
+  \[
+    |W'|\leq 2^{|\Sigma|}.
+  \]
+  فـ~$W'$ منتهية على الخصوص.
+
+  ونقيم الآن بالاستقراء البنيوي لمّة الترشيح لكل~!!{formula}~$!B$
+  في~$\Sigma$:
+  \[
+    \mSat{M}{!B}[u]
+    \quad\text{إذا وفقط إذا}\quad
+    \mSat{M'}{!B}[{[u]_\Sigma}]
+    \qquad(!B\in\Sigma).
+  \]
+  أما ال!!{propositional variable}s و$\lfalse$ و$\land$ و$\lor$
+  فحالاتها تأتي بلا واسطة
+  من تعريف~$V'$ وفرض الاستقراء. والمحتاج إلى بيان هو حفظ النفي والشرط
+  عند هذا الاختيار لـ~$R'$.
+
+  لنأخذ حالة~$!B\ident !C\lif !D$. إذا كان أولًا
+  $\mSat{M}{!C\lif !D}[u]$، وأخذنا
+  $R'{[u]_\Sigma}{[v]_\Sigma}$، فإن
+  $!C\lif !D\in\Sigma$؛ وتعريف~$R'$ ينقل صدقها إلى~$v$،
+  فيثبت~$\mSat{M}{!C\lif !D}[v]$. فإذا تحقق
+  $\mSat{M'}{!C}[{[v]_\Sigma}]$، ثبت بالاستقراء
+  $\mSat{M}{!C}[v]$؛ وانعكاسية~$R$ تعطينا حينئذ
+  $\mSat{M}{!D}[v]$. ثم نطبق فرض الاستقراء ثانيةً فنحصل على
+  $\mSat{M'}{!D}[{[v]_\Sigma}]$. وبهذا يثبت
+  $\mSat{M'}{!C\lif !D}[{[u]_\Sigma}]$.
+
+  وأما العكس، فلو كان~$\mSat/{M}{!C\lif !D}[u]$ لكان عالم~$v$ يحقق
+  $Ruv$ و$\mSat{M}{!C}[v]$ و$\mSat/{M}{!D}[v]$. ورتابة الصدق في
+  النموذج الأول تقتضي انتقال الصدق من~$u$ إلى~$v$ لكل صيغة من~$\Sigma$،
+  فيثبت~$R'{[u]_\Sigma}{[v]_\Sigma}$. ويعطي فرض الاستقراء صدق~$!C$
+  وعدم صدق~$!D$ عند~$[v]_\Sigma$ في~$\mModel{M'}$؛ فينتج
+  $\mSat/{M'}{!C\lif !D}[{[u]_\Sigma}]$.
+
+  وأما حالة~$!B\ident\lnot !C$ فوجهها نظير ذلك. فمن
+  $\mSat{M}{\lnot !C}[u]$ و
+  $R'{[u]_\Sigma}{[v]_\Sigma}$ ينقل تعريف~$R'$ صدق
+  $\lnot !C\in\Sigma$ إلى~$v$. ولانعكاسية~$R$ لا يصدق~$!C$ عند~$v$؛
+  فلا يصدق بالاستقراء عند~$[v]_\Sigma$ في~$\mModel{M'}$. وإن
+  كان~$\mSat/{M}{\lnot !C}[u]$، وُجد~$v$ يحقق~$Ruv$ ويصدق عنده~$!C$
+  أي عند~$v$. فرتابة الصدق تعطينا~$R'{[u]_\Sigma}{[v]_\Sigma}$،
+  ويعطينا فرض الاستقراء شاهدًا يثبت
+  $\mSat/{M'}{\lnot !C}[{[u]_\Sigma}]$.
+
+  وقد كانت ال!!{formula}~$!A$ من~$\Sigma$؛ فتنتج لمّة الترشيح
+  $\mSat/{M'}{!A}[{[w_0]_\Sigma}]$. فصار~$\mModel{M'}$ نموذجًا
+  مضادًا منتهيًا لـ~$!A$، وتم المطلوب.
+\end{proof}
+
+\begin{prob}
+أتمّ التفاصيل المباشرة في برهان~\olref[int][sc][dec]{thm:decidability}:
+أثبت حسن تعريف~$R'$ و$V'$، وكون~$R'$ ترتيبًا جزئيًا و~$V'$
+رتيبة، ثم أقم حالات المتغيرات القضوية و$\lfalse$ و$\land$ و$\lor$ في
+لمّة الترشيح.
+\end{prob}
+
+وتعطي~\olref{thm:decidability} طريقًا خوارزميًا للفصل في
+$\Entails !A$: نقتصر في الفحص على النماذج العلائقية التي عدد عوالمها
+لا يزيد على~$2^{|\Sigma|}$، وعلى المتغيرات القضوية الواقعة
+في~$!A$.
+
+\end{document}

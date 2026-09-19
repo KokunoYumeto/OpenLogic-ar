@@ -1,0 +1,65 @@
+% Part: lambda-calculus
+% Chapter: introduction
+% Section: minimization
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{int}{min}
+\olsection{الدوال \usetoken{S}{lambda definable} مغلقة تحت التصغير}
+
+\begin{lem}
+لتكن~$f(x,y)$ !!{lambda definable}، ولتعرّف~$g$ بالمعادلة
+\[
+g(x) \simeq \umin{y}{f(x,y)}.
+\]
+فإن~$g$ أيضًا !!{lambda definable}.
+\end{lem}
+
+\begin{proof}
+نجمل وجه البرهان أولًا. إذا أعطينا~$x$، استعنا بحد النقطة الثابتة
+اللامبداوي~$Y$ لتعريف دالة~$h_x(n)$ تطلب~$y$ ابتداءً من~$n$.
+وعندئذ يكون~$g(x)$ هو~$h_x(0)$. أما~$h_x$ فنطلبها حلًا لمعادلة النقطة الثابتة الآتية:
+\[
+h_x(n) \simeq
+\begin{cases}
+n & \text{إذا كان $f(x,n) = 0$} \\
+h_x(n+1) & \text{في غير ذلك.}
+\end{cases}
+\]
+
+وأما التفصيل، فإن~$f$، لكونها قابلة للتعريف بلامبدا، هي
+!!{lambda defined} بحد~$F$. وقد سبق أن لدينا حد لامبدا~$D$ يحقق
+$D(M, N, \bar{0}) \red M$ و$D(M, N, \bar{1}) \red N$. نثبت~$x$ في هذه الخطوة؛ ولكي !!{lambda define} حدٌ الدالة~$h_x$،
+نطلب حدًا~$H$ يعتمد على~$x$ ويحقق
+\[
+H(\num{n}) \equiv D(\num{n}, H(S(\num{n})), F(x, \num{n})).
+\]
+ويتيح لنا حد النقطة الثابتة~$Y$ هذا الإنشاء. نأخذ أولًا~$U$ مساويًا للحد
+\[
+\lambd[h][\lambd[z][D(z,(h(Sz)),F(x,z))]],
+\]
+ثم نأخذ~$H$ مساويًا للحد~$YU$. والمتغير الحر الوحيد في~$H$ هو~$x$.
+فلنثبت أن~$H$ يفي بالمعادلة المذكورة.
+
+من تعريف~$Y$ ينتج
+\[
+H = YU \equiv U(YU) = U(H).
+\]
+ومن ثم، لكل عدد طبيعي~$n$،
+\begin{align*}
+H(\num{n}) & \equiv U(H, \num{n}) \\
+& \red D(\num{n}, H(S(\num{n})), F(x, \num{n})),
+\end{align*}
+وهذا هو المطلوب. ثم إذا وضعنا العدد~$\num{m}$ موضع~$x$ في السطر الأخير،
+فإن التعبير يختزل إلى~$\num{n}$ متى اختزل~$F(\num{m}, \num{n})$ إلى~$\num{0}$،
+وإلى~$H(S(\num{n}))$ متى اختزل~$F(\num{m}, \num{n})$ إلى عدد آخر.
+
+ويبقى أن نأخذ~$G$ مساويًا لـ$\lambd[x][H(\num 0)]$. فهذا الحد
+$G$ !!{lambda define}s~$g$: فإن~$G(\num m)$، عند كل~$m$،
+يختزل إلى~$\overline {g(m)}$ إن كانت~$g(m)$ معرّفة، وأما إن لم تكن معرّفة فلا صورة سوية له.
+\end{proof}
+
+\end{document}
+

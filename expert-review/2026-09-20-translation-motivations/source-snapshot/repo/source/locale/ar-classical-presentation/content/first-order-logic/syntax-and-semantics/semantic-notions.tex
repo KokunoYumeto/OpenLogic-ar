@@ -1,0 +1,170 @@
+% Part: first-order-logic
+% Chapter: syntax-and-semantics
+% Section: Semantic Notions
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{syn}{sem}
+\olsection{المفاهيم الدلالية}
+
+\begin{explain}
+لما عُرفت ال!!{structure}s للغات الرتبة الأولى، أمكن تحديد
+الخواص الدلالية للجمل والعلاقات بينها. وأول ذلك \emph{صلاحية}
+الجملة: أن تُرضى في كل !!{structure}. فالجملة الصالحة لا يختلف
+إرضاؤها باختلاف تأويل رموزها غير المنطقية؛ ولهذا تسمى الجمل
+الصالحة \emph{حقائق منطقية}. فهي صادقة، أي مُرضاة، في أي
+!!{structure}؛ وصدقها تابع للرموز المنطقية وال!!{structure}
+التركيبية لها، لا لاختيار الرموز غير المنطقية ولا لتأويلاتها.
+\end{explain}
+
+\begin{defn}[الصلاحية]
+تكون الجملة~$!A$ \emph{صالحة}، $\Entails !A$، إذا وفقط إذا كان
+$\Sat{{\OLId{latin-looped}{M}}}{!A}$ لكل !!{structure}~$\Struct M$.
+\end{defn}
+
+\begin{defn}[الاستلزام]
+\emph{تستلزم} مجموعة من الجمل~${\OLId{greek-variable}{Gamma}}$ جملة~$!A$،
+${\OLId{greek-variable}{Gamma}} \Entails !A$، إذا وفقط إذا كان، لكل
+!!{structure}~$\Struct M$ تحقق $\Sat{{\OLId{latin-looped}{M}}}{{\OLId{greek-variable}{Gamma}}}$،
+$\Sat{{\OLId{latin-looped}{M}}}{!A}$.
+\end{defn}
+
+
+\begin{defn}[قابلية الإرضاء]
+تكون مجموعة من الجمل~${\OLId{greek-variable}{Gamma}}$ \emph{قابلة للإرضاء} إذا كان
+$\Sat{{\OLId{latin-looped}{M}}}{{\OLId{greek-variable}{Gamma}}}$ ل!!{structure} ما~$\Struct M$. وإذا لم تكن
+${\OLId{greek-variable}{Gamma}}$ قابلة للإرضاء سميت \emph{غير قابلة للإرضاء}.
+\end{defn}
+
+\begin{prop}
+تكون الجملة~$!A$ صالحة إذا وفقط إذا كان
+${\OLId{greek-variable}{Gamma}} \Entails !A$ لكل مجموعة من الجمل~${\OLId{greek-variable}{Gamma}}$.
+\end{prop}
+
+\begin{proof}
+أما جهة الذهاب، فلنفرض $!A$ صالحة، ولنأخذ ${\OLId{greek-variable}{Gamma}}$ مجموعة من
+الجمل، و$\Struct M$ !!a{structure} تحقق
+$\Sat{{\OLId{latin-looped}{M}}}{{\OLId{greek-variable}{Gamma}}}$. فصلاحية $!A$ تقتضي $\Sat{{\OLId{latin-looped}{M}}}{!A}$،
+ومن ثم ${\OLId{greek-variable}{Gamma}} \Entails !A$.
+
+وأما جهة الإياب فنثبت مقابل عكسها. إذا لم تكن $!A$ صالحة، وُجدت
+!!a{structure}~$\Struct M$ فيها $\Sat/{{\OLId{latin-looped}{M}}}{!A}$. ولنضع
+${\OLId{greek-variable}{Gamma}} = \{ \ltrue \}$؛ عندئذ $\Sat{{\OLId{latin-looped}{M}}}{{\OLId{greek-variable}{Gamma}}}$، لأن
+$\ltrue$ صالحة. فقد حصلت !!a{structure}~$\Struct M$ تحقق
+$\Sat{{\OLId{latin-looped}{M}}}{{\OLId{greek-variable}{Gamma}}}$ وتحقق $\Sat/{{\OLId{latin-looped}{M}}}{!A}$؛ فلا تستلزم~${\OLId{greek-variable}{Gamma}}$
+الجملة~$!A$.
+\end{proof}
+
+\begin{prop}
+\ollabel{prop:entails-unsat}
+${\OLId{greek-variable}{Gamma}} \Entails !A$ إذا وفقط إذا كانت
+${\OLId{greek-variable}{Gamma}} \cup \{\lnot !A\}$ غير قابلة للإرضاء.
+\end{prop}
+
+\begin{proof}
+للذهاب نفرض ${\OLId{greek-variable}{Gamma}} \Entails !A$، ثم نفرض خلاف المطلوب وجود
+!!a{structure}~$\Struct M$ تحقق
+$\Sat{{\OLId{latin-looped}{M}}}{{\OLId{greek-variable}{Gamma}} \cup \{ \lnot !A \}}$. فمن
+$\Sat{{\OLId{latin-looped}{M}}}{{\OLId{greek-variable}{Gamma}}}$ و${\OLId{greek-variable}{Gamma}} \Entails !A$ يلزم $\Sat{{\OLId{latin-looped}{M}}}{!A}$.
+ومن $\Sat{{\OLId{latin-looped}{M}}}{{\OLId{greek-variable}{Gamma}}\cup \{ \lnot !A \}}$ يلزم
+$\Sat{{\OLId{latin-looped}{M}}}{\lnot !A}$. فقد اجتمع $\Sat{{\OLId{latin-looped}{M}}}{!A}$ و
+$\Sat/{{\OLId{latin-looped}{M}}}{!A}$، وهذا محال. فلا توجد
+!!{structure}~$\Struct M$ بهذه الصفة، وتكون
+${\OLId{greek-variable}{Gamma}} \cup \{ \lnot !A \}$ غير قابلة للإرضاء.
+
+وللإياب نفرض أن ${\OLId{greek-variable}{Gamma}} \cup \{ \lnot !A \}$ غير قابلة للإرضاء.
+فكل !!{structure}~$\Struct M$ لا تخلو من أحد الأمرين:
+$\Sat/{{\OLId{latin-looped}{M}}}{{\OLId{greek-variable}{Gamma}}}$ أو $\Sat{{\OLId{latin-looped}{M}}}{!A}$. فكل !!{structure}
+~$\Struct M$ تحقق $\Sat{{\OLId{latin-looped}{M}}}{{\OLId{greek-variable}{Gamma}}}$ لا بد أن تحقق $\Sat{{\OLId{latin-looped}{M}}}{!A}$،
+وذلك هو ${\OLId{greek-variable}{Gamma}} \Entails !A$.
+\end{proof}
+
+\begin{prob}
+\begin{enumerate}
+\item بيّن أن ${\OLId{greek-variable}{Gamma}} \Entails \lfalse$ إذا وفقط إذا كانت ${\OLId{greek-variable}{Gamma}}$
+  غير قابلة للإرضاء.
+\item بيّن أن ${\OLId{greek-variable}{Gamma}} \cup \{!A\} \Entails \lfalse$ إذا وفقط إذا
+  كان ${\OLId{greek-variable}{Gamma}} \Entails \lnot !A$.
+\item افترض أن ${\OLId{latin-ordinary}{c}}$ لا يرد في~$!A$ ولا في~${\OLId{greek-variable}{Gamma}}$. بيّن أن
+  ${\OLId{greek-variable}{Gamma}} \Entails \lforall[{\OLId{latin-ordinary}{x}}][!A]$ إذا وفقط إذا كان
+  ${\OLId{greek-variable}{Gamma}} \Entails \Subst{!A}{{\OLId{latin-ordinary}{c}}}{{\OLId{latin-ordinary}{x}}}$.
+\end{enumerate}
+\end{prob}
+
+\begin{prop}
+إذا كان ${\OLId{greek-variable}{Gamma}} \subseteq {\OLId{greek-variable}{Gamma}}'$ و${\OLId{greek-variable}{Gamma}} \Entails !A$، فإن
+${\OLId{greek-variable}{Gamma}}' \Entails !A$.
+\end{prop}
+
+\begin{proof}
+لنفرض ${\OLId{greek-variable}{Gamma}} \subseteq {\OLId{greek-variable}{Gamma}}'$ و${\OLId{greek-variable}{Gamma}} \Entails !A$،
+ولنأخذ $\Struct M$ بنية تحقق $\Sat{{\OLId{latin-looped}{M}}}{{\OLId{greek-variable}{Gamma}}'}$.
+فيتبع $\Sat{{\OLId{latin-looped}{M}}}{{\OLId{greek-variable}{Gamma}}}$، ومن ${\OLId{greek-variable}{Gamma}} \Entails !A$ يلزم
+$\Sat{{\OLId{latin-looped}{M}}}{!A}$. إذن كلما كان $\Sat{{\OLId{latin-looped}{M}}}{{\OLId{greek-variable}{Gamma}}'}$ كان
+$\Sat{{\OLId{latin-looped}{M}}}{!A}$؛ فثبت ${\OLId{greek-variable}{Gamma}}' \Entails !A$.
+\end{proof}
+
+
+\begin{thm}[مبرهنة الاستنباط الدلالية]
+\ollabel{thm:sem-deduction}
+${\OLId{greek-variable}{Gamma}} \cup \{!A\} \Entails !B$ إذا وفقط إذا كان
+${\OLId{greek-variable}{Gamma}} \Entails !A \lif !B$.
+\end{thm}
+
+\begin{proof}
+للذهاب نفرض
+${\OLId{greek-variable}{Gamma}} \cup \{ !A \} \Entails !B$، ونأخذ $\Struct M$
+!!a{structure} تحقق $\Sat{{\OLId{latin-looped}{M}}}{{\OLId{greek-variable}{Gamma}}}$. فإن كان $\Sat{{\OLId{latin-looped}{M}}}{!A}$،
+حصل $\Sat{{\OLId{latin-looped}{M}}}{{\OLId{greek-variable}{Gamma}} \cup \{ !A \} }$؛ ولما كانت
+${\OLId{greek-variable}{Gamma}} \cup \{ !A \}$ تستلزم~$!B$، لزم $\Sat{{\OLId{latin-looped}{M}}}{!B}$.
+فيكون $\Sat{{\OLId{latin-looped}{M}}}{!A \lif !B}$، وبه يثبت
+${\OLId{greek-variable}{Gamma}} \Entails !A \lif !B$.
+
+وللإياب نفرض ${\OLId{greek-variable}{Gamma}} \Entails !A \lif !B$، ولتكن
+$\Struct M$ !!a{structure} تحقق
+$\Sat{{\OLId{latin-looped}{M}}}{{\OLId{greek-variable}{Gamma}} \cup \{ !A \}}$. فمنه $\Sat{{\OLId{latin-looped}{M}}}{{\OLId{greek-variable}{Gamma}}}$،
+ومنه $\Sat{{\OLId{latin-looped}{M}}}{!A \lif !B}$. ومع $\Sat{{\OLId{latin-looped}{M}}}{!A}$ يلزم
+$\Sat{{\OLId{latin-looped}{M}}}{!B}$. فمتى تحقق
+$\Sat{{\OLId{latin-looped}{M}}}{{\OLId{greek-variable}{Gamma}} \cup \{ !A \} }$ تحقق $\Sat{{\OLId{latin-looped}{M}}}{!B}$،
+وهذا معنى ${\OLId{greek-variable}{Gamma}} \cup \{ !A \} \Entails !B$.
+\end{proof}
+
+\begin{prop}\ollabel{prop:quant-terms}
+  لتكن $\Struct{M}$ !!a{structure}، ولتكن $!A({\OLId{latin-ordinary}{x}})$ !!a{formula} ذات
+  متغير حر واحد~${\OLId{latin-ordinary}{x}}$، وليكن ${\OLId{latin-ordinary}{t}}$~حدًا مغلقًا. عندئذ:
+  \begin{tagenumerate}{prvEx,prvAll}
+    \tagitem{prvEx}{$!A({\OLId{latin-ordinary}{t}}) \Entails \lexists[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$}{}
+    \tagitem{prvAll}{$\lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})] \Entails !A({\OLId{latin-ordinary}{t}})$}{}
+  \end{tagenumerate}
+\end{prop}
+
+\begin{proof}
+  \begin{tagenumerate}{prvEx,prvAll}
+    \tagitem{prvEx}{%
+      \iftag{probEx}{تمرين.}{افترض $\Sat{{\OLId{latin-looped}{M}}}{!A({\OLId{latin-ordinary}{t}})}$. وليكن ${\OLId{latin-ordinary}{s}}$
+        إسناد متغيرات يحقق ${\OLId{latin-ordinary}{s}}({\OLId{latin-ordinary}{x}}) = \Value{{\OLId{latin-ordinary}{t}}}{{\OLId{latin-looped}{M}}}$. عندئذ
+        $\Sat{{\OLId{latin-looped}{M}}}{!A({\OLId{latin-ordinary}{t}})}[{\OLId{latin-ordinary}{s}}]$ لأن $!A({\OLId{latin-ordinary}{t}})$ !!a{sentence}. وبحسب
+        \olref[ext]{prop:ext-formulas}، يكون
+        $\Sat{{\OLId{latin-looped}{M}}}{!A({\OLId{latin-ordinary}{x}})}[{\OLId{latin-ordinary}{s}}]$. وبحسب
+        \olref[ass]{prop:sat-quant}،
+        $\Sat{{\OLId{latin-looped}{M}}}{\lexists[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]}$.}}{}
+    \tagitem{prvAll}{%
+      \iftag{probAll}{تمرين.}{افترض
+        $\Sat{{\OLId{latin-looped}{M}}}{\lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]}$. وليكن ${\OLId{latin-ordinary}{s}}$ إسناد متغيرات
+        يحقق ${\OLId{latin-ordinary}{s}}({\OLId{latin-ordinary}{x}}) = \Value{{\OLId{latin-ordinary}{t}}}{{\OLId{latin-looped}{M}}}$. بحسب
+        \olref[ass]{prop:sat-quant}، يكون
+        $\Sat{{\OLId{latin-looped}{M}}}{!A({\OLId{latin-ordinary}{x}})}[{\OLId{latin-ordinary}{s}}]$. وبحسب
+        \olref[ext]{prop:ext-formulas}، يكون
+        $\Sat{{\OLId{latin-looped}{M}}}{!A({\OLId{latin-ordinary}{t}})}[{\OLId{latin-ordinary}{s}}]$. وبحسب
+        \olref[ass]{prop:sentence-sat-true}، يكون
+        $\Sat{{\OLId{latin-looped}{M}}}{!A({\OLId{latin-ordinary}{t}})}$ لأن $!A({\OLId{latin-ordinary}{t}})$ !!a{sentence}.}}{}
+  \end{tagenumerate}
+\end{proof}
+
+\begin{probtag}{probEx,probAll}
+  أكمل برهان \olref[fol][syn][sem]{prop:quant-terms}.
+\end{probtag}
+
+\end{document}

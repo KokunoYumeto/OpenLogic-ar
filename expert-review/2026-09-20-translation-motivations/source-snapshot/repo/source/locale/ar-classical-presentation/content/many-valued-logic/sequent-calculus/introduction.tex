@@ -1,0 +1,80 @@
+% Part: many-valued-logic
+% Chapter: sequent-calculus
+% Section: introduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mvl}{seq}{int}
+
+\olsection{مقدمة}
+
+حساب التتابعيات في المنطق الكلاسيكي نسق !!{derivation} يجمع البساطة
+إلى الفعالية. ولا يختص إمكان بنائه بذلك المنطق؛ فمتى عُرّف منطق متعدد
+القيم بمصفوفة كانت مجموعة قيمها~${\OLId{latin-looped}{V}}$ منتهية، أمكن أن يُجعل له حساب
+تتابعيات. ولبيان الطريق إلى ذلك، ننظر أولًا في دلالة التتابعية الكلاسيكية
+وفي صورة قواعد الاستدلال عليها.
+
+تذكر الآن أن التتابعية
+\begin{align*}
+    !A_{\OLMathNumeral{1}}, \dots, !A_{\OLId{latin-ordinary}{m}} & \Sequent !B_{\OLMathNumeral{1}}, \dots, !B_{\OLId{latin-ordinary}{n}}
+\intertext{يمكن تفسيرها بالـ!!{formula}}
+    (!A_{\OLMathNumeral{1}} \land \cdots \land !A_{\OLId{latin-ordinary}{m}}) & \lif (!B_{\OLMathNumeral{1}} \lor \cdots \lor
+!B_{\OLId{latin-ordinary}{n}})
+\end{align*}
+ومعنى ذلك أن !!^a{valuation}~$\pAssign{{\OLId{latin-ordinary}{v}}}$ \emph{يحقق} التتابعية
+${\OLId{greek-variable}{Gamma}} \Sequent {\OLId{greek-variable}{Delta}}$ متى وفقط متى حصل أحد الأمرين:
+$\pValue{{\OLId{latin-ordinary}{v}}}(!A) = \False$ لبعض~$!A \in {\OLId{greek-variable}{Gamma}}$، أو
+$\pValue{{\OLId{latin-ordinary}{v}}}(!A) = \True$ لبعض~$!A \in {\OLId{greek-variable}{Delta}}$. وعلى هذا تكون
+التتابعيات الابتدائية~$!A \Sequent !A$ محققة على كل حال؛ إذ لا يخلو
+الأمر من~$\pValue {\OLId{latin-ordinary}{v}}(!A) = \True$ أو~$\pValue {\OLId{latin-ordinary}{v}}(!A) = \False$.
+
+فيما يأتي قاعدتا الاستدلال الخاصتان بالشرط في~$\Log{LK}$، بعد حذف
+الصيغ الجانبية~${\OLId{greek-variable}{Gamma}}$ و${\OLId{greek-variable}{Delta}}$:
+
+\begin{defish}
+    \Axiom$ \fCenter !A$
+    \Axiom$ !B \fCenter $
+    \RightLabel{\LeftR{\lif}}
+    \BinaryInf$ !A \lif !B \fCenter $
+    \DisplayProof
+    \hfill
+    \Axiom$ !A \fCenter !B$
+    \RightLabel{\RightR{\lif}}
+    \UnaryInf$ \fCenter !A \lif !B $
+    \DisplayProof
+\end{defish}
+
+فلنقرأ القاعدتين على مقتضى هذه الدلالة. تفيد قاعدة
+$\LeftR{\lif}$ أن اجتماع~$\pValue {\OLId{latin-ordinary}{v}}(!A) = \True$ و
+$\pValue {\OLId{latin-ordinary}{v}}(!B) = \False$ يقتضي~$\pValue {\OLId{latin-ordinary}{v}}(!A \lif !B) = \False$.
+وتفيد قاعدة~$\RightR{\lif}$ أن حصول أحد الأمرين:
+$\pValue {\OLId{latin-ordinary}{v}}(!A) = \False$ أو~$\pValue {\OLId{latin-ordinary}{v}}(!B) = \True$، يقتضي
+$\pValue {\OLId{latin-ordinary}{v}}(!A \lif !B) = \True$. بل يصح العكس في كل منهما،
+فتكون الدلالة تكافؤًا. وليس هذا شأن قاعدتي~$\LeftR{\land}$ و$\RightR{\lor}$
+في صورتيهما القياسيتين، غير أن لكل منهما صورة أخرى يتحقق فيها التكافؤ:
+
+\begin{defish}
+    \Axiom$!A, !B, {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}$
+    \RightLabel{\LeftR{\land}}
+    \UnaryInf$!A \land !B, {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}$
+    \DisplayProof
+    \hfill
+    \Axiom$ {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, !A, !B$
+    \RightLabel{\RightR{\lor}}
+    \UnaryInf$ {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, !A \lor !B$
+    \DisplayProof
+\end{defish}
+
+فإذا نقلنا هذا المعنى إلى منطق ذي~${\OLId{latin-ordinary}{n}}$ من القيم، كان حساب التتابعيات
+ذا~${\OLId{latin-ordinary}{n}}$ من المواضع، لا موضعين فحسب: لكل قيمة صدق موضع يخصها.
+ومثال ذلك المنطق الثلاثي القيم حيث~${\OLId{latin-looped}{V}} = \{\False, \Undef, \True\}$؛
+فالتتابعية فيه على صورة~${\OLId{greek-variable}{Gamma}} \mid \Pi \mid {\OLId{greek-variable}{Delta}}$. ويحققها
+!!a{valuation}~$\pAssign {\OLId{latin-ordinary}{v}}$ متى وفقط متى صدق أحد الشروط الآتية:
+$\pValue{{\OLId{latin-ordinary}{v}}}(!A) = \False$ لبعض~$!A \in {\OLId{greek-variable}{Gamma}}$، أو
+$\pValue{{\OLId{latin-ordinary}{v}}}(!A) = \True$ لبعض~$!A \in {\OLId{greek-variable}{Delta}}$، أو
+$\pValue{{\OLId{latin-ordinary}{v}}}(!A) = \Undef$ لبعض~$!A \in \Pi$.
+ولذلك كانت التتابعيات الابتدائية~$!A \mid !A \mid !A$ محققة دائمًا.
+
+\end{document}

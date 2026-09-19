@@ -1,0 +1,232 @@
+% Part: computability
+% Chapter: computability-theory
+% Section: fixed-point-thm
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{thy}{fix}
+\olsection{مبرهنة النقطة الثابتة}
+
+نعود إلى مسألة التوقف، ونتخذ مؤقتًا الرمز
+$\gn{\cfind{{\OLId{latin-ordinary}{x}}}({\OLId{latin-ordinary}{y}})}$ بدل $\tuple{{\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}}}$، كأنه
+«اسم» لقيمة $\cfind{{\OLId{latin-ordinary}{x}}}({\OLId{latin-ordinary}{y}})$. وبه نعيد
+صياغة أحد براهين عدم قابلية مشكلة التوقف للقرار.
+
+فنسأل: أتوجد دالة قابلة للحساب ${\OLId{latin-ordinary}{h}}$ تحقق، لكل ${\OLId{latin-ordinary}{x}}$
+و${\OLId{latin-ordinary}{y}}$،
+\[
+{\OLId{latin-ordinary}{h}}(\gn{\cfind{{\OLId{latin-ordinary}{x}}}({\OLId{latin-ordinary}{y}})}) =
+\begin{cases}
+{\OLMathNumeral{1}} & \text{إذا كانت $\cfind{{\OLId{latin-ordinary}{x}}}({\OLId{latin-ordinary}{y}}) \fdefined$} \\
+{\OLMathNumeral{0}} & \text{خلاف ذلك.}
+\end{cases}
+\]
+
+والجواب بالنفي؛ إذ لو وجدت لكانت الدالة الجزئية
+\[
+{\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{x}}) \simeq
+\begin{cases}
+{\OLMathNumeral{0}} & \text{إذا كان ${\OLId{latin-ordinary}{h}}(\gn{\cfind{{\OLId{latin-ordinary}{x}}}({\OLId{latin-ordinary}{x}})}) = {\OLMathNumeral{0}}$} \\
+\text{غير معرّفة} & \text{خلاف ذلك}
+\end{cases}
+\]
+قابلة للحساب، ومن ثم لكان لها فهرس ما~${\OLId{latin-ordinary}{e}}$. لكن عندئذ يكون
+\[
+\cfind{{\OLId{latin-ordinary}{e}}}({\OLId{latin-ordinary}{e}}) \simeq
+\begin{cases}
+{\OLMathNumeral{0}} & \text{إذا كان ${\OLId{latin-ordinary}{h}}(\gn{\cfind{{\OLId{latin-ordinary}{e}}}({\OLId{latin-ordinary}{e}})}) = {\OLMathNumeral{0}}$} \\
+\text{غير معرّفة} & \text{خلاف ذلك،}
+\end{cases}
+\]
+فيلزم أن $\cfind{{\OLId{latin-ordinary}{e}}}({\OLId{latin-ordinary}{e}})$ معرّفة إذا وفقط إذا كانت غير معرّفة، وهو محال.
+
+فتأمل المعادلة التي وردت فيها $\cfind{{\OLId{latin-ordinary}{e}}}$: فيها ضرب من الإحالة
+الذاتية، إذ جعلنا قيمة $\cfind{{\OLId{latin-ordinary}{e}}}({\OLId{latin-ordinary}{e}})$ تعتمد، على وجه مخصوص، على
+$\gn{\cfind{{\OLId{latin-ordinary}{e}}}({\OLId{latin-ordinary}{e}})}$. ومبرهنة النقطة الثابتة تثبت \emph{إمكان}
+هذا الصنيع على العموم، لا في مقام البرهان بالخلف وحده.
+
+وفي \olref{lem:fixed-equiv} عبارتان متكافئتان لمبرهنة النقطة
+الثابتة. وصحيح أن صدقهما معًا يكفي، من الوجهة المنطقية، لتكافئهما؛
+غير أن المراد هنا استنباط كل واحدة منهما من الأخرى مباشرة.
+فبهذا تصلحان عبارتين بديلتين عن مبرهنة واحدة.
+
+\begin{lem}
+\ollabel{lem:fixed-equiv}
+العبارتان الآتيتان متكافئتان:
+\begin{enumerate}
+\item لكل دالة جزئية قابلة للحساب ${\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})$ فهرس~${\OLId{latin-ordinary}{e}}$ بحيث، لكل~${\OLId{latin-ordinary}{y}}$،
+\[
+\cfind{{\OLId{latin-ordinary}{e}}}({\OLId{latin-ordinary}{y}}) \simeq {\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{e}},{\OLId{latin-ordinary}{y}}).
+\]
+\item لكل دالة قابلة للحساب~${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}})$ فهرس~${\OLId{latin-ordinary}{e}}$ بحيث، لكل~${\OLId{latin-ordinary}{y}}$،
+\[
+\cfind{{\OLId{latin-ordinary}{e}}}({\OLId{latin-ordinary}{y}}) \simeq \cfind{{\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{e}})}({\OLId{latin-ordinary}{y}}).
+\]
+\end{enumerate}
+\end{lem}
+
+\begin{proof}
+$({\OLMathNumeral{1}}) \Rightarrow ({\OLMathNumeral{2}})$: إذا أخذنا ${\OLId{latin-ordinary}{f}}$، عرّفنا ${\OLId{latin-ordinary}{g}}$ بوضع
+${\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}}) \simeq \fn{Un}({\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}}),{\OLId{latin-ordinary}{y}})$. ثم استعملنا (\OLClassicalDigits{1})، فحصل فهرس~${\OLId{latin-ordinary}{e}}$
+يحقق، لكل~${\OLId{latin-ordinary}{y}}$،
+\begin{align*}
+\cfind{{\OLId{latin-ordinary}{e}}}({\OLId{latin-ordinary}{y}}) & = \fn{Un}({\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{e}}),{\OLId{latin-ordinary}{y}}) \\
+& = \cfind{{\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{e}})}({\OLId{latin-ordinary}{y}}).
+\end{align*}
+
+$({\OLMathNumeral{2}}) \Rightarrow ({\OLMathNumeral{1}})$: إذا أخذنا ${\OLId{latin-ordinary}{g}}$، أعطتنا مبرهنة ${\OLId{latin-ordinary}{s}}$-${\OLId{latin-ordinary}{m}}$-${\OLId{latin-ordinary}{n}}$
+دالة ${\OLId{latin-ordinary}{f}}$ تحقق، لكل ${\OLId{latin-ordinary}{x}}$ و~${\OLId{latin-ordinary}{y}}$،
+$\cfind{{\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}})}({\OLId{latin-ordinary}{y}}) \simeq {\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})$. ونستعمل (\OLClassicalDigits{2})، فنأخذ فهرسًا~${\OLId{latin-ordinary}{e}}$
+بحيث
+\begin{align*}
+\cfind{{\OLId{latin-ordinary}{e}}}({\OLId{latin-ordinary}{y}}) & = \cfind{{\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{e}})}({\OLId{latin-ordinary}{y}}) \\
+& = {\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{e}},{\OLId{latin-ordinary}{y}}).
+\end{align*}
+وبذلك يتم البرهان.
+\end{proof}
+
+\begin{explain}
+وقبل إثبات (\OLClassicalDigits{1})، وما يتبعها من (\OLClassicalDigits{2})، تأمل ما في معناها من غرابة.
+فلتكن ${\OLId{latin-ordinary}{e}}$ برنامجًا؛ تقول (\OLClassicalDigits{1}) إنه مهما أعطيتنا
+دالة جزئية قابلة للحساب ${\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})$، أمكن إيجاد برنامج ${\OLId{latin-ordinary}{e}}$
+يحسب ${\OLId{latin-ordinary}{g}}_{\OLId{latin-ordinary}{e}}({\OLId{latin-ordinary}{y}}) \simeq {\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{e}},{\OLId{latin-ordinary}{y}})$. فكأننا نصنع برنامجًا يحسب
+دالة ترجع إلى ذلك البرنامج نفسه.
+\end{explain}
+
+\begin{thm}
+العبارتان الواردتان في \olref{lem:fixed-equiv} صادقتان. وعلى وجه
+التحديد، لكل دالة جزئية قابلة للحساب ${\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})$ فهرس~${\OLId{latin-ordinary}{e}}$ بحيث،
+لكل~${\OLId{latin-ordinary}{y}}$،
+\[
+\cfind{{\OLId{latin-ordinary}{e}}}({\OLId{latin-ordinary}{y}}) \simeq {\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{e}},{\OLId{latin-ordinary}{y}}).
+\]
+\end{thm}
+
+\begin{proof}
+قد تضمنت مناقشة التوقف السابقة أصول هذا البرهان. فلنجعل
+$\fn{diag}({\OLId{latin-ordinary}{x}})$ دالة قابلة للحساب تعيد، لكل ${\OLId{latin-ordinary}{x}}$، فهرسًا للدالة
+${\OLId{latin-ordinary}{f}}_{\OLId{latin-ordinary}{x}}({\OLId{latin-ordinary}{y}}) \simeq \cfind{{\OLId{latin-ordinary}{x}}}[{\OLMathNumeral{2}}]({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})$، أي
+\[
+\cfind{\fn{diag}({\OLId{latin-ordinary}{x}})}({\OLId{latin-ordinary}{y}}) \simeq \cfind{{\OLId{latin-ordinary}{x}}}[{\OLMathNumeral{2}}]({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}}).
+\]
+والدالة $\fn{diag}$ تحول برنامج دالة ثنائية إلى برنامج
+دالة أحادية، بأن تثبت البرنامج الأول حجةً أولى. ولتعريف
+$\fn{diag}$ تعريفًا صوريًا، نبدأ بتعريف ${\OLId{latin-ordinary}{s}}$ بوضع
+\[
+{\OLId{latin-ordinary}{s}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}}) \simeq \fn{Un}^{\OLMathNumeral{2}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}}),
+\]
+حيث $\fn{Un}^{\OLMathNumeral{2}}$ دالة ثلاثية شاملة للدوال الجزئية الثنائية القابلة
+للحساب. ومن مبرهنة ${\OLId{latin-ordinary}{s}}$-${\OLId{latin-ordinary}{m}}$-${\OLId{latin-ordinary}{n}}$ نستخرج دالة عودية بدائية
+$\fn{diag}$ تحقق
+\[
+\cfind{\fn{diag}({\OLId{latin-ordinary}{x}})}({\OLId{latin-ordinary}{y}}) \simeq {\OLId{latin-ordinary}{s}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}}).
+\]
+
+ثم نعرّف ${\OLId{latin-ordinary}{l}}$ بالمعادلة
+\[
+{\OLId{latin-ordinary}{l}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}}) \simeq {\OLId{latin-ordinary}{g}}(\fn{diag}({\OLId{latin-ordinary}{x}}),{\OLId{latin-ordinary}{y}}).
+\]
+ونجعل $\gn{{\OLId{latin-ordinary}{l}}}$ فهرسًا لـ${\OLId{latin-ordinary}{l}}$، ونضع أخيرًا
+${\OLId{latin-ordinary}{e}}=\fn{diag}(\gn{{\OLId{latin-ordinary}{l}}})$. عندئذ، لكل ${\OLId{latin-ordinary}{y}}$، لدينا
+\begin{align*}
+\cfind{{\OLId{latin-ordinary}{e}}}({\OLId{latin-ordinary}{y}}) & \simeq \cfind{\fn{diag}(\gn{{\OLId{latin-ordinary}{l}}})}({\OLId{latin-ordinary}{y}}) \\
+& \simeq \cfind{\gn{{\OLId{latin-ordinary}{l}}}}[{\OLMathNumeral{2}}](\gn{{\OLId{latin-ordinary}{l}}}, {\OLId{latin-ordinary}{y}}) \\
+& \simeq {\OLId{latin-ordinary}{l}}(\gn{{\OLId{latin-ordinary}{l}}}, {\OLId{latin-ordinary}{y}}) \\
+& \simeq {\OLId{latin-ordinary}{g}}(\fn{diag}(\gn{{\OLId{latin-ordinary}{l}}}),{\OLId{latin-ordinary}{y}}) \\
+& \simeq {\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{e}}, {\OLId{latin-ordinary}{y}}),
+\end{align*}
+كما هو مطلوب.
+\end{proof}
+
+\begin{explain}
+فما وجه هذا البناء؟ لنفرض أنك تريد برنامجًا يطبع نفسه،
+وأن لغة البرمجة التي تستعملها ذات مكتبة واسعة، غير مألوفة، من دوال
+السلاسل. ومن جملتها دالة $\fn{diag}$، عملها
+أن تتلقى السلسلة~${\OLId{latin-ordinary}{s}}$، فتعيّن $\fn{diag}$ كل موضع يرد فيه
+الرمز `x' في~${\OLId{latin-ordinary}{s}}$ وتضع مكانه نسخة مقتبسة من السلسلة الأصلية. فإذا
+أدخلنا، مثلًا، السلسلة
+\begin{quote}
+\begin{verbatim}
+hello x world
+\end{verbatim}
+\end{quote}
+دخلًا، أعادت الدالة
+\begin{quote}
+\begin{verbatim}
+hello 'hello x world' world
+\end{verbatim}
+\end{quote}
+خرجًا. فيسهل حينئذ إنشاء البرنامج المطلوب؛ وتحقق أن
+\begin{quote}
+\begin{verbatim}
+print(diag('print(diag(x))'))
+\end{verbatim}
+\end{quote}
+يؤدي الغرض. وتجري الفكرة ذاتها في لغات مألوفة، مثل C++ وJava،
+وإن زاد تفصيل تنفيذها.
+
+ومن هنا نصل إلى برهان النقطة الثابتة بخطوتين. لنفرض أن
+لدالة الطباعة صورة معدلة $\fn{print}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})$ تتلقى سلسلة ${\OLId{latin-ordinary}{x}}$ وحجة
+عددية ${\OLId{latin-ordinary}{y}}$، وتطبع السلسلة ${\OLId{latin-ordinary}{x}}$ متكررة ${\OLId{latin-ordinary}{y}}$ مرة.
+فيكون «البرنامج»
+\begin{quote}
+\begin{verbatim}
+getinput(y);
+print(diag('getinput(y); print(diag(x), y)'), y)
+\end{verbatim}
+\end{quote}
+برنامجًا يطبع نفسه ${\OLId{latin-ordinary}{y}}$ مرة عند الدخل ${\OLId{latin-ordinary}{y}}$. فإذا أقمنا مقام الهيكل
+$\fn{getinput}$---$\fn{print}$---$\fn{diag}$ دالة اعتباطية
+${\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})$ حصل
+\begin{quote}
+\begin{verbatim}
+g(diag('g(diag(x), y)'), y)
+\end{verbatim}
+\end{quote}
+فهذا برنامج يجري، عند الدخل ${\OLId{latin-ordinary}{y}}$، الدالة ${\OLId{latin-ordinary}{g}}$ على البرنامج نفسه مع
+${\OLId{latin-ordinary}{y}}$. ومتى فسرنا «الاقتباس» بأنه «استعمال فهرس لـ»، رجعنا إلى
+البرهان المتقدم.
+
+ولا يضر الآن أن يبدو لك البرهان حيلة صورية أو شيئًا من
+السحر؛ وإنما المطلوب أن تقدر على إعادة تفاصيل الحجة. وعند
+إثبات مبرهنات عدم الاكتمال، و«مبرهنة النقطة الثابتة» المتصلة بها،
+ننظر في وجوه أخرى تفسر نجاح هذا البناء.
+\end{explain}
+
+\begin{tagblock}{lambda}
+\begin{digress}
+وبالفكرة نفسها نحصل على مؤلّف «نقطة ثابتة». فإذا
+أخذنا حد لامبدا ${\OLId{latin-ordinary}{g}}$، وطلبنا حدًا ${\OLId{latin-ordinary}{k}}$ يكون فيه ${\OLId{latin-ordinary}{k}}$ مكافئًا
+$\beta$ لـ$gk$، عرّفنا الحدين
+\[
+\fn{diag}({\OLId{latin-ordinary}{x}}) = xx
+\]
+و
+\[
+{\OLId{latin-ordinary}{l}}({\OLId{latin-ordinary}{x}}) = {\OLId{latin-ordinary}{g}}(\fn{diag}({\OLId{latin-ordinary}{x}}))
+\]
+بحسب اصطلاحات الترميز المتقدمة؛ فيكون ${\OLId{latin-ordinary}{l}}$ الحد
+$\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{g}}(xx)]$. ولنجعل ${\OLId{latin-ordinary}{k}}$ مساويًا للحد $ll$؛ فيحصل
+\begin{align*}
+{\OLId{latin-ordinary}{k}} & = (\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{g}}(xx)])(\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{g}}(xx)]) \\
+& \red  {\OLId{latin-ordinary}{g}}((\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{g}}(xx)])(\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{g}}(xx)])) \\
+& = gk.
+\end{align*}
+فإذا أخذنا
+\[
+{\OLId{latin-looped}{Y}} = \lambd[{\OLId{latin-ordinary}{g}}][((\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{g}}(xx)])(\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{g}}(xx)]))]
+\]
+اختزل $Yg$ و${\OLId{latin-ordinary}{g}}(Yg)$ إلى حد مشترك؛ ومن ثم
+$Yg \equiv_\beta {\OLId{latin-ordinary}{g}}(Yg)$. ويعرف هذا باسم «مؤلّف كاري». أما إذا أخذنا
+بدلًا منه
+\[
+{\OLId{latin-looped}{Y}} = (\lambd[xg][{\OLId{latin-ordinary}{g}}(xxg)])(\lambd[xg][{\OLId{latin-ordinary}{g}}(xxg)])
+\]
+فإن $Yg$ يختزل في الواقع إلى ${\OLId{latin-ordinary}{g}}(Yg)$، وهذا أقوى من مجرد التكافؤ. وهذه
+الصورة الأخيرة لـ${\OLId{latin-looped}{Y}}$ تسمى «مؤلّف تورنغ».
+\end{digress}
+\end{tagblock}
+
+\end{document}

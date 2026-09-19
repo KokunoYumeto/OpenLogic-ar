@@ -1,0 +1,123 @@
+% الجزء: sets-functions-relations
+% الفصل: relations
+% القسم: trees
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid[ar]{sfr}{rel}{tre}
+\olsection{الأشجار}
+
+\emph{الشجرة} صنف مخصوص من الترتيب الجزئي، عظيم النفع في فروع
+المنطق كلها. فالأشجار المنتهية ترد في أولياته: إذ تفهم
+!!{formula}s بتحليلها إلى شجر تركيبية، وتتخذ !!{derivation}s في
+كثير من أنساق !!{derivation} صورة أشجار منتهية.
+%
+وأما غير المنتهية فترد منذ براهين مبرهنات الاكتمال للمنطق القضي
+ومنطق الرتبة الأولى، ثم يستمر استعمالها في المنطق الرياضي كله.
+
+وبين الشجرة في نظرية المجموعات والشجرة في نظرية الرسوم صلة وثيقة.
+وهذه صورة شجرة منتهية:
+
+\begin{center}
+\begin{tikzpicture}[nodes={draw, circle}, -]
+\node{${\OLId{latin-ordinary}{r}}$} [grow'=up]
+    child { node {${\OLId{latin-ordinary}{a}}$} 
+        child { node {${\OLId{latin-ordinary}{c}}$} }
+        child { node {${\OLId{latin-ordinary}{d}}$} }
+        child { node {${\OLId{latin-ordinary}{e}}$} }
+    }
+    child { node {${\OLId{latin-ordinary}{b}}$} };
+\end{tikzpicture}
+\end{center}
+
+أسفل العقد~${\OLId{latin-ordinary}{r}}$، وهي الجذر. وكل عقدة غير ${\OLId{latin-ordinary}{r}}$ لها عقدة أصل واحدة
+تحتها مباشرة. والعلاقة بين عقدة~${\OLId{latin-ordinary}{x}}$ وعقدة~${\OLId{latin-ordinary}{y}}$ هي أنه إذا أمكن بلوغ ${\OLId{latin-ordinary}{y}}$ من~${\OLId{latin-ordinary}{x}}$ بسلوك
+الحواف صعودًا، قلنا إن ${\OLId{latin-ordinary}{x}}$ \emph{سلف} لـ~${\OLId{latin-ordinary}{y}}$.
+
+وعلاقة السلف ترتيب جزئي صارم؛ ومنها نهتدي إلى التعريف بالمجموعات.
+ولا بد له من اصطلاحين: \emph{العنصر الأصغر} لمجموعة~${\OLId{latin-looped}{A}}$ مرتبة
+جزئيًا بـ~$\le$ هو !!a{element} ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}$ يحقق لكل ${\OLId{latin-ordinary}{y}} \in {\OLId{latin-looped}{A}}$
+أن~${\OLId{latin-ordinary}{x}} \le {\OLId{latin-ordinary}{y}}$. ونقول إن المجموعة \emph{مرتبة ترتيبًا جيدًا}
+بـ~$\le$ إذا كان لكل جزئية غير خالية منها عنصر أصغر.
+
+\begin{defn}[الشجرة]
+\emph{الشجرة} زوج ${\OLId{latin-looped}{T}} = \tuple{{\OLId{latin-looped}{A}}, \le}$، فيه ${\OLId{latin-looped}{A}}$ مجموعة و$\le$
+ترتيب جزئي على~${\OLId{latin-looped}{A}}$، وله أصغر وحيد ${\OLId{latin-ordinary}{r}} \in {\OLId{latin-looped}{A}}$ يسمى \emph{الجذر}،
+وتكون لكل ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}$ المجموعة $\Setabs{{\OLId{latin-ordinary}{y}}}{{\OLId{latin-ordinary}{y}} \le {\OLId{latin-ordinary}{x}}}$ مرتبة ترتيبًا
+جيدًا بـ~$\le$.
+\end{defn}
+
+\begin{defn}[اللواحق]
+لتكن ${\OLId{latin-looped}{T}} = \tuple{{\OLId{latin-looped}{A}}, \le}$ شجرة. متى كان ${\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}} \in {\OLId{latin-looped}{A}}$ و${\OLId{latin-ordinary}{x}} < {\OLId{latin-ordinary}{y}}$،
+وامتنع وجود ${\OLId{latin-ordinary}{z}} \in {\OLId{latin-looped}{A}}$ يحقق ${\OLId{latin-ordinary}{x}} < {\OLId{latin-ordinary}{z}} < {\OLId{latin-ordinary}{y}}$، سمي ${\OLId{latin-ordinary}{y}}$ \emph{لاحقًا} لـ~${\OLId{latin-ordinary}{x}}$.
+\end{defn}
+
+ولواحق ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}$ تسمى \emph{أبناءه} أيضًا. فإن كان ${\OLId{latin-ordinary}{y}}$ لاحقًا
+لـ~${\OLId{latin-ordinary}{x}}$، كان ${\OLId{latin-ordinary}{x}}$ \emph{سابق}~${\OLId{latin-ordinary}{y}}$، ويسمى كذلك \emph{عقدته الأصل}.
+
+\begin{prop}
+في الشجرة $\tuple{{\OLId{latin-looped}{A}},\le}$ لا يكون لـ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}$، إن لم يكن الجذر،
+أكثر من سابق واحد.
+\end{prop}
+
+\begin{proof}
+افرض ${\OLId{latin-ordinary}{y}}_{\OLMathNumeral{1}} < {\OLId{latin-ordinary}{x}}$ و${\OLId{latin-ordinary}{y}}_{\OLMathNumeral{2}} < {\OLId{latin-ordinary}{x}}$ و${\OLId{latin-ordinary}{y}}_{\OLMathNumeral{1}} \neq {\OLId{latin-ordinary}{y}}_{\OLMathNumeral{2}}$. فيكون
+$\{{\OLId{latin-ordinary}{y}}_{\OLMathNumeral{1}}, {\OLId{latin-ordinary}{y}}_{\OLMathNumeral{2}}\} \subseteq \Setabs{{\OLId{latin-ordinary}{z}}}{{\OLId{latin-ordinary}{z}}<{\OLId{latin-ordinary}{x}}}$. ولأن
+$\Setabs{{\OLId{latin-ordinary}{z}}}{{\OLId{latin-ordinary}{z}}<{\OLId{latin-ordinary}{x}}}$ جيدة الترتيب بـ~$\le$، فلا بد لجزئيتها
+$\{{\OLId{latin-ordinary}{y}}_{\OLMathNumeral{1}}, {\OLId{latin-ordinary}{y}}_{\OLMathNumeral{2}}\}$ من أصغر، وليس إلا ${\OLId{latin-ordinary}{y}}_{\OLMathNumeral{1}}$ أو~${\OLId{latin-ordinary}{y}}_{\OLMathNumeral{2}}$.
+إذن ${\OLId{latin-ordinary}{y}}_{\OLMathNumeral{1}} \le {\OLId{latin-ordinary}{y}}_{\OLMathNumeral{2}}$ أو ${\OLId{latin-ordinary}{y}}_{\OLMathNumeral{2}} \le {\OLId{latin-ordinary}{y}}_{\OLMathNumeral{1}}$؛ ومع ${\OLId{latin-ordinary}{y}}_{\OLMathNumeral{1}} \neq {\OLId{latin-ordinary}{y}}_{\OLMathNumeral{2}}$
+يصير ذلك ${\OLId{latin-ordinary}{y}}_{\OLMathNumeral{1}} < {\OLId{latin-ordinary}{y}}_{\OLMathNumeral{2}}$ أو ${\OLId{latin-ordinary}{y}}_{\OLMathNumeral{2}} < {\OLId{latin-ordinary}{y}}_{\OLMathNumeral{1}}$. وقد فرضنا
+${\OLId{latin-ordinary}{y}}_{\OLMathNumeral{1}} < {\OLId{latin-ordinary}{x}}$ و${\OLId{latin-ordinary}{y}}_{\OLMathNumeral{2}} < {\OLId{latin-ordinary}{x}}$، فينتج ${\OLId{latin-ordinary}{y}}_{\OLMathNumeral{1}} < {\OLId{latin-ordinary}{y}}_{\OLMathNumeral{2}} < {\OLId{latin-ordinary}{x}}$ أو ${\OLId{latin-ordinary}{y}}_{\OLMathNumeral{2}} < {\OLId{latin-ordinary}{y}}_{\OLMathNumeral{1}} < {\OLId{latin-ordinary}{x}}$.
+ففي كلتا الحالتين يمتنع أن يكون ${\OLId{latin-ordinary}{y}}_{\OLMathNumeral{1}}$ و${\OLId{latin-ordinary}{y}}_{\OLMathNumeral{2}}$ كلاهما سابقًا لـ~${\OLId{latin-ordinary}{x}}$.
+\end{proof}
+
+\begin{defn}
+الشجرة ${\OLId{latin-looped}{T}} = \tuple{{\OLId{latin-looped}{A}}, \le}$ \emph{غير منتهية} إن كانت ${\OLId{latin-looped}{A}}$ غير
+منتهية، و\emph{منتهية} فيما عدا ذلك. وإن كانت ${\OLId{latin-looped}{T}}$ بحيث لكل ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}$ فيها
+لواحق عددها منته، قلنا إن ${\OLId{latin-looped}{T}}$ \emph{منتهية التفرع}.
+\end{defn}
+
+\begin{defn}[الفروع]
+في شجرة ${\OLId{latin-looped}{T}} = \tuple{{\OLId{latin-looped}{A}}, \le}$، \emph{الفرع} من~${\OLId{latin-looped}{T}}$ سلسلة قصوى في~${\OLId{latin-looped}{T}}$:
+أي ${\OLId{latin-looped}{B}} \subseteq {\OLId{latin-looped}{A}}$، لكل ${\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}} \in {\OLId{latin-looped}{B}}$ فيها ${\OLId{latin-ordinary}{x}} \le {\OLId{latin-ordinary}{y}}$ أو ${\OLId{latin-ordinary}{y}} \le {\OLId{latin-ordinary}{x}}$،
+ولكل ${\OLId{latin-ordinary}{z}} \in {\OLId{latin-looped}{A}} \setminus {\OLId{latin-looped}{B}}$ يوجد ${\OLId{latin-ordinary}{u}} \in {\OLId{latin-looped}{B}}$ لا يصدق معه ${\OLId{latin-ordinary}{z}} \le {\OLId{latin-ordinary}{u}}$
+ولا ${\OLId{latin-ordinary}{u}} \le {\OLId{latin-ordinary}{z}}$.
+%
+ورمزها $[{\OLId{latin-looped}{T}}]$، أعني مجموعة جميع فروع ${\OLId{latin-looped}{T}}$.
+\end{defn}
+
+\begin{ex}
+المثال المشهور لمنتهي التفرع هو \emph{الشجرة الثنائية غير المنتهية}:
+متتاليات منتهية من ${\OLMathNumeral{0}}$ و~${\OLMathNumeral{1}}$، يرمز إليها بـ$\{{\OLMathNumeral{0}},{\OLMathNumeral{1}}\}^*$ أو~$\Bin^*$،
+وترتب بالامتداد $\sqsubseteq$، نحو ${\OLMathNumeral{101}} \sqsubseteq {\OLMathNumeral{101101}}$.
+ويمكن أن يلحق بآخر كل سلسلة ثنائية ${\OLMathNumeral{0}}$ أو ${\OLMathNumeral{1}}$؛ لذلك عناصر الشجرة
+غير متناهية، ولكل عنصر~${\OLId{latin-ordinary}{s}}$ لاحقان لا غير هما ${\OLId{latin-ordinary}{s}}{\OLMathNumeral{0}}$ و~${\OLId{latin-ordinary}{s}}{\OLMathNumeral{1}}$.
+وجذرها المتتالية الخالية $\emptyseq$.
+\end{ex}
+
+\begin{ex}
+وأعم قليلًا من ذلك متتاليات الطبيعيّات المنتهية~$\Nat^*$ مع
+الامتداد~$\sqsubseteq$؛ فهي شجرة أيضًا، ولكن تفرعها غير منته:
+لكل ${\OLId{latin-ordinary}{s}} \in \Nat^*$ لواحق~$sn$ لا تتناهى، واحد لكل ${\OLId{latin-ordinary}{n}} \in \Nat$.
+وكل مجموعة غير خالية ${\OLId{latin-looped}{A}} \subseteq \Nat^*$ مغلقة تحت~$\sqsubseteq$ تعد
+\emph{شجرة جزئية} من~$\Nat^*$؛ أي إن ${\OLId{latin-looped}{A}}$ تحقق: ${\OLId{latin-ordinary}{s}} \in {\OLId{latin-looped}{A}}$ و${\OLId{latin-ordinary}{s}}' \sqsubseteq {\OLId{latin-ordinary}{s}}$
+يقتضيان ${\OLId{latin-ordinary}{s}}' \in {\OLId{latin-looped}{A}}$. وكل شجرة منتهية يمكن تمثيلها بشجرة جزئية
+منتهية من~$\Nat^*$.
+\end{ex}
+
+\textbf{تنبيه تصحيحي على الأصل.} قُيّدت الشجرة الجزئية هنا بغير الخالية؛
+إذ إن المجموعة الخالية مغلقة تحت السوابق، ولكن لا جذر لها، فلا تحقق تعريف
+الشجرة المتقدم.
+
+\begin{prop}[قضية \foreignlanguage{english}{K\H{o}nig} المساعدة]
+كل شجرة ${\OLId{latin-looped}{T}} = \tuple{{\OLId{latin-looped}{A}},\le}$ غير منتهية ومنتهية التفرع يكون لـ${\OLId{latin-looped}{T}}$ فرع غير منته.
+\end{prop}
+
+وتختص من قضية \foreignlanguage{english}{K\H{o}nig} المساعدة
+صيغة كثيرة الاستعمال في نظرية قابلية الحساب، تسمى
+\emph{الصيغة الضعيفة من قضية \foreignlanguage{english}{K\H{o}nig} المساعدة}:
+كل شجرة جزئية غير منتهية من $\{{\OLMathNumeral{0}},{\OLMathNumeral{1}}\}^*$ لها فرع غير منته.
+
+\end{document}

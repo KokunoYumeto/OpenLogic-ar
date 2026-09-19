@@ -1,0 +1,70 @@
+% Part: model-theory
+% Chapter: models-of-arithmetic
+% Section: introduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{mar}{int}
+\section{مقدمة}
+
+\emph{النموذج القياسي} للحساب هو الـ!!{structure}~$\Struct{N}$
+ذات المجال $\Domain{{\OLId{latin-looped}{N}}} = \Nat$، حيث تؤول الرموز $\Obj{0}$
+و$\prime$ و$+$ و$\times$ و$<$ بمعانيها المعتادة. فتأويل
+$\Obj{0}$ هو~${\OLMathNumeral{0}}$، وتأويل $\prime$ دالة الخلف، وتأويل $+$
+جمع الأعداد في~$\Nat$، وتأويل $\times$ ضربها، وتأويل $<$
+ترتيبها المعروف. وتفصيل ذلك:
+\begin{align*}
+  \Assign{\Obj{0}}{{\OLId{latin-looped}{N}}} & = {\OLMathNumeral{0}}\\
+  \Assign{\prime}{{\OLId{latin-looped}{N}}}({\OLId{latin-ordinary}{n}}) & = {\OLId{latin-ordinary}{n}} + {\OLMathNumeral{1}}\\
+  \Assign{+}{{\OLId{latin-looped}{N}}}({\OLId{latin-ordinary}{n}}, {\OLId{latin-ordinary}{m}}) & = {\OLId{latin-ordinary}{n}} + {\OLId{latin-ordinary}{m}}\\
+  \Assign{\times}{{\OLId{latin-looped}{N}}}({\OLId{latin-ordinary}{n}}, {\OLId{latin-ordinary}{m}}) & = nm\\
+  \Assign{<}{{\OLId{latin-looped}{N}}} & = \Setabs{\tuple{{\OLId{latin-ordinary}{n}},{\OLId{latin-ordinary}{m}}} \in \Nat^{\OLMathNumeral{2}}}{{\OLId{latin-ordinary}{n}}<{\OLId{latin-ordinary}{m}}}
+\end{align*}
+ولا يلزم أن يكون مجال كل بنية للغة $\Lang{L_A}$ هو~$\Nat$.
+فلنأخذ، مثلًا، $\Struct{M}$ ذات المجال $\Domain{{\OLId{latin-looped}{M}}} = \{{\OLId{latin-ordinary}{a}}\}^*$،
+وهو المتتاليات المنتهية من الرمز الواحد~${\OLId{latin-ordinary}{a}}$:
+$\emptyset$، ${\OLId{latin-ordinary}{a}}$، $aa$، $aaa$، \dots. ولتكن التأويلات:
+\begin{align*}
+  \Assign{\Obj{0}}{{\OLId{latin-looped}{M}}} & = \emptyset\\
+  \Assign{\prime}{{\OLId{latin-looped}{M}}}({\OLId{latin-ordinary}{s}}) & = {\OLId{latin-ordinary}{s}} \concat {\OLId{latin-ordinary}{a}}\\
+  \Assign{+}{{\OLId{latin-looped}{M}}}({\OLId{latin-ordinary}{s}}, {\OLId{latin-ordinary}{t}}) & = {\OLId{latin-ordinary}{s}} \concat {\OLId{latin-ordinary}{t}}\\
+  \Assign{\times}{{\OLId{latin-looped}{M}}}({\OLId{latin-ordinary}{s}}, {\OLId{latin-ordinary}{t}}) & = {\OLId{latin-ordinary}{a}}^{\lvert {\OLId{latin-ordinary}{s}}\rvert\lvert {\OLId{latin-ordinary}{t}}\rvert}\\
+  \Assign{<}{{\OLId{latin-looped}{M}}} & = \Setabs{\tuple{{\OLId{latin-ordinary}{s}},{\OLId{latin-ordinary}{t}}} \in (\{{\OLId{latin-ordinary}{a}}\}^*)^{\OLMathNumeral{2}}}{\lvert {\OLId{latin-ordinary}{s}}\rvert<\lvert {\OLId{latin-ordinary}{t}}\rvert}
+\end{align*}
+البنيتان متفقتان في جوهر بنائهما؛ وإنما تختلف !!{element}s
+الـ!!{domain}s، ولا تختلف الصلات التي تقيمها دوال التأويل بين
+!!{element}s الـ!!{domain}s. ولهذا نقول إن الـ!!{structure}s
+\emph{متشاكلة}.
+
+ومن مبرهنة التراص ينتج بيسر أن كل نظرية تصدق في~$\Struct{N}$
+لها نماذج لا تتشاكل مع~$\Struct{N}$، تسمى \emph{غير قياسية}.
+والفرق الجدير بالنظر أن !!{element}s النموذج القياسي، أي
+$\Struct{N}$ وكل !!{structure}s المتشاكلة معها، تستنفدها قيم
+الأعداد القياسية~$\num{{\OLId{latin-ordinary}{n}}}$؛ فلدينا:
+\[
+\Domain{{\OLId{latin-looped}{N}}} = \Setabs{\Value{\num{{\OLId{latin-ordinary}{n}}}}{{\OLId{latin-looped}{N}}}}{{\OLId{latin-ordinary}{n}} \in \Nat}
+\]
+وأما النموذج غير القياسي فلا تستنفده تلك القيم: إذا كانت
+$\Struct{M}$ غير قياسية، ففيها ${\OLId{latin-ordinary}{x}} \in \Domain{{\OLId{latin-looped}{M}}}$ يحقق
+${\OLId{latin-ordinary}{x}} \neq \Value{\num{{\OLId{latin-ordinary}{n}}}}{{\OLId{latin-looped}{M}}}$ لكل~${\OLId{latin-ordinary}{n}}$.
+
+فهذه العناصر بمثابة «أعداد طبيعية لا نهائية». وبها يتبين،
+من وجه، سبب ظواهر عدم الاكتمال. خذ عبارة اتساق حساب بيانو
+$\OCon[\Th{PA}]$، أي
+$\lnot \lexists[{\OLId{latin-ordinary}{x}}][\OPrf[\Th{PA}]({\OLId{latin-ordinary}{x}}, \gn{\lfalse})]$.
+فـ $\Th{PA}$ لا تثبت $\OCon[\Th{PA}]$ ولا $\lnot \OCon[\Th{PA}]$؛
+لذلك تصح إضافة أي منهما إلى $\Th{PA}$ من غير إخلال بالاتساق.
+وبما أن $\Th{PA}$ متسقة، فـ $\Sat{{\OLId{latin-looped}{N}}}{\OCon[\Th{PA}]}$،
+ويلزم $\Sat/{{\OLId{latin-looped}{N}}}{\lnot \OCon[\Th{PA}]}$. وعليه \emph{ليست}
+$\Struct{N}$ نموذجًا لـ $\Th{PA} \cup \{\lnot \OCon[\Th{PA}]\}$،
+فكل نموذج لهذه النظرية غير قياسي. ولا بد في نماذج
+$\Th{PA} \cup \{\lnot \OCon[\Th{PA}]\}$ من !!{element} يشهد
+لصدق $\lexists[{\OLId{latin-ordinary}{x}}][\OPrf[\Th{PA}]({\OLId{latin-ordinary}{x}},\gn{\lfalse})]$؛ أي إنه،
+بحسب النموذج، عدد غودل لـ!!a{derivation} لتناقض من~$\Th{PA}$.
+ولا يكون هذا الـ!!a{element} قياسيًا؛ إذ
+$\Th{PA} \Proves \lnot \OPrf[\Th{PA}](\num{{\OLId{latin-ordinary}{n}}}, \gn{\lfalse})$
+لكل~${\OLId{latin-ordinary}{n}}$.
+
+\end{document}

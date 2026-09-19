@@ -1,0 +1,110 @@
+% Part: sets-functions-relations
+% Chapter: arithmetization
+% Section: cuts
+%
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid[ar]{sfr}{arith}{cuts}
+\olsection{من $\Rat$ إلى $\Real$}
+
+تدل خاصية الاكتمال، في جوهرها، على أن كل نقطة $\alpha$ من المستقيم الحقيقي تفصل ما على جانبيها فصلًا تامًّا: فهي $\alpha$ أصغر حد علوي للجانب الأدنى، وهي $\alpha$ أكبر حد سفلي للجانب الأعلى. ومن هنا اقترح ديديكند، في \emph{بناء} الأعداد الحقيقية من النسبية، أن نجعل الأعداد الحقيقية \emph{قطوعًا} تفصل الأعداد النسبية. فنطابق مثلًا $\sqrt{2}$ مع \emph{القطع} الفاصل بين النسبية $< \sqrt{2}$ والنسبية $> \sqrt{2}$.
+
+ولنحقق هذا التصور. إذا فصلنا الأعداد النسبية نصفين، كفى تعيين النصف \emph{الأدنى} لتعيين التقسيم كله تعيينًا وحيدًا. فنضبطه بالتعريف الآتي.
+
+\begin{defn}[القطع]
+\emph{القطع} $\alpha$ مقطع ابتدائي من الأعداد النسبية، غير خال، وليس هو النسبية كلها، ولا عنصر أعظم فيه. أي إن $\alpha$ قطع إذا وفقط إذا استوفى الشروط:
+\begin{enumerate}
+\item \emph{عدم الخلو والجزئية الحقيقية}: $\emptyset \neq \alpha \subsetneq \Rat$
+\item \emph{كونه ابتدائيًّا}: لكل $p,q \in \Rat$، من $p < q \in \alpha$ يلزم $p \in \alpha$
+\item \emph{انتفاء العنصر الأعظم}: لكل $p \in \alpha$ يوجد $q \in \alpha$ يحقق $p < q$
+\end{enumerate}
+ونجعل $\Real$ مجموعة هذه القطوع.
+\end{defn}
+
+فيصح بهذا أن نضع $\sqrt{2} = \Setabs{p \in \Rat}{p^2 < 2\text{
+أو }p < 0}$. ولا بد، بالطبع، من إثبات أن هذه المجموعة \emph{قطع} حقًّا، وتفصيله مؤخر إلى \olref[check]{sec}.
+
+ثم يلزمنا، كما لزم من قبل، أن نعين الدوال والعلاقات الأساسية على الكيانات التي عرفناها. ونبدأ بما هو أيسر، فنضع
+\begin{align*}
+	\alpha \leq \beta \text{ إذا وفقط إذا }\alpha \subseteq \beta
+\end{align*}
+وبهذا الترتيب نتمكن من \emph{صياغة} النتيجة المقصودة، وهي اكتمال مجموعة القطوع. فصورتها الكاملة: متى كانت $S$ مجموعة غير خالية من القطوع ولها حد علوي، كان لـ$S$ أصغر حد علوي. أي يوجد قطع $\lambda$ يحد $S$ من أعلى، بمعنى\ 
+$(\forall \alpha \in S)\alpha \subseteq \lambda$، ويكون $\lambda$ أصغر القطوع التي تحقق ذلك، بمعنى\ 
+$(\forall \beta \in \Real)((\forall \alpha \in S)\alpha \subseteq \beta \lif \lambda \subseteq \beta)$.
+ونقيم الآن الدليل.
+
+\begin{thm}\ollabel{realcompleteness}
+مجموعة القطوع ذات خاصية الاكتمال.
+\end{thm}
+
+\begin{proof}
+خذ $S$ مجموعة غير خالية من القطوع لها حد علوي، وضع $\lambda
+= \bigcup S$.
+%\Setabs{p \in \Rat}{(\exists \alpha \in S)p \in \alpha}$$
+فنثبت أولًا أن $\lambda$ قطع:
+\begin{enumerate}
+\item لما كانت $S$ غير خالية، وجد قطع في $S$؛ والقطع غير خال، فيلزم $\emptyset \neq \lambda$. ولكون $S$ مجموعة قطوع نجد $\lambda \subseteq \Rat$. ثم إن لـ$S$ حدًّا علويًّا، وهو قطع حقيقي؛ فيوجد $p \in
+\Rat$ خارج عن كل قطع $ \alpha \in S$. فيكون $p\notin \lambda$، ومنه $\lambda \subsetneq \Rat$.
+\item إذا كان $p < q \in \lambda$، وجد $ \alpha \in S$ يحقق $q \in \alpha$. والقطع $\alpha$ ابتدائي، فيلزم $p \in \alpha$، ومنه $p \in \lambda$.
+\item إذا كان $p \in \lambda$، وجد $ \alpha \in S$ يحقق $p \in
+\alpha$. وليس للقطع $\alpha$ عنصر أعظم، فيوجد $q \in \alpha$ يحقق $p < q$؛ فيكون $q \in \lambda$.
+\end{enumerate}
+فثبت أنه قطع. ثم إن
+$(\forall \alpha \in S)\alpha \subseteq \bigcup S = \lambda$، فتكون $\lambda$ حدًّا علويًّا لـ$S$. وإذا كان $\beta \in \mathbb{R}$ حدًّا علويًّا آخر، أي كان $(\forall \alpha \in S)\alpha \subseteq \beta$، فإن كل $p \in \Rat$ يحقق $p \in \lambda$ ينتمي إلى قطع $ \alpha \in S$ بحيث $p \in \alpha$؛ فيلزم $p \in \beta$. وهذا يثبت $\lambda
+\subseteq \beta$. فـ$\lambda$ هو \emph{أصغر} حد علوي لـ$S$.
+\end{proof}
+
+فقد حصلنا على كيانات تحقق خاصية الاكتمال؛ وبعبارة أخرى، لا «فجوات» بين قطوعنا. ولو أجرينا القطع مرة أخرى في الأعداد الحقيقية عوضًا عن النسبية، لما حصلنا بذلك على كيانات جديدة تزيد شيئًا في المقصود.
+
+ونعين بعد ذلك العمليات على الأعداد الحقيقية. فنبدأ بتضمين النسبية فيها، جاعلين $p_\Real =
+\Setabs{q \in \Rat}{q < p}$ لكل $p \in \Rat$. ثم نضع
+\begin{align*}
+	\alpha + \beta &= \Setabs{p + q}{p \in \alpha \land q \in \beta}\\
+	\alpha \times \beta &=
+	\Setabs{p \times q}{0 \leq p \in \alpha \land 0 \leq q \in \beta} \cup 0_\Real & \text{إذا كان }\alpha, \beta \geq 0_\Real
+\end{align*}
+ولبيان سائر حالات الضرب نعرف أولًا السالب: %that $0_\Real \times \alpha = 0_\Real = \alpha \times 0_\Real$, and add:
+\begin{align*}
+	-\alpha &= \Setabs{p - q}{p < 0 \land q \notin \alpha}
+\end{align*}
+ونجعل الطرح جمع المعكوس، فنضع
+\[
+	\alpha - \beta \defis \alpha + (\mathord{-}\beta).
+\]
+ونضع لكل قطع $\alpha$ أن
+$0_\Real \times \alpha = 0_\Real = \alpha \times 0_\Real$.
+وبذلك نضع:
+\begin{align*}
+	\alpha \times \beta &\defis
+	\begin{cases}
+		\mathord{-}\alpha \times \mathord{-}\beta &\text{إذا كان }\alpha < 0_\Real\text{ و}\beta < 0_\Real\\
+		\mathord{-}(\mathord{-}\alpha \times \beta) &\text{إذا كان }\alpha < 0_\Real \text{ و}\beta > 0_\Real\\
+		\mathord{-}(\alpha \times \mathord{-}\beta) &\text{إذا كان }\alpha > 0_\Real \text{ و}\beta < 0_\Real
+	\end{cases}
+\end{align*}
+ثم نعين المعكوس الضربي لكل قطع غير صفري:
+\begin{align*}
+	\alpha^{-1} &\defis
+	\begin{cases}
+		\Setabs{p \in \Rat}{p \leq 0 \lor
+		(\exists q \in \Rat)(0 < q \land q \notin \alpha \land
+		p < \nicefrac{1}{q})}
+		&\text{إذا كان }\alpha > 0_\Real\\
+		\mathord{-}\bigl((\mathord{-}\alpha)^{-1}\bigr)
+		&\text{إذا كان }\alpha < 0_\Real.
+	\end{cases}
+\end{align*}
+ومعكوس $\mathord{-}\alpha$ في الفرع الثاني مأخوذ بالفرع الأول، إذ
+$\mathord{-}\alpha>0_\Real$. وإذا كان $\beta\neq0_\Real$ جعلنا
+\[
+	\alpha \div \beta \defis \alpha \times \beta^{-1}.
+\]
+\textbf{تنبيه تصحيحي على الأصل.} أُثبتت حالتا الضرب في الصفر اللتان
+سقطتا من التقسيم بحسب الإشارة، ووُحّد رمز قطع الصفر مع الرمز $0_\Real$
+الذي عُرّف به تضمين الأعداد النسبية. وأُظهرت كذلك تعريفات الطرح والمعكوس
+الضربي والقسمة التي لم تكن في المتن المطبوع، لئلا يطلب الملحق تحقيق
+عمليات لم يسبق تعيينها.
+ولا بد أن نتحقق من أن كل حد من هذه الحدود ينتج قطعًا دائمًا. ثم نقيم البرهان على أن القطوع بهذه العمليات تسلك السلوك المطلوب؛ وهو برهان يسير في معناه، وإن طال تفصيله. ونؤخر جميع ذلك إلى \olref[check]{sec}.
+\end{document}

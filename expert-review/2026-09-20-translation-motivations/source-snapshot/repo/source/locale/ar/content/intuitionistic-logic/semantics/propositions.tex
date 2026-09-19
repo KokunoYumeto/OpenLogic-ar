@@ -1,0 +1,51 @@
+% part: intuitionistic-logic
+% chapter: semantics
+% section: propositions
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{sem}{pro}
+
+\olsection{القضايا}
+
+من المفيد أحيانًا أن يكون لدينا اسم لمجموعة العوالم في
+!!a{relational model}~$\mModel{M}$ التي تصدق فيها~!!a{formula}~$!A$.
+ونسميها~\emph{القضية} التي تعرّفها~$!A$، ونكتبها~$\Prop{M}{!A}$.
+
+\begin{defn}
+  نوسّع الدالة~$V$ استقرائيًا إلى التطبيق
+  $(!A \mapsto \Prop{M}{!A}) \colon \Frm \to \Pow{W}$ كما يأتي:
+  \begin{enumerate}
+  \item $\Prop{M}{\lfalse} = \emptyset$
+  \item $\Prop{M}{p} = V(p)$
+  \item $\Prop{M}{\lnot !B} = {}$
+    \[
+      \Setabs{w \in W}{\text{لكل $w'$ بحيث $Rww'$، يكون $w'
+          \notin \Prop{M}{!B}$}}.
+    \]
+  \item $\Prop{M}{!B \land !C} = \Prop{M}{!B} \cap \Prop{M}{!C}$.
+  \item $\Prop{M}{!B \lor !C} = \Prop{M}{!B} \cup \Prop{M}{!C}$.
+  \item $\Prop{M}{!B \lif !C} = {}$
+    \[
+      \Setabs{w \in W}{\text{لكل $w'$ بحيث $Rww'$، إذا كان $w'
+          \in \Prop{M}{!B}$ كان $w' \in \Prop{M}{!C}$}}.
+    \]
+  \end{enumerate}
+\end{defn}
+
+\begin{prop}
+  \ollabel{prop:propositions-true}
+  $\mModel{M}{!A}[w]$ إذا وفقط إذا كان~$w \in \Prop{M}{!A}$.
+\end{prop}
+
+\begin{proof}
+  تمرين.
+\end{proof}
+
+\begin{prob}
+  أثبت~\olref[int][sem][pro]{prop:propositions-true}.
+\end{prob}
+
+\end{document}

@@ -1,0 +1,190 @@
+% Part: computability
+% Chapter: recursive-functions
+% Section: examples
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{rec}{exa}
+\olsection{أمثلة للدوال العودية البدائية}
+
+تقدمت لنا أمثلة للدوال العودية البدائية، منها الجمع
+والضرب~$\Add$ و$\Mult$. ومنها دالة الهوية $\fn{id}({\OLId{latin-ordinary}{x}})={\OLId{latin-ordinary}{x}}$،
+فهي عين~$\Proj{{\OLMathNumeral{1}}}{{\OLMathNumeral{0}}}$. وكذلك الدوال الثابتة
+$\fn{const}_{\OLId{latin-ordinary}{n}}({\OLId{latin-ordinary}{x}})={\OLId{latin-ordinary}{n}}$؛ فإنها تستخرج من $\Zero$ و$\Succ$
+بالتركيب مرة بعد مرة. ونحتاج إلى هذه الدوال حين نورد الثوابت في التعريف
+العودي البدائي. فمن طلب، مثلًا، تعريف ${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}})={\OLMathNumeral{2}}\cdot {\OLId{latin-ordinary}{x}}$، استخرجها
+بتركيب $\fn{const}_{\OLMathNumeral{2}}({\OLId{latin-ordinary}{x}})$ مع الضرب، فيضع:
+${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}})=\Mult(\fn{const}_{\OLMathNumeral{2}}({\OLId{latin-ordinary}{x}}),\Proj{{\OLMathNumeral{1}}}{{\OLMathNumeral{0}}}({\OLId{latin-ordinary}{x}}))$. وسنجري على هذه الطريقة في
+ما يأتي.
+
+\begin{prop}
+  دالة الأس $\fn{exp}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})={\OLId{latin-ordinary}{x}}^{\OLId{latin-ordinary}{y}}$ عودية بدائية.
+\end{prop}
+
+\begin{proof}
+  تعريف $\fn{exp}$ بالعودية البدائية على الوجه الآتي:
+  \begin{align*}
+    \fn{exp}({\OLId{latin-ordinary}{x}}, {\OLMathNumeral{0}}) & = {\OLMathNumeral{1}}\\
+    \fn{exp}({\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}+{\OLMathNumeral{1}}) & = \Mult({\OLId{latin-ordinary}{x}}, \fn{exp}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})).
+    \intertext{وهذا، بالدقة الصارمة، ليس تعريفًا عوديًا من دوال عودية
+      بدائية. أما رسميًا فلدينا:}
+    \fn{exp}({\OLId{latin-ordinary}{x}}, {\OLMathNumeral{0}}) & = {\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}})\\
+    \fn{exp}({\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}+{\OLMathNumeral{1}}) & = {\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}, \fn{exp}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})).
+    \intertext{حيث}
+    {\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}}) & = \Succ(\Zero({\OLId{latin-ordinary}{x}})) = {\OLMathNumeral{1}}\\
+    {\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}, {\OLId{latin-ordinary}{z}}) & = \Mult(\Proj{{\OLMathNumeral{3}}}{{\OLMathNumeral{0}}}({\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}, {\OLId{latin-ordinary}{z}}), \Proj{{\OLMathNumeral{3}}}{{\OLMathNumeral{2}}}({\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}, {\OLId{latin-ordinary}{z}})) = {\OLId{latin-ordinary}{x}} \cdot {\OLId{latin-ordinary}{z}}
+  \end{align*}
+  فقد حصلت ${\OLId{latin-ordinary}{f}}$ و${\OLId{latin-ordinary}{g}}$ بالتركيب من دوال عودية بدائية، وهو المطلوب.
+\end{proof}
+
+\begin{prop}
+  دالة السابق $\fn{pred}({\OLId{latin-ordinary}{y}})$ المعرفة بـ
+  \[
+  \fn{pred}({\OLId{latin-ordinary}{y}}) = \begin{cases}
+    {\OLMathNumeral{0}} & \text{إذا كان ${\OLId{latin-ordinary}{y}}={\OLMathNumeral{0}}$}\\
+    {\OLId{latin-ordinary}{y}}-{\OLMathNumeral{1}} & \text{في غير ذلك}
+  \end{cases}
+  \]
+  عودية بدائية.
+\end{prop}
+
+\begin{proof}
+ أصل الحجة أن
+ \begin{align*}
+   \fn{pred}({\OLMathNumeral{0}}) & = {\OLMathNumeral{0}} \text{، وأن}\\
+   \fn{pred}({\OLId{latin-ordinary}{y}}+{\OLMathNumeral{1}}) & = {\OLId{latin-ordinary}{y}}.
+ \end{align*}
+ وهذا قريب من التعريف بالعودية البدائية، غير أنه لا يوافق
+ نمطه الرسمي؛ إذ لا بد في ذلك النمط من حجة إضافية
+ واحدة على الأقل~${\OLId{latin-ordinary}{x}}$. ثم إن القيمة $\fn{pred}({\OLId{latin-ordinary}{y}})$ لا تدخل
+ في تعريف $\fn{pred}({\OLId{latin-ordinary}{y}}+{\OLMathNumeral{1}})$. ويُستدرك الأمر بتعريف
+ $\fn{pred}'({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})$ أولًا هكذا:
+ \begin{align*}
+   \fn{pred}'({\OLId{latin-ordinary}{x}}, {\OLMathNumeral{0}}) & = \Zero({\OLId{latin-ordinary}{x}}) = {\OLMathNumeral{0}},\\
+   \fn{pred}'({\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}+{\OLMathNumeral{1}}) & = \Proj{{\OLMathNumeral{3}}}{{\OLMathNumeral{1}}}({\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}, \fn{pred'}({\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}})) = {\OLId{latin-ordinary}{y}}.
+ \end{align*}
+ثم نستخرج $\fn{pred}$ منها بالتركيب، فنضع مثلًا:
+$\fn{pred}({\OLId{latin-ordinary}{x}})=\fn{pred}'(\Zero({\OLId{latin-ordinary}{x}}),\Proj{{\OLMathNumeral{1}}}{{\OLMathNumeral{0}}}({\OLId{latin-ordinary}{x}}))$.
+\end{proof}
+
+\begin{prop}
+  دالة المضروب $\fn{fac}({\OLId{latin-ordinary}{x}})=\fact{{\OLId{latin-ordinary}{x}}}={\OLMathNumeral{1}}\cdot{\OLMathNumeral{2}}\cdot{\OLMathNumeral{3}}
+  \cdot\dots\cdot {\OLId{latin-ordinary}{x}}$ عودية بدائية.
+\end{prop}
+
+\begin{proof}
+  يظهر تعريفها بالعودية البدائية من المعادلتين
+  \begin{align*}
+    \fn{fac}({\OLMathNumeral{0}}) &= {\OLMathNumeral{1}}\\
+    \fn{fac}({\OLId{latin-ordinary}{y}}+{\OLMathNumeral{1}}) & = \fn{fac}({\OLId{latin-ordinary}{y}}) \cdot ({\OLId{latin-ordinary}{y}}+{\OLMathNumeral{1}}).
+    \intertext{ويلزمنا رسميًا أن نعرف أولًا دالة ثنائية الحجج ${\OLId{latin-ordinary}{h}}$:}
+    {\OLId{latin-ordinary}{h}}({\OLId{latin-ordinary}{x}}, {\OLMathNumeral{0}}) & = \fn{const}_{\OLMathNumeral{1}}({\OLId{latin-ordinary}{x}})\\
+    {\OLId{latin-ordinary}{h}}({\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}+{\OLMathNumeral{1}}) & = {\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}, {\OLId{latin-ordinary}{h}}({\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}))
+    \intertext{حيث ${\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}},{\OLId{latin-ordinary}{z}})=\Mult(\Proj{{\OLMathNumeral{3}}}{{\OLMathNumeral{2}}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}},{\OLId{latin-ordinary}{z}}),
+      \Succ(\Proj{{\OLMathNumeral{3}}}{{\OLMathNumeral{1}}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}},{\OLId{latin-ordinary}{z}})))$، ثم نجعل}
+    \fn{fac}({\OLId{latin-ordinary}{y}}) & = {\OLId{latin-ordinary}{h}}(\Proj{{\OLMathNumeral{1}}}{{\OLMathNumeral{0}}}({\OLId{latin-ordinary}{y}}), \Proj{{\OLMathNumeral{1}}}{{\OLMathNumeral{0}}}({\OLId{latin-ordinary}{y}})) = {\OLId{latin-ordinary}{h}}({\OLId{latin-ordinary}{y}},{\OLId{latin-ordinary}{y}}).
+  \end{align*}
+  وقد اتضح وجه الرد إلى الصورة الرسمية؛ فلن نلتزم في ما يأتي بذكر كل تفصيل
+  من تفاصيل التركيب والعودية البدائية.
+\end{proof}
+
+\begin{prop}
+  الطرح المبتور، ${\OLId{latin-ordinary}{x}}\tsub {\OLId{latin-ordinary}{y}}$، المعرف بـ
+  \[
+  {\OLId{latin-ordinary}{x}} \tsub {\OLId{latin-ordinary}{y}} = \begin{cases}
+    {\OLMathNumeral{0}} & \text{إذا كان ${\OLId{latin-ordinary}{x}}<{\OLId{latin-ordinary}{y}}$}\\
+    {\OLId{latin-ordinary}{x}}-{\OLId{latin-ordinary}{y}} & \text{في غير ذلك}
+  \end{cases}
+  \]
+  عودي بدائي.
+\end{prop}
+
+\begin{proof}
+  لدينا:
+  \begin{align*}
+    {\OLId{latin-ordinary}{x}} \tsub {\OLMathNumeral{0}} & = {\OLId{latin-ordinary}{x}}\\
+    {\OLId{latin-ordinary}{x}} \tsub ({\OLId{latin-ordinary}{y}}+{\OLMathNumeral{1}}) & = \fn{pred}({\OLId{latin-ordinary}{x}} \tsub {\OLId{latin-ordinary}{y}})
+  \end{align*}
+\end{proof}
+
+\begin{prop}
+ المسافة بين ${\OLId{latin-ordinary}{x}}$ و${\OLId{latin-ordinary}{y}}$، أي $\left|{\OLId{latin-ordinary}{x}}-{\OLId{latin-ordinary}{y}}\right|$، عودية بدائية.
+\end{prop}
+
+\begin{proof}
+  لما كان $\left|{\OLId{latin-ordinary}{x}}-{\OLId{latin-ordinary}{y}}\right|=({\OLId{latin-ordinary}{x}}\tsub {\OLId{latin-ordinary}{y}})+({\OLId{latin-ordinary}{y}}\tsub {\OLId{latin-ordinary}{x}})$، صح تعريف
+  المسافة بتركيب $+$ و$\tsub$، وقد ثبتت عوديتهما البدائية.
+\end{proof}
+
+\begin{prop}
+  أكبر ${\OLId{latin-ordinary}{x}}$ و${\OLId{latin-ordinary}{y}}$، أي $\fn{max}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})$، عودي بدائي.
+\end{prop}
+
+\begin{proof}
+  نستخرج $\fn{max}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})$ من $+$ و$\tsub$ بالتركيب الآتي:
+  \[
+  \fn{max}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}}) \defis {\OLId{latin-ordinary}{x}} + ({\OLId{latin-ordinary}{y}} \tsub {\OLId{latin-ordinary}{x}}).
+  \]
+  وبيانه: إن كان ${\OLId{latin-ordinary}{x}}$ أكبرهما، أي ${\OLId{latin-ordinary}{x}}\ge {\OLId{latin-ordinary}{y}}$، لزم ${\OLId{latin-ordinary}{y}}\tsub {\OLId{latin-ordinary}{x}}={\OLMathNumeral{0}}$، فكان
+  ${\OLId{latin-ordinary}{x}}+({\OLId{latin-ordinary}{y}}\tsub {\OLId{latin-ordinary}{x}})={\OLId{latin-ordinary}{x}}+{\OLMathNumeral{0}}={\OLId{latin-ordinary}{x}}$. وإن كان ${\OLId{latin-ordinary}{y}}$ أكبرهما، لزم
+  ${\OLId{latin-ordinary}{y}}\tsub {\OLId{latin-ordinary}{x}}={\OLId{latin-ordinary}{y}}-{\OLId{latin-ordinary}{x}}$، ومن ثم ${\OLId{latin-ordinary}{x}}+({\OLId{latin-ordinary}{y}}\tsub {\OLId{latin-ordinary}{x}})={\OLId{latin-ordinary}{x}}+({\OLId{latin-ordinary}{y}}-{\OLId{latin-ordinary}{x}})={\OLId{latin-ordinary}{y}}$.
+\end{proof}
+
+\begin{prop}
+  \ollabel{prop:min-pr}
+  أصغر ${\OLId{latin-ordinary}{x}}$ و${\OLId{latin-ordinary}{y}}$، أي $\fn{min}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})$، عودي بدائي.
+\end{prop}
+
+\begin{proof}
+  تمرين.
+\end{proof}
+
+\begin{prob}
+  أقم البرهان على \olref[cmp][rec][exa]{prop:min-pr}.
+\end{prob}
+
+\begin{prob}
+بين أن
+\[
+{\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}) =
+{\OLMathNumeral{2}}^{({\OLMathNumeral{2}}^{\iddots^{{\OLMathNumeral{2}}^{{\OLId{latin-ordinary}{x}}}}})}\raisebox{1ex}{\bigg\rbrace}
+\raisebox{1ex}{\text{${\OLId{latin-ordinary}{y}}$ نسخ من العدد~${\OLMathNumeral{2}}$}}
+\]
+دالة عودية بدائية.
+\end{prob}
+
+\begin{prob}
+أثبت أن القسمة الصحيحة ${\OLId{latin-ordinary}{d}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})=\lfloor {\OLId{latin-ordinary}{x}}/{\OLId{latin-ordinary}{y}}\rfloor$، وهي القسمة التي نطرح فيها
+كل ما بعد الفاصلة العشرية، عودية بدائية. واصطلاحنا عند ${\OLId{latin-ordinary}{y}}={\OLMathNumeral{0}}$ أن
+${\OLId{latin-ordinary}{d}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})={\OLMathNumeral{0}}$. واكتب لـ~${\OLId{latin-ordinary}{d}}$ تعريفًا صريحًا بالعودية البدائية
+والتركيب.
+\end{prob}
+
+\begin{prop}
+لا تخرج العمليتان الآتيتان عن مجموعة الدوال العودية البدائية:
+\begin{enumerate}
+\item المجاميع المنتهية: إذا كانت ${\OLId{latin-ordinary}{f}}(\vec {\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{z}})$ عودية بدائية، كانت
+الدالة الآتية كذلك:
+\[
+{\OLId{latin-ordinary}{g}}(\vec {\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}) \defis \sum_{{\OLId{latin-ordinary}{z}} = {\OLMathNumeral{0}}}^{\OLId{latin-ordinary}{y}} {\OLId{latin-ordinary}{f}}(\vec {\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{z}}).
+\]
+\item الجداءات المنتهية: إذا كانت ${\OLId{latin-ordinary}{f}}(\vec {\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{z}})$ عودية بدائية، كانت
+الدالة الآتية كذلك:
+\[
+{\OLId{latin-ordinary}{h}}(\vec {\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}) \defis \prod_{{\OLId{latin-ordinary}{z}} = {\OLMathNumeral{0}}}^{\OLId{latin-ordinary}{y}} {\OLId{latin-ordinary}{f}}(\vec {\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{z}}).
+\]
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+أما المجاميع المنتهية، فتعريفها العودي، مثلًا، بالمعادلتين
+\begin{align*}
+  {\OLId{latin-ordinary}{g}}(\vec {\OLId{latin-ordinary}{x}}, {\OLMathNumeral{0}}) & = {\OLId{latin-ordinary}{f}}(\vec {\OLId{latin-ordinary}{x}}, {\OLMathNumeral{0}})\\
+  {\OLId{latin-ordinary}{g}}(\vec {\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}+{\OLMathNumeral{1}}) & = {\OLId{latin-ordinary}{g}}(\vec {\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}) + {\OLId{latin-ordinary}{f}}(\vec {\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}+{\OLMathNumeral{1}}).
+\end{align*}
+\end{proof}
+
+
+\end{document}

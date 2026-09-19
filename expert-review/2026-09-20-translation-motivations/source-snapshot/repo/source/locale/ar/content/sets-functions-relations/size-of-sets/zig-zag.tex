@@ -1,0 +1,126 @@
+% Part:sets-functions-relations
+% Chapter: size-of-sets
+% Section: zig-zag
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid[ar]{sfr}{siz}{zigzag}
+
+\olsection{طريقة كانتور المتعرجة}
+
+\begin{explain}
+سبق أن نظرنا في بعض التعدادات «السهلة». والآن سننظر في أمر أصعب
+قليلًا. تأمل مجموعة أزواج الأعداد
+الطبيعية\oliflabeldef{sfr:set:pai:sec}{، التي عرّفناها في
+\olref[set][pai]{sec} على النحو الآتي:}{ المعرّفة كما يأتي:}
+\[
+\Nat \times \Nat = \Setabs{\tuple{n,m}}{n,m \in \Nat}
+\]
+يمكننا تنظيم هذه الأزواج المرتبة في \emph{مصفوفة} كما يأتي:
+\[
+\begin{array}{ c | c | c | c | c | c}
+& \mathbf 0 & \mathbf 1 & \mathbf 2 & \mathbf 3 & \dots \\
+\hline
+\mathbf 0 & \tuple{0,0} & \tuple{0,1} & \tuple{0,2} & \tuple{0,3} & \dots \\
+\hline
+\mathbf 1 & \tuple{1,0} & \tuple{1,1} & \tuple{1,2} & \tuple{1,3} & \dots \\
+\hline
+\mathbf 2 & \tuple{2,0} & \tuple{2,1} & \tuple{2,2} & \tuple{2,3} & \dots \\
+\hline
+\mathbf 3 & \tuple{3,0} & \tuple{3,1} & \tuple{3,2} & \tuple{3,3} & \dots \\
+\hline
+\vdots & \vdots & \vdots & \vdots & \vdots & \ddots\\
+\end{array}
+\]
+من الواضح أن كل زوج مرتب في $\Nat \times \Nat$ سيظهر مرة واحدة
+بالضبط في المصفوفة. وبخاصة، سيظهر $\tuple{n,m}$ في الصف ذي الرتبة
+$n$ والعمود ذي الرتبة $m$. ولكن كيف ننظم عناصر مثل هذه المصفوفة في
+قائمة «أحادية البعد»؟ يبين النمط في المصفوفة أدناه طريقةً لفعل ذلك
+(مع أن ثمة، بطبيعة الحال، خيارات أخرى كثيرة):
+\[
+\begin{array}{ c | c | c | c | c | c | c}
+& \mathbf 0 & \mathbf 1 & \mathbf 2 & \mathbf 3 & \mathbf 4 &\dots \\
+\hline
+\mathbf 0 & 0  & 1& 3 & 6& 10 &\ldots \\
+\hline
+\mathbf 1 &2 & 4& 7 & 11 & \dots &\ldots \\
+\hline
+\mathbf 2 & 5 & 8 & 12 & \ldots & \dots&\ldots \\
+\hline
+\mathbf 3 & 9 & 13 & \ldots & \ldots & \dots & \ldots \\
+\hline
+\mathbf 4 & 14 & \ldots & \ldots & \ldots & \dots & \ldots \\
+\hline
+\vdots & \vdots & \vdots & \vdots & \vdots&\ldots & \ddots\\
+\end{array}
+\]\noindent
+يسمى هذا النمط \emph{طريقة كانتور المتعرجة}. وهو يعدّد
+$\Nat \times \Nat$ كما يأتي:
+\[
+\tuple{0,0}, \tuple{0,1}, \tuple{1,0}, \tuple{0,2}, \tuple{1,1},
+\tuple{2,0}, \tuple{0,3}, \tuple{1,2}, \tuple{2,1}, \tuple{3,0}, \dots
+\]
+وهذا يثبت النتيجة الآتية:
+\end{explain}
+
+\begin{prop}\ollabel{natsquaredenumerable}
+تكون $\Nat \times \Nat$ !!{enumerable}.
+\end{prop}
+
+\begin{proof}
+لتكن $f \colon \Nat \to \Nat\times\Nat$ دالة ترسل كل $k \in \Nat$
+إلى الزوج $\tuple{n,m} \in \Nat \times \Nat$ الذي يحقق أن $k$ هو
+القيمة المدرجة في الصف ذي الرتبة $n$ والعمود ذي الرتبة $m$ في مصفوفة
+كانتور المتعرجة.
+\end{proof}
+
+\begin{explain}
+وتقبل هذه التقنية أيضًا تعميمًا أنيقًا. فمثلًا، يمكننا استعمالها لتعداد
+مجموعة الثلاثيات المرتبة من الأعداد الطبيعية، أي:
+\[
+\Nat \times \Nat \times \Nat = \Setabs{\tuple{n,m,k}}{n,m,k \in \Nat}
+\]
+ننظر إلى $\Nat \times \Nat \times \Nat$ بوصفها الضرب الديكارتي
+لـ$\Nat \times \Nat$ في $\Nat$، أي
+\[
+\Nat^3 = (\Nat \times \Nat) \times \Nat =
+\Setabs{\tuple{\tuple{n,m},k}}{n, m, k
+  \in \Nat }
+\]
+ومن ثم يمكننا تعداد $\Nat^3$ بمصفوفة، فنضع تعداد $\Nat$ على أحد
+محوريها، وتعداد $\Nat^2$ على المحور الآخر:
+\[
+\begin{array}{ c | c | c | c | c | c}
+& \mathbf 0 & \mathbf 1 & \mathbf 2 & \mathbf 3 & \dots \\
+\hline
+\mathbf{\tuple{0,0}} & \tuple{0,0,0} & \tuple{0,0,1} & \tuple{0,0,2} & \tuple{0,0,3} & \dots \\
+\hline
+\mathbf{\tuple{0,1}} & \tuple{0,1,0} & \tuple{0,1,1} & \tuple{0,1,2} & \tuple{0,1,3} & \dots \\
+\hline
+\mathbf{\tuple{1,0}} & \tuple{1,0,0} & \tuple{1,0,1} & \tuple{1,0,2} & \tuple{1,0,3} & \dots \\
+\hline
+\mathbf{\tuple{0,2}} & \tuple{0,2,0} & \tuple{0,2,1} & \tuple{0,2,2} & \tuple{0,2,3} & \dots\\
+\hline
+\vdots & \vdots & \vdots & \vdots & \vdots & \ddots \\
+\end{array}
+\]
+وبذلك، باستعمال طريقة شبيهة بطريقة كانتور المتعرجة، يمكننا أن نحصل
+أيضًا على تعداد لـ$\Nat^3$. ويمكننا مواصلة ذلك، فنحصل على تعدادات
+لـ$\Nat^n$ لكل عدد طبيعي $n$. ومن ثم لدينا:
+\end{explain}
+
+\begin{prop}
+تكون $\Nat^n$ !!{enumerable}، لكل $n \in \Nat$.
+\end{prop}
+
+\begin{prob}\label{sfr:siz:zigzag:prob:posint-n}
+أثبت أن $(\PosInt)^n$ !!{enumerable}، لكل $n \in \Nat$.
+\end{prob}
+
+\begin{prob}\label{sfr:siz:zigzag:prob:posint-star}
+  أثبت أن $(\PosInt)^*$ !!{enumerable}. ويجوز لك افتراض \cref{sfr:siz:zigzag:prob:posint-n}.
+\end{prob}
+
+\end{document}

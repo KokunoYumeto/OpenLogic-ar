@@ -1,0 +1,193 @@
+% Part: proof-theory
+% Chapter: natural-deduction
+% Section: quantifiers
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{nat}{qua}
+
+\olsection{في انتظام \usetoken{P}{proof} والتعويض}
+
+تنشأ من قواعد الأسوار صعوبات سببها «شروط المتغير المميز» في
+$\Elim{\lexists}$ و$\Intro{\lforall}$. وأكثرها يزول إذا ضمنّا ألا يعاد
+استعمال~!!{constant}~${\OLId{latin-ordinary}{c}}$ في هذه الاستدلالات. ومن أجل ذلك نضع التعريف
+الآتي.
+
+\begin{defn}
+نسمي~!!{proof} الاستنباط الطبيعي~$\delta$ \emph{منتظمًا} إذا استوفى
+الشرطين الآتيين:
+\begin{enumerate}
+  \item ألا يستعمل متغير مميز~${\OLId{latin-ordinary}{a}}$ بهذا الوصف في أكثر من استدلال واحد
+  لـ$\Elim{\lexists}$ أو~$\Intro{\lforall}$؛
+  \item وإذا كان~${\OLId{latin-ordinary}{a}}$ هو المتغير المميز في استدلال~$\Elim{\lexists}$
+  أو~$\Intro{\lforall}$، ألا يظهر إلا في~!!{proof} الجزئي المباشر المؤدي
+  إلى المقدمة الصغرى أو إلى المقدمة، على الترتيب.
+\end{enumerate}
+\end{defn}
+
+\begin{lem}\ollabel{lem:subst-regular} إذا كان~$\delta$ منتظمًا،
+وينتهي بـ$!C$، وكان~${\OLId{latin-ordinary}{c}}$~!!a{constant} لا يُستخدم متغيرًا مميزًا في
+$\delta$، وكان~${\OLId{latin-ordinary}{t}}$ حدًا لا يحتوي أي متغير مميز من~$\delta$، فإن
+$\Subst{\delta}{{\OLId{latin-ordinary}{t}}}{{\OLId{latin-ordinary}{c}}}$ الناتج من~$\delta$ باستبدال كل ظهور لـ${\OLId{latin-ordinary}{c}}$ بـ
+${\OLId{latin-ordinary}{t}}$ هو~!!{proof} منتظم. وتكون~!!{formula} نهاية
+$\Subst{\delta}{{\OLId{latin-ordinary}{t}}}{{\OLId{latin-ordinary}{c}}}$ هي~$\Subst{!C}{{\OLId{latin-ordinary}{t}}}{{\OLId{latin-ordinary}{c}}}$. وإذا كان~$!A^{\OLId{latin-ordinary}{x}}$ فرضًا
+مفتوحًا في~$\delta$، كان~$\Subst{!A}{{\OLId{latin-ordinary}{t}}}{{\OLId{latin-ordinary}{c}}}^{\OLId{latin-ordinary}{x}}$ فرضًا مفتوحًا في
+$\Subst{\delta}{{\OLId{latin-ordinary}{t}}}{{\OLId{latin-ordinary}{c}}}$.
+\end{lem}
+
+\begin{proof}
+  نسلك الاستقراء على~$\pheight{\delta}$. فإن كان~$\pheight{\delta}={\OLMathNumeral{0}}$
+  لم يكن فيه غير الفرض~$!A^{\OLId{latin-ordinary}{x}}$، وعندئذ يكون~$\Subst{\delta}{{\OLId{latin-ordinary}{t}}}{{\OLId{latin-ordinary}{c}}}$ هو
+  $\Subst{!A}{{\OLId{latin-ordinary}{t}}}{{\OLId{latin-ordinary}{c}}}^{\OLId{latin-ordinary}{x}}$.
+
+  وإن كان~$\pheight{\delta}>{\OLMathNumeral{0}}$ قسمنا بحسب آخر استدلال في~$\delta$.
+  فأما قواعد الروابط القضوية فحالاتها يسيرة نتركها تمارين، وأما هنا
+  فنبحث الحالات التي يكون آخر~$\delta$ فيها استدلالًا سُوَريًا.
+  \begin{enumerate}
+    \item إذا كان آخر الاستدلال~$\Intro{\lforall}$، كان~$\delta$
+    على الصورة
+    \[
+    \AxiomC{}
+    \RightLabel{$\delta'$}
+    \DeduceC{$!A({\OLId{latin-ordinary}{a}},{\OLId{latin-ordinary}{c}})$}
+    \RightLabel{\Intro{\lforall}}
+    \UnaryInfC{$\lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{c}})]$}
+    \DisplayProof
+    \]
+    وبفرض الاستقراء يكون~$\Subst{\delta'}{{\OLId{latin-ordinary}{t}}}{{\OLId{latin-ordinary}{c}}}$~!!{proof} منتظمًا لـ
+    $!A({\OLId{latin-ordinary}{a}},{\OLId{latin-ordinary}{t}})$. ولأن~${\OLId{latin-ordinary}{a}}$ متغير مميز في~$\delta$، فلا تظهر~${\OLId{latin-ordinary}{a}}$ في~${\OLId{latin-ordinary}{t}}$.
+    ومن ثم يكون آخر الاستدلال في~$\Subst{\delta}{{\OLId{latin-ordinary}{t}}}{{\OLId{latin-ordinary}{c}}}$،
+    \[
+    \AxiomC{}
+    \RightLabel{$\Subst{\delta'}{{\OLId{latin-ordinary}{t}}}{{\OLId{latin-ordinary}{c}}}$}
+    \DeduceC{$!A({\OLId{latin-ordinary}{a}},{\OLId{latin-ordinary}{t}})$}
+    \RightLabel{\Intro{\lforall}}
+    \UnaryInfC{$\lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{t}})]$}
+    \DisplayProof
+    \]
+    صحيحًا: لما كان~${\OLId{latin-ordinary}{t}}$ لا يحتوي~${\OLId{latin-ordinary}{a}}$، لم تحتوها النتيجة ولا أي فرض
+    مفتوح.
+    \item إذا كان آخر الاستدلال~$\Elim{\lforall}$، كان~$\delta$
+    على الصورة
+    \[
+    \AxiomC{}
+    \RightLabel{$\delta'$}
+    \DeduceC{$\lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{c}})]$}
+    \RightLabel{\Elim{\lforall}}
+    \UnaryInfC{$!A({\OLId{latin-ordinary}{s}}({\OLId{latin-ordinary}{c}}),{\OLId{latin-ordinary}{c}})$}
+    \DisplayProof
+    \]
+    وبفرض الاستقراء يكون~$\Subst{\delta'}{{\OLId{latin-ordinary}{t}}}{{\OLId{latin-ordinary}{c}}}$~!!{proof} منتظمًا لـ
+    $\lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{t}})]$. (وقد يحتوي الحد~${\OLId{latin-ordinary}{s}}({\OLId{latin-ordinary}{c}})$ في النتيجة~${\OLId{latin-ordinary}{c}}$،
+    وقد لا يحتويها.) ويكون آخر الاستدلال في
+    $\Subst{\delta}{{\OLId{latin-ordinary}{t}}}{{\OLId{latin-ordinary}{c}}}$،
+    \[
+    \AxiomC{}
+    \RightLabel{$\Subst{\delta'}{{\OLId{latin-ordinary}{t}}}{{\OLId{latin-ordinary}{c}}}$}
+    \DeduceC{$\lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{t}})]$}
+    \RightLabel{\Elim{\lforall}}
+    \UnaryInfC{$!A({\OLId{latin-ordinary}{s}}({\OLId{latin-ordinary}{t}}),{\OLId{latin-ordinary}{t}})$}
+    \DisplayProof
+    \]
+    صحيحًا، ويكون~$!A({\OLId{latin-ordinary}{s}}({\OLId{latin-ordinary}{t}}),{\OLId{latin-ordinary}{t}}) \ident \Subst{!A({\OLId{latin-ordinary}{s}}({\OLId{latin-ordinary}{c}}),{\OLId{latin-ordinary}{c}})}{{\OLId{latin-ordinary}{t}}}{{\OLId{latin-ordinary}{c}}}$.
+    وحالة~$\Intro{\lexists}$ مماثلة.
+  \item إذا كان آخر الاستدلال~$\Elim{\lexists}$، كان~$\delta$
+    على الصورة
+    \[
+    \AxiomC{}
+    \RightLabel{$\delta_{\OLMathNumeral{1}}'$}
+    \DeduceC{$\lexists[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{c}})]$}
+    \AxiomC{$\Discharge{!A({\OLId{latin-ordinary}{a}},{\OLId{latin-ordinary}{c}})}{{\OLId{latin-ordinary}{x}}}$}
+    \RightLabel{$\delta_{\OLMathNumeral{2}}'$}
+    \DeduceC{$!C$}
+    \DischargeRule{\Elim{\lexists}}{{\OLId{latin-ordinary}{x}}}
+    \BinaryInfC{$!C$}
+    \DisplayProof
+    \]
+    وبفرض الاستقراء يكون~$\Subst{\delta_{\OLMathNumeral{1}}'}{{\OLId{latin-ordinary}{t}}}{{\OLId{latin-ordinary}{c}}}$ و
+    $\Subst{\delta_{\OLMathNumeral{2}}'}{{\OLId{latin-ordinary}{t}}}{{\OLId{latin-ordinary}{c}}}$~!!{proof}s منتظمين: الأول لـ
+    $\lexists[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{t}})]$، والثاني لـ$\Subst{!C}{{\OLId{latin-ordinary}{t}}}{{\OLId{latin-ordinary}{c}}}$ من الفرض
+    المفتوح~$!A({\OLId{latin-ordinary}{a}},{\OLId{latin-ordinary}{t}})^{\OLId{latin-ordinary}{x}}$. ولأن~${\OLId{latin-ordinary}{a}}$ متغير مميز في~$\delta$، فلا تظهر
+    ${\OLId{latin-ordinary}{a}}$ في~${\OLId{latin-ordinary}{t}}$. ومن ثم يكون آخر الاستدلال في
+    $\Subst{\delta}{{\OLId{latin-ordinary}{t}}}{{\OLId{latin-ordinary}{c}}}$،
+    \[
+    \AxiomC{}
+    \RightLabel{$\Subst{\delta_{\OLMathNumeral{1}}'}{{\OLId{latin-ordinary}{t}}}{{\OLId{latin-ordinary}{c}}}$}
+    \DeduceC{$\lexists[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{t}})]$}
+    \AxiomC{$\Discharge{!A({\OLId{latin-ordinary}{a}},{\OLId{latin-ordinary}{t}})}{{\OLId{latin-ordinary}{x}}}$}
+    \RightLabel{$\Subst{\delta_{\OLMathNumeral{2}}'}{{\OLId{latin-ordinary}{t}}}{{\OLId{latin-ordinary}{c}}}$}
+    \DeduceC{$\Subst{!C}{{\OLId{latin-ordinary}{t}}}{{\OLId{latin-ordinary}{c}}}$}
+    \DischargeRule{\Elim{\lexists}}{{\OLId{latin-ordinary}{x}}}
+    \BinaryInfC{$\Subst{!C}{{\OLId{latin-ordinary}{t}}}{{\OLId{latin-ordinary}{c}}}$}
+    \DisplayProof
+    \]
+    صحيحًا: لا تظهر~${\OLId{latin-ordinary}{a}}$ في المقدمة الكبرى
+    $\lexists[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{t}})]$، ولا في النتيجة~$\Subst{!C}{{\OLId{latin-ordinary}{t}}}{{\OLId{latin-ordinary}{c}}}$، ولا في
+    أي فرض مفتوح سوى الفرض المبرأ~$!A({\OLId{latin-ordinary}{a}},{\OLId{latin-ordinary}{t}})^{\OLId{latin-ordinary}{x}}$.
+  \end{enumerate}
+\end{proof}
+
+\begin{prop}\ollabel{prop:regular}
+إذا كان~$\delta$~!!a{proof} في~\Log{N1c} أو~\Log{N1i}، وجد
+!!{proof} منتظم~$\delta'$ مماثل له في البنية، ومن ثم في~!!{height}، ولا
+يفارق~$\delta$ إلا في إبدال المتغيرات المميزة.
+\end{prop}
+
+\begin{proof}
+نسمي، لهذا البرهان وحده، استدلال المتغير المميز في~$\delta$
+\emph{نظيفًا} إذا لم يستعمل متغيره المميز في استدلال آخر بهذا الوصف،
+ولم يظهر ذلك المتغير في~$\delta$ خارج~!!{proof} الاستدلال الجزئي
+المباشر؛ وما عدا ذلك فنسميه \emph{متسخًا}. وليكن~${\OLId{latin-ordinary}{n}}$ عدد الاستدلالات
+المتسخة في~$\delta$. ونبرهن بالاستقراء القوي على~${\OLId{latin-ordinary}{n}}$ أن~$\delta$ يحول إلى
+!!{proof} المنتظم المطلوب~$\delta'$. فإذا كان~${\OLId{latin-ordinary}{n}}={\OLMathNumeral{0}}$ كانت استدلالات
+المتغير المميز في~$\delta$ كلها نظيفة، فكان~$\delta$ منتظمًا وانتهى
+الأمر. وإن لم يكن، أخذنا أعلى استدلال متسخ لمتغير مميز، وليكن مثلًا
+$\Intro{\lforall}$. وعندئذ يكون~!!{proof} الجزئي~$\delta_{\OLMathNumeral{1}}$ من
+$\delta$ المنتهي به على الصورة
+    \[
+    \AxiomC{}
+    \RightLabel{$\delta_{\OLMathNumeral{2}}$}
+    \DeduceC{$!A({\OLId{latin-ordinary}{c}})$}
+    \RightLabel{\Intro{\lforall}}
+    \UnaryInfC{$\lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$}
+    \DisplayProof
+    \]
+وتنبّه إلى أن~${\OLId{latin-ordinary}{c}}$ لا تظهر في~$\lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$ ولا في فرض مفتوح لأنها
+متغير مميز. ويكون البرهان~$\delta_{\OLMathNumeral{2}}$ منتظمًا، لأن كل استدلال لمتغير
+مميز فيه نظيف بحكم اختيارنا أعلى استدلال متسخ. ولتكن~${\OLId{latin-ordinary}{a}}$~!!a{constant}
+لا تظهر في~$\delta$.
+وبفضل~\olref{lem:subst-regular} يكون~$\Subst{\delta_{\OLMathNumeral{2}}}{{\OLId{latin-ordinary}{a}}}{{\OLId{latin-ordinary}{c}}}$ برهانًا
+منتظمًا لـ$!A({\OLId{latin-ordinary}{a}})$. وبشرط المتغير المميز لا يحتوي أي فرض مفتوح في
+$\delta_{\OLMathNumeral{2}}$ الثابت~${\OLId{latin-ordinary}{c}}$، ومن ثم لا يحتوي أي فرض مفتوح في
+$\Subst{\delta_{\OLMathNumeral{2}}}{{\OLId{latin-ordinary}{a}}}{{\OLId{latin-ordinary}{c}}}$ الثابت~${\OLId{latin-ordinary}{a}}$. وعلى هذا يمكننا تطبيق
+$\Intro{\lforall}$. وإذا استبدلنا بـ$\delta_{\OLMathNumeral{1}}$ في~$\delta$ البرهان
+$\delta_{\OLMathNumeral{1}}'$،
+    \[
+    \AxiomC{}
+    \RightLabel{$\Subst{\delta_{\OLMathNumeral{2}}}{{\OLId{latin-ordinary}{a}}}{{\OLId{latin-ordinary}{c}}}$}
+    \DeduceC{$!A({\OLId{latin-ordinary}{a}})$}
+    \RightLabel{\Intro{\lforall}}
+    \UnaryInfC{$\lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$}
+    \DisplayProof
+    \]
+نكون قد أقمنا استدلالًا نظيفًا مقام استدلال متسخ لمتغير مميز، ولم نغير
+إلا المتغير المميز~${\OLId{latin-ordinary}{c}}$ إلى~${\OLId{latin-ordinary}{a}}$. فيبقى في البرهان الناتج عدد من
+استدلالات المتغير المميز المتسخة أقل من~${\OLId{latin-ordinary}{n}}$، ومن فرض الاستقراء القوي
+تلزم النتيجة.
+\end{proof}
+
+\begin{prob}
+صف الحالة في برهان~\olref{prop:regular} التي يكون فيها أعلى استدلال
+لمتغير مميز هو~$\Elim{\lexists}$.
+\end{prob}
+
+ولن نذكر القضية المتقدمة كلما استعملناها، بل نفرض فيما يأتي انتظام كل
+!!{proof}s التي ننظر فيها؛ فإن لم تكن منتظمة بدّلنا متغيراتها المميزة
+حتى تنتظم.
+
+تصدق~\Olref{lem:subst-regular} و\olref{prop:regular} كذلك على
+\Log{N2c} و\Log{N2i}. ونترك البرهانين تمرينين.
+
+\end{document}

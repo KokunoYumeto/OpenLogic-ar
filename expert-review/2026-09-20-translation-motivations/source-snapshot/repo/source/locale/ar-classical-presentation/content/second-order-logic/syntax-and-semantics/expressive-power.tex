@@ -1,0 +1,93 @@
+% Part: second-order-logic
+% Chapter: syntax-and-semantics
+% Section: expressive-power
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sol}{syn}{exp}
+\olsection{القوة التعبيرية}
+
+\begin{explain}
+تتسع قدرة اللغة على التعبير اتساعًا عظيمًا إذا جاز التكميم على متغيرات
+الرتبة الثانية. فبالتكميم الوجودي فيها نقرر وجود دوال أو علاقات ذات
+خصائص معينة، ولا يتأتى ذلك في منطق الرتبة الأولى إلا أن نخص الغرض
+برمز غير منطقي، أي !!a{function} أو~!!{predicate}.
+وبالتكميم الكلي من الرتبة الثانية نحكم على جميع المجموعات الجزئية من
+!!{domain}، أو العلاقات عليه، أو الدوال منه إلى !!{domain}،
+بأن لها خاصية بعينها. أما في الرتبة الأولى فليس لنا هذا العموم؛
+وإنما نحكم على ما أُسند من المجموعات الجزئية والعلاقات والدوال إلى
+رموز اللغة غير المنطقية. ثم إن الخاصية نفسها، التي نثبت وجود ما
+يتصف بها أو نعممها على الجميع، يجوز أن يدخل في بيانها تكميم من
+الرتبة الثانية. فمن هنا أمكن تعريف علاقات لا تُعرّف في الرتبة الأولى،
+والتعبير عن خصائص للمجال تعجز الرتبة الأولى عن التعبير عنها.
+\end{explain}
+
+\begin{defn}
+لتكن~$\Struct{M}$ !!a{structure} للغة~$\Lang{L}$.
+نقول إن العلاقة~${\OLId{latin-looped}{R}} \subseteq \Domain{{\OLId{latin-looped}{M}}}^{\OLMathNumeral{2}}$ \emph{قابلة للتعريف}
+في~$\Lang{L}$ إذا وجدت~!!{formula}~$!A_{\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}})$ ليس لها من
+المتغيرات الحرة إلا~${\OLId{latin-ordinary}{x}}$ و${\OLId{latin-ordinary}{y}}$، ويكون~${\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{a}}, {\OLId{latin-ordinary}{b}})$، أي
+$\tuple{{\OLId{latin-ordinary}{a}},{\OLId{latin-ordinary}{b}}} \in {\OLId{latin-looped}{R}}$، إذا وفقط إذا كان
+$\Sat{{\OLId{latin-looped}{M}}}{!A_{\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}})}[{\OLId{latin-ordinary}{s}}]$ حيث~${\OLId{latin-ordinary}{s}}({\OLId{latin-ordinary}{x}}) = {\OLId{latin-ordinary}{a}}$ و${\OLId{latin-ordinary}{s}}({\OLId{latin-ordinary}{y}}) = {\OLId{latin-ordinary}{b}}$.
+\end{defn}
+
+\begin{ex}
+علاقة الهوية~$\Id{\Domain{{\OLId{latin-looped}{M}}}}$، أي
+$\Setabs{\tuple{{\OLId{latin-ordinary}{a}},{\OLId{latin-ordinary}{a}}}}{{\OLId{latin-ordinary}{a}} \in \Domain{{\OLId{latin-looped}{M}}}}$، تُعرّف في منطق
+الرتبة الأولى بالصيغة~$\eq[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{y}}]$. وأما في الرتبة الثانية فيمكن
+تعريفها \emph{من غير~$\eq$}. وبيان ذلك أن~${\OLId{latin-ordinary}{a}}$ و${\OLId{latin-ordinary}{b}}$ إذا كانا
+!!{element} واحدًا من~$\Domain{{\OLId{latin-looped}{M}}}$ لزم أن يكونا !!{element}s
+في المجموعات الجزئية نفسها من~$\Domain{{\OLId{latin-looped}{M}}}$؛ إذ لا تتعين المجموعات
+إلا بـ!!{element}s فيها. وإذا كان~${\OLId{latin-ordinary}{a}}$ و${\OLId{latin-ordinary}{b}}$ مختلفين، لم يكونا
+!!{element}s في المجموعات الجزئية نفسها: فإن~${\OLId{latin-ordinary}{a}} \in \{{\OLId{latin-ordinary}{a}}\}$
+ولكن~${\OLId{latin-ordinary}{b}} \notin \{{\OLId{latin-ordinary}{a}}\}$ متى كان~${\OLId{latin-ordinary}{a}} \neq {\OLId{latin-ordinary}{b}}$.
+فكونهما !!{element}s في المجموعات الجزئية نفسها
+من~$\Domain{{\OLId{latin-looped}{M}}}$ علاقة بين~${\OLId{latin-ordinary}{a}}$ و${\OLId{latin-ordinary}{b}}$ تتحقق إذا وفقط إذا
+${\OLId{latin-ordinary}{a}} = {\OLId{latin-ordinary}{b}}$. ولما كان التكميم على جميع المجموعات الجزئية
+من~$\Domain{{\OLId{latin-looped}{M}}}$ جائزًا في الرتبة الثانية، أمكن التعبير عن هذه
+العلاقة فيها. فتكون !!{formula} الآتية تعريفًا
+لـ$\Id{\Domain{{\OLId{latin-looped}{M}}}}$:
+\[
+\lforall[{\OLId{latin-looped}{X}}][({\OLId{latin-looped}{X}}({\OLId{latin-ordinary}{x}}) \liff {\OLId{latin-looped}{X}}({\OLId{latin-ordinary}{y}}))]
+\]
+\end{ex}
+
+\begin{prob}
+أثبت أن~$\lforall[{\OLId{latin-looped}{X}}][({\OLId{latin-looped}{X}}({\OLId{latin-ordinary}{x}}) \lif {\OLId{latin-looped}{X}}({\OLId{latin-ordinary}{y}}))]$، وفيها~$\lif$
+لا~$\liff$، تعرّف هي أيضًا~$\Id{\Domain{{\OLId{latin-looped}{M}}}}$.
+\end{prob}
+
+\begin{ex}
+ليكن~${\OLId{latin-looped}{R}}$ !!{predicate} ثنائي الموضع؛ فتكون~$\Assign{{\OLId{latin-looped}{R}}}{{\OLId{latin-looped}{M}}}$
+علاقة ثنائية الموضع على~$\Domain{{\OLId{latin-looped}{M}}}$. وسنستعمل الرمز~${\OLId{latin-looped}{R}}$
+للدلالة على !!{predicate}~${\OLId{latin-looped}{R}}$ وعلى العلاقة~$\Assign{{\OLId{latin-looped}{R}}}{{\OLId{latin-looped}{M}}}$
+نفسها، مع ما قد ينشأ عن جمع المعنيين في رمز واحد من التباس.
+\emph{الإغلاق المتعدي}~${\OLId{latin-looped}{R}}^*$ للعلاقة~${\OLId{latin-looped}{R}}$ علاقة بين~${\OLId{latin-ordinary}{a}}$ و${\OLId{latin-ordinary}{b}}$
+تتحقق إذا وفقط إذا وجدت~${\OLId{latin-ordinary}{c}}_{\OLMathNumeral{1}}$، و\dots، و${\OLId{latin-ordinary}{c}}_{\OLId{latin-ordinary}{k}}$ تتوالى بينها
+العلاقات~${\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{a}},{\OLId{latin-ordinary}{c}}_{\OLMathNumeral{1}})$، و${\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{c}}_{\OLMathNumeral{1}}, {\OLId{latin-ordinary}{c}}_{\OLMathNumeral{2}})$، و\dots، و${\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{c}}_{\OLId{latin-ordinary}{k}},{\OLId{latin-ordinary}{b}})$.
+وندخل في ذلك حالة~${\OLId{latin-ordinary}{k}} = {\OLMathNumeral{0}}$؛ فصدق~${\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{a}},{\OLId{latin-ordinary}{b}})$ يستلزم
+صدق~${\OLId{latin-looped}{R}}^*({\OLId{latin-ordinary}{a}},{\OLId{latin-ordinary}{b}})$. ومن ثم~${\OLId{latin-looped}{R}} \subseteq {\OLId{latin-looped}{R}}^*$.
+بل إن~${\OLId{latin-looped}{R}}^*$ أصغر علاقة متعدية تحتوي~${\OLId{latin-looped}{R}}$.
+وللتعبير في الرتبة الثانية عن كون~${\OLId{latin-looped}{X}}$ متعدية وتحتوي~${\OLId{latin-looped}{R}}$ نضع:
+\begin{multline*}
+  !B_{\OLId{latin-looped}{R}}({\OLId{latin-looped}{X}}) \ident \lforall[{\OLId{latin-ordinary}{x}}][\lforall[{\OLId{latin-ordinary}{y}}][({\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}}) \lif {\OLId{latin-looped}{X}}({\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}))]] \land {}\\
+\lforall[{\OLId{latin-ordinary}{x}}][\lforall[{\OLId{latin-ordinary}{y}}][\lforall[{\OLId{latin-ordinary}{z}}][(({\OLId{latin-looped}{X}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}}) \land {\OLId{latin-looped}{X}}({\OLId{latin-ordinary}{y}},{\OLId{latin-ordinary}{z}})) \lif {\OLId{latin-looped}{X}}({\OLId{latin-ordinary}{x}},
+      {\OLId{latin-ordinary}{z}}))]]].
+\end{multline*}
+فالمقترن الأول يقرر~${\OLId{latin-looped}{R}} \subseteq {\OLId{latin-looped}{X}}$، والثاني يقرر تعدي~${\OLId{latin-looped}{X}}$.
+
+ولكي تكون~${\OLId{latin-looped}{X}}$ أصغر العلاقات التي تحقق الشرطين، يلزم أن تكون
+محتواة في كل علاقة متعدية تحتوي~${\OLId{latin-looped}{R}}$. وبذلك يُعرّف الإغلاق المتعدي
+لـ${\OLId{latin-looped}{R}}$ بالـ!!{formula} الآتية:
+\[
+{\OLId{latin-looped}{R}}^*({\OLId{latin-looped}{X}}) \ident !B_{\OLId{latin-looped}{R}}({\OLId{latin-looped}{X}}) \land \lforall[{\OLId{latin-looped}{Y}}][(!B_{\OLId{latin-looped}{R}}({\OLId{latin-looped}{Y}}) \lif
+  \lforall[{\OLId{latin-ordinary}{x}}][\lforall[{\OLId{latin-ordinary}{y}}][({\OLId{latin-looped}{X}}({\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}) \lif {\OLId{latin-looped}{Y}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}}))]])].
+\]
+وعندئذ~$\Sat{{\OLId{latin-looped}{M}}}{{\OLId{latin-looped}{R}}^*({\OLId{latin-looped}{X}})}[{\OLId{latin-ordinary}{s}}]$ إذا وفقط إذا كان~${\OLId{latin-ordinary}{s}}({\OLId{latin-looped}{X}}) = {\OLId{latin-looped}{R}}^*$.
+وأما الإغلاق المتعدي لـ${\OLId{latin-looped}{R}}$ فلا يمكن التعبير عنه في منطق الرتبة
+الأولى.
+\end{ex}
+
+\end{document}

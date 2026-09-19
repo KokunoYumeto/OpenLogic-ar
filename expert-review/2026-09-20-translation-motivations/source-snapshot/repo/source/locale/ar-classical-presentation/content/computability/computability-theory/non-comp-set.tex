@@ -1,0 +1,63 @@
+% Part: computability
+% Chapter: computability-theory
+% Section: non-comp-set
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{thy}{ncp}
+\olsection{توجد مجموعات غير قابلة للحساب}
+
+قد ثبت أن قابلية المجموعة للحساب تستلزم قابليتها للتعداد حسابيًا. وأما
+العكس فلا يصح على العموم، كما تبيّن النتيجة الآتية.
+
+\begin{thm}\ollabel{thm:K-0}
+لتكن ${\OLId{latin-looped}{K}}_{\OLMathNumeral{0}}$ المجموعة $\Setabs{\tuple{{\OLId{latin-ordinary}{e}}, {\OLId{latin-ordinary}{x}}}}{\cfind{{\OLId{latin-ordinary}{e}}}({\OLId{latin-ordinary}{x}}) \fdefined}$.
+عندئذ تكون ${\OLId{latin-looped}{K}}_{\OLMathNumeral{0}}$ قابلة للتعداد حسابيًا، ولكنها غير قابلة للحساب.
+\end{thm}
+
+\begin{proof}
+أما قابلية ${\OLId{latin-looped}{K}}_{\OLMathNumeral{0}}$ للتعداد حسابيًا فتثبت بجعلها مجالًا للدالة~${\OLId{latin-ordinary}{f}}$
+التي تعريفها
+\[
+{\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{z}}) = \umin{{\OLId{latin-ordinary}{y}}}{(\len{{\OLId{latin-ordinary}{z}}} = {\OLMathNumeral{2}} \land {\OLId{latin-looped}{T}}(({\OLId{latin-ordinary}{z}})_{\OLMathNumeral{0}}, ({\OLId{latin-ordinary}{z}})_{\OLMathNumeral{1}}, {\OLId{latin-ordinary}{y}}))}.
+\]
+إذ متى كانت $\cfind{{\OLId{latin-ordinary}{e}}}({\OLId{latin-ordinary}{x}})$ معرّفة عثرت ${\OLId{latin-ordinary}{f}}(\tuple{{\OLId{latin-ordinary}{e}},{\OLId{latin-ordinary}{x}}})$ على سجل حساب
+متوقف؛ وإن لم تُعرّف $\cfind{{\OLId{latin-ordinary}{e}}}({\OLId{latin-ordinary}{x}})$، لم تُعرّف
+${\OLId{latin-ordinary}{f}}(\tuple{{\OLId{latin-ordinary}{e}},{\OLId{latin-ordinary}{x}}})$. وأما إن لم يرمز ${\OLId{latin-ordinary}{z}}$ إلى زوج، فـ${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{z}})$
+غير معرّفة كذلك.
+
+وأما انتفاء قابلية ${\OLId{latin-looped}{K}}_{\OLMathNumeral{0}}$ للحساب فهو عين عدم قابلية مشكلة التوقف
+للقرار في \olref[hlt]{thm:halting-problem}.
+\end{proof}
+
+فـ${\OLId{latin-looped}{K}}_{\OLMathNumeral{0}}$ تجمع الأزواج $\tuple{{\OLId{latin-ordinary}{e}},{\OLId{latin-ordinary}{x}}}$ التي تحقق
+$\cfind{{\OLId{latin-ordinary}{e}}}({\OLId{latin-ordinary}{x}})\fdefined$؛ ومعنى $\tuple{{\OLId{latin-ordinary}{e}},{\OLId{latin-ordinary}{x}}}\in {\OLId{latin-looped}{K}}_{\OLMathNumeral{0}}$ أن
+$\cfind{{\OLId{latin-ordinary}{e}}}$ تتعين عند الدخل~${\OLId{latin-ordinary}{x}}$، أي يتوقف حسابها هناك. ومن ثم تسمى
+«مجموعة التوقف». ونخص المجموعة
+${\OLId{latin-looped}{K}}=\Setabs{{\OLId{latin-ordinary}{e}}}{\cfind{{\OLId{latin-ordinary}{e}}}({\OLId{latin-ordinary}{e}})\fdefined}$ باسم «مجموعة التوقف الذاتي»؛
+وهي مثال معياري كثير الاستعمال لما لا يقبل القرار.
+
+\begin{thm}\ollabel{thm:K}
+مجموعة التوقف الذاتي ${\OLId{latin-looped}{K}}=\Setabs{{\OLId{latin-ordinary}{e}}}{\cfind{{\OLId{latin-ordinary}{e}}}({\OLId{latin-ordinary}{e}})\fdefined}$
+!!{c.e.} ولكنها غير قابلة للقرار.
+\end{thm}
+
+\begin{proof}
+  لنفرض، طلبًا للخلف، قابلية ${\OLId{latin-looped}{K}}$ للقرار؛ فتكون دالتها المميزة $\Char{{\OLId{latin-looped}{K}}}$ قابلة
+  للحساب. ونضع
+  \[{\OLId{latin-ordinary}{d}}({\OLId{latin-ordinary}{e}}) = \begin{cases}
+  {\OLMathNumeral{1}} & \text{إذا كانت\/ $\Char{{\OLId{latin-looped}{K}}}({\OLId{latin-ordinary}{e}}) = {\OLMathNumeral{0}}$}\\
+  \fundefined & \text{في غير ذلك.}
+  \end{cases}
+  \]
+  ثم نأخذ ${\OLId{latin-ordinary}{k}}$ فهرسًا لـ~${\OLId{latin-ordinary}{d}}$، فيكون ${\OLId{latin-ordinary}{d}}\simeq\cfind{{\OLId{latin-ordinary}{k}}}$، ومنه
+  ${\OLId{latin-ordinary}{d}}({\OLId{latin-ordinary}{k}})\simeq\cfind{{\OLId{latin-ordinary}{k}}}({\OLId{latin-ordinary}{k}})$. وهذا يناقض حقيقة أن
+  ${\OLId{latin-ordinary}{d}}({\OLId{latin-ordinary}{k}})\fdefined$ إذا وفقط إذا كانت $\cfind{{\OLId{latin-ordinary}{k}}}({\OLId{latin-ordinary}{k}})\fundefined$، كما
+  يقتضي تعريف~${\OLId{latin-ordinary}{d}}$.
+
+  وأما ${\OLId{latin-looped}{K}}$ فهي مجال ${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}})=\umin{{\OLId{latin-ordinary}{y}}}{{\OLId{latin-looped}{T}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})}$، ومن ثم فهي !!{c.e.}.
+\end{proof}
+
+\end{document}

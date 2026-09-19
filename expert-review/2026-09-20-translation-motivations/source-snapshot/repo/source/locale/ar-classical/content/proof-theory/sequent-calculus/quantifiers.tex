@@ -1,0 +1,156 @@
+% Part: proof-theory
+% Chapter: sequent-calculus
+% Section: quantifiers
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{seq}{qua}
+
+\olsection{في انتظام البراهين والاستبدال}
+
+تنشأ في قواعد الكميات دقة زائدة من «شروط المتغير المميَّز» الملازمة
+لقاعدتي~\LeftR{\lexists} و\RightR{\lforall}. ويزول أكثر الإشكال إذا
+ضمنّا ألا يعاد استعمال~!!{constant}~$a$ في هذه الاستدلالات. فنضع لذلك
+التعريف الآتي.
+
+\begin{defn}
+نسمي~!!^a{proof}~$\pi$ في~\Log{G1c} أو~\Log{G3c} \emph{منتظمًا} متى تحقق
+الشرطان الآتيان:
+\begin{enumerate}
+  \item ألا يُجعل متغير مميَّز~$a$ متغيرًا مميَّزًا لأكثر من استدلال
+  واحد بالقاعدة~\LeftR{\lexists} أو~\RightR{\lforall}؛ و
+  \item إذا كان~$a$ المتغير المميَّز لاستدلال بالقاعدة~\LeftR{\lexists}
+  أو~\RightR{\lforall}، فلا يقع في~$\pi$ إلا فيما فوق ذلك الاستدلال.
+\end{enumerate}
+\end{defn}
+
+\begin{lem}\ollabel{lem:subst-regular} ليكن~$\pi$ منتظمًا وخاتمته
+$\Gamma \Sequent \Delta$، وليكن~$c$~!!a{constant} لا يتخذ متغيرًا
+مميَّزًا في~$\pi$، و$ t$ حدًّا لا يقع فيه شيء من متغيرات~$\pi$ المميَّزة.
+فإن~$\Subst{\pi}{t}{c}$، وهو الحاصل من~$\pi$ باستبدال كل وقوع لـ$c$ بـ$t$،
+!!{proof} منتظم، وخاتمته
+$\Subst{\Gamma}{t}{c} \Sequent \Subst{\Delta}{t}{c}$. والمقصود بـ
+$\Subst{\Gamma}{t}{c}$ متعددة المجموعات الناتجة من استبدال~$c$ بـ$t$
+في كل وقوع لصيغة من~$\Gamma$، من غير إسقاط وقوع ولا تغيير تعدده.
+\end{lem}
+
+\begin{proof}
+  نستقرئ على~$\pheight{\pi}$. فإن كان~$\pheight{\pi}=0$، لم يشتمل
+  $\pi$ إلا على بديهية؛ وعندئذ يكون~$\Subst{\pi}{t}{c}$ بديهية كذلك، إذ
+  تصير كل~!!{formula}~$!A(c)$ فيها~$!A(t)$.
+
+  وإن كان~$\pheight{\pi}>0$، قسمنا بحسب الاستدلال الأخير في~$\pi$.
+  فأما القواعد البنيوية (في~\Log{G1c}) والقواعد المنطقية لروابط القضايا
+  فظاهرة، ونكلها إلى القارئ تمرينًا. ويبقى أن ننظر في الاستدلال الكمي
+  الذي ينتهي به~$\pi$.
+  \begin{enumerate}
+    \item فإن كان الاستدلال الأخير~\RightR{\lforall}، كانت صورة~$\pi$
+    كما يأتي:
+    \[
+    \AxiomC{}
+    \RightLabel{$\pi'$}
+    \Deduce$\Gamma(c) \fCenter \Delta'(c), !A(a,c)$
+    \RightLabel{\RightR{\lforall}}
+    \UnaryInf$\Gamma(c) \fCenter \Delta'(c), \lforall[x][!A(x,c)]$
+    \DisplayProof
+    \]
+    ويفيد فرض الاستقراء أن~$\Subst{\pi'}{t}{c}$~!!{proof} منتظم
+    لـ$\Gamma(t) \fCenter \Delta'(t), !A(a,t)$. ولأن~$a$ متغير مميَّز
+    في~$\pi$، امتنع وقوعه في~$t$. فيكون آخر الاستدلال في
+    $\Subst{\pi}{t}{c}$ هو
+    \[
+    \AxiomC{}
+    \RightLabel{$\Subst{\pi'}{t}{c}$}
+    \Deduce$\Gamma(t) \fCenter \Delta'(t), !A(a,t)$
+    \RightLabel{\RightR{\lforall}}
+    \UnaryInf$\Gamma(t) \fCenter \Delta'(t), \lforall[x][!A(x,t)]$
+    \DisplayProof
+    \]
+    وهو صحيح؛ لأن النتيجة لا تحتوي~$a$.
+    \item وإن كان الاستدلال الأخير~\LeftR{\lforall} في~\Log{G3c}،
+    كانت صورة~$\pi$:
+    \[
+    \AxiomC{}
+    \RightLabel{$\pi'$}
+    \Deduce$!A(s(c),c), \lforall[x][!A(x,c)], \Gamma(c) \fCenter \Delta'(c)$
+    \RightLabel{\LeftR{\lforall}}
+    \UnaryInf$\lforall[x][!A(x,c)], \Gamma(c) \fCenter \Delta'(c)$
+    \DisplayProof
+    \]
+    وبفرض الاستقراء يكون~$\Subst{\pi'}{t}{c}$~!!{proof} منتظمًا
+    لـ$!A(s(t),t), \lforall[x][!A(x,t)], \Gamma(t) \fCenter
+    \Delta'(t)$. فيكون آخر الاستدلال في~$\Subst{\pi}{t}{c}$:
+    \[
+    \AxiomC{}
+    \RightLabel{$\Subst{\pi'}{t}{c}$}
+    \Deduce$!A(s(t),t), \lforall[x][!A(x,t)], \Gamma(t) \fCenter \Delta'(t)$
+    \RightLabel{\LeftR{\lforall}}
+    \UnaryInf$\lforall[x][!A(x,t)], \Gamma(t) \fCenter \Delta'(t)$
+    \DisplayProof
+    \]
+    وهو صحيح. وأما~\LeftR{\lforall} في~\Log{G1c} فحكمها مثله، غير أنها
+    أيسر.
+    \item وأما إذا كان الاستدلال الأخير~\RightR{\lexists} أو
+    \LeftR{\lexists} فتُترك الحالة تمرينًا.
+  \end{enumerate}
+  وفي جميع الأقسام إنما ألحقنا متتالية بخاتمة~!!{proof} منتظم، أو بخواتيم
+  !!{proof}s منتظمة عند القواعد ذات المقدمتين؛ فلم تتبدل استدلالات المتغير
+  المميَّز. ولما لم يكن~$c$ متغيرًا مميَّزًا، ولم يشتمل~$t$ على متغير
+  مميَّز في~$\pi$، لم يُدخل الاستبدال متغيرًا مميَّزًا تحت الاستدلال
+  المختص به. وفرض الاستقراء يحفظ الانتظام، فيكون~$\Subst{\pi}{t}{c}$
+  منتظمًا.
+\end{proof}
+
+\begin{prop}
+إذا كان~$\pi$~!!a{proof} في~\Log{G1c} أو~\Log{G3c}، أمكن إيجاد
+!!{proof} منتظم~$\pi'$ يماثله في البنية، ولا سيما في~!!{height}،
+ولا يفارق~$\pi$ إلا في أسماء المتغيرات المميَّزة.
+\end{prop}
+
+\begin{proof}
+نصطلح في هذا البرهان وحده على تسمية استدلال المتغير المميَّز في~$\pi$
+\emph{نظيفًا} إن لم يكن متغيره المميَّز كذلك لاستدلال آخر، ولم يقع في
+$\pi$ خارج~!!{proof} الاستدلال المباشر؛ وما عداه فنسميه
+\emph{متسخًا}. وليكن~$n$ عدد الاستدلالات المتسخة للمتغير المميَّز في
+$\pi$. ونثبت بالاستقراء على~$n$ إمكان تحويل~$\pi$ إلى !!{proof} منتظم
+$\pi'$ من الصفة المطلوبة. فإن كان~$n=0$، كانت استدلالات المتغير
+المميَّز في~$\pi$ كلها نظيفة، فكان~$\pi$ منتظمًا ولم يبق ما يثبت. وإن لم
+يكن كذلك، اخترنا أعلى استدلال متسخ لمتغير مميَّز؛ وليكن، مثلًا، استدلالًا
+بالقاعدة~\RightR{\lforall}. وعندئذ يكون الـ!!{proof} الجزئي~$\pi_1$
+المنتهي بهذا الاستدلال على الصورة
+    \[
+    \AxiomC{}
+    \RightLabel{$\pi_2$}
+    \Deduce$\Gamma \fCenter \Delta, !A(c)$
+    \RightLabel{\RightR{\lforall}}
+    \UnaryInf$\Gamma \fCenter \Delta, \lforall[x][!A(x)]$
+    \DisplayProof
+    \]
+ولكون~$c$ متغيرًا مميَّزًا، لا يقع في~$\Gamma$ ولا~$\Delta$ ولا
+$\lforall[x][!A(x)]$. والبرهان~$\pi_2$ منتظم، لأن كل استدلال لمتغير
+مميَّز فوق الاستدلال المختار نظيف. ثم خذ~$a$~!!a{constant} لا تقع في
+$\pi$. فيكون، بحسب~\olref{lem:subst-regular}،
+$\Subst{\pi_2}{a}{c}$ برهانًا منتظمًا لـ$\Gamma \fCenter \Delta,
+!A(a)$، صالحًا لأن تطبق عليه~\RightR{\lforall}. فإذا أبدلنا~$\pi_1$
+في~$\pi$ بالبرهان~$\pi_1'$ الآتي،
+    \[
+    \AxiomC{}
+    \RightLabel{$\Subst{\pi_2}{a}{c}$}
+    \Deduce$\Gamma \fCenter \Delta, !A(a)$
+    \RightLabel{\RightR{\lforall}}
+    \UnaryInf$\Gamma \fCenter \Delta, \lforall[x][!A(x)]$
+    \DisplayProof
+    \]
+فقد جعلنا متغيرًا مميَّزًا جديدًا~$a$ بدل المتغير~$c$. وبذلك يقل عدد
+الاستدلالات المتسخة للمتغير المميَّز عن~$n$ قطعًا؛ إذ قد تجعل إعادة
+التسمية أكثر من استدلال واحد نظيفًا. فتثبت الدعوى بفرض الاستقراء، وسائر
+قواعد المتغير المميَّز على هذا القياس.
+\end{proof}
+
+ولن نحتج بهذه القضية تصريحًا فيما يأتي، بل نفرض كل~!!{proof}s التي ننظر
+فيها منتظمة؛ فإن لم تكن، أمكن دائمًا إعادة تسمية متغيراتها المميَّزة حتى
+تنتظم.
+
+\end{document}

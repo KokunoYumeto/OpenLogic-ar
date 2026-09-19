@@ -1,0 +1,118 @@
+% Part: first-order-logic
+% Chapter: models-theories
+% Section: expressing-relations
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{mat}{exr}
+
+\olsection{التعبير عن العلاقات في \article{structure}
+  \printtoken{S}{structure}}
+
+\begin{explain}
+من أهم استعمالات ال!!{formula}s التعبير عن الخصائص والعلاقات في
+!!a{structure}~$\Struct M$ بواسطة أوليات لغة~$\Lang L$ الخاصة
+بـ~$\Struct M$. ونعني بهذا ما يأتي: إن !!{domain}~$\Struct M$ مجموعة
+من الكائنات. وتؤول ال!!{constant}s وال!!{function}s وال!!{predicate}s
+في~$\Struct M$ ببعض الكائنات في~$\Domain M$، والدوال على~$\Domain M$،
+والعلاقات على~$\Domain M$، على الترتيب. فإذا كان $\Obj A^2_0$، مثلًا،
+في $\Lang L$، أسندت إليه $\Struct M$ علاقة~$R = \Assign{{\Obj
+  A^2_0}}{M}$. وعندئذ تعبر الصيغة $\Atom{\Obj A^2_0}{\Obj v_1, \Obj v_2}$
+\emph{عن} تلك العلاقة نفسها بالمعنى الآتي: إذا كان إسناد
+المتغيرات~$s$ يرسل $\Obj v_1$ إلى $a \in \Domain{M}$ و$\Obj v_2$ إلى
+$b \in \Domain M$، فإن
+\[
+Rab \text{\quad iff\quad} \Sat{M}{\Atom{\Obj A^2_0}{\Obj v_1, \Obj v_2}}[s].
+\]
+لاحظ أنه لا بد من إدخال إسنادات المتغيرات هنا؛ فلا نستطيع أن نقول
+فحسب «$Rab$ إذا وفقط إذا كان $\Sat{M}{\Atom{\Obj A^2_0}{a, b}}$»،
+لأن $a$ و$b$ ليسا رمزين من لغتنا، بل هما !!{element}s
+في~$\Domain{M}$.
+
+ولأن لدينا أكثر من ال!!{formula}s الذرية، ويمكننا تركيبها باستعمال
+الروابط المنطقية والمكممات، تستطيع !!{formula}s أعقد أن تعرّف علاقات
+أخرى ليست مضمّنة في~$\Struct M$ مباشرة. ويهمنا أن نعرف كيف نفعل ذلك،
+وبوجه خاص أي العلاقات يمكننا تعريفها في !!a{structure}.
+\end{explain}
+
+\begin{defn}
+لتكن $!A(\Obj v_1,\dots, \Obj v_n)$ !!a{formula} من $\Lang L$ لا
+تقع فيها حرة إلا $\Obj v_1$،\dots، $\Obj v_n$، ولتكن $\Struct M$
+!!a{structure} لـ~$\Lang L$. تعبر $!A(\Obj v_1,\dots, \Obj v_n)$
+\emph{عن العلاقة}~$R \subseteq \Domain M^n$ إذا وفقط إذا كان
+\[
+Ra_1\dots a_n \text{\quad iff\quad} \Sat{M}{\Atom{!A}{\Obj
+    v_1,\dots, \Obj v_n}}[s]
+\]
+لكل إسناد متغيرات~$s$ يكون فيه $s(\Obj v_i) = a_i$ ($i = 1,
+\dots, n$).
+\end{defn}
+
+\begin{ex}
+في النموذج القياسي للحساب~$\Struct N$، تعبر ال!!{formula} $\Obj
+v_1 < \Obj v_2 \lor \eq[\Obj v_1][\Obj v_2]$ عن العلاقة $\le$ على
+~$\Nat$. وتعبر ال!!{formula} $\eq[\Obj v_2][\Obj v_1']$ عن علاقة
+الخلف، أي العلاقة $R \subseteq \Nat^2$ التي يصدق فيها $Rnm$ إذا كان
+$m$ خلف~$n$. وتعبر الصيغة $\eq[\Obj v_1][\Obj v_2']$ عن علاقة السلف.
+وتعبر ال!!{formula}s $\lexists[\Obj v_3][(\eq/[\Obj v_3][\Obj 0] \land
+  \eq[\Obj v_2][(\Obj v_1 + \Obj v_3)])]$ و$\lexists[\Obj
+  v_3][\eq[(\Obj v_1 + {\Obj v_3}')][\Obj v_2]]$ كلتاهما عن العلاقة
+$\Obj <$. وهذا يعني أن رمز المحمول~$<$ زائد في الواقع في لغة الحساب؛
+إذ يمكن تعريفه.
+\end{ex}
+
+\begin{explain}
+لا تقتصر أهمية هذه الفكرة على !!{structure}s بعينها، بل تظهر عمومًا
+كلما استعملنا لغة لوصف نموذج مقصود أو نماذج مقصودة، أي عندما ننظر في
+النظريات. وكثيرًا ما لا تحتوي هذه النظريات إلا عددًا قليلًا من
+ال!!{predicate}s بوصفها رموزًا أولية، مع أن علاقات أخرى كثيرة تؤدي
+دورًا مهمًا في المجال الذي تستعمل النظريات لوصفه. فإذا أمكن التعبير
+عن هذه العلاقات الأخرى على نحو منهجي بواسطة العلاقات التي تؤول
+ال!!{predicate}s الأولية للغة، قلنا إننا نستطيع \emph{تعريفها} في
+اللغة.
+\end{explain}
+
+\begin{prob}
+أوجد !!{formula}s في $\Lang L_A$ تعرّف العلاقات الآتية:
+\begin{enumerate}
+\item $n$ بين $i$ و$j$؛
+\item $n$ يقسم $m$ دون باق (أي إن $m$ مضاعف لـ~$n$)؛
+\item $n$ عدد أولي (أي لا يقسم~$n$ دون باق عدد غير $1$ و$n$).
+\end{enumerate}
+\end{prob}
+
+\begin{prob}
+افترض أن الصيغة $!A(\Obj v_1, \Obj v_2)$ تعبر عن العلاقة $R
+\subseteq \Domain M^2$ في !!a{structure}~$\Struct M$. أوجد صيغًا
+تعبر عن العلاقات الآتية:
+\begin{enumerate}
+\item معكوس العلاقة $R^{-1}$؛
+\item الضرب النسبي $R \mid R$؛
+\end{enumerate}
+هل يمكنك إيجاد طريقة للتعبير عن $R^+$، وهو الإغلاق المتعدي لـ~$R$؟
+\end{prob}
+
+\begin{prob}
+لتكن $\Lang{L}$ اللغة التي لا تحتوي إلا رمز محمول ثنائي المحل
+$<$ (فلا !!{constant}s ولا !!{function}s ولا !!{predicate}s أخرى
+فيها---باستثناء~$\eq$ بالطبع). ولتكن $\Struct{N}$ البنية التي فيها
+$\Domain{N} = \Nat$ و$\Assign{<}{N} = \Setabs{\tuple{n,m}}{n <
+  m}$. أثبت ما يأتي:
+\begin{enumerate}
+\item $\{ 0 \}$ قابلة للتعريف في $\Struct{N}$؛
+\item $\{ 1 \}$ قابلة للتعريف في $\Struct{N}$؛
+\item $\{ 2 \}$ قابلة للتعريف في $\Struct{N}$؛
+\item لكل $n \in \Nat$، المجموعة $\{ n \}$ قابلة للتعريف في
+  $\Struct{N}$؛
+\item كل مجموعة جزئية منتهية من $\Domain{N}$ قابلة للتعريف في
+  $\Struct{N}$؛
+\item كل مجموعة جزئية من $\Domain{N}$ متممتها منتهية قابلة للتعريف
+  في $\Struct{N}$ (حيث تكون متممة $X \subseteq \Nat$ منتهية إذا
+  وفقط إذا كانت $\Nat \setminus X$ منتهية).
+\end{enumerate}
+\end{prob}
+
+
+\end{document}

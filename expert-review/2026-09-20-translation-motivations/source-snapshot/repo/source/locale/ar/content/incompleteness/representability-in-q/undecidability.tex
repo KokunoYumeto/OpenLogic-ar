@@ -1,0 +1,75 @@
+% Part: incompleteness
+% Chapter: representability-in-q
+% Section: undecidability
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{req}{und}
+\olsection{عدم القابلية للقرار}
+
+نسمي النظرية $\Th{T}$ \emph{غير قابلة للقرار} إذا لم يوجد إجراء
+حسابي يعطي دائمًا، بعد عدد منتهٍ من الخطوات، جوابًا صحيحًا عن السؤال
+«هل تثبت $\Th{T}$ الصيغة~$!A$؟» لكل جملة~$!A$ في لغة
+$\Th{T}$. ولذلك تكون $\Th{Q}$ قابلة للقرار إذا وفقط إذا وُجد إجراء
+حسابي يقرر، عند إعطائه جملة~$!A$ في لغة الحساب، ما إذا كانت
+$\Th{Q}\Proves !A$ أم لا. ويمكننا صياغة ذلك بدقة أكبر بالسؤال: هل
+العلاقة~$\Prov[\Th{Q}](y)$، التي تصدق في~$y$ إذا وفقط إذا كان $y$
+عدد غودل لجملة قابلة للإثبات في~$\Th{Q}$، عودية؟ والجواب:
+لا.
+
+\begin{thm}
+$\Th{Q}$ غير قابلة للقرار؛ أي إن العلاقة
+\[
+\Prov[\Th{Q}](y) \defiff \fn{Sent}(y) \land
+\lexists[x][\Prf[\Th{Q}](x, y)]
+\]
+ليست عودية.
+\end{thm}
+
+\begin{proof}
+افترض أنها عودية. عندئذ يمكننا حل مسألة التوقف كما يأتي: إذا أُعطينا
+$e$ و$n$، نعلم أن $\cfind{e}(n)\fdefined$ إذا وفقط إذا وُجد~$s$ بحيث
+$T(e,n,s)$، حيث $T$ محمول كليني الوارد في
+\olref[cmp][rec][nft]{thm:kleene-nf}. ولما كانت $T$ عودية بدائية، فهي
+قابلة للتمثيل في~$\Th{Q}$ بصيغة $!B_T$؛ أي
+$\Th{Q}\Proves !B_T(\num{e},\num{n},\num{s})$ إذا وفقط إذا صدقت
+$T(e,n,s)$. وإذا كانت
+$\Th{Q}\Proves !B_T(\num{e},\num{n},\num{s})$، كانت أيضًا
+$\Th{Q}\Proves\lexists[y][!B_T(\num{e},\num{n},y)]$. وإذا لم يوجد
+مثل هذا $s$، كان
+$\Th{Q}\Proves\lnot !B_T(\num{e},\num{n},\num{s})$ لكل~$s$. لكن $\Th{Q}$
+$\omega$-متسقة؛ أي إذا كانت
+$\Th{Q}\Proves\lnot !A(\num{n})$ لكل~$n\in\Nat$، فإن
+$\Th{Q}\Proves/\lexists[y][!A(y)]$. ونعلم ذلك لأن بديهيات
+$\Th{Q}$ صادقة في النموذج القياسي~$\Struct{N}$. ومن ثم
+$\Th{Q}\Proves/\lexists[y][!B_T(\num{e},\num{n},y)]$. وبعبارة أخرى،
+$\Th{Q}\Proves\lexists[y][!B_T(\num{e},\num{n},y)]$ إذا وفقط إذا
+وُجد $s$ بحيث $T(e,n,s)$؛ أي إذا وفقط إذا كان
+$\cfind{e}(n)\fdefined$. ويمكننا أن نحسب من $e$ و$n$ العدد
+$\Gn{\lexists[y][!B_T(\num{e},\num{n},y)]}$؛ ولتكن $g(e,n)$ الدالة
+العودية البدائية التي تفعل ذلك. إذن
+\[
+h(e, n) =
+\begin{cases}
+1 & \text{إذا كانت $\Prov[\Th{Q}](g(e, n))$ صادقة}\\
+0 & \text{في غير ذلك}.
+\end{cases}
+\]
+كان هذا سيبيّن أن $h$ عودية إذا كانت $\Prov[\Th{Q}]$ عودية. لكن
+$h$ ليست عودية بحسب \olref[cmp][rec][hlt]{thm:halting-problem}،
+ولذلك لا يمكن أن تكون $\Prov[\Th{Q}]$ عودية.
+\end{proof}
+
+\begin{cor}
+منطق الرتبة الأولى غير قابل للقرار.
+\end{cor}
+
+\begin{proof}
+لو كان منطق الرتبة الأولى قابلًا للقرار، لكانت قابلية الإثبات في
+$\Th{Q}$ كذلك، لأن $\Th{Q}\Proves !A$ إذا وفقط إذا
+$\Proves !T\lif !A$، حيث $!T$ اقتران بديهيات~$\Th{Q}$.
+\end{proof}
+
+\end{document}

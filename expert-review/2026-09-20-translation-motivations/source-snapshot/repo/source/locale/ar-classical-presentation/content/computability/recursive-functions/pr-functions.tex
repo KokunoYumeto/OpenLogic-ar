@@ -1,0 +1,153 @@
+% Part: computability
+% Chapter: recursive-functions
+% Section: pr-functions
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{rec}{prf}
+\olsection{الدوال العودية البدائية}
+
+فلنضبط الآن الوجهين اللذين نستخرج بهما دوال جديدة من دوال معلومة:
+العودية البدائية والتركيب.
+
+\begin{defn}
+  \ollabel{defn:primitive-recursion} لتكن ${\OLId{latin-ordinary}{f}}$ دالة ذات ${\OLId{latin-ordinary}{k}}$ حجج
+  (${\OLId{latin-ordinary}{k}}\ge {\OLMathNumeral{1}}$)، ولتكن ${\OLId{latin-ordinary}{g}}$ ذات ${\OLId{latin-ordinary}{k}}+{\OLMathNumeral{2}}$ حجة. فالمعرّفة
+  \emph{بالعودية البدائية من ${\OLId{latin-ordinary}{f}}$ و${\OLId{latin-ordinary}{g}}$} هي الدالة~${\OLId{latin-ordinary}{h}}$ ذات ${\OLId{latin-ordinary}{k}}+{\OLMathNumeral{1}}$ حجة،
+  المعينة بالمعادلتين
+  \begin{align*}
+    {\OLId{latin-ordinary}{h}}({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}},\dots,{\OLId{latin-ordinary}{x}}_{{\OLId{latin-ordinary}{k}}-{\OLMathNumeral{1}}},{\OLMathNumeral{0}}) & =  {\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}},\dots,{\OLId{latin-ordinary}{x}}_{{\OLId{latin-ordinary}{k}}-{\OLMathNumeral{1}}}) \\
+    {\OLId{latin-ordinary}{h}}({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}},\dots,{\OLId{latin-ordinary}{x}}_{{\OLId{latin-ordinary}{k}}-{\OLMathNumeral{1}}},{\OLId{latin-ordinary}{y}}+{\OLMathNumeral{1}}) & = {\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}},\dots,{\OLId{latin-ordinary}{x}}_{{\OLId{latin-ordinary}{k}}-{\OLMathNumeral{1}}}, {\OLId{latin-ordinary}{y}}, {\OLId{latin-ordinary}{h}}({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}},\dots,{\OLId{latin-ordinary}{x}}_{{\OLId{latin-ordinary}{k}}-{\OLMathNumeral{1}}}, {\OLId{latin-ordinary}{y}}))
+  \end{align*}
+\end{defn}
+
+\begin{defn}
+  \ollabel{defn:composition} لتكن ${\OLId{latin-ordinary}{f}}$ ذات ${\OLId{latin-ordinary}{k}}$ حجج، ولنأخذ
+  ${\OLId{latin-ordinary}{g}}_{\OLMathNumeral{0}}$، …،~${\OLId{latin-ordinary}{g}}_{{\OLId{latin-ordinary}{k}}-{\OLMathNumeral{1}}}$، وهي ${\OLId{latin-ordinary}{k}}$ دوال لكل منها ${\OLId{latin-ordinary}{n}}$ حجة. فالدالة الحاصلة \emph{بتركيب ${\OLId{latin-ordinary}{f}}$ مع ${\OLId{latin-ordinary}{g}}_{\OLMathNumeral{0}}$، …،~${\OLId{latin-ordinary}{g}}_{{\OLId{latin-ordinary}{k}}-{\OLMathNumeral{1}}}$} هي الدالة
+  ~ ${\OLId{latin-ordinary}{h}}$ ذات ${\OLId{latin-ordinary}{n}}$ حجة التي تعرفها
+  \[
+  {\OLId{latin-ordinary}{h}}({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}}, \dots, {\OLId{latin-ordinary}{x}}_{{\OLId{latin-ordinary}{n}}-{\OLMathNumeral{1}}}) =
+  {\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{g}}_{\OLMathNumeral{0}}({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}}, \dots, {\OLId{latin-ordinary}{x}}_{{\OLId{latin-ordinary}{n}}-{\OLMathNumeral{1}}}), \dots, {\OLId{latin-ordinary}{g}}_{{\OLId{latin-ordinary}{k}}-{\OLMathNumeral{1}}}({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}}, \dots, {\OLId{latin-ordinary}{x}}_{{\OLId{latin-ordinary}{n}}-{\OLMathNumeral{1}}})).
+  \]
+\end{defn}
+
+ونجعل في عداد الدوال العودية البدائية، مع $\Succ$ ودوال الإسقاط
+\[
+\Proj{{\OLId{latin-ordinary}{n}}}{{\OLId{latin-ordinary}{i}}}({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}},\dots,{\OLId{latin-ordinary}{x}}_{{\OLId{latin-ordinary}{n}}-{\OLMathNumeral{1}}}) = {\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{i}},
+\]
+لكل عدد طبيعي ${\OLId{latin-ordinary}{n}}$ ولكل ${\OLId{latin-ordinary}{i}}<{\OLId{latin-ordinary}{n}}$، الدالة~$\Zero({\OLId{latin-ordinary}{x}})={\OLMathNumeral{0}}$ أيضًا.
+
+\begin{defn}
+  الدوال العودية البدائية دوال من $\Nat^{\OLId{latin-ordinary}{n}}$ إلى
+  $\Nat$، وتُضبط مجموعتها بالتعريف الاستقرائي الآتي:
+  \begin{enumerate}
+  \item $\Zero$ عودية بدائية.
+  \item $\Succ$ عودية بدائية.
+  \item كل دالة إسقاط $\Proj{{\OLId{latin-ordinary}{n}}}{{\OLId{latin-ordinary}{i}}}$ عودية بدائية.
+  \item إذا كانت ${\OLId{latin-ordinary}{f}}$ دالة عودية بدائية ذات ${\OLId{latin-ordinary}{k}}$ حجج وكانت ${\OLId{latin-ordinary}{g}}_{\OLMathNumeral{0}}$،
+    …،~${\OLId{latin-ordinary}{g}}_{{\OLId{latin-ordinary}{k}}-{\OLMathNumeral{1}}}$ دوال عودية بدائية ذات ${\OLId{latin-ordinary}{n}}$ حجة، فإن تركيب ${\OLId{latin-ordinary}{f}}$ مع
+    ${\OLId{latin-ordinary}{g}}_{\OLMathNumeral{0}}$، …،~${\OLId{latin-ordinary}{g}}_{{\OLId{latin-ordinary}{k}}-{\OLMathNumeral{1}}}$ عودي بدائي.
+  \item إذا كانت ${\OLId{latin-ordinary}{f}}$ دالة عودية بدائية ذات ${\OLId{latin-ordinary}{k}}$ حجج وكانت ${\OLId{latin-ordinary}{g}}$ دالة
+    عودية بدائية ذات ${\OLId{latin-ordinary}{k}}+{\OLMathNumeral{2}}$ حجة، فإن الدالة المعرفة بالعودية البدائية
+    من ${\OLId{latin-ordinary}{f}}$ و${\OLId{latin-ordinary}{g}}$ عودية بدائية.
+\end{enumerate}
+\end{defn}
+
+\begin{explain}
+وحاصل التعريف أن مجموعة الدوال العودية البدائية أصغر مجموعة تضم
+$\Zero$ و$\Succ$ ودوال الإسقاط~$\Proj{{\OLId{latin-ordinary}{n}}}{{\OLId{latin-ordinary}{j}}}$، وتكون منغلقة تحت
+التركيب والعودية البدائية.
+
+ولنا أن نصف هذه المجموعة على وجه آخر، بأن نبنيها
+«مرحلة» بعد مرحلة. فلتكن ${\OLId{latin-looped}{S}}_{\OLMathNumeral{0}}$ مجموعة الدوال التي نبدأ بها، وهي $\Zero$ و$\Succ$ ودوال
+الإسقاط. فهذه دوال المرحلة~${\OLMathNumeral{0}}$. فإذا فرغنا من
+تعريف ${\OLId{latin-looped}{S}}_{\OLId{latin-ordinary}{i}}$، جعلنا ${\OLId{latin-looped}{S}}_{{\OLId{latin-ordinary}{i}}+{\OLMathNumeral{1}}}$ مجموعة ما يحصل بإجراء
+تركيب واحد أو عودية بدائية واحدة على دوال من~${\OLId{latin-looped}{S}}_{\OLId{latin-ordinary}{i}}$.
+فيكون
+\[
+{\OLId{latin-looped}{S}} = \bigcup_{{\OLId{latin-ordinary}{i}} \in \Nat} {\OLId{latin-looped}{S}}_{\OLId{latin-ordinary}{i}}
+\]
+مجموعة جميع الدوال العودية البدائية.
+\end{explain}
+
+ولنطبّق هذا الضبط فنثبت أن $\Add$ دالة عودية بدائية.
+
+\begin{prop}
+  دالة الجمع $\Add({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})={\OLId{latin-ordinary}{x}}+{\OLId{latin-ordinary}{y}}$ عودية بدائية.
+\end{prop}
+
+\begin{proof}
+قد سبق تعريف $\Add$ بالعودية البدائية من دالتين ${\OLId{latin-ordinary}{f}}$ و~${\OLId{latin-ordinary}{g}}$،
+وجاء التعريف على صورة \olref{defn:primitive-recursion}:
+\begin{align*}
+  \Add({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}}, {\OLMathNumeral{0}}) & = {\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}}) = {\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}}\\
+  \Add({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}}, {\OLId{latin-ordinary}{y}}+{\OLMathNumeral{1}}) & = {\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}}, {\OLId{latin-ordinary}{y}}, \Add({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}}, {\OLId{latin-ordinary}{y}})) =
+  \Succ(\Add({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}}, {\OLId{latin-ordinary}{y}}))
+\end{align*}
+فلا يبقى لإثبات عودية $\Add$ البدائية إلا إثباتها لـ${\OLId{latin-ordinary}{f}}$ و${\OLId{latin-ordinary}{g}}$. أما الأولى فإن
+${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}})={\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}}=\Proj{{\OLMathNumeral{1}}}{{\OLMathNumeral{0}}}({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}})$، ودوال الإسقاط تعد عودية بدائية، فتكون
+${\OLId{latin-ordinary}{f}}$ عودية بدائية. أما ${\OLId{latin-ordinary}{g}}$ فهي الدالة الثلاثية الحجج ${\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}},{\OLId{latin-ordinary}{y}},{\OLId{latin-ordinary}{z}})$
+المعرفة بـ
+\[
+{\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}}, {\OLId{latin-ordinary}{y}}, {\OLId{latin-ordinary}{z}}) = \Succ({\OLId{latin-ordinary}{z}}).
+\]
+ولا يكفي هذا وحده للحكم بأن ${\OLId{latin-ordinary}{g}}$ عودية بدائية؛ فإن ${\OLId{latin-ordinary}{g}}$ غير $\Succ$
+من جهة عدد الحجج: فـ$\Succ$ أحادية، و${\OLId{latin-ordinary}{g}}$ لا بد أن تكون ثلاثية
+الحجج. وإنما يتم تعريف ${\OLId{latin-ordinary}{g}}$ على الوجه الرسمي بالتركيب الآتي:
+\[
+{\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}}, {\OLId{latin-ordinary}{y}}, {\OLId{latin-ordinary}{z}}) = \Succ(\Proj{{\OLMathNumeral{3}}}{{\OLMathNumeral{2}}}({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}}, {\OLId{latin-ordinary}{y}}, {\OLId{latin-ordinary}{z}})).
+\]
+وحيث إن $\Succ$ و$\Proj{{\OLMathNumeral{3}}}{{\OLMathNumeral{2}}}$ عوديتان بدائيتان، فإن ${\OLId{latin-ordinary}{g}}$
+عودية بدائية أيضًا، لكونها تركيبًا منهما.
+\end{proof}
+
+\begin{prop}
+  \ollabel{prop:mult-pr}
+  دالة الضرب $\Mult({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})={\OLId{latin-ordinary}{x}}\cdot {\OLId{latin-ordinary}{y}}$ عودية بدائية.
+\end{prop}
+
+\begin{proof}
+  تمرين.
+\end{proof}
+
+\begin{prob}
+  برهن \olref[cmp][rec][prf]{prop:mult-pr}: ضع تعريف $\Mult$
+  بالعودية البدائية في الصورة المشترطة في
+  \olref[cmp][rec][prf]{defn:primitive-recursion}، ثم بيّن أن الدالتين
+  اللتين تقومان فيه مقام ${\OLId{latin-ordinary}{f}}$ و~${\OLId{latin-ordinary}{g}}$ عوديتان بدائيتان.
+\end{prob}
+
+\begin{ex}
+ولنعد إلى أول ما أوردناه مثالًا للتعريف بالعودية البدائية:
+\begin{align*}
+{\OLId{latin-ordinary}{h}}({\OLMathNumeral{0}}) & =  {\OLMathNumeral{1}} \\
+{\OLId{latin-ordinary}{h}}({\OLId{latin-ordinary}{y}}+{\OLMathNumeral{1}}) & =  {\OLMathNumeral{2}} \cdot {\OLId{latin-ordinary}{h}}({\OLId{latin-ordinary}{y}}).
+\end{align*}
+لا يندرج هذا التعريف كما هو في الصورة المشترطة في
+\olref{defn:primitive-recursion}، لأن ${\OLId{latin-ordinary}{k}}={\OLMathNumeral{0}}$. ويتضمن التعريف أيضًا
+الثابتين ${\OLMathNumeral{1}}$ و${\OLMathNumeral{2}}$. فأما الإشكال الأول فندفعه بإدخال حجة صورية، فنعرّف
+الدالة~${\OLId{latin-ordinary}{h}}'$ هكذا:
+\begin{align*}
+{\OLId{latin-ordinary}{h}}'({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}}, {\OLMathNumeral{0}}) & =  {\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}}) = {\OLMathNumeral{1}} \\
+{\OLId{latin-ordinary}{h}}'({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}}, {\OLId{latin-ordinary}{y}}+{\OLMathNumeral{1}}) & =  {\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}}, {\OLId{latin-ordinary}{y}}, {\OLId{latin-ordinary}{h}}'({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}}, {\OLId{latin-ordinary}{y}})) = {\OLMathNumeral{2}} \cdot {\OLId{latin-ordinary}{h}}'({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}}, {\OLId{latin-ordinary}{y}}).
+\end{align*}
+يمكن تعريف الدالة ${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}})={\OLMathNumeral{1}}$ من $\Succ$ و$\Zero$ بالتركيب:
+${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}})=\Succ(\Zero({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}}))$. ويمكن تعريف الدالة ${\OLId{latin-ordinary}{g}}$ بالتركيب من
+${\OLId{latin-ordinary}{g}}'({\OLId{latin-ordinary}{z}})={\OLMathNumeral{2}}\cdot {\OLId{latin-ordinary}{z}}$ ومن دوال الإسقاط:
+\begin{align*}
+{\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}}, {\OLId{latin-ordinary}{y}}, {\OLId{latin-ordinary}{z}}) & = {\OLId{latin-ordinary}{g}}'(\Proj{{\OLMathNumeral{3}}}{{\OLMathNumeral{2}}}({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}}, {\OLId{latin-ordinary}{y}}, {\OLId{latin-ordinary}{z}}))
+\intertext{ويمكن بدورها تعريف ${\OLId{latin-ordinary}{g}}'$ بالتركيب هكذا:}
+{\OLId{latin-ordinary}{g}}'({\OLId{latin-ordinary}{z}}) & = \Mult({\OLId{latin-ordinary}{g}}''({\OLId{latin-ordinary}{z}}), \Proj{{\OLMathNumeral{1}}}{{\OLMathNumeral{0}}}({\OLId{latin-ordinary}{z}}))
+\intertext{حيث}
+{\OLId{latin-ordinary}{g}}''({\OLId{latin-ordinary}{z}}) & = \Succ({\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{z}})),
+\end{align*}
+و${\OLId{latin-ordinary}{f}}$ كما سبق: ${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{z}})=\Succ(\Zero({\OLId{latin-ordinary}{z}}))$. وحيث حصلت لنا~${\OLId{latin-ordinary}{h}}'$،
+فلنستعمل التركيب مرة أخرى ونضع
+${\OLId{latin-ordinary}{h}}({\OLId{latin-ordinary}{y}})={\OLId{latin-ordinary}{h}}'(\Proj{{\OLMathNumeral{1}}}{{\OLMathNumeral{0}}}({\OLId{latin-ordinary}{y}}),\Proj{{\OLMathNumeral{1}}}{{\OLMathNumeral{0}}}({\OLId{latin-ordinary}{y}}))$. فقد استخرجنا ${\OLId{latin-ordinary}{h}}$
+من الدوال الأساسية بتركيبات وعوديات بدائية متتابعة؛ وبذلك ثبت أن
+${\OLId{latin-ordinary}{h}}$ عودية بدائية.
+\end{ex}
+
+\end{document}

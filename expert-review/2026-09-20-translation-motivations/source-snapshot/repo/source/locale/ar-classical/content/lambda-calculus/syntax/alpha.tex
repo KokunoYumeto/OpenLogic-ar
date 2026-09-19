@@ -1,0 +1,326 @@
+% Part: lambda-calculus
+% Chapter: syntax
+% Section: alpha
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{syn}{alp}
+\olsection{تحويل~$\alpha$}
+
+لننظر في العلاقة بين~$\lambd[x][x]$ و$\lambd[y][y]$: كلاهما يمثل دالة الهوية،
+ولكنهما حدان متغايران من حيث التركيب. وليس بينهما اختلاف إلا اسم المتغير المقيد؛
+فأحدهما يحصل من الآخر بتغيير هذا الاسم. وهذا هو \emph{تحويل~$\alpha$}.
+
+\begin{defn}[تغيير المتغير المقيد، $\aconvone$]
+  إذا احتوى الحد~$M$ على واقعة لـ$\lambd[x][N]$، وتحقق~$y \notin
+  \FV{N}$، وكان~$\Subst{N}{y}{x}$ معرّفًا، ووضعنا موضع تلك الواقعة
+  \begin{equation*}
+    \lambd[y][\Subst{N}{y}{x}]
+  \end{equation*}
+  فحصل الحد~$M'$، سمينا العملية \emph{تغييرًا للمتغير المقيد}، ورمزنا إليها بـ
+  $M \redone[\alpha] M'$.
+\end{defn}
+
+\begin{defn}[توافق العلاقة]
+  العلاقة~$R$ على الحدود \emph{متوافقة} متى تحققت فيها الشروط الثلاثة:
+  \begin{enumerate}
+  \item من~$R N N'$ يلزم~$R \lambd[x][N] \lambd[x][N']$
+  \item من~$R P P'$ يلزم~$R (PQ) (P'Q)$
+  \item من~$R Q Q'$ يلزم~$R (PQ) (PQ')$
+  \end{enumerate}
+\end{defn}
+
+وبهذا نصوغ التعريف على وجه آخر:
+\begin{defn}[تغيير المتغير المقيد، $\aconvone$]
+  علاقة \emph{تغيير المتغير المقيد} ($\redone[\alpha]$) أصغر العلاقات المتوافقة
+  على الحدود التي تستوفي الشرط التالي:
+  \begin{align*}
+    &\lambd[x][N] \redone[\alpha] \lambd[y][\Subst{N}{y}{x}] && \text{إذا
+      كان~$x \neq y$ و$y \notin \FV{N}$} \\
+    & &&\text{وكان~$\Subst{N}{y}{x}$ معرّفًا}
+  \end{align*}
+\end{defn}
+
+ومعنى «أصغر» أنها تضم ما يوجبه التوافق والشرط المذكور من الأزواج، ولا تضم ما زاد عليه.
+ومن هنا نحصل على التعريف الآتي أيضًا:
+
+\begin{defn}[تغيير المتغير المقيد، $\aconvone$] \ollabel{defn:aconvone}
+  لعلاقة \emph{تغيير المتغير المقيد} ($\aconvone$) القواعد الاستقرائية التالية:
+  \begin{enumerate}
+  \item من~$N \aconvone N'$ يلزم~$\lambd[x][N] \aconvone
+    \lambd[x][N']$ \ollabel{defn:aconvone1}
+  \item من~$P \aconvone P'$ يلزم~$(PQ) \aconvone (P'Q)$ \ollabel{defn:aconvone2}
+  \item من~$Q \aconvone Q'$ يلزم~$(PQ) \aconvone (PQ')$ \ollabel{defn:aconvone3}
+  \item إذا تحقق~$x \neq y$ و$y \notin \FV{N}$ وكان~$\Subst{N}{y}{x}$
+    معرّفًا، لزم~$\lambd[x][N] \redone[\alpha]
+    \lambd[y][\Subst{N}{y}{x}]$.
+    \ollabel{defn:aconvone4}
+  \end{enumerate}
+\end{defn}
+
+هذه التعريفات متكافئة، وإثبات تكافؤها متروك تمرينًا. والذي نعتمده فيما يأتي هو التعريف الاستقرائي.
+
+\begin{defn}[تحويل~$\alpha$، $\aconv$]
+  علاقة \emph{تحويل~$\alpha$} ($\aconv$) أصغر علاقة انعكاسية متعدية على الحدود
+  تشتمل على~$\aconvone$.
+\end{defn}
+
+والمراد بـ«أصغر»، على ما تقدم، ألا تضم العلاقة إلا ما يوجبه الانعكاس والتعدي
+واحتواء~$\aconvone$. وهذا يعطي التعريف المكافئ التالي:
+
+\begin{defn}[تحويل~$\alpha$، $\aconv$] \ollabel{defn:aconv}
+  لعلاقة \emph{تحويل~$\alpha$} ($\aconv$) التعريف الاستقرائي الآتي:
+  \begin{enumerate}
+  \item من~$P \aconv Q$ و$Q \aconv R$ يلزم~$P \aconv R$.
+    \ollabel{defn:aconv1}
+  \item من~$P \aconvone Q$ يلزم~$P \aconv Q$. \ollabel{defn:aconv2}
+  \item $P \aconv P$. \ollabel{defn:aconv3}
+  \end{enumerate}
+\end{defn}
+
+\begin{ex}
+  الحد~$\lambd[x][f x]$ يقبل تحويل~$\alpha$ إلى~$\lambd[y][f
+  y]$، وكذلك العكس.
+  والمعنى غير الصوري أن كليهما دالة تأخذ وسيطًا وتردّ حاصل تطبيق~$f$ عليه،
+  مع الإحالة إلى متغير البيئة~$f$.
+
+  وأما~$\lambd[x][f x]$ فلا يقبل تحويل~$\alpha$ إلى~$\lambd[x][g
+    x]$؛
+  لأنهما، بالمعنى غير الصوري، يحيلان إلى متغيري البيئة~$f$ و$g$ بالترتيب.
+  فهما دالتان مختلفتان: إذا اختلف~$f$ و$g$ في البيئة اختلف سلوكهما فيها.
+\end{ex}
+
+\begin{prob}
+  بيّن في كل زوج مما يلي هل يقبل حداه التحويل بحسب~$\alpha$:
+  \begin{enumerate}
+  \item $\lambd[x][\lambd[y][x]]$ و$\lambd[y][\lambd[x][y]]$
+  \item $\lambd[x][\lambd[y][x]]$ و$\lambd[c][\lambd[b][a]]$
+  \item $\lambd[x][\lambd[y][x]]$ و$\lambd[c][\lambd[b][a]]$
+  \end{enumerate}
+\end{prob}
+
+\begin{lem}\ollabel{lem:fv-one}
+  من~$P \aconvone Q$ يلزم~$\FV{P} = \FV{Q}$.
+\end{lem}
+
+\begin{proof}
+  نستقرئ~!!{derivation} العبارة~$P \aconvone Q$.
+  \begin{enumerate}
+  \item إذا ختم الاشتقاق بالقاعدة~\olref{defn:aconvone4}، كان~$P$ على
+    صورة~$\lambd[x][N]$ و$Q$ على صورة
+    $\lambd[y][\Subst{N}{y}{x}]$، حيث~$x \neq y$ و$y \notin \FV{N}$
+    وكان~$\Subst{N}{y}{x}$ معرّفًا. ثم نفصل بحسب~$x \in \FV{N}$:
+    \begin{enumerate}
+    \item إن كان~$x \in \FV{N}$، حسبنا
+      \begin{align*}
+        \FV{\lambd[y][\Subst{N}{y}{x}]} &=
+        \FV{\Subst{N}{y}{x}} \setminus \{y\} \\
+        & = ((\FV{N} \setminus \{x\}) \cup \{y\}) \setminus \{y\}
+         && \text{ بموجب \olref[sub]{thm:infv}} \\
+        & = \FV{N} \setminus \{x\} \\
+        & = \FV{\lambd[x][N]}
+      \end{align*}
+    \item وإن كان~$x \notin \FV{N}$، حسبنا
+      \begin{align*}
+        \FV{\lambd[y][\Subst{N}{y}{x}]}
+        & = \FV{\Subst{N}{y}{x}} \setminus \{y\} \\
+        & = \FV{N} \setminus \{x\}
+         && \text{بموجب \olref[sub]{thm:notinfv}} \\
+        & = \FV{\lambd[x][N]}.
+      \end{align*}
+    \end{enumerate}
+  \item وأما الحالات الثلاث الباقية فإثباتها تمرين.
+  \end{enumerate}
+\end{proof}
+
+\begin{prob}
+  أتمّ الحالات المتروكة من برهان~\olref[lam][syn][alp]{lem:fv-one}.
+\end{prob}
+
+\begin{lem}\ollabel{lem:inv}
+  من~$P \aconvone Q$ يلزم~$Q \aconvone P$.
+\end{lem}
+
+\begin{proof}
+  نستقرئ~!!{derivation} العبارة~$P \aconvone Q$.
+  \begin{enumerate}
+  \item إذا ختم الاشتقاق بالقاعدة~\olref{defn:aconvone4}، كان~$P$ على
+    صورة~$\lambd[x][N]$ و$Q$ على صورة
+    $\lambd[y][\Subst{N}{y}{x}]$، حيث~$x \neq y$ و$y \notin \FV{N}$
+    وكان~$\Subst{N}{y}{x}$ معرّفًا. فنجد أولًا~$x \notin
+    \FV{\Subst{N}{y}{x}}$ بموجب~\olref[sub]{thm:clr}.
+    ثم تقتضي \olref[sub]{thm:inv} أن~$\Subst{\Subst{N}{y}{x}}{x}{y}$
+    ليس معرّفًا فحسب، بل يساوي~$N$ أيضًا. وبالقاعدة
+    \olref{defn:aconvone4} ينتج~$\lambd[y][\Subst{N}{y}{x}]
+    \aconvone \lambd[x][\Subst{\Subst{N}{y}{x}}{x}{y}] =
+    \lambd[x][N]$.
+    % تصحيح مصدر (0362-I1): المتغير الذي تزيله لمة الخلو من الإحلال الناتج هو x، وهو المطلوب لخطوة ألفا العكسية.
+  \item وإذا كانت القاعدة الأخيرة إحدى قواعد التوافق الثلاث، طبقنا فرض
+    الاستقراء على التحويل الواقع في متن التجريد أو في الطرف الموافق من
+    التطبيق، ثم طبقنا قاعدة التوافق نفسها في الاتجاه المعاكس.
+  \end{enumerate}
+\end{proof}
+
+\begin{prob}
+  أتمّ برهان~\olref[lam][syn][alp]{lem:inv}.
+\end{prob}
+
+\begin{thm}
+  علاقة تحويل~$\alpha$ تكافؤ على الحدود: فهي انعكاسية، متناظرة، متعدية.
+\end{thm}
+
+\begin{proof}
+  \begin{enumerate}
+  \item كل حد~$M$ يرجع إلى~$M$ من غير تغيير للمتغيرات المقيدة،
+    أي بإجراء \emph{صفر} من التغييرات.
+  \item إذا انتقل~$P$ بتحويل~$\alpha$ إلى~$Q$ بسلسلة من تغييرات المتغير المقيد،
+    بدأنا من~$Q$ وعكسنا كل تغيير بموجب~\olref{lem:inv}،
+    وأجرينا المعكوسات بترتيب معاكس، فعُدنا إلى~$P$.
+  \item إذا انتقل~$P$ بتحويل~$\alpha$ إلى~$Q$ بسلسلة،
+    ثم انتقل~$Q$ إلى~$R$ بسلسلة أخرى،
+    انتقل~$P$ إلى~$R$ بإجراء السلسلة الأولى ثم الثانية.
+  \end{enumerate}
+\end{proof}
+
+ومن الآن نسمي~$M$ و$N$ \emph{متكافئين بحسب~$\alpha$}، ونكتب
+$M \aeq N$، متى أمكن تحويل~$M$ بحسب~$\alpha$ إلى~$N$.
+وقد أثبتنا أن ذلك يكافئ إمكان تحويل~$N$ بحسب~$\alpha$ إلى~$M$.
+
+\begin{thm}\ollabel{thm:fv}
+  من~$M \aeq N$ يلزم~$\FV{M} = \FV{N}$.
+\end{thm}
+
+\begin{proof}
+  هذه نتيجة مباشرة لـ\olref{lem:fv-one}.
+\end{proof}
+
+\begin{lem}\ollabel{lem:sub:R}
+  إذا تحقق~$R \aeq R'$ وكان~$\Subst{M}{R}{y}$ معرّفًا، كان
+  $\Subst{M}{R'}{y}$ معرّفًا كذلك، وكان مكافئًا بحسب~$\alpha$ للحد~$\Subst{M}{R}{y}$.
+\end{lem}
+
+\begin{proof}
+  يترك إثباتها تمرينًا.
+\end{proof}
+
+\begin{prob}
+  أقم برهان~\olref[lam][syn][alp]{lem:sub:R}.
+\end{prob}
+
+\begin{lem}\ollabel{lem:sub:left-alpha}
+  إذا تحقق~$P\aeq Q$ وكان كل من~$\Subst{P}{R}{y}$ و
+  $\Subst{Q}{R}{y}$ معرّفًا، لزم
+  $\Subst{P}{R}{y}\aeq\Subst{Q}{R}{y}$.
+\end{lem}
+
+\begin{proof}
+  نقدم حقيقة مساعدة يثبتها الاستقراء القوي في عدد البانيات: لكل حد~$T$
+  ومجموعة منتهية~$F$ من أسماء المتغيرات يوجد حد~$T_F\aeq T$ لا يسمى أي
+  تجريد فيه باسم من~$F$. فأمر المتغير والتطبيق بيّن. وفي حالة
+  $\lambd[x][U]$ نختار~$w\notin F\cup\FV{U}$ مع~$w\ne x$، ثم نستعمل
+  فرض الاستقراء في~$U$ بعد أن نزيد~$\{x,w\}$ في مجموعة المنع؛ فيغدو
+  إحلال~$w$ مكان~$x$ في المتن الناتج معرّفًا، وتصح إعادة تسمية الرابط
+  بالقاعدة~\olref{defn:aconvone4}. ولا دور للّمة الحاضرة في هذا
+  الاستقراء.
+
+  ثم يكفي أن نعالج خطوة~$P\aconvone Q$ واحدة، ونتعدى منها إلى السلسلة.
+  أما حالات التوافق الثلاث فتتبع من فرض الاستقراء ومن تعريف الإحلال.
+  وفي تغيير الرابط عند الجذر نكتب
+  $P=\lambd[x][N]$ و$Q=\lambd[z][\Subst{N}{z}{x}]$.
+  نطبق الحقيقة المساعدة على~$R$ ومجموعة المنع~$\{x,z\}$، فنأخذ
+  $R^\ast\aeq R$ ليس في روابطه اسم~$x$ ولا~$z$.
+  وتفيد~\olref{lem:sub:R} أن الإحلالين يظلان معرّفين إذا جعلنا
+  $R^\ast$ مكان~$R$، وأن نتيجتيهما تكافئان بحسب~$\alpha$ نتيجتيهما
+  الأوليين.
+
+  ومن شروط خطوة تغيير الرابط وكون الإحلالين معرّفين أن~$x,y,z$ مختلفة
+  اثنين اثنين، وأن~$z\notin\FV{N}$ و$x,z\notin\FV{R^\ast}$.
+  ويعطي الاستقراء البنيوي على~$N$، مع استعمال شروط تعريف الإحلال في
+  حالة التجريد، أن الطرف الأيسر التالي معرّف، وأن
+  \[
+    \Subst{\Subst{N}{R^\ast}{y}}{z}{x}
+    =\Subst{\Subst{N}{z}{x}}{R^\ast}{y}.
+  \]
+  ففي حالة~$N=y$ نعبر روابط~$R^\ast$؛ ولا يسمى شيء منها~$x$ أو~$z$.
+  وسائر حالات المتغيرات ظاهرة، وأما التطبيق والتجريد فبفرض الاستقراء.
+  ولا يقع~$z$ حرًا في~$\Subst{N}{R^\ast}{y}$ كذلك. فتجيز
+  \olref{defn:aconvone4} أن نكتب
+  \[
+    \Subst{P}{R^\ast}{y}
+    =\lambd[x][\Subst{N}{R^\ast}{y}]
+    \aconvone
+    \lambd[z][\Subst{\Subst{N}{z}{x}}{R^\ast}{y}]
+    =\Subst{Q}{R^\ast}{y}.
+  \]
+  ثم نرجع من~$R^\ast$ إلى~$R$ بــ\olref{lem:sub:R}، ونستعمل تعدي
+  $\aeq$. وتتم سلسلة التحويل بتكرار حجة الخطوة الواحدة.
+\end{proof}
+
+سبق في~\olref[sub]{sec} أن الإحلال قد لا يكون معرّفًا.
+غير أن تحويل~$\alpha$ يتيح تغيير أسماء المتغيرات المقيدة حتى يصير الإحلال معرّفًا في كل حالة.
+ويظل التكافؤ بحسب~$\alpha$ محفوظًا في النتيجة، كما تقرره المبرهنة التالية:
+
+\begin{thm}\ollabel{thm:sub}
+  أيًا تكن~$M$ و$R$ و$y$، يوجد~$M'$ يحقق~$M \aeq M'$ ويكون
+  $\Subst{M'}{R}{y}$ معرّفًا. وإذا كان~$M'',R''$ زوجًا آخر يحقق
+  $M'' \aeq M$ و$R'' \aeq R$، وكان~$\Subst{M''}{R''}{y}$ معرّفًا،
+  لزم~$\Subst{M'}{R}{y} \aeq \Subst{M''}{R''}{y}$ أيضًا.
+\end{thm}
+
+\begin{proof}
+  نستقرئ استقراءً قويًا في عدد بانيات الحد~$M$:
+  \begin{enumerate}
+  \item إن كان~$M$ متغيرًا~$z$، فالإثبات تمرين.
+  \item ليكن~$M$ على صورة~$\lambd[x][N]$. نختار متغيرًا~$z$
+    غير~$x$ و$y$ بحيث~$z \notin \FV{N}$ و$z \notin \FV{R}$.
+    ونستعمل فرض الاستقراء أولًا في~$N$ مع الإحلال
+    $\Subst{N}{z}{x}$، فنأخذ~$N_0 \aeq N$ يكون
+    $\Subst{N_0}{z}{x}$ معرّفًا. ولنضع~$P=\Subst{N_0}{z}{x}$.
+    حينئذ
+    $\lambd[x][N] \aeq \lambd[x][N_0] \aeq \lambd[z][P]$؛
+    لأن~$z\ne x$، ولأن~$z\notin\FV{N_0}=\FV{N}$، ولأن~$P$ معرّف.
+    وإذ كان تحويل~$\alpha$ وإحلال متغير مكان متغير لا يبدلان عدد
+    البانيات، كان~$P$ دون~$M$؛ لذلك نستعمل فرض الاستقراء القوي مرة
+    أخرى في~$P,R,y$، فنأخذ
+    $P'\aeq P$ يكون~$\Subst{P'}{R}{y}$ معرّفًا.
+    ويرفع توافق~$\aeq$ هذا إلى
+    $\lambd[z][P]\aeq\lambd[z][P']$.
+    فإذا جعلنا~$M'=\lambd[z][P']$ تحقق~$M\aeq M'$، وصار
+    $\Subst{M'}{R}{y}$ معرّفًا؛ إذ إحلال المتن معرّف، و$z\ne y$،
+    و$z\notin\FV{R}$.
+
+    \item وإن كان~$M$ على صورة~$(PQ)$، فالإثبات تمرين.
+  \end{enumerate}
+
+  ويبقى الانفراد. ليكن~$M''\aeq M$ و$R''\aeq R$، وليكن
+  $\Subst{M''}{R''}{y}$ معرّفًا. لما كان~$M'\aeq M$، أفاد تناظر
+  $\aeq$ وتعديه~$M'\aeq M''$. ومن \olref{lem:sub:R}، مطبقةً على
+  $R''\aeq R$، يكون~$\Subst{M''}{R}{y}$ معرّفًا، ويتحقق
+  \[
+    \Subst{M''}{R''}{y}\aeq\Subst{M''}{R}{y}.
+  \]
+  ثم تفيد \olref{lem:sub:left-alpha}
+  $\Subst{M'}{R}{y}\aeq\Subst{M''}{R}{y}$؛ وبالتعدي يلزم
+  $\Subst{M'}{R}{y}\aeq\Subst{M''}{R''}{y}$.
+  % تصحيح مصدر (0362-I2): استُعمل الاستقراء القوي مرتين لضمان تعريف الإحلال، وأثبت توافق الإحلال مع ألفا بعد تنضير أسماء الروابط، واستُبدلت مساواة الممثلين بتكافؤ ألفا.
+\end{proof}
+
+\begin{prob}
+  أتمّ برهان~\olref[lam][syn][alp]{thm:sub}.
+\end{prob}
+
+\begin{cor}\ollabel{cor:sub}
+  أيًا تكن~$M$ و$R$ و$y$، يوجد زوج~$M'$ و$R'$ يحقق~$M' \aeq M$ و$R \aeq
+  R'$،
+  ويكون~$\Subst{M'}{R'}{y}$ معرّفًا. ومتى وجد زوج آخر يحقق~$M'' \aeq M$ و$R'' \aeq R$
+  وكان~$\Subst{M''}{R''}{y}$ معرّفًا، لزم~$\Subst{M'}{R'}{y} \aeq \Subst{M''}{R''}{y}$.
+\end{cor}
+% تصحيح مصدر (0362-I3): أُثبت شرط تكافؤ حدي الإحلال في الزوجين.
+
+\begin{proof}
+  يلزم هذا مباشرة من~\olref{thm:sub}.
+\end{proof}
+
+\end{document}

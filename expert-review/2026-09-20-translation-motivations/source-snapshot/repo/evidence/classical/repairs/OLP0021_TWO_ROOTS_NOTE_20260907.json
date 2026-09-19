@@ -1,0 +1,87 @@
+{
+  "schema": "openlogic-square-root-note-repair-v1",
+  "assessed_on": "2026-09-07",
+  "unit_id": "OLP-0021",
+  "finding_id": "0021-P1",
+  "decision_id": "AR-OLP-0021-TWO-ROOTS-NOTE-20260907",
+  "literal_review_occurrences": [
+    {"edition": "msa", "patch_index": 0,
+     "english": {"line_start": 68, "line_end": 69, "literal": "each positive integer~$n$ has two\nsquare roots"},
+     "before": {"line_start": 77, "line_end": 77, "literal": "الجذور الموجبة للعدد الصحيح الموجب"},
+     "after": {"line_start": 76, "line_end": 77, "literal": "بأن\nللعدد الصحيح الموجب جذرين"},
+     "classical": {"line_start": 68, "line_end": 68, "literal": "كون العدد الصحيح الموجب ذا جذرين"}}
+  ],
+  "status": "implemented-in-shared-msa-pending-batch-integration",
+  "recording_mode": "contemporaneous-independent-verification-of-peer-reported-correction",
+  "open_to_correction": true,
+  "classification": "error-in-added-Arabic-source-correction-note",
+  "source": {
+    "path": "source/locale/ar/content/sets-functions-relations/functions/function-basics.tex",
+    "before_sha256": "273305e874870513299f8031d2d65c77019dca3eb5f89565eb9ef8614128fac7",
+    "before_bytes": 7863,
+    "after_sha256": "309d083bfe0b0b06f66347fcb1a0eae8f25ac593d53bc6f0b357b871a7cbbfc6",
+    "after_bytes": 7848,
+    "line_start": 76,
+    "line_end": 77
+  },
+  "patch": {
+    "before": "«الجذر غير السالب (الرئيسي)»؛ ولا يمس هذا التصويب القول السابق في\nالجذور الموجبة للعدد الصحيح الموجب.",
+    "after": "«الجذر غير السالب (الرئيسي)»؛ ولا يمس هذا التصويب القول السابق بأن\nللعدد الصحيح الموجب جذرين.",
+    "occurrences": 1
+  },
+  "unchanged_sources": [
+    {
+      "kind": "english",
+      "path": "source-snapshot/english/content/sets-functions-relations/functions/function-basics.tex",
+      "sha256": "f01a58d84a175f42d8c233ef0e7d41c23d406b54e8f11475c14514b64eca3dc7",
+      "bytes": 5583
+    },
+    {
+      "kind": "classical",
+      "path": "source/locale/ar-classical/content/sets-functions-relations/functions/function-basics.tex",
+      "sha256": "8183c83e20fc04ced33d83554ebb142f94b7c8bf323b992336a25b9153db2498",
+      "bytes": 6442
+    }
+  ],
+  "english_term": "each positive integer has two square roots",
+  "chosen_arabic": "بأن للعدد الصحيح الموجب جذرين",
+  "sense": "Two real square roots with opposite signs for a positive input; only the principal root is nonnegative.",
+  "rationale": "The displayed source explicitly has sqrt(n) and -sqrt(n). The added MSA note wrongly called both positive. Remove that adjective from the roots while keeping the positive-integer input, both-root claim, original formula displays, and the separate correction of positive to nonnegative/principal for the total Nat-to-Real function. The Classical note already states the correct two-root claim and is unchanged.",
+  "counterexample": "For n=1, the displayed roots are 1 and -1; only the first is positive.",
+  "alternatives": [
+    {
+      "form": "الجذور الموجبة للعدد الصحيح الموجب",
+      "disposition": "rejected",
+      "reason": "Falsely assigns positive sign to both roots."
+    },
+    {
+      "form": "جذر موجب وجذر سالب",
+      "disposition": "not-selected",
+      "reason": "Correct, but the immediately preceding signed formulas already supply this detail; the minimal clause restores the intended count."
+    }
+  ],
+  "authority_checks": [
+    {
+      "source": "Frozen English OLP-0021 and live Classical counterpart",
+      "result": "direct-source-support",
+      "locator": "Square-root example and adjacent source-correction note; exact identities above."
+    },
+    {
+      "source": "Official Arabic dictionaries",
+      "result": "not-applicable",
+      "note": "A sign/count correction, no new technical-term attestation claim. Existing function/domain/codomain/range terminology and Open Logic macros untouched."
+    }
+  ],
+  "expert_review_useful": true,
+  "expert_question": "هل يبين هذا التصويب أن وصف «الموجب» للعدد لا للجذرين معًا، مع بقاء الفرق واضحًا بين الجذرين والجذر الرئيسي غير السالب؟ الصياغة مفتوحة للتصحيح.",
+  "printed_page": null,
+  "page_status": "bind-after-final-reader-build",
+  "validation": {
+    "status": "PASS_FOR_BOUNDED_SOURCE_REPAIR",
+    "command": "python -X utf8 -B -m unittest build.tests.test_square_root_note_0021 -v",
+    "tests_passed": 2,
+    "checks": ["exact inverse source hash", "unchanged formulas and protected structure", "unchanged English and Classical counterparts", "principal-root correction retained", "human source links identify nonempty source lines"],
+    "limits": ["No final PDF or published artifact verified", "Source and reviewer integration pending consolidated batch"]
+  },
+  "publication_claim": false
+}

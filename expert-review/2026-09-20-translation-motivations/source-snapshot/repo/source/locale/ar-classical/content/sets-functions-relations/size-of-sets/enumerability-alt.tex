@@ -1,0 +1,94 @@
+% Part:sets-functions-relations
+% Chapter: size-of-sets
+% Section: enumerations-alt
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid[ar]{sfr}{siz}{enm-alt}
+
+\olsection{التعدادات ومجموعات \usetoken{S}{enumerable}}
+
+\begin{editorial}
+التعداد هنا دالة تقابلية مع $\Nat$ أو مع مقطع ابتدائي منها، على اصطلاح نظرية المجموعات. فبين هذا التعريف وتعريفات \olref[enm]{sec} فرق يسير، وترد هنا أمثلة ذلك القسم كلها مرة أخرى. وهذا العرض أوجز منه بعض الإيجاز.
+\end{editorial}
+
+من طرق تعيين المجموعة المنتهية أن نسرد !!{element}sها؛ ومن ذلك أن نكتب
+\[
+  A = \{a_1, a_2, \ldots, a_n\}.
+\]
+فإذا كانت !!{element}s~$a_1$، \dots،~$a_n$ متمايزة كلها، نشأ من هذا السرد !!a{bijection} بين $A$ والأعداد الطبيعية الأولى التي عددها $n$، وهي $0$، \dots،~$n-1$. وبالعكس، كل مجموعة منتهية يمكن أن نجعلها في مثل هذه المراسلة، لأن عدد !!{element}sها منته. فمتى كانت $A$ منتهية وجدت !!a{bijection} بين $A$ و$\{0, \dots, n-1\}$، حيث $n$ عدد !!{element}s~$A$.
+
+وإذا أجزنا ضروبًا من المجموعات اللانهائية أمكن أن نجيز لبعضها تعدادًا أيضًا. وضبط هذا أن تعداد المجموعة اللانهائية يكون بـ!!a{bijection} بينها وبين مجموعة الأعداد الطبيعية بأسرها~$\Nat$.
+
+\begin{defn}[التعداد في اصطلاح نظرية المجموعات]
+\emph{تعداد} المجموعة $A$ هو !!a{bijection} مداها $A$، ومجالها مقطع ابتدائي من الأعداد الطبيعية $\{0, 1, \ldots, n\}$ {أو} مجموعة الأعداد الطبيعية كلها~$\Nat$.
+\end{defn}
+
+\begin{explain}
+واختيار اسم \emph{التعداد} موافق للتصور؛ فقولنا إننا عددنا المجموعة $A$ معناه وجود !!a{bijection}~$f$ نحصي بها عناصر المجموعة~$A$ واحدًا بعد واحد: ذو الرتبة~$0$ هو $f(0)$، والذي يليه $f(1)$، \ldots وذو الرتبة~$n$ هو $f(n)$\ldots.\footnote{فالعد هنا مبتدئ من $0$؛ ولو ابتدأناه من~$1$ لم يتغير المقصود تغيرًا ذا بال، وإنما نستبدل~$\Nat$ بـ~$\PosInt$.} ويزداد هذا المعنى بيانًا بالتعريف التالي.
+\end{explain}
+
+\begin{defn}
+\ollabel{defn:enumerable}
+المجموعة~$A$ !!{enumerable} إذا وفقط إذا كان $A = \emptyset$ أو وجد لـ~$A$ تعداد. وأما $A$ فتسمى !!{nonenumerable} إذا وفقط إذا لم تكن $A$ !!{enumerable}.
+\end{defn}
+
+\begin{explain}
+فحاصل الأمر أن المجموعة !!{enumerable} إما خالية، وإما ذات تعداد يتيح عد !!{element}sها واحدًا واحدًا.
+\end{explain}
+
+\begin{ex}
+يكفينا لتعداد الأعداد الطبيعية دالة الهوية $\Id{\Nat} \colon \Nat \to \Nat$ التي يحدها $\Id{\Nat}(n) = n$. وأما الأعداد الطبيعية \emph{الموجبة}، أي $\Nat^+ =
+\Nat \setminus \{0\}$، فتعددها دالة اللاحق $g(n) = n + 1$.
+\end{ex}
+
+\begin{prob}
+برهن أن $A$ !!{enumerable} إذا وفقط إذا كان $A = \emptyset$ أو وجدت !!a{surjection} $f\colon \Nat \to A$. ثم برهن أن $A$ !!{enumerable} إذا وفقط إذا وجدت !!a{injection} $g\colon A \to \Nat$.
+\end{prob}
+
+\begin{ex}
+لتكن الدالتان $f\colon \Nat \to \Nat$ و$g \colon \Nat \to \Nat$ معينتين بالحدين
+\begin{align*}
+  f(n) & = 2n \text{ و}\\
+  g(n) & = 2n+1
+\end{align*}
+فالأولى تعدد الأعداد الطبيعية الزوجية، والثانية تعدد الفردية. لكن لا واحدة منهما !!{surjective} إلى المجال المقابل المعين؛ ولذلك ليست أي منهما تعدادًا لـ$\Nat$.
+\end{ex}
+
+\begin{prob}
+عين دالة تعدد الأعداد المربعة $1$، $4$، $9$، $16$، \dots
+\end{prob}
+
+\begin{ex}
+نكتب $\lceil x \rceil$ لـ\emph{دالة السقف}، وقيمتها أصغر عدد صحيح لا يقل عن $x$. فالدالة $f \colon \Nat \to \Int$ المعرفة بالحد
+\[
+  f(n) = (-1)^{n} \left\lceil\tfrac{n}{2}\right\rceil
+\]
+تعدد مجموعة الأعداد الصحيحة~$\Int$، كما يظهر من القيم الآتية:
+\[
+\begin{array}{c c c c c c c c}
+f(0) & f(1) & f(2) & f(3) & f(4) & f(5) & f(6) & \dots \\ \\
+\big\lceil \tfrac{0}{2} \big\rceil & -\big\lceil \tfrac{1}{2}\big\rceil &  \big\lceil \tfrac{2}{2} \big\rceil & -\big\lceil \tfrac{3}{2} \big\rceil & \big\lceil \tfrac{4}{2} \big\rceil  & -\big\lceil \tfrac{5}{2}\big\rceil & \big\lceil \tfrac{6}{2} \big\rceil & \dots \\ \\
+0 & -1 & 1 & -2 & 2 & -3 & 3& \dots
+\end{array}
+\]
+وترى أن $f$ تستوفي قيم $\Int$ بالتنقل بين الأعداد الصحيحة الموجبة والسالبة. ويجوز أن نعين $f$ بحالتين على الوجه الآتي:
+\[
+f(n) = \begin{cases}
+  \frac{n}{2} & \text{إذا كان $n$ زوجيًا}\\
+  -\frac{n+1}{2} & \text{إذا كان $n$ فرديًا}
+  \end{cases}
+\]
+\end{ex}
+
+\begin{prob}
+إذا كانت $A$ و$B$ !!{enumerable}، فبين أن $A \cup B$ كذلك.
+\end{prob}
+
+\begin{prob}
+استعمل الاستقراء على $n$ لإثبات أن $A_1$، $A_2$، \dots،~$A_n$ إذا كانت كلها !!{enumerable}، كان $A_1 \cup \dots \cup A_n$ كذلك.
+\end{prob}
+
+\end{document}

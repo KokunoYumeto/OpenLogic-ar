@@ -1,0 +1,157 @@
+% Part: normal-modal-logic
+% Chapter: frame-definability
+% Section: definability
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{frd}{def}
+
+\olsection{قابلية تعريف الأطر}
+
+لم تصح عكوس~\olref[acc]{thm:soundschemas} في النماذج؛ ولكنها تصح
+متى جعلنا الكلام في الأطر. فالخصائص المذكورة
+في~\olref[acc]{thm:soundschemas} تتميز بأن صلاحية !!a{formula}
+في \emph{إطار} توجب على علاقة وصوله الخاصية المقابلة.
+ولهذا نقول إن تلك ال!!{formula}s \emph{تعرّف} أصناف الأطر المتصفة
+بتلك الخصائص.
+
+\begin{defn}
+  إذا كان~$\mClass{F}$ صنفًا من الأطر، نقول إن~$!A$
+  \emph{تعرّف}~$\mClass{F}$ إذا وفقط إذا كان
+  $\mModel{F} \Entails !A$ لجميع الأطر~$\mModel{F} \in \mClass{F}$
+  ولها وحدها.
+\end{defn}
+
+نشرع الآن في إثبات نتائج قابلية التعريف الكاملة للأطر.
+
+\begin{thm}\ollabel{thm:fullCorrespondence}
+إذا كانت ال!!{formula} في الجانب الأيمن من~\olref[acc]{tab:five}
+صالحة في إطار~$\mModel{F}$، كانت لـ$\mModel{F}$ الخاصية في الجانب
+الأيسر.
+\end{thm}
+
+\begin{proof}
+  \begin{enumerate}
+  \item افترض أن~\Ax{D} صالحة في~$\mModel{F} = \tuple{{\OLId{latin-looped}{W}}, {\OLId{latin-looped}{R}}}$، أي
+    $\mModel{F} \Entails \Box {\OLId{latin-ordinary}{p}} \lif \Diamond {\OLId{latin-ordinary}{p}}$. وليكن
+    $\mModel{M} = \tuple{{\OLId{latin-looped}{W}}, {\OLId{latin-looped}{R}}, {\OLId{latin-looped}{V}}}$ نموذجًا مبنيًا على~$\mModel{F}$،
+    وليكن~${\OLId{latin-ordinary}{w}} \in {\OLId{latin-looped}{W}}$. نحتاج إلى إثبات وجود~${\OLId{latin-ordinary}{v}}$ بحيث~$Rwv$. افترض خلاف
+    ذلك؛ عندئذ يكون كل من~$\mSat{{\OLId{latin-looped}{M}}}{\Box !A}[{\OLId{latin-ordinary}{w}}]$ و
+    $\mSat/{{\OLId{latin-looped}{M}}}{\Diamond !A}[{\OLId{latin-ordinary}{w}}]$ لأي~$!A$، ومنها~${\OLId{latin-ordinary}{p}}$. لكن عندئذ يكون
+    $\mSat/{{\OLId{latin-looped}{M}}}{\Box {\OLId{latin-ordinary}{p}} \lif \Diamond {\OLId{latin-ordinary}{p}}}[{\OLId{latin-ordinary}{w}}]$، مناقضًا للفرض
+    $\mModel{F} \Entails \Box {\OLId{latin-ordinary}{p}} \lif \Diamond {\OLId{latin-ordinary}{p}}$.
+  \item افترض أن~\Ax{T} صالحة في~$\mModel{F}$، أي
+    $\mModel{F} \Entails \Box {\OLId{latin-ordinary}{p}} \lif {\OLId{latin-ordinary}{p}}$. وليكن~${\OLId{latin-ordinary}{w}} \in {\OLId{latin-looped}{W}}$ عالمًا
+    اعتباطيًا؛ نحتاج إلى إثبات~$Rww$. اجعل~${\OLId{latin-ordinary}{u}} \in {\OLId{latin-looped}{V}}({\OLId{latin-ordinary}{p}})$ إذا وفقط إذا
+    كان~$Rwu$ (وإذا كان~${\OLId{latin-ordinary}{q}}$ غير~${\OLId{latin-ordinary}{p}}$، فليكن~${\OLId{latin-looped}{V}}({\OLId{latin-ordinary}{q}})$ اعتباطيًا، ولنقل
+    ${\OLId{latin-looped}{V}}({\OLId{latin-ordinary}{q}}) = \emptyset$). وليكن~$\mModel{M} = \tuple{{\OLId{latin-looped}{W}}, {\OLId{latin-looped}{R}}, {\OLId{latin-looped}{V}}}$. بحسب
+    البناء، لكل~${\OLId{latin-ordinary}{u}}$ يحقق~$Rwu$ يكون~$\mSat{{\OLId{latin-looped}{M}}}{{\OLId{latin-ordinary}{p}}}[{\OLId{latin-ordinary}{u}}]$، ومن ثم
+    $\mSat{{\OLId{latin-looped}{M}}}{\Box {\OLId{latin-ordinary}{p}}}[{\OLId{latin-ordinary}{w}}]$. لكن بحسب الفرض تكون~$\Box {\OLId{latin-ordinary}{p}} \lif {\OLId{latin-ordinary}{p}}$ صادقة
+    في~${\OLId{latin-ordinary}{w}}$، فيكون~$\mSat{{\OLId{latin-looped}{M}}}{{\OLId{latin-ordinary}{p}}}[{\OLId{latin-ordinary}{w}}]$؛ وبتعريف~${\OLId{latin-looped}{V}}$ لا يمكن هذا إلا إذا
+    كان~$Rww$.
+  \item نبرهن المعاكس النقيض: افترض أن~$\mModel{F}$ غير متناظر، ونثبت
+    أن~\Ax{B}، أي~${\OLId{latin-ordinary}{p}} \lif \Box\Diamond {\OLId{latin-ordinary}{p}}$، ليست صالحة في
+    $\mModel{F}= \tuple{{\OLId{latin-looped}{W}}, {\OLId{latin-looped}{R}}}$. فإذا كان~$\mModel{F}$ غير متناظر،
+    وُجد~${\OLId{latin-ordinary}{u}}$ و${\OLId{latin-ordinary}{v}} \in {\OLId{latin-looped}{W}}$ بحيث~$Ruv$ لكن ليس~$Rvu$. عرّف~${\OLId{latin-looped}{V}}$ بحيث
+    ${\OLId{latin-ordinary}{w}} \in {\OLId{latin-looped}{V}}({\OLId{latin-ordinary}{p}})$ إذا وفقط إذا لم يكن~$Rvw$ (واجعل~${\OLId{latin-looped}{V}}$ اعتباطيًا فيما
+    عدا ذلك). وليكن~$\mModel{M} =\tuple{{\OLId{latin-looped}{W}}, {\OLId{latin-looped}{R}}, {\OLId{latin-looped}{V}}}$. الآن، بتعريف~${\OLId{latin-looped}{V}}$،
+    يكون~$\mSat{{\OLId{latin-looped}{M}}}{{\OLId{latin-ordinary}{p}}}[{\OLId{latin-ordinary}{w}}]$ لكل~${\OLId{latin-ordinary}{w}}$ لا يحقق~$Rvw$، وبخاصة
+    $\mSat{{\OLId{latin-looped}{M}}}{{\OLId{latin-ordinary}{p}}}[{\OLId{latin-ordinary}{u}}]$ لأن~$Rvu$ لا يصدق. كذلك، لما كان~$Rvw$ إذا وفقط
+    إذا كان~${\OLId{latin-ordinary}{w}} \notin {\OLId{latin-looped}{V}}({\OLId{latin-ordinary}{p}})$، فلا يوجد~${\OLId{latin-ordinary}{w}}$ يحقق~$Rvw$ و
+    $\mSat{{\OLId{latin-looped}{M}}}{{\OLId{latin-ordinary}{p}}}[{\OLId{latin-ordinary}{w}}]$ معًا، ومن ثم~$\mSat/{{\OLId{latin-looped}{M}}}{\Diamond {\OLId{latin-ordinary}{p}}}[{\OLId{latin-ordinary}{v}}]$. ولما
+    كان~$Ruv$، كان أيضًا~$\mSat/{{\OLId{latin-looped}{M}}}{\Box\Diamond {\OLId{latin-ordinary}{p}}}[{\OLId{latin-ordinary}{u}}]$. فيلزم
+    $\mSat/{{\OLId{latin-looped}{M}}}{{\OLId{latin-ordinary}{p}} \lif \Box\Diamond {\OLId{latin-ordinary}{p}}}[{\OLId{latin-ordinary}{u}}]$، ومن ثم لا تكون~\Ax{B}
+    صالحة في~$\mModel{F}$.
+  \item افترض أن~\Ax{4} صالحة في~$\mModel{F} = \tuple{{\OLId{latin-looped}{W}},{\OLId{latin-looped}{R}}}$، أي
+    $\mModel{F} \Entails \Box {\OLId{latin-ordinary}{p}} \lif \Box\Box {\OLId{latin-ordinary}{p}}$، ولتكن~${\OLId{latin-ordinary}{u}}$ و${\OLId{latin-ordinary}{v}}$
+    و${\OLId{latin-ordinary}{w}} \in {\OLId{latin-looped}{W}}$ عوالم اعتباطية بحيث~$Ruv$ و$Rvw$؛ نحتاج إلى إثبات
+    $Ruw$. عرّف~${\OLId{latin-looped}{V}}$ بحيث~${\OLId{latin-ordinary}{z}} \in {\OLId{latin-looped}{V}}({\OLId{latin-ordinary}{p}})$ إذا وفقط إذا كان~$Ruz$ (واجعل
+    ${\OLId{latin-looped}{V}}$ اعتباطيًا فيما عدا ذلك). وليكن~$\mModel{M} =\tuple{{\OLId{latin-looped}{W}}, {\OLId{latin-looped}{R}}, {\OLId{latin-looped}{V}}}$.
+    بتعريف~${\OLId{latin-looped}{V}}$، يكون~$\mSat{{\OLId{latin-looped}{M}}}{{\OLId{latin-ordinary}{p}}}[{\OLId{latin-ordinary}{z}}]$ لكل~${\OLId{latin-ordinary}{z}}$ يحقق~$Ruz$، ومن ثم
+    $\mSat{{\OLId{latin-looped}{M}}}{\Box {\OLId{latin-ordinary}{p}}}[{\OLId{latin-ordinary}{u}}]$. لكن بحسب الفرض~\Ax{4} تكون
+    $\Box {\OLId{latin-ordinary}{p}} \lif \Box \Box {\OLId{latin-ordinary}{p}}$ صادقة في~${\OLId{latin-ordinary}{u}}$، فيكون
+    $\mSat{{\OLId{latin-looped}{M}}}{\Box \Box {\OLId{latin-ordinary}{p}}}[{\OLId{latin-ordinary}{u}}]$. ولما كان~$Ruv$ و$Rvw$، كان
+    $\mSat{{\OLId{latin-looped}{M}}}{{\OLId{latin-ordinary}{p}}}[{\OLId{latin-ordinary}{w}}]$؛ وبتعريف~${\OLId{latin-looped}{V}}$ لا يمكن هذا إلا إذا كان~$Ruw$، كما
+    أُريد.
+  \item نسلك طريق المعاكس النقيض، فنفترض أن الإطار
+    $\mModel{F} = \tuple{{\OLId{latin-looped}{W}}, {\OLId{latin-looped}{R}}}$ غير إقليدي، ونثبت أنه يفنّد~\Ax{5}،
+    أي~$\mModel{F} \Entails/ \Diamond {\OLId{latin-ordinary}{p}} \lif \Box\Diamond {\OLId{latin-ordinary}{p}}$. افترض
+    وجود عوالم~${\OLId{latin-ordinary}{u}}$ و${\OLId{latin-ordinary}{v}}$ و${\OLId{latin-ordinary}{w}} \in {\OLId{latin-looped}{W}}$ بحيث~$Rwu$ و$Rwv$ لكن ليس~$Ruv$.
+    عرّف~${\OLId{latin-looped}{V}}$ بحيث، لكل عالم~${\OLId{latin-ordinary}{z}}$، يكون~${\OLId{latin-ordinary}{z}} \in {\OLId{latin-looped}{V}}({\OLId{latin-ordinary}{p}})$ إذا وفقط إذا كان
+    \emph{غير} صحيح أن~$Ruz$. وليكن~$\mModel{M} =\tuple{{\OLId{latin-looped}{W}}, {\OLId{latin-looped}{R}}, {\OLId{latin-looped}{V}}}$.
+    عندئذ، بحسب الفرض،~$\mSat{{\OLId{latin-looped}{M}}}{{\OLId{latin-ordinary}{p}}}[{\OLId{latin-ordinary}{v}}]$، ولما كان~$Rwv$، كان أيضًا
+    $\mSat{{\OLId{latin-looped}{M}}}{\Diamond {\OLId{latin-ordinary}{p}}}[{\OLId{latin-ordinary}{w}}]$. لكن لا يوجد عالم~${\OLId{latin-ordinary}{y}}$ يحقق~$Ruy$ و
+    $\mSat{{\OLId{latin-looped}{M}}}{{\OLId{latin-ordinary}{p}}}[{\OLId{latin-ordinary}{y}}]$، ولذلك~$\mSat/{{\OLId{latin-looped}{M}}}{\Diamond {\OLId{latin-ordinary}{p}}}[{\OLId{latin-ordinary}{u}}]$. ولما كان
+    $Rwu$، لزم~$\mSat/{{\OLId{latin-looped}{M}}}{\Box\Diamond {\OLId{latin-ordinary}{p}}}[{\OLId{latin-ordinary}{w}}]$، فتفشل~\Ax{5}، أي
+    $\Diamond {\OLId{latin-ordinary}{p}} \lif \Box\Diamond {\OLId{latin-ordinary}{p}}$، في~${\OLId{latin-ordinary}{w}}$.
+  \end{enumerate}
+\end{proof}
+
+وبين حالة~\Ax{D} وسائر الحالات فرق: لم نحتج فيها إلى اختيار خاص
+للتقييم~${\OLId{latin-looped}{V}}$. فالحاصل أن~$\mSat{{\OLId{latin-looped}{M}}}{\Ax{D}}$ يوجب تسلسل
+$\mModel{M}$ نفسه. ولهذا كانت~\Ax{D} مميزة لصنف \emph{النماذج}
+التسلسلية، لا لصنف الأطر وحده.
+
+\begin{cor}\ollabel{prop:D-serial}
+  كل نموذج تكون فيه~\Ax{D} صادقة تسلسلي.
+\end{cor}
+
+\begin{cor}
+كل !!{formula} في الجانب الأيمن من~\olref[acc]{tab:five} تعرّف صنف
+الأطر ذات الخاصية في الجانب الأيسر.
+\end{cor}
+
+\begin{proof}
+  الاتجاه الأول هو ما ثبت في~\olref[acc]{thm:soundschemas}:
+  خاصية الجانب الأيسر في النموذج تكفي لصدق ال!!{formula}
+  في الجانب الأيمن. فإذا اتصف إطار~$\mModel{F}$ بتلك الخاصية،
+  كانت ال!!{formula} صالحة في~$\mModel{F}$.
+  وأما الاتجاه الآخر فتكفلت به~\olref{thm:fullCorrespondence}:
+  صلاحية !!a{formula} من الجانب الأيمن في~$\mModel{F}$
+  تقتضي أن تكون لـ$\mModel{F}$ خاصية الجانب الأيسر.
+\end{proof}
+
+\begin{prob}
+أثبت أنه إذا كانت ال!!{formula} في الجانب الأيمن من
+\olref[nml][frd][acc]{tab:anotherfive} صالحة في إطار~$\mModel{F}$،
+كانت لـ$\mModel{F}$ الخاصية في الجانب الأيسر. ولفعل ذلك، تأمل إطارًا
+\emph{لا} يحقق الخاصية في الجانب الأيسر، وعرّف~${\OLId{latin-looped}{V}}$ مناسبة تجعل
+ال!!{formula} في الجانب الأيمن كاذبة في عالم ما.
+\end{prob}
+
+ويتيح~\olref{thm:fullCorrespondence} ضم الخصائص بعضها إلى بعض.
+فإذا صلحت~\Ax{B} و\Ax{4} معًا في~$\mModel{F}$، كان متناظرًا
+ومتعديًا. وعلى هذا تُوصف منطقات موجهية كثيرة مهمة:
+نأخذ مجموعة ال!!{formula}s الصالحة في جميع الأطر الجامعة
+لخصائص معينة، وهي نفسها مجموعة ال!!{formula}s الصالحة في
+الأطر التي تصلح فيها ال!!{formula}s المعرّفة لتلك الخصائص.
+فـ$\Log{S4}$، مثلًا، مجموعة جميع ال!!{formula}s الصالحة في
+الأطر الانعكاسية المتعدية، أي الأطر التي تصلح فيها~\Ax{T} و\Ax{4}.
+وأما~$\Log{S5}$ فمجموعة الصيغ الصالحة في الأطر الانعكاسية
+المتناظرة الإقليدية، وهي الأطر التي تصلح فيها~\Ax{T} و\Ax{B} و\Ax{5}.
+
+ولذلك تقابل العلاقات بين خصائص~${\OLId{latin-looped}{R}}$ علاقات بين ال!!{formula}s
+المعرّفة لها. فالانعكاسية تقتضي التسلسل، ومن ثم إذا صلحت~\Ax{T}
+في إطار صلحت فيه~\Ax{D}. لكن هذا \emph{ليس} لزومًا بين الصيغ
+في عالم واحد؛ فلا يلزم من~$\mSat{{\OLId{latin-looped}{M}}}{\Ax{T}}[{\OLId{latin-ordinary}{w}}]$
+أن يكون~$\mSat{{\OLId{latin-looped}{M}}}{\Ax{D}}[{\OLId{latin-ordinary}{w}}]$. وفيما يأتي جملة من علاقات الخصائص.
+
+\begin{prop}\ollabel{prop:relation-facts}
+  لتكن~${\OLId{latin-looped}{R}}$ علاقة ثنائية على مجموعة~${\OLId{latin-looped}{W}}$؛ عندئذ:
+  \begin{enumerate}
+  \item إذا كانت~${\OLId{latin-looped}{R}}$ انعكاسية، فهي تسلسلية.
+  \item إذا كانت~${\OLId{latin-looped}{R}}$ متناظرة، فهي متعدية إذا وفقط إذا كانت إقليدية.
+  \item إذا كانت~${\OLId{latin-looped}{R}}$ متناظرة أو إقليدية، فهي موجهة بضعف (لها ``خاصية
+    الماسة'').
+  \item إذا كانت~${\OLId{latin-looped}{R}}$ إقليدية، فهي متصلة بضعف.
+  \item إذا كانت~${\OLId{latin-looped}{R}}$ دالية، فهي تسلسلية.
+  \end{enumerate}
+\end{prop}
+
+\begin{prob}
+  أثبت~\olref[nml][frd][def]{prop:relation-facts}.
+\end{prob}
+
+\end{document}

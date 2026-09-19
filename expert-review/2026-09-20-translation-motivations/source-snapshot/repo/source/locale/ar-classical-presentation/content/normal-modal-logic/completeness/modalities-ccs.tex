@@ -1,0 +1,252 @@
+% Part: normal-modal-logic
+% Chapter: completeness
+% Section: modalities-ccs
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{com}{mod}
+
+\olsection{المؤثرات الجهية والمجموعات المتسقة التامة}
+
+\begin{explain}
+قد اخترنا للنموذج~$\mModel{M^\Sigma}$ عوالم هي المجموعات
+$\Sigma$-المتسقة التامة~${\OLId{greek-variable}{Delta}}$ في منطق جهوي نظامي~$\Sigma$.
+وبقي أن نعيّن علاقة إمكان الوصول~${\OLId{latin-looped}{R}}^\Sigma$ بين هذه «العوالم».
+وضابط الاختيار، في هذه العلاقة وفي التعيين~${\OLId{latin-looped}{V}}^\Sigma$، أن يتحقق
+$\mSat{{\OLId{latin-looped}{M}}^\Sigma}{!A}[{\OLId{greek-variable}{Delta}}]$ إذا وفقط إذا كان~$!A \in {\OLId{greek-variable}{Delta}}$.
+فلننظر كيف يهدي هذا الضابط إلى التعريف.
+
+متى عُرّفت علاقة إمكان الوصول، ضمن تعريف الصدق عند عالم أن
+\iftag{prvBox}{$\mSat{{\OLId{latin-looped}{M}}^\Sigma}{\Box!A}[{\OLId{greek-variable}{Delta}}]$ إذا وفقط إذا كان
+  $\mSat{{\OLId{latin-looped}{M}}^\Sigma}{!A}[{\OLId{greek-variable}{Delta}}']$ لكل~${\OLId{greek-variable}{Delta}}'$ بحيث
+  ${\OLId{latin-looped}{R}}^\Sigma{\OLId{greek-variable}{Delta}}{\OLId{greek-variable}{Delta}}'$}{$\mSat{{\OLId{latin-looped}{M}}^\Sigma}{\Diamond!A}[{\OLId{greek-variable}{Delta}}]$ إذا
+  وفقط إذا كان~$\mSat{{\OLId{latin-looped}{M}}^\Sigma}{!A}[{\OLId{greek-variable}{Delta}}']$ لبعض~${\OLId{greek-variable}{Delta}}'$ بحيث
+  ${\OLId{latin-looped}{R}}^\Sigma{\OLId{greek-variable}{Delta}}{\OLId{greek-variable}{Delta}}'$}. ويتطلب برهان أن
+$\mSat{{\OLId{latin-looped}{M}}^\Sigma}{!A}[{\OLId{greek-variable}{Delta}}]$ إذا وفقط إذا كان~$!A \in {\OLId{greek-variable}{Delta}}$ أن
+يصدق ذلك خصوصًا في ال!!{formula}s التي تبدأ بمؤثر جهوي؛ أي إن
+\iftag{prvBox}{$\mSat{{\OLId{latin-looped}{M}}^\Sigma}{\Box!A}[{\OLId{greek-variable}{Delta}}]$ إذا وفقط إذا كان
+  $\Box !A \in {\OLId{greek-variable}{Delta}}$}{$\mSat{{\OLId{latin-looped}{M}}^\Sigma}{\Diamond!A}[{\OLId{greek-variable}{Delta}}]$ إذا
+  وفقط إذا كان~$\Diamond !A \in {\OLId{greek-variable}{Delta}}$}. وبجمع هذا المطلب مع تعريف
+الصدق عند عالم لـ\iftag{prvBox}{$\Box !A$}{$\Diamond !A$} نحصل على:
+\[
+\iftag{prvBox}{%
+  \Box!A \in {\OLId{greek-variable}{Delta}} \text{ إذا وفقط إذا كان } !A \in {\OLId{greek-variable}{Delta}}'
+  \text{ لكل ${\OLId{greek-variable}{Delta}}'$ يحقق } {\OLId{latin-looped}{R}}^\Sigma{\OLId{greek-variable}{Delta}}{\OLId{greek-variable}{Delta}}'}{%
+  \Diamond!A \in {\OLId{greek-variable}{Delta}} \text{ إذا وفقط إذا كان } !A \in {\OLId{greek-variable}{Delta}}'
+  \text{ لبعض } {\OLId{greek-variable}{Delta}}' \text{ يحقق } {\OLId{latin-looped}{R}}^\Sigma{\OLId{greek-variable}{Delta}}{\OLId{greek-variable}{Delta}}'}
+\]
+\iftag{prvBox}{تأمل الاتجاه من اليسار إلى اليمين: فهو يقول إنه إذا كان
+  $\Box !A \in {\OLId{greek-variable}{Delta}}$، كان~$!A \in {\OLId{greek-variable}{Delta}}'$ لأي~$!A$ وأي~${\OLId{greek-variable}{Delta}}'$
+  يحقق~${\OLId{latin-looped}{R}}^\Sigma{\OLId{greek-variable}{Delta}}{\OLId{greek-variable}{Delta}}'$. فإذا اشترطنا أن
+  ${\OLId{latin-looped}{R}}^\Sigma{\OLId{greek-variable}{Delta}}{\OLId{greek-variable}{Delta}}'$ إذا وفقط إذا كان~$!A \in {\OLId{greek-variable}{Delta}}'$ لكل
+  $\Box!A \in {\OLId{greek-variable}{Delta}}$، تحقق ذلك. ويمكننا أن نكتب الشرط الواقع يمين
+  ``إذا وفقط إذا'' بإيجاز أكبر هكذا:
+  $\Setabs{!A}{\Box!A \in {\OLId{greek-variable}{Delta}}} \subseteq {\OLId{greek-variable}{Delta}}'$.}{تأمل الاتجاه
+  من اليمين إلى اليسار: فهو يقول إنه إذا كان~$!A \in {\OLId{greek-variable}{Delta}}'$، كان
+  $\Diamond!A \in {\OLId{greek-variable}{Delta}}$ لأي~$!A$ وأي~${\OLId{greek-variable}{Delta}}'$ يحقق
+  ${\OLId{latin-looped}{R}}^\Sigma{\OLId{greek-variable}{Delta}}{\OLId{greek-variable}{Delta}}'$.
+  % تصحيح مصدر (0445-I1): التعريف المعلن علاقة تكافؤ لا شرط كفاية وحده.
+  فإذا عرّفنا~${\OLId{latin-looped}{R}}^\Sigma{\OLId{greek-variable}{Delta}}{\OLId{greek-variable}{Delta}}'$
+  بأنه يتحقق إذا وفقط إذا كان~$\Diamond!A \in {\OLId{greek-variable}{Delta}}$ لكل~$!A \in {\OLId{greek-variable}{Delta}}'$،
+  لزم هذا الاتجاه من التعريف.
+  ويمكننا أن نكتب الشرط الواقع يمين ``إذا وفقط إذا'' بإيجاز أكبر هكذا:
+  $\Setabs{\Diamond!A}{!A \in {\OLId{greek-variable}{Delta}}'} \subseteq {\OLId{greek-variable}{Delta}}$.}
+
+ويبقى السؤال: هل يضمن تعريف~${\OLId{latin-looped}{R}}^\Sigma$ هذا بالفعل أن
+\iftag{prvBox}{$\Box !A \in {\OLId{greek-variable}{Delta}}$ إذا وفقط إذا كان
+  $\mSat{{\OLId{latin-looped}{M}}^\Sigma}{\Box !A}[{\OLId{greek-variable}{Delta}}]$؟ \iftag{prvDiamond}{وهل يضمن
+    أيضًا أن }{}}{}\iftag{prvDiamond}{$\Diamond !A \in {\OLId{greek-variable}{Delta}}$ إذا
+  وفقط إذا كان~$\mSat{{\OLId{latin-looped}{M}}^\Sigma}{\Diamond !A}[{\OLId{greek-variable}{Delta}}]$؟}{}
+ستثبت النتائج القليلة الآتية ذلك.
+\end{explain}
+
+\begin{defn}
+  إذا كانت~${\OLId{greek-variable}{Gamma}}$ مجموعة من ال!!{formula}s، فلتكن
+  \begin{align*}
+    \Box{\OLId{greek-variable}{Gamma}} & = \Setabs{\Box !B}{!B \in {\OLId{greek-variable}{Gamma}}}\\
+    \Diamond{\OLId{greek-variable}{Gamma}} & = \Setabs{\Diamond !B}{!B \in {\OLId{greek-variable}{Gamma}}}\\
+    \intertext{ولتكن}
+    \Box^{-{\OLMathNumeral{1}}}{\OLId{greek-variable}{Gamma}} & = \Setabs{!B}{\Box !B \in {\OLId{greek-variable}{Gamma}}}\\
+    \Diamond^{-{\OLMathNumeral{1}}}{\OLId{greek-variable}{Gamma}} & = \Setabs{!B}{\Diamond !B \in {\OLId{greek-variable}{Gamma}}}\\
+  \end{align*}
+\end{defn}
+
+فالمقصود بـ~$\Box{\OLId{greek-variable}{Gamma}}$ أخذ~${\OLId{greek-variable}{Gamma}}$ ووضع~$\Box$ أمام كل
+!!{formula} من~${\OLId{greek-variable}{Gamma}}$. وأما~$\Box^{-{\OLMathNumeral{1}}}{\OLId{greek-variable}{Gamma}}$ فنأخذ لتكوينها
+ال!!{formula}s التي تبدأ بـ~$\Box$ في~${\OLId{greek-variable}{Gamma}}$، ثم نحذف~$\Box$ الأولى
+من كل واحدة. وإنما أدخلنا هذا الاصطلاح اختصارًا للترميز،
+لا لأن في هذا التعريف وحده نتيجة جديدة مهمة.
+
+لاحظ أن~$\Box\Box^{-{\OLMathNumeral{1}}}{\OLId{greek-variable}{Gamma}} \subseteq {\OLId{greek-variable}{Gamma}}$:
+\[
+\Box\Box^{-{\OLMathNumeral{1}}}{\OLId{greek-variable}{Gamma}} = \Setabs{\Box!B}{\Box!B \in {\OLId{greek-variable}{Gamma}}}
+\]
+أي إنها ليست إلا مجموعة جميع ال!!{formula}s في~${\OLId{greek-variable}{Gamma}}$ التي تبدأ
+بـ~$\Box$.
+
+\begin{lem}\ollabel{lem:box1}
+  إذا كان~${\OLId{greek-variable}{Gamma}} \Proves[\Sigma] !A$، فإن
+  $\Box{\OLId{greek-variable}{Gamma}} \Proves[\Sigma] \Box !A$.
+\end{lem}
+
+\begin{proof}
+  من~${\OLId{greek-variable}{Gamma}} \Proves[\Sigma] !A$ نختار مقدمات متناهية
+  $!B_{\OLMathNumeral{1}}$، \dots،~$!B_{\OLId{latin-ordinary}{k}} \in {\OLId{greek-variable}{Gamma}}$ تحقق
+  $\Sigma \Proves !B_{\OLMathNumeral{1}} \lif (!B_{\OLMathNumeral{2}} \lif \cdots (!B_{\OLId{latin-ordinary}{k}} \lif !A)\cdots)$.
+  ولأن~$\Sigma$ نظامية، يصح استعمال قاعدة~\RK{}، فنحصل على
+  $\Sigma \Proves \Box!B_{\OLMathNumeral{1}} \lif (\Box!B_{\OLMathNumeral{2}} \lif \cdots
+  (\Box!B_{\OLId{latin-ordinary}{k}} \lif \Box!A)\cdots)$.
+  والمقدمات الجديدة $\Box!B_{\OLMathNumeral{1}}$، \dots،~$\Box!B_{\OLId{latin-ordinary}{k}} \in \Box{\OLId{greek-variable}{Gamma}}$
+  بحكم التعريف. فهذا الاشتقاق بعينه شاهد على
+  $\Box{\OLId{greek-variable}{Gamma}} \Proves[\Sigma] \Box !A$.
+\end{proof}
+
+\begin{lem}\ollabel{lem:box2}
+  إذا كان~$\Box^{-{\OLMathNumeral{1}}}{\OLId{greek-variable}{Gamma}} \Proves[\Sigma] !A$، فإن
+  ${\OLId{greek-variable}{Gamma}} \Proves[\Sigma] \Box!A$.
+\end{lem}
+
+\begin{proof}
+  لنفرض $\Box^{-{\OLMathNumeral{1}}}{\OLId{greek-variable}{Gamma}} \Proves[\Sigma] !A$.
+  بتطبيق \olref{lem:box1} يلزم
+  $\Box\Box^{-{\OLMathNumeral{1}}}{\OLId{greek-variable}{Gamma}} \Proves[\Sigma] \Box!A$.
+  وقد علمنا أن $\Box\Box^{-{\OLMathNumeral{1}}}{\OLId{greek-variable}{Gamma}} \subseteq {\OLId{greek-variable}{Gamma}}$؛
+  فيجوز توسيع المقدمات، وبالرتابة نحصل على
+  ${\OLId{greek-variable}{Gamma}} \Proves[\Sigma] \Box!A$.
+\end{proof}
+
+\iftag{prvBox}{%
+% Box is primitive
+
+\begin{prop}\ollabel{prop:box}
+  إذا كانت~${\OLId{greek-variable}{Gamma}}$ $\Sigma$-متسقة تامة، فإن~$\Box !A \in {\OLId{greek-variable}{Gamma}}$
+  إذا وفقط إذا كان، لكل مجموعة $\Sigma$-متسقة تامة~${\OLId{greek-variable}{Delta}}$ تحقق
+  $\Box^{-{\OLMathNumeral{1}}}{\OLId{greek-variable}{Gamma}} \subseteq {\OLId{greek-variable}{Delta}}$، لدينا~$!A \in {\OLId{greek-variable}{Delta}}$.
+\end{prop}
+
+\begin{proof}
+  افترض أن~${\OLId{greek-variable}{Gamma}}$ $\Sigma$-متسقة تامة. الاتجاه ``فقط إذا'' يسير:
+  افترض أن~$\Box !A \in {\OLId{greek-variable}{Gamma}}$ وأن~$\Box^{-{\OLMathNumeral{1}}}{\OLId{greek-variable}{Gamma}} \subseteq
+  {\OLId{greek-variable}{Delta}}$. لما كان~$\Box!A \in {\OLId{greek-variable}{Gamma}}$، كان
+  $!A \in \Box^{-{\OLMathNumeral{1}}}{\OLId{greek-variable}{Gamma}} \subseteq {\OLId{greek-variable}{Delta}}$، ومن ثم~$!A \in {\OLId{greek-variable}{Delta}}$.
+
+  وأما اتجاه «إذا» فنأخذ مقابله. لنفرض $\Box!A \notin {\OLId{greek-variable}{Gamma}}$.
+  بما أن~${\OLId{greek-variable}{Gamma}}$ $\Sigma$-متسقة تامة، فهي مغلقة استنتاجيًا؛
+  ومن ثم ${\OLId{greek-variable}{Gamma}} \Proves/[\Sigma] \Box !A$.
+  ويقتضي مقابل~\olref{lem:box2} أن
+  $\Box^{-{\OLMathNumeral{1}}}{\OLId{greek-variable}{Gamma}} \Proves/[\Sigma] !A$.
+  وبحسب \olref[prf][con]{prop:consistencyfacts}\olref[prf][con]{prop:consistencyfacts-b}
+  تكون~$\Box^{-{\OLMathNumeral{1}}}{\OLId{greek-variable}{Gamma}} \cup \{\lnot!A\}$ $\Sigma$-متسقة.
+  فنوسّعها بمبرهنة ليندنباوم إلى مجموعة $\Sigma$-متسقة تامة~${\OLId{greek-variable}{Delta}}$
+  تحقق $\Box^{-{\OLMathNumeral{1}}}{\OLId{greek-variable}{Gamma}} \cup \{\lnot!A\} \subseteq {\OLId{greek-variable}{Delta}}$.
+  ولما كانت مشتملة على النفي ومتسقة، كان $!A \notin {\OLId{greek-variable}{Delta}}$،
+  فوجدنا المجموعة التي تنقض الشرط الكلي.
+\end{proof}
+}{%
+% Box is not primitive, only Diamond is
+
+\begin{prop}\ollabel{prop:diamond}
+  إذا كانت~${\OLId{greek-variable}{Gamma}}$ $\Sigma$-متسقة تامة، فإن~$\Diamond !A \in {\OLId{greek-variable}{Gamma}}$
+  إذا وفقط إذا وجدت مجموعة $\Sigma$-متسقة تامة~${\OLId{greek-variable}{Delta}}$ تحقق
+  $\Diamond{\OLId{greek-variable}{Delta}} \subseteq {\OLId{greek-variable}{Gamma}}$ و~$!A \in {\OLId{greek-variable}{Delta}}$.
+\end{prop}
+
+\begin{proof}
+  افترض أن~${\OLId{greek-variable}{Gamma}}$ $\Sigma$-متسقة تامة. الاتجاه من اليمين إلى اليسار
+  يسير: لتكن~${\OLId{greek-variable}{Delta}}$ مجموعة $\Sigma$-متسقة تامة تحقق
+  $\Diamond{\OLId{greek-variable}{Delta}} \subseteq {\OLId{greek-variable}{Gamma}}$ و~$!A \in {\OLId{greek-variable}{Delta}}$. عندئذ
+  $\Diamond!A \in \Diamond{\OLId{greek-variable}{Delta}} \subseteq {\OLId{greek-variable}{Gamma}}$، أي
+  $\Diamond!A \in {\OLId{greek-variable}{Gamma}}$.
+
+  أما الاتجاه من اليسار إلى اليمين، فافترض أن
+  $\Diamond !A \in {\OLId{greek-variable}{Gamma}}$. علينا أن نبين وجود مجموعة $\Sigma$-متسقة
+  تامة~${\OLId{greek-variable}{Delta}}$ بحيث~$!A \in {\OLId{greek-variable}{Delta}}$ و
+  $\Diamond{\OLId{greek-variable}{Delta}} \subseteq {\OLId{greek-variable}{Gamma}}$. لما كان~$\Diamond !A \in {\OLId{greek-variable}{Gamma}}$
+  وكانت~${\OLId{greek-variable}{Gamma}}$ $\Sigma$-متسقة، كان~$\Box\lnot !A \notin {\OLId{greek-variable}{Gamma}}$.
+  ولما كانت~${\OLId{greek-variable}{Gamma}}$ $\Sigma$-متسقة تامة، كانت مغلقة استنتاجيًا، ومن
+  ثم~${\OLId{greek-variable}{Gamma}} \Proves/[\Sigma] \Box\lnot !A$. وبحسب~\olref{lem:box2}،
+  $\Box^{-{\OLMathNumeral{1}}}{\OLId{greek-variable}{Gamma}} \Proves/[\Sigma] \lnot !A$. وبحسب
+  \olref[prf][con]{prop:consistencyfacts}\olref[prf][con]{prop:consistencyfacts-b}،
+  تكون~$\Box^{-{\OLMathNumeral{1}}}{\OLId{greek-variable}{Gamma}} \cup \{!A\}$ $\Sigma$-متسقة. وبمبرهنة
+  ليندنباوم، توجد مجموعة $\Sigma$-متسقة تامة~${\OLId{greek-variable}{Delta}}$ بحيث
+  $\Box^{-{\OLMathNumeral{1}}}{\OLId{greek-variable}{Gamma}} \cup \{!A\} \subseteq {\OLId{greek-variable}{Delta}}$. ومن الواضح أن
+  $!A \in {\OLId{greek-variable}{Delta}}$. ولإثبات~$\Diamond{\OLId{greek-variable}{Delta}} \subseteq {\OLId{greek-variable}{Gamma}}$، افترض
+  خلافه: يوجد~$!B \in {\OLId{greek-variable}{Delta}}$ بحيث~$\Diamond !B \notin {\OLId{greek-variable}{Gamma}}$.
+  ولما كانت~${\OLId{greek-variable}{Gamma}}$ $\Sigma$-متسقة تامة، كان
+  $\Box\lnot !B \in {\OLId{greek-variable}{Gamma}}$. لكن عندئذ أيضًا
+  $\lnot !B \in \Box^{-{\OLMathNumeral{1}}}{\OLId{greek-variable}{Gamma}} \subseteq {\OLId{greek-variable}{Delta}}$، وهذا يجعل
+  ${\OLId{greek-variable}{Delta}}$ غير متسقة.
+\end{proof}
+}
+
+\begin{lem}\ollabel{lem:box-iff-diamond}
+  افترض أن~${\OLId{greek-variable}{Gamma}}$ و${\OLId{greek-variable}{Delta}}$ مجموعتان $\Sigma$-متسقتان تامتان. عندئذ
+  $\Box^{-{\OLMathNumeral{1}}}{\OLId{greek-variable}{Gamma}} \subseteq {\OLId{greek-variable}{Delta}}$ إذا وفقط إذا كان
+  $\Diamond{\OLId{greek-variable}{Delta}} \subseteq {\OLId{greek-variable}{Gamma}}$.
+\end{lem}
+
+\begin{proof}
+  لإثبات اتجاه «فقط إذا»، نفرض~$\Box^{-{\OLMathNumeral{1}}}{\OLId{greek-variable}{Gamma}} \subseteq {\OLId{greek-variable}{Delta}}$،
+  ونأخذ~$\Diamond!A \in \Diamond{\OLId{greek-variable}{Delta}}$، أي~$!A \in {\OLId{greek-variable}{Delta}}$.
+  المطلوب $\Diamond!A \in {\OLId{greek-variable}{Gamma}}$؛ ويكفي له~$\Box\lnot!A \notin {\OLId{greek-variable}{Gamma}}$،
+  إذ تلزم عندئذ~$\lnot\Box\lnot !A \in {\OLId{greek-variable}{Gamma}}$ بالقصوية.
+  ولو كان~$\Box\lnot!A \in {\OLId{greek-variable}{Gamma}}$ لكان
+  $\lnot!A \in {\OLId{greek-variable}{Delta}}$ بفرض الاحتواء، فيبطل اتساق~${\OLId{greek-variable}{Delta}}$،
+  لأن~$!A \in {\OLId{greek-variable}{Delta}}$. فثبت~$\Box\lnot!A \notin {\OLId{greek-variable}{Gamma}}$ والمطلوب.
+
+  ولإثبات اتجاه «إذا»، نفرض~$\Diamond{\OLId{greek-variable}{Delta}} \subseteq {\OLId{greek-variable}{Gamma}}$
+  ونستعمل المقابل: نأخذ~$!A \notin {\OLId{greek-variable}{Delta}}$ ونثبت~$\Box!A \notin {\OLId{greek-variable}{Gamma}}$.
+  فمن~$!A \notin {\OLId{greek-variable}{Delta}}$ يلزم~$\lnot!A \in {\OLId{greek-variable}{Delta}}$ بالقصوية؛
+  وبفرض الاحتواء يلزم~$\Diamond\lnot!A \in {\OLId{greek-variable}{Gamma}}$.
+  غير أن~$\Diamond\lnot!A$ تكافئ~$\lnot\Box !A$ في كل منطق جهوي نظامي.
+  فتكون هذه الأخيرة في~${\OLId{greek-variable}{Gamma}}$ بالإغلاق، ويمنع الاتساق خلافها:
+  $\Box!A \notin{\OLId{greek-variable}{Gamma}}$.
+\end{proof}
+
+\iftag{prvBox}{%
+  \iftag{prvDiamond}{%
+% Box and Diamond are both primitive; prove
+% prop:diamond using lem:box-iff-diamond
+
+\begin{prop}\ollabel{prop:diamond}
+  إذا كانت~${\OLId{greek-variable}{Gamma}}$ $\Sigma$-متسقة تامة، فإن~$\Diamond !A \in {\OLId{greek-variable}{Gamma}}$
+  إذا وفقط إذا وجدت مجموعة $\Sigma$-متسقة تامة~${\OLId{greek-variable}{Delta}}$ تحقق
+  $\Diamond{\OLId{greek-variable}{Delta}} \subseteq {\OLId{greek-variable}{Gamma}}$ و~$!A \in {\OLId{greek-variable}{Delta}}$.
+\end{prop}
+
+\begin{proof}
+افترض أن~${\OLId{greek-variable}{Gamma}}$ $\Sigma$-متسقة تامة. لدينا
+$\Diamond!A \in {\OLId{greek-variable}{Gamma}}$ إذا وفقط إذا كان
+$\lnot\Box\lnot !A \in {\OLId{greek-variable}{Gamma}}$، بحسب~\Dual{} والإغلاق.
+ولدينا~$\lnot\Box\lnot !A \in {\OLId{greek-variable}{Gamma}}$ إذا وفقط إذا كان
+$\Box\lnot !A \notin {\OLId{greek-variable}{Gamma}}$، بحسب
+\olref[ccs]{prop:ccs-properties}\olref[ccs]{prop:ccs-lnot}، لأن
+${\OLId{greek-variable}{Gamma}}$ $\Sigma$-متسقة تامة. وبحسب~\olref{prop:box}، يكون
+$\Box\lnot !A \notin {\OLId{greek-variable}{Gamma}}$ إذا وفقط إذا وجدت مجموعة $\Sigma$-متسقة
+تامة~${\OLId{greek-variable}{Delta}}$ تحقق~$\Box^{-{\OLMathNumeral{1}}}{\OLId{greek-variable}{Gamma}} \subseteq {\OLId{greek-variable}{Delta}}$ و
+$\lnot!A \notin {\OLId{greek-variable}{Delta}}$. تأمل الآن أي~${\OLId{greek-variable}{Delta}}$ كهذه. بحسب
+\olref{lem:box-iff-diamond}، يكون~$\Box^{-{\OLMathNumeral{1}}}{\OLId{greek-variable}{Gamma}} \subseteq {\OLId{greek-variable}{Delta}}$
+إذا وفقط إذا كان~$\Diamond{\OLId{greek-variable}{Delta}} \subseteq {\OLId{greek-variable}{Gamma}}$. كذلك، يكون
+$\lnot !A \notin {\OLId{greek-variable}{Delta}}$ إذا وفقط إذا كان~$!A \in {\OLId{greek-variable}{Delta}}$، بحسب
+\olref[ccs]{prop:ccs-properties}\olref[ccs]{prop:ccs-lnot}. وهكذا،
+$\Diamond!A \in {\OLId{greek-variable}{Gamma}}$ إذا وفقط إذا وجدت مجموعة $\Sigma$-متسقة
+تامة~${\OLId{greek-variable}{Delta}}$ تحقق~$\Diamond{\OLId{greek-variable}{Delta}} \subseteq {\OLId{greek-variable}{Gamma}}$ و
+$!A \in {\OLId{greek-variable}{Delta}}$.
+\end{proof}
+
+}{}}{}
+
+\begin{prob}
+  بيّن أنه إذا كانت~${\OLId{greek-variable}{Gamma}}$ $\Sigma$-متسقة تامة، فإن
+  \iftag{prvBox}{$\Diamond !A \in {\OLId{greek-variable}{Gamma}}$ إذا وفقط إذا وجدت مجموعة
+    $\Sigma$-متسقة تامة~${\OLId{greek-variable}{Delta}}$ بحيث
+    $\Box^{-{\OLMathNumeral{1}}}{\OLId{greek-variable}{Gamma}} \subseteq {\OLId{greek-variable}{Delta}}$ و~$!A \in {\OLId{greek-variable}{Delta}}$.}{$\Box !A
+    \in {\OLId{greek-variable}{Gamma}}$ إذا وفقط إذا كان، لكل مجموعة $\Sigma$-متسقة تامة
+    ${\OLId{greek-variable}{Delta}}$ تحقق~$\Box^{-{\OLMathNumeral{1}}}{\OLId{greek-variable}{Gamma}} \subseteq {\OLId{greek-variable}{Delta}}$، لدينا
+    $!A \in {\OLId{greek-variable}{Delta}}$.} \emph{افعل ذلك من دون استعمال
+    \olref[nml][com][mod]{lem:box-iff-diamond}}.
+\end{prob}
+
+\end{document}

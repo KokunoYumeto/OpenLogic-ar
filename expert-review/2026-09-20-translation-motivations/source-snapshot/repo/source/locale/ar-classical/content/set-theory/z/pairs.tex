@@ -1,0 +1,72 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{z}{pairs}
+\olsection{في تكوين الأزواج}
+
+والمسلّمة التي تلي ما سبق هي:
+
+\begin{axiom}[الأزواج]
+لكل مجموعتين~$a,b$ توجد المجموعة~$\{a,b\}$.
+\[
+	\forall a \forall b \exists P \forall x (x \in P \liff (x = a \lor x = b))
+\]
+\end{axiom}
+
+ويسوغها التصور التكراري هكذا. افرض أن~$a$ متاحة في المرحلة~$S$، وأن
+$b$ متاحة في المرحلة~$T$، ولتكن~$M$ المتأخرة من~$S$ و$T$. فكل من~$a$
+و$b$ متاح في المرحلة~$M$، ومن ثم تكون~$\{a,b\}$ تجمعًا ممكنًا في كل
+مرحلة تلي~$M$.
+
+ولكن من أين نعلم وجود مرحلة بعد~$M$؟ إن لم توجد بطل هذا التسويغ. فلا
+تثبت مسلّمة الأزواج حتى نزيد في رواية~\olref[sth][z][story]{sec}
+الأصل الآتي:
+\begin{enumerate}
+	\item[] \stagessucc. لا توجد مرحلة أخيرة.
+\end{enumerate}
+فهل له مسوغ؟ لم تنص رواية شونفيلد \emph{صراحة} على امتناع المرحلة
+الأخيرة. لكنه، وإن كان زيادة دقيقة على الرواية، ملائم لأصل تكون
+المجموعات على مراحل. فسنسلمه فيما يأتي، ونسلم معه بمسلّمة الأزواج.
+
+ومن هذه المسلّمة نثبت وجود مجموعات كثيرة أخرى؛ فمن ذلك:
+
+\begin{prop}\ollabel{prop:pairsconsequences}
+لكل مجموعتين~$a$ و$b$ توجد المجموعات الآتية:
+	\begin{enumerate}
+		\item\ollabel{singleton} $\{a\}$
+		\item\ollabel{binunion} $a \cup b$
+		\item\ollabel{tuples} $\tuple{a, b}$
+	\end{enumerate}
+\end{prop}
+
+\begin{proof}
+\olref{singleton}. بالأزواج توجد~$\{a, a\}$، وهي~$\{a\}$
+بالامتدادية.
+
+\olref{binunion}. بالأزواج توجد~$\{a, b\}$؛ ثم بالاتحاد توجد
+$a \cup b = \bigcup \{a, b\}$.
+
+\olref{tuples}. من~\olref{singleton} توجد~$\{a\}$، ومن الأزواج توجد
+$\{a,b\}$. وبتطبيق الأزواج مرة ثانية توجد
+$\{\{a\}, \{a, b\}\} = \tuple{a, b}$.
+\end{proof}
+
+\begin{prob}
+أثبت أنه لكل مجموعات~$a,b,c$ توجد المجموعة~$\{a,b,c\}$.
+\end{prob}
+
+\begin{prob}
+أثبت أنه لكل مجموعات~$a_1,\ldots,a_n$ توجد المجموعة
+$\{a_1,\ldots,a_n\}$.
+\end{prob}
+
+%\begin{proof} بتطبيق الأزواج مرتين، توجد $\{\{a_1, a_2\}, \{a_1,
+%   a_3\}\}$. وبموجب الاتحاد والامتدادية، توجد $\bigcup \{\{a_1,
+%   a_2\}, \{a_1, a_3\}\} = \{a_1, a_2, a_3\}$. كرر هذه
+%   الحيلة كلما لزم. \end{proof}
+
+\end{document}
+
+
+

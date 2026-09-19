@@ -1,0 +1,63 @@
+% Part: computability
+% Chapter: computability-theory
+% Section: non-comp-set
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{thy}{ncp}
+\olsection{توجد مجموعات غير قابلة للحساب}
+
+رأينا أعلاه أن كل مجموعة قابلة للحساب قابلة للتعداد حسابيًا. فهل يصح
+العكس؟ يبين الآتي أنه لا يصح بوجه عام.
+
+\begin{thm}\ollabel{thm:K-0}
+لتكن $K_0$ المجموعة $\Setabs{\tuple{e, x}}{\cfind{e}(x) \fdefined}$.
+عندئذ تكون $K_0$ قابلة للتعداد حسابيًا، ولكنها غير قابلة للحساب.
+\end{thm}
+
+\begin{proof}
+لرؤية أن $K_0$ قابلة للتعداد حسابيًا، لاحظ أنها مجال الدالة~$f$
+المعرفة بـ
+\[
+f(z) = \umin{y}{(\len{z} = 2 \land T((z)_0, (z)_1, y))}.
+\]
+فإذا كانت $\cfind{e}(x)$ معرفة، وجدت $f(\tuple{e,x})$ متتالية حساب
+متوقف؛ وإذا كانت $\cfind{e}(x)$ غير معرفة، كانت
+$f(\tuple{e,x})$ كذلك؛ وإذا لم يكن $z$ يرمز زوجًا أصلًا، كانت $f(z)$
+غير معرفة أيضًا.
+
+أما كون $K_0$ غير قابلة للحساب، فهو بالضبط عدم قابلية مشكلة التوقف
+للقرار، \olref[hlt]{thm:halting-problem}.
+\end{proof}
+
+المجموعة $K_0$ هي مجموعة الأزواج $\tuple{e,x}$ التي تكون عندها
+$\cfind{e}(x)\fdefined$؛ أي إن $\tuple{e,x}\in K_0$ إذا وفقط إذا كانت
+$\cfind{e}$ معرفة، أو يتوقف حسابها، عند الدخل~$x$، ولذلك تسمى أيضًا
+«مجموعة التوقف». أما المجموعة
+$K=\Setabs{e}{\cfind{e}(e)\fdefined}$ فهي «مجموعة التوقف الذاتي»،
+وكثيرًا ما تستعمل مثالًا معياريًا لمجموعة غير قابلة للقرار.
+
+\begin{thm}\ollabel{thm:K}
+مجموعة التوقف الذاتي $K=\Setabs{e}{\cfind{e}(e)\fdefined}$
+!!{c.e.} ولكنها غير قابلة للقرار.
+\end{thm}
+
+\begin{proof}
+  افترض أن $K$ قابلة للقرار، أي إن دالتها المميزة $\Char{K}$ قابلة
+  للحساب. لتكن
+  \[d(e) = \begin{cases}
+  1 & \text{إذا كانت\/ $\Char{K}(e) = 0$}\\
+  \fundefined & \text{في غير ذلك.}
+  \end{cases}
+  \]
+  وليكن $k$ فهرس~$d$، أي $d\simeq\cfind{k}$. عندئذ
+  $d(k)\simeq\cfind{k}(k)$. وهذا يناقض حقيقة أن
+  $d(k)\fdefined$ إذا وفقط إذا كانت $\cfind{k}(k)\fundefined$، وهي
+  حقيقة تتبع من تعريف~$d$.
+
+  و$K$ مجال $f(x)=\umin{y}{T(x,x,y)}$، ولذلك هي !!{c.e.}.
+\end{proof}
+
+\end{document}

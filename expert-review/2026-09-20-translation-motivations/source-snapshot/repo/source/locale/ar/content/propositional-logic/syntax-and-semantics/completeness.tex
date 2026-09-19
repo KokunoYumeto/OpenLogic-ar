@@ -1,0 +1,123 @@
+% Part: propositional-logic
+% Chapter: propositional-logic 
+% Section: completeness
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pl}{prp}{com}
+
+\olsection{اكتمال منطق القضايا}
+
+\begin{defn}
+\ollabel{def:MaxCon}
+تكون المجموعة~$\Gamma$ من~!!{formula}s \emph{متسقة على نحو أعظمي} إذا
+كانت متسقة، وإذا كانت~$\Delta$ مجموعة متسقة تحقق~$\Gamma\subseteq\Delta$،
+فإن~$\Gamma=\Delta$.
+\end{defn}
+
+\begin{lem}[لمّة الصدق]
+  \ollabel{lem:truth}
+لتكن~$\Gamma$ متسقة على نحو أعظمي؛ عندئذ:
+\begin{enumerate}
+\item \ollabel{lem:truth-1} $!A\in\Gamma$ إذا وفقط إذا كان
+  $\lnot !A\notin\Gamma$؛
+\item \ollabel{lem:truth-2} $\Gamma\Proves !A$ إذا وفقط إذا كان
+  $!A\in\Gamma$؛
+\item \ollabel{lem:truth-3} $!A\lif !B\in\Gamma$ إذا وفقط إذا كان
+  إما~$!A\notin\Gamma$ أو~$!B\in\Gamma$.
+\end{enumerate}
+\end{lem}
+
+\begin{proof}
+\begin{enumerate}
+\item افترض أن~$!A\in\Gamma$. يقتضي الاتساق أن
+  $\lnot !A\notin\Gamma$. وبالعكس، افترض أن~$\lnot !A\notin\Gamma$
+  وأن~$!A\notin\Gamma$. عندئذ لا تنتمي أي منهما إلى~$\Gamma$، وبحسب
+  \olref[axd]{prop:phi} تكون إحدى المجموعتين~$\Gamma\cup\{!A\}$
+  و~$\Gamma\cup\{\lnot !A\}$ متسقة وتمثل امتدادًا حقيقيًا لـ$\Gamma$،
+  وهذا يناقض أعظميتها. ومن ثم~$!A\in\Gamma$.
+\item إذا كان~$!A\in\Gamma$، فمن الواضح أن~$\Gamma\Proves !A$.
+  ومن ناحية أخرى، افترض أن~$\Gamma\Proves !A$. فإذا كان
+  $!A\notin\Gamma$، كان~$\lnot !A\in\Gamma$ بحسب
+  \olref{lem:truth-1}. وعندئذ~$\Gamma\Proves !A$ و
+  $\Gamma\Proves\lnot !A$، وهذا تناقض.
+\item تمرين.
+\end{enumerate}
+\end{proof}
+
+يبين الاتجاه من اليسار إلى اليمين في
+\olref{lem:truth}\olref{lem:truth-2} أن~$\Gamma$ \emph{مغلقة استنباطيًا}؛
+أي إنه إذا كان~$\Gamma\Proves !A$، فإن~$!A\in\Gamma$ لكل~$!A$.
+
+\begin{prob}
+  أكمل برهان~\olref{lem:truth}.
+\end{prob}
+
+\begin{thm}[الاكتمال]
+\ollabel{thm:completeness}
+إذا كانت~$\Gamma$ متسقة، فهي قابلة للإرضاء.
+\end{thm}
+
+\begin{proof}
+لتكن~$!A_0,!A_1,\dots$ قائمة شاملة لجميع~!!{formula}s اللغة. نعرّف
+تعاوديًا متتالية متزايدة من مجموعات~!!{formula}s
+$\Gamma_0,\Gamma_1,\dots$ بوضع:
+\begin{align*}
+\Gamma_0 & = \Gamma\\
+\Gamma_{n+1} &  =
+\begin{cases}
+  \Gamma_n \cup \{!A_n\} & \text{إذا كانت $\Gamma_n\cup\{!A_n\}$
+    متسقة؛}\\
+  \Gamma_n \cup \{\lnot !A_n\} & \text{فيما عدا ذلك.}
+\end{cases}
+\end{align*}
+ثم نعرّف:
+\[
+\Gamma^*=\bigcup_{0\le n}\Gamma_n.
+\]
+ويمضي البرهان الآن بإثبات الحقائق الآتية بالترتيب:
+\begin{enumerate}
+\item المجموعة~$\Gamma_n$ متسقة لكل~$n$ (بالاستقراء على~$n$، مع استعمال
+  \olref[axd]{prop:phi})؛
+\item $\Gamma^*$ متسقة؛
+\item $\Gamma^*$ أعظمية.
+\end{enumerate}
+ثم نعرّف تقييمًا~$v$ بوضع~$v(p_i)=\True$ إذا وفقط إذا كان
+$p_i\in\Gamma^*$. ويُبيَّن بالاستقراء على~$!A$ أن الانتماء إلى
+$\Gamma^*$ يطابق الصدق بحسب~$v$ أيضًا في~!!{sentence}s الأعقد:
+$\overline{v}(!A)=\True$ إذا وفقط إذا كان~$!A\in\Gamma^*$. وعلى وجه
+الخصوص، يحقق~$v$ المجموعة~$\Gamma^*$؛ ولأن~$\Gamma\subseteq\Gamma^*$،
+تكون~$\Gamma$ قابلة للإرضاء أيضًا، كما هو مطلوب.
+\end{proof}
+
+\begin{cor}
+إذا كان~$\Gamma\Entails !A$، فإن~$\Gamma\Proves !A$.
+\end{cor}
+
+\begin{proof}
+إذا كان~$\Gamma\Proves/ !A$، كانت~$\Gamma\cup\{\lnot !A\}$ متسقة
+بحسب~\olref[axd]{prop:prov-incons}. ومن ثم تكون
+$\Gamma\cup\{\lnot !A\}$ قابلة للإرضاء بحسب مبرهنة الاكتمال، ويكون
+$\Gamma\Entails/ !A$.
+\end{proof}
+
+\begin{prop}[مبرهنة التراص]
+\ollabel{prop:compactness}
+تكون~$\Gamma$ قابلة للإرضاء إذا وفقط إذا كانت كل مجموعة جزئية
+\emph{منتهية}~$\Gamma_0$ منها قابلة للإرضاء.
+\end{prop}
+
+\begin{proof}
+تكون~$\Gamma$ غير قابلة للإرضاء إذا وفقط إذا كانت غير متسقة، وهذا يكافئ
+وجود مجموعة جزئية منتهية~$\Gamma_0$ من~$\Gamma$ غير متسقة، وهو يكافئ
+وجود مجموعة جزئية منتهية~$\Gamma_0$ من~$\Gamma$ غير قابلة للإرضاء.
+\end{proof}
+
+\begin{cor}
+$\Gamma\Entails !A$ إذا وفقط إذا وجدت مجموعة جزئية منتهية~$\Gamma_0$
+من~$\Gamma$ تحقق~$\Gamma_0\Entails !A$.
+\end{cor}
+
+\end{document}

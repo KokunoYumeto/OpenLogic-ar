@@ -1,0 +1,59 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{z}{power}
+\olsection{في مجموعات القوى}
+
+ونتبع ما تقدم بمسلّمة أخرى:
+
+\begin{axiom}[مجموعات القوى]
+لكل مجموعة~${\OLId{latin-looped}{A}}$ توجد المجموعة~$\Pow{{\OLId{latin-looped}{A}}} = \Setabs{{\OLId{latin-ordinary}{x}}}{{\OLId{latin-ordinary}{x}} \subseteq {\OLId{latin-looped}{A}}}$.
+\[
+	\forall {\OLId{latin-looped}{A}} \exists {\OLId{latin-looped}{P}} \forall {\OLId{latin-ordinary}{x}}({\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{P}} \liff (\forall {\OLId{latin-ordinary}{z}} \in {\OLId{latin-ordinary}{x}}){\OLId{latin-ordinary}{z}} \in {\OLId{latin-looped}{A}})
+\]
+\end{axiom}
+
+وتسويغها قريب. افترض أن~${\OLId{latin-looped}{A}}$ تكونت في المرحلة~${\OLId{latin-looped}{S}}$؛ فتكون عناصر~${\OLId{latin-looped}{A}}$
+كلها متاحة قبل~${\OLId{latin-looped}{S}}$ بموجب~\stagesacc. وبحجة نظيرة لحجة الفصل تكون كل
+مجموعة جزئية من~${\OLId{latin-looped}{A}}$ قد تكونت عند المرحلة~${\OLId{latin-looped}{S}}$، فتتاح كلها لتُجمع في
+مجموعة واحدة عند أي مرحلة تلي~${\OLId{latin-looped}{S}}$. ومثل هذه المرحلة موجودة، لأن~${\OLId{latin-looped}{S}}$
+ليست الأخيرة بموجب~\stagessucc. فثبت وجود~$\Pow{{\OLId{latin-looped}{A}}}$.
+
+ومن النتائج الحسنة لمسلّمة مجموعات القوى:
+
+\begin{prop}\label{thm:Products}
+لكل مجموعتين~${\OLId{latin-looped}{A}},{\OLId{latin-looped}{B}}$ يوجد حاصل ضربهما الديكارتي~${\OLId{latin-looped}{A}} \times {\OLId{latin-looped}{B}}$.
+\end{prop}
+
+\begin{proof}
+بمجموعات القوى و\olref[sth][z][pairs]{prop:pairsconsequences} توجد
+$\Pow{\Pow{{\OLId{latin-looped}{A}} \cup {\OLId{latin-looped}{B}}}}$؛ ومن ثم يثبت بالفصل وجود المجموعة:
+\[
+	{\OLId{latin-looped}{C}} = \Setabs{{\OLId{latin-ordinary}{z}} \in \Pow{\Pow{{\OLId{latin-looped}{A}} \cup {\OLId{latin-looped}{B}}}}}{(\exists {\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}})(\exists {\OLId{latin-ordinary}{y}} \in {\OLId{latin-looped}{B}}) {\OLId{latin-ordinary}{z}} = \tuple{{\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}}}.
+\]
+ولكل~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}$ و${\OLId{latin-ordinary}{y}} \in {\OLId{latin-looped}{B}}$ توجد~$\tuple{{\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}}}$ بموجب
+\olref[sth][z][pairs]{prop:pairsconsequences}. ثم لما كان
+${\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}} \in {\OLId{latin-looped}{A}} \cup {\OLId{latin-looped}{B}}$، تحقق~$\{{\OLId{latin-ordinary}{x}}\},\{{\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}}\} \in \Pow{{\OLId{latin-looped}{A}} \cup {\OLId{latin-looped}{B}}}$، ومنه
+$\tuple{{\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}}} \in \Pow{\Pow{{\OLId{latin-looped}{A}} \cup {\OLId{latin-looped}{B}}}}$. فـ~${\OLId{latin-looped}{A}} \times {\OLId{latin-looped}{B}} = {\OLId{latin-looped}{C}}$.
+\end{proof}
+
+وفي البرهان تعاون بين مسلّمة مجموعات القوى والفصل، وليس ذلك بعجيب؛ إذ
+لولا الفصل لم تكن مجموعات القوى مبدأ شديد \emph{القوة}. فالفصل يعيّن
+المجموعات الجزئية الموجودة من كل مجموعة، ومن ثم يعيّن «عظم» مجموعة
+قواها.
+
+\begin{prob}
+أثبت، لكل مجموعتين~${\OLId{latin-looped}{A}},{\OLId{latin-looped}{B}}$: (i) وجود مجموعة العلاقات كلها التي مجالها~${\OLId{latin-looped}{A}}$
+ومداها~${\OLId{latin-looped}{B}}$؛ و(ii) وجود مجموعة الدوال كلها من~${\OLId{latin-looped}{A}}$ إلى~${\OLId{latin-looped}{B}}$.
+\end{prob}
+
+\begin{prob}
+لتكن~${\OLId{latin-looped}{A}}$ مجموعة، و~$\sim$ علاقة تكافؤ على~${\OLId{latin-looped}{A}}$. برهن وجود مجموعة فئات
+التكافؤ تحت~$\sim$ على~${\OLId{latin-looped}{A}}$، أي~$\equivclass{{\OLId{latin-looped}{A}}}{\sim}$.
+\end{prob}
+
+\end{document}
+
+
+

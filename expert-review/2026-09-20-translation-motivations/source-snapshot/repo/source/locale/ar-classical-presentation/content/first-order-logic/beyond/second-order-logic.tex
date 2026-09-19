@@ -1,0 +1,222 @@
+% Part: first-order-logic
+% Chapter: beyond
+% Section: second-order-logic
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{byd}{sol}
+
+\olsection{منطق الرتبة الثانية}
+
+في لغة الرتبة الثانية لا يقتصر التكميم على !!a{domain} من
+الأفراد، بل يتناول العلاقات على ذلك ال!!{domain} أيضًا.
+فإذا أخذنا لغة رتبة أولى~$\Lang{L}$، زدنا لكل~${\OLId{latin-ordinary}{k}}$
+!!{variable}s~${\OLId{latin-looped}{R}}$ للعلاقات ذات ${\OLId{latin-ordinary}{k}}$ مواضع، وأجزنا تكميمها.
+فإن كان ${\OLId{latin-looped}{R}}$ !!a{variable} لعلاقة ذات ${\OLId{latin-ordinary}{k}}$ مواضع، وكانت
+${\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}$، و\dots،~${\OLId{latin-ordinary}{t}}_{\OLId{latin-ordinary}{k}}$ حدودًا عادية من الرتبة الأولى، كان
+$\Atom{R}{t_1,\dots,t_k}$ !!a{formula} ذرية. وسائر تعريف
+ال!!{formula}s على مثال تعريفها في الرتبة الأولى، مع زيادة
+حالات تكميم الرتبة الثانية. وأما ال!!{identity} الأولية فلا
+تكون إلا بين حدود الرتبة الأولى. فإذا كان ${\OLId{latin-looped}{R}}$ و${\OLId{latin-looped}{S}}$
+!!{variable}s لعلاقتين لهما العدد نفسه من المواضع~${\OLId{latin-ordinary}{k}}$،
+جعلنا $\eq[{\OLId{latin-looped}{R}}][{\OLId{latin-looped}{S}}]$ اختصارًا للصيغة
+\[
+\lforall[{\OLId{latin-ordinary}{x}}_{\OLMathNumeral{1}}][\dots\lforall[{\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{k}}][(\Atom{R}{x_1, \dots, x_k} \liff
+  \Atom{S}{x_1, \dots, x_k})]].
+\]
+
+وأما القواعد، فتمتد بها قواعد المكممات إلى المتغيرات الجديدة
+من الرتبة الثانية. لكن لا بد من ضبط صلة هذه المتغيرات مع ال!!{predicate}s في~$\Lang{L}$، ومع
+ال!!{formula}s في~$\Lang{L}$ بوجه أعم. وفي الحد الأدنى تُعَد متغيرات
+العلاقات حدودًا، فتكون لدينا استدلالات من الصورة
+\[
+!A({\OLId{latin-looped}{R}}) \Proves \lexists[{\OLId{latin-looped}{R}}][!A({\OLId{latin-looped}{R}})]
+\]
+لكن إذا كانت $\Lang{L}$ لغة الحساب ذات رمز العلاقة الثابت~$<$، توقعنا
+أيضًا أن يكون الاستدلال الآتي صحيحًا:
+\[
+{\OLId{latin-ordinary}{x}} < {\OLId{latin-ordinary}{y}} \Proves \lexists[{\OLId{latin-looped}{R}}][\Atom{R}{x,y}]
+\]
+أو، ل!!a{formula} معطاة~$!A$،
+\[
+!A({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{1}}, \dots, {\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{k}}) \Proves \lexists[{\OLId{latin-looped}{R}}][\Atom{R}{x_1,\dots,x_k}]
+\]
+ولنا أن نعمّم المطلوب فنجيز الاستدلالات على الصورة
+\[
+\Subst{!A}{\lambd[\vec {\OLId{latin-ordinary}{x}}][!B(\vec {\OLId{latin-ordinary}{x}})]}{{\OLId{latin-looped}{R}}} \Proves
+\lexists[{\OLId{latin-looped}{R}}][!A]
+\]
+حيث تدل $\Subst{!A}{\lambd[\vec {\OLId{latin-ordinary}{x}}][!B(\vec {\OLId{latin-ordinary}{x}})]}{{\OLId{latin-looped}{R}}}$ على نتيجة إحلال
+$!B({\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}, \dots, {\OLId{latin-ordinary}{t}}_{\OLId{latin-ordinary}{k}})$ محل كل !!{formula} ذرية من الصورة
+$\Atom{R}{t_1,\dots,t_k}$ في~$!A$. وتكافئ هذه القاعدة الأخيرة وجود
+{\em مخطط استيعاب}، أي بديهية من الصورة
+\[
+\lexists[{\OLId{latin-looped}{R}}][\lforall[{\OLId{latin-ordinary}{x}}_{\OLMathNumeral{1}}, \dots, {\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{k}}][(!A({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{1}}, \dots, {\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{k}}) \liff
+\Atom{R}{x_1, \dots, x_k})]],
+\]
+واحدة لكل !!{formula}~$!A$ في لغة الرتبة الثانية لا يقع فيها~${\OLId{latin-looped}{R}}$
+حرًا. (تمرين: بيّن أن هذا المخطط غير متسق إذا أجيز ورود~${\OLId{latin-looped}{R}}$ في~$!A$!)
+
+والمراد في الغالب بعبارة «بديهيات منطق الرتبة الثانية» أقل
+توسعة لمنطق الرتبة الأولى بقواعد مكممات الرتبة الثانية ومخطط
+الاستيعاب. وقد ينفع النظر في أنساق أضعف تقتصر على بعض هذه
+البديهيات والقواعد. فمخطط الاستيعاب في عمومه \emph{غير حملي}؛
+إذ يجيز تقرير وجود علاقة $\Atom{R}{x_1, \dots, x_k}$ تعرّفها
+!!a{formula} فيها مكممات من الرتبة الثانية، وهذه تتراوح على
+جميع العلاقات من ذلك النوع، ومنها~${\OLId{latin-looped}{R}}$ نفسها!{} وكان من
+المواقف الشائعة عند ظهور مفارقة راسل، نحو مطلع القرن العشرين،
+تحميل مثل هذه التعريفات تبعة المفارقة، واجتنابها في تأسيس
+الرياضيات. فإذا منعنا مكممات الرتبة الثانية في
+ال!!{formula}~$!A$، حصل استيعاب {\em حملي}، وهو أضعف من
+الاستيعاب العام.
+
+وأما من جهة الدلالة، فال!!{structure} من الرتبة الثانية
+تشتمل على !!{structure} من الرتبة الأولى، وعلى مجموعة من
+العلاقات على ال!!{domain} تتراوح عليها مكممات الرتبة الثانية؛
+ولكل~${\OLId{latin-ordinary}{k}}$، على التفصيل، مجموعة علاقات ذات~${\OLId{latin-ordinary}{k}}$ مواضع.
+فإن كان في نسق ال!!{derivation} استيعاب، وجب أن يكفي جزء
+الرتبة الثانية لإرضاء بديهياته، وإلا انتفت سلامة نسق
+ال!!{derivation}!{} وأيسر ما يضمن ذلك أن نأخذ
+\emph{جميع} العلاقات على جزء الرتبة الأولى. وتسمى
+!!a{structure} كهذه \emph{تامة}، وهي أقرب إلى
+«ال!!{structure} المقصودة» للغة. فإذا اقتصرنا على
+ال!!{structure}s التامة، فهذه \emph{الدلالة التامة} للرتبة
+الثانية. ويكفي عندئذ لتعيين ال!!{structure} تعيين جزء الرتبة
+الأولى، إذ يتعيّن به جزء الرتبة الثانية.
+
+فلا بد عند الكلام على منطق الرتبة الثانية من تمييز وجهين.
+فمن جهة نسق ال!!{derivation} نختار أحد الأمرين:
+\begin{enumerate}
+\item نسق !!{derivation} «أدنى» من الرتبة الثانية، مع بعض بديهيات
+  الاستيعاب.
+\item نسق ال!!{derivation} «القياسي» من الرتبة الثانية، ذو الاستيعاب
+  التام.
+\end{enumerate}
+ومن جهة الدلالة نختار أحد الأمرين:
+\begin{enumerate}
+\item الدلالة «الضعيفة»، حيث تتألف ال!!{structure} من جزء من الرتبة
+  الأولى وجزء من الرتبة الثانية كبير بما يكفي لإرضاء بديهيات
+  الاستيعاب.
+\item الدلالة «القياسية» للرتبة الثانية، التي لا ينظر فيها إلا في
+  ال!!{structure}s التامة.
+\end{enumerate}
+وإذا أطلق المناطقة القول ولم يعيّنوا نسق ال!!{derivation}
+أو الدلالة، فالغالب إرادة الوجه الثاني من كل قائمة. ولهذه
+الدلالة مزية سنراها، هي إعطاء أوصاف قطعية لكثير من البنى
+الرياضية الطبيعية. كما أن نسق ال!!{derivation} قوي وسليم
+بالنسبة إليها. غير أن نسق ال!!{derivation} \emph{ليس} تامًا
+بالنسبة إليها؛ بل \emph{لا يوجد} نسق !!{derivation} فعّال تام
+بالنسبة إلى الدلالة التامة للرتبة الثانية. وأما بالنسبة إلى
+الدلالة الضعيفة، فنسق ال!!{derivation} \emph{تام}، كما سيأتي؛
+فكل جملة لا تُثبت توجد !!{structure} \emph{ما} تكذب فيها،
+ولا يلزم أن تكون البنية تامة.
+
+ولغة الرتبة الثانية واسعة التعبير. فيمكن مطابقة العلاقات الأحادية
+بالمجموعات الجزئية من ال!!{domain}، ومن ثم يمكن بوجه خاص التسوير على
+هذه المجموعات؛ ويمكن، مثلًا، التعبير عن الاستقراء على الأعداد الطبيعية
+ببديهية واحدة:
+\[
+\lforall[{\OLId{latin-looped}{R}}][((\Atom{R}{\Obj{0}} \land \lforall[{\OLId{latin-ordinary}{x}}][(\Atom{R}{x} \lif
+    \Atom{R}{x'})]) \lif \lforall[{\OLId{latin-ordinary}{x}}][\Atom{R}{x}])].
+\]
+وإذا جعلنا للغة الحساب الرموز $\Obj 0, \Obj \prime, +,
+\times$ و$<$، أمكننا إضافة البديهيات الآتية لوصف سلوكها:
+\begin{enumerate}
+\item $\lforall[{\OLId{latin-ordinary}{x}}][\lnot {\OLId{latin-ordinary}{x}}' = \Obj 0]$
+\item $\lforall[{\OLId{latin-ordinary}{x}}][\lforall[{\OLId{latin-ordinary}{y}}][({\OLId{latin-ordinary}{x}}' = {\OLId{latin-ordinary}{y}}' \lif {\OLId{latin-ordinary}{x}} = {\OLId{latin-ordinary}{y}})]]$
+\item $\lforall[{\OLId{latin-ordinary}{x}}][({\OLId{latin-ordinary}{x}} + \Obj 0) = {\OLId{latin-ordinary}{x}}]$
+\item $\lforall[{\OLId{latin-ordinary}{x}}][\lforall[{\OLId{latin-ordinary}{y}}][({\OLId{latin-ordinary}{x}} + {\OLId{latin-ordinary}{y}}') = ({\OLId{latin-ordinary}{x}} + {\OLId{latin-ordinary}{y}})']]$
+\item $\lforall[{\OLId{latin-ordinary}{x}}][({\OLId{latin-ordinary}{x}} \times \Obj 0) = \Obj 0]$
+\item $\lforall[{\OLId{latin-ordinary}{x}}][\lforall[{\OLId{latin-ordinary}{y}}][({\OLId{latin-ordinary}{x}} \times {\OLId{latin-ordinary}{y}}') = (({\OLId{latin-ordinary}{x}} \times {\OLId{latin-ordinary}{y}}) + {\OLId{latin-ordinary}{x}})]]$
+\item $\lforall[{\OLId{latin-ordinary}{x}}][\lforall[{\OLId{latin-ordinary}{y}}][({\OLId{latin-ordinary}{x}} < {\OLId{latin-ordinary}{y}} \liff \lexists[{\OLId{latin-ordinary}{z}}][{\OLId{latin-ordinary}{y}} = ({\OLId{latin-ordinary}{x}} + {\OLId{latin-ordinary}{z}}')])]]$
+\end{enumerate}
+وهذه البديهيات، مع الاستقراء المتقدم، تحدّد
+ال!!{structure}~$\Struct{N}$، أي النموذج القياسي للحساب، تحديدًا
+قطعيًا إذا أخذنا بالدلالة التامة للرتبة الثانية. وبيان ذلك أن
+نأخذ أي !!{structure}~$\Struct{M}$ تصدق فيها البديهيات، ونعرّف
+دالة~${\OLId{latin-ordinary}{f}}$ من $\Nat$ إلى !!{domain}~$\Struct{M}$ بالعودية
+المعتادة على $\Nat$، واضعين ${\OLId{latin-ordinary}{f}}({\OLMathNumeral{0}}) = \Assign{\Obj 0}{{\OLId{latin-looped}{M}}}$
+و${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}}+{\OLMathNumeral{1}}) = \Assign{\prime}{{\OLId{latin-looped}{M}}}({\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}}))$. فمن الاستقراء المعتاد
+على~$\Nat$ وصدق البديهتين (\OLClassicalDigits{1}) و(\OLClassicalDigits{2}) في~$\Struct M$ يثبت أن
+${\OLId{latin-ordinary}{f}}$~!!{injective}. ولإثبات أن ${\OLId{latin-ordinary}{f}}$~!!{surjective}، نأخذ~${\OLId{latin-looped}{P}}$
+مجموعة !!{element}s~$\Domain{{\OLId{latin-looped}{M}}}$ التي تقع في مدى~${\OLId{latin-ordinary}{f}}$.
+وبما أن $\Struct M$ تامة، كانت ${\OLId{latin-looped}{P}}$ من
+!!{domain} الرتبة الثانية. وبناء~${\OLId{latin-ordinary}{f}}$ يقتضي أن
+$\Assign{\Obj 0}{{\OLId{latin-looped}{M}}}$ في~${\OLId{latin-looped}{P}}$، وأن ${\OLId{latin-looped}{P}}$ مغلقة تحت
+$\Assign{\prime}{{\OLId{latin-looped}{M}}}$. وصدق الاستقراء في $\Struct M$، ولا سيما
+عند تطبيقه على~${\OLId{latin-looped}{P}}$، يقتضي أن ${\OLId{latin-looped}{P}}$ هي !!{domain} الرتبة الأولى
+كله في~$\Struct M$. فثبت أن ${\OLId{latin-ordinary}{f}}$~!!a{bijection}.
+ويبقى إثبات أن ${\OLId{latin-ordinary}{f}}$ تشاكل، وهو يحصل بتكرار الاستقراء المعتاد
+على~$\Nat$.
+
+الدالة، بلغة نظرية المجموعات، ليست إلا نوعًا خاصًا من العلاقات؛ فيمكن،
+مثلًا، مطابقة الدالة الأحادية~${\OLId{latin-ordinary}{f}}$ بعلاقة ثنائية~${\OLId{latin-looped}{R}}$ تحقق
+$\lforall[{\OLId{latin-ordinary}{x}}][\lexists![{\OLId{latin-ordinary}{y}}][{\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})]]$. ولذلك يمكن التسوير على الدوال
+أيضًا. وعند استعمال الدلالة التامة نستطيع عندئذ تعريف فئة
+ال!!{structure}s اللانهائية بأنها فئة ال!!{structure}s~$\Struct M$
+التي توجد فيها دالة !!{injective} من !!{domain}~$\Struct M$ إلى
+مجموعة جزئية حقيقية منه:
+\[
+\lexists[{\OLId{latin-ordinary}{f}}][(\lforall[{\OLId{latin-ordinary}{x}}][\lforall[{\OLId{latin-ordinary}{y}}][(\eq[{\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}})][{\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{y}})] \lif \eq[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{y}}])]]
+  \land \lexists[{\OLId{latin-ordinary}{y}}][\lforall[{\OLId{latin-ordinary}{x}}][\eq/[{\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}})][{\OLId{latin-ordinary}{y}}]]])].
+\]
+وعندئذ يعرّف نفي هذه الجملة فئة ال!!{structure}s المنتهية.
+
+ويمكن، إضافة إلى ذلك، تعريف فئة الترتيبات الحسنة بإضافة الآتي إلى
+تعريف الترتيب الخطي:
+\[
+\lforall[{\OLId{latin-looped}{P}}][(\lexists[{\OLId{latin-ordinary}{x}}][\Atom{P}{x}] \lif \lexists[{\OLId{latin-ordinary}{x}}][(\Atom{P}{x}
+    \land \lforall[{\OLId{latin-ordinary}{y}}][({\OLId{latin-ordinary}{y}} < {\OLId{latin-ordinary}{x}} \lif \lnot \Atom{P}{y})])])].
+\]
+وتقرر هذه الصيغة أن لكل مجموعة غير خالية أصغر عنصر، بعد مطابقة
+«المجموعة» بـ«العلاقة الأحادية». وفي مثال آخر يمكن التعبير عن مفهوم
+الاتصال في الرسوم البيانية بالقول إنه لا يوجد فصل غير تافه للرؤوس إلى
+جزأين غير متصلين:
+\[
+\lnot \lexists[{\OLId{latin-looped}{A}}][(\lexists[{\OLId{latin-ordinary}{x}}][{\OLId{latin-looped}{A}}({\OLId{latin-ordinary}{x}})] \land \lexists[{\OLId{latin-ordinary}{y}}][\lnot {\OLId{latin-looped}{A}}({\OLId{latin-ordinary}{y}})]
+  \land \lforall[{\OLId{latin-ordinary}{w}}][\lforall[{\OLId{latin-ordinary}{z}}][((\Atom{A}{w} \land \lnot \Atom{A}{z})
+      \lif \lnot \Atom{R}{w,z})]])].
+\]
+ومن التمرين أن تعرّف فئة ال!!{structure}s
+المنتهية التي يكون حجم !!{domain}ها زوجيًا. ومن ثمرات هذه القدرة أيضًا إعطاء
+وصف قطعي للأعداد الحقيقية بوصفها حقلًا مرتبًا تامًا يحتوي الأعداد
+النسبية.
+
+فالحاصل أن قدرة منطق الرتبة الثانية على التعبير أوسع كثيرًا
+من قدرة منطق الرتبة الأولى. غير أن لهذه السعة مقابلًا: فقد
+تقدم أنه لا يوجد نسق !!{derivation} فعّال تام للدلالة التامة
+للرتبة الثانية. كما تفقد هنا خواص منطق الرتبة الأولى، ومنها
+التراص ومبرهنتا لوفنهايم--سكولم.
+
+أما إذا تركنا الدلالة التامة وأخذنا بالضعيفة، عاد نسق
+ال!!{derivation} الأدنى من الرتبة الثانية تامًا. فلو قرأنا
+$\Proves$ بمعنى «يثبت في النسق الأدنى»، و$\Entails$ بمعنى
+«يلزم منطقيًا في الدلالة الضعيفة»، لثبت أنه متى كان
+${\OLId{greek-variable}{Gamma}} \Entails !A$ كان ${\OLId{greek-variable}{Gamma}} \Proves
+!A$. وإذا زدنا بديهيات استيعاب في نسق ال!!{derivation}، وجب
+قصر الدلالة على بنى الرتبة الثانية التي ترضيها. فلو كانت
+${\OLId{greek-variable}{Delta}}$ مجموعة من بديهيات الاستيعاب، وربما كانت جميعها، لكان
+${\OLId{greek-variable}{Gamma}} \cup {\OLId{greek-variable}{Delta}} \Entails
+!A$ مقتضيًا ${\OLId{greek-variable}{Gamma}} \cup {\OLId{greek-variable}{Delta}} \Proves !A$.
+وعليه، إذا لم تكن $!A$ قابلة للإثبات ببديهيات الاستيعاب
+المختارة، وُجد نموذج لـ~$\lnot !A$ تصدق فيه تلك البديهيات.
+
+ويتضح تمام الدلالة الضعيفة إذا نظرنا إلى منطق الرتبة الثانية
+على أنه منطق متعدد الأصناف، على الوجه الآتي.
+يفسر أحد الأصناف بأنه !!{domain} «الرتبة الأولى» العادي، ثم يكون لنا
+% تصحيح ترجمة (0177-A1): استُعمل «ذات k مواضع» للـ arity لئلا يلتبس برتبة المنطق.
+لكل~${\OLId{latin-ordinary}{k}}$ !!a{domain} من «العلاقات ذات ${\OLId{latin-ordinary}{k}}$ مواضع». ونجعل للغة رموز
+العلاقة المضمنة «$\Atom{\Obj{true}_k}{R,x_1,\dots,x_k}$»، ويقصد بها
+تقرير أن ${\OLId{latin-looped}{R}}$ تصدق على ${\OLId{latin-ordinary}{x}}_{\OLMathNumeral{1}}$، و\dots،~${\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{k}}$، حيث ${\OLId{latin-looped}{R}}$ متغير من صنف
+«العلاقات ذات ${\OLId{latin-ordinary}{k}}$ مواضع»، و${\OLId{latin-ordinary}{x}}_{\OLMathNumeral{1}}$، و\dots،~${\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{k}}$ أشياء من صنف الرتبة
+الأولى.
+
+وبهذا الاعتبار ترجع دلالة الرتبة الثانية الضعيفة، في جوهرها،
+إلى دلالة المنطق متعدد الأصناف. وقد تقدم أن هذا المنطق يمكن
+تضمينه في منطق الرتبة الأولى. فبعد إجراء الترجمات في الاتجاهين
+يكون التصور الضعيف للرتبة الثانية صورة من منطق الرتبة الأولى:
+في !!{domain}ها «أشياء» و«علاقات»، تضبطها البديهيات المناسبة.
+
+\end{document}

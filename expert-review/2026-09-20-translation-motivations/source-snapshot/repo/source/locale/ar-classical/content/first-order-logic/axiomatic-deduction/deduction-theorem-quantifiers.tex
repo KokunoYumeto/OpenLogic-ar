@@ -1,0 +1,84 @@
+% Part: first-order-logic
+% Chapter: axiomatic-deduction
+% Section: deduction-theorem-quantifiers
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{axd}{ddq}
+
+\olsection{مبرهنة الاستنباط مع المكمّمات}
+
+\begin{thm}[مبرهنة الاستنباط]
+\ollabel{thm:deduction-thm-q} تكون~$\Gamma \cup \{!A\} \Proves !B$
+إذا وفقط إذا كان~$\Gamma \Proves !A \lif !B$.
+\end{thm}
+
+\begin{proof}
+% استكمال برهاني (0120-I1): أُثبت الاتجاه العكسي، وأُتمّت حالة QR الوجودية التي تركها الأصل الإنجليزي تمرينًا.
+أما اتجاه ``إذا'' فهو الاتجاه اليسير المثبت في
+\olref[ded]{thm:deduction-thm}، ولا يتوقف على صورة آخر قاعدة. وأما اتجاه
+``فقط إذا'' للاشتقاقات الكمية فنتمّ الاستقراء السابق بإضافة صورتي~\QR{}.
+
+نعيد الاستقراء على طول !!{derivation} الصيغة~$!B$
+من~$\Gamma \cup \{!A\}$.
+
+أما الأساس فبرهانه بعينه برهان الأساس في
+\olref[ded]{thm:deduction-thm}.
+
+وأما الخطوة، فنفرض أن !!{derivation} الصيغة~$!B$ من
+$\Gamma \cup \{!A\}$ ينتهي إلى~$!B$ بقاعدة استدلال.
+إن كانت إثبات المقدَّم، جرى برهان
+\olref[ded]{thm:deduction-thm}. وإن كانت~\QR، فنأخذ أولًا الحالة
+$!B \ident !C \lif \lforall[x][!D(x)]$.
+وقد سبقت !!a{formula} صورتها~$!C \lif !D(a)$
+في ال!!{derivation}، ولم يرد~$a$ في~$!C$ ولا~$!A$ ولا~$\Gamma$.
+فيكون لدينا
+\begin{align*}
+  \Gamma \cup \{!A\} & \Proves !C \lif !D(a),\\
+  \intertext{فيشمله فرض الاستقراء، ونحصل على}
+    \Gamma & \Proves !A \lif (!C \lif !D(a)).\\
+  \intertext{ثم نأخذ}
+  & \Proves (!A \lif (!C \lif !D(a))) \lif ((!A \land !C) \lif !D(a))\\
+  \intertext{ونجري إثبات المقدَّم فينتج}
+  \Gamma & \Proves (!A \land !C) \lif !D(a).\\
+  \intertext{ولم يختل شرط المتغير المميَّز، فيصح إلحاق خطوة بهذا ال!!{derivation} بقاعدة \QR، فيحصل}
+    \Gamma & \Proves (!A \land !C) \lif \lforall[x][!D(x)].\\
+    \intertext{ولدينا كذلك}
+    & \Proves ((!A \land !C) \lif \lforall[x][!D(x)]) \lif (!A \lif (!C \lif \lforall[x][!D(x)])),\\
+    \intertext{فينتهي إثبات المقدَّم إلى}
+    \Gamma & \Proves !A \lif (!C \lif \lforall[x][!D(x)]),
+\end{align*}
+أي إن $\Gamma \Proves !A \lif !B$.
+
+وأما صورة~\QR{} الأخرى، فإذا كان
+$!B \ident \lexists[x][!D(x)] \lif !C$، فقد سبقت في ال!!{derivation}
+الصيغة~$!D(a) \lif !C$، ولم يرد~$a$ في~$!C$ ولا~$!A$ ولا~$\Gamma$.
+فيعطينا فرض الاستقراء
+\[
+  \Gamma \Proves !A \lif (!D(a) \lif !C).
+\]
+ونبدّل ترتيب المقدِّمين بقضية صادقة منطقيًا، فينتج
+\[
+  \Gamma \Proves !D(a) \lif (!A \lif !C).
+\]
+وشرط الثابت المميَّز باقٍ، فتعطينا~\QR{}
+\[
+  \Gamma \Proves \lexists[x][!D(x)] \lif (!A \lif !C).
+\]
+ثم نعيد ترتيب المقدِّمين بقضية صادقة منطقيًا أخرى، ونجري إثبات المقدَّم،
+فنخلص إلى
+\[
+  \Gamma \Proves !A \lif (\lexists[x][!D(x)] \lif !C),
+\]
+أي~$\Gamma \Proves !A \lif !B$. فبهاتين الصورتين لـ~\QR{}، وبحالات
+الفرض والبديهية وإثبات المقدَّم المتقدمة، يتم الاستقراء.
+\end{proof}
+
+\begin{prob}
+  تحقّق تفصيلًا من بقاء شروط الثابت المميَّز في صورتي~\QR{} في برهان
+  \olref[fol][axd][ddq]{thm:deduction-thm-q}.
+\end{prob}
+
+\end{document}

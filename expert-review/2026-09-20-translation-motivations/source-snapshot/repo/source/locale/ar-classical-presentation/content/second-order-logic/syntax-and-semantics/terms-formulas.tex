@@ -1,0 +1,89 @@
+% Part: second-order-logic
+% Chapter: syntax-and-semantics
+% Section: terms-formulas
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sol}{syn}{frm}
+
+\olsection{الحدود و\printtoken{P}{formula}}
+
+يبدأ إنشاء تعبيرات منطق الرتبة الثانية، كما في الأولى، بمعجم
+أصلي من \emph{!!{variable}s} و\emph{!!{constant}s}
+و\emph{!!{predicate}s}، وقد يضم \emph{!!{function}s}.
+ثم تؤلف منه، مع الروابط والمكممات والأقواس والفواصل وغيرها من
+علامات الترقيم، \emph{الحدود} و\emph{!!{formula}s}.
+والزيادة في الرتبة الثانية أن المتغيرات لا تقتصر على الأفراد؛
+بل تتناول العلاقات والدوال أيضًا، ويجوز التكميم عليها.
+فالرموز المنطقية هي رموز الرتبة الأولى مع ما يأتي:
+
+\begin{enumerate}
+\item لكل عدد مواضع ${\OLId{latin-ordinary}{n}}$ مجموعة !!{denumerable} من
+  !!{variable}s العلاقات من الرتبة الثانية:
+  $\Obj V_{\OLMathNumeral{0}}^{\OLId{latin-ordinary}{n}}$، و$\Obj V_{\OLMathNumeral{1}}^{\OLId{latin-ordinary}{n}}$، و$\Obj V_{\OLMathNumeral{2}}^{\OLId{latin-ordinary}{n}}$، و\dots
+\item وللدوال من الرتبة الثانية مجموعة !!{denumerable} من
+  !!{variable}s: $\Obj u_{\OLMathNumeral{0}}^{\OLId{latin-ordinary}{n}}$، و$\Obj u_{\OLMathNumeral{1}}^{\OLId{latin-ordinary}{n}}$، و$\Obj u_{\OLMathNumeral{2}}^{\OLId{latin-ordinary}{n}}$، و\dots
+\end{enumerate}
+
+اصطلحنا على ${\OLId{latin-ordinary}{x}}$ و${\OLId{latin-ordinary}{y}}$ و${\OLId{latin-ordinary}{z}}$ متغيرات فوقية لمتغيرات الرتبة
+الأولى $\Obj v_{\OLId{latin-ordinary}{i}}$. وعلى المثال نفسه نستعمل ${\OLId{latin-looped}{X}}$ و${\OLId{latin-looped}{Y}}$ و${\OLId{latin-looped}{Z}}$
+وما شابهها متغيرات فوقية لـ$\Obj V_{\OLId{latin-ordinary}{i}}^{\OLId{latin-ordinary}{n}}$، ونستعمل ${\OLId{latin-ordinary}{u}}$ و${\OLId{latin-ordinary}{v}}$
+وما شابههما لـ$\Obj u_{\OLId{latin-ordinary}{i}}^{\OLId{latin-ordinary}{n}}$.
+
+\begin{explain}
+وأما الرموز غير المنطقية للغة الرتبة الثانية فتتحدد كما في
+الأولى: نعيّن قائمة !!{constant}s و!!{function}s
+و!!{predicate}s الخاصة بها.
+
+وتضم لغة الرتبة الأولى عادةً الـ!!{identity} $\eq$.
+وفي الرتبة الأولى لا غنى عن الرموز غير المنطقية للغة $\Lang{L}$
+للتعبير عن أمور ذات شأن؛ فنعم، توجد !!{sentence}s خالية
+منها، لكن الاقتصار على $\eq$ يضيّق ما يمكن قوله.
+وأما الرتبة الثانية فتتيح عددًا غير محدود من متغيرات العلاقات
+والدوال؛ فبها يمكن التعبير عما نعبر عنه في لغة الرتبة الأولى
+من غير أن نخص اللغة بمجموعة من الرموز غير المنطقية.
+\end{explain}
+
+\begin{defn}[حدود الرتبة الثانية]
+مجموعة \emph{حدود الرتبة الثانية} في $\Lang L$، ورمزها
+$\TrmSOL[{\OLId{latin-looped}{L}}]$، هي المجموعة التي يعرّفها
+\olref[fol][syn][frm]{defn:terms} بعد إلحاق الشرط الآتي به:
+\begin{enumerate}
+\item متى كان ${\OLId{latin-ordinary}{u}}$ متغيرًا داليًا ذا ${\OLId{latin-ordinary}{n}}$ مواضع،
+وكانت ${\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}$، \dots، ${\OLId{latin-ordinary}{t}}_{\OLId{latin-ordinary}{n}}$ حدودًا، عُدّ
+$\Atom{u}{t_1, \ldots, t_n}$ حدًا.
+\end{enumerate}
+\end{defn}
+
+\begin{explain}
+فصورة حد الرتبة الثانية صورة حد الرتبة الأولى، سوى أن الموضع
+الذي تشغله !!a{function} $\Obj{f^n_i}$ في الأول قد يشغله
+المتغير الدالي $\Obj{u^n_i}$ في الثاني.
+\end{explain}
+
+\begin{defn}[\usetoken{s}{formula} الرتبة الثانية]
+نحصل على مجموعة \emph{!!{formula}s الرتبة الثانية}
+$\FrmSOL[{\OLId{latin-looped}{L}}]$ للغة $\Lang L$ بإلحاق الشروط الآتية
+بـ\olref[fol][syn][frm]{defn:formulas}:
+\begin{enumerate}
+\item متى كان ${\OLId{latin-looped}{X}}$ متغيرًا محموليًا ذا ${\OLId{latin-ordinary}{n}}$ مواضع،
+وكانت ${\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}$، \dots، ${\OLId{latin-ordinary}{t}}_{\OLId{latin-ordinary}{n}}$ حدودًا من الرتبة الثانية في
+$\Lang L$، عُدّت $\Atom{X}{t_1,\ldots, t_n}$ !!{formula} ذرية.
+
+\tagitem{prvAll}{من !!a{formula} $!A$ ومتغير دالي ${\OLId{latin-ordinary}{u}}$
+  تتكون !!a{formula} $\lforall[{\OLId{latin-ordinary}{u}}][!A]$.}{}
+
+\tagitem{prvAll}{من !!a{formula} $!A$ ومتغير محمولي ${\OLId{latin-looped}{X}}$
+  تتكون !!a{formula} $\lforall[{\OLId{latin-looped}{X}}][!A]$.}{}
+
+\tagitem{prvEx}{من !!a{formula} $!A$ ومتغير دالي ${\OLId{latin-ordinary}{u}}$
+  تتكون !!a{formula} $\lexists[{\OLId{latin-ordinary}{u}}][!A]$.}{}
+
+\tagitem{prvEx}{من !!a{formula} $!A$ ومتغير محمولي ${\OLId{latin-looped}{X}}$
+  تتكون !!a{formula} $\lexists[{\OLId{latin-looped}{X}}][!A]$.}{}
+\end{enumerate}
+\end{defn}
+
+\end{document}

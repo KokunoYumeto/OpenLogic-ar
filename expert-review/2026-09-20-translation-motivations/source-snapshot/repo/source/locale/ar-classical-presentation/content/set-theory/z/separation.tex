@@ -1,0 +1,101 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{z}{sep}
+\olsection{في الفصل}
+
+نستفتح بمبدأ يقوم مقام الاستيعاب الساذج:
+
+\begin{axiom}[مخطط الفصل] لكل صيغة~$\phi({\OLId{latin-ordinary}{x}})$ يكون الحكم الآتي مسلّمة:
+لكل~${\OLId{latin-looped}{A}}$ توجد المجموعة~$\Setabs{{\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}}{\phi({\OLId{latin-ordinary}{x}})}$.
+\end{axiom}
+
+وليس هذا مسلّمة مفردة، بل \emph{مخطط} مسلّمات؛ فمسلّمات الفصل
+\emph{غير متناهية العدد}، لكل صيغة~$\phi({\OLId{latin-ordinary}{x}})$ واحدة. وصيغته المكافئة
+المعهودة هي:
+
+\begin{defish}
+لكل صيغة~$\phi({\OLId{latin-ordinary}{x}})$ لا يرد فيها «${\OLId{latin-looped}{S}}$»، يكون الآتي مسلّمة:
+\[
+	\forall {\OLId{latin-looped}{A}} \exists {\OLId{latin-looped}{S}} \forall {\OLId{latin-ordinary}{x}}({\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{S}} \liff (\phi({\OLId{latin-ordinary}{x}}) \land {\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}})).
+\]
+\end{defish}
+
+وبحسب الاصطلاح المقرر في صدر~\olref[sth][][]{part}، يجوز أن تشتمل
+الصيغ~$\phi$ في مسلّمات الفصل على معاملات.\footnote{لشرح معنى ذلك،
+  انظر المناقشة التي تلي مباشرة
+  \olref[sfr][infinite][induction]{natinductionschema}.}
+
+والتصور التراكمي-التكراري يسوغ الفصل من فوره. خذ مجموعة~${\OLId{latin-looped}{A}}$؛ فإن~${\OLId{latin-looped}{A}}$
+قد تكونت عند مرحلة~${\OLId{latin-looped}{S}}$ ما بموجب~\stageshier. ولأن~${\OLId{latin-looped}{A}}$ تكونت في
+المرحلة~${\OLId{latin-looped}{S}}$، تكونت عناصر~${\OLId{latin-looped}{A}}$ كلها قبل المرحلة~${\OLId{latin-looped}{S}}$ بموجب~\stagesacc.
+فالمجموعات التي تنتمي إلى~${\OLId{latin-looped}{A}}$ وتحقق~$\phi$ تكونت أيضًا قبل
+المرحلة~${\OLId{latin-looped}{S}}$، ومن ثم تُجمع في~$\Setabs{{\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}}{\phi({\OLId{latin-ordinary}{x}})}$ عند
+المرحلة~${\OLId{latin-looped}{S}}$ بموجب~\stagesacc.
+
+وهذا، على خلاف الاستيعاب الساذج، سالم من مفارقة راسل؛ فلا يثبت به
+وجود~$\Setabs{{\OLId{latin-ordinary}{x}}}{{\OLId{latin-ordinary}{x}} \notin {\OLId{latin-ordinary}{x}}}$ مطلقًا. وإنما إذا \emph{أُعطينا}
+مجموعة~${\OLId{latin-looped}{A}}$ أثبتنا~${\OLId{latin-looped}{R}}_{\OLId{latin-looped}{A}} = \Setabs{{\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}}{{\OLId{latin-ordinary}{x}} \notin {\OLId{latin-ordinary}{x}}}$. ولا يلزم
+من ذلك إلا~${\OLId{latin-looped}{R}}_{\OLId{latin-looped}{A}} \notin {\OLId{latin-looped}{R}}_{\OLId{latin-looped}{A}}$ و${\OLId{latin-looped}{R}}_{\OLId{latin-looped}{A}} \notin {\OLId{latin-looped}{A}}$، وليس فيهما محذور.
+
+لكن للفصل نتيجة قريبة جديرة بالتنبيه:
+
+\begin{thm}\ollabel{thm:NoUniversalSet}
+يمتنع وجود مجموعة \emph{شاملة}؛ أي لا توجد~$\Setabs{{\OLId{latin-ordinary}{x}}}{{\OLId{latin-ordinary}{x}} = {\OLId{latin-ordinary}{x}}}$.
+\end{thm}
+
+\begin{proof}
+افرض بالخلف أن~${\OLId{latin-looped}{V}}$ مجموعة شاملة. فعندئذ توجد، بموجب الفصل،
+${\OLId{latin-looped}{R}} = \Setabs{{\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{V}}}{{\OLId{latin-ordinary}{x}} \notin {\OLId{latin-ordinary}{x}}} = \Setabs{{\OLId{latin-ordinary}{x}}}{{\OLId{latin-ordinary}{x}} \notin {\OLId{latin-ordinary}{x}}}$،
+وهذا يناقض مفارقة راسل.
+\end{proof}
+
+وعدم المجموعة الشاملة، أو انفتاح هرم المجموعات، من أصول التصور
+التراكمي-التكراري. ويمكن إدراك النتيجة من وجه آخر: فلو كانت مجموعة
+شاملة لكانت !!a{element} في نفسها. لكن كل مجموعة، بحسب التصور، لا تظهر
+أول مرة في الهرم إلا في أول مرحلة تلي جميع ما ينتمي إليها من
+!!{element}. فيلزم أن \emph{لا} تنتمي مجموعة إلى نفسها؛ وإلا لوجب أن
+يكون أول ظهورها بعد المرحلة التي وقع فيها أول ظهورها، وهو محال. (وسنرى
+في
+\olref[sth][spine][rank]{defnsetrank} كيف نجعل هذا الشرح أدق باستعمال
+مفهوم «رتبة» المجموعة. لكننا سنحتاج إلى وضع بضع مسلّمات أخرى قبل ذلك.)
+% تصحيح ترقيمي (0539-N1): أعيد قوس البدء للملاحظة الاعتراضية.
+
+ومن الفصل والامتدادية تلزم أيضًا النتائج الآتية.
+
+\begin{prop}\ollabel{prop:emptyexists}
+متى وُجدت مجموعة ما وُجدت~$\emptyset$.
+\end{prop}
+
+\begin{proof}
+  إذا كانت~${\OLId{latin-looped}{A}}$ مجموعة، وُجدت
+  $\emptyset = \Setabs{{\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}}{{\OLId{latin-ordinary}{x}} \neq {\OLId{latin-ordinary}{x}}}$ بموجب الفصل.
+\end{proof}
+
+\begin{prop}
+توجد~${\OLId{latin-looped}{A}} \setminus {\OLId{latin-looped}{B}}$ متى أُعطيت مجموعتان~${\OLId{latin-looped}{A}}$ و${\OLId{latin-looped}{B}}$.
+\end{prop}
+
+\begin{proof}
+توجد~${\OLId{latin-looped}{A}} \setminus {\OLId{latin-looped}{B}} = \Setabs{{\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}}{{\OLId{latin-ordinary}{x}} \notin {\OLId{latin-looped}{B}}}$ بموجب الفصل.
+\end{proof}
+
+ويكاد الفصل يثبت وجود التقاطعات الاعتباطية أيضًا:
+
+\begin{prop}\ollabel{prop:intersectionsexist}
+  متى كان~${\OLId{latin-looped}{A}} \neq \emptyset$، وُجدت
+  $\bigcap {\OLId{latin-looped}{A}} = \Setabs{{\OLId{latin-ordinary}{x}}}{(\forall {\OLId{latin-ordinary}{y}} \in {\OLId{latin-looped}{A}}){\OLId{latin-ordinary}{x}} \in {\OLId{latin-ordinary}{y}}}$.
+\end{prop}
+
+\begin{proof}
+افرض~${\OLId{latin-looped}{A}} \neq \emptyset$؛ فيوجد~${\OLId{latin-ordinary}{c}} \in {\OLId{latin-looped}{A}}$. وعندئذ
+$\bigcap {\OLId{latin-looped}{A}} = \Setabs{{\OLId{latin-ordinary}{x}}}{(\forall {\OLId{latin-ordinary}{y}} \in {\OLId{latin-looped}{A}}){\OLId{latin-ordinary}{x}} \in {\OLId{latin-ordinary}{y}}} =
+\Setabs{{\OLId{latin-ordinary}{x}} \in {\OLId{latin-ordinary}{c}}}{(\forall {\OLId{latin-ordinary}{y}} \in {\OLId{latin-looped}{A}}){\OLId{latin-ordinary}{x}} \in {\OLId{latin-ordinary}{y}}}$، وهي موجودة بموجب الفصل.
+\end{proof}
+
+ولا بد من الشرط~${\OLId{latin-looped}{A}} \neq \emptyset$؛ لأن~$\bigcap \emptyset$، لو وُجد،
+لكان المجموعة الشاملة بصدق فارغ، وهذا مخالف لـ
+\olref{thm:NoUniversalSet}.
+
+\end{document}

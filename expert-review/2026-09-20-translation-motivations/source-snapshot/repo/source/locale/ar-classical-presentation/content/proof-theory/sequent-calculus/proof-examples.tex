@@ -1,0 +1,335 @@
+% Part: proof-theory
+% Chapter: sequent-calculus
+% Section: proof-examples
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{seq}{ex}
+
+\olsection{أمثلة في إنشاء البراهين}
+
+إذا أردنا إنشاء~!!{proof}s لمتتاليات، فأرفق الطرق أن نبدأ بالمتتالية
+النهائية ثم نصعد منها: نعين فيها~!!a{formula} نجعلها~!!{formula} الفاعلة،
+ونثبت فوقها مقدمات القاعدة التي تلائمها، ثم نعاود هذا الصنيع حتى ننتهي
+إلى بديهيات. ولنجعل مطلوبنا، على سبيل المثال، برهنة المتتالية
+\[(!C \land !D) \lif !E \Sequent !C \lif (!D \lif !E)\]
+نبدأ بـ$!C\lif(!D\lif !E)$؛ فهي من الصورة~$!A\lif !B$ وتقع في يمين
+المتتالية. فإذا قابلنا المتتالية كلها بقاعدة~$\RightR{\lif}$ في
+\Log{G1c}،
+\[\Axiom$ !A, {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, !B$
+\RightLabel{\RightR{\lif}}
+\UnaryInf$ {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, !A \lif !B $
+\DisplayProof\]
+بان لنا أن نضع~${\OLId{greek-variable}{Gamma}}=\{(!C\land !D)\lif !E\}$، و${\OLId{greek-variable}{Delta}}=\emptyset$،
+و$!A\ident !C$، و$!B\ident !D\lif !E$. وعلى هذا يجوز أن يكون آخر
+البرهان الاستدلال الآتي:
+\[\Axiom$ !C, (!C \land !D) \lif !E \fCenter !D \lif !E$
+\RightLabel{\RightR{\lif}}
+\UnaryInf$(!C \land !D) \lif !E \fCenter !C \lif (!D \lif !E)$
+\DisplayProof\]
+ثم نعيد العمل نفسه ونجعل~$!D\lif !E$ صيغةً فاعلةً، فنحصل على
+\[\Axiom$ !D, !C, (!C \land !D) \lif !E \fCenter !E$
+\RightLabel{\RightR{\lif}}
+\UnaryInf$!C, (!C \land !D) \lif !E \fCenter !D \lif !E$
+\RightLabel{\RightR{\lif}}
+\UnaryInf$(!C \land !D) \lif !E \fCenter !C \lif (!D \lif !E)$
+\DisplayProof\]
+ثم ننظر في~$(!C\land !D)\lif !E$ ونستعمل قاعدة
+$\LeftR{\lif}$ في~\Log{G1c}،
+\[\Axiom$ {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, !A$
+\Axiom$ !B, {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}$
+\RightLabel{\LeftR{\lif}}
+\BinaryInf$ !A \lif !B, {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}$
+\DisplayProof\]
+فينتج لنا
+\[\Axiom$!D, !C \fCenter !E, !C \land !D$
+\Axiom$!D, !C, !E \fCenter !E$
+\RightLabel{\LeftR{\lif}}
+\BinaryInf$ !D, !C, (!C \land !D) \lif !E \fCenter !E$
+\RightLabel{\RightR{\lif}}
+\UnaryInf$!C, (!C \land !D) \lif !E \fCenter !D \lif !E$
+\RightLabel{\RightR{\lif}}
+\UnaryInf$(!C \land !D) \lif !E \fCenter !C \lif (!D \lif !E)$
+\DisplayProof\]
+فإن جعلنا~!!{formula}~$!C\land !D$ في المتتالية العليا اليسرى رئيسة،
+ثم أعملنا قاعدة~$\RightR{\land}$، تم لنا
+\[
+\Axiom$!D, !C \fCenter !E, !C$
+\Axiom$!D, !C \fCenter !E, !D$
+\RightLabel{\RightR{\land}}
+\BinaryInf$!D, !C \fCenter !E, !C \land !D$
+\Axiom$!D, !C, !E \fCenter !E$
+\RightLabel{\LeftR{\lif}}
+\BinaryInf$ !D, !C, (!C \land !D) \lif !E \fCenter !E$
+\RightLabel{\RightR{\lif}}
+\UnaryInf$!C, (!C \land !D) \lif !E \fCenter !D \lif !E$
+\RightLabel{\RightR{\lif}}
+\UnaryInf$(!C \land !D) \lif !E \fCenter !C \lif (!D \lif !E)$
+\DisplayProof
+\]
+وإلى هنا يستقيم البناء في~\Log{G3c} أيضًا؛ وذلك أن القواعد المستعملة
+إلى الآن مشتركة بين~\Log{G1c} و\Log{G3c}. وقد بلغنا جزءًا من~!!a{proof}
+في كل متتالية عليا منه~!!{formula} واحدة في اليسار واليمين، غير أن تلك
+المتتاليات لم تصر بديهيات بعد.
+
+وأما في~\Log{G1c}، فينبغي أن نبني~!!{proof}s للمتتاليات العليا ابتداءً
+من بديهيات على الصورة~$!A\Sequent !A$. وقواعد الإضعاف تكفينا لذلك؛
+فالمتتالية العليا في أقصى اليسار يمكن~!!{prove}ها، مثلًا،
+$!D,!C\Sequent !E,!C$ كما يأتي:
+\[
+\Axiom$!C \fCenter !C$
+\RightLabel{\LeftR{\Weakening}}
+\UnaryInf$!D, !C \fCenter !C$
+\RightLabel{\RightR{\Weakening}}
+\UnaryInf$!D, !C \fCenter !E, !C$
+\]
+وبضم هذه الخطوات يكون لنا في~\Log{G1c}~!!a{proof} كامل على الصورة الآتية:
+\[
+\Axiom$!C \fCenter !C$
+\RightLabel{\LeftR{\Weakening}}
+\UnaryInf$!D, !C \fCenter !C$
+\RightLabel{\RightR{\Weakening}}
+\UnaryInf$!D, !C \fCenter !E, !C$
+\Axiom$!D \fCenter !D$
+\RightLabel{\LeftR{\Weakening}}
+\UnaryInf$!D, !C \fCenter !D$
+\RightLabel{\RightR{\Weakening}}
+\UnaryInf$!D, !C \fCenter !E, !D$
+\RightLabel{\RightR{\land}}
+\BinaryInf$!D, !C \fCenter !E, !C \land !D$
+\Axiom$!E \fCenter !E$
+\RightLabel{\LeftR{\Weakening}}
+\UnaryInf$!C, !E \fCenter !E$
+\RightLabel{\LeftR{\Weakening}}
+\UnaryInf$!D, !C, !E \fCenter !E$
+\RightLabel{\LeftR{\lif}}
+\BinaryInf$ !D, !C, (!C \land !D) \lif !E \fCenter !E$
+\RightLabel{\RightR{\lif}}
+\UnaryInf$!C, (!C \land !D) \lif !E \fCenter !D \lif !E$
+\RightLabel{\RightR{\lif}}
+\UnaryInf$(!C \land !D) \lif !E \fCenter !C \lif (!D \lif !E)$
+\DisplayProof
+\]
+لا تتوقف صورة هذا البرهان، ولا سيما ارتفاعه، على ماهية~!!{formula}s
+$!C$ و$!D$ و$!E$. فلو أبدلنا بهذه الرموز في~!!{proof} المتقدم أي
+!!{formula}s، لبقي الحاصل~!!{proof} في~\Log{G1c}. ومن ثم كان البرهان في
+\Log{G1c}~\emph{تخطيطيًا}.
+
+وأما بديهيات~\Log{G3c} فمتتاليات على الصورة~$!A,{\OLId{greek-variable}{Gamma}}\Sequent
+{\OLId{greek-variable}{Delta}},!A$، بشرط أن تكون~$!A$ ذرية. لذلك قد تبدو
+$!D,!C\Sequent !E,!C$ بديهية في~\Log{G3c}، لأن
+${\OLId{greek-variable}{Gamma}}=\{!D\}$ و${\OLId{greek-variable}{Delta}}=\{!E\}$؛ لكنها لا تكون بديهية \emph{على التحقيق}
+إلا إن كانت~$!C$ ذرية. فالجزء الذي بنيناه لا يتم برهانًا في~\Log{G3c}
+إلا إذا كانت~$!C$ و$!D$ و$!E$~!!{formula}s ذرية.
+
+وعلى هذا لم نثبت، إذا دققنا، أن
+\[\Log{G3c} \Proves (!C \land !D) \lif !E \Sequent !C \lif (!D \lif
+!E),\]
+غير أن هذا القدر هو المطلوب عمليًا، وهو غاية ما يتيحه الرسم التخطيطي؛
+وذلك أن كل متتالية على الصورة~$!A,{\OLId{greek-variable}{Gamma}}\Sequent{\OLId{greek-variable}{Delta}},!A$ قابلة
+للبرهنة في~\Log{G3c}، وإن لم تكن~$!A$ ذرية. وبرهان ذلك بالاستقراء على
+عمق~$\depth{!A}$ للصيغة~$!A$.
+
+\begin{defn}\ollabel{defn:depth}
+نجعل \emph{عمق}~$\depth{!A}$ لـ~!!a{formula} معرفًا على الوجه الآتي:
+\begin{enumerate}
+  \item إذا كانت~$!A$ ذرية، فإن~$\depth{!A}={\OLMathNumeral{0}}$.
+  \item إذا كانت~$!A\ident\lnot !B$، أو
+    $!A\ident\lforall[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$، أو
+    $!A\ident\lexists[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$، فإن
+    $\depth{!A}=\depth{!B}+{\OLMathNumeral{1}}$.
+  \item إذا كانت~$!A\ident(!B\land !C)$، أو
+    $!A\ident(!B\lor !C)$، أو $!A\ident(!B\lif !C)$، فإن
+    $\depth{!A}=\max(\depth{!B},\depth{!C})+{\OLMathNumeral{1}}$.
+\end{enumerate}
+\end{defn}
+
+ومن اليسير أن نثبت~$\depth{!A({\OLId{latin-ordinary}{x}})}=\depth{!A({\OLId{latin-ordinary}{t}})}$ لكل حد~${\OLId{latin-ordinary}{t}}$. والذي يعنينا
+أن عمق~!!{formula} الرئيسة في القاعدة يفوق أبدًا عمق
+!!{formula}s الفاعلة؛ ومن أمثلة ذلك:
+\begin{align*}
+\depth{{\OLId{latin-looped}{P}}({\OLId{latin-ordinary}{x}})} = \depth{{\OLId{latin-looped}{P}}({\OLId{latin-ordinary}{a}})} & = {\OLMathNumeral{0}},\\
+\depth{\lforall[{\OLId{latin-ordinary}{x}}][{\OLId{latin-looped}{P}}({\OLId{latin-ordinary}{x}})]} & = {\OLMathNumeral{1}},\\
+\depth{(\lforall[{\OLId{latin-ordinary}{x}}][{\OLId{latin-looped}{P}}({\OLId{latin-ordinary}{x}})] \lif {\OLId{latin-looped}{P}}({\OLId{latin-ordinary}{a}}))} & = \max({\OLMathNumeral{1}},{\OLMathNumeral{0}}) + {\OLMathNumeral{1}} = {\OLMathNumeral{2}}.
+\end{align*}
+وبهذا المقياس نستطيع إثبات نتائج بالاستقراء على~$\depth{!A}$، ومنها ما يأتي.
+
+\begin{prop}\ollabel{prop:G1c-axioms}
+لكل~$!A$ يوجد في~$\Log{G1c}$~!!a{proof} لـ~$!A\Sequent !A$، وجميع
+بديهيات ذلك البرهان ذرية.
+\end{prop}
+
+\begin{proof}
+  نستقرئ على~$\depth{!A}$. فإن كان~$\depth{!A}={\OLMathNumeral{0}}$، كانت~$!A$ ذرية،
+  وكانت~$!A\Sequent !A$ بذاتها~!!{proof} في~\Log{G1c} على الوجه
+  المطلوب. وإن كان~$\depth{!A}>{\OLMathNumeral{0}}$، كانت~$!A$ مؤلفة من~!!{formula}s
+  دونها عمقًا؛ كأن تكون~$!A\ident\lnot !B$، أو~$!A\ident(!B\land !C)$،
+  أو~$!A\ident\lforall[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$. وفرض الاستقراء أنه لكل~$!D$ يحقق
+  $\depth{!D}<\depth{!A}$، لدينا
+  $\Log{G1c}\Proves !D\Sequent !D$ انطلاقًا من بديهيات ذرية.
+
+  فأما إن كانت~$!A\ident\lnot !B$، فإن~$\depth{!B}<\depth{!A}$، ومن فرض
+  الاستقراء نحصل على~!!a{proof}~$\pi_{\OLMathNumeral{1}}$ في~\Log{G1c} بديهياته ذرية
+  لـ~$!B\Sequent !B$. ثم نمده إلى~!!a{proof} لـ
+  $\lnot !B\Sequent\lnot !B$ كما يأتي:
+  \[
+  \AxiomC{}
+  \RightLabel{$\pi_{\OLMathNumeral{1}}$}
+  \Deduce$!B \fCenter !B$
+  \RightLabel{\LeftR{\lnot}}
+  \UnaryInf$\lnot !B, !B \fCenter $
+  \RightLabel{\RightR{\lnot}}
+  \UnaryInf$\lnot !B \fCenter \lnot !B$
+  \DisplayProof
+\]
+
+  وأما إن كانت~$!A\ident(!B\land !C)$، فإن~$\depth{!B}<\depth{!A}$ و
+  $\depth{!C}<\depth{!A}$. وبفرض الاستقراء يوجد في
+  \Log{G1c}~!!{proof}s~$\pi_{\OLMathNumeral{1}}$ و$\pi_{\OLMathNumeral{2}}$ بديهياتها ذرية لـ
+  $!B\Sequent !B$ و$!C\Sequent !C$. ومنهما نركب~!!a{proof}
+  لـ~$!B\land !C\Sequent !B\land !C$ كما يأتي:
+  \[
+  \AxiomC{}
+  \RightLabel{$\pi_{\OLMathNumeral{1}}$}
+  \Deduce$!B \fCenter !B$
+  \RightLabel{\LeftR{\Weakening}}
+  \UnaryInf$!B, !C \fCenter !B$
+  \RightLabel{\LeftR{\land}}
+  \UnaryInf$!B \land !C, !C \fCenter !B$
+  \RightLabel{\LeftR{\land}}
+  \UnaryInf$!B \land !C, !B \land !C \fCenter !B$
+  \AxiomC{}
+  \RightLabel{$\pi_{\OLMathNumeral{2}}$}
+  \Deduce$!C \fCenter !C$
+  \RightLabel{\LeftR{\Weakening}}
+  \UnaryInf$!B, !C \fCenter !C$
+  \RightLabel{\LeftR{\land}}
+  \UnaryInf$!B \land !C, !C \fCenter !C$
+  \RightLabel{\LeftR{\land}}
+  \UnaryInf$!B \land !C, !B \land !C \fCenter !C$
+  \RightLabel{\RightR{\land}}
+  \BinaryInf$!B \land !C, !B \land !C \fCenter !B \land !C$
+  \RightLabel{\LeftR{\Contraction}}
+  \UnaryInf$!B \land !C \fCenter !B \land !C$
+  \DisplayProof
+  \]
+
+  وأما إذا كانت~$!A\ident\lforall[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$، فخذ~!!a{constant}~${\OLId{latin-ordinary}{c}}$
+  لا يظهر في~$\lforall[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$. وحينئذ
+  $\depth{!B({\OLId{latin-ordinary}{c}})}=\depth{!B({\OLId{latin-ordinary}{x}})}<\depth{!A}$، وبفرض الاستقراء يوجد
+  !!a{proof}~$\pi_{\OLMathNumeral{1}}$ في~\Log{G1c} بديهياته ذرية لـ
+  $!B({\OLId{latin-ordinary}{c}})\Sequent !B({\OLId{latin-ordinary}{c}})$. ومنه ننشئ~!!a{proof} لـ
+  $\lforall[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]\Sequent\lforall[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$ كما يأتي:
+  \[
+  \AxiomC{}
+  \RightLabel{$\pi_{\OLMathNumeral{1}}$}
+  \Deduce$!B({\OLId{latin-ordinary}{c}}) \fCenter !B({\OLId{latin-ordinary}{c}})$
+  \RightLabel{\LeftR{\lforall}}
+  \UnaryInf$\lforall[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})] \fCenter !B({\OLId{latin-ordinary}{c}})$
+  \RightLabel{\RightR{\lforall}}
+  \UnaryInf$\lforall[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})] \fCenter \lforall[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$
+  \DisplayProof
+\]
+
+  وأما سائر الحالات فتُستكمل تمرينًا.
+\end{proof}
+
+\begin{prob}
+  أتمم برهان~\olref{prop:G1c-axioms} بمعالجة الحالات التي يكون فيها
+  $!A\ident(!B\lor !C)$، و$!A\ident(!B\lif !C)$، و
+  $!A\ident\lexists[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$.
+\end{prob}
+
+وكان يجزئنا في هذا الموضع أيضًا استعمال~!!{proof} الآتي
+\[
+\AxiomC{}
+\RightLabel{$\pi_{\OLMathNumeral{1}}$}
+\Deduce$!B \fCenter !B$
+\RightLabel{\RightR{\lnot}}
+\UnaryInf$\fCenter !B, \lnot !B$
+\RightLabel{\LeftR{\lnot}}
+\UnaryInf$\lnot !B \fCenter \lnot !B$
+\DisplayProof
+\]
+في حالة~$!A\ident\lnot !B$. إلا أن هذا الوجه لا يصح في بعض حسابات
+المتتاليات؛ فإن حساب المتتاليات الحدسي~\Log{G1i} يماثل~\Log{G1c}، غير
+أنه لا يجيز في يمين المتتالية أكثر من~!!{formula} واحدة. فإذا كانت
+${\OLId{greek-variable}{Delta}}=\emptyset$، كان~!!{proof} الأول~!!a{proof} في~\Log{G1i} كذلك؛
+وأما الثاني فلا، لاجتماع~$!B$ و$\lnot !B$ في يمين إحدى متتالياته.
+
+ولا يجوز، حتى في~\Log{G1c}، أن نعكس ترتيب القاعدتين في حالة
+$!A\ident\lforall[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$؛ فالشجرة الآتية \emph{ليست}~!!a{proof}:
+  \[
+  \AxiomC{}
+  \RightLabel{$\pi_{\OLMathNumeral{1}}$}
+  \Deduce$!B({\OLId{latin-ordinary}{c}}) \fCenter !B({\OLId{latin-ordinary}{c}})$
+  \RightLabel{\RightR{\lforall}}
+  \UnaryInf$!B({\OLId{latin-ordinary}{c}}) \fCenter \lforall[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$
+  \RightLabel{\LeftR{\lforall}}
+  \UnaryInf$\lforall[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})] \fCenter \lforall[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$
+  \DisplayProof
+\]
+إذ تنقض شرط المتغير المميز في~$\RightR{\lforall}$.
+
+\begin{prop}\ollabel{prop:G3c-axioms}
+كل متتالية على الصورة~$!A,{\OLId{greek-variable}{Gamma}}\Sequent{\OLId{greek-variable}{Delta}},!A$ قابلة للبرهنة
+في~\Log{G3c}، وإن كانت~$!A$ \emph{غير مشترط} فيها أن تكون ذرية.
+\end{prop}
+
+\begin{proof}
+هذه الحجة قريبة من برهان~\olref{prop:G1c-axioms}، غير أن ضبط فرض الاستقراء
+هنا لازم. فأما حالة~${\OLId{latin-ordinary}{n}}=\depth{!A}={\OLMathNumeral{0}}$ فبينة: إذا كان~${\OLId{latin-ordinary}{n}}={\OLMathNumeral{0}}$، كانت~$!A$
+ذرية، ومن ثم كانت~$!A,{\OLId{greek-variable}{Gamma}}\Sequent{\OLId{greek-variable}{Delta}},!A$ بديهية في~\Log{G3c}.
+
+ولنفرض الآن~${\OLId{latin-ordinary}{n}}>{\OLMathNumeral{0}}$، ثم نفصل الحالات. وفرض الاستقراء أن لكل~$!D$
+يحقق~$\depth{!D}<{\OLId{latin-ordinary}{n}}$، ولكل~$\Pi$ و$\Lambda$، يثبت
+$\Log{G3c}\Proves !D,\Pi\Sequent\Lambda,!D$. فإذا كانت الحالة
+$!A\ident(!B\land !C)$، استعملنا الفرض مرتين: مرة مع~$!D=!B$،
+و$\Pi=!C,{\OLId{greek-variable}{Gamma}}$، و$\Lambda={\OLId{greek-variable}{Delta}}$، فنحصل على~!!a{proof}~$\pi_{\OLMathNumeral{1}}$ لـ
+$!B,!C,{\OLId{greek-variable}{Gamma}}\Sequent{\OLId{greek-variable}{Delta}},!B$؛ ومرة مع~$!D=!C$،
+و$\Pi=!B,{\OLId{greek-variable}{Gamma}}$، و$\Lambda={\OLId{greek-variable}{Delta}}$، فنحصل على~!!a{proof}~$\pi_{\OLMathNumeral{2}}$ لـ
+$!B,!C,{\OLId{greek-variable}{Gamma}}\Sequent{\OLId{greek-variable}{Delta}},!C$. ومنهما يتألف~!!{proof} لـ
+$!B\land !C,{\OLId{greek-variable}{Gamma}}\Sequent{\OLId{greek-variable}{Delta}},!B\land !C$:
+\[
+\AxiomC{}
+\RightLabel{$\pi_{\OLMathNumeral{1}}$}
+\Deduce$!B, !C, {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, !B$
+\RightLabel{\LeftR{\land}}
+\UnaryInf$!B \land !C, {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, !B$
+\AxiomC{}
+\RightLabel{$\pi_{\OLMathNumeral{2}}$}
+\Deduce$!B, !C, {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, !C$
+\RightLabel{\LeftR{\land}}
+\UnaryInf$!B \land !C, {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, !C$
+\RightLabel{\RightR{\land}}
+\BinaryInf$!B \land !C, {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, !B \land !C$
+\DisplayProof
+\]
+
+وأما حالة~$!A\ident\lforall[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$، فاختر~!!a{constant}~${\OLId{latin-ordinary}{c}}$ لا يظهر
+في~$\lforall[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$ ولا~${\OLId{greek-variable}{Gamma}}$ ولا~${\OLId{greek-variable}{Delta}}$. ثم أجر فرض الاستقراء
+مع~$!D=!B({\OLId{latin-ordinary}{c}})$، و$\Pi=\lforall[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})],{\OLId{greek-variable}{Gamma}}$، و$\Lambda={\OLId{greek-variable}{Delta}}$؛
+فيعطينا~!!a{proof}~$\pi_{\OLMathNumeral{1}}$ لـ
+$!B({\OLId{latin-ordinary}{c}}),\lforall[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})],{\OLId{greek-variable}{Gamma}}\Sequent{\OLId{greek-variable}{Delta}},!B({\OLId{latin-ordinary}{c}})$، ومنه نبني:
+\[
+\AxiomC{}
+\RightLabel{$\pi_{\OLMathNumeral{1}}$}
+\Deduce$!B({\OLId{latin-ordinary}{c}}), \lforall[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})], {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, !B({\OLId{latin-ordinary}{c}})$
+\RightLabel{\LeftR{\lforall}}
+\UnaryInf$\lforall[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})], {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, !B({\OLId{latin-ordinary}{c}})$
+\RightLabel{\RightR{\lforall}}
+\UnaryInf$\lforall[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})], {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, \lforall[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$
+\DisplayProof
+\]
+وشرط المتغير المميز في~$\RightR{\lforall}$ متحقق بما اشترطناه في اختيار
+${\OLId{latin-ordinary}{c}}$.
+\end{proof}
+
+\begin{prob}
+  أتمم برهان~\olref{prop:G3c-axioms} بمعالجة الحالتين اللتين يكون فيهما
+  $!A\ident(!B\lif !C)$ و$!A\ident\lexists[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$.
+\end{prob}
+
+\end{document}

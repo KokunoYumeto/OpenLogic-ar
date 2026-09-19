@@ -1,0 +1,250 @@
+% Part: proof-theory
+% Chapter: sequent-calculus
+% Section: admissible-derivable
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{seq}{adm}
+
+\olsection{القواعد المقبولة والقابلة للاشتقاق}
+
+تتعلق نتائج كثيرة في نظرية البرهان، أو تستعمل نتائج تتعلق، بما إذا كان كل ما
+!!{prove} باستعمال قاعدة معينة يمكن أن~!!{prove} من دونها. ومبرهنة حذف
+القطع أشهر مثال: فهي تبيّن أن كل متتالية يمكننا أن~!!{prove} باستعمال قواعد
+حساب متتاليات مع~\Cut{} يمكننا أيضًا أن~!!{prove} من دون~\Cut. ولهذه
+الخاصية اسم لما لها من أهمية.
+
+\begin{defn}
+تكون القاعدة~$R$ \emph{مقبولة} في حساب متتاليات إذا أمكن برهنة كل متتالية
+يمكن برهنتها في الحساب مع القاعدة~$R$ من دون استعمال~$R$ أيضًا.
+\end{defn}
+
+\begin{ex}\ollabel{ex:land-deriv}
+تأخذ القاعدة~$\LeftR{\land}$ صورتين مختلفتين في~\Log{G1c} و\Log{G3c}.
+ففي~\Log{G1c} نسختان منها: تضم مقدمة إحداهما الحد الأيسر~$!A$ من
+!!{formula} الرئيسة~$!A\land !B$، وتضم مقدمة الأخرى الحد الأيمن~$!B$:
+\[
+\Axiom$ !A, \Gamma \fCenter \Delta$
+\RightLabel{$\LeftR{\land}_1$}
+\UnaryInf$ !A \land !B, \Gamma \fCenter \Delta$
+\DisplayProof
+\qquad
+\Axiom$!B, \Gamma \fCenter \Delta$
+\RightLabel{$\LeftR{\land}_2$}
+\UnaryInf$!A \land !B, \Gamma \fCenter \Delta$
+\DisplayProof
+\]
+أما~\Log{G3c} فله قاعدة واحدة فقط:
+\[
+\Axiom$ !A, !B, \Gamma \fCenter \Delta$
+\RightLabel{$\LeftR{\land}_3$}
+\UnaryInf$ !A \land !B, \Gamma \fCenter \Delta$
+\DisplayProof
+\]
+ويعني الوسم~$\LeftR{\star}$ أن الصيغة الرئيسة تقع على اليسار، أي في
+المقدّم، ويعني~$\RightR{\star}$ أنها تقع على اليمين، أي في التالي.
+
+يمكننا الآن أن نسأل: ``هل قاعدة~$\LeftR{\land}_3$ في~\Log{G3c} مقبولة في
+\Log{G1c}؟'' نعم؛ إذ يمكن محاكاة كل استدلال يستعمل~$\LeftR{\land}_3$
+مباشرةً بقواعد~\Log{G1c} وحدها. وإلى جانب~$\LeftR{\land}_1$ و
+$\LeftR{\land}_2$ سنحتاج أيضًا إلى القاعدة البنيوية
+$\LeftR{\Contraction}$:
+\[
+\Axiom$!A, !B, \Gamma \fCenter \Delta$
+\RightLabel{$\LeftR{\land}_1$}
+\UnaryInf$!A \land !B, !B, \Gamma \fCenter \Delta$
+\RightLabel{$\LeftR{\land}_2$}
+\UnaryInf$!A \land !B, !A \land !B, \Gamma \fCenter \Delta$
+\RightLabel{\LeftR{\Contraction}}
+\UnaryInf$!A \land !B, \Gamma \fCenter \Delta$
+\DisplayProof
+\]
+\end{ex}
+
+محاكاة استدلال يستعمل قاعدةً باستدلالات تستعمل قواعد أخرى إحدى طرق إثبات
+قبول القاعدة. لكنها ليست الطريقة الوحيدة؛ فبعض القواعد مقبولة ولا يمكن
+محاكاتها هكذا. وتسمى القواعد التي يمكن محاكاتها \emph{قابلة للاشتقاق}.
+
+\begin{defn}
+تسمى القاعدة~$R$،
+\[
+\AxiomC{$S_1$}
+\AxiomC{$\dots$}
+\AxiomC{$S_n$}
+\RightLabel{$R$}
+\TrinaryInfC{$S$}
+\DisplayProof
+\]
+\emph{قابلة للاشتقاق} في حساب إذا وُجد~!!{proof} تخطيطي للمتتالية~$S$
+يستعمل قواعد الحساب وبديهياته، إلى جانب متتاليات ابتدائية إضافية من صور
+$S_1$، \dots،~$S_n$.
+\end{defn}
+
+يبيّن~!!{proof} الوارد في~\olref{ex:land-deriv} أن
+$\LeftR{\land}_3$ قاعدة قابلة للاشتقاق في~\Log{G1c}؛ فهو~!!{proof}
+تخطيطي لنتيجة~$\LeftR{\land}_3$ من مقدمات~$\LeftR{\land}_3$ بوصفها متتاليات ابتدائية،
+وهو~!!{proof} لا يستعمل إلا قواعد~\Log{G1c}. (ولم يستعمل أي بديهية من
+بديهيات~\Log{G1c}.)
+
+\begin{prop}\ollabel{prop:lor-G3-adm}
+قاعدتا~$\LeftR{\land}$ و$\RightR{\lor}$ في~\Log{G3c} قابلتان للاشتقاق
+في~\Log{G1c}.
+\end{prop}
+
+\begin{proof}
+  يرد البرهان الخاص بـ~$\LeftR{\land}$ في~\olref{ex:land-deriv}، ويُترك
+  البرهان الخاص بـ~$\RightR{\lor}$ تمرينًا.
+\end{proof}
+
+\begin{prob}
+بيّن أن قاعدة~$\RightR{\lor}$ في~\Log{G3c} قابلة للاشتقاق في~\Log{G1c}.
+\end{prob}
+
+\begin{prob}
+افترض أن~$\liff$~!!{operator} معرّف، وأن~$!A\liff !B$ اختصار لـ
+$(!A\lif !B)\land(!B\lif !A)$. بيّن أن القاعدتين
+\begin{enumerate}
+\item \Axiom$\Gamma, !A, !B \fCenter \Delta$
+\Axiom$\Gamma \fCenter \Delta, !A, !B$
+\RightLabel{\LeftR{\liff}}
+\BinaryInf$!A \liff !B, \Gamma \fCenter \Delta$
+\DisplayProof
+\item
+\Axiom$!A, \Gamma \fCenter \Delta, !B$
+\Axiom$!B, \Gamma \fCenter \Delta, !A$
+\RightLabel{\RightR{\liff}}
+\BinaryInf$\Gamma \fCenter \Delta, !A \liff !B$
+\DisplayProof
+\end{enumerate}
+قابلتان للاشتقاق في: (أ)~\Log{G1c}، و(ب)~\Log{G3c}.
+\end{prob}
+
+\begin{ex}\ollabel{ex:weak-adm}
+قاعدة~$\RightR{\Weakening}$ في~\Log{G1c}،
+\[
+\Axiom$ \Gamma \fCenter \Delta$
+\RightLabel{\RightR{\Weakening}}
+\UnaryInf$ \Gamma \fCenter \Delta, !A$
+\DisplayProof
+\]
+مقبولة في~\Log{G3c}. وفكرة البرهان بسيطة: افترض وجود~!!a{proof}~$\pi$
+للمقدمة~$\Gamma\Sequent\Delta$ في~\Log{G3c}. أضف~!!{formula}~$!A$ إلى
+تالي كل متتالية في~$\pi$. تبقى البديهيات بديهيات، وتبقى الاستدلالات الصحيحة
+صحيحة. وبعد إضافة~!!{formula}~$!A$ تكون المتتالية النهائية لـ~!!{proof} الجديد هي
+$\Gamma\Sequent\Delta,!A$.
+
+غير أن قاعدة~$\RightR{\Weakening}$ ليست قابلة للاشتقاق في~\Log{G3c}.
+فلو كانت كذلك، لوجد~!!a{proof} لـ~$\Gamma\Sequent\Delta,!A$ لا يستعمل إلا
+بديهيات~\Log{G3c} وقواعده، وربما المتتالية الابتدائية الإضافية
+$\Gamma\Sequent\Delta$. وإذا كان هذا~!!{proof} تخطيطيًا محضًا، كما يقتضي
+اشتقاق~$\RightR{\Weakening}$، أمكن تحويله إلى~!!a{proof} لـ~$\Sequent !A$
+بحذف~$\Gamma$ و$\Delta$. وهذا يحول المتتاليات الابتدائية الإضافية
+$\Gamma\Sequent\Delta$ إلى المتتالية الخالية~$\quad\Sequent\quad$.
+ولأن المتتالية الخالية لا تحتوي أي~!!{formula}s، فيما تتطلب كل قواعد
+\Log{G3c}~!!{formula} فاعلة واحدة على الأقل في مقدماتها، فلا يمكن أن تكون
+المتتالية الخالية مقدمة لأي استدلال في هذا~!!{proof} التخطيطي. ومن ثم لا
+يمكن أن يكون~!!{proof} تخطيطيًا إلا إذا لم يستعمل بالفعل المتتالية الإضافية
+$\Gamma\Sequent\Delta$ متتاليةً ابتدائية. أي إنه سيكون اشتقاقًا تخطيطيًا
+لـ~$\Gamma\Sequent\Delta,!A$ باستعمال بديهيات~\Log{G3c} وقواعده وحدها،
+وسنكون قد بينا أن لكل متتالية من هذه الصورة~!!a{proof} في~\Log{G3c}. لكن
+هذا محال، لأن~\Log{G3c} سليم، فلا يستطيع أن~!!{prove} إلا متتاليات صادقة
+في كل~!!{structure}. وإذا أخذنا~$\Gamma=\Delta=\emptyset$ و
+$!A\ident\lfalse$، للزم أن~!!{prove}~\Log{G3c}، مثلًا، المتتالية
+$\quad\Sequent\lfalse$، وهو لا يفعل.
+\end{ex}
+
+لنقدم برهانًا استقرائيًا أنيقًا لكون الإضعاف قاعدة مقبولة في~\Log{G3c}.
+بل تصح نتيجة أقوى قليلًا، كما توضح الحجة الحدسية: فإضافة~$!A$ إلى يمين كل
+متتالية في~$\pi$ لا تغيّر بنية~!!{proof}، ولا تزيد ارتفاعه على وجه الخصوص.
+ولأهمية ذلك نضع له تعريفًا مستقلًا.
+
+\begin{defn}
+تكون القاعدة~$R$،
+\[
+\AxiomC{$S_1$}
+\AxiomC{$\dots$}
+\AxiomC{$S_n$}
+\RightLabel{$R$}
+\TrinaryInfC{$S$}
+\DisplayProof
+\]
+\emph{مقبولة مع حفظ~!!{height}}، أو \emph{مقبولة مع~!!{hp}}، في حساب إذا
+كان لكل براهين~$\pi_i$ لمقدماتها~$S_i$، حيث
+$h_i=\pheight{\pi_i}$، برهان~$\pi$ للنتيجة~$S$ يحقق
+$\pheight{\pi}\le\max(h_1,\dots,h_n)$.
+\end{defn}
+
+ويكفي لكي تكون قاعدة مقبولة مع حفظ~!!{height} أنه كلما كان للمقدمات~$S_i$
+!!{proof}s~$\pi_i$ ذات~!!{height}~$h_i=\pheight{\pi_i}$، وُجد
+!!a{proof}~$\pi$ للنتيجة لا يزيد~!!{height}ه~$\pheight{\pi}$ على أكبر
+$h_i$. وعلى وجه الخصوص، إذا كانت لها مقدمة واحدة~$S_1$، كفى أن يكون
+$\pheight{\pi}\le\pheight{\pi_1}$. وفي حالتي~$\RightR{\Weakening}$ و
+$\LeftR{\Weakening}$ يكون بالفعل
+$\pheight{\pi}=\pheight{\pi_1}$، لكن المساواة ليست لازمة.
+
+\begin{prop}\ollabel{prop:weak-G3c-adm}
+قاعدتا~$\RightR{\Weakening}$ و$\LeftR{\Weakening}$ في~\Log{G1c} مقبولتان
+مع حفظ~!!{height} في~\Log{G3c}.
+\end{prop}
+
+\begin{proof}
+  علينا أن نبيّن أنه إذا كان
+  $\Log{G3c}\Proves\Gamma\Sequent\Delta$ بـ~!!{proof}~$\pi$ ذي
+  !!{height}~$\pheight{\pi}=n$، وُجد~!!{proof}~$\pi'$ في~\Log{G3c}
+  لـ~$\Gamma\Sequent\Delta,!A$ وارتفاعه~$\pheight{\pi'}=n$. نبرهن ذلك
+  بالاستقراء في~$n$. إذا كان~$n=0$، كانت~$\pi$ بديهية: فإما أن تقع صيغة
+  ذرية~$!C$ في~$\Gamma$ و$\Delta$ معًا، وإما أن تقع~$\lfalse$ في~$\Gamma$.
+  وفي الحالتين تبقى~$\Gamma\Sequent\Delta,!A$ بديهية.
+
+  وإذا كان~$n=\pheight{\pi}>0$، كان لـ~!!{proof}~$\pi$ استدلال أخير.
+  نميّز الحالات بحسب القاعدة المستعملة. ولنورد مثالًا واحدًا: افترض أن
+  الاستدلال الأخير هو~$\RightR{\land}$. عندئذ
+  $\Delta=\Delta',!B\land !C$، وتكون~!!{proof}s الجزئية المباشرة
+  $\pi_1$ و$\pi_2$ للاستدلال الأخير ذات المتتاليتين النهائيتين
+  $\Gamma\Sequent\Delta',!B$ و$\Gamma\Sequent\Delta',!C$ على الترتيب.
+  أي إن~$\pi$ من الصورة:
+  \[
+  \AxiomC{}
+  \RightLabel{$\pi_1$}
+  \Deduce$\Gamma \fCenter \Delta', !B$
+  \AxiomC{}
+  \RightLabel{$\pi_2$}
+  \Deduce$\Gamma \fCenter \Delta', !C$
+  \RightLabel{\RightR{\land}}
+  \BinaryInf$\Gamma \fCenter \Delta', !B \land !C$
+  \DisplayProof
+  \]
+  ولدينا أيضًا
+  $n=\max(\pheight{\pi_1},\pheight{\pi_2})+1$. ولذلك يكون
+  $\pheight{\pi_1}<n$ و$\pheight{\pi_2}<n$، فينطبق فرض الاستقراء: توجد
+  !!{proof}s~$\pi_1'$ و$\pi_2'$ لـ~$\Gamma\Sequent\Delta',!B,!A$ و
+  $\Gamma\Sequent\Delta',!C,!A$. وبقاعدة~$\RightR{\land}$ نحصل على
+  !!a{proof}~$\pi'$ لـ~$\Gamma\Sequent\Delta',!B\land !C,!A$:
+  \[
+  \AxiomC{}
+  \RightLabel{$\pi_1'$}
+  \Deduce$\Gamma \fCenter \Delta', !B, !A$
+  \AxiomC{}
+  \RightLabel{$\pi_2'$}
+  \Deduce$\Gamma \fCenter \Delta', !C, !A$
+  \RightLabel{\RightR{\land}}
+  \BinaryInf$\Gamma \fCenter \Delta', !B \land !C, !A$
+  \DisplayProof
+  \]
+  ويكون
+  $\pheight{\pi'}=\max(\pheight{\pi_1'},\pheight{\pi_2'})+1
+  \le\max(\pheight{\pi_1},\pheight{\pi_2})+1=\pheight{\pi}$.
+  وتعالج قواعد~\Log{G3c} الأخرى بالطريقة نفسها: نطبق فرض الاستقراء على كل
+  برهان جزئي مباشر ثم نعيد تطبيق القاعدة الأخيرة. وينطبق البرهان المتماثل
+  على الإضعاف الأيسر بإضافة الصيغة إلى مقدم كل متتالية.
+\end{proof}
+
+النتيجة~\olref{prop:weak-G3c-adm} مفيدة جدًا. وسنضع ترميزًا لتطبيقها
+المتكرر: إذا كان~$\pi$~!!a{proof} لـ~$\Gamma\Sequent\Delta$، فإن
+$\pi[\Pi\Sequent\Lambda]$ نتيجة تطبيق مقبولية الإضعاف الأيسر بكل
+!!{formula}s في~$\Pi$، ومقبولية الإضعاف الأيمن بكل~!!{formula}s في
+$\Lambda$. وهو~!!a{proof} لـ~$\Gamma,\Pi\Sequent\Delta,\Lambda$.
+
+\end{document}

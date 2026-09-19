@@ -1,0 +1,54 @@
+% Part: second-order-logic
+% Chapter: metatheory
+% Section: loewenheim-skolem
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sol}{met}{lst}
+
+\olsection{فشل مبرهنة لوفنهايم--سكولم في منطق الرتبة الثانية}
+
+\begin{explain}
+مؤدى مبرهنة لوفنهايم--سكولم النزولية أن كل مجموعة من
+!!{sentence}s لها نموذج لانهائي، لها نموذج !!a{enumerable}.
+وهذه أيضًا من ثمرات الاكتمال؛ فبرهانه ينشئ لكل مجموعة متسقة
+من !!{sentence}s نموذجًا، ويكون هذا النموذج !!{enumerable}.
+وللمبرهنة صورة صعودية كذلك: إذا كان لمجموعة من !!{sentence}s
+نموذج !!a{denumerable}، كان لها نموذج !!a{nonenumerable}.
+ولا تصح الصورة النزولية ولا الصعودية في منطق الرتبة الثانية.
+\end{explain}
+
+\begin{thm}
+\ollabel{thm:sol-no-ls} لا تصح مبرهنة لوفنهايم--سكولم في
+منطق الرتبة الثانية؛ فبعض !!{sentence}s له نماذج لانهائية،
+وليس له نموذج !!{enumerable}.
+\end{thm}
+
+\begin{proof}
+عرفنا أن
+\[
+\fn{Count} \ident \lexists[{\OLId{latin-ordinary}{z}}][\lexists[{\OLId{latin-ordinary}{u}}][\lforall[{\OLId{latin-looped}{X}}][(({\OLId{latin-looped}{X}}({\OLId{latin-ordinary}{z}}) \land
+      \lforall[{\OLId{latin-ordinary}{x}}][({\OLId{latin-looped}{X}}({\OLId{latin-ordinary}{x}}) \lif {\OLId{latin-looped}{X}}({\OLId{latin-ordinary}{u}}({\OLId{latin-ordinary}{x}})))]) \lif \lforall[{\OLId{latin-ordinary}{x}}][{\OLId{latin-looped}{X}}({\OLId{latin-ordinary}{x}})])]]]
+\]
+تصدق في !!a{structure}~$\Struct{M}$ إذا وفقط إذا كان
+$\Domain{{\OLId{latin-looped}{M}}}$ !!{enumerable}. لذلك تصدق~$\lnot\fn{Count}$
+في~$\Struct{M}$ إذا وفقط إذا كان~$\Domain{{\OLId{latin-looped}{M}}}$ !!{nonenumerable}.
+ومثل هذه !!{structure}s موجود؛ إذ نأخذ مجموعة !!{nonenumerable}
+ونجعلها !!{domain}، كـ$\Pow{\Nat}$ أو~$\Real$.
+فتكون لـ$\lnot \fn{Count}$ نماذج لانهائية، ولا يكون لها
+نموذج !!{enumerable}.
+\end{proof}
+
+\begin{thm}
+لبعض !!{sentence}s نماذج !!{denumerable}، ولا نموذج لها
+!!{nonenumerable}.
+\end{thm}
+
+\begin{proof}
+إن~$\fn{Count} \land \fn{Inf}$ تصدق في~$\Nat$، ولا تصدق
+في !!{structure}~$\Struct{M}$ مجموعة حملها !!{nonenumerable}.
+\end{proof}
+
+\end{document}

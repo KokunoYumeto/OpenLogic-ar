@@ -1,0 +1,98 @@
+% Part: first-order-logic
+% Chapter: syntax-and-semantics
+% Section: main-operator
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{syn}{mai}
+
+\olsection{\printtoken{S}{main operator} لصيغة}
+
+\begin{explain}
+كثيرًا ما يكون من المفيد أن نتحدث عن آخر مؤثر استُخدم في بناء
+!!a{formula}~$!A$. ويسمى هذا المؤثر \emph{المؤثر الرئيس}
+لـ~$!A$. وهو، حدسيًا، المؤثر «الأبعد إلى الخارج» في~$!A$. فمثلًا،
+المؤثر الرئيس لـ~$\lnot !A$ هو $\lnot$، والمؤثر الرئيس
+لـ~$(!A \lor !B)$ هو $\lor$، وهكذا.
+\end{explain}
+
+
+\begin{defn}[!!^{main operator}]
+\ollabel{def:main-op}
+يُعرّف \emph{!!{main operator}} ل!!a{formula}~$!A$ كما يأتي:
+\begin{enumerate}
+\item \indcase*{!A}{!A}{ليس لـ~$\indfrm$ !!{main operator}.}
+
+\tagitem{prvNot}{\indcase{!A}{\lnot !B}{!!{main operator} لـ~$\indfrm$
+  هو~$\lnot$.}}{}
+
+\tagitem{prvAnd}{\indcase{!A}{(!B \land !C)}{!!{main operator}
+  لـ~$\indfrm$ هو~$\land$.}}{}
+
+\tagitem{prvOr}{\indcase{!A}{(!B \lor !C)}{!!{main operator}
+  لـ~$\indfrm$ هو~$\lor$.}}{}
+
+\tagitem{prvIf}{\indcase{!A}{(!B \lif !C)}{!!{main operator}
+  لـ~$\indfrm$ هو~$\lif$.}}{}
+
+\tagitem{prvIff}{\indcase{!A}{(!B \liff !C)}{!!{main operator}
+  لـ~$\indfrm$ هو~$\liff$.}}{}
+
+\tagitem{prvAll}{\indcase{!A}{\lforall[x][!B]}{!!{main operator}
+  لـ~$\indfrm$ هو~$\lforall$.}}{}
+
+\tagitem{prvEx}{\indcase{!A}{\lexists[x][!B]}{!!{main operator}
+  لـ~$\indfrm$ هو~$\lexists$.}}{}
+\end{enumerate}
+\end{defn}
+
+نقصد في كل حالة \emph{الورود} المعيّن المشار إليه ل!!{main
+operator} في الصيغة. فبما أن الصيغة $((!D \lif !E) \lif (!E \lif
+!D))$ من الصورة $(!B \lif !C)$، حيث $!B$ هي $(!D \lif !E)$ و$!C$
+هي $(!E \lif !D)$، فإن الورود الثاني لـ~$\lif$ هو !!{main
+operator}.
+
+\begin{explain}
+هذا تعريف \emph{عودي} لدالة ترسل كل !!{formula} غير ذرية إلى ورود
+!!{main operator} فيها. وبسبب الطريقة التي عُرّفت بها
+ال!!{formula}s استقرائيًا، تحقق كل !!{formula}~$!A$ إحدى حالات
+\olref{def:main-op}. وهذا يكفل وجود !!a{main operator} لكل
+!!{formula}~$!A$ غير ذرية. ولما كانت كل !!{formula} لا تحقق إلا
+واحدًا من هذه الشروط، وكانت ال!!{formula}s الأصغر التي بُنيت منها
+$!A$ معيّنة تعيينًا وحيدًا في كل حالة، فإن ورود !!{main operator}
+لـ~$!A$ وحيد، وبذلك نكون قد عرّفنا دالة.
+\end{explain}
+
+نسمي ال!!{formula}s بالأسماء الواردة في
+\olref{tab:main-op} بحسب الرمز الذي يكون !!{main operator}
+لها.\iftag{defNot,defOr,defAnd,defIf,defIff,defTrue,defFalse,defEx,defAll}
+{ لكن تذكّر أن المؤثرات المعرّفة لا ترد رسميًا في ال!!{formula}s؛
+فهي مجرد اختصارات، ولذلك لا يمكنها رسميًا أن تكون المؤثر الرئيس
+لصيغة. ومن ثم لا يلزم تناولها منفصلة في البراهين المتعلقة بجميع
+ال!!{formula}s.}
+
+\begin{table}[!h]
+\centering
+\begin{tabular}{c | c | c}
+!!^{main operator} & نوع ال!!{formula} & مثال\\
+\hline
+لا شيء & (!!{formula}) ذرية &
+\iftag{prvFalse}{$\lfalse$،}{}
+\iftag{prvTrue}{$\ltrue$،}{}
+$\Atom{R}{t_1, \dots, t_n}$،
+$\eq[t_1][t_2]$\\
+$\lnot$ & نفي & $\lnot !A$ \\
+$\land$ & عطف & $(!A \land !B)$ \\
+$\lor$ & فصل & $(!A \lor !B)$ \\
+$\lif$ & !!{conditional} & $(!A \lif !B)$ \\
+$\liff$ & !!{biconditional} & $(!A \liff !B)$ \\
+$\lforall[][]$ & (!!{formula}) كلية & $\lforall[x][!A]$ \\
+$\lexists[][]$ & (!!{formula}) وجودية & $\lexists[x][!A]$
+\end{tabular}
+\caption{المؤثر الرئيس وأسماء ال!!{formula}s}
+\ollabel{tab:main-op}
+\end{table}
+
+\end{document}

@@ -1,0 +1,324 @@
+% Part: proof-theory
+% Chapter: normalization
+% Section: translations
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{nor}{tr}
+
+\olsection{في النقل بين \usetoken{P}{proof} السوية في~\Log{N2i} و\Log{G2i}}
+
+للـ!!^{proof}s في~\Log{N2i} نقل إلى~!!{proof}s في~\Log{G2i}، وللثانية
+نقل إلى الأولى. وأول ما يظهر أن نقل~!!{proof}s الخالية من القطع في
+\Log{G2i} لا ينتج إلا~!!{proof}s سوية في~\Log{N2i}.
+
+وقبل صياغة النتيجة نثبت اصطلاحًا يصل مقدمات المتتاليات في~\Log{N2i}
+بمقدماتها في~\Log{G2i}. فنقول إن مجموعة~${\OLId{greek-variable}{Gamma}}'$ من~!!{formula}s
+الموسومة \emph{تقابل} المجموعة المتعددة~${\OLId{greek-variable}{Gamma}}$ من~!!{formula}s غير
+الموسومة، إذا كان، لكل~!!{formula}~$!A$، عدد~!!{element}s~${\OLId{greek-variable}{Gamma}}'$ التي
+على الصورة~${\OLId{latin-ordinary}{x}}:!A$ غير زائد على تعددية~$!A$ في~${\OLId{greek-variable}{Gamma}}$.
+
+\begin{cor}
+إذا كان $\Log{G2i} \Proves {\OLId{greek-variable}{Gamma}} \Sequent {\OLId{greek-variable}{Delta}}$، فثمة
+!!{proof} سوي~$\delta$ في~\Log{N2i} للمتتالية~${\OLId{greek-variable}{Gamma}}' \Sequent !C$، حيث
+$!C\ident\lfalse$ إذا كانت~${\OLId{greek-variable}{Delta}}$ خالية، و$!C\ident !A$ إذا كانت
+${\OLId{greek-variable}{Delta}}=\{!A\}$، وحيث تقابل مجموعة~${\OLId{greek-variable}{Gamma}}'$ من~!!{formula}s الموسومة
+المجموعة المتعددة~${\OLId{greek-variable}{Gamma}}$؛ أي إنه، لكل~!!{formula}~$!A$، يكون عدد
+!!{element}s المجموعة~${\OLId{greek-variable}{Gamma}}'$ التي صورتها~${\OLId{latin-ordinary}{x}}:!A$ أصغر من أو يساوي
+تعددية~$!A$ (أي عدد نسخ~$!A$) في~${\OLId{greek-variable}{Gamma}}$.
+\end{cor}
+
+\begin{proof}
+وبيانه في فحص برهان~\olref[nat][tgi]{prop:G2i-to-N2i}: فإننا نلحق قواعد
+!!{introduction} بنهايات~!!{proof}s، ولا نضع قواعد~!!{elimination} إلا
+في أعالي~!!{proof}s؛ فلا ندخل قط قاعدة~!!{introduction} فوق
+!!a{elimination}.
+\end{proof}
+
+إلا أن نقل قاعدة~\Cut{} المبين في~\olref[nat][tgi]{prop:G2i-to-N2i}
+قد يحدث قطوعًا في~!!{proof}~$\delta$ من~\Log{N2i}. فإذا كان آخر~!!{proof}
+في~\Log{G2i} بـ~\Cut{} وكان~!!{proof}sه الجزئيان المباشران~$\pi_{\OLMathNumeral{1}}$ و$\pi_{\OLMathNumeral{2}}$
+للمتتاليتين~${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}} \Sequent !A$ و
+$!A,{\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{2}} \Sequent {\OLId{greek-variable}{Delta}}_{\OLMathNumeral{2}}$ على الترتيب، فإننا نوصل ترجمة~$\pi_{\OLMathNumeral{1}}$،
+وهي~$\delta_{\OLMathNumeral{1}}$، بمسلّمات~${\OLId{latin-ordinary}{x}}:!A \Sequent !A$ الواقعة في ترجمة~$\pi_{\OLMathNumeral{2}}$،
+وهي~$\delta_{\OLMathNumeral{2}}$. فإذا انتهى~$\delta_{\OLMathNumeral{1}}$ بقاعدة~!!a{introduction} صيغتها
+الرئيسة~!!{formula}~$!A$، وكانت المسلّمة~${\OLId{latin-ordinary}{x}}:!A \Sequent !A$ في~$\delta_{\OLMathNumeral{2}}$
+المقدمة الكبرى لقاعدة~!!a{elimination}، نتج عن ذلك قطع في~$\delta$.
+
+وفي الجهة الأخرى تنقل~!!{proof}s في~\Log{N2i} إلى~!!{proof}s في
+\Log{G2i}. ففي برهان~\olref[nat][tni]{prop:N2-to-G2} ينشأ عن نقل~\Elim{\land} و
+\Elim{\lif} و\Elim{\lnot} و\Elim{\lforall} استدلالات~\Cut{} في
+!!{proof}~\Log{G2i} الناتج. لكن ذلك يجتنب متى كان~!!{proof}~\Log{N2i}
+الذي نبدأ به سويًا.
+
+ونسمي قائمة~${\OLId{latin-looped}{S}}_{\OLMathNumeral{1}}$، \dots، ${\OLId{latin-looped}{S}}_{\OLId{latin-ordinary}{n}}$ من وقائع المتتاليات في~!!{proof}
+$\delta$ من~\Log{N2i} \emph{فرعًا} إذا كانت~${\OLId{latin-looped}{S}}_{\OLMathNumeral{1}}$ مسلّمة، وكان~${\OLId{latin-looped}{S}}_{{\OLId{latin-ordinary}{i}}+{\OLMathNumeral{1}}}$
+نتيجة الاستدلال متى كان~${\OLId{latin-looped}{S}}_{\OLId{latin-ordinary}{i}}$ مقدمته الكبرى، ولم تكن العقدة الأخيرة
+${\OLId{latin-looped}{S}}_{\OLId{latin-ordinary}{n}}$ مقدمة كبرى لاستدلال. فالفرع يتعقب المتتاليات هبوطًا في~$\delta$
+ابتداء من المسلّمات، ويقف عند المقدمات الصغرى لقواعد~!!{elimination}.
+ونسمي \emph{الفرع الرئيس} لـ~$\delta$ كل فرع تكون~${\OLId{latin-looped}{S}}_{\OLId{latin-ordinary}{n}}$ فيه المتتالية
+النهائية. ولا يخلو~!!{proof}~$\delta$ من فرع رئيس واحد على الأقل؛ لأن
+لكل قاعدة مقدمة كبرى، ولا تكون لها مقدمتان كبريان إلا~\Intro{\land}.
+
+\begin{prop}\ollabel{prop:normal-N2i-to-G2i}
+إذا كان~$\delta$ !!{proof} سويًا في~$\Log{N2i}$ للمتتالية
+${\OLId{greek-variable}{Gamma}} \Sequent !A$، فثمة~!!{proof}~$\pi$ خالٍ من القطع، وهو
+!!{proof} في~$\Log{G2i}$
+للمتتالية~${\OLId{greek-variable}{Gamma}}' \Sequent {\OLId{greek-variable}{Delta}}$، حيث~${\OLId{greek-variable}{Gamma}}'$ هي المجموعة المتعددة
+من~!!{formula}s الناتجة من~${\OLId{greek-variable}{Gamma}}$ بحذف الوسوم، و
+${\OLId{greek-variable}{Delta}}=\{!A\}$ إذا لم تكن~$!A$ هي~$\lfalse$، و
+${\OLId{greek-variable}{Delta}}=\emptyset$ إذا كانت إياها.
+\end{prop}
+
+\begin{proof}
+ونسلك هذه المرة الاستقراء على عدد الاستدلالات في~!!{proof}~$\delta$
+للمتتالية~${\OLId{greek-variable}{Gamma}} \Sequent !A$. فإن خلا~$\delta$ من الاستدلال كان
+المسلّمة~${\OLId{latin-ordinary}{x}}:!A \Sequent !A$، وأخذنا~$\pi$ المسلّمة المقابلة
+$!A \Sequent !A$، أو~$\lfalse \Sequent \ $ إذا كان
+$!A\ident\lfalse$.
+
+وإذا كان آخر~$\delta$ قاعدة استدلال، قسمنا إلى الحالات الآتية:
+\begin{enumerate}
+  \item إذا كانت~${\OLId{latin-looped}{R}}$ قاعدة~!!a{introduction} أو~\FalseInt، جرت الترجمة
+  كما في برهان~\olref[nat][tni]{prop:N2-to-G2} تمامًا، ولم تحتج إلى~\Cut.
+
+  \item إذا كانت آخر قاعدة~${\OLId{latin-looped}{R}}$ في~$\delta$ قاعدة~!!a{elimination}، فلاحظ
+  ما يأتي:
+  \begin{enumerate}
+    \item لا يمر فرع رئيس في~$\delta$ بأي قواعد~!!{introduction}، وإلا
+    لكانت قاعدة~!!a{introduction} أو~\FalseInt{} متبوعةً بقاعدة
+    !!a{elimination} على الفرع الرئيس، ولما كان~$\delta$ سويًا.
+    \item إذ إن الفروع الرئيسة في~$\delta$ لا تمر بقواعد~!!{introduction}،
+    فلا يوجد إلا فرع رئيس واحد. (لقاعدة~\Intro{\land} وحدها مقدمتان
+    كبريان، ولذلك يجب أن تمر الفروع الرئيسة المتعددة بمقدمتي قاعدة من هذا
+    النوع.)
+    \item إذا اشتمل الفرع الرئيس على المقدمة الكبرى لـ~\Elim{\lor} أو
+    \Elim{\lexists}، فلا توجد إلا قاعدة واحدة من هذا النوع وتكون الأخيرة،
+    أي~${\OLId{latin-looped}{R}}$. (وإلا لاحتوى الفرع الرئيس قاعدة~\Elim{\lor} أو
+    \Elim{\lexists} تكون نتيجتها مقدمةً كبرى لقاعدة~!!a{elimination}، ولما
+    كان البرهان سويًا، إذ يمكن عندئذ تطبيق تحويل تبديل.)
+    \item لا تفرّغ أي~!!{elimination} غير~\Elim{\lor} و\Elim{\lexists}
+    فروضًا، أي لا تغيّر السياق الأيسر للمتتاليات. ولا تفرّغ هاتان القاعدتان
+    إلا فروضًا فوق مقدمة صغرى، أي لا تغيّران السياق الأيسر إلا لمقدمتيهما
+    الصغريين. وبعبارة أخرى، إذا كان سياق متتالية~${\OLId{latin-looped}{S}}_{\OLId{latin-ordinary}{i}}$ على الفرع الرئيس
+    لـ~$\delta$ هو~${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}}$، فإن سياق النتيجة~${\OLId{latin-looped}{S}}_{{\OLId{latin-ordinary}{i}}+{\OLMathNumeral{1}}}$ للاستدلال الذي
+    تكون~${\OLId{latin-looped}{S}}_{\OLId{latin-ordinary}{i}}$ مقدمته الكبرى هو سياق حديث~${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{2}} \supseteq {\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}}$.
+    \item ونتيجةً لذلك، إذا كانت~${\OLId{latin-ordinary}{x}}:!C \Sequent !C$ المتتالية العليا
+    ${\OLId{latin-looped}{S}}_{\OLMathNumeral{1}}$ في الفرع الرئيس، فإن~${\OLId{latin-ordinary}{x}}:!C \in {\OLId{greek-variable}{Gamma}}$.
+  \end{enumerate}
+  والآن نميّز الحالات بحسب صورة~$!C$. وبما أن كل~${\OLId{latin-looped}{S}}_{\OLId{latin-ordinary}{i}}$ في الفرع الرئيس
+  مقدمة كبرى لقاعدة~!!a{elimination}، ينطبق ذلك كذلك على
+  ${\OLId{latin-ordinary}{x}}:!C \Sequent !C$.
+
+  \item إذا كان $!C \ident !D \land !E$، كان~$\delta$ بالصورة:
+  \[
+  \Axiom${\OLId{latin-ordinary}{x}}:!D \land !E \fCenter !D \land !E$
+  \RightLabel{\Elim{\land}[{\OLMathNumeral{1}}]}
+  \UnaryInf${\OLId{latin-ordinary}{x}}:!D \land !E \fCenter !D$
+  \Deduce${\OLId{latin-ordinary}{x}}:!D \land !E, {\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}} \fCenter !A$
+  \DisplayProof
+  \]
+  لا يمر الفرع الرئيس، الذي يشتمل على~${\OLId{latin-ordinary}{x}}:!D \land !E \Sequent !D$، بنتيجة
+  قاعدة~\Intro{\lif} أو~\Intro{\lnot}، ولا بمقدمة صغرى لـ~\Elim{\lor} أو
+  \Elim{\lexists}؛ ومن ثم تبقى~!!{formula}s السياق في
+  ${\OLId{latin-ordinary}{x}}:!D \land !E$ بلا تغيير على طول الفرع الرئيس. وهذا يفسر وجوب احتواء
+  سياق المتتالية النهائية على~${\OLId{latin-ordinary}{x}}:!D \land !E$. وفوق ذلك يمكننا تحويل
+  !!{proof}~$\delta$ إلى~!!{proof}~$\delta_{\OLMathNumeral{1}}$ باستبدال الـ~!!{proof}
+  الجزئي المنتهي بـ~\Elim{\land} بالمسلمة~${\OLId{latin-ordinary}{x}}:!D \Sequent !D$، واستبدال
+  ${\OLId{latin-ordinary}{x}}:!D \land !E$ بـ~${\OLId{latin-ordinary}{x}}:!D$ في سياق كل متتالية على الفرع الرئيس؛ أي نحوّل
+  \[
+  \bottomAlignProof
+  \Axiom${\OLId{latin-ordinary}{x}}:!D \land !E \fCenter !D \land !E$
+  \RightLabel{\Elim{\land}[{\OLMathNumeral{1}}]}
+  \UnaryInf${\OLId{latin-ordinary}{x}}:!D \land !E \fCenter !D$
+  \Deduce${\OLId{latin-ordinary}{x}}:!D \land !E, {\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}} \fCenter !A$
+  \DisplayProof
+  \quad\text{إلى}\quad
+  \bottomAlignProof
+  \Axiom${\OLId{latin-ordinary}{x}}:!D \fCenter !D$
+  \Deduce${\OLId{latin-ordinary}{x}}:!D, {\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}} \fCenter !A$
+  \DisplayProof
+  \]
+  ينطبق فرض الاستقراء على~$\delta_{\OLMathNumeral{1}}$، لأن عدد الاستدلالات في~$\delta$
+  يساوي عدد الاستدلالات في~$\delta_{\OLMathNumeral{1}}$ زائد~${\OLMathNumeral{1}}$.
+
+  وبفرض الاستقراء يوجد~!!{proof}~$\pi_{\OLMathNumeral{1}}$ في~\Log{G2i} للمتتالية
+  $!D,{\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}}' \Sequent {\OLId{greek-variable}{Delta}}$. ونحصل على~!!{proof}~$\pi$ بتطبيق
+  \LeftR{\land}، مع إبقاء الطرف الأيمن~${\OLId{greek-variable}{Delta}}$ نفسه:
+  \[
+  \AxiomC{}
+  \RightLabel{$\pi_{\OLMathNumeral{1}}$}
+  \Deduce$!D, {\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}}' \fCenter {\OLId{greek-variable}{Delta}}$
+  \RightLabel{\LeftR{\land}}
+  \UnaryInf$!D \land !E, {\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}}' \fCenter {\OLId{greek-variable}{Delta}}$
+  \DisplayProof
+  \]
+  وإذا كانت~${\OLId{greek-variable}{Delta}}$ خالية فلا نطبّق إضعافًا يمينيًا؛ إذ يجب أن تبقى خالية.
+
+  \item إذا كان $!C \ident !D \lor !E$، فلا بد أن يكون المقدمة الكبرى لـ
+  \Elim{\lor}، ولا بد أن يكون هذا الاستدلال آخر استدلال~${\OLId{latin-looped}{R}}$ على الفرع
+  الرئيس. أي إن~$\delta$ بالصورة:
+  \[
+  \Axiom${\OLId{latin-ordinary}{x}}:!D \lor !E \fCenter !D \lor !E$
+  \AxiomC{}
+  \RightLabel{$\delta_{\OLMathNumeral{1}}$}
+  \Deduce${\OLId{latin-ordinary}{y}}:!D, {\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}} \fCenter!A$
+  \AxiomC{}
+  \RightLabel{$\delta_{\OLMathNumeral{2}}$}
+  \Deduce${\OLId{latin-ordinary}{z}}:!E, {\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{2}} \fCenter !A$
+  \RightLabel{\Elim{\lor}}
+  \TrinaryInf${\OLId{latin-ordinary}{x}}:!D \lor !E, {\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}}, {\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{2}} \fCenter !A$
+  \DisplayProof
+  \]
+  ينطبق فرض الاستقراء على~!!{proof}s~$\delta_{\OLMathNumeral{1}}$ و$\delta_{\OLMathNumeral{2}}$؛ فنحصل على
+  !!{proof}s~$\pi_{\OLMathNumeral{1}}$ و$\pi_{\OLMathNumeral{2}}$ في~\Log{G2i} للمتتاليتين
+  $!D,{\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}}' \Sequent {\OLId{greek-variable}{Delta}}$ و$!E,{\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{2}}' \Sequent {\OLId{greek-variable}{Delta}}$.
+  ونطبّق~$\LeftR{\lor}$ للحصول على~$\pi$:
+  \[
+  \AxiomC{}
+  \RightLabel{$\pi_{\OLMathNumeral{1}}$}
+  \Deduce$!D, {\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}}' \fCenter {\OLId{greek-variable}{Delta}}$
+  \AxiomC{}
+  \RightLabel{$\pi_{\OLMathNumeral{2}}$}
+  \Deduce$!E, {\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{2}}' \fCenter {\OLId{greek-variable}{Delta}}$
+  \RightLabel{\LeftR{\lor}}
+  \BinaryInf$!D \lor !E, {\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}}', {\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{2}}' \fCenter {\OLId{greek-variable}{Delta}}$
+  \DisplayProof
+  \]
+  وإذا لم تفرّغ~$\Elim{\lor}$ الفرض~${\OLId{latin-ordinary}{y}}:!D$ أو~${\OLId{latin-ordinary}{z}}:!E$ (أي إذا لم يكن
+  موجودًا في سياق المقدمة الصغرى)، أضفنا ما يلزم فقط من تطبيقات
+  \LeftR{\Weakening}. ولا نضيف إضعافًا يمينيًا عندما تكون~${\OLId{greek-variable}{Delta}}$ خالية؛
+  فمثلًا، إذا غاب الفرضان:
+  \[
+  \AxiomC{}
+  \RightLabel{$\pi_{\OLMathNumeral{1}}$}
+  \Deduce${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}}' \fCenter {\OLId{greek-variable}{Delta}}$
+  \RightLabel{\LeftR{\Weakening}}
+  \UnaryInf$!D, {\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}}' \fCenter {\OLId{greek-variable}{Delta}}$
+  \AxiomC{}
+  \RightLabel{$\pi_{\OLMathNumeral{2}}$}
+  \Deduce${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{2}}' \fCenter {\OLId{greek-variable}{Delta}}$
+  \RightLabel{\LeftR{\Weakening}}
+  \UnaryInf$!E, {\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{2}}' \fCenter {\OLId{greek-variable}{Delta}}$
+  \RightLabel{\LeftR{\lor}}
+  \BinaryInf$!D \lor !E, {\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}}', {\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{2}}' \fCenter {\OLId{greek-variable}{Delta}}$
+  \DisplayProof
+  \]
+
+  وفي كلتا الصورتين قد يحتوي المقدم المعروض نسخًا زائدة إذا وقع الفرض
+  الموسوم نفسه في أكثر من واحد من السياقات
+  $\{{\OLId{latin-ordinary}{x}}:!D \lor !E\}$ و${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}}$ و${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{2}}$. فنلحق ما يلزم من
+  تطبيقات~\LeftR{\Contraction}، ولا نحذف نسخة ناشئة من فرض موسوم آخر وإن
+  اتفقت الصيغتان، حتى تصير المتتالية النهائية بالضبط
+  \[
+  {\OLId{greek-variable}{Gamma}}' \Sequent {\OLId{greek-variable}{Delta}},
+  \]
+  حيث~${\OLId{greek-variable}{Gamma}}'$ هي المجموعة المتعددة الناتجة من سياق نتيجة~\Elim{\lor}
+  بحذف الوسوم.
+
+  \item إذا كان $!C \ident !D \lif !E$، كان~$\delta$ بالصورة:
+  \[
+  \Axiom${\OLId{latin-ordinary}{x}}:!D \lif !E \fCenter !D \lif !E$
+  \AxiomC{}
+  \RightLabel{$\delta_{\OLMathNumeral{1}}$}
+  \Deduce${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}} \fCenter!D$
+  \RightLabel{\Elim{\lif}}
+  \BinaryInf${\OLId{latin-ordinary}{x}}:!D \lif !E, {\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}} \fCenter !E$
+  \RightLabel{$\delta_{\OLMathNumeral{2}}$}
+  \Deduce${\OLId{latin-ordinary}{x}}:!D \lif !E, {\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}}, {\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{2}} \fCenter !A$
+  \DisplayProof
+  \]
+  لاحظ هنا أن الفرع الرئيس، الذي يشتمل على
+  ${\OLId{latin-ordinary}{x}}:!D \lif !E,{\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}} \Sequent !E$، لا يمر بنتيجة~\Intro{\lif} أو
+  \Intro{\lnot} ولا بمقدمة صغرى لـ~\Elim{\lor} أو~\Elim{\lexists}؛ ولذلك
+  تبقى~!!{formula}s السياق في~${\OLId{latin-ordinary}{x}}:!D \lif !E,{\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}}$ بلا تغيير على طول
+  الفرع الرئيس. وهذا يفسر وجوب احتواء سياق المتتالية النهائية على
+  ${\OLId{latin-ordinary}{x}}:!D \lif !E,{\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}}$. وفوق ذلك يمكننا تحويل قطعة~!!{proof}~$\delta_{\OLMathNumeral{2}}$
+  إلى~!!{proof} صحيح~$\delta_{\OLMathNumeral{2}}'$ باستبدال الـ~!!{proof} الجزئي المنتهي
+  بـ~\Elim{\lif} بالمسلمة~${\OLId{latin-ordinary}{x}}:!E \Sequent !E$، وباستبدال
+  ${\OLId{latin-ordinary}{x}}:!D \lif !E,{\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}}$ في سياق كل متتالية على الفرع الرئيس بـ~${\OLId{latin-ordinary}{x}}:!E$؛
+  أي نحوّل
+  \[
+  \bottomAlignProof
+  \Axiom${\OLId{latin-ordinary}{x}}:!D \lif !E, {\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}} \fCenter !E$
+  \RightLabel{$\delta_{\OLMathNumeral{2}}$}
+  \Deduce${\OLId{latin-ordinary}{x}}:!D \lif !E, {\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}}, {\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{2}} \fCenter !A$
+  \DisplayProof
+  \quad\text{إلى}\quad
+  \bottomAlignProof
+  \Axiom${\OLId{latin-ordinary}{x}}:!E \fCenter !E$
+  \RightLabel{$\delta_{\OLMathNumeral{2}}'$}
+  \Deduce${\OLId{latin-ordinary}{x}}:!E, {\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{2}} \fCenter !A$
+  \DisplayProof
+  \]
+  ينطبق فرض الاستقراء على~$\delta_{\OLMathNumeral{1}}$ و$\delta_{\OLMathNumeral{2}}'$، لأن عدد الاستدلالات في
+  $\delta$ هو مجموع عددي الاستدلالات في~$\delta_{\OLMathNumeral{1}}$ و$\delta_{\OLMathNumeral{2}}$ زائد~${\OLMathNumeral{1}}$
+  لاستدلال~\Elim{\lif} في بداية الفرع الرئيس. وإذا كان هذا الاستدلال نفسه
+  آخر استدلال~${\OLId{latin-looped}{R}}$ في~$\delta$، احتوى~$\delta_{\OLMathNumeral{2}}$ صفرًا من الاستدلالات.
+
+  وبفرض الاستقراء توجد~!!{proof}s~$\pi_{\OLMathNumeral{1}}$ و$\pi_{\OLMathNumeral{2}}$ في~\Log{G2i}، الأولى
+  للمتتالية~${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}}' \Sequent !D$ إذا كان~$!D\not\ident\lfalse$، أو
+  للطرف الأيمن الخالي إذا كان~$!D\ident\lfalse$، والثانية للمتتالية
+  $!E,{\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{2}}' \Sequent {\OLId{greek-variable}{Delta}}$. ونحصل على~!!{proof}~$\pi$ بتطبيق
+  \LeftR{\lif}:
+  \[
+  \AxiomC{}
+  \RightLabel{$\pi_{\OLMathNumeral{1}}$}
+  \Deduce${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}}' \fCenter !D$
+  \AxiomC{}
+  \RightLabel{$\pi_{\OLMathNumeral{2}}$}
+  \Deduce$!E, {\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{2}}' \fCenter {\OLId{greek-variable}{Delta}}$
+  \RightLabel{\LeftR{\lif}}
+  \BinaryInf$!D \lif !E, {\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}}', {\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{2}}' \fCenter {\OLId{greek-variable}{Delta}}$
+  \DisplayProof
+  \]
+  وإذا كان~$!D\ident\lfalse$ وحده، نطبّق~\RightR{\Weakening} على~$\pi_{\OLMathNumeral{1}}$
+  لتوفير المقدمة الأولى لـ~\LeftR{\lif}. ولا نطبّق إضعافًا يمينيًا على
+  $\pi_{\OLMathNumeral{2}}$ أو على النتيجة إذا كانت~$!A\ident\lfalse$؛ فتبقى~${\OLId{greek-variable}{Delta}}$ خالية:
+  \[
+  \AxiomC{}
+  \RightLabel{$\pi_{\OLMathNumeral{1}}$}
+  \Deduce${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}}' \fCenter $
+  \RightLabel{\RightR{\Weakening}}
+  \UnaryInf${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}}' \fCenter !D$
+  \AxiomC{}
+  \RightLabel{$\pi_{\OLMathNumeral{2}}$}
+  \Deduce$!E, {\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{2}}' \fCenter {\OLId{greek-variable}{Delta}}$
+  \RightLabel{\LeftR{\lif}}
+  \BinaryInf$!D \lif !E, {\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}}', {\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{2}}' \fCenter {\OLId{greek-variable}{Delta}}$
+  \DisplayProof
+  \]
+
+  وهنا أيضًا قد يحتوي المقدم المعروض نسخًا زائدة إذا وقع الفرض الموسوم
+  نفسه في أكثر من واحد من السياقات
+  $\{{\OLId{latin-ordinary}{x}}:!D \lif !E\}$ و${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}}$ و${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{2}}$. فنلحق ما يلزم من
+  تطبيقات~\LeftR{\Contraction}، مع إبقاء النسخ الناشئة من فروض مختلفة
+  الوسوم وإن اتفقت صيغها، حتى تصير المتتالية النهائية بالضبط
+  \[
+  {\OLId{greek-variable}{Gamma}}' \Sequent {\OLId{greek-variable}{Delta}}.
+  \]
+
+\end{enumerate}
+وعلى هذا القياس تعالج الحالات الباقية، وقد تركت تمارين. ولا تتناول الحجة
+الحالة الكلاسيكية~\FalseCl؛ فمن ثم تختص المبرهنة بـ\Log{N2i} و\Log{G2i}.
+\end{proof}
+
+\begin{cor}
+كل~!!{formula} يقع في~!!{proof} سوي من~\Log{N2i} هو~!!{formula} فرعية
+لإحدى~!!{formula}s في المتتالية النهائية. وكل صيغة تقع في برهان سوي من
+\Log{N1i} هي صيغة فرعية للصيغة النهائية أو لأحد الفروض المفتوحة.
+\end{cor}
+
+\begin{proof}
+  من~\olref{prop:normal-N2i-to-G2i} ينقل كل~!!{proof} سوي في~\Log{N2i}
+  إلى~!!{proof} خال من القطع في~\Log{G2i}. وبفحص البرهان نجد أن كل
+  !!{formula} واقعة في~!!{proof}~\Log{N2i} واقعة أيضًا في~!!{proof}
+  \Log{G2i}. ولما كان~\Log{G2i} خاليًا من قاعدة~\Cut{}، ثبتت له خاصية
+  !!{formula} الفرعية. وأما نقل~\Log{N1i} إلى~\Log{N2i} فيحفظ السوية،
+  ويثبت الفروض المفتوحة في مقدم المتتالية النهائية؛ فتنتج الحالة الثانية
+  من الأولى.
+\end{proof}
+
+\end{document}

@@ -1,0 +1,57 @@
+% Part: incompleteness
+% Chapter: representability-in-q
+% Section: prim-rec
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{req}{pri}
+\olsection{محاكاة العودية البدائية}
+
+وبدالة بيتا يتبين كيف يقوم التصغير المنتظم مقام التعريف بالعودية
+البدائية. لتكن الدالتان $f(\vec x)$ و$g(\vec x,y,z)$ معطاتين.
+فالدالة~$h(\vec x,y)$ المبنية من $f$ و$g$ بالعودية البدائية تحقق:
+\begin{align*}
+h(\vec x, 0) & =  f(\vec x) \\
+h(\vec x, y+1) & =  g(\vec x, y, h(\vec x, y)).
+\end{align*}
+والمطلوب أن نعرّف $h$ من $f$ و$g$ بالتركيب والتصغير المنتظم وحدهما.
+ولنا في ذلك الدوال الأساسية وما تعرّف منها بالعمليتين نفسيهما،
+ومن جملتها~$\beta$.
+
+\begin{lem}
+\ollabel{lem:prim-rec}
+كل دالة $h$ تعرّف من $f$ و$g$ بالعودية البدائية يمكن تعريفها من
+$f$ و$g$ والدوال $\Zero$ و$\Succ$ و$\Proj{n}{i}$ و$\Add$
+و$\Mult$ و$\Char{=}$، بالتركيب والتصغير المنتظم.
+\end{lem}
+
+\begin{proof}
+نبدأ بدالة مساعدة $\hat h(\vec x,y)$، نجعل قيمتها أصغر عدد~$d$
+يكون $d$ فيه شفرةً لمتتالية تستوفي الشرطين:
+\begin{enumerate}
+\item $(d)_0=f(\vec x)$،
+\item ولكل $i<y$ تصدق $(d)_{i+1}=g(\vec x,i,(d)_i)$،
+\end{enumerate}
+والكتابة $(d)_i$ هنا اختصار لـ$\beta(d,i)$.
+فالمحصّل أن $\hat h$ تعيد شفرة المتتالية
+$\tuple{h(\vec x,0),h(\vec x,1),\dots,h(\vec x,y)}$.
+ومن ثم نكتب $\hat h$ هكذا:
+\[
+\hat h(\vec x, y) = \umin{d}{(\beta(d,0) = f(\vec x) \land \bforall{i <
+  y}{\beta(d,i+1) = g(\vec x, i,\beta(d,i)})}.
+\]
+فليس في هذا التعريف استعمال للعودية البدائية؛ وإنما فيه تصغير،
+وانتظام ما يجري عليه التصغير مضمون بلمة دالة بيتا
+\olref[bet]{lem:beta}.
+
+وبعد هذا التعريف تكون
+\[
+h(\vec x, y) = \beta(\hat h(\vec x, y), y),
+\]
+فيتم تعريف $h$ من الدالتين المعطاتين والدوال الأساسية، ولا يستعمل فيه
+إلا التركيب والتصغير المنتظم.
+\end{proof}
+
+\end{document}

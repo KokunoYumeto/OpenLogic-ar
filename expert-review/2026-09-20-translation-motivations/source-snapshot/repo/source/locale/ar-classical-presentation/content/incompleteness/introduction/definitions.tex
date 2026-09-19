@@ -1,0 +1,303 @@
+% Part: incompleteness
+% Chapter: introduction
+% Section: definitions
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{int}{def}
+
+\olsection{تعريفات}
+
+أول ما يقتضيه مشروع هيلبرت، في صوغ الرياضيات صوريًا وإثبات
+اتساقها وتمامها، تعيين لغة وإطار منطقي وبديهيات. فلنفرض هنا
+أن الرياضيات تقبل الصوغ بلغة من الرتبة الأولى؛ أي إن
+ال!!{constant}s وال!!{function}s وال!!{predicate}s المناسبة،
+مع الروابط والكمّات، تكفي للتعبير عن قضاياها. ومن المتفق عليه
+على نطاق واسع أن لغة نظرية المجموعات تفي بذلك، وليس فيها
+من الرموز غير المنطقية إلا $\in$. وقد تستبعد لأول وهلة
+أن تتسع لغة بهذا الإيجاز لكل ذلك؛ وإثبات أنها تستوعب
+الرياضيات كلها تقريبًا ثمرة عمل كثير. ولنقصر النظر الآن،
+تيسيرًا، على الحساب: علم الأعداد الطبيعية~$\Nat$.
+واللغة الملائمة له هي~$\Lang L_{\OLId{latin-looped}{A}}$. وفي $\Lang L_{\OLId{latin-looped}{A}}$
+!!{predicate} ثنائي واحد $<$، و!!{constant} واحد
+$\Obj 0$، و!!{function} أحادي واحد $\prime$،
+و!!{function}s ثنائيتان $+$ و~$\times$.
+
+\begin{defn}
+مجموعة ال!!{sentence}s~${\OLId{greek-variable}{Gamma}}$ تسمى \emph{نظرية} متى
+كانت مغلقة تحت الاستلزام؛ أي متى تحققت المساواة
+${\OLId{greek-variable}{Gamma}} = \Setabs{!A}{{\OLId{greek-variable}{Gamma}} \Entails !A}$.
+\end{defn}
+
+ولتعيين النظريات طريقان يسيران. أولهما أن نجمع
+ال!!{sentence}s الصادقة في !!{structure} معينة.
+فمن أمثلته ال!!{structure} للغة $\Lang L_{\OLId{latin-looped}{A}}$ التي
+!!{domain}ها~$\Nat$، وتؤوّل فيها الرموز غير المنطقية
+بتفسيراتها المعتادة.
+
+\begin{defn}\ollabel{def:standard-model}
+نسمي \emph{النموذج القياسي للحساب} ال!!{structure}~$\Struct N$
+التي نعيّنها هكذا:
+\begin{enumerate}
+\item $\Domain {\OLId{latin-looped}{N}} = \Nat$
+\item $\Assign{\Obj 0}{{\OLId{latin-looped}{N}}} = {\OLMathNumeral{0}}$
+\item $\Assign{\Obj \prime}{{\OLId{latin-looped}{N}}}({\OLId{latin-ordinary}{n}}) = {\OLId{latin-ordinary}{n}} + {\OLMathNumeral{1}}$ لكل ${\OLId{latin-ordinary}{n}} \in \Nat$
+\item $\Assign{\Obj +}{{\OLId{latin-looped}{N}}}({\OLId{latin-ordinary}{n}}, {\OLId{latin-ordinary}{m}}) = {\OLId{latin-ordinary}{n}} + {\OLId{latin-ordinary}{m}}$ لكل ${\OLId{latin-ordinary}{n}}, {\OLId{latin-ordinary}{m}} \in \Nat$
+\item $\Assign{\Obj \times}{{\OLId{latin-looped}{N}}}({\OLId{latin-ordinary}{n}}, {\OLId{latin-ordinary}{m}}) = {\OLId{latin-ordinary}{n}}\cdot {\OLId{latin-ordinary}{m}}$ لكل ${\OLId{latin-ordinary}{n}}, {\OLId{latin-ordinary}{m}} \in \Nat$
+\item $\Assign{\Obj <}{{\OLId{latin-looped}{N}}} = \Setabs{\tuple{{\OLId{latin-ordinary}{n}}, {\OLId{latin-ordinary}{m}}}}{{\OLId{latin-ordinary}{n}} \in \Nat, {\OLId{latin-ordinary}{m}} \in
+  \Nat, {\OLId{latin-ordinary}{n}} < {\OLId{latin-ordinary}{m}}}$
+\end{enumerate}
+\end{defn}
+
+وينبغي الفصل بين $\times$ و$\cdot$. فأما $\times$
+فمن رموز لغة الحساب؛ وإن اخترناه ليذكّر بالضرب،
+فليس $\times$ عملية الضرب نفسها، بل رمز دالة ثنائية
+المحل، واسمه الرسمي $\Obj f^{\OLMathNumeral{2}}_{\OLMathNumeral{1}}$. وأما $\cdot$
+فهو \emph{دالة الضرب} المعتادة. فـ${\OLId{latin-ordinary}{n}}\cdot {\OLId{latin-ordinary}{m}}$ حاصل
+ضرب العددين ${\OLId{latin-ordinary}{n}}$ و~${\OLId{latin-ordinary}{m}}$؛ وأما ${\OLId{latin-ordinary}{x}}\times {\OLId{latin-ordinary}{y}}$ فحد من
+حدود لغة الحساب. وفي النموذج القياسي نفسر~$\times$
+بالدالة $\cdot$ على الأعداد الطبيعية. وأما $+$
+فنستعمله للرمز اللغوي ولعملية الجمع نفسها؛ والسياق
+هو الذي يميز المراد في كل موضع.
+
+\begin{defn}
+نسمي \emph{الحساب الصادق} نظرية ال!!{sentence}s التي يحققها
+النموذج القياسي للحساب؛ فهي
+\[
+\Th{TA} = \Setabs{!A}{\Sat{{\OLId{latin-looped}{N}}}{!A}}.
+\]
+\end{defn}
+
+وكون $\Th{TA}$ نظرية يظهر مما يأتي: إذا كان
+$\Th{TA}\Entails !A$، صدقت $!A$ في كل !!{structure}
+تحقق~$\Th{TA}$. ومن $\Sat{{\OLId{latin-looped}{N}}}{\Th{TA}}$ يلزم
+$\Sat{{\OLId{latin-looped}{N}}}{!A}$، فتكون $!A\in\Th{TA}$.
+
+وأما الطريق الثاني إلى تعيين نظرية~${\OLId{greek-variable}{Gamma}}$ فهو جمع
+ال!!{sentence}s اللازمة من مجموعة جمل~${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}}$.
+فتكون ${\OLId{greek-variable}{Gamma}}$ «إغلاق» ${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}}$ تحت الاستلزام.
+وإنما يفيد هذا الطريق إذا عُيّنت ${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}}$ تعيينًا
+صريحًا، كأن تسرد !!{element}sها؛ وأقل ما نطلبه أن
+تقبل ${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}}$ القرار، أي أن نستطيع باختبار حسابي
+تمييز !!a{sentence} المنتمية إلى~${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}}$ من غيرها.
+وتسمى ال!!{sentence}s في~${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}}$ \emph{بديهيات}
+لـ~${\OLId{greek-variable}{Gamma}}$، وتوصف ${\OLId{greek-variable}{Gamma}}$ بأنها \emph{مؤكسمة}
+بـ~${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}}$.
+
+\begin{defn}
+نقول إن النظرية~${\OLId{greek-variable}{Gamma}}$ \emph{مؤكسمة} بـ~${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}}$ متى، وفقط متى،
+\[
+{\OLId{greek-variable}{Gamma}} = \Setabs{!A}{{\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \Entails !A}.
+\]
+\end{defn}
+
+\begin{defn}
+النظرية $\Th{Q}$ التي بديهياتها الجمل الآتية تسمى
+«$\Th{Q}$ لروبنسون»، وهي من أبسط نظريات الحساب:
+\begin{align*}
+& \lforall[{\OLId{latin-ordinary}{x}}][\lforall[{\OLId{latin-ordinary}{y}}][(\eq[{\OLId{latin-ordinary}{x}}'][{\OLId{latin-ordinary}{y}}'] \lif \eq[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{y}}])]] \tag{$!Q_{\OLMathNumeral{1}}$}\\
+& \lforall[{\OLId{latin-ordinary}{x}}][\eq/[\Obj 0][{\OLId{latin-ordinary}{x}}']] \tag{$!Q_{\OLMathNumeral{2}}$}\\
+& \lforall[{\OLId{latin-ordinary}{x}}][(\eq[{\OLId{latin-ordinary}{x}}][\Obj 0] \lor \lexists[{\OLId{latin-ordinary}{y}}][\eq[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{y}}']])] \tag{$!Q_{\OLMathNumeral{3}}$}\\
+& \lforall[{\OLId{latin-ordinary}{x}}][\eq[({\OLId{latin-ordinary}{x}} + \Obj 0)][{\OLId{latin-ordinary}{x}}]] \tag{$!Q_{\OLMathNumeral{4}}$}\\
+& \lforall[{\OLId{latin-ordinary}{x}}][\lforall[{\OLId{latin-ordinary}{y}}][\eq[({\OLId{latin-ordinary}{x}} + {\OLId{latin-ordinary}{y}}')][({\OLId{latin-ordinary}{x}} + {\OLId{latin-ordinary}{y}})']]] \tag{$!Q_{\OLMathNumeral{5}}$}\\
+& \lforall[{\OLId{latin-ordinary}{x}}][\eq[({\OLId{latin-ordinary}{x}} \times \Obj 0)][\Obj 0]] \tag{$!Q_{\OLMathNumeral{6}}$}\\
+& \lforall[{\OLId{latin-ordinary}{x}}][\lforall[{\OLId{latin-ordinary}{y}}][\eq[({\OLId{latin-ordinary}{x}} \times {\OLId{latin-ordinary}{y}}')][(({\OLId{latin-ordinary}{x}} \times {\OLId{latin-ordinary}{y}}) + {\OLId{latin-ordinary}{x}})]]] \tag{$!Q_{\OLMathNumeral{7}}$}\\
+& \lforall[{\OLId{latin-ordinary}{x}}][\lforall[{\OLId{latin-ordinary}{y}}][({\OLId{latin-ordinary}{x}} < {\OLId{latin-ordinary}{y}} \liff \lexists[{\OLId{latin-ordinary}{z}}][\eq[({\OLId{latin-ordinary}{z}}' + {\OLId{latin-ordinary}{x}})][{\OLId{latin-ordinary}{y}}]])]] \tag{$!Q_{\OLMathNumeral{8}}$}
+\end{align*}
+فال!!{sentence}s في $\{!Q_{\OLMathNumeral{1}},\dots,!Q_{\OLMathNumeral{8}}\}$ بديهيات $\Th{Q}$؛
+وتجمع $\Th{Q}$ ال!!{sentence}s اللازمة منها جميعًا:
+\[
+\Th{Q} = \Setabs{!A}{\{!Q_{\OLMathNumeral{1}}, \dots, !Q_{\OLMathNumeral{8}}\} \Entails !A}.
+\]
+\end{defn}
+
+\begin{defn}
+لتكن $!A({\OLId{latin-ordinary}{x}})$ !!a{formula} من $\Lang L_{\OLId{latin-looped}{A}}$، ذوات المتغيرات
+الحرة~${\OLId{latin-ordinary}{x}}$ و${\OLId{latin-ordinary}{y}}_{\OLMathNumeral{1}}$، و\dots، و${\OLId{latin-ordinary}{y}}_{\OLId{latin-ordinary}{n}}$. فكل !!{sentence} صورتها
+\[
+\lforall[{\OLId{latin-ordinary}{y}}_{\OLMathNumeral{1}}][\dots\lforall[{\OLId{latin-ordinary}{y}}_{\OLId{latin-ordinary}{n}}][((!A(\Obj 0) \land \lforall[{\OLId{latin-ordinary}{x}}][(!A({\OLId{latin-ordinary}{x}})
+\lif !A({\OLId{latin-ordinary}{x}}'))]) \lif \lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})])]]
+\]
+نسخة من \emph{مخطط الاستقراء}.
+
+ونسمي \emph{حساب بيانو}~$\Th{PA}$ النظرية التي تؤكسَم
+ببديهيات $\Th{Q}$، مضافًا إليها جميع نسخ مخطط الاستقراء.
+\end{defn}
+
+\begin{explain}
+كل نسخة من مخطط الاستقراء تصدق في~$\Struct{N}$.
+وليتضح السبب، نفرض أن ال!!{formula}~$!A$ لا
+!!{variable} حرًا فيها سوى~${\OLId{latin-ordinary}{x}}$. فتعيّن $!A({\OLId{latin-ordinary}{x}})$ مجموعة
+جزئية~${\OLId{latin-looped}{X}}_{!A}$ من~$\Nat$ في~$\Struct{N}$؛
+و${\OLId{latin-looped}{X}}_{!A}$ تجمع كل~${\OLId{latin-ordinary}{n}}\in\Nat$ الذي يحقق
+$\Sat{{\OLId{latin-looped}{N}}}{!A({\OLId{latin-ordinary}{x}})}[{\OLId{latin-ordinary}{s}}]$ حين ${\OLId{latin-ordinary}{s}}({\OLId{latin-ordinary}{x}})={\OLId{latin-ordinary}{n}}$. والنسخة المقابلة
+من مخطط الاستقراء هي
+\[
+((!A(\Obj 0) \land \lforall[{\OLId{latin-ordinary}{x}}][(!A({\OLId{latin-ordinary}{x}}) \lif !A({\OLId{latin-ordinary}{x}}'))]) \lif
+  \lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]).
+\]
+فإن صدق المقدم في~$\Struct{N}$، كان ${\OLMathNumeral{0}}\in {\OLId{latin-looped}{X}}_{!A}$،
+وكان ${\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}}\in {\OLId{latin-looped}{X}}_{!A}$ كلما كان ${\OLId{latin-ordinary}{n}}\in {\OLId{latin-looped}{X}}_{!A}$.
+فمن ${\OLMathNumeral{0}}\in {\OLId{latin-looped}{X}}_{!A}$ ينتج ${\OLMathNumeral{1}}\in {\OLId{latin-looped}{X}}_{!A}$، ومن
+${\OLMathNumeral{1}}\in {\OLId{latin-looped}{X}}_{!A}$ ينتج ${\OLMathNumeral{2}}\in {\OLId{latin-looped}{X}}_{!A}$، وهكذا.
+فـ${\OLId{latin-ordinary}{n}}\in {\OLId{latin-looped}{X}}_{!A}$ لكل ${\OLId{latin-ordinary}{n}}\in\Nat$؛ وهذا هو تحقق
+$\lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$ في~$\Struct{N}$.
+\end{explain}
+
+إذن $\Th{Q}$ و$\Th{PA}$ نظريتان مؤكسَمتان.
+وإنما السؤال عن قوتهما: أتثبت $\Th{PA}$ جميع
+الحقائق عن~$\Nat$ التي تعبّر عنها~$\Lang L_{\OLId{latin-looped}{A}}$؟
+أي أتحسم بديهيات $\Th{PA}$ كل سؤال يمكن صوغه
+في~$\Lang L_{\OLId{latin-looped}{A}}$؟
+
+وهذا بعينه سؤال: هل $\Th{PA}=\Th{TA}$؟
+فـ$\Th{TA}$ تثبت، أي تحتوي، الحقائق كلها عن~$\Nat$،
+وتحسم كل سؤال يصاغ في~$\Lang L_{\OLId{latin-looped}{A}}$. وذلك أن $!A$
+إذا كانت !!a{sentence} في $\Lang L_{\OLId{latin-looped}{A}}$، فإما
+$\Sat{{\OLId{latin-looped}{N}}}{!A}$ وإما $\Sat{{\OLId{latin-looped}{N}}}{\lnot !A}$؛ ومن ثم
+إما $\Th{TA}\Entails !A$ وإما $\Th{TA}\Entails\lnot !A$.
+ونسمي النظرية التي هذا شأنها \emph{!!{complete}}.
+
+\begin{defn}
+النظرية ${\OLId{greek-variable}{Gamma}}$ \emph{!!{complete}} متى، وفقط متى، تحقق لكل
+!!{sentence}~$!A$ في لغتها، إما ${\OLId{greek-variable}{Gamma}}\Entails !A$ وإما
+${\OLId{greek-variable}{Gamma}}\Entails\lnot !A$.
+\end{defn}
+
+\begin{explain}
+وبمبرهنة التمام، ${\OLId{greek-variable}{Gamma}}\Entails !A$ تكافئ
+${\OLId{greek-variable}{Gamma}}\Proves !A$. فتكون ${\OLId{greek-variable}{Gamma}}$ تامة إذا وفقط إذا
+كان لكل !!{sentence}~$!A$ من لغتها أحد الأمرين:
+${\OLId{greek-variable}{Gamma}}\Proves !A$ أو ${\OLId{greek-variable}{Gamma}}\Proves\lnot !A$.
+\end{explain}
+
+ونسأل أيضًا: أيصح اختبار انتماء !!a{sentence}
+إلى~$\Th{TA}$ أو $\Th{PA}$، بل إلى~$\Th{Q}$ وحدها،
+بإجراء حسابي؟ ولضبط هذا السؤال نحدّ متى تكون مجموعة،
+ومنها مجموعات ال!!{sentence}s، !!{decidable}.
+
+\begin{defn}
+المجموعة ${\OLId{latin-looped}{X}}$ \emph{!!{decidable}} إذا وفقط إذا أمكن
+بإجراء حسابي، عند الدخل~${\OLId{latin-ordinary}{x}}$، إخراج~${\OLMathNumeral{1}}$ متى كان
+${\OLId{latin-ordinary}{x}}\in {\OLId{latin-looped}{X}}$، وإخراج~${\OLMathNumeral{0}}$ فيما عدا ذلك.
+\end{defn}
+
+فالسؤال إذن عن $\Th{TA}$، وكذلك $\Th{PA}$ و$\Th{Q}$:
+أهي !!{decidable}؟
+
+والجواب عن مسائل التقرير هذه كلها بالنفي؛ فلا واحدة
+من هذه النظريات تقبل القرار. ولا يخصها ذلك وحدها،
+بل يجري على \emph{كل} نظرية تستوفي شروطًا معينة.
+ومن تلك الشروط، التي تحققها $\Th{Q}$ و$\Th{PA}$،
+أن تكون مجموعة بديهياتها !!a{decidable}.
+
+\begin{defn}
+النظرية \emph{!!{axiomatizable}} هي ما أمكن أكسَمته بمجموعة
+!!a{decidable} من البديهيات.
+\end{defn}
+
+\begin{ex}
+إذا كانت بديهيات النظرية مجموعة منتهية من
+ال!!{sentence}s، كانت !!{axiomatizable}؛ لأن المجموعة
+المنتهية !!{decidable}. ومن أمثلة ذلك $\Th{Q}$،
+فإنها !!{axiomatizable}.
+
+وكذلك النظريات التي تعيّنها مخططات فعلية كهذه،
+ومنها~$\Th{PA}$، !!{axiomatizable}. ولتمييز كون $!B$
+من بديهيات~$\Th{PA}$، أي لحساب $\Char{{\OLId{latin-looped}{X}}}$ حيث
+$\Char{{\OLId{latin-looped}{X}}}(!B)={\OLMathNumeral{1}}$ إن كانت $!B$ بديهية في~$\Th{PA}$،
+و$={\OLMathNumeral{0}}$ خلاف ذلك، نسلك هذا السبيل: نختبر أولًا أ$!B$
+إحدى بديهيات~$\Th{Q}$؛ فإن كانت، أجبنا بنعم وكانت
+$\Char{{\OLId{latin-looped}{X}}}(!B)={\OLMathNumeral{1}}$. وإلا فاختبار كونها نسخة من مخطط
+الاستقراء ممكن على نظام. فإن كل نسخة تبدأ بكمّات كلية،
+تليها !!{formula} فرعية شرطية، وتالي الشرطية
+$\lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}}_{\OLMathNumeral{1}},\dots,{\OLId{latin-ordinary}{y}}_{\OLId{latin-ordinary}{n}})]$. وفيها ${\OLId{latin-ordinary}{x}}$ و${\OLId{latin-ordinary}{y}}_{\OLMathNumeral{1}}$،
+و\dots، و${\OLId{latin-ordinary}{y}}_{\OLId{latin-ordinary}{n}}$ متغيرات~$!A$ الحرة كلها، والكمّات
+الأولى في~$!B$ تربط~${\OLId{latin-ordinary}{y}}_{\OLMathNumeral{1}}$، و\dots، و~${\OLId{latin-ordinary}{y}}_{\OLId{latin-ordinary}{n}}$.
+فنستخرج~$!A$، ونطابق متغيراتها الحرة مع المتغيرات
+المربوطة في أول الجملة وبـ~$\lforall[{\OLId{latin-ordinary}{x}}]$،
+ثم نختبر أكان مقدم الشرطية هو:
+\[
+!A(\Obj 0, {\OLId{latin-ordinary}{y}}_{\OLMathNumeral{1}}, \dots, {\OLId{latin-ordinary}{y}}_{\OLId{latin-ordinary}{n}}) \land \lforall[{\OLId{latin-ordinary}{x}}][(!A({\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}_{\OLMathNumeral{1}}, \dots, {\OLId{latin-ordinary}{y}}_{\OLId{latin-ordinary}{n}})
+\lif !A({\OLId{latin-ordinary}{x}}', {\OLId{latin-ordinary}{y}}_{\OLMathNumeral{1}}, \dots, {\OLId{latin-ordinary}{y}}_{\OLId{latin-ordinary}{n}}))].
+\]
+فإن صحت المطابقة كانت $!B$ نسخة من المخطط؛ وإلا خرجت عنه.
+\end{ex}
+
+وفي بحث هذه المسألة، وما هو أعم منها من تمام النظريات
+وقابليتها للقرار، ينفع التعريف الآتي. فقد تقدم أن ${\OLId{latin-looped}{X}}$
+!!{enumerable} إذا وفقط إذا كانت خالية أو وجدت
+!!a{surjective} دالة~${\OLId{latin-ordinary}{f}}\colon\Nat\to {\OLId{latin-looped}{X}}$؛ وهذه الدالة
+تعداد لـ~${\OLId{latin-looped}{X}}$.
+
+\begin{defn}
+نقول عن المجموعة ${\OLId{latin-looped}{X}}$ إنها \emph{!!{computably enumerable}} (واختصارًا
+!!{c.e.}) متى كانت خالية أو أمكن تعدادها بدالة قابلة للحساب، وفقط حينئذ.
+\end{defn}
+
+ولا تكفي !!{axiomatizability} وحدها لانطباق مبرهنات
+عدم الاكتمال؛ فمن الشروط أيضًا قدرة النظرية على إثبات
+الحقائق الأساسية للدوال القابلة للحساب والعلاقات
+!!{decidable}. والمراد بتلك الحقائق ال!!{sentence}s
+التي تعيّن قيم الدوال عند كل مدخل، وبالقدرة أن تكون
+هذه الجمل مبرهنات في النظرية. خذ الجمع مثالًا:
+قيمة $+$ عند ${\OLMathNumeral{2}}$ و${\OLMathNumeral{3}}$ هي~${\OLMathNumeral{5}}$، أي ${\OLMathNumeral{2}}+{\OLMathNumeral{3}}={\OLMathNumeral{5}}$.
+والتعبير الحسابي عن أن قيمة $+$ عند ${\OLMathNumeral{2}}$ و${\OLMathNumeral{3}}$
+هي~${\OLMathNumeral{5}}$ هو $(\num{{\OLMathNumeral{2}}}+\num{{\OLMathNumeral{3}}})=\num{{\OLMathNumeral{5}}}$؛ وهذه
+الجملة تثبتها $\Th{Q}$. ونطلب على العموم لكل
+دالة قابلة للحساب ${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{1}},{\OLId{latin-ordinary}{x}}_{\OLMathNumeral{2}})$
+!!a{formula}~$!A_{\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{1}},{\OLId{latin-ordinary}{x}}_{\OLMathNumeral{2}},{\OLId{latin-ordinary}{y}})$ في~$\Lang{L_A}$
+تحقق $\Th{Q}\Proves !A_{\OLId{latin-ordinary}{f}}(\num{{\OLId{latin-ordinary}{n}}_{\OLMathNumeral{1}}},\num{{\OLId{latin-ordinary}{n}}_{\OLMathNumeral{2}}},\num{{\OLId{latin-ordinary}{m}}})$
+كلما كان ${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{n}}_{\OLMathNumeral{1}},{\OLId{latin-ordinary}{n}}_{\OLMathNumeral{2}})={\OLId{latin-ordinary}{m}}$. فبذلك تثبت $\Th{Q}$
+قيمة~${\OLId{latin-ordinary}{f}}$ عند ${\OLId{latin-ordinary}{n}}_{\OLMathNumeral{1}}$ و${\OLId{latin-ordinary}{n}}_{\OLMathNumeral{2}}$، وأنها~${\OLId{latin-ordinary}{m}}$.
+بل نزيد فنطلب إثبات انفراد هذه القيمة، فلا يكون
+لـ~${\OLId{latin-ordinary}{f}}$ عند ${\OLId{latin-ordinary}{n}}_{\OLMathNumeral{1}}$ و~${\OLId{latin-ordinary}{n}}_{\OLMathNumeral{2}}$ عدد آخر قيمةً.
+ونظير ذلك في العلاقات !!{decidable}.
+والتعريفان الآتيان يضبطان المراد.
+
+\begin{defn}
+نقول إن ال!!{formula}~$!A({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{1}},\dots,{\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{k}},{\OLId{latin-ordinary}{y}})$ \emph{!!{represents}} الدالة
+${\OLId{latin-ordinary}{f}}\colon\Nat^{\OLId{latin-ordinary}{k}}\to\Nat$ في~${\OLId{greek-variable}{Gamma}}$ متى، وفقط متى، استلزم
+${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{n}}_{\OLMathNumeral{1}},\dots,{\OLId{latin-ordinary}{n}}_{\OLId{latin-ordinary}{k}})={\OLId{latin-ordinary}{m}}$ تحقق الشرطين:
+\begin{enumerate}
+\item ${\OLId{greek-variable}{Gamma}} \Proves !A(\num{{\OLId{latin-ordinary}{n}}_{\OLMathNumeral{1}}}, \dots, \num{{\OLId{latin-ordinary}{n}}_{\OLId{latin-ordinary}{k}}}, \num{{\OLId{latin-ordinary}{m}}})$، و
+\item ${\OLId{greek-variable}{Gamma}} \Proves \lforall[{\OLId{latin-ordinary}{y}}](!A(\num{{\OLId{latin-ordinary}{n}}_{\OLMathNumeral{1}}}, \dots, \num{{\OLId{latin-ordinary}{n}}_{\OLId{latin-ordinary}{k}}},
+{\OLId{latin-ordinary}{y}}) \lif {\OLId{latin-ordinary}{y}} = \num{{\OLId{latin-ordinary}{m}}})$.
+\end{enumerate}
+\end{defn}
+
+\begin{defn}
+نقول إن ال!!{formula}~$!A({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{1}},\dots,{\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{k}})$ \emph{!!{represents}} العلاقة
+${\OLId{latin-looped}{R}}\subseteq\Nat^{\OLId{latin-ordinary}{k}}$ في~${\OLId{greek-variable}{Gamma}}$ متى، وفقط متى، تحقق ما يأتي:
+\begin{enumerate}
+\item إذا تحقق ${\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{n}}_{\OLMathNumeral{1}},\dots,{\OLId{latin-ordinary}{n}}_{\OLId{latin-ordinary}{k}})$، كان
+${\OLId{greek-variable}{Gamma}}\Proves !A(\num{{\OLId{latin-ordinary}{n}}_{\OLMathNumeral{1}}},\dots,\num{{\OLId{latin-ordinary}{n}}_{\OLId{latin-ordinary}{k}}})$، و
+\item إذا لم يتحقق ${\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{n}}_{\OLMathNumeral{1}},\dots,{\OLId{latin-ordinary}{n}}_{\OLId{latin-ordinary}{k}})$، كان ${\OLId{greek-variable}{Gamma}}\Proves\lnot
+!A(\num{{\OLId{latin-ordinary}{n}}_{\OLMathNumeral{1}}},\dots,\num{{\OLId{latin-ordinary}{n}}_{\OLId{latin-ordinary}{k}}})$.
+\end{enumerate}
+\end{defn}
+
+فالقدر من القوة المقصود لانطباق مبرهنات عدم الاكتمال
+أن النظرية !!{represents} جميع الدوال القابلة للحساب
+والعلاقات !!{decidable}. و$\Th{Q}$ وامتداداتها
+تفي بهذا الشرط؛ إلا أن إثباته يحتاج إلى عمل،
+لأنه حكم غير يسير على ما يمكن لـ$\Th{Q}$ إثباته.
+ووجه الصعوبة أن بديهيات $\Th{Q}$ قليلة،
+وعلينا استخراج الحقائق المطلوبة منها جميعًا.
+لكن $\Th{Q}$، مع ذلك، نظرية ضعيفة جدًا.
+فإثبات تمثيل $\Th{Q}$ للدوال القابلة للحساب
+صعب، وأكثر النظريات المهمة أقوى من~$\Th{Q}$،
+أي تزيد عليها فيما تثبت. وكل ما تثبته
+$\Th{Q}$ تثبته النظرية الأقوى؛ فمتى ثبت
+أن $\Th{Q}$ تمثل تلك الدوال، ثبت الأمر نفسه
+لكل ما فوقها. لذلك ينتفع بهذا الجهد في طائفة
+واسعة من النظريات، لا في نظرية واحدة.
+بل أي نظرية تروم صوغ «الرياضيات كلها» ينبغي
+أن تثبت على الأقل ما تثبته $\Th{Q}$،
+إذ لا غنى لها عن استيعاب نتائج الحسابات
+الأولية. فهي من هذه الجهة تدخل في نطاق
+النظريات التي تتناولها مبرهنات عدم الاكتمال.
+
+\end{document}

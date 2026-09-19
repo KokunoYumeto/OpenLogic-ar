@@ -1,0 +1,58 @@
+% Part: incompleteness
+% Chapter: representability-in-q
+% Section: prim-rec
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{req}{pri}
+\olsection{محاكاة العودية البدائية}
+
+يمكننا الآن أن نثبت أن التعريف بالعودية البدائية يمكن «محاكاته»
+بالتصغير المنتظم باستعمال دالة بيتا. افترض أن لدينا $f(\vec x)$ و
+$g(\vec x,y,z)$. عندئذ تكون الدالة~$h(\vec x,y)$ المعرّفة من $f$
+و$g$ بالعودية البدائية هي
+\begin{align*}
+h(\vec x, 0) & =  f(\vec x) \\
+h(\vec x, y+1) & =  g(\vec x, y, h(\vec x, y)).
+\end{align*}
+وعلينا أن نثبت إمكان تعريف $h$ من $f$ و$g$ باستعمال التركيب والتصغير
+المنتظم وحدهما، مع الدوال الأساسية والدوال المعرّفة منها بالتركيب
+والتصغير المنتظم (مثل~$\beta$).
+
+\begin{lem}
+\ollabel{lem:prim-rec}
+إذا أمكن تعريف $h$ من $f$ و$g$ باستعمال العودية البدائية، أمكن
+تعريفها من $f$ و$g$ والدوال $\Zero$ و$\Succ$ و$\Proj{n}{i}$ و$\Add$
+و$\Mult$ و$\Char{=}$، باستعمال التركيب والتصغير المنتظم.
+\end{lem}
+
+\begin{proof}
+عرّف أولًا دالة مساعدة $\hat h(\vec x,y)$ تعيد أصغر عدد~$d$ بحيث يرمّز
+$d$ متتالية تحقق
+\begin{enumerate}
+\item $(d)_0=f(\vec x)$، و
+\item لكل $i<y$، يكون $(d)_{i+1}=g(\vec x,i,(d)_i)$،
+\end{enumerate}
+حيث يختصر $(d)_i$ الآن $\beta(d,i)$. وبعبارة أخرى، تعيد $\hat h$
+المتتالية
+$\tuple{h(\vec x,0),h(\vec x,1),\dots,h(\vec x,y)}$. ويمكننا كتابة
+$\hat h$ بالصيغة
+\[
+\hat h(\vec x, y) = \umin{d}{(\beta(d,0) = f(\vec x) \land \bforall{i <
+  y}{\beta(d,i+1) = g(\vec x, i,\beta(d,i)})}.
+\]
+لاحظ أنه لا حاجة هنا إلى العودية البدائية، بل إلى التصغير وحده.
+والدالة التي نصغّرها منتظمة بفضل لمة دالة بيتا
+\olref[bet]{lem:beta}.
+
+لكن لدينا الآن
+\[
+h(\vec x, y) = \beta(\hat h(\vec x, y), y),
+\]
+ومن ثم يمكن تعريف $h$ من الدوال الأساسية باستعمال التركيب والتصغير
+المنتظم وحدهما.
+\end{proof}
+
+\end{document}

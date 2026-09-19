@@ -1,0 +1,92 @@
+% Part: normal-modal-logic
+% Chapter: axioms-systems
+% Section: logics-proofs
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{prf}{prf}
+
+\olsection{\usetoken{P}{derivation} والنظم الجهية}
+
+نعرّف أولا ما يكونه !!a{derivation} في المنطقات الجهية النظامية.
+وتقريبا، !!a{derivation} متتالية من !!{formula}s يكون فيها كل
+!!{element} إما (مثال إحلال لـ) واحدة من عدة \emph{بديهيات}، وإما
+لازما عن !!{element}s سابقة بإحدى قواعد الاستدلال القليلة. وفي
+المنطقات الجهية النظامية، تعد جميع أمثلة القضايا الصادقة صدقا تحليليا
+\iftag{prvDiamond}{و\Ax{K} و~\Dual{}}{و~\Ax{K}} بديهيات. وينتج من
+ذلك النسق الجهوي~$\Log{K}$، أي أصغر منطق جهوي نظامي. لكن قد نريد إضافة
+بديهيات أخرى للحصول على نظم أخرى. وتكون القاعدتان دائما القياس
+الاستثنائي~\MP{} والإلزام~\Nec.
+
+\begin{defn}
+  إذا أعطي نسق جهوي $\Log{K} !A_1 \dots !A_n$ و!!a{formula}~$!B$،
+  قلنا إن $!B$ \emph{!!{derivable}} في $\Log{K} !A_1 \dots
+  !A_n$، وكتبنا $\Log{K} !A_1 \dots !A_n \Proves !B$، إذا وفقط إذا
+  وجدت !!{formula}s $!C_1$، \dots، $!C_k$ بحيث $!C_k = !B$، وكان كل
+  $!C_i$ إما مثالا لقضية صادقة صدقا تحليليا، أو مثالا لواحدة من
+  $\Ax{K}$،\iftag{prvDiamond}{ $\Dual$،}{} $!A_1$، \dots، $!A_n$،
+  وإما لازما عن !!{formula}s سابقة بواسطة القاعدتين \MP{} أو~\Nec.
+\end{defn}
+
+تتيح لنا القضية الآتية أن نبين أن $!B \in \Sigma$ بإبراز
+$\Sigma$-!!{derivation} لـ~$!B$.
+
+\begin{prop}
+  $\Log{K} !A_1 \dots !A_n = \Setabs{!B}{\Log{K} !A_1 \dots !A_n \Proves !B}$.
+\end{prop}
+
+\begin{proof}
+  نستعمل الاستقراء على طول !!{derivation}s لنبين أن
+  $\Setabs{!B}{\Log{K} !A_1 \dots !A_n \Proves !B} \subseteq
+  \Log{K} !A_1 \dots !A_n$.
+
+  إذا كان طول !!{derivation} لـ~$!B$ هو~$1$، فإنه يشتمل على
+  !!{formula} واحدة. ولا يمكن أن تكون تلك !!{formula} لازمة عن صيغ
+  سابقة بواسطة \MP{} أو \Nec، فلا بد أن تكون مثالا لقضية صادقة صدقا
+  تحليليا، أو مثالا لـ\Ax{K}،\iftag{prvDiamond}{ $\Dual$،}{} أو مثالا
+  لواحدة من $!A_1$، \dots،~$!A_n$. لكن $\Log{K}!A_1\dots!A_n$ يشتمل
+  على هذه أيضا، ومن ثم $!B \in \Log{K}!A_1 \dots !A_n$.
+
+  وإذا كان طول !!{derivation} لـ$!B$ أكبر من~$1$، فقد تكون $!B$
+  حاصلة أيضا بواسطة \MP{} أو \Nec{} من !!{formula}s لا تقع في السطر
+  الأخير من !!{derivation}. فإذا لزمت $!B$ عن $!C$ و$!C \lif !B$
+  (بواسطة \MP)، كان $!C$ و$!C \lif !B \in
+  \Log{K}!A_1 \dots !A_n$ بفرض الاستقراء. لكن كل منطق جهوي مغلق تحت
+  القياس الاستثنائي، ولذلك $!B \in \Log{K}!A_1 \dots !A_n$. وإذا
+  كانت $!B \ident \Box !C$ ولازمت عن $!C$ بواسطة \Nec، كان $!C
+  \in \Log{K}!A_1 \dots !A_n$ بفرض الاستقراء. لكن كل منطق جهوي
+  نظامي مغلق تحت $\Nec$، ولذلك $!B \in
+  \Log{K}!A_1\dots!A_n$.
+
+  وينتج الاحتواء العكسي من بيان أن
+  $\Sigma = \Setabs{!B}{\Log{K} !A_1 \dots !A_n \Proves !B }$ منطق جهوي
+  نظامي يشتمل على جميع أمثلة $!A_1$، \dots، $!A_n$، ومن ملاحظة أن
+  $\Log{K} !A_1 \dots !A_n$ هو بالتعريف أصغر منطق من هذا القبيل.
+  \begin{enumerate}
+    \item كل قضية صادقة صدقا تحليليا~$!B$ مثال لمثل هذه القضية، ولذلك
+      $\Log{K}!A_1\dots!A_n \Proves !B$، فتشتمل $\Sigma$ على جميع
+      القضايا الصادقة صدقا تحليليا.
+    \item إذا كان $\Log{K}!A_1\dots!A_n \Proves !C$ و
+      $\Log{K}!A_1\dots!A_n \Proves !C \lif !B$، فعندئذ
+      $\Log{K}!A_1\dots!A_n \Proves !B$: اجمع !!{derivation} لـ
+      $!C$ مع اشتقاق $!C \lif !B$، وأضف السطر~$!B$. ويسوغ السطر
+      الأخير بـ\MP{}. وهكذا تكون $\Sigma$ مغلقة تحت القياس الاستثنائي.
+    \item إذا كان لـ$!B$ !!a{derivation}، فإن لكل مثال إحلال لـ~$!B$
+      أيضا !!a{derivation}: طبّق الإحلال على كل !!{formula} في
+      !!{derivation}. (تمرين: أثبت بالاستقراء على طول !!{derivation}s
+      أن الناتج أيضا !!{derivation} صحيح.) ومن ثم تكون $\Sigma$
+      مغلقة تحت الإحلال المنتظم. (وقد أثبتنا الآن أن $\Sigma$ تحقق
+      جميع شروط المنطق الجهوي.)
+    \item لدينا $\Log{K}!A_1\dots!A_n \Proves \Ax{K}$، ومن ثم
+      $\Ax{K} \in \Sigma$.
+    \tagitem{prvDiamond}{لدينا
+      $\Log{K}!A_1\dots!A_n \Proves \Dual$، ومن ثم $\Dual \in \Sigma$.}{}
+    \item إذا كان $\Log{K}!A_1\dots!A_n \Proves !C$، كان السطر
+      الإضافي~$\Box !C$ مسوغا بـ~\Nec. ولذلك تكون $\Sigma$ مغلقة
+      تحت~\Nec، ومن ثم تكون $\Sigma$ نظامية.
+  \end{enumerate}
+\end{proof}
+
+\end{document}

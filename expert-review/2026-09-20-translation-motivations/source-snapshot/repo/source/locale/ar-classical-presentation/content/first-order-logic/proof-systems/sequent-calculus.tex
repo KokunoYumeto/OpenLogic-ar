@@ -1,0 +1,58 @@
+% Part: first-order-logic
+% Chapter: proof-systems
+% Section: seqeunt-calculus
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{prf}{seq}}
+      {\olfileid{pl}{prf}{seq}}
+
+\olsection{حساب التتابعيات}
+
+ليست مادة حساب التتابعيات ترتيبًا من ال!!{sentence}s وحدها، كما في أنظمة
+!!{derivation} كثيرة، بل \emph{تتابعيات}. والتتابعية على هذه الصورة:
+\[
+!A_{\OLMathNumeral{1}}, \dots, !A_{\OLId{latin-ordinary}{m}} \Sequent !B_{\OLMathNumeral{1}}, \dots, !B_{\OLId{latin-ordinary}{n}},
+\]
+فهي زوج متتاليتين من ال!!{sentence}s، بينهما الرمز~$\Sequent$؛ ولكل منهما أن تكون خالية.
+\textbf{تنبيه تصحيحي على الأصل (C065-01).} جُعل مؤشر آخر صيغة في الطرف الأيمن
+${\OLId{latin-ordinary}{n}}$ مستقلًا عن المؤشر ${\OLId{latin-ordinary}{m}}$ في الطرف الأيسر؛ فليس يلزم أن يتساوى طولا
+المتتاليتين.
+و!!^a{derivation} في هذا الحساب شجرة تتابعيات، أعلاها تتابعيات مخصوصة تُسمى «ابتدائية» أو «بديهيات»، وما دونها ينتج كلٌّ منه عن التتابعيات التي تعلوه مباشرة بإحدى قواعد الاستدلال.
+والقواعد على ضربين: ضرب يتصرف في ال!!{sentence}s بإضافة أو حذف أو تقديم وتأخير في أحد الجانبين؛ وضرب يُدخل
+!!{formula} مركبة في النتيجة. من ذلك أن~$\LeftR{\land}$ تنقل من
+$!A,
+{\OLId{greek-variable}{Gamma}} \Sequent {\OLId{greek-variable}{Delta}}$ إلى $!A \land !B, {\OLId{greek-variable}{Gamma}} \Sequent {\OLId{greek-variable}{Delta}}$،
+وأن~$\RightR{\lif}$ تنقل من $!A, {\OLId{greek-variable}{Gamma}} \Sequent
+{\OLId{greek-variable}{Delta}}, !B$ إلى ${\OLId{greek-variable}{Gamma}} \Sequent {\OLId{greek-variable}{Delta}}, !A \lif !B$.
+وهذا جائز لأي
+${\OLId{greek-variable}{Gamma}}$ و${\OLId{greek-variable}{Delta}}$ و$!A$ و~$!B$، ولو كانت ${\OLId{greek-variable}{Gamma}}$
+و~${\OLId{greek-variable}{Delta}}$ خاليتين.
+
+تُعرّف علاقة~$\Proves$ القائمة على حساب التتابعيات كما يأتي:
+${\OLId{greek-variable}{Gamma}} \Proves !A$ إذا وفقط إذا وجدت متتالية~${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}}$ بحيث يكون
+كل~$!A$ في~${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}}$ عنصرًا في~${\OLId{greek-variable}{Gamma}}$، ويوجد !!{derivation} تقع
+التتابعية~${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \Sequent !A$ في جذره. وتكون~$!A$ مبرهنة في حساب
+التتابعيات إذا كان للتتابعية~$\Sequent !A$ !!a{derivation}. فمثلًا،
+هذا !!a{derivation} يبين أن $\Proves (!A \land !B) \lif !A$:
+\begin{prooftree}
+  \Axiom$!A \fCenter !A$
+  \RightLabel{\LeftR{\land}}
+  \UnaryInf$!A \land !B \fCenter !A$
+  \RightLabel{\RightR{\lif}}
+  \UnaryInf$\fCenter (!A \land !B) \lif !A$
+\end{prooftree}
+
+أما عدم الاتساق فأن يوجد للمجموعة~${\OLId{greek-variable}{Gamma}}$
+!!a{derivation} لـ~${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \Sequent$، حيث كل
+$!A \in {\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}}$ واقع في~${\OLId{greek-variable}{Gamma}}$، والجانب الأيمن خالٍ.
+وعندئذ تكفي قاعدة~\RightR{\Weakening} لجعل كل
+!!{sentence} قابلة لل!!{derive} من تلك المجموعة.
+
+وضع غيرهارد غنتسن حساب التتابعيات في ثلاثينيات القرن العشرين. وانتظام بنائه وتناظره يجعلان منه أداة صورية نافعة جدًا لنظرية ال!!{derivation}s. والعثور على
+!!{derivation}s فيه يسير نسبيًا؛ غير أن قراءة هذه ال!!{derivation}s قد تعسر، وقد تخفى صلتها بالبراهين. ومع ذلك فقد اتضح حسن هذه الطريقة في أنظمة ال!!{derivation}، حتى صار لكثير من الأنساق المنطقية حساب تتابعيات خاص بها.
+
+\end{document}

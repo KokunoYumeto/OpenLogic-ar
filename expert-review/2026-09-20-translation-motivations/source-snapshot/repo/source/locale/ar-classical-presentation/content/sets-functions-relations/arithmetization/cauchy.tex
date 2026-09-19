@@ -1,0 +1,140 @@
+% Part: sets-functions-relations
+% Chapter: arithmetization
+% Section: cauchy
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid[ar]{sfr}{arith}{cauchy}
+
+\olsection{ملحق: بناء الحقيقية بمتتاليات كوشي}
+
+كان بناء الأعداد الحقيقية في \olref[cuts]{sec} بقطوع ديديكند. ونبين هنا بناء آخر، أصله تعريف كوشي لما يسمى اليوم متتالية كوشي. أما اتخاذ هذا التعريف سبيلًا إلى \emph{بناء} الحقيقية فمن عمل مؤلفين آخرين في القرن التاسع عشر، منهم فايرشتراس وهاينه وميري وكانتور. وفي تاريخ ذلك عرض حسن عند \citeauthor{OConnorRobertson:RN}، \citeyear{OConnorRobertson:RN}.
+
+وقبل بلوغ أولئك، لننظر في فكرة سيمون ستيفن (\OLClassicalDigits{1548}--\OLClassicalDigits{1620}). فقد أدرك أن كل عدد حقيقي يمكن النظر إليه من جهة تمثيله العشري؛ حتى غير النسبي، مثل $\sqrt{{\OLMathNumeral{2}}}$، له تمثيل عشري معلوم أولُه:
+\[
+	{\OLMathNumeral{1}}.{\OLMathNumeral{41421356237}}\ldots
+\]
+وتمثيل هذه الكسور العشرية في نظرية المجموعات يسير: نجعلها دوال ${\OLId{latin-ordinary}{d}} \colon \Nat \to \Nat$، فتكون ${\OLId{latin-ordinary}{d}}({\OLId{latin-ordinary}{n}})$ الخانة العشرية ذات الرتبة ${\OLId{latin-ordinary}{n}}$ التي ننظر فيها، ونقيد قيم الخانات بالأرقام العشرية. ثم نحتاج إلى تعديل صغير لحفظ الجزء السابق للفاصلة العشرية، وهو هنا ${\OLMathNumeral{1}}$، وإلى تعديل آخر بعلاقة تكافؤ يضمن، مثلًا، ${\OLMathNumeral{0}}.{\OLMathNumeral{999}}\ldots = {\OLMathNumeral{1}}$. ولا يصعب بعد ذلك إقامة بناء صارم تمامًا للأعداد الحقيقية على طريقة ستيفن في نظرية المجموعات.
+
+وليس تفصيل أمر ستيفن غرضنا (وللزيادة انظر \citealt{KatzKatz2012})، لكن فكرته تقود إلى معنى قريب. فعوضًا عن النظر مباشرة في التمثيل العشري لـ$\sqrt{{\OLMathNumeral{2}}}$، نأخذ \emph{متتالية} من التقريبات النسبية لـ$\sqrt{{\OLMathNumeral{2}}}$ تزداد دقة شيئًا فشيئًا:
+\[
+{\OLMathNumeral{1}}, {\OLMathNumeral{1}}.{\OLMathNumeral{4}}, {\OLMathNumeral{1}}.{\OLMathNumeral{414}}, {\OLMathNumeral{1}}.{\OLMathNumeral{4142}}, {\OLMathNumeral{1}}.{\OLMathNumeral{41421}},\ldots
+\]
+ومن هذا النظر إلى الحقيقية بواسطة «تقريبات تتحسن تدريجيًّا» تنشأ سلسلة ملاحظات، نظير ما استعملناه لبناء $\Rat$ من $\Int$، أو $\Int$ من $\Nat$:
+\begin{enumerate}
+\item كل عدد حقيقي له تمثيل عشري، وقد يكون غير منته.
+\item ما يحمله التمثيل العشري من معلومات، وإن لم ينته، يمكن أن تحمله متتالية من الأعداد النسبية.
+\item ومتتالية الأعداد النسبية دالة من $\Nat$ إلى $\Rat$؛ نجعل ${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{n}})$ العدد النسبي ذا الرتبة ${\OLId{latin-ordinary}{n}}$ فيها.
+\end{enumerate}
+على أن \emph{مطلق} الدالة من $\Nat$ إلى $\Rat$ لا يحدد عددًا حقيقيًّا. وشاهد ذلك الدالة
+\[
+	{\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{n}}) =\begin{cases}
+			{\OLMathNumeral{1}} & \text{إذا كان }{\OLId{latin-ordinary}{n}}\text{ فرديًا}\\
+			{\OLMathNumeral{0}} &\text{إذا كان }{\OLId{latin-ordinary}{n}}\text{ زوجيًا}
+		\end{cases}
+\]
+فالمتتالية ${\OLMathNumeral{0}},{\OLMathNumeral{1}},{\OLMathNumeral{0}},{\OLMathNumeral{1}},{\OLMathNumeral{0}},{\OLMathNumeral{1}},{\OLMathNumeral{0}},\ldots$ لا تتجه إلى عدد حقيقي بعينه. فلا بد أن نقصر النظر على ما يقترب من عدد حقيقي، أي على متتاليات ذات \emph{نهاية}.
+
+وقد مر معنى النهاية في \olref[his][set][limits]{sec}. لكن لا يسوغ أن نأخذ التعريف السابق \emph{بعينه}؛ إذ كان في عبارة «$(\forall \epsilon>{\OLMathNumeral{0}})$» تكميم ضمني على الأعداد الحقيقية، وكانت الدوال المنظور في نهاياتها على الأعداد الحقيقية. فاستعماله هنا يفترض توافر ما نريد \emph{بناءه}. غير أن معنى قريبًا من النهاية يغنينا عنه.
+\begin{defn}\ollabel{def:CauchySequence}
+الدالة ${\OLId{latin-ordinary}{f}}: \Nat \to \Rat$ \emph{متتالية كوشي} إذا وفقط إذا تحقق، لكل $\epsilon \in \Rat$ موجب، أن $(\exists \ell \in
+\Nat)(\forall {\OLId{latin-ordinary}{m}}, {\OLId{latin-ordinary}{n}} > \ell)|{\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{m}}) - {\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{n}})| < \epsilon$.
+\end{defn}
+
+فالمعنى العام قريب مما تقدم: مهما طلبنا قدرًا من الدقة يقاس بـ~$\epsilon$، وجدنا موضعًا إذا تجاوزناه---أي أخذنا المدخل أكبر من~$\ell$---حصل المقصود. ويتبين من هذا أن متتاليتنا ${\OLMathNumeral{1}}$، و${\OLMathNumeral{1}}.{\OLMathNumeral{4}}$، و${\OLMathNumeral{1}}.{\OLMathNumeral{414}}$، و${\OLMathNumeral{1}}.{\OLMathNumeral{4142}}$، و${\OLMathNumeral{1}}.{\OLMathNumeral{41421}}$\ldots تتجه إلى نهاية؛ فلتقريب $\sqrt{{\OLMathNumeral{2}}}$ بخطأ لا يجاوز $\nicefrac{{\OLMathNumeral{1}}}{{\OLMathNumeral{10}}^{{\OLId{latin-ordinary}{n}}}}$ يكفي أن نأخذ أي حد بعد الحد ذي الرتبة ${\OLId{latin-ordinary}{n}}$.
+
+فيتبادر أن العدد الحقيقي \emph{هو} متتالية كوشي كيف اتفقت. غير أن هذا، كما في بناء $\Int$ و$\Rat$، لا يفي بالمقصود؛ فقد تدل متتاليات مختلفة على العدد الحقيقي الواحد. ومثال ذلك أن نأخذ متتالية كوشي~${\OLId{latin-ordinary}{f}}$، ونعين ${\OLId{latin-ordinary}{g}}$ مثل~${\OLId{latin-ordinary}{f}}$ في جميع القيم سوى ${\OLId{latin-ordinary}{g}}({\OLMathNumeral{0}})\neq {\OLId{latin-ordinary}{f}}({\OLMathNumeral{0}})$. وهما تتفقان فيما بعد الحد الأول، فنريد آخر الأمر أن نجعل لهما النهاية نفسها، على المعنى المقصود في \olref{def:CauchySequence}؛ ومن ثم تعدان طريقتين «لتعريف» عدد حقيقي واحد. فلا بد من معاملتهما من هذه الجهة معاملة العدد نفسه.
+
+فنحتاج مرة أخرى إلى علاقة تكافؤ على متتاليات كوشي، ثم نطابق الأعداد الحقيقية مع فئاتها، لا مع العلاقات نفسها. ونقدم لذلك معنى الدالة الآيلة إلى ${\OLMathNumeral{0}}$. فإذا كانت ${\OLId{latin-ordinary}{h}} : \Nat \to \Rat$، قلنا \emph{إن ${\OLId{latin-ordinary}{h}}$ تؤول إلى ${\OLMathNumeral{0}}$} إذا وفقط إذا تحقق لكل $\epsilon \in
+\Rat$ موجب أن $(\exists \ell \in \Nat)(\forall {\OLId{latin-ordinary}{n}} > \ell)|{\OLId{latin-ordinary}{h}}({\OLId{latin-ordinary}{n}})| <
+\epsilon$.\footnote{قابل هذا بتعريف $\lim_{{\OLId{latin-ordinary}{x}}
+\mathord{\rightarrow}\infty}{\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}}) = {\OLMathNumeral{0}}$ في \olref[his][set][limits]{sec}.} وإذا كانت ${\OLId{latin-ordinary}{f}}$ و${\OLId{latin-ordinary}{g}}$ دالتين من النوع $\Nat \to \Rat$، وضعنا $({\OLId{latin-ordinary}{f}}-{\OLId{latin-ordinary}{g}})({\OLId{latin-ordinary}{n}}) = {\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{n}}) - {\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{n}})$. ثم نعرف
+\[
+	{\OLId{latin-ordinary}{f}} \Realequiv {\OLId{latin-ordinary}{g}} \text{ إذا وفقط إذا كانت الدالة $({\OLId{latin-ordinary}{f}}-{\OLId{latin-ordinary}{g}})$ تؤول إلى ${\OLMathNumeral{0}}$}.
+\]
+ويلزم إثبات أن $\Realequiv$ علاقة تكافؤ، وهو صحيح. فبعده يصح أن نعرف الأعداد الحقيقية بأنها فئات التكافؤ تحت $\Realequiv$ لمتتاليات كوشي كلها من النوع $\Nat \to \Rat$.
+
+\begin{prob}
+ضع ${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{n}}) = {\OLMathNumeral{0}}$ لكل ${\OLId{latin-ordinary}{n}}$، وضع ${\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{n}}) = \frac{{\OLMathNumeral{1}}}{({\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}})^{\OLMathNumeral{2}}}$. أثبت أن الدالتين متتاليتا كوشي، بل إنهما تؤولان إلى ${\OLMathNumeral{0}}$، فيتحقق أيضًا ${\OLId{latin-ordinary}{f}} \sim_\Real {\OLId{latin-ordinary}{g}}$.
+\end{prob}
+
+ونكتب، على عادتنا، $\equivrep{{\OLId{latin-ordinary}{f}}}{\Realequiv}$ لفئة التكافؤ التي تضم ${\OLId{latin-ordinary}{f}}$ بوصفها !!a{element} منها. ونحذف الرمز السفلي فيما يلي تخفيفًا للقراءة، فنكتب $\equivrep{{\OLId{latin-ordinary}{f}}}{}$. ونضع لكل ${\OLId{latin-ordinary}{q}} \in \Rat$ العدد ${\OLId{latin-ordinary}{q}}_{\Real} = \equivrep{{\OLId{latin-ordinary}{c}}_{{\OLId{latin-ordinary}{q}}}}{}$، حيث ${\OLId{latin-ordinary}{c}}_{{\OLId{latin-ordinary}{q}}}$ الدالة الثابتة التي تحقق ${\OLId{latin-ordinary}{c}}_{\OLId{latin-ordinary}{q}}({\OLId{latin-ordinary}{n}}) = {\OLId{latin-ordinary}{q}}$ لكل ${\OLId{latin-ordinary}{n}} \in \Nat$. ثم نعين العلاقات والعمليات الأساسية، ومن ذلك
+\begin{align*}
+	\equivrep{{\OLId{latin-ordinary}{f}}}{} + \equivrep{{\OLId{latin-ordinary}{g}}}{} &= 	\equivrep{({\OLId{latin-ordinary}{f}} + {\OLId{latin-ordinary}{g}})}{} \\
+	\equivrep{{\OLId{latin-ordinary}{f}}}{} \times 	\equivrep{{\OLId{latin-ordinary}{g}}}{} &= \equivrep{({\OLId{latin-ordinary}{f}} \times {\OLId{latin-ordinary}{g}})}{} 
+\end{align*}
+ونريد هنا $({\OLId{latin-ordinary}{f}} + {\OLId{latin-ordinary}{g}})({\OLId{latin-ordinary}{n}}) = {\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{n}}) + {\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{n}})$ و$({\OLId{latin-ordinary}{f}} \times {\OLId{latin-ordinary}{g}})({\OLId{latin-ordinary}{n}}) = {\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{n}}) \times
+{\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{n}})$. ويلزم أن نثبت أن $({\OLId{latin-ordinary}{f}} + {\OLId{latin-ordinary}{g}})$ و$({\OLId{latin-ordinary}{f}}-{\OLId{latin-ordinary}{g}})$ و$({\OLId{latin-ordinary}{f}}\times {\OLId{latin-ordinary}{g}})$ كلها متتاليات كوشي متى كانت ${\OLId{latin-ordinary}{f}}$ و${\OLId{latin-ordinary}{g}}$ كذلك؛ وهذه أحكام صحيحة نترك إثباتها للقارئ.
+
+ونعين أخيرًا الترتيب: تكون $\equivrep{{\OLId{latin-ordinary}{f}}}{}$ \emph{موجبة} إذا وفقط إذا اجتمع الشرطان $\equivrep{{\OLId{latin-ordinary}{f}}}{}\neq {\OLMathNumeral{0}}_\Real$ و$(\exists \ell \in \Nat)(\forall {\OLId{latin-ordinary}{n}} > \ell){\OLMathNumeral{0}} < {\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{n}})$. ثم نضع $\equivrep{{\OLId{latin-ordinary}{f}}}{} < \equivrep{{\OLId{latin-ordinary}{g}}}{}$ إذا وفقط إذا كانت $\equivrep{({\OLId{latin-ordinary}{g}} - {\OLId{latin-ordinary}{f}})}{}$ موجبة. ولا بد من إثبات أن هذا التعيين لا يتغير بتغير الدالة «الممثلة» لفئة التكافؤ.
+
+\textbf{تنبيه تصحيحي على الأصل.} قورنت فئة التكافؤ هنا بالصفر الحقيقي
+${\OLMathNumeral{0}}_\Real$، لا بالصفر النسبي ${\OLMathNumeral{0}}_\Rat$؛ فذلك يصون نوع طرفي المقارنة.
+%\begin{align*}
+%	\equivrep{f}{} \leq \equivrep{g}{} \text{ iff }&\equivrep{f}{} = \equivrep{g}{} \text{ or }\\
+%	&(\exists \ell \in \Nat)(\forall n \in \Nat)(\ell < n \lif f(n) \leq g(n))
+%\end{align*}
+فإذا تم ذلك، سهل إثبات أن التعريفات تحقق الخواص الجبرية المطلوبة:
+\begin{thm}\ollabel{thm:cauchyorderedfield}
+فئات تكافؤ متتاليات كوشي حقل مرتب.
+\end{thm}
+
+\begin{proof}
+يترك البرهان تمرينًا.
+\end{proof}
+
+\begin{prob}
+أثبت أن فئات تكافؤ متتاليات كوشي حقل مرتب.
+\end{prob}
+
+وأما اكتمال الأعداد الحقيقية بهذا البناء فإثباته أشق، ولذلك نسوق برهانه.
+
+\begin{thm}
+كل مجموعة غير خالية من متتاليات كوشي، مأخوذة بفئات تكافئها، إذا كان لها حد علوي فلها أصغر حد علوي.
+\end{thm}
+
+\begin{proof}[مخطط البرهان]
+خذ ${\OLId{latin-looped}{S}}$ مجموعة غير خالية من متتاليات كوشي لها حد علوي، مع فهم المتتاليات من جهة فئات تكافئها. فيوجد ${\OLId{latin-ordinary}{p}} \in \Rat$ يكون ${\OLId{latin-ordinary}{p}}_{\Real}$ حدًّا علويًّا لـ${\OLId{latin-looped}{S}}$. وخذ ${\OLId{latin-ordinary}{r}} \in {\OLId{latin-looped}{S}}$؛ فيوجد ${\OLId{latin-ordinary}{q}} \in \Rat$ يحقق ${\OLId{latin-ordinary}{q}}_{\Real} < \equivrep{{\OLId{latin-ordinary}{r}}}{}$. فإذا وجد لـ${\OLId{latin-looped}{S}}$ أصغر حد علوي، وقع بين ${\OLId{latin-ordinary}{q}}_\Real$ و${\OLId{latin-ordinary}{p}}_\Real$، مع إدخال الطرفين.
+
+\textbf{تنبيه تصحيحي على الأصل.} أُظهر قوسا الفئة في المقارنة
+${\OLId{latin-ordinary}{q}}_\Real < \equivrep{{\OLId{latin-ordinary}{r}}}{}$؛ لأن ${\OLId{latin-ordinary}{r}}$ ممثل من متتاليات كوشي، والترتيب
+معرّف على فئات التكافؤ.
+
+فنضيق المسافة إلى أصغر حد علوي من الجهتين معًا. ونعين لذلك دالتين ${\OLId{latin-ordinary}{f}}, {\OLId{latin-ordinary}{g}} \colon
+\Nat \to \Rat$، لتقترب ${\OLId{latin-ordinary}{f}}$ منه من أعلى،\ وتقترب ${\OLId{latin-ordinary}{g}}$ منه من أسفل. ونبدأ بوضع
+\begin{align*}
+	{\OLId{latin-ordinary}{f}}({\OLMathNumeral{0}}) &= {\OLId{latin-ordinary}{p}} \\
+	{\OLId{latin-ordinary}{g}}({\OLMathNumeral{0}}) &= {\OLId{latin-ordinary}{q}}
+\end{align*}
+ثم نضع ${\OLId{latin-ordinary}{a}}_{\OLId{latin-ordinary}{n}} = \frac{{\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{n}}) + {\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{n}})}{{\OLMathNumeral{2}}}$، ونعرف:\footnote{هذا تعريف عودي؛ ولم نقدم \emph{إلى الآن} ما يسوغ قبول التعريفات العودية.}
+\begin{align*}
+	{\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}}) &=
+	\begin{cases}
+		{\OLId{latin-ordinary}{a}}_{\OLId{latin-ordinary}{n}} &\text{إذا كان }(\forall {\OLId{latin-ordinary}{h}} \in {\OLId{latin-looped}{S}})\equivrep{{\OLId{latin-ordinary}{h}}}{} \leq ({\OLId{latin-ordinary}{a}}_{\OLId{latin-ordinary}{n}})_\Real\\
+		{\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{n}})&\text{فيما عدا ذلك}
+	\end{cases}\\
+	{\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}}) &=
+	\begin{cases}
+		{\OLId{latin-ordinary}{a}}_{\OLId{latin-ordinary}{n}} &\text{إذا كان }(\exists {\OLId{latin-ordinary}{h}} \in {\OLId{latin-looped}{S}})\equivrep{{\OLId{latin-ordinary}{h}}}{} \geq ({\OLId{latin-ordinary}{a}}_{\OLId{latin-ordinary}{n}})_\Real\\
+	 	{\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{n}}) &\text{فيما عدا ذلك}
+	\end{cases}
+\end{align*}
+والدالتان ${\OLId{latin-ordinary}{f}}$ و${\OLId{latin-ordinary}{g}}$ متتاليتا كوشي؛ والتحقق من ذلك يسير نسبيًّا، فنتركه تمرينًا. ثم إن $({\OLId{latin-ordinary}{f}}-{\OLId{latin-ordinary}{g}})$ تؤول إلى ${\OLMathNumeral{0}}$؛ لأن المسافة بين ${\OLId{latin-ordinary}{f}}$ و${\OLId{latin-ordinary}{g}}$ لا تزيد في كل خطوة على نصف سابقتها. ومنه $\equivrep{{\OLId{latin-ordinary}{f}}}{} = \equivrep{{\OLId{latin-ordinary}{g}}}{}$.
+
+نثبت أولًا أن $\equivrep{{\OLId{latin-ordinary}{f}}}{}$ حد علوي لـ${\OLId{latin-looped}{S}}$، أي\ 
+$(\forall {\OLId{latin-ordinary}{h}} \in {\OLId{latin-looped}{S}})\equivrep{{\OLId{latin-ordinary}{h}}}{} \leq \equivrep{{\OLId{latin-ordinary}{f}}}{}$.
+ونستعمل في ذلك \olref{thm:cauchyorderedfield}. خذ ${\OLId{latin-ordinary}{h}} \in {\OLId{latin-looped}{S}}$، وافرض للخلف أن $\equivrep{{\OLId{latin-ordinary}{f}}}{} < \equivrep{{\OLId{latin-ordinary}{h}}}{}$؛ فيكون ${\OLMathNumeral{0}}_\Real < \equivrep{({\OLId{latin-ordinary}{h}}-{\OLId{latin-ordinary}{f}})}{}$. وحيث كانت ${\OLId{latin-ordinary}{f}}$ متتالية كوشي متناقصة رتيبًا، وجد ${\OLId{latin-ordinary}{n}} \in \Nat$ يحقق $\equivrep{({\OLId{latin-ordinary}{c}}_{{\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{n}})} - {\OLId{latin-ordinary}{f}})}{} < \equivrep{({\OLId{latin-ordinary}{h}}-{\OLId{latin-ordinary}{f}})}{}$. فينتج
+\[
+	({\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{n}}))_\Real = \equivrep{{\OLId{latin-ordinary}{c}}_{{\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{n}})}}{} < \equivrep{{\OLId{latin-ordinary}{f}}}{} + \equivrep{({\OLId{latin-ordinary}{h}}-{\OLId{latin-ordinary}{f}})}{} = \equivrep{{\OLId{latin-ordinary}{h}}}{},
+\]
+وهذا يناقض ما يضمنه البناء من $\equivrep{{\OLId{latin-ordinary}{h}}}{} \leq ({\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{n}}))_\Real$.
+
+ثم نثبت أن $\equivrep{{\OLId{latin-ordinary}{f}}}{} = \equivrep{{\OLId{latin-ordinary}{g}}}{}$ هو \emph{أصغر} حد علوي لـ${\OLId{latin-looped}{S}}$. خذ ${\OLId{latin-ordinary}{j}}$ متتالية كوشي كيف اتفقت، وافرض $\equivrep{{\OLId{latin-ordinary}{j}}}{} <
+\equivrep{{\OLId{latin-ordinary}{g}}}{}$. فبمثل الاستدلال السابق، مع استعمال كون ${\OLId{latin-ordinary}{g}}$ \emph{متزايدة}، يوجد ${\OLId{latin-ordinary}{n}} \in \Nat$ يحقق $\equivrep{{\OLId{latin-ordinary}{j}}}{} <
+({\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{n}}))_\Real$. والبناء يضمن وجود ${\OLId{latin-ordinary}{h}} \in {\OLId{latin-looped}{S}}$ بحيث $({\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{n}}))_\Real \leq \equivrep{{\OLId{latin-ordinary}{h}}}{}$. فيلزم $\equivrep{{\OLId{latin-ordinary}{j}}}{} <
+\equivrep{{\OLId{latin-ordinary}{h}}}{}$، فلا تكون $\equivrep{{\OLId{latin-ordinary}{j}}}{}$ حدًّا علويًّا لـ${\OLId{latin-looped}{S}}$، وهو المطلوب.
+\end{proof}
+
+\end{document}

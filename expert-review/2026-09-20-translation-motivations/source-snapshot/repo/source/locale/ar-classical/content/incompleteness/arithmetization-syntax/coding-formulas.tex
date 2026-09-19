@@ -1,0 +1,102 @@
+% Part: incompleteness
+% Chapter: arithmetization-syntax
+% Section: coding-formulas
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{art}{frm}
+\olsection{ترميز \printtoken{P}{formula}}
+
+قد ثبت التعريف العودي البدائي لـ$\fn{Term}(x)$.
+ونتخذه الآن أساسًا لتعريف نظيرته في
+ال!!{formula}s، وهي $\fn{Frm}(x)$،
+تعريفًا عوديًا بدائيًا.
+
+\begin{prop}
+العلاقة $\fn{Atom}(x)$ عودية بدائية؛ ومعناها أن $x$
+عدد غودل ل!!{formula} ذرية.
+\end{prop}
+
+\begin{proof}
+لتمييز $x$ بوصفه عدد غودل ل!!{formula} ذرية،
+يكفي ويلزم تحقق إحدى الحالات الآتية:
+% تصحيح صياغة كلاسيكية (C284-01/أ): حُذف تكرار الفعل في صدر التفصيل.
+\begin{enumerate}
+\item ثمة $n$ و$j<x$ و$z<x$ تحقق $\len{z}=n$، ولكل $i<n$ تكون
+  $\fn{Term}((z)_i)$ صادقة، و$x=$
+\[
+\Gn{\Obj P^n_j(} \concat \fn{flatten}(z) \concat \Gn{)}.
+\]
+\item ثمة $z_1,z_2<x$ تصدق فيهما $\fn{Term}(z_1)$ و$\fn{Term}(z_2)$،
+  و$x=$
+\[
+\Gn{{\eq}(} \concat z_1 \concat \Gn{,} \concat z_2 \concat{\Gn{)}}.
+\]
+  \tagitem{prvFalse}{$x = \Gn{\lfalse}$.}{}
+  \tagitem{prvTrue}{$x = \Gn{\ltrue}$.}{}
+\end{enumerate}
+\end{proof}
+
+\begin{prop}
+\ollabel{prop:frm-primrec}
+العلاقة $\fn{Frm}(x)$ عودية بدائية، ومفادها أن $x$
+عدد غودل ل!!a{formula}.
+\end{prop}
+
+\begin{proof}
+متتالية الرموز~$s$ !!a{formula} إذا وفقط إذا
+أمكنت متتالية تكوين $s_0$، \dots،
+$s_{k-1}=s$ من !!{formula}، تسجل
+بناء~$s$ من !!{formula}s ذرية بقواعد
+التكوين. ونختار المتتالية بلا تكرار،
+فيكون كل $s_i$ صيغة جزئية من~$s$،
+وطولها لا يتجاوز $k=\len{x}$،
+وعدد غودل لأي عنصر فيها لا يتجاوز~$x$،
+ويساويه في العنصر الأخير. فيحصر رمز
+المتتالية، مثلًا، بالحد العودي البدائي
+$p_{k-1}^{k(x+1)}$. ومن ثم تكون
+الكمّات التي نحتاج إليها على متتاليات
+التكوين محدودة بحدود عودية بدائية.
+% تصحيح صياغة كلاسيكية (C284-01/ب): أُزيل الرسم المعيب «المرّمزة» بإعادة العبارة.
+\end{proof}
+
+\begin{prob}
+فصّل برهان \olref[inc][art][frm]{prop:frm-primrec} على مثال
+البرهان الأول لـ\olref[inc][art][trm]{prop:term-primrec}.
+\end{prob}
+
+\begin{prop}
+\ollabel{prop:freeocc-primrec}
+العلاقة $\fn{FreeOcc}(x,z,i)$ عودية بدائية. وهي تعني
+أن الرمز رقم $i$ في الصيغة ذات عدد غودل~$x$
+ورود حر للمتغير ذي عدد غودل~$z$.
+\end{prop}
+
+\begin{proof}
+برهانه متروك للتمرين.
+\end{proof}
+
+\begin{prob}
+برهن \olref[inc][art][frm]{prop:freeocc-primrec}. ولك الاستناد إلى أن كل مقطع من !!a{formula} يكون !!a{formula} لا بد أن يكون
+!!{formula} جزئية منها.
+\end{prob}
+
+\begin{prop}
+الخاصية $\fn{Sent}(x)$ عودية بدائية؛ ومعناها أن $x$
+عدد غودل ل!!a{sentence}.
+\end{prop}
+
+\begin{proof}
+إنما ال!!{sentence} !!a{formula} خالية من الورودات الحرة
+  لل!!{variable}s. ومن ثم يصدق $\fn{Sent}(x)$ إذا وفقط إذا
+\begin{multline*}
+\fn{Frm}(x) \land {}\\
+\bforall{i<\len{x}}{\bforall{z<x}{}}\\
+(\bexists{j<z}{z=\Gn{\Obj v_j}} \lif \lnot\fn{FreeOcc}(x,z,i)).
+\end{multline*}
+% تصحيح مصدر (C284-02): أُضيف شرط كون x رمز صيغة قبل شرط انعدام المتغيرات الحرة.
+\end{proof}
+
+\end{document}

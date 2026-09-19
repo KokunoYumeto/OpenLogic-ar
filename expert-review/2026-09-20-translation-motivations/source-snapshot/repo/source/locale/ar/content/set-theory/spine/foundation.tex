@@ -1,0 +1,109 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{spine}{foundation}
+
+\olsection{التأسيس}
+
+لم \emph{نفرغ تمامًا}، بل \emph{قاربنا} الفراغ فحسب، لأن لا شيء في
+$\ZFminus$ يضمن أن \emph{كل} مجموعة تنتمي إلى~$V_\alpha$ ما، أي إن
+كل مجموعة تتكون في مرحلة ما.
+
+وثمة معنى (رياضي) مباشر إلى حد بعيد لا \emph{نهتم} فيه بوجود مجموعات
+خارج الهرم. (فإن وجدت هناك مجموعات، أمكننا ببساطة تجاهلها.) لكننا
+حفزنا \emph{مفهومنا} للمجموعة بفكرة أن كل مجموعة تتكون في مرحلة ما
+(انظر~\stageshier{} في~\olref[z][story]{sec}). ولذلك نريد استبعاد
+إمكان وجود مجموعات تقع خارج الهرم. ومن ثم لا بد أن نضيف مسلّمة جديدة
+تضمن وقوع كل مجموعة في موضع ما من الهرم.
+
+بما أن مجموعات~$V_\alpha$ هي مراحلنا، فقد ننظر ببساطة في إضافة الآتي
+مسلّمة:
+
+\begin{defish}
+\emph{الانتظام.} $\forall A \exists \alpha\, A \subseteq V_\alpha$
+\end{defish}
+
+سيكون هذا نهجًا معقولًا تمامًا. غير أننا، لأسباب ستُشرح في القسم
+التالي، سنتبنى بدلًا منه مسلّمة بديلة:
+
+\begin{axiom}[التأسيس]
+$(\forall A \neq \emptyset)(\exists B \in A)A \cap B = \emptyset$.
+\end{axiom}
+
+وبشيء من الجهد، نستطيع أن نبيّن (في~$\ZFminus$) أن التأسيس يستلزم
+الانتظام:
+\begin{defn}
+لكل مجموعة~$A$، لتكن:
+\begin{align*}
+	\text{cl}_0(A) &= A,\\
+	\text{cl}_{n+1}(A) &= \bigcup \text{cl}_n(A),\\
+	\text{trcl}(A) &= \bigcup_{n < \omega} \text{cl}_{n}(A).
+\end{align*}
+نسمي~$\text{trcl}(A)$ \emph{الإغلاق المتعدي} لـ$A$.
+\end{defn}
+\noindent
+وتسمية «الإغلاق المتعدي» في محلها:
+\begin{prop}\ollabel{subsetoftrcl}
+$A \subseteq \trcl{A}$ و$\trcl{A}$ مجموعة متعدية.
+\end{prop}
+
+\begin{proof}
+من الواضح أن
+$A = \text{cl}_0(A) \subseteq \text{trcl}(A)$. وإذا كان
+$x \in b \in \trcl{A}$، كان~$b \in \text{cl}_n(A)$ لبعض~$n$، ومن ثم
+$x \in \text{cl}_{n+1}(A) \subseteq \text{trcl}(A)$.
+\end{proof}
+
+\begin{lem}\ollabel{lem:TransitiveWellFounded}
+إذا كانت~$A$ مجموعة متعدية، فهناك~$\alpha$ يحقق
+$A \subseteq V_\alpha$.
+\end{lem}
+
+\begin{proof}
+مع تذكر تعريف «$\supstrict(X)$» من
+\olref[ordinals][opps]{defsupstrict}، عرّف مجموعتين:
+\begin{align*}
+	D  &= \Setabs{x \in A}{\forall \delta\ x \nsubseteq V_\delta}\\
+	\alpha &= \supstrict\Setabs{\delta}{(\exists x \in A)
+	(x \subseteq V_\delta \land (\forall \gamma \in \delta)x \nsubseteq V_\gamma)}
+\end{align*}
+افترض~$D = \emptyset$. فإذا كان~$x \in A$، وجد~$\delta$ يحقق
+$x \subseteq V_\delta$، وبفضل الترتيب الجيد للأعداد الترتيبية،
+$(\forall \gamma \in \delta)x \nsubseteq V_\gamma$؛ ومن ثم
+$\delta \in \alpha$، ولذلك~$x \in V_\alpha$ بموجب
+\olref[spine][Valphabasic]{Valphabasicprops}. ومن ثم
+$A \subseteq V_{\alpha}$، كما هو مطلوب.
+
+إذن يكفي أن نبيّن~$D = \emptyset$. وبرهانًا بالخلف، افترض خلاف ذلك.
+بموجب التأسيس، يوجد~$B \in D \subseteq A$ يحقق
+$D \cap B = \emptyset$. إذا كان~$x \in B$، كان~$x \in A$ لأن~$A$
+متعدية؛ ولما كان~$x \notin D$، ينتج
+$\exists \delta\ x \subseteq V_\delta$. والآن لتكن
+\[
+	\beta = \supstrict\Setabs{\delta}{(\exists x \in B)(x \subseteq V_\delta \land (\forall \gamma < \delta)x \nsubseteq V_\gamma)}.
+\]
+وكما سبق، $B \subseteq V_\beta$، خلافًا للادعاء أن~$B \in D$.
+\end{proof}
+
+\begin{thm}\ollabel{zfentailsregularity}
+يصدق الانتظام.
+\end{thm}
+
+\begin{proof}
+ثبّت~$A$؛ عندئذ
+$A \subseteq \trcl{A}$ بموجب~\olref{subsetoftrcl}، وهذه الأخيرة
+متعدية. ولذلك يوجد~$\alpha$ يحقق
+$A \subseteq \trcl{A} \subseteq V_\alpha$ بموجب
+\olref{lem:TransitiveWellFounded}.
+\end{proof}
+
+تبيّن هذه النتائج أن~$\ZFminus$ تثبت الشرط
+$\emph{التأسيس}\Rightarrow\emph{الانتظام}$. وسنبيّن في
+\olref[spine][rank]{zfminusregularityfoundation} أن~$\ZFminus$ تثبت
+$\emph{الانتظام}\Rightarrow\emph{التأسيس}$. ولذلك يكون التأسيس
+والانتظام \emph{متكافئين} (بترديد~$\ZFminus$). لكن ذلك يعني أننا،
+بالنظر إلى~$\ZFminus$، نستطيع تسويغ التأسيس بملاحظة أنه مكافئ
+للانتظام. ونستطيع تسويغ الانتظام مباشرة على أساس~\stageshier{}.
+
+\end{document}

@@ -1,0 +1,113 @@
+% Part: model-theory
+% Chapter: models-of-arithmetic
+% Section: non-standard-models
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{mar}{nst}
+\section{النماذج غير القياسية}
+
+\begin{explain}
+نسمي !!a{structure} للغة $\Lang{L_A}$ قياسية إذا كانت متشاكلة
+مع~$\Struct{N}$. وإذا لم تكن !!a{structure} متشاكلة مع~$\Struct{N}$،
+سمّيت غير قياسية.
+\end{explain}
+
+\begin{defn}
+تكون !!{structure}~$\Struct{M}$ للغة $\Lang{L_A}$ \emph{غير قياسية}
+إذا لم تكن متشاكلة مع~$\Struct{N}$. وتسمى الـ!!{element}s
+$x \in \Domain{M}$ التي تساوي $\Value{\num{n}}{M}$ لبعض
+$n \in \Nat$ \emph{أعدادًا قياسية} (في $\Struct{M}$)، وما عداها
+\emph{أعدادًا غير قياسية}.
+\end{defn}
+
+\begin{explain}
+بحسب \olref[stm]{prop:standard-domain}، لا تحتوي أي !!{structure} قياسية
+للغة~$\Lang{L_A}$ إلا !!{element}s قياسية. ولا يصح عكس ذلك عمومًا: قد
+تكون الـ!!{structure} غير قياسية مع أن الأعداد القياسية تستنفد مجالها،
+كما يبين تمرين القسم السابق. أما وجود !!{element} غير قياسي فيضمن أن
+الـ!!{structure} غير قياسية.
+\end{explain}
+
+\begin{prop}
+إذا احتوت !!a{structure}~$\Struct{M}$ للغة $\Lang{L_A}$ عددًا غير
+قياسي، كانت $\Struct{M}$ غير قياسية.
+\end{prop}
+
+\begin{proof}
+افترض العكس، أي افترض أن $\Struct{M}$ قياسية لكنها تحتوي عددًا غير
+قياسي~$x$. وليكن $g\colon \Nat \to \Domain{M}$ تشاكلًا. يسهل أن نرى
+(بالاستقراء على~$n$) أن
+$g(\Value{\num{n}}{N})=\Value{\num{n}}{M}$. وبعبارة أخرى، ترسل $g$
+الأعداد القياسية في~$\Struct{N}$ إلى الأعداد القياسية في~$\Struct{M}$.
+فإذا احتوت $\Struct{M}$ عددًا غير قياسي، لم تكن $g$~!!{surjective}،
+خلافًا للفرض.
+\end{proof}
+
+\begin{prob}
+تذكر أن $\Th{Q}$ تحتوي البديهيات
+\begin{align*}
+& \lforall[x][\lforall[y][(\eq[x'][y'] \lif \eq[x][y])]] \tag{$!Q_1$}\\
+& \lforall[x][\eq/[\Obj 0][x']] \tag{$!Q_2$}\\
+& \lforall[x][(\eq[x][\Obj 0] \lor \lexists[y][\eq[x][y']])] \tag{$!Q_3$}
+\end{align*}
+أعط !!{structure}s~$\Struct{M_1}$ و$\Struct{M_2}$ و$\Struct{M_3}$ بحيث
+\begin{enumerate}
+\item $\Sat{M_1}{!Q_1}$ و$\Sat{M_1}{!Q_2}$ و$\Sat/{M_1}{!Q_3}$؛
+\item $\Sat{M_2}{!Q_1}$ و$\Sat/{M_2}{!Q_2}$ و$\Sat{M_2}{!Q_3}$؛ و
+\item $\Sat/{M_3}{!Q_1}$ و$\Sat{M_3}{!Q_2}$ و$\Sat{M_3}{!Q_3}$.
+\end{enumerate}
+ومن الواضح أنك لا تحتاج إلا إلى تحديد~$\Assign{\Obj{0}}{M_i}$ و
+$\Assign{\prime}{M_i}$ لكل منها.
+\end{prob}
+
+\begin{explain}
+من السهل تحديد !!{structure}s غير قياسية للغة $\Lang{L_A}$. خذ مثلًا
+البنية ذات الـ!!{domain}~$\Int$، وفسر جميع الرموز غير المنطقية على النحو
+المعتاد. ولما كانت الأعداد السالبة ليست قيمًا لـ$\num{n}$ لأي~$n$، كانت
+هذه البنية غير قياسية. وبالطبع لن تكون \emph{نموذجًا} للحساب بمعنى أنها
+تجعل الجمل نفسها التي تجعلها~$\Struct{N}$ صادقة. فمثلًا تكون
+$\lforall[x][\eq/[x'][\Obj{0}]]$ كاذبة. ومع ذلك يمكننا بسهولة إثبات وجود
+نماذج غير قياسية للحساب باستعمال مبرهنة التراص.
+\end{explain}
+
+\begin{prop}
+لتكن $\Th{TA} = \Setabs{!A}{\Sat{N}{!A}}$ نظرية~$\Struct{N}$.
+لـ$\Th{TA}$ نموذج غير قياسي !!a{enumerable}.
+\end{prop}
+
+\begin{proof}
+وسّع $\Lang{L_A}$ بـ!!{constant} جديد~$c$، وتأمل مجموعة الـ!!{sentence}s
+\[
+\Gamma = \Th{TA} \cup \{\eq/[c][\num{0}], \eq/[c][\num{1}],
+\eq/[c][\num{2}], \dots\}.
+\]
+كل نموذج~$\Struct{M^c}$ لـ$\Gamma$ يحتوي !!a{element}~$x =
+\Assign{c}{M}$ غير قياسي، لأن $x \neq \Value{\num{n}}{M}$ لكل
+$n \in \Nat$. ومن الواضح أيضًا أن $\Sat{M^c}{\Th{TA}}$، لأن
+$\Th{TA} \subseteq \Gamma$. وإذا حوّلنا $\Struct{M^c}$ إلى
+!!a{structure}~$\Struct{M}$ للغة $\Lang{L_A}$ بمجرد نسيان~$c$، ظل
+مجالها يحتوي $x$ غير القياسي، وظل $\Sat{M}{\Th{TA}}$. ويضمن الأمر
+الأخير أن $c$ لا يقع في~$\Th{TA}$. لذلك يكفي أن نبين أن لـ$\Gamma$
+نموذجًا.
+
+نستعمل مبرهنة التراص لإثبات أن لـ$\Gamma$ نموذجًا. فإذا كانت كل مجموعة
+جزئية منتهية من~$\Gamma$ قابلة للإرضاء، كانت $\Gamma$ كذلك. خذ أي
+مجموعة جزئية منتهية $\Gamma_0 \subseteq \Gamma$. تحتوي $\Gamma_0$ بعض
+!!{sentence}s~$\Th{TA}$ وبعض الصيغ من الشكل~$\eq/[c][\num{n}]$، لكن
+عددها منتهٍ. ليكن $k$ أكبر عدد يظهر في صيغة
+$\eq/[c][\num{k}] \in \Gamma_0$، ولنضع $k=0$ إذا لم تظهر أي صيغة من
+هذا الشكل. عرّف $\Struct{N_k}$ بتوسيع~$\Struct{N}$ بحيث يتضمن التفسير
+$\Assign{c}{N_k}=k+1$. عندئذ $\Sat{N_k}{\Gamma_0}$: فإذا كان
+$!A \in \Th{TA}$، كان $\Sat{N_k}{!A}$ لأن $\Struct{N_k}$ تشبه
+$\Struct{N}$ في كل شيء عدا~$c$، ولا يقع $c$ في~$!A$. وكذلك
+$\Sat{N_k}{\eq/[c][\num{n}]}$، لأن $n \le k$ و
+$\Value{c}{N_k}=k+1$. ومن ثم تكون كل مجموعة جزئية منتهية منها قابلة
+للإرضاء، فتكون $\Gamma$ قابلة للإرضاء بمبرهنة التراص. ولما كانت
+اللغة الموسعة قابلة للعد، تضمن مبرهنة لوفنهايم--سكولم النزولية وجود نموذج
+!!{enumerable} لها؛ ويعطي مختزله إلى اللغة الأصلية النموذج المطلوب.
+\end{proof}
+
+\end{document}

@@ -1,0 +1,111 @@
+% Part: first-order-logic
+% Chapter: tableaux
+% Section: quantifier-rules
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{tab}{qrl}
+
+\olsection{قواعد المكممات}
+
+\subsection{قواعد~$\lforall$}
+
+\begin{defish}
+\AxiomC{\sFmla{\True}{\lforall[x][!A(x)]}}
+\RightLabel{\TRule{\True}{\forall}}
+\UnaryInfC{\sFmla{\True}{!A(t)}}
+\DisplayProof
+\hfill
+\AxiomC{\sFmla{\False}{\lforall[x][!A(x)]}}
+\RightLabel{\TRule{\False}{\lforall}}
+\UnaryInfC{\sFmla{\False}{!A(a)}}
+\DisplayProof
+\end{defish}
+
+أما~\TRule{\True}{\lforall}، فالحد~$t$ فيها مغلق، أي خالٍ من
+المتغيرات. وأما~\TRule{\False}{\lforall}، فالرمز~$a$ !!a{constant}
+لا يجوز أن يرد في شيء من الفرع الواقع فوق
+قاعدة~\TRule{\False}{\lforall}. ويسمّى~$a$ \emph{المتغير المميَّز}
+لاستدلال~\TRule{\False}{\forall}.
+\footnote{جرت التسمية بـ«المتغير المميَّز» مع أن~$a$ في هذه
+القاعدة !!a{constant}؛ وللاصطلاح أسباب تاريخية.}
+
+
+\subsection{قواعد~$\lexists$}
+
+\begin{defish}
+\AxiomC{\sFmla{\True}{\lexists[x][!A(x)]}}
+\RightLabel{\TRule{\True}{\lexists}}
+\UnaryInfC{\sFmla{\True}{!A(a)}}
+\DisplayProof
+\hfill
+\AxiomC{\sFmla{\False}{\lexists[x][!A(x)]}}
+\RightLabel{\TRule{\False}{\lexists}}
+\UnaryInfC{\sFmla{\False}{!A(t)}}
+\DisplayProof
+\end{defish}
+
+وكذلك هنا، فالحد~$t$ مغلق، والرمز~$a$ !!a{constant} لا يرد في
+الفرع فوق قاعدة~\TRule{\True}{\lexists}. ونسمي~$a$
+\emph{المتغير المميَّز} لاستدلال~\TRule{\True}{\lexists}.
+
+وأما امتناع ورود المتغير المميَّز في الفرع السابق لاستدلال
+\TRule{\False}{\lforall} أو~\TRule{\True}{\lexists}، فهو
+\emph{شرط المتغير المميَّز}.
+
+
+\begin{explain}
+قد اصطلحنا على أنه إذا كانت~$!A$ !!a{formula} يرد فيها
+ال!!{variable}~$x$ حرًا، كتبنا~$!A(x)$ تنبيهًا على ذلك.
+ويكون~$!A(t)$ في هذا السياق اختصارًا لـ~$\Subst{!A}{t}{x}$.
+وعلى هذا يصح أن نكتب قاعدة~\TRule{\False}{\lexists} كما يأتي:
+\begin{prooftree}
+  \AxiomC{\sFmla{\False}{\lexists[x][!A]}}
+  \RightLabel{\TRule{\False}{\lexists}}
+  \UnaryInfC{\sFmla{\False}{\Subst{!A}{t}{x}}}
+\end{prooftree}
+ولا يمتنع أن يرد~$t$ في~$!A$ قبل الاستبدال؛ فقد تكون~$!A$ مثلًا
+$\Atom{\Obj P}{t,x}$. فاستنتاج
+$\sFmla{\False}{\Atom{\Obj P}{t,t}}$ من
+$ \sFmla{\False}{\lexists[x][\Atom{\Obj P}{t,x}]}$ إجراء صحيح
+لقاعدة~\TRule{\False}{\lexists}. وأما
+\TRule{\False}{\lforall} و\TRule{\True}{\lexists} فشرط المتغير المميَّز
+فيهما يمنع ورود ال!!{constant}~$a$ في~$!A$.
+فلا يصح استنتاج~$\sFmla{\False}{\Atom{\Obj P}{a,a}}$ من
+$\sFmla{\False}{\lforall[x][\Atom{\Obj P}{a,x}]}$
+بقاعدة~$\TRule{\False}{\lforall}$.
+\end{explain}
+
+\begin{explain}
+فالحد~$t$ في~\TRule{\True}{\lforall}
+و\TRule{\False}{\lexists} لا قيد عليه من جهة الورود السابق، مع
+بقاء اشتراط انغلاقه. وأما قاعدتا~\TRule{\True}{\lexists}
+و\TRule{\False}{\lforall} فلا يجوز فيهما أن يرد ال!!{constant}~$a$
+في أي موضع من الفروع فوق الاستدلال المعني. ولولا هذا الشرط لانتفت
+سلامة النسق؛ إذ لكان البناء الآتي !!{tableau} مغلقًا لـ
+$\lexists[x][\formula{A}(x)] \lif
+\lforall[x][\formula{A}(x)]$:
+\begin{center}
+\begin{tableau}{}
+  [\sFmla{\False}{\lexists[x][\formula{A}(x)] \lif \lforall[x][\formula{A}(x)]}, just=\TAss
+    [\sFmla{\True}{\lexists[x][\formula{A}(x)]},
+      just={\TRule{\False}{\lif}[1]}
+      [\sFmla{\False}{\lforall[x][\formula{A}(x)]},
+        just={\TRule{\False}{\lif}[1]}
+        [\sFmla{\True}{\formula{A}(a)},
+          just={\TRule{\True}{\lexists}[2]}
+          [\sFmla{\False}{\formula{A}(a)},
+            just={\TRule{\False}{\lforall}[3]}, close]
+        ]
+      ]
+    ]
+  ]
+\end{tableau}
+\end{center}
+مع أن~$\lexists[x][\formula{A}(x)] \lif
+\lforall[x][\formula{A}(x)]$ ليست صالحة.
+\end{explain}
+
+\end{document}

@@ -1,0 +1,105 @@
+% Part: first-order-logic
+% Chapter: syntax-and-semantics
+% Section: Structures
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{syn}{str}
+
+\olsection{\printtoken{P}{structure} للغات الرتبة الأولى}
+
+\begin{explain}
+لغات الرتبة الأولى، في ذاتها، \emph{غير مؤوَّلة:} فلا يرتبط
+بال!!{constant}s وال!!{function}s وال!!{predicate}s معنى معيّن.
+وتُعطى المعاني بتعيين \article{structure} \emph{!!{structure}}.
+فتعيّن هذه \emph{المجال}، أي الأشياء التي تشير إليها
+ال!!{constant}s، وتعمل عليها ال!!{function}s، وتتراوح عليها
+المكممات. وتعيّن، فضلًا عن ذلك، أي ال!!{constant}s يشير إلى أي
+الأشياء، وكيف ترسل !!a{function} أشياء إلى أشياء، وعلى أي الأشياء
+تصدق ال!!{predicate}s. وال!!^{structure}s أساس المفاهيم
+\emph{الدلالية} في المنطق، مثل مفهوم النتيجة والصلاحية وقابلية
+الإرضاء. وتسمى في المؤلفات، على أنحاء مختلفة، «بنى» أو «تأويلات» أو
+«نماذج».
+\end{explain}
+
+\begin{defn}[!!^{structure}s]
+تتألف \Article{structure} \emph{!!{structure}}~$\Struct M$ للغة
+$\Lang{L}$ من منطق الرتبة الأولى من العناصر الآتية:
+\begin{enumerate}
+\item \emph{المجال:} مجموعة غير خالية، $\Domain M$
+\item \emph{تأويل ال!!{constant}s:} لكل !!{constant}~$c$ من
+  $\Lang{L}$، !!a{element}~$\Assign{c}{M} \in \Domain M$
+\item \emph{تأويل ال!!{predicate}s:} لكل !!{predicate} ذات
+  $n$ مواضع~$R$ من~$\Lang{L}$ (عدا~$\eq$)، علاقة ذات $n$ مواضع
+  $\Assign{R}{M} \subseteq \Domain{M}^n$
+\item \emph{تأويل ال!!{function}s:} لكل !!{function} ذات
+  $n$ مواضع~$f$ من~$\Lang{L}$، دالة ذات $n$ مواضع
+  $\Assign{f}{M} \colon \Domain{M}^n \to \Domain{M}$
+\end{enumerate}
+\end{defn}
+
+\begin{ex}
+تتألف !!^a{structure}~$\Struct M$ للغة الحساب من مجموعة، ومن عنصر
+من~$\Domain M$، هو $\Assign{\Obj 0}{M}$، تأويلًا لل!!{constant}
+~$\Obj 0$، ومن دالة أحادية المحل
+$\Assign{\Obj \prime}{M} \colon \Domain{M} \to \Domain M$،
+ودالتين ثنائيتي المحل $\Assign{\Obj +}{M}$ و$\Assign{\Obj
+  \times}{M}$، كلتاهما $\Domain M^2 \to \Domain M$، وعلاقة ثنائية
+المحل $\Assign{\Obj <}{M} \subseteq \Domain{M}^2$.
+
+ومن الأمثلة البديهية على بنية كهذه ما يأتي:
+\begin{enumerate}
+\item $\Domain N = \Nat$
+\item $\Assign{\Obj 0}{N} = 0$
+\item $\Assign{\Obj \prime}{N}(n) = n + 1$ لكل $n \in \Nat$
+\item $\Assign{\Obj +}{N}(n, m) = n + m$ لكل $n, m \in \Nat$
+\item $\Assign{\Obj \times}{N}(n, m) = n\cdot m$ لكل $n, m \in \Nat$
+\item $\Assign{\Obj <}{N} = \Setabs{\tuple{n, m}}{n \in \Nat, m \in
+  \Nat, n < m}$
+\end{enumerate}
+تسمى البنية~$\Struct N$ للغة~$\Lang L_A$ المعرّفة على هذا النحو
+\emph{النموذج القياسي للحساب}، لأنها تؤول الرموز غير المنطقية
+لـ~$\Lang L_A$ كما تتوقع بالضبط.
+
+ومع ذلك، ثمة !!{structure}s أخرى كثيرة ممكنة لـ~$\Lang L_A$. فقد
+نأخذ، مثلًا، مجموعة الأعداد الصحيحة~$\Int$ مجالًا بدلًا من~$\Nat$،
+ونعرّف تأويلات~$\Obj 0$، و$\Obj \prime$، و$\Obj +$، و$\Obj
+\times$، و$\Obj <$ وفقًا لذلك. لكن يمكننا أيضًا تعريف بنى
+لـ~$\Lang L_A$ لا تمت إلى الأعداد بأدنى صلة.
+\end{ex}
+
+\begin{ex}
+لا تتطلب البنية~$\Struct M$ للغة نظرية المجموعات~$\Lang L_Z$ إلا
+مجموعة غير خالية وعلاقة واحدة ثنائية المحل. ومن ثم يمكن، من الناحية
+التقنية، استخدام مجموعة الناس مع العلاقة «$x$ أكبر سنًا من~$y$»
+بوصفهما !!a{structure} لـ~$\Lang L_Z$، كما يمكن استخدام~$\Nat$ مع
+$n \ge m$، حيث $n, m \in \Nat$.
+
+ومن ال!!{structure}s المهمة على وجه الخصوص للغة~$\Lang L_Z$، التي
+تكون فيها !!{element}s المجال مجموعات فعلًا، ويكون تأويل~$\Obj \in$
+هو فعلًا العلاقة «$x$ !!a{element} من~$y$»، ال!!{structure}
+~$\Struct{{HF}}$ المؤلفة من \emph{المجموعات المنتهية وراثيًا}:
+\begin{enumerate}
+\item $\Domain{{{HF}}} = \emptyset \cup \Pow{\emptyset} \cup
+  \Pow{\Pow{\emptyset}} \cup \Pow{\Pow{\Pow{\emptyset}}} \cup \dots$;
+\item $\Assign{\Obj \in}{{{HF}}} = \Setabs{\tuple{x, y}}{x, y \in
+  \Domain{{{HF}}}, x \in y}$.
+\end{enumerate}
+\end{ex}
+
+\begin{digress}
+تؤثر الشروط التي نضعها لما يُعَد !!a{structure} في منطقنا. فمثلًا،
+إن اختيار منع المجالات الخالية يكفل، في ضوء المعالجة المعتادة
+للإرضاء (أو الصدق) في الجمل المكممة، أن
+$\lexists[x][(!A(x) \lor \lnot !A(x))]$ صالحة---أي إنها حقيقة
+منطقية. كما أن اشتراط إحالة جميع ال!!{constant}s إلى شيء في المجال
+يكفل أن يكون التعميم الوجودي نمط استدلال سليمًا: $!A(a)$، ومن ثم
+$\lexists[x][!A(x)]$. ولو أجزنا للأسماء أن تحيل إلى خارج المجال، أو
+ألا تحيل، لكنا في طريقنا إلى \emph{منطق حر}، يتطلب فيه التعميم
+الوجودي مقدمة إضافية: $!A(a)$ و$\lexists[x][\eq[x][a]]$، ومن ثم
+$\lexists[x][!A(x)]$.
+\end{digress}
+
+\end{document}

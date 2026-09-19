@@ -1,0 +1,172 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{ordinals}{iso}
+\olsection{تماثلات الترتيب}
+
+لكي نوضح \emph{مدى} متانة الترتيب الجيد، سنبدأ بعرض طريقة لمقارنة
+الترتيبات الجيدة.
+
+\begin{defn}
+\emph{الترتيب الجيد} زوج~$\tuple{A, <}$ تكون فيه~$<$ ترتيبًا جيدًا
+على~$A$. ويكون الترتيبان الجيدان~$\tuple{A, <}$ و
+$\tuple{B, \lessdot}$ \emph{متماثلين ترتيبيًا} إذا وفقط إذا وجد
+!!a{bijection}~$f \colon A \to B$ بحيث: $x < y$ إذا وفقط إذا كان
+$f(x) \lessdot f(y)$. وفي هذه الحالة نكتب
+$\ordeq{\tuple{A, <}}{\tuple{B, \lessdot}}$، ونقول إن~$f$
+\emph{تماثل ترتيبي}.
+\end{defn}
+\noindent
+سنتحدث فيما يأتي، طلبًا للاختصار، عن «التماثلات» بدلًا من «تماثلات
+الترتيب». وحدسيًا، التماثلات هي !!{bijection}s حافظة للبنية. وفيما
+يأتي بضع حقائق بسيطة عن التماثلات.
+
+\begin{lem}\ollabel{isoscompose}
+تركيب التماثلات تماثل؛ أي إذا كان~$f \colon A \to B$ و
+$g \colon B \to C$ تماثلين، فإن
+$(g \circ f) \colon A \to C$ تماثل.
+\end{lem}
+\begin{prob}
+	أثبت~\olref[sth][ordinals][iso]{isoscompose}.
+\end{prob}
+\begin{proof}
+متروك تمرينًا.
+\end{proof}
+\begin{cor}\ollabel{ordisoisequiv}
+	$\ordeq{X}{Y}$ علاقة تكافؤ.
+\end{cor}
+\begin{prop}\ollabel{ordisounique}
+إذا كان الترتيبان الجيدان~$\tuple{A, <}$ و$\tuple{B, \lessdot}$
+متماثلين، فالتماثل بينهما وحيد.
+\end{prop}
+
+\begin{proof}
+لتكن~$f$ و$g$ تماثلين من النوع~$A \to B$. سنثبت النتيجة بالاستقراء، أي
+باستعمال~\olref[wo]{propwoinduction}.
+ثبّت~$a\in A$، وافترض (فرض الاستقراء) أن
+$(\forall b < a)f(b) = g(b)$. وثبّت~$x \in B$.
+
+إذا كان~$x \lessdot f(a)$، كان~$f^{-1}(x) < a$، ومن ثم
+$g(f^{-1}(x)) \lessdot g(a)$، باستعمال كون~$f$ و$g$ تماثلين. لكن لما
+كان~$f^{-1}(x) < a$، حصلنا من فرضنا على
+$x =f(f^{-1}(x)) = g(f^{-1}(x))$. ومن ثم~$x \lessdot g(a)$. وبالمثل،
+إذا كان~$x \lessdot g(a)$، كان~$x \lessdot f(a)$.
+
+وبالتعميم، $(\forall x \in B)(x \lessdot f(a) \liff x \lessdot
+g(a))$. وينتج أن~$f(a) = g(a)$ بموجب
+\olref[sfr][rel][ord]{prop:extensionality-strictlinearorders}. ومن ثم
+$(\forall a \in A)f(a) = g(a)$ بموجب
+\olref[wo]{propwoinduction}.
+\end{proof}\noindent
+يمنحنا هذا قدرًا من الإحساس بمتانة الترتيبات الجيدة. لكن مواصلة شرح
+ذلك تستفيد من إدخال ترميز إضافي.
+
+\begin{defn}
+إذا كان~$\tuple{A, <}$ ترتيبًا جيدًا وكان~$a \in A$، فلتكن
+$A_a = \Setabs{x \in A}{x < a}$. ونقول إن~$A_a$ \emph{قطعة
+ابتدائية حقيقية} من~$A$ (ونسمح بأن تكون~$A$ نفسها قطعة ابتدائية غير
+حقيقية من~$A$). ولتكن~$<_a$ تقييد~$<$ إلى القطعة الابتدائية، أي
+$\funrestrictionto{\mathord{<}}{A_a^2}$.
+\end{defn}
+\noindent
+باستعمال هذا الترميز نستطيع تقرير وإثبات أنه لا يوجد ترتيب جيد متماثل
+مع أي قطعة ابتدائية حقيقية منه.
+
+\begin{lem}\ollabel{wellordnotinitial}
+إذا كان~$\tuple{A, <}$ ترتيبًا جيدًا وكان~$a \in A$، فإن
+$\ordneq{\tuple{A, <}}{\tuple{A_a, <_a}}$.
+\end{lem}
+
+\begin{proof}
+برهانًا بالخلف، افترض أن~$f \colon A \to A_a$ تماثل. ولما كانت~$f$
+تقابلًا وكان~$A_a \subsetneq A$، فليكن~$b \in A$، باستعمال
+\olref[wo]{wo:strictorder}، أصغر !!{element} في~$A$ بحسب~$<$ يحقق
+$b \neq f(b)$. سنبيّن أن
+$(\forall x \in A)(x<b \liff x < f(b))$، ومن ذلك سينتج، بموجب
+\olref[sfr][rel][ord]{prop:extensionality-strictlinearorders}، أن
+$b = f(b)$، فيكتمل البرهان بالخلف.
+
+افترض~$x < b$. إذن~$x = f(x)$، باختيار~$b$. وكذلك
+$f(x) < f(b)$، لأن~$f$ تماثل. ومن ثم~$x < f(b)$.
+
+وافترض~$x < f(b)$. إذن~$f^{-1}(x) < b$، لأن~$f$ تماثل، ولذلك
+$f^{-1}(x) = x$ باختيار~$b$. ومن ثم~$x < b$.
+\end{proof}
+
+تبيّن نتيجتنا التالية، على وجه التقريب، أن «القطعة الابتدائية» من
+تماثل هي تماثل:
+
+\begin{lem}\ollabel{wellordinitialsegment}
+ليكن~$\tuple{A, <}$ و$\tuple{B, \lessdot}$ ترتيبين جيدين. إذا كان
+$f \colon A \to B$ تماثلًا وكان~$a \in A$، فإن
+$\funrestrictionto{f}{A_{a}} : A_a \to B_{f(a)}$ تماثل.
+\end{lem}
+
+\begin{proof}
+بما أن~$f$ تماثل:
+	%Since $f$ is an isomorphism, $b < a$ iff $f(b) \lessdot f(a)$, so that 
+\begin{align*}
+	\funimage{f}{A_a} &= \funimage{f}{\Setabs{x \in A}{x < a}}\\
+	&= \Setabs{y \in B}{f^{-1}(y)<a} \\
+	&= \Setabs{y \in B}{y \lessdot f(a)} \\
+	&=B_{f(a)} 
+\end{align*}
+ويحفظ~$\funrestrictionto{f}{A_a}$ الترتيب لأن~$f$ يحفظه.
+\end{proof}
+
+تثبت نتيجتانا التاليتان أن الترتيبات الجيدة قابلة للمقارنة دائمًا:
+
+\begin{lem}\ollabel{lemordsegments}
+ليكن~$\tuple{A, <}$ و$\tuple{B, \lessdot}$ ترتيبين جيدين. إذا كان
+$\ordeq{\tuple{A_{a_1}, <_{a_1}}}{\tuple{B_{b_1}, \lessdot_{b_1}}}$
+و$\ordeq{\tuple{A_{{a_2}}, <_{a_2}}}{\tuple{B_{{b_2}},
+\lessdot_{b_2}}}$، فإن ${a_1} < {a_2} \text{ إذا وفقط إذا كان }
+{b_1} \lessdot {b_2}$.
+\end{lem}
+
+\begin{proof}
+سنثبت الاتجاه \emph{من اليسار إلى اليمين}؛ والاتجاه الآخر مماثل.
+افترض
+$\ordeq{\tuple{A_{a_1}, <_{a_1}}}{\tuple{B_{b_1},
+\lessdot_{b_1}}}$ و
+$\ordeq{\tuple{A_{{a_2}}, <_{a_2}}}{\tuple{B_{{b_2}},
+\lessdot_{b_2}}}$ مع كون~$f \colon A_{{a_2}} \to B_{{b_2}}$
+تماثلنا. ولنفترض~${a_1} < {a_2}$؛ فعندئذ
+$\ordeq{\tuple{A_{a_1}, <_{a_1}}}{\tuple{B_{f({a_1})},
+\lessdot_{f({a_1})}}}$ بموجب~\olref{wellordinitialsegment}. ومن ثم
+$\ordeq{\tuple{B_{b_1}, \lessdot_{b_1}}}{\tuple{B_{f({a_1})},
+\lessdot_{f({a_1})}}}$، ولذلك~${b_1} = f({a_1})$ بموجب
+\olref{wellordnotinitial}. والآن~${b_1} \lessdot {b_2}$ لأن مدى~$f$
+هو~$B_{{b_2}}$.
+\end{proof}
+
+\begin{thm}\ollabel{thm:woalwayscomparable}
+إذا أُعطي أي ترتيبين جيدين، كان أحدهما متماثلًا مع قطعة ابتدائية من
+الآخر (ليست بالضرورة حقيقية).
+\end{thm}
+
+\begin{proof}
+ليكن~$\tuple{A, <}$ و$\tuple{B, \lessdot}$ ترتيبين جيدين. باستعمال
+الفصل، لتكن
+\[
+	f = \Setabs{\tuple{a, b} \in A \times B}{
+		\ordeq{\tuple{A_a, <_a}}{\tuple{B_b, \lessdot_b}}}.
+\]
+بموجب~\olref{lemordsegments}، يكون~$a_1 < a_2$ إذا وفقط إذا كان
+$b_1 \lessdot b_2$ لكل
+$\tuple{a_1, b_1}, \tuple{a_2, b_2} \in f$. ومن ثم يكون
+$f \colon \dom{f} \to \ran{f}$ تماثلًا.
+
+إذا كان~$a_2 \in \dom{f}$ و$a_1 < a_2$، كان~$a_1 \in \dom{f}$
+بموجب~\olref{wellordinitialsegment}؛ ولذلك يكون~$\dom{f}$ قطعة
+ابتدائية من~$A$. وبالمثل، يكون~$\ran{f}$ قطعة ابتدائية من~$B$.
+برهانًا بالخلف، افترض أن كلتيهما قطعة ابتدائية \emph{حقيقية}. ولتكن
+$a$ أصغر !!{element} بحسب~$<$ في~$A \setminus \dom{f}$، بحيث
+$\dom{f} = A_a$، ولتكن~$b$ أصغر !!{element} بحسب~$\lessdot$ في
+$B \setminus \ran{f}$، بحيث~$\ran{f} = B_b$.
+إذن~$f \colon A_a \to B_b$ تماثل، ومن ثم~$\tuple{a, b} \in f$،
+وهذا تناقض.
+\end{proof}
+
+\end{document}

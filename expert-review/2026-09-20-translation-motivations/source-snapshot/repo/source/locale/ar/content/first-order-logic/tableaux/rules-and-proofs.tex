@@ -1,0 +1,57 @@
+% Part: first-order-logic
+% Chapter: tableaux
+% Section: rules-and-proofs
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{tab}{rul}}
+      {\olfileid{pl}{tab}{rul}}
+
+\olsection{القواعد و\usetoken{P}{tableau}}
+
+!!^a{tableau} استقصاء منهجي للوجوه الممكنة لصدق !!a{sentence} أو
+كذبها في \iftag{FOL}{!!a{structure}}{!!a{valuation}}. ولبنات الجدول
+الدلالي هي ال!!{signed formula}s: أي !!{sentence}s مضافًا إليها قيمة
+صدق ``إشارة''، إما~$\True$ أو~$\False$. وتُرتب هذه ال!!{formula}s
+الموقعة في شجرة (تنمو إلى أسفل).
+
+\begin{defn}
+  \emph{!!{signed formula}} زوج يتألف من قيمة صدق و!!a{sentence}، أي
+  إحدى الصورتين:
+  \[
+  \sFmla{\True}{!A} \text{ أو } \sFmla{\False}{!A}.
+  \]
+\end{defn}
+
+يمكننا حدسيًا أن نقرأ~$\sFmla{\True}{!A}$ هكذا: ``قد تكون~$!A$
+صادقة''، وأن نقرأ~$\sFmla{\False}{!A}$ هكذا: ``قد تكون~$!A$ كاذبة''
+(في بعض \iftag{FOL}{!!{structure}}{!!{valuation}}).
+
+كل !!{signed formula} في الشجرة إما \emph{افتراض} (وتسرد الافتراضات في
+أعلى الشجرة تمامًا)، وإما أن تُحصّل من !!a{signed formula} فوقها بقاعدة
+من عدد من قواعد الاستدلال. ولكل !!{main operator} ممكن في ال!!{formula}
+السابقة قاعدتان: واحدة للحالة التي تكون فيها الإشارة~$\True$، وأخرى
+للحالة التي تكون فيها الإشارة~$\False$. وتسمح بعض القواعد بتفرع
+الشجرة، في حين لا تضيف أخرى إلا !!{signed formula}s إلى الفرع. وقد
+تُطبق القاعدة (وكثيرًا ما يلزم أن تطبق) لا على ال!!{signed formula}
+السابقة مباشرة، بل على أي !!{signed formula} في الفرع من الجذر إلى
+الموضع الذي تطبق فيه القاعدة.
+
+يكون الفرع \emph{مغلقًا} عندما يحتوي على كل من
+$\sFmla{\True}{!A}$ و$\sFmla{\False}{!A}$. ويكون ال!!{tableau} مغلقًا
+إذا كان كل فرع فيه مغلقًا. وبحسب التفسير الحدسي، يصف كل فرع إمكانًا
+مشتركًا، لكن~$\sFmla{\True}{!A}$ و$\sFmla{\False}{!A}$ لا يمكنان معًا.
+وبعبارة أخرى، إذا كان الفرع مغلقًا، فقد استُبعد الإمكان الذي يصفه.
+ويعني هذا، على وجه الخصوص، أن ال!!{tableau} المغلق يستبعد كل إمكانات
+جعل كل افتراض على الصورة~$\sFmla{\True}{!A}$ صادقًا وكل افتراض على
+الصورة~$\sFmla{\False}{!A}$ كاذبًا في آن واحد.
+
+ال!!{tableau} المغلق \emph{لـ~$!A$} هو !!{tableau} مغلق جذره
+$\sFmla{\False}{!A}$. وإذا وجد !!{tableau} مغلق كهذا، فقد استُبعدت كل
+إمكانات كذب~$!A$؛ أي يجب أن تكون~$!A$ صادقة في كل
+\iftag{FOL}{!!{structure}}{!!{valuation}}.
+
+\end{document}

@@ -1,0 +1,57 @@
+% Part: first-order-logic
+% Chapter: tableaux
+% Section: rules-and-proofs
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{tab}{rul}}
+      {\olfileid{pl}{tab}{rul}}
+
+\olsection{القواعد و\usetoken{P}{tableau}}
+
+ال!!^a{tableau} طريق منظّم لاستقصاء الوجوه التي قد تصدق بها
+!!a{sentence} أو تكذب في \iftag{FOL}{!!a{structure}}{!!a{valuation}}.
+ومادّة الجدول الدلالي ال!!{signed formula}s؛ وهي !!{sentence}s
+تقرن كل واحدة منها بإشارة لقيمة الصدق، إما~$\True$ وإما~$\False$.
+وتنتظم هذه ال!!{formula}s الموقّعة في شجرة تمتد من أعلاها إلى أسفلها.
+
+\begin{defn}
+  \emph{!!{signed formula}} هي زوج: أوله قيمة صدق، وثانيه
+  !!a{sentence}. ولها إذن إحدى هاتين الصورتين:
+  \[
+  \sFmla{\True}{!A} \text{ أو } \sFmla{\False}{!A}.
+  \]
+\end{defn}
+
+ولتصوّر المراد نقرأ~$\sFmla{\True}{!A}$: ``يجوز أن تكون~$!A$
+صادقة''، ونقرأ~$\sFmla{\False}{!A}$: ``يجوز أن تكون~$!A$ كاذبة''،
+وذلك في بعض \iftag{FOL}{!!{structure}}{!!{valuation}}.
+
+وكل !!{signed formula} في الشجرة لا تخلو من أحد أمرين: إما أن تكون
+\emph{افتراضًا}، ومكان الافتراضات أعلى الشجرة، وإما أن تكون مأخوذة من
+!!a{signed formula} تعلوها بإحدى قواعد الاستدلال. ولكل !!{main operator}
+قد يتصدّر ال!!{formula} السابقة قاعدتان؛ إحداهما لإشارة~$\True$،
+والأخرى لإشارة~$\False$. فمن القواعد ما يشعّب الشجرة، ومنها ما يقتصر
+على إلحاق !!{signed formula}s بالفرع نفسه. وليس من شرط القاعدة أن
+تتناول ال!!{signed formula} السابقة لها مباشرة؛ بل يجوز لها، وكثيرًا
+ما يجب، أن تتناول أي !!{signed formula} على مسار الفرع، من الجذر
+إلى الموضع الذي تجرى فيه القاعدة.
+
+والفرع \emph{مغلق} متى اجتمع فيه
+$\sFmla{\True}{!A}$ و$\sFmla{\False}{!A}$؛ فإذا أغلقت الفروع كلّها
+كان ال!!{tableau} مغلقًا. ووجه ذلك في التفسير الحدسي أن الفرع يصف
+حالًا يُفترض إمكان اجتماع أجزائها، لكن~$\sFmla{\True}{!A}$
+و$\sFmla{\False}{!A}$ لا يجتمعان. فإغلاق الفرع إبطال للإمكان الذي
+كان يصفه. ومن ثم فإن ال!!{tableau} المغلق يبطل جميع الوجوه التي
+قد يصدق فيها كل افتراض صورته~$\sFmla{\True}{!A}$، ويكذب فيها كل
+افتراض صورته~$\sFmla{\False}{!A}$، معًا.
+
+ونسمّي ال!!{tableau} المغلق \emph{لـ~$!A$} كل !!{tableau} مغلق
+جذره~$\sFmla{\False}{!A}$. فإذا وجد !!{tableau} مغلق على هذا الوجه،
+بطلت جميع إمكانات كذب~$!A$؛ فلا بد أن تصدق~$!A$ في كل
+\iftag{FOL}{!!{structure}}{!!{valuation}}.
+
+\end{document}

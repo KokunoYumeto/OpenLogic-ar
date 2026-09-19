@@ -1,0 +1,126 @@
+% الجزء: sets-functions-relations
+% الفصل: sets
+% القسم: pairs-and-products
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid[ar]{sfr}{set}{pai}
+\olsection{الأزواج والصفوف المرتبة والضروب الديكارتية}
+
+\begin{explain}
+الامتدادية لا تجعل لعناصر المجموعة ترتيبًا. فإن أريد تمثيل الترتيب
+احتيج إلى \emph{الأزواج المرتبة} $\tuple{x, y}$. فالزوج غير المرتب
+$\{x, y\}$ لا يتغير بقلب الترتيب: $\{x, y\} = \{y, x\}$.
+وأما المرتب فيتغير؛ إذ متى كان $x
+\neq y$ كان $\tuple{x, y} \neq \tuple{y, x}$.
+
+والمطلوب في تعريف الزوج المرتب داخل نظرية المجموعات أن يكون تساوي
+زوجين مكافئًا لتساوي الأول بالأول والثاني بالثاني، أعني:
+\[
+  \tuple{a, b}= \tuple{c, d}\text{ إذا وفقط إذا كان }a = c \text{ وكان }b=d.
+\]
+ويحقق هذا المقصود تعريف وينر--كوراتوفيسكي الآتي.
+\end{explain}
+
+\begin{defn}[الزوج المرتب]\ollabel{wienerkuratowski}
+	$\tuple{a, b} = \{\{a\}, \{a, b\}\}$.
+\end{defn}
+
+\begin{prob}
+استخرج من \olref[sfr][set][pai]{wienerkuratowski} أن $\tuple{a,
+	b}= \tuple{c, d}$ إذا وفقط إذا اجتمع $a = c$ و$b=d$.
+\end{prob}
+
+\begin{explain}
+وإذا تقرر تعريف الزوج المرتب أمكن بناء غيره عليه. فقد نحتاج إلى
+ترتيب أكثر من شيئين، كـ\emph{الثلاثيات} $\tuple{x, y, z}$
+و\emph{الرباعيات} $\tuple{x, y, z, u}$، ثم ما بعدها.
+فالثلاثية زوج مرتب أوله زوج مرتب: $\tuple{x, y, z}$ هي
+$\tuple{\tuple{x, y},z}$. والرباعية كذلك: $\tuple{x,y,z,u}$ هي
+$\tuple{\tuple{\tuple{x,y},z},u}$. وعلى هذا القياس نعرّف عمومًا
+\emph{الصفوف المرتبة من $n$ عناصر} $\tuple{x_1, \dots, x_n}$.
+
+ومن مجموعات الأزواج المرتبة، ومن سائر الصفوف المرتبة ذات $n$
+عناصر، مجموعات سيكثر نفعها فيما يأتي.
+\end{explain}
+
+\begin{defn}[الضرب الديكارتي]
+\emph{الضرب الديكارتي} للمجموعتين $A$ و$B$، ورمزه $A \times B$،
+تعريفه
+\[
+  A \times B = \Setabs{\tuple{x, y}}{x \in A \text{ و } y \in B}.
+\]
+\end{defn}
+
+\begin{ex}
+لتكن $A = \{0, 1\}$ و$B = \{1, a, b\}$. فضربهما
+\[
+A \times B = \{ \tuple{0, 1}, \tuple{0, a}, \tuple{0, b},
+    \tuple{1, 1}, \tuple{1, a}, \tuple{1, b} \}.
+\]
+\end{ex}
+
+\begin{ex}
+خذ المجموعة $A$؛ فضرب $A$ في نفسها $A \times A$ له رمز آخر هو~$A^2$؛
+فهو مجموعة \emph{كل} الأزواج $\tuple{x, y}$ حيث $x, y \in A$.
+وكذلك جميع الثلاثيات $\tuple{x, y, z}$ مجموعتها $A^3$، ثم على هذا
+القياس. ويجمع ذلك التعريف العودي:
+\begin{align*}
+  A^1 & = A\\
+  A^{k+1} & = A^k \times A
+\end{align*}
+\end{ex}
+
+\begin{prob}
+عيّن جميع !!{element}s المجموعة $\{1, 2, 3\}^3$.
+\end{prob}
+
+\begin{prop}\ollabel{cardnmprod}
+ليكن عدد !!{element}s $A$ هو $n$، وعدد !!{element}s $B$ هو $m$.
+فعدد عناصر $A \times B$ حينئذ $n\cdot m$.
+\end{prop}
+
+\begin{proof}
+ثبت كل !!{element}~$x$ في~$A$؛ فتحصل على $m$ من !!{element}s بالصورة
+$\tuple{x, y} \in A \times B$. ولنجمعها في
+$B_x = \Setabs{\tuple{x, y}}{y \in B}$. فإذا كان
+$x_1 \neq x_2$ امتنع تساوي الزوجين، أي $\tuple{x_1, y} \neq \tuple{x_2, y}$،
+ومن ثم $B_{x_1} \cap B_{x_2} = \emptyset$. فإذا كتبنا
+$A = \{x_1, \dots, x_n\}$ كان
+$A \times B = B_{x_1} \cup \dots \cup B_{x_n}$؛ فهو اتحاد هذه
+المجموعات المتباينة، وعدد !!{element}sه $n\cdot m$.
+
+ويتبين ذلك للعين بجعل !!{element}s~$A \times B$ في هذه الشبكة:
+\[
+\begin{array}{rcccc}
+  B_{x_1} = & \{\tuple{x_1, y_1} & \tuple{x_1, y_2} & \dots & \tuple{x_1, y_m}\}\\
+  B_{x_2} = & \{\tuple{x_2, y_1} & \tuple{x_2, y_2} & \dots & \tuple{x_2, y_m}\}\\
+  \vdots & & \vdots\\
+  B_{x_n} = & \{\tuple{x_n, y_1} & \tuple{x_n, y_2} & \dots & \tuple{x_n, y_m}\}
+\end{array}
+\]
+فلا يتكرر في الشبكة زوج؛ لأن قيم $x_i$ متمايزة، وكذلك قيم $y_j$.
+وعدّ الأزواج فيها يعطي $n\cdot m$.
+\end{proof}
+
+\begin{prob}
+برهن بالاستقراء على~$k$ أن كل $k \ge 1$ يحقق الآتي: إذا كان عدد
+!!{element}s $A$ هو $n$، كان عدد !!{element}s $A^k$ هو $n^k$.
+\end{prob}
+
+\begin{ex}
+لتكن $A$ مجموعة. \emph{الكلمة} على~$A$ متتالية من !!{element}s~$A$، وتؤخذ
+المتتالية صفًا مرتبًا من $n$ من !!{element}s~$A$. فإن كانت
+$A = \{a, b, c\}$، كانت «$bac$» هي الثلاثية~$\tuple{b, a, c}$.
+ولهذه الكلمات، أي متتاليات الرموز، منزلة أساسية في علوم الحاسوب.
+واصطلاحنا أن !!{element}s~$A$ نفسها متتاليات طولها~$1$، وأن
+$\emptyset$ هي المتتالية ذات الطول~$0$. فمجموعة \emph{جميع} الكلمات
+على~$A$ تكون
+\[
+A^* = \{\emptyset\} \cup A \cup A^2 \cup A^3 \cup \dots
+\]
+\end{ex}
+
+\end{document}

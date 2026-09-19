@@ -1,0 +1,141 @@
+% Part: first-order-logic
+% Chapter: axiomatic-deduction
+% Section: soundness
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{axd}{sou}}
+      {\olfileid{pl}{axd}{sou}}
+
+\olsection{السلامة}
+
+\begin{explain}
+نسق !!^a{derivation}، ومنه الاستنتاج البديهي، يوصف بأنه \emph{سليم}
+متى امتنع عليه أن !!{derive} ما ليس بصحيح. فالسلامة ضمان لأنساق
+ال!!{derivation} من هذا الخلل. ولها وجوه بحسب ما ننظر فيه من خواص
+البراهين؛ فمنها أن
+\begin{enumerate}
+\item كل $!A$ !!{derivable} تكون \iftag{FOL}{صالحة}{تحصيل حاصل}؛
+\item متى كانت $!A$ !!{derivable} من عبارات~${\OLId{greek-variable}{Gamma}}$، لزمت عنها
+  دلاليًا كذلك؛
+\item كل مجموعة من ال!!{formula}s~${\OLId{greek-variable}{Gamma}}$ غير متسقة تكون غير قابلة
+  للإرضاء.
+\end{enumerate}
+وهذه خواص لا يستقيم نسق !!a{derivation} بدونها؛ فإن تخلفت إحداها
+كان في نسق ال!!{derivation} خلل، إذ أمكنه أن !!{derive} ما يتجاوز
+الصحيح. ومن هنا كان إثبات سلامة نسق !!a{derivation} من آكد ما يلزم
+في دراسته.
+\end{explain}
+
+\begin{prop}
+  إذا كانت $!A$ بديهية، فإن
+  \iftag{FOL}
+    {$\Sat{{\OLId{latin-looped}{M}}}{!A}[{\OLId{latin-ordinary}{s}}]$ لكل !!{structure}~$\Struct{M}$ ولكل إسناد~${\OLId{latin-ordinary}{s}}$.}
+    {$\pSat{{\OLId{latin-ordinary}{v}}}{!A}$ لكل !!{valuation}~$\pAssign{{\OLId{latin-ordinary}{v}}}$.}
+\end{prop}
+
+\begin{proof}
+\iftag{FOL}{المطلوب بيان صلاحية البديهيات كلها. ونبين، مثالًا لذلك،
+  حالة \olref[qua]{ax:q1}. ليكن ${\OLId{latin-ordinary}{t}}$ !!{free for} ${\OLId{latin-ordinary}{x}}$ في $!A$،
+  ولنفترض $\Sat{{\OLId{latin-looped}{M}}}{\lforall[{\OLId{latin-ordinary}{x}}][!A]}[{\OLId{latin-ordinary}{s}}]$. فتعريف الإرضاء يقتضي، لكل
+  $\varAssign{{\OLId{latin-ordinary}{s}}'}{{\OLId{latin-ordinary}{s}}}{{\OLId{latin-ordinary}{x}}}$، أن $\Sat{{\OLId{latin-looped}{M}}}{!A}[{\OLId{latin-ordinary}{s}}']$؛ ومن جملة ذلك الحالة
+  التي فيها ${\OLId{latin-ordinary}{s}}'({\OLId{latin-ordinary}{x}}) = \Value{{\OLId{latin-ordinary}{t}}}{{\OLId{latin-looped}{M}}}[{\OLId{latin-ordinary}{s}}]$. فتفيد
+  \olref[syn][ext]{prop:ext-formulas}
+  $\Sat{{\OLId{latin-looped}{M}}}{\Subst{!A}{{\OLId{latin-ordinary}{t}}}{{\OLId{latin-ordinary}{x}}}}[{\OLId{latin-ordinary}{s}}]$، وبذلك يثبت
+  $\Sat{{\OLId{latin-looped}{M}}}{(\lforall[{\OLId{latin-ordinary}{x}}][!A] \lif \Subst{!A}{{\OLId{latin-ordinary}{t}}}{{\OLId{latin-ordinary}{x}}})}[{\OLId{latin-ordinary}{s}}]$.}{ضع لكل
+  بديهية جدول صدق، وبيّن به أنها تحصيل حاصل.}
+\end{proof}
+
+\begin{thm}[السلامة]
+\ollabel{thm:soundness}
+إذا كانت ${\OLId{greek-variable}{Gamma}}$ مجموعة من ال!!{sentence}s، وكانت $!A$ !!a{sentence}،
+وكان ${\OLId{greek-variable}{Gamma}} \Proves !A$، فإن ${\OLId{greek-variable}{Gamma}} \Entails !A$.
+\end{thm}
+
+\begin{proof}
+البرهان بالاستقراء على عدد مرات تطبيق قواعد الاستدلال في !!{derivation}
+الصيغة $!A$ من ${\OLId{greek-variable}{Gamma}}$. فأما إذا لم تطبق قاعدة استدلال قط، فال!!{sentence}s
+الواردة في ال!!{derivation} كلها إما حالات من البديهيات وإما أعضاء
+في~${\OLId{greek-variable}{Gamma}}$. وقد ثبت في القضية السابقة أن البديهيات
+\iftag{FOL}{صالحة}{تحصيل حاصل}؛ فإذا كانت $!A$ بديهية، لزم
+${\OLId{greek-variable}{Gamma}} \Entails !A$. وأما إذا كان $!A \in {\OLId{greek-variable}{Gamma}}$، فحينئذ
+${\OLId{greek-variable}{Gamma}} \Entails !A$ بلا مزيد برهان.
+
+وأما إذا انتهى !!{derivation} الصيغة~$!A$ بتطبيق قاعدة إثبات المقدَّم،
+فقد سبقته !!{sentence}s هما $!B$ و$!B \lif !A$ في
+ال!!{derivation}. وفرض الاستقراء جار على جزأي ال!!{derivation}
+المنتهيين بهاتين ال!!{sentence}s، إذ ينقص عدد تطبيقات قواعد الاستدلال
+في كل منهما تطبيقًا واحدًا على الأقل. فينتج من فرض الاستقراء
+${\OLId{greek-variable}{Gamma}} \Entails !B$ و${\OLId{greek-variable}{Gamma}} \Entails !B \lif !A$، ومنهما
+${\OLId{greek-variable}{Gamma}} \Entails !A$ بمقتضى
+\iftag{FOL}
+      {\olref[syn][sem]{thm:sem-deduction}}
+      {\olref[pl][syn][sem]{thm:sem-deduction}}.
+
+\iftag{FOL}{ولنفرض أن خاتمة البرهان تستند إلى \QR. صورتها إذن
+$!C \lif \lforall[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$، وقد سبقتها
+$!C \lif !B({\OLId{latin-ordinary}{c}})$، على أن ${\OLId{latin-ordinary}{c}}$ لا يقع في ${\OLId{greek-variable}{Gamma}}$ ولا في $!C$ ولا في
+$\lforall[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$. فيعطينا فرض الاستقراء ${\OLId{greek-variable}{Gamma}} \Entails !C \lif
+!B({\OLId{latin-ordinary}{c}})$، وتفيد \olref[syn][sem]{thm:sem-deduction}
+${\OLId{greek-variable}{Gamma}} \cup \{!C\} \Entails !B({\OLId{latin-ordinary}{c}})$.
+
+خذ بنية~$\Struct{M}$ بحيث $\Sat{{\OLId{latin-looped}{M}}}{{\OLId{greek-variable}{Gamma}} \cup \{!C\}}$. والمطلوب
+$\Sat{{\OLId{latin-looped}{M}}}{\lforall[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]}$. ولما كانت
+$\lforall[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$ !!a{sentence}، كفى أن نثبت، لكل إسناد
+متغيرات~${\OLId{latin-ordinary}{s}}$، أن $\Sat{{\OLId{latin-looped}{M}}}{!B({\OLId{latin-ordinary}{x}})}[{\OLId{latin-ordinary}{s}}]$
+(\olref[syn][ass]{prop:sat-quant}). وعناصر ${\OLId{greek-variable}{Gamma}} \cup \{!C\}$ جمل
+كلها، ولذلك $\Sat{{\OLId{latin-looped}{M}}}{!D}[{\OLId{latin-ordinary}{s}}]$ لكل $!D \in {\OLId{greek-variable}{Gamma}}$، بمقتضى
+\olref[syn][sat]{defn:satisfaction}. أنشئ الآن $\Struct{M'}$ من
+$\Struct{M}$ بتغيير واحد، هو جعل $\Assign{{\OLId{latin-ordinary}{c}}}{{\OLId{latin-looped}{M}}'} = {\OLId{latin-ordinary}{s}}({\OLId{latin-ordinary}{x}})$. ولأن ${\OLId{latin-ordinary}{c}}$
+لا يقع في~${\OLId{greek-variable}{Gamma}}$ ولا في~$!C$، يبقى $\Sat{{\OLId{latin-looped}{M}}'}{{\OLId{greek-variable}{Gamma}} \cup \{!C\}}$
+بحسب \olref[syn][ext]{cor:extensionality-sent}. وحيث إن ${\OLId{greek-variable}{Gamma}} \cup \{!C\}
+\Entails !B({\OLId{latin-ordinary}{c}})$، يلزم $\Sat{{\OLId{latin-looped}{M}}'}{!B({\OLId{latin-ordinary}{c}})}$. ثم إن $!B({\OLId{latin-ordinary}{c}})$ !!a{sentence}،
+فيترتب $\Sat{{\OLId{latin-looped}{M}}'}{!B({\OLId{latin-ordinary}{c}})}[{\OLId{latin-ordinary}{s}}]$ على
+\olref[syn][ass]{prop:sentence-sat-true}. ولدينا
+$\Sat{{\OLId{latin-looped}{M}}'}{!B({\OLId{latin-ordinary}{x}})}[{\OLId{latin-ordinary}{s}}]$ إذا وفقط إذا كان $\Sat{{\OLId{latin-looped}{M}}'}{!B({\OLId{latin-ordinary}{c}})}[{\OLId{latin-ordinary}{s}}]$، بمقتضى
+\olref[syn][ext]{prop:ext-formulas}؛ فإن $!B({\OLId{latin-ordinary}{c}})$ إنما هي
+$\Subst{!B({\OLId{latin-ordinary}{x}})}{{\OLId{latin-ordinary}{c}}}{{\OLId{latin-ordinary}{x}}}$. فنحصل على $\Sat{{\OLId{latin-looped}{M}}'}{!B({\OLId{latin-ordinary}{x}})}[{\OLId{latin-ordinary}{s}}]$. وليس ${\OLId{latin-ordinary}{c}}$
+واقعًا في~$!B({\OLId{latin-ordinary}{x}})$، فتقتضي \olref[syn][ext]{prop:extensionality}
+$\Sat{{\OLId{latin-looped}{M}}}{!B({\OLId{latin-ordinary}{x}})}[{\OLId{latin-ordinary}{s}}]$. وإذ كان ${\OLId{latin-ordinary}{s}}$ إسنادًا اعتباطيًا، ثبت
+$\Sat{{\OLId{latin-looped}{M}}}{\lforall[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]}$، ومن ثم ${\OLId{greek-variable}{Gamma}} \cup \{!C\} \Entails
+\lforall[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$. وتفيد \olref[syn][sem]{thm:sem-deduction} أخيرًا
+${\OLId{greek-variable}{Gamma}} \Entails !C \lif \lforall[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$.
+
+بقيت الحالة التي تنتج فيها \QR{} الصيغة $!A$ وهي على الصورة
+$\lexists[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})] \lif !C$؛ وبرهانها موكول إلى القارئ تمرينًا.}{}
+\end{proof}
+
+\tagprob{FOL}
+\begin{prob}
+  أكمل برهان \olref[fol][axd][sou]{thm:soundness}.
+\end{prob}
+\tagendprob
+
+\begin{cor}
+\ollabel{cor:weak-soundness}
+إذا كان $\Proves !A$، فإن $!A$ \iftag{FOL}{صالحة}{تحصيل حاصل}.
+\end{cor}
+
+\begin{cor}
+\ollabel{cor:consistency-soundness}
+إذا كانت ${\OLId{greek-variable}{Gamma}}$ قابلة للإرضاء، فهي متسقة.
+\end{cor}
+
+\begin{proof}
+نثبت المقابل بالنقيض. لتكن ${\OLId{greek-variable}{Gamma}}$ غير متسقة؛ فيكون
+${\OLId{greek-variable}{Gamma}} \Proves \lfalse$، أي يوجد !!a{derivation} للصيغة
+$\lfalse$ من~${\OLId{greek-variable}{Gamma}}$. وبمقتضى \olref{thm:soundness}، كل
+\iftag{FOL}{!!{structure}~$\Struct{M}$}{!!{valuation}~$\pAssign{{\OLId{latin-ordinary}{v}}}$}
+يرضي ${\OLId{greek-variable}{Gamma}}$ يلزمه أن يرضي~$\lfalse$. لكن
+\iftag{FOL}{$\Sat/{{\OLId{latin-looped}{M}}}{\lfalse}$ لكل
+  !!{structure}~$\Struct{M}$}{$\pSat/{{\OLId{latin-ordinary}{v}}}{\lfalse}$ لكل
+  !!{valuation}~$\pAssign{{\OLId{latin-ordinary}{v}}}$}؛ فليس ثمة
+\iftag{FOL}{$\Struct{M}$}{$\pAssign{{\OLId{latin-ordinary}{v}}}$} يرضي ${\OLId{greek-variable}{Gamma}}$. ومعنى ذلك أن
+${\OLId{greek-variable}{Gamma}}$ غير قابلة للإرضاء.
+\end{proof}
+
+
+\end{document}

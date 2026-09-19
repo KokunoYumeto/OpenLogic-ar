@@ -1,0 +1,83 @@
+% Part: normal-modal-logic
+% Chapter: axioms-systems
+% Section: introduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{prf}{int}
+
+\olsection{مقدمة}
+
+قد فرغنا من دلالة اللغة الجهية الأساسية بالنماذج، ومن معنى صلاحية
+!!a{formula}: إما أن تصدق في كل عالم من كل نموذج، وإما أن يختص هذا
+التعميم بفئة من النماذج أو بالأطر والنماذج المبنية عليها.
+ونريد الآن وصل هذا الوصف الدلالي بمعنى برهاني، هو
+!!{derivability}. فالمطلوب حدّ !!{derivability} في نسق يجعل
+!!a{formula} !!{derivable} متى وفقط متى كانت صالحة.
+
+وأقدم نظم !!{derivation} وأبسطها النظم المسماة هلبرتية أو بديهية.
+ويسهل نسبيًا إنشاء نظم !!{derivation} من هذا النمط لكثير من
+المنطقات الجهية؛ فنظم !!{derivation} الهلبرتية يسيرة من جهة
+دراستها الميتانظرية، كبحث السلامة والتمام. ولا يلزم من يسر الدراسة
+يسر الاستعمال: فإثبات !!{formula}s فيها أشق بكثير من إثباتها
+في الاستنتاج الطبيعي، مثلًا.
+
+في نظم !!{derivation} الهلبرتية، !!a{derivation} لـ!!a{formula}
+متتالية من !!{formula}s تبتدئ ببديهيات وتنتهي، بقواعد استدلال
+قليلة، إلى ال!!{formula} المطلوبة. ولكي يوافق نسق !!{derivation}
+الدلالة، لا بد أن تكون الصيغ !!{derivable} صادقة في كل نموذج،
+أو في كل نموذج تصدق فيه البديهيات المختارة جميعًا.
+فنستخرج أولًا الشروط التي تتيح ذلك، وهي شروط المنطق الجهوي
+«النظامي». ويكفي فيه افتراض قاعدتين: القياس الاستثنائي والإلزام.
+وأما البديهيات فجميع أمثلة إحلال القضايا الصادقة صدقًا تحليليًا،
+ومعها ما يقتضيه المنطق المقصود من البديهيات الجهية.
+وحتى إذا كان نظرنا في جميع النماذج، وجب إدخال كل أمثلة إحلال~\Ax{K}
+\iftag{notprvDiamond}{}{و~$\Ax{Dual}$} في البديهيات؛ ومن هذا وحده
+ينشأ أصغر منطق جهوي نظامي~$\Log K$.
+
+\begin{defn}
+قاعدة \emph{القياس الاستثنائي} هي مخطط الاستدلال
+\begin{prooftree}
+\AxiomC{$!A$}
+\AxiomC{$!A \lif !B$}
+\RightLabel{\MP}
+\BinaryInfC{$!B$}
+\end{prooftree}
+نقول إن !!a{formula}~$!B$ \emph{تلزم عن}~!!{formula}s $!A$، $!C$
+بالقياس الاستثنائي إذا وفقط إذا كان $!C \ident !A \lif !B$.
+\end{defn}
+
+\begin{defn}
+قاعدة \emph{الإلزام} هي مخطط الاستدلال
+\begin{prooftree}
+\AxiomC{$!A$}
+\RightLabel{\Nec}
+\UnaryInfC{$\Box !A$}
+\end{prooftree}
+نقول إن !!{formula}~$!B$ تلزم عن !!{formula}s~$!A$ بالإلزام إذا وفقط
+إذا كان $!B \ident \Box !A$.
+\end{defn}
+
+\begin{defn}
+\emph{!!{derivation}} من مجموعة البديهيات~$\Sigma$ هو متتالية من
+!!{formula}s $!B_{\OLMathNumeral{1}}$، $!B_{\OLMathNumeral{2}}$، \dots، $!B_{\OLId{latin-ordinary}{n}}$، بحيث يكون كل $!B_{\OLId{latin-ordinary}{i}}$ إما
+\begin{enumerate}
+\item مثال إحلال لقضية صادقة صدقا تحليليا، أو
+\item مثال إحلال لـ!!a{formula} في~$\Sigma$، أو
+\item لازما بالقياس الاستثنائي عن !!{formula}s اثنتين $!B_{\OLId{latin-ordinary}{j}}$، $!B_{\OLId{latin-ordinary}{k}}$
+  حيث ${\OLId{latin-ordinary}{j}}$، ${\OLId{latin-ordinary}{k}} < {\OLId{latin-ordinary}{i}}$، أو
+\item لازما بالإلزام عن !!a{formula}~$!B_{\OLId{latin-ordinary}{j}}$ حيث ${\OLId{latin-ordinary}{j}} < {\OLId{latin-ordinary}{i}}$.
+\end{enumerate}
+إذا وجد !!a{derivation} كهذا وكان $!B_{\OLId{latin-ordinary}{n}} \ident !A$، قلنا إن
+$!A$ \emph{!!{derivable} من $\Sigma$}، ورمزنا إلى ذلك بـ$\Sigma \Proves !A$.
+\end{defn}
+
+وسيثبت أن الصيغ !!{derivable} بهذا التعريف تؤلف منطقًا جهويًا
+نظاميًا، وأن كل عنصر !!{derivable} من نوع !!{formula} يصدق
+في كل نموذج تصدق فيه البديهيات جميعًا. وهذه خاصية
+\emph{السلامة} للـ!!{derivation}s. وأما العكس، وهو
+\emph{التمام}، فإقامة برهانه أشق.
+
+\end{document}

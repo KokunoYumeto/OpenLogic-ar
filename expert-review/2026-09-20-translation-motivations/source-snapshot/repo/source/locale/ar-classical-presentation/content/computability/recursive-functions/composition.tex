@@ -1,0 +1,84 @@
+% Part: computability
+% Chapter: recursive-functions
+% Section: composition
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{rec}{com}
+\olsection{التركيب}
+
+لنأخذ ${\OLId{latin-ordinary}{f}}$ و${\OLId{latin-ordinary}{g}}$ دالتين أحاديتي الحجة في الأعداد الطبيعية، ولنجعل
+${\OLId{latin-ordinary}{h}}({\OLId{latin-ordinary}{x}})={\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{x}}))$. فالدالة الجديدة~${\OLId{latin-ordinary}{h}}({\OLId{latin-ordinary}{x}})$ حاصلة
+\emph{بالتركيب} من الدالتين ${\OLId{latin-ordinary}{f}}$ و~${\OLId{latin-ordinary}{g}}$. والمطلوب تعميم هذا الوجه على الدوال
+التي تزيد حججها على واحدة.
+
+ومن وجوه تعميمه أن نفرض ${\OLId{latin-ordinary}{f}}$ ذات ${\OLId{latin-ordinary}{k}}$ حجج، ونأخذ ${\OLId{latin-ordinary}{g}}_{\OLMathNumeral{0}}$، …،
+${\OLId{latin-ordinary}{g}}_{{\OLId{latin-ordinary}{k}}-{\OLMathNumeral{1}}}$، وهي ${\OLId{latin-ordinary}{k}}$ دوال لكل منها ${\OLId{latin-ordinary}{n}}$ حجة. ثم نعرّف دالة
+جديدة~${\OLId{latin-ordinary}{h}}$ ذات ${\OLId{latin-ordinary}{n}}$ حجة هكذا:
+\[
+{\OLId{latin-ordinary}{h}}({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}}, \dots, {\OLId{latin-ordinary}{x}}_{{\OLId{latin-ordinary}{n}}-{\OLMathNumeral{1}}}) =
+{\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{g}}_{\OLMathNumeral{0}}({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}}, \dots, {\OLId{latin-ordinary}{x}}_{{\OLId{latin-ordinary}{n}}-{\OLMathNumeral{1}}}), \dots, {\OLId{latin-ordinary}{g}}_{{\OLId{latin-ordinary}{k}}-{\OLMathNumeral{1}}}({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}}, \dots, {\OLId{latin-ordinary}{x}}_{{\OLId{latin-ordinary}{n}}-{\OLMathNumeral{1}}}))
+\]
+فإن أمكن حساب ${\OLId{latin-ordinary}{f}}$ وكل ${\OLId{latin-ordinary}{g}}_{\OLId{latin-ordinary}{i}}$، أمكن حساب ${\OLId{latin-ordinary}{h}}$. وبيان ذلك أننا لحساب
+${\OLId{latin-ordinary}{h}}({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}},\dots,{\OLId{latin-ordinary}{x}}_{{\OLId{latin-ordinary}{n}}-{\OLMathNumeral{1}}})$، نستخرج أولًا القيم
+${\OLId{latin-ordinary}{y}}_{\OLId{latin-ordinary}{i}}={\OLId{latin-ordinary}{g}}_{\OLId{latin-ordinary}{i}}({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}},\dots,{\OLId{latin-ordinary}{x}}_{{\OLId{latin-ordinary}{n}}-{\OLMathNumeral{1}}})$ لكل ${\OLId{latin-ordinary}{i}}={\OLMathNumeral{0}}$، …،~${\OLId{latin-ordinary}{k}}-{\OLMathNumeral{1}}$. ثم نجعل هذه
+القيم حججًا لـ${\OLId{latin-ordinary}{f}}$، فيحصل
+${\OLId{latin-ordinary}{h}}({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}},\dots,{\OLId{latin-ordinary}{x}}_{{\OLId{latin-ordinary}{n}}-{\OLMathNumeral{1}}})={\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{y}}_{\OLMathNumeral{0}},\dots,{\OLId{latin-ordinary}{y}}_{{\OLId{latin-ordinary}{k}}-{\OLMathNumeral{1}}})$.
+
+وقد يعترض بأن هذا الوصف يضيّق ما يجوز فعله عند حساب دالة جديدة بدوال
+معلومة؛ إذ قد يُستغنى عن بعض حجج الدالة، كما فعلنا في تعريف
+${\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}},{\OLId{latin-ordinary}{z}})=\Succ({\OLId{latin-ordinary}{z}})$ لاستعمالها في التعريف بالعودية البدائية لـ~$\Add$.
+وجواب ذلك أن نضم إلى ما يجوز استعماله الدوال الآتية:
+\[
+\Proj{{\OLId{latin-ordinary}{n}}}{{\OLId{latin-ordinary}{i}}}({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}}, \dots, {\OLId{latin-ordinary}{x}}_{{\OLId{latin-ordinary}{n}}-{\OLMathNumeral{1}}}) = {\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{i}}
+\]
+تسمى الدوال~$\Proj{{\OLId{latin-ordinary}{n}}}{{\OLId{latin-ordinary}{i}}}$ \emph{دوال الإسقاط}؛ فـ$\Proj{{\OLId{latin-ordinary}{n}}}{{\OLId{latin-ordinary}{i}}}$ دالة
+ذات ${\OLId{latin-ordinary}{n}}$ حجة. وعندئذ يمكن تعريف ${\OLId{latin-ordinary}{g}}$ بـ
+\[
+{\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}, {\OLId{latin-ordinary}{z}}) = \Succ(\Proj{{\OLMathNumeral{3}}}{{\OLMathNumeral{2}}}({\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}, {\OLId{latin-ordinary}{z}})).
+\]
+فالدالة الأحادية $\Succ$ هنا في موضع ${\OLId{latin-ordinary}{f}}$، ومن ثم ${\OLId{latin-ordinary}{k}}={\OLMathNumeral{1}}$. والدالة
+الثلاثية الوحيدة $\Proj{{\OLMathNumeral{3}}}{{\OLMathNumeral{2}}}$ في موضع ${\OLId{latin-ordinary}{g}}_{\OLMathNumeral{0}}$. وبتركيبهما تحصل دالة
+ثلاثية الحجج، قيمتها لاحق الحجة الثالثة.
+
+وللإسقاط نفع آخر: فبه نعيد ترتيب الحجج أو نجعل بعضها عين بعض عند
+تعريف دوال جديدة. ومن أمثلته تعريف الدالة ${\OLId{latin-ordinary}{h}}({\OLId{latin-ordinary}{x}})=\Add({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{x}})$ بـ
+\[
+{\OLId{latin-ordinary}{h}}({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}}) = \Add(\Proj{{\OLMathNumeral{1}}}{{\OLMathNumeral{0}}}({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}}),\Proj{{\OLMathNumeral{1}}}{{\OLMathNumeral{0}}}({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}})).
+\]
+هنا ${\OLId{latin-ordinary}{k}}={\OLMathNumeral{2}}$ و${\OLId{latin-ordinary}{n}}={\OLMathNumeral{1}}$، وتؤدي $\Add$ دور ${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{y}}_{\OLMathNumeral{0}},{\OLId{latin-ordinary}{y}}_{\OLMathNumeral{1}})$، ويؤدي
+$\Proj{{\OLMathNumeral{1}}}{{\OLMathNumeral{0}}}({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}})$، وهو دالة الإسقاط الأحادية الحجة (أي دالة الهوية)،
+دوري ${\OLId{latin-ordinary}{g}}_{\OLMathNumeral{0}}({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}})$ و${\OLId{latin-ordinary}{g}}_{\OLMathNumeral{1}}({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}})$ معًا.
+
+وكذلك إذا علمنا الدالة ${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{y}}_{\OLMathNumeral{0}},{\OLId{latin-ordinary}{y}}_{\OLMathNumeral{1}})$، استخرجنا منها الدالة
+${\OLId{latin-ordinary}{h}}({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}},{\OLId{latin-ordinary}{x}}_{\OLMathNumeral{1}})={\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{1}},{\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}})$ بـ
+\[
+{\OLId{latin-ordinary}{h}}({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}}, {\OLId{latin-ordinary}{x}}_{\OLMathNumeral{1}}) = {\OLId{latin-ordinary}{f}}(\Proj{{\OLMathNumeral{2}}}{{\OLMathNumeral{1}}}({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}}, {\OLId{latin-ordinary}{x}}_{\OLMathNumeral{1}}),\Proj{{\OLMathNumeral{2}}}{{\OLMathNumeral{0}}}({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}}, {\OLId{latin-ordinary}{x}}_{\OLMathNumeral{1}})).
+\]
+هنا ${\OLId{latin-ordinary}{k}}={\OLMathNumeral{2}}$ و${\OLId{latin-ordinary}{n}}={\OLMathNumeral{2}}$، وتؤدي $\Proj{{\OLMathNumeral{2}}}{{\OLMathNumeral{1}}}$ و~$\Proj{{\OLMathNumeral{2}}}{{\OLMathNumeral{0}}}$ دوري
+${\OLId{latin-ordinary}{g}}_{\OLMathNumeral{0}}$ و${\OLId{latin-ordinary}{g}}_{\OLMathNumeral{1}}$ على الترتيب.
+
+وقد يرد اعتراض آخر، وهو اشتراط اتفاق ${\OLId{latin-ordinary}{g}}_{\OLMathNumeral{0}}$، …،~${\OLId{latin-ordinary}{g}}_{{\OLId{latin-ordinary}{k}}-{\OLMathNumeral{1}}}$ في عدد
+حججها~${\OLId{latin-ordinary}{n}}$. و\emph{رتبة} الدالة هي عدد حججها؛ فالدالة ذات
+${\OLId{latin-ordinary}{n}}$ حجة رتبتها~${\OLId{latin-ordinary}{n}}$. غير أن دوال الإسقاط ترفع هذا التضييق.
+وبيانه: لنفرض أن ${\OLId{latin-ordinary}{f}}$ و~${\OLId{latin-ordinary}{g}}$ ثلاثيتا الحجج، وأن ${\OLId{latin-ordinary}{h}}$ دالة ثنائية
+الحجة، تعريفها
+\[
+{\OLId{latin-ordinary}{h}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}}) = {\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}}),{\OLId{latin-ordinary}{y}}).
+\]
+فإذا أظهرنا دوال الإسقاط في تعريف~${\OLId{latin-ordinary}{h}}$ كتبناه هكذا:
+\[
+{\OLId{latin-ordinary}{h}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}}) = {\OLId{latin-ordinary}{f}}(\Proj{{\OLMathNumeral{2}}}{{\OLMathNumeral{0}}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}}), {\OLId{latin-ordinary}{g}}(\Proj{{\OLMathNumeral{2}}}{{\OLMathNumeral{0}}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}}), \Proj{{\OLMathNumeral{2}}}{{\OLMathNumeral{0}}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}}),
+\Proj{{\OLMathNumeral{2}}}{{\OLMathNumeral{1}}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})), \Proj{{\OLMathNumeral{2}}}{{\OLMathNumeral{1}}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})).
+\]
+فتكون ${\OLId{latin-ordinary}{h}}$ تركيب ${\OLId{latin-ordinary}{f}}$ مع $\Proj{{\OLMathNumeral{2}}}{{\OLMathNumeral{0}}}$ و${\OLId{latin-ordinary}{l}}$ و
+~$\Proj{{\OLMathNumeral{2}}}{{\OLMathNumeral{1}}}$، حيث
+\[
+{\OLId{latin-ordinary}{l}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}}) = {\OLId{latin-ordinary}{g}}(\Proj{{\OLMathNumeral{2}}}{{\OLMathNumeral{0}}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}}),\Proj{{\OLMathNumeral{2}}}{{\OLMathNumeral{0}}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}}),\Proj{{\OLMathNumeral{2}}}{{\OLMathNumeral{1}}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})),
+\]
+أي إن ${\OLId{latin-ordinary}{l}}$ تركيب ${\OLId{latin-ordinary}{g}}$ مع $\Proj{{\OLMathNumeral{2}}}{{\OLMathNumeral{0}}}$ و$\Proj{{\OLMathNumeral{2}}}{{\OLMathNumeral{0}}}$ و
+~$\Proj{{\OLMathNumeral{2}}}{{\OLMathNumeral{1}}}$.
+
+\end{document}

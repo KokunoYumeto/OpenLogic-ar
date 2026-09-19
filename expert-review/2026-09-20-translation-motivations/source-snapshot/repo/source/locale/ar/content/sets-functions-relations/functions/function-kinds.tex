@@ -1,0 +1,118 @@
+% Part: sets-functions-relations
+% Chapter: functions
+% Section: kinds
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid[ar]{sfr}{fun}{kin}
+\olsection{أنواع الدوال}
+
+\begin{explain}
+سيكون من المفيد أن نقدم تصنيفًا لبعض
+أنواع الدوال التي نصادفها أكثر من غيرها.
+
+ولنبدأ بالنظر في الدوال التي تتصف بأن
+كل عنصر من المجال المقابل قيمة للدالة. وتسمى
+هذه الدوال !!{surjective}، ويمكن تمثيلها كما في
+\olref{fig:surjective}.
+
+\begin{figure}
+  \olasset{assets/diagrams/surjective.tikz}
+  \caption{تكون الدالة !!^a{surjective} حين يكون كل !!{element} من
+    المجال المقابل قيمةً لها.}
+  \ollabel{fig:surjective}
+\end{figure}
+\end{explain}
+
+\begin{defn}[دالة !!^{surjective}]
+تكون الدالة $f \colon A \rightarrow B$ \emph{!!{surjective}} إذا وفقط إذا كان $B$
+هو أيضًا مدى~$f$، أي إذا كان لكل $y \in B$ عنصر~$x \in A$
+واحد على الأقل بحيث~$f(x) = y$؛ أو بالرموز:
+\[
+  (\forall y \in B)(\exists x \in A)f(x) = y.
+\]
+ونسميها !!a{surjection} من $A$ إلى $B$.
+\end{defn}
+
+\begin{explain}
+إذا أردت أن تبين أن $f$ هي !!a{surjection}، فعليك أن تثبت
+أن كل كائن في المجال المقابل لـ$f$ هو قيمة $f(x)$ لمدخل ما
+$x$.
+
+لاحظ أن كل دالة \emph{تستحث} !!a{surjection}. فبالنظر إلى
+دالة $f \colon A \to B$، لتكن $f' \colon A \to \ran{f}$
+معرفة بـ$f'(x) = f(x)$. وبما أن $\ran{f}$ \emph{معرّف} بأنه
+$\Setabs{f(x) \in B}{x \in A}$، فلا بد أن تكون الدالة $f'$
+!!a{surjection}
+\end{explain}
+
+\begin{explain}
+تقرن كل دالة كل مدخل ممكن بمخرج وحيد. غير أن
+ثمة أيضًا دوال لا تقرن مدخلين مختلفين بالمخرج نفسه قط.
+وتسمى هذه الدوال !!{injective}، ويمكن تمثيلها
+كما في \olref{fig:injective}.
+\begin{figure}
+  \olasset{assets/diagrams/injective.tikz}
+  \caption{إذا كانت الدالة !!^a{injective} فإنها لا تقرن أبدًا وسيطتين
+    مختلفتين بالقيمة نفسها.}
+  \ollabel{fig:injective}
+\end{figure}
+\end{explain}
+
+\begin{defn}[دالة !!^{injective}]
+تكون الدالة $f \colon A \rightarrow B$ \emph{!!{injective}} إذا وفقط إذا كان لكل
+$y \in B$ عنصر~$x \in A$ واحد على الأكثر بحيث~$f(x) = y$. ونسمي
+مثل هذه الدالة !!a{injection} من $A$ إلى~$B$.
+\end{defn}
+
+\begin{explain}
+إذا أردت أن تبين أن $f$ هي !!a{injection}، فعليك أن تثبت،
+لكل $x$ و$y$ من !!{element}s مجال $f$، أنه إذا كان $f(x)=f(y)$ فإن
+$x=y$.
+\end{explain}
+
+\begin{ex}
+الدالة الثابتة $f\colon \Nat \to \Nat$ المعطاة بـ$f(x) = 1$
+ليست !!{injective} ولا !!{surjective}.
+
+دالة الهوية $f\colon \Nat \to \Nat$ المعطاة بـ$f(x) = x$
+هي !!{injective} و!!{surjective} معًا.
+
+دالة اللاحق $f \colon \Nat \to \Nat$ المعطاة بـ$f(x) = x+1$
+هي !!{injective}، لكنها ليست !!{surjective}.
+
+الدالة $f \colon \Nat \to \Nat$ المعرفة كما يأتي:
+\[
+  f(x) =
+  \begin{cases}
+    \frac{x}{2} & \text{إذا كان $x$ زوجيًا} \\
+    \frac{x+1}{2} & \text{إذا كان $x$ فرديًا.}
+  \end{cases}
+\]
+هي !!{surjective}، لكنها ليست !!{injective}.
+\end{ex}
+
+\begin{explain}
+كثيرًا ما نريد النظر في الدوال التي تكون
+!!{injective} و!!{surjective} معًا. ونسمي هذه الدوال
+!!{bijective}. وهي تشبه الدالة الممثلة في
+\olref{fig:bijective}. وتسمى !!^{bijection}s أحيانًا أيضًا
+\emph{مراسلات واحد إلى واحد}، لأنها تقرن كل عنصر
+من المجال المقابل بعنصر وحيد من المجال.
+\begin{figure}
+  \olasset{assets/diagrams/bijective.tikz}
+  \caption{إذا كانت الدالة !!^a{bijective} فإنها تقرن كل عنصر
+    من المجال المقابل بعنصر وحيد من المجال.}
+  \ollabel{fig:bijective}
+\end{figure}
+\end{explain}
+
+\begin{defn}[!!^{bijection}]
+تكون الدالة $f \colon A \to B$ \emph{!!{bijective}} إذا وفقط إذا كانت
+!!{surjective} و!!{injective} معًا. ونسمي مثل هذه الدالة
+!!a{bijection} من $A$ إلى~$B$ (أو بين $A$ و~$B$).
+\end{defn}
+
+\end{document}

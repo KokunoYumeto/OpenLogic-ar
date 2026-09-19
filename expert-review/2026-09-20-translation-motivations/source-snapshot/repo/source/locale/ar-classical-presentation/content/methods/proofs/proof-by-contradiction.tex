@@ -1,0 +1,194 @@
+% القسم: المناهج
+% الفصل: البراهين
+% المبحث: البرهان بالتناقض
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mth}{prf}{con}
+
+\olsection{البرهان بالتناقض}
+
+البرهان بالتناقض ضرب من الاستدلال يُقصد به أولاً إلى إثبات القضايا
+السالبة. فإذا أردنا بيان أن قضية~${\OLId{latin-ordinary}{p}}$ \emph{كاذبة}، أي إثبات
+$\lnot {\OLId{latin-ordinary}{p}}$، كان الطريق الغالب أن (أ) نفرض صدق ${\OLId{latin-ordinary}{p}}$، ثم (ب) نستخرج من
+هذا الفرض أمرًا نعلم كذبه. وقد يكون ذلك الأمر مناقضًا لـ${\OLId{latin-ordinary}{p}}$ نفسها، أو
+لفرض آخر من فروض القضية الكلية موضع النظر. فإثبات «إذا كان ${\OLId{latin-ordinary}{q}}$ فإن
+$\lnot {\OLId{latin-ordinary}{p}}$»، مثلًا، يبتدئ بفرض ${\OLId{latin-ordinary}{q}}$ وينتهي إلى~$\lnot {\OLId{latin-ordinary}{p}}$. فإذا أُقيم
+$\lnot {\OLId{latin-ordinary}{p}}$ بالتناقض ضُم فرض ${\OLId{latin-ordinary}{p}}$ إلى~${\OLId{latin-ordinary}{q}}$؛ فإن أمكن استخراج $\lnot {\OLId{latin-ordinary}{q}}$
+من ${\OLId{latin-ordinary}{p}}$، ظهر أن الفرض~${\OLId{latin-ordinary}{p}}$ يفضي إلى نقيض الفرض الآخر~${\OLId{latin-ordinary}{q}}$، ولا يجتمع
+${\OLId{latin-ordinary}{q}}$ و$\lnot {\OLId{latin-ordinary}{q}}$ في الصدق. ولا يستغني هذا الطريق عن سائر أنماط
+الاستدلال ولا عن بسط التعريفات. ومثاله الآتي يوضح ذلك.
+
+\begin{prop}
+  إذا كان ${\OLId{latin-looped}{A}} \subseteq {\OLId{latin-looped}{B}}$ و${\OLId{latin-looped}{B}} = \emptyset$، فلا توجد في ${\OLId{latin-looped}{A}}$
+  !!{element}.
+\end{prop}
+
+\begin{proof}
+  لنفرض أن ${\OLId{latin-looped}{A}} \subseteq {\OLId{latin-looped}{B}}$ و${\OLId{latin-looped}{B}} = \emptyset$. ونريد أن نبين أنه لا توجد
+  في ${\OLId{latin-looped}{A}}$ !!{element}.
+  \begin{quote}
+    لما كانت القضية شرطية فمقدمها مفروض، وتاليها هو المطلوب. والتالي
+    ينفي وجود !!{element} في ${\OLId{latin-looped}{A}}$؛ وبسط هذا النفي: ليس صحيحًا أن يوجد
+    ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}$.
+  \end{quote}
+  لا توجد في ${\OLId{latin-looped}{A}}$ !!{element} إذا وفقط إذا بطل أن يوجد~${\OLId{latin-ordinary}{x}}$
+  بحيث ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}$.
+  \begin{quote}
+    فقد تعين المطلوب قضية سالبة~$\lnot {\OLId{latin-ordinary}{p}}$: بطلان وجود ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}$.
+    ولإثباتها بالتناقض نفرض القضية الموجبة المقابلة~${\OLId{latin-ordinary}{p}}$، أي وجود
+    ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}$، ثم نستخرج منها تناقضًا. ويُعلن هذا المسلك بقولنا
+    «للوصول إلى تناقض، افترض»، أو باختصار «افترض العكس»، ثم نسوق
+    الفرض~${\OLId{latin-ordinary}{p}}$.
+  \end{quote}
+  فلنفرض العكس: يوجد ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}$.
+  \begin{quote}
+    هذا هو الفرض المستحدث الذي سنستخرج منه التناقض، ومعه الفرضان
+    ${\OLId{latin-looped}{A}} \subseteq {\OLId{latin-looped}{B}}$ و${\OLId{latin-looped}{B}} = \emptyset$. أما أولهما فيعطينا
+    ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{B}}$:
+  \end{quote}
+  إذ كان ${\OLId{latin-looped}{A}} \subseteq {\OLId{latin-looped}{B}}$، لزم ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{B}}$.
+  \begin{quote}
+    غير أن ${\OLId{latin-looped}{B}} = \emptyset$ يوجب أن تكون كل !!{element} في ${\OLId{latin-looped}{B}}$، ومنها
+    ${\OLId{latin-ordinary}{x}}$،~!!a{element} أيضاً في~$\emptyset$.
+  \end{quote}
+  ولما كان ${\OLId{latin-looped}{B}} = \emptyset$، كان ${\OLId{latin-ordinary}{x}} \in \emptyset$. وهذا محال، إذ لا
+  تحتوي $\emptyset$، بحكم تعريفها، أي !!{element}.
+  \begin{quote}
+    وهنا قد تم البرهان في المعنى؛ فقد انتهت الفروض إلى تناقض، فامتنع
+    صدقها مجتمعة. ولما كان الفرضان الأولان، ${\OLId{latin-looped}{A}} \subseteq {\OLId{latin-looped}{B}}$ و
+    ${\OLId{latin-looped}{B}} = \emptyset$، ثابتين غير متنازع فيهما، تعين كذب الفرض الأخير،
+    وهو وجود ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}$. ولنا أن نصرح بهذه الخاتمة زيادة في البيان.
+  \end{quote}
+  ففرض وجود ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}$ كاذب؛ ومن ثم لا توجد في ${\OLId{latin-looped}{A}}$ !!{element}، وهو
+  المطلوب بطريق التناقض.
+\end{proof}
+
+وكل قضية موجبة تكافئ قضية سالبة بطريق ظاهر: فـ${\OLId{latin-ordinary}{p}}$ إذا وفقط إذا كان
+$\lnot\lnot {\OLId{latin-ordinary}{p}}$. ومن ثم يجوز إثبات القضايا الموجبة بالتناقض، ويسمى
+ذلك «الطريق غير المباشر». فإثبات~${\OLId{latin-ordinary}{p}}$ يُقرأ إثباتًا للقضية السالبة
+$\lnot\lnot {\OLId{latin-ordinary}{p}}$؛ فإذا استخرجنا تناقضًا من $\lnot {\OLId{latin-ordinary}{p}}$، ثبت
+$\lnot\lnot {\OLId{latin-ordinary}{p}}$ بالتناقض، فثبت~${\OLId{latin-ordinary}{p}}$.
+
+وكان المقصود في المثال المتقدم قضية سالبة، هي خلو ${\OLId{latin-looped}{A}}$ من أي
+!!{element}؛ ولذلك كان الفرض الموضوع للتناقض، أي وجود ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}$،
+قضية موجبة. وقد أعطانا هذا شاهدًا نعمل عليه، هو ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}$، فتابعنا
+أحكامه حتى انتهينا إلى ${\OLId{latin-ordinary}{x}} \in \emptyset$.
+
+وأما إذا أُثبتت قضية موجبة بطريق غير مباشر، فالفرض المؤقت للتناقض
+سالب. وكثيرًا ما يسهل رد الموجبة إلى سالبة، والسالبة إلى موجبة. ولو
+جعلنا مطلوب البرهان السابق «${\OLId{latin-looped}{A}} = \emptyset$» عوض التالي السالب «لا
+توجد في ${\OLId{latin-looped}{A}}$ !!{element}»، لما اختلف جوهر البرهان. (فتعريف $=$ يجعل
+«${\OLId{latin-looped}{A}} = \emptyset$» قضية كلية تُبسط إلى «كل !!{element} في~${\OLId{latin-looped}{A}}$ هي
+!!{element} في~$\emptyset$، والعكس».) وظاهر أنها تكافئ القضية السالبة
+«ليس صحيحًا أنه يوجد ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}$».
+
+فربما كان اتخاذ $\lnot {\OLId{latin-ordinary}{p}}$ فرضًا أيسر من إثبات~${\OLId{latin-ordinary}{p}}$ رأسًا. بل يختار
+بعض النظار الطريق غير المباشر وإن كان المباشر مساويًا له في السهولة
+أو أيسر، كما في الأمثلة الآتية. ومن التبس عليه النفي المزدوج فلينظر
+إلى برهان التناقض على أنه استخراج محال من القضية \emph{المقابلة}:
+فبرهان $\lnot {\OLId{latin-ordinary}{p}}$ بالتناقض يبتدئ بفرض ${\OLId{latin-ordinary}{p}}$، وبرهان~${\OLId{latin-ordinary}{p}}$ بالتناقض يبتدئ
+بفرض~$\lnot {\OLId{latin-ordinary}{p}}$.
+
+\begin{prop}
+${\OLId{latin-looped}{A}} \subseteq {\OLId{latin-looped}{A}} \cup {\OLId{latin-looped}{B}}$.
+\end{prop}
+
+\begin{proof}
+  مرادنا بيان ${\OLId{latin-looped}{A}} \subseteq {\OLId{latin-looped}{A}} \cup {\OLId{latin-looped}{B}}$.
+  \begin{quote}
+    ظاهرها قضية موجبة: كل ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}$ منتم أيضًا إلى ${\OLId{latin-looped}{A}} \cup {\OLId{latin-looped}{B}}$.
+    ونفيها وجود ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}$ غير منتم إلى ${\OLId{latin-looped}{A}} \cup {\OLId{latin-looped}{B}}$. فلنا أن نسلك
+    الطريق غير المباشر، فنفرض القضية النافية ونستخرج منها تناقضًا.
+    \end{quote}
+  فلنفرض العكس، أي ${\OLId{latin-looped}{A}} \nsubseteq {\OLId{latin-looped}{A}} \cup {\OLId{latin-looped}{B}}$.
+  \begin{quote}
+    وتعريف ${\OLId{latin-looped}{A}} \subseteq {\OLId{latin-looped}{A}} \cup {\OLId{latin-looped}{B}}$ أن كل ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}$ ينتمي أيضًا إلى
+    ${\OLId{latin-looped}{A}} \cup {\OLId{latin-looped}{B}}$. أما فهم ${\OLId{latin-looped}{A}} \nsubseteq {\OLId{latin-looped}{A}} \cup {\OLId{latin-looped}{B}}$ فيحتاج إلى معالجة
+    منطقية للتعريف المبسوط: فكذب انتماء كل ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}$ إلى
+    ${\OLId{latin-looped}{A}} \cup {\OLId{latin-looped}{B}}$ يكافئ وجود \emph{بعض} ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}$ بحيث
+    ${\OLId{latin-ordinary}{x}} \notin {\OLId{latin-looped}{A}} \cup {\OLId{latin-looped}{B}}$. (وهنا موضع الحذر؛ فكثير من محاولات البرهان
+    بالتناقض تفسد بسوء نفي قضية من نحو «كل ${\OLId{latin-looped}{A}}$ هو ${\OLId{latin-looped}{B}}$».) فالحاصل أن
+    ${\OLId{latin-looped}{A}} \nsubseteq {\OLId{latin-looped}{A}} \cup {\OLId{latin-looped}{B}}$ إذا وفقط إذا وجد ${\OLId{latin-ordinary}{x}}$ بحيث ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}$ و
+    ${\OLId{latin-ordinary}{x}} \notin {\OLId{latin-looped}{A}} \cup {\OLId{latin-looped}{B}}$. وما بقي قريب.
+  \end{quote}
+  فيوجد ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}$ بحيث ${\OLId{latin-ordinary}{x}} \notin {\OLId{latin-looped}{A}} \cup {\OLId{latin-looped}{B}}$. وبتعريف $\cup$، يكون
+  ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}} \cup {\OLId{latin-looped}{B}}$ إذا وفقط إذا كان ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}$ أو ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{B}}$.
+  ولما كان ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}$، ثبت ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}} \cup {\OLId{latin-looped}{B}}$. وهذا نقيض الفرض
+  ${\OLId{latin-ordinary}{x}} \notin {\OLId{latin-looped}{A}} \cup {\OLId{latin-looped}{B}}$.
+\end{proof}
+
+\begin{prob}
+أثبت \emph{بطريق غير مباشر} أن ${\OLId{latin-looped}{A}} \cap {\OLId{latin-looped}{B}} \subseteq {\OLId{latin-looped}{A}}$.
+\end{prob}
+
+\begin{prop}
+إذا كان ${\OLId{latin-looped}{A}} \subseteq {\OLId{latin-looped}{B}}$ و${\OLId{latin-looped}{B}} \subseteq {\OLId{latin-looped}{C}}$ فإن ${\OLId{latin-looped}{A}} \subseteq {\OLId{latin-looped}{C}}$.
+\end{prop}
+
+\begin{proof}
+  لنفرض أن ${\OLId{latin-looped}{A}} \subseteq {\OLId{latin-looped}{B}}$ و${\OLId{latin-looped}{B}} \subseteq {\OLId{latin-looped}{C}}$. ونريد بيان
+  ${\OLId{latin-looped}{A}} \subseteq {\OLId{latin-looped}{C}}$.
+  \begin{quote}
+    نسلك الطريق غير المباشر، فنفرض نقيض المطلوب.
+  \end{quote}
+  فلنفرض العكس، أي ${\OLId{latin-looped}{A}} \nsubseteq {\OLId{latin-looped}{C}}$.
+  \begin{quote}
+    وعلى ما تقدم، يكون ${\OLId{latin-looped}{A}} \nsubseteq {\OLId{latin-looped}{C}}$ إذا وفقط إذا لم يكن كل
+    ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}$ منتميًا أيضًا إلى ${\OLId{latin-looped}{C}}$، أي إذا وُجد بعض ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}$ غير
+    منتم إلى ${\OLId{latin-looped}{C}}$. ومع المران يصير بسط هذا النفي قريبًا لا يحتاج إلى
+    طول تفكر.
+  \end{quote}
+  فبعبارة أخرى، يوجد~${\OLId{latin-ordinary}{x}}$ بحيث ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}$ و${\OLId{latin-ordinary}{x}} \notin {\OLId{latin-looped}{C}}$.
+  \begin{quote}
+    ومن هذا، مع الفرضين الآخرين، نستخرج التناقض.
+  \end{quote}
+  إذ كان ${\OLId{latin-looped}{A}} \subseteq {\OLId{latin-looped}{B}}$، لزم ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{B}}$. وإذ كان ${\OLId{latin-looped}{B}} \subseteq {\OLId{latin-looped}{C}}$،
+  لزم ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{C}}$؛ وهذا يناقض ${\OLId{latin-ordinary}{x}} \notin {\OLId{latin-looped}{C}}$.
+\end{proof}
+
+\begin{prop}
+إذا كان ${\OLId{latin-looped}{A}} \cup {\OLId{latin-looped}{B}} = {\OLId{latin-looped}{A}} \cap {\OLId{latin-looped}{B}}$ فإن ${\OLId{latin-looped}{A}} = {\OLId{latin-looped}{B}}$.
+\end{prop}
+
+\begin{proof}
+  لنفرض أن ${\OLId{latin-looped}{A}} \cup {\OLId{latin-looped}{B}} = {\OLId{latin-looped}{A}} \cap {\OLId{latin-looped}{B}}$. والمطلوب أن ${\OLId{latin-looped}{A}} = {\OLId{latin-looped}{B}}$.
+  \begin{quote}
+    قد ألفنا الآن صورة الابتداء:
+  \end{quote}
+  فنفرض، طلبًا للتناقض، أن ${\OLId{latin-looped}{A}} \neq {\OLId{latin-looped}{B}}$.
+  \begin{quote}
+    والفرض الموضوع للتناقض هو ${\OLId{latin-looped}{A}} \neq {\OLId{latin-looped}{B}}$. وبما أن ${\OLId{latin-looped}{A}} = {\OLId{latin-looped}{B}}$ إذا وفقط
+    إذا كان ${\OLId{latin-looped}{A}} \subseteq {\OLId{latin-looped}{B}}$ و${\OLId{latin-looped}{B}} \subseteq {\OLId{latin-looped}{A}}$، لزم أن
+    ${\OLId{latin-looped}{A}} \neq {\OLId{latin-looped}{B}}$ إذا وفقط إذا كان ${\OLId{latin-looped}{A}} \nsubseteq {\OLId{latin-looped}{B}}$ \emph{أو}
+    ${\OLId{latin-looped}{B}} \nsubseteq {\OLId{latin-looped}{A}}$. (فتأمل مبلغ الحاجة إلى الدقة في معالجة
+    النفي!{}) ولاستخراج التناقض من هذا الفصل نقسم إلى حالتين، ونبين
+    وقوع المحال في كلتيهما.
+  \end{quote}
+  فـ${\OLId{latin-looped}{A}} \neq {\OLId{latin-looped}{B}}$ إذا وفقط إذا كان ${\OLId{latin-looped}{A}} \nsubseteq {\OLId{latin-looped}{B}}$ أو
+  ${\OLId{latin-looped}{B}} \nsubseteq {\OLId{latin-looped}{A}}$؛ فنميز حالتين.
+  \begin{quote}
+    نفرض في الحالة الأولى ${\OLId{latin-looped}{A}} \nsubseteq {\OLId{latin-looped}{B}}$، فيوجد ${\OLId{latin-ordinary}{x}}$ بحيث
+    ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}$ ولكن ${\OLId{latin-ordinary}{x}} \notin {\OLId{latin-looped}{B}}$. وأما ${\OLId{latin-looped}{A}} \cap {\OLId{latin-looped}{B}}$ فهي مجموعة
+    !!{element} المشتركة بين ${\OLId{latin-looped}{A}}$ و${\OLId{latin-looped}{B}}$؛ فما لم ينتم إلى إحداهما لم
+    ينتم إلى تقاطعهما. وأما ${\OLId{latin-looped}{A}} \cup {\OLId{latin-looped}{B}}$ فهو ضم ${\OLId{latin-looped}{A}}$ إلى ${\OLId{latin-looped}{B}}$، فينتمي
+    إليه كل ما انتمى إلى واحد منهما. فينتج
+    ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}} \cup {\OLId{latin-looped}{B}}$ مع ${\OLId{latin-ordinary}{x}} \notin {\OLId{latin-looped}{A}} \cap {\OLId{latin-looped}{B}}$، ومن ثم
+    ${\OLId{latin-looped}{A}} \cap {\OLId{latin-looped}{B}} \neq {\OLId{latin-looped}{A}} \cup {\OLId{latin-looped}{B}}$.
+  \end{quote}
+
+  الحالة \OLClassicalDigits{1}: ${\OLId{latin-looped}{A}} \nsubseteq {\OLId{latin-looped}{B}}$. فيوجد ${\OLId{latin-ordinary}{x}}$ بحيث ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}$ ولكن
+  ${\OLId{latin-ordinary}{x}} \notin {\OLId{latin-looped}{B}}$. ولما كان ${\OLId{latin-ordinary}{x}} \notin {\OLId{latin-looped}{B}}$، لزم ${\OLId{latin-ordinary}{x}} \notin {\OLId{latin-looped}{A}} \cap {\OLId{latin-looped}{B}}$.
+  ولما كان ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}$، ثبت ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}} \cup {\OLId{latin-looped}{B}}$. ومن ثم
+  ${\OLId{latin-looped}{A}} \cap {\OLId{latin-looped}{B}} \neq {\OLId{latin-looped}{A}} \cup {\OLId{latin-looped}{B}}$، خلافًا للفرض
+  ${\OLId{latin-looped}{A}} \cap {\OLId{latin-looped}{B}} = {\OLId{latin-looped}{A}} \cup {\OLId{latin-looped}{B}}$.
+
+  الحالة \OLClassicalDigits{2}: ${\OLId{latin-looped}{B}} \nsubseteq {\OLId{latin-looped}{A}}$. فيوجد ${\OLId{latin-ordinary}{y}}$ بحيث ${\OLId{latin-ordinary}{y}} \in {\OLId{latin-looped}{B}}$ ولكن
+  ${\OLId{latin-ordinary}{y}} \notin {\OLId{latin-looped}{A}}$. وعلى ما سبق، ${\OLId{latin-ordinary}{y}} \in {\OLId{latin-looped}{A}} \cup {\OLId{latin-looped}{B}}$ ولكن
+  ${\OLId{latin-ordinary}{y}} \notin {\OLId{latin-looped}{A}} \cap {\OLId{latin-looped}{B}}$؛ ومن ثم ${\OLId{latin-looped}{A}} \cap {\OLId{latin-looped}{B}} \neq {\OLId{latin-looped}{A}} \cup {\OLId{latin-looped}{B}}$، فيعود
+  التناقض مع ${\OLId{latin-looped}{A}} \cap {\OLId{latin-looped}{B}} = {\OLId{latin-looped}{A}} \cup {\OLId{latin-looped}{B}}$.
+\end{proof}
+
+\end{document}

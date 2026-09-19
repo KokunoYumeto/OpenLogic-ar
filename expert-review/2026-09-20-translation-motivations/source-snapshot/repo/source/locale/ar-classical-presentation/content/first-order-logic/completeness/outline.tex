@@ -1,0 +1,150 @@
+% Part: first-order-logic
+% Chapter: completeness
+% Section: outline
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{com}{out}}
+      {\olfileid{pl}{com}{out}}
+
+\olsection{مخطط البرهان}
+
+في برهان الاكتمال شيء من التشعب، وقد يخفى وجه انتظامه على من يقرأه
+أول مرة؛ فنقدم خطة تجمع أطرافه. وأول الأمر أن نغيّر وجه النظر حتى
+يظهر مسلك البرهان. فالاكتمال إذا عُبّر عنه بأن «${\OLId{greek-variable}{Gamma}} \Entails !A$
+يستلزم ${\OLId{greek-variable}{Gamma}} \Proves !A$» لم يتضح من أين نبدأ؛ إذ إثبات
+${\OLId{greek-variable}{Gamma}} \Proves !A$ يطلب منا إيجاد !!a{derivation}، وليس في الفرض
+${\OLId{greek-variable}{Gamma}} \Entails !A$، فيما يبدو، ما يرشد إلى إيجاده. وفي بعض أنساق
+البرهان يمكن بناء !!a{derivation} مباشرة، غير أننا نسلك هنا طريقًا
+آخر. وذلك أن للاكتمال عبارة ثانية: «كل مجموعة ${\OLId{greek-variable}{Gamma}}$ متسقة قابلة
+للإرضاء». فلعل ما تتضمنه~${\OLId{greek-variable}{Gamma}}$، مع اتساقها، يرشد إلى بناء
+\iftag{FOL}{!!a{structure}}{!!a{valuation}} ترضي كل
+\iftag{FOL}{!!{sentence}}{!!{formula}} فيها، أي في~${\OLId{greek-variable}{Gamma}}$. وصفة
+ال\iftag{FOL}{!!{structure}}{!!{valuation}} المطلوبة معلومة لنا من
+هذا الوجه: ينبغي أن تكون على ما تصفه ${\OLId{greek-variable}{Gamma}}$!{}
+
+لنبدأ بحالة لا تحتوي فيها ${\OLId{greek-variable}{Gamma}}$ إلا
+\iftag{FOL}{!!{sentence}s ذرية}{!!{propositional variable}s}؛ فبناء
+نموذج لها يسير.\iftag{FOL}{ ولتكن ال!!{sentence}s الذرية كلها من
+  الصورة $\Atom{P}{a_1,\dots,a_n}$، حيث ${\OLId{latin-ordinary}{a}}_{\OLId{latin-ordinary}{i}}$
+  !!{constant}s.}{} إذ يكفينا إيجاد
+\iftag{FOL}{%
+  !!a{domain}~$\Domain{{\OLId{latin-looped}{M}}}$ وتعيين تفسير لـ~${\OLId{latin-looped}{P}}$ يحقق
+  $\Sat{{\OLId{latin-looped}{M}}}{\Atom{P}{a_1,\ldots,a_n}}$. لهذا نضع
+  $\Domain{{\OLId{latin-looped}{M}}} = \Nat$ و$\Assign{\Obj c_{\OLId{latin-ordinary}{i}}}{{\OLId{latin-looped}{M}}} = {\OLId{latin-ordinary}{i}}$، ثم لكل
+  $\Atom{P}{a_1,\ldots,a_n} \in {\OLId{greek-variable}{Gamma}}$ نُدخل الصف
+  $\tuple{{\OLId{latin-ordinary}{k}}_{\OLMathNumeral{1}},\dots, {\OLId{latin-ordinary}{k}}_{\OLId{latin-ordinary}{n}}}$ في $\Assign{{\OLId{latin-looped}{P}}}{{\OLId{latin-looped}{M}}}$، جاعلين ${\OLId{latin-ordinary}{k}}_{\OLId{latin-ordinary}{i}}$ فهرس
+  الرمز الثابت~${\OLId{latin-ordinary}{a}}_{\OLId{latin-ordinary}{i}}$، أي ${\OLId{latin-ordinary}{a}}_{\OLId{latin-ordinary}{i}} \ident \Obj c_{{\OLId{latin-ordinary}{k}}_{\OLId{latin-ordinary}{i}}}$.}{%
+  !!a{valuation}~$\pAssign{{\OLId{latin-ordinary}{v}}}$ تحقق $\pSat{{\OLId{latin-ordinary}{v}}}{{\OLId{latin-ordinary}{p}}}$ لكل ${\OLId{latin-ordinary}{p}} \in
+  {\OLId{greek-variable}{Gamma}}$. ويحصل ذلك بتعريف $\pAssign{{\OLId{latin-ordinary}{v}}}({\OLId{latin-ordinary}{p}}) = \True$ إذا وفقط إذا
+  كان ${\OLId{latin-ordinary}{p}} \in {\OLId{greek-variable}{Gamma}}$.}
+
+ولنفرض بعد ذلك أن في ${\OLId{greek-variable}{Gamma}}$ !!{formula}~$\lnot !B$، وأن $!B$
+ذرية. أيمنع بناء $\iftag{FOL}{\Struct{M}}{\pAssign{{\OLId{latin-ordinary}{v}}}}$ السابق من
+إرضاء $\lnot !B$؟ هنا موضع الاستفادة من اتساق~${\OLId{greek-variable}{Gamma}}$: فمتى كان
+$\lnot !B \in {\OLId{greek-variable}{Gamma}}$ لزم $!B \notin {\OLId{greek-variable}{Gamma}}$، وإلا لم تكن ${\OLId{greek-variable}{Gamma}}$
+متسقة. وإذا كان $!B \notin {\OLId{greek-variable}{Gamma}}$، فإن تعريفنا لـ
+$\iftag{FOL}{\Struct{M}}{\pAssign{{\OLId{latin-ordinary}{v}}}}$ يعطي
+$\iftag{FOL}{\Sat/{{\OLId{latin-looped}{M}}}}{\pSat/{{\OLId{latin-ordinary}{v}}}}{!B}$، فينتج
+$\iftag{FOL}{\Sat{{\OLId{latin-looped}{M}}}}{\pSat{{\OLId{latin-ordinary}{v}}}}{\lnot !B}$. فلا إشكال في هذه الحالة.
+
+فأما إذا اشتملت ${\OLId{greek-variable}{Gamma}}$ على صيغ مركبة، كالصيغة $!A \land !B$،
+فإرضاؤها يقتضي أن نعامل كلًا من $!A$ و$!B$ كأنها عضو
+في~${\OLId{greek-variable}{Gamma}}$. وإن كان $!A \lor !B \in {\OLId{greek-variable}{Gamma}}$، وجب إرضاء إحدى
+الصيغتين على الأقل؛ فنعمل كأن إحداهما عضو في~${\OLId{greek-variable}{Gamma}}$.
+
+ومن ذلك تنشأ الخطة الآتية: نزيد في~${\OLId{greek-variable}{Gamma}}$ !!{formula}s مع مراعاة
+ثلاثة أمور: (أ)~بقاء الاتساق؛ (ب)~أن نصل إلى مجموعة تقضي في كل
+\iftag{FOL}{!!{sentence}}{!!{formula}}~$!A$، فتضم إما $!A$ وإما
+$\lnot !A$؛ (ج)~أن اشتمالها على $!A \land !B$ يستتبع اشتمالها على
+كل من $!A$ و$!B$، واشتمالها على $!A \lor !B$ يستتبع اشتمالها على
+واحدة من $!A$ و$!B$ على الأقل، وقس على ذلك. ونمضي في هذه الزيادات
+وإن لم تنته مراحلها. ولتكن~${\OLId{greek-variable}{Gamma}}^*$ مجموعة ال!!{formula}s الحاصلة
+بهذه العملية. يعطينا البناء السابق عندئذ
+\iftag{FOL}{!!a{structure}~$\Struct{M}$}{!!a{valuation}~$\pAssign{{\OLId{latin-ordinary}{v}}}$}
+نثبت بالاستقراء أنها ترضي جميع
+\iftag{FOL}{ال!!{sentence}s}{ال!!{formula}s} في~${\OLId{greek-variable}{Gamma}}^*$، وبالتالي
+جميع \iftag{FOL}{ال!!{sentence}s}{ال!!{formula}s} في~${\OLId{greek-variable}{Gamma}}$، إذ
+${\OLId{greek-variable}{Gamma}} \subseteq {\OLId{greek-variable}{Gamma}}^*$. وسنرى أن الشرطين (أ) و(ب) يغنيان عن
+الثالث. وتسمى \iftag{FOL}{مجموعة ال!!{sentence}s}{مجموعة ال!!{formula}s}
+التي تستوفي (ب) \emph{كاملة}. فالمطلوب إذن توسيع المجموعة المتسقة
+~${\OLId{greek-variable}{Gamma}}$ إلى مجموعة متسقة كاملة~${\OLId{greek-variable}{Gamma}}^*$.
+
+\iftag{FOL}{%
+غير أن المكمّمات تعرض لنا عقبة. فإذا كان $\lexists[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})] \in {\OLId{greek-variable}{Gamma}}$،
+أردنا اختيار !!{constant}~${\OLId{latin-ordinary}{c}}$ وإلحاق $!A({\OLId{latin-ordinary}{c}})$ أثناء البناء. فما الذي
+يضمن إمكان هذا الاختيار؟ قد لا يكون في اللغة إلا عدد قليل من
+ال!!{constant}s، وقد يكون $\lnot !A({\OLId{latin-ordinary}{c}}) \in {\OLId{greek-variable}{Gamma}}$ لكل واحد منها.
+فلا تجوز حينئذ زيادة $!A({\OLId{latin-ordinary}{c}})$، لأنها تفسد الاتساق، ويقع التعارض فيما
+نطلب من $\Struct{M}$: أترضي $!A({\OLId{latin-ordinary}{c}})$ أم $\lnot !A({\OLId{latin-ordinary}{c}})$؟ وقد تكون
+جمل ${\OLId{greek-variable}{Gamma}}$ من لغة تخلو أصلًا من الرموز الثابتة، كلغة نظرية
+المجموعات.
+
+وعلاج ذلك أن نزيد، منذ البدء، رموزًا ثابتة لا نهاية لها، ونزيد معها
+جملًا تصلها بالمكمّمات على الوجه اللازم. ويبقى علينا، بالطبع، أن نثبت
+أن هذه الزيادة لا تُحدث تناقضًا.
+
+وإنما سهل البناء الأول حين لم يكن في الجمل الذرية إلا !!{constant}s.
+فإذا ضمت اللغة !!{function}s أيضًا، ربما عسر تعيين دوال
+على~$\Nat$ تصلح لتفسير هذه ال!!{function}s وتفي بجميع المطلوب.
+فلنعدل البناء: عوض استعمال ${\OLId{latin-ordinary}{i}}$ تفسيرًا لـ$\Obj c_{\OLId{latin-ordinary}{i}}$، نتخذ مجموعة
+ال!!{constant}s نفسها مجالًا. عندئذ تفسر $\Struct M$ كل
+!!{constant} بنفسه: $\Assign{\Obj c_{\OLId{latin-ordinary}{i}}}{{\OLId{latin-looped}{M}}} = \Obj c_{\OLId{latin-ordinary}{i}}$. ولنكمل هذا
+المسلك، فنجعل $\Domain{{\OLId{latin-looped}{M}}}$ جميع \emph{حدود} اللغة!{} يصير تفسير
+ال!!{function}s واضحًا: الدوال هنا حججها حدود وقيمها حدود، ونفسر
+ال!!{function}~$\Obj f^{\OLId{latin-ordinary}{n}}_{\OLId{latin-ordinary}{i}}$ بالدالة التي، إذا أُعطيت ${\OLId{latin-ordinary}{n}}$ حدود هي
+${\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}$، \dots،~${\OLId{latin-ordinary}{t}}_{\OLId{latin-ordinary}{n}}$، ردت الحد $\Obj f^{\OLId{latin-ordinary}{n}}_{\OLId{latin-ordinary}{i}}({\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}, \dots, {\OLId{latin-ordinary}{t}}_{\OLId{latin-ordinary}{n}})$.
+
+ويبقى النظر في~$\eq$. فإن تفسير ال!!{predicate}~$\eq$ مفروض
+سلفًا: $\Sat{{\OLId{latin-looped}{M}}}{\eq[{\OLId{latin-ordinary}{t}}][{\OLId{latin-ordinary}{t}}']}$ إذا وفقط إذا كان
+$\Value{{\OLId{latin-ordinary}{t}}}{{\OLId{latin-looped}{M}}} = \Value{{\OLId{latin-ordinary}{t}}'}{{\OLId{latin-looped}{M}}}$. فإذا جعلنا !!{value} كل حد~${\OLId{latin-ordinary}{t}}$
+هي ${\OLId{latin-ordinary}{t}}$ نفسه، لم تُرض هذه ال!!{structure} \emph{أي} جملة
+$\eq[{\OLId{latin-ordinary}{t}}][{\OLId{latin-ordinary}{t}}']$ إلا حيث يكون ${\OLId{latin-ordinary}{t}}$ و${\OLId{latin-ordinary}{t}}'$ حدًا واحدًا بعينه. ولا يستقيم
+ذلك مع أكثر النظريات ذات ال!!{function}s التي لها شأن؛ إذ تثبت
+جملًا $\eq[{\OLId{latin-ordinary}{t}}][{\OLId{latin-ordinary}{t}}']$ مع اختلاف الحدين ${\OLId{latin-ordinary}{t}}$ و${\OLId{latin-ordinary}{t}}'$، ومن أمثلة الحساب
+$\eq[(\Obj 0+ \Obj 0)][\Obj 0]$. فنغير مجال $\Struct M$ مرة أخرى:
+نجعل أشياء~$\Domain{{\OLId{latin-looped}{M}}}$ مجموعات من الحدود بدل الحدود المفردة،
+بحيث تضم كل مجموعة الحدود التي توجب جمل~${\OLId{greek-variable}{Gamma}}$ تساويها.
+فإذا كانت ${\OLId{greek-variable}{Gamma}}$ نظرية في الحساب، اجتمع في مجموعة واحدة مثلًا
+$\Obj 0$ و$(\Obj 0 + \Obj 0)$ و$(\Obj
+0 \times \Obj 0)$، وما إليها. نفسر $\Obj 0$ بهذه المجموعة، ثم
+يتبين أنها قيمة كل حد فيها، ومنها $(\Obj 0 + \Obj 0)$؛ فتصدق
+$\eq[(\Obj 0+ \Obj 0)][\Obj 0]$ في ال!!{structure} بعد هذا
+التعديل.}{}
+
+فهذا ترتيب العمل: نبحث أولًا خواص المجموعات المتسقة ال!!{complete}،
+ونثبت أن المجموعة المتسقة !!a{complete} تضم $!A \land !B$ إذا وفقط
+إذا ضمت $!A$ و~$!B$ جميعًا، وتضم $!A \lor !B$ إذا وفقط إذا ضمت
+إحداهما على الأقل، إلى سائر الروابط (\olref[ccs]{prop:ccs}).
+\iftag{FOL}{ثم نعرّف مجموعات الجمل «المشبعة» وندرسها. ومعنى الإشباع
+  اشتمال المجموعة على شرطيات تصل كل !!{sentence} مكمّمة بحالات
+  منها (\olref[hen]{defn:henkin-exp}). ونثبت أن كل مجموعة
+  متسقة~${\OLId{greek-variable}{Gamma}}$ تقبل توسيعًا إلى مجموعة مشبعة~${\OLId{greek-variable}{Gamma}}'$
+  (\olref[hen]{lem:henkin}). ومتى اجتمع للمجموعة الاتساق والإشباع
+  وكونها !!{complete}، فإنها تحتوي
+  \iftag{prvEx}{$\lexists[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$ إذا وفقط إذا احتوت $!A({\OLId{latin-ordinary}{t}})$
+    لحد مغلق ما~${\OLId{latin-ordinary}{t}}$}{}\iftag{defEx,defAll}{}{، وتحتوي
+  }\iftag{prvAll}{$\lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$ إذا وفقط إذا احتوت $!A({\OLId{latin-ordinary}{t}})$
+    لكل حد مغلق~${\OLId{latin-ordinary}{t}}$}{} (\olref[hen]{prop:saturated-instances}).}{}
+وبعد ذلك نبين أن المجموعة المتسقة\iftag{FOL}{ المشبعة}{}
+~$\iftag{FOL}{{\OLId{greek-variable}{Gamma}}'}{{\OLId{greek-variable}{Gamma}}}$ تقبل توسيعًا إلى مجموعة
+\iftag{FOL}{مشبعة ومتسقة و}{متسقة و}!!{complete}~${\OLId{greek-variable}{Gamma}}^*$
+(\olref[lin]{lem:lindenbaum}). ومن ${\OLId{greek-variable}{Gamma}}^*$ نعرّف
+\iftag{FOL}{نموذج الحدود~$\Struct M({\OLId{greek-variable}{Gamma}}^*)$}{!!{valuation}
+~$\pAssign {\OLId{latin-ordinary}{v}}({\OLId{greek-variable}{Gamma}}^*)$}. \iftag{FOL}{مجال هذا النموذج مجموعة الحدود
+  المغلقة، وأما تفسير !!{predicate}sه فيتحدد بما يقع من
+  ال!!{sentence}s الذرية}{ويتحدد هذا التقييم بما يقع من
+  ال!!{propositional variable}s} في~${\OLId{greek-variable}{Gamma}}^*$
+(\olref[mod]{defn:termmodel}). وبخواص المجموعات
+\iftag{FOL}{المشبعة و}{}المتسقة الكاملة نثبت
+$\iftag{FOL}{\Sat{{\OLId{latin-looped}{M}}({\OLId{greek-variable}{Gamma}}^*)}}{\pSat{{\OLId{latin-ordinary}{v}}({\OLId{greek-variable}{Gamma}}^*)}}{!A}$ إذا وفقط إذا
+كان $!A \in {\OLId{greek-variable}{Gamma}}^*$ (\olref[mod]{lem:truth})، فيحصل خصوصًا
+$\iftag{FOL}{\Sat{{\OLId{latin-looped}{M}}({\OLId{greek-variable}{Gamma}}^*)}}{\pSat{{\OLId{latin-ordinary}{v}}({\OLId{greek-variable}{Gamma}}^*)}}{{\OLId{greek-variable}{Gamma}}}$.
+\iftag{FOL}{ثم نختم ببيان تعريف نموذج الحدود حين تكون في ${\OLId{greek-variable}{Gamma}}$
+  جمل فيها~$\eq$ (\olref[ide]{defn:term-model-factor})، وبإثبات أنه
+  يرضي~${\OLId{greek-variable}{Gamma}}^*$ (\olref[ide]{lem:truth}).}{}
+
+\end{document}

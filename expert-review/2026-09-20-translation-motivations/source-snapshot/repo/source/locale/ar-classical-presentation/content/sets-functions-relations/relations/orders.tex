@@ -1,0 +1,149 @@
+% الجزء: sets-functions-relations
+% الفصل: relations
+% القسم: orders
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid[ar]{sfr}{rel}{ord}
+\olsection{الترتيبات}
+
+\begin{explain}
+كثيرًا ما نقارن الأشياء فنقول إن هذا «أصغر من» ذاك أو «مساو له»
+أو «أكبر منه» من جهة ما؛ وتلك علاقات \emph{ترتيب}. وليس الترتيب
+نوعًا واحدًا: فمنه ما يوجب إمكان المقارنة بين كل شيئين، ومنه ما لا
+يوجبه؛ ومنه ما يدخل الهوية، كـ~$\le$، وما يخرجها، كـ~$<$.
+فلنميز هذه الأنواع بتصنيفها.
+\end{explain}
+
+\begin{defn}[الترتيب المسبق]
+\emph{الترتيب المسبق} العلاقة الجامعة للانعكاسية والتعدية.
+\end{defn}
+
+\begin{defn}[الترتيب الجزئي]
+\emph{الترتيب الجزئي} ترتيب مسبق يضاف إلى خصائصه مضادّة التناظر.
+\end{defn}
+
+\begin{defn}[الترتيب الخطي]\ollabel{def:linearorder}
+\emph{الترتيب الكلي}، ويسمى أيضًا \emph{الترتيب الخطي}، ترتيب جزئي متصل.
+\end{defn}
+
+\begin{ex}
+فالخطي جزئي، والجزئي مسبق، ولا ينعكس واحد من القولين.
+فالعلاقة الشاملة على~${\OLId{latin-looped}{A}}$ انعكاسية ومتعدية، فهي ترتيب مسبق.
+فإن كان لـ${\OLId{latin-looped}{A}}$ أكثر من !!{element} واحد انتفت مضادّة التناظر،
+فلم تكن ترتيبًا جزئيًا.
+\end{ex}
+
+\begin{ex}
+ولننظر في علاقة \emph{لا يزيد طولًا على} $\preccurlyeq$ على~$\Bin^*$:
+${\OLId{latin-ordinary}{x}} \preccurlyeq {\OLId{latin-ordinary}{y}}$ إذا وفقط إذا كان $\len{{\OLId{latin-ordinary}{x}}} \le \len{{\OLId{latin-ordinary}{y}}}$.
+فهي ترتيب مسبق لانعكاسيتها وتعديتها، وهي متصلة كذلك. ولكنها ليست
+جزئية، إذ لا تضاد التناظر: فـ${\OLMathNumeral{01}} \preccurlyeq {\OLMathNumeral{10}}$ و${\OLMathNumeral{10}} \preccurlyeq {\OLMathNumeral{01}}$
+مع ${\OLMathNumeral{01}} \neq {\OLMathNumeral{10}}$.
+\end{ex}
+
+\begin{ex}
+ومن أهم الترتيبات الجزئية $\subseteq$ على مجموعة من المجموعات.
+ولا يلزم أن تكون خطية: فإذا كان ${\OLId{latin-ordinary}{a}} \neq {\OLId{latin-ordinary}{b}}$، ففي
+$\Pow{\{{\OLId{latin-ordinary}{a}}, {\OLId{latin-ordinary}{b}}\}} = \{\emptyset, \{{\OLId{latin-ordinary}{a}}\}, \{{\OLId{latin-ordinary}{b}}\}, \{{\OLId{latin-ordinary}{a}},{\OLId{latin-ordinary}{b}}\}\}$
+نجد $\{{\OLId{latin-ordinary}{a}}\} \nsubseteq \{{\OLId{latin-ordinary}{b}}\}$ و$\{{\OLId{latin-ordinary}{a}}\} \neq \{{\OLId{latin-ordinary}{b}}\}$ و$\{{\OLId{latin-ordinary}{b}}\}
+\nsubseteq \{{\OLId{latin-ordinary}{a}}\}$.
+\end{ex}
+
+\begin{ex}
+ومن أمثلتها أيضًا \emph{القابلية للقسمة دون باق}. فإذا كان ${\OLId{latin-ordinary}{n}}$ و~${\OLId{latin-ordinary}{m}}$
+صحيحين، فمعنى ${\OLId{latin-ordinary}{n}} \mid {\OLId{latin-ordinary}{m}}$ أن ${\OLId{latin-ordinary}{n}}$ يقسم ${\OLId{latin-ordinary}{m}}$ بلا باق؛ أي يوجد صحيح~${\OLId{latin-ordinary}{k}}$
+يحقق ${\OLId{latin-ordinary}{m}} = kn$. وهذه على~$\Nat$ ترتيب جزئي غير خطي، إذ
+${\OLMathNumeral{2}} \nmid {\OLMathNumeral{3}}$ و${\OLMathNumeral{3}} \nmid {\OLMathNumeral{2}}$. وأما على $\Int$ فليست إلا ترتيبًا مسبقًا:
+يمتنع وصفها بمضادّة التناظر، لأن ${\OLMathNumeral{1}} \mid -{\OLMathNumeral{1}}$ و$-{\OLMathNumeral{1}} \mid {\OLMathNumeral{1}}$ مع
+${\OLMathNumeral{1}} \neq -{\OLMathNumeral{1}}$.
+\end{ex}
+
+\begin{ex}
+وعلاقة \emph{الامتداد} على~${\OLId{latin-looped}{A}}^*$ تعريفها: ${\OLId{latin-ordinary}{s}} \sqsubseteq {\OLId{latin-ordinary}{s}}'$ إذا وفقط
+إذا كان ${\OLId{latin-ordinary}{s}} = \emptyseq$، أي المتتالية الخالية، أو ${\OLId{latin-ordinary}{s}} = {\OLId{latin-ordinary}{s}}'$، أو كان
+${\OLId{latin-ordinary}{s}} = \tuple{{\OLId{latin-ordinary}{s}}_{\OLMathNumeral{1}}, \dots, {\OLId{latin-ordinary}{s}}_{\OLId{latin-ordinary}{n}}}$ و${\OLId{latin-ordinary}{s}}' = \tuple{{\OLId{latin-ordinary}{s}}_{\OLMathNumeral{1}}, \dots, {\OLId{latin-ordinary}{s}}_{\OLId{latin-ordinary}{n}}, {\OLId{latin-ordinary}{s}}_{{\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}}}, \dots, {\OLId{latin-ordinary}{s}}_{\OLId{latin-ordinary}{m}}}$.
+فمتى كان ${\OLId{latin-ordinary}{s}} \sqsubseteq {\OLId{latin-ordinary}{s}}'$ سمينا ${\OLId{latin-ordinary}{s}}$ \emph{مقطعًا ابتدائيًا} من~${\OLId{latin-ordinary}{s}}'$.
+وهي على ${\OLId{latin-looped}{A}}^*$ ترتيب جزئي، لا خطي عمومًا؛ فإذا كان ${\OLId{latin-ordinary}{a}} \neq {\OLId{latin-ordinary}{b}}$ كان
+$ab \not\sqsubseteq ba$ و$ba \not\sqsubseteq ab$.
+\end{ex}
+
+\begin{defn}[الترتيب الصارم]
+كل علاقة تجمع اللاانعكاسية واللاتناظرية والتعدية \emph{ترتيب صارم}.
+\end{defn}
+
+\begin{defn}[الترتيب الخطي الصارم]\ollabel{def:strictlinearorder}
+\emph{الترتيب الكلي الصارم}، أو \emph{الخطي الصارم}، ترتيب صارم متصل.
+\end{defn}
+
+\begin{ex}
+يقابل $\le$، وهو خطي، الترتيب الخطي الصارم~$<$.
+ويقابل $\subseteq$، وهو جزئي، الترتيب الصارم~$\subsetneq$.
+\end{ex}
+
+إذا أخذنا ترتيبًا صارمًا ${\OLId{latin-looped}{R}}$ على~${\OLId{latin-looped}{A}}$ ثم ضممنا إليه القطر $\Id{{\OLId{latin-looped}{A}}}$،
+أي جميع الأزواج~$\tuple{{\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{x}}}$، صار ترتيبًا جزئيًا. وهذا
+\emph{الإغلاق الانعكاسي} لـ~${\OLId{latin-looped}{R}}$. وبالعكس، حذف~$\Id{{\OLId{latin-looped}{A}}}$ من ترتيب
+جزئي يعطي ترتيبًا صارمًا. وتفصيل القول في القضيتين الآتيتين.
+
+\begin{prop}\ollabel{prop:stricttopartial}
+ليكن ${\OLId{latin-looped}{R}}$ ترتيبًا صارمًا على~${\OLId{latin-looped}{A}}$. فإن ${\OLId{latin-looped}{R}}^+ = {\OLId{latin-looped}{R}} \cup \Id{{\OLId{latin-looped}{A}}}$ ترتيب
+جزئي؛ وإن كان ${\OLId{latin-looped}{R}}$ خطيًا صارمًا كان ${\OLId{latin-looped}{R}}^+$ خطيًا.
+\end{prop}
+
+\begin{proof}
+لنفرض ${\OLId{latin-looped}{R}}$ ترتيبًا صارمًا؛ أي ${\OLId{latin-looped}{R}} \subseteq {\OLId{latin-looped}{A}}^{\OLMathNumeral{2}}$، و${\OLId{latin-looped}{R}}$ لا انعكاسية
+ولا تناظرية ومتعدية. ضع ${\OLId{latin-looped}{R}}^+ = {\OLId{latin-looped}{R}} \cup \Id{{\OLId{latin-looped}{A}}}$. فالمطلوب إثبات
+انعكاسية ${\OLId{latin-looped}{R}}^+$ ومضادّتها للتناظر وتعديتها.
+
+أما انعكاسية ${\OLId{latin-looped}{R}}^+$ فظاهرة من $\tuple{{\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{x}}} \in \Id{{\OLId{latin-looped}{A}}} \subseteq
+{\OLId{latin-looped}{R}}^+$ لكل ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}$.
+
+وأما مضادّة التناظر لـ${\OLId{latin-looped}{R}}^+$، فلو كان ${\OLId{latin-looped}{R}}^+xy$ و${\OLId{latin-looped}{R}}^+yx$ مع
+${\OLId{latin-ordinary}{x}} \neq {\OLId{latin-ordinary}{y}}$، لكان $\tuple{{\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}}} \in {\OLId{latin-looped}{R}} \cup \Id{{\OLId{latin-looped}{A}}}$، ولما كان
+$\tuple{{\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}} \notin \Id{{\OLId{latin-looped}{A}}}$ لزم $\tuple{{\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}} \in {\OLId{latin-looped}{R}}$، أي
+$Rxy$. وبمثله~$Ryx$. وهذا يناقض لاتناظرية ${\OLId{latin-looped}{R}}$ المفروضة.
+
+وأما التعدية، فافرض ${\OLId{latin-looped}{R}}^+xy$ و${\OLId{latin-looped}{R}}^+yz$. فإن كان
+$\tuple{{\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}} \in {\OLId{latin-looped}{R}}$ و$\tuple{{\OLId{latin-ordinary}{y}},{\OLId{latin-ordinary}{z}}} \in {\OLId{latin-looped}{R}}$ لزم $\tuple{{\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{z}}} \in
+{\OLId{latin-looped}{R}}$ من تعدية~${\OLId{latin-looped}{R}}$. وإن لم يجتمعا، فلا بد من
+$\tuple{{\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}} \in \Id{{\OLId{latin-looped}{A}}}$، أي ${\OLId{latin-ordinary}{x}} = {\OLId{latin-ordinary}{y}}$، أو $\tuple{{\OLId{latin-ordinary}{y}}, {\OLId{latin-ordinary}{z}}} \in \Id{{\OLId{latin-looped}{A}}}$،
+أي ${\OLId{latin-ordinary}{y}} = {\OLId{latin-ordinary}{z}}$. ففي الأولى ${\OLId{latin-looped}{R}}^+yz$ بالفرض، ومع ${\OLId{latin-ordinary}{x}} = {\OLId{latin-ordinary}{y}}$ ينتج
+${\OLId{latin-looped}{R}}^+xz$. والثانية مثلها. ففي كل حال ${\OLId{latin-looped}{R}}^+xz$، فتثبت تعدية ${\OLId{latin-looped}{R}}^+$.
+
+ويبقى حكم الخطية. إن كانت ${\OLId{latin-looped}{R}}$ متصلة، كان لكل ${\OLId{latin-ordinary}{x}} \neq {\OLId{latin-ordinary}{y}}$ أحد
+$Rxy$ و~$Ryx$، أي أحد $\tuple{{\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}} \in {\OLId{latin-looped}{R}}$ و$\tuple{{\OLId{latin-ordinary}{y}}, {\OLId{latin-ordinary}{x}}} \in {\OLId{latin-looped}{R}}$.
+ولأن ${\OLId{latin-looped}{R}} \subseteq {\OLId{latin-looped}{R}}^+$ يبقى ذلك في ${\OLId{latin-looped}{R}}^+$، فتكون ${\OLId{latin-looped}{R}}^+$ متصلة أيضًا.
+\end{proof}
+
+\begin{prop}\ollabel{prop:partialtostrict}
+ليكن ${\OLId{latin-looped}{R}}$ ترتيبًا جزئيًا على~${\OLId{latin-looped}{A}}$. فإن ${\OLId{latin-looped}{R}}^- = {\OLId{latin-looped}{R}} \setminus \Id{{\OLId{latin-looped}{A}}}$
+ترتيب صارم؛ وإن كان ${\OLId{latin-looped}{R}}$ خطيًا كان ${\OLId{latin-looped}{R}}^-$ خطيًا صارمًا.
+\end{prop}
+
+\begin{proof}
+إثبات هذه القضية موكول إلى التمرين.
+\end{proof}
+
+\begin{prob}
+برهن على \olref[sfr][rel][ord]{prop:partialtostrict}.
+\end{prob}
+
+ومن خصائص الترتيب الخطي الصارم ما يشبه الامتدادية، وتبينه هذه النتيجة اليسيرة:
+
+\begin{prop}\ollabel{prop:extensionality-strictlinearorders}
+لكل ترتيب خطي صارم $<$ على ${\OLId{latin-looped}{A}}$ تصدق الصيغة:
+\[
+  (\forall {\OLId{latin-ordinary}{a}}, {\OLId{latin-ordinary}{b}} \in {\OLId{latin-looped}{A}})((\forall {\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}})({\OLId{latin-ordinary}{x}} < {\OLId{latin-ordinary}{a}} \liff {\OLId{latin-ordinary}{x}} < {\OLId{latin-ordinary}{b}}) \lif {\OLId{latin-ordinary}{a}} = {\OLId{latin-ordinary}{b}}).
+\]
+\end{prop}
+
+\begin{proof}
+لنفرض $(\forall {\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}})({\OLId{latin-ordinary}{x}} < {\OLId{latin-ordinary}{a}} \liff {\OLId{latin-ordinary}{x}} < {\OLId{latin-ordinary}{b}})$. فلو كان ${\OLId{latin-ordinary}{a}} < {\OLId{latin-ordinary}{b}}$ للزم
+${\OLId{latin-ordinary}{a}} < {\OLId{latin-ordinary}{a}}$، خلافًا للاانعكاسية $<$؛ إذن ${\OLId{latin-ordinary}{a}} \nless {\OLId{latin-ordinary}{b}}$.
+وبمثله ${\OLId{latin-ordinary}{b}} \nless {\OLId{latin-ordinary}{a}}$. فلا يبقى إلا ${\OLId{latin-ordinary}{a}} = {\OLId{latin-ordinary}{b}}$، لاتصالية $<$.
+\end{proof}
+
+\end{document}

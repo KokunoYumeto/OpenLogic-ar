@@ -1,0 +1,160 @@
+% Part: first-order-logic
+% Chapter: natural-deduction
+% Section: proof-theoretic-notions
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{ntd}{ptn}}
+      {\olfileid{pl}{ntd}{ptn}}
+
+\olsection{مفاهيم نظرية البرهان}
+
+\begin{editorial}
+يجمع هذا القسم تعريفي علاقة قابلية الإثبات والاتساق في الاستنتاج
+الطبيعي.
+\end{editorial}
+
+\begin{explain}
+مثلما عرّفنا عددًا من المفاهيم الدلالية المهمة (الصلاحية، والاستلزام،
+وقابلية الإرضاء)، نعرّف الآن \emph{مفاهيم نظرية البرهان} المقابلة. ولا
+تُعرّف هذه بالرجوع إلى إرضاء ال!!{sentence}s في
+\iftag{FOL}{ال!!{structure}s}{ال!!{valuation}s}، بل بالرجوع إلى
+!!{derivability} بعض ال!!{sentence}s من غيرها أو !!{nonderivability}ها.
+وكان اكتشاف تطابق هذه المفاهيم اكتشافًا مهمًا. وتقرر هذا التطابق
+\emph{مبرهنتا السلامة} و\emph{الاكتمال}.
+\end{explain}
+
+
+\begin{defn}[المبرهنات]
+تكون !!{sentence}~$!A$ \emph{مبرهنةً} إذا وجد !!a{derivation} لـ~$!A$
+في الاستنتاج الطبيعي تكون فيه كل الافتراضات !!{discharged}. ونكتب
+$\Proves !A$ إذا كانت~$!A$ مبرهنة، ونكتب~$\Proves/ !A$ إذا لم تكن.
+\end{defn}
+
+\begin{defn}[!!^{derivability}]
+تكون !!^a{sentence}~$!A$ \emph{!!{derivable} من} مجموعة
+!!{sentence}s~$\Gamma$، أي~$\Gamma \Proves !A$، إذا وجد
+!!{derivation} نتيجته~$!A$ ويكون فيه كل افتراض إما !!{discharged} أو
+عنصرًا في~$\Gamma$. وإذا لم تكن~$!A$ !!{derivable} من~$\Gamma$، كتبنا
+$\Gamma \Proves/ !A$.
+\end{defn}
+
+\begin{defn}[الاتساق]
+تكون مجموعة ال!!{sentence}s~$\Gamma$ \emph{غير متسقة} إذا وفقط إذا
+كان~$\Gamma \Proves \lfalse$. وإذا لم تكن~$\Gamma$ غير متسقة، أي إذا
+كان~$\Gamma \Proves/ \lfalse$، قلنا إنها \emph{متسقة}.
+\end{defn}
+
+\begin{prop}[الانعكاسية]
+\ollabel{prop:reflexivity}
+إذا كان~$!A \in \Gamma$، فإن~$\Gamma \Proves !A$.
+\end{prop}
+
+\begin{proof}
+الافتراض~$!A$ بمفرده !!a{derivation} لـ~$!A$ يكون فيه كل افتراض
+!!{undischarged} (أي~$!A$) عنصرًا في~$\Gamma$.
+\end{proof}
+  
+
+\begin{prop}[الرتابة]
+\ollabel{prop:monotonicity}
+إذا كان~$\Gamma \subseteq \Delta$ وكان~$\Gamma \Proves !A$، فإن
+$\Delta \Proves !A$.
+\end{prop}
+
+\begin{proof}
+كل !!{derivation} لـ~$!A$ من~$\Gamma$ هو كذلك !!a{derivation} لـ~$!A$
+من~$\Delta$.
+\end{proof}
+
+\begin{prop}[التعدي]
+\ollabel{prop:transitivity}
+إذا كان~$\Gamma \Proves !A$ وكان~$\{!A\} \cup \Delta \Proves !B$،
+فإن~$\Gamma \cup \Delta \Proves !B$.
+\end{prop}
+
+\begin{proof}
+إذا كان~$\Gamma \Proves !A$، وجد !!a{derivation}~$\delta_0$ لـ~$!A$
+تكون كل افتراضاته ال!!{undischarged} في~$\Gamma$. وإذا كان
+$\{!A\} \cup \Delta \Proves !B$، وجد !!a{derivation}~$\delta_1$
+لـ~$!B$ تكون كل افتراضاته ال!!{undischarged} في
+$\{!A\} \cup \Delta$. والآن اعتبر:
+\begin{prooftree}
+  \AxiomC{$\Delta, \Discharge{!A}{1}$}
+  \RightLabel{$\delta_1$}
+  \DeduceC{$!B$}
+  \DischargeRule{\Intro{\lif}}{1}
+  \UnaryInfC{$!A \lif !B$}
+  \AxiomC{$\Gamma$}
+  \RightLabel{$\delta_0$}
+  \DeduceC{$!A$}
+  \RightLabel{\Elim{\lif}}
+  \BinaryInfC{$!B$}
+\end{prooftree}
+صارت الافتراضات ال!!{undischarged} كلها الآن ضمن~$\Gamma \cup
+\Delta$، ولذلك يبين هذا أن~$\Gamma \cup \Delta \Proves !B$.
+\end{proof}
+
+عندما تكون~$\Gamma = \{!A_1, !A_2, \ldots, !A_k\}$ مجموعة منتهية،
+يجوز أن نستعمل الترميز المبسط~$!A_1,!A_2,\ldots,!A_k \Proves !B$
+بدلًا من~$\Gamma \Proves !B$؛ وعلى وجه الخصوص، يعني
+$!A \Proves !B$ أن~$\{!A\} \Proves !B$.
+
+لاحظ أنه إذا كان~$\Gamma \Proves !A$ وكان~$!A \Proves !B$، فإن
+$\Gamma \Proves !B$. ويلزم أيضًا أنه إذا كان
+$!A_1, \dots, !A_n \Proves !B$ وكان~$\Gamma \Proves !A_i$ لكل~$i$،
+فإن~$\Gamma \Proves !B$.
+
+\begin{prop}
+\ollabel{prop:incons}
+العبارات الآتية متكافئة:
+    \begin{enumerate}
+      \item \( \Gamma \) غير متسقة.
+      \item \( \Gamma \Proves {!A} \) لكل !!{sentence}~\( {!A} \).
+      \item \( \Gamma \Proves {!A} \) و\( \Gamma \Proves \lnot {!A} \) لبعض !!{sentence}~\( {!A} \).
+    \end{enumerate}
+\end{prop}
+
+\begin{proof}
+تمرين.
+\end{proof}
+
+\tagprob{FOL}
+\begin{prob}
+أثبت \olref[fol][ntd][ptn]{prop:incons}.
+\end{prob}
+\tagendprob
+
+\tagprob{notFOL}
+\begin{prob}
+أثبت \olref[pl][ntd][ptn]{prop:incons}.
+\end{prob}
+\tagendprob
+
+\begin{prop}[التراص]
+  \ollabel{prop:proves-compact}
+  \begin{enumerate}
+  \item إذا كان~$\Gamma \Proves !A$، وجدت مجموعة جزئية منتهية
+    $\Gamma_0 \subseteq \Gamma$ بحيث~$\Gamma_0 \Proves !A$.
+  \item إذا كانت كل مجموعة جزئية منتهية من~$\Gamma$ متسقة، فإن
+    $\Gamma$ متسقة.
+  \end{enumerate}
+\end{prop}
+
+\begin{proof}
+  \begin{enumerate}
+    \item إذا كان~$\Gamma \Proves !A$، وجد !!a{derivation}~$\delta$
+      لـ~$!A$ من~$\Gamma$. ولتكن~$\Gamma_0$ مجموعة الافتراضات
+      ال!!{undischarged} في~$\delta$. وبما أن كل !!{derivation} منته،
+      فلا يمكن أن تحتوي~$\Gamma_0$ إلا على عدد منته من
+      ال!!{sentence}s. ولذلك يكون~$\delta$ !!a{derivation} لـ~$!A$ من
+      $\Gamma_0 \subseteq \Gamma$ منتهية.
+    \item هذه هي المقابل بالنقيض لـ~(1) في الحالة الخاصة
+      $!A \ident \lfalse$.
+  \end{enumerate}
+\end{proof}
+
+\end{document}

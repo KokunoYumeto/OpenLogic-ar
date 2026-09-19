@@ -1,0 +1,467 @@
+{
+  "schema": "openlogic-classical-repair-ledger-v2",
+  "created_utc": "2026-09-04T22:16:03Z",
+  "scope": "OLP-0101 through OLP-0200. Repairs are limited to the MSA and Classical Arabic content layers for these units; the pinned English source, baseline, historical batch receipts, validator, consolidated terminology files, TeX products, Git state, and publication state are unchanged by this lane.",
+  "status": "SOURCE_REPAIRS_APPLIED_AND_CURRENT_BYTES_BOUND",
+  "recording_mode": "Contemporaneous repair verification against the current tree, followed by bounded completion of cross-layer instances of the same evidenced defects.",
+  "open_to_correction": true,
+  "roots": {
+    "english": "source-snapshot/english/content",
+    "msa": "source/locale/ar/content",
+    "classical": "source/locale/ar-classical/content"
+  },
+  "authority": [
+    {"path": "evidence/classical/STYLE_SPEC.md", "sha256": "449f1a0d8dbb4e93e7a9f5a8e42ccde8f0f01574eafed37223969461185197d9"},
+    {"path": "evidence/classical/BASELINE.json", "sha256": "c10a6321b79a210febba49b3fc216a7fb22b729a738af71d57dc1aea9e105beb"},
+    {"path": "evidence/classical/reviews/0101-0200.json", "sha256": "93be2b852178b21ea252d5d7229219bda66e4ef5ea037b08c6baea5ec58ce795"},
+    {"path": "evidence/classical/reviews/0101-0200.md", "sha256": "6f89d35c5ba7802d099747a88a1ee4f0e17037c6caf2ec15dedee1fef981ed39"},
+    {"path": "evidence/classical/terminology/README.md", "sha256": "43d8bcc75273164a6a8b60a9b5a661e04de897d29bd39d057007f85cc06799b2"},
+    {"path": "evidence/classical/batches/0101-0150.json", "sha256": "b13908869b883cda9fe0e2c539587ae848c958cb9b8b1c250761f0409b946de2", "role": "historical pre-repair construction receipt"},
+    {"path": "evidence/classical/batches/0151-0200.json", "sha256": "d027b985dcf4383afa06ae4e771c3c0ba86789a07b0f9fbe6834dfeed7bd53ae", "role": "historical pre-repair construction receipt"}
+  ],
+  "summary": {
+    "units_total": 100,
+    "review_findings_considered": 16,
+    "review_findings_disposed": 16,
+    "units_with_repair_or_cross_layer_completion": 20,
+    "units_with_both_layers_repaired": 17,
+    "units_with_msa_only_completion_where_classical_was_already_correct": 2,
+    "units_with_classical_only_repair": 1,
+    "units_with_explicit_no_change_disposition": 80,
+    "msa_files_changed_from_review_bound_snapshot": 19,
+    "classical_files_changed_from_review_bound_snapshot": 18,
+    "inherited_english_defects_with_adjacent_keyed_arabic_notes": 10,
+    "adjacent_keyed_arabic_note_instances": 24,
+    "untranslated_terms_left_behind": 0
+  },
+  "scope_repairs_beyond_the_literal_location_list": [
+    {
+      "finding_id": "QNT-01",
+      "units": ["OLP-0104", "OLP-0112"],
+      "reason": "Independent cross-layer verification found five further in-range MSA occurrences of the identical الكمّيات-for-quantifiers defect. Their Classical counterparts already used المكمّمات. Leaving them would preserve the inconsistency the finding identifies."
+    },
+    {
+      "finding_id": "0113-N1",
+      "units": ["OLP-0113"],
+      "reason": "The review classified the broken construction as Classical-only, but the current MSA witness contained the same grammatical and logical ambiguity. Both layers now state the unary/binary alternatives without imposing a k-index in the unary case."
+    },
+    {
+      "finding_id": "0118-I1",
+      "units": ["OLP-0113", "OLP-0115", "OLP-0118"],
+      "reason": "Acceptance review showed that a local invocation in OLP-0118 did not establish the required transformation. Both Arabic layers now define finite derivation support in OLP-0113, provide a conservative denumerable reserve and a proved endpoint-preserving QR freshening lemma in OLP-0115, and use that lemma only in the FOL branch of OLP-0118 while retaining ordinary PL concatenation."
+    },
+    {
+      "finding_id": "0177-A1",
+      "units": ["OLP-0177"],
+      "reason": "The review listed the two late Classical occurrences. Cross-layer inspection found three earlier MSA uses of k-المحلية or الرتبة for arity. They now use the same unambiguous عدد المواضع analysis."
+    },
+    {
+      "finding_id": "0193-N1",
+      "units": ["OLP-0193"],
+      "reason": "The review classified the number-agreement defect as Classical-only, but the MSA witness also combined a pluralized token with dual agreement. The MSA sentence now uses اثنتان من explicitly."
+    }
+  ],
+  "finding_dispositions": [
+    {
+      "finding_id": "0105-I1",
+      "units": ["OLP-0105"],
+      "status": "REPAIRED_BOTH_LAYERS",
+      "locations": [
+        {"layer": "msa", "relative_path": "first-order-logic/tableaux/proof-theoretic-notions.tex", "lines": [108, 110], "note_line": 108},
+        {"layer": "classical", "relative_path": "first-order-logic/tableaux/proof-theoretic-notions.tex", "lines": [112, 113], "note_line": 112}
+      ],
+      "chosen_repair": "Freshen the eigenconstants of the two independently closed tableaux before grafting them below Cut, avoiding the other tableau's assumptions and the entire upper branch.",
+      "rationale": "Grafting enlarges the formulas above old quantified-rule applications; without freshening, a formerly valid eigenconstant condition can fail.",
+      "source_defect": true,
+      "expert_review": {"useful": false, "reason": "This is a standard eigenconstant hygiene condition, not an unsettled lexical choice."},
+      "open_to_correction": true
+    },
+    {
+      "finding_id": "0106-I1",
+      "units": ["OLP-0106"],
+      "status": "REPAIRED_BOTH_LAYERS",
+      "locations": [
+        {"layer": "msa", "relative_path": "first-order-logic/tableaux/provability-consistency.tex", "lines": [119, 121], "note_line": 119},
+        {"layer": "classical", "relative_path": "first-order-logic/tableaux/provability-consistency.tex", "lines": [116, 117], "note_line": 116}
+      ],
+      "chosen_repair": "Freshen the new constants in both closed component tableaux before attaching them to the two Cut branches.",
+      "rationale": "The composite tableau has a larger upper context than either component tableau had in isolation.",
+      "source_defect": true,
+      "expert_review": {"useful": false, "reason": "This follows directly from the tableau eigenconstant side condition."},
+      "open_to_correction": true
+    },
+    {
+      "finding_id": "QNT-01",
+      "units": ["OLP-0104", "OLP-0108", "OLP-0112", "OLP-0115", "OLP-0117", "OLP-0120", "OLP-0123", "OLP-0128"],
+      "status": "REPAIRED_LISTED_LOCATIONS_AND_COMPLETED_CROSS_LAYER_RESIDUALS",
+      "chosen_arabic": "المكمّمات",
+      "rejected_or_deferred_alternatives": ["الكمّيات", "السور"],
+      "locations": [
+        {"unit": "OLP-0104", "msa_lines": [11, 14, 228], "classical_already_correct": true},
+        {"unit": "OLP-0108", "msa_lines": [10], "classical_lines": [10]},
+        {"unit": "OLP-0112", "msa_lines": [14, 16], "classical_already_correct": true},
+        {"unit": "OLP-0115", "msa_lines": [11, 13, 29], "classical_lines": [11, 13, 29]},
+        {"unit": "OLP-0117", "msa_lines": [11], "classical_lines": [11]},
+        {"unit": "OLP-0120", "msa_lines": [11], "classical_lines": [11]},
+        {"unit": "OLP-0123", "msa_lines": [14], "classical_lines": [14]},
+        {"unit": "OLP-0128", "msa_lines": [91], "classical_lines": [77, 87]}
+      ],
+      "rationale": "المكمّم names the formal binding operators and is already the dominant local corpus term; الكمّيات is readily read as quantities. السور remains a historically relevant alternative requiring expert policy rather than piecemeal substitution.",
+      "source_defect": false,
+      "expert_review": {"useful": true, "reason": "Experts may prefer the older logical term السور or a controlled distinction between السور and المكمّم; please double-check this corpus-wide choice."},
+      "open_to_correction": true
+    },
+    {
+      "finding_id": "0113-N1",
+      "units": ["OLP-0113"],
+      "status": "REPAIRED_BOTH_LAYERS_AFTER_CROSS_LAYER_VERIFICATION",
+      "locations": [
+        {"layer": "msa", "relative_path": "first-order-logic/axiomatic-deduction/rules-and-proofs.tex", "lines": [31, 33]},
+        {"layer": "classical", "relative_path": "first-order-logic/axiomatic-deduction/rules-and-proofs.tex", "lines": [32, 34]}
+      ],
+      "chosen_repair": "State disjunctively that an inference rule uses one earlier formula, or two earlier formulas for a binary rule, with the applicable indices smaller than i.",
+      "rationale": "The previous parenthetical construction was broken Arabic and obscured whether the rule was unary or binary; the revised wording also avoids mentioning k in the unary case.",
+      "source_defect": false,
+      "expert_review": {"useful": false, "reason": "This is a direct grammar and logical-scope repair."},
+      "open_to_correction": true
+    },
+    {
+      "finding_id": "0115-I1",
+      "units": ["OLP-0115"],
+      "status": "REPAIRED_BOTH_LAYERS",
+      "locations": [
+        {"layer": "msa", "relative_path": "first-order-logic/axiomatic-deduction/axioms-rules-quantifiers.tex", "lines": [30, 37], "note_line": 30},
+        {"layer": "classical", "relative_path": "first-order-logic/axiomatic-deduction/axioms-rules-quantifiers.tex", "lines": [30, 37], "note_line": 30}
+      ],
+      "chosen_repair": "Require the eigenconstant a to be absent from the finite support of the derivation, B, and A(x) in both quantified inference rules.",
+      "rationale": "Testing the finite support expresses the actual premises used even when Γ is infinite; absence from A(x) is independently necessary, since A(x) := (x=a) would otherwise make the universal rule unsound.",
+      "source_defect": true,
+      "expert_review": {"useful": false, "reason": "The counterexample deterministically establishes the missing side condition."},
+      "open_to_correction": true
+    },
+    {
+      "finding_id": "0117-I1",
+      "units": ["OLP-0117"],
+      "status": "REPAIRED_BOTH_LAYERS",
+      "locations": [
+        {"layer": "msa", "relative_path": "first-order-logic/axiomatic-deduction/proving-things-quant.tex", "lines": [31, 32], "note_line": 31},
+        {"layer": "classical", "relative_path": "first-order-logic/axiomatic-deduction/proving-things-quant.tex", "lines": [31, 32], "note_line": 31}
+      ],
+      "chosen_repair": "Compose P→A(a) with ax:land3, then use ax:lif2 and two applications of MP, including P→B(a), to derive P→(A(a)∧B(a)).",
+      "rationale": "ax:land3 and two MP applications alone do not directly combine the two formulas sharing antecedent P.",
+      "source_defect": true,
+      "expert_review": {"useful": false, "reason": "The Hilbert derivation is checked axiom by axiom."},
+      "open_to_correction": true
+    },
+    {
+      "finding_id": "0117-I2",
+      "units": ["OLP-0117"],
+      "status": "REPAIRED_BOTH_LAYERS",
+      "locations": [
+        {"layer": "msa", "relative_path": "first-order-logic/axiomatic-deduction/proving-things-quant.tex", "lines": [16, 17], "note_line": 16},
+        {"layer": "classical", "relative_path": "first-order-logic/axiomatic-deduction/proving-things-quant.tex", "lines": [16, 17], "note_line": 16}
+      ],
+      "chosen_repair": "Choose a fresh constant a absent from both schematic formulas before the displayed derivation.",
+      "rationale": "The final QR step needs the fresh-eigenconstant side condition; this derivation has no premises, and the antecedent and matrix are built from A and B.",
+      "source_defect": true,
+      "expert_review": {"useful": false, "reason": "This is a deterministic side-condition repair."},
+      "open_to_correction": true
+    },
+    {
+      "finding_id": "0118-I1",
+      "units": ["OLP-0113", "OLP-0115", "OLP-0118"],
+      "status": "REPAIRED_WITH_SELF_CONTAINED_SUPPORT_RESERVE_AND_FRESHENING_PROOF_BOTH_LAYERS",
+      "locations": [
+        {"unit": "OLP-0113", "layer": "msa", "relative_path": "first-order-logic/axiomatic-deduction/rules-and-proofs.tex", "lines": [37, 41], "note_line": 37},
+        {"unit": "OLP-0113", "layer": "classical", "relative_path": "first-order-logic/axiomatic-deduction/rules-and-proofs.tex", "lines": [38, 42], "note_line": 38},
+        {"unit": "OLP-0115", "layer": "msa", "relative_path": "first-order-logic/axiomatic-deduction/axioms-rules-quantifiers.tex", "lines": [22, 64], "note_line": 22, "lemma_label": "lem:qr-freshening"},
+        {"unit": "OLP-0115", "layer": "classical", "relative_path": "first-order-logic/axiomatic-deduction/axioms-rules-quantifiers.tex", "lines": [22, 64], "note_line": 22, "lemma_label": "lem:qr-freshening"},
+        {"unit": "OLP-0118", "layer": "msa", "relative_path": "first-order-logic/axiomatic-deduction/proof-theoretic-notions.tex", "lines": [59, 97], "note_line": 73},
+        {"unit": "OLP-0118", "layer": "classical", "relative_path": "first-order-logic/axiomatic-deduction/proof-theoretic-notions.tex", "lines": [60, 98], "note_line": 74}
+      ],
+      "chosen_repair": "Define finite derivation support; conservatively extend the FOL proof language by a denumerable auxiliary-constant reserve; state and prove an endpoint-preserving QR-freshening lemma by induction on a pruned finite proof tree; and invoke it successively before transitivity concatenation. Gate every QR-specific convention and proof step with FOL, leaving the PL route as ordinary concatenation.",
+      "rationale": "Finite support alone does not guarantee a fresh constant when the original constant stock is finite, and an unproved local invocation does not establish preservation of support or endpoints. The conservative reserve proves availability; the tree induction proves that assumptions, axiom instances, MP, inner QR nodes, support, and conclusion are preserved; FOL gating prevents quantifier-specific prose from leaking into the shared PL rendering.",
+      "source_defect": true,
+      "expert_review": {"useful": false, "reason": "This is the standard freshening transformation for Hilbert derivations."},
+      "open_to_correction": true
+    },
+    {
+      "finding_id": "0133-I1",
+      "units": ["OLP-0133"],
+      "status": "REPAIRED_BOTH_LAYERS",
+      "locations": [
+        {"layer": "msa", "relative_path": "first-order-logic/completeness/identity.tex", "lines": [123, 124], "note_line": 123},
+        {"layer": "classical", "relative_path": "first-order-logic/completeness/identity.tex", "lines": [121, 122], "note_line": 121}
+      ],
+      "chosen_repair": "Use the alternative representative t' inside the non-satisfaction formula.",
+      "rationale": "Representative-independence requires comparing satisfaction of R(t) with non-satisfaction of R(t'); retaining t makes the hypothesis contradict itself before equivalence is used.",
+      "source_defect": true,
+      "expert_review": {"useful": false, "reason": "The representative variable is uniquely determined by the argument."},
+      "open_to_correction": true
+    },
+    {
+      "finding_id": "0147-I1",
+      "units": ["OLP-0147"],
+      "status": "REPAIRED_BOTH_LAYERS",
+      "locations": [
+        {"layer": "msa", "relative_path": "first-order-logic/introduction/models-theories.tex", "lines": [29, 53], "note_line": 29},
+        {"layer": "classical", "relative_path": "first-order-logic/introduction/models-theories.tex", "lines": [30, 53], "note_line": 30}
+      ],
+      "chosen_repair": "Qualify the example throughout as preorders on nonempty carriers.",
+      "rationale": "The book's first-order structures have nonempty domains, so models of Γ do not represent preorders on the empty carrier.",
+      "source_defect": true,
+      "expert_review": {"useful": false, "reason": "The scope follows the book's explicit nonempty-domain convention."},
+      "open_to_correction": true
+    },
+    {
+      "finding_id": "0163-N1",
+      "units": ["OLP-0163"],
+      "status": "REPAIRED_CLASSICAL_ONLY",
+      "locations": [
+        {"layer": "classical", "relative_path": "first-order-logic/syntax-and-semantics/satisfaction.tex", "lines": [18, 18]}
+      ],
+      "chosen_repair": "Change رمز ثابت to رمزًا ثابتًا after كان.",
+      "rationale": "The predicate of كان is accusative; the differently worded MSA sentence is acceptable.",
+      "source_defect": false,
+      "expert_review": {"useful": false, "reason": "This is a direct case-agreement correction."},
+      "open_to_correction": true
+    },
+    {
+      "finding_id": "0165-I1",
+      "units": ["OLP-0165"],
+      "status": "REPAIRED_BOTH_LAYERS",
+      "locations": [
+        {"layer": "msa", "relative_path": "first-order-logic/syntax-and-semantics/extensionality.tex", "lines": [39, 42], "note_line": 39},
+        {"layer": "classical", "relative_path": "first-order-logic/syntax-and-semantics/extensionality.tex", "lines": [39, 43], "note_line": 39}
+      ],
+      "chosen_repair": "Restrict the preliminary term-value induction to terms occurring in the formula under consideration.",
+      "rationale": "The hypotheses equate interpretations only for symbols occurring in A; they cannot imply equal values for arbitrary unrelated terms.",
+      "source_defect": true,
+      "expert_review": {"useful": false, "reason": "This is forced by the proposition's stated hypothesis."},
+      "open_to_correction": true
+    },
+    {
+      "finding_id": "0177-A1",
+      "units": ["OLP-0177"],
+      "status": "REPAIRED_BOTH_LAYERS_AND_COMPLETED_MSA_FILE_WIDE_CONSISTENCY",
+      "locations": [
+        {"layer": "msa", "relative_path": "first-order-logic/beyond/second-order-logic.tex", "line_groups": [[13, 23], [209, 213]], "note_lines": [13, 209]},
+        {"layer": "classical", "relative_path": "first-order-logic/beyond/second-order-logic.tex", "lines": [209, 213], "note_line": 209}
+      ],
+      "chosen_arabic": "العلاقات ذات k مواضع",
+      "rejected_or_deferred_alternatives": ["العلاقات ذات الرتبة k", "العلاقات k-المحلية"],
+      "rationale": "عدد المواضع expresses arity without colliding with the surrounding distinction between first- and second-order logic; the k-محلية form is opaque in this context.",
+      "source_defect": false,
+      "expert_review": {"useful": true, "reason": "An Arabic mathematical-terminology authority may prefer رتبة العلاقة or a specialized compact noun under a controlled convention; please double-check the chosen descriptive term."},
+      "open_to_correction": true
+    },
+    {
+      "finding_id": "0186-A1",
+      "units": ["OLP-0186"],
+      "status": "REPAIRED_BOTH_LAYERS",
+      "locations": [
+        {"layer": "msa", "relative_path": "model-theory/basics/overspill.tex", "line_groups": [[13, 14], [20, 20], [37, 37]]},
+        {"layer": "classical", "relative_path": "model-theory/basics/overspill.tex", "line_groups": [[13, 14], [20, 20], [38, 38]]}
+      ],
+      "chosen_arabic": "نماذج منتهية لا حدّ لكبرها",
+      "alternative": "نماذج منتهية لا حدَّ لأعداد عناصرها",
+      "rationale": "The former كبيرة اعتباطيًا calqued arbitrarily large and could mean capriciously chosen; the replacement expresses unbounded finite cardinality.",
+      "source_defect": false,
+      "expert_review": {"useful": false, "reason": "Both recorded alternatives are semantically exact; the chosen form is shorter and idiomatic."},
+      "open_to_correction": true
+    },
+    {
+      "finding_id": "0189-I1",
+      "units": ["OLP-0189"],
+      "status": "REPAIRED_BOTH_LAYERS",
+      "locations": [
+        {"layer": "msa", "relative_path": "model-theory/basics/partial-iso.tex", "lines": [87, 98], "note_line": 87},
+        {"layer": "classical", "relative_path": "model-theory/basics/partial-iso.tex", "lines": [88, 99], "note_line": 88}
+      ],
+      "chosen_repair": "Quantify the induction over p in the witnessing back-and-forth family I, require all free variables of A to be among the paired variables, and use forth/back extensions in the quantifier cases.",
+      "rationale": "The inherited proof's claim for an arbitrary partial isomorphism and arbitrary formula is false; the strengthened induction is the standard proof of elementary equivalence.",
+      "source_defect": true,
+      "expert_review": {"useful": false, "reason": "The missing hypotheses and quantifier step are mathematically forced."},
+      "open_to_correction": true
+    },
+    {
+      "finding_id": "0193-N1",
+      "units": ["OLP-0193"],
+      "status": "REPAIRED_BOTH_LAYERS_AFTER_CROSS_LAYER_VERIFICATION",
+      "locations": [
+        {"layer": "msa", "relative_path": "model-theory/models-of-arithmetic/standard-models.tex", "lines": [14, 17]},
+        {"layer": "classical", "relative_path": "model-theory/models-of-arithmetic/standard-models.tex", "lines": [14, 17]}
+      ],
+      "chosen_repair": "Use the explicit dual construction «فإذا تشاكلت اثنتان من الــ!!{structure}s اتفقتا/اشتركتا»، then define every structure isomorphic to N as standard.",
+      "rationale": "The earlier plural token followed by dual adjectives and verbs had broken number agreement and a dangling comparison.",
+      "source_defect": false,
+      "expert_review": {"useful": false, "reason": "This is a direct number-agreement repair with unchanged mathematical content."},
+      "open_to_correction": true
+    }
+  ],
+  "unit_record_fields": [
+    "unit_id",
+    "review_disposition",
+    "repair_disposition",
+    "finding_ids",
+    "relative_content_path",
+    "current_msa_sha256",
+    "current_msa_line_span",
+    "current_classical_sha256",
+    "current_classical_line_span"
+  ],
+  "unit_dispositions": [
+    ["OLP-0101","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"first-order-logic/tableaux/quantifier-rules.tex","045c65fb651e827c062be5000ed33dbba15078d85c262976baf5afa5abaa022f",[1,107],"48e0f9b01ed9bbe8373369dcac64a8225482e92d78d58199b5e6219c62c64915",[1,111]],
+    ["OLP-0102","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"first-order-logic/tableaux/derivations.tex","df91ecce6cb5ace0d39736844c24169bfea8d95536db3945ce27980caea80a88",[1,91],"58a3676671245fc3024fa605d9556ace30e52025b38171bff9c6ffe3ce8e4501",[1,90]],
+    ["OLP-0103","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"first-order-logic/tableaux/proving-things.tex","3187a693de69dcccee3388cf81f86a55734e8a9e800223de1cad0ea2ad494317",[1,451],"e6c454b348a06804d989f01a47ae464bcf5f698a1a9c7e0e53d0b395f9770dec",[1,451]],
+    ["OLP-0104","PASS","REPAIR_PRESENT_AND_VERIFIED_MSA_ONLY_CLASSICAL_ALREADY_CORRECT",["QNT-01"],"first-order-logic/tableaux/proving-things-quant.tex","d280908bafc3c36286d5c1522b66f3b53c36b61c6067645f5f1393dc73dd4766",[1,340],"8d050f4f8d596766f4ddc7f4f7dae6d3f1351ffaa7da31e75c7543952e023801",[1,341]],
+    ["OLP-0105","PASS_WITH_INHERITED_ISSUES","REPAIR_PRESENT_AND_VERIFIED_BOTH_LAYERS",["0105-I1"],"first-order-logic/tableaux/proof-theoretic-notions.tex","c568cdafb745c15a4786721ab3a24d6f006869ca51c284f11734cec2d6862767",[1,189],"6183adb828dc402e1948e969a4a9d760836531d5df1244199a0283347a703844",[1,193]],
+    ["OLP-0106","PASS_WITH_INHERITED_ISSUES","REPAIR_PRESENT_AND_VERIFIED_BOTH_LAYERS",["0106-I1"],"first-order-logic/tableaux/provability-consistency.tex","ea30e867b874c8d6dd590d091dbaabb4cce66304f3f559d9468ffee1ed5b6b18",[1,147],"2a8de618592d1a29be61fa3f44f39ca9c0d051b6f4b220e464f9fa47656684f0",[1,142]],
+    ["OLP-0107","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"first-order-logic/tableaux/provability-propositional.tex","3503d8037148da5cb8ad9bde282ac4c182320dbaf3cf1607c0038f8b648dab50",[1,174],"1e59b8602e30fb27507abac245113f406672c3fc14d68404873a6ac8a94a8cfe",[1,180]],
+    ["OLP-0108","REPAIR_RECOMMENDED","REPAIR_PRESENT_AND_VERIFIED_BOTH_LAYERS",["QNT-01"],"first-order-logic/tableaux/provability-quantifiers.tex","c706b1af27ee2613bc54bacdbb1e8d8eb9257ef587cba0387e24cbbb4502c55b",[1,87],"558f66b806f67b465cba47bbd0435601ed49441cdb9bf33f0aaaa14a0b09282f",[1,90]],
+    ["OLP-0109","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"first-order-logic/tableaux/soundness.tex","ae87feac4ab6fd53772f3ddc561406264928c1333f5fb4581b5ba4f567bd1d56",[1,235],"42bbb26b73ae03d62d5ce1027ff359b735f56d01809457c347178924e766b53e",[1,239]],
+    ["OLP-0110","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"first-order-logic/tableaux/identity.tex","6e8393cc0276a94d683d5129ff63593da6a17efd6654a70dd7fdde31502bf7c3",[1,104],"604fff807dc0b8060cd2c8fbc22f92516d83eaf66ebe6ef078e564e71dad762e",[1,106]],
+    ["OLP-0111","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"first-order-logic/tableaux/soundness-identity.tex","e87ba46f210c16558a6330b65fe105887b6cec145d5ae6a960a2668d355e906c",[1,43],"1683ef44c2879dc3e65caa1fcf96bd80c42f83f4151c72ebf9c13e135478acc0",[1,45]],
+    ["OLP-0112","PASS","REPAIR_PRESENT_AND_VERIFIED_MSA_ONLY_CLASSICAL_ALREADY_CORRECT",["QNT-01"],"first-order-logic/axiomatic-deduction/axiomatic-deduction.tex","89196a61bf7e9cb1463867f9d3a85889bf159dbd270b93d7f02c87e2ca291835",[1,57],"e466223517f1cde62d060e19ca2a9b832a256cd41cea27ba9a6da7474d5be816",[1,57]],
+    ["OLP-0113","REPAIR_RECOMMENDED","REPAIR_PRESENT_AND_VERIFIED_BOTH_LAYERS",["0113-N1","0118-I1"],"first-order-logic/axiomatic-deduction/rules-and-proofs.tex","59cd08ec76041b286d37655003203faa2e541e16065bf479ca8c27514ed8052b",[1,97],"ef95c56a63aa41ad03713ad04696acb464d82a2e27666df832e94e6ccdb32ab1",[1,101]],
+    ["OLP-0114","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"first-order-logic/axiomatic-deduction/axioms-rules-propositional.tex","9c278cdec87283299d8f4587ecc23a5802693ffcc8fa48e557114b305299b702",[1,43],"d873df49d68961292b28d4088cc750a956a2ae0fdab906eb96777a7ee79f5a0f",[1,43]],
+    ["OLP-0115","REPAIR_RECOMMENDED","REPAIR_PRESENT_AND_VERIFIED_BOTH_LAYERS",["QNT-01","0115-I1","0118-I1"],"first-order-logic/axiomatic-deduction/axioms-rules-quantifiers.tex","345d43860b8e3b9bba26a5e25e966566aaa9170249f19e7be37992ef60f88853",[1,66],"424a87974c3ce437079eca8bb2f585e121b42b82216af1c0b499d25cab3cfb03",[1,66]],
+    ["OLP-0116","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"first-order-logic/axiomatic-deduction/proving-things.tex","a110107581f11ba0e18f180352659fc1b4c25b4a27e0dcd065cce80ce52a2436",[1,126],"57a3a005f5b4a0f5573d33777691511fcb488d4f37483a527dd8d4381274828b",[1,131]],
+    ["OLP-0117","REPAIR_RECOMMENDED","REPAIR_PRESENT_AND_VERIFIED_BOTH_LAYERS",["QNT-01","0117-I1","0117-I2"],"first-order-logic/axiomatic-deduction/proving-things-quant.tex","28fa5d01bfc7e6651ee3b63a19f0f8ac5d11b0926fd75faeeb8bc1a054e1c7ca",[1,39],"518e7f6bdda2fddd93f285748657066c947f99a84f6e860248e94d2ffdacaf8e",[1,39]],
+    ["OLP-0118","PASS_WITH_INHERITED_ISSUES","REPAIR_PRESENT_AND_VERIFIED_BOTH_LAYERS_SELF_CONTAINED",["0118-I1"],"first-order-logic/axiomatic-deduction/proof-theoretic-notions.tex","abd8e985397fade16d489ed2b217d436c9716bf911c84134f959c59a5b2569f8",[1,150],"64146cb3731fe9895e781de149b196fd9b445a53588a0ec7ad9d47ccd0372d16",[1,153]],
+    ["OLP-0119","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"first-order-logic/axiomatic-deduction/deduction-theorem.tex","2cabf30890512fa34807be9fa83e883a8c6b96f34cb8534ee32c4815839f1e74",[1,129],"9bad7b6608b948a017068d42c9dae0fc413db0d41f6af3f49643aaef90c5e83c",[1,133]],
+    ["OLP-0120","REPAIR_RECOMMENDED","REPAIR_PRESENT_AND_VERIFIED_BOTH_LAYERS",["QNT-01"],"first-order-logic/axiomatic-deduction/deduction-theorem-quantifiers.tex","7df3f23a13ee4631e4f17c13922921c4530e9b9d8d33856293efb6a5c5d2b67c",[1,57],"770261f26bcdf715fb31302e0ef47493858c6b783037c466355f59c1203000ab",[1,58]],
+    ["OLP-0121","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"first-order-logic/axiomatic-deduction/provability-consistency.tex","97559d57f527670e3238939e6d6ce20f3ebe131fb2d066199ffe54cd0b2c1027",[1,93],"45a7d8ae055a9f2c82792b81b8621a2dbd043b50e0b37fcf6a6ddccfb1dcc859",[1,95]],
+    ["OLP-0122","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"first-order-logic/axiomatic-deduction/provability-propositional.tex","0b8da69ce9dc5ab2e9976a7c4e26f69ce9a931af9d3779c1689f46120aac1b61",[1,82],"c581f9db799f2545ef96f3b66f36ed1e307ba48fe7127367081cc4211fdd2910",[1,82]],
+    ["OLP-0123","REPAIR_RECOMMENDED","REPAIR_PRESENT_AND_VERIFIED_BOTH_LAYERS",["QNT-01"],"first-order-logic/axiomatic-deduction/provability-quantifiers.tex","1fb0d2483c253af33dc5157ef41a9357f66465e4a468016334af18064bbc8ff0",[1,52],"4ddea86f63dd237813667fe78d90e8263e52d79ad8ee840705825919de0841e3",[1,53]],
+    ["OLP-0124","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"first-order-logic/axiomatic-deduction/soundness.tex","9cbe26f85697057bc93713fd1adfcbc9ef18239c911a85a8c6292f3919af0d84",[1,140],"dc0721f98f9b52d984dff5c6e236da25ae09764a6e0c5b1a7a09aeae21a8c3ca",[1,141]],
+    ["OLP-0125","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"first-order-logic/axiomatic-deduction/identity.tex","636256ab77d00814d94c893c325c02ee6af6e3bdcc38362a605a3199a0132f23",[1,55],"61d332790b7a70b88d91d78f952388344d72636fd13d3ae07448e5d3be12a682",[1,55]],
+    ["OLP-0126","PASS_STRUCTURAL","NO_CHANGE_REQUIRED_STRUCTURAL_UNIT",[],"first-order-logic/completeness/completeness.tex","66e202e666607b6d38013c30ce62bbd959c19e4f68bcdce9c1e29e40f144b0b6",[1,42],"408952eb9e208195af66dc380e395e0d76b6bb7cf1db8fe32a4b65140bb623ed",[1,42]],
+    ["OLP-0127","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"first-order-logic/completeness/introduction.tex","2031e653718513b1a7185dfe3243f541d5e54fa8af1de160c637d8f97044e390",[1,66],"1d7e5157d10bf1b00e2d4ceb0656e4b814264a6308ac58a5ad4d95d3c9ff7782",[1,62]],
+    ["OLP-0128","REPAIR_RECOMMENDED","REPAIR_PRESENT_AND_VERIFIED_BOTH_LAYERS",["QNT-01"],"first-order-logic/completeness/outline.tex","a8d229deefdefc4ab965b59eae42b14f5dd7171a6f67ffcc17bf9208099c42b1",[1,155],"9129a691959f71291906eaa80a5449945437bb0f6ef2b347755d71be1a83e399",[1,150]],
+    ["OLP-0129","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"first-order-logic/completeness/complete-consistent-sets.tex","5d1c844cc230e37cec8596d99585bd75cfa18b8293955220bbfc24c8dd4a10f2",[1,220],"9206675f66a8e732043544c7b5e4c89d5ccf14ea0d782db9a118ebd5eab6d3b5",[1,218]],
+    ["OLP-0130","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"first-order-logic/completeness/henkin-expansions.tex","02d8346892889949baddbc1d044101044651ecaf9425aa166405a4c695def0e5",[1,202],"b2eef8591c621108908c414177fab787fb127b07b9a7b338960ab7227bf12dc1",[1,203]],
+    ["OLP-0131","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"first-order-logic/completeness/lindenbaums-lemma.tex","0d8dc6c844a2c5bdf7a8659f8b7ed76f0ec44a64745deb369a4e9ff69a263ef4",[1,95],"5d0efe6f279578e7454542d93bfbe1fc5708f00f729a76910180be88c6f8f477",[1,92]],
+    ["OLP-0132","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"first-order-logic/completeness/construction-of-model.tex","560ce36ec87566837db5a04edbce4c93db56783c15e927c11893f9bdeb88752d",[1,278],"09350f7cb4ddb6b853b4be841d955bc1b77318dcccaa3d8f68619ef8a941203f",[1,276]],
+    ["OLP-0133","PASS_WITH_INHERITED_ISSUES","REPAIR_PRESENT_AND_VERIFIED_BOTH_LAYERS",["0133-I1"],"first-order-logic/completeness/identity.tex","84a0dd07275746e0954ec103baf7a54379adf510e74733348757dd5de8770bc3",[1,199],"1faae3093739904165643360c7fe483e71488b1172a16afd5457de72fb42b70b",[1,197]],
+    ["OLP-0134","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"first-order-logic/completeness/completeness-thm.tex","72fdcf2059cdf57ecf2d20df7bfc1cbd4e52e8da17cd6216ec749fb933e7fc2b",[1,121],"191bacfc7afece17f6c95d09c0309aa6c1903aa74aa896ab1f75a480d75bbd3d",[1,119]],
+    ["OLP-0135","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"first-order-logic/completeness/compactness.tex","51f53ab528d857312751738cff4014824a1663604cccb1b8b84f1f1199accaad",[1,194],"fc898bb1203ee8d8c0eee37cb5bc04a56366d8a4b1be6feed36f4a5cae11d157",[1,191]],
+    ["OLP-0136","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"first-order-logic/completeness/compactness-direct.tex","80f5ded2e2fac8e3c2b391b2736474af559e8e46dbfb9ee3a10dbac03b4018c8",[1,172],"858970eef3c739670b92191e5e97b00fc1ab3a575e51f6710129e80d90a09553",[1,170]],
+    ["OLP-0137","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"first-order-logic/completeness/downward-ls.tex","88cbc9d9207239a94e77d6a2a9619679c8045a167e704e41f588675b05a0fac4",[1,62],"0ac75cc804d1a75902c8b4d00d35ed5bad811321f3e72bb002a0c5bc1694774c",[1,63]],
+    ["OLP-0138","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"first-order-logic/first-order-logic.tex","80dfdd864fc591886d0d05a434f59d7482ae4d5bc66309274dd839a766e045be",[1,56],"66abacc8fd70f1a4ed6523faef3ed93b3c0fc18aa75576c2028dd5e7f5ca9800",[1,55]],
+    ["OLP-0139","PASS_STRUCTURAL","NO_CHANGE_REQUIRED_STRUCTURAL_UNIT",[],"first-order-logic/introduction/introduction.tex","a3d6317c72951ab63c70684d47d384eb9b7dd93554e9f477561308e63ace20f9",[1,30],"281876764afbd2eb844f29ebf3bd36c40ec21d1ffb8a527260716aafa1bd7257",[1,30]],
+    ["OLP-0140","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"first-order-logic/introduction/first-order-logic.tex","ff291d1987adbe9e51bacb954893295010c8ddd1429ca134cafa8629edbbe106",[1,74],"2c93cc1d14912ac76ffffcc01cca1b82fbabe63bf23295d7a1f457bfed9c704d",[1,72]],
+    ["OLP-0141","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"first-order-logic/introduction/syntax.tex","87cc8b169b96a915472bfaaef38033205f2d14bbec56742aa9a577439536e8e0",[1,51],"92bed668a1fefc7803227ce697276dca8060d6776419d2e9d0ee8f5c6e992e26",[1,47]],
+    ["OLP-0142","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"first-order-logic/introduction/formulas.tex","51a9ab24fc5ad9a3152644c514fcc8ded9da68c65f26d7aab012a2a22bce36ea",[1,89],"395523b50f64a9d646c133453b427f7fd6d112f53234458fd9e731477ae2bf2f",[1,87]],
+    ["OLP-0143","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"first-order-logic/introduction/satisfaction.tex","f3dee26b3bd0aa97514eaf5e198cef904473333781493ba6157bde31c59500c9",[1,115],"9b5423ad7c6a540cfe3a021cf522e3fc16c390463e30ebc72bc1eef7db1a28ba",[1,117]],
+    ["OLP-0144","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"first-order-logic/introduction/sentences.tex","8d5c180fd5022d475a779eeaa4d8a5c565d2159358e62df014d76937f77f8613",[1,53],"b89072a9c02d77894609e7a77b233e89d0c66e101fa69718f61505f92b24d683",[1,50]],
+    ["OLP-0145","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"first-order-logic/introduction/semantic-notions.tex","2a42224750a7b71aa55f4ff7fd073b08a771a320261fe74c303888497f8a651a",[1,45],"aab93b3db4e5478ea8478898c6be0d6ab972a0e722e4846cdde15b27a9221dbe",[1,43]],
+    ["OLP-0146","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"first-order-logic/introduction/substitution.tex","1d1b15ec84724451c4a79bb6b42c552ea48b2d5f67a04ed866ac3b403f0eed0a",[1,43],"9d6dc85d8f038a48d7846f7bf38413bee2a964390a234972e086f4000623ded8",[1,42]],
+    ["OLP-0147","PASS_WITH_INHERITED_ISSUES","REPAIR_PRESENT_AND_VERIFIED_BOTH_LAYERS",["0147-I1"],"first-order-logic/introduction/models-theories.tex","fe94d2a9ddf932d0922bac36327bbbacb43f88a69d579ceee64d6c014e8001bf",[1,66],"79120a7e3f15186a953d6195b0c85679e6f74b4244d054ebd04ea8c9ab3295e1",[1,67]],
+    ["OLP-0148","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"first-order-logic/introduction/soundness-completeness.tex","c5a4b8ae3a364e788d46eb23686cf5ea8356871891ff77a816a8e69f5472e2ea",[1,62],"df912403af80310c34411f22f7b84856641d0f197ff8e27328f55b198efac7ed",[1,63]],
+    ["OLP-0149","PASS_STRUCTURAL","NO_CHANGE_REQUIRED_STRUCTURAL_UNIT",[],"first-order-logic/syntax-and-semantics/syntax.tex","f52b91ea89ec8518ea113fc30b7fc148b241cda3e241bef90985324e91a46de1",[1,30],"9357242741d2e6fad8f02d928ff8a18a6517b9dba84268ce21657dab148ad021",[1,30]],
+    ["OLP-0150","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"first-order-logic/syntax-and-semantics/intro-syntax.tex","f953d00e28dea677cb82798dce12ffa2c6ed58340bdb559060194e4b516e8731",[1,29],"8cd96130f60e49fe037509e6fc1c463c23bb40120420cbf31b1dce9bd9ef8993",[1,28]],
+    ["OLP-0151","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"first-order-logic/syntax-and-semantics/first-order-languages.tex","8dde190f5eea5f8653d979e466a934dfc89c9e084d219c514f2e35ca26d37b80",[1,152],"ec145db1cab35bba0320641c5a64644c35b3802614452172887d2fa58a85a1b9",[1,153]],
+    ["OLP-0152","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"first-order-logic/syntax-and-semantics/terms-formulas.tex","8975f248160cff5ae3b930036b2183ddcad74bc484e7f4d651d681e0698899bc",[1,227],"a0b5784cdc7dd7c1bdeeac7ab1cb83d83fe0f035edbd91a65066e04be3d0d27a",[1,225]],
+    ["OLP-0153","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"first-order-logic/syntax-and-semantics/unique-readability.tex","7cbe1afa46a80ffed2b9d03fd06faf603ce1329296ab1888a4e497b7f78a6597",[1,199],"eab3c0ae148530921cf410946696a1b7e048c077108f07f832bfbd2140e8dbf1",[1,198]],
+    ["OLP-0154","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"first-order-logic/syntax-and-semantics/main-operator.tex","f0728fbcefd24d035536647031b917fe8527488fc845b4b172d866abb9c1ed7e",[1,98],"80000f71ae60515a4a721bfc3ba1bb8ca24e71e5ad7b3e2eb3980ca3f01fe5b1",[1,98]],
+    ["OLP-0155","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"first-order-logic/syntax-and-semantics/subformulas.tex","701625f68550ecf7e3da2eb78bf6ab0180be0232cc6a4940facc4ef066482c76",[1,107],"8915272e79222c05a55b6f43cb4cdc3d493550a180e07d53f34a0b346933a367",[1,107]],
+    ["OLP-0156","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"first-order-logic/syntax-and-semantics/formation-sequences.tex","fdb708940e8cb0439a6d9a33de3981516eb2e58f58819f5a2817ed3dcd0d0731",[1,266],"1f3bb18232d53cc95935dfde89ebc0156be57d503e72c3f28a5598e30bb92d7d",[1,263]],
+    ["OLP-0157","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"first-order-logic/syntax-and-semantics/free-vars-sentences.tex","03f6c2caa9e29d3121ef085802a3de900ade02c6ea8f09352196acbb0ab00342",[1,95],"66930d4a86dcf03b845ac7ff260156f96f8e952ce82a3611e5b0ea014eabf9a1",[1,95]],
+    ["OLP-0158","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"first-order-logic/syntax-and-semantics/substitution.tex","4ea05cca3163a19cbeac3c2d7511e77d034f4b489eb35f0a9d7cb13c10b96e6b",[1,124],"692955824513277ab79aa1fdea958dabcdc24ebd8ef5d41279b2a3a8836f7182",[1,124]],
+    ["OLP-0159","PASS_STRUCTURAL","NO_CHANGE_REQUIRED_STRUCTURAL_UNIT",[],"first-order-logic/syntax-and-semantics/semantics.tex","ac82cde90d16631191fafc7143276d9696717186ce64c8fb7ae10745ad199144",[1,26],"ac82cde90d16631191fafc7143276d9696717186ce64c8fb7ae10745ad199144",[1,26]],
+    ["OLP-0160","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"first-order-logic/syntax-and-semantics/intro-semantics.tex","59d442bffb5eeb6956c4aa4014d95bb350b54f9f781890f99b3dbdc2a7339cad",[1,44],"99b7d34cd693b61c834e11dc207f01760fb85c9b527a9a47a3092a17c3da7479",[1,45]],
+    ["OLP-0161","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"first-order-logic/syntax-and-semantics/structures.tex","6751ab4aec54b6b1938ddb7a7de88588534866dc76e060a0d4622679008610c6",[1,105],"1b3fbf0ce6aaf15c91425eb1f64495a3709cb8395a15b8a772450d803d94e426",[1,106]],
+    ["OLP-0162","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"first-order-logic/syntax-and-semantics/covered-structures.tex","950d0d131cc3844ca5fed2ae1128a084cd1641b136aacaf6f4dd5089f653a15b",[1,74],"dd3ab042a95041583e972da4b5933805a2d775c6bb558c0fffd141873734e4b7",[1,74]],
+    ["OLP-0163","REPAIR_RECOMMENDED","REPAIR_PRESENT_AND_VERIFIED_CLASSICAL_ONLY",["0163-N1"],"first-order-logic/syntax-and-semantics/satisfaction.tex","b24611b8a5c5ff925da5fa62ec6eb894a527e20836bde333fd4df226a3a3ea45",[1,423],"f353690883ecce4ac720e570439f1716225a09a3963a345815d50e8f0c352749",[1,419]],
+    ["OLP-0164","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"first-order-logic/syntax-and-semantics/assignments.tex","87e526451b5463c66cf22e7fa0fe5b7c7efbe0124d09c02c80395b18c210ebc2",[1,365],"a34cc2aedae77ed81ea8aa67a3acdc7d9a6cd8bd26ccffa7c1b3afe69f41d382",[1,365]],
+    ["OLP-0165","PASS_WITH_INHERITED_ISSUES","REPAIR_PRESENT_AND_VERIFIED_BOTH_LAYERS",["0165-I1"],"first-order-logic/syntax-and-semantics/extensionality.tex","ed611a57e654483b1e3eeea91926cdcc75803614fb356785edb874cf9f484f00",[1,137],"a66ca7e4f30e6ee6fab18cd0b98e593b3427ca5b28227126d4f6ad8bd9b6b1d9",[1,139]],
+    ["OLP-0166","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"first-order-logic/syntax-and-semantics/semantic-notions.tex","a95e2f24d3d3b4d5578aa5c096e1365de82f05514bbaab8013ad89d8dba6097e",[1,171],"d440b44d66e17c822c0a0975766ea52cc07c4c5d041dca51b3ede2bd17311414",[1,170]],
+    ["OLP-0167","PASS_STRUCTURAL","NO_CHANGE_REQUIRED_STRUCTURAL_UNIT",[],"first-order-logic/models-theories/models-theories.tex","c5ed6891f3ab4b1dc3c4308587870f9461f1b1ccad1fcca17f23a4dad5598fd5",[1,24],"c5ed6891f3ab4b1dc3c4308587870f9461f1b1ccad1fcca17f23a4dad5598fd5",[1,24]],
+    ["OLP-0168","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"first-order-logic/models-theories/introduction.tex","80d7daf4275549ec0ee7243969e84249ab10b7309026ae338ecd6364ed785054",[1,93],"aef2c68908335ad2a3cc83efa23a2cd5141d0086f0bb628d8315c9d24fcddaf7",[1,88]],
+    ["OLP-0169","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"first-order-logic/models-theories/expressing-props-of-structures.tex","f9394965bd374858bc0c3d5198c957a81a780865e2f5f2ffb1474048461f8f59",[1,61],"a0560436d83f3307b838a30a093d95f1eb2d42c4b761015ddda3798a2e045692",[1,62]],
+    ["OLP-0170","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"first-order-logic/models-theories/theories.tex","e1d101b277a61292ef8ee6b4811e6bb054b072dd0bf6b0aaf87ddcd0205e744c",[1,133],"e68c9eab6c3ca034d15e8e38910a6cbfd06bc9e8535ed36252eac8a8d0478f8b",[1,134]],
+    ["OLP-0171","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"first-order-logic/models-theories/expressing-relations.tex","3212b6c201a1575d6865fef969d9c51fd19c33ffe930a6263c25b99cf3ed23f7",[1,118],"29cec678a91e91991b30d757497cf33248cce8fbb377d74bcda31853c13a9831",[1,118]],
+    ["OLP-0172","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"first-order-logic/models-theories/set-theory.tex","f060743240b712fcaceee0b524a8c651946f13e8e46cd7a6558e55ca6e58b628",[1,168],"6c4eedab2140ab114225e1f1f2c87fdbdcfcc504255e1906148a7564a7250a8f",[1,166]],
+    ["OLP-0173","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"first-order-logic/models-theories/size-of-structures.tex","50fde69c3e01977ae12af6147a4f4e4cf245ba444013798884b1e39aabe742e5",[1,71],"55f8dd559cd04823f245afdfa688eed5b94653936a73a1a09e6ffa6abb4e7b29",[1,71]],
+    ["OLP-0174","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"first-order-logic/beyond/beyond.tex","be963a9dbfdf072fb98d96f5accaee771b049942515ac9ae022df206c135d3c6",[1,34],"09094cf0617e28300c7943c5f62af73662ce9172f174f5c51efdc6d6a67133ab",[1,34]],
+    ["OLP-0175","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"first-order-logic/beyond/introduction.tex","2aa518b6da0bbccf5b5bae0176ad803679f7c29dd0051967e17a1dca3ffaf079",[1,45],"b561346723bc92e77c15d28576cdc60e64cf2dae84345ee895d242f32dee7119",[1,43]],
+    ["OLP-0176","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"first-order-logic/beyond/many-sorted-logic.tex","852409e62cde53d7b19d4eeedc5fad1ce8ab00f0842f7192955bf6cdb1bf1be6",[1,63],"c2b2906343fee998a57cc6e3c2e3ba5f1d6c49386c5ee1eea845b583b2296212",[1,62]],
+    ["OLP-0177","REPAIR_RECOMMENDED","REPAIR_PRESENT_AND_VERIFIED_BOTH_LAYERS",["0177-A1"],"first-order-logic/beyond/second-order-logic.tex","c688044ab388186fb78440fa952dcf7b511e2ddacf92114988163d0a270c246e",[1,223],"3c988792458e2ca6b6174f08da17d0d27663199dac1694210399722e3b6e45ed",[1,222]],
+    ["OLP-0178","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"first-order-logic/beyond/higher-order-logic.tex","01ff022fd835f61e0aba14d1e327ad2e31848ec42be9879846e4be5a6f3bf77b",[1,117],"330af66f3b26fcf572a1404c357b3310c0ca6219b14f7ad1a511108c6f64c4cf",[1,113]],
+    ["OLP-0179","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"first-order-logic/beyond/intuitionistic-logic.tex","d9f18e27ec7b07ac855760ce9f89a11d52e8fbc28b419be3c7bca8a6e3e69b63",[1,194],"62b801ec4a540c01aacaee4b3d638474f578e4415ff13df832bbe62d12ce65f9",[1,192]],
+    ["OLP-0180","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"first-order-logic/beyond/modal-logics.tex","f550955bbcda1035d4118b4de85f5c17daa52aa6460ef2e25312b13d8ace6f3e",[1,77],"00233d4f9cf3e3f62a4845d5a789872af00e02f5f32cf7004b502ad3d47c472f",[1,75]],
+    ["OLP-0181","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"first-order-logic/beyond/other-logics.tex","b6a4b6292c8bcc190df500cb3534d0662305a9e0e65079d310c979f2b4e3dd9d",[1,36],"710ddcd4b5a715844cc01461450c1163cab1f7f8411215d42fa63a495ea10b06",[1,35]],
+    ["OLP-0182","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"model-theory/model-theory.tex","3da3c749f8e65e009de03cb4e1f9558958b5433844a88bb584b96a496afd204d",[1,28],"e234be4fd63c74c09e45815f723a6bd5b9f0217eaa79af87756b7b73a9d12171",[1,28]],
+    ["OLP-0183","PASS_STRUCTURAL","NO_CHANGE_REQUIRED_STRUCTURAL_UNIT",[],"model-theory/basics/basics.tex","231df975c3a42894ff80f9a0a134c122818eb21498143fb7e4334e4e27697433",[1,28],"231df975c3a42894ff80f9a0a134c122818eb21498143fb7e4334e4e27697433",[1,28]],
+    ["OLP-0184","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"model-theory/basics/reducts-and-expansions.tex","d11e46d413cfe175346af1f929120982f0f2550cbdae9a483802f74b6bc2e932",[1,65],"5e9aa4c2d49a019541a9875bfbcdd26e5598c91c6caa38521a50a6d12ba40404",[1,66]],
+    ["OLP-0185","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"model-theory/basics/substructures.tex","eaf33cc655db1da31a827a95050d2f8f03d4ce473a78f3e5c79889ce54e24179",[1,48],"82a276a164db68a7607b340162e839ac0a4664766ce35a24c379cb762da59efa",[1,48]],
+    ["OLP-0186","REPAIR_RECOMMENDED","REPAIR_PRESENT_AND_VERIFIED_BOTH_LAYERS",["0186-A1"],"model-theory/basics/overspill.tex","13112fb0acd8ae45fc4b222215994c1d10d20da61c49a51f899909c3f58ef5ba",[1,41],"869cf9234e04c37111c081ffa7fe3f82c3a7131f5096d20934b0c72ab99b7a96",[1,42]],
+    ["OLP-0187","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"model-theory/basics/isomorphism.tex","c267c07e57b45e0ddb962f804772ee1b008f8a8b78ba4a60cc65ec6c35382796",[1,126],"dc76f4661bd3c1a7adcec8bd8211cfa049829aa5134e81306b3a6222c6e8e114",[1,127]],
+    ["OLP-0188","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"model-theory/basics/theory-of-m.tex","acb69f95855cd33b9bb1f84a52972fe7fc8edd8bec314526b47df4ee264ec110",[1,62],"16beb2721ba3dfaed4e46100aa2476f85435e5aa6f46143e11bf6b466a8feab0",[1,64]],
+    ["OLP-0189","PASS_WITH_INHERITED_ISSUES","REPAIR_PRESENT_AND_VERIFIED_BOTH_LAYERS",["0189-I1"],"model-theory/basics/partial-iso.tex","4cc691a41776c780179d0b870aaaa84cfc1077d8c88a85c8d68abdef9f759584",[1,223],"8e3781b96f3fb39cbcb7eef6b3e7e25d832b8997f7d86398fd9e6173737b4eb3",[1,226]],
+    ["OLP-0190","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"model-theory/basics/dlo.tex","66b753804a7de8110585465d496a4806f15b6a7324ef9886aa6a7df2cae357a7",[1,83],"a4c1dfef0dad0bf9428c7577ea49a140feb5766e8d2f2826ea4cde70406a6f11",[1,84]],
+    ["OLP-0191","PASS_STRUCTURAL","NO_CHANGE_REQUIRED_STRUCTURAL_UNIT",[],"model-theory/models-of-arithmetic/models-of-arithmetic.tex","aad16bca00f29314705940cf1b23cc03d7dd953d48393b0af5c10d5f591c9c1f",[1,24],"aad16bca00f29314705940cf1b23cc03d7dd953d48393b0af5c10d5f591c9c1f",[1,24]],
+    ["OLP-0192","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"model-theory/models-of-arithmetic/introduction.tex","b4ab0f3ea99ef032f8d4d6af0b55484cda7af0f2571bb06a1105ffb4668b1d21",[1,70],"a48fffe8c293b2f1b7a4c1f341c55b92bf85ed7a8249ab892aed6149cf025e8b",[1,70]],
+    ["OLP-0193","REPAIR_RECOMMENDED","REPAIR_PRESENT_AND_VERIFIED_BOTH_LAYERS",["0193-N1"],"model-theory/models-of-arithmetic/standard-models.tex","153f160172f34f595b95ead911553eaed17196f0ec8c746d97164cad0259ae26",[1,168],"4048db3d320876c47dc3f065c28180f2c4d798c3e089bae7f20522fbc0343e44",[1,174]],
+    ["OLP-0194","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"model-theory/models-of-arithmetic/non-standard-models.tex","5185439fdf9300f0355c3d6f94065ddb30b8348967cfe56433209bd04cfe0375",[1,113],"53b374b6d92d876e82e33210ea9dd794f0388cb0766ce017202097d18aad09d3",[1,118]],
+    ["OLP-0195","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"model-theory/models-of-arithmetic/models-of-q.tex","6b0024532da80ca22814f58b6fdbb8cb7ef636684b4b818304fcea75635334fc",[1,202],"5d6f8295bccc654b07afdec18e1688dfb07faf202f712b0406d5784513d943e8",[1,205]],
+    ["OLP-0196","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"model-theory/models-of-arithmetic/models-of-pa.tex","7327383f14ce466c12039b4c4e1d544ab37a1c6c4addb2ab2ae82b7f7f4afd13",[1,255],"0565f6c441e70f79f2db854057fa687c2e0c4c299305fb1b6f99863c4aed9e9e",[1,265]],
+    ["OLP-0197","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"model-theory/models-of-arithmetic/computable-models.tex","de327884ef4d03e2a02f5f76c5ac1b1589ab00c2bb4162211c91d8f19bceeecc",[1,112],"15daca165e748a85baefe7c7a6d812fcd2b2d9b8b34cc8409ea3635bd2678db5",[1,122]],
+    ["OLP-0198","PASS_STRUCTURAL","NO_CHANGE_REQUIRED_STRUCTURAL_UNIT",[],"model-theory/interpolation/interpolation.tex","1c7a6beb9440291691569ff25ca70752294c3166e150018c65c87c45a40ded7c",[1,20],"1c7a6beb9440291691569ff25ca70752294c3166e150018c65c87c45a40ded7c",[1,20]],
+    ["OLP-0199","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"model-theory/interpolation/introduction.tex","f48cc0cbec51970d357d23782f14b5ecc85546abdbf0ac90847327a26f71c60e",[1,25],"fa71674b61cb9b36756f6f575a36229b153cc3dfff9e5efecb3f7415a82b650e",[1,27]],
+    ["OLP-0200","PASS","NO_CHANGE_REQUIRED_AFTER_FULL_REVIEW",[],"model-theory/interpolation/separation.tex","0b09e178672b62a50ff89f844f6b3dc4c6626ea13daaf08abbacb500fee20e15",[1,116],"e8467261bdea395b9568a97abebdad46e319c6d5969467c2ac160b90f9832e7b",[1,121]]
+  ],
+  "validation": {
+    "performed_utc": "2026-09-04T22:25:02Z",
+    "receipt_and_binding_check": {
+      "status": "PASS",
+      "authority_hashes_verified": 7,
+      "unit_ids_verified": 100,
+      "unit_current_msa_hash_and_full_line_span_bindings_verified": 100,
+      "unit_current_classical_hash_and_full_line_span_bindings_verified": 100,
+      "pinned_english_hashes_verified_against_review": 100,
+      "finding_id_set_verified": 16,
+      "keyed_source_note_pairs_verified": 10,
+      "errors": []
+    },
+    "required_and_forbidden_fragment_check": {
+      "status": "PASS",
+      "forbidden_residuals_absent_from_all_100_unit_pairs": [
+        "الكمّيات",
+        "كبيرة اعتباطيًا",
+        "العلاقات $k$-المحلية",
+        "علاقة $k$-محلية",
+        "تلزم $!A_i$ عن $!A_j$ ما"
+      ],
+      "interpretation": "This is a bounded exact-fragment check over the 100 MSA/Classical file pairs, not a corpus-wide terminology-completeness claim."
+    },
+    "direct_cross_layer_static_comparison": {
+      "status": "PASS_FOR_STRUCTURAL_INVARIANTS",
+      "units_compared": 100,
+      "environment_sequence_mismatches": [],
+      "protected_reference_citation_and_macro_key_mismatches": [],
+      "ordered_import_identity_mismatches": [],
+      "protected_program_and_literal_block_mismatches": [],
+      "formula_environment_embedded_prose_differences": ["OLP-0117", "OLP-0120", "OLP-0131"],
+      "interpretation": "The three listed conservative formula-environment differences are Arabic prose in intertext/textrm nodes, not differing mathematical formula tokens: OLP-0117 contains the independently reviewed proof explanation; OLP-0120 and OLP-0131 are pre-existing reviewed rephrasings."
+    },
+    "validator_diagnostic_without_integration_overlays": {
+      "invocation": "python -B build/validate_classical_overlay.py --ids 101-200 --json",
+      "status": "EXPECTED_NONZERO_PENDING_OWNER_INTEGRATION",
+      "exit_code": 1,
+      "selected_units": 100,
+      "counts": {
+        "baseline-mismatch": 19,
+        "changed-prose-awaiting-semantic-review": 75,
+        "flagged": 1,
+        "unchanged-prose": 5
+      },
+      "baseline_mismatch_units": ["OLP-0104", "OLP-0105", "OLP-0106", "OLP-0108", "OLP-0112", "OLP-0113", "OLP-0115", "OLP-0117", "OLP-0118", "OLP-0120", "OLP-0123", "OLP-0128", "OLP-0133", "OLP-0147", "OLP-0165", "OLP-0177", "OLP-0186", "OLP-0189", "OLP-0193"],
+      "pre_existing_conservative_flag": {"unit": "OLP-0131", "failure": "ordered_formula_segments_and_tokens differs", "cause": "Arabic prose variation inside a cases-environment textrm node; the independent review disposition is PASS."},
+      "interpretation": "No baseline-correction or formal-repair overlay was supplied because this lane was forbidden to edit those owner-controlled integration artifacts. The 19 baseline mismatches are precisely the changed MSA files bound above; this diagnostic is not represented as a passing validator run or as a waiver."
+    },
+    "tex_or_rendering_run": false
+  },
+  "unresolved_deterministic_issues_in_scope": []
+}

@@ -1,0 +1,100 @@
+% Part: incompleteness
+% Chapter: representability-in-q
+% Section: composition-representable
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{req}{cmp}
+\olsection{التركيب قابل للتمثيل في $\Th{Q}$}
+
+افترض أن $h$ معرّفة بـ
+\[
+h(x_0,\dots,x_{l-1}) = f(g_0(x_0,\dots,x_{l-1}), \dots,
+g_{k-1}(x_0,\dots,x_{l-1})).
+\]
+حيث سبق أن وجدنا !!{formula}s $!A_f,!A_{g_0},\dots,!A_{g_{k-1}}$
+تمثل، على الترتيب، الدوال $f$ و$g_0$، \dots، و$g_{k-1}$. وعلينا أن
+نجد !!a{formula}~$!A_h$ تمثل~$h$.
+
+لنبدأ بحالة بسيطة تكون فيها الدوال كلها أحادية الموضع؛ أي تأمل
+$h(x)=f(g(x))$. فإذا كانت $!A_f(y,z)$ تمثل~$f$، وكانت $!A_g(x,y)$
+تمثل~$g$، لزمنا !!a{formula}~$!A_h(x,z)$ تمثل~$h$. لاحظ أن $h(x)=z$
+إذا وفقط إذا وُجد~$y$ بحيث $z=f(y)$ و$y=g(x)$ معًا. (فإذا كان
+$h(x)=z$، كان $g(x)$ مثل هذا~$y$؛ وإذا وُجد مثل هذا $y$، فمن
+$y=g(x)$ و$z=f(y)$ ينتج $z=f(g(x))$.) وهذا يوحي بأن
+$\lexists[y][(!A_g(x,y)\land !A_f(y,z))]$ مرشحة مناسبة لـ$!A_h(x,z)$.
+ولا يبقى إلا التحقق من أن $\Th{Q}$ تثبت !!{formula}s ذات الصلة.
+
+\begin{prop}
+\ollabel{prop:rep1}
+إذا كان $h(n)=m$، فإن $\Th{Q}\Proves !A_h(\num{n},\num{m})$.
+\end{prop}
+
+\begin{proof}
+افترض أن $h(n)=m$، أي $f(g(n))=m$. وضع $k=g(n)$. عندئذ
+\begin{align*}
+  \Th{Q} & \Proves !A_g(\num{n}, \num{k})
+  \intertext{لأن $!A_g$ تمثل~$g$، و}
+  \Th{Q} & \Proves !A_f(\num{k}, \num{m})
+  \intertext{لأن $!A_f$ تمثل~$f$. ومن ثم}
+  \Th{Q} & \Proves !A_g(\num{n}, \num{k}) \land !A_f(\num{k}, \num{m})
+  \intertext{وبالتالي أيضًا}
+  \Th{Q} & \Proves \lexists[y][(!A_g(\num{n}, y) \land !A_f(y, \num{m}))],
+\end{align*}
+أي إن $\Th{Q}\Proves !A_h(\num{n},\num{m})$.
+\end{proof}
+
+\begin{prop}
+\ollabel{prop:rep2}
+إذا كان $h(n)=m$، فإن $\Th{Q}\Proves\lforall[z][(!A_h(\num{n},z)\lif
+z=\num{m})]$.
+\end{prop}
+
+\begin{proof}
+افترض أن $h(n)=m$، أي $f(g(n))=m$. وضع $k=g(n)$. عندئذ
+\begin{align*}
+  \Th{Q} & \Proves \lforall[y][(!A_g(\num{n}, y) \lif \eq[y][\num{k}])]
+  \intertext{لأن $!A_g$ تمثل~$g$، و}
+  \Th{Q} & \Proves \lforall[z][(!A_f(\num{k}, z) \lif \eq[z][\num{m}])]
+  \intertext{لأن $!A_f$ تمثل~$f$. وبقليل من المنطق يمكننا أن نبيّن أيضًا أن}
+  \Th{Q} & \Proves \lforall[z][(\lexists[y][(!A_g(\num{n}, y) \land
+      !A_f(y, z))] \lif \eq[z][\num{m}])].
+\end{align*}
+أي إن $\Th{Q}\Proves\lforall[y][(!A_h(\num n,y)\lif
+\eq[y][\num m])]$.
+\end{proof}
+
+تصلح الفكرة نفسها في الحالة الأشد تعقيدًا، حيث تكون رتبة $f$ و$g_i$
+أكبر من~$1$.
+
+\begin{prop}
+\ollabel{prop:rep-composition}
+إذا كانت $!A_f(y_0,\dots,y_{k-1},z)$ تمثل
+$f(y_0,\dots,y_{k-1})$ في~$\Th{Q}$، وكانت
+$!A_{g_i}(x_0,\dots,x_{l-1},y)$ تمثل
+$g_i(x_0,\dots,x_{l-1})$ في~$\Th{Q}$، فإن
+\begin{multline*}
+  \lexists[y_0\dots][\lexists[y_{k-1}][(!A_{g_0}(x_0,\dots,x_{l-1},y_0) \land
+      \dots \land {}]]\\
+  !A_{g_{k-1}}(x_0,\dots,x_{l-1},y_{k-1}) \land !A_f(y_0,\dots,y_{k-1},z))
+\end{multline*}
+تمثل
+\[
+h(x_0, \dots, x_{l-1}) = f(g_0(x_0, \dots, x_{l-1}), \dots, g_{k-1}(x_0,
+\dots, x_{l-1})).
+\]
+\end{prop}
+
+\begin{proof}
+تمرين.
+\end{proof}
+
+\begin{prob}
+مسترشدًا ببرهاني \olref[inc][req][cmp]{prop:rep1} و
+\olref[inc][req][cmp]{prop:rep2}، أنجز برهان
+\olref[inc][req][cmp]{prop:rep-composition} بالتفصيل.
+\end{prob}
+
+\end{document}

@@ -1,0 +1,98 @@
+% Part: first-order-logic
+% Chapter: sequent-calculus
+% Section: quantifier-rules
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{seq}{qrl}
+
+\olsection{قواعد المكممات}
+
+\subsection{قواعد $\lforall$}
+
+\begin{defish}
+\Axiom$ !A({\OLId{latin-ordinary}{t}}), {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}$
+\RightLabel{\LeftR{\lforall}}
+\UnaryInf$ \lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})],{\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}$
+\DisplayProof
+\hfill
+\Axiom$ {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, !A({\OLId{latin-ordinary}{a}}) $
+\RightLabel{\RightR{\lforall}}
+\UnaryInf$ {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, \lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$
+\DisplayProof
+\end{defish}
+
+أما~\LeftR{\lforall} فـ~${\OLId{latin-ordinary}{t}}$ فيها حد مغلق، أي خالٍ من المتغيرات. وأما
+\RightR{\lforall} فـ~${\OLId{latin-ordinary}{a}}$ فيها !!a{constant}، وشرطه ألا يقع في شيء من التتابعية السفلى لقاعدة~\RightR{\lforall}.
+ويسمى~${\OLId{latin-ordinary}{a}}$ \emph{المتغير المميَّز} لاستدلال~\RightR{\forall}.\footnote{إنما بقيت تسمية «المتغير المميَّز» لأسباب تاريخية، وإن كان~${\OLId{latin-ordinary}{a}}$ هنا !!a{constant}.}
+
+\subsection{قواعد $\lexists$}
+
+\begin{defish}
+\Axiom$ !A({\OLId{latin-ordinary}{a}}), {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}} $
+\RightLabel{\LeftR{\lexists}}
+\UnaryInf$ \lexists[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})], {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}$
+\DisplayProof
+\hfill
+\Axiom$ {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, !A({\OLId{latin-ordinary}{t}}) $
+\RightLabel{\RightR{\lexists}}
+\UnaryInf$ {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, \lexists[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$
+\DisplayProof
+\end{defish}
+
+وكذلك~${\OLId{latin-ordinary}{t}}$ هنا حد مغلق؛ وأما~${\OLId{latin-ordinary}{a}}$ فهو !!a{constant} لا يقع في التتابعية السفلى لقاعدة~\LeftR{\lexists}.
+وهو، أعني~${\OLId{latin-ordinary}{a}}$، \emph{المتغير المميَّز} لاستدلال~\LeftR{\lexists}.
+
+يسمى الشرط القاضي بألا يرد المتغير المميَّز في التتابعية السفلى
+لاستدلال~\RightR{\lforall} أو~\LeftR{\lexists}
+\emph{شرط المتغير المميَّز}.
+
+\begin{explain}
+إذا كانت~$!A$ !!a{formula} وفيها ال!!{variable}~${\OLId{latin-ordinary}{x}}$ حر، فاصطلاحنا أن نكتب~$!A({\OLId{latin-ordinary}{x}})$.
+وفي هذا السياق يدل~$!A({\OLId{latin-ordinary}{t}})$ اختصارًا على~$\Subst{!A}{{\OLId{latin-ordinary}{t}}}{{\OLId{latin-ordinary}{x}}}$.
+وعليه تصح كتابة قاعدة~\RightR{\lexists} بالصورة الآتية:
+\begin{prooftree}
+  \Axiom${\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, \Subst{!A}{{\OLId{latin-ordinary}{t}}}{{\OLId{latin-ordinary}{x}}}$
+  \RightLabel{\RightR{\lexists}}
+  \UnaryInf${\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, \lexists[{\OLId{latin-ordinary}{x}}][!A]$
+\end{prooftree}
+لاحظ أن~${\OLId{latin-ordinary}{t}}$ قد يرد سلفًا في~$!A$؛ فقد تكون~$!A$، مثلًا،
+$\Atom{\Obj P}{t,x}$. ومن ثم فإن استنتاج
+${\OLId{greek-variable}{Gamma}} \Sequent {\OLId{greek-variable}{Delta}}, \lexists[{\OLId{latin-ordinary}{x}}][\Atom{\Obj P}{t,x}]$ من
+~${\OLId{greek-variable}{Gamma}} \Sequent {\OLId{greek-variable}{Delta}}, \Atom{\Obj P}{t,t}$ تطبيق صحيح
+لـ~\RightR{\lexists}---إذ يجوز لك أن «تستبدل» ورودًا واحدًا أو أكثر
+لـ~${\OLId{latin-ordinary}{t}}$ في المقدمة بال!!{variable} المربوط~${\OLId{latin-ordinary}{x}}$، ولا يلزم استبدالها
+كلها. غير أن شرطي المتغير المميَّز في~\RightR{\lforall}
+و~\LeftR{\lexists} يقتضيان ألا يرد ال!!{constant}~${\OLId{latin-ordinary}{a}}$ في~$!A$.
+ولذلك لا يصح أن تستنتج
+${\OLId{greek-variable}{Gamma}} \Sequent {\OLId{greek-variable}{Delta}}, \lforall[{\OLId{latin-ordinary}{x}}][\Atom{\Obj P}{a,x}]$ من
+${\OLId{greek-variable}{Gamma}} \Sequent {\OLId{greek-variable}{Delta}}, \Atom{\Obj P}{a,a}$ باستعمال
+~$\RightR{\lforall}$.
+\end{explain}
+
+\begin{explain}
+لا قيد على الحد~${\OLId{latin-ordinary}{t}}$ في~\RightR{\lexists}
+و~\LeftR{\lforall} من جهة المتغير المميَّز. وأما~\LeftR{\lexists}
+و~\RightR{\lforall} فشرطهما ألا يقع ال!!{constant}~${\OLId{latin-ordinary}{a}}$ في التتابعية العليا خارج~$!A({\OLId{latin-ordinary}{a}})$.
+ولا تستقيم سلامة النظام من غير هذا الشرط، أعني ألا !!{derive}s إلا التتابعيات الصالحة. إذ لو أُسقط لجاز ما يأتي:
+\begin{prooftree}
+  \Axiom$!A({\OLId{latin-ordinary}{a}}) \fCenter !A({\OLId{latin-ordinary}{a}})$
+  \RightLabel{*\LeftR{\lexists}}
+  \UnaryInf$\lexists[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})] \fCenter !A({\OLId{latin-ordinary}{a}})$
+  \RightLabel{\RightR{\lforall}}
+  \UnaryInf$\lexists[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})] \fCenter \lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$
+  \DisplayProof\bottomAlignProof
+  \qquad
+  \Axiom$!A({\OLId{latin-ordinary}{a}}) \fCenter !A({\OLId{latin-ordinary}{a}})$
+  \RightLabel{*\RightR{\lforall}}
+  \UnaryInf$!A({\OLId{latin-ordinary}{a}}) \fCenter \lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$
+  \RightLabel{\LeftR{\lexists}}
+  \UnaryInf$\lexists[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})] \fCenter \lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$
+\end{prooftree}
+لكن التتابعية~$\lexists[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})] \Sequent \lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$ ليست
+صالحة.
+\end{explain}
+
+\end{document}

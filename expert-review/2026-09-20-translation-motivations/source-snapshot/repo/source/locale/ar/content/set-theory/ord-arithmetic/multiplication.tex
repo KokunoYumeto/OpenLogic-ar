@@ -1,0 +1,112 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{ord-arithmetic}{mult}
+
+\olsection{الضرب الترتيبي}
+
+ننتقل الآن إلى الضرب الترتيبي، ونتناوله على نحو قريب جدًا من تناولنا
+الجمع الترتيبي. افترض إذن أننا نريد ضرب~$\alpha$ في~$\beta$. ويمكنك
+لفعل ذلك أن تتخيل شبكة مستطيلة عرضها~$\alpha$ وارتفاعها~$\beta$؛
+فيكون حاصل ضرب~$\alpha$ و$\beta$ هو نتيجة التحرك عبر كل صف، ثم
+الانتقال عبر الصف التالي\ldots{} إلى أن تجتاز الشبكة كلها. وبعبارة
+أخرى، ينتج حاصل ضرب~$\alpha$ و$\beta$ من إحلال نسخة من~$\alpha$ محل
+\emph{كل} عنصر في~$\beta$.
+
+ولصياغة ذلك صوريًا، نستخدم ببساطة الترتيب المعجمي المعكوس على حاصل
+الضرب الديكارتي لـ$\alpha$ و$\beta$:
+
+\begin{defn}
+لأي عددين ترتيبيين~$\alpha, \beta$، يكون حاصل ضربهما
+$\alpha \ordtimes \beta = \ordtype{\alpha \times \beta, \rlexless}$.
+\end{defn}
+\noindent
+ينبغي لنا مرة أخرى أن نتحقق من أن هذا تعريف حسن الصياغة:
+
+\begin{lem}\ollabel{ordtimeslessiswo}
+$\tuple{\alpha \times \beta, \rlexless}$ ترتيب جيد، لأي عددين
+ترتيبيين~$\alpha$ و$\beta$.
+\end{lem}
+
+\begin{proof}
+تمامًا كما في~\olref[add]{ordsumlessiswo}.
+\end{proof}
+\noindent
+وليس من العسير إثبات أن الضرب يسلك هكذا:
+
+\begin{lem}\ollabel{ordtimesrecursion}
+لأي عددين ترتيبيين~$\alpha, \beta$:
+\begin{align*}
+	\alpha \ordtimes 0 &= 0\\
+	\alpha \ordtimes (\beta \ordplus 1) &=
+		(\alpha \ordtimes \beta) \ordplus \alpha\\
+	\alpha  \ordtimes \beta &=
+		\supstrict_{\delta < \beta}(\alpha \ordtimes \delta) &&
+		\text{عندما يكون $\beta$ عددًا ترتيبيًا حديًا}.
+\end{align*}
+\end{lem}
+
+\begin{proof}
+متروك تمرينًا.
+\end{proof}
+
+والواقع أنه، مثلما في حالة الجمع، كان بوسعنا تعريف الضرب الترتيبي
+بهذه المعادلات العودية بدلًا من تقديم تعريف مباشر. وبالمثل أيضًا،
+كما في الجمع، ثمة سلوك مألوف:
+
+\begin{lem}\ollabel{ordinalmultiplicationisnice}
+إذا كانت~$\alpha, \beta, \gamma$ أعدادًا ترتيبية، فإن:
+\begin{enumerate}
+	\item\ollabel{ordtimes1} إذا كان~$\alpha \neq 0$ و$\beta < \gamma$،
+	فإن~$\alpha \ordtimes \beta < \alpha \ordtimes \gamma$؛
+	\item\ollabel{ordtimes2} إذا كان~$\alpha \neq 0$ و
+	$\alpha \ordtimes \beta = \alpha\ordtimes\gamma$، فإن
+	$\beta = \gamma$؛
+	\item\ollabel{ordtimes3} $\alpha \ordtimes (\beta \ordtimes
+	\gamma) = (\alpha \ordtimes \beta) \ordtimes \gamma$؛
+	\item\ollabel{ordtimes4} إذا كان~$\alpha \leq \beta$، فإن
+	$\alpha \ordtimes \gamma \leq \beta \ordtimes \gamma$؛
+	\item\ollabel{ordtimes5} $\alpha \ordtimes (\beta \ordplus
+	\gamma) = (\alpha \ordtimes \beta )\ordplus (\alpha\ordtimes
+	\gamma)$.
+\end{enumerate}
+\end{lem}
+
+\begin{proof}
+متروك تمرينًا.
+\end{proof}
+
+يمكنك إثبات نتائج أخرى (أو البحث عنها) بقدر ما تشاء. لكن، في ضوء
+\olref[ord-arithmetic][add]{ordsumnotcommute}، ينبغي ألا تكون النتيجة
+الآتية مفاجئة:
+
+\begin{prop}
+الضرب الترتيبي ليس تبادليًا:
+$2 \ordtimes \omega = \omega < \omega \ordtimes 2$
+\end{prop}
+
+\begin{proof}
+$2 \ordtimes \omega = \supstrict_{n < \omega}(2\ordtimes n) = \omega
+\in \supstrict_{n < \omega}(\omega \ordplus n) = \omega \ordplus
+\omega = \omega \ordtimes 2$.
+\end{proof}
+\noindent
+ومرة أخرى، المسوغ الحدسي مباشر جدًا. فلكي تحسب
+$2 \ordtimes \omega$، تستبدل بكل عدد طبيعي كيانين. وستحصل على نمط
+الترتيب نفسه إذا أدخلت ببساطة جميع الأعداد «النصفية» بين الأعداد
+الطبيعية، أي إذا نظرت في الترتيب الطبيعي على
+$\Setabs{\nicefrac{n}{2}}{n \in \omega}$. وعند عرض الأمر بهذه الطريقة،
+يكون نمط الترتيب هو بوضوح نمط~$\omega$ نفسه. أما لكي تحسب
+$\omega \ordtimes 2$، فإنك تضع نسختين من~$\omega$، إحداهما بعد
+الأخرى.
+
+\begin{prob}
+أثبت
+\olref[sth][ord-arithmetic][mult]{ordtimeslessiswo}،
+و\olref[sth][ord-arithmetic][mult]{ordtimesrecursion}،
+و
+\olref[sth][ord-arithmetic][mult]{ordinalmultiplicationisnice}
+\end{prob}
+
+\end{document}

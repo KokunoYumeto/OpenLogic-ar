@@ -1,0 +1,129 @@
+% Part: incompleteness
+% Chapter: incompleteness-provability
+% Section: first-incompleteness-thm
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{inp}{1in}
+
+\olsection{مبرهنة عدم الاكتمال الأولى}
+
+تهيأ لنا الآن عرض برهان غودل الأصلي لمبرهنة عدم الاكتمال الأولى.
+نأخذ $\Th{T}$ نظرية مؤكسمة حسابيًا، لغتها امتداد للغة الحساب،
+ونفرض أن $\Th{T}$ تشتمل على بديهيات $\Th{Q}$. ومن هذا الفرض
+يلزم، على الخصوص، أن $\Th{T}$ تمثل كل دالة وعلاقة قابلتين للحساب.
+
+قد بيّنّا أن $\Prf[\Th{T}]({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})$ علاقة قابلة للحساب متى اعتمدنا
+ترميزًا معقولًا للصيغ والبراهين بالأعداد. ومعناها أن
+$\Prf[\Th{T}]({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})$ تصدق بالضبط حين يكون ${\OLId{latin-ordinary}{x}}$ عدد غودل
+لـ!!a{derivation} للـ!!{formula} ذات عدد غودل ${\OLId{latin-ordinary}{y}}$ في
+$\Th{T}$. وأثبت غودل، للنظرية التي اختارها، أمرًا أدق: هذه العلاقة
+عودية بدائية، مستعينًا بقائمته المؤلفة من خمس وأربعين دالة وعلاقة.
+وآخرها، ${\OLId{latin-ordinary}{x}} {\OLId{latin-looped}{B}} {\OLId{latin-ordinary}{y}}$، هي $\Prf[\Th{T}]({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})$ لا غير بالنسبة إلى
+نظريته $\Th{T}$. وينبغي أن يُقرأ اصطلاحه «عودية» هنا بمعنى ما
+نسميه اليوم «عودية بدائية».
+
+ومن قابلية $\Prf[\Th{T}]({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})$ للحساب يلزم إمكان تمثيلها في
+$\Th{T}$؛ ولتكن $\OPrf[\Th{T}]({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})$ صيغتها الممثلة.
+ونعرّف $\OProv[\Th{T}]({\OLId{latin-ordinary}{y}})$ بأنها
+$\lexists[{\OLId{latin-ordinary}{x}}][\OPrf[\Th{T}]({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})]$. فهذه هي العلاقة السادسة
+والأربعون في قائمة غودل، $\fn{Bew}({\OLId{latin-ordinary}{y}})$. وقد نبه إلى أنها العلاقة
+الوحيدة التي «لا يمكن الجزم بأنها عودية». ولعل مراده أن قابلية
+حسابها لا تظهر من تعريفها؛ ثم دلت النتائج اللاحقة على أنها
+غير قابلة للحساب بالفعل.
+
+لتكن $\Th{T}$ نظرية !!{axiomatizable} تحتوي $\Th{Q}$.
+فتكون $\Prf[\Th{T}]({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})$ قابلة للقرار، وتمثلها في $\Th{Q}$
+!!a{formula} هي $\OPrf[\Th{T}]({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})$. ونأخذ
+$\OProv[\Th{T}]({\OLId{latin-ordinary}{y}})$ كما عرّفناها. وتعطي لمّة النقطة الثابتة صيغة
+$!G_\Th{T}$ بحيث !!{derive}s النظام $\Th{Q}$، ومن ثم $\Th{T}$،
+التكافؤ
+\begin{equation}
+\ollabel{eqn:qpf}
+!G_\Th{T} \liff \lnot \OProv[\Th{T}](\gn{!G_\Th{T}}).
+\end{equation}
+فمؤدى $!G_\Th{T}$ أن «$!G_\Th{T}$ ليست !!{derivable} في
+$\Th{T}$».
+
+\begin{lem}\ollabel{lem:cons-G-unprov}
+متى كانت $\Th{T}$ متسقة و!!{axiomatizable} وتمتد $\Th{Q}$،
+لزم $\Th{T}\Proves/ !G_\Th{T}$.
+\end{lem}
+
+\begin{proof}
+لنفرض أن النظام $\Th{T}$ !!{derive}s $!G_\Th{T}$.
+فيوجد \emph{حقًا} !!a{derivation}، وله عدد غودل ${\OLId{latin-ordinary}{m}}$ يحقق
+$\Prf[\Th{T}]({\OLId{latin-ordinary}{m}},\Gn{!G_\Th{T}})$. وحينئذ النظام $\Th{Q}$
+!!{derive}s الجملة $\OPrf[\Th{T}](\num {\OLId{latin-ordinary}{m}},\gn{!G_\Th{T}})$،
+ومنها !!{derive}s النظام $\Th{Q}$
+$\lexists[{\OLId{latin-ordinary}{x}}][\OPrf[\Th{T}]({\OLId{latin-ordinary}{x}},\gn{!G_\Th{T}})]$،
+أي $\OProv[\Th{T}](\gn{!G_\Th{T}})$ بحسب التعريف.
+فبمقتضى \olref{eqn:qpf}، !!{derive}s النظام $\Th{Q}$
+الصيغة $\lnot !G_\Th{T}$. ولأن $\Th{T}$ تمتد $\Th{Q}$،
+فإن $\Th{T}$ !!{derive}s تلك الصيغة أيضًا.
+فإذا كان $\Th{T}$ !!{derive}s $!G_\Th{T}$، لزم أنه !!{derive}s
+$\lnot !G_\Th{T}$ كذلك؛ وهذا ينافي الاتساق.
+\end{proof}
+
+\begin{defn}
+\ollabel{thm:oconsis-q}
+نصف النظرية $\Th{T}$ بأنها \emph{متسقة-$\omega$} إذا تحقق الشرط
+التالي لكل جملة $\lexists[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$: إن كان النظام $\Th{T}$
+!!{derive}s $\lnot !A(\num {\OLMathNumeral{0}})$ و$\lnot !A(\num {\OLMathNumeral{1}})$ و$\lnot !A(\num {\OLMathNumeral{2}})$،
+و\dots، امتنع أن تثبت $\Th{T}$ الجملة $\lexists[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$.
+\end{defn}
+
+الاتساق-$\omega$ يستلزم الاتساق المعتاد. ولبيانه نفرض العكس:
+إذا كانت $\Th{T}$ غير متسقة كان $\Th{T}\Proves !A$ لأي $!A$.
+وعليه، متى كانت $\Th{T}$ غير متسقة، فإنها !!{derive}s جميع
+$\lnot !A(\num {\OLId{latin-ordinary}{n}})$، لكل ${\OLId{latin-ordinary}{n}}$، وتثبت معها
+$\lexists[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$. فتكون $\Th{T}$ غير متسقة-$\omega$.
+وبعكس النقيض، لا بد للنظرية $\Th{T}$ المتسقة-$\omega$ أن تكون
+متسقة.
+
+\begin{lem}\ollabel{lem:omega-cons-G-unref}
+متى كانت $\Th{T}$ متسقة-$\omega$ و!!{axiomatizable} وتمتد
+$\Th{Q}$، لزم $\Th{T}\Proves/\lnot !G_\Th{T}$.
+\end{lem}
+
+\begin{proof}
+نثبت أن النظام $\Th{T}$ إذا كان !!{derive}s $\lnot !G_\Th{T}$
+لم يكن متسقًا-$\omega$. فنفرض أن $\Th{T}$ !!{derive}s
+$\lnot !G_\Th{T}$. إن كانت $\Th{T}$ غير متسقة، فهي غير
+متسقة-$\omega$ وقد تم المطلوب. وإن كانت $\Th{T}$ متسقة، امتنع
+عليها !!{derive} الصيغة $!G_\Th{T}$ بمقتضى
+\olref{lem:cons-G-unprov}. وبانتفاء !!{derivation} لـ$!G_\Th{T}$
+في $\Th{T}$، يكون النظام $\Th{Q}$ !!{derive}s
+\[
+\lnot \OPrf[\Th{T}](\num {\OLMathNumeral{0}}, \gn{!G_\Th{T}}), \lnot \OPrf[\Th{T}](\num {\OLMathNumeral{1}},
+\gn{!G_\Th{T}}), \lnot \OPrf[\Th{T}](\num {\OLMathNumeral{2}}, \gn{!G_\Th{T}}), \dots
+\]
+وتثبتها $\Th{T}$ كذلك. ولكن $\lnot !G_\Th{T}$ مكافئة،
+بحسب \olref{eqn:qpf}، لـ
+$\lexists[{\OLId{latin-ordinary}{x}}][\OPrf[\Th{T}]({\OLId{latin-ordinary}{x}},\gn{!G_\Th{T}})]$.
+فيجتمع في $\Th{T}$ ما يمنع اتساقها-$\omega$.
+\end{proof}
+
+\begin{prob}
+  قد ثبت أن المتسقة-$\omega$ متسقة. أثبت أن العكس غير لازم،
+  ببناء نظرية متسقة غير متسقة-$\omega$؛ وتحديدًا، بيّن أن
+  $\Th{Q}\cup\{\lnot !G_\Th{Q}\}$ متسقة لكنها غير متسقة-$\omega$.
+\end{prob}
+
+\begin{thm}
+\ollabel{thm:first-incompleteness} إذا كانت $\Th{T}$ نظرية
+متسقة-$\omega$ و!!{axiomatizable} تمتد $\Th{Q}$،
+فإن $\Th{T}$ غير تامة.
+\end{thm}
+
+\begin{proof}
+  اتساق $\Th{T}$-$\omega$ يقتضي اتساقها، فيلزم
+  $\Th{T}\Proves/ !G_\Th{T}$ من \olref{lem:cons-G-unprov}.
+  وتقتضي \olref{lem:omega-cons-G-unref} أيضًا
+  $\Th{T}\Proves/\lnot !G_\Th{T}$. فلا تكون $\Th{T}$ تامة:
+  لا !!{derive}s $!G_\Th{T}$ ولا نفيها $\lnot !G_\Th{T}$.
+\end{proof}
+
+\end{document}

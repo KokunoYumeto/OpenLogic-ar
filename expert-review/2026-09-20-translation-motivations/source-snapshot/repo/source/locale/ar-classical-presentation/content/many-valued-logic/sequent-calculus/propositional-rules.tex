@@ -1,0 +1,234 @@
+% Part: many-valued-logic
+% Chapter: sequent-calculus
+% Section: propositional-rules
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mvl}{seq}{prl}
+
+\olsection{قواعد القضايا لمنطقات مختارة}
+
+العمدة في تعيين قواعد رابط ما في حساب تتابعيات ذي جوانب~${\OLId{latin-ordinary}{n}}$ هي
+دالة الصدق المميزة لذلك الرابط وحدها. فإن اشترك منطقان أو أكثر في
+هذه الدالة، اشتركا في قواعد التتابعيات ذات الجوانب~${\OLId{latin-ordinary}{n}}$ الخاصة
+بالرابط، وإن اختلفا من وجوه أخرى.
+
+\subsection{قواعد~$\lnot$}
+
+أما~$\lnot$ في منطقي~\L ukasiewicz وكلايني وفي صورهما المختلفة،
+فقواعده كما يأتي.
+
+\begin{defish}
+  \begin{center}
+\AxiomC{$ {\OLId{greek-variable}{Gamma}} \nSequent \Pi \nSequent {\OLId{greek-variable}{Delta}}, !A $}
+\RightLabel{\iR{\lnot}{\False}}
+\UnaryInfC{$ \lnot !A, {\OLId{greek-variable}{Gamma}} \nSequent \Pi \nSequent {\OLId{greek-variable}{Delta}}$}
+\DisplayProof
+\\[2ex]
+\AxiomC{$ {\OLId{greek-variable}{Gamma}} \nSequent !A, \Pi \nSequent {\OLId{greek-variable}{Delta}} $}
+\RightLabel{\iR{\lnot}{\Undef}}
+\UnaryInfC{${\OLId{greek-variable}{Gamma}} \nSequent \lnot !A, \Pi \nSequent {\OLId{greek-variable}{Delta}}$}
+\DisplayProof
+\\[2ex]
+\AxiomC{$!A, {\OLId{greek-variable}{Gamma}} \nSequent \Pi \nSequent {\OLId{greek-variable}{Delta}}$}
+\RightLabel{\iR{\lnot}{\True}}
+\UnaryInfC{${\OLId{greek-variable}{Gamma}} \nSequent \Pi \nSequent {\OLId{greek-variable}{Delta}},  \lnot !A$}
+\DisplayProof
+  \end{center}
+\end{defish}
+
+تنطبق القواعد الآتية لـ$\lnot$ على منطق غودل.
+
+\begin{defish}
+\AxiomC{$ {\OLId{greek-variable}{Gamma}} \nSequent !A, \Pi \nSequent {\OLId{greek-variable}{Delta}}, !A $}
+\RightLabel{\iR{\lnot}{\False}[\LogGod]}
+\UnaryInfC{$ \lnot !A, {\OLId{greek-variable}{Gamma}} \nSequent \Pi \nSequent {\OLId{greek-variable}{Delta}}$}
+\DisplayProof
+\hfill
+\AxiomC{$!A, {\OLId{greek-variable}{Gamma}} \nSequent \Pi \nSequent {\OLId{greek-variable}{Delta}}$}
+\RightLabel{\iR{\lnot}{\True}[\LogGod]}
+\UnaryInfC{${\OLId{greek-variable}{Gamma}} \nSequent \Pi \nSequent {\OLId{greek-variable}{Delta}},  \lnot !A$}
+\DisplayProof
+\hfill
+\end{defish}
+
+وأما~$\lnot !A$ فلا سبيل إلى أن تكون قيمته~$\Undef$ في منطق غودل؛
+ولذلك خلا الموضع الأوسط من قاعدة خاصة به.
+
+\subsection{قواعد~$\land$}
+
+هذه قواعد~$\land$ في منطق~\L ukasiewicz ومنطق كلايني القوي ومنطق
+غودل.
+
+\begin{defish}
+\begin{center}
+  \AxiomC{$!A, !B, {\OLId{greek-variable}{Gamma}} \nSequent \Pi \nSequent {\OLId{greek-variable}{Delta}}$}
+  \RightLabel{$\iR{\land}{\False}$}
+  \UnaryInfC{$!A \land !B, {\OLId{greek-variable}{Gamma}} \nSequent \Pi \nSequent {\OLId{greek-variable}{Delta}}$}
+  \DisplayProof
+\\[2ex]
+  \AxiomC{${\OLId{greek-variable}{Gamma}} \nSequent !A, \Pi \nSequent !A, {\OLId{greek-variable}{Delta}}$}
+  \AxiomC{${\OLId{greek-variable}{Gamma}} \nSequent !B, \Pi \nSequent !B, {\OLId{greek-variable}{Delta}}$}
+  \AxiomC{${\OLId{greek-variable}{Gamma}} \nSequent !A, !B, \Pi \nSequent {\OLId{greek-variable}{Delta}}$}
+  \RightLabel{$\iR\land\Undef$}
+  \TrinaryInfC{${\OLId{greek-variable}{Gamma}} \nSequent !A \land !B, \Pi \nSequent {\OLId{greek-variable}{Delta}}$}
+  \DisplayProof
+  \\[2ex]
+  \AxiomC{${\OLId{greek-variable}{Gamma}} \nSequent \Pi \nSequent {\OLId{greek-variable}{Delta}}, !A$}
+  \AxiomC{${\OLId{greek-variable}{Gamma}} \nSequent \Pi \nSequent {\OLId{greek-variable}{Delta}}, !B$}
+  \RightLabel{$\iR\land\True$}
+  \BinaryInfC{${\OLId{greek-variable}{Gamma}} \nSequent \Pi \nSequent {\OLId{greek-variable}{Delta}}, !A \land !B$}
+  \DisplayProof
+\end{center}
+\end{defish}
+
+\subsection{قواعد~$\lor$}
+
+هذه قواعد~$\lor$ في منطق~\L ukasiewicz ومنطق كلايني القوي ومنطق
+غودل.
+
+\begin{defish}
+\begin{center}
+ \AxiomC{$!A, {\OLId{greek-variable}{Gamma}} \nSequent \Pi \nSequent {\OLId{greek-variable}{Delta}}$}
+  \AxiomC{$!B, {\OLId{greek-variable}{Gamma}} \nSequent \Pi \nSequent {\OLId{greek-variable}{Delta}}$}
+  \RightLabel{$\iR\lor\False$}
+  \BinaryInfC{$!A \lor !B, {\OLId{greek-variable}{Gamma}} \nSequent \Pi \nSequent {\OLId{greek-variable}{Delta}}$}
+  \DisplayProof
+\\[2ex]
+  \AxiomC{$!A, {\OLId{greek-variable}{Gamma}} \nSequent !A, \Pi \nSequent {\OLId{greek-variable}{Delta}}$}
+  \AxiomC{$!B, {\OLId{greek-variable}{Gamma}} \nSequent !B, \Pi \nSequent {\OLId{greek-variable}{Delta}}$}
+  \AxiomC{${\OLId{greek-variable}{Gamma}} \nSequent !A, !B, \Pi \nSequent {\OLId{greek-variable}{Delta}}$}
+  \RightLabel{$\iR\lor\Undef$}
+  \TrinaryInfC{${\OLId{greek-variable}{Gamma}} \nSequent !A \lor !B, \Pi \nSequent {\OLId{greek-variable}{Delta}}$}
+  \DisplayProof
+  \\[2ex]
+  \AxiomC{${\OLId{greek-variable}{Gamma}} \nSequent \Pi \nSequent {\OLId{greek-variable}{Delta}}, !A, !B$}
+  \RightLabel{$\iR\lor\True$}
+  \UnaryInfC{${\OLId{greek-variable}{Gamma}} \nSequent \Pi \nSequent {\OLId{greek-variable}{Delta}}, !A \lor !B$}
+  \DisplayProof
+\end{center}
+\end{defish}
+
+\subsection{قواعد~$\lif$}
+
+هذه قواعد~$\lif$ في منطق~\L ukasiewicz.
+
+\begin{defish}
+\begin{center}
+  \AxiomC{${\OLId{greek-variable}{Gamma}} \nSequent \Pi \nSequent {\OLId{greek-variable}{Delta}}, !A$}
+  \AxiomC{$!B, {\OLId{greek-variable}{Gamma}} \nSequent \Pi \nSequent {\OLId{greek-variable}{Delta}}$}
+  \RightLabel{$\iR\lif\False[\LogLuk[{\OLMathNumeral{3}}]]$}
+  \BinaryInfC{$!A \lif !B, {\OLId{greek-variable}{Gamma}} \nSequent \Pi \nSequent {\OLId{greek-variable}{Delta}}$}
+  \DisplayProof
+  \\[2ex]
+  \AxiomC{${\OLId{greek-variable}{Gamma}} \nSequent !A, !B, \Pi \nSequent {\OLId{greek-variable}{Delta}}$}
+  \AxiomC{$!B, {\OLId{greek-variable}{Gamma}} \nSequent \Pi \nSequent {\OLId{greek-variable}{Delta}}, !A$}
+  \RightLabel{$\iR\lif\Undef[\LogLuk[{\OLMathNumeral{3}}]]$}
+  \BinaryInfC{${\OLId{greek-variable}{Gamma}} \nSequent !A \lif !B, \Pi \nSequent {\OLId{greek-variable}{Delta}}$}
+  \DisplayProof
+\\[2ex]
+  \AxiomC{$!A, {\OLId{greek-variable}{Gamma}} \nSequent !B, \Pi \nSequent {\OLId{greek-variable}{Delta}}, !B$}
+  \AxiomC{$!A, {\OLId{greek-variable}{Gamma}} \nSequent !A, \Pi \nSequent {\OLId{greek-variable}{Delta}}, !B$}
+  \RightLabel{$\iR{\lif}{\True}[\LogLuk[{\OLMathNumeral{3}}]]$}
+  \BinaryInfC{${\OLId{greek-variable}{Gamma}} \nSequent \Pi \nSequent {\OLId{greek-variable}{Delta}}, !A \lif !B$}
+  \DisplayProof
+\end{center}
+\end{defish}
+
+هذه قواعد~$\lif$ في منطق كلايني القوي.
+
+\begin{defish}
+\begin{center}
+  \AxiomC{${\OLId{greek-variable}{Gamma}} \nSequent \Pi \nSequent {\OLId{greek-variable}{Delta}}, !A$}
+  \AxiomC{$!B, {\OLId{greek-variable}{Gamma}} \nSequent \Pi \nSequent {\OLId{greek-variable}{Delta}}$}
+  \RightLabel{$\iR\lif\False[\LogKs]$}
+  \BinaryInfC{$!A \lif !B, {\OLId{greek-variable}{Gamma}} \nSequent \Pi \nSequent {\OLId{greek-variable}{Delta}}$}
+  \DisplayProof
+  \\[2ex]
+  \AxiomC{$!B, {\OLId{greek-variable}{Gamma}} \nSequent !B, \Pi \nSequent {\OLId{greek-variable}{Delta}}$}
+  \AxiomC{${\OLId{greek-variable}{Gamma}} \nSequent !A, !B, \Pi \nSequent {\OLId{greek-variable}{Delta}}$}
+  \AxiomC{${\OLId{greek-variable}{Gamma}} \nSequent !A, \Pi \nSequent {\OLId{greek-variable}{Delta}}, !A$}
+  \RightLabel{$\iR\lif\Undef[\LogKs]$}
+  \TrinaryInfC{${\OLId{greek-variable}{Gamma}} \nSequent !A \lif !B, \Pi \nSequent {\OLId{greek-variable}{Delta}}$}
+  \DisplayProof
+\\[2ex]
+  \AxiomC{$!A, {\OLId{greek-variable}{Gamma}} \nSequent \Pi \nSequent {\OLId{greek-variable}{Delta}}, !B$}
+  \RightLabel{$\iR{\lif}{\True}[\LogKs]$}
+  \UnaryInfC{${\OLId{greek-variable}{Gamma}} \nSequent \Pi \nSequent {\OLId{greek-variable}{Delta}}, !A \lif !B$}
+  \DisplayProof
+\end{center}
+\end{defish}
+
+هذه قواعد~$\lif$ في منطق غودل.
+
+\begin{defish}
+\begin{center}
+  \AxiomC{${\OLId{greek-variable}{Gamma}} \nSequent !A, \Pi \nSequent {\OLId{greek-variable}{Delta}}, !A$}
+  \AxiomC{$!B, {\OLId{greek-variable}{Gamma}} \nSequent \Pi \nSequent {\OLId{greek-variable}{Delta}}$}
+  \RightLabel{$\iR\lif\False[\LogGod[{\OLMathNumeral{3}}]]$}
+  \BinaryInfC{$!A \lif !B, {\OLId{greek-variable}{Gamma}} \nSequent \Pi \nSequent {\OLId{greek-variable}{Delta}}$}
+  \DisplayProof
+  \\[2ex]
+  \AxiomC{${\OLId{greek-variable}{Gamma}} \nSequent !B, \Pi \nSequent {\OLId{greek-variable}{Delta}}$}
+  \AxiomC{${\OLId{greek-variable}{Gamma}} \nSequent \Pi \nSequent {\OLId{greek-variable}{Delta}}, !A$}
+  \RightLabel{$\iR\lif\Undef[\LogGod[{\OLMathNumeral{3}}]]$}
+  \BinaryInfC{${\OLId{greek-variable}{Gamma}} \nSequent !A \lif !B, \Pi \nSequent {\OLId{greek-variable}{Delta}}$}
+  \DisplayProof
+\\[2ex]
+  \AxiomC{$!A, {\OLId{greek-variable}{Gamma}} \nSequent !B, \Pi \nSequent {\OLId{greek-variable}{Delta}}, !B$}
+  \AxiomC{$!A, {\OLId{greek-variable}{Gamma}} \nSequent !A, \Pi \nSequent {\OLId{greek-variable}{Delta}}, !B$}
+  \RightLabel{$\iR{\lif}{\True}[\LogGod[{\OLMathNumeral{3}}]]$}
+  \BinaryInfC{${\OLId{greek-variable}{Gamma}} \nSequent \Pi \nSequent {\OLId{greek-variable}{Delta}}, !A \lif !B$}
+  \DisplayProof
+\end{center}
+\end{defish}
+
+
+\begin{sidewaysfigure}
+  \begin{center}
+  \AxiomC{${\OLId{latin-looped}{A}} \nSequent {\OLId{latin-looped}{A}} \nSequent {\OLId{latin-looped}{A}}$}
+  \RightLabel{\iR \Weakening \True}
+  \UnaryInfC{${\OLId{latin-looped}{A}} \nSequent {\OLId{latin-looped}{A}} \nSequent {\OLId{latin-looped}{B}}, {\OLId{latin-looped}{A}}$}
+  \RightLabel{\iR \Weakening \Undef}
+  \UnaryInfC{${\OLId{latin-looped}{A}} \nSequent {\OLId{latin-looped}{B}}, {\OLId{latin-looped}{A}} \nSequent {\OLId{latin-looped}{B}}, {\OLId{latin-looped}{A}}$}
+  \RightLabel{\iR \Weakening \Undef}
+  \UnaryInfC{${\OLId{latin-looped}{A}} \nSequent {\OLId{latin-looped}{A}}, {\OLId{latin-looped}{B}}, {\OLId{latin-looped}{A}} \nSequent {\OLId{latin-looped}{B}}, {\OLId{latin-looped}{A}}$}
+  \AxiomC{${\OLId{latin-looped}{A}} \nSequent {\OLId{latin-looped}{A}} \nSequent {\OLId{latin-looped}{A}}$}
+  \RightLabel{\iR \Weakening \True}
+  \UnaryInfC{${\OLId{latin-looped}{A}} \nSequent {\OLId{latin-looped}{A}} \nSequent {\OLId{latin-looped}{A}}, {\OLId{latin-looped}{A}}$}
+  \RightLabel{\iR \Weakening \True}
+  \UnaryInfC{${\OLId{latin-looped}{A}} \nSequent {\OLId{latin-looped}{A}} \nSequent {\OLId{latin-looped}{B}}, {\OLId{latin-looped}{A}}, {\OLId{latin-looped}{A}}$}
+  \RightLabel{\iR \Weakening \False}
+  \UnaryInfC{${\OLId{latin-looped}{B}}, {\OLId{latin-looped}{A}} \nSequent {\OLId{latin-looped}{A}} \nSequent {\OLId{latin-looped}{B}}, {\OLId{latin-looped}{A}}, {\OLId{latin-looped}{A}}$}
+  \RightLabel{$\iR\lif\Undef$}
+  \BinaryInfC{${\OLId{latin-looped}{A}} \nSequent {\OLId{latin-looped}{A}} \lif {\OLId{latin-looped}{B}}, {\OLId{latin-looped}{A}} \nSequent {\OLId{latin-looped}{B}}, {\OLId{latin-looped}{A}}$}
+  \AxiomC{${\OLId{latin-looped}{B}} \nSequent {\OLId{latin-looped}{B}} \nSequent {\OLId{latin-looped}{B}}$}
+  \RightLabel{\iR \Weakening \Undef}
+  \UnaryInfC{${\OLId{latin-looped}{B}} \nSequent {\OLId{latin-looped}{A}}, {\OLId{latin-looped}{B}} \nSequent {\OLId{latin-looped}{B}}$}
+  \RightLabel{\iR \Exchange \Undef}
+  \UnaryInfC{${\OLId{latin-looped}{B}} \nSequent {\OLId{latin-looped}{B}}, {\OLId{latin-looped}{A}} \nSequent {\OLId{latin-looped}{B}}$}
+  \RightLabel{\iR \Weakening \Undef}
+  \UnaryInfC{${\OLId{latin-looped}{B}} \nSequent {\OLId{latin-looped}{A}}, {\OLId{latin-looped}{B}}, {\OLId{latin-looped}{A}} \nSequent {\OLId{latin-looped}{B}}$}
+  \RightLabel{\iR \Weakening \False}
+  \UnaryInfC{${\OLId{latin-looped}{A}}, {\OLId{latin-looped}{B}} \nSequent {\OLId{latin-looped}{A}}, {\OLId{latin-looped}{B}}, {\OLId{latin-looped}{A}} \nSequent {\OLId{latin-looped}{B}}$}
+  \RightLabel{\iR \Exchange \False}
+  \UnaryInfC{${\OLId{latin-looped}{B}}, {\OLId{latin-looped}{A}} \nSequent {\OLId{latin-looped}{A}}, {\OLId{latin-looped}{B}}, {\OLId{latin-looped}{A}} \nSequent {\OLId{latin-looped}{B}}$}
+  \AxiomC{${\OLId{latin-looped}{A}} \nSequent {\OLId{latin-looped}{A}} \nSequent {\OLId{latin-looped}{A}}$}
+  \RightLabel{\iR \Weakening \True}
+  \UnaryInfC{${\OLId{latin-looped}{A}} \nSequent {\OLId{latin-looped}{A}} \nSequent {\OLId{latin-looped}{B}}, {\OLId{latin-looped}{A}}$}
+  \RightLabel{\iR \Weakening \False}
+  \UnaryInfC{${\OLId{latin-looped}{B}}, {\OLId{latin-looped}{A}} \nSequent {\OLId{latin-looped}{A}} \nSequent {\OLId{latin-looped}{B}}, {\OLId{latin-looped}{A}}$}
+  \RightLabel{\iR \Weakening \False}
+  \UnaryInfC{${\OLId{latin-looped}{B}}, {\OLId{latin-looped}{B}}, {\OLId{latin-looped}{A}} \nSequent {\OLId{latin-looped}{A}} \nSequent {\OLId{latin-looped}{B}}, {\OLId{latin-looped}{A}}$}
+  \RightLabel{$\iR\lif\Undef$}
+  \BinaryInfC{${\OLId{latin-looped}{B}}, {\OLId{latin-looped}{A}} \nSequent {\OLId{latin-looped}{A}} \lif {\OLId{latin-looped}{B}}, {\OLId{latin-looped}{A}} \nSequent {\OLId{latin-looped}{B}}$}
+  \RightLabel{$\iR\lif\False$}
+  \BinaryInfC{${\OLId{latin-looped}{A}} \lif {\OLId{latin-looped}{B}}, {\OLId{latin-looped}{A}} \nSequent {\OLId{latin-looped}{A}} \lif {\OLId{latin-looped}{B}}, {\OLId{latin-looped}{A}} \nSequent {\OLId{latin-looped}{B}}$}
+  \DisplayProof
+  \end{center}
+  \caption{مثال لـ!!{derivation} في~$\LogLuk[{\OLMathNumeral{3}}]$}
+\end{sidewaysfigure}
+
+\end{document}

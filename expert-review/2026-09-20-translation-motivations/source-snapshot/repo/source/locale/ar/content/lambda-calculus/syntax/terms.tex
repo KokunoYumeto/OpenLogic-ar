@@ -1,0 +1,47 @@
+% Part: lambda-calculus
+% Chapter: syntax
+% Section: terms
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{syn}{trm}
+\olsection{الحدود}
+
+تُبنى حدود حساب لامبدا استقرائيًا من مخزون غير منته من المتغيرات
+$\Obj{v_0}$ و$\Obj{v_1}$ و\dots، ومن الرمز~``$\lambd$'' والأقواس. وسنستعمل
+$x$ و$y$ و$z$ و\dots{} للدلالة على المتغيرات، و$M$ و$N$ و$P$ و\dots{}
+للدلالة على الحدود.
+
+\begin{defn}[الحدود] \ollabel{defn:term}
+تعرّف مجموعة \emph{حدود} حساب لامبدا استقرائيًا كما يأتي:
+\begin{enumerate}
+  \item \ollabel{defn:term-var} إذا كان~$x$ متغيرًا، فإن~$x$ حد.
+  \item \ollabel{defn:term-abs} إذا كان~$x$ متغيرًا و$M$ حدًا، فإن
+    $(\lambd[x][M])$ حد.
+  \item \ollabel{defn:term-app} إذا كان كل من~$M$ و$N$ حدًا، فإن
+    $(MN)$ حد.
+\end{enumerate}
+\end{defn}
+
+إذا تكوّن الحد~$(\lambd[x][M])$ وفق
+\olref{defn:term-abs} قلنا إنه ناتج \emph{تجريد}، وسمينا~$x$ في
+$\lambd[x]$ \emph{!!{parameter}}. والحد~$(MN)$ المتكوّن وفق
+\olref{defn:term-app} هو ناتج \emph{تطبيق}.
+
+الحدود المعرّفة أعلاه تامة الأقواس. وقد يصير ذلك مرهقًا، كما يبيّن الحد
+$(\lambd[x][((\lambd[x][x])(\lambd[x][(xx)]))])$. وسنقدم اصطلاحات تغنينا
+عن بعض الأقواس. غير أن التعريف الرسمي يسهّل تعيين كيفية بناء حد وفق
+\olref{defn:term}. فمثلًا، لا بد أن تكون الخطوة الأخيرة في تكوين الحد
+$(\lambd[x][((\lambd[x][x])(\lambd[x][(xx)]))])$ تجريدًا يكون فيه
+!!{parameter} هو~$x$. وهو ينتج بالتجريد من الحد
+$((\lambd[x][x])(\lambd[x][(xx)]))$، الذي هو تطبيق حدين. وكل واحد من
+هذين الحدين ناتج تجريد، وهكذا دواليك.
+
+\begin{prob}
+صف تكوين~$(\lambd[g][(\lambd[x][(g (x x))])
+  (\lambd[x][(g (x x))])])$.
+\end{prob}
+
+\end{document}

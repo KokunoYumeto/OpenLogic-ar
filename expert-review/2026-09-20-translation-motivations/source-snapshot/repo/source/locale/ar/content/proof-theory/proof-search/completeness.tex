@@ -1,0 +1,181 @@
+% Part: proof-theory
+% Chapter: proof-search
+% Section: completeness
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{ps}{cpl}
+
+\olsection{الاكتمال}
+
+نبيّن الآن أن خوارزمية البحث عن البرهان مضمونة؛ أي إنه إذا أُجهضت أو لم
+تتوقف قط، فلا يوجد~!!{proof} للمتتالية الابتدائية
+$\Gamma \Sequent \Delta$. ولهذا نعرّف~!!a{structure}~$\Struct M$ بحيث
+يكون~$\Sat{M}{!A}$ لكل~$!A \in \Gamma$، و$\Sat/{M}{!A}$ لكل
+$!A \in \Delta$. وبعبارة أخرى، تكون كل~!!{formula}s في~$\Gamma$ صادقة
+وكل~!!{formula}s في~$\Delta$ كاذبة في~$\Struct M$؛ أي إن
+$\Gamma \Sequent \Delta$ غير صالحة. وبما أن~\Log{G3c} سليم، فلا يوجد
+!!{proof} للمتتالية~$\Gamma \Sequent \Delta$.
+
+نعرّف~$\Struct{M}$ من زوج~$\Theta,\Xi$ من~!!{formula}s ومن مجموعة~$C$ من
+!!{constant}s. ونحصل على~$\Theta,\Xi$ و$C$ من \emph{فرع فشل} لتشغيل البحث
+عن البرهان الذي أخفق (إما بالإجهاض وإما بعدم التوقف). وفرع الفشل متتالية
+منتهية أو لامتناهية من المتتاليات~$\Pi_n \Sequent \Lambda_n$
+ومجموعات~!!{constant}s~$C_n$، بحيث
+تكون~$\Pi_0 \Sequent \Lambda_0$ هي المتتالية النهائية
+$\Gamma \Sequent \Delta$، وتكون~$\Pi_{n+1} \Sequent \Lambda_{n+1}$ مقدمةً
+لـ~$\Pi_n \Sequent \Lambda_n$ وُلّدت في المرحلة~$n+1$ ولم تجد الخوارزمية
+لها~!!a{proof}. ولا بد بوضوح من وجود مقدمة كهذه لكل~$n$ غير أخير في
+الفرع، وإلا لكانت الخوارزمية قد وجدت~!!a{proof}. وفي الفرع المنتهي تكون
+المتتالية الأخيرة~$\Pi_n \Sequent \Lambda_n$ موضع الإجهاض. ونجعل~$C_n$
+مجموعة~!!{constant}s المرتبطة بالمتتالية~$\Pi_n \Sequent \Lambda_n$.
+
+إذا أُجهضت الخوارزمية عند متتالية عليا لا تحتوي إلا~!!{formula}s ذرية، كان
+الفرع المنتهي بتلك المتتالية فرع فشل. وإذا لم تتوقف الخوارزمية قط، ظلت تولّد
+أشجارًا أكبر فأكبر. ويمكن تصورها شجرةً لامتناهية نامية (أي الشجرة التي
+سنحصل عليها لو نفذت الخوارزمية عددًا لامتناهيًا من الخطوات). وتكون هذه
+الشجرة لامتناهية لكنها متناهية التشعب، إذ لا تملك كل عقدة إلا ابنًا واحدًا
+أو ابنين، هما المتتاليات الواقعة فوقها مباشرةً. وبحسب مبرهنة كونيغ، لكل شجرة
+لامتناهية متناهية التشعب فرع لامتناهٍ. ويكون مثل هذا الفرع فرع فشل عندما
+تستمر خوارزمية البحث إلى الأبد.
+
+إذا كانت متتالية~$\Pi_n \Sequent \Lambda_n$ و$C_n$ فرع فشل، فلتكن
+$\Theta=\bigcup_n\Pi_n$ و$\Xi=\bigcup_n\Lambda_n$ (بعد حذف المؤشرات
+والوقائع المتكررة لـ~!!{formula}s)، ولتكن~$C=\bigcup_n C_n$.
+
+نحن الآن مستعدون لتعريف~$\Struct{M}$.
+\begin{enumerate}
+\item المجال~$\Domain{M}$ هو مجموعة الحدود التي يمكن تكوينها من~$C$ ومن
+!!{function}s الواقعة في~$\Gamma \Sequent \Delta$ إن وُجدت، من دون أي
+!!{variable}s.
+\item إذا كان~$c\in C$، فإن~$\Assign{c}{M}=c$.
+\item إذا كان~$f$ !!{function} ذا~$m$ مواضع في~$\Gamma \Sequent \Delta$،
+وكان~$t_1,\dots,t_m\in\Domain{M}$، فإن
+$\Assign{f}{M}(t_1,\dots,t_m)=f(t_1,\dots,t_m)$.
+\item إذا كان~$R$ !!{predicate} ذا~$m$ مواضع في
+$\Gamma \Sequent \Delta$، فإن
+$\Assign{R}{M}=\Setabs{\tuple{t_1,\dots,t_m}\in\Domain{M}^m}
+{R(t_1,\dots,t_m)\in\Theta}$.
+\end{enumerate}
+إن~$\Struct{M}$ \emph{نموذج حدود}، بمعنى أن مجاله مجموعة من الحدود، وأن
+!!{constant}s و!!{function}s تُفسَّر بحيث تضمن~$\Value{t}{M}=t$. وتُستعمل
+!!{formula}s الذرية في~$\Theta$ لتعريف~$\Assign{R}{M}$ بطريقة تضمن أن
+$\Sat{M}{R(t_1,\dots,t_m)}$ إذا وفقط إذا كان
+$R(t_1,\dots,t_m)\in\Theta$.
+
+\begin{lem}\ollabel{lem:truth}
+لكل~$!A\in\Theta\cup\Xi$:
+\begin{enumerate}
+  \item إذا كان~$!A\in\Theta$، فإن~$\Sat{M}{!A}$.
+  \item إذا كان~$!A\in\Xi$، فإن~$\Sat/{M}{!A}$.
+\end{enumerate}
+\end{lem}
+
+\begin{proof}
+  نستعمل الاستقراء في~$\depth{!A}$.
+
+افترض أولًا أن~$!A$ ذرية؛ أي إما~$!A\ident\lfalse$ وإما
+$!A\ident R(t_1,\dots,t_m)$.
+
+لأن~$\Pi_n \Sequent \Lambda_n$ فرع فشل، لا يمكن أن تحتوي أي~$\Pi_n$ على
+$\lfalse$ (وإلا كانت~$\Pi_n \Sequent \Lambda_n$ مسلّمة). وبحسب تعريف
+$\Struct{M}$، يكون~$\Sat{M}{R(t_1,\dots,t_m)}$ إذا وفقط إذا كان
+$R(t_1,\dots,t_m)\in\Theta$. وتنتج عن الأمرين معًا العبارة: إذا كان
+$!A\in\Theta$، فإن~$\Sat{M}{!A}$.
+
+إذا كانت~$!A$ ذرية و$!A\in\Pi_n$، فإن~$!A\in\Pi_{n+1}$؛ وإذا كان
+$!A\in\Lambda_n$، فإن~$!A\in\Lambda_{n+1}$. (وهذا ناتج من الطريقة التي
+تولّد بها خوارزمية البحث المتتاليات اللاحقة.) لذلك، إذا كان
+$!A\in\Theta\cap\Xi$، كان~$!A\in\Pi_n\cap\Lambda_n$ لبعض~$n$. وهذا يعني
+أن~$\Pi_n \Sequent \Lambda_n$ مسلّمة، مع أن فرع الفشل لا يمكن أن يحتوي
+مسلّمات. إذن، بحسب الإنشاء، $!A\notin\Theta\cap\Xi$ لكل~$!A$ ذرية؛ ومن ثم
+إذا كان~$!A\in\Xi$ كان~$!A\notin\Theta$. ويستلزم تعريف~$\Struct{M}$ عندئذ
+أن~$\Sat/{M}{!A}$.
+
+في خطوة الاستقراء، افترض أن (1) و(2) تصحان لكل~!!{formula}s ذات~!!{depth}
+أدنى من~$!A$. ونثبت (1) و(2) لـ~$!A$ بتمييز الحالات.
+
+لاحظ أولًا أنه إذا وقع~$!A^i$ غير ذري في
+$\Pi_n \Sequent \Lambda_n$، فإنه يقع أيضًا في
+$\Pi_{n+1} \Sequent \Lambda_{n+1}$ ما لم يكن~$i$ أصغر مؤشر بين وقائع
+الصيغ غير الذرية في~$\Pi_n \Sequent \Lambda_n$. وكل مؤشر جديد تضيفه
+الخوارزمية أكبر من جميع المؤشرات الموجودة، ولذلك نصل في النهاية إلى
+$\Pi_n \Sequent \Lambda_n$ يقع فيها~$!A^i$ ويكون~$i$ أصغر مؤشر بين
+وقائع الصيغ غير الذرية. وفي المرحلة~$n+1$ تختزل الخوارزمية~$!A^i$.
+وبعبارة أخرى، إذا كان~$!A\in\Theta$، فلبعض~$n$ يكون
+$\Pi_n=\Pi_n',!A^i$ ويكون~$i$ أصغر مؤشر غير ذري. وإذا كان~$!A\in\Xi$،
+فلبعض~$n$ يكون~$\Lambda_n=\Lambda_n',!A^i$ ويكون~$i$ أصغر مؤشر غير ذري.
+
+\begin{enumerate}
+  \item إذا كان~$!A\in\Theta$ و$!A\ident !B\land !C$، فلبعض~$n$ يكون
+  $\Pi_n=\Pi_n',(!B\land !C)^i$. وتكون
+  $\Pi_{n+1}\Sequent\Lambda_{n+1}$ المقدمة المقابلة لـ~\LeftR{\land}؛ أي
+  $\Pi_{n+1}=\Pi_n',!B^k,!C^{k+1}$. ومن ثم~$!B,!C\in\Theta$. وبفرض
+  الاستقراء~$\Sat{M}{!B}$ و$\Sat{M}{!C}$. وينتج من تعريف~$\Sat{M}{}$ أن
+  $\Sat{M}{!B\land !C}$.
+
+  \item إذا كان~$!A\in\Xi$ و$!A\ident !B\land !C$، فلبعض~$n$ يكون
+  $\Lambda_n=\Lambda_n',!B\land !C$. وتكون
+  $\Pi_{n+1}\Sequent\Lambda_{n+1}$ إحدى مقدمتي~\RightR{\land} اللتين
+  نتيجتهما~$\Pi_n\Sequent\Lambda_n',!B\land !C$؛ أي إما
+  $\Lambda_{n+1}=\Lambda_n',!B^k$ وإما
+  $\Lambda_{n+1}=\Lambda_n',!C^k$. ومن ثم إما~$!B\in\Xi$ وإما
+  $!C\in\Xi$. وبفرض الاستقراء، إما~$\Sat/{M}{!B}$ وإما
+  $\Sat/{M}{!C}$. وينتج من تعريف~$\Sat{M}{}$ أن
+  $\Sat/{M}{!B\land !C}$.
+  
+  \item حالات~$!A\ident\lnot !B$ و$!A\ident !B\lor !C$ و
+  $!A\ident !B\lif !C$ مماثلة، وتُترك تمارين.
+
+  \item إذا كان~$!A\in\Theta$ و$!A\ident\lexists[x][!B(x)]$، فلبعض~$n$
+  يكون~$\Pi_n=\Pi_n',\lexists[x][!B(x)]^i$. وتكون
+  $\Pi_{n+1}\Sequent\Lambda_{n+1}$ المقدمة المقابلة لـ
+  \LeftR{\lexists}؛ أي~$\Pi_{n+1}=\Pi_n',!B(c)^k$ لثابت~$c$. ومن ثم
+  $!B(c)\in\Theta$ و$c\in C$. وبفرض الاستقراء~$\Sat{M}{!B(c)}$، ومن تعريف
+  $\Sat{M}{}$ نحصل على~$\Sat{M}{\lexists[x][!B(x)]}$.
+
+  \item إذا كان~$!A\in\Xi$ و$!A\ident\lexists[x][!B(x)]$، فلبعض~$n$ يكون
+  $\Lambda_n=\Lambda_n',\lexists[x][!B(x)]^i$. ولأن
+  $\lexists[x][!B(x)]$ يبقى في يمين المتتالية المقدمة بمؤشر جديد كلما
+  اختُزل، فإنه يُختزل عددًا لامتناهيًا من المرات في يمين فرع الفشل متى وقع
+  هناك. وكل حد~$t\in\Domain{M}$ يصير في النهاية ``أول حد لا يحتوي إلا
+  ثوابت في~$C_n$ ولم يُستعمل من قبل في اختزال~$\lexists[x][!B(x)]$ على
+  اليمين'' على فرع الفشل. ولذلك، لكل~$t\in\Domain{M}$، يكون
+  $!B(t)\in\Lambda_n$ لبعض~$n$، ومن ثم~$!B(t)\in\Xi$. وبفرض الاستقراء
+  $\Sat/{M}{!B(t)}$ لكل~$t\in\Domain{M}$. وينتج من تعريف~$\Sat{M}{}$ أن
+  $\Sat/{M}{\lexists[x][!B(x)]}$.
+
+  \item حالات~$!A\ident\lforall[x][!B(x)]$ مماثلة، وتُترك تمارين.
+\end{enumerate}
+\end{proof}
+
+\begin{cor}\ollabel{cor:complete}
+خوارزمية البحث عن البرهان في~\Log{G3c} كاملة: إذا أُجهضت أو لم تتوقف قط،
+فإن المتتالية الابتدائية~$\Gamma \Sequent \Delta$ غير صالحة، ومن ثم لا
+يوجد لها~!!{proof}.
+\end{cor}
+
+\begin{proof}
+  إذا أُجهضت الخوارزمية أو لم تتوقف قط، وُجد فرع فشل يمكن أن نعرّف منه
+  $\Struct{M}$. وبموجب~\olref{lem:truth}، يكون~$\Sat{M}{!A}$ لكل
+  $!A\in\Gamma$ و$\Sat/{M}{!A}$ لكل~$!A\in\Delta$. (تذكّر أن
+  $\Pi_0=\Gamma$ و$\Lambda_0=\Delta$، ومن ثم~$\Gamma\subseteq\Theta$ و
+  $\Delta\subseteq\Xi$.) وهكذا تكون~$\Gamma \Sequent \Delta$ غير صالحة.
+  وبسلامة~\Log{G3c}، لا يوجد لها~!!{proof}.
+\end{proof}
+
+\begin{cor}
+النسق~\Log{G3c} كامل: إذا كانت~$\Gamma \Sequent \Delta$ صالحة، فإن
+$\Log{G3c}\Proves\Gamma \Sequent \Delta$.
+\end{cor}
+
+\begin{proof}
+  نثبت المقابل النقيض. افترض أن
+  $\Log{G3c}\Proves/\Gamma \Sequent \Delta$. لا بد أن تُجهض خوارزمية
+  البحث عن البرهان أو ألا تتوقف، إذ لا يوجد~!!{proof} يمكن العثور عليه.
+  وبموجب~\olref{cor:complete}، تكون~$\Gamma \Sequent \Delta$ غير صالحة.
+\end{proof}
+
+\end{document}

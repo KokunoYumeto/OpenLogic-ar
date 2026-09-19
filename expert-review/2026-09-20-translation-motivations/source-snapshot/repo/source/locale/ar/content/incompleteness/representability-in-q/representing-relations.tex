@@ -1,0 +1,64 @@
+% Part: incompleteness
+% Chapter: representability-in-q
+% Section: representing-relations
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{req}{rel}
+
+\olsection{تمثيل العلاقات}
+
+لنبيّن ما يعنيه أن تكون \emph{علاقة} ما قابلة للتمثيل.
+
+\begin{defn}
+\ollabel{defn:representing-relations} تكون العلاقة
+$R(x_0,\dots,x_k)$ على الأعداد الطبيعية {\em قابلة للتمثيل في
+$\Th{Q}$} إذا وُجدت صيغة $!A_R(x_0,\dots,x_k)$ بحيث كلما صدقت
+$R(n_0,\dots,n_k)$ أثبتت $\Th{Q}$
+$!A_R(\num{n_0},\dots,\num{n_k})$، وكلما كذبت
+$R(n_0,\dots,n_k)$ أثبتت $\Th{Q}$ الصيغة
+$\lnot !A_R(\num{n_0},\dots,\num{n_k})$.
+\end{defn}
+
+\begin{thm}
+\ollabel{thm:representing-rels} تكون العلاقة قابلة للتمثيل في
+$\Th{Q}$ إذا وفقط إذا كانت قابلة للحساب.
+\end{thm}
+
+\begin{proof}
+في الاتجاه المباشر، افترض أن الصيغة $!A_R(x_0,\dots,x_k)$ تمثل
+$R(x_0,\dots,x_k)$. وهذه خوارزمية لحساب $R$: عند إدخال
+$n_0$، \dots،~$n_k$، ابحث بالتوازي عن برهان
+$!A_R(\num{n_0},\dots,\num{n_k})$ وعن برهان
+$\lnot !A_R(\num{n_0},\dots,\num{n_k})$. وبحسب فرضنا لا بد أن
+يعثر البحث على أحدهما؛ فإن عثر على الأول فأجب «نعم»، وإلا فأجب «لا».
+
+وفي الاتجاه الآخر، افترض أن $R(x_0,\dots,x_k)$ قابلة للحساب. يعني
+هذا، بالتعريف، أن الدالة $\Char{R}(x_0,\dots,x_k)$ قابلة للحساب.
+وبحسب \olref[int]{thm:representable-iff-comp} تمثل $\Char{R}$ صيغة،
+ولتكن $!A_{\Char{R}}(x_0,\dots,x_k,y)$. ولتكن
+$!A_R(x_0,\dots,x_k)$ هي الصيغة
+$!A_{\Char{R}}(x_0,\dots,x_k,\num{1})$. عندئذ، لأي
+$n_0$، \dots،~$n_k$، إذا صدقت $R(n_0,\dots,n_k)$، كانت
+$\Char{R}(n_0,\dots,n_k)=1$، فتثبت $\Th{Q}$ الصيغة
+$!A_{\Char{R}}(\num{n_0},\dots,\num{n_k},\num{1})$، ومن ثم تثبت
+$\Th{Q}$ الصيغة $!A_R(\num{n_0},\dots,\num{n_k})$. ومن جهة أخرى، إذا كذبت
+$R(n_0,\dots,n_k)$، كانت $\Char{R}(n_0,\dots,n_k)=0$. وهذا يعني أن
+$\Th{Q}$ تثبت
+\[
+\lforall[y][(!A_{\Char{R}}(\num{n_0}, \dots, \num{n_k}, y) \lif y =
+  \num{0})].
+\]
+ولما كانت $\Th{Q}$ تثبت $\eq/[\num{0}][\num{1}]$، فإن $\Th{Q}$ تثبت
+$\lnot !A_{\Char{R}}(\num{n_0},\dots,\num{n_k},\num{1})$، ومن ثم
+تثبت $\lnot !A_R(\num{n_0},\dots,\num{n_k})$.
+\end{proof}
+
+\begin{prob}
+بيّن أنه إذا كانت $R$ قابلة للتمثيل في~$\Th{Q}$، كانت
+$\Char{R}$ قابلة للتمثيل أيضًا.
+\end{prob}
+
+\end{document}

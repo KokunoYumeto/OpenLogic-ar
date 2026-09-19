@@ -1,0 +1,162 @@
+% Part: normal-modal-logic
+% Chapter: syntax-and-semantics
+% Section: tautological-instances
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{syn}{tau}
+
+\olsection{حالات التحصيل المنطقي}
+
+\begin{explain}
+التحصيل المنطقي، في الصيغ الخالية من الجهات، ما يصدق تحت كل تعيين
+لقيم الصدق؛ ومن ثم يصدق في كل عالم من كل نموذج. أما ال!!{formula}s
+التي يرد فيها~$\Box$ و$\Diamond$، فلم نعرّف لها التحصيل المنطقي
+بهذا الطريق. فما حكم~$\Box p \lor \lnot \Box p$ مثلًا، وهي حالة
+من الثالث المرفوع؟ هنا نحتاج إلى \emph{حالة التحصيل المنطقي}:
+أي !!a{formula} تحصل بالإحلال في تحصيل منطقي غير موجهي.
+والمتوقع أن تكون كل حالة من هذا القبيل صالحة، لكن التوقع لا يغني
+عن البرهان الآتي.
+\end{explain}
+
+\begin{defn}
+  تكون ال!!{formula} الموجهية~$!B$ \emph{حالة تحصيل منطقي} إذا وفقط
+  إذا وُجد تحصيل منطقي خالٍ من الجهات~$!A$ ذو !!{propositional
+    variable}s~$p_1$، و\dots، و$p_n$، ووُجدت !!{formula}s~$!D_1$،
+  و\dots، و$!D_n$ بحيث
+  $!B \ident \SSubst{!A}{\subst{!D_1}{p_1},
+    \dots, \subst{!D_n}{p_n}}$.
+\end{defn}
+
+\begin{lem}\ollabel{lem:valid-taut}
+  افترض أن~$!A$ !!{formula} خالية من الجهات و!!{propositional
+  variable}sها هي~$p_1$، و\dots، و$p_n$، ولتكن~$!D_1$، و\dots،
+  و$!D_n$ !!{formula}s موجهية. عندئذ، لأي تعيين~$\pAssign{v}$ وأي
+  نموذج~$\mModel{M} = \tuple{W, R, V}$ وأي~$w \in W$ بحيث
+  $\pAssign{v}(p_i) = \True$ إذا وفقط إذا كان~$\mSat{M}{!D_i}[w]$،
+  يكون~$\pSat{v}{!A}$ إذا وفقط إذا كان
+  $\mSat{M}{\SSubst{!A}{\subst{!D_1}{p_1}, \dots,
+      \subst{!D_n}{p_n}}}[w]$.
+\end{lem}
+
+\begin{proof}
+  بالاستقراء على~$!A$.
+  % تصحيح لغوي (0416-N1): أُسند الحكم صراحة إلى كل واحد من الحدين.
+  \begin{enumerate}
+  \tagitem{prvFalse}{\indcase{!A}{\lfalse}{يصدق كل من
+      $\pSat/{v}{\lfalse}$ و$\mSat/{M}{\lfalse}[w]$}.}{}
+  \tagitem{prvTrue}{\indcase{!A}{\ltrue}{يصدق كل من
+      $\pSat{v}{\ltrue}$ و$\mSat{M}{\ltrue}[w]$}.}{}
+  \item \indcase{!A}{p_i}{%
+    \begin{align*}
+      \pSat{v}{p_i} \Leftrightarrow {} & \pAssign{v}(p_i) = \True \\
+      & \qquad \text{بتعريف~$\pSat{v}{p_i}$}\\
+      \Leftrightarrow {} & \mSat{M}{!D_i}[w] \\
+      &\qquad \text{بحسب الفرض}\\
+      \Leftrightarrow {} & \mSat{M}{\SSubst{p_i}{\subst{!D_1}{p_1}, \dots,
+          \subst{!D_n}{p_n}}}[w]\\
+      &\qquad \text{لأن~$\SSubst{p_i}{\subst{!D_1}{p_1}, \dots,
+          \subst{!D_n}{p_n}} \ident !D_i$}.
+      \end{align*}}
+  \tagitem{prvNot}{\indcase{!A}{\lnot !B}{%
+      \begin{align*}
+        \pSat{v}{\lnot !B} \Leftrightarrow {} & \pSat/{v}{!B}\\
+        &\qquad \text{بتعريف~$\pSat{v}{}$؛}\\
+        \Leftrightarrow {} & \mSat/{M}{\SSubst{!B}{\subst{!D_1}{p_1}, \dots,
+          \subst{!D_n}{p_n}}}[w]\\
+        &\qquad \text{بفرض الاستقراء}\\
+        \Leftrightarrow {} &
+        \mSat{M}{\SSubst{\lnot !B}{\subst{!D_1}{p_1}, \dots,
+          \subst{!D_n}{p_n}}}[w]\\
+        &\qquad \text{بتعريف~$\mSat{M}{}[w]$}.
+      \end{align*}}}{}
+  \tagitem{prvAnd}{\indcase{!A}{(!B \land !C)}{%
+      \begin{align*}
+        \pSat{v}{!B \land !C} \Leftrightarrow {} &
+        \pSat{v}{!B} \text{ و } \pSat{v}{!C}\\
+        &\qquad \text{بتعريف~$\pSat{v}{}$}\\
+        \Leftrightarrow {} &
+        \mSat{M}{\SSubst{!B}{\subst{!D_1}{p_1}, \dots,
+            \subst{!D_n}{p_n}}}[w] \text{ و } \\
+        & \mSat{M}{\SSubst{!C}{\subst{!D_1}{p_1}, \dots,
+          \subst{!D_n}{p_n}}}[w]\\
+        &\qquad \text{بفرض الاستقراء}\\
+        \Leftrightarrow{} &
+        \mSat{M}{\SSubst{(!B \land !C)}{\subst{!D_1}{p_1}, \dots,
+          \subst{!D_n}{p_n}}}[w]\\
+        &\qquad \text{بتعريف~$\mSat{M}{}[w]$}.
+      \end{align*}}}{}
+  \tagitem{prvOr}{\indcase{!A}{(!B \lor !C)}{%
+      \begin{align*}
+        \pSat{v}{!B \lor !C} \Leftrightarrow{} &
+        \pSat{v}{!B} \text{ أو } \pSat{v}{!C}\\
+        &\qquad \text{بتعريف~$\pSat{v}{}$؛}\\
+        \Leftrightarrow{} & \mSat{M}{\SSubst{!B}{\subst{!D_1}{p_1}, \dots,
+            \subst{!D_n}{p_n}}}[w] \text{ أو }\\
+        & \mSat{M}{\SSubst{!C}{\subst{!D_1}{p_1}, \dots,
+          \subst{!D_n}{p_n}}}[w]\\
+        &\qquad \text{بفرض الاستقراء}\\
+        \Leftrightarrow{} &
+        \mSat{M}{\SSubst{(!B \lor !C)}{\subst{!D_1}{p_1}, \dots,
+          \subst{!D_n}{p_n}}}[w]\\
+        &\qquad \text{بتعريف~$\mSat{M}{}[w]$}.
+      \end{align*}}}{}
+  \tagitem{prvIf}{\indcase{!A}{(!B \lif !C)}{%
+      \begin{align*}
+        \pSat{v}{!B \lif !C} \Leftrightarrow{} &
+        \pSat/{v}{!B} \text{ أو } \pSat{v}{!C}\\
+        &\qquad \text{بتعريف~$\pSat{v}{}$}\\
+        \Leftrightarrow{} &
+        \mSat/{M}{\SSubst{!B}{\subst{!D_1}{p_1}, \dots,
+            \subst{!D_n}{p_n}}}[w] \text{ أو }\\
+        & \mSat{M}{\SSubst{!C}{\subst{!D_1}{p_1}, \dots,
+          \subst{!D_n}{p_n}}}[w]\\
+        &\qquad \text{بفرض الاستقراء}\\
+        \Leftrightarrow{} &
+        \mSat{M}{\SSubst{(!B \lif !C)}{\subst{!D_1}{p_1}, \dots,
+          \subst{!D_n}{p_n}}}[w]\\
+        &\qquad \text{بتعريف~$\mSat{M}{}[w]$}.
+      \end{align*}}}{}
+  \tagitem{prvIff}{\indcase{!A}{(!B \liff !C)}{%
+      \begin{align*}
+        \pSat{v}{!B \liff !C} \Leftrightarrow {} &
+        \text{إما } \pSat{v}{!B} \text{ و } \pSat{v}{!C}\\
+        & \text{أو } \pSat/{v}{!B} \text{ و } \pSat/{v}{!C}\\
+        &\qquad \text{بتعريف~$\pSat{v}{}$}\\
+        \Leftrightarrow {} &
+        \text{إما } \mSat{M}{\SSubst{!B}{\subst{!D_1}{p_1}, \dots,
+            \subst{!D_n}{p_n}}}[w] \text{ و }\\
+        & \qquad \mSat{M}{\SSubst{!C}{\subst{!D_1}{p_1}, \dots,
+          \subst{!D_n}{p_n}}}[w]\\
+        &  \text{ أو } \mSat/{M}{\SSubst{!B}{\subst{!D_1}{p_1}, \dots,
+            \subst{!D_n}{p_n}}}[w] \text{ و }\\
+        & \qquad \mSat/{M}{\SSubst{!C}{\subst{!D_1}{p_1}, \dots,
+          \subst{!D_n}{p_n}}}[w]\\
+        &\qquad\text{بفرض الاستقراء}\\
+        \Leftrightarrow {} &
+        \mSat{M}{\SSubst{(!B \liff !C)}{\subst{!D_1}{p_1}, \dots,
+          \subst{!D_n}{p_n}}}[w]\\
+        &\qquad \text{بتعريف~$\mSat{M}{}[w]$}.
+      \end{align*}}}{}
+  \end{enumerate}
+  \end{proof}
+
+\begin{prop}\ollabel{prop:valid-taut}
+  كل حالات التحصيل المنطقي صالحة.
+\end{prop}
+
+\begin{proof}
+  نسلك طريق المعاكس النقيض. ولنفترض أنه في نموذج ما~$\mModel{M}$
+  وعالم~$w$ تتحقق
+  $\mSat/{M}{\SSubst{!A}{\subst{!D_1}{p_1}, \dots,
+  \subst{!D_n}{p_n}}}[w]$.
+  ونختار التعيين~$\pAssign{v}$ بإيجاب~$\pAssign{v}(p_i) = \True$
+  متى وفقط متى كان~$\mSat{M}{!D_i}[w]$؛ أما~$\pAssign{v}$
+  فليأخذ قيمًا كيف اتفق عند~$q \notin \{p_1, \dots, p_n \}$.
+  فتفيد~\olref{lem:valid-taut} أن~$\pSat/{v}{!A}$،
+  وبذلك لا تكون~$!A$ تحصيلًا منطقيًا.
+\end{proof}
+
+\end{document}

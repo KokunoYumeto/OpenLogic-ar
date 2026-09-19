@@ -1,0 +1,92 @@
+% Part: first-order-logic
+% Chapter: completeness
+% Section: lindenbaums-lemma
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{com}{lin}}
+      {\olfileid{pl}{com}{lin}}
+
+\olsection{لمّة ليندنبوم}
+
+\begin{explain}
+المقصود بهذه اللمّة أن كل مجموعة متسقة من ال!!{sentence}s لها امتداد
+من الجمل يجمع إلى الاتساق كونه !!{complete}. وطريق البرهان أن نزيد
+!!{sentence} واحدة في كل مرحلة، على شرط ألا يزول الاتساق. نرتب
+الزيادات بحيث كل $!A$ يلحق إما $!A$ وإما $\lnot !A$ عند مرحلة ما.
+فإذا أخذنا اتحاد المراحل كلها، وجدنا فيه $!A$ أو نفيها~$\lnot !A$،
+فكان كاملًا. ويبقى متسقًا لأن كل مرحلة منه مصونة من التناقض.
+\end{explain}
+
+\begin{lem}[لمّة ليندنبوم]
+\ollabel{lem:lindenbaum} يمكن توسيع كل مجموعة متسقة~$\Gamma$ في
+لغة~$\Lang{L}$ إلى مجموعة !!a{complete} ومتسقة~$\Gamma^*$.
+\end{lem}
+
+\begin{proof}
+ليكن الفرض اتساق $\Gamma$. نرتب $!A_0$ و$!A_1$ و\dots{} في قائمة
+تستوعب ال!!{sentence}s في~$\Lang L$، ثم نضع $\Gamma_0 = \Gamma$، و
+\[
+\Gamma_{n+1} =
+\begin{cases}
+\Gamma_n \cup \{ !A_n \} & \textrm{متى كانت $\Gamma_n \cup \{!A_n\}$
+  متسقة؛} \\
+\Gamma_n \cup \{ \lnot !A_n \} & \textrm{وإلا.}
+\end{cases}
+\]
+ولتكن $\Gamma^* = \bigcup_{n \geq 0} \Gamma_n$.
+
+نثبت استقراءً اتساق كل $\Gamma_n$. فأما $\Gamma_0$ فمتسقة بحكم
+تعريفها. وإذا اخترنا $\Gamma_{n+1} = \Gamma_n \cup \{!A_n\}$، فإنما
+اخترناها لاتساقها. وإلا كان $\Gamma_{n+1} = \Gamma_n \cup \{\lnot !A_n\}$،
+فلنثبت اتساق $\Gamma_n \cup \{\lnot !A_n\}$. لو لم تكن متسقة، لكانت
+\emph{كل من} $\Gamma_n \cup \{!A_n\}$ و$\Gamma_n \cup \{\lnot !A_n\}$
+غير متسقة؛ فيلزم عدم اتساق $\Gamma_n$ بمقتضى
+\iftag{FOL}{%
+  \tagrefs{prfAX/{fol:axd:prv:prop:provability-exhaustive},
+    prfSC/{fol:seq:prv:prop:provability-exhaustive},
+    prfND/{fol:ntd:prv:prop:provability-exhaustive},
+    prfTab/{fol:tab:prv:prop:provability-exhaustive}}}{%
+  \tagrefs{prfAX/{pl:axd:prv:prop:provability-exhaustive},
+    prfSC/{pl:seq:prv:prop:provability-exhaustive},
+    prfND/{pl:ntd:prv:prop:provability-exhaustive},
+    prfTab/{pl:tab:prv:prop:provability-exhaustive}}},
+خلافًا لفرض الاستقراء.
+
+ونثبت أيضًا أنه لكل~$n$ ولكل $i < n$، يكون $\Gamma_i \subseteq \Gamma_n$،
+باستقراء على~$n$. ففي حالة $n=0$ ليس ثمة $i < 0$، فتصدق الدعوى
+خلوًا. وافترض الآن صحتها عند~$n$؛ نريد أن $i < n+1$ يقتضي
+$\Gamma_i \subseteq \Gamma_{n+1}$. وبحسب البناء إما
+$\Gamma_{n+1} = \Gamma_n \cup \{!A_n\}$ وإما $= \Gamma_n \cup \{\lnot
+!A_n\}$؛ فيكون $\Gamma_n \subseteq \Gamma_{n+1}$. ومتى كان $i < n+1$،
+كان $\Gamma_i \subseteq \Gamma_n$: بفرض الاستقراء إن كان $i < n$،
+وبالانعكاسية $\Gamma_n \subseteq \Gamma_n$ إن كان $i = n$. ثم تفيد
+تعدية~$\subseteq$ أن $\Gamma_i \subseteq \Gamma_{n+1}$.
+
+بهذا يتبين اتساق $\Gamma^*$. خذ مجموعة منتهية
+$\Gamma' \subseteq \Gamma^*$. فإن كان $\Gamma'=\emptyset$، فالاتساق
+ظاهر. وإلا فكل $!B \in \Gamma'$ واقع في~$\Gamma_i$ عند فهرس~$i$.
+اختر $n$ أكبر هذه الفهارس. وحيث إن
+$\Gamma_i \subseteq \Gamma_n$ متى كان $i \le n$، فكل
+$!B \in \Gamma'$ يحقق $!B \in \Gamma_n$، فيكون
+$\Gamma' \subseteq \Gamma_n$ مع اتساق~$\Gamma_n$. فثبت اتساق كل
+مجموعة منتهية $\Gamma' \subseteq \Gamma^*$. وتفيد \iftag{FOL}{%
+  \tagrefs{prfAX/{fol:axd:ptn:prop:proves-compact},
+    prfSC/{fol:seq:ptn:prop:proves-compact},
+    prfND/{fol:ntd:ptn:prop:proves-compact},
+    prfTab/{fol:tab:ptn:prop:proves-compact}}}{%
+  \tagrefs{prfAX/{pl:axd:ptn:prop:proves-compact},
+    prfSC/{pl:seq:ptn:prop:proves-compact},
+    prfND/{pl:ntd:ptn:prop:proves-compact},
+    prfTab/{pl:tab:ptn:prop:proves-compact}}}، تكون $\Gamma^*$ متسقة.
+
+وأما الاكتمال، فكل !!{sentence} من $\Frm[L]$ لها موضع في قائمة بناء
+~$\Gamma^*$. فإن كان $!A_n \notin \Gamma^*$، لم يمنع إلحاقها إلا
+عدم اتساق $\Gamma_n \cup \{!A_n\}$؛ وحينئذ قد ألحقنا
+$\lnot !A_n \in \Gamma^*$. فالمجموعة $\Gamma^*$ !!{complete}.
+\end{proof}
+
+\end{document}

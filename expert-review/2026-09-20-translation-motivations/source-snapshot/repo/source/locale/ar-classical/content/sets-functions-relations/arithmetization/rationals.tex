@@ -1,0 +1,58 @@
+% Part: sets-functions-relations
+% Chapter: arithmetization
+% Section: rationals
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid[ar]{sfr}{arith}{rat}
+\olsection{من $\Int$ إلى $\Rat$}
+
+قد رأينا بناء الأعداد الصحيحة من الأعداد الطبيعية بأدوات من نظرية المجموعات الساذجة. ونبني النسبية من الصحيحة على نهج قريب منه. وأصل النظر ملاحظتان:
+\begin{enumerate}
+\item كل عدد نسبي يقبل الصورة $\nicefrac{i}{j}$، حيث $i$ و$j$ صحيحان، و$j$ ليس صفرًا.
+\item والمعلومات التي يتضمنها $\nicefrac{i}{j}$ يمكن إيداعها في الزوج المرتب $\tuple{ i, j}$.
+\end{enumerate}
+فيتبادر أن نجعل الأعداد النسبية \emph{هي} الأزواج المرتبة من $\Int \times (\Int \setminus \{0_\Int\})$. غير أن هذا لا يستقيم وحده، كما لم يستقم نظيره آنفًا؛ إذ نريد $\nicefrac{3}{2} = \nicefrac{6}{4}$، مع أن $\tuple{ 3, 2}\neq \tuple{ 6,
+4}$. والمطلب على وجه العموم هو
+\[
+	\nicefrac{a}{b} = \nicefrac{c}{d} \text{ إذا وفقط إذا } a \times d = b \times c
+\]
+فنضع لذلك {علاقة تكافؤ} على $\Int \times
+(\Int \setminus \{0_\Int\})$ بالحد
+\[
+	\tuple{ a, b }\Ratequiv \tuple{ c, d} \text{ إذا وفقط إذا }a \times d = b \times c
+\]
+ويجب تحقيق كونها علاقة تكافؤ. وبرهانه قريب من برهان $\Intequiv$، فنتركه تمرينًا.
+\begin{prob}
+بين أن $\Ratequiv$ من علاقات التكافؤ.
+\end{prob}
+وبثبوت ذلك يصح التعريف الآتي:
+\begin{defn}
+الأعداد النسبية فئات أزواج الأعداد الصحيحة تحت علاقة التكافؤ $\Ratequiv$، بشرط ألا يكون الحد الثاني في الزوج صفرًا. أي إن $\Rat =
+\equivclass{(\Int \times (\Int\setminus \{0_\Int\}))}{\Ratequiv}$.
+\end{defn}
+
+ثم نعين العمليات الأساسية، كما صنعنا في الصحيحة. فإذا رمزنا بـ$\equivrep{i,j}{\Ratequiv}$ إلى فئة التكافؤ تحت $\Ratequiv$ التي تضم $\tuple{i, j}$ بوصفه !!a{element} منها، كانت حدود العمليات:
+\begin{align*}
+	\equivrep{a, b}{\Ratequiv} + \equivrep{c, d}{\Ratequiv} &= \equivrep{ad + bc,  bd}{\Ratequiv}\\
+	\equivrep{a, b}{\Ratequiv} \times \equivrep{c, d}{\Ratequiv} &= \equivrep{a  c, b d}{\Ratequiv}.
+\intertext{لتعريف $r \leq s$ على هذه الأعداد النسبية، نستعمل حقيقة أن
+$r \le s$ إذا وفقط إذا كان $s - r$ غير سالب، أي إن $s - r$ يمكن كتابته
+على صورة $\nicefrac{i}{j}$ حيث يكون $i$ غير سالب ويكون $j$~موجبًا:}
+	\equivrep{a, b}{\Ratequiv} \leq \equivrep{c, d}{\Ratequiv} &\text{ إذا وفقط إذا }
+	\equivrep{c, d}{\Ratequiv} - \equivrep{a, b}{\Ratequiv} =
+	\equivrep{i_\Int, j_\Int}{\Ratequiv}
+\end{align*}
+حيث يوجد $i \in \Nat$ و$0 \neq j \in \Nat$ يحققان ذلك.
+
+ولا بد بعد الوضع من البرهان على أن التعريفات تجري \emph{كما هو مطلوب}؛ وتفصيله في \olref[check]{sec}، حيث نثبت أنها تفي بالغرض. ونحتاج أخيرًا إلى معاملة الأعداد الصحيحة \emph{معاملة} النسبية، فنضع لكل $i \in \Int$ العدد $i_\Rat =
+\equivrep{i, 1_\Int}{\Ratequiv}$. وسيأتي في \olref[check]{sec} أيضًا تحقق سلامة هذا الوضع.
+
+\begin{prob}
+حقق $(i + j)_\Rat = i_\Rat+ j_\Rat$، و$(i \times j)_\Rat =
+i_\Rat \times j_\Rat$، و$i \leq j \liff i_\Rat \leq j_\Rat$، مهما يكن $i, j \in \Int$.
+\end{prob}
+
+\end{document}

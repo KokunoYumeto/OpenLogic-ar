@@ -1,0 +1,83 @@
+% Part: computability
+% Chapter: recursive-functions
+% Section: primes
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{rec}{pri}
+\olsection{الأعداد الأولية}
+
+بالتكميم المحدود والتصغير المحدود يتيسر لنا إثبات العودية البدائية لكثير من الدوال
+والعلائق المألوفة. فلننظر، مثلًا، في العلاقة «${\OLId{latin-ordinary}{x}}$ يقسم
+${\OLId{latin-ordinary}{y}}$»، التي تكتب ${\OLId{latin-ordinary}{x}}\mid {\OLId{latin-ordinary}{y}}$. ومعنى ${\OLId{latin-ordinary}{x}}\mid {\OLId{latin-ordinary}{y}}$ أن تقبل قسمة
+${\OLId{latin-ordinary}{y}}$ على~${\OLId{latin-ordinary}{x}}$ دون باق، أي أن يكون ${\OLId{latin-ordinary}{y}}$ مضاعفًا صحيحًا لـ~${\OLId{latin-ordinary}{x}}$. (وإذا لم
+تصدق، أي إذا كان باقي قسمة ${\OLId{latin-ordinary}{y}}$ على ${\OLId{latin-ordinary}{x}}$ أكبر من~${\OLMathNumeral{0}}$، كتبنا
+${\OLId{latin-ordinary}{x}}\nmid {\OLId{latin-ordinary}{y}}$.) وبعبارة أخرى، ${\OLId{latin-ordinary}{x}}\mid {\OLId{latin-ordinary}{y}}$ إذا وفقط إذا وجد~${\OLId{latin-ordinary}{z}}$ بحيث
+${\OLId{latin-ordinary}{x}}\cdot {\OLId{latin-ordinary}{z}}={\OLId{latin-ordinary}{y}}$. ومتى وجد شاهد ${\OLId{latin-ordinary}{z}}$ لهذا، أمكن اختيار شاهد يكون
+$\leq {\OLId{latin-ordinary}{y}}$؛ حتى في حالة كون العددين صفرًا نختار الصفر شاهدًا. ومن ثم يصدق ${\OLId{latin-ordinary}{x}}\mid {\OLId{latin-ordinary}{y}}$ إذا وفقط إذا وجد ${\OLId{latin-ordinary}{z}}\le {\OLId{latin-ordinary}{y}}$ بحيث
+${\OLId{latin-ordinary}{x}}\cdot {\OLId{latin-ordinary}{z}}={\OLId{latin-ordinary}{y}}$. فتعرّف العلاقة ${\OLId{latin-ordinary}{x}}\mid {\OLId{latin-ordinary}{y}}$ بالتكميم الوجودي
+المحدود من المساواة والضرب على الوجه الآتي:
+\[
+{\OLId{latin-ordinary}{x}} \mid {\OLId{latin-ordinary}{y}} \defiff \bexists{{\OLId{latin-ordinary}{z}} \leq {\OLId{latin-ordinary}{y}}}{({\OLId{latin-ordinary}{x}} \cdot {\OLId{latin-ordinary}{z}}) = {\OLId{latin-ordinary}{y}}}.
+\]
+فتثبت بذلك العودية البدائية لـ${\OLId{latin-ordinary}{x}}\mid {\OLId{latin-ordinary}{y}}$.
+
+العدد الطبيعي~${\OLId{latin-ordinary}{x}}$ \emph{أولي} متى كان غير ${\OLMathNumeral{0}}$ وغير ${\OLMathNumeral{1}}$، ولم
+يقبل القسمة إلا على ${\OLMathNumeral{1}}$ ونفسه. فشرط القواسم في العدد
+الأولي أن ${\OLId{latin-ordinary}{y}}\mid {\OLId{latin-ordinary}{x}}$ يستلزم إما ${\OLId{latin-ordinary}{y}}={\OLMathNumeral{1}}$ وإما~${\OLId{latin-ordinary}{y}}={\OLId{latin-ordinary}{x}}$. فإذا استبعدنا الصفر والواحد وأردنا
+اختبار أولية ${\OLId{latin-ordinary}{x}}$، كفانا فحص ${\OLId{latin-ordinary}{y}}\mid {\OLId{latin-ordinary}{x}}$ لكل ${\OLId{latin-ordinary}{y}}\le {\OLId{latin-ordinary}{x}}$، لأن
+${\OLId{latin-ordinary}{y}}\nmid {\OLId{latin-ordinary}{x}}$ تلقائيًا إذا كان ${\OLId{latin-ordinary}{y}}>{\OLId{latin-ordinary}{x}}$. وعليه يكون تعريف العلاقة
+$\fn{Prime}({\OLId{latin-ordinary}{x}})$، التي تصدق إذا وفقط إذا كان ${\OLId{latin-ordinary}{x}}$ أوليًا، بـ
+\[
+\fn{Prime}({\OLId{latin-ordinary}{x}}) \defiff {\OLId{latin-ordinary}{x}} \geq {\OLMathNumeral{2}} \land \bforall{{\OLId{latin-ordinary}{y}} \leq {\OLId{latin-ordinary}{x}}}{({\OLId{latin-ordinary}{y}} \mid {\OLId{latin-ordinary}{x}} \lif {\OLId{latin-ordinary}{y}}
+  = {\OLMathNumeral{1}} \lor {\OLId{latin-ordinary}{y}} = {\OLId{latin-ordinary}{x}})}
+\]
+فتكون عودية بدائية.
+
+الأعداد الأولية هي ${\OLMathNumeral{2}}$ و${\OLMathNumeral{3}}$ و${\OLMathNumeral{5}}$ و${\OLMathNumeral{7}}$ و${\OLMathNumeral{11}}$، وهكذا. ولنسمّ الدالة
+${\OLId{latin-ordinary}{p}}({\OLId{latin-ordinary}{x}})$ التي تعطي العدد الأولي ذا الرتبة ${\OLId{latin-ordinary}{x}}$ في هذه المتتالية؛ أي
+${\OLId{latin-ordinary}{p}}({\OLMathNumeral{0}})={\OLMathNumeral{2}}$ و${\OLId{latin-ordinary}{p}}({\OLMathNumeral{1}})={\OLMathNumeral{3}}$ و${\OLId{latin-ordinary}{p}}({\OLMathNumeral{2}})={\OLMathNumeral{5}}$، وهكذا. (وتيسيرًا للكتابة سنكتب غالبًا
+${\OLId{latin-ordinary}{p}}_{\OLId{latin-ordinary}{x}}$ بدلًا من ${\OLId{latin-ordinary}{p}}({\OLId{latin-ordinary}{x}})$؛ فـ${\OLId{latin-ordinary}{p}}_{\OLMathNumeral{0}}={\OLMathNumeral{2}}$ و${\OLId{latin-ordinary}{p}}_{\OLMathNumeral{1}}={\OLMathNumeral{3}}$، وهكذا.)
+
+فإن حصلت لنا دالة $\fn{nextPrime(x)}$ تعطي أول عدد أولي يجاوز~${\OLId{latin-ordinary}{x}}$،
+سهل تعريف ${\OLId{latin-ordinary}{p}}$ بالعودية البدائية:
+\begin{align*}
+  {\OLId{latin-ordinary}{p}}({\OLMathNumeral{0}}) & = {\OLMathNumeral{2}}\\
+  {\OLId{latin-ordinary}{p}}({\OLId{latin-ordinary}{x}}+{\OLMathNumeral{1}}) & = \fn{nextPrime}({\OLId{latin-ordinary}{p}}({\OLId{latin-ordinary}{x}}))
+\end{align*}
+وقيمة $\fn{nextPrime}({\OLId{latin-ordinary}{x}})$ هي أصغر ${\OLId{latin-ordinary}{y}}$ يجمع الشرطين: ${\OLId{latin-ordinary}{y}}>{\OLId{latin-ordinary}{x}}$ وكون ${\OLId{latin-ordinary}{y}}$ أوليًا؛ فلا يعسر
+طلبها بالبحث غير المحدود. لكننا نستغني عن ذلك، ونعرفها بالتصغير
+المحدود، اعتمادًا على نتيجة لإقليدس: بين ${\OLId{latin-ordinary}{x}}$ و
+$\fact{{\OLId{latin-ordinary}{x}}}+{\OLMathNumeral{1}}$ دائمًا عدد أولي.
+\[
+  \fn{nextPrime(x)} =
+  \bmin{{\OLId{latin-ordinary}{y}} \leq \fact{{\OLId{latin-ordinary}{x}}}+{\OLMathNumeral{1}}}{({\OLId{latin-ordinary}{y}} > {\OLId{latin-ordinary}{x}} \land \fn{Prime}({\OLId{latin-ordinary}{y}}))}.
+\]
+فتكون $\fn{nextPrime}({\OLId{latin-ordinary}{x}})$، ويتبعها ${\OLId{latin-ordinary}{p}}({\OLId{latin-ordinary}{x}})$، عوديتين بدائيتين،
+وهو أقوى من مجرد قابليتهما للحساب.
+
+(وبرهان نتيجة إقليدس موجز: إذا كان ${\OLId{latin-ordinary}{x}}<{\OLMathNumeral{2}}$، فالعدد الأولي~${\OLMathNumeral{2}}$ أكبر
+من~${\OLId{latin-ordinary}{x}}$ ولا يجاوز $\fact{{\OLId{latin-ordinary}{x}}}+{\OLMathNumeral{1}}$. وأما إذا كان ${\OLId{latin-ordinary}{x}}\geq{\OLMathNumeral{2}}$، فليكن ${\OLId{latin-ordinary}{p}}_{\OLId{latin-ordinary}{n}}$
+أكبر عدد أولي $\le {\OLId{latin-ordinary}{x}}$، ولنأخذ الجداء
+${\OLId{latin-ordinary}{p}}={\OLId{latin-ordinary}{p}}_{\OLMathNumeral{0}}\cdot {\OLId{latin-ordinary}{p}}_{\OLMathNumeral{1}}\cdot\dots\cdot {\OLId{latin-ordinary}{p}}_{\OLId{latin-ordinary}{n}}$ لجميع الأعداد الأولية~$\le {\OLId{latin-ordinary}{x}}$.
+إما أن يكون ${\OLId{latin-ordinary}{p}}+{\OLMathNumeral{1}}$ أوليًا، وإما أن يوجد عدد أولي بين ${\OLId{latin-ordinary}{x}}$ و~${\OLId{latin-ordinary}{p}}+{\OLMathNumeral{1}}$.
+وبيانه أنه إن لم يكن ${\OLId{latin-ordinary}{p}}+{\OLMathNumeral{1}}$ أوليًا، فلا بد من عدد أولي ${\OLId{latin-ordinary}{q}}\mid {\OLId{latin-ordinary}{p}}+{\OLMathNumeral{1}}$
+بحيث ${\OLId{latin-ordinary}{q}}<{\OLId{latin-ordinary}{p}}+{\OLMathNumeral{1}}$. ولا يقسم أي عدد أولي $\le {\OLId{latin-ordinary}{x}}$ العدد ${\OLId{latin-ordinary}{p}}+{\OLMathNumeral{1}}$. (فبحسب
+تعريف~${\OLId{latin-ordinary}{p}}$، يقسم كل عدد أولي ${\OLId{latin-ordinary}{p}}_{\OLId{latin-ordinary}{i}}\le {\OLId{latin-ordinary}{x}}$ العدد~${\OLId{latin-ordinary}{p}}$ بلا باق. ولذلك تكون
+قسمة ${\OLId{latin-ordinary}{p}}+{\OLMathNumeral{1}}$ على كل ${\OLId{latin-ordinary}{p}}_{\OLId{latin-ordinary}{i}}\le {\OLId{latin-ordinary}{x}}$ ذات باق~${\OLMathNumeral{1}}$، ومن ثم
+${\OLId{latin-ordinary}{p}}_{\OLId{latin-ordinary}{i}}\nmid {\OLId{latin-ordinary}{p}}+{\OLMathNumeral{1}}$.) وهكذا يكون ${\OLId{latin-ordinary}{q}}$ عددًا أوليًا أكبر من~${\OLId{latin-ordinary}{x}}$ وأصغر من
+${\OLId{latin-ordinary}{p}}+{\OLMathNumeral{1}}$. ولأن ${\OLId{latin-ordinary}{p}}\le\fact{{\OLId{latin-ordinary}{x}}}$، يوجد عدد أولي أكبر من~${\OLId{latin-ordinary}{x}}$ وأصغر من أو
+مساو لـ$\fact{{\OLId{latin-ordinary}{x}}}+{\OLMathNumeral{1}}$.)
+
+% تصحيح مصدر (C219-01): فُصلت حالتا x=0 وx=1 قبل اختيار أكبر أولي لا يجاوز x.
+\textbf{تنبيه تصحيحي على الأصل.} فُصلت حالتا ${\OLId{latin-ordinary}{x}}={\OLMathNumeral{0}}$ و${\OLId{latin-ordinary}{x}}={\OLMathNumeral{1}}$؛ إذ لا
+يتأتى فيهما اختيار «أكبر عدد أولي لا يجاوز~${\OLId{latin-ordinary}{x}}$»، ويشهد لهما العدد~${\OLMathNumeral{2}}$
+مباشرة.
+
+\begin{prob}
+ضع تعريفًا للقسمة الصحيحة ${\OLId{latin-ordinary}{d}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})$ بالتصغير المحدود.
+\end{prob}
+
+\end{document}

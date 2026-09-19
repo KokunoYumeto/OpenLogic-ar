@@ -1,0 +1,105 @@
+% Part: first-order-logic
+% Chapter: sequent-calculus
+% Section: proving-things-quant
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{seq}{prq}
+
+\olsection{\usetoken{P}{derivation} ذات المكممات}
+
+\begin{ex}
+أعط $\Log{LK}$-!!{derivation} للتتابعية
+$\lexists[x][\lnot !A(x)] \Sequent \lnot \lforall[x][!A(x)]$.
+
+عند التعامل مع المكممات، يجب أن نتأكد من عدم انتهاك شرط المتغير
+المميَّز، وقد يقتضي ذلك أحيانًا تجريب ترتيب تنفيذ بعض الاستدلالات.
+ومن المفيد عمومًا أن نحاول معالجة القواعد الخاضعة لشرط المتغير
+المميَّز أولًا (إذ ستقع في موضع أدنى من البرهان المكتمل). ومن المستحسن
+أيضًا أن ننظر إلى الأمام ونحاول تخمين صورة التتابعية الابتدائية. وفي
+حالتنا لا بد أن تكون شبيهةً بـ~$!A(a) \Sequent !A(a)$. وهذا يعني أننا
+حين «نعكس» قواعد المكممات، سنضطر إلى اختيار الحد نفسه---وسنسميه
+$a$---لكل من قاعدتي~$\lforall$ و$\lexists$. ولو اخترنا حدين مختلفين
+للقاعدتين لانتهينا إلى شيء مثل~$!A(a) \Sequent !A(b)$، وهو غير قابل
+للاشتقاق بالطبع.
+
+نبدأ كالمعتاد، فنكتب
+\begin{prooftree}
+\AxiomC{}
+\UnaryInf$\lexists[x][\lnot !A(x)] \fCenter \lnot \lforall[x][!A(x)]$
+\end{prooftree}
+يمكننا تنفيذ القاعدة~\LeftR{\exists} أو القاعدة~\RightR{\lnot}.
+ولأن~\LeftR{\exists} خاضعة لشرط المتغير المميَّز، فمن المستحسن
+معالجتها عاجلًا لا آجلًا، ولذلك ننفذها أولًا.
+\begin{prooftree}
+\AxiomC{}
+\UnaryInf$ \lnot !A(a) \fCenter \lnot \lforall[x][!A(x)]$
+\RightLabel{\LeftR{\lexists}}
+\UnaryInf$ \lexists[x][\lnot !A(x)] \fCenter \lnot \lforall[x][!A(x)]$
+\end{prooftree}
+وبتطبيق قاعدتي~\LeftR{\lnot} و\RightR{\lnot} عكسيًا نحصل على
+\begin{prooftree}
+\AxiomC{}
+\UnaryInf$\lforall[x][!A(x)] \fCenter !A(a)$
+\RightLabel{\LeftR{\lnot}}
+\UnaryInf$\lnot !A(a), \lforall[x][!A(x)] \fCenter $
+\RightLabel{\LeftR{\Exchange}}
+\UnaryInf$\lforall[x][!A(x)], \lnot !A(a) \fCenter $
+\RightLabel{\RightR{\lnot}}
+\UnaryInf$ \lnot !A(a) \fCenter \lnot \lforall[x] !A(x)$
+\RightLabel{\LeftR{\lexists}}
+\UnaryInf$ \lexists[x] \lnot !A(x) \fCenter \lnot \lforall[x] !A(x)$
+\end{prooftree}
+ليس أمامنا عند هذه النقطة إلا تنفيذ القاعدة~\LeftR{\forall}. ولأن
+هذه القاعدة لا تخضع لقيد المتغير المميَّز، فلا مانع من ذلك. وتذكر
+أننا نريد الحصول على تتابعية ابتدائية (من الصورة
+$!A(a) \Sequent !A(a)$)، ولذلك ينبغي أن نختار~$a$ وسيطةً لـ~$!A$ عند
+تطبيق القاعدة.
+\begin{prooftree}
+\Axiom$!A(a) \fCenter !A(a)$
+\RightLabel{\LeftR{\lforall}}
+\UnaryInf$\lforall[x][!A(x)] \fCenter !A(a)$
+\RightLabel{\LeftR{\lnot}}
+\UnaryInf$\lnot !A(a), \lforall[x][!A(x)] \fCenter $
+\RightLabel{\LeftR{\Exchange}}
+\UnaryInf$\lforall[x][!A(x)], \lnot !A(a) \fCenter $
+\RightLabel{\RightR{\lnot}}
+\UnaryInf$ \lnot !A(a) \fCenter \lnot \lforall[x][!A(x)]$
+\RightLabel{\LeftR{\lexists}}
+\UnaryInf$ \lexists[x][ \lnot !A(x)] \fCenter \lnot \lforall[x][!A(x)]$
+\end{prooftree}
+ومن المهم، ولا سيما عند التعامل مع المكممات، أن نتحقق مرة أخرى عند
+هذه النقطة من أن شرط المتغير المميَّز لم يُنتهك. ولأن القاعدة الوحيدة
+التي طبقناها وكانت خاضعة لهذا الشرط هي~\LeftR{\exists}، ولأن المتغير
+المميَّز~$a$ لا يرد في تتابعيتها السفلى (التتابعية النهائية)، فهذا
+!!{derivation} صحيح.
+\end{ex}
+
+\begin{prob}
+أعط !!{derivation}s للتتابعيات الآتية:
+\begin{enumerate}
+\item $\Sequent (\lforall[x][!A(x)] \land \lforall[y][!B(y)]) \lif
+\lforall[z][(!A(z) \land !B(z))]$.
+\item $\Sequent (\lexists[x][!A(x)] \lor \lexists[y][!B(y)]) \lif
+\lexists[z][(!A(z) \lor !B(z))]$.
+\item $\lforall[x][(!A(x) \lif !B)] \Sequent \lexists[y][!A(y)] \lif !B$.
+\item $\lforall[x][\lnot !A(x)] \Sequent \lnot\lexists[x][!A(x)]$.
+\item $\Sequent \lnot\lexists[x][!A(x)] \lif \lforall[x][\lnot !A(x)]$.
+\item $\Sequent \lnot\lexists[x][\lforall[y][((!A(x,y) \lif \lnot
+!A(y,y)) \land (\lnot !A(y,y) \lif !A(x,y)))]]$.
+\end{enumerate}
+\end{prob}
+
+\begin{prob}
+أعط !!{derivation}s للتتابعيات الآتية:
+\begin{enumerate}
+\item $\Sequent \lnot\lforall[x][!A(x)] \lif \lexists[x][\lnot!A(x)]$.
+\item $(\lforall[x][!A(x)] \lif !B) \Sequent \lexists[y][(!A(y) \lif !B)]$.
+\item $\Sequent \lexists[x][(!A(x) \lif \lforall[y][!A(y)])]$.
+\end{enumerate}
+(تتطلب هذه كلها القاعدة~$\RightR{\Contraction}$.)
+\end{prob}
+
+\end{document}

@@ -1,0 +1,87 @@
+% Part: first-order-logic
+% Chapter: axiomatic-deduction
+% Section: axioms-rules-quantifiers
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{axd}{qua}
+
+\olsection{بديهيات المكمّمات وقواعدها}
+
+\begin{defn}[بديهيات المكمّمات]
+\emph{بديهيات} المكمّمات هي كل ما يقع تحت الصورتين الآتيتين:
+\begin{align}
+\ollabel{ax:q1} & \lforall[{\OLId{latin-ordinary}{x}}][!B] \lif !B({\OLId{latin-ordinary}{t}}), \\
+\ollabel{ax:q2} & !B({\OLId{latin-ordinary}{t}}) \lif \lexists[{\OLId{latin-ordinary}{x}}][!B],
+\end{align}
+حيث يؤخذ~${\OLId{latin-ordinary}{t}}$ أيّ حد مغلق.
+\end{defn}
+
+% تصحيح مصدر (0118-I1): أُضيف مخزون محافظ غير متناهٍ للثوابت المميزة.
+ونلحق بلغة المسألة~$\Lang L$ طائفةً لا تتناهى
+$\mathcal E=\{{\OLId{latin-ordinary}{e}}_{\OLMathNumeral{0}},{\OLId{latin-ordinary}{e}}_{\OLMathNumeral{1}},\dots\}$ من الثوابت المساعدة المستجدة. وقد تقع ثوابت
+$\mathcal E$ في أثناء البرهان، وتُحمل صور البديهيات والقواعد على اللغة
+الموسعة، ولا يقع شيء منها في دعم ال!!{derivation} ولا في خاتمته. ومنها
+نأخذ الثابت المميّز في كل تطبيق من~$\mathcal E$.
+
+\begin{defn}[قواعد المكمّمات]
+% تصحيح مصدر (0115-I1): أُضيف شرط عدم ورود الثابت المميز في A(x)، وهو ساقط من الأصل الإنجليزي وخط الأساس العربي.
+\begin{enumerate}
+\item متى سبقت~$!B \lif !A({\OLId{latin-ordinary}{a}})$ في ال!!{derivation}، وكان
+  ${\OLId{latin-ordinary}{a}}$ غير وارد في دعم ال!!{derivation} ولا في~$!B$ ولا في~$!A({\OLId{latin-ordinary}{x}})$، جاز إلحاق~$!B \lif
+  \lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$ خطوةَ استدلال صحيحة.
+\item ومتى سبقت~$!A({\OLId{latin-ordinary}{a}}) \lif !B$ في ال!!{derivation}، وكان
+  ${\OLId{latin-ordinary}{a}}$ غير وارد في دعم ال!!{derivation} ولا في~$!B$ ولا في~$!A({\OLId{latin-ordinary}{x}})$، جاز إلحاق~$\lexists[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})] \lif
+  !B$ خطوةَ استدلال صحيحة.
+\end{enumerate}
+\end{defn}
+
+ونرمز إلى أيّ من هاتين القاعدتين اختصارًا بـ«\QR».
+
+ونعد من الثوابت الواقعة في شجرة برهان كل ثابت يقع في صيغة منها، وكل ثابت
+مميز مكتوب على عقدة~\QR{}، وإن كان المتغير المسوّر غير واقع في الصيغة فلم
+يظهر ذلك الثابت في مقدمة العقدة.
+
+\begin{lem}[تجديد الثوابت المميزة]\ollabel{lem:qr-freshening}
+لتكن~$\Pi$ !!a{derivation} متناهية الدعم خاتمتها~$!C$، ولتكن~${\OLId{latin-looped}{F}}$
+طائفة متناهية من الثوابت. توجد !!a{derivation}~$\Pi'$ خاتمتها~$!C$،
+ودعمها داخل في دعم~$\Pi$، وتكون الثوابت المميزة في تطبيقات~\QR{} فيها
+متمايزة، ولا يقع شيء منها في~${\OLId{latin-looped}{F}}$ ولا في دعم~$\Pi$ ولا في~$!B$ أو
+~$!A({\OLId{latin-ordinary}{x}})$ الخاصين بتطبيقها.
+\end{lem}
+
+\begin{proof}
+سم دعم~$\Pi$ الأول~$\Sigma_{\OLMathNumeral{0}}$، ثم احذف سطوره التي لا تستعمل، وابسط
+الباقي إلى شجرة برهان متناهية دعمها~$\Sigma\subseteq\Sigma_{\OLMathNumeral{0}}$.
+ونستقرئ في العبارة الأقوى الآتية: إذا كانت~${\OLId{latin-looped}{T}}$ شجرة متناهية جذرها~$!D$
+ودعمها~$\Sigma$، وكانت~${\OLId{latin-looped}{H}}$ طائفة متناهية من الثوابت، أمكن إنشاء
+شجرة~${\OLId{latin-looped}{T}}'$ لها الجذر والدعم نفسهما، وثوابتها المميزة متباينة، لا يقع شيء منها في~${\OLId{latin-looped}{H}}$ ولا في
+$!D$ ولا في~$\Sigma$، مع بقاء جميع شروط~\QR{} المحلية. فأوراق الفرض
+والبديهية لا تتغير.
+
+وعند عقدة MP، سم شجرتي المقدمتين~${\OLId{latin-looped}{T}}_{\OLMathNumeral{1}},{\OLId{latin-looped}{T}}_{\OLMathNumeral{2}}$. جدّد~${\OLId{latin-looped}{T}}_{\OLMathNumeral{1}}$ بعد أن تضم إلى
+${\OLId{latin-looped}{H}}$ جميع ثوابت~${\OLId{latin-looped}{T}}_{\OLMathNumeral{2}}$، ثم جدّد~${\OLId{latin-looped}{T}}_{\OLMathNumeral{2}}$ بعد أن تضم إلى~${\OLId{latin-looped}{H}}$ جميع ثوابت
+الشجرة~${\OLId{latin-looped}{T}}'_{\OLMathNumeral{1}}$ الناتجة. فلا يتساوى ثابت مميز في إحدى الشجرتين بثابت في الأخرى،
+ولا يقع في دعمها؛ ويبقى MP صحيحًا، وتصح شروط الجدة بالنسبة إلى الدعم
+المجموع.
+
+وعند عقدة~\QR{} ذات الثابت المميز~${\OLId{latin-ordinary}{a}}$ والجذر~$!D$، جدّد شجرة المقدمة
+أولًا مع تحريم~${\OLId{latin-looped}{H}}$ و~${\OLId{latin-ordinary}{a}}$ وجميع ثوابت~$!D$. ثم اختر
+${\OLId{latin-ordinary}{b}}\in\mathcal E$ لا يقع في~${\OLId{latin-looped}{H}}$ ولا في شجرة المقدمة المجددة كلها ولا
+في~$!D$، وبدّل الاسمين~${\OLId{latin-ordinary}{a}}$ و~${\OLId{latin-ordinary}{b}}$ في شجرة المقدمة تبديلًا منتظمًا.
+فشرط التطبيق الأول يمنع~${\OLId{latin-ordinary}{a}}$ من الدعم ومن~$!B$ و~$!A({\OLId{latin-ordinary}{x}})$، وجدة~${\OLId{latin-ordinary}{b}}$
+تمنعه من الشجرة؛ فلا يتغير الدعم، ويتحول جذر المقدمة من الحالة ذات~${\OLId{latin-ordinary}{a}}$
+إلى الحالة ذات~${\OLId{latin-ordinary}{b}}$، وتبقى خاتمة عقدة~\QR{} هي~$!D$. وهذا التبديل
+تقابل في أسماء الثوابت، فهو ينقل البديهيات إلى أمثلتها، ويحفظ MP والحدود
+المغلقة وعقد~\QR{} الداخلة. وقد حظر الاستقراء~${\OLId{latin-ordinary}{a}}$ على ثوابتها المميزة،
+وحظر اختيار~${\OLId{latin-ordinary}{b}}$ على الشجرة كلها، فلا يتحد الثابت المستجد بثابت مميز داخلي.
+فنعيد تطبيق~\QR{} بالثابت~${\OLId{latin-ordinary}{b}}$؛ والقول واحد في صورتي القاعدة.
+
+فتثبت العبارة الأقوى. خذ فيها~${\OLId{latin-looped}{H}}$ اتحاد~${\OLId{latin-looped}{F}}$ وطائفة جميع الثوابت الواقعة
+في~$\Sigma_{\OLMathNumeral{0}}$، ثم أعد الشجرة إلى متتالية متناهية. فيكون دعمها
+$\Sigma\subseteq\Sigma_{\OLMathNumeral{0}}$، وتلك~$\Pi'$ المطلوبة.
+\end{proof}
+
+\end{document}

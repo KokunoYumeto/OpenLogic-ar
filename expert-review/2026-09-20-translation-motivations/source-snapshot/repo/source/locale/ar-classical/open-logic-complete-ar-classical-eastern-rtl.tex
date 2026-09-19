@@ -1,0 +1,83 @@
+% Canonical 642-unit component of the complete 722-unit Classical-Arabic reader.
+% The guarded build appends the separately compiled 80-unit closure component
+% without changing either component's page streams.
+\input{../ar/open-logic-readable-letter-r2-layout-ar.tex}
+\documentclass[openany]{memoir}
+
+\input{open-logic-ar-classical-eastern-rtl-preamble.tex}
+
+\newcommand*{\OLCompletePDFTitle}
+  {نص المنطق المفتوح: الطبعة العربية ذات البيان التراثي والترميز العربي}
+\newcommand*{\OLCompleteEditionSubtitle}
+  {الطبعة العربية الثالثة: بيان تراثي، وأرقام عربية هندية، ورموز عربية، وصيغ من اليمين إلى اليسار}
+\hypersetup{
+  unicode=true,
+  pdflang={ar},
+  pdftitle={\OLCompletePDFTitle},
+  pdfauthor={Open Logic Project},
+  pdfsubject={\OLCompleteEditionSubtitle}
+}
+
+% Only the stable concept DOI is advertised. A version DOI is deliberately
+% absent because it changes with each preserved release.
+\newcommand*{\OLReleaseConceptDOI}{10.5281/zenodo.21921850}
+\newcommand*{\OLReleaseRepository}{https://github.com/KokunoYumeto/OpenLogic-ar}
+
+\begin{document}
+
+\begin{titlingpage}
+\begin{center}
+\vspace*{2.5cm}
+{\HUGE\bfseries\sffamily نص المنطق المفتوح\par}
+\vspace{1.2cm}
+{\huge \OLCompleteEditionSubtitle\par}
+\vspace{0.6cm}
+{\large\foreignlanguage{english}{%
+  Complete Classical-Arabic edition --- Eastern Arabic numerals, Arabic
+  mathematical symbols, and right-to-left formula layout}\par}
+\vspace{1.3cm}
+{\Large العربية ذات البيان التراثي --- \babelsublr{ar-classical}\par}
+\vspace{1.2cm}
+{\large المصدر: مشروع المنطق المفتوح\par}
+\vspace{0.5cm}
+{\large المستودع: \href{\OLReleaseRepository}{\babelsublr{OpenLogic-ar}}\par}
+{\large DOI المفهومي الثابت: \babelsublr{\OLReleaseConceptDOI}\par}
+\end{center}
+
+\vfill
+
+\noindent
+يشتمل مسار هذا القارئ القانوني على \OLClassicalDigits{642} وحدة من
+وحدات المصدر المثبتة. وتلحق به عند التجميع الحتمي الوحدات الثمانون
+المحفوظة خارج ذلك المسار، فيصير القارئ المستقل مشتملًا على الوحدات
+\OLClassicalDigits{722} كلها من غير تغيير في رسم التبعيات.
+
+\medskip
+\noindent
+وهذه ترجمة معدلة بموجب رخصة
+\href{https://creativecommons.org/licenses/by/4.0/}{CC BY 4.0}.
+ينسب الأصل إلى مشروع المنطق المفتوح، ولا يفهم من هذه الطبعة إقرار من
+المشروع. واختيارات الاصطلاح المثبتة فيها مؤقتة قابلة لتصحيح أهل الخبرة،
+من غير أن يكون انتظار ذلك شرطًا في تمام البناء أو إتاحته.
+
+\end{titlingpage}
+
+\pagestyle{giheadings}
+
+% The accepted Classical prose remains in ar-classical/content.  The build
+% reads only its generated, reversible notation-presentation counterpart;
+% recorder QA proves that no authoritative source file or MSA prose enters
+% either compiled component.
+\subfile{\OLClassicalPresentationRoot/content/open-logic-about}
+
+\tableofcontents*
+
+\subfile{\OLClassicalPresentationRoot/content/content}
+
+\photocredits
+
+\nocite{Frege1953,Peter1967}
+\bibliographystyle{\olpath/bib/natbib-oup}
+\bibliography{\olpath/bib/open-logic}
+
+\end{document}

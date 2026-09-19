@@ -1,0 +1,158 @@
+% Part: normal-modal-logic
+% Chapter: completeness
+% Section: truth-lemma
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{com}{tru}
+
+\olsection{لمّة الصدق}
+
+قصدنا بتعريف النموذج القانوني~$\mModel{M^\Sigma}$ أن يكون
+$\mSat{{\OLId{latin-looped}{M}}^\Sigma}{!A}[{\OLId{greek-variable}{Delta}}]$ إذا وفقط إذا كان~$!A \in {\OLId{greek-variable}{Delta}}$.
+أما تعريف~${\OLId{latin-looped}{V}}^\Sigma$ فيكفل ذلك رأسًا لل!!{propositional
+variable}s، وأما سائر ال!!{formula}s فلا بد من إقامة البرهان عليها.
+وسبيل ذلك الاستقراء: نرد ال!!{formula}s المركبة بالروابط القضوية
+إلى أجزائها باستعمال \olref[ccs]{prop:ccs-properties}،
+ونعالج المؤثرات الجهية بما ثبت في \olref[mod]{sec}.
+وبذلك ينتقل التكافؤ من الأجزاء إلى المركب في كل حالة.
+
+\begin{prop}[لمّة الصدق]
+  \ollabel{prop:truthlemma}
+  لكل~${\OLId{greek-variable}{Delta}} \in {\OLId{latin-looped}{W}}^\Sigma$ ولكل !!{formula}~$!A$،
+  $\mSat{{\OLId{latin-looped}{M}}^\Sigma}{!A}[{\OLId{greek-variable}{Delta}}]$ إذا وفقط إذا كان~$!A \in {\OLId{greek-variable}{Delta}}$.
+\end{prop}
+
+\begin{proof}
+  نستقرئ بناء~$!A$، مثبتين الدعوى في جميع عوالم النموذج معًا؛
+  فيجوز استعمال فرض الاستقراء عند العالم نفسه وعند كل عالم يمكن الوصول إليه.
+  \begin{enumerate}
+    \tagitem{prvFalse}{\indcase{!A}{\lfalse}{لدينا
+        $\mSat/{{\OLId{latin-looped}{M}}^\Sigma}{\lfalse}[{\OLId{greek-variable}{Delta}}]$ بحسب
+        \olref[syn][trw]{defn:mmodels}، و$\lfalse \notin {\OLId{greek-variable}{Delta}}$ بحسب
+        \olref[ccs]{prop:ccs-properties}\olref[ccs]{prop:ccs-lfalse}.}}{}
+
+    \tagitem{prvTrue}{\indcase{!A}{\ltrue}{لدينا
+        $\mSat{{\OLId{latin-looped}{M}}^\Sigma}{\ltrue}[{\OLId{greek-variable}{Delta}}]$ بحسب
+        \olref[syn][trw]{defn:mmodels}، و$\ltrue \in {\OLId{greek-variable}{Delta}}$ بحسب
+        \olref[ccs]{prop:ccs-properties}\olref[ccs]{prop:ccs-ltrue}.}}{}
+
+    \item \indcase{!A}{p}{لدينا~$\mSat{{\OLId{latin-looped}{M}}^\Sigma}{{\OLId{latin-ordinary}{p}}}[{\OLId{greek-variable}{Delta}}]$ إذا وفقط
+      إذا كان~${\OLId{greek-variable}{Delta}} \in {\OLId{latin-looped}{V}}^\Sigma({\OLId{latin-ordinary}{p}})$، بحسب
+      \olref[syn][trw]{defn:mmodels}. كذلك،~${\OLId{greek-variable}{Delta}} \in {\OLId{latin-looped}{V}}^\Sigma({\OLId{latin-ordinary}{p}})$
+      إذا وفقط إذا كان~${\OLId{latin-ordinary}{p}} \in {\OLId{greek-variable}{Delta}}$، بحسب تعريف~${\OLId{latin-looped}{V}}^\Sigma$.}
+
+    \tagitem{prvNot}{\indcase{!A}{\lnot !B}{%
+        \iftag{probNot}{تمرين.}{لدينا
+          $\mSat{{\OLId{latin-looped}{M}}^\Sigma}{\lnot !B}[{\OLId{greek-variable}{Delta}}]$ إذا وفقط إذا كان
+          $\mSat/{{\OLId{latin-looped}{M}}^\Sigma}{!B}[{\OLId{greek-variable}{Delta}}]$
+          (\olref[syn][trw]{defn:mmodels})، إذا وفقط إذا كان
+          $!B \notin {\OLId{greek-variable}{Delta}}$ (بفرض الاستقراء)، إذا وفقط إذا كان
+          $\lnot !B \in {\OLId{greek-variable}{Delta}}$ (بحسب
+          \olref[ccs]{prop:ccs-properties}\olref[ccs]{prop:ccs-lnot}).}}}{}
+
+    \tagitem{prvAnd}{\indcase{!A}{!B \land !C}{%
+        \iftag{probAnd}{تمرين.}{لدينا
+          $\mSat{{\OLId{latin-looped}{M}}^\Sigma}{!B \land !C}[{\OLId{greek-variable}{Delta}}]$ إذا وفقط إذا كان
+          $\mSat{{\OLId{latin-looped}{M}}^\Sigma}{!B}[{\OLId{greek-variable}{Delta}}]$ و
+          $\mSat{{\OLId{latin-looped}{M}}^\Sigma}{!C}[{\OLId{greek-variable}{Delta}}]$ (بحسب
+          \olref[syn][trw]{defn:mmodels})، إذا وفقط إذا كان
+          $!B \in {\OLId{greek-variable}{Delta}}$ و$!C \in {\OLId{greek-variable}{Delta}}$ (بفرض الاستقراء)، إذا
+          وفقط إذا كان~$!B \land !C \in {\OLId{greek-variable}{Delta}}$ (بحسب
+          \olref[ccs]{prop:ccs-properties}\olref[ccs]{prop:ccs-land}).}}}{}
+
+    \tagitem{prvOr}{\indcase{!A}{!B \lor !C}{%
+        \iftag{probOr}{تمرين.}{لدينا
+          $\mSat{{\OLId{latin-looped}{M}}^\Sigma}{!B \lor !C}[{\OLId{greek-variable}{Delta}}]$ إذا وفقط إذا كان
+          $\mSat{{\OLId{latin-looped}{M}}^\Sigma}{!B}[{\OLId{greek-variable}{Delta}}]$ أو
+          $\mSat{{\OLId{latin-looped}{M}}^\Sigma}{!C}[{\OLId{greek-variable}{Delta}}]$ (بحسب
+          \olref[syn][trw]{defn:mmodels})، إذا وفقط إذا كان
+          $!B \in {\OLId{greek-variable}{Delta}}$ أو~$!C \in {\OLId{greek-variable}{Delta}}$ (بفرض الاستقراء)، إذا
+          وفقط إذا كان~$!B \lor !C \in {\OLId{greek-variable}{Delta}}$ (بحسب
+          \olref[ccs]{prop:ccs-properties}\olref[ccs]{prop:ccs-lor}).}}}{}
+
+    \tagitem{prvIf}{\indcase{!A}{!B \lif !C}{%
+        \iftag{probIf}{تمرين.}{لدينا
+          $\mSat{{\OLId{latin-looped}{M}}^\Sigma}{!B \lif !C}[{\OLId{greek-variable}{Delta}}]$ إذا وفقط إذا كان
+          $\mSat/{{\OLId{latin-looped}{M}}^\Sigma}{!B}[{\OLId{greek-variable}{Delta}}]$ أو
+          $\mSat{{\OLId{latin-looped}{M}}^\Sigma}{!C}[{\OLId{greek-variable}{Delta}}]$ (بحسب
+          \olref[syn][trw]{defn:mmodels})، إذا وفقط إذا كان
+          $!B \notin {\OLId{greek-variable}{Delta}}$ أو~$!C \in {\OLId{greek-variable}{Delta}}$ (بفرض الاستقراء)، إذا
+          وفقط إذا كان~$!B \lif !C \in {\OLId{greek-variable}{Delta}}$ (بحسب
+          \olref[ccs]{prop:ccs-properties}\olref[ccs]{prop:ccs-lif}).}}}{}
+
+    \tagitem{prvIff}{\indcase{!A}{!B \liff !C}{%
+        \iftag{probIff}{تمرين.}{لدينا
+          $\mSat{{\OLId{latin-looped}{M}}^\Sigma}{!B \liff !C}[{\OLId{greek-variable}{Delta}}]$ إذا وفقط إذا كان إما
+          $\mSat{{\OLId{latin-looped}{M}}^\Sigma}{!B}[{\OLId{greek-variable}{Delta}}]$ و
+          $\mSat{{\OLId{latin-looped}{M}}^\Sigma}{!C}[{\OLId{greek-variable}{Delta}}]$، أو
+          $\mSat/{{\OLId{latin-looped}{M}}^\Sigma}{!B}[{\OLId{greek-variable}{Delta}}]$ و
+          $\mSat/{{\OLId{latin-looped}{M}}^\Sigma}{!C}[{\OLId{greek-variable}{Delta}}]$ (بحسب
+          \olref[syn][trw]{defn:mmodels})، إذا وفقط إذا كان إما
+          $!B \in {\OLId{greek-variable}{Delta}}$ و$!C \in {\OLId{greek-variable}{Delta}}$، أو~$!B \notin {\OLId{greek-variable}{Delta}}$ و
+          $!C \notin {\OLId{greek-variable}{Delta}}$ (بفرض الاستقراء)، إذا وفقط إذا كان
+          $!B \liff !C \in {\OLId{greek-variable}{Delta}}$ (بحسب
+          \olref[ccs]{prop:ccs-properties}\olref[ccs]{prop:ccs-liff}).}}}{}
+
+    \tagitem{prvBox}{\indcase{!A}{\Box !B}{%
+        \iftag{probBox}{تمرين.}{افترض أولًا أن
+          $\mSat{{\OLId{latin-looped}{M}}^\Sigma}{\Box !B}[{\OLId{greek-variable}{Delta}}]$. بحسب
+          \olref[syn][trw]{defn:mmodels}، يكون
+          $\mSat{{\OLId{latin-looped}{M}}^\Sigma}{!B}[{\OLId{greek-variable}{Delta}}']$ لكل~${\OLId{greek-variable}{Delta}}'$ بحيث
+          ${\OLId{latin-looped}{R}}^\Sigma {\OLId{greek-variable}{Delta}}{\OLId{greek-variable}{Delta}}'$. وبفرض الاستقراء، يكون
+          $!B \in {\OLId{greek-variable}{Delta}}'$ لكل~${\OLId{greek-variable}{Delta}}'$ بحيث
+          ${\OLId{latin-looped}{R}}^\Sigma {\OLId{greek-variable}{Delta}}{\OLId{greek-variable}{Delta}}'$. وبحسب تعريف~${\OLId{latin-looped}{R}}^\Sigma$، يكون
+          $!B \in {\OLId{greek-variable}{Delta}}'$ لكل~${\OLId{greek-variable}{Delta}}'$ بحيث
+          $\Box^{-{\OLMathNumeral{1}}}{\OLId{greek-variable}{Delta}} \subseteq {\OLId{greek-variable}{Delta}}'$. وبحسب
+          \olref[mod]{prop:box}، يكون~$\Box !B \in {\OLId{greek-variable}{Delta}}$.
+
+          والآن افترض~$\Box !B \in {\OLId{greek-variable}{Delta}}$. لتكن~${\OLId{greek-variable}{Delta}}' \in
+          {\OLId{latin-looped}{W}}^\Sigma$ بحيث~${\OLId{latin-looped}{R}}^\Sigma {\OLId{greek-variable}{Delta}}{\OLId{greek-variable}{Delta}}'$، أي
+          $\Box^{-{\OLMathNumeral{1}}}{\OLId{greek-variable}{Delta}} \subseteq {\OLId{greek-variable}{Delta}}'$. ولما كان
+          $\Box !B \in {\OLId{greek-variable}{Delta}}$، كان~$!B \in \Box^{-{\OLMathNumeral{1}}}{\OLId{greek-variable}{Delta}}$، ومن
+          ثم~$!B \in {\OLId{greek-variable}{Delta}}'$. وبفرض الاستقراء،
+          $\mSat{{\OLId{latin-looped}{M}}^\Sigma}{!B}[{\OLId{greek-variable}{Delta}}']$. ولأن~${\OLId{greek-variable}{Delta}}'$ اعتباطية بين
+          ما يحقق~${\OLId{latin-looped}{R}}^\Sigma {\OLId{greek-variable}{Delta}}{\OLId{greek-variable}{Delta}}'$، يكون، لكل~${\OLId{greek-variable}{Delta}}' \in
+          {\OLId{latin-looped}{W}}^\Sigma$ بحيث~${\OLId{latin-looped}{R}}^\Sigma {\OLId{greek-variable}{Delta}}{\OLId{greek-variable}{Delta}}'$،
+          $\mSat{{\OLId{latin-looped}{M}}^\Sigma}{!B}[{\OLId{greek-variable}{Delta}}']$. وبحسب
+          \olref[syn][trw]{defn:mmodels}،
+          $\mSat{{\OLId{latin-looped}{M}}^\Sigma}{\Box !B}[{\OLId{greek-variable}{Delta}}]$.}}}{}
+
+    \tagitem{prvDiamond}{\indcase{!A}{\Diamond !B}{%
+        \iftag{probDiamond}{تمرين.}{افترض أولًا أن
+          $\mSat{{\OLId{latin-looped}{M}}^\Sigma}{\Diamond !B}[{\OLId{greek-variable}{Delta}}]$. بحسب
+          \olref[syn][trw]{defn:mmodels}، يوجد~${\OLId{greek-variable}{Delta}}'$ يحقق
+          ${\OLId{latin-looped}{R}}^\Sigma {\OLId{greek-variable}{Delta}}{\OLId{greek-variable}{Delta}}'$ و
+          $\mSat{{\OLId{latin-looped}{M}}^\Sigma}{!B}[{\OLId{greek-variable}{Delta}}']$. وبفرض الاستقراء، يوجد
+          ${\OLId{greek-variable}{Delta}}'$ يحقق~${\OLId{latin-looped}{R}}^\Sigma {\OLId{greek-variable}{Delta}}{\OLId{greek-variable}{Delta}}'$ و~$!B \in {\OLId{greek-variable}{Delta}}'$.
+          وبحسب تعريف~${\OLId{latin-looped}{R}}^\Sigma$،\iftag{prvBox}{ يوجد~${\OLId{greek-variable}{Delta}}'$ بحيث
+            $\Box^{-{\OLMathNumeral{1}}}{\OLId{greek-variable}{Delta}} \subseteq {\OLId{greek-variable}{Delta}}'$ و~$!B \in {\OLId{greek-variable}{Delta}}'$.
+            % تصحيح إحالة (0447-I1): التكافؤ المباشر هو لمّة الوصفين لعلاقة الوصول.
+            وبحسب~\olref[mod]{lem:box-iff-diamond}،}{} يوجد~${\OLId{greek-variable}{Delta}}'$ بحيث
+          $\Diamond {\OLId{greek-variable}{Delta}}' \subseteq {\OLId{greek-variable}{Delta}}$ و~$!B \in {\OLId{greek-variable}{Delta}}'$.
+          ولما كان~$!B \in {\OLId{greek-variable}{Delta}}'$، كان
+          $\Diamond !B \in \Diamond{\OLId{greek-variable}{Delta}}'$، ومن ثم
+          $\Diamond !B \in {\OLId{greek-variable}{Delta}}$.
+
+          والآن افترض~$\Diamond !B \in {\OLId{greek-variable}{Delta}}$. بحسب
+          \olref[mod]{prop:diamond}، توجد مجموعة $\Sigma$-متسقة تامة
+          ${\OLId{greek-variable}{Delta}}' \in {\OLId{latin-looped}{W}}^\Sigma$ بحيث~$\Diamond{\OLId{greek-variable}{Delta}}' \subseteq
+          {\OLId{greek-variable}{Delta}}$ و~$!B \in {\OLId{greek-variable}{Delta}}'$.\iftag{prvBox}{ وبحسب
+            \olref[mod]{lem:box-iff-diamond}، توجد~${\OLId{greek-variable}{Delta}}' \in
+            {\OLId{latin-looped}{W}}^\Sigma$ بحيث~$\Box^{-{\OLMathNumeral{1}}}{\OLId{greek-variable}{Delta}} \subseteq {\OLId{greek-variable}{Delta}}'$ و
+            $!B \in {\OLId{greek-variable}{Delta}}'$.}{} وبحسب تعريف~${\OLId{latin-looped}{R}}^\Sigma$، يتحقق
+          ${\OLId{latin-looped}{R}}^\Sigma {\OLId{greek-variable}{Delta}}{\OLId{greek-variable}{Delta}}'$؛ ومن ثم توجد~${\OLId{greek-variable}{Delta}}' \in {\OLId{latin-looped}{W}}^\Sigma$
+          بحيث~${\OLId{latin-looped}{R}}^\Sigma {\OLId{greek-variable}{Delta}}{\OLId{greek-variable}{Delta}}'$ و~$!B \in {\OLId{greek-variable}{Delta}}'$.
+          وبفرض الاستقراء تصدق الصيغة عند هذا العالم؛ فبحسب
+          \olref[syn][trw]{defn:mmodels}،
+          $\mSat{{\OLId{latin-looped}{M}}^\Sigma}{\Diamond !B}[{\OLId{greek-variable}{Delta}}]$.}}}{}
+  \end{enumerate}
+\end{proof}
+
+\begin{probtag}{probFalse,probTrue,probNot,probAnd,probOr,probIf,probIff,probBox,probDiamond}
+  أكمل برهان~\olref[nml][com][tru]{prop:truthlemma}.
+\end{probtag}
+
+\end{document}

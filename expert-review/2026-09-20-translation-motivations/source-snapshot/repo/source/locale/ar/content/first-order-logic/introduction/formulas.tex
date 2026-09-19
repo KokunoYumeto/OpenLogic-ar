@@ -1,0 +1,89 @@
+% Part: first-order-logic
+% Chapter: introduction
+% Section: formulas
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{int}{fml}
+
+\section{\usetoken{P}{formula}}
+
+سنستعمل المنهج الآتي في التحديد الصارم لل!!{sentence}s في منطق الرتبة
+الأولى وفي معالجة المسائل الناشئة عن استعمال ال!!{variable}s. نبدأ
+بتعريف مجموعة \emph{مختلفة} من التعبيرات: ال!!{formula}s. وبعد ذلك
+يمكننا بحث الدور الذي تؤديه ال!!{variable}s فيها؛ وعلى أساس بعض
+الأفكار الأخرى، أعني ال!!{variable}s «الحرة» و«المقيدة»، يمكننا تعريف
+ال!!{sentence} (وهي !!a{formula} لا تحتوي على !!{variable}s حرة).
+ولا نفعل ذلك لمجرد أنه يجعل تعريف «ال!!{sentence}» أيسر تناولًا، بل
+أيضًا لأنه سيكون حاسمًا في الطريقة التي نعرّف بها مفهوم الإرضاء
+الدلالي.
+
+لنعرّف «ال!!{formula}» للغة بسيطة من لغات الرتبة الأولى، لا تحتوي إلا
+على !!{predicate} واحد~$\Obj P$ و!!{constant} واحد~$\Obj a$، ولا
+تحتوي من الرموز المنطقية إلا $\lnot$ و$\land$ و~$\lexists$. وستكون
+تعريفاتنا الكاملة أعم كثيرًا: إذ سنسمح بعدد لا نهائي من
+ال!!{predicate}s وال!!{constant}s. بل سنبحث أيضًا ال!!{function}s
+التي يمكن ضمها إلى ال!!{constant}s وال!!{variable}s لتكوين «حدود».
+أما الآن، فلن تكون لدينا حدود غير $\Obj a$ والمتغيرات. ونحن نحتاج
+بالفعل إلى عدد لا نهائي من ال!!{variable}s. وسنستعمل رسميًا الرموز
+$\Obj v_0$، و$\Obj v_1$، و\dots، متغيراتٍ.
+
+\begin{defn}
+تُعرّف مجموعة \emph{ال!!{formula}s}~$\Frm$ كما يأتي:
+\begin{enumerate}
+\item\ollabel{fmls-atom} إن $\Atom{\Obj P}{\Obj a}$ و$\Atom{\Obj
+  P}{\Obj v_i}$ !!{formula}s (حيث $i \in \Nat$).
+
+\tagitem{prvNot}{\ollabel{fmls-not}إذا كانت $!A$ !!a{formula}، فإن
+  $\lnot !A$ !!{formula}.}{}
+
+\tagitem{prvAnd}{إذا كانت $!A$ و$!B$ !!{formula}s، فإن
+  $(!A \land !B)$ !!a{formula}.}{}
+
+\tagitem{prvEx}{\ollabel{fmls-ex}إذا كانت $!A$ !!a{formula} وكان
+  $x$ !!a{variable}، فإن $\lexists[x][!A]$ !!a{formula}.}{}
+
+\tagitem{limitClause}{\ollabel{fmls-limit}لا شيء غير ذلك
+  !!a{formula}.}{}
+\end{enumerate}
+\end{defn}
+
+تفيدنا \olref{fmls-atom} أن $\Atom{\Obj P}{\Obj a}$ و
+$\Atom{\Obj P}{\Obj v_i}$ !!{formula}s، لأي $i \in \Nat$. وهذه هي
+ال!!{formula}s المسماة \emph{ذرية}. فهي تمنحنا نقطة نبدأ منها. أما
+البنود الأخرى فتعطينا طرائق لتكوين !!{formula}s جديدة من صيغ سبق أن
+كوّناها. فبموجب \olref{fmls-not}، مثلًا، نعلم أن
+$\lnot \Atom{\Obj P}{\Obj v_2}$ !!a{formula}، لأن
+$\Atom{\Obj P}{\Obj v_2}$ !!a{formula} بموجب
+\olref{fmls-atom}. ثم نعلم، بموجب \olref{fmls-ex}، أن
+$\lexists[\Obj v_2][\lnot \Atom{\Obj P}{\Obj v_2}]$
+!!{formula} أخرى، وهكذا. وتفيدنا \olref{fmls-limit} أن السلاسل
+\emph{الوحيدة} التي تدخل في عداد ال!!{formula}s هي التي يمكننا تكوينها بهذه
+الطريقة. وعلى وجه الخصوص، فإن
+$\lexists[\Obj v_0][\Atom{\Obj P}{\Obj a}]$ و
+$\lexists[\Obj v_0][\lexists[\Obj v_0][\Atom{\Obj P}{\Obj a}]]$
+\emph{تدخلان} في عداد ال!!{formula}s، أما
+$(\lnot \Atom{\Obj P}{\Obj a})$ فلا تعد كذلك، بسبب القوسين الخارجيين
+الزائدين.
+
+وتسمى هذه الطريقة في تعريف ال!!{formula}s \emph{تعريفًا استقرائيًا}،
+وهي تتيح لنا إثبات قضايا عن ال!!{formula}s باستعمال ضرب من البرهان
+بالاستقراء يسمى \emph{الاستقراء البنيوي}. وترد مناقشة عامة لهذين
+المفهومين في \olref[mth][ind][idf]{sec} و
+\olref[mth][ind][sti]{sec}، وينبغي لك مراجعتهما قبل الخوض في البراهين
+اللاحقة. وخلاصة الفكرة أنك إذا أردت إثبات صدق أمر ما في جميع
+ال!!{formula}s، فإنك تثبت أولًا صدقه في ال!!{formula}s الذرية، ثم
+تثبت أنه \emph{إذا} صدق في أي !!{formula}~$!A$ (وفي~$!B$)، صدق
+\emph{أيضًا} في $\lnot !A$ و$(!A \land !B)$ و
+$\lexists[x][!A]$. فهذا يثبت، مثلًا، صدقه في
+$\lexists[\Obj v_2][\lnot \Atom{\Obj P}{\Obj v_2}]$: إذ تعلم من
+الجزء الأول أنه يصدق في ال!!{formula} الذرية
+$\Atom{\Obj P}{\Obj v_2}$. ثم تستنتج من الجزء الثاني أنه يصدق في
+$\lnot \Atom{\Obj P}{\Obj v_2}$، وبعد ذلك تستنتج مرة أخرى أنه يصدق
+في $\lexists[\Obj v_2][\lnot \Atom{\Obj P}{\Obj v_2}]$ نفسها. ولما
+كانت جميع ال!!{formula}s تتولد استقرائيًا من ال!!{formula}s الذرية،
+فإن هذا يصلح لأي منها.
+
+\end{document}

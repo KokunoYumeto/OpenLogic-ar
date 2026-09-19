@@ -1,0 +1,59 @@
+% part: intuitionistic-logic
+% chapter: soundness-completeness
+% section: soundness-axd
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{sc}{sax}
+
+\olsection{سلامة \usetoken{P}{derivation} البديهية}
+
+\begin{editorial}
+  مبنى برهان السلامة أن البديهيات كلها صالحة حدسيًا. وهذه دعوى لم يُقم
+  برهانها هنا بعد؛ ويمكن أن يُجعل لها موضع في فصل الدلالات مثلًا.
+\end{editorial}
+
+\begin{thm}[السلامة]
+  \ollabel{thm:soundness}
+  من~${\OLId{greek-variable}{Gamma}} \Proves !A$ يلزم~${\OLId{greek-variable}{Gamma}} \Entails !A$.
+\end{thm}
+
+\begin{proof}
+  المطلوب أن يلزم من~${\OLId{greek-variable}{Gamma}} \Proves !A$ أن~${\OLId{greek-variable}{Gamma}} \Entails !A$.
+  ونستقرئ في عدد ال!!{formula}s، أعني~${\OLId{latin-ordinary}{n}}$، التي تتألف منها
+  !!{derivation}~$!A$ من~${\OLId{greek-variable}{Gamma}}$. فتكون دعوانا: متى كانت~$!A_{\OLMathNumeral{1}}$،
+  \dots،~$!A_{\OLId{latin-ordinary}{n}}=!A$ !!a{derivation} من~${\OLId{greek-variable}{Gamma}}$، ثبت
+  ${\OLId{greek-variable}{Gamma}} \Entails !A_{\OLId{latin-ordinary}{n}}$. ولنتنبه إلى أن~$!A_{\OLMathNumeral{1}}$، \dots،~$!A_{\OLId{latin-ordinary}{n}}$
+  متى كانت !!a{derivation}، فإن~$!A_{\OLMathNumeral{1}}$، \dots،~$!A_{\OLId{latin-ordinary}{k}}$ كذلك لكل~${\OLId{latin-ordinary}{k}}<{\OLId{latin-ordinary}{n}}$.
+  % تصحيح أسلوبي (0504-N1): أزيل تكرار أداة الشرط وصُححت مطابقة الفعل.
+
+  أما ال!!{derivation}s التي طولها~${\OLMathNumeral{0}}$ فلا وجود لها؛ فالدعوى عند
+  ${\OLId{latin-ordinary}{n}}={\OLMathNumeral{0}}$ صادقة صدقًا خاليًا. ولنفرض صحتها في ال!!{derivation}s جميعًا
+  التي طولها~$<{\OLId{latin-ordinary}{n}}$، ثم ننظر في المسوغ الذي جاءت به~$!A_{\OLId{latin-ordinary}{n}}$.
+
+  \begin{enumerate}
+  \item إن كانت~$!A_{\OLId{latin-ordinary}{n}}$ بديهية، فصلاحية البديهيات تقتضي
+    ${\OLId{greek-variable}{Gamma}} \Entails !A_{\OLId{latin-ordinary}{n}}$ مهما تكن~${\OLId{greek-variable}{Gamma}}$.
+  \item وإن كان~$!A_{\OLId{latin-ordinary}{n}} \in {\OLId{greek-variable}{Gamma}}$، فأيّ~$\mModel{M}$ وأيّ~${\OLId{latin-ordinary}{w}}$ أُخذا،
+    لزم من~$\mSat{{\OLId{latin-looped}{M}}}{{\OLId{greek-variable}{Gamma}}}[{\OLId{latin-ordinary}{w}}]$ بلا واسطة
+    $\mSat{{\OLId{latin-looped}{M}}}{!A_{\OLId{latin-ordinary}{n}}}[{\OLId{latin-ordinary}{w}}]$؛ وذلك معنى~${\OLId{greek-variable}{Gamma}} \Entails !A$.
+  \item وإن جاءت~$!A_{\OLId{latin-ordinary}{n}}$ من~\MP{} مطبقةً على~$!A_{\OLId{latin-ordinary}{i}}$ و
+    $!A_{\OLId{latin-ordinary}{j}} \ident !A_{\OLId{latin-ordinary}{i}} \lif !A_{\OLId{latin-ordinary}{n}}$، كان كل من~$!A_{\OLMathNumeral{1}}$، \dots،~$!A_{\OLId{latin-ordinary}{i}}$ و
+    $!A_{\OLMathNumeral{1}}$، \dots،~$!A_{\OLId{latin-ordinary}{j}}$ من ال!!{derivation}s من~${\OLId{greek-variable}{Gamma}}$. وفرض
+    الاستقراء يعطي~${\OLId{greek-variable}{Gamma}} \Entails !A_{\OLId{latin-ordinary}{i}}$ و
+    ${\OLId{greek-variable}{Gamma}} \Entails !A_{\OLId{latin-ordinary}{i}} \lif !A_{\OLId{latin-ordinary}{n}}$.
+
+    ليكن~$\mSat{{\OLId{latin-looped}{M}}}{{\OLId{greek-variable}{Gamma}}}[{\OLId{latin-ordinary}{w}}]$. فاجتماع~$\mSat{{\OLId{latin-looped}{M}}}{{\OLId{greek-variable}{Gamma}}}[{\OLId{latin-ordinary}{w}}]$ مع
+    ${\OLId{greek-variable}{Gamma}} \Entails !A_{\OLId{latin-ordinary}{i}} \lif !A_{\OLId{latin-ordinary}{n}}$ يوجب
+    $\mSat{{\OLId{latin-looped}{M}}}{!A_{\OLId{latin-ordinary}{i}} \lif !A_{\OLId{latin-ordinary}{n}}}[{\OLId{latin-ordinary}{w}}]$. ومعناه بحسب التعريف: كل~${\OLId{latin-ordinary}{w}}'$
+    يحقق~$Rww'$ يلزم فيه من~$\mSat{{\OLId{latin-looped}{M}}}{!A_{\OLId{latin-ordinary}{i}}}[{\OLId{latin-ordinary}{w}}']$ أن
+    $\mSat{{\OLId{latin-looped}{M}}}{!A_{\OLId{latin-ordinary}{n}}}[{\OLId{latin-ordinary}{w}}']$. والعلاقة~${\OLId{latin-looped}{R}}$ انعكاسية، فيكون~${\OLId{latin-ordinary}{w}}$ نفسه من
+    جملة~${\OLId{latin-ordinary}{w}}'$ التي تحقق~$Rww'$. فإذن يلزم من~$\mSat{{\OLId{latin-looped}{M}}}{!A_{\OLId{latin-ordinary}{i}}}[{\OLId{latin-ordinary}{w}}]$ أن
+    $\mSat{{\OLId{latin-looped}{M}}}{!A_{\OLId{latin-ordinary}{n}}}[{\OLId{latin-ordinary}{w}}]$. وقد علمنا~${\OLId{greek-variable}{Gamma}} \Entails !A_{\OLId{latin-ordinary}{i}}$، فثبت
+    $\mSat{{\OLId{latin-looped}{M}}}{!A_{\OLId{latin-ordinary}{i}}}[{\OLId{latin-ordinary}{w}}]$، وبذلك يثبت~$\mSat{{\OLId{latin-looped}{M}}}{!A_{\OLId{latin-ordinary}{n}}}[{\OLId{latin-ordinary}{w}}]$، وهو المطلوب.
+  \end{enumerate}
+\end{proof}
+
+\end{document}

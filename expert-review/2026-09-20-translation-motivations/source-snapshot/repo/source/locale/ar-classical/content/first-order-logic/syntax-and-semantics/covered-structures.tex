@@ -1,0 +1,74 @@
+% Part: first-order-logic
+% Chapter: syntax-and-semantics
+% Section: covered-structures
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{syn}{cov}
+
+\olsection{\printtoken{P}{structure} المغطاة للغات الرتبة الأولى}
+
+\begin{explain}
+قد تقدم أن الحد الذي يخلو من ال!!{variable}s حد \emph{مغلق}.
+\end{explain}
+
+\begin{defn}[!!^{value} الحدود المغلقة]
+إذا كان $t$ حدًا مغلقًا من اللغة~$\Lang L$، وكانت $\Struct M$
+!!a{structure} لـ~$\Lang L$، عُرّفت \emph{!!{value}}~$\Value{t}{M}$
+كما يأتي:
+\begin{enumerate}
+\item إذا كان $t$ هو ال!!{constant}~$c$ فحسب، فإن
+  $\Value{c}{M} = \Assign{c}{M}$.
+\item إذا كان $t$ من الصورة $\Atom{f}{t_1, \ldots, t_n}$، فإن
+  \[
+  \Value{t}{M} = \Assign{f}{M}(\Value{t_1}{M}, \ldots,
+  \Value{t_n}{M}).
+  \]
+\end{enumerate}
+\end{defn}
+
+\begin{defn}[ال!!{structure} المغطاة]
+نسمي ال!!{structure} \emph{مغطاة} متى كان لكل عنصر من المجال
+حد مغلق يكون ذلك العنصر !!{value} له.
+\end{defn}
+
+\begin{ex}
+لنأخذ~$\Lang L$ لغةً ذات ال!!{constant}s~$\Obj{zero}$،
+و$\Obj{one}$، و$\Obj{two}$، و\dots، وفيها ال!!{predicate} الثنائية~$<$،
+وال!!{function}s الثنائية~$+$ و$\times$. ثم نعيّن~$\Struct M$
+!!a{structure} لهذه اللغة~$\Lang L$، مجالها
+$\Domain M = \{0, 1, 2, \ldots \}$، والتعيينات فيها
+$\Assign{\Obj{zero}}{M} = 0$، و$\Assign{\Obj{one}}{M} = 1$،
+و$\Assign{\Obj{two}}{M} = 2$، وعلى هذا القياس. أما رمز العلاقة
+الثنائية~$<$، فنأخذ~$\Assign{<}{M}$ مجموعة الأزواج
+$\tuple{c_1, c_2} \in \Domain{M}^2$ التي يكون فيها $c_1$ أصغر
+من~$c_2$. فمن أمثلتها $\tuple{1, 3} \in \Assign{<}{M}$، وأما
+$\tuple{2, 2} \notin \Assign{<}{M}$. وأما
+ال!!{function} الثنائية~$+$، فنجعل $\Assign{+}{M}$ الجمع
+المعتاد؛ ومنه $\Assign{+}{M}(2,3)=5$. وعلى هذا نؤول
+ال!!{function} الثنائية~$\times$ بالضرب المعتاد. فتكون !!{value}
+~$\Obj{four}$ هي~$4$، وتُحسب !!{value}
+~$\times(\Obj{two}, +(\Obj{three},\Obj{zero}))$، وهي بالترميز
+الوسطي $\Obj{two} \times (\Obj{three} + \Obj{zero})$، كما يأتي:
+\begin{multline*}
+\Value{\times(\Obj{two}, +(\Obj{three},\Obj{zero}))}{M} =\\
+\begin{aligned}
+& \Assign{\times}{M}(\Value{\Obj{two}}{M}, \Value{+(\Obj{three}, \Obj{zero})}{M})\\
+& = \Assign{\times}{M}(\Value{\Obj{two}}{M}, \Assign{+}{M}(\Value{\Obj{three}}{M},
+\Value{\Obj{zero}}{M})) \\
+& = \Assign{\times}{M}(\Assign{\Obj{two}}{M}, \Assign{+}{M}(\Assign{\Obj{three}}{M},
+\Assign{\Obj{zero}}{M})) \\
+& = \Assign{\times}{M}(2, \Assign{+}{M}(3, 0)) \\
+& = \Assign{\times}{M}(2, 3) \\
+& = 6
+\end{aligned}
+\end{multline*}
+\end{ex}
+
+\begin{prob}
+هل $\Struct N$، وهو النموذج القياسي للحساب، بنية مغطاة؟ بيّن وجه جوابك.
+\end{prob}
+
+\end{document}

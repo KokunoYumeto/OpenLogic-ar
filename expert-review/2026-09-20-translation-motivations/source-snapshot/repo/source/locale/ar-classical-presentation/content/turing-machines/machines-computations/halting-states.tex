@@ -1,0 +1,59 @@
+% Part: turing-machines
+% Chapter: machines-computations
+% Section: halting-states
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{tur}{mac}{hal}
+\olsection{حالات التوقف}
+
+\begin{explain}
+جعلنا توقف الآلة ناشئًا عن عدم وجود تعليمة تنفذها. غير أن الشائع في بعض تمثيلات آلات تورنغ تخصيص \emph{حالة توقف} ${\OLId{latin-ordinary}{h}}$، مع ${\OLId{latin-ordinary}{h}} \in {\OLId{latin-looped}{Q}}$.
+
+ومعنى ذلك أن الآلة، إذا قضت عملها فتهيأت لقبول الدخل أو فرغت من كتابة الخرج، تدخل الحالة~${\OLId{latin-ordinary}{h}}$ وتقف. وقد يخصص لها حالتا توقف: إحداهما للقبول، والأخرى للرفض.
+\end{explain}
+
+\begin{ex}\emph{حالات التوقف}.
+ولنوضح الأمر بتعديل آلة الزوجية. فقد كانت تقف في الحالة~${\OLId{latin-ordinary}{q}}_{\OLMathNumeral{0}}$ عند الدخل الزوجي؛ فنزيد الآن تعليمة تنقلها إلى حالة التوقف المخصوصة.
+\[
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+                    semithick]
+  \tikzstyle{every state}=[fill=none,draw=black,text=black]
+
+  \node[initial, state]         (A)                     {${\OLId{latin-ordinary}{q}}_{\OLMathNumeral{0}}$};
+  \node[state]         (B) [right of=A] {${\OLId{latin-ordinary}{q}}_{\OLMathNumeral{1}}$};
+  \node[state]         (C) [below of=A] {${\OLId{latin-ordinary}{h}}$};
+
+  \path (A) edge [bend left] node {\TMtrans{\TMstroke}{\TMstroke}{R}} (B)
+        edge node {\TMtrans{\TMblank}{\TMblank}{N}} (C)
+        (B) edge [loop above] node {\TMtrans{\TMblank}{\TMblank}{R}} (B)
+            edge [bend left] node {\TMtrans{\TMstroke}{\TMstroke}{R}} (A);
+\end{tikzpicture}
+\]
+
+ونزيد في التعديل: كانت الآلة، إذا تبين لها فردية الدخل، تدور بلا توقف. فنجعل لها حالة \emph{رفض} عوضًا عن ذلك، ونستبدل بالتعليمة الدائرة تعليمة تنقلها إلى حالة الرفض~${\OLId{latin-ordinary}{r}}$.
+\[
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+                    semithick]
+  \tikzstyle{every state}=[fill=none,draw=black,text=black]
+
+  \node[initial,state]         (A)                     {${\OLId{latin-ordinary}{q}}_{\OLMathNumeral{0}}$};
+  \node[state]         (B) [right of=A] {${\OLId{latin-ordinary}{q}}_{\OLMathNumeral{1}}$};
+  \node[state]         (C) [below of=A] {${\OLId{latin-ordinary}{h}}$};
+  \node[state]         (D) [below of=B] {${\OLId{latin-ordinary}{r}}$};
+
+  \path (A) edge [bend left] node {\TMtrans{\TMstroke}{\TMstroke}{R}} (B)
+        edge node {\TMtrans{\TMblank}{\TMblank}{N}} (C)
+        (B) edge node {\TMtrans{\TMblank}{\TMblank}{N}} (D)
+            edge [bend left] node {\TMtrans{\TMstroke}{\TMstroke}{R}} (A);
+\end{tikzpicture}
+\]
+\end{ex}
+
+\begin{explain}
+ولهذا التخصيص فائدة؛ إذ يظهر به قبول المدخلات ورفضها ظهورًا صريحًا. لكنه لا يزيد شيئًا في القدرة الحسابية للآلة. وللاكتفاء بمعنى التوقف الأول مزاياه أيضًا؛ فإن تعريفنا السابق ييسر عرض برهان \emph{مسألة التوقف} ويقرب معناه إلى الحدس. ولذلك نثبت على التعريف الأصلي.
+\end{explain}
+
+\end{document}

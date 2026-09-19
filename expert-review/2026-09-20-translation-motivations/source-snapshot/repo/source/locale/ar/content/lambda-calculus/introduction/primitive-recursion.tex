@@ -1,0 +1,135 @@
+% Part: lambda-calculus
+% Chapter: introduction
+% Section: primitive-recursion
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{int}{pr}
+\olsection{الدوال \usetoken{S}{lambda definable} مغلقة تحت العودية البدائية}
+
+حين نصل إلى العودية البدائية، نحتاج أخيرًا إلى بعض العمل. وسنمضي على
+مراحل. وكما سبق، نفترض أن لدينا حدين~$G'$ و$H'$، وأن كلًا منهما
+!!{lambda define} دالته، $g$ و$h$ على الترتيب، ونريد حدًا~$F$
+!!{lambda define}s الدالة~$f$ المعرّفة بـ
+\begin{align*}
+f(0, \vec z) & = g(\vec z) \\
+f(x+1, \vec z) & = h(x, f(x,\vec z), \vec z).
+\end{align*}
+وبوجه عام، إذا أعطينا حدي لامبدا~$G'$ و$H'$، فيكفي إيجاد حد~$F$ بحيث
+\begin{align*}
+F(\num{0}, \vec z) & \equiv G(\vec z) \\
+F(\overline{n+1}, \vec z) & \equiv H(\num{n}, F(\num{n}, \vec z), \vec z)
+\end{align*}
+لكل عدد طبيعي~$n$؛ وكون كل من~$G'$ و$H'$ !!{lambda define} دالته،
+$g$ و$h$ على الترتيب، يعني أنه متى أحللنا الأعداد~$\num{\vec m}$ محل~$\vec z$،
+اختزل~$F(\num{n+1}, \num{\vec m})$ إلى الجواب الصحيح في صورة سوية.
+
+لكن يكفي لهذا إيجاد حد~$F$ يحقق
+\begin{align*}
+F(\num 0) & \equiv G \\
+F(\overline {n+1}) & \equiv H(\num{n},F(\num{n}))
+\intertext{لكل عدد طبيعي $n$، حيث}
+G & = \lambd[\vec z][G'(\vec z)] \text{ و}\\
+H(u,v) & = \lambd[\vec z][H'(u,v(\vec z),\vec z)].
+\end{align*}
+وبعبارة أخرى، نستطيع بحيل لامبدا تجنب القلق بشأن المعلمات الإضافية
+$\vec z$، إذ يمتصها ترميز لامبدا.
+
+وقبل تعريف الحد~$F$، نحتاج إلى آلية لمعالجة الأزواج المرتبة. وتوفرها
+اللمّة الآتية.
+
+\begin{lem}
+يوجد حد لامبدا~$D$ بحيث يكون، لكل زوج من حدي لامبدا~$M$ و$N$،
+$D(M,N)(\num{0}) \red M$ و$D(M,N)(\num{1}) \red N$.
+\end{lem}
+
+\begin{proof}
+عرّف أولًا حد لامبدا~$K$ بـ
+\[
+K(y) = \lambd[x][y].
+\]
+وبعبارة أخرى،~$K$ هو الحد~$\lambd[y][\lambd[x][y]]$. ومن وجهة أخرى،
+لكل~$M$، تكون~$K(M)$ دالة ثابتة تعيد~$M$ على أي مدخل.
+
+وعرّف الآن~$D(x,y,z)$ بـ$D(x,y,z) = z (K(y))x$. عندئذ لدينا
+\begin{align*}
+D(M,N,\num 0) & \red \num 0 (K(N)) M \red M \text{ و}\\
+D(M,N,\num 1) & \red \num 1 (K(N)) M \red K(N) M \red N,
+\end{align*}
+كما هو مطلوب.
+\end{proof}
+
+الفكرة هي أن~$D(M,N)$ يمثل الزوج~$\tuple{M, N}$، وإذا افترضنا أن~$P$
+يمثل زوجًا كهذا، فإن~$P(\num 0)$ و$P(\num 1)$ يمثلان الإسقاطين الأيسر
+والأيمن، أي~$(P)_0$ و$(P)_1$. وسنستعمل الترميزين الأخيرين.
+
+\begin{lem}
+الدوال~!!{lambda definable} مغلقة تحت العودية البدائية.
+\end{lem}
+
+\begin{proof}
+نحتاج إلى إثبات أنه إذا أعطينا أي حدين~$G$ و$H$، أمكننا إيجاد حد~$F$
+بحيث
+\begin{align*}
+F(\num{0}) & \equiv G \\
+F(\num{n+1}) & \equiv H(\num{n}, F(\num{n}))
+\end{align*}
+لكل عدد طبيعي~$n$. والفكرة، على وجه التقريب، هي حساب متتاليات من
+\emph{الأزواج}
+\[
+\tuple{\num 0, F(\num 0)}, \tuple{\num 1, F(\num 1)}, \dots,
+\]
+باستعمال الأعداد بوصفها مكررات. ولاحظ أن الزوج الأول ليس إلا
+$\tuple{\num 0, G}$. وإذا أعطينا زوجًا~$\tuple{\num{n}, F(\num{n})}$،
+فمن المفترض أن يكون الزوج التالي~$\tuple{\num{n+1}, F(\num{n+1})}$
+مكافئًا للزوج~$\tuple{\num{n+1}, H(\num{n}, F(\num{n}))}$. وسنصمم حد
+لامبدا~$T$ ينجز هذا الانتقال ذي الخطوة الواحدة.
+
+والتفاصيل كما يأتي. عرّف~$T(u)$ بـ
+\[
+T(u) = \tuple{\fn{Succ}((u)_0), H((u)_0,(u)_1)}.
+\]
+ويسهل الآن التحقق من أنه، لكل عدد~$n$،
+\[
+T(\tuple{\num{n}, M}) \red \tuple{\num{n+1}, H(\num{n}, M)}.
+\]
+وكما اقترحنا، عند إعطاء~$G$ و$H$، عرّف~$F(u)$ بـ
+\[
+F(u) = (u(T,\tuple{\num 0, G}))_1.
+\]
+وبعبارة أخرى، عند المدخل~$\num{n}$، يكرر~$F$ الدالة~$T$ عدد~$n$ من
+المرات على~$\tuple{\num 0, G}$، ثم يعيد المركبة الثانية. وفي البداية
+لدينا
+\begin{enumerate}
+\item $\num{0} (T, \tuple{\num 0, G}) \equiv \tuple{\num{0}, G}$
+\item $F(\num{0}) \equiv G$
+\end{enumerate}
+وبالاستقراء على~$n$، نستطيع إثبات أن الآتي يصدق لكل عدد طبيعي:
+\begin{enumerate}
+\item $\num{n+1}(T, \tuple{\num{0}, G}) \equiv \tuple{\num{n+1}, F(\num{n+1})}$
+\item $F(\num{n+1}) \equiv H(\num{n}, F(\num{n}))$
+\end{enumerate}
+فللبند الثاني لدينا
+\begin{align*}
+F(\num{n+1}) & \red (\num{n+1}(T, \tuple{\num 0, G}))_1 \\
+& \equiv (T(\num{n} (T, \tuple{\num 0, G})))_1 \\
+& \equiv (T(\tuple{\num{n}, F(\num{n})}))_1 \\
+& \equiv (\tuple{\num{n+1}, H(\num{n}, F(\num{n}))})_1 \\
+& \equiv H(\num{n}, F(\num{n})).
+\end{align*}
+وقد استعملنا هنا فرض الاستقراء في السطر قبل الأخير. وللبند الأول لدينا
+\begin{align*}
+\num{n+1} (T, \tuple{\num 0, G}) &
+\equiv T(\num{n} (T, \tuple{\num 0, G})) \\
+& \equiv T( \tuple{\num{n}, F(\num{n})}) \\
+& \equiv \tuple{\num{n+1}, H(\num{n}, F(\num{n}))} \\
+& \equiv \tuple{\num{n+1}, F(\num{n+1})}.
+\end{align*}
+وقد استعملنا هنا البند الثاني في السطر الأخير. وهكذا أثبتنا أن
+$F(\num 0) \equiv G$ وأنه، لكل~$n$، يتحقق~$F(\num {n+1}) \equiv H(\num n,
+F(\num{n}))$، وهو بالضبط ما نحتاج إليه.
+\end{proof}
+
+\end{document}

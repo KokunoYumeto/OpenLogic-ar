@@ -1,0 +1,199 @@
+% Part: turing-machines
+% Chapter: undecidability
+% Section: representing-tms
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{tur}{und}{rep}
+\olsection{تمثيل آلات تورنغ}
+
+\begin{explain}
+تمثيل آلة تورنغ وسلوكها بـ!!a{sentence} من الرتبة الأولى يقتضي
+اختيار لغة تلائم هذا الغرض. ولها صنفان من التعبيرات:
+!!{predicate}s تصف تهيئات الآلة، وتعبيرات نرقم بها خطوات التنفيذ،
+أي «اللحظات»، ومواضع الشريط.
+
+فنضع صنفين من ال!!{predicate}s الثنائية المحل: لكل حالة~${\OLId{latin-ordinary}{q}}$
+!!a{predicate}~$\Obj Q_{\OLId{latin-ordinary}{q}}$، ولكل رمز شريط~$\sigma$
+!!a{predicate}~$\Obj S_\sigma$. فبالصنف الأول نبيّن حالة~${\OLId{latin-looped}{M}}$
+وموضع رأسها، وبالثاني نبيّن ما في الشريط من رموز.
+
+ولا بد، لتعيين موضع الرأس وعدد الخطوات المنفذة، من تعبير عن
+الأعداد. فنتخذ لذلك !!a{constant}~$\Obj 0$ ودالة خلف أحادية
+المحل~$\prime$. واصطلاحنا أن نكتب علامة هذه الدالة \emph{بعد}
+وسيطها، مع إسقاط القوسين.
+
+ويقابل كل عدد~${\OLId{latin-ordinary}{n}}$ حد مخصوص~$\num{{\OLId{latin-ordinary}{n}}}$، نسميه
+\emph{العدد القياسي} لـ~${\OLId{latin-ordinary}{n}}$، وبه نمثل العدد في~$\Lang L_{\OLId{latin-looped}{M}}$.
+فـ$\num{{\OLMathNumeral{0}}}$ هو $\Obj 0$، و$\num{{\OLMathNumeral{1}}}$ هو $\Obj 0'$،
+و$\num{{\OLMathNumeral{2}}}$ هو $\Obj 0''$، وعلى هذا القياس. وحد ذلك بدقة:
+\begin{align*}
+\num{{\OLMathNumeral{0}}} & = \Obj 0 \\
+\num{{\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}}} &= \num{{\OLId{latin-ordinary}{n}}}'
+\end{align*}
+فالحد $\num{{\OLMathNumeral{0}}}$، وهو $\Obj 0$، اسم للخانة القصوى في اليسار،
+واسم أيضًا للزمن السابق لأول خطوة تنفيذ، أي زمن التهيئة الابتدائية.
+والحد $\num{{\OLMathNumeral{1}}}$، وهو $\Obj 0'$، اسم للخانة التالية لها يمينًا،
+وللزمن الذي يلي أول خطوة تنفيذ؛ وهكذا فيما بعد.
+
+ونزيد !!a{predicate}~$<$، نستعمله لترتيب المواضع فيكون معناه
+«إلى يسار»، ولترتيب خطوات التنفيذ فيكون معناه «قبل».
+
+ثم نورد، بعد تعيين اللغة، «بديهيات» $!T({\OLId{latin-looped}{M}},{\OLId{latin-ordinary}{w}})$؛ وهي
+ال!!{sentence}s التي يدل مجموعها على سلوك~${\OLId{latin-looped}{M}}$ عند الدخل~${\OLId{latin-ordinary}{w}}$.
+فمنها !!{sentence}s تفرض شروطًا على $\Obj 0$ و$\prime$ و$<$،
+ومنها !!{sentence}s لتهيئة الدخل، ومنها !!{sentence}s تبين
+تهيئة~${\OLId{latin-looped}{M}}$ الحاصلة عقب تنفيذ تعليمة بعينها.
+\end{explain}
+
+\begin{defn}
+  \ollabel{defn:tm-descr}
+لتكن ${\OLId{latin-looped}{M}}=\tuple{{\OLId{latin-looped}{Q}},\Sigma,{\OLId{latin-ordinary}{q}}_{\OLMathNumeral{0}},\delta}$ آلة تورنغ. نعيّن اللغة
+$\Lang L_{\OLId{latin-looped}{M}}$ بالأجزاء الآتية:
+\begin{enumerate}
+\item !!{predicate} ثنائي المحل $ \Obj Q_{\OLId{latin-ordinary}{q}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})$ لكل حالة~${\OLId{latin-ordinary}{q}}\in {\OLId{latin-looped}{Q}}$.
+  والمقصود بـ$\Obj Q_{\OLId{latin-ordinary}{q}}(\num{{\OLId{latin-ordinary}{m}}},\num{{\OLId{latin-ordinary}{n}}})$ أن ${\OLId{latin-looped}{M}}$ تكون، بعد ${\OLId{latin-ordinary}{n}}$
+  خطوة، في الحالة~${\OLId{latin-ordinary}{q}}$ ورأسها على الخانة رقم~${\OLId{latin-ordinary}{m}}$.
+\item !!{predicate} ثنائي المحل $\Obj S_\sigma({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})$ لكل رمز
+  $\sigma\in\Sigma$. والمقصود بـ$\Obj S_\sigma(\num{{\OLId{latin-ordinary}{m}}},\num{{\OLId{latin-ordinary}{n}}})$
+  أن الخانة رقم~${\OLId{latin-ordinary}{m}}$ تحتوي، بعد ${\OLId{latin-ordinary}{n}}$ خطوة، الرمز~$\sigma$.
+\item !!a{constant}~$\Obj 0$.
+\item !!a{function} أحادية المحل~$\prime$.
+\item !!a{predicate} ثنائي المحل~$<$.
+\end{enumerate}
+\end{defn}
+
+وهذه ال!!{sentence}s الواصفة لعمل الآلة~${\OLId{latin-looped}{M}}$ عند الدخل
+${\OLId{latin-ordinary}{w}}=\sigma_{{\OLId{latin-ordinary}{i}}_{\OLMathNumeral{1}}}\dots\sigma_{{\OLId{latin-ordinary}{i}}_{\OLId{latin-ordinary}{k}}}$:
+\begin{enumerate}
+\item بديهيات الأعداد والعلاقة~$<$:
+\begin{enumerate}
+\item !!^a{sentence} مفادها أن كل عدد دون خلفه:
+\[
+\lforall[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{x}} < {\OLId{latin-ordinary}{x}}']
+\]
+\item !!^a{sentence} تنص على تعدي $<$:
+\[
+\lforall[{\OLId{latin-ordinary}{x}}][\lforall[{\OLId{latin-ordinary}{y}}][\lforall[{\OLId{latin-ordinary}{z}}][
+      (({\OLId{latin-ordinary}{x}} < {\OLId{latin-ordinary}{y}} \land {\OLId{latin-ordinary}{y}} < {\OLId{latin-ordinary}{z}}) \lif {\OLId{latin-ordinary}{x}} < {\OLId{latin-ordinary}{z}})]]]
+\]
+\end{enumerate}
+\item بديهيات تهيئة الدخل:
+\begin{enumerate}
+\item عند تمام ${\OLMathNumeral{0}}$ من الخطوات، أي قبل التنفيذ، تكون ${\OLId{latin-looped}{M}}$ على الحالة
+  الابتدائية~${\OLId{latin-ordinary}{q}}_{\OLMathNumeral{0}}$ ورأسها ماسح للخانة رقم~${\OLMathNumeral{1}}$:
+\[
+\Obj Q_{{\OLId{latin-ordinary}{q}}_{\OLMathNumeral{0}}}(\num{{\OLMathNumeral{1}}},\num{{\OLMathNumeral{0}}})
+\]
+\item الخانات ${\OLId{latin-ordinary}{k}}+{\OLMathNumeral{1}}$ الأولى تحمل الرموز $\TMendtape$،
+  و$\sigma_{{\OLId{latin-ordinary}{i}}_{\OLMathNumeral{1}}}$،~\dots، و$\sigma_{{\OLId{latin-ordinary}{i}}_{\OLId{latin-ordinary}{k}}}$:
+\[
+\Obj S_\TMendtape(\num{{\OLMathNumeral{0}}}, \num{{\OLMathNumeral{0}}}) \land
+\Obj S_{\sigma_{{\OLId{latin-ordinary}{i}}_{\OLMathNumeral{1}}}}(\num{{\OLMathNumeral{1}}}, \num{{\OLMathNumeral{0}}}) \land
+\dots \land
+\Obj S_{\sigma_{{\OLId{latin-ordinary}{i}}_{\OLId{latin-ordinary}{k}}}}(\num{{\OLId{latin-ordinary}{k}}}, \num{{\OLMathNumeral{0}}})
+\]
+\item وسائر الشريط خال من غير علامة الفراغ:
+\[
+\lforall[{\OLId{latin-ordinary}{x}}][(\num{{\OLId{latin-ordinary}{k}}} < {\OLId{latin-ordinary}{x}} \lif \Obj S_\TMblank({\OLId{latin-ordinary}{x}}, \num{{\OLMathNumeral{0}}}))]
+\]
+\end{enumerate}
+\item بديهيات الانتقال بين التهيئتين المتعاقبتين:
+
+ولنرمز بـ$!A({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})$ إلى اقتران ال!!{sentence}s كلها مما صورته
+\[
+\lforall[{\OLId{latin-ordinary}{z}}][
+  ((({\OLId{latin-ordinary}{z}} < {\OLId{latin-ordinary}{x}} \lor {\OLId{latin-ordinary}{x}} < {\OLId{latin-ordinary}{z}}) \land \Obj S_\sigma({\OLId{latin-ordinary}{z}}, {\OLId{latin-ordinary}{y}}))
+  \lif \Obj S_\sigma({\OLId{latin-ordinary}{z}}, {\OLId{latin-ordinary}{y}}'))]
+\]
+وذلك لكل $\sigma\in\Sigma$. فمعنى $!A(\num{{\OLId{latin-ordinary}{m}}},\num{{\OLId{latin-ordinary}{n}}})$ أن
+الشريط بعد ${\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}}$ خطوة، باستثناء الخانة رقم~${\OLId{latin-ordinary}{m}}$، لم يتغير عما
+كان عليه بعد ${\OLId{latin-ordinary}{n}}$ خطوة.
+\begin{enumerate}
+\item \ollabel{rep-right} نقابل كل تعليمة
+$\delta({\OLId{latin-ordinary}{q}}_{\OLId{latin-ordinary}{i}},\sigma)=\tuple{{\OLId{latin-ordinary}{q}}_{\OLId{latin-ordinary}{j}},\sigma',\TMright}$ بال!!{sentence}:
+\begin{align*}
+& \lforall[{\OLId{latin-ordinary}{x}}][\lforall[{\OLId{latin-ordinary}{y}}][(
+   (\Obj Q_{{\OLId{latin-ordinary}{q}}_{\OLId{latin-ordinary}{i}}}({\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}) \land \Obj S_{\sigma}({\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}})) \lif {}]] \\
+&\qquad   (\Obj Q_{{\OLId{latin-ordinary}{q}}_{\OLId{latin-ordinary}{j}}}({\OLId{latin-ordinary}{x}}', {\OLId{latin-ordinary}{y}}') \land \Obj S_{\sigma'}({\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}') \land
+!A({\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}})))
+\end{align*}
+ومفاد ذلك: إذا مضت~${\OLId{latin-ordinary}{y}}$ خطوة وكانت الآلة في الحالة~${\OLId{latin-ordinary}{q}}_{\OLId{latin-ordinary}{i}}$ على
+الخانة~${\OLId{latin-ordinary}{x}}$ ورمزها~$\sigma$، فإنها عند تمام ${\OLId{latin-ordinary}{y}}+{\OLMathNumeral{1}}$ خطوة تكون على
+الخانة~${\OLId{latin-ordinary}{x}}+{\OLMathNumeral{1}}$ في الحالة~${\OLId{latin-ordinary}{q}}_{\OLId{latin-ordinary}{j}}$، وتحمل الخانة~${\OLId{latin-ordinary}{x}}$ الرمز
+$\sigma'$؛ وأما ما عدا~${\OLId{latin-ordinary}{x}}$ من الخانات فيبقى على ما كان فيه
+من الرموز بعد~${\OLId{latin-ordinary}{y}}$ خطوة.
+
+\item \ollabel{rep-left} نقابل كل تعليمة
+$\delta({\OLId{latin-ordinary}{q}}_{\OLId{latin-ordinary}{i}},\sigma)=\tuple{{\OLId{latin-ordinary}{q}}_{\OLId{latin-ordinary}{j}},\sigma',\TMleft}$ بال!!{sentence}:
+\begin{align*}
+& \lforall[{\OLId{latin-ordinary}{x}}][\lforall[{\OLId{latin-ordinary}{y}}][
+    ((\Obj Q_{{\OLId{latin-ordinary}{q}}_{\OLId{latin-ordinary}{i}}}({\OLId{latin-ordinary}{x}}', {\OLId{latin-ordinary}{y}}) \land \Obj S_{\sigma}({\OLId{latin-ordinary}{x}}', {\OLId{latin-ordinary}{y}})) \lif {}]]\\
+& \qquad   (\Obj Q_{{\OLId{latin-ordinary}{q}}_{\OLId{latin-ordinary}{j}}}({\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}') \land \Obj S_{\sigma'}({\OLId{latin-ordinary}{x}}', {\OLId{latin-ordinary}{y}}') \land
+!A({\OLId{latin-ordinary}{x}}', {\OLId{latin-ordinary}{y}}))) \land {}\\
+& \lforall[{\OLId{latin-ordinary}{y}}][((\Obj Q_{{\OLId{latin-ordinary}{q}}_{\OLId{latin-ordinary}{i}}}(\num{{\OLMathNumeral{0}}}, {\OLId{latin-ordinary}{y}}) \land \Obj S_{\sigma}(\num{{\OLMathNumeral{0}}},
+    {\OLId{latin-ordinary}{y}})) \lif {}]\\
+& \qquad (\Obj Q_{{\OLId{latin-ordinary}{q}}_{\OLId{latin-ordinary}{j}}}(\num{{\OLMathNumeral{0}}}, {\OLId{latin-ordinary}{y}}') \land \Obj S_{\sigma'}(\num{{\OLMathNumeral{0}}},
+  {\OLId{latin-ordinary}{y}}') \land !A(\num{{\OLMathNumeral{0}}}, {\OLId{latin-ordinary}{y}})))
+\end{align*}
+وتأمل وجه هذه الصياغة: لم نقل «إذا كانت الآلة تمسح الخانة~${\OLId{latin-ordinary}{x}}$،
+~\dots»، بل «إذا كانت تمسح الخانة~${\OLId{latin-ordinary}{x}}+{\OLMathNumeral{1}}$، \dots». فإنها بالتحرك
+يسارًا تصير في الخطوة التالية إلى الخانة~${\OLId{latin-ordinary}{x}}$، في حين تقع الكتابة
+على الخانة~${\OLId{latin-ordinary}{x}}+{\OLMathNumeral{1}}$. وإنما عدلنا إلى هذا التعبير لأن اللغة لا تتضمن
+طرحًا ولا دالة سلف.
+
+ولما كانت الأعداد ذات الصورة ${\OLId{latin-ordinary}{x}}+{\OLMathNumeral{1}}$ هي ${\OLMathNumeral{1}}$، و${\OLMathNumeral{2}}$،~\dots،
+بقيت حالة الخانة~${\OLMathNumeral{0}}$ خارج هذا الشرط: فقد يؤمر الرأس فيها بالتحرك
+يسارًا، ولا موضع له إلى اليسار، فيبقى مكانه. ولهذه الحالة
+وضعنا المقترن الثاني. فهو يقول: إذا كانت الآلة بعد ${\OLId{latin-ordinary}{y}}$ خطوة
+تمسح الخانة~${\OLMathNumeral{0}}$ في الحالة~${\OLId{latin-ordinary}{q}}_{\OLId{latin-ordinary}{i}}$، وكان في الخانة~${\OLMathNumeral{0}}$
+الرمز~$\sigma$، فإنها بعد ${\OLId{latin-ordinary}{y}}+{\OLMathNumeral{1}}$ خطوة تظل على الخانة~${\OLMathNumeral{0}}$،
+وتصير إلى الحالة~${\OLId{latin-ordinary}{q}}_{\OLId{latin-ordinary}{j}}$، ويكون في الخانة~${\OLMathNumeral{0}}$ الرمز
+$\sigma'$؛ وأما الخانات غير~${\OLMathNumeral{0}}$ فتبقى رموزها كما كانت بعد~${\OLId{latin-ordinary}{y}}$
+خطوة.
+\item \ollabel{rep-stay} نقابل كل تعليمة
+$\delta({\OLId{latin-ordinary}{q}}_{\OLId{latin-ordinary}{i}},\sigma)=\tuple{{\OLId{latin-ordinary}{q}}_{\OLId{latin-ordinary}{j}},\sigma',\TMstay}$ بال!!{sentence}:
+\begin{align*}
+& \lforall[{\OLId{latin-ordinary}{x}}][\lforall[{\OLId{latin-ordinary}{y}}][(
+   (\Obj Q_{{\OLId{latin-ordinary}{q}}_{\OLId{latin-ordinary}{i}}}({\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}) \land \Obj S_{\sigma}({\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}})) \lif {}]] \\
+&\qquad   (\Obj Q_{{\OLId{latin-ordinary}{q}}_{\OLId{latin-ordinary}{j}}}({\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}') \land \Obj S_{\sigma'}({\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}') \land
+!A({\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}})))
+\end{align*}
+\end{enumerate}
+\end{enumerate}
+ونسمي $!T({\OLId{latin-looped}{M}},{\OLId{latin-ordinary}{w}})$ اقتران ال!!{sentence}s المتقدمة جميعًا، الخاصة
+بالآلة~${\OLId{latin-looped}{M}}$ والدخل~${\OLId{latin-ordinary}{w}}$.
+
+وأما توقف~${\OLId{latin-looped}{M}}$ في نهاية المطاف، فنعبر عنه ب!!{sentence}
+مفادها أن دالة الانتقال تصير غير معرّفة بعد عدد من الخطوات.
+فلتكن ${\OLId{latin-looped}{X}}$ مجموعة الأزواج $\tuple{{\OLId{latin-ordinary}{q}},\sigma}$ التي تكون فيها
+$\delta({\OLId{latin-ordinary}{q}},\sigma)$ غير معرّفة؛ ولتكن $!E({\OLId{latin-looped}{M}},{\OLId{latin-ordinary}{w}})$ ال!!{sentence}
+\[
+\lexists[{\OLId{latin-ordinary}{x}}][\lexists[{\OLId{latin-ordinary}{y}}][(\bigvee_{\tuple{{\OLId{latin-ordinary}{q}}, \sigma} \in
+      {\OLId{latin-looped}{X}}}(\Obj Q_{\OLId{latin-ordinary}{q}}({\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}) \land \Obj S_\sigma({\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}})))]]
+\]
+
+وإن خصصنا للآلة حالة توقف~${\OLId{latin-ordinary}{h}}$، اختصر التعبير؛ فتكون
+ال!!{sentence}~$!E({\OLId{latin-looped}{M}},{\OLId{latin-ordinary}{w}})$
+\[
+\lexists[{\OLId{latin-ordinary}{x}}][\lexists[{\OLId{latin-ordinary}{y}}][\Obj Q_{\OLId{latin-ordinary}{h}}({\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}})]]
+\]
+دالةً على توقف الآلة في نهاية المطاف.
+
+\begin{prop}
+\ollabel{prop:mlessk}
+من ${\OLId{latin-ordinary}{m}}<{\OLId{latin-ordinary}{k}}$ يلزم $!T({\OLId{latin-looped}{M}},{\OLId{latin-ordinary}{w}})\Entails\num{{\OLId{latin-ordinary}{m}}}<\num{{\OLId{latin-ordinary}{k}}}$.
+\end{prop}
+
+\begin{proof}
+برهانه متروك للتمرين.
+\end{proof}
+
+\begin{prob}
+برهن \olref[tur][und][rep]{prop:mlessk}.
+(إرشاد: اجعل الاستقراء على ${\OLId{latin-ordinary}{k}}-{\OLId{latin-ordinary}{m}}$.)
+\end{prob}
+
+\end{document}

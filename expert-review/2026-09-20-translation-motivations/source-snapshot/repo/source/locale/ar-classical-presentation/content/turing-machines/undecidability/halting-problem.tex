@@ -1,0 +1,139 @@
+% Part: turing-machines
+% Chapter: undecidability
+% Section: halting-problem
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{tur}{und}{hal}
+\olsection{مسألة التوقف}
+
+\begin{explain}
+لنثبت تعدادًا لأوصاف آلات تورنغ. فلكل آلة \emph{فهرس} يدل على
+موضعها في هذا التعداد: ${\OLId{latin-looped}{M}}_{\OLMathNumeral{1}}$، و${\OLId{latin-looped}{M}}_{\OLMathNumeral{2}}$، و${\OLId{latin-looped}{M}}_{\OLMathNumeral{3}}$،~\dots.
+
+وقد علمنا وجود دوال لا تقبل الحساب بآلة تورنغ؛ لأن مجموعة أوصاف
+الآلات، ومن ثم الآلات نفسها بالمعنى المتقدم، !!{enumerable}،
+ومجموعة الدوال كلها من $\Nat$ إلى~$\Nat$ ليست كذلك. إلا أن الحجة
+لا تقف عند إثبات الوجود المجرد؛ بل يمكن تعيين دوال بهذه الصفة.
+ومنها دالة التوقف.
+\end{explain}
+
+\begin{defn}[دالة التوقف]
+ \emph{دالة التوقف}~${\OLId{latin-ordinary}{h}}$ هي الدالة التي حدها:
+\[
+{\OLId{latin-ordinary}{h}}({\OLId{latin-ordinary}{e}},{\OLId{latin-ordinary}{n}}) =
+\begin{cases}
+  \text{0} & \text{إذا لم تتوقف الآلة~${\OLId{latin-looped}{M}}_{\OLId{latin-ordinary}{e}}$ عند الدخل ${\OLId{latin-ordinary}{n}}$} \\
+  \text{1} & \text{إذا توقفت الآلة~${\OLId{latin-looped}{M}}_{\OLId{latin-ordinary}{e}}$ عند الدخل ${\OLId{latin-ordinary}{n}}$}
+\end{cases}
+\]
+\end{defn}
+
+\begin{defn}[مسألة التوقف]
+\emph{مسألة التوقف} طلب تقرير توقف آلة تورنغ~${\OLId{latin-looped}{M}}_{\OLId{latin-ordinary}{e}}$ أو عدم توقفها
+عند دخل من~${\OLId{latin-ordinary}{n}}$ علامات، وذلك لكل اختيار لـ${\OLId{latin-ordinary}{e}}$ و~${\OLId{latin-ordinary}{n}}$.
+\end{defn}
+
+\begin{explain}
+ولإثبات أن~${\OLId{latin-ordinary}{h}}$ لا تقبل الحساب بآلة تورنغ، نبدأ بدالة متصلة بها
+هي ${\OLId{latin-ordinary}{s}}$، فنثبت امتناع حسابها. ونعتمد في البرهان على أمرين: أن كل
+ما تحسبه آلة تورنغ تحسبه آلة منضبطة
+(\olref[mac][dis]{sec})، وأن وصل آلتين ينتج آلة تورنغ واحدة
+(\olref[mac][cmb]{sec}).
+\end{explain}
+
+\begin{defn} لنجعل الدالة~${\OLId{latin-ordinary}{s}}$ محددة بالشرط الآتي:
+\[
+{\OLId{latin-ordinary}{s}}({\OLId{latin-ordinary}{e}}) =
+\begin{cases}
+  \text{0} & \text{إذا لم تتوقف الآلة~${\OLId{latin-looped}{M}}_{\OLId{latin-ordinary}{e}}$ عند الدخل ${\OLId{latin-ordinary}{e}}$} \\
+  \text{1} & \text{إذا توقفت الآلة~${\OLId{latin-looped}{M}}_{\OLId{latin-ordinary}{e}}$ عند الدخل ${\OLId{latin-ordinary}{e}}$}
+\end{cases}
+\]
+\end{defn}
+
+\begin{lem}
+لا تقبل الدالة~${\OLId{latin-ordinary}{s}}$ الحساب بآلة تورنغ.
+\end{lem}
+
+\begin{proof}
+لنفرض خلاف المطلوب، وهو أن الدالة~${\OLId{latin-ordinary}{s}}$ قابلة للحساب بآلة تورنغ.
+فتوجد آلة~${\OLId{latin-looped}{S}}$ تحسب~${\OLId{latin-ordinary}{s}}$. ولنا، من غير نقصان في العموم، أن نجعل
+${\OLId{latin-looped}{S}}$ منضبطة، أي تتوقف ورأسها على الخانة الأولى. ونصلها بآلة~${\OLId{latin-looped}{J}}$
+تتوقف إذا ابتدأت بالدخل~${\OLMathNumeral{0}}$، أي إذا قرأت $\TMblank$ في الحالة
+الابتدائية على الخانة التي تلي علامة نهاية الشريط؛ وأما في غير
+ذلك فتسير إلى اليمين أبدًا ولا تتوقف. فالآلة ${\OLId{latin-looped}{S}}\concat {\OLId{latin-looped}{J}}$،
+المؤلفة بوصل ${\OLId{latin-looped}{S}}$ بـ~${\OLId{latin-looped}{J}}$، آلة تورنغ، فلا بد أن تكون ${\OLId{latin-looped}{M}}_{\OLId{latin-ordinary}{e}}$
+لفهرس ما~${\OLId{latin-ordinary}{e}}$؛ أي يقع وصفها في التعداد. ولنبدأ تشغيل ${\OLId{latin-looped}{M}}_{\OLId{latin-ordinary}{e}}$
+على دخل من ${\OLId{latin-ordinary}{e}}$ علامات~$\TMstroke$. ولا تخلو ${\OLId{latin-looped}{M}}_{\OLId{latin-ordinary}{e}}$ من التوقف
+أو عدمه:
+\begin{enumerate}
+\item إن توقفت ${\OLId{latin-looped}{M}}_{\OLId{latin-ordinary}{e}}$ على دخل من ${\OLId{latin-ordinary}{e}}$ علامات~$\TMstroke$،
+  كان ${\OLId{latin-ordinary}{s}}({\OLId{latin-ordinary}{e}})={\OLMathNumeral{1}}$. فتتوقف ${\OLId{latin-looped}{S}}$ عند الدخل~${\OLId{latin-ordinary}{e}}$ وقد أخرجت
+  علامة~$\TMstroke$ واحدة. وتبدأ ${\OLId{latin-looped}{J}}$ وفي الشريط علامة
+  $\TMstroke$، فلا تتوقف ${\OLId{latin-looped}{J}}$ حينئذ. لكن ${\OLId{latin-looped}{M}}_{\OLId{latin-ordinary}{e}}$ هي
+  ${\OLId{latin-looped}{S}}\concat {\OLId{latin-looped}{J}}$، وعملها عمل ${\OLId{latin-looped}{S}}$ تتلوها~${\OLId{latin-looped}{J}}$؛ فيلزم أن تسير
+  إلى اليمين بلا توقف. وهذا يمنع توقف ${\OLId{latin-looped}{M}}_{\OLId{latin-ordinary}{e}}$ عند الدخل المؤلف
+  من ${\OLId{latin-ordinary}{e}}$ علامات~$\TMstroke$.
+
+\item وإن لم تتوقف ${\OLId{latin-looped}{M}}_{\OLId{latin-ordinary}{e}}$ على دخل من ${\OLId{latin-ordinary}{e}}$ علامات
+  $\TMstroke$، كان ${\OLId{latin-ordinary}{s}}({\OLId{latin-ordinary}{e}})={\OLMathNumeral{0}}$. فتتوقف ${\OLId{latin-looped}{S}}$ عند الدخل~${\OLId{latin-ordinary}{e}}$
+  وقد أخلت الشريط من علامات العدد. وتبدأ ${\OLId{latin-looped}{J}}$ بهذا الشريط فتتوقف
+  فورًا. ولما كانت ${\OLId{latin-looped}{M}}_{\OLId{latin-ordinary}{e}}$ تعمل عمل ${\OLId{latin-looped}{S}}$ تتلوها~${\OLId{latin-looped}{J}}$، لزم أن
+  تتوقف ${\OLId{latin-looped}{M}}_{\OLId{latin-ordinary}{e}}$ عند دخل من ${\OLId{latin-ordinary}{e}}$ علامات~$\TMstroke$.
+\end{enumerate}
+فكلا الفرضين يؤدي إلى نقيضه. إذن لا توجد الآلة~${\OLId{latin-looped}{S}}$ المفروضة،
+ولا تقبل الدالة~${\OLId{latin-ordinary}{s}}$ الحساب بآلة تورنغ.
+\end{proof}
+
+\begin{thm}[استحالة حل مسألة التوقف]
+\ollabel{thm:halting-problem}
+لا حل لمسألة التوقف؛ وبعبارة أخرى، لا تقبل الدالة~${\OLId{latin-ordinary}{h}}$ الحساب
+بآلة تورنغ.
+\end{thm}
+
+\begin{proof}
+لو كانت ${\OLId{latin-ordinary}{h}}$ قابلة للحساب بآلة تورنغ~${\OLId{latin-looped}{H}}$، لأمكن اتخاذ ${\OLId{latin-looped}{H}}$
+في بناء آلة تحسب~${\OLId{latin-ordinary}{s}}$. ننسخ الدخل أولًا، ونجعل بينه وبين نسخته
+علامة~$\TMblank$، ثم نعيد الرأس إلى البداية ونشغّل~${\OLId{latin-looped}{H}}$.
+وصنع آلة للنسخ ممكن كما في \cref{tur:mac:dis:prob:copier}.
+فلو وجدت ${\OLId{latin-looped}{H}}$، لوصلناها بالناسخة، فحصلت آلة تقرر توقف ${\OLId{latin-looped}{M}}_{\OLId{latin-ordinary}{e}}$
+عند الدخل~${\OLId{latin-ordinary}{e}}$، أي تحسب~${\OLId{latin-ordinary}{s}}$. وقد ثبت أن هذه الآلة ممتنعة
+الوجود. فلا تكون ${\OLId{latin-ordinary}{h}}$ قابلة للحساب بآلة تورنغ.
+\end{proof}
+
+\begin{prob}
+يراد بمسألة التوقف الثلاثي (3-Halt) إيجاد إجراء قرار يبين، لآلة
+تورنغ مختارة كيفما اتفق، أتتوقف عند دخل من ثلاث علامات
+$\TMstroke$ على شريط خال فيما عداها أم لا. برهن أن هذه المسألة
+لا تقبل الحل.
+\end{prob}
+
+\begin{prob}
+لتكن مسألة التوقف قابلة للحل على أزواج الآلة والدخل
+${\OLId{latin-looped}{M}}_{\OLId{latin-ordinary}{e}}$ و~${\OLId{latin-ordinary}{n}}$ التي فيها ${\OLId{latin-ordinary}{e}}\neq {\OLId{latin-ordinary}{n}}$. بيّن أنها تقبل الحل حينئذ
+على الأزواج التي فيها ${\OLId{latin-ordinary}{e}}={\OLId{latin-ordinary}{n}}$ أيضًا.
+\end{prob}
+
+\begin{prob}
+ثبت امتناع حل مسألة التوقف حين يعطى عدد~${\OLId{latin-ordinary}{e}}$ يعيّن الآلة~${\OLId{latin-looped}{M}}_{\OLId{latin-ordinary}{e}}$
+بموضعها في تعداد الآلات. فانظر الآن في إعطاء وصف الآلة نفسه،
+على الوجه المبين في \olref[tur][und][enu]{sec}، دخلًا مباشرًا.
+أيصح أن توجد آلة تقرر مسألة التوقف إذا أخذت الأوصاف بدل الفهارس؟
+أجب مع بيان الحجة.
+\end{prob}
+
+\begin{prob} لتكن الدالة \emph{الجزئية}~${\OLId{latin-ordinary}{s}}'$ معرفة بالشرط:
+  \[
+  {\OLId{latin-ordinary}{s}}'({\OLId{latin-ordinary}{e}}) =
+  \begin{cases}
+    \text{1} & \text{إذا توقفت الآلة~${\OLId{latin-looped}{M}}_{\OLId{latin-ordinary}{e}}$ عند الدخل ${\OLId{latin-ordinary}{e}}$}\\
+    \text{غير معرّفة} & \text{إذا لم تتوقف الآلة~${\OLId{latin-looped}{M}}_{\OLId{latin-ordinary}{e}}$ عند الدخل ${\OLId{latin-ordinary}{e}}$}
+  \end{cases}
+  \]
+  برهن أنها \emph{قابلة} للحساب بآلة تورنغ.
+\end{prob}
+
+\end{document}

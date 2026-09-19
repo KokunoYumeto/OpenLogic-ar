@@ -1,0 +1,213 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{ordinals}{basic}
+\olsection{الخصائص الأساسية للأعداد الترتيبية}
+
+قد تبين أن أوائل الأعداد الترتيبية هي الأعداد الطبيعية. وإنما نبني
+نظرية الأعداد الترتيبية، في المقام الأول، لنتجاوز بمبدأ الاستقراء
+مجاله في الأعداد الطبيعية. ونمهد لذلك بنتائج أولية متتابعة.
+
+\begin{lem}\ollabel{ordmemberord}
+كل !!{element} من عدد ترتيبي عدد ترتيبي أيضًا.
+\end{lem}
+
+\begin{proof}
+نأخذ عددًا ترتيبيًا~$\alpha$، ونفرض~$b \in \alpha$. فتعدي~$\alpha$
+يعطي~$b \subseteq \alpha$؛ ولذلك ترتب~$\in$ المجموعة~$b$ ترتيبًا
+جيدًا، إذ إن~$\in$ ترتب~$\alpha$ ترتيبًا جيدًا.
+
+بقي تعدي~$b$. لنفرض~$x \in c \in b$؛ فيلزم~$c \in \alpha$ من
+$b \subseteq \alpha$. وبتعدي~$\alpha$ مرة أخرى نحصل على~$c \subseteq \alpha$،
+ثم~$x \in \alpha$. وهكذا~$x, c, b \in \alpha$. ولما كانت~$\in$
+ترتب~$\alpha$ ترتيبًا جيدًا، كانت~$\in$ علاقة متعدية على~$\alpha$،
+بموجب~\olref[sth][ordinals][wo]{wo:strictorder}. فمن~$x \in c \in b$
+يلزم~$x \in b$؛ وبالتعميم~$c \subseteq b$.
+\end{proof}
+
+\begin{cor}\ollabel{ordissetofsmallerord}
+لدينا~$\alpha = \Setabs{\beta \in \alpha}{\beta \text{ عدد ترتيبي}}$
+لكل عدد ترتيبي~$\alpha$.
+\end{cor}
+
+\begin{proof}
+هذه نتيجة مباشرة لـ\olref{ordmemberord}.
+\end{proof}
+
+وسنثبت نتيجتين أساسيتين، هما~\olref{ordinductionschema}
+و\olref{ordtrichotomy}؛ ومعناهما الإجمالي أن الانتماء يرتب الأعداد
+الترتيبية نفسها ترتيبًا جيدًا.
+
+\begin{thm}[الاستقراء المتناهي التجاوز]\ollabel{ordinductionschema}
+لكل صيغة~$\phi(x)$ يصح:
+\[
+\text{إذا كان }\exists \alpha \phi(\alpha)\text{، فإن }
+\exists \alpha(\phi(\alpha)
+\land (\forall \beta \in \alpha) \lnot \phi(\beta))
+\]
+والمكممات الظاهرة هنا مقيدة بالأعداد الترتيبية وإن لم يُصرَّح بالقيد.
+\end{thm}
+
+\begin{proof}
+%\olref{ordinductionschema1}.
+لنفرض~$\phi(\alpha)$ لعدد ترتيبي~$\alpha$. فإن كان
+$(\forall \beta \in \alpha) \lnot \phi(\beta)$ تم المطلوب. وإلا وضعنا
+$X = \Setabs{\beta \in \alpha}{\phi(\beta)}$، فكان~$X \neq \emptyset$.
+وبما أن~$\in$ ترتب~$\alpha$ ترتيبًا جيدًا، فلـ$X$ !!{element} أصغر
+بحسب~$\in$، نرمز إليه بـ$\gamma$. ومن تعريف~$X$ نجد~$\phi(\gamma)$؛
+ثم إن~$\gamma$ عدد ترتيبي بمقتضى~\olref{ordmemberord}.
+فإذا كان~$\beta \in \gamma$ لزم~$\beta \in \alpha$ من تعدي~$\alpha$،
+وامتنع~$\beta \in X$ لأصغرية~$\gamma$. إذن~$\lnot\phi(\beta)$،
+وبالتعميم~$(\forall \beta \in \gamma)\lnot\phi(\beta)$.
+%\olref{ordinductionschema2}. Suppose there is some ordinal
+% $\gamma$ such that $\lnot\phi(\gamma)$. Then by
+% \olref{ordinductionschema1}, there is an $\in$-minimal ordinal
+% $\alpha$ for which $\lnot\phi(\alpha)$. So $(\forall \beta <
+% \alpha) \phi(\beta)$, rendering the antecedent of the conditional
+% false.
+\end{proof}
+\noindent
+ولـ\olref{ordinductionschema} صياغة مكافئة بالمخطط الآتي:
+\[
+\text{إذا كان }\forall \alpha((\forall \beta \in \alpha)\phi(\beta) \lif
+\phi(\alpha))\text{، فإن }\forall \alpha\phi(\alpha)
+\]
+فما علينا إلا أن نعوض بـ$\lnot\phi(\alpha)$ في~\olref{ordinductionschema}،
+ثم نجري التحويلات المنطقية الأولية.
+
+\begin{thm}[التثليث]\ollabel{ordtrichotomy}
+لدينا~$\alpha \in \beta \lor \alpha = \beta \lor \beta \in \alpha$
+لكل عددين ترتيبيين~$\alpha$ و$\beta$.
+\end{thm}
+
+\begin{proof}
+نستعمل الاستقراء مرتين، أي نطبق~\olref{ordinductionschema} تطبيقين.
+ونقول إن~$x$ \emph{قابل للمقارنة} مع~$y$ إذا وفقط إذا كان
+$x \in y \lor x = y \lor y \in x$.
+
+نفرض أولًا أن كل عدد ترتيبي في~$\alpha$ قابل للمقارنة مع \emph{كل}
+عدد ترتيبي. ثم نفرض، لاستقراء ثان، أن~$\alpha$ قابل للمقارنة مع كل
+عدد ترتيبي في~$\beta$. والمطلوب الآن مقارنة~$\alpha$ بـ$\beta$.
+فإذا ثبتت، دل الاستقراء على~$\beta$ على أن~$\alpha$ قابل للمقارنة
+مع كل عدد ترتيبي، ثم دل الاستقراء على~$\alpha$ على أن \emph{كل}
+عدد ترتيبي قابل للمقارنة مع \emph{كل} عدد ترتيبي. ويكفينا لهذا أن
+نفرض~$\alpha \notin \beta$ و$\beta \notin \alpha$ ونستنتج~$\alpha = \beta$.
+
+نثبت أولًا~$\alpha \subseteq \beta$. خذ~$\gamma \in \alpha$؛ فهو
+عدد ترتيبي بمقتضى~\olref{ordmemberord}، ولذلك يقبل~$\gamma$ المقارنة
+مع~$\beta$ بفرض الاستقراء الأول. فإن كان~$\gamma = \beta$ أو
+$\beta \in \gamma$، لزم~$\beta \in \alpha$، مع الاستعانة بتعدي~$\alpha$
+حيث يلزم. وهذا خلاف الفرض، فلا يبقى إلا~$\gamma \in \beta$.
+وبالتعميم نحصل على~$\alpha \subseteq \beta$.
+
+وبمثل هذه الحجة تمامًا، ولكن بفرض الاستقراء الثاني، يثبت
+$\beta \subseteq \alpha$؛ فينتج~$\alpha = \beta$.
+\end{proof}\noindent
+لهذا نكتب أحيانًا~$\alpha <\beta$ مكان~$\alpha \in \beta$، فقد
+قامت~$\in$ مقام علاقة ترتيب. وليس وراء هذا الاصطلاح أمر عميق:
+إنما هو مألوف، وكتابة~$\alpha \leq \beta$ أيسر من كتابة
+$\alpha \in \beta \lor \alpha = \beta$.
+\footnote{يجوز من حيث الإمكان أن نكتب~$\alpha \mathrel{\underline{\in}} \beta$،
+إلا أنه ترميز خارج عن الاصطلاح المعتاد تمامًا.}
+
+ويتفرع عما تقدم نتيجتان قريبتان، يظهر في أولاهما استعمال الترميز الجديد.
+
+\begin{cor}\ollabel{ordordered}
+إذا كان~$\exists \alpha\phi(\alpha)$، لزم
+$\exists \alpha(\phi(\alpha) \land \forall \beta(\phi(\beta) \lif \alpha \leq \beta))$.
+وكذلك، لكل أعداد ترتيبية~$\alpha, \beta, \gamma$، يصح
+$\alpha \notin \alpha$ ويصح~$\alpha \in \beta \in \gamma \lif \alpha \in \gamma$.
+\end{cor}
+
+\begin{proof}
+يجري البرهان على مثال~\olref[wo]{wo:strictorder} بعينه.
+\end{proof}
+
+\begin{prob}
+استوفِ الحجة التي قيل عنها «بمثل هذه الحجة تمامًا» في برهان
+\olref[sth][ordinals][basic]{ordtrichotomy}.
+\end{prob}
+
+\begin{cor}\ollabel{corordtransitiveord}
+تكون~$A$ عددًا ترتيبيًا إذا وفقط إذا كانت~$A$ مجموعة متعدية عناصرها
+أعداد ترتيبية.
+\end{cor}
+
+\begin{proof}
+أما الاتجاه \emph{من اليسار إلى اليمين} فمن~\olref{ordmemberord}.
+وأما \emph{من اليمين إلى اليسار}، فإذا كانت~$A$ مجموعة متعدية من
+الأعداد الترتيبية، فإن~$\in$ ترتب~$A$ ترتيبًا جيدًا بمقتضى
+\olref{ordinductionschema} و\olref{ordtrichotomy}.
+\end{proof}
+
+قد فسرنا~\olref{ordinductionschema} و\olref{ordtrichotomy} بأن
+$\in$ ترتب الأعداد الترتيبية ترتيبًا جيدًا. لكن هذا القول يحتاج إلى
+\emph{احتراز شديد}، كما يتبين من النتيجة التالية.
+
+\begin{thm}[مفارقة بورالي--فورتي]\ollabel{buraliforti}
+يمتنع أن تكون هناك مجموعة تضم جميع الأعداد الترتيبية.
+\end{thm}
+
+\begin{proof}
+لنفترض خلاف ذلك، ولتكن~$O$ مجموعة الأعداد الترتيبية كلها. إذا كان
+$\alpha \in \beta \in O$، كان~$\alpha$ عددًا ترتيبيًا بحسب
+\olref{ordmemberord}، فيلزم~$\alpha \in O$. وعليه تكون~$O$ متعدية،
+فتكون عددًا ترتيبيًا بمقتضى~\olref{corordtransitiveord}؛ وينتج
+$O \in O$، خلافًا لـ\olref{ordordered}.
+\end{proof}
+\noindent
+نُسبت النتيجة إلى~\citeauthor{Burali-Forti1897}. غير أن كانتور، في
+رسالته إلى ددكند سنة~1899، كان أول من أدرك بوضوح \emph{التناقض}
+الناشئ من افتراض مجموعة لجميع الأعداد الترتيبية. ويبين فان هاينورت ذلك بقوله:
+\begin{quote}
+أما بورالي--فورتي نفسه فعدّ التناقض برهانًا، بطريق \emph{الخلف}،
+على أن الترتيب الطبيعي للأعداد الترتيبية ليس إلا ترتيبًا جزئيًا.
+\citep[p.~105]{Heijenoort1967}
+\end{quote}
+وبصرف النظر عن خطئه، حاصل ما تقدم أن الأعداد الترتيبية مجموعات
+يرتب الانتماء كل واحدة منها ترتيبًا جيدًا، ويرتبها جميعًا ترتيبًا
+جيدًا أيضًا، من غير أن يكون مجموعها مجموعة.
+
+ونختم بخواص أولية أخرى تتفرع عن~\olref{ordinductionschema}
+و\olref{ordtrichotomy}.
+
+\begin{prop}
+لا تكون المتتالية المتناقصة تمامًا من الأعداد الترتيبية إلا متناهية.
+\end{prop}
+
+\begin{proof}
+لو وجدت متتالية غير متناهية متناقصة تمامًا
+$\alpha_0 > \alpha_1 > \alpha_2 > \ldots$، لما كان لها عنصر أصغري
+بحسب~$<$؛ وذلك يناقض~\olref{ordinductionschema}.
+\end{proof}
+
+\begin{prop}\ollabel{ordinalsaresubsets}
+لكل عددين ترتيبيين يصح~$\alpha \subseteq \beta \lor \beta \subseteq \alpha$،
+حيث~$\alpha, \beta$ هما العددان.
+\end{prop}
+
+\begin{proof}
+إن كان~$\alpha \in \beta$، لزم~$\alpha \subseteq \beta$ لتعدي~$\beta$.
+وإن كان~$\beta \in \alpha$، لزم كذلك~$\beta \subseteq \alpha$.
+أما إن كان~$\alpha = \beta$، فيصح~$\alpha \subseteq \beta$
+و$\beta \subseteq \alpha$ معًا. وقد حصرت~\olref{ordtrichotomy}
+جميع الحالات في هذه الثلاث، فتم المطلوب.
+\end{proof}
+
+\begin{prop}\ollabel{ordisoidentity}
+لدينا~$\alpha = \beta$ إذا وفقط إذا كان~$\ordeq{\alpha}{\beta}$،
+وذلك لكل عددين ترتيبيين~$\alpha, \beta$.
+\end{prop}
+
+\begin{proof}
+الأعداد الترتيبية ترتيبات جيدة؛ فتنتج الدعوى من التثليث
+(\olref[basic]{ordtrichotomy}) ومن~\olref[iso]{wellordnotinitial} مباشرة.
+\end{proof}
+
+\begin{prob}\ollabel{probunionordinalsordinal}
+برهن أنه متى كانت عناصر~$X$ كلها أعدادًا ترتيبية، كان~$\bigcup X$
+عددًا ترتيبيًا أيضًا.
+\end{prob}
+
+\end{document}

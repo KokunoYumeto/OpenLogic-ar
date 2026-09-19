@@ -1,0 +1,81 @@
+% الجزء: sets-functions-relations
+% الفصل: sets
+% القسم: russells-paradox
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+
+\begin{document}
+
+\olfileid[ar]{sfr}{set}{rus}
+\olsection{مفارقة راسل}
+
+سوّغت الامتدادية أن نرمز بـ$\Setabs{{\OLId{latin-ordinary}{x}}}{\phi({\OLId{latin-ordinary}{x}})}$ إلى \emph{مجموعة}
+قيم ${\OLId{latin-ordinary}{x}}$ التي تحقق~$\phi({\OLId{latin-ordinary}{x}})$. ولكن معناها \emph{على التحقيق} شرط:
+\emph{إذا} وجدت مجموعة تضم كل ما يتصف بـ~$\phi$ ولا تضم غيره،
+\emph{فإنها} واحدة. فمتى ثبتت الخاصية~$\phi$ كانت
+$\Setabs{{\OLId{latin-ordinary}{x}}}{\phi({\OLId{latin-ordinary}{x}})}$ فريدة \emph{إن وجدت}.
+
+ولا غنى عن هذا الشرط!{} فليس كل وصف صالحًا لـ\emph{الاستيعاب}؛
+بل من الخواص ما \emph{لا} يعيّن مجموعة. ولو جاز ذلك لكل خاصية لزم
+التناقض الصريح، وأشهر شاهد عليه مفارقة راسل.
+
+قد تكون المجموعات !!{element}s لمجموعات أخرى؛ فمجموعة قوى~${\OLId{latin-looped}{A}}$ مؤلفة
+من مجموعات. فلا حرج إذن في السؤال: هل هذه المجموعة !!a{element}
+من تلك؟ ثم نسأل: أيجوز أن تكون المجموعة عضوًا في نفسها؟
+ليس في مجرد تصور المجموعة ما يبدو مانعًا منه. فقد يقال إن
+\emph{جميع} المجموعات أشياء مجتمعة، فيجوز أن تضمها مجموعة واحدة
+تسمى مجموعة جميع المجموعات. وهذه، لو وجدت، لكانت مجموعة، ومن ثم
+كانت !!a{element} من مجموعة جميع المجموعات.
+
+وأما مفارقة راسل فتنشأ من وصف المجموعة بأنها ليست !!a{element} من
+نفسها، أي بأنها \emph{غير منتمية إلى نفسها}. فلنفرض أن لكل
+المجموعات التي ليست !!a{element} من أنفسها مجموعة جامعة:
+\[
+{\OLId{latin-looped}{R}} = \Setabs{{\OLId{latin-ordinary}{x}}}{{\OLId{latin-ordinary}{x}} \notin {\OLId{latin-ordinary}{x}}}
+\]
+أيمكن وجودها؟ سنبرهن على امتناعه.
+
+\begin{thm}[مفارقة راسل]\ollabel{thm:russells-paradox}
+يمتنع وجود مجموعة ${\OLId{latin-looped}{R}} = \Setabs{{\OLId{latin-ordinary}{x}}}{{\OLId{latin-ordinary}{x}} \notin {\OLId{latin-ordinary}{x}}}$.
+\end{thm}
+
+\begin{proof}
+لنفرض وجود ${\OLId{latin-looped}{R}} = \Setabs{{\OLId{latin-ordinary}{x}}}{{\OLId{latin-ordinary}{x}} \notin {\OLId{latin-ordinary}{x}}}$. فيلزم من تعريفها
+${\OLId{latin-looped}{R}} \in {\OLId{latin-looped}{R}}$ إذا وفقط إذا كان ${\OLId{latin-looped}{R}} \notin {\OLId{latin-looped}{R}}$؛ وهذا تناقض.
+\end{proof}
+
+\begin{tagblock}{novice}
+\begin{explain}
+وتفصيل البرهان أن~${\OLId{latin-looped}{R}}$، إن وجدت، صح السؤال عن ${\OLId{latin-looped}{R}} \in {\OLId{latin-looped}{R}}$.
+فإن فرضنا ${\OLId{latin-looped}{R}} \in {\OLId{latin-looped}{R}}$، تذكرنا أن~${\OLId{latin-looped}{R}}$ إنما عرّفت بجمع المجموعات التي
+ليست !!{element}s في أنفسها. فمع ${\OLId{latin-looped}{R}} \in {\OLId{latin-looped}{R}}$ لا تتصف~${\OLId{latin-looped}{R}}$ بالخاصية
+التي تعرّف~${\OLId{latin-looped}{R}}$. وليس في~${\OLId{latin-looped}{R}}$ إلا ما اتصف بها؛ فلا تكون~${\OLId{latin-looped}{R}}$
+!!a{element} من~${\OLId{latin-looped}{R}}$، أي ${\OLId{latin-looped}{R}} \notin {\OLId{latin-looped}{R}}$. وهذا تناقض، إذ يستحيل
+أن تكون~${\OLId{latin-looped}{R}}$ !!a{element} من~${\OLId{latin-looped}{R}}$ وألا تكون كذلك في آن واحد.
+
+فقد بطل فرض ${\OLId{latin-looped}{R}} \in {\OLId{latin-looped}{R}}$، وثبت ${\OLId{latin-looped}{R}} \notin {\OLId{latin-looped}{R}}$. غير أن هذا أيضًا
+يفضي إلى التناقض!{} إذ متى كان ${\OLId{latin-looped}{R}} \notin {\OLId{latin-looped}{R}}$ اتصفت~${\OLId{latin-looped}{R}}$ نفسها
+بالخاصية المعرّفة لـ~${\OLId{latin-looped}{R}}$، فصارت~${\OLId{latin-looped}{R}}$ !!a{element} من~${\OLId{latin-looped}{R}}$، كسائر
+المجموعات التي لا تنتمي إلى أنفسها. فعاد المحال: تكون !!a{element}
+من~${\OLId{latin-looped}{R}}$ ولا تنتمي إليها معًا.
+\end{explain}
+\end{tagblock}
+
+\begin{digress}
+فكيف توضع نظرية مجموعات تسلم من مفارقة راسل، فلا تقضي بالقول
+\emph{غير المتسق} إن ${\OLId{latin-looped}{R}} = \Setabs{{\OLId{latin-ordinary}{x}}}{{\OLId{latin-ordinary}{x}} \notin {\OLId{latin-ordinary}{x}}}$ موجودة؟
+سبيل ذلك بديهيات تضبط بدقة شروط وجود المجموعات وعدم وجودها.
+
+وليست النظرية الموجزة في هذا الفصل من ذلك القبيل؛ فهي
+\emph{ساذجة حقًا}. % حفظ أمر تشكيل غير منفذ من المصدر: \"
+وإنما تقضي بالامتدادية، وتجيز، إذا أعطيت مجموعات، تكوين اتحادها
+وتقاطعها ونحوهما. وللنظرية بناء أشد إحكامًا يمكن سلوكه.
+\oliflabeldef{cumul:::part}{وسيكون محل هذا الإحكام الجزء
+\olref[cumul][][]{part}. أما هنا فنمضي على الطريقة الساذجة مع التحفظ
+في اجتناب التناقض. % حفظ أمر تشكيل غير منفذ من المصدر: \"
+}{}
+\end{digress}
+
+
+\end{document}

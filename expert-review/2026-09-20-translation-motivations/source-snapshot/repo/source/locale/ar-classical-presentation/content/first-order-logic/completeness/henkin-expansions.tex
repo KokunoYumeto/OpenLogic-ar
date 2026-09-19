@@ -1,0 +1,203 @@
+% Part: first-order-logic
+% Chapter: completeness
+% Section: henkin-expansion
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{com}{hen}
+
+\olsection{توسيع هنكن}
+
+\begin{explain}
+من مطالب برهان الاكتمال أن النموذج المبني من مجموعة متسقة
+كاملة~${\OLId{greek-variable}{Gamma}}$ يرضي ال!!{formula}s المكممة كلها في~${\OLId{greek-variable}{Gamma}}$.
+ولتحصيل هذا الضمان نأخذ بطريقة ليون هنكن: نزيد اللغة
+!!{constant}s لا نهاية لها، ونلحق، لكل !!{formula} لها
+!!{variable} حر واحد $!A({\OLId{latin-ordinary}{x}})$، صيغة على النحو
+\iftag{prvEx}
+      {$\lexists[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})] \lif !A({\OLId{latin-ordinary}{c}})$}
+      {$\lnot\lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})] \lif \lnot !A({\OLId{latin-ordinary}{c}})$},
+على أن ${\OLId{latin-ordinary}{c}}$ من ال!!{constant}s المستحدثة. فإذا بنينا ال!!{structure}
+المرضية لـ~${\OLId{greek-variable}{Gamma}}$، كفلت هذه الزيادة لكل
+\iftag{prvEx}
+{جملة وجودية صادقة شاهدًا}
+{جملة كلية كاذبة مثالًا ناقضًا}
+من بين الرموز الثابتة الجديدة.
+\end{explain}
+
+\begin{prop}
+\ollabel{prop:lang-exp}
+إذا كانت ${\OLId{greek-variable}{Gamma}}$ متسقة في $\Lang L$، وكانت $\Lang L'$ ناتجة من
+$\Lang L$ بإضافة مجموعة !!a{denumerable} من ال!!{constant}s الجديدة
+$\Obj d_{\OLMathNumeral{0}}$ و$\Obj d_{\OLMathNumeral{1}}$ و\dots، فإن ${\OLId{greek-variable}{Gamma}}$ متسقة في~$\Lang L'$.
+\end{prop}
+
+\begin{defn}[المجموعة المشبعة]
+المجموعة ${\OLId{greek-variable}{Gamma}}$ من !!{formula}s اللغة $\Lang {L}$ تسمى
+\emph{مشبعة} إذا وفقط إذا كان لكل !!{formula}~$!A({\OLId{latin-ordinary}{x}}) \in \Frm[{\OLId{latin-looped}{L}}]$
+ليس لها إلا !!{variable} حر واحد~${\OLId{latin-ordinary}{x}}$، !!a{constant}~${\OLId{latin-ordinary}{c}} \in \Lang{L}$ يحقق
+\iftag{prvEx}
+      {$\lexists[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})] \lif !A({\OLId{latin-ordinary}{c}}) \in {\OLId{greek-variable}{Gamma}}$}
+      {$\lnot\lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})] \lif \lnot !A({\OLId{latin-ordinary}{c}}) \in {\OLId{greek-variable}{Gamma}}$}.
+\end{defn}
+
+ولأجل البرهان الآتي نضع التعريف التالي.
+
+\begin{defn}
+\ollabel{defn:henkin-exp}
+لتكن $\Lang L'$ اللغة الموصوفة في \olref{prop:lang-exp}. نختار تعدادًا
+$!A_{\OLMathNumeral{0}}({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}})$ و$!A_{\OLMathNumeral{1}}({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{1}})$ و\dots يستوعب ال!!{formula}s~$!A_{\OLId{latin-ordinary}{i}}({\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{i}})$
+في~$\Lang L'$ التي لها متغير حر واحد (${\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{i}}$). ثم نبني
+ال!!{sentence}s~$!D_{\OLId{latin-ordinary}{n}}$ استقراءً على~${\OLId{latin-ordinary}{n}}$.
+
+فنختار ${\OLId{latin-ordinary}{c}}_{\OLMathNumeral{0}}$ أول !!{constant} في قائمة $\Obj d_{\OLId{latin-ordinary}{i}}$ المضافة
+إلى~$\Lang{L}$ مما لا يقع في~$!A_{\OLMathNumeral{0}}({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}})$. وإذا سبق تعريف $!D_{\OLMathNumeral{0}}$
+و\dots و~$!D_{{\OLId{latin-ordinary}{n}}-{\OLMathNumeral{1}}}$، اخترنا ${\OLId{latin-ordinary}{c}}_{\OLId{latin-ordinary}{n}}$ أول ال!!{constant}s الجديدة
+~$\Obj d_{\OLId{latin-ordinary}{i}}$ مما لا يقع في $!D_{\OLMathNumeral{0}}$ و\dots و~$!D_{{\OLId{latin-ordinary}{n}}-{\OLMathNumeral{1}}}$، ولا
+في~$!A_{\OLId{latin-ordinary}{n}}({\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{n}})$.
+
+ونعرّف $!D_{{\OLId{latin-ordinary}{n}}}$ بأنها ال!!{sentence} \iftag{prvEx}
+{$\lexists[{\OLId{latin-ordinary}{x}}_{{\OLId{latin-ordinary}{n}}}][!A_{{\OLId{latin-ordinary}{n}}}({\OLId{latin-ordinary}{x}}_{{\OLId{latin-ordinary}{n}}})] \lif
+  !A_{{\OLId{latin-ordinary}{n}}}({\OLId{latin-ordinary}{c}}_{{\OLId{latin-ordinary}{n}}})$}{$\lnot\lforall[{\OLId{latin-ordinary}{x}}_{{\OLId{latin-ordinary}{n}}}][!A_{{\OLId{latin-ordinary}{n}}}({\OLId{latin-ordinary}{x}}_{{\OLId{latin-ordinary}{n}}})] \lif \lnot
+  !A_{{\OLId{latin-ordinary}{n}}}({\OLId{latin-ordinary}{c}}_{{\OLId{latin-ordinary}{n}}})$}.
+\end{defn}
+
+\begin{lem}
+\ollabel{lem:henkin}
+يمكن توسيع كل مجموعة متسقة~${\OLId{greek-variable}{Gamma}}$ إلى مجموعة متسقة مشبعة~${\OLId{greek-variable}{Gamma}}'$.
+\end{lem}
+
+\begin{proof}
+ابدأ بمجموعة جمل متسقة~${\OLId{greek-variable}{Gamma}}$ في لغة~$\Lang{L}$، وزد اللغة مجموعة
+!!a{denumerable} من ال!!{constant}s الجديدة، ولتكن اللغة الناتجة
+~$\Lang{L'}$. تضمن \olref{prop:lang-exp} بقاء اتساق ${\OLId{greek-variable}{Gamma}}$ بعد
+الزيادة. وخذ $!D_{\OLId{latin-ordinary}{i}}$ من \olref{defn:henkin-exp}، وعرّف
+\begin{align*}
+{\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} & = {\OLId{greek-variable}{Gamma}} \\
+{\OLId{greek-variable}{Gamma}}_{{\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}}} & = {\OLId{greek-variable}{Gamma}}_{\OLId{latin-ordinary}{n}} \cup \{!D_{\OLId{latin-ordinary}{n}} \}
+\end{align*}
+فيكون ${\OLId{greek-variable}{Gamma}}_{{\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}}} = {\OLId{greek-variable}{Gamma}} \cup \{ !D_{\OLMathNumeral{0}}, \dots, !D_{\OLId{latin-ordinary}{n}} \}$. ثم ضع
+${\OLId{greek-variable}{Gamma}}' = \bigcup_{{\OLId{latin-ordinary}{n}}} {\OLId{greek-variable}{Gamma}}_{\OLId{latin-ordinary}{n}}$؛ وإشباع ${\OLId{greek-variable}{Gamma}}'$ بيّن من بنائها.
+
+إن عدم اتساق ${\OLId{greek-variable}{Gamma}}'$ يستلزم عدم اتساق ${\OLId{greek-variable}{Gamma}}_{\OLId{latin-ordinary}{n}}$ عند بعض ${\OLId{latin-ordinary}{n}}$
+(بيّن وجه ذلك تمرينًا). فإثبات اتساق ${\OLId{greek-variable}{Gamma}}'$ مردود إلى الاستقراء
+على~${\OLId{latin-ordinary}{n}}$ لإثبات اتساق كل~${\OLId{greek-variable}{Gamma}}_{\OLId{latin-ordinary}{n}}$.
+
+أما الأساس، فاتساق ${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} = {\OLId{greek-variable}{Gamma}}$ هو الفرض نفسه. وأما الانتقال،
+فلنفرض اتساق ${\OLId{greek-variable}{Gamma}}_{{\OLId{latin-ordinary}{n}}}$ وعدم اتساق
+${\OLId{greek-variable}{Gamma}}_{{\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}}} = {\OLId{greek-variable}{Gamma}}_{\OLId{latin-ordinary}{n}} \cup \{!D_{\OLId{latin-ordinary}{n}}\}$. وقد عرّفنا $!D_{\OLId{latin-ordinary}{n}}$~بأنها
+\iftag{prvEx}
+{$\lexists[{\OLId{latin-ordinary}{x}}_{{\OLId{latin-ordinary}{n}}}][!A_{{\OLId{latin-ordinary}{n}}}({\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{n}})] \lif !A_{{\OLId{latin-ordinary}{n}}}({\OLId{latin-ordinary}{c}}_{{\OLId{latin-ordinary}{n}}})$}
+{$\lnot\lforall[{\OLId{latin-ordinary}{x}}_{{\OLId{latin-ordinary}{n}}}][!A_{{\OLId{latin-ordinary}{n}}}({\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{n}})] \lif \lnot !A_{{\OLId{latin-ordinary}{n}}}({\OLId{latin-ordinary}{c}}_{{\OLId{latin-ordinary}{n}}})$},
+وصيغة $!A_{\OLId{latin-ordinary}{n}}({\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{n}})$ هي !!a{formula} من $\Lang{L'}$ متغيرها الحر
+الوحيد~${\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{n}}$. وطريقة اختيار~${\OLId{latin-ordinary}{c}}_{\OLId{latin-ordinary}{n}}$ في
+\olref{defn:henkin-exp} تكفل أن ${\OLId{latin-ordinary}{c}}_{\OLId{latin-ordinary}{n}}$ لا يقع في~$!A_{\OLId{latin-ordinary}{n}}({\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{n}})$ ولا في~${\OLId{greek-variable}{Gamma}}_{\OLId{latin-ordinary}{n}}$.
+
+فمن عدم اتساق ${\OLId{greek-variable}{Gamma}}_{\OLId{latin-ordinary}{n}} \cup \{!D_{\OLId{latin-ordinary}{n}}\}$ يلزم ${\OLId{greek-variable}{Gamma}}_{\OLId{latin-ordinary}{n}}
+\Proves \lnot !D_{\OLId{latin-ordinary}{n}}$، ويلزم من ذلك هذان الحكمان:
+\iftag{prvEx}{
+\[
+{\OLId{greek-variable}{Gamma}}_{\OLId{latin-ordinary}{n}} \Proves \lexists[{\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{n}}][!A_{\OLId{latin-ordinary}{n}}({\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{n}})]
+\qquad
+{\OLId{greek-variable}{Gamma}}_{\OLId{latin-ordinary}{n}} \Proves \lnot !A_{\OLId{latin-ordinary}{n}}({\OLId{latin-ordinary}{c}}_{\OLId{latin-ordinary}{n}})
+\]}{
+\[
+{\OLId{greek-variable}{Gamma}}_{\OLId{latin-ordinary}{n}} \Proves \lnot\lforall[{\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{n}}][!A_{\OLId{latin-ordinary}{n}}({\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{n}})]
+\qquad
+{\OLId{greek-variable}{Gamma}}_{\OLId{latin-ordinary}{n}} \Proves !A_{\OLId{latin-ordinary}{n}}({\OLId{latin-ordinary}{c}}_{\OLId{latin-ordinary}{n}})
+\]}
+ولأن ${\OLId{latin-ordinary}{c}}_{\OLId{latin-ordinary}{n}}$ لا يقع في ${\OLId{greek-variable}{Gamma}}_{\OLId{latin-ordinary}{n}}$ ولا في~$!A_{\OLId{latin-ordinary}{n}}({\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{n}})$، يصح تطبيق
+\tagrefs{prfAX/{fol:axd:qpr:thm:strong-generalization},prfSC/{fol:seq:qpr:thm:strong-generalization},prfND/{fol:ntd:qpr:thm:strong-generalization},prfTab/{fol:tab:qpr:thm:strong-generalization}}.
+ومن \iftag{prvEx}
+{${\OLId{greek-variable}{Gamma}}_{\OLId{latin-ordinary}{n}} \Proves \lnot !A_{\OLId{latin-ordinary}{n}}({\OLId{latin-ordinary}{c}}_{\OLId{latin-ordinary}{n}})$}
+{${\OLId{greek-variable}{Gamma}}_{\OLId{latin-ordinary}{n}} \Proves !A_{\OLId{latin-ordinary}{n}}({\OLId{latin-ordinary}{c}}_{\OLId{latin-ordinary}{n}})$},
+نحصل على
+\iftag{prvEx}
+{${\OLId{greek-variable}{Gamma}}_{\OLId{latin-ordinary}{n}} \Proves \lforall[{\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{n}}][\lnot !A_{\OLId{latin-ordinary}{n}}({\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{n}})]$}
+{${\OLId{greek-variable}{Gamma}}_{\OLId{latin-ordinary}{n}} \Proves \lforall[{\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{n}}][!A_{\OLId{latin-ordinary}{n}}({\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{n}})]$}.
+فيجتمع الحكمان
+\iftag{prvEx}
+{${\OLId{greek-variable}{Gamma}}_{\OLId{latin-ordinary}{n}} \Proves \lexists[{\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{n}}][!A_{\OLId{latin-ordinary}{n}}({\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{n}})]$ و
+${\OLId{greek-variable}{Gamma}}_{\OLId{latin-ordinary}{n}} \Proves \lforall[{\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{n}}][\lnot !A_{\OLId{latin-ordinary}{n}}({\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{n}})]$}
+{${\OLId{greek-variable}{Gamma}}_{\OLId{latin-ordinary}{n}} \Proves \lnot\lforall[{\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{n}}][!A_{\OLId{latin-ordinary}{n}}({\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{n}})]$ و
+${\OLId{greek-variable}{Gamma}}_{\OLId{latin-ordinary}{n}} \Proves \lforall[{\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{n}}][!A_{\OLId{latin-ordinary}{n}}({\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{n}})]$},
+ومن اجتماعهما يلزم عدم اتساق ${\OLId{greek-variable}{Gamma}}_{\OLId{latin-ordinary}{n}}$ نفسها.
+\iftag{prvEx}
+{(لاحظ أن
+\iftag{prvAll}
+{$\lforall[{\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{n}}][\lnot !A_{\OLId{latin-ordinary}{n}}({\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{n}})] \Proves
+  \lnot\lexists[{\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{n}}][!A_{\OLId{latin-ordinary}{n}}({\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{n}})]$}
+{$\lforall[{\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{n}}][\lnot !A_{\OLId{latin-ordinary}{n}}({\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{n}})]$ تُعرّف بأنها
+  $\lnot\lexists[{\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{n}}][\lnot\lnot !A_{\OLId{latin-ordinary}{n}}({\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{n}})]$ و
+  $\lnot\lexists[{\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{n}}][\lnot\lnot !A_{\OLId{latin-ordinary}{n}}({\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{n}})] \Proves
+  \lnot\lexists[{\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{n}}][!A_{\OLId{latin-ordinary}{n}}({\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{n}})]$}.)}{}
+وهذا خلاف اتساق ${\OLId{greek-variable}{Gamma}}_{\OLId{latin-ordinary}{n}}$ المفروض. فثبت اتساق
+${\OLId{greek-variable}{Gamma}}_{\OLId{latin-ordinary}{n}} \cup \{ !D_{\OLId{latin-ordinary}{n}}\}$، وتم الاستقراء.
+\end{proof}
+
+\begin{explain}
+ننتقل إلى المجموعات التي يجتمع فيها الاتساق و\emph{الاكتمال} والإشباع.
+سنثبت أن المجموعة من هذا القبيل
+\iftag{prvAll}{تضم !!{sentence} مكممة كليًا إذا وفقط إذا ضمت
+  جميع حالاتها}{}\iftag{defAll,defEx}{}{، وأنها }\iftag{prvEx}{تضم
+  !!{sentence} مكممة وجوديًا إذا وفقط إذا ضمت حالة واحدة منها
+  على الأقل}{}. بهذه الخاصية نثبت أن ال!!{structure} المنشأة من
+مجموعة كاملة متسقة مشبعة ترضي جميع جمل المجموعة المكممة.
+\end{explain}
+
+\begin{prop}\ollabel{prop:saturated-instances}
+افترض أن ${\OLId{greek-variable}{Gamma}}$ كاملة ومتسقة ومشبعة.
+\begin{tagenumerate}{prvEx,prvAll}
+\tagitem{prvEx}{$\lexists[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})] \in {\OLId{greek-variable}{Gamma}}$ إذا وفقط إذا كان
+  $!A({\OLId{latin-ordinary}{t}}) \in {\OLId{greek-variable}{Gamma}}$ لحد مغلق واحد~${\OLId{latin-ordinary}{t}}$ على الأقل.}{}
+\tagitem{prvAll}{$\lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})] \in {\OLId{greek-variable}{Gamma}}$ إذا وفقط إذا كان
+  $!A({\OLId{latin-ordinary}{t}}) \in {\OLId{greek-variable}{Gamma}}$ لكل حد مغلق~${\OLId{latin-ordinary}{t}}$.}{}
+\end{tagenumerate}
+\end{prop}
+
+\begin{proof}
+  \begin{tagenumerate}{prvEx,prvAll}
+  \tagitem{prvEx}{%
+    \iftag{probEx}{تمرين.}{أما إذا كان $\lexists[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]
+      \in {\OLId{greek-variable}{Gamma}}$، فإن إشباع ${\OLId{greek-variable}{Gamma}}$ يضمن
+      $(\lexists[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})] \lif !A({\OLId{latin-ordinary}{c}})) \in {\OLId{greek-variable}{Gamma}}$ لبعض
+      ال!!{constant}~${\OLId{latin-ordinary}{c}}$. وبحسب
+      \tagrefs{prfAX/{fol:axd:ppr:prop:provability-lif},prfSC/{fol:seq:ppr:prop:provability-lif},prfND/{fol:ntd:ppr:prop:provability-lif},prfTab/{fol:tab:ppr:prop:provability-lif}}، البند~(\OLClassicalDigits{1})،
+      و\olref[ccs]{prop:ccs}\olref[ccs]{prop:ccs-prov-in}، نحصل على
+      $!A({\OLId{latin-ordinary}{c}}) \in {\OLId{greek-variable}{Gamma}}$.
+
+    وأما العكس فلا يتوقف على الإشباع. فمتى كان $!A({\OLId{latin-ordinary}{t}}) \in {\OLId{greek-variable}{Gamma}}$،
+    ثبت ${\OLId{greek-variable}{Gamma}} \Proves \lexists[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$ بمقتضى
+      \tagrefs{prfAX/{fol:axd:qpr:prop:provability-quantifiers},prfSC/{fol:seq:qpr:prop:provability-quantifiers},prfND/{fol:ntd:qpr:prop:provability-quantifiers},prfTab/{fol:tab:qpr:prop:provability-quantifiers}}، البند~(\OLClassicalDigits{1}). وبحسب
+    \olref[ccs]{prop:ccs}\olref[ccs]{prop:ccs-prov-in} نحصل على
+    $\lexists[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})] \in {\OLId{greek-variable}{Gamma}}$.}}{}
+  \tagitem{prvAll}{%
+    \iftag{probAll}{تمرين.}{ليكن $!A({\OLId{latin-ordinary}{t}}) \in {\OLId{greek-variable}{Gamma}}$ لكل حد
+      مغلق~${\OLId{latin-ordinary}{t}}$. فلو كان
+      $\lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})] \notin {\OLId{greek-variable}{Gamma}}$، لأوجب اكتمال ${\OLId{greek-variable}{Gamma}}$
+      أن $\lnot\lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})] \in {\OLId{greek-variable}{Gamma}}$. وبالإشباع نحصل على
+      \iftag{prvEx}{$(\lexists[{\OLId{latin-ordinary}{x}}][\lnot !A({\OLId{latin-ordinary}{x}})] \lif \lnot !A({\OLId{latin-ordinary}{c}})) \in
+        {\OLId{greek-variable}{Gamma}}$}{$(\lnot\lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})] \lif \lnot !A({\OLId{latin-ordinary}{c}})) \in
+        {\OLId{greek-variable}{Gamma}}$} لبعض ال!!{constant}~${\OLId{latin-ordinary}{c}}$. ثم إن ${\OLId{latin-ordinary}{c}}$
+      حد مغلق، فيقتضي الفرض $!A({\OLId{latin-ordinary}{c}}) \in {\OLId{greek-variable}{Gamma}}$؛ وحينئذ لا تكون ${\OLId{greek-variable}{Gamma}}$
+      متسقة. (تمرين: أقم ال!!{derivation} المبين أن
+      \[
+      \lnot \lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})],
+      \iftag{prvEx}{\lexists[{\OLId{latin-ordinary}{x}}][\lnot !A({\OLId{latin-ordinary}{x}})] \lif \lnot
+        !A({\OLId{latin-ordinary}{c}})}{\lnot\lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})] \lif \lnot
+        !A({\OLId{latin-ordinary}{c}})}, !A({\OLId{latin-ordinary}{c}})
+      \]
+      غير متسقة.)
+
+      وأما الاتجاه المقابل فلا يفتقر إلى الإشباع. فإذا كان
+      $\lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})] \in {\OLId{greek-variable}{Gamma}}$، لزم ${\OLId{greek-variable}{Gamma}} \Proves !A({\OLId{latin-ordinary}{t}})$
+      بمقتضى
+      \tagrefs{prfAX/{fol:axd:qpr:prop:provability-quantifiers},prfSC/{fol:seq:qpr:prop:provability-quantifiers},prfND/{fol:ntd:qpr:prop:provability-quantifiers},prfTab/{fol:tab:qpr:prop:provability-quantifiers}},
+      البند~(\OLClassicalDigits{2}). ونحصل على $!A({\OLId{latin-ordinary}{t}}) \in {\OLId{greek-variable}{Gamma}}$ بحسب
+      \olref[ccs]{prop:ccs}.}}{}
+  \end{tagenumerate}
+\end{proof}
+
+\end{document}

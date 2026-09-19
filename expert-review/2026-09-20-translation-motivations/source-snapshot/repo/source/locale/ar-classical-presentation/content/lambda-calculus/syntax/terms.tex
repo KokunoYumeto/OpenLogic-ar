@@ -1,0 +1,46 @@
+% Part: lambda-calculus
+% Chapter: syntax
+% Section: terms
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{syn}{trm}
+\olsection{الحدود}
+
+مادة حدود حساب لامبدا متغيرات لا تنفد، هي
+$\Obj{v_0}$ و$\Obj{v_1}$ و\dots، ورمز~«$\lambd$»، وأقواس؛ ومنها نبني الحدود استقرائيًا.
+ونجعل ${\OLId{latin-ordinary}{x}}$ و${\OLId{latin-ordinary}{y}}$ و${\OLId{latin-ordinary}{z}}$ و\dots{} أسماء للمتغيرات، و${\OLId{latin-looped}{M}}$ و${\OLId{latin-looped}{N}}$ و${\OLId{latin-looped}{P}}$ و\dots{} أسماء للحدود.
+
+\begin{defn}[الحدود] \ollabel{defn:term}
+هذه قواعد التعريف الاستقرائي لمجموعة \emph{حدود} حساب لامبدا:
+\begin{enumerate}
+  \item \ollabel{defn:term-var} كل متغير~${\OLId{latin-ordinary}{x}}$ يعدّ، بذاته، حدًا~${\OLId{latin-ordinary}{x}}$.
+  \item \ollabel{defn:term-abs} إذا أخذنا متغيرًا~${\OLId{latin-ordinary}{x}}$ وحدًا~${\OLId{latin-looped}{M}}$، حصلنا على الحد
+    $(\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-looped}{M}}])$.
+  \item \ollabel{defn:term-app} من الحدين~${\OLId{latin-looped}{M}}$ و${\OLId{latin-looped}{N}}$ نحصل على الحد
+    $(MN)$.
+\end{enumerate}
+\end{defn}
+
+أما الحد~$(\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-looped}{M}}])$ الذي تبنيه القاعدة
+\olref{defn:term-abs} فنسميه حاصل \emph{تجريد}؛ ونسمي~${\OLId{latin-ordinary}{x}}$ الوارد في
+$\lambd[{\OLId{latin-ordinary}{x}}]$ \emph{!!{parameter}}. وأما الحد~$(MN)$ الذي تبنيه
+\olref{defn:term-app} فنسميه حاصل \emph{تطبيق}.
+
+يلزم من هذا التعريف إثبات جميع الأقواس في الحدود؛ وقد تثقل بذلك الكتابة، كما ترى في الحد
+$(\lambd[{\OLId{latin-ordinary}{x}}][((\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{x}}])(\lambd[{\OLId{latin-ordinary}{x}}][(xx)]))])$. وسنضع اصطلاحات تجيز إسقاط بعض الأقواس.
+غير أن لهذا التعريف الرسمي فائدة، إذ يظهر منه بناء الحد بحسب
+\olref{defn:term}. فالخطوة الأخيرة، مثلًا، في تكوين الحد
+$(\lambd[{\OLId{latin-ordinary}{x}}][((\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{x}}])(\lambd[{\OLId{latin-ordinary}{x}}][(xx)]))])$ لا بد أن تكون تجريدًا فيه
+!!{parameter} هو~${\OLId{latin-ordinary}{x}}$. فالحد ناشئ بالتجريد من
+$((\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{x}}])(\lambd[{\OLId{latin-ordinary}{x}}][(xx)]))$، وهذا ناشئ بتطبيق حدين، وكل منهما ناشئ بتجريد، ويستمر التحليل على هذا الوجه.
+
+\begin{prob}
+بيّن خطوات تكوين~$(\lambd[{\OLId{latin-ordinary}{g}}][(\lambd[{\OLId{latin-ordinary}{x}}][({\OLId{latin-ordinary}{g}} ({\OLId{latin-ordinary}{x}} {\OLId{latin-ordinary}{x}}))])
+  (\lambd[{\OLId{latin-ordinary}{x}}][({\OLId{latin-ordinary}{g}} ({\OLId{latin-ordinary}{x}} {\OLId{latin-ordinary}{x}}))])])$.
+\end{prob}
+
+\end{document}
+

@@ -1,0 +1,58 @@
+% Part: computability
+% Chapter: computability-theory
+% Section: total
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{thy}{tot}
+\olsection{عدم قابلية تقرير الكلية}
+
+ومن استعمالات مبرهنة $s$-$m$-$n$ في إثبات عدم قابلية
+الحساب المثال الآتي. نجعل $\fn{Tot}$ مجموعة فهارس الدوال الكلية القابلة
+للحساب، فيكون
+\[
+\fn{Tot} = \Setabs{x}{\text{لكل $y$، تكون $\cfind{x}(y)\fdefined$}}.
+\]
+
+\begin{prop}
+\ollabel{prop:total}
+المجموعة $\fn{Tot}$ غير قابلة للحساب.
+\end{prop}
+
+\begin{proof}
+نثبت انتفاء قابلية $\fn{Tot}$ للحساب باختزال $K$
+إليها. فنعرّف $h(x,y)$ على الوجه الآتي:
+\[
+h(x,y) \simeq
+\begin{cases}
+0 & \text{إذا كان $x \in K$} \\
+\fundefined & \text{خلاف ذلك.}
+\end{cases}
+\]
+أما $h(x,y)$ فلا اعتماد لها على $y$ أصلًا.
+ومن اليسير حساب $h$ جزئيًا: نتلقى $x,y$، ونحسب~$h$ بمحاكاة
+الدالة~$\cfind{x}$ عند الدخل~$x$؛ فإن توقف الحساب، أعطت
+$h(x,y)$ القيمة~$0$ ووقفت. فالدالة $h(x,y)$ هي
+$\Zero(\umin{s}{T(x,x,s)})$، و$\Zero$ دالة الصفر الثابتة.
+
+ومن مبرهنة $s$-$m$-$n$ نحصل على دالة عودية بدائية~$k(x)$، بحيث لكل
+$x$ و~$y$،
+\[
+\cfind{k(x)}(y) \simeq
+\begin{cases}
+0 & \text{إذا كان $x \in K$} \\
+\fundefined & \text{خلاف ذلك.}
+\end{cases}
+\]
+فتكون $\cfind{k(x)}$ كلية حين $x \in K$، وغير معرّفة في أي موضع
+إن لم يكن. فهذه $k$ اختزال من $K$ إلى~$\fn{Tot}$.
+\end{proof}
+
+\begin{digress}
+بل إن $\fn{Tot}$ لا تقبل التعداد الحسابي أصلًا؛ فتعقيدها في
+منزلة أعلى من «الهرم الحسابي». ولا نتناول هنا إثبات هذه الزيادة.
+\end{digress}
+
+\end{document}

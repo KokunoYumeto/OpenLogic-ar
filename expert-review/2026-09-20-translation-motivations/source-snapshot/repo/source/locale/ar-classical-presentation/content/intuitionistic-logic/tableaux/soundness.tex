@@ -1,0 +1,224 @@
+% Part: intuitionistic-logic
+% Chapter: tableaux
+% Section: soundness
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{tab}{sou}
+
+\olsection{سلامة \usetoken{P}{tableau} الحدسية}
+
+\begin{explain}
+  معنى سلامة !!{tableau} الحدسية أن نثبت: إذا كان
+  \[
+  \sFmla{\True}{!B_{\OLMathNumeral{1}}}[{\OLMathNumeral{1}}], \dots, \sFmla{\True}{!B_{\OLId{latin-ordinary}{n}}}[{\OLMathNumeral{1}}], \sFmla{\False}{!A}[{\OLMathNumeral{1}}]
+  \]
+  ذا !!{tableau} مغلق، لزم~$!B_{\OLMathNumeral{1}}, \dots, !B_{\OLId{latin-ordinary}{n}} \Entails !A$.
+  والأيسر أن نبرهن نقيض المقابل؛ فنفرض وجود نموذج~$\mModel{M}$ وعالم~${\OLId{latin-ordinary}{w}}$
+  بحيث~$\mSat{{\OLId{latin-looped}{M}}}{!B_{\OLId{latin-ordinary}{i}}}[{\OLId{latin-ordinary}{w}}]$ لكل~${\OLId{latin-ordinary}{i}}={\OLMathNumeral{1}}$، \dots،~${\OLId{latin-ordinary}{n}}$، ولكن
+  $\mSat/{{\OLId{latin-looped}{M}}}{!A}[{\OLId{latin-ordinary}{w}}]$؛ وعندئذ لا سبيل إلى إغلاق أي !!{tableau}. فهذا
+  النموذج المضاد يرضي الافتراضات التي افتُتح بها !!{tableau}. وحجة
+  البرهان هي أن الشعبة من !!a{tableau} التي تقبل الإرضاء بما عليها من !!{formula} ذوات
+  السوابق، إذا جرت عليها قاعدة، خلّفت في الامتداد شعبة واحدة على الأقل
+  تقبل الإرضاء أيضًا. ولما كانت الشعبة المغلقة لا تقبله، وجب أن يبقى في
+  كل !!{tableau} ناشئ من مجموعة قابلة للإرضاء من !!{formula} ذوات
+  السوابق شعبة مفتوحة على الأقل.
+
+  ولا تتم هذه الحجة في الحال الحدسية حتى نعمم معنى «قابل للإرضاء» على
+  النماذج العلاقية والسوابق؛ فإذا فُعل ذلك استقام البرهان من غير عسر.
+\end{explain}
+
+\begin{defn}
+  افرض~${\OLId{latin-looped}{P}}$ مجموعة سوابق، أي
+  ${\OLId{latin-looped}{P}} \subseteq (\PosInt)^* \setminus \{\emptyseq\}$، وليكن
+  $\mModel{M}$ نموذجًا. تكون الدالة~${\OLId{latin-ordinary}{f}}\colon {\OLId{latin-looped}{P}} \to {\OLId{latin-looped}{W}}$
+  \emph{تفسيرًا لـ}~${\OLId{latin-looped}{P}}$ في~$\mModel{M}$ متى تحقق
+  $Rf(\sigma){\OLId{latin-ordinary}{f}}(\tau)$ لكل~$\sigma,\tau\in {\OLId{latin-looped}{P}}$ بحيث تكون~$\tau=\sigma$
+  أو~$\tau=\sigma.{\OLId{latin-ordinary}{n}}_{\OLMathNumeral{1}}.\cdots.{\OLId{latin-ordinary}{n}}_{\OLId{latin-ordinary}{k}}$ لبعض~${\OLId{latin-ordinary}{k}}\geq {\OLMathNumeral{1}}$.
+
+  فإذا عُيّن تفسير للسوابق~${\OLId{latin-looped}{P}}$، حدّدنا الإرضاء هكذا:
+  \begin{enumerate}
+  \item يرضي~$\mModel{M}$ الصيغة~$\sFmla{\True}{!A}[\sigma]$ إذا وفقط
+    إذا تحقق~$\mSat{{\OLId{latin-looped}{M}}}{!A}[{\OLId{latin-ordinary}{f}}(\sigma)]$.
+  \item يرضي~$\mModel{M}$ الصيغة~$\sFmla{\False}{!A}[\sigma]$ إذا وفقط
+    إذا تحقق~$\mSat/{{\OLId{latin-looped}{M}}}{!A}[{\OLId{latin-ordinary}{f}}(\sigma)]$.
+  \end{enumerate}
+\end{defn}
+
+ومن ثم، كلما كانت~$\sigma,\tau\in {\OLId{latin-looped}{P}}$ وكانت~$\tau$ إحدى السوابق التي
+يدل عليها~$\sigma.{*}$، ثبت~$Rf(\sigma){\OLId{latin-ordinary}{f}}(\tau)$.
+% تصحيح مصدر (0515-I1): شمل شرط التفسير كل امتداد سابق داخل P، لا الحافة المباشرة وحدها.
+
+\begin{defn}
+  لتكن~${\OLId{greek-variable}{Gamma}}$ مجموعة من !!{formula} ذوات السوابق، ولتدل~${\OLId{latin-looped}{P}}({\OLId{greek-variable}{Gamma}})$
+  على مجموعة السوابق الواردة فيها. فإذا كانت~${\OLId{latin-ordinary}{f}}$ تفسيرًا لـ${\OLId{latin-looped}{P}}({\OLId{greek-variable}{Gamma}})$
+  في~$\mModel{M}$، قلنا إن~$\mModel{M}$ يرضي~${\OLId{greek-variable}{Gamma}}$ بالنسبة إلى~${\OLId{latin-ordinary}{f}}$،
+  ورمزنا إلى ذلك بـ~$\mSat{{\OLId{latin-looped}{M}}}{{\OLId{greek-variable}{Gamma}}}[{\OLId{latin-ordinary}{f}}]$، متى أرضى~$\mModel{M}$ كل
+  !!{formula} ذات سابقة في~${\OLId{greek-variable}{Gamma}}$ بالنسبة إلى~${\OLId{latin-ordinary}{f}}$. ونسمي~${\OLId{greek-variable}{Gamma}}$
+  \emph{قابلة للإرضاء} إذا وفقط إذا وُجد نموذج~$\mModel{M}$ وتفسير~${\OLId{latin-ordinary}{f}}$
+  لـ${\OLId{latin-looped}{P}}({\OLId{greek-variable}{Gamma}})$ يحققان~$\mSat{{\OLId{latin-looped}{M}}}{{\OLId{greek-variable}{Gamma}}}[{\OLId{latin-ordinary}{f}}]$.
+\end{defn}
+
+\begin{prop}
+  إذا جمعت~${\OLId{greek-variable}{Gamma}}$ بين~$\sFmla{\True}{!A}[\sigma]$
+  و$\sFmla{\False}{!A}[\sigma.{*}]$ لبعض !!{formula}~$!A$
+  وسابقة~$\sigma$، أو احتوت~$\sFmla{\True}{\lfalse}[\sigma]$،
+  امتنعت قابلية~${\OLId{greek-variable}{Gamma}}$ للإرضاء.
+\end{prop}
+
+\begin{proof}
+  لما كان~$\mSat/{{\OLId{latin-looped}{M}}}{\lfalse}[{\OLId{latin-ordinary}{f}}(\sigma)]$ حاصلًا أبدًا، لم تقبل
+  الإرضاء أي~${\OLId{greek-variable}{Gamma}}$ تشتمل على~$\sFmla{\True}{\lfalse}[\sigma]$.
+
+  وكذلك يمتنع وجود نموذج~$\mModel{M}$ وتفسير~${\OLId{latin-ordinary}{f}}$ لـ${\OLId{latin-looped}{P}}({\OLId{greek-variable}{Gamma}})$
+  يرضيان معًا~$\sFmla{\True}{!A}[\sigma]$
+  و$\sFmla{\False}{!A}[\sigma.{*}]$. إذ يلزم حينئذ
+  $\mSat{{\OLId{latin-looped}{M}}}{!A}[{\OLId{latin-ordinary}{f}}(\sigma)]$ و$\mSat/{{\OLId{latin-looped}{M}}}{!A}[{\OLId{latin-ordinary}{f}}(\sigma.{*})]$؛
+  لكن من~$Rf(\sigma){\OLId{latin-ordinary}{f}}(\sigma.{*})$ ومن
+  \olref[sem][rel]{prop:true-monotonic} ينتج
+  $\mSat{{\OLId{latin-looped}{M}}}{!A}[{\OLId{latin-ordinary}{f}}(\sigma.{*})]$، فيقع التناقض.
+\end{proof}
+
+\begin{thm}[السلامة]
+  \ollabel{thm:tableau-soundness}
+  متى كانت~${\OLId{latin-looped}{P}}({\OLId{greek-variable}{Gamma}})$ مغلقة تحت أخذ السوابق، وكان لـ${\OLId{greek-variable}{Gamma}}$
+  !!{tableau} مغلق، لم تكن~${\OLId{greek-variable}{Gamma}}$ قابلة للإرضاء.
+\end{thm}
+% تصحيح مصدر (0515-I2): أضيف ثبات الانغلاق تحت السوابق لاستبعاد امتدادات قديمة للسابق الجديد.
+
+\begin{proof}
+نصف شعبة من !!a{tableau} بأنها قابلة للإرضاء إذا وفقط إذا قبلت الإرضاء
+مجموعة !!{signed formula} الواقعة عليها؛ ونصف !!a{tableau} بذلك إذا
+كان فيه شعبة واحدة على الأقل تقبل الإرضاء.
+
+ونحفظ مع ذلك أصلًا ثابتًا: مجموعة السوابق على كل شعبة مغلقة تحت أخذ
+السوابق. وهو قائم في الشعبة الأولى بفرض المبرهنة، وتحفظه القواعد التي لا
+تستحدث سابقة. وأما القاعدة التي تلحق السابقة الجديدة~$\sigma.{\OLId{latin-ordinary}{n}}$، فجميع
+سوابقها السابقة إما~$\sigma$ وإما سابقة لـ~$\sigma$، فهي واقعة على
+الشعبة من قبل. ولا يكون في المجموعة القديمة، لذلك، امتداد لـ~$\sigma.{\OLId{latin-ordinary}{n}}$؛
+إذ لو كان لأوجب الانغلاق وقوع~$\sigma.{\OLId{latin-ordinary}{n}}$ فيها، وهذا يناقض جدتها.
+
+والأصل الذي نثبته هو أن تمديد !!{tableau} قابل للإرضاء بقاعدة استدلال
+يبقي !!{tableau} الناتج قابلًا للإرضاء. ومنه تتم المبرهنة؛ لأن كل
+!!{tableau} مغلق إنما يُبنى بتطبيق القواعد على !!{tableau} لا يحوي
+أولًا إلا افتراضات من~${\OLId{greek-variable}{Gamma}}$. فلو قبلت~${\OLId{greek-variable}{Gamma}}$ الإرضاء لقبله كل
+!!{tableau} لها، مع أن !!{tableau} المغلق لا يقبله: شعبه كلها مغلقة،
+ولا تقبل شعبة مغلقة الإرضاء.
+
+خذ !!{tableau} قابلًا للإرضاء، أي !!a{tableau} تشتمل على شعبة قابلة
+للإرضاء على الأقل. وتطبيق القاعدة إما أن يلحق !!{signed formula}
+بشعبة، وإما أن يشطر الشعبة شعبتين. فإن بقيت للـ!!{tableau} شعبة قابلة للإرضاء لم تمسها
+القاعدة، بقيت كذلك في !!{tableau} الممتد، فكان هو أيضًا قابلًا للإرضاء.
+فلا يبقى للنظر إلا أن تقع القاعدة على شعبة قابلة للإرضاء.
+
+ولتكن~${\OLId{greek-variable}{Gamma}}$ مجموعة !!{signed formula} في تلك الشعبة، ولتكن
+$\sFmla{{\OLId{latin-looped}{S}}}{!A}[\sigma] \in {\OLId{greek-variable}{Gamma}}$ هي !!{signed formula} التي تُطبّق
+عليها القاعدة. فإن لم تشطر القاعدة الشعبة، وجب أن يبقى امتدادها، أعني
+${\OLId{greek-variable}{Gamma}}$ مضمومًا إليها ناتج القاعدة، قابلًا للإرضاء. وإن شطرتها وجب أن
+تقبل الإرضاء إحدى الشعبتين الناتجتين على الأقل.
+\begin{enumerate}
+\item إذا طُبقت~$\TRule{\True}{\lnot}$ على
+  $\sFmla{\True}{\lnot !B}[\sigma] \in {\OLId{greek-variable}{Gamma}}$، كان في الشعبة
+  الممتدة !!{signed formula} من المجموعة
+  ${\OLId{greek-variable}{Gamma}} \cup \{\sFmla{\False}{!B}[\sigma.{*}]\}$. ولنفترض
+  $\mSat{{\OLId{latin-looped}{M}}}{{\OLId{greek-variable}{Gamma}}}[{\OLId{latin-ordinary}{f}}]$؛ فيلزم خاصةً
+  $\mSat{{\OLId{latin-looped}{M}}}{\lnot !B}[{\OLId{latin-ordinary}{f}}(\sigma)]$. ومن ثم يتحقق~$\mSat/{{\OLId{latin-looped}{M}}}{!B}[{\OLId{latin-ordinary}{w}}]$
+  لكل~${\OLId{latin-ordinary}{w}}$ يحقق~$Rf(\sigma){\OLId{latin-ordinary}{w}}$، ومن جملة ذلك~${\OLId{latin-ordinary}{f}}(\sigma.{*})$. فـ
+  $\mModel{M}$ يرضي~$\sFmla{\False}{!B}[\sigma.{*}]$ بالنسبة إلى~${\OLId{latin-ordinary}{f}}$.
+\item وإذا طُبقت~$\TRule{\False}{\lnot}$ على
+  $\sFmla{\False}{\lnot !B}[\sigma] \in {\OLId{greek-variable}{Gamma}}$: تمرين.
+\item وإذا طُبقت~$\TRule{\True}{\land}$ على
+  $\sFmla{\True}{!B \land !C}[\sigma] \in {\OLId{greek-variable}{Gamma}}$، لحقت بالشعبة
+  !!{signed formula} جديدتان، وهما:
+  $\sFmla{\True}{!B}[\sigma]$ و$\sFmla{\True}{!C}[\sigma]$. افترض أن
+  $\mSat{{\OLId{latin-looped}{M}}}{{\OLId{greek-variable}{Gamma}}}[{\OLId{latin-ordinary}{f}}]$، وبوجه خاص
+  $\mSat{{\OLId{latin-looped}{M}}}{!B \land !C}[{\OLId{latin-ordinary}{f}}(\sigma)]$؛ فينتج
+  $\mSat{{\OLId{latin-looped}{M}}}{!B}[{\OLId{latin-ordinary}{f}}(\sigma)]$ و$\mSat{{\OLId{latin-looped}{M}}}{!C}[{\OLId{latin-ordinary}{f}}(\sigma)]$. وهذا يعني أن
+  $\mModel{M}$ يرضي كلًا من~$\sFmla{\True}{!B}[\sigma]$
+  و$\sFmla{\True}{!C}[\sigma]$ بالنسبة إلى~${\OLId{latin-ordinary}{f}}$.
+\item وإذا طُبقت~$\TRule{\False}{\lor}$ على
+  $\sFmla{\False}{!B \lor !C}[\sigma] \in {\OLId{greek-variable}{Gamma}}$: تمرين.
+\item وإذا طُبقت~$\TRule{\False}{\lif}$ على
+  $\sFmla{\False}{!B \lif !C}[\sigma] \in {\OLId{greek-variable}{Gamma}}$، لحقت بالشعبة
+  !!{signed formula} جديدتان:
+  $\sFmla{\True}{!B}[\sigma.{\OLId{latin-ordinary}{n}}]$ و$\sFmla{\False}{!C}[\sigma.{\OLId{latin-ordinary}{n}}]$،
+  على أن~$\sigma.{\OLId{latin-ordinary}{n}}$ سابقة جديدة في الشعبة، أي
+  $\sigma.{\OLId{latin-ordinary}{n}} \notin {\OLId{latin-looped}{P}}({\OLId{greek-variable}{Gamma}})$.
+
+  وبما أن~${\OLId{greek-variable}{Gamma}}$ قابلة للإرضاء، فثمة نموذج~$\mModel{M}$ وتفسير~${\OLId{latin-ordinary}{f}}$
+  لـ${\OLId{latin-looped}{P}}({\OLId{greek-variable}{Gamma}})$ بحيث~$\mSat{{\OLId{latin-looped}{M}}}{{\OLId{greek-variable}{Gamma}}}[{\OLId{latin-ordinary}{f}}]$، وبوجه خاص
+  $\mSat/{{\OLId{latin-looped}{M}}}{!B \lif !C}[{\OLId{latin-ordinary}{f}}(\sigma)]$. والمطلوب إثبات أن
+  ${\OLId{greek-variable}{Gamma}} \cup \{\sFmla{\True}{!B}[\sigma.{\OLId{latin-ordinary}{n}}],
+  \sFmla{\False}{!C}[\sigma.{\OLId{latin-ordinary}{n}}]\}$ قابلة للإرضاء. فنعرّف
+  تفسيرًا لـ${\OLId{latin-looped}{P}}({\OLId{greek-variable}{Gamma}}) \cup \{\sigma.{\OLId{latin-ordinary}{n}}\}$ كما يأتي:
+
+  إذ يقتضي~$\mSat/{{\OLId{latin-looped}{M}}}{!B \lif !C}[{\OLId{latin-ordinary}{f}}(\sigma)]$ وجود عالم~${\OLId{latin-ordinary}{w}} \in {\OLId{latin-looped}{W}}$
+  بحيث~$Rf(\sigma){\OLId{latin-ordinary}{w}}$ و$\mSat{{\OLId{latin-looped}{M}}}{!B}[{\OLId{latin-ordinary}{w}}]$ و$\mSat/{{\OLId{latin-looped}{M}}}{!C}[{\OLId{latin-ordinary}{w}}]$.
+  ولتكن~${\OLId{latin-ordinary}{f}}'$ مثل~${\OLId{latin-ordinary}{f}}$، إلا أن~${\OLId{latin-ordinary}{f}}'(\sigma.{\OLId{latin-ordinary}{n}}) = {\OLId{latin-ordinary}{w}}$. وبما أن
+  ${\OLId{latin-ordinary}{f}}'(\sigma) = {\OLId{latin-ordinary}{f}}(\sigma)$ و$Rf(\sigma){\OLId{latin-ordinary}{w}}$، فإن
+  $Rf'(\sigma){\OLId{latin-ordinary}{f}}'(\sigma.{\OLId{latin-ordinary}{n}})$. وإذا كانت~$\tau\in {\OLId{latin-looped}{P}}({\OLId{greek-variable}{Gamma}})$ سابقة
+  لـ$\sigma.{\OLId{latin-ordinary}{n}}$، كانت سابقة لـ$\sigma$ أو مساوية لها؛ فيعطي تفسير~${\OLId{latin-ordinary}{f}}$
+  أن~$Rf(\tau){\OLId{latin-ordinary}{f}}(\sigma)$، ومن تعدي~${\OLId{latin-looped}{R}}$ يثبت
+  $Rf'(\tau){\OLId{latin-ordinary}{f}}'(\sigma.{\OLId{latin-ordinary}{n}})$. وليس في~${\OLId{latin-looped}{P}}({\OLId{greek-variable}{Gamma}})$ امتداد لـ~$\sigma.{\OLId{latin-ordinary}{n}}$
+  بثابت الانغلاق والجدة المتقدمين، وبانعكاس~${\OLId{latin-looped}{R}}$ يكون~$Rww$ للحالة
+  الجديدة مع نفسها. فتكون~${\OLId{latin-ordinary}{f}}'$ تفسيرًا لـ
+  ${\OLId{latin-looped}{P}}({\OLId{greek-variable}{Gamma}}) \cup \{\sigma.{\OLId{latin-ordinary}{n}}\}$. ومن الواضح أن
+  $\mSat{{\OLId{latin-looped}{M}}}{!B}[{\OLId{latin-ordinary}{f}}'(\sigma.{\OLId{latin-ordinary}{n}})]$ و$\mSat/{{\OLId{latin-looped}{M}}}{!C}[{\OLId{latin-ordinary}{f}}'(\sigma.{\OLId{latin-ordinary}{n}})]$.
+  وإذ كان~${\OLId{latin-ordinary}{f}}(\sigma') = {\OLId{latin-ordinary}{f}}'(\sigma')$ لكل السوابق
+  $\sigma' \in {\OLId{latin-looped}{P}}({\OLId{greek-variable}{Gamma}})$، كان~$\mSat{{\OLId{latin-looped}{M}}}{{\OLId{greek-variable}{Gamma}}}[{\OLId{latin-ordinary}{f}}']$. ولذلك يرضي
+  $\mModel{M}, {\OLId{latin-ordinary}{f}}'$ المجموعة
+  ${\OLId{greek-variable}{Gamma}} \cup \{\sFmla{\True}{!B}[\sigma.{\OLId{latin-ordinary}{n}}],
+  \sFmla{\False}{!C}[\sigma.{\OLId{latin-ordinary}{n}}]\}$.
+\end{enumerate}
+وأما الاستدلالات التي تُخرج شعبتين فبيانها هكذا.
+\begin{enumerate}
+\item إذا طُبقت~$\TRule{\False}{\land}$ على
+  $\sFmla{\False}{!B \land !C}[\sigma] \in {\OLId{greek-variable}{Gamma}}$، نشأت شعبتان:
+  تمتد اليسرى بـ~$\sFmla{\False}{!B}[\sigma]$، واليمنى بـ
+  $\sFmla{\False}{!C}[\sigma]$. افترض أن~$\mSat{{\OLId{latin-looped}{M}}}{{\OLId{greek-variable}{Gamma}}}[{\OLId{latin-ordinary}{f}}]$،
+  وبوجه خاص~$\mSat/{{\OLId{latin-looped}{M}}}{!B \land !C}[{\OLId{latin-ordinary}{f}}(\sigma)]$؛ ومنه
+  $\mSat/{{\OLId{latin-looped}{M}}}{!B}[{\OLId{latin-ordinary}{f}}(\sigma)]$ أو~$\mSat/{{\OLId{latin-looped}{M}}}{!C}[{\OLId{latin-ordinary}{f}}(\sigma)]$.
+  ففي الحال الأولى يرضي~$\mModel{M}, {\OLId{latin-ordinary}{f}}$ الصيغة
+  $\sFmla{\False}{!B}[\sigma]$ فتقبل الشعبة اليسرى الإرضاء؛ وفي
+  الثانية يرضي~$\mModel{M}, {\OLId{latin-ordinary}{f}}$ الصيغة
+  $\sFmla{\False}{!C}[\sigma]$ فتقبله الشعبة اليمنى.
+\item وإذا طُبقت~$\TRule{\True}{\lor}$ على
+    $\sFmla{\True}{!B \lor !C}[\sigma] \in {\OLId{greek-variable}{Gamma}}$: تمرين.
+\item وإذا طُبقت~$\TRule{\True}{\lif}$ على
+    $\sFmla{\True}{!B \lif !C}[\sigma] \in {\OLId{greek-variable}{Gamma}}$: تمرين.
+\end{enumerate}
+\end{proof}
+
+\begin{prob}
+أتمّ ما تُرك من برهان~\olref[int][tab][sou]{thm:tableau-soundness}.
+\end{prob}
+
+\begin{cor}
+\ollabel{cor:entailment-soundness}
+متى كان~${\OLId{greek-variable}{Gamma}} \Proves !A$، كان~${\OLId{greek-variable}{Gamma}} \Entails !A$.
+\end{cor}
+
+\begin{proof}
+  لنفرض~${\OLId{greek-variable}{Gamma}} \Proves !A$. فعندئذ المجموعة
+  ${\OLId{greek-variable}{Delta}} = \{\sFmla{\False}{!A}[{\OLMathNumeral{1}}], \sFmla{\True}{!B_{\OLMathNumeral{1}}}[{\OLMathNumeral{1}}],
+  \dots, \sFmla{\True}{!B_{\OLId{latin-ordinary}{n}}}[{\OLMathNumeral{1}}]\}$ تملك !!{tableau} مغلقًا لبعض
+  $!B_{\OLMathNumeral{1}}$، \dots،~$!B_{\OLId{latin-ordinary}{n}} \in {\OLId{greek-variable}{Gamma}}$. ولإثبات
+  % تصحيح أسلوبي (0515-N1): أزيل تكرار «تملك» حول تعريف Delta.
+  ${\OLId{greek-variable}{Gamma}} \Entails !A$ نفرض خلافه؛ فيوجد نموذج~$\mModel{M}$
+  وعالم~${\OLId{latin-ordinary}{w}}$ بحيث~$\mSat{{\OLId{latin-looped}{M}}}{!B_{\OLId{latin-ordinary}{i}}}[{\OLId{latin-ordinary}{w}}]$ لكل~${\OLId{latin-ordinary}{i}}={\OLMathNumeral{1}}$، \dots،~${\OLId{latin-ordinary}{n}}$،
+  ولكن~$\mSat/{{\OLId{latin-looped}{M}}}{!A}[{\OLId{latin-ordinary}{w}}]$. ولتكن~${\OLId{latin-ordinary}{f}}({\OLMathNumeral{1}}) = {\OLId{latin-ordinary}{w}}$؛ عندئذ تكون~${\OLId{latin-ordinary}{f}}$ تفسيرًا
+  لـ${\OLId{latin-looped}{P}}({\OLId{greek-variable}{Delta}})$ في~$\mModel{M}$، ويرضي~$\mModel{M}$ المجموعة~${\OLId{greek-variable}{Delta}}$
+  بالنسبة إلى~${\OLId{latin-ordinary}{f}}$. ولأن~${\OLId{latin-looped}{P}}({\OLId{greek-variable}{Delta}})=\{{\OLMathNumeral{1}}\}$ فهي مغلقة تحت أخذ السوابق.
+  لكن وفقًا لـ\olref{thm:tableau-soundness} تكون
+  ${\OLId{greek-variable}{Delta}}$ غير قابلة للإرضاء، إذ لها !!{tableau} مغلق؛ وهذا تناقض.
+  فلابد إذن من~${\OLId{greek-variable}{Gamma}} \Entails !A$.
+\end{proof}
+
+\begin{cor}
+\ollabel{cor:weak-soundness}
+متى كان~$\Proves !A$، صدقت~$!A$ في النماذج كلها.
+\end{cor}
+
+\end{document}

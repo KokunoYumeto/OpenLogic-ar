@@ -1,0 +1,213 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{ordinals}{basic}
+\olsection{الخصائص الأساسية للأعداد الترتيبية}
+
+قد تبين أن أوائل الأعداد الترتيبية هي الأعداد الطبيعية. وإنما نبني
+نظرية الأعداد الترتيبية، في المقام الأول، لنتجاوز بمبدأ الاستقراء
+مجاله في الأعداد الطبيعية. ونمهد لذلك بنتائج أولية متتابعة.
+
+\begin{lem}\ollabel{ordmemberord}
+كل !!{element} من عدد ترتيبي عدد ترتيبي أيضًا.
+\end{lem}
+
+\begin{proof}
+نأخذ عددًا ترتيبيًا~${\OLId{greek-variable}{alpha}}$، ونفرض~${\OLId{latin-ordinary}{b}} \in {\OLId{greek-variable}{alpha}}$. فتعدي~${\OLId{greek-variable}{alpha}}$
+يعطي~${\OLId{latin-ordinary}{b}} \subseteq {\OLId{greek-variable}{alpha}}$؛ ولذلك ترتب~$\in$ المجموعة~${\OLId{latin-ordinary}{b}}$ ترتيبًا
+جيدًا، إذ إن~$\in$ ترتب~${\OLId{greek-variable}{alpha}}$ ترتيبًا جيدًا.
+
+بقي تعدي~${\OLId{latin-ordinary}{b}}$. لنفرض~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-ordinary}{c}} \in {\OLId{latin-ordinary}{b}}$؛ فيلزم~${\OLId{latin-ordinary}{c}} \in {\OLId{greek-variable}{alpha}}$ من
+${\OLId{latin-ordinary}{b}} \subseteq {\OLId{greek-variable}{alpha}}$. وبتعدي~${\OLId{greek-variable}{alpha}}$ مرة أخرى نحصل على~${\OLId{latin-ordinary}{c}} \subseteq {\OLId{greek-variable}{alpha}}$،
+ثم~${\OLId{latin-ordinary}{x}} \in {\OLId{greek-variable}{alpha}}$. وهكذا~${\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{c}}, {\OLId{latin-ordinary}{b}} \in {\OLId{greek-variable}{alpha}}$. ولما كانت~$\in$
+ترتب~${\OLId{greek-variable}{alpha}}$ ترتيبًا جيدًا، كانت~$\in$ علاقة متعدية على~${\OLId{greek-variable}{alpha}}$،
+بموجب~\olref[sth][ordinals][wo]{wo:strictorder}. فمن~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-ordinary}{c}} \in {\OLId{latin-ordinary}{b}}$
+يلزم~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-ordinary}{b}}$؛ وبالتعميم~${\OLId{latin-ordinary}{c}} \subseteq {\OLId{latin-ordinary}{b}}$.
+\end{proof}
+
+\begin{cor}\ollabel{ordissetofsmallerord}
+لدينا~${\OLId{greek-variable}{alpha}} = \Setabs{\beta \in {\OLId{greek-variable}{alpha}}}{\beta \text{ عدد ترتيبي}}$
+لكل عدد ترتيبي~${\OLId{greek-variable}{alpha}}$.
+\end{cor}
+
+\begin{proof}
+هذه نتيجة مباشرة لـ\olref{ordmemberord}.
+\end{proof}
+
+وسنثبت نتيجتين أساسيتين، هما~\olref{ordinductionschema}
+و\olref{ordtrichotomy}؛ ومعناهما الإجمالي أن الانتماء يرتب الأعداد
+الترتيبية نفسها ترتيبًا جيدًا.
+
+\begin{thm}[الاستقراء المتناهي التجاوز]\ollabel{ordinductionschema}
+لكل صيغة~$\phi({\OLId{latin-ordinary}{x}})$ يصح:
+\[
+\text{إذا كان }\exists {\OLId{greek-variable}{alpha}} \phi({\OLId{greek-variable}{alpha}})\text{، فإن }
+\exists {\OLId{greek-variable}{alpha}}(\phi({\OLId{greek-variable}{alpha}})
+\land (\forall \beta \in {\OLId{greek-variable}{alpha}}) \lnot \phi(\beta))
+\]
+والمكممات الظاهرة هنا مقيدة بالأعداد الترتيبية وإن لم يُصرَّح بالقيد.
+\end{thm}
+
+\begin{proof}
+%\olref{ordinductionschema1}.
+لنفرض~$\phi({\OLId{greek-variable}{alpha}})$ لعدد ترتيبي~${\OLId{greek-variable}{alpha}}$. فإن كان
+$(\forall \beta \in {\OLId{greek-variable}{alpha}}) \lnot \phi(\beta)$ تم المطلوب. وإلا وضعنا
+${\OLId{latin-looped}{X}} = \Setabs{\beta \in {\OLId{greek-variable}{alpha}}}{\phi(\beta)}$، فكان~${\OLId{latin-looped}{X}} \neq \emptyset$.
+وبما أن~$\in$ ترتب~${\OLId{greek-variable}{alpha}}$ ترتيبًا جيدًا، فلـ${\OLId{latin-looped}{X}}$ !!{element} أصغر
+بحسب~$\in$، نرمز إليه بـ$\gamma$. ومن تعريف~${\OLId{latin-looped}{X}}$ نجد~$\phi(\gamma)$؛
+ثم إن~$\gamma$ عدد ترتيبي بمقتضى~\olref{ordmemberord}.
+فإذا كان~$\beta \in \gamma$ لزم~$\beta \in {\OLId{greek-variable}{alpha}}$ من تعدي~${\OLId{greek-variable}{alpha}}$،
+وامتنع~$\beta \in {\OLId{latin-looped}{X}}$ لأصغرية~$\gamma$. إذن~$\lnot\phi(\beta)$،
+وبالتعميم~$(\forall \beta \in \gamma)\lnot\phi(\beta)$.
+%\olref{ordinductionschema2}. Suppose there is some ordinal
+% $\gamma$ such that $\lnot\phi(\gamma)$. Then by
+% \olref{ordinductionschema1}, there is an $\in$-minimal ordinal
+% $\alpha$ for which $\lnot\phi(\alpha)$. So $(\forall \beta <
+% \alpha) \phi(\beta)$, rendering the antecedent of the conditional
+% false.
+\end{proof}
+\noindent
+ولـ\olref{ordinductionschema} صياغة مكافئة بالمخطط الآتي:
+\[
+\text{إذا كان }\forall {\OLId{greek-variable}{alpha}}((\forall \beta \in {\OLId{greek-variable}{alpha}})\phi(\beta) \lif
+\phi({\OLId{greek-variable}{alpha}}))\text{، فإن }\forall {\OLId{greek-variable}{alpha}}\phi({\OLId{greek-variable}{alpha}})
+\]
+فما علينا إلا أن نعوض بـ$\lnot\phi({\OLId{greek-variable}{alpha}})$ في~\olref{ordinductionschema}،
+ثم نجري التحويلات المنطقية الأولية.
+
+\begin{thm}[التثليث]\ollabel{ordtrichotomy}
+لدينا~${\OLId{greek-variable}{alpha}} \in \beta \lor {\OLId{greek-variable}{alpha}} = \beta \lor \beta \in {\OLId{greek-variable}{alpha}}$
+لكل عددين ترتيبيين~${\OLId{greek-variable}{alpha}}$ و$\beta$.
+\end{thm}
+
+\begin{proof}
+نستعمل الاستقراء مرتين، أي نطبق~\olref{ordinductionschema} تطبيقين.
+ونقول إن~${\OLId{latin-ordinary}{x}}$ \emph{قابل للمقارنة} مع~${\OLId{latin-ordinary}{y}}$ إذا وفقط إذا كان
+${\OLId{latin-ordinary}{x}} \in {\OLId{latin-ordinary}{y}} \lor {\OLId{latin-ordinary}{x}} = {\OLId{latin-ordinary}{y}} \lor {\OLId{latin-ordinary}{y}} \in {\OLId{latin-ordinary}{x}}$.
+
+نفرض أولًا أن كل عدد ترتيبي في~${\OLId{greek-variable}{alpha}}$ قابل للمقارنة مع \emph{كل}
+عدد ترتيبي. ثم نفرض، لاستقراء ثان، أن~${\OLId{greek-variable}{alpha}}$ قابل للمقارنة مع كل
+عدد ترتيبي في~$\beta$. والمطلوب الآن مقارنة~${\OLId{greek-variable}{alpha}}$ بـ$\beta$.
+فإذا ثبتت، دل الاستقراء على~$\beta$ على أن~${\OLId{greek-variable}{alpha}}$ قابل للمقارنة
+مع كل عدد ترتيبي، ثم دل الاستقراء على~${\OLId{greek-variable}{alpha}}$ على أن \emph{كل}
+عدد ترتيبي قابل للمقارنة مع \emph{كل} عدد ترتيبي. ويكفينا لهذا أن
+نفرض~${\OLId{greek-variable}{alpha}} \notin \beta$ و$\beta \notin {\OLId{greek-variable}{alpha}}$ ونستنتج~${\OLId{greek-variable}{alpha}} = \beta$.
+
+نثبت أولًا~${\OLId{greek-variable}{alpha}} \subseteq \beta$. خذ~$\gamma \in {\OLId{greek-variable}{alpha}}$؛ فهو
+عدد ترتيبي بمقتضى~\olref{ordmemberord}، ولذلك يقبل~$\gamma$ المقارنة
+مع~$\beta$ بفرض الاستقراء الأول. فإن كان~$\gamma = \beta$ أو
+$\beta \in \gamma$، لزم~$\beta \in {\OLId{greek-variable}{alpha}}$، مع الاستعانة بتعدي~${\OLId{greek-variable}{alpha}}$
+حيث يلزم. وهذا خلاف الفرض، فلا يبقى إلا~$\gamma \in \beta$.
+وبالتعميم نحصل على~${\OLId{greek-variable}{alpha}} \subseteq \beta$.
+
+وبمثل هذه الحجة تمامًا، ولكن بفرض الاستقراء الثاني، يثبت
+$\beta \subseteq {\OLId{greek-variable}{alpha}}$؛ فينتج~${\OLId{greek-variable}{alpha}} = \beta$.
+\end{proof}\noindent
+لهذا نكتب أحيانًا~${\OLId{greek-variable}{alpha}} <\beta$ مكان~${\OLId{greek-variable}{alpha}} \in \beta$، فقد
+قامت~$\in$ مقام علاقة ترتيب. وليس وراء هذا الاصطلاح أمر عميق:
+إنما هو مألوف، وكتابة~${\OLId{greek-variable}{alpha}} \leq \beta$ أيسر من كتابة
+${\OLId{greek-variable}{alpha}} \in \beta \lor {\OLId{greek-variable}{alpha}} = \beta$.
+\footnote{يجوز من حيث الإمكان أن نكتب~${\OLId{greek-variable}{alpha}} \mathrel{\underline{\in}} \beta$،
+إلا أنه ترميز خارج عن الاصطلاح المعتاد تمامًا.}
+
+ويتفرع عما تقدم نتيجتان قريبتان، يظهر في أولاهما استعمال الترميز الجديد.
+
+\begin{cor}\ollabel{ordordered}
+إذا كان~$\exists {\OLId{greek-variable}{alpha}}\phi({\OLId{greek-variable}{alpha}})$، لزم
+$\exists {\OLId{greek-variable}{alpha}}(\phi({\OLId{greek-variable}{alpha}}) \land \forall \beta(\phi(\beta) \lif {\OLId{greek-variable}{alpha}} \leq \beta))$.
+وكذلك، لكل أعداد ترتيبية~${\OLId{greek-variable}{alpha}}, \beta, \gamma$، يصح
+${\OLId{greek-variable}{alpha}} \notin {\OLId{greek-variable}{alpha}}$ ويصح~${\OLId{greek-variable}{alpha}} \in \beta \in \gamma \lif {\OLId{greek-variable}{alpha}} \in \gamma$.
+\end{cor}
+
+\begin{proof}
+يجري البرهان على مثال~\olref[wo]{wo:strictorder} بعينه.
+\end{proof}
+
+\begin{prob}
+استوفِ الحجة التي قيل عنها «بمثل هذه الحجة تمامًا» في برهان
+\olref[sth][ordinals][basic]{ordtrichotomy}.
+\end{prob}
+
+\begin{cor}\ollabel{corordtransitiveord}
+تكون~${\OLId{latin-looped}{A}}$ عددًا ترتيبيًا إذا وفقط إذا كانت~${\OLId{latin-looped}{A}}$ مجموعة متعدية عناصرها
+أعداد ترتيبية.
+\end{cor}
+
+\begin{proof}
+أما الاتجاه \emph{من اليسار إلى اليمين} فمن~\olref{ordmemberord}.
+وأما \emph{من اليمين إلى اليسار}، فإذا كانت~${\OLId{latin-looped}{A}}$ مجموعة متعدية من
+الأعداد الترتيبية، فإن~$\in$ ترتب~${\OLId{latin-looped}{A}}$ ترتيبًا جيدًا بمقتضى
+\olref{ordinductionschema} و\olref{ordtrichotomy}.
+\end{proof}
+
+قد فسرنا~\olref{ordinductionschema} و\olref{ordtrichotomy} بأن
+$\in$ ترتب الأعداد الترتيبية ترتيبًا جيدًا. لكن هذا القول يحتاج إلى
+\emph{احتراز شديد}، كما يتبين من النتيجة التالية.
+
+\begin{thm}[مفارقة بورالي--فورتي]\ollabel{buraliforti}
+يمتنع أن تكون هناك مجموعة تضم جميع الأعداد الترتيبية.
+\end{thm}
+
+\begin{proof}
+لنفترض خلاف ذلك، ولتكن~${\OLId{latin-looped}{O}}$ مجموعة الأعداد الترتيبية كلها. إذا كان
+${\OLId{greek-variable}{alpha}} \in \beta \in {\OLId{latin-looped}{O}}$، كان~${\OLId{greek-variable}{alpha}}$ عددًا ترتيبيًا بحسب
+\olref{ordmemberord}، فيلزم~${\OLId{greek-variable}{alpha}} \in {\OLId{latin-looped}{O}}$. وعليه تكون~${\OLId{latin-looped}{O}}$ متعدية،
+فتكون عددًا ترتيبيًا بمقتضى~\olref{corordtransitiveord}؛ وينتج
+${\OLId{latin-looped}{O}} \in {\OLId{latin-looped}{O}}$، خلافًا لـ\olref{ordordered}.
+\end{proof}
+\noindent
+نُسبت النتيجة إلى~\citeauthor{Burali-Forti1897}. غير أن كانتور، في
+رسالته إلى ددكند سنة~\OLClassicalDigits{1899}، كان أول من أدرك بوضوح \emph{التناقض}
+الناشئ من افتراض مجموعة لجميع الأعداد الترتيبية. ويبين فان هاينورت ذلك بقوله:
+\begin{quote}
+أما بورالي--فورتي نفسه فعدّ التناقض برهانًا، بطريق \emph{الخلف}،
+على أن الترتيب الطبيعي للأعداد الترتيبية ليس إلا ترتيبًا جزئيًا.
+\citep[p.~105]{Heijenoort1967}
+\end{quote}
+وبصرف النظر عن خطئه، حاصل ما تقدم أن الأعداد الترتيبية مجموعات
+يرتب الانتماء كل واحدة منها ترتيبًا جيدًا، ويرتبها جميعًا ترتيبًا
+جيدًا أيضًا، من غير أن يكون مجموعها مجموعة.
+
+ونختم بخواص أولية أخرى تتفرع عن~\olref{ordinductionschema}
+و\olref{ordtrichotomy}.
+
+\begin{prop}
+لا تكون المتتالية المتناقصة تمامًا من الأعداد الترتيبية إلا متناهية.
+\end{prop}
+
+\begin{proof}
+لو وجدت متتالية غير متناهية متناقصة تمامًا
+${\OLId{greek-variable}{alpha}}_{\OLMathNumeral{0}} > {\OLId{greek-variable}{alpha}}_{\OLMathNumeral{1}} > {\OLId{greek-variable}{alpha}}_{\OLMathNumeral{2}} > \ldots$، لما كان لها عنصر أصغري
+بحسب~$<$؛ وذلك يناقض~\olref{ordinductionschema}.
+\end{proof}
+
+\begin{prop}\ollabel{ordinalsaresubsets}
+لكل عددين ترتيبيين يصح~${\OLId{greek-variable}{alpha}} \subseteq \beta \lor \beta \subseteq {\OLId{greek-variable}{alpha}}$،
+حيث~${\OLId{greek-variable}{alpha}}, \beta$ هما العددان.
+\end{prop}
+
+\begin{proof}
+إن كان~${\OLId{greek-variable}{alpha}} \in \beta$، لزم~${\OLId{greek-variable}{alpha}} \subseteq \beta$ لتعدي~$\beta$.
+وإن كان~$\beta \in {\OLId{greek-variable}{alpha}}$، لزم كذلك~$\beta \subseteq {\OLId{greek-variable}{alpha}}$.
+أما إن كان~${\OLId{greek-variable}{alpha}} = \beta$، فيصح~${\OLId{greek-variable}{alpha}} \subseteq \beta$
+و$\beta \subseteq {\OLId{greek-variable}{alpha}}$ معًا. وقد حصرت~\olref{ordtrichotomy}
+جميع الحالات في هذه الثلاث، فتم المطلوب.
+\end{proof}
+
+\begin{prop}\ollabel{ordisoidentity}
+لدينا~${\OLId{greek-variable}{alpha}} = \beta$ إذا وفقط إذا كان~$\ordeq{{\OLId{greek-variable}{alpha}}}{\beta}$،
+وذلك لكل عددين ترتيبيين~${\OLId{greek-variable}{alpha}}, \beta$.
+\end{prop}
+
+\begin{proof}
+الأعداد الترتيبية ترتيبات جيدة؛ فتنتج الدعوى من التثليث
+(\olref[basic]{ordtrichotomy}) ومن~\olref[iso]{wellordnotinitial} مباشرة.
+\end{proof}
+
+\begin{prob}\ollabel{probunionordinalsordinal}
+برهن أنه متى كانت عناصر~${\OLId{latin-looped}{X}}$ كلها أعدادًا ترتيبية، كان~$\bigcup {\OLId{latin-looped}{X}}$
+عددًا ترتيبيًا أيضًا.
+\end{prob}
+
+\end{document}

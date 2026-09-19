@@ -1,0 +1,126 @@
+% Part: model-theory
+% Chapter: basics
+% Section: isomorphism
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{bas}{iso}
+\olsection{بنى متشاكلة}
+
+يمكن أن تتشابه !!{structure}s الرتبة الأولى على أحد وجهين. فأحد وجهي
+التشابه أن تجعل !!{sentence}s نفسها صادقة. ونسمي مثل هذه الـ!!{structure}s
+\emph{متكافئة أوليًا}. غير أن البنى قد تختلف اختلافًا كبيرًا
+وتظل تجعل !!{sentence}s نفسها صادقة؛ فقد تكون إحداها مثلًا !!{enumerable}
+والأخرى غير ذلك. والسبب أن للـ!!a{structure} خصائص كثيرة لا يمكن التعبير
+عنها بلغات الرتبة الأولى، إما لأن اللغة ليست غنية بما يكفي، وإما بسبب
+قيود أساسية في منطق الرتبة الأولى، مثل مبرهنة لوفنهايم--سكولم. ومن ثم
+يوجد وجه آخر أشد صرامة لتشابه الـ!!{structure}s: أن تكون في جوهرها الشيء
+نفسه، بمعنى ألا تختلف إلا في الأشياء التي تؤلفها، لا في خصائصها البنيوية.
+وتتيح فكرة \emph{التشاكل} صياغة ذلك بدقة.
+
+\begin{defn}
+\ollabel{defn:elem-equiv}
+لتكن !!{structure}s اثنتان $\Struct{M}$ و$\Struct M'$ للـ!!{language}
+نفسها~$\Lang{L}$. نقول إن $\Struct{M}$ \emph{مكافئة أوليًا لـ}
+$\Struct M'$، ونكتب $\Struct{M} \equiv \Struct M'$، إذا وفقط إذا كان،
+لكل !!{sentence}~$!A$ في~$\Lang{L}$، $\Sat{M}{!A}$ إذا وفقط إذا كان
+$\Sat{M'}{!A}$.
+\end{defn}
+
+\begin{defn}
+\ollabel{defn:isomorphism} لتكن !!{structure}s اثنتان $\Struct{M}$
+و$\Struct M'$ للـ!!{language} نفسها~$\Lang L$. نقول إن $\Struct{M}$
+\emph{متشاكلة مع}~$\Struct M'$، ونكتب $\Struct{M} \simeq \Struct M'$،
+إذا وفقط إذا وجدت دالة $h \colon \Domain{M} \to \Domain{M'}$ بحيث:
+\begin{enumerate}
+\item تكون $h$~!!{injective}: إذا كان $h(x) = h(y)$، فإن $x = y$؛
+\item تكون $h$~!!{surjective}: لكل $y \in \Domain{M'}$ يوجد
+  $x \in \Domain{M}$ بحيث $h(x) = y$؛
+\item \ollabel{defn:iso-const}لكل !!{constant}~$c$:
+  $h(\Assign{c}{M}) = \Assign{c}{M'}$؛
+\item \ollabel{defn:iso-pred}لكل !!{predicate}~$P$ ذي $n$ مواضع:
+  \[
+  \tuple{a_1, \dots, a_n}\in \Assign{P}{M} \quad\text{إذا وفقط إذا}\quad
+  \tuple{h(a_1), \dots, h(a_n)} \in \Assign{P}{M'};
+  \]
+\item \ollabel{defn:iso-func}لكل !!{function}~$f$ ذات $n$ مواضع:
+  \[
+  h(\Assign{f}{M}(a_1, \dots, a_n)) =
+  \Assign{f}{M'}(h(a_1), \dots, h(a_n)).
+  \]
+\end{enumerate}
+\end{defn}
+
+\begin{thm}
+\ollabel{thm:isom}
+إذا كان $\Struct{M} \iso \Struct M'$، فإن $\Struct{M} \elemequiv
+\Struct{M'}$.
+\end{thm}
+
+\begin{proof}
+ليكن $h$ تشاكلًا من $\Struct{M}$ على $\Struct M'$. لأي تعيين~$s$، يكون
+$h \circ s$ تركيب $h$ و$s$، أي التعيين في $\Struct{M'}$ الذي يحقق
+$(h \circ s)(x) = h(s(x))$. وبالاستقراء على $t$ و$!A$ يمكن إثبات
+الدعويين الأقوى:
+\begin{enumerate}
+  \item[a.] $h(\Value{t}{M}[s]) = \Value{t}{M'}[h\circ s]$.
+  \item[b.] $\Sat{M}{!A}[s]$ إذا وفقط إذا كان
+    $\Sat{M'}{!A}[h \circ s]$.
+\end{enumerate}
+تثبت الأولى بالاستقراء على تعقيد~$t$.
+\begin{enumerate}
+\item إذا كان $t \ident c$، فإن $\Value{c}{M}[s] = \Assign{c}{M}$
+  و$\Value{c}{M'}[h \circ s] = \Assign{c}{M'}$. ولذلك
+  $h(\Value{t}{M}[s]) = h(\Assign{c}{M}) = \Assign{c}{M'}$ (بالبند
+  \olref{defn:iso-const} من \olref{defn:isomorphism}) $=
+  \Value{t}{M'}[h \circ s]$.
+\item إذا كان $t \ident x$، فإن $\Value{x}{M}[s] = s(x)$ و
+  $\Value{x}{M'}[h \circ s] = h(s(x))$. ومن ثم
+  $h(\Value{x}{M}[s]) = h(s(x)) = \Value{x}{M'}[h \circ s]$.
+\item إذا كان $t \ident f(t_1, \dots, t_n)$، فإن
+  \begin{align*}
+    \Value{t}{M}[s] & = \Assign{f}{M}(\Value{t_1}{M}[s], \dots, \Value{t_n}{M}[s]) \quad\text{و}\\
+  \Value{t}{M'}[h \circ s] & = \Assign{f}{M'}(\Value{t_1}{M'}[h \circ
+    s], \dots, \Value{t_n}{M'}[h \circ s]).
+  \end{align*}
+  وفرض الاستقراء هو أنه، لكل $i$،
+  $h(\Value{t_i}{M}[s]) = \Value{t_i}{M'}[h\circ s]$. لذلك
+  \begin{align}
+    h(\Value{t}{M}[s])
+    & = h(\Assign{f}{M}(\Value{t_1}{M}[s], \dots, \Value{t_n}{M}[s])) \notag\\
+    & = \Assign{f}{M'}(h(\Value{t_1}{M}[s]), \dots,
+    h(\Value{t_n}{M}[s])) \ollabel{iso-1}\\
+    & = \Assign{f}{M'}(\Value{t_1}{M'}[h \circ s], \dots,
+    \Value{t_n}{M'}[h \circ s]) \ollabel{iso-2}\\
+    & = \Value{t}{M'}[h\circ s] \notag
+  \end{align}
+  وهنا يتبع \olref{iso-1} من البند \olref{defn:iso-func} في
+  \olref{defn:isomorphism}، ويتبع \olref{iso-2} من فرض الاستقراء.
+\end{enumerate}
+ونترك الجزء (b) تمرينًا.
+
+إذا كانت $!A$ جملة، لم يكن للتعيينين~$s$ و$h \circ s$ أثر، وحصلنا على
+$\Sat{M}{!A}$ إذا وفقط إذا كان $\Sat{M'}{!A}$.
+\end{proof}
+
+\begin{prob}
+نفّذ بالتفصيل برهان الجزء (b) من \olref[mod][bas][iso]{thm:isom}.
+واحرص على بيان موضع استعمال كل واحدة من الخواص الخمس التي تميز التشاكلات
+في \olref[mod][bas][iso]{defn:isomorphism}.
+\end{prob}
+
+\begin{defn}
+\emph{التشاكل الذاتي} لبنية~$\Struct{M}$ هو تشاكل من
+$\Struct{M}$ على نفسها.
+\end{defn}
+
+\begin{prob}
+بيّن أنه لأي بنية~$\Struct{M}$، إذا كانت $X$ مجموعة جزئية قابلة
+للتعريف في $\Struct{M}$، وكان $h$ تشاكلًا ذاتيًا لـ$\Struct{M}$، فإن
+$X = \Setabs{h(x)}{x \in X}$ (أي إن $X$ ثابتة تحت $h$).
+\end{prob}
+
+
+\end{document}

@@ -1,0 +1,78 @@
+% Part: incompleteness
+% Chapter: representability-in-q
+% Section: undecidability
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{req}{und}
+\olsection{عدم القابلية للقرار}
+
+النظرية $\Th{T}$ \emph{غير قابلة للقرار} إذا امتنع وجود إجراء حسابي
+ينتهي دائمًا في خطوات منتهية إلى جواب صحيح عن السؤال:
+«أتثبت $\Th{T}$ الصيغة~$!A$؟»، وذلك لكل جملة~$!A$ في لغة
+$\Th{T}$. فلو كانت $\Th{Q}$ قابلة للقرار لأمكن، بإجراء حسابي،
+أخذ جملة~$!A$ من لغة الحساب والبتّ في صدق
+$\Th{Q}\Proves !A$ أو عدمه، والعكس كذلك.
+ويصير السؤال أدق إذا صغناه عن العلاقة~$\Prov[\Th{Q}](y)$،
+التي تصدق على~$y$ حين يكون $y$ عدد غودل لجملة تثبتها~$\Th{Q}$:
+أتكون هذه العلاقة عودية؟ سنثبت أن الجواب بالنفي.
+
+\begin{thm}
+يمتنع قرار $\Th{Q}$؛ وبعبارة أدق، العلاقة
+\[
+\Prov[\Th{Q}](y) \defiff \fn{Sent}(y) \land
+\lexists[x][\Prf[\Th{Q}](x, y)]
+\]
+غير عودية.
+\end{thm}
+
+\begin{proof}
+نفرض عودية هذه العلاقة، ونستخرج من الفرض حلًا لمسألة التوقف.
+إذا أعطيت $e$ و$n$، فإن $\cfind{e}(n)\fdefined$ تكافئ وجود~$s$
+تحقق $T(e,n,s)$، حيث $T$ محمول كليني المذكور في
+\olref[cmp][rec][nft]{thm:kleene-nf}.
+ولأن $T$ عودي بدائي، تمثله في~$\Th{Q}$ صيغة $!B_T$؛
+فتكون $\Th{Q}\Proves !B_T(\num{e},\num{n},\num{s})$
+إذا وفقط إذا صدقت $T(e,n,s)$.
+ومتى ثبتت $\Th{Q}\Proves !B_T(\num{e},\num{n},\num{s})$، ثبتت أيضًا
+$\Th{Q}\Proves\lexists[y][!B_T(\num{e},\num{n},y)]$.
+أما إذا لم يوجد مثل هذا $s$، فإن
+$\Th{Q}\Proves\lnot !B_T(\num{e},\num{n},\num{s})$ لكل~$s$.
+والنظرية $\Th{Q}$ متسقة اتساقًا من نوع $\omega$؛
+أي إنه متى كانت $\Th{Q}\Proves\lnot !A(\num{n})$
+لكل~$n\in\Nat$، لزم $\Th{Q}\Proves/\lexists[y][!A(y)]$.
+ودليل ذلك صدق بديهيات $\Th{Q}$ في النموذج القياسي~$\Struct{N}$.
+فينتج $\Th{Q}\Proves/\lexists[y][!B_T(\num{e},\num{n},y)]$.
+فالمحصّل أن $\Th{Q}\Proves\lexists[y][!B_T(\num{e},\num{n},y)]$
+تكافئ وجود $s$ تحقق $T(e,n,s)$، أي تكافئ
+$\cfind{e}(n)\fdefined$.
+ومن $e$ و$n$ يمكن حساب
+$\Gn{\lexists[y][!B_T(\num{e},\num{n},y)]}$؛
+فلنسمّ الدالة العودية البدائية التي تقوم بذلك $g(e,n)$.
+ونعرّف:
+\[
+h(e, n) =
+\begin{cases}
+1 & \text{إذا كانت $\Prov[\Th{Q}](g(e, n))$ صادقة}\\
+0 & \text{في غير ذلك}.
+\end{cases}
+\]
+فتكون $h$ عودية على فرض عودية $\Prov[\Th{Q}]$.
+لكن $h$ غير عودية بمقتضى \olref[cmp][rec][hlt]{thm:halting-problem}؛
+فبطل الفرض، وامتنع أن تكون $\Prov[\Th{Q}]$ عودية.
+\end{proof}
+
+\begin{cor}
+يمتنع وجود إجراء قرار لمنطق الرتبة الأولى.
+\end{cor}
+
+\begin{proof}
+لو أمكن قرار منطق الرتبة الأولى لأمكن قرار قابلية الإثبات في
+$\Th{Q}$؛ إذ إن $\Th{Q}\Proves !A$ تكافئ
+$\Proves !T\lif !A$، حيث $!T$ اقتران بديهيات~$\Th{Q}$ المنتهية.
+وقد ثبت امتناع قرارها.
+\end{proof}
+
+\end{document}

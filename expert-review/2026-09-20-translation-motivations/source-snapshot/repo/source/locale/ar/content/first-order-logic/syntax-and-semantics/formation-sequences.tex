@@ -1,0 +1,266 @@
+% Part: first-order-logic
+% Chapter: syntax-and-semantics
+% Section: formation-sequences
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{syn}{fseq}
+
+\olsection{متواليات التكوين}
+
+إن تعريف ال!!{formula}s بتعريف استقرائي، والأسلوب المتمم له المتمثل
+في إثبات خصائص ال!!{formula}s بالاستقراء، نهج أنيق وفعال. غير أنه قد
+يكون من المفيد أيضًا النظر في نهج تصاعدي خطوة خطوة لبناء
+ال!!{formula}s، وهو ما نفعله هنا باستخدام مفهوم \emph{متوالية
+التكوين}.
+%
+ولكي نبيّن كيف يمكن إدخال الحدود وال!!{formula}s بهذه الطريقة من غير
+حاجة إلى الإحالة إلى تعريفيهما الاستقرائيين، ندخل أولًا مفهوم سلسلة
+اعتباطية من الرموز المأخوذة من لغة ما~$\Lang L$.
+
+\begin{defn}[السلاسل]
+\ollabel{defn:string}
+افترض أن $\Lang L$ لغة رتبة أولى. \emph{سلسلة~$\Lang L$} هي
+متوالية منتهية من رموز~$\Lang L$. وحيث تكون اللغة~$\Lang L$ معيّنة
+بوضوح من السياق، سنشير غالبًا إلى سلسلة~$\Lang L$ باسم
+\emph{سلسلة} فحسب.
+\end{defn}
+
+\begin{ex}
+لكل لغة رتبة أولى~$\Lang L$، جميع
+!!{formula}s-$\Lang L$ هي سلاسل~$\Lang L$، لكن العكس غير صحيح.
+فمثلًا، \[)(\Obj v_0\lif\lexists\] سلسلة~$\Lang L$، لكنها ليست
+!!{formula}-$\Lang L$.
+\end{ex}
+
+\begin{defn}[متواليات تكوين الحدود]
+\ollabel{defn:fseq-trm}
+تكون المتوالية المنتهية من سلاسل~$\Lang L$
+$\tuple{t_0,\dotsc,t_n}$ \emph{متوالية تكوين} لحد~$t$ إذا كان
+$t \ident t_n$، وكان، لكل $i \leq n$، إما أن $t_i$ !!a{variable}
+أو !!a{constant}، وإما أن تحتوي $\Lang L$ !!{function} ذات
+$k$ مواضع~$f$ وتوجد $m_1,\dotsc,m_k < i$ بحيث
+$t_i \ident f(t_{m_1},\dotsc,t_{m_k})$. وحين يلزم التمييز، سنسمي
+متواليات التكوين للحدود \emph{متواليات تكوين الحدود}.
+\end{defn}
+
+\begin{ex}
+المتوالية
+\[
+    \tuple{\Obj c_0, \Obj v_0, \Atom{\Obj f^2_0}{\Obj c_0, \Obj v_0}, \Atom{\Obj f^1_0}{\Atom{\Obj f^2_0}{\Obj c_0, \Obj v_0}}}
+\]
+متوالية تكوين للحد~$\Atom{\Obj f^1_0}{\Atom{\Obj
+f^2_0}{\Obj c_0, \Obj v_0}}$، وكذلك المتوالية
+\[
+    \tuple{\Obj v_0, \Obj c_0, \Atom{\Obj f^2_0}{\Obj c_0, \Obj v_0}, \Atom{\Obj f^1_0}{\Atom{\Obj f^2_0}{\Obj c_0, \Obj v_0}}}.
+\]
+\end{ex}
+
+\begin{defn}[متواليات تكوين الصيغ]
+\ollabel{defn:fseq-frm}
+تكون المتوالية المنتهية من سلاسل~$\Lang L$
+$\tuple{!A_0,\dotsc,!A_n}$ \emph{متوالية تكوين} لـ~$!A$ إذا كان
+$!A \ident !A_n$، وكان، لكل $i \leq n$، إما أن $!A_i$
+!!{formula} ذرية، وإما أن يوجد $j,k < i$ و!!a{variable}~$x$ بحيث
+يتحقق أحد ما يأتي:
+\begin{enumerate}
+    \tagitem{prvNot}{$!A_i \ident \lnot !A_j$.}{}%
+    \tagitem{prvAnd}{$!A_i \ident (!A_j \land !A_k)$.}{}%
+    \tagitem{prvOr}{$!A_i \ident (!A_j \lor !A_k)$.}{}%
+    \tagitem{prvIf}{$!A_i \ident (!A_j \lif !A_k)$.}{}%
+    \tagitem{prvIff}{$!A_i \ident (!A_j \liff !A_k)$.}{}%
+    \tagitem{prvAll}{$!A_i \ident \lforall[x][!A_j]$.}{}%
+    \tagitem{prvEx}{$!A_i \ident \lexists[x][!A_j]$.}{}%
+\end{enumerate}
+وحين يلزم التمييز، سنسمي متواليات التكوين للصيغ
+\emph{متواليات تكوين الصيغ}.
+\end{defn}
+
+\begin{ex}
+\[
+\tuple{
+    \Atom{\Obj A^1_0}{\Obj v_0},
+    \Atom{\Obj A^1_1}{\Obj c_1},
+    (\Atom{\Obj A^1_1}{\Obj c_1} \land \Atom{\Obj A^1_0}{\Obj v_0}),
+    \lexists[\Obj v_0][(\Atom{\Obj A^1_1}{\Obj c_1} \land \Atom{\Obj A^1_0}{\Obj v_0})]
+}
+\]
+متوالية تكوين لـ~$\lexists[\Obj v_0][(\Atom{\Obj A^1_1}{\Obj
+c_1} \land \Atom{\Obj A^1_0}{\Obj v_0})]$، وكذلك
+\begin{multline*}
+\tuple{
+    \Atom{\Obj A^1_0}{\Obj v_0},
+    \Atom{\Obj A^1_1}{\Obj c_1},
+    (\Atom{\Obj A^1_1}{\Obj c_1} \land \Atom{\Obj A^1_0}{\Obj v_0}),
+    \Atom{\Obj A^1_1}{\Obj c_1},\\
+    \lforall[\Obj v_1][\Atom{\Obj A^1_0}{\Obj v_0}],
+    \lexists[\Obj v_0][(\Atom{\Obj A^1_1}{\Obj c_1} \land \Atom{\Obj A^1_0}{\Obj v_0})]
+}.
+\end{multline*}
+%
+وكما يُرى من المثال الثاني، قد تحتوي متواليات التكوين على
+«حشو»: !!{formula}s زائدة أو لا تسهم في البناء.
+\end{ex}
+
+\begin{prop}\ollabel{prop:formed}
+لكل !!{formula}~$!A$ في~$\Frm[L]$ متوالية تكوين.
+\end{prop}
+
+\begin{proof}
+افترض أن $!A$ ذرية. عندئذ تكون المتوالية $\tuple{!A}$ متوالية
+تكوين لـ~$!A$.
+%
+وافترض الآن أن لـ~$!B$ و$!C$ متواليتي التكوين
+$\tuple{!B_0,\dotsc,!B_n}$ و$\tuple{!C_0,\dotsc,!C_m}$ على
+التوالي.
+%
+\begin{enumerate}
+  \tagitem{prvNot}{إذا كان $!A \ident \lnot !B$،
+      فإن $\tuple{!B_0,\dotsc,!B_n,\lnot !B_n}$
+      متوالية تكوين لـ~$!A$.}{}
+  \tagitem{prvAnd}{إذا كان $!A \ident (!B \land !C)$،
+      فإن $\tuple{!B_0,\dotsc,!B_n,!C_0,\dotsc,!C_m,(!B_n \land !C_m)}$
+      متوالية تكوين لـ~$!A$.}{}
+  \tagitem{prvOr}{إذا كان $!A \ident (!B \lor !C)$،
+      فإن $\tuple{!B_0,\dotsc,!B_n,!C_0,\dotsc,!C_m,(!B_n \lor !C_m)}$
+      متوالية تكوين لـ~$!A$.}{}
+  \tagitem{prvIf}{إذا كان $!A \ident (!B \lif !C)$،
+      فإن $\tuple{!B_0,\dotsc,!B_n,!C_0,\dotsc,!C_m,(!B_n \lif !C_m)}$
+      متوالية تكوين لـ~$!A$.}{}
+  \tagitem{prvIff}{إذا كان $!A \ident (!B \liff !C)$،
+      فإن $\tuple{!B_0,\dotsc,!B_n,!C_0,\dotsc,!C_m,(!B_n \liff !C_m)}$
+      متوالية تكوين لـ~$!A$.}{}
+  \tagitem{prvAll}{إذا كان $!A \ident \lforall[x][!B]$،
+      فإن $\tuple{!B_0,\dotsc,!B_n,\lforall[x][!B_n]}$
+      متوالية تكوين لـ~$!A$.}{}
+  \tagitem{prvEx}{إذا كان $!A \ident \lexists[x][!B]$،
+      فإن $\tuple{!B_0,\dotsc,!B_n,\lexists[x][!B_n]}$
+      متوالية تكوين لـ~$!A$.}{}
+\end{enumerate}
+وبحسب مبدأ الاستقراء على ال!!{formula}s، لكل !!{formula} متوالية
+تكوين.
+\end{proof}
+
+ويمكننا أيضًا إثبات العكس. وهذا مهم لأنه يبيّن أن طريقتينا في تعريف
+الصيغ متكافئتان: فهما تعطيان النتائج نفسها. ويعني كذلك أن في وسعنا
+إثبات مبرهنات عن الصيغ باستخدام الاستقراء العادي على طول متواليات
+التكوين.
+
+\begin{lem}
+\ollabel{lem:fseq-init}
+افترض أن $\tuple{!A_0,\dotsc,!A_n}$ متوالية تكوين لـ~$!A_n$، وأن
+$k \leq n$. عندئذ تكون $\tuple{!A_0,\dotsc,!A_k}$ متوالية تكوين
+لـ~$!A_k$.
+\end{lem}
+
+\begin{proof}
+تمرين.
+\end{proof}
+
+\begin{prob}
+أثبت \olref[fol][syn][fseq]{lem:fseq-init}.
+\end{prob}
+
+\begin{thm}
+\ollabel{thm:fseq-frm-equiv}
+$\Frm[L]$ هي مجموعة جميع سلاسل~$\Lang L$، $!A$، التي توجد لها
+متوالية تكوين صيغ لـ~$!A$.
+\end{thm}
+
+\begin{proof}
+لتكن $F$ مجموعة جميع سلاسل الرموز في اللغة~$\Lang L$ التي لها
+متوالية تكوين. وقد رأينا في
+\olref[fol][syn][fseq]{prop:formed} أن $\Frm[L] \subseteq F$،
+فنثبت الآن العكس.
+
+افترض أن لـ~$!A$ متوالية التكوين
+$\tuple{!A_0,\dotsc,!A_n}$. نثبت أن $!A \in \Frm[L]$ بالاستقراء
+القوي على~$n$. وفرضية استقرائنا هي أن كل سلسلة رموز لها متوالية
+تكوين فهرسها الأخير $m < n$ تنتمي إلى~$\Frm[L]$. وبحسب تعريف
+متوالية التكوين، إما أن تكون $!A_n$ ذرية، وإما أن يوجد $j,k < n$
+و!!a{variable}~$x$ بحيث تصدق إحدى الحالات الآتية:
+\begin{enumerate}
+    \tagitem{prvNot}{$!A \ident \lnot !A_j$.}{}%
+    \tagitem{prvAnd}{$!A \ident (!A_j \land !A_k)$.}{}%
+    \tagitem{prvOr}{$!A \ident (!A_j \lor !A_k)$.}{}%
+    \tagitem{prvIf}{$!A \ident (!A_j \lif !A_k)$.}{}%
+    \tagitem{prvIff}{$!A \ident (!A_j \liff !A_k)$.}{}%
+    \tagitem{prvAll}{$!A \ident \lforall[x][!A_j]$.}{}%
+    \tagitem{prvEx}{$!A \ident \lexists[x][!A_j]$.}{}%
+\end{enumerate}
+نستدل الآن بالحالات. فإذا كانت $!A$ ذرية، كان
+$!A_n \in \Frm[L]$. وافترض، بدلًا من ذلك، أن
+$!A \ident (!A_j \land !A_k)$. بحسب
+\olref[fol][syn][fseq]{lem:fseq-init}،
+تكون $\tuple{!A_0,\dotsc,!A_j}$ و$\tuple{!A_0,\dotsc,!A_k}$
+متواليتي تكوين لـ~$!A_j$ و$!A_k$، على التوالي. ولما كانتا متواليتين
+جزئيتين ابتدائيتين حقيقيتين من متوالية تكوين~$!A$، كان الفهرس
+الأخير لكل منهما أصغر من~$n$. ولذلك تنتمي $!A_j$ و$!A_k$، بفرضية
+الاستقراء، إلى~$\Frm[L]$، وينتمي كذلك، بحسب تعريف !!a{formula}،
+$(!A_j \land !A_k)$. وتتبع الحالات الأخرى باستدلال مماثل.
+\end{proof}
+
+لمتواليات تكوين الحدود خصائص مماثلة لخصائص متواليات تكوين
+ال!!{formula}s.
+
+\begin{prop}
+\ollabel{prop:fseq-trm-equiv}
+$\Trm[L]$ هي مجموعة جميع سلاسل~$\Lang L$، $t$، التي توجد لها
+متوالية تكوين حدود لـ~$t$.
+\end{prop}
+
+\begin{proof}
+تمرين.
+\end{proof}
+
+\begin{prob}
+أثبت \olref[fol][syn][fseq]{prop:fseq-trm-equiv}.
+تلميح: استخدم استراتيجية مماثلة لما استُخدم في برهان
+\olref[fol][syn][fseq]{thm:fseq-frm-equiv}.
+\end{prob}
+
+ثمة نوعان من «الحشو» قد يظهران في متواليات التكوين: العناصر
+المكررة، والعناصر التي لا صلة لها ببناء الصيغة أو الحد. ويمكننا
+التخلص منهما معًا بالنظر في متواليات التكوين الصغرى.
+
+\begin{defn}[متواليات التكوين الصغرى]
+\ollabel{defn:minimal-fseq}
+تكون متوالية التكوين $\tuple{!A_0, \ldots, !A_n}$ لصيغة~$!A$
+\emph{متوالية تكوين صغرى} لـ~$!A$ إذا كان، لكل متوالية تكوين
+أخرى~$s$ لـ~$!A$، طول~$s$ أكبر من أو يساوي~$n+1$.
+
+وبالمثل، تكون متوالية التكوين $\tuple{t_0, \ldots, t_n}$
+لحد~$t$ \emph{متوالية تكوين صغرى} لـ~$t$ إذا كان، لكل متوالية
+تكوين أخرى~$s$ لـ~$t$، طول~$s$ أكبر من أو يساوي~$n+1$.
+\end{defn}
+
+لاحظ أنه قد يكون للصيغة أو الحد أكثر من متوالية تكوين صغرى، لكنها ستحتوي
+السلاسل نفسها بالضبط.
+
+\begin{prop}
+\ollabel{prop:subformula-equivs}
+الشروط الآتية متكافئة:
+\begin{enumerate}
+    \item $!B$ !!{subformula} من~$!A$.
+    \item ترد $!B$ في كل متوالية تكوين لـ~$!A$.
+    \item ترد $!B$ في متوالية تكوين صغرى لـ~$!A$.
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+تمرين.
+\end{proof}
+
+\begin{prob}
+أثبت \olref[fol][syn][fseq]{prop:subformula-equivs}.
+\end{prob}
+
+\begin{history}
+أدخل ريموند سموليان متواليات التكوين في كتابه
+\emph{First-Order Logic} \citep{Smullyan1968}.
+وأثبت \citet{Zuckerman1973} خصائص إضافية لمتواليات التكوين.
+\end{history}
+
+\end{document}

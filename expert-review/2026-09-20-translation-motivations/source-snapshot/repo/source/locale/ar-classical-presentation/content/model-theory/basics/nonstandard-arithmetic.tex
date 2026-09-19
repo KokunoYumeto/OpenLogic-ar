@@ -1,0 +1,216 @@
+% Part: model-theory
+% Chapter: basics
+% Section: nonstandard-arithmetic
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{bas}{nsa}
+\olsection{في نماذج الحساب غير القياسية}
+
+\begin{defn}
+لتكن~$\Lang{L_N}$ !!{language} الحساب. وقوام هذه اللغة~!!{constant}
+$\Obj{0}$، و!!{predicate} ثنائي الموضع~$<$، و!!{function} أحادي الموضع
+$\prime$، و!!{function}s ثنائية الموضع~$+$ و$\times$.
+\begin{enumerate}
+\item أما \emph{النموذج القياسي} للحساب فهو~!!{structure}~$\Struct{N}$
+  للغة~$\Lang{L_N}$، مجاله~$\Nat = \{ {\OLMathNumeral{0}}, {\OLMathNumeral{1}}, {\OLMathNumeral{2}}, \dots\}$. وفيه يفسر
+  $\Obj{0}$ بالصفر~${\OLMathNumeral{0}}$، و$<$ بعلاقة الأصغر من على~$\Nat$، وتفسر
+  $\prime$ و$+$ و$\times$، على الترتيب، بالخلف والجمع والضرب على~$\Nat$.
+\item وأما \emph{الحساب الصادق} فهو النظرية~$\Theory{{\OLId{latin-looped}{N}}}$.
+\end{enumerate}
+\end{defn}
+
+إذا عملنا في~$\Lang{L_N}$ اختصرنا كل حد من الصورة
+$\Obj{0}^{\prime\dots\prime}$، تكون فيه لدالة الخلف~${\OLId{latin-ordinary}{n}}$ تطبيقات على
+$\Obj{0}$، فرمزنا إليه بـ~$\num{{\OLId{latin-ordinary}{n}}}$.
+
+\begin{defn}
+ونسمي~!!{structure}~$\Struct{M}$ للغة~$\Lang{L_N}$ \emph{قياسيًا} إذا
+وفقط إذا تحقق~$\Struct{N} \iso \Struct{M}$.
+\end{defn}
+
+\begin{thm}\ollabel{thm:non-std}
+توجد نماذج~!!{enumerable} غير قياسية للحساب الصادق.
+\end{thm}
+
+\begin{proof}
+نوسع~$\Lang{L_N}$ بـ!!{constant} جديد~${\OLId{latin-ordinary}{c}}$، ثم ننظر في النظرية
+\[
+\Theory{{\OLId{latin-looped}{N}}} \cup \Setabs{\num{{\OLId{latin-ordinary}{n}}} < {\OLId{latin-ordinary}{c}}}{{\OLId{latin-ordinary}{n}} \in \Nat}.
+\]
+وهذه النظرية قابلة للإشباع منتهيًا؛ فمن التراص يكون لها نموذج~$\Struct{M}$،
+وبمبرهنة لوفنهايم--سكولم النزولية يجوز أن نختاره~!!{enumerable}. فإذا كان
+$\Domain{{\OLId{latin-looped}{M}}}$ مجال~$\Struct{M}$، أثبتنا لما يفسر به~$\Struct{M}$ الرموز
+غير المنطقية في~$\Lang{L_N}$ الأسماء الآتية:
+$\mathbf{z} = \Assign{\Obj{0}}{{\OLId{latin-looped}{M}}} \in \Domain{{\OLId{latin-looped}{M}}}$، و
+${\prec} = \Assign{<}{{\OLId{latin-looped}{M}}} \subseteq \Domain{{\OLId{latin-looped}{M}}}^{\OLMathNumeral{2}}$، و
+$* = \Assign{\prime}{{\OLId{latin-looped}{M}}} \colon \Domain{{\OLId{latin-looped}{M}}} \to \Domain{{\OLId{latin-looped}{M}}}$، و
+$\oplus = \Assign{+}{{\OLId{latin-looped}{M}}}$، و
+$\otimes = \Assign{\times}{{\OLId{latin-looped}{M}}} \colon \Domain{{\OLId{latin-looped}{M}}}^{\OLMathNumeral{2}} \to \Domain{{\OLId{latin-looped}{M}}}$.
+ولكل~${\OLId{latin-ordinary}{x}} \in \Domain{{\OLId{latin-looped}{M}}}$، نرمز بـ~${\OLId{latin-ordinary}{x}}^*$ إلى العنصر من~$\Domain{{\OLId{latin-looped}{M}}}$
+الحاصل من تطبيق~$*$ على~${\OLId{latin-ordinary}{x}}$.
+
+فلو كان~${\OLId{latin-ordinary}{h}}$ تماثلًا بين~$\Struct{N}$ و$\Struct{M}$، لوجد
+${\OLId{latin-ordinary}{n}} \in \Nat$ بحيث~${\OLId{latin-ordinary}{h}}({\OLId{latin-ordinary}{n}}) = \Assign{{\OLId{latin-ordinary}{c}}}{{\OLId{latin-looped}{M}}}$. فليكن~${\OLId{latin-ordinary}{s}}$ أي إسناد في
+$\Struct{N}$ بحيث~${\OLId{latin-ordinary}{s}}({\OLId{latin-ordinary}{x}}) = {\OLId{latin-ordinary}{n}}$. عندئذ
+$\Sat{{\OLId{latin-looped}{N}}}{\eq[\num{{\OLId{latin-ordinary}{n}}}][{\OLId{latin-ordinary}{x}}]}[{\OLId{latin-ordinary}{s}}]$؛ وببرهان~\olref[iso]{thm:isom} يكون
+كذلك~$\Sat{{\OLId{latin-looped}{M}}}{\eq[\num{{\OLId{latin-ordinary}{n}}}][{\OLId{latin-ordinary}{x}}]}[{\OLId{latin-ordinary}{h}} \circ {\OLId{latin-ordinary}{s}}]$، ومن ثم
+$\Assign{{\OLId{latin-ordinary}{c}}}{{\OLId{latin-looped}{M}}} = \mathbf{z}^{*\cdots *}$، وفي الطرف الأيمن يتكرر~$*$ عدد~${\OLId{latin-ordinary}{n}}$
+من المرات. وهذا محال؛ إذ يقتضي الفرض
+$\Sat{{\OLId{latin-looped}{M}}}{\num{{\OLId{latin-ordinary}{n}}} < {\OLId{latin-ordinary}{c}}}$، و~$\prec$ لا انعكاسية. فثبت أن
+$\Struct{M}$ غير قياسي.
+\end{proof}
+
+\begin{prob}
+تكون علاقة~${\OLId{latin-looped}{R}}$ على مجموعة~${\OLId{latin-looped}{X}}$ \emph{راسخة} إذا وفقط إذا لم توجد فيها
+سلاسل نزولية غير منتهية؛ أي إذا لم توجد~${\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}}$،~${\OLId{latin-ordinary}{x}}_{\OLMathNumeral{1}}$،~${\OLId{latin-ordinary}{x}}_{\OLMathNumeral{2}}$،~\dots
+في~${\OLId{latin-looped}{X}}$ بحيث~$\dots {\OLId{latin-ordinary}{x}}_{\OLMathNumeral{2}}Rx_{\OLMathNumeral{1}}Rx_{\OLMathNumeral{0}}$. وبافتراض اتساق نظرية مجموعات
+زيرميلو--فرينكل~$ZF$، بيّن أن لـ$ZF$ نماذج غير راسخة؛ أي نماذج
+$\mathfrak{M}$ بحيث~$\dots {\OLId{latin-ordinary}{x}}_{\OLMathNumeral{2}} \in {\OLId{latin-ordinary}{x}}_{\OLMathNumeral{1}} \in {\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}}$.
+\end{prob}
+
+النموذج غير القياسي~$\Struct{M}$ الوارد في~\olref{thm:non-std} مكافئ
+أوليًا للنموذج القياسي، ومن هذا التكافؤ تستخرج طائفة من خواص~$\Struct{M}$.
+وفيما بقي من هذا القسم نفصل تلك الخواص، حتى ننتهي إلى وصف دقيق لنماذج~$\Theory{{\OLId{latin-looped}{N}}}$
+غير القياسية~!!{enumerable}.
+
+\begin{enumerate}
+\item لا يكون أي عنصر من~$\Domain{{\OLId{latin-looped}{M}}}$ أصغر بحسب~$\prec$ من نفسه:
+  فالجملة~$\lforall[{\OLId{latin-ordinary}{x}}][\lnot {\OLId{latin-ordinary}{x}} < {\OLId{latin-ordinary}{x}}]$ صادقة في~$\Struct{N}$، ومن ثم
+  في~$\Struct{M}$.
+\item وباستدلال مماثل ينتج لنا أن~$\prec$ \emph{ترتيب خطي} لـ
+  $\Domain{{\OLId{latin-looped}{M}}}$، أي علاقة كلية لا انعكاسية ومتعدية على~$\Domain{{\OLId{latin-looped}{M}}}$.
+\item العنصر~$\mathbf{z}$ هو أصغر عناصر~$\Domain{{\OLId{latin-looped}{M}}}$ بحسب~$\prec$.
+\item كل عنصر من~$\Domain{{\OLId{latin-looped}{M}}}$ أصغر بحسب~$\prec$ من خلفه بالنسبة إلى
+  $*$، و${\OLId{latin-ordinary}{x}}^*$ هو أصغر عناصر~$\Domain{{\OLId{latin-looped}{M}}}$ بحسب~$\prec$ بين العناصر
+  الأكبر من~${\OLId{latin-ordinary}{x}}$.
+\item يحتوي~$\Struct{M}$ قطعة ابتدائية بالنسبة إلى~$\prec$ متماثلة
+  مع~$\Nat$، هي~$\mathbf{z}, \mathbf{z}^*, \mathbf{z}^{**}, \dots$،
+  ونسميها~\emph{الجزء القياسي} من~$\Domain{{\OLId{latin-looped}{M}}}$. وكل عنصر آخر من
+  $\Domain{{\OLId{latin-looped}{M}}}$ \emph{غير قياسي}. ولا بد من وجود عناصر غير قياسية في
+  $\Domain{{\OLId{latin-looped}{M}}}$، وإلا لكانت الدالة~${\OLId{latin-ordinary}{h}}$ من برهان~\olref{thm:non-std}
+  تماثلًا. ونستخدم~${\OLId{latin-ordinary}{n}}, {\OLId{latin-ordinary}{m}}, \dots$ بوصفها~!!{variable}s تتراوح على هذا
+  الجزء القياسي من~$\Struct{M}$.
+\item كل عنصر غير قياسي أكبر من كل عنصر قياسي؛ ذلك أنه لكل
+  ${\OLId{latin-ordinary}{n}} \in \Nat$،
+  \[
+  \Sat{{\OLId{latin-looped}{N}}}{\lforall[{\OLId{latin-ordinary}{z}}][(\lnot(\eq[{\OLId{latin-ordinary}{z}}][\Obj{0}] \lor
+  \dots \lor \eq[{\OLId{latin-ordinary}{z}}][\num{{\OLId{latin-ordinary}{n}}}]) \lif \num{{\OLId{latin-ordinary}{n}}} < {\OLId{latin-ordinary}{z}})]},
+  \]
+  ولذلك إذا كان~${\OLId{latin-ordinary}{z}} \in \Domain{{\OLId{latin-looped}{M}}}$ مختلفًا عن جميع العناصر القياسية،
+  وجب أن يكون~\emph{أكبر} منها جميعًا.
+\item كل عنصر من~$\Domain{{\OLId{latin-looped}{M}}}$ غير~$\mathbf{z}$ هو خلف بالنسبة إلى~$*$
+  لعنصر وحيد من~$\Domain{{\OLId{latin-looped}{M}}}$، نرمز إليه بـ$^*{\OLId{latin-ordinary}{x}}$. وإذا كان~${\OLId{latin-ordinary}{x}} = {\OLId{latin-ordinary}{y}}^*$،
+  كان~${\OLId{latin-ordinary}{x}}$ و${\OLId{latin-ordinary}{y}}$ قياسيين إذا كان أحدهما قياسيًا، وكانا غير قياسيين إذا
+  كان أحدهما غير قياسي.
+\item عرّف علاقة تكافؤ~$\approx$ على~$\Domain{{\OLId{latin-looped}{M}}}$ بالقول إن
+  ${\OLId{latin-ordinary}{x}} \approx {\OLId{latin-ordinary}{y}}$ إذا وفقط إذا كان، لبعض~${\OLId{latin-ordinary}{n}}$ \emph{قياسي}، إما
+  ${\OLId{latin-ordinary}{x}} \oplus {\OLId{latin-ordinary}{n}} = {\OLId{latin-ordinary}{y}}$ وإما~${\OLId{latin-ordinary}{y}} \oplus {\OLId{latin-ordinary}{n}} ={\OLId{latin-ordinary}{x}}$. وبعبارة أخرى، يكون
+  ${\OLId{latin-ordinary}{x}} \approx {\OLId{latin-ordinary}{y}}$ إذا وفقط إذا كانت المسافة بين~${\OLId{latin-ordinary}{x}}$ و${\OLId{latin-ordinary}{y}}$ منتهية. وإذا
+  كان~${\OLId{latin-ordinary}{n}}$ و${\OLId{latin-ordinary}{m}}$ قياسيين، كان~${\OLId{latin-ordinary}{n}} \approx {\OLId{latin-ordinary}{m}}$. وعرّف~\emph{كتلة}~${\OLId{latin-ordinary}{x}}$
+  بأنها صنف التكافؤ~$[{\OLId{latin-ordinary}{x}}] = \Setabs{{\OLId{latin-ordinary}{y}}}{{\OLId{latin-ordinary}{x}} \approx {\OLId{latin-ordinary}{y}}}$.
+\item افترض~${\OLId{latin-ordinary}{x}} \prec {\OLId{latin-ordinary}{y}}$ و${\OLId{latin-ordinary}{x}} \not\approx {\OLId{latin-ordinary}{y}}$. ولأن
+  $\Sat{{\OLId{latin-looped}{N}}}{\lforall[{\OLId{latin-ordinary}{x}}][\lforall[{\OLId{latin-ordinary}{y}}][({\OLId{latin-ordinary}{x}} < {\OLId{latin-ordinary}{y}} \lif ({\OLId{latin-ordinary}{x}}' < {\OLId{latin-ordinary}{y}} \lor {\OLId{latin-ordinary}{x}}' =
+      {\OLId{latin-ordinary}{y}}))]]}$، يكون إما~${\OLId{latin-ordinary}{x}}^* \prec {\OLId{latin-ordinary}{y}}$ وإما~${\OLId{latin-ordinary}{x}}^* = {\OLId{latin-ordinary}{y}}$. والحالة
+  الأخيرة مستحيلة لأنها تستلزم~${\OLId{latin-ordinary}{x}} \approx {\OLId{latin-ordinary}{y}}$، ومن ثم~${\OLId{latin-ordinary}{x}}^* \prec {\OLId{latin-ordinary}{y}}$.
+  وبالمثل، إذا كان~${\OLId{latin-ordinary}{x}} \prec {\OLId{latin-ordinary}{y}}$ و${\OLId{latin-ordinary}{x}} \not\approx {\OLId{latin-ordinary}{y}}$، كان
+  ${\OLId{latin-ordinary}{x}} \prec {^*{\OLId{latin-ordinary}{y}}}$. لذلك، إذا كان~${\OLId{latin-ordinary}{x}} \prec {\OLId{latin-ordinary}{y}}$ و${\OLId{latin-ordinary}{x}} \not\approx {\OLId{latin-ordinary}{y}}$،
+  كان كل~${\OLId{latin-ordinary}{w}} \approx {\OLId{latin-ordinary}{x}}$ أصغر بحسب~$\prec$ من كل~${\OLId{latin-ordinary}{v}} \approx {\OLId{latin-ordinary}{y}}$.
+  وكل كتلة غير قياسية~$[{\OLId{latin-ordinary}{x}}]$ تكوّن سلسلة غير منتهية في الاتجاهين
+  \[
+  \cdots \prec {^{**}{\OLId{latin-ordinary}{x}}} \prec {^*}{\OLId{latin-ordinary}{x}} \prec {\OLId{latin-ordinary}{x}} \prec {\OLId{latin-ordinary}{x}}^* \prec {\OLId{latin-ordinary}{x}}^{**}
+  \prec \cdots
+  \]
+  تسمى سلسلة~${\OLId{latin-looped}{Z}}$ لأن نوع ترتيبها هو نوع ترتيب الأعداد الصحيحة.
+\item يمكن رفع ترتيب~$\prec$ إلى الكتل: إذا كان~${\OLId{latin-ordinary}{x}} \prec {\OLId{latin-ordinary}{y}}$ و
+  ${\OLId{latin-ordinary}{x}} \not\approx {\OLId{latin-ordinary}{y}}$، كانت كتلة~${\OLId{latin-ordinary}{x}}$ أصغر من كتلة~${\OLId{latin-ordinary}{y}}$. وتكون الكتلة
+  \emph{غير قياسية} إذا احتوت عنصرًا غير قياسي. أما الكتلة القياسية
+  فهي أصغر الكتل.
+\item لا توجد أصغر كتلة غير قياسية: فإذا كان~${\OLId{latin-ordinary}{y}}$ غير قياسي، وُجد
+  ${\OLId{latin-ordinary}{x}} \prec {\OLId{latin-ordinary}{y}}$ يكون~${\OLId{latin-ordinary}{x}}$ فيه غير قياسي كذلك و${\OLId{latin-ordinary}{x}} \not\approx {\OLId{latin-ordinary}{y}}$.
+  البرهان: في النموذج القياسي~$\Struct{N}$، يقبل كل عدد القسمة على
+  اثنين، وربما كان الباقي واحدًا؛ أي
+  $\Sat{{\OLId{latin-looped}{N}}}{\lforall[{\OLId{latin-ordinary}{y}}][\lexists[{\OLId{latin-ordinary}{x}}][({\OLId{latin-ordinary}{y}} = {\OLId{latin-ordinary}{x}} + {\OLId{latin-ordinary}{x}} \lor {\OLId{latin-ordinary}{y}} = {\OLId{latin-ordinary}{x}} + {\OLId{latin-ordinary}{x}} +
+        \Obj{0}')]]}$. وبالتكافؤ الأولي، لكل~${\OLId{latin-ordinary}{y}} \in \Domain{{\OLId{latin-looped}{M}}}$ يوجد
+  ${\OLId{latin-ordinary}{x}} \in \Domain{{\OLId{latin-looped}{M}}}$ بحيث إما~${\OLId{latin-ordinary}{x}} \oplus {\OLId{latin-ordinary}{x}} = {\OLId{latin-ordinary}{y}}$ وإما
+  ${\OLId{latin-ordinary}{x}} \oplus {\OLId{latin-ordinary}{x}} \oplus \mathbf{z}^*= {\OLId{latin-ordinary}{y}}$. ولو كان~${\OLId{latin-ordinary}{x}}$ قياسيًا، لكان~${\OLId{latin-ordinary}{y}}$
+  قياسيًا أيضًا؛ ولذلك~${\OLId{latin-ordinary}{x}}$ غير قياسي، كما أن~${\OLId{latin-ordinary}{x}} \prec {\OLId{latin-ordinary}{y}}$. وفوق ذلك،
+  ينتمي~${\OLId{latin-ordinary}{x}}$ و${\OLId{latin-ordinary}{y}}$ إلى كتلتين مختلفتين، أي~${\OLId{latin-ordinary}{x}} \not\approx {\OLId{latin-ordinary}{y}}$. ولرؤية
+  ذلك، افترض أنهما ينتميان إلى الكتلة نفسها، أي
+  ${\OLId{latin-ordinary}{x}} \oplus {\OLId{latin-ordinary}{n}} = {\OLId{latin-ordinary}{y}}$ لبعض~${\OLId{latin-ordinary}{n}}$ قياسي. فإذا كان~${\OLId{latin-ordinary}{y}} = {\OLId{latin-ordinary}{x}} \oplus {\OLId{latin-ordinary}{x}}$، كان
+  ${\OLId{latin-ordinary}{x}} \oplus {\OLId{latin-ordinary}{n}} = {\OLId{latin-ordinary}{x}} \oplus {\OLId{latin-ordinary}{x}}$، ومنه~${\OLId{latin-ordinary}{x}} = {\OLId{latin-ordinary}{n}}$ بقانون الاختزال للجمع،
+  وهو قانون يصدق في~$\Struct{N}$ ومن ثم في~$\Struct{M}$ أيضًا، فيكون
+  ${\OLId{latin-ordinary}{x}}$ قياسيًا في نهاية المطاف. وتُعالج حالة
+  ${\OLId{latin-ordinary}{y}} = {\OLId{latin-ordinary}{x}} \oplus {\OLId{latin-ordinary}{x}} \oplus \mathbf{z}^*$ على هذا القياس.
+\item وبحجة مماثلة، لا توجد أكبر كتلة.
+\item ترتيب الكتل كثيف: إذا كانت~$[{\OLId{latin-ordinary}{x}}]$ أصغر من~$[{\OLId{latin-ordinary}{y}}]$، حيث
+  ${\OLId{latin-ordinary}{x}} \not\approx {\OLId{latin-ordinary}{y}}$، وُجدت كتلة~$[{\OLId{latin-ordinary}{z}}]$ متميزة منهما وتقع بينهما. افترض
+  ${\OLId{latin-ordinary}{x}} \prec {\OLId{latin-ordinary}{y}}$. وكما سبق، يقبل~${\OLId{latin-ordinary}{x}} \oplus {\OLId{latin-ordinary}{y}}$ القسمة على اثنين، وربما
+  كان ثمة باق، ولذلك يوجد~${\OLId{latin-ordinary}{u}} \in \Domain{{\OLId{latin-looped}{M}}}$ بحيث إما
+  ${\OLId{latin-ordinary}{x}} \oplus {\OLId{latin-ordinary}{y}} = {\OLId{latin-ordinary}{u}} \oplus {\OLId{latin-ordinary}{u}}$ وإما
+  ${\OLId{latin-ordinary}{x}} \oplus {\OLId{latin-ordinary}{y}} = {\OLId{latin-ordinary}{u}} \oplus {\OLId{latin-ordinary}{u}} \oplus \mathbf{z}^*$. والعنصر~${\OLId{latin-ordinary}{u}}$ هو
+  متوسط~${\OLId{latin-ordinary}{x}}$ و${\OLId{latin-ordinary}{y}}$، ولذلك يقع بينهما. افترض
+  ${\OLId{latin-ordinary}{x}} \oplus {\OLId{latin-ordinary}{y}} = {\OLId{latin-ordinary}{u}} \oplus {\OLId{latin-ordinary}{u}}$، والحالة الأخرى مماثلة: إذا كان
+  ${\OLId{latin-ordinary}{u}} \approx {\OLId{latin-ordinary}{x}}$، فلبعض~${\OLId{latin-ordinary}{n}}$ قياسي
+  \[
+  {\OLId{latin-ordinary}{x}} \oplus {\OLId{latin-ordinary}{y}} = {\OLId{latin-ordinary}{x}} \oplus {\OLId{latin-ordinary}{n}} \oplus {\OLId{latin-ordinary}{x}} \oplus {\OLId{latin-ordinary}{n}},
+  \]
+  ومن ثم~${\OLId{latin-ordinary}{y}} = {\OLId{latin-ordinary}{x}} \oplus {\OLId{latin-ordinary}{n}} \oplus {\OLId{latin-ordinary}{n}}$، فيكون~${\OLId{latin-ordinary}{x}} \approx {\OLId{latin-ordinary}{y}}$ خلافًا
+  للفرض. فنستنتج~${\OLId{latin-ordinary}{u}} \not\approx {\OLId{latin-ordinary}{x}}$. وتعطي حجة مماثلة
+  ${\OLId{latin-ordinary}{u}} \not\approx {\OLId{latin-ordinary}{y}}$.
+\end{enumerate}
+وعلى هذا تُرتب الكتل غير القياسية مثل الأعداد النسبية: فهي تكوّن ترتيبًا
+خطيًا~!!a{enumerable} بلا نقطتي نهاية. ويلزم من ذلك أنه لأي نموذجين
+غير قياسيين~!!{enumerable}~$\Struct{M}_{\OLMathNumeral{1}}$ و$\Struct{M}_{\OLMathNumeral{2}}$ للحساب
+الصادق، يكون اختزالهما إلى اللغة التي لا تحتوي إلا~$<$ و$=$ متماثلين.
+فالجزآن القياسيان من~$\Struct{M_1}$ و$\Struct{M_2}$ متماثلان مع
+النموذج القياسي~$\Struct{N}$، ومن ثم أحدهما مع الآخر. والكتل المكوّنة
+للجزء غير القياسي مرتبة هي نفسها مثل الأعداد النسبية، ولذلك تكون
+متماثلة بموجب~\olref[dlo]{thm:cantorQ}؛ ويمكن توسيع تماثل الكتل إلى
+تماثل~\emph{داخل} الكتل بمقابلة عناصر اعتباطية في كل منها، ثم جعل
+صورة خلف~${\OLId{latin-ordinary}{x}}$ في~$\Struct{M_1}$ خلف صورة~${\OLId{latin-ordinary}{x}}$ في~$\Struct{M_2}$. لاحظ
+أنه لا يلزم من ذلك~\emph{أن}~$\mathfrak{M}_{\OLMathNumeral{1}}$ و$\mathfrak{M}_{\OLMathNumeral{2}}$
+متماثلان في لغة الحساب الكاملة، فالتماثل دائمًا نسبي إلى توقيع؛ إذ
+توجد طرائق غير متماثلة لتعريف الجمع والضرب على~$\Domain{{\OLId{latin-looped}{M}}_{\OLMathNumeral{1}}}$ و
+$\Domain{{\OLId{latin-looped}{M}}_{\OLMathNumeral{2}}}$. (ويلزم ذلك كذلك من مبرهنة شهيرة لفوت، تقول إن عدد
+النماذج المعدودة لنظرية تامة لا يجوز أن يكون~\OLClassicalDigits{2}.)
+
+\begin{prob}
+بيّن أنه لا يجوز أن توجد أكبر كتلة في نموذج حسابي غير قياسي.
+\end{prob}
+
+\begin{prob}
+لتكن~$\Lang{L}$ !!{language} الرتبة الأولى التي لا تحتوي، عدا~$\eq$،
+إلا~$<$ بوصفه~!!{predicate} وحيدًا، ولتكن
+$\Struct{N} = (\Nat,<)$. جميع المجموعات الجزئية المنتهية أو المتناهية
+المتممة من~$\Struct{N}$ قابلة للتعريف بغير معاملات. بيّن أنها
+المجموعات الجزئية الوحيدة القابلة للتعريف بغير معاملات في
+$\Struct{N}$.
+
+(تلميح: أولًا، لتكن~$\Obj{prc}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})$ صيغة~$\Lang{L}$ المختصرة لعبارة
+«${\OLId{latin-ordinary}{x}}$ هو السلف المباشر لـ${\OLId{latin-ordinary}{y}}$»:
+\[
+{\OLId{latin-ordinary}{x}}<{\OLId{latin-ordinary}{y}} \land \lnot \lexists[{\OLId{latin-ordinary}{z}}][({\OLId{latin-ordinary}{x}}<{\OLId{latin-ordinary}{z}} \land {\OLId{latin-ordinary}{z}} < {\OLId{latin-ordinary}{y}})].
+\]
+تقابل كل مجموعة جزئية من~$\Struct{N}$ قابلة للتعريف بغير معاملات
+صيغة~$!A({\OLId{latin-ordinary}{x}})$ في~$\Lang{L}$. ولكل صيغة كهذه~$!A$، تأمل الجملة~$!D$:
+\[
+\lexists[{\OLId{latin-ordinary}{x}}][\lforall[{\OLId{latin-ordinary}{y}}][\lforall[{\OLId{latin-ordinary}{z}}][(({\OLId{latin-ordinary}{x}}<{\OLId{latin-ordinary}{y}} \land {\OLId{latin-ordinary}{x}}<{\OLId{latin-ordinary}{z}} \land \Obj{prc}({\OLId{latin-ordinary}{y}},{\OLId{latin-ordinary}{z}})
+  \land !A({\OLId{latin-ordinary}{y}})) \lif !A({\OLId{latin-ordinary}{z}}))]]].
+\]
+بيّن أن~$\Sat{{\OLId{latin-looped}{N}}}{!D}$ إذا وفقط إذا كانت المجموعة الجزئية من
+$\Struct{N}$ التي تعرّفها~$!A$ إما منتهية وإما متناهية المتممة.
+
+والآن ليكن~$\Struct{M}$ نموذجًا غير قياسي مكافئًا أوليًا لـ
+$\Struct{N}$. وإذا كان~${\OLId{latin-ordinary}{a}} \in \Domain{{\OLId{latin-looped}{M}}}$ غير قياسي، فليكن
+${\OLId{latin-ordinary}{b}}, {\OLId{latin-ordinary}{c}} \in \Domain{{\OLId{latin-looped}{M}}}$ أكبر من~${\OLId{latin-ordinary}{a}}$، وليكن~${\OLId{latin-ordinary}{b}}$ السلف المباشر لـ${\OLId{latin-ordinary}{c}}$.
+عندئذ يوجد تشاكل ذاتي~${\OLId{latin-ordinary}{h}}$ لاختزال~$\Struct{M}$ إلى لغة الترتيب بحيث
+${\OLId{latin-ordinary}{h}}({\OLId{latin-ordinary}{b}})={\OLId{latin-ordinary}{c}}$، فلماذا؟ ولذلك إذا أشبع~${\OLId{latin-ordinary}{b}}$ الصيغة~$!A$، أشبعها~${\OLId{latin-ordinary}{c}}$ أيضًا،
+فلماذا؟ ويلزم أن~$!D$ صادقة في~$\Struct{M}$، ومن ثم في~$\Struct{N}$
+كذلك. غير أن ذلك يستلزم أن المجموعة الجزئية من~$\Struct{N}$ التي
+تعرّفها~$!A$ إما منتهية وإما متناهية المتممة.)
+\end{prob}
+
+\end{document}

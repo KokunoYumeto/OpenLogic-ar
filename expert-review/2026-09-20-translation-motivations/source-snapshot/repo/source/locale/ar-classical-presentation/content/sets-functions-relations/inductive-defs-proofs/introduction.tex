@@ -1,0 +1,125 @@
+% Part: sets-functions-relations
+% Chapter: induction
+% Section: induction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sfr}{ind}{int}
+
+\olsection{في الاستقراء}
+
+\begin{explain}
+الاستقراء طريق مألوف من طرق البرهان في الرياضيات والمنطق. ولعلك عرفته من
+الاستقراء على الأعداد الطبيعية؛ غير أن الاستقراء يجري أيضًا في أصناف
+كثيرة من الأشياء الرياضية والمنطقية.
+
+والغرض منه إثبات دعوى كلية، أي إثبات خاصية لكل شيء من نوع معين. وتظهر
+منفعته خاصة حين يتعذر إدخال الأشياء كلها في البرهان مباشرة. وإنما يصح
+هذا الطريق في الأشياء المنشأة على نظام معلوم: فإذا كان كل عنصر من
+المجموعة أصلًا، أو مبنيًا من أصول في عدد متناه من الخطوات، جرى عليها
+الاستقراء. وبيان ذلك أدق بما يأتي:
+\end{explain}
+
+\begin{defn}
+لتكن ${\OLId{latin-ordinary}{f}}$ دالة ${\OLId{latin-ordinary}{n}}$-موضعية. ونقول إن المجموعة ${\OLId{latin-looped}{S}}$ \emph{مغلقة} تحت ${\OLId{latin-ordinary}{f}}$
+إذا وفقط إذا كان ${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{1}},\dots,{\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{n}}) \in {\OLId{latin-looped}{S}}$ كلما كانت
+${\OLId{latin-ordinary}{x}}_{\OLMathNumeral{1}},\dots,{\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{n}} \in {\OLId{latin-looped}{S}}$ وكانت ${\OLId{latin-ordinary}{f}}$ معرفة عند هذه المدخلات.
+\end{defn}
+
+\begin{explain}
+فمجموعة الأعداد الطبيعية ($\mathbb{N}$)، مثلًا، مغلقة تحت دالة التالي
+${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}}) = {\OLId{latin-ordinary}{x}}+{\OLMathNumeral{1}}$؛ إذ إذا كان ${\OLId{latin-ordinary}{x}}$ طبيعيًا كان ${\OLId{latin-ordinary}{x}}+{\OLMathNumeral{1}}$ طبيعيًا. وليست مغلقة،
+في المقابل، تحت دالة السابق ${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}}) = {\OLId{latin-ordinary}{x}}-{\OLMathNumeral{1}}$؛ لأن ${\OLMathNumeral{0}}$ طبيعي، وأما $-{\OLMathNumeral{1}}$
+فليس بطبيعي.
+\end{explain}
+
+\begin{defn}
+نقول إن الخاصية ${\OLId{latin-looped}{P}}$ \emph{محفوظة تحت} الدالة ${\OLId{latin-ordinary}{n}}$-موضعية ${\OLId{latin-ordinary}{f}}$ إذا كان،
+لكل مدخلات ${\OLId{latin-ordinary}{a}}_{\OLMathNumeral{1}},\dots,{\OLId{latin-ordinary}{a}}_{\OLId{latin-ordinary}{n}}$ من مجال ${\OLId{latin-ordinary}{f}}$، صدق
+${\OLId{latin-looped}{P}}({\OLId{latin-ordinary}{a}}_{\OLMathNumeral{1}}),\dots,{\OLId{latin-looped}{P}}({\OLId{latin-ordinary}{a}}_{\OLId{latin-ordinary}{n}})$ مستلزمًا لصدق ${\OLId{latin-looped}{P}}({\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{a}}_{\OLMathNumeral{1}},\dots,{\OLId{latin-ordinary}{a}}_{\OLId{latin-ordinary}{n}}))$.
+\end{defn}
+
+\begin{explain}
+خاصية «كون العدد زوجيًا» محفوظة تحت الدالة ${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}}) = {\OLId{latin-ordinary}{x}}+{\OLMathNumeral{2}}$؛ لأن
+${\OLId{latin-ordinary}{x}}$ إذا كان زوجيًا كان ${\OLId{latin-ordinary}{x}}+{\OLMathNumeral{2}}$ زوجيًا. وأما دالة التالي فلا تحفظ هذه
+الخاصية، إذ يكون ${\OLId{latin-ordinary}{x}}+{\OLMathNumeral{1}}$ فرديًا متى كان ${\OLId{latin-ordinary}{x}}$ زوجيًا.
+
+وإنما يصح الاستقراء على الأعداد الطبيعية لأن كل عدد طبيعي يُنال من
+${\OLMathNumeral{0}}$ بتكرار دالة التالي عددًا متناهيًا من المرات. وهذه هي السمة العامة
+لكل مجموعة يصح فيها الاستقراء.
+\end{explain}
+
+\begin{defn}[الاستقراء على $\Nat$]
+إذا اتصف ${\OLMathNumeral{0}}$ بخاصية ${\OLId{latin-looped}{P}}$، وكانت ${\OLId{latin-looped}{P}}$ محفوظة تحت دالة التالي، اتصف كل
+عدد طبيعي بالخاصية ${\OLId{latin-looped}{P}}$.
+\end{defn}
+
+\begin{ex} إن مجموع الأعداد الطبيعية من ${\OLMathNumeral{0}}$ إلى ${\OLId{latin-ordinary}{n}}$ يساوي $\frac{{\OLId{latin-ordinary}{n}}({\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}})}{{\OLMathNumeral{2}}}$. \\
+
+\textbf{حالة الأساس.} المجموع من ${\OLMathNumeral{0}}$ إلى ${\OLMathNumeral{0}}$ هو ${\OLMathNumeral{0}}=
+\frac{{\OLMathNumeral{0}}\cdot {\OLMathNumeral{1}}}{{\OLMathNumeral{2}}}$.\\
+
+\textbf{خطوة الاستقراء.} افترض صدق الخاصية عند ${\OLId{latin-ordinary}{k}}$، ونثبت صدقها عند
+${\OLId{latin-ordinary}{k}}+{\OLMathNumeral{1}}$. أي نفترض صدق ${\OLId{latin-looped}{P}}({\OLId{latin-ordinary}{k}})$، وهو أن
+\[ {\OLMathNumeral{0}} + {\OLMathNumeral{1}} + \ldots + {\OLId{latin-ordinary}{k}} = \frac{{\OLId{latin-ordinary}{k}}({\OLId{latin-ordinary}{k}}+{\OLMathNumeral{1}})}{{\OLMathNumeral{2}}} \]
+ثم نثبت صدق ${\OLId{latin-looped}{P}}({\OLId{latin-ordinary}{k}}+{\OLMathNumeral{1}})$، وهو أن
+\[ {\OLMathNumeral{0}} + {\OLMathNumeral{1}} + \ldots + {\OLId{latin-ordinary}{k}} + ({\OLId{latin-ordinary}{k}}+{\OLMathNumeral{1}}) = \frac{({\OLId{latin-ordinary}{k}}+{\OLMathNumeral{1}})({\OLId{latin-ordinary}{k}}+{\OLMathNumeral{2}})}{{\OLMathNumeral{2}}} \]
+مستعينين بفرض صدق ${\OLId{latin-looped}{P}}({\OLId{latin-ordinary}{k}})$.
+
+\begin{align*}
+{\OLMathNumeral{0}} + {\OLMathNumeral{1}} + \ldots + {\OLId{latin-ordinary}{k}} &= \frac{{\OLId{latin-ordinary}{k}}({\OLId{latin-ordinary}{k}}+{\OLMathNumeral{1}})}{{\OLMathNumeral{2}}} \tag{فرض الاستقراء} \\
+{\OLMathNumeral{0}} + {\OLMathNumeral{1}} + \ldots + {\OLId{latin-ordinary}{k}} + ({\OLId{latin-ordinary}{k}}+{\OLMathNumeral{1}}) &= \frac{{\OLId{latin-ordinary}{k}}({\OLId{latin-ordinary}{k}}+{\OLMathNumeral{1}})}{{\OLMathNumeral{2}}} + ({\OLId{latin-ordinary}{k}}+{\OLMathNumeral{1}})
+\tag{إضافة ${\OLId{latin-ordinary}{k}}+{\OLMathNumeral{1}}$ إلى الطرفين} \\
+&= \frac{{\OLId{latin-ordinary}{k}}({\OLId{latin-ordinary}{k}}+{\OLMathNumeral{1}}) + {\OLMathNumeral{2}}({\OLId{latin-ordinary}{k}}+{\OLMathNumeral{1}})}{{\OLMathNumeral{2}}} \\
+&= \frac{{\OLId{latin-ordinary}{k}}^{\OLMathNumeral{2}} + {\OLId{latin-ordinary}{k}} + {\OLMathNumeral{2}}{\OLId{latin-ordinary}{k}} +{\OLMathNumeral{2}}}{{\OLMathNumeral{2}}} \\
+&=\frac{({\OLId{latin-ordinary}{k}}+{\OLMathNumeral{1}})({\OLId{latin-ordinary}{k}}+{\OLMathNumeral{2}})}{{\OLMathNumeral{2}}}
+\end{align*}
+فتمت خطوة الاستقراء، وثبتت الدعوى.
+\end{ex}
+
+\begin{explain}
+وأما !!{formula}s فأصولها !!{formula}s الذرية، وتُنشأ !!{formula}s المركبة
+بضم !!{formula}s أقل تعقيدًا بواسطة الروابط. فلكل رابط دالة على
+!!{formula}s، ترد !!{formula} جديدة عند تطبيق الرابط على مدخلاته. ومن
+ذلك الدالة التي تقرن اثنتين من !!{formula}s، هما $!A$ و$!B$، ويمكن كتابتها
+$\mathcal E _\land (!A, !B) = !A \land !B$. ولنا أن نسمي هذه وأمثالها
+\emph{دوال بناء الصيغ}. ومجموعة !!{formula}s مغلقة تحتها؛ فإذا كان كل من
+$!A$ و$!B$ من !!{formula}s، كان كل من $\lnot !A$ و$!A \land !B$،
+وغيرهما، صيغة كذلك.
+\end{explain}
+
+\begin{defn}[الاستقراء على !!{formula}s]
+إذا اتصفت كل !!{formula} ذرية بالخاصية ${\OLId{latin-looped}{P}}$، وكانت ${\OLId{latin-looped}{P}}$ محفوظة تحت دوال
+بناء !!{formula}، اتصفت كل !!{formula} بالخاصية ${\OLId{latin-looped}{P}}$.
+\end{defn}
+
+\begin{explain}
+يفيد هذا التعريف منهاج البراهين الاستقرائية على !!{formula}s. فإذا أردنا
+أن نبين اتصاف كل !!{formula} بالخاصية ${\OLId{latin-looped}{P}}$، رتبنا البرهان هكذا:\\
+
+\textbf{حالة الأساس.} لتكن $!A$~!!{formula} ذرية. [\ldots]
+فيثبت اتصاف $!A$ بالخاصية ${\OLId{latin-looped}{P}}$.
+
+\textbf{خطوة الاستقراء.} لتكن $!A$ و$!B$ من !!{formula}s، ولتكن
+الخاصية ${\OLId{latin-looped}{P}}$ صادقة عليهما.
+
+حالة $\lnot$: [\ldots] فيثبت اتصاف $\lnot !A$ بالخاصية ${\OLId{latin-looped}{P}}$.
+
+حالة $\land$: [\ldots] فيثبت اتصاف $!A \land !B$ بالخاصية ${\OLId{latin-looped}{P}}$.
+
+حالة $\lor$: [\ldots] فيثبت اتصاف $!A \lor !B$ بالخاصية ${\OLId{latin-looped}{P}}$.
+
+حالة $\lif$: [\ldots] فيثبت اتصاف $!A \lif !B$ بالخاصية ${\OLId{latin-looped}{P}}$.
+
+حالة $\liff$: [\ldots] فيثبت اتصاف $!A \liff !B$ بالخاصية ${\OLId{latin-looped}{P}}$.
+
+حالة $\lforall[]$: [\ldots] فيثبت اتصاف $\lforall[{\OLId{latin-ordinary}{x}}] !A$ بالخاصية ${\OLId{latin-looped}{P}}$.
+
+حالة $\lexists[]$: [\ldots] فيثبت اتصاف $\lexists[{\OLId{latin-ordinary}{x}}] !A$ بالخاصية ${\OLId{latin-looped}{P}}$. \\
+
+ومن ثم تتصف كل !!{formula} بالخاصية ${\OLId{latin-looped}{P}}$.
+\end{explain}
+
+\end{document}

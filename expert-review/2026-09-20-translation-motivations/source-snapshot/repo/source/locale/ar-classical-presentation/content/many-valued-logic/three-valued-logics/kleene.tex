@@ -1,0 +1,188 @@
+% Part: many-valued-logic
+% Chapter: three-valued-logics
+% Section: kleene
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mvl}{thr}{skl}
+
+\olsection{منطقا كليني}
+
+وضع ستيفن كليني منطقين ثلاثيي القيم، مستندًا إلى تصور قيم الصدق
+نتائج لإجراءات حسابية: فقد يرد الإجراء~$\True$ أو~$\False$، وقد لا
+يتوقف أصلًا؛ وعندئذ تكون القيمة الموافقة غير معرفة، ويرمز إليها
+بـ~$\Undef$.
+
+فلحساب نفي~$!A$ نحسب قيمة~$!A$ أولًا، ثم نرد نقيضها. فإن لم يتوقف
+حساب~$!A$ لم يتوقف الحساب كله؛ فيلزم أن يكون نفي~$\Undef$ هو
+$\Undef$.
+
+وأما اقتران~$!A \land !B$ فله طريقان في الحساب. يمكن أن نحسب~$!A$
+ثم~$!B$، فنرد~$\True$ إذا ردّ كلا الحسابين~$\True$، ونرد~$\False$
+في غير ذلك. لكن توقف الإجراء كله حينئذ متوقف على توقف الحسابين؛ فإذا
+لم يتوقف أحدهما بقي الاقتران غير معرف. ومثل ذلك الفصل.
+
+وإن حسبنا~$!A$ و$!B$ معًا على التوازي أمكن تحصيل جواب في حالات أكثر.
+فمتى توقف أحد الحسابين وردّ~$\False$، جاز أن نوقف الحساب ونحكم بكذب
+الاقتران، وإن بقي المقترن الآخر غير معرف. وكذلك الفصل المحسوب على
+التوازي: متى ردّ أحد حسابي المفصولين بالصدق، حكمنا بصدق الفصل ولم
+ننتظر الآخر. فقد تعرف قيمة القضية المركبة، مع أن قيمة أحد جزأيها
+غير معرفة. وبهذا الاعتبار تقرأ~$\Undef$ بمعنى «مجهول»، لا «غير معرف».
+% تصحيح أسلوبي (0395-N1): طوبق العدد «أحد» مع المذكر «جزأين».
+
+ومن هذين الطريقين نشأ منطق كليني القوي ومنطقه الضعيف. وأما الشرط
+فيعرّف بما يكافئ~$\lnot !A \lor !B$.
+
+\begin{defn}
+مصفوفة \emph{منطق كليني القوي}~$\LogKs$ هي:
+\begin{enumerate}
+  \item الجزء الخالي من الثوابت~$\Lang L_{\OLMathNumeral{0}}^{-}$ من لغة القضايا القياسية، ذو الروابط
+  $\lnot$ و$\land$ و$\lor$ و$\lif$.
+  \item مجموعة قيم الصدق~${\OLId{latin-looped}{V}} = \{\True, \Undef, \False\}$.
+  \item القيمة المميزة وحدها هي~$\True$؛ أي~${\OLId{latin-looped}{V}}^+ = \{\True\}$.
+  \item دوال الصدق مبينة في الجداول الآتية:
+  \begin{center}
+    \begin{tabular}{c|c}
+      $\tf{\lnot}$ & \\
+      \hline
+      $\True$ & $\False$ \\
+      $\Undef$ & $\Undef$ \\
+      $\False$ & $\True$
+    \end{tabular}
+    \quad
+    \begin{tabular}{c|ccc}
+      $\tf{\land}[\LogKs]$ & $\True$ & $\Undef$ & $\False$ \\
+      \hline
+      $\True$ & $\True$ & $\Undef$ & $\False$ \\
+      $\Undef$ & $\Undef$ & $\Undef$ & $\False$\\
+      $\False$ & $\False$ & $\False$ & $\False$
+    \end{tabular}
+    \\[2ex]
+    \begin{tabular}{c|ccc}
+      $\tf{\lor}[\LogKs]$ & $\True$ & $\Undef$ & $\False$ \\
+      \hline
+      $\True$ & $\True$ & $\True$ & $\True$ \\
+      $\Undef$ & $\True$ & $\Undef$ & $\Undef$ \\
+      $\False$ & $\True$ & $\Undef$ & $\False$
+    \end{tabular}
+    \quad
+    \begin{tabular}{c|ccc}
+      $\tf{\lif}[\LogKs]$ & $\True$ & $\Undef$ & $\False$ \\
+      \hline
+      $\True$ & $\True$ & $\Undef$ & $\False$ \\
+      $\Undef$ & $\True$ & $\Undef$ & $\Undef$  \\
+      $\False$ & $\True$ & $\True$ & $\True$
+    \end{tabular}
+  \end{center}
+\end{enumerate}
+\end{defn}
+
+\begin{defn}
+ومصفوفة \emph{منطق كليني الضعيف}~$\LogKw$ هي:
+\begin{enumerate}
+  \item الجزء الخالي من الثوابت~$\Lang L_{\OLMathNumeral{0}}^{-}$ من لغة القضايا القياسية، ذو الروابط
+  $\lnot$ و$\land$ و$\lor$ و$\lif$.
+  % تصحيح مصدر مشترك (MVL-L0-I1): استُبعد lfalse صراحةً، فبقي برهان خلو المنطقين من التحصيلات صحيحًا.
+  \item مجموعة قيم الصدق~${\OLId{latin-looped}{V}} = \{\True, \Undef, \False\}$.
+  \item القيمة المميزة وحدها هي~$\True$؛ أي~${\OLId{latin-looped}{V}}^+ = \{\True\}$.
+  \item دوال الصدق مبينة في الجداول الآتية:
+  \begin{center}
+    \begin{tabular}{c|c}
+      $\tf{\lnot}$ & \\
+      \hline
+      $\True$ & $\False$ \\
+      $\Undef$ & $\Undef$ \\
+      $\False$ & $\True$
+    \end{tabular}
+    \quad
+    \begin{tabular}{c|ccc}
+      $\tf{\land}[\LogKw]$ & $\True$ & $\Undef$ & $\False$ \\
+      \hline
+      $\True$ & $\True$ & $\Undef$ & $\False$ \\
+      $\Undef$ & $\Undef$ & $\Undef$ & $\Undef$\\
+      $\False$ & $\False$ & $\Undef$ & $\False$
+    \end{tabular}
+    \\[2ex]
+    \begin{tabular}{c|ccc}
+      $\tf{\lor}[\LogKw]$ & $\True$ & $\Undef$ & $\False$ \\
+      \hline
+      $\True$ & $\True$ & $\Undef$ & $\True$ \\
+      $\Undef$ & $\Undef$ & $\Undef$ & $\Undef$ \\
+      $\False$ & $\True$ & $\Undef$ & $\False$
+    \end{tabular}
+    \quad
+    \begin{tabular}{c|ccc}
+      $\tf{\lif}[\LogKw]$ & $\True$ & $\Undef$ & $\False$ \\
+      \hline
+      $\True$ & $\True$ & $\Undef$ & $\False$ \\
+      $\Undef$ & $\Undef$ & $\Undef$ & $\Undef$  \\
+      $\False$ & $\True$ & $\Undef$ & $\True$
+    \end{tabular}
+  \end{center}
+\end{enumerate}
+\end{defn}
+
+\begin{prop}
+  لا تحصيل منطقي في~$\LogKs$ ولا في~$\LogKw$.
+\end{prop}
+
+\begin{proof}
+  خذ~$\pAssign {\OLId{latin-ordinary}{v}}({\OLId{latin-ordinary}{p}}) = \Undef$ لكل~!!{propositional variable}s~${\OLId{latin-ordinary}{p}}$.
+  فعند هذا التقييم تكون قيمة كل صيغة~$!A$ هي
+  $\pValue {\OLId{latin-ordinary}{v}}(!A) = \Undef$؛ لأن
+  \[
+    \tf{\lnot}(\Undef) = \tf{\lor}(\Undef, \Undef) = \tf{\land}(\Undef,
+  \Undef) = \tf{\lif}(\Undef, \Undef) = \Undef
+  \]
+  في المنطقين جميعًا. ولما كان~$\Undef \notin {\OLId{latin-looped}{V}}^+$ في كل من~$\LogKs$
+  و$\LogKw$، لم تكن~$!A$ مميزة في هذا~!!{valuation}.
+\end{proof}
+
+ومع خلو المنطقين القوي والضعيف من التحصيلات المنطقية، فعلاقتا
+النتيجة فيهما ليستا تافهتين.
+
+\begin{prob}
+  أي العلاقات الآتية تصح في (أ)~منطق كليني القوي، و(ب)~منطق كليني
+  الضعيف؟ ضع جدول صدق لكل واحدة.
+  \begin{enumerate}
+    \item ${\OLId{latin-ordinary}{p}}, {\OLId{latin-ordinary}{p}} \lif {\OLId{latin-ordinary}{q}} \Entails {\OLId{latin-ordinary}{q}}$
+    \item ${\OLId{latin-ordinary}{p}} \lor {\OLId{latin-ordinary}{q}}, \lnot {\OLId{latin-ordinary}{p}} \Entails {\OLId{latin-ordinary}{q}}$
+    \item ${\OLId{latin-ordinary}{p}} \land {\OLId{latin-ordinary}{q}} \Entails {\OLId{latin-ordinary}{p}}$
+    \item ${\OLId{latin-ordinary}{p}} \Entails {\OLId{latin-ordinary}{p}} \land {\OLId{latin-ordinary}{p}}$
+    \item ${\OLId{latin-ordinary}{p}} \Entails {\OLId{latin-ordinary}{p}} \lor {\OLId{latin-ordinary}{q}}$
+  \end{enumerate}
+\end{prob}
+
+وفسر دميتري بوتشفار~$\Undef$ بـ«عديم المعنى»، وأراد بذلك معالجة
+مفارقات كمفارقة الكذاب، فجعل الجمل المفارقة ذات القيمة~$\Undef$.
+ووضع منطقًا هو، في أصله، منطق كليني الضعيف مع روابط زائدة، منها
+«النفي الخارجي» ومؤثر «غير معرف»:
+\begin{center}
+  \begin{tabular}{c|c}
+    $\tf{\sim}$ & \\
+    \hline
+    $\True$ & $\False$ \\
+    $\Undef$ & $\True$ \\
+    $\False$ & $\True$
+  \end{tabular}
+\quad
+  \begin{tabular}{c|c}
+    $\tf{+}$ & \\
+    \hline
+    $\True$ & $\False$ \\
+    $\Undef$ & $\True$ \\
+    $\False$ & $\False$
+  \end{tabular}
+\end{center}
+
+\begin{prob}
+  هل يمكن تعريف~$\sim$ في منطق بوتشفار بدلالة~$\lnot$ و$+$؟ أي هل
+  توجد~!!a{formula} لا تحوي إلا~!!{propositional variable} واحدًا
+  هو~${\OLId{latin-ordinary}{p}}$، ولا يدخل فيها~$\sim$، وتأخذ دائمًا قيمة الصدق التي يأخذها
+  $\mathord{\sim}{\OLId{latin-ordinary}{p}}$؟ ضع جدول صدق يثبت جوابك.
+\end{prob}
+
+
+\end{document}

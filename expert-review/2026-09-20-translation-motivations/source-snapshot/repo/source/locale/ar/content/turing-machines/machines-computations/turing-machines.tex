@@ -1,0 +1,57 @@
+% Part: turing-machines
+% Chapter: machines-computations
+% Section: turing-machines
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{tur}{mac}{tur}
+\olsection{آلات تورنغ}
+
+\begin{explain}
+يبدو التعريف الصوري لما تتألف منه آلة تورنغ مجردًا، لكنه بسيط في
+الواقع: فهو لا يفعل إلا جمع كل المعلومات اللازمة لتحديد عمل آلة
+تورنغ في بنية رياضية واحدة. وتشمل هذه المعلومات (1) الحالات التي
+يمكن أن تكون فيها الآلة، و(2) الرموز المسموح بها على الشريط، و(3)
+الحالة التي ينبغي أن تبدأ فيها الآلة، و(4) مجموعة تعليمات الآلة.
+\end{explain}
+
+\begin{defn}[آلة تورنغ]
+\emph{آلة تورنغ} $M$ هي رباعية $\langle Q,\Sigma,q_0,\delta\rangle$
+تتألف من
+\begin{enumerate}
+\item مجموعة منتهية من \emph{الحالات}~$Q$،
+\item \emph{أبجدية} منتهية $\Sigma$ تضم $\TMendtape$ و$\TMblank$،
+\item \emph{حالة ابتدائية}~$q_0 \in Q$،
+\item \emph{مجموعة تعليمات} منتهية~$\delta\colon Q \times \Sigma
+  \pto Q \times \Sigma \times \{\TMleft,\TMright,\TMstay\}$.
+\end{enumerate}
+وتسمى الدالة الجزئية~$\delta$ أيضًا \emph{دالة الانتقال} للآلة~$M$.
+\end{defn}
+
+\begin{explain}
+نفترض أن الشريط غير متناه في اتجاه واحد فقط. ولهذا يفيد تخصيص الرمز
+$\TMendtape$ علامةً للطرف الأيسر من الشريط. فهذا ييسر على برامج آلات
+تورنغ معرفة متى تكون «معرضة» للخروج من الشريط. وكان يمكننا أن نفترض
+أن هذا الرمز لا يكتب فوقه قط، أي إن
+$\delta(q,\TMendtape)=\tuple{q',\TMendtape,D}$ إذا كانت
+$\delta(q,\TMendtape)$ معرّفة. وتتبنى بعض الكتب هذا الافتراض، أما نحن
+فلا نتبناه. ويمكنك ببساطة أن تحتاط عند بناء آلة تورنغ كيلا تكتب فوق
+$\TMendtape$. وفوق ذلك توجد حالات يتيح فيها السماح بهذا الاستبدال
+قدرًا ملائمًا من المرونة.
+\end{explain}
+
+\begin{ex}
+\emph{آلة الزوجية:} آلة الزوجية هي صوريًا الرباعية
+$\tuple{Q,\Sigma,q_0,\delta}$ حيث
+\begin{align*}
+Q & = \{ q_0, q_1 \} \\
+\Sigma & = \{ \TMendtape, \TMblank, \TMstroke \}, \\
+\delta(q_0, \TMstroke) & = \tuple{q_1, \TMstroke, \TMright},\\
+\delta(q_1, \TMstroke) & = \tuple{q_0, \TMstroke, \TMright},\\
+\delta(q_1, \TMblank)  & = \tuple{q_1, \TMblank, \TMright}.
+\end{align*}
+\end{ex}
+
+\end{document}

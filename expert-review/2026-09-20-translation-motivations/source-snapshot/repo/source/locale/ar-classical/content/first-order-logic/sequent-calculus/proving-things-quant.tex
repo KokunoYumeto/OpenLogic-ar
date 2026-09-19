@@ -1,0 +1,94 @@
+% Part: first-order-logic
+% Chapter: sequent-calculus
+% Section: proving-things-quant
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{seq}{prq}
+
+\olsection{\usetoken{P}{derivation} ذات المكممات}
+
+\begin{ex}
+أعط $\Log{LK}$-!!{derivation} للتتابعية
+$\lexists[x][\lnot !A(x)] \Sequent \lnot \lforall[x][!A(x)]$.
+
+مع المكممات لا بد من صيانة شرط المتغير المميَّز، وقد لا يصان إلا بتغيير ترتيب بعض الاستدلالات.
+والنافع في الغالب أن نبدأ، عند الطلب من أسفل، بالقواعد التي يلزمها هذا الشرط؛ فتقع أسفل البرهان بعد تمامه.
+وينفع كذلك تقدير صورة التتابعية الابتدائية سلفًا. فهي هنا من نحو~$!A(a) \Sequent !A(a)$؛ ولهذا يلزم عند عكس القاعدتين اختيار حد واحد، نسميه
+$a$، لكل من~$\lforall$ و$\lexists$. فإن اختلف الحدّان انتهينا إلى نحو~$!A(a) \Sequent !A(b)$، وليس ذلك قابلًا للاشتقاق.
+
+ونبدأ بوضع المطلوب:
+\begin{prooftree}
+\AxiomC{}
+\UnaryInf$\lexists[x][\lnot !A(x)] \fCenter \lnot \lforall[x][!A(x)]$
+\end{prooftree}
+إما أن نأخذ~\LeftR{\exists} وإما~\RightR{\lnot}.
+ولما كانت~\LeftR{\exists} مقيدة بشرط المتغير المميَّز، كان تقديمها في البحث أنفع؛ فنبدأ بها:
+\begin{prooftree}
+\AxiomC{}
+\UnaryInf$ \lnot !A(a) \fCenter \lnot \lforall[x][!A(x)]$
+\RightLabel{\LeftR{\lexists}}
+\UnaryInf$ \lexists[x][\lnot !A(x)] \fCenter \lnot \lforall[x][!A(x)]$
+\end{prooftree}
+وبتطبيق قاعدتي~\LeftR{\lnot} و\RightR{\lnot} عكسيًا نحصل على
+\begin{prooftree}
+\AxiomC{}
+\UnaryInf$\lforall[x][!A(x)] \fCenter !A(a)$
+\RightLabel{\LeftR{\lnot}}
+\UnaryInf$\lnot !A(a), \lforall[x][!A(x)] \fCenter $
+\RightLabel{\LeftR{\Exchange}}
+\UnaryInf$\lforall[x][!A(x)], \lnot !A(a) \fCenter $
+\RightLabel{\RightR{\lnot}}
+\UnaryInf$ \lnot !A(a) \fCenter \lnot \lforall[x] !A(x)$
+\RightLabel{\LeftR{\lexists}}
+\UnaryInf$ \lexists[x] \lnot !A(x) \fCenter \lnot \lforall[x] !A(x)$
+\end{prooftree}
+ولا يبقى الآن إلا~\LeftR{\forall}. وهذه لا يلزمها قيد المتغير المميَّز، فلا عائق من جهته.
+ولكي نبلغ التتابعية الابتدائية
+$!A(a) \Sequent !A(a)$، نختار~$a$ وسيطة لـ~$!A$ عند تطبيقها:
+\begin{prooftree}
+\Axiom$!A(a) \fCenter !A(a)$
+\RightLabel{\LeftR{\lforall}}
+\UnaryInf$\lforall[x][!A(x)] \fCenter !A(a)$
+\RightLabel{\LeftR{\lnot}}
+\UnaryInf$\lnot !A(a), \lforall[x][!A(x)] \fCenter $
+\RightLabel{\LeftR{\Exchange}}
+\UnaryInf$\lforall[x][!A(x)], \lnot !A(a) \fCenter $
+\RightLabel{\RightR{\lnot}}
+\UnaryInf$ \lnot !A(a) \fCenter \lnot \lforall[x][!A(x)]$
+\RightLabel{\LeftR{\lexists}}
+\UnaryInf$ \lexists[x][ \lnot !A(x)] \fCenter \lnot \lforall[x][!A(x)]$
+\end{prooftree}
+وبعد تمام الشجرة نراجع شرط المتغير المميَّز، ولا سيما أن البحث في المكممات.
+القاعدة الوحيدة المستعملة التي تتقيد به هي~\LeftR{\exists}، ومتغيرها المميَّز~$a$ لا يقع في تتابعيتها السفلى، وهي التتابعية النهائية.
+فهذا !!{derivation} صحيح.
+\end{ex}
+
+\begin{prob}
+أعط !!{derivation}s للتتابعيات الآتية:
+\begin{enumerate}
+\item $\Sequent (\lforall[x][!A(x)] \land \lforall[y][!B(y)]) \lif
+\lforall[z][(!A(z) \land !B(z))]$.
+\item $\Sequent (\lexists[x][!A(x)] \lor \lexists[y][!B(y)]) \lif
+\lexists[z][(!A(z) \lor !B(z))]$.
+\item $\lforall[x][(!A(x) \lif !B)] \Sequent \lexists[y][!A(y)] \lif !B$.
+\item $\lforall[x][\lnot !A(x)] \Sequent \lnot\lexists[x][!A(x)]$.
+\item $\Sequent \lnot\lexists[x][!A(x)] \lif \lforall[x][\lnot !A(x)]$.
+\item $\Sequent \lnot\lexists[x][\lforall[y][((!A(x,y) \lif \lnot
+!A(y,y)) \land (\lnot !A(y,y) \lif !A(x,y)))]]$.
+\end{enumerate}
+\end{prob}
+
+\begin{prob}
+أعط !!{derivation}s للتتابعيات الآتية:
+\begin{enumerate}
+\item $\Sequent \lnot\lforall[x][!A(x)] \lif \lexists[x][\lnot!A(x)]$.
+\item $(\lforall[x][!A(x)] \lif !B) \Sequent \lexists[y][(!A(y) \lif !B)]$.
+\item $\Sequent \lexists[x][(!A(x) \lif \lforall[y][!A(y)])]$.
+\end{enumerate}
+(تتطلب هذه كلها القاعدة~$\RightR{\Contraction}$.)
+\end{prob}
+
+\end{document}

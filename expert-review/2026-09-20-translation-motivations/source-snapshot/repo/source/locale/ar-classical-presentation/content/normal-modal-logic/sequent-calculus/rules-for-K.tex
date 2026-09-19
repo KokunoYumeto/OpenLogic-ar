@@ -1,0 +1,130 @@
+% Part: normal-modal-logic
+% Chapter: sequent-calculus
+% Section: rules-for-K
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{seq}{rul}
+
+\olsection{قواعد النسق \Log{K}}
+
+أما الروابط القضوية المألوفة فقواعدها هي قواعد حساب التتابعيات
+$\Log{LK}$ بعينها؛ وكذلك المسلمات، فكل تتابعية صورتها
+$!A \Sequent !A$ مسلمة.
+
+وأما المؤثر\iftag{prvBox}{\iftag{prvDiamond}{ان الجهويان~$\Box$
+و}{ الجهوي~$\Box$}}{}\iftag{prvDiamond}{ الجهوي~$\Diamond$}{}، فلدينا
+\iftag{notprvBox,notprvDiamond}{القاعدة الزائدة الآتية}{القواعد
+الزائدة الآتية}:
+\[
+  \iftag{prvBox}{\iftag{prvDiamond}{% <> and [] primitive
+    \Axiom${\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, !A$
+    \RightLabel{$\Box$}
+    \UnaryInf$\Box{\OLId{greek-variable}{Gamma}} \fCenter \Diamond{\OLId{greek-variable}{Delta}}, \Box!A$
+    \DisplayProof  
+    \qquad
+    \Axiom$!A, {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}$
+    \RightLabel{$\Diamond$}
+    \UnaryInf$\Diamond!A, \Box{\OLId{greek-variable}{Gamma}} \fCenter \Diamond{\OLId{greek-variable}{Delta}}$
+    \DisplayProof
+}{% only Box primitive
+\Axiom${\OLId{greek-variable}{Gamma}} \fCenter !A$
+\RightLabel{$\Box$}
+\UnaryInf$\Box{\OLId{greek-variable}{Gamma}} \fCenter \Box!A$
+\DisplayProof
+}}{% only <> primitive
+  \Axiom$!A \fCenter {\OLId{greek-variable}{Delta}}$
+  \RightLabel{$\Diamond$}
+  \UnaryInf$\Diamond!A \fCenter \Diamond{\OLId{greek-variable}{Delta}}$
+  \DisplayProof
+}
+\]
+والمراد بـ\iftag{prvBox}{$\Box{\OLId{greek-variable}{Gamma}}$ متتالية ال!!{formula}s التي
+تحصل من~${\OLId{greek-variable}{Gamma}}$ إذا جُعل $\Box$ أمام كل !!{formula} في~${\OLId{greek-variable}{Gamma}}$
+\iftag{prvDiamond}{؛ والمراد بـ}{}}{}\iftag{prvDiamond}{$\Diamond{\OLId{greek-variable}{Delta}}$
+متتالية ال!!{formula}s التي تحصل من~${\OLId{greek-variable}{Delta}}$ إذا جُعل $\Diamond$ أمام
+كل !!{formula} في~${\OLId{greek-variable}{Delta}}$}{}. \iftag{notprvDiamond}{ولا يكون في يمين مقدمة
+قاعدة $\Box$ أكثر من !!{formula} واحدة~$!A$. }{}%
+\iftag{notprvBox}{ولا يكون في يسار مقدمة قاعدة $\Diamond$ أكثر من
+!!{formula} واحدة~$!A$. }{}%
+وقد تكون \iftag{prvBox}{${\OLId{greek-variable}{Gamma}}$\iftag{prvDiamond}{ و~}{}}{}%
+\iftag{prvDiamond}{${\OLId{greek-variable}{Delta}}$}{} خالية؛ فإذا كانت كذلك خلا أيضًا الجزء
+المقابل \iftag{prvBox}{$\Box{\OLId{greek-variable}{Gamma}}$\iftag{prvDiamond}{ و~}{}}{}%
+\iftag{prvDiamond}{$\Diamond{\OLId{greek-variable}{Delta}}$}{} من تتابعية النتيجة.
+
+ولا بد من قصر
+\iftag{prvBox}{إضافة $\Box$ في اليمين\iftag{prvDiamond}{ وإضافة
+}{}}{}\iftag{prvDiamond}{$\Diamond$ في اليسار}{}
+على !!{formula} واحدة~$!A$. وذلك أنا لو أجزنا
+  \iftag{prvBox}{إضافة $\Box$ إلى أي عدد من ال!!{formula}s في
+  اليمين\iftag{prvDiamond}{، أو }{}}{}\iftag{prvDiamond}{إضافة
+$\Diamond$ إلى أي عدد من ال!!{formula}s في اليسار}{} لأمكن أن
+!!{derive}:
+  \[
+    \iftag{prvBox}{
+      \Axiom$!A \fCenter !A$
+      \RightLabel{\RightR{\lnot}}
+      \UnaryInf$\fCenter !A, \lnot !A$
+      \RightLabel{$\Box*$}
+      \UnaryInf$\fCenter \Box!A, \Box\lnot !A$
+      \doubleLine
+      \RightLabel{\RightR{\lor}}
+      \UnaryInf$\fCenter \Box!A \lor \Box \lnot !A$
+      \DisplayProof}{}
+    \iftag{notprvBox,notprvDiamond}{}{\qquad}
+    \iftag{prvDiamond}{
+      \Axiom$!A \fCenter !A$
+      \RightLabel{\LeftR{\lnot}}
+      \UnaryInf$\lnot !A, !A \fCenter$
+      \RightLabel{$\Diamond*$}
+      \UnaryInf$\Diamond\lnot !A,\Diamond!A \fCenter $
+      \RightLabel{\RightR{\lnot}}
+      \UnaryInf$\Diamond!A \fCenter \lnot\Diamond\lnot !A$
+      \RightLabel{\RightR{\lif}}
+      \UnaryInf$ \fCenter \Diamond!A \lif \lnot\Diamond\lnot !A$
+      \DisplayProof}{}
+  \]
+على أن \iftag{prvBox}{$\Box!A \lor \Box \lnot !A$
+\iftag{prvDiamond}{ و$\Diamond!A \lif \lnot\Diamond\lnot !A$
+ليستا}{ليست}}{$\Diamond!A \lif \lnot\Diamond\lnot !A$ ليست} صادقة
+صدقًا عامًا في~$\Log{K}$.
+
+وكذلك لو أجزنا في المقدمة صيغًا جانبية مع~$!A$، ثم أجزنا
+\iftag{prvBox}{لقاعدة $\Box$ بأن تضيف $\Box$ إلى~$!A$ وحدها في
+اليمين\iftag{prvDiamond}{، أو سمحنا }{}}{}\iftag{prvDiamond}{لقاعدة
+$\Diamond$ بأن تضيف $\Diamond$ إلى~$!A$ وحدها في اليسار}{} (من غير
+أن تتناول الصيغ الجانبية بشيء)، لأمكن أن !!{derive}:
+\[
+  \iftag{prvBox}{
+    \Axiom$!A \fCenter !A$
+    \RightLabel{\RightR{\lnot}}
+    \UnaryInf$\fCenter !A, \lnot !A$
+    \RightLabel{\RightR{\Exchange}}
+    \UnaryInf$\fCenter \lnot !A, !A$
+    \RightLabel{$\Box*$}
+    \UnaryInf$\fCenter \lnot!A, \Box !A$
+    \doubleLine
+    \RightLabel{\RightR{\lor}}
+    \UnaryInf$\fCenter \lnot!A \lor \Box !A$
+    \DisplayProof}{}
+  \iftag{notprvBox,notprvDiamond}{}{\qquad}
+  \iftag{prvDiamond}{
+    \Axiom$!A \fCenter !A$
+    \RightLabel{\LeftR{\lnot}}
+    \UnaryInf$\lnot !A, !A \fCenter$
+    \RightLabel{$\Diamond*$}
+    \UnaryInf$\Diamond\lnot !A, !A \fCenter $
+    \RightLabel{\RightR{\lnot}}
+    \UnaryInf$!A \fCenter \lnot\Diamond\lnot !A$
+    \RightLabel{\RightR{\lif}}
+    \UnaryInf$ \fCenter !A \lif \lnot\Diamond\lnot !A$
+    \DisplayProof}{}
+\]
+على أن \iftag{prvBox}{$\lnot!A \lor \Box !A$ (وهي مكافئة لـ$!A
+\lif \Box!A$)\iftag{prvDiamond}{ و$!A \lif \lnot\Diamond\lnot !A$
+ليستا}{ليست}}{$!A \lif \lnot\Diamond\lnot !A$ ليست} صادقة صدقًا
+عامًا في~$\Log{K}$.
+
+\end{document}

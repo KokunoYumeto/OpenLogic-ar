@@ -1,0 +1,102 @@
+% Part: proof-theory
+% Chapter: normalization
+% Section: segments
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{nor}{seg}
+
+\olsection{المقاطع والقطوع}
+
+قاعدة~!!^a{introduction} تتبعها قاعدة~!!a{elimination} هي التفاف في
+!!a{proof}، وتطبيع~!!a{proof} هو حذف مثل هذه الالتفافات. غير أن قاعدتي
+\Elim{\lor} و\Elim{\lexists} تجعلان حتى تعريف ``الالتفاف الذي نريد حذفه''
+معقدًا بعض الشيء. والمشكلة هي أن هاتين القاعدتين لا تضمنان أن قاعدة
+!!{elimination} تتبع قاعدة~!!{introduction} \emph{مباشرةً} داخل التفاف؛
+فقد تقع~\Elim{\lor} أو~\Elim{\lexists} بينهما، مثلًا:
+\[
+\AxiomC{}
+\DeduceC{$\lexists[x][!C(x)]$}
+\AxiomC{$\Discharge{!A}{x}$}
+\DeduceC{$!B$}
+\DischargeRule{\Intro{\lif}}{x}
+\UnaryInfC{$!A \lif !B$}
+\DischargeRule{\Elim{\lexists}}{y}
+\BinaryInfC{$!A \lif !B$}
+\AxiomC{}
+\DeduceC{$!A$}
+\RightLabel{\Elim{\lif}}
+\BinaryInfC{$!B$}
+\DisplayProof
+\]
+وفي الواقع قد يفصل أي عدد من تطبيقات~\Elim{\lor} أو~\Elim{\lexists}
+بين~\Intro{\lif} و\Elim{\lif}، مثلًا:
+\[
+\AxiomC{}
+\DeduceC{$\lexists[x][!C(x)]$}
+\AxiomC{}
+\DeduceC{$!D \lor !E$}
+\AxiomC{$\Discharge{!A}{x}$}
+\DeduceC{$!B$}
+\DischargeRule{\Intro{\lif}}{x}
+\UnaryInfC{$!A \lif !B$}
+\AxiomC{$\Discharge{!A}{x}$}
+\DeduceC{$!B$}
+\DischargeRule{\Intro{\lif}}{x}
+\UnaryInfC{$!A \lif !B$}
+\RightLabel{\Elim{\lor}}
+\TrinaryInfC{$!A \lif !B$}
+\DischargeRule{\Elim{\lexists}}{y}
+\BinaryInfC{$!A \lif !B$}
+\AxiomC{}
+\DeduceC{$!A$}
+\RightLabel{\Elim{\lif}}
+\BinaryInfC{$!B$}
+\DisplayProof
+\]
+يبين هذا المثال أن تطبيق~\Elim{\lif} نفسه قد يدخل في التفافات متعددة، إذ
+يتبع أكثر من تطبيق واحد لـ~\Intro{\lif}. ولشمول جميع هذه الاحتمالات، نعرّف
+الالتفافات باستعمال أنواع معينة من متتاليات وقائع~!!{formula} في برهان
+\Log{N1i}، ونسميها \emph{مقاطع}. وفي مثالنا هي متتالية من وقائع
+$!A \lif !B$ تتبع فيها نتيجة~$\Elim{\lor}$ أو~$\Elim{\lexists}$ مقدمتها
+الصغرى. وفي المثال مقطعان من هذا النوع، يحتوي كل منهما ثلاثة وقائع من
+$!A \lif !B$. وهذا هو التعريف الرسمي.
+
+\begin{defn}
+\emph{المقطع} في~!!{proof}~$\delta$ من~\Log{N1i} هو متتالية الوقائع
+$!A_1$، \dots، $!A_n$ لـ~!!{formula}~$!A$ نفسها في~$\delta$، بحيث:
+\begin{enumerate}
+  \item لا تكون~$!A_1$ نتيجة~\Elim{\lor} أو~\Elim{\lexists}؛
+  \item لا تكون~$!A_n$ مقدمةً صغرى لـ~\Elim{\lor} أو~\Elim{\lexists}؛
+  \item لكل~$i = 1$، \dots، $n-1$، تكون~$!A_i$ مقدمةً صغرى لـ
+  \Elim{\lor} أو~\Elim{\lexists}، وتكون~$!A_{i+1}$ نتيجة ذلك الاستدلال.
+\end{enumerate}
+و\emph{طول} هذا المقطع هو~$n$.
+\end{defn}
+
+ليس كل مقطع هدفًا للحذف (أي التفافًا). وتسمى المقاطع التي تكون أهدافًا
+\emph{قطوعًا}.
+
+\begin{defn}
+\emph{القطع} مقطع تكون فيه~$!A_n$ المقدمة الكبرى لاستدلال~!!a{elimination}،
+ويكون إما~$n=1$ و$!A_1=!A_n$ نتيجة استدلال~!!a{introduction} أو~\FalseInt،
+وإما~$n>1$.
+\end{defn}
+
+لاحظ أن مقطع القطع لا يلزم أن يبدأ بنتيجة قاعدة~!!a{introduction}. وكل ما
+يلزم هو أن ينتهي بالمقدمة الكبرى لقاعدة~!!a{elimination}. لكن المقطع الذي
+طوله~$1$ يجب أن يكون نتيجة قاعدة~!!{introduction} أو~\FalseInt كي يُعد
+قطعًا.
+
+\begin{defn}
+\emph{رتبة} القطع هي~$\depth{!A}$. و\emph{رتبة القطع}
+$\cutrank{\delta}$ لـ~!!a{proof}~$\delta$ هي أكبر رتب القطوع في~$\delta$،
+وتُعرَّف بأنها~$0$ إذا لم توجد قطوع. ويكون القطع \emph{أقصى} في~$\delta$
+إذا كانت رتبته~$\cutrank{\delta}$؛ أي إذا كانت رتبته أكبر ما يمكن.
+و\emph{طول القطع} لـ~$\delta$ هو مجموع أطوال جميع قطوعه القصوى، ويُعرَّف
+بأنه~$0$ إذا لم توجد قطوع.
+\end{defn}
+
+\end{document}

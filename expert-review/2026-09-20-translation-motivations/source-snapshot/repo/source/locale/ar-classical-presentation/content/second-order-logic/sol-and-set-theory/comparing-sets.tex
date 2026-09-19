@@ -1,0 +1,81 @@
+% Part: second-order-logic
+% Chapter: sol-and-set-theory
+% Section: comparing-sets
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sol}{set}{cmp}
+
+\olsection{مقارنة المجموعات}
+
+\begin{prop}
+!!{formula}~$\lforall[{\OLId{latin-ordinary}{x}}][({\OLId{latin-looped}{X}}({\OLId{latin-ordinary}{x}}) \lif {\OLId{latin-looped}{Y}}({\OLId{latin-ordinary}{x}}))]$ تعريف لعلاقة الاحتواء
+الجزئي؛ فـ$\Sat{{\OLId{latin-looped}{M}}}{\lforall[{\OLId{latin-ordinary}{x}}][({\OLId{latin-looped}{X}}({\OLId{latin-ordinary}{x}}) \lif {\OLId{latin-looped}{Y}}({\OLId{latin-ordinary}{x}}))]}[{\OLId{latin-ordinary}{s}}]$ إذا وفقط
+إذا~${\OLId{latin-ordinary}{s}}({\OLId{latin-looped}{X}}) \subseteq {\OLId{latin-ordinary}{s}}({\OLId{latin-looped}{Y}})$.
+\end{prop}
+
+\begin{prop}
+!!{formula}~$\lforall[{\OLId{latin-ordinary}{x}}][({\OLId{latin-looped}{X}}({\OLId{latin-ordinary}{x}}) \liff {\OLId{latin-looped}{Y}}({\OLId{latin-ordinary}{x}}))]$ تعريف لهوية المجموعات؛
+فـ$\Sat{{\OLId{latin-looped}{M}}}{\lforall[{\OLId{latin-ordinary}{x}}][({\OLId{latin-looped}{X}}({\OLId{latin-ordinary}{x}}) \liff {\OLId{latin-looped}{Y}}({\OLId{latin-ordinary}{x}}))]}[{\OLId{latin-ordinary}{s}}]$ إذا وفقط
+إذا~${\OLId{latin-ordinary}{s}}({\OLId{latin-looped}{X}}) = {\OLId{latin-ordinary}{s}}({\OLId{latin-looped}{Y}})$.
+\end{prop}
+
+\begin{prop}
+!!{formula}~$\lexists[{\OLId{latin-ordinary}{x}}][{\OLId{latin-looped}{X}}({\OLId{latin-ordinary}{x}})]$ تعريف لعدم الخلو؛
+فـ$\Sat{{\OLId{latin-looped}{M}}}{\lexists[{\OLId{latin-ordinary}{x}}][{\OLId{latin-looped}{X}}({\OLId{latin-ordinary}{x}})]}[{\OLId{latin-ordinary}{s}}]$ إذا وفقط إذا~${\OLId{latin-ordinary}{s}}({\OLId{latin-looped}{X}}) \neq \emptyset$.
+\end{prop}
+
+قولنا إن المجموعة~${\OLId{latin-looped}{X}}$ لا تزيد حجمًا على المجموعة~${\OLId{latin-looped}{Y}}$، أي
+$\cardle{{\OLId{latin-looped}{X}}}{{\OLId{latin-looped}{Y}}}$، معناه وجود دالة !!a{injective}~${\OLId{latin-ordinary}{f}}\colon {\OLId{latin-looped}{X}} \to {\OLId{latin-looped}{Y}}$.
+ولما أمكن التعبير عن تباين الدالة وعن وقوع قيمها عند عناصر~${\OLId{latin-looped}{X}}$
+في~${\OLId{latin-looped}{Y}}$، أمكن تعريف علاقة عدم الزيادة في الحجم بين مجموعات المجال
+الجزئية.
+
+\begin{prop}
+الصيغة
+\[
+\lexists[{\OLId{latin-ordinary}{u}}][(\lforall[{\OLId{latin-ordinary}{x}}][({\OLId{latin-looped}{X}}({\OLId{latin-ordinary}{x}}) \lif {\OLId{latin-looped}{Y}}({\OLId{latin-ordinary}{u}}({\OLId{latin-ordinary}{x}})))] \land \lforall[{\OLId{latin-ordinary}{x}}][\lforall[{\OLId{latin-ordinary}{y}}][(\eq[{\OLId{latin-ordinary}{u}}({\OLId{latin-ordinary}{x}})][{\OLId{latin-ordinary}{u}}({\OLId{latin-ordinary}{y}})] \lif
+      \eq[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{y}}])]])]
+\]
+تعريف لعلاقة عدم الزيادة في الحجم.
+\end{prop}
+
+ومجموعتان متساويتان حجمًا، أو «متكافئتان عدديًا»،
+$\cardeq{{\OLId{latin-looped}{X}}}{{\OLId{latin-looped}{Y}}}$، إذا وفقط إذا وجدت بينهما دالة
+!!a{bijective}~${\OLId{latin-ordinary}{f}}\colon {\OLId{latin-looped}{X}} \to {\OLId{latin-looped}{Y}}$.
+
+\begin{prop}
+الصيغة
+\begin{multline*}
+  \lexists[{\OLId{latin-ordinary}{u}}][(\lforall[{\OLId{latin-ordinary}{x}}][({\OLId{latin-looped}{X}}({\OLId{latin-ordinary}{x}}) \lif {\OLId{latin-looped}{Y}}({\OLId{latin-ordinary}{u}}({\OLId{latin-ordinary}{x}})))] \land {}\\
+    \lforall[{\OLId{latin-ordinary}{x}}][\lforall[{\OLId{latin-ordinary}{y}}][(({\OLId{latin-looped}{X}}({\OLId{latin-ordinary}{x}}) \land {\OLId{latin-looped}{X}}({\OLId{latin-ordinary}{y}}) \land \eq[{\OLId{latin-ordinary}{u}}({\OLId{latin-ordinary}{x}})][{\OLId{latin-ordinary}{u}}({\OLId{latin-ordinary}{y}})]) \lif \eq[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{y}}])]]
+  \land {} \\\lforall[{\OLId{latin-ordinary}{y}}][({\OLId{latin-looped}{Y}}({\OLId{latin-ordinary}{y}}) \lif \lexists[{\OLId{latin-ordinary}{x}}][({\OLId{latin-looped}{X}}({\OLId{latin-ordinary}{x}})
+      \land \eq[{\OLId{latin-ordinary}{y}}][{\OLId{latin-ordinary}{u}}({\OLId{latin-ordinary}{x}})])])])]
+\end{multline*}
+تعريف لعلاقة التكافؤ العددي.
+\end{prop}
+
+وسنستعمل اختصارًا لهذه !!{formula}s الرموز
+${\OLId{latin-looped}{X}} \subseteq {\OLId{latin-looped}{Y}}$، و${\OLId{latin-looped}{X}} = {\OLId{latin-looped}{Y}}$، و${\OLId{latin-looped}{X}} \neq \emptyset$، و$\cardle{{\OLId{latin-looped}{X}}}{{\OLId{latin-looped}{Y}}}$،
+و$\cardeq{{\OLId{latin-looped}{X}}}{{\OLId{latin-looped}{Y}}}$، بهذا الترتيب.
+وقد يوقع هذا الاستعمال في التباس؛ فالرموز نفسها نستعملها حين
+نتكلم خارج اللغة الصورية على المجموعتين~${\OLId{latin-looped}{X}}$ و${\OLId{latin-looped}{Y}}$.
+أما هنا فهي اختصارات لـ!!{formula}s من الرتبة الثانية،
+ترد فيها متغيرات العلاقات الأحادية الموضع~${\OLId{latin-looped}{X}}$ و${\OLId{latin-looped}{Y}}$.
+
+\begin{prop}
+!!{sentence}~$\lforall[{\OLId{latin-looped}{X}}][\lforall[{\OLId{latin-looped}{Y}}][((\cardle{{\OLId{latin-looped}{X}}}{{\OLId{latin-looped}{Y}}} \land
+    \cardle{{\OLId{latin-looped}{Y}}}{{\OLId{latin-looped}{X}}}) \lif \cardeq{{\OLId{latin-looped}{X}}}{{\OLId{latin-looped}{Y}}})]]$ صحيحة منطقيًا.
+\end{prop}
+
+\begin{proof}
+إرضاء !!{sentence} في !!a{structure}~$\Struct{M}$
+يعني أنه لكل مجموعتين جزئيتين~${\OLId{latin-looped}{X}} \subseteq \Domain{{\OLId{latin-looped}{M}}}$
+و${\OLId{latin-looped}{Y}} \subseteq \Domain{{\OLId{latin-looped}{M}}}$ يحصل~$\cardeq{{\OLId{latin-looped}{X}}}{{\OLId{latin-looped}{Y}}}$ متى
+حصل~$\cardle{{\OLId{latin-looped}{X}}}{{\OLId{latin-looped}{Y}}}$ و$\cardle{{\OLId{latin-looped}{Y}}}{{\OLId{latin-looped}{X}}}$.
+وهذا ثابت لـ\emph{أي} مجموعتين~${\OLId{latin-looped}{X}}$ و${\OLId{latin-looped}{Y}}$ بمبرهنة شرودر--برنشتاين.
+\end{proof}
+
+\end{document}

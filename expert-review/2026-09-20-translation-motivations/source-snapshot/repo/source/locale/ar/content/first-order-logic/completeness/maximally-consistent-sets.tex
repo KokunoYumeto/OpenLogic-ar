@@ -1,0 +1,172 @@
+% Part: first-order-logic
+% Chapter: completeness
+% Section: maximally-consistent-sets
+
+% Definition of maximally consistent sets. Properties of maximally
+% consistent sets required for the completeness proof are in
+% maximally-consistent-sets.tex in the chapter on the proof system used.
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{com}{mcs}
+\olsection{مجموعات \usetoken{P}{sentence} المتسقة القصوى}
+
+\begin{defn}[المجموعة المتسقة القصوى]
+\ollabel{mcs}
+تكون مجموعة~$\Gamma$ من~!!{sentence}s 
+\emph{متسقة قصوى} إذا وفقط إذا
+\begin{enumerate}
+\item كانت~$\Gamma$ متسقة، و
+\item إذا كان~$\Gamma \subsetneq \Gamma'$، كانت~$\Gamma'$ غير متسقة.
+\end{enumerate}
+\end{defn}
+
+\begin{explain}
+وفيما يأتي تعريف بديل مكافئ للتعريف السابق: تكون مجموعة~$\Gamma$ من
+الجمل \emph{متسقة قصوى} إذا وفقط إذا
+\begin{enumerate}
+\item كانت~$\Gamma$ متسقة، و
+\item إذا كانت~$\Gamma \cup \{ !A \}$ متسقة، كان~$!A \in \Gamma$.
+\end{enumerate}
+وبعبارة أخرى، لا يمكن إضافة~!!{sentence}s غير الموجودة أصلًا في
+$\Gamma$ إلى مجموعة متسقة قصوى~$\Gamma$ من دون جعل المجموعة الأكبر
+الناتجة غير متسقة.
+\end{explain}
+
+\begin{explain}
+للمجموعات المتسقة القصوى أهمية في برهان الاكتمال، لأننا نستطيع ضمان
+أن كل مجموعة متسقة من~!!{sentence}s~$\Gamma$ محتواة في مجموعة متسقة
+قصوى~$\Gamma^*$، وأن المجموعة المتسقة القصوى تحتوي، لكل~!!{sentence}
+$!A$، إما~$!A$ وإما نفيها~$\lnot !A$. ويصدق ذلك بوجه خاص على
+!!{sentence}s الذرية؛ ومن ثم نستطيع، انطلاقًا من مجموعة متسقة قصوى في
+لغة وُسعت توسيعًا مناسبًا بـ!!{constant}s، أن نبني~!!a{structure}
+يُعرّف فيه تأويل~!!{predicate}s بحسب أي~!!{sentence}s ذرية تنتمي إلى
+$\Gamma^*$. ويمكن عندئذ إثبات أن هذا~!!{structure} يجعل كل
+!!{sentence}s في~$\Gamma^*$، وبالتالي في~$\Gamma$ أيضًا، صادقة. ويتطلب
+برهان هذه الحقيقة الأخيرة أن يكون~$\lnot !A \in \Gamma^*$ إذا وفقط
+إذا كان~$!A \notin \Gamma^*$، وأن يكون
+$(!A \lor !B) \in \Gamma^*$ إذا وفقط إذا كان~$!A \in \Gamma^*$ أو
+$!B \in \Gamma^*$، وهلم جرًا.
+\end{explain}
+
+\begin{prop}
+\ollabel{prop:mcs}
+افترض أن~$\Gamma$ متسقة قصوى. عندئذ:
+\begin{enumerate}
+\item \ollabel{prop:mcs-prov-in} إذا كان~$\Gamma \Proves !A$، كان
+$!A \in \Gamma$.
+
+\item \ollabel{prop:mcs-either-or} لكل~$!A$، إما~$!A \in \Gamma$ أو
+$\lnot !A \in \Gamma$.
+
+\tagitem{prvAnd}{\ollabel{prop:mcs-and} يكون
+$(!A \land !B) \in \Gamma$ إذا وفقط إذا كان كل من
+$!A \in \Gamma$ و$!B \in \Gamma$.}{}
+
+\tagitem{prvOr}{\ollabel{prop:mcs-or} يكون
+$(!A \lor !B) \in \Gamma$ إذا وفقط إذا كان إما~$!A \in \Gamma$
+وإما~$!B \in \Gamma$.}{}
+
+\tagitem{prvIf}{\ollabel{prop:mcs-if} يكون
+$(!A \lif !B) \in \Gamma$ إذا وفقط إذا كان إما~$!A \notin \Gamma$
+وإما~$!B \in \Gamma$.}{}
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+لنفترض في كل ما يأتي أن~$\Gamma$ متسقة قصوى.
+\begin{enumerate}
+\item إذا كان~$\Gamma \Proves !A$، كان~$!A \in \Gamma$.
+
+افترض~$\Gamma \Proves !A$. وافترض، طلبًا للتناقض، أن
+$!A \notin \Gamma$. لما كانت~$\Gamma$ متسقة قصوى، تكون
+$\Gamma \cup \{!A\}$ غير متسقة، ومن ثم
+$\Gamma \cup \{!A\} \Proves \lfalse$. وبموجب
+\tagrefs{prfSC/{fol:seq:prv:prop:provability-contr},prfND/{fol:ntd:prv:prop:provability-contr}}،
+تكون~$\Gamma$ غير متسقة. وهذا يناقض افتراض اتساقها. لذلك لا يمكن أن
+يكون~$!A \notin \Gamma$، فيكون~$!A \in \Gamma$.
+
+\item لكل~$!A$، إما~$!A \in \Gamma$ أو~$\lnot !A \in \Gamma$.
+
+افترض، طلبًا للتناقض، أنه يوجد~$!A$ بحيث~$!A \notin \Gamma$ و
+$\lnot !A \notin \Gamma$. ولأن~$\Gamma$ متسقة قصوى، تكون
+$\Gamma \cup \{!A\}$ و$\Gamma \cup \{\lnot !A\}$ كلتاهما غير
+متسقة، فيكون~$\Gamma \cup \{!A\} \Proves \lfalse$ و
+$\Gamma \cup \{\lnot !A\} \Proves \lfalse$. وبموجب
+\tagrefs{prfSC/{fol:seq:prv:prop:provability-exhaustive},prfND/{fol:ntd:prv:prop:provability-exhaustive}}،
+تكون~$\Gamma$ غير متسقة، وهذا تناقض. ومن ثم لا يوجد~!!a{sentence}
+$!A$ كهذا، ولكل~$!A$ إما~$!A \in \Gamma$ أو
+$\lnot !A \in \Gamma$.
+
+\tagitem{defAnd}{}{%
+\iftag{probAnd}{تمرين.}{%
+يكون~$(!A \land !B) \in \Gamma$ إذا وفقط إذا كان كل من
+$!A \in \Gamma$ و$!B \in \Gamma$:
+
+في الاتجاه الأمامي، افترض~$(!A \land !B) \in \Gamma$. عندئذ
+$\Gamma \Proves !A \land !B$. وبموجب
+\tagrefs{prfSC/{fol:seq:prv:prop:provability-land-left},prfND/{fol:ntd:prv:prop:provability-land-left}}،
+يكون~$\Gamma \Proves !A$ و$\Gamma \Proves !B$. وبموجب
+\olref{prop:mcs-prov-in}، يكون~$!A \in \Gamma$ و$!B \in \Gamma$ كما
+أردنا.
+
+وفي الاتجاه العكسي، ليكن~$!A \in \Gamma$ و$!B \in \Gamma$. عندئذ
+$\Gamma \Proves !A$ و$\Gamma \Proves !B$. وبموجب
+\tagrefs{prfSC/{fol:seq:prv:prop:provability-land-right},prfND/{fol:ntd:prv:prop:provability-land-right}}،
+يكون~$\Gamma \Proves !A \land !B$. وبموجب~\olref{prop:mcs-prov-in}،
+يكون~$(!A \land !B) \in \Gamma$.}}
+
+\tagitem{defOr}{}{%
+\iftag{probOr}{تمرين.}{%
+يكون~$(!A \lor !B) \in \Gamma$ إذا وفقط إذا كان إما
+$!A \in \Gamma$ وإما~$!B \in \Gamma$.
+
+لإثبات مقابل الاتجاه الأمامي، افترض~$!A \notin \Gamma$ و
+$!B \notin \Gamma$. نريد أن نبيّن~$(!A \lor !B) \notin \Gamma$.
+ولأن~$\Gamma$ متسقة قصوى، يكون
+$\Gamma \cup \{!A\} \Proves \lfalse$ و
+$\Gamma \cup \{!B\} \Proves \lfalse$. وبموجب
+\tagrefs{prfSC/{fol:seq:prv:prop:provability-lor-left},prfND/{fol:ntd:prv:prop:provability-lor-left}}،
+تكون~$\Gamma \cup \{(!A \lor !B)\}$ غير متسقة. ومن ثم
+$(!A \lor !B) \notin \Gamma$ كما أردنا.
+
+وفي الاتجاه العكسي، افترض~$!A \in \Gamma$ أو~$!B \in \Gamma$.
+عندئذ~$\Gamma \Proves !A$ أو~$\Gamma \Proves !B$. وبموجب
+\tagrefs{prfSC/{fol:seq:prv:prop:provability-lor-right},prfND/{fol:ntd:prv:prop:provability-lor-right}}،
+يكون~$\Gamma \Proves !A \lor !B$. وبموجب~\olref{prop:mcs-prov-in}،
+يكون~$(!A \lor !B) \in \Gamma$ كما أردنا.}}
+
+\tagitem{defIf}{}{%
+\iftag{probIf}{تمرين.}{%
+يكون~$(!A \lif !B) \in \Gamma$ إذا وفقط إذا كان إما
+$!A \notin \Gamma$ وإما~$!B \in \Gamma$:
+
+في الاتجاه الأمامي، ليكن~$(!A \lif !B) \in \Gamma$، وافترض طلبًا
+للتناقض أن~$!A \in \Gamma$ و$!B \notin \Gamma$. وبموجب هذين
+الافتراضين، يكون~$\Gamma \Proves !A \lif !B$ و
+$\Gamma \Proves !A$. وبموجب
+\tagrefs{prfSC/{fol:seq:prv:prop:provability-mp},prfND/{fol:ntd:prv:prop:provability-mp}}،
+يكون~$\Gamma \Proves !B$. لكن~\olref{prop:mcs-prov-in} تعطي عندئذ
+$!B \in \Gamma$، وهو ما يناقض~$!B \notin \Gamma$.
+
+وفي الاتجاه العكسي، تأمل أولًا حالة~$!A \notin \Gamma$. بموجب
+\olref{prop:mcs-either-or}، يكون~$\lnot !A \in \Gamma$، ومن ثم
+$\Gamma \Proves \lnot !A$. وبموجب
+\tagrefs{prfSC/{fol:seq:prv:prop:provability-lif},prfND/{fol:ntd:prv:prop:provability-lif}}،
+يكون~$\Gamma \Proves !A \lif !B$. وتطبيق~\olref{prop:mcs-prov-in}
+مرة أخرى يعطينا~$(!A \lif !B) \in \Gamma$ كما أردنا.
+
+والآن تأمل حالة~$!B \in \Gamma$. عندئذ~$\Gamma \Proves !B$، وبموجب
+\tagrefs{prfSC/{fol:seq:prv:prop:provability-lif},prfND/{fol:ntd:prv:prop:provability-lif}}،
+يكون~$\Gamma \Proves !A \lif !B$. وبموجب~\olref{prop:mcs-prov-in}،
+يكون~$(!A \lif !B) \in \Gamma$.}}
+\end{enumerate}
+\end{proof}
+
+\begin{prob}
+أكمل برهان~\olref[fol][com][mcs]{prop:mcs}.
+\end{prob}
+
+\end{document}

@@ -1,0 +1,130 @@
+% Part: lambda-calculus
+% Chapter: introduction
+% Section: primitive-recursion
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{int}{pr}
+\olsection{الدوال \usetoken{S}{lambda definable} مغلقة تحت العودية البدائية}
+
+أما العودية البدائية فتحتاج إلى برهان نبنيه على مراحل. نفرض، كما تقدم، حدين~${\OLId{latin-looped}{G}}'$ و${\OLId{latin-looped}{H}}'$، كل منهما
+!!{lambda define} الدالة المناظرة له، وهما ${\OLId{latin-ordinary}{g}}$ و${\OLId{latin-ordinary}{h}}$ بالترتيب. ونطلب حدًا~${\OLId{latin-looped}{F}}$
+!!{lambda define}s الدالة~${\OLId{latin-ordinary}{f}}$ التي تعريفها
+\begin{align*}
+{\OLId{latin-ordinary}{f}}({\OLMathNumeral{0}}, \vec {\OLId{latin-ordinary}{z}}) & = {\OLId{latin-ordinary}{g}}(\vec {\OLId{latin-ordinary}{z}}) \\
+{\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}}+{\OLMathNumeral{1}}, \vec {\OLId{latin-ordinary}{z}}) & = {\OLId{latin-ordinary}{h}}({\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}},\vec {\OLId{latin-ordinary}{z}}), \vec {\OLId{latin-ordinary}{z}}).
+\end{align*}
+فإذا أعطينا، على العموم، حدي لامبدا~${\OLId{latin-looped}{G}}'$ و${\OLId{latin-looped}{H}}'$، كفانا أن نجد حدًا~${\OLId{latin-looped}{F}}$ يحقق
+\begin{align*}
+{\OLId{latin-looped}{F}}(\num{{\OLMathNumeral{0}}}, \vec {\OLId{latin-ordinary}{z}}) & \equiv {\OLId{latin-looped}{G}}(\vec {\OLId{latin-ordinary}{z}}) \\
+{\OLId{latin-looped}{F}}(\overline{{\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}}}, \vec {\OLId{latin-ordinary}{z}}) & \equiv {\OLId{latin-looped}{H}}(\num{{\OLId{latin-ordinary}{n}}}, {\OLId{latin-looped}{F}}(\num{{\OLId{latin-ordinary}{n}}}, \vec {\OLId{latin-ordinary}{z}}), \vec {\OLId{latin-ordinary}{z}})
+\end{align*}
+لكل عدد طبيعي~${\OLId{latin-ordinary}{n}}$. ذلك أن كون~${\OLId{latin-looped}{G}}'$ و${\OLId{latin-looped}{H}}'$ كل منهما !!{lambda define} دالته،
+${\OLId{latin-ordinary}{g}}$ و${\OLId{latin-ordinary}{h}}$ بالترتيب، يضمن أننا إذا وضعنا الأعداد~$\num{\vec {\OLId{latin-ordinary}{m}}}$ موضع~$\vec {\OLId{latin-ordinary}{z}}$،
+انتهى اختزال~${\OLId{latin-looped}{F}}(\num{{\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}}}, \num{\vec {\OLId{latin-ordinary}{m}}})$ إلى الجواب الصحيح في صورة سوية.
+
+ونردّ هذا المطلوب إلى إيجاد حد~${\OLId{latin-looped}{F}}$ يحقق
+\begin{align*}
+{\OLId{latin-looped}{F}}(\num {\OLMathNumeral{0}}) & \equiv {\OLId{latin-looped}{G}} \\
+{\OLId{latin-looped}{F}}(\overline {{\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}}}) & \equiv {\OLId{latin-looped}{H}}(\num{{\OLId{latin-ordinary}{n}}},{\OLId{latin-looped}{F}}(\num{{\OLId{latin-ordinary}{n}}}))
+\intertext{لكل عدد طبيعي ${\OLId{latin-ordinary}{n}}$، حيث}
+{\OLId{latin-looped}{G}} & = \lambd[\vec {\OLId{latin-ordinary}{z}}][{\OLId{latin-looped}{G}}'(\vec {\OLId{latin-ordinary}{z}})] \text{ و}\\
+{\OLId{latin-looped}{H}}({\OLId{latin-ordinary}{u}},{\OLId{latin-ordinary}{v}}) & = \lambd[\vec {\OLId{latin-ordinary}{z}}][{\OLId{latin-looped}{H}}'({\OLId{latin-ordinary}{u}},{\OLId{latin-ordinary}{v}}(\vec {\OLId{latin-ordinary}{z}}),\vec {\OLId{latin-ordinary}{z}})].
+\end{align*}
+فبهذا التصرف في تجريد لامبدا نستغني عن تتبع المعلمات الزائدة
+$\vec {\OLId{latin-ordinary}{z}}$ على حدة؛ إذ تدخل في ترميز لامبدا نفسه.
+
+ولتعريف الحد~${\OLId{latin-looped}{F}}$ لا بد أولًا من وسيلة نمثل بها الأزواج المرتبة ونتصرف فيها، وهذا ما تثبته اللمّة التالية.
+
+\begin{lem}
+يمكن اختيار حد لامبدا~${\OLId{latin-looped}{D}}$ بحيث يتحقق، لأي حدي لامبدا~${\OLId{latin-looped}{M}}$ و${\OLId{latin-looped}{N}}$،
+${\OLId{latin-looped}{D}}({\OLId{latin-looped}{M}},{\OLId{latin-looped}{N}})(\num{{\OLMathNumeral{0}}}) \red {\OLId{latin-looped}{M}}$ و${\OLId{latin-looped}{D}}({\OLId{latin-looped}{M}},{\OLId{latin-looped}{N}})(\num{{\OLMathNumeral{1}}}) \red {\OLId{latin-looped}{N}}$.
+\end{lem}
+
+\begin{proof}
+نبدأ بتعريف حد لامبدا~${\OLId{latin-looped}{K}}$ كما يلي:
+\[
+{\OLId{latin-looped}{K}}({\OLId{latin-ordinary}{y}}) = \lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{y}}].
+\]
+فـ${\OLId{latin-looped}{K}}$، وفق اصطلاحنا، هو الحد~$\lambd[{\OLId{latin-ordinary}{y}}][\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{y}}]]$. ومعنى ذلك أن كل حد~${\OLId{latin-looped}{M}}$
+يعطي دالة ثابتة~${\OLId{latin-looped}{K}}({\OLId{latin-looped}{M}})$، تردّ القيمة~${\OLId{latin-looped}{M}}$ مهما يكن المدخل.
+
+ثم نعرّف~${\OLId{latin-looped}{D}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}},{\OLId{latin-ordinary}{z}})$ بالمعادلة~${\OLId{latin-looped}{D}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}},{\OLId{latin-ordinary}{z}}) = {\OLId{latin-ordinary}{z}} ({\OLId{latin-looped}{K}}({\OLId{latin-ordinary}{y}})){\OLId{latin-ordinary}{x}}$، فنحصل على
+\begin{align*}
+{\OLId{latin-looped}{D}}({\OLId{latin-looped}{M}},{\OLId{latin-looped}{N}},\num {\OLMathNumeral{0}}) & \red \num {\OLMathNumeral{0}} ({\OLId{latin-looped}{K}}({\OLId{latin-looped}{N}})) {\OLId{latin-looped}{M}} \red {\OLId{latin-looped}{M}} \text{ و}\\
+{\OLId{latin-looped}{D}}({\OLId{latin-looped}{M}},{\OLId{latin-looped}{N}},\num {\OLMathNumeral{1}}) & \red \num {\OLMathNumeral{1}} ({\OLId{latin-looped}{K}}({\OLId{latin-looped}{N}})) {\OLId{latin-looped}{M}} \red {\OLId{latin-looped}{K}}({\OLId{latin-looped}{N}}) {\OLId{latin-looped}{M}} \red {\OLId{latin-looped}{N}},
+\end{align*}
+وبذلك يتم المطلوب.
+\end{proof}
+
+فالمقصود أن نجعل~${\OLId{latin-looped}{D}}({\OLId{latin-looped}{M}},{\OLId{latin-looped}{N}})$ تمثيلًا للزوج~$\tuple{{\OLId{latin-looped}{M}}, {\OLId{latin-looped}{N}}}$. ومتى كان~${\OLId{latin-looped}{P}}$
+تمثيلًا لزوج من هذا القبيل، كان~${\OLId{latin-looped}{P}}(\num {\OLMathNumeral{0}})$ و${\OLId{latin-looped}{P}}(\num {\OLMathNumeral{1}})$ تمثيلين لإسقاطيه الأيسر والأيمن،
+أي~$({\OLId{latin-looped}{P}})_{\OLMathNumeral{0}}$ و$({\OLId{latin-looped}{P}})_{\OLMathNumeral{1}}$. ومن الآن نعتمد هذين الرمزين الأخيرين.
+
+\begin{lem}
+العودية البدائية تحفظ كون الدوال~!!{lambda definable}.
+\end{lem}
+
+\begin{proof}
+المطلوب أن نجد، لأي حدين~${\OLId{latin-looped}{G}}$ و${\OLId{latin-looped}{H}}$، حدًا~${\OLId{latin-looped}{F}}$ تتحقق له
+\begin{align*}
+{\OLId{latin-looped}{F}}(\num{{\OLMathNumeral{0}}}) & \equiv {\OLId{latin-looped}{G}} \\
+{\OLId{latin-looped}{F}}(\num{{\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}}}) & \equiv {\OLId{latin-looped}{H}}(\num{{\OLId{latin-ordinary}{n}}}, {\OLId{latin-looped}{F}}(\num{{\OLId{latin-ordinary}{n}}}))
+\end{align*}
+عند كل عدد طبيعي~${\OLId{latin-ordinary}{n}}$. وسبيل ذلك، إجمالًا، أن نحسب متتاليات من
+\emph{الأزواج}
+\[
+\tuple{\num {\OLMathNumeral{0}}, {\OLId{latin-looped}{F}}(\num {\OLMathNumeral{0}})}, \tuple{\num {\OLMathNumeral{1}}, {\OLId{latin-looped}{F}}(\num {\OLMathNumeral{1}})}, \dots,
+\]
+ونجعل الأعداد أدوات تكرار. فأول هذه الأزواج هو
+$\tuple{\num {\OLMathNumeral{0}}, {\OLId{latin-looped}{G}}}$. وإذا بلغنا الزوج~$\tuple{\num{{\OLId{latin-ordinary}{n}}}, {\OLId{latin-looped}{F}}(\num{{\OLId{latin-ordinary}{n}}})}$، وجب أن يكون ما يليه، وهو~$\tuple{\num{{\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}}}, {\OLId{latin-looped}{F}}(\num{{\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}}})}$،
+مكافئًا للزوج~$\tuple{\num{{\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}}}, {\OLId{latin-looped}{H}}(\num{{\OLId{latin-ordinary}{n}}}, {\OLId{latin-looped}{F}}(\num{{\OLId{latin-ordinary}{n}}}))}$. ولذلك ننشئ حد لامبدا~${\OLId{latin-looped}{T}}$ ينقلنا من كل زوج إلى تاليه في خطوة واحدة.
+
+وبيان هذا الإنشاء أن نعرّف~${\OLId{latin-looped}{T}}({\OLId{latin-ordinary}{u}})$ بالمعادلة
+\[
+{\OLId{latin-looped}{T}}({\OLId{latin-ordinary}{u}}) = \tuple{\fn{Succ}(({\OLId{latin-ordinary}{u}})_{\OLMathNumeral{0}}), {\OLId{latin-looped}{H}}(({\OLId{latin-ordinary}{u}})_{\OLMathNumeral{0}},({\OLId{latin-ordinary}{u}})_{\OLMathNumeral{1}})}.
+\]
+وحينئذ يسهل التحقق، لكل عدد~${\OLId{latin-ordinary}{n}}$، من أن
+\[
+{\OLId{latin-looped}{T}}(\tuple{\num{{\OLId{latin-ordinary}{n}}}, {\OLId{latin-looped}{M}}}) \red \tuple{\num{{\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}}}, {\OLId{latin-looped}{H}}(\num{{\OLId{latin-ordinary}{n}}}, {\OLId{latin-looped}{M}})}.
+\]
+ثم إذا أعطينا~${\OLId{latin-looped}{G}}$ و${\OLId{latin-looped}{H}}$، عرّفنا~${\OLId{latin-looped}{F}}({\OLId{latin-ordinary}{u}})$ كما سبق أن اقترحنا:
+\[
+{\OLId{latin-looped}{F}}({\OLId{latin-ordinary}{u}}) = ({\OLId{latin-ordinary}{u}}({\OLId{latin-looped}{T}},\tuple{\num {\OLMathNumeral{0}}, {\OLId{latin-looped}{G}}}))_{\OLMathNumeral{1}}.
+\]
+فإذا كان المدخل~$\num{{\OLId{latin-ordinary}{n}}}$، كرر~${\OLId{latin-looped}{F}}$ تطبيق~${\OLId{latin-looped}{T}}$ بمقدار~${\OLId{latin-ordinary}{n}}$ من المرات
+على~$\tuple{\num {\OLMathNumeral{0}}, {\OLId{latin-looped}{G}}}$، ثم أخذ المركبة الثانية. أما حالة الابتداء فهي
+\begin{enumerate}
+\item $\num{{\OLMathNumeral{0}}} ({\OLId{latin-looped}{T}}, \tuple{\num {\OLMathNumeral{0}}, {\OLId{latin-looped}{G}}}) \equiv \tuple{\num{{\OLMathNumeral{0}}}, {\OLId{latin-looped}{G}}}$
+\item ${\OLId{latin-looped}{F}}(\num{{\OLMathNumeral{0}}}) \equiv {\OLId{latin-looped}{G}}$
+\end{enumerate}
+ونثبت بالاستقراء على~${\OLId{latin-ordinary}{n}}$ العبارتين الآتيتين لكل عدد طبيعي:
+\begin{enumerate}
+\item $\num{{\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}}}({\OLId{latin-looped}{T}}, \tuple{\num{{\OLMathNumeral{0}}}, {\OLId{latin-looped}{G}}}) \equiv \tuple{\num{{\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}}}, {\OLId{latin-looped}{F}}(\num{{\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}}})}$
+\item ${\OLId{latin-looped}{F}}(\num{{\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}}}) \equiv {\OLId{latin-looped}{H}}(\num{{\OLId{latin-ordinary}{n}}}, {\OLId{latin-looped}{F}}(\num{{\OLId{latin-ordinary}{n}}}))$
+\end{enumerate}
+أما العبارة الثانية فبيانها
+\begin{align*}
+{\OLId{latin-looped}{F}}(\num{{\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}}}) & \red (\num{{\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}}}({\OLId{latin-looped}{T}}, \tuple{\num {\OLMathNumeral{0}}, {\OLId{latin-looped}{G}}}))_{\OLMathNumeral{1}} \\
+& \equiv ({\OLId{latin-looped}{T}}(\num{{\OLId{latin-ordinary}{n}}} ({\OLId{latin-looped}{T}}, \tuple{\num {\OLMathNumeral{0}}, {\OLId{latin-looped}{G}}})))_{\OLMathNumeral{1}} \\
+& \equiv ({\OLId{latin-looped}{T}}(\tuple{\num{{\OLId{latin-ordinary}{n}}}, {\OLId{latin-looped}{F}}(\num{{\OLId{latin-ordinary}{n}}})}))_{\OLMathNumeral{1}} \\
+& \equiv (\tuple{\num{{\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}}}, {\OLId{latin-looped}{H}}(\num{{\OLId{latin-ordinary}{n}}}, {\OLId{latin-looped}{F}}(\num{{\OLId{latin-ordinary}{n}}}))})_{\OLMathNumeral{1}} \\
+& \equiv {\OLId{latin-looped}{H}}(\num{{\OLId{latin-ordinary}{n}}}, {\OLId{latin-looped}{F}}(\num{{\OLId{latin-ordinary}{n}}})).
+\end{align*}
+وفي السطر قبل الأخير استعملنا فرض الاستقراء. وأما الأولى فبيانها
+\begin{align*}
+\num{{\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}}} ({\OLId{latin-looped}{T}}, \tuple{\num {\OLMathNumeral{0}}, {\OLId{latin-looped}{G}}}) &
+\equiv {\OLId{latin-looped}{T}}(\num{{\OLId{latin-ordinary}{n}}} ({\OLId{latin-looped}{T}}, \tuple{\num {\OLMathNumeral{0}}, {\OLId{latin-looped}{G}}})) \\
+& \equiv {\OLId{latin-looped}{T}}( \tuple{\num{{\OLId{latin-ordinary}{n}}}, {\OLId{latin-looped}{F}}(\num{{\OLId{latin-ordinary}{n}}})}) \\
+& \equiv \tuple{\num{{\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}}}, {\OLId{latin-looped}{H}}(\num{{\OLId{latin-ordinary}{n}}}, {\OLId{latin-looped}{F}}(\num{{\OLId{latin-ordinary}{n}}}))} \\
+& \equiv \tuple{\num{{\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}}}, {\OLId{latin-looped}{F}}(\num{{\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}}})}.
+\end{align*}
+وفي السطر الأخير استعملنا العبارة الثانية. فثبت
+${\OLId{latin-looped}{F}}(\num {\OLMathNumeral{0}}) \equiv {\OLId{latin-looped}{G}}$، وثبت أيضًا، لكل~${\OLId{latin-ordinary}{n}}$، أن~${\OLId{latin-looped}{F}}(\num {{\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}}}) \equiv {\OLId{latin-looped}{H}}(\num {\OLId{latin-ordinary}{n}},
+{\OLId{latin-looped}{F}}(\num{{\OLId{latin-ordinary}{n}}}))$؛ وذلك هو المطلوب.
+\end{proof}
+
+\end{document}
+

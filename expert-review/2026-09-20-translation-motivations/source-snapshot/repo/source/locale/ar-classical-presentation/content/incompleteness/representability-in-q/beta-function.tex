@@ -1,0 +1,166 @@
+% Part: incompleteness
+% Chapter: representability-in-q
+% Section: beta-function
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{req}{bet}
+\olsection{لمة دالة بيتا}
+
+نريد أن نجري العودية البدائية مستعينين بالجمع والضرب
+و$\Char{=}$؛ ولا يتم ذلك حتى نبني دوال للتصرف في المتتاليات.
+ولو أتيح لنا الرفع إلى قوة لهان العمل. فقد كنا، حين كانت العودية البدائية
+متاحة، نعرّف بها «العدد الأولي ذا الرتبة ${\OLId{latin-ordinary}{n}}$» ونختار ترميزًا قريب المأخذ.
+أما الآن فالعودية البدائية ليست من وسائلنا؛ بل إثبات إمكان إجرائها
+بالتصغير هو المطلوب نفسه. فلا بد إذن من طريق أدق حيلة.
+
+\begin{lem}
+\ollabel{lem:beta}
+يمكن إيجاد دالة $\beta({\OLId{latin-ordinary}{d}},{\OLId{latin-ordinary}{i}})$ لها الخاصية الآتية: لكل متتالية ${\OLId{latin-ordinary}{a}}_{\OLMathNumeral{0}}$، \dots،~${\OLId{latin-ordinary}{a}}_{\OLId{latin-ordinary}{n}}$،
+يوجد عدد~${\OLId{latin-ordinary}{d}}$ يحقق $\beta({\OLId{latin-ordinary}{d}},{\OLId{latin-ordinary}{i}})={\OLId{latin-ordinary}{a}}_{\OLId{latin-ordinary}{i}}$ لجميع ${\OLId{latin-ordinary}{i}}\le {\OLId{latin-ordinary}{n}}$.
+وهذه الدالة $\beta$ قابلة للتعريف من الدوال الأساسية بالتركيب والتصغير
+المنتظم وحدهما.
+\end{lem}
+
+فيمكن عدّ ${\OLId{latin-ordinary}{d}}$ شفرةً للمتتالية $\tuple{{\OLId{latin-ordinary}{a}}_{\OLMathNumeral{0}},\dots,{\OLId{latin-ordinary}{a}}_{\OLId{latin-ordinary}{n}}}$، وعدّ
+$\beta({\OLId{latin-ordinary}{d}},{\OLId{latin-ordinary}{i}})$ دالة تستخرج عنصرها ذا الرتبة ${\OLId{latin-ordinary}{i}}$. لكن هذا الترميز
+\emph{ليس} ترميز قوى الأعداد الأولية الذي تقدم. وما تثبته اللمة أضيق من
+كثير مما قد يتوهم: فلا تزعم إمكان وصل المتتاليات أو إلحاق العناصر بها،
+ولا تزعم حتى إمكان \emph{حساب}~${\OLId{latin-ordinary}{d}}$ من ${\OLId{latin-ordinary}{a}}_{\OLMathNumeral{0}}$، \dots،~${\OLId{latin-ordinary}{a}}_{\OLId{latin-ordinary}{n}}$
+بدوال تعرّف بالتركيب والتصغير المنتظم. وإنما تثبت وجود دالة لفك الترميز،
+بحيث لا تخلو متتالية من شفرة تفكها تلك الدالة.
+
+وأصل استعمال الرمز $\beta$ لغودل. والصعوبة، كما نؤكد مرة أخرى، في
+تعريف دالة~$\beta$ تفي بالغرض، مع الاقتصار على التركيب والتصغير؛ وإن كان
+الجمع والضرب و$\Char{=}$ من جملة ما يجوز استعماله. وللّمة براهين شتى،
+ولا تزال طريقة غودل الأولى من أوضحها. وهي مبنية على حقيقة من نظرية الأعداد،
+تسمى مبرهنة سون تزو، وتعرف تقليديًا باسم «مبرهنة الباقي الصينية».
+
+\begin{defn}
+العددان الطبيعيان ${\OLId{latin-ordinary}{a}}$ و${\OLId{latin-ordinary}{b}}$ \emph{أوليان فيما بينهما} متى كان
+قاسمهما المشترك الأكبر~${\OLMathNumeral{1}}$؛ أي لم يكن لهما قاسم مشترك غيره.
+\end{defn}
+
+\begin{defn}
+نقول إن العددين الطبيعيين ${\OLId{latin-ordinary}{a}}$ و${\OLId{latin-ordinary}{b}}$ \emph{متطابقان بترديد~${\OLId{latin-ordinary}{c}}$}، ونكتب
+${\OLId{latin-ordinary}{a}}\equiv {\OLId{latin-ordinary}{b}}\mod {\OLId{latin-ordinary}{c}}$، إذا وفقط إذا كان ${\OLId{latin-ordinary}{c}}\mid({\OLId{latin-ordinary}{a}}-{\OLId{latin-ordinary}{b}})$.
+ومعنى ذلك أن باقي قسمتهما على~${\OLId{latin-ordinary}{c}}$ واحد.
+\end{defn}
+
+ونص مبرهنة سون تزو:
+\begin{thm}
+إذا كانت ${\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}}$، \dots،~${\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{n}}$ أولية فيما بينها مثنى مثنى، وأخذنا
+${\OLId{latin-ordinary}{y}}_{\OLMathNumeral{0}}$، \dots،~${\OLId{latin-ordinary}{y}}_{\OLId{latin-ordinary}{n}}$ أعدادًا كيفما اتفقت، أمكن إيجاد عدد ${\OLId{latin-ordinary}{z}}$ يحقق
+\begin{align*}
+{\OLId{latin-ordinary}{z}} & \equiv {\OLId{latin-ordinary}{y}}_{\OLMathNumeral{0}} \mod {\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}} \\
+{\OLId{latin-ordinary}{z}} & \equiv {\OLId{latin-ordinary}{y}}_{\OLMathNumeral{1}} \mod {\OLId{latin-ordinary}{x}}_{\OLMathNumeral{1}} \\
+& \vdots  \\
+{\OLId{latin-ordinary}{z}} & \equiv {\OLId{latin-ordinary}{y}}_{\OLId{latin-ordinary}{n}} \mod {\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{n}}.
+\end{align*}
+\end{thm}
+
+ووجه الانتفاع بمبرهنة سون تزو هنا أن تكون ${\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}}$، \dots،~${\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{n}}$
+أكبر من ${\OLId{latin-ordinary}{y}}_{\OLMathNumeral{0}}$، \dots،~${\OLId{latin-ordinary}{y}}_{\OLId{latin-ordinary}{n}}$ على الترتيب؛ فعندئذ نعدّ ${\OLId{latin-ordinary}{z}}$
+شفرةً للمتتالية $\tuple{{\OLId{latin-ordinary}{y}}_{\OLMathNumeral{0}},\dots,{\OLId{latin-ordinary}{y}}_{\OLId{latin-ordinary}{n}}}$. وأما استرداد~${\OLId{latin-ordinary}{y}}_{\OLId{latin-ordinary}{i}}$
+فبقسمة ${\OLId{latin-ordinary}{z}}$ على ${\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{i}}$ وأخذ الباقي، لا بعملية أخرى.
+فالمطلوب لاستخدام هذا الترميز إيجاد قيم مناسبة لـ${\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}}$، \dots،~${\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{n}}$.
+
+ويمهّد لذلك أمران. فلتكن ${\OLId{latin-ordinary}{y}}_{\OLMathNumeral{0}}$، \dots،~${\OLId{latin-ordinary}{y}}_{\OLId{latin-ordinary}{n}}$ معطاة، ولنضع
+\begin{align*}
+{\OLId{latin-ordinary}{j}} &= \max({\OLId{latin-ordinary}{n}}, {\OLId{latin-ordinary}{y}}_{\OLMathNumeral{0}} + {\OLMathNumeral{1}}, \dots, {\OLId{latin-ordinary}{y}}_{\OLId{latin-ordinary}{n}} + {\OLMathNumeral{1}}), \\
+{\OLId{latin-ordinary}{m}} &= \lcm({\OLMathNumeral{1}},\dots,{\OLId{latin-ordinary}{j}}),
+\end{align*}
+ثم نضع
+\begin{align*}
+{\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}} & = {\OLMathNumeral{1}} + {\OLId{latin-ordinary}{m}} \\
+{\OLId{latin-ordinary}{x}}_{\OLMathNumeral{1}} & = {\OLMathNumeral{1}} + {\OLMathNumeral{2}} \cdot {\OLId{latin-ordinary}{m}} \\
+{\OLId{latin-ordinary}{x}}_{\OLMathNumeral{2}} & = {\OLMathNumeral{1}} + {\OLMathNumeral{3}} \cdot {\OLId{latin-ordinary}{m}} \\
+& \vdots  \\
+{\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{n}} & = {\OLMathNumeral{1}} + ({\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}}) \cdot {\OLId{latin-ordinary}{m}}
+\end{align*}
+فنحصل على الخاصيتين الآتيتين:
+\begin{enumerate}
+\item\ollabel{rel-prime} كل اثنين مختلفين من الأعداد ${\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}},\dots,{\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{n}}$ أوليان فيما بينهما.
+\item\ollabel{less} لكل رتبة ${\OLId{latin-ordinary}{i}}$ تصدق ${\OLId{latin-ordinary}{y}}_{\OLId{latin-ordinary}{i}}<{\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{i}}$.
+\end{enumerate}
+أما \olref{rel-prime}، فبرهانه بالخلف. لو كان ${\OLId{latin-ordinary}{p}}$ عددًا أوليًا، وكان
+${\OLId{latin-ordinary}{p}}\mid {\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{i}}$ و${\OLId{latin-ordinary}{p}}\mid {\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{k}}$ لرتبتين مختلفتين، لكان ${\OLId{latin-ordinary}{p}}\mid{\OLMathNumeral{1}}+({\OLId{latin-ordinary}{i}}+{\OLMathNumeral{1}}){\OLId{latin-ordinary}{m}}$ و
+${\OLId{latin-ordinary}{p}}\mid{\OLMathNumeral{1}}+({\OLId{latin-ordinary}{k}}+{\OLMathNumeral{1}}){\OLId{latin-ordinary}{m}}$. فيقسم ${\OLId{latin-ordinary}{p}}$ الفرق بينهما:
+\[
+({\OLMathNumeral{1}} + ({\OLId{latin-ordinary}{i}}+{\OLMathNumeral{1}}){\OLId{latin-ordinary}{m}}) - ({\OLMathNumeral{1}}+ ({\OLId{latin-ordinary}{k}}+{\OLMathNumeral{1}}){\OLId{latin-ordinary}{m}}) = ({\OLId{latin-ordinary}{i}}-{\OLId{latin-ordinary}{k}}) {\OLId{latin-ordinary}{m}}.
+\]
+لكن ${\OLId{latin-ordinary}{p}}$، إذ يقسم ${\OLMathNumeral{1}}+({\OLId{latin-ordinary}{i}}+{\OLMathNumeral{1}}){\OLId{latin-ordinary}{m}}$، لا يقسم ${\OLId{latin-ordinary}{m}}$؛ وإلا بقي في القسمة
+الأولى~${\OLMathNumeral{1}}$. فلا بد أن يقسم ${\OLId{latin-ordinary}{p}}$ العدد ${\OLId{latin-ordinary}{i}}-{\OLId{latin-ordinary}{k}}$، لأنه يقسم
+$({\OLId{latin-ordinary}{i}}-{\OLId{latin-ordinary}{k}}){\OLId{latin-ordinary}{m}}$. ومقدار $\left|{\OLId{latin-ordinary}{i}}-{\OLId{latin-ordinary}{k}}\right|$ لا يزيد على~${\OLId{latin-ordinary}{n}}$؛ وقد جعلنا
+${\OLId{latin-ordinary}{j}}\geq {\OLId{latin-ordinary}{n}}$، فيلزم ${\OLId{latin-ordinary}{p}}\mid {\OLId{latin-ordinary}{m}}$، وهو التناقض نفسه.
+فلا عدد أوليًا يقسم ${\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{i}}$ و${\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{k}}$ معًا.
+وأما~\olref{less} فيظهر من المتباينات ${\OLId{latin-ordinary}{y}}_{\OLId{latin-ordinary}{i}}<{\OLId{latin-ordinary}{j}}\leq {\OLId{latin-ordinary}{m}}<{\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{i}}$.
+
+نعود الآن إلى برهان لمة دالة $\beta$. ووسائلنا هي ${\OLMathNumeral{0}}$ والخلف
+والجمع والضرب و$\Char{=}$ والإسقاطات، وما يتولد منها بالتركيب
+وبالتصغير المطبق على دوال منتظمة. ويجوز استعمال العلاقة متى أمكن تعريف
+دالتها المميزة بهذه الوسائل. وعلى نحو ما تقدم، يثبت انغلاق صنف هذه
+العلاقات تحت التركيبات البوليانية والتكميم المحدود. ومن أمثلة ذلك:
+\begin{align*}
+\fn{not}({\OLId{latin-ordinary}{x}}) & \defis \Char{=}({\OLId{latin-ordinary}{x}},{\OLMathNumeral{0}})\\
+\bmin{{\OLId{latin-ordinary}{x}} \leq {\OLId{latin-ordinary}{z}}}{{\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})} & \defis \umin{{\OLId{latin-ordinary}{x}}}{({\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}}) \lor {\OLId{latin-ordinary}{x}} = {\OLId{latin-ordinary}{z}})}\\
+\bexists{{\OLId{latin-ordinary}{x}} \leq {\OLId{latin-ordinary}{z}}}{{\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})} & \defiff {\OLId{latin-looped}{R}}(\bmin{{\OLId{latin-ordinary}{x}} \leq {\OLId{latin-ordinary}{z}}}{{\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})}, {\OLId{latin-ordinary}{y}})
+\end{align*}
+ثم يثبت أن الأشياء الآتية جميعًا قابلة للتعريف من غير عودية بدائية:
+\begin{enumerate}
+\item دالة المزاوجة المعطاة بـ ${\OLId{latin-looped}{J}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})=\frac{{\OLMathNumeral{1}}}{{\OLMathNumeral{2}}}[({\OLId{latin-ordinary}{x}}+{\OLId{latin-ordinary}{y}})({\OLId{latin-ordinary}{x}}+{\OLId{latin-ordinary}{y}}+{\OLMathNumeral{1}})]+{\OLId{latin-ordinary}{x}}$؛
+% maybe explain more what is going on here, a bit confusing.
+\item ودالتا الإسقاط المعطاتان بـ
+\begin{align*}
+{\OLId{latin-looped}{K}}({\OLId{latin-ordinary}{z}}) & = \bmin{{\OLId{latin-ordinary}{x}} \leq {\OLId{latin-ordinary}{z}}}{\bexists{{\OLId{latin-ordinary}{y}} \leq {\OLId{latin-ordinary}{z}}}{{\OLId{latin-ordinary}{z}} = {\OLId{latin-looped}{J}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})}},\\
+{\OLId{latin-looped}{L}}({\OLId{latin-ordinary}{z}}) & = \bmin{{\OLId{latin-ordinary}{y}} \leq {\OLId{latin-ordinary}{z}}}{\bexists{{\OLId{latin-ordinary}{x}} \leq {\OLId{latin-ordinary}{z}}}{{\OLId{latin-ordinary}{z}} = {\OLId{latin-looped}{J}}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})}};
+\end{align*}
+\item وعلاقة كون عدد أصغر من آخر، ${\OLId{latin-ordinary}{x}}<{\OLId{latin-ordinary}{y}}$؛
+\item وعلاقة القسمة، ${\OLId{latin-ordinary}{x}}\mid {\OLId{latin-ordinary}{y}}$؛
+% \item $x \tsub y$
+% \item $\fn{Prime}(x)$
+% \item Assuming $p$ is prime, the relation ``$x$ is a power of $p$'':
+% \[
+% \bforall{y \leq x}{(y \mid x \lif y = 1 \lor y = x)}.
+% \]
+\item والدالة $\fn{rem}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})$، وقيمتها باقي قسمة ${\OLId{latin-ordinary}{y}}$ على~${\OLId{latin-ordinary}{x}}$.
+\end{enumerate}
+وعليه نعرّف
+\begin{align*}
+\beta^*({\OLId{latin-ordinary}{d}}_{\OLMathNumeral{0}},{\OLId{latin-ordinary}{d}}_{\OLMathNumeral{1}},{\OLId{latin-ordinary}{i}}) & = \fn{rem}({\OLMathNumeral{1}}+({\OLId{latin-ordinary}{i}}+{\OLMathNumeral{1}}) {\OLId{latin-ordinary}{d}}_{\OLMathNumeral{1}},{\OLId{latin-ordinary}{d}}_{\OLMathNumeral{0}}) \text{ و}\\
+\beta({\OLId{latin-ordinary}{d}},{\OLId{latin-ordinary}{i}}) & = \beta^*({\OLId{latin-looped}{K}}({\OLId{latin-ordinary}{d}}),{\OLId{latin-looped}{L}}({\OLId{latin-ordinary}{d}}),{\OLId{latin-ordinary}{i}}).
+\end{align*}
+وندّعي أن هذه الدالة تفي بالمطلوب. فإذا أعطيت ${\OLId{latin-ordinary}{a}}_{\OLMathNumeral{0}},\dots,{\OLId{latin-ordinary}{a}}_{\OLId{latin-ordinary}{n}}$،
+وضعنا، كما تقدم،
+\[
+{\OLId{latin-ordinary}{j}} = \max({\OLId{latin-ordinary}{n}},{\OLId{latin-ordinary}{a}}_{\OLMathNumeral{0}}+{\OLMathNumeral{1}},\dots,{\OLId{latin-ordinary}{a}}_{\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}}),
+\]
+ثم أخذنا ${\OLId{latin-ordinary}{d}}_{\OLMathNumeral{1}}=\lcm({\OLMathNumeral{1}},\dots,{\OLId{latin-ordinary}{j}})$.
+فمن \olref{rel-prime} نعلم أن
+${\OLMathNumeral{1}}+{\OLId{latin-ordinary}{d}}_{\OLMathNumeral{1}}$ و${\OLMathNumeral{1}}+{\OLMathNumeral{2}}{\OLId{latin-ordinary}{d}}_{\OLMathNumeral{1}}$، \dots، ${\OLMathNumeral{1}}+({\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}}){\OLId{latin-ordinary}{d}}_{\OLMathNumeral{1}}$ أولية مثنى مثنى،
+ومن \olref{less} نعلم أنها أكبر من ${\OLId{latin-ordinary}{a}}_{\OLMathNumeral{0}},\dots,{\OLId{latin-ordinary}{a}}_{\OLId{latin-ordinary}{n}}$ على الترتيب.
+فتعطينا مبرهنة سون تزو عددًا~${\OLId{latin-ordinary}{d}}_{\OLMathNumeral{0}}$ يحقق، لكل~${\OLId{latin-ordinary}{i}}$،
+\[
+{\OLId{latin-ordinary}{d}}_{\OLMathNumeral{0}} \equiv {\OLId{latin-ordinary}{a}}_{\OLId{latin-ordinary}{i}} \mod ({\OLMathNumeral{1}}+({\OLId{latin-ordinary}{i}}+{\OLMathNumeral{1}}){\OLId{latin-ordinary}{d}}_{\OLMathNumeral{1}})
+\]
+ولما كان ${\OLId{latin-ordinary}{d}}_{\OLMathNumeral{1}}$ أكبر من~${\OLId{latin-ordinary}{a}}_{\OLId{latin-ordinary}{i}}$، لزم
+\[
+{\OLId{latin-ordinary}{a}}_{\OLId{latin-ordinary}{i}} = \fn{rem}({\OLMathNumeral{1}}+({\OLId{latin-ordinary}{i}}+{\OLMathNumeral{1}}){\OLId{latin-ordinary}{d}}_{\OLMathNumeral{1}},{\OLId{latin-ordinary}{d}}_{\OLMathNumeral{0}}).
+\]
+فلنضع ${\OLId{latin-ordinary}{d}}={\OLId{latin-looped}{J}}({\OLId{latin-ordinary}{d}}_{\OLMathNumeral{0}},{\OLId{latin-ordinary}{d}}_{\OLMathNumeral{1}})$؛ فيكون، لكل ${\OLId{latin-ordinary}{i}}\le {\OLId{latin-ordinary}{n}}$،
+\begin{align*}
+\beta({\OLId{latin-ordinary}{d}},{\OLId{latin-ordinary}{i}}) & =  \beta^*({\OLId{latin-ordinary}{d}}_{\OLMathNumeral{0}},{\OLId{latin-ordinary}{d}}_{\OLMathNumeral{1}},{\OLId{latin-ordinary}{i}}) \\
+& =  \fn{rem}({\OLMathNumeral{1}}+({\OLId{latin-ordinary}{i}}+{\OLMathNumeral{1}}) {\OLId{latin-ordinary}{d}}_{\OLMathNumeral{1}},{\OLId{latin-ordinary}{d}}_{\OLMathNumeral{0}}) \\
+& =  {\OLId{latin-ordinary}{a}}_{\OLId{latin-ordinary}{i}}
+\end{align*}
+فحصل المطلوب، وتم برهان لمة دالة~$\beta$.
+
+\begin{prob}
+  بيّن إمكان تعريف العلاقتين ${\OLId{latin-ordinary}{x}}<{\OLId{latin-ordinary}{y}}$ و${\OLId{latin-ordinary}{x}}\mid {\OLId{latin-ordinary}{y}}$ والدالة~$\fn{rem}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})$
+  من غير استعمال العودية البدائية. ولك أن تستعمل ${\OLMathNumeral{0}}$ والخلف والجمع
+  والضرب و$\Char{=}$ والإسقاطات، والتصغير المحدود والتكميم المحدود.
+\end{prob}
+
+\end{document}

@@ -1,0 +1,99 @@
+% Part: sets-functions-relations
+% Chapter: functions
+% Section: functions-relations
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+
+\begin{document}
+
+\olfileid[ar]{sfr}{fun}{rel}
+
+\olsection{الدوال بوصفها علاقات}
+
+\begin{explain}
+الدالة التي تقابل !!{element}s~${\OLId{latin-looped}{A}}$ بـ!!{element}s~${\OLId{latin-looped}{B}}$ تعيّن علاقة
+بين ${\OLId{latin-looped}{A}}$ و~${\OLId{latin-looped}{B}}$: وهي التي تقوم بين ${\OLId{latin-ordinary}{x}}$ و${\OLId{latin-ordinary}{y}}$ إذا وفقط إذا كان
+${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}}) = {\OLId{latin-ordinary}{y}}$. وقد نريد، اختزالًا لأصول البناء الرياضي مثلًا،
+\emph{مماهاة}~${\OLId{latin-ordinary}{f}}$ بهذه العلاقة، أي بمجموعة الأزواج.
+فأي العلاقات يجوز أن تؤخذ دوال على هذا الوجه؟
+\end{explain}
+
+\begin{defn}[الرسم البياني لدالة]
+للدالة ${\OLId{latin-ordinary}{f}}\colon {\OLId{latin-looped}{A}} \to {\OLId{latin-looped}{B}}$ \emph{رسم بياني} للدالة~${\OLId{latin-ordinary}{f}}$، وهو العلاقة
+${\OLId{latin-looped}{R}}_{\OLId{latin-ordinary}{f}} \subseteq {\OLId{latin-looped}{A}} \times {\OLId{latin-looped}{B}}$ ذات التعريف
+\[
+{\OLId{latin-looped}{R}}_{\OLId{latin-ordinary}{f}} = \Setabs{\tuple{{\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}}}}{{\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}}) = {\OLId{latin-ordinary}{y}}}.
+\]
+\end{defn}
+
+\begin{explain}
+تقضي الامتدادية بوحدة رسم الدالة البياني. بل إن امتدادية المجموعات
+تسوّغ مباشرة امتدادية الدوال التي استعملناها ضمنًا: متى اتحد
+مجال ${\OLId{latin-ordinary}{f}}$ و~${\OLId{latin-ordinary}{g}}$ ومجالهما المقابل، واتفقت قيمهما كلها، كانتا واحدة.
+
+وبالعكس، كل علاقة تستوفي شرط «الدالية» هي رسم بياني لدالة.
+\end{explain}
+
+\begin{prop}\ollabel{prop:graph-function}
+افرض أن ${\OLId{latin-looped}{R}} \subseteq {\OLId{latin-looped}{A}} \times {\OLId{latin-looped}{B}}$ تحقق الشرطين:
+\begin{enumerate}
+\item اجتماع $Rxy$ و$Rxz$ يقتضي ${\OLId{latin-ordinary}{y}} = {\OLId{latin-ordinary}{z}}$؛ و
+\item يوجد لكل ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}$ عنصر ${\OLId{latin-ordinary}{y}} \in {\OLId{latin-looped}{B}}$ يحقق $\tuple{{\OLId{latin-ordinary}{x}},
+{\OLId{latin-ordinary}{y}}} \in {\OLId{latin-looped}{R}}$.
+\end{enumerate}
+فتكون ${\OLId{latin-looped}{R}}$ رسم الدالة ${\OLId{latin-ordinary}{f}}\colon {\OLId{latin-looped}{A}} \to {\OLId{latin-looped}{B}}$ التي نضعها بالشرط:
+${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}}) = {\OLId{latin-ordinary}{y}}$ إذا وفقط إذا كان $Rxy$.
+\end{prop}
+
+\begin{proof}
+إذا وجد ${\OLId{latin-ordinary}{y}}$ يحقق $Rxy$ امتنع أن يوجد ${\OLId{latin-ordinary}{z}} \neq
+{\OLId{latin-ordinary}{y}}$ يحقق $Rxz$، وإلا خولف شرط~${\OLId{latin-looped}{R}}$. فمتى وجد ${\OLId{latin-ordinary}{y}}$ مع $Rxy$ كان
+هذا ${\OLId{latin-ordinary}{y}}$ واحدًا؛ ومع ضمان الوجود تكون ${\OLId{latin-ordinary}{f}}$ سليمة التعريف.
+ومن تعريفها يظهر ${\OLId{latin-looped}{R}}_{\OLId{latin-ordinary}{f}} = {\OLId{latin-looped}{R}}$.
+\end{proof}
+
+\begin{explain}
+فكل دالة ${\OLId{latin-ordinary}{f}}\colon {\OLId{latin-looped}{A}} \to {\OLId{latin-looped}{B}}$ لها رسم، أي علاقة بين ${\OLId{latin-looped}{A}}$ و~${\OLId{latin-looped}{B}}$
+محتواة في~${\OLId{latin-looped}{A}} \times {\OLId{latin-looped}{B}}$ يضبطها ${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}}) = {\OLId{latin-ordinary}{y}}$. وكل علاقة~${\OLId{latin-looped}{R}}
+\subseteq {\OLId{latin-looped}{A}} \times {\OLId{latin-looped}{B}}$ تحقق شرطي \olref{prop:graph-function} رسم
+لدالة~${\OLId{latin-ordinary}{f}} \colon {\OLId{latin-looped}{A}} \to {\OLId{latin-looped}{B}}$. ولشدة هذه الصلة يجوز أن نأخذ الدالة
+رسمها نفسه، أي علاقة مخصوصة أو مجموعة مخصوصة من الصفوف المرتبة.
+\oliflabeldef{sfr:rel:ref:sec}{والمقصود بالمماهاة هنا ما بُيّن في
+\olref[sfr][rel][ref]{sec}: ليست دعوى ميتافيزيقية في ماهية الدوال،
+بل إجازة نافعة لـ\emph{معاملتها} مجموعات معينة. ومن نفع ذلك أن }{}
+العمليات التي أجريناها على العلاقات يمكن إجراء نظائرها على الدوال
+(انظر \olref[sfr][rel][ops]{sec})؛ ومنها ما يأتي.
+\end{explain}
+
+\begin{defn}\ollabel{defn:funimage}
+خذ دالة ${\OLId{latin-ordinary}{f}} \colon {\OLId{latin-looped}{A}} \to {\OLId{latin-looped}{B}}$ وجزئية ${\OLId{latin-looped}{C}}\subseteq {\OLId{latin-looped}{A}}$.
+
+\emph{تقييد}~${\OLId{latin-ordinary}{f}}$ على~${\OLId{latin-looped}{C}}$ هو الدالة~$\funrestrictionto{{\OLId{latin-ordinary}{f}}}{{\OLId{latin-looped}{C}}}\colon {\OLId{latin-looped}{C}} \to {\OLId{latin-looped}{B}}$
+التي تحقق $(\funrestrictionto{{\OLId{latin-ordinary}{f}}}{{\OLId{latin-looped}{C}}})({\OLId{latin-ordinary}{x}}) = {\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}})$ لكل ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{C}}$؛ أي
+$\funrestrictionto{{\OLId{latin-ordinary}{f}}}{{\OLId{latin-looped}{C}}} = \Setabs{\tuple{{\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}} \in {\OLId{latin-looped}{R}}_{\OLId{latin-ordinary}{f}}}{{\OLId{latin-ordinary}{x}} \in
+{\OLId{latin-looped}{C}}}$.
+
+و\emph{تطبيق}~${\OLId{latin-ordinary}{f}}$ على~${\OLId{latin-looped}{C}}$ تعريفه $\funimage{{\OLId{latin-ordinary}{f}}}{{\OLId{latin-looped}{C}}} =
+\Setabs{{\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}})}{{\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{C}}}$؛ ويسمى أيضًا \emph{صورة}~${\OLId{latin-looped}{C}}$ تحت~${\OLId{latin-ordinary}{f}}$.
+\end{defn}
+
+\begin{explain}
+ومن التعريفين ينتج $\ran{{\OLId{latin-ordinary}{f}}} =
+\funimage{{\OLId{latin-ordinary}{f}}}{\dom{{\OLId{latin-ordinary}{f}}}}$ لكل دالة~${\OLId{latin-ordinary}{f}}$.
+\oliflabeldef{sfr:rel:ops:sec}{وهذا نظير لما تقتضيه تعريفات
+\olref[sfr][rel][ops]{sec} ومماهاة الدوال بالعلاقات، إلا أن تقييد
+الدالة هنا إنما يقصر المدخل على~${\OLId{latin-looped}{C}}$ ولا يقصر المخرج على~${\OLId{latin-looped}{C}}$.
+وأما المعكوسات والضروب النسبية فيحتاجان إلى زيادة تفصيل،
+وسيأتي في \olref[inv]{sec} و\olref[cmp]{sec}.}{}
+\end{explain}
+
+\begin{explain}
+\textbf{تنبيهان على لفظ الأصل.} سمى الأصل رسم~${\OLId{latin-ordinary}{f}}$ «علاقة على
+${\OLId{latin-looped}{A}}\times {\OLId{latin-looped}{B}}$»، مع أن اصطلاح الكتاب يجعل العلاقة على~${\OLId{latin-looped}{U}}$ جزءًا من
+${\OLId{latin-looped}{U}}^{\OLMathNumeral{2}}$؛ فقلنا علاقة بين ${\OLId{latin-looped}{A}}$ و~${\OLId{latin-looped}{B}}$ محتواة في~${\OLId{latin-looped}{A}}\times {\OLId{latin-looped}{B}}$. ثم إن
+تقييد الدالة على~${\OLId{latin-looped}{C}}$ يخص الإحداثي الأول، فلا يطابق تقييد العلاقة
+المتجانسة بالتقاطع مع~${\OLId{latin-looped}{C}}^{\OLMathNumeral{2}}$ إلا على جهة النظير.
+\end{explain}
+
+\end{document}

@@ -1,0 +1,71 @@
+% Part: normal-modal-logic
+% Chapter: syntax-and-semantics
+% Section: modal-validity
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{syn}{val}
+
+\olsection{الصلاحية}
+
+\begin{explain}
+  من ال!!^{formula}s ما يصدق في كل عالم من كل نموذج؛ ولهذه مزية
+  أنها تمثل ما يصدق من القضايا الموجهية مهما اختلف تفسير
+  $\Box$ و$\Diamond$، بشرط أن يكون التفسير نظاميًا، أي ناشئًا عن
+  علاقة وصول على العوالم الممكنة. ونسمي هذه ال!!{formula}s
+  \emph{صالحة}. فالصيغة~$\Box(p \land q) \lif \Box p$ مثال لها.
+  وليس كل ما قد يُتوقع من ال!!{formula}s على تفسير~$\Box$ بجهة
+  الصدق صالحًا؛ فإن~$\Box p \lif p$ لا تصح في جميع النماذج.
+  ووجه ذلك أن اختلاف علاقات الوصول يتيح تفسير~$\Box$ و$\Diamond$
+  على أنحاء مختلفة. فالأولى أن نميز الصلاحية في \emph{جميع}
+  النماذج من الصلاحية في نماذج \emph{من نوع مخصوص}.
+  وسيتبين أن~$\Box p \lif p$ تصدق إذا كان كل عالم يصل إلى نفسه،
+  أعني إذا كانت~$R$ انعكاسية. وباصطلاح الصلاحية النسبية نوجز هذا
+  فنقول: الصيغة~$\Box p \lif p$ صالحة في صنف النماذج الانعكاسية.
+\end{explain}
+
+\begin{defn}
+  تكون !!^a{formula}~$!A$ \emph{صالحة} في صنف النماذج~$\mClass{C}$
+  إذا كانت صادقة في كل نموذج من~$\mClass{C}$ (أي في كل عالم من كل
+  نموذج في~$\mClass{C}$). وإذا كانت~$!A$ صالحة في~$\mClass{C}$، كتبنا
+  $\mClass{C} \Entails !A$؛ ونكتب~$\Entails !A$ إذا كانت~$!A$ صالحة
+  في صنف \emph{جميع} النماذج.
+\end{defn}
+
+\begin{prop}\ollabel{prop:subset-class}
+  إذا كانت~$!A$ صالحة في~$\mClass{C}$، فهي صالحة أيضًا في كل صنف
+  $\mClass{C}' \subseteq \mClass{C}$.
+\end{prop}
+
+\begin{prop}\ollabel{prop:Nec-rule}
+  إذا كانت~$!A$ صالحة، فإن~$\Box!A$ صالحة أيضًا.
+\end{prop}
+
+\begin{proof}
+  لنفرض~$\Entails !A$، ولننظر في~$\Entails \Box!A$. خذ نموذجًا
+  $\mModel{M} = \tuple{W, R, V}$ وعالمًا~$w \in W$ كيف اتفق.
+  كلما كان~$Rww'$ لزم~$\mSat{M}{!A}[w']$ من صلاحية~$!A$؛
+  فحصل~$\mSat{M}{\Box!A}[w]$. وإذ لم نخصّ~$\mModel{M}$ ولا~$w$
+  بصفة، ثبت~$\Entails \Box!A$.
+\end{proof}
+
+\begin{prob}
+  أثبت أن الصيغ الآتية صالحة:
+  \begin{enumerate}
+  \item $\Box p \lif \Box (q \lif p)$؛
+  \item $\Box \lnot \lfalse$؛
+  \item $\Box p \lif (\Box q \lif \Box p)$.
+  \end{enumerate}
+\end{prob}
+
+\begin{prob}
+  أثبت أن~$!A \lif \Box!A$ صالحة في صنف النماذج~$\mClass{C}$ من
+  الصورة~$\mModel{M} = \tuple{W, R, V}$ حيث~$W = \{w\}$. وبالمثل،
+  أثبت أن~$!B \lif \Box !A$ و$\Diamond !A \lif !B$ صالحتان في صنف
+  النماذج~$\mModel{M} = \tuple{W, R, V}$ التي فيها
+  $R = \emptyset$.
+\end{prob}
+
+\end{document}

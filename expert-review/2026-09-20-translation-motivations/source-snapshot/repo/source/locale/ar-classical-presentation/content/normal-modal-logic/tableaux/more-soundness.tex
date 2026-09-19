@@ -1,0 +1,230 @@
+% Part: normal-modal-logic
+% Chapter: tableaux
+% Section: more-soundness
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{tab}{msn}
+      
+\olsection{سلامة القواعد الإضافية}
+
+سلامة القاعدة لفئة من النماذج معناها أنه متى أمكن إرضاء فرع من
+!!a{tableau} في نموذج من تلك الفئة، أمكن إرضاء الفرع الناتج من إجراء
+القاعدة عليه في نموذج من الفئة نفسها.
+ونفترض فيما يأتي انغلاق مجموعة بادئات الفرع تحت السوابق، كما يقع في
+الـ!!{tableau}s المولدة بالقواعد؛ فورود~$\sigma.{\OLId{latin-ordinary}{n}}$ يضمن ورود~$\sigma$.
+% توضيح برهاني (0466-I1): تحتاج حالتا B و4r إلى كون البادئة الأم مفسرة بالفعل.
+
+\begin{prop}
+  \ollabel{prop:soundness-T} 
+  \iftag{prvBox}{\Ax{T}$\Box$}{}%
+  \iftag{notprvBox,notprvDiamond}{}{ و}%
+  \iftag{prvDiamond}{\Ax{T}$\Diamond$}{}
+  \iftag{notprvBox,notprvDiamond}{سليمة}{سليمتان}
+  للنماذج الانعكاسية.
+\end{prop}
+
+\begin{proof}
+\begin{tagenumerate}{prvBox,prvDiamond}
+\tagitem{prvBox}{أما تطبيق T$\Box$ على
+  $\sFmla{\True}{\Box !B}[\sigma] \in {\OLId{greek-variable}{Gamma}}$:
+  \iftag{probBox}{تمرين.}{فنتيجته زيادة !!{signed
+      formula}~$\sFmla{\True}{!B}[\sigma]$ في الفرع. ولنفرض
+    $\mSat{{\OLId{latin-looped}{M}}}{{\OLId{greek-variable}{Gamma}}}[{\OLId{latin-ordinary}{f}}]$، فيكون خاصةً~$\mSat{{\OLId{latin-looped}{M}}}{\Box
+      !B}[{\OLId{latin-ordinary}{f}}(\sigma)]$. ومن انعكاسية~${\OLId{latin-looped}{R}}$ يلزم
+    $Rf(\sigma){\OLId{latin-ordinary}{f}}(\sigma)$، ومنه~$\mSat{{\OLId{latin-looped}{M}}}{!B}[{\OLId{latin-ordinary}{f}}(\sigma)]$.
+    فإذن~$\mModel{M}, {\OLId{latin-ordinary}{f}}$ يرضيان~$\sFmla{\True}{!B}[\sigma]$.}}{}
+\tagitem{prvDiamond}{وأما تطبيق T$\Diamond$ على
+  $\sFmla{\False}{\Diamond !B}[\sigma] \in {\OLId{greek-variable}{Gamma}}$:
+  \iftag{probDiamond}{تمرين.}{فيزيد في الفرع !!{signed
+      formula}~$\sFmla{\False}{!B}[\sigma]$. فإن كان
+    $\mSat{{\OLId{latin-looped}{M}}}{{\OLId{greek-variable}{Gamma}}}[{\OLId{latin-ordinary}{f}}]$ كان خاصةً~$\mSat/{{\OLId{latin-looped}{M}}}{\Diamond
+      !B}[{\OLId{latin-ordinary}{f}}(\sigma)]$. ولانعكاسية~${\OLId{latin-looped}{R}}$ يكون
+    $Rf(\sigma){\OLId{latin-ordinary}{f}}(\sigma)$، فيلزم~$\mSat/{{\OLId{latin-looped}{M}}}{!B}[{\OLId{latin-ordinary}{f}}(\sigma)]$.
+    وبذلك يرضي~$\mModel{M}, {\OLId{latin-ordinary}{f}}$ الصيغة~$\sFmla{\False}{!B}[\sigma]$.}}{}
+\end{tagenumerate}
+\end{proof}
+
+\tagprob{probBox,probDiamond}
+\begin{prob}
+  أكمل برهان \olref[nml][tab][msn]{prop:soundness-T}.
+\end{prob}
+\tagendprob
+
+\begin{prop}
+  \ollabel{prop:soundness-D} 
+  \iftag{prvBox}{\Ax{D}$\Box$}{}%
+  \iftag{notprvBox,notprvDiamond}{}{ و}%
+  \iftag{prvDiamond}{\Ax{D}$\Diamond$}{}
+  \iftag{notprvBox,notprvDiamond}{سليمة}{سليمتان}
+  للنماذج التسلسلية.
+\end{prop}
+
+\begin{proof}
+\begin{tagenumerate}{prvBox,prvDiamond}
+\tagitem{prvBox}{في تطبيق D$\Box$ على
+  $\sFmla{\True}{\Box !B}[\sigma] \in {\OLId{greek-variable}{Gamma}}$:
+  \iftag{probBox}{تمرين.}{تُزاد !!{signed
+      formula}~$\sFmla{\True}{\Diamond !B}[\sigma]$ في الفرع.
+    فإذا كان~$\mSat{{\OLId{latin-looped}{M}}}{{\OLId{greek-variable}{Gamma}}}[{\OLId{latin-ordinary}{f}}]$ صدق خاصةً
+    $\mSat{{\OLId{latin-looped}{M}}}{\Box !B}[{\OLId{latin-ordinary}{f}}(\sigma)]$. وبما أن~${\OLId{latin-looped}{R}}$ تسلسلية، نجد~${\OLId{latin-ordinary}{w}}
+    \in {\OLId{latin-looped}{W}}$ يحقق~$Rf(\sigma){\OLId{latin-ordinary}{w}}$. فيكون~$\mSat{{\OLId{latin-looped}{M}}}{!B}[{\OLId{latin-ordinary}{w}}]$،
+    ويشهد هذا العالم لـ~$\mSat{{\OLId{latin-looped}{M}}}{\Diamond !B}[{\OLId{latin-ordinary}{f}}(\sigma)]$.
+    ومن ثم يرضي~$\mModel{M}, {\OLId{latin-ordinary}{f}}$ الصيغة
+    $\sFmla{\True}{\Diamond!B}[\sigma]$.}}{}
+\tagitem{prvDiamond}{وفي تطبيق D$\Diamond$ على
+  $\sFmla{\False}{\Diamond !B}[\sigma] \in {\OLId{greek-variable}{Gamma}}$:
+  \iftag{probDiamond}{تمرين.}{تُزاد !!{signed
+      formula}~$\sFmla{\False}{\Box !B}[\sigma]$ في الفرع.
+    ولنفرض~$\mSat{{\OLId{latin-looped}{M}}}{{\OLId{greek-variable}{Gamma}}}[{\OLId{latin-ordinary}{f}}]$، فيلزم خاصةً
+    $\mSat/{{\OLId{latin-looped}{M}}}{\Diamond !B}[{\OLId{latin-ordinary}{f}}(\sigma)]$. ولتسلسل~${\OLId{latin-looped}{R}}$ يوجد~${\OLId{latin-ordinary}{w}}
+    \in {\OLId{latin-looped}{W}}$ بحيث~$Rf(\sigma){\OLId{latin-ordinary}{w}}$. وعنده~$\mSat/{{\OLId{latin-looped}{M}}}{!B}[{\OLId{latin-ordinary}{w}}]$،
+    فيشهد بكذب الضرورة:~$\mSat/{{\OLId{latin-looped}{M}}}{\Box !B}[{\OLId{latin-ordinary}{f}}(\sigma)]$.
+    فالنموذج وتأويله~$\mModel{M}, {\OLId{latin-ordinary}{f}}$ يرضيان
+    $\sFmla{\False}{\Box!B}[\sigma]$.}}{}
+\end{tagenumerate}
+\end{proof}
+
+\tagprob{probBox,probDiamond}
+\begin{prob}
+  أكمل برهان \olref[nml][tab][msn]{prop:soundness-D}.
+\end{prob}
+\tagendprob
+
+\begin{prop}
+  \ollabel{prop:soundness-B} 
+  \iftag{prvBox}{\Ax{B}$\Box$}{}%
+  \iftag{notprvBox,notprvDiamond}{}{ و}%
+  \iftag{prvDiamond}{\Ax{B}$\Diamond$}{}
+  \iftag{notprvBox,notprvDiamond}{سليمة}{سليمتان}
+  للنماذج المتناظرة.
+\end{prop}
+
+\begin{proof}
+\begin{tagenumerate}{prvBox,prvDiamond}
+\tagitem{prvBox}{إذا أُجريت B$\Box$ على
+  $\sFmla{\True}{\Box !B}[\sigma.{\OLId{latin-ordinary}{n}}] \in {\OLId{greek-variable}{Gamma}}$:
+  \iftag{probBox}{تمرين.}{نتجت !!{signed
+      formula}~$\sFmla{\True}{!B}[\sigma]$. ولنفترض
+    $\mSat{{\OLId{latin-looped}{M}}}{{\OLId{greek-variable}{Gamma}}}[{\OLId{latin-ordinary}{f}}]$، ومنه خاصةً~$\mSat{{\OLId{latin-looped}{M}}}{\Box
+      !B}[{\OLId{latin-ordinary}{f}}(\sigma.{\OLId{latin-ordinary}{n}})]$. أما~${\OLId{latin-ordinary}{f}}$ فتأويل لبادئات الفرع في~$\mModel{M}$،
+    ولذلك~$Rf(\sigma){\OLId{latin-ordinary}{f}}(\sigma.{\OLId{latin-ordinary}{n}})$. وأما~${\OLId{latin-looped}{R}}$ فمتناظرة،
+    ولذلك~$Rf(\sigma.{\OLId{latin-ordinary}{n}}){\OLId{latin-ordinary}{f}}(\sigma)$. ومن
+    $\mSat{{\OLId{latin-looped}{M}}}{\Box !B}[{\OLId{latin-ordinary}{f}}(\sigma.{\OLId{latin-ordinary}{n}})]$ نستنتج
+    $\mSat{{\OLId{latin-looped}{M}}}{!B}[{\OLId{latin-ordinary}{f}}(\sigma)]$، فيرضي~$\mModel{M}, {\OLId{latin-ordinary}{f}}$
+    الصيغة~$\sFmla{\True}{!B}[\sigma]$.}}{}
+\tagitem{prvDiamond}{وإذا أُجريت B$\Diamond$ على
+  $\sFmla{\False}{\Diamond !B}[\sigma.{\OLId{latin-ordinary}{n}}] \in {\OLId{greek-variable}{Gamma}}$:
+  \iftag{probDiamond}{تمرين.}{نتجت !!{signed
+      formula}~$\sFmla{\False}{!B}[\sigma]$. فإذا كان
+    $\mSat{{\OLId{latin-looped}{M}}}{{\OLId{greek-variable}{Gamma}}}[{\OLId{latin-ordinary}{f}}]$ كان خاصةً
+    $\mSat/{{\OLId{latin-looped}{M}}}{\Diamond !B}[{\OLId{latin-ordinary}{f}}(\sigma.{\OLId{latin-ordinary}{n}})]$. ولأن~${\OLId{latin-ordinary}{f}}$ تأويل لبادئات
+    الفرع في~$\mModel{M}$، ثبت~$Rf(\sigma){\OLId{latin-ordinary}{f}}(\sigma.{\OLId{latin-ordinary}{n}})$.
+    ومن تناظر~${\OLId{latin-looped}{R}}$ يثبت~$Rf(\sigma.{\OLId{latin-ordinary}{n}}){\OLId{latin-ordinary}{f}}(\sigma)$.
+    فمع~$\mSat/{{\OLId{latin-looped}{M}}}{\Diamond !B}[{\OLId{latin-ordinary}{f}}(\sigma.{\OLId{latin-ordinary}{n}})]$ يلزم
+    $\mSat/{{\OLId{latin-looped}{M}}}{!B}[{\OLId{latin-ordinary}{f}}(\sigma)]$. وهكذا يرضي~$\mModel{M}, {\OLId{latin-ordinary}{f}}$
+    الصيغة~$\sFmla{\False}{!B}[\sigma]$.}}{}
+\end{tagenumerate}
+\end{proof}
+
+\tagprob{probBox,probDiamond}
+\begin{prob}
+  أكمل برهان \olref[nml][tab][msn]{prop:soundness-B}.
+\end{prob}
+\tagendprob
+
+\begin{prop}
+  \ollabel{prop:soundness-4} 
+  \iftag{prvBox}{\Ax{4}$\Box$}{}%
+  \iftag{notprvBox,notprvDiamond}{}{ و}%
+  \iftag{prvDiamond}{\Ax{4}$\Diamond$}{}
+  \iftag{notprvBox,notprvDiamond}{سليمة}{سليمتان}
+  للنماذج المتعدية.
+\end{prop}
+
+\begin{proof}
+\begin{tagenumerate}{prvBox,prvDiamond}
+\tagitem{prvBox}{أما \OLClassicalDigits{4}$\Box$ إذا أُجريت على
+  $\sFmla{\True}{\Box !B}[\sigma] \in {\OLId{greek-variable}{Gamma}}$:
+  \iftag{probBox}{تمرين.}{فإنها تزيد !!{signed
+      formula}~$\sFmla{\True}{\Box!B}[\sigma.{\OLId{latin-ordinary}{n}}]$ في الفرع.
+    نأخذ~$\mSat{{\OLId{latin-looped}{M}}}{{\OLId{greek-variable}{Gamma}}}[{\OLId{latin-ordinary}{f}}]$، فيلزم خاصةً
+    $\mSat{{\OLId{latin-looped}{M}}}{\Box !B}[{\OLId{latin-ordinary}{f}}(\sigma)]$. وكون~${\OLId{latin-ordinary}{f}}$ تأويلًا لبادئات
+    الفرع في~$\mModel{M}$، مع كون~$\sigma.{\OLId{latin-ordinary}{n}}$ مستعملة، يقتضي
+    $Rf(\sigma){\OLId{latin-ordinary}{f}}(\sigma.{\OLId{latin-ordinary}{n}})$. خذ الآن عالمًا~${\OLId{latin-ordinary}{w}}$ كيفما اتفق يحقق
+    $Rf(\sigma.{\OLId{latin-ordinary}{n}}){\OLId{latin-ordinary}{w}}$. فتعدي~${\OLId{latin-looped}{R}}$ يوجب~$Rf(\sigma){\OLId{latin-ordinary}{w}}$.
+    ولما كان~$\mSat{{\OLId{latin-looped}{M}}}{\Box !B}[{\OLId{latin-ordinary}{f}}(\sigma)]$، لزم~$\mSat{{\OLId{latin-looped}{M}}}{!B}[{\OLId{latin-ordinary}{w}}]$.
+    فثبت~$\mSat{{\OLId{latin-looped}{M}}}{\Box !B}[{\OLId{latin-ordinary}{f}}(\sigma.{\OLId{latin-ordinary}{n}})]$، وبذلك يرضي~$\mModel{M}, {\OLId{latin-ordinary}{f}}$
+    الصيغة~$\sFmla{\True}{\Box !B}[\sigma.{\OLId{latin-ordinary}{n}}]$.}}{}
+\tagitem{prvDiamond}{وأما \OLClassicalDigits{4}$\Diamond$ إذا أُجريت على
+  $\sFmla{\False}{\Diamond !B}[\sigma] \in {\OLId{greek-variable}{Gamma}}$:
+  \iftag{probDiamond}{تمرين.}{فإنها تزيد !!{signed
+      formula}~$\sFmla{\False}{\Diamond!B}[\sigma.{\OLId{latin-ordinary}{n}}]$ في الفرع.
+    ولنفرض~$\mSat{{\OLId{latin-looped}{M}}}{{\OLId{greek-variable}{Gamma}}}[{\OLId{latin-ordinary}{f}}]$، فيكون خاصةً
+    $\mSat/{{\OLId{latin-looped}{M}}}{\Diamond !B}[{\OLId{latin-ordinary}{f}}(\sigma)]$. وكون~${\OLId{latin-ordinary}{f}}$ تأويلًا لبادئات
+    الفرع في~$\mModel{M}$، مع استعمال~$\sigma.{\OLId{latin-ordinary}{n}}$، يقتضي
+    $Rf(\sigma){\OLId{latin-ordinary}{f}}(\sigma.{\OLId{latin-ordinary}{n}})$. فمهما أخذنا~${\OLId{latin-ordinary}{w}}$ بحيث~$Rf(\sigma.{\OLId{latin-ordinary}{n}}){\OLId{latin-ordinary}{w}}$،
+    أوجب تعدي~${\OLId{latin-looped}{R}}$ أن~$Rf(\sigma){\OLId{latin-ordinary}{w}}$. ومع
+    $\mSat/{{\OLId{latin-looped}{M}}}{\Diamond !B}[{\OLId{latin-ordinary}{f}}(\sigma)]$ يلزم~$\mSat/{{\OLId{latin-looped}{M}}}{!B}[{\OLId{latin-ordinary}{w}}]$.
+    فحصل~$\mSat/{{\OLId{latin-looped}{M}}}{\Diamond !B}[{\OLId{latin-ordinary}{f}}(\sigma.{\OLId{latin-ordinary}{n}})]$، فيرضي
+    $\mModel{M}, {\OLId{latin-ordinary}{f}}$ الصيغة~$\sFmla{\False}{\Diamond !B}[\sigma.{\OLId{latin-ordinary}{n}}]$.}}{}
+\end{tagenumerate}
+\end{proof}
+
+\tagprob{probBox,probDiamond}
+\begin{prob}
+  أكمل برهان \olref[nml][tab][msn]{prop:soundness-4}.
+\end{prob}
+\tagendprob
+
+\begin{prop}
+  \ollabel{prop:soundness-4r} 
+  \iftag{prvBox}{\Ax{4r}$\Box$}{}%
+  \iftag{notprvBox,notprvDiamond}{}{ و}%
+  \iftag{prvDiamond}{\Ax{4r}$\Diamond$}{}
+  \iftag{notprvBox,notprvDiamond}{سليمة}{سليمتان}
+  للنماذج الإقليدية.
+\end{prop}
+
+\begin{proof}
+\begin{tagenumerate}{prvBox,prvDiamond}
+\tagitem{prvBox}{إذا أُجريت 4r$\Box$ على
+  $\sFmla{\True}{\Box !B}[\sigma.{\OLId{latin-ordinary}{n}}] \in {\OLId{greek-variable}{Gamma}}$:
+  \iftag{probBox}{تمرين.}{كانت الزيادة !!{signed
+      formula}~$\sFmla{\True}{\Box!B}[\sigma]$.
+    نأخذ~$\mSat{{\OLId{latin-looped}{M}}}{{\OLId{greek-variable}{Gamma}}}[{\OLId{latin-ordinary}{f}}]$، فيصدق خاصةً~$\mSat{{\OLId{latin-looped}{M}}}{\Box
+      !B}[{\OLId{latin-ordinary}{f}}(\sigma.{\OLId{latin-ordinary}{n}})]$. ولما كان~${\OLId{latin-ordinary}{f}}$ تأويلًا لبادئات الفرع
+    في~$\mModel{M}$، علمنا~$Rf(\sigma){\OLId{latin-ordinary}{f}}(\sigma.{\OLId{latin-ordinary}{n}})$.
+    خذ عالمًا~${\OLId{latin-ordinary}{w}}$ يحقق~$Rf(\sigma){\OLId{latin-ordinary}{w}}$. فإقليدية~${\OLId{latin-looped}{R}}$ تستلزم
+    $Rf(\sigma.{\OLId{latin-ordinary}{n}}){\OLId{latin-ordinary}{w}}$، ومن~$\mSat{{\OLId{latin-looped}{M}}}{\Box !B}[{\OLId{latin-ordinary}{f}}(\sigma.{\OLId{latin-ordinary}{n}})]$
+    ينتج~$\mSat{{\OLId{latin-looped}{M}}}{!B}[{\OLId{latin-ordinary}{w}}]$. فثبت~$\mSat{{\OLId{latin-looped}{M}}}{\Box !B}[{\OLId{latin-ordinary}{f}}(\sigma)]$،
+    أي إن~$\mModel{M}, {\OLId{latin-ordinary}{f}}$ يرضيان~$\sFmla{\True}{\Box !B}[\sigma]$.}}{}
+\tagitem{prvDiamond}{وإذا أُجريت 4r$\Diamond$ على
+  $\sFmla{\False}{\Diamond !B}[\sigma.{\OLId{latin-ordinary}{n}}] \in {\OLId{greek-variable}{Gamma}}$:
+  \iftag{probDiamond}{تمرين.}{كانت الزيادة !!{signed
+      formula}~$\sFmla{\False}{\Diamond!B}[\sigma]$.
+    فإذا كان~$\mSat{{\OLId{latin-looped}{M}}}{{\OLId{greek-variable}{Gamma}}}[{\OLId{latin-ordinary}{f}}]$ كان خاصةً
+    $\mSat/{{\OLId{latin-looped}{M}}}{\Diamond !B}[{\OLId{latin-ordinary}{f}}(\sigma.{\OLId{latin-ordinary}{n}})]$. ولأن~${\OLId{latin-ordinary}{f}}$ تأويل لبادئات
+    الفرع في~$\mModel{M}$، كان~$Rf(\sigma){\OLId{latin-ordinary}{f}}(\sigma.{\OLId{latin-ordinary}{n}})$.
+    وأي عالم~${\OLId{latin-ordinary}{w}}$ يحقق~$Rf(\sigma){\OLId{latin-ordinary}{w}}$، توجب إقليدية~${\OLId{latin-looped}{R}}$ أن
+    $Rf(\sigma.{\OLId{latin-ordinary}{n}}){\OLId{latin-ordinary}{w}}$. فمع~$\mSat/{{\OLId{latin-looped}{M}}}{\Diamond !B}[{\OLId{latin-ordinary}{f}}(\sigma.{\OLId{latin-ordinary}{n}})]$
+    يلزم~$\mSat/{{\OLId{latin-looped}{M}}}{!B}[{\OLId{latin-ordinary}{w}}]$. ومنه~$\mSat/{{\OLId{latin-looped}{M}}}{\Diamond !B}[{\OLId{latin-ordinary}{f}}(\sigma)]$،
+    فيرضي~$\mModel{M}, {\OLId{latin-ordinary}{f}}$ الصيغة
+    $\sFmla{\False}{\Diamond !B}[\sigma]$.}}{}
+\end{tagenumerate}
+\end{proof}
+
+\tagprob{probBox,probDiamond}
+\begin{prob}
+  أكمل برهان \olref[nml][tab][msn]{prop:soundness-4r}.
+\end{prob}
+\tagendprob
+
+\begin{cor}
+\ollabel{cor:soundness-logics} أنظمة ال!!{tableau} الواردة في
+\olref[mru]{tab:logics-rules} سليمة لفئات النماذج المقابلة لها.
+\end{cor}
+
+\end{document}

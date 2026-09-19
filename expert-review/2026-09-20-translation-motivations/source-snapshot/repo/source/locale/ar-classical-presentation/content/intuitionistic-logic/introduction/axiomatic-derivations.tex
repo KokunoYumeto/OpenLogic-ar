@@ -1,0 +1,68 @@
+% part: intuitionistic-logic
+% chapter: introduction
+% section: axiomatic-derivations
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{int}{axd}
+
+\olsection{\usetoken{P}{derivation} بطريق المسلّمات}
+
+ال!!{derivation}s المسلّمية للمنطق القضي الحدسي هي أسبق أنظمة
+ال!!{derivation} تاريخًا، وأبينها من جهة التصور. وطريق عملها هو طريق
+المنطق القضي الكلاسيكي نفسه.
+
+\begin{defn}[!!^{derivability}]
+إذا كانت~${\OLId{greek-variable}{Gamma}}$ مجموعة من !!{formula}s اللغة~$\Lang L$، فــ
+\emph{!!{derivation}} من~${\OLId{greek-variable}{Gamma}}$ متتالية منتهية~$!A_{\OLMathNumeral{1}}$،
+\dots،~$!A_{\OLId{latin-ordinary}{n}}$ من ال!!{formula}s، ويصدق في كل~${\OLId{latin-ordinary}{i}} \le {\OLId{latin-ordinary}{n}}$ واحد مما يأتي:
+\begin{enumerate}
+\item $!A_{\OLId{latin-ordinary}{i}} \in {\OLId{greek-variable}{Gamma}}$؛ أو
+\item $!A_{\OLId{latin-ordinary}{i}}$ مسلمة؛ أو
+\item تنتج $!A_{\OLId{latin-ordinary}{i}}$ من بعض $!A_{\OLId{latin-ordinary}{j}}$ و$!A_{\OLId{latin-ordinary}{k}}$، حيث ${\OLId{latin-ordinary}{j}} < {\OLId{latin-ordinary}{i}}$ و${\OLId{latin-ordinary}{k}} < {\OLId{latin-ordinary}{i}}$،
+  بقاعدة إثبات المقدَّم؛ أي $!A_{\OLId{latin-ordinary}{k}} \ident !A_{\OLId{latin-ordinary}{j}} \lif !A_{\OLId{latin-ordinary}{i}}$.
+\end{enumerate}
+\end{defn}
+
+\begin{defn}[المسلّمات]
+مجموعة $\PAx$ من \emph{مسلّمات} المنطق القضي الحدسي هي جميع
+ال!!{formula}s ذات الصور الآتية:
+\begin{align}
+  & (!A \land !B) \lif !A \ollabel{ax:land1}\\
+  & (!A \land !B) \lif !B \ollabel{ax:land2}\\
+  & !A \lif (!B \lif (!A \land !B)) \ollabel{ax:land3}\\
+  & !A \lif (!A \lor !B) \ollabel{ax:lor1}\\
+  & !A \lif (!B \lor !A) \ollabel{ax:lor2}\\
+  & (!A \lif !C) \lif ((!B \lif !C) \lif ((!A \lor !B) \lif !C)) \ollabel{ax:lor3}\\
+  & !A \lif (!B \lif !A) \ollabel{ax:lif1}\\
+  & (!A \lif (!B \lif !C)) \lif ((!A \lif !B) \lif (!A \lif !C)) \ollabel{ax:lif2}\\
+  & \lfalse \lif !A \ollabel{ax:lfalse1}
+\end{align}
+\end{defn}
+
+\begin{defn}[!!^{derivability}]
+تكون !!^a{formula}~$!A$ \emph{!!{derivable}} من~${\OLId{greek-variable}{Gamma}}$، ونكتب
+${\OLId{greek-variable}{Gamma}} \Proves !A$، إذا وجدت !!a{derivation} من~${\OLId{greek-variable}{Gamma}}$ آخرها
+$!A$.
+\end{defn}
+
+\begin{defn}[المبرهنات]
+تسمى !!^a{formula}~$!A$ \emph{مبرهنة} إذا وجدت !!a{derivation}
+لــ$!A$ من المجموعة الخالية. ونكتب~$\Proves !A$ إذا كانت~$!A$
+مبرهنة، و$\Proves/ !A$ إذا لم تكن.
+\end{defn}
+
+\begin{prop}
+  إذا كان~${\OLId{greek-variable}{Gamma}} \Proves !A$ في نظام ال!!{derivation} المسلّمي
+  الحدسي، كان~${\OLId{greek-variable}{Gamma}} \Proves !A$ في المنطق الكلاسيكي أيضًا. وعلى
+  الخصوص، كل~$!A$ تكون مبرهنة حدسية هي مبرهنة كلاسيكية.
+\end{prop}
+
+\begin{proof}
+  لأن كل مسلمة حدسية مسلمة كلاسيكية؛ فكل !!{derivation} حدسية
+  !!a{derivation} كلاسيكية أيضًا.
+\end{proof}
+
+\end{document}

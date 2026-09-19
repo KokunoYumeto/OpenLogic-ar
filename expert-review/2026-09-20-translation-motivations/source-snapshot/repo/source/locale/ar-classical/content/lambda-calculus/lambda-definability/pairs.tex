@@ -1,0 +1,55 @@
+% Part: lambda-calculus
+% Chapter: lambda-definability
+% Section: pairs
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{ldf}{pai}
+\olsection{الأزواج ودالة السابق}
+
+\begin{defn}
+زوج الحدين~$M$ و$N$، ورمزه~$\tuple{M,N}$، هو بالتعريف
+\[
+\tuple{M,N} \ident \lambd[f][fMN].
+\]
+\end{defn}
+  
+معناه الحدسي دالة تأخذ دالة أخرى فتطبقها في عنصري الزوج.
+وعلى هذا نبني حدًا يأخذ حدين ويعطي الزوج المؤلف منهما:
+\[
+  \fn{Pair} \ident \lambd[mn][\lambd[f][fmn]]
+\]
+وكما نحتاج إلى تكوين الزوج، نحتاج إلى استخراج عنصريه.
+فلذلك نعرّف دالتي وصول، تأخذ كل منهما زوجًا،
+فتردّ إحداهما عنصره الأول وتردّ الأخرى عنصره الثاني:
+\begin{align*}
+  \fn{Fst} & \ident \lambd[p][p(\lambd[mn][m])]\\
+  \fn{Snd} & \ident \lambd[p][p(\lambd[mn][n])]
+\end{align*}
+
+\begin{prob}
+  بيّن وجه أداء دالتي الوصول~$\fn{Fst}$ و$\fn{Snd}$ لما قصد بهما.
+\end{prob}
+
+وبعد أن صار تمثيل الأزواج في أيدينا، أمكن أن !!{lambda define} دالة السابق:
+\[
+  \fn{Pred} \ident \lambd[n][\fn{Fst}(n (\lambd[p][\tuple{\fn{Snd}\, {p}, \fn{Succ}(\fn{Snd}\, {p})}]) \tuple{\num 0, \num 0})]
+\]
+فقد علمنا أن~$\num n\, f x$ يختزل إلى~$f^{n}(x)$.
+أما~$f$ هنا فتأخذ زوجًا~$p$، وتردّ زوجًا مركبته الأولى هي الثانية من~$p$،
+ومركبته الثانية خلف تلك المركبة؛ وأما~$x$ فهو~$\tuple{\num 0,\num 0}$.
+فتبقى النتيجة~$\tuple{\num 0,\num 0}$ إذا كان~$n=0$،
+وتكون~$\tuple{\num{n-1}, \num n}$ فيما عدا ذلك.
+ثم تأخذ~$\fn{Pred}$ المركبة الأولى من هذا الناتج.
+
+ومن هنا نعرّف الطرح على الأعداد الطبيعية مع الوقوف عند الصفر؛
+فإن جاوز المطروحُ المطروحَ منه فالنتيجة صفر، وإلا فالفرق المعتاد.
+وبهذا يتبين قيد العملية التي أطلق الأصل عليها اسم الطرح.
+وسبيل تعريفه تكرار تطبيق~$\fn{Pred}$ في~$a$ بمقدار~$b$ من المرات:
+\[
+\fn{Sub} \ident \lambd[ab][b \fn{Pred}\, a].
+\]
+    
+\end{document}

@@ -1,0 +1,378 @@
+% Part: proof-theory
+% Chapter: sequent-calculus
+% Section: invertibility
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{seq}{inv}
+
+\olsection{قابلية القواعد للعكس}
+
+\begin{defn}
+تكون القاعدة~$R$،
+\[
+\AxiomC{$S_1$}
+\AxiomC{$\dots$}
+\AxiomC{$S_n$}
+\RightLabel{$R$}
+\TrinaryInfC{$S$}
+\DisplayProof
+\]
+\emph{قابلة للعكس} في نظام إذا لزم من~$\Proves S$ أن~$\Proves S_i$
+لكل~$i=1$، \dots،~$n$. وتكون~\emph{قابلة للعكس مع حفظ~!!{height}}
+(أو~\emph{قابلة للعكس مع حفظ~!!{hp}}) في نظام إذا لزم من
+$\Proves_n S$ أن~$\Proves[n] S_i$ لكل~$i=1$، \dots،~$n$.
+\end{defn}
+
+\begin{lem}\ollabel{lem:G3c-invert}
+قواعد~\Log{G3c} الخاصة بـ$\lnot$ و$\land$ و$\lor$ و$\lif$ قابلة للعكس مع
+حفظ~!!{height}، أي:
+\begin{enumerate}
+  \item \RightR{\lnot}: إذا كان~$\Log{G3c} \Proves[n] \Gamma \Sequent
+  \Delta, \lnot !A$، فإن~$\Log{G3c} \Proves[n] !A, \Gamma \Sequent
+  \Delta$.
+  \item \LeftR{\lnot}: إذا كان~$\Log{G3c} \Proves[n] \Gamma, \lnot !A
+  \Sequent \Delta$، فإن~$\Log{G3c} \Proves[n] \Gamma \Sequent \Delta,
+  !A$.
+  \item \RightR{\land}: إذا كان~$\Log{G3c} \Proves[n] \Gamma \Sequent
+  \Delta, !A \land !B$، فإن~$\Log{G3c} \Proves[n] \Gamma \Sequent
+  \Delta, !A$ و$\Log{G3c} \Proves[n] \Gamma \Sequent
+  \Delta, !B$.
+  \item \LeftR{\land}: إذا كان~$\Log{G3c} \Proves[n] \Gamma, !A \land !B
+  \Sequent \Delta$، فإن~$\Log{G3c} \Proves[n] !A, !B, \Gamma \Sequent
+  \Delta$.
+  \item \RightR{\lor}: إذا كان~$\Log{G3c} \Proves[n] \Gamma \Sequent
+  \Delta, !A \lor !B$، فإن~$\Log{G3c} \Proves[n] \Gamma \Sequent
+  \Delta, !A, !B$.
+  \item \LeftR{\lor}: إذا كان~$\Log{G3c} \Proves[n] !A \lor !B, \Gamma \Sequent
+  \Delta$، فإن~$\Log{G3c} \Proves[n] !A, \Gamma \Sequent
+  \Delta$ و$\Log{G3c} \Proves[n] !B, \Gamma \Sequent
+  \Delta$.
+  \item \RightR{\lif}: إذا كان~$\Log{G3c} \Proves[n] \Gamma \Sequent
+  \Delta, !A \lif !B$، فإن~$\Log{G3c} \Proves[n] !A, \Gamma \Sequent
+  \Delta, !B$.
+  \item \LeftR{\lif}: إذا كان~$\Log{G3c} \Proves[n] !A \lif !B, \Gamma
+  \Sequent \Delta$، فإن~$\Log{G3c} \Proves[n] \Gamma \Sequent \Delta,
+  !A$ و$\Log{G3c} \Proves[n] !B, \Gamma \Sequent \Delta$.
+\end{enumerate}
+\end{lem}
+
+\begin{proof}
+علينا أن نبين أنه لأي قاعدة~$R$ من~\Log{G3c}، إذا وُجد~!!a{proof}~$\pi$
+لنتيجة~$S$ للقاعدة~$R$، وُجدت كذلك~!!{proof}s~$\pi_i$ لمقدماتها~$S_i$،
+مع~$\pheight{\pi_i}\leq\pheight{\pi}$. ولننظر في القاعدة
+\LeftR{\land}: افترض أن ثمة~!!a{proof}~$\pi$ متتاليته النهائية من الصورة
+$!A\land !B,\Gamma\Sequent\Delta$. علينا أن نبين وجود~!!a{proof}~$\pi'$
+لـ$!A,!B,\Gamma\Sequent\Delta$ بحيث~$\pheight{\pi'}\leq
+\pheight{\pi}$. ونفعل ذلك بالاستقراء على~$n=\pheight{\pi}$.
+
+إذا كان~$n=0$، فإن~$\pi$ يتكون من بديهية واحدة أو من تطبيق بلا مقدمات
+لقاعدة~$\LeftR{\lfalse}$. وبديهيات~\Log{G3c} من الصورة~$!C,\Gamma
+\Sequent\Delta,!C$ حيث~$!C$ ذرية؛ أي لا يمكن أن تكون~$!C$ هي~$!A\land
+!B$. فإذا كانت~$!A\land !B,\Gamma\Sequent\Delta$ بديهية، وجب أن يكون
+بعض~$!C$ الذرية~!!a{element} في كل من~$\Gamma$ و$\Delta$. ومن ثم تكون
+$!A,!B,\Gamma\Sequent\Delta$ بديهية أيضًا، فنكون قد وجدنا~!!{proof}~$\pi'$
+(وهو أيضًا ذو~!!{height}~$0$). وإذا كانت~$\pi$ تطبيقًا لـ$\LeftR{\lfalse}$،
+فإن~$\lfalse$ في السياق الأيسر وتظل فيه بعد الاستبدال، فتكون المتتالية
+المطلوبة نتيجة تطبيق للقاعدة نفسها.
+
+إذا كان~$n>0$، انتهى البرهان باستدلال. وعلينا إثبات الدعوى لـ$n$، مع
+افتراض صحتها لأي~!!{proof} ارتفاعه أصغر من~$n$، حتى لو اختلف السياق.
+وبعبارة أخرى، لكل~$k<n$ ولكل~$\Pi$ و$\Lambda$، إذا كان لـ$!A\land
+!B,\Pi\Sequent\Lambda$~!!a{proof} ذو~!!{height}~$k$، فهناك~!!a{proof}
+ذو~!!{height} لا يتجاوز~$k$ لـ$!A,!B,\Pi\Sequent\Lambda$.
+
+لدينا حالتان: إما أن تكون~$!A\land !B$ في اليسار رئيسة، وإما ألا تكون.
+فإذا كانت رئيسة، كان الاستدلال الأخير هو~\LeftR{\land}، وانتهى
+الـ!!{proof} الجزئي المباشر~$\pi_1$ بـ$!A,!B,\Gamma\Sequent\Delta$.
+فتصح النتيجة في هذه الحالة لأن~$\pheight{\pi_1}<\pheight{\pi}$.
+
+أما إذا لم تكن~$!A\land !B$ رئيسة، فبعض~!!{formula} أخرى هي الرئيسة،
+وتنتمي~$!A\land !B$ إلى سياق الاستدلال الأخير. ينطبق عندئذ فرض الاستقراء
+على الـ!!{proof}s الجزئية المباشرة للقاعدة الأخيرة~$R$، فيعطي~!!a{proof}
+واحدًا~$\pi_1'$ أو~!!{proof}s اثنين~$\pi_1'$ و$\pi_2'$، لا يزيد
+!!{height} كل منهما على ارتفاع الـ!!{proof}s الجزئية المباشرة لـ$\pi$.
+وتحتوي المتتاليات النهائية لـ$\pi_1'$ و$\pi_2'$ على~$!A,!B$ في السياق
+الأيسر بدلًا من~$!A\land !B$. نطبق القاعدة~$R$ لنحصل على البرهان~$\pi'$.
+فمثلًا، افترض أن~$\pi$ ينتهي بـ\LeftR{\lif}:
+\[
+\AxiomC{}
+\RightLabel{$\pi_1$}
+\Deduce$!A \land !B, \Gamma' \fCenter \Delta, !C$
+\AxiomC{}
+\RightLabel{$\pi_2$}
+\Deduce$!A \land !B, \Gamma', !D \fCenter \Delta$
+\RightLabel{\LeftR{\lif}}
+\BinaryInf$!A \land !B, \Gamma', !C \lif !D \fCenter \Delta$
+\DisplayProof
+\]
+هنا تكون~$!C\lif !D$ في اليسار رئيسة، والسياق الأيسر هو~$!A\land
+!B,\Gamma'$ (أي~$\Gamma=\Gamma',!C\lif !D$). ويعطي فرض الاستقراء
+!!{proof}s~$\pi_1'$ و$\pi_2'$ لـ$!A,!B,\Gamma'\Sequent\Delta,!C$
+و$!A,!B,\Gamma',!D\Sequent\Delta$، على الترتيب. ويمكن استعمال هاتين
+المتتاليتين مرة أخرى مقدمتين لقاعدة~\LeftR{\lif} للحصول على~$\pi'$:
+\[
+\AxiomC{}
+\RightLabel{$\pi_1'$}
+\Deduce$!A, !B, \Gamma' \fCenter \Delta, !C$
+\AxiomC{}
+\RightLabel{$\pi_2'$}
+\Deduce$!A, !B, \Gamma', !D \fCenter \Delta$
+\RightLabel{\LeftR{\lif}}
+\BinaryInf$!A, !B, \Gamma', !C \lif !D \fCenter \Delta$
+\DisplayProof
+\]
+ولدينا
+\begin{align*}
+\pheight{\pi} & = \max(\pheight{\pi_1}, \pheight{\pi_2}) + 1\\
+\pheight{\pi'} & = \max(\pheight{\pi_1'}, \pheight{\pi_2'}) + 1
+\intertext{بحسب التعريف، كما أن}
+\pheight{\pi_1'} & \le \pheight{\pi_1}\\
+\pheight{\pi_2'} & \le \pheight{\pi_2}
+\intertext{بفرض الاستقراء. ومن ثم}
+\pheight{\pi'} & \le \pheight{\pi}.
+\end{align*}
+\end{proof}
+
+\begin{prob}
+أعط برهان~\olref{lem:G3c-invert} للقاعدة~\RightR{\lif}.
+\end{prob}
+
+\begin{lem}\ollabel{lem:invert-quant}
+القاعدتان~\RightR{\lforall} و\LeftR{\lexists} قابلتان للعكس مع
+حفظ~!!{height} بالمعنى الآتي:
+\begin{enumerate}
+  \item إذا كان~$\Log{G3c} \Proves[n] \Gamma \Sequent \Delta,
+  \lforall[x][!A(x)]$، فإن~$\Log{G3c} \Proves[n] \Gamma \Sequent
+  \Delta,!A(c)$؛ و
+  \item إذا كان~$\Log{G3c} \Proves[n] \lexists[x][!A(x)],\Gamma\Sequent
+  \Delta$، فإن~$\Log{G3c} \Proves[n] !A(c),\Gamma\Sequent\Delta$،
+\end{enumerate}
+لكل~$c$ لا يظهر في~$\Gamma$ ولا~$\Delta$ ولا في~$\lforall[x][!A(x)]$
+أو~$\lexists[x][!A(x)]$، على الترتيب.
+\end{lem}
+
+\begin{proof}
+نبرهن (1) ونترك (2) تمرينًا. والحجة شبيهة ببرهان
+\olref{lem:G3c-invert}. في خطوة الاستقراء حالتان مرة أخرى. أما الحالة التي
+تكون فيها~$\lforall[x][!A(x)]$ رئيسة فهي سريعة: مقدمة استدلال
+$\RightR{\lforall}$ الأخير من الصورة المطلوبة~$\Gamma\Sequent
+\Delta,!A(a)$، وينتهي عندها الـ!!{proof} الجزئي المباشر~$\pi_1$، ولدينا
+$\pheight{\pi_1}<\pheight{\pi}$. ويضمن شرط المتغير المميز، فوق ذلك، ألا
+يظهر~$a$ في~$\Gamma$ أو~$\Delta$ أو~$\lforall[x][!A(x)]$. ولنا أن نفترض
+أن~$\pi_1$ منتظم، ولذلك يكون~$\Subst{\pi_1}{c}{a}$~!!a{proof} من
+!!{height} نفسه لـ$\Gamma\Sequent\Delta,!A(c)$ بموجب
+\olref[qua]{lem:subst-regular}.
+
+وفي الحالة الثانية لا تكون~$\lforall[x][!A(x)]$ رئيسة في الاستدلال
+الأخير، بل تكون صيغة أخرى رئيسة. ولننظر مرة أخرى في حالة على سبيل المثال.
+افترض أن الاستدلال الأخير هو~\RightR{\land}. تكون~!!{formula} ما في
+$\Delta$ من الصورة~$!B\land !C$ وهي الرئيسة، وينتهي~!!{proof}~$\pi$ هكذا:
+\[
+\AxiomC{}
+\RightLabel{$\pi_1$}
+\Deduce$\Gamma \fCenter \Delta', \lforall[x][!A(x)], !B$
+\AxiomC{}
+\RightLabel{$\pi_2$}
+\Deduce$\Gamma \fCenter \Delta', \lforall[x][!A(x)], !C$
+\RightLabel{\RightR{\land}}
+\BinaryInf$\Gamma \fCenter \Delta', \lforall[x][!A(x)], !B \land !C$
+\DisplayProof
+\]
+حيث~$\Delta=\Delta',!B\land !C$. ولتكن~$c$~!!a{constant} لا تظهر في
+$\Gamma$ ولا~$\Delta$ ولا~$\lforall[x][!A(x)]$؛ فمن الواضح عندئذ أنها لا
+تظهر أيضًا في~$\Delta',!B$ ولا في~$\Delta',!C$. ولذلك ينطبق فرض الاستقراء
+على~$\pi_1$ و$\pi_2$؛ فنحصل على~!!{proof}s~$\pi_1'$ و$\pi_2'$ مع
+$\pheight{\pi_1'}\leq\pheight{\pi_1}$ و$\pheight{\pi_2'}\leq
+\pheight{\pi_2}$. والـ!!{proof} المطلوب~$\pi'$ لـ$\Gamma\Sequent
+\Delta,!A(c)$ هو:
+\[
+\AxiomC{}
+\RightLabel{$\pi_1'$}
+\Deduce$\Gamma \fCenter \Delta', !A(c), !B$
+\AxiomC{}
+\RightLabel{$\pi_2'$}
+\Deduce$\Gamma \fCenter \Delta', !A(c), !C$
+\RightLabel{\RightR{\land}}
+\BinaryInf$\Gamma \fCenter \Delta', !A(c), !B \land !C$
+\DisplayProof
+\]
+ومعه~$\pheight{\pi'}=\max(\pheight{\pi_1'},\pheight{\pi_2'})+1
+\leq\pheight{\pi}$.
+\end{proof}
+
+تؤدي~\Olref{lem:G3c-invert} دورًا مهمًا في برهان مبرهنة حذف القطع. ويمكن
+كذلك استعمالها لبيان ما يأتي:
+
+\begin{prop}\ollabel{prop:G3c-cont-adm}
+قاعدتا التقلص~\LeftR{\Contraction} و\RightR{\Contraction} في~\Log{G1c}
+مقبولتان في~\Log{G3c} مع حفظ~!!{height}.
+\end{prop}
+
+\begin{proof}
+نقدم الحجة لـ\RightR{\Contraction} و\LeftR{\Contraction} معًا. افترض أن
+$\pi$~!!a{proof} لـ$\Gamma\Sequent\Delta,!A,!A$ أو لـ$!A,!A,\Gamma
+\Sequent\Delta$ في~\Log{G3c}. علينا أن نبين وجود~\Log{G3c}-!!{proof}
+أيضًا، وليكن~$\pi'$، لـ$\Gamma\Sequent\Delta,!A$ أو لـ$!A,\Gamma
+\Sequent\Delta$، على الترتيب، مع~$\pheight{\pi'}\leq\pheight{\pi}$.
+ونفعل ذلك بالاستقراء على~$n=\pheight{\pi}$.
+
+إذا كان~$n=0$، فإن~$\pi$ بديهية أو تطبيق بلا مقدمات لـ$\LeftR{\lfalse}$.
+فإذا كانت~$\Gamma\Sequent\Delta,!A,!A$ بديهية لـ\Log{G3c}، كانت
+$\Gamma\Sequent\Delta,!A$ بديهية أيضًا: فإما أن تكون~$!C$ ذرية ما
+!!a{element} في كل من~$\Gamma$ و$\Delta$، أو أن تكون~$!A$ ذرية
+و!!a{element} في~$\Gamma$. وينطبق التعليل نفسه إذا كانت المتتالية النهائية
+$!A,!A,\Gamma\Sequent\Delta$. وإذا كانت~$\pi$ تطبيقًا لـ$\LeftR{\lfalse}$،
+بقيت~$\lfalse$ في الطرف الأيسر بعد التقلص، فتكون النتيجة المطلوبة تطبيقًا
+للقاعدة نفسها.
+
+إذا كان~$n>0$، انتهى~$\pi$ بقاعدة ما~$R$. وإذا لم تكن~$!A$ رئيسة في هذا
+الاستدلال الأخير، أمكننا الحصول على~!!a{proof}~$\pi'$ كما في برهان
+\olref{lem:G3c-invert}، بتطبيق فرض الاستقراء على الـ!!{proof}s الجزئية
+المباشرة لـ$\pi$ ثم تطبيق القاعدة~$R$ نفسها على الـ!!{proof}s الناتجة.
+وفرض الاستقراء هو أنه إذا وُجد~!!a{proof} من~!!{height}~$k<n$ لإحدى
+المتتاليتين~$\Pi\Sequent\Lambda,!D,!D$ أو~$!D,!D,\Pi\Sequent\Lambda$،
+فيوجد~!!a{proof} من~!!{height} لا يتجاوز~$k$ لـ$\Pi\Sequent\Lambda,!D$
+أو~$!D,\Pi\Sequent\Lambda$، على الترتيب. (لاحظ أن فرض الاستقراء ينطبق
+حتى إذا اختلفت السياقات أو~!!{formula} المتقلصة عن~$\Gamma$ و$\Delta$
+و$!A$.)
+
+فمثلًا، افترض أن~$R$ هي~$\RightR{\land}$ وأن~$\pi$ ينتهي بـ
+\[
+\AxiomC{}
+\RightLabel{$\pi_1$}
+\Deduce$\Gamma \fCenter \Delta', !B, !A, !A$
+\AxiomC{}
+\RightLabel{$\pi_2$}
+\Deduce$\Gamma \fCenter \Delta', !C, !A, !A$
+\RightLabel{\RightR{\land}}
+\BinaryInf$\Gamma \fCenter \Delta', !B \land !C, !A, !A$
+\DisplayProof
+\]
+حيث~$\Delta=\Delta',!B\land !C$. يعطي فرض الاستقراء~!!{proof}s
+$\pi_1'$ و$\pi_2'$ لـ$\Gamma\fCenter\Delta',!B,!A$ و$\Gamma\fCenter
+\Delta',!C,!A$، على الترتيب، مع~$\pheight{\pi_1'}\leq
+\pheight{\pi_1}$ و$\pheight{\pi_2'}\leq\pheight{\pi_2}$. والـ!!{proof}
+$\pi'$ هو:
+\[
+\AxiomC{}
+\RightLabel{$\pi_1'$}
+\Deduce$\Gamma \fCenter \Delta', !B, !A$
+\AxiomC{}
+\RightLabel{$\pi_2'$}
+\Deduce$\Gamma \fCenter \Delta', !C, !A$
+\RightLabel{\RightR{\land}}
+\BinaryInf$\Gamma \fCenter \Delta', !B \land !C, !A$
+\DisplayProof
+\]
+
+وإذا كانت~$!A$ رئيسة في الاستدلال الأخير، طبقنا لمّة العكس
+(\olref{lem:G3c-invert}) على الـ!!{proof}s الجزئية المباشرة لـ$\pi$، ثم
+فرض الاستقراء، ثم القاعدة~$R$ مرة أخرى. فمثلًا، افترض أن~$\pi$ يبرهن
+$\Gamma\Sequent\Delta,!A,!A$، وأن~$!A\ident(!B\land !C)$ ورئيسة في
+الاستدلال الأخير. عندئذ يبدو~$\pi$ كما يأتي:
+\[
+\AxiomC{}
+\RightLabel{$\pi_1$}
+\Deduce$\Gamma \fCenter \Delta, !B \land !C, !B$
+\AxiomC{}
+\RightLabel{$\pi_2$}
+\Deduce$\Gamma \fCenter \Delta, !B \land !C, !C$
+\RightLabel{\RightR{\land}}
+\BinaryInf$\Gamma \fCenter \Delta, !B \land !C, !B \land !C$
+\DisplayProof
+\]
+طبّق~\olref{lem:G3c-invert} على~$\pi_1$ لتحصل على~!!a{proof}~$\pi_1'$
+لـ$\Gamma\Sequent\Delta,!B,!B$. (وتعطي أيضًا~!!a{proof} لـ$\Gamma
+\Sequent\Delta,!C,!B$، لكننا لا نحتاج إليه.) وبالمثل، نحصل بتطبيق
+\olref{lem:G3c-invert} على~$\pi_2$ على~!!a{proof}~$\pi_2'$ لـ$\Gamma
+\Sequent\Delta,!C,!C$. ولأن عكس~$\RightR{\land}$ يحفظ~!!{height}، فإن
+$\pheight{\pi_1'}\leq\pheight{\pi_1}<\pheight{\pi}$ و
+$\pheight{\pi_2'}\leq\pheight{\pi_2}<\pheight{\pi}$. ومن ثم ينطبق فرض
+الاستقراء على~$\pi_1'$ و$\pi_2'$: فثمة~!!{proof}s~$\pi_1''$ و$\pi_2''$
+لـ$\Gamma\Sequent\Delta,!B$ و$\Gamma\Sequent\Delta,!C$، على الترتيب،
+مع~$\pheight{\pi_1''}\leq\pheight{\pi_1'}\leq\pheight{\pi_1}$ و
+$\pheight{\pi_2''}\leq\pheight{\pi_2'}\leq\pheight{\pi_2}$. وعندئذ
+يكون~!!{proof}~$\pi'$:
+\[
+\AxiomC{}
+\RightLabel{$\pi_1''$}
+\Deduce$\Gamma \fCenter \Delta, !B$
+\AxiomC{}
+\RightLabel{$\pi_2''$}
+\Deduce$\Gamma \fCenter \Delta, !C$
+\RightLabel{\RightR{\land}}
+\BinaryInf$\Gamma \fCenter \Delta, !B \land !C$
+\DisplayProof
+\]
+مع~$\pheight{\pi'}\leq\pheight{\pi}$.
+
+يجب أن نولي قواعد الكم عناية خاصة في الحالات التي تكون فيها~!!{formula}
+رئيسة.
+
+افترض أن~$!A\ident\lforall[x][!B(x)]$ رئيسة في اليمين. عندئذ ينتهي~$\pi$
+بـ
+\[
+\AxiomC{}
+\RightLabel{$\pi_1$}
+\Deduce$\Gamma \fCenter \Delta, \lforall[x][!B(x)], !B(a)$
+\RightLabel{\RightR{\lforall}}
+\UnaryInf$\Gamma \fCenter \Delta, \lforall[x][!B(x)], \lforall[x][!B(x)]$
+\DisplayProof
+\]
+وبموجب~\olref{lem:invert-quant} يوجد~!!a{proof}~$\pi_1'$ من~!!{height}
+لا يتجاوز~$\pheight{\pi_1}$ لـ$\Gamma\fCenter\Delta,!B(c),!B(a)$ لكل~$c$
+لا تظهر في~$\Gamma\fCenter\Delta,\lforall[x][!B(x)],!B(a)$. ولنا أن نفترض
+أن~$\pi_1'$ منتظم؛ ولذلك يكون الـ!!{proof}~$\Subst{\pi_1'}{a}{c}$ بموجب
+\olref[qua]{lem:subst-regular}~!!a{proof} لـ$\Gamma\fCenter\Delta,!B(a),
+!B(a)$، ومن~!!{height} لا يتجاوز~$\pheight{\pi_1}$ أيضًا. وينطبق الآن
+فرض الاستقراء فيعطينا~!!a{proof}~$\pi_1''$ لـ$\Gamma\fCenter\Delta,!B(a)$.
+نطبق قاعدة~$\RightR{\lforall}$ لنحصل على~$\pi'$:
+\[
+\AxiomC{}
+\RightLabel{$\pi_1''$}
+\Deduce$\Gamma \fCenter \Delta, !B(a)$
+\RightLabel{\RightR{\lforall}}
+\UnaryInf$\Gamma \fCenter \Delta, \lforall[x][!B(x)]$
+\DisplayProof
+\]
+مع~$\pheight{\pi'}\leq\pheight{\pi}$.
+
+والآن افترض أن~$!A\ident\lexists[x][!B(x)]$ ورئيسة في اليمين. عندئذ يبدو
+$\pi$ هكذا:
+\[
+\AxiomC{}
+\RightLabel{$\pi_1$}
+\Deduce$\Gamma \fCenter \Delta, \lexists[x][!B(x)], \lexists[x][!B(x)], !B(t)$
+\RightLabel{\RightR{\lexists}}
+\UnaryInf$\Gamma \fCenter \Delta, \lexists[x][!B(x)], \lexists[x][!B(x)]$
+\DisplayProof
+\]
+ينطبق فرض الاستقراء على~$\pi_1$، فنحصل على~!!a{proof}~$\pi_1'$ لـ$\Gamma
+\Sequent\Delta,\lexists[x][!B(x)],!B(t)$. (ولاحظ أننا لا نحتاج هنا إلى
+لمّة عكس.) وعندئذ يكون~!!{proof}~$\pi'$:
+\[
+\AxiomC{}
+\RightLabel{$\pi_1'$}
+\Deduce$\Gamma \fCenter \Delta, \lexists[x][!B(x)], !B(t)$
+\RightLabel{\RightR{\lexists}}
+\UnaryInf$\Gamma \fCenter \Delta, \lexists[x][!B(x)]$
+\DisplayProof
+\]
+مع~$\pheight{\pi'}\leq\pheight{\pi}$.
+\end{proof}
+
+\begin{prob}
+ارسم برهان~\olref{prop:G3c-cont-adm} لـ\LeftR{\Contraction}، وبيّن الحالتين
+اللّتين فيهما~$!A\ident(!B\land !C)$ و$!A\ident(!B\lif !C)$.
+\end{prob}
+
+\begin{prob}
+ارسم برهان~\olref{prop:G3c-cont-adm} لـ\LeftR{\Contraction} في حالات الكم
+المتبقية، أي حين~$!A\ident\lforall[x][!B(x)]$ وحين
+$!A\ident\lexists[x][!B(x)]$.
+\end{prob}
+
+\end{document}

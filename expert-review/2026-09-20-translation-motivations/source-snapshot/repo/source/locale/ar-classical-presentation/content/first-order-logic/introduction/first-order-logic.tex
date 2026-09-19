@@ -1,0 +1,72 @@
+% Part: first-order-logic
+% Chapter: introduction
+% Section: first-order-logic
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{int}{fol}
+
+\olsection{منطق الرتبة الأولى}
+
+الغالب أن القارئ قد عرف منطق الرتبة الأولى في دراسته الأولى للمنطق
+الصوري.\footnote{وعلى هذه المعرفة نبني عرضنا إلى حد بعيد!{} فمن
+  احتاج إليها رجع إلى كتاب تمهيدي، مثل \emph{forall x}
+  \citep{Magnus2021}.} وقد يكون عرفه باسم «منطق الكم» أو «منطق
+المحمولات». وهو في أصله لغة صورية: لها معجم معلوم، وتؤلف عباراتها
+من سلاسل عناصره. ولا تعد كل سلسلة عبارة مقبولة؛ بل للمقبول منها
+أقسام: الحدود، وال!!{formula}s، وال!!{sentence}s. والذي يعنينا
+خاصة هو ال!!{sentence}s، فإنها تقوم في منطق الرتبة الأولى مقام
+الجمل في اللغة الطبيعية. ومن ثم تعرض فيها مسائل المنطقي، كأن نسأل:
+\begin{itemize}
+    \item هل $!B$ لازمة منطقيًا عن~$!A$؟
+    \item أَ$!A$ صادقة منطقيًا، أم كاذبة منطقيًا، أم عارضة؟
+    \item أَ$!A$ و$!B$ متكافئتان؟
+\end{itemize}
+
+مرجع هذه المسائل أولًا إلى «معنى» ال!!{sentence}s. فالفيلسوف إذا
+سأل: أتلزم $!B$ منطقيًا عن~$!A$؟ قصد إلى التمييز بين أمرين:
+أيمكن أن تصدق $!A$ في حالة تكذب فيها~$!B$، فلا تكون $!B$ لازمة
+عن~$!A$؟ أم كل حالة تصدق فيها $!A$ تصدق فيها~$!B$، فتكون $!B$
+لازمة عن~$!A$؟ ولم نبيّن بعد ما «الحالة»؛ وبيانها من شأن
+\emph{الدلالة}. فدلالة منطق الرتبة الأولى تضبط ضبطًا رياضيًا فكرة
+«الحالة» الحدسية عند الفيلسوف، وتضبط معها معنى كون
+!!a{sentence}~$!A$ \emph{صادقة في} تلك الحالة. وما نضعه لضبط
+الحالة نسميه !!a{structure}، والعلاقة التي نضبط بها «الصدق في»
+نسميها \emph{الإرضاء}. فسنعرف «إرضاء $!A$ في~$\Struct{M}$»،
+ورمزه $\Sat{{\OLId{latin-looped}{M}}}{!A}$، حيث ال!!{sentence}s~$!A$ وال!!{structure}s~$\Struct{M}$.
+وبعد ذلك نحد سائر الألفاظ الدلالية، مثل «تلزم عن» و«صادقة
+منطقيًا»، حدودًا دقيقة. تتيح لنا هذه الحدود أن نفصل رياضيًا في
+قولنا، مثلًا:
+$\lforall[{\OLId{latin-ordinary}{x}}][(!A({\OLId{latin-ordinary}{x}}) \lif !B({\OLId{latin-ordinary}{x}}))],
+\lexists[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})] \Entails \lexists[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$.
+والجواب نعم. ومن تمرس بترميز اللغة الطبيعية عرف أن هذا ترميز لحجة
+مثل: «كل النمل حشرات، ويوجد نمل، فإذن توجد حشرات». وصلاحية هذه
+الحجة ظاهرة؛ فلا بد أن يوافقها تعريفنا الرياضي للزوم في اللغة
+الصورية.
+
+ولعل القارئ عرف أيضًا من دراسته الأولى \emph{!!{derivation}s}.
+فالمقرر التمهيدي في المنطق الصوري يدرب على إيجاد هذه
+ال!!{derivation}s، وقد يكون من أمثلته !!a{derivation} للاستلزام
+المتقدم. ولعرض ال!!{derivation}s طرائق كثيرة، منها «الاستنباط
+الطبيعي» و«أشجار الصدق» وغيرهما. وإنما توضع أنساق ال!!{derivation}
+لتكون أدوات للفصل في الأسئلة السابقة. فمثلًا، !!a{derivation}
+بالاستنباط الطبيعي مقدمته
+$\lforall[{\OLId{latin-ordinary}{x}}][(!A({\OLId{latin-ordinary}{x}}) \lif !B({\OLId{latin-ordinary}{x}}))]$ و$\lexists[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$،
+ونتيجته، أي سطره الأخير، $\lexists[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$، \emph{يثبت} أن
+$\lexists[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$ لازمة منطقيًا عن
+$\lforall[{\OLId{latin-ordinary}{x}}][(!A({\OLId{latin-ordinary}{x}}) \lif !B({\OLId{latin-ordinary}{x}}))]$ و$\lexists[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$.
+
+فما وجه هذا الإثبات؟ أنساق ال!!{derivation} في ظاهرها لا تتعرض
+للدلالة؛ فإن إقامة !!a{derivation} صوري إنما هي ترتيب رموز بمقتضى
+قواعد، ولا ذكر فيها للحالات ولا للصدق فيها. فلا تثبت الصلة بين
+أنساق ال!!{derivation} والدلالة إلا ببحث فوق منطقي. نحتاج، مثلًا،
+إلى برهان رياضي يثبت أن إمكان !!a{derivation} صوري
+لـ~$\lexists[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$ من
+$\lforall[{\OLId{latin-ordinary}{x}}][(!A({\OLId{latin-ordinary}{x}}) \lif !B({\OLId{latin-ordinary}{x}}))]$ و$\lexists[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$
+يكافئ كون $\lforall[{\OLId{latin-ordinary}{x}}][(!A({\OLId{latin-ordinary}{x}}) \lif !B({\OLId{latin-ordinary}{x}}))]$ و
+$\lexists[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$ مستلزمتين معًا~$\lexists[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$.
+ولا نشرع في ذلك حتى نفرغ من العمل الدقيق اللازم لضبط النحو والدلالة.
+
+\end{document}

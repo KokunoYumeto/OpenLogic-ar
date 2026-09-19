@@ -1,0 +1,114 @@
+% Part: incompleteness
+% Chapter: arithmetization-syntax
+% Section: coding-symbols
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{art}{cod}
+\olsection{ترميز الرموز}
+
+رموز اللغة الأساسية~$\Lang L$ لمنطق الرتبة الأولى هي
+\[
+\lfalse \quad \lnot \quad \lor \quad \land \quad \lif \quad \lforall
+\quad \lexists \quad \eq \quad ( \quad ) \quad ,
+\]
+ومعها مجموعات !!{enumerable} من المتغيرات
+وال!!{constant}s، ومجموعات !!{enumerable}
+من ال!!{function}s وال!!{predicate}s على
+اختلاف رتبها. ولكل رمز نعيّن \emph{رمزًا عدديًا}
+واحدًا، بحيث لا يشترك رمزان مختلفان في عدد.
+وإمكان ذلك معلوم من أن مجموعة الرموز
+!!{enumerable}، فتوجد !!a{bijection} بينها
+وبين الأعداد الطبيعية. لكننا نطلب زيادةً
+على ذلك أن يُستخرج الرمز من عدده حسابيًا،
+وأن تستخرج بعض خواصه، كرتبة !!a{function}.
+ولهذا طرائق كثيرة؛ نختار منها طريقةً
+تستعمل الدوال العودية البدائية.
+وتذكر أن $\tuple{{\OLId{latin-ordinary}{n}}_{\OLMathNumeral{0}},\dots,{\OLId{latin-ordinary}{n}}_{\OLId{latin-ordinary}{k}}}$ يرمز
+متتالية الأعداد ${\OLId{latin-ordinary}{n}}_{\OLMathNumeral{0}}$، و\dots، و${\OLId{latin-ordinary}{n}}_{\OLId{latin-ordinary}{k}}$.
+
+\begin{defn}
+لكل رمز ${\OLId{latin-ordinary}{s}}$ من~$\Lang L$ نعرّف \emph{رمزه العددي}
+$\scode {\OLId{latin-ordinary}{s}}$ بحسب التقسيم الآتي:
+\begin{enumerate}
+\item أما ${\OLId{latin-ordinary}{s}}$ المنطقي، فيؤخذ $\scode {\OLId{latin-ordinary}{s}}$ له من هذا الجدول:
+\[
+\begin{array}{cccccccccc}
+  \lfalse & \lnot & \lor & \land & \lif & \lforall \\
+\tuple{{\OLMathNumeral{0}}, {\OLMathNumeral{0}}} & \tuple{{\OLMathNumeral{0}}, {\OLMathNumeral{1}}} & \tuple{{\OLMathNumeral{0}}, {\OLMathNumeral{2}}} & \tuple{{\OLMathNumeral{0}}, {\OLMathNumeral{3}}} &
+\tuple{{\OLMathNumeral{0}}, {\OLMathNumeral{4}}} & \tuple{{\OLMathNumeral{0}}, {\OLMathNumeral{5}}} \\
+\lexists & \eq & ( & ) & ,\\
+\tuple{{\OLMathNumeral{0}}, {\OLMathNumeral{6}}} & \tuple{{\OLMathNumeral{0}}, {\OLMathNumeral{7}}} &
+\tuple{{\OLMathNumeral{0}}, {\OLMathNumeral{8}}} & \tuple{{\OLMathNumeral{0}}, {\OLMathNumeral{9}}} & \tuple{{\OLMathNumeral{0}}, {\OLMathNumeral{10}}}
+\end{array}
+\]
+\item وأما إذا كان ${\OLId{latin-ordinary}{s}}$ المتغير رقم ${\OLId{latin-ordinary}{i}}$، أي $\Obj v_{\OLId{latin-ordinary}{i}}$، فنجعل
+$\scode {\OLId{latin-ordinary}{s}}=\tuple{{\OLMathNumeral{1}},{\OLId{latin-ordinary}{i}}}$.
+\item وأما إذا كان ${\OLId{latin-ordinary}{s}}$ ال!!{constant} رقم ${\OLId{latin-ordinary}{i}}$، أي~$\Obj c_{\OLId{latin-ordinary}{i}}$، فنجعل
+  $\scode {\OLId{latin-ordinary}{s}}=\tuple{{\OLMathNumeral{2}},{\OLId{latin-ordinary}{i}}}$.
+\item وأما إذا كان ${\OLId{latin-ordinary}{s}}$ ال!!{function} رقم ${\OLId{latin-ordinary}{i}}$ وذا الرتبة ${\OLId{latin-ordinary}{n}}$، أي
+$\Obj f_{\OLId{latin-ordinary}{i}}^{\OLId{latin-ordinary}{n}}$، فنجعل $\scode {\OLId{latin-ordinary}{s}}=\tuple{{\OLMathNumeral{3}},{\OLId{latin-ordinary}{n}},{\OLId{latin-ordinary}{i}}}$.
+\item وأما إذا كان ${\OLId{latin-ordinary}{s}}$ ال!!{predicate} رقم ${\OLId{latin-ordinary}{i}}$ وذا الرتبة ${\OLId{latin-ordinary}{n}}$، أي
+$\Obj P_{\OLId{latin-ordinary}{i}}^{\OLId{latin-ordinary}{n}}$، فنجعل $\scode {\OLId{latin-ordinary}{s}}=\tuple{{\OLMathNumeral{4}},{\OLId{latin-ordinary}{n}},{\OLId{latin-ordinary}{i}}}$.
+\end{enumerate}
+\end{defn}
+
+\begin{prop}
+كل من العلاقتين الآتيتين عودية بدائية:
+\begin{enumerate}
+\item $\fn{Fn}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{n}})$ إذا وفقط إذا كان ${\OLId{latin-ordinary}{x}}$ رمز $\Obj f^{\OLId{latin-ordinary}{n}}_{\OLId{latin-ordinary}{i}}$ لبعض~${\OLId{latin-ordinary}{i}}$؛
+  وبعبارة أخرى، إذا كان ${\OLId{latin-ordinary}{x}}$ رمز !!{function} ذي رتبة ${\OLId{latin-ordinary}{n}}$.
+\item $\fn{Pred}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{n}})$ إذا وفقط إذا كان ${\OLId{latin-ordinary}{x}}$ رمز $\Obj P^{\OLId{latin-ordinary}{n}}_{\OLId{latin-ordinary}{i}}$ لبعض
+  ${\OLId{latin-ordinary}{i}}$، أو كان ${\OLId{latin-ordinary}{x}}$ رمز $\eq$ وكان ${\OLId{latin-ordinary}{n}}={\OLMathNumeral{2}}$؛ وبعبارة أخرى، إذا كان ${\OLId{latin-ordinary}{x}}$ رمز
+  !!{predicate} ذي رتبة ${\OLId{latin-ordinary}{n}}$.
+\end{enumerate}
+\end{prop}
+
+\begin{defn}
+لمتتالية الرموز ${\OLId{latin-ordinary}{s}}_{\OLMathNumeral{0}},\dots,{\OLId{latin-ordinary}{s}}_{{\OLId{latin-ordinary}{n}}-{\OLMathNumeral{1}}}$ نعرّف
+\emph{عدد غودل} بأنه
+$\tuple{\scode{{\OLId{latin-ordinary}{s}}_{\OLMathNumeral{0}}},\dots,\scode{{\OLId{latin-ordinary}{s}}_{{\OLId{latin-ordinary}{n}}-{\OLMathNumeral{1}}}}}$.
+\end{defn}
+
+\begin{explain}
+ولا تخلط بين \emph{الرمز العددي} و\emph{عدد غودل}.
+فرمز المتغير~$\Obj v_{\OLMathNumeral{5}}$ العددي هو
+$\scode{\Obj v_{\OLMathNumeral{5}}}=\tuple{{\OLMathNumeral{1}},{\OLMathNumeral{5}}}={\OLMathNumeral{2}}^{\OLMathNumeral{2}}\cdot{\OLMathNumeral{3}}^{\OLMathNumeral{6}}$.
+لكن~$\Obj v_{\OLMathNumeral{5}}$، إذا أخذ حدًا، متتالية
+رموز طولها~${\OLMathNumeral{1}}$. فيكون \emph{عدد غودل}
+$\Gn{\Obj v_{\OLMathNumeral{5}}}$ لل\emph{حد}~$\Obj v_{\OLMathNumeral{5}}$
+هو $\tuple{\scode{\Obj v_{\OLMathNumeral{5}}}}={\OLMathNumeral{2}}^{\scode{\Obj v_{\OLMathNumeral{5}}}+{\OLMathNumeral{1}}}
+={\OLMathNumeral{2}}^{{\OLMathNumeral{2}}^{\OLMathNumeral{2}}\cdot{\OLMathNumeral{3}}^{\OLMathNumeral{6}}+{\OLMathNumeral{1}}}$.
+\end{explain}
+
+\begin{ex}
+إذا كانت ${\OLId{latin-ordinary}{k}}_{\OLMathNumeral{0}}$، و\dots، و${\OLId{latin-ordinary}{k}}_{{\OLId{latin-ordinary}{n}}-{\OLMathNumeral{1}}}$ متتالية أعداد،
+فرمزها $\tuple{{\OLId{latin-ordinary}{k}}_{\OLMathNumeral{0}},\dots,{\OLId{latin-ordinary}{k}}_{{\OLId{latin-ordinary}{n}}-{\OLMathNumeral{1}}}}$ بطريق قوى الأعداد
+الأولية هو، كما تقدم،
+\[
+{\OLMathNumeral{2}}^{{\OLId{latin-ordinary}{k}}_{\OLMathNumeral{0}}+{\OLMathNumeral{1}}}\cdot{\OLMathNumeral{3}}^{{\OLId{latin-ordinary}{k}}_{\OLMathNumeral{1}}+{\OLMathNumeral{1}}}\cdot \dots \cdot {\OLId{latin-ordinary}{p}}_{{\OLId{latin-ordinary}{n}}-{\OLMathNumeral{1}}}^{{\OLId{latin-ordinary}{k}}_{{\OLId{latin-ordinary}{n}}-{\OLMathNumeral{1}}}+{\OLMathNumeral{1}}},
+\]
+وفيه ${\OLId{latin-ordinary}{p}}_{\OLId{latin-ordinary}{i}}$ العدد الأولي رقم ${\OLId{latin-ordinary}{i}}$، مع الابتداء بـ${\OLId{latin-ordinary}{p}}_{\OLMathNumeral{0}}={\OLMathNumeral{2}}$.
+فالصيغة $\eq[\Obj v_{\OLMathNumeral{0}}][\Obj 0]$، وكتابتها الصريحة
+${\eq}(\Obj v_{\OLMathNumeral{0}},\Obj c_{\OLMathNumeral{0}})$، لها عدد غودل
+\[
+\tuple{\scode{\eq},\scode{(},\scode{\Obj v_{\OLMathNumeral{0}}},\scode{,}, \scode{\Obj
+    c_{\OLMathNumeral{0}}},\scode{)}}.
+\]
+فنعوّض عن $\scode{\eq}$ بـ $\tuple{{\OLMathNumeral{0}},{\OLMathNumeral{7}}}={\OLMathNumeral{2}}^{{\OLMathNumeral{0}}+{\OLMathNumeral{1}}}\cdot{\OLMathNumeral{3}}^{{\OLMathNumeral{7}}+{\OLMathNumeral{1}}}$، وعن
+$\scode{\Obj v_{\OLMathNumeral{0}}}$ بـ $\tuple{{\OLMathNumeral{1}},{\OLMathNumeral{0}}}={\OLMathNumeral{2}}^{{\OLMathNumeral{1}}+{\OLMathNumeral{1}}}\cdot{\OLMathNumeral{3}}^{{\OLMathNumeral{0}}+{\OLMathNumeral{1}}}$، وهكذا.
+فتكون قيمة $\Gn{=(\Obj v_{\OLMathNumeral{0}},\Obj c_{\OLMathNumeral{0}})}$
+\begin{multline*}
+{\OLMathNumeral{2}}^{\scode{=} + {\OLMathNumeral{1}}}\cdot {\OLMathNumeral{3}}^{\scode{(}+{\OLMathNumeral{1}}}\cdot {\OLMathNumeral{5}}^{\scode{\Obj v_{\OLMathNumeral{0}}}+{\OLMathNumeral{1}}}
+\cdot {\OLMathNumeral{7}}^{\scode{,} + {\OLMathNumeral{1}}} \cdot {\OLMathNumeral{11}}^{\scode{\Obj c_{\OLMathNumeral{0}}}+{\OLMathNumeral{1}}} \cdot
+{\OLMathNumeral{13}}^{\scode{)}+{\OLMathNumeral{1}}} = \\
+{\OLMathNumeral{2}}^{{\OLMathNumeral{2}}^{\OLMathNumeral{1}}\cdot {\OLMathNumeral{3}}^{\OLMathNumeral{8}} + {\OLMathNumeral{1}}}\cdot {\OLMathNumeral{3}}^{{\OLMathNumeral{2}}^{\OLMathNumeral{1}}\cdot {\OLMathNumeral{3}}^{\OLMathNumeral{9}}+{\OLMathNumeral{1}}}\cdot {\OLMathNumeral{5}}^{{\OLMathNumeral{2}}^{\OLMathNumeral{2}}\cdot {\OLMathNumeral{3}}^{\OLMathNumeral{1}}+{\OLMathNumeral{1}}}
+\cdot {\OLMathNumeral{7}}^{{\OLMathNumeral{2}}^{\OLMathNumeral{1}}\cdot {\OLMathNumeral{3}}^{{\OLMathNumeral{11}}} + {\OLMathNumeral{1}}} \cdot {\OLMathNumeral{11}}^{{\OLMathNumeral{2}}^{\OLMathNumeral{3}}\cdot{\OLMathNumeral{3}}^{\OLMathNumeral{1}}+{\OLMathNumeral{1}}} \cdot
+{\OLMathNumeral{13}}^{{\OLMathNumeral{2}}^{\OLMathNumeral{1}}\cdot{\OLMathNumeral{3}}^{{\OLMathNumeral{10}}}+{\OLMathNumeral{1}}} = \\
+{\OLMathNumeral{2}}^{{\OLMathNumeral{13}}\,{\OLMathNumeral{123}}}\cdot {\OLMathNumeral{3}}^{{\OLMathNumeral{39}}\,{\OLMathNumeral{367}}}\cdot {\OLMathNumeral{5}}^{{\OLMathNumeral{13}}}\cdot {\OLMathNumeral{7}}^{{\OLMathNumeral{354}}\,{\OLMathNumeral{295}}}\cdot{\OLMathNumeral{11}}^{{\OLMathNumeral{25}}}\cdot{\OLMathNumeral{13}}^{{\OLMathNumeral{118}}\,{\OLMathNumeral{099}}}.
+\end{multline*}
+\end{ex}
+
+\end{document}

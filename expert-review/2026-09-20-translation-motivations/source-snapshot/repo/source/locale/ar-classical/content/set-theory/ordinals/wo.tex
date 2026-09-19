@@ -1,0 +1,73 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{ordinals}{wo}
+\olsection{في الترتيبات الجيدة}
+
+والحد الأساس هو:
+
+\begin{defn}
+تُسمّى العلاقة~$<$ \emph{ترتيبًا جيدًا} على~$A$ إذا وفقط إذا حققت
+الشرطين الآتيين:
+\begin{enumerate}
+\item أن تكون~$<$ متصلة: فلكل~$a, b \in A$ إما~$a < b$،
+	أو~$a = b$، أو~$b < a$؛
+\item وأن يكون لكل مجموعة جزئية غير خالية من~$A$ !!{element} أصغري بحسب~$<$،
+	أي إذا كان~$\emptyset \neq X \subseteq A$، فإن
+	$(\exists m \in X)(\forall z \in X)z \nless m$.
+\end{enumerate}
+\end{defn}
+
+ومن اليسير التحقق من أن علاقات الأمثلة الثلاثة السابقة ترتيبات جيدة.
+
+\begin{prob}
+في~\Olref[sth][ordinals][idea]{sec} ثلاثة ترتيبات نموذجية على الأعداد
+الطبيعية؛ أثبت أن كل واحد منها ترتيب جيد.
+\end{prob}
+
+وفي الترتيب الجيد ملاحظات أولية عظيمة الأثر:
+
+\begin{prop}\ollabel{wo:strictorder}
+إذا كانت~$<$ ترتيبًا جيدًا على~$A$، كان لكل مجموعة جزئية غير خالية من~$A$
+عنصر أصغر وحيد بحسب~$<$، وكانت~$<$ غير انعكاسية ولا تناظرية ومتعدية.
+\end{prop}
+
+\begin{proof}
+لتكن~$X$ مجموعة جزئية غير خالية من~$A$. فلها !!{element} أصغري بحسب
+$<$، سمّه~$m$؛ أي $(\forall z \in X)z \nless m$. ومن اتصال~$<$ يلزم
+$(\forall z \in X)m \leq z$؛ فيكون~$m$ أصغر !!{element} بحسب~$<$
+في~$X$.
+
+  ولعدم الانعكاس ثبّت~$a \in A$؛ فإن أصغر !!{element} بحسب~$<$ في
+  $\{a\}$ هو~$a$، ومن ثم~$a \nless a$. ولعدم التناظر، لو كان
+  $a<b$ و$b<a$ لما كان واحد من~$a$ و$b$ أصغريًا في~$\{a,b\}$، وذلك
+  محال. وللتعدي افرض~$a<b<c$، وليكن~$m$ أصغر !!{element} في
+  $\{a,b,c\}$. لا يكون~$m=b$ لأن~$a<b$، ولا يكون~$m=c$ لأن~$b<c$؛
+  فلا بد أن يكون~$m=a$، ومن ثم~$a\leq c$. ولما كان~$a\neq c$ بحكم
+  عدم التناظر، لزم~$a<c$، فثبت أن~$<$ متعدية.
+\end{proof}
+
+\begin{prop}\ollabel{propwoinduction}
+إذا كانت~$<$ ترتيبًا جيدًا على~$A$، كان، لكل صيغة~$\phi(x)$:
+\[
+	\text{إذا كان }(\forall a \in A)((\forall b < a)\phi(b) \lif 
+		\phi(a))\text{، فإن }(\forall a \in A)\phi(a).
+\]
+\end{prop}
+
+\begin{proof}
+نبرهن نقيض المقابل. افترض~$\lnot(\forall a \in A)\phi(a)$؛ أي إن
+$X = \Setabs{x \in A}{\lnot\phi(x)} \neq \emptyset$. عندئذ يكون
+لـ$X$ !!{element} أصغري بحسب~$<$، سمّه~$a$. ومن ثم
+$(\forall b < a)\phi(b)$، مع أن~$\lnot \phi(a)$.
+\end{proof}\noindent
+وهذه الخاصية الأخيرة نظيرة مبدأ الاستقراء القوي على الأعداد الطبيعية،
+وهو: إذا كان
+$(\forall n \in \omega)((\forall m < n)\phi(m) \lif \phi(n))$، فإن
+$(\forall n \in \omega)\phi(n)$. وبها يغدو الترتيب الجيد مفهومًا بالغ
+\emph{القوة}.
+\footnote{تذكير: يجوز أن تكون لجميع الصيغ معاملات (ما لم يُصرح بخلاف ذلك).}
+
+\end{document}
+

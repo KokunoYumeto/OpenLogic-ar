@@ -1,0 +1,151 @@
+% Part: proof-theory
+% Chapter: natural-deduction
+% Section: sequents
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{nat}{seq}
+
+\olsection{الاستنباط الطبيعي بالمتتاليات: \Log{N2c} و\Log{N2i}}
+
+يبين~!!^a{proof}~$\delta$ في~\Log{N1c} أو~\Log{N1i} أن~!!{formula}
+نهايته~$!A$ تلزم من فروضه المفتوحة. وإذا كانت~$\Gamma$ مجموعة
+!!{formula}s~$!B$ التي تظهر~$!B^x$ منها فرضًا مفتوحًا في~$\delta$،
+أمكننا كتابة ذلك~$\delta \Proves \Gamma \Sequent !A$. وهذا يرجح إمكان
+صياغة نظام للاستنباط الطبيعي يعمل على المتتاليات أيضًا. ففي نظام كهذا
+تحمل كل متتالية معلومة الفروض المفتوحة التي تعتمد عليها~!!{formula}
+الواقعة في اليمين، أي الفروض المفتوحة في~!!{proof} الجزئي المنتهي
+بمتتالية. وهذا هو الاستنباط الطبيعي بالمتتاليات، أو الاستنباط الطبيعي
+«على طريقة المتتاليات»، ونسمي النظامين الناتجين~\Log{N2c} و\Log{N2i}.
+
+ولتقريب المطابقة بين~\Log{N1} و\Log{N2}، لنجعل المجموعات~$\Gamma$ في
+اليسار مؤلفة من~!!{formula}s موسومة~$x:!B$. ولأن قواعد~\Log{N1} لا تعمل
+إلا على~!!{formula}s في المقدمات، أي~!!{formula}s نهاية~!!{proof}s
+الجزئية المباشرة، فلا تعمل قواعد~\Log{N2} إلا على تالي المتتالية. ومن ثم
+نستطيع تسمية الصيغ الموسومة الواقعة إلى يسار المتتاليات \emph{السياق}
+فحسب.
+
+وبدلًا من الفروض، تكون أعلى متتاليات براهين~\Log{N2} مسلّمات من الصورة
+\[x:!A \Sequent !A.\]
+وتطابق القواعد قواعد~\Log{N1} تمامًا، وترد في~\olref{tab:N2}.
+
+\subfile{rules-N2}
+
+ولأن علينا أن نجيز، كما نجيز في~\Log{N1c} و\Log{N1i}، أن قواعد
+$\Intro{\lif}$ و$\Intro{\lnot}$ و$\Elim{\lor}$ و$\Elim{\lexists}$
+قد تبرئ فروضًا وقد لا تبرئها بالفعل، فإننا نجيز التطبيقات الصحيحة
+للقواعد المقابلة في~\Log{N2c} و\Log{N2i} حتى عندما لا تكون
+!!{formula}s السياق المقابلة~$!A$ و$!B$ و$!A(a)$ موجودة في سياق
+المقدمة المعنية.
+
+\begin{prop}
+إذا كان~$\delta$~!!a{proof} في~\Log{N1c} أو~\Log{N1i} لـ$!A$، وُجد
+!!a{proof}~$\delta'$ لـ$\Gamma \Sequent !A$ في~\Log{N2c}، أو في
+\Log{N2i}، حيث~$\Gamma$ مجموعة كل~$x:!B$ التي يكون فيها~$!B^x$ فرضًا
+مفتوحًا في~$\delta$.
+\end{prop}
+
+\begin{proof}
+  بالاستقراء على~$n=\pheight{\delta}$. إذا كان~$n=0$، كان~$\delta$
+  فرضًا مفتوحًا وحيدًا~$!A^x$. وعندئذ~$\Gamma=\{x:!A\}$، وتكون
+  $\Gamma \Sequent !A$ مسلّمة في~\Log{N2c} أو~\Log{N2i}.
+
+  وإذا كان~$n>0$، ميزنا الحالات بحسب الاستدلال الأخير في~$\delta$.
+  ونناقش حالة واحدة فقط، ونترك الباقي تمارين.
+
+  افترض أن الاستدلال الأخير~$\Intro{\lif}$. عندئذ ينتهي~$\delta$ بـ
+  \[
+  \AxiomC{$\Discharge{!B}{x}$}
+  \RightLabel{$\delta_1$}
+  \DeduceC{$!C$}
+  \DischargeRule{\Intro{\lif}}{x}
+  \UnaryInfC{$!B \lif !C$}
+  \DisplayProof
+  \]
+  وبفرض الاستقراء يوجد~!!a{proof}~$\delta_1'$ في~\Log{N2c}، أو في
+  \Log{N2i}، لـ$\Gamma' \Sequent !C$، حيث~$\Gamma'$ هي الفروض الموسومة
+  المفتوحة في~$\delta_1$. فإذا كان~$!B^x$ فرضًا مفتوحًا في~$\delta_1$،
+  بُرئ عند استدلال~$\Intro{\lif}$، وكانت فروض~$\delta$ المفتوحة هي
+  $\Gamma=\Gamma'\setminus\{x:!B\}$. وبعبارة أخرى، يكون~$\delta_1'$
+  !!a{proof} لـ$x:!B, \Gamma \Sequent !C$، ويمكننا اتخاذ~$\delta'$ هو
+  \[
+  \AxiomC{}
+  \RightLabel{$\delta_1'$}
+  \Deduce$x:!B, \Gamma \fCenter !C$
+  \RightLabel{\Intro{\lif}}
+  \UnaryInf$\Gamma \fCenter !B \lif !C$
+  \DisplayProof
+  \]
+  وإذا لم يكن~$!B^x$ فرضًا مفتوحًا في~$\delta_1$، لم يبرئ
+  $\Intro{\lif}$ فرضًا، وكانت الفروض المفتوحة في~$\delta$ و$\delta_1$
+  واحدة. ولأن وجود صيغة السياق~$x:!B$ في مقدمة~$\Intro{\lif}$
+  ليس لازمًا في~\Log{N2c} و\Log{N2i}، أمكننا اتخاذ~$\delta'$ هو
+  \[
+  \AxiomC{}
+  \RightLabel{$\delta_1'$}
+  \Deduce$\Gamma \fCenter !C$
+  \RightLabel{\Intro{\lif}}
+  \UnaryInf$\Gamma \fCenter !B \lif !C$
+  \DisplayProof
+  \]
+
+  والحالات التي ينتهي فيها~$\delta$ بقاعدة أخرى مماثلة.
+\end{proof}
+
+\begin{prop}
+إذا كان~$\delta$~!!a{proof} في~\Log{N2c} أو~\Log{N2i} لـ
+$\Gamma \Sequent !A$، وُجد~!!a{proof}~$\delta'$ في~\Log{N1c}، أو في
+\Log{N1i}، تكون~!!{formula} نهايته~$!A$، وفروضه المفتوحة~$!B^x$ لكل
+$x:!B \in \Gamma$.
+\end{prop}
+
+\begin{proof}
+  نسير مرة أخرى بالاستقراء على~!!{height}~$n$ للـ$\delta$. فإذا كان
+  $n=0$، كان~$\delta$ المسلّمة~$x:!A \Sequent !A$. ويكون~!!{proof}
+  $\delta'$ هو الفرض~$!A^x$.
+
+  وإذا كان~$n>0$، ميزنا الحالات بحسب الاستدلال الأخير في~$\delta$.
+  فمثلًا، إذا كان ذلك الاستدلال~$\Intro{\lif}$، انتهى~$\delta$ بـ
+  \[
+  \bottomAlignProof
+  \AxiomC{}
+  \RightLabel{$\delta_1$}
+  \Deduce$x:!B, \Gamma \fCenter !C$
+  \RightLabel{\Intro{\lif}}
+  \UnaryInf$\Gamma \fCenter !B \lif !C$
+  \DisplayProof
+  \quad\text{ أو }\quad
+  \bottomAlignProof
+  \AxiomC{}
+  \RightLabel{$\delta_1$}
+  \Deduce$\Gamma \fCenter !C$
+  \RightLabel{\Intro{\lif}}
+  \UnaryInf$\Gamma \fCenter !B \lif !C$
+  \DisplayProof
+  \]
+  وبفرض الاستقراء يوجد~!!a{proof}~$\delta_1'$ في~\Log{N1c}، أو في
+  \Log{N1i}، لـ$!C$. وفي الحالة الأولى يكون~$!B^x$ فرضًا مفتوحًا في
+  $\delta_1'$، ولا يكون كذلك في الحالة الثانية. ويمكننا اتخاذ
+  !!{proof}~$\delta'$ هو، على الترتيب،
+  \[
+  \bottomAlignProof
+  \AxiomC{$\Discharge{!B}{x}$}
+  \RightLabel{$\delta_1'$}
+  \DeduceC{$!C$}
+  \DischargeRule{\Intro{\lif}}{x}
+  \UnaryInfC{$!B \lif !C$}
+  \DisplayProof
+  \quad\text{ أو }\quad
+  \bottomAlignProof
+  \AxiomC{}
+  \RightLabel{$\delta_1'$}
+  \DeduceC{$!C$}
+  \RightLabel{\Intro{\lif}}
+  \UnaryInfC{$!B \lif !C$}
+  \DisplayProof
+  \]
+\end{proof}
+
+\end{document}

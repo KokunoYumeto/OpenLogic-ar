@@ -1,0 +1,46 @@
+% Part: lambda-calculus
+% Chapter: lambda-definability
+% Section: lists
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{ldf}{lst}
+\olsection{القوائم}
+
+تُحد القائمة~$[{\OLId{latin-looped}{M}}_{\OLMathNumeral{1}}, {\OLId{latin-looped}{M}}_{\OLMathNumeral{2}}, \ldots, {\OLId{latin-looped}{M}}_{\OLId{latin-ordinary}{n}}]$ على الوجه الآتي:
+\[
+  [{\OLId{latin-looped}{M}}_{\OLMathNumeral{1}}, {\OLId{latin-looped}{M}}_{\OLMathNumeral{2}}, \ldots, {\OLId{latin-looped}{M}}_{\OLId{latin-ordinary}{n}}] \ident \lambd[sz][{\OLId{latin-ordinary}{s}} {\OLId{latin-looped}{M}}_{\OLMathNumeral{1}} ({\OLId{latin-ordinary}{s}} {\OLId{latin-looped}{M}}_{\OLMathNumeral{2}} (\ldots ({\OLId{latin-ordinary}{s}} {\OLId{latin-looped}{M}}_{\OLId{latin-ordinary}{n}} {\OLId{latin-ordinary}{z}})))]
+\]
+وبعبارة غير صورية، الحد الممثل للقائمة هو دالة التراكم فيها: تقبل حدين؛ أحدهما
+دالة تأخذ القيمة المتراكمة وعنصراً جديداً فترد قيمة متراكمة جديدة، والآخر
+القيمة التي يبدأ بها التراكم. ثم تضم العناصر واحداً بعد واحد، وترد الحاصل
+في آخر العمل.
+
+\begin{digress}
+  ومن عرف البرمجة الدالية رأى الحد شبيهاً بـ\emph{الطي من اليمين}؛ إذ
+  جُعلت القائمة دالة تطوي عناصرها من جهة اليمين.
+\end{digress}
+
+ومن هذا الترميز يسهل أن نحد طائفة من الدوال النافعة:
+\begin{align*}
+  \fn{Sum} & \ident
+  \lambd[{\OLId{latin-ordinary}{l}}][{\OLId{latin-ordinary}{l}} \, (\lambd[xa][\fn{Add} \, {\OLId{latin-ordinary}{x}} \, {\OLId{latin-ordinary}{a}}])\,  \num{{\OLMathNumeral{0}}}]\\
+  \fn{Len} & \ident
+  \lambd[{\OLId{latin-ordinary}{l}}][{\OLId{latin-ordinary}{l}} \, (\lambd[xa][\fn{Add} \, {\OLId{latin-ordinary}{a}} \, \num{{\OLMathNumeral{1}}}]) \num{{\OLMathNumeral{0}}}]
+\end{align*}
+
+تحسب~$\fn{Sum}$ مجموع قائمة من أرقام تشرش؛ فتجمع القائمة مبتدئة بالقيمة
+~$\num{{\OLMathNumeral{0}}}$، وتجعل لكل عنصر~$\fn{Add} \, {\OLId{latin-ordinary}{x}}\, {\OLId{latin-ordinary}{a}}$ قيمة التراكم الجديدة،
+حيث~${\OLId{latin-ordinary}{x}}$ هو العنصر الحاضر و${\OLId{latin-ordinary}{a}}$ القيمة المتراكمة. والحاصل مجموع العناصر
+كلها.
+
+\begin{prob}
+  ما عمل~$\fn{Len}$؟ بيّنه.
+\end{prob}
+
+\begin{prob}
+  حدّ دالة تقلب ترتيب قائمة.
+\end{prob}
+\end{document}

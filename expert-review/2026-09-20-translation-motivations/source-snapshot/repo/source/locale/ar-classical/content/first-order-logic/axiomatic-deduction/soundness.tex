@@ -1,0 +1,141 @@
+% Part: first-order-logic
+% Chapter: axiomatic-deduction
+% Section: soundness
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{axd}{sou}}
+      {\olfileid{pl}{axd}{sou}}
+
+\olsection{السلامة}
+
+\begin{explain}
+نسق !!^a{derivation}، ومنه الاستنتاج البديهي، يوصف بأنه \emph{سليم}
+متى امتنع عليه أن !!{derive} ما ليس بصحيح. فالسلامة ضمان لأنساق
+ال!!{derivation} من هذا الخلل. ولها وجوه بحسب ما ننظر فيه من خواص
+البراهين؛ فمنها أن
+\begin{enumerate}
+\item كل $!A$ !!{derivable} تكون \iftag{FOL}{صالحة}{تحصيل حاصل}؛
+\item متى كانت $!A$ !!{derivable} من عبارات~$\Gamma$، لزمت عنها
+  دلاليًا كذلك؛
+\item كل مجموعة من ال!!{formula}s~$\Gamma$ غير متسقة تكون غير قابلة
+  للإرضاء.
+\end{enumerate}
+وهذه خواص لا يستقيم نسق !!a{derivation} بدونها؛ فإن تخلفت إحداها
+كان في نسق ال!!{derivation} خلل، إذ أمكنه أن !!{derive} ما يتجاوز
+الصحيح. ومن هنا كان إثبات سلامة نسق !!a{derivation} من آكد ما يلزم
+في دراسته.
+\end{explain}
+
+\begin{prop}
+  إذا كانت $!A$ بديهية، فإن
+  \iftag{FOL}
+    {$\Sat{M}{!A}[s]$ لكل !!{structure}~$\Struct{M}$ ولكل إسناد~$s$.}
+    {$\pSat{v}{!A}$ لكل !!{valuation}~$\pAssign{v}$.}
+\end{prop}
+
+\begin{proof}
+\iftag{FOL}{المطلوب بيان صلاحية البديهيات كلها. ونبين، مثالًا لذلك،
+  حالة \olref[qua]{ax:q1}. ليكن $t$ !!{free for} $x$ في $!A$،
+  ولنفترض $\Sat{M}{\lforall[x][!A]}[s]$. فتعريف الإرضاء يقتضي، لكل
+  $\varAssign{s'}{s}{x}$، أن $\Sat{M}{!A}[s']$؛ ومن جملة ذلك الحالة
+  التي فيها $s'(x) = \Value{t}{M}[s]$. فتفيد
+  \olref[syn][ext]{prop:ext-formulas}
+  $\Sat{M}{\Subst{!A}{t}{x}}[s]$، وبذلك يثبت
+  $\Sat{M}{(\lforall[x][!A] \lif \Subst{!A}{t}{x})}[s]$.}{ضع لكل
+  بديهية جدول صدق، وبيّن به أنها تحصيل حاصل.}
+\end{proof}
+
+\begin{thm}[السلامة]
+\ollabel{thm:soundness}
+إذا كانت $\Gamma$ مجموعة من ال!!{sentence}s، وكانت $!A$ !!a{sentence}،
+وكان $\Gamma \Proves !A$، فإن $\Gamma \Entails !A$.
+\end{thm}
+
+\begin{proof}
+البرهان بالاستقراء على عدد مرات تطبيق قواعد الاستدلال في !!{derivation}
+الصيغة $!A$ من $\Gamma$. فأما إذا لم تطبق قاعدة استدلال قط، فال!!{sentence}s
+الواردة في ال!!{derivation} كلها إما حالات من البديهيات وإما أعضاء
+في~$\Gamma$. وقد ثبت في القضية السابقة أن البديهيات
+\iftag{FOL}{صالحة}{تحصيل حاصل}؛ فإذا كانت $!A$ بديهية، لزم
+$\Gamma \Entails !A$. وأما إذا كان $!A \in \Gamma$، فحينئذ
+$\Gamma \Entails !A$ بلا مزيد برهان.
+
+وأما إذا انتهى !!{derivation} الصيغة~$!A$ بتطبيق قاعدة إثبات المقدَّم،
+فقد سبقته !!{sentence}s هما $!B$ و$!B \lif !A$ في
+ال!!{derivation}. وفرض الاستقراء جار على جزأي ال!!{derivation}
+المنتهيين بهاتين ال!!{sentence}s، إذ ينقص عدد تطبيقات قواعد الاستدلال
+في كل منهما تطبيقًا واحدًا على الأقل. فينتج من فرض الاستقراء
+$\Gamma \Entails !B$ و$\Gamma \Entails !B \lif !A$، ومنهما
+$\Gamma \Entails !A$ بمقتضى
+\iftag{FOL}
+      {\olref[syn][sem]{thm:sem-deduction}}
+      {\olref[pl][syn][sem]{thm:sem-deduction}}.
+
+\iftag{FOL}{ولنفرض أن خاتمة البرهان تستند إلى \QR. صورتها إذن
+$!C \lif \lforall[x][!B(x)]$، وقد سبقتها
+$!C \lif !B(c)$، على أن $c$ لا يقع في $\Gamma$ ولا في $!C$ ولا في
+$\lforall[x][!B(x)]$. فيعطينا فرض الاستقراء $\Gamma \Entails !C \lif
+!B(c)$، وتفيد \olref[syn][sem]{thm:sem-deduction}
+$\Gamma \cup \{!C\} \Entails !B(c)$.
+
+خذ بنية~$\Struct{M}$ بحيث $\Sat{M}{\Gamma \cup \{!C\}}$. والمطلوب
+$\Sat{M}{\lforall[x][!B(x)]}$. ولما كانت
+$\lforall[x][!B(x)]$ !!a{sentence}، كفى أن نثبت، لكل إسناد
+متغيرات~$s$، أن $\Sat{M}{!B(x)}[s]$
+(\olref[syn][ass]{prop:sat-quant}). وعناصر $\Gamma \cup \{!C\}$ جمل
+كلها، ولذلك $\Sat{M}{!D}[s]$ لكل $!D \in \Gamma$، بمقتضى
+\olref[syn][sat]{defn:satisfaction}. أنشئ الآن $\Struct{M'}$ من
+$\Struct{M}$ بتغيير واحد، هو جعل $\Assign{c}{M'} = s(x)$. ولأن $c$
+لا يقع في~$\Gamma$ ولا في~$!C$، يبقى $\Sat{M'}{\Gamma \cup \{!C\}}$
+بحسب \olref[syn][ext]{cor:extensionality-sent}. وحيث إن $\Gamma \cup \{!C\}
+\Entails !B(c)$، يلزم $\Sat{M'}{!B(c)}$. ثم إن $!B(c)$ !!a{sentence}،
+فيترتب $\Sat{M'}{!B(c)}[s]$ على
+\olref[syn][ass]{prop:sentence-sat-true}. ولدينا
+$\Sat{M'}{!B(x)}[s]$ إذا وفقط إذا كان $\Sat{M'}{!B(c)}[s]$، بمقتضى
+\olref[syn][ext]{prop:ext-formulas}؛ فإن $!B(c)$ إنما هي
+$\Subst{!B(x)}{c}{x}$. فنحصل على $\Sat{M'}{!B(x)}[s]$. وليس $c$
+واقعًا في~$!B(x)$، فتقتضي \olref[syn][ext]{prop:extensionality}
+$\Sat{M}{!B(x)}[s]$. وإذ كان $s$ إسنادًا اعتباطيًا، ثبت
+$\Sat{M}{\lforall[x][!B(x)]}$، ومن ثم $\Gamma \cup \{!C\} \Entails
+\lforall[x][!B(x)]$. وتفيد \olref[syn][sem]{thm:sem-deduction} أخيرًا
+$\Gamma \Entails !C \lif \lforall[x][!B(x)]$.
+
+بقيت الحالة التي تنتج فيها \QR{} الصيغة $!A$ وهي على الصورة
+$\lexists[x][!B(x)] \lif !C$؛ وبرهانها موكول إلى القارئ تمرينًا.}{}
+\end{proof}
+
+\tagprob{FOL}
+\begin{prob}
+  أكمل برهان \olref[fol][axd][sou]{thm:soundness}.
+\end{prob}
+\tagendprob
+
+\begin{cor}
+\ollabel{cor:weak-soundness}
+إذا كان $\Proves !A$، فإن $!A$ \iftag{FOL}{صالحة}{تحصيل حاصل}.
+\end{cor}
+
+\begin{cor}
+\ollabel{cor:consistency-soundness}
+إذا كانت $\Gamma$ قابلة للإرضاء، فهي متسقة.
+\end{cor}
+
+\begin{proof}
+نثبت المقابل بالنقيض. لتكن $\Gamma$ غير متسقة؛ فيكون
+$\Gamma \Proves \lfalse$، أي يوجد !!a{derivation} للصيغة
+$\lfalse$ من~$\Gamma$. وبمقتضى \olref{thm:soundness}، كل
+\iftag{FOL}{!!{structure}~$\Struct{M}$}{!!{valuation}~$\pAssign{v}$}
+يرضي $\Gamma$ يلزمه أن يرضي~$\lfalse$. لكن
+\iftag{FOL}{$\Sat/{M}{\lfalse}$ لكل
+  !!{structure}~$\Struct{M}$}{$\pSat/{v}{\lfalse}$ لكل
+  !!{valuation}~$\pAssign{v}$}؛ فليس ثمة
+\iftag{FOL}{$\Struct{M}$}{$\pAssign{v}$} يرضي $\Gamma$. ومعنى ذلك أن
+$\Gamma$ غير قابلة للإرضاء.
+\end{proof}
+
+
+\end{document}

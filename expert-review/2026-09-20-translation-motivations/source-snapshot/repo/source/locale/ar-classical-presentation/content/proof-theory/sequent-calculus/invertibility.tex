@@ -1,0 +1,377 @@
+% Part: proof-theory
+% Chapter: sequent-calculus
+% Section: invertibility
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{seq}{inv}
+
+\olsection{في قابلية القواعد للعكس}
+
+\begin{defn}
+نقول إن القاعدة~${\OLId{latin-looped}{R}}$،
+\[
+\AxiomC{${\OLId{latin-looped}{S}}_{\OLMathNumeral{1}}$}
+\AxiomC{$\dots$}
+\AxiomC{${\OLId{latin-looped}{S}}_{\OLId{latin-ordinary}{n}}$}
+\RightLabel{${\OLId{latin-looped}{R}}$}
+\TrinaryInfC{${\OLId{latin-looped}{S}}$}
+\DisplayProof
+\]
+\emph{قابلة للعكس} في نظام ما متى كان ثبوت~$\Proves {\OLId{latin-looped}{S}}$ يستلزم
+$\Proves {\OLId{latin-looped}{S}}_{\OLId{latin-ordinary}{i}}$ لكل~${\OLId{latin-ordinary}{i}}={\OLMathNumeral{1}}$، \dots،~${\OLId{latin-ordinary}{n}}$. فإن بقي الارتفاع محفوظًا،
+أي كان~$\Proves_{\OLId{latin-ordinary}{n}} {\OLId{latin-looped}{S}}$ مستلزمًا لـ$\Proves[{\OLId{latin-ordinary}{n}}] {\OLId{latin-looped}{S}}_{\OLId{latin-ordinary}{i}}$ لكل~${\OLId{latin-ordinary}{i}}={\OLMathNumeral{1}}$، \dots،~${\OLId{latin-ordinary}{n}}$،
+سميناها~\emph{قابلة للعكس مع حفظ~!!{height}}
+(أو~\emph{قابلة للعكس مع حفظ~!!{hp}}).
+\end{defn}
+
+\begin{lem}\ollabel{lem:G3c-invert}
+قواعد~\Log{G3c} المختصة بـ$\lnot$ و$\land$ و$\lor$ و$\lif$ قابلة للعكس
+مع حفظ~!!{height}؛ وتفصيل ذلك ما يأتي:
+\begin{enumerate}
+  \item \RightR{\lnot}: إذا كان~$\Log{G3c} \Proves[{\OLId{latin-ordinary}{n}}] {\OLId{greek-variable}{Gamma}} \Sequent
+  {\OLId{greek-variable}{Delta}}, \lnot !A$، فإن~$\Log{G3c} \Proves[{\OLId{latin-ordinary}{n}}] !A, {\OLId{greek-variable}{Gamma}} \Sequent
+  {\OLId{greek-variable}{Delta}}$.
+  \item \LeftR{\lnot}: إذا كان~$\Log{G3c} \Proves[{\OLId{latin-ordinary}{n}}] {\OLId{greek-variable}{Gamma}}, \lnot !A
+  \Sequent {\OLId{greek-variable}{Delta}}$، فإن~$\Log{G3c} \Proves[{\OLId{latin-ordinary}{n}}] {\OLId{greek-variable}{Gamma}} \Sequent {\OLId{greek-variable}{Delta}},
+  !A$.
+  \item \RightR{\land}: إذا كان~$\Log{G3c} \Proves[{\OLId{latin-ordinary}{n}}] {\OLId{greek-variable}{Gamma}} \Sequent
+  {\OLId{greek-variable}{Delta}}, !A \land !B$، فإن~$\Log{G3c} \Proves[{\OLId{latin-ordinary}{n}}] {\OLId{greek-variable}{Gamma}} \Sequent
+  {\OLId{greek-variable}{Delta}}, !A$ و$\Log{G3c} \Proves[{\OLId{latin-ordinary}{n}}] {\OLId{greek-variable}{Gamma}} \Sequent
+  {\OLId{greek-variable}{Delta}}, !B$.
+  \item \LeftR{\land}: إذا كان~$\Log{G3c} \Proves[{\OLId{latin-ordinary}{n}}] {\OLId{greek-variable}{Gamma}}, !A \land !B
+  \Sequent {\OLId{greek-variable}{Delta}}$، فإن~$\Log{G3c} \Proves[{\OLId{latin-ordinary}{n}}] !A, !B, {\OLId{greek-variable}{Gamma}} \Sequent
+  {\OLId{greek-variable}{Delta}}$.
+  \item \RightR{\lor}: إذا كان~$\Log{G3c} \Proves[{\OLId{latin-ordinary}{n}}] {\OLId{greek-variable}{Gamma}} \Sequent
+  {\OLId{greek-variable}{Delta}}, !A \lor !B$، فإن~$\Log{G3c} \Proves[{\OLId{latin-ordinary}{n}}] {\OLId{greek-variable}{Gamma}} \Sequent
+  {\OLId{greek-variable}{Delta}}, !A, !B$.
+  \item \LeftR{\lor}: إذا كان~$\Log{G3c} \Proves[{\OLId{latin-ordinary}{n}}] !A \lor !B, {\OLId{greek-variable}{Gamma}} \Sequent
+  {\OLId{greek-variable}{Delta}}$، فإن~$\Log{G3c} \Proves[{\OLId{latin-ordinary}{n}}] !A, {\OLId{greek-variable}{Gamma}} \Sequent
+  {\OLId{greek-variable}{Delta}}$ و$\Log{G3c} \Proves[{\OLId{latin-ordinary}{n}}] !B, {\OLId{greek-variable}{Gamma}} \Sequent
+  {\OLId{greek-variable}{Delta}}$.
+  \item \RightR{\lif}: إذا كان~$\Log{G3c} \Proves[{\OLId{latin-ordinary}{n}}] {\OLId{greek-variable}{Gamma}} \Sequent
+  {\OLId{greek-variable}{Delta}}, !A \lif !B$، فإن~$\Log{G3c} \Proves[{\OLId{latin-ordinary}{n}}] !A, {\OLId{greek-variable}{Gamma}} \Sequent
+  {\OLId{greek-variable}{Delta}}, !B$.
+  \item \LeftR{\lif}: إذا كان~$\Log{G3c} \Proves[{\OLId{latin-ordinary}{n}}] !A \lif !B, {\OLId{greek-variable}{Gamma}}
+  \Sequent {\OLId{greek-variable}{Delta}}$، فإن~$\Log{G3c} \Proves[{\OLId{latin-ordinary}{n}}] {\OLId{greek-variable}{Gamma}} \Sequent {\OLId{greek-variable}{Delta}},
+  !A$ و$\Log{G3c} \Proves[{\OLId{latin-ordinary}{n}}] !B, {\OLId{greek-variable}{Gamma}} \Sequent {\OLId{greek-variable}{Delta}}$.
+\end{enumerate}
+\end{lem}
+
+\begin{proof}
+المطلوب في كل قاعدة~${\OLId{latin-looped}{R}}$ من~\Log{G3c} أن نستخرج، من كل~!!a{proof}~$\pi$
+لنتيجتها~${\OLId{latin-looped}{S}}$ بحسب القاعدة~${\OLId{latin-looped}{R}}$، !!{proof}s~$\pi_{\OLId{latin-ordinary}{i}}$ لمقدماتها~${\OLId{latin-looped}{S}}_{\OLId{latin-ordinary}{i}}$، مع
+$\pheight{\pi_{\OLId{latin-ordinary}{i}}}\leq\pheight{\pi}$. ونفصّل الحجة في القاعدة
+\LeftR{\land}. فليكن~$\pi$~!!a{proof} متتاليته النهائية
+$!A\land !B,{\OLId{greek-variable}{Gamma}}\Sequent{\OLId{greek-variable}{Delta}}$؛ ونريد إنشاء~!!a{proof}~$\pi'$
+لـ$!A,!B,{\OLId{greek-variable}{Gamma}}\Sequent{\OLId{greek-variable}{Delta}}$ يحقق~$\pheight{\pi'}\leq
+\pheight{\pi}$. والسبيل إلى ذلك الاستقراء على~${\OLId{latin-ordinary}{n}}=\pheight{\pi}$.
+
+أما إذا كان~${\OLId{latin-ordinary}{n}}={\OLMathNumeral{0}}$، فلا يعدو~$\pi$ بديهية واحدة أو تطبيقًا خالي المقدمات
+للقاعدة~$\LeftR{\lfalse}$. وبديهيات~\Log{G3c} على الصورة~$!C,{\OLId{greek-variable}{Gamma}}
+\Sequent{\OLId{greek-variable}{Delta}},!C$، وشرطها أن تكون~$!C$ ذرية؛ فلا تكون إذن~$!C$ هي
+$!A\land !B$. فإن كانت~$!A\land !B,{\OLId{greek-variable}{Gamma}}\Sequent{\OLId{greek-variable}{Delta}}$ بديهية، كان
+بعض~$!C$ الذرية بوصفها~!!a{element} في كل من~${\OLId{greek-variable}{Gamma}}$ و${\OLId{greek-variable}{Delta}}$؛ ولذلك
+تكون~$!A,!B,{\OLId{greek-variable}{Gamma}}\Sequent{\OLId{greek-variable}{Delta}}$ بديهية كذلك، وهي~!!{proof}~$\pi'$
+ذو~!!{height}~${\OLMathNumeral{0}}$. وإن كان~$\pi$ تطبيقًا لـ$\LeftR{\lfalse}$، بقيت
+$\lfalse$ في السياق الأيسر بعد الإحلال المذكور، فكانت
+المتتالية المطلوبة نتيجة للقاعدة نفسها.
+
+وأما إذا كان~${\OLId{latin-ordinary}{n}}>{\OLMathNumeral{0}}$، فإن آخر البرهان استدلال. ونثبت الدعوى عند~${\OLId{latin-ordinary}{n}}$ بعد أن
+نفترضها لكل~!!{proof} ارتفاعه دون~${\OLId{latin-ordinary}{n}}$، مهما اختلف سياقه. ومعنى الفرض
+دقيقًا أنه لكل~${\OLId{latin-ordinary}{k}}<{\OLId{latin-ordinary}{n}}$ ولكل~$\Pi$ و$\Lambda$، متى وُجد لـ$!A\land
+!B,\Pi\Sequent\Lambda$~!!a{proof} ذو~!!{height}~${\OLId{latin-ordinary}{k}}$، وُجد~!!a{proof}
+ذو~!!{height} لا يتجاوز~${\OLId{latin-ordinary}{k}}$ لـ$!A,!B,\Pi\Sequent\Lambda$.
+
+والأمر على قسمين: إما أن تكون~$!A\land !B$ رئيسة في اليسار، وإما أن
+تكون من السياق. فإن كانت رئيسة، كان الاستدلال الأخير~\LeftR{\land}،
+وكانت خاتمة الـ!!{proof} الجزئي المباشر~$\pi_{\OLMathNumeral{1}}$ هي
+$!A,!B,{\OLId{greek-variable}{Gamma}}\Sequent{\OLId{greek-variable}{Delta}}$. فيكفينا ذلك البرهان نفسه، إذ
+$\pheight{\pi_{\OLMathNumeral{1}}}<\pheight{\pi}$.
+
+وإن لم تكن~$!A\land !B$ رئيسة، كانت الرئيسة~!!{formula} أخرى، وكانت
+$!A\land !B$ من سياق الاستدلال الأخير. فنطبق فرض الاستقراء على
+الـ!!{proof}s الجزئية المباشرة للقاعدة الأخيرة~${\OLId{latin-looped}{R}}$؛ فينتج~!!a{proof}
+واحد~$\pi_{\OLMathNumeral{1}}'$، أو~!!{proof}s اثنان~$\pi_{\OLMathNumeral{1}}'$ و$\pi_{\OLMathNumeral{2}}'$، ولا يزيد
+!!{height} واحد منها على ارتفاع نظيره من الـ!!{proof}s الجزئية المباشرة
+لـ$\pi$. وخاتمة كل من~$\pi_{\OLMathNumeral{1}}'$ و$\pi_{\OLMathNumeral{2}}'$ تحمل~$!A,!B$ في السياق الأيسر
+مكان~$!A\land !B$. ثم نعيد تطبيق~${\OLId{latin-looped}{R}}$ فنحصل على~$\pi'$. ولتوضيح ذلك،
+لنفترض أن خاتمة~$\pi$ هي استدلال~\LeftR{\lif}:
+\[
+\AxiomC{}
+\RightLabel{$\pi_{\OLMathNumeral{1}}$}
+\Deduce$!A \land !B, {\OLId{greek-variable}{Gamma}}' \fCenter {\OLId{greek-variable}{Delta}}, !C$
+\AxiomC{}
+\RightLabel{$\pi_{\OLMathNumeral{2}}$}
+\Deduce$!A \land !B, {\OLId{greek-variable}{Gamma}}', !D \fCenter {\OLId{greek-variable}{Delta}}$
+\RightLabel{\LeftR{\lif}}
+\BinaryInf$!A \land !B, {\OLId{greek-variable}{Gamma}}', !C \lif !D \fCenter {\OLId{greek-variable}{Delta}}$
+\DisplayProof
+\]
+فالرئيسة في اليسار هنا~$!C\lif !D$، وسياقه الأيسر~$!A\land
+!B,{\OLId{greek-variable}{Gamma}}'$؛ أي إن~${\OLId{greek-variable}{Gamma}}={\OLId{greek-variable}{Gamma}}',!C\lif !D$. ويفيد فرض الاستقراء
+!!{proof}s~$\pi_{\OLMathNumeral{1}}'$ و$\pi_{\OLMathNumeral{2}}'$ لـ$!A,!B,{\OLId{greek-variable}{Gamma}}'\Sequent{\OLId{greek-variable}{Delta}},!C$
+و$!A,!B,{\OLId{greek-variable}{Gamma}}',!D\Sequent{\OLId{greek-variable}{Delta}}$ على الترتيب. ونجعل خاتمتيهما مقدمتين
+جديدتين للقاعدة~\LeftR{\lif}، فيتم لنا~$\pi'$:
+\[
+\AxiomC{}
+\RightLabel{$\pi_{\OLMathNumeral{1}}'$}
+\Deduce$!A, !B, {\OLId{greek-variable}{Gamma}}' \fCenter {\OLId{greek-variable}{Delta}}, !C$
+\AxiomC{}
+\RightLabel{$\pi_{\OLMathNumeral{2}}'$}
+\Deduce$!A, !B, {\OLId{greek-variable}{Gamma}}', !D \fCenter {\OLId{greek-variable}{Delta}}$
+\RightLabel{\LeftR{\lif}}
+\BinaryInf$!A, !B, {\OLId{greek-variable}{Gamma}}', !C \lif !D \fCenter {\OLId{greek-variable}{Delta}}$
+\DisplayProof
+\]
+وحينئذ لدينا
+\begin{align*}
+\pheight{\pi} & = \max(\pheight{\pi_{\OLMathNumeral{1}}}, \pheight{\pi_{\OLMathNumeral{2}}}) + {\OLMathNumeral{1}}\\
+\pheight{\pi'} & = \max(\pheight{\pi_{\OLMathNumeral{1}}'}, \pheight{\pi_{\OLMathNumeral{2}}'}) + {\OLMathNumeral{1}}
+\intertext{بحسب التعريف، كما أن}
+\pheight{\pi_{\OLMathNumeral{1}}'} & \le \pheight{\pi_{\OLMathNumeral{1}}}\\
+\pheight{\pi_{\OLMathNumeral{2}}'} & \le \pheight{\pi_{\OLMathNumeral{2}}}
+\intertext{بفرض الاستقراء. ومن ثم}
+\pheight{\pi'} & \le \pheight{\pi}.
+\end{align*}
+\end{proof}
+
+\begin{prob}
+أعط برهان~\olref{lem:G3c-invert} للقاعدة~\RightR{\lif}.
+\end{prob}
+
+\begin{lem}\ollabel{lem:invert-quant}
+القاعدتان~\RightR{\lforall} و\LeftR{\lexists} قابلتان للعكس مع
+حفظ~!!{height} بالمعنى الآتي:
+\begin{enumerate}
+  \item إذا كان~$\Log{G3c} \Proves[{\OLId{latin-ordinary}{n}}] {\OLId{greek-variable}{Gamma}} \Sequent {\OLId{greek-variable}{Delta}},
+  \lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$، فإن~$\Log{G3c} \Proves[{\OLId{latin-ordinary}{n}}] {\OLId{greek-variable}{Gamma}} \Sequent
+  {\OLId{greek-variable}{Delta}},!A({\OLId{latin-ordinary}{c}})$؛ و
+  \item إذا كان~$\Log{G3c} \Proves[{\OLId{latin-ordinary}{n}}] \lexists[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})],{\OLId{greek-variable}{Gamma}}\Sequent
+  {\OLId{greek-variable}{Delta}}$، فإن~$\Log{G3c} \Proves[{\OLId{latin-ordinary}{n}}] !A({\OLId{latin-ordinary}{c}}),{\OLId{greek-variable}{Gamma}}\Sequent{\OLId{greek-variable}{Delta}}$،
+\end{enumerate}
+لكل~${\OLId{latin-ordinary}{c}}$ لا يظهر في~${\OLId{greek-variable}{Gamma}}$ ولا~${\OLId{greek-variable}{Delta}}$ ولا في~$\lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$
+أو~$\lexists[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$، على الترتيب.
+\end{lem}
+
+\begin{proof}
+نقيم البرهان على (\OLClassicalDigits{1})، وندع (\OLClassicalDigits{2}) تمرينًا؛ والحجة من جنس حجة
+\olref{lem:G3c-invert}. ففي خطوة الاستقراء يعود التقسيم نفسه. فإن كانت
+$\lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$ رئيسة، كانت مقدمة استدلال~$\RightR{\lforall}$
+الأخير هي المتتالية المطلوبة~${\OLId{greek-variable}{Gamma}}\Sequent{\OLId{greek-variable}{Delta}},!A({\OLId{latin-ordinary}{a}})$، وعندها ينتهي
+الـ!!{proof} الجزئي المباشر~$\pi_{\OLMathNumeral{1}}$، مع
+$\pheight{\pi_{\OLMathNumeral{1}}}<\pheight{\pi}$. ثم إن شرط المتغير المميز يضمن ألا يظهر
+${\OLId{latin-ordinary}{a}}$ في~${\OLId{greek-variable}{Gamma}}$ أو~${\OLId{greek-variable}{Delta}}$ أو~$\lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$. ولنا أن نأخذ
+$\pi_{\OLMathNumeral{1}}$ منتظمًا؛ فيكون~$\Subst{\pi_{\OLMathNumeral{1}}}{{\OLId{latin-ordinary}{c}}}{{\OLId{latin-ordinary}{a}}}$، بموجب
+\olref[qua]{lem:subst-regular}، !!a{proof} من !!{height} نفسه
+لـ${\OLId{greek-variable}{Gamma}}\Sequent{\OLId{greek-variable}{Delta}},!A({\OLId{latin-ordinary}{c}})$.
+
+وأما القسم الثاني فلا تكون فيه~$\lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$ رئيسة في الاستدلال
+الأخير، بل تكون الرئيسة صيغة أخرى. ونكتفي بصورة ممثلة: ليكن الاستدلال
+الأخير~\RightR{\land}. فتكون في~${\OLId{greek-variable}{Delta}}$~!!{formula} من الصورة
+$!B\land !C$ هي الرئيسة، وتكون خاتمة~!!{proof}~$\pi$ هكذا:
+\[
+\AxiomC{}
+\RightLabel{$\pi_{\OLMathNumeral{1}}$}
+\Deduce${\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}', \lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})], !B$
+\AxiomC{}
+\RightLabel{$\pi_{\OLMathNumeral{2}}$}
+\Deduce${\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}', \lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})], !C$
+\RightLabel{\RightR{\land}}
+\BinaryInf${\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}', \lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})], !B \land !C$
+\DisplayProof
+\]
+حيث~${\OLId{greek-variable}{Delta}}={\OLId{greek-variable}{Delta}}',!B\land !C$. واختر~${\OLId{latin-ordinary}{c}}$~!!a{constant} لا تظهر في
+${\OLId{greek-variable}{Gamma}}$ ولا~${\OLId{greek-variable}{Delta}}$ ولا~$\lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$؛ فلا تظهر، من باب أولى،
+في~${\OLId{greek-variable}{Delta}}',!B$ ولا في~${\OLId{greek-variable}{Delta}}',!C$. فيجري فرض الاستقراء على~$\pi_{\OLMathNumeral{1}}$
+و$\pi_{\OLMathNumeral{2}}$، ونحصل على~!!{proof}s~$\pi_{\OLMathNumeral{1}}'$ و$\pi_{\OLMathNumeral{2}}'$ مع
+$\pheight{\pi_{\OLMathNumeral{1}}'}\leq\pheight{\pi_{\OLMathNumeral{1}}}$ و$\pheight{\pi_{\OLMathNumeral{2}}'}\leq
+\pheight{\pi_{\OLMathNumeral{2}}}$. وأما الـ!!{proof} المطلوب~$\pi'$ لـ${\OLId{greek-variable}{Gamma}}\Sequent
+{\OLId{greek-variable}{Delta}},!A({\OLId{latin-ordinary}{c}})$ فهو:
+\[
+\AxiomC{}
+\RightLabel{$\pi_{\OLMathNumeral{1}}'$}
+\Deduce${\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}', !A({\OLId{latin-ordinary}{c}}), !B$
+\AxiomC{}
+\RightLabel{$\pi_{\OLMathNumeral{2}}'$}
+\Deduce${\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}', !A({\OLId{latin-ordinary}{c}}), !C$
+\RightLabel{\RightR{\land}}
+\BinaryInf${\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}', !A({\OLId{latin-ordinary}{c}}), !B \land !C$
+\DisplayProof
+\]
+ومعه~$\pheight{\pi'}=\max(\pheight{\pi_{\OLMathNumeral{1}}'},\pheight{\pi_{\OLMathNumeral{2}}'})+{\OLMathNumeral{1}}
+\leq\pheight{\pi}$.
+\end{proof}
+
+لمّا كانت~\Olref{lem:G3c-invert} عمدةً في برهان مبرهنة حذف القطع، كان لها
+أيضًا الأثر الآتي:
+
+\begin{prop}\ollabel{prop:G3c-cont-adm}
+قاعدتا التقلص~\LeftR{\Contraction} و\RightR{\Contraction} في~\Log{G1c}
+مقبولتان في~\Log{G3c} مع حفظ~!!{height}.
+\end{prop}
+
+\begin{proof}
+نسوق حجة واحدة لـ\RightR{\Contraction} و\LeftR{\Contraction}. فليكن
+$\pi$~!!a{proof} في~\Log{G3c} لإحدى المتتاليتين
+${\OLId{greek-variable}{Gamma}}\Sequent{\OLId{greek-variable}{Delta}},!A,!A$ أو~$!A,!A,{\OLId{greek-variable}{Gamma}}\Sequent{\OLId{greek-variable}{Delta}}$. والمطلوب
+\Log{G3c}-!!{proof}~$\pi'$، على الترتيب، لـ${\OLId{greek-variable}{Gamma}}\Sequent{\OLId{greek-variable}{Delta}},!A$
+أو~$!A,{\OLId{greek-variable}{Gamma}}\Sequent{\OLId{greek-variable}{Delta}}$، بحيث~$\pheight{\pi'}\leq
+\pheight{\pi}$. ونستقرئ على~${\OLId{latin-ordinary}{n}}=\pheight{\pi}$.
+
+فإن كان~${\OLId{latin-ordinary}{n}}={\OLMathNumeral{0}}$، كان~$\pi$ بديهية أو تطبيقًا بلا مقدمات لـ$\LeftR{\lfalse}$.
+فإذا كانت~${\OLId{greek-variable}{Gamma}}\Sequent{\OLId{greek-variable}{Delta}},!A,!A$ بديهية لـ\Log{G3c}، كانت
+${\OLId{greek-variable}{Gamma}}\Sequent{\OLId{greek-variable}{Delta}},!A$ بديهية أيضًا؛ إذ إما أن يوجد~$!C$ ذري
+بوصفه~!!a{element} في كل من~${\OLId{greek-variable}{Gamma}}$ و${\OLId{greek-variable}{Delta}}$، وإما أن تكون~$!A$ ذرية
+و!!a{element} في~${\OLId{greek-variable}{Gamma}}$. وكذلك الحكم إذا كانت خاتمة البرهان
+$!A,!A,{\OLId{greek-variable}{Gamma}}\Sequent{\OLId{greek-variable}{Delta}}$. وإن كان~$\pi$ تطبيقًا لـ$\LeftR{\lfalse}$،
+ظلت~$\lfalse$ في الطرف الأيسر بعد التقلص، فنتج المطلوب بالقاعدة نفسها.
+
+وإن كان~${\OLId{latin-ordinary}{n}}>{\OLMathNumeral{0}}$، انتهى~$\pi$ بقاعدة~${\OLId{latin-looped}{R}}$. فإذا لم تكن~$!A$ رئيسة في هذا
+الاستدلال، أنشأنا~!!a{proof}~$\pi'$ كما صنعنا في برهان
+\olref{lem:G3c-invert}: نجري فرض الاستقراء على الـ!!{proof}s الجزئية
+المباشرة لـ$\pi$، ثم نعيد القاعدة~${\OLId{latin-looped}{R}}$ على الـ!!{proof}s الناتجة. والفرض هنا عام؛
+فمتى وُجد~!!a{proof} من~!!{height}~${\OLId{latin-ordinary}{k}}<{\OLId{latin-ordinary}{n}}$ لإحدى المتتاليتين
+$\Pi\Sequent\Lambda,!D,!D$ أو~$!D,!D,\Pi\Sequent\Lambda$، وُجد
+!!a{proof} من~!!{height} لا يتجاوز~${\OLId{latin-ordinary}{k}}$ لـ$\Pi\Sequent\Lambda,!D$
+أو~$!D,\Pi\Sequent\Lambda$ على الترتيب. فهو جار وإن خالفت السياقات أو
+!!{formula} المتقلصة~${\OLId{greek-variable}{Gamma}}$ و${\OLId{greek-variable}{Delta}}$ و$!A$.
+
+ومثال ذلك أن تكون~${\OLId{latin-looped}{R}}$ هي~$\RightR{\land}$، وأن ينتهي~$\pi$ بـ
+\[
+\AxiomC{}
+\RightLabel{$\pi_{\OLMathNumeral{1}}$}
+\Deduce${\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}', !B, !A, !A$
+\AxiomC{}
+\RightLabel{$\pi_{\OLMathNumeral{2}}$}
+\Deduce${\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}', !C, !A, !A$
+\RightLabel{\RightR{\land}}
+\BinaryInf${\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}', !B \land !C, !A, !A$
+\DisplayProof
+\]
+حيث~${\OLId{greek-variable}{Delta}}={\OLId{greek-variable}{Delta}}',!B\land !C$. وعندئذ يفيد فرض الاستقراء~!!{proof}s
+$\pi_{\OLMathNumeral{1}}'$ و$\pi_{\OLMathNumeral{2}}'$ لـ${\OLId{greek-variable}{Gamma}}\fCenter{\OLId{greek-variable}{Delta}}',!B,!A$ و${\OLId{greek-variable}{Gamma}}\fCenter
+{\OLId{greek-variable}{Delta}}',!C,!A$ على الترتيب، مع~$\pheight{\pi_{\OLMathNumeral{1}}'}\leq
+\pheight{\pi_{\OLMathNumeral{1}}}$ و$\pheight{\pi_{\OLMathNumeral{2}}'}\leq\pheight{\pi_{\OLMathNumeral{2}}}$. فيكون
+الـ!!{proof}~$\pi'$:
+\[
+\AxiomC{}
+\RightLabel{$\pi_{\OLMathNumeral{1}}'$}
+\Deduce${\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}', !B, !A$
+\AxiomC{}
+\RightLabel{$\pi_{\OLMathNumeral{2}}'$}
+\Deduce${\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}', !C, !A$
+\RightLabel{\RightR{\land}}
+\BinaryInf${\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}', !B \land !C, !A$
+\DisplayProof
+\]
+
+وأما إن كانت~$!A$ رئيسة في الاستدلال الأخير، بدأنا بلمّة العكس
+(\olref{lem:G3c-invert}) على الـ!!{proof}s الجزئية المباشرة لـ$\pi$،
+ثم أجرينا فرض الاستقراء، ثم أعدنا القاعدة~${\OLId{latin-looped}{R}}$. فافترض، مثلًا، أن~$\pi$
+يبرهن~${\OLId{greek-variable}{Gamma}}\Sequent{\OLId{greek-variable}{Delta}},!A,!A$، وأن~$!A\ident(!B\land !C)$ هي
+الرئيسة في استدلاله الأخير. حينئذ تكون صورة~$\pi$:
+\[
+\AxiomC{}
+\RightLabel{$\pi_{\OLMathNumeral{1}}$}
+\Deduce${\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, !B \land !C, !B$
+\AxiomC{}
+\RightLabel{$\pi_{\OLMathNumeral{2}}$}
+\Deduce${\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, !B \land !C, !C$
+\RightLabel{\RightR{\land}}
+\BinaryInf${\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, !B \land !C, !B \land !C$
+\DisplayProof
+\]
+فمن تطبيق~\olref{lem:G3c-invert} على~$\pi_{\OLMathNumeral{1}}$ نحصل على~!!a{proof}~$\pi_{\OLMathNumeral{1}}'$
+لـ${\OLId{greek-variable}{Gamma}}\Sequent{\OLId{greek-variable}{Delta}},!B,!B$؛ وهي تعطينا أيضًا~!!a{proof} لـ${\OLId{greek-variable}{Gamma}}
+\Sequent{\OLId{greek-variable}{Delta}},!C,!B$ لا حاجة لنا به. وبالمثل، يخرج من تطبيق
+\olref{lem:G3c-invert} على~$\pi_{\OLMathNumeral{2}}$~!!a{proof}~$\pi_{\OLMathNumeral{2}}'$ لـ${\OLId{greek-variable}{Gamma}}
+\Sequent{\OLId{greek-variable}{Delta}},!C,!C$. وإذ كان عكس~$\RightR{\land}$ حافظًا لـ!!{height}، فإن
+$\pheight{\pi_{\OLMathNumeral{1}}'}\leq\pheight{\pi_{\OLMathNumeral{1}}}<\pheight{\pi}$ و
+$\pheight{\pi_{\OLMathNumeral{2}}'}\leq\pheight{\pi_{\OLMathNumeral{2}}}<\pheight{\pi}$. ومن ثم يجري فرض
+الاستقراء على~$\pi_{\OLMathNumeral{1}}'$ و$\pi_{\OLMathNumeral{2}}'$، فتوجد~!!{proof}s~$\pi_{\OLMathNumeral{1}}''$ و$\pi_{\OLMathNumeral{2}}''$
+لـ${\OLId{greek-variable}{Gamma}}\Sequent{\OLId{greek-variable}{Delta}},!B$ و${\OLId{greek-variable}{Gamma}}\Sequent{\OLId{greek-variable}{Delta}},!C$، على الترتيب،
+مع~$\pheight{\pi_{\OLMathNumeral{1}}''}\leq\pheight{\pi_{\OLMathNumeral{1}}'}\leq\pheight{\pi_{\OLMathNumeral{1}}}$ و
+$\pheight{\pi_{\OLMathNumeral{2}}''}\leq\pheight{\pi_{\OLMathNumeral{2}}'}\leq\pheight{\pi_{\OLMathNumeral{2}}}$. وعند ذلك
+يكون~!!{proof}~$\pi'$:
+\[
+\AxiomC{}
+\RightLabel{$\pi_{\OLMathNumeral{1}}''$}
+\Deduce${\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, !B$
+\AxiomC{}
+\RightLabel{$\pi_{\OLMathNumeral{2}}''$}
+\Deduce${\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, !C$
+\RightLabel{\RightR{\land}}
+\BinaryInf${\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, !B \land !C$
+\DisplayProof
+\]
+مع~$\pheight{\pi'}\leq\pheight{\pi}$.
+
+وتحتاج قواعد الكم، حين تكون~!!{formula} رئيسة، إلى تفصيل خاص.
+
+فلتكن~$!A\ident\lforall[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$ رئيسة في اليمين؛ وعندئذ ينتهي~$\pi$
+بـ
+\[
+\AxiomC{}
+\RightLabel{$\pi_{\OLMathNumeral{1}}$}
+\Deduce${\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, \lforall[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})], !B({\OLId{latin-ordinary}{a}})$
+\RightLabel{\RightR{\lforall}}
+\UnaryInf${\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, \lforall[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})], \lforall[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$
+\DisplayProof
+\]
+وبحسب~\olref{lem:invert-quant} يوجد~!!a{proof}~$\pi_{\OLMathNumeral{1}}'$ من~!!{height}
+لا يتجاوز~$\pheight{\pi_{\OLMathNumeral{1}}}$ لـ${\OLId{greek-variable}{Gamma}}\fCenter{\OLId{greek-variable}{Delta}},!B({\OLId{latin-ordinary}{c}}),!B({\OLId{latin-ordinary}{a}})$ لكل~${\OLId{latin-ordinary}{c}}$
+لا تظهر في~${\OLId{greek-variable}{Gamma}}\fCenter{\OLId{greek-variable}{Delta}},\lforall[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})],!B({\OLId{latin-ordinary}{a}})$. ونأخذ
+$\pi_{\OLMathNumeral{1}}'$ منتظمًا؛ فيكون الـ!!{proof}~$\Subst{\pi_{\OLMathNumeral{1}}'}{{\OLId{latin-ordinary}{a}}}{{\OLId{latin-ordinary}{c}}}$، بموجب
+\olref[qua]{lem:subst-regular}، !!a{proof} لـ${\OLId{greek-variable}{Gamma}}\fCenter{\OLId{greek-variable}{Delta}},!B({\OLId{latin-ordinary}{a}}),
+!B({\OLId{latin-ordinary}{a}})$، ومن~!!{height} لا يتجاوز~$\pheight{\pi_{\OLMathNumeral{1}}}$ كذلك. ثم يمدنا فرض
+الاستقراء بـ!!a{proof}~$\pi_{\OLMathNumeral{1}}''$ لـ${\OLId{greek-variable}{Gamma}}\fCenter{\OLId{greek-variable}{Delta}},!B({\OLId{latin-ordinary}{a}})$؛ فإذا
+طبقنا~$\RightR{\lforall}$ تم لنا~$\pi'$:
+\[
+\AxiomC{}
+\RightLabel{$\pi_{\OLMathNumeral{1}}''$}
+\Deduce${\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, !B({\OLId{latin-ordinary}{a}})$
+\RightLabel{\RightR{\lforall}}
+\UnaryInf${\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, \lforall[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$
+\DisplayProof
+\]
+مع~$\pheight{\pi'}\leq\pheight{\pi}$.
+
+وأما إن كانت~$!A\ident\lexists[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$ هي الرئيسة في اليمين، كانت
+صورة~$\pi$:
+\[
+\AxiomC{}
+\RightLabel{$\pi_{\OLMathNumeral{1}}$}
+\Deduce${\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, \lexists[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})], \lexists[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})], !B({\OLId{latin-ordinary}{t}})$
+\RightLabel{\RightR{\lexists}}
+\UnaryInf${\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, \lexists[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})], \lexists[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$
+\DisplayProof
+\]
+يجري فرض الاستقراء على~$\pi_{\OLMathNumeral{1}}$، فيعطينا~!!a{proof}~$\pi_{\OLMathNumeral{1}}'$ لـ${\OLId{greek-variable}{Gamma}}
+\Sequent{\OLId{greek-variable}{Delta}},\lexists[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})],!B({\OLId{latin-ordinary}{t}})$، من غير حاجة هنا إلى لمّة عكس.
+وعندئذ يكون~!!{proof}~$\pi'$:
+\[
+\AxiomC{}
+\RightLabel{$\pi_{\OLMathNumeral{1}}'$}
+\Deduce${\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, \lexists[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})], !B({\OLId{latin-ordinary}{t}})$
+\RightLabel{\RightR{\lexists}}
+\UnaryInf${\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, \lexists[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$
+\DisplayProof
+\]
+مع~$\pheight{\pi'}\leq\pheight{\pi}$.
+\end{proof}
+
+\begin{prob}
+أنشئ برهان~\olref{prop:G3c-cont-adm} لـ\LeftR{\Contraction}، وفصّل حالتي
+$!A\ident(!B\land !C)$ و$!A\ident(!B\lif !C)$.
+\end{prob}
+
+\begin{prob}
+أنشئ برهان~\olref{prop:G3c-cont-adm} لـ\LeftR{\Contraction} في حالتي الكم
+الباقيتين: حين~$!A\ident\lforall[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$ وحين
+$!A\ident\lexists[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]$.
+\end{prob}
+
+\end{document}

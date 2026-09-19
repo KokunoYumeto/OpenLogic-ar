@@ -1,0 +1,156 @@
+% Part: proof-theory
+% Chapter: sequent-calculus
+% Section: quantifiers
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{seq}{qua}
+
+\olsection{في انتظام البراهين والاستبدال}
+
+تنشأ في قواعد الكميات دقة زائدة من «شروط المتغير المميَّز» الملازمة
+لقاعدتي~\LeftR{\lexists} و\RightR{\lforall}. ويزول أكثر الإشكال إذا
+ضمنّا ألا يعاد استعمال~!!{constant}~${\OLId{latin-ordinary}{a}}$ في هذه الاستدلالات. فنضع لذلك
+التعريف الآتي.
+
+\begin{defn}
+نسمي~!!^a{proof}~$\pi$ في~\Log{G1c} أو~\Log{G3c} \emph{منتظمًا} متى تحقق
+الشرطان الآتيان:
+\begin{enumerate}
+  \item ألا يُجعل متغير مميَّز~${\OLId{latin-ordinary}{a}}$ متغيرًا مميَّزًا لأكثر من استدلال
+  واحد بالقاعدة~\LeftR{\lexists} أو~\RightR{\lforall}؛ و
+  \item إذا كان~${\OLId{latin-ordinary}{a}}$ المتغير المميَّز لاستدلال بالقاعدة~\LeftR{\lexists}
+  أو~\RightR{\lforall}، فلا يقع في~$\pi$ إلا فيما فوق ذلك الاستدلال.
+\end{enumerate}
+\end{defn}
+
+\begin{lem}\ollabel{lem:subst-regular} ليكن~$\pi$ منتظمًا وخاتمته
+${\OLId{greek-variable}{Gamma}} \Sequent {\OLId{greek-variable}{Delta}}$، وليكن~${\OLId{latin-ordinary}{c}}$~!!a{constant} لا يتخذ متغيرًا
+مميَّزًا في~$\pi$، و$ {\OLId{latin-ordinary}{t}}$ حدًّا لا يقع فيه شيء من متغيرات~$\pi$ المميَّزة.
+فإن~$\Subst{\pi}{{\OLId{latin-ordinary}{t}}}{{\OLId{latin-ordinary}{c}}}$، وهو الحاصل من~$\pi$ باستبدال كل وقوع لـ${\OLId{latin-ordinary}{c}}$ بـ${\OLId{latin-ordinary}{t}}$،
+!!{proof} منتظم، وخاتمته
+$\Subst{{\OLId{greek-variable}{Gamma}}}{{\OLId{latin-ordinary}{t}}}{{\OLId{latin-ordinary}{c}}} \Sequent \Subst{{\OLId{greek-variable}{Delta}}}{{\OLId{latin-ordinary}{t}}}{{\OLId{latin-ordinary}{c}}}$. والمقصود بـ
+$\Subst{{\OLId{greek-variable}{Gamma}}}{{\OLId{latin-ordinary}{t}}}{{\OLId{latin-ordinary}{c}}}$ متعددة المجموعات الناتجة من استبدال~${\OLId{latin-ordinary}{c}}$ بـ${\OLId{latin-ordinary}{t}}$
+في كل وقوع لصيغة من~${\OLId{greek-variable}{Gamma}}$، من غير إسقاط وقوع ولا تغيير تعدده.
+\end{lem}
+
+\begin{proof}
+  نستقرئ على~$\pheight{\pi}$. فإن كان~$\pheight{\pi}={\OLMathNumeral{0}}$، لم يشتمل
+  $\pi$ إلا على بديهية؛ وعندئذ يكون~$\Subst{\pi}{{\OLId{latin-ordinary}{t}}}{{\OLId{latin-ordinary}{c}}}$ بديهية كذلك، إذ
+  تصير كل~!!{formula}~$!A({\OLId{latin-ordinary}{c}})$ فيها~$!A({\OLId{latin-ordinary}{t}})$.
+
+  وإن كان~$\pheight{\pi}>{\OLMathNumeral{0}}$، قسمنا بحسب الاستدلال الأخير في~$\pi$.
+  فأما القواعد البنيوية (في~\Log{G1c}) والقواعد المنطقية لروابط القضايا
+  فظاهرة، ونكلها إلى القارئ تمرينًا. ويبقى أن ننظر في الاستدلال الكمي
+  الذي ينتهي به~$\pi$.
+  \begin{enumerate}
+    \item فإن كان الاستدلال الأخير~\RightR{\lforall}، كانت صورة~$\pi$
+    كما يأتي:
+    \[
+    \AxiomC{}
+    \RightLabel{$\pi'$}
+    \Deduce${\OLId{greek-variable}{Gamma}}({\OLId{latin-ordinary}{c}}) \fCenter {\OLId{greek-variable}{Delta}}'({\OLId{latin-ordinary}{c}}), !A({\OLId{latin-ordinary}{a}},{\OLId{latin-ordinary}{c}})$
+    \RightLabel{\RightR{\lforall}}
+    \UnaryInf${\OLId{greek-variable}{Gamma}}({\OLId{latin-ordinary}{c}}) \fCenter {\OLId{greek-variable}{Delta}}'({\OLId{latin-ordinary}{c}}), \lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{c}})]$
+    \DisplayProof
+    \]
+    ويفيد فرض الاستقراء أن~$\Subst{\pi'}{{\OLId{latin-ordinary}{t}}}{{\OLId{latin-ordinary}{c}}}$~!!{proof} منتظم
+    لـ${\OLId{greek-variable}{Gamma}}({\OLId{latin-ordinary}{t}}) \fCenter {\OLId{greek-variable}{Delta}}'({\OLId{latin-ordinary}{t}}), !A({\OLId{latin-ordinary}{a}},{\OLId{latin-ordinary}{t}})$. ولأن~${\OLId{latin-ordinary}{a}}$ متغير مميَّز
+    في~$\pi$، امتنع وقوعه في~${\OLId{latin-ordinary}{t}}$. فيكون آخر الاستدلال في
+    $\Subst{\pi}{{\OLId{latin-ordinary}{t}}}{{\OLId{latin-ordinary}{c}}}$ هو
+    \[
+    \AxiomC{}
+    \RightLabel{$\Subst{\pi'}{{\OLId{latin-ordinary}{t}}}{{\OLId{latin-ordinary}{c}}}$}
+    \Deduce${\OLId{greek-variable}{Gamma}}({\OLId{latin-ordinary}{t}}) \fCenter {\OLId{greek-variable}{Delta}}'({\OLId{latin-ordinary}{t}}), !A({\OLId{latin-ordinary}{a}},{\OLId{latin-ordinary}{t}})$
+    \RightLabel{\RightR{\lforall}}
+    \UnaryInf${\OLId{greek-variable}{Gamma}}({\OLId{latin-ordinary}{t}}) \fCenter {\OLId{greek-variable}{Delta}}'({\OLId{latin-ordinary}{t}}), \lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{t}})]$
+    \DisplayProof
+    \]
+    وهو صحيح؛ لأن النتيجة لا تحتوي~${\OLId{latin-ordinary}{a}}$.
+    \item وإن كان الاستدلال الأخير~\LeftR{\lforall} في~\Log{G3c}،
+    كانت صورة~$\pi$:
+    \[
+    \AxiomC{}
+    \RightLabel{$\pi'$}
+    \Deduce$!A({\OLId{latin-ordinary}{s}}({\OLId{latin-ordinary}{c}}),{\OLId{latin-ordinary}{c}}), \lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{c}})], {\OLId{greek-variable}{Gamma}}({\OLId{latin-ordinary}{c}}) \fCenter {\OLId{greek-variable}{Delta}}'({\OLId{latin-ordinary}{c}})$
+    \RightLabel{\LeftR{\lforall}}
+    \UnaryInf$\lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{c}})], {\OLId{greek-variable}{Gamma}}({\OLId{latin-ordinary}{c}}) \fCenter {\OLId{greek-variable}{Delta}}'({\OLId{latin-ordinary}{c}})$
+    \DisplayProof
+    \]
+    وبفرض الاستقراء يكون~$\Subst{\pi'}{{\OLId{latin-ordinary}{t}}}{{\OLId{latin-ordinary}{c}}}$~!!{proof} منتظمًا
+    لـ$!A({\OLId{latin-ordinary}{s}}({\OLId{latin-ordinary}{t}}),{\OLId{latin-ordinary}{t}}), \lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{t}})], {\OLId{greek-variable}{Gamma}}({\OLId{latin-ordinary}{t}}) \fCenter
+    {\OLId{greek-variable}{Delta}}'({\OLId{latin-ordinary}{t}})$. فيكون آخر الاستدلال في~$\Subst{\pi}{{\OLId{latin-ordinary}{t}}}{{\OLId{latin-ordinary}{c}}}$:
+    \[
+    \AxiomC{}
+    \RightLabel{$\Subst{\pi'}{{\OLId{latin-ordinary}{t}}}{{\OLId{latin-ordinary}{c}}}$}
+    \Deduce$!A({\OLId{latin-ordinary}{s}}({\OLId{latin-ordinary}{t}}),{\OLId{latin-ordinary}{t}}), \lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{t}})], {\OLId{greek-variable}{Gamma}}({\OLId{latin-ordinary}{t}}) \fCenter {\OLId{greek-variable}{Delta}}'({\OLId{latin-ordinary}{t}})$
+    \RightLabel{\LeftR{\lforall}}
+    \UnaryInf$\lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{t}})], {\OLId{greek-variable}{Gamma}}({\OLId{latin-ordinary}{t}}) \fCenter {\OLId{greek-variable}{Delta}}'({\OLId{latin-ordinary}{t}})$
+    \DisplayProof
+    \]
+    وهو صحيح. وأما~\LeftR{\lforall} في~\Log{G1c} فحكمها مثله، غير أنها
+    أيسر.
+    \item وأما إذا كان الاستدلال الأخير~\RightR{\lexists} أو
+    \LeftR{\lexists} فتُترك الحالة تمرينًا.
+  \end{enumerate}
+  وفي جميع الأقسام إنما ألحقنا متتالية بخاتمة~!!{proof} منتظم، أو بخواتيم
+  !!{proof}s منتظمة عند القواعد ذات المقدمتين؛ فلم تتبدل استدلالات المتغير
+  المميَّز. ولما لم يكن~${\OLId{latin-ordinary}{c}}$ متغيرًا مميَّزًا، ولم يشتمل~${\OLId{latin-ordinary}{t}}$ على متغير
+  مميَّز في~$\pi$، لم يُدخل الاستبدال متغيرًا مميَّزًا تحت الاستدلال
+  المختص به. وفرض الاستقراء يحفظ الانتظام، فيكون~$\Subst{\pi}{{\OLId{latin-ordinary}{t}}}{{\OLId{latin-ordinary}{c}}}$
+  منتظمًا.
+\end{proof}
+
+\begin{prop}
+إذا كان~$\pi$~!!a{proof} في~\Log{G1c} أو~\Log{G3c}، أمكن إيجاد
+!!{proof} منتظم~$\pi'$ يماثله في البنية، ولا سيما في~!!{height}،
+ولا يفارق~$\pi$ إلا في أسماء المتغيرات المميَّزة.
+\end{prop}
+
+\begin{proof}
+نصطلح في هذا البرهان وحده على تسمية استدلال المتغير المميَّز في~$\pi$
+\emph{نظيفًا} إن لم يكن متغيره المميَّز كذلك لاستدلال آخر، ولم يقع في
+$\pi$ خارج~!!{proof} الاستدلال المباشر؛ وما عداه فنسميه
+\emph{متسخًا}. وليكن~${\OLId{latin-ordinary}{n}}$ عدد الاستدلالات المتسخة للمتغير المميَّز في
+$\pi$. ونثبت بالاستقراء على~${\OLId{latin-ordinary}{n}}$ إمكان تحويل~$\pi$ إلى !!{proof} منتظم
+$\pi'$ من الصفة المطلوبة. فإن كان~${\OLId{latin-ordinary}{n}}={\OLMathNumeral{0}}$، كانت استدلالات المتغير
+المميَّز في~$\pi$ كلها نظيفة، فكان~$\pi$ منتظمًا ولم يبق ما يثبت. وإن لم
+يكن كذلك، اخترنا أعلى استدلال متسخ لمتغير مميَّز؛ وليكن، مثلًا، استدلالًا
+بالقاعدة~\RightR{\lforall}. وعندئذ يكون الـ!!{proof} الجزئي~$\pi_{\OLMathNumeral{1}}$
+المنتهي بهذا الاستدلال على الصورة
+    \[
+    \AxiomC{}
+    \RightLabel{$\pi_{\OLMathNumeral{2}}$}
+    \Deduce${\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, !A({\OLId{latin-ordinary}{c}})$
+    \RightLabel{\RightR{\lforall}}
+    \UnaryInf${\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, \lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$
+    \DisplayProof
+    \]
+ولكون~${\OLId{latin-ordinary}{c}}$ متغيرًا مميَّزًا، لا يقع في~${\OLId{greek-variable}{Gamma}}$ ولا~${\OLId{greek-variable}{Delta}}$ ولا
+$\lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$. والبرهان~$\pi_{\OLMathNumeral{2}}$ منتظم، لأن كل استدلال لمتغير
+مميَّز فوق الاستدلال المختار نظيف. ثم خذ~${\OLId{latin-ordinary}{a}}$~!!a{constant} لا تقع في
+$\pi$. فيكون، بحسب~\olref{lem:subst-regular}،
+$\Subst{\pi_{\OLMathNumeral{2}}}{{\OLId{latin-ordinary}{a}}}{{\OLId{latin-ordinary}{c}}}$ برهانًا منتظمًا لـ${\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}},
+!A({\OLId{latin-ordinary}{a}})$، صالحًا لأن تطبق عليه~\RightR{\lforall}. فإذا أبدلنا~$\pi_{\OLMathNumeral{1}}$
+في~$\pi$ بالبرهان~$\pi_{\OLMathNumeral{1}}'$ الآتي،
+    \[
+    \AxiomC{}
+    \RightLabel{$\Subst{\pi_{\OLMathNumeral{2}}}{{\OLId{latin-ordinary}{a}}}{{\OLId{latin-ordinary}{c}}}$}
+    \Deduce${\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, !A({\OLId{latin-ordinary}{a}})$
+    \RightLabel{\RightR{\lforall}}
+    \UnaryInf${\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, \lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$
+    \DisplayProof
+    \]
+فقد جعلنا متغيرًا مميَّزًا جديدًا~${\OLId{latin-ordinary}{a}}$ بدل المتغير~${\OLId{latin-ordinary}{c}}$. وبذلك يقل عدد
+الاستدلالات المتسخة للمتغير المميَّز عن~${\OLId{latin-ordinary}{n}}$ قطعًا؛ إذ قد تجعل إعادة
+التسمية أكثر من استدلال واحد نظيفًا. فتثبت الدعوى بفرض الاستقراء، وسائر
+قواعد المتغير المميَّز على هذا القياس.
+\end{proof}
+
+ولن نحتج بهذه القضية تصريحًا فيما يأتي، بل نفرض كل~!!{proof}s التي ننظر
+فيها منتظمة؛ فإن لم تكن، أمكن دائمًا إعادة تسمية متغيراتها المميَّزة حتى
+تنتظم.
+
+\end{document}

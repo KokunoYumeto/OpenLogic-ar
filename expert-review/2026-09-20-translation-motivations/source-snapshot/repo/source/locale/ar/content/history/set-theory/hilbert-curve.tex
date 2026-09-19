@@ -1,0 +1,169 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{his}{set}{hilbertcurve}
+
+\olsection{ملحق: منحنيات هيلبرت المالئة للفضاء}
+
+ذكرنا في~\olref[pathology]{sec} أن برهان كانتور على تساوي عدد نقاط
+الخط وعدد نقاط المربع
+(\olref[his][set][cantorplane]{thm:cantorplane}) دفع بيانو إلى التساؤل
+عن إمكان وجود \emph{منحنى} يملأ الفضاء. وتوصل إلى جواب بالإيجاب عام
+1890. ونشرح في هذا القسم، شرحًا حدسيًا غير رسمي، كيفية إنشاء منحنى
+هيلبرت المالئ للفضاء، مع تعديل طفيف.\footnote{لشرح أشد صرامة، انظر
+\cite{Rose2010}. ويتمثل التعديل في إضافة الأجزاء الحمراء من المنحنيات
+أدناه، مما ييسر قليلًا التحقق من اتصال المنحنى.}
+
+يجب أن نعرّف دالة~$h \colon \unitline \to \unitsquare$ بوصفها نهاية
+متتالية من الدوال المتصلة
+$h_n \colon \unitline \to \unitsquare$، حيث~$n \geq 1$. نصف البناء
+أولًا، ثم نبيّن أنه يملأ الفضاء، ثم نبيّن أنه منحنى.
+
+نجعل المجال المقابل للدالة~$h$ هو مربع الوحدة~$\unitsquare$. وهذا أول
+تقريب لها، أي الدالة~$h_1 \colon \unitline \to \unitsquare$:
+\begin{center}
+	\begin{tikzpicture}
+	\draw[gray] (0pt, 0pt) rectangle (80pt, 80pt);
+	\draw[step = 40pt, gray, very thin] (0pt, 0pt) grid (80pt, 80pt);
+	\draw[oldiagcolorC, thick] (20pt, 0)--(20pt, 20pt);
+	\draw[oldiagcolorC, thick] (60pt, 0)--(60pt, 20pt);		
+	\begin{scope}[xshift=20pt, yshift=20pt]
+	\draw [black, thick, l-system={Hilbert curve, step=40pt, angle=90, axiom=L, order=1}]  lindenmayer system;
+	\end{scope}
+	\end{tikzpicture}
+\end{center}
+ولتتبع البناء، فرضنا شبكة~$2 \times 2$ على المربع. ويمكننا تصور
+المنحنى يبدأ في الربع السفلي الأيسر، ثم ينتقل إلى العلوي الأيسر، ثم
+إلى العلوي الأيمن، وأخيرًا إلى السفلي الأيمن. وهذه المرحلة الثانية من
+البناء، أي~$h_2 \colon \unitline \to \unitsquare$:
+\begin{center}
+	\begin{tikzpicture}
+	\draw[gray] (0pt, 0pt) rectangle (80pt, 80pt);
+	\draw[step = 20pt, gray, very thin] (0pt, 0pt) grid (80pt, 80pt);
+	\draw[oldiagcolorC, thick] (0pt, 10pt)--(10pt, 10pt);
+	\draw[oldiagcolorC, thick] (70pt, 10pt)--(80pt, 10pt);
+	\draw[thick, oldiagcolorE] (10pt, 30pt)--(10pt, 50pt); 
+	\draw[thick, oldiagcolorE] (30pt, 50pt)--(50pt, 50pt); 
+	\draw[thick, oldiagcolorE] (70pt, 50pt)--(70pt, 30pt); \begin{scope}[xshift=10pt, yshift=30pt]
+	\draw [thick, rotate=270,black, l-system={Hilbert curve, step=20pt, angle=90, axiom=L, order=1}]  lindenmayer system;
+	\end{scope}
+	\begin{scope}[xshift=10pt, yshift=50pt]
+	\draw [thick, black, l-system={Hilbert curve, step=20pt, angle=90, axiom=L, order=1}]  lindenmayer system;
+	\end{scope}
+	\begin{scope}[xshift=50pt, yshift=50pt]
+	\draw [thick, black, l-system={Hilbert curve, step=20pt, angle=90, axiom=L, order=1}]  lindenmayer system;
+	\end{scope}
+	\begin{scope}[xshift=70pt, yshift=10pt]
+	\draw [thick, rotate=90,black, l-system={Hilbert curve, step=20pt, angle=90, axiom=L, order=1}]  lindenmayer system;
+	\end{scope}
+	\end{tikzpicture}
+\end{center}
+تساعد الألوان المختلفة في شرح كيفية إنشاء~$h_2$. نضع أولًا نسخًا
+مصغرة من الجزء غير~!!{colorC} من~$h_1$ في أرباع مربعنا: السفلي الأيسر
+والعلوي الأيسر والعلوي الأيمن والسفلي الأيمن (وقد رُسمت بالأسود). ثم
+نصل الأشكال الأربعة (بخطوط~!!{colorE}). وأخيرًا نصل شكلنا بحد المربع
+(بخطوط~!!{colorC}).
+
+ننتقل الآن إلى~$h_3 \colon \unitline \to \unitsquare$. فكما صُنعت
+$h_2$ من أربع نسخ مصغرة متصلة من الجزء غير الأحمر من~$h_1$، تتكون
+$h_3$ من أربع نسخ مصغرة من الجزء غير الأحمر من~$h_2$ (مرسومة
+بالأسود)، ثم تُوصل معًا (بخطوط~!!{colorE})، وتُوصل أخيرًا بحد المربع
+(بخطوط~!!{colorC}).
+\begin{center}
+	\begin{tikzpicture}
+	\draw[gray] (0pt, 0pt) rectangle (80pt, 80pt);
+	\draw[step = 10pt, gray, very thin] (0pt, 0pt) grid (80pt, 80pt);
+	\draw[thick, oldiagcolorC](5pt, 0pt)--(5pt, 5pt); 
+	\draw[thick, oldiagcolorC] (75pt, 0pt)--(75pt, 5pt); 
+	\draw[thick, oldiagcolorE] (5pt, 35pt)--(5pt, 45pt); 
+	\draw[thick, oldiagcolorE] (35pt, 45pt)--(45pt, 45pt); 
+	\draw[thick, oldiagcolorE] (75pt, 45pt)--(75pt, 35pt); \begin{scope}[xshift=5pt, yshift=35pt]
+	\draw [rotate=270, thick, black, l-system={Hilbert curve, step=10pt, angle=90, axiom=L, order=2}]  lindenmayer system;
+	\end{scope}
+	\begin{scope}[xshift=5pt, yshift=45pt]
+	\draw [thick, black, l-system={Hilbert curve, step=10pt, angle=90, axiom=L, order=2}]  lindenmayer system;
+	\end{scope}
+	\begin{scope}[xshift=45pt, yshift=45pt]
+	\draw [thick, black, l-system={Hilbert curve, step=10pt, angle=90, axiom=L, order=2}]  lindenmayer system;
+	\end{scope}
+	\begin{scope}[xshift=75pt, yshift=5pt]
+	\draw [thick, rotate=90,black, l-system={Hilbert curve, step=10pt, angle=90, axiom=L, order=2}]  lindenmayer system;
+	\end{scope}
+	\end{tikzpicture}
+\end{center}
+نرى الآن النمط العام لتعريف كل دالة متصلة
+$h_{n+1} \colon \unitline \to \unitsquare$ انطلاقًا من الدالة
+$h_n \colon \unitline \to \unitsquare$. وأخيرًا نعرّف المنحنى~$h$
+\emph{نفسه} بالنهاية النقطية لهذه الدوال المتعاقبة~$h_1$،~$h_2$،
+\dots\@ أي، لكل~$x \in \unitline$:
+\begin{align*}
+	h(x) &= \lim_{n \rightarrow \infty} h_n(x)
+\end{align*}
+
+يلزم أولًا التحقق من وجود هذه النهاية ومن أن التقارب أقوى من مجرد
+التقارب النقطي. فعند رسم~$h_n$ نفرض شبكة~$2^n \times 2^n$ على
+$\unitsquare$. وبحسب مبرهنة فيثاغورس، قطر كل خلية في الشبكة طوله
+\[
+\sqrt{\left(\nicefrac{1}{2^{n}}\right)^2+\left(\nicefrac{1}{2^{n}}\right)^2}
+= \sqrt{2}\,2^{-n}.
+\]
+يضمن البناء المتداخل أنه إذا كان~$m \geq n$، فإن~$h_m(x)$ و$h_n(x)$
+يقعان في إغلاق خلية المستوى~$n$ المقابلة للمعلمة~$x$. ولذلك
+\[
+\sup_{x \in \unitline}\lVert h_m(x)-h_n(x)\rVert
+\leq \sqrt{2}\,2^{-n}\qquad(m \geq n).
+\]
+ومن ثم تكون المتتالية~$(h_n)$ كوشية بانتظام، فتتقارب بانتظام إلى~$h$،
+ويكون
+\[
+\sup_{x \in \unitline}\lVert h(x)-h_n(x)\rVert
+\leq \sqrt{2}\,2^{-n} = O(2^{-n}).
+\]
+وكل~$h_n$ متصلة لأنها تمثل القطع المستقيمة المتعاقبة تمثيلًا بارامتريًا
+متصلًا. لذلك تكون~$h$ متصلة بوصفها نهاية منتظمة لدوال متصلة. ولرؤية
+ذلك مباشرة، ثبّت~$x \in \unitline$ و$\epsilon>0$، واختر~$n$ بحيث
+يكون الحد المنتظم أعلاه أصغر من~$\epsilon/3$. وباتصال~$h_n$، يوجد
+$\delta>0$ بحيث إذا كان~$|x-y|<\delta$ كان
+$\lVert h_n(x)-h_n(y)\rVert<\epsilon/3$. وتعطي متباينة المثلث عندئذ
+$\lVert h(x)-h(y)\rVert<\epsilon$.
+
+نبيّن الآن أن~$h$ يملأ الفضاء، أي إنه شامل على~$\unitsquare$. ثبّت
+$p \in \unitsquare$. ولكل~$n$ اختر خلية~$Q_n$ من شبكة المستوى~$n$
+تحتوي~$p$. ولأن~$h_n$ يمر بكل خلية من خلايا تلك الشبكة، يمكن اختيار
+$x_n \in \unitline$ بحيث~$h_n(x_n) \in Q_n$. وبما أن~$\unitline$
+متراصة، فللمتتالية~$(x_n)$ متتالية جزئية~$(x_{n_k})$ تتقارب إلى نقطة
+$x \in \unitline$. وباستخدام اتصال~$h$ وتقارب~$h_n$ المنتظم، نحصل
+على
+\[
+\lVert h(x)-p\rVert
+\leq \lVert h(x)-h(x_{n_k})\rVert
+ + \lVert h(x_{n_k})-h_{n_k}(x_{n_k})\rVert
+ + \lVert h_{n_k}(x_{n_k})-p\rVert \longrightarrow 0,
+\]
+إذ لا يتجاوز الحد الأخير قطر~$Q_{n_k}$، أي
+$\sqrt{2}\,2^{-n_k}$. ومن ثم~$h(x)=p$. ولما كانت~$p$ اعتباطية، تقع
+كل نقطة من~$\unitsquare$ على المنحنى. وهكذا يملأ~$h$ الفضاء!
+
+يبقى أن نبيّن أن~$h$ \emph{منحنى} بالفعل. ولكي نفعل ذلك، يجب أن نعرّف
+المفهوم. ويبني التعريف الحديث على تعريف قدمه جوردان عام 1887، أي قبل
+ظهور أول منحنى مالئ للفضاء ببضع سنوات فقط:
+
+\begin{defn}
+المنحنى تصوير متصل من~$\unitline$ إلى~$\Real^2$.
+\end{defn}
+
+وهذا تعريف حدسي إلى حد بعيد: فالمنحنى، حدسيًا، تصوير \emph{متصل} يأخذ
+خطًا معياريًا إلى المستوى~$\Real^2$. ودالتنا~$h$ تصوير من~$\unitline$
+إلى~$\unitsquare \subseteq \Real^2$، وقد أثبتنا للتو أنها متصلة، ومن
+ثم فهي منحنى.
+
+ويمكن أيضًا وصل هذا البرهان مباشرة بالوصف الهندسي للبناء. فإذا رمزنا
+بـ$I$ إلى فاصل مفتوح من~$\unitline$ تصوره~$h_n$ داخل خلية معينة من
+شبكة المستوى~$n$، فإن~$I$ موجود لأن المسار يمر بداخل كل خلية. وكلما
+كان~$x \in I$، بقيت الصور اللاحقة في إغلاق الخلية المقابلة نفسها؛
+وهذا هو بالضبط التداخل الذي أعطى حد التقارب المنتظم أعلاه. أما صياغة
+الاتصال الدقيقة فهي صياغة~$\epsilon$/$\delta$ الواردة في
+\olref[limits]{sec}، وقد تحققها تقديرات متباينة المثلث السابقة.
+
+\end{document}

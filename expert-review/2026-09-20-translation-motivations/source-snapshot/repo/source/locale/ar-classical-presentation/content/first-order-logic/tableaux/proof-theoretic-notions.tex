@@ -1,0 +1,193 @@
+% Part: first-order-logic
+% Chapter: tableaux
+% Section: proof-theoretic-notions
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{tab}{ptn}}
+      {\olfileid{pl}{tab}{ptn}}
+      
+\olsection{المفاهيم النظرية البرهانية}
+
+\begin{editorial}
+في هذا القسم بيان علاقة القابلية للإثبات ومعنى الاتساق في الجداول الدلالية.
+\end{editorial}
+
+\begin{explain}
+قد تقدّم تعريف الصلاحية والاستلزام وقابلية الإرضاء. ولهذه المعاني
+الدلالية نظائر من \emph{مفاهيم نظرية البرهان} نعرّفها الآن.
+وليس مدارها على إرضاء ال!!{sentence}s في
+\iftag{FOL}{ال!!{structure}s}{ال!!{valuation}s}، بل على وجود
+ال!!{tableau}x المغلقة التي نستوفي شروطها. ومن النتائج الجليلة
+تطابق هذه المفاهيم مع نظائرها؛ وذلك ما تقرره
+\emph{مبرهنة السلامة} و\emph{مبرهنة الاكتمال}.
+\end{explain}
+
+
+\begin{defn}[المبرهنات]
+ال!!{sentence}~$!A$ تسمّى \emph{مبرهنة} متى وجد !!{tableau} مغلق
+لـ~$\sFmla{\False}{!A}$. ويرمز إلى ذلك بـ~$\Proves !A$؛
+فإن لم تكن~$!A$ مبرهنة كتبنا~$\Proves/ !A$.
+\end{defn}
+
+\begin{defn}[!!^{derivability}]
+نقول إن !!^a{sentence}~$!A$ \emph{!!{derivable} من} مجموعة
+ال!!{sentence}s~${\OLId{greek-variable}{Gamma}}$، ونكتب~${\OLId{greek-variable}{Gamma}} \Proves !A$، إذا وفقط إذا
+أمكن اختيار مجموعة منتهية~$\{!B_{\OLMathNumeral{1}}, \dots, !B_{\OLId{latin-ordinary}{n}}\} \subseteq {\OLId{greek-variable}{Gamma}}$
+بحيث يوجد !!{tableau} مغلق للمجموعة
+\[
+\{
+  \sFmla{\False}{!A},
+  \sFmla{\True}{!B_{\OLMathNumeral{1}}}, \dots,
+  \sFmla{\True}{!B_{\OLId{latin-ordinary}{n}}}
+  \}.
+\]
+إذا لم تكن $!A$ !!{derivable} من ${\OLId{greek-variable}{Gamma}}$ كتبنا ${\OLId{greek-variable}{Gamma}} \Proves/
+!A$.
+\end{defn}
+
+\begin{defn}[الاتساق]
+مجموعة ال!!{sentence}s~${\OLId{greek-variable}{Gamma}}$ \emph{غير متسقة} إذا وفقط إذا
+أمكن اختيار مجموعة منتهية~$\{!B_{\OLMathNumeral{1}}, \dots, !B_{\OLId{latin-ordinary}{n}}\} \subseteq {\OLId{greek-variable}{Gamma}}$
+لها !!{tableau} مغلق بافتراضات هي المجموعة
+\[
+\{
+  \sFmla{\True}{!B_{\OLMathNumeral{1}}}, \dots,
+  \sFmla{\True}{!B_{\OLId{latin-ordinary}{n}}}  
+  \}.
+\]
+فإن انتفى عدم الاتساق عن~${\OLId{greek-variable}{Gamma}}$ سمّيناها \emph{متسقة}.
+\end{defn}
+
+\begin{prop}[الانعكاسية]
+\ollabel{prop:reflexivity}
+إذا كان $!A \in {\OLId{greek-variable}{Gamma}}$، فإن ${\OLId{greek-variable}{Gamma}} \Proves !A$.
+\end{prop}
+
+\begin{proof}
+من~$!A \in {\OLId{greek-variable}{Gamma}}$ نأخذ~$\{!A\}$ مجموعةً جزئية منتهية
+من~${\OLId{greek-variable}{Gamma}}$. ويكفي ال!!{tableau} الآتي، فهو مغلق:
+\begin{oltableau}
+  [\sFmla{\False}{\formula{A}}, just = \TAss
+    [\sFmla{\True}{\formula{A}}, just = \TAss,close]
+  ]
+\end{oltableau}
+\end{proof}
+  
+
+\begin{prop}[الرتابة]
+\ollabel{prop:monotonicity}
+إذا كان ${\OLId{greek-variable}{Gamma}} \subseteq {\OLId{greek-variable}{Delta}}$ و${\OLId{greek-variable}{Gamma}} \Proves !A$، فإن ${\OLId{greek-variable}{Delta}}
+\Proves !A$.
+\end{prop}
+
+\begin{proof}
+فالمجموعة الجزئية المنتهية من~${\OLId{greek-variable}{Gamma}}$ تبقى جزئية منتهية من~${\OLId{greek-variable}{Delta}}$،
+فيكفي الجدول نفسه شاهدًا.
+\end{proof}
+
+\begin{prop}[التعدية]
+\ollabel{prop:transitivity}
+إذا كان ${\OLId{greek-variable}{Gamma}} \Proves !A$ و$\{!A\} \cup
+{\OLId{greek-variable}{Delta}} \Proves !B$، فإن ${\OLId{greek-variable}{Gamma}} \cup {\OLId{greek-variable}{Delta}} \Proves !B$.
+\end{prop}
+
+\begin{proof}
+من~$\{!A\} \cup {\OLId{greek-variable}{Delta}} \Proves !B$ نأخذ مجموعة جزئية منتهية
+${\OLId{greek-variable}{Delta}}_{\OLMathNumeral{0}} =
+\{!C_{\OLMathNumeral{1}}, \dots, !C_{\OLId{latin-ordinary}{n}}\} \subseteq {\OLId{greek-variable}{Delta}}$ بحيث
+\begin{align*}
+\{\sFmla{\False}{!B}, & \sFmla{\True}{!A}, \sFmla{\True}{!C_{\OLMathNumeral{1}}},
+\dots, \sFmla{\True}{!C_{\OLId{latin-ordinary}{n}}}\}
+\intertext{لها !!{tableau} مغلق. وإذا كان ${\OLId{greek-variable}{Gamma}} \Proves !A$، فثمة
+  $!D_{\OLMathNumeral{1}}$, \dots, $!D_{\OLId{latin-ordinary}{m}} \in {\OLId{greek-variable}{Gamma}}$ بحيث}
+\{\sFmla{\False}{!A}, & \sFmla{\True}{!D_{\OLMathNumeral{1}}},
+\dots, \sFmla{\True}{!D_{\OLId{latin-ordinary}{m}}}\}
+\end{align*}
+لها !!{tableau} مغلق.
+
+% تصحيح مصدر (0105-I1): أغفل الأصل الإنجليزي وخط الأساس العربي تجديد الثوابت المستجدة قبل تركيب جدولين مستقلين.
+وقبل تركيب الجدولين نعيد تسمية كل ثابت مستجد فيهما تسميةً جديدةً، بحيث لا يرد في افتراضات الجدول الآخر ولا في الفرع الواقع فوق موضع إلحاقه.
+ننشئ الآن ال!!{tableau} الذي افتراضاته
+\[
+\sFmla{\False}{!B},
+\sFmla{\True}{!C_{\OLMathNumeral{1}}}, \dots, \sFmla{\True}{!C_{\OLId{latin-ordinary}{n}}},
+\sFmla{\True}{!D_{\OLMathNumeral{1}}}, \dots, \sFmla{\True}{!D_{\OLId{latin-ordinary}{m}}}.
+\]
+ونجري قاعدة~\Cut{} على~$!A$، فينشأ فرعان: في أحدهما
+$\sFmla{\True}{!A}$، وفي الآخر~$\sFmla{\False}{!A}$.
+أما الأول ففيه الصيغ كلّها:
+\[
+\{\sFmla{\False}{!B}, \sFmla{\True}{!A},
+\sFmla{\True}{!C_{\OLMathNumeral{1}}}, \dots, \sFmla{\True}{!C_{\OLId{latin-ordinary}{n}}}\}
+\]
+وقد علمنا أن لهذه الافتراضات !!{tableau} مغلقًا؛ فنلحقه بالفرع،
+فتغلق جميع الفروع المارّة بـ~$\sFmla{\True}{!A}$.
+وأما الفرع الآخر ففيه الصيغ كلّها:
+\[
+\{\sFmla{\False}{!A}, \sFmla{\True}{!D_{\OLMathNumeral{1}}}, \dots,
+\sFmla{\True}{!D_{\OLId{latin-ordinary}{m}}}\}
+\]
+فنتم هذا الجانب كذلك بجدوله المغلق، فيحصل !!{tableau} مغلق
+بأسره. وبذلك ثبت~${\OLId{greek-variable}{Gamma}} \cup {\OLId{greek-variable}{Delta}} \Proves !B$.
+\end{proof}
+
+ومن التعدي، على الخصوص، أنه متى كان~${\OLId{greek-variable}{Gamma}} \Proves !A$ و$!A
+\Proves !B$ لزم~${\OLId{greek-variable}{Gamma}} \Proves !B$. وبتكراره، إذا كان~$!A_{\OLMathNumeral{1}},
+\dots, !A_{\OLId{latin-ordinary}{n}} \Proves !B$ وكان~${\OLId{greek-variable}{Gamma}} \Proves !A_{\OLId{latin-ordinary}{i}}$ لكل~${\OLId{latin-ordinary}{i}}$،
+حصل~${\OLId{greek-variable}{Gamma}} \Proves !B$.
+
+\begin{prop}
+\ollabel{prop:incons}
+تكون ${\OLId{greek-variable}{Gamma}}$ غير متسقة إذا وفقط إذا كان ${\OLId{greek-variable}{Gamma}} \Proves !A$ لكل
+!!{sentence}~$!A$.
+\end{prop}
+
+\begin{proof}
+تمرين.
+\end{proof}
+
+\tagprob{FOL}
+\begin{prob}
+أثبت \olref[fol][tab][ptn]{prop:incons}
+\end{prob}
+\tagendprob
+
+\tagprob{notFOL}
+\begin{prob}
+أثبت \olref[pl][tab][ptn]{prop:incons}
+\end{prob}
+\tagendprob
+
+\begin{prop}[التراص]
+  \ollabel{prop:proves-compact}
+  \begin{enumerate}
+  \item إذا كان ${\OLId{greek-variable}{Gamma}} \Proves !A$، فثمة مجموعة جزئية منتهية ${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}}
+    \subseteq {\OLId{greek-variable}{Gamma}}$ بحيث ${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \Proves !A$.
+  \item إذا كانت كل مجموعة جزئية منتهية من~${\OLId{greek-variable}{Gamma}}$ متسقة، فإن ${\OLId{greek-variable}{Gamma}}$
+    متسقة.
+  \end{enumerate}
+\end{prop}
+
+\begin{proof}
+  \begin{enumerate}
+    \item من~${\OLId{greek-variable}{Gamma}} \Proves !A$ نأخذ مجموعة جزئية منتهية
+      ${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} = \{!B_{\OLMathNumeral{1}}, \dots, !B_{\OLId{latin-ordinary}{n}}\}$ ومعها !!{tableau} مغلق لـ
+      \[
+      \{\sFmla{\False}{!A}, \sFmla{\True}{!B_{\OLMathNumeral{1}}}, \dots, \sFmla{\True}{!B_{\OLId{latin-ordinary}{n}}}\}
+      \]
+      وهذا ال!!{tableau} بعينه شاهد على~${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} \Proves !A$.
+    \item نأخذ المقابل بالنقيض. فإذا كانت~${\OLId{greek-variable}{Gamma}}$ غير متسقة،
+      وجد !!{tableau} مغلق لمجموعة جزئية منتهية
+      ${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}} = \{!B_{\OLMathNumeral{1}}, \dots, !B_{\OLId{latin-ordinary}{n}}\}$، وافتراضاته
+      \[
+      \{\sFmla{\True}{!B_{\OLMathNumeral{1}}}, \dots, \sFmla{\True}{!B_{\OLId{latin-ordinary}{n}}}\}
+      \]
+      فهذا ال!!{tableau} المغلق يثبت عدم اتساق~${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{0}}$.
+  \end{enumerate}
+\end{proof}
+
+\end{document}

@@ -1,0 +1,72 @@
+% Part: sets-functions-relations
+% Chapter: relations
+% Section: operations
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid[ar]{sfr}{rel}{ops}
+\olsection{عمليات على العلاقات}
+
+قد ينفع أن نغير العلاقات أو نضم بعضها إلى بعض. ففي
+\olref[sfr][rel][ord]{prop:stricttopartial} أخذنا \emph{اتحاد} علاقتين،
+وهو اتحادهما حين تؤخذان مجموعتين من الأزواج. وفي
+\olref[sfr][rel][ord]{prop:partialtostrict} أخذنا الفرق النسبي
+بينهما. وها هنا عمليات أخرى على العلاقات.
+
+\begin{defn}\ollabel{relationoperations}
+خذ علاقتين ${\OLId{latin-looped}{R}}$ و${\OLId{latin-looped}{S}}$، ومجموعة كيفما كانت ${\OLId{latin-looped}{A}}$.
+
+نسمّي \emph{معكوس} ${\OLId{latin-looped}{R}}$ المجموعة ${\OLId{latin-looped}{R}}^{-{\OLMathNumeral{1}}} = \Setabs{\tuple{{\OLId{latin-ordinary}{y}}, {\OLId{latin-ordinary}{x}}}}{\tuple{{\OLId{latin-ordinary}{x}},
+    {\OLId{latin-ordinary}{y}}} \in {\OLId{latin-looped}{R}}}$.
+
+ونسمّي \emph{الضرب النسبي} لـ${\OLId{latin-looped}{R}}$ و${\OLId{latin-looped}{S}}$ المجموعة $({\OLId{latin-looped}{R}} \mid {\OLId{latin-looped}{S}}) =
+\{\tuple{{\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{z}}} : \exists {\OLId{latin-ordinary}{y}}(Rxy \land Syz)\}$.
+
+و\emph{تقييد} ${\OLId{latin-looped}{R}}$ على ${\OLId{latin-looped}{A}}$ معرّف بـ$\funrestrictionto{{\OLId{latin-looped}{R}}}{{\OLId{latin-looped}{A}}}= {\OLId{latin-looped}{R}}
+\cap {\OLId{latin-looped}{A}}^{\OLMathNumeral{2}}$.
+
+و\emph{تطبيق} ${\OLId{latin-looped}{R}}$ على ${\OLId{latin-looped}{A}}$ معرّف بـ$\funimage{{\OLId{latin-looped}{R}}}{{\OLId{latin-looped}{A}}} = \{{\OLId{latin-ordinary}{y}} :
+(\exists {\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}})Rxy\}$.
+\end{defn}
+
+\begin{ex}
+خذ علاقة اللاحق ${\OLId{latin-looped}{S}} \subseteq \Int^{\OLMathNumeral{2}}$ على~$\Int$، وهي
+${\OLId{latin-looped}{S}} = \Setabs{\tuple{{\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}} \in \Int^{\OLMathNumeral{2}}}{{\OLId{latin-ordinary}{x}} + {\OLMathNumeral{1}} = {\OLId{latin-ordinary}{y}}}$؛ فـ$Sxy$ يكافئ ${\OLId{latin-ordinary}{x}} + {\OLMathNumeral{1}} = {\OLId{latin-ordinary}{y}}$.
+
+فمعكوسها ${\OLId{latin-looped}{S}}^{-{\OLMathNumeral{1}}}$ علاقة السابق على $\Int$، أي
+$\Setabs{\tuple{{\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}}}\in\Int^{\OLMathNumeral{2}}}{{\OLId{latin-ordinary}{x}} -{\OLMathNumeral{1}} ={\OLId{latin-ordinary}{y}}}$.
+
+وأما ${\OLId{latin-looped}{S}}\mid {\OLId{latin-looped}{S}}$ فتعطي
+$ \Setabs{\tuple{{\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}}}\in\Int^{\OLMathNumeral{2}}}{{\OLId{latin-ordinary}{x}} + {\OLMathNumeral{2}} ={\OLId{latin-ordinary}{y}}}$.
+
+وتقييدها $\funrestrictionto{{\OLId{latin-looped}{S}}}{\Nat}$ علاقة اللاحق على~$\Nat$.
+
+وتطبيقها يعطي $\funimage{{\OLId{latin-looped}{S}}}{\{{\OLMathNumeral{1}},{\OLMathNumeral{2}},{\OLMathNumeral{3}}\}}$ مساوية لـ$\{{\OLMathNumeral{2}}, {\OLMathNumeral{3}}, {\OLMathNumeral{4}}\}$.
+\end{ex}
+
+\begin{defn}[الإغلاق المتعدي]
+خذ العلاقة الثنائية ${\OLId{latin-looped}{R}} \subseteq {\OLId{latin-looped}{A}}^{\OLMathNumeral{2}}$.
+
+نعرّف \emph{الإغلاق المتعدي} لـ~${\OLId{latin-looped}{R}}$ بأنه ${\OLId{latin-looped}{R}}^+ = \bigcup_{{\OLMathNumeral{0}} < {\OLId{latin-ordinary}{n}} \in
+\Nat} {\OLId{latin-looped}{R}}^{\OLId{latin-ordinary}{n}}$؛ والقوى فيه معرفة عوديًا: ${\OLId{latin-looped}{R}}^{\OLMathNumeral{1}} = {\OLId{latin-looped}{R}}$ و${\OLId{latin-looped}{R}}^{{\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}}} = {\OLId{latin-looped}{R}}^{\OLId{latin-ordinary}{n}}
+\mid {\OLId{latin-looped}{R}}$.
+
+وأما \emph{الإغلاق الانعكاسي المتعدي} لـ${\OLId{latin-looped}{R}}$ فتعريفه ${\OLId{latin-looped}{R}}^* = {\OLId{latin-looped}{R}}^+ \cup
+\Id{{\OLId{latin-looped}{A}}}$.
+\end{defn}
+
+\begin{ex}
+في علاقة اللاحق ${\OLId{latin-looped}{S}} \subseteq \Int^{\OLMathNumeral{2}}$ يكون ${\OLId{latin-looped}{S}}^{\OLMathNumeral{2}}xy$ مكافئًا لـ${\OLId{latin-ordinary}{x}} + {\OLMathNumeral{2}} =
+{\OLId{latin-ordinary}{y}}$، و${\OLId{latin-looped}{S}}^{\OLMathNumeral{3}}xy$ مكافئًا لـ${\OLId{latin-ordinary}{x}} + {\OLMathNumeral{3}} = {\OLId{latin-ordinary}{y}}$، وعلى هذا القياس.
+فـ${\OLId{latin-looped}{S}}^+xy$ إذا وفقط إذا كان ${\OLId{latin-ordinary}{x}} + {\OLId{latin-ordinary}{n}} = {\OLId{latin-ordinary}{y}}$ لعدد ${\OLId{latin-ordinary}{n}} \geq {\OLMathNumeral{1}}$.
+وحاصل ذلك أن ${\OLId{latin-looped}{S}}^+xy$ يكافئ ${\OLId{latin-ordinary}{x}} < {\OLId{latin-ordinary}{y}}$، وأن ${\OLId{latin-looped}{S}}^*xy$ يكافئ ${\OLId{latin-ordinary}{x}} \le
+{\OLId{latin-ordinary}{y}}$.
+\end{ex}
+
+\begin{prob}
+بيّن أن إغلاق ${\OLId{latin-looped}{R}}$ المتعدي يحقق التعدية حقًا.
+\end{prob}
+
+\end{document}

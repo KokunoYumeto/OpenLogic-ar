@@ -1,0 +1,106 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{ordinals}{opps}
+\olsection{الأعداد الترتيبية الخلفية والحدية}
+
+سنستعمل الأعداد الترتيبية كثيرًا في الفصول القليلة التالية. ولذلك من
+المفيد أن ندخل بعض المفاهيم البسيطة.
+
+\begin{defn}
+لكل عدد ترتيبي~$\alpha$، يكون \emph{خلفه}
+$\ordsucc{\alpha} =\alpha \cup \{\alpha\}$. ونقول إن~$\alpha$
+عدد ترتيبي \emph{خلفي} إذا كان~$\ordsucc{\beta} = \alpha$ لعدد ترتيبي
+ما~$\beta$. ونقول إن~$\alpha$ عدد ترتيبي \emph{حدي} إذا وفقط إذا لم
+يكن خاليًا ولا عددًا ترتيبيًا خلفيًا.
+\end{defn}
+\noindent
+تبيّن النتيجة الآتية أن هذا هو المفهوم الصحيح لـ\emph{الخلف}:
+
+\begin{prop}
+لكل عدد ترتيبي~$\alpha$:
+\begin{enumerate}
+	\item $\alpha \in \ordsucc{\alpha}$؛
+	\item $\ordsucc{\alpha}$ عدد ترتيبي؛
+	\item لا يوجد عدد ترتيبي~$\beta$ يحقق
+	$\alpha \in \beta \in \ordsucc{\alpha}$.
+	\end{enumerate}
+\end{prop}
+
+\begin{proof}
+من البديهي أن
+$\alpha \in \alpha \cup \{\alpha\} = \ordsucc{\alpha}$. كذلك تكون
+$\ordsucc{\alpha}$ مجموعة متعدية من الأعداد الترتيبية، ومن ثم تكون
+عددًا ترتيبيًا بموجب~\olref[basic]{corordtransitiveord}.
+ويستحيل~$\alpha \in \beta \in \ordsucc{\alpha}$، لأن ذلك يستلزم
+$\beta \in \alpha$ أو~$\beta = \alpha$، خلافًا لـ
+\olref[basic]{ordordered}.
+\end{proof}
+\noindent
+يسوّغ هذا أيضًا صورة أخرى للبرهان بالاستقراء المتناهي التجاوز:
+
+\begin{thm}[الاستقراء المتناهي التجاوز البسيط]\ollabel{simpletransrecursion}
+لتكن~$\phi(x)$ صيغة تحقق:
+\begin{enumerate}
+	\item $\phi(\emptyset)$؛ و
+	\item لكل عدد ترتيبي~$\alpha$، إذا كان~$\phi(\alpha)$، فإن
+	$\phi(\ordsucc{\alpha})$؛ و
+	\item إذا كان~$\alpha$ عددًا ترتيبيًا حديًا وكان
+	$(\forall \beta \in \alpha)\phi(\beta)$، فإن~$\phi(\alpha)$.
+\end{enumerate}
+عندئذ~$\forall \alpha \phi(\alpha)$.
+\end{thm}
+
+\begin{proof}
+نثبت المقابل بالنقيض. افترض إذن وجود عدد ترتيبي يحقق~$\lnot\phi$، ولتكن
+$\gamma$ أصغر عدد ترتيبي كذلك. فإما أن~$\gamma = \emptyset$، وهذا
+يناقض الفرض~1؛ أو أن~$\gamma = \ordsucc{\alpha}$ لبعض~$\alpha$،
+وعندئذ تقتضي أصغرية~$\gamma$ أن~$\phi(\alpha)$، فيعطي الفرض~2
+$\phi(\gamma)$؛ أو أن~$\gamma$ عدد ترتيبي حدي، وعندئذ تقتضي أصغريته
+$(\forall \beta \in \gamma)\phi(\beta)$، فيعطي الفرض~3
+$\phi(\gamma)$. وفي الحالات الثلاث نحصل على تناقض.
+\end{proof}
+\noindent
+وسيكون قدر أخير من الترميز نافعًا فيما بعد:
+
+\begin{defn}\ollabel{defsupstrict}
+إذا كانت~$X$ مجموعة من الأعداد الترتيبية، فإن
+$\supstrict(X) = \bigcup_{\alpha \in X} \ordsucc{\alpha}$.
+\end{defn}
+\noindent
+يرمز الاختصار «lsub» هنا إلى «أصغر حد علوي صارم».
+\footnote{تستعمل بعض الكتب «$\text{sup}(X)$» لذلك. لكن كتبًا أخرى
+تستعمل «$\text{sup}(X)$» لأصغر حد علوي \emph{غير صارم}، أي ببساطة
+$\bigcup X$. وإذا كان لـ$X$ عنصر أكبر~$\alpha$، افترق المفهومان:
+فأصغر حد علوي \emph{صارم} هو~$\ordsucc{\alpha}$، في حين أن أصغر حد
+علوي \emph{غير صارم} هو~$\alpha$ نفسه.}
+وتشرح النتيجة الآتية ذلك:
+
+\begin{prop}
+إذا كانت~$X$ مجموعة من الأعداد الترتيبية، فإن~$\supstrict(X)$ أصغر
+عدد ترتيبي أكبر من كل عدد ترتيبي في~$X$.
+\end{prop}
+
+\begin{proof}
+لتكن~$Y = \Setabs{\ordsucc{\alpha}}{\alpha \in X}$، بحيث
+$\supstrict(X) = \bigcup Y$. ولما كانت الأعداد الترتيبية متعدية، وكان
+كل عنصر من عدد ترتيبي عددًا ترتيبيًا، كانت~$\supstrict(X)$ مجموعة
+متعدية من الأعداد الترتيبية، ومن ثم عددًا ترتيبيًا بموجب
+\olref[basic]{corordtransitiveord}.
+
+إذا كان~$\alpha \in X$، كان~$\ordsucc{\alpha} \in Y$، ولذلك
+$\ordsucc{\alpha} \subseteq \bigcup Y = \supstrict(X)$، ومن ثم
+$\alpha \in \supstrict(X)$. وهكذا تكون~$\supstrict(X)$ أكبر تمامًا
+من كل عدد ترتيبي في~$X$.
+
+ولتكن~$\gamma$ حدًا علويًا صارمًا اعتباطيًا لـ$X$. إذن
+$\alpha \in \gamma$ لكل~$\alpha \in X$. ولما كان~$\gamma$ عددًا
+ترتيبيًا، ينتج~$\ordsucc{\alpha} \subseteq \gamma$ لكل
+$\alpha \in X$. ومن ثم
+$\bigcup Y = \supstrict(X) \subseteq \gamma$، أي
+$\supstrict(X) \leq \gamma$. لذلك تكون~$\supstrict(X)$ \emph{أصغر} حد علوي
+صارم لـ$X$.
+\end{proof}
+
+\end{document}

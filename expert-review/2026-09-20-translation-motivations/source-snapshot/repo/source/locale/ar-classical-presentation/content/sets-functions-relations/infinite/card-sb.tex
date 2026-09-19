@@ -1,0 +1,105 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid[ar]{sfr}{infinite}{card-sb}
+
+\olsection{ملحق: إثبات مبرهنة شرودر–برنشتاين}
+
+بقي قبل مفارقة نظرية المجموعات الساذجة برهان أخير، ساذج في مبانيه دقيق في صنعته: برهان مبرهنة شرودر–برنشتاين
+(\olref[sfr][siz][sb]{thm:schroder-bernstein}). ومفادها أنه إذا كان
+$\cardle{{\OLId{latin-looped}{A}}}{{\OLId{latin-looped}{B}}}$ و$\cardle{{\OLId{latin-looped}{B}}}{{\OLId{latin-looped}{A}}}$، كان $\cardeq{{\OLId{latin-looped}{A}}}{{\OLId{latin-looped}{B}}}$؛ أي إنه متى وُجدت
+!!{injection}s ${\OLId{latin-ordinary}{f}} \colon {\OLId{latin-looped}{A}} \to {\OLId{latin-looped}{B}}$ و${\OLId{latin-ordinary}{g}} \colon {\OLId{latin-looped}{B}} \to {\OLId{latin-looped}{A}}$، وُجدت
+!!a{bijection} ${\OLId{latin-ordinary}{h}} \colon {\OLId{latin-looped}{A}} \to {\OLId{latin-looped}{B}}$.
+
+جرى البحث في هذا الفصل على مفهوم ديديكند في \emph{الإغلاقات}. وبهذا المفهوم أقام ديديكند برهانًا حسنًا لمبرهنة شرودر–برنشتاين، نعرضه الآن. وطريقتنا قريبة من معالجة
+\citet[صص.~157--8]{Potter2004}؛ فمن شاء أن يرجع إليها وجد عرضًا يختلف قليلًا ويتفق في الأصل. ويكفي قليل من البحث في غوغل ليتبين أن لهذه المبرهنة براهين
+\emph{كثيرة} مختلفة طريفة، كما لعدم نسبية
+$\sqrt{{\OLMathNumeral{2}}}$ براهين من هذا القبيل.
+
+وباستخدام ترميز شبيه بما في
+\olref[sfr][infinite][dedekind]{Closure}، لتكن ${\OLId{latin-looped}{E}}$ مجموعة، ولتكن
+${\OLId{latin-looped}{B}}\subseteq {\OLId{latin-looped}{E}}$ و${\OLId{latin-ordinary}{f}}\colon {\OLId{latin-looped}{E}}\to {\OLId{latin-looped}{E}}$، ونضع
+\[
+\Closureofunder{{\OLId{latin-ordinary}{f}}}{{\OLId{latin-looped}{B}}} = \bigcap \Setabs{{\OLId{latin-looped}{X}}}{{\OLId{latin-looped}{X}}\subseteq {\OLId{latin-looped}{E}}\text{ و}{\OLId{latin-looped}{B}} \subseteq {\OLId{latin-looped}{X}}
+\text{ و${\OLId{latin-looped}{X}}$ منغلقة تحت ${\OLId{latin-ordinary}{f}}$}}
+\]
+وبحسب هذا التعريف، تكون
+$\Closureofunder{{\OLId{latin-ordinary}{f}}}{{\OLId{latin-looped}{B}}}$ أصغر مجموعة منغلقة تحت ${\OLId{latin-ordinary}{f}}$ وتحتوي~${\OLId{latin-looped}{B}}$، بمعنى
+ما يأتي:
+
+\begin{lem}\ollabel{Closureprops}
+	لكل مجموعة ${\OLId{latin-looped}{E}}$، ولكل دالة ${\OLId{latin-ordinary}{f}}\colon {\OLId{latin-looped}{E}}\to {\OLId{latin-looped}{E}}$، ولكل ${\OLId{latin-looped}{B}}\subseteq {\OLId{latin-looped}{E}}$:
+	\begin{enumerate}
+		\item\ollabel{Closurehaselem} ${\OLId{latin-looped}{B}} \subseteq \Closureofunder{{\OLId{latin-ordinary}{f}}}{{\OLId{latin-looped}{B}}}$؛ و
+		\item\ollabel{Closureclosed} $\Closureofunder{{\OLId{latin-ordinary}{f}}}{{\OLId{latin-looped}{B}}}$ منغلقة تحت ${\OLId{latin-ordinary}{f}}$؛ و
+		\item\ollabel{Closuresmallest} إذا كانت ${\OLId{latin-looped}{X}}$ منغلقة تحت ${\OLId{latin-ordinary}{f}}$ وكان ${\OLId{latin-looped}{B}}
+		\subseteq {\OLId{latin-looped}{X}}$، فإن $\Closureofunder{{\OLId{latin-ordinary}{f}}}{{\OLId{latin-looped}{B}}} \subseteq {\OLId{latin-looped}{X}}$.
+	\end{enumerate}
+\end{lem}
+
+\textbf{تنبيه تصحيحي على الأصل (C054-01).} صُرّح بالمجموعة المحيطة ${\OLId{latin-looped}{E}}$ وبكون
+${\OLId{latin-ordinary}{f}}$ دالة من ${\OLId{latin-looped}{E}}$ إلى نفسها؛ فبدون ذلك لا يلزم أن يكون تقاطع الجزئيات
+منغلقًا تحت ${\OLId{latin-ordinary}{f}}$، ولا يكون المتغير ${\OLId{latin-looped}{X}}$ محصورًا في مجموعة معلومة.
+
+\begin{proof}
+يُسلك فيه بعينه مسلك \olref[sfr][infinite][dedekind]{closureproperties}.
+\end{proof}
+
+ولا يبقى قبل إثبات شرودر–برنشتاين إلا القضية الآتية:
+
+\begin{prop}\ollabel{sbhelper}
+إذا كان ${\OLId{latin-looped}{A}} \subseteq {\OLId{latin-looped}{B}} \subseteq {\OLId{latin-looped}{C}}$ وكان $\cardeq{{\OLId{latin-looped}{A}}}{{\OLId{latin-looped}{C}}}$، فإن $\cardeq{{\OLId{latin-looped}{A}}}{{\OLId{latin-looped}{B}}}$ و$\cardeq{{\OLId{latin-looped}{B}}}{{\OLId{latin-looped}{C}}}$.
+\end{prop}
+
+\begin{proof}
+إذا أعطيت !!a{bijection} ${\OLId{latin-ordinary}{f}} \colon {\OLId{latin-looped}{C}} \to {\OLId{latin-looped}{A}}$، فبما أن ${\OLId{latin-looped}{A}}\subseteq {\OLId{latin-looped}{C}}$
+ننظر إلى ${\OLId{latin-ordinary}{f}}$ أيضًا بوصفها دالة من ${\OLId{latin-looped}{C}}$ إلى نفسها، ولتكن ${\OLId{latin-looped}{F}} =
+\Closureofunder{{\OLId{latin-ordinary}{f}}}{{\OLId{latin-looped}{C}} \setminus {\OLId{latin-looped}{B}}}$، وعرّف دالة ${\OLId{latin-ordinary}{g}}$ مجالها ${\OLId{latin-looped}{C}}$ كما
+يأتي:
+\[
+	{\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{x}}) =
+	\begin{cases}
+			{\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}}) &\text{إذا كان ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{F}}$}\\
+			{\OLId{latin-ordinary}{x}} & \text{فيما عدا ذلك}
+		\end{cases}
+\]
+سنبيّن أن ${\OLId{latin-ordinary}{g}}$ هي !!a{bijection} ${\OLId{latin-looped}{C}} \to {\OLId{latin-looped}{B}}$ (أي إن $\cardeq{{\OLId{latin-looped}{B}}}{{\OLId{latin-looped}{C}}}$)، ومن ذلك يلزم أن
+$\comp{{\OLId{latin-ordinary}{f}}^{-{\OLMathNumeral{1}}}}{{\OLId{latin-ordinary}{g}}} \colon {\OLId{latin-looped}{A}} \to {\OLId{latin-looped}{B}}$ هي !!a{bijection} (أي إن $\cardeq{{\OLId{latin-looped}{A}}}{{\OLId{latin-looped}{B}}}$)، فيكتمل البرهان.
+
+نبدأ بتمييز الصورتين: إذا كان ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{F}}$ وكان ${\OLId{latin-ordinary}{y}}\notin {\OLId{latin-looped}{F}}$، فلا بد أن ${\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{x}}) \neq
+{\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{y}})$. وإلا لزم ${\OLId{latin-ordinary}{y}} = {\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{y}}) = {\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{x}}) =
+{\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}})$. لكن ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{F}}$، و${\OLId{latin-looped}{F}}$ منغلقة تحت ${\OLId{latin-ordinary}{f}}$ بمقتضى
+\olref{Closureprops}؛ فيكون ${\OLId{latin-ordinary}{y}} = {\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}}) \in {\OLId{latin-looped}{F}}$، خلاف الفرض.
+
+وعليه، إذا فرضنا ${\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{x}}) = {\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{y}})$، لزم أن ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{F}}$ إذا
+وفقط إذا كان ${\OLId{latin-ordinary}{y}} \in {\OLId{latin-looped}{F}}$. فإن كان ${\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}} \in {\OLId{latin-looped}{F}}$، كان ${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}}) = {\OLId{latin-ordinary}{g}} ({\OLId{latin-ordinary}{x}}) =
+{\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{y}}) = {\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{y}})$، فيلزم ${\OLId{latin-ordinary}{x}} = {\OLId{latin-ordinary}{y}}$ لأن ${\OLId{latin-ordinary}{f}}$ هي !!a{bijection}. وإن كان
+${\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}} \notin {\OLId{latin-looped}{F}}$، حصل ${\OLId{latin-ordinary}{x}} = {\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{x}}) = {\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{y}}) = {\OLId{latin-ordinary}{y}}$. ففي الحالين يتساوى المدخلان؛ وبذلك تكون ${\OLId{latin-ordinary}{g}}$
+!!a{injection}.
+
+ولإتمام البرهان نثبت $\ran{{\OLId{latin-ordinary}{g}}} = {\OLId{latin-looped}{B}}$. خذ ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{B}} \subseteq {\OLId{latin-looped}{C}}$. إن كان
+${\OLId{latin-ordinary}{x}} \notin {\OLId{latin-looped}{F}}$، فلدينا ${\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{x}}) = {\OLId{latin-ordinary}{x}}$. وإن كان ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{F}}$، فلا بد أن ${\OLId{latin-ordinary}{x}} = {\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{y}})$
+لبعض ${\OLId{latin-ordinary}{y}} \in {\OLId{latin-looped}{F}}$. إذ لو انتفت هذه الصورة، لكانت ${\OLId{latin-looped}{F}} \setminus \{{\OLId{latin-ordinary}{x}}\}$
+منغلقة تحت ${\OLId{latin-ordinary}{f}}$ ومحتوية على ${\OLId{latin-looped}{C}}\setminus {\OLId{latin-looped}{B}}$، وهو محال بمقتضى
+\olref{Closureprops}. وحينئذ ${\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{y}}) = {\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{y}}) = {\OLId{latin-ordinary}{x}}$.
+\end{proof}
+
+فلنرجع إلى المبرهنة الأصلية. نذكّر بأن صورة الدالة ${\OLId{latin-ordinary}{h}}$ على المجموعة ${\OLId{latin-looped}{D}}$ معرّفة هكذا:
+$\funimage{{\OLId{latin-ordinary}{h}}}{{\OLId{latin-looped}{D}}} = \Setabs{{\OLId{latin-ordinary}{h}}({\OLId{latin-ordinary}{x}})}{{\OLId{latin-ordinary}{x}}
+\in {\OLId{latin-looped}{D}}}$.
+
+\begin{proof}[برهان مبرهنة شرودر–برنشتاين] خذ !!{injection}s
+${\OLId{latin-ordinary}{f}} \colon {\OLId{latin-looped}{A}} \to {\OLId{latin-looped}{B}}$ و${\OLId{latin-ordinary}{g}} \colon {\OLId{latin-looped}{B}} \to {\OLId{latin-looped}{A}}$. من $\funimage{{\OLId{latin-ordinary}{f}}}{{\OLId{latin-looped}{A}}}
+\subseteq {\OLId{latin-looped}{B}}$ يلزم $\funimage{{\OLId{latin-ordinary}{g}}}{\funimage{{\OLId{latin-ordinary}{f}}}{{\OLId{latin-looped}{A}}}} \subseteq
+{\OLId{latin-ordinary}{g}}[{\OLId{latin-looped}{B}}] \subseteq {\OLId{latin-looped}{A}}$. والدالة $\comp{{\OLId{latin-ordinary}{f}}}{{\OLId{latin-ordinary}{g}}} \colon {\OLId{latin-looped}{A}} \to
+\funimage{{\OLId{latin-ordinary}{g}}}{\funimage{{\OLId{latin-ordinary}{f}}}{{\OLId{latin-looped}{A}}}}$ هي !!{injection}، إذ كل من ${\OLId{latin-ordinary}{g}}$ و
+${\OLId{latin-ordinary}{f}}$ كذلك؛ ثم إن $\comp{{\OLId{latin-ordinary}{f}}}{{\OLId{latin-ordinary}{g}}}$ هي !!a{bijection} أيضًا، لاختيار صورتها مجالًا مقابلًا. فينتج
+$\cardeq{\funimage{{\OLId{latin-ordinary}{g}}}{\funimage{{\OLId{latin-ordinary}{f}}}{{\OLId{latin-looped}{A}}}}}{{\OLId{latin-looped}{A}}}$، ومن
+\olref{sbhelper} توجد !!a{bijection} ${\OLId{latin-ordinary}{h}} \colon {\OLId{latin-looped}{A}} \to
+\funimage{{\OLId{latin-ordinary}{g}}}{{\OLId{latin-looped}{B}}}$. وأما ${\OLId{latin-ordinary}{g}}^{-{\OLMathNumeral{1}}}$ فهي !!a{bijection}
+$\funimage{{\OLId{latin-ordinary}{g}}}{{\OLId{latin-looped}{B}}} \to {\OLId{latin-looped}{B}}$. فتركيبهما $\comp{{\OLId{latin-ordinary}{h}}}{{\OLId{latin-ordinary}{g}}^{-{\OLMathNumeral{1}}}} \colon {\OLId{latin-looped}{A}} \to {\OLId{latin-looped}{B}}$
+!!a{bijection}، وهو المطلوب.
+\end{proof}
+
+\end{document}

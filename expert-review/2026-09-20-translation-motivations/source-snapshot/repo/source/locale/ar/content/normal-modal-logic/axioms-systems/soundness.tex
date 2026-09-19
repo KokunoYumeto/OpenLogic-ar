@@ -1,0 +1,56 @@
+% Part: normal-modal-logic
+% Chapter: axioms-systems
+% Section: soundness
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{prf}{snd}
+
+\olsection{السلامة}
+
+يسمى نسق !!^a{derivation} سليما إذا كان كل ما يمكن !!{derive}d
+صالحا. وعند النظر في النظم الجهية، أي !!{derivation}s التي يمكن فيها
+استعمال أمثلة بعض !!{formula}s $!A_1$، \dots،~$!A_n$ بالإضافة إلى
+\Ax{K}، نريد لكل صيغة !!{derivable} أن تكون صادقة في كل نموذج تصدق
+فيه $!A_1$، \dots، $!A_n$.
+
+\begin{thm}[مبرهنة السلامة]\ollabel{thm:soundness}
+  إذا كان كل مثال لـ$!A_1$، \dots، $!A_n$ صالحا، على الترتيب، في
+  فئات النماذج $\mClass{C}_1$، \dots، $\mClass{C}_n$، فإن
+  $\Log{K}!A_1\dots !A_n \Proves !B$ يستلزم أن تكون $!B$ صالحة في
+  فئة النماذج $\mClass{C}_1 \cap \dots \cap \mClass{C}_n$.
+\end{thm}
+
+\begin{proof}
+  بالاستقراء على طول البراهين. وللاختصار، ضع $\mClass{C} =
+  \mClass{C}_1 \cap \dots \cap \mClass{C}_n$.
+  \begin{enumerate}
+  \item أساس الاستقراء: إذا كان لـ$!B$ برهان طوله~$1$، فهي إما مثال
+    لقضية صادقة صدقا تحليليا، أو مثال لـ~\Ax{K}،
+    \iftag{prvDiamond}{أو لـ~\Dual{}،}{} أو مثال لواحدة من $!A_1$،
+    \dots،~$!A_n$. في الحالة الأولى تكون $!B$ صالحة في
+    $\mClass{C}$، لأن أمثلة القضايا الصادقة صدقا تحليليا صالحة في
+    \emph{كل} فئة من النماذج، بحسب \olref[syn][tau]{prop:valid-taut}.
+    وكذلك في الحالة الثانية، بحسب
+    \olref[syn][sch]{prop:Kvalid}\iftag{prvDiamond}{ و
+      \olref[syn][sch]{prop:Dual-valid}}{}. وأخيرا، في الحالة الثالثة،
+    لما كانت $!B$ صالحة في $\mClass{C}_i$ وكان $\mClass{C} \subseteq
+    \mClass{C}_i$، كانت $!B$ صالحة في $\mClass{C}$ أيضا بحسب
+    \olref[syn][val]{prop:subset-class}.
+  \item خطوة الاستقراء: افترض أن لـ$!B$ برهانا طوله $k>1$. فإذا كانت
+    $!B$ مثالا لقضية صادقة صدقا تحليليا، أو مثالا لـ~\Ax{K}،
+    \iftag{prvDiamond}{أو مثالا لـ~\Dual{}،}{} أو مثالا لواحدة من
+    $!A_1$، \dots، $!A_n$، سرنا كما في الخطوة السابقة. فافترض إذن أن
+    $!B$ حصلت بواسطة \MP{} من !!{formula}s السابقتين $!C \lif !B$
+    و$!C$. عندئذ لـ$!C \lif !B$ و$!C$ برهانان طول كل منهما أقل من
+    $k$، وهما صالحتان في~$\mClass{C}$ بفرض الاستقراء. وبحسب
+    \olref[syn][sch]{prop:soundMP} تكون $!B$ صالحة في $\mClass{C}$
+    أيضا. وأخيرا، افترض أن $!B$ حصلت بواسطة \Nec{} من $!C$ (أي إن
+    $!B = \Box!C$). عندئذ تكون $!C$ صالحة في $\mClass{C}$ بفرض
+    الاستقراء، وتكون~$!B$ كذلك بحسب \olref[syn][val]{prop:Nec-rule}.
+  \end{enumerate}
+\end{proof}
+
+\end{document}

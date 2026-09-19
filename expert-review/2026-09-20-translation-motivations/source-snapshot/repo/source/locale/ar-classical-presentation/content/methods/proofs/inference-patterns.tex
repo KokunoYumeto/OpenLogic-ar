@@ -1,0 +1,295 @@
+% Part: methods
+% Chapter: proofs
+% Section: inference-patterns
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mth}{prf}{pat}
+
+\olsection{أنماط الاستدلال}
+
+إنما يتركب البرهان من استدلالات مفردة، ولكل استدلال انتقال من معلوم
+إلى لازم عنه. ويُنبَّه على هذا الانتقال بألفاظ كـ«إذن» و«وعليه»
+و«لذلك». وقد يتكئ على حقيقة واحدة أو حقيقتين سبقتا في البرهان، سواء
+كانتا من الفروض أو مما ثبت قبله. وربما رُمز إلى تلك الحقائق بحروف أو
+أرقام، ثم أُحيل إليها عند استعمالها، ليكون مسار الحجة أبين. ويحسن
+كذلك أن يُذكر \emph{وجه} لزوم النتيجة الجديدة عن مقدماتها. ولما كانت
+جملة من صور الاستدلال كثيرة الدوران في البراهين، أفردنا الآتي لبيان
+أشهرها؛ وأما الصور المركبة، كالاستقراء، فموضعها يأتي بعد.
+
+وقد مر بنا منها ضرب واحد، وهو بسط التعريف أو إجراؤه. فبسط التعريف ردّ
+الكلام المشتمل على المعرَّف إلى عبارة المُعرِّف. فإذا ثبت لنا، مثلًا،
+في أثناء البرهان أن~${\OLId{latin-looped}{D}} = {\OLId{latin-looped}{E}}$ (أ)، أجرينا تعريف~$=$ في المجموعات وقلنا:
+«إذن، بالتعريف وبناء على (أ)، كل !!{element} من~${\OLId{latin-looped}{D}}$ هو !!a{element}
+من~${\OLId{latin-looped}{E}}$، وصح العكس».
+
+وقد يشتبه الأمر لأننا كثيرًا ما نورد مسوّغ الاستدلال قبل تمامه، لا
+عند الفراغ منه. فافرض أن~${\OLId{latin-looped}{D}} = {\OLId{latin-looped}{E}}$ لم تثبت بعد، وأن~${\OLId{latin-looped}{D}} = {\OLId{latin-looped}{E}}$ عين
+المطلوب. لنا أن نبسط الغاية بالتعريف فنقول: يلزم لإثبات~${\OLId{latin-looped}{D}} = {\OLId{latin-looped}{E}}$ أن نثبت أن كل
+!!{element} من~${\OLId{latin-looped}{D}}$ هو !!a{element} من~${\OLId{latin-looped}{E}}$، وأن العكس صحيح. ولو فُصّل
+مسار البرهان لقيل: (أ) أثبت أن كل !!{element} من~${\OLId{latin-looped}{D}}$ هو !!a{element}
+من~${\OLId{latin-looped}{E}}$؛ (ب) أثبت أن كل !!{element} من~${\OLId{latin-looped}{E}}$ هو !!a{element} من~${\OLId{latin-looped}{D}}$؛
+(ج) يستنتج من (أ) و(ب)، بتعريف~$=$، أن~${\OLId{latin-looped}{D}} = {\OLId{latin-looped}{E}}$. غير أن المعتاد جمع
+ذلك في صورة أقرب إلى الآتية:
+\begin{quote}
+مرادنا أن نبيّن~${\OLId{latin-looped}{D}} = {\OLId{latin-looped}{E}}$. وبحسب تعريف~$=$، يكافئ ذلك بيان أن كل
+!!{element} من~${\OLId{latin-looped}{D}}$ هو !!a{element} من~${\OLId{latin-looped}{E}}$، وأن الأمر بالعكس كذلك.
+
+(أ) \dots{} (برهان أن كل !!{element} من~${\OLId{latin-looped}{D}}$ هو !!a{element} من~${\OLId{latin-looped}{E}}$)
+\dots
+
+(ب) \dots{} (برهان أن كل !!{element} من~${\OLId{latin-looped}{E}}$ هو !!a{element} من~${\OLId{latin-looped}{D}}$)
+\dots
+\end{quote}
+
+\subsection{استخدام اقتران}
+
+وأقرب وجوه الاستدلال أن يؤخذ أحد جزأي الاقتران نتيجة. فإذا كان~${\OLId{latin-ordinary}{p}}$
+و${\OLId{latin-ordinary}{q}}$ مفروضين أو ثابتين، جاز استخراج~${\OLId{latin-ordinary}{p}}$، كما جاز استخراج~${\OLId{latin-ordinary}{q}}$. وهذا
+من البداهة بحيث يُطوى ذكره في أكثر المواضع. فبعد بسط تعريف~${\OLId{latin-looped}{D}} = {\OLId{latin-looped}{E}}$،
+مثلًا، نكون قد أثبتنا أن كل !!{element} من~${\OLId{latin-looped}{D}}$ هو !!a{element} من
+${\OLId{latin-looped}{E}}$، وأن العكس صحيح؛ ومن مجموع القولين نأخذ أن كل !!{element} من~${\OLId{latin-looped}{E}}$
+هو !!a{element} من~${\OLId{latin-looped}{D}}$، وهو المراد بقولنا «والعكس صحيح».
+
+\subsection{إثبات اقتران}
+
+وربما كان المطلوب اقترانًا، كأن يقال: «أثبت~${\OLId{latin-ordinary}{p}}$ و${\OLId{latin-ordinary}{q}}$». وحينئذ ينقسم
+العمل قسمين: يثبت~${\OLId{latin-ordinary}{p}}$ أولًا، ثم يثبت~${\OLId{latin-ordinary}{q}}$. ولزيادة الإيضاح يمكن أن
+تجعل في مسودة البرهان عنوانين: «(\OLClassicalDigits{1}) أثبت~${\OLId{latin-ordinary}{p}}$» في صدر الصفحة، و«(\OLClassicalDigits{2})
+أثبت~${\OLId{latin-ordinary}{q}}$» في وسطها. وقد لا يُصرح في السؤال بأنه اقتران، ثم يكشفه فك
+تعريف. فإذا كان المطلوب، مثلًا،~${\OLId{latin-looped}{D}} = {\OLId{latin-looped}{E}}$، آل تعريف~$=$ إلى إثبات أن
+كل !!{element} من~${\OLId{latin-looped}{D}}$ هو !!a{element} من~${\OLId{latin-looped}{E}}$ \emph{و}أن كل
+!!{element} من~${\OLId{latin-looped}{E}}$ هو !!a{element} من~${\OLId{latin-looped}{D}}$.
+
+\subsection{إثبات فصل}
+
+وأما إذا كان المطلوب فصلًا، أي قولًا من نحو «${\OLId{latin-ordinary}{p}}$ أو~${\OLId{latin-ordinary}{q}}$»، فكفاية
+البرهان في إظهار صدق أحد الطرفين. غير أن الفروض قلما تعيّن أحدهما
+مباشرة؛ والأغلب أن تكون الفروض نفسها فصلية، أو أن يراد إثبات أن كل
+شيء من صنف ما يتصف بإحدى صفتين، مع اختلاف الأفراد في أيتهما تتحقق.
+وعندئذ يكون البرهان بالحالات، الآتي بيانه، هو الطريق الملائم.
+
+\subsection{البرهان الشرطي}
+
+وكثير من المبرهنات شرطيات، أي المطلوب فيها بيان أن تحقق~${\OLId{latin-ordinary}{p}}$ يستلزم
+صدق~${\OLId{latin-ordinary}{q}}$. وطريق إعدادها بيّن: تُفرض مقدمة الشرطية، وهي~${\OLId{latin-ordinary}{p}}$ هنا، ثم
+يُستخرج منها التالي~${\OLId{latin-ordinary}{q}}$. فإذا كان نص المبرهنة «إذا~${\OLId{latin-ordinary}{p}}$ فإن~${\OLId{latin-ordinary}{q}}$»، كان
+أول البرهان «افترض~${\OLId{latin-ordinary}{p}}$»، وكان آخره بلوغ~${\OLId{latin-ordinary}{q}}$.
+
+وتختلف العبارة عن الشرطية ولا يختلف معناها؛ فقد يقال بدل «إذا~${\OLId{latin-ordinary}{p}}$
+فإن~${\OLId{latin-ordinary}{q}}$»: «${\OLId{latin-ordinary}{p}}$ فقط إذا~${\OLId{latin-ordinary}{q}}$»، أو «${\OLId{latin-ordinary}{q}}$ إذا~${\OLId{latin-ordinary}{p}}$»، أو «${\OLId{latin-ordinary}{q}}$، بشرط~${\OLId{latin-ordinary}{p}}$».
+وفي الجميع يُفرض~${\OLId{latin-ordinary}{p}}$ ويُثبت منه~${\OLId{latin-ordinary}{q}}$. وأما التكافؤ، أعني «${\OLId{latin-ordinary}{p}}$ إذا
+وفقط إذا~${\OLId{latin-ordinary}{q}}$»، فمركب من شرطيتين: إذا~${\OLId{latin-ordinary}{p}}$ فإن~${\OLId{latin-ordinary}{q}}$، وإذا~${\OLId{latin-ordinary}{q}}$ فإن~${\OLId{latin-ordinary}{p}}$؛
+فيعاد البرهان الشرطي مرة لكل جهة. وقد يُثبت التكافؤ أحيانًا بسلسلة
+من عبارات «إذا وفقط إذا» أولها «${\OLId{latin-ordinary}{p}}$» وآخرها «${\OLId{latin-ordinary}{q}}$»، بشرط التحقق من أن
+كل حلقة في السلسلة تكافؤ حقًّا، لا استلزام من جهة واحدة.
+
+\subsection{الادعاءات الكلية}
+
+أما استعمال الدعوى الكلية فقاعدته أن ما ثبت لكل فرد ثبت للفرد
+المعيّن. فإذا كان من فروض البرهان~${\OLId{latin-looped}{A}} \subseteq {\OLId{latin-looped}{B}}$، فمعناه، بعد بسط
+$\subseteq$، أن كل~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}$ يحقق~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{B}}$. فإن عُلم بعد ذلك أن
+${\OLId{latin-ordinary}{z}} \in {\OLId{latin-looped}{A}}$، لزم~${\OLId{latin-ordinary}{z}} \in {\OLId{latin-looped}{B}}$.
+
+وقد يبدو إثبات ادعاء كلي عسيرًا قليلًا. وتأخذ هذه العبارات عادة
+الصورة الآتية: «إذا كانت لـ${\OLId{latin-ordinary}{x}}$ الخاصية~${\OLId{latin-looped}{P}}$، فله الخاصية~${\OLId{latin-looped}{Q}}$»، أو «كل
+${\OLId{latin-looped}{P}}$ هو~${\OLId{latin-looped}{Q}}$». وقد لا تطابق هذه الصورة تمامًا بالطبع، وتحتاج إلى شيء
+من المران لتعرف المطلوب إثباته على وجه الدقة. لكننا كثيرًا ما نضطر
+إلى إثبات أن جميع الأشياء ذات خاصية ما لها خاصية معينة أخرى.
+
+وطريقة إثبات ادعاء كلي هي إدخال أسماء أو متغيرات للأشياء التي لها
+الخاصية الأولى، ثم بيان أن لها الخاصية الأخرى أيضًا. وقد نصوغ ذلك
+بالقول إنه لكي تثبت شيئًا لـ\emph{كل}~${\OLId{latin-looped}{P}}$، عليك إثباته لـ${\OLId{latin-looped}{P}}$
+\emph{اعتباطي}. والاسم المدخل اسم لـ${\OLId{latin-looped}{P}}$ اعتباطي. ونستخدم عادة حروفًا
+مفردة أسماء لهذه الأشياء الاعتباطية، وتتبع الحروف في العادة أعرافًا:
+فنستخدم مثلًا~${\OLId{latin-ordinary}{n}}$ للأعداد الطبيعية، و$!A$ لـ!!{formula}s، و${\OLId{latin-looped}{A}}$
+للمجموعات، و${\OLId{latin-ordinary}{f}}$ للدوال، وهلم جرًا.
+
+والحيلة هي الحفاظ على العمومية طوال البرهان. تبدأ بافتراض أن شيئًا
+اعتباطيًا («${\OLId{latin-ordinary}{x}}$») له الخاصية~${\OLId{latin-looped}{P}}$، وتبيّن (استنادًا فقط إلى التعريفات
+أو إلى ما يجوز لك افتراضه) أن لـ${\OLId{latin-ordinary}{x}}$ الخاصية~${\OLId{latin-looped}{Q}}$. ولأنك لم تحدد ما
+${\OLId{latin-ordinary}{x}}$ على وجه الخصوص سوى أن له الخاصية~${\OLId{latin-looped}{P}}$، يمكنك أن تقرر أن كل شيء
+له~${\OLId{latin-looped}{P}}$ يملك الخاصية~${\OLId{latin-looped}{Q}}$. وباختصار، ينوب~${\OLId{latin-ordinary}{x}}$ عن \emph{جميع} الأشياء
+ذات الخاصية~${\OLId{latin-looped}{P}}$.
+
+\begin{prop}
+  لكل مجموعتين~${\OLId{latin-looped}{A}}$ و${\OLId{latin-looped}{B}}$، يكون~${\OLId{latin-looped}{A}} \subseteq {\OLId{latin-looped}{A}} \cup {\OLId{latin-looped}{B}}$.
+\end{prop}
+
+\begin{proof}
+  خذ~${\OLId{latin-looped}{A}}$ و${\OLId{latin-looped}{B}}$ مجموعتين كيف اتفق. والمطلوب
+  ${\OLId{latin-looped}{A}} \subseteq {\OLId{latin-looped}{A}} \cup {\OLId{latin-looped}{B}}$؛ وهذا، بتعريف~$\subseteq$، أن يكون لكل
+  ${\OLId{latin-ordinary}{x}}$: إذا كان~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}$ كان~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}} \cup {\OLId{latin-looped}{B}}$. فليكن~${\OLId{latin-ordinary}{x}}$
+  عنصرًا اعتباطيًّا من~${\OLId{latin-looped}{A}}$، ولنفرض~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}$؛ ونريد إثبات
+  ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}} \cup {\OLId{latin-looped}{B}}$. ولما كان~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}$، صدق أن~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}$ أو
+  ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{B}}$. ومن ثم~${\OLId{latin-ordinary}{x}} \in \Setabs{{\OLId{latin-ordinary}{x}}}{{\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}} \lor {\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{B}}}$،
+  وهو، بحسب تعريف~$\cup$، عين القول إن~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}} \cup {\OLId{latin-looped}{B}}$.
+\end{proof}
+
+
+\subsection{البرهان بالحالات}
+
+افترض أن لديك فصلًا بوصفه افتراضًا أو نتيجة مثبتة بالفعل---أي إنك
+افترضت أو أثبتت صدق~${\OLId{latin-ordinary}{p}}$ أو~${\OLId{latin-ordinary}{q}}$. وتريد إثبات~${\OLId{latin-ordinary}{r}}$. وتفعل ذلك في
+خطوتين: تفترض أولًا صدق~${\OLId{latin-ordinary}{p}}$ وتثبت~${\OLId{latin-ordinary}{r}}$، ثم تفترض صدق~${\OLId{latin-ordinary}{q}}$ وتثبت~${\OLId{latin-ordinary}{r}}$
+مرة أخرى. وينجح ذلك لأننا نفترض أو نعلم أن أحد البديلين متحقق.
+وتثبت الخطوتان أن أيًا منهما يكفي لصدق~${\OLId{latin-ordinary}{r}}$. (وإذا صدقا معًا، لم يكن
+لدينا سبب واحد، بل سببان، لصدق~${\OLId{latin-ordinary}{r}}$. ولا يلزم أن نثبت على حدة صدق~${\OLId{latin-ordinary}{r}}$
+بافتراض~${\OLId{latin-ordinary}{p}}$ و${\OLId{latin-ordinary}{q}}$ معًا.) ولكي نشير إلى ما نفعله، نعلن أننا «نميز
+الحالات». افترض مثلًا أننا نعلم~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{B}} \cup {\OLId{latin-looped}{C}}$. وتُعرّف
+${\OLId{latin-looped}{B}} \cup {\OLId{latin-looped}{C}}$ بأنها~$\Setabs{{\OLId{latin-ordinary}{x}}}{{\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{B}} \text{ أو } {\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{C}}}$. أي
+إن~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{B}}$ أو~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{C}}$ بحسب التعريف. ونثبت من ذلك~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}$
+بافتراض~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{B}}$ أولًا وإثبات~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}$ من هذا الافتراض، ثم
+بافتراض~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{C}}$ وإثبات~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}$ مرة أخرى من هذا الافتراض. وتكتب
+«نميز الحالات» تحت الافتراض، ثم «الحالة (\OLClassicalDigits{1}):~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{B}}$» تحتها،
+و«الحالة (\OLClassicalDigits{2}):~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{C}}$» في منتصف الصفحة. ثم تملأ النصف الأعلى
+والنصف الأسفل من الصفحة.
+
+ويشتد نفع هذا الطريق إذا كان المطلوب نفسه فصلًا. ومن أبسط أمثلته:
+
+\begin{prop}
+افترض~${\OLId{latin-looped}{B}} \subseteq {\OLId{latin-looped}{D}}$ و${\OLId{latin-looped}{C}} \subseteq {\OLId{latin-looped}{E}}$. عندئذ
+${\OLId{latin-looped}{B}} \cup {\OLId{latin-looped}{C}} \subseteq {\OLId{latin-looped}{D}} \cup {\OLId{latin-looped}{E}}$.
+\end{prop}
+
+\begin{proof}
+  افترض (أ)~${\OLId{latin-looped}{B}} \subseteq {\OLId{latin-looped}{D}}$ و(ب)~${\OLId{latin-looped}{C}} \subseteq {\OLId{latin-looped}{E}}$. بحسب التعريف، كل
+  ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{B}}$ يحقق أيضًا~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{D}}$ (ج)، وكل~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{C}}$ يحقق أيضًا
+  ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{E}}$ (د). ولكي نبيّن~${\OLId{latin-looped}{B}} \cup {\OLId{latin-looped}{C}} \subseteq {\OLId{latin-looped}{D}} \cup {\OLId{latin-looped}{E}}$، علينا أن
+  نبيّن أنه إذا كان~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{B}} \cup {\OLId{latin-looped}{C}}$، فإن~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{D}} \cup {\OLId{latin-looped}{E}}$ (بحسب
+  تعريف~$\subseteq$). ويكون~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{B}} \cup {\OLId{latin-looped}{C}}$ إذا وفقط إذا كان
+  ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{B}}$ أو~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{C}}$ (بحسب تعريف~$\cup$). وبالمثل، يكون
+  ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{D}} \cup {\OLId{latin-looped}{E}}$ إذا وفقط إذا كان~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{D}}$ أو~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{E}}$. ومن ثم
+  علينا أن نبيّن: لكل~${\OLId{latin-ordinary}{x}}$، إذا كان~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{B}}$ أو~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{C}}$، فإن
+  ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{D}}$ أو~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{E}}$.
+
+  \begin{quote}
+  وما صنعناه إلى الآن إلا بسط التعريفات!{} فقد عبّرنا عن القضية من
+  غير~$\subseteq$ و$\cup$، وبقي إثبات دعوى كلية شرطية. وعلى ما تقدم،
+  نأخذ~${\OLId{latin-ordinary}{x}}$ اعتباطيًّا ونفرض فيه صدق طرف «إذا»، ثم نبيّن له طرف «فإن».
+  أي نفرض~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{B}}$ أو~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{C}}$ ونثبت~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{D}}$ أو
+  ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{E}}$.\footnote{هذه الفقرة شرح لطريقة العمل، وليست جزءًا من
+  البرهان نفسه؛ فلا يلزم استيفاء هذا التفصيل كلما كتبت برهانًا.}
+  \end{quote}
+
+  افرض~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{B}}$ أو~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{C}}$. والمطلوب~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{D}}$ أو
+  ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{E}}$؛ فنقسم إلى حالتين.
+
+  الحالة \OLClassicalDigits{1}:~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{B}}$. فمن (ج)،~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{D}}$؛ ومن ثم~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{D}}$ أو
+  ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{E}}$. (وهذا هو الاستدلال الذي مر في القسم الفرعي السابق.)
+
+  الحالة \OLClassicalDigits{2}:~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{C}}$. فمن (د)،~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{E}}$؛ ومن ثم~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{D}}$ أو
+  ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{E}}$.
+ \end{proof}
+
+
+\subsection{إثبات ادعاء وجودي}
+
+إذا كان المطلوب دعوى وجودية، جاء السؤال غالبًا على نحو «أثبت وجود
+${\OLId{latin-ordinary}{x}}$ بحيث~$\dots {\OLId{latin-ordinary}{x}} \dots$»؛ أي أثبت أن في الأشياء ما يتصف بالخاصية
+«$\dots {\OLId{latin-ordinary}{x}} \dots$». فلا بد حينئذ من تعيين شاهد صالح ثم إثبات الخاصية
+له. وإن بدا الأمر قريبًا، فقد يعسر هذا النوع من البراهين؛ إذ يقتضي
+في العادة \emph{بناء} شيء أو \emph{تعريفه}، ثم إقامة الدليل على أن
+المبني أو المعرّف يفي بالمطلوب. وربما عسر العثور على الشاهد، أو إثبات
+صفته، بل ربما دقّ البرهان على أن التعريف عيّن شيئًا أصلًا!{}
+
+ويبدأ ذلك عادة بقولك: «ليكن~${\OLId{latin-ordinary}{x}}$ هو \dots»، فتجعل~$\dots$ وصفًا لما
+تقصد. وقد يلزمك أولًا إثبات أن هذا الوصف يتحقق في شيء موجود، ثم تمضي
+إلى بيان أن لـ${\OLId{latin-ordinary}{x}}$ الخاصية~${\OLId{latin-looped}{Q}}$. وهذا مثال يسير.
+
+\begin{prop}
+  افترض~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{B}}$. عندئذ توجد~${\OLId{latin-looped}{A}}$ بحيث~${\OLId{latin-looped}{A}} \subseteq {\OLId{latin-looped}{B}}$ و
+  ${\OLId{latin-looped}{A}} \neq \emptyset$.
+\end{prop}
+
+\begin{proof}
+  افرض~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{B}}$، واجعل~${\OLId{latin-looped}{A}} = \{{\OLId{latin-ordinary}{x}}\}$.
+  \begin{quote}
+    عرّفنا هنا المجموعة~${\OLId{latin-looped}{A}}$ بتعداد !!{element}sها. ولأننا نفترض أن
+    ${\OLId{latin-ordinary}{x}}$ شيء، ولأن بوسعنا دائمًا تكوين مجموعة بتعداد !!{element}sها،
+    فلا يلزم أن نبيّن هنا أننا نجحنا في تعريف مجموعة~${\OLId{latin-looped}{A}}$. لكن ما زال
+    علينا أن نبيّن أن لـ${\OLId{latin-looped}{A}}$ الخواص التي تتطلبها القضية. ولا يكتمل
+    البرهان من دون ذلك!{}
+  \end{quote}
+  ولما كان~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}$، لزم~${\OLId{latin-looped}{A}} \neq \emptyset$.
+  \begin{quote}
+    ووجه ذلك تعريف~${\OLId{latin-looped}{A}}$ بأنها~$\{{\OLId{latin-ordinary}{x}}\}$، مع الحقيقتين الظاهرتين
+    ${\OLId{latin-ordinary}{x}} \in \{{\OLId{latin-ordinary}{x}}\}$ و${\OLId{latin-ordinary}{x}} \notin \emptyset$.
+  \end{quote}
+  ثم إن~${\OLId{latin-ordinary}{x}}$ هو !!{element} الوحيد من~$\{{\OLId{latin-ordinary}{x}}\}$، ومع~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{B}}$ يكون كل
+  !!{element} من~${\OLId{latin-looped}{A}}$ !!a{element} من~${\OLId{latin-looped}{B}}$ أيضًا. فينتج، بتعريف
+  $\subseteq$، أن~${\OLId{latin-looped}{A}} \subseteq {\OLId{latin-looped}{B}}$.
+\end{proof}
+
+\subsection{استخدام الادعاءات الوجودية}
+
+افترض أنك تعرف صدق ادعاء وجودي ما (لأنك أثبته، أو لأنه فرضية يجوز لك
+استخدامها)، وليكن «لبعض~${\OLId{latin-ordinary}{x}}$،~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}$»، أو «يوجد~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}$». فإذا
+أردت استخدامه في برهانك، أمكنك ببساطة أن تتظاهر بأن لديك اسمًا لأحد
+الأشياء التي تقول فرضيتك إنها موجودة. ولأن~${\OLId{latin-looped}{A}}$ تحتوي شيئًا واحدًا على
+الأقل، توجد أشياء قد يشير إليها ذلك الاسم. وقد لا تستطيع بالطبع
+تعيين أحدها أو وصفه أكثر (سوى أنه~$\in {\OLId{latin-looped}{A}}$). لكنك تستطيع، لغرض
+البرهان، أن تتظاهر بأنك عينته وأن تسميه. ومن المهم أن تختار اسمًا لم
+تستخدمه بالفعل (ولم يرد في فرضياتك)، وإلا فقد تختل الأمور. وتشير إلى
+ذلك في برهانك بالانتقال من «لبعض~${\OLId{latin-ordinary}{x}}$،~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}$» إلى «ليكن
+${\OLId{latin-ordinary}{a}} \in {\OLId{latin-looped}{A}}$». ويمكنك الآن أن تستدل بشأن~${\OLId{latin-ordinary}{a}}$، وتستخدم فرضيات أخرى، وهلم
+جرًا، إلى أن تبلغ نتيجة~${\OLId{latin-ordinary}{p}}$. فإذا لم تعد~${\OLId{latin-ordinary}{p}}$ تذكر~${\OLId{latin-ordinary}{a}}$، كانت~${\OLId{latin-ordinary}{p}}$
+مستقلة عن الافتراض~${\OLId{latin-ordinary}{a}} \in {\OLId{latin-looped}{A}}$، وتكون قد بينت أنها تلزم فقط من الافتراض
+«لبعض~${\OLId{latin-ordinary}{x}}$،~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}$».
+
+\begin{prop}
+إذا كان~${\OLId{latin-looped}{A}} \neq \emptyset$، فإن~${\OLId{latin-looped}{A}} \cup {\OLId{latin-looped}{B}} \neq \emptyset$.
+\end{prop}
+
+\begin{proof}
+  افرض~${\OLId{latin-looped}{A}} \neq \emptyset$. فيوجد، من ثم، بعض~${\OLId{latin-ordinary}{x}}$ بحيث~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}$.
+  \begin{quote}
+    ليس ما فعلناه أولًا إلا إعادة عبارة الفرض. فإن~${\OLId{latin-looped}{A}} \neq \emptyset$
+    تستبطن دعوى وجودية تظهر بعد بسط جملة من التعريفات. فتعريف~$=$
+    يقضي بأن~${\OLId{latin-looped}{A}} = \emptyset$ إذا وفقط إذا كان، لكل~${\OLId{latin-ordinary}{x}}$: إذا
+    ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}$ فإن~${\OLId{latin-ordinary}{x}} \in \emptyset$، وإذا~${\OLId{latin-ordinary}{x}} \in \emptyset$ فإن
+    ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}$. وبنفي الجانبين يصير~${\OLId{latin-looped}{A}} \neq \emptyset$ مكافئًا لوجود
+    ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}$ بحيث~${\OLId{latin-ordinary}{x}} \notin \emptyset$، أو لوجود~${\OLId{latin-ordinary}{x}} \in \emptyset$
+    بحيث~${\OLId{latin-ordinary}{x}} \notin {\OLId{latin-looped}{A}}$. ولما كان~${\OLId{latin-ordinary}{x}} \in \emptyset$ ممتنعًا لأي~${\OLId{latin-ordinary}{x}}$،
+    بطل الطرف الثاني، واختصر اقتران «${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}$ و
+    ${\OLId{latin-ordinary}{x}} \notin \emptyset$» إلى~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}$. فثبت أن
+    ${\OLId{latin-looped}{A}} \neq \emptyset$ إذا وفقط إذا كان~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}$ لبعض~${\OLId{latin-ordinary}{x}}$؛ وهذه
+    دعوى وجودية. والآن نضع اسمًا لأحد !!{element}s~${\OLId{latin-looped}{A}}$:
+  \end{quote}
+  ليكن~${\OLId{latin-ordinary}{a}} \in {\OLId{latin-looped}{A}}$.
+  \begin{quote}
+    سمّينا واحدًا من الأشياء التي~$\in {\OLId{latin-looped}{A}}$، وسنجري الاستدلال على~${\OLId{latin-ordinary}{a}}$
+    من غير أن نحمّله فرضًا زائدًا على~${\OLId{latin-ordinary}{a}} \in {\OLId{latin-looped}{A}}$:
+  \end{quote}
+  لما كان~${\OLId{latin-ordinary}{a}} \in {\OLId{latin-looped}{A}}$، كان~${\OLId{latin-ordinary}{a}} \in {\OLId{latin-looped}{A}} \cup {\OLId{latin-looped}{B}}$ بتعريف~$\cup$. ومن ثم
+  يوجد بعض~${\OLId{latin-ordinary}{x}}$ بحيث~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}} \cup {\OLId{latin-looped}{B}}$، أي~${\OLId{latin-looped}{A}} \cup {\OLId{latin-looped}{B}} \neq \emptyset$.
+  \begin{quote}
+    انتقلنا أخيرًا من «${\OLId{latin-ordinary}{a}} \in {\OLId{latin-looped}{A}} \cup {\OLId{latin-looped}{B}}$» إلى «لبعض~${\OLId{latin-ordinary}{x}}$،
+    ${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}} \cup {\OLId{latin-looped}{B}}$». ولما خلت العبارة الثانية من~${\OLId{latin-ordinary}{a}}$، علمنا أن
+    «لبعض~${\OLId{latin-ordinary}{x}}$،~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}} \cup {\OLId{latin-looped}{B}}$» لازمة عن «لبعض~${\OLId{latin-ordinary}{x}}$،~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}$»
+    وحدها؛ ومؤدى ذلك~${\OLId{latin-looped}{A}} \cup {\OLId{latin-looped}{B}} \neq \emptyset$.
+  \end{quote}
+\end{proof}
+
+والأحوط أن تميز المتغيرات المقيدة مثل «${\OLId{latin-ordinary}{x}}$» من الأسماء الموضوعة
+للشهود مثل~${\OLId{latin-ordinary}{a}}$، كما صنعنا. غير أن العمل الجاري كثيرًا ما يستعمل~${\OLId{latin-ordinary}{x}}$
+للأمرين اختصارًا، على هذا الوجه:
+\begin{quote}
+افرض~${\OLId{latin-looped}{A}} \neq \emptyset$، أي يوجد~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}$. وبتعريف~$\cup$،
+${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}} \cup {\OLId{latin-looped}{B}}$؛ ومن ثم~${\OLId{latin-looped}{A}} \cup {\OLId{latin-looped}{B}} \neq \emptyset$.
+\end{quote}
+فإذا اختُصر على هذا النحو لزم الاحتراز، وجعل~${\OLId{latin-ordinary}{x}}$ و${\OLId{latin-ordinary}{y}}$ رمزين مختلفين
+لدعويين وجوديتين مختلفتين. ولذلك فإن الكلام الآتي \emph{ليس} برهانًا
+صحيحًا على «إذا كان~${\OLId{latin-looped}{A}} \neq \emptyset$ و${\OLId{latin-looped}{B}} \neq \emptyset$، فإن
+${\OLId{latin-looped}{A}} \cap {\OLId{latin-looped}{B}} \neq \emptyset$»؛ بل العبارة نفسها كاذبة.
+\begin{quote}
+افرض~${\OLId{latin-looped}{A}} \neq \emptyset$ و${\OLId{latin-looped}{B}} \neq \emptyset$. فيكون لبعض~${\OLId{latin-ordinary}{x}}$
+${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}$، ويكون لبعض~${\OLId{latin-ordinary}{x}}$ كذلك~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{B}}$. وبما أن~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}$ و
+${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{B}}$، كان~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}} \cap {\OLId{latin-looped}{B}}$ بتعريف~$\cap$؛ ومن ثم
+${\OLId{latin-looped}{A}} \cap {\OLId{latin-looped}{B}} \neq \emptyset$.
+\end{quote}
+فأين وقع الانتقال الفاسد، ولِمَ لا تثبت منه النتيجة؟
+
+\end{document}

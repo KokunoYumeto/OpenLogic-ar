@@ -1,0 +1,94 @@
+% Part: many-valued-logic
+% Chapter: syntax-and-semantics
+% Section: sublogics
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mvl}{syn}{sub}
+
+\olsection{المنطقات المتعددة القيم بوصفها منطقات جزئية من~$\LogCL$}
+
+المصفوفات التي تعرف بها المنطقات المتعددة القيم المعتادة متفقة على
+أمر: متى اقتصرت وسائط دوال الصدق على~$\{\True, \False\}$، جاءت
+قيمها على وفق الدوال الكلاسيكية. وتفصيل ذلك أنه إذا كان
+${\OLId{latin-ordinary}{x}} \in \{\True, \False\}$، كان
+$\tf{\lnot}[\Log L]({\OLId{latin-ordinary}{x}}) = \tf{\lnot}[\LogCL]({\OLId{latin-ordinary}{x}})$؛ وإذا كان
+$\star$ واحدًا من~$\land$ و$\lor$ و$\lif$، وكان
+${\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}} \in \{\True, \False\}$، كان
+$\tf{\star}[\Log L]({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}}) = \tf{\star}[\LogCL]({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})$. أي إن تقييد
+دوال صدق~$\lnot$ و$\land$ و$\lor$ و$\lif$ إلى
+$\{\True,\False\}$ يردها بعينها إلى دوال الصدق الكلاسيكية.
+
+\begin{prop}\ollabel{prop:mvl-cl}
+  ليكن~$\Log L$ منطقًا متعدد القيم تحتوي لغته~$\lnot$ و$\land$
+  و$\lor$ و$\lif$، ولتكن~$\True, \False \in {\OLId{latin-looped}{V}}$، ولتحقق دوال صدقه:
+  \begin{enumerate}
+    \item\ollabel{prop:not} $\tf{\lnot}[\Log L]({\OLId{latin-ordinary}{x}}) = \tf{\lnot}[\LogCL]({\OLId{latin-ordinary}{x}})$ إذا كان~${\OLId{latin-ordinary}{x}} =
+    \True$ أو~${\OLId{latin-ordinary}{x}} = \False$؛
+    \item\ollabel{prop:land} $\tf{\land}[\Log L]({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}}) = \tf{\land}[\LogCL]({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})$،
+    \item\ollabel{prop:lor} $\tf{\lor}[\Log L]({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}}) = \tf{\lor}[\LogCL]({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})$،
+    \item\ollabel{prop:lif} $\tf{\lif}[\Log L]({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}}) = \tf{\lif}[\LogCL]({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})$،
+    إذا كان~${\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}} \in \{\True, \False\}$.
+  \end{enumerate}
+  فعندئذ، لكل تقييم~$\pAssign {\OLId{latin-ordinary}{v}}$ في~${\OLId{latin-looped}{V}}$ يحقق
+  $\pAssign {\OLId{latin-ordinary}{v}}({\OLId{latin-ordinary}{p}}) \in \{\True,\False\}$ لكل~${\OLId{latin-ordinary}{p}}$ واقع في~$!A$، ولكل
+  صيغة~$!A$ في الجزء المتولد من متغيرات القضايا والروابط الأربع
+  $\lnot$ و$\land$ و$\lor$ و$\lif$، يكون
+  $\pValue {\OLId{latin-ordinary}{v}}[\Log L](!A) = \pValue {\OLId{latin-ordinary}{v}}[\LogCL](!A)$.
+\end{prop}
+
+\begin{proof}
+  البرهان بالاستقراء على~$!A$.
+  \begin{enumerate}
+  \item إذا كانت~$!A \ident {\OLId{latin-ordinary}{p}}$ ذرية، كان
+  $\pValue {\OLId{latin-ordinary}{v}}[\Log L](!A) = \pAssign {\OLId{latin-ordinary}{v}}({\OLId{latin-ordinary}{p}}) = \pValue
+  {\OLId{latin-ordinary}{v}}[\LogCL](!A)$.
+  \item وإذا كان~$!A \ident \lnot {\OLId{latin-looped}{B}}$، حسبنا
+  \begin{align*}
+    \pValue {\OLId{latin-ordinary}{v}}[\Log L](!A) & = \tf{\lnot}[\Log L](\pValue {\OLId{latin-ordinary}{v}}[\Log L](!B)) & &\text{بحسب \olref[val]{defn:pValue}}\\
+    & = \tf{\lnot}[\Log L](\pValue {\OLId{latin-ordinary}{v}}[\LogCL](!B)) && \text{بفرض الاستقراء}\\
+    & = \tf{\lnot}[\LogCL](\pValue {\OLId{latin-ordinary}{v}}[\LogCL](!B))
+&&\text{بحسب الفرض \olref{prop:not}،}\\
+&&&\text{لأن~$\pValue {\OLId{latin-ordinary}{v}}[\LogCL](!B) \in \{\True, \False\}$،}\\
+& = \pValue {\OLId{latin-ordinary}{v}}[\LogCL](!A) &&\text{بحسب \olref[val]{defn:pValue}}.
+\end{align*}
+\item وإذا كان~$!A \ident (!B \land !C)$، كان
+\begin{align*}
+  \pValue {\OLId{latin-ordinary}{v}}[\Log L](!A) & = \tf{\land}[\Log L](\pValue {\OLId{latin-ordinary}{v}}[\Log L](!B), \pValue {\OLId{latin-ordinary}{v}}[\Log L](!C)) & &\text{بحسب \olref[val]{defn:pValue}}\\
+  & = \tf{\land}[\Log L](\pValue {\OLId{latin-ordinary}{v}}[\LogCL](!B),\pValue {\OLId{latin-ordinary}{v}}[\LogCL](!C)) && \text{بفرض الاستقراء}\\
+  & = \tf{\land}[\LogCL](\pValue {\OLId{latin-ordinary}{v}}[\LogCL](!B),\pValue {\OLId{latin-ordinary}{v}}[\LogCL](!C))
+&&\text{بحسب الفرض \olref{prop:land}،}\\
+&&&\text{لأن~$\pValue {\OLId{latin-ordinary}{v}}[\LogCL](!B),\pValue {\OLId{latin-ordinary}{v}}[\LogCL](!C) \in \{\True, \False\}$،}\\
+& = \pValue {\OLId{latin-ordinary}{v}}[\LogCL](!A) &&\text{بحسب \olref[val]{defn:pValue}}.
+\end{align*}
+\end{enumerate}
+وأما حالتا~$!A \ident (!B \lor !C)$ و$!A \ident (!B \lif !C)$
+فتجريان على المثال نفسه.
+\end{proof}
+
+\begin{cor}
+  إذا استوفى منطق متعدد القيم شروط \olref{prop:mvl-cl}، وكان
+  $\True \in {\OLId{latin-looped}{V}}^+$ و$\False \notin {\OLId{latin-looped}{V}}^+$، وكانت صيغ
+  ${\OLId{greek-variable}{Gamma}} \cup \{!B\}$ كلها في الجزء المتولد من متغيرات القضايا
+  والروابط الأربع المذكورة، لزم من~${\OLId{greek-variable}{Gamma}} \Entails[\Log L] !B$
+  أن~${\OLId{greek-variable}{Gamma}} \Entails[\LogCL] !B$. وعلى الخصوص، كل تحصيل في هذا
+  الجزء من~$\Log L$ تحصيل كلاسيكي أيضًا.
+\end{cor}
+
+\begin{proof}
+  نبرهن المعاكس النقيض. افترض~${\OLId{greek-variable}{Gamma}} \Entails/[\LogCL] !B$.
+  فهناك~!!{valuation}~$\pAssign {\OLId{latin-ordinary}{v}}\colon \PVar \to
+  \{\True, \False\}$ يحقق~$\pValue {\OLId{latin-ordinary}{v}}[\LogCL](!A) = \True$ لكل
+  $!A \in {\OLId{greek-variable}{Gamma}}$، ويحقق~$\pValue {\OLId{latin-ordinary}{v}}[\LogCL](!B) = \False$.
+  ولما كان~$\True, \False \in {\OLId{latin-looped}{V}}$، كان~!!{valuation}~$\pAssign {\OLId{latin-ordinary}{v}}$
+  كذلك~!!a{valuation} للمنطق~$\Log L$. ثم تفيد \olref{prop:mvl-cl}
+  أن~$\pValue {\OLId{latin-ordinary}{v}}[\Log L](!A) = \True$ لكل~$!A \in {\OLId{greek-variable}{Gamma}}$، وأن
+  $\pValue {\OLId{latin-ordinary}{v}}[\Log L](!B) = \False$. ومع~$\True \in {\OLId{latin-looped}{V}}^+$ و
+  $\False \notin {\OLId{latin-looped}{V}}^+$، فتتحقق~$\pSat{{\OLId{latin-ordinary}{v}}}{{\OLId{greek-variable}{Gamma}}}[\Log L]$
+  وتتحقق~$\pSat/{{\OLId{latin-ordinary}{v}}}{!B}[\Log L]$؛ أي
+  ${\OLId{greek-variable}{Gamma}} \Entails/[\Log L] !B$.
+  % تصحيح مصدر (0391-I1، 0391-I2، 0391-N1): قُيدت النتيجة بالجزء الذي تغطيه الفروض، واستُعمل رمز الإشباع من غير نفي مزدوج.
+\end{proof}
+\end{document}

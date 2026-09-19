@@ -1,0 +1,60 @@
+% Part: incompleteness
+% Chapter: theories-computability
+% Section: consis-with-q
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{tcp}{con}
+
+\olsection{النظريات المتسقة مع $\Th{Q}$ غير قابلة للقرار}
+
+لا تقف النتيجة الآتية عند عدم قابلية $\Th{Q}$ للقرار؛ بل تتناول
+كل نظرية لا تناقض $\Th{Q}$، فتحكم بعدم قابليتها للقرار أيضًا.
+
+\begin{thm}
+إذا كانت $\Th{T}$ نظرية في لغة الحساب متسقة مع $\Th{Q}$، أي إن
+$\Th{T}\cup\Th{Q}$ متسقة، فإن $\Th{T}$ غير قابلة للقرار.
+\end{thm}
+
+\begin{proof}
+للنظرية $\Th{Q}$ بديهيات معدودة عددًا منتهيًا، هي $!Q_{\OLMathNumeral{1}}$، \dots،
+$!Q_{\OLMathNumeral{8}}$. ويمكن جمعها في بديهية واحدة:
+$!E=!Q_{\OLMathNumeral{1}}\land\dots\land !Q_{\OLMathNumeral{8}}$.
+
+لنفرض $\Th{T}$ نظرية قابلة للقرار ومتسقة مع $\Th{Q}$، ولنضع
+\[
+{\OLId{latin-looped}{C}}=\Setabs{!A}{\Th{T}\Proves !E\lif !A}.
+\]
+نبيّن أن ${\OLId{latin-looped}{C}}$ تفصل حسابيًا بين $\Th{Q}$ و
+$\Th{\bar Q}$، فنبلغ التناقض. أما إذا انتمت $!A$ إلى $\Th{Q}$،
+فإن $!A$ تثبت من بديهيات $\Th{Q}$؛ فبمبرهنة الاستنباط يوجد
+!!a{derivation} لـ$!E\lif !A$ في منطق الرتبة الأولى.
+إذن $!A$ عنصر في ${\OLId{latin-looped}{C}}$.
+
+وأما إذا انتمت $!A$ إلى $\Th{\bar Q}$، فثمة برهان على
+$!E\lif\lnot !A$ في منطق الرتبة الأولى. ولو أثبتت $\Th{T}$
+كذلك $!E\lif !A$، لأثبتت $\Th{T}$ نفي البديهية، أي $\lnot !E$؛
+وحينئذ لا تكون $\Th{T}\cup\Th{Q}$ متسقة. ولكن
+$\Th{T}\cup\Th{Q}$ متسقة بالفرض، فيمتنع أن تثبت $\Th{T}$
+الجملة $!E\lif !A$، وتمتنع عضوية $!A$ في ${\OLId{latin-looped}{C}}$.
+
+فكل $!A$ في $\Th{Q}$ تقع في ${\OLId{latin-looped}{C}}$،
+وكل $!A$ في $\Th{\bar Q}$ تقع في $\Complement{{\OLId{latin-looped}{C}}}$.
+وهكذا تكون ${\OLId{latin-looped}{C}}$ فاصلًا قابلًا للحساب، وهو التناقض المطلوب.
+\end{proof}
+
+ومن سعة هذه المبرهنة أنها تعطينا، مثلًا، النتيجة الآتية:
+
+\begin{cor}
+  في لغة الحساب لا يقبل منطق الرتبة الأولى القرار؛ والمقصود مجموعته
+  $\Setabs{!A}{\text{الصيغة $!A$ قابلة للإثبات في منطق الرتبة الأولى}}$.
+\end{cor}
+
+\begin{proof}
+ذلك أن منطق الرتبة الأولى مجموعة ما يلزم عن $\emptyset$،
+وهذه المجموعة متسقة مع $\Th{Q}$.
+\end{proof}
+
+\end{document}

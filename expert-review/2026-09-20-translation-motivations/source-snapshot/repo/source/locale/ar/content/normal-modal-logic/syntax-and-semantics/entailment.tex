@@ -1,0 +1,87 @@
+% Part: normal-modal-logic
+% Chapter: syntax-and-semantics
+% Section: entailment
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{syn}{ent}
+
+\olsection{اللزوم}
+
+\begin{explain}
+  يتيح لنا تعريف الصدق في عالم أن نعرّف علاقة لزوم بين ال!!{formula}s.
+  تلزم !!^a{formula}~$!B$ الصيغة~$!A$ إذا وفقط إذا كانت~$!A$
+  صادقة كلما كانت~$!B$ صادقة. وتعني ``كلما'' هنا ``أيًا كان النموذج
+  الذي ننظر فيه'' و``أيًا كان العالم الذي ننظر فيه داخل ذلك النموذج''
+  معًا.
+\end{explain}
+
+\begin{defn}
+  إذا كانت~$\Gamma$ مجموعة من ال!!{formula}s وكانت~$!A$ !!a{formula}،
+  فإن~$\Gamma$ \emph{تلزم}~$!A$، ويرمز إلى ذلك بـ
+  $\Gamma \Entails !A$، إذا وفقط إذا كان لكل نموذج
+  $\mModel{M} = \tuple{W, R, V}$ وعالم~$w \in W$: إذا كان
+  $\mSat{M}{!B}[w]$ لكل~$!B \in \Gamma$، فإن~$\mSat{M}{!A}[w]$.
+  وإذا لم تحو~$\Gamma$ إلا !!{formula} واحدة~$!B$، كتبنا
+  $!B \Entails !A$.
+\end{defn}
+
+\begin{ex}
+  لكي نثبت أن !!a{formula} تلزم أخرى، يجب أن نستدل في جميع النماذج
+  مستعملين تعريف~$\mSat{M}{}[w]$. فمثلًا، لإثبات
+  $p \lif \Diamond p \Entails \Box\lnot p \lif \lnot p$، يمكننا أن
+  نستدل كما يأتي: تأمل نموذجًا~$\mModel{M} = \tuple{W, R, V}$ وعالمًا
+  $w \in W$، وافترض~$\mSat{M}{p \lif \Diamond p}[w]$. نحتاج إلى
+  إثبات~$\mSat{M}{\Box\lnot p \lif \lnot p}[w]$. افترض خلاف ذلك.
+  عندئذ~$\mSat{M}{\Box\lnot p}[w]$ و$\mSat/{M}{\lnot p}[w]$. ولما
+  كان~$\mSat/{M}{\lnot p}[w]$، كان~$\mSat{M}{p}[w]$. وبحسب الفرض،
+  $\mSat{M}{p \lif \Diamond p}[w]$، ومن ثم
+  $\mSat{M}{\Diamond p}[w]$. وبحسب تعريف~$\mSat{M}{\Diamond p}[w]$،
+  يوجد~$w'$ يحقق~$Rww'$ بحيث~$\mSat{M}{p}[w']$. ولما كان أيضًا
+  $\mSat{M}{\Box \lnot p}[w]$، كان~$\mSat{M}{\lnot p}[w']$، وهذا
+  تناقض.
+
+  ولكي نثبت أن !!a{formula}~$!B$ لا تلزم أخرى~$!A$، يجب أن نقدم
+  مثالًا مضادًا، أي نموذجًا~$\mModel{M} = \tuple{W, R, V}$ نثبت فيه
+  أنه، في عالم ما~$w \in W$، لدينا~$\mSat{M}{!B}[w]$ لكن
+  $\mSat/{M}{!A}[w]$. فلنثبت أن
+  $p \lif \Diamond p \Entails/ \Box p \lif p$. تأمل النموذج في
+  \olref{fig:counterex}. لدينا~$\mSat{M}{\Diamond p}[w_1]$، ومن ثم
+  $\mSat{M}{p \lif \Diamond p}[w_1]$. لكن، لما كان
+  $\mSat{M}{\Box p}[w_1]$ مع~$\mSat/{M}{p}[w_1]$، كان
+  $\mSat/{M}{\Box p \lif p}[w_1]$.
+  \begin{figure}
+  \begin{center}
+    \begin{tikzpicture}[modal]
+      \node[world] (w1) [label=right:\mFalse{p}]{$w_1$};
+      \node[world] (w2) [label=right:\mTrue{p}, above left=of w1]{$w_2$};
+      \node[world] (w3) [label=right:\mTrue{p}, above right=of w1] {$w_3$};
+      \draw[->] (w1) to (w2);
+      \draw[->] (w1) to (w3);
+    \end{tikzpicture}
+  \end{center}
+  \caption{مثال مضاد لـ$p \lif \Diamond p
+  \Entails \Box p \lif p$.}
+  \ollabel{fig:counterex}
+  \end{figure}
+
+  وغالبًا ما تكفي أمثلة مضادة شديدة البساطة. فالنموذج
+  $\mModel{M'} = \tuple{W', R', V'}$ حيث~$W' = \{w\}$، و
+  $R' = \emptyset$، و$V'(p) = \emptyset$ مثال مضاد أيضًا: لما كان
+  $\mSat/{M'}{p}[w]$، كان~$\mSat{M'}{p \lif \Diamond p}[w]$. ولأنه
+  لا يمكن الوصول من~$w$ إلى أي عالم، كان~$\mSat{M'}{\Box p}[w]$، ومن
+  ثم~$\mSat/{M'}{\Box p \lif p}[w]$.
+\end{ex}
+
+\begin{prob}
+  أثبت أن~$\Box (!A \land !B) \Entails \Box !A$.
+\end{prob}
+
+\begin{prob}
+  أثبت أن~$\Box (p \lif q) \Entails/ p \lif \Box q$ وأن
+  $p \lif \Box q \Entails/\Box (p \lif q)$.
+\end{prob}
+
+\end{document}

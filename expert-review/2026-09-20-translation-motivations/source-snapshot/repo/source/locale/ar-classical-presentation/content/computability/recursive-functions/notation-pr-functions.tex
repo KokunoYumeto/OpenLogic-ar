@@ -1,0 +1,47 @@
+% Part: computability
+% Chapter: recursive-functions
+% Section: notations-pr-functions
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{rec}{not}
+\olsection{ترميزات العودية البدائية}
+
+إذا ضبطنا الدوال العودية البدائية بتعريف استقرائي دقيق، أمكننا أن نسلك
+في وصفها سبيلًا منتظمًا؛ ومن ذلك أن نجعل لكل دالة «ترميزًا» على
+الوجه الآتي. نضع الرموز $\Zero$ و$\Succ$ و$\Proj{{\OLId{latin-ordinary}{n}}}{{\OLId{latin-ordinary}{i}}}$ للصفر
+واللاحق والإسقاطات. فإذا كانت ${\OLId{latin-ordinary}{h}}$ مركبة من دالة~${\OLId{latin-ordinary}{f}}$ ذات
+${\OLId{latin-ordinary}{k}}$ حجج ومن دوال ${\OLId{latin-ordinary}{g}}_{\OLMathNumeral{0}}$، …،~${\OLId{latin-ordinary}{g}}_{{\OLId{latin-ordinary}{k}}-{\OLMathNumeral{1}}}$ ذات ${\OLId{latin-ordinary}{n}}$ حجة، وكنا قد جعلنا
+الترميزات ${\OLId{latin-looped}{F}}$ و${\OLId{latin-looped}{G}}_{\OLMathNumeral{0}}$، …،~${\OLId{latin-looped}{G}}_{{\OLId{latin-ordinary}{k}}-{\OLMathNumeral{1}}}$ لهذه الدوال، جاز لنا
+أن نستعمل رمزًا جديدًا، هو $\fn{Comp}_{{\OLId{latin-ordinary}{k}},{\OLId{latin-ordinary}{n}}}$، فنرمز إلى الدالة ${\OLId{latin-ordinary}{h}}$ بـ
+$\fn{Comp}_{{\OLId{latin-ordinary}{k}},{\OLId{latin-ordinary}{n}}}[{\OLId{latin-looped}{F}},{\OLId{latin-looped}{G}}_{\OLMathNumeral{0}},\dots,{\OLId{latin-looped}{G}}_{{\OLId{latin-ordinary}{k}}-{\OLMathNumeral{1}}}]$.
+
+وكذلك نصنع في الدوال المعرفة بالعودية البدائية. فإذا
+كانت الدالة~${\OLId{latin-ordinary}{h}}$ ذات ${\OLId{latin-ordinary}{k}}+{\OLMathNumeral{1}}$ حجة معرفة بالعودية البدائية من الدالة~${\OLId{latin-ordinary}{f}}$ ذات
+${\OLId{latin-ordinary}{k}}$ حجج والدالة~${\OLId{latin-ordinary}{g}}$ ذات ${\OLId{latin-ordinary}{k}}+{\OLMathNumeral{2}}$ حجة، وكان الترميزان المسندان إلى ${\OLId{latin-ordinary}{f}}$
+و~${\OLId{latin-ordinary}{g}}$ هما ${\OLId{latin-looped}{F}}$ و~${\OLId{latin-looped}{G}}$ على الترتيب، فالترميز الذي نجعله لـ~${\OLId{latin-ordinary}{h}}$ هو
+$\fn{Rec}_{\OLId{latin-ordinary}{k}}[{\OLId{latin-looped}{F}},{\OLId{latin-looped}{G}}]$.
+% تصحيح صياغة كلاسيكية (C214-01): رُبط الشرط بجميع مقدماته ثم بجوابه.
+
+وقد تقدم أن تعريف دالة الجمع بالعودية البدائية هو:
+\begin{align*}
+  \Add({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}}, {\OLMathNumeral{0}}) & = \Proj{{\OLMathNumeral{1}}}{{\OLMathNumeral{0}}}({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}}) = {\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}}\\
+  \Add({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}}, {\OLId{latin-ordinary}{y}}+{\OLMathNumeral{1}}) & = \Succ(\Proj{{\OLMathNumeral{3}}}{{\OLMathNumeral{2}}}({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}}, {\OLId{latin-ordinary}{y}}, \Add({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}}, {\OLId{latin-ordinary}{y}}))) = \Add({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}}, {\OLId{latin-ordinary}{y}}) +{\OLMathNumeral{1}}
+\end{align*}
+فـ$\Proj{{\OLMathNumeral{1}}}{{\OLMathNumeral{0}}}$ هنا في موضع~${\OLId{latin-ordinary}{f}}$، و
+$\Succ(\Proj{{\OLMathNumeral{3}}}{{\OLMathNumeral{2}}}({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}},{\OLId{latin-ordinary}{y}},{\OLId{latin-ordinary}{z}}))$ في موضع~${\OLId{latin-ordinary}{g}}$؛ وترميزها
+$\fn{Comp}_{{\OLMathNumeral{1}},{\OLMathNumeral{3}}}[\Succ,\Proj{{\OLMathNumeral{3}}}{{\OLMathNumeral{2}}}]$ لأنها ناتجة من تعريف دالة
+بالتركيب من الدالة~$\Succ$ الأحادية الحجة والدالة~$\Proj{{\OLMathNumeral{3}}}{{\OLMathNumeral{2}}}$
+الثلاثية الحجج. وعلى هذا يكون ترميز دالة الجمع
+\[
+\fn{Rec}_{\OLMathNumeral{1}}[\Proj{{\OLMathNumeral{1}}}{{\OLMathNumeral{0}}},\fn{Comp}_{{\OLMathNumeral{1}},{\OLMathNumeral{3}}}[\Succ,\Proj{{\OLMathNumeral{3}}}{{\OLMathNumeral{2}}}]].
+\]
+ولهذه الترميزات فائدة في مواضع، منها تعداد الدوال العودية البدائية.
+
+\begin{prob}
+  اكتب ترميز~$\Mult$ العودي البدائي تامًا.
+\end{prob}
+
+\end{document}

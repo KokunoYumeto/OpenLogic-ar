@@ -1,0 +1,58 @@
+% Part: lambda-calculus
+% Chapter: church-rosser
+% Section: beta-eta-reduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{cr}{be}
+
+\olsection{اختزال~$\beta\eta$}
+
+تتحقق خاصية تشيرش--روسر لاختزال~$\beta\eta$ ($\bered$).
+
+\begin{lem}\ollabel{lem:one-par}
+  إذا كان~$M \beredone M'$، فإن~$M \beredpar M'$.
+\end{lem}
+
+\begin{proof}
+  بالاستقراء على~!!{derivation} لـ$M \beredone M'$. فإذا حصلنا على
+  $M \beredone M'$ بتحويل~$\eta$ (أي بحسب
+  \olref[syn][eta]{defn:beredone})، استعملنا
+  \olref[pbe]{defn:beredpar5} مع \olref[pbe]{thm:refl}. وسائر الحالات
+  كما في \olref[b]{lem:one-par}.
+\end{proof}
+
+
+\begin{lem}\ollabel{lem:par-red}
+  إذا كان~$M \beredpar M'$، فإن~$M \bered M'$.
+\end{lem}
+
+\begin{proof} بالاستقراء على~!!{derivation} لـ$M \beredpar M'$.
+
+  الحالات الأربع الأولى كما في \olref[b]{lem:par-red}.
+  وإذا كانت القاعدة الأخيرة هي \olref[pbe]{defn:beredpar5}، كان~$M$
+  هو~$\lambd[x][Nx]$ و$M'$ هو~$N'$ لبعض~$x$ و$N$ و$N'$، حيث
+  $x \notin \FV{N}$ و$N \beredpar N'$. ولذلك يمكننا أولًا اختزال
+  $\lambd[x][Nx]$ إلى~$N$ بتحويل~$\eta$، ثم اتباع ذلك بمتتالية خطوات
+  $\beredone$ التي تبين~$N \bered N'$، وهو ما يتحقق بفرض الاستقراء.
+\end{proof}
+
+
+\begin{lem}\ollabel{lem:str}
+  $\bered$ هي أصغر علاقة متعدية تحتوي~$\beredpar$.
+\end{lem}
+
+\begin{proof}
+  كما في \olref[b]{lem:str}.
+\end{proof}
+
+\begin{thm}\ollabel{thm:cr}
+  تحقق~$\bered$ خاصية تشيرش--روسر.
+\end{thm}
+
+\begin{proof}
+  بحسب \olref[dap]{thm:str} و\olref[pbe]{thm:cr} و\olref{lem:str}.
+\end{proof}
+\end{document}

@@ -1,0 +1,115 @@
+% Part: many-valued-logic
+% Chapter: three-valued-logics
+% Section: goedel
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mvl}{thr}{god}
+
+\olsection{منطقات غودل}
+
+قدم كورت غودل متتالية من المنطقات ذات~$n$ من القيم، يحتوي كل منها
+جميع~!!{formula}s الصحيحة في المنطق الحدسي، ويحتويه المنطق الكلاسيكي.
+وفيما يأتي أول مثال غير تافه:
+
+\begin{defn}\ollabel{defn:goedel}
+يعرّف \emph{منطق غودل الثلاثي القيم}~$\LogGod$ بالمصفوفة الآتية:
+\begin{enumerate}
+  \item لغة القضايا القياسية~$\Lang L_0$ بروابطها
+  $\lfalse$ و$\lnot$ و$\land$ و$\lor$ و$\lif$.
+  \item مجموعة قيم الصدق~$V = \{\True, \Undef, \False\}$.
+  \item $\True$ هي القيمة المميزة الوحيدة؛ أي~$V^+ = \{\True\}$.
+  \item أما~$\lfalse$، فلدينا~$\tf{\lfalse} = \False$. وأما دوال
+  صدق الروابط الباقية فتعطيها الجداول الآتية:
+  \begin{center}
+    \begin{tabular}{c|c}
+      $\tf{\lnot}[\LogGod]$ & \\
+      \hline
+      $\True$ & $\False$ \\
+      $\Undef$ & $\False$ \\
+      $\False$ & $\True$
+    \end{tabular}
+    \quad
+    \begin{tabular}{c|ccc}
+      $\tf{\land}[\LogGod]$ & $\True$ & $\Undef$ & $\False$ \\
+      \hline
+      $\True$ & $\True$ & $\Undef$ & $\False$ \\
+      $\Undef$ & $\Undef$ & $\Undef$ & $\False$\\
+      $\False$ & $\False$ & $\False$ & $\False$
+    \end{tabular}
+    \\[2ex]
+    \begin{tabular}{c|ccc}
+      $\tf{\lor}[\LogGod]$ & $\True$ & $\Undef$ & $\False$ \\
+      \hline
+      $\True$ & $\True$ & $\True$ & $\True$ \\
+      $\Undef$ & $\True$ & $\Undef$ & $\Undef$ \\
+      $\False$ & $\True$ & $\Undef$ & $\False$
+    \end{tabular}
+    \quad
+    \begin{tabular}{c|ccc}
+      $\tf{\lif}[\LogGod]$ & $\True$ & $\Undef$ & $\False$ \\
+      \hline
+      $\True$ & $\True$ & $\Undef$ & $\False$ \\
+      $\Undef$ & $\True$ & $\True$ & $\False$  \\
+      $\False$ & $\True$ & $\True$ & $\True$
+    \end{tabular}
+  \end{center}
+\end{enumerate}
+\end{defn}
+
+لاحظ أن جدولي صدق~$\land$ و$\lor$ هما نفسيهما في منطق~\L
+ukasiewicz ومنطق كليني القوي، لكن جدولي~$\lnot$ و$\lif$ يختلفان في
+كل منها. ففي منطق غودل~$\tf{\lnot}(\Undef) = \False$. وعلى خلاف منطق
+\L ukasiewicz ومنطق كليني، يكون
+$\tf{\lif}(\Undef, \False) = \False$؛ وعلى خلاف منطق كليني (لكن كما
+في منطق~\L ukasiewicz)، يكون
+$\tf{\lif}(\Undef, \Undef) = \True$.
+
+وكما يوحي الارتباط بالمنطق الحدسي المشار إليه أعلاه، فإن~$\LogGod[3]$
+قريب من المنطق الحدسي. فجميع الحقائق الحدسية تحصيلات منطقية في
+$\LogGod[3]$، وكثير من التحصيلات المنطقية الكلاسيكية غير الصحيحة
+حدسيًا لا تكون تحصيلات في~$\LogGod[3]$ أيضًا. فمثلًا، ليست الصيغ الآتية
+تحصيلات منطقية:
+\begin{align*}
+  & p \lor \lnot p && (p \lif q) \lif (\lnot p \lor q) \\
+  & \lnot\lnot p \lif p && \lnot(\lnot p \land \lnot q) \lif (p \lor q) \\
+  & ((p \lif q) \lif p) \lif p && \lnot(p \lif q) \lif (p \land \lnot q)
+\end{align*}
+غير أن بعض تحصيلات~$\LogGod[3]$ ليست صحيحة حدسيًا، مثل
+$\lnot\lnot p \lor \lnot p$ أو~$(p \lif q) \lor (q \lif p)$.
+
+\begin{prob}
+  أعط جداول صدق تبين أن الصيغ الآتية تحصيلات منطقية في~$\LogGod[3]$:
+  \begin{align*}
+    & \lnot\lnot p \lor \lnot p\\
+    & (p \lif q) \lor (q \lif p) \\
+    & \lnot(p \land q) \lif (\lnot p \lor \lnot q) \\
+    & (p \lif q) \lor (q \lif r) \lor (r \lif s)
+  \end{align*}
+\end{prob}
+
+\begin{prob}
+  أعط جداول صدق تبين أن الصيغ الآتية ليست تحصيلات منطقية في
+  $\LogGod[3]$:
+  \begin{align*}
+    & (p \lif q) \lif (\lnot p \lor q) \\
+    & \lnot(\lnot p \land \lnot q) \lif (p \lor q) \\
+    & ((p \lif q) \lif p) \lif p \\
+    & \lnot(p \lif q) \lif (p \land \lnot q)
+  \end{align*}
+\end{prob}
+
+\begin{prob}
+  أي العلاقات الآتية تصح في منطق غودل؟ أعط جدول صدق لكل منها.
+  \begin{enumerate}
+    \item $p, p \lif q \Entails q$
+    \item $p \lor q, \lnot p \Entails q$
+    \item $p \land q \Entails p$
+    \item $p \Entails p \land p$
+    \item $p \Entails p \lor q$
+  \end{enumerate}
+\end{prob}
+
+\end{document}

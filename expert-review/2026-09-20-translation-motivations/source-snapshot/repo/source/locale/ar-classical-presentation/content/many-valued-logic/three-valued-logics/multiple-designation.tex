@@ -1,0 +1,222 @@
+% Part: many-valued-logic
+% Chapter: three-valued-logics
+% Section: multiple-designation
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mvl}{thr}{mul}
+
+\olsection{تمييز قيم غير~$\True$}
+
+كانت القيم المميزة في المنطقات المتقدمة إلى الآن هي
+${\OLId{latin-looped}{V}}^+ = \{\True\}$؛ فالحكم بالصدق كان مكافئًا لكون قيمة الصدق
+$\True$. غير أنه يجوز أن نحكم بالصدق كلما لم تكن القيمة~$\False$.
+وعلى هذا الوجه نضع في المصفوفة، مثلًا،
+${\OLId{latin-looped}{V}}^+ = \{\True, \Undef\}$، فنحصل على منطق آخر.
+
+\begin{defn}
+مصفوفة \emph{منطق المفارقة}~$\LogLP$ هي:
+\begin{enumerate}
+  \item الجزء الخالي من الثوابت~$\Lang L_{\OLMathNumeral{0}}^{-}$ من لغة القضايا القياسية، ذو الروابط
+  $\lnot$ و$\land$ و$\lor$ و$\lif$.
+  \item مجموعة قيم الصدق~${\OLId{latin-looped}{V}} = \{\True, \Undef, \False\}$.
+  \item القيمتان~$\True$ و$\Undef$ مميزتان؛ أي
+  ${\OLId{latin-looped}{V}}^+ = \{\True, \Undef\}$.
+  \item دوال الصدق هي دوال منطق كليني القوي نفسها.
+\end{enumerate}
+\end{defn}
+
+\begin{defn}
+ومصفوفة \emph{منطق اللامعنى} لهالدين~$\LogHal$ هي:
+\begin{enumerate}
+  \item اللغة الناتجة من الجزء الخالي من الثوابت~$\Lang L_{\OLMathNumeral{0}}^{-}$
+  بإضافة الرابط الأحادي~$+$.
+  \item مجموعة قيم الصدق~${\OLId{latin-looped}{V}} = \{\True, \Undef, \False\}$.
+  \item القيمتان~$\True$ و$\Undef$ مميزتان؛ أي
+  ${\OLId{latin-looped}{V}}^+ = \{\True, \Undef\}$.
+  \item دوال الصدق هي دوال منطق كليني الضعيف، ويزاد عليها مؤثر
+  «عديم المعنى»:
+  \begin{center}
+    \begin{tabular}{c|c}
+    $\tf{+}$ & \\
+    \hline
+    $\True$ & $\False$ \\
+    $\Undef$ & $\True$ \\
+    $\False$ & $\False$
+    \end{tabular}
+  \end{center}
+\end{enumerate}
+\end{defn}
+
+فهذان المنطقان، على خلاف منطقي كليني اللذين يوافقانهما في جداول
+الصدق، لهما \emph{بالفعل} تحصيلات منطقية.
+
+\begin{prop}\ollabel{prop:LP-taut-CL} تحصيلات~$\LogLP$ هي بعينها
+  تحصيلات منطق القضايا الكلاسيكي.
+\end{prop}
+
+\begin{proof}
+  تفيد \olref[syn][sub]{prop:mvl-cl} أن~$\Entails[\LogLP] !A$ يستلزم
+  $\Entails[\LogCL] !A$. ولإثبات الجهة الأخرى يكفينا أن نبين: إذا
+  وجد~!!a{valuation}~$\pAssign {\OLId{latin-ordinary}{v}}\colon \PVar \to
+  \{\False, \True, \Undef\}$ يحقق~$\pValue {\OLId{latin-ordinary}{v}}[\LogKs](!A) = \False$،
+  وجد~!!a{valuation}~$\pAssign {{\OLId{latin-ordinary}{v}}'}\colon \PVar \to \{\False, \True\}$
+  يحقق~$\pValue {{\OLId{latin-ordinary}{v}}'}[\LogCL](!A) = \False$. وهذه الدعوى تثبت المطلوب
+  لـ~$\LogLP$؛ فإن~$\LogKs$ و$\LogLP$ مشتركان في دوال الصدق،
+  و$\False$ وحدها غير مميزة في~$\LogLP$، وهذا هو الفرق الوحيد بين
+  $\LogLP$ و$\LogKs$. فإذا كان~$\Entails/[\LogLP] !A$، كان هناك
+  !!{valuation}~$\pAssign {\OLId{latin-ordinary}{v}}$ بحيث
+  $\pValue {\OLId{latin-ordinary}{v}}[\LogLP](!A) = \pValue {\OLId{latin-ordinary}{v}}[\LogKs](!A) = \False$.
+  وبالدعوى يكون~$\pValue{{\OLId{latin-ordinary}{v}}'}[\LogCL](!A) = \False$؛ أي
+  $\Entails/[\LogCL] !A$.
+  
+  بقي إثبات الدعوى. نعرّف~$\pAssign {{\OLId{latin-ordinary}{v}}'}$ أولًا بالمعادلة
+  \[
+    \pAssign {{\OLId{latin-ordinary}{v}}'}({\OLId{latin-ordinary}{p}}) =
+    \begin{cases}
+    \True & \text{إذا كان } \pAssign {{\OLId{latin-ordinary}{v}}}({\OLId{latin-ordinary}{p}}) \in \{\True, \Undef\}\\
+    \False & \text{في غير ذلك}
+  \end{cases}
+  \]
+  ثم نثبت بالاستقراء على~$!A$ خاصتين: (أ)~إذا كان
+  $\pValue {\OLId{latin-ordinary}{v}}[\LogKs](!A) = \False$، كان
+  $\pValue {{\OLId{latin-ordinary}{v}}'}[\LogCL](!A) = \False$؛ و(ب)~إذا كان
+  $\pValue {\OLId{latin-ordinary}{v}}[\LogKs](!A) = \True$، كان
+  $\pValue {{\OLId{latin-ordinary}{v}}'}[\LogCL](!A) = \True$.
+  \begin{enumerate}
+    \item أساس الاستقراء هو~$!A \ident {\OLId{latin-ordinary}{p}}$. فإذا كان، بحسب
+    \olref[syn][val]{defn:pValue}،
+    $\pValue {\OLId{latin-ordinary}{v}}[\LogKs](!A) = \False$، كان
+    $\pAssign {\OLId{latin-ordinary}{v}}({\OLId{latin-ordinary}{p}}) = \False$؛ ومن تعريف~$\pAssign{{\OLId{latin-ordinary}{v}}'}$ ينتج
+    $\pValue {{\OLId{latin-ordinary}{v}}'}[\LogCL](!A) = \pAssign{{\OLId{latin-ordinary}{v}}'}({\OLId{latin-ordinary}{p}}) = \False$، فتثبت
+    (أ). وإذا كان~$\pValue {\OLId{latin-ordinary}{v}}[\LogKs](!A) = \True$، كان
+    $\pAssign {\OLId{latin-ordinary}{v}}({\OLId{latin-ordinary}{p}}) = \True$، ومن ثم
+    $\pValue {{\OLId{latin-ordinary}{v}}'}[\LogCL](!A) = \pAssign{{\OLId{latin-ordinary}{v}}'}({\OLId{latin-ordinary}{p}}) = \True$، فتثبت
+    (ب).
+    
+    وأما خطوة الاستقراء فتفصل إلى الحالات الآتية:
+    \item $!A \ident \lnot !B$.
+    \begin{enumerate}
+      \item إذا كان~$\pValue {\OLId{latin-ordinary}{v}}[\LogKs](\lnot!B) = \False$، أفاد
+      تعريف~$\tf{\lnot}[\LogKs]$ أن
+      $\pValue {\OLId{latin-ordinary}{v}}[\LogKs](!B) = \True$. وبالحالة~(ب) من فرض
+      الاستقراء يكون~$\pValue {{\OLId{latin-ordinary}{v}}'}[\LogCL](!B) = \True$؛ ولذلك
+      $\pValue {{\OLId{latin-ordinary}{v}}'}[\LogCL](\lnot !B) = \False$.
+      \item وإذا كان~$\pValue {\OLId{latin-ordinary}{v}}[\LogKs](\lnot!B) = \True$، أفاد
+      تعريف~$\tf{\lnot}[\LogKs]$ أن
+      $\pValue {\OLId{latin-ordinary}{v}}[\LogKs](!B) = \False$. وبالحالة~(أ) من فرض
+      الاستقراء يكون~$\pValue {{\OLId{latin-ordinary}{v}}'}[\LogCL](!B) = \False$؛ ولذلك
+      $\pValue {{\OLId{latin-ordinary}{v}}'}[\LogCL](\lnot !B) = \True$.
+    \end{enumerate}
+
+    \item $!A \ident (!B \land !C)$.
+    \begin{enumerate}
+      \item إذا كان~$\pValue {\OLId{latin-ordinary}{v}}[\LogKs](!B \land !C) = \False$،
+      أفاد تعريف~$\tf{\land}[\LogKs]$ أن
+      $\pValue {\OLId{latin-ordinary}{v}}[\LogKs](!B) = \False$ أو
+      $\pValue {\OLId{latin-ordinary}{v}}[\LogKs](!C) = \False$. وبالحالة~(أ) من فرض
+      الاستقراء يكون~$\pValue {{\OLId{latin-ordinary}{v}}'}[\LogCL](!B) = \False$ أو
+      $\pValue {{\OLId{latin-ordinary}{v}}'}[\LogCL](!C) = \False$؛ ومن ثم
+      $\pValue {{\OLId{latin-ordinary}{v}}'}[\LogCL](!B \land !C) = \False$.
+      \item وإذا كان~$\pValue {\OLId{latin-ordinary}{v}}[\LogKs](!B \land !C) = \True$،
+      أفاد تعريف~$\tf{\land}[\LogKs]$ أن
+      $\pValue {\OLId{latin-ordinary}{v}}[\LogKs](!B) = \True$ و
+      $\pValue {\OLId{latin-ordinary}{v}}[\LogKs](!C) = \True$. وبالحالة~(ب) من فرض
+      الاستقراء يكون~$\pValue {{\OLId{latin-ordinary}{v}}'}[\LogCL](!B) = \True$ و
+      $\pValue {{\OLId{latin-ordinary}{v}}'}[\LogCL](!C) = \True$؛ ومن ثم
+      $\pValue {{\OLId{latin-ordinary}{v}}'}[\LogCL](!B \land !C) = \True$.
+    \end{enumerate}
+  \end{enumerate}
+
+  والحالتان الباقيتان تجريان على هذا المثال، فنتركهما تمرينًا.
+  ويجوز بدل ذلك أن يقال: إن البرهان السابق يثبت النتيجة لكل
+  !!{formula}s التي لا يدخل فيها إلا~$\lnot$ و$\land$. ثم نستعمل،
+  في~$\LogKs$ و$\LogCL$ جميعًا ولكل~$\pAssign {\OLId{latin-ordinary}{v}}$، المساواتين
+  $\pValue {\OLId{latin-ordinary}{v}}(!B \lor !C) = \pValue {\OLId{latin-ordinary}{v}}(\lnot(\lnot!B \land \lnot !C))$
+  و$\pValue {\OLId{latin-ordinary}{v}}(!B \lif !C) = \pValue {\OLId{latin-ordinary}{v}}(\lnot(!B \land \lnot !C))$.
+\end{proof}
+
+\begin{prob}
+  أكمل برهان \olref[mvl][thr][mul]{prop:LP-taut-CL}، فأثبت (أ)
+  و(ب) للحالتين~$!A \ident (!B \lor !C)$ و
+  $!A \ident (!B \lif !C)$.
+\end{prob}
+
+\begin{prob}
+أثبت أن كل تحصيل كلاسيكي تحصيل في~$\LogHal$.
+\end{prob}
+
+ومع أن تحصيلات هذين المنطقين هي تحصيلات المنطق الكلاسيكي نفسها، فإن
+علاقتي النتيجة تختلفان. فمنطق~$\LogLP$، مثلًا، \emph{متسامح مع
+التناقض}؛ إذ~$\lnot {\OLId{latin-ordinary}{p}}, {\OLId{latin-ordinary}{p}} \Entails/ {\OLId{latin-ordinary}{q}}$، فلا يصح مبدأ الانفجار
+$\lnot !A, !A \Entails !B$ على العموم. وقد يصح في حالات مخصوصة من
+$!A$ و$!B$، كأن تكون~$!B$ تحصيلًا منطقيًا.
+
+\begin{prob}
+  أي العلاقات الآتية تصح في (أ)~$\LogLP$، و(ب)~$\LogHal$؟ ضع لكل
+  واحدة جدول صدق.
+  \begin{enumerate}
+    \item ${\OLId{latin-ordinary}{p}}, {\OLId{latin-ordinary}{p}} \lif {\OLId{latin-ordinary}{q}} \Entails {\OLId{latin-ordinary}{q}}$
+    \item $\lnot {\OLId{latin-ordinary}{q}}, {\OLId{latin-ordinary}{p}} \lif {\OLId{latin-ordinary}{q}} \Entails \lnot {\OLId{latin-ordinary}{p}}$
+    \item ${\OLId{latin-ordinary}{p}} \lor {\OLId{latin-ordinary}{q}}, \lnot {\OLId{latin-ordinary}{p}} \Entails {\OLId{latin-ordinary}{q}}$
+    \item $\lnot {\OLId{latin-ordinary}{p}}, {\OLId{latin-ordinary}{p}} \Entails {\OLId{latin-ordinary}{q}}$
+    \item ${\OLId{latin-ordinary}{p}} \Entails {\OLId{latin-ordinary}{p}} \lor {\OLId{latin-ordinary}{q}}$
+    \item ${\OLId{latin-ordinary}{p}} \lif {\OLId{latin-ordinary}{q}}, {\OLId{latin-ordinary}{q}}\lif {\OLId{latin-ordinary}{r}} \Entails {\OLId{latin-ordinary}{p}} \lif {\OLId{latin-ordinary}{r}}$
+  \end{enumerate}
+\end{prob}
+
+فماذا يكون إذا جعلنا~$\Undef$ مميزة في~$\LogLuk[{\OLMathNumeral{3}}]$؟
+
+\begin{defn}
+  مصفوفة \emph{منطق R-Mingle الثلاثي القيم}~$\LogRM[{\OLMathNumeral{3}}]$ هي:
+  \begin{enumerate}
+    \item الجزء الخالي من الثوابت~$\Lang L_{\OLMathNumeral{0}}^{-}$ من لغة القضايا القياسية، ذو الروابط
+    $\lnot$ و$\land$ و$\lor$ و$\lif$.
+    \item مجموعة قيم الصدق~${\OLId{latin-looped}{V}} = \{\True, \Undef, \False\}$.
+    \item القيمتان~$\True$ و$\Undef$ مميزتان؛ أي
+    ${\OLId{latin-looped}{V}}^+ = \{\True, \Undef\}$.
+    \item دوال الصدق هي دوال منطق~\L ukasiewicz~$\LogLuk[{\OLMathNumeral{3}}]$ نفسها.
+    % تصحيح مصدر مشترك (MVL-L0-I1): وُحدت اللغات مع مخزون دوال الصدق المعرّف، وحُذف lfalse غير المفسر من R-Mingle.
+  \end{enumerate}
+\end{defn}
+
+\begin{prob}
+  أي العلاقات الآتية تصح في~$\LogRM[{\OLMathNumeral{3}}]$؟
+  \begin{enumerate}
+    \item ${\OLId{latin-ordinary}{p}}, {\OLId{latin-ordinary}{p}} \lif {\OLId{latin-ordinary}{q}} \Entails {\OLId{latin-ordinary}{q}}$
+    \item ${\OLId{latin-ordinary}{p}} \lor {\OLId{latin-ordinary}{q}}, \lnot {\OLId{latin-ordinary}{p}} \Entails {\OLId{latin-ordinary}{q}}$
+    \item $\lnot {\OLId{latin-ordinary}{p}}, {\OLId{latin-ordinary}{p}} \Entails {\OLId{latin-ordinary}{q}}$
+    \item ${\OLId{latin-ordinary}{p}} \Entails {\OLId{latin-ordinary}{p}} \lor {\OLId{latin-ordinary}{q}}$
+  \end{enumerate}
+\end{prob}
+
+وقد تؤدي جداول صدق مختلفة إلى المنطق نفسه، أي إلى علاقة الاستلزام
+نفسها، إذا غيرنا القيم المميزة. ومن ذلك أن نجعل في منطق غودل
+${\OLId{latin-looped}{V}}^+ = \{\True, \Undef\}$ بدل~$\{\True\}$.
+
+\begin{prop}\ollabel{prop:gl-udes}
+  المصفوفة التي فيها~${\OLId{latin-looped}{V}} = \{\False, \Undef,\True\}$ و
+  ${\OLId{latin-looped}{V}}^+=\{\True, \Undef\}$، ودوال صدقها دوال منطق غودل الثلاثي،
+  تعرّف المنطق الكلاسيكي.
+\end{prop}
+
+\begin{proof}
+  يترك إثباته تمرينًا.
+\end{proof}
+
+\begin{prob}
+  أثبت \olref[mvl][thr][mul]{prop:gl-udes}. فإذا كان~$\Log L$
+  معرفًا كمنطق غودل، إلا أن~${\OLId{latin-looped}{V}}^+=\{\True,\Undef\}$، فبيّن أن
+  ${\OLId{greek-variable}{Gamma}} \Entails/[\Log L] !B$ يستلزم~${\OLId{greek-variable}{Gamma}} \Entails/[\LogCL] !B$.
+  واستعمل طريقة \olref[mvl][thr][mul]{prop:LP-taut-CL}، غير أنك بدل
+  إثبات (أ) و(ب) تبين أن
+  $\pValue {\OLId{latin-ordinary}{v}}[\LogGod](!A) = \False$ إذا وفقط إذا كان
+  $\pValue {{\OLId{latin-ordinary}{v}}'}[\LogCL](!A) = \False$، ومن ثم أن
+  $\pValue {\OLId{latin-ordinary}{v}}[\LogGod](!A) \in \{\True,\Undef\}$ إذا وفقط إذا كان
+  $\pValue {{\OLId{latin-ordinary}{v}}'}[\LogCL](!A) = \True$. ثم اشرح كيف تثبت هذه النتيجة
+  القضية.
+\end{prob}
+
+\end{document}

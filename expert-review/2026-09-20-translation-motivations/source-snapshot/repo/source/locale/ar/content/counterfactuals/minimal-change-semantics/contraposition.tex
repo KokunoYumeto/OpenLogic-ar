@@ -1,0 +1,64 @@
+% Part: counterfactuals
+% Chapter: minimal-change-semantics
+% Section: contraposition
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cnt}{min}{cpo}
+
+\olsection{المقابلة بالنقيض}
+
+الشروط المادية والصارمة مكافئة لمقابلاتها بالنقيض، أما الشرطيات المخالفة
+للواقع فليست كذلك. وهذا مثال لكراتزر:
+\begin{quote}
+  لو لم يمت غوته سنة 1832، لكان ميتًا الآن (مع ذلك).
+
+  لو لم يكن غوته ميتًا الآن، لكان قد مات سنة 1832.
+\end{quote}
+الجملة الأولى صادقة: فالبشر لا يعيشون مئات السنين. أما الثانية فكاذبة
+بوضوح: فلو لم يكن غوته ميتًا الآن، لكان لا يزال حيًا، ومن ثم لم يكن
+ليكون قد مات سنة 1832.
+
+\begin{ex}\ollabel{ex:contraposition-counterex}
+  تجعل دلالة الكرات المقابلة بالنقيض غير صالحة، أي إن لدينا
+  $p \cif q \Entails/ \lnot q \cif \lnot p$. افهم~$p$ بمعنى «لم يمت
+  غوته سنة 1832»، و$q$ بمعنى «غوته ميت الآن». ويمكننا تمثيل ذلك في
+  نموذج~$\mModel{M_1} = \tuple{W, O, V}$ حيث
+  $W = \{w, w_1, w_2\}$،
+  و$O_w = \{\{w\}, \{w, w_1\}, \{w, w_1, w_2\}\}$،
+  و$V(p) = \{w_1, w_2\}$، و$V(q) = \{w, w_1\}$. ومن ثم يكون~$w$
+  العالم الفعلي الذي مات فيه غوته سنة 1832 ولا يزال ميتًا؛ ويكون
+  $w_1$ العالم (القريب) الذي مات فيه غوته، لنقل، سنة 1833 ولا يزال
+  ميتًا؛ ويكون~$w_2$ عالمًا (بعيدًا) لا يزال فيه غوته حيًا.
+\begin{figure}
+\begin{center}
+\begin{tikzpicture}[scale=.6,layerwidth=1.5]\tiny
+  \spheresystem{3}
+  \begin{scope}
+    \clip \propositionplot{0}{.8}{50}{4.5} -- (4.5,-4.5) -- (-4.5,-4.5) -- (-4.5,4.5) -- (4.5,4.5);
+    \spherelayer{3}
+  \end{scope}
+  \propositionintersect{0}{2}{110}{5.5}
+  \proposition{0}{.8}{50}{4.5}
+  \path (0,0) node[world] {$w$};
+  \spherepos{0}{2}{node[world] {$w_1$}}
+  \spherepos{-50}{3}{node[world] {$w_2$}}
+  \spherepos{28}{3}{node {$q$}}
+  \spherepos{42}{3}{node {$\lnot q$}}
+  \spherepos{-55}{4}{node {$p$}}
+  \spherepos{-67}{4}{node {$\lnot p$}}
+\end{tikzpicture}
+\caption{نموذج مضاد للمقابلة بالنقيض}
+\ollabel{fig:contraposition}
+\end{center}
+\end{figure}
+توجد كرة تقبل~$p$ هي~$S = \{w, w_1\}$، وتصدق~$p \lif q$ عند جميع
+العوالم فيها، ولذلك~$\mSat{M_1}{p \cif q}[w]$. لكن الكرة التي تقبل
+$\lnot q$، وهي~$\{w, w_1, w_2\}$، تحتوي عالمًا هو~$w_2$ تكون فيه
+$q$ كاذبة و$p$ صادقة؛ ولذلك
+$\mSat/{M_1}{\lnot q \lif \lnot p}[w_2]$.
+\end{ex}
+
+\end{document}

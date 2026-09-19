@@ -1,0 +1,117 @@
+% Part: first-order-logic
+% Chapter: sequent-calculus
+% Section: derivations
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{seq}{der}}
+      {\olfileid{pl}{seq}{der}}
+
+\olsection{\usetoken{P}{derivation}}
+
+\begin{explain}
+قد ضُبطت التتابعيات الابتدائية وقواعد الاستدلال. ومنها تُنشأ ال!!^{derivation}s بالاستقراء:
+فإما أن يكون !!{derivation} تتابعية ابتدائية مفردة، وإما أن يؤخذ واحد أو اثنان من ال!!{derivation}s ويُتبع باستدلال.
+\end{explain}
+
+\begin{defn}[$\Log{LK}$: !!{derivation}]
+إن \emph{$\Log{LK}$-!!{derivation}} لتتابعية~${\OLId{latin-looped}{S}}$ شجرة منتهية من
+التتابعيات تحقق الشروط الآتية:
+\begin{enumerate}
+\item التتابعيات العليا في الشجرة تتابعيات ابتدائية.
+\item التتابعية السفلى في الشجرة هي~${\OLId{latin-looped}{S}}$.
+\item كل تتابعية في الشجرة عدا~${\OLId{latin-looped}{S}}$ مقدمة لتطبيق صحيح لقاعدة استدلال
+  تقع نتيجته تحت تلك التتابعية مباشرةً في الشجرة.
+\end{enumerate}
+ونسمّي عندئذٍ~${\OLId{latin-looped}{S}}$ \emph{التتابعية النهائية} لل!!{derivation}، ونقول
+إن~${\OLId{latin-looped}{S}}$ \emph{!!{derivable} في $\Log{LK}$} (أو
+$\Log{LK}$-!!{derivable}).
+\end{defn}
+
+\begin{ex}
+كل تتابعية ابتدائية، مثل~$!C \Sequent !C$، هي !!a{derivation}. ويمكننا
+أن نحصل منها على !!{derivation} جديد بتطبيق القاعدة
+$\LeftR{\Weakening}$ مثلًا،
+\begin{prooftree}
+\Axiom$ {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}} $
+\RightLabel{\LeftR{\Weakening}}
+\UnaryInf$ !A, {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}$
+\end{prooftree}
+والقاعدة عامة، فيحل محل~$!A$ أي !!{sentence}، ومنها~$!D$ مثلًا.
+فإذا أُريد أن تطابق مقدمتها التتابعية الابتدائية~$!C \Sequent !C$، وجب أن يكون~${\OLId{greek-variable}{Gamma}}$
+و${\OLId{greek-variable}{Delta}}$ كلٌّ منهما~$!C$ وحده. وتكون النتيجة حينئذ
+$!D, !C \Sequent !C$؛ فيصح !!a{derivation} الآتي:
+\begin{prooftree}
+\Axiom$ !C \fCenter !C $
+\RightLabel{\LeftR{\Weakening}}
+\UnaryInf$ !D, !C \fCenter !C$
+\end{prooftree}
+يمكننا الآن تطبيق قاعدة أخرى، ولتكن~$\LeftR{\Exchange}$، وهي تتيح لنا
+تبديل !!{sentence}s اثنتين في الجانب الأيسر. ومن ثم فإن ما يأتي أيضًا
+!!{derivation} صحيح:
+\begin{prooftree}
+\Axiom$ !C \fCenter !C $
+\RightLabel{\LeftR{\Weakening}}
+\UnaryInf$ !D, !C \fCenter !C$
+\RightLabel{\LeftR{\Exchange}}
+\UnaryInf$ !C, !D \fCenter !C$
+\end{prooftree}
+وفي هذا التطبيق للقاعدة، التي عُرضت على الصورة
+\begin{prooftree}
+\Axiom$ {\OLId{greek-variable}{Gamma}}, !A, !B, \Pi \fCenter {\OLId{greek-variable}{Delta}} $
+\RightLabel{\LeftR{\Exchange}}
+\UnaryInf$ {\OLId{greek-variable}{Gamma}}, !B, !A, \Pi \fCenter {\OLId{greek-variable}{Delta}},$
+\end{prooftree}
+كان كل من~${\OLId{greek-variable}{Gamma}}$ و$\Pi$ خاليًا، وكانت~${\OLId{greek-variable}{Delta}}$ هي~$!C$، وأدى
+دوري~$!A$ و$!B$ كل من~$!D$ و~$!C$ على الترتيب. وبالطريقة نفسها
+تقريبًا نرى أيضًا أن
+\begin{prooftree}
+\Axiom$ !D \fCenter !D $
+\RightLabel{\LeftR{\Weakening}}
+\UnaryInf$ !C, !D \fCenter !D$
+\end{prooftree}
+هو !!a{derivation}. والآن يمكننا أخذ هذين ال!!{derivation}s ودمجهما
+باستعمال~$\RightR{\land}$. وقد عُرضت تلك القاعدة على الصورة
+\begin{prooftree}
+\Axiom${\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, !A$
+\Axiom$ {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, !B$
+\RightLabel{\RightR{\land}}
+\BinaryInf$ {\OLId{greek-variable}{Gamma}} \fCenter {\OLId{greek-variable}{Delta}}, !A \land !B $
+\end{prooftree}
+فلنطابق مقدمتي القاعدة على آخر تتابعية في كل من ال!!{derivation}s.
+يلزم من هذه المطابقة أن~${\OLId{greek-variable}{Gamma}}$ هي
+$!C, !D$، وأن~${\OLId{greek-variable}{Delta}}$ خالية، وأن~$!A$ هي~$!C$ و$!B$ هي~$!D$.
+فلا يصح الاستدلال إلا إذا كانت نتيجته
+$!C, !D \Sequent !C \land !D$.
+\begin{prooftree}
+\Axiom$ !C \fCenter !C $
+\RightLabel{\LeftR{\Weakening}}
+\UnaryInf$ !D, !C \fCenter !C$
+\RightLabel{\LeftR{\Exchange}}
+\UnaryInf$ !C, !D \fCenter !C$
+\Axiom$ !D \fCenter !D $
+\RightLabel{\LeftR{\Weakening}}
+\UnaryInf$ !C, !D \fCenter !D$
+\RightLabel{\RightR{\land}}
+\BinaryInf$ !C, !D \fCenter !C \land !D $
+\end{prooftree}
+وبالطبع يمكننا أيضًا عكس المقدمتين؛ وعندئذ تكون~$!A$ هي~$!D$،
+وتكون~$!B$ هي~$!C$. 
+\begin{prooftree}
+\Axiom$ !D \fCenter !D $
+\RightLabel{\LeftR{\Weakening}}
+\UnaryInf$ !C, !D \fCenter !D$
+\Axiom$ !C \fCenter !C $
+\RightLabel{\LeftR{\Weakening}}
+\UnaryInf$ !D, !C \fCenter !C$
+\RightLabel{\LeftR{\Exchange}}
+\UnaryInf$ !C, !D \fCenter !C$
+\RightLabel{\RightR{\land}}
+\BinaryInf$ !C, !D \fCenter !D \land !C $
+\end{prooftree}
+\end{ex}
+
+\end{document}

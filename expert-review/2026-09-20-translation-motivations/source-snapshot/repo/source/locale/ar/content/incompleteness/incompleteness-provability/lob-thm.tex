@@ -1,0 +1,156 @@
+% Part: incompleteness
+% Chapter: incompleteness-provability
+% Section: lob-thm
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{inp}{lob}
+
+\olsection{مبرهنة لوب}
+
+جملة غودل لنظرية~$\Th{T}$ نقطة ثابتة لـ$\lnot
+\OProv[\Th{T}](y)$؛ أي إنها !!a{sentence}~$!G$ بحيث
+\[
+\Th{T} \Proves \lnot \OProv[\Th{T}](\gn{!G}) \liff !G.
+\]
+وهي غير !!{derivable} إذا كانت~$\Th{T}$ متسقة، لأنه إذا كان
+$\Th{T} \Proves !G$، فإن
+(أ)~$\Th{T} \Proves \OProv[\Th{T}](\gn{!G})$ بحسب شرط
+!!{derivability}~(1)، وإن (ب)~$\Th{T} \Proves !G$ مع
+$\Th{T} \Proves \lnot \OProv[\Th{T}](\gn{!G})
+\liff !G$ يعطيان
+$\Th{T} \Proves \lnot \OProv[\Th{T}](\gn{!G})$، فتكون~$\Th{T}$
+غير متسقة. ومن الطبيعي الآن أن نسأل عن وضع نقطة ثابتة لـ
+$\OProv[\Th{T}](y)$؛ أي !!a{sentence}~$!H$ بحيث
+\[
+\Th{T} \Proves \OProv[\Th{T}](\gn{!H}) \liff !H.
+\]
+لو كانت !!{derivable}، لكان
+$\Th{T} \Proves \OProv[\Th{T}](\gn{!H})$ بحسب الشرط~(1)، لكن
+النتيجة نفسها تحصل أيضًا إذا طبقنا قاعدة الفصل على التكافؤ أعلاه. ومن
+ثم لا نستنتج أن~$\Th{T}$ غير متسقة، على الأقل لا بالحجة نفسها التي
+استعملناها في حالة جملة غودل. وهذا بالطبع لا يبين أن~$\Th{T}$
+\emph{تستطيع} أن !!{derive} $!H$.
+
+يمكننا إحراز تقدم في هذا السؤال إذا عممناه قليلًا. فاتجاه نقطة الثبات
+من اليسار إلى اليمين، $\OProv[\Th{T}](\gn{!H}) \lif !H$، حالة من
+مخطط عام يسمى \emph{مبدأ الانعكاس}:
+$\OProv[\Th{T}](\gn{!A}) \lif !A$. وسمي كذلك لأنه يعبر، بمعنى ما،
+عن قدرة~$\Th{T}$ على «التفكر» فيما تستطيع أن !!{derive}؛ إذ يقول في
+الأساس: «إذا استطاعت~$\Th{T}$ أن !!{derive} $!A$، فإن~$!A$ صادقة»،
+لأي~$!A$. وهذا لا يصدق بالطبع إلا في النظريات السليمة، مما يوحي بأن
+النظريات لن !!{derive} عمومًا كل حالة منه. فأي الحالات تستطيع نظرية
+(قوية بما يكفي وتحقق شروط~!!{derivability}) أن !!{derive}؟ لا شك في
+كل الحالات التي تكون فيها~$!A$ نفسها !!{derivable}. وهذه هي الحالات
+كلها، كما تبين النتيجة الآتية.
+
+\begin{thm}\ollabel{thm:lob}
+لتكن~$!A$ !!a{sentence}، ولتكن~$\Th{T}$ نظرية !!a{axiomatizable}
+تمتد~$\Th{Q}$، وافترض أن
+$\OProv[\Th{T}](y)$ صيغة تحقق الشروط~P1--P3 من
+\olref[2in]{sec}. إذا كانت~$\Th{T}$ !!{derive}s
+$\OProv[\Th{T}](\gn{!A}) \lif !A$، فإن~$\Th{T}$ !!{derive}s في
+الواقع~$!A$.
+\end{thm}
+
+وبعبارة أخرى، إذا كان~$\Th{T} \Proves/ !A$، فإن
+$\Th{T} \Proves/ \OProv[\Th{T}](\gn{!A}) \lif !A$. وتعرف هذه
+النتيجة بمبرهنة لوب.
+
+\begin{explain}
+الحدس الموجه لبرهان مبرهنة لوب هو برهان ذكي على وجود سانتا كلوز. (وإذا
+لم تعجبك هذه النتيجة، فلك أن تستبدل بها أي نتيجة أخرى تريدها.) وهذا هو
+البرهان:
+\begin{enumerate}
+\item لتكن~$X$ الجملة: «إذا كانت~$X$ صادقة، فإن سانتا كلوز موجود».
+\item افترض أن~$X$ صادقة.
+\item عندئذ يصدق ما تقوله؛ أي لدينا: إذا كانت~$X$ صادقة، فإن سانتا
+  كلوز موجود.
+\item لما كنا نفترض أن~$X$ صادقة، أمكننا أن نستنتج أن سانتا كلوز
+  موجود، بقاعدة الفصل من (2) و(3).
+\item نجحنا في اشتقاق (4)، «سانتا كلوز موجود»، من الفرض~(2)، «$X$
+  صادقة». وبالبرهان الشرطي بيّنا: «إذا كانت~$X$ صادقة، فإن سانتا كلوز
+  موجود».
+\item لكن هذه هي الجملة~$X$ نفسها. ولذلك بيّنا أن~$X$ صادقة.
+\item وعندئذ، بحسب الحجة (2)--(4) أعلاه، يكون سانتا كلوز موجودًا.
+\end{enumerate}
+إن صورنة هذه الفكرة، مع استبدال «هي صادقة» بـ«هي !!{derivable}»
+واستبدال «سانتا كلوز موجود» بـ$!A$، تعطينا برهان مبرهنة لوب. والحيلة
+هي تطبيق لمّة النقطة الثابتة على الـ!!{formula}~
+$\OProv[\Th{T}](y) \lif !A$. وتقابل النقطة الثابتة لهذه الصيغة
+الجملة~$X$ في المخطط السابق.
+\end{explain}
+
+\begin{proof}[برهان \olref{thm:lob}]
+افترض أن~$!A$ !!a{sentence} بحيث إن~$\Th{T}$ !!{derive}s
+$\OProv[\Th{T}](\gn{!A}) \lif !A$. ولتكن~$!B(y)$ الـ!!{formula}~
+$\OProv[\Th{T}](y) \lif !A$، واستعمل لمّة النقطة الثابتة لإيجاد
+!!a{sentence}~$!D$ بحيث إن~$\Th{T}$ !!{derive}s
+$!D \liff !B(\gn{!D})$. وعندئذ يكون كل مما يأتي !!{derivable} في
+$\Th{T}$:
+\begin{align}
+  & !D \liff (\OProv[\Th{T}](\gn{!D}) \lif !A) \ollabel{L-1}\\
+  & \qquad \text{إن~$!D$ نقطة ثابتة لـ$!B(y)$}\notag \\
+  & !D \lif (\OProv[\Th{T}](\gn{!D}) \lif !A) \ollabel{L-2}\\
+  & \qquad\text{من \olref{L-1}}\notag\\
+  & \OProv[\Th{T}](\gn{!D \lif (\OProv[\Th{T}](\gn{!D}) \lif !A)}) \ollabel{L-3}\\
+  & \qquad \text{من \olref{L-2} بحسب الشرط P1}\notag \\
+  & \OProv[\Th{T}](\gn{!D}) \lif \OProv[\Th{T}](\gn{\OProv[\Th{T}](\gn{!D}) \lif !A})
+  \ollabel{L-4}\\
+  &\qquad \text{من \olref{L-3} باستعمال الشرط P2}\notag \\
+  & \OProv[\Th{T}](\gn{!D}) \lif (\OProv[\Th{T}](\gn{\OProv[\Th{T}](\gn{!D})}) \lif \OProv[\Th{T}](\gn{!A})) \ollabel{L-5}\\
+  &\qquad \text{من \olref{L-4} باستعمال P2 مرة أخرى} \notag\\
+& \OProv[\Th{T}](\gn{!D}) \lif \OProv[\Th{T}](\gn{\OProv[\Th{T}](\gn{!D})}) \ollabel{L-6}\\
+  & \qquad\text{بحسب شرط~!!{derivability} P3} \notag\\
+  & \OProv[\Th{T}](\gn{!D}) \lif \OProv[\Th{T}](\gn{!A}) \ollabel{L-7} \\
+  &\qquad\text{من \olref{L-5} و\olref{L-6}}\notag\\
+  & \OProv[\Th{T}](\gn{!A}) \lif !A \ollabel{L-8}\\
+  &\qquad\text{بحسب فرض المبرهنة} \notag\\
+  & \OProv[\Th{T}](\gn{!D}) \lif !A \ollabel{L-9}\\
+  &\qquad\text{من \olref{L-7} و\olref{L-8}}\notag\\
+  & (\OProv[\Th{T}](\gn{!D}) \lif !A) \lif !D \ollabel{L-10}\\
+  & \qquad \text{من \olref{L-1}}\notag \\
+  & !D \ollabel{L-11}\\
+  & \qquad\text{من \olref{L-9} و\olref{L-10}}\notag \\
+  & \OProv[\Th{T}](\gn{!D}) \ollabel{L-12}\\
+  & \qquad\text{من \olref{L-11} بحسب الشرط~P1}\notag \\
+  & !A \qquad\qquad\text{من \olref{L-8} و\olref{L-12}}\notag
+\end{align}
+\end{proof}
+
+وبعد أن صارت مبرهنة لوب في أيدينا، يمكن تقديم برهان قصير لمبرهنة عدم
+الاكتمال الثانية (للنظريات التي لها !!a{derivability} محمول يحقق
+الشروط~P1--P3): إذا كان
+$\Th{T} \Proves \OProv[\Th{T}](\gn{\lfalse}) \lif \lfalse$، فإن
+$\Th{T} \Proves \lfalse$. وإذا كانت~$\Th{T}$ متسقة، كان
+$\Th{T} \Proves/ \lfalse$. ولذلك
+$\Th{T} \Proves/ \OProv[\Th{T}](\gn{\lfalse}) \lif \lfalse$؛ أي
+$\Th{T} \Proves/ \OCon[\Th{T}]$. ويمكننا أيضًا تطبيقها لإثبات أن
+$!H$، وهي النقطة الثابتة لـ$\OProv[\Th{T}](x)$، !!{derivable}. إذ لما
+كان
+\begin{align*}
+  \Th{T} & \Proves \OProv[\Th{T}](\gn{!H}) \liff !H\\
+  \intertext{وعلى وجه الخصوص}
+    \Th{T} & \Proves \OProv[\Th{T}](\gn{!H}) \lif !H
+\end{align*}
+ينتج بحسب مبرهنة لوب أن~$\Th{T} \Proves !H$.
+
+% Going in the other direction, for homework I
+% may ask you to work through a short proof of L"ob's theorem, using
+% the second incompleteness theorem instead of the fixed-point lemma.
+
+\begin{prob}
+لتكن~$\Th{T}$ نظرية مؤكسمة حسابيًا، ولتكن~$\OProv[\Th{T}]$
+!!a{derivability} محمولًا لـ$\Th{T}$. تأمل العبارات الأربع الآتية:
+\begin{enumerate}
+\item إذا كان $T \Proves !A$، فإن $T \Proves \OProv[\Th{T}](\gn{!A})$.
+\item $T \Proves !A \lif \OProv[\Th{T}](\gn{!A})$.
+\item إذا كان $T \Proves \OProv[\Th{T}](\gn{!A})$، فإن $T \Proves !A$.
+\item $T \Proves \OProv[\Th{T}](\gn{!A}) \lif !A$
+\end{enumerate}
+تحت أي شروط تصدق كل واحدة من هذه العبارات؟
+\end{prob}
+
+\end{document}

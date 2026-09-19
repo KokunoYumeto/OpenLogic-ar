@@ -1,0 +1,64 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{story}{blv}
+
+\olsection{ملحق: قانون فرغه الأساسي الخامس}
+
+شرحنا في~\olref[rus]{sec} أن راسل صاغ مفارقته بوصفها مشكلة للنسق
+الذي عرضه فرغه في~\emph{Grundgesetze}. ولم يتضمن نسق فرغه صياغة
+مباشرة للاستيعاب الساذج. ولذلك سنشرح بإيجاز شديد في هذا الملحق ما
+\emph{تضمنه} نسق فرغه، وكيف يتصل بالاستيعاب الساذج وبمفارقة راسل.
+
+نسق فرغه \emph{من الرتبة الثانية}، وقد صُمم لصوغ مفهوم
+\emph{امتداد مفهوم}.\footnote{يحاول فرغه، على وجه الدقة، إضفاء الصبغة
+  الصورية على مفهوم أعم هو «مدى قيم» دالة. وامتدادات المفاهيم حالة خاصة
+  من ذلك المفهوم الأعم. للتفاصيل، انظر
+  \citet[pp.\ 8--9]{Heck2012}.} وبترميز مستلهم من فرغه، سنكتب
+$\fregeext{x}{F(x)}$ للدلالة على \emph{امتداد المفهوم~$F$}. وهذه
+أداة تأخذ \emph{محمولًا}، «$F$»، وتحوله إلى \emph{حد} (من الرتبة
+الأولى)، «$\fregeext{x}{F(x)}$». وباستعمال هذه الأداة، قدم فرغه
+\emph{التعريف} الآتي للانتماء:
+\[
+	a \in b \liff_\text{df} \exists G(b = \fregeext{x}{G(x)} \land Ga)
+\]
+أي، على وجه التقريب، إن~$a \in b$ إذا وفقط إذا اندرج~$a$ تحت مفهوم
+امتداده~$b$. (لاحظ أن المكمّم «$\exists G$» من الرتبة الثانية.)
+وقد تبنى فرغه أيضًا المبدأ الآتي، المعروف بـ\emph{القانون الأساسي
+الخامس}:
+$$\fregeext{x}{F(x)} = \fregeext{x}{G(x)} \liff \forall x (Fx \liff Gx)$$
+أي، على وجه التقريب، إن للمفهومين امتدادًا واحدًا إذا وفقط إذا كانا
+متساويي الامتداد. (ومرة أخرى، يقع كل من «$F$» و«$G$» في موضع المحمول.)
+ويربط الآن مبدأ بسيط الانتماء بتحقق الخاصية:
+
+\begin{lem}[في \emph{Grundgesetze}]\ollabel{lem:Fregeextensions}
+$\forall F \forall a(a \in \fregeext{x}{F(x)} \liff Fa)$
+\end{lem}
+
+\begin{proof}
+ثبّت~$F$ و$a$. يكون~$a \in \fregeext{x}{F(x)}$ إذا وفقط إذا كان
+$\exists G(\fregeext{x}{F(x)} = \fregeext{x}{G(x)} \land Ga)$
+(بتعريف الانتماء)، وإذا وفقط إذا كان
+$\exists G(\forall x(Fx \liff Gx) \land Ga)$
+(بالقانون الأساسي الخامس)، وإذا وفقط إذا كان~$Fa$
+(بالمنطق الأولي من الرتبة الثانية).
+\end{proof}
+
+وينتج من ذلك الاستيعاب الساذج على الفور تقريبًا:
+
+\begin{lem}[في \emph{Grundgesetze}.]
+$\forall F \exists s \forall a (a \in s \liff Fa)$
+\end{lem}
+
+\begin{proof}
+ثبّت~$F$؛ ينتج الآن من~\olref{lem:Fregeextensions} أن
+$\forall a (a \in \fregeext{x}{F(x)} \liff Fa)$؛ ومن ثم
+$\exists s\forall a(a \in s \liff Fa)$ بالتعميم الوجودي. وتنتج النتيجة
+لأن~$F$ كانت اعتباطية.
+\end{proof}
+
+وتنتج مفارقة راسل بأخذ~$F$ كما تعطيها
+$\forall x(Fx \liff x \notin x)$.
+
+\end{document}

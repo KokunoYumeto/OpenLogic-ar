@@ -1,0 +1,112 @@
+% Part: propositional-logic
+% Chapter: propositional-logic
+% Section: preliminaries
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pl}{syn}{pre}
+
+\olsection{تمهيدات}
+
+\begin{thm}[\emph{مبدأ الاستقراء على !!{formula}s}]
+  \ollabel{thm:induction}
+  إذا كانت خاصية ما~${\OLId{latin-looped}{P}}$ متحققة لجميع ما هو ذري من !!{formula}s، وكانت
+  بحيث
+  \begin{enumerate}
+    \tagitem{prvNot}{تتحقق لـ~$\lnot !A$ كلما تحققت
+      لـ~$!A$؛}{}
+    \tagitem{prvAnd}{تتحقق لـ~$(!A \land !B)$
+      كلما تحققت لـ~$!A$ و~$!B$؛}{}
+    \tagitem{prvOr}{تتحقق لـ~$(!A \lor !B)$
+      كلما تحققت لـ~$!A$ و~$!B$؛}{}
+    \tagitem{prvIf}{تتحقق لـ~$(!A \lif !B)$
+      كلما تحققت لـ~$!A$ و~$!B$؛}{}
+    \tagitem{prvIff}{تتحقق لـ~$(!A \liff !B)$
+      كلما تحققت لـ~$!A$ و~$!B$؛}{}
+  \end{enumerate}
+  فإن ${\OLId{latin-looped}{P}}$ تتحقق لجميع !!{formula}s.
+\end{thm}
+
+\begin{proof}
+  اجمع في ${\OLId{latin-looped}{S}}$ جميع !!{formula}s التي تتحقق لها الخاصية~${\OLId{latin-looped}{P}}$. فمن تعريفها
+  ${\OLId{latin-looped}{S}} \subseteq \Frm[{\OLId{latin-looped}{L}}_{\OLMathNumeral{0}}]$. وتستوفي~${\OLId{latin-looped}{S}}$ شروط
+  \olref[fml]{defn:formulas}: إذ تضم كل ما هو ذري من
+  !!{formula}s، وتنغلق تحت !!{operator}s. ولما كانت~$\Frm[{\OLId{latin-looped}{L}}_{\OLMathNumeral{0}}]$ أصغر صنف يستوفي هذه الشروط، لزم
+  $\Frm[{\OLId{latin-looped}{L}}_{\OLMathNumeral{0}}] \subseteq {\OLId{latin-looped}{S}}$. فثبت $\Frm[{\OLId{latin-looped}{L}}_{\OLMathNumeral{0}}] = {\OLId{latin-looped}{S}}$، وثبتت الخاصية~${\OLId{latin-looped}{P}}$ لكل صيغة.
+\end{proof}
+
+\begin{prop}\ollabel{prop:balanced}
+   كل !!{formula} في~$\Frm[{\OLId{latin-looped}{L}}_{\OLMathNumeral{0}}]$ \emph{متوازنة}، بمعنى أن فيها من
+   الأقواس اليسرى بقدر ما فيها من الأقواس اليمنى.
+\end{prop}
+
+\begin{prob}
+أثبت \olref[pl][syn][pre]{prop:balanced}
+\end{prob}
+
+\begin{prop} \ollabel{prop:noinit}
+لا يكون أي مقطع ابتدائي حقيقي من !!a{formula} هو نفسه !!a{formula}.
+\end{prop}
+
+\begin{prob}
+  أثبت \olref[pl][syn][pre]{prop:noinit}
+\end{prob}
+
+\begin{prop}[وحدانية القراءة]
+لكل !!{formula}~$!A$ في $ \Frm[{\OLId{latin-looped}{L}}_{\OLMathNumeral{0}}]$ تحليل واحد بالضبط بوصفها واحدة من
+الصور الآتية
+\begin{enumerate}
+\tagitem{prvFalse}{$\lfalse$.}{}
+
+\tagitem{prvTrue}{$\ltrue$.}{}
+
+\item $\Obj p_{\OLId{latin-ordinary}{n}}$ لمتغير ما $\Obj p_{\OLId{latin-ordinary}{n}} \in  \PVar$.
+
+\tagitem{prvNot}{$\lnot !B$ لـ~$!B$ بوصفه !!{formula} ما.}{}
+
+\tagitem{prvAnd}{$(!B \land !C)$ لـ~$!B$ و~$!C$ من !!{formula}s.}{}
+
+\tagitem{prvOr}{$(!B \lor !C)$ لـ~$!B$ و~$!C$ من !!{formula}s.}{}
+
+\tagitem{prvIf}{$(!B \lif !C)$ لـ~$!B$ و~$!C$ من !!{formula}s.}{}
+
+\tagitem{prvIff}{$(!B \liff !C)$ لـ~$!B$ و~$!C$ من !!{formula}s.}{}
+\end{enumerate}
+وفوق ذلك، هذا التحليل \emph{وحيد}.
+\end{prop}
+
+\begin{proof}
+نستقرئ على $!A$. ولنبين، مثالًا، امتناع أن تكون لـ~$!A$ قراءتان مختلفتان:
+$(!B \lif !C)$ و~$(!B' \lif !C')$. لا بد أولًا من تطابق $!B$ و~$!B'$؛ وإلا كان أحدهما مقطعًا ابتدائيًا حقيقيًا من الآخر. فإذا اختلفت قراءتا~$!A$ بعد ذلك، لم يبق إلا أن $!C$ و~$!C'$ قراءتان مختلفتان لسلسلة رموز واحدة. وهذا ممتنع بفرض الاستقراء.
+\end{proof}
+
+\begin{defn}[الإحلال المنتظم]
+لتكن $!A$ و~$!B$ من !!{formula}s، وليكن $\Obj p_{\OLId{latin-ordinary}{i}}$ !!{propositional
+variable}. نرمز بـ~$\Subst{!A}{!B}{\Obj p_{\OLId{latin-ordinary}{i}}}$ إلى ما يحصل إذا وُضع مكان كل ظهور لـ~$\Obj p_{\OLId{latin-ordinary}{i}}$ ظهورٌ لـ~$!B$ في~$!A$.
+وإذا أُحلت مكان~$\Obj p_{\OLMathNumeral{1}}$، \dots،~$\Obj p_{\OLId{latin-ordinary}{n}}$ في آن واحد
+!!{formula}s $!B_{\OLMathNumeral{1}}$، \dots،~$!B_{\OLId{latin-ordinary}{n}}$ على الترتيب، رمزنا إلى النتيجة بـ
+$\SSubst{!A}{\subst{!B_{\OLMathNumeral{1}}}{\Obj p_{\OLMathNumeral{1}}},\dots,\subst{!B_{\OLId{latin-ordinary}{n}}}{\Obj p_{\OLId{latin-ordinary}{n}}}}$.
+\end{defn}
+
+\begin{prob} لكل واحدة من خمس !!{formula}s أدناه، حدّد ما إذا كان يمكن
+ التعبير عن !!{formula} على صورة إحلال \( \Subst{!A}{!B}{\Obj p_{\OLId{latin-ordinary}{i}}} \)
+ حيث تكون \( !A \) هي (i) \( \Obj p_{\OLMathNumeral{0}} \)؛ و(ii) \( ( \lnot \Obj p_{\OLMathNumeral{0}} \land \Obj
+ p_{\OLMathNumeral{1}}) \)؛ و(iii) \( ( ( \lnot \Obj p_{\OLMathNumeral{0}} \lif \Obj p_{\OLMathNumeral{1}} ) \land \Obj
+ p_{\OLMathNumeral{2}} ) \). وفي كل حالة حدّد الإحلال ذا الصلة.
+  \begin{enumerate}
+    \item \( \Obj p_{\OLMathNumeral{1}} \)
+    \item \( ( \lnot \Obj p_{\OLMathNumeral{0}} \land \Obj p_{\OLMathNumeral{0}} ) \)
+    \item \( ( ( \Obj p_{\OLMathNumeral{0}} \lor \Obj p_{\OLMathNumeral{1}} ) \land \Obj p_{\OLMathNumeral{2}} )  \)
+    \item \( \lnot ( ( \Obj p_{\OLMathNumeral{0}} \lif \Obj p_{\OLMathNumeral{1}} ) \land \Obj p_{\OLMathNumeral{2}} ) \)
+    \item \( (( \lnot ( \Obj p_{\OLMathNumeral{0}} \lif \Obj p_{\OLMathNumeral{1}} ) \lif ( \Obj p_{\OLMathNumeral{0}} \lor \Obj p_{\OLMathNumeral{1}} )) \land \lnot ( \Obj p_{\OLMathNumeral{0}} \land \Obj p_{\OLMathNumeral{1}} )) \)
+  \end{enumerate}
+\end{prob}
+
+\begin{prob}
+أعط تعريفًا صارمًا رياضيًا لـ~$\Subst{!A}{!B}{{\OLId{latin-ordinary}{p}}}$ بطريق
+الاستقراء.
+\end{prob}
+
+\end{document}

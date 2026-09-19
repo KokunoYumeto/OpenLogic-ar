@@ -1,0 +1,53 @@
+% Part: incompleteness
+% Chapter: theories-computability
+% Section: q-is-ce
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{tcp}{qce}
+
+\olsection{$\Th{Q}$ تامة بين المجموعات \printtoken{S}{c.e.}}
+
+
+\begin{thm}
+$\Th{Q}$ !!{c.e.} وغير قابلة للقرار؛ وهي، فوق ذلك، تامة بين المجموعات
+!!{c.e.}.
+\end{thm}
+
+\begin{proof}
+أما كون $\Th{Q}$ !!{c.e.} فبيانه أنها مجموعة شفرات الجمل
+$y$ التي يوجد برهان $x$ عليها في $\Th{Q}$:
+\[
+Q = \Setabs{y}{\lexists[x][\Prf[\Th{Q}](x,y)]}.
+\]
+والعلاقة $\Prf[\Th{Q}](x,y)$ قابلة للحساب، بل عودية بدائية؛ وقد
+علمنا أن كل مجموعة ترد على هذه الصورة قابلة للتعداد حسابيًا.
+
+وأما تمامها بين المجموعات القابلة للتعداد حسابيًا فمكافئ لكون
+$K\leq_m Q$، حيث $K=\Setabs{x}{!A_x(x)\downarrow}$. فالمطلوب إذن
+اختزال $K$ إلى $\Th{Q}$. ومحمول كليني $T(e,x,s)$ عودي بدائي، ومن ثم
+يقبل التمثيل في $\Th{Q}$؛ ولنسمّ الصيغة التي تمثله $!A_T$. فلكل $x$:
+\begin{align*}
+x \in K & \lif \lexists[s][T(x,x,s)] \\
+& \lif \lexists[s][(\Th{Q} \Proves !A_T(\num x,\num x, \num s))]
+  \\
+& \lif \Th{Q} \Proves \lexists[s][!A_T(\num x, \num x, s)].
+\end{align*}
+وأما العكس، فإذا كان
+$\Th{Q}\Proves\lexists[s][!A_T(\num x,\num x,s)]$، لزم أن تصدق
+الصيغة $!A_T(\num x,\num x,\num n)$ عند عدد طبيعي ما $n$.
+فلو كانت $T(x,x,n)$ كاذبة، لأثبتت $\Th{Q}$ نفي تلك الصيغة،
+$\lnot !A_T(\num x,\num x,\num n)$، إذ $!A_T$ ممثلة للعلاقة $T$.
+وحينئذ تكون $\Th{Q}$ قد أثبتت صيغة كاذبة، وهو محال. فثبت صدق
+$T(x,x,n)$، ولزم منه $!A_x(x)\downarrow$.
+
+فالحاصل أن انتماء $x$ إلى $K$، لأي $x$، يكافئ إثبات
+$\Th{Q}$ للصيغة $\lexists[s][!A_T(\num x,\num x,s)]$.
+وعليه فالدالة $f$ التي تأخذ $x$ وتعطي شفرة الجملة
+$\lexists[s][!A_T(\num x,\num x,s)]$ هي اختزال $K$ إلى
+$\Th{Q}$ المطلوب.
+\end{proof}
+
+\end{document}

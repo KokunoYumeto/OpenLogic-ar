@@ -1,0 +1,135 @@
+% Part: second-order-logic
+% Chapter: metatheory
+% Section: second-order-arithmetic
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sol}{met}{spa}
+
+\olsection{حساب الرتبة الثانية}
+
+قد تقدم أن حساب بيانو~$\Th{PA}$ يشتمل على بديهيات~$\Th{Q}$
+الثماني:
+\begin{align*}
+& \lforall[{\OLId{latin-ordinary}{x}}][\eq/[{\OLId{latin-ordinary}{x}}'][\Obj 0]]\\
+& \lforall[{\OLId{latin-ordinary}{x}}][\lforall[{\OLId{latin-ordinary}{y}}][(\eq[{\OLId{latin-ordinary}{x}}'][{\OLId{latin-ordinary}{y}}'] \lif \eq[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{y}}])]]\\
+& \lforall[{\OLId{latin-ordinary}{x}}][(\eq[{\OLId{latin-ordinary}{x}}][\Obj 0] \lor \lexists[{\OLId{latin-ordinary}{y}}][\eq[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{y}}']])]\\ 
+& \lforall[{\OLId{latin-ordinary}{x}}][\eq[({\OLId{latin-ordinary}{x}} + \Obj 0)][{\OLId{latin-ordinary}{x}}]]\\
+& \lforall[{\OLId{latin-ordinary}{x}}][\lforall[{\OLId{latin-ordinary}{y}}][\eq[({\OLId{latin-ordinary}{x}} + {\OLId{latin-ordinary}{y}}')][({\OLId{latin-ordinary}{x}} + {\OLId{latin-ordinary}{y}})']]]\\
+& \lforall[{\OLId{latin-ordinary}{x}}][\eq[({\OLId{latin-ordinary}{x}} \times \Obj 0)][\Obj 0]]\\
+& \lforall[{\OLId{latin-ordinary}{x}}][\lforall[{\OLId{latin-ordinary}{y}}][\eq[({\OLId{latin-ordinary}{x}} \times {\OLId{latin-ordinary}{y}}')][(({\OLId{latin-ordinary}{x}} \times {\OLId{latin-ordinary}{y}}) + {\OLId{latin-ordinary}{x}})]]]\\
+& \lforall[{\OLId{latin-ordinary}{x}}][\lforall[{\OLId{latin-ordinary}{y}}][({\OLId{latin-ordinary}{x}} < {\OLId{latin-ordinary}{y}} \liff \lexists[{\OLId{latin-ordinary}{z}}][\eq[({\OLId{latin-ordinary}{z}}' + {\OLId{latin-ordinary}{x}})][{\OLId{latin-ordinary}{y}}]])]]\\
+\intertext{مضافًا إليها جميع الجمل من الصورة}
+& (!A(\Obj 0) \land \lforall[{\OLId{latin-ordinary}{x}}][(!A({\OLId{latin-ordinary}{x}}) \lif !A({\OLId{latin-ordinary}{x}}'))]) \lif \lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})].
+\end{align*}
+وليست الصورة الأخيرة جملة واحدة، بل «مخططًا» يولد من
+!!{sentence}s لغة الحساب ما لا نهاية له: لكل !!{formula}~$!A({\OLId{latin-ordinary}{x}})$
+جملة تخصها. وهو ما نسميه \emph{مخطط بديهية الاستقراء} من
+الرتبة الأولى. وأما حساب بيانو \emph{من الرتبة الثانية}~$\Th{PA^2}$
+فيُجمع فيه الاستقراء في جملة واحدة؛ فتكون~$\Th{PA^2}$
+مؤلفة من البديهيات الثماني المذكورة ومن \emph{بديهية الاستقراء}
+من الرتبة الثانية:
+\[
+\lforall[{\OLId{latin-looped}{X}}][(({\OLId{latin-looped}{X}}(\Obj 0) \land \lforall[{\OLId{latin-ordinary}{x}}][({\OLId{latin-looped}{X}}({\OLId{latin-ordinary}{x}}) \lif {\OLId{latin-looped}{X}}({\OLId{latin-ordinary}{x}}'))]) \lif \lforall[{\OLId{latin-ordinary}{x}}][{\OLId{latin-looped}{X}}({\OLId{latin-ordinary}{x}})])].
+\]
+ومعناها أن المجموعة الجزئية~${\OLId{latin-looped}{X}}$ من !!{domain} إذا احتوت
+$\Assign{\Obj{0}}{{\OLId{latin-looped}{M}}}$، وكانت متى احتوت~${\OLId{latin-ordinary}{x}} \in \Domain{{\OLId{latin-looped}{M}}}$
+احتوت خلفه~$\Assign{\prime}{{\OLId{latin-looped}{M}}}({\OLId{latin-ordinary}{x}})$، أي كانت «مغلقة تحت الخلف»،
+لزم أن تحتوي كل ما في !!{domain}، أي~${\OLId{latin-looped}{X}} = \Domain{{\OLId{latin-looped}{M}}})$.
+
+وبهذه البديهية لا يكون في أي !!{structure} تحققها من
+!!{element}s~$\Domain{{\OLId{latin-looped}{M}}}$ إلا ما أوجبت البديهيات وجوده:
+قيم~$\num{{\OLId{latin-ordinary}{n}}}$ حيث~${\OLId{latin-ordinary}{n}} \in \Nat$.
+فلا مكان للأعداد غير القياسية في نموذج لـ$\Th{PA^2}$.
+
+\begin{thm}
+\ollabel{thm:sol-pa-standard}
+من~$\Sat{{\OLId{latin-looped}{M}}}{\Th{PA^2}}$ يلزم~$\Domain{{\OLId{latin-looped}{M}}} =
+\Setabs{\Value{\num{{\OLId{latin-ordinary}{n}}}}{{\OLId{latin-looped}{M}}}}{{\OLId{latin-ordinary}{n}} \in \Nat}$.
+\end{thm}
+
+\begin{proof}
+ضع~${\OLId{latin-looped}{N}} = \Setabs{\Value{\num{{\OLId{latin-ordinary}{n}}}}{{\OLId{latin-looped}{M}}}}{{\OLId{latin-ordinary}{n}} \in \Nat}$، ولنفترض
+$\Sat{{\OLId{latin-looped}{M}}}{\Th{PA^2}}$. لكل~${\OLId{latin-ordinary}{n}} \in \Nat$ يكون
+$\Value{\num{{\OLId{latin-ordinary}{n}}}}{{\OLId{latin-looped}{M}}} \in \Domain{{\OLId{latin-looped}{M}}}$؛ فثبت~${\OLId{latin-looped}{N}} \subseteq \Domain{{\OLId{latin-looped}{M}}}$.
+
+بقي إثبات الاحتواء المعاكس. نأخذ تعيين متغيرات~${\OLId{latin-ordinary}{s}}$
+يحقق~${\OLId{latin-ordinary}{s}}({\OLId{latin-looped}{X}}) = {\OLId{latin-looped}{N}}$. ومن الفرض،
+\begin{align*}
+\Sat{{\OLId{latin-looped}{M}}}{\lforall[{\OLId{latin-looped}{X}}][(({\OLId{latin-looped}{X}}(\Obj 0) \land \lforall[{\OLId{latin-ordinary}{x}}][({\OLId{latin-looped}{X}}({\OLId{latin-ordinary}{x}})
+      \lif {\OLId{latin-looped}{X}}({\OLId{latin-ordinary}{x}}'))]) \lif \lforall[{\OLId{latin-ordinary}{x}}][{\OLId{latin-looped}{X}}({\OLId{latin-ordinary}{x}})])]}, & \text{ومن ثم}\\
+\Sat{{\OLId{latin-looped}{M}}}{({\OLId{latin-looped}{X}}(\Obj 0) \land \lforall[{\OLId{latin-ordinary}{x}}][({\OLId{latin-looped}{X}}({\OLId{latin-ordinary}{x}}) \lif {\OLId{latin-looped}{X}}({\OLId{latin-ordinary}{x}}'))]) \lif
+  \lforall[{\OLId{latin-ordinary}{x}}][{\OLId{latin-looped}{X}}({\OLId{latin-ordinary}{x}})]}[{\OLId{latin-ordinary}{s}}]. & 
+\end{align*}
+ولنثبت مقدم الشرطية. أوله ثابت لأن~$\Value{\Obj{0}}{{\OLId{latin-looped}{M}}} \in {\OLId{latin-looped}{N}}$،
+فيكون~$\Sat{{\OLId{latin-looped}{M}}}{{\OLId{latin-looped}{X}}(\Obj{0})}[{\OLId{latin-ordinary}{s}}]$.
+وأما المقترن الثاني~$\lforall[{\OLId{latin-ordinary}{x}}][({\OLId{latin-looped}{X}}({\OLId{latin-ordinary}{x}}) \lif {\OLId{latin-looped}{X}}({\OLId{latin-ordinary}{x}}'))]$
+فيُرضى كذلك: إذ لو كان~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{N}}$، لاقتضى تعريف~${\OLId{latin-looped}{N}}$
+أن~${\OLId{latin-ordinary}{x}} = \Value{\num{{\OLId{latin-ordinary}{n}}}}{{\OLId{latin-looped}{M}}}$ لبعض~${\OLId{latin-ordinary}{n}}$.
+فيكون~$\Assign{\prime}{{\OLId{latin-looped}{M}}}({\OLId{latin-ordinary}{x}}) = \Value{\num{{\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}}}}{{\OLId{latin-looped}{M}}} \in {\OLId{latin-looped}{N}}$،
+ومن ثم~$\Assign{\prime}{{\OLId{latin-looped}{M}}}({\OLId{latin-ordinary}{x}}) \in {\OLId{latin-looped}{N}}$.
+
+فحصل~$\Sat{{\OLId{latin-looped}{M}}}{{\OLId{latin-looped}{X}}(\Obj 0) \land \lforall[{\OLId{latin-ordinary}{x}}][({\OLId{latin-looped}{X}}({\OLId{latin-ordinary}{x}}) \lif {\OLId{latin-looped}{X}}({\OLId{latin-ordinary}{x}}'))]}[{\OLId{latin-ordinary}{s}}]$،
+ولزم~$\Sat{{\OLId{latin-looped}{M}}}{\lforall[{\OLId{latin-ordinary}{x}}][{\OLId{latin-looped}{X}}({\OLId{latin-ordinary}{x}})]}[{\OLId{latin-ordinary}{s}}]$.
+ومعنى هذا أن~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-ordinary}{s}}({\OLId{latin-looped}{X}}) = {\OLId{latin-looped}{N}}$ لكل~${\OLId{latin-ordinary}{x}} \in \Domain{{\OLId{latin-looped}{M}}}$؛
+فثبت~$\Domain{{\OLId{latin-looped}{M}}} \subseteq {\OLId{latin-looped}{N}}$.
+\end{proof}
+
+\begin{cor}
+\ollabel{cor:sol-pa-categorical}
+كل نموذجين لـ$\Th{PA^2}$ متماثلان بنيويًا.
+\end{cor}
+
+\begin{proof}
+بمبرهنة~\olref{thm:sol-pa-standard} تستوعب
+$\Value{\num{{\OLId{latin-ordinary}{n}}}}{{\OLId{latin-looped}{M}}}$ مجال كل نموذج لـ$\Th{PA^2}$.
+وهو أيضًا نموذج لـ$\Th{Q}$؛ فينتج من
+\olref[mod][mar][stm]{prop:thq-standard} أنه قياسي، أي متماثل
+بنيويًا مع~$\Struct{N}$.
+\end{proof}
+
+جعلنا~$\Th{PA^2}$ مؤلفة من البديهيات الحسابية الثماني وبديهية
+الاستقراء من الرتبة الثانية. غير أن ما في هذه الرتبة من قوة تعبيرية
+يغنينا، في حساب بيانو من الرتبة الثانية، عن ست من تلك البديهيات؛
+إذ تكفي البديهيتان \emph{الأوليان} مع الاستقراء.
+
+\begin{prop}\ollabel{prop:sol-pa-definable}
+لتكن~$\Th{PA^{2\dagger}}$ نظرية الرتبة الثانية المؤلفة من
+البديهتين الحسابيتين الأوليين، وهما بديهيتا الخلف، ومن بديهية
+الاستقراء من الرتبة الثانية. يمكن حينئذ تعريف~$\le$ و$+$ و$\times$
+في~$\Th{PA^{2\dagger}}$.
+\end{prop}
+
+\begin{proof}
+أما تعريف~$\le$ فيقتضي صيغة~$!A_\le({\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}})$ يكون بها
+$\Sat{{\OLId{latin-looped}{N}}}{!A_\le(\num {\OLId{latin-ordinary}{n}}, \num {\OLId{latin-ordinary}{m}})}$ إذا وفقط إذا~${\OLId{latin-ordinary}{n}} \le {\OLId{latin-ordinary}{m}}$.
+فلنأخذ الصيغة
+\[
+!B({\OLId{latin-ordinary}{x}}, {\OLId{latin-looped}{Y}}) \ident {\OLId{latin-looped}{Y}}({\OLId{latin-ordinary}{x}}) \land \lforall[{\OLId{latin-ordinary}{y}}][({\OLId{latin-looped}{Y}}({\OLId{latin-ordinary}{y}}) \lif {\OLId{latin-looped}{Y}}({\OLId{latin-ordinary}{y}}'))]
+\]
+إن~$!B(\num {\OLId{latin-ordinary}{n}},{\OLId{latin-looped}{Y}})$ تعني أن~${\OLId{latin-looped}{Y}}$ تحتوي~${\OLId{latin-ordinary}{n}}$ ومغلقة تحت الخلف؛
+فيلزم أن تحتوي كل~${\OLId{latin-ordinary}{m}}\ge {\OLId{latin-ordinary}{n}}$. وإذا كان~${\OLId{latin-ordinary}{m}}<{\OLId{latin-ordinary}{n}}$، حققت مجموعة الذيل
+$\Setabs{{\OLId{latin-ordinary}{k}}}{{\OLId{latin-ordinary}{n}}\le {\OLId{latin-ordinary}{k}}}$ الصيغة~$!B(\num {\OLId{latin-ordinary}{n}},{\OLId{latin-looped}{Y}})$ ولم تحتو~${\OLId{latin-ordinary}{m}}$.
+ولذلك نضع~$!A_\le({\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}) \ident
+\lforall[{\OLId{latin-looped}{Y}}][(!B({\OLId{latin-ordinary}{x}}, {\OLId{latin-looped}{Y}}) \lif {\OLId{latin-looped}{Y}}({\OLId{latin-ordinary}{y}}))]$.
+% تصحيح مصدر (0332-I1): استُبدل التكافؤ الزائف بالتوصيف اللازم وبمجموعة الذيل الشاهدة للاتجاه العكسي.
+
+وأما الجمع، فإن~${\OLId{latin-ordinary}{k}}+{\OLId{latin-ordinary}{l}}={\OLId{latin-ordinary}{m}}$ إذا وفقط إذا وجدت دالة~${\OLId{latin-ordinary}{u}}$
+تحقق~${\OLId{latin-ordinary}{u}}({\OLMathNumeral{0}})={\OLId{latin-ordinary}{k}}$ و${\OLId{latin-ordinary}{u}}({\OLId{latin-ordinary}{n}}')={\OLId{latin-ordinary}{u}}({\OLId{latin-ordinary}{n}})'$ لكل~${\OLId{latin-ordinary}{n}}$، و${\OLId{latin-ordinary}{m}} = {\OLId{latin-ordinary}{u}}({\OLId{latin-ordinary}{l}})$.
+فبهذا التكافؤ نعرّف الجمع في~$\Th{PA^{2\dagger}}$
+بالصيغة:
+\[
+!A_+({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}},{\OLId{latin-ordinary}{z}}) \ident \lexists[{\OLId{latin-ordinary}{u}}][({\OLId{latin-ordinary}{u}}(\Obj 0)={\OLId{latin-ordinary}{x}} \land \lforall[{\OLId{latin-ordinary}{w}}][{\OLId{latin-ordinary}{u}}({\OLId{latin-ordinary}{w}}')={\OLId{latin-ordinary}{u}}
+ ({\OLId{latin-ordinary}{w}})'] \land {\OLId{latin-ordinary}{u}}({\OLId{latin-ordinary}{y}})={\OLId{latin-ordinary}{z}})]
+\] 
+ومن البيان السابق يتضح أن~$\Sat{{\OLId{latin-looped}{N}}}{!A_+(\num {\OLId{latin-ordinary}{k}}, \num {\OLId{latin-ordinary}{l}}, \num {\OLId{latin-ordinary}{m}})}$
+إذا وفقط إذا كان~${\OLId{latin-ordinary}{k}}+{\OLId{latin-ordinary}{l}}={\OLId{latin-ordinary}{m}}$.
+\end{proof}
+
+\begin{prob}
+أتم ما بقي من برهان~\olref[sol][met][spa]{prop:sol-pa-definable}.
+\end{prob}
+
+\end{document}

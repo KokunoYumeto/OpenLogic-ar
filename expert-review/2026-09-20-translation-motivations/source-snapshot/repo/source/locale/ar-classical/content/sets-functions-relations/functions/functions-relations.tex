@@ -1,0 +1,99 @@
+% Part: sets-functions-relations
+% Chapter: functions
+% Section: functions-relations
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+
+\begin{document}
+
+\olfileid[ar]{sfr}{fun}{rel}
+
+\olsection{الدوال بوصفها علاقات}
+
+\begin{explain}
+الدالة التي تقابل !!{element}s~$A$ بـ!!{element}s~$B$ تعيّن علاقة
+بين $A$ و~$B$: وهي التي تقوم بين $x$ و$y$ إذا وفقط إذا كان
+$f(x) = y$. وقد نريد، اختزالًا لأصول البناء الرياضي مثلًا،
+\emph{مماهاة}~$f$ بهذه العلاقة، أي بمجموعة الأزواج.
+فأي العلاقات يجوز أن تؤخذ دوال على هذا الوجه؟
+\end{explain}
+
+\begin{defn}[الرسم البياني لدالة]
+للدالة $f\colon A \to B$ \emph{رسم بياني} للدالة~$f$، وهو العلاقة
+$R_f \subseteq A \times B$ ذات التعريف
+\[
+R_f = \Setabs{\tuple{x,y}}{f(x) = y}.
+\]
+\end{defn}
+
+\begin{explain}
+تقضي الامتدادية بوحدة رسم الدالة البياني. بل إن امتدادية المجموعات
+تسوّغ مباشرة امتدادية الدوال التي استعملناها ضمنًا: متى اتحد
+مجال $f$ و~$g$ ومجالهما المقابل، واتفقت قيمهما كلها، كانتا واحدة.
+
+وبالعكس، كل علاقة تستوفي شرط «الدالية» هي رسم بياني لدالة.
+\end{explain}
+
+\begin{prop}\ollabel{prop:graph-function}
+افرض أن $R \subseteq A \times B$ تحقق الشرطين:
+\begin{enumerate}
+\item اجتماع $Rxy$ و$Rxz$ يقتضي $y = z$؛ و
+\item يوجد لكل $x \in A$ عنصر $y \in B$ يحقق $\tuple{x,
+y} \in R$.
+\end{enumerate}
+فتكون $R$ رسم الدالة $f\colon A \to B$ التي نضعها بالشرط:
+$f(x) = y$ إذا وفقط إذا كان $Rxy$.
+\end{prop}
+
+\begin{proof}
+إذا وجد $y$ يحقق $Rxy$ امتنع أن يوجد $z \neq
+y$ يحقق $Rxz$، وإلا خولف شرط~$R$. فمتى وجد $y$ مع $Rxy$ كان
+هذا $y$ واحدًا؛ ومع ضمان الوجود تكون $f$ سليمة التعريف.
+ومن تعريفها يظهر $R_f = R$.
+\end{proof}
+
+\begin{explain}
+فكل دالة $f\colon A \to B$ لها رسم، أي علاقة بين $A$ و~$B$
+محتواة في~$A \times B$ يضبطها $f(x) = y$. وكل علاقة~$R
+\subseteq A \times B$ تحقق شرطي \olref{prop:graph-function} رسم
+لدالة~$f \colon A \to B$. ولشدة هذه الصلة يجوز أن نأخذ الدالة
+رسمها نفسه، أي علاقة مخصوصة أو مجموعة مخصوصة من الصفوف المرتبة.
+\oliflabeldef{sfr:rel:ref:sec}{والمقصود بالمماهاة هنا ما بُيّن في
+\olref[sfr][rel][ref]{sec}: ليست دعوى ميتافيزيقية في ماهية الدوال،
+بل إجازة نافعة لـ\emph{معاملتها} مجموعات معينة. ومن نفع ذلك أن }{}
+العمليات التي أجريناها على العلاقات يمكن إجراء نظائرها على الدوال
+(انظر \olref[sfr][rel][ops]{sec})؛ ومنها ما يأتي.
+\end{explain}
+
+\begin{defn}\ollabel{defn:funimage}
+خذ دالة $f \colon A \to B$ وجزئية $C\subseteq A$.
+
+\emph{تقييد}~$f$ على~$C$ هو الدالة~$\funrestrictionto{f}{C}\colon C \to B$
+التي تحقق $(\funrestrictionto{f}{C})(x) = f(x)$ لكل $x \in C$؛ أي
+$\funrestrictionto{f}{C} = \Setabs{\tuple{x, y} \in R_f}{x \in
+C}$.
+
+و\emph{تطبيق}~$f$ على~$C$ تعريفه $\funimage{f}{C} =
+\Setabs{f(x)}{x \in C}$؛ ويسمى أيضًا \emph{صورة}~$C$ تحت~$f$.
+\end{defn}
+
+\begin{explain}
+ومن التعريفين ينتج $\ran{f} =
+\funimage{f}{\dom{f}}$ لكل دالة~$f$.
+\oliflabeldef{sfr:rel:ops:sec}{وهذا نظير لما تقتضيه تعريفات
+\olref[sfr][rel][ops]{sec} ومماهاة الدوال بالعلاقات، إلا أن تقييد
+الدالة هنا إنما يقصر المدخل على~$C$ ولا يقصر المخرج على~$C$.
+وأما المعكوسات والضروب النسبية فيحتاجان إلى زيادة تفصيل،
+وسيأتي في \olref[inv]{sec} و\olref[cmp]{sec}.}{}
+\end{explain}
+
+\begin{explain}
+\textbf{تنبيهان على لفظ الأصل.} سمى الأصل رسم~$f$ «علاقة على
+$A\times B$»، مع أن اصطلاح الكتاب يجعل العلاقة على~$U$ جزءًا من
+$U^2$؛ فقلنا علاقة بين $A$ و~$B$ محتواة في~$A\times B$. ثم إن
+تقييد الدالة على~$C$ يخص الإحداثي الأول، فلا يطابق تقييد العلاقة
+المتجانسة بالتقاطع مع~$C^2$ إلا على جهة النظير.
+\end{explain}
+
+\end{document}

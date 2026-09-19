@@ -1,0 +1,87 @@
+% Part: first-order-logic
+% Chapter: introduction
+% Section: formulas
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{int}{fml}
+
+\section{\usetoken{P}{formula}}
+
+طريقنا إلى ضبط ال!!{sentence}s ومعالجة ما ينشأ عن ال!!{variable}s
+أن نبدأ بصنف \emph{آخر} من العبارات، هو ال!!{formula}s. ثم
+ننظر في مواقع ال!!{variable}s فيها، ونميز ال!!{variable}s الحرة
+من المقيدة؛ وبهذا نحد ال!!{sentence} بأنها !!a{formula} خالية
+من ال!!{variable}s الحرة. وليس الغرض مجرد تيسير تعريف
+«ال!!{sentence}»، بل هذا التقديم أساس لطريقتنا في تعريف الإرضاء
+الدلالي.
+
+نعرّف «ال!!{formula}» أولًا في لغة بسيطة من الرتبة الأولى: ليس
+فيها إلا !!{predicate} واحد~$\Obj P$ و!!{constant} واحد~$\Obj a$،
+ولا نأخذ من الرموز المنطقية إلا $\lnot$ و$\land$ و~$\lexists$.
+وأما التعريف العام الذي سيأتي، فيجيز ال!!{predicate}s
+وال!!{constant}s بأعداد غير منتهية، ويشمل ال!!{function}s التي
+تركب مع ال!!{constant}s وال!!{variable}s لتأليف «حدود». وأما الآن،
+فحدودنا ليست إلا $\Obj a$ والمتغيرات. ولا بد لنا من
+ال!!{variable}s بعدد غير منتهٍ؛ ونختار رسميًا لها الرموز
+$\Obj v_0$ و$\Obj v_1$ و\dots.
+
+\begin{defn}
+تُعرّف مجموعة \emph{ال!!{formula}s}~$\Frm$ كما يأتي:
+\begin{enumerate}
+\item\ollabel{fmls-atom} إن $\Atom{\Obj P}{\Obj a}$ و$\Atom{\Obj
+  P}{\Obj v_i}$ !!{formula}s (حيث $i \in \Nat$).
+
+\tagitem{prvNot}{\ollabel{fmls-not}إذا كانت $!A$ !!a{formula}، فإن
+  $\lnot !A$ !!{formula}.}{}
+
+\tagitem{prvAnd}{إذا كانت $!A$ و$!B$ !!{formula}s، فإن
+  $(!A \land !B)$ !!a{formula}.}{}
+
+\tagitem{prvEx}{\ollabel{fmls-ex}إذا كانت $!A$ !!a{formula} وكان
+  $x$ !!a{variable}، فإن $\lexists[x][!A]$ !!a{formula}.}{}
+
+\tagitem{limitClause}{\ollabel{fmls-limit}لا شيء غير ذلك
+  !!a{formula}.}{}
+\end{enumerate}
+\end{defn}
+
+بمقتضى \olref{fmls-atom}، تكون $\Atom{\Obj P}{\Obj a}$ و
+$\Atom{\Obj P}{\Obj v_i}$ !!{formula}s لكل $i \in \Nat$.
+هذه ال!!{formula}s هي \emph{الذرية}، ومنها يبدأ البناء.
+وأما سائر البنود فتمدنا بطرائق إنشاء !!{formula}s من الصيغ
+المنشأة قبلها. فتعطي \olref{fmls-not} مثلًا أن
+$\lnot \Atom{\Obj P}{\Obj v_2}$ !!a{formula}، لأن
+$\Atom{\Obj P}{\Obj v_2}$ !!a{formula} بمقتضى
+\olref{fmls-atom}. ثم تعطي \olref{fmls-ex} أن
+$\lexists[\Obj v_2][\lnot \Atom{\Obj P}{\Obj v_2}]$
+!!{formula} كذلك، وعلى هذا نمضي. وأما \olref{fmls-limit} فتحصر
+ال!!{formula}s في السلاسل التي يُتوصل إليها بهذا البناء
+\emph{وحدها}. فيدخل
+$\lexists[\Obj v_0][\Atom{\Obj P}{\Obj a}]$ و
+$\lexists[\Obj v_0][\lexists[\Obj v_0][\Atom{\Obj P}{\Obj a}]]$
+\emph{حقًا} في ال!!{formula}s؛ ولا يدخل
+$(\lnot \Atom{\Obj P}{\Obj a})$، إذ القوسان المحيطان به زائدان
+لا تجيزهما القواعد.
+
+هذا النحو من تعريف ال!!{formula}s يسمى \emph{تعريفًا استقرائيًا}.
+وبه يتاح إثبات خواص ال!!{formula}s بطريق \emph{الاستقراء البنيوي}.
+وقد بُحث التعريف والاستقراء على وجه عام في
+\olref[mth][ind][idf]{sec} و\olref[mth][ind][sti]{sec}؛
+فراجعهما قبل الدخول في البراهين الآتية. وحاصل الطريقة أن إثبات
+خاصية لكل ال!!{formula}s يتم بأمرين: إثباتها لل!!{formula}s
+الذرية، وإثبات أنها \emph{متى} ثبتت لــ!!{formula}~$!A$
+(ولـ~$!B$)، ثبتت \emph{كذلك} لـ$\lnot !A$ و$(!A \land !B)$
+و$\lexists[x][!A]$. انظر مثلًا إلى
+$\lexists[\Obj v_2][\lnot \Atom{\Obj P}{\Obj v_2}]$:
+بالأمر الأول تثبت الخاصية لل!!{formula} الذرية
+$\Atom{\Obj P}{\Obj v_2}$؛ وبالثاني تنتقل إلى
+$\lnot \Atom{\Obj P}{\Obj v_2}$، ثم بتطبيقه مرة أخرى إلى
+$\lexists[\Obj v_2][\lnot \Atom{\Obj P}{\Obj v_2}]$.
+ولأن ال!!{formula}s جميعًا ناشئة استقراءً من ال!!{formula}s
+الذرية، شمل البرهان كل واحدة منها.
+
+
+\end{document}

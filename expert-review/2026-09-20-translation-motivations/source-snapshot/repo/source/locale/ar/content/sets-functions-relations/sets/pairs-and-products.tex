@@ -1,0 +1,130 @@
+% الجزء: sets-functions-relations
+% الفصل: sets
+% القسم: pairs-and-products
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid[ar]{sfr}{set}{pai}
+\olsection{الأزواج والصفوف المرتبة والضروب الديكارتية}
+
+\begin{explain}
+يترتب على الامتدادية أن عناصر المجموعة لا ترتيب لها. ولذلك، إذا أردنا
+تمثيل الترتيب، استعملنا \emph{الأزواج المرتبة} $\tuple{x, y}$.
+أما في الزوج غير المرتب $\{x, y\}$، فلا يهم الترتيب:
+$\{x, y\} = \{y, x\}$. وفي الزوج المرتب يهم الترتيب: فإذا كان $x
+\neq y$، فإن $\tuple{x, y} \neq \tuple{y, x}$.
+
+كيف ينبغي أن نفهم الأزواج المرتبة في نظرية المجموعات؟ من الجوهري أن
+نحافظ على الفكرة القائلة إن زوجين مرتبين يكونان متساويين إذا وفقط إذا
+تساوى عنصراهما الأولان وتساوى عنصراهما الثانيان، أي:
+\[
+  \tuple{a, b}= \tuple{c, d}\text{ إذا وفقط إذا كان }a = c \text{ وكان }b=d.
+\]
+ويمكننا تعريف الأزواج المرتبة في نظرية المجموعات باستعمال تعريف
+وينر--كوراتوفيسكي.
+\end{explain}
+
+\begin{defn}[الزوج المرتب]\ollabel{wienerkuratowski}
+	$\tuple{a, b} = \{\{a\}, \{a, b\}\}$.
+\end{defn}
+
+\begin{prob}
+	باستعمال \olref[sfr][set][pai]{wienerkuratowski}، أثبت أن $\tuple{a,
+	b}= \tuple{c, d}$ إذا وفقط إذا كان $a = c$ وكان $b=d$.
+\end{prob}
+
+\begin{explain}
+بعد تثبيت تعريف الزوج المرتب، يمكننا استعماله لتعريف مجموعات أخرى.
+فمثلًا، نريد أحيانًا متتاليات مرتبة مؤلفة من أكثر من كائنين، مثل
+\emph{الثلاثيات} $\tuple{x, y, z}$ و\emph{الرباعيات}
+$\tuple{x, y, z, u}$، وهكذا. ويمكننا فهم الثلاثيات بوصفها أزواجًا
+مرتبة خاصة، يكون فيها العنصر الأول نفسه زوجًا مرتبًا: فالثلاثية
+$\tuple{x, y, z}$ هي $\tuple{\tuple{x, y},z}$. ويصح الأمر نفسه في
+الرباعيات: فالرباعية $\tuple{x,y,z,u}$ هي
+$\tuple{\tuple{\tuple{x,y},z},u}$، وهكذا. وبوجه عام، نتحدث عن
+\emph{صفوف مرتبة من $n$ عناصر} $\tuple{x_1, \dots, x_n}$.
+
+وسوف تفيدنا مجموعات معينة من الأزواج المرتبة، أو من غيرها من الصفوف
+المرتبة المؤلفة من $n$ عناصر.
+\end{explain}
+
+\begin{defn}[الضرب الديكارتي]
+إذا كانت $A$ و$B$ مجموعتين، فإن \emph{ضربهما الديكارتي} $A \times B$
+يُعرّف بالصيغة
+\[
+  A \times B = \Setabs{\tuple{x, y}}{x \in A \text{ و } y \in B}.
+\]
+\end{defn}
+
+\begin{ex}
+إذا كانت $A = \{0, 1\}$ و$B = \{1, a, b\}$، فإن ضربهما هو
+\[
+A \times B = \{ \tuple{0, 1}, \tuple{0, a}, \tuple{0, b},
+    \tuple{1, 1}, \tuple{1, a}, \tuple{1, b} \}.
+\]
+\end{ex}
+
+\begin{ex}
+إذا كانت $A$ مجموعة، فإن ضرب $A$ في نفسها، $A \times A$، يكتب أيضًا
+بالصيغة~$A^2$. وهو مجموعة \emph{جميع} الأزواج $\tuple{x, y}$ التي
+تحقق $x, y \in A$. ومجموعة جميع الثلاثيات $\tuple{x, y, z}$ هي
+$A^3$، وهكذا. ويمكننا إعطاء تعريف عودي:
+\begin{align*}
+  A^1 & = A\\
+  A^{k+1} & = A^k \times A
+\end{align*}
+\end{ex}
+
+\begin{prob}
+اسرد جميع !!{element}s المجموعة $\{1, 2, 3\}^3$.
+\end{prob}
+
+\begin{prop}\ollabel{cardnmprod}
+إذا كان لـ$A$ عدد $n$ من !!{element}s وكان لـ$B$ عدد $m$ من
+!!{element}s، فإن لـ$A \times B$ عدد $n\cdot m$ من العناصر.
+\end{prop}
+
+\begin{proof}
+لكل !!{element}~$x$ في~$A$، يوجد عدد $m$ من !!{element}s من الصورة
+$\tuple{x, y} \in A \times B$. ولتكن
+$B_x = \Setabs{\tuple{x, y}}{y \in B}$. وبما أنه متى كان
+$x_1 \neq x_2$ كان $\tuple{x_1, y} \neq \tuple{x_2, y}$، فإن
+$B_{x_1} \cap B_{x_2} = \emptyset$. ولكن إذا كانت
+$A = \{x_1, \dots, x_n\}$، فإن
+$A \times B = B_{x_1} \cup \dots \cup B_{x_n}$، ولذلك يكون لها عدد
+$n\cdot m$ من !!{element}s.
+
+ولتَصوّر ذلك، رتّب !!{element}s~$A \times B$ في شبكة:
+\[
+\begin{array}{rcccc}
+  B_{x_1} = & \{\tuple{x_1, y_1} & \tuple{x_1, y_2} & \dots & \tuple{x_1, y_m}\}\\
+  B_{x_2} = & \{\tuple{x_2, y_1} & \tuple{x_2, y_2} & \dots & \tuple{x_2, y_m}\}\\
+  \vdots & & \vdots\\
+  B_{x_n} = & \{\tuple{x_n, y_1} & \tuple{x_n, y_2} & \dots & \tuple{x_n, y_m}\}
+\end{array}
+\]
+وبما أن قيم $x_i$ كلها مختلفة، وقيم $y_j$ كلها مختلفة، فلا يكون
+زوجان من الأزواج في هذه الشبكة متساويين، وعدد الأزواج فيها $n\cdot m$.
+\end{proof}
+
+\begin{prob}
+بيّن، بالاستقراء على~$k$، أنه لكل $k \ge 1$، إذا كان لـ$A$ عدد $n$
+من !!{element}s، فإن لـ$A^k$ عدد $n^k$ من !!{element}s.
+\end{prob}
+
+\begin{ex}
+إذا كانت $A$ مجموعة، فإن \emph{الكلمة} على~$A$ هي أي متتالية من
+!!{element}s~$A$. ويمكن فهم المتتالية بوصفها صفًا مرتبًا من $n$ من
+!!{element}s~$A$. فمثلًا، إذا كانت $A = \{a, b, c\}$، أمكن فهم
+المتتالية «$bac$» بوصفها الثلاثية~$\tuple{b, a, c}$. وللكلمات، أي
+لمتتاليات الرموز، أهمية جوهرية في علوم الحاسوب. واصطلاحًا، نعد
+!!{element}s~$A$ متتاليات طولها~$1$، ونعد $\emptyset$ متتاليةً
+طولها~$0$. وعندئذ تكون مجموعة \emph{جميع} الكلمات على~$A$ هي
+\[
+A^* = \{\emptyset\} \cup A \cup A^2 \cup A^3 \cup \dots
+\]
+\end{ex}
+
+\end{document}

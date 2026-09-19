@@ -1,0 +1,68 @@
+% Part: turing-machines
+% Chapter: machines-computations
+% Section: disciplined-machines
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{tur}{mac}{dis}
+\olsection{الآلات المنضبطة}
+
+\begin{explain}
+نظرنا في \olref[hal]{sec} في آلات لها حالة توقف معينة واحدة~${\OLId{latin-ordinary}{h}}$، فلا تقف، إن وقفت، إلا في~${\OLId{latin-ordinary}{h}}$. فهي من هذه الجهة «أشد انضباطًا» من مطلق آلات تورنغ. ويمكن فرض ضروب أخرى من الانضباط؛ إذ لم نمنع الآلة من محو علامة الطرف في الخانة~${\OLMathNumeral{0}}$، ولا من محاولة التحرك يسارًا من الخانة~${\OLMathNumeral{0}}$. وعند المحاولة يبقى الرأس، في تعريفنا، على الخانة~${\OLMathNumeral{0}}$؛ أما تعريفات غيرنا فتجعله يتوقف. وربما احتجنا أيضًا إلى أن تقف الآلة، متى وقفت، على الخانة~${\OLMathNumeral{1}}$.
+\end{explain}
+
+\begin{defn}\ollabel{defn:disciplined}
+آلة تورنغ~${\OLId{latin-looped}{M}}$ \emph{منضبطة} إذا وفقط إذا استوفت:
+\begin{enumerate}
+\item لها حالة توقف معينة وحيدة~${\OLId{latin-ordinary}{h}}$؛
+\item لا تقف إلا وهي تمسح الخانة~${\OLMathNumeral{1}}$؛
+\item لا تمحو $\TMendtape$ من الخانة~${\OLMathNumeral{0}}$ أبدًا؛
+\item لا تحاول التحرك يسارًا من الخانة~${\OLMathNumeral{0}}$ أبدًا.
+\end{enumerate}
+\end{defn}
+
+\begin{explain}
+قد بينا أن كل آلة يمكن تعديلها مع حفظ سلوكها ليكون لها توقف في حالة مخصوصة. فنزيد حالة جديدة~${\OLId{latin-ordinary}{h}}$، ونجعل $\delta({\OLId{latin-ordinary}{q}},\sigma)=\tuple{{\OLId{latin-ordinary}{h}},\sigma,\TMstay}$ لكل زوج $\tuple{{\OLId{latin-ordinary}{q}},\sigma}$ لا تعرف عنده الدالة الأصلية~$\delta$. وكذلك يمكن، وإن طال برهانه، تحويل كل آلة تورنغ~${\OLId{latin-looped}{M}}$ إلى آلة منضبطة~${\OLId{latin-looped}{M}}'$، لها مدخلات التوقف نفسها والخرج نفسه. فإذا كانت الآلة تقف خارج الخانة~${\OLMathNumeral{1}}$ مثلًا، ألحقنا بها تعليمات ترد الرأس يسارًا حتى علامة الطرف، ثم يمينًا خانة واحدة، ثم توقفه. وأما الوفاء بالشروط الأخرى فنترك طريقه للنظر.
+\end{explain}
+
+\begin{ex}
+    يبين \olref{fig:adder-disc} تعديل آلة الجمع في \olref[una]{ex:adder} حتى تصير منضبطة.
+    \begin{figure}\[
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+                    semithick]
+  \tikzstyle{every state}=[fill=none,draw=black,text=black]
+
+  \node[initial,state]         (A)              {${\OLId{latin-ordinary}{q}}_{\OLMathNumeral{0}}$};
+  \node[state]         (B) [right of=A] {${\OLId{latin-ordinary}{q}}_{\OLMathNumeral{1}}$};
+  \node[state]         (C) [below right of=B] {${\OLId{latin-ordinary}{q}}_{\OLMathNumeral{2}}$};
+  \node[state]         (D) [below left of=C] {${\OLId{latin-ordinary}{q}}_{\OLMathNumeral{3}}$};
+  \node[state]         (H) [left of=D] {${\OLId{latin-ordinary}{h}}$};
+
+  \path (A) edge node {\TMtrans{\TMblank}{\TMstroke}{\TMstay}} (B)
+           edge [loop below] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (A)
+        (B) edge [loop below] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (B)
+            edge node {\TMtrans{\TMblank}{\TMblank}{\TMleft}} (C)
+        (C) edge node {\TMtrans{\TMstroke}{\TMblank}{\TMleft}} (D)
+        (D) edge [loop above] node {\TMtrans{\TMstroke}{\TMstroke}{\TMleft}} (D)
+        edge node {\TMtrans{\TMendtape}{\TMendtape}{\TMright}} (H);
+\end{tikzpicture}
+\]\caption{الجمع بآلة منضبطة}
+\ollabel{fig:adder-disc}
+\end{figure}
+\end{ex}
+
+\begin{prop}\ollabel{prop:disciplined}
+لكل آلة تورنغ~${\OLId{latin-looped}{M}}$ آلة منضبطة~${\OLId{latin-looped}{M}}'$، تقف بخرج~${\OLId{latin-looped}{O}}$ متى وقفت ${\OLId{latin-looped}{M}}$ بخرج~${\OLId{latin-looped}{O}}$، ولا تقف متى لم تقف~${\OLId{latin-looped}{M}}$. ومن ثم فإن كل دالة ${\OLId{latin-ordinary}{f}}\colon\Nat^{\OLId{latin-ordinary}{n}}\to\Nat$ تحسبها آلة تورنغ تحسبها آلة منضبطة أيضًا.
+\end{prop}
+
+\begin{prob}\label{tur:mac:dis:prob:disc-succ}
+أنشئ آلة منضبطة لحساب ${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}})={\OLId{latin-ordinary}{x}}+{\OLMathNumeral{1}}$.
+\end{prob}
+
+\begin{prob}\label{tur:mac:dis:prob:copier}
+أنشئ آلة منضبطة تحول الدخل $\TMstroke^{\OLId{latin-ordinary}{n}}$ إلى الخرج $\TMstroke^{\OLId{latin-ordinary}{n}}\concat\TMblank\concat\TMstroke^{\OLId{latin-ordinary}{n}}$.
+\end{prob}
+
+\end{document}

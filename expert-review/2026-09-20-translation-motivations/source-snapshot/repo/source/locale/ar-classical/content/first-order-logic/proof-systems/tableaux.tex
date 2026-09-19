@@ -1,0 +1,77 @@
+% Part: first-order-logic
+% Chapter: proof-systems
+% Section: tableaux
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{prf}{tab}}
+      {\olfileid{pl}{prf}{tab}}
+
+\olsection{\usetoken{P}{tableau}}
+
+تستعمل ال!!{tableau}s ال!!{signed formula}s، حيث تستعمل أنظمة
+!!{derivation} كثيرة ترتيبات من ال!!{sentence}s.
+و!!^a{signed formula} زوج: أوله علامة قيمة صدق، $\True$ أو $\False$، وثانيه
+!!a{sentence}، هكذا:
+\[
+\sFmla{\True}{!A} \text{ أو } \sFmla{\False}{!A}.
+\]
+وأما !!^a{tableau} فشجرة متفرعة إلى أسفل تُرتَّب فيها
+!!{signed formula}s. أولها جملة \emph{فروض}، وبعدها
+!!{signed formula}s تُستخرج من ال!!{signed formula}s المتقدمة عليها بقاعدة استدلال.
+وبكل قاعدة نضيف إلى آخر الفرع واحدة أو أكثر من ال!!{signed formula}s، أو نضع اثنتين من
+!!{signed formula}s متجاورتين. وفي هذه الصورة الثانية ينشطر الفرع، وتكون الصيغتان الموقّعتان المضافتان رأسي الفرعين الجديدين.
+
+إذا أُعملت القاعدة في !!{signed formula} مركبة، كانت الزيادة
+!!{signed formula}s ذات !!{formula}s فرعية مباشرة. ولكل علامة قاعدة، فتأتي القواعد أزواجًا.
+فقاعدة $\TRule{\True}{\land}$ تعمل في~$\sFmla{\True}{!A \land !B}$،
+وتجيز إضافة كلتا الصيغتين الموقّعتين
+$\sFmla{\True}{!A}$ و~$\sFmla{\True}{!B}$ إلى آخر أي فرع يشتمل على
+$\sFmla{\True}{!A \land !B}$. وأما
+$\TRule{\False}{\land}$ فتشطر الفرع بوضع
+$\sFmla{\False}{!A}$ و$\sFmla{\False}{!B}$ متجاورتين.
+ويكون !!^a{tableau} مغلقًا متى اشتمل كل فرع على صيغتين موقّعتين متطابقتين صيغةً مختلفتين علامةً:
+$\sFmla{\True}{!A}$ و$\sFmla{\False}{!A}$.
+
+تُعرّف علاقة~$\Proves$ القائمة على ال!!{tableau}s كما يأتي:
+$\Gamma \Proves !A$ إذا وفقط إذا وجدت مجموعة منتهية
+$\Gamma_0 = \{!B_1, \dots, !B_n\} \subseteq \Gamma$ وكان ثمة
+!!{tableau} مغلق للفروض
+\[
+\{\sFmla{\False}{!A}, \sFmla{\True}{!B_1}, \dots, \sFmla{\True}{!B_n}\} 
+\]
+فمثلًا، هذا !!{tableau} مغلق يبين أن $\Proves
+(!A \land !B) \lif !A$:
+\begin{oltableau}
+  [\sFmla{\False}{(\formula{A} \land \formula{B}) \lif \formula{A}}, just = \TAss
+    [\sFmla{\True}{\formula{A} \land \formula{B}}, just = {\TRule{\False}{\lif}[1]}
+      [\sFmla{\False}{\formula{A}}, just = {\TRule{\False}{\lif}[1]}
+        [\sFmla{\True}{\formula{A}}, just = {\TRule{\True}{\land}[2]}
+          [\sFmla{\True}{\formula{B}}, just = {\TRule{\True}{\land}[2]}, close]
+        ]
+      ]
+    ]
+  ]
+\end{oltableau}
+
+تكون المجموعة~$\Gamma$ غير متسقة في حساب ال!!{tableau} إذا وجد
+!!{tableau} مغلق للفروض
+\[
+\{\sFmla{\True}{!B_1}, \dots, \sFmla{\True}{!B_n}\} 
+\]
+لبعض~$!B_i \in \Gamma$.
+
+ظهرت ال!!^{tableau}s في خمسينيات القرن العشرين عند إيفرت بِث وياكو هنتيكا، كلٌّ مستقل عن الآخر، ثم بسطها ريموند سموليان وأشاعها.
+وهي يسيرة الاستعمال؛ فإن إنشاء !!a{tableau} إجراء شديد الانتظام. وهذا الانتظام نفسه في ال!!{tableau}s يعين على تنفيذها بالحاسوب.
+غير أن قراءة !!a{tableau} قد تعسر، وقد تخفى علاقته بالبرهان. والطريقة واسعة التطبيق، حتى إن لأنساق منطقية كثيرة أنظمة
+!!{tableau}. ومن فوائد ال!!^{tableau}s أيضًا استخراج
+!!{structure}s ترضي ما يُعطى من !!{sentence}s أو مجموعات منها.
+فإن أمكن إرضاء المجموعة امتنع وجود !!{tableau} مغلق لها؛ أي بقي في كل
+!!{tableau} فرع مفتوح. وإذا استُنفدت على فرع مفتوح جميع القواعد الممكنة، أمكن أن تُقرأ منه ال!!{structure} المُرضية.
+وللطريقة صلة وثيقة بحساب التتابعيات: فإن ال!!{tableau} المغلق في أصله
+!!{derivation} مختصر من ذلك الحساب، لكن اتجاه كتابته معكوس.
+
+\end{document}

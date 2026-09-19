@@ -1,0 +1,253 @@
+% Opt-in printed counters plus an independent typed mathematical-numeral API.
+% Load after memoir, OpenLogic, and open-logic-defer; install last in preamble:
+%   \input{open-logic-numerals-ar-classical.tex}
+%   \OLClassicalInstallNumerals
+% Merely inputting this file does not change any counter or hyperref option.
+\ifdefined\OLClassicalInstallNumerals\endinput\fi
+\ProvidesFile{open-logic-numerals-ar-classical.tex}[2026/09/04 opt-in Eastern Arabic counters]
+% This is a .tex input, so LaTeX does not make @ a letter automatically.
+% Tokenize internal commands correctly when loaded by the public reader.
+\makeatletter
+\ExplSyntaxOn
+
+\providecommand*{\OLClassicalMathNumeralFontPath}{../ar/fonts/vendor/xits-1.302/XITSMath-Regular.otf}
+\msg_new:nnn {ol-classical-numerals}{math-engine}
+  {Typed~mathematical~numerals~require~LuaLaTeX.}
+\msg_new:nnn {ol-classical-numerals}{math-input}
+  {OLMathNumeral~accepts~one~nonempty~literal~ASCII~digit~run;~received~'#1'.}
+\msg_new:nnn {ol-classical-numerals}{math-glyph}
+  {Pinned~mathematical~font~does~not~contain~U+#1.}
+
+% Fully expandable plain-text formatter, suitable for .aux/.toc/PDF strings.
+% The argument must expand to a plain counter string, not decorated TeX.
+% It is intentionally NOT a prose, formula, URL, label-key or code filter.
+\cs_new:Npn \__olc_digit:n #1
+  {
+    \str_case:nnF {#1}
+      {
+        {0}{٠} {1}{١} {2}{٢} {3}{٣} {4}{٤}
+        {5}{٥} {6}{٦} {7}{٧} {8}{٨} {9}{٩}
+      }
+      {#1}
+  }
+\NewExpandableDocumentCommand \OLClassicalDigits { m }
+  { \exp_args:Ne \str_map_function:nN {#1} \__olc_digit:n }
+\NewExpandableDocumentCommand \OLClassicalCounter { m }
+  { \OLClassicalDigits { \int_use:c { c@#1 } } }
+
+% Typed formula numerals are deliberately separate from printed counters.
+% No digit mathcode is changed and this command is never installed globally.
+% A materialized occurrence retains its exact ASCII source in the external
+% occurrence registry; the wrapper accepts only the literal digit run itself.
+\clist_const:Nn \c__olc_math_digit_codes_clist
+  {0660,0661,0662,0663,0664,0665,0666,0667,0668,0669}
+\cs_new_protected:Npn \__olc_math_require_glyph:n #1
+  {
+    \iffontchar\OLClassicalMathNumeralSelectedFont "#1\scan_stop:
+    \else
+      \msg_fatal:nnn {ol-classical-numerals}{math-glyph}{#1}
+    \fi
+  }
+\cs_new_protected:Npn \__olc_math_select_font:n #1
+  {
+    \cs_if_exist:cF {g__olc_math_digit_font_#1}
+      {
+        \tex_global:D \exp_after:wN \tex_font:D
+          \cs:w g__olc_math_digit_font_#1\cs_end:
+          = "[\OLClassicalMathNumeralFontPath]:mode=base"~at~#1pt\scan_stop:
+        \cs_set_eq:Nc \OLClassicalMathNumeralSelectedFont
+          {g__olc_math_digit_font_#1}
+        \clist_map_function:NN \c__olc_math_digit_codes_clist
+          \__olc_math_require_glyph:n
+      }
+    \cs_set_eq:Nc \OLClassicalMathNumeralSelectedFont
+      {g__olc_math_digit_font_#1}
+    \OLClassicalMathNumeralSelectedFont
+  }
+\cs_new_protected:Npn \__olc_math_numeral_box:nn #1#2
+  {
+    \hbox
+      {
+        \textdir TLT
+        \__olc_math_select_font:n {#1}
+        \str_map_inline:nn {#2} {\__olc_digit:n {##1}}
+      }
+  }
+\cs_new_protected:Npn \__olc_math_numeral:n #1
+  {
+    \sys_if_engine_luatex:F
+      {\msg_fatal:nn {ol-classical-numerals}{math-engine}}
+    \regex_match:nnTF {\A[0-9]+\Z} {#1}
+      {
+        \check@mathfonts
+        \mathord
+          {
+            \mathchoice
+              {\__olc_math_numeral_box:nn {\tf@size} {#1}}
+              {\__olc_math_numeral_box:nn {\tf@size} {#1}}
+              {\__olc_math_numeral_box:nn {\sf@size} {#1}}
+              {\__olc_math_numeral_box:nn {\ssf@size} {#1}}
+          }
+      }
+      {\msg_fatal:nnn {ol-classical-numerals}{math-input}{#1}}
+  }
+\NewDocumentCommand \OLMathNumeral { m }
+  {\ensuremath{\__olc_math_numeral:n {#1}}}
+
+% Keep inherited hierarchy, separators, appendix letters and theorem aliases.
+% Nested conversion is idempotent. Local recaptures remain local, so e.g. a
+% grouped appendix cannot leak its saved chapter formatter out of that group.
+\clist_const:Nn \c__olc_wrapped_counters_clist
+  {
+    part,chapter,section,subsection,subsubsection,paragraph,subparagraph,
+    thm,ex,lem,prop,cor,defn,prob,probd,rem,note,case,conv,
+    equation,figure,table
+  }
+\cs_new_protected:Npn \__olc_wrap_counter:n #1
+  {
+    \cs_if_exist:cT { the#1 }
+      {
+        \cs_if_exist:cF { __olc_print_#1: }
+          {
+            \cs_set:cpn { __olc_print_#1: }
+              { \OLClassicalDigits { \use:c { __olc_original_#1: } } }
+          }
+        \cs_if_eq:ccF { the#1 } { __olc_print_#1: }
+          {
+            \cs_set_eq:cc { __olc_original_#1: } { the#1 }
+            \cs_set_eq:cc { the#1 } { __olc_print_#1: }
+          }
+      }
+  }
+\cs_new_protected:Npn \__olc_decimal_counter:n #1
+  {
+    \cs_if_exist:cT { c@#1 }
+      { \cs_set:cpn { the#1 } { \OLClassicalCounter {#1} } }
+  }
+\cs_new_protected:Npn \__olc_refresh:
+  {
+    \clist_map_function:NN \c__olc_wrapped_counters_clist
+      \__olc_wrap_counter:n
+    \clist_map_inline:nn { enumi,enumii,enumiii,enumiv,footnote,mpfootnote }
+      { \__olc_decimal_counter:n {##1} }
+  }
+\cs_new_protected:Npn \__olc_set_page:
+  { \cs_gset:Npn \thepage { \OLClassicalCounter {page} } }
+
+\bool_new:N \g__olc_installed_bool
+\bool_new:N \l__olc_supported_bool
+\cs_new_protected:Npn \__olc_error:nn #1#2
+  { \PackageError {open-logic-numerals-ar-classical} {#1} {#2} }
+\cs_new_protected:Npn \__olc_requirements:
+  {
+    \bool_set_true:N \l__olc_supported_bool
+    \int_compare:nNnF { \tex_currentgrouplevel:D } = {0}
+      {
+        \bool_set_false:N \l__olc_supported_bool
+        \__olc_error:nn {Install~at~top-level~in~the~preamble}
+          {A~grouped~installation~could~discard~local~display~definitions.}
+      }
+    \@ifclassloaded {memoir} { }
+      {
+        \bool_set_false:N \l__olc_supported_bool
+        \__olc_error:nn {The~memoir~class~is~required}
+          {This~isolated~formatter~targets~the~inspected~OpenLogic~memoir~driver.}
+      }
+    \@ifpackageloaded {hyperref} { }
+      {
+        \bool_set_false:N \l__olc_supported_bool
+        \__olc_error:nn {Load~hyperref~before~installing~numerals}
+          {Install~after~the~OpenLogic~master~style.}
+      }
+    \@ifpackageloaded {enumitem}
+      {
+        \bool_set_false:N \l__olc_supported_bool
+        \__olc_error:nn {enumitem~is~not~supported~by~this~formatter}
+          {Do~not~silently~use~the~memoir~enumerate~adapter~with~enumitem.}
+      } { }
+    \clist_map_inline:nn
+      { @enLabel,@smemfront,@smemmain,settitlingpagenumbering }
+      {
+        \cs_if_exist:cF {##1}
+          {
+            \bool_set_false:N \l__olc_supported_bool
+            \__olc_error:nn {Required~memoir~interface~missing:~##1}
+              {Reinspect~the~installed~memoir~version~before~integration.}
+          }
+      }
+  }
+\cs_new_protected:Npn \__olc_assert_anchor_mode:
+  {
+    \ifHy@hypertexnames
+      \__olc_error:nn {hypertexnames=false~must~remain~enabled}
+        {Printed~page~numbers~may~repeat~after~resets.~Keep~OpenLogic's~
+         sequential~ASCII~destination~mode;~do~not~derive~targets~from~thepage.}
+    \fi
+  }
+
+\NewDocumentCommand \OLClassicalRefreshPrintedCounters { }
+  {
+    \bool_if:NTF \g__olc_installed_bool { \__olc_refresh: }
+      {
+        \__olc_error:nn {Numerals~have~not~been~installed}
+          {Call~OLClassicalInstallNumerals~in~the~preamble~first.}
+      }
+  }
+\NewDocumentCommand \OLClassicalInstallNumerals { }
+  {
+    \bool_if:NF \g__olc_installed_bool
+      {
+        \__olc_requirements:
+        \bool_if:NT \l__olc_supported_bool
+          {
+            \bool_gset_true:N \g__olc_installed_bool
+            % Already the OpenLogic default: preserve its target mechanism.
+            % Never redefine arabic, @arabic, theH*, or theol* identifiers.
+            \hypersetup { unicode=true,hypertexnames=false,bookmarksnumbered=true }
+            \__olc_refresh:
+            \__olc_set_page:
+            \settitlingpagenumbering { \OLClassicalCounter }
+
+            % Memoir has an sm signature, unlike the base LaTeX command.
+            % Copy it with NewCommandCopy, not let (xparse command internals).
+            % Delegate all counter arithmetic and preserve the starred form.
+            \NewCommandCopy \OLClassicalOriginalPageNumbering \pagenumbering
+            \RenewDocumentCommand \pagenumbering { s m }
+              {
+                \IfBooleanTF {##1}
+                  { \OLClassicalOriginalPageNumbering * {##2} }
+                  { \OLClassicalOriginalPageNumbering {##2} }
+                % Explicitly hidden page numbers stay hidden; otherwise even
+                % frontmatter's roman request is printed in Eastern decimal.
+                \str_if_eq:nnF {##2} {gobble} { \__olc_set_page: }
+              }
+
+            % Memoir's optional A/a/i/I/1 list marker selects a formatter.
+            % Change only that selection: punctuation, literal groups and
+            % explicit \item[...] labels remain untouched. Width measurement
+            % in @@enum@ therefore sees the selected Eastern numeral too.
+            \cs_new_eq:NN \__olc_original_enlabel: \@enLabel
+            \cs_set:Npn \@enLabel ##1##2
+              { \__olc_original_enlabel: \OLClassicalCounter ##2 }
+
+            % These are inspected no-argument memoir internals. Do not append
+            % code to frontmatter/mainmatter's star-reading parser itself.
+            \AddToHook { cmd/@smemfront/after } [olc-numerals] { \__olc_refresh: }
+            \AddToHook { cmd/@smemmain/after } [olc-numerals] { \__olc_refresh: }
+            \AddToHook { cmd/appendix/after } [olc-numerals] { \__olc_refresh: }
+            \AddToHook { begindocument/end } [olc-numerals]
+              { \__olc_refresh: \__olc_assert_anchor_mode: }
+            \AddToHook { shipout/before } [olc-numerals]
+              { \__olc_assert_anchor_mode: }
+            \AddToHook { package/enumitem/before } [olc-numerals]
+              {
+                \__olc_error:nn {Do~not~load~enumitem~after~installing~numerals}
+                  {This~edition~currently~uses~the~memoir~enumerate~adapter.}
+              }
+          }
+      }
+  }
+\@onlypreamble \OLClassicalInstallNumerals
+\ExplSyntaxOff
+\makeatother
+\endinput

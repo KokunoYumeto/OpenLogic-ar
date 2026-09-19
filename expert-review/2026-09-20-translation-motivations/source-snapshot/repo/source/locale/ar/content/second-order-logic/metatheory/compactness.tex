@@ -1,0 +1,66 @@
+% Part: second-order-logic
+% Chapter: metatheory
+% Section: compactness
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sol}{met}{com}
+
+\olsection{منطق الرتبة الثانية غير متراص}
+
+\begin{explain}
+سمّ مجموعة من الجمل~$\Gamma$ \emph{قابلة للإرضاء منتهيًا} إذا كانت كل
+مجموعة جزئية منتهية منها قابلة للإرضاء. ولمنطق الرتبة الأولى الخاصية
+القائلة إنه إذا كانت مجموعة من~!!{sentence}s~$\Gamma$ قابلة للإرضاء
+منتهيًا، فهي قابلة للإرضاء. وتسمى هذه الخاصية \emph{التراص}. ولها صيغة
+مكافئة تتعلق بالاستلزام: إذا كانت~$\Gamma \Entails !A$، فثمة بالفعل
+مجموعة جزئية منتهية~$\Gamma_0 \subseteq \Gamma$ بحيث
+$\Gamma_0 \Entails !A$. وفي هذه الصيغة تكون الخاصية نتيجة مباشرة
+لمبرهنة الاكتمال: فإذا كانت~$\Gamma \Entails !A$، فإن
+$\Gamma \Proves !A$ بحسب الاكتمال. لكن~!!{derivation} لا يمكنه أن
+يستعمل إلا عددًا منتهيًا من~!!{sentence}s~$\Gamma$.
+
+ولا يصدق التراص في منطق الرتبة الثانية. فثمة مجموعات من~!!{sentence}s
+الرتبة الثانية قابلة للإرضاء منتهيًا لكنها غير قابلة للإرضاء، وتستلزم
+صيغة ما~$!A$ من دون أن تستلزم أي مجموعة جزئية منتهية منها~$!A$.
+\end{explain}
+
+\begin{thm}
+\ollabel{thm:sol-not-compact}
+منطق الرتبة الثانية غير متراص.
+\end{thm}
+
+\begin{proof}
+تذكّر أن
+\[
+\fn{Inf} \ident \lexists[u][(\lforall[x][\lforall[y][(\eq[u(x)][u(y)]
+      \lif \eq[x][y])]] \land \lexists[y][\lforall[x][\eq/[y][u(x)]]])]
+\]
+تُرضى في~!!a{structure} إذا وفقط إذا كان مجالها لانهائيًا. ولتكن
+$!A^{\ge n}$ جملة تقرر أن للمجال~$n$ من~!!{element}s على الأقل، مثلًا:
+\[
+!A^{\ge n} \ident \lexists[x_1][\dots\lexists[x_n][(\eq/[x_1][x_2]
+    \land \eq/[x_1][x_3] \land \dots \land \eq/[x_{n-1}][x_n])]].
+\]
+تأمل مجموعة الـ!!{sentence}s
+\[
+\Gamma = \{\lnot \fn{Inf}, !A^{\ge 1}, !A^{\ge 2}, !A^{\ge 3}, \dots\}.
+\]
+إنها قابلة للإرضاء منتهيًا، لأنه لكل مجموعة جزئية منتهية~$\Gamma_0
+\subseteq \Gamma$ يوجد~$k$ بحيث~$!A^{\ge k} \in \Gamma$، لكن لا توجد
+$!A^{\ge n} \in \Gamma_0$ لأي~$n>k$. فإذا كان لـ$\Domain{M}$
+$k$ من~!!{element}s، كانت~$\Sat{M}{\Gamma_0}$. لكن~$\Gamma$ غير
+قابلة للإرضاء: فإذا كانت~$\Sat{M}{\lnot \fn{Inf}}$، فلا بد أن يكون
+$\Domain{M}$ منتهيًا، وليكن حجمه~$k$. وعندئذ
+$\Sat/{M}{!A^{\ge k+1}}$.
+\end{proof}
+
+\begin{prob}
+أعط مثالًا لمجموعة~$\Gamma$ و!!a{sentence}~$!A$ بحيث
+$\Gamma \Entails !A$، لكن لكل مجموعة جزئية منتهية~$\Gamma_0 \subseteq
+\Gamma$ تكون~$\Gamma_0 \Entails/ !A$.
+\end{prob}
+
+\end{document}

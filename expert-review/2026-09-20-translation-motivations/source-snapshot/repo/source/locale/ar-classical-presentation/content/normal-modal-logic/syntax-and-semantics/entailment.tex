@@ -1,0 +1,86 @@
+% Part: normal-modal-logic
+% Chapter: syntax-and-semantics
+% Section: entailment
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{syn}{ent}
+
+\olsection{اللزوم}
+
+\begin{explain}
+  بعد ضبط الصدق في عالم، يمكن ضبط اللزوم بين ال!!{formula}s.
+  فمعنى أن !!^a{formula}~$!B$ تلزم الصيغة~$!A$ أن~$!A$
+  تصدق كلما صدقت~$!B$. وليس المراد عالمًا بعينه ولا نموذجًا بعينه؛
+  بل يجري هذا الشرط في أي عالم من أي نموذج.
+\end{explain}
+
+\begin{defn}
+  إذا كانت~${\OLId{greek-variable}{Gamma}}$ مجموعة من ال!!{formula}s وكانت~$!A$ !!a{formula}،
+  فإن~${\OLId{greek-variable}{Gamma}}$ \emph{تلزم}~$!A$، ويرمز إلى ذلك بـ
+  ${\OLId{greek-variable}{Gamma}} \Entails !A$، إذا وفقط إذا كان لكل نموذج
+  $\mModel{M} = \tuple{{\OLId{latin-looped}{W}}, {\OLId{latin-looped}{R}}, {\OLId{latin-looped}{V}}}$ وعالم~${\OLId{latin-ordinary}{w}} \in {\OLId{latin-looped}{W}}$: إذا كان
+  $\mSat{{\OLId{latin-looped}{M}}}{!B}[{\OLId{latin-ordinary}{w}}]$ لكل~$!B \in {\OLId{greek-variable}{Gamma}}$، فإن~$\mSat{{\OLId{latin-looped}{M}}}{!A}[{\OLId{latin-ordinary}{w}}]$.
+  وإذا لم تحو~${\OLId{greek-variable}{Gamma}}$ إلا !!{formula} واحدة~$!B$، كتبنا
+  $!B \Entails !A$.
+\end{defn}
+
+\begin{ex}
+  إثبات لزوم !!a{formula} لأخرى يقتضي استدلالًا يعم النماذج،
+  مستنده تعريف~$\mSat{{\OLId{latin-looped}{M}}}{}[{\OLId{latin-ordinary}{w}}]$. ولنبرهن مثلًا
+  ${\OLId{latin-ordinary}{p}} \lif \Diamond {\OLId{latin-ordinary}{p}} \Entails \Box\lnot {\OLId{latin-ordinary}{p}} \lif \lnot {\OLId{latin-ordinary}{p}}$.
+  خذ~$\mModel{M} = \tuple{{\OLId{latin-looped}{W}}, {\OLId{latin-looped}{R}}, {\OLId{latin-looped}{V}}}$ وعالمًا~${\OLId{latin-ordinary}{w}} \in {\OLId{latin-looped}{W}}$،
+  وافرض~$\mSat{{\OLId{latin-looped}{M}}}{{\OLId{latin-ordinary}{p}} \lif \Diamond {\OLId{latin-ordinary}{p}}}[{\OLId{latin-ordinary}{w}}]$. نريد
+  $\mSat{{\OLId{latin-looped}{M}}}{\Box\lnot {\OLId{latin-ordinary}{p}} \lif \lnot {\OLId{latin-ordinary}{p}}}[{\OLId{latin-ordinary}{w}}]$؛ فلو انتفى لكان
+  $\mSat{{\OLId{latin-looped}{M}}}{\Box\lnot {\OLId{latin-ordinary}{p}}}[{\OLId{latin-ordinary}{w}}]$ و$\mSat/{{\OLId{latin-looped}{M}}}{\lnot {\OLId{latin-ordinary}{p}}}[{\OLId{latin-ordinary}{w}}]$.
+  ومن~$\mSat/{{\OLId{latin-looped}{M}}}{\lnot {\OLId{latin-ordinary}{p}}}[{\OLId{latin-ordinary}{w}}]$ نحصل على~$\mSat{{\OLId{latin-looped}{M}}}{{\OLId{latin-ordinary}{p}}}[{\OLId{latin-ordinary}{w}}]$.
+  ثم إن~$\mSat{{\OLId{latin-looped}{M}}}{{\OLId{latin-ordinary}{p}} \lif \Diamond {\OLId{latin-ordinary}{p}}}[{\OLId{latin-ordinary}{w}}]$ مفروض، فينتج
+  $\mSat{{\OLId{latin-looped}{M}}}{\Diamond {\OLId{latin-ordinary}{p}}}[{\OLId{latin-ordinary}{w}}]$. ومعنى~$\mSat{{\OLId{latin-looped}{M}}}{\Diamond {\OLId{latin-ordinary}{p}}}[{\OLId{latin-ordinary}{w}}]$
+  وجود~${\OLId{latin-ordinary}{w}}'$ يحقق~$Rww'$ وتصدق فيه~${\OLId{latin-ordinary}{p}}$، أي~$\mSat{{\OLId{latin-looped}{M}}}{{\OLId{latin-ordinary}{p}}}[{\OLId{latin-ordinary}{w}}']$.
+  غير أن~$\mSat{{\OLId{latin-looped}{M}}}{\Box \lnot {\OLId{latin-ordinary}{p}}}[{\OLId{latin-ordinary}{w}}]$ يقتضي
+  $\mSat{{\OLId{latin-looped}{M}}}{\lnot {\OLId{latin-ordinary}{p}}}[{\OLId{latin-ordinary}{w}}']$؛ فقد اجتمع النقيضان.
+
+  ولكي نثبت أن !!a{formula}~$!B$ لا تلزم أخرى~$!A$، يجب أن نقدم
+  مثالًا مضادًا، أي نموذجًا~$\mModel{M} = \tuple{{\OLId{latin-looped}{W}}, {\OLId{latin-looped}{R}}, {\OLId{latin-looped}{V}}}$ نثبت فيه
+  أنه، في عالم ما~${\OLId{latin-ordinary}{w}} \in {\OLId{latin-looped}{W}}$، لدينا~$\mSat{{\OLId{latin-looped}{M}}}{!B}[{\OLId{latin-ordinary}{w}}]$ لكن
+  $\mSat/{{\OLId{latin-looped}{M}}}{!A}[{\OLId{latin-ordinary}{w}}]$. فلنثبت أن
+  ${\OLId{latin-ordinary}{p}} \lif \Diamond {\OLId{latin-ordinary}{p}} \Entails/ \Box {\OLId{latin-ordinary}{p}} \lif {\OLId{latin-ordinary}{p}}$. تأمل النموذج في
+  \olref{fig:counterex}. لدينا~$\mSat{{\OLId{latin-looped}{M}}}{\Diamond {\OLId{latin-ordinary}{p}}}[{\OLId{latin-ordinary}{w}}_{\OLMathNumeral{1}}]$، ومن ثم
+  $\mSat{{\OLId{latin-looped}{M}}}{{\OLId{latin-ordinary}{p}} \lif \Diamond {\OLId{latin-ordinary}{p}}}[{\OLId{latin-ordinary}{w}}_{\OLMathNumeral{1}}]$. لكن، لما كان
+  $\mSat{{\OLId{latin-looped}{M}}}{\Box {\OLId{latin-ordinary}{p}}}[{\OLId{latin-ordinary}{w}}_{\OLMathNumeral{1}}]$ مع~$\mSat/{{\OLId{latin-looped}{M}}}{{\OLId{latin-ordinary}{p}}}[{\OLId{latin-ordinary}{w}}_{\OLMathNumeral{1}}]$، كان
+  $\mSat/{{\OLId{latin-looped}{M}}}{\Box {\OLId{latin-ordinary}{p}} \lif {\OLId{latin-ordinary}{p}}}[{\OLId{latin-ordinary}{w}}_{\OLMathNumeral{1}}]$.
+  \begin{figure}
+  \begin{center}
+    \begin{tikzpicture}[modal]
+      \node[world] (w1) [label=right:\mFalse{{\OLId{latin-ordinary}{p}}}]{${\OLId{latin-ordinary}{w}}_{\OLMathNumeral{1}}$};
+      \node[world] (w2) [label=right:\mTrue{{\OLId{latin-ordinary}{p}}}, above left=of w1]{${\OLId{latin-ordinary}{w}}_{\OLMathNumeral{2}}$};
+      \node[world] (w3) [label=right:\mTrue{{\OLId{latin-ordinary}{p}}}, above right=of w1] {${\OLId{latin-ordinary}{w}}_{\OLMathNumeral{3}}$};
+      \draw[->] (w1) to (w2);
+      \draw[->] (w1) to (w3);
+    \end{tikzpicture}
+  \end{center}
+  \caption{مثال مضاد لـ${\OLId{latin-ordinary}{p}} \lif \Diamond {\OLId{latin-ordinary}{p}}
+  \Entails \Box {\OLId{latin-ordinary}{p}} \lif {\OLId{latin-ordinary}{p}}$.}
+  \ollabel{fig:counterex}
+  \end{figure}
+
+  وقد يغني المثال المضاد اليسير عن رسم أطول. فخذ النموذج
+  $\mModel{M'} = \tuple{{\OLId{latin-looped}{W}}', {\OLId{latin-looped}{R}}', {\OLId{latin-looped}{V}}'}$ حيث~${\OLId{latin-looped}{W}}' = \{{\OLId{latin-ordinary}{w}}\}$،
+  و${\OLId{latin-looped}{R}}' = \emptyset$، و${\OLId{latin-looped}{V}}'({\OLId{latin-ordinary}{p}}) = \emptyset$. هو مثال مضاد أيضًا:
+  فمن~$\mSat/{{\OLId{latin-looped}{M}}'}{{\OLId{latin-ordinary}{p}}}[{\OLId{latin-ordinary}{w}}]$ ينتج~$\mSat{{\OLId{latin-looped}{M}}'}{{\OLId{latin-ordinary}{p}} \lif \Diamond {\OLId{latin-ordinary}{p}}}[{\OLId{latin-ordinary}{w}}]$.
+  ولما لم يصل~${\OLId{latin-ordinary}{w}}$ إلى عالم أصلًا، ثبت~$\mSat{{\OLId{latin-looped}{M}}'}{\Box {\OLId{latin-ordinary}{p}}}[{\OLId{latin-ordinary}{w}}]$؛
+  فحصل~$\mSat/{{\OLId{latin-looped}{M}}'}{\Box {\OLId{latin-ordinary}{p}} \lif {\OLId{latin-ordinary}{p}}}[{\OLId{latin-ordinary}{w}}]$.
+\end{ex}
+
+\begin{prob}
+  أثبت أن~$\Box (!A \land !B) \Entails \Box !A$.
+\end{prob}
+
+\begin{prob}
+  أثبت أن~$\Box ({\OLId{latin-ordinary}{p}} \lif {\OLId{latin-ordinary}{q}}) \Entails/ {\OLId{latin-ordinary}{p}} \lif \Box {\OLId{latin-ordinary}{q}}$ وأن
+  ${\OLId{latin-ordinary}{p}} \lif \Box {\OLId{latin-ordinary}{q}} \Entails/\Box ({\OLId{latin-ordinary}{p}} \lif {\OLId{latin-ordinary}{q}})$.
+\end{prob}
+
+\end{document}

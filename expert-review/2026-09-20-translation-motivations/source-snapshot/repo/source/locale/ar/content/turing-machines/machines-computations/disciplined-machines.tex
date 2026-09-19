@@ -1,0 +1,90 @@
+% Part: turing-machines
+% Chapter: machines-computations
+% Section: disciplined-machines
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{tur}{mac}{dis}
+\olsection{الآلات المنضبطة}
+
+\begin{explain}
+نظرنا في القسم \olref[hal]{sec} في آلات تورنغ ذات حالة توقف واحدة
+معينة~$h$؛ ومضمون لها، إن توقفت أصلًا، أن تتوقف في الحالة~$h$. وبهذا
+المعنى تكون الآلات ذات حالة التوقف الواحدة «أشد انضباطًا» مما نسمح به
+لآلات تورنغ بوجه عام. وثمة قيود أخرى يمكن أن نفرضها على سلوك آلات
+تورنغ. فمثلًا لم نحظر عليها محو علامة نهاية الشريط من الخانة~$0$، ولا
+محاولة التحرك يسارًا من الخانة~$0$. (ينص تعريفنا على أن الرأس يبقى
+ببساطة في الخانة~$0$ في هذه الحال؛ أما تعريفات أخرى فتجعل الآلة
+تتوقف.) ومن المرغوب فيه أحيانًا أيضًا أن نستطيع افتراض أن آلة تورنغ،
+إن توقفت أصلًا، تتوقف في الخانة~$1$.
+\end{explain}
+
+\begin{defn}\ollabel{defn:disciplined}
+تكون آلة تورنغ~$M$ \emph{منضبطة} إذا وفقط إذا
+\begin{enumerate}
+    \item كانت لها حالة توقف واحدة معينة~$h$،
+    \item توقفت، إن توقفت أصلًا، وهي تمسح الخانة~$1$،
+    \item لم تمح قط الرمز $\TMendtape$ من الخانة~$0$، و
+    \item لم تحاول قط التحرك يسارًا من الخانة~$0$.
+\end{enumerate}
+\end{defn}
+
+\begin{explain}
+سبق أن ناقشنا إمكان تحويل كل آلة تورنغ إلى آلة لها السلوك نفسه وحالة
+توقف معينة. ويتم ذلك ببساطة بإضافة حالة جديدة~$h$، وإضافة تعليمة
+$\delta(q,\sigma)=\tuple{h,\sigma,\TMstay}$ لكل زوج
+$\tuple{q,\sigma}$ تكون عنده الدالة الأصلية~$\delta$ غير معرّفة.
+وصحيح، وإن كان إثباته مضجرًا، أنه يمكن تحويل كل آلة تورنغ~$M$ إلى آلة
+تورنغ منضبطة~$M'$ تتوقف عند المدخلات نفسها وتنتج الخرج نفسه. فمثلًا،
+إذا توقفت آلة تورنغ ولم تكن في الخانة~$1$، أمكننا إضافة تعليمات تجعل
+الرأس يتحرك يسارًا حتى يجد علامة نهاية الشريط، ثم يتحرك خانة واحدة
+نحو اليمين، ثم يتوقف. وسنترك لك التفكير في كيفية معالجة الشروط
+الأخرى.
+\end{explain}
+
+\begin{ex}
+    في \olref{fig:adder-disc} نحول آلة الجمع الواردة في
+    \olref[una]{ex:adder} إلى آلة منضبطة.
+    \begin{figure}\[
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+                    semithick]
+  \tikzstyle{every state}=[fill=none,draw=black,text=black]
+
+  \node[initial,state]         (A)              {$q_0$};
+  \node[state]         (B) [right of=A] {$q_1$};
+  \node[state]         (C) [below right of=B] {$q_2$};
+  \node[state]         (D) [below left of=C] {$q_3$};
+  \node[state]         (H) [left of=D] {$h$};
+
+  \path (A) edge node {\TMtrans{\TMblank}{\TMstroke}{\TMstay}} (B)
+           edge [loop below] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (A)
+        (B) edge [loop below] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (B)
+            edge node {\TMtrans{\TMblank}{\TMblank}{\TMleft}} (C)
+        (C) edge node {\TMtrans{\TMstroke}{\TMblank}{\TMleft}} (D)
+        (D) edge [loop above] node {\TMtrans{\TMstroke}{\TMstroke}{\TMleft}} (D)
+        edge node {\TMtrans{\TMendtape}{\TMendtape}{\TMright}} (H);
+\end{tikzpicture}
+\]\caption{آلة جمع منضبطة}
+\ollabel{fig:adder-disc}
+\end{figure}
+\end{ex}
+
+\begin{prop}\ollabel{prop:disciplined} لكل آلة تورنغ~$M$ آلة تورنغ
+منضبطة~$M'$ تتوقف بخرج~$O$ إذا توقفت $M$ بخرج~$O$، ولا تتوقف إذا لم
+تتوقف~$M$. وعلى وجه الخصوص، كل دالة $f\colon\Nat^n\to\Nat$ تحسبها
+آلة تورنغ تحسبها أيضًا آلة تورنغ منضبطة.
+\end{prop}
+
+\begin{prob}\label{tur:mac:dis:prob:disc-succ}
+أعط آلة منضبطة تحسب $f(x)=x+1$.
+\end{prob}
+
+
+\begin{prob}\label{tur:mac:dis:prob:copier}
+جد آلة منضبطة تنتج، إذا بدأت عند الدخل $\TMstroke^n$، الخرج
+$\TMstroke^n\concat\TMblank\concat\TMstroke^n$.
+\end{prob}
+
+\end{document}

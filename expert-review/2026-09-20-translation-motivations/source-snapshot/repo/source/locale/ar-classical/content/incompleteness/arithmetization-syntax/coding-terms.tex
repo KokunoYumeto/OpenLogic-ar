@@ -1,0 +1,117 @@
+% Part: incompleteness
+% Chapter: arithmetization-syntax
+% Section: coding-terms
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{art}{trm}
+\olsection{ترميز الحدود}
+
+\begin{explain}
+الحد متتالية رموز ذات بناء مخصوص، تنشأ استقرائيًا
+من الثوابت والمتغيرات بقواعد تكوين الحدود.
+ولما أمكن ترميز الرموز، ثم متتاليات أعدادها،
+لم يشق تعيين عدد غودل لكل حد. وإنما المطلوب
+الأدق أن نثبت أن تمييز عدد غودل لحد حسن
+التكوين قابل للحساب، بل عودي بدائي.
+\end{explain}
+
+!!^{variable}s وال!!{constant}s أول الحدود وأبسطها.
+واختبار كون $x$ عدد غودل لأحدها يسير:
+فـ$\fn{Var}(x)$ تصدق إذا كان $x$ هو
+$\Gn{\Obj v_i}$ لبعض~$i$. أي إن $x$
+يرمز متتالية طولها~$1$، وعنصرها الوحيد
+$(x)_0$ رمز !!{variable}~$\Obj v_i$.
+فتكون قيمة $x$ هي $\tuple{\tuple{1, i}}$
+لبعض~$i$. ونظير ذلك $\fn{Const}(x)$:
+تصدق إذا كان $x$ هو $\Gn{\Obj c_i}$
+لبعض~$i$. والعلاقتان عوديتان بدائيتان،
+إذ الشاهد $i$ إن وجد كان $< x$:
+\begin{align*}
+  \fn{Var}(x) & \defiff \bexists{i<x}{x = \tuple{\tuple{1, i}}}\\
+  \fn{Const}(x) & \defiff \bexists{i<x}{x = \tuple{\tuple{2, i}}}
+\end{align*}
+
+\begin{prop}
+\ollabel{prop:term-primrec}
+كل من $\fn{Term}(x)$ و$\fn{ClTerm}(x)$ عودية بدائية،
+ومعناهما أن $x$ عدد غودل لحد، ولحد مغلق، على الترتيب.
+\end{prop}
+
+\begin{proof}
+متتالية الرموز~$s$ حد إذا وفقط إذا وجدت
+متتالية حدود $s_0$، \dots، $s_{k-1}=s$
+تسجل بناء~$s$ من ال!!{constant}s
+وال!!{variable}s بقواعد التكوين.
+ولصحة متتالية البناء لا بد، لكل $i<k$،
+من أحد الأمور الآتية:
+\begin{enumerate}
+\item $s_i$ !!a{variable}~$\Obj v_j$؛
+\item أو $s_i$ !!a{constant}~$\Obj c_j$؛
+\item أو $s_i$ مؤلف من $n$ حدود
+  $t_1$، \dots، $t_n$ سبقت الموضع~$i$،
+  باستعمال !!{function}~$\Obj f^n_j$ ذات $n$ مواضع.
+\end{enumerate}
+فنحتاج إلى التعبير عن هذا الشرط على أعداد غودل
+بدوال وعلاقات عودية بدائية وكمّات محدودة؛
+ليثبت أن العلاقة المناظرة عودية بدائية.
+
+ليكن $y$ رمز المتتالية $s_0$، \dots، $s_{k-1}$،
+أي $y=\tuple{\Gn{s_0}, \dots, \Gn{s_{k-1}}}$.
+وكونه رمز متتالية تكوين للحد ذي عدد غودل~$x$
+يتوقف على تحقق أحد الشروط الآتية لكل $i<k$:
+\begin{enumerate}
+\item $\fn{Var}((y)_i)$؛ أو
+\item $\fn{Const}((y)_i)$؛ أو
+\item ثمة $n$ وعدد~$z=\tuple{z_1, \dots, z_n}$ على أن يكون كل $z_l$
+  مساويًا لقيمة $(y)_{i'}$ من أجل $i'<i$، و
+\[
+(y)_i = \Gn{\Obj f^n_j(} \concat \fn{flatten}(z) \concat \Gn{)},
+\]
+\end{enumerate}
+مع اشتراط $(y)_{k-1}=x$. (والدالة $\fn{flatten}(z)$ تأخذ المتتالية
+$\tuple{\Gn{t_1}, \dots, \Gn{t_n}}$ إلى $\Gn{t_1, \dots, t_n}$، وتكون
+عودية بدائية.)
+
+وفي الشرط الثالث، كل من $j$ و$n$، وأعداد
+غودل $z_l$ للحدود $t_l$، ورمز المتتالية
+$z$، أي $\tuple{z_1, \dots, z_n}$،
+دون~$y$. ونستبدل $k$ بـ$\len{y}$.
+فبذلك تصاغ عبارة «$y$ رمز متتالية تكوين
+لحد عدد غودل له~$x$» بدوال وعلاقات
+عودية بدائية وكمّات محدودة.
+
+ويبقى حصر $y$ بحد عودي بدائي. فإذا كان
+$x$ عدد غودل لحد، أمكن بناؤه بمتتالية
+لا يزيد عدد حدودها على $\len{x}$؛
+إذ كل حد في متتالية تكوين~$s$ يبدأ
+في موضع من~$s$، ولا يبدأ حدان جزئيان
+في موضع واحد. وعدد غودل لكل حد جزئي
+من~$s$ هو $ \le x$. فتوجد متتالية
+تكوين رمزها $\le p_{k-1}^{k(x+1)}$،
+حيث $k=\len{x}$.
+
+وأما $\fn{ClTerm}$، فنحصل على حجة عوديتها
+البدائية بحذف حالة ال!!{variable}s من البناء.
+\end{proof}
+
+\begin{prob}
+برهن عودية الدالة $\fn{flatten}(z)$ البدائية، وهي التي ترسل المتتالية
+$\tuple{\Gn{t_1}, \dots, \Gn{t_n}}$ إلى $\Gn{t_1, \dots, t_n}$.
+\end{prob}
+
+\begin{prop}\ollabel{prop:num-primrec}
+  تحسب الدالة $\fn{num}(n)=\Gn{\num{n}}$ بالعودية البدائية.
+\end{prop}
+
+\begin{proof}
+  يكفي التعريف الآتي لـ$\fn{num}(n)$ بالعودية البدائية:
+  \begin{align*}
+    \fn{num}(0) & = \Gn{\Obj 0}\\
+    \fn{num}(n+1) & = \Gn{\prime(} \concat \fn{num}(n) \concat \Gn{)}.
+  \end{align*}
+\end{proof}
+
+\end{document}

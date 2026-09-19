@@ -1,0 +1,234 @@
+% Part: incompleteness
+% Chapter: representability-in-q
+% Section: basic-representable
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{req}{bre}
+\olsection{الدوال الأساسية قابلة للتمثيل في~$\Th{Q}$}
+
+أول ما يلزمنا قابلية الدوال الأساسية جميعًا للتمثيل في~$\Th{Q}$.
+ومعنى المطلوب أن نعيّن !!a{formula}
+$!A_{\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}},\dots,{\OLId{latin-ordinary}{x}}_{{\OLId{latin-ordinary}{k}}-{\OLMathNumeral{1}}},{\OLId{latin-ordinary}{y}})$ تمثل، لكل عدد وسائط ${\OLId{latin-ordinary}{k}}$،
+الدالة الأساسية ${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}},\dots,{\OLId{latin-ordinary}{x}}_{{\OLId{latin-ordinary}{k}}-{\OLMathNumeral{1}}})$.
+
+وسنشمل بذلك الصفر والخلف والجمع والضرب والدالة المميزة للمساواة
+والإسقاطات. واختيار الصيغة في هذه المواضع قريب: للصفر الصيغة ${\OLId{latin-ordinary}{y}}=\Obj 0$،
+وللخلف !!{formula} ${\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}}'={\OLId{latin-ordinary}{y}}$، وللجمع !!{formula} $({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}}+{\OLId{latin-ordinary}{x}}_{\OLMathNumeral{1}})={\OLId{latin-ordinary}{y}}$.
+وإنما العمل في إثبات أن $\Th{Q}$ تبرهن ما يلزم من !!{sentence}s.
+فالقول، مثلًا، إن هذه الـ!!{formula} تمثل الجمع معناه أن $\Th{Q}$
+تثبت، لكل عددين طبيعيين ${\OLId{latin-ordinary}{m}}$ و${\OLId{latin-ordinary}{n}}$، ما يأتي:
+\begin{align*}
+& \eq[\num {\OLId{latin-ordinary}{n}} + \num {\OLId{latin-ordinary}{m}}][\num {{\OLId{latin-ordinary}{n}}+{\OLId{latin-ordinary}{m}}}] \text{ و}\\
+& \lforall[{\OLId{latin-ordinary}{y}}][(\eq[(\num {\OLId{latin-ordinary}{n}} + \num {\OLId{latin-ordinary}{m}})][{\OLId{latin-ordinary}{y}}] \lif \eq[{\OLId{latin-ordinary}{y}}][\num{{\OLId{latin-ordinary}{n}}+{\OLId{latin-ordinary}{m}}}])].
+\end{align*}
+
+\begin{prop}
+\ollabel{prop:rep-zero}
+الصيغة $!A_{\Zero}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})\ident\eq[{\OLId{latin-ordinary}{y}}][\Obj 0]$ تمثيل لدالة الصفر
+$\Zero({\OLId{latin-ordinary}{x}})={\OLMathNumeral{0}}$ في~$\Th{Q}$.
+\end{prop}
+
+\begin{prop}
+\ollabel{prop:rep-succ}
+الصيغة $!A_{\Succ}({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})\ident\eq[{\OLId{latin-ordinary}{y}}][{\OLId{latin-ordinary}{x}}']$ تمثيل لدالة الخلف
+$\Succ({\OLId{latin-ordinary}{x}})={\OLId{latin-ordinary}{x}}+{\OLMathNumeral{1}}$ في~$\Th{Q}$.
+\end{prop}
+
+\begin{prop}
+\ollabel{prop:rep-proj}
+الصيغة
+\[!A_{\Proj{{\OLId{latin-ordinary}{n}}}{{\OLId{latin-ordinary}{i}}}}({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}},\dots,{\OLId{latin-ordinary}{x}}_{{\OLId{latin-ordinary}{n}}-{\OLMathNumeral{1}}},{\OLId{latin-ordinary}{y}})\ident\eq[{\OLId{latin-ordinary}{y}}][{\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{i}}].\]
+تمثيل لدالة الإسقاط $\Proj{{\OLId{latin-ordinary}{n}}}{{\OLId{latin-ordinary}{i}}}({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}},\dots,{\OLId{latin-ordinary}{x}}_{{\OLId{latin-ordinary}{n}}-{\OLMathNumeral{1}}})={\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{i}}$ في~$\Th{Q}$.
+\end{prop}
+
+\begin{prob}
+بيّن أن الصيغ $\eq[{\OLId{latin-ordinary}{y}}][\Obj 0]$ و$\eq[{\OLId{latin-ordinary}{y}}][{\OLId{latin-ordinary}{x}}']$ و$\eq[{\OLId{latin-ordinary}{y}}][{\OLId{latin-ordinary}{x}}_{\OLId{latin-ordinary}{i}}]$
+تمثيلات للدوال $\Zero$ و$\Succ$ و$\Proj{{\OLId{latin-ordinary}{n}}}{{\OLId{latin-ordinary}{i}}}$، على هذا الترتيب.
+\end{prob}
+
+\begin{prop}
+\ollabel{prop:rep-id}
+لدالة المساواة $=$ المميزة، وهي
+\[
+\Char{=}({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}}, {\OLId{latin-ordinary}{x}}_{\OLMathNumeral{1}}) =
+\begin{cases}
+  {\OLMathNumeral{1}} & \text{إذا كان } {\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}}={\OLId{latin-ordinary}{x}}_{\OLMathNumeral{1}}\\
+  {\OLMathNumeral{0}} & \text{في غير ذلك}
+\end{cases}
+\]
+تمثيل في~$\Th{Q}$ تعطيه الصيغة
+\[
+  !A_{\Char{=}}({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}}, {\OLId{latin-ordinary}{x}}_{\OLMathNumeral{1}}, {\OLId{latin-ordinary}{y}}) \ident (\eq[{\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}}][{\OLId{latin-ordinary}{x}}_{\OLMathNumeral{1}}] \land \eq[{\OLId{latin-ordinary}{y}}][\num{{\OLMathNumeral{1}}}]) \lor (\eq/[{\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}}][{\OLId{latin-ordinary}{x}}_{\OLMathNumeral{1}}] \land
+\eq[{\OLId{latin-ordinary}{y}}][\num{{\OLMathNumeral{0}}}]).
+\]
+\end{prop}
+
+ولإثبات ذلك نقدّم اللمة الآتية.
+
+\begin{lem}
+\ollabel{lem:q-proves-neq} لتكن ${\OLId{latin-ordinary}{n}}$ و${\OLId{latin-ordinary}{m}}$ عددين طبيعيين.
+فإن كان ${\OLId{latin-ordinary}{n}}\neq {\OLId{latin-ordinary}{m}}$ لزم $\Th{Q}\Proves\eq/[\num {\OLId{latin-ordinary}{n}}][\num {\OLId{latin-ordinary}{m}}]$.
+\end{lem}
+
+\begin{proof}
+نجري الاستقراء على ${\OLId{latin-ordinary}{n}}$، والدعوى لكل ${\OLId{latin-ordinary}{m}}$ هي: إذا كان ${\OLId{latin-ordinary}{n}}\neq {\OLId{latin-ordinary}{m}}$،
+فإن ${\OLId{latin-looped}{Q}}\Proves\eq/[\num {\OLId{latin-ordinary}{n}}][\num {\OLId{latin-ordinary}{m}}]$.
+
+أما الأساس فهو ${\OLId{latin-ordinary}{n}}={\OLMathNumeral{0}}$. فإن خالف ${\OLId{latin-ordinary}{m}}$ العدد ${\OLMathNumeral{0}}$، كتبناه
+${\OLId{latin-ordinary}{m}}={\OLId{latin-ordinary}{k}}+{\OLMathNumeral{1}}$ لعدد طبيعي ${\OLId{latin-ordinary}{k}}$. ولدينا البديهية
+$\lforall[{\OLId{latin-ordinary}{x}}][\eq/[{\OLMathNumeral{0}}][{\OLId{latin-ordinary}{x}}']]$؛ فنضع $\num {\OLId{latin-ordinary}{k}}$ موضع ${\OLId{latin-ordinary}{x}}$ ببديهية الكم،
+ونستنتج $\eq/[{\OLMathNumeral{0}}][\num {\OLId{latin-ordinary}{k}}']$. ثم إن $\num {\OLId{latin-ordinary}{k}}'$ هو بعينه $\num {\OLId{latin-ordinary}{m}}$.
+
+وأما خطوة الاستقراء، فنفرض الدعوى لـ${\OLId{latin-ordinary}{n}}$ ثم نثبتها لـ${\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}}$.
+خذ ${\OLId{latin-ordinary}{m}}$ عددًا طبيعيًا كيفما كان. إما أن يكون ${\OLId{latin-ordinary}{m}}={\OLMathNumeral{0}}$، وإما أن يكون
+${\OLId{latin-ordinary}{m}}={\OLId{latin-ordinary}{k}}+{\OLMathNumeral{1}}$ لعدد ${\OLId{latin-ordinary}{k}}$. فالحالة الأولى على مثال حالة الأساس.
+وفي الثانية، إذا فرضنا ${\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}}\neq {\OLId{latin-ordinary}{k}}+{\OLMathNumeral{1}}$، لزم ${\OLId{latin-ordinary}{n}}\neq {\OLId{latin-ordinary}{k}}$،
+وبفرض الاستقراء لـ${\OLId{latin-ordinary}{n}}$ نحصل على
+$\Th{Q}\Proves\eq/[\num {\OLId{latin-ordinary}{n}}][\num {\OLId{latin-ordinary}{k}}]$. ومن البديهية
+$\lforall[{\OLId{latin-ordinary}{x}}][\lforall[{\OLId{latin-ordinary}{y}}][\eq[{\OLId{latin-ordinary}{x}}'][{\OLId{latin-ordinary}{y}}']\lif\eq[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{y}}]]]$
+نستخرج، ببديهية الكم،
+$\eq[\num {\OLId{latin-ordinary}{n}}'][\num {\OLId{latin-ordinary}{k}}']\lif\eq[\num {\OLId{latin-ordinary}{n}}][\num {\OLId{latin-ordinary}{k}}]$.
+ثم نستنتج بالمنطق القضي، داخل $\Th{Q}$،
+$\eq/[\num {\OLId{latin-ordinary}{n}}][\num {\OLId{latin-ordinary}{k}}]\lif\eq/[\num {\OLId{latin-ordinary}{n}}'][\num {\OLId{latin-ordinary}{k}}']$.
+فتعطينا قاعدة إثبات المقدّم $\eq/[\num {\OLId{latin-ordinary}{n}}'][\num {\OLId{latin-ordinary}{k}}']$.
+وهذا المطلوب، لأن $\num {\OLId{latin-ordinary}{k}}'$ هو $\num {\OLId{latin-ordinary}{m}}$.
+\end{proof}
+
+\begin{explain}
+ومضمون اللمة متواضع: تستطيع $\Th{Q}$ أن تثبت أن أسماء الأعداد المختلفة
+تدل على أشياء مختلفة. ومن أمثلته أن تثبت $\Th{Q}$ العبارة
+${\OLMathNumeral{0}}''\neq{\OLMathNumeral{0}}'''$. غير أن تعميم هذا القول يقتضي بعض العناية.
+وينبغي تمييز موضع الاستقراء هنا؛ فهو، وإن استعملناه في البرهان،
+استقراء \emph{خارج} $\Th{Q}$، لا بديهية استقراء فيها.
+\end{explain}
+
+\begin{proof}[برهان \olref{prop:rep-id}]
+نقسم أولًا بحسب تساوي العددين واختلافهما. فإن كان ${\OLId{latin-ordinary}{n}}={\OLId{latin-ordinary}{m}}$ كان
+$\num{{\OLId{latin-ordinary}{n}}}$ و$\num{{\OLId{latin-ordinary}{m}}}$ اسمًا واحدًا، وكانت $\Char{=}({\OLId{latin-ordinary}{n}},{\OLId{latin-ordinary}{m}})={\OLMathNumeral{1}}$.
+ولما كان
+$\Th{Q}\Proves(\eq[\num{{\OLId{latin-ordinary}{n}}}][\num{{\OLId{latin-ordinary}{m}}}]\land\eq[\num{{\OLMathNumeral{1}}}][\num{{\OLMathNumeral{1}}}])$،
+ثبتت $!A_=(\num{{\OLId{latin-ordinary}{n}}},\num{{\OLId{latin-ordinary}{m}}},\num{{\OLMathNumeral{1}}})$.
+وأما إذا كان ${\OLId{latin-ordinary}{n}}\neq {\OLId{latin-ordinary}{m}}$، فالقيمة $\Char=({\OLId{latin-ordinary}{n}},{\OLId{latin-ordinary}{m}})={\OLMathNumeral{0}}$.
+ومن \olref{lem:q-proves-neq} نحصل على
+$\Th{Q}\Proves\eq/[\num{{\OLId{latin-ordinary}{n}}}][\num{{\OLId{latin-ordinary}{m}}}]$؛ فتثبت أيضًا
+$(\eq/[\num{{\OLId{latin-ordinary}{n}}}][\num{{\OLId{latin-ordinary}{m}}}]\land\Obj 0=\Obj 0)$،
+ومنها $\Th{Q}\Proves !A_=(\num{{\OLId{latin-ordinary}{n}}},\num{{\OLId{latin-ordinary}{m}}},\num{{\OLMathNumeral{0}}})$.
+
+ويبقى شرط انفراد القيمة، وله الحالتان نفسيهما.
+إذا كان ${\OLId{latin-ordinary}{n}}={\OLId{latin-ordinary}{m}}$، فالمطلوب
+$\Th{Q}\Proves\lforall[{\OLId{latin-ordinary}{y}}][(!A_=(\num{{\OLId{latin-ordinary}{n}}},\num{{\OLId{latin-ordinary}{m}}},{\OLId{latin-ordinary}{y}})
+\lif\eq[{\OLId{latin-ordinary}{y}}][\num{{\OLMathNumeral{1}}}])]$.
+نبيّن الحجة بعبارة غير صورية: لنفرض
+$!A_=(\num{{\OLId{latin-ordinary}{n}}},\num{{\OLId{latin-ordinary}{m}}},{\OLId{latin-ordinary}{y}})$، أي
+\[
+(\eq[\num{{\OLId{latin-ordinary}{n}}}][\num{{\OLId{latin-ordinary}{n}}}] \land \eq[{\OLId{latin-ordinary}{y}}][\num{{\OLMathNumeral{1}}}]) \lor
+(\eq/[\num{{\OLId{latin-ordinary}{n}}}][\num{{\OLId{latin-ordinary}{n}}}] \land \eq[{\OLId{latin-ordinary}{y}}][\num{{\OLMathNumeral{0}}}])
+\]
+فالشق الأيسر يعطي $\eq[{\OLId{latin-ordinary}{y}}][\num{{\OLMathNumeral{1}}}]$ بالمنطق.
+وأما الشق الأيمن فيناقض $\eq[\num{{\OLId{latin-ordinary}{n}}}][\num{{\OLId{latin-ordinary}{n}}}]$، وهي ثابتة بالمنطق.
+
+وأما إذا كان ${\OLId{latin-ordinary}{n}}\neq {\OLId{latin-ordinary}{m}}$، فإن
+$!A_=(\num{{\OLId{latin-ordinary}{n}}},\num{{\OLId{latin-ordinary}{m}}},{\OLId{latin-ordinary}{y}})$ هي
+\[
+(\eq[\num{{\OLId{latin-ordinary}{n}}}][\num{{\OLId{latin-ordinary}{m}}}] \land \eq[{\OLId{latin-ordinary}{y}}][\num{{\OLMathNumeral{1}}}]) \lor
+(\eq/[\num{{\OLId{latin-ordinary}{n}}}][\num{{\OLId{latin-ordinary}{m}}}] \land \eq[{\OLId{latin-ordinary}{y}}][\num{{\OLMathNumeral{0}}}])
+\]
+فالشق الأيسر الآن يناقض $\eq/[\num{{\OLId{latin-ordinary}{n}}}][\num{{\OLId{latin-ordinary}{m}}}]$، وقد ثبتت في
+$\Th{Q}$ باللمة \olref{lem:q-proves-neq}.
+ويبقى الشق الأيمن، وهو يعطي $\eq[{\OLId{latin-ordinary}{y}}][\num{{\OLMathNumeral{0}}}]$.
+\end{proof}
+
+\begin{prop}
+\ollabel{prop:rep-add}
+لدالة الجمع $\Add({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}},{\OLId{latin-ordinary}{x}}_{\OLMathNumeral{1}})={\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}}+{\OLId{latin-ordinary}{x}}_{\OLMathNumeral{1}}$ تمثيل في~$\Th{Q}$ بالصيغة:
+\[
+  !A_{\Add}({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}}, {\OLId{latin-ordinary}{x}}_{\OLMathNumeral{1}}, {\OLId{latin-ordinary}{y}}) \ident \eq[{\OLId{latin-ordinary}{y}}][({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}} + {\OLId{latin-ordinary}{x}}_{\OLMathNumeral{1}})].
+\]
+\end{prop}
+
+\begin{lem}
+\ollabel{lem:q-proves-add}
+$\Th{Q} \Proves \eq[(\num{{\OLId{latin-ordinary}{n}}} + \num{{\OLId{latin-ordinary}{m}}})][\num{{\OLId{latin-ordinary}{n}}+{\OLId{latin-ordinary}{m}}}]$
+\end{lem}
+
+\begin{proof}
+البرهان بالاستقراء على~${\OLId{latin-ordinary}{m}}$. ففي الأساس ${\OLId{latin-ordinary}{m}}={\OLMathNumeral{0}}$،
+والمطلوب $\Th{Q}\Proves\eq[(\num{{\OLId{latin-ordinary}{n}}}+\Obj 0)][\num{{\OLId{latin-ordinary}{n}}}]$،
+وهو نتيجة البديهية $!Q_{\OLMathNumeral{4}}$. ثم نفرض الدعوى لـ${\OLId{latin-ordinary}{m}}$، وننتقل إلى ${\OLId{latin-ordinary}{m}}+{\OLMathNumeral{1}}$،
+فيكون المطلوب
+$\Th{Q}\Proves\eq[(\num{{\OLId{latin-ordinary}{n}}}+\num{{\OLId{latin-ordinary}{m}}+{\OLMathNumeral{1}}})][\num{{\OLId{latin-ordinary}{n}}+{\OLId{latin-ordinary}{m}}+{\OLMathNumeral{1}}}]$.
+واسم العدد $\num{{\OLId{latin-ordinary}{m}}+{\OLMathNumeral{1}}}$ هو $\num{{\OLId{latin-ordinary}{m}}}'$، كما أن $\num{{\OLId{latin-ordinary}{n}}+{\OLId{latin-ordinary}{m}}+{\OLMathNumeral{1}}}$
+هو $\num{{\OLId{latin-ordinary}{n}}+{\OLId{latin-ordinary}{m}}}'$. فبالبديهية $!Q_{\OLMathNumeral{5}}$ نحصل على
+$\Th{Q}\Proves\eq[(\num{{\OLId{latin-ordinary}{n}}}+\num{{\OLId{latin-ordinary}{m}}}')][(\num{{\OLId{latin-ordinary}{n}}}+\num{{\OLId{latin-ordinary}{m}}})']$.
+وبفرض الاستقراء لدينا
+$\Th{Q}\Proves\eq[(\num{{\OLId{latin-ordinary}{n}}}+\num{{\OLId{latin-ordinary}{m}}})][\num{{\OLId{latin-ordinary}{n}}+{\OLId{latin-ordinary}{m}}}]$؛
+فيلزم $\Th{Q}\Proves\eq[(\num{{\OLId{latin-ordinary}{n}}}+\num{{\OLId{latin-ordinary}{m}}}')][\num{{\OLId{latin-ordinary}{n}}+{\OLId{latin-ordinary}{m}}}']$.
+\end{proof}
+
+\begin{proof}[برهان \olref{prop:rep-add}]
+نختار لتمثيل الجمع الـ!!{formula}~$!A_\Add({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}},{\OLId{latin-ordinary}{x}}_{\OLMathNumeral{1}},{\OLId{latin-ordinary}{y}})$؛ فتمثيلها
+لـ$\Add$ يكون بأخذها $\eq[{\OLId{latin-ordinary}{y}}][({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}}+{\OLId{latin-ordinary}{x}}_{\OLMathNumeral{1}})]$.
+أما الشرط الأول فهو أنه، متى كان $\Add({\OLId{latin-ordinary}{n}},{\OLId{latin-ordinary}{m}})={\OLId{latin-ordinary}{k}}$، لزم
+$\Th{Q}\Proves !A_\Add(\num{{\OLId{latin-ordinary}{n}}},\num{{\OLId{latin-ordinary}{m}}},\num{{\OLId{latin-ordinary}{k}}})$، أي
+$\Th{Q}\Proves\eq[\num{{\OLId{latin-ordinary}{k}}}][(\num{{\OLId{latin-ordinary}{n}}}+\num{{\OLId{latin-ordinary}{m}}})]$.
+وهذا حاصل؛ فإن ${\OLId{latin-ordinary}{k}}={\OLId{latin-ordinary}{n}}+{\OLId{latin-ordinary}{m}}$، فيكون $\num{{\OLId{latin-ordinary}{k}}}$ هو $\num{{\OLId{latin-ordinary}{n}}+{\OLId{latin-ordinary}{m}}}$ نفسه،
+وقد ثبت في \olref{lem:q-proves-add} أن
+$\Th{Q}\Proves\eq[(\num{{\OLId{latin-ordinary}{n}}}+\num{{\OLId{latin-ordinary}{m}}})][\num{{\OLId{latin-ordinary}{n}}+{\OLId{latin-ordinary}{m}}}]$.
+
+وأما الشرط الآخر، فهو أنه متى كان $\Add({\OLId{latin-ordinary}{n}},{\OLId{latin-ordinary}{m}})={\OLId{latin-ordinary}{k}}$، فإن
+\[
+\Th{Q} \Proves \lforall[{\OLId{latin-ordinary}{y}}][(!A_\Add(\num{{\OLId{latin-ordinary}{n}}}, \num{{\OLId{latin-ordinary}{m}}}, {\OLId{latin-ordinary}{y}}) \lif
+  \eq[{\OLId{latin-ordinary}{y}}][\num{{\OLId{latin-ordinary}{k}}}])].
+\]
+لنفرض، باستعمال تناظر المساواة، $\eq[(\num{{\OLId{latin-ordinary}{n}}}+\num{{\OLId{latin-ordinary}{m}}})][{\OLId{latin-ordinary}{y}}]$. وقد ثبت
+\[
+\Th{Q} \Proves \eq[(\num{{\OLId{latin-ordinary}{n}}}+\num{{\OLId{latin-ordinary}{m}}})][\num{{\OLId{latin-ordinary}{n}}+{\OLId{latin-ordinary}{m}}}],
+\]
+فنضع في الطرف الأيسر $\num{{\OLId{latin-ordinary}{n}}+{\OLId{latin-ordinary}{m}}}$، فنحصل على
+$\eq[\num{{\OLId{latin-ordinary}{n}}+{\OLId{latin-ordinary}{m}}}][{\OLId{latin-ordinary}{y}}]$ لأي~${\OLId{latin-ordinary}{y}}$؛ وبالتناظر والتعميم يتم المطلوب.
+\end{proof}
+
+\begin{prop}
+\ollabel{prop:rep-mult}
+ولدالة الضرب
+$\Mult({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}},{\OLId{latin-ordinary}{x}}_{\OLMathNumeral{1}})={\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}}\cdot {\OLId{latin-ordinary}{x}}_{\OLMathNumeral{1}}$ تمثيل في~$\Th{Q}$ بالصيغة:
+\[
+  !A_{\Mult}({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}}, {\OLId{latin-ordinary}{x}}_{\OLMathNumeral{1}}, {\OLId{latin-ordinary}{y}}) \ident {\OLId{latin-ordinary}{y}} = ({\OLId{latin-ordinary}{x}}_{\OLMathNumeral{0}} \times {\OLId{latin-ordinary}{x}}_{\OLMathNumeral{1}}).
+\]
+\end{prop}
+
+\begin{proof} يُترك إثباتها تمرينًا. \end{proof}
+
+\begin{lem}
+\ollabel{lem:q-proves-mult}
+$\Th{Q} \Proves \eq[(\num{{\OLId{latin-ordinary}{n}}} \times \num{{\OLId{latin-ordinary}{m}}})][\num{{\OLId{latin-ordinary}{n}} \cdot {\OLId{latin-ordinary}{m}}}]$
+\end{lem}
+
+\begin{proof} يُترك إثباتها تمرينًا. \end{proof}
+
+\begin{prob}
+ضع برهانًا لـ\olref[inc][req][bre]{lem:q-proves-mult}.
+\end{prob}
+
+\begin{prob}
+استخرج من \olref[inc][req][bre]{lem:q-proves-mult} برهانًا على
+\olref[inc][req][bre]{prop:rep-mult}.
+\end{prob}
+
+\begin{explain}
+  لا بد من حفظ الفرق بين الرمزين: $\times$ رمز دالة في لغة الحساب،
+  وأما $\cdot$ فهو عملية الضرب المألوفة في الأعداد.
+  لذلك يوضع $\cdot$ بين تعبيرين عن عددين، نحو ${\OLId{latin-ordinary}{m}}\cdot {\OLId{latin-ordinary}{n}}$؛
+  وأما $\times$ فموضعه بين حدين من لغة الحساب، نحو
+  $(\num{{\OLId{latin-ordinary}{m}}}\times\num{{\OLId{latin-ordinary}{n}}})$. ويزيد الأمر التباسًا اشتراك الرمز $+$
+  بين !!{function} وعملية الجمع. فإذا وقع بين حدين،
+  نحو $(\num{{\OLId{latin-ordinary}{n}}}+\num{{\OLId{latin-ordinary}{m}}})$، فهو !!{function} ثنائية الموضع في لغة الحساب؛
+  وإذا وقع بين عددين، نحو ${\OLId{latin-ordinary}{n}}+{\OLId{latin-ordinary}{m}}$، فهو عملية الجمع.
+  وهذا هو المعنى أيضًا في $\num{{\OLId{latin-ordinary}{n}}+{\OLId{latin-ordinary}{m}}}$: فالعبارة اسم العدد القياسي الذي
+  يقابل العدد~${\OLId{latin-ordinary}{n}}+{\OLId{latin-ordinary}{m}}$.
+\end{explain}
+
+\end{document}

@@ -1,0 +1,262 @@
+% Part: turing-machines
+% Chapter: undecidability
+% Section: trakhtenbrot
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{tur}{und}{tra}
+\olsection{مبرهنة تراختنبروت}
+
+\begin{explain}
+  سبق في \olref[rep]{sec} تعريف ال!!{sentence}s $!T({\OLId{latin-looped}{M}},{\OLId{latin-ordinary}{w}})$
+  و~$!E({\OLId{latin-looped}{M}},{\OLId{latin-ordinary}{w}})$ للآلة~${\OLId{latin-looped}{M}}$ وسلسلة الدخل~${\OLId{latin-ordinary}{w}}$. ثم أثبتنا في
+  \olref[ver]{lem:valid-if-halt} و\olref[ver]{lem:halt-if-valid}
+  أن الصدق المنطقي لـ$!T({\OLId{latin-looped}{M}},{\OLId{latin-ordinary}{w}})\lif !E({\OLId{latin-looped}{M}},{\OLId{latin-ordinary}{w}})$ يكافئ توقف~${\OLId{latin-looped}{M}}$
+  في نهاية المطاف عند الدخل~${\OLId{latin-ordinary}{w}}$. فكان امتناع تقرير مسألة
+  التوقف مستلزمًا لامتناع تقرير الصدق المنطقي وقابلية الإرضاء
+  لل!!{sentence}s من الرتبة الأولى
+  (\cref{tur:und:uns:thm:decision-prob,tur:und:uns:cor:undecidable-sat}).
+
+  إلا أن التعريف المتقدم للصدق المنطقي وقابلية الإرضاء يتناول
+  !!{structure}s كيفما كانت، منتهية أو غير منتهية. فهل يهون
+  التقرير إذا قصرنا النظر على كون !!a{sentence} قابلة للإرضاء
+  في !!{structure} منتهية، أو صادقة في جميع
+  ال!!{structure}s المنتهية؟ لا؛ وسنعدل حجة استحالة حل مسألة
+  القرار ليظهر لنا ذلك.
+
+  ولنرجع أولًا إلى برهان \olref[ver]{lem:halt-if-valid}.
+  فقد أنشأنا فيه نموذجًا~$\Struct M$ لـ~$!T({\OLId{latin-looped}{M}},{\OLId{latin-ordinary}{w}})$ يطابق
+  عمل الآلة~${\OLId{latin-looped}{M}}$ عند الدخل~${\OLId{latin-ordinary}{w}}$، وكان مجاله~$\Nat$ غير المنتهي.
+  فإن كانت ${\OLId{latin-looped}{M}}$ تتوقف عند الدخل~${\OLId{latin-ordinary}{w}}$، أمكن إنشاء نموذج منته
+  $\Struct M'$ بالطريقة نفسها. ولتتوقف ${\OLId{latin-looped}{M}}$ عند الدخل~${\OLId{latin-ordinary}{w}}$
+  بعد~${\OLId{latin-ordinary}{k}}$ خطوات. نجعل المجال~$\Domain{{\OLId{latin-looped}{M}}'}$ هو
+  $\{{\OLMathNumeral{0}},\dots,{\OLId{latin-ordinary}{n}}\}$، حيث ${\OLId{latin-ordinary}{n}}$ أكبر العددين:~${\OLId{latin-ordinary}{k}}+{\OLMathNumeral{1}}$ وطول~${\OLId{latin-ordinary}{w}}$،
+  ونضع
+  \[
+    \Assign{\prime}{{\OLId{latin-looped}{M}}'}({\OLId{latin-ordinary}{x}}) =
+    \begin{cases}
+      {\OLId{latin-ordinary}{x}} + {\OLMathNumeral{1}} &\text{إذا كان ${\OLId{latin-ordinary}{x}} < {\OLId{latin-ordinary}{n}}$}\\
+      {\OLId{latin-ordinary}{n}} &\text{خلاف ذلك،}
+    \end{cases}
+  \]
+  ونضع $\tuple{{\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}}}\in\Assign{<}{{\OLId{latin-looped}{M}}'}$ إذا وفقط إذا كان
+  ${\OLId{latin-ordinary}{x}}<{\OLId{latin-ordinary}{y}}$ أو ${\OLId{latin-ordinary}{x}}={\OLId{latin-ordinary}{y}}={\OLId{latin-ordinary}{n}}$. وأما سائر تعريف $\Struct{M'}$ فكتعريف
+  $\Struct{M}$. فيلزم من بناء~$\Struct{M'}$، على نحو ما في
+  \olref[ver]{lem:halt-if-valid}، أن $\Sat{{\OLId{latin-looped}{M}}'}{!T({\OLId{latin-looped}{M}},{\OLId{latin-ordinary}{w}})}$.
+  ومن فرض توقف ${\OLId{latin-looped}{M}}$ عند الدخل~${\OLId{latin-ordinary}{w}}$ يلزم $\Sat{{\OLId{latin-looped}{M}}'}{!E({\OLId{latin-looped}{M}},{\OLId{latin-ordinary}{w}})}$.
+  فـ$\Struct{M'}$ نموذج منته لـ$!T({\OLId{latin-looped}{M}},{\OLId{latin-ordinary}{w}})\land !E({\OLId{latin-looped}{M}},{\OLId{latin-ordinary}{w}})$.
+  وتنبه إلى إبدال $\lif$ بـ~$\land$.
+
+  وبذلك ثبتت إحدى الجهتين: توقف ${\OLId{latin-looped}{M}}$ عند الدخل~${\OLId{latin-ordinary}{w}}$ يقتضي
+  وجود نموذج منته لـ$!T({\OLId{latin-looped}{M}},{\OLId{latin-ordinary}{w}})\land !E({\OLId{latin-looped}{M}},{\OLId{latin-ordinary}{w}})$. لكن عكسها
+  باطل؛ فقد لا تتوقف آلة عند دخل~${\OLId{latin-ordinary}{w}}$، مع وجود نموذج منته
+  لـ$!T({\OLId{latin-looped}{M}},{\OLId{latin-ordinary}{w}})\land !E({\OLId{latin-looped}{M}},{\OLId{latin-ordinary}{w}})$. ومثال ذلك الآلة~${\OLId{latin-looped}{M}}$ ذات
+  الحالة الوحيدة ${\OLId{latin-ordinary}{q}}_{\OLMathNumeral{0}}$ والتعليمة
+  $\delta({\OLId{latin-ordinary}{q}}_{\OLMathNumeral{0}},\TMblank)=\tuple{{\OLId{latin-ordinary}{q}}_{\OLMathNumeral{0}},\TMblank,\TMstay}$.
+  فإنها تبدأ بالدخل الخالي~${\OLId{latin-ordinary}{w}}=\emptyseq$، وتدور أبدًا
+  من غير كتابة جديدة ولا حركة للرأس؛ فتهيئاتها كلها واحدة:
+  حالة واحدة، وموضع رأس واحد، ومحتوى شريط واحد. ومع ذلك يمكن
+  تعريف !!{structure} منتهية~$\Struct{M''}$ تحقق
+  $!T({\OLId{latin-looped}{M}},\emptyseq)\land !E({\OLId{latin-looped}{M}},\emptyseq)$، كما في التمرين.
+  وسنعالج هذا بتغيير $!T({\OLId{latin-looped}{M}},{\OLId{latin-ordinary}{w}})$ بحيث نمنع مثل هذه
+  ال!!{structure}s.
+
+  \begin{prob}
+    خذ ${\OLId{latin-looped}{M}}$ آلة لا حالة لها سوى ${\OLId{latin-ordinary}{q}}_{\OLMathNumeral{0}}$، ولا تعليمة سوى
+    $\delta({\OLId{latin-ordinary}{q}}_{\OLMathNumeral{0}},\TMblank)=\tuple{{\OLId{latin-ordinary}{q}}_{\OLMathNumeral{0}},\TMblank,\TMstay}$. واجعل
+    $\Domain{{\OLId{latin-looped}{M}}''}=\{{\OLMathNumeral{0}},{\OLMathNumeral{1}},{\OLMathNumeral{2}}\}$، و
+    $\Assign{\prime}{{\OLId{latin-looped}{M}}''}({\OLMathNumeral{0}})=\Assign{\prime}{{\OLId{latin-looped}{M}}''}({\OLMathNumeral{1}})={\OLMathNumeral{1}}$، و
+    $\Assign{\prime}{{\OLId{latin-looped}{M}}''}({\OLMathNumeral{2}})={\OLMathNumeral{2}}$، و
+    $\Assign{<}{{\OLId{latin-looped}{M}}''}=\{\tuple{{\OLMathNumeral{0}},{\OLMathNumeral{1}}},\tuple{{\OLMathNumeral{1}},{\OLMathNumeral{1}}},\tuple{{\OLMathNumeral{2}},{\OLMathNumeral{2}}}\}$.
+    عيّن $\Assign{\Obj Q_{{\OLId{latin-ordinary}{q}}_{\OLMathNumeral{0}}}}{{\OLId{latin-looped}{M}}''}$، و$\Assign{\Obj
+    S_{\TMblank}}{{\OLId{latin-looped}{M}}''}$، و$\Assign{\Obj S_{\TMendtape}}{{\OLId{latin-looped}{M}}''}$ على أن
+    تصدق $!T({\OLId{latin-looped}{M}},\emptyseq)$ و$!E({\OLId{latin-looped}{M}},\emptyseq)$، وأقم الحجة على صدقهما.
+    إرشاد: إن $\delta({\OLId{latin-ordinary}{q}}_{\OLMathNumeral{0}},\TMendtape)$ غير معرّفة. واطلب أن تصدق
+    \begin{align*}
+    & \Obj Q_{{\OLId{latin-ordinary}{q}}_{\OLMathNumeral{0}}}(\num{{\OLMathNumeral{1}}}, \num{{\OLId{latin-ordinary}{n}}}) \land \Obj S_{\TMendtape}(\num{{\OLMathNumeral{0}}}, \num{{\OLId{latin-ordinary}{n}}})
+      \land
+      \lforall[{\OLId{latin-ordinary}{x}}][(\num{{\OLMathNumeral{0}}} < {\OLId{latin-ordinary}{x}} \lif \Obj S_\TMblank({\OLId{latin-ordinary}{x}}, \num{{\OLId{latin-ordinary}{n}}}))] \text{\quad لكل ${\OLId{latin-ordinary}{n}} \in \Nat$}\\
+    & \lexists[{\OLId{latin-ordinary}{y}}][(\Obj Q_{{\OLId{latin-ordinary}{q}}_{\OLMathNumeral{0}}}(\num{{\OLMathNumeral{0}}}, {\OLId{latin-ordinary}{y}}) \land \Obj S_{\TMendtape}(\num{{\OLMathNumeral{0}}}, {\OLId{latin-ordinary}{y}}))]
+    \end{align*}
+    معًا في~$\Struct{M''}$.
+  \end{prob}
+\end{explain}
+
+فلنأخذ ال!!{sentence}s الواصفة لعمل الآلة~${\OLId{latin-looped}{M}}$ على الدخل
+${\OLId{latin-ordinary}{w}}=\sigma_{{\OLId{latin-ordinary}{i}}_{\OLMathNumeral{1}}}\dots\sigma_{{\OLId{latin-ordinary}{i}}_{\OLId{latin-ordinary}{k}}}$، بالترتيب الآتي:
+\begin{enumerate}
+\item بديهيات الأعداد والعلاقة~$<$، كما في تعريف~$!T({\OLId{latin-looped}{M}},{\OLId{latin-ordinary}{w}})$
+في \olref[rep]{sec}.
+\item بديهيات تهيئة الدخل نفسها التي في تعريف~$!T({\OLId{latin-looped}{M}},{\OLId{latin-ordinary}{w}})$.
+\item بديهيات الانتقال بين التهيئتين المتعاقبتين:
+
+نبقي معنى $!A({\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})$ على ما تقدم، ونضع
+\[
+  !B({\OLId{latin-ordinary}{y}}) \ident \lforall[{\OLId{latin-ordinary}{x}}][({\OLId{latin-ordinary}{x}} < {\OLId{latin-ordinary}{y}} \lif \eq/[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{y}}])].
+\]
+\begin{enumerate}
+\item \ollabel{rep-right} نقابل كل تعليمة $\delta({\OLId{latin-ordinary}{q}}_{\OLId{latin-ordinary}{i}},\sigma)=
+  \tuple{{\OLId{latin-ordinary}{q}}_{\OLId{latin-ordinary}{j}},\sigma',\TMright}$ بال!!{sentence}:
+\begin{align*}
+& \lforall[{\OLId{latin-ordinary}{x}}][\lforall[{\OLId{latin-ordinary}{y}}][(
+   (\Obj Q_{{\OLId{latin-ordinary}{q}}_{\OLId{latin-ordinary}{i}}}({\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}) \land \Obj S_{\sigma}({\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}})) \lif {}]] \\
+&\qquad   (\Obj Q_{{\OLId{latin-ordinary}{q}}_{\OLId{latin-ordinary}{j}}}({\OLId{latin-ordinary}{x}}', {\OLId{latin-ordinary}{y}}') \land \Obj S_{\sigma'}({\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}') \land
+!A({\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}) \land !B({\OLId{latin-ordinary}{y}}')))
+\end{align*}
+\item \ollabel{rep-left} نقابل كل تعليمة $\delta({\OLId{latin-ordinary}{q}}_{\OLId{latin-ordinary}{i}},\sigma)=
+  \tuple{{\OLId{latin-ordinary}{q}}_{\OLId{latin-ordinary}{j}},\sigma',\TMleft}$ بال!!{sentence}
+\begin{align*}
+& \lforall[{\OLId{latin-ordinary}{x}}][\lforall[{\OLId{latin-ordinary}{y}}][
+    ((\Obj Q_{{\OLId{latin-ordinary}{q}}_{\OLId{latin-ordinary}{i}}}({\OLId{latin-ordinary}{x}}', {\OLId{latin-ordinary}{y}}) \land \Obj S_{\sigma}({\OLId{latin-ordinary}{x}}', {\OLId{latin-ordinary}{y}})) \lif {}]]\\
+& \qquad   (\Obj Q_{{\OLId{latin-ordinary}{q}}_{\OLId{latin-ordinary}{j}}}({\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}') \land \Obj S_{\sigma'}({\OLId{latin-ordinary}{x}}', {\OLId{latin-ordinary}{y}}') \land
+!A({\OLId{latin-ordinary}{x}}', {\OLId{latin-ordinary}{y}}) \land !B({\OLId{latin-ordinary}{y}}'))) \land {}\\
+& \lforall[{\OLId{latin-ordinary}{y}}][((\Obj Q_{{\OLId{latin-ordinary}{q}}_{\OLId{latin-ordinary}{i}}}(\num{{\OLMathNumeral{0}}}, {\OLId{latin-ordinary}{y}}) \land \Obj S_{\sigma}(\num{{\OLMathNumeral{0}}},
+    {\OLId{latin-ordinary}{y}})) \lif {}]\\
+& \qquad (\Obj Q_{{\OLId{latin-ordinary}{q}}_{\OLId{latin-ordinary}{j}}}(\num{{\OLMathNumeral{0}}}, {\OLId{latin-ordinary}{y}}') \land \Obj S_{\sigma'}(\num{{\OLMathNumeral{0}}},
+  {\OLId{latin-ordinary}{y}}') \land !A(\num{{\OLMathNumeral{0}}}, {\OLId{latin-ordinary}{y}}) \land !B({\OLId{latin-ordinary}{y}}')))
+\end{align*}
+\item \ollabel{rep-stay} نقابل كل تعليمة $\delta({\OLId{latin-ordinary}{q}}_{\OLId{latin-ordinary}{i}},\sigma)=
+  \tuple{{\OLId{latin-ordinary}{q}}_{\OLId{latin-ordinary}{j}},\sigma',\TMstay}$ بال!!{sentence}:
+\begin{align*}
+& \lforall[{\OLId{latin-ordinary}{x}}][\lforall[{\OLId{latin-ordinary}{y}}][(
+   (\Obj Q_{{\OLId{latin-ordinary}{q}}_{\OLId{latin-ordinary}{i}}}({\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}) \land \Obj S_{\sigma}({\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}})) \lif {}]] \\
+&\qquad (\Obj Q_{{\OLId{latin-ordinary}{q}}_{\OLId{latin-ordinary}{j}}}({\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}') \land \Obj S_{\sigma'}({\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}') \land
+!A({\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}) \land !B({\OLId{latin-ordinary}{y}}')))
+\end{align*}
+\end{enumerate}
+وكما ترى بال!!{sentence}s التي تصف انتقالات~${\OLId{latin-looped}{M}}$ مماثلة
+لل!!{sentence} المقابلة في~$!T({\OLId{latin-looped}{M}},{\OLId{latin-ordinary}{w}})$، إلا أننا نضيف $!B({\OLId{latin-ordinary}{y}}')$ في
+النهاية. وتضمن $!B({\OLId{latin-ordinary}{y}}')$ أن يكون العدد ${\OLId{latin-ordinary}{y}}'$، رقم التهيئة «التالية»،
+مختلفًا عن جميع الأعداد السابقة $\Obj 0$، و$\Obj 0'$، و\dots.
+% \item Sentences that express consistency conditions:
+% \begin{enumerate}
+%   \item\ollabel{rep-con-symb}%
+%   !!^a{sentence} that says that no square can have more than one
+%   symbol on it at any given time:
+%   \[\lforall[x][\lforall[y][(\Obj S_{\sigma}(x, y) \lif \lnot \Obj
+%   S_{\sigma'}(x, y))]],\]
+%   for every pair $\sigma \neq \sigma'$ of tape symbols of~$T$.
+%   \item\ollabel{rep-con-state}%
+%   !!^a{sentence} that says that $M$ cannot be in more than one state
+%   at any given time:
+%   \[\lforall[x][\lforall[y][(\Obj Q_{q}(x, y) \lif
+%   \lforall[z][\lnot \Obj
+%   Q_{q'}(z, y))]],\]
+%   for every pair $q \neq q'$ of states of~$T$.
+%   \item\ollabel{rep-con-tape}%
+%   !!^a{sentence} that says that $M$ cannot be on more than one tape
+%   square at any given time:
+%   \[\lforall[x][\lforall[y][(\Obj Q_{q}(x, y) \lif
+%   \lforall[z][\eq/[z][y]\lif \lnot \Obj
+%   Q_{q'}(z, y))]],\]
+%   for every pair $q$, $q'$ of states of~$T$.
+% \end{enumerate}
+\end{enumerate}
+ولنسمّ $!T'({\OLId{latin-looped}{M}},{\OLId{latin-ordinary}{w}})$ اقتران ال!!{sentence}s المتقدمة جميعًا،
+الخاصة بالآلة~${\OLId{latin-looped}{M}}$ والدخل~${\OLId{latin-ordinary}{w}}$.
+
+\begin{lem}\ollabel{lem:halts-sat}
+  توقف ${\OLId{latin-looped}{M}}$ عند الدخل~${\OLId{latin-ordinary}{w}}$ يستلزم أن يكون لـ
+  $!T'({\OLId{latin-looped}{M}},{\OLId{latin-ordinary}{w}})\land !E({\OLId{latin-looped}{M}},{\OLId{latin-ordinary}{w}})$ نموذج منته.
+\end{lem}
+
+\begin{proof}
+  ننشئ $\Struct{M'}$ على نحو ما في برهان
+  \olref[ver]{lem:halt-if-valid}، غير أننا نجعل
+  \begin{align*}
+    \Domain{{\OLId{latin-looped}{M}}'} & = \{{\OLMathNumeral{0}}, \dots, {\OLId{latin-ordinary}{n}}\},\\
+    \Assign{\prime}{{\OLId{latin-looped}{M}}'}({\OLId{latin-ordinary}{x}}) & =
+    \begin{cases}
+      {\OLId{latin-ordinary}{x}} + {\OLMathNumeral{1}} &\text{إذا كان ${\OLId{latin-ordinary}{x}} < {\OLId{latin-ordinary}{n}}$}\\
+      {\OLId{latin-ordinary}{n}} &\text{خلاف ذلك،}
+    \end{cases} \\
+    \tuple{{\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}}} \in \Assign{<}{{\OLId{latin-looped}{M}}'} &\text{إذا وفقط إذا كان ${\OLId{latin-ordinary}{x}} < {\OLId{latin-ordinary}{y}}$ أو ${\OLId{latin-ordinary}{x}} = {\OLId{latin-ordinary}{y}} = {\OLId{latin-ordinary}{n}}$،}
+  \end{align*}
+  وفي ذلك ${\OLId{latin-ordinary}{n}}=\max({\OLId{latin-ordinary}{k}}+{\OLMathNumeral{1}},\len{{\OLId{latin-ordinary}{w}}})$، و${\OLId{latin-ordinary}{k}}$ أقل عدد تتوقف ${\OLId{latin-looped}{M}}$
+  بعده، أي بعد~${\OLId{latin-ordinary}{k}}$ خطوات من ابتدائها بالدخل~${\OLId{latin-ordinary}{w}}$. ويبقى،
+  على سبيل التمرين، إثبات
+  $\Sat{{\OLId{latin-looped}{M}}'}{!T'({\OLId{latin-looped}{M}},{\OLId{latin-ordinary}{w}})\land !E({\OLId{latin-looped}{M}},{\OLId{latin-ordinary}{w}})}$.
+\end{proof}
+
+\begin{prob}
+  تمم حجة \olref[tur][und][tra]{lem:halts-sat} بإثبات
+  $\Sat{{\OLId{latin-looped}{M}}'}{!T'({\OLId{latin-looped}{M}},{\OLId{latin-ordinary}{w}})\land !E({\OLId{latin-looped}{M}},{\OLId{latin-ordinary}{w}})}$.
+\end{prob}
+
+\begin{lem}\ollabel{lem:sat-halts}
+  وجود نموذج منته لـ$!T'({\OLId{latin-looped}{M}},{\OLId{latin-ordinary}{w}})\land !E({\OLId{latin-looped}{M}},{\OLId{latin-ordinary}{w}})$ يقتضي أن
+  تتوقف ${\OLId{latin-looped}{M}}$ عند الدخل~${\OLId{latin-ordinary}{w}}$.
+\end{lem}
+
+\begin{proof}
+  نثبت العكس النقيض. لتكن ${\OLId{latin-looped}{M}}$ غير متوقفة عند~${\OLId{latin-ordinary}{w}}$.
+  فإن لم يكن لـ$!T'({\OLId{latin-looped}{M}},{\OLId{latin-ordinary}{w}})\land !E({\OLId{latin-looped}{M}},{\OLId{latin-ordinary}{w}})$ نموذج أصلًا،
+  حصل المطلوب. وإلا فليكن $\Struct{M}$ نموذجًا
+  لـ~$!T'({\OLId{latin-looped}{M}},{\OLId{latin-ordinary}{w}})\land !E({\OLId{latin-looped}{M}},{\OLId{latin-ordinary}{w}})$؛ ونثبت أنه غير منته.
+
+  % تصحيح مصدر (C273-01): لا تلزم B(0) من البديهيات المعروضة؛ اقتصر استعمالها على n>0.
+  يمكن، على مثال حجة \olref[ver]{lem:config}، إثبات أن
+  ${\OLId{latin-looped}{M}}$ إذا لم تتوقف عند الدخل~${\OLId{latin-ordinary}{w}}$ بعد~${\OLId{latin-ordinary}{n}}$ خطوات، كان
+  $!T'({\OLId{latin-looped}{M}},{\OLId{latin-ordinary}{w}})\Entails !C({\OLId{latin-looped}{M}},{\OLId{latin-ordinary}{w}},{\OLId{latin-ordinary}{n}})$؛ وإذا كان ${\OLId{latin-ordinary}{n}}>{\OLMathNumeral{0}}$ لزم أيضًا
+  $!T'({\OLId{latin-looped}{M}},{\OLId{latin-ordinary}{w}})\Entails !B(\num{{\OLId{latin-ordinary}{n}}})$.
+  ومن عدم توقف ${\OLId{latin-looped}{M}}$ عند~${\OLId{latin-ordinary}{w}}$ نستنتج
+  $!T'({\OLId{latin-looped}{M}},{\OLId{latin-ordinary}{w}})\Entails !C({\OLId{latin-looped}{M}},{\OLId{latin-ordinary}{w}},{\OLId{latin-ordinary}{n}})\land !B(\num{{\OLId{latin-ordinary}{n}}})$
+  لكل~${\OLId{latin-ordinary}{n}}>{\OLMathNumeral{0}}$. ثم إن \olref[rep]{prop:mlessk} تعطي
+  $!T'({\OLId{latin-looped}{M}},{\OLId{latin-ordinary}{w}})\Entails\num{{\OLId{latin-ordinary}{k}}}<\num{{\OLId{latin-ordinary}{n}}}$ لكل~${\OLId{latin-ordinary}{k}}<{\OLId{latin-ordinary}{n}}$، ولدينا
+  $!B(\num{{\OLId{latin-ordinary}{n}}})\Entails\num{{\OLId{latin-ordinary}{k}}}<\num{{\OLId{latin-ordinary}{n}}}\lif
+  \eq/[\num{{\OLId{latin-ordinary}{k}}}][\num{{\OLId{latin-ordinary}{n}}}]$. فيلزم
+  $\Sat{{\OLId{latin-looped}{M}}}{\eq/[\num{{\OLId{latin-ordinary}{k}}}][\num{{\OLId{latin-ordinary}{n}}}]}$ لكل~${\OLId{latin-ordinary}{k}}<{\OLId{latin-ordinary}{n}}$.
+  فهذه الحدود~$\num{{\OLId{latin-ordinary}{k}}}$، وهي غير متناهية العدد، لها في
+  $\Struct{M}$ قيم متباينة. ولا يسعها إلا مجال $\Domain{{\OLId{latin-looped}{M}}}$
+  غير منته؛ فلا يكون $\Struct{M}$ نموذجًا منتهيًا
+  لـ$!T'({\OLId{latin-looped}{M}},{\OLId{latin-ordinary}{w}})\land !E({\OLId{latin-looped}{M}},{\OLId{latin-ordinary}{w}})$.
+\end{proof}
+
+\begin{prob}
+  تمم حجة \olref[tur][und][tra]{lem:sat-halts} بإقامة البرهان على أنه إذا لم
+  تتوقف~${\OLId{latin-looped}{M}}$، حين تبدأ عند الدخل~${\OLId{latin-ordinary}{w}}$، بعد~${\OLId{latin-ordinary}{n}}>{\OLMathNumeral{0}}$ خطوة، فإن
+  $!T'({\OLId{latin-looped}{M}},{\OLId{latin-ordinary}{w}})\Entails !B(\num{{\OLId{latin-ordinary}{n}}})$.
+\end{prob}
+
+\begin{thm}[مبرهنة تراختنبروت]
+  \ollabel{thm:trakhtenbrodt}
+  لا يمكن تقرير وجود نموذج منته ل!!{sentence} اعتباطية من
+  الرتبة الأولى، أي تقرير قابليتها للإرضاء على نحو منته.
+\end{thm}
+
+\begin{proof}
+  لو وجدت آلة تورنغ~${\OLId{latin-looped}{F}}$ تقرر قابلية الإرضاء المنتهية،
+  لأخذنا أي آلة~${\OLId{latin-looped}{M}}$ ودخل~${\OLId{latin-ordinary}{w}}$، وحسبنا الجملة
+  $!T'({\OLId{latin-looped}{M}},{\OLId{latin-ordinary}{w}})\land !E({\OLId{latin-looped}{M}},{\OLId{latin-ordinary}{w}})$، ثم استعملنا~${\OLId{latin-looped}{F}}$ في تقرير
+  وجود نموذج منته لها. وبحسب
+  \cref{tur:und:tra:lem:halts-sat,tur:und:tra:lem:sat-halts}،
+  يوجد لها نموذج منته إذا وفقط إذا توقفت ${\OLId{latin-looped}{M}}$ عند
+  الدخل~${\OLId{latin-ordinary}{w}}$. فتكون ${\OLId{latin-looped}{F}}$ سبيلًا إلى حل مسألة التوقف،
+  وقد ثبت امتناع حلها.
+\end{proof}
+
+\begin{cor}\ollabel{cor:fproof-incomp}%
+  % تصحيح مصدر (C273-02): أُظهر شرط الفعالية اللازم لحجة القابلية للحساب.
+  يمتنع وجود نظام !!{derivation} فعّال سليم وتام للصدق المنطقي
+  \emph{المنتهي}، تكون اشتقاقاته قابلة للتعداد الفعّال (أو يكون فحص
+  براهينه المنتهية قابلًا للقرار)؛ أي نظام تتحقق فيه $\Proves !B$ إذا وفقط
+  إذا كان $\Sat{{\OLId{latin-looped}{M}}}{!B}$ لكل !!{structure} منتهية~$\Struct{M}$.
+\end{cor}
+
+\begin{proof}
+  برهانه متروك للتمرين.
+\end{proof}
+
+\begin{prob}
+  برهن \olref[tur][und][tra]{cor:fproof-incomp}. استعمل أن
+  $!B$ تصدق في كل !!{structure} منتهية إذا وفقط إذا كانت
+  $\lnot !B$ غير قابلة للإرضاء على نحو منته. ثم بيّن أن
+  قابلية الإرضاء المنتهية شبه قابلة للقرار بالمعنى الوارد في
+  \olref[tur][und][uns]{thm:valid-ce}. واستنتج من ذلك أن
+  وجود نظام !!a{derivation} فعّال للصدق المنطقي المنتهي كان
+  سيجعل قابلية الإرضاء المنتهية قابلة للقرار.
+\end{prob}
+
+\end{document}

@@ -1,0 +1,101 @@
+% part: intuitionistic-logic
+% chapter: propositions-as-types
+% section: types
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{pty}{typ}
+
+\olsection{في الأنماط}
+
+لا يعيّن حد برهان مثل~$(MN)$ بمفرده البرهان الذي يرمّزه تعيينًا وحيدًا؛
+ذلك أن المتغيرات الحرة، وهي حدود برهان البديهيات، لا تحدد~!!{formula}s في
+البديهيات المقابلة. أما إذا حددناها في سياق~${\OLId{greek-variable}{Gamma}}$، كان البرهان، متى
+وُجد، \emph{معيّنًا تعيينًا وحيدًا} بالنسبة إلى ذلك السياق.
+
+\begin{defn}
+\emph{سياق} حد برهان~${\OLId{latin-looped}{N}}$ هو مجموعة~${\OLId{greek-variable}{Gamma}}$ تحتوي، لكل متغير حر~${\OLId{latin-ordinary}{x}}$ في~${\OLId{latin-looped}{N}}$،
+زوجًا واحدًا بالضبط~${\OLId{latin-ordinary}{x}}:!A$.
+\end{defn}
+
+وتنبّه إلى أن التعريف لا يشترط أن تحتوي~${\OLId{greek-variable}{Gamma}}$ أزواجًا~${\OLId{latin-ordinary}{x}}:!A$
+\emph{للمتغيرات الحرة في~${\OLId{latin-looped}{N}}$ وحدها}. ولذلك، مثلًا، تكون
+${\OLId{greek-variable}{Gamma}}=\{{\OLId{latin-ordinary}{x}}:!A,{\OLId{latin-ordinary}{y}}:!B,{\OLId{latin-ordinary}{z}}:!C\}$ سياقًا لـ~$\pair{{\OLId{latin-ordinary}{x}}}{{\OLId{latin-ordinary}{y}}}$.
+
+\begin{defn}\ollabel{defn:type}
+  لنفرض أن~${\OLId{greek-variable}{Gamma}}$ سياق لـ~${\OLId{latin-looped}{N}}$. يُعرّف \emph{نوع}~${\OLId{latin-looped}{N}}$ بالنسبة إلى
+  ${\OLId{greek-variable}{Gamma}}$ استقرائيًا كما يأتي:
+  \begin{enumerate}
+  \item نوع~${\OLId{latin-ordinary}{x}}$ هو~$!A$ إذا وفقط إذا كان~${\OLId{latin-ordinary}{x}}:!A\in{\OLId{greek-variable}{Gamma}}$.
+  \item إذا كان نوع~${\OLId{latin-looped}{N}}$ بالنسبة إلى~${\OLId{latin-ordinary}{x}}:!A,{\OLId{greek-variable}{Gamma}}$ هو~$!B$، فنوع
+    $\lambd[\typeof{{\OLId{latin-ordinary}{x}}}{!A}][{\OLId{latin-looped}{N}}]$ هو~$!A\lif !B$.
+  \item إذا كان نوع~${\OLId{latin-looped}{N}}$ هو~$!A\lif !B$ ونوع~${\OLId{latin-looped}{M}}$ هو~$!A$، فنوع~$(NM)$
+    هو~$!B$.
+  \item إذا كان نوع~${\OLId{latin-looped}{N}}$ هو~$!A$ ونوع~${\OLId{latin-looped}{M}}$ هو~$!B$، فنوع~$\pair{{\OLId{latin-looped}{N}}}{{\OLId{latin-looped}{M}}}$
+    هو~$!A\land !B$.
+  \item إذا كان نوع~${\OLId{latin-looped}{N}}$ هو~$!A_{\OLMathNumeral{1}}\land !A_{\OLMathNumeral{2}}$، فنوع~$\proj{{\OLId{latin-ordinary}{i}}}{{\OLId{latin-looped}{N}}}$ هو
+    $!A_{\OLId{latin-ordinary}{i}}$.
+  \item إذا كان نوع~${\OLId{latin-looped}{N}}$ هو~$!A$، فنوع~$\inj[!B]{{\OLId{latin-ordinary}{i}}}{{\OLId{latin-looped}{N}}}$ هو
+    $!A\lor !B$ إذا كان~${\OLId{latin-ordinary}{i}}={\OLMathNumeral{1}}$، وهو~$!B\lor !A$ إذا كان~${\OLId{latin-ordinary}{i}}={\OLMathNumeral{2}}$.
+  \item إذا كان نوع~${\OLId{latin-looped}{M}}$ هو~$!A\lor !B$، وكان نوع~${\OLId{latin-looped}{N}}_{\OLMathNumeral{1}}$ بالنسبة إلى
+    ${\OLId{latin-ordinary}{x}}_{\OLMathNumeral{1}}:!A,{\OLId{greek-variable}{Gamma}}$ هو~$!C$، ونوع~${\OLId{latin-looped}{N}}_{\OLMathNumeral{2}}$ بالنسبة إلى~${\OLId{latin-ordinary}{x}}_{\OLMathNumeral{2}}:!B,{\OLId{greek-variable}{Gamma}}$
+    هو~$!C$، فنوع~$\dcase{{\OLId{latin-looped}{M}}}{{\OLId{latin-ordinary}{x}}_{\OLMathNumeral{1}}}{{\OLId{latin-looped}{N}}_{\OLMathNumeral{1}}}{{\OLId{latin-ordinary}{x}}_{\OLMathNumeral{2}}}{{\OLId{latin-looped}{N}}_{\OLMathNumeral{2}}}$ هو~$!C$.
+  \item إذا كان نوع~${\OLId{latin-looped}{N}}$ هو~$\lfalse$، فنوع~$\abort{!A}{{\OLId{latin-looped}{N}}}$ هو~$!A$.
+  \end{enumerate}
+\end{defn}
+
+\begin{prop}
+لكل حد برهان~${\OLId{latin-looped}{N}}$ نوع واحد على الأكثر بالنسبة إلى سياق~${\OLId{greek-variable}{Gamma}}$ له؛ أي إن
+نوعه، إذا وُجد، وحيد بالنسبة إلى~${\OLId{greek-variable}{Gamma}}$.
+\end{prop}
+
+\begin{proof}
+  بالاستقراء في~${\OLId{latin-looped}{N}}$.
+\end{proof}
+
+نكتب~${\OLId{greek-variable}{Gamma}}\Sequent {\OLId{latin-looped}{N}}:!A$ إذا كان نوع~${\OLId{latin-looped}{N}}$ بالنسبة إلى~${\OLId{greek-variable}{Gamma}}$ هو
+$!A$. وينبغي أن تبدو بنود~\olref{defn:type} مألوفة: فهي بالضبط قواعد
+\Log{tN2i} مع فرق طفيف واحد، هو أن السياق~${\OLId{greek-variable}{Gamma}}$ يبقى نفسه طوال البرهان.
+ويمكننا ترميز التعريف في حساب~\Log{tN3i} ذي القواعد الواردة في
+\olref{tab:tN3ip}.
+
+\subfile{rules-tN3}
+
+حدود البرهان حدود في نسخة من حساب لامبدا تسمى \emph{حساب لامبدا المنمّط
+ذو الأنماط الضربية والجمعية والخالية}. ولا يحتوي حساب لامبدا التقليدي إلا
+حدودًا مبنية من المتغيرات، و\emph{تجريدات لامبدا}~$\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-looped}{N}}]$،
+والتطبيق~$(MN)$؛ ولا يحتوي وسم~$!A$ في تجريد لامبدا المنمّط
+$\lambd[\typeof{{\OLId{latin-ordinary}{x}}}{!A}][{\OLId{latin-looped}{N}}]$. وحساب لامبدا نموذج للحوسبة تام تورنغ، أي يمكن
+تمثيل كل دالة جزئية قابلة للحساب فيه بحد. أما نسخته التي تعطيها حدود البرهان
+وقواعد التنميط فهي نموذج حوسبة مقيّد، غير أن أفكاره الأساسية هي نفسها. ويفرض
+إسناد الأنماط هذا القيد: فلا تعد حدودًا مشروعة إلا الحدود \emph{الصحيحة
+النوع}، أي حدود البرهان ذات الأنماط بالنسبة إلى سياق~${\OLId{greek-variable}{Gamma}}$. فمثلًا،
+$\lambd[{\OLId{latin-ordinary}{x}}][(xx)]$ حد مشروع في حساب لامبدا التقليدي غير المنمّط، غير أن
+$\lambd[\typeof{{\OLId{latin-ordinary}{x}}}{!A}][(xx)]$ ليس صحيح النوع لأي~$!A$. ذلك أن قواعد
+التنميط تقتضي، كي يكون لـ~$(xx)$ نوع، أن يكون نوع~${\OLId{latin-ordinary}{x}}$ الأول
+$!A\lif !B$ ونوع~${\OLId{latin-ordinary}{x}}$ الثاني~$!A$؛ وهذا محال لأن~$!A$~!!{formula} جزئية
+أصلية من~$!A\lif !B$.
+
+ويمكن فهم الأنماط حدسيًا بوصفها أصناف الأشياء التي تسميها حدود من تلك
+الأنماط. فالحد من النوع~$!A\land !B$ يعيّن زوجًا مركبته الأولى من النوع
+$!A$ والثانية من النوع~$!B$؛ أي~!!a{element} من الضرب~$!A\times !B$.
+والحد من النوع~$!A\lif !B$ دالة من أشياء النوع~$!A$ إلى أشياء النوع~$!B$.
+والحد من النوع~$!A\lor !B$ إما شيء من النوع~$!A$ وإما شيء من النوع~$!B$،
+ومعه معلومة تحدد أيهما هو. وهذا يشبه الاتحاد المنفصل للمجموعتين~$!A$ و
+$!B$ المعرّف بأنه
+$\{\tuple{{\OLId{latin-ordinary}{i}},{\OLId{latin-ordinary}{x}}}:{\OLId{latin-ordinary}{i}}={\OLMathNumeral{1}}\text{ أو }{\OLMathNumeral{2}}\text{، }{\OLId{latin-ordinary}{x}}\in !A\text{ إذا كان }{\OLId{latin-ordinary}{i}}={\OLMathNumeral{1}}\text{، }
+{\OLId{latin-ordinary}{x}}\in !B\text{ إذا كان }{\OLId{latin-ordinary}{i}}={\OLMathNumeral{2}}\}$. والنوع~$\lfalse$ هو المجموعة الخالية؛
+أي إن حدًا من هذا النوع لا يجوز أن يسمي شيئًا. ولأن الاستنباط الطبيعي، ومنه
+\Log{tN3i}، متسق، فلا يوجد~!!{proof} لـ~$\lfalse$ بغير فروض مفتوحة؛ ومن
+ثم لا يوجد حد برهان مغلق، أي حد بلا متغيرات حرة، نوعه~$\lfalse$.
+
+تنتج مؤثرات حساب لامبدا المنمّط حدودًا تسمي حدسيًا الأشياء من الصنف الصحيح،
+بشرط أن تسمي الحدود التي تطبق عليها أشياء معينة. فمثلًا، تقول العبارة
+``إذا كان~${\OLId{latin-looped}{N}}_{\OLMathNumeral{1}}:!A$ و${\OLId{latin-looped}{N}}_{\OLMathNumeral{2}}:!B$، كان
+$\pair{{\OLId{latin-looped}{N}}_{\OLMathNumeral{1}}}{{\OLId{latin-looped}{N}}_{\OLMathNumeral{2}}}:!A\land !B$'' إن~${\OLId{latin-looped}{N}}_{\OLMathNumeral{1}}$ إذا سمّى شيئًا من النوع~$!A$
+وسمّى~${\OLId{latin-looped}{N}}_{\OLMathNumeral{2}}$ شيئًا من النوع~$!B$، سمّى~$\pair{{\OLId{latin-looped}{N}}_{\OLMathNumeral{1}}}{{\OLId{latin-looped}{N}}_{\OLMathNumeral{2}}}$ شيئًا من النوع
+$!A\land !B$.
+
+\end{document}

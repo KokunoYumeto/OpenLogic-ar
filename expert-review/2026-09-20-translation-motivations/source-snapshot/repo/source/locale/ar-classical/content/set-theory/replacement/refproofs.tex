@@ -1,0 +1,178 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{replacement}{refproofs}
+\olsection{ملحق: نتائج تتعلق بالاستبدال}
+
+نثبت في هذا القسم الانعكاس داخل~$\ZF$، ثم نبين وجهًا يصير به الانعكاس
+مكافئًا للاستبدال، ونختم بنتيجة لافتة في قوتهما. \emph{تنبيه: هذا
+القسم، بفارق ظاهر، أرفع أجزاء الكتاب منزلة في الصعوبة الرياضية.}
+
+ونقدم لمّة نستعمل فيها، اختصارًا، وسيلة ترميزية هي \emph{الخط
+العلوي} للدلالة على متتاليات المتغيرات أو الأشياء. فالعبارة
+«$\overline{a}_k$» تغني عن «$a_{k_1}$، \dots، $a_{k_n}$»، ويعين
+السياق قيمة~$n$.
+
+\begin{lem}\ollabel{lemreflection}
+لكل~$1 \leq i \leq k$، لتكن~$\phi_i(\overline{v}_i, x)$ صيغة. عندئذ
+يوجد لكل~$\alpha$ عدد~$\beta > \alpha$ بحيث، لأي
+$\overline{a}_1, \ldots, \overline{a}_k \in V_\beta$ ولكل
+$1 \leq i \leq k$:
+\[
+	\exists x\phi_i(\overline{a}_i, x) \rightarrow (\exists x \in V_\beta) \phi_i(\overline{a}_i, x)
+\]
+\end{lem}
+
+\begin{proof}
+نعرّف حدًا~$\mu$ كما يلي: نجعل
+$\mu(\overline{a}_1, \ldots, \overline{a}_k)$ أول مرحلة~$V$ تحقق،
+لكل~$1 \leq i \leq k$، الشرطيات الآتية:
+\[
+\exists x\phi_i(\overline{a}_i, x) \rightarrow (\exists x \in V) \phi_i(\overline{a}_i, x)
+\]
+ولا يعسر التحقق من وجود~$\mu(\overline{a}_1, \ldots,
+\overline{a}_k)$ لكل~$\overline{a}_1, \ldots, \overline{a}_k$.
+ثم نستخدم الاستبدال ومبرهنة العودية فنعرّف:
+\begin{align*}
+	S_0 & = V_{\alpha+1}\\
+	S_{n+1} & = S_n \cup \bigcup
+	\Setabs{\mu(\overline{a}_1, \ldots, \overline{a}_k)}
+	{\overline{a}_1, \ldots, \overline{a}_k \in S_n} \\
+	S &= \bigcup_{m < \omega} S_m.
+\end{align*}
+كل~$S_n$، ومن ثم~$S$ نفسها، مرحلة تلي~$V_\alpha$. والآن ثبت
+$\overline{a}_1$، \dots،~$\overline{a}_k \in S$؛ فلا بد من
+$n < \omega$ بحيث~$\overline{a}_1$، \dots،
+$\overline{a}_k \in S_n$. وثبت~$1 \leq i \leq k$، وافترض
+$\exists x\phi_i(\overline{a}_i,x)$. يقتضي البناء
+$(\exists x \in \mu(\overline{a}_1,
+\ldots, \overline{a}_k))\phi_i(\overline{a}_i, x)$؛ ومنه
+$(\exists x \in S_{n+1})\phi_i(\overline{a}_i, x)$، ثم
+$(\exists x \in S)\phi_i(\overline{a}_i, x)$. فهذه~$S$ هي
+$V_\beta$ المطلوبة.
+\end{proof}
+\noindent
+وبهذه اللمّة يصير إثبات
+\olref[sth][replacement][ref]{reflectionschema} مباشرًا:
+
+\begin{proof}[الإثبات]
+ثبّت~$\alpha$. ولا يخل بالعموم أن نجعل روابط~$\phi$ مقصورة على
+$\exists$ و$\lnot$ و$\land$، فهي وافية من جهة القوة التعبيرية.
+ولتكن~$\psi_1, \ldots, \psi_k$ جميع الصيغ الجزئية لـ$\phi$، مرتبة
+بحسب تعقيدها، بحيث~$\psi_k = \phi$. ومن~\olref{lemreflection} يوجد
+$\beta > \alpha$ بحيث، لأي~$\overline{a}_i \in V_\beta$ ولكل
+$1 \leq i \leq k$:
+\begin{align}\label{reflectionnicelybehaved}
+	\exists x\psi_i(\overline{a}_i, x) \rightarrow
+	(\exists x \in V_\beta) \psi_i(\overline{a}_i, x)\tag{*}
+\end{align}
+ونثبت، بالاستقراء في تعقيد~$\psi_i$، أنه لأي
+$\overline{a}_i \in V_\beta$:
+$\psi_i(\overline{a}_i) \leftrightarrow
+\psi_i^{V_\beta}(\overline{a}_i)$. أما إذا كانت~$\psi_i$ ذرية
+فالأمر ظاهر. ويثبت هذا التكافؤ كذلك أنه إذا كانت~$\psi_i$ نفيًا أو
+اقترانًا لصيغ جزئية تحققه، فإن~$\psi_i$ نفسها تحققه؛ فلا تبقى إلا
+حالة التكميم. ثبت
+$\overline{a}_i \in V_\beta$؛ فعندئذ:
+\begin{align*}
+	(\exists x \psi_i(\overline{a}_i, x))^{V_\beta}
+	&\text{ إذا وفقط إذا }
+	(\exists x \in V_\beta)\psi_i^{V_\beta}(\overline{a}_i, x)
+	&&\text{بحكم التعريف}\\
+	&\text{ إذا وفقط إذا }
+	(\exists x \in V_\beta)\psi_i(\overline{a}_i,  x)
+	&&\text{بحكم فرض الاستقراء}\\
+	&\text{ إذا وفقط إذا }
+	\exists x \psi_i(\overline{a}_i, x)
+	&&\text{بموجب \eqref{reflectionnicelybehaved}}
+\end{align*}
+فتم الاستقراء، والنتيجة تابعة من~$\psi_k = \phi$.
+\end{proof}
+
+ثبت إذن الانعكاس في~$\ZF$، وبرهاننا في جوهره طريق
+\citet{Montague1961}. ونريد الآن أن نثبت، داخل~$\Z$، أن الانعكاس
+يستلزم الاستبدال. والبرهان الآتي تبسيط لطريق~\citet{Levy1960}.
+
+ولأننا نعمل في~$\Z$، لا يمكننا عرض الانعكاس بالصورة السابقة؛ فقد
+استعملت تلك الصورة الرمز «$V_\alpha$»، وهو غير قابل للتعريف في~$\Z$
+(انظر~\olref[sth][spine][zf]{sec}). فنستعيض عنها بصورة تبدو أضعف:
+
+\begin{defish}
+\emph{الانعكاس الضعيف.} لكل صيغة~$\phi$، توجد مجموعة متعدية~$S$ بحيث
+تكون~$0$ و$1$ وأي وسائط لـ$\phi$ من !!{element}s~$S$، ويكون
+$(\forall \overline{x} \in S)(\phi \liff \phi^S)$.
+\end{defish}
+
+ولكي نستعمل هذا في إثبات الاستبدال، نتبع أولًا
+\citet[first part of Theorem 2]{Levy1960} ونثبت إمكان «عكس» صيغتين
+معًا:
+
+\begin{lem}[في $\Z + \text{الانعكاس الضعيف}$.]\ollabel{lem:reflect}
+لكل صيغتين~$\psi, \chi$، توجد مجموعة متعدية~$S$ بحيث يكون~$0$ و$1$
+(وأي وسائط للصيغتين) من !!{element}s~$S$، ويكون
+$(\forall \overline{x} \in S)((\psi \liff \psi^S) \land (\chi
+\liff \chi^S))$.
+\end{lem}
+
+\begin{proof}
+ضع~$\phi$ مساوية للصيغة~$(z = 0 \land \psi) \lor (z = 1 \land \chi)$.
+
+وفي هذا اختصار ينبغي كشفه: فالعبارة «$z = 0$» حقها أن تفصل إلى
+«$\forall t\, t \notin z$»، والعبارة «$z =1$» إلى «$\forall s(s \in z
+\liff \forall t\, t \notin s)$». غير أن~$0, 1 \in S$، وأن~$S$
+متعدية؛ فهاتان الصيغتان \emph{مطلقتان} بالنسبة إلى~$S$، أي تصدقان في
+الشيء نفسه، سواء قيدنا مكمماتهما بـ$S$ أم أطلقناها.
+\footnote{وبصيغة أدق، إذا كانت~$\xi$ إحدى هاتين الصيغتين، فإن
+$\xi(z) \liff \xi^S(z)$.}
+
+ويعطينا الانعكاس الضعيف~$S$ ملائمة بحيث:
+\begin{align*}
+	(\forall z, \overline{x} \in S)(&\phi \liff \phi^S)\\
+	\text{أي }(\forall z, \overline{x} \in S)(&((z = 0 \land \psi) \lor (z = 1 \land \chi)) \liff {}\\
+	&\phantom{(}((z = 0 \land \psi) \lor (z = 1 \land \chi))^S)\\
+	\text{أي }(\forall z, \overline{x} \in S)(&((z = 0 \land \psi) \lor (z = 1 \land \chi))\liff {}\\
+	&\phantom{(}((z = 0 \land \psi^S) \lor (z = 1 \land \chi^S)))\\
+	\text{أي }(\forall \overline{x} \in S)(&(\psi \liff \psi^S) \land (\chi \liff \chi^S))
+\end{align*}
+فالادعاء الثاني يقتضي الثالث لإطلاق «$z = 0$» و«$z=1$» بالنسبة
+إلى~$S$؛ والرابع تابع لأن~$0 \neq 1$.
+\end{proof}\noindent
+ثم نحصل على الاستبدال باتباع
+\citet[Theorem 6]{Levy1960} مع تبسيط الحجة:
+
+\begin{thm}[في $\Z$ + الانعكاس الضعيف]\label{thm:replacement}
+لكل صيغة~$\phi(v,w)$ ولكل~$A$، إذا كان
+$(\forall x \in A)\lexists![y][\phi(x,y)]$، فإن
+$\Setabs{y}{(\exists x \in A)\phi(x,y)}$ موجودة.
+\end{thm}
+
+\begin{proof}
+ثبّت~$A$ بحيث~$(\forall x \in A)\lexists![y][\phi(x,y)]$، وعرّف
+الصيغتين:
+\begin{align*}
+	\psi &\text{ هي } (\phi(x, z) \land A = A)\\
+	\chi &\text{ هي } \lexists[y][\phi(x, y)]
+\end{align*}
+من~\olref{lem:reflect}، ولأن~$A$ وسيط في~$\psi$، توجد مجموعة متعدية
+$S$ بحيث~$0, 1, A \in S$، ومعها سائر الوسائط، وبحيث:
+\[
+	(\forall x,z \in S)((\psi \liff \psi^S) \land (\chi \liff \chi^S))
+\]
+فيكون، على الخصوص:
+\begin{align*}
+	(\forall  x, z \in S)(&\phi(x, z) \liff \phi^S(x, z))\\
+	(\forall x \in S)(&\exists y\phi(x, y) \liff (\exists y \in S)\phi^S(x, y))
+\end{align*}
+نجمع بينهما، ونلاحظ أن~$A \subseteq S$ لأن~$A \in S$ و$S$ متعدية،
+فنحصل على:
+\begin{align*}
+	(\forall x \in A)(&\exists y\phi(x, y) \liff (\exists y \in S)\phi(x, y))
+\end{align*}
+ولما كان~$(\forall x \in A)\lexists![y \in S][\phi(x,y)]$، من
+الفرض~$(\forall x \in A)\lexists![y][\phi(x, y)]$، أعطانا الفصل
+$\Setabs{y \in S}{(\exists x \in A) \phi(x, y)} = \Setabs{y}{(\exists
+x \in A) \phi(x, y)}$.
+\end{proof}
+
+\end{document}

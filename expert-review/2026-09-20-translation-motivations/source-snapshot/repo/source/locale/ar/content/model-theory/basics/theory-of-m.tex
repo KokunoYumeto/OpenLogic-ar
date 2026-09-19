@@ -1,0 +1,62 @@
+% Part: model-theory
+% Chapter: basics
+% Section: theory-of-m
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{bas}{thm}
+
+\section{نظرية \printtoken{S}{structure}}
+
+تجعل كل !!{structure}~$\Struct{M}$ بعض الـ!!{sentence}s صادقة وبعضها
+كاذبة. وتسمى مجموعة جميع الـ!!{sentence}s التي تجعلها صادقة
+\emph{نظريتها}. وهذه المجموعة نظرية بالفعل، لأن كل ما تستلزمه لا بد أن
+يكون صادقًا في جميع نماذجها، ومنها~$\Struct{M}$.
+
+\begin{defn}
+  لتكن !!a{structure}~$\Struct M$. \emph{نظرية} $\Struct{M}$ هي مجموعة
+  الـ!!{sentence}s~$\Theory{M}$ الصادقة في $\Struct{M}$، أي
+  $\Theory{M} = \Setabs{!A}{\Sat{M}{!A}}$.
+\end{defn}
+
+ونستعمل لفظ «نظرية» أيضًا استعمالًا غير رسمي للإشارة إلى مجموعات من
+الـ!!{sentence}s لها تفسير مقصود، سواء أكانت مغلقة استنباطيًا أم لم تكن.
+
+\begin{prop}
+لكل $\Struct{M}$، تكون $\Theory{M}$ تامة.
+\end{prop}
+
+\begin{proof}
+لكل !!{sentence}~$!A$، إما أن $\Sat{M}{!A}$ وإما أن
+$\Sat{M}{\lnot !A}$؛ ومن ثم إما أن $!A \in \Theory{M}$ وإما أن
+$\lnot !A \in \Theory{M}$.
+\end{proof}
+
+\begin{prop}\ollabel{prop:equiv}
+  إذا كان $\Struct{N} \models !A$ لكل $!A \in \Theory{M}$، فإن
+  $\Struct{M} \elemequiv \Struct{N}$.
+\end{prop}
+
+\begin{proof}
+بما أن $\Sat{N}{!A}$ لكل $!A \in \Theory{M}$، فإن
+$\Theory{M} \subseteq \Theory{N}$. وإذا كان $\Sat{N}{!A}$، فلا يكون
+$\Sat{N}{\lnot !A}$، ومن ثم $\lnot !A \notin \Theory{M}$. ولما كانت
+$\Theory{M}$ تامة، كان $!A \in \Theory{M}$. ولذلك
+$\Theory{N} \subseteq \Theory{M}$، فنحصل على
+$\Struct{M} \elemequiv \Struct{N}$.
+\end{proof}
+
+\begin{rem}\ollabel{remark:R}
+  تأمل $\Struct{R} = \langle\Real, <\rangle$، وهي الـ!!{structure} التي
+  مجالها مجموعة الأعداد الحقيقية~$\Real$، في الـ!!{language} التي لا
+  تضم إلا !!{predicate} ذا موضعين يفسر بعلاقة~$<$ على الأعداد الحقيقية.
+  من الواضح أن $\Struct{R}$~!!{nonenumerable}؛ غير أن $\Theory{R}$
+  متسقة بوضوح، ومن ثم فلها، بمبرهنة لوفنهايم--سكولم، نموذج
+  !!{enumerable}، ولنسمه $\Struct{S}$. وبحسب \olref{prop:equiv} يكون
+  $\Struct{R} \equiv \Struct{S}$. ثم إن $\Struct{R}$ و$\Struct{S}$
+  غير متشاكلتين، وهذا يبين أن عكس \olref[iso]{thm:isom} لا يصح عمومًا.
+\end{rem}
+
+\end{document}

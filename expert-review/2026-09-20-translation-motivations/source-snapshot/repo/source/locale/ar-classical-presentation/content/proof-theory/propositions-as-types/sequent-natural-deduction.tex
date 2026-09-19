@@ -1,0 +1,124 @@
+% part: intuitionistic-logic
+% chapter: propositions-as-types
+% section: sequent-natural-deduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{pty}{snd}
+
+\olsection{في الاستنباط الطبيعي بالمتتاليات}
+
+نكتب~${\OLId{greek-variable}{Gamma}} \Sequent !A$ إذا وُجد~!!{derivation} استنباط طبيعي تكون
+${\OLId{greek-variable}{Gamma}}$ فروضه~!!{undischarged} و$!A$ نتيجته؛ ونكتب~$\Sequent !A$ إذا كانت
+${\OLId{greek-variable}{Gamma}}$ خالية.
+
+ونكتب~${\OLId{greek-variable}{Gamma}},!A_{\OLMathNumeral{1}},\dots,!A_{\OLId{latin-ordinary}{n}}$ بدل~${\OLId{greek-variable}{Gamma}}\cup\{!A_{\OLMathNumeral{1}},\dots,!A_{\OLId{latin-ordinary}{n}}\}$،
+و${\OLId{greek-variable}{Gamma}},{\OLId{greek-variable}{Delta}}$ بدل~${\OLId{greek-variable}{Gamma}}\cup{\OLId{greek-variable}{Delta}}$.
+
+لاحظ أننا حين ينتج لنا~${\OLId{greek-variable}{Gamma}}\Sequent !A\land !B$، أي حين يكون لدينا
+!!a{derivation} فروضه~${\OLId{greek-variable}{Gamma}}$~!!{undischarged} وصيغته النهائية
+!!{formula}~$!A\land !B$، نستطيع بتطبيق~$\Elim{\land}$ في الأسفل الحصول على
+!!a{derivation} له الفروض~!!{undischarged} نفسها ونتيجته~$!A$. وبعبارة
+أخرى، إذا كان~${\OLId{greek-variable}{Gamma}}\Sequent !A\land !B$، كان~${\OLId{greek-variable}{Gamma}}\Sequent !A$.
+\begin{prooftree}
+  \Axiom${\OLId{greek-variable}{Gamma}} \fCenter !A \land !B$
+  \RightLabel{$\Elim{\land}$}
+  \UnaryInf${\OLId{greek-variable}{Gamma}} \fCenter !A$
+  \DisplayProof\qquad\bottomAlignProof
+  \Axiom${\OLId{greek-variable}{Gamma}} \fCenter !A \land !B$
+  \RightLabel{$\Elim{\land}$}
+  \UnaryInf${\OLId{greek-variable}{Gamma}} \fCenter !B$
+\end{prooftree}
+ويشير الوسم~$\Elim{\land}$ إلى الصلة بالقاعدة التي تحمل الاسم نفسه في
+الاستنباط الطبيعي.
+
+وبالمثل، لنفرض أن لدينا~${\OLId{greek-variable}{Gamma}},!A\Sequent !B$، أي لدينا~!!a{derivation}
+فروضه~${\OLId{greek-variable}{Gamma}},!A$~!!{undischarged} وصيغته النهائية~!!{formula}~$!B$. فإذا طبقنا قاعدة
+$\Intro{\lif}$ حصلنا على~!!a{derivation} تكون~${\OLId{greek-variable}{Gamma}}$ فروضه
+!!{undischarged} و$!A\lif !B$ صيغته النهائية~!!{formula}، أي
+${\OLId{greek-variable}{Gamma}}\Sequent !A\lif !B$. ولاحظ كيف جعل ذلك~!!{discharge} الفروض أكثر
+صراحة.
+\begin{prooftree}
+  \Axiom ${\OLId{greek-variable}{Gamma}}, !A \fCenter !B$
+  \RightLabel{$\Intro{\lif}$}
+  \UnaryInf ${\OLId{greek-variable}{Gamma}} \fCenter !A \lif !B$
+\end{prooftree}
+
+ويمكننا استخلاص نتائج من القواعد الأخرى بالطريقة نفسها، وترد مفصلةً هنا:
+\begin{gather*}
+  \Axiom ${\OLId{greek-variable}{Gamma}} \fCenter !A$
+  \Axiom ${\OLId{greek-variable}{Delta}} \fCenter !B$
+  \RightLabel{$\Intro{\land}$}
+  \BinaryInf ${\OLId{greek-variable}{Gamma}},{\OLId{greek-variable}{Delta}} \fCenter !A \land !B$
+  \DisplayProof\\
+  \Axiom ${\OLId{greek-variable}{Gamma}} \fCenter !A \land !B$
+  \RightLabel{$\Elim{\land}_{\OLMathNumeral{1}}$}
+  \UnaryInf ${\OLId{greek-variable}{Gamma}} \fCenter !A$
+  \DisplayProof
+  \qquad
+  \Axiom ${\OLId{greek-variable}{Gamma}} \fCenter !A \land !B$
+  \RightLabel{$\Elim{\land}_{\OLMathNumeral{2}}$}
+  \UnaryInf ${\OLId{greek-variable}{Gamma}} \fCenter !B$
+  \DisplayProof
+  \\
+  \Axiom ${\OLId{greek-variable}{Gamma}} \fCenter !A$
+  \RightLabel{$\Intro{\lor}_{\OLMathNumeral{1}}$}
+  \UnaryInf ${\OLId{greek-variable}{Gamma}} \fCenter !A \lor !B$
+  \DisplayProof\qquad
+  \Axiom ${\OLId{greek-variable}{Gamma}} \fCenter !B$
+  \RightLabel{$\Intro{\lor}_{\OLMathNumeral{2}}$}
+  \UnaryInf ${\OLId{greek-variable}{Gamma}} \fCenter !A \lor !B$
+  \DisplayProof\\
+  \Axiom ${\OLId{greek-variable}{Gamma}} \fCenter !A \lor !B$
+  \Axiom ${\OLId{greek-variable}{Delta}}, !A \fCenter !C$
+  \Axiom ${\OLId{greek-variable}{Delta}}', !B \fCenter !C$
+  \RightLabel{$\Elim{\lor}$}
+  \TrinaryInf ${\OLId{greek-variable}{Gamma}}, {\OLId{greek-variable}{Delta}}, {\OLId{greek-variable}{Delta}}' \fCenter !C$
+  \DisplayProof
+  \\
+  \Axiom ${\OLId{greek-variable}{Gamma}}, !A \fCenter !B$
+  \RightLabel{$\Intro{\lif}$}
+  \UnaryInf ${\OLId{greek-variable}{Gamma}} \fCenter !A \lif !B$
+  \DisplayProof
+  \qquad
+  \Axiom ${\OLId{greek-variable}{Delta}} \fCenter !A \lif !B$
+  \Axiom ${\OLId{greek-variable}{Gamma}} \fCenter !A$
+  \RightLabel{$\Elim{\lif}$}
+  \BinaryInf ${\OLId{greek-variable}{Gamma}}, {\OLId{greek-variable}{Delta}} \fCenter !B$
+  \DisplayProof
+  \\
+  \Axiom ${\OLId{greek-variable}{Gamma}} \fCenter \lfalse$
+  \RightLabel{$\FalseInt$}
+  \UnaryInf ${\OLId{greek-variable}{Gamma}} \fCenter !A$
+  \DisplayProof
+\end{gather*}
+
+وكل فرض بمفرده~!!a{derivation} لـ~$!A$ من~$!A$؛ أي إن لدينا دائمًا
+$!A\Sequent !A$.
+
+\begin{prooftree}
+  \AxiomC{$ $}
+  \UnaryInfC{$!A \fCenter !A$}
+\end{prooftree}
+
+يمكن اتخاذ هذه القواعد مجتمعةً حسابًا لما يوجد من~!!{derivation}s الاستنباط
+الطبيعي. ويمكن كذلك اتخاذها تنويعًا ترميزيًا للاستنباط الطبيعي تسجل فيه كل
+خطوة لا~!!{formula} الناتجة من~!!{derive} فحسب، بل كذلك الفروض
+!!{undischarged} التي انطلق منها ذلك~!!{derive}.
+
+\begin{prooftree}
+  \Axiom$!A \fCenter !A$
+  \UnaryInf$!A \fCenter !A \lor (!A \lif \lfalse)$
+  \Axiom$!B \fCenter !B$
+  \BinaryInf$!A,!B \fCenter \lfalse$
+  \UnaryInf$!B \fCenter !A \lif \lfalse$
+  \UnaryInf$!B \fCenter !A \lor (!A \lif \lfalse)$
+  \Axiom$!B \fCenter !B$
+  \BinaryInf$!B \fCenter \lfalse$
+  \UnaryInf$\fCenter !B \lif \lfalse$
+\end{prooftree}
+حيث~$!B$ اختصار لـ~$(!A\lor(!A\lif\lfalse))\lif\lfalse$.
+
+\end{document}

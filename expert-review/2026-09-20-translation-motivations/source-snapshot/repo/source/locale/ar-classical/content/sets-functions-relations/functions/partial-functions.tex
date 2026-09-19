@@ -1,0 +1,70 @@
+% Part: sets-functions-relations
+% Chapter: functions
+% Section: partial-functions
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+
+\begin{document}
+
+\olfileid[ar]{sfr}{fun}{par}
+
+\olsection{الدوال الجزئية}
+
+\begin{explain}
+قد ينفع إسقاط شرط من تعريف الدالة، فلا نوجب وجود مخرج لكل مدخل
+ممكن. والتعيينات التي تجوز عند هذا التخفيف تسمى \emph{دوالًا جزئية}.
+\end{explain}
+
+\begin{defn}
+\emph{الدالة الجزئية} $f \colon A \pto B$ تعيين يجعل لكل
+!!{element} من~$A$ ما لا يزيد على !!{element} واحد من~$B$.
+فإن عيّنت $f$ عنصرًا من~$B$ للمدخل $x \in A$، كانت $f(x)$
+\emph{معرّفة}، وإلا كانت \emph{غير معرّفة}. ونكتب في الحال الأولى،
+إذا تعينت $f(x)$، الرمز $f(x) \fdefined$، وفي الأخرى $f(x) \fundefined$.
+و\emph{مجال} الجزئية~$f$ ما عُرّفت عليه من~$A$، أي
+$\dom{f} = \Setabs{x \in A}{f(x) \fdefined}$.
+\end{defn}
+
+\begin{ex}
+كل دالة $f\colon A \to B$ جزئية أيضًا. والجزئية التي تعرّف على~$A$
+كلها، وهي ما سميناه إلى الآن دالة فحسب، تسمى دالة \emph{كلية}.
+\end{ex}
+
+\begin{ex}
+خذ الجزئية $f \colon \Real \pto \Real$ المحددة بـ$f(x) = 1/x$؛
+فهي لا تعرّف عند $x = 0$، وتعرّف في كل ما سواه.
+\end{ex}
+
+\begin{prob}
+خذ $f\colon A \pto B$، واجعل $g\colon B \pto A$ جزئية على الوجه
+الآتي: لكل $y \in B$، إن وجد $x \in A$ وحيد يحقق $f(x) = y$
+ضع $g(y) = x$، وإلا فـ$g(y) \fundefined$. أثبت أنه إذا كانت
+$f$ متباينة، كان $g(f(x)) = x$ لكل $x \in \dom{f}$،
+و$f(g(y)) = y$ لكل $y \in \ran{f}$.
+\end{prob}
+
+\begin{defn}[الرسم البياني لدالة جزئية]
+للدالة الجزئية $f\colon A \pto B$ \emph{رسم بياني} للدالة~$f$، وهو العلاقة
+$R_f \subseteq A \times B$ ذات التعريف
+\[
+R_f = \Setabs{\tuple{x,y}}{f(x) = y}.
+\]
+\end{defn}
+
+\begin{prop}
+لتكن $R \subseteq A \times B$ بحيث لا يجتمع $Rxy$ و$Rxy'$ إلا مع
+$y = y'$. فتكون $R$ رسم الجزئية $f\colon A \pto B$ التي نعرّفها:
+إن وجد $y$ مع $Rxy$ وضعنا $f(x) = y$، وإلا فـ$f(x) \fundefined$.
+فإن كانت $R$ \emph{تسلسلية} أيضًا، أي لكل $x \in A$ يوجد
+$y \in B$ يحقق $Rxy$، كانت $f$ كلية.
+\end{prop}
+
+\begin{proof}
+افرض وجود $y$ بحيث $Rxy$. فلا يجوز وجود $y' \neq y$ مع $Rxy'$،
+وإلا خولف شرط~$R$. فمتى وجد $y$ يحقق $Rxy$ كان هذا $y$ وحيدًا،
+فيصح تعريف $f$. ومنه يظهر $R_f = R$، وتكون $f$ كلية متى
+كانت~$R$ تسلسلية.
+\end{proof}
+
+\end{document}

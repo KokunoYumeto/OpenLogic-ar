@@ -1,0 +1,104 @@
+% Part: lambda-calculus
+% Chapter: church-rosser
+% Section: parallel-beta-eta-reduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{cr}{pbe}
+
+\olsection{اختزال~$\beta\eta$ المتوازي}
+
+المطلوب في هذا القسم إثبات خاصية تشيرش--روسر لاختزال~$\beta\eta$ المتوازي؛
+فهو النظير المتوازي لاختزال~$\beta\eta$.
+
+\begin{defn}[اختزال~$\beta\eta$ المتوازي، $\beredpar$] \ollabel{defn:beredpar}
+  لعلاقة \emph{اختزال~$\beta\eta$ المتوازي} ($\beredpar$) على الحدود
+  التعريف الاستقرائي التالي:
+  \begin{enumerate}
+    \item \ollabel{defn:beredpar1} ${\OLId{latin-ordinary}{x}} \beredpar {\OLId{latin-ordinary}{x}}$.
+    \item \ollabel{defn:beredpar2} من~${\OLId{latin-looped}{N}} \beredpar {\OLId{latin-looped}{N}}'$ يلزم
+      $\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-looped}{N}}] \beredpar \lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-looped}{N}}']$.
+    \item \ollabel{defn:beredpar3} من~${\OLId{latin-looped}{P}} \beredpar {\OLId{latin-looped}{P}}'$ و
+      ${\OLId{latin-looped}{Q}} \beredpar {\OLId{latin-looped}{Q}}'$ يلزم~$PQ \beredpar {\OLId{latin-looped}{P}}'{\OLId{latin-looped}{Q}}'$.
+    \item \ollabel{defn:beredpar4} من~${\OLId{latin-looped}{N}} \beredpar {\OLId{latin-looped}{N}}'$ و
+      ${\OLId{latin-looped}{Q}} \beredpar {\OLId{latin-looped}{Q}}'$ يلزم
+      $(\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-looped}{N}}]){\OLId{latin-looped}{Q}} \beredpar \Subst{{\OLId{latin-looped}{N}}'}{{\OLId{latin-looped}{Q}}'}{{\OLId{latin-ordinary}{x}}}$.
+    \item \ollabel{defn:beredpar5} من~${\OLId{latin-looped}{N}} \beredpar {\OLId{latin-looped}{N}}'$ يلزم
+      $\lambd[{\OLId{latin-ordinary}{x}}][Nx] \beredpar {\OLId{latin-looped}{N}}'$، بشرط~${\OLId{latin-ordinary}{x}} \notin \FV{{\OLId{latin-looped}{N}}}$.
+  \end{enumerate}
+\end{defn}
+
+\begin{thm}\ollabel{thm:refl}
+  ${\OLId{latin-looped}{M}} \beredpar {\OLId{latin-looped}{M}}$.
+\end{thm}
+
+\begin{proof}
+  يترك إثبات ذلك تمرينًا.
+\end{proof}
+
+\begin{prob}
+  أقم برهان~\olref[lam][cr][pbe]{thm:refl}.
+\end{prob}
+
+\begin{defn}[التطوير الكامل بحسب~$\beta\eta$]\ollabel{defn:becd}
+  \emph{التطوير الكامل بحسب~$\beta\eta$}، ورمزه~$\becd{{\OLId{latin-looped}{M}}}$، للحد~${\OLId{latin-looped}{M}}$
+  هو المحدد بالقواعد الآتية:
+  \begin{align}
+    \becd{{\OLId{latin-ordinary}{x}}} &= {\OLId{latin-ordinary}{x}} \ollabel{defn:becd1} \\
+    \becd{(\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-looped}{N}}])} &= \lambd[{\OLId{latin-ordinary}{x}}][\becd{{\OLId{latin-looped}{N}}}] \ollabel{defn:becd2}
+      && \text{إذا لم يكن~${\OLId{latin-looped}{N}}$ من الصورة~${\OLId{latin-looped}{P}} {\OLId{latin-ordinary}{x}}$ مع~${\OLId{latin-ordinary}{x}}\notin\FV{{\OLId{latin-looped}{P}}}$}\\
+    \becd{(PQ)} &= \becd{{\OLId{latin-looped}{P}}}\becd{{\OLId{latin-looped}{Q}}} && \text{إذا لم يكن~${\OLId{latin-looped}{P}}$ تجريد~$\lambd$}
+    \ollabel{defn:becd3} \\
+    \becd{((\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-looped}{N}}]){\OLId{latin-looped}{Q}})} &= \Subst{\becd{{\OLId{latin-looped}{N}}}}{\becd{{\OLId{latin-looped}{Q}}}}{{\OLId{latin-ordinary}{x}}}
+                             \ollabel{defn:becd4} \\
+    \becd{(\lambd[{\OLId{latin-ordinary}{x}}][Nx])} &= \becd{{\OLId{latin-looped}{N}}} \ollabel{defn:becd5} &
+      \text{إذا كان~${\OLId{latin-ordinary}{x}} \notin \FV{{\OLId{latin-looped}{N}}}$}
+  \end{align}
+\end{defn}
+
+\begin{lem}\ollabel{lem:comp}
+  من~${\OLId{latin-looped}{M}} \beredpar {\OLId{latin-looped}{M}}'$ و${\OLId{latin-looped}{R}} \beredpar {\OLId{latin-looped}{R}}'$ يلزم~$\Subst{{\OLId{latin-looped}{M}}}{{\OLId{latin-looped}{R}}}{{\OLId{latin-ordinary}{y}}}
+  \beredpar \Subst{{\OLId{latin-looped}{M}}'}{{\OLId{latin-looped}{R}}'}{{\OLId{latin-ordinary}{y}}}$.
+\end{lem}
+
+\begin{proof}
+  نستقرئ~!!{derivation} العبارة~${\OLId{latin-looped}{M}} \beredpar {\OLId{latin-looped}{M}}'$.
+  وعند الحاجة نغير أسماء الممثلين بتحويل~${\OLId{greek-variable}{alpha}}$ قبل النظر في حالات الإحلال،
+  حتى يحقق متغير التجريد~${\OLId{latin-ordinary}{x}} \ne {\OLId{latin-ordinary}{y}}$، ولا يقع~${\OLId{latin-ordinary}{x}}$ حرًا في~${\OLId{latin-looped}{R}}$ ولا في~${\OLId{latin-looped}{R}}'$.
+
+  أما الحالات الأربع الأولى فهي بعينها حالات~\olref[pb]{lem:comp}.
+  وأما إذا ختم الاشتقاق بالقاعدة~\olref{defn:beredpar5}، فإن~${\OLId{latin-looped}{M}}$
+  هو~$\lambd[{\OLId{latin-ordinary}{x}}][Nx]$ و${\OLId{latin-looped}{M}}'$ هو~${\OLId{latin-looped}{N}}'$، لبعض~${\OLId{latin-ordinary}{x}}$ و${\OLId{latin-looped}{N}}$ و${\OLId{latin-looped}{N}}'$،
+  مع~${\OLId{latin-ordinary}{x}} \notin \FV{{\OLId{latin-looped}{N}}}$ و${\OLId{latin-looped}{N}} \beredpar {\OLId{latin-looped}{N}}'$.
+  فالمطلوب~$\Subst{(\lambd[{\OLId{latin-ordinary}{x}}][Nx])}{{\OLId{latin-looped}{R}}}{{\OLId{latin-ordinary}{y}}} \beredpar \Subst{{\OLId{latin-looped}{N}}'}{{\OLId{latin-looped}{R}}'}{{\OLId{latin-ordinary}{y}}}$،
+  أي~$\lambd[{\OLId{latin-ordinary}{x}}][\Subst{{\OLId{latin-looped}{N}}}{{\OLId{latin-looped}{R}}}{{\OLId{latin-ordinary}{y}}} {\OLId{latin-ordinary}{x}}] \beredpar \Subst{{\OLId{latin-looped}{N}}'}{{\OLId{latin-looped}{R}}'}{{\OLId{latin-ordinary}{y}}}$.
+  وتحصل هذه النتيجة من~\olref{defn:beredpar}\olref{defn:beredpar5}
+  ومن فرض الاستقراء.
+\end{proof}
+
+\begin{lem}\ollabel{lem:cont}
+  من~${\OLId{latin-looped}{M}} \beredpar {\OLId{latin-looped}{M}}'$ يلزم~${\OLId{latin-looped}{M}}' \beredpar \becd{{\OLId{latin-looped}{M}}}$.
+\end{lem}
+
+\begin{proof}
+  نستقرئ~!!{derivation} العبارة~${\OLId{latin-looped}{M}} \beredpar {\OLId{latin-looped}{M}}'$.
+
+  تجري الحالات الأربع الأولى على مثال~\olref[pb]{lem:cont}.
+  فإن كانت القاعدة الأخيرة~\olref{defn:beredpar5}، كان~${\OLId{latin-looped}{M}}$ هو~$\lambd[{\OLId{latin-ordinary}{x}}][Nx]$
+  و${\OLId{latin-looped}{M}}'$ هو~${\OLId{latin-looped}{N}}'$، لبعض~${\OLId{latin-ordinary}{x}}$ و${\OLId{latin-looped}{N}}$ و${\OLId{latin-looped}{N}}'$،
+  مع~${\OLId{latin-ordinary}{x}} \notin \FV{{\OLId{latin-looped}{N}}}$ و${\OLId{latin-looped}{N}} \beredpar {\OLId{latin-looped}{N}}'$.
+  فنطلب~${\OLId{latin-looped}{N}}' \beredpar \becd{(\lambd[{\OLId{latin-ordinary}{x}}][Nx])}$،
+  أو، وهو نفسه،~${\OLId{latin-looped}{N}}' \beredpar \becd{{\OLId{latin-looped}{N}}}$؛ وهذا حاصل من فرض الاستقراء مباشرة.
+\end{proof}
+
+\begin{thm}\ollabel{thm:cr}
+  العلاقة~$\beredpar$ ذات خاصية تشيرش--روسر.
+\end{thm}
+
+\begin{proof}
+  النتيجة لازمة مباشرة من~\olref{lem:cont}.
+\end{proof}
+
+\end{document}

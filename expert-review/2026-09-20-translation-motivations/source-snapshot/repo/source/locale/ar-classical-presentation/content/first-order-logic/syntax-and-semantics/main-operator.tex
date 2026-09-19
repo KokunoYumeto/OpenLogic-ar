@@ -1,0 +1,98 @@
+% Part: first-order-logic
+% Chapter: syntax-and-semantics
+% Section: main-operator
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{syn}{mai}
+
+\olsection{\printtoken{S}{main operator} لصيغة}
+
+\begin{explain}
+قد نحتاج في البحث إلى تعيين آخر مؤثر استُعمل في تأليف
+!!a{formula}~$!A$؛ فهذا هو \emph{المؤثر الرئيس}
+لـ~$!A$. وتقريبه إلى الذهن أنه المؤثر الذي يقع في ظاهر~$!A$
+ويحيط بسائر تأليفها. فالمؤثر الرئيس لـ~$\lnot !A$ هو $\lnot$،
+ولـ~$(!A \lor !B)$ هو $\lor$، وعلى ذلك يُقاس.
+\end{explain}
+
+
+\begin{defn}[!!^{main operator}]
+\ollabel{def:main-op}
+يُعرّف \emph{!!{main operator}} ل!!a{formula}~$!A$ كما يأتي:
+\begin{enumerate}
+\item \indcase*{!A}{!A}{ليس لـ~$\indfrm$ !!{main operator}.}
+
+\tagitem{prvNot}{\indcase{!A}{\lnot !B}{!!{main operator} لـ~$\indfrm$
+  هو~$\lnot$.}}{}
+
+\tagitem{prvAnd}{\indcase{!A}{(!B \land !C)}{!!{main operator}
+  لـ~$\indfrm$ هو~$\land$.}}{}
+
+\tagitem{prvOr}{\indcase{!A}{(!B \lor !C)}{!!{main operator}
+  لـ~$\indfrm$ هو~$\lor$.}}{}
+
+\tagitem{prvIf}{\indcase{!A}{(!B \lif !C)}{!!{main operator}
+  لـ~$\indfrm$ هو~$\lif$.}}{}
+
+\tagitem{prvIff}{\indcase{!A}{(!B \liff !C)}{!!{main operator}
+  لـ~$\indfrm$ هو~$\liff$.}}{}
+
+\tagitem{prvAll}{\indcase{!A}{\lforall[x][!B]}{!!{main operator}
+  لـ~$\indfrm$ هو~$\lforall$.}}{}
+
+\tagitem{prvEx}{\indcase{!A}{\lexists[x][!B]}{!!{main operator}
+  لـ~$\indfrm$ هو~$\lexists$.}}{}
+\end{enumerate}
+\end{defn}
+
+والمراد في كل حالة \emph{الورود} المعيّن ل!!{main
+operator}، لا مجرد نوع الرمز. فالصيغة $((!D \lif !E) \lif (!E \lif
+!D))$ على صورة $(!B \lif !C)$؛ فيها $!B$ هي $(!D \lif !E)$ و$!C$
+هي $(!E \lif !D)$. ومن ثم فالورود الثاني لـ~$\lif$ هو !!{main
+operator}.
+
+\begin{explain}
+وبهذا عرّفنا تعريفًا \emph{عوديًا} دالةً تعيّن لكل !!{formula}
+غير ذرية ورود !!{main operator} فيها. فإن التعريف الاستقرائي
+لل!!{formula}s يقتضي أن تقع كل !!{formula}~$!A$ في إحدى حالات
+\olref{def:main-op}؛ فثبت بذلك وجود !!a{main operator} لكل
+!!{formula}~$!A$ غير ذرية. ثم إن كل !!{formula} لا تدخل إلا تحت
+شرط واحد، وال!!{formula}s الأصغر التي تألّفت منها
+$!A$ متعيّنة في كل حالة. فكان ورود !!{main operator}
+لـ~$!A$ واحدًا لا غير؛ ولذلك صحّ أن ما عرّفناه دالة.
+\end{explain}
+
+ولل!!{formula}s أسماء يبيّنها
+\olref{tab:main-op}، يختلف الاسم منها باختلاف الرمز الذي هو
+!!{main operator} لها.\iftag{defNot,defOr,defAnd,defIf,defIff,defTrue,defFalse,defEx,defAll}
+{ وأما المؤثرات المعرّفة، فلا تدخل في ال!!{formula}s دخولًا صوريًا؛
+إنما هي اختصارات، فلا تكون على التحقيق مؤثرات رئيسة للصيغ.
+ولهذا لا نفردها بحالات في البراهين التي تعمّ جميع
+ال!!{formula}s.}
+
+\begin{table}[!h]
+\centering
+\begin{tabular}{c | c | c}
+!!^{main operator} & نوع ال!!{formula} & مثال\\
+\hline
+لا شيء & (!!{formula}) ذرية &
+\iftag{prvFalse}{$\lfalse$،}{}
+\iftag{prvTrue}{$\ltrue$،}{}
+$\Atom{R}{t_1, \dots, t_n}$،
+$\eq[{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{1}}][{\OLId{latin-ordinary}{t}}_{\OLMathNumeral{2}}]$\\
+$\lnot$ & نفي & $\lnot !A$ \\
+$\land$ & عطف & $(!A \land !B)$ \\
+$\lor$ & فصل & $(!A \lor !B)$ \\
+$\lif$ & !!{conditional} & $(!A \lif !B)$ \\
+$\liff$ & !!{biconditional} & $(!A \liff !B)$ \\
+$\lforall[][]$ & (!!{formula}) كلية & $\lforall[{\OLId{latin-ordinary}{x}}][!A]$ \\
+$\lexists[][]$ & (!!{formula}) وجودية & $\lexists[{\OLId{latin-ordinary}{x}}][!A]$
+\end{tabular}
+\caption{المؤثر الرئيس وأسماء ال!!{formula}s}
+\ollabel{tab:main-op}
+\end{table}
+
+\end{document}

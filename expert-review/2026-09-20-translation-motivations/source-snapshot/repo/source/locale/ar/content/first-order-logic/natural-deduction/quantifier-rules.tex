@@ -1,0 +1,107 @@
+% Part: first-order-logic
+% Chapter: natural-deduction
+% Section: quantifier-rules
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{ntd}{qrl}
+
+\olsection{قواعد المكممات}
+
+\subsection{قواعد~$\lforall$}
+
+\begin{defish}
+\AxiomC{$!A(a)$}
+\RightLabel{\Intro{\lforall}}
+\UnaryInfC{$\lforall[x][\Atom{!A}{x}]$}
+\DisplayProof
+\hfill
+\AxiomC{$\lforall[x][\Atom{!A}{x}]$}
+\RightLabel{\Elim{\lforall}}
+\UnaryInfC{$!A(t)$}
+\DisplayProof
+\end{defish}
+
+في قاعدتي~$\lforall$، يكون~$t$ حدًا مغلقًا (أي حدًا لا يحتوي على أي
+متغيرات)، ويكون~$a$ !!a{constant} لا يرد في النتيجة
+$\lforall[x][!A(x)]$، ولا في أي افتراض !!{undischarged} في
+ال!!{derivation} المنتهي بالمقدمة~$!A(a)$. ونسمي~$a$
+\emph{المتغير المميَّز} لاستدلال~\Intro{\lforall}.
+\footnote{نستعمل مصطلح ``المتغير المميَّز'' حتى وإن كان~$a$ في القاعدة
+أعلاه رمزًا ثابتًا، وذلك لأسباب تاريخية.}
+
+\subsection{قواعد~$\lexists$}
+
+\begin{defish}
+\AxiomC{$\Atom{!A}{t}$}
+\RightLabel{\Intro{\lexists}}
+\UnaryInfC{$\lexists[x][\Atom{!A}{x}]$}
+\DisplayProof
+\hfill
+\AxiomC{$\lexists[x][\Atom{!A}{x}]$}
+\AxiomC{[$\Atom{!A}{a}$]$^n$}
+\DeduceC{$!C$}
+\DischargeRule{\Elim{\lexists}}{n}
+\BinaryInfC{$!C$}
+\DisplayProof
+\end{defish}
+
+مرة أخرى، يكون~$t$ حدًا مغلقًا، ويكون~$a$ !!a{constant} لا يرد في
+المقدمة~$\lexists[x][!A(x)]$، ولا في النتيجة~$!C$، ولا في أي افتراض
+!!{undischarged} في ال!!{derivation}s المنتهية بالمقدمتين (عدا
+الافتراضات~$!A(a)$). ونسمي~$a$ \emph{المتغير المميَّز} لاستدلال
+\Elim{\lexists}.
+
+يسمى الشرط القاضي بألا يرد المتغير المميَّز في النتائج ولا في أي
+افتراض !!{undischarged} في ال!!{derivation}s المؤدية إلى مقدمتي استدلال
+\Intro{\lforall} أو~\Elim{\lexists} \emph{شرط المتغير المميَّز}.
+
+\begin{explain}
+تذكّر الاصطلاح القائل إننا عندما تكون~$!A$ !!a{formula} يكون فيها
+ال!!{variable}~$x$ حرًا، نشير إلى ذلك بكتابة~$!A(x)$. وفي السياق نفسه،
+تكون~$!A(t)$ اختصارًا لـ~$\Subst{!A}{t}{x}$. ولذلك يمكننا أيضًا كتابة
+قاعدة~$\Intro\lexists$ هكذا:
+\begin{prooftree}
+\AxiomC{$\Subst{!A}{t}{x}$}
+\RightLabel{\Intro{\lexists}}
+\UnaryInfC{$\lexists[x][!A]$}
+\end{prooftree}
+لاحظ أن~$t$ قد يرد أصلًا في~$!A$؛ فمثلًا قد تكون~$!A$ هي
+$\Atom{\Obj P}{t,x}$. ومن ثم فإن استنتاج
+$\lexists[x][\Atom{\Obj P}{t,x}]$ من~$\Atom{\Obj P}{t,t}$ تطبيق
+صحيح لـ~$\Intro\lexists$---إذ يجوز لك أن ``تستبدل'' بموضع واحد أو
+أكثر، وليس بالضرورة كل المواضع، للحد~$t$ في المقدمة ال!!{variable}
+المقيد~$x$. غير أن شرطي المتغير المميَّز في~$\Intro\lforall$
+و$\Elim\lexists$ يقتضيان ألا يرد ال!!{constant}~$a$ في~$!A$.
+ولذلك لا يمكنك أن تستنتج على نحو صحيح
+$\lforall[x][\Atom{\Obj P}{a,x}]$ من~$\Atom{\Obj P}{a,a}$ باستعمال
+$\Intro\lforall$.
+\end{explain}
+
+\begin{explain}
+لا توجد قيود في~\Intro{\lexists} و\Elim{\lforall}، ويمكن أن يكون
+الحد~$t$ أي شيء، فلا داعي إلى القلق من أي شروط. أما في قاعدتي
+\Elim{\lexists} و\Intro{\lforall}، فيقتضي شرط المتغير المميَّز ألا
+يرد ال!!{constant}~$a$ في أي موضع من النتيجة أو من افتراض
+!!{undischarged}. والشرط ضروري لضمان سلامة النسق، أي إنه لا
+!!{derive}s إلا !!{sentence}s تلزم عن الافتراضات ال!!{undischarged}
+التي تشتق منها. ومن دون هذا الشرط، يكون الآتي جائزًا:
+\begin{prooftree}
+  \AxiomC{$\lexists[x][!A(x)]$}
+  \AxiomC{$\Discharge{!A(a)}{1}$}
+  \RightLabel{*\Intro{\lforall}}
+  \UnaryInfC{$\lforall[x][!A(x)]$}
+  \RightLabel{\Elim{\lexists}}
+  \BinaryInfC{$\lforall[x][!A(x)]$}
+\end{prooftree}
+لكن~$\lexists[x][!A(x)] \Entails/ \lforall[x][!A(x)]$.
+
+بما أن قواعد الحذف للمكممات لا تسمح إلا بإحلال حدود مغلقة محل
+ال!!{variable}s، فإنه يلزم أن تكون أي !!{formula} يمكن اشتقاقها من
+مجموعة من ال!!{sentence}s هي نفسها !!a{sentence}.
+\end{explain}
+
+
+\end{document}

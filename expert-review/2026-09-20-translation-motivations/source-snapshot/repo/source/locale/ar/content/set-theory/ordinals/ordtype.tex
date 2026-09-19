@@ -1,0 +1,88 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{ordinals}{ordtype}
+\olsection{الأعداد الترتيبية بوصفها أنماط ترتيب}
+
+بعد أن أصبح الاستبدال في حوزتنا، وصِرنا نعمل في~$\ZFminus$، يمكننا
+أخيرًا إثبات النتيجة التي كنا نستهدفها:
+
+\begin{thm}\ollabel{thmOrdinalRepresentation}
+كل ترتيب جيد متماثل مع عدد ترتيبي وحيد.
+\end{thm}
+
+\begin{proof}
+ليكن~$\tuple{A, <}$ ترتيبًا جيدًا. بموجب
+\olref[basic]{ordisoidentity}، يكون متماثلًا مع عدد ترتيبي واحد على
+الأكثر. وبرهانًا بالخلف، افترض أن~$\tuple{A, <}$ ليس متماثلًا مع
+\emph{أي} عدد ترتيبي. سنجعل أولًا «$\tuple{A, <}$ صغيرًا قدر
+الإمكان». وبالتفصيل: إذا كانت قطعة ابتدائية حقيقية ما
+$\tuple{A_a, <_a}$ غير متماثلة مع أي عدد ترتيبي، فهناك أصغر~$a \in A$
+لهذه الخاصية؛ وعندئذ لتكن~$B = A_a$ و
+$\mathord{\lessdot} = \mathord{<_a}$. وإلا فلتكن~$B = A$ و
+$\mathord{\lessdot} = \mathord{<}$.
+
+بحسب التعريف، كل قطعة ابتدائية حقيقية من~$B$ متماثلة مع عدد ترتيبي
+ما، وهو وحيد كما تقدم. ولذلك توجد، بموجب الاستبدال، المجموعة الآتية،
+وهي دالة:
+\[
+	f = \Setabs{\tuple{\beta, b}}{b \in B\text{ و }
+	\ordeq{\beta}{\tuple{B_b, \lessdot_b}}}
+\]
+ولإكمال البرهان بالخلف، سنبيّن أن~$f$ تماثل~$\alpha \to B$ لعدد
+ترتيبي ما~$\alpha$.
+
+من الواضح أن~$\ran{f} = B$. وبموجب~\olref[iso]{lemordsegments}، تحفظ
+$f$ الترتيب، أي إن~$\gamma \in \beta$ إذا وفقط إذا كان
+$f(\gamma) \lessdot f(\beta)$. ولإثبات أن~$\dom{f}$ عدد ترتيبي، يكفي،
+بموجب~\olref[basic]{corordtransitiveord}، أن نبيّن أن~$\dom{f}$ متعد.
+فثبّت~$\beta \in \dom{f}$، أي
+$\ordeq{\beta}{\tuple{B_b, \lessdot_b}}$ لبعض~$b$. إذا كان
+$\gamma \in \beta$، كان~$\gamma \in \dom{f}$ بموجب
+\olref[iso]{wellordinitialsegment}؛ وبالتعميم،
+$\beta \subseteq \dom{f}$.
+\end{proof}
+
+تسوّغ هذه النتيجة التعريف الآتي، الذي أردنا تقديمه منذ~\olref[vn]{sec}:
+
+\begin{defn}
+إذا كان~$\tuple{A, <}$ ترتيبًا جيدًا، فإن نمط ترتيبه
+$\ordtype{A, <}$ هو العدد الترتيبي الوحيد~$\alpha$ الذي يحقق
+$\ordeq{\tuple{A, < }}{\alpha}$.
+\end{defn}
+
+وفوق ذلك، يسوغ هذا التعريف مبدأين حسنين:
+
+\begin{cor}\ollabel{ordtypesworklikeyouwant}
+حيث~$\tuple{A, <}$ و$\tuple{B, \lessdot}$ ترتيبان جيدان:
+\begin{align*}
+	\ordtype{A, <} = \ordtype{B, \lessdot}&\text{ إذا وفقط إذا كان }
+	\ordeq{\tuple{A, <}}{\tuple{B, \lessdot}}\\
+	\ordtype{A, <} \in \ordtype{B, \lessdot}&\text{ إذا وفقط إذا كان }
+	\ordeq{\tuple{A, <}}{\tuple{B_b, \lessdot_b}}
+	\text{ لبعض }b \in B
+\end{align*}
+\end{cor}
+
+\begin{proof}
+تصدق المساواة بموجب~\olref[basic]{ordisoidentity}. ولإثبات الادعاء
+الثاني، لتكن~$\ordtype{A, <} = \alpha$ و
+$\ordtype{B, \lessdot} = \beta$، ولتكن~$f \colon \beta \to B$
+الدالة الكامنة وراء تماثل الترتيب مع~$\tuple {B, \lessdot}$. عندئذ:
+\begin{align*}
+	\alpha \in \beta&\text{ إذا وفقط إذا كان }
+	\funrestrictionto{f}{\alpha} \colon \alpha \to B_{f(\alpha)}
+	\text{ تماثلًا}\\
+	&\text{ إذا وفقط إذا كان }
+	\ordeq{\tuple{A, <}}{\tuple{B_{f(\alpha)}, \lessdot_{f(\alpha)}}}\\
+	&\text{ إذا وفقط إذا كان }
+	\ordeq{\tuple{A, <}}{\tuple{B_b, \lessdot_b}}
+	\text{ لبعض $b \in B$}
+\end{align*}
+بموجب~\olref[iso]{ordisounique}، و
+\olref[iso]{wellordinitialsegment}، و
+\olref[basic]{ordissetofsmallerord}.
+\end{proof}
+
+\end{document}

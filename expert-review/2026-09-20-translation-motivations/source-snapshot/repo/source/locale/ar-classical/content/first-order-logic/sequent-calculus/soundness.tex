@@ -1,0 +1,395 @@
+% Part: first-order-logic
+% Chapter: sequent-calculus
+% Section: soundness.tex
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{seq}{sou}}
+      {\olfileid{pl}{seq}{sou}}
+
+\olsection{السلامة}
+
+\begin{explain}
+السلامة في نظام !!^a{derivation}، كحساب التتابعيات، أن يمتنع عليه
+!!{derive} ما لا يصدق. فهي ضمان لأنظمة ال!!{derivation} من تجاوز الحق.
+وبحسب المعنى البرهاني الذي نبحثه، نطلب مثلًا الأمور الآتية:
+\begin{enumerate}
+\item كل~$!A$ !!{derivable} تكون \iftag{FOL}{صالحة}{تحصيل حاصل}؛
+\item إذا كانت !!a{sentence} !!{derivable} من جمل أخرى، فهي أيضًا
+  نتيجة لها؛
+\item إذا كانت مجموعة من ال!!{sentence}s غير متسقة، فهي غير قابلة
+  للإرضاء.
+\end{enumerate}
+هذه خصائص لا يستغني عنها نظام !!a{derivation}. فإذا تخلف شيء منها كان نظام ال!!{derivation} معيبًا، لأنه يتيح
+!!{derive} ما لا ينبغي إثباته. فإقامة السلامة لنظام ال!!{derivation} من أهم ما يلزم.
+
+وكل هذه المعاني البرهانية مردّه إلى
+!!{derivability} تتابعيات بعينها في حساب التتابعيات؛ فطريق إثبات
+(1)--(3) أن ننظر في دلالة التتابعيات ال!!{derivable}.
+نعرّف أولًا صلاحية التتابعية، أي كونها \emph{صالحة}، ثم نثبت أن كل تتابعية
+!!{derivable} صالحة. وحينئذ تأتي (1)--(3) نتائج تابعة.
+\end{explain}
+
+\begin{defn}
+\iftag{FOL}{!!^a{structure}~$\Struct
+  M$}{!!^a{valuation}~$\pAssign{v}$} \emph{تُرضي} تتابعية
+$\Gamma \Sequent \Delta$ إذا وفقط إذا كان إما
+$\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{!A}$ لبعض $!A \in \Gamma$، أو
+$\iftag{FOL}{\Sat{M}}{\pSat{v}}{!A}$ لبعض $!A \in \Delta$.
+
+تكون التتابعية \emph{صالحة} إذا وفقط إذا كانت كل
+\iftag{FOL}{!!{structure}~$\Struct M$}{!!{valuation}~$\pAssign{v}$}
+ترضيها.
+\end{defn}
+
+\begin{thm}[السلامة]
+\ollabel{thm:sequent-soundness} إذا كان~$\Log{LK}$ !!{derive}s
+$\Theta \Sequent \Xi$، فإن~$\Theta \Sequent \Xi$ صالحة.
+\end{thm}
+
+\begin{proof}
+خذ~$\pi$، وهو !!a{derivation} لـ~$\Theta \Sequent \Xi$، واستقرئ على عدد استدلالاته~$n$ في~$\pi$.
+
+أما إذا كان العدد~$0$، فلا يشتمل~$\pi$ إلا على تتابعية ابتدائية.
+والتتابعية~$!A \Sequent !A$ صالحة، إذ لكل
+\iftag{FOL}{$\Struct M$}{$\pAssign{v}$} إما
+$\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{!A}$ وإما
+$\iftag{FOL}{\Sat{M}}{\pSat{v}}{!A}$.
+
+وأما إذا زاد العدد على~0، فالتفصيل بحسب الاستدلال الأخير.
+مقدماته صالحة بفرض الاستقراء، لأن كل !!{derivation} مؤدٍّ إلى مقدمة منها يشتمل على أقل من~$n$ استدلالات.
+
+ننظر أولًا في الاستدلالات الممكنة ذات المقدمة الواحدة.
+\begin{enumerate}
+\item الاستدلال الأخير إضعاف. وعندئذ تكون~$\Theta \Sequent \Xi$
+  إما $!A, \Gamma \Sequent \Delta$ (إذا كان الاستدلال الأخير
+  \LeftR{\Weakening})، أو $\Gamma \Sequent \Delta, !A$ (إذا كان
+  \RightR{\Weakening})، وينتهي ال!!{derivation} بإحدى الصورتين:
+  \begin{prooftree}
+    \AxiomC{}
+    \Deduce$\Gamma \fCenter \Delta$
+    \RightLabel{\LeftR{\Weakening}}
+    \UnaryInf$!A, \Gamma \fCenter \Delta$
+    \DisplayProof\qquad\bottomAlignProof
+    \AxiomC{}
+    \Deduce$\Gamma \fCenter \Delta$
+    \RightLabel{\RightR{\Weakening}}
+    \UnaryInf$\Gamma \fCenter \Delta, !A$
+  \end{prooftree}
+  وبفرض الاستقراء، تكون~$\Gamma \Sequent \Delta$ صالحة، أي إنه لكل
+  \iftag{FOL}{!!{structure}~$\Struct{M}$}{!!{valuation}~$\pAssign{v}$}،
+  يوجد إما $!C \in \Gamma$ بحيث
+  $\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{!C}$، أو $!C \in \Delta$ بحيث
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!C}$.
+  
+  إذا كان $\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{!C}$ لبعض
+  $!C \in \Gamma$، فإن~$!C \in \Theta$ أيضًا؛ ففي الإضعاف الأيسر
+  $\Theta = !A, \Gamma$، وأما في الإضعاف الأيمن فـ$\Theta=\Gamma$. ومن ثم يكون
+  $\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{!C}$ لبعض $!C \in \Theta$.
+  وبالمثل، إذا كان $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!C}$ لبعض
+  $!C \in \Delta$، فإن~$!C \in \Xi$ أيضًا؛ ففي الإضعاف الأيسر
+  $\Xi=\Delta$، وفي الإضعاف الأيمن $\Xi=\Delta,!A$. ومن ثم يكون
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!C}$ لبعض $!C \in \Xi$.
+  وبناء عليه تكون~$\Theta \Sequent \Xi$ صالحة.
+  \textbf{تنبيه تصحيحي على الأصل (C081-01).} فُصلت حالتا الإضعاف؛ فالمعادلة
+  $\Theta=!A,\Gamma$ لا تصدق إلا في الإضعاف الأيسر، أما في الإضعاف
+  الأيمن فلا يتغير المقدم، ويزاد $!A$ في التالي.
+\item الاستدلال الأخير هو~\LeftR{\lnot}: عندئذ تكون مقدمة الاستدلال
+  الأخير~$\Gamma \Sequent \Delta, !A$، وتكون نتيجته
+  $\lnot !A, \Gamma \Sequent \Delta$، أي إن ال!!{derivation} ينتهي
+  هكذا:
+  \begin{prooftree}
+    \AxiomC{}
+    \Deduce$\Gamma \fCenter \Delta, !A$
+    \RightLabel{\LeftR{\lnot}}
+    \UnaryInf$\lnot !A, \Gamma \fCenter \Delta$
+  \end{prooftree}
+  ويكون~$\Theta = \lnot !A, \Gamma$، في حين يكون~$\Xi = \Delta$.
+
+  من فرض الاستقراء أن~$\Gamma \Sequent \Delta, !A$ صالحة.
+  فلكل \iftag{FOL}{$\Struct{M}$}{$\pAssign{v}$} أحد ثلاثة أوجه:
+  (أ) يوجد $!C \in \Gamma$ مع~$\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{!C}$؛
+  (ب) يوجد $!C \in \Delta$ مع
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!C}$؛
+  (ج) يتحقق $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!A}$.
+  ولإثبات صلاحية~$\Theta \Sequent \Xi$ خذ
+  \iftag{FOL}{$\Struct{M}$ !!a{structure}}{$\pAssign{v}$ !!a{valuation}}.
+  في (أ) لدينا~$!C \in \Gamma$ و
+  $\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{!C}$؛ ولذلك يتحقق أيضًا~$!C \in \Theta$.
+  وفي (ب) لدينا~$!C \in \Delta$ و
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!C}$؛ ولذلك يتحقق أيضًا~$!C \in \Xi$.
+  وأما (ج)، فمن~$\iftag{FOL}{\Sat{M}}{\pSat{v}}{!A}$ يلزم
+  $\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{\lnot !A}$.
+  وحيث إن $\lnot !A \in \Theta$، فقد وجد~$!C \in \Theta$ بحيث
+  $\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{!C}$.
+  فكل وجه يحقق شرط الإرضاء، وتثبت صلاحية
+  $\Theta \Sequent \Xi$.
+\item الاستدلال الأخير هو~\RightR{\lnot}: تمرين.
+\item الاستدلال الأخير هو~\LeftR{\land}: توجد صورتان؛ فقد يُستنتج
+  $!A \land !B$ في اليسار من~$!A$ أو من~$!B$ في الجانب الأيسر من
+  المقدمة. وفي الحالة الأولى، ينتهي~$\pi$ هكذا:
+  \begin{prooftree}
+    \AxiomC{}
+    \Deduce$!A, \Gamma \fCenter \Delta$
+    \RightLabel{\LeftR{\land}}
+    \UnaryInf$!A \land !B, \Gamma \fCenter \Delta$
+  \end{prooftree}
+  ويكون~$\Theta = !A \land !B, \Gamma$، في حين يكون~$\Xi = \Delta$.
+  اعتبر \iftag{FOL}{!!a{structure}~$\Struct
+    M$}{!!a{valuation}~$\pAssign{v}$}. وبما أن
+  $!A, \Gamma \Sequent \Delta$ صالحة بفرض الاستقراء، فإما (أ) أن
+  $\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{!A}$، أو (ب) أن
+  $\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{!C}$ لبعض $!C \in \Gamma$، أو
+  (ج) أن~$\iftag{FOL}{\Sat{M}}{\pSat{v}}{!C}$ لبعض $!C \in \Delta$.
+  في الحالة (أ)، يكون
+  $\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{!A \land !B}$، ومن ثم يوجد
+  $!C \in \Theta$ (وهو تحديدًا~$!A \land !B$) بحيث
+  $\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{!C}$. وفي الحالة (ب)، يوجد
+  $!C \in \Gamma$ بحيث $\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{!C}$،
+  ويكون~$!C \in \Theta$ أيضًا. وفي الحالة (ج)، يوجد $!C \in \Delta$
+  بحيث $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!C}$، ويكون~$!C \in \Xi$
+  أيضًا لأن~$\Xi = \Delta$. ولذلك، في كل حالة، ترضي
+  \iftag{FOL}{$\Struct M$}{$\pAssign{v}$} التتابعية
+  $!A \land !B, \Gamma \Sequent \Delta$. وبما أن
+  \iftag{FOL}{$\Struct{M}$}{$\pAssign{v}$} كانت اعتباطية، تكون
+  $!A \land !B, \Gamma \Sequent \Delta$ صالحة. وتعالج الحالة التي
+  يُستنتج فيها~$!A \land !B$ من~$!B$ بالطريقة نفسها، مع تغيير~$!A$
+  إلى~$!B$.
+\item الاستدلال الأخير هو~\RightR{\lor}: توجد صورتان؛ فقد يُستنتج
+  $!A \lor !B$ في اليمين من~$!A$ أو من~$!B$ في الجانب الأيمن من
+  المقدمة. وفي الحالة الأولى، ينتهي~$\pi$ هكذا:
+  \begin{prooftree}
+    \AxiomC{}
+    \Deduce$\Gamma \fCenter \Delta, !A$
+    \RightLabel{\RightR{\lor}}
+    \UnaryInf$\Gamma \fCenter \Delta, !A \lor !B$
+  \end{prooftree}
+  والآن~$\Theta = \Gamma$ و$\Xi = \Delta, !A \lor !B$. اعتبر
+  \iftag{FOL}{!!a{structure}~$\Struct{M}$}{!!a{valuation}~$\pAssign{v}$}.
+  وبما أن~$\Gamma \Sequent \Delta, !A$ صالحة، فإما (أ) أن
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!A}$، أو (ب) أن
+  $\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{!C}$ لبعض $!C \in \Gamma$، أو
+  (ج) أن~$\iftag{FOL}{\Sat{M}}{\pSat{v}}{!C}$ لبعض $!C \in \Delta$.
+  في الحالة (أ)، يكون~$\iftag{FOL}{\Sat{M}}{\pSat{v}}{!A \lor !B}$.
+  وفي الحالة (ب)، يوجد~$!C \in \Gamma$ بحيث
+  $\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{!C}$. وفي الحالة (ج)، يوجد
+  $!C \in \Delta$ بحيث $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!C}$.
+  ولذلك، في كل حالة، ترضي \iftag{FOL}{$\Struct{M}$}{$\pAssign{v}$}
+  التتابعية~$\Gamma \Sequent \Delta, !A \lor !B$، أي
+  $\Theta \Sequent \Xi$. وبما أن
+  \iftag{FOL}{$\Struct{M}$}{$\pAssign{v}$} كانت اعتباطية، تكون
+  $\Theta \Sequent \Xi$ صالحة. وتعالج الحالة التي يُستنتج فيها
+  $!A \lor !B$ من~$!B$ بالطريقة نفسها، مع تغيير~$!A$ إلى~$!B$.
+\item الاستدلال الأخير هو~\RightR{\lif}: عندئذ ينتهي~$\pi$ هكذا:
+  \begin{prooftree}
+    \AxiomC{}
+    \Deduce$!A, \Gamma \fCenter \Delta, !B$
+    \RightLabel{\RightR{\lif}}
+    \UnaryInf$\Gamma \fCenter \Delta, !A \lif !B$
+  \end{prooftree}
+  المقدمة صالحة بفرض الاستقراء؛ فنثبت صلاحية النتيجة.
+  خذ \iftag{FOL}{$\Struct{M}$}{$\pAssign{v}$} كيف اتفق.
+  من صلاحية $!A, \Gamma \Sequent \Delta, !B$ يلزم أحد الأوجه:
+  (أ) $\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{!A}$؛
+  (ب) $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!B}$؛
+  (ج) $\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{!C}$ لبعض
+  $~!C \in \Gamma$؛
+  (د) $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!C}$ لبعض $!C \in \Delta$.
+  في (أ) و(ب) يتحقق
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!A \lif !B}$، فيوجد
+  $!C \in \Delta, !A \lif !B$ مع
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!C}$.
+  وفي (ج) يوجد $!C \in \Gamma$ مع
+  $\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{!C}$، وفي (د) يوجد
+  $!C \in \Delta$ مع $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!C}$.
+  فكل وجه يقتضي أن
+  \iftag{FOL}{$\Struct{M}$}{$\pAssign{v}$} ترضي
+  $\Gamma \Sequent \Delta, !A \lif !B$.
+  ولما كان اختيار \iftag{FOL}{$\Struct{M}$}{$\pAssign{v}$} مطلقًا، ثبتت صلاحية
+  $\Gamma \Sequent \Delta, !A \lif !B$. \iftag{FOL}{%
+\item الاستدلال الأخير هو~\LeftR{\lforall}: عندئذ توجد
+  !!a{formula}~$!A(x)$ وحد مغلق~$t$ بحيث ينتهي~$\pi$ هكذا:
+  \begin{prooftree}
+    \AxiomC{}
+    \Deduce$!A(t), \Gamma \fCenter \Delta$
+    \RightLabel{\LeftR{\lforall}}
+    \UnaryInf$\lforall[x][!A(x)], \Gamma \fCenter \Delta$
+  \end{prooftree}
+  ونريد أن نبين أن النتيجة~$\lforall[x][!A(x)], \Gamma
+  \Sequent \Delta$ صالحة. اعتبر !!a{structure}~$\Struct M$.
+  وبما أن المقدمة~$!A(t), \Gamma \Sequent \Delta$ صالحة، فإما
+  (أ) أن~$\Sat/{M}{!A(t)}$، أو (ب) أن~$\Sat/{M}{!C}$ لبعض
+  $!C \in \Gamma$، أو (ج) أن~$\Sat{M}{!C}$ لبعض $!C \in \Delta$.
+  في الحالة (أ)، من \olref[syn][sem]{prop:quant-terms}، إذا كان
+  $\Sat{M}{\lforall[x][!A(x)]}$ فإن~$\Sat{M}{!A(t)}$. وبما أن
+  $\Sat/{M}{!A(t)}$، يكون~$\Sat/{M}{\lforall[x][!A(x)]}$. وفي
+  الحالتين (ب) و(ج)، ترضي~$\Struct{M}$ أيضًا
+  $\lforall[x][!A(x)], \Gamma \Sequent \Delta$. وبما أن~$\Struct M$
+  كانت اعتباطية، تكون~$\lforall[x][!A(x)], \Gamma \Sequent \Delta$
+  صالحة.
+\item الاستدلال الأخير هو~\RightR{\lexists}: تمرين.
+\item الاستدلال الأخير هو~\RightR{\lforall}: عندئذ توجد
+  !!a{formula}~$!A(x)$ و!!a{constant}~$a$ بحيث ينتهي~$\pi$ هكذا:
+  \begin{prooftree}
+    \AxiomC{}
+    \Deduce$\Gamma \fCenter \Delta, !A(a)$
+    \RightLabel{\RightR{\lforall}}
+    \UnaryInf$\Gamma \fCenter \Delta, \lforall[x][!A(x)]$
+  \end{prooftree}
+  حيث يتحقق شرط المتغير المميَّز، أي إن~$a$ لا يرد في~$!A(x)$ ولا
+  في~$\Gamma$ ولا في~$\Delta$. وبفرض الاستقراء، تكون مقدمة الاستدلال
+  الأخير صالحة. وعلينا أن نبين أن النتيجة صالحة أيضًا، أي إنه لأي
+  !!{structure}~$\Struct M$، إما (أ) أن~$\Sat{M}{\lforall[x][!A(x)]}$،
+  أو (ب) أن~$\Sat/{M}{!C}$ لبعض $!C \in \Gamma$، أو (ج) أن
+  $\Sat{M}{!C}$ لبعض $!C \in \Delta$.
+
+  خذ~$\Struct{M}$ !!{structure} كيف اتفق.
+  إن تحقق (ب) أو (ج) تم المطلوب. وإلا فلكل
+  $!C \in \Gamma$ يكون~$\Sat{M}{!C}$، ولكل $!C \in \Delta$ يكون
+  $\Sat/{M}{!C}$. فلا يبقى إلا إثبات (أ)، أي
+  $\Sat{M}{\lforall[x][!A(x)]}$.
+  وبحسب \olref[syn][ass]{prop:sat-quant}، يكفي إثبات
+  $\Sat{M}{!A(x)}[s]$ لكل إسناد~$s$.
+  فخذ~$s$ إسنادًا كيف اتفق، واجعل~$\Struct{M'}$ موافقة لـ
+  $\Struct{M}$ فيما عدا~$\Assign{a}{M'} = s(x)$.
+  من \olref[syn][ext]{cor:extensionality-sent}، لكل $!C \in \Gamma$
+  يتحقق~$\Sat{M'}{!C}$، إذ~$a$ لا يقع في~$\Gamma$؛ ولكل
+  $!C \in \Delta$ يتحقق~$\Sat/{M'}{!C}$.
+  والمقدمة صالحة، فلا بد من $\Sat{M'}{!A(a)}$.
+  ثم من \olref[syn][ass]{prop:sentence-sat-true} يلزم
+  $\Sat{M'}{!A(a)}[s]$، لأن~$!A(a)$ جملة.
+  ولدينا $\varAssign{s}{s}{x}$ مع $s(x) = \Value{a}{M'}[s]$، على ما وضعنا به
+  $\Struct{M'}$. فتُطبق
+  \olref[syn][ext]{prop:ext-formulas} ويُستنتج
+  $\Sat{M'}{!A(x)}[s]$.
+  وحيث إن~$a$ لا يقع في~$!A(x)$، تنقلنا
+  \olref[syn][ext]{prop:extensionality} إلى
+  $\Sat{M}{!A(x)}[s]$.
+  واختيار~$s$ كان مطلقًا؛ فثبت
+  $\Sat{M}{!A(x)}[s]$ لكل إسناد متغيرات.
+\item الاستدلال الأخير هو~\LeftR{\lexists}: تمرين.
+}{}
+\end{enumerate}
+والآن لننظر في الاستدلالات الممكنة ذات المقدمتين.
+\begin{enumerate}
+\item الاستدلال الأخير قطع؛ وعندئذ ينتهي~$\pi$ هكذا:
+  \begin{prooftree}
+    \AxiomC{}
+    \Deduce$\Gamma \fCenter \Delta, !A$
+    \AxiomC{}
+    \Deduce$!A, \Pi \fCenter \Lambda$
+    \RightLabel{\Cut}
+    \BinaryInf$\Gamma, \Pi \fCenter \Delta, \Lambda$
+  \end{prooftree}
+  خذ \iftag{FOL}{$\Struct{M}$ !!a{structure}}{$\pAssign{v}$
+    !!a{valuation}}. المقدمتان صالحتان بفرض الاستقراء؛ فترضي
+  \iftag{FOL}{$\Struct{M}$}{$\pAssign{v}$} كلتيهما.
+  إما (أ) $\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{!A}$، وإما (ب)
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!A}$.
+  في (أ) لا ترضي
+  \iftag{FOL}{$\Struct{M}$}{$\pAssign{v}$} المقدمة اليسرى إلا بإرضاء
+  $\Gamma \Sequent \Delta$، فيلزم إرضاء النتيجة.
+  وفي (ب) لا ترضي
+  \iftag{FOL}{$\Struct{M}$}{$\pAssign{v}$} المقدمة اليمنى إلا بإرضاء
+  $\Pi \Sequent \Lambda$؛ فتكون
+  \iftag{FOL}{$\Struct{M}$}{$\pAssign{v}$} مُرضية للنتيجة أيضًا.
+\item الاستدلال الأخير هو~\RightR{\land}. وعندئذ ينتهي~$\pi$ هكذا:
+  \begin{prooftree}
+    \AxiomC{}
+    \Deduce$\Gamma \fCenter \Delta, !A$
+    \AxiomC{}
+    \Deduce$\Gamma \fCenter \Delta, !B$
+    \RightLabel{\RightR{\land}}
+    \BinaryInf$\Gamma \fCenter \Delta, !A \land !B$
+  \end{prooftree}
+  اعتبر \iftag{FOL}{!!a{structure}~$\Struct
+    M$}{!!a{valuation}~$\pAssign{v}$}. فإذا كانت
+  \iftag{FOL}{$\Struct{M}$}{$\pAssign{v}$} ترضي
+  $\Gamma \Sequent \Delta$، نكون قد انتهينا. فافترض أنها لا ترضيها.
+  وبما أن~$\Gamma \fCenter \Delta, !A$ صالحة بفرض الاستقراء، يكون
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!A}$. وبالمثل، بما أن
+  $\Gamma \Sequent \Delta, !B$ صالحة، يكون
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!B}$. لكن عندئذ يكون
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!A \land !B}$.
+\item الاستدلال الأخير هو~\LeftR{\lor}: تمرين.
+\item الاستدلال الأخير هو~\LeftR{\lif}. وعندئذ ينتهي~$\pi$ هكذا:
+  \begin{prooftree}
+    \AxiomC{}
+    \Deduce$\Gamma \fCenter \Delta, !A$
+    \AxiomC{}
+    \Deduce$!B, \Pi \fCenter \Lambda$
+    \RightLabel{\LeftR{\lif}}
+    \BinaryInf$!A \lif !B, \Gamma, \Pi \fCenter \Delta, \Lambda$
+  \end{prooftree}
+  اعتبر مرة أخرى
+  \iftag{FOL}{!!a{structure}~$\Struct{M}$}{!!a{valuation}~$\pAssign{v}$}،
+  وافترض أن \iftag{FOL}{$\Struct{M}$}{$\pAssign{v}$} لا ترضي
+  $\Gamma, \Pi \Sequent \Delta, \Lambda$. وعلينا أن نبين أن
+  $\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{!A \lif !B}$. فإذا كانت
+  \iftag{FOL}{$\Struct{M}$}{$\pAssign{v}$} لا ترضي
+  $\Gamma, \Pi \Sequent \Delta, \Lambda$، فهي لا ترضي
+  $\Gamma \Sequent \Delta$ ولا~$\Pi \Sequent \Lambda$. وبما أن
+  $\Gamma \Sequent \Delta, !A$ صالحة، يكون
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!A}$. وبما أن
+  $!B, \Pi \Sequent \Lambda$ صالحة، يكون
+  $\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{!B}$. لكن عندئذ يكون
+  $\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{!A \lif !B}$، وهو ما أردنا بيانه.
+\end{enumerate}
+\end{proof}
+
+\tagprob{FOL}
+\begin{prob}
+أكمل برهان \olref[fol][seq][sou]{thm:sequent-soundness}.
+\end{prob}
+\tagendprob
+
+\tagprob{notFOL}
+\begin{prob}
+أكمل برهان \olref[pl][seq][sou]{thm:sequent-soundness}.
+\end{prob}
+\tagendprob
+
+\begin{cor}
+\ollabel{cor:weak-soundness}
+إذا كان~$\Proves !A$، فإن~$!A$ \iftag{FOL}{صالحة}{تحصيل حاصل}.
+\end{cor}
+
+\begin{cor}
+\ollabel{cor:entailment-soundness}
+إذا كان~$\Gamma \Proves !A$، فإن~$\Gamma \Entails !A$.
+\end{cor}
+
+\begin{proof}
+من~$\Gamma \Proves !A$ توجد مجموعة جزئية منتهية
+$\Gamma_0 \subseteq \Gamma$ و!!a{derivation} لـ
+$\Gamma_0 \Sequent !A$. وبمقتضى \olref{thm:sequent-soundness}، فإن كل
+\iftag{FOL}{!!{structure}~$\Struct{M}$}{!!{valuation}~$\pAssign{v}$}
+إما أن تكذّب بعض~$!B \in \Gamma_0$ وإما أن تصدّق~$!A$.
+فإذا تحقق
+$\iftag{FOL}{\Sat{M}}{\pSat{v}}{\Gamma}$، امتنع الوجه الأول، ولزم
+$\iftag{FOL}{\Sat{M}}{\pSat{v}}{!A}$.
+\end{proof}
+
+\begin{cor}
+\ollabel{cor:consistency-soundness}
+إذا كانت~$\Gamma$ قابلة للإرضاء، فهي متسقة.
+\end{cor}
+
+\begin{proof}
+نثبت المقابل بالنقيض. لتكن~$\Gamma$ غير متسقة؛ فتوجد مجموعة منتهية
+$\Gamma_0 \subseteq \Gamma$ و!!a{derivation} لـ
+$\Gamma_0 \Sequent \quad$. ومن \olref{thm:sequent-soundness} أن
+$\Gamma_0 \Sequent \quad$ صالحة.
+ومعناه أن لكل
+\iftag{FOL}{!!{structure}~$\Struct{M}$}{!!{valuation}~$\pAssign{v}$}
+شاهدًا~$!C \in \Gamma_0$ بحيث
+$\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{!C}$.
+ولما كانت $\Gamma_0 \subseteq \Gamma$، كان~$!C$ في~$\Gamma$ أيضًا.
+فلا توجد \iftag{FOL}{$\Struct{M}$}{$\pAssign{v}$} ترضي
+$\Gamma$؛ أي إن~$\Gamma$ غير قابلة للإرضاء.
+\end{proof}
+
+\end{document}

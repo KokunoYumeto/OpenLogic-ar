@@ -1,0 +1,162 @@
+% Part: many-valued-logics
+% Chapter: sequent-calculus
+% Section: proof-theoretic-notions
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mvl}{seq}{prf}
+
+\olsection{المعاني النظرية البرهانية}
+
+\begin{explain}
+تقدم لنا من المعاني الدلالية المهمة الصحة واللزوم وقابلية الإشباع؛
+ونقابلها الآن بـ\emph{معان نظرية برهانية}. وهذه لا يحدّها إشباع
+!!{sentence}s في~!!{structure}s، وإنما يحدّها~!!{derivability} تتابعات
+مخصوصة أو~!!{nonderivability}ها. وقد كان الوقوف على موافقة المعاني
+الدلالية لهذه المعاني البرهانية كشفًا مهمًا؛ ومضمون هذه الموافقة هو
+\emph{مبرهنتا السلامة} و\emph{الاكتمال}.
+\end{explain}
+
+\begin{defn}[المبرهنات]
+نسمي~!!^a{sentence}~$!A$ \emph{مبرهنة} متى وُجد~!!a{derivation} في
+$\Log{LK}$ للتتابع~$\quad \Sequent !A$. ونكتب~$\Proves !A$ متى كانت
+$!A$ مبرهنة، ونكتب~$\Proves/ !A$ إذا لم تكن.
+\end{defn}
+
+\begin{defn}[!!^{derivability}]
+نقول إن~!!^a{sentence}~$!A$ \emph{!!{derivable} من} مجموعة
+!!{sentence}s~$\Gamma$، ونرمز إلى ذلك بـ$\Gamma \Proves !A$، متى
+وُجدت مجموعة جزئية منتهية~$\Gamma_0 \subseteq \Gamma$ ومتتالية
+$\Gamma_0'$ مؤلفة من !!{sentence}s~$\Gamma_0$، وكان~$\Log{LK}$
+!!{derive}s~$\Gamma_0' \Sequent !A$. وأما إن لم تكن~$!A$
+!!{derivable} من~$\Gamma$ فنكتب~$\Gamma \Proves/ !A$.
+\end{defn}
+
+ولما كانت لنا قواعد التقليص والإضعاف والتبديل، لم يكن لترتيب
+!!{sentence}s في~$\Gamma_0'$ ولا لتعدد ورودها أثر: فإن كان التتابع
+$\Gamma_0' \Sequent !A$ !!{derivable}، كان
+$\Gamma_0'' \Sequent !A$ كذلك لكل~$\Gamma_0''$ تشتمل على
+!!{sentence}s نفسها التي تشتمل عليها~$\Gamma_0'$. ومثال ذلك: إذا كان
+$\Gamma_0 = \{!B, !C\}$، كانت كل من
+$\Gamma_0' = \tuple{!B, !B, !C}$ و
+$\Gamma_0'' = \tuple{!C, !C, !B}$ متتالية لا تحتوي إلا
+!!{sentence}s الموجودة في~$\Gamma_0$. فمتى كان التتابع المشتمل على
+إحداهما~!!{derivable} كان المشتمل على الأخرى كذلك، كما في:
+\begin{prooftree}
+  \AxiomC{}
+  \Deduce$!B, !B, !C \fCenter !A$
+  \RightLabel{\LeftR{\Contraction}}
+  \UnaryInf$!B, !C \fCenter !A$
+  \RightLabel{\LeftR{\Exchange}}
+  \UnaryInf$!C, !B \fCenter !A$
+  \RightLabel{\LeftR{\Weakening}}
+  \UnaryInf$!C, !C, !B \fCenter !A$
+\end{prooftree}
+وعليه، إذا كانت~$\Gamma_0$ مجموعة منتهية من !!{sentence}s، أطلقنا فيما
+يأتي~$\Gamma_0 \Sequent !A$ على أي تتابع سابقه متتالية من
+!!{sentence}s~$\Gamma_0$، وأضمرنا ما تدعو إليه الحاجة من التقليصات
+والتبديلات والإضعافات.
+
+\begin{defn}[الاتساق]
+نسمي مجموعة الجمل~$\Gamma$ \emph{غير متسقة} إذا وفقط إذا وُجدت
+مجموعة جزئية منتهية~$\Gamma_0 \subseteq \Gamma$ بحيث~$\Log{LK}$
+  !!{derive}s~$\Gamma_0 \Sequent \quad$. وإذا لم تكن~$\Gamma$ غير
+  متسقة—أي إذا لم تشتق~$\Log{LK}$ التتابع~$\Gamma_0 \Sequent \quad$
+  لأي مجموعة جزئية منتهية~$\Gamma_0 \subseteq \Gamma$—سميناها \emph{متسقة}.
+\end{defn}
+
+\begin{prop}[الانعكاسية]
+\ollabel{prop:reflexivity}
+إذا كان~$!A \in \Gamma$، كان~$\Gamma \Proves !A$.
+\end{prop}
+
+\begin{proof}
+ذلك أن التتابع الابتدائي~$!A \Sequent !A$ !!{derivable}، وأن
+$\{!A\} \subseteq \Gamma$.
+\end{proof}
+
+\begin{prop}[الرتابة]
+\ollabel{prop:monotonicity}
+إذا كان~$\Gamma \subseteq \Delta$ و$\Gamma \Proves !A$، كان
+$\Delta \Proves !A$.
+\end{prop}
+
+\begin{proof}
+لنفرض~$\Gamma \Proves !A$؛ فهناك~$\Gamma_0 \subseteq \Gamma$
+منتهية يكون~$\Gamma_0 \Sequent !A$ معها !!{derivable}. وبما أن
+$\Gamma \subseteq \Delta$، كانت~$\Gamma_0$ مجموعة جزئية منتهية من
+$\Delta$ أيضًا. ولذلك يشهد~!!{derivation}~$\Gamma_0 \Sequent !A$
+كذلك بأن~$\Delta \Proves !A$.
+\end{proof}
+
+\begin{prop}[التعدي]
+\ollabel{prop:transitivity}
+إذا كان~$\Gamma \Proves !A$ و$\{!A\} \cup \Delta \Proves !B$، كان
+$\Gamma \cup \Delta \Proves !B$.
+\end{prop}
+
+\begin{proof}
+متى كان~$\Gamma \Proves !A$، وُجدت~$\Gamma_0 \subseteq \Gamma$
+منتهية و!!a{derivation}~$\pi_0$ لـ$\Gamma_0 \Sequent !A$. وإذا كان
+$\{!A\} \cup \Delta \Proves !B$، وُجدت مجموعة جزئية منتهية
+$\Delta_0 \subseteq \Delta$ و!!a{derivation}~$\pi_1$ لـ
+$!A, \Delta_0 \Sequent !B$. والبيان في~!!{derivation} الآتي:
+\begin{prooftree}
+  \AxiomC{}
+  \RightLabel{$\pi_0$}
+  \Deduce$\Gamma_0 \fCenter !A$
+  \AxiomC{}
+  \RightLabel{$\pi_1$}
+  \Deduce$!A, \Delta_0 \fCenter !B$
+  \RightLabel{\Cut}
+  \BinaryInf$\Gamma_0, \Delta_0 \fCenter !B$
+\end{prooftree}
+ولما كان~$\Gamma_0 \cup \Delta_0 \subseteq \Gamma \cup \Delta$، ثبت
+بذلك~$\Gamma \cup \Delta \Proves !B$.
+\end{proof}
+
+ويلزم من هذا، بوجه خاص، أنه إذا كان~$\Gamma \Proves !A$ و
+$!A \Proves !B$، كان~$\Gamma \Proves !B$. ويلزم أيضًا أنه إذا كان
+$!A_1, \dots, !A_n \Proves !B$ و$\Gamma \Proves !A_i$ لكل~$i$، كان
+$\Gamma \Proves !B$.
+
+\begin{prop}
+\ollabel{prop:incons}
+تكون~$\Gamma$ غير متسقة إذا وفقط إذا كان~$\Gamma \Proves {!A}$ لكل
+جملة~$!A$.
+\end{prop}
+
+\begin{proof}
+وهذا مما يترك تمرينًا.
+\end{proof}
+
+\begin{prob}
+برهن على~\olref[mvl][seq][prf]{prop:incons}.
+\end{prob}
+
+\begin{prop}[التراص]
+  \ollabel{prop:proves-compact}
+  \begin{enumerate}
+  \item إذا كان~$\Gamma \Proves !A$، وُجدت مجموعة جزئية منتهية
+    $\Gamma_0 \subseteq \Gamma$ بحيث~$\Gamma_0 \Proves !A$.
+  \item إذا كانت كل مجموعة جزئية منتهية من~$\Gamma$ متسقة، كانت
+    $\Gamma$ متسقة.
+  \end{enumerate}
+\end{prop}
+
+\begin{proof}
+  \begin{enumerate}
+    \item متى كان~$\Gamma \Proves !A$، وُجدت مجموعة جزئية منتهية
+      $\Gamma_0 \subseteq \Gamma$ بحيث يكون للتتابع
+      $\Gamma_0 \Sequent !A$ !!a{derivation}. ومن ثم
+      $\Gamma_0 \Proves !A$.
+    \item إن كانت~$\Gamma$ غير متسقة، وُجدت مجموعة جزئية منتهية
+      $\Gamma_0 \subseteq \Gamma$ بحيث~$\Log{LK}$ !!{derive}s
+      $\Gamma_0 \Sequent \quad$. غير أن~$\Gamma_0$ عندئذ مجموعة جزئية
+      منتهية غير متسقة من~$\Gamma$.
+  \end{enumerate}
+\end{proof}
+
+\end{document}

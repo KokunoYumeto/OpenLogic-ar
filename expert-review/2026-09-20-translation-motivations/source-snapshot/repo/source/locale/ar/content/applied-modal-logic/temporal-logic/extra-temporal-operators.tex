@@ -1,0 +1,43 @@
+% Part: applied-modal-logics
+% Chapter: temporal-logic
+% Section: extra-operators
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{aml}{tl}{ext}
+
+\olsection{مؤثرات إضافية للمنطق الزمني}
+
+إلى جانب المؤثرات الأحادية للماضي والمستقبل، يضم المنطق الزمني أحيانًا
+المؤثرين الثنائيين~$\Since$ و$\Until$، ويُقصد بهما تمثيل «منذ» و«حتى».
+ويعني ذلك إضافة~$\Since$ و$\Until$ إلى لغة المنطق الزمني، وإضافة العبارة
+الآتية إلى تعريف ال!!{formula} الزمنية:
+
+\begin{itemize}
+\item[] إذا كانت~$!A$ و$!B$ !!{formula}s، كان كل من
+  $(\Since !A !B)$ و$(\Until !A !B)$ !!{formula}s.
+\end{itemize}
+
+ثم تُعطى دلالات هذين المؤثرين كما يأتي:
+
+\begin{defn}\ollabel{defn:since-until}
+  \emph{صدق !!a{formula}~$!A$ عند~$t$} في~$\mModel M$:
+  \begin{enumerate}
+  \item\ollabel{defn:sub:mmodels-since} \indcase{!A}{\Since !B
+    !C}{$\mSat{M}{\indfrm}[t]$ إذا وفقط إذا كان~$\mSat{M}{!B}[t']$
+    لبعض~$t' \in T$ بحيث~$t' \prec t$، وكان لكل~$s$ بحيث
+    $t' \prec s \prec t$، $\mSat{M}{!C}[s]$}
+  \item\ollabel{defn:sub:mmodels-until} \indcase{!A}{\Until !B
+    !C}{$\mSat{M}{\indfrm}[t]$ إذا وفقط إذا كان~$\mSat{M}{!B}[t']$
+    لبعض~$t' \in T$ بحيث~$t \prec t'$، وكان لكل~$s$ بحيث
+    $t \prec s \prec t'$، $\mSat{M}{!C}[s]$}
+  \end{enumerate}
+\end{defn}
+
+القراءة الحدسية لـ~$\Since !B !C$ هي: «منذ أن كانت~$!B$ واقعة، ظلت
+$!C$ واقعة». والقراءة الحدسية لـ~$\Until !B !C$ هي: «إلى أن تصبح~$!B$
+واقعة، ستظل~$!C$ واقعة».
+
+\end{document}

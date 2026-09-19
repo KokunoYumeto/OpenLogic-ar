@@ -1,0 +1,91 @@
+% Part: computability
+% Chapter: computability-theory
+% Section: normal-form
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{thy}{nfm}
+\olsection{مبرهنة الصورة السوية}
+
+متى أمكننا وصف تعريف الدالة القابلة للحساب، والتحقق من صحة ما يُدّعى أنه
+سجل تام لحسابها عند دخل معين، أمكن أن نسلك سبيلًا لا يختص
+بنموذج حساب بعينه. فلطلب قيمة
+الدالة القابلة للحساب~${\OLId{latin-ordinary}{f}}$ عند الدخل~${\OLId{latin-ordinary}{x}}$ نجري ما يأتي:
+\begin{enumerate}
+  \item نفحص الأوصاف الممكنة لسجلات الحساب، واحدًا بعد آخر.
+  \item نختبر السجل المعطى: أهو سجل حساب~${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}})$؟
+  \item فإن وجدنا السجل الصحيح استخرجنا منه قيمة~${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}})$.
+\end{enumerate}
+وصحة هذا المسلك هي مضمون مبرهنة كليني للصورة السوية.
+
+\begin{thm}[مبرهنة كليني للصورة السوية]
+\ollabel{thm:normal-form}
+توجد علاقة عودية بدائية~${\OLId{latin-looped}{T}}({\OLId{latin-ordinary}{e}},{\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{s}})$ ودالة عودية بدائية~${\OLId{latin-looped}{U}}({\OLId{latin-ordinary}{s}})$ لهما
+الخاصية الآتية: إذا كانت ${\OLId{latin-ordinary}{f}}$ أي دالة جزئية قابلة للحساب، وجد~${\OLId{latin-ordinary}{e}}$ بحيث
+\[
+{\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}}) \simeq {\OLId{latin-looped}{U}}(\umin{{\OLId{latin-ordinary}{s}}}{{\OLId{latin-looped}{T}}({\OLId{latin-ordinary}{e}}, {\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{s}})})
+\]
+لكل~${\OLId{latin-ordinary}{x}}$.
+\end{thm}
+
+\begin{proof}[رسم البرهان]
+في أي نموذج حساب نستطيع أن نضبط وصف الدالة القابلة
+للحساب~${\OLId{latin-ordinary}{f}}$، ثم نجعل عددًا طبيعيًا~${\OLId{latin-ordinary}{e}}$ رمزًا له. ونضبط كذلك
+«متتالية الحساب»، وهي سجل الخطوات التي تُحسب بها الدالة ذات
+الفهرس~${\OLId{latin-ordinary}{e}}$ عند الدخل~${\OLId{latin-ordinary}{x}}$، ونجعل للمتتالية عددًا يرمزها~${\OLId{latin-ordinary}{s}}$.
+ويُختار هذا الترميز بحيث تكون
+\begin{enumerate}
+  \item العلاقة ${\OLId{latin-looped}{T}}({\OLId{latin-ordinary}{e}},{\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{s}})$، التي تصدق إذا وفقط إذا كان العدد~${\OLId{latin-ordinary}{s}}$
+  يرمز متتالية حساب الدالة ذات الفهرس~${\OLId{latin-ordinary}{e}}$ عند الدخل~${\OLId{latin-ordinary}{x}}$، و
+  \item الدالة ${\OLId{latin-looped}{U}}({\OLId{latin-ordinary}{s}})$، التي تستخرج من متتالية الحساب ذات الرمز~${\OLId{latin-ordinary}{s}}$
+  النتيجة النهائية لذلك الحساب،
+\end{enumerate}
+قابلتين للحساب. بل إن العلاقة~${\OLId{latin-looped}{T}}$ والدالة~${\OLId{latin-looped}{U}}$ عوديتان بدائيتان.
+
+% تصحيح ترجمة (C231-02): صُرّح بأن U تستخرج النتيجة من سجل الحساب المرمّز.
+\textbf{تنبيه تصحيحي على الترجمة الأساس.} أُصلح وصف~${\OLId{latin-looped}{U}}$ ليصرح بأنها
+تستخرج النتيجة من متتالية الحساب المرمّزة، لا أنها «تعيّن المتتالية إلى»
+نتيجة.
+\end{proof}
+
+\begin{explain}
+وأما استيفاء البرهان الصارم فيقتضي اختيار نموذج حساب، وبسط
+ترميز أوصاف الدوال ومتتاليات حسابها تفصيلًا، ثم إثبات
+العودية البدائية للعلاقة~${\OLId{latin-looped}{T}}$ والدالة~${\OLId{latin-looped}{U}}$. غير أن أكثر التطبيقات يكفيها
+أن تكون ${\OLId{latin-looped}{T}}$ و~${\OLId{latin-looped}{U}}$ قابلتين للحساب، مع كلية~${\OLId{latin-looped}{U}}$.
+
+ويحسن جمع فكرة البرهان في العبارة الموجزة الآتية:
+$\umin{{\OLId{latin-ordinary}{s}}}{{\OLId{latin-looped}{T}}({\OLId{latin-ordinary}{e}},{\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{s}})}$ يبحث عن متتالية حساب الدالة ذات الفهرس~${\OLId{latin-ordinary}{e}}$ عند
+الدخل~${\OLId{latin-ordinary}{x}}$، و${\OLId{latin-looped}{U}}$ تعيد خرج متتالية الحساب إن أمكن العثور عليها.
+\end{explain}
+
+فإذا اخترنا الدوال العودية الجزئية نموذجًا للحساب، كما فعل كليني
+أولًا، دلت المبرهنة على كفاية بحث غير محدود واحد،
+أي مؤثر واحد $\umin{{\OLId{latin-ordinary}{y}}}{{\OLId{latin-ordinary}{f}}(\vec {\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}})}$، لتعريف الدالة. ومن هذه
+الجهة يقال إن لكل دالة عودية جزئية صورة سوية.
+
+ونستعمل ${\OLId{latin-looped}{T}}$ و${\OLId{latin-looped}{U}}$ في تعريف التعداد $\cfind{{\OLMathNumeral{0}}}$ و$\cfind{{\OLMathNumeral{1}}}$ و
+$\cfind{{\OLMathNumeral{2}}}$ و…. ونفترض من الآن اختيارًا ملائمًا
+لـ${\OLId{latin-looped}{T}}$ و~${\OLId{latin-looped}{U}}$، ونجعل المعادلة
+% تصحيح صياغة كلاسيكية (C231-01): صُرّح بأن الاختيار فرض ثابت من هذا الموضع، لا برهان مؤجل.
+\[
+\cfind{{\OLId{latin-ordinary}{e}}}({\OLId{latin-ordinary}{x}}) \simeq {\OLId{latin-looped}{U}}(\umin{{\OLId{latin-ordinary}{s}}}{{\OLId{latin-looped}{T}}({\OLId{latin-ordinary}{e}},{\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{s}})})
+\]
+\emph{تعريفًا} لـ$\cfind{{\OLId{latin-ordinary}{e}}}$.
+
+ومن الحقائق التي نحتاج إليها أيضًا:
+
+\begin{thm}
+لكل دالة جزئية قابلة للحساب عدد لا نهائي من الفهارس.
+\end{thm}
+
+ووجه ذلك بيّن للحدس: إذا أخذنا وصفًا لدالة قابلة للحساب، صنعنا
+وصفًا آخر يؤدي أزواج الدخل والخرج نفسها. ولا يلزم إلا أن
+نقدّم على الحساب عملًا لا يغيّر نتيجته، كفحص
+${\OLMathNumeral{0}}={\OLMathNumeral{0}}$، أو العد إلى ${\OLMathNumeral{5}}$، أو نحو ذلك. فيختلف فهرس الوصف الجديد
+عن الأول، مع أن كليهما فهرس للدالة نفسها؛ وإنما اختلفت طريقة
+حسابها اختلافًا يسيرًا.
+
+\end{document}

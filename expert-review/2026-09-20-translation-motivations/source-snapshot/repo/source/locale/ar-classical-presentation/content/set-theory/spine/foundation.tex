@@ -1,0 +1,106 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{spine}{foundation}
+
+\olsection{التأسيس}
+
+لم يتم لنا المقصود \emph{كلّه}، وإنما قاربناه؛ وذلك أن~$\ZFminus$
+لا تضمن أن تقع \emph{كل} مجموعة في بعض~${\OLId{latin-looped}{V}}_{\OLId{greek-variable}{alpha}}$، أي أن تكون كل
+مجموعة قد نشأت في مرحلة من المراحل.
+
+وقد يقال إن في وسعنا، من الوجه الرياضي المباشر، ألا \emph{نبالي}
+بالمجموعات الخارجة عن الهرم؛ فإن وُجدت أغفلناها. غير أن تصورنا للمجموعة
+إنما بُني على أن كل مجموعة تتكون في مرحلة ما (انظر~\stageshier{} في
+\olref[z][story]{sec}). فوجب أن ننفي إمكان خروج مجموعة عن الهرم، ولا
+سبيل إلى ذلك إلا بإضافة مسلّمة تجعل لكل مجموعة موضعًا فيه.
+
+ولما كانت مجموعات~${\OLId{latin-looped}{V}}_{\OLId{greek-variable}{alpha}}$ هي مراحلنا، كان أقرب ما يلوح أن نتخذ
+القول الآتي مسلّمة:
+
+\begin{defish}
+\emph{الانتظام.} $\forall {\OLId{latin-looped}{A}} \exists {\OLId{greek-variable}{alpha}}\, {\OLId{latin-looped}{A}} \subseteq {\OLId{latin-looped}{V}}_{\OLId{greek-variable}{alpha}}$
+\end{defish}
+
+وهذا مسلك مستقيم لا غبار عليه. إلا أننا سنعدل عنه، لعلة يأتي بيانها في
+القسم التالي، إلى المسلّمة الآتية:
+
+\begin{axiom}[التأسيس]
+$(\forall {\OLId{latin-looped}{A}} \neq \emptyset)(\exists {\OLId{latin-looped}{B}} \in {\OLId{latin-looped}{A}}){\OLId{latin-looped}{A}} \cap {\OLId{latin-looped}{B}} = \emptyset$.
+\end{axiom}
+
+ومع شيء من العمل يتبين، داخل~$\ZFminus$، أن التأسيس يوجب الانتظام.
+ونبدأ بالتعريف الآتي:
+\begin{defn}
+لكل مجموعة~${\OLId{latin-looped}{A}}$، لتكن:
+\begin{align*}
+	\text{cl}_{\OLMathNumeral{0}}({\OLId{latin-looped}{A}}) &= {\OLId{latin-looped}{A}},\\
+	\text{cl}_{{\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}}}({\OLId{latin-looped}{A}}) &= \bigcup \text{cl}_{\OLId{latin-ordinary}{n}}({\OLId{latin-looped}{A}}),\\
+	\text{trcl}({\OLId{latin-looped}{A}}) &= \bigcup_{{\OLId{latin-ordinary}{n}} < \omega} \text{cl}_{{\OLId{latin-ordinary}{n}}}({\OLId{latin-looped}{A}}).
+\end{align*}
+ونسمي~$\text{trcl}({\OLId{latin-looped}{A}})$ \emph{الإغلاق المتعدي} لـ${\OLId{latin-looped}{A}}$.
+\end{defn}
+\noindent
+ووجه هذه التسمية ظاهر من القضية الآتية:
+\begin{prop}\ollabel{subsetoftrcl}
+${\OLId{latin-looped}{A}} \subseteq \trcl{{\OLId{latin-looped}{A}}}$ و$\trcl{{\OLId{latin-looped}{A}}}$ مجموعة متعدية.
+\end{prop}
+
+\begin{proof}
+أما~${\OLId{latin-looped}{A}} = \text{cl}_{\OLMathNumeral{0}}({\OLId{latin-looped}{A}}) \subseteq \text{trcl}({\OLId{latin-looped}{A}})$ فظاهر. وإذا كان
+${\OLId{latin-ordinary}{x}} \in {\OLId{latin-ordinary}{b}} \in \trcl{{\OLId{latin-looped}{A}}}$، كان~${\OLId{latin-ordinary}{b}} \in \text{cl}_{\OLId{latin-ordinary}{n}}({\OLId{latin-looped}{A}})$ لبعض~${\OLId{latin-ordinary}{n}}$؛ ومن ثم
+${\OLId{latin-ordinary}{x}} \in \text{cl}_{{\OLId{latin-ordinary}{n}}+{\OLMathNumeral{1}}}({\OLId{latin-looped}{A}}) \subseteq \text{trcl}({\OLId{latin-looped}{A}})$.
+\end{proof}
+
+\begin{lem}\ollabel{lem:TransitiveWellFounded}
+إذا كانت~${\OLId{latin-looped}{A}}$ مجموعة متعدية، وجد~${\OLId{greek-variable}{alpha}}$ يحقق
+${\OLId{latin-looped}{A}} \subseteq {\OLId{latin-looped}{V}}_{\OLId{greek-variable}{alpha}}$.
+\end{lem}
+
+\begin{proof}
+نستحضر تعريف «$\supstrict({\OLId{latin-looped}{X}})$» من
+\olref[ordinals][opps]{defsupstrict}، ثم نعرّف مجموعتين:
+\begin{align*}
+	{\OLId{latin-looped}{D}}  &= \Setabs{{\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}}{\forall \delta\ {\OLId{latin-ordinary}{x}} \nsubseteq {\OLId{latin-looped}{V}}_\delta}\\
+	{\OLId{greek-variable}{alpha}} &= \supstrict\Setabs{\delta}{(\exists {\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}})
+	({\OLId{latin-ordinary}{x}} \subseteq {\OLId{latin-looped}{V}}_\delta \land (\forall \gamma \in \delta){\OLId{latin-ordinary}{x}} \nsubseteq {\OLId{latin-looped}{V}}_\gamma)}
+\end{align*}
+ولنفرض أولًا~${\OLId{latin-looped}{D}} = \emptyset$. إذا كان~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}$، وجد~$\delta$ بحيث
+${\OLId{latin-ordinary}{x}} \subseteq {\OLId{latin-looped}{V}}_\delta$؛ وبما أن الأعداد الترتيبية مرتبة ترتيبًا جيدًا،
+جاز اختياره بحيث
+$(\forall \gamma \in \delta){\OLId{latin-ordinary}{x}} \nsubseteq {\OLId{latin-looped}{V}}_\gamma$. فيكون
+$\delta \in {\OLId{greek-variable}{alpha}}$، ويلزم~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{V}}_{\OLId{greek-variable}{alpha}}$ من
+\olref[spine][Valphabasic]{Valphabasicprops}. وإذن
+${\OLId{latin-looped}{A}} \subseteq {\OLId{latin-looped}{V}}_{{\OLId{greek-variable}{alpha}}}$، وهو المطلوب.
+
+فلم يبق إلا إثبات~${\OLId{latin-looped}{D}} = \emptyset$. نفرض خلافه طلبًا للمحال. يقضي
+التأسيس بوجود~${\OLId{latin-looped}{B}} \in {\OLId{latin-looped}{D}} \subseteq {\OLId{latin-looped}{A}}$ بحيث~${\OLId{latin-looped}{D}} \cap {\OLId{latin-looped}{B}} = \emptyset$.
+فإذا كان~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{B}}$ كان~${\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{A}}$ لتعدي~${\OLId{latin-looped}{A}}$؛ ولأن~${\OLId{latin-ordinary}{x}} \notin {\OLId{latin-looped}{D}}$،
+ينتج~$\exists \delta\ {\OLId{latin-ordinary}{x}} \subseteq {\OLId{latin-looped}{V}}_\delta$. ضع الآن
+\[
+	\beta = \supstrict\Setabs{\delta}{(\exists {\OLId{latin-ordinary}{x}} \in {\OLId{latin-looped}{B}})({\OLId{latin-ordinary}{x}} \subseteq {\OLId{latin-looped}{V}}_\delta \land (\forall \gamma < \delta){\OLId{latin-ordinary}{x}} \nsubseteq {\OLId{latin-looped}{V}}_\gamma)}.
+\]
+فنستدل كما تقدم على~${\OLId{latin-looped}{B}} \subseteq {\OLId{latin-looped}{V}}_\beta$، وهذا يناقض كون~${\OLId{latin-looped}{B}} \in {\OLId{latin-looped}{D}}$.
+\end{proof}
+
+\begin{thm}\ollabel{zfentailsregularity}
+يصدق الانتظام.
+\end{thm}
+
+\begin{proof}
+خذ~${\OLId{latin-looped}{A}}$ كيفما اتفق. من~\olref{subsetoftrcl} نعلم أن
+${\OLId{latin-looped}{A}} \subseteq \trcl{{\OLId{latin-looped}{A}}}$ وأن الأخيرة متعدية؛ فتوجد~${\OLId{greek-variable}{alpha}}$ بحيث
+${\OLId{latin-looped}{A}} \subseteq \trcl{{\OLId{latin-looped}{A}}} \subseteq {\OLId{latin-looped}{V}}_{\OLId{greek-variable}{alpha}}$، بمقتضى
+\olref{lem:TransitiveWellFounded}.
+\end{proof}
+
+فقد ثبت أن~$\ZFminus$ تقضي بـ
+$\emph{التأسيس}\Rightarrow\emph{الانتظام}$. وسيأتي في
+\olref[spine][rank]{zfminusregularityfoundation} أن~$\ZFminus$ تقضي
+كذلك بـ$\emph{الانتظام}\Rightarrow\emph{التأسيس}$. فالتأسيس
+والانتظام، مع افتراض~$\ZFminus$، متكافئان. وعلى هذا، بالنظر إلى
+$\ZFminus$، يجوز تسويغ التأسيس بتكافئه مع الانتظام؛ أما الانتظام
+نفسه فيسوّغه تصور~\stageshier{} مباشرة.
+
+\end{document}

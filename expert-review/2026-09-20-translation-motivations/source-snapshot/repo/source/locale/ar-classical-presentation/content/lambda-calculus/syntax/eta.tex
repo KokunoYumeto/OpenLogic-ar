@@ -1,0 +1,82 @@
+% Part: lambda-calculus
+% Chapter: syntax
+% Section: eta
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{syn}{eta}
+\olsection{تحويل~$\eta$}
+
+ولحدود~$\lambda$ علاقة أخرى نبينها بالمثال الذي سبق في~\olref[fv]{sec}:
+فالحد~$\lambd[{\OLId{latin-ordinary}{x}}][(fx)]$ يأخذ وسيطًا ثم يطبق~${\OLId{latin-ordinary}{f}}$ عليه؛ فهو من حيث الدالة
+نفس~${\OLId{latin-ordinary}{f}}$، إذ يختزل كل من~$\lambd[{\OLId{latin-ordinary}{x}}][(fx)]{\OLId{latin-looped}{N}}$ و$fN$ إلى~$fN$.
+ولضبط هذا المعنى نستعمل اختزال~$\eta$ وتمديد~$\eta$.
+
+\begin{defn}[تقلّص~$\eta$، $\eredone$]
+  \ollabel{defn:beredone}
+  علاقة \emph{تقلّص~$\eta$} ($\eredone$) أصغر العلاقات المتوافقة على الحدود
+  التي تحقق
+  \[
+    \lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-looped}{M}} {\OLId{latin-ordinary}{x}}] \eredone {\OLId{latin-looped}{M}} \text{ بشرط } {\OLId{latin-ordinary}{x}} \notin \FV{{\OLId{latin-looped}{M}}}
+  \]
+\end{defn}
+
+\begin{defn}[اختزال~$\beta\eta$، $\bered$] \ollabel{defn:bered}
+  علاقة \emph{اختزال~$\beta\eta$} ($\bered$) أصغر علاقة انعكاسية متعدية
+  على الحدود تشتمل على~$\bredone$ و$\eredone$.
+  فتعريفها يجمع قاعدتي الانعكاس والتعدي إلى القاعدتين:
+  \begin{enumerate}
+  \item من~${\OLId{latin-looped}{M}} \bredone {\OLId{latin-looped}{N}}$ يلزم~${\OLId{latin-looped}{M}} \bered {\OLId{latin-looped}{N}}$. \ollabel{defn:bered3}
+  \item من~${\OLId{latin-looped}{M}} \eredone {\OLId{latin-looped}{N}}$ يلزم~${\OLId{latin-looped}{M}} \bered {\OLId{latin-looped}{N}}$. \ollabel{defn:bered4}
+  \end{enumerate}
+    
+\end{defn}
+
+\begin{defn}
+  نضم إلى علاقة التكافؤ~$\equal$ قاعدة تحويل~$\eta$:
+  \[
+  \lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{f}} {\OLId{latin-ordinary}{x}}] \equal {\OLId{latin-ordinary}{f}} \quad\text{إذا كان }{\OLId{latin-ordinary}{x}} \notin \FV{{\OLId{latin-ordinary}{f}}}
+  \]
+  ونسمي العلاقة الحاصلة~$\equal[\eta]$.
+  % تصحيح مصدر (0366-I1): أُثبت شرط النضارة اللازم لتحويل إيتا.
+\end{defn}
+
+ومن شأن التكافؤ بحسب~$\eta$ أنه يتصل بامتدادية حدود لامبدا:
+
+\begin{defn}[الامتدادية]
+  نضم إلى علاقة التكافؤ~$\equal$ قاعدة~(\ext):
+  \begin{center}
+  من~$Mx \equal Nx$ يلزم~${\OLId{latin-looped}{M}} \equal {\OLId{latin-looped}{N}}$، بشرط~${\OLId{latin-ordinary}{x}} \notin \FV{MN}$.
+  \end{center}
+  ونجعل~$\equal[\ext]$ رمزًا للعلاقة الحاصلة.
+\end{defn}
+
+ومؤدى هذه القاعدة، على وجه التقريب، أن الحدين إذا عدّا دالتين وكان
+فعلهما في الوسيط الواحد سواء، وجب عدهما متساويين.
+
+فلنثبت أن ما تضيفه قاعدة~$\eta$ هو الامتدادية وحدها، لا أكثر منها ولا أقل.
+
+\begin{thm}
+  ${\OLId{latin-looped}{M}} \equal[\ext] {\OLId{latin-looped}{N}}$ يكافئ~${\OLId{latin-looped}{M}} \equal[\eta] {\OLId{latin-looped}{N}}$.
+\end{thm}
+
+\begin{proof}
+  نبدأ بإثبات انغلاق~$\equal[\eta]$ تحت قاعدة الامتدادية؛ فإذا ثبت
+  أن قاعدة~$ext$ لا تزيد شيئًا على~$\equal[\eta]$، لزم أن تحتوي~$\equal[\eta]$
+  العلاقة~$\equal[\ext]$، وأن يلزم من~${\OLId{latin-looped}{M}} \equal[\ext] {\OLId{latin-looped}{N}}$ تحقق~${\OLId{latin-looped}{M}}
+  \equal[\eta] {\OLId{latin-looped}{N}}$.
+
+  ووجه انغلاق~$\equal[\eta]$ تحت~\ext{} أن كل نتيجة~${\OLId{latin-looped}{M}} \equal {\OLId{latin-looped}{N}}$
+  يراد اشتقاقها بقاعدة~\ext{} لها المقدمة~$Mx \equal[\eta] Nx$.
+  ومنها نحصل على~$\lambd[{\OLId{latin-ordinary}{x}}][Mx] \equal[\eta] \lambd[{\OLId{latin-ordinary}{x}}][Nx]$
+  بقاعدة من قواعد~$\equal$، ثم نطبق~$\eta$ على الطرفين فنبلغ~${\OLId{latin-looped}{M}} \equal[\eta] {\OLId{latin-looped}{N}}$.
+
+  وأما الاتجاه الآخر فنثبت فيه أن قاعدة~$\eta$ داخلة في~$\equal[\ext]$.
+  فمتى أخذنا~$\lambd[{\OLId{latin-ordinary}{x}}][Mx]$ و${\OLId{latin-looped}{M}}$ مع الشرط~${\OLId{latin-ordinary}{x}} \notin \FV{{\OLId{latin-looped}{M}}}$،
+  كان~$(\lambd[{\OLId{latin-ordinary}{x}}][Mx]){\OLId{latin-ordinary}{x}} \equal[\ext] Mx$؛
+  فتنتج~$\lambd[{\OLId{latin-ordinary}{x}}][Mx] \equal[\ext] {\OLId{latin-looped}{M}}$ بقاعدة~\ext{}.
+\end{proof}
+
+\end{document}

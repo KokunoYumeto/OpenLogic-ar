@@ -1,0 +1,76 @@
+% Part: lambda-calculus
+% Chapter: syntax
+% Section: de-bruijn
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{syn}{deb}
+
+\olsection{مؤشر دي بروين}
+
+التكافؤ بحسب~${\OLId{greek-variable}{alpha}}$ أمر طبيعي؛ إذ إن الحدود المتكافئة بحسب~${\OLId{greek-variable}{alpha}}$
+تؤدي المعنى نفسه. بل يمكن وضع نحو لحدود لامبدا لا يفرّق أصلًا بين الحدود
+التي يحوّل بعضها إلى بعض بتحويل~${\OLId{greek-variable}{alpha}}$. وأشهر هذه الأنحاء ما يجعل
+\emph{مؤشر دي بروين} بدلًا من المتغير.
+
+إذا كتبنا~$\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-looped}{M}}]$، فقد صرّحنا بأن~${\OLId{latin-ordinary}{x}}$ معلمة الدالة، وأمكننا استعمال~${\OLId{latin-ordinary}{x}}$
+في~${\OLId{latin-looped}{M}}$ للإحالة إلى تلك المعلمة. وأما ترميز دي بروين فلا يسمي المعلمات؛
+بل يجعل مكان الإحالة في متن الدالة عددًا يبين كم تجريدًا يفصلها عن التجريد الذي يربطها.
+فانظر، مثلًا، إلى~$\lambd[{\OLId{latin-ordinary}{x}}][\lambd[{\OLId{latin-ordinary}{y}}][{\OLId{latin-ordinary}{y}} {\OLId{latin-ordinary}{x}}]]$: تجريده الخارجي يربط~${\OLId{latin-ordinary}{x}}$، والداخلي يربط~${\OLId{latin-ordinary}{y}}$،
+والحد الجزئي~${\OLId{latin-ordinary}{y}} {\OLId{latin-ordinary}{x}}$ داخل مجال التجريد الداخلي.
+فلا تجريد يتوسط~${\OLId{latin-ordinary}{y}}$ وتجريده~$\lambd[{\OLId{latin-ordinary}{y}}]$، ويتوسط~${\OLId{latin-ordinary}{x}}$ وتجريده~$\lambd[{\OLId{latin-ordinary}{x}}]$ تجريد واحد.
+لذلك نضع~${\OLMathNumeral{0}}\, {\OLMathNumeral{1}}$ موضع~${\OLId{latin-ordinary}{y}} {\OLId{latin-ordinary}{x}}$، ونكتب
+$\lambd[][\lambd[][{\OLMathNumeral{01}}]]$ للحد كله.
+
+\begin{defn}
+  لحدود دي بروين التعريف الاستقرائي التالي:
+  \begin{enumerate}
+  \item ${\OLId{latin-ordinary}{n}}$، لكل عدد طبيعي~${\OLId{latin-ordinary}{n}}$.
+  \item $PQ$، إذا كان~${\OLId{latin-looped}{P}}$ و${\OLId{latin-looped}{Q}}$ حدين من حدود دي بروين.
+  \item $\lambd[][{\OLId{latin-looped}{N}}]$، إذا كان~${\OLId{latin-looped}{N}}$ حدًا من حدود دي بروين.
+  \end{enumerate}
+\end{defn}
+
+ونضبط الانتقال من حدود لامبدا المعتادة إلى الحدود المفهرسة بدي بروين بهذا التعريف:
+\begin{defn}
+  \begin{align*}
+    {\OLId{latin-looped}{F}}_{\OLId{greek-variable}{Gamma}}({\OLId{latin-ordinary}{x}}) &= {\OLId{greek-variable}{Gamma}}({\OLId{latin-ordinary}{x}}) \\
+    {\OLId{latin-looped}{F}}_{\OLId{greek-variable}{Gamma}}(PQ) &= {\OLId{latin-looped}{F}}_{\OLId{greek-variable}{Gamma}}({\OLId{latin-looped}{P}}){\OLId{latin-looped}{F}}_{\OLId{greek-variable}{Gamma}}({\OLId{latin-looped}{Q}}) \\
+    {\OLId{latin-looped}{F}}_{\OLId{greek-variable}{Gamma}}(\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-looped}{N}}]) &= \lambd[][{\OLId{latin-looped}{F}}_{{\OLId{latin-ordinary}{x}},{\OLId{greek-variable}{Gamma}}}({\OLId{latin-looped}{N}})]
+  \end{align*}
+  فيه~${\OLId{greek-variable}{Gamma}}$ قائمة متغيرات يبدأ ترقيم مواضعها بالصفر؛ و${\OLId{greek-variable}{Gamma}}({\OLId{latin-ordinary}{x}})$
+  موضع أول ورود للمتغير~${\OLId{latin-ordinary}{x}}$ في~${\OLId{greek-variable}{Gamma}}$، والبحث بادئ من الموضع~${\OLMathNumeral{0}}$.
+  فإذا كانت~${\OLId{greek-variable}{Gamma}}$ هي~${\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}},{\OLId{latin-ordinary}{z}}$، مثلًا، كان~${\OLId{greek-variable}{Gamma}}({\OLId{latin-ordinary}{x}})$ مساويًا لـ${\OLMathNumeral{0}}$،
+  و${\OLId{greek-variable}{Gamma}}({\OLId{latin-ordinary}{z}})$ مساويًا لـ${\OLMathNumeral{2}}$.
+  
+  وأما~${\OLId{latin-ordinary}{x}},{\OLId{greek-variable}{Gamma}}$ فهي القائمة الحاصلة بإضافة~${\OLId{latin-ordinary}{x}}$ في أول~${\OLId{greek-variable}{Gamma}}$.
+  فإذا أبقينا~${\OLId{greek-variable}{Gamma}}$ كما في المثال السابق، كانت~${\OLId{latin-ordinary}{w}},{\OLId{greek-variable}{Gamma}}$ هي~${\OLId{latin-ordinary}{w}},{\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}},{\OLId{latin-ordinary}{z}}$.
+  % تصحيح مصدر (0363-I1): عُين أول ورود ابتداءً من الصفر ليختار الرابط الأقرب عند حجب المتغيرات.
+\end{defn}
+
+وفي الاتجاه المعاكس نستعيد من حد دي بروين حد لامبدا معتادًا على الوجه التالي:
+
+\begin{defn}
+  \begin{align*}
+    {\OLId{latin-looped}{G}}_{\OLId{greek-variable}{Gamma}}({\OLId{latin-ordinary}{n}}) &= {\OLId{greek-variable}{Gamma}}[{\OLId{latin-ordinary}{n}}] \\
+    {\OLId{latin-looped}{G}}_{\OLId{greek-variable}{Gamma}}(PQ) &= {\OLId{latin-looped}{G}}_{\OLId{greek-variable}{Gamma}}({\OLId{latin-looped}{P}}) {\OLId{latin-looped}{G}}_{\OLId{greek-variable}{Gamma}}({\OLId{latin-looped}{Q}}) \\
+    {\OLId{latin-looped}{G}}_{\OLId{greek-variable}{Gamma}}(\lambd[][{\OLId{latin-looped}{N}}]) &= \lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-looped}{G}}_{{\OLId{latin-ordinary}{x}},{\OLId{greek-variable}{Gamma}}}({\OLId{latin-looped}{N}})]
+  \end{align*}
+  فيه~${\OLId{greek-variable}{Gamma}}$ أيضًا قائمة متغيرات تبدأ مواضعها بالصفر، و${\OLId{greek-variable}{Gamma}}[{\OLId{latin-ordinary}{n}}]$
+  اسم المتغير الذي في الموضع~${\OLId{latin-ordinary}{n}}$.
+  فإذا كانت~${\OLId{greek-variable}{Gamma}}$ هي~${\OLId{latin-ordinary}{x}},{\OLId{latin-ordinary}{y}},{\OLId{latin-ordinary}{z}}$، مثلًا، كانت~${\OLId{greek-variable}{Gamma}}[{\OLMathNumeral{1}}]$ هي~${\OLId{latin-ordinary}{y}}$.
+
+  وفي المعادلة الأخيرة نأخذ~${\OLId{latin-ordinary}{x}}$ أي متغير لا يقع في القائمة
+  ${\OLId{greek-variable}{Gamma}}$.
+\end{defn}
+
+ونذكر النتيجة الآتية من غير إثبات:
+
+\begin{prop}
+  إذا تحقق~${\OLId{latin-looped}{M}} \aconvone {\OLId{latin-looped}{M}}'$، وكانت~${\OLId{greek-variable}{Gamma}}$ قائمة كيفما اتفقت تحتوي~$\FV{{\OLId{latin-looped}{M}}}$، لزم
+  ${\OLId{latin-looped}{F}}_{\OLId{greek-variable}{Gamma}}({\OLId{latin-looped}{M}}) \eqs {\OLId{latin-looped}{F}}_{\OLId{greek-variable}{Gamma}}({\OLId{latin-looped}{M}}')$.
+\end{prop}
+
+\end{document}

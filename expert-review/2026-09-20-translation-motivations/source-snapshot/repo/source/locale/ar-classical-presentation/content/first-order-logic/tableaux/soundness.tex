@@ -1,0 +1,239 @@
+% Part: first-order-logic
+% Chapter: tableaux
+% Section: soundness.tex
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{tab}{sou}}
+      {\olfileid{pl}{tab}{sou}}
+      
+\olsection{السلامة}
+
+\begin{explain}
+نسق !!^a{derivation}، كالجداول الدلالية، \emph{سليم} متى امتنع عليه
+!!{derive} ما لا يلزم في الحقيقة. فالسلامة ضمان لأنساق ال!!{derivation}
+من تجاوز ما يسوّغه الاستدلال. ويتبيّن المراد بحسب الخاصية البرهانية
+التي نبحث عنها؛ فمن ذلك:
+\begin{enumerate}
+\item كل~$!A$ !!{derivable} تكون \iftag{FOL}{صالحة}{تحصيل حاصل}؛
+\item إذا كانت !!a{sentence} !!{derivable} من جمل أخرى، فهي أيضًا نتيجة لها؛
+\item إذا كانت مجموعة من ال!!{sentence}s غير متسقة، فهي غير قابلة للإرضاء.
+\end{enumerate}
+هذه خصائص لا غنى عنها لنسق !!a{derivation}. فإن تخلّفت إحداها
+كان نسق ال!!{derivation} معيبًا، إذ أمكنه !!{derive} ما لا حق له
+في إثباته. فمن أجل ذلك كان إثبات سلامة نسق !!a{derivation}
+من أوكد مطالب دراسته.
+
+وجميع هذه الخصائص البرهانية مردّها إلى !!{tableau}s مغلقة
+تختلف صورها. فإثبات~(\OLClassicalDigits{1})--(\OLClassicalDigits{3}) يقتضي بيان خاصية دلالية مشتركة
+لل!!{tableau}s المغلقة. نعرّف أولًا إرضاء
+!!a{signed formula} في \iftag{FOL}{بنية}{تقييم}، ثم نثبت أن
+ال!!{tableau} متى أغلق امتنع أن ترضي \iftag{FOL}{بنية}{تقييم}
+جميع افتراضاته. وعندئذ تتبع~(\OLClassicalDigits{1})--(\OLClassicalDigits{3}) هذه النتيجة.
+\end{explain}
+
+\begin{defn}
+\iftag{FOL}{!!^a{structure}}{!!^a{valuation}}~$\iftag{FOL}{\Struct{M}}{\pAssign{{\OLId{latin-ordinary}{v}}}}$
+\emph{ترضي}
+!!a{signed formula} $\sFmla{\True}{!A}$ إذا وفقط إذا كان
+$\iftag{FOL}{\Sat{{\OLId{latin-looped}{M}}}}{\pSat{{\OLId{latin-ordinary}{v}}}}{!A}$، وتُرضي
+$\sFmla{\False}{!A}$ إذا وفقط إذا كان
+$\iftag{FOL}{\Sat/{{\OLId{latin-looped}{M}}}}{\pSat/{{\OLId{latin-ordinary}{v}}}}{!A}$. وتُرضي
+$\iftag{FOL}{\Struct{M}}{\pAssign{{\OLId{latin-ordinary}{v}}}}$ مجموعة من ال!!{signed formula}s
+~${\OLId{greek-variable}{Gamma}}$ إذا وفقط إذا أرضت كل $\sFmla{{\OLId{latin-looped}{S}}}{!A} \in {\OLId{greek-variable}{Gamma}}$. وتكون
+${\OLId{greek-variable}{Gamma}}$~\emph{قابلة للإرضاء} إذا وُجدت
+\iftag{FOL}{!!a{structure}}{!!a{valuation}} ترضيها، و\emph{غير قابلة
+للإرضاء} خلاف ذلك.
+\end{defn}
+
+\begin{thm}[السلامة]
+  \ollabel{thm:tableau-soundness}
+  إذا كان لــ${\OLId{greek-variable}{Gamma}}$ !!{tableau} مغلق، فإن ${\OLId{greek-variable}{Gamma}}$ غير قابلة للإرضاء.
+\end{thm}
+
+\begin{proof}
+نقول عن فرع من !!a{tableau} إنه قابل للإرضاء إذا وفقط إذا كانت
+مجموعة ال!!{signed formula}s التي عليه قابلة للإرضاء.
+ونقول عن !!a{tableau} إنه قابل للإرضاء متى كان له فرع واحد
+قابل للإرضاء على الأقل.
+
+نثبت أن مدّ !!{tableau} قابل للإرضاء بإحدى قواعد الاستدلال
+يبقيه !!{tableau} قابلًا للإرضاء. وفي ذلك إثبات المبرهنة؛
+فإن كل !!{tableau} مغلق يُبنى بإجراء القواعد على ال!!{tableau}
+المؤلّف من افتراضات في~${\OLId{greek-variable}{Gamma}}$ وحدها. فلو كانت~${\OLId{greek-variable}{Gamma}}$ قابلة
+للإرضاء، لكان كل !!{tableau} مبني لها قابلًا للإرضاء.
+لكن ال!!{tableau} المغلق لا يقبل الإرضاء؛ إذ يجتمع في كل فرع
+$\sFmla{\True}{!A}$ و$\sFmla{\False}{!A}$، ولا
+\iftag{FOL}{بنية}{تقييم} ترضي~$!A$ ولا ترضيها معًا.
+
+نفرض !!{tableau} قابلًا للإرضاء، أي !!a{tableau} له فرع قابل
+للإرضاء على الأقل. وإجراء القاعدة إما إلحاق !!{signed formula}s
+بفرع، وإما شقّه إلى فرعين. فإن كان في ال!!{tableau} فرع قابل
+للإرضاء لم تتناوله هذه الخطوة، بقي كذلك في ال!!{tableau} الممدود؛
+فيصح المطلوب. فليس علينا إلا النظر في إجراء قاعدة على فرع قابل
+للإرضاء.
+
+نسمّي~${\OLId{greek-variable}{Gamma}}$ مجموعة ال!!{signed formula}s على هذا الفرع،
+ونفرض أن~$\sFmla{{\OLId{latin-looped}{S}}}{!A} \in {\OLId{greek-variable}{Gamma}}$ هي ال!!{signed formula}
+التي تناولتها القاعدة. إن لم تشعّب القاعدة الفرع، وجب إثبات
+قابلية إرضاء~${\OLId{greek-variable}{Gamma}}$ مع النتائج المضافة. وإن شعّبته،
+كفى أن يقبل الإرضاء أحد الفرعين الناشئين على الأقل.
+
+أما الاستدلالات التي لا تشعّب الفرع، فتفصيلها كما يأتي:
+\begin{enumerate}
+\item إذا أجرينا~$\TRule{\True}{\lnot}$ على
+  $\sFmla{\True}{\lnot !B} \in {\OLId{greek-variable}{Gamma}}$، صارت
+  ال!!{signed formula}s على الفرع~${\OLId{greek-variable}{Gamma}} \cup
+  \{\sFmla{\False}{!B}\}$. نفرض
+  $\iftag{FOL}{\Sat{{\OLId{latin-looped}{M}}}}{\pSat{{\OLId{latin-ordinary}{v}}}}{{\OLId{greek-variable}{Gamma}}}$؛ فيلزم، على الخصوص،
+  $\iftag{FOL}{\Sat{{\OLId{latin-looped}{M}}}}{\pSat{{\OLId{latin-ordinary}{v}}}}{\lnot !B}$.
+  ومن تعريف النفي~$\iftag{FOL}{\Sat/{{\OLId{latin-looped}{M}}}}{\pSat/{{\OLId{latin-ordinary}{v}}}}{!B}$؛
+  أي إن~$\iftag{FOL}{\Struct{M}}{\pAssign{{\OLId{latin-ordinary}{v}}}}$
+  ترضي~$\sFmla{\False}{!B}$، كما أردنا.
+\item يُوسَّع الفرع بتطبيق $\TRule{\False}{\lnot}$ على
+  $\sFmla{\False}{\lnot !B} \in {\OLId{greek-variable}{Gamma}}$: تمرين.
+\item وإذا أجرينا~$\TRule{\True}{\land}$ على
+  $\sFmla{\True}{!B \land !C} \in {\OLId{greek-variable}{Gamma}}$،
+  أضفنا !!{signed formula}s اثنتين:~$\sFmla{\True}{!B}$
+  و$\sFmla{\True}{!C}$. نفرض
+  $\iftag{FOL}{\Sat{{\OLId{latin-looped}{M}}}}{\pSat{{\OLId{latin-ordinary}{v}}}}{{\OLId{greek-variable}{Gamma}}}$، ومنه
+  $\iftag{FOL}{\Sat{{\OLId{latin-looped}{M}}}}{\pSat{{\OLId{latin-ordinary}{v}}}}{!B \land !C}$.
+  فيلزم~$\iftag{FOL}{\Sat{{\OLId{latin-looped}{M}}}}{\pSat{{\OLId{latin-ordinary}{v}}}}{!B}$ و
+  $\iftag{FOL}{\Sat{{\OLId{latin-looped}{M}}}}{\pSat{{\OLId{latin-ordinary}{v}}}}{!C}$؛
+  فالبنية أو التقييم~$\iftag{FOL}{\Struct{M}}{\pAssign{{\OLId{latin-ordinary}{v}}}}$
+  ترضي~$\sFmla{\True}{!B}$ و$\sFmla{\True}{!C}$ جميعًا.
+\item يُوسَّع الفرع بتطبيق $\TRule{\False}{\lor}$ على
+  $\sFmla{\False}{!B \lor !C} \in {\OLId{greek-variable}{Gamma}}$: تمرين.
+\item وإذا أجرينا~$\TRule{\False}{\lif}$ على
+  $\sFmla{\False}{!B \lif !C} \in {\OLId{greek-variable}{Gamma}}$،
+  أضفنا !!{signed formula}s اثنتين:~$\sFmla{\True}{!B}$
+  و$\sFmla{\False}{!C}$. نفرض
+  $\iftag{FOL}{\Sat{{\OLId{latin-looped}{M}}}}{\pSat{{\OLId{latin-ordinary}{v}}}}{{\OLId{greek-variable}{Gamma}}}$، فيكون، على الخصوص،
+  $\iftag{FOL}{\Sat/{{\OLId{latin-looped}{M}}}}{\pSat/{{\OLId{latin-ordinary}{v}}}}{!B \lif !C}$.
+  ولا يكون ذلك إلا مع~$\iftag{FOL}{\Sat{{\OLId{latin-looped}{M}}}}{\pSat{{\OLId{latin-ordinary}{v}}}}{!B}$
+  و$\iftag{FOL}{\Sat/{{\OLId{latin-looped}{M}}}}{\pSat/{{\OLId{latin-ordinary}{v}}}}{!C}$؛
+  فالبنية أو التقييم~$\iftag{FOL}{\Struct{M}}{\pAssign{{\OLId{latin-ordinary}{v}}}}$
+  ترضي~$\sFmla{\True}{!B}$ و$\sFmla{\False}{!C}$.
+
+
+\iftag{FOL}{%
+\item وإذا أجرينا~$\TRule{\True}{\lforall}$ على
+  $\sFmla{\True}{\lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]} \in {\OLId{greek-variable}{Gamma}}$،
+  ألحقنا بالفرع !!{signed formula} هي~$\sFmla{\True}{!A({\OLId{latin-ordinary}{t}})}$.
+  نفرض~$\Sat{{\OLId{latin-looped}{M}}}{{\OLId{greek-variable}{Gamma}}}$؛ فمنه
+  $\Sat{{\OLId{latin-looped}{M}}}{\lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]}$. وبمقتضى
+  \olref[syn][sem]{prop:quant-terms} نحصل على~$\Sat{{\OLId{latin-looped}{M}}}{!A({\OLId{latin-ordinary}{t}})}$؛
+  أي إن~$\Struct{M}$ ترضي~$\sFmla{\True}{!A({\OLId{latin-ordinary}{t}})}$.
+
+
+\item وإذا أجرينا~$\TRule{\False}{\lforall}$ على
+  $\sFmla{\False}{\lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]} \in {\OLId{greek-variable}{Gamma}}$،
+  ألحقنا !!{signed formula} هي~$\sFmla{\False}{!A({\OLId{latin-ordinary}{a}})}$، حيث~${\OLId{latin-ordinary}{a}}$
+  !!a{constant} لم يرد في~${\OLId{greek-variable}{Gamma}}$. والمجموعة~${\OLId{greek-variable}{Gamma}}$ قابلة
+  للإرضاء، فنأخذ~$\Struct{M}$ تحقق~$\Sat{{\OLId{latin-looped}{M}}}{{\OLId{greek-variable}{Gamma}}}$، ومنه
+  $\Sat/{{\OLId{latin-looped}{M}}}{\lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]}$. ولإثبات قابلية إرضاء
+  ${\OLId{greek-variable}{Gamma}} \cup \{\sFmla{\False}{!A({\OLId{latin-ordinary}{a}})}\}$ نبني بنية
+  $\Struct{M'}$ على الوجه الآتي.
+
+  تقضي \olref[syn][ass]{prop:sat-quant} بأن
+  $\Sat/{{\OLId{latin-looped}{M}}}{\lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]}$ يكافئ وجود~${\OLId{latin-ordinary}{s}}$ له
+  $\Sat/{{\OLId{latin-looped}{M}}}{!A({\OLId{latin-ordinary}{x}})}[{\OLId{latin-ordinary}{s}}]$. نأخذ~$\Struct{M'}$ موافقةً
+  لـ~$\Struct{M}$ في كل شيء سوى~$\Assign{{\OLId{latin-ordinary}{a}}}{{\OLId{latin-looped}{M}}'} = {\OLId{latin-ordinary}{s}}({\OLId{latin-ordinary}{x}})$.
+  وبمقتضى \olref[syn][ext]{cor:extensionality-sent}،
+  لكل~$\sFmla{\True}{!C} \in {\OLId{greek-variable}{Gamma}}$ يكون~$\Sat{{\OLId{latin-looped}{M}}'}{!C}$،
+  ولكل~$\sFmla{\False}{!C} \in {\OLId{greek-variable}{Gamma}}$ يكون~$\Sat/{{\OLId{latin-looped}{M}}'}{!C}$؛
+  إذ لم يرد~${\OLId{latin-ordinary}{a}}$ في~${\OLId{greek-variable}{Gamma}}$.
+
+  ثم تعطينا \olref[syn][ext]{prop:extensionality}
+  $\Sat/{{\OLId{latin-looped}{M}}'}{!A({\OLId{latin-ordinary}{x}})}[{\OLId{latin-ordinary}{s}}]$، وتعطينا
+  \olref[syn][ext]{prop:ext-formulas}~$\Sat/{{\OLId{latin-looped}{M}}'}{!A({\OLId{latin-ordinary}{a}})}[{\OLId{latin-ordinary}{s}}]$.
+  ولأن~$!A({\OLId{latin-ordinary}{a}})$ !!a{sentence}، تنقلنا
+  \olref[syn][ass]{prop:sentence-sat-true} إلى~$\Sat/{{\OLId{latin-looped}{M}}'}{!A({\OLId{latin-ordinary}{a}})}$؛
+  أي إن~$\Struct{M'}$ ترضي~$\sFmla{\False}{!A({\OLId{latin-ordinary}{a}})}$.
+\item يُوسَّع الفرع بتطبيق $\TRule{\True}{\lexists}$ على
+  $\sFmla{\True}{\lexists[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]} \in {\OLId{greek-variable}{Gamma}}$: تمرين.
+\item يُوسَّع الفرع بتطبيق $\TRule{\False}{\lexists}$ على
+  $\sFmla{\False}{\lexists[{\OLId{latin-ordinary}{x}}][!B({\OLId{latin-ordinary}{x}})]} \in {\OLId{greek-variable}{Gamma}}$: تمرين.}{}
+\end{enumerate}
+وأما الاستدلالات التي تشعّب الفرع، فنفصّلها الآن:
+\begin{enumerate}
+\item إذا أجرينا~$\TRule{\False}{\land}$ على
+  $\sFmla{\False}{!B \land !C} \in {\OLId{greek-variable}{Gamma}}$،
+  نشأ فرع أيسر يمر بـ~$\sFmla{\False}{!B}$،
+  وفرع أيمن يمر بـ~$\sFmla{\False}{!C}$.
+  نفرض~$\iftag{FOL}{\Sat{{\OLId{latin-looped}{M}}}}{\pSat{{\OLId{latin-ordinary}{v}}}}{{\OLId{greek-variable}{Gamma}}}$، فيلزم
+  $\iftag{FOL}{\Sat/{{\OLId{latin-looped}{M}}}}{\pSat/{{\OLId{latin-ordinary}{v}}}}{!B \land !C}$؛
+  ومن ثم إما~$\iftag{FOL}{\Sat/{{\OLId{latin-looped}{M}}}}{\pSat/{{\OLId{latin-ordinary}{v}}}}{!B}$
+  وإما~$\iftag{FOL}{\Sat/{{\OLId{latin-looped}{M}}}}{\pSat/{{\OLId{latin-ordinary}{v}}}}{!C}$.
+  أما في الأولى، فـ~$\iftag{FOL}{\Struct{M}}{\pAssign{{\OLId{latin-ordinary}{v}}}}$
+  ترضي~$\sFmla{\False}{!B}$؛ أي إن
+  $\iftag{FOL}{\Struct{M}}{\pAssign{{\OLId{latin-ordinary}{v}}}}$ ترضي صيغ الفرع الأيسر.
+  وأما في الثانية، فـ~$\iftag{FOL}{\Struct{M}}{\pAssign{{\OLId{latin-ordinary}{v}}}}$
+  ترضي~$\sFmla{\False}{!C}$؛ أي إن
+  $\iftag{FOL}{\Struct{M}}{\pAssign{{\OLId{latin-ordinary}{v}}}}$ ترضي صيغ الفرع الأيمن.
+\item يُوسَّع الفرع بتطبيق $\TRule{\True}{\lor}$ على
+  $\sFmla{\True}{!B \lor !C} \in {\OLId{greek-variable}{Gamma}}$: تمرين.
+\item يُوسَّع الفرع بتطبيق $\TRule{\True}{\lif}$ على
+  $\sFmla{\True}{!B \lif !C} \in {\OLId{greek-variable}{Gamma}}$: تمرين.
+\item وإذا أجرينا~\Cut، نشأ فرع فيه~$\sFmla{\True}{!B}$،
+  وآخر فيه~$\sFmla{\False}{!B}$. ونحن نفرض
+  $\iftag{FOL}{\Sat{{\OLId{latin-looped}{M}}}}{\pSat{{\OLId{latin-ordinary}{v}}}}{{\OLId{greek-variable}{Gamma}}}$؛ ولا يخلو الأمر من
+  $\iftag{FOL}{\Sat{{\OLId{latin-looped}{M}}}}{\pSat{{\OLId{latin-ordinary}{v}}}}{!B}$ أو
+  $\iftag{FOL}{\Sat/{{\OLId{latin-looped}{M}}}}{\pSat/{{\OLId{latin-ordinary}{v}}}}{!B}$.
+  فـ~$\iftag{FOL}{\Struct{M}}{\pAssign{{\OLId{latin-ordinary}{v}}}}$ ترضي أحد الفرعين،
+  الأيسر أو الأيمن.
+\end{enumerate}
+\end{proof}
+
+\tagprob{FOL}
+\begin{prob}
+أكمل برهان \olref[fol][tab][sou]{thm:tableau-soundness}.
+\end{prob}
+\tagendprob
+
+\tagprob{notFOL}
+\begin{prob}
+أكمل برهان \olref[pl][tab][sou]{thm:tableau-soundness}.
+\end{prob}
+\tagendprob
+
+\begin{cor}
+\ollabel{cor:weak-soundness}
+إذا كان $\Proves !A$، فإن $!A$ \iftag{FOL}{صالحة}{تحصيل حاصل}.
+\end{cor}
+
+\begin{cor}
+\ollabel{cor:entailment-soundness}
+إذا كان ${\OLId{greek-variable}{Gamma}} \Proves !A$، فإن ${\OLId{greek-variable}{Gamma}} \Entails !A$.
+\end{cor}
+
+\begin{proof}
+  من~${\OLId{greek-variable}{Gamma}} \Proves !A$ نأخذ~$!B_{\OLMathNumeral{1}}$، \dots، $!B_{\OLId{latin-ordinary}{n}} \in
+  {\OLId{greek-variable}{Gamma}}$ بحيث يكون للمجموعة~$\{\sFmla{\False}{!A}, \sFmla{\True}{!B_{\OLMathNumeral{1}}}, \dots,
+  \sFmla{\True}{!B_{\OLId{latin-ordinary}{n}}}\}$ !!{tableau} مغلق. فتقتضي
+  \olref{thm:tableau-soundness} أن كل
+  \iftag{FOL}{!!{structure}}{!!{valuation}}~$\iftag{FOL}{\Struct{M}}{\pAssign{{\OLId{latin-ordinary}{v}}}}$
+  إما أن تكذّب بعض~$!B_{\OLId{latin-ordinary}{i}}$ وإما أن تصدّق~$!A$.
+  فإذا كان~$\iftag{FOL}{\Sat{{\OLId{latin-looped}{M}}}}{\pSat{{\OLId{latin-ordinary}{v}}}}{{\OLId{greek-variable}{Gamma}}}$ انتفى الأول،
+  فلزم~$\iftag{FOL}{\Sat{{\OLId{latin-looped}{M}}}}{\pSat{{\OLId{latin-ordinary}{v}}}}{!A}$.
+\end{proof}
+
+\begin{cor}
+\ollabel{cor:consistency-soundness}
+إذا كانت ${\OLId{greek-variable}{Gamma}}$ قابلة للإرضاء، فهي متسقة.
+\end{cor}
+
+\begin{proof}
+نأخذ المقابل بالنقيض. فإذا كانت~${\OLId{greek-variable}{Gamma}}$ غير متسقة، وجد~$!B_{\OLMathNumeral{1}}$،
+\dots، $!B_{\OLId{latin-ordinary}{n}} \in {\OLId{greek-variable}{Gamma}}$ ومعها !!{tableau} مغلق لـ
+$\{\sFmla{\True}{!B_{\OLMathNumeral{1}}}, \dots, \sFmla{\True}{!B_{\OLId{latin-ordinary}{n}}}\}$.
+وبمبرهنة \olref{thm:tableau-soundness} لا توجد
+$\iftag{FOL}{\Struct{M}}{\pAssign{{\OLId{latin-ordinary}{v}}}}$ تحقق
+$\iftag{FOL}{\Sat{{\OLId{latin-looped}{M}}}}{\pSat{{\OLId{latin-ordinary}{v}}}}{!B_{\OLId{latin-ordinary}{i}}}$ لكل~${\OLId{latin-ordinary}{i}}={\OLMathNumeral{1}}$، \dots،~${\OLId{latin-ordinary}{n}}$.
+فيمتنع إرضاء~${\OLId{greek-variable}{Gamma}}$، وهو المطلوب.
+\end{proof}
+
+\end{document}

@@ -1,0 +1,128 @@
+% Part: turing-machines
+% Chapter: undecidability
+% Section: universal-tm
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{tur}{und}{uni}
+\olsection{آلات تورنغ الشاملة}
+
+قد تقدم في \olref[enu]{sec} أن لكل آلة تورنغ وصفًا بمتتالية
+منتهية من الأعداد الصحيحة، تتضمن ترميز الحالات والأبجدية والحالة
+الابتدائية والتعليمات. وتقدم أن مجموعة هذه الأوصاف !!{enumerable}.
+ولكونها !!{denumerable} توجد دالة !!a{surjective} من~$\Nat$ إليها؛
+ويمكن تحصيل دالة !!a{surjective} بهذه الصفة بطريقة كانتور المتعرجة،
+مثلًا. فبذلك تتعدد أوصاف الآلات على نظام معين. وإذا ثبتنا هذا
+التعداد، صح أن نقول: الآلة الأولى، والثانية،~\dots، والآلة ذات
+الرتبة~${\OLId{latin-ordinary}{e}}$. وتسمى هذه الأعداد \emph{فهارس}.
+
+\begin{defn}
+لتكن ${\OLId{latin-looped}{M}}$ الآلة ذات الرتبة~${\OLId{latin-ordinary}{e}}$ في التعداد المثبت؛ عندئذ يسمى
+${\OLId{latin-ordinary}{e}}$~\emph{فهرسًا} للآلة~${\OLId{latin-looped}{M}}$. ونكتب ${\OLId{latin-looped}{M}}_{\OLId{latin-ordinary}{e}}$ للدلالة على الآلة ذات
+الرتبة~${\OLId{latin-ordinary}{e}}$.
+\end{defn}
+
+ولا يلزم أن يكون للآلة فهرس واحد؛ فقد يختلف وصفان للآلة~${\OLId{latin-looped}{M}}$
+في ترتيب التعليمات وحده، فيقع كل وصف في موضع غير موضع الآخر،
+ويختلف فهرساهما.
+
+والأمر الذي نعتمد عليه أن هذا التعداد يمكن ترتيبه بحيث يُحسب وصف
+${\OLId{latin-looped}{M}}$ فعليًا من فهرسها، ويُحسب فهرس للآلة~${\OLId{latin-looped}{M}}$ فعليًا من وصفها.
+فتقتضي أطروحة تشرتش--تورنغ وجود آلة تورنغ تستخرج وصف الآلة ذات
+الفهرس~${\OLId{latin-ordinary}{e}}$ وتخرجه على شريطها. ويكون ذلك الوصف متتالية من كتل
+علامات~$\TMstroke$، تمثل الأعداد الصحيحة الموجبة التي يتألف منها
+وصف~${\OLId{latin-looped}{M}}_{\OLId{latin-ordinary}{e}}$.
+
+فأي الدوال على فهارس آلات تورنغ تقبل هي نفسها الحساب بهذه الآلات؟
+وأي خواص تلك الفهارس يمكن تقريرها؟ من أمثلة ما يقبل الحساب الدالة
+التي تعطي، من الفهرس~${\OLId{latin-ordinary}{e}}$، عدد حالات الآلة ذات الفهرس~${\OLId{latin-ordinary}{e}}$.
+وبيان عمل آلة تحسبها أنها تبدأ بكتلة واحدة من ${\OLId{latin-ordinary}{e}}$ علامات
+$\TMstroke$، فتستخرج من ${\OLId{latin-ordinary}{e}}$ الوصف الذي يرمزه. ويصير هذا الوصف
+متتالية من كتل علامات~$\TMstroke$ على الشريط. ولما كان أول
+!!{element} من المتتالية عدد الحالات، لم يبق عليها إلا محو ما سوى
+الكتلة الأولى من علامات~$\TMstroke$، ثم التوقف.
+
+ومن أهم ما يترتب على هذا التمثيل المبرهنة الآتية:
+
+\begin{thm}\ollabel{thm:universal-tm}
+توجد \emph{آلة تورنغ شاملة}~${\OLId{latin-looped}{U}}$، إذا ابتدأت بالدخل $\tuple{{\OLId{latin-ordinary}{e}},{\OLId{latin-ordinary}{n}}}$،
+كان شأنها ما يأتي:
+  \begin{enumerate}
+    \item تتوقف إذا وفقط إذا توقفت ${\OLId{latin-looped}{M}}_{\OLId{latin-ordinary}{e}}$ عند الدخل~${\OLId{latin-ordinary}{n}}$؛
+    \item وإذا توقفت ${\OLId{latin-looped}{M}}_{\OLId{latin-ordinary}{e}}$ بخرج ${\OLId{latin-ordinary}{m}}$، أخرجت~${\OLId{latin-looped}{U}}$ العدد نفسه ثم توقفت.
+  \end{enumerate}
+  فالدالة التي تحسبها ${\OLId{latin-looped}{U}}$ هي ${\OLId{latin-ordinary}{f}}\colon\Nat\times\Nat\pto\Nat$،
+  حيث~${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{e}},{\OLId{latin-ordinary}{n}})={\OLId{latin-ordinary}{m}}$ متى توقفت ${\OLId{latin-looped}{M}}_{\OLId{latin-ordinary}{e}}$ عند الدخل~${\OLId{latin-ordinary}{n}}$ بخرج~${\OLId{latin-ordinary}{m}}$،
+  وتكون غير معرّفة فيما عدا ذلك.
+\end{thm}
+
+\begin{proof}
+  أما تفصيل إنشاء~${\OLId{latin-looped}{U}}$ فشديد التعقيد حتى يكاد يتعذر عرضه هنا؛
+  فنكتفي ببيان طريقة عملها، ثم نستند إلى أطروحة تشرتش--تورنغ.
+  يكون على شريط~${\OLId{latin-looped}{U}}$ أولًا كتلة من ${\OLId{latin-ordinary}{e}}$ علامات $\TMstroke$،
+  وبعدها كتلة من ${\OLId{latin-ordinary}{n}}$ علامات~$\TMstroke$. فتفك ترميز الفهرس~${\OLId{latin-ordinary}{e}}$
+  وتضع الوصف إلى يمين الدخل~${\OLId{latin-ordinary}{n}}$. وهذا الوصف قائمة أعداد، أي كتل
+  علامات~$\TMstroke$ تفصلها رموز~$\TMblank$، تتضمن تعليمات~${\OLId{latin-looped}{M}}_{\OLId{latin-ordinary}{e}}$.
+  ثم تكتب ${\OLId{latin-looped}{U}}$ عدد الحالة الابتدائية للآلة~${\OLId{latin-looped}{M}}_{\OLId{latin-ordinary}{e}}$ والعدد~${\OLMathNumeral{1}}$
+  إلى يمين وصف~${\OLId{latin-looped}{M}}_{\OLId{latin-ordinary}{e}}$؛ وتمثلهما أيضًا تمثيلًا أحاديًا بكتل
+  علامات~$\TMstroke$. وبعد ذلك تنسخ الدخل، وهو كتلة من ${\OLId{latin-ordinary}{n}}$
+  علامات~$\TMstroke$، إلى اليمين، جاعلةً بدل كل علامة~$\TMstroke$
+  كتلة من ثلاث علامات~$\TMstroke$. ذلك أن رمز $\TMstroke$
+  عدده~${\OLMathNumeral{3}}$، ورمز $\TMendtape$ عدده~${\OLMathNumeral{1}}$، ورمز $\TMblank$
+  عدده~${\OLMathNumeral{2}}$. وتضع على يسار متتالية هذه الكتل، التي تفصلها
+  رموز~$\TMblank$ في شريط ${\OLId{latin-looped}{U}}$، علامة~$\TMstroke$ واحدة،
+  وهي ترميز~$\TMendtape$.
+
+  فصار شريط~${\OLId{latin-looped}{U}}$ يحمل الفهرس~${\OLId{latin-ordinary}{e}}$، والعدد~${\OLId{latin-ordinary}{n}}$، ورمز الحالة
+  الابتدائية الذي يمثل «الحالة الحالية»، وعدد موضع الرأس الابتدائي~${\OLMathNumeral{1}}$
+  الذي يمثل «موضع الرأس الحالي»، ومحتويات «الشريط» الابتدائية:
+  متتالية كتل من علامات~$\TMstroke$ تمثل أعداد رموز~${\OLId{latin-looped}{M}}_{\OLId{latin-ordinary}{e}}$،
+  ونسميها «الرموز»، وتفصل بينها علامات~$\TMblank$.
+
+  ولتحاكي ما تفعله ${\OLId{latin-looped}{M}}_{\OLId{latin-ordinary}{e}}$ عند الدخل~${\OLId{latin-ordinary}{n}}$، تجري على هذه الطريقة:
+  \begin{enumerate}
+    \item تطلب العدد~${\OLId{latin-ordinary}{k}}$ المسجل ل«موضع الرأس الحالي»؛ وهو في
+    الابتداء~${\OLMathNumeral{1}}$.
+    \item تقصد الكتلة رقم~${\OLId{latin-ordinary}{k}}$ من «الشريط»، وتقرأ «الرمز» فيها.
+    \item\ollabel{find-inst}%
+    تطلب التعليمة الموافقة ل«الحالة» و«الرمز» الحاليين.
+    \item تعود إلى الكتلة رقم~${\OLId{latin-ordinary}{k}}$، وتجعل موضع «رمزها» عدد ترميز
+    الرمز الذي تكتبه~${\OLId{latin-looped}{M}}_{\OLId{latin-ordinary}{e}}$.
+    \item تقصد موضع تسجيل «الحالة الحالية»، وتبدل عددها بعدد
+    الحالة الجديدة.
+    \item تقصد موضع تسجيل «موضع الشريط»، فتحذف علامة
+    $\TMstroke$ أو تزيد علامة~$\TMstroke$، بحسب كون الحركة
+    المأمور بها إلى اليسار أو إلى اليمين، على الترتيب.
+    \item تعيد هذه الخطوات.\footnote{نترك في هذا الوصف بعض
+    الدقائق؛ فقد تفتقر~${\OLId{latin-looped}{U}}$ إلى موضع أوسع عند زيادة العداد الذي
+    يسجل «موضع الرأس الحالي»، فيلزمها حينئذ نقل «الشريط» كله
+    إلى اليمين.}
+  \end{enumerate}
+  فإن كانت ${\OLId{latin-looped}{M}}_{\OLId{latin-ordinary}{e}}$ لا تتوقف عند الدخل~${\OLId{latin-ordinary}{n}}$، لم تتوقف ${\OLId{latin-looped}{U}}$ أيضًا،
+  وكان خرجها غير معرّف.
+
+  وأما إذا لم تجد في الخطوة~\olref{find-inst}، ضمن وصف~${\OLId{latin-looped}{M}}_{\OLId{latin-ordinary}{e}}$،
+  تعليمة لزوج «الحالة» و«الرمز» الحاليين، فذلك موضع توقف ${\OLId{latin-looped}{M}}_{\OLId{latin-ordinary}{e}}$.
+  وعندئذ تمحو ${\OLId{latin-looped}{U}}$ ما يقع يسار «الشريط»، وتتخطى كتلته الأولى:
+  علامة~$\TMstroke$ واحدة ترمز $\TMendtape$. ثم تبدأ بالكتلة
+  التالية، فتضع في أقصى يسار شريطها علامة~$\TMstroke$ واحدة
+  عن كل كتلة متعاقبة من ثلاث علامات~$\TMstroke$، وتمحو في أثناء
+  ذلك ما فرغت منه من كتل «الشريط». فإذا بلغت كتلة من
+  علامتي~$\TMstroke$، وهي ترميز $\TMblank$، فحصت كل ما بعدها من
+  الخانات المرمّزة. فإن كانت كلها فراغات محت ما بقي وتوقفت؛ وإن
+  وجدت بعد ذلك رمزًا غير فارغ تباعدت أو تركت خرجًا غير أحادي عمدًا،
+  فلا تقبل ترميزًا غير قياسي. وبتمام العمل المقبول لا يبقى على شريط
+  ${\OLId{latin-looped}{U}}$ إلا كتلة واحدة من علامات~$\TMstroke$ طولها~${\OLId{latin-ordinary}{m}}$.
+
+  % تصحيح مصدر (C267-01): أُضيف فحص ما بعد أول فراغ لرفض ترميزات الشريط غير القياسية.
+
+  فإن وجدت ${\OLId{latin-looped}{U}}$ قبل بلوغ رمز~$\TMblank$ كتلة لا ترمز
+  $\TMstroke$، أي ليست من ثلاث علامات~$\TMstroke$، توقفت من
+  فورها. وحينئذ لا يكون ما على شريط~${\OLId{latin-looped}{U}}$ كتلة واحدة من
+  علامات~$\TMstroke$، فلا يكون خرجها عددًا طبيعيًا؛ أي إن
+  ${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{e}},{\OLId{latin-ordinary}{n}})$ غير معرّفة في هذه الحال.
+\end{proof}
+
+\end{document}

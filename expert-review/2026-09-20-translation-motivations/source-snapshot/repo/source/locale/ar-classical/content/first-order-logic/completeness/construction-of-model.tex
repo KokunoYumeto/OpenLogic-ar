@@ -1,0 +1,276 @@
+% Part: first-order-logic
+% Chapter: completeness
+% Section: construction-of-model
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{com}{mod}}
+      {\olfileid{pl}{com}{mod}}
+
+\olsection{إنشاء نموذج}
+
+\begin{explain}
+\iftag{FOL}{نؤخر النظر في $\eq$، ونقصد الآن إلى إرضاء كل مجموعة
+  متسقة~$\Gamma$ من ال!!{sentence}s خالية من~$\eq$. نمد~$\Gamma$
+  أولًا إلى مجموعة متسقة و!!{complete} ومشبعة~$\Gamma^*$.
+  ثم نعرّف النموذج~$\Struct{M(\Gamma^*)}$ تعريفًا يسيرًا: مجاله
+  الحدود المغلقة في~$\Lang{L'}$، وكل !!{constant} يُفسَّر بنفسه.
+  ويعم هذا الحكم الحدود المغلقة، فنضمن $\Value{t}{M(\Gamma^*)} = t$
+  لكل حد مغلق~$t$. وأما ال!!{predicate}s فنعين امتداداتها بحيث
+  تصدق ال!!{sentence} الذرية في $\Struct{M(\Gamma^*)}$ إذا وفقط
+  إذا كانت في~$\Gamma^*$. وبذلك تصدق ال!!{sentence}s الذرية كلها
+  في~$\Gamma^*$ داخل $\Struct{M(\Gamma^*)}$. وأما غير الذرية،
+  فيكفل صدقها اتساق $\Gamma^*$ واكتمالها وإشباعها.}{حان تعريف
+  !!a{valuation} ترضي كل $!A \in \Gamma$. نأخذ، بلمّة ليندنبوم،
+  مجموعة متسقة كاملة $\Gamma^* \supseteq \Gamma$، ثم نعيّن التقييم
+  بما يقع من ال!!{propositional variable}s في~$\Gamma^*$؛ وليكن
+  هذا التقييم~$\pAssign v(\Gamma^*)$.}
+\end{explain}
+
+\iftag{FOL}{%
+\begin{defn}[نموذج الحدود]
+\ollabel{defn:termmodel}
+إذا كانت $\Gamma^*$ مجموعة !!a{complete} ومتسقة ومشبعة من ال!!{sentence}s
+في لغة~$\Lang L$، سمينا \emph{نموذج الحدود}~$\Struct M(\Gamma^*)$ الخاص
+بـ$\Gamma^*$ ال!!{structure} التي نحددها بهذه البنود:
+\begin{enumerate}
+\item نجعل ال!!{domain}~$\Domain{M(\Gamma^*)}$ مجموعة الحدود المغلقة
+  كلها في~$\Lang L$.
+\item نأخذ !!a{constant} $c$؛ فتفسيره $c$ بعينه:
+  $\Assign{c}{M(\Gamma^*)} = c$.
+\item نفسر ال!!{function}~$f$ بالدالة التي ترسل الحدود المغلقة
+  $t_1$، \dots، $t_n$ إلى الحد المغلق
+  $f(t_1, \dots, t_n)$؛ أي:
+\[
+\Assign{f}{M(\Gamma^*)}(t_1, \dots, t_n) = f(t_1,\dots, t_n)
+\]
+\item إذا كان $R$ !!{predicate} ذا $n$ مواضع، فإن
+  \[
+  \tuple{t_1, \dots,
+  t_n} \in \Assign{R}{M(\Gamma^*)} \text{ إذا وفقط إذا } \Atom{R}{t_1, \dots,
+    t_n} \in \Gamma^*.
+  \]
+\end{enumerate}
+\end{defn}
+}{%
+\begin{defn}
+\ollabel{defn:termmodel}
+متى كانت $\Gamma^*$ مجموعة متسقة كاملة من ال!!{formula}s، عرّفنا التقييم الآتي:
+\[
+\pAssign v(\Gamma^*)(p) = \begin{cases}
+  \True & \text{إذا كان $p \in \Gamma^*$}\\
+  \False & \text{إذا كان $p \notin \Gamma^*$}
+  \end{cases}
+\]
+\end{defn}
+}
+
+\iftag{FOL}{%
+نثبت أولًا أن التفسير يفي بما وعدنا به، أي $\Value{t}{M(\Gamma^*)} = t$.
+
+\begin{lem}
+\ollabel{lem:val-in-termmodel} ليكن $\Struct M(\Gamma^*)$ نموذج الحدود
+في \olref{defn:termmodel}؛ عندئذ $\Value{t}{M(\Gamma^*)} = t$ لكل حد
+مغلق~$t$.
+\end{lem}
+\begin{proof}
+ نستقرئ تركيب $t$. ففي الأساس يكون $t$ !!a{constant}، وقيمته معلومة
+ من تعريف نموذج الحدود. ولخطوة الاستقراء خذ حدودًا مغلقة
+ $t_1, \ldots, t_n$ تحقق $\Value{t_i}{M(\Gamma^*)} = t_i$، وليكن
+ $f$ !!{function} له $n$ حجج. عندئذ نحسب:
+\begin{align*}
+\Value{f(t_1,\ldots,t_n)}{M(\Gamma^*)} &= \Assign{f}{M(\Gamma^*)}(\Value{t_1}
+ {M(\Gamma^*)},
+\ldots, \Value{t_n}{M(\Gamma^*)}) \\
+&= \Assign{f}{M(\Gamma^*)}(t_1, \dots, t_n) \\
+&= f(t_1,\dots, t_n),
+\end{align*}
+ومن ثم، بالاستقراء، يصح ذلك لكل حد مغلق~$t$.
+\end{proof}
+}
+
+\iftag{FOL}{%
+\begin{explain}
+  \iftag{prvEx}{يجوز أن ترضي !!^a{structure}~$\Struct{M}$
+    !!{sentence} وجودية~$\lexists[x][!A(x)]$، ولا ترضي أي
+    حالة~$!A(t)$ منها.}{}
+  \iftag{prvAll}{ويجوز أن ترضي !!^a{structure}~$\Struct{M}$ كل
+    حالة~$!A(t)$ من !!{sentence} كلية~$\lforall[x][!A(x)]$،
+    ولا ترضي~$\lforall[x][!A(x)]$ نفسها.}{} ووجه ذلك أن
+  !!{element} من~$\Domain{M}$ قد لا يكون قيمة لأي حد مغلق؛ فليس
+  لازمًا أن تكون $\Struct{M}$ مغطاة. ولهذا احتجنا إلى إسنادات
+  المتغيرات في تعريف الإرضاء. فأما نموذج الحدود~$\Struct{M(\Gamma^*)}$
+  فمغطى، فلا حاجة فيه إلى ذلك الطريق؛ وهذا ما تفصله القضية الآتية.
+\end{explain}
+
+\begin{prop}
+\ollabel{prop:quant-termmodel}
+ليكن $\Struct M(\Gamma^*)$ نموذج الحدود في \olref{defn:termmodel}.
+\begin{tagenumerate}{prvEx,prvAll}
+\tagitem{prvEx}{$\Sat{M(\Gamma^*)}{\lexists[x][!A(x)]}$ إذا وفقط إذا
+  كان $\Sat{M(\Gamma^*)}{!A(t)}$ لحد مغلق واحد~$t$ على الأقل.}{}
+\tagitem{prvAll}{$\Sat{M(\Gamma^*)}{\lforall[x][!A(x)]}$ إذا وفقط إذا
+  كان $\Sat{M(\Gamma^*)}{!A(t)}$ لكل حد مغلق~$t$.}{}
+\end{tagenumerate}
+\end{prop}
+
+\begin{proof}
+\begin{tagenumerate}{prvEx,prvAll}
+\tagitem{prvEx}{%
+  \iftag{probEx}{تمرين.}{نستعمل \olref[syn][ass]{prop:sat-quant}: فصدق
+    $\Sat{M(\Gamma^*)}{\lexists[x][!A(x)]}$ يكافئ وجود إسناد
+    متغيرات~$s$ يحقق $\Sat{M(\Gamma^*)}{!A(x)}[s]$.
+    ومجال $\Domain{M(\Gamma^*)}$ هو الحدود المغلقة في~$\Lang{L}$؛
+    فذلك يكافئ وجود حد مغلق~$t$ مع إسناد يحقق
+    $s(x) = t$ و$\Sat{M(\Gamma^*)}{!A(x)}[s]$. ثم تفيد
+    \olref[fol][syn][ext]{prop:ext-formulas},
+    يتحقق $\Sat{M(\Gamma^*)}{!A(x)}[s]$ إذا وفقط إذا تحقق
+    $\Sat{M(\Gamma^*)}{!A(t)}[s]$، حيث $s(x) = t$. وبحسب
+    \olref[fol][syn][ass]{prop:sentence-sat-true}، يتحقق
+    $\Sat{M(\Gamma^*)}{!A(t)}[s]$ إذا وفقط إذا تحقق
+    $\Sat{M(\Gamma^*)}{!A(t)}$، لأن $!A(t)$ جملة.}}{}
+\tagitem{prvAll}{%
+  \iftag{probAll}{تمرين.}{تقضي \olref[syn][ass]{prop:sat-quant} بأن
+    $\Sat{M(\Gamma^*)}{\lforall[x][!A(x)]}$ يكافئ، لكل إسناد متغيرات
+    $s$، تحقق $\Sat{M(\Gamma^*)}{!A(x)}[s]$. وعناصر
+    $\Domain{M(\Gamma^*)}$ هي الحدود المغلقة في~$\Lang{L}$؛ فيمكن
+    اختيار إسناد يحقق $s(x) = t$ لأي حد مغلق~$t$، وبالعكس تكون
+    $s(x)$ في كل إسناد حدًا مغلقًا~$t$. وتفيد
+    \olref[fol][syn][ext]{prop:ext-formulas}، يتحقق
+    $\Sat{M(\Gamma^*)}{!A(x)}[s]$ إذا وفقط إذا تحقق
+    $\Sat{M(\Gamma^*)}{!A(t)}[s]$، حيث $s(x) = t$. وبحسب
+    \olref[fol][syn][ass]{prop:sentence-sat-true}، يتحقق
+    $\Sat{M(\Gamma^*)}{!A(t)}[s]$ إذا وفقط إذا تحقق
+    $\Sat{M(\Gamma^*)}{!A(t)}$، لأن $!A(t)$ جملة.}}{}
+\end{tagenumerate}
+\end{proof}
+}{}
+
+\tagprob[FOL]{probEx,probAll}
+\begin{prob}
+أكمل برهان \olref[fol][com][mod]{prop:quant-termmodel}.
+\end{prob}
+\tagendprob
+
+\begin{lem}[لمّة الصدق]
+\ollabel{lem:truth} \iftag{FOL}{افترض أن $!A$ لا تحتوي~$\eq$. عندئذ}{}
+$\iftag{FOL}{\Sat{M(\Gamma^*)}}{\pSat{v(\Gamma^*)}}{!A}$ إذا وفقط إذا
+كان $!A \in \Gamma^*$.
+\end{lem}
+
+\begin{proof}
+نجري الاستقراء على $!A$، ونثبت وجهي التكافؤ في كل حالة معًا.
+\begin{enumerate}
+\tagitem{prvFalse}{\indcase{!A}{\lfalse}
+  {$\iftag{FOL}{\Sat/{M(\Gamma^*)}{\lfalse}}{\pSat/{v(\Gamma^*)}{\lfalse}}$
+    هو حكم تعريف الإرضاء؛ ويقابله $\lfalse \notin \Gamma^*$، إذ
+    اتساق $\Gamma^*$ يمنع اشتمالها على الباطل.}}{}
+
+\tagitem{prvTrue}{\indcase{!A}{\ltrue}
+  {$\iftag{FOL}{\Sat{M(\Gamma^*)}}{\pSat{v(\Gamma^*)}}{\ltrue}$
+    يقتضيه تعريف الإرضاء؛ وكذلك $\ltrue \in \Gamma^*$، لاجتماع
+    الاتساق وكون $\Gamma^*$ !!{complete} مع $\Gamma^* \Proves \ltrue$.}}{}
+
+\tagitem{FOL}{\indcase{!A}{R(t_1, \dots, t_n)}
+  {$\Sat{M(\Gamma^*)}{\Atom{R}{t_1, \dots, t_n}}$ إذا وفقط إذا كان $\tuple{t_1,
+      \dots, t_n} \in \Assign{R}{M(\Gamma^*)}$ (بحسب تعريف الإرضاء)
+    إذا وفقط إذا كان $R(t_1, \dots, t_n) \in \Gamma^*$ (بحسب إنشاء
+    $\Struct M(\Gamma^*)$).}}{\indcase{!A}{p}{$\pSat{v(\Gamma^*)}{p}$
+    إذا وفقط إذا كان $\pAssign v(\Gamma^*)(p) = \True$ (بحسب تعريف
+    الإرضاء)، وذلك إذا وفقط إذا كان $p \in \Gamma^*$ (بحسب إنشاء
+    $\pAssign v(\Gamma^*)$).}}
+
+\tagitem{prvNot}{%
+  \indcase{!A}{\lnot !B}
+    {$\iftag{FOL}{\Sat{M(\Gamma^*)}}{\pSat{v(\Gamma^*)}}{\indfrm}$ إذا وفقط إذا تحقق
+    $\iftag{FOL}{\Sat/{M(\Gamma^*)}{!B}}{\pSat/{v(\Gamma^*)}{!B}}$
+    بتعريف الإرضاء. ثم ينقلنا فرض الاستقراء إلى أن
+    $\iftag{FOL}{\Sat/{M(\Gamma^*)}{!B}}{\pSat/{v(\Gamma^*)}{!B}}$ إذا
+    وفقط إذا كان $!B \notin \Gamma^*$. والاتساق مع كون $\Gamma^*$
+    !!{complete} يقتضيان أن $!B \notin \Gamma^*$ يكافئ
+    $\lnot !B \in \Gamma^*$.}}{}
+
+\tagitem{prvAnd}{%
+\iftag{probAnd}{%
+  \indcase!{!A}{!B \land !C}{}}{%
+  \indcase{!A}{!B \land
+    !C}{$\iftag{FOL}{\Sat{M(\Gamma^*)}}{\pSat{v(\Gamma^*)}}{\indfrm}$
+    إذا وفقط إذا كان كل من
+    $\iftag{FOL}{\Sat{M(\Gamma^*)}}{\pSat{v(\Gamma^*)}}{!B}$ و
+    $\iftag{FOL}{\Sat{M(\Gamma^*)}}{\pSat{v(\Gamma^*)}}{!C}$ متحققًا
+    بتعريف الإرضاء؛ ويحوّل فرض الاستقراء هذا إلى اجتماع
+    $!B \in \Gamma^*$ و$!C \in \Gamma^*$. ثم تفيد
+    \olref[ccs]{prop:ccs}\olref[ccs]{prop:ccs-and}، يتحقق ذلك إذا وفقط
+    إذا كان $(!B \land !C) \in \Gamma^*$.}}}{}
+
+\tagitem{prvOr}{%
+\iftag{probOr}{%
+  \indcase!{!A}{!B \lor !C}{}}{%
+  \indcase{!A}{!B \lor !C}
+    {$\iftag{FOL}{\Sat{M(\Gamma^*)}}{\pSat{v(\Gamma^*)}}{\indfrm}$
+    إذا وفقط إذا تحقق
+    $\iftag{FOL}{\Sat{M(\Gamma^*)}}{\pSat{v(\Gamma^*)}}{!B}$ أو
+    $\iftag{FOL}{\Sat{M(\Gamma^*)}}{\pSat{v(\Gamma^*)}}{!C}$ بتعريف
+    الإرضاء؛ وبفرض الاستقراء يكافئ ذلك $!B \in \Gamma^*$ أو
+    $!C \in \Gamma^*$. وهذان البديلان يكافئان
+    $(!B \lor !C) \in \Gamma^*$، بمقتضى
+    \olref[ccs]{prop:ccs}\olref[ccs]{prop:ccs-or}.}}}{}
+
+\tagitem{prvIf}{%
+\iftag{probIf}{%
+  \indcase!{!A}{!B \lif !C}{}}{%
+  \indcase{!A}{!B \lif !C}
+    {$\iftag{FOL}{\Sat{M(\Gamma^*)}}{\pSat{v(\Gamma^*)}}{\indfrm}$
+    إذا وفقط إذا تحقق
+    $\iftag{FOL}{\Sat/{M(\Gamma^*)}}{\pSat/{v(\Gamma^*)}}{!B}$ أو
+    $\iftag{FOL}{\Sat{M (\Gamma^*)}}{\pSat{v(\Gamma^*)}}{!C}$ بتعريف
+    الإرضاء؛ وبتطبيق فرض الاستقراء نجد $!B \notin \Gamma^*$ أو
+    $!C \in \Gamma^*$. وذلك مكافئ لـ
+    $(!B \lif !C) \in \Gamma^*$، بمقتضى
+    \olref[ccs]{prop:ccs}\olref[ccs]{prop:ccs-if}.}}}{}
+
+\iftag{FOL}{%
+\tagitem{prvAll}{%
+  \iftag{probAll}{%
+    \indcase!{!A}{\lforall[x][!B(x)]}{}}{%
+    \indcase{!A}{\lforall[x][!B(x)]}{$\Sat{M(\Gamma^*)}{\indfrm}$ إذا
+      وفقط إذا كان $\Sat{M(\Gamma^*)}{!B(t)}$ لكل حد مغلق~$t$
+      (\olref{prop:quant-termmodel}). وهذا، بفرض الاستقراء، يكافئ
+      $!B(t) \in \Gamma^*$ لكل حد مغلق~$t$؛ ثم ترده
+      \olref[hen]{prop:saturated-instances} إلى
+      $\lforall[x][!B(x)] \in \Gamma^*$.}}}{}
+
+\tagitem{prvEx}{%
+  \iftag{probEx}{%
+    \indcase!{!A}{\lexists[x][!B(x)]}{}}{%
+    \indcase{!A}{\lexists[x][!B(x)]}{$\Sat{M(\Gamma^*)}{\indfrm}$ إذا
+      وفقط إذا كان $\Sat{M(\Gamma^*)}{!B(t)}$ لحد مغلق واحد~$t$ على
+      الأقل (\olref{prop:quant-termmodel}). وينقلنا فرض الاستقراء إلى
+      الشرط المكافئ $!B(t) \in \Gamma^*$ لحد مغلق~$t$ واحد على
+      الأقل. وتفيد \olref[hen]{prop:saturated-instances} أن هذا
+      يكافئ $\lexists[x][!B(x)] \in \Gamma^*$.}}}{}
+}{}
+\end{enumerate}
+\end{proof}
+
+
+\tagprob[FOL]{probOr,probAnd,probIf,probEx,probAll}
+
+\begin{prob}
+أكمل برهان \olref[fol][com][mod]{lem:truth}.
+\end{prob}
+
+\tagendprob
+
+\tagprob[notFOL]{probOr,probAnd,probIf}
+
+\begin{prob}
+أكمل برهان \olref[pl][com][mod]{lem:truth}.
+\end{prob}
+
+\tagendprob
+
+\end{document}

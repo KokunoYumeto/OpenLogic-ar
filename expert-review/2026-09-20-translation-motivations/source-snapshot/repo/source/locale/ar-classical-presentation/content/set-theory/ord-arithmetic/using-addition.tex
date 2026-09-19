@@ -1,0 +1,121 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{ord-arithmetic}{using-addition}
+\olsection{استخدام الجمع الترتيبي}
+
+بجمع الأعداد الترتيبية نستطيع حساب رتب طائفة من المجموعات حسابًا
+صريحًا، على معنى~\olref[spine][rank]{defnsetrank}:
+
+\begin{lem}\ollabel{rankcomputation}
+إذا كان~$\setrank{{\OLId{latin-looped}{A}}} = {\OLId{greek-variable}{alpha}}$ و$\setrank{{\OLId{latin-looped}{B}}} = \beta$، فإن:
+\begin{enumerate}
+	\item\ollabel{exrankpow} $\setrank{\Pow{{\OLId{latin-looped}{A}}}} = {\OLId{greek-variable}{alpha}}\ordplus {\OLMathNumeral{1}}$
+	\item\ollabel{exrankpair} $\setrank{\{{\OLId{latin-looped}{A}}, {\OLId{latin-looped}{B}}\}} = \max({\OLId{greek-variable}{alpha}},
+	\beta) \ordplus {\OLMathNumeral{1}}$
+	\item\ollabel{exrankcup} $\setrank{{\OLId{latin-looped}{A}} \cup {\OLId{latin-looped}{B}}} = \max({\OLId{greek-variable}{alpha}},
+	\beta)$
+	\item\ollabel{exranktuple} $\setrank{\tuple{{\OLId{latin-looped}{A}},{\OLId{latin-looped}{B}}}} = \max({\OLId{greek-variable}{alpha}},
+	\beta) \ordplus {\OLMathNumeral{2}}$
+	\item\ollabel{exranktimes} $\setrank{{\OLId{latin-looped}{A}} \times {\OLId{latin-looped}{B}}} \leq \max({\OLId{greek-variable}{alpha}},
+	\beta) \ordplus {\OLMathNumeral{2}}$
+	\item\ollabel{exrankunion} $\setrank{\bigcup {\OLId{latin-looped}{A}}} = {\OLId{greek-variable}{alpha}}$ عندما
+	تكون~${\OLId{greek-variable}{alpha}}$ خالية أو حدية؛ و$\setrank{\bigcup {\OLId{latin-looped}{A}}} = \gamma$ عندما
+	${\OLId{greek-variable}{alpha}} = \gamma\ordplus {\OLMathNumeral{1}}$
+\end{enumerate}
+\end{lem}
+
+\begin{proof}
+نكرر استعمال~\olref[spine][rank]{ranksupstrict} في أجزاء البرهان.
+
+\emph{\olref{exrankpow}.} إذا كان~${\OLId{latin-ordinary}{x}} \subseteq {\OLId{latin-looped}{A}}$، كان
+$\setrank{{\OLId{latin-ordinary}{x}}} \leq \setrank{{\OLId{latin-looped}{A}}}$، ومن ثم
+$\setrank{\Pow{{\OLId{latin-looped}{A}}}} \leq {\OLId{greek-variable}{alpha}} \ordplus {\OLMathNumeral{1}}$. ولما كان
+${\OLId{latin-looped}{A}} \in \Pow{{\OLId{latin-looped}{A}}}$، تعين~$\setrank{\Pow{{\OLId{latin-looped}{A}}}} = {\OLId{greek-variable}{alpha}} \ordplus {\OLMathNumeral{1}}$.
+
+\emph{\olref{exrankpair}.} يتبع من
+\olref[spine][rank]{ranksupstrict}.
+
+\emph{\olref{exrankcup}.} يتبع من
+\olref[spine][rank]{ranksupstrict}.
+
+\emph{\olref{exranktuple}.} طبق~\olref{exrankpair} مرتين.
+
+\emph{\olref{exranktimes}.} لما كان
+${\OLId{latin-looped}{A}} \times {\OLId{latin-looped}{B}} \subseteq \Pow{\Pow{{\OLId{latin-looped}{A}} \cup {\OLId{latin-looped}{B}}}}$، استعمل
+\olref{exrankpow} مرتين، ثم~\olref{exrankcup}.
+
+\emph{\olref{exrankunion}.} إذا كان~${\OLId{greek-variable}{alpha}} = \gamma\ordplus {\OLMathNumeral{1}}$،
+وجد~${\OLId{latin-ordinary}{c}} \in {\OLId{latin-looped}{A}}$ بحيث~$\setrank{{\OLId{latin-ordinary}{c}}} = \gamma$، ولم يكن لأي
+!!{element} من~${\OLId{latin-looped}{A}}$ رتبة أعلى؛ فيلزم~$\setrank{\bigcup {\OLId{latin-looped}{A}}} = \gamma$.
+وأما إذا كانت~${\OLId{greek-variable}{alpha}}$ عددًا ترتيبيًا حديًا، فلـ${\OLId{latin-looped}{A}}$ !!{element}s
+رتبها تقترب كيفما شئنا من~${\OLId{greek-variable}{alpha}}$ مع بقائها دونه؛ ولذلك يكون
+لـ$\bigcup {\OLId{latin-looped}{A}}$ أيضًا !!{element}s رتبها تقترب كيفما شئنا من
+${\OLId{greek-variable}{alpha}}$ مع بقائها دونه. ومن ثم~$\setrank{\bigcup {\OLId{latin-looped}{A}}} = {\OLId{greek-variable}{alpha}}$.
+\end{proof}
+\noindent
+ويبقى بيان سبب ورود \emph{المتباينة} في~\olref{exranktimes} تمرينًا.
+
+\begin{prob}
+أعط مجموعتين~${\OLId{latin-looped}{A}}$ و${\OLId{latin-looped}{B}}$ بحيث
+$\setrank{{\OLId{latin-looped}{A}} \times {\OLId{latin-looped}{B}}} =
+\max(\setrank{{\OLId{latin-looped}{A}}}, \setrank{{\OLId{latin-looped}{B}}})$. وأعط مجموعتين~${\OLId{latin-looped}{A}}$ و${\OLId{latin-looped}{B}}$ بحيث
+$\setrank{{\OLId{latin-looped}{A}} \times {\OLId{latin-looped}{B}}} =
+\max(\setrank{{\OLId{latin-looped}{A}}}, \setrank{{\OLId{latin-looped}{B}}}) \ordplus {\OLMathNumeral{2}}$. هل توجد رتب أخرى ممكنة؟
+\end{prob}
+
+ونستطيع الآن أن نبين تكافؤ معان عدة معقولة لكون العدد الترتيبي
+«منتهيًا» أو «غير منته».
+
+\begin{lem}\ollabel{ordinfinitycharacter}
+لأي عدد ترتيبي~${\OLId{greek-variable}{alpha}}$، تتكافأ العبارات الآتية:
+\begin{enumerate}
+	\item\ollabel{ord:notinomega} ${\OLId{greek-variable}{alpha}}\notin \omega$، أي إن
+	${\OLId{greek-variable}{alpha}}$ ليس عددًا طبيعيًا؛
+	\item\ollabel{ord:omegaplus} $\omega \leq {\OLId{greek-variable}{alpha}}$؛
+	\item\ollabel{ord:oneplus} ${\OLMathNumeral{1}} \ordplus {\OLId{greek-variable}{alpha}} = {\OLId{greek-variable}{alpha}}$؛
+	%\alpha \approx \alpha \ordplus 1$
+	\item\ollabel{ord:plusone} ${\OLId{greek-variable}{alpha}} \approx {\OLId{greek-variable}{alpha}}\ordplus {\OLMathNumeral{1}}$، أي
+	إن~${\OLId{greek-variable}{alpha}}$ و${\OLId{greek-variable}{alpha}}\ordplus {\OLMathNumeral{1}}$ متساويا العدد؛
+	\item\ollabel{ord:infinite} ${\OLId{greek-variable}{alpha}}$ غير منتهة بحسب ديديكند.
+	\end{enumerate}
+\end{lem}
+\noindent
+فهذه خمسة أوصاف، متكافئة برهانيًا، لما يعنيه أن يكون العدد الترتيبي
+غير منته، وبالنفي منتهيًا.
+
+\begin{proof}
+\emph{\olref{ord:notinomega} $\Rightarrow$ \olref{ord:omegaplus}.}
+هذا من التثليث.
+
+\emph{\olref{ord:omegaplus} $\Rightarrow$ \olref{ord:oneplus}.}
+ثبت~${\OLId{greek-variable}{alpha}} \geq \omega$. وبالاستقراء المتناهي التجاوز يوجد أصغر
+عدد ترتيبي~$\gamma$، ولعله~${\OLMathNumeral{0}}$، بحيث يوجد عدد ترتيبي حدي~$\beta$
+يحقق~${\OLId{greek-variable}{alpha}} = \beta \ordplus \gamma$. وعندئذ:
+\[
+	{\OLMathNumeral{1}} \ordplus {\OLId{greek-variable}{alpha}} =
+	{\OLMathNumeral{1}} \ordplus (\beta \ordplus \gamma) =
+	({\OLMathNumeral{1}} \ordplus \beta) \ordplus \gamma =
+	\supstrict_{\delta < \beta} ({\OLMathNumeral{1}} \ordplus \delta) \ordplus \gamma =
+	\beta \ordplus \gamma =
+	{\OLId{greek-variable}{alpha}}.
+\]
+\emph{\olref{ord:oneplus} $\Rightarrow$ \olref{ord:plusone}.} من
+الواضح وجود !!a{bijection}~${\OLId{latin-ordinary}{f}} \colon ({\OLId{greek-variable}{alpha}} \disjointsum {\OLMathNumeral{1}}) \to ({\OLMathNumeral{1}}
+\disjointsum {\OLId{greek-variable}{alpha}})$. وإذا كان~${\OLMathNumeral{1}} \ordplus {\OLId{greek-variable}{alpha}} = {\OLId{greek-variable}{alpha}}$، وجد
+تماثل~${\OLId{latin-ordinary}{g}} \colon ({\OLMathNumeral{1}} \disjointsum {\OLId{greek-variable}{alpha}}) \to {\OLId{greek-variable}{alpha}}$. فانظر في
+$\comp{{\OLId{latin-ordinary}{f}}}{{\OLId{latin-ordinary}{g}}}$.
+
+\emph{\olref{ord:plusone} $\Rightarrow$ \olref{ord:infinite}.} إذا
+كان~${\OLId{greek-variable}{alpha}} \approx {\OLId{greek-variable}{alpha}} \ordplus {\OLMathNumeral{1}}$، وجدت !!a{bijection}
+${\OLId{latin-ordinary}{f}} \colon ({\OLId{greek-variable}{alpha}} \disjointsum {\OLMathNumeral{1}}) \to {\OLId{greek-variable}{alpha}}$. عرّف
+${\OLId{latin-ordinary}{g}}(\gamma) = {\OLId{latin-ordinary}{f}}(\gamma, {\OLMathNumeral{0}})$ لكل~$\gamma < {\OLId{greek-variable}{alpha}}$؛ فتكون هذه
+!!{injection} شاهدة على أن~${\OLId{greek-variable}{alpha}}$ غير منتهية بحسب ديديكند، لأن
+${\OLId{latin-ordinary}{f}}({\OLMathNumeral{0}},{\OLMathNumeral{1}}) \in {\OLId{greek-variable}{alpha}} \setminus \ran{{\OLId{latin-ordinary}{g}}}$.
+
+\emph{\olref{ord:infinite} $\Rightarrow$ \olref{ord:notinomega}.}
+وهو عين~\olref[z][infinity-again]{naturalnumbersarentinfinite}.
+\end{proof}
+
+\end{document}

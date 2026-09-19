@@ -1,0 +1,79 @@
+% Part: lambda-calculus
+% Chapter: syntax
+% Section: term-revisited
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{syn}{tr}
+\olsection{الحدود بوصفها أصناف تكافؤ بحسب~${\OLId{greek-variable}{alpha}}$}
+
+من الآن ندرس الحدود مع إهمال الفرق الذي لا يتجاوز التكافؤ بحسب~${\OLId{greek-variable}{alpha}}$.
+فإذا كتبنا حدًا قصدنا صنف تكافؤه بحسب~${\OLId{greek-variable}{alpha}}$.
+فكتابتنا~$\lambd[{\OLId{latin-ordinary}{a}}][\lambd[{\OLId{latin-ordinary}{b}}][{\OLId{latin-ordinary}{a}} {\OLId{latin-ordinary}{c}}]]$ تعني مجموعة الحدود التي تكافئه بحسب~${\OLId{greek-variable}{alpha}}$،
+ومنها~$\lambd[{\OLId{latin-ordinary}{a}}][\lambd[{\OLId{latin-ordinary}{b}}][{\OLId{latin-ordinary}{a}} {\OLId{latin-ordinary}{c}}]]$ و$\lambd[{\OLId{latin-ordinary}{b}}][\lambd[{\OLId{latin-ordinary}{a}}][{\OLId{latin-ordinary}{b}} {\OLId{latin-ordinary}{c}}]]$ وما شابهها.
+
+وكانت حروف مثل~${\OLId{latin-looped}{N}}, {\OLId{latin-looped}{Q}}$ في الأقسام الماضية أسماء لحدود مفردة؛
+أما فيما يأتي فنسمي بها الأصناف، وهي التي تكون موضوع البحث بدل الحدود المفردة.
+وتبقى حروف مثل~${\OLId{latin-ordinary}{x}}, {\OLId{latin-ordinary}{y}}$ أسماء للمتغيرات.
+
+ونجعل~$\rep{{\OLId{latin-looped}{M}}}$ رمزًا لـ!!{element} كيفما اتفق من الصنف~${\OLId{latin-looped}{M}}$.
+فإن احتجنا إلى ممثلين متعددين استعملنا~$\rep{{\OLId{latin-looped}{M}}}[{\OLMathNumeral{0}}], \rep{{\OLId{latin-looped}{M}}}[{\OLMathNumeral{1}}]$، وهكذا.
+
+ولإيجاز العبارة نبقي ترميز الحدود، ونعرّف معناه على الأصناف:
+\begin{defn}
+  \begin{enumerate}
+  \item $\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-looped}{N}}]$ هو، بالتعريف، الصنف الذي ينتمي إليه
+    $\lambd[{\OLId{latin-ordinary}{x}}][\rep{{\OLId{latin-looped}{N}}}]$.
+  \item $PQ$ هو، بالتعريف، الصنف الذي ينتمي إليه~$\rep{{\OLId{latin-looped}{P}}}\rep{{\OLId{latin-looped}{Q}}}$.
+  \end{enumerate}
+\end{defn}
+
+وهذان التعريفان لا يتوقفان على اختيار الممثل؛ فإن تحويل~${\OLId{greek-variable}{alpha}}$ متوافق، ومن ذلك يظهر حسن تعريفهما.
+
+\begin{defn} \ollabel{def:fv}
+  مجموعة \emph{المتغيرات الحرة} لصنف التكافؤ بحسب~${\OLId{greek-variable}{alpha}}$ المسمى~${\OLId{latin-looped}{M}}$،
+  ورمزها~$\FV{{\OLId{latin-looped}{M}}}$، هي بالتعريف~$\FV{\rep{{\OLId{latin-looped}{M}}}}$.
+\end{defn}
+
+ولا تتعلق هذه المجموعة باختيار الممثل، لأن~$\FV{\rep{{\OLId{latin-looped}{M}}}[{\OLMathNumeral{0}}]} =
+\FV{\rep{{\OLId{latin-looped}{M}}}[{\OLMathNumeral{1}}]}$، كما أثبتنا في~\olref[alp]{thm:fv}.
+
+وننقل ترميز الإحلال إلى الأصناف كذلك:
+\begin{defn} \ollabel{def:sub}
+  \emph{إحلال}~${\OLId{latin-looped}{R}}$ محل~${\OLId{latin-ordinary}{y}}$ في~${\OLId{latin-looped}{M}}$، ورمزه~$\Subst{{\OLId{latin-looped}{M}}}{{\OLId{latin-looped}{R}}}{{\OLId{latin-ordinary}{y}}}$،
+  هو صنف التكافؤ بحسب~${\OLId{greek-variable}{alpha}}$ الذي ينتمي إليه
+  $\Subst{\rep{{\OLId{latin-looped}{M}}}}{\rep{{\OLId{latin-looped}{R}}}}{{\OLId{latin-ordinary}{y}}}$؛ ونأخذ~$\rep{{\OLId{latin-looped}{M}}}$ و$\rep{{\OLId{latin-looped}{R}}}$ أي ممثلين يكون الإحلال عليهما معرّفًا.
+\end{defn}
+
+وحسن تعريف هذا الإحلال ثابت أيضًا بـ\olref[alp]{cor:sub}.
+
+ويتضح مقدار ما ييسره هذا التعريف من الاستدلال في المثال الآتي:
+\begin{align}
+  \Subst{\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{x}}]}{{\OLId{latin-ordinary}{y}}}{{\OLId{latin-ordinary}{x}}} & \ollabel{eq:1}\\
+  &= \Subst{\lambd[{\OLId{latin-ordinary}{z}}][{\OLId{latin-ordinary}{z}}]}{{\OLId{latin-ordinary}{y}}}{{\OLId{latin-ordinary}{x}}} \ollabel{eq:2}\\
+  &= \lambd[{\OLId{latin-ordinary}{z}}][\Subst{{\OLId{latin-ordinary}{z}}}{{\OLId{latin-ordinary}{y}}}{{\OLId{latin-ordinary}{x}}}] \\
+  &= \lambd[{\OLId{latin-ordinary}{z}}][{\OLId{latin-ordinary}{z}}]
+\end{align}
+
+لو حملنا~\olref{eq:1} على الإحلال في الحدود المفردة لكان غير معرّف.
+لكن المراد الآن الإحلال في الأصناف، كما تقدم؛ ولذلك جاز الانتقال إلى~\olref{eq:2}:
+فلنا أن نستبدل~$\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{x}}]$ بـ$\lambd[{\OLId{latin-ordinary}{z}}][{\OLId{latin-ordinary}{z}}]$، إذ كلاهما في صنف واحد.
+
+وللعلة نفسها نفترض فيما يأتي أن اختيار الممثلين قد استوفى شروط الإحلال.
+فإذا ورد~$\Subst{\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-looped}{N}}]}{{\OLId{latin-looped}{R}}}{{\OLId{latin-ordinary}{y}}}$، مثلًا، حملناه على أن الممثل~$\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-looped}{N}}]$
+اختير بحيث~${\OLId{latin-ordinary}{x}} \neq {\OLId{latin-ordinary}{y}}$ و${\OLId{latin-ordinary}{x}} \notin \FV{{\OLId{latin-looped}{R}}}$.
+
+ولما كان إطلاق «صنف» على~$\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-ordinary}{x}}]$ غير مألوف بعض الشيء،
+سمينا هذه الأشياء فيما يأتي حدود~$\Lambda$، أو «حدودًا» بإطلاق في بقية هذا الجزء،
+تمييزًا لها من حدود~$\lambda$ المعهودة.
+
+\begin{editorial}
+  لا نستغني بذلك عن الحدود الأصلية؛ فتعريف حدود~$\Lambda$ كله يرجع إلى
+  حدود~$\lambda$. ولم نضع بعد طريقة لتعريف الدوال على حدود~$\Lambda$،
+  فلا بد من تعريف كل دالة أولًا على حدود~$\lambda$،
+  ثم إنزالها إلى حدود~$\Lambda$، على نحو ما صنعنا بالإحلال.
+  غير أننا نفترض أن القارئ يدرك حدسيًا كيف تعرّف الدوال على حدود~$\Lambda$.
+\end{editorial}
+\end{document}

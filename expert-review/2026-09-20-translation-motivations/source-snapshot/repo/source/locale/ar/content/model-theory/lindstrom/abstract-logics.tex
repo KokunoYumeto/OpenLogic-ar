@@ -1,0 +1,130 @@
+% Part: model-theory
+% Chapter: lindstrom
+% Section: abstract-logics
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{lin}{alg}
+\olsection{المنطقات المجردة}
+
+\begin{defn}
+\emph{المنطق المجرد} زوج~$\tuple{L,\models_L}$، حيث $L$ دالة تسند إلى
+كل !!{language}~$\Lang{L}$ مجموعة~$L(\Lang{L})$ من الـ!!{sentence}s،
+و$\models_L$ علاقة بين الـ!!{structure}s للـ!!{language}~$\Lang{L}$
+و!!{element}s~$L(\Lang{L})$. وبوجه خاص، يكون
+$\tuple{F,\models}$ منطق الرتبة الأولى المعتاد؛ أي إن $F$ هي الدالة
+التي تسند إلى الـ!!{language}~$\Lang{L}$ مجموعة !!{sentence}s الرتبة
+الأولى المبنية من الثوابت في $\Lang{L}$، و$\models$ علاقة الإرضاء في
+منطق الرتبة الأولى.
+\end{defn}
+
+لاحظ أننا ما زلنا نستعمل مفهوم الـ!!{structure} نفسه لـ!!{language}
+معينة كما في منطق الرتبة الأولى، لكننا لا نفترض أن الـ!!{sentence}s تبنى
+من الرموز الأساسية في $\Lang{L}$ بالطريقة المعتادة، ولا أن العلاقة
+$\models_L$ تعرّف استقرائيًا كما في منطق الرتبة الأولى. فالتعريف، بعمومه
+التام، يراد منه مثلًا أن يشمل الحالة التي تحتوي فيها الـ!!{sentence}s في
+$\tuple{L,\models_L}$ اقترانات أو انفصالات لا نهائية الطول، أو مكممات
+غير $\lexists$ و$\lforall$ (مثل «يوجد عدد لا نهائي من~$x$ بحيث
+\dots»)، أو ربما سوابق كمّية لا نهائية الطول. وللتأكيد على أن
+«الـ!!{sentence}s» في $L(\Lang{L})$ لا يلزم أن تكون !!{sentence}s
+عادية من منطق الرتبة الأولى، نستعمل في هذا الفصل الـ!!{variable}s~$!E$
+و$!F$ و\dots للدلالة عليها، ونحتفظ بـ$!A$ و$!B$ و\dots للـ!!{formula}s
+العادية من الرتبة الأولى.
+
+\begin{defn}
+ليرمز $\Mod(L){!E}$ إلى الفئة
+$\Setabs{\Struct{M}}{\Struct{M} \models_L !E}$. وإذا لزم التصريح
+بالـ!!{language} كتبنا $\Mod[L](L){!E}$. تكون !!{structure}s اثنتان
+$\Struct{M}$ و$\Struct{N}$ للغة $\Lang{L}$ \emph{متكافئتين أوليًا في}
+$\tuple{L,\models_L}$، ونكتب
+$\Struct{M} \elemequiv[L] \Struct{N}$، إذا صدقت فيهما الـ!!{sentence}s
+نفسها من $L(\Lang{L})$.
+\end{defn}
+
+\begin{defn}
+يكون المنطق المجرد $\tuple{L,\models_L}$ للـ!!{language}~$\Lang{L}$
+\emph{سويًا} إذا حقق الخواص الآتية:
+\begin{enumerate}
+\item (\emph{رتابة $L$}) للـ!!{language}s~$\Lang{L}$ و$\Lang{L'}$،
+  إذا كان $\Lang{L} \subseteq \Lang{L'}$، فإن
+  $L(\Lang{L}) \subseteq L(\Lang{L'})$.
+\item (\emph{خاصية التوسع}) لكل $!E \in L(\Lang{L})$ توجد مجموعة
+  جزئية \emph{منتهية}~$\Lang{L'}$ من $\Lang{L}$ بحيث لا تعتمد العلاقة
+  $\Struct{M} \models_L !E$ إلا على مختزل $\Struct{M}$ إلى
+  $\Lang{L'}$؛ أي إذا كان لـ$\Struct{M}$ و$\Struct{N}$ المختزل نفسه
+  إلى $\Lang{L'}$، فإن $\Struct{M} \models_L !E$ إذا وفقط إذا كان
+  $\Struct{N} \models_L !E$.
+\item (\emph{خاصية التشاكل}) إذا كان $\Struct{M} \models_L !E$ و
+  $\Struct{M} \simeq \Struct{N}$، فإن $\Struct{N} \models_L !E$ أيضًا.
+\item (\emph{خاصية إعادة التسمية}) تحفظ العلاقة $\models_L$ تحت إعادة
+  التسمية: إذا نتجت الـ!!{language}~$\Lang{L}'$ من $\Lang{L}$ بإحلال
+  رمز~$P'$ له الرتبة نفسها محل كل رمز~$P$، وثابت متميز~$c'$ محل كل
+  ثابت~$c$، فإنه لكل !!{structure}~$\Struct{M}$ و!!{sentence}~$!E$،
+  يكون $\Struct{M} \models_L !E$ إذا وفقط إذا كان
+  $\Struct{M}' \models_L !E'$، حيث $\Struct{M}'$ هي
+  !!{structure}~$\Lang{L}'$ المقابلة لـ$\Struct{M}$، و
+  $!E' \in L(\Lang{L}')$.
+\item (\emph{الخاصية البوليانية}) يكون المنطق المجرد
+  $\tuple{L,\models_L}$ مغلقًا تحت الروابط البوليانية، بمعنى أنه لكل
+  $!E \in L(\Lang{L})$ يوجد $!F \in L(\Lang{L})$ بحيث
+  $\Struct{M} \models_L !F$ إذا وفقط إذا كان
+  $\Struct{M} \not\models_L !E$، ولكل $!E$ و$!F$ يوجد $!G$ بحيث
+  $\Mod(L){!G}=\Mod(L){!E} \cap \Mod(L){!F}$. وبالمثل للـ!!{formula}s
+  الذرية وسائر الروابط.
+\item (\emph{خاصية الكم}) لكل ثابت~$c$ في $\Lang{L}$ ولكل
+  $!E \in L(\Lang{L})$ يوجد $!F \in L(\Lang{L'})$ بحيث
+  \[
+  \Mod[L'](L){!F} = \Setabs{\Struct{M}}{\Expan{M}{a} \in
+  \Mod[L](L){!E} \text{ لبعض } a \in \Domain{M}},
+  \]
+  حيث $\Lang{L'}=\Lang{L} \setminus \{c\}$، و$\Expan{M}{a}$ توسيع
+  $\Struct{M}$ إلى $\Lang{L}$ الذي يسند $a$ إلى~$c$.
+\item (\emph{خاصية النسبنة}) لكل !!a{sentence}~$!E \in L(\Lang{L})$
+  ورموز $R,c_1,\dots,c_n$ لا تقع في $\Lang{L}$، توجد
+  !!a{sentence}~$!F \in L(\Lang{L} \cup \{R,c_1,\ldots,c_n\})$ تسمى
+  \emph{نسبنة} $!E$ إلى $\Atom{R}{x,c_1,\dots,c_n}$، بحيث يكون لكل
+  !!{structure}~$\Struct{M}$:
+  \[
+  \Expan{M}{X, b_1, \ldots, b_n} \models_L !F \text{ إذا وفقط إذا كان }
+  \Struct{N} \models_L !E,
+  \]
+  حيث $\Struct{N}$ هي البنية الجزئية من $\Struct{M}$ ذات
+  الـ!!{domain}
+  $\Domain{N}=\Setabs{a\in\Domain{M}}{\tuple{a,b_1,\dots,b_n}\in X}$
+  (انظر \olref[bas][sub]{rem:substructure})، على أن تكون $\Domain{N}$
+  غير خالية وأن تحتوي $\Assign{c}{M}$ لكل ثابت~$c$ في $\Lang{L}$؛ وأن
+  $\Expan{M}{X,b_1,\ldots,b_n}$ توسيع $\Struct{M}$ الذي يفسر $R$ و
+  $c_1$، \dots، $c_n$ بـ$X$ و$b_1$، \dots، $b_n$، على الترتيب (حيث
+  $X \subseteq \Domain{M}^{n+1}$).
+\end{enumerate}
+\end{defn}
+
+\begin{defn}
+لتكن $\tuple{L_1,\models_{L_1}}$ و$\tuple{L_2,\models_{L_2}}$ منطقيْن
+مجردين. نقول إن الثاني \emph{لا يقل قدرة تعبيرية} عن الأول، ونكتب
+$\tuple{L_1,\models_{L_1}} \leq \tuple{L_2,\models_{L_2}}$، إذا كان
+لكل !!{language}~$\Lang{L}$ ولكل !!{sentence}~$!E \in L_1(\Lang{L})$
+!!a{sentence}~$!F \in L_2(\Lang{L})$ بحيث
+$\Mod[L](L_1){!E}=\Mod[L](L_2){!F}$. ويكون المنطقان
+$\tuple{L_1,\models_{L_1}}$ و$\tuple{L_2,\models_{L_2}}$
+\emph{متكافئين} إذا كان
+$\tuple{L_1,\models_{L_1}} \leq \tuple{L_2,\models_{L_2}}$ و
+$\tuple{L_2,\models_{L_2}} \leq \tuple{L_1,\models_{L_1}}$.
+\end{defn}
+
+\begin{rem}
+  منطق الرتبة الأولى، أي المنطق المجرد $\tuple{F,\models}$، سوي. بل إن
+  الخواص أعلاه مباشرة في معظمها لمنطق الرتبة الأولى. ونكتفي بالإشارة إلى
+  أن خاصية التوسع ترجع إلى الامتدادية، وأن نسبنة !!a{sentence}~$!E$ إلى
+  $\Atom{R}{x,c_1,\dots,c_n}$ تحصل بإحلال
+  $\lforall[x][(\Atom{R}{x,c_1,\dots,c_n} \lif \ !F)]$ محل كل
+  !!{subformula}~$\lforall[x][!F]$. وفوق ذلك، إذا كان
+  $\tuple{L,\models_L}$ سويًا، فإن
+  $\tuple{F,\models} \leq \tuple{L,\models_L}$، كما يبيّن الاستقراء على
+  !!{formula}s الرتبة الأولى. ولذلك يجوز، من غير إخلال بالعموم، أن نفترض
+  أن كل !!{sentence} من الرتبة الأولى تنتمي إلى كل منطق سوي.
+\end{rem}
+
+\end{document}

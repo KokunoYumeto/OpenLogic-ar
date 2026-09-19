@@ -1,0 +1,74 @@
+% Part: lambda-calculus
+% Chapter: introduction
+% Section: reduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{int}{red}
+\olsection{اختزال حدود لامبدا}
+
+ومن العمل في حدود لامبدا تبسيطها. فإذا كان~${\OLId{latin-looped}{M}}$ و${\OLId{latin-looped}{N}}$ حدين منها،
+وكان~${\OLId{latin-ordinary}{x}}$ متغيرًا، رمزنا بـ$\Subst{{\OLId{latin-looped}{M}}}{{\OLId{latin-looped}{N}}}{{\OLId{latin-ordinary}{x}}}$ إلى نتيجة إحلال~${\OLId{latin-looped}{N}}$
+محل~${\OLId{latin-ordinary}{x}}$ في~${\OLId{latin-looped}{M}}$، على أن نسبق الإحلال بإعادة تسمية ما يلزم من
+متغيرات~${\OLId{latin-looped}{M}}$ المربوطة، لئلا تتداخل مع متغيرات~${\OLId{latin-looped}{N}}$ الحرة بعد
+الإحلال. ومن ذلك:
+\[
+\Subst{(\lambd[{\OLId{latin-ordinary}{w}}][xxw])}{yyz}{{\OLId{latin-ordinary}{x}}} = \lambd[{\OLId{latin-ordinary}{w}}][(yyz)(yyz){\OLId{latin-ordinary}{w}}].
+\]
+
+\begin{digress}
+ويرمز بعضهم إلى الإحلال بـ$[{\OLId{latin-looped}{N}}/{\OLId{latin-ordinary}{x}}]{\OLId{latin-looped}{M}}$ أو~$[{\OLId{latin-ordinary}{x}}/{\OLId{latin-looped}{N}}]{\OLId{latin-looped}{M}}$ أو~${\OLId{latin-looped}{M}}[{\OLId{latin-ordinary}{x}}/{\OLId{latin-looped}{N}}]$.
+فلا يغفل اختلاف الاصطلاحات!
+\end{digress}
+
+يؤدي~$(\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-looped}{M}}]){\OLId{latin-looped}{N}}$ و$\Subst{{\OLId{latin-looped}{M}}}{{\OLId{latin-looped}{N}}}{{\OLId{latin-ordinary}{x}}}$ معنى واحدًا بحسب
+الفهم الحدسي؛ وإحلال الثاني محل الأول يسمى \emph{تقلّص~$\beta$}.
+الأول~$(\lambd[{\OLId{latin-ordinary}{x}}][{\OLId{latin-looped}{M}}]){\OLId{latin-looped}{N}}$ هو \emph{موضع الاختزال}،
+والثاني~$\Subst{{\OLId{latin-looped}{M}}}{{\OLId{latin-looped}{N}}}{{\OLId{latin-ordinary}{x}}}$ هو \emph{ناتج التقلّص}.
+وبوجه عام، إذا تحول الحد~${\OLId{latin-looped}{P}}$ إلى~${\OLId{latin-looped}{P}}'$ بتقلّص~$\beta$ في
+أحد حدوده الجزئية، قلنا إن~${\OLId{latin-looped}{P}}$ \emph{يختزل بحسب~$\beta$
+إلى~${\OLId{latin-looped}{P}}'$ في خطوة واحدة}، وكتبنا~${\OLId{latin-looped}{P}} \redone {\OLId{latin-looped}{P}}'$.
+ومتى انتقلنا من~${\OLId{latin-looped}{P}}$ إلى~${\OLId{latin-looped}{P}}'$ بخطوات من هذا القبيل،
+يجوز أن يكون عددها صفرًا، قلنا إن~${\OLId{latin-looped}{P}}$ \emph{يختزل بحسب~$\beta$}
+إلى~${\OLId{latin-looped}{P}}'$، وكتبنا~${\OLId{latin-looped}{P}} \red {\OLId{latin-looped}{P}}'$.
+وما امتنع فيه مزيد اختزال بحسب~$\beta$ يسمى
+\emph{غير قابل للاختزال بحسب~$\beta$}، أو \emph{سويًا بحسب~$\beta$}.
+وحيث لا التباس نكتفي بقولنا «يختزل» عن «يختزل بحسب~$\beta$»،
+وكذلك في سائر هذه العبارات.
+
+وهذه أمثلة تبين المراد:
+\begin{enumerate}
+\item يحصل الاختزال التالي:
+\begin{align*}
+(\lambd[{\OLId{latin-ordinary}{x}}][xxy]) \lambd[{\OLId{latin-ordinary}{z}}][{\OLId{latin-ordinary}{z}}] & \redone (\lambd[{\OLId{latin-ordinary}{z}}][{\OLId{latin-ordinary}{z}}])(\lambd[{\OLId{latin-ordinary}{z}}][{\OLId{latin-ordinary}{z}}]) {\OLId{latin-ordinary}{y}} \\
+& \redone (\lambd[{\OLId{latin-ordinary}{z}}][{\OLId{latin-ordinary}{z}}]) {\OLId{latin-ordinary}{y}} \\
+& \redone {\OLId{latin-ordinary}{y}}.
+\end{align*}
+\item وليس كل «تبسيط» أقصر؛ فقد يزيد الحد تعقيدًا:
+\begin{align*}
+(\lambd[{\OLId{latin-ordinary}{x}}][xxy])(\lambd[{\OLId{latin-ordinary}{x}}][xxy]) & \redone (\lambd[{\OLId{latin-ordinary}{x}}][xxy])(\lambd[{\OLId{latin-ordinary}{x}}][xxy]){\OLId{latin-ordinary}{y}} \\
+& \redone (\lambd[{\OLId{latin-ordinary}{x}}][xxy])(\lambd[{\OLId{latin-ordinary}{x}}][xxy])yy \\
+& \redone \dots
+\end{align*}
+\item وقد يبقى الحد بعد خطوة الاختزال على حاله:
+\[
+(\lambd[{\OLId{latin-ordinary}{x}}][xx])(\lambd[{\OLId{latin-ordinary}{x}}][xx]) \redone (\lambd[{\OLId{latin-ordinary}{x}}][xx])(\lambd[{\OLId{latin-ordinary}{x}}][xx]).
+\]
+\item وقد تتعدد وجوه الاختزال في الحد الواحد. فمثلًا،
+\[
+(\lambd[{\OLId{latin-ordinary}{x}}][(\lambd[{\OLId{latin-ordinary}{y}}][yx]) {\OLId{latin-ordinary}{z}})] {\OLId{latin-ordinary}{v}} \redone (\lambd[{\OLId{latin-ordinary}{y}}][yv]) {\OLId{latin-ordinary}{z}}
+\]
+إذا قلصنا التطبيق الخارجي، ويكون
+\[
+(\lambd[{\OLId{latin-ordinary}{x}}][(\lambd[{\OLId{latin-ordinary}{y}}][yx]) {\OLId{latin-ordinary}{z}})] {\OLId{latin-ordinary}{v}} \redone (\lambd[{\OLId{latin-ordinary}{x}}][zx]) {\OLId{latin-ordinary}{v}}
+\]
+إذا قلصنا التطبيق الداخلي. غير أن الحدين الناتجين ينتهيان،
+في هذا المثال، باختزال آخر إلى الحد نفسه~$zv$.
+\end{enumerate}
+
+وليس اتفاق المآل في المثال الأخير أمرًا عارضًا؛ بل يكشف
+عن خاصية مهمة عميقة لحساب لامبدا، هي «خاصية تشيرش--روسر».
+
+\end{document}

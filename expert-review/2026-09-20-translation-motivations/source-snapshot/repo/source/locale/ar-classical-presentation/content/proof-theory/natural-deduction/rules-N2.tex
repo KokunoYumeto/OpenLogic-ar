@@ -1,0 +1,109 @@
+% Part: proof-theory
+% Chapter: natural-deduction
+% Section: rules-N2
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\begin{table}
+\begin{tabular}{@{}c@{}c@{}}
+\Axiom${\OLId{latin-ordinary}{x}}: !A, {\OLId{greek-variable}{Gamma}} \fCenter !B$
+\RightLabel{\Intro{\lif}}
+\UnaryInf${\OLId{greek-variable}{Gamma}} \fCenter !A \lif !B $
+\DisplayProof
+&
+\Axiom${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}} \fCenter !A \lif !B$
+\Axiom${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{2}} \fCenter !A$
+\RightLabel{\Elim{\lif}}
+\BinaryInf${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}}, {\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{2}} \fCenter !B$
+\DisplayProof
+\\[4ex]
+\Axiom${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}} \fCenter !A$
+\Axiom${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{2}} \fCenter !B$
+\RightLabel{\Intro{\land}}
+\BinaryInf${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}}, {\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{2}} \fCenter !A \land !B $
+\DisplayProof
+&
+\begin{tabular}[b]{@{}l@{}}
+\Axiom${\OLId{greek-variable}{Gamma}} \fCenter !A \land !B$
+\RightLabel{\Elim{\land}[1]}
+\UnaryInf${\OLId{greek-variable}{Gamma}} \fCenter !A$
+\DisplayProof
+\\[3ex]
+\Axiom${\OLId{greek-variable}{Gamma}} \fCenter !A \land !B$
+\RightLabel{\Elim{\land}[2]}
+\UnaryInf${\OLId{greek-variable}{Gamma}} \fCenter !B$
+\DisplayProof\\[3ex]
+\end{tabular}
+\\[4ex]
+\Axiom${\OLId{greek-variable}{Gamma}} \fCenter !A$
+\RightLabel{\Intro{\lor}[1]}
+\UnaryInf${\OLId{greek-variable}{Gamma}} \fCenter !A \lor !B$
+\DisplayProof
+&
+\Axiom$ {\OLId{greek-variable}{Gamma}} \fCenter !B$
+\RightLabel{\Intro{\lor}[2]}
+\UnaryInf${\OLId{greek-variable}{Gamma}} \fCenter !A \lor !B$
+\DisplayProof\\[3ex]
+\multicolumn{\OLClassicalDigits{2}}{c}{
+\begin{tabular}[b]{@{}l@{}}
+\Axiom${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}} \fCenter !A \lor !B$
+\Axiom${\OLId{latin-ordinary}{x}}:!A, {\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{2}} \fCenter !C$
+\Axiom${\OLId{latin-ordinary}{y}}:!B, {\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{3}} \fCenter !C$
+\RightLabel{\Elim{\lor}}
+\TrinaryInf${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}}, {\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{2}}, {\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{3}} \fCenter !C$
+\DisplayProof
+\end{tabular}
+}
+\\[4ex]
+\Axiom${\OLId{latin-ordinary}{x}}:!A, {\OLId{greek-variable}{Gamma}} \fCenter \lfalse$
+\RightLabel{\Intro{\lnot}}
+\UnaryInf$ {\OLId{greek-variable}{Gamma}} \fCenter \lnot !A $
+\DisplayProof
+&
+\Axiom${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}} \fCenter \lnot !A $
+\Axiom${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{2}} \fCenter !A $
+\RightLabel{\Elim{\lnot}}
+\BinaryInf${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}}, {\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{2}} \fCenter \lfalse$
+\DisplayProof
+\\[4ex]
+\Axiom${\OLId{greek-variable}{Gamma}} \fCenter !A({\OLId{latin-ordinary}{a}}) $
+\RightLabel{\Intro{\lforall}}
+\UnaryInf${\OLId{greek-variable}{Gamma}} \fCenter \lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$
+\DisplayProof
+&
+\Axiom${\OLId{greek-variable}{Gamma}} \fCenter \lforall[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$
+\RightLabel{\Elim{\lforall}}
+\UnaryInf${\OLId{greek-variable}{Gamma}} \fCenter !A({\OLId{latin-ordinary}{t}})$
+\DisplayProof
+\\[4ex]
+\Axiom${\OLId{greek-variable}{Gamma}} \fCenter !A({\OLId{latin-ordinary}{t}}) $
+\RightLabel{\Intro{\lexists}}
+\UnaryInf${\OLId{greek-variable}{Gamma}} \fCenter \lexists[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$
+\DisplayProof
+&
+\Axiom${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}} \fCenter  \lexists[{\OLId{latin-ordinary}{x}}][!A({\OLId{latin-ordinary}{x}})]$
+\Axiom${\OLId{latin-ordinary}{x}}: !A({\OLId{latin-ordinary}{a}}), {\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{2}} \fCenter !C$
+\RightLabel{\Elim{\lexists}}
+\BinaryInf${\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{1}}, {\OLId{greek-variable}{Gamma}}_{\OLMathNumeral{2}} \fCenter !C$
+\DisplayProof
+\\[4ex]
+\Axiom${\OLId{greek-variable}{Gamma}} \fCenter \lfalse$
+\RightLabel{\FalseInt}
+\UnaryInf${\OLId{greek-variable}{Gamma}} \fCenter !A$
+\DisplayProof
+&
+\Axiom${\OLId{latin-ordinary}{x}}: \lnot !A, {\OLId{greek-variable}{Gamma}} \fCenter \lfalse$
+\RightLabel{\FalseCl}
+\UnaryInf${\OLId{greek-variable}{Gamma}} \fCenter !A$
+\DisplayProof
+\end{tabular}
+\caption{هذه قواعد~\Log{N2c} و\Log{N2i}. ويشترط في~$\Intro{\lforall}$
+و$\Elim{\lexists}$ ألا يظهر~!!{constant}~${\OLId{latin-ordinary}{a}}$ في متتالية النتيجة. وأما
+${\OLId{greek-variable}{Gamma}}_{\OLId{latin-ordinary}{i}}$ فهي مجموعات من~!!{formula}s الموسومة~${\OLId{latin-ordinary}{x}}:!A$. وليس في
+\Log{N2i} القاعدة~\FalseCl.}
+\ollabel{tab:N2}
+\end{table}
+
+\end{document}

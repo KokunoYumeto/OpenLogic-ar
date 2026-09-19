@@ -1,0 +1,153 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+\olfileid{sth}{card-arithmetic}{simp}
+
+\olsection{تبسيط الجمع والضرب}
+
+يتبين أن جمع الكاردينالات وضربها فيما جاوز المتناهي بالغَا اليسر.
+ومأتاه أن الكاردينالات أعداد ترتيبية مخصوصة، فهي مرتبة ترتيبًا حسنًا
+ويتهيأ تناولها على نحو معين. غير أن إقامة البرهان على ذلك ليست باليسيرة.
+ولنبدأ بتعريف محكم.
+
+\begin{defn}
+نسمي الترتيب~$\canonord$ على أزواج الأعداد الترتيبية
+\emph{الترتيب المعياري}، ونجعل
+$\tuple{{\OLId{greek-variable}{alpha}}_{\OLMathNumeral{1}}, {\OLId{greek-variable}{alpha}}_{\OLMathNumeral{2}}} \canonord
+\tuple{\beta_{\OLMathNumeral{1}}, \beta_{\OLMathNumeral{2}}}$ إذا وفقط إذا تحقق أحد الشروط الآتية:
+\begin{enumerate}
+	\item $\max({\OLId{greek-variable}{alpha}}_{\OLMathNumeral{1}}, {\OLId{greek-variable}{alpha}}_{\OLMathNumeral{2}}) < \max(\beta_{\OLMathNumeral{1}}, \beta_{\OLMathNumeral{2}})$؛ أو
+	\item $\max({\OLId{greek-variable}{alpha}}_{\OLMathNumeral{1}}, {\OLId{greek-variable}{alpha}}_{\OLMathNumeral{2}}) = \max(\beta_{\OLMathNumeral{1}}, \beta_{\OLMathNumeral{2}})$ و
+	${\OLId{greek-variable}{alpha}}_{\OLMathNumeral{1}} < \beta_{\OLMathNumeral{1}}$؛ أو
+	\item $\max({\OLId{greek-variable}{alpha}}_{\OLMathNumeral{1}}, {\OLId{greek-variable}{alpha}}_{\OLMathNumeral{2}}) = \max(\beta_{\OLMathNumeral{1}}, \beta_{\OLMathNumeral{2}})$ و
+	${\OLId{greek-variable}{alpha}}_{\OLMathNumeral{1}} = \beta_{\OLMathNumeral{1}}$ و${\OLId{greek-variable}{alpha}}_{\OLMathNumeral{2}} < \beta_{\OLMathNumeral{2}}$.
+\end{enumerate}
+\end{defn}
+
+\begin{lem}
+$\tuple{{\OLId{greek-variable}{alpha}} \times {\OLId{greek-variable}{alpha}}, \canonord}$ ترتيب جيد، لكل عدد ترتيبي
+${\OLId{greek-variable}{alpha}}$.
+\end{lem}
+
+\begin{proof}
+ظاهر أن~$\canonord$ تام على~${\OLId{greek-variable}{alpha}} \times {\OLId{greek-variable}{alpha}}$. فلنفرض أنه لا
+$\tuple{{\OLId{greek-variable}{alpha}}_{\OLMathNumeral{1}}, {\OLId{greek-variable}{alpha}}_{\OLMathNumeral{2}}}$ أصغر من
+$\tuple{\beta_{\OLMathNumeral{1}}, \beta_{\OLMathNumeral{2}}}$ في~$\canonord$، ولا الثاني أصغر من الأول.
+فيلزم حينئذ
+$\max({\OLId{greek-variable}{alpha}}_{\OLMathNumeral{1}}, {\OLId{greek-variable}{alpha}}_{\OLMathNumeral{2}}) = \max(\beta_{\OLMathNumeral{1}}, \beta_{\OLMathNumeral{2}})$ و
+${\OLId{greek-variable}{alpha}}_{\OLMathNumeral{1}} = \beta_{\OLMathNumeral{1}}$ و${\OLId{greek-variable}{alpha}}_{\OLMathNumeral{2}} = \beta_{\OLMathNumeral{2}}$، ومن ثم
+$\tuple{{\OLId{greek-variable}{alpha}}_{\OLMathNumeral{1}}, {\OLId{greek-variable}{alpha}}_{\OLMathNumeral{2}}} = \tuple{\beta_{\OLMathNumeral{1}}, \beta_{\OLMathNumeral{2}}}$.
+
+وأما حسن الترتيب، فلتكن~${\OLId{latin-looped}{X}} \subseteq {\OLId{greek-variable}{alpha}}\times{\OLId{greek-variable}{alpha}}$ غير
+خالية. ولما كانت~${\OLId{greek-variable}{alpha}}$ عددًا ترتيبيًا، وُجد~$\delta$ هو أصغر عنصر في
+$\Setabs{\max(\gamma_{\OLMathNumeral{1}}, \gamma_{\OLMathNumeral{2}})}{\tuple{\gamma_{\OLMathNumeral{1}},
+\gamma_{\OLMathNumeral{2}}} \in {\OLId{latin-looped}{X}}}$. ثم احذف من
+$\Setabs{\tuple{\gamma_{\OLMathNumeral{1}},\gamma_{\OLMathNumeral{2}}} \in {\OLId{latin-looped}{X}}}{\max(\gamma_{\OLMathNumeral{1}}, \gamma_{\OLMathNumeral{2}}) =
+\delta}$ كل زوج ليس إحداثيه الأول أصغر ما يكون؛ ومن الباقي اختر ذا
+الإحداثي الثاني الأصغر. فهذا أصغر عناصر~${\OLId{latin-looped}{X}}$ بحسب~$\canonord$.
+\end{proof}
+\noindent
+وها هنا ملاحظة يسيرة.
+
+\begin{prop}\ollabel{simplecardproduct}
+إذا كان $\cardeq{{\OLId{greek-variable}{alpha}}}{\beta}$، فإن
+$\cardeq{{\OLId{greek-variable}{alpha}} \times {\OLId{greek-variable}{alpha}}}{\beta \times \beta}$.
+\end{prop}
+
+\begin{proof}
+خذ تقابلًا~${\OLId{latin-ordinary}{f}} \colon {\OLId{greek-variable}{alpha}} \to \beta$ يشهد الفرض؛
+فتكون الخريطة
+$\tuple{\gamma_{\OLMathNumeral{1}}, \gamma_{\OLMathNumeral{2}}} \mapsto
+\tuple{{\OLId{latin-ordinary}{f}}(\gamma_{\OLMathNumeral{1}}), {\OLId{latin-ordinary}{f}}(\gamma_{\OLMathNumeral{2}})}$ تقابلًا هي الأخرى، وهذا كاف.
+% تصحيح برهاني (0588-N1): قُيدت f بأن تكون تقابلًا واستُعملت تقابلية خريطة الضرب.
+\end{proof}
+\noindent
+ونستعمل ما تقدم لإثبات اللمّة الآتية، وهي عمدة هذا الباب.
+\begin{lem}\ollabel{alphatimesalpha}
+لكل عدد ترتيبي غير متناهٍ ${\OLId{greek-variable}{alpha}}$،
+$\cardeq{{\OLId{greek-variable}{alpha}}}{{\OLId{greek-variable}{alpha}} \times {\OLId{greek-variable}{alpha}}}$.
+\end{lem}
+
+\begin{proof}
+نبرهن بالخلف. فليكن~${\OLId{greek-variable}{alpha}}$ أصغر عدد ترتيبي غير متناهٍ تخلف عنه
+هذا الحكم. وقد ثبت في
+\olref[sfr][siz][zigzag]{natsquaredenumerable} أن
+$\cardeq{\omega}{\omega\times\omega}$، ولذلك
+$\omega \in {\OLId{greek-variable}{alpha}}$. ثم إن~${\OLId{greek-variable}{alpha}}$ كاردينال؛ إذ لو لم يكن كذلك
+لكان~$\card{{\OLId{greek-variable}{alpha}}} \in {\OLId{greek-variable}{alpha}}$، فيعطينا اختيار ذلك العدد أصغر ما يكون
+$\cardeq{\card{{\OLId{greek-variable}{alpha}}}}{\card{{\OLId{greek-variable}{alpha}}} \times \card{{\OLId{greek-variable}{alpha}}}}$،
+ويعطينا التعريف~$\cardeq{\card{{\OLId{greek-variable}{alpha}}}}{{\OLId{greek-variable}{alpha}}}$. فيلزم عندئذ، بمقتضى
+\olref{simplecardproduct}، أن
+$\cardeq{{\OLId{greek-variable}{alpha}}}{{\OLId{greek-variable}{alpha}}\times{\OLId{greek-variable}{alpha}}}$، وهو خلف.
+
+والآن خذ أي~$\tuple{\gamma_{\OLMathNumeral{1}}, \gamma_{\OLMathNumeral{2}}} \in {\OLId{greek-variable}{alpha}} \times {\OLId{greek-variable}{alpha}}$،
+وانظر في القطعة:
+\begin{align*}
+	\text{Seg}(\gamma_{\OLMathNumeral{1}}, \gamma_{\OLMathNumeral{2}}) &= \Setabs{\tuple{\delta_{\OLMathNumeral{1}}, \delta_{\OLMathNumeral{2}}} \in {\OLId{greek-variable}{alpha}} \times {\OLId{greek-variable}{alpha}}}{\tuple{\delta_{\OLMathNumeral{1}}, \delta_{\OLMathNumeral{2}}} \canonord \tuple{\gamma_{\OLMathNumeral{1}}, \gamma_{\OLMathNumeral{2}}}}
+\end{align*}
+ضع $\gamma = \max(\gamma_{\OLMathNumeral{1}}, \gamma_{\OLMathNumeral{2}})$، ولاحظ أن
+$\tuple{\gamma_{\OLMathNumeral{1}}, \gamma_{\OLMathNumeral{2}}} \canonord \tuple{\gamma+{\OLMathNumeral{1}}, \gamma + {\OLMathNumeral{1}}}$.
+فإن كان~$\gamma$ متناهيًا فالقطعة متناهية، ومن ثم كانت كارديناليتها
+أصغر من الكاردينال غير المتناهي~${\OLId{greek-variable}{alpha}}$. وإن كان~$\gamma$ غير
+متناهٍ، حصلنا على:
+\begin{align*}
+	\text{Seg}(\gamma_{\OLMathNumeral{1}}, \gamma_{\OLMathNumeral{2}}) &
+	\precsim ((\gamma \ordplus {\OLMathNumeral{1}})\ordtimes (\gamma \ordplus {\OLMathNumeral{1}}))\\
+	&\approx (\gamma \ordtimes \gamma)
+	\text{، بحسب \olref[ord-arithmetic][using-addition]{ordinfinitycharacter} و
+	\olref{simplecardproduct}}\\
+	&\approx \gamma \text{، بحسب فرض الاستقراء}\\
+	& \prec {\OLId{greek-variable}{alpha}}\text{، لأن ${\OLId{greek-variable}{alpha}}$ كاردينال.}
+\end{align*}
+فإذن~$\ordtype{{\OLId{greek-variable}{alpha}}\times {\OLId{greek-variable}{alpha}}, \canonord} \leq {\OLId{greek-variable}{alpha}}$، ومنه
+$\cardle{{\OLId{greek-variable}{alpha}} \times {\OLId{greek-variable}{alpha}}}{{\OLId{greek-variable}{alpha}}}$. وأما
+$\cardle{{\OLId{greek-variable}{alpha}}}{{\OLId{greek-variable}{alpha}} \times {\OLId{greek-variable}{alpha}}}$ فظاهر، فتتم النتيجة بمبرهنة
+شرودر--برنشتاين.
+\end{proof}
+
+وبهذا ننتهي إلى الحكم الذي يبسط هذه العمليات.
+
+\begin{thm}\ollabel{cardplustimesmax}
+إذا كان $\cardfont{{\OLId{latin-ordinary}{a}}}, \cardfont{{\OLId{latin-ordinary}{b}}}$ كاردينالين غير متناهيين، فإن:
+\[
+	\cardfont{{\OLId{latin-ordinary}{a}}}
+\cardtimes \cardfont{{\OLId{latin-ordinary}{b}}} = \cardfont{{\OLId{latin-ordinary}{a}}} \cardplus \cardfont{{\OLId{latin-ordinary}{b}}} =
+\text{max}(\cardfont{{\OLId{latin-ordinary}{a}}}, \cardfont{{\OLId{latin-ordinary}{b}}}).
+\]
+\end{thm}
+
+\begin{proof}
+يجوز، من غير إخلال بالعموم، أن نفرض
+$\cardfont{{\OLId{latin-ordinary}{a}}} = \max(\cardfont{{\OLId{latin-ordinary}{a}}}, \cardfont{{\OLId{latin-ordinary}{b}}})$. وعندئذ يعطي
+\olref{alphatimesalpha} أن
+$\cardfont{{\OLId{latin-ordinary}{a}}}\cardtimes\cardfont{{\OLId{latin-ordinary}{a}}} = \cardfont{{\OLId{latin-ordinary}{a}}} \leq \cardfont{{\OLId{latin-ordinary}{a}}}
+\cardplus \cardfont{{\OLId{latin-ordinary}{b}}} \leq \cardfont{{\OLId{latin-ordinary}{a}}} \cardplus \cardfont{{\OLId{latin-ordinary}{a}}} \leq
+\cardfont{{\OLId{latin-ordinary}{a}}} \cardtimes \cardfont{{\OLId{latin-ordinary}{a}}}$، فيثبت المطلوب.
+\end{proof}\noindent
+وكذلك إذا كان~$\cardfont{{\OLId{latin-ordinary}{a}}}$ غير متناهٍ، فإن اتحاد~$\cardfont{{\OLId{latin-ordinary}{a}}}$
+من المجموعات، لا يزيد حجم واحدة منها على~$\cardfont{{\OLId{latin-ordinary}{a}}}$، لا يزيد حجمه
+هو أيضًا على~$\cardfont{{\OLId{latin-ordinary}{a}}}$.
+
+\begin{prop}\ollabel{kappaunionkappasize}
+ليكن $\cardfont{{\OLId{latin-ordinary}{a}}}$ كاردينالاً غير متناهٍ. ولكل عدد ترتيبي
+$\beta \in \cardfont{{\OLId{latin-ordinary}{a}}}$، لتكن ${\OLId{latin-looped}{X}}_\beta$ مجموعة تحقق
+$\card{{\OLId{latin-looped}{X}}_\beta} \leq \cardfont{{\OLId{latin-ordinary}{a}}}$. عندئذ
+$\card{\bigcup_{\beta \in \cardfont{{\OLId{latin-ordinary}{a}}}} {\OLId{latin-looped}{X}}_\beta} \leq \cardfont{{\OLId{latin-ordinary}{a}}}$.
+\end{prop}
+
+\begin{proof}
+لكل~$\beta \in \cardfont{{\OLId{latin-ordinary}{a}}}$، ثبّت !!a{injection}
+${\OLId{latin-ordinary}{f}}_\beta \colon {\OLId{latin-looped}{X}}_\beta \to \cardfont{{\OLId{latin-ordinary}{a}}}$؛ وفي وجه إمكان هذا
+التثبيت كلام يأتي في الحاشية.
+\footnote{كيف «ثُبِّتت» هذه
+الدوال؟ انظر \olref[sth][choice][countablechoice]{sec}.}
+ثم عرّف !!a{injection} ${\OLId{latin-ordinary}{g}} \colon
+\bigcup_{\beta \in \cardfont{{\OLId{latin-ordinary}{a}}}} {\OLId{latin-looped}{X}}_\beta \to \cardfont{{\OLId{latin-ordinary}{a}}} \times
+\cardfont{{\OLId{latin-ordinary}{a}}}$ بوضع ${\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{v}}) = \tuple{\beta, {\OLId{latin-ordinary}{f}}_\beta({\OLId{latin-ordinary}{v}})}$، حيث
+${\OLId{latin-ordinary}{v}} \in {\OLId{latin-looped}{X}}_\beta$ ولا يكون ${\OLId{latin-ordinary}{v}} \in {\OLId{latin-looped}{X}}_\gamma$ لأي $\gamma \in \beta$.
+وبحسب~\olref{cardplustimesmax}،
+$\bigcup_{\beta \in \cardfont{{\OLId{latin-ordinary}{a}}}} {\OLId{latin-looped}{X}}_\beta \preceq
+\cardfont{{\OLId{latin-ordinary}{a}}} \times \cardfont{{\OLId{latin-ordinary}{a}}} \approx \cardfont{{\OLId{latin-ordinary}{a}}}$.
+\end{proof}
+
+\end{document}

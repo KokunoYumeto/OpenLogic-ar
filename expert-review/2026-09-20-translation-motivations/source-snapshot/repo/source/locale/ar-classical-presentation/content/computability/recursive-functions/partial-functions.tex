@@ -1,0 +1,100 @@
+% Part: computability
+% Chapter: recursive-functions
+% Section: partial-functions
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{rec}{par}
+\olsection{الدوال العودية الجزئية}
+
+قبل تعريف الدوال العودية، لننظر فيما زاد برهاننا على مجرد إثبات دوال قابلة
+للحساب غير عودية بدائية. فأصل الحجة
+إمكان تعداد دوال ${\OLId{latin-ordinary}{f}}_{\OLMathNumeral{0}},{\OLId{latin-ordinary}{f}}_{\OLMathNumeral{1}},\dots$ على نحو يجعل،
+بالنظر إلى الحجتين ${\OLId{latin-ordinary}{x}}$ و${\OLId{latin-ordinary}{y}}$، قيمة ${\OLId{latin-ordinary}{f}}_{\OLId{latin-ordinary}{x}}({\OLId{latin-ordinary}{y}})$ قابلة للحساب. فالحجة إذن جارية في
+\emph{كل صنف من الدوال يمكن تعداده على هذا النحو}. وهنا
+موضع الإشكال: نطلب وصفًا صريحًا للدوال القابلة للحساب، ثم لا يكون الوصف
+الذي يتيح هذا التعداد الفعال لدوال كلية مستنفدًا لها!
+
+ويدفع هذا الإشكال أن نضم الدوال \emph{الجزئية} إلى البحث؛ فإننا سنرى
+\emph{إمكان} تعداد الدوال الجزئية القابلة للحساب.
+\iftag{TMs}{ وقد كاد هذا يتبين لنا من قبل، لأن
+آلات تورنغ تقبل تعدادًا منتظمًا.}{} ثم نرجع إلى الحجة القطرية
+فنبيّن أين ينقطع الاستدلال إذا أدخلنا الدوال الجزئية.
+
+فما الذي نزيده على الدوال العودية البدائية لنحصل
+على الدوال العودية الجزئية كلها؟ لا بد من أمرين:
+\begin{enumerate}
+\item توسيع تعريف الدوال العودية البدائية حتى يتسع للدوال الجزئية.
+\item \emph{إضافة} بند إلى التعريف يُدخل دوال جزئية
+جديدة.
+\end{enumerate}
+
+أما الأول فيسير: نبدأ بالصفر واللاحق والإسقاطات كما فعلنا، ونأخذ الإغلاق تحت
+التركيب والعودية البدائية. وإنما نعدل تعريفي التركيب
+والعودية البدائية بحيث يصحان وإن كان بعض الحدود الواردة غير معرّف.
+فإذا كانت ${\OLId{latin-ordinary}{f}}$ و${\OLId{latin-ordinary}{g}}$ جزئيتين، كتبنا ${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}})\fdefined$ لنعني أن
+${\OLId{latin-ordinary}{f}}$ معرفة عند ${\OLId{latin-ordinary}{x}}$، أي إن ${\OLId{latin-ordinary}{x}}$ في مجال ${\OLId{latin-ordinary}{f}}$؛ ونكتب
+${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}})\fundefined$ لنعني العكس، أي إن ${\OLId{latin-ordinary}{f}}$ غير معرفة عند~${\OLId{latin-ordinary}{x}}$.
+وأما ${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}})\simeq {\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{x}})$ فمعناه أن ${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}})$ و${\OLId{latin-ordinary}{g}}({\OLId{latin-ordinary}{x}})$ إما غير معرفتين
+معًا، وإما معرفتان ومتساويتان معًا. ويجري هذا الاصطلاح على الحدود
+المركبة أيضًا. ثم نتفق على أنه إذا كانت ${\OLId{latin-ordinary}{h}}$ و${\OLId{latin-ordinary}{g}}_{\OLMathNumeral{0}}$،
+…،~${\OLId{latin-ordinary}{g}}_{\OLId{latin-ordinary}{k}}$ كلها دوال جزئية، فإن
+\[
+{\OLId{latin-ordinary}{h}}({\OLId{latin-ordinary}{g}}_{\OLMathNumeral{0}}(\vec {\OLId{latin-ordinary}{x}}),\dots,{\OLId{latin-ordinary}{g}}_{\OLId{latin-ordinary}{k}}(\vec {\OLId{latin-ordinary}{x}}))
+\]
+تكون معرفة إذا وفقط إذا كانت كل ${\OLId{latin-ordinary}{g}}_{\OLId{latin-ordinary}{i}}$ معرفة عند $\vec {\OLId{latin-ordinary}{x}}$، وكانت ${\OLId{latin-ordinary}{h}}$
+معرفة عند ${\OLId{latin-ordinary}{g}}_{\OLMathNumeral{0}}(\vec {\OLId{latin-ordinary}{x}})$، …،~${\OLId{latin-ordinary}{g}}_{\OLId{latin-ordinary}{k}}(\vec {\OLId{latin-ordinary}{x}})$. وعلى هذا تبقى صورتا تعريف
+التركيب والعودية البدائية كما تقدمتا، ولا يتغير إلا
+استبدال «$=$» بـ«$\simeq$».
+
+وأما الإضافة التي تنشئ دوال جزئية جديدة فهي
+\emph{مؤثر البحث غير المحدود}. فإن كانت ${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}},\vec {\OLId{latin-ordinary}{z}})$ أي دالة جزئية
+في الأعداد الطبيعية، عرف $\mu {\OLId{latin-ordinary}{x}}\;{\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}},\vec {\OLId{latin-ordinary}{z}})$ بأنه
+\begin{quote}
+  أصغر ${\OLId{latin-ordinary}{x}}$ بحيث تكون ${\OLId{latin-ordinary}{f}}({\OLMathNumeral{0}},\vec {\OLId{latin-ordinary}{z}}), {\OLId{latin-ordinary}{f}}({\OLMathNumeral{1}},\vec {\OLId{latin-ordinary}{z}}), \dots, {\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}},\vec {\OLId{latin-ordinary}{z}})$
+  كلها معرفة، وتكون ${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}},\vec {\OLId{latin-ordinary}{z}})={\OLMathNumeral{0}}$، إن وجد ${\OLId{latin-ordinary}{x}}$ كهذا.
+\end{quote}
+فإن لم يوجد كانت $\mu {\OLId{latin-ordinary}{x}}\;{\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}},\vec {\OLId{latin-ordinary}{z}})$ غير معرّفة. وبذلك تتعين
+$\mu {\OLId{latin-ordinary}{x}}\;{\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}},\vec {\OLId{latin-ordinary}{z}})$ على وجه واحد.
+
+\begin{explain}
+وهذا التعريف لا يستند إلى\iftag{TMs}{ آلات تورنغ، ولا إلى}{}
+الخوارزميات، ولا إلى أي نموذج حساب معين. غير أن البحث غير المحدود،
+كالتركيب والعودية البدائية، له تفسير إجرائي حسابي. فحين نحسب
+دالة جزئية، تكون الحجج التي لم تُعرّف عندها هي المداخل
+التي لا يقف عليها الحساب. وطريقة حساب $\mu {\OLId{latin-ordinary}{x}}\;{\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}},\vec {\OLId{latin-ordinary}{z}})$ هي الآتية:
+% تصحيح صياغة كلاسيكية (C224-01): طابق الضمير والخبر الاسم المؤنث «طريقة».
+نحسب ${\OLId{latin-ordinary}{f}}({\OLMathNumeral{0}},\vec {\OLId{latin-ordinary}{z}}), {\OLId{latin-ordinary}{f}}({\OLMathNumeral{1}},\vec {\OLId{latin-ordinary}{z}}), {\OLId{latin-ordinary}{f}}({\OLMathNumeral{2}},\vec {\OLId{latin-ordinary}{z}})$ حتى تعاد قيمة
+\OLClassicalDigits{0}. فإن لم يتوقف حساب من الحسابات الوسيطة، لم يتوقف حساب
+$\mu {\OLId{latin-ordinary}{x}}\;{\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}},\vec {\OLId{latin-ordinary}{z}})$ أيضًا.
+\end{explain}
+
+إذا كانت ${\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{x}},\vec {\OLId{latin-ordinary}{z}})$ أي علاقة، عرفنا $\mu {\OLId{latin-ordinary}{x}}\;{\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{x}},\vec {\OLId{latin-ordinary}{z}})$ بأنه
+$\mu {\OLId{latin-ordinary}{x}}\;({\OLMathNumeral{1}}\tsub\Char{{\OLId{latin-looped}{R}}}({\OLId{latin-ordinary}{x}},\vec {\OLId{latin-ordinary}{z}}))$. وبعبارة أخرى، يعيد
+$\mu {\OLId{latin-ordinary}{x}}\;{\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{x}},\vec {\OLId{latin-ordinary}{z}})$ أصغر قيمة لـ${\OLId{latin-ordinary}{x}}$ بحيث تصدق ${\OLId{latin-looped}{R}}({\OLId{latin-ordinary}{x}},\vec {\OLId{latin-ordinary}{z}})$.
+فإذا كانت ${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}},\vec {\OLId{latin-ordinary}{z}})$ دالة كلية، كان $\mu {\OLId{latin-ordinary}{x}}\;{\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}},\vec {\OLId{latin-ordinary}{z}})$ هو نفسه
+$\mu {\OLId{latin-ordinary}{x}}\;({\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}},\vec {\OLId{latin-ordinary}{z}})={\OLMathNumeral{0}})$. أما التعريف الأول فأعم، إذ لا يشترط
+أن تكون ${\OLId{latin-ordinary}{f}}({\OLId{latin-ordinary}{x}},\vec {\OLId{latin-ordinary}{z}})$ معرفة في كل موضع (أما الدالة المميزة
+لعلاقة فهي كلية دائمًا).
+
+\begin{defn}
+مجموعة \emph{الدوال العودية الجزئية} هي أصغر مجموعة من الدوال الجزئية
+من الأعداد الطبيعية إلى الأعداد الطبيعية، بمختلف الرتب، تحتوي الصفر
+واللاحق والإسقاطات، وتكون منغلقة تحت التركيب والعودية البدائية والبحث
+غير المحدود.
+\end{defn}
+
+وقد تكون الدالة العودية الجزئية كلية، أعني معرّفة عند كل
+حجة؛ فنخص هذه باسم آخر.
+
+\begin{defn}
+\ollabel{defn:recursive-fn}
+مجموعة \emph{الدوال العودية} هي مجموعة الدوال العودية الجزئية الكلية.
+\end{defn}
+
+ويقال أحيانًا «عودية كلية» بدل «عودية»، تنبيهًا إلى أنها معرّفة في كل
+موضع.
+
+\end{document}

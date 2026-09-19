@@ -1,0 +1,136 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{spine}{rank}
+\olsection{الرتبة}
+
+لما عرّفنا المراحل بمجموعات~$V_\alpha$، وثبت أن كل مجموعة جزء من
+مرحلة ما، أمكن أن نعرّف \emph{رتبة} المجموعة. ورتبة~$A$ في الحدس
+هي أول مرحلة تتكون فيها~$A$؛ وأما حدها الدقيق فهو الآتي.
+
+\begin{defn}\ollabel{defnsetrank}
+لكل مجموعة~$A$، تكون~$\setrank{A}$ أصغر عدد ترتيبي~$\alpha$ يحقق
+$A \subseteq V_\alpha$.
+\end{defn}
+\begin{prop}\ollabel{ranksexist}
+	توجد~$\setrank{A}$ لكل~$A$.
+\end{prop}
+\begin{proof}
+	متروك تمرينًا.
+\end{proof}
+\begin{prob}
+	أثبت~\olref[sth][spine][rank]{ranksexist}.
+\end{prob}
+\noindent
+وبفضل الترتيب الجيد للرتب نستخرج نتائج نافعة، أولها:
+\begin{prop}\ollabel{valphalowerrank}
+لكل عدد ترتيبي~$\alpha$،
+$V_\alpha = \Setabs{x}{\setrank{x} \in \alpha}$.
+\end{prop}
+
+\begin{proof}
+إذا كان~$\setrank{x} \in \alpha$، كان
+$x \subseteq V_{\setrank{x}} \in V_\alpha$؛ فيلزم
+$x \in V_\alpha$، لأن~$V_\alpha$ مقتدرة، باستعمال
+\olref[Valphabasic]{Valphabasicprops} مرات. وفي العكس، إذا كان
+$x \in V_\alpha$، كان~$x \subseteq V_\alpha$، ومن ثم
+$\setrank{x} \leq \alpha$. ويبيّن استقراء بسيط متناهٍ في التجاوز أن
+$x \notin V_{\setrank{x}}$؛ ويلزم لذلك~$\setrank{x} \neq \alpha$،
+ومن ثم~$\setrank{x} \in \alpha$.
+\end{proof}
+\begin{prob}
+	أكمل الاستقراء البسيط المتناهي التجاوز المذكور في
+	\olref[sth][spine][rank]{valphalowerrank}.
+\end{prob}
+
+\begin{prop}\ollabel{rankmemberslower}
+إذا كان~$B \in A$، فإن~$\setrank{B} \in \setrank{A}$.
+\end{prop}
+
+\begin{proof}
+$A \subseteq V_{\setrank{A}} =
+\Setabs{x}{\setrank{x} \in \setrank{A}}$ بموجب
+\olref{valphalowerrank}.
+\end{proof}
+\noindent
+ومن هذه الحقيقة نحصل على ضرب من الاستقراء يثبت الأحكام في
+\emph{جميع المجموعات}:
+
+\begin{thm}[مخطط الاستقراء بـ$\in$]
+لكل صيغة~$\phi$:
+\[
+	\forall A((\forall x \in A)\phi(x) \lif \phi(A)) \lif \forall A \phi(A).
+\]
+\end{thm}
+
+\begin{proof}
+نبرهن بالمقابل. افترض~$\lnot \forall A \phi(A)$. يقتضي الاستقراء
+المتناهي التجاوز
+(\olref[ordinals][basic]{ordinductionschema}) وجود مجموعة لا تحقق
+$\phi$ ورتبتها أصغر رتبة ممكنة؛ أي يوجد~$A$ بحيث~$\lnot \phi(A)$ و
+$\forall x(\setrank{x} \in \setrank{A} \lif \phi(x))$. فإذا كان
+$x \in A$، كان~$\setrank{x} \in \setrank{A}$ من
+\olref{rankmemberslower}، ومنه~$\phi(x)$. وهكذا
+$(\forall x \in A)\phi(x) \land \lnot \phi(A)$.
+\end{proof}\noindent
+ومعنى ذلك بغير الرموز أن نقول إن~$\phi$ \emph{وراثية} إذا وفقط إذا
+كان تحقق~$\phi$ في كل !!{element} من مجموعة موجبًا لتحقق~$\phi$ في
+المجموعة نفسها. فمخطط الاستقراء بـ$\in$ يقول: إذا كانت~$\phi$ وراثية،
+فإن كل مجموعة تحقق~$\phi$.
+
+ونختم، إلى حين، بحث الرتب بإثبات دعاوى تقدمت الإشارة إليها.
+
+\begin{prop}\ollabel{ranksupstrict}
+$\setrank{A} = \supstrict_{x \in A}\setrank{x}$.
+\end{prop}
+
+\begin{proof}
+ضع~$\alpha = \supstrict_{x \in A}\setrank{x}$. من
+\olref{rankmemberslower} ينتج~$\alpha \leq \setrank{A}$. ومن جهة
+أخرى، إذا كان~$x \in A$، كان~$\setrank{x} \in \alpha$، ومن ثم
+$x \in V_\alpha$ بموجب~\olref{valphalowerrank}. فيكون
+$A \subseteq V_\alpha$، أي~$\setrank{A} \leq \alpha$؛ فتتعين
+$\setrank{A} = \alpha$.
+\end{proof}
+
+\begin{cor}\ollabel{ordsetrankalpha}
+لكل عدد ترتيبي~$\alpha$، $\setrank{\alpha} = \alpha$.
+\end{cor}
+
+\begin{proof}
+افترض، في الاستقراء المتناهي التجاوز، أن
+$\setrank{\beta} = \beta$ لكل~$\beta \in \alpha$. عندئذ
+$\setrank{\alpha} = \supstrict_{\beta \in \alpha}\setrank{\beta}
+= \supstrict_{\beta \in \alpha}\beta = \alpha$ بموجب
+\olref{ranksupstrict}.
+%	First note that $\setrank{\alpha} \neq \beta$ for any $\beta \in
+%	\alpha$. For otherwise we would have $\beta = \setrank{\beta} \in
+%	\setrank{\alpha} = \beta$ by \olref{rankmemberslower}, i.e.,
+%	$\beta \in \beta$, a contradiction. 
+%
+%	Now note that $\alpha \subseteq V_\alpha$. For $\alpha =
+%	\Setabs{\beta}{\beta \in \alpha}$ by
+%	\olref[sfr][ordinals][basic]{ordissetofsmallerord}. And if
+%	$\beta \in \alpha$ then $\beta \subseteq V_{\setrank{\beta}} =
+%	V_\beta \in V_\alpha$, hence $\beta \in V_\alpha$, by
+%	\olref[sfr][spine][Valphabasic]{Valphabasicprops} twice. 
+\end{proof}
+
+وأخيرًا نثبت سريعًا ما وُعد به في آخر~\olref[foundation]{sec}، وهو أن
+$\ZFminus$ تثبت
+$\emph{الانتظام} \Rightarrow \emph{التأسيس}$. ومفهوم «الرتبة»
+و\olref{rankmemberslower} مباحان في هذا البرهان؛ لأنهما، كما ذكر في
+صدر هذا القسم، يُعرضان باستعمال~$\ZFminus + \text{الانتظام}$.
+
+\begin{prop}[العمل في~$\ZFminus + \text{الانتظام}$]\ollabel{zfminusregularityfoundation}
+يصدق التأسيس.
+\end{prop}
+
+\begin{proof}
+ثبّت~$A \neq \emptyset$، واختر~$B \in A$ ذا أصغر رتبة ممكنة. إذا
+كان~$c \in B$، كان~$\setrank{c} \in \setrank{B}$ بموجب
+\olref{rankmemberslower}؛ ولذلك~$c \notin A$، باختيار~$B$.
+\end{proof}
+
+\end{document}
