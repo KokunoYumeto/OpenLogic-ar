@@ -1,0 +1,502 @@
+{
+  "schema": "openlogic-semantic-qualification-repairs-v1",
+  "assessed_on": "2026-09-06",
+  "recording_mode": "new-independent-assessment-of-retained-translation",
+  "status": "implemented-in-shared-msa-source",
+  "validation": {
+    "status": "pass",
+    "command": "python -B -m unittest discover -s build/tests -p test_qualification_propagation_batch2_sources.py -v",
+    "tests_run": 24,
+    "failures": 0,
+    "errors": 0,
+    "test_source_path": "build/tests/test_qualification_propagation_batch2_sources.py",
+    "test_source_sha256": "aa3a036a4c3b35c0ff046c4ff22ddf327fe0e2eef3688fab4de07c20b3748953",
+    "literal_phrase_choice_records_checked": 5,
+    "literal_phrase_fields_checked": 20,
+    "scope": "All four live MSA after hashes, exact forward/inverse patches, before hashes/sizes, unchanged inline/display math and proof/formal blocks; eight live English/Classical whole-file identities and excerpts; five supporting primary witnesses; exact four-unit baseline mappings; bounded empty-set/singleton/scope counterexamples; active non-comment literal EN/before-MSA/after-MSA/Classical phrase bindings; separate exact 0039 connective decision; locations.msa.changed_ranges; human links to the actual chosen-phrase line; source-drift, false-original, wrong-excerpt, compound/ellipsis and comment-only negative probes.",
+    "limits": "The semantic tests demonstrate the distinctions behind the edits, not a formal proof of the complete textbook. No TeX, rendering, printed-page binding or publication verification was performed."
+  },
+  "units": [
+    {
+      "unit_id": "OLP-0033",
+      "human_topic": "enumerable set / surjection",
+      "source_term": "enumerable",
+      "before_arabic": "فلكل مجموعة",
+      "chosen_arabic": "فلكل مجموعة غير خالية",
+      "classical_arabic": "المجموعة غير الخالية",
+      "sense": "A surjection from positive integers exists for every nonempty enumerable set, not for the empty enumerable set.",
+      "rationale": "English and MSA omit nonemptiness from the universal existence claim. Classical already adds it and a disclosed source-correction note. OLP-0029 explicitly includes the empty set among enumerable sets. No total function from the nonempty positive integers can have empty codomain. We propagate غير خالية and the existing Classical note, and repeat the nonempty qualification in the next paragraph's no-surjection criterion so that the same exception is not immediately lost. No diagonal proof or formula changes.",
+      "counterexample": "If f:PosInt→∅ were total, f(1) would have to be an element of ∅, impossible. Nonetheless ∅ has the empty enumeration and is enumerable under the book's definition.",
+      "finding_id": "0033-P1",
+      "classification": "inherited-source-qualification-already-correct-in-classical",
+      "alternatives": [
+        {
+          "form": "exclude the empty set from enumerable sets",
+          "disposition": "not selected",
+          "reason": "Would contradict the explicit preceding definition. The local nonempty qualification preserves that definition and all results."
+        }
+      ],
+      "expert_review": {
+        "useful": true,
+        "question": "Does غير خالية plus the source-correction note make clear that the empty set remains enumerable, despite admitting no total map from positive integers? Does repeating the qualification in the following criterion prevent a false converse?",
+        "open_to_correction": true,
+        "official_attestation_claimed": false,
+        "non_blocking": true
+      },
+      "locations": {
+        "english": {
+          "path": "content/sets-functions-relations/size-of-sets/non-enumerability.tex",
+          "bytes": 9412,
+          "sha256": "a272a841f8c50bda6589aac40278b9bff7f8a1f5284730c7195423b09ac3ba2e",
+          "line_start": 25,
+          "line_end": 41,
+          "excerpt": "First of all, it is perhaps already surprising that there are\n!!{nonenumerable} sets.  For any !!{enumerable} set~$A$ there is\n!!a{surjective} function $f \\colon \\PosInt \\to A$.  If a set is\n!!{nonenumerable} there is no such function.  That is, no function\nmapping the infinitely many !!{element}s of~$\\PosInt$ to~$A$ can\nexhaust all of~$A$.  So there are ``more'' !!{element}s of~$A$ than\nthe infinitely many positive integers.\n\nHow would one prove that a set is !!{nonenumerable}? You have to show\nthat no such surjective function can exist. Equivalently, you have to\nshow that the elements of~$A$ cannot be enumerated in a one way\ninfinite list.  The best way to do this is to show that every list of\n!!{element}s of~$A$ must leave at least one element out; or that no\nfunction $f\\colon \\PosInt \\to A$ can be !!{surjective}.  We can do this\nusing Cantor's \\emph{diagonal method}.  Given a list of !!{element}s\nof~$A$, say, $x_1$, $x_2$, \\dots, we construct another element of~$A$\nwhich, by its construction, cannot possibly be on that list.",
+          "excerpt_sha256": "e59ad63e63bb20d3a6b91341f0552a5c5bf4a06d90c254299fbd2da811afbad9"
+        },
+        "msa": {
+          "path": "source/locale/ar/content/sets-functions-relations/size-of-sets/non-enumerability.tex",
+          "before_sha256": "b0f9c3161b44d0aed5c0dbdc508ad09da35610cdfafb5c5aa732975b07c01f1a",
+          "before_bytes": 12058,
+          "line_start": 25,
+          "line_end": 38,
+          "after_sha256": "82014f0a1361ae5462c5dd7d082e18a2e701dd23aa730a5550bd362ceb2b77e8",
+          "after_bytes": 12479,
+          "excerpt": "ولعل وجود مجموعات !!{nonenumerable} مدعاة للدهشة أصلًا. فلكل مجموعة غير خالية\n!!{enumerable}~$A$ توجد دالة~!!a{surjective}\n$f \\colon \\PosInt \\to A$. أما إذا كانت مجموعة ما !!{nonenumerable}،\nفلا توجد مثل هذه الدالة. أي لا يمكن لأي دالة ترسل !!{element}s~$\\PosInt$،\nوهي لا نهائية العدد، إلى~$A$ أن تستنفد~$A$ كلها. ومن ثم تكون\n!!{element}s~$A$ «أكثر عددًا» من الأعداد الصحيحة الموجبة، على الرغم\nمن لا نهائيتها.\n\n\\textbf{تنبيه تصحيحي على الأصل.} قُيّدت دعوى وجود الدالة الشاملة بكون\nالمجموعة غير خالية؛ إذ لا توجد دالة كلية من الصحيحات الموجبة إلى المجموعة الخالية،\nمع أن الخالية داخلة في المجموعات المعدودة بحسب التعريف المتقدم.\n\nفكيف نثبت أن مجموعة غير خالية !!{nonenumerable}؟ لا بد أن نبين أنه لا يمكن\nوجود دالة شاملة من ذلك النوع. وبصورة مكافئة، لا بد أن نبين أن عناصر~$A$",
+          "excerpt_sha256": "16237cff4bc874b917e8149dad5b0b166574211d95ac8d9646a822fc2194eede",
+          "changed_ranges": [
+            [
+              25,
+              25
+            ],
+            [
+              31,
+              37
+            ]
+          ],
+          "before_line_start": 25,
+          "before_line_end": 38,
+          "before_excerpt": "ولعل وجود مجموعات !!{nonenumerable} مدعاة للدهشة أصلًا. فلكل مجموعة\n!!{enumerable}~$A$ توجد دالة~!!a{surjective}\n$f \\colon \\PosInt \\to A$. أما إذا كانت مجموعة ما !!{nonenumerable}،\nفلا توجد مثل هذه الدالة. أي لا يمكن لأي دالة ترسل !!{element}s~$\\PosInt$،\nوهي لا نهائية العدد، إلى~$A$ أن تستنفد~$A$ كلها. ومن ثم تكون\n!!{element}s~$A$ «أكثر عددًا» من الأعداد الصحيحة الموجبة، على الرغم\nمن لا نهائيتها.\n\nفكيف نثبت أن مجموعة ما !!{nonenumerable}؟ لا بد أن نبين أنه لا يمكن\nوجود دالة شاملة من ذلك النوع. وبصورة مكافئة، لا بد أن نبين أن عناصر~$A$\nلا يمكن تعدادها في قائمة لا نهائية أحادية الاتجاه. وأفضل طريقة لذلك\nهي إثبات أن كل قائمة من !!{element}s~$A$ لا بد أن تغفل عنصرًا واحدًا\nعلى الأقل؛ أو أن أي دالة $f\\colon \\PosInt \\to A$ لا يمكن أن تكون\n!!{surjective}. ويمكننا فعل ذلك باستعمال \\emph{طريقة كانتور القطرية}.",
+          "before_excerpt_sha256": "51f6b99ab7ad37e7eddb78b8604d254fb225ccaacbf8812e7437b3f75590168f",
+          "before_excerpt_provenance": "Exact inverse of the recorded patches, verified against the whole-file before SHA-256; no invented original source."
+        },
+        "classical": {
+          "path": "source/locale/ar-classical/content/sets-functions-relations/size-of-sets/non-enumerability.tex",
+          "bytes": 11568,
+          "sha256": "6aea9fd0baec506686a0c45153e8dfdf7d556f89878f9bd2ea9f90c7b4e8f3e9",
+          "line_start": 19,
+          "line_end": 25,
+          "excerpt": "وقد يستغرب المرء أول الأمر وجود مجموعات !!{nonenumerable}. ووجه ذلك أن المجموعة غير الخالية !!{enumerable}~$A$ تقبل دالة~!!a{surjective} $f \\colon \\PosInt \\to A$، وأما المجموعة !!{nonenumerable} فلا تقبلها. فمهما أرسلنا !!{element}s~$\\PosInt$، على ما فيها من اللانهاية، إلى~$A$، لم نستوف بذلك~$A$. فكأن !!{element}s~$A$ «أكثر عددًا» حتى من الأعداد الصحيحة الموجبة التي لا نهاية لها.\n\n\\textbf{تنبيه تصحيحي على الأصل.} قُيّدت دعوى وجود الدالة الشاملة بكون\nالمجموعة غير خالية؛ إذ لا توجد دالة كلية من الصحيحات الموجبة إلى المجموعة الخالية،\nمع أن الخالية داخلة في المجموعات المعدودة بحسب التعريف المتقدم.\n\nوطريق إثبات أن المجموعة !!{nonenumerable} أن ننفي إمكان تلك الدالة الشاملة؛ ومعناه أن عناصر~$A$ لا تستوعبها قائمة لا نهائية تمتد في جهة واحدة. ويكفينا لذلك أن نبين أن كل قائمة من !!{element}s~$A$ يفوتها عنصر على الأقل، أي إن الدالة $f\\colon \\PosInt \\to A$ لا تكون !!{surjective} أيًّا كانت. ولهذا نستعمل \\emph{طريقة كانتور القطرية}: نأخذ قائمة من !!{element}s~$A$، ولتكن $x_1$، $x_2$، \\dots، ثم نبني عنصرًا من~$A$ يقتضي نفس بنائه خروجه عن القائمة.",
+          "excerpt_sha256": "0f3f2f2a2fe379dd14ca25fd3fa8959c7c497fa9a6a9913c68b5204dbd017bb6"
+        }
+      },
+      "patches": [
+        {
+          "before": "ولعل وجود مجموعات !!{nonenumerable} مدعاة للدهشة أصلًا. فلكل مجموعة",
+          "after": "ولعل وجود مجموعات !!{nonenumerable} مدعاة للدهشة أصلًا. فلكل مجموعة غير خالية"
+        },
+        {
+          "before": "من لا نهائيتها.\n\nفكيف نثبت أن مجموعة ما !!{nonenumerable}؟ لا بد أن نبين أنه لا يمكن",
+          "after": "من لا نهائيتها.\n\n\\textbf{تنبيه تصحيحي على الأصل.} قُيّدت دعوى وجود الدالة الشاملة بكون\nالمجموعة غير خالية؛ إذ لا توجد دالة كلية من الصحيحات الموجبة إلى المجموعة الخالية،\nمع أن الخالية داخلة في المجموعات المعدودة بحسب التعريف المتقدم.\n\nفكيف نثبت أن مجموعة غير خالية !!{nonenumerable}؟ لا بد أن نبين أنه لا يمكن"
+        }
+      ],
+      "verification": {
+        "exact_inverse_matches_before_hash": true,
+        "inline_formulas_unchanged": true,
+        "formal_blocks_unchanged": true,
+        "classical_unchanged": true,
+        "english_unchanged": true,
+        "active_literal_phrase_fields_verified": true
+      },
+      "implementation_status": "implemented-and-byte-verified"
+    },
+    {
+      "unit_id": "OLP-0039",
+      "human_topic": "nonenumerability / no bijection / no surjection",
+      "source_term": "nonenumerable",
+      "before_arabic": "هو القول",
+      "chosen_arabic": "يقتضي",
+      "classical_arabic": "يقتضي",
+      "additional_phrase_choices": [
+        {
+          "choice_id": "0039-P1-no-surjection-connective",
+          "human_topic": "A stronger no-surjection consequence, not an equivalent paraphrase of no bijection",
+          "source_term": "that is",
+          "before_arabic": "أي لا توجد دالة",
+          "chosen_arabic": "بل لا توجد دالة",
+          "classical_arabic": "بل لا توجد دالة",
+          "rationale": "English that is and retained MSA أي introduce an allegedly equivalent paraphrase. No bijection and no surjection are not equivalent for a singleton. بل separately strengthens the consequence of nonenumerability, matching the actual Classical connective. The listed phrases are literal source text, not an ellipsis joining separate occurrences.",
+          "expert_review": {
+            "useful": true,
+            "question": "Does بل لا توجد دالة clearly strengthen the consequence rather than present no surjection as synonymous with no bijection?",
+            "open_to_correction": true,
+            "official_attestation_claimed": false,
+            "non_blocking": true
+          },
+          "locations": {
+            "english": {
+              "line_start": 28,
+              "line_end": 28,
+              "path": "content/sets-functions-relations/size-of-sets/non-enumerability-alt.tex",
+              "sha256": "0c20a2c420fbf4dbd801bb97e37799b3c602ae33ef2b1dc85ff94e24208ca2bb",
+              "excerpt": "\\colon \\Nat \\to A$; that is, no function mapping the infinitely many",
+              "excerpt_sha256": "ed17dc7bf0b0e328c1f7f9bfa9c3653eeea4d00207c398345bb4bf155c7528cf"
+            },
+            "msa_before": {
+              "line_start": 27,
+              "line_end": 27,
+              "path": "source/locale/ar/content/sets-functions-relations/size-of-sets/non-enumerability-alt.tex",
+              "sha256": "220397cac793278ce81ab7115d91df5c23dad9946c476d5e6d38bc2596a3c5ec",
+              "excerpt": "\\colon \\Nat \\to A$؛ أي لا توجد دالة ترسل !!{element}s~$\\Nat$،",
+              "excerpt_sha256": "7836c42e52e4165fcf2dd0eef81aecf53a9e878ac14b3d50b0b9ca89fee81e5f"
+            },
+            "msa": {
+              "line_start": 27,
+              "line_end": 27,
+              "path": "source/locale/ar/content/sets-functions-relations/size-of-sets/non-enumerability-alt.tex",
+              "sha256": "34f35fe15bda03d978b2b6176f8f2f5899ba9fa06b592dbaec27edaa1a51bad8",
+              "excerpt": "\\colon \\Nat \\to A$؛ بل لا توجد دالة ترسل !!{element}s~$\\Nat$،",
+              "excerpt_sha256": "ac081e2773fffb9b02fddd6f3d0cad957de2cb03bd8721c69ecc1d63996f3363"
+            },
+            "classical": {
+              "line_start": 21,
+              "line_end": 21,
+              "path": "source/locale/ar-classical/content/sets-functions-relations/size-of-sets/non-enumerability-alt.tex",
+              "sha256": "188cbb92250ed4cae9dfb1c4879501fc27e12960d0d2b424b0c2c6deabebc714",
+              "excerpt": "\\colon \\Nat \\to A$. بل لا توجد دالة ترسل !!{element}s~$\\Nat$، على كثرتها التي لا تنتهي، إلى~$A$ وتستوفي~$A$. فإذا كانت $A$ !!{nonenumerable}، ففي~$A$ !!{element}s «أكثر» من الأعداد الطبيعية.",
+              "excerpt_sha256": "5658a5246ed256288ce3819b1515a7390d85c2500c22f56207b5a0a437474640"
+            }
+          },
+          "patches": [
+            {
+              "before": "\\colon \\Nat \\to A$؛ أي لا توجد دالة ترسل !!{element}s~$\\Nat$،",
+              "after": "\\colon \\Nat \\to A$؛ بل لا توجد دالة ترسل !!{element}s~$\\Nat$،"
+            }
+          ],
+          "unit_patch_indices": [
+            0
+          ],
+          "patch_application_note": "This exact phrase patch is contained in the unit's full inverse patch; it documents the second choice and must not be applied a second time."
+        }
+      ],
+      "sense": "Nonenumerability implies absence of a Nat bijection and, more strongly, absence of a Nat surjection. Absence of a Nat bijection alone is not a definition of nonenumerability for arbitrary sets.",
+      "rationale": "The English equates nonenumerability with having no bijection from Nat, then equates that absence with having no surjection. MSA repeats these equivalences. Classical correctly uses implication and separates the stronger no-surjection assertion. A singleton is enumerable, has a constant surjection from Nat, but cannot have a Nat bijection. We replace هو القول with يقتضي and the explanatory أي with strengthening بل, retaining every existing formula, quantifier and later proof. This corrects an inherited source overstatement; it is not a claim that the English explicitly made the needed distinction.",
+      "counterexample": "A={0} has a finite enumeration and constant surjection f(n)=0 from Nat. Any function into {0} sends distinct 0 and 1 to the same value, so no such function is injective or bijective.",
+      "finding_id": "0039-P1",
+      "classification": "inherited-source-implication-scope-already-correct-in-classical",
+      "alternatives": [
+        {
+          "form": "restrict A explicitly to infinite sets before stating the equivalence",
+          "disposition": "not selected",
+          "reason": "Mathematically sufficient, but the Classical implication wording is narrower textually and preserves the paragraph's arbitrary-set context without redefining enumerable."
+        }
+      ],
+      "expert_review": {
+        "useful": true,
+        "question": "Do يقتضي and بل clearly distinguish a necessary no-bijection consequence from the stronger no-surjection assertion? Please check that finite sets, including a singleton, are not labelled nonenumerable merely because they lack a Nat bijection.",
+        "open_to_correction": true,
+        "official_attestation_claimed": false,
+        "non_blocking": true
+      },
+      "locations": {
+        "english": {
+          "path": "content/sets-functions-relations/size-of-sets/non-enumerability-alt.tex",
+          "bytes": 6735,
+          "sha256": "0c20a2c420fbf4dbd801bb97e37799b3c602ae33ef2b1dc85ff94e24208ca2bb",
+          "line_start": 26,
+          "line_end": 31,
+          "excerpt": "This might be surprising. After all, to say that $A$ is\n!!{nonenumerable} is to say that there is \\emph{no} !!{bijection} $f\n\\colon \\Nat \\to A$; that is, no function mapping the infinitely many\n!!{element}s of~$\\Nat$ to~$A$ exhausts all of~$A$.  So if $A$ is\n!!{nonenumerable}, there are ``more'' !!{element}s of~$A$ than there\nare natural numbers.",
+          "excerpt_sha256": "d095db994384f11c141c8ee22689e7332c813440c82ba57f0b2e442ba84a124d"
+        },
+        "msa": {
+          "path": "source/locale/ar/content/sets-functions-relations/size-of-sets/non-enumerability-alt.tex",
+          "before_sha256": "220397cac793278ce81ab7115d91df5c23dad9946c476d5e6d38bc2596a3c5ec",
+          "before_bytes": 9163,
+          "line_start": 25,
+          "line_end": 30,
+          "after_sha256": "34f35fe15bda03d978b2b6176f8f2f5899ba9fa06b592dbaec27edaa1a51bad8",
+          "after_bytes": 9149,
+          "excerpt": "قد يبدو ذلك مفاجئًا. ففي نهاية المطاف، كون $A$\n!!{nonenumerable} يقتضي أنه لا توجد \\emph{أي} !!{bijection} $f\n\\colon \\Nat \\to A$؛ بل لا توجد دالة ترسل !!{element}s~$\\Nat$،\nوهي لا نهائية العدد، إلى~$A$ وتستنفد~$A$ كلها. فإذا كانت $A$\n!!{nonenumerable}، كان في~$A$ !!{element}s «أكثر» مما في مجموعة\nالأعداد الطبيعية.",
+          "excerpt_sha256": "6d94efd404e6dd8eafc949593f740f22073e2a640ec5b2e9bc6ccfdc22cbb866",
+          "changed_ranges": [
+            [
+              25,
+              27
+            ]
+          ],
+          "before_line_start": 25,
+          "before_line_end": 30,
+          "before_excerpt": "قد يبدو ذلك مفاجئًا. ففي نهاية المطاف، القول إن $A$\n!!{nonenumerable} هو القول إنه لا توجد \\emph{أي} !!{bijection} $f\n\\colon \\Nat \\to A$؛ أي لا توجد دالة ترسل !!{element}s~$\\Nat$،\nوهي لا نهائية العدد، إلى~$A$ وتستنفد~$A$ كلها. فإذا كانت $A$\n!!{nonenumerable}، كان في~$A$ !!{element}s «أكثر» مما في مجموعة\nالأعداد الطبيعية.",
+          "before_excerpt_sha256": "3383d9bd670c92f23e6756fd4da4983bee7b8c855afe9554c7b69591a43ff29a",
+          "before_excerpt_provenance": "Exact inverse of the recorded patches, verified against the whole-file before SHA-256; no invented original source."
+        },
+        "classical": {
+          "path": "source/locale/ar-classical/content/sets-functions-relations/size-of-sets/non-enumerability-alt.tex",
+          "bytes": 8078,
+          "sha256": "188cbb92250ed4cae9dfb1c4879501fc27e12960d0d2b424b0c2c6deabebc714",
+          "line_start": 20,
+          "line_end": 23,
+          "excerpt": "وقد يستغرب هذا؛ فإن كون $A$ !!{nonenumerable} يقتضي \\emph{انتفاء} كل !!{bijection} $f\n\\colon \\Nat \\to A$. بل لا توجد دالة ترسل !!{element}s~$\\Nat$، على كثرتها التي لا تنتهي، إلى~$A$ وتستوفي~$A$. فإذا كانت $A$ !!{nonenumerable}، ففي~$A$ !!{element}s «أكثر» من الأعداد الطبيعية.\n\nفسبيل إثبات أن المجموعة !!{nonenumerable} أن ننفي وجود !!{bijection} على الوجه المطلوب. ويكفي لذلك أن نبرهن أن كل محاولة لتعداد !!{element}s~$A$ تفوت !!{element} واحدًا على الأقل؛ فتكون كل دالة $f\\colon \\Nat \\to A$ غير !!{surjective}. وطريقة كانتور \\emph{القطرية} سبيل عام إلى هذا النفي: تعطى قائمة من !!{element}s~$A$، ولتكن $x_1$، $x_2$، \\dots، فننشئ !!{element} من~$A$ يمتنع، بحكم إنشائه، أن يكون في القائمة.",
+          "excerpt_sha256": "d73e2965146ba23c0b6bb24260452099d78daf8c91dc28aeecfa091a240596ba"
+        }
+      },
+      "patches": [
+        {
+          "before": "قد يبدو ذلك مفاجئًا. ففي نهاية المطاف، القول إن $A$\n!!{nonenumerable} هو القول إنه لا توجد \\emph{أي} !!{bijection} $f\n\\colon \\Nat \\to A$؛ أي لا توجد دالة ترسل !!{element}s~$\\Nat$،",
+          "after": "قد يبدو ذلك مفاجئًا. ففي نهاية المطاف، كون $A$\n!!{nonenumerable} يقتضي أنه لا توجد \\emph{أي} !!{bijection} $f\n\\colon \\Nat \\to A$؛ بل لا توجد دالة ترسل !!{element}s~$\\Nat$،"
+        }
+      ],
+      "verification": {
+        "exact_inverse_matches_before_hash": true,
+        "inline_formulas_unchanged": true,
+        "formal_blocks_unchanged": true,
+        "classical_unchanged": true,
+        "english_unchanged": true,
+        "active_literal_phrase_fields_verified": true
+      },
+      "implementation_status": "implemented-and-byte-verified"
+    },
+    {
+      "unit_id": "OLP-0072",
+      "human_topic": "no restrictions on t / eigenvariable condition",
+      "source_term": "no restrictions",
+      "before_arabic": "لا ترد أي قيود على الحد",
+      "chosen_arabic": "لا ترد أي قيود من جهة المتغير المميَّز على الحد",
+      "classical_arabic": "من جهة المتغير المميَّز",
+      "sense": "Existential-right and universal-left permit arbitrary closed terms without eigenvariable freshness restrictions; they do not permit open terms in this presentation.",
+      "rationale": "Both English and MSA first require t to be closed, then say there are no restrictions on t. Classical limits the latter statement to eigenvariable restrictions. We insert من جهة المتغير المميَّز, retaining MSA's existing spelling of eigenvariable. The earlier closedness requirements, the eigenconstant conditions for the other two rules, all rule schemas and the invalid derivation example stay exactly unchanged. This is an inherited expository scope clarification, not evidence that the formal calculus previously admitted open terms.",
+      "counterexample": "A variable x is a term but is not closed. The unrestricted literal reading would admit it, contrary to the explicit closed-term condition. A constant c is closed and may already occur in the surrounding sequent for existential-right/universal-left; the other quantifier rules impose their own freshness conditions.",
+      "finding_id": "0072-P1",
+      "classification": "inherited-source-scope-clarification-already-correct-in-classical",
+      "alternatives": [
+        {
+          "form": "repeat the closed-term requirement instead of naming the missing restriction",
+          "disposition": "not selected",
+          "reason": "Closedness is already stated twice. Naming the scope of the absent restriction directly resolves the apparent conflict and preserves the contrast with eigenvariable rules."
+        }
+      ],
+      "expert_review": {
+        "useful": true,
+        "question": "Does من جهة المتغير المميَّز make it clear that arbitrary choice among closed terms is allowed without removing closedness? Is المتغير المميَّز understood as the historical name for a constant/eigenparameter in these rules?",
+        "open_to_correction": true,
+        "official_attestation_claimed": false,
+        "non_blocking": true
+      },
+      "locations": {
+        "english": {
+          "path": "content/first-order-logic/sequent-calculus/quantifier-rules.tex",
+          "bytes": 3956,
+          "sha256": "254abc98503c7370e046c43f8fec7cf7b5e9909be2959b0f1c513bb278d85b78",
+          "line_start": 80,
+          "line_end": 86,
+          "excerpt": "In \\RightR{\\lexists} and \\LeftR{\\lforall} there are no restrictions on\nthe term~$t$. On the other hand, in the \\LeftR{\\lexists} and\n\\RightR{\\lforall} rules, the eigenvariable condition requires that the\n!!{constant}~$a$ does not occur anywhere outside of~$!A(a)$ in the\nupper sequent. It is necessary to ensure that the system is sound,\ni.e., only !!{derive}s sequents that are valid. Without this\ncondition, the following would be allowed:",
+          "excerpt_sha256": "f8efd42c43d6950befabb940c4a8ab1ec2a26742e1b1cb0fb5fb13d865942e68"
+        },
+        "msa": {
+          "path": "source/locale/ar/content/first-order-logic/sequent-calculus/quantifier-rules.tex",
+          "before_sha256": "910cb388472402e3f5e26f55d96aab0fbd5c8b3fc18fbffbe1861ea9d8302fb9",
+          "before_bytes": 4469,
+          "line_start": 81,
+          "line_end": 86,
+          "after_sha256": "acbfdf7dfcf111cde788957becd9fdd0a03f9d736baa907b59bac3e8b2aee657",
+          "after_bytes": 4513,
+          "excerpt": "لا ترد أي قيود من جهة المتغير المميَّز على الحد~$t$ في~\\RightR{\\lexists}\nو~\\LeftR{\\lforall}. أما في قاعدتي~\\LeftR{\\lexists}\nو~\\RightR{\\lforall}، فيقتضي شرط المتغير المميَّز ألا يرد\nال!!{constant}~$a$ في أي موضع خارج~$!A(a)$ في التتابعية العليا.\nوهذا ضروري لضمان سلامة النظام، أي إنه لا !!{derive}s إلا تتابعيات\nصالحة. ومن دون هذا الشرط كان ما يأتي جائزًا:",
+          "excerpt_sha256": "fe351172e8529055924a71264ac0f22c9643bac02709740d140fd1866f14185a",
+          "changed_ranges": [
+            [
+              81,
+              81
+            ]
+          ],
+          "before_line_start": 81,
+          "before_line_end": 86,
+          "before_excerpt": "لا ترد أي قيود على الحد~$t$ في~\\RightR{\\lexists}\nو~\\LeftR{\\lforall}. أما في قاعدتي~\\LeftR{\\lexists}\nو~\\RightR{\\lforall}، فيقتضي شرط المتغير المميَّز ألا يرد\nال!!{constant}~$a$ في أي موضع خارج~$!A(a)$ في التتابعية العليا.\nوهذا ضروري لضمان سلامة النظام، أي إنه لا !!{derive}s إلا تتابعيات\nصالحة. ومن دون هذا الشرط كان ما يأتي جائزًا:",
+          "before_excerpt_sha256": "97f99fbdbdc840e2b8425ea96963f92b8b96233f12b45ca914f47cdd4a8e13f7",
+          "before_excerpt_provenance": "Exact inverse of the recorded patches, verified against the whole-file before SHA-256; no invented original source."
+        },
+        "classical": {
+          "path": "source/locale/ar-classical/content/first-order-logic/sequent-calculus/quantifier-rules.tex",
+          "bytes": 4324,
+          "sha256": "f00e5ad1a829a1717b132b40f6f1f38e732c724d0961c7d1ea96704d1ded230e",
+          "line_start": 76,
+          "line_end": 79,
+          "excerpt": "لا قيد على الحد~$t$ في~\\RightR{\\lexists}\nو~\\LeftR{\\lforall} من جهة المتغير المميَّز. وأما~\\LeftR{\\lexists}\nو~\\RightR{\\lforall} فشرطهما ألا يقع ال!!{constant}~$a$ في التتابعية العليا خارج~$!A(a)$.\nولا تستقيم سلامة النظام من غير هذا الشرط، أعني ألا !!{derive}s إلا التتابعيات الصالحة. إذ لو أُسقط لجاز ما يأتي:",
+          "excerpt_sha256": "cd7c95ce258f6e313c28c3df31edb0b5c571ac1e88bb64aedf84de78f0713903"
+        }
+      },
+      "patches": [
+        {
+          "before": "لا ترد أي قيود على الحد~$t$ في~\\RightR{\\lexists}",
+          "after": "لا ترد أي قيود من جهة المتغير المميَّز على الحد~$t$ في~\\RightR{\\lexists}"
+        }
+      ],
+      "verification": {
+        "exact_inverse_matches_before_hash": true,
+        "inline_formulas_unchanged": true,
+        "formal_blocks_unchanged": true,
+        "classical_unchanged": true,
+        "english_unchanged": true,
+        "active_literal_phrase_fields_verified": true
+      },
+      "implementation_status": "implemented-and-byte-verified"
+    },
+    {
+      "unit_id": "OLP-0081",
+      "human_topic": "if any of the soundness properties do not hold",
+      "source_term": "do not hold",
+      "before_arabic": "فإذا لم تتحقق أي منها",
+      "chosen_arabic": "فإذا تخلّفت واحدة على الأقل منها",
+      "classical_arabic": "فإذا تخلف شيء منها",
+      "sense": "Failure of at least one of the three required soundness properties is enough; it is not necessary for all three properties to fail.",
+      "rationale": "English says if any of the properties do not hold; Classical accurately says إذا تخلف شيء منها. The retained MSA فإذا لم تتحقق أي منها can naturally mean that none holds. We make the intended scope explicit with واحدة على الأقل, so one or more failed requirements suffice. This is a translation-level quantifier-scope ambiguity, not an inherited English error. The three properties themselves, the soundness theorem, all semantic arguments and prior source-correction notes are untouched.",
+      "counterexample": "For the Boolean valuation (true,true,false), at least one requirement fails, but it is false that none holds. This truth-assignment counterexample distinguishes the two readings of the sentence; it does not assert that a particular proof calculus realizes independently varying soundness properties.",
+      "finding_id": "0081-P1",
+      "classification": "translation-any-versus-none-scope-ambiguity-already-correct-in-classical",
+      "alternatives": [
+        {
+          "form": "فإذا تخلّفت إحدى هذه الخصائص",
+          "disposition": "not selected",
+          "reason": "Also expresses failure of one required property, but واحدة على الأقل makes explicit that the condition includes multiple failures and is not exactly-one."
+        }
+      ],
+      "expert_review": {
+        "useful": true,
+        "question": "Does فإذا تخلّفت واحدة على الأقل منها clearly express that any single failed requirement suffices, while including cases where more than one fails? Please preserve the distinction between السلامة of the calculus and الصلاحية of sequents.",
+        "open_to_correction": true,
+        "official_attestation_claimed": false,
+        "non_blocking": true
+      },
+      "locations": {
+        "english": {
+          "path": "content/first-order-logic/sequent-calculus/soundness.tex",
+          "bytes": 18047,
+          "sha256": "d9f6180bee35f29553144b6eca5a1eb1916e0262dcdc8c30f50193a53d8001fa",
+          "line_start": 21,
+          "line_end": 30,
+          "excerpt": "\\begin{enumerate}\n\\item every !!{derivable}~$!A$ is \\iftag{FOL}{valid}{a tautology};\n\\item if !!a{sentence} is !!{derivable} from some others, it is also a\n  consequence of them;\n\\item if a set of !!{sentence}s is inconsistent, it is unsatisfiable.\n\\end{enumerate}\nThese are important properties of !!a{derivation} system.  If any of\nthem do not hold, the !!{derivation} system is deficient---it would\n!!{derive} too much.  Consequently, establishing the soundness of a\n!!{derivation} system is of the utmost importance.",
+          "excerpt_sha256": "d3170945d40d4e693a63523de52b941cd68917e1f77781ca514ed8038c1aa616"
+        },
+        "msa": {
+          "path": "source/locale/ar/content/first-order-logic/sequent-calculus/soundness.tex",
+          "before_sha256": "6c9d2a0e01db0c58202f7f71a5ffd3309e973fa8ab1e06cca190b3728f64bfcb",
+          "before_bytes": 21655,
+          "line_start": 20,
+          "line_end": 29,
+          "after_sha256": "6c4b8d5dfd1d258f936be7c5d0be4e2c3ddf2598dda118120ac873c6c36979dc",
+          "after_bytes": 21676,
+          "excerpt": "\\begin{enumerate}\n\\item كل~$!A$ !!{derivable} تكون \\iftag{FOL}{صالحة}{تحصيل حاصل}؛\n\\item إذا كانت !!a{sentence} !!{derivable} من جمل أخرى، فهي أيضًا\n  نتيجة لها؛\n\\item إذا كانت مجموعة من ال!!{sentence}s غير متسقة، فهي غير قابلة\n  للإرضاء.\n\\end{enumerate}\nهذه خصائص مهمة لنسق !!a{derivation}. فإذا تخلّفت واحدة على الأقل منها، كان نسق\nال!!{derivation} معيبًا---إذ يكون قادرًا على !!{derive} أكثر مما ينبغي.\nولذلك فإن إثبات سلامة نسق ال!!{derivation} في غاية الأهمية.",
+          "excerpt_sha256": "07d1e2396ed630c3671230b4aa696c33026a3ebdcf5fb8fbddb4bc071cc75423",
+          "changed_ranges": [
+            [
+              27,
+              27
+            ]
+          ],
+          "before_line_start": 20,
+          "before_line_end": 29,
+          "before_excerpt": "\\begin{enumerate}\n\\item كل~$!A$ !!{derivable} تكون \\iftag{FOL}{صالحة}{تحصيل حاصل}؛\n\\item إذا كانت !!a{sentence} !!{derivable} من جمل أخرى، فهي أيضًا\n  نتيجة لها؛\n\\item إذا كانت مجموعة من ال!!{sentence}s غير متسقة، فهي غير قابلة\n  للإرضاء.\n\\end{enumerate}\nهذه خصائص مهمة لنسق !!a{derivation}. فإذا لم تتحقق أي منها، كان نسق\nال!!{derivation} معيبًا---إذ يكون قادرًا على !!{derive} أكثر مما ينبغي.\nولذلك فإن إثبات سلامة نسق ال!!{derivation} في غاية الأهمية.",
+          "before_excerpt_sha256": "a7f68dea33ff9fc836a3517b04480081ab1b445ab573df29d43d1374915dcaa9",
+          "before_excerpt_provenance": "Exact inverse of the recorded patches, verified against the whole-file before SHA-256; no invented original source."
+        },
+        "classical": {
+          "path": "source/locale/ar-classical/content/first-order-logic/sequent-calculus/soundness.tex",
+          "bytes": 20697,
+          "sha256": "1d454b3e2de754537de7f02c80bb32750ee1e2e2cbd3b52e4c755dae80bf16ca",
+          "line_start": 19,
+          "line_end": 27,
+          "excerpt": "\\begin{enumerate}\n\\item كل~$!A$ !!{derivable} تكون \\iftag{FOL}{صالحة}{تحصيل حاصل}؛\n\\item إذا كانت !!a{sentence} !!{derivable} من جمل أخرى، فهي أيضًا\n  نتيجة لها؛\n\\item إذا كانت مجموعة من ال!!{sentence}s غير متسقة، فهي غير قابلة\n  للإرضاء.\n\\end{enumerate}\nهذه خصائص لا يستغني عنها نظام !!a{derivation}. فإذا تخلف شيء منها كان نظام ال!!{derivation} معيبًا، لأنه يتيح\n!!{derive} ما لا ينبغي إثباته. فإقامة السلامة لنظام ال!!{derivation} من أهم ما يلزم.",
+          "excerpt_sha256": "3832f256fd51a16a15b0fc34e61080cc9a63bdec65d0b85c987af2a25c362dd3"
+        }
+      },
+      "patches": [
+        {
+          "before": "هذه خصائص مهمة لنسق !!a{derivation}. فإذا لم تتحقق أي منها، كان نسق",
+          "after": "هذه خصائص مهمة لنسق !!a{derivation}. فإذا تخلّفت واحدة على الأقل منها، كان نسق"
+        }
+      ],
+      "verification": {
+        "exact_inverse_matches_before_hash": true,
+        "inline_formulas_unchanged": true,
+        "formal_blocks_unchanged": true,
+        "classical_unchanged": true,
+        "english_unchanged": true,
+        "active_literal_phrase_fields_verified": true
+      },
+      "implementation_status": "implemented-and-byte-verified"
+    }
+  ],
+  "affected_msa_profiles": [
+    "international",
+    "machrek"
+  ],
+  "printed_page": null,
+  "page_status": "bind-after-final-reader-build",
+  "rebuilt_pdf_verified": false,
+  "published_pdf_verified": false,
+  "supporting_primary_witnesses": [
+    {
+      "unit_id": "OLP-0033",
+      "source_kind": "english",
+      "path": "content/sets-functions-relations/size-of-sets/enumerability.tex",
+      "bytes": 12285,
+      "sha256": "7657db317a07eef9cd5497ad88997483dd43c9f94f27d257abe857084886a2fe",
+      "line_start": 64,
+      "line_end": 64,
+      "excerpt": "\\item The empty set is enumerable: it is enumerated by the empty list!{}",
+      "excerpt_sha256": "ae8c1012d8e7f9cc906c03139ebb8c47b6ded8cb3f04c2ddaff85af2bd2ad24f"
+    },
+    {
+      "unit_id": "OLP-0039",
+      "source_kind": "english",
+      "path": "content/sets-functions-relations/size-of-sets/enumerability-alt.tex",
+      "bytes": 4883,
+      "sha256": "8ad8d8941a5ca6d1b4cd2cc351fc16a912d00273783c0358838dd4fa51fb4627",
+      "line_start": 39,
+      "line_end": 43,
+      "excerpt": "\\begin{defn}[Enumeration, set-theoretic] \nAn \\emph{enumeration} of a set $A$ is !!a{bijection} whose range is\n$A$ and whose domain is either an initial set of natural numbers $\\{0,\n1, \\ldots, n\\}$ {or} the entire set of natural numbers~$\\Nat$. \n\\end{defn}",
+      "excerpt_sha256": "abf53cfcd05d061a9d81f8b80efe5fb6b17a8496ed41f532027df7a001c6260c"
+    },
+    {
+      "unit_id": "OLP-0039",
+      "source_kind": "english",
+      "path": "content/sets-functions-relations/size-of-sets/enumerability-alt.tex",
+      "bytes": 4883,
+      "sha256": "8ad8d8941a5ca6d1b4cd2cc351fc16a912d00273783c0358838dd4fa51fb4627",
+      "line_start": 57,
+      "line_end": 62,
+      "excerpt": "\\begin{defn}\n  \\ollabel{defn:enumerable}\n  A set~$A$ is !!{enumerable} iff either $A = \\emptyset$ or there is\n  an enumeration of~$A$. We say that $A$ is !!{nonenumerable} iff $A$\n  is not !!{enumerable}.\n\\end{defn}",
+      "excerpt_sha256": "7ee91fa022d9fd72476e4a6eda19d5b80eb8734b79ab88aaca5e57c6822b5b34"
+    },
+    {
+      "unit_id": "OLP-0072",
+      "source_kind": "english",
+      "path": "content/first-order-logic/sequent-calculus/quantifier-rules.tex",
+      "bytes": 3956,
+      "sha256": "254abc98503c7370e046c43f8fec7cf7b5e9909be2959b0f1c513bb278d85b78",
+      "line_start": 27,
+      "line_end": 32,
+      "excerpt": "In \\LeftR{\\lforall}, $t$ is a closed term (i.e., one without\nvariables). In \\RightR{\\lforall}, $a$~is !!a{constant} which must not\noccur anywhere in the lower sequent of the \\RightR{\\lforall} rule. We\ncall $a$ the \\emph{eigenvariable} of the \\RightR{\\forall}\ninference.\\footnote{We use the term ``eigenvariable'' even though $a$\nin the above rule is !!a{constant}. This has historical reasons.}",
+      "excerpt_sha256": "f5a373a635d9111a5f599b7e17981ea8932e4a6c11066c4cf9c79dc8d123a1cf"
+    },
+    {
+      "unit_id": "OLP-0072",
+      "source_kind": "english",
+      "path": "content/first-order-logic/sequent-calculus/quantifier-rules.tex",
+      "bytes": 3956,
+      "sha256": "254abc98503c7370e046c43f8fec7cf7b5e9909be2959b0f1c513bb278d85b78",
+      "line_start": 48,
+      "line_end": 54,
+      "excerpt": "Again, $t$~is a closed term, and $a$~is !!a{constant} which does not\noccur in the lower sequent of the \\LeftR{\\lexists} rule. We call $a$\nthe \\emph{eigenvariable} of the \\LeftR{\\lexists} inference.\n\nThe condition that an eigenvariable not occur in the lower sequent of\nthe \\RightR{\\lforall} or \\LeftR{\\lexists} inference is called the\n\\emph{eigenvariable condition}.",
+      "excerpt_sha256": "49b99568053b0e8185d6bbec85e85f90345f1cf61e949f6b582e09365a7ba24f"
+    }
+  ],
+  "source_boundaries": {
+    "msa_paths": [
+      "source/locale/ar/content/sets-functions-relations/size-of-sets/non-enumerability.tex",
+      "source/locale/ar/content/sets-functions-relations/size-of-sets/non-enumerability-alt.tex",
+      "source/locale/ar/content/first-order-logic/sequent-calculus/quantifier-rules.tex",
+      "source/locale/ar/content/first-order-logic/sequent-calculus/soundness.tex"
+    ],
+    "english_and_classical_read_only": true,
+    "unrelated_proofs_and_formulas_unchanged": true
+  }
+}

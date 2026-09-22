@@ -9,6 +9,15 @@
 - [المصادر وأدلة البناء والتحقق](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-complete-dual-notation-r2-20260903/02_OPENLOGIC_ar_COMPLETE_DUAL_NOTATION_SOURCES_AND_EVIDENCE_OLP-0722.zip)
 - [بيان SHA-256](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-complete-dual-notation-r2-20260903/03_OPENLOGIC_ar_COMPLETE_DUAL_NOTATION_SHA256_OLP-0722.txt)
 
+## سجل مراجعة اختيارات الترجمة
+
+أصبح لكل اختيار من اختيارات الفهرس الحالي تعليل خاص وسؤال مراجعة صريح، ويمكن للمختصين البدء بالمراجعة الآن:
+
+- [ابدأ هنا: المدخل العربي للمراجعين](expert-review/2026-09-22-complete-questions/START_HERE.md)
+- [القائمة الكاملة للاختيارات والمواضع والتعليلات والأسئلة](expert-review/2026-09-22-complete-questions/FULL_LIST.md)
+
+يضم السجل ١٠٩٥ اختيارًا؛ ولم يبق اختيار موسوم بلا سؤال خبير صريح. المراجعة البشرية فرصة للتصحيح والتحسين وليست شرطًا لاستمرار العمل أو إتاحته. أنتج المعالجة والترجمة والتدقيق الاصطناعي: **OpenAI Codex — GPT-5.6 Sol, Ultra effort**.
+
 ## معنى الاكتمال
 
 يحتوي كل ملف PDF على جميع ملفات المحتوى الإنجليزي المتتبّعة البالغ عددها 722 ملفًا في صورة عربية. يصل مسار الكتاب الاعتيادي في المصدر إلى 642 وحدة؛ أما الوحدات الثمانون الأخرى، ومنها مشغلات وفصول بديلة، فأُدرجت داخل كل ملف في قسم تقني لاحق. لذلك لا توجد «نسخة ناقصة» ولا حاجة إلى تنزيل ملحق منفصل.
