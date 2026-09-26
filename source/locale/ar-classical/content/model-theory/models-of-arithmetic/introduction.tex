@@ -1,0 +1,70 @@
+% Part: model-theory
+% Chapter: models-of-arithmetic
+% Section: introduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{mar}{int}
+\section{مقدمة}
+
+\emph{النموذج القياسي} للحساب هو الـ!!{structure}~$\Struct{N}$
+ذات المجال $\Domain{N} = \Nat$، حيث تؤول الرموز $\Obj{0}$
+و$\prime$ و$+$ و$\times$ و$<$ بمعانيها المعتادة. فتأويل
+$\Obj{0}$ هو~$0$، وتأويل $\prime$ دالة الخلف، وتأويل $+$
+جمع الأعداد في~$\Nat$، وتأويل $\times$ ضربها، وتأويل $<$
+ترتيبها المعروف. وتفصيل ذلك:
+\begin{align*}
+  \Assign{\Obj{0}}{N} & = 0\\
+  \Assign{\prime}{N}(n) & = n + 1\\
+  \Assign{+}{N}(n, m) & = n + m\\
+  \Assign{\times}{N}(n, m) & = nm\\
+  \Assign{<}{N} & = \Setabs{\tuple{n,m} \in \Nat^2}{n<m}
+\end{align*}
+ولا يلزم أن يكون مجال كل بنية للغة $\Lang{L_A}$ هو~$\Nat$.
+فلنأخذ، مثلًا، $\Struct{M}$ ذات المجال $\Domain{M} = \{a\}^*$،
+وهو المتتاليات المنتهية من الرمز الواحد~$a$:
+$\emptyset$، $a$، $aa$، $aaa$، \dots. ولتكن التأويلات:
+\begin{align*}
+  \Assign{\Obj{0}}{M} & = \emptyset\\
+  \Assign{\prime}{M}(s) & = s \concat a\\
+  \Assign{+}{M}(s, t) & = s \concat t\\
+  \Assign{\times}{M}(s, t) & = a^{\lvert s\rvert\lvert t\rvert}\\
+  \Assign{<}{M} & = \Setabs{\tuple{s,t} \in (\{a\}^*)^2}{\lvert s\rvert<\lvert t\rvert}
+\end{align*}
+البنيتان متفقتان في جوهر بنائهما؛ وإنما تختلف !!{element}s
+الـ!!{domain}s، ولا تختلف الصلات التي تقيمها دوال التأويل بين
+!!{element}s الـ!!{domain}s. ولهذا نقول إن الـ!!{structure}s
+\emph{متشاكلة}.
+
+ومن مبرهنة التراص ينتج بيسر أن كل نظرية تصدق في~$\Struct{N}$
+لها نماذج لا تتشاكل مع~$\Struct{N}$، تسمى \emph{غير قياسية}.
+والفرق الجدير بالنظر أن !!{element}s النموذج القياسي، أي
+$\Struct{N}$ وكل !!{structure}s المتشاكلة معها، تستنفدها قيم
+الأعداد القياسية~$\num{n}$؛ فلدينا:
+\[
+\Domain{N} = \Setabs{\Value{\num{n}}{N}}{n \in \Nat}
+\]
+وأما النموذج غير القياسي فلا تستنفده تلك القيم: إذا كانت
+$\Struct{M}$ غير قياسية، ففيها $x \in \Domain{M}$ يحقق
+$x \neq \Value{\num{n}}{M}$ لكل~$n$.
+
+فهذه العناصر بمثابة «أعداد طبيعية لا نهائية». وبها يتبين،
+من وجه، سبب ظواهر عدم الاكتمال. خذ عبارة اتساق حساب بيانو
+$\OCon[\Th{PA}]$، أي
+$\lnot \lexists[x][\OPrf[\Th{PA}](x, \gn{\lfalse})]$.
+فـ $\Th{PA}$ لا تثبت $\OCon[\Th{PA}]$ ولا $\lnot \OCon[\Th{PA}]$؛
+لذلك تصح إضافة أي منهما إلى $\Th{PA}$ من غير إخلال بالاتساق.
+وبما أن $\Th{PA}$ متسقة، فـ $\Sat{N}{\OCon[\Th{PA}]}$،
+ويلزم $\Sat/{N}{\lnot \OCon[\Th{PA}]}$. وعليه \emph{ليست}
+$\Struct{N}$ نموذجًا لـ $\Th{PA} \cup \{\lnot \OCon[\Th{PA}]\}$،
+فكل نموذج لهذه النظرية غير قياسي. ولا بد في نماذج
+$\Th{PA} \cup \{\lnot \OCon[\Th{PA}]\}$ من !!{element} يشهد
+لصدق $\lexists[x][\OPrf[\Th{PA}](x,\gn{\lfalse})]$؛ أي إنه،
+بحسب النموذج، عدد غودل لـ!!a{derivation} لتناقض من~$\Th{PA}$.
+ولا يكون هذا الـ!!a{element} قياسيًا؛ إذ
+$\Th{PA} \Proves \lnot \OPrf[\Th{PA}](\num{n}, \gn{\lfalse})$
+لكل~$n$.
+
+\end{document}

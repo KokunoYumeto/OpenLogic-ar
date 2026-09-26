@@ -1,0 +1,46 @@
+% Part: lambda-calculus
+% Chapter: lambda-definability
+% Section: lists
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{ldf}{lst}
+\olsection{القوائم}
+
+تُحد القائمة~$[M_1, M_2, \ldots, M_n]$ على الوجه الآتي:
+\[
+  [M_1, M_2, \ldots, M_n] \ident \lambd[sz][s M_1 (s M_2 (\ldots (s M_n z)))]
+\]
+وبعبارة غير صورية، الحد الممثل للقائمة هو دالة التراكم فيها: تقبل حدين؛ أحدهما
+دالة تأخذ القيمة المتراكمة وعنصراً جديداً فترد قيمة متراكمة جديدة، والآخر
+القيمة التي يبدأ بها التراكم. ثم تضم العناصر واحداً بعد واحد، وترد الحاصل
+في آخر العمل.
+
+\begin{digress}
+  ومن عرف البرمجة الدالية رأى الحد شبيهاً بـ\emph{الطي من اليمين}؛ إذ
+  جُعلت القائمة دالة تطوي عناصرها من جهة اليمين.
+\end{digress}
+
+ومن هذا الترميز يسهل أن نحد طائفة من الدوال النافعة:
+\begin{align*}
+  \fn{Sum} & \ident
+  \lambd[l][l \, (\lambd[xa][\fn{Add} \, x \, a])\,  \num{0}]\\
+  \fn{Len} & \ident
+  \lambd[l][l \, (\lambd[xa][\fn{Add} \, a \, \num{1}]) \num{0}]
+\end{align*}
+
+تحسب~$\fn{Sum}$ مجموع قائمة من أرقام تشرش؛ فتجمع القائمة مبتدئة بالقيمة
+~$\num{0}$، وتجعل لكل عنصر~$\fn{Add} \, x\, a$ قيمة التراكم الجديدة،
+حيث~$x$ هو العنصر الحاضر و$a$ القيمة المتراكمة. والحاصل مجموع العناصر
+كلها.
+
+\begin{prob}
+  ما عمل~$\fn{Len}$؟ بيّنه.
+\end{prob}
+
+\begin{prob}
+  حدّ دالة تقلب ترتيب قائمة.
+\end{prob}
+\end{document}

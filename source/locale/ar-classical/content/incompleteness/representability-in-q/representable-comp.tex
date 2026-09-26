@@ -1,0 +1,111 @@
+% Part: incompleteness
+% Chapter: representability-in-q
+% Section: representable-comp
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{req}{rpc}
+\olsection{الدوال القابلة للتمثيل في $\Th{Q}$ قابلة للحساب}
+
+نبدأ بإثبات أن قابلية الدالة للتمثيل في~$\Th{Q}$ تستلزم قابليتها للحساب.
+ونقدّم لذلك لمة في الدوال القابلة للتمثيل في~$\Th{Q}$.
+
+\begin{lem}\ollabel{lem:rep-q}
+  لتكن $f(x_0,\dots,x_k)$ قابلة للتمثيل في~$\Th{Q}$. حينئذ توجد
+  !!a{formula}~$!A_f(x_0,\dots,x_k,y)$ تحقق:
+  \[
+  \Th{Q} \Proves !A_f(\num{n_0}, \dots, \num{n_k}, \num{m})
+  \quad\text{إذا وفقط إذا}\quad m = f(n_0, \dots, n_k).
+  \]
+\end{lem}
+
+\begin{proof}
+أما اتجاه «إذا» فمقتضى
+\olref[int]{defn:representable-fn}\olref[int]{defn:rep:a}.
+وأما اتجاه «فقط إذا»، فنبرهنه بالخلف. لنفرض
+$\Th{Q}\Proves !A_f(\num{n_0},\dots,\num{n_k},\num{m})$ مع
+$m\neq f(n_0,\dots,n_k)$، ولنضع $l=f(n_0,\dots,n_k)$.
+فمن \olref[int]{defn:representable-fn}\olref[int]{defn:rep:a} نحصل على
+$\Th{Q}\Proves !A_f(\num{n_0},\dots,\num{n_k},\num{l})$.
+ومن \olref[int]{defn:representable-fn}\olref[int]{defn:rep:b} نحصل على
+$\Th{Q}\Proves
+\lforall[y][(!A_f(\num{n_0},\dots,\num{n_k},y)\lif\num{l}=y)]$.
+فإذا استعملنا قواعد المنطق وفرضنا
+$\Th{Q}\Proves !A_f(\num{n_0},\dots,\num{n_k},\num{m})$، لزم
+$\Th{Q}\Proves\eq[\num{l}][\num{m}]$.
+لكن \olref[bre]{lem:q-proves-neq} يعطينا أيضًا
+$\Th{Q}\Proves\eq/[\num{l}][\num{m}]$؛ فتكون $\Th{Q}$ غير متسقة.
+وهذا ممتنع: فإن النموذج القياسي يحقق $\Th{Q}$
+(انظر \olref[int][def]{def:standard-model})، أي إن $\Sat{N}{\Th{Q}}$،
+وكل نظرية قابلة للتحقيق متسقة بمبرهنة السلامة
+(\tagrefs{prfAX/{fol:axd:sou:cor:consistency-soundness},
+prfSC/{fol:seq:sou:cor:consistency-soundness},
+prfND/{fol:ntd:sou:cor:consistency-soundness},
+prfTab/{fol:tab:sou:cor:consistency-soundness}}).
+\end{proof}
+
+\begin{lem}
+إذا كانت الدالة قابلة للتمثيل في $\Th{Q}$ فهي قابلة للحساب.
+\end{lem}
+
+\begin{proof}
+نبيّن أولًا وجه القول على سبيل التقريب. فحساب~$f$ يجري بالبحث الآتي:
+نسرد كل ما يمكن أن يكون من !!{derivation}s~$\delta$ في لغة الحساب،
+وسردها ممكن آليًا. ثم ننظر في كل واحدة: أهي !!a{derivation}
+لـ!!a{formula} على الصورة
+$!A_f(\num{n_0},\dots,\num{n_k},\num{m})$، أعني الـ!!{formula} الممثلة
+لـ$f$ في~$\Th{Q}$ بحسب \olref{lem:rep-q}؟ فإن كانت كذلك ثبت
+$m=f(n_0,\dots,n_k)$ باللمة \olref{lem:rep-q}، فحصلت قيمة~$f$.
+ولا يستمر البحث بلا نهاية؛ إذ
+$\Th{Q}\Proves !A_f(\num{n_0},\dots,\num{n_k},
+\num{f(n_0,\dots,n_k)})$، فلا بد أن يظهر في السرد $\delta$ المطلوبة.
+
+ولم تبلغ هذه الحجة بعدُ غاية الدقة؛ فالإجراء الموصوف يتناول
+!!{derivation}s و!!{formula}s، لا الأعداد وحدها، ولم نفصّل وجه إمكان
+«سرد جميع الـ!!{derivation}s الممكنة» آليًا. غير أن الطريق إلى ضبطها
+قد تقدم: فالحدود و!!{formula}s و!!{derivation}s ترمّز بأعداد غودل،
+والدوال العودية العامة تعطينا نموذجًا مضبوطًا للحساب. وقد ثبت أن العلاقة
+$\Prf[\Th{Q}](d,y)$ عودية، بل عودية بدائية؛ ومعناها أن $d$ عدد غودل
+لـ!!a{derivation} من بديهيات~$\Th{Q}$ للـ!!{formula} التي عدد غودل لها~$y$.
+ونحتاج معها إلى الدالتين العوديتين البدائيتين
+$\fn{num}$ (\olref[art][trm]{prop:num-primrec}) و$\fn{Subst}$
+(\olref[art][sub]{prop:subst-primrec}).
+ومن هذه المعطيات نعرّف~$f$ بالتصغير، فتثبت عودية $f$.
+
+نضع أولًا
+\begin{multline*}
+  A(n_0, \dots, n_k, m) = \\
+  \fn{Subst}(\fn{Subst}(\dots\fn{Subst}(\Gn{!A_f}, \fn{num}(n_0), \Gn{x_0}),\\ \dots),
+  \fn{num}(n_k),  \Gn{x_k}), \fn{num}(m), \Gn{y})
+\end{multline*}
+وليس وراء تعقيد هذه الكتابة إلا الدالة
+$A(n_0,\dots,n_k,m)=
+\Gn{!A_f(\num{n_0},\dots,\num{n_k},\num{m})}$.
+
+ثم نأخذ العلاقة~$R(n_0,\dots,n_k,s)$، ومعناها أن $(s)_0$
+عدد غودل لـ!!a{derivation} من~$\Th{Q}$ للصيغة
+$!A_f(\num{n_0},\dots,\num{n_k},\num{(s)_1})$:
+\[
+R(n_0, \dots, n_k, s) \quad\text{إذا وفقط إذا}\quad \Prf[\Th{Q}]((s)_0, A(n_0,
+\dots, n_k, (s)_1))
+\]
+فمتى وجدنا~$s$ تحقق $R(n_0,\dots,n_k,s)$، وجدنا زوج العددين
+$(s)_0$ و$(s)_1$؛ أولهما، $(s)_0$، عدد غودل
+  لـ!!a{derivation} للصيغة المعبّر عنها اختصارًا بـ$!A_f(\num{n_0},\dots,\num{n_k},\num{(s)_1})$.
+فالبحث عن~$s$ هو نظير البحث عن $d$ و$m$ معًا في الحجة غير الصورية.
+وهذا البحث عن $s$ تحدده دالة قابلة للحساب بالتّصغير المنتظم.
+وانتظام $R$ بيّن: لكل $n_0$، \dots، $n_k$، توجد
+!!a{derivation}~$\delta$ تثبت ما تقوله
+$\Th{Q}\Proves !A_f(\num{n_0},\dots,\num{n_k},
+\num{f(n_0,\dots,n_k)})$.
+فتصدق $R(n_0,\dots,n_k,s)$ عند
+$s=\tuple{\Gn{\delta},f(n_0,\dots,n_k)}$، ونحصل على $f$ بالتعريف:
+\[
+  f(n_0,\dots,n_{k}) = (\umin{s}{R(n_0, \dots, n_k, s)})_1.
+  \]
+  % تصحيح مصدر (C291-01): وُحّد اسم الصيغة الممثلة وأُثبت واسم الصيغة وغلاف العدد في المثال المختصر.
+\end{proof}
+
+\end{document}

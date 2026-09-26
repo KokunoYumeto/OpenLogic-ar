@@ -1,0 +1,148 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{card-arithmetic}{opps}
+\olsection{تعريف العمليات الأساسية}
+
+لما كنا غير محتاجين إلى حفظ الترتيب، كان تعريف حساب الكاردينالات
+أيسر من تعريف حساب الأعداد الترتيبية بعض اليسر. ونعرف الجمع والضرب
+والأس جميعًا.
+
+\begin{defn}
+إذا كان~$\cardfont{a}$ و$\cardfont{b}$ كاردينالين، فنعرف:
+\begin{align*}
+	\cardfont{a} \cardplus \cardfont{b} &\defis
+	\card{\cardfont{a} \disjointsum \cardfont{b}}\\
+	\cardfont{a} \cardtimes \cardfont{b} &\defis
+	\card{\cardfont{a} \times \cardfont{b}}\\
+	\cardexpo{\cardfont{a}}{\cardfont{b}} &\defis
+	\card{\funfromto{\cardfont{b}}{\cardfont{a}}}
+\end{align*}
+حيث
+$\funfromto{X}{Y} = \Setabs{f}{f \text{ دالة } X \to Y}$.
+(ووجود~$\funfromto{X}{Y}$ لأي مجموعتين~$X$ و$Y$ سهل الإثبات، وهو
+متروك تمرينًا.)
+\end{defn}
+
+\begin{prob}
+أثبت في~$\Zminus$ أن~$\funfromto{X}{Y}$ موجودة لأي مجموعتين~$X$
+و~$Y$. وبالعمل في~$\ZF$، احسب~$\setrank{\funfromto{X}{Y}}$ من
+$\setrank{X}$ و$\setrank{Y}$، على مثال
+\olref[sth][ord-arithmetic][using-addition]{rankcomputation}.
+\end{prob}
+
+ولنشرح وجه التعريف. فأما الجمع فيستعمل الجمع المنفصل،~$\disjointsum$،
+على تعريف~\olref[ord-arithmetic][add]{defdissum}؛ ومن اليسير رؤية
+موافقته للحساب في الحالات المتناهية. وأما الضرب، فقد أثبت
+\olref[sfr][set][pai]{cardnmprod} أن المجموعة~$A$ إذا كان لها~$n$
+عناصر، والمجموعة~$B$ إذا كان لها~$m$ عناصر، كان لـ$A \times B$
+عدد~$n \cdot m$ من العناصر. فتعريفنا يعمم هذا المعنى على ما فوق
+المتناهي. والأس على القياس نفسه، ينقل الفكرة من المتناهي إلى ما فوقه.
+بل إن حساب الكاردينالات ما فوق المتناهي أشبه بالحساب المعتاد من بعض
+الوجوه من حساب الأعداد الترتيبية ما فوق المتناهي.
+
+\begin{prop}\ollabel{cardplustimescommute}
+العمليتان~$\cardplus$ و$\cardtimes$ إبداليتان وتجميعيتان.
+\end{prop}
+
+\begin{proof}
+يكفي في الإبدالية، بموجب
+\olref[cardinals][cardsasords]{lem:CardinalsBehaveRight}، أن نلاحظ
+$\cardeq{(\cardfont{a} \disjointsum
+\cardfont{b})}{(\cardfont{b} \disjointsum \cardfont{a})}$ وأن
+$\cardeq{(\cardfont{a} \times \cardfont{b})}{(\cardfont{b} \times
+\cardfont{a})}$. وأما التجميعية فنتركها تمرينًا.
+\end{proof}
+
+\begin{prob}
+أثبت أن~$\cardplus$ و$\cardtimes$ تجميعيتان.
+\end{prob}
+
+\begin{prop}
+$A$ غير متناهية إذا وفقط إذا كان
+$\card{A} \cardplus 1 = 1 \cardplus \card{A} = \card{A}$.
+\end{prop}
+
+\begin{proof}
+كما في~\olref[cardinals][classing]{generalinfinitycharacter}، تتبع
+النتيجة من~\olref[ord-arithmetic][using-addition]{ordinfinitycharacter}
+و\olref[cardinals][cardsasords]{lem:CardinalsBehaveRight}.
+\end{proof}
+
+ومن هنا احتيج إلى رموز تفصل جمع الأعداد الترتيبية وضربها عن جمع
+الكاردينالات وضربها؛ فهما عمليتان \emph{مختلفتان} حقًا. والنتيجتان
+الآتيتان تبينان اختلاف الأسين كذلك. وتذكر أن
+\olref[z][infinity-again]{defnomega} يقتضي~$2 = \{0, 1\}$.
+
+\begin{lem}\ollabel{lem:SizePowerset2Exp}
+لكل~$A$، $\card{\Pow{A}} = \cardexpo{2}{\card{A}}$.
+\end{lem}
+
+\begin{proof}
+لكل مجموعة جزئية~$B \subseteq A$، لتكن
+$\chi_B \in \funfromto{A}{2}$ معطاة هكذا:
+\begin{align*}
+	\chi_{B}(x) &\defis
+	\begin{cases}
+		1 & \text{إذا كان }x\in B\\
+		0 & \text{فيما عدا ذلك.}
+	\end{cases}
+\end{align*}
+ثم ضع~$f(B) = \chi_B$؛ فيعرف ذلك !!a{bijection}
+$f \colon \Pow{A} \to \funfromto{A}{2}$. ومن ثم
+$\cardeq{\Pow{A}}{\funfromto{A}{2}}$، ويتبعه
+$\cardeq{\Pow{A}}{\funfromto{\card{A}}{2}}$. ولذلك
+$\card{\Pow{A}} = \card{\funfromto{\card{A}}{2}} =
+\cardexpo{2}{\card{A}}$.
+\end{proof}
+
+وهذا البرهان الوجيز يجمع في باطنه بحث
+\olref[sfr][siz][red-alt]{sec}. فقد رددنا هنالك عدم قابلية
+$\Pow{\omega}$ للعد إلى عدم قابلية مجموعة السلاسل الثنائية غير
+المتناهية~$\Bin^\omega$. وليست~$\Bin^{\omega}$ إلا
+$\funfromto{\omega}{2}$. وقد ظهر الآن أن مسلك الاستدلال في
+\olref[sfr][siz][red-alt]{sec} نفسه يصح إذا عوضنا أي مجموعة~$A$
+عن~$\omega$. وتفيد النتيجة أيضًا حقيقة قريبة عن أس
+الكاردينالات.
+
+\begin{cor}\ollabel{cantorcor}
+لكل كاردينال~$\cardfont{a}$،
+$\cardfont{a} < \cardexpo{2}{\cardfont{a}}$.
+\end{cor}
+
+\begin{proof}
+ذلك من مبرهنة كانتور~(\olref[sfr][siz][car]{thm:cantor}) ومن
+\olref{lem:SizePowerset2Exp}.
+\end{proof}
+\noindent
+إذن~$\omega < \cardexpo{2}{\omega}$. وهذا حكم في أس
+\emph{الكاردينالات}؛ فقابله بأس \emph{الأعداد الترتيبية}، حيث
+$\omega = \ordexpo{2}{\omega}$؛ انظر
+\olref[ord-arithmetic][expo]{sec}.
+
+وبمناسبة أس الكاردينالات يمكن أن نضبط أكثر الوجه الذي تكون به
+$\Real$ !!{nonenumerable}.
+
+\begin{thm}\ollabel{continuumis2aleph0}
+$\card{\Real} = \cardexpo{2}{\omega}$.
+\end{thm}
+
+\begin{proof}[مخطط البرهان]
+لهذا براهين كثيرة. وأقربها أن نثبت
+$\cardle{\Pow{\omega}}{\Real}$ و$\cardle{\Real}{\Pow{\omega}}$، ثم
+نستعمل شرودر--برنشتاين فنحصل على
+$\cardeq{\Real}{\Pow{\omega}}$، ثم
+\olref[card-arithmetic][opps]{lem:SizePowerset2Exp} فنستنتج
+$\card{\Real} = \cardexpo{2}{\omega}$. ويبقى تمرين نافع: عرّف
+دالتين حقنيتين~$f \colon \Pow{\omega} \to \Real$ و
+$g \colon \Real \to \Pow{\omega}$.
+\end{proof}
+
+\begin{prob}
+أكمل برهان~\olref[sth][card-arithmetic][opps]{continuumis2aleph0} بإظهار
+أن~$\cardle{\Pow{\omega}}{\Real}$ و
+$\cardle{\Real}{\Pow{\omega}}$.
+\end{prob}
+
+\end{document}

@@ -33,10 +33,12 @@ $\fn{Mult}$ حد لامبدا خالصًا؛ وإذا كان~$\fn{Add}$ نفسه
 أحللنا تعريف~$\fn{Fac}$ نفسه محل ورود~$\fn{Fac}$ في الطرف الأيمن،
 حصلنا على:
 \begin{align*}
-  \fn{Fac} & \ident \lambd[n][\fn{IsZero}\, n\, \num{1}] \\
-    & \qquad (\fn{Mult}\, n
-  ((\lambd[n][\fn{IsZero} \, n \, \num 1\, (\fn{Mult}\, n\, (\fn{Fac}
-    (\fn{Pred}\, n)))]) (\fn{Pred}\, n)))
+  \fn{Fac} & \ident
+  \lambd[n][\fn{IsZero}\, n\, \num{1}\,
+    (\fn{Mult}\, n
+      ((\lambd[n][\fn{IsZero}\, n\, \num{1}\,
+        (\fn{Mult}\, n\, (\fn{Fac}(\fn{Pred}\, n)))])
+      (\fn{Pred}\, n)))]
 \end{align*}
 وما زلنا لم نتخلص من~$\fn{Fac}$ في الطرف الأيمن. ومن الواضح أن تكرار
 هذه العملية يجعل التعريف يطول باستمرار، ولا تنتهي العملية أبدًا إلى

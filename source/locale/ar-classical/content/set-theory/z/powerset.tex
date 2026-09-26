@@ -1,0 +1,59 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{z}{power}
+\olsection{في مجموعات القوى}
+
+ونتبع ما تقدم بمسلّمة أخرى:
+
+\begin{axiom}[مجموعات القوى]
+لكل مجموعة~$A$ توجد المجموعة~$\Pow{A} = \Setabs{x}{x \subseteq A}$.
+\[
+	\forall A \exists P \forall x(x \in P \liff (\forall z \in x)z \in A)
+\]
+\end{axiom}
+
+وتسويغها قريب. افترض أن~$A$ تكونت في المرحلة~$S$؛ فتكون عناصر~$A$
+كلها متاحة قبل~$S$ بموجب~\stagesacc. وبحجة نظيرة لحجة الفصل تكون كل
+مجموعة جزئية من~$A$ قد تكونت عند المرحلة~$S$، فتتاح كلها لتُجمع في
+مجموعة واحدة عند أي مرحلة تلي~$S$. ومثل هذه المرحلة موجودة، لأن~$S$
+ليست الأخيرة بموجب~\stagessucc. فثبت وجود~$\Pow{A}$.
+
+ومن النتائج الحسنة لمسلّمة مجموعات القوى:
+
+\begin{prop}\label{thm:Products}
+لكل مجموعتين~$A,B$ يوجد حاصل ضربهما الديكارتي~$A \times B$.
+\end{prop}
+
+\begin{proof}
+بمجموعات القوى و\olref[sth][z][pairs]{prop:pairsconsequences} توجد
+$\Pow{\Pow{A \cup B}}$؛ ومن ثم يثبت بالفصل وجود المجموعة:
+\[
+	C = \Setabs{z \in \Pow{\Pow{A \cup B}}}{(\exists x \in A)(\exists y \in B) z = \tuple{x, y}}.
+\]
+ولكل~$x \in A$ و$y \in B$ توجد~$\tuple{x,y}$ بموجب
+\olref[sth][z][pairs]{prop:pairsconsequences}. ثم لما كان
+$x,y \in A \cup B$، تحقق~$\{x\},\{x,y\} \in \Pow{A \cup B}$، ومنه
+$\tuple{x,y} \in \Pow{\Pow{A \cup B}}$. فـ~$A \times B = C$.
+\end{proof}
+
+وفي البرهان تعاون بين مسلّمة مجموعات القوى والفصل، وليس ذلك بعجيب؛ إذ
+لولا الفصل لم تكن مجموعات القوى مبدأ شديد \emph{القوة}. فالفصل يعيّن
+المجموعات الجزئية الموجودة من كل مجموعة، ومن ثم يعيّن «عظم» مجموعة
+قواها.
+
+\begin{prob}
+أثبت، لكل مجموعتين~$A,B$: (i) وجود مجموعة العلاقات كلها التي مجالها~$A$
+ومداها~$B$؛ و(ii) وجود مجموعة الدوال كلها من~$A$ إلى~$B$.
+\end{prob}
+
+\begin{prob}
+لتكن~$A$ مجموعة، و~$\sim$ علاقة تكافؤ على~$A$. برهن وجود مجموعة فئات
+التكافؤ تحت~$\sim$ على~$A$، أي~$\equivclass{A}{\sim}$.
+\end{prob}
+
+\end{document}
+
+
+

@@ -1,0 +1,150 @@
+% part: intuitionistic-logic
+% chapter: soundness-completeness
+% section: lindenbaum
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{sc}{lin}
+
+\olsection{لمّة ليندنباوم}
+
+سبيل برهان التمام للمنطق الحدسي أن نفرض~$\Gamma \Proves/ !A$، ثم ننشئ
+نموذجًا~$\mModel{M}$ يكون فيه~$\mSat{M}{\Gamma}$ و$\mSat/{M}{!A}$.
+
+أما المنطق الكلاسيكي فتُردّ فيه !!{derivability} إلى الاتساق: فإن
+!!a{formula}~$!A$ تكون !!{derivable} من مجموعة
+ال!!{formula}s إذا وفقط إذا صار ضم نفي~$!A$ إليها موجبًا لعدم الاتساق.
+وليس هذا الرد جائزًا في المنطق الحدسي. فعدم اتساق~$\lnot !A$
+لا يعطينا فيه إلا~$\Proves \lnot\lnot !A$؛ وبما أن
+$\lnot\lnot !A \lif !A$ ليست صالحة حدسيًا على العموم، لم يلزم
+$\Proves !A$.
+
+فلا بد إذن، عند إنشاء النموذج~$\mModel{M}$، من إبقاء عدم
+!!{derivability}~$!A$ ملحوظًا؛ فهذه~$!A$ هي ال!!{formula} التي نعنيها.
+ولذلك لا يصح أن نبني النموذج~$\mModel{M}$ على مجموعة كاملة
+$\Gamma^* \supseteq \Gamma$؛ إذ كل مجموعة كاملة~$\Gamma^*$ تحقق
+$\Gamma^* \Proves !A \lor \lnot !A$.
+
+ونأخذ عوضًا عن المجموعة الكاملة~$\Gamma^*$ مجموعةً أولية من الصيغ،
+بالمعنى الذي نحدّه الآن.
+
+\begin{defn}\ollabel{defn:prime}
+  مجموعة ال!!{formula}s~$\Gamma$ \emph{أولية} إذا وفقط إذا اجتمعت لها
+  الشروط الآتية:
+  \begin{enumerate}
+  \item\ollabel{defn:prime1} اتساق~$\Gamma$، أي
+    $\Gamma \Proves/ \lfalse$؛
+  \item\ollabel{defn:prime2} أن يلزم من~$\Gamma \Proves !A$ أن
+    $!A \in \Gamma$؛
+  \item\ollabel{defn:prime3} وأن يلزم من~$!A \lor !B \in \Gamma$ أحد
+    الأمرين:~$!A \in \Gamma$ أو~$!B \in \Gamma$.
+  \end{enumerate}
+\end{defn}
+
+\begin{lem}[لمّة ليندنباوم]
+  \ollabel{lem:lindenbaum} متى كان~$\Gamma \Proves/ !A$ أمكن إيجاد
+  $\Gamma^* \supseteq \Gamma$ تكون فيها~$\Gamma^*$ أولية مع
+  $\Gamma^* \Proves/ !A$.
+\end{lem}
+
+\begin{proof}
+  نعدّ~$!B_1 \lor !C_1$، $!B_2 \lor !C_2$، \dots، جميع
+  ال!!{formula}s التي صورتها~$!B \lor !C$. ثم ننشئ متتالية متزايدة من
+  مجموعات ال!!{formula}s~$\Gamma_n$؛ فتكون
+  $\Gamma_{n+1}$ هي~$\Gamma_n$ مع !!{formula} جديدة واحدة.
+  ونجعل~$\Gamma^*$ اتحاد المجموعات~$\Gamma_n$ كلها. ويكون اختيار
+  ال!!{formula}s المضافة على وجه يجمع لـ~$\Gamma^*$ الأولية مع بقاء
+  $\Gamma^* \Proves/ !A$. ولهذا نطلب في كل خطوة أول فصل~$!B_i \lor !C_i$
+  يتصف بما يأتي:
+  \begin{enumerate}
+  \item\ollabel{gamma-1} $\Gamma_n \Proves !B_i \lor !C_i$؛
+  \item\ollabel{gamma-2} $!B_i \notin \Gamma_n$ و
+    $!C_i \notin \Gamma_n$.
+  \end{enumerate}
+  ثم نزيد على~$\Gamma_n$ إما~$!B_i$، إن كان
+  $\Gamma_n \cup \{!B_i\} \Proves/ !A$، وإما~$!C_i$ في سائر الأحوال.
+  وسنقيم الدليل على كفاية هذا الصنيع. ولنسمِّ~$i(n)$ أصغر~$i$ تتحقق له
+  \olref{gamma-1} و\olref{gamma-2}.
+
+  فنضع~$\Gamma_0 = \Gamma$، ثم
+  \[
+  \Gamma_{n+1} = \begin{cases}
+    \Gamma_n \cup \{!B_{i(n)}\} &
+    \text{إذا كان $\Gamma_n \cup \{!B_{i(n)}\} \Proves/ !A$} \\
+    \Gamma_n \cup \{!C_{i(n)}\} & \text{خلاف ذلك}
+    \end{cases}
+  \]
+  فإن لم تتعين~$i(n)$، أي إن كان كل تحقق لـ
+  $\Gamma_n \Proves !B \lor !C$ مصحوبًا بأحد الأمرين~$!B \in \Gamma_n$ أو
+  $!C \in \Gamma_n$، أبقينا~$\Gamma_{n+1}=\Gamma_n$. ولتكن أخيرًا
+  $\Gamma^* = \bigcup_{n=0}^\infty \Gamma_n$.
+
+  أول ما نثبته أن كل~$n$ يحقق~$\Gamma_n \Proves/ !A$. نستقرئ
+  في~$n$: فعند~$n=0$ هذا هو فرض اللمّة، أعني
+  $\Gamma \Proves/ !A$. ولخطوة الاستقراء ليكن~$n\geq 0$، ولنفرض
+  $\Gamma_n \Proves/ !A$؛ فالمطلوب~$\Gamma_{n+1} \Proves/ !A$. فإن لم تتعين
+  $i(n)$، كانت~$\Gamma_{n+1}=\Gamma_n$ وتم الانتقال. فلنفرض
+  تعين~$i(n)$، ونختصر بكتابة~$i=i(n)$.
+
+  ونبرهن هذا الانتقال بإثبات نقيضه المقابل. ليكن~$\Gamma_{n+1} \Proves !A$.
+  وبحسب الإنشاء، إما أن تكون~$\Gamma_{n+1}=\Gamma_n\cup\{!B_i\}$ حين
+  $\Gamma_n\cup\{!B_i\}\Proves/!A$، وإما أن تكون
+  $\Gamma_{n+1}=\Gamma_n\cup\{!C_i\}$ فيما عدا ذلك. والأول ممتنع، إذ
+  يلزم عنه~$\Gamma_{n+1}\Proves/!A$. فتعين إذن
+  $\Gamma_n\cup\{!B_i\}\Proves !A$ و
+  $\Gamma_{n+1}=\Gamma_n\cup\{!C_i\}$. وتعريف~$i(n)$ يعطينا
+  $\Gamma_n\Proves !B_i\lor !C_i$. ومعنا
+  $\Gamma_n\cup\{!B_i\}\Proves !A$ و
+  $\Gamma_n\cup\{!C_i\}\Proves !A$؛ فينتج
+  $\Gamma_n\Proves !A$، كما أردنا.
+
+  ولو ثبت~$\Gamma^* \Proves !A$، لكفت مجموعة جزئية منتهية
+  $\Gamma'\subseteq\Gamma^*$ في أن~$\Gamma'\Proves !A$. وكل
+  $!D\in\Gamma'$ يقع في~$\Gamma_i$ لبعض~$i$. نأخذ~$n$ أعظم
+  هذه المؤشرات؛ ولأن~$\Gamma_i\subseteq\Gamma_n$ متى كان~$i\leq n$،
+  يكون~$\Gamma'\subseteq\Gamma_n$؛ فيلزم
+  $\Gamma_n\Proves !A$، مناقضًا لما ثبت من
+  $\Gamma_n\Proves/!A$.
+
+  وبقي بيان أولية~$\Gamma^*$، أي استيفاؤها
+  \olref{defn:prime1} و\olref{defn:prime2} و\olref{defn:prime3} من
+  \olref{defn:prime}.
+
+  أما أولًا، فإن~$\Gamma^*\Proves/!A$ يوجب اتساق~$\Gamma^*$، فثبت
+  \olref{defn:prime1}.
+
+  ونثبت بعد ذلك أن~$\Gamma^*\Proves !B\lor !C$ يقتضي إما
+  $!B\in\Gamma^*$ وإما~$!C\in\Gamma^*$. وهذا كافٍ لـ
+  \olref{defn:prime3}، إذ من~$!B\lor !C\in\Gamma^*$ يلزم
+  $\Gamma^*\Proves !B\lor !C$. ولنفرض خلاف المطلوب:
+  $\Gamma^*\Proves !B\lor !C$، مع~$!B\notin\Gamma^*$ و
+  $!C\notin\Gamma^*$. ومن~$\Gamma^*\Proves !B\lor !C$ نجد~$n$
+  يتحقق له~$\Gamma_n\Proves !B\lor !C$. والفصل~$!B\lor !C$ له موضع
+  في التعداد، وليكن~$!B_j\lor !C_j$. فهذا~$!B_j\lor !C_j$ يفي بشرطي
+  تعريف~$i(n)$؛ لأن
+  $\Gamma_n\Proves !B_j\lor !C_j$، مع تحقق
+  $!B_j\notin\Gamma_n$ و~$!C_j\notin\Gamma_n$. ومن المرحلة~$n$
+  فصاعدًا يبقى الموضع~$j$ مستوفيًا للشرطين ما لم يُنتخب؛ لأن
+  $\Gamma_n\subseteq\Gamma_m$ يحفظ الاشتقاق، ولأن~$!B_j$ و$!C_j$ لا
+  ينتميان إلى~$\Gamma^*$ بحسب الفرض. فيكون~$i(m)\leq j$ في كل
+  مرحلة~$m\geq n$ تسبق انتخاب~$j$. وإذا اختير موضع~$i(m)$ أُضيف أحد فصليه، فلا
+  يستوفي الشرطين بعد ذلك. وليس للمؤشرات~$i\leq j$ إلا عدد منتهٍ؛ فلا بد
+  من مرحلة~$m\geq n$ يكون فيها~$j=i(m)$. ويلزم عندئذ إما
+  $!B\in\Gamma_{m+1}$ وإما~$!C\in\Gamma_{m+1}$، مناقضًا لفرض
+  $!B\notin\Gamma^*$ و$!C\notin\Gamma^*$.
+  % تصحيح مصدر (0506-I1، 0506-I2): شملت خطوة الاستقراء n=0، واستُبدلت حجة العد الرتيب بحجة إنصاف منتهية المؤشرات.
+
+  وأخيرًا، ليكن~$\Gamma^*\Proves !B$؛ فيثبت
+  $\Gamma^*\Proves !B\lor !B$. وقد بينّا أن
+  $\Gamma^*\Proves !B\lor !B$ يقتضي~$!B\in\Gamma^*$. فتستوفي
+  $\Gamma^*$ بذلك~\olref{defn:prime2} من~\olref{defn:prime}.
+\end{proof}
+
+\begin{prob}
+أقم البرهان على أن~$\Gamma \Proves/ \bot$ يقتضي كون~$\Gamma$ متسقة في
+المنطق الكلاسيكي؛ أي وجود تقييم تصدق به جميع الصيغ في~$\Gamma$.
+\end{prob}
+
+\end{document}

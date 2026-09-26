@@ -1,0 +1,309 @@
+% Part: incompleteness
+% Chapter: representability-in-q
+% Section: sigma1-completeness
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{inp}{s1c}
+\olsection{تمام \texorpdfstring{$\Sigma_1$}{Sigma-1}}
+
+مع أن $\Th{Q}$ وامتداداتها المتسقة القابلة للمحورة غير تامة،
+قد رأينا $\Th{Q}$ تثبت كثيرًا من الحقائق الأساسية عن أسماء الأعداد.
+ويمكن توسيع هذه النتيجة توسعًا كبيرًا. ولتبيين ما يصل إليه الإثبات في
+$\Th{Q}$، نميّز !!{formula}s من الأصناف $\Delta_0$ و
+$\Sigma_1$ و$\Pi_1$.
+فالـ!!{formula} من الصنف $\Sigma_1$، على وجه التقريب،
+هي ما صورتها $\lexists[x][!B(x)]$، وتكون $!B$ مبنية بالروابط القضوية
+والمكممات المحدودة وحدها. وسنثبت أن كل $!A$ تكون !!{sentence}
+من الصنف $\Sigma_1$ وتصدق في $\Struct{N}$،
+تستوفي $\Th{Q}\Proves !A$ (\olref{thm:sigma1-completeness}).
+
+\begin{defn}
+\ollabel{defn:bd-quant}
+الـ\emph{!!{formula} الوجودية المحدودة} ما كانت على الصورة
+$\lexists[x][(x<t\land !A(x))]$، حيث $t$ حد لا يرد فيه المتغير المكمَّم،
+واختصار كتابتها المتعارف عليه $\bexists{x<t}{!A(x)}$.
+%
+والـ\emph{!!{formula} الكلية المحدودة} ما كانت على الصورة
+$\lforall[x][(x<t\lif !A(x))]$، حيث $t$ حد لا يرد فيه المتغير المكمَّم،
+واختصارها المتعارف عليه $\bforall{x<t}{!A(x)}$.
+\end{defn}
+
+\begin{defn}
+\ollabel{defn:delta0-sigma1-pi1-frm}
+نعدّ الـ!!{formula}~$!B$ من الصنف $\Delta_0$ متى كان بناؤها من
+!!{formula}s ذرية، ولم يستعمل فيه إلا الروابط القضوية والتكميم المحدود.
+%
+ونعدّ الـ!!{formula}~$!A$ من الصنف $\Sigma_1$ متى كانت
+$!A\ident\lexists[x][!B(x)]$، وكانت $!B$ من الصنف $\Delta_0$.
+%
+ونعدّ الـ!!{formula}~$!A$ من الصنف $\Pi_1$ متى كانت
+$!A\ident\lforall[x][!B(x)]$، وكانت $!B$ من الصنف $\Delta_0$.
+\end{defn}
+
+\begin{lem}
+\ollabel{lem:q-proves-clterm-id} إذا كان $t$ حدًا مغلقًا وقيمته
+$\Value{t}{N}=n$، لزم $\Th{Q}\Proves\eq[t][\num n]$.
+\end{lem}
+
+\begin{proof}
+البرهان بالاستقراء على تعقيد~$t$. ففي الأساس
+$\Value{\Obj 0}{N}=0$، وتثبت $\Th{Q}\Proves\eq[\Obj 0][\num 0]$،
+إذ $\num 0\ident\Obj 0$.
+%
+وللخطوة نأخذ الحدين $t_1$ و$t_2$ مع
+$\Value{t_1}{N}=n_1$ و$\Value{t_2}{N}=n_2$،
+ونفرض $\Th{Q}\Proves\eq[t_1][\num{n_1}]$
+و$\Th{Q}\Proves\eq[t_2][\num{n_2}]$.
+
+أما الخلف، فـ$\Value{(t_1')}{N}=n_1+1$.
+ونحصل على $\Th{Q}\Proves\eq[t_1'][{\num n_1}']$
+بقواعد الهوية في الرتبة الأولى، مستعملين فرض الاستقراء والـ!!{formula}
+$\eq[\num{n_1}'][\num{n_1}']$.
+ومن تعريف أسماء الأعداد ينتج
+$\Th{Q}\Proves\eq[t_1'][\num{n_1+1}]$.
+
+وأما الجمع، فقيمة حده
+\[
+      \Value{(t_1 + t_2)}{N}
+    = \Value{t_1}{N} + \Value{t_2}{N}
+    = n_1 + n_2.
+\]
+فمن فرض الاستقراء وقواعد الهوية نحصل أولًا على
+$\Th{Q}\Proves\eq[t_1+t_2][\num{n_1}+t_2]$،
+ثم نحصل على
+$\Th{Q}\Proves\eq[t_1+t_2][\num{n_1}+\num{n_2}]$
+بتطبيق قواعد الهوية مرة ثانية.
+وتعطينا \olref[inc][req][bre]{lem:q-proves-add}
+$\Th{Q}\Proves
+\eq[\num{n_1}+\num{n_2}][\num{n_1+n_2}]$؛
+فتلزم $\Th{Q}\Proves\eq[t_1+t_2][\num{n_1+n_2}]$.
+
+وأما $\times$، فحجته نظير هذه، مع استعمال
+\olref[inc][req][bre]{lem:q-proves-mult}.
+%
+وهذه جميع وجوه بناء الحدود المغلقة في الحساب. فيثبت
+$\Th{Q}\Proves\eq[t][\num n]$ لكل حد مغلق~$t$ قيمته
+$\Value{t}{N}=n$.
+\end{proof}
+
+\begin{prob}
+فصّل حجة $\times$ في
+\olref{lem:q-proves-clterm-id}.
+\end{prob}
+
+\begin{lem}
+\ollabel{lem:atomic-completeness}
+ليكن $t_1$ و$t_2$ حدين مغلقين. فتصدق الأحكام الآتية:
+\begin{enumerate}
+\item متى كان $\Value{t_1}{N}=\Value{t_2}{N}$،
+    لزم $\Th{Q}\Proves\eq[t_1][t_2]$.
+\item متى كان $\Value{t_1}{N}\neq\Value{t_2}{N}$،
+    لزم $\Th{Q}\Proves\eq/[t_1][t_2]$.
+\item متى كان $\Value{t_1}{N}<\Value{t_2}{N}$،
+    لزم $\Th{Q}\Proves t_1<t_2$.
+\item متى كان $\Value{t_2}{N}\leq\Value{t_1}{N}$،
+    لزم $\Th{Q}\Proves\lnot(t_1<t_2)$.
+\end{enumerate}
+\end{lem}
+
+\begin{proof}
+نأخذ الحدين $t_1$ و$t_2$، ونسمّي قيمتيهما
+$n=\Value{t_1}{N}$ و$m=\Value{t_2}{N}$.
+
+أما $!A\ident t_1=t_2$، فنعلم من
+\olref{lem:q-proves-clterm-id} أن
+$\Th{Q}\Proves\eq[t_1][\num n]$
+و$\Th{Q}\Proves\eq[t_2][\num m]$.
+إذا كان $n=m$ ثبتت $\Th{Q}\Proves\eq[\num n][\num m]$،
+فينتج $\Th{Q}\Proves\eq[t_1][t_2]$ بتعدي الهوية.
+وإذا كان $n\neq m$ ثبتت
+$\Th{Q}\Proves\eq/[\num n][\num m]$؛
+ومن تعدي الهوية أيضًا يلزم $\Th{Q}\Proves\eq/[t_1][t_2]$.
+
+وأما $!A\ident t_1<t_2$، فمرجع الحالتين إلى
+البديهية~$!Q_8$، ونصها
+$x<y\liff\lexists[z][\eq[z'+x][y]]$ لكل $x,y$.
+
+إن صدقت $\Sat{N}{t_1<t_2}$، وُجد $k\in\Nat$
+يحقق $n+k+1=m$. وباللمة \olref{lem:q-proves-clterm-id} لدينا
+$\Th{Q}\Proves\eq[t_1][\num n]$
+و$\Th{Q}\Proves\eq[t_2][\num m]$.
+ومن أول هذه اللمة نحصل على
+$\Th{Q}\Proves\eq[{\num k}'+\num n][\num m]$.
+فتعطي قواعد الهوية
+$\Th{Q}\Proves\eq[{\num k}'+t_1][t_2]$،
+ومنها $\Th{Q}\Proves\lexists[z][\eq[z'+t_1][t_2]]$.
+وعندئذ نستعمل اتجاه~$!Q_8$ من اليمين إلى اليسار فنثبت
+$\Th{Q}\Proves t_1<t_2$.
+
+وإن كانت $\Sat/{N}{t_1<t_2}$، أي $m\leq n$، فالحجة بالخلف.
+%
+نعمل داخل~$\Th{Q}$ ونفرض $t_1<t_2$.
+بالاتجاه الآخر من~$!Q_8$ يوجد~$z$ يحقق $\eq[z'+t_1][t_2]$.
+ولأن $\Th{Q}\Proves\eq[t_1][\num n]$
+و$\Th{Q}\Proves\eq[t_2][\num m]$، ينتج
+$\eq[z'+\num n][\num m]$.
+%
+ثم نستعمل استقراءً خارجيًا على~$m$، ومعه~$!Q_5$ وإلغاء الخلفين بقواعد
+الهوية والبديهية الأولى، فنحصل على
+$\eq[z'+\num{n-m}][\Obj 0]$.
+إن كان $m=n$، صارت $\eq[z'][\Obj 0]$، وتناقض~$!Q_2$.
+وإن كان $m<n$، صارت
+$\eq[(z'+\num{n-m-1})'][\Obj 0]$ باستعمال~$!Q_5$ مرة أخرى،
+فتناقض~$!Q_2$ أيضًا. وإذن $\Th{Q}\Proves\lnot(t_1<t_2)$.
+\end{proof}
+
+\begin{lem}
+\ollabel{lem:bounded-quant-equiv}
+لتكن $!A$ !!a{formula}، وليكن $t$ حدًا مغلقًا،
+ولتكن $k=\Value{t}{N}$. عندئذ لدينا التكافؤان:
+\begin{enumerate}
+\item $\Th{Q}\Proves\bforall{x<t}{!A(x)}$ إذا وفقط إذا
+    $\Th{Q}\Proves !A(\num 0)\land\dots\land !A(\num{k-1})$.
+\item $\Th{Q}\Proves\bexists{x<t}{!A(x)}$ إذا وفقط إذا
+    $\Th{Q}\Proves !A(\num 0)\lor\dots\lor !A(\num{k-1})$.
+\end{enumerate}
+\end{lem}
+
+\begin{proof}
+نبرهن التكافؤ الخاص بالمكمم الكلي المحدود.
+إذا كانت $\Value{t}{N}=0$، ثبت الطرف الأيسر في~$\Th{Q}$،
+إذ لا يوجد $x<\num 0$ بمقتضى
+\olref[inc][req][min]{lem:less-zero}.
+وأما الطرف الآخر فالاقتران فيه خال، ونجعله $\ltrue$،
+وهو ثابت كذلك في~$\Th{Q}$.
+%
+يبقى أن تكون $\Value{t}{N}=k+1$ لعدد طبيعي~$k$.
+وتجيز لنا \olref{lem:q-proves-clterm-id} أن نستبدل بالصيغة المعطاة
+!!a{formula} على الصورة $\bforall{x<\num{k+1}}{!A(x)}$.
+
+في الاتجاه الأول، لنفرض
+$\Th{Q}\Proves\bforall{x<\num{k+1}}{!A(x)}$،
+ولنأخذ $n\leq k$.
+ولدينا $\Th{Q}\Proves\num n<\num{k+1}$
+باللمة \olref{lem:atomic-completeness}،
+فيستخرج بالمنطق $\Th{Q}\Proves !A(\num n)$.
+نكرر ذلك $k+1$ مرة، لكل $n\leq k$ مرة،
+فنحصل على $\Th{Q}\Proves !A(\num 0)\land\dots\land !A(\num k)$،
+وهو المطلوب.
+
+وفي الاتجاه المقابل، نفرض
+$\Th{Q}\Proves !A(\num 0)\land\dots\land !A(\num k)$.
+ثم نعمل في $\Th{Q}$ على فرض $x<\num{k+1}$.
+ومن \olref[inc][req][min]{lem:less-nsucc} نحصل على
+$x=\num 0\lor\dots\lor x=\num k$،
+فيثبت بالمنطق~$!A(x)$ في كل حالة، ثم يثبت التعميم
+$\bforall{x<\num{k+1}}{!A(x)}$.
+
+وأما التكافؤ الخاص بالـ!!{formula}s ذات التكميم الوجودي المحدود
+فحجته على هذا المثال.
+\end{proof}
+
+\begin{prob}
+فصّل حجة الحالة الوجودية من
+\olref{lem:bounded-quant-equiv}.
+\end{prob}
+
+\begin{lem}
+\ollabel{lem:delta0-completeness}
+كل $!A$ تكون !!{sentence} من الصنف $\Delta_0$ وتصدق في
+$\Struct{N}$، تحقق $\Th{Q}\Proves !A$.
+\end{lem}
+
+\begin{proof}
+نجري الاستقراء على تعقيد بنية الـ!!{formula} من حيث الروابط والمكممات؛
+فتعويض أسماء الأعداد لا يزيد هذه البنية.
+%
+أما الأساس ففي \olref{lem:atomic-completeness}، فننتقل إلى الخطوة.
+ونأخذ الروابط القضوية بعد رد الشرطية والتكافؤ إلى النفي والاقتران والفصل.
+وليتضح التفصيل، نقسم النفي بحسب بنية الـ!!{formula} الواقعة في نطاقه.
+
+\begin{enumerate}
+\item إذا صدقت $(!A\land !B)$ في $\Struct{N}$، صدقت
+$!A$ و$!B$ معًا في~$\Struct{N}$.
+فيعطي فرض الاستقراء $\Th{Q}\Proves !A$
+و$\Th{Q}\Proves !B$، ويعطي المنطق $\Th{Q}\Proves(!A\land !B)$.
+%
+\item وإذا صدقت $\lnot(!A\land !B)$ في $\Struct{N}$،
+صدقت إحدى $\lnot !A$ و$\lnot !B$ في~$\Struct{N}$.
+نأخذ الأولى من غير إخلال بالعموم؛
+فيكون $\Th{Q}\Proves\lnot !A$ بفرض الاستقراء،
+ثم $\Th{Q}\Proves\lnot(!A\land !B)$ بالمنطق.
+%
+\item وإذا صدقت $(!A\lor !B)$ في $\Struct{N}$،
+فإما أن تصدق $!A$ في $\Struct{N}$، وإما أن تصدق $!B$ في $\Struct{N}$.
+وليكن الأول، إذ حجة الثاني مثله.
+بفرض الاستقراء $\Th{Q}\Proves !A$،
+فتلزم $\Th{Q}\Proves(!A\lor !B)$ بالمنطق.
+%
+\item وإذا صدقت $\lnot(!A\lor !B)$ في $\Struct{N}$،
+صدقت $\lnot !A$ و$\lnot !B$ جميعًا في $\Struct{N}$.
+فتثبت $\Th{Q}\Proves\lnot !A$
+و$\Th{Q}\Proves\lnot !B$ بفرض الاستقراء،
+ومنهما $\Th{Q}\Proves\lnot(!A\lor !B)$ بالمنطق.
+%
+\item وأما صدق $\bforall{x<t}{!A(x)}$ في~$\Struct{N}$،
+حيث $t$ حد مغلق و$k=\Value{t}{N}$، فنستعمل فيه فرض الاستقراء والمنطق.
+فمتى صدقت $!A(\num n)$ في~$\Struct{N}$ لكل
+$n<\Value{t}{N}$، حصل
+$\Th{Q}\Proves !A(\num 0)\land\dots\land !A(\num{k-1})$.
+فتعطينا \olref{lem:bounded-quant-equiv}
+$\Th{Q}\Proves\bforall{x<t}{!A(x)}$.
+%
+\item وأما التكميم الوجودي المحدود، حين تكون !!a{sentence} على الصورة
+$\bexists{x<t}{!A(x)}$، فحجته نظير حجة التكميم الكلي المحدود.
+%
+\item وإذا صدقت $\lnot\bforall{x<t}{!A(x)}$ في
+$\Struct{N}$، حيث $t$ حد مغلق، كانت هذه الـ!!{sentence}
+مكافئة للـ!!{sentence} $\bexists{x<t}{\lnot !A(x)}$،
+والتكافؤ قابل للاشتقاق في~$\Th{Q}$.
+فنرجع إلى حجة التكميم الوجودي المحدود.
+%
+\item وكذلك، إذا صدقت $\lnot\bexists{x<t}!A(x)$ في
+$\Struct{N}$، حيث $t$ حد مغلق، كانت هذه الـ!!{sentence} مكافئة في
+$\Th{Q}$ للصيغة $\bforall{x<t}{\lnot !A(x)}$.
+فنرجع إلى حجة التكميم الكلي المحدود.
+%
+\item وأخيرًا، إذا صدقت $\lnot !A$ في $\Struct{N}$،
+فقد فرغنا من سائر الحالات إلا أن تكون $!A$ ذرية، أو أن تكون
+$\lnot !A\ident\lnot\lnot !B$ لـ!!{sentence}~$!B$
+من الصنف $\Delta_0$.
+إن كانت $!A$ ذرية، حصل $\Th{Q}\Proves\lnot !A$
+من \olref{lem:atomic-completeness}.
+وإن كانت $\lnot !A\ident\lnot\lnot !B$،
+فهي تكافئ~$!B$ تكافؤًا يثبته المنطق في~$\Th{Q}$.
+والجملة $!B$ صادقة في~$\Struct{N}$، لأن
+$\lnot !A$ صادقة في~$\Struct{N}$.
+فيعطي فرض الاستقراء، مع إزالة النفي المزدوج ثم إعادته،
+$\Th{Q}\Proves\lnot !A$.
+\end{enumerate}
+\end{proof}
+
+\begin{prob}
+فصّل حجة الحالة الوجودية من
+\olref{lem:delta0-completeness}.
+\end{prob}
+
+\begin{thm}
+\ollabel{thm:sigma1-completeness}
+كل $!A$ تكون !!{sentence} من الصنف $\Sigma_1$ وتصدق في
+$\Struct{N}$، تحقق $\Th{Q}\Proves !A$.
+\end{thm}
+
+\begin{proof}
+لتكن $\lexists{x}!A(x)$ !!{sentence} من الصنف $\Sigma_1$
+صادقة في~$\Struct{N}$. فيوجد عدد طبيعي~$n$ وإسناد متغيرات~$s$
+مع $s(x)=n$ و$\Sat{N}{!A(x)}[s]$.
+وبالخواص المعروفة لعلاقة التحقيق نحصل على
+$\Sat{N}{!A(\num n)}$.
+لكن $!A(\num n)$ !!{formula} مغلقة من الصنف $\Delta_0$،
+فتعطي \olref{lem:delta0-completeness}
+$\Th{Q}\Proves !A(\num n)$.
+وبالتعميم الوجودي نحصل على
+$\Th{Q}\Proves\lexists[x][!A(x)]$.
+\end{proof}
+
+\end{document}

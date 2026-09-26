@@ -8,14 +8,19 @@
 
 \olfileid{fol}{axd}{ddq}
 
-\olsection{مبرهنة الاستنباط مع الكمّيات}
+\olsection{مبرهنة الاستنباط مع المكمّمات}
 
 \begin{thm}[مبرهنة الاستنباط]
-\ollabel{thm:deduction-thm-q} إذا كان $\Gamma \cup \{!A\} \Proves !B$،
-فإن $\Gamma \Proves !A \lif !B$.
+\ollabel{thm:deduction-thm-q} تكون~$\Gamma \cup \{!A\} \Proves !B$
+إذا وفقط إذا كان~$\Gamma \Proves !A \lif !B$.
 \end{thm}
 
 \begin{proof}
+% استكمال برهاني (0120-I1): أُثبت الاتجاه العكسي، وأُتمّت حالة QR الوجودية التي تركها الأصل تمرينًا.
+اتجاه ``إذا'' هو الاتجاه المباشر المثبت في
+\olref[ded]{thm:deduction-thm}، ولا يعتمد على صورة آخر قاعدة. ولإثبات
+اتجاه ``فقط إذا'' في الاشتقاقات الكمية، نكمل الاستقراء السابق بحالتي~\QR{}.
+
 نسير مرة أخرى بالاستقراء في طول !!{derivation} الصيغة $!B$ من
 $\Gamma \cup \{!A\}$.
 
@@ -46,12 +51,33 @@ $!C$ ولا في $!A$ ولا في $\Gamma$. ومن ثم لدينا
 \end{align*}
 أي إن $\Gamma \Proves !A \lif !B$.
 
-ونترك تمرينًا الحالة التي تبرر فيها القاعدة \QR الصيغة $!B$، ولكنها
-تكون من الصورة $\lexists[x][!D(x)] \lif !C$.
+وتبقى صورة~\QR{} الثانية. فإذا كان
+$!B \ident \lexists[x][!D(x)] \lif !C$، فقد سبقت في ال!!{derivation}
+الصيغة~$!D(a) \lif !C$، حيث لا يرد~$a$ في~$!C$ ولا في~$!A$ ولا في
+$\Gamma$. ويعطي فرض الاستقراء
+\[
+  \Gamma \Proves !A \lif (!D(a) \lif !C).
+\]
+وبإعادة ترتيب المقدِّمين في هذه القضية الصادقة منطقيًا نحصل على
+\[
+  \Gamma \Proves !D(a) \lif (!A \lif !C).
+\]
+وشرط الثابت المميَّز ما يزال متحققًا، فتجيز~\QR{} الاستنتاج
+\[
+  \Gamma \Proves \lexists[x][!D(x)] \lif (!A \lif !C).
+\]
+ثم تعيد قضية صادقة منطقيًا ترتيب المقدِّمين مرة أخرى، فنحصل بقاعدة
+إثبات المقدَّم على
+\[
+  \Gamma \Proves !A \lif (\lexists[x][!D(x)] \lif !C),
+\]
+أي~$\Gamma \Proves !A \lif !B$. وبهاتين الصورتين لـ~\QR{}، مع حالات
+الفرض والبديهية وإثبات المقدَّم المعالجة في البرهان السابق، يتم الاستقراء.
 \end{proof}
 
 \begin{prob}
-  أكمل برهان \olref[fol][axd][ddq]{thm:deduction-thm-q}.
+  تحقّق تفصيلًا من بقاء شروط الثابت المميَّز في صورتي~\QR{} في برهان
+  \olref[fol][axd][ddq]{thm:deduction-thm-q}.
 \end{prob}
 
 \end{document}

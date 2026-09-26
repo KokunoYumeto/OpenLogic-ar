@@ -30,25 +30,31 @@
 الأولى وحده. وكان إنجاز ديديكند الحاسم أن أعاد صياغة الشرط
 \olref{repeatedapplication} بلغة نظرية المجموعات كما يأتي:
 \begin{enumerate}
-	\item[3$'$.] الأعداد الطبيعية هي أصغر مجموعة
+	\item[3$'$.] الأعداد الطبيعية هي أصغر مجموعة تحتوي الصفر و
 	\emph{منغلقة تحت دالة اللاحق}: أي إننا إذا طبقنا $s$ على أي
 	!!{element} من المجموعة، حصلنا على !!{element} آخر من المجموعة.
 \end{enumerate}
 لكن سيلزمنا أن نبسط ذلك على مهل.
 
 \begin{defn}\ollabel{Closure}
-	لكل دالة $f$، تكون المجموعة $X$ \emph{منغلقة} تحت $f$
-	{إذا وفقط إذا} كان $(\forall x \in X)f(x) \in X$. والآن نعرّف، لكل $o$:
-	$$\closureofunder{f}{o} = \bigcap\Setabs{X}{o \in X\text{ و}X
-\text{ منغلقة تحت $f$}}$$
+	لتكن $A$ مجموعة، ولتكن $f\colon A\to A$. تكون المجموعة
+	$X\subseteq A$ \emph{منغلقة} تحت $f$
+	{إذا وفقط إذا} كان $(\forall x \in X)f(x) \in X$. ولكل $o\in A$ نعرّف:
+	$$\closureofunder{f}{o} = \bigcap\Setabs{X}{X\subseteq A\text{ و}o \in X\text{ و}X
+	\text{ منغلقة تحت $f$}}$$
 \end{defn}
+
+\textbf{تنبيه تصحيحي على الأصل (C051-01).} قُيّد تعريف الإغلاق بدالة
+$f\colon A\to A$، وجُعلت المجموعات المتقاطعة جزئيات من $A$؛ فعبارة
+«لكل دالة» لا تكفل أن يبقى تطبيق $f$ داخل المجال ولا تعيّن المجموعة
+المحيطة التي يؤخذ فيها التقاطع.
 
 إذن $\closureofunder{f}{o}$ هي تقاطع جميع المجموعات المنغلقة تحت $f$
 التي $o$ فيها !!a{element}. ومن ثم، حدسيًا، تكون
 $\closureofunder{f}{o}$ \emph{أصغر} مجموعة منغلقة تحت $f$، و$o$ فيها
 !!a{element}. وتجعل النتيجة الآتية هذه الفكرة الحدسية دقيقة؛
 \begin{lem}\ollabel{closureproperties}
-	لكل دالة $f$ ولكل $o \in A$:
+	لكل مجموعة $A$، ولكل دالة $f\colon A\to A$، ولكل $o \in A$:
 	\begin{enumerate}
 		\item\ollabel{closurehaselem} $o \in \closureofunder{f}{o}$؛ و
 		\item\ollabel{closureclosed} $\closureofunder{f}{o}$ منغلقة تحت $f$؛ و
@@ -59,8 +65,7 @@ $\closureofunder{f}{o}$ \emph{أصغر} مجموعة منغلقة تحت $f$، �
 
 \begin{proof}
 لاحظ أن ثمة مجموعة واحدة على الأقل منغلقة تحت $f$، و$o$ فيها
-!!a{element}، وهي $\ran{f}\cup
-\{o\}$. ولذلك يوجد $\closureofunder{f}{o}$، أي تقاطع
+!!a{element}، وهي $A$ نفسها. ولذلك يوجد $\closureofunder{f}{o}$، أي تقاطع
 \emph{جميع} المجموعات من هذا القبيل. ويلزمنا الآن أن نتحقق من
 \olref{closurehaselem}--\olref{closuresmallest}.
 
@@ -93,8 +98,8 @@ $\closureofunder{f}{o}$ \emph{أصغر} مجموعة منغلقة تحت $f$، �
 مجموعة منغلقة تحت $f$، و$o$ فيها !!a{element}. ومن الواضح أن جبر
 ديديكند لانهائي بحسب ديديكند؛ فما عليك إلا أن تنظر إلى الشرطين
 \olref{ded:proper} و\olref{ded:injection} من التعريف. لكن الحقيقة الأكثر
-إثارة هي أن كل مجموعة لانهائية بحسب ديديكند يمكن تحويلها إلى جبر
-ديديكند.
+إثارة هي أن وجود أي مجموعة لانهائية بحسب ديديكند يتيح إنشاء جبر
+ديديكند على مجموعة جزئية منها.
 
 \begin{thm}\ollabel{thm:DedekindInfiniteAlgebra}
 إذا وجدت مجموعة لانهائية بحسب ديديكند، وجد جبر ديديكند.

@@ -1,0 +1,82 @@
+% Part: lambda-calculus
+% Chapter: syntax
+% Section: eta
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{syn}{eta}
+\olsection{تحويل~$\eta$}
+
+ولحدود~$\lambda$ علاقة أخرى نبينها بالمثال الذي سبق في~\olref[fv]{sec}:
+فالحد~$\lambd[x][(fx)]$ يأخذ وسيطًا ثم يطبق~$f$ عليه؛ فهو من حيث الدالة
+نفس~$f$، إذ يختزل كل من~$\lambd[x][(fx)]N$ و$fN$ إلى~$fN$.
+ولضبط هذا المعنى نستعمل اختزال~$\eta$ وتمديد~$\eta$.
+
+\begin{defn}[تقلّص~$\eta$، $\eredone$]
+  \ollabel{defn:beredone}
+  علاقة \emph{تقلّص~$\eta$} ($\eredone$) أصغر العلاقات المتوافقة على الحدود
+  التي تحقق
+  \[
+    \lambd[x][M x] \eredone M \text{ بشرط } x \notin \FV{M}
+  \]
+\end{defn}
+
+\begin{defn}[اختزال~$\beta\eta$، $\bered$] \ollabel{defn:bered}
+  علاقة \emph{اختزال~$\beta\eta$} ($\bered$) أصغر علاقة انعكاسية متعدية
+  على الحدود تشتمل على~$\bredone$ و$\eredone$.
+  فتعريفها يجمع قاعدتي الانعكاس والتعدي إلى القاعدتين:
+  \begin{enumerate}
+  \item من~$M \bredone N$ يلزم~$M \bered N$. \ollabel{defn:bered3}
+  \item من~$M \eredone N$ يلزم~$M \bered N$. \ollabel{defn:bered4}
+  \end{enumerate}
+    
+\end{defn}
+
+\begin{defn}
+  نضم إلى علاقة التكافؤ~$\equal$ قاعدة تحويل~$\eta$:
+  \[
+  \lambd[x][f x] \equal f \quad\text{إذا كان }x \notin \FV{f}
+  \]
+  ونسمي العلاقة الحاصلة~$\equal[\eta]$.
+  % تصحيح مصدر (0366-I1): أُثبت شرط النضارة اللازم لتحويل إيتا.
+\end{defn}
+
+ومن شأن التكافؤ بحسب~$\eta$ أنه يتصل بامتدادية حدود لامبدا:
+
+\begin{defn}[الامتدادية]
+  نضم إلى علاقة التكافؤ~$\equal$ قاعدة~(\ext):
+  \begin{center}
+  من~$Mx \equal Nx$ يلزم~$M \equal N$، بشرط~$x \notin \FV{MN}$.
+  \end{center}
+  ونجعل~$\equal[\ext]$ رمزًا للعلاقة الحاصلة.
+\end{defn}
+
+ومؤدى هذه القاعدة، على وجه التقريب، أن الحدين إذا عدّا دالتين وكان
+فعلهما في الوسيط الواحد سواء، وجب عدهما متساويين.
+
+فلنثبت أن ما تضيفه قاعدة~$\eta$ هو الامتدادية وحدها، لا أكثر منها ولا أقل.
+
+\begin{thm}
+  $M \equal[\ext] N$ يكافئ~$M \equal[\eta] N$.
+\end{thm}
+
+\begin{proof}
+  نبدأ بإثبات انغلاق~$\equal[\eta]$ تحت قاعدة الامتدادية؛ فإذا ثبت
+  أن قاعدة~$ext$ لا تزيد شيئًا على~$\equal[\eta]$، لزم أن تحتوي~$\equal[\eta]$
+  العلاقة~$\equal[\ext]$، وأن يلزم من~$M \equal[\ext] N$ تحقق~$M
+  \equal[\eta] N$.
+
+  ووجه انغلاق~$\equal[\eta]$ تحت~\ext{} أن كل نتيجة~$M \equal N$
+  يراد اشتقاقها بقاعدة~\ext{} لها المقدمة~$Mx \equal[\eta] Nx$.
+  ومنها نحصل على~$\lambd[x][Mx] \equal[\eta] \lambd[x][Nx]$
+  بقاعدة من قواعد~$\equal$، ثم نطبق~$\eta$ على الطرفين فنبلغ~$M \equal[\eta] N$.
+
+  وأما الاتجاه الآخر فنثبت فيه أن قاعدة~$\eta$ داخلة في~$\equal[\ext]$.
+  فمتى أخذنا~$\lambd[x][Mx]$ و$M$ مع الشرط~$x \notin \FV{M}$،
+  كان~$(\lambd[x][Mx])x \equal[\ext] Mx$؛
+  فتنتج~$\lambd[x][Mx] \equal[\ext] M$ بقاعدة~\ext{}.
+\end{proof}
+
+\end{document}

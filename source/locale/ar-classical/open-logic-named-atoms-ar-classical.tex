@@ -1,0 +1,94 @@
+% Opt-in direction protection for the existing set-of-expressions names.
+% These Latin names are preserved spellings, not translated terminology.
+\ifdefined\OLClassicalNamedAtomsLoaded\endinput\fi
+\def\OLClassicalNamedAtomsLoaded{1}
+\ProvidesFile{open-logic-named-atoms-ar-classical.tex}
+  [2026/09/09 Classical named math stems with scoped LTR spelling]
+\RequirePackage{xparse}
+\makeatletter
+\newif\ifOLClassicalNamedAtomsInstalled
+
+% The outer noad stays ordinary, as with the inherited \mathrm stem. Only
+% the fixed spelling receives a TLT subformula; arguments, parentheses and
+% scripts remain in the caller's math list. mathpalette propagates the actual
+% display/text/script/scriptscript size rather than freezing a text font size.
+\newcommand*{\OLClassicalNamedAtomPalette}[2]{%
+  \hbox{%
+    \textdir TLT
+    \OLClassicalSetLocalMathDirection\z@
+    \m@th$#1\mathrm{#2}$%
+  }%
+}
+\newcommand*{\OLClassicalNamedMathAtom}[1]{%
+  \ifnum\OLClassicalDesiredMathDirection=\@ne
+    \mathord{\mathpalette\OLClassicalNamedAtomPalette{#1}}%
+  \else
+    \mathrm{#1}%
+  \fi
+}
+
+\newcommand*{\OLClassicalInstallNamedAtoms}{%
+  \ifOLClassicalNamedAtomsInstalled\else
+    \ifdefined\OLClassicalSetLocalMathDirection\else
+      \PackageError{open-logic-classical-named-atoms}
+        {Classical math-direction helpers are not loaded}
+        {Load open-logic-rtl-math.tex before installing named atoms.}%
+    \fi
+    % xparse commands own parser/code auxiliaries: a plain let would retain
+    % aliases to auxiliaries that RenewDocumentCommand subsequently replaces.
+    \DeclareCommandCopy\OLClassicalSavedNamedTrm\Trm
+    \DeclareCommandCopy\OLClassicalSavedNamedFrm\Frm
+    \DeclareCommandCopy\OLClassicalSavedNamedTrmSOL\TrmSOL
+    \DeclareCommandCopy\OLClassicalSavedNamedFrmSOL\FrmSOL
+    \DeclareCommandCopy\OLClassicalSavedNamedPVar\PVar
+    \DeclareCommandCopy\OLClassicalSavedNamedSubFrm\SubFrm
+    \DeclareCommandCopy\OLClassicalSavedNamedFV\FV
+    \DeclareCommandCopy\OLClassicalSavedNamedSent\Sent
+    \RenewDocumentCommand\Trm{o}{%
+      \IfNoValueTF{##1}
+        {\OLClassicalNamedMathAtom{Trm}}
+        {\OLClassicalNamedMathAtom{Trm}({\Lang{##1}})}%
+    }
+    \RenewDocumentCommand\Frm{o}{%
+      \IfNoValueTF{##1}
+        {\OLClassicalNamedMathAtom{Frm}}
+        {\OLClassicalNamedMathAtom{Frm}({\Lang{##1}})}%
+    }
+    \RenewDocumentCommand\TrmSOL{o}{%
+      \IfNoValueTF{##1}
+        {\OLClassicalNamedMathAtom{Trm}^2}
+        {\OLClassicalNamedMathAtom{Trm}^2({\Lang{##1}})}%
+    }
+    \RenewDocumentCommand\FrmSOL{o}{%
+      \IfNoValueTF{##1}
+        {\OLClassicalNamedMathAtom{Frm}^2}
+        {\OLClassicalNamedMathAtom{Frm}^2({\Lang{##1}})}%
+    }
+    \renewcommand*{\PVar}{\OLClassicalNamedMathAtom{At}_0}
+    \RenewDocumentCommand\SubFrm{m}{\OLClassicalNamedMathAtom{SFrm}({##1})}
+    \RenewDocumentCommand\FV{m}{\OLClassicalNamedMathAtom{FV}({##1})}
+    \RenewDocumentCommand\Sent{o}{%
+      \IfNoValueTF{##1}
+        {\OLClassicalNamedMathAtom{Sent}}
+        {\OLClassicalNamedMathAtom{Sent}({\Lang{##1}})}%
+    }
+    \OLClassicalNamedAtomsInstalledtrue
+    \typeout{OL-CLASSICAL-NAMED-ATOMS=ordinary-scoped-ltr-stems-v1}%
+  \fi
+}
+
+\newcommand*{\OLClassicalRestoreNamedAtoms}{%
+  \ifOLClassicalNamedAtomsInstalled
+    \RenewCommandCopy\Trm\OLClassicalSavedNamedTrm
+    \RenewCommandCopy\Frm\OLClassicalSavedNamedFrm
+    \RenewCommandCopy\TrmSOL\OLClassicalSavedNamedTrmSOL
+    \RenewCommandCopy\FrmSOL\OLClassicalSavedNamedFrmSOL
+    \RenewCommandCopy\PVar\OLClassicalSavedNamedPVar
+    \RenewCommandCopy\SubFrm\OLClassicalSavedNamedSubFrm
+    \RenewCommandCopy\FV\OLClassicalSavedNamedFV
+    \RenewCommandCopy\Sent\OLClassicalSavedNamedSent
+    \OLClassicalNamedAtomsInstalledfalse
+  \fi
+}
+\makeatother
+\endinput

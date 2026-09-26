@@ -1,0 +1,64 @@
+% Part: first-order-logic
+% Chapter: axiomatic-deduction
+% Section: provability-quantifiers
+
+% verification of properties of provability needed for maximally
+% consistent sets in the completeness chapter.
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{axd}{qpr}
+
+\olsection{\usetoken{S}{derivability} والمكمّمات}
+
+\begin{explain}
+  ومن مقدمات برهان الاكتمال أن تثبت بالاشتقاقات البديهية هذه
+  النتائج في علاقة~$\Proves$؛ فنبيّنها الآن.
+\end{explain}
+
+\begin{thm}
+\ollabel{thm:strong-generalization} إذا كان $c$ !!a{constant} لا يرد
+في $\Gamma$ ولا في $!A(x)$، وكان $\Gamma \Proves !A(c)$، فإن $\Gamma
+\Proves \lforall[x][!A(x)]$.
+\end{thm}
+
+\begin{proof}
+% تصحيح برهاني (0123-I1): لا يلزم أن يكون c من مخزون الثوابت المميزة؛ نجدد ثوابت البرهان ثم نبدله بثابت من E.
+خذ برهانًا منتهيًا~$\Pi$ لـ~$!A(c)$ من~$\Gamma$، وسمّ فروضه المستعملة
+$\Gamma_0$. جدّد ثوابته المميَّزة بـ
+  \olref[qua]{lem:qr-freshening} مع مجموعة المنع~$\{c\}$، ثم اختر
+$e\in\mathcal E\setminus\{c\}$ لا يقع في شيء من صيغ البرهان المجدَّد ولا يساوي ثابتًا
+مميَّزًا مكتوبًا على عقدة~\QR{} فيه. بدّل~$c$ و~$e$ تقابليًا في البرهان
+كله. ولا يتغير~$\Gamma_0$، إذ كلا الثابتين غير وارد فيه؛ كما تحفظ إعادة
+التسمية البديهيات وإثبات المقدَّم وصورتي~\QR{} وشروطهما. فينتج
+$\Gamma_0\Proves !A(e)$.
+
+  ونضم إلى ذلك الصيغة~$!A(e)\lif(\ltrue\lif !A(e))$ من بديهية اللزوم
+  الأولى، فنستخرج بإثبات المقدَّم
+  $\Gamma_0\Proves\ltrue\lif !A(e)$. ولما كان~$e\in\mathcal E$ غير وارد
+في~$\Gamma_0$ ولا~$\ltrue$ ولا~$!A(x)$، جاز إجراء~\QR{}، فحصلنا على
+$\Gamma_0\Proves\ltrue\lif\lforall[x][!A(x)]$. ونضم إليه
+$\Gamma_0\Proves\ltrue$، فنستنتج بإثبات المقدَّم
+$\Gamma_0\Proves\lforall[x][!A(x)]$؛ ثم ترفع الرتابة النتيجة إلى~$\Gamma$.
+\end{proof}
+
+\begin{prop}
+\ollabel{prop:provability-quantifiers}
+لكل حد مغلق~$t$ تصح العبارتان الآتيتان:
+\begin{tagenumerate}{prvEx,prvAll}
+\tagitem{prvEx}{$!A(t) \Proves \lexists[x][!A(x)]$.}{}
+
+\tagitem{prvAll}{$\lforall[x][!A(x)] \Proves !A(t)$.}{}
+\end{tagenumerate}
+\end{prop}
+
+\begin{proof}
+\begin{tagenumerate}{prvEx,prvAll}
+\tagitem{prvEx}{نأخذ \olref[qua]{ax:q2} ثم نطبق مبرهنة الاستنباط.}{}
+\tagitem{prvAll}{ونأخذ \olref[qua]{ax:q1} ثم نطبق مبرهنة الاستنباط.}{}
+\end{tagenumerate}
+\end{proof}
+
+\end{document}

@@ -1,0 +1,68 @@
+% Part: first-order-logic
+% Chapter: sequent-calculus
+% Section: rules-and-proofs
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{seq}{rul}}
+      {\olfileid{pl}{seq}{rul}}
+
+\olsection{القواعد وال\usetoken{P}{derivation}}
+
+فيما يأتي، لتدل~$\Gamma, \Delta, \Pi, \Lambda$ على متتاليات منتهية
+من ال!!{sentence}s.
+
+\begin{defn}[التتابعية]
+\emph{التتابعية} تعبير من الصورة
+\[
+\Gamma \Sequent \Delta
+\]
+حيث~$\Gamma$ و$\Delta$ متتاليتان منتهيتان (وربما خاليتان) من
+!!{sentence}s اللغة~$\Lang L$. وتسمى~$\Gamma$ \emph{المقدَّم}، بينما
+تسمى~$\Delta$ \emph{التالي}.
+\end{defn}
+
+\begin{explain}
+المقصود بالتتابعية، في التصور الأول، أن صدق جميع ال!!{sentence}s في مقدَّمها يقتضي صدق واحدة على الأقل من ال!!{sentence}s في تاليها.
+فإذا كان $\Gamma = \tuple{!A_1, \dots, !A_m}$ و
+$\Delta = \tuple{!B_1, \dots, !B_n}$، كان تحقق $\Gamma \Sequent \Delta$
+مكافئًا لتحقق
+\[
+(!A_1 \land \cdots \land !A_m) \lif (!B_1 \lor \cdots \lor
+!B_n)
+\]
+ويُفرد بالنظر خلو~$\Gamma$ وخلو~$\Delta$.
+فإن خلت~$\Gamma$، أي كان $m = 0$، تحققت $\quad
+\Sequent \Delta$ متى وفقط متى تحقق
+$!B_1 \lor \dots \lor !B_n$.
+وإن خلت~$\Delta$، أي كان $n = 0$، تحققت $\Gamma \Sequent \quad$
+متى وفقط متى تحقق
+$\lnot(!A_1 \land \dots \land !A_m)$.
+فصلاحية التتابعية هي صلاحية ال!!{sentence} التي تقابلها، والشرط لازم وكاف.
+\end{explain}
+
+للمتتالية~$\Gamma$ من ال!!{sentence}s نكتب $\Gamma, !A$
+إذا أُلحق~$!A$ بآخر~$\Gamma$ من اليمين، ونكتب $!A, \Gamma$
+إذا أُلحق~$!A$ بطرف~$\Gamma$ الأيسر. فإن كانت~$\Delta$
+متتالية من ال!!{sentence}s كذلك، دلّ~$\Gamma, \Delta$ على وصلهما.
+
+\begin{defn}[تتابعية ابتدائية]
+\emph{التتابعية الابتدائية} تتابعية
+\iftag{prvFalse,prvTrue}{من إحدى الصور الآتية:
+  \begin{enumerate}
+    \item $!A \Sequent !A$
+    \tagitem{prvTrue}{$\quad \Sequent \ltrue$}{}
+    \tagitem{prvFalse}{$\lfalse \Sequent \quad$}{}
+  \end{enumerate}}
+{من الصورة $!A \Sequent !A$} لأي !!{sentence}~$!A$ في اللغة.
+\end{defn}
+
+ال!!^{derivation}s في حساب التتابعيات أشجارٌ مخصوصة: في أعلاها تتابعيات ابتدائية، وكل تتابعية تلي تتابعية أو تتابعيتين لا بد أن تنتج عنها أو عنهما بتطبيق صحيح لقاعدة.
+وقواعد~$\Log{LK}$ ضربان: \emph{منطقية} و\emph{بنيوية}.
+وتُنسب القاعدة المنطقية إلى !!{main operator} لل!!{sentence} التي تضم~$!A$ و/أو~$!B$ في التتابعية السفلى.
+ولكل قاعدة وجهان: وجه تكون فيه ال!!{sentence} المشتملة على ال!!{operator} في يسار النتيجة، ووجه تكون فيه ال!!{sentence} في يمينها.
+
+\end{document}

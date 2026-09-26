@@ -1,0 +1,41 @@
+% Part: lambda-calculus
+% Chapter: introduction
+% Section: lambda-computable
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{int}{cmp}
+\olsection{الدوال \usetoken{S}{lambda definable} قابلة للحساب}
+
+\begin{thm}
+\ollabel{thm:lambda-computable}
+كل دالة جزئية~$f$ تكون !!{lambda defined} بحد لامبدا تقبل الحساب.
+\end{thm}
+
+\begin{proof}
+لتكن الدالة~$f$ !!{lambda defined} بحد لامبدا~$X$.
+نصف أولًا إجراء حساب~$f$ وصفًا غير صوري.
+إذا أعطينا~$m_0$، \dots،~$m_{n-1}$،
+كتبنا الحد~$X \num m_0 \ldots \num m_{n-1}$.
+ثم أنشأنا شجرة: في طبقتها الأولى جميع اختزالات هذا الحد
+بخطوة واحدة، وتحت كل حد منها جميع اختزالاته بخطوة واحدة،
+فتكون الطبقة الثانية اختزالات الحد الأصلي بخطوتين،
+وهكذا طبقة بعد طبقة. متى بلغنا تمثيلًا عدديًا أعدناه جوابًا؛
+وإن لم نبلغه كانت الدالة غير معرّفة.
+
+وبأطروحة تشيرش نستنتج من هذا الوصف قابلية الدالة للحساب.
+والأدق أن نصف البحث وصفًا عوديًا. فلنا مثلًا أن نعرّف دوال
+وعلاقات عودية بدائية باسم
+«$\fn{IsASubterm}$» و«$\fn{Substitute}$»
+و«$\fn{ReducesToInOneStep}$» و«$\fn{ReductionSequence}$»
+و«$\fn{Numeral}$»، ونحوها.
+ثم يكون حساب~$f(m_0, \dots, m_{n-1})$ إجراءً عوديًا جزئيًا:
+نبحث عن متتالية اختزالات، كل منها بخطوة واحدة، تبدأ
+بـ$X \num{m_0} \dots \num{m_{n-1}}$ وتنتهي بتمثيل عددي،
+فنعيد العدد الطبيعي الذي يمثله.
+وتفصيل ذلك طويل مضجر، إلا أنه جار على الطرق المعتادة.
+\end{proof}
+
+\end{document}

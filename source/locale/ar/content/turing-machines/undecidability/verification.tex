@@ -155,10 +155,11 @@ $!T(M,w)\Entails !C(M,w,n+1)$.
 \intertext{فنحصل الآن على}
 & \Obj Q_{q'}(\num{m}', \num{n}') \land \Obj S_{\sigma'}(\num{m},
   \num{n}') \land {}\\
-& \qquad\Obj S_{\sigma_0}(\num{0}, \num{n}') \land \dots \land
-  \Obj S_{\sigma_k}(\num{k}, \num{n}') \land {}\\
+& \qquad\displaystyle\bigwedge_{\substack{0\leq i\leq k\\i\neq m}}
+  \Obj S_{\sigma_i}(\num{i}, \num{n}') \land {}\\
 & \qquad \lforall[x][(\num{k} < x \lif \Obj S_\TMblank(x, \num{n}'))]
 \end{align*}
+% تصحيح مصدر (C271-01): قُيّد حفظ رموز الشريط بالخانات i≠m؛ فالخانة m تُكتب فيها sigma'.
 كما يأتي: يأتي السطر الأول مباشرة من تالي الشرط السابق بقياس الفصل.
 وكل مقترن في السطر الأوسط، الذي يستثني
 $S_{\sigma_m}(\num{m},\num{n}')$، ينتج من المقترن المقابل في
@@ -198,9 +199,9 @@ $\lforall[x][(\num{k}'<x\lif\Obj S_\TMblank(x,\num{n}'))]$. (ونترك
     S_{\sigma}(x', y)) \lif {}]]\\
 & \qquad (\Obj Q_{q'}(x, y') \land \Obj
   S_{\sigma'}(x', y') \land !A(x', y))) \land {}\\
-& \lforall[y][((\Obj Q_{q_i}(\num{0}, y) \land \Obj S_{\sigma}(\num{0},
+& \lforall[y][((\Obj Q_{q}(\num{0}, y) \land \Obj S_{\sigma}(\num{0},
     y)) \lif {}]\\
-& \qquad (\Obj Q_{q_j}(\num{0}, y') \land \Obj S_{\sigma'}(\num{0}, y')
+& \qquad (\Obj Q_{q'}(\num{0}, y') \land \Obj S_{\sigma'}(\num{0}, y')
   \land !A(\num{0}, y)))
 \intertext{مقترنة في $!T(M,w)$. فإذا كان $m>0$، فليكن $l=m-1$
   (أي $m=l+1$). ويستلزم المقترن الأول من ال!!{sentence} السابقة ما يأتي:}
@@ -210,17 +211,18 @@ $\lforall[x][(\num{k}'<x\lif\Obj S_\TMblank(x,\num{n}'))]$. (ونترك
 \num{n}') \land !A(\num{l}', \num{n})).
 \intertext{وإلا فليكن $l=m=0$، وانظر إلى ال!!{sentence} الآتية التي
   يستلزمها المقترن الثاني:}
-& ((\Obj Q_{q_i}(\num{0}, \num{n}) \land \Obj S_{\sigma}(\num{0}, \num{n})) \lif {}\\
-& \qquad   (\Obj Q_{q_j}(\num{0}, \num{n}') \land \Obj S_{\sigma'}(\num{0}, \num{n}') \land
+& ((\Obj Q_{q}(\num{0}, \num{n}) \land \Obj S_{\sigma}(\num{0}, \num{n})) \lif {}\\
+& \qquad   (\Obj Q_{q'}(\num{0}, \num{n}') \land \Obj S_{\sigma'}(\num{0}, \num{n}') \land
 !A(\num{0}, \num{n}))).
 \intertext{وتستلزم كل من العبارتين}
 &  \Obj Q_{q'}(\num{l}, \num{n}') \land \Obj S_{\sigma'}(\num{m},
   \num{n}') \land {}\\
-&\qquad  \Obj S_{\sigma_0}(\num{0}, \num{n}')\land \dots \land
-  \Obj S_{\sigma_k}(\num{k}, \num{n}')  \land {} \\
+&\qquad \displaystyle\bigwedge_{\substack{0\leq i\leq k\\i\neq m}}
+  \Obj S_{\sigma_i}(\num{i}, \num{n}') \land {} \\
 & \qquad  \lforall[x][(\num{k} < x
   \lif \Obj S_\TMblank(x, \num{n}'))]
 \end{align*}
+% تصحيح مصدر (C271-02): رُبط فرع أقصى اليسار بالحالتين q وq' في التعليمة محل البحث.
 كما سبق. (لاحظ أن $\num{l}'\ident\num{l+1}\ident\num{m}$ في الحالة
 الأولى، وأن $\num{l}\ident\num{0}$ في الحالة الثانية.) لكن هذه هي
 $!C(M,w,n+1)$ بعينها.

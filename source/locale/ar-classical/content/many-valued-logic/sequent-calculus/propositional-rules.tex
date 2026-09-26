@@ -1,0 +1,424 @@
+% Part: many-valued-logic
+% Chapter: sequent-calculus
+% Section: propositional-rules
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mvl}{seq}{prl}
+
+\olsection{قواعد القضايا لمنطقات مختارة}
+
+العمدة في تعيين قواعد رابط ما في حساب تتابعيات ذي جوانب~$n$ هي
+دالة الصدق المميزة لذلك الرابط وحدها. فإن اشترك منطقان أو أكثر في
+هذه الدالة، اشتركا في قواعد التتابعيات ذات الجوانب~$n$ الخاصة
+بالرابط، وإن اختلفا من وجوه أخرى.
+
+\subsection{قواعد~$\lnot$}
+
+أما~$\lnot$ في منطقي~\L ukasiewicz وكلايني وفي صورهما المختلفة،
+فقواعده كما يأتي.
+
+\begin{defish}
+  \begin{center}
+\AxiomC{$ \Gamma \nSequent \Pi \nSequent \Delta, !A $}
+\RightLabel{\iR{\lnot}{\False}}
+\UnaryInfC{$ \lnot !A, \Gamma \nSequent \Pi \nSequent \Delta$}
+\DisplayProof
+\\[2ex]
+\AxiomC{$ \Gamma \nSequent !A, \Pi \nSequent \Delta $}
+\RightLabel{\iR{\lnot}{\Undef}}
+\UnaryInfC{$\Gamma \nSequent \lnot !A, \Pi \nSequent \Delta$}
+\DisplayProof
+\\[2ex]
+\AxiomC{$!A, \Gamma \nSequent \Pi \nSequent \Delta$}
+\RightLabel{\iR{\lnot}{\True}}
+\UnaryInfC{$\Gamma \nSequent \Pi \nSequent \Delta,  \lnot !A$}
+\DisplayProof
+  \end{center}
+\end{defish}
+
+تنطبق القواعد الآتية لـ$\lnot$ على منطق غودل.
+
+\begin{defish}
+\AxiomC{$ \Gamma \nSequent !A, \Pi \nSequent \Delta, !A $}
+\RightLabel{\iR{\lnot}{\False}[\LogGod]}
+\UnaryInfC{$ \lnot !A, \Gamma \nSequent \Pi \nSequent \Delta$}
+\DisplayProof
+\hfill
+\AxiomC{$!A, \Gamma \nSequent \Pi \nSequent \Delta$}
+\RightLabel{\iR{\lnot}{\True}[\LogGod]}
+\UnaryInfC{$\Gamma \nSequent \Pi \nSequent \Delta,  \lnot !A$}
+\DisplayProof
+\hfill
+\end{defish}
+
+وأما~$\lnot !A$ فلا سبيل إلى أن تكون قيمته~$\Undef$ في منطق غودل؛
+ولذلك خلا الموضع الأوسط من قاعدة خاصة به.
+
+\subsection{قواعد~$\land$}
+
+هذه قواعد~$\land$ في منطق~\L ukasiewicz ومنطق كلايني القوي ومنطق
+غودل.
+
+\begin{defish}
+\[
+  \AxiomC{$\begin{gathered}
+    !A, !B, \Gamma \\[-0.25ex]
+    \nSequent \Pi \\[-0.25ex]
+    \nSequent \Delta
+  \end{gathered}$}
+  \RightLabel{$\iR{\land}{\False}$}
+  \UnaryInfC{$\begin{gathered}
+    !A \land !B, \Gamma \\[-0.25ex]
+    \nSequent \Pi \\[-0.25ex]
+    \nSequent \Delta
+  \end{gathered}$}
+  \DisplayProof
+\]
+\[
+  \AxiomC{$\begin{gathered}
+    \Gamma \\[-0.25ex]
+    \nSequent !A, \Pi \\[-0.25ex]
+    \nSequent !A, \Delta
+  \end{gathered}$}
+  \AxiomC{$\begin{gathered}
+    \Gamma \\[-0.25ex]
+    \nSequent !B, \Pi \\[-0.25ex]
+    \nSequent !B, \Delta
+  \end{gathered}$}
+  \AxiomC{$\begin{gathered}
+    \Gamma \\[-0.25ex]
+    \nSequent !A, !B, \Pi \\[-0.25ex]
+    \nSequent \Delta
+  \end{gathered}$}
+  \RightLabel{$\iR\land\Undef$}
+  \TrinaryInfC{$\begin{gathered}
+    \Gamma \\[-0.25ex]
+    \nSequent !A \land !B, \Pi \\[-0.25ex]
+    \nSequent \Delta
+  \end{gathered}$}
+  \DisplayProof
+\]
+\[
+  \AxiomC{$\begin{gathered}
+    \Gamma \\[-0.25ex]
+    \nSequent \Pi \\[-0.25ex]
+    \nSequent \Delta, !A
+  \end{gathered}$}
+  \AxiomC{$\begin{gathered}
+    \Gamma \\[-0.25ex]
+    \nSequent \Pi \\[-0.25ex]
+    \nSequent \Delta, !B
+  \end{gathered}$}
+  \RightLabel{$\iR\land\True$}
+  \BinaryInfC{$\begin{gathered}
+    \Gamma \\[-0.25ex]
+    \nSequent \Pi \\[-0.25ex]
+    \nSequent \Delta, !A \land !B
+  \end{gathered}$}
+  \DisplayProof
+\]
+\end{defish}
+
+\subsection{قواعد~$\lor$}
+
+هذه قواعد~$\lor$ في منطق~\L ukasiewicz ومنطق كلايني القوي ومنطق
+غودل.
+
+\begin{defish}
+\[
+  \AxiomC{$\begin{gathered}
+    !A, \Gamma \\[-0.25ex]
+    \nSequent \Pi \\[-0.25ex]
+    \nSequent \Delta
+  \end{gathered}$}
+  \AxiomC{$\begin{gathered}
+    !B, \Gamma \\[-0.25ex]
+    \nSequent \Pi \\[-0.25ex]
+    \nSequent \Delta
+  \end{gathered}$}
+  \RightLabel{$\iR\lor\False$}
+  \BinaryInfC{$\begin{gathered}
+    !A \lor !B, \Gamma \\[-0.25ex]
+    \nSequent \Pi \\[-0.25ex]
+    \nSequent \Delta
+  \end{gathered}$}
+  \DisplayProof
+\]
+\[
+  \AxiomC{$\begin{gathered}
+    !A, \Gamma \\[-0.25ex]
+    \nSequent !A, \Pi \\[-0.25ex]
+    \nSequent \Delta
+  \end{gathered}$}
+  \AxiomC{$\begin{gathered}
+    !B, \Gamma \\[-0.25ex]
+    \nSequent !B, \Pi \\[-0.25ex]
+    \nSequent \Delta
+  \end{gathered}$}
+  \AxiomC{$\begin{gathered}
+    \Gamma \\[-0.25ex]
+    \nSequent !A, !B, \Pi \\[-0.25ex]
+    \nSequent \Delta
+  \end{gathered}$}
+  \RightLabel{$\iR\lor\Undef$}
+  \TrinaryInfC{$\begin{gathered}
+    \Gamma \\[-0.25ex]
+    \nSequent !A \lor !B, \Pi \\[-0.25ex]
+    \nSequent \Delta
+  \end{gathered}$}
+  \DisplayProof
+\]
+\[
+  \AxiomC{$\begin{gathered}
+    \Gamma \\[-0.25ex]
+    \nSequent \Pi \\[-0.25ex]
+    \nSequent \Delta, !A, !B
+  \end{gathered}$}
+  \RightLabel{$\iR\lor\True$}
+  \UnaryInfC{$\begin{gathered}
+    \Gamma \\[-0.25ex]
+    \nSequent \Pi \\[-0.25ex]
+    \nSequent \Delta, !A \lor !B
+  \end{gathered}$}
+  \DisplayProof
+\]
+\end{defish}
+
+\subsection{قواعد~$\lif$}
+
+هذه قواعد~$\lif$ في منطق~\L ukasiewicz.
+
+\begin{defish}
+\[
+  \AxiomC{$\begin{gathered}
+    \Gamma \\[-0.25ex]
+    \nSequent \Pi \\[-0.25ex]
+    \nSequent \Delta, !A
+  \end{gathered}$}
+  \AxiomC{$\begin{gathered}
+    !B, \Gamma \\[-0.25ex]
+    \nSequent \Pi \\[-0.25ex]
+    \nSequent \Delta
+  \end{gathered}$}
+  \RightLabel{$\iR\lif\False[\LogLuk[3]]$}
+  \BinaryInfC{$\begin{gathered}
+    !A \lif !B, \Gamma \\[-0.25ex]
+    \nSequent \Pi \\[-0.25ex]
+    \nSequent \Delta
+  \end{gathered}$}
+  \DisplayProof
+\]
+\[
+  \AxiomC{$\begin{gathered}
+    \Gamma \\[-0.25ex]
+    \nSequent !A, !B, \Pi \\[-0.25ex]
+    \nSequent \Delta
+  \end{gathered}$}
+  \AxiomC{$\begin{gathered}
+    !B, \Gamma \\[-0.25ex]
+    \nSequent \Pi \\[-0.25ex]
+    \nSequent \Delta, !A
+  \end{gathered}$}
+  \RightLabel{$\iR\lif\Undef[\LogLuk[3]]$}
+  \BinaryInfC{$\begin{gathered}
+    \Gamma \\[-0.25ex]
+    \nSequent !A \lif !B, \Pi \\[-0.25ex]
+    \nSequent \Delta
+  \end{gathered}$}
+  \DisplayProof
+\]
+\[
+  \AxiomC{$\begin{gathered}
+    !A, \Gamma \\[-0.25ex]
+    \nSequent !B, \Pi \\[-0.25ex]
+    \nSequent \Delta, !B
+  \end{gathered}$}
+  \AxiomC{$\begin{gathered}
+    !A, \Gamma \\[-0.25ex]
+    \nSequent !A, \Pi \\[-0.25ex]
+    \nSequent \Delta, !B
+  \end{gathered}$}
+  \RightLabel{$\iR{\lif}{\True}[\LogLuk[3]]$}
+  \BinaryInfC{$\begin{gathered}
+    \Gamma \\[-0.25ex]
+    \nSequent \Pi \\[-0.25ex]
+    \nSequent \Delta, !A \lif !B
+  \end{gathered}$}
+  \DisplayProof
+\]
+\end{defish}
+
+هذه قواعد~$\lif$ في منطق كلايني القوي.
+
+\begin{defish}
+\[
+  \AxiomC{$\begin{gathered}
+    \Gamma \\[-0.25ex]
+    \nSequent \Pi \\[-0.25ex]
+    \nSequent \Delta, !A
+  \end{gathered}$}
+  \AxiomC{$\begin{gathered}
+    !B, \Gamma \\[-0.25ex]
+    \nSequent \Pi \\[-0.25ex]
+    \nSequent \Delta
+  \end{gathered}$}
+  \RightLabel{$\iR\lif\False[\LogKs]$}
+  \BinaryInfC{$\begin{gathered}
+    !A \lif !B, \Gamma \\[-0.25ex]
+    \nSequent \Pi \\[-0.25ex]
+    \nSequent \Delta
+  \end{gathered}$}
+  \DisplayProof
+\]
+\[
+  \AxiomC{$\begin{gathered}
+    !B, \Gamma \\[-0.25ex]
+    \nSequent !B, \Pi \\[-0.25ex]
+    \nSequent \Delta
+  \end{gathered}$}
+  \AxiomC{$\begin{gathered}
+    \Gamma \\[-0.25ex]
+    \nSequent !A, !B, \Pi \\[-0.25ex]
+    \nSequent \Delta
+  \end{gathered}$}
+  \AxiomC{$\begin{gathered}
+    \Gamma \\[-0.25ex]
+    \nSequent !A, \Pi \\[-0.25ex]
+    \nSequent \Delta, !A
+  \end{gathered}$}
+  \RightLabel{$\iR\lif\Undef[\LogKs]$}
+  \TrinaryInfC{$\begin{gathered}
+    \Gamma \\[-0.25ex]
+    \nSequent !A \lif !B, \Pi \\[-0.25ex]
+    \nSequent \Delta
+  \end{gathered}$}
+  \DisplayProof
+\]
+\[
+  \AxiomC{$\begin{gathered}
+    !A, \Gamma \\[-0.25ex]
+    \nSequent \Pi \\[-0.25ex]
+    \nSequent \Delta, !B
+  \end{gathered}$}
+  \RightLabel{$\iR{\lif}{\True}[\LogKs]$}
+  \UnaryInfC{$\begin{gathered}
+    \Gamma \\[-0.25ex]
+    \nSequent \Pi \\[-0.25ex]
+    \nSequent \Delta, !A \lif !B
+  \end{gathered}$}
+  \DisplayProof
+\]
+\end{defish}
+
+هذه قواعد~$\lif$ في منطق غودل.
+
+\begin{defish}
+\[
+  \AxiomC{$\begin{gathered}
+    \Gamma \\[-0.25ex]
+    \nSequent !A, \Pi \\[-0.25ex]
+    \nSequent \Delta, !A
+  \end{gathered}$}
+  \AxiomC{$\begin{gathered}
+    !B, \Gamma \\[-0.25ex]
+    \nSequent \Pi \\[-0.25ex]
+    \nSequent \Delta
+  \end{gathered}$}
+  \RightLabel{$\iR\lif\False[\LogGod[3]]$}
+  \BinaryInfC{$\begin{gathered}
+    !A \lif !B, \Gamma \\[-0.25ex]
+    \nSequent \Pi \\[-0.25ex]
+    \nSequent \Delta
+  \end{gathered}$}
+  \DisplayProof
+\]
+\[
+  \AxiomC{$\begin{gathered}
+    \Gamma \\[-0.25ex]
+    \nSequent !B, \Pi \\[-0.25ex]
+    \nSequent \Delta
+  \end{gathered}$}
+  \AxiomC{$\begin{gathered}
+    \Gamma \\[-0.25ex]
+    \nSequent \Pi \\[-0.25ex]
+    \nSequent \Delta, !A
+  \end{gathered}$}
+  \RightLabel{$\iR\lif\Undef[\LogGod[3]]$}
+  \BinaryInfC{$\begin{gathered}
+    \Gamma \\[-0.25ex]
+    \nSequent !A \lif !B, \Pi \\[-0.25ex]
+    \nSequent \Delta
+  \end{gathered}$}
+  \DisplayProof
+\]
+\[
+  \AxiomC{$\begin{gathered}
+    !A, \Gamma \\[-0.25ex]
+    \nSequent !B, \Pi \\[-0.25ex]
+    \nSequent \Delta, !B
+  \end{gathered}$}
+  \AxiomC{$\begin{gathered}
+    !A, \Gamma \\[-0.25ex]
+    \nSequent !A, \Pi \\[-0.25ex]
+    \nSequent \Delta, !B
+  \end{gathered}$}
+  \RightLabel{$\iR{\lif}{\True}[\LogGod[3]]$}
+  \BinaryInfC{$\begin{gathered}
+    \Gamma \\[-0.25ex]
+    \nSequent \Pi \\[-0.25ex]
+    \nSequent \Delta, !A \lif !B
+  \end{gathered}$}
+  \DisplayProof
+\]
+\end{defish}
+
+
+\begin{sidewaysfigure}
+  \begin{center}
+  \AxiomC{$A \nSequent A \nSequent A$}
+  \RightLabel{\iR \Weakening \True}
+  \UnaryInfC{$A \nSequent A \nSequent B, A$}
+  \RightLabel{\iR \Weakening \Undef}
+  \UnaryInfC{$A \nSequent B, A \nSequent B, A$}
+  \RightLabel{\iR \Weakening \Undef}
+  \UnaryInfC{$A \nSequent A, B, A \nSequent B, A$}
+  \AxiomC{$A \nSequent A \nSequent A$}
+  \RightLabel{\iR \Weakening \True}
+  \UnaryInfC{$A \nSequent A \nSequent A, A$}
+  \RightLabel{\iR \Weakening \True}
+  \UnaryInfC{$A \nSequent A \nSequent B, A, A$}
+  \RightLabel{\iR \Weakening \False}
+  \UnaryInfC{$B, A \nSequent A \nSequent B, A, A$}
+  \RightLabel{$\iR\lif\Undef$}
+  \BinaryInfC{$A \nSequent A \lif B, A \nSequent B, A$}
+  \AxiomC{$B \nSequent B \nSequent B$}
+  \RightLabel{\iR \Weakening \Undef}
+  \UnaryInfC{$B \nSequent A, B \nSequent B$}
+  \RightLabel{\iR \Exchange \Undef}
+  \UnaryInfC{$B \nSequent B, A \nSequent B$}
+  \RightLabel{\iR \Weakening \Undef}
+  \UnaryInfC{$B \nSequent A, B, A \nSequent B$}
+  \RightLabel{\iR \Weakening \False}
+  \UnaryInfC{$A, B \nSequent A, B, A \nSequent B$}
+  \RightLabel{\iR \Exchange \False}
+  \UnaryInfC{$B, A \nSequent A, B, A \nSequent B$}
+  \AxiomC{$A \nSequent A \nSequent A$}
+  \RightLabel{\iR \Weakening \True}
+  \UnaryInfC{$A \nSequent A \nSequent B, A$}
+  \RightLabel{\iR \Weakening \False}
+  \UnaryInfC{$B, A \nSequent A \nSequent B, A$}
+  \RightLabel{\iR \Weakening \False}
+  \UnaryInfC{$B, B, A \nSequent A \nSequent B, A$}
+  \RightLabel{$\iR\lif\Undef$}
+  \BinaryInfC{$B, A \nSequent A \lif B, A \nSequent B$}
+  \RightLabel{$\iR\lif\False$}
+  \BinaryInfC{$A \lif B, A \nSequent A \lif B, A \nSequent B$}
+  \DisplayProof
+  \end{center}
+  \caption{مثال لـ!!{derivation} في~$\LogLuk[3]$}
+\end{sidewaysfigure}
+
+\end{document}

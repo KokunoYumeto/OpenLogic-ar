@@ -1,0 +1,153 @@
+% Part: first-order-logic
+% Chapter: axiomatic-deduction
+% Section: proof-theoretic-notions
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{axd}{ptn}}
+      {\olfileid{pl}{axd}{ptn}}
+
+\olsection{المفاهيم النظرية البرهانية}
+
+\begin{explain}
+قد تقدّم تعريف المعاني الدلالية:
+\iftag{FOL}{الصلاحية}{تحصيل الحاصل} والاستلزام وقابلية الإرضاء.
+ولها نظائر من \emph{مفاهيم نظرية البرهان} نعرّفها الآن.
+فليست هذه النظائر مبنية على إرضاء ال!!{sentence}s في
+\iftag{FOL}{ال!!{structure}s}{ال!!{valuation}s}، وإنما هي مبنية على
+!!{derivability} بعض الصيغ أو !!{nonderivability}ها.
+ومن النتائج المهمة تطابق المعاني الدلالية ونظائرها البرهانية؛
+وهذا هو مضمون \emph{مبرهنة السلامة} و\emph{مبرهنة الاكتمال}.
+\end{explain}
+
+\begin{defn}[!!^{derivability}]
+ال!!^a{formula}~$!A$ \emph{!!{derivable}} من~$\Gamma$،
+ونرمز إلى ذلك بـ~$\Gamma \Proves !A$، متى وجد !!a{derivation}
+من~$\Gamma$ ينتهي إلى~$!A$.
+\end{defn}
+
+\begin{defn}[المبرهنات]
+ال!!^a{formula}~$!A$ \emph{مبرهنة} متى وجد !!a{derivation}
+لـ~$!A$ من المجموعة الخالية. فنكتب~$\Proves !A$ إذا كانت~$!A$
+مبرهنة، ونكتب~$\Proves/ !A$ إذا لم تكن.
+\end{defn}
+
+\begin{defn}[الاتساق]
+المجموعة~$\Gamma$ من ال!!{formula}s \emph{متسقة} إذا وفقط إذا
+كان~$\Gamma\Proves/ \lfalse$؛ فإن لم يكن فهي \emph{غير متسقة}.
+\end{defn}
+
+\begin{prop}[الانعكاسية]
+\ollabel{prop:reflexivity}
+إذا كان $!A \in \Gamma$، فإن $\Gamma \Proves !A$.
+\end{prop}
+
+\begin{proof}
+  يكفي أخذ ال!!{formula}~$!A$ وحدها؛ فهي !!a{derivation}
+  لـ~$!A$ من~$\Gamma$.
+\end{proof}
+
+\begin{prop}[الرتابة]
+\ollabel{prop:monotonicity}
+إذا كان $\Gamma \subseteq \Delta$ و$\Gamma \Proves !A$، فإن $\Delta
+\Proves !A$.
+\end{prop}
+
+\begin{proof}
+\iftag{FOL}{لل!!{derivation} لـ~$!A$ من~$\Gamma$ دعم منتهٍ
+$\Gamma_0\subseteq\Gamma$. ولما كان~$\Gamma_0\subseteq\Delta$، بقيت
+المتتالية نفسها !!a{derivation} لـ~$!A$ من~$\Delta$ بحسب شرط الدعم في
+\QR{}.}{فال!!{derivation} لـ~$!A$ من~$\Gamma$ يصح أن يؤخذ
+!!a{derivation} لـ~$!A$ من~$\Delta$ أيضًا.}
+\end{proof}
+
+\begin{prop}[التعدية]
+\ollabel{prop:transitivity}
+إذا كان $\Gamma \Proves !A$ و$\{!A\} \cup \Delta \Proves
+!B$، فإن $\Gamma \cup \Delta \Proves !B$.
+\end{prop}
+
+\begin{proof}
+% تصحيح مصدر (0118-I1): جُدّدت ثوابت QR المميزة قبل وصل الاشتقاقين.
+\iftag{FOL}{من~$\{!A\}\cup\Delta\Proves !B$ نأخذ دعمًا منتهيًا
+$\Delta_0\subseteq\Delta$ بحيث يكون دعم ال!!{derivation} لـ~$!B$
+داخلًا في~$\{!A\}\cup\Delta_0$، ونأخذ دعمًا منتهيًا
+$\Gamma_0\subseteq\Gamma$ ل!!{derivation}~$!A$. وشجرتا البرهان
+متناهيتان، فطائفة الثوابت الواقعة فيهما متناهية. طبّق
+\olref[qua]{lem:qr-freshening} أولًا على شجرة~$!A$ مع تحريم ثوابت الشجرة
+الثانية، ثم على الشجرة الثانية مع تحريم ثوابت الأولى بعد تجديدها. فنحصل
+على شجرتين تحفظان الخاتمتين ولا يزيد دعمهما، وتتباين جميع ثوابتهما المميزة وتفي
+بشروط الجدة بالنسبة إلى الدعم المشترك. ثم نعيد خطيتهما، ولتكن الأولى
+$!A_1$، \dots، $!A_k = !A$ والثانية~$!B_1$، \dots، $!B_l = !B$.
+فتكون المتتالية
+  \[
+  !A_1, \dots, !A_k = !A, !B_1, \dots, !B_l = !B.
+  \]
+!!a{derivation} صحيحة لـ~$!B$ من~$\Gamma\cup\Delta$؛ إذ يبرر كل ورود
+$!B_i=!A$ ما برّر~$!A_k=!A$، وتبقى شروط~\QR{} صحيحة.}{من
+$\{!A\}\cup\Delta\Proves !B$ نأخذ !!a{derivation}
+$!B_1$، \dots، $!B_l=!B$ من~$\{!A\}\cup\Delta$. وبالفرض توجد
+!!a{derivation}~$!A_1$، \dots، $!A_k=!A$ من~$\Gamma$. فالمتتالية
+\[
+!A_1, \dots, !A_k = !A, !B_1, \dots, !B_l = !B
+\]
+!!a{derivation} لـ~$!B$ من~$\Gamma\cup\Delta$؛ إذ يبرر كل ورود
+$!B_i=!A$ ما برّر~$!A_k=!A$.}
+\end{proof}
+
+ومن التعدّي، على الخصوص، أنه إذا كان~$\Gamma \Proves !A$ و$!A
+\Proves !B$ لزم~$\Gamma \Proves !B$. وبتكراره، إذا كان~$!A_1,
+\dots, !A_n \Proves !B$ وكان~$\Gamma \Proves !A_i$ لكل~$i$،
+حصل~$\Gamma \Proves !B$.
+
+
+\begin{prop}
+\ollabel{prop:incons}
+تكون $\Gamma$ غير متسقة إذا وفقط إذا كان $\Gamma \Proves !A$ لكل~$!A$.
+\end{prop}
+
+\begin{proof}
+تمرين.
+\end{proof}
+
+\tagprob{FOL}
+\begin{prob}
+أثبت \olref[fol][axd][ptn]{prop:incons}.
+\end{prob}
+\tagendprob
+
+\tagprob{notFOL}
+\begin{prob}
+أثبت \olref[pl][axd][ptn]{prop:incons}.
+\end{prob}
+\tagendprob
+
+\begin{prop}[التراص]
+\ollabel{prop:proves-compact}
+  \begin{enumerate}
+  \item إذا كان $\Gamma \Proves !A$، فثمة مجموعة جزئية منتهية $\Gamma_0
+    \subseteq \Gamma$ بحيث $\Gamma_0 \Proves !A$.
+  \item إذا كانت كل مجموعة جزئية منتهية من~$\Gamma$ متسقة، فإن
+    $\Gamma$ متسقة.
+  \end{enumerate}
+\end{prop}
+
+\begin{proof}
+  \begin{enumerate}
+    \item من~$\Gamma \Proves !A$ نأخذ متتالية منتهية من
+      ال!!{formula}s~$!A_1$، \dots،~$!A_n$ بحيث~$!A \ident !A_n$،
+      وكل~$!A_i$ إما بديهية منطقية، أو !!a{element} من~$\Gamma$،
+      أو مأخوذة من !!{formula}s سابقة بقاعدة استدلال.
+      نسمّي~$\Gamma_0$ مجموعة تلك الصيغ~$!A_i$ التي تقع
+      في~$\Gamma$؛ فال!!{derivation} نفسه !!a{derivation}
+      من~$\Gamma_0$، وبذلك~$\Gamma_0 \Proves !A$.
+    \item نأخذ المقابل بالنقيض للفقرة~(1) في الحالة الخاصة~$!A
+      \ident \lfalse$.
+
+\end{enumerate}
+\end{proof}
+
+\end{document}

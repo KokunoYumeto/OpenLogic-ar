@@ -1,0 +1,135 @@
+% Part: second-order-logic
+% Chapter: metatheory
+% Section: second-order-arithmetic
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sol}{met}{spa}
+
+\olsection{حساب الرتبة الثانية}
+
+قد تقدم أن حساب بيانو~$\Th{PA}$ يشتمل على بديهيات~$\Th{Q}$
+الثماني:
+\begin{align*}
+& \lforall[x][\eq/[x'][\Obj 0]]\\
+& \lforall[x][\lforall[y][(\eq[x'][y'] \lif \eq[x][y])]]\\
+& \lforall[x][(\eq[x][\Obj 0] \lor \lexists[y][\eq[x][y']])]\\ 
+& \lforall[x][\eq[(x + \Obj 0)][x]]\\
+& \lforall[x][\lforall[y][\eq[(x + y')][(x + y)']]]\\
+& \lforall[x][\eq[(x \times \Obj 0)][\Obj 0]]\\
+& \lforall[x][\lforall[y][\eq[(x \times y')][((x \times y) + x)]]]\\
+& \lforall[x][\lforall[y][(x < y \liff \lexists[z][\eq[(z' + x)][y]])]]\\
+\intertext{مضافًا إليها جميع الجمل من الصورة}
+& (!A(\Obj 0) \land \lforall[x][(!A(x) \lif !A(x'))]) \lif \lforall[x][!A(x)].
+\end{align*}
+وليست الصورة الأخيرة جملة واحدة، بل «مخططًا» يولد من
+!!{sentence}s لغة الحساب ما لا نهاية له: لكل !!{formula}~$!A(x)$
+جملة تخصها. وهو ما نسميه \emph{مخطط بديهية الاستقراء} من
+الرتبة الأولى. وأما حساب بيانو \emph{من الرتبة الثانية}~$\Th{PA^2}$
+فيُجمع فيه الاستقراء في جملة واحدة؛ فتكون~$\Th{PA^2}$
+مؤلفة من البديهيات الثماني المذكورة ومن \emph{بديهية الاستقراء}
+من الرتبة الثانية:
+\[
+\lforall[X][((X(\Obj 0) \land \lforall[x][(X(x) \lif X(x'))]) \lif \lforall[x][X(x)])].
+\]
+ومعناها أن المجموعة الجزئية~$X$ من !!{domain} إذا احتوت
+$\Assign{\Obj{0}}{M}$، وكانت متى احتوت~$x \in \Domain{M}$
+احتوت خلفه~$\Assign{\prime}{M}(x)$، أي كانت «مغلقة تحت الخلف»،
+لزم أن تحتوي كل ما في !!{domain}، أي~$X = \Domain{M})$.
+
+وبهذه البديهية لا يكون في أي !!{structure} تحققها من
+!!{element}s~$\Domain{M}$ إلا ما أوجبت البديهيات وجوده:
+قيم~$\num{n}$ حيث~$n \in \Nat$.
+فلا مكان للأعداد غير القياسية في نموذج لـ$\Th{PA^2}$.
+
+\begin{thm}
+\ollabel{thm:sol-pa-standard}
+من~$\Sat{M}{\Th{PA^2}}$ يلزم~$\Domain{M} =
+\Setabs{\Value{\num{n}}{M}}{n \in \Nat}$.
+\end{thm}
+
+\begin{proof}
+ضع~$N = \Setabs{\Value{\num{n}}{M}}{n \in \Nat}$، ولنفترض
+$\Sat{M}{\Th{PA^2}}$. لكل~$n \in \Nat$ يكون
+$\Value{\num{n}}{M} \in \Domain{M}$؛ فثبت~$N \subseteq \Domain{M}$.
+
+بقي إثبات الاحتواء المعاكس. نأخذ تعيين متغيرات~$s$
+يحقق~$s(X) = N$. ومن الفرض،
+\begin{align*}
+\Sat{M}{\lforall[X][((X(\Obj 0) \land \lforall[x][(X(x)
+      \lif X(x'))]) \lif \lforall[x][X(x)])]}, & \text{ومن ثم}\\
+\Sat{M}{(X(\Obj 0) \land \lforall[x][(X(x) \lif X(x'))]) \lif
+  \lforall[x][X(x)]}[s]. & 
+\end{align*}
+ولنثبت مقدم الشرطية. أوله ثابت لأن~$\Value{\Obj{0}}{M} \in N$،
+فيكون~$\Sat{M}{X(\Obj{0})}[s]$.
+وأما المقترن الثاني~$\lforall[x][(X(x) \lif X(x'))]$
+فيُرضى كذلك: إذ لو كان~$x \in N$، لاقتضى تعريف~$N$
+أن~$x = \Value{\num{n}}{M}$ لبعض~$n$.
+فيكون~$\Assign{\prime}{M}(x) = \Value{\num{n+1}}{M} \in N$،
+ومن ثم~$\Assign{\prime}{M}(x) \in N$.
+
+فحصل~$\Sat{M}{X(\Obj 0) \land \lforall[x][(X(x) \lif X(x'))]}[s]$،
+ولزم~$\Sat{M}{\lforall[x][X(x)]}[s]$.
+ومعنى هذا أن~$x \in s(X) = N$ لكل~$x \in \Domain{M}$؛
+فثبت~$\Domain{M} \subseteq N$.
+\end{proof}
+
+\begin{cor}
+\ollabel{cor:sol-pa-categorical}
+كل نموذجين لـ$\Th{PA^2}$ متماثلان بنيويًا.
+\end{cor}
+
+\begin{proof}
+بمبرهنة~\olref{thm:sol-pa-standard} تستوعب
+$\Value{\num{n}}{M}$ مجال كل نموذج لـ$\Th{PA^2}$.
+وهو أيضًا نموذج لـ$\Th{Q}$؛ فينتج من
+\olref[mod][mar][stm]{prop:thq-standard} أنه قياسي، أي متماثل
+بنيويًا مع~$\Struct{N}$.
+\end{proof}
+
+جعلنا~$\Th{PA^2}$ مؤلفة من البديهيات الحسابية الثماني وبديهية
+الاستقراء من الرتبة الثانية. غير أن ما في هذه الرتبة من قوة تعبيرية
+يغنينا، في حساب بيانو من الرتبة الثانية، عن ست من تلك البديهيات؛
+إذ تكفي البديهيتان \emph{الأوليان} مع الاستقراء.
+
+\begin{prop}\ollabel{prop:sol-pa-definable}
+لتكن~$\Th{PA^{2\dagger}}$ نظرية الرتبة الثانية المؤلفة من
+البديهتين الحسابيتين الأوليين، وهما بديهيتا الخلف، ومن بديهية
+الاستقراء من الرتبة الثانية. يمكن حينئذ تعريف~$\le$ و$+$ و$\times$
+في~$\Th{PA^{2\dagger}}$.
+\end{prop}
+
+\begin{proof}
+أما تعريف~$\le$ فيقتضي صيغة~$!A_\le(x, y)$ يكون بها
+$\Sat{N}{!A_\le(\num n, \num m)}$ إذا وفقط إذا~$n \le m$.
+فلنأخذ الصيغة
+\[
+!B(x, Y) \ident Y(x) \land \lforall[y][(Y(y) \lif Y(y'))]
+\]
+إن~$!B(\num n,Y)$ تعني أن~$Y$ تحتوي~$n$ ومغلقة تحت الخلف؛
+فيلزم أن تحتوي كل~$m\ge n$. وإذا كان~$m<n$، حققت مجموعة الذيل
+$\Setabs{k}{n\le k}$ الصيغة~$!B(\num n,Y)$ ولم تحتو~$m$.
+ولذلك نضع~$!A_\le(x, y) \ident
+\lforall[Y][(!B(x, Y) \lif Y(y))]$.
+% تصحيح مصدر (0332-I1): استُبدل التكافؤ الزائف بالتوصيف اللازم وبمجموعة الذيل الشاهدة للاتجاه العكسي.
+
+وأما الجمع، فإن~$k+l=m$ إذا وفقط إذا وجدت دالة~$u$
+تحقق~$u(0)=k$ و$u(n')=u(n)'$ لكل~$n$، و$m = u(l)$.
+فبهذا التكافؤ نعرّف الجمع في~$\Th{PA^{2\dagger}}$
+بالصيغة:
+\[
+!A_+(x,y,z) \ident \lexists[u][(u(\Obj 0)=x \land \lforall[w][u(w')=u
+ (w)'] \land u(y)=z)]
+\] 
+ومن البيان السابق يتضح أن~$\Sat{N}{!A_+(\num k, \num l, \num m)}$
+إذا وفقط إذا كان~$k+l=m$.
+\end{proof}
+
+\begin{prob}
+أتم ما بقي من برهان~\olref[sol][met][spa]{prop:sol-pa-definable}.
+\end{prob}
+
+\end{document}

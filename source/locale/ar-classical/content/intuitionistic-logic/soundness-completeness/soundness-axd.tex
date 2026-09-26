@@ -1,0 +1,59 @@
+% part: intuitionistic-logic
+% chapter: soundness-completeness
+% section: soundness-axd
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{sc}{sax}
+
+\olsection{سلامة \usetoken{P}{derivation} البديهية}
+
+\begin{editorial}
+  مبنى برهان السلامة أن البديهيات كلها صالحة حدسيًا. وهذه دعوى لم يُقم
+  برهانها هنا بعد؛ ويمكن أن يُجعل لها موضع في فصل الدلالات مثلًا.
+\end{editorial}
+
+\begin{thm}[السلامة]
+  \ollabel{thm:soundness}
+  من~$\Gamma \Proves !A$ يلزم~$\Gamma \Entails !A$.
+\end{thm}
+
+\begin{proof}
+  المطلوب أن يلزم من~$\Gamma \Proves !A$ أن~$\Gamma \Entails !A$.
+  ونستقرئ في عدد ال!!{formula}s، أعني~$n$، التي تتألف منها
+  !!{derivation}~$!A$ من~$\Gamma$. فتكون دعوانا: متى كانت~$!A_1$،
+  \dots،~$!A_n=!A$ !!a{derivation} من~$\Gamma$، ثبت
+  $\Gamma \Entails !A_n$. ولنتنبه إلى أن~$!A_1$، \dots،~$!A_n$
+  متى كانت !!a{derivation}، فإن~$!A_1$، \dots،~$!A_k$ كذلك لكل~$k<n$.
+  % تصحيح أسلوبي (0504-N1): أزيل تكرار أداة الشرط وصُححت مطابقة الفعل.
+
+  أما ال!!{derivation}s التي طولها~$0$ فلا وجود لها؛ فالدعوى عند
+  $n=0$ صادقة صدقًا خاليًا. ولنفرض صحتها في ال!!{derivation}s جميعًا
+  التي طولها~$<n$، ثم ننظر في المسوغ الذي جاءت به~$!A_n$.
+
+  \begin{enumerate}
+  \item إن كانت~$!A_n$ بديهية، فصلاحية البديهيات تقتضي
+    $\Gamma \Entails !A_n$ مهما تكن~$\Gamma$.
+  \item وإن كان~$!A_n \in \Gamma$، فأيّ~$\mModel{M}$ وأيّ~$w$ أُخذا،
+    لزم من~$\mSat{M}{\Gamma}[w]$ بلا واسطة
+    $\mSat{M}{!A_n}[w]$؛ وذلك معنى~$\Gamma \Entails !A$.
+  \item وإن جاءت~$!A_n$ من~\MP{} مطبقةً على~$!A_i$ و
+    $!A_j \ident !A_i \lif !A_n$، كان كل من~$!A_1$، \dots،~$!A_i$ و
+    $!A_1$، \dots،~$!A_j$ من ال!!{derivation}s من~$\Gamma$. وفرض
+    الاستقراء يعطي~$\Gamma \Entails !A_i$ و
+    $\Gamma \Entails !A_i \lif !A_n$.
+
+    ليكن~$\mSat{M}{\Gamma}[w]$. فاجتماع~$\mSat{M}{\Gamma}[w]$ مع
+    $\Gamma \Entails !A_i \lif !A_n$ يوجب
+    $\mSat{M}{!A_i \lif !A_n}[w]$. ومعناه بحسب التعريف: كل~$w'$
+    يحقق~$Rww'$ يلزم فيه من~$\mSat{M}{!A_i}[w']$ أن
+    $\mSat{M}{!A_n}[w']$. والعلاقة~$R$ انعكاسية، فيكون~$w$ نفسه من
+    جملة~$w'$ التي تحقق~$Rww'$. فإذن يلزم من~$\mSat{M}{!A_i}[w]$ أن
+    $\mSat{M}{!A_n}[w]$. وقد علمنا~$\Gamma \Entails !A_i$، فثبت
+    $\mSat{M}{!A_i}[w]$، وبذلك يثبت~$\mSat{M}{!A_n}[w]$، وهو المطلوب.
+  \end{enumerate}
+\end{proof}
+
+\end{document}

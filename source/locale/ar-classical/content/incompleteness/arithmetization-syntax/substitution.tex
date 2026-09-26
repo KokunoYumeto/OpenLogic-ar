@@ -1,0 +1,54 @@
+% Part: incompleteness
+% Chapter: arithmetization-syntax
+% Section: substitution
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{art}{sub}
+\olsection{الإحلال}
+
+الإحلال، كما تقدم، أن نجعل الحد~$t$ محل كل ورود حر
+لـ!!a{variable}~$u$ في !!a{formula}~$!A$؛ ورمزه
+$\Subst{!A}{t}{u}$. فإذا نقلنا هذه العملية إلى أعداد غودل
+لل!!{variable}s وال!!{formula}s والحدود، حصلت دالة
+عودية بدائية.
+
+\begin{prop}\ollabel{prop:subst-primrec}
+يمكن تعيين دالة عودية بدائية $\fn{Subst}(x,y,z)$ تحقق
+\[
+\fn{Subst}(\Gn{!A}, \Gn{t}, \Gn{u}) = \Gn{\Subst{!A}{t}{u}}.
+\]
+\end{prop}
+
+\begin{proof}
+نبدأ بدالة مساعدة $\fn{hSubst}$، ونحدّها بالعودية البدائية:
+\begin{multline*}
+\begin{aligned}
+\fn{hSubst}(x, y, z, 0) & = \emptyseq \\
+\fn{hSubst}(x, y, z, i+1) & =
+\end{aligned}\\
+\begin{cases}
+\fn{hSubst}(x, y, z, i) \concat y & \text{إذا صدقت $\fn{FreeOcc}(x, z, i)$} \\
+\fn{append}(\fn{hSubst}(x, y, z, i), (x)_{i}) & \text{في غير ذلك.}
+\end{cases}
+\end{multline*}
+ثم نجعل $\fn{Subst}(x,y,z)$ مساويةً لـ
+$\fn{hSubst}(x,y,z,\len{x})$.
+\end{proof}
+
+\begin{prop}
+\ollabel{prop:free-for}
+العلاقة $\fn{FreeFor}(x,y,z)$ عودية بدائية؛ ومعناها أن الحد ذا
+عدد غودل~$y$ !!{free for} المتغير ذي عدد غودل~$z$
+في الصيغة ذات عدد غودل~$x$.
+\end{prop}
+
+\begin{proof} برهانه متروك للتمرين. \end{proof}
+
+\begin{prob}
+برهن \olref[inc][art][sub]{prop:free-for}.
+\end{prob}
+
+\end{document}

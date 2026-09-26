@@ -1,0 +1,81 @@
+% Part: second-order-logic
+% Chapter: sol-and-set-theory
+% Section: comparing-sets
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sol}{set}{cmp}
+
+\olsection{مقارنة المجموعات}
+
+\begin{prop}
+!!{formula}~$\lforall[x][(X(x) \lif Y(x))]$ تعريف لعلاقة الاحتواء
+الجزئي؛ فـ$\Sat{M}{\lforall[x][(X(x) \lif Y(x))]}[s]$ إذا وفقط
+إذا~$s(X) \subseteq s(Y)$.
+\end{prop}
+
+\begin{prop}
+!!{formula}~$\lforall[x][(X(x) \liff Y(x))]$ تعريف لهوية المجموعات؛
+فـ$\Sat{M}{\lforall[x][(X(x) \liff Y(x))]}[s]$ إذا وفقط
+إذا~$s(X) = s(Y)$.
+\end{prop}
+
+\begin{prop}
+!!{formula}~$\lexists[x][X(x)]$ تعريف لعدم الخلو؛
+فـ$\Sat{M}{\lexists[x][X(x)]}[s]$ إذا وفقط إذا~$s(X) \neq \emptyset$.
+\end{prop}
+
+قولنا إن المجموعة~$X$ لا تزيد حجمًا على المجموعة~$Y$، أي
+$\cardle{X}{Y}$، معناه وجود دالة !!a{injective}~$f\colon X \to Y$.
+ولما أمكن التعبير عن تباين الدالة وعن وقوع قيمها عند عناصر~$X$
+في~$Y$، أمكن تعريف علاقة عدم الزيادة في الحجم بين مجموعات المجال
+الجزئية.
+
+\begin{prop}
+الصيغة
+\[
+\lexists[u][(\lforall[x][(X(x) \lif Y(u(x)))] \land \lforall[x][\lforall[y][(\eq[u(x)][u(y)] \lif
+      \eq[x][y])]])]
+\]
+تعريف لعلاقة عدم الزيادة في الحجم.
+\end{prop}
+
+ومجموعتان متساويتان حجمًا، أو «متكافئتان عدديًا»،
+$\cardeq{X}{Y}$، إذا وفقط إذا وجدت بينهما دالة
+!!a{bijective}~$f\colon X \to Y$.
+
+\begin{prop}
+الصيغة
+\begin{multline*}
+  \lexists[u][(\lforall[x][(X(x) \lif Y(u(x)))] \land {}\\
+    \lforall[x][\lforall[y][((X(x) \land X(y) \land \eq[u(x)][u(y)]) \lif \eq[x][y])]]
+  \land {} \\\lforall[y][(Y(y) \lif \lexists[x][(X(x)
+      \land \eq[y][u(x)])])])]
+\end{multline*}
+تعريف لعلاقة التكافؤ العددي.
+\end{prop}
+
+وسنستعمل اختصارًا لهذه !!{formula}s الرموز
+$X \subseteq Y$، و$X = Y$، و$X \neq \emptyset$، و$\cardle{X}{Y}$،
+و$\cardeq{X}{Y}$، بهذا الترتيب.
+وقد يوقع هذا الاستعمال في التباس؛ فالرموز نفسها نستعملها حين
+نتكلم خارج اللغة الصورية على المجموعتين~$X$ و$Y$.
+أما هنا فهي اختصارات لـ!!{formula}s من الرتبة الثانية،
+ترد فيها متغيرات العلاقات الأحادية الموضع~$X$ و$Y$.
+
+\begin{prop}
+!!{sentence}~$\lforall[X][\lforall[Y][((\cardle{X}{Y} \land
+    \cardle{Y}{X}) \lif \cardeq{X}{Y})]]$ صحيحة منطقيًا.
+\end{prop}
+
+\begin{proof}
+إرضاء !!{sentence} في !!a{structure}~$\Struct{M}$
+يعني أنه لكل مجموعتين جزئيتين~$X \subseteq \Domain{M}$
+و$Y \subseteq \Domain{M}$ يحصل~$\cardeq{X}{Y}$ متى
+حصل~$\cardle{X}{Y}$ و$\cardle{Y}{X}$.
+وهذا ثابت لـ\emph{أي} مجموعتين~$X$ و$Y$ بمبرهنة شرودر--برنشتاين.
+\end{proof}
+
+\end{document}

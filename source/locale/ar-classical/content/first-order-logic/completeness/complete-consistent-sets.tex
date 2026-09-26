@@ -1,0 +1,218 @@
+% Part: first-order-logic
+% Chapter: completeness
+% Section: complete-sets
+
+% Definition of complete consistent sets. Properties of complete sets required
+% for completeness proved are in provability.tex in the
+% chapter on the proof system used.
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{com}{ccs}}
+      {\olfileid{pl}{com}{ccs}}
+
+\olsection{مجموعات ال\usetoken{P}{sentence} المتسقة الكاملة}
+
+\begin{defn}[المجموعة الكاملة]
+\ollabel{def:complete-set} تكون مجموعة~$\Gamma$ من ال!!{sentence}s
+\emph{!!{complete}} إذا وفقط إذا تحقق لكل !!{sentence}~$!A$ أن
+$!A \in \Gamma$ أو $\lnot !A \in \Gamma$.
+\end{defn}
+
+\begin{explain}
+مجموعات الجمل ال!!^{complete} تفصل في كل سؤال: فأيّ !!{sentence}~$!A$
+أخذنا، وجدنا في $\Gamma$ حكمًا بصدق $!A$ أو كذبها. وليست فائدة
+المجموعات ال!!{complete} مقصورة على برهان الاكتمال؛ فإن النظرية
+ال!!{complete} إذا كانت قابلة للأكسمة كانت قابلة للقرار.
+\end{explain}
+
+\begin{explain}
+تقوم المجموعات المتسقة ال!!^{complete} بدور أساس في البرهان؛ إذ سنضمن
+أن كل مجموعة متسقة من ال!!{sentence}s~$\Gamma$ تقع ضمن مجموعة متسقة
+!!a{complete}~$\Gamma^*$. ففي المجموعة المتسقة !!^a{complete}،
+لكل !!{sentence}~$!A$، إما $!A$ وإما نفيها $\lnot !A$، ولا تجتمعان.
+ويشمل هذا \iftag{FOL}{ال!!{sentence}s الذرية}{المتغيرات القضوية}؛
+ومن ثم تتيح لنا المجموعة المتسقة !!a{complete}\iftag{FOL}{، في لغة
+زِيدت فيها !!{constant}s على وجه مناسب،}{} بناء
+\iftag{FOL}{!!a{structure}}{!!a{valuation}} نعيّن فيها
+\iftag{FOL}{تفسير ال!!{predicate}s}{قيم صدق المتغيرات القضوية}
+بحسب ما في~$\Gamma^*$ من
+\iftag{FOL}{ال!!{sentence}s الذرية}{ال!!{propositional variable}s}.
+ثم نثبت أن هذه ال\iftag{FOL}{!!{structure}}{!!{valuation}} ترضي
+ال!!{sentence}s كلها في~$\Gamma^*$، وبذلك ترضي ما في~$\Gamma$.
+ولا يتم هذا الإثبات إلا بخواص منها أن $\lnot !A \in \Gamma^*$ إذا
+وفقط إذا كان $!A \notin \Gamma^*$، وأن $(!A \lor !B) \in \Gamma^*$
+إذا وفقط إذا كان $!A \in \Gamma^*$ أو $!B \in \Gamma^*$، ونظائر ذلك.
+\end{explain}
+
+وسنجري في البراهين الآتية على انعكاسية العلاقة $\Proves$ ورتابتها
+وتعديها، وكثيرًا ما نكتفي باستعمالها من غير تنبيه (انظر
+\iftag{FOL}{%
+  \tagrefs{prfSC/{fol:seq:ptn:sec},prfND/{fol:ntd:ptn:sec},prfAX/{fol:axd:ptn:sec},prfTab/{fol:tab:ptn:sec}}}{%
+  \tagrefs{prfSC/{pl:seq:ptn:sec},prfND/{pl:ntd:ptn:sec},prfAX/{pl:axd:ptn:sec},prfTab/{pl:tab:ptn:sec}}}).
+
+\begin{prop}
+\ollabel{prop:ccs}
+افترض أن $\Gamma$ !!{complete} ومتسقة. عندئذ:
+\begin{enumerate}
+\item \ollabel{prop:ccs-prov-in} إذا كان $\Gamma \Proves !A$، فإن
+  $!A \in \Gamma$.
+
+\tagitem{prvAnd}{\ollabel{prop:ccs-and} $!A \land !B \in \Gamma$
+  إذا وفقط إذا كان كل من $!A \in \Gamma$ و$!B \in \Gamma$.}{}
+
+\tagitem{prvOr}{\ollabel{prop:ccs-or} $!A \lor !B \in \Gamma$ إذا
+  وفقط إذا كان $!A \in \Gamma$ أو $!B \in \Gamma$.}{}
+
+\tagitem{prvIf}{\ollabel{prop:ccs-if} $!A \lif !B \in \Gamma$ إذا
+  وفقط إذا كان $!A \notin \Gamma$ أو $!B \in \Gamma$.}{}
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+فرضنا في جميع أجزاء البرهان أن $\Gamma$ !!{complete} مع اتساقها.
+\begin{enumerate}
+\item إذا كان $\Gamma \Proves !A$، فإن $!A \in \Gamma$.
+
+ليكن $\Gamma \Proves !A$. فإن فرضنا $!A \notin
+\Gamma$، اقتضى كون $\Gamma$ !!{complete} أن $\lnot !A \in \Gamma$.
+فتفيد
+\iftag{FOL}{%
+  \tagrefs{prfSC/{fol:seq:prv:prop:explicit-inc},
+    prfND/{fol:ntd:prv:prop:explicit-inc},
+    prfAX/{fol:axd:prv:prop:explicit-inc},
+    prfTab/{fol:tab:prv:prop:explicit-inc}}}{%
+  \tagrefs{prfSC/{pl:seq:prv:prop:explicit-inc},
+    prfND/{pl:ntd:prv:prop:explicit-inc},
+    prfAX/{pl:axd:prv:prop:explicit-inc},
+    prfTab/{pl:tab:prv:prop:explicit-inc}}},
+أن $\Gamma$ غير متسقة، خلاف اتساق $\Gamma$ المفروض. فبطل
+$!A \notin \Gamma$، وثبت $!A \in \Gamma$.
+
+\tagitem{defAnd}{}{%
+\iftag{probAnd}{تمرين.}{%
+$!A \land !B \in \Gamma$ إذا وفقط إذا كان كل من $!A \in \Gamma$ و
+$!B \in \Gamma$:
+
+أما اللزوم من اليسار إلى اليمين، فليكن $!A \land !B \in \Gamma$.
+بمقتضى
+\iftag{FOL}{%
+  \tagrefs{prfSC/{fol:seq:ppr:prop:provability-land},
+    prfND/{fol:ntd:ppr:prop:provability-land},
+    prfAX/{fol:axd:ppr:prop:provability-land},
+    prfTab/{fol:tab:ppr:prop:provability-land}}}{%
+  \tagrefs{prfSC/{pl:seq:ppr:prop:provability-land},
+    prfND/{pl:ntd:ppr:prop:provability-land},
+    prfAX/{pl:axd:ppr:prop:provability-land},
+    prfTab/{pl:tab:ppr:prop:provability-land}}}، البند~(1)،
+يلزم $\Gamma \Proves !A$ و$\Gamma \Proves !B$؛ فتنقلنا
+\olref{prop:ccs-prov-in} إلى $!A \in \Gamma$ و$!B \in \Gamma$،
+وهو المطلوب.
+
+وأما العكس، فإذا كان $!A \in \Gamma$ و$!B \in \Gamma$، أفاد
+\iftag{FOL}{%
+  \tagrefs{prfSC/{fol:seq:ppr:prop:provability-land},
+    prfND/{fol:ntd:ppr:prop:provability-land},
+    prfAX/{fol:axd:ppr:prop:provability-land},
+    prfTab/{fol:tab:ppr:prop:provability-land}}}{%
+  \tagrefs{prfSC/{pl:seq:ppr:prop:provability-land},
+    prfND/{pl:ntd:ppr:prop:provability-land},
+    prfAX/{pl:axd:ppr:prop:provability-land},
+    prfTab/{pl:tab:ppr:prop:provability-land}}}، البند~(2)،
+أن $\Gamma \Proves !A \land !B$؛ وبـ\olref{prop:ccs-prov-in}
+يكون $!A \land !B \in \Gamma$.}}
+
+\tagitem{defOr}{}{%
+\iftag{probOr}{تمرين.}{%
+نبدأ بإثبات أن $!A \lor !B \in \Gamma$ يقتضي $!A \in \Gamma$
+أو $!B \in \Gamma$. فلو كان $!A \lor !B \in \Gamma$ مع
+$!A \notin \Gamma$ و$!B \notin \Gamma$، للزم، لأن $\Gamma$
+!!{complete}، أن $\lnot !A \in \Gamma$ و$\lnot !B \in \Gamma$.
+فتفيد
+\iftag{FOL}{%
+  \tagrefs{prfSC/{fol:seq:ppr:prop:provability-lor},
+    prfND/{fol:ntd:ppr:prop:provability-lor},
+    prfAX/{fol:axd:ppr:prop:provability-lor},
+    prfTab/{fol:tab:ppr:prop:provability-lor}}}{%
+  \tagrefs{prfSC/{pl:seq:ppr:prop:provability-lor},
+    prfND/{pl:ntd:ppr:prop:provability-lor},
+    prfAX/{pl:axd:ppr:prop:provability-lor},
+    prfTab/{pl:tab:ppr:prop:provability-lor}}}،
+البند (1)، عدم اتساق $\Gamma$، وهو محال. فلا بد من
+$!A \in \Gamma$ أو $!B \in \Gamma$.
+
+وأما العكس، فليكن $!A \in \Gamma$ أو $!B \in \Gamma$؛ وعندئذ يفيد
+\iftag{FOL}{%
+  \tagrefs{prfSC/{fol:seq:ppr:prop:provability-lor},
+    prfND/{fol:ntd:ppr:prop:provability-lor},
+    prfAX/{fol:axd:ppr:prop:provability-lor},
+    prfTab/{fol:tab:ppr:prop:provability-lor}}}{%
+  \tagrefs{prfSC/{pl:seq:ppr:prop:provability-lor},
+    prfND/{pl:ntd:ppr:prop:provability-lor},
+    prfAX/{pl:axd:ppr:prop:provability-lor},
+    prfTab/{pl:tab:ppr:prop:provability-lor}}}، البند (2)،
+أن $\Gamma \Proves !A \lor !B$، فبمقتضى \olref{prop:ccs-prov-in}
+ثبت $!A \lor !B \in \Gamma$، وتم هذا الاتجاه.}}
+
+\tagitem{defIf}{}{%
+\iftag{probIf}{تمرين.}{%
+لإثبات الاتجاه الأول، ليكن $!A \lif !B \in \Gamma$، ولنفرض نقيض
+المطلوب: $!A \in \Gamma$ و$!B \notin \Gamma$. فيجتمع
+$!A \lif !B \in \Gamma$ مع $!A \in \Gamma$. وعليه يفيد
+\iftag{FOL}{%
+  \tagrefs{prfSC/{fol:seq:ppr:prop:provability-lif},
+    prfND/{fol:ntd:ppr:prop:provability-lif},
+    prfAX/{fol:axd:ppr:prop:provability-lif},
+    prfTab/{fol:tab:ppr:prop:provability-lif}}}{%
+  \tagrefs{prfSC/{pl:seq:ppr:prop:provability-lif},
+    prfND/{pl:ntd:ppr:prop:provability-lif},
+    prfAX/{pl:axd:ppr:prop:provability-lif},
+    prfTab/{pl:tab:ppr:prop:provability-lif}}}، البند (1)،
+أن $\Gamma \Proves !B$؛ ومن \olref{prop:ccs-prov-in} يلزم
+$!B \in \Gamma$، مناقضًا فرض $!B \notin \Gamma$.
+
+وللعكس حالتان. أما حالة $!A \notin \Gamma$، فكون
+$\Gamma$ !!{complete} يقتضي $\lnot !A \in \Gamma$؛ فيفيد
+\iftag{FOL}{%
+  \tagrefs{prfSC/{fol:seq:ppr:prop:provability-lif},
+    prfND/{fol:ntd:ppr:prop:provability-lif},
+    prfAX/{fol:axd:ppr:prop:provability-lif},
+    prfTab/{fol:tab:ppr:prop:provability-lif}}}{%
+  \tagrefs{prfSC/{pl:seq:ppr:prop:provability-lif},
+    prfND/{pl:ntd:ppr:prop:provability-lif},
+    prfAX/{pl:axd:ppr:prop:provability-lif},
+    prfTab/{pl:tab:ppr:prop:provability-lif}}}، البند (2)،
+أن $\Gamma \Proves !A \lif !B$؛ وبالرجوع إلى
+\olref{prop:ccs-prov-in} يثبت $!A \lif !B \in \Gamma$.
+
+وأما حالة $!B \in \Gamma$، فنستعمل
+\iftag{FOL}{%
+  \tagrefs{prfSC/{fol:seq:ppr:prop:provability-lif},
+    prfND/{fol:ntd:ppr:prop:provability-lif},
+    prfTab/{fol:tab:ppr:prop:provability-lif},
+    prfAX/{fol:axd:ppr:prop:provability-lif}}}{%
+  \tagrefs{prfSC/{pl:seq:ppr:prop:provability-lif},
+    prfND/{pl:ntd:ppr:prop:provability-lif},
+    prfTab/{pl:tab:ppr:prop:provability-lif},
+    prfAX/{pl:axd:ppr:prop:provability-lif}}}،
+البند (2) كذلك، فنجد $\Gamma \Proves !A \lif !B$؛ وتثبت
+\olref{prop:ccs-prov-in} أن $!A \lif !B \in \Gamma$.}}
+\end{enumerate}
+\end{proof}
+
+\tagprob{FOL}
+\begin{prob}
+أكمل برهان \olref[fol][com][ccs]{prop:ccs}.
+\end{prob}
+\tagendprob
+
+\tagprob{notFOL}
+\begin{prob}
+أكمل برهان \olref[pl][com][ccs]{prop:ccs}.
+\end{prob}
+\tagendprob
+
+\end{document}

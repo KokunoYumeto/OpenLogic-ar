@@ -19,7 +19,7 @@
   نثبت أن علاقة ال!!{derivability}~$\Proves$ في حساب التتابعيات قوية
   بما يكفي لإثبات بعض الوقائع الأساسية التي تتعلق بالروابط القضوية،
   مثل $!A \land !B \Proves !A$ و$!A, !A \lif !B \Proves !B$
-  (قاعدة إثبات التالي). وتلزم هذه الوقائع لبرهان مبرهنة الاكتمال.
+  (قاعدة إثبات المقدَّم). وتلزم هذه الوقائع لبرهان مبرهنة الاكتمال.
 \end{explain}
 
 \begin{prop}\ollabel{prop:provability-land}
@@ -47,10 +47,19 @@
     \item فيما يأتي !!a{derivation} للتتابعية $!A, !B \Sequent !A \land !B$:
     \begin{prooftree}
       \Axiom$!A \fCenter !A$
+      \RightLabel{\LeftR{\Weakening}}
+      \UnaryInf$!B, !A \fCenter !A$
+      \RightLabel{\LeftR{\Exchange}}
+      \UnaryInf$!A, !B \fCenter !A$
       \Axiom$!B \fCenter !B$
+      \RightLabel{\LeftR{\Weakening}}
+      \UnaryInf$!A, !B \fCenter !B$
       \RightLabel{\RightR{\land}}
       \BinaryInf$!A, !B \fCenter !A \land !B$
     \end{prooftree}
+    \textbf{تنبيه تصحيحي على الأصل (C079-01).} أُدخل الإضعاف والتبادل في الفرعين
+    قبل إدخال العطف في اليمين، حتى تشترك المقدمتان في السياق الأيسر
+    $!A,!B$ كما تشترط القاعدة المقررة في هذا الكتاب.
   \end{enumerate}
 \end{proof}
 

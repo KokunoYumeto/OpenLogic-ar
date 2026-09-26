@@ -15,6 +15,12 @@
 
 \olsection{خواص \usetoken{S}{derivability}}
 
+\begin{editorial}
+نفهم في هذا القسم شرط الجدة في~\QR{} بالنسبة إلى فرضيات البرهان المستعملة
+فعلًا، لا إلى أعضاء مجموعة محيطة لم تُستعمل فيه. وهذا اصطلاح الدعم المنتهي
+الذي تعتمد عليه الرتابة والتراص.
+\end{editorial}
+
 \begin{prop}[الرتابة] إذا كان~$\Gamma \subseteq \Delta$ و
 $\Gamma \Proves !A$، كان أيضًا~$\Delta \Proves !A$.
 \end{prop}
@@ -204,21 +210,30 @@ $\Gamma$، كان~$\Gamma \Proves \lforall[x][!A]$.
 \end{thm}
 
 \begin{proof}
-بالاستقراء على~$\mathsf{Thm}_\Gamma$: إذا كانت~$!A$ مسلّمة، كانت
-$\lforall[x][!A]$ مسلّمة أيضًا. وإذا كانت~$!A\in \Gamma$، لم يكن~$x$
-حرًا في~$!A$، فتكون~$!A \lif \lforall[x][!A]$ مسلّمة
-(\textbf{Ax3})، ونحصل على~$\Gamma \Proves \lforall[x][!A]$ بـMP.
-وافترض الآن أن~$!A$ تلزم بـMP لأن~$\Gamma \Proves !B$ و
-$\Gamma \Proves !B \lif !A$. بفرض الاستقراء،
-$\Gamma \Proves \lforall[x][!B]$ و
-$\Gamma \Proves \lforall[x][( !B \lif !A)]$. لكن~\textbf{Ax2} تعطي
-أيضًا
-\[
-\Gamma \Proves \lforall[x][( !B \lif !A)] \lif
-(\lforall[x][ !B] \lif \lforall[x][!A]),
-\]
-ويعطي تطبيقان لـMP النتيجة~$\Gamma \Proves \lforall[x][!A]$ كما
-أردنا.
+خذ برهانًا منتهيًا لـ~$!A$ من~$\Gamma$، ولتكن~$\Gamma_0$ مجموعة
+!!{formula}s~$\Gamma$ التي استُعملت فيه. اختر~!!a{constant}~$c\in\mathcal E$ لا يقع
+في أي صيغة من صيغ البرهان، ولا يساوي أي ثابت مميز استُعمل لتسويغ تطبيق
+لـ~\QR{} فيه، وأحلّ~$c$ محل كل وقوع حر لـ~$x$ في كل خطوة. ولأن
+$x$ غير حر في~$\Gamma_0$ تبقى خطوات الفرض كما هي. ويبيّن الاستقراء في
+خطوات البرهان أن المتتالية الجديدة برهان لـ
+$\Subst{!A}{c}{x}$ من~$\Gamma_0$: فالتعويض يحفظ أمثلة مسلمات الروابط
+والمكمّمات ومسلّمات الهوية ذات الحدود المغلقة، ويحفظ MP وصورتي~\QR{}،
+كما يحفظ شرط الجدة فيهما لأن~$c$ اختير جديدًا. ومن ثم
+$\Gamma_0 \Proves \Subst{!A}{c}{x}$.
+
+والآن نشتق:
+\begin{derivation}
+1. & $\Gamma_0 \Proves \Subst{!A}{c}{x}$ & كما تقدم \\
+2. & $\Gamma_0 \Proves \Subst{!A}{c}{x} \lif
+  (\ltrue \lif \Subst{!A}{c}{x})$ & \olref[prp]{ax:lif1} \\
+3. & $\Gamma_0 \Proves \ltrue \lif \Subst{!A}{c}{x}$ & MP 1، 2 \\
+4. & $\Gamma_0 \Proves \ltrue \lif \lforall[x][!A]$ & \QR{} 3 \\
+5. & $\Gamma_0 \Proves \ltrue$ & \olref[prp]{ax:ltrue} \\
+6. & $\Gamma_0 \Proves \lforall[x][!A]$ & MP 4، 5
+\end{derivation}
+وينطبق~\QR{} في الخطوة~4 لأن~$c$ لا يقع في~$\Gamma_0$ ولا في~$\ltrue$
+ولا في~$!A$.
+وأخيرًا تعطينا الرتابة~$\Gamma \Proves \lforall[x][!A]$.
 \end{proof}
 
 \begin{thm}\ollabel{thm:WeakGen}
@@ -229,27 +244,41 @@ $c$ !!a{constant} لا يظهر في~$\Gamma$، وُجد متغير~$x$ لا ي�
 \end{thm}
 
 \begin{proof}
-لتكن~$!A_1,\ldots,!A_n$ برهانًا لـ$!A$ من~$\Gamma$، بحيث
-$!A=!A_n$. اختر متغيرًا~$x$ لا يظهر في~$!A_1,\ldots,!A_n$، وتأمل
-المتتالية الجديدة
-$\Subst{!A_1}{x}{c},\ldots,\Subst{!A_n}{x}{c}$. وهذه المتتالية برهان
-لـ$\Subst{!A}{x}{c}$ من~$\Gamma$. والواقع أنه لكل~$i=1,\ldots,n$:
-\begin{itemize}
-\item إذا كانت~$!A_i$ مسلّمة، كانت~$\Subst{!A_i}{x}{c}$ مسلّمة أيضًا؛
-\item إذا كانت~$!A_i \in \Gamma$، فبما أن~$c$ لا يظهر في~$\Gamma$،
-يكون~$\Subst{!A_i}{x}{c} = !A_i \in \Gamma$؛
-\item إذا حُصل على~$!A_i$ من~$!A_j$ و$!A_j \lif !A_i$، لزمت
-$\Subst{!A_i}{x}{c}$ بـMP من~$\Subst{!A_j}{x}{c}$ و
-$\Subst{(!A_j \lif !A_i)}{x}{c} = \Subst{!A_j}{x}{c} \lif
-\Subst{!A_i}{x}{c}$.
-\end{itemize}
-ومن الواضح أن~!!{constant}~$c$ لم يعد يظهر في المتتالية الجديدة. ولتكن
-$\Gamma'$ مؤلفة من~!!{formula}s~$\Gamma$ التي تظهر في~!!{derivation}
-لـ$\Subst{!A}{x}{c}$؛ عندئذ لا يكون~$x$ حرًا في أي~!!{formula} في
-$\Gamma'$، ويكون~$\Gamma' \Proves \Subst{!A}{x}{c}$. وبالتعميم
-(\olref{thm:Generalization}) نحصل على
-$\Gamma' \Proves \lforall[x][\Subst{!A}{x}{c}]$، ومنه بالرتابة
-$\Gamma \Proves \lforall[x][\Subst{!A}{x}{c}]$ كما أردنا.
+% تصحيح برهاني (0643-I2): عولجت مسلّمتا المكمّمات وصورتا QR بتجديد الثوابت ثم تبديل ثابتين تقابليًا.
+خذ برهانًا منتهيًا~$\Pi$ لـ~$!A$ من~$\Gamma$، ولتكن~$\Gamma_0$
+دعمه المنتهي. طبّق \olref[qua]{lem:qr-freshening} على~$\Pi$ مع مجموعة
+المنع~$\{c\}$؛ فنحصل على برهان~$\Pi^*$ خاتمته~$!A$ ودعمه محتوى
+في~$\Gamma_0$، ولا يساوي~$c$ أيٌّ من ثوابته المميزة. ولأن~$\Pi^*$
+منتهٍ، اختر~$d\in\mathcal E$ لا يظهر في أي صيغة فيه ولا يساوي أي ثابت
+مميز على عقدة~\QR{} فيه. واختر متغيرًا~$x$ لا يظهر في~$!A$.
+
+لتكن~$\rho$ إعادة التسمية المنتظمة التقابلية للثوابت التي تبدّل~$c$ و~$d$
+وتثبت سائر الرموز؛ ونضع~$!A_d=\rho(!A)$، ونكتب هذا اختصارًا~$!A[d/c]$
+لأن~$d$ لم يظهر في~$!A$. يؤدي تطبيق~$\rho$ في
+كل سطر من~$\Pi^*$ إلى برهان لـ~$\rho(!A)$ من~$\Gamma_0$. فدعم هذا البرهان لا يتغير
+لأن~$c$ لا يظهر في~$\Gamma$؛ ومسلمات الروابط محفوظة. وتبقى مسلّمتا
+المكمّمات حالتين منهما لأن~$\rho$ ترسل كل حد مغلق~$t$ إلى الحد المغلق
+$\rho(t)$، وكذلك تحفظ مسلمات الهوية ذات الحدود المغلقة. وتحفظ~MP.
+أما تطبيق~\QR{} ذو الثابت المميز~$a$، فإن~$a\ne c,d$ بفضل التجديد؛
+ومن ثم تحفظ~$\rho$ مقدمته
+وخاتمته وشرط الجدة، في كلتا صورتي~\QR{}. وهكذا يخلو البرهان الناتج من~$c$.
+
+ضع~$!A_x=\Subst{!A}{x}{c}$. ولأن~$x$ و~$d$ لا يظهران في~$!A$، يكون
+إحلال~$d$ محل~$x$ في~$!A_x$ هو بعينه~$!A_d=\rho(!A)=!A[d/c]$.
+ومن البرهان السابق نشتق:
+\begin{derivation}
+1. & $\Gamma_0 \Proves !A_d$ & كما تقدم \\
+2. & $\Gamma_0 \Proves !A_d \lif (\ltrue \lif !A_d)$
+   & \olref[prp]{ax:lif1} \\
+3. & $\Gamma_0 \Proves \ltrue \lif !A_d$ & MP 1، 2 \\
+4. & $\Gamma_0 \Proves \ltrue \lif \lforall[x][!A_x]$
+   & \QR{} 3، بالثابت المميز~$d$ \\
+5. & $\Gamma_0 \Proves \ltrue$ & \olref[prp]{ax:ltrue} \\
+6. & $\Gamma_0 \Proves \lforall[x][!A_x]$ & MP 4، 5
+\end{derivation}
+ويصح تطبيق~\QR{} لأن~$d$ لا يظهر في~$\Gamma_0$ ولا في~$\ltrue$ ولا في
+$!A_x$. وبالرتابة نحصل على
+$\Gamma \Proves \lforall[x][\Subst{!A}{x}{c}]$ ببرهان لا يتضمن~$c$.
 \end{proof}
 
 \begin{explain}
@@ -295,13 +324,16 @@ $\Subst{!A}{x}{c} \Subst{}{y}{x} = \Subst{!A}{y}{c}$، ومن ثم
 وتعطي مبرهنة الاستنباط
 $\lforall[x][\Subst{!A}{x}{c}] \Proves \Subst{!A}{y}{c}$. ولأن~$y$
 ليس حرًا في~$!A$، فهو أيضًا ليس حرًا في
-$\lforall[x][\Subst{!A}{x}{c}]$؛ ومن ثم يعطينا التعميم
+$\lforall[x][\Subst{!A}{x}{c}]$؛ ومن ثم يعطينا التعميم، مع اختيار
+ثابته المميز الجديد من~$\mathcal E\setminus\{c\}$،
 $\lforall[x][\Subst{!A}{x}{c}] \Proves
 \lforall[y][\Subst{!A}{y}{c}]$، وتعطي مبرهنة الاستنباط مرة أخرى
 $\Proves \lforall[x][\Subst{!A}{x}{c}] \lif
 \lforall[y][\Subst{!A}{y}{c}]$. وبرهان الاتجاه
 $\Proves \lforall[y][\Subst{!A}{y}{c}] \lif
-\lforall[x][\Subst{!A}{x}{c}]$ متناظر تمامًا، فتتبع النتيجة بـTaut.
+\lforall[x][\Subst{!A}{x}{c}]$ متناظر تمامًا، مع اختيار الثابت المميز
+بالطريقة نفسها. وجميع الصيغ والخطوات السابقة خالية من~$c$، كما أن بناء
+مبرهنة الاستنباط لا يستحدثه؛ فتتبع النتيجة بـTaut ببرهان يخلو من~$c$.
 \end{proof}
 
 \begin{thm}[التعميم القوي على الثوابت]

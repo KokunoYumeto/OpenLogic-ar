@@ -1,0 +1,66 @@
+% part: intuitionistic-logic
+% chapter: soundness-completeness
+% section: canonical-model
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{sc}{mod}
+
+\olsection{النموذج القانوني}
+
+نختار لعوالم هذا النموذج متتاليات منتهية~$\sigma$ من الأعداد الطبيعية،
+بحيث~$\sigma \in \Nat^*$. وتعريف~$\Nat^*$ استقرائي على الوجه الآتي:
+\begin{enumerate}
+\item $\emptyseq \in \Nat^*$.
+\item متى كان~$\sigma \in \Nat^*$ و$n \in \Nat$، كان
+  $\sigma.n \in \Nat^*$؛ ونعني بـ~$\sigma.n$
+  $\sigma \concat \tuple{n}$، وبـ~$\sigma \concat \sigma'$ وصل
+  $\sigma$ بـ~$\sigma'$.
+\item وليس في~$\Nat^*$ شيء وراء ما يقتضيه هذان الشرطان.
+\end{enumerate}
+ولهذا جاز أن تكون~$\Nat^*$ أساسًا لتعريفات استقرائية.
+
+ولتكن~$\tuple{!B_1, !C_1}$، $\tuple{!B_2, !C_2}$، \dots، تعدادًا
+لأزواج ال!!{formula}s كلها. إذا أُعطيت مجموعة
+ال!!{formula}s~$\Delta$، عرّفنا~$\Delta(\sigma)$ بالاستقراء التالي:
+\begin{enumerate}
+\item $\Delta(\emptyseq) = \Delta$.
+\item $\Delta(\sigma.n) = {}$
+  \[
+  \begin{cases}
+    (\Delta(\sigma) \cup \{!B_n\})^* &
+    \text{إذا كان $\Delta(\sigma) \cup \{!B_n\} \Proves/ !C_n$} \\
+    \Delta(\sigma) & \text{خلاف ذلك}
+  \end{cases}
+  \]
+\end{enumerate}
+والمراد بـ~$(\Delta(\sigma) \cup \{!B_n\})^*$ مجموعة
+ال!!{formula}s الأولية التي نحصل عليها من
+\olref[lin]{lem:lindenbaum} حين نطبقها على
+$\Delta(\sigma) \cup \{!B_n\}$ وعلى ال!!{formula}~$!C_n$. ومن مقتضى
+هذا الاختيار أنه متى كان~$\Delta(\sigma) \cup \{!B_n\} \Proves/ !C_n$
+ثبت~$\Delta(\sigma.n) \Proves !B_n$ وبقي
+$\Delta(\sigma.n) \Proves/ !C_n$. كذلك يتحقق
+$\Delta(\sigma) \subseteq \Delta(\sigma.n)$ لكل~$n$. فإذا كانت
+$\Delta$ أولية، لزم أن تكون~$\Delta(\sigma)$ أولية لكل~$\sigma$.
+
+\begin{defn}\ollabel{defn:canonical-model}
+  لتكن~$\Delta$ أولية. نسمّي \emph{النموذج القانوني}
+  $\mModel{M(\Delta)}$ للمجموعة~$\Delta$ النموذج الذي أجزاؤه كما يأتي:
+  \begin{enumerate}
+  \item $W = \Nat^*$، أي مجموعة المتتاليات المنتهية من الأعداد الطبيعية.
+  \item $R$ ترتيب جزئي يحدّه التكافؤ الآتي:~$R\sigma\sigma'$ إذا وفقط إذا
+    كانت~$\sigma$ قطعة ابتدائية من~$\sigma'$؛ ومعنى ذلك أن
+    $\sigma'=\sigma\concat\sigma''$ لمتتالية~$\sigma''$ ما.
+  \item $V(p) = \Setabs{\sigma}{p \in \Delta(\sigma)}$.
+  \end{enumerate}
+\end{defn}
+
+والتحقق من كون~$R$ ترتيبًا جزئيًا يسير. وأما شرط الرتابة في~$V$
+فحاصل أيضًا: إذ من~$\Delta(\sigma)\subseteq\Delta(\sigma.n)$ يلزم بالاستقراء
+$\Delta(\sigma)\subseteq\Delta(\sigma')$ كلما تحقق
+$R\sigma\sigma'$.
+
+\end{document}

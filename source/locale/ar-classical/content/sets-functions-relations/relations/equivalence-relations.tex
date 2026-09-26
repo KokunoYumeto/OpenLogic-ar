@@ -1,0 +1,76 @@
+% الجزء: sets-functions-relations
+% الفصل: relations
+% القسم: equivalence-relations
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid[ar]{sfr}{rel}{eqv}
+
+\olsection{علاقات التكافؤ}
+
+تجتمع في علاقة الهوية على المجموعة ثلاث خصائص: الانعكاسية والتناظر
+والتعدية. والعلاقات~$R$ الجامعة لهذه الثلاث كثيرة الورود.
+
+\begin{defn}[علاقة التكافؤ]
+\emph{علاقة التكافؤ} علاقة $R \subseteq A^2$ تجمع الانعكاسية والتناظر
+والتعدية. ويقال إن !!^{element}s $x$ و$y$ من~$A$
+\emph{متكافئان وفق $R$} متى كان~$Rxy$.
+\end{defn}
+
+ومن علاقة التكافؤ تؤخذ \emph{فئات التكافؤ}. وذلك أن العلاقة تقسم
+المجال كتلًا: تتعلق الأشياء في كل كتلة بعضها ببعض، ولا يتعلق شيء
+من كتلة بشيء من أخرى. وقد ينفع أن يكون الكلام على هذه الكتل
+\emph{مباشرة}؛ فلهذا نعرّفها كما يأتي.
+
+\begin{defn}\ollabel{def:equivalenceclass}
+لتكن $R \subseteq A^2$ علاقة تكافؤ. إذا أخذ $x \in A$ كانت
+\emph{فئة تكافؤ} $x$ في~$A$ هي المجموعة $\equivrep{x}{R}
+= \Setabs{y \in A}{Rxy}$. وأما \emph{مجموعة قسمة} $A$ بالنسبة
+إلى~$R$ فهي $\equivclass{A}{R} = \Setabs{\equivrep{x}{R}}{x \in A}$؛
+أي المجموعة الجامعة لفئات التكافؤ هذه.
+\end{defn}
+
+وتشهد النتيجة الآتية لصحة هذا التعريف، إذ تبين أن فئات التكافؤ
+هي حقًا الكتل التي تتجزأ إليها~$A$:
+
+\begin{prop}
+لتكن $R \subseteq A^2$ علاقة تكافؤ. حينئذ يتكافأ $Rxy$ مع
+$\equivrep{x}{R} = \equivrep{y}{R}$.
+\end{prop}
+
+\begin{proof}
+أما من اليسار إلى اليمين، فنفرض $Rxy$ ونأخذ $z \in
+\equivrep{x}{R}$. فبالتعريف $Rxz$، وبما أن $R$ تكافؤ يلزم $Ryz$.
+وتفصيل اللزوم: من $Rxy$ وتناظر~$R$ نحصل على $Ryx$، ثم من
+$Rxz$ وتعدية~$R$ نحصل على~$Ryz$. إذن $z \in \equivrep{y}{R}$،
+وبعموم الاختيار $\equivrep{x}{R} \subseteq \equivrep{y}{R}$.
+وبمثل ذلك $\equivrep{y}{R} \subseteq \equivrep{x}{R}$؛ فالامتدادية
+تقضي بأن $\equivrep{x}{R} = \equivrep{y}{R}$.
+
+وأما من اليمين إلى اليسار، فنفرض $\equivrep{x}{R} =
+\equivrep{y}{R}$. وانعكاسية $R$ تعطي $Ryy$، ومنه
+$y \in \equivrep{y}{R}$. فيكون $y \in \equivrep{x}{R}$ أيضًا،
+لأن $\equivrep{x}{R} = \equivrep{y}{R}$ بالفرض؛ أي $Rxy$.
+\end{proof}
+
+\begin{ex}
+ومن أمثلة التكافؤ الحساب بترديد عدد. خذ $a$ و$b$ و$n \in \PosInt$.
+نقول $a \equiv_n b$ إذا وفقط إذا اتفق باقي قسمة $a$ على~$n$
+وباقي قسمة $b$ على~$n$. وصورته الرمزية أن $a \equiv_n b$ إذا وفقط
+إذا وجد $k \in \Int$ يحقق $a - b = kn$. فـ$\equiv_n$ علاقة تكافؤ
+لكل~$n$، وعدد الفئات المتمايزة $n$ بالضبط، وهي الناشئة عن~$\equiv_n$؛ أي إن
+$\equivclass{\Nat}{\equiv_n}$ عدد !!{element}sها $n$.
+فمنها الأعداد القابلة للقسمة على $n$ بلا باق، وهي
+$\equivrep{0}{\equiv_n}$؛ ثم ما بقي من قسمته على $n$ العدد~$1$،
+وهو $\equivrep{1}{\equiv_n}$؛ و\ldots؛ إلى ما بقي من قسمته على~$n$
+العدد~$n-1$، وهو~$\equivrep{n-1}{\equiv_n}$.
+\end{ex}
+
+\begin{prob}
+برهن على أن $\equiv_n$ علاقة تكافؤ لكل $n \in \PosInt$، وأن
+عدد عناصر $\equivclass{\Nat}{\equiv_n}$ هو $n$ بالضبط.
+\end{prob}
+
+\end{document}

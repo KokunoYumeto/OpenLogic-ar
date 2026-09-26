@@ -1,0 +1,84 @@
+% Part: lambda-calculus
+% Chapter: syntax
+% Section: unique-readability
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{syn}{unq}
+\olsection{وحدانية القراءة}
+
+هل يمكن أن تتعدد طرق تكوين الحد الواحد؟ سنثبت أنها لا تتعدد:
+فلكل حد لامبدا وجه واحد في البناء والتأويل. ومرادنا بـ\emph{التكوين}
+فيما يلي بناء الحد بتطبيق قواعد \olref[trm]{defn:term} مرة أو مرات.
+
+\begin{lem}\ollabel{lem:term-start}
+لا يخلو أول الحد من أن يكون متغيرًا أو قوسًا.
+\end{lem}
+
+\begin{proof}
+إنما يكون الشيء حدًا إذا بني بقواعد~\olref[trm]{defn:term}.
+فما تبنيه \olref[trm]{defn:term-var} متغير، وما تبنيه
+\olref[trm]{defn:term-abs} أو~\olref[trm]{defn:term-app} أوله قوس.
+\end{proof}
+
+\begin{lem}\ollabel{lem:app-start}
+أول ناتج التطبيق قوسان، أو قوس يتلوه متغير.
+\end{lem}
+
+\begin{proof}
+ليكن~$M$ حاصل تطبيق؛ فصورته~$(PQ)$، وأوله إذن قوس.
+ثم إن~$P$ حد، فأوله، بموجب~\olref{lem:term-start}، قوس أو متغير.
+\end{proof}
+
+\begin{lem}\ollabel{lem:initial}
+كل جزء ابتدائي حقيقي من حد يمتنع أن يكون حدًا.
+\end{lem}
+
+\begin{prob}
+أقم برهان~\olref[lam][syn][unq]{lem:initial} مستعملًا الاستقراء على طول الحد.
+\end{prob}
+
+\begin{prop}[وحدانية القراءة] \ollabel{prop:unq}
+تكوين كل حد وحيد؛ فإن انتهى تكوين إلى حد~$M$، امتنع أن ينتهي إليه تكوين آخر.
+\end{prop}
+
+\begin{proof}
+  نستقرئ تكوين الحدود، ونميز الحالات الثلاث:
+  \begin{enumerate}
+    \item إذا كان~$M$ على صورة~$x$، حيث~$x$ متغير،
+      لم يدخل التجريد ولا التطبيق في بنائه؛ إذ يبدأ ناتج كل منهما بقوس.
+      فلا سبيل إلى بناء~$M$ إلا أن يكون تكوين~$M$ خطوة واحدة من
+      \olref[trm]{defn:term}\olref[trm]{defn:term-var}.
+    \item إذا كان~$M$ على صورة~$(\lambd[x][N])$، حيث~$x$ متغير و$N$ حد،
+      امتنع أن تبنيه القاعدة
+      \olref[trm]{defn:term}\olref[trm]{defn:term-var}؛ لأنه ليس متغيرًا مفردًا.
+      ويمتنع أيضًا أن يكون حاصل تطبيق، بموجب~\olref{lem:app-start}.
+      فليس~$M$ إلا حاصل تجريد~$N$، وتكوين~$N$ وحيد بفرض الاستقراء.
+    \item إذا كان~$M$ على صورة~$(PQ)$، حيث~$P$ و$Q$ حدان،
+      امتنع بناؤه بالقاعدة
+      \olref[trm]{defn:term}\olref[trm]{defn:term-var}، لأن أوله قوس.
+      وتقتضي~\olref{lem:term-start} أن~$P$ لا يبدأ بـ$\lambd$؛
+      فلا يكون~$(PQ)$ حاصل تجريد. فلنفرض أن~$M$ بني بتطبيق آخر،
+      فكانت صورته أيضًا~$(P'Q')$. إذا كان~$P \neq
+      P'$، لزم أن يكون أحد~$P$ و$P'$
+      جزءًا ابتدائيًا حقيقيًا من الآخر، وهو ممتنع بموجب~\olref{lem:initial}.
+      إذن~$P=P'$، ومنه~$Q=Q'$. وبذلك يتعين~$P$ و$Q$،
+      ثم ينفرد كل من~$P$ و$Q$ بتكوينه، بمقتضى فرض الاستقراء.
+  \end{enumerate}
+\end{proof}
+
+وللقضية نفسها عبارة أيسر في القراءة:
+\begin{prop}
+  ينحصر الحد~$M$ في إحدى الصور التالية:
+  \begin{enumerate}
+    \item $x$، وفيها~$x$ متغير يتعين من~$M$ على وجه واحد.
+    \item $(\lambd[x][N])$، وفيها~$x$ متغير و$N$ حد آخر، يتعين كلاهما من
+      $M$ على وجه واحد.
+    \item $(PQ)$، وفيها~$P$ و$Q$ حدان يتعينان من~$M$ على وجه واحد.
+  \end{enumerate}
+\end{prop}
+
+\end{document}
+

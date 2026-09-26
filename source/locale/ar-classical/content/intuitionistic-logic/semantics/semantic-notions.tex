@@ -1,0 +1,74 @@
+% part: intuitionistic-logic
+% chapter: semantics
+% section: semantic-notions
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{sem}{sem}
+
+\olsection{مفاهيم دلالية}
+
+\begin{defn}
+  توصف~$!A$ بأنها \emph{صادقة في النموذج
+    $\mModel{M}=\tuple{W,R,V}$}، ويكتب لذلك~$\mSat{M}{!A}$، إذا وفقط إذا
+  تحقق~$\mSat{M}{!A}[w]$ لكل~$w \in W$. وأما~$!A$ فتسمى \emph{صالحة}،
+  ورمز صلاحيتها~$\Entails !A$، إذا وفقط إذا صدقت في النماذج جميعًا. وأما مجموعة
+  ال!!{formula}s~$\Gamma$ فتقال إنها \emph{تستلزم}~$!A$، ويكتب
+  $\Gamma \Entails !A$، إذا وفقط إذا لزم، في كل نموذج~$\mModel{M}$ وعند كل
+  $w$ يتحقق فيه~$\mSat{M}{\Gamma}[w]$، أن يتحقق~$\mSat{M}{!A}[w]$.
+\end{defn}
+
+\begin{prop}\ollabel{prop:sat-entails}
+  \begin{enumerate}
+  \item\ollabel{prop:sat-entails1} من~$\mSat{M}{\Gamma}[w]$ و
+    $\Gamma \Entails !A$ يلزم~$\mSat{M}{!A}[w]$.
+  \item\ollabel{prop:sat-entails2} ومن~$\mSat{M}{\Gamma}$ و
+    $\Gamma \Entails !A$ يلزم~$\mSat{M}{!A}$.
+  \end{enumerate}
+\end{prop}
+
+\begin{proof}
+  \begin{enumerate}
+  \item ليكن~$\mSat{M}{\Gamma}[w]$ و$\Gamma \Entails !A$. فليس
+    $\mSat{M}{!A}[w]$ إلا مقتضى تعريف الاستلزام في هذا الموضع.
+  \item وليكن~$\mSat{M}{\Gamma}$ و$\Gamma \Entails !A$. نأخذ
+    $w \in W$ كيفما اتفق؛ فيتحقق~$\mSat{M}{\Gamma}[w]$، ويلزم من
+    \olref{prop:sat-entails1} أن~$\mSat{M}{!A}[w]$. ولم نخص~$w$
+    بشيء، فثبت~$\mSat{M}{!A}$.
+  \end{enumerate}
+\end{proof}
+
+\begin{defn}\ollabel{defn:restrict}
+  ليكن~$\mModel{M}$ نموذجًا علائقيًا، وليكن~$w \in W$. أما
+  \emph{تقييد}~$\mModel{M}$ إلى~$w$، ونعني به
+  $\mModel{M}_w=\tuple{W_w,R_w,V_w}$، فتعريف أجزائه كما يأتي:
+  \begin{align*}
+    W_w & = \Setabs{u \in W}{Rwu},\\
+    R_w & = R \cap (W_w)^2, \text{ و}\\
+    V_w(p) & = V(p) \cap W_w.
+  \end{align*}
+\end{defn}
+
+\begin{prop}\ollabel{prop:restrict}
+  $\mSat{M}{!A}[w]$ إذا وفقط إذا تحقق~$\mSat{M_w}{!A}$.
+\end{prop}
+
+\begin{prob}
+  أقم البرهان على~\olref[int][sem][sem]{prop:restrict}.
+\end{prob}
+
+\begin{prop}
+  إذا كان كل نموذج~$\mModel{M}$ يحقق~$\mSat{M}{\Gamma}$ يحقق كذلك
+  $\mSat{M}{!A}$، لزم~$\Gamma \Entails !A$.
+\end{prop}
+
+\begin{proof}
+  ليكن~$\mSat{M}{\Gamma}[w]$. نطبق~\olref{prop:restrict} على كل
+  $!B \in \Gamma$، فيثبت~$\mSat{M_w}{\Gamma}$. فالفرض يقتضي إذن
+  $\mSat{M_w}{!A}$؛ ثم نعود إلى~\olref{prop:restrict}، فيلزم
+  $\mSat{M}{!A}[w]$، وهو المطلوب.
+\end{proof}
+
+\end{document}

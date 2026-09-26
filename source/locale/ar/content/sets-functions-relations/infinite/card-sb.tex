@@ -22,17 +22,18 @@ $\cardle{A}{B}$ و$\cardle{B}{A}$، فإن $\cardeq{A}{B}$؛ أي إنه إذا
 \emph{كثيرة} ممتعة ومختلفة.
 
 وباستخدام ترميز شبيه بما في
-\olref[sfr][infinite][dedekind]{Closure}، لتكن
+\olref[sfr][infinite][dedekind]{Closure}، لتكن $E$ مجموعة، ولتكن
+$B\subseteq E$ و$f\colon E\to E$، ولتكن
 \[
-\Closureofunder{f}{B} = \bigcap \Setabs{X}{B \subseteq X
+\Closureofunder{f}{B} = \bigcap \Setabs{X}{X\subseteq E\text{ و}B \subseteq X
 \text{ و$X$ منغلقة تحت $f$}}
 \]
-لكل مجموعة $B$ ودالة~$f$. وبحسب هذا التعريف، تكون
+وبحسب هذا التعريف، تكون
 $\Closureofunder{f}{B}$ أصغر مجموعة منغلقة تحت $f$ وتحتوي~$B$، بمعنى
 ما يأتي:
 
 \begin{lem}\ollabel{Closureprops}
-	لكل دالة $f$ ولكل $B$:
+	لكل مجموعة $E$، ولكل دالة $f\colon E\to E$، ولكل $B\subseteq E$:
 	\begin{enumerate}
 		\item\ollabel{Closurehaselem} $B \subseteq \Closureofunder{f}{B}$؛ و
 		\item\ollabel{Closureclosed} $\Closureofunder{f}{B}$ منغلقة تحت $f$؛ و
@@ -41,6 +42,10 @@ $\Closureofunder{f}{B}$ أصغر مجموعة منغلقة تحت $f$ وتحتو
 	\end{enumerate}
 \end{lem}
 
+\textbf{تنبيه تصحيحي على الأصل (C054-01).} صُرّح بالمجموعة المحيطة $E$ وبكون
+$f$ دالة من $E$ إلى نفسها؛ فبدون ذلك لا يلزم أن يكون تقاطع الجزئيات
+منغلقًا تحت $f$، ولا يكون المتغير $X$ محصورًا في مجموعة معلومة.
+
 \begin{proof}
 تمامًا كما في \olref[sfr][infinite][dedekind]{closureproperties}.
 \end{proof}
@@ -48,11 +53,12 @@ $\Closureofunder{f}{B}$ أصغر مجموعة منغلقة تحت $f$ وتحتو
 نحتاج إلى حقيقة أخيرة لنصل إلى مبرهنة شرودر–برنشتاين:
 
 \begin{prop}\ollabel{sbhelper}
-إذا كان $A \subseteq B \subseteq C$ وكان $A \approx C$، فإن $\cardeq{\cardeq{A}{B}}{C}$.
+إذا كان $A \subseteq B \subseteq C$ وكان $\cardeq{A}{C}$، فإن $\cardeq{A}{B}$ و$\cardeq{B}{C}$.
 \end{prop}
 
 \begin{proof}
-إذا أعطيت !!a{bijection} $f \colon C \to A$، فلتكن $F =
+إذا أعطيت !!a{bijection} $f \colon C \to A$، فبما أن $A\subseteq C$
+ننظر إلى $f$ أيضًا بوصفها دالة من $C$ إلى نفسها، ولتكن $F =
 \Closureofunder{f}{C \setminus B}$، وعرّف دالة $g$ مجالها $C$ كما
 يأتي:
 \[
@@ -62,8 +68,8 @@ $\Closureofunder{f}{B}$ أصغر مجموعة منغلقة تحت $f$ وتحتو
 			x & \text{فيما عدا ذلك}
 		\end{cases}
 \]
-سنبيّن أن $g$ هي !!a{bijection} $C \to B$، ومن ذلك يلزم أن
-$\comp{f^{-1}}{g} \colon A \to B$ هي !!a{bijection}، فيكتمل البرهان.
+سنبيّن أن $g$ هي !!a{bijection} $C \to B$ (أي إن $\cardeq{B}{C}$)، ومن ذلك يلزم أن
+$\comp{f^{-1}}{g} \colon A \to B$ هي !!a{bijection} (أي إن $\cardeq{A}{B}$)، فيكتمل البرهان.
 
 ندعي أولًا أنه إذا كان $x \in F$ وكان $y\notin F$، فإن $g(x) \neq
 g(y)$. وافترض، برهانًا بالخلف، خلاف ذلك، فيكون $y = g(y) = g(x) =

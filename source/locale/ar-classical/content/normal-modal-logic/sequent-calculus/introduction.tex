@@ -1,0 +1,49 @@
+% Part: normal-modal-logic
+% Chapter: sequent-calculus
+% Section: introduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{seq}{int}
+
+\olsection{مقدمة}
+
+نوسّع حساب التتابعيات القضي بأن نزيد قواعد للمؤثرين، بحسب ما أُخذ منهما
+أوليًا:
+\iftag{prvBox}{$\Box$\iftag{prvDiamond}{ و~}{}}{}%
+\iftag{prvDiamond}{$\Diamond$}{}. فحساب~$\Log{K}$، مثلًا، هو
+\Log{LK} مضمومًا إليه ما يأتي:
+\[
+  \iftag{prvBox}{\iftag{prvDiamond}{% <> and [] primitive
+    \Axiom$\Gamma \fCenter \Delta, !A$
+    \RightLabel{$\Box$}
+    \UnaryInf$\Box\Gamma \fCenter \Diamond\Delta, \Box!A$
+    \DisplayProof  
+    \qquad
+    \Axiom$!A, \Gamma \fCenter \Delta$
+    \RightLabel{$\Diamond$}
+    \UnaryInf$\Diamond!A, \Box\Gamma \fCenter \Diamond\Delta$
+    \DisplayProof
+}{% only Box primitive
+\Axiom$\Gamma \fCenter !A$
+\RightLabel{$\Box$}
+\UnaryInf$\Box\Gamma \fCenter \Box!A$
+\DisplayProof
+}}{% only <> primitive
+  \Axiom$!A \fCenter \Delta$
+  \RightLabel{$\Diamond$}
+  \UnaryInf$\Diamond!A \fCenter \Diamond\Delta$
+  \DisplayProof
+}
+\]
+وأما توسيعات~$\Log{K}$ فتحتاج إلى قواعد أخرى أيضًا.
+
+ولا يوجد لكل منطق جهوي حساب تتابعيات على هذا النحو. بل إن
+\Log{S5}، مع بساطة دلالته وإمكان تعريفها من غير ذكر علاقة الإتاحة،
+لا يُعرف له في العرض المعتمد هنا حساب ناتج من~$\Log{LK}$ يتمّ من
+غير قاعدة~\Cut. وله، مع ذلك، حساب \emph{تتابعيات فائقة} تام
+خالٍ من القطع.
+
+\end{document}

@@ -1,0 +1,128 @@
+% Part: incompleteness
+% Chapter: incompleteness-provability
+% Section: second-incompleteness-thm
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{inp}{2in}
+
+\olsection{مبرهنة عدم الاكتمال الثانية}
+
+نريد الآن ضبط قولنا إن $\Th{PA}$ لا تثبت اتساقها.
+فعدم اتساق $\Th{PA}$ يكافئ $\Th{PA} \Proves \eq[0][1]$.
+لذلك نعرّف عبارة الاتساق $\OCon[\Th{PA}]$ بأنها
+الـ!!{sentence} $\lnot
+\OProv[\Th{PA}](\gn{\eq[0][1]})$، فتأخذ دعوانا صورة المبرهنة
+الآتية:
+
+\begin{thm}
+\ollabel{thm:second-incompleteness}
+متى كانت $\Th{PA}$ متسقة، امتنع على $\Th{PA}$ !!{derive}
+الصيغة $\OCon[\Th{PA}]$.
+\end{thm}
+
+ولا بد من التنبه إلى اعتماد هذه المبرهنة على التمثيل المختار
+لـ$\OCon[\Th{PA}]$، أي على كيفية تمثيل $\OProv[\Th{PA}](y)$.
+ولن نحتاج من $\OProv[\Th{PA}](y)$ إلا استيفاء شروط
+!!{derivability} الثلاثة. فكل نظرية لها محمول
+!!a{derivability} يستوفيها يجري عليها البرهان نفسه.
+
+ويكشف مخطط غودل للحجة كيف تأتي النتيجة عقب مقدماتها مباشرة.
+لتكن $!G_\Th{PA}$ جملة غودل المبنية في برهان
+\olref[1in]{thm:first-incompleteness}. قد أثبتنا: «إذا كانت
+$\Th{PA}$ متسقة، امتنعت على $\Th{PA}$ !!{derive} الصيغة
+$!G_\Th{PA}$». فلو صُوّر هذا البرهان \emph{داخل} $\Th{PA}$
+لحصلنا على برهان
+\[
+\OCon[\Th{PA}] \lif \lnot \OProv[\Th{PA}](\gn{!G_\Th{PA}}).
+\]
+فلنفرض أن النظام $\Th{PA}$ !!{derive}s $\OCon[\Th{PA}]$.
+حينئذ !!{derive}s أيضًا $\lnot \OProv[\Th{PA}](\gn{!G_\Th{PA}})$.
+وبما أن $!G_\Th{PA}$ جملة غودل، فهذه مكافئة لـ$!G_\Th{PA}$؛
+إذن !!{derive}s النظام $\Th{PA}$ الصيغة $!G_\Th{PA}$.
+
+لكن اتساق $\Th{PA}$ يمنعها، كما علمنا، من !!{derive}
+الصيغة $!G_\Th{PA}$!{} فمتى كانت $\Th{PA}$ متسقة امتنع
+عليها !!{derive} عبارة اتساقها $\OCon[\Th{PA}]$.
+
+ولنضبط الحجة نأخذ $!G_\Th{PA}$ جملة غودل للنظرية $\Th{PA}$،
+ونستعمل شروط !!{derivability} (P1)--(P3) لإثبات أن $\Th{PA}$
+!!{derive}s $\OCon[\Th{PA}] \lif !G_\Th{PA}$.
+ومن ذلك يتبيّن أن $\Th{PA}$ لا يمكنها !!{derive} $\OCon[\Th{PA}]$.
+وهذا ترتيب البرهان في $\Th{PA}$، مع حذف المؤشرات $\Th{PA}$
+السفلية طلبًا للاختصار:
+\begin{align}
+& !G \liff \lnot \OProv(\gn{!G}) \ollabel{G2-1}\\
+& \qquad\text{إن~$!G$ جملة غودل}\notag \\
+& !G \lif \lnot \OProv(\gn{!G}) \ollabel{G2-2}\\
+  & \qquad\text{من \olref{G2-1}} \notag\\
+& !G \lif
+  (\OProv(\gn{!G}) \lif \lfalse) \ollabel{G2-3}\\
+  & \qquad\text{من \olref{G2-2} بالمنطق}\notag\\
+& \OProv(\gn{
+    !G \lif
+    (\OProv(\gn{!G}) \lif \lfalse)
+  }) \ollabel{G2-4}\\
+  & \qquad\text{من \olref{G2-3} بحسب الشرط P1} \notag\\
+& \OProv(\gn{!G}) \lif
+  \OProv(\gn{
+    (\OProv(\gn{!G}) \lif \lfalse)
+    }) \ollabel{G2-5}\\
+  & \qquad\text{من \olref{G2-4} بحسب الشرط P2} \notag\\
+& \OProv(\gn{!G}) \lif (\OProv(\gn{\OProv(\gn{!G})}) \lif \OProv(\gn{\lfalse})) \ollabel{G2-6}\\
+  & \qquad\text{من \olref{G2-5} بحسب الشرط P2 والمنطق} \notag\\
+& \OProv(\gn{!G}) \lif
+  \OProv(\gn{\OProv(\gn{!G})}) \ollabel{G2-7}\\
+   & \qquad\text{بحسب P3} \notag\\
+& \OProv(\gn{!G}) \lif \OProv(\gn{\lfalse}) \ollabel{G2-8}\\
+  & \qquad \text{من \olref{G2-6} و\olref{G2-7} بالمنطق}\notag\\
+& \OCon \lif \lnot \OProv(\gn{!G}) \ollabel{G2-9}\\
+  & \qquad\text{بعكس نقيض \olref{G2-8} و$\OCon \ident \lnot \OProv(\gn{\lfalse})$}\notag \\
+& \OCon \lif !G \notag\\
+  & \qquad\text{من \olref{G2-1} و\olref{G2-9} بالمنطق}\notag
+\end{align}
+والمقصود بالمنطق في هذه الخطوات حقائق أولية من المنطق القضوي.
+فالخطوة \olref{G2-3} تعتمد
+$\Proves \lnot!A \liff (!A\lif \lfalse)$،
+والخطوة \olref{G2-8} تعتمد
+$!A \lif (!B \lif !C), !A \lif !B \Proves !A \lif !C$.
+وأما تطبيق P2 في \olref{G2-5} و\olref{G2-6} فبحالتين من
+$\OProv(\gn{!A \lif !B}) \lif
+(\OProv(\gn{!A}) \lif \OProv(\gn{!B}))$:
+نأخذ في الأولى $!A \ident !G$ و$!B \ident \OProv(\gn{!G}) \lif \lfalse$،
+وفي الثانية $!A \ident \OProv(\gn{!G})$ و$!B \ident \lfalse$.
+
+وعلى وجه أعم نصوغ مبرهنة عدم الاكتمال الثانية هكذا:
+
+\begin{thm}
+\ollabel{thm:second-incompleteness-gen} إذا كانت $\Th{T}$
+نظرية متسقة و!!{axiomatized} تمتد $\Th{Q}$، وكانت
+$\OProv[\Th{T}](y)$ صيغة تستوفي شروط !!{derivability}
+P1--P3 للنظرية $\Th{T}$، امتنع !!{derive} النظام
+$\Th{T}$ للصيغة $\OCon[\Th{T}]$.
+\end{thm}
+
+\begin{prob}
+أثبت أن النظام $\Th{PA}$ !!{derive}s الصيغة
+$!G_{\Th{PA}} \lif \OCon[\Th{PA}]$.
+\end{prob}
+
+\begin{digress}
+فحاصل الأمر أن النظرية الرياضية المتسقة «المعقولة» لا يمكنها
+!!{derive} عبارة اتساقها. لنأخذ $\Th{T}$ نظرية تشمل
+$\Th{Q}$ وتشمل استدلال هيلبرت «التناهي»، أيًّا كان تحديده.
+إذا عجزت $\Th{T}$ بجملتها عن !!{derive} عبارة اتساق $\Th{T}$،
+فجزؤها التناهي أولى بالعجز عن !!{derive} عبارة اتساق $\Th{T}$.
+وبهذا المعنى يمتنع البرهان التناهي على اتساق «الرياضيات كلها».
+
+ومع ذلك، يحتمل لفظ «التناهي» أكثر من تفسير. لذلك أجاز غودل
+في بحثه سنة 1931 أن يكون بعض ما نعدّه تناهيًا خارج الرياضيات التي
+طلب هيلبرت صياغتها صوريًا. وكان في هذا متسامحًا؛ إذ يعسر اليوم
+تصور استدلال يصح عدّه تناهيًا ولا يقبل الصياغة الصورية في
+$\Th{ZFC}$، مثلًا، وهي نظرية مجموعات زرميلو--فرينكل مع بديهية
+الاختيار.
+\end{digress}
+
+\end{document}

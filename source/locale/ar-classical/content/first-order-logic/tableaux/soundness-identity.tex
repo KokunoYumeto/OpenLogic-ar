@@ -1,0 +1,45 @@
+% Part: first-order-logic
+% Chapter: tableaux
+% Section: soundness-identity
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{tab}{sid}
+
+\olsection{السلامة مع \usetoken{S}{identity}}
+
+\begin{prop}
+!!^{tableau}s ذات قواعد الهوية سليمة: فلا !!{tableau} مغلق قابل للإرضاء.
+\end{prop}
+
+\begin{proof}
+يكفي، على ما تقدّم، أن نأخذ فرعًا قابلًا للإرضاء من !!a{tableau}
+ونثبت أن إجراء إحدى قواعد~$\eq$ عليه يبقيه قابلًا للإرضاء.
+نسمّي~$\Gamma$ مجموعة ال!!{formula}s الموقّعة على الفرع،
+ونأخذ~$\Struct{M}$، وهي !!a{structure} ترضي~$\Gamma$.
+
+أما إن مدّدنا الفرع بقاعدة~$\eq$، فقد أضفنا ال!!{formula}
+الموقّعة~$\sFmla{\True}{\eq[t][t]}$. وصدق
+$\Sat{M}{\eq[t][t]}$ بيّن؛ فتبقى~$\Struct{M}$ مرضيةً
+لـ~$\Gamma \cup
+\{\sFmla{\True}{\eq[t][t]}\}$.
+
+وأما إن مدّدناه بـ~$\TRule{\True}{\eq}$، فنضيف !!{formula}
+موقّعة هي~$\sFmla{\True}{!A(t_2)}$، وقد اشتملت~$\Gamma$ على
+$\sFmla{\True}{\eq[t_1][t_2]}$ و$\sFmla{\True}{!A(t_1)}$.
+فيلزم~$\Sat{M}{\eq[t_1][t_2]}$ و$\Sat{M}{!A(t_1)}$.
+نأخذ~$s$ إسنادًا يحقق~$s(x) = \Value{t_1}{M}$.
+وبمقتضى \olref[syn][ass]{prop:sentence-sat-true}
+نحصل على~$\Sat{M}{!A(t_1)}[s]$. ولأن~$\varAssign{s}{s}{x}$،
+تفيد \olref[syn][ext]{prop:ext-formulas} أن~$\Sat{M}{!A(x)}[s]$.
+ومن~$\Sat{M}{\eq[t_1][t_2]}$ يلزم~$\Value{t_1}{M} = \Value{t_2}{M}$،
+فيكون~$s(x) = \Value{t_2}{M}$. نعيد استعمال
+\olref[syn][ext]{prop:ext-formulas}، فيحصل
+$\Sat{M}{!A(t_2)}[s]$. ثم ننتهي، بمقتضى
+\olref[syn][ass]{prop:sentence-sat-true}، إلى~$\Sat{M}{!A(t_2)}$.
+وحالة~$\TRule{\False}{\eq}$ تجري على هذا المسلك نفسه.
+\end{proof}
+
+\end{document}

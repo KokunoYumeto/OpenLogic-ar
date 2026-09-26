@@ -78,14 +78,16 @@ $\Gamma \Sequent \Delta$ هو
     \Gn{!A \Sequent !A}}$. ويكون عدد غودل للـ!!{derivation} المنتهي
     بنتيجة~$\LeftR{\land}$ هو $p_1=
     \tuple{1,p_0,\Gn{!A \land !B \Sequent !A},9}$ ($1$ لأن
-    $\LeftR{\land}$ لها مقدمة واحدة، ثم عدد غودل للنتيجة
+    $\LeftR{\land}$ لها مقدمة واحدة، ثم $p_0$ رمز ال!!{derivation}
+    الجزئي المباشر، ثم عدد غودل للنتيجة
     $!A \land !B \Sequent !A$، و$9$ هو العدد الذي يرمّز
     $\LeftR{\land}$). ومن ثم يكون عدد غودل للـ!!{derivation} بأكمله
     $\tuple{1,p_1,\Gn{\Sequent (!A \land !B) \lif !A},14}$، أي
   \[
-  \tuple{1, \tuple{1, \tuple{0, \Gn{!A \Sequent !A}}, \Gn{!A \land !B \Sequent !A}, 9},
-    \Gn{\Sequent (!A \land !B) \lif !A}, 14}.
+    \tuple{1, \tuple{1, \tuple{0, \Gn{!A \Sequent !A}}, \Gn{!A \land !B \Sequent !A}, 9},
+      \Gn{\Sequent (!A \land !B) \lif !A}, 14}.
   \]
+  % تصحيح مصدر (C286-02): ذُكرت حقول p_1 الأربعة بالترتيب، ومنها رمز الاشتقاق الجزئي المباشر p_0.
 \end{ex}
 
 \begin{explain}
@@ -94,10 +96,14 @@ $\Gamma \Sequent \Delta$ هو
 الأساسية. بعض العمليات بسيطة؛ فمثلًا إذا أُعطينا عدد غودل~$p$
 لـ!!a{derivation}، فإن $\fn{EndSeq}(p)=(p)_{(p)_0+1}$ يعطينا عدد غودل
 لتتابعه الختامي، وتعطينا $\fn{LastRule}(p)=(p)_{(p)_0+2}$ شفرة
-قاعدته الأخيرة. والخاصية $\fn{Sequent}(s)$ المعرّفة بـ
-\[
-  \len{s} = 2 \land \bforall{i<\len{(s)_0} + \len{(s)_1}}{\fn{Sent}(((s)_0 \concat (s)_1)_i)}
-\]
+  قاعدته الأخيرة. ولتكن $\fn{SeqCode}(u)$ الخاصية العودية البدائية
+  التي تقول إن~$u$ رمز متتالية منتهية في الترميز المعتمد. والخاصية
+  $\fn{Sequent}(s)$ المعرّفة بـ
+  \[
+  \fn{SeqCode}(s) \land \len{s} = 2 \land
+  \fn{SeqCode}((s)_0) \land \fn{SeqCode}((s)_1) \land
+  \bforall{i<\len{(s)_0} + \len{(s)_1}}{\fn{Sent}(((s)_0 \concat (s)_1)_i)}
+  \]
 تصدق في $s$ إذا وفقط إذا كان $s$ عدد غودل لتتابع مؤلف من
 !!{sentence}s. وبعض العمليات أصعب بكثير. وسنرسم على الأقل كيفية
 معالجتها. والغاية أن نثبت أن علاقة «$\pi$ !!a{derivation} لـ$!A$ من
@@ -231,10 +237,14 @@ $\Gamma \Sequent \Delta,\lexists[x][!A]$، ويكون التتابع الختا�
 \begin{proof}
   يكون !!^a{derivation}~$\pi$ صحيحًا إذا كان كل استدلال فيه تطبيقًا
   صحيحًا لقاعدة، أي إذا انتهت كل الـ!!{derivation}s الجزئية فيه باستدلال
-  صحيح. ومن ثم تصدق $\fn{Deriv}(p)$ إذا وفقط إذا
+  صحيح. ولتكن $\fn{TreeCode}(p)$ الخاصية العودية البدائية التي تقول
+  إن~$p$ رمز شجرة اشتقاق منتهية ذات جذر بحسب الترميز المعتمد. ومن ثم
+  تصدق $\fn{Deriv}(p)$ إذا وفقط إذا
   \[
+  \fn{TreeCode}(p) \land
   \bforall{i<\len{\fn{SubtreeSeq}(p)}}{\fn{Correct}((\fn{SubtreeSeq}(p))_i)}.
   \]
+  % تصحيح مصدر (C286-01): أُثبت حارسا رمز المتتالية وشجرة الاشتقاق قبل استعمال الإسقاطات الكلية.
 \end{proof}
 
 

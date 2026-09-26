@@ -1,0 +1,76 @@
+% Part: many-valued-logic
+% Chapter: syntax-and-semantics
+% Section: matrices
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mvl}{syn}{mat}
+
+\olsection{المصفوفات}
+
+يتعين المنطق المتعدد القيم بأربعة أمور: لغته، ومجموعة قيم صدقه~$V$،
+والمجموعة الجزئية المميزة من تلك القيم، ودوال الصدق لروابطه. ومجموع
+هذه الأمور يسمى \emph{مصفوفة}.
+
+\begin{defn}[المصفوفة]
+\ollabel{defn:matrix}
+\emph{مصفوفة} المنطق~$\Log L$ مؤلفة من:
+\begin{enumerate}
+\item مجموعة روابط هي لغة~$\Lang L$؛
+\item مجموعة غير خالية~$V \neq \emptyset$ من قيم الصدق؛
+\item مجموعة~$V^+ \subseteq V$ من قيم الصدق المميزة؛
+\item لكل رابط~$\star$ ذي~$n$ من المواضع في~$\Lang L$ دالة صدق
+$\tf{\star} : V^n \to V$. فإن كان~$n = 0$، لم تكن
+$\tf{\star}$ إلا عنصرًا من~$V$.
+\end{enumerate}
+\end{defn}
+
+\begin{ex}
+أما مصفوفة المنطق الكلاسيكي~\LogCL{} فعناصرها:
+\begin{enumerate}
+  \item لغة القضايا القياسية~$\Lang L_0$، وروابطها
+  $\lfalse$ و$\lnot$ و$\land$ و$\lor$ و$\lif$.
+  \item مجموعة قيم الصدق~$V = \{\True, \False\}$.
+  \item القيمة المميزة وحدها هي~$\True$؛ أي~$V^+ = \{\True\}$.
+  \item في الثابت~$\lfalse$ يكون~$\tf{\lfalse} = \False$؛ وأما
+  دوال الصدق الباقية فمبينة في الجداول المعتادة (انظر
+  \olref{fig:tf-CL}).
+\end{enumerate}
+\begin{figure}
+  \begin{center}
+      \begin{tabular}{c|c}
+        $\tf{\lnot}$ & \\
+        \hline
+        $\True$ & $\False$ \\
+        $\False$ & $\True$
+      \end{tabular}
+      \quad
+      \begin{tabular}{c|cc}
+        $\tf{\land}$ & $\True$ & $\False$ \\
+        \hline
+        $\True$ & $\True$ & $\False$ \\
+        $\False$ & $\False$ & $\False$
+      \end{tabular}
+      \quad
+      \begin{tabular}{c|cc}
+        $\tf{\lor}$ & $\True$ & $\False$ \\
+        \hline
+        $\True$ & $\True$ & $\True$ \\
+        $\False$ & $\True$ & $\False$
+      \end{tabular}
+      \quad
+      \begin{tabular}{c|cc}
+        $\tf{\lif}$ & $\True$ & $\False$ \\
+        \hline
+        $\True$ & $\True$ & $\False$ \\
+        $\False$ & $\True$ & $\True$
+      \end{tabular}
+    \end{center}
+    \caption{دوال الصدق في المنطق الكلاسيكي~$\LogCL$.}
+    \ollabel{fig:tf-CL}
+  \end{figure}
+  \end{ex}
+
+\end{document}
