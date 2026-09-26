@@ -1,0 +1,867 @@
+# القرارات العربية الحالية — الجزء ٢ من ١١
+
+[الرجوع إلى فهرس الأجزاء](README.md)
+
+السياقات والتعليلات أدناه من السجل القائم؛ لم تُراجع جميعها مراجعة معجمية جديدة في هذا الإخراج. يعني تحذير الموضع غير المحسوم أن الملف معروف لكن السطر الحالي لم يثبت، ويعني رابط بدء الوحدة أن صفحة اللفظ ليست معلومة بالدقة.
+
+## أبجدية
+
+الأصل الإنجليزي: `alphabet (formal language)`. معرّف القرار: `locale-ar-chosen-8006a89f2cb6f7bb`.
+
+**المعنى المقصود:** مجموعة رموز منتهية في اللغات الصورية وآلات تورنغ، لا نظام كتابة طبيعي.
+
+**سبب الاختيار:** جميع الوقوعات المسماة تربط Σ بمجموعة رموز وتضم رمزي طرف الشريط والفراغ. الكانون يشهد «رمز» تعريفًا لكنه لا يطبع alphabet في هذا المعنى.
+
+**سؤال مفتوح:** هل «أبجدية» مناسبة لـalphabet بمعنى مجموعة رموز منتهية Σ في نظرية اللغات الصورية وآلات تورنغ، أم ينبغي «ألفباء» أو «مجموعة الرموز»؟ يجب أن يبقى رمزا طرف الشريط والفراغ عضوين في Σ، وألا يوحي المصطلح بأن المقصود نظام كتابة طبيعي فقط.
+
+**كل وقوع مسجل لهذا القرار:**
+
+- **OLP-0256 — آلات تورنغ، وقوع ١:**
+  - **الأصل:** [السطر ٢٧](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/turing-machines/machines-computations/turing-machines.tex#L27). الشاهد المسجل: «\item a finite \emph{alphabet} $\Sigma$ which includes $\TMendtape$ and».
+  - **العربية المعيارية:** [السطر ٢٥](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/turing-machines/machines-computations/turing-machines.tex#L25)؛ الطبعة الدولية: [ص ٤٨٧](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=487) (ترقيم المتن: ٤٨٦) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٤٨٨](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=488) (ترقيم المتن: ٤٨٧) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «\item \emph{أبجدية} منتهية $\Sigma$ تضم $\TMendtape$ و$\TMblank$،».
+  - **العربية التراثية:** [السطر ٢٠](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/turing-machines/machines-computations/turing-machines.tex#L20)؛ الطبعة التراثية: [ص ٤٧٩](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=479) (ترقيم المتن: ٤٧٨) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «\item \emph{أبجدية} منتهية $\Sigma$ فيها $\TMendtape$ و$\TMblank$؛».
+- **OLP-0254 — مقدمة، وقوع ٢:**
+  - **الأصل:** [السطر ٣٥](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/turing-machines/machines-computations/introduction.tex#L35). الشاهد المسجل: «may contain a symbol from a finite \emph{alphabet}. Such alphabets can».
+  - **العربية المعيارية:** [السطر ٢٩](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/turing-machines/machines-computations/introduction.tex#L29)؛ الطبعة الدولية: [ص ٤٨٢](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=482) (ترقيم المتن: ٤٨١) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٤٨٣](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=483) (ترقيم المتن: ٤٨٢) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «رمزًا من \emph{أبجدية} منتهية. وقد تضم هذه الأبجديات أي عدد من الرموز».
+  - **العربية التراثية:** [السطر ١٥](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/turing-machines/machines-computations/introduction.tex#L15)؛ الطبعة التراثية: [ص ٤٧٤](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=474) (ترقيم المتن: ٤٧٣) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «وأقرب ما نتصور به آلة تورنغ أنها برنامج لآلية متخيلة مخصوصة. وتتألف الآلية من \emph{شريط} و\emph{رأس للقراءة والكتابة}. وشريطنا هنا ممتد إلى غير نهاية في جهة واحدة، هي اليمين، ومقسم إلى \emph{خانات}، في كل منها رمز من \emph{أبجدية} منتهية. ويجوز أن تشتمل ال…».
+
+## دالة مزاوجة بديلة
+
+الأصل الإنجليزي: `An Alternative Pairing Function`. معرّف القرار: `retro-0005-0050:section:2f44490d518ebd73`.
+
+**المعنى المقصود:** عنوان قسم يقدم دالة بديلة لترميز زوج من الأعداد الطبيعية بعد دالة مزاوجة سابقة.
+
+**سبب الاختيار:** «مزاوجة» تنقل ربط عنصرين في قيمة واحدة وتنسجم مع البناء المعروض، لكن البحث المحدود في المعجم لم يجد pairing function، وتوجد بدائل عربية غير محسومة مثل «اقتران» و«ترميز الأزواج».
+
+**سؤال مفتوح:** ما الاسم الأنسب لدالة N²→N التي ترمز زوجا مرتبا: «مزاوجة» أم «اقتران» أم «ترميز أزواج»؟
+
+**كل وقوع مسجل لهذا القرار:**
+
+- **OLP-0032 — دالة مزاوجة بديلة، وقوع ١:**
+  - **الأصل:** [السطر ١١](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/size-of-sets/pairing-alt.tex#L11). الشاهد المسجل: «\olsection{An Alternative Pairing Function}».
+  - **العربية المعيارية:** [السطر ١١](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/sets-functions-relations/size-of-sets/pairing-alt.tex#L11)؛ الطبعة الدولية: [ص ٦٨](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=68) (ترقيم المتن: ٦٧) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٦٨](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=68) (ترقيم المتن: ٦٧) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «\olsection{دالة مزاوجة بديلة}».
+  - **العربية التراثية:** [السطر ١١](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/sets-functions-relations/size-of-sets/pairing-alt.tex#L11)؛ الطبعة التراثية: [ص ٦٥](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=65) (ترقيم المتن: ٦٤) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «\olsection{دالة مزاوجة بديلة}».
+
+## الاستقراء الحسابي؛ مخطط الاستقراء؛ معلمة؛ تعريف عودي
+
+الأصل الإنجليزي: `arithmetical induction; induction schema; parameter; recursive definition`. معرّف القرار: `locale-ar-chosen-ac2996c793babc2e`.
+
+**المعنى المقصود:** الاستقراء في جبرات ديديكند، مخطط الاستقراء ذو المعلمات، والتعريف العودي للدوال الحسابية.
+
+**سبب الاختيار:** طوبقت مواضع Arithmetical induction والـparameters والـrecursive definition في OLP-0052 بالنسختين. الكانون يعرض «استقراء رياضي»، و«وسيط»، وعائلة «ارتدادي»؛ وهي بدائل مباشرة لكن سياقاتها ليست مطابقة تمامًا.
+
+**سؤال مفتوح:** في جبر ديديكند، هل نحتفظ بـ«الاستقراء الحسابي» اتباعًا لـArithmetical induction أم نوحده مع الرأس المعجمي «الاستقراء الرياضي»؟ وهل «مخطط الاستقراء»، «معلمة»، و«تعريف عودي» أفضل من «نسق الاستقراء»، «وسيط»، و«تعريف ارتدادي»؟ يجب حفظ جميع التكميمات، وأن o رمز العنصر المميز لا الرقم 0، ومعادلات العودية الست.
+
+**كل وقوع مسجل لهذا القرار:**
+
+- **OLP-0052 — جبرات ديديكند والاستقراء الحسابي، وقوع ١:**
+
+## البناء الحسابي للنظم العددية
+
+الأصل الإنجليزي: `Arithmetization (construction of number systems)`. معرّف القرار: `locale-ar-chosen-f5f611b6672d041f`.
+
+**المعنى المقصود:** عنوان فصل يبني الأعداد الصحيحة والنسبية والحقيقية من نظم أسبق، لا ترميز النحو ولا رد الرياضيات العليا إلى الحساب الابتدائي.
+
+**سبب الاختيار:** للمعجم مدخل مباشر arithmetization ← معالجة حسابية، لكنه يشرح معنيين لا يطابقان بناء نظم الأعداد في هذا الفصل. لذلك عُدّ شاهد اختلاف معنى لا ترخيصًا آليًا للاستبدال.
+
+**سؤال مفتوح:** هل عنوان «البناء الحسابي للنظم العددية» أدق لهذا الفصل من الرأس المعجمي «معالجة حسابية»؟ صفحة المعجم تعطي arithmetization بمعنيين آخرين—رد طرائق أعلى إلى الحساب، وتمثيل مجموعات بالأعداد الصحيحة—فهل يوجد رأس عربي مؤسسي خاص بـconstruction of number systems يحفظ معنى بناء ℤ وℚ وℝ من نظم أسبق؟
+
+**كل وقوع مسجل لهذا القرار:**
+
+- **OLP-0041 — البناء الحسابي للنظم العددية، وقوع ١:**
+  - **الأصل:** [السطر ٨](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/arithmetization/arithmetization.tex#L8). الشاهد المسجل: «\olchapter{sfr}{arith}{Arithmetization}».
+  - **العربية المعيارية:** [السطر ٨](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/sets-functions-relations/arithmetization/arithmetization.tex#L8)؛ الطبعة الدولية: [ص ٨٦](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=86) (ترقيم المتن: ٨٥)، [ص ٨٧](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=87) (ترقيم المتن: ٨٦) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٨٦](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=86) (ترقيم المتن: ٨٥)، [ص ٨٧](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=87) (ترقيم المتن: ٨٦) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «\olchapter{sfr}{arith}{البناء الحسابي للنظم العددية}».
+  - **العربية التراثية:** [السطر ٨](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/sets-functions-relations/arithmetization/arithmetization.tex#L8)؛ الطبعة التراثية: [ص ٨٢](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=82) (ترقيم المتن: ٨١)، [ص ٨٣](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=83) (ترقيم المتن: ٨٢) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «\olchapter{sfr}{arith}{البناء الحسابي للنظم العددية}».
+
+## العلاقات ذات k مواضع
+
+الأصل الإنجليزي: `arity / k-ary relation`. معرّف القرار: `repair-compact-0101-0200:0177-A1`.
+
+**المعنى المقصود:** عدد حجج/مواضع العلاقة أو الدالة (arity، k-ary، n-ary)، مع تمييزه من رتبة المنطق.
+
+**سبب الاختيار:** المتن الحي يثبت «ذات k مواضع» في OLP-0177، ويستعمل في مواضع أخرى «دالة k-ية» و«ذي رتبة n». يشهد المعجم البنية الصرفية «نوني». كانت اللقطة المجمدة تترك أربعة مواضع بلا مقطع حرفي؛ ويضيف هذا المرشح النص الحرفي من المدى نفسه في الملف الحالي المقيّد بتجزئته، مع حفظ واقعة الغياب الأصلية. أما وقوع OLP-0184 فهو وقوع هوية غير ذي صلة ويظل معروضًا للمراجعة.
+
+**سؤال مفتوح:** في OLP-0177، هل «علاقة ذات k مواضع/عدد المواضع» هو الأنسب لـk-ary/arity، أم «علاقة k-ية/نونية» أو «رتبة العلاقة k»؟ وكيف نوحده مع «دالة k-ية» و«رمز دالة ذي رتبة n» من غير خلط arity برتبة المنطق؟ يرجى أيضًا حذف OLP-0184 من تغطية القرار إن تأكد أنه وقوع هوية غير ذي صلة.
+
+**كل وقوع مسجل لهذا القرار:**
+
+- **OLP-0177 — منطق الرتبة الثانية، وقوع ١:**
+  - **العربية المعيارية:** [الملف](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/first-order-logic/beyond/second-order-logic.tex)؛ الطبعة الدولية: [ص ٣٨٢](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=382) (ترقيم المتن: ٣٨١) (صفحة بدء الوحدة فحسب، لا صفحة اللفظ المثبتة بالدقة)؛ طبعة المشرق: [ص ٣٨٢](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=382) (ترقيم المتن: ٣٨١) (صفحة بدء الوحدة فحسب، لا صفحة اللفظ المثبتة بالدقة)؛ ⚠ لم يثبت السطر الحالي لهذا الاختيار؛ لا تُعامل أرقام المرشحات القديمة إحالة دقيقة. الشاهد المسجل: «».
+  - **العربية المعيارية:** [الملف](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/first-order-logic/beyond/second-order-logic.tex)؛ الطبعة الدولية: [ص ٣٨٢](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=382) (ترقيم المتن: ٣٨١) (صفحة بدء الوحدة فحسب، لا صفحة اللفظ المثبتة بالدقة)؛ طبعة المشرق: [ص ٣٨٢](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=382) (ترقيم المتن: ٣٨١) (صفحة بدء الوحدة فحسب، لا صفحة اللفظ المثبتة بالدقة)؛ ⚠ لم يثبت السطر الحالي لهذا الاختيار؛ لا تُعامل أرقام المرشحات القديمة إحالة دقيقة. الشاهد المسجل: «».
+  - **العربية التراثية:** [السطر ٢٠٩](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/first-order-logic/beyond/second-order-logic.tex#L209)؛ الطبعة التراثية: [ص ٣٧٥](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=375) (ترقيم المتن: ٣٧٤) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «% تصحيح ترجمة (0177-A1): استُعمل «ذات k مواضع» للـ arity لئلا يلتبس برتبة المنطق. لكل~$k$ !!a{domain} من «العلاقات ذات $k$ مواضع». ونجعل للغة رموز العلاقة المضمنة «$\Atom{\Obj{true}_k}{R,x_1,\dots,x_k}$»، ويقصد بها تقرير أن $R$ تصدق على $x_1$، و\dots،~$x_k$…».
+- **OLP-0184 — reducts and expansions، وقوع ٣:**
+- **OLP-0645 — تمهيد، وقوع ٤:**
+  - **العربية التراثية:** [السطر ٣١](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/first-order-logic/syntax-and-semantics/introduction.tex#L31)؛ الطبعة التراثية: [ص ١٠٠٩](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=1009) (ترقيم المتن: ٨) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «ذي رتبة~$n$ دالة من~$D^n$ إلى~$D$، حيث~$D$ هو~!!{domain}؛ ويُجعل».
+- **OLP-0647 — تمثيل دوال C في ThQ، وقوع ٥:**
+  - **العربية التراثية:** [الملف](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/incompleteness/representability-in-q/c-representable.tex)؛ الطبعة التراثية: [ص ١٠١٠](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=1010) (ترقيم المتن: ٩) (صفحة بدء الوحدة فحسب، لا صفحة اللفظ المثبتة بالدقة)؛ ⚠ لم يثبت السطر الحالي لهذا الاختيار؛ لا تُعامل أرقام المرشحات القديمة إحالة دقيقة. الشاهد المسجل: «».
+  - **العربية التراثية:** [الملف](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/incompleteness/representability-in-q/c-representable.tex)؛ الطبعة التراثية: [ص ١٠١٠](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=1010) (ترقيم المتن: ٩) (صفحة بدء الوحدة فحسب، لا صفحة اللفظ المثبتة بالدقة)؛ ⚠ لم يثبت السطر الحالي لهذا الاختيار؛ لا تُعامل أرقام المرشحات القديمة إحالة دقيقة. الشاهد المسجل: «».
+
+## بديهية
+
+الأصل الإنجليزي: `axiom`. معرّف القرار: `locale-ar-chosen-4b6b22bb5c337dc1`.
+
+**المعنى المقصود:** axiom في الأنساق الصورية ونظرية المجموعات والحساب، أي مبدأ مفترض داخل نسق.
+
+**سبب الاختيار:** المعجم يشهد axiom ← موضوعة ويذكر مسلمة أيضًا. «بديهية» مفهومة في النص الحالي لكنها قد توحي بوضوح ذاتي لا يلزم للموضوعة الصورية.
+
+**سؤال مفتوح:** هل ينبغي توحيد axiom على «موضوعة» كما في المعجم، أو «مسلمة»، أم الإبقاء على «بديهية»؟ إن بقيت «بديهية»، فكيف نمنع إيحاء أنها صادقة بالوضوح الذاتي، ولا سيما في ZFC وPA وقواعد الاشتقاق حيث المقصود مبدأ مفترض داخل نسق؟
+
+**كل وقوع مسجل لهذا القرار:**
+
+- **OLP-0504 — سلامة Derivations البديهية، وقوع ١:**
+  - **الأصل:** [السطر ٣٨](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/intuitionistic-logic/soundness-completeness/soundness-axd.tex#L38). الشاهد المسجل: «\item $!A_n$ is an axiom. All axioms are valid, so $\Gamma \Entails».
+  - **العربية المعيارية:** [السطر ٣٦](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/intuitionistic-logic/soundness-completeness/soundness-axd.tex#L36)؛ الطبعة الدولية: [ص ٨٣٧](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=837) (ترقيم المتن: ٨٣٦) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٨٣٨](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=838) (ترقيم المتن: ٨٣٧) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «\item إذا كانت~$!A_n$ بديهية، فجميع البديهيات صالحة، ومن ثم».
+  - **العربية التراثية:** [السطر ٣٧](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/intuitionistic-logic/soundness-completeness/soundness-axd.tex#L37)؛ الطبعة التراثية: [ص ٨٢٣](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=823) (ترقيم المتن: ٨٢٢) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «\item إن كانت~$!A_n$ بديهية، فصلاحية البديهيات تقتضي».
+- **OLP-0277 — تعريفات، وقوع ٢:**
+  - **الأصل:** [السطر ٢١٤](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/incompleteness/introduction/definitions.tex#L214). الشاهد المسجل: «$\Char{X}(!B) = 1$ if $!B$ is an axiom of~$\Th{PA}$ and $= 0$».
+  - **العربية المعيارية:** [السطر ١٩٩](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/incompleteness/introduction/definitions.tex#L199)؛ الطبعة الدولية: [ص ٥٢٩](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=529) (ترقيم المتن: ٥٢٨) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٥٣٠](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=530) (ترقيم المتن: ٥٢٩) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «$\Char{X}$ حيث $\Char{X}(!B)=1$ إذا كانت $!B$ بديهية في~$\Th{PA}$».
+  - **العربية التراثية:** [السطر ٢١٠](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/incompleteness/introduction/definitions.tex#L210)؛ الطبعة التراثية: [ص ٥١٨](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=518) (ترقيم المتن: ٥١٧) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «$\Char{X}(!B)=1$ إن كانت $!B$ بديهية في~$\Th{PA}$،».
+- **OLP-0319 — مبرهنة عدم الاكتمال الثانية، وقوع ٣:**
+  - **الأصل:** [السطر ١٢٥](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/incompleteness/incompleteness-provability/second-incompleteness-thm.tex#L125). الشاهد المسجل: «Zermelo--Fraenkel set theory with the axiom of choice.».
+  - **العربية المعيارية:** [السطر ١١٨](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/incompleteness/incompleteness-provability/second-incompleteness-thm.tex#L118)؛ الطبعة الدولية: [ص ٥٩٣](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=593) (ترقيم المتن: ٥٩٢) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٥٩٤](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=594) (ترقيم المتن: ٥٩٣) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «$\Th{ZFC}$ مثلًا، أي نظرية مجموعات زرميلو--فرينكل مع بديهية الاختيار.».
+  - **العربية التراثية:** [السطر ١٢٤](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/incompleteness/incompleteness-provability/second-incompleteness-thm.tex#L124)؛ الطبعة التراثية: [ص ٥٧٩](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=579) (ترقيم المتن: ٥٧٨) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «$\Th{ZFC}$، مثلًا، وهي نظرية مجموعات زرميلو--فرينكل مع بديهية».
+- **OLP-0591 — نقاط aleph الثابتة، وقوع ٤:**
+  - **الأصل:** [السطر ٦٨](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/set-theory/card-arithmetic/fix.tex#L68). الشاهد المسجل: «axiom which allows our proof to work. In which case, one assumes,».
+  - **العربية المعيارية:** [السطر ٨](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/set-theory/card-arithmetic/fix.tex#L8)؛ الطبعة الدولية: [ص ٩٣٩](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=939) (ترقيم المتن: ٩٣٨) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٩٤٠](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=940) (ترقيم المتن: ٩٣٩) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «اقترحنا في \olref[spine][]{chap} أن بديهية الاستبدال بحاجة إلى تبرير،».
+  - **العربية التراثية:** [السطر ٨](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/set-theory/card-arithmetic/fix.tex#L8)؛ الطبعة التراثية: [ص ٩٢٠](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=920) (ترقيم المتن: ٩١٩) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «قدمنا في~\olref[spine][]{chap} أن بديهية الاستبدال مفتقرة إلى مسوغ،».
+- **OLP-0311 — النظريات التي تقبل تأويل ThQ غير قابلة للقرار، وقوع ٥:**
+  - **الأصل:** [السطر ٣١](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/incompleteness/theories-computability/interpretability.tex#L31). الشاهد المسجل: «axiom of choice, to be an axiomatic foundation that is powerful enough».
+  - **العربية المعيارية:** [السطر ٢٧](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/incompleteness/theories-computability/interpretability.tex#L27)؛ الطبعة الدولية: [ص ٥٨٢](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=582) (ترقيم المتن: ٥٨١) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٥٨٣](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=583) (ترقيم المتن: ٥٨٢) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «اتخاذ $\Th{ZFC}$، أي نظرية مجموعات زرميلو--فرينكل مع بديهية الاختيار،».
+  - **العربية التراثية:** [السطر ٢٨](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/incompleteness/theories-computability/interpretability.tex#L28)؛ الطبعة التراثية: [ص ٥٦٨](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=568) (ترقيم المتن: ٥٦٧) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «وللتطبيق نأخذ $\Th{ZFC}$، نظرية مجموعات زرميلو--فرينكل مع بديهية».
+
+## الأساسيات
+
+الأصل الإنجليزي: `Basics`. معرّف القرار: `retro-0005-0050:section:4ca42974687e12e9`.
+
+**المعنى المقصود:** عنوان تمهيدي يجمع التعريفات الأولية للدوال قبل الأنواع والإنشاءات اللاحقة.
+
+**سبب الاختيار:** «الأساسيات» عنوان عربي مألوف ومحايد ويعكس وظيفة القسم لا مصطلحا تقنيا خاصا.
+
+**سؤال مفتوح:** هل يحفظ اختيار «الأساسيات» معنى المصطلح الإنجليزي «Basics» في المواضع المبيّنة، أم يُفضَّل أحد البدائل المسجلة؟
+
+**كل وقوع مسجل لهذا القرار:**
+
+- **OLP-0021 — الأساسيات، وقوع ١:**
+  - **الأصل:** [السطر ١٠](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/functions/function-basics.tex#L10). الشاهد المسجل: «\olsection{Basics}».
+  - **العربية المعيارية:** [السطر ١٠](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/sets-functions-relations/functions/function-basics.tex#L10)؛ الطبعة الدولية: [ص ٥٢](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=52) (ترقيم المتن: ٥١) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٥٢](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=52) (ترقيم المتن: ٥١) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «\olsection{الأساسيات}».
+  - **العربية التراثية:** [السطر ١٠](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/sets-functions-relations/functions/function-basics.tex#L10)؛ الطبعة التراثية: [ص ٥٠](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=50) (ترقيم المتن: ٤٩) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «\olsection{الأساسيات}».
+
+## بيناسيراف؛ فريغه؛ فيتغنشتاين؛ مفارقة مفهوم الحصان
+
+الأصل الإنجليزي: `Benacerraf; Frege; Wittgenstein; concept horse paradox`. معرّف القرار: `locale-ar-chosen-e1facea9cacc61f0`.
+
+**المعنى المقصود:** أسماء بيناسيراف وفريغه وفيتغنشتاين واسم concept horse paradox في فلسفة الرياضيات.
+
+**سبب الاختيار:** تثبت الوقوعات نسب الحجج كما في المصدر. الكانون المحلي يشهد paradox العام بـ«محيرة» ولا يشهد الاسم الخاص أو تهجئات الأعلام؛ ومن ثم يلزم مرجع عربي فلسفي/ببليوغرافي مستقل.
+
+**سؤال مفتوح:** هل تهجئات «بيناسيراف/فريغه/فيتغنشتاين» هي المتداولة في المراجع العربية، وهل «مفارقة مفهوم الحصان» هو الاسم العربي الأنسب لـconcept horse paradox؟ يرجى كذلك مراجعة الإسناد: بيناسيراف شهّر الحجة، والمفارقة مرتبطة بفريغه، واعتراض فيتغنشتاين موجّه إلى راسل.
+
+**كل وقوع مسجل لهذا القرار:**
+
+- **OLP-0035 — التساوي العددي، وقوع ١:**
+  - **الأصل:** [السطر ١٧](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/size-of-sets/equinumerous-sets.tex#L17). الشاهد المسجل: «is Frege:».
+  - **العربية المعيارية:** [السطر ١٦](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/sets-functions-relations/size-of-sets/equinumerous-sets.tex#L16)؛ الطبعة الدولية: [ص ٧٤](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=74) (ترقيم المتن: ٧٣) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٧٤](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=74) (ترقيم المتن: ٧٣) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «متى تكون المجموعتان متساويتين في الحجم. يقول فريغه:».
+  - **العربية التراثية:** [السطر ١٣](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/sets-functions-relations/size-of-sets/equinumerous-sets.tex#L13)؛ الطبعة التراثية: [ص ٧١](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=71) (ترقيم المتن: ٧٠) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «إن تصورنا المعتاد لحجم المجموعة يكفينا ما دامت منتهية؛ فإذا صرنا إلى المجموعات اللانهائية احتجنا إلى تحقيقه. ولإقامة مقارنة صورية بين مجموعتين، \emph{أيًّا} كان حجمهما، نبدأ بضبط معنى تساويهما في الحجم. وفي هذا يقول فريغه:».
+- **OLP-0013 — تأملات فلسفية، وقوع ٢:**
+  - **الأصل:** [السطر ٣٨](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/relations/reflections.tex#L38). الشاهد المسجل: «set-theoretic reductionism which Benacerraf made famous in».
+  - **الأصل:** [السطر ٦٧](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/relations/reflections.tex#L67). الشاهد المسجل: «together a simple version of Frege's concept \emph{horse} paradox, and».
+  - **الأصل:** [السطر ٦٨](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/relations/reflections.tex#L68). الشاهد المسجل: «a famous objection that Wittgenstein once raised against Russell.)».
+  - **العربية المعيارية:** [السطر ٣٥](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/sets-functions-relations/relations/reflections.tex#L35)؛ الطبعة الدولية: [ص ٤٣](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=43) (ترقيم المتن: ٤٢) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٤٣](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=43) (ترقيم المتن: ٤٢) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «ضد الاختزالية في نظرية المجموعات جعلها بيناسيراف مشهورة في».
+  - **العربية المعيارية:** [السطر ٦١](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/sets-functions-relations/relations/reflections.tex#L61)؛ الطبعة الدولية: [ص ٤٣](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=43) (ترقيم المتن: ٤٢) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٤٣](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=43) (ترقيم المتن: ٤٢) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «حالة خاصة. (وهذا يجمع صيغة بسيطة من مفارقة مفهوم \emph{الحصان} عند فريغه».
+  - **العربية المعيارية:** [السطر ٦٢](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/sets-functions-relations/relations/reflections.tex#L62)؛ الطبعة الدولية: [ص ٤٣](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=43) (ترقيم المتن: ٤٢) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٤٣](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=43) (ترقيم المتن: ٤٢) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «واعتراضًا شهيرًا كان فيتغنشتاين قد وجّهه إلى راسل.)».
+  - **العربية التراثية:** [السطر ٣٤](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/sets-functions-relations/relations/reflections.tex#L34)؛ الطبعة التراثية: [ص ٤٢](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=42) (ترقيم المتن: ٤١) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «بيناسيراف في \citeyear{Benacerraf1965}، وسنعاودها مرارًا.».
+  - **العربية التراثية:** [السطر ٥٥](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/sets-functions-relations/relations/reflections.tex#L55)؛ الطبعة التراثية: [ص ٤٢](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=42) (ترقيم المتن: ٤١) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «ويجتمع في هذا الوجه تبسيط لمفارقة مفهوم \emph{الحصان} عند فريغه».
+  - **العربية التراثية:** [السطر ٥٦](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/sets-functions-relations/relations/reflections.tex#L56)؛ الطبعة التراثية: [ص ٤٢](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=42) (ترقيم المتن: ٤١) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «واعتراض مشهور وجّهه فيتغنشتاين إلى راسل.».
+- **OLP-0175 — لمحة عامة، وقوع ٣:**
+  - **الأصل:** [السطر ٣٥](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/first-order-logic/beyond/introduction.tex#L35). الشاهد المسجل: «begun by Frege. Their system of logic was a form of higher-type logic».
+  - **العربية المعيارية:** [السطر ٣١](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/first-order-logic/beyond/introduction.tex#L31)؛ الطبعة الدولية: [ص ٣٨٠](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=380) (ترقيم المتن: ٣٧٩) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٣٨٠](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=380) (ترقيم المتن: ٣٧٩) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «التقليد {\em المنطقياني} الذي بدأه فريغه. وكان نسقهما المنطقي صورة من».
+  - **العربية التراثية:** [السطر ٢٩](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/first-order-logic/beyond/introduction.tex#L29)؛ الطبعة التراثية: [ص ٣٧١](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=371) (ترقيم المتن: ٣٧٠) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «على المنطق، على نهج {\em المنطقيانية} الذي ابتدأه فريغه.».
+
+## دالة تقابلية
+
+الأصل الإنجليزي: `bijection`. معرّف القرار: `retro-0005-0050:shared-token:f10e992e090ccab9`.
+
+**المعنى المقصود:** دالة تقيم تقابلا واحدا لواحد وعلى بين مجموعتين؛ الاستعمال هنا اسم جنس غير مسبوق بأداة التنكير الإنجليزية.
+
+**سبب الاختيار:** كما في «a bijection»، تعرف السياقات الكائن تعريفا صريحا، وتدعم مادة المعجم أسرة «تقابل/تقابلي». إضافة «دالة» تمنع التباس الاسم بالعلاقة العامة.
+
+**سؤال مفتوح:** هل يحفظ اختيار «دالة تقابلية» معنى المصطلح الإنجليزي «bijection» في المواضع المبيّنة، أم يُفضَّل أحد البدائل المسجلة؟
+
+**كل وقوع مسجل لهذا القرار:**
+
+- **OLP-0035 — التساوي العددي، وقوع ١:**
+  - **الأصل:** [السطر ٦٩](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/size-of-sets/equinumerous-sets.tex#L69). الشاهد المسجل: «Suppose $\cardeq{A}{B}$, so there is some !!{bijection} $f \colon A».
+  - **العربية المعيارية:** [السطر ٦٦](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/sets-functions-relations/size-of-sets/equinumerous-sets.tex#L66)؛ الطبعة الدولية: [ص ٧٥](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=75) (ترقيم المتن: ٧٤) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٧٥](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=75) (ترقيم المتن: ٧٤) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «افترض أن $\cardeq{A}{B}$، فتوجد !!{bijection} ما $f \colon A».
+  - **العربية التراثية:** [السطر ٤٧](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/sets-functions-relations/size-of-sets/equinumerous-sets.tex#L47)؛ الطبعة التراثية: [ص ٧٢](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=72) (ترقيم المتن: ٧١) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «ليكن $\cardeq{A}{B}$، ولنأخذ !!{bijection} $f \colon A».
+- **OLP-0035 — التساوي العددي، وقوع ٢:**
+  - **الأصل:** [السطر ٩٢](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/size-of-sets/equinumerous-sets.tex#L92). الشاهد المسجل: «!!{bijection}~$g$. Then $\comp{g}{f}$ is !!a{bijection} with».
+  - **العربية المعيارية:** [السطر ٨٩](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/sets-functions-relations/size-of-sets/equinumerous-sets.tex#L89)؛ الطبعة الدولية: [ص ٧٤](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=74) (ترقيم المتن: ٧٣) (صفحة بدء الوحدة فحسب، لا صفحة اللفظ المثبتة بالدقة)؛ طبعة المشرق: [ص ٧٤](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=74) (ترقيم المتن: ٧٣) (صفحة بدء الوحدة فحسب، لا صفحة اللفظ المثبتة بالدقة). الشاهد المسجل: «!!{bijection}~$g$. عندئذ تكون $\comp{g}{f}$ !!a{bijection} مداها~$B$».
+  - **العربية التراثية:** [السطر ٦٠](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/sets-functions-relations/size-of-sets/equinumerous-sets.tex#L60)؛ الطبعة التراثية: [ص ٧١](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=71) (ترقيم المتن: ٧٠)، [ص ٧٢](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=72) (ترقيم المتن: ٧١) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «\in A$ يحقق $f(x) = y$. وأما مع وجود !!{bijection}~$g$، فإن $\comp{g}{f}$ !!a{bijection} مداها~$B$ ومجالها هو مجال~$g$؛ أي $\Nat$ أو مقطع ابتدائي منه. ومن ثم تكون $B$ !!{enumerable}.}».
+- **OLP-0035 — التساوي العددي، وقوع ٣:**
+  - **الأصل:** [السطر ٩٧](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/size-of-sets/equinumerous-sets.tex#L97). الشاهد المسجل: «repeating the argument with the !!{bijection} $f^{-1}\colon B \to A$».
+  - **العربية المعيارية:** [السطر ٩٤](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/sets-functions-relations/size-of-sets/equinumerous-sets.tex#L94)؛ الطبعة الدولية: [ص ٧٥](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=75) (ترقيم المتن: ٧٤) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٧٥](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=75) (ترقيم المتن: ٧٤) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «الحجة مع !!{bijection} $f^{-1}\colon B \to A$ بدلًا من~$f$.».
+  - **العربية التراثية:** [السطر ٦٢](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/sets-functions-relations/size-of-sets/equinumerous-sets.tex#L62)؛ الطبعة التراثية: [ص ٧٢](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=72) (ترقيم المتن: ٧١) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «وأما إن كانت $B$ !!{enumerable}، فإن $A$ !!{enumerable} بالحجة نفسها، إذا استعملنا !!{bijection} $f^{-1}\colon B \to A$ في موضع~$f$.».
+- **OLP-0024 — معكوسات الدوال، وقوع ٤:**
+  - **الأصل:** [السطر ١٢٣](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/functions/inverses.tex#L123). الشاهد المسجل: «!!{bijection} has an inverse, i.e., there is a single function».
+  - **العربية المعيارية:** [السطر ١٣١](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/sets-functions-relations/functions/inverses.tex#L131)؛ الطبعة الدولية: [ص ٥٩](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=59) (ترقيم المتن: ٥٨) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٥٩](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=59) (ترقيم المتن: ٥٨) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «!!{bijection} معكوسًا، أي إن ثمة دالة واحدة».
+  - **العربية التراثية:** [السطر ١٢٢](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/sets-functions-relations/functions/inverses.tex#L122)؛ الطبعة التراثية: [ص ٥٦](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=56) (ترقيم المتن: ٥٥) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «وبجمع وجوه البرهان السابق يتبين أن لكل !!{bijection} معكوسًا:».
+- **OLP-0036 — اختلاف أحجام المجموعات ومبرهنة كانتور، وقوع ٥:**
+  - **الأصل:** [السطر ٣٨](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/size-of-sets/comparing-size.tex#L38). الشاهد المسجل: «is !!a{injection}~$f\colon A \to B$ but no !!{bijection}~$g\colon A».
+  - **العربية المعيارية:** [السطر ٣٦](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/sets-functions-relations/size-of-sets/comparing-size.tex#L36)؛ الطبعة الدولية: [ص ٧٦](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=76) (ترقيم المتن: ٧٥) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٧٦](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=76) (ترقيم المتن: ٧٥) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «!!{bijection}~$g\colon A».
+  - **العربية التراثية:** [السطر ٢٤](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/sets-functions-relations/size-of-sets/comparing-size.tex#L24)؛ الطبعة التراثية: [ص ٧٢](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=72) (ترقيم المتن: ٧١) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «تكون $A$ \emph{أصغر حجمًا من}~$B$، ونكتب $\cardless{A}{B}$، إذا وفقط إذا وجدت !!a{injection}~$f\colon A \to B$ ولم توجد !!{bijection}~$g\colon A».
+- **OLP-0036 — اختلاف أحجام المجموعات ومبرهنة كانتور، وقوع ٦:**
+  - **الأصل:** [السطر ٩٤](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/size-of-sets/comparing-size.tex#L94). الشاهد المسجل: «!!{bijection} $g \colon A \to \Pow{A}$. Now consider:».
+  - **العربية المعيارية:** [السطر ٩١](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/sets-functions-relations/size-of-sets/comparing-size.tex#L91)؛ الطبعة الدولية: [ص ٧٦](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=76) (ترقيم المتن: ٧٥) (صفحة بدء الوحدة فحسب، لا صفحة اللفظ المثبتة بالدقة)؛ طبعة المشرق: [ص ٧٦](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=76) (ترقيم المتن: ٧٥) (صفحة بدء الوحدة فحسب، لا صفحة اللفظ المثبتة بالدقة). الشاهد المسجل: «$\cardeq{A}{\Pow{A}}$، أي إن ثمة !!{bijection} ما».
+  - **العربية التراثية:** [السطر ٦٠](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/sets-functions-relations/size-of-sets/comparing-size.tex#L60)؛ الطبعة التراثية: [ص ٧٢](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=72) (ترقيم المتن: ٧١) (صفحة بدء الوحدة فحسب، لا صفحة اللفظ المثبتة بالدقة). الشاهد المسجل: «}{والمطلوب الباقي هو $\cardneq{A}{\Pow{A}}$. فلو فرضنا خلافه، أي $\cardeq{A}{\Pow{A}}$، لوجدت !!{bijection} $g \colon A \to \Pow{A}$. ولنضع».
+- **OLP-0039 — مجموعات Non-enumerable، وقوع ٧:**
+  - **الأصل:** [السطر ٢٧](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/size-of-sets/non-enumerability-alt.tex#L27). الشاهد المسجل: «!!{nonenumerable} is to say that there is \emph{no} !!{bijection} $f».
+  - **العربية المعيارية:** [السطر ٢٦](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/sets-functions-relations/size-of-sets/non-enumerability-alt.tex#L26)؛ الطبعة الدولية: [ص ٨٠](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=80) (ترقيم المتن: ٧٩) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٨٠](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=80) (ترقيم المتن: ٧٩) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «!!{nonenumerable} يقتضي أنه لا توجد \emph{أي} !!{bijection} $f».
+  - **العربية التراثية:** [السطر ٢٠](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/sets-functions-relations/size-of-sets/non-enumerability-alt.tex#L20)؛ الطبعة التراثية: [ص ٧٦](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=76) (ترقيم المتن: ٧٥) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «وقد يستغرب هذا؛ فإن كون $A$ !!{nonenumerable} يقتضي \emph{انتفاء} كل !!{bijection} $f».
+- **OLP-0039 — مجموعات Non-enumerable، وقوع ٨:**
+  - **الأصل:** [السطر ٣٤](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/size-of-sets/non-enumerability-alt.tex#L34). الشاهد المسجل: «appropriate !!{bijection} can exist. The best way to do this is to».
+  - **العربية المعيارية:** [السطر ٣٣](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/sets-functions-relations/size-of-sets/non-enumerability-alt.tex#L33)؛ الطبعة الدولية: [ص ٨٠](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=80) (ترقيم المتن: ٧٩) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٨٠](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=80) (ترقيم المتن: ٧٩) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «وجود !!{bijection} مناسبة. وأفضل سبيل إلى ذلك هو بيان أن كل محاولة».
+  - **العربية التراثية:** [السطر ٢٣](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/sets-functions-relations/size-of-sets/non-enumerability-alt.tex#L23)؛ الطبعة التراثية: [ص ٧٦](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=76) (ترقيم المتن: ٧٥) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «فسبيل إثبات أن المجموعة !!{nonenumerable} أن ننفي وجود !!{bijection} على الوجه المطلوب. ويكفي لذلك أن نبرهن أن كل محاولة لتعداد !!{element}s~$A$ تفوت !!{element} واحدًا على الأقل؛ فتكون كل دالة $f\colon \Nat \to A$ غير !!{surjective}. وطريقة كانتور \emph{ال…».
+
+## تقابلية
+
+الأصل الإنجليزي: `bijective`. معرّف القرار: `retro-0005-0050:shared-token:5971b5dcd59a045e`.
+
+**المعنى المقصود:** صفة لدالة متباينة وشاملة معا.
+
+**سبب الاختيار:** «تقابلية» نعت صحيح لـ«دالة» ومؤيد مباشرة بعبارة «تطبيق تقابلي» في المعجم؛ السياقات تحافظ على شرطي الحقن والشمول.
+
+**سؤال مفتوح:** هل يحفظ اختيار «تقابلية» معنى المصطلح الإنجليزي «bijective» في المواضع المبيّنة، أم يُفضَّل أحد البدائل المسجلة؟
+
+**كل وقوع مسجل لهذا القرار:**
+
+- **OLP-0022 — أنواع الدوال، وقوع ١:**
+  - **الأصل:** [السطر ١١٣](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/functions/function-kinds.tex#L113). الشاهد المسجل: «A function $f \colon A \to B$ is \emph{!!{bijective}} iff it is both».
+  - **العربية المعيارية:** [السطر ١١٣](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/sets-functions-relations/functions/function-kinds.tex#L113)؛ الطبعة الدولية: [ص ٥٥](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=55) (ترقيم المتن: ٥٤) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٥٥](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=55) (ترقيم المتن: ٥٤) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «تكون الدالة $f \colon A \to B$ \emph{!!{bijective}} إذا وفقط إذا كانت».
+  - **العربية التراثية:** [السطر ١٠٠](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/sets-functions-relations/functions/function-kinds.tex#L100)؛ الطبعة التراثية: [ص ٥٣](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=53) (ترقيم المتن: ٥٢) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «الدالة $f \colon A \to B$ \emph{!!{bijective}} إذا وفقط إذا كانت !!{surjective} و!!{injective} معًا. وحينئذ تسمى !!a{bijection}».
+- **OLP-0022 — أنواع الدوال، وقوع ٢:**
+  - **الأصل:** [السطر ١٠٠](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/functions/function-kinds.tex#L100). الشاهد المسجل: «!!{bijective}. They look like the function pictured in».
+  - **العربية المعيارية:** [السطر ١٠٠](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/sets-functions-relations/functions/function-kinds.tex#L100)؛ الطبعة الدولية: [ص ٥٥](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=55) (ترقيم المتن: ٥٤) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٥٥](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=55) (ترقيم المتن: ٥٤) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «!!{bijective}. وهي تشبه الدالة الممثلة في».
+  - **العربية التراثية:** [السطر ٨٩](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/sets-functions-relations/functions/function-kinds.tex#L89)؛ الطبعة التراثية: [ص ٥٣](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=53) (ترقيم المتن: ٥٢) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «واسمها !!{bijective}، وصورتها في \olref{fig:bijective}.».
+- **OLP-0035 — التساوي العددي، وقوع ٣:**
+  - **الأصل:** [السطر ٤٧](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/size-of-sets/equinumerous-sets.tex#L47). الشاهد المسجل: «!!a{bijection} $f\colon A \to B$. Since $f$ is !!{bijective}, its».
+  - **العربية المعيارية:** [السطر ٤٤](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/sets-functions-relations/size-of-sets/equinumerous-sets.tex#L44)؛ الطبعة الدولية: [ص ٧٥](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=75) (ترقيم المتن: ٧٤) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٧٥](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=75) (ترقيم المتن: ٧٤) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «!!a{bijection} $f\colon A \to B$. وبما أن $f$ !!{bijective}، فإن».
+  - **العربية التراثية:** [السطر ٣٢](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/sets-functions-relations/size-of-sets/equinumerous-sets.tex#L32)؛ الطبعة التراثية: [ص ٧١](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=71) (ترقيم المتن: ٧٠) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «\emph{التناظر.} من $\cardeq{A}{B}$ نحصل على !!a{bijection} $f\colon A \to B$. ولكون $f$ !!{bijective} توجد دالتها العكسية $f^{-1}$، وهي !!{bijective} أيضًا. فالدالة $f^{-1}\colon B \to A$ !!a{bijection} تشهد بأن $\cardeq{B}{A}$.».
+- **OLP-0035 — التساوي العددي، وقوع ٤:**
+  - **الأصل:** [السطر ٤٨](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/size-of-sets/equinumerous-sets.tex#L48). الشاهد المسجل: «inverse $f^{-1}$ exists and is also !!{bijective}. Hence,».
+  - **العربية المعيارية:** [السطر ٤٥](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/sets-functions-relations/size-of-sets/equinumerous-sets.tex#L45)؛ الطبعة الدولية: [ص ٧٥](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=75) (ترقيم المتن: ٧٤) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٧٥](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=75) (ترقيم المتن: ٧٤) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «دالتها العكسية $f^{-1}$ موجودة وهي أيضًا !!{bijective}. ومن ثم تكون».
+  - **العربية التراثية:** [السطر ٣٢](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/sets-functions-relations/size-of-sets/equinumerous-sets.tex#L32)؛ الطبعة التراثية: [ص ٧١](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=71) (ترقيم المتن: ٧٠) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «\emph{التناظر.} من $\cardeq{A}{B}$ نحصل على !!a{bijection} $f\colon A \to B$. ولكون $f$ !!{bijective} توجد دالتها العكسية $f^{-1}$، وهي !!{bijective} أيضًا. فالدالة $f^{-1}\colon B \to A$ !!a{bijection} تشهد بأن $\cardeq{B}{A}$.».
+- **OLP-0035 — التساوي العددي، وقوع ٥:**
+  - **الأصل:** [السطر ٥٣](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/size-of-sets/equinumerous-sets.tex#L53). الشاهد المسجل: «C$. Then the composition $\comp{f}{g}\colon A \to C$ is !!{bijective},».
+  - **العربية المعيارية:** [السطر ٥٠](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/sets-functions-relations/size-of-sets/equinumerous-sets.tex#L50)؛ الطبعة الدولية: [ص ٧٥](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=75) (ترقيم المتن: ٧٤) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٧٥](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=75) (ترقيم المتن: ٧٤) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «C$. عندئذ تكون الدالة المركبة $\comp{f}{g}\colon A \to C$ !!{bijective}،».
+  - **العربية التراثية:** [السطر ٣٥](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/sets-functions-relations/size-of-sets/equinumerous-sets.tex#L35)؛ الطبعة التراثية: [ص ٧١](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=71) (ترقيم المتن: ٧٠) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «C$. والدالة المركبة منهما $\comp{f}{g}\colon A \to C$ !!{bijective}، فيثبت بها $\cardeq{A}{C}$.».
+- **OLP-0024 — معكوسات الدوال، وقوع ٦:**
+  - **الأصل:** [السطر ١٠٩](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/functions/inverses.tex#L109). الشاهد المسجل: «However, in many specific cases, e.g., when $A = \Nat$ or is finite, or when $f$ is !!{bijective},».
+  - **العربية المعيارية:** [السطر ١١٦](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/sets-functions-relations/functions/inverses.tex#L116)؛ الطبعة الدولية: [ص ٥٧](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=57) (ترقيم المتن: ٥٦) (صفحة بدء الوحدة فحسب، لا صفحة اللفظ المثبتة بالدقة)؛ طبعة المشرق: [ص ٥٧](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=57) (ترقيم المتن: ٥٦) (صفحة بدء الوحدة فحسب، لا صفحة اللفظ المثبتة بالدقة). الشاهد المسجل: «غير أن بديهية الاختيار لا تلزم في حالات خاصة كثيرة، مثلًا عندما يكون $A = \Nat$ أو تكون منتهيةً، أو عندما تكون $f$ !!{bijective}.».
+  - **العربية التراثية:** [السطر ١٠٩](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/sets-functions-relations/functions/inverses.tex#L109)؛ الطبعة التراثية: [ص ٥٥](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=55) (ترقيم المتن: ٥٤) (صفحة بدء الوحدة فحسب، لا صفحة اللفظ المثبتة بالدقة). الشاهد المسجل: «الأخيرة، حيث $f$ !!{bijective}، لكل $y \in B$ مجموعة».
+- **OLP-0024 — معكوسات الدوال، وقوع ٧:**
+  - **الأصل:** [السطر ١١٠](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/functions/inverses.tex#L110). الشاهد المسجل: «the Axiom of Choice is not required. (In the particular case when $f$ is !!{bijective}, for each $y \in B$ the set».
+  - **العربية المعيارية:** [السطر ١١٧](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/sets-functions-relations/functions/inverses.tex#L117)؛ الطبعة الدولية: [ص ٥٧](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=57) (ترقيم المتن: ٥٦) (صفحة بدء الوحدة فحسب، لا صفحة اللفظ المثبتة بالدقة)؛ طبعة المشرق: [ص ٥٧](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=57) (ترقيم المتن: ٥٦) (صفحة بدء الوحدة فحسب، لا صفحة اللفظ المثبتة بالدقة). الشاهد المسجل: «(وفي الحالة الخاصة التي تكون فيها $f$ !!{bijective}، فلكل $y \in B$».
+  - **العربية التراثية:** [السطر ١٠٩](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/sets-functions-relations/functions/inverses.tex#L109)؛ الطبعة التراثية: [ص ٥٥](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=55) (ترقيم المتن: ٥٤) (صفحة بدء الوحدة فحسب، لا صفحة اللفظ المثبتة بالدقة). الشاهد المسجل: «الأخيرة، حيث $f$ !!{bijective}، لكل $y \in B$ مجموعة».
+- **OLP-0024 — معكوسات الدوال، وقوع ٨:**
+  - **الأصل:** [السطر ١٢٨](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/functions/inverses.tex#L128). الشاهد المسجل: «If $f\colon A \to B$ is !!{bijective}, there is a».
+  - **العربية المعيارية:** [السطر ١٣٦](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/sets-functions-relations/functions/inverses.tex#L136)؛ الطبعة الدولية: [ص ٥٩](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=59) (ترقيم المتن: ٥٨) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٥٩](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=59) (ترقيم المتن: ٥٨) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «إذا كانت $f\colon A \to B$ !!{bijective}، فثمة».
+  - **العربية التراثية:** [السطر ١٢٧](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/sets-functions-relations/functions/inverses.tex#L127)؛ الطبعة التراثية: [ص ٥٦](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=56) (ترقيم المتن: ٥٥) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «لتكن $f\colon A \to B$ !!{bijective}. فتوجد».
+- **OLP-0024 — معكوسات الدوال، وقوع ٩:**
+  - **الأصل:** [السطر ١٤٨](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/functions/inverses.tex#L148). الشاهد المسجل: «Clearly, if $f$~is !!{injective}, then $f'$~is !!{bijective}, so that».
+  - **العربية المعيارية:** [السطر ١٥٦](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/sets-functions-relations/functions/inverses.tex#L156)؛ الطبعة الدولية: [ص ٥٩](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=59) (ترقيم المتن: ٥٨) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٥٩](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=59) (ترقيم المتن: ٥٨) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «ومن الواضح أنه إذا كانت $f$ !!{injective}، فإن $f'$ !!{bijective}، ومن ثم».
+  - **العربية التراثية:** [السطر ١٤٦](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/sets-functions-relations/functions/inverses.tex#L146)؛ الطبعة التراثية: [ص ٥٦](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=56) (ترقيم المتن: ٥٥) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «$f'$ !!{bijective}؛ فلها معكوس وحيد بمقتضى \olref{prop:bijection-inverse}.».
+
+## فرع؛ سلسلة قصوى؛ شجرة جزئية
+
+الأصل الإنجليزي: `branch; maximal chain; subtree`. معرّف القرار: `locale-ar-chosen-b49c59ba8535485b`.
+
+**المعنى المقصود:** branch في الشجرة بوصفه سلسلة قصوى، وsubtree بوصفها شجرة جزئية، مع branch أيضًا بمعنى فرع من فروع المنطق.
+
+**سبب الاختيار:** المعجم يشهد subtree ← شجرة جزئية ويعرض maximal chain ← سلسلة أعظمية. يختلف الأخير عن «سلسلة قصوى» الحالية، ويحتاج شرط القصوى بالإدراج إلى بقاء صريح.
+
+**سؤال مفتوح:** هل «سلسلة قصوى» أدق من الرأس المعجمي «سلسلة أعظمية» لـmaximal chain في تعريف الفرع، وهل «شجرة جزئية» ثابتة لـsubtree؟ يجب ألا يصير branch مجرد مسار منتهٍ، وأن يبقى شرط القصوى بالنسبة إلى الإدراج، مع تمييز هذا المعنى من «فرع من فروع المنطق».
+
+**كل وقوع مسجل لهذا القرار:**
+
+- **OLP-0676 — في تحويلات الاختزال، وقوع ١:**
+  - **الأصل:** [السطر ٨٢](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/proof-theory/normalization/reductions.tex#L82). الشاهد المسجل: «no maximal cut lies on a branch through~$\delta$ to the right of the».
+  - **العربية المعيارية:** [السطر ٧٤](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/proof-theory/normalization/reductions.tex#L74)؛ الطبعة الدولية: [ص ١٠٩١](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=1091) (ترقيم المتن: ٧١) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ١٠٩٢](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=1092) (ترقيم المتن: ٧١) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «القطع المختزل في برهانه الجزئي، ولا على فرع في~$\delta$ إلى يمينه. فلو».
+  - **العربية التراثية:** [السطر ٧٣](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/proof-theory/normalization/reductions.tex#L73)؛ الطبعة التراثية: [ص ١٠٧٠](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=1070) (ترقيم المتن: ٦٩) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «القطع المختزل في برهانه الجزئي، ولا على فرع في~$\delta$ إلى يمينه. فلو».
+- **OLP-0221 — الأشجار، وقوع ٢:**
+  - **الأصل:** [السطر ٧٤](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/computability/recursive-functions/trees.tex#L74). الشاهد المسجل: «the code of a subtree occurs only once in the resulting list.».
+  - **العربية المعيارية:** [السطر ٦٧](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/computability/recursive-functions/trees.tex#L67)؛ الطبعة الدولية: [ص ٤٤٨](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=448) (ترقيم المتن: ٤٤٧) (صفحة بدء الوحدة فحسب، لا صفحة اللفظ المثبتة بالدقة)؛ طبعة المشرق: [ص ٤٤٩](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=449) (ترقيم المتن: ٤٤٨) (صفحة بدء الوحدة فحسب، لا صفحة اللفظ المثبتة بالدقة). الشاهد المسجل: «بديلًا يضمن ألا يرد رمز شجرة جزئية إلا مرة واحدة في القائمة الناتجة.».
+  - **العربية التراثية:** [السطر ٦٧](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/computability/recursive-functions/trees.tex#L67)؛ الطبعة التراثية: [ص ٤٣٩](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=439) (ترقيم المتن: ٤٣٨) (صفحة بدء الوحدة فحسب، لا صفحة اللفظ المثبتة بالدقة). الشاهد المسجل: «لا يورد رمز أي شجرة جزئية في القائمة الناتجة إلا مرة واحدة.».
+- **OLP-0018 — الأشجار، وقوع ٣:**
+  - **الأصل:** [السطر ٩٢](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/relations/trees.tex#L92). الشاهد المسجل: «maximal chain in~$T$, i.e., a set $B \subseteq A$ such that».
+  - **العربية المعيارية:** [السطر ٨٨](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/sets-functions-relations/relations/trees.tex#L88)؛ الطبعة الدولية: [ص ٥٠](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=50) (ترقيم المتن: ٤٩) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٥٠](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=50) (ترقيم المتن: ٤٩) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «إذا أعطيت شجرة $T = \tuple{A, \le}$، كان \emph{الفرع} من~$T$ سلسلة قصوى في~$T$، أي مجموعة $B \subseteq A$ بحيث يكون، لأي $x, y \in B$،».
+  - **العربية التراثية:** [السطر ٨٣](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/sets-functions-relations/relations/trees.tex#L83)؛ الطبعة التراثية: [ص ٤٨](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=48) (ترقيم المتن: ٤٧) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «في شجرة $T = \tuple{A, \le}$، \emph{الفرع} من~$T$ سلسلة قصوى في~$T$:».
+- **OLP-0229 — مقدمة، وقوع ٤:**
+  - **الأصل:** [السطر ١٢](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/computability/computability-theory/introduction.tex#L12). الشاهد المسجل: «The branch of logic known as \emph{computability theory} deals with».
+  - **العربية المعيارية:** [السطر ١٢](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/computability/computability-theory/introduction.tex#L12)؛ الطبعة الدولية: [ص ٤٥٦](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=456) (ترقيم المتن: ٤٥٥) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٤٥٧](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=457) (ترقيم المتن: ٤٥٦) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «يتناول فرع المنطق المعروف بـ\emph{نظرية قابلية الحساب} المسائل المتصلة».
+  - **العربية التراثية:** [السطر ١٢](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/computability/computability-theory/introduction.tex#L12)؛ الطبعة التراثية: [ص ٤٤٨](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=448) (ترقيم المتن: ٤٤٧) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «موضوع \emph{نظرية قابلية الحساب}، وهي فرع من المنطق، ما يتصل».
+
+## طريقة كانتور المتعرجة
+
+الأصل الإنجليزي: `Cantor's zig-zag method`. معرّف القرار: `retro-0005-0050:emphasis:0da14549eed1a159`.
+
+**المعنى المقصود:** طريقة كانتور لتعداد N×N بالسير المتعرج على أقطار الشبكة.
+
+**سبب الاختيار:** تحفظ «المتعرجة» هيئة مسار zig-zag في تعداد N×N. أما مدخل المعجم «إجرائية كانتور القطرية» فيشير إلى diagonal process مختلف مفهوما، فيسجل هنا شاهدا مضادا يوجب عدم الخلط، لا سندا ولا بديلا موصى به.
+
+**سؤال مفتوح:** ما الاسم العربي الدقيق لمسار Cantor zig-zag الذي يعدّد N×N، بحيث يصف التعريج ولا يخلطه بإجرائية كانتور القطرية المختلفة؟
+
+**كل وقوع مسجل لهذا القرار:**
+
+- **OLP-0030 — طريقة كانتور المتعرجة، وقوع ١:**
+  - **الأصل:** [السطر ٥٩](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/size-of-sets/zig-zag.tex#L59). الشاهد المسجل: «This pattern is called \emph{Cantor's zig-zag method}. It enumerates».
+  - **العربية المعيارية:** [السطر ٥٩](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/sets-functions-relations/size-of-sets/zig-zag.tex#L59)؛ الطبعة الدولية: [ص ٦٧](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=67) (ترقيم المتن: ٦٦) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٦٧](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=67) (ترقيم المتن: ٦٦) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «يسمى هذا النمط \emph{طريقة كانتور المتعرجة}. وهو يعدّد».
+  - **العربية التراثية:** [السطر ٥٦](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/sets-functions-relations/size-of-sets/zig-zag.tex#L56)؛ الطبعة التراثية: [ص ٦٣](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=63) (ترقيم المتن: ٦٢) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «واسم هذا النمط \emph{طريقة كانتور المتعرجة}، وبه يكون تعداد».
+
+## طريقة كانتور المتعرجة
+
+الأصل الإنجليزي: `Cantor's Zig-Zag Method`. معرّف القرار: `retro-0005-0050:section:85fb2f37920b2ad3`.
+
+**المعنى المقصود:** عنوان القسم الذي يشرح تعداد الأزواج الطبيعية بالسير المتعرج على الأقطار.
+
+**سبب الاختيار:** لأن هذا قرار عنوان لا مجرد وقوع مصطلح، تُبقي «طريقة كانتور المتعرجة» اسم صاحب الطريقة وبنية العنوان، وتربط «المتعرجة» بمسار zig-zag في تعداد N×N. أما مدخل المعجم «إجرائية كانتور القطرية» فيدل على diagonal process مختلف، فلا يصلح عنوانا بديلا لهذا القسم.
+
+**سؤال مفتوح:** ما عنوان القسم العربي الدقيق لـCantor’s Zig-Zag Method بحيث يطابق مسار التعداد المتعرج ويظل متميزا من diagonal process؟
+
+**كل وقوع مسجل لهذا القرار:**
+
+- **OLP-0030 — طريقة كانتور المتعرجة، وقوع ١:**
+  - **الأصل:** [السطر ١١](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/size-of-sets/zig-zag.tex#L11). الشاهد المسجل: «\olsection{Cantor's Zig-Zag Method}».
+  - **العربية المعيارية:** [السطر ١١](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/sets-functions-relations/size-of-sets/zig-zag.tex#L11)؛ الطبعة الدولية: [ص ٦٦](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=66) (ترقيم المتن: ٦٥) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٦٦](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=66) (ترقيم المتن: ٦٥) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «\olsection{طريقة كانتور المتعرجة}».
+  - **العربية التراثية:** [السطر ١١](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/sets-functions-relations/size-of-sets/zig-zag.tex#L11)؛ الطبعة التراثية: [ص ٦٢](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=62) (ترقيم المتن: ٦١) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «\olsection{طريقة كانتور المتعرجة}».
+
+## طريقة كانتور المتعرجة؛ الإحداثي الأول للصف والثاني للعمود
+
+الأصل الإنجليزي: `Cantor's zig-zag method; row-column orientation`. معرّف القرار: `locale-ar-chosen-f42c727528044518`.
+
+**المعنى المقصود:** تعداد N² بالمسار المتعرج مع كون الإحداثي الأول للصف والثاني للعمود.
+
+**سبب الاختيار:** المعجم يشهد طريقة كانتور القطرية، والصف والعمود، لكنه لا يشهد zig-zag method. الطريقة القطرية المجاورة قد تكون برهانًا مختلفًا، ولذلك سجلناها حدًا يمنع الخلط.
+
+**سؤال مفتوح:** هل «طريقة كانتور المتعرجة» الاسم الأنسب لتعداد ℕ²، مع «السطر/العمود» أو «الصف/العمود» للإحداثيين؟ يشهد المعجم Cantor’s diagonal process بـ«إجرائية كانتور القطرية»، وهي طريقة مختلفة؛ فيرجى التحقق من عدم استبدال إحداهما بالأخرى ومن عدم قلب الزوج (n,m).
+
+**كل وقوع مسجل لهذا القرار:**
+
+- **OLP-0031 — دوال المزاوجة والرموز، وقوع ١:**
+  - **الأصل:** [السطر ١٣](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/size-of-sets/pairing.tex#L13). الشاهد المسجل: «Cantor's zig-zag method makes the enumerability of $\Nat^n$ visually».
+  - **العربية المعيارية:** [السطر ١٣](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/sets-functions-relations/size-of-sets/pairing.tex#L13)؛ الطبعة الدولية: [ص ٦٧](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=67) (ترقيم المتن: ٦٦) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٦٧](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=67) (ترقيم المتن: ٦٦) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «تجعل طريقة كانتور المتعرجة قابلية $\Nat^n$ للتعداد ظاهرةً للعيان.».
+  - **العربية التراثية:** [السطر ١٣](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/sets-functions-relations/size-of-sets/pairing.tex#L13)؛ الطبعة التراثية: [ص ٦٤](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=64) (ترقيم المتن: ٦٣) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «طريقة كانتور المتعرجة تظهر للعين قابلية $\Nat^n$ للتعداد.».
+
+## الضرب الديكارتي
+
+الأصل الإنجليزي: `Cartesian product`. معرّف القرار: `locale-ar-chosen-79d0af600b55bced`.
+
+**المعنى المقصود:** الجداء/الضرب الديكارتي A×B بوصفه مجموعة الأزواج المرتبة (a,b).
+
+**سبب الاختيار:** تطابق الوقوعات معنى مجموعة الأزواج واتجاه الإحداثيين. المعجم يشهد «جداء ديكارتي» مباشرة، في حين تستعمل الطبعة «الضرب الديكارتي».
+
+**سؤال مفتوح:** هل نوحد «الضرب الديكارتي» إلى الرأس المؤسسي «الجداء الديكارتي»، أم نسجل الصيغتين بوصفهما تنويعًا إقليميًا؟ يجب حفظ A×B مجموعةً للأزواج المرتبة لا حاصل ضرب عددي، وأن يبقى العنصر الأول من A والثاني من B.
+
+**كل وقوع مسجل لهذا القرار:**
+
+- **OLP-0012 — العلاقات بوصفها مجموعات، وقوع ١:**
+  - **الأصل:** [السطر ٢٨](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/relations/relations-as-sets.tex#L28). الشاهد المسجل: «$\{a, b\}=\{b, a\}$.) Second, recall the notion of a \emph{Cartesian product}: if $A$ and $B$ are sets, then we can form~$A \times B$, the».
+  - **العربية المعيارية:** [السطر ٢٧](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/sets-functions-relations/relations/relations-as-sets.tex#L27)؛ الطبعة الدولية: [ص ٤١](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=41) (ترقيم المتن: ٤٠) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٤١](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=41) (ترقيم المتن: ٤٠) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «$\{a, b\}=\{b, a\}$.) ثانيًا، تذكّر مفهوم \emph{الضرب الديكارتي}: فإذا».
+  - **العربية التراثية:** [السطر ٢٤](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/sets-functions-relations/relations/relations-as-sets.tex#L24)؛ الطبعة التراثية: [ص ٤٠](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=40) (ترقيم المتن: ٣٩) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «$\{a, b\}=\{b, a\}$. والآخر \emph{الضرب الديكارتي}: فالمجموعتان».
+- **OLP-0578 — الضرب الترتيبي، وقوع ٢:**
+  - **الأصل:** [السطر ١٩](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/set-theory/ord-arithmetic/multiplication.tex#L19). الشاهد المسجل: «on the Cartesian product of $\alpha$ and $\beta$:».
+  - **العربية المعيارية:** [السطر ١٨](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/set-theory/ord-arithmetic/multiplication.tex#L18)؛ الطبعة الدولية: [ص ٩٢٢](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=922) (ترقيم المتن: ٩٢١) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٩٢٣](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=923) (ترقيم المتن: ٩٢٢) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «الضرب الديكارتي لـ$\alpha$ و$\beta$:».
+  - **العربية التراثية:** [السطر ١٦](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/set-theory/ord-arithmetic/multiplication.tex#L16)؛ الطبعة التراثية: [ص ٩٠٤](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=904) (ترقيم المتن: ٩٠٣) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «ولصياغة المعنى صوريًا نستعمل الترتيب المعجمي المعكوس على حاصل الضرب الديكارتي لـ$\alpha$ و$\beta$.».
+
+## متتالية كوشي؛ يؤول إلى الصفر؛ نهاية؛ تقريب نسبي
+
+الأصل الإنجليزي: `Cauchy sequence; tends to zero; limit; rational approximation`. معرّف القرار: `locale-ar-chosen-c2c36e77ef1ee206`.
+
+**المعنى المقصود:** بناء الأعداد الحقيقية بفئات متتاليات كوشي من Nat إلى Rat، مع النهاية والتقريب النسبي والتكافؤ حين يؤول الفرق إلى الصفر.
+
+**سبب الاختيار:** الموضع المسمى في الفهرس الحالي لا يخص هذا القرار: إنه استعمال أدبي لـlimit في OLP-0591. لذلك أضيفت شواهد OLP-0048 الحقيقية باللغات الثلاث. المعجم يشهد متتالية كوشي ونهاية، ولا يحسم «تقريب نسبي».
+
+**سؤال مفتوح:** هل الأسرة «متتالية كوشي/تؤول إلى الصفر/نهاية/تقريب نسبي» هي الأنسب في بناء ℝ؟ يشهد المعجم «متتالية كوشي» و«نهاية»، لكن هل rational approximation ينبغي «تقريبًا نسبيًا» أم «تقريبًا كسريًا/بأعداد نسبية»؟ يجب حفظ تكميمات ε ومجالي Nat وRat وشرط المؤشرات اللاحقة.
+
+**كل وقوع مسجل لهذا القرار:**
+
+- **OLP-0591 — نقاط aleph الثابتة، وقوع ١:**
+  - **الأصل:** [السطر ١٥٧](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/set-theory/card-arithmetic/fix.tex#L157). الشاهد المسجل: «\text{, when $\alpha$ is a limit}».
+  - **العربية المعيارية:** [السطر ٧٠](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/set-theory/card-arithmetic/fix.tex#L70)؛ الطبعة الدولية: [ص ٩٤٠](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=940) (ترقيم المتن: ٩٣٩) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٩٤١](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=941) (ترقيم المتن: ٩٤٠) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «$n$ من حياته. ولذلك ستكون لتريسترام، «في نهاية الزمان»، يوميات كاملة.».
+  - **العربية التراثية:** [السطر ٦٨](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/set-theory/card-arithmetic/fix.tex#L68)؛ الطبعة التراثية: [ص ٩٢١](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=921) (ترقيم المتن: ٩٢٠) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «فتكتمل يومياته «عند نهاية الزمان».».
+
+## دالة السقف
+
+الأصل الإنجليزي: `ceiling`. معرّف القرار: `retro-0005-0050:emphasis:8de4edee1eb23ab1`.
+
+**المعنى المقصود:** دالة التقريب إلى أعلى التي تعطي أصغر عدد صحيح لا يقل عن x.
+
+**سبب الاختيار:** «دالة السقف» شفافة ومتسقة مع الرمز، لكن المعجم يثبت «سقف عدد حقيقي» للاسم و«دالة سقفية» للدالة. الصيغة الحالية مفهومة وليست مطابقة للمدخل المؤسسي.
+
+**سؤال مفتوح:** هل تستبدل «دالة السقف» بـ«دالة سقفية» اتباعا للمعجم، مع الحفاظ على التمييز بين الدالة وقيمتها؟
+
+**كل وقوع مسجل لهذا القرار:**
+
+- **OLP-0029 — التعدادات ومجموعات Enumerable، وقوع ١:**
+  - **الأصل:** [السطر ١٤٢](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/size-of-sets/enumerability.tex#L142). الشاهد المسجل: «$\lceil x \rceil$ denotes the \emph{ceiling} function, which rounds».
+  - **العربية المعيارية:** [السطر ١٣٨](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/sets-functions-relations/size-of-sets/enumerability.tex#L138)؛ الطبعة الدولية: [ص ٦٤](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=64) (ترقيم المتن: ٦٣) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٦٤](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=64) (ترقيم المتن: ٦٣) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «ترمز $\lceil x \rceil$ إلى \emph{دالة السقف}، التي تقرّب $x$ صعودًا».
+  - **العربية التراثية:** [السطر ١٢١](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/sets-functions-relations/size-of-sets/enumerability.tex#L121)؛ الطبعة التراثية: [ص ٦١](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=61) (ترقيم المتن: ٦٠) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «الصحيحات. والرمز $\lceil x \rceil$ \emph{دالة السقف}: تصعد بـ$x$».
+- **OLP-0038 — التعدادات ومجموعات Enumerable، وقوع ٢:**
+  - **الأصل:** [السطر ١٠٠](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/size-of-sets/enumerability-alt.tex#L100). الشاهد المسجل: «Let $\lceil x \rceil$ be the \emph{ceiling} function, which rounds $x$».
+  - **العربية المعيارية:** [السطر ٩٦](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/sets-functions-relations/size-of-sets/enumerability-alt.tex#L96)؛ الطبعة الدولية: [ص ٧٩](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=79) (ترقيم المتن: ٧٨) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٧٩](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=79) (ترقيم المتن: ٧٨) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «لتكن $\lceil x \rceil$ \emph{دالة السقف}، التي تقرّب $x$ صعودًا».
+  - **العربية التراثية:** [السطر ٦٥](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/sets-functions-relations/size-of-sets/enumerability-alt.tex#L65)؛ الطبعة التراثية: [ص ٧٥](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=75) (ترقيم المتن: ٧٤) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «نكتب $\lceil x \rceil$ لـ\emph{دالة السقف}، وقيمتها أصغر عدد صحيح لا يقل عن $x$. فالدالة $f \colon \Nat \to \Int$ المعرفة بالحد».
+
+## دالة السقف
+
+الأصل الإنجليزي: `ceiling function`. معرّف القرار: `locale-ar-chosen-cd6e17a546146d55`.
+
+**المعنى المقصود:** دالة السقف: أصغر عدد صحيح لا يقل عن x، في تعداد الأعداد الصحيحة.
+
+**سبب الاختيار:** المعجم يشهد «دالة سقفية» ويعطي الاسم الوصفي «دالة أصغر عدد صحيح». يحفظ النص الحالي الرمز والقيم والتقريب صعودًا.
+
+**سؤال مفتوح:** هل يستعمل القارئ «دالة السقف»، أم الرأس المعجمي «دالة سقفية»، أم «دالة أصغر عدد صحيح»؟ يجب أن يكون الناتج أصغر عدد صحيح ≥x، لا دالة الأرضية ولا تقريبًا إلى أقرب صحيح مطلقًا.
+
+**كل وقوع مسجل لهذا القرار:**
+
+- **OLP-0029 — التعدادات ومجموعات Enumerable، وقوع ١:**
+  - **الأصل:** [السطر ١٤٠](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/size-of-sets/enumerability.tex#L140). الشاهد المسجل: «\begin{ex} The function $f(n) = (-1)^{n} \lceil \frac{(n-1)}{2}\rceil$ (where $\lceil x \rceil$ denotes the \emph{ceiling} function, which rounds $x$ up to the nearest integer) enumerates the set of integers~$\Int$. Notice how $f$ generates the values of $\…».
+  - **العربية المعيارية:** [السطر ١٣٦](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/sets-functions-relations/size-of-sets/enumerability.tex#L136)؛ الطبعة الدولية: [ص ٦٤](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=64) (ترقيم المتن: ٦٣) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٦٤](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=64) (ترقيم المتن: ٦٣) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «\begin{ex} تعدّد الدالة $f(n) = (-1)^{n} \lceil \frac{(n-1)}{2}\rceil$ (حيث ترمز $\lceil x \rceil$ إلى \emph{دالة السقف}، التي تقرّب $x$ صعودًا إلى أقرب عدد صحيح) مجموعة الأعداد الصحيحة~$\Int$. ولاحظ كيف تولد $f$ قيم $\Int$ «بالقفز» جيئةً وذهابًا بين الأعدا…».
+  - **العربية التراثية:** [السطر ١٢٠](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/sets-functions-relations/size-of-sets/enumerability.tex#L120)؛ الطبعة التراثية: [ص ٦١](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=61) (ترقيم المتن: ٦٠) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «الدالة $f(n) = (-1)^{n} \lceil \frac{(n-1)}{2}\rceil$ تعدّد الصحيحات. والرمز $\lceil x \rceil$ \emph{دالة السقف}: تصعد بـ$x$ إلى أقرب صحيح. فتعداد~$\Int$ بها يجعل $f$ تنتقل في قيم $\Int$ من الموجب إلى السالب ثم تعود، كما ترى: \[ \begin{array}{c c c c c c c…».
+- **OLP-0038 — التعدادات ومجموعات Enumerable، وقوع ٢:**
+  - **الأصل:** [السطر ٩٩](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/size-of-sets/enumerability-alt.tex#L99). الشاهد المسجل: «\begin{ex} Let $\lceil x \rceil$ be the \emph{ceiling} function, which rounds $x$ up to the nearest integer. Then the function $f \colon \Nat \to \Int$ given by: \[ f(n) = (-1)^{n} \left\lceil\tfrac{n}{2}\right\rceil \] enumerates the set of integers~$\Int$…».
+  - **العربية المعيارية:** [السطر ٩٥](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/sets-functions-relations/size-of-sets/enumerability-alt.tex#L95)؛ الطبعة الدولية: [ص ٧٩](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=79) (ترقيم المتن: ٧٨) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٧٩](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=79) (ترقيم المتن: ٧٨) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «\begin{ex} لتكن $\lceil x \rceil$ \emph{دالة السقف}، التي تقرّب $x$ صعودًا إلى أقرب عدد صحيح. عندئذ تعدّد الدالة $f \colon \Nat \to \Int$ المعطاة بـ: \[ f(n) = (-1)^{n} \left\lceil\tfrac{n}{2}\right\rceil \] مجموعة الأعداد الصحيحة~$\Int$ على النحو الآتي: \[…».
+  - **العربية التراثية:** [السطر ٦٤](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/sets-functions-relations/size-of-sets/enumerability-alt.tex#L64)؛ الطبعة التراثية: [ص ٧٥](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=75) (ترقيم المتن: ٧٤)، [ص ٧٦](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=76) (ترقيم المتن: ٧٥) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «\begin{ex} نكتب $\lceil x \rceil$ لـ\emph{دالة السقف}، وقيمتها أصغر عدد صحيح لا يقل عن $x$. فالدالة $f \colon \Nat \to \Int$ المعرفة بالحد \[ f(n) = (-1)^{n} \left\lceil\tfrac{n}{2}\right\rceil \] تعدد مجموعة الأعداد الصحيحة~$\Int$، كما يظهر من القيم الآتية…».
+
+## أبناءه
+
+الأصل الإنجليزي: `children`. معرّف القرار: `retro-0005-0050:emphasis:6588e3a2f089b175`.
+
+**المعنى المقصود:** العقد اللاحقة مباشرة لعقدة x في شجرة، لا جميع ذريتها البعيدة.
+
+**سبب الاختيار:** «أبناءه» استعارة شجرية مفهومة ويقيدها التعريف المحلي بأنها لواحق مباشرة. الضمير يعود إلى x، والصيغة المنصوبة صحيحة بلا حركات في السياق.
+
+**سؤال مفتوح:** هل يحفظ اختيار «أبناءه» معنى المصطلح الإنجليزي «children» في المواضع المبيّنة، أم يُفضَّل أحد البدائل المسجلة؟
+
+**كل وقوع مسجل لهذا القرار:**
+
+- **OLP-0018 — الأشجار، وقوع ١:**
+  - **الأصل:** [السطر ٦٢](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/relations/trees.tex#L62). الشاهد المسجل: «The successors of $x \in A$ are also called its \emph{children}. If».
+  - **العربية المعيارية:** [السطر ٥٩](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/sets-functions-relations/relations/trees.tex#L59)؛ الطبعة الدولية: [ص ٤٩](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=49) (ترقيم المتن: ٤٨) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٤٩](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=49) (ترقيم المتن: ٤٨) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «تسمى لواحق $x \in A$ أيضًا \emph{أبناءه}. وإذا كان».
+  - **العربية التراثية:** [السطر ٥٧](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/sets-functions-relations/relations/trees.tex#L57)؛ الطبعة التراثية: [ص ٤٧](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=47) (ترقيم المتن: ٤٦) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «ولواحق $x \in A$ تسمى \emph{أبناءه} أيضًا. فإن كان $y$ لاحقًا».
+
+## رمز
+
+الأصل الإنجليزي: `code`. معرّف القرار: `retro-0005-0050:emphasis:a0002361b266eb40`.
+
+**المعنى المقصود:** اللفظ المفرد code في الجملة التي تسمي f(x,y) قيمة مرتبطة بالزوج المرتب ⟨x,y⟩؛ السياق لا يحسم هل الرأس العربي الأنسب «رمز» أم «قيمة ترميز».
+
+**سبب الاختيار:** المواضع الثلاثية الحية تثبت أن التنفيذ الحالي يقابل code بـ«رمز»، وأن المقصود قيمة يسندها f للزوج. هذا شاهد مصدر داخلي فقط؛ لم يعثر البحث المحدود على مدخل معجمي رسمي يثبت code → رمز، كما أن كثرة «رمز» في المعجم بمعنى symbol لا تثبت هذه المطابقة.
+
+**سؤال مفتوح:** في جملة f(x,y) هو code للزوج المرتب، هل الأدق «رمز» أم «قيمة الترميز» أم «شفرة»، وما الشاهد الاصطلاحي العربي لهذا المعنى تحديدا؟
+
+**كل وقوع مسجل لهذا القرار:**
+
+- **OLP-0031 — دوال المزاوجة والرموز، وقوع ١:**
+  - **الأصل:** [السطر ٥٥](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/size-of-sets/pairing.tex#L55). الشاهد المسجل: «\emph{code} for $\tuple{x,y}$.».
+  - **العربية المعيارية:** [السطر ٥٣](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/sets-functions-relations/size-of-sets/pairing.tex#L53)؛ الطبعة الدولية: [ص ٦٨](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=68) (ترقيم المتن: ٦٧) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٦٨](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=68) (ترقيم المتن: ٦٧) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «$A \times B$، وإن $f(x,y)$ هو \emph{رمز} $\tuple{x,y}$.».
+  - **العربية التراثية:** [السطر ٥٠](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/sets-functions-relations/size-of-sets/pairing.tex#L50)؛ الطبعة التراثية: [ص ٦٤](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=64) (ترقيم المتن: ٦٣) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «وإن $f(x,y)$ \emph{رمز} $\tuple{x,y}$.».
+
+## متممتها منتهية
+
+الأصل الإنجليزي: `cofinite`. معرّف القرار: `retro-0005-0050:emphasis:ccb85147746ef8fb`.
+
+**المعنى المقصود:** مجموعة جزئية متممتها منتهية.
+
+**سبب الاختيار:** «متممتها منتهية» جملة تعريفية صحيحة في الموضع الحالي، لكن المشروع نفسه يستعمل «متناهية المتممة» استعمالا صفيا مطابقا لـcofinite في أربعة مواضع حية. هذا منافس داخلي دقيق يوجب توحيدا واعيا، مع بقاء غياب المدخل الرسمي في المعجم المفحوص محدودا.
+
+**سؤال مفتوح:** في تعريف A⊆N، هل يوحّد الكتاب الصفة إلى «متناهية المتممة» المشهودة داخليا، أم يبقي الجملة «متممتها منتهية»، وما أثر ذلك في الإسناد النحوي؟
+
+**كل وقوع مسجل لهذا القرار:**
+
+- **OLP-0031 — دوال المزاوجة والرموز، وقوع ١:**
+  - **الأصل:** [السطر ٩٢](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/size-of-sets/pairing.tex#L92). الشاهد المسجل: «A subset of $\Nat$ is said to be \emph{cofinite} iff it is the».
+  - **العربية المعيارية:** [السطر ٨٨](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/sets-functions-relations/size-of-sets/pairing.tex#L88)؛ الطبعة الدولية: [ص ٦٧](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=67) (ترقيم المتن: ٦٦) (صفحة بدء الوحدة فحسب، لا صفحة اللفظ المثبتة بالدقة)؛ طبعة المشرق: [ص ٦٧](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=67) (ترقيم المتن: ٦٦) (صفحة بدء الوحدة فحسب، لا صفحة اللفظ المثبتة بالدقة). الشاهد المسجل: «يقال إن مجموعة جزئية $A$ من $\Nat$ \emph{متممتها منتهية} إذا وفقط إذا».
+  - **العربية التراثية:** [السطر ٨٤](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/sets-functions-relations/size-of-sets/pairing.tex#L84)؛ الطبعة التراثية: [ص ٦٤](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=64) (ترقيم المتن: ٦٣) (صفحة بدء الوحدة فحسب، لا صفحة اللفظ المثبتة بالدقة). الشاهد المسجل: «يقال إن جزئية $A$ من $\Nat$ \emph{متممتها منتهية} إذا وفقط إذا وجدت».
+
+## الحلقة التبديلية
+
+الأصل الإنجليزي: `commutative ring`. معرّف القرار: `retro-0005-0050:emphasis:40c4ebd28a5d4025`.
+
+**المعنى المقصود:** حلقة يكون ضربها تبديليا.
+
+**سبب الاختيار:** «الحلقة التبديلية» تطابق المدخل المؤسسي مع إضافة أداة التعريف المطلوبة نحويا، ويثبت السياق قانون ab=ba.
+
+**سؤال مفتوح:** هل يحفظ اختيار «الحلقة التبديلية» معنى المصطلح الإنجليزي «commutative ring» في المواضع المبيّنة، أم يُفضَّل أحد البدائل المسجلة؟
+
+**كل وقوع مسجل لهذا القرار:**
+
+- **OLP-0047 — الحلقات والحقول المرتبة، وقوع ١:**
+  - **الأصل:** [السطر ٢٤](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/arithmetization/checking-details.tex#L24). الشاهد المسجل: «A \emph{commutative ring} is a set $S$, equipped with specific elements $0$ and $1$ and operations $+$ and $\times$, satisfying these eight formulas:».
+  - **العربية المعيارية:** [السطر ٢٢](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/sets-functions-relations/arithmetization/checking-details.tex#L22)؛ الطبعة الدولية: [ص ٩٥](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=95) (ترقيم المتن: ٩٤) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٩٥](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=95) (ترقيم المتن: ٩٤) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «\emph{الحلقة التبديلية} هي مجموعة $S$ مزودة بعنصرين معينين $0$ و$1$».
+  - **العربية التراثية:** [السطر ١٧](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/sets-functions-relations/arithmetization/checking-details.tex#L17)؛ الطبعة التراثية: [ص ٩١](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=91) (ترقيم المتن: ٩٠) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «\emph{الحلقة التبديلية} مجموعة $S$ عين فيها عنصران $0$ و$1$ وعمليتان $+$ و$\times$، واستوفت الصيغ الثماني:».
+
+## كائنان قابلان للمقارنة؛ اتجاه الترتيب
+
+الأصل الإنجليزي: `comparable objects; order orientation`. معرّف القرار: `locale-ar-chosen-727f957670a8dcac`.
+
+**المعنى المقصود:** قابلية عنصرين للمقارنة في ترتيب، مع حفظ اتجاه Rxy/Ryx في الأمثلة والبراهين.
+
+**سبب الاختيار:** المعجم يطبع «زوجان متقارنان (قابلان للمقارنة)» ويعرّف الشرط x≤y أو y≤x. النص الحالي يستعمل الصيغة التفسيرية الأطول.
+
+**سؤال مفتوح:** هل «قابلان للمقارنة» هو الرأس الأنسب، أم «متقارنان» كما يقدمه المعجم أولًا؟ يجب ألا يتحول الشرط إلى مساواة، وأن تبقى اتجاهات no-longer-than و⊆ وdivides وinitial-segment وجميع صيغ Rxy/Ryx كما في المصدر.
+
+**كل وقوع مسجل لهذا القرار:**
+
+- **OLP-0016 — الترتيبات، وقوع ١:**
+  - **الأصل:** [السطر ١٣](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/relations/orders.tex#L13). الشاهد المسجل: «Many of our comparisons involve describing some objects as being ``less than'', ``equal to'', or ``greater than'' other objects, in a certain respect. These involve \emph{order} relations. But there are different kinds of order relations. For instance, some…».
+  - **الأصل:** [السطر ٤٥](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/relations/orders.tex#L45). الشاهد المسجل: «\begin{ex} Consider the \emph{no longer than} relation $\preccurlyeq$ on~$\Bin^*$: $x \preccurlyeq y$ iff $\len{x} \le \len{y}$. This is a preorder (reflexive and transitive), and even connected, but not a partial order, since it is not anti-symmetric. For…».
+  - **الأصل:** [السطر ٥٣](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/relations/orders.tex#L53). الشاهد المسجل: «\begin{ex} An important partial order is the relation $\subseteq$ on a set of sets. This is not in general a linear order, since if $a \neq b$ and we consider $\Pow{\{a, b\}} = \{\emptyset, \{a\}, \{b\}, \{a,b\}\}$, we see that $\{a\} \nsubseteq \{b\}$ and…».
+  - **الأصل:** [السطر ٦١](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/relations/orders.tex#L61). الشاهد المسجل: «\begin{ex} The relation of \emph{divisibility without remainder} gives us a partial order which isn't a linear order. For integers $n$ and~$m$, we write $n \mid m$ to mean $n$ (evenly) divides $m$, i.e., iff there is some integer~$k$ so that $m = kn$. On~$\…».
+  - **الأصل:** [السطر ٧٢](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/relations/orders.tex#L72). الشاهد المسجل: «\begin{ex} The \emph{extension} relation on a set of sequences~$A^*$ is the following: $s \sqsubseteq s'$ iff $s = \emptyseq$ (the empty sequence), $s = s'$, or $s = \tuple{s_1, \dots, s_n}$ and $s' = \tuple{s_1, \dots, s_n, s_{n+1}, \dots, s_m}$. If $s \sq…».
+  - **الأصل:** [السطر ١٣٢](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/relations/orders.tex#L132). الشاهد المسجل: «Concerning the ``moreover'' clause, suppose that $R$ is also connected. So for all $x \neq y$, either $Rxy$ or~$Ryx$, i.e., either $\tuple{x, y} \in R$ or $\tuple{y, x} \in R$. Since $R \subseteq R^+$, this remains true of $R^+$, so $R^+$ is connected as well.».
+  - **العربية المعيارية:** [السطر ١٣](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/sets-functions-relations/relations/orders.tex#L13)؛ الطبعة الدولية: [ص ٤٥](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=45) (ترقيم المتن: ٤٤)، [ص ٤٦](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=46) (ترقيم المتن: ٤٥) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٤٥](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=45) (ترقيم المتن: ٤٤)، [ص ٤٦](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=46) (ترقيم المتن: ٤٥) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «ينطوي كثير من مقارناتنا على وصف بعض الكائنات بأنها «أصغر من» كائنات أخرى، أو «مساوية لها»، أو «أكبر منها»، من وجه معين. وتتعلق هذه المقارنات بعلاقات \emph{الترتيب}. لكن علاقات الترتيب أنواع مختلفة؛ فمنها مثلًا ما يشترط أن يكون كل كائنين قابلين للمقارنة، ومن…».
+  - **العربية المعيارية:** [السطر ٤٣](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/sets-functions-relations/relations/orders.tex#L43)؛ الطبعة الدولية: [ص ٤٦](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=46) (ترقيم المتن: ٤٥) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٤٦](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=46) (ترقيم المتن: ٤٥) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «\begin{ex} اعتبر علاقة \emph{لا يزيد طولًا على} $\preccurlyeq$ على~$\Bin^*$: يكون $x \preccurlyeq y$ إذا وفقط إذا كان $\len{x} \le \len{y}$. وهذه علاقة ترتيب مسبق (انعكاسية ومتعدية)، بل إنها متصلة أيضًا، لكنها ليست ترتيبًا جزئيًا لأنها ليست مضادّة للتناظر.…».
+  - **العربية المعيارية:** [السطر ٥١](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/sets-functions-relations/relations/orders.tex#L51)؛ الطبعة الدولية: [ص ٤٦](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=46) (ترقيم المتن: ٤٥) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٤٦](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=46) (ترقيم المتن: ٤٥) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «\begin{ex} من الترتيبات الجزئية المهمة العلاقة $\subseteq$ على مجموعة من المجموعات. وهذه ليست ترتيبًا خطيًا بوجه عام؛ لأنه إذا كان $a \neq b$ ونظرنا في $\Pow{\{a, b\}} = \{\emptyset, \{a\}, \{b\}, \{a,b\}\}$، رأينا أن $\{a\} \nsubseteq \{b\}$ و$\{a\} \neq \…».
+  - **العربية المعيارية:** [السطر ٥٩](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/sets-functions-relations/relations/orders.tex#L59)؛ الطبعة الدولية: [ص ٤٦](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=46) (ترقيم المتن: ٤٥) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٤٦](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=46) (ترقيم المتن: ٤٥) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «\begin{ex} تعطينا علاقة \emph{القابلية للقسمة دون باق} ترتيبًا جزئيًا ليس ترتيبًا خطيًا. فللعددين الصحيحين $n$ و~$m$، نكتب $n \mid m$ لنعني أن $n$ يقسم $m$ (دون باق)، أي إذا وفقط إذا وجد عدد صحيح~$k$ بحيث $m = kn$. وعلى~$\Nat$ تكون هذه العلاقة ترتيبًا جزئيً…».
+  - **العربية المعيارية:** [السطر ٦٩](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/sets-functions-relations/relations/orders.tex#L69)؛ الطبعة الدولية: [ص ٤٦](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=46) (ترقيم المتن: ٤٥) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٤٦](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=46) (ترقيم المتن: ٤٥) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «\begin{ex} تُعرَّف علاقة \emph{الامتداد} على مجموعة المتتاليات~$A^*$ كما يأتي: يكون $s \sqsubseteq s'$ إذا وفقط إذا كان $s = \emptyseq$ (أي المتتالية الخالية)، أو كان $s = s'$، أو كان $s = \tuple{s_1, \dots, s_n}$ وكان $s' = \tuple{s_1, \dots, s_n, s_{n+1},…».
+  - **العربية المعيارية:** [السطر ١٢٦](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/sets-functions-relations/relations/orders.tex#L126)؛ الطبعة الدولية: [ص ٤٧](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=47) (ترقيم المتن: ٤٦) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٤٧](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=47) (ترقيم المتن: ٤٦) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «أما فقرة «علاوة على ذلك»، فافترض أن $R$ متصلة أيضًا. وعندئذ، لكل $x \neq y$، يصدق واحد على الأقل من $Rxy$ و~$Ryx$، أي يصدق واحد على الأقل من $\tuple{x, y} \in R$ و$\tuple{y, x} \in R$. وبما أن $R \subseteq R^+$، يبقى هذا صحيحًا في $R^+$، فتكون $R^+$ متصلة أ…».
+  - **العربية التراثية:** [السطر ١٣](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/sets-functions-relations/relations/orders.tex#L13)؛ الطبعة التراثية: [ص ٤٤](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=44) (ترقيم المتن: ٤٣) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «كثيرًا ما نقارن الأشياء فنقول إن هذا «أصغر من» ذاك أو «مساو له» أو «أكبر منه» من جهة ما؛ وتلك علاقات \emph{ترتيب}. وليس الترتيب نوعًا واحدًا: فمنه ما يوجب إمكان المقارنة بين كل شيئين، ومنه ما لا يوجبه؛ ومنه ما يدخل الهوية، كـ~$\le$، وما يخرجها، كـ~$<$. فلنم…».
+  - **العربية التراثية:** [السطر ٣٩](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/sets-functions-relations/relations/orders.tex#L39)؛ الطبعة التراثية: [ص ٤٤](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=44) (ترقيم المتن: ٤٣) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «\begin{ex} ولننظر في علاقة \emph{لا يزيد طولًا على} $\preccurlyeq$ على~$\Bin^*$: $x \preccurlyeq y$ إذا وفقط إذا كان $\len{x} \le \len{y}$. فهي ترتيب مسبق لانعكاسيتها وتعديتها، وهي متصلة كذلك. ولكنها ليست جزئية، إذ لا تضاد التناظر: فـ$01 \preccurlyeq 10$ و$…».
+  - **العربية التراثية:** [السطر ٤٧](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/sets-functions-relations/relations/orders.tex#L47)؛ الطبعة التراثية: [ص ٤٤](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=44) (ترقيم المتن: ٤٣) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «\begin{ex} ومن أهم الترتيبات الجزئية $\subseteq$ على مجموعة من المجموعات. ولا يلزم أن تكون خطية: فإذا كان $a \neq b$، ففي $\Pow{\{a, b\}} = \{\emptyset, \{a\}, \{b\}, \{a,b\}\}$ نجد $\{a\} \nsubseteq \{b\}$ و$\{a\} \neq \{b\}$ و$\{b\} \nsubseteq \{a\}$.».
+  - **العربية التراثية:** [السطر ٥٥](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/sets-functions-relations/relations/orders.tex#L55)؛ الطبعة التراثية: [ص ٤٥](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=45) (ترقيم المتن: ٤٤) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «\begin{ex} ومن أمثلتها أيضًا \emph{القابلية للقسمة دون باق}. فإذا كان $n$ و~$m$ صحيحين، فمعنى $n \mid m$ أن $n$ يقسم $m$ بلا باق؛ أي يوجد صحيح~$k$ يحقق $m = kn$. وهذه على~$\Nat$ ترتيب جزئي غير خطي، إذ $2 \nmid 3$ و$3 \nmid 2$. وأما على $\Int$ فليست إلا ترتي…».
+  - **العربية التراثية:** [السطر ٦٤](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/sets-functions-relations/relations/orders.tex#L64)؛ الطبعة التراثية: [ص ٤٥](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=45) (ترقيم المتن: ٤٤) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «\begin{ex} وعلاقة \emph{الامتداد} على~$A^*$ تعريفها: $s \sqsubseteq s'$ إذا وفقط إذا كان $s = \emptyseq$، أي المتتالية الخالية، أو $s = s'$، أو كان $s = \tuple{s_1, \dots, s_n}$ و$s' = \tuple{s_1, \dots, s_n, s_{n+1}, \dots, s_m}$. فمتى كان $s \sqsubseteq s…».
+  - **العربية التراثية:** [السطر ١١٦](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/sets-functions-relations/relations/orders.tex#L116)؛ الطبعة التراثية: [ص ٤٥](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=45) (ترقيم المتن: ٤٤) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «ويبقى حكم الخطية. إن كانت $R$ متصلة، كان لكل $x \neq y$ أحد $Rxy$ و~$Ryx$، أي أحد $\tuple{x, y} \in R$ و$\tuple{y, x} \in R$. ولأن $R \subseteq R^+$ يبقى ذلك في $R^+$، فتكون $R^+$ متصلة أيضًا.».
+
+## مدى f مجموعة جزئية من مجال g
+
+الأصل الإنجليزي: `compatibility condition for composing functions`. معرّف القرار: `locale-ar-chosen-aac7b8e5217805d0`.
+
+**المعنى المقصود:** شرط إمكان تركيب دالتين: range(f)⊆domain(g)، لا مساواة المجال المقابل بالمجال.
+
+**سبب الاختيار:** المصدر يصرح بالاحتواء ثم يطبقه في A→B وB→C. صفحة المعجم تشهد تركيب الدوال لكنها تستعمل اتفاقًا رمزيًا معاكس الاتجاه، مما يوجب فصل الشرط النوعي عن ترتيب الرمز.
+
+**سؤال مفتوح:** هل صياغة «مدى f مجموعة جزئية من مجال g» أوضح شرطًا لإمكان التركيب؟ يرجى التحقق من أن المقصود المدى الفعلي لا المجال المقابل بالضرورة، وأن الاحتواء يكفي ولا تشترط المساواة، مع عدم قلب ترتيب التطبيق.
+
+**كل وقوع مسجل لهذا القرار:**
+
+- **OLP-0025 — تركيب الدوال، وقوع ١:**
+  - **الأصل:** [السطر ١٢](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/functions/composition.tex#L12). الشاهد المسجل: «\begin{explain} \oliflabeldef{sfr:fun:inv:sec}{We saw in \olref[inv]{sec} that the inverse~$f^{-1}$ of !!a{bijection}~$f$ is itself a function. Another operation on functions is composition: w}{W}e can define a new function by composing two functions, $f$ a…».
+  - **العربية المعيارية:** [السطر ١٣](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/sets-functions-relations/functions/composition.tex#L13)؛ الطبعة الدولية: [ص ٥٩](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=59) (ترقيم المتن: ٥٨)، [ص ٦٠](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=60) (ترقيم المتن: ٥٩) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٥٩](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=59) (ترقيم المتن: ٥٨)، [ص ٦٠](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=60) (ترقيم المتن: ٥٩) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «\oliflabeldef{sfr:fun:inv:sec}{رأينا في \olref[inv]{sec} أن المعكوس~$f^{-1}$، حين تكون لدينا !!a{bijection} نرمز إليها بـ~$f$، هو نفسه دالة. ومن العمليات الأخرى على الدوال عملية التركيب؛ إذ }{}يمكننا تعريف دالة جديدة بتركيب دالتين، $f$ و~$g$، أي بتطبيق $f$…».
+  - **العربية التراثية:** [السطر ١٣](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/sets-functions-relations/functions/composition.tex#L13)؛ الطبعة التراثية: [ص ٥٦](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=56) (ترقيم المتن: ٥٥)، [ص ٥٧](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=57) (ترقيم المتن: ٥٦) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «\oliflabeldef{sfr:fun:inv:sec}{تقدم في \olref[inv]{sec} أن معكوس~$f^{-1}$ لـ!!a{bijection}~$f$ دالة أيضًا. ومن عمليات الدوال التركيب. }{}فنركب $f$ و~$g$ فنحصل على دالة جديدة، بتطبيق $f$ أولًا ثم~$g$. ولا يصح ذلك إلا إذا اتفق المدى والمجال بالقدر المطلوب: أن…».
+
+## الحقل المرتب الكامل
+
+الأصل الإنجليزي: `complete ordered field`. معرّف القرار: `retro-0005-0050:emphasis:904f8cf9195749e3`.
+
+**المعنى المقصود:** حقل مرتب يحقق خاصية التمام: كل مجموعة غير خالية محدودة من أعلى لها أصغر حد أعلى.
+
+**سبب الاختيار:** «الكامل» مفهوم دلاليا، لكن المدخل المؤسسي الحرفي هو «حقل مرتب تام». لأن complete في هذا السياق خاصية فنية لا مجرد كمال عام، فالاختلاف يستحق توحيدا واعيا.
+
+**سؤال مفتوح:** هل يوحد المصطلح إلى «الحقل المرتب التام» وفق المعجم، أم يوجد سبب اصطلاحي للإبقاء على «الكامل»؟
+
+**كل وقوع مسجل لهذا القرار:**
+
+- **OLP-0046 — بعض التأملات الفلسفية، وقوع ١:**
+  - **الأصل:** [السطر ٢٠](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/arithmetization/reflections.tex#L20). الشاهد المسجل: «\emph{complete ordered field} is coherent, for the cuts form just such».
+  - **العربية المعيارية:** [السطر ١٩](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/sets-functions-relations/arithmetization/reflections.tex#L19)؛ الطبعة الدولية: [ص ٩٣](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=93) (ترقيم المتن: ٩٢) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٩٣](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=93) (ترقيم المتن: ٩٢) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «\emph{الحقل المرتب الكامل} متسق، لأن القطوع تكوّن حقلًا من هذا القبيل».
+  - **العربية التراثية:** [السطر ١٤](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/sets-functions-relations/arithmetization/reflections.tex#L14)؛ الطبعة التراثية: [ص ٨٩](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=89) (ترقيم المتن: ٨٨)، [ص ٩٠](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=90) (ترقيم المتن: ٨٩) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «أفدنا منها، فيما لا يكاد ينازع فيه، رياضيات بحتة {جميلة}. وفوق ذلك حصل تحقيق عميق لبعض المفاهيم: فإن إدراك أن خاصية الاكتمال هي الفارق الحاسم بين الحقيقية والنسبية نفاذ بعيد في النظر. ثم إن بناء الحقيقية صراحة بوصفها قطوع ديديكند يثبت أساس موضوع التحليل؛ فم…».
+
+## تركيب الدوال؛ تطبيق f أولًا ثم g
+
+الأصل الإنجليزي: `composition of functions; first f then g`. معرّف القرار: `locale-ar-chosen-fa1c71f43b40f678`.
+
+**المعنى المقصود:** تركيب الدوال وفق ماكرو المصدر: (comp{f}{g})(x)=g(f(x))، أي f أولًا ثم g.
+
+**سبب الاختيار:** يحفظ النص اتجاه A→B→C والمثال. المعجم يشهد «تركيب دوال» لكنه يطبع h=f∘g مع تطبيق g ثم f؛ وهذا اختلاف اصطلاح رمزي صريح.
+
+**سؤال مفتوح:** هل «تركيب الدوال» أم «تأليف الدوال» أنسب، وكيف ينبغي شرح ترتيب الرمز إقليميًا؟ يجب تثبيت اصطلاح هذه الطبعة: (comp{f}{g})(x)=g(f(x))، أي تطبيق f أولًا ثم g، مع التنبيه إلى أن صفحة المعجم تعرض اصطلاحًا رمزيًا معاكسًا.
+
+**كل وقوع مسجل لهذا القرار:**
+
+- **OLP-0025 — تركيب الدوال، وقوع ١:**
+  - **الأصل:** [السطر ١٠](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/functions/composition.tex#L10). الشاهد المسجل: «\olsection{Composition of Functions}».
+  - **العربية المعيارية:** [السطر ١٠](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/sets-functions-relations/functions/composition.tex#L10)؛ الطبعة الدولية: [ص ٥٩](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=59) (ترقيم المتن: ٥٨) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٥٩](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=59) (ترقيم المتن: ٥٨) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «\olsection{تركيب الدوال}».
+  - **العربية التراثية:** [السطر ١٠](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/sets-functions-relations/functions/composition.tex#L10)؛ الطبعة التراثية: [ص ٥٦](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=56) (ترقيم المتن: ٥٥) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «\olsection{تركيب الدوال}».
+- **OLP-0600 — ملحق: مفارقة فيتالي، وقوع ٢:**
+  - **الأصل:** [السطر ٤٢](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/set-theory/choice/vitali.tex#L42). الشاهد المسجل: «$\rotationsgroup$ forms an abelian {group} under composition of functions.».
+  - **العربية المعيارية:** [السطر ٣٧](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/set-theory/choice/vitali.tex#L37)؛ الطبعة الدولية: [ص ٩٥٠](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=950) (ترقيم المتن: ٩٤٩) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٩٥١](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=951) (ترقيم المتن: ٩٥٠) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «تكوّن~$\rotationsgroup$ {group} أبيلية تحت تركيب الدوال.».
+  - **العربية التراثية:** [السطر ٣٤](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/set-theory/choice/vitali.tex#L34)؛ الطبعة التراثية: [ص ٩٣٢](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=932) (ترقيم المتن: ٩٣١) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «تكوّن~$\rotationsgroup$ {group} أبيلية تحت تركيب الدوال.».
+
+## الاستيعاب
+
+الأصل الإنجليزي: `comprehension`. معرّف القرار: `retro-0005-0050:emphasis:e8d569d04365445c`.
+
+**المعنى المقصود:** تكوين مجموعة من جميع الكائنات التي تحقق خاصية، في سياق قيود مبدأ أو موضوعة الاستيعاب في نظرية المجموعات.
+
+**سبب الاختيار:** «الاستيعاب» مشهود حرفيا داخل هذا المشروع في «الاستيعاب الساذج» و«مبدأ الاستيعاب» في النسختين، فيدعم اتساق الاختيار الحالي. لكن المعجم المؤسسي يعطي «موضوعة الاشتمال» لـcomprehension axiom، والموضع الحالي اسم للعملية أو المبدأ لا عنوان الموضوعة وحده؛ لذلك يبقى القرار محروسا.
+
+**سؤال مفتوح:** في سياق تكوين مجموعة بكل ما يحقق خاصية، هل يوحد المصطلح إلى «الاستيعاب» المشهود داخليا أم «الاشتمال» المؤسسي، وكيف يميز كلاهما من مبدأ الفصل المقيد؟
+
+**كل وقوع مسجل لهذا القرار:**
+
+- **OLP-0010 — مفارقة راسل، وقوع ١:**
+  - **الأصل:** [السطر ٢٢](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/sets/russells-paradox.tex#L22). الشاهد المسجل: «lends itself to \emph{comprehension}. That is, some properties do».
+  - **العربية المعيارية:** [السطر ٢١](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/sets-functions-relations/sets/russells-paradox.tex#L21)؛ الطبعة الدولية: [ص ٣٨](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=38) (ترقيم المتن: ٣٧) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٣٨](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=38) (ترقيم المتن: ٣٧) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «\emph{الاستيعاب}. أي إن بعض الخواص \emph{لا} تعرّف مجموعات.».
+  - **العربية التراثية:** [السطر ١٩](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/sets-functions-relations/sets/russells-paradox.tex#L19)؛ الطبعة التراثية: [ص ٣٧](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=37) (ترقيم المتن: ٣٦) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «ولا غنى عن هذا الشرط!{} فليس كل وصف صالحًا لـ\emph{الاستيعاب}؛».
+
+## قابلية الحساب / دالة عودية / العودية البدائية / الدالة المميزة
+
+الأصل الإنجليزي: `computability / recursive function / primitive recursion / characteristic function`. معرّف القرار: `locale-ar-chosen-efbb821c1bd97c3b`.
+
+**المعنى المقصود:** قابلية الحساب والدوال العودية والعودية البدائية والدالة المميزة، مع الفروق بين الجزئي والعام والكلي.
+
+**سبب الاختيار:** قورنت عناوين OLP-0208–0210 وتعريفاتها باللغات الثلاث. المعجم يعرض الحوسبة/حسوبة، والتكرارية والارتدادية، ويوافق «الدالة المميزة»؛ فتوجد منافسة اصطلاحية حقيقية داخل المرجع نفسه.
+
+**سؤال مفتوح:** هل نثبت «قابلية الحساب/دالة عودية/العودية البدائية/الدالة المميزة»، أم نفضل عائلة المعجم «الحوسبة/دالة حسوبة» و«تكرارية» أو «ارتدادية»؟ يجب حفظ الفروق بين الدوال الجزئية والعامة والكلية، وألا تختلط characteristic function بدالة مميزة في الاحتمالات.
+
+**كل وقوع مسجل لهذا القرار:**
+
+- **OLP-0208 — قابلية الحساب، وقوع ١:**
+
+## قابل للتعداد حسابيًا / شبه قابل للقرار / قابلية الاختزال متعددًا إلى واحد / قابلية الاختزال واحدًا إلى واحد / قابلية الاختزال بتورنغ / تام / عرّاف
+
+الأصل الإنجليزي: `computably enumerable / semi-decidable / many-one reducibility / one-one reducibility / Turing reducibility / complete / oracle`. معرّف القرار: `locale-ar-chosen-e8410e4949a92281`.
+
+**المعنى المقصود:** المجموعات القابلة للتعداد حسابيًا وشبه القابلة للقرار، واختزالات many-one وone-one وتورنغ، والتمام وoracle.
+
+**سبب الاختيار:** أضيفت التعريفات الحرفية من OLP-0238 و0239 و0243–0246 باللغات الثلاث. يحفظ النص اتجاه A≤B ومعنى التمام بوصفه الأصعب في الصنف. الكانون لا يشهد المركبات نفسها؛ يشهد فقط عائلتي قابل للاختزال وتورنغ/قابل للحساب.
+
+**سؤال مفتوح:** هل الرؤوس «قابل للتعداد حسابيًا»، «شبه قابل للقرار»، «قابلية الاختزال متعددًا إلى واحد»، «واحدًا إلى واحد»، «بتورنغ»، «تام»، و«عُرّاف» هي الأنسب والمتسقة إقليميًا؟ يرجى خاصة مراجعة «عُرّاف» مقابل «أوراكل/مجيب استشاري»، مع حفظ اتجاه A≤B، وكون التام أصعب درجات الصنف، والفرق الدقيق بين الاختزالات الثلاثة.
+
+**كل وقوع مسجل لهذا القرار:**
+
+- **OLP-0235 — مشكلة التوقف، وقوع ١:**
+
+## متسق؛ غير متسق
+
+الأصل الإنجليزي: `consistent; inconsistent (formal theory or claim)`. معرّف القرار: `locale-ar-chosen-85406e071910ac94`.
+
+**المعنى المقصود:** consistent/inconsistent لنظرية صورية أو مخطط أو عالم متوافق مع معلومات فاعل، بمعنى انتفاء التناقض المناسب للسياق.
+
+**سبب الاختيار:** جميع الوقوعات تحفظ قطبية الاتساق. المعجم يشهد «شرط الاتساق» و«افتراضات متسقة» و«معادلات متسقة» في سياقات رياضية.
+
+**سؤال مفتوح:** هل «متسق/غير متسق» مناسب في جميع هذه الوقوعات، ولا سيما اتساق نسق صوري ومخطط وادعاء؟ يرجى التأكد من أن القارئ يفهم انتفاء التناقض أو إمكان الاجتماع، لا مجرد الانسجام الأسلوبي.
+
+**كل وقوع مسجل لهذا القرار:**
+
+- **OLP-0697 — في الأنماط، وقوع ١:**
+  - **الأصل:** [السطر ٩٨](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/proof-theory/propositions-as-types/types.tex#L98). الشاهد المسجل: «\Log{tN3i}) is consistent, there is no !!{proof} of~$\lfalse$ unless».
+  - **العربية المعيارية:** [السطر ٩١](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/proof-theory/propositions-as-types/types.tex#L91)؛ الطبعة الدولية: [ص ١١٢٦](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=1126) (ترقيم المتن: ١٠٦) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ١١٢٧](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=1127) (ترقيم المتن: ١٠٦) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «\Log{tN3i}، متسق، فلا يوجد~!!{proof} لـ~$\lfalse$ من دون فروض مفتوحة؛ ومن».
+  - **العربية التراثية:** [السطر ٩١](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/proof-theory/propositions-as-types/types.tex#L91)؛ الطبعة التراثية: [ص ١١٠٥](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=1105) (ترقيم المتن: ١٠٤) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «\Log{tN3i}، متسق، فلا يوجد~!!{proof} لـ~$\lfalse$ بغير فروض مفتوحة؛ ومن».
+- **OLP-0486 — الصدق عند عالم، وقوع ٢:**
+  - **الأصل:** [السطر ٥٤](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/applied-modal-logic/epistemic-logic/truth-at-w.tex#L54). الشاهد المسجل: «idea that the actual world is consistent with an agent's information.».
+  - **العربية المعيارية:** [السطر ٥٥](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/applied-modal-logic/epistemic-logic/truth-at-w.tex#L55)؛ الطبعة الدولية: [ص ٨١٣](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=813) (ترقيم المتن: ٨١٢) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٨١٤](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=814) (ترقيم المتن: ٨١٣) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «دائمًا. وهذا يقابل تقريبًا فكرة أن العالم الفعلي متسق مع معلومات الفاعل.».
+  - **العربية التراثية:** [السطر ٥٤](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/applied-modal-logic/epistemic-logic/truth-at-w.tex#L54)؛ الطبعة التراثية: [ص ٧٩٩](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=799) (ترقيم المتن: ٧٩٨) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «أبدًا؛ فيكون العالم الفعلي متسقًا مع معلومات الفاعل. ولهذا يستعمل في منطق».
+- **OLP-0177 — منطق الرتبة الثانية، وقوع ٣:**
+  - **الأصل:** [السطر ٦٥](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/first-order-logic/beyond/second-order-logic.tex#L65). الشاهد المسجل: «occur in~$!A$, this schema is inconsistent!)».
+  - **العربية المعيارية:** [السطر ٦١](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/first-order-logic/beyond/second-order-logic.tex#L61)؛ الطبعة الدولية: [ص ٣٨٢](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=382) (ترقيم المتن: ٣٨١) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٣٨٢](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=382) (ترقيم المتن: ٣٨١) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «حرًا. (تمرين: بيّن أن هذا المخطط غير متسق إذا أجيز ورود~$R$ في~$!A$!)».
+  - **العربية التراثية:** [السطر ٦٠](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/first-order-logic/beyond/second-order-logic.tex#L60)؛ الطبعة التراثية: [ص ٣٧٣](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=373) (ترقيم المتن: ٣٧٢) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «حرًا. (تمرين: بيّن أن هذا المخطط غير متسق إذا أجيز ورود~$R$ في~$!A$!)».
+
+## بناء
+
+الأصل الإنجليزي: `construct`. معرّف القرار: `retro-0005-0050:emphasis:a9ff0ca513b2bbd1`.
+
+**المعنى المقصود:** إنشاء بنية الأعداد الحقيقية من الأعداد المنطقية بواسطة قطوع ديديكند أو متتاليات كوشي.
+
+**سبب الاختيار:** «بناء» اسم مصدر رياضي طبيعي يطابق construct هنا بوصفه إنشاء بنيويا لا فعلا يدويا.
+
+**سؤال مفتوح:** هل يحفظ اختيار «بناء» معنى المصطلح الإنجليزي «construct» في المواضع المبيّنة، أم يُفضَّل أحد البدائل المسجلة؟
+
+**كل وقوع مسجل لهذا القرار:**
+
+- **OLP-0048 — ملحق: بناء الحقيقية بمتتاليات كوشي، وقوع ١:**
+  - **الأصل:** [السطر ١٦](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/arithmetization/cauchy.tex#L16). الشاهد المسجل: «use of this definition to \emph{construct} the reals is due to other».
+  - **العربية المعيارية:** [السطر ١٥](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/sets-functions-relations/arithmetization/cauchy.tex#L15)؛ الطبعة الدولية: [ص ٩٨](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=98) (ترقيم المتن: ٩٧) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٩٨](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=98) (ترقيم المتن: ٩٧) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «متتالية كوشي؛ لكن استعمال هذا التعريف في \emph{بناء} الأعداد الحقيقية».
+  - **العربية التراثية:** [السطر ١٣](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/sets-functions-relations/arithmetization/cauchy.tex#L13)؛ الطبعة التراثية: [ص ٩٤](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=94) (ترقيم المتن: ٩٣) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «كان بناء الأعداد الحقيقية في \olref[cuts]{sec} بقطوع ديديكند. ونبين هنا بناء آخر، أصله تعريف كوشي لما يسمى اليوم متتالية كوشي. أما اتخاذ هذا التعريف سبيلًا إلى \emph{بناء} الحقيقية فمن عمل مؤلفين آخرين في القرن التاسع عشر، منهم فايرشتراس وهاينه وميري وكانتو…».
+- **OLP-0045 — من ℚ إلى ℝ، وقوع ٢:**
+  - **الأصل:** [السطر ١٥](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/arithmetization/cuts.tex#L15). الشاهد المسجل: «is the greatest lower bound. To \emph{construct} the real numbers from».
+  - **العربية المعيارية:** [السطر ١٥](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/sets-functions-relations/arithmetization/cuts.tex#L15)؛ الطبعة الدولية: [ص ٩١](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=91) (ترقيم المتن: ٩٠) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٩١](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=91) (ترقيم المتن: ٩٠) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «أجل \emph{بناء} الأعداد الحقيقية من الأعداد النسبية، أن ننظر إلى».
+  - **العربية التراثية:** [السطر ١٢](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/sets-functions-relations/arithmetization/cuts.tex#L12)؛ الطبعة التراثية: [ص ٨٧](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=87) (ترقيم المتن: ٨٦) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «تدل خاصية الاكتمال، في جوهرها، على أن كل نقطة $\alpha$ من المستقيم الحقيقي تفصل ما على جانبيها فصلًا تامًّا: فهي $\alpha$ أصغر حد علوي للجانب الأدنى، وهي $\alpha$ أكبر حد سفلي للجانب الأعلى. ومن هنا اقترح ديديكند، في \emph{بناء} الأعداد الحقيقية من النسبية،…».
+
+## المتصل العددي
+
+الأصل الإنجليزي: `continuum (real-number set)`. معرّف القرار: `locale-ar-chosen-3fc8855031560253`.
+
+**المعنى المقصود:** continuum بوصفه مجموعة الأعداد الحقيقية، لا مجرد خاصية الاستمرار ولا الاتصال الطوبولوجي.
+
+**سبب الاختيار:** المعجم يضع «المتصل» ويعد مجموعة جميع الأعداد الحقيقية معنى ثانيًا له. «العددي» في النص قيد تحريري لرفع تعدد المعنى.
+
+**سؤال مفتوح:** يشهد المعجم continuum بـ«المتصل» ويذكر صراحة معنى مجموعة جميع الأعداد الحقيقية؛ فهل نبقي «المتصل العددي» قيدًا لإزالة اللبس، أم نستخدم «المتصل» وحده؟ يجب ألا يختلط المصطلح بالاستمرارية أو الاتصال الطوبولوجي.
+
+**كل وقوع مسجل لهذا القرار:**
+
+- **OLP-0007 — بعض المجموعات المهمة، وقوع ١:**
+  - **الأصل:** [السطر ٢٤](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/sets/important-sets.tex#L24). الشاهد المسجل: «\text{the set of real numbers (the continuum)}».
+  - **العربية المعيارية:** [السطر ٢٤](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/sets-functions-relations/sets/important-sets.tex#L24)؛ الطبعة الدولية: [ص ٣٣](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=33) (ترقيم المتن: ٣٢) (صفحة بدء الوحدة فحسب، لا صفحة اللفظ المثبتة بالدقة)؛ طبعة المشرق: [ص ٣٣](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=33) (ترقيم المتن: ٣٢) (صفحة بدء الوحدة فحسب، لا صفحة اللفظ المثبتة بالدقة). الشاهد المسجل: «\text{مجموعة الأعداد الحقيقية (المتصل العددي)}».
+  - **العربية التراثية:** [السطر ٢٣](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/sets-functions-relations/sets/important-sets.tex#L23)؛ الطبعة التراثية: [ص ٣٢](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=32) (ترقيم المتن: ٣١) (صفحة بدء الوحدة فحسب، لا صفحة اللفظ المثبتة بالدقة). الشاهد المسجل: «\text{مجموعة الأعداد الحقيقية (المتصل العددي)}».
+
+## القطع
+
+الأصل الإنجليزي: `cut`. معرّف القرار: `retro-0005-0050:emphasis:c9e487344671a6fa`.
+
+**المعنى المقصود:** قطع ديديكند كما تمثله هذه الطبعة صراحة: المقطع الابتدائي الأدنى الواحد α من الأعداد المنطقية، غير الخالي والحقيقي والذي لا عنصر أعظم له؛ وهذا النصف الأدنى يعيّن التقسيم كله تعيينًا وحيدًا.
+
+**سبب الاختيار:** تصرح هذه الطبعة بأن التقسيم يتعين تعيينًا وحيدًا بالنظر إلى نصفه الأدنى، ثم تعرّف القطع α نفسه مقطعًا ابتدائيًا أدنى واحدًا من الأعداد المنطقية، غير خال وحقيقي ولا عنصر أعظم له. لذلك لا يكون تمثيل المصدر محايدًا بين الاصطلاحات. يشهد DAM للرأس «مقطع ديديكند» ويعرض صياغة زوجية (A,B)، لكن شروطه المطبوعة لا تنص على A∪B=Q ولا على انتفاء العنصر الأعظم من A؛ فلا تثبت تكافؤ تلك الصياغة، كما طبعت، مع تعريف هذه الطبعة. فحتى مع إضافة A∪B=Q، يحقق A={q∈Q:q≤0} وB={q∈Q:q>0} الشروط المطبوعة، مع أن A له العنصر الأعظم 0، وهو ما يمنعه التعريف الحي.
+
+**سؤال مفتوح:** في طبعة تعرّف قطع ديديكند صراحة بالمقطع الابتدائي الأدنى α وحده، هل الأنسب تثبيت «القطع» أم اعتماد الرأس المشهود «مقطع ديديكند»؟ وكيف ينبغي التنبيه إلى أن شروط العرض الزوجي (A,B) المطبوعة في DAM لا تثبت تكافؤه مع هذا التعريف؟
+
+**كل وقوع مسجل لهذا القرار:**
+
+- **OLP-0045 — من ℚ إلى ℝ، وقوع ١:**
+  - **الأصل:** [السطر ١٨](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/arithmetization/cuts.tex#L18). الشاهد المسجل: «identify $\sqrt{2}$ with the \emph{cut} which separates the rationals».
+  - **العربية المعيارية:** [السطر ١٧](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/sets-functions-relations/arithmetization/cuts.tex#L17)؛ الطبعة الدولية: [ص ٩١](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=91) (ترقيم المتن: ٩٠) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٩١](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=91) (ترقيم المتن: ٩٠) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «النسبية. أي إننا نطابق $\sqrt{2}$ مع \emph{القطع} الذي يفصل الأعداد».
+  - **العربية التراثية:** [السطر ١٢](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/sets-functions-relations/arithmetization/cuts.tex#L12)؛ الطبعة التراثية: [ص ٨٧](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=87) (ترقيم المتن: ٨٦) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «تدل خاصية الاكتمال، في جوهرها، على أن كل نقطة $\alpha$ من المستقيم الحقيقي تفصل ما على جانبيها فصلًا تامًّا: فهي $\alpha$ أصغر حد علوي للجانب الأدنى، وهي $\alpha$ أكبر حد سفلي للجانب الأعلى. ومن هنا اقترح ديديكند، في \emph{بناء} الأعداد الحقيقية من النسبية،…».
+
+## قطع ديديكند؛ مقطع ابتدائي حقيقي؛ لا عنصر أعظم له
+
+الأصل الإنجليزي: `Dedekind cut; proper initial segment; no greatest element`. معرّف القرار: `locale-ar-chosen-9dc1c24bd5946fbf`.
+
+**المعنى المقصود:** قطع ديديكند في هذه الطبعة هو النصف الأدنى α من الأعداد النسبية: مجموعة غير خالية، جزئية حقيقية من ℚ، مغلقة إلى أسفل، ولا عنصر أعظم لها. و«حقيقي» هنا ترجمة proper بمعنى أن α ليست ℚ كلها، لا بمعنى real.
+
+**سبب الاختيار:** تحفظ الصياغة الحالية الشروط الأربعة الحاسمة وتفصل اسم الكائن عن وصفه التعريفي. غير أن DAM يشهد الرأس «مقطع ديديكند»، لا «قطع ديديكند»، ويعرض تعريفًا زوجيًا مطبوعًا لا يذكر A∪B=ℚ ولا انتفاء العنصر الأعظم من A؛ فلا يجوز اتخاذه برهانًا على تكافؤ العرضين. لذلك يُسجّل الرأس المؤسسي منافسًا مباشرًا، مع إبقاء تعريف المصدر الحي حاكمًا للمعنى، ومن غير اقتراح تعديل نصي في هذه الدفعة.
+
+**سؤال مفتوح:** في OLP-0045، هل يُفضَّل اسم الكائن المشهود «مقطع ديديكند» على «قطع ديديكند»، مع إبقاء التعريف «مقطع ابتدائي حقيقي غير خال ولا عنصر أعظم له»؟ وهل تكفي قرينة α⊊ℚ لمنع فهم «حقيقي» بمعنى real، أم أن «فعلي» أو شرحًا صريحًا أوضح، من غير إسقاط أي شرط من شروط المصدر؟
+
+**كل وقوع مسجل لهذا القرار:**
+
+- **OLP-0045 — من ℚ إلى ℝ، وقوع ١:**
+  - **الأصل:** [السطر ١٢](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/arithmetization/cuts.tex#L12). الشاهد المسجل: «In essence, the Completeness Property shows that any point $\alpha$ of the real line divides that line into two halves perfectly: those for which $\alpha$ is the least upper bound, and those for which $\alpha$ is the greatest lower bound. To \emph{construct…».
+  - **الأصل:** [السطر ٢٦](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/arithmetization/cuts.tex#L26). الشاهد المسجل: «\begin{defn}[Cut] A \emph{cut} $\alpha$ is any non-empty proper initial segment of the rationals with no greatest element. That is, $\alpha$ is a cut iff: \begin{enumerate} \item \emph{non-empty, proper}: $\emptyset \neq \alpha \subsetneq \Rat$ \item \emph{…».
+  - **العربية المعيارية:** [السطر ١٢](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/sets-functions-relations/arithmetization/cuts.tex#L12)؛ الطبعة الدولية: [ص ٩١](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=91) (ترقيم المتن: ٩٠) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٩١](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=91) (ترقيم المتن: ٩٠) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «خلاصة الأمر أن خاصية الاكتمال تبين أن كل نقطة $\alpha$ من المستقيم الحقيقي تقسم ذلك المستقيم قسمين تامّين: قسمًا تكون $\alpha$ أصغر حد علوي له، وقسمًا تكون $\alpha$ أكبر حد سفلي له. وقد اقترح ديديكند، من أجل \emph{بناء} الأعداد الحقيقية من الأعداد النسبية،…».
+  - **العربية المعيارية:** [السطر ٢٤](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/sets-functions-relations/arithmetization/cuts.tex#L24)؛ الطبعة الدولية: [ص ٩١](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=91) (ترقيم المتن: ٩٠)، [ص ٩٢](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=92) (ترقيم المتن: ٩١) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٩١](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=91) (ترقيم المتن: ٩٠)، [ص ٩٢](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=92) (ترقيم المتن: ٩١) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «\begin{defn}[قطع] الـ\emph{قطع} $\alpha$ هو كل مقطع ابتدائي حقيقي غير خالٍ من الأعداد النسبية لا عنصر أعظم له. أي إن $\alpha$ قطع إذا وفقط إذا: \begin{enumerate} \item \emph{غير خالٍ وحقيقي}: $\emptyset \neq \alpha \subsetneq \Rat$ \item \emph{ابتدائي}: لكل…».
+  - **العربية التراثية:** [السطر ١٢](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/sets-functions-relations/arithmetization/cuts.tex#L12)؛ الطبعة التراثية: [ص ٨٧](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=87) (ترقيم المتن: ٨٦)، [ص ٨٨](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=88) (ترقيم المتن: ٨٧) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «تدل خاصية الاكتمال، في جوهرها، على أن كل نقطة $\alpha$ من المستقيم الحقيقي تفصل ما على جانبيها فصلًا تامًّا: فهي $\alpha$ أصغر حد علوي للجانب الأدنى، وهي $\alpha$ أكبر حد سفلي للجانب الأعلى. ومن هنا اقترح ديديكند، في \emph{بناء} الأعداد الحقيقية من النسبية،…».
+
+## لانهائية بحسب ديديكند
+
+الأصل الإنجليزي: `Dedekind infinite`. معرّف القرار: `retro-0005-0050:emphasis:b39b4ce3bb915303`.
+
+**المعنى المقصود:** مجموعة لانهائية بمعنى ديديكند: توجد دالة متباينة منها إلى جزء حقيقي منها، أو تقابل مع جزء حقيقي.
+
+**سبب الاختيار:** «لانهائية بحسب ديديكند» وصف دقيق ومقروء، لكنه ليس تركيبا اسميا مؤسسيا مشهودا في المعجم المفحوص. ينبغي الحفاظ على تمييزه من اللانهاية العادية في السياقات التي لا تقبل الاختيار.
+
+**سؤال مفتوح:** ما الصيغة العربية القياسية التي تميز Dedekind-infinite عن infinite بلا افتراضات إضافية؟
+
+**كل وقوع مسجل لهذا القرار:**
+
+- **OLP-0050 — فندق هيلبرت، وقوع ١:**
+  - **الأصل:** [السطر ٦١](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/infinite/hilberts-hotel.tex#L61). الشاهد المسجل: «A set $A$ is \emph{Dedekind infinite} iff there is !!a{injection}».
+  - **العربية المعيارية:** [السطر ٥٩](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/sets-functions-relations/infinite/hilberts-hotel.tex#L59)؛ الطبعة الدولية: [ص ١٠٤](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=104) (ترقيم المتن: ١٠٣) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ١٠٤](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=104) (ترقيم المتن: ١٠٣) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «تكون المجموعة $A$ \emph{لانهائية بحسب ديديكند} إذا وفقط إذا وجدت».
+  - **العربية التراثية:** [السطر ٤٣](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/sets-functions-relations/infinite/hilberts-hotel.tex#L43)؛ الطبعة التراثية: [ص ١٠٠](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=100) (ترقيم المتن: ٩٩) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «المجموعة $A$ \emph{لانهائية بحسب ديديكند} إذا وفقط إذا وجدت !!a{injection} من~$A$ إلى جزء حقيقي من~$A$. أي يوجد $o \in A$ وتوجد !!a{injection} $f \colon A \to A$ تحقق $o \notin \ran{f}$.».
+
+## معرّفة
+
+الأصل الإنجليزي: `defined`. معرّف القرار: `retro-0005-0050:emphasis:a693fe3424484268`.
+
+**المعنى المقصود:** كون قيمة الدالة الجزئية موجودة عند حجة معينة، في مقابل undefined.
+
+**سبب الاختيار:** «معرّفة» تؤدي تقابل defined/undefined مباشرة وتنسجم مع تأنيث «الدالة أو القيمة» في السياق.
+
+**سؤال مفتوح:** هل يحفظ اختيار «معرّفة» معنى المصطلح الإنجليزي «defined» في المواضع المبيّنة، أم يُفضَّل أحد البدائل المسجلة؟
+
+**كل وقوع مسجل لهذا القرار:**
+
+- **OLP-0026 — الدوال الجزئية، وقوع ١:**
+  - **الأصل:** [السطر ٢٤](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/functions/partial-functions.tex#L24). الشاهد المسجل: «\emph{defined}, and otherwise \emph{undefined}. If $f(x)$ is defined,».
+  - **العربية المعيارية:** [السطر ٢٤](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/sets-functions-relations/functions/partial-functions.tex#L24)؛ الطبعة الدولية: [ص ٦٠](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=60) (ترقيم المتن: ٥٩) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٦٠](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=60) (ترقيم المتن: ٥٩) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «\emph{معرّفة}، وإلا فهي \emph{غير معرّفة}. وإذا كانت قيمة $f(x)$ معرّفة،».
+  - **العربية التراثية:** [السطر ٢٣](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/sets-functions-relations/functions/partial-functions.tex#L23)؛ الطبعة التراثية: [ص ٥٧](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=57) (ترقيم المتن: ٥٦) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «\emph{معرّفة}، وإلا كانت \emph{غير معرّفة}. ونكتب في الحال الأولى،».
+
+## اشتقاق
+
+الأصل الإنجليزي: `derivation`. معرّف القرار: `retro-0005-0050:shared-token:77f0e6464a52a837`.
+
+**المعنى المقصود:** اشتقاق صوري في نسق استنتاج: شجرة أو سلسلة من تطبيقات القواعد تؤدي إلى صيغة ختامية.
+
+**سبب الاختيار:** «اشتقاق» يطابق المدخل المؤسسي، وتذكر مادته معنى إجرائية تستنتج صيغة؛ وهذا هو المعنى البرهاني المقصود لا المشتقة التفاضلية.
+
+**سؤال مفتوح:** هل يحفظ اختيار «اشتقاق» معنى المصطلح الإنجليزي «derivation» في المواضع المبيّنة، أم يُفضَّل أحد البدائل المسجلة؟
+
+**كل وقوع مسجل لهذا القرار:**
+
+- **OLP-0018 — الأشجار، وقوع ١:**
+  - **الأصل:** [السطر ١٦](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/relations/trees.tex#L16). الشاهد المسجل: «many !!{derivation} systems also take the form of finite trees.».
+  - **العربية المعيارية:** [السطر ١٥](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/sets-functions-relations/relations/trees.tex#L15)؛ الطبعة الدولية: [ص ٤٩](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=49) (ترقيم المتن: ٤٨) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٤٩](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=49) (ترقيم المتن: ٤٨) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «!!{derivation}s في كثير من أنساق !!{derivation} أيضًا صورة أشجار منتهية.».
+  - **العربية التراثية:** [السطر ١٥](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/sets-functions-relations/relations/trees.tex#L15)؛ الطبعة التراثية: [ص ٤٧](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=47) (ترقيم المتن: ٤٦) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «كثير من أنساق !!{derivation} صورة أشجار منتهية.».
+
+## اشتقاقات
+
+الأصل الإنجليزي: `derivations`. معرّف القرار: `retro-0005-0050:shared-token:955ebac429a13ca4`.
+
+**المعنى المقصود:** جمع اشتقاق صوري في نسق استنتاج.
+
+**سبب الاختيار:** «اشتقاقات» هو جمع قياسي للمفرد المثبت «اشتقاق»، ويحافظ على عد البنى البرهانية المتعددة.
+
+**سؤال مفتوح:** هل يحفظ اختيار «اشتقاقات» معنى المصطلح الإنجليزي «derivations» في المواضع المبيّنة، أم يُفضَّل أحد البدائل المسجلة؟
+
+**كل وقوع مسجل لهذا القرار:**
+
+- **OLP-0018 — الأشجار، وقوع ١:**
+  - **الأصل:** [السطر ١٥](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/relations/trees.tex#L15). الشاهد المسجل: «of their decomposition into a syntax tree, while !!{derivation}s in».
+  - **العربية المعيارية:** [السطر ١٥](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/sets-functions-relations/relations/trees.tex#L15)؛ الطبعة الدولية: [ص ٤٩](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=49) (ترقيم المتن: ٤٨) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٤٩](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=49) (ترقيم المتن: ٤٨) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «!!{derivation}s في كثير من أنساق !!{derivation} أيضًا صورة أشجار منتهية.».
+  - **العربية التراثية:** [السطر ١٤](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/sets-functions-relations/relations/trees.tex#L14)؛ الطبعة التراثية: [ص ٤٧](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=47) (ترقيم المتن: ٤٦) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «!!{formula}s بتحليلها إلى شجر تركيبية، وتتخذ !!{derivation}s في».
+
+## طريقة كانتور القطرية
+
+الأصل الإنجليزي: `diagonal method`. معرّف القرار: `retro-0005-0050:emphasis:438f00bb75b3817e`.
+
+**المعنى المقصود:** طريقة كانتور القطرية التي تبني عنصرا يختلف عند الموضع n عن العنصر n في أي قائمة مفترضة.
+
+**سبب الاختيار:** «طريقة كانتور القطرية» تحافظ على الاسم الرياضي وتدعمها مادة المعجم «إجرائية كانتور القطرية». اختيار «طريقة» بدل «إجرائية» فرق أسلوبي لا دلالي.
+
+**سؤال مفتوح:** هل يحفظ اختيار «طريقة كانتور القطرية» معنى المصطلح الإنجليزي «diagonal method» في المواضع المبيّنة، أم يُفضَّل أحد البدائل المسجلة؟
+
+**كل وقوع مسجل لهذا القرار:**
+
+- **OLP-0033 — مجموعات Non-enumerable، وقوع ١:**
+  - **الأصل:** [السطر ٣٩](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/size-of-sets/non-enumerability.tex#L39). الشاهد المسجل: «using Cantor's \emph{diagonal method}. Given a list of !!{element}s».
+  - **العربية المعيارية:** [السطر ٤٢](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/sets-functions-relations/size-of-sets/non-enumerability.tex#L42)؛ الطبعة الدولية: [ص ٧١](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=71) (ترقيم المتن: ٧٠) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٧١](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=71) (ترقيم المتن: ٧٠) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «!!{surjective}. ويمكننا فعل ذلك باستعمال \emph{طريقة كانتور القطرية}.».
+  - **العربية التراثية:** [السطر ٢٥](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/sets-functions-relations/size-of-sets/non-enumerability.tex#L25)؛ الطبعة التراثية: [ص ٦٧](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=67) (ترقيم المتن: ٦٦) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «وطريق إثبات أن المجموعة غير الخالية !!{nonenumerable} أن ننفي إمكان تلك الدالة الشاملة؛ ومعناه أن عناصر~$A$ لا تستوعبها قائمة لا نهائية تمتد في جهة واحدة. ويكفينا لذلك أن نبين أن كل قائمة من !!{element}s~$A$ يفوتها عنصر على الأقل، أي إن الدالة $f\colon \Pos…».
+
+## طريقة كانتور القطرية؛ الاستدلال القطري؛ حجة قطرية
+
+الأصل الإنجليزي: `diagonal method; diagonalization; diagonal argument`. معرّف القرار: `locale-ar-chosen-3f4d969cf938a56c`.
+
+**المعنى المقصود:** أسرة من الحجج القطرية تبني عنصرًا خارج كل قائمة مفترضة بتغيير المدخل ذي الرتبة n في الكائن رقم n؛ وفي الشاهد الحي OLP-0279 تسمى الخطوة البرهانية «حجة قطرية»، لا عملية قطرنة مصفوفة في الجبر الخطي.
+
+**سبب الاختيار:** يشهد DAM «إجرائية كانتور القطرية»، فيثبت اسم كانتور والصفة القطرية ويقدّم «إجرائية» بديلًا مؤسسيًا لـ«طريقة». أما الوقوع الحي المسمى في هذا القرار فيقابل diagonal argument بـ«حجة قطرية». وبذلك يفيد إبقاء التمييز بين اسم الطريقة، واسم الحيلة البرهانية العامة، وعملية diagonalization؛ ولا يصح جعل «القطرنة» رأسًا وحيدًا قد يلتبس بقطرنة المصفوفات. لا يثبت الكانون المقروء «الاستدلال القطري» أو «حجة قطرية» حرفيًا، فتظل الأسرة قابلة للتصحيح.
+
+**سؤال مفتوح:** هل يحسن في هذه الطبعة تثبيت التقابل السياقي: «طريقة/إجرائية كانتور القطرية» لـdiagonal method/process، و«حجة قطرية» لـdiagonal argument، و«الاستدلال القطري» لـdiagonalization؟ أم يُفضّل توحيد بعضها، مع منع التباس «القطرنة» بقطرنة المصفوفات والمحافظة على آلية تغيير الحد القطري؟
+
+**كل وقوع مسجل لهذا القرار:**
+
+- **OLP-0279 — عدم قابلية القرار وعدم الاكتمال، وقوع ١:**
+  - **الأصل:** [السطر ١٦](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/incompleteness/introduction/undecidability.tex#L16). الشاهد المسجل: «relations. The proof is a diagonal argument similar to the proof of».
+  - **العربية المعيارية:** [السطر ١٥](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/incompleteness/introduction/undecidability.tex#L15)؛ الطبعة الدولية: [ص ٥٣٢](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=532) (ترقيم المتن: ٥٣١) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٥٣٣](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=533) (ترقيم المتن: ٥٣٢) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «!!{represents} جميع العلاقات !!{decidable}. والبرهان حجة قطرية تشبه».
+  - **العربية التراثية:** [السطر ١٦](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/incompleteness/introduction/undecidability.tex#L16)؛ الطبعة التراثية: [ص ٥٢٠](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=520) (ترقيم المتن: ٥١٩) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «من غير تلك الحوسبة. وطريقها حجة قطرية تشبه».
+
+## الرسم البياني الموجه
+
+الأصل الإنجليزي: `directed graph`. معرّف القرار: `retro-0005-0050:emphasis:7af8ae793506639b`.
+
+**المعنى المقصود:** رسم أو بيان G=(V,E) تكون فيه الحواف أزواجا مرتبة، أي لها اتجاه.
+
+**سبب الاختيار:** «الرسم البياني الموجه» واضح من تركيبه ومن التعريف المحلي، لكنه يختلف عن المدخل المؤسسي «بيان موجه». ولأن «الرسم البياني» قد يلتبس برسم دالة، ينبغي توحيد الأسرة بقرار موثق.
+
+**سؤال مفتوح:** هل يعتمد الكتاب «بيان موجه» وفق المعجم، أم يحتفظ بـ«رسم بياني موجه» بوصفه الاستعمال الأوضح للجمهور؟
+
+**كل وقوع مسجل لهذا القرار:**
+
+- **OLP-0017 — الرسوم البيانية، وقوع ١:**
+  - **الأصل:** [السطر ٢٥](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/relations/graphs.tex#L25). الشاهد المسجل: «A \emph{directed graph} $G = \tuple{V, E}$ is a set of».
+  - **العربية المعيارية:** [السطر ٢٣](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/sets-functions-relations/relations/graphs.tex#L23)؛ الطبعة الدولية: [ص ٤٨](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=48) (ترقيم المتن: ٤٧) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٤٨](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=48) (ترقيم المتن: ٤٧) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «\emph{الرسم البياني الموجه} $G = \tuple{V, E}$ يتألف من مجموعة من».
+  - **العربية التراثية:** [السطر ٢٢](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/sets-functions-relations/relations/graphs.tex#L22)؛ الطبعة التراثية: [ص ٤٦](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=46) (ترقيم المتن: ٤٥) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «\emph{الرسم البياني الموجه} هو $G = \tuple{V, E}$، حيث~$V$ مجموعة».
+
+## الرسم البياني الموجه
+
+الأصل الإنجليزي: `Directed graph`. معرّف القرار: `retro-0005-0050:named-defn:8dfb35211fe25c42`.
+
+**المعنى المقصود:** اسم تعريف رسمي للكائن G=(V,E) ذي الحواف المرتبة.
+
+**سبب الاختيار:** العنوان «الرسم البياني الموجه» متسق مع المتن الحالي، لكن المدخل الرسمي في المعجم «بيان موجه». ينبغي تعديل العنوان والمتن والجمع معا إن غيرت الأسرة.
+
+**سؤال مفتوح:** ما الرأس المعتمد لتعريف Directed graph: «البيان الموجه» أم «الرسم البياني الموجه»؟
+
+**كل وقوع مسجل لهذا القرار:**
+
+- **OLP-0017 — الرسوم البيانية، وقوع ١:**
+  - **الأصل:** [السطر ٢٤](https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/content/sets-functions-relations/relations/graphs.tex#L24). الشاهد المسجل: «\begin{defn}[Directed graph]».
+  - **العربية المعيارية:** [السطر ٢٢](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar/content/sets-functions-relations/relations/graphs.tex#L22)؛ الطبعة الدولية: [ص ٤٨](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf#page=48) (ترقيم المتن: ٤٧) (موضع السطر مطابق لصفحة القارئ)؛ طبعة المشرق: [ص ٤٨](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf#page=48) (ترقيم المتن: ٤٧) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «\begin{defn}[الرسم البياني الموجه]».
+  - **العربية التراثية:** [السطر ٢١](https://github.com/KokunoYumeto/OpenLogic-ar/blob/86a4a7c11c0a0289ade28cb8f96acbacf9c01844/source/locale/ar-classical/content/sets-functions-relations/relations/graphs.tex#L21)؛ الطبعة التراثية: [ص ٤٦](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf#page=46) (ترقيم المتن: ٤٥) (موضع السطر مطابق لصفحة القارئ). الشاهد المسجل: «\begin{defn}[الرسم البياني الموجه]».
