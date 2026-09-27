@@ -63,6 +63,7 @@ def page_parts(location: dict) -> tuple[list[str], int, int]:
     out = []
     exact = 0
     fallback = 0
+    unavailable = 0
     for page in pages:
         reader = reader_kind(page.get("reader", ""))
         if reader is None:
@@ -77,13 +78,20 @@ def page_parts(location: dict) -> tuple[list[str], int, int]:
         elif method == "unit-start-fallback":
             note = "صفحة بدء الوحدة فحسب، لا صفحة اللفظ المثبتة بالدقة"
             fallback += 1
+        elif method == "unavailable":
+            if page.get("pdf_pages"):
+                raise ValueError(f"Unavailable page record unexpectedly has pages: {location['location_id']}")
+            unavailable += 1
+            continue
         else:
             raise ValueError(f"Unexpected page evidence method: {method}")
         out.append(f"{LABELS[reader]}: {page_links(reader, page)} ({note})")
+    if unavailable and not out:
+        out.append("⚠ لم تثبت صفحة PDF لهذا الموضع؛ إحالة السطر أعلاه هي الإحالة الدقيقة المتاحة")
     return out, exact, fallback
 
 
-def decision_card(decision: dict) -> tuple[str, dict]:
+def decision_card(decision: dict, title_overrides: dict[str, str] | None = None) -> tuple[str, dict]:
     index_meta = decision["index_metadata"]
     surface = decision["review_display"]["chosen_arabic"]
     lines = [
@@ -105,7 +113,8 @@ def decision_card(decision: dict) -> tuple[str, dict]:
         if not group.get("human_review_included"):
             continue
         unit = group["unit"]
-        lines.append(f"- **{unit['unit_id']} — {unit['title']}، وقوع {east(group['occurrence_index'])}:**")
+        unit_title = (title_overrides or {}).get(unit["unit_id"], unit["title"])
+        lines.append(f"- **{unit['unit_id']} — {unit_title}، وقوع {east(group['occurrence_index'])}:**")
         for location in group["locations"]:
             if not location.get("human_review_included"):
                 continue
