@@ -45,10 +45,18 @@ def main() -> None:
     parser.add_argument("--xml", required=True, type=Path)
     parser.add_argument("--output", required=True, type=Path)
     parser.add_argument("--context-lines", type=int, default=3)
+    parser.add_argument("--queries-json", type=Path)
     args = parser.parse_args()
 
+    queries = (json.loads(args.queries_json.read_text(encoding="utf-8"))
+               if args.queries_json else DEFAULT_QUERIES)
+    if not isinstance(queries, dict) or not queries or not all(
+        isinstance(label, str) and isinstance(pattern, str)
+        for label, pattern in queries.items()
+    ):
+        raise ValueError("queries must be a nonempty string-to-regex object")
     compiled = {
-        label: re.compile(pattern, re.IGNORECASE) for label, pattern in DEFAULT_QUERIES.items()
+        label: re.compile(pattern, re.IGNORECASE) for label, pattern in queries.items()
     }
     hits: dict[str, list[dict[str, object]]] = {label: [] for label in compiled}
     object_index = -1
@@ -80,11 +88,11 @@ def main() -> None:
     payload = {
         "schema": "dam2018enar-selected-terminology-v1",
         "source": {
-            "path": str(args.xml.resolve()),
+            "file": args.xml.name,
             "bytes": args.xml.stat().st_size,
             "sha256": sha256(args.xml),
         },
-        "queries": DEFAULT_QUERIES,
+        "queries": queries,
         "hits": hits,
     }
     args.output.parent.mkdir(parents=True, exist_ok=True)
