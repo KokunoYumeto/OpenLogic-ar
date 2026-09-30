@@ -116,13 +116,13 @@ def card_map(include_revisions: bool = True) -> dict[str, str]:
         path = BASE / revision["review_card"]
         assert path.is_file() and identifier in path.read_text(encoding="utf-8")
         mapping[identifier] = revision["review_card"]
-    rechecks = function_definition_rechecks()
-    for item in rechecks.get("records", []):
-        identifier = item["decision_id"]
-        assert identifier in mapping
-        path = BASE / rechecks["review_card"]
-        assert path.is_file() and identifier in path.read_text(encoding="utf-8")
-        mapping[identifier] = rechecks["review_card"]
+    for rechecks in recheck_layers():
+        for item in rechecks.get("records", []):
+            identifier = item["decision_id"]
+            assert identifier in mapping
+            path = BASE / rechecks["review_card"]
+            assert path.is_file() and identifier in path.read_text(encoding="utf-8")
+            mapping[identifier] = rechecks["review_card"]
     return mapping
 
 
@@ -164,6 +164,39 @@ def function_definition_rechecks() -> dict:
     return value
 
 
+def contextual_rechecks() -> dict:
+    path = TERM / "SOL6_CONTEXTUAL_RECHECK_20260930.json"
+    if not path.exists():
+        return {}
+    value = json.loads(path.read_bytes())
+    assert value["schema"] == "openlogic-arabic-contextual-recheck-v1"
+    assert value["source_index_sha256"] == EXPECTED
+    assert value["model"] == "GPT-6.1 Sol" and value["effort"] == "Ultra"
+    assert len(value["records"]) == len({r["decision_id"] for r in value["records"]}) == 5
+    assert value["source_edit_applied"] is False
+    assert sum(len(r["checked_occurrences"]) for r in value["records"]) == 21
+    return value
+
+
+def proof_quantification_rechecks() -> dict:
+    path = TERM / "SOL6_PROOF_QUANTIFICATION_RECHECK_20260930.json"
+    if not path.exists():
+        return {}
+    value = json.loads(path.read_bytes())
+    assert value["schema"] == "openlogic-arabic-contextual-recheck-v1"
+    assert value["source_index_sha256"] == EXPECTED
+    assert value["model"] == "GPT-6.1 Sol" and value["effort"] == "Ultra"
+    assert len(value["records"]) == len({r["decision_id"] for r in value["records"]}) == 3
+    assert value["source_edit_applied"] is True
+    assert sum(len(r["checked_occurrences"]) for r in value["records"]) == 69
+    assert len(value["source_transitions"]) == 1
+    return value
+
+
+def recheck_layers() -> tuple[dict, ...]:
+    return (function_definition_rechecks(), contextual_rechecks(), proof_quantification_rechecks())
+
+
 def note_map() -> dict[str, dict]:
     notes = {}
     files = ([TERM / "ARABIC_PRIORITY_30_20260926.json",
@@ -184,9 +217,10 @@ def note_map() -> dict[str, dict]:
     for item in review_corrections().get("records", []):
         assert item["decision_id"] in notes, "Correction must replace an existing note"
         notes[item["decision_id"]] = item
-    for item in function_definition_rechecks().get("records", []):
-        assert item["decision_id"] in notes
-        notes[item["decision_id"]] = item
+    for rechecks in recheck_layers():
+        for item in rechecks.get("records", []):
+            assert item["decision_id"] in notes
+            notes[item["decision_id"]] = item
     return notes
 
 
@@ -229,8 +263,11 @@ def main() -> None:
     links = card_map()
     notes = note_map()
     witness_revision = {r["decision_id"]: r for r in source_witness_corrections().get("records", [])}
-    rechecks = function_definition_rechecks()
-    recheck_ids = {r["decision_id"] for r in rechecks.get("records", [])}
+    recheck_documents = {}
+    for rechecks in recheck_layers():
+        for row in rechecks.get("records", []):
+            assert row["decision_id"] not in recheck_documents
+            recheck_documents[row["decision_id"]] = rechecks
     decisions = []
     seen = set()
     for decision in iter_decisions(INDEX):
@@ -268,14 +305,21 @@ def main() -> None:
             decisions[-1]["revision_canon_limit_ar"] = note["canon_limit_ar"]
             decisions[-1]["revision_confidence_ar"] = note["confidence_ar"]
             decisions[-1]["revision_source_identity_note_ar"] = (
-                rechecks if decision_id in recheck_ids else review_corrections())["source_identity_note_ar"]
-        if decision_id in recheck_ids:
+                recheck_documents.get(decision_id) or review_corrections())["source_identity_note_ar"]
+        if decision_id in recheck_documents:
+            rechecks = recheck_documents[decision_id]
             decisions[-1]["revision_canon_evidence"] = note["canon_evidence"]
             decisions[-1]["revision_canon_sources"] = rechecks["canon_sources"]
             decisions[-1]["revision_register_comparison"] = rechecks["register_comparison"]
             decisions[-1]["revision_alternatives_ar"] = note["alternatives_ar"]
             decisions[-1]["revision_checked_occurrences"] = note["checked_occurrences"]
             decisions[-1]["revision_recording_mode"] = rechecks["recording_mode"]
+            if "context_bindings" in note:
+                decisions[-1]["revision_context_bindings"] = note["context_bindings"]
+            if rechecks.get("source_transitions"):
+                decisions[-1]["revision_source_transitions"] = rechecks["source_transitions"]
+                decisions[-1]["revision_body_corrections_ar"] = rechecks["body_corrections_ar"]
+                decisions[-1]["revision_source_edit_applied"] = rechecks["source_edit_applied"]
         if decision_id in witness_revision:
             decisions[-1]["source_witness_revision"] = witness_revision[decision_id]
     assert len(decisions) == len(seen) == len(links) == 1095
@@ -304,7 +348,10 @@ def main() -> None:
                      "بمستوى جهد Ultra؛ وصيغت المراجعات العربية اللاحقة والربط والتحقق "
                      "بواسطة OpenAI Codex — GPT-6 Sol، بمستوى جهد Ultra. "
                      "وصُحِّحت شروح قابلية المحورة والتجاوز والمختزلات وإحالاتها بواسطة OpenAI Codex — GPT-6.1 Sol، "
-                     "بمستوى جهد Ultra؛ وقوبلت ثلاثة تعريفات للدوال بشواهد رياضية عربية جديدة بالمستوى نفسه. "
+                     "بمستوى جهد Ultra؛ وقوبلت ثلاثة تعريفات للدوال وخمسة اختيارات أخرى في سياقاتها "
+                     "بالمستوى نفسه، وثلاثة قرارات في المتغير المميّز والروابط والمكمّمات؛ "
+                     "نُقل تصحيحان إلى المصدر المعياري المشترك، ولم يصدر بعد قارئ جديد بهما؛ "
+                     "توضح البطاقة فرق المصدر المصحح من الصفحات السابقة. فجوات الشاهد ظاهرة. "
                      "لم تقع مراجعة بشرية شاملة؛ كل اختيار قابل للتصحيح.\n")
     historic = BASE / "COMPLETE_DIRECTORY_RECEIPT_20260927_HISTORICAL.json"
     previous_receipt = BASE / "COMPLETE_DIRECTORY_RECEIPT.json"

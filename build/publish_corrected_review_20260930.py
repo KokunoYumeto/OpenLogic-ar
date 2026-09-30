@@ -33,6 +33,7 @@ TITLE='المنطق المفتوح بالعربية: تصحيح خمسة شرو�
 COLD_RECEIPT='CORRECTED_REVIEW_SOURCE_COLD_REPLAY_20260930.json'
 READABLE=False
 FUNCTION_RECHECK=False
+CONTEXT_RECHECK=False
 STRUCTURAL_RECEIPT='COMPLETE_INDEPENDENT_READBACK_20260930_R3.json'
 NOTES=(f'## دليل المراجعة العربية المصحح\n\n[ابدأ من هنا]({ENTRY}) · [القائمة الكاملة]({FULL})\n\n'
        'يضم الدليل ١٠٩٥ اختيارًا مسجلًا مع ألفاظها ومواضعها وتعليلاتها وأسئلة للمختصين. '
@@ -119,6 +120,17 @@ def selected_files():
         paths.extend('build/'+name for name in (
             'render_function_definition_recheck_20260930.py','tests/test_function_definition_recheck_20260930.py',
             'verify_readable_review_public_20260930.py'))
+    if CONTEXT_RECHECK:
+        paths.extend((base/name).as_posix() for name in (
+            'SOL6_CONTEXTUAL_CHOICES_AR.md','SOL6_PROOF_QUANTIFICATION_AR.md',
+            'CONTEXTUAL_SOURCE_READBACK_20260930.json','PROOF_QUANTIFICATION_SOURCE_READBACK_20260930.json',
+            'COMPLETE_INDEPENDENT_READBACK_20260930_R5.json'))
+        paths.extend(p.relative_to(ROOT).as_posix() for p in (BASE/'reexamination-source-proof-quantification').rglob('*') if p.is_file())
+        paths.extend('evidence/classical/terminology/'+name for name in (
+            'SOL6_CONTEXTUAL_RECHECK_20260930.json','SOL6_PROOF_QUANTIFICATION_RECHECK_20260930.json'))
+        paths.extend('build/'+name for name in (
+            'render_contextual_recheck_20260930.py','tests/test_contextual_recheck_20260930.py'))
+        paths.append('source/locale/ar/content/first-order-logic/natural-deduction/quantifier-rules.tex')
     require(len(paths)==len(set(paths)) and all((ROOT/p).is_file() for p in paths),'Selected source inventory differs')
     return paths
 
@@ -153,10 +165,11 @@ def github_verify():
     print(json.dumps({'status':'PASS_ANONYMOUS_GITHUB_READBACK','files':len(checked)}))
 
 
-def configure(readable=False,function_recheck=False):
-    global READABLE,FUNCTION_RECHECK,TAG,GITHUB,ENTRY,FULL,STAGE,STATE,TITLE,NOTES,COLD_RECEIPT,REPLACED,STRUCTURAL_RECEIPT
+def configure(readable=False,function_recheck=False,context_recheck=False):
+    global READABLE,FUNCTION_RECHECK,CONTEXT_RECHECK,TAG,GITHUB,ENTRY,FULL,STAGE,STATE,TITLE,NOTES,COLD_RECEIPT,REPLACED,STRUCTURAL_RECEIPT
     READABLE=readable
     FUNCTION_RECHECK=function_recheck
+    CONTEXT_RECHECK=context_recheck
     if readable:
         TAG='ar-openlogic-translation-review-readable-20260930'
         GITHUB=f'https://github.com/{REMOTE}/releases/tag/{TAG}'
@@ -211,19 +224,57 @@ def configure(readable=False,function_recheck=False):
                'كل اختيار قابل للتصحيح، ولا يدعي التعليل اللاحق استعادة دافع المترجم الأول.\n\n'
                '[PDF التراثي ولاتخ المباشر وحزمة المصدر](https://github.com/KokunoYumeto/OpenLogic-ar/releases/tag/ar-olp-0722-classical-eastern-rtl-fn-unicode-20260928) · '
                '[EPUB للطبعات الثلاث ومصادره](https://github.com/KokunoYumeto/OpenLogic-ar/releases/tag/ar-olp-0722-epub-provenance-correction-20260930).\n')
+    if context_recheck:
+        require(readable and function_recheck,'Context assessment preserves the previous checked layers')
+        TAG='ar-openlogic-context-and-proof-review-20260930'
+        GITHUB=f'https://github.com/{REMOTE}/releases/tag/{TAG}'
+        ENTRY=f'https://github.com/{REMOTE}/blob/{TAG}/expert-review/2026-09-26-final-page-review/INDEX_AR.md'
+        FULL=ENTRY.replace('INDEX_AR.md','DIRECTORY_READABLE_AR.md')
+        STAGE=ROOT/'output/release/review-context-and-proof-20260930'
+        STATE=ROOT/'evidence/publication/review-context-and-proof-20260930'
+        STRUCTURAL_RECEIPT='COMPLETE_INDEPENDENT_READBACK_20260930_R6.json'
+        COLD_RECEIPT='CORRECTED_REVIEW_SOURCE_COLD_REPLAY_20260930_R4.json'
+        REPLACED=NAMES
+        TITLE='المنطق المفتوح بالعربية: ثمانية اختيارات في سياقاتها وتصحيح مصدر قواعد المكمّمات'
+        contextual=ENTRY.replace('INDEX_AR.md','SOL6_CONTEXTUAL_CHOICES_AR.md')
+        proof=ENTRY.replace('INDEX_AR.md','SOL6_PROOF_QUANTIFICATION_AR.md')
+        NOTES=(f'## اختيارات الترجمة العربية في سياقاتها\n\n[ابدأ من هنا]({ENTRY}) · [القائمة الكاملة]({FULL})\n\n'
+            f'[خمسة اختيارات في سياقاتها]({contextual}) · [المتغير المميّز والروابط والمكمّمات]({proof}). '
+            'يحفظ الدليل جميع القرارات الـ١٠٩٥ ووقوعاتها. تضيف المقابلة ثمانية قرارات وتسعين '
+            'موضعًا مسجلًا، مع أسباب الإبقاء والتصحيح والشواهد المقروءة والبدائل وفجواتها. '
+            'صُحح تعليل المسرد غير المثبت ونطاق شرح المتغير المميّز، وفُصل التعداد المجموعاتي '
+            'عن الحسابي والرابط المنطقي عن رابطة الحمل. شاهد السور بديل موثق، لا إثبات '
+            'للفظ المكمّم. خمس إحالات إنجليزية بلا سطر قوبلت بسياقات محددة، مع بيان الشرح '
+            'غير الحرفي والاستدراكات بدل اختلاق لفظ غائب.\n\n'
+            '**المصدر المصحح ليس قارئًا جديدًا بعد:** نُقل إلى المصدر المعياري المشترك '
+            'استثناء فروض حذف الوجودي المؤقتة، وقيد إغلاق حد الاستبدال؛ الصيغ وأشجار البرهان '
+            'الأربعة لم تتغير. المصدر الموافق متاح في الالتزام وحزمة المراجعة، لكن PDFs '
+            'وEPUBs المنشورة ما زالت النسخ السابقة ولا تشمل هذين التعديلين. '
+            'تظل مصادرها الكاملة ولاتخ المباشر والملفات السابقة متاحة.\n\n'
+            'تضم حزمة المصدر البيانات والبطاقات والبرامج والشواهد المحددة، وأعادت الحزمة '
+            'الفعلية بناء سبعة ملفات كاملة وجميع صفحات العرض القصير حرفيًا. '
+            'لا تضم المعجم أو البحث المحمي أو النصوص التراثية الكاملة. '
+            'هذه دفعة مجمعة، لا إعادة بناء أو نشر للكتاب بعد كل تغيير منفرد.\n\n'
+            'المقابلة والتعليل اللاحق والتصحيح المحدد: OpenAI Codex — GPT-6.1 Sol، جهد Ultra. '
+            'التعليلات اللاحقة والفهرسة الموروثة: OpenAI Codex — GPT-6 Sol، جهد Ultra. '
+            'الترجمة الأقدم: OpenAI Codex — GPT-5.6 Sol، جهد Ultra. '
+            'إعادة فحص فترة GPT-6 Sol كلها ما زالت جارية؛ لا دعوى بتصديق كل اختيار، '
+            'أو استعادة دوافع المترجم الأول، أو مراجعة بشرية. كل اختيار مفتوح للتصحيح.\n')
     git_publication.ROOT=ROOT; git_publication.STATE=STATE/'GITHUB_TRANSACTION.json'
     git_publication.READBACK=STATE/'GITHUB_COMMIT_READBACK.json'
     git_publication.PACKAGE=BASE/'COMPLETE_SOURCE_PACKAGE_RECEIPT.json'
-    git_publication.EXPECTED_PARENT=('9badef2df05c3e3c4a33708536f7f93566df3731' if function_recheck else
+    git_publication.EXPECTED_PARENT=('a0f19b713fcc9a199e8bc71e16d171e1a858ba2f' if context_recheck else
+        '9badef2df05c3e3c4a33708536f7f93566df3731' if function_recheck else
         '603ce2e93af4a7a31a54447689c8b79785677ceb' if readable else
         'c480a848dc403f05f6a810bea8542c6873779877')
     git_publication.COMMIT_MESSAGE='تصحيح شروح وإحالات محددة في فهرس مراجعة الترجمة العربية'
     git_publication.ALLOW_CHANGED=set(selected_files()); git_publication.selected_files=selected_files
     git_publication.READBACK_STATUS='PASS_ANONYMOUS_GITHUB_CORRECTED_REVIEW_EXACT_FILES'
-    zenodo.STATE_DIR=STATE; zenodo.PREVIOUS=23050440 if function_recheck else 23050173; zenodo.SUCCESSOR=True
+    zenodo.STATE_DIR=STATE; zenodo.PREVIOUS=23051728 if context_recheck else 23050440 if function_recheck else 23050173; zenodo.SUCCESSOR=True
     zenodo.EXPECTED_PREDECESSOR_FILES=100 if function_recheck else 98
     zenodo.REPLACEMENT_NAMES=REPLACED; zenodo.assets=assets
-    zenodo.VERSION=('OLP-0722-AR-FUNCTION-DEFINITIONS-REVIEW-20260930' if function_recheck else
+    zenodo.VERSION=('OLP-0722-AR-CONTEXT-PROOF-REVIEW-20260930' if context_recheck else
+                   'OLP-0722-AR-FUNCTION-DEFINITIONS-REVIEW-20260930' if function_recheck else
                    'OLP-0722-AR-REVIEW-READABLE-20260930' if readable
                    else 'OLP-0722-AR-REVIEW-CORRECTIONS-20260930')
     zenodo.release.STAGE=STAGE; zenodo.release.GITHUB=GITHUB
@@ -231,7 +282,32 @@ def configure(readable=False,function_recheck=False):
     def metadata(draft):
         value=dict(draft['metadata']); value.pop('doi',None); value.pop('prereserve_doi',None)
         value.update(version=zenodo.VERSION,publication_date='2026-09-30',language='ara',access_right='open')
-        if function_recheck:
+        if context_recheck:
+            contextual=ENTRY.replace('INDEX_AR.md','SOL6_CONTEXTUAL_CHOICES_AR.md')
+            proof=ENTRY.replace('INDEX_AR.md','SOL6_PROOF_QUANTIFICATION_AR.md')
+            value['title']='المنطق المفتوح بالعربية: الطبعات الثلاث وسجل اختيارات الترجمة المصحح'
+            value['description']=(f'<div lang="ar" dir="rtl"><h2>{TITLE}</h2>'
+                f'<p><a href="{ENTRY}">ابدأ من هنا</a> · <a href="{FULL}">القائمة الكاملة للمراجعة</a> · '
+                f'<a href="{contextual}">خمسة اختيارات في سياقاتها</a> · <a href="{proof}">المتغير المميّز والروابط والمكمّمات</a>.</p>'
+                '<p>يحفظ الدليل جميع القرارات الـ١٠٩٥ ووقوعاتها؛ أضيفت مقابلة ثمانية قرارات '
+                'وتسعين موضعًا مسجلًا مع أسباب الاختيار والشواهد المقروءة والبدائل والثقة وحدودها. '
+                'صُحح تعليل غير مثبت للمسرد ونطاق شرح المتغير المميّز، ووثقت فجوات الاسم '
+                'بدل إخفائها. خمس إحالات إنجليزية كانت بلا سطر ربطت بسياقات محددة، '
+                'مع تمييز اللفظ الموجود من الشرح أو الاستدراك غير الحرفي. '
+                'أعادت حزمة المصدر الفعلية إنتاج سبعة ملفات كاملة وصفحات القراءة القصيرة حرفيًا.</p>'
+                '<p><strong>فرق المصدر المصحح من القارئ المنشور:</strong> نُقل تصحيحان من التراثية '
+                'إلى المصدر المعياري للدولية والمشرق: استثناء الفروض المؤقتة في حذف الوجودي '
+                'وإغلاق حد الاستبدال. أشجار البرهان والصيغ لم تتغير. المصدر المصحح متاح '
+                'مع البطاقة وحزمة المراجعة، لكن ملفاتPDF وEPUB هنا ما زالت النسخ السابقة '
+                'ولا تشمل هذين التعديلين الجديدين. مصادرها الكاملة ولاتخ المباشر وكل التاريخ '
+                'المنشور باقية، ومعاينة القراءة هيPDF التراثي الجاري.</p>'
+                '<p>المقابلة والتعليل الجديد والتصحيح المحدد: OpenAI Codex — GPT-6.1 Sol، جهد Ultra. '
+                'التعليلات اللاحقة والفهرسة الموروثة: OpenAI Codex — GPT-6 Sol، جهد Ultra. '
+                'الترجمة الأقدم: OpenAI Codex — GPT-5.6 Sol، جهد Ultra. '
+                'إعادة فحص الفترة كلها ما زالت جارية؛ ليست هذه شهادة على كل الاختيارات '
+                'ولا استعادة لدوافع تاريخية ولا مراجعة بشرية. كل اختيار مفتوح للتصحيح.</p>'
+                f'<p><a href="{GITHUB}">الملفات ومصادر المراجعة علىGitHub</a>.</p></div>'+value.get('description',''))
+        elif function_recheck:
             card=ENTRY.replace('INDEX_AR.md','SOL6_FUNCTION_DEFINITIONS_AR.md')
             value['description']=(f'<div lang="ar" dir="rtl"><h2>{TITLE}</h2>'
                 f'<p><a href="{ENTRY}">ابدأ من هنا</a> · <a href="{FULL}">القائمة الكاملة للمراجعة</a> · '
@@ -352,7 +428,8 @@ if __name__=='__main__':
     parser.add_argument('action',choices=actions)
     parser.add_argument('--readable',action='store_true')
     parser.add_argument('--function-recheck',action='store_true')
-    args=parser.parse_args(); configure(args.readable or args.function_recheck,args.function_recheck)
+    parser.add_argument('--context-recheck',action='store_true')
+    args=parser.parse_args(); configure(args.readable or args.function_recheck or args.context_recheck,args.function_recheck or args.context_recheck,args.context_recheck)
     require(not(args.readable and not args.function_recheck and args.action=='prepare'),'Readable repair reuses the existing draft; use revise-draft')
     try: actions[args.action]()
     except requests.RequestException as error:

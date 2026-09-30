@@ -41,11 +41,16 @@ def include_files() -> list[Path]:
         "SOL6_FUNCTION_DEFINITIONS_AR.md",
         "FUNCTION_DEFINITION_SOURCE_READBACK_20260930.json",
         "COMPLETE_INDEPENDENT_READBACK_20260930_R4.json",
+        "SOL6_CONTEXTUAL_CHOICES_AR.md", "CONTEXTUAL_SOURCE_READBACK_20260930.json",
+        "SOL6_PROOF_QUANTIFICATION_AR.md", "PROOF_QUANTIFICATION_SOURCE_READBACK_20260930.json",
+        "COMPLETE_INDEPENDENT_READBACK_20260930_R5.json",
+        "COMPLETE_INDEPENDENT_READBACK_20260930_R6.json",
     ]
     files = [BASE / name for name in top]
     for directory in BASE.iterdir():
         if directory.is_dir() and (directory.name.startswith("arabic-")
-                                   or directory.name in {"global-caption-decisions", "reexamination-source", "readable-review"}):
+                                   or directory.name.startswith("reexamination-source")
+                                   or directory.name in {"global-caption-decisions", "readable-review"}):
             files.extend(path for path in directory.rglob("*") if path.is_file())
     for path in TERM.iterdir():
         if path.is_file() and path.name.endswith("_20260927.json") and (
@@ -62,6 +67,9 @@ def include_files() -> list[Path]:
     files.append(TERM / "SOL6_SOURCE_WITNESS_CORRECTIONS_20260930.json")
     files.append(TERM / "SOL6_COMMENT_ONLY_WITNESS_CENSUS_20260930.json")
     files.append(TERM / "SOL6_FUNCTION_DEFINITIONS_RECHECK_20260930.json")
+    files.append(TERM / "SOL6_CONTEXTUAL_RECHECK_20260930.json")
+    files.append(TERM / "SOL6_PROOF_QUANTIFICATION_RECHECK_20260930.json")
+    files.append(ROOT / "source/locale/ar/content/first-order-logic/natural-deduction/quantifier-rules.tex")
     files.append(ROOT / "LICENSE.md")
     build = ROOT / "build"
     for path in build.glob("*.py"):
@@ -80,10 +88,12 @@ def include_files() -> list[Path]:
                     "render_readable_review_20260930.py",
                     "verify_readable_review_20260930.py",
                     "render_function_definition_recheck_20260930.py",
+                    "render_contextual_recheck_20260930.py",
                 }):
             files.append(path)
     files.append(build / "tests/test_readable_review_20260930.py")
     files.append(build / "tests/test_function_definition_recheck_20260930.py")
+    files.append(build / "tests/test_contextual_recheck_20260930.py")
     assert len(files) == len(set(files))
     assert all(path.is_file() for path in files)
     return sorted(files, key=lambda path: path.relative_to(ROOT).as_posix())

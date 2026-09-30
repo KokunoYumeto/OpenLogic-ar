@@ -13,7 +13,7 @@ ROOT=Path(__file__).resolve().parents[1]
 BASE=ROOT/'expert-review/2026-09-26-final-page-review'
 ARCHIVE=BASE/'90-ARABIC-REVIEW-COMPLETE-SOURCE.zip'
 RECEIPT=BASE/'CORRECTED_REVIEW_SOURCE_COLD_REPLAY_20260930.json'
-FILES=('SOL6_CORRECTIONS_AR.md','SOL6_SOURCE_REFERENCES_AR.md','SOL6_FUNCTION_DEFINITIONS_AR.md','DIRECTORY_AR.md','DECISION_RECORD_AR.jsonl.gz')
+FILES=('SOL6_CORRECTIONS_AR.md','SOL6_SOURCE_REFERENCES_AR.md','SOL6_FUNCTION_DEFINITIONS_AR.md','SOL6_CONTEXTUAL_CHOICES_AR.md','SOL6_PROOF_QUANTIFICATION_AR.md','DIRECTORY_AR.md','DECISION_RECORD_AR.jsonl.gz')
 
 
 def digest(path):
@@ -49,6 +49,8 @@ def main(receipt_path=None):
             ('correct_added_source_witnesses_20260930.py',['generate']),
             ('render_sol6_review_corrections_20260930.py',[]),
             ('render_function_definition_recheck_20260930.py',[]),
+            ('render_contextual_recheck_20260930.py',[]),
+            ('render_contextual_recheck_20260930.py',['--ledger','evidence/classical/terminology/SOL6_PROOF_QUANTIFICATION_RECHECK_20260930.json']),
             ('assemble_complete_arabic_review.py',[]),
             ('verify_complete_arabic_review.py',[]),
             ('render_readable_review_20260930.py',[]),
