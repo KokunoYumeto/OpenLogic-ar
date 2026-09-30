@@ -42,7 +42,7 @@ def clean(value: object, limit: int | None = None) -> str:
     return (result[:limit - 1] + "…" if limit and len(result) > limit else result)
 
 
-def card_map() -> dict[str, str]:
+def card_map(include_revisions: bool = True) -> dict[str, str]:
     mapping = {}
 
     def add(ids: list[str], link: str) -> None:
@@ -100,7 +100,48 @@ def card_map() -> dict[str, str]:
     global_doc = json.loads((BASE / "global-caption-decisions/DECISIONS.json").read_text(encoding="utf-8"))
     add([item["decision_id"] for item in global_doc["records"]],
         "global-caption-decisions/CARDS.md")
+    if not include_revisions:
+        return mapping
+    witnesses = source_witness_corrections()
+    for item in witnesses.get("records", []):
+        identifier = item["decision_id"]
+        assert identifier in mapping
+        path = BASE / witnesses["review_card"]
+        assert path.is_file() and identifier in path.read_text(encoding="utf-8")
+        mapping[identifier] = witnesses["review_card"]
+    revision = review_corrections()
+    for item in revision.get("records", []):
+        identifier = item["decision_id"]
+        assert identifier in mapping, "Correction cannot introduce an unrecorded decision"
+        path = BASE / revision["review_card"]
+        assert path.is_file() and identifier in path.read_text(encoding="utf-8")
+        mapping[identifier] = revision["review_card"]
     return mapping
+
+
+def review_corrections() -> dict:
+    path = TERM / "SOL6_REEXAMINATION_CORRECTIONS_20260930.json"
+    if not path.exists():
+        return {}
+    value = json.loads(path.read_text(encoding="utf-8"))
+    assert value["schema"] == "openlogic-arabic-review-evidenced-corrections-v1"
+    assert value["source_index_sha256"] == EXPECTED
+    assert value["model"] == "GPT-6.1 Sol" and value["effort"] == "Ultra"
+    assert len({r["decision_id"] for r in value["records"]}) == len(value["records"])
+    return value
+
+
+def source_witness_corrections() -> dict:
+    path = TERM / "SOL6_SOURCE_WITNESS_CORRECTIONS_20260930.json"
+    if not path.exists():
+        return {}
+    value = json.loads(path.read_bytes())
+    assert value["schema"] == "openlogic-arabic-source-witness-corrections-v1"
+    assert value["source_index_sha256"] == EXPECTED
+    assert value["model"] == "GPT-6.1 Sol" and value["effort"] == "Ultra"
+    assert len(value["records"]) == len({r["decision_id"] for r in value["records"]}) == 32
+    assert sum(len(r["removed_non_supporting_pointers"]) for r in value["records"]) == 59
+    return value
 
 
 def note_map() -> dict[str, dict]:
@@ -119,6 +160,9 @@ def note_map() -> dict[str, dict]:
     global_doc = json.loads((BASE / "global-caption-decisions/DECISIONS.json").read_text(encoding="utf-8"))
     for item in global_doc["records"]:
         assert item["decision_id"] not in notes
+        notes[item["decision_id"]] = item
+    for item in review_corrections().get("records", []):
+        assert item["decision_id"] in notes, "Correction must replace an existing note"
         notes[item["decision_id"]] = item
     return notes
 
@@ -161,6 +205,7 @@ def main() -> None:
     assert sha(INDEX) == EXPECTED
     links = card_map()
     notes = note_map()
+    witness_revision = {r["decision_id"]: r for r in source_witness_corrections().get("records", [])}
     decisions = []
     seen = set()
     for decision in iter_decisions(INDEX):
@@ -192,6 +237,14 @@ def main() -> None:
             "global_source_bindings": decision.get("global_source_bindings", []),
             "open_to_correction": True,
         })
+        if "source_bindings" in note:
+            decisions[-1]["revision_source_bindings"] = note["source_bindings"]
+            decisions[-1]["revision_target_bindings"] = note["target_bindings"]
+            decisions[-1]["revision_canon_limit_ar"] = note["canon_limit_ar"]
+            decisions[-1]["revision_confidence_ar"] = note["confidence_ar"]
+            decisions[-1]["revision_source_identity_note_ar"] = review_corrections()["source_identity_note_ar"]
+        if decision_id in witness_revision:
+            decisions[-1]["source_witness_revision"] = witness_revision[decision_id]
     assert len(decisions) == len(seen) == len(links) == 1095
     decisions.sort(key=lambda row: (row["english_term"].casefold(), row["decision_id"]))
     directory = [
@@ -217,7 +270,12 @@ def main() -> None:
     directory.append("\nأُنجزت الترجمة والتعليلات الموروثة بواسطة OpenAI Codex — GPT-5.6 Sol، "
                      "بمستوى جهد Ultra؛ وصيغت المراجعات العربية اللاحقة والربط والتحقق "
                      "بواسطة OpenAI Codex — GPT-6 Sol، بمستوى جهد Ultra. "
-                     "لم تقع مراجعة بشرية شاملة؛ كل اختيار قابل للتصحيح.\n")
+                     "وصُحِّحت شروح قابلية المحورة والتجاوز والمختزلات وإحالاتها بواسطة OpenAI Codex — GPT-6.1 Sol، "
+                     "بمستوى جهد Ultra. لم تقع مراجعة بشرية شاملة؛ كل اختيار قابل للتصحيح.\n")
+    historic = BASE / "COMPLETE_DIRECTORY_RECEIPT_20260927_HISTORICAL.json"
+    previous_receipt = BASE / "COMPLETE_DIRECTORY_RECEIPT.json"
+    if previous_receipt.exists() and not historic.exists():
+        historic.write_bytes(previous_receipt.read_bytes())
     (BASE / "DIRECTORY_AR.md").write_text("\n".join(directory), encoding="utf-8", newline="\n")
     machine_path = BASE / "DECISION_RECORD_AR.jsonl.gz"
     with machine_path.open("wb") as sink:

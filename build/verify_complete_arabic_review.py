@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import gzip
+import argparse
 import hashlib
 import json
 from pathlib import Path
@@ -25,7 +26,7 @@ def sha(path: Path) -> str:
     return h.hexdigest().upper()
 
 
-def main() -> None:
+def main(output_path: Path | None = None) -> None:
     assert sha(FROZEN) == FROZEN_SHA
     frozen = {d["decision_id"]: d for d in iter_decisions(FROZEN)
               if d["index_metadata"]["human_index_included"]}
@@ -92,11 +93,15 @@ def main() -> None:
         "all_reviewable_ids_exactly_once": True,
         "all_frozen_occurrences_preserved": True,
         "all_card_files_and_id_bindings_exist": True,
+        "scope": "Structural IDs, bytes, Arabic fields and inherited occurrence bindings only; not semantic or canon approval of every explanation.",
     }
-    (BASE / "COMPLETE_INDEPENDENT_READBACK.json").write_text(
-        json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
+    if output_path is not None:
+        with output_path.open("x", encoding="utf-8", newline="\n") as destination:
+            destination.write(json.dumps(result, ensure_ascii=False, indent=2) + "\n")
     print(json.dumps(result, ensure_ascii=True))
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--output", type=Path, help="Fresh receipt path; historical receipts are never overwritten")
+    main(parser.parse_args().output)

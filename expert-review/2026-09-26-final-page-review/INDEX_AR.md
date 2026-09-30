@@ -10,10 +10,16 @@
 
 ## نصوص القراءة
 
-- [الطبعة المعيارية بالترقيم الدولي — PDF](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf) · [EPUB](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-complete-epubs-20260925/22_OpenLogic-Arabic-Complete-722-international.epub)
-- [الطبعة المعيارية بالترقيم المشرقي — PDF](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf) · [EPUB](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-complete-epubs-20260925/25_OpenLogic-Arabic-Complete-722-machrek.epub)
-- [الطبعة التراثية — PDF](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf) · [EPUB](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-complete-epubs-20260925/28_OpenLogic-Arabic-Complete-722-classical.epub)
+صُحِّحت [خمسة شروح وإحالاتها](SOL6_CORRECTIONS_AR.md): قيد قابلية الحساب في تعريف قابلية المحورة؛ ومعنى مبرهنة التجاوز في هذه الوحدة؛ والمختزلات والتوسيعات في نظرية النماذج، التي خلطتها البطاقة بحساب لامبدا. تحفظ الترجمة المعاني الرياضية الصحيحة بالفعل؛ التصحيح للتعليلات لا لمتن الكتاب. واستُبدلت [٥٩ إحالة إلى تعليقات أسماء الأقسام والفصول، في ٣٢ قرارًا، بمقاطع مقروءة من الأصل](SOL6_SOURCE_REFERENCES_AR.md). بقيت البطاقات السابقة محفوظة للشهادة على تاريخ التصحيح. هذه إعادة مقابلة محددة، لا تصديق شامل على بقية التعليلات أو الشواهد المعجمية.
+
+- [الطبعة المعيارية بالترقيم الدولي — PDF](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf) · [EPUB](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-epub-provenance-correction-20260930/22_OpenLogic-Arabic-Complete-722-international.epub)
+- [الطبعة المعيارية بالترقيم المشرقي — PDF](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf) · [EPUB](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-epub-provenance-correction-20260930/25_OpenLogic-Arabic-Complete-722-machrek.epub)
+- [الطبعة التراثية المصححة — PDF](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-fn-unicode-20260928/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf) · [EPUB](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-epub-provenance-correction-20260930/28_OpenLogic-Arabic-Complete-722-classical.epub)
+
+تشير بعض روابط الصفحات داخل البطاقات إلى قارئ ٢٦ سبتمبر المحفوظ بوصفه شاهدًا للإصدار الأول من الفهرس. قارئ PDF أعلاه هو التصحيح المنشور في ٢٨ سبتمبر؛ وقورنت وجهات الصفحات في الملفين مباشرةً: كلاهما ١١٤٥ صفحة، ولم تتغير صفحة أيٍّ من الوجهات المسماة وعددها ٩٧٩١. لذلك تصلح أرقام الصفحات المسجلة للعثور في القارئ المصحح أيضًا. لا يُفهم من هذا الفحص أن EPUB القديم يتضمن كل تصحيحات PDF اللاحقة.
 
 توجد المصادر القابلة للتحرير المقابلة لكل قارئ بجوار ملفات القراءة في إصدارات GitHub، وفي [سلسلة الحفظ على Zenodo](https://doi.org/10.5281/zenodo.21921850). وتوجد شيفرة بناء هذا الفهرس وبطاقاته وملفات التحقق في مستودع الإصدار وأرشيف مصادر المراجعة المرفق به.
 
 الترجمة والصياغة والتصحيحات والتعليلات الموروثة من عمل OpenAI Codex — GPT-5.6 Sol، بمستوى جهد Ultra. صيغت التعليلات العربية اللاحقة، والتدقيق المعجمي، وربط المواضع، والفهرس الحالي بواسطة OpenAI Codex — GPT-6 Sol، بمستوى جهد Ultra. التعليل اللاحق لا يُقدَّم على أنه دافع المترجم الأول. لم تقع مراجعة بشرية شاملة، وكل اختيار قابل للتصحيح.
+
+صُحِّح رابط القارئ، وقورنت وجهات الصفحات، بواسطة OpenAI Codex — GPT-6.1 Sol، بمستوى جهد Ultra، في ٣٠ سبتمبر ٢٠٢٦. هذه مقارنة محددة للملفين، لا شهادة على سلامة جميع تعليلات الفهرس أو جميع تفاصيل العرض.

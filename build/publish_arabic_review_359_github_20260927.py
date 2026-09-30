@@ -87,7 +87,7 @@ def prepare() -> None:
         changed = []
         for name in paths:
             local = ROOT / name
-            oid = git("hash-object", "-w", "--", name, env=env)
+            oid = git("hash-object", "-w", "--no-filters", "--", name, env=env)
             try:
                 prior = git("rev-parse", f"{EXPECTED_PARENT}:{name}", env=env)
             except subprocess.CalledProcessError:
@@ -101,7 +101,7 @@ def prepare() -> None:
         tree = git("write-tree", env=env)
         commit = git("commit-tree", tree, "-p", EXPECTED_PARENT, "-m",
                      COMMIT_MESSAGE, env=env)
-    names = git("diff-tree", "--no-commit-id", "--name-only", "-r", commit).splitlines()
+    names = git("diff-tree", "--no-commit-id", "--name-only", "-r", commit, "--", *paths).splitlines()
     if set(names) != {item["path"] for item in changed} or not changed:
         raise RuntimeError("Prepared commit diff does not match selected bytes")
     state = {"status": "PREPARED", "parent": EXPECTED_PARENT, "commit": commit,
