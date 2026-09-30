@@ -34,6 +34,11 @@ COLD_RECEIPT='CORRECTED_REVIEW_SOURCE_COLD_REPLAY_20260930.json'
 READABLE=False
 FUNCTION_RECHECK=False
 CONTEXT_RECHECK=False
+CURRENT_MSA=False
+ASSET_INPUTS={}
+ORIGINAL_NAMES=NAMES
+CURRENT_MSA_SOURCE_ROOT=None
+CURRENT_PDF_ROOT=ROOT/'output/pdf/msa-quantifier-reference-items-20260930'
 STRUCTURAL_RECEIPT='COMPLETE_INDEPENDENT_READBACK_20260930_R3.json'
 NOTES=(f'## دليل المراجعة العربية المصحح\n\n[ابدأ من هنا]({ENTRY}) · [القائمة الكاملة]({FULL})\n\n'
        'يضم الدليل ١٠٩٥ اختيارًا مسجلًا مع ألفاظها ومواضعها وتعليلاتها وأسئلة للمختصين. '
@@ -55,6 +60,8 @@ NOTES=(f'## دليل المراجعة العربية المصحح\n\n[ابدأ �
 
 
 def stage():
+    if CURRENT_MSA:
+        check_current_msa()
     fresh=json.loads((BASE/STRUCTURAL_RECEIPT).read_bytes())
     cold=json.loads((BASE/COLD_RECEIPT).read_bytes())
     require(fresh['all_frozen_occurrences_preserved'] and fresh['verified_machine_records']==1095,'Fresh structural checks differ')
@@ -66,13 +73,14 @@ def stage():
             identity(BASE/'DECISION_RECORD_AR.jsonl.gz')['sha256'].upper()==fresh['machine_record_sha256'],
             'Fresh directory/ledger identities differ')
     require(not STAGE.exists() and not STATE.exists(),'Existing publication state must be inspected')
-    hashes=[identity(BASE/name) for name in NAMES[:-1]]
+    hashes=[{**identity(ASSET_INPUTS.get(name,BASE/name)),'file':name} for name in NAMES[:-1]]
     (BASE/NAMES[-1]).write_text(''.join(r['sha256']+'  '+r['file']+'\n' for r in hashes),encoding='utf-8',newline='\n')
     STAGE.mkdir(parents=True); STATE.mkdir(parents=True)
     rows=[]
     for name in NAMES:
-        row=identity(BASE/name); rows.append({'name':name,'bytes':row['bytes'],'sha256':row['sha256']})
-        shutil.copy2(BASE/name,STAGE/name)
+        source=ASSET_INPUTS.get(name,BASE/name)
+        row=identity(source); rows.append({'name':name,'bytes':row['bytes'],'sha256':row['sha256']})
+        shutil.copy2(source,STAGE/name)
     zenodo.save(STATE/'STAGE.json',{'status':'PASS_CURRENT_CORRECTED_REVIEW_STAGE','files':rows})
     (STATE/'RELEASE_NOTES_AR.md').write_text(NOTES,encoding='utf-8',newline='\n')
     print(json.dumps({'status':'PASS_CURRENT_CORRECTED_REVIEW_STAGE','files':len(rows)}))
@@ -87,7 +95,7 @@ def assets():
 
 def selected_files():
     base=BASE.relative_to(ROOT)
-    paths=[(base/name).as_posix() for name in NAMES]
+    paths=[(base/name).as_posix() for name in NAMES if name not in ASSET_INPUTS]
     paths.extend((base/name).as_posix() for name in (
         'README_BUILD_AR.md','COMPLETE_DIRECTORY_RECEIPT.json','COMPLETE_SOURCE_PACKAGE_RECEIPT.json',
         'COMPLETE_DIRECTORY_RECEIPT_20260927_HISTORICAL.json','COMPLETE_INDEPENDENT_READBACK_20260930_R3.json',
@@ -131,6 +139,30 @@ def selected_files():
         paths.extend('build/'+name for name in (
             'render_contextual_recheck_20260930.py','tests/test_contextual_recheck_20260930.py'))
         paths.append('source/locale/ar/content/first-order-logic/natural-deduction/quantifier-rules.tex')
+    if CURRENT_MSA:
+        paths.extend((base/name).as_posix() for name in (
+            'SOL6_FREE_BOUND_VARIABLE_AR.md','FREE_BOUND_VARIABLE_SOURCE_READBACK_20260930.json',
+            STRUCTURAL_RECEIPT,COLD_RECEIPT))
+        paths.extend(p.relative_to(ROOT).as_posix() for p in (BASE/'reexamination-source-free-bound-variable').rglob('*') if p.is_file())
+        paths.extend('evidence/classical/terminology/'+name for name in (
+            'SOL6_FREE_BOUND_VARIABLE_RECHECK_20260930.json','SOL6_ARABIC_REFERENCE_LOCALIZATION_20260930.json'))
+        paths.extend(['README.md','source/locale/ar/open-logic-locale.sty',
+            'source/locale/ar/open-logic-complete-ar.tex','source/locale/ar/open-logic-closure-supplement-ar.tex',
+            'evidence/provenance/openlogic-control/CLOSURE_MANIFEST.csv',
+            'evidence/provenance/openlogic-control/MSA_CLOSURE_MANIFEST_REBIND_20260930_FORMULA_ANNOTATED.json',
+            'evidence/msa-source-successor-20260930/EFFECTIVE_BUILD_MANIFEST.json'])
+        import prepare_editable_source_deliverables as source_export
+        paths.extend(p.relative_to(ROOT).as_posix() for p in (ROOT/source_export.CURRENT_MSA_GRAPH_ROOT).glob('*.json'))
+        paths.extend('build/'+name for name in (
+            'BUILD_DUAL_NOTATION.ps1','BUILD_DUAL_NOTATION_INNER.ps1','profile_checkpoint.py',
+            'repair_rtl_link_rects_letter_ar.py','qa_dual_notation_pdfs.py','rebind_msa_closure_manifest.py',
+            'prepare_editable_source_deliverables.py','assemble_complete_722_tex.py',
+            'tests/test_letter_rtl_link_repair.py','tests/test_msa_build_route.py',
+            'tests/test_rebind_msa_closure_manifest.py','tests/test_prepare_editable_source_deliverables.py'))
+        # Rendered books and their complete ZIPs are release assets, not large
+        # Git blobs. All changed modular sources and reconstruction code are
+        # committed here; the exact full editable bundles remain direct assets.
+        paths=list(dict.fromkeys(paths))
     require(len(paths)==len(set(paths)) and all((ROOT/p).is_file() for p in paths),'Selected source inventory differs')
     return paths
 
@@ -353,6 +385,121 @@ def configure(readable=False,function_recheck=False,context_recheck=False):
     zenodo.metadata_for=metadata
 
 
+def check_current_msa():
+    require(CURRENT_MSA_SOURCE_ROOT is not None,'Explicit current source stage is required')
+    cold=json.loads((CURRENT_MSA_SOURCE_ROOT/'COLD_REPLAY_COMPARISON.json').read_bytes())
+    require(cold['status']=='PASS_BYTE_IDENTICAL_COLD_REPLAY' and cold['files_compared']==4,
+            'Current editable source cold replay differs')
+    for row in cold['files']:
+        require(identity(CURRENT_MSA_SOURCE_ROOT/'primary/files'/row['file'])==
+                {'file':row['file'],'bytes':row['bytes'],'sha256':row['sha256']},
+                'Current editable source stage changed')
+    qa=json.loads((CURRENT_PDF_ROOT/'OPENLOGIC_ar_DUAL_NOTATION_PDF_QA.json').read_bytes())
+    require(qa.get('status')=='PASS','Current component PDF checks are incomplete')
+    from profile_checkpoint import source_identity
+    digest,_=source_identity(ROOT)
+    for profile,pdf_name in (
+        ('international','00_OPENLOGIC_ar_COMPLETE_722_UNIT_READER_INTERNATIONAL_NOTATION_OLP-0722.pdf'),
+        ('machrek','01_OPENLOGIC_ar_COMPLETE_722_UNIT_READER_MACHREK_NOTATION_OLP-0722.pdf')):
+        checkpoint=json.loads((CURRENT_PDF_ROOT/f'PROFILE_CHECKPOINT_{profile}.json').read_bytes())
+        require(checkpoint['status']=='PASS' and checkpoint['source_tree_sha256']==digest,
+                'Current compiled source identity differs')
+        assembly=json.loads((CURRENT_PDF_ROOT/pdf_name.replace('.pdf','.assembly.json')).read_bytes())
+        pdf=identity(CURRENT_PDF_ROOT/pdf_name)
+        require(assembly['status']=='PASS' and assembly['output']['sha256'].lower()==pdf['sha256']
+                and assembly['output']['bytes']==pdf['bytes'],'Current complete PDF assembly differs')
+
+
+def configure_current_msa(source_root):
+    """One finite, paired current-reader/review release in the existing lineage."""
+    global CURRENT_MSA,CURRENT_MSA_SOURCE_ROOT,ASSET_INPUTS,NAMES,REPLACED
+    global TAG,GITHUB,ENTRY,FULL,STATE,STAGE,TITLE,NOTES,STRUCTURAL_RECEIPT,COLD_RECEIPT
+    CURRENT_MSA=True;CURRENT_MSA_SOURCE_ROOT=source_root.resolve()
+    CURRENT_MSA_SOURCE_ROOT.relative_to((ROOT/'tmp').resolve())
+    TAG='ar-openlogic-current-msa-and-review-20260930'
+    GITHUB=f'https://github.com/{REMOTE}/releases/tag/{TAG}'
+    ENTRY=f'https://github.com/{REMOTE}/blob/{TAG}/expert-review/2026-09-26-final-page-review/INDEX_AR.md'
+    FULL=ENTRY.replace('INDEX_AR.md','DIRECTORY_READABLE_AR.md')
+    STATE=ROOT/'evidence/publication/current-msa-and-review-20260930'
+    STAGE=ROOT/'output/release/current-msa-and-review-20260930'
+    STRUCTURAL_RECEIPT='COMPLETE_INDEPENDENT_READBACK_20260930_R8.json'
+    COLD_RECEIPT='CORRECTED_REVIEW_SOURCE_COLD_REPLAY_20260930_R8.json'
+    stems=('MSA_INTERNATIONAL','MSA_MACHREK')
+    books=[];ASSET_INPUTS={}
+    for i,stem in enumerate(stems):
+        published=(f'{i*3:02d}_OPENLOGIC_ar_R3_{stem}.pdf',
+                   f'{i*3+1:02d}_OPENLOGIC_ar_R3_{stem}.tex',
+                   f'{i*3+2:02d}_OPENLOGIC_ar_R3_{stem}_SOURCES.zip')
+        component=('00_OPENLOGIC_ar_COMPLETE_722_UNIT_READER_INTERNATIONAL_NOTATION_OLP-0722.pdf'
+                   if i==0 else '01_OPENLOGIC_ar_COMPLETE_722_UNIT_READER_MACHREK_NOTATION_OLP-0722.pdf')
+        ASSET_INPUTS.update(zip(published,(CURRENT_PDF_ROOT/component,
+            CURRENT_MSA_SOURCE_ROOT/f'primary/files/OPENLOGIC_ar_R3_{stem}.tex',
+            CURRENT_MSA_SOURCE_ROOT/f'primary/files/OPENLOGIC_ar_R3_{stem}_SOURCES.zip')))
+        books.extend(published)
+    NAMES=tuple(books)+ORIGINAL_NAMES;REPLACED=NAMES
+    TITLE='المنطق المفتوح بالعربية: القارئان المعياريان المصححان وسجل المراجعة الكامل'
+    NOTES=(f'## القارئان المعياريان المصححان وسجل الاختيارات\n\n[ابدأ من هنا]({ENTRY}) · [القائمة الكاملة]({FULL})\n\n'
+        'تتضمن ملفات PDF الحالية تصحيحي قواعد المكممات: استثناء الفرض المؤقت الذي يسقطه حذف '
+        'الوجودي، وإغلاق حد الاستبدال. عُرّبت أدوات وصل الإحالات ولفظ بنودها. لم تُغير قواعد '
+        'البرهان أو المعاني الرياضية. يعرض ترميز المشرق أرقام الصيغ بالأشكال العربية الهندية؛ '
+        'أرقام الصفحات والفصول باقية بالأشكال الدولية في هذا المسار الموروث. '
+        'لكل قارئ ملف لاتخ تراكمي مباشر وحزمة المصدر الكاملة '
+        'المقابلة، بما فيها الخطوط والصور والمراجع وبرامج البناء.\n\n'
+        'يحفظ دليل المراجعة جميع القرارات الـ١٠٩٥ ووقوعاتها وتعليلاتها. أضيف تصحيح وصف شاهد '
+        'المتغير الحر والمقيد: المواضع الثلاثة المسجلة تثبت الحرية فقط، والتعريف المساند '
+        'يستعمل مقيد لا مربوط. بقيت فجوة الشاهد المستقل ظاهرة، ولم يتغير متن هذه الفقرة. '
+        'أعادت حزمة المراجعة الفعلية بناء العرض والبيانات وصفحات القراءة حرفيًا.\n\n'
+        'الترجمة الموروثة: OpenAI Codex — GPT-5.6 Sol، جهد Ultra. التعليلات والفهرسة اللاحقة '
+        'وإكمال EPUB السابق: OpenAI Codex — GPT-6 Sol، جهد Ultra. التصحيح المحدد والمقابلة '
+        'الجديدة وإعادة بناء هذين القارئين: OpenAI Codex — GPT-6.1 Sol، جهد Ultra. '
+        'لم تقع مراجعة بشرية شاملة، وإعادة فحص فترة GPT-6 Sol كلها ما زالت جارية. '
+        'كل اختيار مفتوح للتصحيح.\n\n'
+        '**EPUB ليس هذا PDF:** الكتب الإلكترونية المحفوظة لا تتضمن تصحيحي المتن الجديدين. '
+        'القارئ التراثي وملف لاتخ المباشر ومصدره الكامل وجميع الإصدارات السابقة باقية؛ '
+        'لم يعاد بناء التراثية في هذه الدفعة.\n\n')
+    labels=('القارئ الدولي PDF','لاتخ الدولي الكامل','حزمة مصادر الدولي',
+            'قارئ المشرق PDF','لاتخ المشرق الكامل','حزمة مصادر المشرق')
+    for label,name in zip(labels,books):
+        NOTES+=f'- [{label}](https://github.com/{REMOTE}/releases/download/{TAG}/{name})\n'
+    git_publication.STATE=STATE/'GITHUB_TRANSACTION.json'
+    git_publication.READBACK=STATE/'GITHUB_COMMIT_READBACK.json'
+    git_publication.EXPECTED_PARENT='3902c93a8fb8448b299044564a4c875080c7e042'
+    git_publication.COMMIT_MESSAGE='تحديث القارئين المعياريين ومصادرهما وسجل مراجعة الاختيارات'
+    git_publication.ALLOW_CHANGED=set(selected_files());git_publication.selected_files=selected_files
+    zenodo.STATE_DIR=STATE;zenodo.PREVIOUS=23055816;zenodo.SUCCESSOR=True
+    zenodo.EXPECTED_PREDECESSOR_FILES=100;zenodo.REPLACEMENT_NAMES=REPLACED
+    zenodo.PREVIEW=books[0];zenodo.ORDER_PREFIX=tuple(books)
+    zenodo.VERSION='OLP-0722-AR-CURRENT-MSA-REVIEW-20260930'
+    zenodo.release.STAGE=STAGE;zenodo.release.GITHUB=GITHUB
+    def metadata(draft):
+        value=dict(draft['metadata']);value.pop('doi',None);value.pop('prereserve_doi',None)
+        value.update(title=TITLE,version=zenodo.VERSION,publication_date='2026-09-30',language='ara',access_right='open')
+        # Do not append superseded current-status claims from the predecessor.
+        value['description']=(f'<div lang="ar" dir="rtl"><h2>{TITLE}</h2>'
+            f'<p><a href="{ENTRY}">ابدأ من هنا</a> · <a href="{FULL}">القائمة الكاملة للمراجعة</a>.</p>'
+            '<p>تتضمن الطبعتان المعياريتان الكاملتان تصحيحي قواعد المكمّمات والإحالات العربية. '
+            'كل ملف PDF يضم الوحدات الـ٧٢٢، ويرافقه ملف لاتخ كامل مباشر وحزمة المصدر الدقيق '
+            'مع الخطوط والصور والمراجع وبرامج البناء. المعاينة للقارئ الدولي المصحح. '
+            'ترميز المشرق يحول أرقام الصيغ فقط؛ أرقام الصفحات والفصول باقية بالأشكال الدولية. '
+            'يحفظ الدليل جميع القرارات الـ١٠٩٥ ووقوعاتها وأسبابها وأسئلة المراجع، مع تصحيح '
+            'نطاق شاهد المتغير الحر والمقيد وإظهار فجوات التوثيق.</p>'
+            '<p>الترجمة الموروثة: OpenAI Codex — GPT-5.6 Sol، جهد Ultra. التعليلات والفهرسة '
+            'اللاحقة وإكمال EPUB السابق: OpenAI Codex — GPT-6 Sol، جهد Ultra. '
+            'التصحيح المحدد والمقابلة الجديدة وإعادة بناء القارئين المعياريين: '
+            'OpenAI Codex — GPT-6.1 Sol، جهد Ultra. إعادة فحص الفترة كلها ما زالت جارية؛ '
+            'لا دعوى بمراجعة بشرية شاملة أو تصديق جميع الاختيارات. كل اختيار مفتوح للتصحيح.</p>'
+            '<p>التراثية ومصدرها والإصدارات السابقة محفوظة. EPUB يظل بالمتن المجمد السابق '
+            'ولا يتضمن تصحيحي المعيارية الجديدين؛ ليس نسخة مطابقة للقارئين الجديدين.</p>'
+            f'<p><a href="{GITHUB}">تنزيل القارئين ولاتخ المباشر وحزم المصادر ودليل المراجعة</a>.</p></div>')
+        related=list(value.get('related_identifiers',[]))
+        for url in (ENTRY,FULL,GITHUB):
+            if not any(r.get('identifier')==url for r in related):
+                related.append({'identifier':url,'relation':'isSupplementTo','scheme':'url'})
+        value['related_identifiers']=related
+        return value
+    zenodo.metadata_for=metadata
+
+
 def revise_existing_draft():
     require(READABLE,'This repair must use the explicitly selected readable edition')
     rows=assets(); zenodo.checked_github_receipt(rows)
@@ -429,7 +576,10 @@ if __name__=='__main__':
     parser.add_argument('--readable',action='store_true')
     parser.add_argument('--function-recheck',action='store_true')
     parser.add_argument('--context-recheck',action='store_true')
-    args=parser.parse_args(); configure(args.readable or args.function_recheck or args.context_recheck,args.function_recheck or args.context_recheck,args.context_recheck)
+    parser.add_argument('--current-msa-source',type=Path,
+                        help='Checked four-file current-MSA source export under repo/tmp; selects the paired current-reader release.')
+    args=parser.parse_args(); configure(args.readable or args.function_recheck or args.context_recheck or bool(args.current_msa_source),args.function_recheck or args.context_recheck or bool(args.current_msa_source),args.context_recheck or bool(args.current_msa_source))
+    if args.current_msa_source:configure_current_msa(args.current_msa_source)
     require(not(args.readable and not args.function_recheck and args.action=='prepare'),'Readable repair reuses the existing draft; use revise-draft')
     try: actions[args.action]()
     except requests.RequestException as error:

@@ -193,8 +193,24 @@ def proof_quantification_rechecks() -> dict:
     return value
 
 
+def free_bound_variable_recheck() -> dict:
+    path = TERM / "SOL6_FREE_BOUND_VARIABLE_RECHECK_20260930.json"
+    if not path.exists():
+        return {}
+    value = json.loads(path.read_bytes())
+    assert value["schema"] == "openlogic-arabic-contextual-recheck-v1"
+    assert value["source_index_sha256"] == EXPECTED
+    assert value["model"] == "GPT-6.1 Sol" and value["effort"] == "Ultra"
+    assert len(value["records"]) == 1
+    assert value["records"][0]["decision_id"] == "RETRO0051-0100-free-bound-variable"
+    assert value["source_edit_applied"] is False
+    assert len(value["records"][0]["checked_occurrences"]) == 3
+    return value
+
+
 def recheck_layers() -> tuple[dict, ...]:
-    return (function_definition_rechecks(), contextual_rechecks(), proof_quantification_rechecks())
+    return (function_definition_rechecks(), contextual_rechecks(),
+            proof_quantification_rechecks(), free_bound_variable_recheck())
 
 
 def note_map() -> dict[str, dict]:
@@ -350,8 +366,9 @@ def main() -> None:
                      "وصُحِّحت شروح قابلية المحورة والتجاوز والمختزلات وإحالاتها بواسطة OpenAI Codex — GPT-6.1 Sol، "
                      "بمستوى جهد Ultra؛ وقوبلت ثلاثة تعريفات للدوال وخمسة اختيارات أخرى في سياقاتها "
                      "بالمستوى نفسه، وثلاثة قرارات في المتغير المميّز والروابط والمكمّمات؛ "
-                     "نُقل تصحيحان إلى المصدر المعياري المشترك، ولم يصدر بعد قارئ جديد بهما؛ "
-                     "توضح البطاقة فرق المصدر المصحح من الصفحات السابقة. فجوات الشاهد ظاهرة. "
+                     "وصُحح نطاق شاهد المتغير الحر والمقيد، مع إبقاء فجوة الشاهد المستقل ظاهرة؛ "
+                     "نُقل تصحيحان إلى المصدر المعياري المشترك؛ تحفظ البطاقة حالة المصدر عند المقابلة الأولى، "
+                     "ويبين مدخل القراءة حالة القارئين الحالية. الصفحات الموروثة ليست قياسًا جديدًا. فجوات الشاهد ظاهرة. "
                      "لم تقع مراجعة بشرية شاملة؛ كل اختيار قابل للتصحيح.\n")
     historic = BASE / "COMPLETE_DIRECTORY_RECEIPT_20260927_HISTORICAL.json"
     previous_receipt = BASE / "COMPLETE_DIRECTORY_RECEIPT.json"

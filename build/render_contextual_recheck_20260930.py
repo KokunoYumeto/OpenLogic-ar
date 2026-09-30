@@ -92,7 +92,10 @@ def sha(raw: bytes) -> str:
 
 
 def frozen_records(ids=None) -> list[dict]:
-    if sha(INDEX.read_bytes()).upper() != EXPECTED_INDEX:
+    digest=hashlib.sha256()
+    with INDEX.open('rb') as stream:
+        for chunk in iter(lambda:stream.read(1024*1024),b''):digest.update(chunk)
+    if digest.hexdigest().upper() != EXPECTED_INDEX:
         raise ValueError('Frozen index identity changed')
     return [r for r in iter_decisions(INDEX) if r['decision_id'] in (set(ids) if ids is not None else CHOICES)]
 
@@ -117,7 +120,7 @@ def prepare(data: dict) -> dict:
     prior_raw=prior_path.read_bytes()
     if sha(prior_raw)!=out['previous_ledger_sha256']:
         raise ValueError('Previous authored explanations changed')
-    previous={r['decision_id']:r for r in json.loads(prior_raw)['records']}
+    previous={r['decision_id']:r for r in json.loads(prior_raw)[out.get('previous_records_field','records')]}
     for row in out['records']:
         original=originals[row['decision_id']]
         row['original_occurrences']=copy.deepcopy(original['index_metadata']['occurrences'])
@@ -135,6 +138,11 @@ def prepare(data: dict) -> dict:
                 lo,hi=out['personally_read_ranges'][relative][['english','msa','classical'].index(kind)]
                 row['source_bindings' if kind=='english' else 'target_bindings'].append(witness(path,lo,hi,kind=='english'))
         row['fresh_location_bindings']={}
+        if 'context_read_ranges' in row:
+            row['context_bindings']=[]
+            for spec in row['context_read_ranges']:
+                w=witness(spec['logical_path'],spec['line_start'],spec['line_end'],spec['source_kind']=='english')
+                w['source_kind']=spec['source_kind'];row['context_bindings'].append(w)
         for loc in (l for g in row['original_occurrences'] for l in g['locations']):
             spec=row.get('fresh_location_specs',{}).get(loc['location_id'])
             if not spec:continue
@@ -307,11 +315,14 @@ def render(data: dict) -> str:
     lines=[data.get('heading_ar','# مقابلة خمسة اختيارات في سياقاتها — ٣٠ سبتمبر ٢٠٢٦'),'','[مدخل المراجعة](INDEX_AR.md) · [القائمة الكاملة](DIRECTORY_READABLE_AR.md)','',data['scope_ar'],'',
         'OpenAI Codex — GPT-6.1 Sol، جهد Ultra: المقابلة والتعليل الجديدان. التعليلات السابقة لـOpenAI Codex — GPT-6 Sol، جهد Ultra، محفوظة في [الدفعة السابقة]('+data.get('previous_review_card','BATCH_31_38_AR.md')+'). لا تنسب المقابلة إلى مراجع بشري أو إلى دوافع تاريخية مجهولة.','',data['source_identity_note_ar'],'']
     if data.get('source_transitions'):
-        lines+=['## التصحيحات في المتن','',data['body_corrections_ar'],'']
+        lines+=['## التصحيحات في المتن','',
+                'الحالة الآتية محفوظة من وقت المقابلة الأولى قبل إعادة بناء القارئين؛ '
+                'راجع [مدخل القراءة](INDEX_AR.md) لحالة PDF وEPUB الحالية.','',
+                data['body_corrections_ar'],'']
         for t in data['source_transitions']:
             lines+=['- [المصدر المصحح الموافق لهذه البطاقة]('+source_url(data,'msa',t['logical_path'],57,59)+')؛ السابق SHA-256 `'+t['before_sha256']+'`؛ المصحح `'+t['after_sha256']+'`.','']
     for row in data['records']:
-        lines+=['## '+row['surface_ar'],'','معرّف القرار: `'+row['decision_id']+'`.','','**أين وما الذي يراجع؟** '+row['expert_question_ar'],'','**المعنى:** '+row['sense_ar'],'','**لماذا أُبقي؟** '+row['rationale_ar'],'','**البدائل:** '+'؛ '.join(row['alternatives_ar']),'','**الثقة وحدود الشاهد:** '+row['confidence_ar']+' '+row['canon_limit_ar'],'']
+        lines+=['## '+row.get('review_heading_ar',row['surface_ar']),'','معرّف القرار: `'+row['decision_id']+'`.','','**أين وما الذي يراجع؟** '+row['expert_question_ar'],'','**المعنى:** '+row['sense_ar'],'','**لماذا أُبقي؟** '+row['rationale_ar'],'','**البدائل:** '+'؛ '.join(row['alternatives_ar']),'','**الثقة وحدود الشاهد:** '+row['confidence_ar']+' '+row['canon_limit_ar'],'']
         for e in row['canon_evidence']:
             s=data['canon_sources'][e['source_id']];place=e.get('section_ar') or 'PDF ص '+str(e['physical_pdf_page']).translate(EAST)+'؛ المطبوع '+str(e['printed_page']).translate(EAST)+'؛ '+e['entry']
             lines+=['- ['+s['title_ar']+']('+s['url']+')، '+place+': «'+e['short_quote_ar']+'». '+e['relation_ar']]

@@ -15,6 +15,13 @@ $qaScript = Join-Path $PSScriptRoot "qa_dual_notation_pdfs.py"
 $fontBuilder = Join-Path $PSScriptRoot "make_machrek_digit_font.py"
 $repairScript = Join-Path $PSScriptRoot "repair_rtl_link_rects_letter_ar.py"
 $assemblerScript = Join-Path $PSScriptRoot "assemble_complete_722_reader.py"
+$sourceAuditScript = Join-Path $PSScriptRoot "audit_arabic_notation_profiles.py"
+$profileCheckpointScript = Join-Path $PSScriptRoot "profile_checkpoint.py"
+$msaClosureRebindScript = Join-Path $PSScriptRoot "rebind_msa_closure_manifest.py"
+$closureManifest = Join-Path $releaseRoot "evidence\provenance\openlogic-control\CLOSURE_MANIFEST.csv"
+$msaClosureRebindReceipt = Join-Path $releaseRoot "evidence\provenance\openlogic-control\MSA_CLOSURE_MANIFEST_REBIND_20260930_FORMULA_ANNOTATED.json"
+$msaSuccessorLedger = Join-Path $releaseRoot "evidence\classical\terminology\SOL6_PROOF_QUANTIFICATION_RECHECK_20260930.json"
+$profileMapping = Join-Path $releaseRoot "evidence\notation\PROFILE_MAPPING.json"
 
 $profiles = @(
   [pscustomobject]@{
@@ -40,14 +47,22 @@ foreach ($commandName in @("lualatex", "bibtex", "python")) {
     throw "Required command is unavailable: $commandName"
   }
 }
-if (-not (Test-Path -LiteralPath $fontBuilder -PathType Leaf)) {
-  throw "Machrek digit-font builder is missing: $fontBuilder"
-}
-if (-not (Test-Path -LiteralPath $repairScript -PathType Leaf)) {
-  throw "US-Letter RTL link repair is missing: $repairScript"
-}
-if (-not (Test-Path -LiteralPath $assemblerScript -PathType Leaf)) {
-  throw "Complete 722-unit PDF assembler is missing: $assemblerScript"
+foreach ($required in @(
+    $qaScript,
+    $fontBuilder,
+    $repairScript,
+    $assemblerScript,
+    $sourceAuditScript,
+    $profileCheckpointScript,
+    $msaClosureRebindScript,
+    $closureManifest,
+    $msaClosureRebindReceipt,
+    $msaSuccessorLedger,
+    $profileMapping
+  )) {
+  if (-not (Test-Path -LiteralPath $required -PathType Leaf)) {
+    throw "Required build/audit input is missing: $required"
+  }
 }
 & python -c "import pdfplumber, pypdf"
 if ($LASTEXITCODE -ne 0) {
@@ -64,7 +79,13 @@ foreach ($profile in $profiles) {
 
 foreach ($directory in @($FinalOutputDirectory, $WorkDirectory)) {
   if (Test-Path -LiteralPath $directory) {
-    $existing = Get-ChildItem -LiteralPath $directory -Force | Select-Object -First 1
+    $isWorkDirectory = [IO.Path]::GetFullPath($directory).Equals(
+      [IO.Path]::GetFullPath($WorkDirectory),
+      [StringComparison]::OrdinalIgnoreCase
+    )
+    $existing = Get-ChildItem -LiteralPath $directory -Force |
+      Where-Object { -not ($isWorkDirectory -and $_.Name -eq "TEX_MUTEX_RECEIPT.json") } |
+      Select-Object -First 1
     if ($null -ne $existing -and -not $ResumeExisting) {
       throw "Build directory must be empty: $directory"
     }
@@ -80,6 +101,10 @@ $latexArguments = @(
   "-halt-on-error",
   "-file-line-error",
   "-recorder",
+  # Retain source-to-page data in the private work directory.  The released
+  # PDF stays self-contained; this sidecar lets the human terminology index
+  # cite the exact printed/PDF page for every recorded source-line occurrence.
+  "-synctex=1",
   $outputArgument
 )
 
@@ -171,10 +196,47 @@ try {
     & python $fontBuilder
     if ($LASTEXITCODE -ne 0) { throw "Machrek digit-font build or provenance verification failed" }
 
+    # Fail closed before any TeX engine: the legacy shared manifest must bind
+    # every live MSA file to the historical 722-unit closure plus ONE exact,
+    # published prose correction. Earlier acceptance evidence is not rewritten;
+    # all Farsi and non-Arabic fields remain byte-for-field preserved.
+    & python $msaClosureRebindScript `
+      --repo $releaseRoot `
+      --action verify `
+      --receipt $msaClosureRebindReceipt `
+      --successor-ledger $msaSuccessorLedger
+    if ($LASTEXITCODE -ne 0) { throw "MSA closure-manifest rebind preflight failed" }
+
+    # Bind the exact post-font-build source, manifest, drivers and notation
+    # mapping into each fresh output tree.  The final replay gate requires the
+    # primary and replay receipts to be byte-identical.
+    & python $sourceAuditScript `
+      --repo $releaseRoot `
+      --manifest $closureManifest `
+      --mapping $profileMapping `
+      --output (Join-Path $resolvedFinal "SOURCE_PROFILE_AUDIT.json")
+    if ($LASTEXITCODE -ne 0) { throw "Arabic notation-profile source audit failed" }
+
     $convergence = @()
     foreach ($profile in $profiles) {
+      $checkpoint = Join-Path $resolvedFinal "PROFILE_CHECKPOINT_$($profile.Name).json"
+      if ($ResumeExisting -and (Test-Path -LiteralPath $checkpoint -PathType Leaf)) {
+        & python $profileCheckpointScript --repo $releaseRoot --work $resolvedWork --output $resolvedFinal --profile $profile.Name --action verify
+        if ($LASTEXITCODE -ne 0) { throw "Existing profile checkpoint failed validation" }
+        $convergence += [pscustomobject]@{ Stage = "$($profile.Name) reused validated checkpoint"; Checkpoint = [IO.Path]::GetFileName($checkpoint); RerunRequested = $false }
+        continue
+      }
       $readerJob = [IO.Path]::GetFileNameWithoutExtension($profile.ReaderDriver)
       $supplementJob = [IO.Path]::GetFileNameWithoutExtension($profile.SupplementDriver)
+
+      $readerRawPdf = Join-Path $resolvedWork "$readerJob.raw-before-link-repair.pdf"
+      $readerCompiledReceipt = Join-Path $resolvedWork "$readerJob.compiled-checkpoint.json"
+      $reuseCompiledReader = $ResumeExisting -and (Test-Path -LiteralPath $readerRawPdf -PathType Leaf) -and (Test-Path -LiteralPath $readerCompiledReceipt -PathType Leaf)
+      if ($reuseCompiledReader) {
+        & python $profileCheckpointScript --repo $releaseRoot --work $resolvedWork --output $resolvedFinal --profile $profile.Name --role reader --action compiled-verify
+        if ($LASTEXITCODE -ne 0) { throw "Converged reader checkpoint failed validation" }
+        $convergence += [pscustomobject]@{ Stage = "$($profile.Name) reader reused converged TeX"; RerunRequested = $false }
+      } else {
 
       $readerCheckpointFiles = @(
         (Join-Path $resolvedWork "$readerJob.aux"),
@@ -197,14 +259,18 @@ try {
         -LastPass 6 `
         -StateExtensions @("aux", "bbl", "out", "pcr", "prb", "thm", "toc")
 
+        & python $profileCheckpointScript --repo $releaseRoot --work $resolvedWork --output $resolvedFinal --profile $profile.Name --role reader --action compiled-record
+        if ($LASTEXITCODE -ne 0) { throw "Converged reader checkpoint record failed" }
+      }
+
       $readerPdf = Join-Path $resolvedWork "$readerJob.pdf"
-      $readerRawPdf = Join-Path $resolvedWork "$readerJob.raw-before-link-repair.pdf"
       $readerRepairReceipt = Join-Path $resolvedWork "$readerJob.rtl-link-rect-repair.json"
-      Move-Item -LiteralPath $readerPdf -Destination $readerRawPdf
+      if (-not $reuseCompiledReader) { Move-Item -LiteralPath $readerPdf -Destination $readerRawPdf }
       & python $repairScript `
         --input $readerRawPdf `
         --output $readerPdf `
-        --receipt $readerRepairReceipt
+        --receipt $readerRepairReceipt `
+        --resume-verified
       if ($LASTEXITCODE -ne 0) { throw "$($profile.Name) reader link repair failed" }
 
       # xr-hyper reads the job AUX but records this exact released filename in
@@ -213,6 +279,14 @@ try {
       $readerReleaseAlias = Join-Path $resolvedWork $profile.ReaderAsset
       Copy-Item -LiteralPath $readerPdf -Destination $readerReleaseAlias
 
+      $supplementRawPdf = Join-Path $resolvedWork "$supplementJob.raw-before-link-repair.pdf"
+      $supplementCompiledReceipt = Join-Path $resolvedWork "$supplementJob.compiled-checkpoint.json"
+      $reuseCompiledSupplement = $ResumeExisting -and (Test-Path -LiteralPath $supplementRawPdf -PathType Leaf) -and (Test-Path -LiteralPath $supplementCompiledReceipt -PathType Leaf)
+      if ($reuseCompiledSupplement) {
+        & python $profileCheckpointScript --repo $releaseRoot --work $resolvedWork --output $resolvedFinal --profile $profile.Name --role supplement --action compiled-verify
+        if ($LASTEXITCODE -ne 0) { throw "Converged supplement checkpoint failed validation" }
+        $convergence += [pscustomobject]@{ Stage = "$($profile.Name) supplement reused converged TeX"; RerunRequested = $false }
+      } else {
       $convergence += Invoke-ConvergentLuaLaTeX `
         -Driver $profile.SupplementDriver `
         -Job $supplementJob `
@@ -221,14 +295,18 @@ try {
         -LastPass 5 `
         -StateExtensions @("aux", "out", "prb", "thm")
 
+        & python $profileCheckpointScript --repo $releaseRoot --work $resolvedWork --output $resolvedFinal --profile $profile.Name --role supplement --action compiled-record
+        if ($LASTEXITCODE -ne 0) { throw "Converged supplement checkpoint record failed" }
+      }
+
       $supplementPdf = Join-Path $resolvedWork "$supplementJob.pdf"
-      $supplementRawPdf = Join-Path $resolvedWork "$supplementJob.raw-before-link-repair.pdf"
       $supplementRepairReceipt = Join-Path $resolvedWork "$supplementJob.rtl-link-rect-repair.json"
-      Move-Item -LiteralPath $supplementPdf -Destination $supplementRawPdf
+      if (-not $reuseCompiledSupplement) { Move-Item -LiteralPath $supplementPdf -Destination $supplementRawPdf }
       & python $repairScript `
         --input $supplementRawPdf `
         --output $supplementPdf `
-        --receipt $supplementRepairReceipt
+        --receipt $supplementRepairReceipt `
+        --resume-verified
       if ($LASTEXITCODE -ne 0) { throw "$($profile.Name) supplement link repair failed" }
 
       $readerLog = Join-Path $resolvedWork "$readerJob.log"
@@ -271,6 +349,8 @@ try {
       Copy-Item -LiteralPath $supplementPdf -Destination (Join-Path $resolvedFinal $profile.SupplementAsset)
       Copy-Item -LiteralPath $readerRepairReceipt -Destination (Join-Path $resolvedFinal "$($profile.ReaderAsset).rtl-link-rect-repair.json")
       Copy-Item -LiteralPath $supplementRepairReceipt -Destination (Join-Path $resolvedFinal "$($profile.SupplementAsset).rtl-link-rect-repair.json")
+      & python $profileCheckpointScript --repo $releaseRoot --work $resolvedWork --output $resolvedFinal --profile $profile.Name --action record
+      if ($LASTEXITCODE -ne 0) { throw "Profile checkpoint validation failed" }
     }
     $convergenceJson = $convergence | ConvertTo-Json -Depth 4
     Write-Utf8NoBom -Path (Join-Path $resolvedFinal "BUILD_CONVERGENCE.json") -Content ($convergenceJson + "`n")

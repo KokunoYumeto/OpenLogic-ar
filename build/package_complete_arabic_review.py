@@ -45,6 +45,9 @@ def include_files() -> list[Path]:
         "SOL6_PROOF_QUANTIFICATION_AR.md", "PROOF_QUANTIFICATION_SOURCE_READBACK_20260930.json",
         "COMPLETE_INDEPENDENT_READBACK_20260930_R5.json",
         "COMPLETE_INDEPENDENT_READBACK_20260930_R6.json",
+        "SOL6_FREE_BOUND_VARIABLE_AR.md", "FREE_BOUND_VARIABLE_SOURCE_READBACK_20260930.json",
+        "COMPLETE_INDEPENDENT_READBACK_20260930_R7.json",
+        "COMPLETE_INDEPENDENT_READBACK_20260930_R8.json",
     ]
     files = [BASE / name for name in top]
     for directory in BASE.iterdir():
@@ -69,6 +72,7 @@ def include_files() -> list[Path]:
     files.append(TERM / "SOL6_FUNCTION_DEFINITIONS_RECHECK_20260930.json")
     files.append(TERM / "SOL6_CONTEXTUAL_RECHECK_20260930.json")
     files.append(TERM / "SOL6_PROOF_QUANTIFICATION_RECHECK_20260930.json")
+    files.append(TERM / "SOL6_FREE_BOUND_VARIABLE_RECHECK_20260930.json")
     files.append(ROOT / "source/locale/ar/content/first-order-logic/natural-deduction/quantifier-rules.tex")
     files.append(ROOT / "LICENSE.md")
     build = ROOT / "build"

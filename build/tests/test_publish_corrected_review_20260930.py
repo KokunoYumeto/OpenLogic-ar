@@ -4,10 +4,41 @@ import json
 from pathlib import Path
 import tempfile
 from unittest.mock import patch
+from types import SimpleNamespace
 from build import publish_corrected_review_20260930 as publication
 
 
 class CorrectedReviewPublicationTests(unittest.TestCase):
+    def test_current_msa_release_pairs_pdf_tex_zip_without_adding_record_files(self):
+        names=('ROOT','CURRENT_MSA','CURRENT_MSA_SOURCE_ROOT','ASSET_INPUTS','NAMES','REPLACED',
+               'TAG','GITHUB','ENTRY','FULL','STATE','STAGE','TITLE','NOTES',
+               'STRUCTURAL_RECEIPT','COLD_RECEIPT')
+        originals={name:getattr(publication,name) for name in names}
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory)
+            backend=SimpleNamespace(release=SimpleNamespace())
+            with patch.multiple(publication,**originals),patch.object(publication,'ROOT',root),\
+                    patch.object(publication,'selected_files',return_value=[]),\
+                    patch.object(publication,'git_publication',SimpleNamespace()),\
+                    patch.object(publication,'zenodo',backend):
+                publication.configure_current_msa(root/'tmp/current-sources')
+                self.assertEqual(len(publication.NAMES),13)
+                self.assertEqual(publication.REPLACED,publication.NAMES)
+                self.assertEqual(100-len(publication.REPLACED)+len(publication.NAMES),100)
+                for start in (0,3):
+                    self.assertTrue(publication.NAMES[start].endswith('.pdf'))
+                    self.assertTrue(publication.NAMES[start+1].endswith('.tex'))
+                    self.assertTrue(publication.NAMES[start+2].endswith('_SOURCES.zip'))
+                self.assertEqual(backend.PREVIEW,publication.NAMES[0])
+                self.assertEqual(backend.PREVIOUS,23055816)
+                self.assertIn('لا تتضمن',publication.NOTES)
+                self.assertIn('كلها ما زالت جارية',publication.NOTES)
+                metadata=backend.metadata_for({'metadata':{'description':'superseded claim','related_identifiers':[]}})
+                self.assertNotIn('superseded claim',metadata['description'])
+                self.assertEqual(metadata['language'],'ara')
+                for model in ('GPT-5.6 Sol','GPT-6 Sol','GPT-6.1 Sol'):
+                    self.assertIn(model,metadata['description'])
+
     def test_five_replacements_and_two_additions_fit_100_file_cap(self):
         self.assertEqual(len(publication.NAMES),7)
         self.assertEqual(len(publication.REPLACED),5)

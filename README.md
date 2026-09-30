@@ -1,65 +1,41 @@
-# نص المنطق المفتوح — الطبعات العربية الكاملة
+# نص المنطق المفتوح — الطبعات العربية الثلاث
 
-هذا المستودع يتيح ثلاثة ملفات قراءة مستقلة، يغطي كل منها **٧٢٢ من ٧٢٢ وحدة** من محتوى «مشروع المنطق المفتوح» المثبّت: الفصحى المعاصرة بالترميز الدولي، والنص المعاصر نفسه بترميز المشرق، وصياغة عربية تراثية بالترميز الشرقي. اختلاف الترميز ليس ترجمة مستقلة؛ أما الصياغة التراثية فهي مسار لغوي آخر.
+يتيح هذا المستودع محتوى «مشروع المنطق المفتوح» المثبت في ثلاث طبعات عربية كاملة. تضم كل طبعة جميع وحدات المصدر البالغ عددها ٧٢٢: مسار الكتاب الاعتيادي ذو ٦٤٢ وحدة، والوحدات الثمانون الأخرى في قسم تقني داخل القارئ نفسه. لا يحتاج ملف PDF الكامل إلى ملف مرافق للقراءة.
 
-[فهرس الطبعات والملفات العربية](https://kokunoyumeto.github.io/OpenLogic-translations/#openlogic-ar) · [أرشيف Zenodo الحالي](https://zenodo.org/records/23004225) · [المشروع الأصلي](https://openlogicproject.org/)
+## القراءة والمصادر
 
-## ملفات PDF ومصادرها القابلة للتحرير
+الطبعة المعيارية بالترميز الدولي:
 
-للقراءة بالفصحى المعاصرة مع الرموز المعتادة دوليًا، ابدأ بالصف الأول. لكل PDF ملف LaTeX تراكمي مطابق وحزمة مصادر كاملة، تتضمن الملفات اللازمة لإعادة البناء وتعليماته.
+1. [القارئ الكامل المصحح — PDF](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-openlogic-current-msa-and-review-20260930/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf)
+2. [ملف لاتخ التراكمي الكامل](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-openlogic-current-msa-and-review-20260930/01_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.tex)
+3. [حزمة المصدر الدقيق مع الخطوط والصور والمراجع وبرامج البناء](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-openlogic-current-msa-and-review-20260930/02_OPENLOGIC_ar_R3_MSA_INTERNATIONAL_SOURCES.zip)
 
-| الطبعة | القراءة | LaTeX كامل | حزمة المصادر | الصفحات |
-|---|---|---|---|---|
-| الفصحى المعاصرة — الترميز الدولي | [PDF](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf) | [تنزيل LaTeX](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/01_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.tex) | [تنزيل ZIP](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/02_OPENLOGIC_ar_R3_MSA_INTERNATIONAL_SOURCES.zip) | ١١٦٤ |
-| الفصحى المعاصرة — ترميز المشرق | [PDF](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf) | [تنزيل LaTeX](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/04_OPENLOGIC_ar_R3_MSA_MACHREK.tex) | [تنزيل ZIP](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/05_OPENLOGIC_ar_R3_MSA_MACHREK_SOURCES.zip) | ١١٦٥ |
-| الصياغة العربية التراثية — الترميز الشرقي | [PDF](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-fn-unicode-20260928/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf) | [تنزيل LaTeX](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-fn-unicode-20260928/00-CLASSICAL-02_OPENLOGIC_ar_R3_CUMULATIVE.tex) | [تنزيل ZIP](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-fn-unicode-20260928/00-CLASSICAL-03_OPENLOGIC_ar_R3_SOURCES.zip) | ١١٤٥ |
+الطبعة المعيارية بترميز المشرق:
 
-ملفا الفصحى المعاصرة من إصدار ٢٤ سبتمبر ٢٠٢٦. ملف الصياغة التراثية من إصدار ٢٨ سبتمبر ٢٠٢٦، وفيه تصحيح اتجاه الأسماء اللاتينية وخرائط Unicode؛ هذا تصحيح عرض محدد، لا ادعاء بتدقيق لغوي جديد للكتاب كله.
+1. [القارئ الكامل المصحح — PDF](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-openlogic-current-msa-and-review-20260930/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf)
+2. [ملف لاتخ التراكمي الكامل](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-openlogic-current-msa-and-review-20260930/04_OPENLOGIC_ar_R3_MSA_MACHREK.tex)
+3. [حزمة المصدر الدقيق مع الخطوط والصور والمراجع وبرامج البناء](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-openlogic-current-msa-and-review-20260930/05_OPENLOGIC_ar_R3_MSA_MACHREK_SOURCES.zip)
 
-## كتب EPUB ومصادرها
+الطبعة العربية التراثية بالرموز والأرقام المشرقية واتجاه الصيغ من اليمين إلى اليسار، المحفوظة من إصدار ٢٨ سبتمبر:
 
-كتب EPUB الثلاثة كاملة من حيث الوحدات، وصادرة في ٢٥ سبتمبر ٢٠٢٦. مصادرها ليست بديلًا عن مصادر ملفات PDF المبينة أعلاه: احتُفظ بمصدر كل بناء على حدة. حزمة EPUB المشتركة، نحو ٢٩٧ ميغابايت، تشمل مصادر الطبعات الثلاث وملفات إعادة البناء.
+1. [القارئ الكامل — PDF](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-fn-unicode-20260928/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf)
+2. [ملف لاتخ التراكمي الكامل](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-fn-unicode-20260928/00-CLASSICAL-02_OPENLOGIC_ar_R3_CUMULATIVE.tex)
+3. [حزمة المصدر الدقيقة](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-fn-unicode-20260928/00-CLASSICAL-03_OPENLOGIC_ar_R3_SOURCES.zip)
 
-| الطبعة | LaTeX الكامل الخاص بكتاب EPUB | حزمة مصادر EPUB | كتاب EPUB |
-|---|---|---|---|
-| الفصحى المعاصرة — الترميز الدولي | [تنزيل LaTeX](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-complete-epubs-20260925/20_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.tex) | [تنزيل ZIP](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-complete-epubs-20260925/29_OPENLOGIC_ar_R3_COMPLETE_EPUB_SOURCE_AND_QA.zip) | [تنزيل EPUB](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-complete-epubs-20260925/22_OpenLogic-Arabic-Complete-722-international.epub) |
-| الفصحى المعاصرة — ترميز المشرق | [تنزيل LaTeX](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-complete-epubs-20260925/23_OPENLOGIC_ar_R3_MSA_MACHREK.tex) | [تنزيل ZIP](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-complete-epubs-20260925/29_OPENLOGIC_ar_R3_COMPLETE_EPUB_SOURCE_AND_QA.zip) | [تنزيل EPUB](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-complete-epubs-20260925/25_OpenLogic-Arabic-Complete-722-machrek.epub) |
-| الصياغة العربية التراثية — الترميز الشرقي | [تنزيل LaTeX](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-complete-epubs-20260925/26_OPENLOGIC_ar_R3_CLASSICAL_EASTERN_RTL.tex) | [تنزيل ZIP](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-complete-epubs-20260925/29_OPENLOGIC_ar_R3_COMPLETE_EPUB_SOURCE_AND_QA.zip) | [تنزيل EPUB](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-complete-epubs-20260925/28_OpenLogic-Arabic-Complete-722-classical.epub) |
+المعياريتان لهما المتن والصيغ المصدرية نفسها. تظهر أرقام الرياضيات الدولية بالأشكال `0–9`، وفي المشرق بالأشكال `٠–٩`، مع بقاء الصيغ من اليسار إلى اليمين. أما التراثية فلها إعادة صياغة عربية مستقلة وعرض رياضي من اليمين إلى اليسار؛ لا تعني هذه التسمية أن عالمًا تراثيًا كتب النص الحديث.
 
-## كيف تختلف الطبعات؟
+## التصحيح والمراجعة
 
-- **الفصحى المعاصرة — الدولي:** أرقام الصيغ بالأشكال `0–9`.
-- **الفصحى المعاصرة — المشرقي:** النص نفسه مع الأرقام العربية الهندية `٠–٩`؛ تبقى الصيغ مرتبة من اليسار إلى اليمين، وتُحفظ المتغيرات والرموز ومعانيها.
-- **الصياغة التراثية — الشرقي:** صياغة لغوية أخرى مع معالجة مستقلة للترميز واتجاهه. تبيّن مصادرها وسجلات المراجعة الاختيارات وحدودها؛ لا توصف بأنها مجرد تبديل للأرقام.
+تتضمن ملفات PDF المعيارية الحالية تصحيحي قواعد المكممات: استثناء الفرض المؤقت الذي يسقطه حذف الوجودي، وإغلاق حد الاستبدال. عُرّبت وصلات الإحالات ولفظ بنودها. لم يعاد بناء PDF التراثية في هذه الدفعة. لكل ملف قراءة مصدره الدقيق الخاص؛ لا يُقدم مصدر طبعة أو تاريخ آخر بوصفه مصدر ذلك الملف.
 
-## ما الذي يعنيه اكتمال ٧٢٢/٧٢٢؟
+[ابدأ مراجعة الاختيارات هنا](expert-review/2026-09-26-final-page-review/INDEX_AR.md)، ثم [ابحث في القائمة الكاملة ذات الصفحات القصيرة](expert-review/2026-09-26-final-page-review/DIRECTORY_READABLE_AR.md). يحفظ الدليل جميع القرارات المسجلة الـ١٠٩٥ ووقوعاتها وأسبابها وحدود شواهدها وأسئلة المراجع. اكتمال السجل لا يعني أن كل اختيار صائب أو أن إعادة فحص عمل GPT-6 Sol كله قد انتهت. كل اختيار مفتوح للتصحيح، ولا تنتظر عملية الإنتاج موافقة بشرية.
 
-المقصود جميع ملفات المحتوى الإنجليزي المتتبّعة في المصدر المثبّت لهذه الطبعات، لا كل ما أُضيف لاحقًا إلى المشروع الأصلي. يصل مسار الكتاب الاعتيادي إلى ٦٤٢ وحدة، وأُدرجت الوحدات الثمانون الأخرى، ومنها مشغلات وفصول بديلة، داخل كل ملف قراءة. لا يحتاج القارئ إلى ملحق منفصل لاستكمال هذا النطاق.
+[كتب EPUB الثلاثة ومصادرها الدقيقة](https://github.com/KokunoYumeto/OpenLogic-ar/releases/tag/ar-olp-0722-epub-provenance-correction-20260930) محفوظة بالمتن المجمد السابق؛ لا تتضمن تصحيحي المعيارية الجديدين، وليست نسخة مطابقة لملفات PDF الحالية. توضح بيانات كل ملف تاريخ متنه والعمل الذي أُنجز عليه.
 
-اكتمال الوحدات وفحوص البناء والروابط لا يثبتان صحة كل اختيار لغوي. ملفات PDF غير موسومة بنيويًا، ولا يُدّعى امتثالها لمعيار PDF/UA. تختلف تواريخ PDF وEPUB؛ تُذكر أدلة التحقق وهويات المصادر في حزمها وسجلاتها التقنية، لا في عنوان الكتاب.
+## المنشأ والحدود
 
-## دليل مراجعة اختيارات الترجمة
+المؤلف الأصلي: Open Logic Project، ورخصة الأصل CC BY 4.0. الترجمة والصياغة الموروثتان: OpenAI Codex — GPT-5.6 Sol، جهد Ultra. التعليلات والفهرسة اللاحقة وإكمال EPUB السابق: OpenAI Codex — GPT-6 Sol، جهد Ultra. التصحيح المحدد والمقابلة الجديدة وإعادة بناء القارئين المعياريين: OpenAI Codex — GPT-6.1 Sol، جهد Ultra. لإصلاح أسماء الدوال وخرائط Unicode في التراثية نسبه التفصيلية إلى GPT-6 Astra وGPT-6 Sol، كلاهما بجهد Ultra، في وصف إصدارها؛ لا تنسب هذه الأعمال إلى محرر بشري.
 
-- [ابدأ هنا: المدخل العربي للمراجعين](https://github.com/KokunoYumeto/OpenLogic-ar/blob/e0a7f7358f144bf894185ecd979794606901dc17/expert-review/2026-09-26-final-page-review/INDEX_AR.md)
-- [الدليل الكامل — ١٠٩٥ اختيارًا](https://github.com/KokunoYumeto/OpenLogic-ar/blob/e0a7f7358f144bf894185ecd979794606901dc17/expert-review/2026-09-26-final-page-review/DIRECTORY_AR.md)
-- [السجل المقروء آليًا](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-openlogic-translation-review-complete-20260927/DECISION_RECORD_AR.jsonl.gz)
-- [المصادر الكاملة لدليل المراجعة وبطاقاته](https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-openlogic-translation-review-complete-20260927/90-ARABIC-REVIEW-COMPLETE-SOURCE.zip)
+لم تقع مراجعة بشرية شاملة. ملفات PDF ثابتة التخطيط وليست شهادة توافق PDF/UA؛ كتب EPUB تخضع لاختبارات بنيتها وروابطها دون ادعاء اختبار كل جهاز قراءة. صفحات الفهرس الموروثة مرتبطة بالنسخ المحددة في بطاقاتها، لا بقياس جديد لكل صفحة من قارئ أعيد بناؤه.
 
-يصل الدليل إلى البطاقات والتعليلات والشواهد وحدودها والبدائل وأسئلة المراجعة. اكتمال ١٠٩٥ سجلًا لا يعني ١٠٩٥ موافقة بشرية، ولا يثبت أن كل اختيار صحيح. الشواهد التي أضيفت في مراجعة لاحقة لا تُنسب بأثر رجعي إلى المترجم الأول. المراجعة البشرية فرصة للتصحيح والتحسين، وليست شرطًا لاستمرار العمل أو إتاحته.
-
-## بيان العمل بالذكاء الاصطناعي
-
-- الترجمة والتصحيح السابقان: OpenAI Codex — GPT-5.6 Sol، بمستوى جهد Ultra، وفق سجلات الطبعة.
-- الفهرس العربي والتعليلات اللاحقة والتدقيق المعجمي: OpenAI Codex — GPT-6 Sol، بمستوى جهد Ultra.
-- تصحيح أسماء الدوال وخرائط Unicode: OpenAI Codex — GPT-6 Astra، بمستوى جهد Ultra؛ وتصحيح الأسماء الثابتة الإضافية والتجميع والنشر: OpenAI Codex — GPT-6 Sol، بمستوى جهد Ultra.
-- تحديث هذه الصفحة وروابطها في ٢٩ سبتمبر ٢٠٢٦: OpenAI Codex — GPT-6 Astra، بمستوى جهد Ultra. لم يغيّر هذا التحديث نصوص الكتب أو ملفاتها.
-
-هذه بيانات عن العمل الاصطناعي المنفّذ، وليست ادعاءً بتأليف أو تحرير أو اعتماد بشري.
-
-## المصدر والترخيص والطبعات السابقة
-
-العمل الأصلي من إعداد Open Logic Project. راجع [الترخيص](LICENSE.md) ونصوص الإسناد والتراخيص المحفوظة داخل كل حزمة. المعرّف المفهومي الثابت للأرشيف: [10.5281/zenodo.21921850](https://doi.org/10.5281/zenodo.21921850).
-
-تبقى [جميع الإصدارات السابقة](https://github.com/KokunoYumeto/OpenLogic-ar/releases) متاحة، ومنها [ملفا PDF الكاملان المؤرخان في ٣ سبتمبر ومصادرهما](https://github.com/KokunoYumeto/OpenLogic-ar/releases/tag/ar-olp-0722-complete-dual-notation-r2-20260903)، و[الطبعة التراثية المؤرخة في ٢٦ سبتمبر مع خلل العرض الموثق](https://github.com/KokunoYumeto/OpenLogic-ar/releases/tag/ar-olp-0722-classical-eastern-rtl-complete-20260926). روابط القراءة الأساسية أعلاه تقود إلى الملفات الأحدث التي جرى التحقق منها.
-
-[مدخل المراجعة السابق](expert-review/2026-09-22-complete-questions/START_HERE.md) و[قائمته السابقة](expert-review/2026-09-22-complete-questions/FULL_LIST.md) محفوظان للتتبّع؛ الدليل الحالي هو المرتبط في قسم المراجعة أعلاه.
+[سلسلة الحفظ العامة على Zenodo](https://doi.org/10.5281/zenodo.21921850) · [الفهرس المركزي للترجمات](https://github.com/KokunoYumeto/OpenLogic-translations). تبقى جميع الإصدارات السابقة ومصادرها وروابطها العامة متاحة.

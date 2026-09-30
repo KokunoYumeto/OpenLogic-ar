@@ -149,4 +149,32 @@ class ProofQuantificationTests(unittest.TestCase):
         self.assertIn('لعلاقة أو دالة',quantifier['sense_ar'])
 
 
+class FreeBoundVariableTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.data=assembly.free_bound_variable_recheck()
+        cls.frozen=review.frozen_records(cls.data['finite_scope']['decision_ids'])
+
+    def test_three_original_locations_are_not_new_bound_occurrences(self):
+        self.assertEqual(review.bind(self.data,self.frozen),self.data)
+        row=self.data['records'][0]
+        self.assertEqual(len(row['checked_occurrences']),3)
+        self.assertEqual(len(row['context_bindings']),3)
+        self.assertEqual(row['surface_ar'],'متغير حر؛ متغير مربوط')
+        self.assertFalse(self.data['source_edit_applied'])
+        self.assertIn('لا وقوع له',row['rationale_ar'])
+        self.assertIn('لم يُتحقق',row['canon_limit_ar'])
+
+    def test_full_directory_uses_actual_heading_without_rewriting_history(self):
+        row=self.data['records'][0]
+        note=assembly.note_map()[row['decision_id']]
+        self.assertEqual(note['display_override_ar'],row['display_override_ar'])
+        self.assertIn('لا مربوط',note['display_override_ar'])
+        self.assertEqual(assembly.card_map()[row['decision_id']],self.data['review_card'])
+        card=(review.BASE/self.data['review_card']).read_text(encoding='utf-8')
+        self.assertEqual(card,review.render(self.data))
+        self.assertIn('متغيرات حرة',card)
+        self.assertIn('لا تعد مقاطع التعريف المساندة وقوعات جديدة',card)
+
+
 if __name__=='__main__':unittest.main()
