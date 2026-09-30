@@ -38,6 +38,9 @@ def include_files() -> list[Path]:
         "COMPLETE_DIRECTORY_RECEIPT_20260927_HISTORICAL.json",
         "DIRECTORY_READABLE_AR.md", "READABLE_REVIEW_RECEIPT_20260930.json",
         "READABLE_REVIEW_VERIFICATION_20260930.json",
+        "SOL6_FUNCTION_DEFINITIONS_AR.md",
+        "FUNCTION_DEFINITION_SOURCE_READBACK_20260930.json",
+        "COMPLETE_INDEPENDENT_READBACK_20260930_R4.json",
     ]
     files = [BASE / name for name in top]
     for directory in BASE.iterdir():
@@ -58,6 +61,7 @@ def include_files() -> list[Path]:
     files.append(TERM / "SOL6_REEXAMINATION_CORRECTIONS_20260930.json")
     files.append(TERM / "SOL6_SOURCE_WITNESS_CORRECTIONS_20260930.json")
     files.append(TERM / "SOL6_COMMENT_ONLY_WITNESS_CENSUS_20260930.json")
+    files.append(TERM / "SOL6_FUNCTION_DEFINITIONS_RECHECK_20260930.json")
     files.append(ROOT / "LICENSE.md")
     build = ROOT / "build"
     for path in build.glob("*.py"):
@@ -75,9 +79,11 @@ def include_files() -> list[Path]:
                     "replay_corrected_review_20260930.py",
                     "render_readable_review_20260930.py",
                     "verify_readable_review_20260930.py",
+                    "render_function_definition_recheck_20260930.py",
                 }):
             files.append(path)
     files.append(build / "tests/test_readable_review_20260930.py")
+    files.append(build / "tests/test_function_definition_recheck_20260930.py")
     assert len(files) == len(set(files))
     assert all(path.is_file() for path in files)
     return sorted(files, key=lambda path: path.relative_to(ROOT).as_posix())

@@ -37,6 +37,7 @@ VERSION = "OLP-0722-AR-CLASSICAL-EASTERN-RTL-20260926"
 SUCCESSOR = False
 ORDER_PREFIX: tuple[str, ...] = ()
 REPLACEMENT_NAMES: tuple[str, ...] | None = None
+EXPECTED_PREDECESSOR_FILES = 98
 
 
 def configure_successor(path: Path) -> None:
@@ -187,9 +188,9 @@ def prepare() -> None:
     require(replacement_names.issubset(row["name"] for row in rows),
             "Every replacement must have a checked successor asset")
     if SUCCESSOR:
-        require(len(predecessor_inventory) == 98 and
+        require(len(predecessor_inventory) == EXPECTED_PREDECESSOR_FILES and
                 replacement_names.issubset(predecessor_inventory),
-                "Successor must replace only named existing files in the 98-file predecessor")
+                "Successor must replace only named existing files in the explicitly pinned predecessor inventory")
     inherited = {name: row for name, row in predecessor_inventory.items()
                  if name not in replacement_names}
     require((SUCCESSOR or len(inherited) == 81) and

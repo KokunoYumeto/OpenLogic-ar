@@ -116,6 +116,13 @@ def card_map(include_revisions: bool = True) -> dict[str, str]:
         path = BASE / revision["review_card"]
         assert path.is_file() and identifier in path.read_text(encoding="utf-8")
         mapping[identifier] = revision["review_card"]
+    rechecks = function_definition_rechecks()
+    for item in rechecks.get("records", []):
+        identifier = item["decision_id"]
+        assert identifier in mapping
+        path = BASE / rechecks["review_card"]
+        assert path.is_file() and identifier in path.read_text(encoding="utf-8")
+        mapping[identifier] = rechecks["review_card"]
     return mapping
 
 
@@ -144,6 +151,19 @@ def source_witness_corrections() -> dict:
     return value
 
 
+def function_definition_rechecks() -> dict:
+    path = TERM / "SOL6_FUNCTION_DEFINITIONS_RECHECK_20260930.json"
+    if not path.exists():
+        return {}
+    value = json.loads(path.read_bytes())
+    assert value["schema"] == "openlogic-arabic-function-definitions-recheck-v1"
+    assert value["source_index_sha256"] == EXPECTED
+    assert value["model"] == "GPT-6.1 Sol" and value["effort"] == "Ultra"
+    assert len(value["records"]) == len({r["decision_id"] for r in value["records"]}) == 3
+    assert value["source_edit_applied"] is False
+    return value
+
+
 def note_map() -> dict[str, dict]:
     notes = {}
     files = ([TERM / "ARABIC_PRIORITY_30_20260926.json",
@@ -163,6 +183,9 @@ def note_map() -> dict[str, dict]:
         notes[item["decision_id"]] = item
     for item in review_corrections().get("records", []):
         assert item["decision_id"] in notes, "Correction must replace an existing note"
+        notes[item["decision_id"]] = item
+    for item in function_definition_rechecks().get("records", []):
+        assert item["decision_id"] in notes
         notes[item["decision_id"]] = item
     return notes
 
@@ -206,6 +229,8 @@ def main() -> None:
     links = card_map()
     notes = note_map()
     witness_revision = {r["decision_id"]: r for r in source_witness_corrections().get("records", [])}
+    rechecks = function_definition_rechecks()
+    recheck_ids = {r["decision_id"] for r in rechecks.get("records", [])}
     decisions = []
     seen = set()
     for decision in iter_decisions(INDEX):
@@ -242,7 +267,15 @@ def main() -> None:
             decisions[-1]["revision_target_bindings"] = note["target_bindings"]
             decisions[-1]["revision_canon_limit_ar"] = note["canon_limit_ar"]
             decisions[-1]["revision_confidence_ar"] = note["confidence_ar"]
-            decisions[-1]["revision_source_identity_note_ar"] = review_corrections()["source_identity_note_ar"]
+            decisions[-1]["revision_source_identity_note_ar"] = (
+                rechecks if decision_id in recheck_ids else review_corrections())["source_identity_note_ar"]
+        if decision_id in recheck_ids:
+            decisions[-1]["revision_canon_evidence"] = note["canon_evidence"]
+            decisions[-1]["revision_canon_sources"] = rechecks["canon_sources"]
+            decisions[-1]["revision_register_comparison"] = rechecks["register_comparison"]
+            decisions[-1]["revision_alternatives_ar"] = note["alternatives_ar"]
+            decisions[-1]["revision_checked_occurrences"] = note["checked_occurrences"]
+            decisions[-1]["revision_recording_mode"] = rechecks["recording_mode"]
         if decision_id in witness_revision:
             decisions[-1]["source_witness_revision"] = witness_revision[decision_id]
     assert len(decisions) == len(seen) == len(links) == 1095
@@ -271,7 +304,8 @@ def main() -> None:
                      "بمستوى جهد Ultra؛ وصيغت المراجعات العربية اللاحقة والربط والتحقق "
                      "بواسطة OpenAI Codex — GPT-6 Sol، بمستوى جهد Ultra. "
                      "وصُحِّحت شروح قابلية المحورة والتجاوز والمختزلات وإحالاتها بواسطة OpenAI Codex — GPT-6.1 Sol، "
-                     "بمستوى جهد Ultra. لم تقع مراجعة بشرية شاملة؛ كل اختيار قابل للتصحيح.\n")
+                     "بمستوى جهد Ultra؛ وقوبلت ثلاثة تعريفات للدوال بشواهد رياضية عربية جديدة بالمستوى نفسه. "
+                     "لم تقع مراجعة بشرية شاملة؛ كل اختيار قابل للتصحيح.\n")
     historic = BASE / "COMPLETE_DIRECTORY_RECEIPT_20260927_HISTORICAL.json"
     previous_receipt = BASE / "COMPLETE_DIRECTORY_RECEIPT.json"
     if previous_receipt.exists() and not historic.exists():

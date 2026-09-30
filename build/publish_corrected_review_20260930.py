@@ -3,6 +3,7 @@ import argparse
 import hashlib
 import json
 import os
+import shutil
 from pathlib import Path
 import subprocess
 import sys
@@ -31,6 +32,8 @@ REPLACED=('INDEX_AR.md','DIRECTORY_AR.md','DECISION_RECORD_AR.jsonl.gz',
 TITLE='المنطق المفتوح بالعربية: تصحيح خمسة شروح وإحالات ٣٢ قرارًا في دليل المراجعة'
 COLD_RECEIPT='CORRECTED_REVIEW_SOURCE_COLD_REPLAY_20260930.json'
 READABLE=False
+FUNCTION_RECHECK=False
+STRUCTURAL_RECEIPT='COMPLETE_INDEPENDENT_READBACK_20260930_R3.json'
 NOTES=(f'## دليل المراجعة العربية المصحح\n\n[ابدأ من هنا]({ENTRY}) · [القائمة الكاملة]({FULL})\n\n'
        'يضم الدليل ١٠٩٥ اختيارًا مسجلًا مع ألفاظها ومواضعها وتعليلاتها وأسئلة للمختصين. '
        'صُحِّح قيد قابلية الحساب في شرح قابلية المحورة، ومعنى التجاوز في هذه الوحدة، '
@@ -51,7 +54,7 @@ NOTES=(f'## دليل المراجعة العربية المصحح\n\n[ابدأ �
 
 
 def stage():
-    fresh=json.loads((BASE/'COMPLETE_INDEPENDENT_READBACK_20260930_R3.json').read_bytes())
+    fresh=json.loads((BASE/STRUCTURAL_RECEIPT).read_bytes())
     cold=json.loads((BASE/COLD_RECEIPT).read_bytes())
     require(fresh['all_frozen_occurrences_preserved'] and fresh['verified_machine_records']==1095,'Fresh structural checks differ')
     archive=identity(BASE/NAMES[-2])
@@ -68,7 +71,7 @@ def stage():
     rows=[]
     for name in NAMES:
         row=identity(BASE/name); rows.append({'name':name,'bytes':row['bytes'],'sha256':row['sha256']})
-        os.link(BASE/name,STAGE/name)
+        shutil.copy2(BASE/name,STAGE/name)
     zenodo.save(STATE/'STAGE.json',{'status':'PASS_CURRENT_CORRECTED_REVIEW_STAGE','files':rows})
     (STATE/'RELEASE_NOTES_AR.md').write_text(NOTES,encoding='utf-8',newline='\n')
     print(json.dumps({'status':'PASS_CURRENT_CORRECTED_REVIEW_STAGE','files':len(rows)}))
@@ -108,6 +111,14 @@ def selected_files():
         paths.extend('build/'+name for name in (
             'render_readable_review_20260930.py','verify_readable_review_20260930.py',
             'tests/test_readable_review_20260930.py','tests/test_publish_corrected_review_20260930.py'))
+    if FUNCTION_RECHECK:
+        paths.extend((base/name).as_posix() for name in (
+            STRUCTURAL_RECEIPT,'SOL6_FUNCTION_DEFINITIONS_AR.md',
+            'FUNCTION_DEFINITION_SOURCE_READBACK_20260930.json'))
+        paths.append('evidence/classical/terminology/SOL6_FUNCTION_DEFINITIONS_RECHECK_20260930.json')
+        paths.extend('build/'+name for name in (
+            'render_function_definition_recheck_20260930.py','tests/test_function_definition_recheck_20260930.py',
+            'verify_readable_review_public_20260930.py'))
     require(len(paths)==len(set(paths)) and all((ROOT/p).is_file() for p in paths),'Selected source inventory differs')
     return paths
 
@@ -142,9 +153,10 @@ def github_verify():
     print(json.dumps({'status':'PASS_ANONYMOUS_GITHUB_READBACK','files':len(checked)}))
 
 
-def configure(readable=False):
-    global READABLE,TAG,GITHUB,ENTRY,FULL,STAGE,STATE,TITLE,NOTES,COLD_RECEIPT
+def configure(readable=False,function_recheck=False):
+    global READABLE,FUNCTION_RECHECK,TAG,GITHUB,ENTRY,FULL,STAGE,STATE,TITLE,NOTES,COLD_RECEIPT,REPLACED,STRUCTURAL_RECEIPT
     READABLE=readable
+    FUNCTION_RECHECK=function_recheck
     if readable:
         TAG='ar-openlogic-translation-review-readable-20260930'
         GITHUB=f'https://github.com/{REMOTE}/releases/tag/{TAG}'
@@ -168,24 +180,79 @@ def configure(readable=False):
                '[PDF التراثي ومصدر لاتخ المباشر وحزمة المصدر](https://github.com/KokunoYumeto/OpenLogic-ar/releases/tag/ar-olp-0722-classical-eastern-rtl-fn-unicode-20260928) · '
                '[EPUB للطبعات الثلاث ومصادره](https://github.com/KokunoYumeto/OpenLogic-ar/releases/tag/ar-olp-0722-epub-provenance-correction-20260930).\n')
         COLD_RECEIPT='CORRECTED_REVIEW_SOURCE_COLD_REPLAY_20260930_R2.json'
+    if function_recheck:
+        require(readable,'Function assessments retain the complete readable presentation')
+        TAG='ar-openlogic-function-definitions-review-20260930'
+        GITHUB=f'https://github.com/{REMOTE}/releases/tag/{TAG}'
+        ENTRY=f'https://github.com/{REMOTE}/blob/{TAG}/expert-review/2026-09-26-final-page-review/INDEX_AR.md'
+        FULL=ENTRY.replace('INDEX_AR.md','DIRECTORY_READABLE_AR.md')
+        STAGE=ROOT/'output/release/review-function-definitions-20260930'
+        STATE=ROOT/'evidence/publication/review-function-definitions-20260930'
+        STRUCTURAL_RECEIPT='COMPLETE_INDEPENDENT_READBACK_20260930_R4.json'
+        COLD_RECEIPT='CORRECTED_REVIEW_SOURCE_COLD_REPLAY_20260930_R3.json'
+        REPLACED=NAMES
+        TITLE='المنطق المفتوح بالعربية: شواهد جديدة لثلاثة تعريفات للدوال في سجل المراجعة'
+        card=ENTRY.replace('INDEX_AR.md','SOL6_FUNCTION_DEFINITIONS_AR.md')
+        NOTES=(f'## اختيارات الترجمة العربية: مقابلة ثلاثة تعريفات للدوال\n\n[ابدأ من هنا]({ENTRY}) · [القائمة الكاملة]({FULL}) · [النتائج الجديدة ومواضعها]({card})\n\n'
+               'يضم الدليل جميع القرارات الـ١٠٩٥ ووقوعاتها. قُرئت تعريفات الدوال المتباينة والشاملة والتقابلية '
+               'في الأصل والترجمتين، وصفحات المعجم الأصلية ومقالة رياضية للموسوعة العربية. '
+               'أضيف شاهد مستقل للتباين، وبقي الخلاف بين شاملة واللفظ المثبت غامر صريحًا. '
+               'المقارنة التراثية أسلوبية محدودة ولا تثبت هذه المصطلحات الحديثة. '
+               'هذه ثلاثة قرارات وتسعة مواضع محددة، لا شهادة على سائر استعمالات الأسرة أو الكتاب كله. '
+               'أُبقي متن الطبعات الثلاث؛ لم تضف هذه الدفعة تغييرًا إلى PDF أو EPUB.\n\n'
+               'بقيت التصحيحات الخمسة السابقة وإصلاح ٥٩ إحالة في ٣٢ قرارًا، والصفحات القصيرة '
+               'والملفات الكاملة والتاريخ المنشور. تضم حزمة المصدر البطاقة الجديدة وشواهد التعريفات '
+               'وبياناتها وشيفرة بنائها، وقد أعادت الحزمة الفعلية إنتاج العرض والبيانات حرفيًا. '
+               'لا تشمل الحزمة المقالة المحمية أو الأزواج التراثية الكاملة.\n\n'
+               'الترجمة والتعليلات الموروثة: OpenAI Codex — GPT-5.6 Sol، جهد Ultra. '
+               'التعليلات اللاحقة والفهرسة: OpenAI Codex — GPT-6 Sol، جهد Ultra. '
+               'المقابلة الجديدة والتعليل اللاحق وإصلاح العرض: OpenAI Codex — GPT-6.1 Sol، جهد Ultra. '
+               'لم تقع مراجعة بشرية شاملة؛ إعادة فحص الفترة كلها ما زالت جارية. '
+               'كل اختيار قابل للتصحيح، ولا يدعي التعليل اللاحق استعادة دافع المترجم الأول.\n\n'
+               '[PDF التراثي ولاتخ المباشر وحزمة المصدر](https://github.com/KokunoYumeto/OpenLogic-ar/releases/tag/ar-olp-0722-classical-eastern-rtl-fn-unicode-20260928) · '
+               '[EPUB للطبعات الثلاث ومصادره](https://github.com/KokunoYumeto/OpenLogic-ar/releases/tag/ar-olp-0722-epub-provenance-correction-20260930).\n')
     git_publication.ROOT=ROOT; git_publication.STATE=STATE/'GITHUB_TRANSACTION.json'
     git_publication.READBACK=STATE/'GITHUB_COMMIT_READBACK.json'
     git_publication.PACKAGE=BASE/'COMPLETE_SOURCE_PACKAGE_RECEIPT.json'
-    git_publication.EXPECTED_PARENT=('603ce2e93af4a7a31a54447689c8b79785677ceb' if readable
-                                     else 'c480a848dc403f05f6a810bea8542c6873779877')
+    git_publication.EXPECTED_PARENT=('9badef2df05c3e3c4a33708536f7f93566df3731' if function_recheck else
+        '603ce2e93af4a7a31a54447689c8b79785677ceb' if readable else
+        'c480a848dc403f05f6a810bea8542c6873779877')
     git_publication.COMMIT_MESSAGE='تصحيح شروح وإحالات محددة في فهرس مراجعة الترجمة العربية'
     git_publication.ALLOW_CHANGED=set(selected_files()); git_publication.selected_files=selected_files
     git_publication.READBACK_STATUS='PASS_ANONYMOUS_GITHUB_CORRECTED_REVIEW_EXACT_FILES'
-    zenodo.STATE_DIR=STATE; zenodo.PREVIOUS=23050173; zenodo.SUCCESSOR=True
+    zenodo.STATE_DIR=STATE; zenodo.PREVIOUS=23050440 if function_recheck else 23050173; zenodo.SUCCESSOR=True
+    zenodo.EXPECTED_PREDECESSOR_FILES=100 if function_recheck else 98
     zenodo.REPLACEMENT_NAMES=REPLACED; zenodo.assets=assets
-    zenodo.VERSION=('OLP-0722-AR-REVIEW-READABLE-20260930' if readable
+    zenodo.VERSION=('OLP-0722-AR-FUNCTION-DEFINITIONS-REVIEW-20260930' if function_recheck else
+                   'OLP-0722-AR-REVIEW-READABLE-20260930' if readable
                    else 'OLP-0722-AR-REVIEW-CORRECTIONS-20260930')
     zenodo.release.STAGE=STAGE; zenodo.release.GITHUB=GITHUB
     zenodo.ORDER_PREFIX=('00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf','00-CLASSICAL-02_OPENLOGIC_ar_R3_CUMULATIVE.tex','00-CLASSICAL-03_OPENLOGIC_ar_R3_SOURCES.zip')
     def metadata(draft):
         value=dict(draft['metadata']); value.pop('doi',None); value.pop('prereserve_doi',None)
         value.update(version=zenodo.VERSION,publication_date='2026-09-30',language='ara',access_right='open')
-        value['description']=(f'<div lang="ar" dir="rtl"><h2>{TITLE}</h2>'
+        if function_recheck:
+            card=ENTRY.replace('INDEX_AR.md','SOL6_FUNCTION_DEFINITIONS_AR.md')
+            value['description']=(f'<div lang="ar" dir="rtl"><h2>{TITLE}</h2>'
+                f'<p><a href="{ENTRY}">ابدأ من هنا</a> · <a href="{FULL}">القائمة الكاملة للمراجعة</a> · '
+                f'<a href="{card}">ثلاثة تعريفات للدوال: الكلمات والمواضع والأسباب</a>.</p>'
+                '<p>يحفظ الدليل القرارات الـ١٠٩٥ ووقوعاتها كاملة. تضيف هذه النسخة شواهد مقروءة '
+                'لثلاثة عناوين في OLP-0022 وتسعة مواضع في الأصل والترجمتين، مع البدائل وحدود '
+                'الثقة والسؤال الموجه للمختص. أُبقي المتن الصحيح رياضيًا؛ وأضيف شاهد مستقل للتباين '
+                'وبقي الخلاف بين شاملة وغامرة معلنًا. لا تعمم النتيجة على بقية الأسرة أو كل التعليلات. '
+                'المصادر الكاملة للدليل والشيفرة والشواهد المحددة في حزمة المصدر؛ '
+                'لا تعاد نشر المقالة المحمية أو الأزواج التراثية الكاملة. '
+                'أُعيد من الحزمة الفعلية بناء العرض والبيانات حرفيًا.</p>'
+                '<p>المقابلة والتعليل الجديد: OpenAI Codex — GPT-6.1 Sol، جهد Ultra. '
+                'التعليلات العربية اللاحقة والفهرسة الموروثة: OpenAI Codex — GPT-6 Sol، جهد Ultra. '
+                'الترجمة والتعليلات الأقدم: OpenAI Codex — GPT-5.6 Sol، جهد Ultra. '
+                'لم تقع مراجعة بشرية شاملة، وإعادة فحص الفترة كلها ما زالت جارية. '
+                'كل اختيار قابل للتصحيح، ولا يستعاد بهذا التسويغ اللاحق دافع المترجم الأول.</p>'
+                '<p>كل القراء ومصادر لاتخ المباشرة وحزمها وكتب EPUB والتاريخ الموروث باقية. '
+                'لم يضف هذا الإصدار تعديلًا لمتن PDF أو EPUB؛ معاينة القراءة هي PDF التراثي الجاري.</p>'
+                f'<p><a href="{GITHUB}">الدليل وملفات مصادره على GitHub</a>.</p></div>'+value.get('description',''))
+        else:
+            value['description']=(f'<div lang="ar" dir="rtl"><h2>{TITLE}</h2>'
             f'<p><a href="{ENTRY}">ابدأ من هنا</a> · <a href="{FULL}">القائمة الكاملة للمراجعة</a>.</p>'
             '<p>حُفظت جميع القرارات الـ١٠٩٥ ووقوعاتها. صُحِّحت خمسة شروح رياضية، واستُبدلت '
             '٥٩ إحالة إلى تعليقات أسماء الأقسام في ٣٢ قرارًا بمقاطع مقروءة من الأصل. '
@@ -200,7 +267,7 @@ def configure(readable=False):
             'المقابلة والتصحيحات المحددة وهذه الدفعة: OpenAI Codex — GPT-6.1 Sol، بمستوى جهد Ultra. '
             'لم تقع مراجعة بشرية شاملة؛ إعادة فحص الفترة كلها ما زالت جارية، '
             'ولا يدعي هذا الإصدار تصديق كل تعليل أو شاهد معجمي. تبقى الاختيارات مفتوحة للتصحيح.</p>'
-            f'<p><a href="{GITHUB}">ملفات التصحيح ومصادرها على GitHub</a>.</p></div>'+value.get('description',''))
+                f'<p><a href="{GITHUB}">ملفات التصحيح ومصادرها على GitHub</a>.</p></div>'+value.get('description',''))
         related=list(value.get('related_identifiers',[]))
         for url in (ENTRY,FULL,GITHUB):
             if not any(r.get('identifier')==url for r in related):
@@ -283,8 +350,10 @@ if __name__=='__main__':
              'prepare':zenodo.prepare,'publish':zenodo.publish,'verify':zenodo.verify,
              'revise-draft':revise_existing_draft}
     parser.add_argument('action',choices=actions)
-    parser.add_argument('--readable',action='store_true'); args=parser.parse_args(); configure(args.readable)
-    require(not(args.readable and args.action=='prepare'),'Readable repair reuses the existing draft; use revise-draft')
+    parser.add_argument('--readable',action='store_true')
+    parser.add_argument('--function-recheck',action='store_true')
+    args=parser.parse_args(); configure(args.readable or args.function_recheck,args.function_recheck)
+    require(not(args.readable and not args.function_recheck and args.action=='prepare'),'Readable repair reuses the existing draft; use revise-draft')
     try: actions[args.action]()
     except requests.RequestException as error:
         raise SystemExit('Publication transport failed ('+type(error).__name__+'); inspect saved state before one bounded retry') from None
