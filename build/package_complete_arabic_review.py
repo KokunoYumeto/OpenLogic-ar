@@ -36,11 +36,13 @@ def include_files() -> list[Path]:
         "SOL6_SOURCE_REFERENCES_AR.md", "SOURCE_WITNESS_PUBLIC_READBACK_20260930.json",
         "COMPLETE_INDEPENDENT_READBACK_20260930_R3.json",
         "COMPLETE_DIRECTORY_RECEIPT_20260927_HISTORICAL.json",
+        "DIRECTORY_READABLE_AR.md", "READABLE_REVIEW_RECEIPT_20260930.json",
+        "READABLE_REVIEW_VERIFICATION_20260930.json",
     ]
     files = [BASE / name for name in top]
     for directory in BASE.iterdir():
         if directory.is_dir() and (directory.name.startswith("arabic-")
-                                   or directory.name in {"global-caption-decisions", "reexamination-source"}):
+                                   or directory.name in {"global-caption-decisions", "reexamination-source", "readable-review"}):
             files.extend(path for path in directory.rglob("*") if path.is_file())
     for path in TERM.iterdir():
         if path.is_file() and path.name.endswith("_20260927.json") and (
@@ -71,8 +73,11 @@ def include_files() -> list[Path]:
                     "render_sol6_review_corrections_20260930.py",
                     "correct_added_source_witnesses_20260930.py",
                     "replay_corrected_review_20260930.py",
+                    "render_readable_review_20260930.py",
+                    "verify_readable_review_20260930.py",
                 }):
             files.append(path)
+    files.append(build / "tests/test_readable_review_20260930.py")
     assert len(files) == len(set(files))
     assert all(path.is_file() for path in files)
     return sorted(files, key=lambda path: path.relative_to(ROOT).as_posix())

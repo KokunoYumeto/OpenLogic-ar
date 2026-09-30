@@ -29,6 +29,8 @@ NAMES=('INDEX_AR.md','DIRECTORY_AR.md','DECISION_RECORD_AR.jsonl.gz',
 REPLACED=('INDEX_AR.md','DIRECTORY_AR.md','DECISION_RECORD_AR.jsonl.gz',
           '90-ARABIC-REVIEW-COMPLETE-SOURCE.zip','90-ARABIC-REVIEW-SHA256SUMS.txt')
 TITLE='المنطق المفتوح بالعربية: تصحيح خمسة شروح وإحالات ٣٢ قرارًا في دليل المراجعة'
+COLD_RECEIPT='CORRECTED_REVIEW_SOURCE_COLD_REPLAY_20260930.json'
+READABLE=False
 NOTES=(f'## دليل المراجعة العربية المصحح\n\n[ابدأ من هنا]({ENTRY}) · [القائمة الكاملة]({FULL})\n\n'
        'يضم الدليل ١٠٩٥ اختيارًا مسجلًا مع ألفاظها ومواضعها وتعليلاتها وأسئلة للمختصين. '
        'صُحِّح قيد قابلية الحساب في شرح قابلية المحورة، ومعنى التجاوز في هذه الوحدة، '
@@ -50,7 +52,7 @@ NOTES=(f'## دليل المراجعة العربية المصحح\n\n[ابدأ �
 
 def stage():
     fresh=json.loads((BASE/'COMPLETE_INDEPENDENT_READBACK_20260930_R3.json').read_bytes())
-    cold=json.loads((BASE/'CORRECTED_REVIEW_SOURCE_COLD_REPLAY_20260930.json').read_bytes())
+    cold=json.loads((BASE/COLD_RECEIPT).read_bytes())
     require(fresh['all_frozen_occurrences_preserved'] and fresh['verified_machine_records']==1095,'Fresh structural checks differ')
     archive=identity(BASE/NAMES[-2])
     require(cold['status']=='PASS_COLD_REPLAY_FROM_EXACT_CORRECTED_REVIEW_ZIP' and cold['source_zip_sha256']==archive['sha256'],'Cold source replay differs')
@@ -98,6 +100,14 @@ def selected_files():
         'review_sol6_epub_20260930.py','package_reviewed_epubs_20260930.py','publish_reviewed_epubs_20260930.py',
         'tests/test_source_witness_corrections_20260930.py','tests/test_publish_reviewed_epubs_20260930.py',
         'tests/test_review_sol6_epub_20260930.py','tests/test_recovered_review_witnesses_20260930.py'))
+    if READABLE:
+        paths.extend((base/name).as_posix() for name in (
+            'DIRECTORY_READABLE_AR.md','READABLE_REVIEW_RECEIPT_20260930.json',
+            'READABLE_REVIEW_VERIFICATION_20260930.json',COLD_RECEIPT))
+        paths.extend(p.relative_to(ROOT).as_posix() for p in (BASE/'readable-review').glob('*.md'))
+        paths.extend('build/'+name for name in (
+            'render_readable_review_20260930.py','verify_readable_review_20260930.py',
+            'tests/test_readable_review_20260930.py','tests/test_publish_corrected_review_20260930.py'))
     require(len(paths)==len(set(paths)) and all((ROOT/p).is_file() for p in paths),'Selected source inventory differs')
     return paths
 
@@ -132,17 +142,44 @@ def github_verify():
     print(json.dumps({'status':'PASS_ANONYMOUS_GITHUB_READBACK','files':len(checked)}))
 
 
-def configure():
+def configure(readable=False):
+    global READABLE,TAG,GITHUB,ENTRY,FULL,STAGE,STATE,TITLE,NOTES,COLD_RECEIPT
+    READABLE=readable
+    if readable:
+        TAG='ar-openlogic-translation-review-readable-20260930'
+        GITHUB=f'https://github.com/{REMOTE}/releases/tag/{TAG}'
+        ENTRY=f'https://github.com/{REMOTE}/blob/{TAG}/expert-review/2026-09-26-final-page-review/INDEX_AR.md'
+        FULL=ENTRY.replace('INDEX_AR.md','DIRECTORY_READABLE_AR.md')
+        STAGE=ROOT/'output/release/review-readable-20260930'
+        STATE=ROOT/'evidence/publication/review-readable-20260930'
+        TITLE='المنطق المفتوح بالعربية: دليل المراجعة الكامل في صفحات قابلة للقراءة'
+        NOTES=(f'## مراجعة اختيارات الترجمة العربية\n\n[ابدأ من هنا]({ENTRY}) · [القائمة الكاملة]({FULL})\n\n'
+               'حُفظت جميع القرارات الـ١٠٩٥ ووقوعاتها وتعليلاتها. قُسِّم جدول البحث والبطاقات الكبيرة '
+               'إلى صفحات قصيرة متصلة، مع حفظ الجدول والبطاقات الكاملة للتنزيل. لا يغيّر التقسيم '
+               'النصوص أو أسباب الاختيار؛ يتيح قراءتها على الإنترنت من غير الاعتماد على عرض الملفات الكبيرة.\n\n'
+               'تشمل هذه النسخة التصحيحات الخمسة للشروح الرياضية وإصلاح ٥٩ إحالة في ٣٢ قرارًا. '
+               'متن الكتب لم يتغير بهذه الدفعة. تضم حزمة المصدر جميع الصفحات والبيانات والشيفرة '
+               'والشواهد المحددة، وأعيد منها إنتاج الدليل والبطاقات وصفحات القراءة حرفيًا.\n\n'
+               'الترجمة والتعليلات الموروثة: OpenAI Codex — GPT-5.6 Sol، بمستوى جهد Ultra. '
+               'التعليلات اللاحقة والفهرسة: OpenAI Codex — GPT-6 Sol، بمستوى جهد Ultra. '
+               'المقابلة والتصحيحات المحددة وإصلاح الوصول: OpenAI Codex — GPT-6.1 Sol، بمستوى جهد Ultra. '
+               'لم تقع مراجعة بشرية شاملة؛ إعادة فحص الفترة كلها ما زالت جارية، '
+               'ولا يثبت هذا الإصدار صحة كل تعليل أو شاهد معجمي. كل اختيار قابل للتصحيح.\n\n'
+               '[PDF التراثي ومصدر لاتخ المباشر وحزمة المصدر](https://github.com/KokunoYumeto/OpenLogic-ar/releases/tag/ar-olp-0722-classical-eastern-rtl-fn-unicode-20260928) · '
+               '[EPUB للطبعات الثلاث ومصادره](https://github.com/KokunoYumeto/OpenLogic-ar/releases/tag/ar-olp-0722-epub-provenance-correction-20260930).\n')
+        COLD_RECEIPT='CORRECTED_REVIEW_SOURCE_COLD_REPLAY_20260930_R2.json'
     git_publication.ROOT=ROOT; git_publication.STATE=STATE/'GITHUB_TRANSACTION.json'
     git_publication.READBACK=STATE/'GITHUB_COMMIT_READBACK.json'
     git_publication.PACKAGE=BASE/'COMPLETE_SOURCE_PACKAGE_RECEIPT.json'
-    git_publication.EXPECTED_PARENT='c480a848dc403f05f6a810bea8542c6873779877'
+    git_publication.EXPECTED_PARENT=('603ce2e93af4a7a31a54447689c8b79785677ceb' if readable
+                                     else 'c480a848dc403f05f6a810bea8542c6873779877')
     git_publication.COMMIT_MESSAGE='تصحيح شروح وإحالات محددة في فهرس مراجعة الترجمة العربية'
     git_publication.ALLOW_CHANGED=set(selected_files()); git_publication.selected_files=selected_files
     git_publication.READBACK_STATUS='PASS_ANONYMOUS_GITHUB_CORRECTED_REVIEW_EXACT_FILES'
     zenodo.STATE_DIR=STATE; zenodo.PREVIOUS=23050173; zenodo.SUCCESSOR=True
     zenodo.REPLACEMENT_NAMES=REPLACED; zenodo.assets=assets
-    zenodo.VERSION='OLP-0722-AR-REVIEW-CORRECTIONS-20260930'
+    zenodo.VERSION=('OLP-0722-AR-REVIEW-READABLE-20260930' if readable
+                   else 'OLP-0722-AR-REVIEW-CORRECTIONS-20260930')
     zenodo.release.STAGE=STAGE; zenodo.release.GITHUB=GITHUB
     zenodo.ORDER_PREFIX=('00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf','00-CLASSICAL-02_OPENLOGIC_ar_R3_CUMULATIVE.tex','00-CLASSICAL-03_OPENLOGIC_ar_R3_SOURCES.zip')
     def metadata(draft):
@@ -153,6 +190,8 @@ def configure():
             '<p>حُفظت جميع القرارات الـ١٠٩٥ ووقوعاتها. صُحِّحت خمسة شروح رياضية، واستُبدلت '
             '٥٩ إحالة إلى تعليقات أسماء الأقسام في ٣٢ قرارًا بمقاطع مقروءة من الأصل. '
             'متن الكتب لم يتغير بهذه الدفعة؛ كانت التعريفات المعنية صحيحة فيه بالفعل. '
+            'أضيف عرض كامل في صفحات قصيرة متصلة لقراءة الجدول والبطاقات الكبيرة؛ '
+            'حُفظ كل صف وكل نص، وبقيت الملفات الكاملة قابلة للتنزيل. '
             'تشمل الملفات البطاقتين المصححتين والدليل والبيانات وحزمة المصدر القابلة لإعادة البناء حرفيًا. '
             'تحتفظ هذه النسخة بكل القراء ومصادر لاتخ المباشرة وحزمها وكتب EPUB والملفات الموروثة؛ '
             'معاينة القراءة هي PDF القارئ التراثي الأحدث.</p>'
@@ -171,12 +210,81 @@ def configure():
     zenodo.metadata_for=metadata
 
 
+def revise_existing_draft():
+    require(READABLE,'This repair must use the explicitly selected readable edition')
+    rows=assets(); zenodo.checked_github_receipt(rows)
+    old_dir=ROOT/'evidence/publication/review-corrections-20260930'
+    old_path=old_dir/'ZENODO_TRANSACTION.json'
+    old=json.loads(old_path.read_bytes())
+    require(old['status']=='READY_TO_PUBLISH' and old['draft_id']==23050440,
+            'Existing draft state must be inspected; no duplicate version')
+    old_stage=ROOT/'output/release/review-corrections-20260930'
+    def md5(path):
+        with path.open('rb') as stream:
+            return 'md5:'+hashlib.file_digest(stream,'md5').hexdigest()
+    before=dict(old['inherited'])
+    for item in old['assets']:
+        path=old_stage/item['name']
+        require(identity(path)=={'file':item['name'],'bytes':item['bytes'],'sha256':item['sha256']},
+                'Historical accepted stage differs')
+        before[item['name']]={'bytes':item['bytes'],'checksum':md5(path)}
+    transaction=STATE/'ZENODO_TRANSACTION.json'
+    require(not transaction.exists(),'Inspect the saved same-draft revision instead of restarting it')
+    updated=dict(old); updated.update(status='REVISING_EXISTING_DRAFT',assets=rows,
+                                     predecessor_correction_state=str(old_path.relative_to(ROOT)))
+    with zenodo.authenticated() as session:
+        legacy=zenodo.call(session,'GET',f'{zenodo.API}/deposit/depositions/{old["draft_id"]}').json()
+        require(not legacy['submitted'] and int(legacy['conceptrecid'])==zenodo.CONCEPT,
+                'Existing record is no longer this unpublished draft')
+        modern=zenodo.draft_record(session,old['draft_id'])
+        observed={n:{'bytes':v['size'],'checksum':v['checksum']} for n,v in modern['files']['entries'].items()}
+        require(observed==before,'Existing draft inventory changed')
+        require(zenodo.public_record(zenodo.PREVIOUS)['versions']['is_latest'],'Predecessor changed')
+        zenodo.save(transaction,updated)
+        old['status']='SUPERSEDED_BY_READABILITY_REVISION_SAME_DRAFT'
+        old['successor_transaction']=str(transaction.relative_to(ROOT)); zenodo.save(old_path,old)
+        old_rows={r['name']:r for r in old['assets']}
+        files={r['filename']:r for r in legacy['files']}
+        replaced=[]
+        for row in rows:
+            if row==old_rows[row['name']]:
+                continue
+            zenodo.call(session,'DELETE',f'{zenodo.API}/deposit/depositions/{old["draft_id"]}/files/{files[row["name"]]["id"]}')
+            with (STAGE/row['name']).open('rb') as stream:
+                zenodo.call(session,'PUT',legacy['links']['bucket']+'/'+row['name'],data=stream,
+                            headers={'Content-Type':'application/octet-stream'})
+            replaced.append(row['name'])
+        zenodo.call(session,'PUT',f'{zenodo.API}/deposit/depositions/{old["draft_id"]}',
+                    json={'metadata':zenodo.metadata_for(legacy)})
+        modern=zenodo.draft_record(session,old['draft_id'])
+        expected=dict(updated['inherited'])
+        expected.update({r['name']:{'bytes':r['bytes'],'checksum':md5(STAGE/r['name'])} for r in rows})
+        observed={n:{'bytes':v['size'],'checksum':v['checksum']} for n,v in modern['files']['entries'].items()}
+        require(observed==expected and len(observed)==100,'Revised draft identities differ')
+        payload={k:modern[k] for k in ('metadata','access','custom_fields') if k in modern}
+        payload['files']={'enabled':True,'default_preview':zenodo.PREVIEW,
+                         'order':list(zenodo.ORDER_PREFIX)+sorted(set(expected)-set(zenodo.ORDER_PREFIX))}
+        zenodo.call(session,'PUT',f'{zenodo.API}/records/{old["draft_id"]}/draft',headers={'Accept':zenodo.RDM},json=payload)
+        final=zenodo.draft_record(session,old['draft_id'])
+        require(final['files']['default_preview']==zenodo.PREVIEW and final['metadata']['version']==zenodo.VERSION,
+                'Revised preview/version differs')
+        require(final['access']['record']==final['access']['files']=='public','Draft access differs')
+        updated.update(status='READY_TO_PUBLISH',revised_private_draft_files=replaced,
+                       draft_files=100,default_preview=zenodo.PREVIEW)
+        zenodo.save(transaction,updated)
+    print(json.dumps({'status':updated['status'],'same_draft_id':updated['draft_id'],
+                      'replaced_private_files':len(replaced),'public_access_removed':False}))
+
+
 if __name__=='__main__':
     parser=argparse.ArgumentParser(description=__doc__)
     actions={'stage':stage,'git-prepare':git_publication.prepare,'git-push':git_publication.push,
              'git-verify':git_publication.verify,'github':github_release,'github-verify':github_verify,
-             'prepare':zenodo.prepare,'publish':zenodo.publish,'verify':zenodo.verify}
-    parser.add_argument('action',choices=actions); args=parser.parse_args(); configure()
+             'prepare':zenodo.prepare,'publish':zenodo.publish,'verify':zenodo.verify,
+             'revise-draft':revise_existing_draft}
+    parser.add_argument('action',choices=actions)
+    parser.add_argument('--readable',action='store_true'); args=parser.parse_args(); configure(args.readable)
+    require(not(args.readable and args.action=='prepare'),'Readable repair reuses the existing draft; use revise-draft')
     try: actions[args.action]()
     except requests.RequestException as error:
         raise SystemExit('Publication transport failed ('+type(error).__name__+'); inspect saved state before one bounded retry') from None

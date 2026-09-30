@@ -1,5 +1,6 @@
 """One cold reconstruction of the actual corrected public-review source ZIP."""
 import gzip
+import argparse
 import hashlib
 import json
 from pathlib import Path
@@ -20,10 +21,12 @@ def digest(path):
         return hashlib.file_digest(stream,'sha256').hexdigest()
 
 
-def main():
+def main(receipt_path=None):
     accepted=json.loads((BASE/'COMPLETE_SOURCE_PACKAGE_RECEIPT.json').read_bytes())
     assert digest(ARCHIVE).upper()==accepted['sha256']
-    expected={name:digest(BASE/name) for name in FILES}
+    readable=json.loads((BASE/'READABLE_REVIEW_RECEIPT_20260930.json').read_bytes())
+    names=FILES+tuple(r['path'] for r in readable['files'])
+    expected={name:digest(BASE/name) for name in names}
     with TemporaryDirectory(prefix='arabic-review-cold-',dir=ROOT/'tmp') as temporary:
         destination=Path(temporary).resolve()
         destination.relative_to((ROOT/'tmp').resolve())
@@ -47,18 +50,22 @@ def main():
             ('render_sol6_review_corrections_20260930.py',[]),
             ('assemble_complete_arabic_review.py',[]),
             ('verify_complete_arabic_review.py',[]),
+            ('render_readable_review_20260930.py',[]),
+            ('verify_readable_review_20260930.py',[]),
         ):
             result=subprocess.run([sys.executable,'-X','utf8','build/'+script,*args],cwd=destination,
                                   capture_output=True,text=True,encoding='utf-8',timeout=120)
             assert result.returncode==0,(script,result.stderr[-2000:])
-        assert {name:digest(base/name) for name in FILES}==expected
+        assert {name:digest(base/name) for name in names}==expected
     value={'status':'PASS_COLD_REPLAY_FROM_EXACT_CORRECTED_REVIEW_ZIP',
            'source_zip_sha256':digest(ARCHIVE),'source_zip_bytes':ARCHIVE.stat().st_size,
            'byte_identical_outputs':expected,'model':'GPT-6.1 Sol','effort':'Ultra'}
-    with RECEIPT.open('x',encoding='utf-8',newline='\n') as sink:
+    with (receipt_path or RECEIPT).open('x',encoding='utf-8',newline='\n') as sink:
         sink.write(json.dumps(value,ensure_ascii=False,indent=2)+'\n')
     print(json.dumps(value))
 
 
 if __name__=='__main__':
-    main()
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--output',type=Path)
+    main(parser.parse_args().output)
