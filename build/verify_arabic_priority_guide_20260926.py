@@ -45,7 +45,7 @@ def main() -> None:
         raise ValueError("Guide IDs differ from the 30-record ledger or order")
     if guide.count("**المعنى المقصود:**") != 30 or guide.count("**لماذا اختير هذا اللفظ مؤقتًا؟**") != 30 or guide.count("**سؤال للمراجع:**") != 30:
         raise ValueError("Guide missing senses, rationales or expert questions")
-    if "Floris" in guide or "السطر None" in guide or "TODO" in guide or "HOLD" in guide:
+    if "user" in guide or "السطر None" in guide or "TODO" in guide or "HOLD" in guide:
         raise ValueError("Guide contains prohibited attribution or placeholder")
     source_links = re.findall(r"\[(?:المصدر، )?السطر ([٠-٩]+)\]\((https://[^)]+#L[0-9]+(?:-L[0-9]+)?)\)", guide)
     if len(source_links) < 90:
